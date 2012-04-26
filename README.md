@@ -1,2 +1,0 @@
-Equivalent-Exchange-3
-=====================
