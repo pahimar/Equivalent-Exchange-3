@@ -34,6 +34,9 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Bind GUI Handler
 		MinecraftForge.setGuiHandler(this, new GuiHandler());
+		
+		// Bind Sound Handler
+		this.proxy.registerSoundHandler();
 	}
 	
 	@Override
