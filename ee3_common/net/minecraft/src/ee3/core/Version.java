@@ -18,7 +18,7 @@ public class Version {
 	
 	public static final int REQ_FORGE_MAJOR = 3;
 	public static final int REQ_FORGE_MINOR = 1;
-	public static final int REQ_FORGE_REVISION = 2;
+	public static final int REQ_FORGE_REVISION = 3;
 	
 	private static final String REMOTE_VERSION_FILE = "http://dl.dropbox.com/u/25591134/EE2/version.txt";
 	
