@@ -32,4 +32,6 @@ public interface IProxy {
 	public abstract void handleTEPacket(int x, int y, int z, byte direction, String player);
 	
 	public abstract Object handleGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
+	
+	public abstract void playSound(String soundName, float x, float y, float z, float volume, float pitch);
 }

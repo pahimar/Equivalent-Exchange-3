@@ -67,4 +67,9 @@ public class EEProxy implements IProxy {
 		return null;
 	}
 
+	@Override
+	public void playSound(String soundName, float x, float y, float z, float volume, float pitch) {
+		ModLoader.getMinecraftInstance().sndManager.playSound(soundName, x, y, z, volume, pitch);	
+	}
+
 }

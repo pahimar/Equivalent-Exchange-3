@@ -5,6 +5,7 @@ import net.minecraft.src.ee3.core.IProxy;
 import net.minecraft.src.ee3.core.ServerClientProxy;
 import net.minecraft.src.ee3.core.Version;
 import net.minecraft.src.ee3.gui.GuiHandler;
+import net.minecraft.src.ee3.lib.Sounds;
 import net.minecraft.src.ee3.network.PacketHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;

@@ -64,4 +64,6 @@ public class EEProxy implements IProxy {
 		return null;
 	}
 
+	@Override
+	public void playSound(String soundName, float x, float y, float z, float volume, float pitch) {	}
 }
