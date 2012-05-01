@@ -30,6 +30,6 @@ public class SoundHandler implements ISoundHandler {
 	@Override public SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager, SoundPoolEntry entry) { return entry; }
 	@Override public SoundPoolEntry onPlayStreaming(SoundManager soundManager, SoundPoolEntry entry, String soundName, float x, float y, float z) { return entry; }
 	@Override public SoundPoolEntry onPlaySound(SoundManager soundManager, SoundPoolEntry entry, String soundName, float x, float y, float z, float volume, float pitch) { return entry; }
-	@Override public SoundPoolEntry onPlaySoundEffect(SoundManager soundManager, SoundPoolEntry entry, String soundName, float volume, float pitch) {	return entry; }
+	@Override public SoundPoolEntry onPlaySoundEffect(SoundManager soundManager, SoundPoolEntry entry, String soundName, float volume, float pitch) { return entry; }
 
 }

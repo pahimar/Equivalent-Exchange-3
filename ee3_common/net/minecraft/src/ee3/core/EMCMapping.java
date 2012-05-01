@@ -2,34 +2,34 @@ package net.minecraft.src.ee3.core;
 
 public class EMCMapping {
 	
-	private int cost;
-	private int recovery;
+	private float cost;
+	private float recovery;
 	
 	public EMCMapping() { }
 	
-	public EMCMapping(int cost) {
+	public EMCMapping(float cost) {
 		this.cost = cost;
 		recovery = cost;
 	}
 	
-	public EMCMapping(int cost, int recovery) {
+	public EMCMapping(float cost, float recovery) {
 		this.cost = cost;
 		this.recovery = recovery;
 	}
 	
-	public int getCostEMC() {
+	public float getCostEMC() {
 		return cost;
 	}
 	
-	public int getRecoveryEMC() {
+	public float getRecoveryEMC() {
 		return recovery;
 	}
 	
-	public void setCostEMC(int cost) {
+	public void setCostEMC(float cost) {
 		this.cost = cost;
 	}
 	
-	public void setRecoveryEMC(int recovery) {
+	public void setRecoveryEMC(float recovery) {
 		this.recovery = recovery;
 	}
 }

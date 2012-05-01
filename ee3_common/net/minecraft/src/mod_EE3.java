@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.ee3.core.ConfigurationManager;
 import net.minecraft.src.ee3.core.IProxy;
 import net.minecraft.src.ee3.core.ServerClientProxy;
 import net.minecraft.src.ee3.core.Version;
@@ -16,6 +17,7 @@ public class mod_EE3 extends NetworkMod {
 	public static mod_EE3 instance;
 	public static IProxy proxy;
 	public static final String CHANNEL_NAME = "EE3";
+	public static ConfigurationManager config = new ConfigurationManager("EE3.cfg");
 	
 	public mod_EE3() {
 		instance = this;
@@ -38,6 +40,9 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Bind Sound Handler
 		this.proxy.registerSoundHandler();
+		
+		// Initialise the configuration settings from file
+		config.init();
 	}
 	
 	@Override
