@@ -13,21 +13,11 @@ import net.minecraft.src.forge.ISoundHandler;
 
 public class SoundHandler implements ISoundHandler {
 
-	private String[] eeSoundFiles = {"ee/sound/break.ogg",
-									 "ee/sound/chargetick.ogg",
-									 "ee/sound/destruct.ogg",
-									 "ee/sound/flash.ogg",
-									 "ee/sound/gust.ogg",
-									 "ee/sound/heal.ogg",
-									 "ee/sound/kinesis.ogg",
-									 "ee/sound/launch.ogg",
-									 "ee/sound/nova.ogg",
-									 "ee/sound/philball.ogg",
-									 "ee/sound/tock.ogg",
-									 "ee/sound/transmute.ogg",
-									 "ee/sound/wall.ogg",
-									 "ee/sound/waterball.ogg",
-									 "ee/sound/wind.ogg"};
+	private String[] eeSoundFiles = {"ee/sound/break.ogg", "ee/sound/chargetick.ogg", "ee/sound/destruct.ogg", 
+			"ee/sound/flash.ogg", "ee/sound/gust.ogg", "ee/sound/heal.ogg", 
+			"ee/sound/kinesis.ogg", "ee/sound/launch.ogg", "ee/sound/nova.ogg", 
+			"ee/sound/philball.ogg", "ee/sound/tock.ogg", "ee/sound/transmute.ogg", 
+			"ee/sound/wall.ogg",	"ee/sound/waterball.ogg", "ee/sound/wind.ogg"};
 	
 	@Override
 	// Initialises our entries into the Sound Pool
