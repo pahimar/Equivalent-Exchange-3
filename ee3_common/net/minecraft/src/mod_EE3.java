@@ -6,6 +6,7 @@ import net.minecraft.src.ee3.core.IProxy;
 import net.minecraft.src.ee3.core.ServerClientProxy;
 import net.minecraft.src.ee3.core.Version;
 import net.minecraft.src.ee3.gui.GuiHandler;
+import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.ee3.lib.Sounds;
 import net.minecraft.src.ee3.network.PacketHandler;
 import net.minecraft.src.forge.MinecraftForge;
@@ -16,8 +17,7 @@ public class mod_EE3 extends NetworkMod {
 
 	public static mod_EE3 instance;
 	public static IProxy proxy;
-	public static final String CHANNEL_NAME = "EE3";
-	public static ConfigurationManager config = new ConfigurationManager("EE3.cfg");
+	public static ConfigurationManager config = new ConfigurationManager(Reference.CONFIG_FILE);
 	
 	public mod_EE3() {
 		instance = this;

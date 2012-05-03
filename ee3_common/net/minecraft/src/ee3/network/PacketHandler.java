@@ -7,7 +7,7 @@ import java.io.IOException;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet1Login;
-import net.minecraft.src.mod_EE3;
+import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
 import net.minecraft.src.forge.MessageManager;
@@ -21,7 +21,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	@Override
 	//Called when a connection is established 
 	public void onLogin(NetworkManager network, Packet1Login login) {
-		MessageManager.getInstance().registerChannel(network, this, mod_EE3.CHANNEL_NAME);
+		MessageManager.getInstance().registerChannel(network, this, Reference.CHANNEL_NAME);
 	}
 
 	@Override

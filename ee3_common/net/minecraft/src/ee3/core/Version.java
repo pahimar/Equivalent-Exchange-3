@@ -8,6 +8,7 @@ import java.net.URL;
 
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.mod_EE3;
+import net.minecraft.src.ee3.lib.Reference;
 
 public class Version {
 
@@ -41,9 +42,9 @@ public class Version {
 			String line = null;
 		    while ((line = reader.readLine()) != null) {
 		    	if (line.startsWith(mod_EE3.proxy.getMinecraftVersion())) {
-		    		if (line.contains(mod_EE3.CHANNEL_NAME)) {
+		    		if (line.contains(Reference.CHANNEL_NAME)) {
 			    		if (line.endsWith(getVersion())) {
-							ModLoader.getLogger().info("[" + mod_EE3.CHANNEL_NAME +  "] Version Check: Using the latest version");
+							ModLoader.getLogger().info("[" + Reference.CHANNEL_NAME +  "] Version Check: Using the latest version");
 			    			currentVersion = CURRENT;
 			    			return;
 			    		}
@@ -51,11 +52,11 @@ public class Version {
 		    	}
 		    }
 		    
-			ModLoader.getLogger().info("[" + mod_EE3.CHANNEL_NAME +  "] Version Check: Using outdated version");
+			ModLoader.getLogger().info("[" + Reference.CHANNEL_NAME +  "] Version Check: Using outdated version");
 			currentVersion = OUTDATED;
 			
 		} catch (Exception e) {
-			ModLoader.getLogger().warning("[" + mod_EE3.CHANNEL_NAME +  "] Version Check: Unable to read from remote version authority");
+			ModLoader.getLogger().warning("[" + Reference.CHANNEL_NAME +  "] Version Check: Unable to read from remote version authority");
 			currentVersion = CONNECTION_ERROR;
 		}
 	}

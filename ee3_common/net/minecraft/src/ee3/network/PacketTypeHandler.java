@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.mod_EE3;
+import net.minecraft.src.ee3.lib.Reference;
 
 
 public enum PacketTypeHandler {
@@ -50,7 +50,7 @@ public enum PacketTypeHandler {
 	public static Packet populatePacket(EEPacket packet) {
 		byte[] data = packet.populate();
 		Packet250CustomPayload pkt = new Packet250CustomPayload();
-		pkt.channel = mod_EE3.CHANNEL_NAME;
+		pkt.channel = Reference.CHANNEL_NAME;
 		pkt.data = data;
 		pkt.length = data.length;
 		pkt.isChunkDataPacket = packet.isChunkDataPacket;

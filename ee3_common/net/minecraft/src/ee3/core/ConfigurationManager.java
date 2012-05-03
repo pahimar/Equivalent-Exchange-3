@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import net.minecraft.src.mod_EE3;
+import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.Property;
 
@@ -13,7 +14,7 @@ public class ConfigurationManager {
 	private static final String CATEGORY_KEYBIND = "keybinds";
 	
 	public ConfigurationManager(String cfgFile) {
-		this.cfgFile = "config/ee3/" + cfgFile;
+		this.cfgFile = Reference.CONFIG_DIR + cfgFile;
 	}
 	
 	public void init() {
