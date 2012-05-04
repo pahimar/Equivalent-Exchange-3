@@ -7,7 +7,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
-import net.minecraft.src.ee3.core.IProxy;
+import net.minecraft.src.ee3.interfaces.IProxy;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
 public class EEProxy implements IProxy {

@@ -14,7 +14,6 @@ public class ItemMod extends Item implements ITextureProvider {
 	
 	@Override
 	public String getTextureFile() {
-		// TODO Proper location
 		return Reference.SPRITE_SHEET_LOCATION + Reference.ITEM_SPRITE_SHEET;
 	}
 
