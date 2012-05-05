@@ -1,4 +1,4 @@
-package net.minecraft.src.ee3.interfaces;
+package net.minecraft.src.ee3.core.interfaces;
 
 import java.io.File;
 

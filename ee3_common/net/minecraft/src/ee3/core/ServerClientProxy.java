@@ -1,7 +1,7 @@
 package net.minecraft.src.ee3.core;
 
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.ee3.interfaces.IProxy;
+import net.minecraft.src.ee3.core.interfaces.IProxy;
 import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.forge.MinecraftForge;
 
