@@ -2,10 +2,12 @@ package net.minecraft.src;
 
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.ee3.core.ConfigurationManager;
+import net.minecraft.src.ee3.core.RecipesPhilStone;
 import net.minecraft.src.ee3.core.ServerClientProxy;
 import net.minecraft.src.ee3.core.Version;
 import net.minecraft.src.ee3.core.interfaces.IProxy;
 import net.minecraft.src.ee3.gui.GuiHandler;
+import net.minecraft.src.ee3.item.ModItems;
 import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.ee3.lib.Sounds;
 import net.minecraft.src.ee3.network.PacketHandler;
@@ -43,6 +45,9 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Initialise the configuration settings from file
 		config.init();
+		
+		ModItems.init();
+		RecipesPhilStone.initRecipes();
 	}
 	
 	@Override
