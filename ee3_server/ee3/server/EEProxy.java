@@ -1,6 +1,10 @@
 package ee3.server;
 
 import java.io.File;
+import java.lang.reflect.Field;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.ReflectionHelper;
 
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ModLoader;
@@ -11,6 +15,16 @@ import ee3.core.interfaces.IProxy;
 public class EEProxy implements IProxy {
 
 	public EEProxy() { }
+	
+	@SuppressWarnings("unchecked")
+    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex) {
+		return ReflectionHelper.getPrivateValue(classToAccess, instance, fieldIndex);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, String fieldName) {
+    	return ReflectionHelper.getPrivateValue(classToAccess, instance, fieldName);
+    }
 	
 	@Override
 	public void registerRenderInformation() {
@@ -66,4 +80,5 @@ public class EEProxy implements IProxy {
 
 	@Override
 	public void playSound(String soundName, float x, float y, float z, float volume, float pitch) {	}
+
 }

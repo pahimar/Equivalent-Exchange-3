@@ -18,6 +18,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.ShapelessRecipes;
+import net.minecraft.src.mod_EE3;
 
 public class RecipesPhilStone {
 
@@ -35,11 +36,11 @@ public class RecipesPhilStone {
 	
 	public static void initRecipes() {
 		determineBaseMaterials();
-		initTransmutationRecipes();
-		initEquivalencyRecipes();
-		initReconstructiveRecipes();
-		initDestructorRecipes();
-		initPortableSmeltingRecipes();
+		//initTransmutationRecipes();
+		//initEquivalencyRecipes();
+		//initReconstructiveRecipes();
+		//initDestructorRecipes();
+		//initPortableSmeltingRecipes();
 	}
 	
 	public static void determineBaseMaterials() {
@@ -50,17 +51,33 @@ public class RecipesPhilStone {
 		ShapedRecipes shapedRecipe;
 		ShapelessRecipes shapelessRecipe;
 		
+		ItemStack[] shapedInputs;
+		List shapelessInputs;
+		
 		Iterator<IRecipe> recipeIter = recipeList.iterator();
 
-		while (recipeIter.hasNext()) {
-			recipe = recipeIter.next();
-			
-			if (recipe instanceof ShapedRecipes) {
-				System.out.println("Shaped");
+		try {			
+			while (recipeIter.hasNext()) {
+				recipe = recipeIter.next();
+				
+				if (recipe instanceof ShapedRecipes) {
+					shapedRecipe = (ShapedRecipes) recipe;
+					shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
+					
+					System.out.println("Shaped");
+					System.out.println(shapedInputs.toString());
+				}
+				else if (recipe instanceof ShapelessRecipes) {
+					shapelessRecipe = (ShapelessRecipes) recipe;
+					shapelessInputs = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
+					
+					System.out.println("Shapeless");
+					System.out.println(shapelessInputs.toString());
+				}
 			}
-			else if (recipe instanceof ShapelessRecipes) {
-				System.out.println("Shapeless");
-			}
+		}
+		catch (Exception e) {
+			e.printStackTrace(System.err);
 		}
 	}
 	

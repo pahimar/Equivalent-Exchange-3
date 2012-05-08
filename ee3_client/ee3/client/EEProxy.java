@@ -1,9 +1,9 @@
 package ee3.client;
 
 import java.io.File;
+import java.lang.reflect.Field;
 
 import ee3.core.interfaces.IProxy;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ModLoader;
@@ -14,6 +14,34 @@ import net.minecraft.src.forge.MinecraftForgeClient;
 public class EEProxy implements IProxy {
 
 	public EEProxy() { }
+	
+	@SuppressWarnings("unchecked")
+    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex) {
+        try {
+            Field f = classToAccess.getDeclaredFields()[fieldIndex];
+            f.setAccessible(true);
+            return (T) f.get(instance);
+        }
+        catch (Exception e) {
+        	ModLoader.getLogger().severe(String.format("There was a problem getting field %d from %s", fieldIndex, classToAccess.getName()));
+        	ModLoader.getLogger().throwing("ReflectionHelper", "getPrivateValue", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, String fieldName) {
+        try {
+            Field f = classToAccess.getDeclaredField(fieldName);
+            f.setAccessible(true);
+            return (T) f.get(instance);
+        }
+        catch (Exception e) {
+        	ModLoader.getLogger().severe(String.format("There was a problem getting field %s from %s", fieldName, classToAccess.getName()));
+        	ModLoader.getLogger().throwing("ReflectionHelper", "getPrivateValue", e);
+            throw new RuntimeException(e);
+        }
+    }
 	
 	@Override
 	public void registerRenderInformation() {

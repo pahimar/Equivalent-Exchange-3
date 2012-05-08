@@ -4,10 +4,15 @@ import java.io.File;
 
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NetworkManager;
+import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.World;
 import net.minecraft.src.forge.IGuiHandler;
 
 public interface IProxy {
+
+	public abstract <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex);
+	
+	public abstract <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, String fieldName);
 	
 	public abstract void registerRenderInformation();
 	
@@ -34,4 +39,5 @@ public interface IProxy {
 	public abstract Object handleGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
 	
 	public abstract void playSound(String soundName, float x, float y, float z, float volume, float pitch);
+
 }
