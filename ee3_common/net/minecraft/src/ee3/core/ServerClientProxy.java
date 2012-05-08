@@ -6,8 +6,10 @@ import net.minecraft.src.ee3.lib.Reference;
 import net.minecraft.src.forge.MinecraftForge;
 
 public enum ServerClientProxy {
-	CLIENT("net.minecraft.src.ee3.client.EEProxy"),
-	SERVER("net.minecraft.src.ee3.server.EEProxy");
+	//CLIENT("net.minecraft.src.ee3.client.EEProxy"),
+	//SERVER("net.minecraft.src.ee3.server.EEProxy");
+	CLIENT("ee3.client.EEProxy"),
+	SERVER("ee3.server.EEProxy");
 	
 	private String className;
 	

@@ -30,11 +30,15 @@ public class RecipesPhilStone {
 	private static ItemStack pineWood = new ItemStack(Block.wood, 1, 2);
 	private static ItemStack jungleWood = new ItemStack(Block.wood, 1, 3);
 	
+	private static ItemStack boneMeal = new ItemStack(Item.dyePowder, 1, 15);
+	
 	public static void initRecipes() {
 		determineBaseMaterials();
-		//initEquivalencyRecipes();
-		//initDestructorRecipes();
-		//initPortableSmeltingRecipes();
+		initTransmutationRecipes();
+		initEquivalencyRecipes();
+		initReconstructiveRecipes();
+		initDestructorRecipes();
+		initPortableSmeltingRecipes();
 	}
 	
 	public static void determineBaseMaterials() {
@@ -50,11 +54,91 @@ public class RecipesPhilStone {
 		while (recipeIter.hasNext()) {
 			recipe = recipeIter.next();
 			
-			if (recipe instanceof ShapedRecipes)
+			if (recipe instanceof ShapedRecipes) {
 				System.out.println("Shaped");
-			else if (recipe instanceof ShapelessRecipes)
+			}
+			else if (recipe instanceof ShapelessRecipes) {
 				System.out.println("Shapeless");
+			}
 		}
+	}
+	
+	public static void initTransmutationRecipes() {
+		/* 4 Cobble <-> 1 Gravel */
+		ModLoader.addShapelessRecipe(new ItemStack(Block.gravel, 1), new Object[] {
+			philStone, Block.cobblestone, Block.cobblestone, Block.cobblestone, Block.cobblestone
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.cobblestone, 4), new Object[] {
+			philStone, Block.gravel
+		});
+		
+		/* 8 Gravel <-> 1 Wood Log */
+		ModLoader.addShapelessRecipe(oakWood, new Object[] {
+			philStone, Block.gravel, Block.gravel, Block.gravel, Block.gravel, 
+			Block.gravel, Block.gravel, Block.gravel, Block.gravel, 
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.gravel, 16), new Object[] {
+			philStone, oakWood, oakWood
+		});
+		
+		/* 4 Wood Log <-> 1 Obsidian */
+		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
+			philStone, oakWood, oakWood, oakWood, oakWood
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
+			philStone, birchWood, birchWood, birchWood, birchWood
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
+			philStone, pineWood, pineWood, pineWood, pineWood
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
+			philStone, jungleWood, jungleWood, jungleWood, jungleWood
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 4), new Object[] {
+			philStone, Block.obsidian
+		});
+		
+		/* 4 Obsidian <-> 1 Iron Ingot */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {
+			philStone, Block.obsidian, Block.obsidian, Block.obsidian, Block.obsidian
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 4), new Object[] {
+			philStone, Item.ingotIron
+		});
+		
+		/* 8 Iron Ingot <-> 1 Gold Ingot */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {
+			philStone, Item.ingotIron, Item.ingotIron, Item.ingotIron, Item.ingotIron,
+			Item.ingotIron, Item.ingotIron, Item.ingotIron, Item.ingotIron
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotIron, 8), new Object[] {
+			philStone, Item.ingotGold
+		});
+		
+		/* 4 Gold Ingot <-> 1 Diamond */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.diamond, 1), new Object[] {
+			philStone, Item.ingotGold, Item.ingotGold, Item.ingotGold, Item.ingotGold
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotGold, 4), new Object[] {
+			philStone, Item.diamond
+		});
+		
+		/* 8 Iron Block <-> 1 Gold Block */
+		ModLoader.addShapelessRecipe(new ItemStack(Block.blockGold, 1), new Object[] {
+			philStone, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, 
+			Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.blockSteel, 8), new Object[] {
+			philStone, Block.blockGold
+		});
+		
+		/* 4 Gold Block <-> 1 Diamond Block */
+		ModLoader.addShapelessRecipe(new ItemStack(Block.blockDiamond, 1), new Object[] {
+			philStone, Block.blockGold, Block.blockGold, Block.blockGold, Block.blockGold
+		});
+		ModLoader.addShapelessRecipe(new ItemStack(Block.blockGold, 4), new Object[] {
+			philStone, Block.blockDiamond
+		});
 	}
 	
 	public static void initEquivalencyRecipes() {
@@ -190,9 +274,20 @@ public class RecipesPhilStone {
 		});
 	}
 	
+	public static void initReconstructiveRecipes() {
+		/* 3 Bone Meal <-> 1 Bone */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.bone, 1), new Object[] {
+			philStone, boneMeal, boneMeal, boneMeal
+		});
+		
+		/* 2 Blaze Powder <-> 1 Blaze Rod */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.blazeRod, 1), new Object[] {
+			philStone, Item.blazePowder, Item.blazePowder
+		});
+	}
+	
 	public static void initDestructorRecipes() {
 		/* Clay Block -> 4 Clay Balls */
-		//ModLoader.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[] {
 		ModLoader.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[] {
 			philStone, Block.blockClay
 		});
