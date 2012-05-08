@@ -20,7 +20,7 @@ public class SoundHandler implements ISoundHandler {
 			"ee/sound/wall.ogg",	"ee/sound/waterball.ogg", "ee/sound/wind.ogg"};
 	
 	@Override
-	// Initialises our entries into the Sound Pool
+	// Initializes our entries into the Sound Pool
 	public void onLoadSoundSettings(SoundManager soundManager) {
 		for (int i = 0; i < eeSoundFiles.length; i++)
 			soundManager.getSoundsPool().addSound(eeSoundFiles[i], this.getClass().getResource("/" + eeSoundFiles[i]));
