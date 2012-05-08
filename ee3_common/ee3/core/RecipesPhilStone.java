@@ -82,18 +82,9 @@ public class RecipesPhilStone {
 			philStone, oakWood, oakWood
 		});
 		
-		/* 4 Wood Log <-> 1 Obsidian */
+		/* 2 Wood Log <-> 1 Obsidian */
 		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
-			philStone, oakWood, oakWood, oakWood, oakWood
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
-			philStone, birchWood, birchWood, birchWood, birchWood
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
-			philStone, pineWood, pineWood, pineWood, pineWood
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
-			philStone, jungleWood, jungleWood, jungleWood, jungleWood
+			philStone, anyWood, anyWood
 		});
 		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 4), new Object[] {
 			philStone, Block.obsidian
@@ -191,17 +182,17 @@ public class RecipesPhilStone {
 		});
 		
 		/* Wood Log Equivalence Recipes */
-		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 1, 1), new Object[] {
-			philStone, new ItemStack(Block.wood, 1, 0)
+		ModLoader.addShapelessRecipe(birchWood, new Object[] {
+			philStone, oakWood
 		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 1, 2), new Object[] {
-			philStone, new ItemStack(Block.wood, 1, 1)
+		ModLoader.addShapelessRecipe(pineWood, new Object[] {
+			philStone, birchWood
 		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 1, 3), new Object[] {
-			philStone, new ItemStack(Block.wood, 1, 2)
+		ModLoader.addShapelessRecipe(jungleWood, new Object[] {
+			philStone, pineWood
 		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 1, 0), new Object[] {
-			philStone, new ItemStack(Block.wood, 1, 3)
+		ModLoader.addShapelessRecipe(oakWood, new Object[] {
+			philStone, jungleWood
 		});
 		
 		/* Wood Plank Equivalence Recipes */
@@ -346,6 +337,21 @@ public class RecipesPhilStone {
 		/* 7 Sand + 1 Coal|Charcoal = 7 Glass */
 		ModLoader.addShapelessRecipe(new ItemStack(Block.glass, 7), new Object[] {
 			philStone, anyCoal, Block.sand, Block.sand, Block.sand, Block.sand, Block.sand, Block.sand, Block.sand
+		});
+		
+		/* 7 Raw Chicken + 1 Coal|Charcoal = 7 Cooked Chicken */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.chickenCooked, 7), new Object[] {
+			philStone, anyCoal, Item.chickenRaw, Item.chickenRaw, Item.chickenRaw, Item.chickenRaw, Item.chickenRaw, Item.chickenRaw, Item.chickenRaw
+		});
+		
+		/* 7 Raw Pork + 1 Coal|Charcoal = 7 Cooked Pork */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.porkCooked, 7), new Object[] {
+			philStone, anyCoal, Item.porkRaw, Item.porkRaw, Item.porkRaw, Item.porkRaw, Item.porkRaw, Item.porkRaw, Item.porkRaw
+		});
+		
+		/* 7 Raw Beef + 1 Coal|Charcoal = 7 Cooked Pork */
+		ModLoader.addShapelessRecipe(new ItemStack(Item.beefCooked, 7), new Object[] {
+			philStone, anyCoal, Item.beefRaw, Item.beefRaw, Item.beefRaw, Item.beefRaw, Item.beefRaw, Item.beefRaw, Item.beefRaw
 		});
 	}
 }
