@@ -120,8 +120,10 @@ public class RecipesPhilStone {
 		}
 	}
 	
-	/* Pass this a Block, Item or ItemStack and the maximum (desired) meta, including zero */
+	/* Pass this a Block, Item or ItemStack and the maximum number of indexes, EXCLUDING zero */
 	public static void addMetaCycleRecipe(Object input, int n) {
+		/* Decrements n by 1, so that it will include the zero index */
+		n -= 1;
 		/* Makes a single item cycle through its meta values when it's crafted with a PStone */
 		for(int i = 0; i <= n; i++) {
 			if(input instanceof Block)
@@ -224,22 +226,22 @@ public class RecipesPhilStone {
 		/* Initialize meta-cycling recipes and other cycles first */
 		
 		/* Wood Plank Cycle */
-		addMetaCycleRecipe(Block.planks, 3);
+		addMetaCycleRecipe(Block.planks, 4);
 		
 		/* Wood Log Cycle */
-		addMetaCycleRecipe(Block.wood, 3);
+		addMetaCycleRecipe(Block.wood, 4);
 		
 		/* Sapling Cycle */
-		addMetaCycleRecipe(Block.sapling, 3);
+		addMetaCycleRecipe(Block.sapling, 4);
 		
 		/* Leaf Cycle */
-		addMetaCycleRecipe(Block.leaves, 3);
+		addMetaCycleRecipe(Block.leaves, 4);
 		
 		/* Tallgrass Cycle */
-		addMetaCycleRecipe(Block.tallGrass, 2);
+		addMetaCycleRecipe(Block.tallGrass, 3);
 		
 		/* Wool Cycle */
-		addMetaCycleRecipe(Block.cloth, 15);
+		addMetaCycleRecipe(Block.cloth, 16);
 		
 		/* Dirt -> Cobble -> Sand -> Dirt */
 		addOneWayRecipe(Block.dirt, 1, new ItemStack(Block.cobblestone, 1));
