@@ -30,6 +30,8 @@ public class RecipesPhilStone {
 	private static ItemStack pineWood = new ItemStack(Block.wood, 1, 2);
 	private static ItemStack jungleWood = new ItemStack(Block.wood, 1, 3);
 	private static ItemStack anyWood = new ItemStack(Block.wood, 1, -1);
+	private static ItemStack planks(int i) { return new ItemStack(Block.planks, 1, i); }
+	private static ItemStack wood(int i) { return new ItemStack(Block.wood, 1, i); }
 	
 	private static ItemStack boneMeal = new ItemStack(Item.dyePowder, 1, 15);
 	
@@ -64,81 +66,132 @@ public class RecipesPhilStone {
 		}
 	}
 	
-	public static void initTransmutationRecipes() {
-		/* 4 Cobble <-> 1 Gravel */
-		ModLoader.addShapelessRecipe(new ItemStack(Block.gravel, 1), new Object[] {
-			philStone, Block.cobblestone, Block.cobblestone, Block.cobblestone, Block.cobblestone
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.cobblestone, 4), new Object[] {
-			philStone, Block.gravel
-		});
+	/* Just a speed-loader for a linear recipes requiring the PStone */
+	/* Give it an input Item/Block/ItemStack, the number inputs required, and an output ItemStack */
+	public static void addOneWayRecipe(Object input, int n, ItemStack output) {
+		if(!(input instanceof Item || input instanceof Block || input instanceof ItemStack))
+			return;
+		Object[] list = new Object[n];
+		list[0] = philStone;
+		for(int i = 1; i <= n; i++)
+			list[i] = input;
+		ModLoader.addShapelessRecipe(output, list);
+	}
+	
+	/* Adds a recipe AND its exact reversal */
+	public static void addTwoWayRecipe(Object input, int n, ItemStack output) {
+		/* Adds the one-way recipe */
+		addOneWayRecipe(input, n, output);
 		
-		/* 8 Gravel <-> 1 Wood Log */
-		ModLoader.addShapelessRecipe(oakWood, new Object[] {
-			philStone, Block.gravel, Block.gravel, Block.gravel, Block.gravel, 
-			Block.gravel, Block.gravel, Block.gravel, Block.gravel, 
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.gravel, 16), new Object[] {
-			philStone, oakWood, oakWood
-		});
+		/* Reverses the recipe by making a list of the output */
+		Object[] list = new Object[output.stackSize];
+		for(int i = 0; i < output.stackSize; i++)
+			list[i] = new ItemStack(output.itemID, 1, output.getItemDamage());
+		
+		/* Checks the type of the input so it can make a proper ItemStack */
+		if(input instanceof Item)
+			ModLoader.addShapelessRecipe(new ItemStack((Item)input, n), list);
+		else if(input instanceof Block)
+			ModLoader.addShapelessRecipe(new ItemStack((Block)input, n), list);
+		else if(input instanceof ItemStack) {
+			ItemStack ist = new ItemStack(((ItemStack)input).itemID, n, ((ItemStack)input).getItemDamage());
+			ModLoader.addShapelessRecipe(ist, list);
+		}
+	}
+	
+	/* Pass this a Block, Item or ItemStack and the maximum (desired) meta, including zero */
+	public static void addMetaCycleRecipe(Object input, int n) {
+		/* Makes a single item cycle through its meta values when it's crafted with a PStone */
+		for(int i = 0; i <= n; i++) {
+			if(input instanceof Block)
+				ModLoader.addShapelessRecipe(new ItemStack((Block)input, 1, (i == n - 1 ? 0 : i + 1)), new Object[] {
+					new ItemStack((Block)input, 1, i)
+				});
+			else if (input instanceof Item)
+				ModLoader.addShapelessRecipe(new ItemStack((Item)input, 1, (i == n - 1 ? 0 : i + 1)), new Object[] {
+					new ItemStack((Item)input, 1, i)
+				});
+			else if (input instanceof ItemStack) {				
+				ModLoader.addShapelessRecipe(new ItemStack(((ItemStack)input).itemID, 1, (i == n - 1 ? 0 : i + 1)), new Object[] {
+					new ItemStack(((ItemStack)input).itemID, 1, i)
+				});
+			}
+				
+		}
+	}
+	
+	
+	
+	public static void initTransmutationRecipes() {
+		/* Initialize meta-cycling recipes and other cycles first */
+		
+		/* Wood Plank Cycle */
+		addMetaCycleRecipe(Block.planks, 3);
+		
+		/* Wood Log Cycle */
+		addMetaCycleRecipe(Block.wood, 3);
+		
+		/* Sapling Cycle */
+		addMetaCycleRecipe(Block.sapling, 3);
+		
+		/* Leaf Cycle */
+		addMetaCycleRecipe(Block.leaves, 3);
+		
+		/* Wool Cycle */
+		addMetaCycleRecipe(Block.cloth, 15);
+		
+		/* Dirt -> Cobble -> Sand -> Dirt */
+		addOneWayRecipe(Block.dirt, 1, new ItemStack(Block.cobblestone, 1));
+		addOneWayRecipe(Block.cobblestone, 1, new ItemStack(Block.sand, 1));
+		addOneWayRecipe(Block.sand, 1, new ItemStack(Block.dirt, 1));
+		
+		/* 2 Gravel -> 2 Flint -> 2 Sandstone -> 2 Gravel*/
+		addOneWayRecipe(Block.gravel, 2, new ItemStack(Item.flint, 2));
+		addOneWayRecipe(Item.flint, 2, new ItemStack(Block.sandStone, 2));
+		addOneWayRecipe(Block.sandStone, 2, new ItemStack(Block.gravel, 2));		
+		
+		/* Initialize constructive/destructive recipes */
+		
+		/* 4 Cobble <-> 1 Flint */
+		addTwoWayRecipe(Block.cobblestone, 4, new ItemStack(Item.flint, 1));
+		
+		/* 4 Dirt/Sand -> 1 Gravel, 1 Gravel -> 4 Dirt */
+		addTwoWayRecipe(Block.dirt, 4, new ItemStack(Block.gravel, 1));
+		addOneWayRecipe(Block.sand, 4, new ItemStack(Block.gravel, 1));
+		
+		/* 2 Sticks -> Wood Plank */
+		addOneWayRecipe(Item.stick, 2, planks(0));
+		
+		/* 4 Wood Planks -> Wood Block */
+		for(int i = 0; i <= 3; i++)
+			addOneWayRecipe(planks(i), 1, wood(i));
+		
+		/* 4 Gravel/Sandstone/Flint -> 1 Clay Ball, 1 Clay Ball -> 4 Gravel */
+		addTwoWayRecipe(Block.gravel, 4, new ItemStack(Item.clay, 1));
+		addOneWayRecipe(Block.sandStone, 4, new ItemStack(Item.clay, 1));
+		addOneWayRecipe(Item.flint, 4, new ItemStack(Item.clay, 1));
 		
 		/* 2 Wood Log <-> 1 Obsidian */
-		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 1), new Object[] {
-			philStone, anyWood, anyWood
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.wood, 4), new Object[] {
-			philStone, Block.obsidian
-		});
+		addTwoWayRecipe(anyWood, 2, new ItemStack(Block.obsidian, 1));
 		
-		/* 4 Obsidian <-> 1 Iron Ingot */
-		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {
-			philStone, Block.obsidian, Block.obsidian, Block.obsidian, Block.obsidian
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.obsidian, 4), new Object[] {
-			philStone, Item.ingotIron
-		});
+		/* 4 Obsidian/Clay Block -> 1 Iron Ingot, Iron Ingot -> Clay Block */
+		addTwoWayRecipe(Block.blockClay, 4, new ItemStack(Item.ingotIron, 1));
+		addOneWayRecipe(Block.obsidian, 4, new ItemStack(Item.ingotIron, 1));
 		
 		/* 8 Iron Ingot <-> 1 Gold Ingot */
-		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {
-			philStone, Item.ingotIron, Item.ingotIron, Item.ingotIron, Item.ingotIron,
-			Item.ingotIron, Item.ingotIron, Item.ingotIron, Item.ingotIron
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotIron, 8), new Object[] {
-			philStone, Item.ingotGold
-		});
+		addTwoWayRecipe(Item.ingotIron, 8, new ItemStack(Item.ingotGold, 1));
 		
 		/* 4 Gold Ingot <-> 1 Diamond */
-		ModLoader.addShapelessRecipe(new ItemStack(Item.diamond, 1), new Object[] {
-			philStone, Item.ingotGold, Item.ingotGold, Item.ingotGold, Item.ingotGold
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotGold, 4), new Object[] {
-			philStone, Item.diamond
-		});
+		addTwoWayRecipe(Item.ingotGold, 4, new ItemStack(Item.diamond, 1));
 		
 		/* 8 Iron Block <-> 1 Gold Block */
-		ModLoader.addShapelessRecipe(new ItemStack(Block.blockGold, 1), new Object[] {
-			philStone, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, 
-			Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.blockSteel, 8), new Object[] {
-			philStone, Block.blockGold
-		});
+		addTwoWayRecipe(Block.blockSteel, 8, new ItemStack(Block.blockGold, 1));
 		
 		/* 4 Gold Block <-> 1 Diamond Block */
-		ModLoader.addShapelessRecipe(new ItemStack(Block.blockDiamond, 1), new Object[] {
-			philStone, Block.blockGold, Block.blockGold, Block.blockGold, Block.blockGold
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Block.blockGold, 4), new Object[] {
-			philStone, Block.blockDiamond
-		});
+		addTwoWayRecipe(Block.blockGold, 4, new ItemStack(Block.blockDiamond, 1));
 		
 		/* 1 Ender Pearl <-> 4 Iron Ingot */
-		ModLoader.addShapelessRecipe(new ItemStack(Item.enderPearl, 1), new Object[] {
-			philStone, Item.ingotIron, Item.ingotIron, Item.ingotIron, Item.ingotIron
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Item.ingotIron, 4), new Object[] {
-			philStone, Item.enderPearl
-		});
+		addTwoWayRecipe(Item.ingotIron, 4, new ItemStack(Item.enderPearl, 1));
 	}
 	
 	public static void initEquivalencyRecipes() {
