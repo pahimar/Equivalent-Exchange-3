@@ -1,16 +1,16 @@
 package net.minecraft.src;
 
+import ee3.core.ConfigurationManager;
+import ee3.core.RecipesPhilStone;
+import ee3.core.ServerClientProxy;
+import ee3.core.Version;
+import ee3.core.interfaces.IProxy;
+import ee3.gui.GuiHandler;
+import ee3.item.ModItems;
+import ee3.lib.Reference;
+import ee3.lib.Sounds;
+import ee3.network.PacketHandler;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.ee3.core.ConfigurationManager;
-import net.minecraft.src.ee3.core.RecipesPhilStone;
-import net.minecraft.src.ee3.core.ServerClientProxy;
-import net.minecraft.src.ee3.core.Version;
-import net.minecraft.src.ee3.core.interfaces.IProxy;
-import net.minecraft.src.ee3.gui.GuiHandler;
-import net.minecraft.src.ee3.item.ModItems;
-import net.minecraft.src.ee3.lib.Reference;
-import net.minecraft.src.ee3.lib.Sounds;
-import net.minecraft.src.ee3.network.PacketHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
 
