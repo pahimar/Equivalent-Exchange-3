@@ -23,30 +23,30 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	}
 
 	@Override
-	public void increaseCharge() {
-		if (currentCharge < maxCharge)
-			currentCharge++;			
+	public void increaseCharge(ItemStack ist) {
+		if (getCurrentCharge(ist) < getMaxCharge())
+			setCurrentCharge(ist, (byte)(getCurrentCharge(ist) + 1));			
 	}
 
 	@Override
-	public void decreaseCharge() {
-		if (currentCharge > 0)
-			currentCharge--;
+	public void decreaseCharge(ItemStack ist) {
+		if (getCurrentCharge(ist) > 0)
+			setCurrentCharge(ist, (byte)(getCurrentCharge(ist) - 1));	
 	}
 
 	@Override
-	public byte getCurrentCharge() {
-		return currentCharge;
+	public byte getCurrentCharge(ItemStack ist) {
+		return getByte(ist, "currentCharge");
 	}
 
 	@Override
-	public void setCurrentCharge(byte charge) {
-		currentCharge = charge;
+	public void setCurrentCharge(ItemStack ist, byte charge) {
+		setByte(ist, "currentCharge", charge);
 	}
 
 	@Override
-	public byte getCurrentMode() {
-		return currentMode;
+	public byte getCurrentMode(ItemStack ist) {
+		return getByte(ist, "currentMode");
 	}
 
 	@Override
@@ -55,17 +55,17 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	}
 
 	@Override
-	public byte cycleMode() {
-		if (currentMode < maxMode)
-			currentMode += 1;
+	public byte cycleMode(ItemStack ist) {
+		if (getCurrentMode(ist) < getMaxMode())
+			setMode(ist, (byte)(getCurrentMode(ist) + 1));
 		else
-			currentMode = 0;
-		return currentMode;
+			setMode(ist, (byte)0);
+		return getCurrentMode(ist);
 	}
 
 	@Override
-	public void setMode(byte mode) {
-		this.currentMode = mode;
+	public void setMode(ItemStack ist, byte mode) {
+		setByte(ist, "currentMode", mode);
 	}
 
 	@Override
