@@ -36,17 +36,17 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 
 	@Override
 	public byte getCurrentCharge(ItemStack ist) {
-		return this.getByte(ist, "currentCharge");
+		return getByte(ist, "currentCharge");
 	}
 
 	@Override
 	public void setCurrentCharge(ItemStack ist, byte charge) {
-		this.setByte(ist, "currentCharge", charge);
+		setByte(ist, "currentCharge", charge);
 	}
 
 	@Override
 	public byte getCurrentMode(ItemStack ist) {
-		return this.getByte(ist, "currentMode");
+		return getByte(ist, "currentMode");
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 
 	@Override
 	public void setMode(ItemStack ist, byte mode) {
-		this.setByte(ist, "currentMode", mode);
+		setByte(ist, "currentMode", mode);
 	}
 
 	@Override
