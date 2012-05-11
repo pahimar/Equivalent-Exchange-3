@@ -34,7 +34,7 @@ public class RecipesPhilStone {
 	public static void initRecipes() {
 		//determineBaseMaterials();
 		initTransmutationRecipes();
-		initEquivalencyRecipes();
+		initEquivalenceRecipes();
 		initReconstructiveRecipes();
 		initDestructorRecipes();
 		initPortableSmeltingRecipes();
@@ -139,7 +139,7 @@ public class RecipesPhilStone {
 		}
 	}
 	
-	public static void initEquivalencyRecipes() {
+	public static void initEquivalenceRecipes() {
 		/* Wood Plank Cycle */
 		addMetaCycleRecipe(planks, 4);
 		
@@ -152,7 +152,7 @@ public class RecipesPhilStone {
 		/* Leaf Cycle */
 		addMetaCycleRecipe(leaves, 4);
 		
-		/* Tallgrass Cycle */
+		/* Tall Grass Cycle */
 		addMetaCycleRecipe(tallGrass, 3);
 		
 		/* Wool Cycle */
@@ -160,6 +160,8 @@ public class RecipesPhilStone {
 		
 		/* Stone Brick Cycle */
 		addMetaCycleRecipe(stoneBrick, 4);
+		
+		/* Dye Equivalence Cycle */
 		
 		/* Dirt -> Cobble -> Sand -> Dirt */
 		addRecipe(dirt, philStone, cobblestone);

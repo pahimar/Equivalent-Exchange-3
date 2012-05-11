@@ -3,7 +3,7 @@ package ee3.core;
 public class EMCMapping {
 	
 	private float cost;
-	private float recovery;
+	private float recoveryPercentage;
 	private boolean learnable;
 	private boolean recoverable;
 	
@@ -11,14 +11,14 @@ public class EMCMapping {
 	
 	public EMCMapping(float cost) {
 		this.cost = cost;
-		recovery = cost;
+		recoveryPercentage = 1.0F;
 		learnable = true;
 		recoverable = true;
 	}
 	
-	public EMCMapping(float cost, float recovery, boolean learnable, boolean recoverable) {
+	public EMCMapping(float cost, float recoveryPercentage, boolean learnable, boolean recoverable) {
 		this.cost = cost;
-		this.recovery = recovery;
+		this.recoveryPercentage = recoveryPercentage;
 		this.learnable = learnable;
 		this.recoverable = recoverable;
 	}
@@ -28,7 +28,7 @@ public class EMCMapping {
 	}
 	
 	public float getRecoveryEMC() {
-		return recovery;
+		return recoveryPercentage;
 	}
 	
 	public boolean isLearnable() {
@@ -43,8 +43,8 @@ public class EMCMapping {
 		this.cost = cost;
 	}
 	
-	public void setRecoveryEMC(float recovery) {
-		this.recovery = recovery;
+	public void setRecoveryPercentage(float recoveryPercentage) {
+		this.recoveryPercentage = recoveryPercentage;
 	}
 	
 	public void setLearnable(boolean learnable) {

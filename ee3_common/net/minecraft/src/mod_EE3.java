@@ -7,6 +7,7 @@ import ee3.core.Version;
 import ee3.core.interfaces.IProxy;
 import ee3.gui.GuiHandler;
 import ee3.item.ModItems;
+import ee3.lib.ItemIds;
 import ee3.lib.Reference;
 import ee3.lib.Sounds;
 import ee3.network.PacketHandler;
@@ -46,7 +47,10 @@ public class mod_EE3 extends NetworkMod {
 		// Initialise the configuration settings from file
 		config.init();
 		
+		// Initialise the mod items
 		ModItems.init();
+		
+		// Initialise the Philosopher Stone recipes
 		RecipesPhilStone.initRecipes();
 	}
 	
