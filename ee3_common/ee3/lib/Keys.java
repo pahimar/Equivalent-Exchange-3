@@ -1,5 +1,10 @@
 package ee3.lib;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class Keys {
 	
 	public static final int EXTRA = 0;

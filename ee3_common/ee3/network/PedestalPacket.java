@@ -7,6 +7,11 @@ import java.io.IOException;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.mod_EE3;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class PedestalPacket extends EEPacket {
 
 	int x, y, z;

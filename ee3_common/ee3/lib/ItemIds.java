@@ -1,5 +1,10 @@
 package ee3.lib;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class ItemIds {
 	public static int IMPERFECT_PHIL_STONE;
 	public static int PHIL_STONE;

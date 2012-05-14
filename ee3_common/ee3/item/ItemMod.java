@@ -6,6 +6,11 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.forge.ITextureProvider;
 
+/**
+ * TODO Class Description 
+ * @author pahimar, x3n0ph0b3
+ *
+ */
 public class ItemMod extends Item implements ITextureProvider {
 
 	public ItemMod(int i) {

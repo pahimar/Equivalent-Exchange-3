@@ -6,6 +6,11 @@ import net.minecraft.src.World;
 import net.minecraft.src.mod_EE3;
 import net.minecraft.src.forge.IGuiHandler;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class GuiHandler implements IGuiHandler {
 
 	@Override

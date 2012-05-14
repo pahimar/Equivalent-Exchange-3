@@ -5,6 +5,11 @@ import ee3.lib.Reference;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.forge.MinecraftForge;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public enum ServerClientProxy {
 	CLIENT("ee3.client.EEProxy"),
 	SERVER("ee3.server.EEProxy");
@@ -19,7 +24,7 @@ public enum ServerClientProxy {
 		try {
 			return (IProxy)Class.forName(className).newInstance();
 		} catch (Exception e) {
-			ModLoader.getLogger().severe("[" + Reference.CHANNEL_NAME +  "] A fatal error has occured initializing Equivalent Exchange");
+			ModLoader.getLogger().severe(Reference.LOGGER_PREFIX + "A fatal error has occured initializing Equivalent Exchange");
 			e.printStackTrace(System.err);
 			throw new RuntimeException(e);
 		}

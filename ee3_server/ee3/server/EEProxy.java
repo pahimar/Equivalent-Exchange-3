@@ -12,6 +12,11 @@ import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
 import ee3.core.interfaces.IProxy;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class EEProxy implements IProxy {
 
 	public EEProxy() { }

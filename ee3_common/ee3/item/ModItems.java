@@ -4,6 +4,11 @@ import ee3.lib.ItemIds;
 import net.minecraft.src.Item;
 import net.minecraft.src.ModLoader;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class ModItems {
 	
 	private static boolean initialized; 

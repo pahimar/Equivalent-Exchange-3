@@ -8,6 +8,11 @@ import java.io.IOException;
 import net.minecraft.src.mod_EE3;
 import net.minecraft.src.NetworkManager;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class TileEntityPacket extends EEPacket {
 
 	public int x, y, z;

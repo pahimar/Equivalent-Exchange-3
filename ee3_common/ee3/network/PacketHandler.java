@@ -13,6 +13,11 @@ import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
 import net.minecraft.src.forge.MessageManager;
 
+/**
+ * TODO Class Description 
+ * @author pahimar, cpw
+ *
+ */
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 	@Override

@@ -1,11 +1,17 @@
 package ee3.core;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class EMCMapping {
 	
 	private float cost;
 	private float recoveryPercentage;
 	private boolean learnable;
 	private boolean recoverable;
+	private float[] emcBreakdown;
 	
 	public EMCMapping() { }
 	

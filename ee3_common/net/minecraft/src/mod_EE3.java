@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
 import ee3.core.RecipesPhilStone;
 import ee3.core.ServerClientProxy;
@@ -15,7 +16,11 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
 
-
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class mod_EE3 extends NetworkMod {
 
 	public static mod_EE3 instance;
@@ -27,7 +32,7 @@ public class mod_EE3 extends NetworkMod {
 		proxy = ServerClientProxy.getProxy();
 		
 		// Forge version check
-		MinecraftForge.versionDetect("Equivalent Exchange 3", Version.REQ_FORGE_MAJOR, Version.REQ_FORGE_MINOR, Version.REQ_FORGE_REVISION);
+		MinecraftForge.versionDetect(Reference.MOD_NAME, Version.REQ_FORGE_MAJOR, Version.REQ_FORGE_MINOR, Version.REQ_FORGE_REVISION);
 		
 		// Register the mod with ModLoader
 		ModLoader.setInGameHook(this, true, true);
@@ -52,6 +57,8 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Initialise the Philosopher Stone recipes
 		RecipesPhilStone.initRecipes();
+		
+		BuildCraftAddon.init();
 	}
 	
 	@Override

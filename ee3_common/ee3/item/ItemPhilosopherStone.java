@@ -4,6 +4,11 @@ import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
 import net.minecraft.src.ItemStack;
 
+/**
+ * TODO Class Description 
+ * @author pahimar, x3n0ph0b3
+ *
+ */
 public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal {
 
 	private byte currentCharge;

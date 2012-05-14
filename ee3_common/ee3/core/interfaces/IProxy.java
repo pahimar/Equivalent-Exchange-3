@@ -8,6 +8,11 @@ import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.World;
 import net.minecraft.src.forge.IGuiHandler;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public interface IProxy {
 
 	public abstract <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex);

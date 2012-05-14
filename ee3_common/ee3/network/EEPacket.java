@@ -9,6 +9,11 @@ import java.io.IOException;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.forge.packets.ForgePacket;
 
+/**
+ * TODO Class Description 
+ * @author pahimar, cpw
+ *
+ */
 public class EEPacket {
 
 	protected PacketTypeHandler packetType;

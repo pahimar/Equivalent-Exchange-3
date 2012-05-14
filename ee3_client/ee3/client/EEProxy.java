@@ -11,6 +11,11 @@ import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
+/**
+ * TODO Class Description 
+ * @author pahimar, cpw
+ *
+ */
 public class EEProxy implements IProxy {
 
 	public EEProxy() { }

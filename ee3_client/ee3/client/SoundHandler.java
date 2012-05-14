@@ -11,6 +11,11 @@ import net.minecraft.src.SoundPoolEntry;
 import net.minecraft.src.mod_EE3;
 import net.minecraft.src.forge.ISoundHandler;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class SoundHandler implements ISoundHandler {
 
 	private String[] eeSoundFiles = {"ee/sound/break.ogg", "ee/sound/chargetick.ogg", "ee/sound/destruct.ogg", 

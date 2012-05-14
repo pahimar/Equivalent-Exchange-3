@@ -1,5 +1,10 @@
 package ee3.lib;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class Sounds {
 	public static final String BREAK = "ee.sound.break";
 	public static final String CHARGE_TICK = "ee.sound.chargetick";

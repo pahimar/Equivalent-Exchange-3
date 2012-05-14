@@ -8,7 +8,11 @@ import ee3.lib.Reference;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
 
-
+/**
+ * TODO Class Description 
+ * @author pahimar, cpw
+ *
+ */
 public enum PacketTypeHandler {
 	KEY(KeyPressedPacket.class),
 	TILE(TileEntityPacket.class),

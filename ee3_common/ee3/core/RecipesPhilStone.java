@@ -21,6 +21,11 @@ import net.minecraft.src.mod_EE3;
 import static net.minecraft.src.Item.*;
 import static net.minecraft.src.Block.*;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class RecipesPhilStone {
 
 	private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);

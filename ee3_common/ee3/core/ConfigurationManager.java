@@ -11,6 +11,11 @@ import static net.minecraft.src.forge.Configuration.*;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.Property;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ *
+ */
 public class ConfigurationManager {
 
 	private String cfgFile;
