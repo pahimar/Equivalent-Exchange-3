@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
+import ee3.core.PickupHandler;
 import ee3.core.RecipesPhilStone;
 import ee3.core.ServerClientProxy;
 import ee3.core.Version;
@@ -59,6 +60,8 @@ public class mod_EE3 extends NetworkMod {
 		RecipesPhilStone.initRecipes();
 		
 		BuildCraftAddon.init();
+		
+		MinecraftForge.registerPickupHandler(new PickupHandler());
 	}
 	
 	@Override

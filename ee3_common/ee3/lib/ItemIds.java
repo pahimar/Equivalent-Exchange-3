@@ -7,7 +7,7 @@ package ee3.lib;
  */
 public class ItemIds {
 	public static int IMPERFECT_PHIL_STONE;
-	public static int PHIL_STONE;
+	public static int PHIL_STONE = 27271;
 	public static int DJINN_RING;
 	public static int EYE_OF_THE_VOID;
 	public static int IDOL_OF_GAIA;
@@ -36,4 +36,5 @@ public class ItemIds {
 	public static int DARK_MATTER_BOW;
 	public static int DARK_MATTER_FISHING_ROD;
 	public static int DARK_MATTER_ARMOR;
+	public static int LOOT_BALL = 27298;
 }

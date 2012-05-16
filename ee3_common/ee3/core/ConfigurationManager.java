@@ -119,6 +119,8 @@ public class ConfigurationManager {
 	    	DARK_MATTER_ARMOR = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("wardOfXeno", CATEGORY_ITEM, 27297);
 	    	WARD_OF_XENOPHOBIA = prop.getInt();
+	    	prop = config.getOrCreateIntProperty("lootBall", CATEGORY_ITEM, 27298);
+	    	LOOT_BALL = prop.getInt();
 	    	
 	    	/* Keybinds */
         	prop = config.getOrCreateIntProperty("extra", CATEGORY_KEYBIND, 46);
