@@ -33,7 +33,8 @@ public class RecipesPhilStone {
 	private static ItemStack anyWood = new ItemStack(wood, 1, -1);
 	private static ItemStack anyPlank = new ItemStack(planks, 1, -1);
 	private static ItemStack anySandStone = new ItemStack(sandStone, 1, -1);
-	private static ItemStack boneMeal = new ItemStack(dyePowder, 1, 15);
+	private static ItemStack dyeBoneMeal = new ItemStack(dyePowder, 1, 15);
+	
 	
 	
 	public static void initRecipes() {
@@ -43,6 +44,44 @@ public class RecipesPhilStone {
 		initReconstructiveRecipes();
 		initDestructorRecipes();
 		initPortableSmeltingRecipes();
+	}
+	
+	public static void determineBaseMaterials() {
+		CraftingManager instance = CraftingManager.getInstance();
+		List recipeList = instance.getRecipeList();
+
+		IRecipe recipe;
+		ShapedRecipes shapedRecipe;
+		ShapelessRecipes shapelessRecipe;
+		
+		ItemStack[] shapedInputs;
+		List shapelessInputs;
+		
+		Iterator<IRecipe> recipeIter = recipeList.iterator();
+
+		try {			
+			while (recipeIter.hasNext()) {
+				recipe = recipeIter.next();
+				
+				if (recipe instanceof ShapedRecipes) {
+					shapedRecipe = (ShapedRecipes) recipe;
+					shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
+					
+					System.out.println("Shaped");
+					System.out.println(shapedInputs.toString());
+				}
+				else if (recipe instanceof ShapelessRecipes) {
+					shapelessRecipe = (ShapelessRecipes) recipe;
+					shapelessInputs = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
+					
+					System.out.println("Shapeless");
+					System.out.println(shapelessInputs.toString());
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
 	}
 	
 	public static void initTransmutationRecipes() {
@@ -106,44 +145,6 @@ public class RecipesPhilStone {
 		addRecipe(ingotIron, 4, philStone, enderPearl);
 	}
 	
-	public static void determineBaseMaterials() {
-		CraftingManager instance = CraftingManager.getInstance();
-		List recipeList = instance.getRecipeList();
-
-		IRecipe recipe;
-		ShapedRecipes shapedRecipe;
-		ShapelessRecipes shapelessRecipe;
-		
-		ItemStack[] shapedInputs;
-		List shapelessInputs;
-		
-		Iterator<IRecipe> recipeIter = recipeList.iterator();
-
-		try {			
-			while (recipeIter.hasNext()) {
-				recipe = recipeIter.next();
-				
-				if (recipe instanceof ShapedRecipes) {
-					shapedRecipe = (ShapedRecipes) recipe;
-					shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					
-					System.out.println("Shaped");
-					System.out.println(shapedInputs.toString());
-				}
-				else if (recipe instanceof ShapelessRecipes) {
-					shapelessRecipe = (ShapelessRecipes) recipe;
-					shapelessInputs = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
-					
-					System.out.println("Shapeless");
-					System.out.println(shapelessInputs.toString());
-				}
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
-	}
-	
 	public static void initEquivalenceRecipes() {
 		/* Wood Plank Cycle */
 		addMetaCycleRecipe(planks, 4);
@@ -167,6 +168,7 @@ public class RecipesPhilStone {
 		addMetaCycleRecipe(stoneBrick, 4);
 		
 		/* Dye Equivalence Cycle */
+		addMetaCycleRecipe(dyePowder, 16, 3, 4, 15);
 		
 		/* Dirt -> Cobble -> Sand -> Dirt */
 		addRecipe(dirt, philStone, cobblestone);
@@ -204,7 +206,7 @@ public class RecipesPhilStone {
 	
 	public static void initReconstructiveRecipes() {
 		/* 3 Bone Meal --> 1 Bone */
-		addRecipe(bone, philStone, boneMeal, boneMeal, boneMeal);
+		addRecipe(bone, philStone, dyeBoneMeal, dyeBoneMeal, dyeBoneMeal);
 		
 		/* 2 Blaze Powder --> 1 Blaze Rod */
 		addRecipe(blazeRod, philStone, blazePowder, blazePowder);
@@ -289,6 +291,28 @@ public class RecipesPhilStone {
 				ModLoader.addShapelessRecipe(new ItemStack((Item)input, 1, outputI), philStone, new ItemStack((Item)input, 1, i));
 			else if (input instanceof ItemStack)		
 				ModLoader.addShapelessRecipe(new ItemStack(((ItemStack)input).itemID, 1, outputI), philStone, new ItemStack(((ItemStack)input).itemID, 1, i));
+		}
+	}
+	
+	protected static void addMetaCycleRecipe(Object input, int n, int ... excludedMeta) {
+		int i = 0;
+		int outputI = 1;
+		while (i < n && outputI != 0) {
+			outputI = (i == n - 1 ? 0 : i + 1);
+			
+			for (int j : excludedMeta) {
+				if (outputI == j)
+					outputI = (outputI + 1) % 16;
+			}
+			
+			if(input instanceof Block)
+				ModLoader.addShapelessRecipe(new ItemStack((Block)input, 1, outputI), philStone, new ItemStack((Block)input, 1, i));
+			else if (input instanceof Item)
+				ModLoader.addShapelessRecipe(new ItemStack((Item)input, 1, outputI), philStone, new ItemStack((Item)input, 1, i));
+			else if (input instanceof ItemStack)		
+				ModLoader.addShapelessRecipe(new ItemStack(((ItemStack)input).itemID, 1, outputI), philStone, new ItemStack(((ItemStack)input).itemID, 1, i));
+			
+			i = outputI;
 		}
 	}
 	
