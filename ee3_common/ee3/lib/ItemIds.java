@@ -36,5 +36,4 @@ public class ItemIds {
 	public static int DARK_MATTER_BOW;
 	public static int DARK_MATTER_FISHING_ROD;
 	public static int DARK_MATTER_ARMOR;
-	public static int LOOT_BALL = 27298;
 }
