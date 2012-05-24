@@ -2,6 +2,7 @@ package ee3.item;
 
 import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
+import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 
 /**
@@ -21,6 +22,10 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 		maxCharge = 4;
 		maxMode = 2;
 	}
+	
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
+        return EnumRarity.uncommon;
+    }
 
 	@Override
 	public byte getMaxCharge() {

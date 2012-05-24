@@ -6,6 +6,7 @@ import ee3.core.RecipesPhilStone;
 import ee3.core.ServerClientProxy;
 import ee3.core.Version;
 import ee3.core.interfaces.IProxy;
+import ee3.emc.EMCList;
 import ee3.gui.GuiHandler;
 import ee3.item.ModItems;
 import ee3.lib.ItemIds;
@@ -25,10 +26,12 @@ public class mod_EE3 extends NetworkMod {
 
 	public static mod_EE3 instance;
 	public static IProxy proxy;
+	public static EMCList emcList;
 	public static ConfigurationManager config = new ConfigurationManager(Reference.CONFIG_FILE);
 	
 	public mod_EE3() {
 		instance = this;
+		emcList = new EMCList();
 		proxy = ServerClientProxy.getProxy();
 		
 		// Forge version check
@@ -59,6 +62,8 @@ public class mod_EE3 extends NetworkMod {
 		RecipesPhilStone.initRecipes();
 		
 		BuildCraftAddon.init();
+		
+		emcList.initEMCList();
 	}
 	
 	@Override

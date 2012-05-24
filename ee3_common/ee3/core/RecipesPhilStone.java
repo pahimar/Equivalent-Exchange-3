@@ -1,8 +1,10 @@
 package ee3.core;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ModItems;
@@ -38,12 +40,12 @@ public class RecipesPhilStone {
 	
 	
 	public static void initRecipes() {
-		//determineBaseMaterials();
-		initTransmutationRecipes();
-		initEquivalenceRecipes();
-		initReconstructiveRecipes();
-		initDestructorRecipes();
-		initPortableSmeltingRecipes();
+		determineBaseMaterials();
+		//initTransmutationRecipes();
+		//initEquivalenceRecipes();
+		//initReconstructiveRecipes();
+		//initDestructorRecipes();
+		//initPortableSmeltingRecipes();
 	}
 	
 	public static void determineBaseMaterials() {
@@ -55,28 +57,51 @@ public class RecipesPhilStone {
 		ShapelessRecipes shapelessRecipe;
 		
 		ItemStack[] shapedInputs;
-		List shapelessInputs;
+		List<ItemStack> shapelessInputs;
 		
+		ItemStack recipeOutput = null;
 		Iterator<IRecipe> recipeIter = recipeList.iterator();
-
+		
+		ItemStack[] recipeInputs = null;
+		Vector<Integer> inputs = new Vector<Integer>();
+		Vector<Integer> outputs = new Vector<Integer>();
+		
 		try {			
 			while (recipeIter.hasNext()) {
 				recipe = recipeIter.next();
 				
 				if (recipe instanceof ShapedRecipes) {
 					shapedRecipe = (ShapedRecipes) recipe;
-					shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					
-					System.out.println("Shaped");
-					System.out.println(shapedInputs.toString());
+					//shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
+					recipeInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
+					recipeOutput = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeOutput");
+					System.out.println("Shaped Recipe");
 				}
 				else if (recipe instanceof ShapelessRecipes) {
 					shapelessRecipe = (ShapelessRecipes) recipe;
 					shapelessInputs = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
-					
-					System.out.println("Shapeless");
-					System.out.println(shapelessInputs.toString());
+					recipeInputs = shapelessInputs.toArray(new ItemStack[0]);
+					recipeOutput = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeOutput");
+					System.out.println("Shapeless Recipe");
 				}
+				System.out.println("Output: " + recipeOutput.toString());
+				outputs.add(recipeOutput.getItem().shiftedIndex);
+				for (ItemStack itemStack : recipeInputs) {
+					if (itemStack != null) {
+						System.out.println("Input: " + itemStack.toString());
+						if (!inputs.contains(new Integer(itemStack.getItem().shiftedIndex)))
+							inputs.add(new Integer(itemStack.getItem().shiftedIndex));
+					}
+				}
+				System.out.println();
+			}
+			
+			//for (int i = 0; i < outputs.size(); i++) {
+			//	System.out.println("i: " + i + ", item: " + outputs.get(i));
+			//}
+			inputs.removeAll(outputs);
+			for (int i = 0; i < inputs.size(); i++) {
+				System.out.println(i + "," + inputs.get(i) + "," + Item.itemsList[inputs.get(i)].getItemName());
 			}
 		}
 		catch (Exception e) {

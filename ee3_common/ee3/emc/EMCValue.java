@@ -1,4 +1,4 @@
-package ee3.core;
+package ee3.emc;
 
 /**
  * TODO Class Description 
