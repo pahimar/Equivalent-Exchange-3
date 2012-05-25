@@ -14,6 +14,7 @@ import net.minecraft.src.mod_EE3;
  */
 public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal {
 
+	private byte type;
 	private byte currentCharge;
 	private byte maxCharge;
 	private byte currentMode;
@@ -21,12 +22,36 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	
 	public ItemPhilosopherStone(int i) {
 		super(i);
+		type = 1;
 		maxCharge = 4;
 		maxMode = 2;
 	}
 	
+	/**
+     * Gets an icon index based on an item's damage value
+     */
+    public int getIconFromDamage(int par1)
+    {
+        return this.iconIndex + type;
+    }
+	
+	/*
+	 * Returns the custom item rarity type for the item
+	 * @see net.minecraft.src.Item#getRarity(net.minecraft.src.ItemStack)
+	 */
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.RARE);
+		if (type == 1)
+			return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.RARE);
+		else
+			return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.MAGICAL);
+    }
+	
+	/*
+	 * Gives the Philosopher Stone a nice visual effect
+	 * @see net.minecraft.src.Item#hasEffect(net.minecraft.src.ItemStack)
+	 */
+	public boolean hasEffect(ItemStack par1ItemStack) {
+        return (this.type == 1);
     }
 
 	@Override

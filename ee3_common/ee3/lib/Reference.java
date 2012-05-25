@@ -14,7 +14,7 @@ public class Reference {
 	public static final String CONFIG_DIR = "config/ee3/";
 	
 	public static final String SPRITE_SHEET_LOCATION = "/ee3/art/sprites/";
-	public static final String ITEM_SPRITE_SHEET = "eqexsheet.png";
+	public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
 	public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
 	public static final String ARMOR_SHEET_LOCATION = "/ee3/art/armor/";
 	public static final String SOUND_RESOURCE_LOCATION = "/ee3/sound/";
