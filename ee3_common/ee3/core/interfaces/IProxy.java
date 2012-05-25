@@ -3,6 +3,7 @@ package ee3.core.interfaces;
 import java.io.File;
 
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumRarity;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.World;
@@ -44,5 +45,8 @@ public interface IProxy {
 	public abstract Object handleGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z);
 	
 	public abstract void playSound(String soundName, float x, float y, float z, float volume, float pitch);
+	
+	public abstract void addCustomEnumRarityTypes();
 
+	public abstract EnumRarity getCustomEnumRarityType(String custom);
 }

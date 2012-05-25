@@ -7,6 +7,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ReflectionHelper;
 
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
@@ -74,7 +75,6 @@ public class EEProxy implements IProxy {
 	public void handleTEPacket(int x, int y, int z, byte direction, String player) { }
 
 	@Override
-	// Stub, no need for a Sound Handler on the server
 	public void registerSoundHandler() { }
 
 	@Override
@@ -86,4 +86,11 @@ public class EEProxy implements IProxy {
 	@Override
 	public void playSound(String soundName, float x, float y, float z, float volume, float pitch) {	}
 
+	@Override
+	public void addCustomEnumRarityTypes() { }
+
+	@Override
+	public EnumRarity getCustomEnumRarityType(String custom) {
+		return null;
+	}
 }

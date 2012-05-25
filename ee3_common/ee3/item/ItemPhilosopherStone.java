@@ -2,8 +2,10 @@ package ee3.item;
 
 import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
+import ee3.lib.CustomItemRarity;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.mod_EE3;
 
 /**
  * TODO Class Description 
@@ -24,7 +26,7 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	}
 	
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return EnumRarity.uncommon;
+		return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.RARE);
     }
 
 	@Override

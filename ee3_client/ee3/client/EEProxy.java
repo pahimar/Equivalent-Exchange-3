@@ -4,11 +4,14 @@ import java.io.File;
 import java.lang.reflect.Field;
 
 import ee3.core.interfaces.IProxy;
+import static ee3.lib.CustomItemRarity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
+import net.minecraft.src.forge.EnumHelperClient;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
 /**
@@ -106,4 +109,21 @@ public class EEProxy implements IProxy {
 		ModLoader.getMinecraftInstance().sndManager.playSound(soundName, x, y, z, volume, pitch);	
 	}
 
+	public void addCustomEnumRarityTypes() {
+		EnumHelperClient.addRarity(JUNK, COLOR_JUNK, DISPLAY_NAME_JUNK);
+		EnumHelperClient.addRarity(NORMAL, COLOR_NORMAL, DISPLAY_NAME_NORMAL);
+		EnumHelperClient.addRarity(MAGICAL, COLOR_MAGICAL, DISPLAY_NAME_MAGICAL);
+		EnumHelperClient.addRarity(RARE, COLOR_RARE, DISPLAY_NAME_RARE);
+		EnumHelperClient.addRarity(LEGENDARY, COLOR_LEGENDARY, DISPLAY_NAME_LEGENDARY);
+	}
+
+	@Override
+	public EnumRarity getCustomEnumRarityType(String custom) {
+		for (EnumRarity eRare : EnumRarity.class.getEnumConstants()) {
+			if (eRare.name().equals(custom))
+				return eRare;
+		}
+		return EnumRarity.common;
+	}
+	
 }

@@ -40,12 +40,12 @@ public class RecipesPhilStone {
 	
 	
 	public static void initRecipes() {
-		determineBaseMaterials();
-		//initTransmutationRecipes();
-		//initEquivalenceRecipes();
-		//initReconstructiveRecipes();
-		//initDestructorRecipes();
-		//initPortableSmeltingRecipes();
+		//determineBaseMaterials();
+		initTransmutationRecipes();
+		initEquivalenceRecipes();
+		initReconstructiveRecipes();
+		initDestructorRecipes();
+		initPortableSmeltingRecipes();
 	}
 	
 	public static void determineBaseMaterials() {

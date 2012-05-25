@@ -20,8 +20,6 @@ public class ModItems {
 		if (initialized)
 			initialized = true;
 		
-		System.out.println("philStone: " + ItemIds.PHIL_STONE);
-		
 		/* Initialise each mod item individually */
 		philStone = new ItemPhilosopherStone(ItemIds.PHIL_STONE).setIconCoord(0, 0).setItemName("philStone");
 		

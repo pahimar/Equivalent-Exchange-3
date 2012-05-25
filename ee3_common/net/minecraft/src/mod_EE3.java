@@ -53,7 +53,10 @@ public class mod_EE3 extends NetworkMod {
 		this.proxy.registerSoundHandler();
 		
 		// Initialise the configuration settings from file
-		config.init();
+		this.config.init();
+		
+		// Add in the custom Item rarity types
+		this.proxy.addCustomEnumRarityTypes();
 		
 		// Initialise the mod items
 		ModItems.init();
@@ -61,9 +64,8 @@ public class mod_EE3 extends NetworkMod {
 		// Initialise the Philosopher Stone recipes
 		RecipesPhilStone.initRecipes();
 		
-		BuildCraftAddon.init();
-		
-		emcList.initEMCList();
+		// Initialise the EMC List
+		this.emcList.initEMCList();
 	}
 	
 	@Override
