@@ -14,17 +14,18 @@ import net.minecraft.src.mod_EE3;
  */
 public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal {
 
-	private byte type;
 	private byte currentCharge;
 	private byte maxCharge;
+	
 	private byte currentMode;
 	private byte maxMode;
 	
 	public ItemPhilosopherStone(int i) {
 		super(i);
-		type = 1;
 		maxCharge = 4;
 		maxMode = 2;
+		
+		this.setMaxDamage(1561);
 	}
 	
 	/**
@@ -32,7 +33,10 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
      */
     public int getIconFromDamage(int par1)
     {
-        return this.iconIndex + type;
+    	if (this.getMaxDamage() > 0)
+    		return this.iconIndex;
+    	else
+    		return this.iconIndex + 1;
     }
 	
 	/*
@@ -40,7 +44,7 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	 * @see net.minecraft.src.Item#getRarity(net.minecraft.src.ItemStack)
 	 */
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		if (type == 1)
+		if (getShort(par1ItemStack, "Damage") > 0)
 			return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.RARE);
 		else
 			return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.MAGICAL);
@@ -51,7 +55,7 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	 * @see net.minecraft.src.Item#hasEffect(net.minecraft.src.ItemStack)
 	 */
 	public boolean hasEffect(ItemStack par1ItemStack) {
-        return (this.type == 1);
+        return (getType(par1ItemStack) == 1);
     }
 
 	@Override
@@ -103,6 +107,17 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	@Override
 	public void setMode(ItemStack ist, byte mode) {
 		setByte(ist, "currentMode", mode);
+	}
+	
+	public byte getType(ItemStack ist) {
+		return getByte(ist, "type");
+	}
+	
+	public void setType(ItemStack ist, byte type) {
+		setByte(ist, "type", type);
+		setShort(ist, "Damage", -1);
+		ist.writeToNBT(ist.stackTagCompound);
+		this.setMaxDamage(-1);
 	}
 
 	@Override
