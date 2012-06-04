@@ -15,10 +15,6 @@ import net.minecraft.src.forge.IGuiHandler;
  *
  */
 public interface IProxy {
-
-	public abstract <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex);
-	
-	public abstract <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, String fieldName);
 	
 	public abstract void registerRenderInformation();
 	

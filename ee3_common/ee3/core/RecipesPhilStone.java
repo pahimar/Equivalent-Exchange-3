@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import cpw.mods.fml.common.ReflectionHelper;
+
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ModItems;
 
@@ -73,15 +75,15 @@ public class RecipesPhilStone {
 				if (recipe instanceof ShapedRecipes) {
 					shapedRecipe = (ShapedRecipes) recipe;
 					//shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					recipeInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					recipeOutput = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeOutput");
+					recipeInputs = ReflectionHelper.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
+					recipeOutput = ReflectionHelper.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeOutput");
 					System.out.println("Shaped Recipe");
 				}
 				else if (recipe instanceof ShapelessRecipes) {
 					shapelessRecipe = (ShapelessRecipes) recipe;
-					shapelessInputs = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
+					shapelessInputs = ReflectionHelper.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
 					recipeInputs = shapelessInputs.toArray(new ItemStack[0]);
-					recipeOutput = mod_EE3.proxy.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeOutput");
+					recipeOutput = ReflectionHelper.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeOutput");
 					System.out.println("Shapeless Recipe");
 				}
 				System.out.println("Output: " + recipeOutput.toString());

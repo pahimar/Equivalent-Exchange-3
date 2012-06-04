@@ -59,8 +59,8 @@ public class ConfigurationManager {
 	    	prop = config.getOrCreateBlockIdProperty("device", 179);
 	    	
 	    	/* Item Ids */	    	
-	    	prop = config.getOrCreateIntProperty("imperfectPhilStone", CATEGORY_ITEM, 27270);
-	    	IMPERFECT_PHIL_STONE = prop.getInt();
+	    	prop = config.getOrCreateIntProperty("redStone", CATEGORY_ITEM, 27270);
+	    	RED_STONE = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("philStone", CATEGORY_ITEM, 27271);
 	    	PHIL_STONE = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("djinnRing", CATEGORY_ITEM, 27272);

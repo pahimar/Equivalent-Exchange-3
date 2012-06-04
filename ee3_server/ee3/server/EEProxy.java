@@ -22,16 +22,6 @@ public class EEProxy implements IProxy {
 
 	public EEProxy() { }
 	
-	@SuppressWarnings("unchecked")
-    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, int fieldIndex) {
-		return ReflectionHelper.getPrivateValue(classToAccess, instance, fieldIndex);
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T, E> T getPrivateValue(Class <? super E > classToAccess, E instance, String fieldName) {
-    	return ReflectionHelper.getPrivateValue(classToAccess, instance, fieldName);
-    }
-	
 	@Override
 	public void registerRenderInformation() {
 		// TODO Auto-generated method stub

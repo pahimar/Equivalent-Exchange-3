@@ -21,9 +21,6 @@ public class CraftingHandler implements ICraftingHandler {
 				if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
 					System.out.println(currentItemStack.getItem().getItemName());
 					ItemPhilosopherStone stone = (ItemPhilosopherStone) currentItemStack.getItem();
-					System.out.println("Stone Type: " + stone.getType(currentItemStack));
-					stone.setType(currentItemStack, (byte)1);
-					System.out.println("Stone Type: " + stone.getType(currentItemStack));
 				}
 			}
 		}
