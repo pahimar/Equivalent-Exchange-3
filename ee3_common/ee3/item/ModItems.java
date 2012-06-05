@@ -15,7 +15,7 @@ public class ModItems {
 	
 	private static boolean initialized; 
 	
-	public static Item redStone;
+	public static Item miniumStone;
 	public static Item philStone;
 	
 	public static void init() {
@@ -23,18 +23,18 @@ public class ModItems {
 			initialized = true;
 		
 		/* Initialise each mod item individually */
-		redStone = new ItemRedStone(ItemIds.RED_STONE).setIconCoord(0, 0).setItemName("redStone");
+		miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(0, 0).setItemName("miniumStone");
 		philStone = new ItemPhilosopherStone(ItemIds.PHIL_STONE).setIconCoord(1, 0).setItemName("philStone");
 		
 		/* Set the Container items for our mod items */
-		redStone.setContainerItem(redStone);
+		miniumStone.setContainerItem(miniumStone);
 		philStone.setContainerItem(philStone);
 		
 		/* Add the item names to the mod items */
-		ModLoader.addName(redStone, "Red Stone");
+		ModLoader.addName(miniumStone, "Minium Stone");
 		ModLoader.addName(philStone, "Philosopher's Stone");
 		
-		ModLoader.addShapelessRecipe(new ItemStack(redStone), Block.dirt);
+		ModLoader.addShapelessRecipe(new ItemStack(miniumStone), Block.dirt);
 		ModLoader.addShapelessRecipe(new ItemStack(philStone), Block.dirt, Block.dirt);
 	}
 }

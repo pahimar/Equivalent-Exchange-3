@@ -1,26 +1,14 @@
 package ee3.core;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
-import cpw.mods.fml.common.ReflectionHelper;
-
 import ee3.item.ItemPhilosopherStone;
+import ee3.item.ItemMiniumStone;
 import ee3.item.ModItems;
 
 import net.minecraft.src.Block;
-import net.minecraft.src.CraftingManager;
 import net.minecraft.src.FurnaceRecipes;
-import net.minecraft.src.IRecipe;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.ShapedRecipes;
-import net.minecraft.src.ShapelessRecipes;
-import net.minecraft.src.mod_EE3;
 
 import static net.minecraft.src.Item.*;
 import static net.minecraft.src.Block.*;
@@ -33,82 +21,20 @@ import static net.minecraft.src.Block.*;
 public class RecipesPhilStone {
 
 	private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);
+	private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, -1);
 	private static ItemStack anyCoal = new ItemStack(coal, 1, -1);	
 	private static ItemStack anyWood = new ItemStack(wood, 1, -1);
 	private static ItemStack anyPlank = new ItemStack(planks, 1, -1);
 	private static ItemStack anySandStone = new ItemStack(sandStone, 1, -1);
 	private static ItemStack dyeBoneMeal = new ItemStack(dyePowder, 1, 15);
 	
-	
-	
+
 	public static void initRecipes() {
-		//determineBaseMaterials();
 		initTransmutationRecipes();
 		initEquivalenceRecipes();
 		initReconstructiveRecipes();
 		initDestructorRecipes();
 		initPortableSmeltingRecipes();
-	}
-	
-	public static void determineBaseMaterials() {
-		CraftingManager instance = CraftingManager.getInstance();
-		List recipeList = instance.getRecipeList();
-
-		IRecipe recipe;
-		ShapedRecipes shapedRecipe;
-		ShapelessRecipes shapelessRecipe;
-		
-		ItemStack[] shapedInputs;
-		List<ItemStack> shapelessInputs;
-		
-		ItemStack recipeOutput = null;
-		Iterator<IRecipe> recipeIter = recipeList.iterator();
-		
-		ItemStack[] recipeInputs = null;
-		Vector<Integer> inputs = new Vector<Integer>();
-		Vector<Integer> outputs = new Vector<Integer>();
-		
-		try {			
-			while (recipeIter.hasNext()) {
-				recipe = recipeIter.next();
-				
-				if (recipe instanceof ShapedRecipes) {
-					shapedRecipe = (ShapedRecipes) recipe;
-					//shapedInputs = mod_EE3.proxy.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					recipeInputs = ReflectionHelper.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeItems");
-					recipeOutput = ReflectionHelper.getPrivateValue(ShapedRecipes.class, shapedRecipe, "recipeOutput");
-					System.out.println("Shaped Recipe");
-				}
-				else if (recipe instanceof ShapelessRecipes) {
-					shapelessRecipe = (ShapelessRecipes) recipe;
-					shapelessInputs = ReflectionHelper.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeItems");
-					recipeInputs = shapelessInputs.toArray(new ItemStack[0]);
-					recipeOutput = ReflectionHelper.getPrivateValue(ShapelessRecipes.class, shapelessRecipe, "recipeOutput");
-					System.out.println("Shapeless Recipe");
-				}
-				System.out.println("Output: " + recipeOutput.toString());
-				outputs.add(recipeOutput.getItem().shiftedIndex);
-				for (ItemStack itemStack : recipeInputs) {
-					if (itemStack != null) {
-						System.out.println("Input: " + itemStack.toString());
-						if (!inputs.contains(new Integer(itemStack.getItem().shiftedIndex)))
-							inputs.add(new Integer(itemStack.getItem().shiftedIndex));
-					}
-				}
-				System.out.println();
-			}
-			
-			//for (int i = 0; i < outputs.size(); i++) {
-			//	System.out.println("i: " + i + ", item: " + outputs.get(i));
-			//}
-			inputs.removeAll(outputs);
-			for (int i = 0; i < inputs.size(); i++) {
-				System.out.println(i + "," + inputs.get(i) + "," + Item.itemsList[inputs.get(i)].getItemName());
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
 	}
 	
 	public static void initTransmutationRecipes() {

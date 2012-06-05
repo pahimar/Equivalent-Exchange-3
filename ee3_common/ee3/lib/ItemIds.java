@@ -6,7 +6,7 @@ package ee3.lib;
  *
  */
 public class ItemIds {
-	public static int RED_STONE = 27270;
+	public static int MINIUM_STONE = 27270;
 	public static int PHIL_STONE = 27271;
 	public static int DJINN_RING;
 	public static int EYE_OF_THE_VOID;
