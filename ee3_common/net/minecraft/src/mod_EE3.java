@@ -4,7 +4,6 @@ import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
 import ee3.core.CraftingHandler;
 import ee3.core.RecipesPhilStone;
-import ee3.core.ServerClientProxy;
 import ee3.core.Version;
 import ee3.core.interfaces.IProxy;
 import ee3.emc.EMCList;
@@ -26,14 +25,14 @@ import net.minecraft.src.forge.NetworkMod;
 public class mod_EE3 extends NetworkMod {
 
 	public static mod_EE3 instance;
+	@SidedProxy(clientSide="ee3.client.EEProxy", serverSide="ee3.server.EEProxy")
 	public static IProxy proxy;
 	public static EMCList emcList;
 	public static ConfigurationManager config = new ConfigurationManager(Reference.CONFIG_FILE);
 	
-	public mod_EE3() {
+	public void load() {
 		instance = this;
 		emcList = new EMCList();
-		proxy = ServerClientProxy.getProxy();
 		
 		// Forge version check
 		MinecraftForge.versionDetect(Reference.MOD_NAME, Version.REQ_FORGE_MAJOR, Version.REQ_FORGE_MINOR, Version.REQ_FORGE_REVISION);
@@ -86,8 +85,5 @@ public class mod_EE3 extends NetworkMod {
 	public boolean serverSideRequired() {
 		return false;
 	}
-	
-	@Override
-	public void load() { }
 	
 }
