@@ -1,5 +1,7 @@
 package ee3.core;
 
+import java.util.ArrayList;
+
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ItemMiniumStone;
 import ee3.item.ModItems;
@@ -28,13 +30,96 @@ public class RecipesPhilStone {
 	private static ItemStack anySandStone = new ItemStack(sandStone, 1, -1);
 	private static ItemStack dyeBoneMeal = new ItemStack(dyePowder, 1, 15);
 	
-
+	
+	public static ArrayList<ArrayList<ItemStack>> equivalencyLists = new ArrayList<ArrayList<ItemStack>>();
+	
 	public static void initRecipes() {
-		initTransmutationRecipes();
-		initEquivalenceRecipes();
-		initReconstructiveRecipes();
-		initDestructorRecipes();
-		initPortableSmeltingRecipes();
+		addToEquivalencyList(new ItemStack(dirt), new ItemStack(stone));
+		addToEquivalencyList(new ItemStack(cobblestone), new ItemStack(stone));
+		addToEquivalencyList(new ItemStack(dirt), new ItemStack(stone));
+		printEquivalencyList();
+		//initTransmutationRecipes();
+		//initEquivalenceRecipes();
+		//initReconstructiveRecipes();
+		//initDestructorRecipes();
+		//initPortableSmeltingRecipes();
+	}
+	
+	public static void addToEquivalencyList(Object target, Object ... equivObjects) {
+		
+	}
+	
+	public static void addToEquivalencyList(ItemStack stack1, ItemStack stack2) {
+		boolean addFlag = false;
+		int i = 0;
+		ArrayList<ItemStack> currentList;
+		
+		while (addFlag != true && i < equivalencyLists.size()) {
+			currentList = equivalencyLists.get(i);
+			for (ItemStack stack : currentList) {
+				if (stack.isStackEqual(stack1)) {
+					currentList.add(stack2);
+					equivalencyLists.set(i, currentList);
+					addFlag = true;
+					break;
+				}
+			}
+			++i;
+		}
+		
+		i = 0;
+		while (addFlag != true && i < equivalencyLists.size()) {
+			currentList = equivalencyLists.get(i);
+			for (ItemStack stack : currentList) {
+				if (stack.isStackEqual(stack2)) {
+					currentList.add(stack1);
+					equivalencyLists.set(i, currentList);
+					addFlag = true;
+					break;
+				}
+			}
+			++i;
+		}
+		
+		if (!addFlag) {
+			ArrayList<ItemStack> tempList = new ArrayList();
+			tempList.add(stack1);
+			tempList.add(stack2);
+			equivalencyLists.add(tempList);
+		}
+	}
+	
+	/*
+	public static void addToEquivalencyList(ItemStack targetStack, ItemStack newStack) {
+		boolean addFlag = false;
+		int i = 0;
+		ArrayList<ItemStack> currentList;
+		
+		while (addFlag != true && i < equivalencyLists.size()) {
+			currentList = equivalencyLists.get(i);
+			for (ItemStack stack : currentList) {
+				if (stack.isStackEqual(targetStack)) {
+					currentList.add(newStack);
+					equivalencyLists.set(i, currentList);
+					addFlag = true;
+					break;
+				}
+			}
+			++i;
+		}
+		if (!addFlag) {
+			ArrayList<ItemStack> tempList = new ArrayList();
+			tempList.add(targetStack);
+			tempList.add(newStack);
+			equivalencyLists.add(tempList);
+		}
+	}
+	*/
+	
+	public static void printEquivalencyList() {
+		for (ArrayList list : equivalencyLists) {
+			System.out.println(list.toString());
+		}
 	}
 	
 	public static void initTransmutationRecipes() {
