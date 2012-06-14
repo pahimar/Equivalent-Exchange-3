@@ -49,6 +49,25 @@ public class RecipesPhilStone {
 		
 	}
 	
+	private static Integer findObjectInEquivalencyLists(Object obj) {
+		ItemStack stack;
+		
+		if (obj instanceof Block) {
+			stack = new ItemStack((Block)obj);
+		}
+		else if (obj instanceof Item) {
+			stack = new ItemStack((Item)obj);
+		}
+		else if (obj instanceof ItemStack) { 
+			
+		}
+		else { 
+			return null;
+		}
+		
+		return null;
+	}
+	
 	public static void addToEquivalencyList(ItemStack stack1, ItemStack stack2) {
 		boolean addFlag = false;
 		int i = 0;
