@@ -4,7 +4,6 @@ import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
 import ee3.core.CraftingHandler;
 import ee3.core.RecipesPhilStone;
-import ee3.core.Version;
 import ee3.core.interfaces.IProxy;
 import ee3.emc.EMCList;
 import ee3.gui.GuiHandler;
@@ -12,6 +11,7 @@ import ee3.item.ModItems;
 import ee3.lib.ItemIds;
 import ee3.lib.Reference;
 import ee3.lib.Sounds;
+import ee3.lib.Version;
 import ee3.network.PacketHandler;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.forge.MinecraftForge;
@@ -68,7 +68,7 @@ public class mod_EE3 extends NetworkMod {
 		RecipesPhilStone.initRecipes();
 		
 		// Initialise the EMC List
-		this.emcList.initEMCList();
+		//this.emcList.initEMCList();
 	}
 	
 	@Override

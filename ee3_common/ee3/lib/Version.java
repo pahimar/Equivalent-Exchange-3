@@ -1,4 +1,4 @@
-package ee3.core;
+package ee3.lib;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import ee3.lib.Reference;
 
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.mod_EE3;
@@ -24,8 +23,8 @@ public class Version {
 	public static final int BUILD = 0;
 	
 	public static final int REQ_FORGE_MAJOR = 3;
-	public static final int REQ_FORGE_MINOR = 1;
-	public static final int REQ_FORGE_REVISION = 3;
+	public static final int REQ_FORGE_MINOR = 3;
+	public static final int REQ_FORGE_REVISION = 7;
 	
 	private static final String REMOTE_VERSION_FILE = "http://dl.dropbox.com/u/25591134/EE2/version.txt";
 	

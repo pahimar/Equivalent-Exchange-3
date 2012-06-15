@@ -2,9 +2,11 @@ package ee3.core;
 
 import java.util.ArrayList;
 
+import ee3.core.interfaces.ITransmuteStone;
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ItemMiniumStone;
 import ee3.item.ModItems;
+import ee3.lib.TransmuteEquivalencyList;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.FurnaceRecipes;
@@ -33,173 +35,84 @@ public class RecipesPhilStone {
 	
 	public static ArrayList<ArrayList<ItemStack>> equivalencyLists = new ArrayList<ArrayList<ItemStack>>();
 	
+	
 	public static void initRecipes() {
-		addToEquivalencyList(new ItemStack(dirt), new ItemStack(stone));
-		addToEquivalencyList(new ItemStack(cobblestone), new ItemStack(stone));
-		addToEquivalencyList(new ItemStack(dirt), new ItemStack(stone));
-		printEquivalencyList();
-		//initTransmutationRecipes();
-		//initEquivalenceRecipes();
-		//initReconstructiveRecipes();
-		//initDestructorRecipes();
-		//initPortableSmeltingRecipes();
+		//TransmuteEquivalencyList.addObjectToEquivalencyList(dirt, stone);
+		//TransmuteEquivalencyList.addObjectToEquivalencyList(cobblestone, stone);
+		//TransmuteEquivalencyList.addObjectToEquivalencyList(dirt, stone);
+		//TransmuteEquivalencyList.debugPrintEquivalencyList();
+		
+		initTransmutationRecipes(miniumStone);
+		initTransmutationRecipes(philStone);
+		initEquivalenceRecipes();
+		initReconstructiveRecipes();
+		initDestructorRecipes();
+		initPortableSmeltingRecipes();
 	}
 	
-	public static void addToEquivalencyList(Object target, Object ... equivObjects) {
-		
-	}
-	
-	private static Integer findObjectInEquivalencyLists(Object obj) {
-		ItemStack stack;
-		
-		if (obj instanceof Block) {
-			stack = new ItemStack((Block)obj);
-		}
-		else if (obj instanceof Item) {
-			stack = new ItemStack((Item)obj);
-		}
-		else if (obj instanceof ItemStack) { 
-			
-		}
-		else { 
-			return null;
+	public static void initTransmutationRecipes(ItemStack stone) {
+		if (!(stone.getItem() instanceof ITransmuteStone)) {
+			return;
 		}
 		
-		return null;
-	}
-	
-	public static void addToEquivalencyList(ItemStack stack1, ItemStack stack2) {
-		boolean addFlag = false;
-		int i = 0;
-		ArrayList<ItemStack> currentList;
-		
-		while (addFlag != true && i < equivalencyLists.size()) {
-			currentList = equivalencyLists.get(i);
-			for (ItemStack stack : currentList) {
-				if (stack.isStackEqual(stack1)) {
-					currentList.add(stack2);
-					equivalencyLists.set(i, currentList);
-					addFlag = true;
-					break;
-				}
-			}
-			++i;
-		}
-		
-		i = 0;
-		while (addFlag != true && i < equivalencyLists.size()) {
-			currentList = equivalencyLists.get(i);
-			for (ItemStack stack : currentList) {
-				if (stack.isStackEqual(stack2)) {
-					currentList.add(stack1);
-					equivalencyLists.set(i, currentList);
-					addFlag = true;
-					break;
-				}
-			}
-			++i;
-		}
-		
-		if (!addFlag) {
-			ArrayList<ItemStack> tempList = new ArrayList();
-			tempList.add(stack1);
-			tempList.add(stack2);
-			equivalencyLists.add(tempList);
-		}
-	}
-	
-	/*
-	public static void addToEquivalencyList(ItemStack targetStack, ItemStack newStack) {
-		boolean addFlag = false;
-		int i = 0;
-		ArrayList<ItemStack> currentList;
-		
-		while (addFlag != true && i < equivalencyLists.size()) {
-			currentList = equivalencyLists.get(i);
-			for (ItemStack stack : currentList) {
-				if (stack.isStackEqual(targetStack)) {
-					currentList.add(newStack);
-					equivalencyLists.set(i, currentList);
-					addFlag = true;
-					break;
-				}
-			}
-			++i;
-		}
-		if (!addFlag) {
-			ArrayList<ItemStack> tempList = new ArrayList();
-			tempList.add(targetStack);
-			tempList.add(newStack);
-			equivalencyLists.add(tempList);
-		}
-	}
-	*/
-	
-	public static void printEquivalencyList() {
-		for (ArrayList list : equivalencyLists) {
-			System.out.println(list.toString());
-		}
-	}
-	
-	public static void initTransmutationRecipes() {
 		/* 4 Cobble <-> 1 Flint */
-		addRecipe(flint, philStone, cobblestone, cobblestone, cobblestone, cobblestone);
-		addRecipe(cobblestone, 4, philStone, flint);
+		addRecipe(flint, stone, cobblestone, cobblestone, cobblestone, cobblestone);
+		addRecipe(cobblestone, 4, stone, flint);
 		
 		/* 4 Dirt <-> 1 Gravel */
-		addRecipe(gravel, philStone, dirt, dirt, dirt, dirt);
-		addRecipe(dirt, 4, philStone, gravel);
+		addRecipe(gravel, stone, dirt, dirt, dirt, dirt);
+		addRecipe(dirt, 4, stone, gravel);
 		
 		/* 4 Sand <-> 1 Sandstone */
 		// Vanilla Recipes exist to make SandStone from 4 Sand
-		addRecipe(sand, 4, philStone, anySandStone);
+		addRecipe(sand, 4, stone, anySandStone);
 		
 		/* 2 Sticks -> Wood Plank */
-		addRecipe(planks, philStone, stick, stick);
+		addRecipe(planks, stone, stick, stick);
 		// Vanilla recipe exists to make sticks from planks
 		
 		/* 4 Wood Planks -> Wood Block */
-		addRecipe(wood, philStone, anyPlank, anyPlank, anyPlank, anyPlank);
+		addRecipe(wood, stone, anyPlank, anyPlank, anyPlank, anyPlank);
 		// Vanilla recipes exist to make planks from any wood log
 		
 		/* 4 Gravel/Sandstone/Flint -> 1 Clay Ball, 1 Clay Ball -> 4 Gravel */
-		addRecipe(clay, philStone, gravel, gravel, gravel, gravel);
-		addRecipe(clay, philStone, anySandStone, anySandStone, anySandStone, anySandStone);
-		addRecipe(clay, philStone, flint, flint, flint, flint);
-		addRecipe(gravel, 4, philStone, clay);
+		addRecipe(clay, stone, gravel, gravel, gravel, gravel);
+		addRecipe(clay, stone, anySandStone, anySandStone, anySandStone, anySandStone);
+		addRecipe(clay, stone, flint, flint, flint, flint);
+		addRecipe(gravel, 4, stone, clay);
 		
 		/* 2 Wood Log <-> 1 Obsidian */
-		addRecipe(obsidian, philStone, anyWood, anyWood);
-		addRecipe(wood, 2, philStone, obsidian);
+		addRecipe(obsidian, stone, anyWood, anyWood);
+		addRecipe(wood, 2, stone, obsidian);
 		
 		/* 4 Clay Ball <-> 1 Clay Block */
 		// Vanilla recipe exists to make clay blocks from clay balls
-		addRecipe(clay, 4, philStone, blockClay);
+		addRecipe(clay, 4, stone, blockClay);
 		
 		/* 4 Obsidian/Clay Block -> 1 Iron Ingot, Iron Ingot -> Clay Block */
-		addRecipe(ingotIron, philStone, obsidian, obsidian, obsidian, obsidian);
-		addRecipe(ingotIron, philStone, blockClay, blockClay, blockClay, blockClay);
-		addRecipe(blockClay, 4, philStone, ingotIron);
+		addRecipe(ingotIron, stone, obsidian, obsidian, obsidian, obsidian);
+		addRecipe(ingotIron, stone, blockClay, blockClay, blockClay, blockClay);
+		addRecipe(blockClay, 4, stone, ingotIron);
 		
 		/* 8 Iron Ingot <-> 1 Gold Ingot */
-		addRecipe(ingotGold, philStone, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron);
-		addRecipe(ingotIron, 8, philStone, ingotGold);
+		addRecipe(ingotGold, stone, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron);
+		addRecipe(ingotIron, 8, stone, ingotGold);
 		
 		/* 4 Gold Ingot <-> 1 Diamond */
-		addRecipe(diamond, philStone, ingotGold, ingotGold, ingotGold, ingotGold);
-		addRecipe(ingotGold, 4, philStone, diamond);
+		addRecipe(diamond, stone, ingotGold, ingotGold, ingotGold, ingotGold);
+		addRecipe(ingotGold, 4, stone, diamond);
 		
 		/* 8 Iron Block <-> 1 Gold Block */
-		addRecipe(blockGold, philStone, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel);
-		addRecipe(blockSteel, 8, philStone, blockGold);
+		addRecipe(blockGold, stone, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel);
+		addRecipe(blockSteel, 8, stone, blockGold);
 		
 		/* 4 Gold Block <-> 1 Diamond Block */
-		addRecipe(blockDiamond, philStone, blockGold, blockGold, blockGold, blockGold);
-		addRecipe(blockGold, 4, philStone, blockDiamond);
+		addRecipe(blockDiamond, stone, blockGold, blockGold, blockGold, blockGold);
+		addRecipe(blockGold, 4, stone, blockDiamond);
 		
 		/* 1 Ender Pearl <-> 4 Iron Ingot */
-		addRecipe(enderPearl, philStone, ingotIron, ingotIron, ingotIron, ingotIron);
-		addRecipe(ingotIron, 4, philStone, enderPearl);
+		addRecipe(enderPearl, stone, ingotIron, ingotIron, ingotIron, ingotIron);
+		addRecipe(ingotIron, 4, stone, enderPearl);
 	}
 	
 	public static void initEquivalenceRecipes() {

@@ -3,9 +3,10 @@ package ee3.item;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.mod_EE3;
+import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
 
-public class ItemMiniumStone extends ItemEE {
+public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 
 	// Possible names: Vermillion Stone, Minium Stone, Red Stone
 	

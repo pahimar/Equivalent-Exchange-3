@@ -2,6 +2,7 @@ package ee3.client;
 
 import static ee3.lib.Sounds.soundFiles;
 
+import net.minecraft.src.Entity;
 import net.minecraft.src.SoundManager;
 import net.minecraft.src.SoundPoolEntry;
 import net.minecraft.src.forge.adaptors.SoundHandlerAdaptor;
@@ -19,4 +20,9 @@ public class SoundHandler extends SoundHandlerAdaptor {
 		for (int i = 0; i < soundFiles.length; i++)
 			soundManager.getSoundsPool().addSound(soundFiles[i], this.getClass().getResource("/" + soundFiles[i]));
 	}
+	
+	@Override
+    public String onPlaySoundAtEntity(Entity entity, String soundName, float volume, float pitch) {
+        return soundName;
+    }
 }

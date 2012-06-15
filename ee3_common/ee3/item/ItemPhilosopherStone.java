@@ -2,6 +2,7 @@ package ee3.item;
 
 import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
+import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
@@ -12,7 +13,7 @@ import net.minecraft.src.mod_EE3;
  * @author pahimar, x3n0ph0b3
  *
  */
-public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal {
+public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal, ITransmuteStone {
 
 	private byte currentCharge;
 	private byte maxCharge;
