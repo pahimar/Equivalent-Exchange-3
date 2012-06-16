@@ -1,0 +1,29 @@
+package ee3.lib;
+
+import java.util.ArrayList;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+
+public class Helper {
+
+	public static ItemStack convertObjectToItemStack(Object obj) {
+		if (obj instanceof Item) { return new ItemStack((Item)obj);	}
+		else if (obj instanceof Block) { return new ItemStack((Block)obj); }
+		else if (obj instanceof ItemStack){	return (ItemStack)obj; }
+		else { return null;	}
+	}
+
+	public static Object[] convertSingleStackToPluralStacks(ItemStack stone, ItemStack stack) {
+		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+		ItemStack currentStack;
+		list.add(stone);
+		for (int i = 0; i < stack.stackSize; i++) {
+			currentStack = new ItemStack(stack.itemID, 1, stack.getItemDamage());
+			list.add(currentStack);
+		}
+		
+		return list.toArray();
+	}
+}

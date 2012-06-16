@@ -2,17 +2,24 @@ package ee3.lib;
 
 import java.util.ArrayList;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
 public class TransmuteEquivalencyList {
 	
 	public static ArrayList<ArrayList<ItemStack>> equivalencyLists = new ArrayList<ArrayList<ItemStack>>();
 	
+	public static void addObjectsToEquivalencyLists(Object ... objList) {
+		if (objList.length < 2)
+			return;
+		
+		for (int i = 0; i < objList.length - 1; i++) {
+			addObjectToEquivalencyList(objList[i], objList[i+1]);
+		}
+	}
+	
 	public static void addObjectToEquivalencyList(Object obj1, Object obj2) {
-		ItemStack stack1 = convertObjectToItemStack(obj1);
-		ItemStack stack2 = convertObjectToItemStack(obj2);
+		ItemStack stack1 = Helper.convertObjectToItemStack(obj1);
+		ItemStack stack2 = Helper.convertObjectToItemStack(obj2);
 		
 		ArrayList<ItemStack> currentList = new ArrayList<ItemStack>();
 		
@@ -40,7 +47,7 @@ public class TransmuteEquivalencyList {
 	}
 	
 	public static Integer getEquivalencyIndexForItem(Object obj) {
-		ItemStack checkStack = convertObjectToItemStack(obj);
+		ItemStack checkStack = Helper.convertObjectToItemStack(obj);
 		ArrayList<ItemStack> currentList;
 		int i = 0;
 		
@@ -58,7 +65,7 @@ public class TransmuteEquivalencyList {
 	}
 	
 	public static ArrayList<ItemStack> getEquivalencyListForItem(Object obj) {
-		ItemStack checkStack = convertObjectToItemStack(obj);
+		ItemStack checkStack = Helper.convertObjectToItemStack(obj);
 		
 		for (ArrayList<ItemStack> list : equivalencyLists) {
 			for (ItemStack currentStack : list) {
@@ -71,21 +78,6 @@ public class TransmuteEquivalencyList {
 		return null;
 	}
 
-	private static ItemStack convertObjectToItemStack(Object obj) {
-		if (obj instanceof Item) {
-			return new ItemStack((Item)obj);
-		}
-		else if (obj instanceof Block) {
-			return new ItemStack((Block)obj);
-		}
-		else if (obj instanceof ItemStack){
-			return (ItemStack)obj;
-		}
-		else {
-			return null;
-		}
-	}
-	
 	public static void debugPrintEquivalencyList() {
 		int i = 0;
 		for (ArrayList list : equivalencyLists) {
