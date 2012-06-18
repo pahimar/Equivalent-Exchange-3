@@ -15,10 +15,10 @@ public class Helper {
 		else { return null;	}
 	}
 
-	public static Object[] convertSingleStackToPluralStacks(ItemStack stone, ItemStack stack) {
+	public static Object[] convertSingleStackToPluralStacks(ItemStack stack) {
 		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
 		ItemStack currentStack;
-		list.add(stone);
+
 		for (int i = 0; i < stack.stackSize; i++) {
 			currentStack = new ItemStack(stack.itemID, 1, stack.getItemDamage());
 			list.add(currentStack);

@@ -49,7 +49,7 @@ public class RecipesPhilStone {
 			initPortableSmeltingRecipes(transmutationStone);
 		}
 		
-		//debugPrintEquivalencyList();
+		debugPrintEquivalencyList();
 	}
 	
 	public static void initTransmutationRecipes(ItemStack transmutationStone) {
@@ -141,7 +141,7 @@ public class RecipesPhilStone {
 			for(int i = 0; i < currentList.length; i++) {
 				outputI = (i == currentList.length - 1 ? 0 : i + 1);
 
-				addRecipe(currentList[outputI], Helper.convertSingleStackToPluralStacks(transmutationStone, currentList[i]));
+				addRecipe(currentList[outputI], transmutationStone, Helper.convertSingleStackToPluralStacks(currentList[i]));
 			}
 		}
 		System.out.println();
@@ -198,6 +198,16 @@ public class RecipesPhilStone {
 	
 	protected static void addRecipe(ItemStack result, Object ... input) {
 		ModLoader.addShapelessRecipe(result, input);
+	}
+	
+	protected static void addRecipe(ItemStack result, ItemStack transmutationStone, Object ... input) {
+		Object[] inputs = new Object[input.length + 1];
+		inputs[0] = transmutationStone;
+		for (int i = 1; i < inputs.length; ++i) {
+			inputs[i] = input[i-1];
+		}
+		
+		addRecipe(result, inputs);
 	}
 
 	protected static void addRecipe(Block result, Object ... input) {
