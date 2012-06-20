@@ -1,9 +1,12 @@
 package net.minecraft.src;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
 import ee3.core.CraftingHandler;
+import ee3.core.EntityLivingHandler;
 import ee3.core.RecipesPhilStone;
+import ee3.core.TickHandler;
 import ee3.core.interfaces.IProxy;
 import ee3.emc.EMCList;
 import ee3.gui.GuiHandler;
@@ -40,17 +43,23 @@ public class mod_EE3 extends NetworkMod {
 		// Register the mod with ModLoader
 		ModLoader.setInGameHook(this, true, true);
 		
+		// Register the Tick Handler
+		FMLCommonHandler.instance().registerTickHandler(new TickHandler());
+		
 		// Check this version of EE against the remote version authority
 		Version.versionCheck();
 		
-		// Bind Packet Handler
+		// Register Packet Handler
 		MinecraftForge.registerConnectionHandler(new PacketHandler());
 		
-		// Bind GUI Handler
+		// Register GUI Handler
 		MinecraftForge.setGuiHandler(this, new GuiHandler());
 		
-		// Bind Sound Handler
+		// Register Sound Handler
 		this.proxy.registerSoundHandler();
+		
+		// Register the EntityLiving Handler
+		MinecraftForge.registerEntityLivingHandler(new EntityLivingHandler());
 		
 		// Register the Crafting Handler
 		MinecraftForge.registerCraftingHandler(new CraftingHandler());
