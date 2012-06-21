@@ -20,9 +20,4 @@ public class SoundHandler extends SoundHandlerAdaptor {
 		for (int i = 0; i < soundFiles.length; i++)
 			soundManager.getSoundsPool().addSound(soundFiles[i], this.getClass().getResource("/" + soundFiles[i]));
 	}
-	
-	@Override
-    public String onPlaySoundAtEntity(Entity entity, String soundName, float volume, float pitch) {
-        return soundName;
-    }
 }
