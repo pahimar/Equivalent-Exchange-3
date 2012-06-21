@@ -10,6 +10,7 @@ import ee3.item.ItemPhilosopherStone;
 import ee3.item.ItemMiniumStone;
 import ee3.item.ModItems;
 import ee3.lib.Helper;
+import ee3.lib.Reference;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.FurnaceRecipes;
@@ -49,7 +50,9 @@ public class RecipesPhilStone {
 			initPortableSmeltingRecipes(transmutationStone);
 		}
 		
-		debugPrintEquivalencyList();
+		if (Reference.DEBUG) {
+			debugPrintEquivalencyList();
+		}
 	}
 	
 	public static void initTransmutationRecipes(ItemStack transmutationStone) {

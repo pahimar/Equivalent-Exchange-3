@@ -40,9 +40,6 @@ public class mod_EE3 extends NetworkMod {
 		// Forge version check
 		MinecraftForge.versionDetect(Reference.MOD_NAME, Version.REQ_FORGE_MAJOR, Version.REQ_FORGE_MINOR, Version.REQ_FORGE_REVISION);
 		
-		// Register the mod with ModLoader
-		ModLoader.setInGameHook(this, true, true);
-		
 		// Register the Tick Handler
 		FMLCommonHandler.instance().registerTickHandler(new TickHandler());
 		
