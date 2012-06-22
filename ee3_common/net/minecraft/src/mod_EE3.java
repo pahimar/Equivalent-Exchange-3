@@ -48,6 +48,9 @@ public class mod_EE3 extends NetworkMod {
 		// Register Packet Handler
 		MinecraftForge.registerConnectionHandler(new PacketHandler());
 		
+		// Register KeyBindings
+		this.proxy.registerKeyBindings();
+		
 		// Register GUI Handler
 		MinecraftForge.setGuiHandler(this, new GuiHandler());
 		
@@ -74,9 +77,6 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Initialise the EMC List
 		//this.emcList.initEMCList();
-		
-		// Register KeyBindings
-		this.proxy.registerKeyBindings();
 	}
 	
 	public static BaseMod instance() {

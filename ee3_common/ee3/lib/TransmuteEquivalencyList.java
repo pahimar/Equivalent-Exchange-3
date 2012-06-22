@@ -67,6 +67,9 @@ public class TransmuteEquivalencyList {
 	public static ArrayList<ItemStack> getEquivalencyListForItem(Object obj) {
 		ItemStack checkStack = Helper.convertObjectToItemStack(obj);
 		
+		if (checkStack == null)
+			return null;
+		
 		for (ArrayList<ItemStack> list : equivalencyLists) {
 			for (ItemStack currentStack : list) {
 				if (checkStack.isStackEqual(currentStack)) {
