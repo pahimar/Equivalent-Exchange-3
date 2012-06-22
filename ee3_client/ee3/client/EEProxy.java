@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 
 import cpw.mods.fml.common.ReflectionHelper;
 
-import ee3.client.core.KeyHandler;
+import ee3.client.core.KeyBindingHandler;
 import ee3.client.core.SoundHandler;
 import ee3.core.interfaces.IProxy;
 import static ee3.lib.CustomItemRarity.*;
@@ -106,12 +106,12 @@ public class EEProxy implements IProxy {
 
 	@Override
 	public void registerKeyBindings() {
-		KeyHandler.init();		
+		KeyBindingHandler.init();		
 	}
 
 	@Override
 	public void keyBindingEvent(Object event) {
-		KeyHandler.keyboardEvent((KeyBinding)event);
+		KeyBindingHandler.keyboardEvent((KeyBinding)event);
 	}
 	
 }

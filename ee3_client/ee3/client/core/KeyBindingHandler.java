@@ -9,7 +9,7 @@ import net.minecraft.src.mod_EE3;
  * @author pahimar
  *
  */
-public class KeyHandler {
+public class KeyBindingHandler {
 	
 	public static KeyBinding Extra;
 	public static KeyBinding Charge;
