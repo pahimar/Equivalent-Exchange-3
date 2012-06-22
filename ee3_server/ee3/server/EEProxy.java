@@ -83,4 +83,11 @@ public class EEProxy implements IProxy {
 	public EnumRarity getCustomEnumRarityType(String custom) {
 		return null;
 	}
+
+	@Override
+	public void registerKeyBindings() {	}
+
+	@Override
+	public void keyBindingEvent(Object event) {	}
+
 }

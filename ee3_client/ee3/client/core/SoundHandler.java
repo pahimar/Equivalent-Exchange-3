@@ -1,4 +1,4 @@
-package ee3.client;
+package ee3.client.core;
 
 import static ee3.lib.Sounds.soundFiles;
 

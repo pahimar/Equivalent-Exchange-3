@@ -32,6 +32,10 @@ public interface IProxy {
 	
 	public abstract void registerSoundHandler();
 	
+	public abstract void registerKeyBindings();
+	
+	public abstract void keyBindingEvent(Object event);
+	
 	public abstract void handleControl(NetworkManager network, int key);
 	
 	public abstract void handlePedestalPacket(int x, int y, int z, int itemId, boolean activated);

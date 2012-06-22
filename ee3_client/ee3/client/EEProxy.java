@@ -5,14 +5,18 @@ import java.lang.reflect.Field;
 
 import cpw.mods.fml.common.ReflectionHelper;
 
+import ee3.client.core.KeyHandler;
+import ee3.client.core.SoundHandler;
 import ee3.core.interfaces.IProxy;
 import static ee3.lib.CustomItemRarity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
+import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
+import net.minecraft.src.mod_EE3;
 import net.minecraft.src.forge.EnumHelperClient;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
@@ -98,6 +102,16 @@ public class EEProxy implements IProxy {
 				return eRare;
 		}
 		return EnumRarity.common;
+	}
+
+	@Override
+	public void registerKeyBindings() {
+		KeyHandler.init();		
+	}
+
+	@Override
+	public void keyBindingEvent(Object event) {
+		KeyHandler.keyboardEvent((KeyBinding)event);
 	}
 	
 }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import ee3.addons.BuildCraftAddon;
 import ee3.core.ConfigurationManager;
 import ee3.core.CraftingHandler;
 import ee3.core.EntityLivingHandler;
@@ -27,7 +26,7 @@ import net.minecraft.src.forge.NetworkMod;
  */
 public class mod_EE3 extends NetworkMod {
 
-	public static mod_EE3 instance;
+	private static mod_EE3 instance;
 	@SidedProxy(clientSide="ee3.client.EEProxy", serverSide="ee3.server.EEProxy")
 	public static IProxy proxy;
 	public static EMCList emcList;
@@ -75,7 +74,19 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Initialise the EMC List
 		//this.emcList.initEMCList();
+		
+		// Register KeyBindings
+		this.proxy.registerKeyBindings();
 	}
+	
+	public static BaseMod instance() {
+		return instance;
+	}
+	
+	@Override
+	public void keyBindingEvent(Object event) {
+		this.proxy.keyBindingEvent(event);
+    }
 	
 	@Override
 	public String getVersion() {
