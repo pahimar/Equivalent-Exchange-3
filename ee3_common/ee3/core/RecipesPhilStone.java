@@ -117,7 +117,7 @@ public class RecipesPhilStone {
 	}
 	
 	public static void initEquivalencyList() {
-		addObjectsToEquivalencyLists(sand, dirt, cobblestone);
+		addObjectsToEquivalencyLists(sand, dirt, cobblestone, grass);
 		addObjectsToEquivalencyLists(plantYellow, plantRed);
 		addObjectsToEquivalencyLists(mushroomRed, mushroomBrown);
 		addObjectsToEquivalencyLists(pumpkinSeeds, melonSeeds);
