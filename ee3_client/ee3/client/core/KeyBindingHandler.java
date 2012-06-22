@@ -1,5 +1,7 @@
 package ee3.client.core;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.mod_EE3;
@@ -16,12 +18,11 @@ public class KeyBindingHandler {
 	public static KeyBinding Toggle;
 	public static KeyBinding Release;
 	
-	
 	public static void init() {
-		Extra = new KeyBinding("ee3.mod.key.extra", 46);
-		Charge = new KeyBinding("ee3.mod.key.charge", 47);
-		Toggle = new KeyBinding("ee3.mod.key.toggle", 34);
-		Release = new KeyBinding("ee3.mod.key.release", 19);
+		Extra = new KeyBinding("ee3.mod.key.extra", Keyboard.KEY_C);
+		Charge = new KeyBinding("ee3.mod.key.charge", Keyboard.KEY_V);
+		Toggle = new KeyBinding("ee3.mod.key.toggle", Keyboard.KEY_G);
+		Release = new KeyBinding("ee3.mod.key.release", Keyboard.KEY_R);
 		
 		ModLoader.registerKey(mod_EE3.instance(), Extra, false);
 		ModLoader.registerKey(mod_EE3.instance(), Charge, false);
