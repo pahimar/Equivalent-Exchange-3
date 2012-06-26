@@ -2,9 +2,10 @@ package ee3.client.core;
 
 import org.lwjgl.input.Keyboard;
 
+import ee3.core.mod_EE3;
+
 import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.mod_EE3;
 
 /**
  * TODO Class Description 

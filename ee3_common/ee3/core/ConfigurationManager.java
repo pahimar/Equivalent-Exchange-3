@@ -6,7 +6,6 @@ import java.util.HashMap;
 import static ee3.lib.ItemIds.*;
 import ee3.lib.Reference;
 
-import net.minecraft.src.mod_EE3;
 import static net.minecraft.src.forge.Configuration.*;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.Property;

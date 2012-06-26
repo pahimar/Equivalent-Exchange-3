@@ -7,6 +7,7 @@ import cpw.mods.fml.common.ReflectionHelper;
 
 import ee3.client.core.KeyBindingHandler;
 import ee3.client.core.SoundHandler;
+import ee3.core.mod_EE3;
 import ee3.core.interfaces.IProxy;
 import static ee3.lib.CustomItemRarity.*;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,6 @@ import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_EE3;
 import net.minecraft.src.forge.EnumHelperClient;
 import net.minecraft.src.forge.MinecraftForgeClient;
 

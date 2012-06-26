@@ -1,11 +1,6 @@
-package net.minecraft.src;
+package ee3.core;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import ee3.core.ConfigurationManager;
-import ee3.core.CraftingHandler;
-import ee3.core.EntityLivingHandler;
-import ee3.core.RecipesPhilStone;
-import ee3.core.TickHandler;
 import ee3.core.interfaces.IProxy;
 import ee3.emc.EMCList;
 import ee3.gui.GuiHandler;
@@ -15,7 +10,9 @@ import ee3.lib.Reference;
 import ee3.lib.Sounds;
 import ee3.lib.Version;
 import ee3.network.PacketHandler;
+import net.minecraft.src.BaseMod;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.SidedProxy;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
 

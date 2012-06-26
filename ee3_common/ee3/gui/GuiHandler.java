@@ -1,9 +1,9 @@
 package ee3.gui;
 
+import ee3.core.mod_EE3;
 import ee3.lib.GuiIds;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_EE3;
 import net.minecraft.src.forge.IGuiHandler;
 
 /**

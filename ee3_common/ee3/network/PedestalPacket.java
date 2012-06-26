@@ -4,8 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import ee3.core.mod_EE3;
+
 import net.minecraft.src.NetworkManager;
-import net.minecraft.src.mod_EE3;
 
 /**
  * TODO Class Description 
