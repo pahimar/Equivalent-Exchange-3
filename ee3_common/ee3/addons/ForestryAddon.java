@@ -1,6 +1,6 @@
 package ee3.addons;
 
-import ee3.lib.Helper;
+import ee3.core.helper.Helper;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ModLoader;

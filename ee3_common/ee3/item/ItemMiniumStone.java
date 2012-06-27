@@ -6,11 +6,12 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 import net.minecraft.src.World;
 import ee3.core.mod_EE3;
+import ee3.core.helper.Helper;
 import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
-import ee3.lib.Helper;
 import ee3.lib.Sounds;
 import ee3.lib.TransmuteEquivalencyList;
 
@@ -24,16 +25,21 @@ public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, 
 			int x, int y, int z, int l) {
 		
-		ItemStack nextItem = TransmuteEquivalencyList.getNextItemInEquivalencyList(world.getBlockId(x, y, z), world.getBlockMetadata(x, y, z));
+		int id = world.getBlockId(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		
+		if (world.getBlockMaterial(x, y, z) == Material.leaves)
+			meta = meta % 4;
+		
+		ItemStack nextItem = TransmuteEquivalencyList.getNextBlockInEquivalencyList(id, meta, entityPlayer.isSneaking());
 		
 		if (nextItem != null) {
 			if (Block.blocksList[nextItem.itemID] != null) {
-				System.out.println(world.setBlockAndMetadataWithNotify(x, y, z, nextItem.itemID, nextItem.getItemDamage()));
+				world.setBlockAndMetadataWithNotify(x, y, z, nextItem.itemID, nextItem.getItemDamage());
 			}
 		}
 		
-		
-		world.playSoundAtEntity(entityPlayer, Sounds.TRANSMUTE, 1.0F, 1.0F);
+		world.playSoundAtEntity(entityPlayer, Sounds.TRANSMUTE, 0.5F, 1.0F);
 		
 		return false;
     }

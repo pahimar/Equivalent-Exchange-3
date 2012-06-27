@@ -8,7 +8,7 @@ import net.minecraft.src.ModLoader;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import ee3.addons.*;
-import ee3.lib.Helper;
+import ee3.core.helper.Helper;
 import ee3.lib.Reference;
 
 public class TickHandler implements ITickHandler {

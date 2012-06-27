@@ -1,7 +1,7 @@
 package ee3.addons;
 
 import net.minecraft.src.ModLoader;
-import ee3.lib.Helper;
+import ee3.core.helper.Helper;
 
 /**
  * TODO Class Description 

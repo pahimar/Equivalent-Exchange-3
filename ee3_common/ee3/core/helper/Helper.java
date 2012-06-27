@@ -1,4 +1,4 @@
-package ee3.lib;
+package ee3.core.helper;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -7,6 +7,7 @@ import ee3.addons.BuildCraftAddon;
 import ee3.addons.ForestryAddon;
 import ee3.addons.IndustrialCraftAddon;
 import ee3.addons.RedPowerAddon;
+import ee3.lib.Reference;
 
 import net.minecraft.src.BaseMod;
 import net.minecraft.src.Block;

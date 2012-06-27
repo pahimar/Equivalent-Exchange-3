@@ -3,8 +3,12 @@ package ee3.lib;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import ee3.core.helper.Helper;
+
 import net.minecraft.src.Block;
+import net.minecraft.src.BlockSand;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 
 public class TransmuteEquivalencyList {
 	
@@ -122,19 +126,17 @@ public class TransmuteEquivalencyList {
 	}
 	
 	public static ItemStack getNextItemInEquivalencyList(int id, int meta) {
-		System.out.println("id: " + id + ", meta: " + meta);
 		ArrayList<ItemStack> list = getEquivalencyListForItem(id, meta);
+		
 		ItemStack currentStack;
 		ItemStack returnStack = null;
 		int i = 0;
 		
 		if (list != null) {
-			System.out.println(list.toString());
 			while (i < list.size()) {
 				currentStack = list.get(i);
 				if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
 					returnStack = list.get((i + 1) % list.size());
-					System.out.println(list.toString());
 					break;
 				}
 				++i;
@@ -144,8 +146,9 @@ public class TransmuteEquivalencyList {
 		return returnStack;
 	}
 	
-	public static ItemStack getNextBlockInEquivalencyList(int id, int meta) {
+	public static ItemStack getNextBlockInEquivalencyList(int id, int meta, boolean skipGravityAffectedBlocks) {
 		ArrayList<ItemStack> list = getEquivalencyListForItem(id, meta);
+		
 		ItemStack currentStack;
 		ItemStack returnStack = null;
 		int i = 0;
@@ -154,12 +157,40 @@ public class TransmuteEquivalencyList {
 			while (i < list.size()) {
 				currentStack = list.get(i);
 				if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
-					for (int index = (i + 1) % list.size(); index < i; ++index) {
-						if (Block.blocksList[list.get(index).itemID] != null) {
-							returnStack = list.get(index);
-							System.out.println(returnStack.toString());
-							return returnStack;
-						}
+					int index = (i + 1) % list.size();
+					returnStack = list.get(index);
+
+					//while ((index != i) && (Block.blocksList[returnStack.itemID] == null)) {
+					while ((index != i) && ((Block.blocksList[returnStack.itemID] == null) || ((Block.blocksList[returnStack.itemID] instanceof BlockSand) && skipGravityAffectedBlocks) )) 
+					{
+						returnStack = list.get(index);
+						index = (index + 1) % list.size();
+					}
+				}
+				++i;
+			}
+		}
+		
+		return returnStack;
+	}
+	
+	public static ItemStack getPrevBlockInEquivalencyList(int id, int meta) {
+		ArrayList<ItemStack> list = getEquivalencyListForItem(id, meta);
+		
+		ItemStack currentStack;
+		ItemStack returnStack = null;
+		int i = 0;
+		
+		if (list != null) {
+			while (i < list.size()) {
+				currentStack = list.get(i);
+				if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
+					int index = ((i - 1) + list.size()) % list.size();
+					returnStack = list.get(index);
+					
+					while ((index != i) && (Block.blocksList[returnStack.itemID] == null)) {
+						returnStack = list.get(index);
+						index = ((index - 1) + list.size()) % list.size();
 					}
 				}
 				++i;
