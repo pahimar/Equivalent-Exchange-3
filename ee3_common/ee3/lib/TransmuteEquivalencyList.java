@@ -146,7 +146,7 @@ public class TransmuteEquivalencyList {
 		return returnStack;
 	}
 	
-	public static ItemStack getNextBlockInEquivalencyList(int id, int meta, boolean skipGravityAffectedBlocks) {
+	public static ItemStack getNextBlockInEquivalencyList(int id, int meta, boolean useGravityAffectedBlocks) {
 		ArrayList<ItemStack> list = getEquivalencyListForItem(id, meta);
 		
 		ItemStack currentStack;
@@ -161,7 +161,7 @@ public class TransmuteEquivalencyList {
 					returnStack = list.get(index);
 
 					//while ((index != i) && (Block.blocksList[returnStack.itemID] == null)) {
-					while ((index != i) && ((Block.blocksList[returnStack.itemID] == null) || ((Block.blocksList[returnStack.itemID] instanceof BlockSand) && skipGravityAffectedBlocks) )) 
+					while ((index != i) && ((Block.blocksList[returnStack.itemID] == null) || ((Block.blocksList[returnStack.itemID] instanceof BlockSand) && !useGravityAffectedBlocks) )) 
 					{
 						returnStack = list.get(index);
 						index = (index + 1) % list.size();
