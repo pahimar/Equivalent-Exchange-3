@@ -58,15 +58,15 @@ public class RecipesPhilStone {
 	public static void initTransmutationRecipes(ItemStack transmutationStone) {
 		/* 4 Cobble <-> 1 Flint */
 		addRecipe(flint, transmutationStone, cobblestone, cobblestone, cobblestone, cobblestone);
-		addRecipe(cobblestone, 4, transmutationStone, flint);
+		addRecipe(new ItemStack(cobblestone, 4), transmutationStone, flint);
 		
 		/* 4 Dirt <-> 1 Gravel */
 		addRecipe(gravel, transmutationStone, dirt, dirt, dirt, dirt);
-		addRecipe(dirt, 4, transmutationStone, gravel);
+		addRecipe(new ItemStack(dirt, 4), transmutationStone, gravel);
 		
 		/* 4 Sand <-> 1 Sandstone */
 		// Vanilla Recipes exist to make SandStone from 4 Sand
-		addRecipe(sand, 4, transmutationStone, anySandStone);
+		addRecipe(new ItemStack(sand, 4), transmutationStone, anySandStone);
 		
 		/* 2 Sticks -> Wood Plank */
 		addRecipe(planks, transmutationStone, stick, stick);
@@ -80,40 +80,40 @@ public class RecipesPhilStone {
 		addRecipe(clay, transmutationStone, gravel, gravel, gravel, gravel);
 		addRecipe(clay, transmutationStone, anySandStone, anySandStone, anySandStone, anySandStone);
 		addRecipe(clay, transmutationStone, flint, flint, flint, flint);
-		addRecipe(gravel, 4, transmutationStone, clay);
+		addRecipe(new ItemStack(gravel, 4), transmutationStone, clay);
 		
 		/* 2 Wood Log <-> 1 Obsidian */
 		addRecipe(obsidian, transmutationStone, anyWood, anyWood);
-		addRecipe(wood, 2, transmutationStone, obsidian);
+		addRecipe(new ItemStack(wood, 2), transmutationStone, obsidian);
 		
 		/* 4 Clay Ball <-> 1 Clay Block */
 		// Vanilla recipe exists to make clay blocks from clay balls
-		addRecipe(clay, 4, transmutationStone, blockClay);
+		addRecipe(new ItemStack(clay, 4), transmutationStone, blockClay);
 		
 		/* 4 Obsidian/Clay Block -> 1 Iron Ingot, Iron Ingot -> Clay Block */
 		addRecipe(ingotIron, transmutationStone, obsidian, obsidian, obsidian, obsidian);
 		addRecipe(ingotIron, transmutationStone, blockClay, blockClay, blockClay, blockClay);
-		addRecipe(blockClay, 4, transmutationStone, ingotIron);
+		addRecipe(new ItemStack(blockClay, 4), transmutationStone, ingotIron);
 		
 		/* 8 Iron Ingot <-> 1 Gold Ingot */
 		addRecipe(ingotGold, transmutationStone, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron, ingotIron);
-		addRecipe(ingotIron, 8, transmutationStone, ingotGold);
+		addRecipe(new ItemStack(ingotIron, 8), transmutationStone, ingotGold);
 		
 		/* 4 Gold Ingot <-> 1 Diamond */
 		addRecipe(diamond, transmutationStone, ingotGold, ingotGold, ingotGold, ingotGold);
-		addRecipe(ingotGold, 4, transmutationStone, diamond);
+		addRecipe(new ItemStack(ingotGold, 4), transmutationStone, diamond);
 		
 		/* 8 Iron Block <-> 1 Gold Block */
 		addRecipe(blockGold, transmutationStone, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel);
-		addRecipe(blockSteel, 8, transmutationStone, blockGold);
+		addRecipe(new ItemStack(blockSteel), 8, transmutationStone, blockGold);
 		
 		/* 4 Gold Block <-> 1 Diamond Block */
 		addRecipe(blockDiamond, transmutationStone, blockGold, blockGold, blockGold, blockGold);
-		addRecipe(blockGold, 4, transmutationStone, blockDiamond);
+		addRecipe(new ItemStack(blockGold, 4), transmutationStone, blockDiamond);
 		
 		/* 1 Ender Pearl <-> 4 Iron Ingot */
 		addRecipe(enderPearl, transmutationStone, ingotIron, ingotIron, ingotIron, ingotIron);
-		addRecipe(ingotIron, 4, transmutationStone, enderPearl);
+		addRecipe(new ItemStack(ingotIron, 4), transmutationStone, enderPearl);
 	}
 	
 	public static void initEquivalencyList() {
@@ -166,10 +166,10 @@ public class RecipesPhilStone {
 		addRecipe(sand, transmutationStone, glass);
 		
 		/* Glowstone Block -> 4 Glowstone Dust */
-		addRecipe(lightStoneDust, 4, transmutationStone, glowStone);
+		addRecipe(new ItemStack(lightStoneDust, 4), transmutationStone, glowStone);
 		
 		/* Brick Block -> 4 Bricks */
-		addRecipe(Item.brick, 4, transmutationStone, Block.brick);
+		addRecipe(new ItemStack(Item.brick, 4), transmutationStone, Block.brick);
 	}
 	
 	public static void initPortableSmeltingRecipes(ItemStack transmutationStone) {	
