@@ -13,14 +13,13 @@ public class CraftingHandler implements ICraftingHandler {
 	
 	@Override
 	public void onTakenFromCrafting(EntityPlayer player, ItemStack stack, IInventory craftMatrix) {
-		// TODO Auto-generated method stub
 		ItemStack currentItemStack;
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
 			currentItemStack = craftMatrix.getStackInSlot(i);
 			if (currentItemStack != null) {
-				if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
+				if (currentItemStack.itemID == ModItems.miniumStone.shiftedIndex) {
 					System.out.println(currentItemStack.getItem().getItemName());
-					ItemPhilosopherStone stone = (ItemPhilosopherStone) currentItemStack.getItem();
+					currentItemStack.damageItem(1, player);
 				}
 			}
 		}

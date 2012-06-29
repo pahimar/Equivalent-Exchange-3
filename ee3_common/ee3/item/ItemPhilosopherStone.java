@@ -1,12 +1,15 @@
 package ee3.item;
 
 import ee3.core.mod_EE3;
+import ee3.core.helper.TransmutationHelper;
 import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
 import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 /**
  * TODO Class Description 
@@ -26,6 +29,11 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 		maxCharge = 4;
 		maxMode = 2;
 	}
+	
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l) {
+		return TransmutationHelper.transmuteInWorld(itemStack, entityPlayer, world, x, y, z);
+    }
 	
 	/*
 	 * Returns the custom item rarity type for the item

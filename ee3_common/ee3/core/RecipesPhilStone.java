@@ -105,7 +105,7 @@ public class RecipesPhilStone {
 		
 		/* 8 Iron Block <-> 1 Gold Block */
 		addRecipe(blockGold, transmutationStone, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel, blockSteel);
-		addRecipe(new ItemStack(blockSteel), 8, transmutationStone, blockGold);
+		addRecipe(new ItemStack(blockSteel, 8), transmutationStone, blockGold);
 		
 		/* 4 Gold Block <-> 1 Diamond Block */
 		addRecipe(blockDiamond, transmutationStone, blockGold, blockGold, blockGold, blockGold);
