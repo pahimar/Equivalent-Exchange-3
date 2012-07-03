@@ -101,9 +101,4 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	public void setMode(ItemStack ist, byte mode) {
 		setByte(ist, "currentMode", mode);
 	}
-
-	@Override
-	public boolean doesContainerItemLeaveCraftingGrid(ItemStack ist) {
-        return false;
-    }
 }

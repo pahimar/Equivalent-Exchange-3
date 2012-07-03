@@ -37,9 +37,4 @@ public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.MAGICAL);
     }
-
-	@Override
-	public boolean doesContainerItemLeaveCraftingGrid(ItemStack ist) {
-        return false;
-    }
 }

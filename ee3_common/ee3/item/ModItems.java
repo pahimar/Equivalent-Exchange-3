@@ -26,10 +26,6 @@ public class ModItems {
 		miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(0, 0).setItemName("miniumStone");
 		philStone = new ItemPhilosopherStone(ItemIds.PHIL_STONE).setIconCoord(1, 0).setItemName("philStone");
 		
-		/* Set the Container items for our mod items */
-		miniumStone.setContainerItem(miniumStone);
-		philStone.setContainerItem(philStone);
-		
 		/* Add the item names to the mod items */
 		ModLoader.addName(miniumStone, "Minium Stone");
 		ModLoader.addName(philStone, "Philosopher's Stone");

@@ -8,8 +8,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.forge.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler {
-
-	public CraftingHandler() { }
 	
 	@Override
 	public void onTakenFromCrafting(EntityPlayer player, ItemStack stack, IInventory craftMatrix) {
@@ -18,8 +16,11 @@ public class CraftingHandler implements ICraftingHandler {
 			currentItemStack = craftMatrix.getStackInSlot(i);
 			if (currentItemStack != null) {
 				if (currentItemStack.itemID == ModItems.miniumStone.shiftedIndex) {
-					System.out.println(currentItemStack.getItem().getItemName());
 					currentItemStack.damageItem(1, player);
+					currentItemStack.stackSize++;
+				}
+				else if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
+					currentItemStack.stackSize++;
 				}
 			}
 		}
