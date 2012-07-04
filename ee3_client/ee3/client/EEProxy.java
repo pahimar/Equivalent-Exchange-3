@@ -7,8 +7,10 @@ import cpw.mods.fml.common.ReflectionHelper;
 
 import ee3.client.core.KeyBindingHandler;
 import ee3.client.core.SoundHandler;
+import ee3.client.gui.GuiPortableCrafting;
 import ee3.core.mod_EE3;
 import ee3.core.interfaces.IProxy;
+import ee3.lib.GuiIds;
 import static ee3.lib.CustomItemRarity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
@@ -77,8 +79,11 @@ public class EEProxy implements IProxy {
 	}
 
 	@Override
-	// TODO Client side: Handle GUI call
 	public Object handleGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == GuiIds.PORTABLE_CRAFTING) {
+			return new GuiPortableCrafting(player.inventory);
+		}
+		
 		return null;
 	}
 
@@ -112,6 +117,11 @@ public class EEProxy implements IProxy {
 	@Override
 	public void keyBindingEvent(Object event) {
 		KeyBindingHandler.keyboardEvent((KeyBinding)event);
+	}
+
+	@Override
+	public boolean isPortableCraftingGUIOpen() {
+		return (ModLoader.getMinecraftInstance().currentScreen instanceof GuiPortableCrafting);
 	}
 	
 }

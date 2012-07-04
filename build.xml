@@ -4,14 +4,14 @@
 	<property file="build.properties" />
 	
 	<target name="clean">
-		<delete file="..\mcp\src\minecraft\mod_EE3.info" />
-		<delete file="..\mcp\src\minecraft\net\minecraft\src\mod_EE3.java" />
-		<delete dir="..\mcp\src\minecraft\ee3" />
-		<delete dir="..\mcp\src\minecraft\codechicken" />
-		<delete file="..\mcp\src\minecraft_server\mod_EE3.info" />
-		<delete file="..\mcp\src\minecraft_server\net\minecraft\src\mod_EE3.java" />
-		<delete file="..\mcp\src\minecraft_server\net\minecraft\src\EnumRarity.java" />
-		<delete dir="..\mcp\src\minecraft_server\ee3" />
+		<delete file="${dir.development}\mcp\src\minecraft\mod_EE3.info" />
+		<delete file="${dir.development}\mcp\src\minecraft\net\minecraft\src\mod_EE3.java" />
+		<delete dir="${dir.development}\mcp\src\minecraft\ee3" />
+		<delete dir="${dir.development}\mcp\src\minecraft\codechicken" />
+		<delete file="${dir.development}\mcp\src\minecraft_server\mod_EE3.info" />
+		<delete file="${dir.development}\mcp\src\minecraft_server\net\minecraft\src\mod_EE3.java" />
+		<delete file="${dir.development}\mcp\src\minecraft_server\net\minecraft\src\EnumRarity.java" />
+		<delete dir="${dir.development}\mcp\src\minecraft_server\ee3" />
 	</target>
 	
 	<target name="integrate-nei">

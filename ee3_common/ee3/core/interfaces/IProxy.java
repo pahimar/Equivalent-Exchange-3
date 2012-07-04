@@ -49,4 +49,7 @@ public interface IProxy {
 	public abstract void addCustomEnumRarityTypes();
 
 	public abstract EnumRarity getCustomEnumRarityType(String custom);
+	
+	public abstract boolean isPortableCraftingGUIOpen();
+
 }

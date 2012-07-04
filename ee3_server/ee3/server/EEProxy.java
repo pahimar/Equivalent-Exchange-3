@@ -11,7 +11,9 @@ import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.World;
+import ee3.container.ContainerPortableCrafting;
 import ee3.core.interfaces.IProxy;
+import ee3.lib.GuiIds;
 
 /**
  * TODO Class Description 
@@ -70,6 +72,10 @@ public class EEProxy implements IProxy {
 	@Override
 	// TODO Server side: Handle GUI call
 	public Object handleGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == GuiIds.PORTABLE_CRAFTING) {
+			return new ContainerPortableCrafting(player.inventory, world, x, y, z);
+		}
+		
 		return null;
 	}
 
@@ -89,5 +95,10 @@ public class EEProxy implements IProxy {
 
 	@Override
 	public void keyBindingEvent(Object event) {	}
+
+	@Override
+	public boolean isPortableCraftingGUIOpen() {
+		return false;
+	}
 
 }

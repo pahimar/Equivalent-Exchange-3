@@ -6,5 +6,5 @@ package ee3.lib;
  *
  */
 public class GuiIds {
-	
+	public static int PORTABLE_CRAFTING = 1;
 }
