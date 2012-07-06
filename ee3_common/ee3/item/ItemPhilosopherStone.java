@@ -32,6 +32,7 @@ public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IIt
 	
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l) {
+		System.out.println("Transmuted at size " + getCurrentCharge(itemStack));
 		return TransmutationHelper.transmuteInWorld(itemStack, entityPlayer, world, x, y, z);
     }
 	
