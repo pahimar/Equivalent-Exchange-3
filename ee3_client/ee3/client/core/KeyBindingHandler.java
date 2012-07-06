@@ -1,105 +1,82 @@
-package ee3.item;
+package ee3.client.core;
+
+import org.lwjgl.input.Keyboard;
 
 import ee3.core.mod_EE3;
-import ee3.core.helper.TransmutationHelper;
-import ee3.core.interfaces.IItemChargeable;
-import ee3.core.interfaces.IItemModal;
-import ee3.core.interfaces.ITransmuteStone;
-import ee3.lib.CustomItemRarity;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumRarity;
+import ee3.item.ItemPhilosopherStone;
+import ee3.item.ModItems;
+import ee3.lib.GuiIds;
+
+import net.minecraft.src.EntityPlayerSP;
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.KeyBinding;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 
 /**
  * TODO Class Description 
- * @author pahimar, x3n0ph0b3
+ * @author pahimar
  *
  */
-public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal, ITransmuteStone {
+public class KeyBindingHandler {
 
-	private byte currentCharge;
-	private byte maxCharge;
-	
-	private byte currentMode;
-	private byte maxMode;
-	
-	public ItemPhilosopherStone(int i) {
-		super(i);
-		maxCharge = 4;
-		maxMode = 2;
-	}
-	
-	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l) {
-		System.out.println("Transmuted at size " + getCurrentCharge(itemStack));
-		return TransmutationHelper.transmuteInWorld(itemStack, entityPlayer, world, x, y, z);
-    }
-	
-	/*
-	 * Returns the custom item rarity type for the item
-	 * @see net.minecraft.src.Item#getRarity(net.minecraft.src.ItemStack)
-	 */
-	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		return mod_EE3.proxy.getCustomEnumRarityType(CustomItemRarity.RARE);
-    }
-	
-	/*
-	 * Gives the Philosopher Stone a nice visual effect
-	 * @see net.minecraft.src.Item#hasEffect(net.minecraft.src.ItemStack)
-	 */
-	public boolean hasEffect(ItemStack par1ItemStack) {
-        return true;
-    }
+	public static KeyBinding Extra;
+	public static KeyBinding Charge;
+	public static KeyBinding Toggle;
+	public static KeyBinding Release;
 
-	@Override
-	public byte getMaxCharge() {
-		return maxCharge;
+	public static void init() {
+		Extra = new KeyBinding("ee3.mod.key.extra", Keyboard.KEY_C);
+		Charge = new KeyBinding("ee3.mod.key.charge", Keyboard.KEY_V);
+		Toggle = new KeyBinding("ee3.mod.key.toggle", Keyboard.KEY_G);
+		Release = new KeyBinding("ee3.mod.key.release", Keyboard.KEY_R);
+
+		ModLoader.registerKey(mod_EE3.instance(), Extra, false);
+		ModLoader.registerKey(mod_EE3.instance(), Charge, false);
+		ModLoader.registerKey(mod_EE3.instance(), Toggle, false);
+		ModLoader.registerKey(mod_EE3.instance(), Release, false);
 	}
 
-	@Override
-	public void increaseCharge(ItemStack ist) {
-		if (getCurrentCharge(ist) < getMaxCharge())
-			setCurrentCharge(ist, (byte)(getCurrentCharge(ist) + 1));			
+	public static void keyboardEvent(KeyBinding event) {
+		// We only care about keybinding events that happen when the game is "in play"	
+		if (!ModLoader.getMinecraftInstance().isGamePaused) {
+
+			EntityPlayerSP thePlayer = ModLoader.getMinecraftInstance().thePlayer;
+			World theWorld = ModLoader.getMinecraftInstance().theWorld;
+
+			if (event.equals(Extra)) {
+				if (thePlayer.inventory.getCurrentItem() != null) {
+					Item currentItem = thePlayer.inventory.getCurrentItem().getItem();
+					if (((currentItem.shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.shiftedIndex == ModItems.philStone.shiftedIndex)) && !theWorld.isRemote) {
+						thePlayer.openGui(mod_EE3.instance(), GuiIds.PORTABLE_CRAFTING, theWorld, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
+					}
+				}
+			}
+			else if (event.equals(Charge)) {
+				if (thePlayer.inventory.getCurrentItem() != null) {
+					ItemStack currentStack = thePlayer.inventory.getCurrentItem();
+					Item currentItem = currentStack.getItem();
+					if (currentItem.shiftedIndex == ModItems.philStone.shiftedIndex) {
+						// Check to see if the player is sneaking
+						if(thePlayer.isSneaking()){
+							((ItemPhilosopherStone)currentItem).decreaseCharge(currentStack);
+							System.out.println("Decharged Philosophers Stone to " + ((ItemPhilosopherStone)currentItem).getCurrentCharge(currentStack));
+						}else{
+							((ItemPhilosopherStone)currentItem).increaseCharge(currentStack);
+							System.out.println("Charged Philosophers Stone to " + ((ItemPhilosopherStone)currentItem).getCurrentCharge(currentStack));
+						}
+					}
+				}
+				System.out.println("Charge Key Pressed");
+			}
+			else if (event.equals(Toggle)) {
+				System.out.println("Toggle Key Pressed");
+			}
+			else if (event.equals(Release)) {
+				System.out.println("Release Key Pressed");
+			}
+		}
 	}
 
-	@Override
-	public void decreaseCharge(ItemStack ist) {
-		if (getCurrentCharge(ist) > 0)
-			setCurrentCharge(ist, (byte)(getCurrentCharge(ist) - 1));	
-	}
-
-	@Override
-	public byte getCurrentCharge(ItemStack ist) {
-		return getByte(ist, "currentCharge");
-	}
-
-	@Override
-	public void setCurrentCharge(ItemStack ist, byte charge) {
-		setByte(ist, "currentCharge", charge);
-	}
-
-	@Override
-	public byte getCurrentMode(ItemStack ist) {
-		return getByte(ist, "currentMode");
-	}
-
-	@Override
-	public byte getMaxMode() {
-		return maxMode;
-	}
-
-	@Override
-	public byte cycleMode(ItemStack ist) {
-		if (getCurrentMode(ist) < getMaxMode())
-			setMode(ist, (byte)(getCurrentMode(ist) + 1));
-		else
-			setMode(ist, (byte)0);
-		return getCurrentMode(ist);
-	}
-
-	@Override
-	public void setMode(ItemStack ist, byte mode) {
-		setByte(ist, "currentMode", mode);
-	}
 }
