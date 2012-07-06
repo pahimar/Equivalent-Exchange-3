@@ -3,11 +3,13 @@ package ee3.client.core;
 import org.lwjgl.input.Keyboard;
 
 import ee3.core.mod_EE3;
+import ee3.item.ItemPhilosopherStone;
 import ee3.item.ModItems;
 import ee3.lib.GuiIds;
 
 import net.minecraft.src.EntityPlayerSP;
 import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.KeyBinding;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
@@ -46,13 +48,26 @@ public class KeyBindingHandler {
 			if (event.equals(Extra)) {
 				if (thePlayer.inventory.getCurrentItem() != null) {
 					Item currentItem = thePlayer.inventory.getCurrentItem().getItem();
-					if ((currentItem.shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.shiftedIndex == ModItems.philStone.shiftedIndex)) {
+					if (((currentItem.shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.shiftedIndex == ModItems.philStone.shiftedIndex)) && !theWorld.isRemote) {
 						thePlayer.openGui(mod_EE3.instance(), GuiIds.PORTABLE_CRAFTING, theWorld, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
 					}
 				}
 			}
 			else if (event.equals(Charge)) {
-				// Check to see if the player is sneaking
+				if (thePlayer.inventory.getCurrentItem() != null) {
+					ItemStack currentStack = thePlayer.inventory.getCurrentItem();
+					Item currentItem = currentStack.getItem();
+					if (currentItem.shiftedIndex == ModItems.philStone.shiftedIndex) {
+						// Check to see if the player is sneaking
+						if(thePlayer.isSneaking()){
+							((ItemPhilosopherStone)currentItem).decreaseCharge(currentStack);
+							System.out.println("Decharged Philosophers Stone to " + ((ItemPhilosopherStone)currentItem).getCurrentCharge(currentStack));
+						}else{
+							((ItemPhilosopherStone)currentItem).increaseCharge(currentStack);
+							System.out.println("Charged Philosophers Stone to " + ((ItemPhilosopherStone)currentItem).getCurrentCharge(currentStack));
+						}
+					}
+				}
 				System.out.println("Charge Key Pressed");
 			}
 			else if (event.equals(Toggle)) {
