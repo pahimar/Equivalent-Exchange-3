@@ -14,7 +14,10 @@ public class CraftingHandler implements ICraftingHandler {
 	@Override
 	public void onTakenFromCrafting(EntityPlayer player, ItemStack stack, IInventory craftMatrix) {
 		if (mod_EE3.proxy.isPortableCraftingGUIOpen()) {
-			player.inventory.getCurrentItem().damageItem(1, player);
+			ItemStack currentInventoryItem = player.inventory.getCurrentItem();
+			if (currentInventoryItem != null) {
+				player.inventory.getCurrentItem().damageItem(1, player);
+			}
 		}
 		
 		ItemStack currentItemStack;
