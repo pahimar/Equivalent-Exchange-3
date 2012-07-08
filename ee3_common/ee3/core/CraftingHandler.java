@@ -16,7 +16,7 @@ public class CraftingHandler implements ICraftingHandler {
 		if (mod_EE3.proxy.isPortableCraftingGUIOpen()) {
 			ItemStack currentInventoryItem = player.inventory.getCurrentItem();
 			if (currentInventoryItem != null) {
-				player.inventory.getCurrentItem().damageItem(1, player);
+				currentInventoryItem.damageItem(1, player);
 			}
 		}
 		
