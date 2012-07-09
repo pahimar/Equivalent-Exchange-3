@@ -22,4 +22,6 @@ public class Reference {
 	public static final String SOUND_RESOURCE_LOCATION = "ee3/sound/";
 	public static final String SOUND_PREFIX = "ee3.sound.";
 	
+	public static final int MINIUM_STONE_DURABILITY = 1531;
+	public static final int MINIUM_STONE_TRANSMUTE_COST = 4;
 }

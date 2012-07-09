@@ -11,12 +11,13 @@ import ee3.core.helper.Helper;
 import ee3.core.helper.TransmutationHelper;
 import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
+import ee3.lib.Reference;
 
 public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 	
 	public ItemMiniumStone(int i) {
 		super(i);
-		this.setMaxDamage(50);
+		this.setMaxDamage(Reference.MINIUM_STONE_DURABILITY);
 	}
 
 	@Override

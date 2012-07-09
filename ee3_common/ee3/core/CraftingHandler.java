@@ -3,6 +3,7 @@ package ee3.core;
 import ee3.core.interfaces.IProxy;
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ModItems;
+import ee3.lib.Reference;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
@@ -16,7 +17,7 @@ public class CraftingHandler implements ICraftingHandler {
 		if (mod_EE3.proxy.isPortableCraftingGUIOpen()) {
 			ItemStack currentInventoryItem = player.inventory.getCurrentItem();
 			if (currentInventoryItem != null) {
-				currentInventoryItem.damageItem(1, player);
+				currentInventoryItem.damageItem(Reference.MINIUM_STONE_TRANSMUTE_COST, player);
 			}
 		}
 		
@@ -25,7 +26,7 @@ public class CraftingHandler implements ICraftingHandler {
 			currentItemStack = craftMatrix.getStackInSlot(i);
 			if (currentItemStack != null) {
 				if (currentItemStack.itemID == ModItems.miniumStone.shiftedIndex) {
-					currentItemStack.damageItem(1, player);
+					currentItemStack.damageItem(Reference.MINIUM_STONE_TRANSMUTE_COST, player);
 					currentItemStack.stackSize++;
 				}
 				else if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
