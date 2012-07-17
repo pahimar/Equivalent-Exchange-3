@@ -2,7 +2,7 @@ package ee3.client.core;
 
 import org.lwjgl.input.Keyboard;
 
-import ee3.core.mod_EE3;
+import ee3.mod_EE3;
 import ee3.item.ModItems;
 import ee3.lib.GuiIds;
 
@@ -15,6 +15,7 @@ import net.minecraft.src.World;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class KeyBindingHandler {

@@ -25,6 +25,7 @@ import static ee3.lib.TransmuteEquivalencyList.*;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class RecipesPhilStone {

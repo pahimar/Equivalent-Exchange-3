@@ -1,5 +1,6 @@
 package ee3.core;
 
+import ee3.mod_EE3;
 import ee3.core.interfaces.IProxy;
 import ee3.item.ItemPhilosopherStone;
 import ee3.item.ModItems;
@@ -10,6 +11,12 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.forge.ICraftingHandler;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class CraftingHandler implements ICraftingHandler {
 	
 	@Override

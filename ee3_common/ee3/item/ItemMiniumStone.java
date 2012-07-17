@@ -6,13 +6,19 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import ee3.core.mod_EE3;
+import ee3.mod_EE3;
 import ee3.core.helper.Helper;
 import ee3.core.helper.TransmutationHelper;
 import ee3.core.interfaces.ITransmuteStone;
 import ee3.lib.CustomItemRarity;
 import ee3.lib.Reference;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 	
 	public ItemMiniumStone(int i) {
@@ -25,7 +31,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmuteStone {
 		boolean result = TransmutationHelper.transmuteInWorld(itemStack, entityPlayer, world, x, y, z);
 		
 		if (result) {
-			itemStack.damageItem(1, entityPlayer);
+			itemStack.damageItem(Reference.MINIUM_STONE_TRANSMUTE_COST, entityPlayer);
 		}
 		
 		return result;

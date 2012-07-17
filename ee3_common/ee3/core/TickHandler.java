@@ -11,6 +11,12 @@ import ee3.addons.*;
 import ee3.core.helper.Helper;
 import ee3.lib.Reference;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TickHandler implements ITickHandler {
 
 	private static boolean addonsInitialized = false;

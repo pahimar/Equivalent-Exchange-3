@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import ee3.core.mod_EE3;
+import ee3.mod_EE3;
 
 
 import net.minecraft.src.ModLoader;
@@ -14,6 +14,7 @@ import net.minecraft.src.ModLoader;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class Version {

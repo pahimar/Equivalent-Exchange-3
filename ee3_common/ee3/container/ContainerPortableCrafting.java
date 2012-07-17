@@ -11,6 +11,12 @@ import net.minecraft.src.Slot;
 import net.minecraft.src.SlotCrafting;
 import net.minecraft.src.World;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ContainerPortableCrafting extends ContainerWorkbench {
 
 	public ContainerPortableCrafting(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5) {

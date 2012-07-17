@@ -11,6 +11,7 @@ import net.minecraft.src.Packet250CustomPayload;
 /**
  * TODO Class Description 
  * @author pahimar, cpw
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public enum PacketTypeHandler {

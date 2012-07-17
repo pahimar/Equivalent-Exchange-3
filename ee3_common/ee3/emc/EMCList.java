@@ -14,6 +14,12 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.ShapelessRecipes;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class EMCList {
 
 	private HashMap<Integer, HashMap<Integer, EMCValue>> emcMap;

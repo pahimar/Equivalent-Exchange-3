@@ -1,6 +1,11 @@
-package ee3.core;
+package ee3;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import ee3.core.ConfigurationManager;
+import ee3.core.CraftingHandler;
+import ee3.core.EntityLivingHandler;
+import ee3.core.RecipesPhilStone;
+import ee3.core.TickHandler;
 import ee3.core.interfaces.IProxy;
 import ee3.emc.EMCList;
 import ee3.gui.GuiHandler;
@@ -19,6 +24,7 @@ import net.minecraft.src.forge.NetworkMod;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class mod_EE3 extends NetworkMod {

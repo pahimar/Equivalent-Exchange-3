@@ -10,6 +10,12 @@ import net.minecraft.src.BlockSand;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TransmuteEquivalencyList {
 	
 	public static ArrayList<ArrayList<ItemStack>> equivalencyLists = new ArrayList<ArrayList<ItemStack>>();

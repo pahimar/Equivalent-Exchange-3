@@ -7,6 +7,12 @@ import ee3.container.ContainerPortableCrafting;
 import net.minecraft.src.GuiContainer;
 import net.minecraft.src.InventoryPlayer;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GuiPortableCrafting extends GuiContainer {
 	
 	public GuiPortableCrafting(InventoryPlayer inventoryPlayer) {

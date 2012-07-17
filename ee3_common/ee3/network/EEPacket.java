@@ -12,6 +12,7 @@ import net.minecraft.src.forge.packets.ForgePacket;
 /**
  * TODO Class Description 
  * @author pahimar, cpw
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class EEPacket {

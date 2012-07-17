@@ -10,6 +10,7 @@ import net.minecraft.src.forge.adaptors.SoundHandlerAdaptor;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class SoundHandler extends SoundHandlerAdaptor {

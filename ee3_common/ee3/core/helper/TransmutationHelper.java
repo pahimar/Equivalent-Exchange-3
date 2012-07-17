@@ -1,5 +1,6 @@
 package ee3.core.helper;
 
+import ee3.mod_EE3;
 import ee3.lib.Sounds;
 import ee3.lib.TransmuteEquivalencyList;
 import net.minecraft.src.Block;
@@ -8,6 +9,12 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
 
+/**
+ * TODO Class Description 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TransmutationHelper {
 
 	public static boolean transmuteInWorld(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z) {
@@ -24,6 +31,7 @@ public class TransmutationHelper {
 		if (nextItem != null) {
 			if (Block.blocksList[nextItem.itemID] != null) {
 				world.setBlockAndMetadataWithNotify(x, y, z, nextItem.itemID, nextItem.getItemDamage());
+				// @TODO
 				world.playSoundAtEntity(entityPlayer, Sounds.TRANSMUTE, 0.5F, 1.0F);
 				return true;
 			}

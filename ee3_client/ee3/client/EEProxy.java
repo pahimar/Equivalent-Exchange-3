@@ -5,10 +5,10 @@ import java.lang.reflect.Field;
 
 import cpw.mods.fml.common.ReflectionHelper;
 
+import ee3.mod_EE3;
 import ee3.client.core.KeyBindingHandler;
 import ee3.client.core.SoundHandler;
 import ee3.client.gui.GuiPortableCrafting;
-import ee3.core.mod_EE3;
 import ee3.core.interfaces.IProxy;
 import ee3.lib.GuiIds;
 import static ee3.lib.CustomItemRarity.*;
@@ -25,6 +25,7 @@ import net.minecraft.src.forge.MinecraftForgeClient;
 /**
  * TODO Class Description 
  * @author pahimar, cpw
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class EEProxy implements IProxy {

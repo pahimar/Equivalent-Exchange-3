@@ -1,6 +1,6 @@
 package ee3.item;
 
-import ee3.core.mod_EE3;
+import ee3.mod_EE3;
 import ee3.core.helper.TransmutationHelper;
 import ee3.core.interfaces.IItemChargeable;
 import ee3.core.interfaces.IItemModal;
@@ -14,6 +14,7 @@ import net.minecraft.src.World;
 /**
  * TODO Class Description 
  * @author pahimar, x3n0ph0b3
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class ItemPhilosopherStone extends ItemEE implements IItemChargeable, IItemModal, ITransmuteStone {

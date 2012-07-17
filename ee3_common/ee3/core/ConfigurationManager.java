@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import static ee3.lib.ItemIds.*;
+import ee3.mod_EE3;
 import ee3.lib.Reference;
 
 import static net.minecraft.src.forge.Configuration.*;
@@ -13,6 +14,7 @@ import net.minecraft.src.forge.Property;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class ConfigurationManager {
@@ -57,7 +59,9 @@ public class ConfigurationManager {
 	    	prop = config.getOrCreateBlockIdProperty("torch", 178);
 	    	prop = config.getOrCreateBlockIdProperty("device", 179);
 	    	
-	    	/* Item Ids */	    	
+	    	/* Item Ids */	
+	    	prop = config.getOrCreateIntProperty("miniumShard", CATEGORY_ITEM, 27269);
+	    	MINIUM_SHARD = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("miniumStone", CATEGORY_ITEM, 27270);
 	    	MINIUM_STONE = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("philStone", CATEGORY_ITEM, 27271);

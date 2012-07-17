@@ -3,9 +3,11 @@ package ee3.lib;
 /**
  * TODO Class Description 
  * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
 public class ItemIds {
+	public static int MINIUM_SHARD = 27269;
 	public static int MINIUM_STONE = 27270;
 	public static int PHIL_STONE = 27271;
 	public static int DJINN_RING;
