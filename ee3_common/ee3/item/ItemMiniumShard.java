@@ -1,5 +1,8 @@
 package ee3.item;
 
+import ee3.core.helper.LocalizationHelper;
+import net.minecraft.src.ItemStack;
+
 /**
  * TODO Class Description 
  * @author pahimar

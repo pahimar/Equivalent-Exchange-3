@@ -56,7 +56,35 @@
 		</exec>
 	</target>
 	
-	<target name="release">
+	<target name="release-beta">
+			<!-- Prep for the release -->
+			<antcall target="clean" />
+			<antcall target="build" />
+			<antcall target="recompile" />		
+			<antcall target="reobfuscate" />
+			
+			<!-- Update the mod_*.info file for release -->
+			<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mod_EE3.info" todir="${dir.development}\releases\" />
+			<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
+			
+			<!-- Build the jar -->
+			<jar destfile="${dir.development}\releases\ee3-client-v${release.mod.version}.jar">
+				<fileset dir="${dir.development}\releases\"	includes="mcmod.info" />
+				<fileset dir="${dir.development}\mcp\reobf\minecraft" />
+				<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+			</jar>
+			<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
+		
+			<!-- Put a copy in my Beta DB share -->
+			<mkdir dir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+			<move file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+			<move file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+			
+			<!-- Clean up the MCP source now that we are done -->
+			<antcall target="clean" />
+		</target>
+	
+	<target name="release-final">
 		<!-- Prep for the release -->
 		<antcall target="clean" />
 		<antcall target="build" />
@@ -68,25 +96,25 @@
 		<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
 		
 		<!-- Build the jar -->
-		<jar destfile="${dir.development}\releases\ee3-client-v${release.version}.jar">
+		<jar destfile="${dir.development}\releases\ee3-client-v${release.mod.version}.jar">
 			<fileset dir="${dir.development}\releases\"	includes="mcmod.info" />
 			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
-		<jar destfile="${dir.development}\releases\ee3-server-v${release.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
+		<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
 		
 		<!-- Put a copy in Sengir's DB share -->
-		<mkdir dir="${dir.dropbox.mod.share}\${release.minecraft.version}\${release.version}" />
-		<copy file="${dir.development}\releases\ee3-client-v${release.version}.jar" todir="${dir.dropbox.mod.share}\${release.minecraft.version}\${release.version}" />
-		<copy file="${dir.development}\releases\ee3-server-v${release.version}.jar" todir="${dir.dropbox.mod.share}\${release.minecraft.version}\${release.version}" />
-		
+		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
 		
 		<!-- Put a copy in my public DB share -->
-		<mkdir dir="${dir.dropbox.pahimar}\${release.minecraft.version}\${release.version}" />
-		<move file="${dir.development}\releases\ee3-client-v${release.version}.jar" todir="${dir.dropbox.pahimar}\${release.minecraft.version}\${release.version}" />
-		<move file="${dir.development}\releases\ee3-server-v${release.version}.jar" todir="${dir.dropbox.pahimar}\${release.minecraft.version}\${release.version}" />
+		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
 		
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
+	
 </project>

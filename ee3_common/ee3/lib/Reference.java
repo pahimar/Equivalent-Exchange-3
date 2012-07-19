@@ -22,7 +22,12 @@ public class Reference {
 	public static final String ARMOR_SHEET_LOCATION = "/ee3/art/armor/";
 	public static final String SOUND_RESOURCE_LOCATION = "ee3/sound/";
 	public static final String SOUND_PREFIX = "ee3.sound.";
+	public static final String LANG_RESOURCE_LOCATION = "/ee3/lang/";
 	
 	public static final int MINIUM_STONE_DURABILITY = 1531;
 	public static final int MINIUM_STONE_TRANSMUTE_COST = 4;
+	
+	public static final String ITEM_NAME_MINIUM_SHARD = "item.name.minium_shard";
+	public static final String ITEM_NAME_MINIUM_STONE = "item.name.minium_stone";
+	public static final String ITEM_NAME_PHILOSOPHERS_STONE = "item.name.philosophers_stone";
 }

@@ -1,5 +1,6 @@
 package ee3.item;
 
+import ee3.core.helper.LocalizationHelper;
 import ee3.lib.Reference;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -18,6 +19,10 @@ public class ItemMod extends Item implements ITextureProvider {
 		super(i);
 		maxStackSize = 1;
 		setNoRepair();
+	}
+	
+	public String getItemDisplayName(ItemStack itemstack) {
+		return LocalizationHelper.instance.get(getItemNameIS(itemstack));
 	}
 	
 	@Override

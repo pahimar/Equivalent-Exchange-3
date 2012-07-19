@@ -1,19 +1,21 @@
-package ee3.core;
+package ee3.core.helper;
 
 import java.io.InputStream;
 import java.util.Properties;
 
+import ee3.lib.Reference;
+
 import net.minecraft.src.StringTranslate;
 
 /**
-* Simple mod localization class. Shamelessly ripped from Buildcraft. All Javadoc after this point is from the original
+* Simple mod localization class. Shamelessly ripped from Buildcraft, renamed LocalizationHelper, and modified. 
 *
 * @author Jimeo Wan
 * @license Public domain
 */
-public class Localization {
+public class LocalizationHelper {
 
-	public static Localization instance = new Localization();
+	public static LocalizationHelper instance = new LocalizationHelper();
 	
 	private static final String DEFAULT_LANGUAGE = "en_US";
 
@@ -23,12 +25,12 @@ public class Localization {
 
 	/**
 	* Loads the mod's localization files. All language files must be stored in
-	* "[modname]/lang/", in .properties files. (ex: for the mod 'invtweaks',
-	* the french translation is in: "invtweaks/lang/fr_FR.properties")
+	* "/lang[modname]/", in .lang files. (ex: for the mod 'invtweaks',
+	* the french translation is in: "lang/invtweaks/fr_FR.lang")
 	*
 	* @param modName The mod name
 	*/
-	public Localization() {
+	public LocalizationHelper() {
 		load(getCurrentLanguage());
 	}
 
@@ -50,10 +52,10 @@ public class Localization {
 		defaultMappings.clear();
 		mappings.clear();
 		try {
-			InputStream langStream = Localization.class.getResourceAsStream(
-			"/lang/ee3/" + newLanguage + ".properties");
-			InputStream defaultLangStream = Localization.class.getResourceAsStream(
-			"/lang/ee3/" + DEFAULT_LANGUAGE + ".properties");
+			InputStream langStream = LocalizationHelper.class.getResourceAsStream(
+				Reference.LANG_RESOURCE_LOCATION + newLanguage + ".lang");
+			InputStream defaultLangStream = LocalizationHelper.class.getResourceAsStream(
+				Reference.LANG_RESOURCE_LOCATION + DEFAULT_LANGUAGE + ".lang");
 			mappings.load((langStream == null) ? defaultLangStream : langStream);
 			defaultMappings.load(defaultLangStream);
 		

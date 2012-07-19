@@ -1,4 +1,4 @@
-package ee3.core;
+package ee3.block;
 
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.Material;
@@ -11,26 +11,15 @@ import net.minecraft.src.forge.ITextureProvider;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-public class BlockEE extends BlockContainer implements ITextureProvider {
+public class BlockEE extends BlockContainer {
 
 	protected BlockEE(int i) {
 		super(i, Material.rock);
 	}
 
 	@Override
-	public String getTextureFile() {
-		// TODO
-		return "";
-	}
-
-	@Override
 	public TileEntity getBlockEntity() {
-		return null;
-	}
-	
-	@Override 
-	public TileEntity getBlockEntity(int metadata) {
-		// TODO
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
