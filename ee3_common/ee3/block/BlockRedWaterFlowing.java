@@ -1,12 +1,21 @@
 package ee3.block;
 
+import ee3.lib.Reference;
 import net.minecraft.src.BlockFluid;
 import net.minecraft.src.Material;
 
 public class BlockRedWaterFlowing extends BlockFluid {
 
-	protected BlockRedWaterFlowing(int par1, Material par2Material) {
-		super(par1, par2Material);
+	protected BlockRedWaterFlowing(int id, Material material) {
+		super(id, material);
+		this.blockHardness = 100F;
+		this.setLightOpacity(3);
+		this.setBlockName("redWaterFlowing");
 	}
 
+	@Override
+	public String getTextureFile() {
+		return Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET;
+	}
+	
 }

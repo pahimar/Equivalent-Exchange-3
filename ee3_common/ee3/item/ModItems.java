@@ -14,15 +14,11 @@ import net.minecraft.src.ModLoader;
  */
 public class ModItems {
 	
-	private static boolean initialized; 
-	
 	public static Item miniumShard;
 	public static Item miniumStone;
 	public static Item philStone;
 	
 	public static void init() {
-		if (initialized)
-			initialized = true;
 		
 		/* Initialise each mod item individually */
 		miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD).setIconCoord(0, 0).setItemName("miniumShard");

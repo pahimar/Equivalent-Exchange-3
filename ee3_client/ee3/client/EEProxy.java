@@ -8,9 +8,12 @@ import cpw.mods.fml.common.ReflectionHelper;
 import ee3.mod_EE3;
 import ee3.client.core.KeyBindingHandler;
 import ee3.client.core.SoundHandler;
+import ee3.client.core.TextureRedWaterFX;
+import ee3.client.core.TextureRedWaterFlowFX;
 import ee3.client.gui.GuiPortableCrafting;
 import ee3.core.interfaces.IProxy;
 import ee3.lib.GuiIds;
+import ee3.lib.Reference;
 import static ee3.lib.CustomItemRarity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
@@ -40,12 +43,6 @@ public class EEProxy implements IProxy {
 
 	@Override
 	public void registerTileEntities() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void registerTranslations() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -123,6 +120,18 @@ public class EEProxy implements IProxy {
 	@Override
 	public boolean isPortableCraftingGUIOpen() {
 		return (ModLoader.getMinecraftInstance().currentScreen instanceof GuiPortableCrafting);
+	}
+
+	@Override
+	public void preloadTextures() {
+		MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
+		
+	}
+
+	@Override
+	public void initTextureFX() {
+		ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(new TextureRedWaterFX());
+		ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
 	}
 	
 }

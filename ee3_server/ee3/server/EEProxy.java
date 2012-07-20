@@ -38,12 +38,6 @@ public class EEProxy implements IProxy {
 	}
 
 	@Override
-	public void registerTranslations() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public File getMinecraftDir() {
 		return new File(".");
 	}
@@ -101,5 +95,11 @@ public class EEProxy implements IProxy {
 	public boolean isPortableCraftingGUIOpen() {
 		return false;
 	}
+
+	@Override
+	public void preloadTextures() {	}
+
+	@Override
+	public void initTextureFX() { }
 
 }

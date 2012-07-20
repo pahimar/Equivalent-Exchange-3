@@ -17,11 +17,13 @@ import net.minecraft.src.forge.IGuiHandler;
  */
 public interface IProxy {
 	
+	public abstract void preloadTextures();
+	
+	public abstract void initTextureFX();
+	
 	public abstract void registerRenderInformation();
 	
 	public abstract void registerTileEntities();
-	
-	public abstract void registerTranslations();
 	
 	public abstract File getMinecraftDir();
 	

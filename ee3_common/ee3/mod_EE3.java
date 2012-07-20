@@ -1,6 +1,7 @@
 package ee3;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import ee3.block.ModBlocks;
 import ee3.core.ConfigurationManager;
 import ee3.core.CraftingHandler;
 import ee3.core.EntityLivingHandler;
@@ -12,6 +13,7 @@ import ee3.gui.GuiHandler;
 import ee3.item.ModItems;
 import ee3.lib.ItemIds;
 import ee3.lib.Reference;
+import ee3.lib.RenderIds;
 import ee3.lib.Sounds;
 import ee3.lib.Version;
 import ee3.network.PacketHandler;
@@ -72,8 +74,20 @@ public class mod_EE3 extends NetworkMod {
 		// Add in the custom Item rarity types
 		this.proxy.addCustomEnumRarityTypes();
 		
+		// Pre-load Textures
+		this.proxy.preloadTextures();
+		
+		// Initialise the render models
+		RenderIds.init();
+		
+		// Initialise the mod blocks
+		ModBlocks.init();
+		
 		// Initialise the mod items
 		ModItems.init();
+		
+		// Init TextureFX
+		this.proxy.initTextureFX();
 		
 		// Initialise the Philosopher Stone recipes
 		RecipesPhilStone.initRecipes();
