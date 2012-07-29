@@ -1,8 +1,16 @@
 package ee3.core;
 
+import java.util.ArrayList;
+
+import ee3.block.ModBlocks;
+import ee3.core.helper.Helper;
+import ee3.lib.Reference;
+
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 import net.minecraft.src.forge.adaptors.EntityLivingHandlerAdaptor;
 
 /**
@@ -22,4 +30,15 @@ public class EntityLivingHandler extends EntityLivingHandlerAdaptor {
 		}
         return false;
     }
+	
+	@Override
+	public boolean onEntityLivingUpdate(EntityLiving entity) {
+		if (Helper.handleRedWaterMovement(entity)) {
+			entity.addPotionEffect(new PotionEffect(Potion.weakness.id, Reference.BLOCK_RED_WATER_EFFECT_DURATION * 20, 0));
+			entity.addPotionEffect(new PotionEffect(Potion.poison.id, Reference.BLOCK_RED_WATER_EFFECT_DURATION * 20, 0));
+			entity.addPotionEffect(new PotionEffect(Potion.blindness.id, Reference.BLOCK_RED_WATER_EFFECT_DURATION * 20, 0));
+		}
+		return false;
+	}
+	
 }

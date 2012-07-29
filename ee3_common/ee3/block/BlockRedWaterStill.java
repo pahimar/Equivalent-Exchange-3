@@ -29,4 +29,9 @@ public class BlockRedWaterStill extends BlockStationary {
 		return Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET;
 	}
 	
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+		
+	}
+	
 }

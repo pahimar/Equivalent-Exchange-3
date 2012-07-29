@@ -20,7 +20,7 @@ public class ModBlocks {
 	public static void init() {
 
 		redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL, Material.water);
-		redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL + 1, Material.water);
+		redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1, Material.water);
 		
 		ModLoader.addName(redWaterStill, "Red Water (Still)");
 		ModLoader.addName(redWaterFlowing, "Red Water (Flowing)");

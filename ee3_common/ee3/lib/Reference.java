@@ -31,4 +31,6 @@ public class Reference {
 	public static final String ITEM_NAME_MINIUM_SHARD = "item.name.minium_shard";
 	public static final String ITEM_NAME_MINIUM_STONE = "item.name.minium_stone";
 	public static final String ITEM_NAME_PHILOSOPHERS_STONE = "item.name.philosophers_stone";
+	
+	public static final int BLOCK_RED_WATER_EFFECT_DURATION = 30;
 }

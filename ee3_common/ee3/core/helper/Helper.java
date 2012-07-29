@@ -7,13 +7,18 @@ import ee3.addons.BuildCraftAddon;
 import ee3.addons.ForestryAddon;
 import ee3.addons.IndustrialCraftAddon;
 import ee3.addons.RedPowerAddon;
+import ee3.block.ModBlocks;
 import ee3.lib.Reference;
 
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BaseMod;
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.World;
 
 /**
  * TODO Class Description 
@@ -78,5 +83,29 @@ public class Helper {
 			ModLoader.getLogger().finer(getLogMessage("No addons for loaded mods found"));
 	}
 	
+	public static boolean handleRedWaterMovement(EntityLiving entity) {
+        return (isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterFlowing) || isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterStill));
+    }
 	
+	public static boolean isBlockInBB(World world, AxisAlignedBB par1AxisAlignedBB, Block block) {
+        int var3 = MathHelper.floor_double(par1AxisAlignedBB.minX);
+        int var4 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
+        int var5 = MathHelper.floor_double(par1AxisAlignedBB.minY);
+        int var6 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
+        int var7 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
+        int var8 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
+
+        for (int var9 = var3; var9 < var4; ++var9) {
+            for (int var10 = var5; var10 < var6; ++var10) {
+                for (int var11 = var7; var11 < var8; ++var11) {
+                    Block var12 = Block.blocksList[world.getBlockId(var9, var10, var11)];
+                    if (var12 != null && var12.blockID == block.blockID) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }
