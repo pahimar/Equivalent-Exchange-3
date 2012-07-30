@@ -13,6 +13,7 @@ import ee3.lib.Reference;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BaseMod;
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -85,6 +86,14 @@ public class Helper {
 	
 	public static boolean handleRedWaterMovement(EntityLiving entity) {
         return (isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterFlowing) || isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterStill));
+    }
+	
+	public static boolean handleWaterMovement(EntityItem entity) {
+		boolean isInWater = isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), Block.waterStill);
+        if(isInWater){
+        	entity.worldObj.setBlock((int)entity.posX - 1, (int)entity.posY, (int)entity.posZ, ModBlocks.redWaterFlowing.blockID);
+        }
+		return isInWater;
     }
 	
 	public static boolean isBlockInBB(World world, AxisAlignedBB par1AxisAlignedBB, Block block) {
