@@ -4,7 +4,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.World;
 import net.minecraft.src.WorldServer;
 import net.minecraft.src.forge.DimensionManager;
 import ee3.core.helper.Helper;
