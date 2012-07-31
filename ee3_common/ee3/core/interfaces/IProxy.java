@@ -55,4 +55,6 @@ public interface IProxy {
 	
 	public abstract boolean isPortableCraftingGUIOpen();
 
+	void HandleMinumShards();
+
 }
