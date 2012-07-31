@@ -5,15 +5,15 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
+import net.minecraft.src.WorldServer;
 import net.minecraft.src.forge.DimensionManager;
 import ee3.core.helper.Helper;
 import ee3.item.ModItems;
 
 public class MinumInWaterHandler {
-	private static MinecraftServer mc = ModLoader.getMinecraftServerInstance();
 	public static void HandleItems(){
 		for (Integer id : DimensionManager.getIDs()){
-			World theWorld = DimensionManager.getWorld(id);
+			WorldServer theWorld = (WorldServer)DimensionManager.getWorld(id);
 			if(theWorld != null){
 				for(int i = 0; i < theWorld.loadedEntityList.size(); i++) {
 					Entity entity = (Entity)theWorld.loadedEntityList.get(i);
