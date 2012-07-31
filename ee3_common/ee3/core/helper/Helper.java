@@ -91,7 +91,7 @@ public class Helper {
 	public static boolean handleWaterMovement(EntityItem entity) {
 		boolean isInWater = isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), Block.waterStill);
         if(isInWater){
-        	entity.worldObj.setBlock((int)entity.posX - 1, (int)entity.posY, (int)entity.posZ, ModBlocks.redWaterFlowing.blockID);
+        	entity.worldObj.setBlock((int)entity.posX, (int)entity.posY, (int)entity.posZ, ModBlocks.redWaterFlowing.blockID);
         }
 		return isInWater;
     }
