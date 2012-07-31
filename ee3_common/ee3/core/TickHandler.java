@@ -12,6 +12,7 @@ import net.minecraft.src.ModLoader;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import ee3.mod_EE3;
 import ee3.addons.*;
 import ee3.core.helper.Helper;
 import ee3.item.ModItems;
@@ -24,8 +25,9 @@ import ee3.lib.Reference;
  *
  */
 public class TickHandler implements ITickHandler {
-	private Method HandleItems;
+	
 	private static boolean addonsInitialized = false;
+	
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) { 
 		for (TickType tickType : type) {
@@ -36,24 +38,10 @@ public class TickHandler implements ITickHandler {
 					addonsInitialized = true;
 					Helper.initAddons();
 				}
-				//Get the minum in water handler
-				try {
-					HandleItems = Class.forName("ee3.client.core.MinumInWaterHandler").getDeclaredMethod("HandleItems");
-				} catch (Exception e) {
-					try{
-						HandleItems = Class.forName("ee3.server.core.MinumInWaterHandler").getDeclaredMethod("HandleItems");
-					} catch (Exception f) {
-						f.printStackTrace();
-					}
-				}
 			}
 			//Handle Minum Shards that are in water
 			if(tickType == TickType.GAME){
-				try {
-					HandleItems.invoke(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				mod_EE3.proxy.HandleMinumShards();
 			}
 		}
 	}
