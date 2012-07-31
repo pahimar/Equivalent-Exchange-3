@@ -101,5 +101,9 @@ public class EEProxy implements IProxy {
 
 	@Override
 	public void initTextureFX() { }
-
+	
+	@Override
+	public void HandleMinumShards(){
+		ee3.server.core.MinumInWaterHandler.HandleItems();
+	}
 }

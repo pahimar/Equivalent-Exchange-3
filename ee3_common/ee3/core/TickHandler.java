@@ -2,12 +2,9 @@ package ee3.core;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.ModLoader;
-
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import ee3.addons.*;
+import ee3.mod_EE3;
 import ee3.core.helper.Helper;
 import ee3.lib.Reference;
 
@@ -18,7 +15,7 @@ import ee3.lib.Reference;
  *
  */
 public class TickHandler implements ITickHandler {
-
+	
 	private static boolean addonsInitialized = false;
 	
 	@Override
@@ -31,6 +28,10 @@ public class TickHandler implements ITickHandler {
 					addonsInitialized = true;
 					Helper.initAddons();
 				}
+			}
+			//Handle Minum Shards that are in water
+			if(tickType == TickType.GAME){
+				mod_EE3.proxy.HandleMinumShards();
 			}
 		}
 	}
