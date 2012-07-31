@@ -23,7 +23,6 @@ public class MinumInWaterHandler {
 							//If the helper has replaced the water with red water
 							if(Helper.handleWaterMovement((EntityItem)entity)){
 								//Destroy the minum shard
-								System.out.println(entity.worldObj == theWorld);
 								entity.setDead();
 							}
 						}
