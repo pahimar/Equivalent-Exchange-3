@@ -7,6 +7,7 @@ import cpw.mods.fml.common.ReflectionHelper;
 
 import ee3.mod_EE3;
 import ee3.client.core.KeyBindingHandler;
+import ee3.client.core.MinumInWaterHandler;
 import ee3.client.core.SoundHandler;
 import ee3.client.core.TextureRedWaterFX;
 import ee3.client.core.TextureRedWaterFlowFX;
@@ -132,6 +133,11 @@ public class EEProxy implements IProxy {
 	public void initTextureFX() {
 		ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(new TextureRedWaterFX());
 		ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
+	}
+
+	@Override
+	public void HandleMinumShards() {
+		MinumInWaterHandler.HandleItems();
 	}
 	
 }
