@@ -1,21 +1,11 @@
 package ee3.core;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.EnumSet;
-import java.util.logging.Logger;
-
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.ModLoader;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import ee3.mod_EE3;
-import ee3.addons.*;
 import ee3.core.helper.Helper;
-import ee3.item.ModItems;
 import ee3.lib.Reference;
 
 /**
