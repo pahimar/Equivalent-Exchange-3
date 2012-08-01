@@ -2,7 +2,6 @@ package ee3.block;
 
 import ee3.core.helper.LocalizationHelper;
 import ee3.lib.Reference;
-import ee3.lib.RenderIds;
 import net.minecraft.src.BlockStationary;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -27,11 +26,6 @@ public class BlockRedWaterStill extends BlockStationary {
 	@Override
 	public String getTextureFile() {
 		return Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET;
-	}
-	
-	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-		
 	}
 	
 }

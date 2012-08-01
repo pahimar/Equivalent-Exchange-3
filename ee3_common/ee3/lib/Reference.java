@@ -25,6 +25,8 @@ public class Reference {
 	public static final String SOUND_PREFIX = "ee3.sound.";
 	public static final String LANG_RESOURCE_LOCATION = "/ee3/lang/";
 	
+	public static final int SECOND_IN_TICKS = 20;
+	
 	public static final int MINIUM_STONE_DURABILITY = 1531;
 	public static final int MINIUM_STONE_TRANSMUTE_COST = 4;
 	
@@ -32,5 +34,8 @@ public class Reference {
 	public static final String ITEM_NAME_MINIUM_STONE = "item.name.minium_stone";
 	public static final String ITEM_NAME_PHILOSOPHERS_STONE = "item.name.philosophers_stone";
 	
-	public static final int BLOCK_RED_WATER_EFFECT_DURATION = 30;
+	public static final int BLOCK_RED_WATER_EFFECT_DURATION_BASE = 5;
+	public static final int BLOCK_RED_WATER_EFFECT_DURATION_MODIFIER = 1;
+	public static final int BLOCK_RED_WATER_RANGE_BASE = 1;
+	public static final int BLOCK_RED_WATER_RANGE_MODIFIER = 1;
 }

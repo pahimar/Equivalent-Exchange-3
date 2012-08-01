@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import static ee3.lib.ItemIds.*;
+import static ee3.lib.BlockIds.*;
 import ee3.mod_EE3;
 import ee3.lib.Reference;
 
@@ -38,6 +39,7 @@ public class ConfigurationManager {
             config.load();
         }
         catch(Exception e) {
+        	e.printStackTrace();
         	config = null;
         }
         
@@ -53,11 +55,8 @@ public class ConfigurationManager {
         	ENABLE_PARTICLES = prop.getBoolean(false);
         	
         	/* Block Ids */
-        	prop = config.getOrCreateBlockIdProperty("stone", 175);
-	    	prop = config.getOrCreateBlockIdProperty("pedestal", 176);
-	    	prop = config.getOrCreateBlockIdProperty("chest", 177);
-	    	prop = config.getOrCreateBlockIdProperty("torch", 178);
-	    	prop = config.getOrCreateBlockIdProperty("device", 179);
+	    	prop = config.getOrCreateBlockIdProperty("redWater", 176);
+	    	RED_WATER_STILL = prop.getInt();
 	    	
 	    	/* Item Ids */	
 	    	prop = config.getOrCreateIntProperty("miniumShard", CATEGORY_ITEM, 27269);
@@ -72,15 +71,15 @@ public class ConfigurationManager {
 	    	EYE_OF_THE_VOID = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("idolOfGaia", CATEGORY_ITEM, 27274);
 	    	IDOL_OF_GAIA = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("luminator", CATEGORY_ITEM, 27275);
-	    	LUMINATOR = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("pahisTempest", CATEGORY_ITEM, 27276);
-	    	PAHIS_TEMPEST = prop.getInt();
+	    	prop = config.getOrCreateIntProperty("umbralDisplacer", CATEGORY_ITEM, 27275);
+	    	UMBRAL_DISPLACER = prop.getInt();
+	    	prop = config.getOrCreateIntProperty("wikidsTempest", CATEGORY_ITEM, 27276);
+	    	WIKIDS_TEMPEST = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("hornOfEverflowing", CATEGORY_ITEM, 27277);
 	    	HORN_OF_EVERFLOWING = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("timelordsPocketWatch", CATEGORY_ITEM, 27278);
 	    	TIMELORDS_POCKET_WATCH = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("caclinedAsh", CATEGORY_ITEM, 27279);
+	    	prop = config.getOrCreateIntProperty("calcinedAsh", CATEGORY_ITEM, 27279);
 	    	CALCINED_ASH = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("alchemicalCoal", CATEGORY_ITEM, 27280);
 	    	ALCHEMICAL_COAL = prop.getInt();
@@ -102,23 +101,23 @@ public class ConfigurationManager {
 	    	WOLF_BOOTS = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("darkMatter", CATEGORY_ITEM, 27289);
 	    	DARK_MATTER = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Pickaxe", CATEGORY_ITEM, 27290);
+	    	prop = config.getOrCreateIntProperty("dmPickaxe", CATEGORY_ITEM, 27290);
 	    	DARK_MATTER_PICKAXE = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Shovel", CATEGORY_ITEM, 27291);
+	    	prop = config.getOrCreateIntProperty("dmShovel", CATEGORY_ITEM, 27291);
 	    	DARK_MATTER_SHOVEL = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Hoe", CATEGORY_ITEM, 27292);
+	    	prop = config.getOrCreateIntProperty("dmHoe", CATEGORY_ITEM, 27292);
 	    	DARK_MATTER_HOE = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Shears", CATEGORY_ITEM, 27292);
+	    	prop = config.getOrCreateIntProperty("dmShears", CATEGORY_ITEM, 27292);
 	    	DARK_MATTER_SHEARS = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Hammer", CATEGORY_ITEM, 27293);
+	    	prop = config.getOrCreateIntProperty("dmHammer", CATEGORY_ITEM, 27293);
 	    	DARK_MATTER_HAMMER = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Sword", CATEGORY_ITEM, 27294);
+	    	prop = config.getOrCreateIntProperty("dmSword", CATEGORY_ITEM, 27294);
 	    	DARK_MATTER_SWORD = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Bow", CATEGORY_ITEM, 27295);
+	    	prop = config.getOrCreateIntProperty("dmBow", CATEGORY_ITEM, 27295);
 	    	DARK_MATTER_BOW = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_FishingRod", CATEGORY_ITEM, 27296);
+	    	prop = config.getOrCreateIntProperty("dmFishingRod", CATEGORY_ITEM, 27296);
 	    	DARK_MATTER_FISHING_ROD = prop.getInt();
-	    	prop = config.getOrCreateIntProperty("dm_Armor", CATEGORY_ITEM, 27297);
+	    	prop = config.getOrCreateIntProperty("dmArmor", CATEGORY_ITEM, 27297);
 	    	DARK_MATTER_ARMOR = prop.getInt();
 	    	prop = config.getOrCreateIntProperty("wardOfXeno", CATEGORY_ITEM, 27297);
 	    	WARD_OF_XENOPHOBIA = prop.getInt();

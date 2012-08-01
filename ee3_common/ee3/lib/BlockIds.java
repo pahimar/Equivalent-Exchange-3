@@ -8,7 +8,6 @@ package ee3.lib;
  */
 public class BlockIds {
 	
-	public static int RED_WATER_FLOWING = 250;
-	public static int RED_WATER_STILL = 251;
+	public static int RED_WATER_STILL;
 
 }

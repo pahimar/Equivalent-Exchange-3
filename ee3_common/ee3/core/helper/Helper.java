@@ -83,29 +83,29 @@ public class Helper {
 			ModLoader.getLogger().finer(getLogMessage("No addons for loaded mods found"));
 	}
 	
-	public static boolean handleRedWaterMovement(EntityLiving entity) {
-        return (isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterFlowing) || isBlockInBB(entity.worldObj, entity.boundingBox.expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D), ModBlocks.redWaterStill));
+	public static boolean handleRedWaterDetection(EntityLiving entity) {
+        return (isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterFlowing) 
+        		|| isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterStill));
     }
 	
 	public static boolean isBlockInBB(World world, AxisAlignedBB par1AxisAlignedBB, Block block) {
-        int var3 = MathHelper.floor_double(par1AxisAlignedBB.minX);
-        int var4 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
-        int var5 = MathHelper.floor_double(par1AxisAlignedBB.minY);
-        int var6 = MathHelper.floor_double(par1AxisAlignedBB.maxY + 1.0D);
-        int var7 = MathHelper.floor_double(par1AxisAlignedBB.minZ);
-        int var8 = MathHelper.floor_double(par1AxisAlignedBB.maxZ + 1.0D);
-
-        for (int var9 = var3; var9 < var4; ++var9) {
-            for (int var10 = var5; var10 < var6; ++var10) {
-                for (int var11 = var7; var11 < var8; ++var11) {
-                    Block var12 = Block.blocksList[world.getBlockId(var9, var10, var11)];
-                    if (var12 != null && var12.blockID == block.blockID) {
-                        return true;
+        int minX = MathHelper.floor_double(par1AxisAlignedBB.minX - Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        int maxX = MathHelper.floor_double(par1AxisAlignedBB.maxX + Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        int minY = MathHelper.floor_double(par1AxisAlignedBB.minY - Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        int maxY = MathHelper.floor_double(par1AxisAlignedBB.maxY + Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        int minZ = MathHelper.floor_double(par1AxisAlignedBB.minZ - Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        int maxZ = MathHelper.floor_double(par1AxisAlignedBB.maxZ + Reference.BLOCK_RED_WATER_RANGE_BASE * Reference.BLOCK_RED_WATER_RANGE_MODIFIER * 1.0D);
+        
+        for (int i = minX; i < maxX; ++i) {
+            for (int j = minY; j < maxY; ++j) {
+                for (int k = minZ; k < maxZ; ++k) {
+                    Block currentBlock = Block.blocksList[world.getBlockId(i, j, k)];
+                    if (currentBlock != null && currentBlock.blockID == block.blockID) {
+                    	return true;
                     }
                 }
             }
         }
-
         return false;
     }
 }

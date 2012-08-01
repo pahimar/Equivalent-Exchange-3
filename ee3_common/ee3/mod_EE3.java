@@ -13,7 +13,6 @@ import ee3.gui.GuiHandler;
 import ee3.item.ModItems;
 import ee3.lib.ItemIds;
 import ee3.lib.Reference;
-import ee3.lib.RenderIds;
 import ee3.lib.Sounds;
 import ee3.lib.Version;
 import ee3.network.PacketHandler;
@@ -76,9 +75,6 @@ public class mod_EE3 extends NetworkMod {
 		
 		// Pre-load Textures
 		this.proxy.preloadTextures();
-		
-		// Initialise the render models
-		RenderIds.init();
 		
 		// Initialise the mod blocks
 		ModBlocks.init();
