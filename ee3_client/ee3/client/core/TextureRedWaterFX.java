@@ -1,7 +1,10 @@
 package ee3.client.core;
 
+import net.minecraft.src.RenderEngine;
+import net.minecraft.src.forge.MinecraftForgeClient;
 import cpw.mods.fml.client.FMLTextureFX;
 import ee3.block.ModBlocks;
+import ee3.lib.Reference;
 
 /**
  * TODO Class Description 
@@ -32,6 +35,11 @@ public class TextureRedWaterFX extends FMLTextureFX {
         alpha = new float[tileSizeSquare];
         tickCounter = 0;
     }
+	
+	@Override
+	public void bindImage(RenderEngine renderengine) {
+		MinecraftForgeClient.bindTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
+	}
 	
 	public void onTick() {
         ++this.tickCounter;
@@ -102,9 +110,9 @@ public class TextureRedWaterFX extends FMLTextureFX {
             }
 
             this.imageData[var2 * 4 + 0] = (byte)var5;
-            this.imageData[var2 * 4 + 1] = (byte)var6;
-            this.imageData[var2 * 4 + 2] = (byte)var7;
-            this.imageData[var2 * 4 + 3] = (byte)var8;
+            this.imageData[var2 * 4 + 1] = (byte)0;
+            this.imageData[var2 * 4 + 2] = (byte)0;
+            this.imageData[var2 * 4 + 3] = (byte)192;
         }
     }
 }
