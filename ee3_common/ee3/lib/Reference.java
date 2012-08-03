@@ -27,6 +27,8 @@ public class Reference {
 	
 	public static final int SECOND_IN_TICKS = 20;
 	
+	public static final String hexRedWaterCorruptionOverlayColor = "A5162E";
+	
 	public static final int MINIUM_STONE_DURABILITY = 1531;
 	public static final int MINIUM_STONE_TRANSMUTE_COST = 4;
 	

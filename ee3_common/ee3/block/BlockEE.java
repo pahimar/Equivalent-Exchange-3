@@ -16,10 +16,15 @@ public class BlockEE extends BlockContainer {
 	protected BlockEE(int i) {
 		super(i, Material.rock);
 	}
-
+	
 	@Override
 	public TileEntity getBlockEntity() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String getBlockName() {
+		return "Test";
 	}
 }

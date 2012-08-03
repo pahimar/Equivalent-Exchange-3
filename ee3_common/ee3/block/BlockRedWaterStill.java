@@ -1,5 +1,7 @@
 package ee3.block;
 
+import java.util.ArrayList;
+
 import ee3.core.helper.LocalizationHelper;
 import ee3.lib.Reference;
 import net.minecraft.src.BlockStationary;
@@ -19,13 +21,12 @@ public class BlockRedWaterStill extends BlockStationary {
 	}
 	
 	@Override
-	public String getBlockName() {
-		return LocalizationHelper.instance.get("tile.redWaterStill");
-	}
-	
-	@Override
 	public String getTextureFile() {
 		return Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET;
 	}
 	
+	@Override
+	public void addCreativeItems(ArrayList itemList) {
+		itemList.add(new ItemStack(this));
+    }
 }

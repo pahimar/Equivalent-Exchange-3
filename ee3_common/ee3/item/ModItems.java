@@ -3,6 +3,7 @@ package ee3.item;
 import ee3.lib.ItemIds;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
+import net.minecraft.src.ItemSapling;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 
@@ -27,5 +28,7 @@ public class ModItems {
 		
 		ModLoader.addShapelessRecipe(new ItemStack(miniumStone), Block.dirt);
 		ModLoader.addShapelessRecipe(new ItemStack(philStone), Block.dirt, Block.dirt);
+		
+		
 	}
 }
