@@ -1,19 +1,17 @@
 package ee3.common;
 
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import ee3.client.core.KeyBindingHandler;
-import ee3.common.core.ConfigurationManager;
+import ee3.common.core.CommonProxy;
+import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.lib.Reference;
 import ee3.common.network.PacketHandler;
 
@@ -24,20 +22,20 @@ public class EquivalentExchange3 {
 	@Instance
 	public static EquivalentExchange3 instance;
 	
+	@SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.core.common.CommonProxy")
+	public static CommonProxy proxy;
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		
 		// Initialize the configuration
-		ConfigurationManager.init(event.getSuggestedConfigurationFile());
+		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 		
 	}
 	
 	@Init
 	public void load(FMLInitializationEvent event) {
-		
-		// Initialize the KeyBinding handler
-		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
-		
+		proxy.registerKeyBindingHandler();
 	}
 	
 	@PostInit

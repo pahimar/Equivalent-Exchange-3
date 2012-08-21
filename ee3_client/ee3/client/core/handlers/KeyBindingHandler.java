@@ -1,4 +1,4 @@
-package ee3.client.core;
+package ee3.client.core.handlers;
 
 import java.util.EnumSet;
 
@@ -9,15 +9,12 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.asm.SideOnly;
+import ee3.client.lib.KeyBindings;
 
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
-
-	private static KeyBinding extra = new KeyBinding("ee3.mod.key.extra", Keyboard.KEY_C);
-	private static KeyBinding[] keyBindings = {extra};
-	private static boolean[] repeatings = {false};
 	
 	public KeyBindingHandler() {
-		super(keyBindings, repeatings);
+		super(KeyBindings.gatherKeyBindings(), KeyBindings.gatherIsRepeating());
 	}
 
 	@Override

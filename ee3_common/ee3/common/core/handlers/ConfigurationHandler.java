@@ -1,15 +1,12 @@
-package ee3.common.core;
+package ee3.common.core.handlers;
 
 import java.io.File;
 import java.util.logging.Level;
-
-import org.lwjgl.input.Keyboard;
-
-import net.minecraftforge.common.Configuration;
-
 import cpw.mods.fml.common.FMLLog;
-
+import ee3.common.EquivalentExchange3;
+import net.minecraftforge.common.Configuration;
 import static net.minecraftforge.common.Configuration.*;
+import static ee3.common.lib.Reference.*;
 
 /**
 * TODO Class Description
@@ -17,7 +14,7 @@ import static net.minecraftforge.common.Configuration.*;
 * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
 *
 */
-public class ConfigurationManager {
+public class ConfigurationHandler {
 	
 	private static final String CATEGORY_KEYBIND = "keybinds";
 	
@@ -31,6 +28,8 @@ public class ConfigurationManager {
 		try {
 			configuration.load();
 			
+			// TODO: Clean up property names
+			
 			/* General Configs */
 			ENABLE_SOUNDS = configuration.getOrCreateBooleanProperty("enable_sounds", CATEGORY_GENERAL, true).getBoolean(false);
 			ENABLE_PARTICLES = configuration.getOrCreateBooleanProperty("enable_particles", CATEGORY_GENERAL, true).getBoolean(false);
@@ -40,13 +39,14 @@ public class ConfigurationManager {
 			
 			/* Item Configs */
 			
-			/* Keybinding Configs */
-			configuration.getOrCreateIntProperty("extra", CATEGORY_KEYBIND, Keyboard.KEY_C);
-			configuration.getOrCreateIntProperty("charge", CATEGORY_KEYBIND, Keyboard.KEY_V);
-			configuration.getOrCreateIntProperty("toggle", CATEGORY_KEYBIND, Keyboard.KEY_G);
-			configuration.getOrCreateIntProperty("release", CATEGORY_KEYBIND, Keyboard.KEY_R);
+			/* KeyBinding Configs */
+			EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_EXTRA_NAME, configuration.getOrCreateIntProperty(KEYBINDING_EXTRA_NAME, CATEGORY_KEYBIND, KEYBINDING_EXTRA_DEFAULT).getInt(KEYBINDING_EXTRA_DEFAULT));
+			EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_CHARGE_NAME, configuration.getOrCreateIntProperty(KEYBINDING_CHARGE_NAME, CATEGORY_KEYBIND, KEYBINDING_CHARGE_DEFAULT).getInt(KEYBINDING_CHARGE_DEFAULT));
+			EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_TOGGLE_NAME, configuration.getOrCreateIntProperty(KEYBINDING_TOGGLE_NAME, CATEGORY_KEYBIND, KEYBINDING_TOGGLE_DEFAULT).getInt(KEYBINDING_TOGGLE_DEFAULT));
+			EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_RELEASE_NAME, configuration.getOrCreateIntProperty(KEYBINDING_RELEASE_NAME, CATEGORY_KEYBIND, KEYBINDING_RELEASE_DEFAULT).getInt(KEYBINDING_RELEASE_DEFAULT));
 		}
 		catch (Exception e) {
+			// TODO: Clean up the logging message 
 			FMLLog.log(Level.SEVERE, e, "Equivalent Exchange 3 has had a problem loading its configuration");
 		}
 		finally {
