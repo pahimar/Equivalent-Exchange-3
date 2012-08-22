@@ -27,8 +27,6 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 		if (tickEnd) {
 			System.out.println(types.toString());
 			System.out.println(kb.keyDescription);
-			System.out.println(tickEnd);
-			System.out.println(isRepeat);
 		}
 		
 	}
