@@ -30,18 +30,22 @@ public class EquivalentExchange3 {
 		
 		// Initialize the configuration
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-
+		
 		// Register the KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
 
 		// Register the Sound Handler (Client only)
 		proxy.registerSoundHandler();
-
+		
 	}
 	
 	@Init
 	public void load(FMLInitializationEvent event) { }
 	
 	@PostInit
-	public void modsLoaded(FMLPostInitializationEvent event) { }
+	public void modsLoaded(FMLPostInitializationEvent event) { 
+
+		// Initialize the Addon Handler
+		
+	}
 }

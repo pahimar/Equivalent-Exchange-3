@@ -10,6 +10,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.asm.SideOnly;
 import ee3.client.lib.KeyBindings;
+import ee3.common.lib.Reference;
 
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 	
@@ -19,13 +20,12 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
 	@Override
 	public String getLabel() {
-		return "";
+		return Reference.MOD_NAME + " KeyBindingHandler";
 	}
 
 	@Override
 	public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
 		if (tickEnd) {
-			System.out.println(types.toString());
 			System.out.println(kb.keyDescription);
 		}
 		
