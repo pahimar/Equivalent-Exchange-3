@@ -11,10 +11,20 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import ee3.common.core.CommonProxy;
+import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.lib.Reference;
 import ee3.common.network.PacketHandler;
 
+/**
+* EquivalentExchange3
+* 
+* Main mod class for the Minecraft mod Equivalent Exchange 3
+* 
+* @author pahimar
+* @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+*
+*/
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
@@ -22,7 +32,7 @@ public class EquivalentExchange3 {
 	@Instance
 	public static EquivalentExchange3 instance;
 	
-	@SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.core.common.CommonProxy")
+	@SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@PreInit
@@ -46,6 +56,7 @@ public class EquivalentExchange3 {
 	public void modsLoaded(FMLPostInitializationEvent event) { 
 
 		// Initialize the Addon Handler
+		AddonHandler.init();
 		
 	}
 }

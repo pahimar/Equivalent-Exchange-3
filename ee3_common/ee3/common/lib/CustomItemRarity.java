@@ -1,7 +1,10 @@
 package ee3.common.lib;
 
 /**
-* TODO Class Description
+* CustomItemRarity
+* 
+* Library containing references to custom colour codes for item rarity
+* 
 * @author pahimar
 * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
 *

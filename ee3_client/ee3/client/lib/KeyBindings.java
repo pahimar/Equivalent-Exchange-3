@@ -1,9 +1,17 @@
 package ee3.client.lib;
 
 import java.util.ArrayList;
-
 import net.minecraft.src.KeyBinding;
 
+/**
+* KeyBindings
+* 
+* Client specific library for a general collection of mod related KeyBindings
+* 
+* @author pahimar
+* @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+*
+*/
 public class KeyBindings {
 
 	public static ArrayList<KeyBinding> keyBindingsList;

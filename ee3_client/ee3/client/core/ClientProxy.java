@@ -1,7 +1,5 @@
 package ee3.client.core;
 
-import net.minecraft.src.KeyBinding;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import ee3.client.core.handlers.KeyBindingHandler;
@@ -9,6 +7,15 @@ import ee3.client.core.handlers.SoundHandler;
 import ee3.client.lib.KeyBindings;
 import ee3.common.core.CommonProxy;
 
+/**
+* ClientProxy
+* 
+* Client specific functionality that cannot be put into CommonProxy
+* 
+* @author pahimar
+* @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+*
+*/
 public class ClientProxy extends CommonProxy {
 
 	@Override

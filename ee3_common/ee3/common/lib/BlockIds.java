@@ -1,7 +1,10 @@
 package ee3.common.lib;
 
 /**
-* TODO Class Description
+* BlockIds
+* 
+* Library containing the default values for mod related Block ids
+* 
 * @author pahimar
 * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
 *
