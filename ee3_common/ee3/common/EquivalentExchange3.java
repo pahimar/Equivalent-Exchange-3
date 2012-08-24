@@ -1,5 +1,6 @@
 package ee3.common;
 
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,6 +14,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import ee3.common.core.CommonProxy;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
+import ee3.common.core.handlers.EntityLivingHandler;
 import ee3.common.lib.Reference;
 import ee3.common.network.PacketHandler;
 
@@ -50,7 +52,12 @@ public class EquivalentExchange3 {
 	}
 	
 	@Init
-	public void load(FMLInitializationEvent event) { }
+	public void load(FMLInitializationEvent event) {
+		
+		// Register the EntityLiving Handler
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		
+	}
 	
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent event) { 
