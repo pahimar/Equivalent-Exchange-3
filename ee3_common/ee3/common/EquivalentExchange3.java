@@ -1,7 +1,6 @@
 package ee3.common;
 
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,66 +24,69 @@ import ee3.common.lib.Reference;
 import ee3.common.network.PacketHandler;
 
 /**
-* EquivalentExchange3
-* 
-* Main mod class for the Minecraft mod Equivalent Exchange 3
-* 
-* @author pahimar
-* @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
-*
-*/
+ * EquivalentExchange3
+ * 
+ * Main mod class for the Minecraft mod Equivalent Exchange 3
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
-	@Instance
-	public static EquivalentExchange3 instance;
-	
-	@SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
-	public static CommonProxy proxy;
-	
-	@PreInit
-	public void preInit(FMLPreInitializationEvent event) {
-		
-		// Initialize the configuration
-		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-		
-		// Register the KeyBinding Handler (Client only)
-		proxy.registerKeyBindingHandler();
+    @Instance
+    public static EquivalentExchange3 instance;
 
-		// Register the Sound Handler (Client only)
-		proxy.registerSoundHandler();
-		
-	}
-	
-	@Init
-	public void load(FMLInitializationEvent event) {
-		
-		// Pre-load textures (Client only)
-		proxy.preloadTextures();
-		
-		// Register the GUI Handler
-		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
-		
-		// Register the Crafting Handler
-		GameRegistry.registerCraftingHandler(new CraftingHandler());
-		
-		// Register the Item Pickup Handler
-		MinecraftForge.EVENT_BUS.register(new ItemPickupHandler());
-		
-		// Register the EntityLiving Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
-		
-		// Initialize mod items
-		ModItems.init();
-		
-	}
-	
-	@PostInit
-	public void modsLoaded(FMLPostInitializationEvent event) { 
+    @SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
+    public static CommonProxy proxy;
 
-		// Initialize the Addon Handler
-		AddonHandler.init();
-		
-	}
+    @PreInit
+    public void preInit(FMLPreInitializationEvent event) {
+
+        // Initialize the configuration
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+
+        // Register the KeyBinding Handler (Client only)
+        proxy.registerKeyBindingHandler();
+
+        // Register the Sound Handler (Client only)
+        proxy.registerSoundHandler();
+
+    }
+
+    @Init
+    public void load(FMLInitializationEvent event) {
+
+        // Pre-load textures (Client only)
+        proxy.preloadTextures();
+        
+        // Initialize the custom item rarity types
+        proxy.initCustomRarityTypes();
+
+        // Register the GUI Handler
+        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+
+        // Register the Crafting Handler
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
+
+        // Register the Item Pickup Handler
+        MinecraftForge.EVENT_BUS.register(new ItemPickupHandler());
+
+        // Register the EntityLiving Handler
+        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+
+        // Initialize mod items
+        ModItems.init();
+
+    }
+
+    @PostInit
+    public void modsLoaded(FMLPostInitializationEvent event) {
+
+        // Initialize the Addon Handler
+        AddonHandler.init();
+
+    }
 }
