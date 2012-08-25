@@ -1,6 +1,7 @@
 package ee3.common;
 
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -11,10 +12,15 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import ee3.common.core.CommonProxy;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
+import ee3.common.core.handlers.CraftingHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
+import ee3.common.core.handlers.ItemPickupHandler;
+import ee3.common.item.ModItems;
 import ee3.common.lib.Reference;
 import ee3.common.network.PacketHandler;
 
@@ -54,8 +60,23 @@ public class EquivalentExchange3 {
 	@Init
 	public void load(FMLInitializationEvent event) {
 		
+		// Pre-load textures (Client only)
+		proxy.preloadTextures();
+		
+		// Register the GUI Handler
+		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+		
+		// Register the Crafting Handler
+		GameRegistry.registerCraftingHandler(new CraftingHandler());
+		
+		// Register the Item Pickup Handler
+		MinecraftForge.EVENT_BUS.register(new ItemPickupHandler());
+		
 		// Register the EntityLiving Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		
+		// Initialize mod items
+		ModItems.init();
 		
 	}
 	

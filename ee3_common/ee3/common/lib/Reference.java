@@ -10,6 +10,9 @@ package ee3.common.lib;
 *
 */
 public class Reference {
+	
+	/* Debug Mode On-Off */
+	public static final boolean DEBUG_MODE = false;
 
 	/* General Mod related constants */
 	public static final String MOD_ID = "EE3";
@@ -27,4 +30,12 @@ public class Reference {
 	public static final int KEYBINDING_TOGGLE_DEFAULT = 34;
 	public static final String KEYBINDING_CHARGE = "mod.ee3.charge_key";
 	public static final int KEYBINDING_CHARGE_DEFAULT = 47;
+	
+	/* Texture related constants */
+	public static final String SPRITE_SHEET_LOCATION = "/ee3/art/sprites/";
+	public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
+	public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
+	public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
+	public static final String ARMOR_SHEET_LOCATION = "/ee3/art/armor/";
+
 }

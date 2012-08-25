@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.logging.Level;
 import cpw.mods.fml.common.FMLLog;
 import ee3.common.EquivalentExchange3;
+import ee3.common.lib.ItemIds;
 import net.minecraftforge.common.Configuration;
 import static net.minecraftforge.common.Configuration.*;
 import static ee3.common.lib.Reference.*;
@@ -41,6 +42,9 @@ public class ConfigurationHandler {
 			AUTO_RESOLVE_IDS = configuration.getOrCreateBooleanProperty("auto_resolve_ids", CATEGORY_BLOCK, false).getBoolean(false);
 			
 			/* Item Configs */
+			ItemIds.MINIUM_SHARD = configuration.getOrCreateIntProperty("miniumShard", CATEGORY_ITEM, 27269).getInt(27269);
+			ItemIds.MINIUM_STONE = configuration.getOrCreateIntProperty("miniumStone", CATEGORY_ITEM, 27270).getInt(27270);
+			ItemIds.PHIL_STONE = configuration.getOrCreateIntProperty("philStone", CATEGORY_ITEM, 27271).getInt(27271);
 			
 			/* KeyBinding Configs */
 			EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_EXTRA, configuration.getOrCreateIntProperty(KEYBINDING_EXTRA, CATEGORY_KEYBIND, KEYBINDING_EXTRA_DEFAULT).getInt(KEYBINDING_EXTRA_DEFAULT));

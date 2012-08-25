@@ -1,11 +1,13 @@
 package ee3.client.core;
 
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import ee3.client.core.handlers.KeyBindingHandler;
 import ee3.client.core.handlers.SoundHandler;
 import ee3.client.lib.KeyBindings;
 import ee3.common.core.CommonProxy;
+import ee3.common.lib.Reference;
 
 /**
 * ClientProxy
@@ -34,4 +36,9 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 	}
 	
+	@Override
+	public void preloadTextures() {
+		MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
+		MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.ITEM_SPRITE_SHEET);
+	}
 }
