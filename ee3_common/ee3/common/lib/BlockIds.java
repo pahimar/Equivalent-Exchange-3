@@ -12,5 +12,6 @@ package ee3.common.lib;
 public class BlockIds {
 
     public static int RED_WATER_STILL;
+    public static int CALCINATOR;
 
 }

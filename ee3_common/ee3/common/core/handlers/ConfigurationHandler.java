@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.logging.Level;
 import cpw.mods.fml.common.FMLLog;
 import ee3.common.EquivalentExchange3;
+import ee3.common.lib.BlockIds;
 import ee3.common.lib.ItemIds;
 import net.minecraftforge.common.Configuration;
 import static net.minecraftforge.common.Configuration.*;
@@ -40,6 +41,7 @@ public class ConfigurationHandler {
 
             /* Block Configs */
             AUTO_RESOLVE_IDS = configuration.getOrCreateBooleanProperty("auto_resolve_ids", CATEGORY_BLOCK, false).getBoolean(false);
+            BlockIds.CALCINATOR =  configuration.getOrCreateIntProperty("block_calcinator", CATEGORY_BLOCK, 600).getInt(600);
 
             /* Item Configs */
             ItemIds.MINIUM_SHARD = configuration.getOrCreateIntProperty("miniumShard", CATEGORY_ITEM, 27269).getInt(27269);

@@ -13,6 +13,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
@@ -59,8 +60,8 @@ public class EquivalentExchange3 {
     @Init
     public void load(FMLInitializationEvent event) {
 
-        // Pre-load textures (Client only)
-        proxy.preloadTextures();
+    	// Initialize custom rendering and pre-load textures (Client only)
+    	proxy.initRenderingAndTextures();
         
         // Initialize the custom item rarity types
         proxy.initCustomRarityTypes();
@@ -77,8 +78,14 @@ public class EquivalentExchange3 {
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
+        // Initialize mod blocks
+        ModBlocks.init();
+        
         // Initialize mod items
         ModItems.init();
+        
+        // Initialize mod tile entities
+        proxy.initTileEntities();
 
     }
 

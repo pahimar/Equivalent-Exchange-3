@@ -4,6 +4,8 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.World;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import ee3.common.tile.TileCalcinator;
 
 /**
  * CommonProxy
@@ -23,12 +25,16 @@ public class CommonProxy implements IGuiHandler {
 
     public void registerSoundHandler() {}
 
-    public void preloadTextures() {}
-
     public void initCustomRarityTypes() {}
 
     public EnumRarity getCustomRarityType(String customRarity) {
         return null;
+    }
+    
+    public void initRenderingAndTextures() {}
+    
+    public void initTileEntities() {
+    	GameRegistry.registerTileEntity(TileCalcinator.class, "tileCalcinator");
     }
 
     @Override
