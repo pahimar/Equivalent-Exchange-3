@@ -2,6 +2,8 @@ package ee3.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import ee3.common.lib.Reference;
+
 import net.minecraft.src.ModelBase;
 import net.minecraft.src.ModelRenderer;
 import net.minecraft.src.Tessellator;
@@ -11,44 +13,71 @@ import net.minecraftforge.client.ForgeHooksClient;
 
 public class RenderCalcinator extends TileEntitySpecialRenderer {
 
+	private ModelBase model = new ModelBase() {};
 	static final float factor = (float) (1.0 / 16.0);
 
-	private final ModelRenderer lowerLeftLeg;
-	private final ModelRenderer upperLeftLeg;
-	private final ModelRenderer lowerRightLeg;
-	private final ModelRenderer upperRightLeg;
+	/* The four support legs of the Calcinator */
+	private final ModelRenderer[] legs = new ModelRenderer[4];
 	
-	private final ModelRenderer supportPlate;
+	/* The four support arms for the fire plateof  the Calcinator */
+	private final ModelRenderer[] supportArms = new ModelRenderer[4];
 	
-	private final ModelRenderer supportArm1;
+	/* The five faces (four sides and the bottom) of the Calcinator bowl */
+	private final ModelRenderer[] bowlParts = new ModelRenderer[5];
 	
-	private ModelBase model = new ModelBase() {};
+	/*  */
+	private final ModelRenderer firePlate;
+	private final ModelRenderer ashLayer;
 	
 	public RenderCalcinator() {
-		upperLeftLeg = new ModelRenderer(model, 0, 0);
-		upperLeftLeg.addBox(-1F, -8F, -1F, 2, 16, 2).setRotationPoint(1, 8, 1);
+		legs[0] = new ModelRenderer(model, 0, 0);
+		legs[0].addBox(-1F, -8F, -1F, 2, 8, 2).setRotationPoint(2, 8, 2);
+		legs[0].rotateAngleY = ((float)Math.PI / 4F);
+		legs[1] = new ModelRenderer(model, 0, 0);
+		legs[1].addBox(-1F, -8F, -1F, 2, 8, 2).setRotationPoint(2, 8, 14);
+		legs[1].rotateAngleY = ((float)Math.PI / 4F);
+		legs[2] = new ModelRenderer(model, 0, 0);
+		legs[2].addBox(-1F, -8F, -1F, 2, 8, 2).setRotationPoint(14, 8, 2);
+		legs[2].rotateAngleY = ((float)Math.PI / 4F);
+		legs[3] = new ModelRenderer(model, 0, 0);
+		legs[3].addBox(-1F, -8F, -1F, 2, 8, 2).setRotationPoint(14, 8, 14);
+		legs[3].rotateAngleY = ((float)Math.PI / 4F);
 		
-		lowerLeftLeg = new ModelRenderer(model, 0, 0);
-		lowerLeftLeg.addBox(-1F, -8F, -1F, 2, 16, 2).setRotationPoint(1, 8, 15);
+		firePlate = new ModelRenderer(model, 0, 0);
+		firePlate.addBox(-3.5F, -1F, -3.5F, 8, 2, 8).setRotationPoint(8, 3, 8);
+		firePlate.rotateAngleY = ((float)Math.PI / 4F);
 		
-		upperRightLeg = new ModelRenderer(model, 0, 0);
-		upperRightLeg.addBox(-1F, -8F, -1F, 2, 16, 2).setRotationPoint(15, 8, 1);
+		supportArms[0] = new ModelRenderer(model, 0, 0);
+		supportArms[0].addBox(-5F, -1F, -1F, 4, 2, 2).setRotationPoint(2, 3, 2);
+		supportArms[0].rotateAngleY = ((float)Math.PI * 3 / 4F);
+		supportArms[1] = new ModelRenderer(model, 0, 0);
+		supportArms[1].addBox(-5F, -1F, -1F, 4, 2, 2).setRotationPoint(14, 3, 2);
+		supportArms[1].rotateAngleY = ((float)Math.PI / 4F);
+		supportArms[2] = new ModelRenderer(model, 0, 0);
+		supportArms[2].addBox(-5F, -1F, -1F, 4, 2, 2).setRotationPoint(14, 3, 14);
+		supportArms[2].rotateAngleY = ((float)Math.PI * 7 / 4F);
+		supportArms[3] = new ModelRenderer(model, 0, 0);
+		supportArms[3].addBox(-5F, -1F, -1F, 4, 2, 2).setRotationPoint(2, 3, 14);
+		supportArms[3].rotateAngleY = ((float)Math.PI * 5 / 4F);
 		
-		lowerRightLeg = new ModelRenderer(model, 0, 0);
-		lowerRightLeg.addBox(-1F, -8F, -1F, 2, 16, 2).setRotationPoint(15, 8, 15);
+		bowlParts[0] = new ModelRenderer(model, 0, 0);
+		bowlParts[0].addBox(-8F, -4F, -1F, 16, 8, 2).setRotationPoint(8, 12, 1);
+		bowlParts[1] = new ModelRenderer(model, 0, 0);
+		bowlParts[1].addBox(-8F, -4F, -1F, 16, 8, 2).setRotationPoint(8, 12, 15);
+		bowlParts[2] = new ModelRenderer(model, 0, 0);
+		bowlParts[2].addBox(-1F, -4F, -6F, 2, 8, 12).setRotationPoint(1, 12, 8);
+		bowlParts[3] = new ModelRenderer(model, 0, 0);
+		bowlParts[3].addBox(-1F, -4F, -6F, 2, 8, 12).setRotationPoint(15, 12, 8);
+		bowlParts[4] = new ModelRenderer(model, 0, 0);
+		bowlParts[4].addBox(-6F, -1F, -6F, 12, 1, 12).setRotationPoint(8, 9, 8);
 		
-		supportPlate = new ModelRenderer(model, 0, 0);
-		supportPlate.addBox(-4F, -1F, -4F, 8, 2, 8).setRotationPoint(8, 8, 8);
-		
-		supportArm1 = new ModelRenderer(model, 0, 0);
-		supportArm1.addBox(-5F, -1F, -1F, 5, 2, 2);
-		supportArm1.setRotationPoint(1, 8, 1);
-		supportArm1.rotateAngleY = ((float)Math.PI * 3F/ 4F);
+		ashLayer = new ModelRenderer(model, 0, 0);
+		ashLayer.addBox(-6F, 0F, -6F, 12, 1, 12).setRotationPoint(8, 9, 8);
 		
 	}
 	
 	@Override
-	public void renderTileEntityAt(TileEntity var1, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
 		render(x, y, z);
 	}
 	
@@ -57,13 +86,23 @@ public class RenderCalcinator extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		GL11.glTranslated(x, y, z);
-		ForgeHooksClient.bindTexture("/hopper.png", 0);
-		lowerLeftLeg.render(factor);
-		upperLeftLeg.render(factor);
-		lowerRightLeg.render(factor);
-		upperRightLeg.render(factor);
-		supportPlate.render(factor);
-		supportArm1.render(factor);
+		ForgeHooksClient.bindTexture(Reference.SPRITE_SHEET_LOCATION + "calcinator.png", 0);
+		
+		firePlate.render(factor);
+		
+		for (ModelRenderer leg : legs) {
+			leg.render(factor);
+		}
+		
+		for (ModelRenderer supportArm : supportArms) {
+			supportArm.render(factor);
+		}
+
+		for (ModelRenderer bowlPart : bowlParts) {
+			bowlPart.render(factor);
+		}
+		
+		ashLayer.render(factor);
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
