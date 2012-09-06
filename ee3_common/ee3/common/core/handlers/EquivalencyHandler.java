@@ -35,6 +35,15 @@ public class EquivalencyHandler {
         }
     }
 
+    public static void addObjectsToEquivalencyLists(Object... objList) {
+        if (objList.length < 2)
+            return;
+
+        for (int i = 0; i < objList.length - 1; i++) {
+            addObjectToEquivalencyList(objList[i], objList[i + 1]);
+        }
+    }
+
     public static Integer getEquivalencyIndexForItem(Object obj) {
         ItemStack checkStack = GeneralHelper.convertObjectToItemStack(obj);
         ArrayList<ItemStack> currentList;
