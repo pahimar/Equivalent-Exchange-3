@@ -62,11 +62,27 @@ public class EquivalencyHandler {
         return null;
     }
 
+    public static ArrayList<ItemStack> getEquivalencyListForItem(Object obj) {
+        ItemStack checkStack = GeneralHelper.convertObjectToItemStack(obj);
+
+        if (checkStack == null)
+            return null;
+
+        for (ArrayList<ItemStack> list : equivalencyList) {
+            for (ItemStack currentStack : list) {
+                if (checkStack.isStackEqual(currentStack)) {
+                    return list;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public static void debug() {
         int i = 0;
         for (ArrayList list : equivalencyList) {
-            System.out
-                    .println("equivalencyList[" + i + "]: " + list.toString());
+            System.out.println("equivalencyList[" + i + "]: " + list.toString());
             ++i;
         }
     }

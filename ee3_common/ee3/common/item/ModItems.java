@@ -15,16 +15,22 @@ import net.minecraft.src.Item;
  * 
  */
 public class ModItems {
+    
+    /* Item name constants */
+    public static final String MINIUM_SHARD_NAME = "miniumShard";
+    public static final String MINIUM_STONE_NAME = "miniumStone";
+    public static final String PHILOSOPHER_STONE_NAME = "philStone";
 
+    /* Mod item instances */
     public static Item miniumShard;
     public static Item miniumStone;
     public static Item philStone;
 
     public static void init() {
         /* Initialize each mod item individually */
-        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD).setIconCoord(0, 0).setItemName("miniumShard").setTabToDisplayOn(CreativeTabs.tabMisc);
-        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(1, 0).setItemName("miniumStone").setTabToDisplayOn(CreativeTabs.tabMisc);
-        philStone = new ItemPhilosopherStone(ItemIds.PHIL_STONE).setIconCoord(2, 0).setItemName("philStone").setTabToDisplayOn(CreativeTabs.tabMisc);
+        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD).setIconCoord(0, 0).setItemName(MINIUM_SHARD_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
+        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(1, 0).setItemName(MINIUM_STONE_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
+        philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE).setIconCoord(2, 0).setItemName(PHILOSOPHER_STONE_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
 
         LanguageRegistry.addName(miniumShard, "Shard of Minium");
         LanguageRegistry.addName(miniumStone, "Minium Stone");

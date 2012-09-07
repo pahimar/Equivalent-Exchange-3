@@ -135,4 +135,5 @@ public class RecipeHelper {
 
         GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), 7, result.getItemDamage()), list);
     }
+    
 }

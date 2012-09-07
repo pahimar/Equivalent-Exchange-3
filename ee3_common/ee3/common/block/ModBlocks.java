@@ -6,12 +6,16 @@ import ee3.common.lib.BlockIds;
 import net.minecraft.src.Block;
 
 public class ModBlocks {
+    
+    /* Block name constants */
+    public static final String CALCINATOR_NAME = "calcinator";
 	
+    /* Mod block instances */
 	public static Block calcinator;
 
 	public static void init() {
 
-		calcinator = new BlockCalcinator(BlockIds.CALCINATOR).setBlockName("calcinator");
+		calcinator = new BlockCalcinator(BlockIds.CALCINATOR).setBlockName(CALCINATOR_NAME);
 		
 		LanguageRegistry.addName(calcinator, "Calcinator");
 		

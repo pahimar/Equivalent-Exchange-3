@@ -4,11 +4,14 @@ import java.io.File;
 import java.util.logging.Level;
 import cpw.mods.fml.common.FMLLog;
 import ee3.common.EquivalentExchange3;
+import ee3.common.block.ModBlocks;
+import ee3.common.item.ModItems;
 import ee3.common.lib.BlockIds;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.ItemIds;
+import ee3.common.lib.Reference;
 import net.minecraftforge.common.Configuration;
 import static net.minecraftforge.common.Configuration.*;
-import static ee3.common.lib.Reference.*;
 
 /**
  * ConfigurationManager
@@ -23,40 +26,35 @@ public class ConfigurationHandler {
 
     private static final String CATEGORY_KEYBIND = "keybinds";
 
-    public static boolean AUTO_RESOLVE_IDS;
-    public static boolean ENABLE_SOUNDS;
-    public static boolean ENABLE_PARTICLES;
-
     public static void init(File configFile) {
         Configuration configuration = new Configuration(configFile);
 
         try {
             configuration.load();
 
-            // TODO: Clean up property names
-
             /* General Configs */
-            ENABLE_SOUNDS = configuration.getOrCreateBooleanProperty("enable_sounds", CATEGORY_GENERAL, true).getBoolean(false);
-            ENABLE_PARTICLES = configuration.getOrCreateBooleanProperty("enable_particles", CATEGORY_GENERAL, true).getBoolean(false);
+            ConfigurationSettings.ENABLE_SOUNDS = configuration.getOrCreateBooleanProperty(Reference.ENABLE_SOUNDS, CATEGORY_GENERAL, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_SOUNDS_DEFAULT);
+            ConfigurationSettings.ENABLE_PARTICLE_FX = configuration.getOrCreateBooleanProperty(Reference.ENABLE_PARTICLE_FX, CATEGORY_GENERAL, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
+            ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST = configuration.getOrCreateIntProperty(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_CONFIGNAME, CATEGORY_GENERAL, ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_DEFAULT);
+            ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = configuration.getOrCreateIntProperty(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, CATEGORY_GENERAL, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);
 
             /* Block Configs */
-            AUTO_RESOLVE_IDS = configuration.getOrCreateBooleanProperty("auto_resolve_ids", CATEGORY_BLOCK, false).getBoolean(false);
-            BlockIds.CALCINATOR =  configuration.getOrCreateIntProperty("block_calcinator", CATEGORY_BLOCK, 600).getInt(600);
+            ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS = configuration.getOrCreateBooleanProperty(Reference.AUTO_RESOLVE_BLOCK_IDS, CATEGORY_BLOCK, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT).getBoolean(ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT);
+            BlockIds.CALCINATOR =  configuration.getOrCreateIntProperty(ModBlocks.CALCINATOR_NAME, CATEGORY_BLOCK, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
 
             /* Item Configs */
-            ItemIds.MINIUM_SHARD = configuration.getOrCreateIntProperty("miniumShard", CATEGORY_ITEM, 27269).getInt(27269);
-            ItemIds.MINIUM_STONE = configuration.getOrCreateIntProperty("miniumStone", CATEGORY_ITEM, 27270).getInt(27270);
-            ItemIds.PHIL_STONE = configuration.getOrCreateIntProperty("philStone", CATEGORY_ITEM, 27271).getInt(27271);
+            ItemIds.MINIUM_SHARD = configuration.getOrCreateIntProperty(ModItems.MINIUM_SHARD_NAME, CATEGORY_ITEM, ItemIds.MINIUM_SHARD_DEFAULT).getInt(ItemIds.MINIUM_SHARD_DEFAULT);
+            ItemIds.MINIUM_STONE = configuration.getOrCreateIntProperty(ModItems.MINIUM_STONE_NAME, CATEGORY_ITEM, ItemIds.MINIUM_STONE_DEFAULT).getInt(ItemIds.MINIUM_STONE_DEFAULT);            
+            ItemIds.PHILOSOPHER_STONE = configuration.getOrCreateIntProperty(ModItems.PHILOSOPHER_STONE_NAME, CATEGORY_ITEM, ItemIds.PHILOSOPHER_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHER_STONE_DEFAULT);
 
             /* KeyBinding Configs */
-            EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_EXTRA, configuration.getOrCreateIntProperty(KEYBINDING_EXTRA, CATEGORY_KEYBIND, KEYBINDING_EXTRA_DEFAULT).getInt(KEYBINDING_EXTRA_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_CHARGE, configuration.getOrCreateIntProperty(KEYBINDING_CHARGE, CATEGORY_KEYBIND, KEYBINDING_CHARGE_DEFAULT).getInt(KEYBINDING_CHARGE_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_TOGGLE, configuration.getOrCreateIntProperty(KEYBINDING_TOGGLE, CATEGORY_KEYBIND, KEYBINDING_TOGGLE_DEFAULT).getInt(KEYBINDING_TOGGLE_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(KEYBINDING_RELEASE, configuration.getOrCreateIntProperty(KEYBINDING_RELEASE, CATEGORY_KEYBIND, KEYBINDING_RELEASE_DEFAULT).getInt(KEYBINDING_RELEASE_DEFAULT));
+            EquivalentExchange3.proxy.setKeyBinding(Reference.KEYBINDING_EXTRA, configuration.getOrCreateIntProperty(Reference.KEYBINDING_EXTRA, CATEGORY_KEYBIND, Reference.KEYBINDING_EXTRA_DEFAULT).getInt(Reference.KEYBINDING_EXTRA_DEFAULT));
+            EquivalentExchange3.proxy.setKeyBinding(Reference.KEYBINDING_CHARGE, configuration.getOrCreateIntProperty(Reference.KEYBINDING_CHARGE, CATEGORY_KEYBIND, Reference.KEYBINDING_CHARGE_DEFAULT).getInt(Reference.KEYBINDING_CHARGE_DEFAULT));
+            EquivalentExchange3.proxy.setKeyBinding(Reference.KEYBINDING_TOGGLE, configuration.getOrCreateIntProperty(Reference.KEYBINDING_TOGGLE, CATEGORY_KEYBIND, Reference.KEYBINDING_TOGGLE_DEFAULT).getInt(Reference.KEYBINDING_TOGGLE_DEFAULT));
+            EquivalentExchange3.proxy.setKeyBinding(Reference.KEYBINDING_RELEASE, configuration.getOrCreateIntProperty(Reference.KEYBINDING_RELEASE, CATEGORY_KEYBIND, Reference.KEYBINDING_RELEASE_DEFAULT).getInt(Reference.KEYBINDING_RELEASE_DEFAULT));
         }
         catch (Exception e) {
-            // TODO: Clean up the logging message
-            FMLLog.log(Level.SEVERE, e, "Equivalent Exchange 3 has had a problem loading its configuration");
+            FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");
         }
         finally {
             configuration.save();

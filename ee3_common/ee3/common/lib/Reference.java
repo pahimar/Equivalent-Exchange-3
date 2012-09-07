@@ -20,6 +20,11 @@ public class Reference {
     public static final String VERSION = "1.0.0.0";
     public static final String CHANNEL_NAME = MOD_ID;
     public static final String LOGGER_PREFIX = "[" + MOD_ID + "] ";
+    
+    /* Configuration related constants */
+    public static final String ENABLE_SOUNDS = "enable_sounds";
+    public static final String ENABLE_PARTICLE_FX = "enable_particle_fx";
+    public static final String AUTO_RESOLVE_BLOCK_IDS = "auto_resolve_block_ids";
 
     /* KeyBinding related constants */
     public static final String KEYBINDING_EXTRA = "mod.ee3.extra_key";

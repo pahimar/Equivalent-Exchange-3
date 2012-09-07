@@ -11,6 +11,10 @@ package ee3.common.lib;
  */
 public class BlockIds {
 
+    /* Default block ids */
+    public static int CALCINATOR_DEFAULT = 600;
+    
+    /* Current block ids */
     public static int RED_WATER_STILL;
     public static int CALCINATOR;
 

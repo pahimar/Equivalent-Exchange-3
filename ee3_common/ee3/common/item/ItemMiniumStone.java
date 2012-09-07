@@ -5,6 +5,7 @@ import net.minecraft.src.ItemStack;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import ee3.common.EquivalentExchange3;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
 
 /**
@@ -17,9 +18,10 @@ import ee3.common.lib.CustomItemRarity;
  * 
  */
 public class ItemMiniumStone extends ItemEE {
-
+    
     public ItemMiniumStone(int id) {
         super(id);
+        setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY);
     }
 
     @SideOnly(Side.CLIENT)

@@ -15,6 +15,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
+import ee3.common.core.RecipesTransmutationStone;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.CraftingHandler;
@@ -86,6 +87,9 @@ public class EquivalentExchange3 {
         
         // Initialize mod tile entities
         proxy.initTileEntities();
+        
+        // Load the Transmutation Stone recipes
+        RecipesTransmutationStone.init();
 
     }
 
