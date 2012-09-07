@@ -26,12 +26,11 @@ public class CraftingHandler implements ICraftingHandler {
             currentItemStack = craftMatrix.getStackInSlot(i);
             if (currentItemStack != null) {
                 if (currentItemStack.itemID == ModItems.miniumStone.shiftedIndex) {
+                    
+                    // Capture the destruction of the Minium Stone when used the final time
                     currentItemStack.damageItem(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST, player);
-                    
-                    System.out.println("Minium Stone Durability: " + currentItemStack.getItemDamage());
-                    System.out.println("Minium Stone Max Durability: " + currentItemStack.getMaxDamage());
-                    
                     currentItemStack.stackSize++;
+                    
                 } else if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
                     currentItemStack.stackSize++;
                 }
