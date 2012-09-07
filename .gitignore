@@ -1,1 +1,4 @@
 build.properties
+/minecraft/*
+/minecraft_server/*
+/common/*
