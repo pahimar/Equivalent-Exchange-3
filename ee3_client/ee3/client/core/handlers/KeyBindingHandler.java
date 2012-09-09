@@ -1,11 +1,18 @@
 package ee3.client.core.handlers;
 
 import java.util.EnumSet;
+
+import net.minecraft.src.EntityClientPlayerMP;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.KeyBinding;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import ee3.client.lib.KeyBindings;
+import ee3.common.EquivalentExchange3;
+import ee3.common.item.ModItems;
+import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
 
 /**
@@ -34,7 +41,17 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
             if (FMLClientHandler.instance().getClient().currentScreen == null) {
-
+                if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
+                    ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
+                    
+                    if (currentItem != null) {
+                        // TODO Works sorta, fix this up proper
+                        if ((currentItem.getItem().shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.getItem().shiftedIndex == ModItems.philStone.shiftedIndex)) {
+                            EntityClientPlayerMP thePlayer = FMLClientHandler.instance().getClient().thePlayer;
+                            thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
+                        }
+                    }
+                }
             }
         }
 
