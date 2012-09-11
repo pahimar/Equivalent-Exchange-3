@@ -39,7 +39,7 @@ public class CommonProxy implements IGuiHandler {
     public void initTileEntities() {
     	GameRegistry.registerTileEntity(TileCalcinator.class, "tileCalcinator");
     }
-
+    
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == GuiIds.PORTABLE_CRAFTING) {

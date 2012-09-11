@@ -61,9 +61,6 @@ public class EquivalentExchange3 {
 
     @Init
     public void load(FMLInitializationEvent event) {
-
-    	// Initialize custom rendering and pre-load textures (Client only)
-    	proxy.initRenderingAndTextures();
         
         // Initialize the custom item rarity types
         proxy.initCustomRarityTypes();
@@ -91,6 +88,9 @@ public class EquivalentExchange3 {
         
         // Initialize mod tile entities
         proxy.initTileEntities();
+        
+        // Initialize custom rendering and pre-load textures (Client only)
+        proxy.initRenderingAndTextures();
         
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();

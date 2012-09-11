@@ -41,6 +41,7 @@ public class ConfigurationHandler {
             /* Block Configs */
             ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS = configuration.getOrCreateBooleanProperty(Reference.AUTO_RESOLVE_BLOCK_IDS, CATEGORY_BLOCK, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT).getBoolean(ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT);
             BlockIds.CALCINATOR =  configuration.getOrCreateIntProperty(ModBlocks.CALCINATOR_NAME, CATEGORY_BLOCK, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
+            BlockIds.RED_WATER_STILL = configuration.getOrCreateIntProperty(ModBlocks.RED_WATER_STILL_NAME, CATEGORY_BLOCK, BlockIds.RED_WATER_STILL_DEFAULT).getInt(BlockIds.RED_WATER_STILL_DEFAULT);
 
             /* Item Configs */
             ItemIds.MINIUM_SHARD = configuration.getOrCreateIntProperty(ModItems.MINIUM_SHARD_NAME, CATEGORY_ITEM, ItemIds.MINIUM_SHARD_DEFAULT).getInt(ItemIds.MINIUM_SHARD_DEFAULT);
