@@ -5,6 +5,9 @@ import net.minecraft.src.EnumRarity;
 import net.minecraft.src.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import ee3.client.gui.GuiPortableCrafting;
+import ee3.common.container.ContainerPortableCrafting;
+import ee3.common.lib.GuiIds;
 import ee3.common.tile.TileCalcinator;
 
 /**
@@ -36,14 +39,22 @@ public class CommonProxy implements IGuiHandler {
     public void initTileEntities() {
     	GameRegistry.registerTileEntity(TileCalcinator.class, "tileCalcinator");
     }
-
+    
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        if (ID == GuiIds.PORTABLE_CRAFTING) {
+            return new ContainerPortableCrafting(player.inventory, world, x, y, z);
+        }
+        
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        if (ID == GuiIds.PORTABLE_CRAFTING) {
+            return new GuiPortableCrafting(player, world, x, y, z);
+        }
+        
         return null;
     }
 

@@ -43,4 +43,14 @@ public class Reference {
     public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
     public static final String ARMOR_SHEET_LOCATION = "/ee3/art/armor/";
 
+    public static final int SECOND_IN_TICKS = 20;
+
+    public static final int BLOCK_RED_WATER_EFFECT_DURATION_BASE = 5;
+
+    public static final int BLOCK_RED_WATER_EFFECT_DURATION_MODIFIER = 2;
+
+    public static final int BLOCK_RED_WATER_RANGE_BASE = 1;
+
+    public static final int BLOCK_RED_WATER_RANGE_MODIFIER = 3;
+
 }
