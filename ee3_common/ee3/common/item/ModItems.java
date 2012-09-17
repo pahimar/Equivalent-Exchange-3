@@ -28,9 +28,9 @@ public class ModItems {
 
     public static void init() {
         /* Initialize each mod item individually */
-        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD).setIconCoord(0, 0).setItemName(MINIUM_SHARD_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
-        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(1, 0).setItemName(MINIUM_STONE_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
-        philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE).setIconCoord(2, 0).setItemName(PHILOSOPHER_STONE_NAME).setTabToDisplayOn(CreativeTabs.tabMisc);
+        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD).setIconCoord(0, 0).setItemName(MINIUM_SHARD_NAME).setCreativeTab(CreativeTabs.tabMisc);
+        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(1, 0).setItemName(MINIUM_STONE_NAME).setCreativeTab(CreativeTabs.tabMisc);
+        philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE).setIconCoord(2, 0).setItemName(PHILOSOPHER_STONE_NAME).setCreativeTab(CreativeTabs.tabMisc);
 
         LanguageRegistry.addName(miniumShard, "Shard of Minium");
         LanguageRegistry.addName(miniumStone, "Minium Stone");

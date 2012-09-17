@@ -1,14 +1,15 @@
 package ee3.common.container;
 
+import ee3.common.tile.TileCalcinator;
 import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.InventoryPlayer;
 
 public class ContainerCalcinator extends Container {
 
-    private TileEntityCalcinator calcinator;
+    private TileCalcinator calcinator;
     
-    public ContainerCalcinator(InventoryPlayer inventoryPlayer, TileEntityCalcinator calcinator) {
+    public ContainerCalcinator(InventoryPlayer inventoryPlayer, TileCalcinator calcinator) {
         this.calcinator = calcinator;
     }
     
