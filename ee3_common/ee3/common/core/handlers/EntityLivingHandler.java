@@ -16,7 +16,6 @@ public class EntityLivingHandler {
 		EntityLiving entity = event.entityLiving;
 		
 		if (entity.worldObj.getWorldTime() % 4 == 0) {
-			System.out.println(entity.toString());
 			
 			if (RedWaterHelper.handleRedWaterDetection(entity)) {
 				entity.addPotionEffect(new PotionEffect(Potion.weakness.id, Reference.BLOCK_RED_WATER_EFFECT_DURATION_MODIFIER * Reference.BLOCK_RED_WATER_EFFECT_DURATION_BASE * Reference.SECOND_IN_TICKS, 0));

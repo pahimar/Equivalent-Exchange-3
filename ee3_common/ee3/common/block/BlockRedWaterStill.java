@@ -14,7 +14,7 @@ public class BlockRedWaterStill extends BlockStationary {
         setBlockName("redWaterStill");
         disableStats();
         setRequiresSelfNotify();
-        setCreativeTab(CreativeTabs.tabDeco);
+        setCreativeTab(CreativeTabs.tabDecorations);
     }
 
     @Override

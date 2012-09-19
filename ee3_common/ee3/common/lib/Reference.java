@@ -45,12 +45,10 @@ public class Reference {
 
     public static final int SECOND_IN_TICKS = 20;
 
+    // TODO: Find a better spot for these
     public static final int BLOCK_RED_WATER_EFFECT_DURATION_BASE = 5;
-
     public static final int BLOCK_RED_WATER_EFFECT_DURATION_MODIFIER = 2;
-
     public static final int BLOCK_RED_WATER_RANGE_BASE = 1;
-
     public static final int BLOCK_RED_WATER_RANGE_MODIFIER = 3;
 
 }
