@@ -21,10 +21,10 @@ import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.CraftingHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
 import ee3.common.core.handlers.ItemPickupHandler;
+import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
 import ee3.common.item.ModItems;
 import ee3.common.lib.Reference;
-import ee3.common.network.PacketHandler;
 
 /**
  * EquivalentExchange3
