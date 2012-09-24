@@ -30,17 +30,16 @@ public class CraftingHandler implements ICraftingHandler {
                 if (currentItemStack.itemID == ModItems.miniumStone.shiftedIndex) {
                     // If we still have enough durability to do the transmute, do it
                     if ((currentItemStack.getItemDamage() + ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST) <= currentItemStack.getMaxDamage()) {
-                        currentItemStack.damageItem(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST, player);
-                        currentItemStack.stackSize++;
+                        System.out.println(currentItemStack.getItemDamage());
+                    	currentItemStack.damageItem(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST, player);
                     }
                     // Else capture the destruction of the item, and throw the event
                     else {
                         currentItemStack.damageItem(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST, player);
                         MinecraftForge.EVENT_BUS.post(new PlayerDestroyItemEvent(player, currentItemStack));
+                        currentItemStack = null;
                     }
                     
-                } else if (currentItemStack.itemID == ModItems.philStone.shiftedIndex) {
-                    currentItemStack.stackSize++;
                 }
             }
         }

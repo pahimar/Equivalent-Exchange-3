@@ -4,9 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-
 import cpw.mods.fml.common.network.Player;
-
 import net.minecraft.src.NetworkManager;
 
 public class PacketEE {
