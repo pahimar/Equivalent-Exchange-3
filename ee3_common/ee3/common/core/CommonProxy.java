@@ -39,6 +39,7 @@ public class CommonProxy implements IGuiHandler {
     public void initRenderingAndTextures() {}
     
     public void initTileEntities() {
+    	// TODO: Constant
     	GameRegistry.registerTileEntity(TileCalcinator.class, "tileCalcinator");
     }
     

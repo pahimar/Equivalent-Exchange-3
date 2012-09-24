@@ -31,5 +31,15 @@ public class ItemPhilosopherStone extends ItemEE {
     public EnumRarity getRarity(ItemStack stack) {
         return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.RARE);
     }
+    
+    @Override
+    public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemStack) {
+    	return false;
+    }
+    
+    @Override
+    public boolean getShareTag() {
+    	return true;
+    }
 
 }

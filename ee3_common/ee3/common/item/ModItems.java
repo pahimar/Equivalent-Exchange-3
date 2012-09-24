@@ -32,6 +32,9 @@ public class ModItems {
         miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE).setIconCoord(1, 0).setItemName(MINIUM_STONE_NAME).setCreativeTab(CreativeTabs.tabMisc);
         philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE).setIconCoord(2, 0).setItemName(PHILOSOPHER_STONE_NAME).setCreativeTab(CreativeTabs.tabMisc);
 
+        miniumStone.setContainerItem(miniumStone);
+        philStone.setContainerItem(philStone);
+        
         LanguageRegistry.addName(miniumShard, "Shard of Minium");
         LanguageRegistry.addName(miniumStone, "Minium Stone");
         LanguageRegistry.addName(philStone, "Philosophers Stone");

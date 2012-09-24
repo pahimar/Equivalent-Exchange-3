@@ -9,11 +9,15 @@ import net.minecraft.src.KeyBinding;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import ee3.client.lib.KeyBindings;
 import ee3.common.EquivalentExchange3;
 import ee3.common.item.ModItems;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
+import ee3.common.network.PacketEE;
+import ee3.common.network.PacketKeyPressed;
+import ee3.common.network.PacketTypeHandler;
 
 /**
  * KeyBindingHandler
@@ -45,8 +49,11 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
                     
                     if (currentItem != null) {
-                        // TODO Works sorta, fix this up proper
                         if ((currentItem.getItem().shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.getItem().shiftedIndex == ModItems.philStone.shiftedIndex)) {
+                        	// Notify the Server that we opened the GUI
+                        	PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
+                        	
+                        	// Open the GUI
                             EntityClientPlayerMP thePlayer = FMLClientHandler.instance().getClient().thePlayer;
                             thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
                         }
