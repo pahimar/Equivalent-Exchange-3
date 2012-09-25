@@ -36,7 +36,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
     @Override
     public String getLabel() {
-        return Reference.MOD_NAME + " KeyBindingHandler";
+    	return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
     @Override
