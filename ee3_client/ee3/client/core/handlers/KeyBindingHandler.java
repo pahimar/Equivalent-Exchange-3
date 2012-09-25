@@ -41,27 +41,30 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
     @Override
     public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-        // Only operate at the end of the tick
-        if (tickEnd) {
-            // If we are not in a GUI of any kind, continue execution
-            if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
-                    ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
-                    
-                    if (currentItem != null) {
-                        if ((currentItem.getItem().shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.getItem().shiftedIndex == ModItems.philStone.shiftedIndex)) {
-                        	// Notify the Server that we opened the GUI
-                        	PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
-                        	
-                        	// Open the GUI
-                            EntityClientPlayerMP thePlayer = FMLClientHandler.instance().getClient().thePlayer;
-                            thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
-                        }
-                    }
-                }
-            }
-        }
+    	if ( !shouldKeyDownOperationProceed( tickEnd, kb ) ) return;
 
+    	PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
+   	
+    	// Open the GUI
+        EntityClientPlayerMP thePlayer = FMLClientHandler.instance().getClient().thePlayer;
+        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
+
+    }
+    
+    protected boolean shouldKeyDownOperationProceed( boolean isTickEnd, KeyBinding kb ){
+    	if ( !isTickEnd ) return false;
+    	if ( FMLClientHandler.instance().getClient().currentScreen != null ) return false;
+    	if ( kb.keyDescription != Reference.KEYBINDING_EXTRA ) return false;
+    	if ( !isCurrentlyEquippedItemMinimumStoneOrPhilospherStone() ) return false; 
+    	return true;
+    }
+    
+    private boolean isCurrentlyEquippedItemMinimumStoneOrPhilospherStone(){
+    	ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
+    	if ( currentItem == null ) return false;
+    	if ( currentItem.getItem().shiftedIndex == ModItems.miniumStone.shiftedIndex ) return true;
+    	if ( currentItem.getItem().shiftedIndex == ModItems.philStone.shiftedIndex ) return true;
+    	return false;
     }
 
     @Override

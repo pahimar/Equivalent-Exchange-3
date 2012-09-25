@@ -34,10 +34,16 @@ public class KeyBindings {
     }
 
     public static KeyBinding[] gatherKeyBindings() {
+    	if ( keyBindingsList == null ){
+    		return new KeyBinding[0];
+    	}
         return keyBindingsList.toArray(new KeyBinding[keyBindingsList.size()]);
     }
 
     public static boolean[] gatherIsRepeating() {
+        if (isRepeatingList == null) {
+            return new boolean[0];
+        }
         boolean[] isRepeating = new boolean[isRepeatingList.size()];
 
         for (int x = 0; x < isRepeating.length; x++) {
