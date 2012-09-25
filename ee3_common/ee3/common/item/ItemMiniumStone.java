@@ -43,12 +43,7 @@ public class ItemMiniumStone extends ItemEE {
     public ItemStack getContainerItemStack(ItemStack itemStack) {
     	itemStack.setItemDamage(itemStack.getItemDamage() + 1);
     	
-    	if (itemStack.getItemDamage() < itemStack.getMaxDamage()) {
-    		return itemStack;
-    	}
-    	else {
-    		return null;
-    	}
+		return itemStack;
     }
     
 }

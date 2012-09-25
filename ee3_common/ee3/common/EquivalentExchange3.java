@@ -68,9 +68,6 @@ public class EquivalentExchange3 {
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 
-        // Register the Crafting Handler
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
-
         // Register the PlayerDestroyItem Handler
         MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
         
