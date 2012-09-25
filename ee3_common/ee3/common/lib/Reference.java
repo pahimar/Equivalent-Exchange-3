@@ -20,7 +20,7 @@ public class Reference {
     public static final String VERSION = "1.0.0.0";
     public static final String CHANNEL_NAME = MOD_ID;
     public static final String LOGGER_PREFIX = "[" + MOD_ID + "] ";
-    public static final int SHIFTED_ID_SIZE = 256;
+    public static final int SHIFTED_ID_RANGE_CORRECTION = 256;
     
     /* Configuration related constants */
     public static final String ENABLE_SOUNDS = "enable_sounds";

@@ -15,7 +15,7 @@ import net.minecraft.src.Item;
 public class ItemEE extends Item {
 
     public ItemEE(int id) {
-        super(id - Reference.SHIFTED_ID_SIZE);
+        super(id - Reference.SHIFTED_ID_RANGE_CORRECTION);
         maxStackSize = 1;
         setTextureFile(Reference.SPRITE_SHEET_LOCATION + Reference.ITEM_SPRITE_SHEET);
         setNoRepair();
