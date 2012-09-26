@@ -56,6 +56,7 @@ public class LocalizationHandler {
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		} finally {
+			// Close the input stream when we are done with it
 			try {
 				if (languageStream != null) {
 					languageStream.close();

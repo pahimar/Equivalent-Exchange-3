@@ -56,8 +56,12 @@ public class EquivalentExchange3 {
         // Initialize the configuration
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
-        // Conduct the version check
+    	// Load the localization files into the LanguageRegistry
+    	LocalizationHandler.loadLanguages();
+        
+        // Conduct the version check and log the result
         VersionHelper.checkVersion();
+        VersionHelper.logResult();
         
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
@@ -72,9 +76,6 @@ public class EquivalentExchange3 {
 
     @Init
     public void load(FMLInitializationEvent event) {
-    	
-    	// Load the localization files into the LanguageRegistry
-    	LocalizationHandler.loadLanguages();
     	
         // Initialize the custom item rarity types
         proxy.initCustomRarityTypes();

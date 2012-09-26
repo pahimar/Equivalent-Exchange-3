@@ -3,6 +3,7 @@ package ee3.client.core.handlers;
 import java.io.File;
 import java.util.logging.Level;
 import cpw.mods.fml.common.FMLCommonHandler;
+import ee3.common.core.helper.LogHelper;
 import ee3.common.lib.Reference;
 import ee3.common.lib.Sounds;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
@@ -31,7 +32,7 @@ public class SoundHandler {
             // If we cannot add the custom sound file to the pool, log the
             // exception
             catch (Exception e) {
-                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING, Reference.LOGGER_PREFIX + "Failed loading sound file: " + soundFile);
+                LogHelper.log(Level.WARNING, "Failed loading sound file: " + soundFile);
             }
         }
 
