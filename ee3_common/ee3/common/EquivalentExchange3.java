@@ -23,6 +23,7 @@ import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
 import ee3.common.core.handlers.ItemPickupHandler;
+import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
@@ -71,6 +72,9 @@ public class EquivalentExchange3 {
 
     @Init
     public void load(FMLInitializationEvent event) {
+    	
+    	// Load the localization files into the LanguageRegistry
+    	LocalizationHandler.loadLanguages();
     	
         // Initialize the custom item rarity types
         proxy.initCustomRarityTypes();
