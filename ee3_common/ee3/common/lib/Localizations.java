@@ -14,6 +14,7 @@ public class Localizations {
 	private static final String LANG_RESOURCE_LOCATION = "/ee3/lang/";
 	
 	public static String[] localeFiles = {
+		LANG_RESOURCE_LOCATION + "cy_GB.xml",
 		LANG_RESOURCE_LOCATION + "en_US.xml",
 		LANG_RESOURCE_LOCATION + "nl_NL.xml"
 	};
