@@ -3,6 +3,7 @@ package ee3.common.core.helper;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.logging.Level;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -28,6 +29,12 @@ public class VersionHelper {
 	public static final byte CURRENT = 1;
 	public static final byte OUTDATED = 2;
 	public static final byte CONNECTION_ERROR = 3;
+	
+	// Localization keys
+	private static final String UNINITIALIZED_MESSAGE = "version.uninitialized";
+	private static final String CURRENT_MESSAGE = "version.current";
+	private static final String OUTDATED_MESSAGE = "version.outdated";
+	private static final String CONNECTION_ERROR_MESSAGE = "version.connection_error";
 
 	// Var to hold the result of the remote version check
 	public static byte result = UNINITIALIZED;
@@ -73,33 +80,33 @@ public class VersionHelper {
 			isr.close();
 		} catch (Exception e) {
 			// If we cannot connect to the remote version number authority, set the version check appropriately
+			e.printStackTrace(System.err);
 			result = CONNECTION_ERROR;
 		}
 		
-		logResult();
 	}
 	
 	public static void logResult() {
 		if ((result == CURRENT) || (result == OUTDATED)) {
-			FMLCommonHandler.instance().getFMLLogger().fine(getResultMessage());
+			LogHelper.log(Level.FINE, getResultMessage());
 		}
 		else {
-			FMLCommonHandler.instance().getFMLLogger().warning(getResultMessage());
+			LogHelper.log(Level.WARNING, getResultMessage());
 		}
 	}
 	
 	public static String getResultMessage() {
 		if (result == UNINITIALIZED) {
-			return "Uninitialized";
+			return LocalizationHelper.localize(UNINITIALIZED_MESSAGE);
 		}
 		else if (result == CURRENT) {
-			return "Current";
+			return LocalizationHelper.localize(CURRENT_MESSAGE);
 		}
 		else if (result == OUTDATED) {
-			return "Outdated";
+			return LocalizationHelper.localize(OUTDATED_MESSAGE);
 		}
 		else if (result == CONNECTION_ERROR) {
-			return "Connection Error";
+			return LocalizationHelper.localize(CONNECTION_ERROR_MESSAGE);
 		}
 		else {
 			return null;
