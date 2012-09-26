@@ -2,6 +2,7 @@ package ee3.common.core.handlers;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -19,10 +20,16 @@ import ee3.common.lib.Localizations;
  */
 public class LocalizationHandler {
 	
+	private static final LocalizationHandler INSTANCE = new LocalizationHandler();
+	
+	public static LocalizationHandler instance() {
+        return INSTANCE;
+    }
+	
 	/***
 	 * Loads in all the localization files from the Localizations library class
 	 */
-	public static void loadLanguages() {
+	public void loadLanguages() {
 		InputStream languageStream = null;
 		Properties languageMappings = new Properties();
 		Iterator<String> keyIter = null;
@@ -31,7 +38,9 @@ public class LocalizationHandler {
 		try {
 			// For every file specified in the Localization library class, load them into the Language Registry
 			for (String localizationFile : Localizations.localeFiles) {
-				languageStream = LocalizationHandler.class.getResourceAsStream(localizationFile);
+				URL localizationFileURL = this.getClass().getResource(localizationFile);
+				
+				languageStream = localizationFileURL.openStream();
 				
 				// If this file is a XML file, load it from XML
 				if (LocalizationHelper.isXMLLanguageFile(localizationFile)) {
