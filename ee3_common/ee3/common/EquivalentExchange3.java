@@ -57,7 +57,7 @@ public class EquivalentExchange3 {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
     	// Load the localization files into the LanguageRegistry
-    	LocalizationHandler.loadLanguages();
+    	LocalizationHandler.instance().loadLanguages();
         
         // Conduct the version check and log the result
         VersionHelper.checkVersion();
