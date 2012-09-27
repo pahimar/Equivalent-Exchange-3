@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Deutsche (Deutschland) Übersetzungs-Datei</comment>
+	<entry key="item.miniumShard.name">Scherbe Bleirot</entry>
+	<entry key="item.miniumStone.name">Bleirot-Stein</entry>
+	<entry key="item.philStone.name">Stein des Philosophen</entry>
+	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
+	<entry key="tile.redWaterFlowing.name">Rotes Wass (Fließend)</entry>
+	<entry key="tile.calcinator.name">Kalzinator</entry>
+	<entry key="version.uninitialized">Uninitialisiert</entry>
+	<entry key="version.current">Aktuell</entry>
+	<entry key="version.outdated">Veraltet</entry>
+	<entry key="version.connection_error">Verbindungsfehler</entry>
+</properties>
