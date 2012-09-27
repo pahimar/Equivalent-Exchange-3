@@ -25,10 +25,6 @@ public class ModBlocks {
 		redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL, Material.water);
 		redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1, Material.water);
 		
-		LanguageRegistry.addName(calcinator, "Calcinator");
-		LanguageRegistry.addName(redWaterStill, "Red Water (Still)");
-		LanguageRegistry.addName(redWaterFlowing, "Red Water (Flowing)");
-		
 		GameRegistry.registerBlock(calcinator);
 		GameRegistry.registerBlock(redWaterStill);
 		GameRegistry.registerBlock(redWaterFlowing);

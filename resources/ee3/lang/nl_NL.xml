@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Dutch (NL) Localization File</comment>
+	<entry key="item.miniumShard.name">Minium Scherf</entry>
+	<entry key="item.miniumStone.name">Minium Steen</entry>
+	<entry key="item.philStone.name">Steen der Wijzen</entry>
+	<entry key="tile.redWaterStill.name">Rood Water (Stilstaand)</entry>
+	<entry key="tile.redWaterFlowing.name">Rood Water (Vloeiend)</entry>
+	<entry key="tile.calcinator.name">Calcinator</entry>
+	<entry key="version.uninitialized">Ongestart</entry>
+	<entry key="version.current">Huidig</entry>
+	<entry key="version.outdated">Verouderd</entry>
+	<entry key="version.connection_error">Verbindingsfout</entry>
+</properties>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English (US) Localization File</comment>
+	<entry key="item.miniumShard.name">Shard of Minium</entry>
+	<entry key="item.miniumStone.name">Minium Stone</entry>
+	<entry key="item.philStone.name">Philosophers Stone</entry>
+	<entry key="tile.redWaterStill.name">Red Water (Still)</entry>
+	<entry key="tile.redWaterFlowing.name">Red Water (Flowing)</entry>
+	<entry key="tile.calcinator.name">Calcinator</entry>
+	<entry key="version.uninitialized">Uninitialized</entry>
+	<entry key="version.current">Current</entry>
+	<entry key="version.outdated">Outdated</entry>
+	<entry key="version.connection_error">Connection Error</entry>
+</properties>

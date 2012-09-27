@@ -34,9 +34,6 @@ public class ModItems {
 
         miniumStone.setContainerItem(miniumStone);
         philStone.setContainerItem(philStone);
-        
-        LanguageRegistry.addName(miniumShard, "Shard of Minium");
-        LanguageRegistry.addName(miniumStone, "Minium Stone");
-        LanguageRegistry.addName(philStone, "Philosophers Stone");
+
     }
 }
