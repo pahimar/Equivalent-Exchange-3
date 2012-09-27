@@ -39,7 +39,6 @@
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
 		<copy todir="${dir.development}\mcp\src\minecraft_server">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_server\" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
 	</target>
@@ -48,11 +47,17 @@
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
 			<arg line="/c recompile.bat" />
 		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+			<arg line="recompile.sh" />
+		</exec>
 	</target>
 	
 	<target name="reobfuscate">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
 			<arg line="/c reobfuscate.bat" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+			<arg line="reobfuscate.sh" />
 		</exec>
 	</target>
 	
