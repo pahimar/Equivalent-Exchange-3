@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Italian (IT) Localization File</comment>
+	<entry key="item.miniumShard.name">Frammento di Minium</entry>
+	<entry key="item.miniumStone.name">Pietra Minium</entry>
+	<entry key="item.philStone.name">Pietra Filosofale</entry>
+	<entry key="tile.redWaterStill.name">Acqua Rossa (Ferma)</entry>
+	<entry key="tile.redWaterFlowing.name">Acqua Rossa (Flusso)</entry>
+	<entry key="tile.calcinator.name">Calcinatore</entry>
+	<entry key="version.uninitialized">Non Inizializzato</entry>
+	<entry key="version.current">Corrente</entry>
+	<entry key="version.outdated">Obsoleta</entry>
+	<entry key="version.connection_error">Errore di Connessione</entry>
+</properties>

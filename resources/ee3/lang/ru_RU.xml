@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Russian (RU) Localization File</comment>
+	<entry key="item.miniumShard.name">Осколок Миниума</entry>
+	<entry key="item.miniumStone.name">Миниум</entry>
+	<entry key="item.philStone.name">Философский Камень</entry>
+	<entry key="tile.redWaterStill.name">Красная Вода (Стоящая)</entry>
+	<entry key="tile.redWaterFlowing.name">Красная Вода (Текущая)</entry>
+	<entry key="tile.calcinator.name">Кальцинатор</entry>
+	<entry key="version.uninitialized">Неинициализированная</entry>
+	<entry key="version.current">Текущая</entry>
+	<entry key="version.outdated">Устаревшая</entry>
+	<entry key="version.connection_error">Ошибка подключения</entry>
+</properties>
