@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+<comment>French (FR) Localization File</comment>
+<entry key="item.miniumShard.name">Eclat de Minium</entry>
+<entry key="item.miniumStone.name">Pierre de Minium</entry>
+<entry key="item.philStone.name">Pierre Philosophale</entry>
+<entry key="tile.redWaterStill.name">Eau rouge (Immobile)</entry>
+<entry key="tile.redWaterFlowing.name">Eau rouge (Ruisselante)</entry>
+<entry key="tile.calcinator.name">Calcinateur</entry>
+<entry key="version.uninitialized">Non Initialisée</entry>
+<entry key="version.current">Courante</entry>
+<entry key="version.outdated">Périmée</entry>
+<entry key="version.connection_error">Erreur de connexion</entry>
+</properties>
