@@ -20,6 +20,7 @@ public class Reference {
     public static final String VERSION = "1.0.0.0";
     public static final String CHANNEL_NAME = MOD_ID;
     public static final String LOGGER_PREFIX = "[" + MOD_ID + "] ";
+    public static final int SECOND_IN_TICKS = 20;
     public static final int SHIFTED_ID_RANGE_CORRECTION = 256;
     
     /* Configuration related constants */
@@ -44,10 +45,12 @@ public class Reference {
     public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
     public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
     public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
+
+    /* General Tile Entity related constants */
+    public static final String TE_GEN_OWNER_NBT_TAG_LABEL = "owner";
+    public static final String TE_GEN_STATE_NBT_TAG_LABEL = "state";
+    public static final String TE_GEN_DIRECTION_NBT_TAG_LABEL = "direction";
     
-
-    public static final int SECOND_IN_TICKS = 20;
-
     // TODO: Find a better spot for these
     public static final int BLOCK_RED_WATER_EFFECT_DURATION_BASE = 5;
     public static final int BLOCK_RED_WATER_EFFECT_DURATION_MODIFIER = 2;
