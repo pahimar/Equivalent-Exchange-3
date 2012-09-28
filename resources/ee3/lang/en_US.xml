@@ -4,7 +4,7 @@
 	<comment>English (US) Localization File</comment>
 	<entry key="item.miniumShard.name">Shard of Minium</entry>
 	<entry key="item.miniumStone.name">Minium Stone</entry>
-	<entry key="item.philStone.name">Philosophers Stone</entry>
+	<entry key="item.philStone.name">Philosopher's Stone</entry>
 	<entry key="tile.redWaterStill.name">Red Water (Still)</entry>
 	<entry key="tile.redWaterFlowing.name">Red Water (Flowing)</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
