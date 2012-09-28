@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+п»ї<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Russian (RU) Localization File</comment>
-	<entry key="item.miniumShard.name">Осколок Миниума</entry>
-	<entry key="item.miniumStone.name">Миниум</entry>
-	<entry key="item.philStone.name">Философский Камень</entry>
-	<entry key="tile.redWaterStill.name">Красная Вода (Still)</entry>
-	<entry key="tile.redWaterFlowing.name">Красная вода (Flowing)</entry>
-	<entry key="tile.calcinator.name">Кальцинатор</entry>
-	<entry key="version.uninitialized">Неинициализированная</entry>
-	<entry key="version.current">Текущая</entry>
-	<entry key="version.outdated">Устаревшая</entry>
-	<entry key="version.connection_error">Ошибка подключения</entry>
+	<entry key="item.miniumShard.name">РћСЃРєРѕР»РѕРє РњРёРЅРёСѓРјР°</entry>
+	<entry key="item.miniumStone.name">РњРёРЅРёСѓРј</entry>
+	<entry key="item.philStone.name">Р¤РёР»РѕСЃРѕС„СЃРєРёР№ РљР°РјРµРЅСЊ</entry>
+	<entry key="tile.redWaterStill.name">РљСЂР°СЃРЅР°СЏ Р’РѕРґР° (РЎС‚РѕСЏС‰Р°СЏ)</entry>
+	<entry key="tile.redWaterFlowing.name">РљСЂР°СЃРЅР°СЏ Р’РѕРґР° (РўРµРєСѓС‰Р°СЏ)</entry>
+	<entry key="tile.calcinator.name">РљР°Р»СЊС†РёРЅР°С‚РѕСЂ</entry>
+	<entry key="version.uninitialized">РќРµРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅР°СЏ</entry>
+	<entry key="version.current">РўРµРєСѓС‰Р°СЏ</entry>
+	<entry key="version.outdated">РЈСЃС‚Р°СЂРµРІС€Р°СЏ</entry>
+	<entry key="version.connection_error">РћС€РёР±РєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ</entry>
 </properties>
