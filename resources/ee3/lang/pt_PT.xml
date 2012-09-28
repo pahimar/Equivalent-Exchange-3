@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+<comment>Portuguese (PT) Post Reform Localization File</comment>
+<entry key="item.miniumShard.name">Fragmento de Mínio</entry>
+<entry key="item.miniumStone.name">Pedra de Mínio</entry>
+<entry key="item.philStone.name">Pedra do Filósofo</entry>
+<entry key="tile.redWaterStill.name">Água Vermelha (Estagnada)</entry>
+<entry key="tile.redWaterFlowing.name">Água Vermelha (A fluir)</entry>
+<entry key="tile.calcinator.name">Calcinatório</entry>
+<entry key="version.uninitialized">Não iniciado</entry>
+<entry key="version.current">Atual</entry>
+<entry key="version.outdated">Desatualizado</entry>
+<entry key="version.connection_error">Erro de Ligação</entry>
+</properties>
