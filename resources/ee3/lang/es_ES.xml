@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Archivo de Traducción en Español (ES)</comment>
+	<entry key="item.miniumShard.name">Fragmento de Minio</entry>
+	<entry key="item.miniumStone.name">Piedra de Minio</entry>
+	<entry key="item.philStone.name">Piedra Filosofal</entry>
+	<entry key="tile.redWaterStill.name">Agua Roja (Quieta)</entry>
+	<entry key="tile.redWaterFlowing.name">Agua Roja (Fluyendo)</entry>
+	<entry key="tile.calcinator.name">Calcinador</entry>
+	<entry key="version.uninitialized">No inicializado</entry>
+	<entry key="version.current">Actual</entry>
+	<entry key="version.outdated">Obsoleto</entry>
+	<entry key="version.connection_error">Error de Conexión</entry>
+</properties>
