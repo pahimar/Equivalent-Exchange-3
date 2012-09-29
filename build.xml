@@ -2,6 +2,8 @@
 <project name="Equivalent Exchange 3">
 	
 	<property file="build.properties" />
+	<!-- Set some default properties -->
+	<property name="dir.development" value="../../"/>
 	
 	<target name="clean">
 		<delete file="${dir.development}\mcp\src\minecraft\mod_EE3.info" />
