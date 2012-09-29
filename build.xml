@@ -1,9 +1,10 @@
 <?xml version="1.0" ?> 
 <project name="Equivalent Exchange 3">
 	
-	<property file="build.properties" />
 	<!-- Set some default properties -->
 	<property name="dir.development" value="../../" />
+	<!-- Read properties from build.properties, if it exists -->
+	<property file="build.properties" />
 	
 	<target name="clean">
 		<delete file="${dir.development}\mcp\src\minecraft\mod_EE3.info" />
@@ -88,9 +89,12 @@
 			<antcall target="recompile" />
 			<antcall target="reobfuscate" />
 			
+			<!-- Create the releases directory if it doesn't exist -->
+			<mkdir dir="${dir.development}\releases\" />
+			
 			<!-- Update the mod_*.info file for release -->
-			<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mod_EE3.info" todir="${dir.development}\releases\" />
-			<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
+			<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mcmod.info" todir="${dir.development}\releases\" />
+			<move file="${dir.development}\releases\mcmod.info" tofile="${dir.development}\releases\mod_EE3.info" />
 			
 			<!-- Build the jar -->
 			<jar destfile="${dir.development}\releases\ee3-client-v${release.mod.version}.jar">
@@ -100,14 +104,15 @@
 			</jar>
 			<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
 		
-			<!-- Put a copy in my Beta DB share -->
-			<mkdir dir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			<move file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			<move file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			
+			<!-- Put a copy in pahimar's Beta DB share if ${dir.beta} is defined-->
+			<condition property="dir.beta.set" else="false">
+			      <isset property="dir.beta"/>
+			</condition>
+			<antcall target="copy-to-beta-share" />
+
 			<!-- Clean up the MCP source now that we are done -->
 			<antcall target="clean" />
-		</target>
+	</target>
 	
 	<target name="release-final">
 		<!-- Prep for the release -->
@@ -116,8 +121,11 @@
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		
+		<!-- Create the releases directory if it doesn't exist -->
+		<mkdir dir="${dir.development}\releases\" />
+		
 		<!-- Update the mod_*.info file for release -->
-		<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mod_EE3.info" todir="${dir.development}\releases\" />
+		<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mcmod.info" todir="${dir.development}\releases\" />
 		<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
 		
 		<!-- Build the jar -->
@@ -129,17 +137,40 @@
 		<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
 		
 		<!-- Put a copy in Sengir's DB share -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<condition property="dir.beta.set" else="false">
+			      <isset property="dir.share"/>
+		</condition>
+		<antcall target="copy-to-sengir-share" />
 		
 		<!-- Put a copy in my public DB share -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<condition property="dir.release.set" else="false">
+			      <isset property="dir.release"/>
+		</condition>
+		<antcall target="copy-to-public-share" />
 		
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
+	</target>
+		
+	<!-- Put a copy in pahimar's Beta DB share if ${dir.beta} is defined-->
+	<target name="copy-to-beta-share" if="dir.beta.set">
+		<mkdir dir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+		<move file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+		<move file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+	</target>	
+	
+	<!-- Put a copy in Sengir's DB share if ${dir.share} is defined-->
+	<target name="copy-to-sengir-share" if="dir.share.set">
+		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+	</target>
+	
+	<!-- Put a copy in Sengir's DB share if ${dir.share} is defined-->
+	<target name="copy-to-public-share" if="dir.share.set">
+		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
 	</target>
 	
 </project>
