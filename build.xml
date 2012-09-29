@@ -3,7 +3,7 @@
 	
 	<property file="build.properties" />
 	<!-- Set some default properties -->
-	<property name="dir.development" value="../../"/>
+	<property name="dir.development" value="../../" />
 	
 	<target name="clean">
 		<delete file="${dir.development}\mcp\src\minecraft\mod_EE3.info" />
@@ -63,11 +63,29 @@
 		</exec>
 	</target>
 	
+	<!-- Build, recompile, reobfuscate and start MC with EE3 -->
+	<target name="start">
+			<antcall target="build" />
+			<antcall target="recompile" />
+			<antcall target="reobfuscate" />
+			<antcall target="start-client" />
+	</target>
+	
+	<!-- Start the client -->
+	<target name="start-client">
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+			<arg line="/c startclient.bat" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+			<arg line="startclient.sh" />
+		</exec>
+	</target>
+	
 	<target name="release-beta">
 			<!-- Prep for the release -->
 			<antcall target="clean" />
 			<antcall target="build" />
-			<antcall target="recompile" />		
+			<antcall target="recompile" />
 			<antcall target="reobfuscate" />
 			
 			<!-- Update the mod_*.info file for release -->
