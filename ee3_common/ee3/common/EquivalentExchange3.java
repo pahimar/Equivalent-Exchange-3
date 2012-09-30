@@ -53,11 +53,11 @@ public class EquivalentExchange3 {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
+    	// Load the localization files into the LanguageRegistry
+    	LocalizationHandler.loadLanguages();
+    	
         // Initialize the configuration
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-
-    	// Load the localization files into the LanguageRegistry
-    	LocalizationHandler.instance().loadLanguages();
         
         // Conduct the version check and log the result
         VersionHelper.checkVersion();
