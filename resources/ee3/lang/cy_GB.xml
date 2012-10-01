@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Welsh Localization File</comment>
+	<entry key="item.miniumShard.name">Darn o Finiwm</entry>
+	<entry key="item.miniumStone.name">Carreg Miniwm</entry>
+	<entry key="item.philStone.name">Maen Athronwyr</entry>
+	<entry key="tile.redWaterStill.name">Dŵr Coch (Llonydd)</entry>
+	<entry key="tile.redWaterFlowing.name">Dŵr Coch (Llifeiriol)</entry>
+	<entry key="tile.calcinator.name">Calchyniadwr</entry>
+	<entry key="version.uninitialized">Heb Ymgychwyn</entry>
+	<entry key="version.current">Cyfredol</entry>
+	<entry key="version.outdated">Wedi Dyddio</entry>
+	<entry key="version.connection_error">Gwall Cysylltiad</entry>
+</properties>

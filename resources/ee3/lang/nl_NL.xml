@@ -11,5 +11,5 @@
 	<entry key="version.uninitialized">Ongestart</entry>
 	<entry key="version.current">Huidig</entry>
 	<entry key="version.outdated">Verouderd</entry>
-	<entry key="version.connection_error">Fout tijdens verbinden</entry>
+	<entry key="version.connection_error">Verbindingsfout</entry>
 </properties>
