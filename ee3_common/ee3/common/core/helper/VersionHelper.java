@@ -7,6 +7,7 @@ import java.util.logging.Level;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.lib.Reference;
 
 /**
@@ -97,16 +98,16 @@ public class VersionHelper {
 	
 	public static String getResultMessage() {
 		if (result == UNINITIALIZED) {
-			return LocalizationHelper.localize(UNINITIALIZED_MESSAGE);
+			return LanguageRegistry.instance().getStringLocalization(UNINITIALIZED_MESSAGE);
 		}
 		else if (result == CURRENT) {
-			return LocalizationHelper.localize(CURRENT_MESSAGE);
+			return LanguageRegistry.instance().getStringLocalization(CURRENT_MESSAGE);
 		}
 		else if (result == OUTDATED) {
-			return LocalizationHelper.localize(OUTDATED_MESSAGE);
+			return LanguageRegistry.instance().getStringLocalization(OUTDATED_MESSAGE);
 		}
 		else if (result == CONNECTION_ERROR) {
-			return LocalizationHelper.localize(CONNECTION_ERROR_MESSAGE);
+			return LanguageRegistry.instance().getStringLocalization(CONNECTION_ERROR_MESSAGE);
 		}
 		else {
 			return null;
