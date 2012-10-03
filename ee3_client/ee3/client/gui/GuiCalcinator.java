@@ -20,6 +20,7 @@ public class GuiCalcinator extends GuiContainer {
     
     public GuiCalcinator(InventoryPlayer player, TileCalcinator calcinator) {
         super(new ContainerCalcinator(player, calcinator));
+        this.ySize = 176;
         this.calcinator = calcinator;
     }
     
