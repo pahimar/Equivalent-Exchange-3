@@ -22,6 +22,7 @@ import ee3.common.core.RecipesTransmutationStone;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
+import ee3.common.core.handlers.FuelHandler;
 import ee3.common.core.handlers.ItemPickupHandler;
 import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
@@ -106,6 +107,9 @@ public class EquivalentExchange3 {
         
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
+        
+        // Register the Fuel Handler
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
     }
 
