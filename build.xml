@@ -1,6 +1,12 @@
 <?xml version="1.0" ?> 
 <project name="Equivalent Exchange 3">
 	
+	<!-- Set some default properties -->
+	<property name="dir.development" value="../../" />
+	<property name="release.minecraft.version" value="1.3.2" /> <!-- Update when EE3 is updated to a newer MC version -->
+	<property name="release.mod.version" value="0.0.1dev" /> <!-- Update when EE3 is updated to a newer version -->
+	<property name="dir.beta" value="${dir.development}/beta" /> <!-- Update when EE3 is updated to a newer version -->
+	<!-- Read properties from build.properties, if it exists -->
 	<property file="build.properties" />
 	
 	<target name="clean">
@@ -61,16 +67,37 @@
 		</exec>
 	</target>
 	
+	<!-- Build, recompile, reobfuscate and start MC with EE3 -->
+	<target name="start">
+			<antcall target="build" />
+			<antcall target="recompile" />
+			<antcall target="reobfuscate" />
+			<antcall target="start-client" />
+	</target>
+	
+	<!-- Start the client -->
+	<target name="start-client">
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+			<arg line="/c startclient.bat" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+			<arg line="startclient.sh" />
+		</exec>
+	</target>
+	
 	<target name="release-beta">
 			<!-- Prep for the release -->
 			<antcall target="clean" />
 			<antcall target="build" />
-			<antcall target="recompile" />		
+			<antcall target="recompile" />
 			<antcall target="reobfuscate" />
 			
+			<!-- Create the releases directory if it doesn't exist -->
+			<mkdir dir="${dir.development}\releases\" />
+			
 			<!-- Update the mod_*.info file for release -->
-			<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mod_EE3.info" todir="${dir.development}\releases\" />
-			<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
+			<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mcmod.info" todir="${dir.development}\releases\" />
+			<move file="${dir.development}\releases\mcmod.info" tofile="${dir.development}\releases\mod_EE3.info" />
 			
 			<!-- Build the jar -->
 			<jar destfile="${dir.development}\releases\ee3-client-v${release.mod.version}.jar">
@@ -78,16 +105,17 @@
 				<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 				<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 			</jar>
-			<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
+			<!--TODO Fix server jar if neccessary for 1.3.2 -->
+			<!--<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" /> -->
 		
-			<!-- Put a copy in my Beta DB share -->
+			<!-- Put a copy in pahimar's Beta DB share if ${dir.beta} is defined-->
 			<mkdir dir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			<move file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			<move file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
-			
+			<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />
+			<!--<move file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.beta}\${release.minecraft.version}\${release.mod.version}" />-->
+
 			<!-- Clean up the MCP source now that we are done -->
 			<antcall target="clean" />
-		</target>
+	</target>
 	
 	<target name="release-final">
 		<!-- Prep for the release -->
@@ -96,8 +124,11 @@
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		
+		<!-- Create the releases directory if it doesn't exist -->
+		<mkdir dir="${dir.development}\releases\" />
+		
 		<!-- Update the mod_*.info file for release -->
-		<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mod_EE3.info" todir="${dir.development}\releases\" />
+		<copy file="${dir.development}\source\Equivalent-Exchange-3\ee3_common\mcmod.info" todir="${dir.development}\releases\" />
 		<move file="${dir.development}\releases\mod_EE3.info" tofile="${dir.development}\releases\mcmod.info" />
 		
 		<!-- Build the jar -->
@@ -106,20 +137,19 @@
 			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
-		<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />
+		<!--<jar destfile="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" basedir="${dir.development}\mcp\reobf\minecraft_server" />-->
 		
 		<!-- Put a copy in Sengir's DB share -->
 		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
 		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<!--<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />-->
 		
 		<!-- Put a copy in my public DB share -->
 		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
 		<copy file="${dir.development}\releases\ee3-client-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<!--<copy file="${dir.development}\releases\ee3-server-v${release.mod.version}.jar" todir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />-->
 		
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
-	
 </project>
