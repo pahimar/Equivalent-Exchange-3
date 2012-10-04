@@ -26,62 +26,64 @@ public class ModelCalcinator extends ModelBase {
         this.textureWidth = TEXTURE_WIDTH;
         
         this.legFrontLeft = new ModelRenderer(this, 0, 0);
-        this.legFrontLeft.addBox(-1F, -8F, -1F, 2, 8, 2);
-        this.legFrontLeft.setRotationPoint(2, 8, 2);
-        this.legFrontLeft.rotateAngleY = ((float) Math.PI / 4F);
+        this.legFrontLeft.addBox(-1F, -8F, -1F, 2, 8, 2, scale);
+        this.legFrontLeft.setRotationPoint(-9F, 4, 0);
         this.legFrontRight = new ModelRenderer(this, 0, 0);
-        this.legFrontRight.addBox(-1F, -8F, -1F, 2, 8, 2);
-        this.legFrontRight.setRotationPoint(2, 8, 14);
-        this.legFrontRight.rotateAngleY = ((float) Math.PI / 4F);
+        this.legFrontRight.addBox(-1F, -8F, -1F, 2, 8, 2, scale);
+        this.legFrontRight.setRotationPoint(9F, 4, 0);
         this.legBackLeft = new ModelRenderer(this, 0, 0);
-        this.legBackLeft.addBox(-1F, -8F, -1F, 2, 8, 2);
-        this.legBackLeft.setRotationPoint(14, 8, 2);
-        this.legBackLeft.rotateAngleY = ((float) Math.PI / 4F);
+        this.legBackLeft.addBox(-1F, -8F, -1F, 2, 8, 2, scale);
+        this.legBackLeft.setRotationPoint(0, 4, -9F);
         this.legBackRight = new ModelRenderer(this, 0, 0);
-        this.legBackRight.addBox(-1F, -8F, -1F, 2, 8, 2);
-        this.legBackRight.setRotationPoint(14, 8, 14);
-        this.legBackRight.rotateAngleY = ((float) Math.PI / 4F);
+        this.legBackRight.addBox(-1F, -8F, -1F, 2, 8, 2, scale);
+        this.legBackRight.setRotationPoint(0, 4, 9F);
         
-        this.armFrontLeft = new ModelRenderer(this, 8, 0);
-        this.armFrontLeft.addBox(-2F, -0.5F, -0.5F, 4, 1, 1);
-        this.armFrontLeft.setRotationPoint(4, 3, 4);
-        this.armFrontLeft.rotateAngleY = ((float) Math.PI * 3 / 4F);
-        this.armFrontRight = new ModelRenderer(this, 8, 0);
-        this.armFrontRight.addBox(-2F, -0.5F, -0.5F, 4, 1, 1);
-        this.armFrontRight.setRotationPoint(12, 3, 4);
-        this.armFrontRight.rotateAngleY = ((float) Math.PI / 4F);
-        this.armBackLeft = new ModelRenderer(this, 8, 0);
-        this.armBackLeft.addBox(-2F, -0.5F, -0.5F, 4, 1, 1);
-        this.armBackLeft.setRotationPoint(12, 3, 12);
-        this.armBackLeft.rotateAngleY = ((float) Math.PI * 7 / 4F);
-        this.armBackRight = new ModelRenderer(this, 8, 0);
-        this.armBackRight.addBox(-2F, -0.5F, -0.5F, 4, 1, 1);
-        this.armBackRight.setRotationPoint(4, 3, 12);
-        this.armBackRight.rotateAngleY = ((float) Math.PI * 5 / 4F);
+        this.armFrontLeft = new ModelRenderer(this, 0, 10);
+        this.armFrontLeft.addBox(-2F, -1F, -1F, 4, 2, 2, scale);
+        this.armFrontLeft.setRotationPoint(6, 0, 0);
+        this.armFrontRight = new ModelRenderer(this, 0, 10);
+        this.armFrontRight.addBox(-2F, -1F, -1F, 4, 2, 2, scale);
+        this.armFrontRight.setRotationPoint(-6, 0, 0);
+        this.armBackLeft = new ModelRenderer(this, 12, 10);
+        this.armBackLeft.addBox(-1F, -1F, -2.0F, 2, 2, 4, scale);
+        this.armBackLeft.setRotationPoint(0, 0, 6);
+        this.armBackRight = new ModelRenderer(this, 12, 10);
+        this.armBackRight.addBox(-1F, -1F, -2.0F, 2, 2, 4, scale);
+        this.armBackRight.setRotationPoint(0, 0, -6);
         
-        this.firePlate = new ModelRenderer(this, 0, 10);
-        this.firePlate.addBox(-4F, -0.5F, -4F, 8, 1, 8);
-        this.firePlate.setRotationPoint(8, 3, 8);
+        this.firePlate = new ModelRenderer(this, 8, 0);
+        this.firePlate.addBox(-4F, -1F, -4F, 8, 2, 8, scale);
+        this.firePlate.setRotationPoint(8, 4, 8);
         this.firePlate.rotateAngleY = ((float) Math.PI / 4F);
         
+        this.firePlate.addChild(this.legFrontLeft);        
+        this.firePlate.addChild(this.legFrontRight);
+        this.firePlate.addChild(this.legBackLeft);
+        this.firePlate.addChild(this.legBackRight);
+        this.firePlate.addChild(this.armFrontLeft);
+        this.firePlate.addChild(this.armFrontRight);
+        this.firePlate.addChild(this.armBackLeft);
+        this.firePlate.addChild(this.armBackRight);
+        
+        
         this.bowlBottom = new ModelRenderer(this, 0, 19);
-        this.bowlBottom.addBox(-8F, -1F, -8F, 16, 1, 16);
+        this.bowlBottom.addBox(-8F, -1F, -8F, 16, 1, 16, scale);
         this.bowlBottom.setRotationPoint(8, 9, 8);
         this.bowlBack = new ModelRenderer(this, 0, 36);
-        this.bowlBack.addBox(-8F, -3.5F, -0.5F, 16, 7, 1);
+        this.bowlBack.addBox(-8F, -3.5F, -0.5F, 16, 7, 1, scale);
         this.bowlBack.setRotationPoint(8F, 12.5F, 0.5F);
         this.bowlFront = new ModelRenderer(this, 0, 36);
-        this.bowlFront.addBox(-8F, -3.5F, -0.5F, 16, 7, 1);
+        this.bowlFront.addBox(-8F, -3.5F, -0.5F, 16, 7, 1, scale);
         this.bowlFront.setRotationPoint(8, 12.5F, 15.5F);
         this.bowlLeft = new ModelRenderer(this, 0, 44);
-        this.bowlLeft.addBox(-0.5F, -3.5F, -7F, 1, 7, 14);
+        this.bowlLeft.addBox(-0.5F, -3.5F, -7F, 1, 7, 14, scale);
         this.bowlLeft.setRotationPoint(0.5F, 12.5F, 8);
         this.bowlRight = new ModelRenderer(this, 0, 44);
-        this.bowlRight.addBox(-0.5F, -3.5F, -7F, 1, 7, 14);
+        this.bowlRight.addBox(-0.5F, -3.5F, -7F, 1, 7, 14, scale);
         this.bowlRight.setRotationPoint(15.5F, 12.5F, 8);
         
         this.ashLayer = new ModelRenderer(this, 0, 65);
-        this.ashLayer.addBox(-7F, -0.5F, -7F, 14, 1, 14);
+        this.ashLayer.addBox(-7F, -0.5F, -7F, 14, 1, 14, scale);
         this.ashLayer.setRotationPoint(8, 9, 8);
         this.ashLayer.mirror = true;
     }
@@ -93,15 +95,10 @@ public class ModelCalcinator extends ModelBase {
         GL11.glTranslated(x, y, z);
         ForgeHooksClient.bindTexture(Reference.SPRITE_SHEET_LOCATION + "calcinator.png", 0);
         
-        legFrontLeft.render(scale);
-        legFrontRight.render(scale);
-        legBackLeft.render(scale);
-        legBackRight.render(scale);
-        armFrontLeft.render(scale);
-        armFrontRight.render(scale);
-        armBackLeft.render(scale);
-        armBackRight.render(scale);
+        // TODO Make a fire pot instead of a plate
         firePlate.render(scale);
+        
+        // TODO Merge this together better
         bowlBottom.render(scale);
         bowlBack.render(scale);
         bowlFront.render(scale);
@@ -110,6 +107,7 @@ public class ModelCalcinator extends ModelBase {
         
         ashLayer.render(scale);
         
+
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
