@@ -18,10 +18,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
-import ee3.common.core.RecipesTransmutationStone;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
+import ee3.common.core.handlers.FuelHandler;
 import ee3.common.core.handlers.ItemPickupHandler;
 import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
@@ -30,6 +30,7 @@ import ee3.common.core.handlers.VersionCheckTickHandler;
 import ee3.common.core.helper.VersionHelper;
 import ee3.common.item.ModItems;
 import ee3.common.lib.Reference;
+import ee3.common.recipe.RecipesTransmutationStone;
 
 /**
  * EquivalentExchange3
@@ -53,11 +54,11 @@ public class EquivalentExchange3 {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
+    	// Load the localization files into the LanguageRegistry
+    	LocalizationHandler.loadLanguages();
+    	
         // Initialize the configuration
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-
-    	// Load the localization files into the LanguageRegistry
-    	LocalizationHandler.instance().loadLanguages();
         
         // Conduct the version check and log the result
         VersionHelper.checkVersion();
@@ -106,6 +107,9 @@ public class EquivalentExchange3 {
         
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
+        
+        // Register the Fuel Handler
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
     }
 
