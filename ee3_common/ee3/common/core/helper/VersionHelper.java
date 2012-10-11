@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 
 /**
@@ -32,12 +33,14 @@ public class VersionHelper {
 	public static final byte CONNECTION_ERROR = 3;
 	
 	// Localization keys
+	private static final String VERSION_CHECK_DISABLED = "version.check_disabled";
+	private static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.init_log_message";
 	private static final String UNINITIALIZED_MESSAGE = "version.uninitialized";
 	private static final String CURRENT_MESSAGE = "version.current";
 	private static final String OUTDATED_MESSAGE = "version.outdated";
 	private static final String CONNECTION_ERROR_MESSAGE = "version.connection_error";
 
-	// Var to hold the result of the remote version check
+	// Var to hold the result of the remote version check, initially set to uninitialized
 	public static byte result = UNINITIALIZED;
 	
 	/***
@@ -88,29 +91,40 @@ public class VersionHelper {
 	}
 	
 	public static void logResult() {
-		if ((result == CURRENT) || (result == OUTDATED)) {
-			LogHelper.log(Level.FINE, getResultMessage());
+		if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+			LogHelper.log(Level.FINE, LanguageRegistry.instance().getStringLocalization(VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_FILE);
+			if ((result == CURRENT) || (result == OUTDATED)) {
+				LogHelper.log(Level.FINE, getResultMessage());
+			}
+			else {
+				LogHelper.log(Level.WARNING, getResultMessage());
+			}
 		}
 		else {
-			LogHelper.log(Level.WARNING, getResultMessage());
+			LogHelper.log(Level.FINE, getResultMessage());
 		}
 	}
 	
 	public static String getResultMessage() {
-		if (result == UNINITIALIZED) {
-			return LanguageRegistry.instance().getStringLocalization(UNINITIALIZED_MESSAGE);
-		}
-		else if (result == CURRENT) {
-			return LanguageRegistry.instance().getStringLocalization(CURRENT_MESSAGE);
-		}
-		else if (result == OUTDATED) {
-			return LanguageRegistry.instance().getStringLocalization(OUTDATED_MESSAGE);
-		}
-		else if (result == CONNECTION_ERROR) {
-			return LanguageRegistry.instance().getStringLocalization(CONNECTION_ERROR_MESSAGE);
+		if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+			if (result == UNINITIALIZED) {
+				return LanguageRegistry.instance().getStringLocalization(UNINITIALIZED_MESSAGE);
+			}
+			else if (result == CURRENT) {
+				return LanguageRegistry.instance().getStringLocalization(CURRENT_MESSAGE);
+			}
+			else if (result == OUTDATED) {
+				return LanguageRegistry.instance().getStringLocalization(OUTDATED_MESSAGE);
+			}
+			else if (result == CONNECTION_ERROR) {
+				return LanguageRegistry.instance().getStringLocalization(CONNECTION_ERROR_MESSAGE);
+			}
+			else {
+				return null;
+			}
 		}
 		else {
-			return null;
+			return LanguageRegistry.instance().getStringLocalization(VERSION_CHECK_DISABLED);
 		}
 	}
 

@@ -33,6 +33,9 @@ public class ConfigurationHandler {
             configuration.load();
 
             /* General Configs */
+            ConfigurationSettings.ENABLE_VERSION_CHECK = configuration
+            		.get(CATEGORY_GENERAL, Reference.ENABLE_VERSION_CHECK, ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT)
+            		.getBoolean(ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT);
             ConfigurationSettings.ENABLE_SOUNDS = configuration
             		.get(CATEGORY_GENERAL, Reference.ENABLE_SOUNDS, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT)
             		.getBoolean(ConfigurationSettings.ENABLE_SOUNDS_DEFAULT);
