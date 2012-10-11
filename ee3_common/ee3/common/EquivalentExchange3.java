@@ -1,5 +1,7 @@
 package ee3.common;
 
+import java.util.logging.Logger;
+
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -51,6 +53,9 @@ public class EquivalentExchange3 {
 
     @SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
     public static CommonProxy proxy;
+    
+    // TODO Come back to this later
+    public static Logger eeLogger = Logger.getLogger(Reference.MOD_NAME);
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
