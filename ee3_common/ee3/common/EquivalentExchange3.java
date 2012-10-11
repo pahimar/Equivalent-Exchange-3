@@ -45,7 +45,7 @@ import ee3.common.recipe.RecipesTransmutationStone;
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
-    @Instance
+    @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
     @SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
