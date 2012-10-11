@@ -49,7 +49,10 @@ public class Reference {
     public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
     public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
     public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
-
+    
+    /* Gui related constants */
+    public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
+    
     /* General Tile Entity related constants */
     public static final String TE_GEN_OWNER_NBT_TAG_LABEL = "owner";
     public static final String TE_GEN_STATE_NBT_TAG_LABEL = "state";
