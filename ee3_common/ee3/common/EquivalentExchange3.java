@@ -29,6 +29,7 @@ import ee3.common.core.handlers.PlayerDestroyItemHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
 import ee3.common.core.helper.VersionHelper;
 import ee3.common.item.ModItems;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 import ee3.common.recipe.RecipesTransmutationStone;
 
@@ -61,8 +62,10 @@ public class EquivalentExchange3 {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
         
         // Conduct the version check and log the result
-        VersionHelper.checkVersion();
-        VersionHelper.logResult();
+        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+        	VersionHelper.checkVersion();
+        }
+    	VersionHelper.logResult();
         
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);

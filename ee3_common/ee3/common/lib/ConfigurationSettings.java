@@ -19,6 +19,10 @@ public class ConfigurationSettings {
     public static boolean ENABLE_PARTICLE_FX;
     public static final boolean ENABLE_PARTICLE_FX_DEFAULT = true;
     
+    // Whether or not EE3 will do a version check when loaded
+    public static boolean ENABLE_VERSION_CHECK;
+    public static final boolean ENABLE_VERSION_CHECK_DEFAULT = true;
+    
     /* 
      * Minium stone config settings
      */
