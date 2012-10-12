@@ -92,16 +92,16 @@ public class VersionHelper {
 	
 	public static void logResult() {
 		if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-			LogHelper.log(Level.FINE, LanguageRegistry.instance().getStringLocalization(VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_FILE);
+			LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_FILE);
 			if ((result == CURRENT) || (result == OUTDATED)) {
-				LogHelper.log(Level.FINE, getResultMessage());
+				LogHelper.log(Level.INFO, getResultMessage());
 			}
 			else {
 				LogHelper.log(Level.WARNING, getResultMessage());
 			}
 		}
 		else {
-			LogHelper.log(Level.FINE, getResultMessage());
+			LogHelper.log(Level.INFO, getResultMessage());
 		}
 	}
 	
