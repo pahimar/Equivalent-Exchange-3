@@ -19,8 +19,7 @@ public class TransmutationHelper {
         }
 
         /*
-         * @TODO Clean up later tonight
-        ItemStack nextItem = TransmuteEquivalencyList.getNextBlockInEquivalencyList(id, meta, player.isSneaking());
+        ItemStack nextItem = EquivalencyHandler.getNextBlockInEquivalencyList(id, meta, player.isSneaking());
 
         if (nextItem != null) {
             if (Block.blocksList[nextItem.itemID] != null) {
@@ -30,7 +29,7 @@ public class TransmutationHelper {
             }
         }
         */
-
+        
         return false;
     }
 

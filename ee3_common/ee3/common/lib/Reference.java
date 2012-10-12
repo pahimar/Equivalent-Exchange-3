@@ -36,13 +36,13 @@ public class Reference {
     
     /* KeyBinding related constants */
     // TODO: Localize keybinding names
-    public static final String KEYBINDING_EXTRA = "mod.ee3.extra_key";
+    public static final String KEYBINDING_EXTRA = "key.extra";
     public static final int KEYBINDING_EXTRA_DEFAULT = 46;
-    public static final String KEYBINDING_RELEASE = "mod.ee3.release_key";
+    public static final String KEYBINDING_RELEASE = "key.release";
     public static final int KEYBINDING_RELEASE_DEFAULT = 19;
-    public static final String KEYBINDING_TOGGLE = "mod.ee3.toggle_key";
+    public static final String KEYBINDING_TOGGLE = "key.toggle";
     public static final int KEYBINDING_TOGGLE_DEFAULT = 34;
-    public static final String KEYBINDING_CHARGE = "mod.ee3.charge_key";
+    public static final String KEYBINDING_CHARGE = "key.charge";
     public static final int KEYBINDING_CHARGE_DEFAULT = 47;
 
     /* Texture related constants */
