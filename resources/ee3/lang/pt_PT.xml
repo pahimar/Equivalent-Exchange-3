@@ -12,7 +12,7 @@
 	<entry key="tile.redWaterStill.name">Água Vermelha (Estagnada)</entry>
 	<entry key="tile.redWaterFlowing.name">Água Vermelha (A fluir)</entry>
 	<entry key="tile.calcinator.name">Calcinatório</entry>
-	<entry key="gui.calcinator.name">Calcinator</entry>
+	<entry key="gui.calcinator.name">Calcinatório</entry>
 	<entry key="version.init_log_message">A iniciar a verificação da versão em relação ao ficheiro de versões remoto, localizado em</entry>
 	<entry key="version.uninitialized">A verificação de versão não teve sucesso porque não foi iniciada correctamente</entry>
 	<entry key="version.current">Estás a usar a versão atual para a tua versão do Minecraft</entry>
