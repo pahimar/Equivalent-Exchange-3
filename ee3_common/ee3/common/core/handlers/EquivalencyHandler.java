@@ -20,15 +20,18 @@ public class EquivalencyHandler {
 
         if ((stack1Index != null) && (stack2Index != null)) {
             return;
-        } else if ((stack1Index != null) && (stack2Index == null)) {
+        } 
+        else if ((stack1Index != null) && (stack2Index == null)) {
             currentList = equivalencyList.get(stack1Index.intValue());
             currentList.add(stack2);
             equivalencyList.set(stack1Index.intValue(), currentList);
-        } else if ((stack1Index == null) && (stack2Index != null)) {
+        }
+        else if ((stack1Index == null) && (stack2Index != null)) {
             currentList = equivalencyList.get(stack2Index.intValue());
             currentList.add(stack1);
             equivalencyList.set(stack2Index.intValue(), currentList);
-        } else if ((stack1Index == null) && (stack2Index == null)) {
+        }
+        else if ((stack1Index == null) && (stack2Index == null)) {
             currentList.add(stack1);
             currentList.add(stack2);
             equivalencyList.add(currentList);

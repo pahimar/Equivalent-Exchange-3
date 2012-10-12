@@ -2,6 +2,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>English (US) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Release</entry>
+	<entry key="key.toggle">Toggle</entry>
+	<entry key="key.charge">Charge</entry>
 	<entry key="item.miniumShard.name">Shard of Minium</entry>
 	<entry key="item.miniumStone.name">Minium Stone</entry>
 	<entry key="item.philStone.name">Philosopher's Stone</entry>
