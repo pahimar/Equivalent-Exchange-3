@@ -2,14 +2,21 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Dutch (NL) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Uitgave</entry>
+	<entry key="key.toggle">Schakelen</entry>
+	<entry key="key.charge">Lading</entry>
 	<entry key="item.miniumShard.name">Minium Scherf</entry>
 	<entry key="item.miniumStone.name">Minium Steen</entry>
 	<entry key="item.philStone.name">Steen der Wijzen</entry>
 	<entry key="tile.redWaterStill.name">Rood Water (Stilstaand)</entry>
 	<entry key="tile.redWaterFlowing.name">Rood Water (Vloeiend)</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
-	<entry key="version.uninitialized">Ongestart</entry>
-	<entry key="version.current">Huidig</entry>
-	<entry key="version.outdated">Verouderd</entry>
-	<entry key="version.connection_error">Verbindingsfout</entry>
+	<entry key="gui.calcinator.name">Calcinator</entry>
+	<entry key="version.init_log_message">Nakijken van versie tegenover het externe versie autoriteitsbestand geïnitialiseerd in</entry>
+	<entry key="version.uninitialized">Het nakijken van de versie is niet geslaagd (het nakijken van de versie werd niet juist geïnitialiseerd)</entry>
+	<entry key="version.current">U gebruikt momenteel de meest recente versie voor uw Minecraft</entry>
+	<entry key="version.outdated">U gebruikt momenteel niet de meest recente versie; overweeg om hier te updaten - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Fout tijdens het verbinden met het externe versie autoriteitsbestand (kijk uw Internet verbinding na?)</entry>
+	<entry key="version.check_disabled">Het nakijken van de versie is uitgeschakeld, overslaan</entry>
 </properties>
