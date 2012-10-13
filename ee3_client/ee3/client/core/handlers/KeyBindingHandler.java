@@ -10,7 +10,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import ee3.client.lib.KeyBindings;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import ee3.client.core.helper.KeyBindingHelper;
 import ee3.common.EquivalentExchange3;
 import ee3.common.item.ModItems;
 import ee3.common.lib.GuiIds;
@@ -31,7 +32,7 @@ import ee3.common.network.PacketTypeHandler;
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
     public KeyBindingHandler() {
-        super(KeyBindings.gatherKeyBindings(), KeyBindings.gatherIsRepeating());
+        super(KeyBindingHelper.gatherKeyBindings(), KeyBindingHelper.gatherIsRepeating());
     }
 
     @Override
@@ -45,7 +46,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
             if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
+                if (kb.keyDescription == getLocalizedKey(Reference.KEYBINDING_EXTRA)) {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
                     
                     if (currentItem != null) {
@@ -72,4 +73,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         return EnumSet.of(TickType.CLIENT);
     }
 
+    private static String getLocalizedKey(String key) {
+    	return LanguageRegistry.instance().getStringLocalization(key);
+    }
 }

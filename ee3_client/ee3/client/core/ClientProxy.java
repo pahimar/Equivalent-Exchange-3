@@ -8,13 +8,16 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.client.core.handlers.KeyBindingHandler;
 import ee3.client.core.handlers.SoundHandler;
-import ee3.client.lib.KeyBindings;
+import ee3.client.core.helper.KeyBindingHelper;
 import ee3.client.render.RenderCalcinator;
+import ee3.client.render.RenderItemCalcinator;
 import ee3.client.render.TextureRedWaterFX;
 import ee3.client.render.TextureRedWaterFlowFX;
 import ee3.common.core.CommonProxy;
+import ee3.common.lib.BlockIds;
 import ee3.common.lib.Reference;
 import ee3.common.lib.RenderIds;
 import ee3.common.tile.TileCalcinator;
@@ -38,8 +41,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void setKeyBinding(String name, int value) {
-        KeyBindings.addKeyBinding(name, value);
-        KeyBindings.addIsRepeating(false);
+        KeyBindingHelper.addKeyBinding(LanguageRegistry.instance().getStringLocalization(name), value);
+        KeyBindingHelper.addIsRepeating(false);
     }
 
     @Override
@@ -74,6 +77,8 @@ public class ClientProxy extends CommonProxy {
         
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFX());
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
+        
+        MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new RenderItemCalcinator());
     }
     
     @Override
