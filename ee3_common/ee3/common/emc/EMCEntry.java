@@ -18,8 +18,7 @@ public class EMCEntry {
 		breakdown = Collections.synchronizedMap(new HashMap<EMCType, Float>());
 	}
 
-	public EMCEntry(float cost, float recoveryPercentage, boolean learnable,
-			boolean recoverable) {
+	public EMCEntry(float cost, float recoveryPercentage, boolean learnable, boolean recoverable) {
 		this.cost = cost;
 		this.recoveryPercentage = recoveryPercentage;
 		this.learnable = learnable;
