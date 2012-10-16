@@ -8,7 +8,7 @@ public class QualityHelper {
 	 * Legend for the dust table quality lookup, comparison is based off of quality tiers
 	 * 
 	 *                   Item Quality
-	 *				|_0_|_1_|_2_|_3_|_4_|_5_|
+	 *	            |_0_|_1_|_2_|_3_|_4_|_5_|
 	 *   Fuel     0 | 0 | 0 | 0 | 1 | 1 | 1 |
 	 * 	Quality	  1 | 0 | 1 | 1 | 1 | 2 | 2 |
 	 * 	          2 | 0 | 1 | 2 | 2 | 2 | 2 |
