@@ -3,6 +3,8 @@ package ee3.common.emc;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.src.ItemStack;
+
 public class EMCRegistry {
 
 	private static final EMCRegistry emcRegistry = new EMCRegistry();
@@ -11,6 +13,11 @@ public class EMCRegistry {
 	
 	public EMCRegistry instance() {
 		return emcRegistry;
+	}
+	
+	public EMCEntry getEMCEntry(ItemStack item) {
+		
+		return null;
 	}
 	
 }
