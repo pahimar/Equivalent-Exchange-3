@@ -13,7 +13,7 @@ public class EMCRegistry {
 
 	private HashMap<Integer, HashMap<Integer, EMCEntry>> emcMap = new HashMap<Integer, HashMap<Integer, EMCEntry>>();
 
-	public EMCRegistry instance() {
+	public static EMCRegistry instance() {
 		return emcRegistry;
 	}
 	
