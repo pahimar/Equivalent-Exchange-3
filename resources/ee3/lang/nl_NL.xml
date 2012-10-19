@@ -2,14 +2,21 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Dutch (NL) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Ontlaad</entry>
+	<entry key="key.toggle">Wissel</entry>
+	<entry key="key.charge">Opladen</entry>
 	<entry key="item.miniumShard.name">Minium Scherf</entry>
 	<entry key="item.miniumStone.name">Minium Steen</entry>
 	<entry key="item.philStone.name">Steen der Wijzen</entry>
 	<entry key="tile.redWaterStill.name">Rood Water (Stilstaand)</entry>
 	<entry key="tile.redWaterFlowing.name">Rood Water (Vloeiend)</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
-	<entry key="version.uninitialized">Ongestart</entry>
-	<entry key="version.current">Huidig</entry>
-	<entry key="version.outdated">Verouderd</entry>
-	<entry key="version.connection_error">Verbindingsfout</entry>
+	<entry key="gui.calcinator.name">Calcinator</entry>
+	<entry key="version.init_log_message">Initialisatie versiecontrole tegen extern versie bestand, te vinden op</entry>
+	<entry key="version.uninitialized">De versiecontrole is niet geslaagd (versiecontrole niet correct gestart)</entry>
+	<entry key="version.current">Je gebruikt momenteel de meest recente versie voor jouw Minecraft versie</entry>
+	<entry key="version.outdated">Je gebruikt momenteel een verouderde versie; overweeg om up te daten - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Fout bij het verbinden met het extern versiecontrole bestand (controleer je internetverbinding)</entry>
+	<entry key="version.check_disabled">Externe versiecontrole uitgeschakeld, wordt overgeslagen</entry>
 </properties>
