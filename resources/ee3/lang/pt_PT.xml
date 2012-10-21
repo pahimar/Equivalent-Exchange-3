@@ -2,14 +2,21 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 <comment>Portuguese (PT) Post Reform Localization File</comment>
+<entry key="key.extra">Extra</entry>
+<entry key="key.release">Largar</entry>
+<entry key="key.toggle">Mudar</entry>
+<entry key="key.charge">Carregar</entry>
 <entry key="item.miniumShard.name">Fragmento de Mínio</entry>
 <entry key="item.miniumStone.name">Pedra de Mínio</entry>
 <entry key="item.philStone.name">Pedra do Filósofo</entry>
 <entry key="tile.redWaterStill.name">Água Vermelha (Estagnada)</entry>
 <entry key="tile.redWaterFlowing.name">Água Vermelha (A fluir)</entry>
 <entry key="tile.calcinator.name">Calcinatório</entry>
-<entry key="version.uninitialized">Não iniciado</entry>
-<entry key="version.current">Atual</entry>
-<entry key="version.outdated">Desatualizado</entry>
-<entry key="version.connection_error">Erro de Ligação</entry>
+<entry key="gui.calcinator.name">Calcinatório</entry>
+<entry key="version.init_log_message">A iniciar verificação da versão em relação ao ficheiro de autoridade, localizado em</entry>
+<entry key="version.uninitialized">A verificação da versão não foi completa com sucesso (verificação de versão não iniciou correctamente)</entry>
+<entry key="version.current">Esta é a versão mais atualizada para esta versão de Minecraft</entry>
+<entry key="version.outdated">A tua versão está desatualizada; considere atualizar aqui - http://goo.gl/sNcGl</entry>
+<entry key="version.connection_error">Erro ao conectar ao ficheiro de verificação de versão (verifique a sua conecção à internet?)</entry>
+<entry key="version.check_disabled">Verificação de versão desligada, ignorando</entry>
 </properties>
