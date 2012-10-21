@@ -155,13 +155,37 @@ public class EquivalencyHandler {
     }
     
     public ItemStack getPrevInList(Object obj) {
-    	// TODO Finish
+    	ItemStack checkStack = GeneralHelper.convertObjectToItemStack(obj);
+
+    	if (checkStack != null) {
+    		return getPrevInList(checkStack.itemID, checkStack.getItemDamage());
+    	}
+    	
     	return null;
     }
     
     public ItemStack getPrevInList(int id, int meta) {
-    	// TODO Finish
-    	return null;
+    	ArrayList<ItemStack> list = getEquivalencyList(id, meta);
+
+    	ItemStack currentStack;
+    	ItemStack returnStack = null;
+    	int i = 0;
+
+    	if (list != null) {
+	    	while (i < list.size()) {
+		    	currentStack = list.get(i);
+		    	
+		    	if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
+		    		int index = ((i - 1) + list.size()) % list.size();
+		    		returnStack = list.get(index);
+		    		break;
+		    	}
+		    	
+		    	++i;
+	    	}
+    	}
+
+    	return returnStack;
     }
 
     public void debug() {
