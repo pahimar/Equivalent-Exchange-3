@@ -4,6 +4,7 @@ import ee3.common.block.ModBlocks;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.NBTTagList;
 
 public class TileCalcinator extends TileEE implements IInventory {
 	
@@ -14,10 +15,35 @@ public class TileCalcinator extends TileEE implements IInventory {
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
+		
+		// Read in the ItemStacks in the inventory from NBT
+		NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        this.calcinatorItemStacks = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); ++i) {
+            NBTTagCompound tagCompound = (NBTTagCompound)tagList.tagAt(i);
+            byte slot = tagCompound.getByte("Slot");
+            if (slot >= 0 && slot < this.calcinatorItemStacks.length) {
+                this.calcinatorItemStacks[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            }
+        }
+		
 	}
 	
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
+		
+		// Write the ItemStacks in the inventory to NBT
+		NBTTagList tagList = new NBTTagList();
+        for (int currentIndex = 0; currentIndex < this.calcinatorItemStacks.length; ++currentIndex) {
+            if (this.calcinatorItemStacks[currentIndex] != null) {
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte)currentIndex);
+                this.calcinatorItemStacks[currentIndex].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        nbtTagCompound.setTag("Items", tagList);
+        
 	}
 
 	/**
@@ -56,7 +82,6 @@ public class TileCalcinator extends TileEE implements IInventory {
 	public int getInventoryStackLimit() {
 		return 64;
 	}
-
 
 	public void openChest() { }
 	public void closeChest() { }

@@ -6,6 +6,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import ee3.common.core.helper.VersionHelper;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 
 public class VersionCheckTickHandler implements ITickHandler {
@@ -17,12 +18,14 @@ public class VersionCheckTickHandler implements ITickHandler {
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if (!initialized) {
-			for (TickType tickType : type) {
-				if (tickType == TickType.CLIENT) {
-					if (FMLClientHandler.instance().getClient().currentScreen == null) {
-						initialized = true;
-						FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(VersionHelper.getResultMessage());
+		if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+			if (!initialized) {
+				for (TickType tickType : type) {
+					if (tickType == TickType.CLIENT) {
+						if (FMLClientHandler.instance().getClient().currentScreen == null) {
+							initialized = true;
+							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(Reference.VERSION_CHECK_COLOUR_PREFIX + "[" + Reference.MOD_NAME + "] " + VersionHelper.getResultMessage());
+						}
 					}
 				}
 			}

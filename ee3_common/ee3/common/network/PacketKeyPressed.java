@@ -11,7 +11,7 @@ import ee3.common.lib.ItemIds;
 import ee3.common.lib.Reference;
 
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.NetworkManager;
+import net.minecraft.src.INetworkManager;
 import net.minecraft.src.Packet250CustomPayload;
 
 public class PacketKeyPressed extends PacketEE {
@@ -40,7 +40,7 @@ public class PacketKeyPressed extends PacketEE {
 		this.key = key;
 	}
 	
-	public void execute(NetworkManager manager, Player player) {
+	public void execute(INetworkManager manager, Player player) {
 		EntityPlayer thePlayer = (EntityPlayer) player;
 
 		if ((this.key.equals(Reference.KEYBINDING_EXTRA)) && (thePlayer.getCurrentEquippedItem().getItem().shiftedIndex == ItemIds.MINIUM_STONE)) {

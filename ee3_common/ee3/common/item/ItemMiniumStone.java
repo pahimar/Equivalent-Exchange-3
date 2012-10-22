@@ -1,12 +1,16 @@
 package ee3.common.item;
 
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import ee3.common.EquivalentExchange3;
+import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
+import ee3.common.lib.Reference;
 
 /**
  * ItemMiniumStone
@@ -44,6 +48,17 @@ public class ItemMiniumStone extends ItemEE {
     	itemStack.setItemDamage(itemStack.getItemDamage() + 1);
     	
 		return itemStack;
+    }
+    
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
+		boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+		
+		if (result) {
+			itemStack.damageItem(1, entityPlayer);
+		}
+		
+		return result;
     }
     
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import cpw.mods.fml.common.network.Player;
 
-import net.minecraft.src.NetworkManager;
+import net.minecraft.src.INetworkManager;
 import net.minecraftforge.common.ForgeDirection;
 
 public class PacketTileUpdate extends PacketEE {
@@ -62,7 +62,7 @@ public class PacketTileUpdate extends PacketEE {
 		this.player = data.readUTF();
 	}
 
-	public void execute(NetworkManager manager, Player player) {
+	public void execute(INetworkManager manager, Player player) {
 		// TODO: Stuff here
 	}
 	
