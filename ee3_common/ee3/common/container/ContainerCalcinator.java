@@ -114,7 +114,7 @@ public class ContainerCalcinator extends Container {
                 return null;
             }
 
-            var3.onPickupFromSlot(var4);
+            var3.onSlotChanged();
         }
 
         return var2;

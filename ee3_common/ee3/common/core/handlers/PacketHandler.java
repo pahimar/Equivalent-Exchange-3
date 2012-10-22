@@ -3,7 +3,8 @@ package ee3.common.core.handlers;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-import net.minecraft.src.NetworkManager;
+import net.minecraft.src.INetworkManager;
+import net.minecraft.src.TcpConnection;
 import net.minecraft.src.Packet250CustomPayload;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -28,7 +29,7 @@ public class PacketHandler implements IPacketHandler {
 	 * @param player The Player associated with the packet
 	 */
     @Override
-    public void onPacketData(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
     	// Build a PacketEE object from the data contained within the Packet250CustomPayload packet
     	PacketEE packetEE = PacketTypeHandler.buildPacket(packet.data);
     	
