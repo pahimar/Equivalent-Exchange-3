@@ -65,7 +65,7 @@ public class EquivalencyHandler {
         while (i < equivalencyList.size()) {
             currentList = equivalencyList.get(i);
             for (ItemStack currentStack : currentList) {
-                if (checkStack.isStackEqual(currentStack)) {
+                if (ItemStack.areItemStacksEqual(checkStack, currentStack)) {
                     return new Integer(i);
                 }
             }
@@ -100,7 +100,7 @@ public class EquivalencyHandler {
 
         for (ArrayList<ItemStack> list : equivalencyList) {
             for (ItemStack currentStack : list) {
-                if (checkStack.isStackEqual(currentStack)) {
+                if (ItemStack.areItemStacksEqual(checkStack, currentStack)) {
                     return list;
                 }
             }
