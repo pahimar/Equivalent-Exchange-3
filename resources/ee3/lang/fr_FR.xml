@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+<comment>French (FR) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Libérer</entry>
+	<entry key="key.toggle">Baculer</entry>
+	<entry key="key.charge">Charger</entry>
+	<entry key="item.miniumShard.name">Eclat de Minium</entry>
+	<entry key="item.miniumStone.name">Pierre de Minium</entry>
+	<entry key="item.philStone.name">Pierre Philosophale</entry>
+	<entry key="tile.redWaterStill.name">Eau rouge (Immobile)</entry>
+	<entry key="tile.redWaterFlowing.name">Eau rouge (Ruisselante)</entry>
+	<entry key="tile.calcinator.name">Calcinateur</entry>
+	<entry key="version.init_log_message">Lancement de la vérification de votre version par rapport à cette de reference : </entry>
+	<entry key="version.uninitialized">Le lancement de la vérification a échoué</entry>
+	<entry key="version.current">Vous utilisez la version la plus à jour pour votre version de Minecraft</entry>
+	<entry key="version.outdated">Vous utilisez une verison obsolète, pensez à effecuter une mise a jour ici - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Erreur de connexion vers la version de référence (vérifiez votre connexion internet ?)</entry>
+	<entry key="version.check_disabled">Verification de version désactiée</entry>
+</properties>
