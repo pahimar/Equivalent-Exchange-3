@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Czech (CS) Localization File</comment>
+	<entry key="item.miniumShard.name">Úlomek suříku</entry>
+	<entry key="item.miniumStone.name">Kámen suříku</entry>
+	<entry key="item.philStone.name">Kámen mudrců</entry>
+	<entry key="tile.redWaterStill.name">Rudá voda (v klidu)</entry>
+	<entry key="tile.redWaterFlowing.name">Rudá voda (tekoucí)</entry>
+	<entry key="tile.calcinator.name">Kalcinátor</entry>
+	<entry key="version.uninitialized">Neinicializováno</entry>
+	<entry key="version.current">Proud</entry>
+	<entry key="version.outdated">Zastaralé</entry>
+	<entry key="version.connection_error">Chyba připojení</entry>
+</properties>
