@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Czech (CS) Localization File</comment>
+	<entry key="item.miniumShard.name">Úlomek suříku</entry>
+	<entry key="item.miniumStone.name">Kámen suříku</entry>
+	<entry key="item.philStone.name">Kámen mudrců</entry>
+	<entry key="tile.redWaterStill.name">Rudá voda (v klidu)</entry>
+	<entry key="tile.redWaterFlowing.name">Rudá voda (tekoucí)</entry>
+	<entry key="tile.calcinator.name">Kalcinátor</entry>
+	<entry key="version.uninitialized">Neinicializováno</entry>
+	<entry key="version.current">Proud</entry>
+	<entry key="version.outdated">Zastaralé</entry>
+	<entry key="version.connection_error">Chyba připojení</entry>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Vypustit</entry>
+	<entry key="key.toggle">Přepnout</entry>
+	<entry key="key.charge">Nabít</entry>
+	<entry key="gui.calcinator.name">Kalcinátor</entry>
+	<entry key="version.init_log_message">Provádím kontrolu verze, vzdálený soubor umístěn na </entry>
+	<entry key="version.uninitialized">Kontrola verze neproběhla úspěšně (nezdařila se inicializace)</entry>
+	<entry key="version.current">Používáte nejaktuálnější verzi, která je pro vaši verzi Minecraftu</entry>
+	<entry key="version.outdated">Používáte neaktuální verzi; zvažte aktualizaci - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Chyba při připojování k servru poskytujícímu informace o verzi (je v pořádku vaše připojení k Internetu?)</entry>
+	<entry key="version.check_disabled">Kontrola verze deaktivována, přeskakuji</entry>
+</properties>
