@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Swedish (SE) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Släpp</entry>
+	<entry key="key.toggle">Växla</entry>
+	<entry key="key.charge">Laddda</entry>
+	<entry key="item.miniumShard.name">Fragment av Minium</entry>
+	<entry key="item.miniumStone.name">Minium Sten</entry>
+	<entry key="item.philStone.name">Filosofens Sten</entry>
+	<entry key="tile.redWaterStill.name">Rött Vatten (Stilla)</entry>
+	<entry key="tile.redWaterFlowing.name">Rött Vatten (Forsande)</entry>
+	<entry key="tile.calcinator.name">Kalcinator</entry>
+	<entry key="gui.calcinator.name">Kalcinator</entry>
+	<entry key="version.init_log_message">Initierar versionskontroll mot den avlägsna versions auktoritet filen, lokaliserad vid</entry>
+	<entry key="version.uninitialized">Versionskontrollen avslutades inte framgångsrikt (Versionskontrollen initierade inte riktigt)</entry>
+	<entry key="version.current">Du använder för närvarande den mest uppdaterade versionen för din version av Minecraft</entry>
+	<entry key="version.outdated">Du använder för närvarande en utdaterad version; Fundera på att updattera här - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Fel att ansluta till den avlägsna versions auktoritets fil (Kolla din internetanslutning?)</entry>
+	<entry key="version.check_disabled">Avlägsens versions kontroll inaktiverad, hoppar över</entry>
+</properties>
