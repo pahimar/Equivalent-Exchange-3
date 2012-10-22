@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import cpw.mods.fml.common.network.Player;
-import net.minecraft.src.NetworkManager;
+import net.minecraft.src.INetworkManager;
 
 public class PacketEE {
 	
@@ -43,7 +43,7 @@ public class PacketEE {
 
 	public void writeData(DataOutputStream dos) throws IOException { }
 
-	public void execute(NetworkManager network, Player player) { }
+	public void execute(INetworkManager network, Player player) { }
 	
 	public void setKey(int key) { }
 }

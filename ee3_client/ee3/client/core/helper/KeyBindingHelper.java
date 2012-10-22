@@ -1,4 +1,4 @@
-package ee3.client.lib;
+package ee3.client.core.helper;
 
 import java.util.ArrayList;
 import net.minecraft.src.KeyBinding;
@@ -12,7 +12,7 @@ import net.minecraft.src.KeyBinding;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class KeyBindings {
+public class KeyBindingHelper {
 
     public static ArrayList<KeyBinding> keyBindingsList;
     public static ArrayList<Boolean> isRepeatingList;

@@ -18,18 +18,21 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
-import ee3.common.core.RecipesTransmutationStone;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
+import ee3.common.core.handlers.FuelHandler;
 import ee3.common.core.handlers.ItemPickupHandler;
 import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
+import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.VersionHelper;
 import ee3.common.item.ModItems;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
+import ee3.common.recipe.RecipesTransmutationStone;
 
 /**
  * EquivalentExchange3
@@ -44,24 +47,29 @@ import ee3.common.lib.Reference;
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
-    @Instance
+    @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = "ee3.client.core.ClientProxy", serverSide = "ee3.common.core.CommonProxy")
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
+    	// Initialize the log helper
+        LogHelper.init();
+        
+    	// Load the localization files into the LanguageRegistry
+    	LocalizationHandler.loadLanguages();
+    	
         // Initialize the configuration
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
-
-    	// Load the localization files into the LanguageRegistry
-    	LocalizationHandler.instance().loadLanguages();
         
         // Conduct the version check and log the result
-        VersionHelper.checkVersion();
-        VersionHelper.logResult();
+        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+        	VersionHelper.checkVersion();
+        }
+    	VersionHelper.logResult();
         
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
@@ -106,6 +114,9 @@ public class EquivalentExchange3 {
         
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
+        
+        // Register the Fuel Handler
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
     }
 

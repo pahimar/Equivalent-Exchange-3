@@ -1,17 +1,89 @@
 package ee3.common.tile;
 
+import ee3.common.block.ModBlocks;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.NBTTagList;
 
-public class TileCalcinator extends TileEE {
+public class TileCalcinator extends TileEE implements IInventory {
+	
+	/**
+     * The ItemStacks that hold the items currently being used in the Calcinator
+     */
+	private ItemStack[] calcinatorItemStacks = new ItemStack[3];
 
-	@Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readFromNBT(par1NBTTagCompound);
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		
+		// Read in the ItemStacks in the inventory from NBT
+		NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        this.calcinatorItemStacks = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); ++i) {
+            NBTTagCompound tagCompound = (NBTTagCompound)tagList.tagAt(i);
+            byte slot = tagCompound.getByte("Slot");
+            if (slot >= 0 && slot < this.calcinatorItemStacks.length) {
+                this.calcinatorItemStacks[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            }
+        }
+		
 	}
 	
-	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeToNBT(par1NBTTagCompound);
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		
+		// Write the ItemStacks in the inventory to NBT
+		NBTTagList tagList = new NBTTagList();
+        for (int currentIndex = 0; currentIndex < this.calcinatorItemStacks.length; ++currentIndex) {
+            if (this.calcinatorItemStacks[currentIndex] != null) {
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte)currentIndex);
+                this.calcinatorItemStacks[currentIndex].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        nbtTagCompound.setTag("Items", tagList);
+        
 	}
+
+	/**
+     * Returns the number of slots in the inventory.
+     */
+	public int getSizeInventory() {
+		return this.calcinatorItemStacks.length;
+	}
+
+	/**
+     * Returns the stack in slot i
+     */
+	public ItemStack getStackInSlot(int i) {
+		return this.calcinatorItemStacks[i];
+	}
+
+	public ItemStack decrStackSize(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ItemStack getStackInSlotOnClosing(int i) {
+		return null;
+	}
+
+	@Override
+	public void setInventorySlotContents(int var1, ItemStack var2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getInvName() {
+		return "container." + ModBlocks.CALCINATOR_NAME;
+	}
+
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	public void openChest() { }
+	public void closeChest() { }
 	
 }
