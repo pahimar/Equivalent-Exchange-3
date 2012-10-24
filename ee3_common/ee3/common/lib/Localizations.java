@@ -17,9 +17,11 @@ public class Localizations {
 		LANG_RESOURCE_LOCATION + "cy_GB.xml",
 		LANG_RESOURCE_LOCATION + "de_DE.xml",
 		LANG_RESOURCE_LOCATION + "en_US.xml",
+		LANG_RESOURCE_LOCATION + "fr_FR.xml",
 		LANG_RESOURCE_LOCATION + "it_IT.xml",
 		LANG_RESOURCE_LOCATION + "nl_NL.xml",
 		LANG_RESOURCE_LOCATION + "pt_PT.xml",
+		LANG_RESOURCE_LOCATION + "es_ES.xml",
 		LANG_RESOURCE_LOCATION + "ru_RU.xml"
 	};
 
