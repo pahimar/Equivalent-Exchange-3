@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Archivo de Traducción en Español (ES)</comment>
+	<comment>Archivo de TraducciÃ³n en EspaÃ±ol (ES)</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Lanzamiento</entry>
 	<entry key="key.toggle">Alternar</entry>
@@ -13,10 +13,10 @@
 	<entry key="tile.redWaterFlowing.name">Agua Roja (Fluyendo)</entry>
 	<entry key="tile.calcinator.name">Calcinador</entry>
 	<entry key="gui.calcinator.name">Calcinador</entry>
-	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
-	<entry key="version.uninitialized">El chequeo de versiones no se completó exitosamente (el chequeo de versiones no se inicializó correctamente)</entry>
-	<entry key="version.current">Actualmente estás usando la versión más actualizada para tu versión de Minecraft</entry>
-	<entry key="version.outdated">Actualmente estás usando una versión desactualizada; considera actualizarla aquí - http://goo.gl/sNcGl</entry>
-	<entry key="version.connection_error">Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)</entry>
+	<entry key="version.init_log_message">Inicializando chequeo de versiÃ³n contra el archivo autoritario remoto, ubicado en</entry>
+	<entry key="version.uninitialized">El chequeo de versiones no se completÃ³ exitosamente (el chequeo de versiones no se inicializÃ³ correctamente)</entry>
+	<entry key="version.current">Actualmente estÃ¡s usando la versiÃ³n mÃ¡s actualizada para tu versiÃ³n de Minecraft</entry>
+	<entry key="version.outdated">Actualmente estÃ¡s usando una versiÃ³n desactualizada; considera actualizarla aquÃ­ - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Error al conectar con el archivo autoritario remoto (Â¿Comprueba tu conexiÃ³n a internet?)</entry>
 	<entry key="version.check_disabled">Chequeo remoto de versiones desactivado, omitiendo</entry>
 </properties>
