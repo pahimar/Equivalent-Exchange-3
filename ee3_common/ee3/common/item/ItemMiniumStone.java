@@ -8,9 +8,9 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.TransmutationHelper;
+import ee3.common.lib.Colours;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
-import ee3.common.lib.Reference;
 
 /**
  * ItemMiniumStone
@@ -59,6 +59,18 @@ public class ItemMiniumStone extends ItemEE {
 		}
 		
 		return result;
+    }
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+    public int func_82790_a(ItemStack par1ItemStack, int par2)
+    {
+        return Integer.parseInt(Colours.PURE_RED, 16);
+    }
+	
+	@SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack) {
+        return false;
     }
     
 }
