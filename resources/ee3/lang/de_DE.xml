@@ -6,7 +6,7 @@
 	<entry key="item.miniumStone.name">Miniumstein</entry>
 	<entry key="item.philStone.name">Stein der Weisen</entry>
 	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
-	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fliessend)</entry>
+	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fließend)</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="version.uninitialized">Uninitialisiert</entry>
 	<entry key="version.current">Aktuell</entry>
