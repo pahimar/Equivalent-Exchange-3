@@ -7,6 +7,7 @@
 	<entry key="key.toggle">Toggle</entry>
 	<entry key="key.charge">Charge</entry>
 	<entry key="item.miniumShard.name">Shard of Minium</entry>
+	<entry key="item.inertStone.name">Inert Stone</entry>
 	<entry key="item.miniumStone.name">Minium Stone</entry>
 	<entry key="item.philStone.name">Philosopher's Stone</entry>
 	<entry key="tile.redWaterStill.name">Red Water (Still)</entry>

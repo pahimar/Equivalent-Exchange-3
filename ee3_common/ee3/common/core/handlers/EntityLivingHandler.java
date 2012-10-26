@@ -1,8 +1,10 @@
 package ee3.common.core.handlers;
 
+import ee3.common.core.helper.ItemDropHelper;
 import ee3.common.core.helper.RedWaterHelper;
 import ee3.common.lib.Reference;
 import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionEffect;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -28,7 +30,9 @@ public class EntityLivingHandler {
 	
 	@ForgeSubscribe
 	public void onEntityLivingDeath(LivingDeathEvent event) {
-		
+		if (event.source.getDamageType().equals("player")) {
+			ItemDropHelper.dropMiniumShard((EntityPlayer)event.source.getSourceOfDamage(), event.entityLiving);
+		}
 	}
 	
 }
