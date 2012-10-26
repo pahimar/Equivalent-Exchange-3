@@ -8,7 +8,7 @@ public class PlayerDestroyItemHandler {
     @ForgeSubscribe
     public void onPlayerDestroyItemEvent(PlayerDestroyItemEvent event) {
         // TODO Come back and actually do what I want here
-        System.out.println(event.original.func_82833_r());
+
     }
 
 }
