@@ -40,12 +40,18 @@ public class ModItems {
 
         miniumStone.setContainerItem(miniumStone);
         philStone.setContainerItem(philStone);
+
+        GameRegistry.addRecipe(new ItemStack(inertStone), 
+                new Object[] {" s ","sis"," s ", 
+            Character.valueOf('s'), Block.stone, 
+            Character.valueOf('i'), Item.ingotGold
+        });
         
         GameRegistry.addRecipe(new ItemStack(miniumStone), 
-        		new Object[] {"sss","sds","sss", 
+        		new Object[] {"sss","sis","sss", 
 	        Character.valueOf('s'), miniumShard, 
-	        Character.valueOf('d'), Item.diamond
-	        });
+	        Character.valueOf('i'), inertStone
+        });
 
     }
 }
