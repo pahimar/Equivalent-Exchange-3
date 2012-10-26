@@ -7,6 +7,7 @@
 	<entry key="key.toggle">Переключение</entry>
 	<entry key="key.charge">Заряд</entry>
 	<entry key="item.miniumShard.name">Осколок Сурика</entry>
+	<entry key="item.inertStone.name">Инертный Камень</entry>
 	<entry key="item.miniumStone.name">Сурик</entry>
 	<entry key="item.philStone.name">Философский Камень</entry>
 	<entry key="tile.redWaterStill.name">Красная Вода (Стоящая)</entry>
