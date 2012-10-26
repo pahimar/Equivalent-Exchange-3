@@ -13,6 +13,7 @@ public class ItemMiniumShard extends ItemEE {
 
     public ItemMiniumShard(int id) {
         super(id);
+        maxStackSize = 64;
     }
 
 }

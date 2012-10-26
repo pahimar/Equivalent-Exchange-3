@@ -17,7 +17,6 @@ public class LogHelper {
 	}
 	
 	public static void log(Level logLevel, String message) {
-		//System.out.println(Reference.LOGGER_PREFIX + message);
 		eeLogger.log(logLevel, message);
 	}
 	
