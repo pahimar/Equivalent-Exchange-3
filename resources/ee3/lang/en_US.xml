@@ -14,6 +14,7 @@
 	<entry key="tile.redWaterFlowing.name">Red Water (Flowing)</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="gui.calcinator.name">Calcinator</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initializing version check against the remote version authority file, located at</entry>
 	<entry key="version.uninitialized">The version check did not complete successfully (version check did not initialize properly)</entry>
 	<entry key="version.current">You are currently using the most up to date version for your version of Minecraft</entry>

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import ee3.common.core.handlers.EquivalencyHandler;
 import ee3.common.lib.Sounds;
 import net.minecraft.src.Block;
+import net.minecraft.src.BlockSand;
+import net.minecraft.src.BlockLeaves;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
@@ -18,12 +20,11 @@ public class TransmutationHelper {
         int id = world.getBlockId(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (world.getBlockMaterial(x, y, z) == Material.leaves) {
-            meta = meta % 4;
+        if ((world.getBlockMaterial(x, y, z) == Material.leaves) && (Block.blocksList[id] instanceof BlockLeaves)) {
+        	meta = meta % 4;
         }
 
-        /*
-        ItemStack nextItem = EquivalencyHandler.getNextBlockInEquivalencyList(id, meta, player.isSneaking());
+        ItemStack nextItem = getNextBlock(id, meta, player.isSneaking());
 
         if (nextItem != null) {
             if (Block.blocksList[nextItem.itemID] != null) {
@@ -32,7 +33,6 @@ public class TransmutationHelper {
                 return true;
             }
         }
-        */
         
         return false;
     }
@@ -43,18 +43,8 @@ public class TransmutationHelper {
         ItemStack nextStack = null;
         
         if (list != null) {
-            nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
-            
-            
+            return getNextBlock(id, meta, id, meta, allowFalling);
         }
-        
-        /*
-         * Get next in list
-         * if next !block
-         *  set current to next
-         *  repeat
-         * else
-         */
         
         return nextStack;
     }
@@ -67,16 +57,46 @@ public class TransmutationHelper {
         if (list != null) {
             nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
 
-            if (nextStack.getItem() instanceof ItemBlock) {
-                
+            /*
+             * If the current item is the same as the original one we started with, then we have
+             * recursed through the entire list and not found a next block so return the original.
+             * This is the "base case" for the recursion.
+             */
+            if ((nextStack.itemID == origId) && (nextStack.getItemDamage() == origMeta)) {
+            	return nextStack;
             }
             else {
-                return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
+            	/*
+            	 * If we are allowing any block (including falling ones) just check to see if the 
+            	 * next item is a block. If it is, return it. Otherwise continue the recursion.
+            	 */
+            	if (allowFalling) {
+            		if (nextStack.getItem() instanceof ItemBlock) {
+            			return nextStack;
+            		}
+            		else {
+            			return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
+            		}
+            	}
+            	/*
+            	 * Else we need to check to make sure the next item is both a block and not an
+            	 * instance of BlockSand (which all gravity affected blocks are a subclass of.
+            	 * If the next item is a block, and is not a subclass of BlockSand return it,
+            	 * otherwise, continue the recursion.
+            	 */
+            	else {
+            		if ((nextStack.getItem() instanceof ItemBlock) && (!(Block.blocksList[nextStack.itemID] instanceof BlockSand))) {
+            			return nextStack;
+            		}
+            		else {
+            			return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
+            		}
+            	}
             }
-            
         }
         
+        // In the event the list is null, return null
         return nextStack;
     }
-
+    
 }
