@@ -5,6 +5,15 @@ import net.minecraft.src.EntityAgeable;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 
+/**
+ * ItemDropHelper
+ * 
+ * Helper methods for dropping items in game
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ItemDropHelper {
 	
 	private static double rand;

@@ -2,20 +2,17 @@ package ee3.common.core.helper;
 
 import net.minecraft.src.ItemStack;
 
+/**
+ * QualityHelper
+ * 
+ * Helper methods for determining the quality tier of items
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class QualityHelper {
 	
-	/*
-	 * Legend for the dust table quality lookup, comparison is based off of quality tiers
-	 * 
-	 *                   Item Quality
-	 *	            |_0_|_1_|_2_|_3_|_4_|_5_|
-	 *   Fuel     0 | 0 | 0 | 0 | 1 | 1 | 1 |
-	 * 	Quality	  1 | 0 | 1 | 1 | 1 | 2 | 2 |
-	 * 	          2 | 0 | 1 | 2 | 2 | 2 | 2 |
-	 *            3 | 1 | 1 | 2 | 3 | 3 | 3 |
-	 *            4 | 1 | 2 | 2 | 3 | 4 | 4 |
-	 *            5 | 1 | 2 | 2 | 3 | 4 | 5 |
-	 */
 	private static int[][] dustTable = {
 		{0, 0, 0, 1, 1, 1},
 		{0, 1, 1, 1, 2, 2},

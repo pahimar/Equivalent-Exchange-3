@@ -4,6 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * EMCEntry
+ * 
+ * Holds the breakdown of how much, and what kinds, of EMC an object has
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class EMCEntry {
 
 	private float cost, recoveryPercentage;

@@ -18,6 +18,15 @@ import ee3.common.core.helper.RecipeHelper;
 import ee3.common.item.ModItems;
 import ee3.common.lib.Reference;
 
+/**
+ * RecipesTransmutationStone
+ * 
+ * Transmutation Stone recipes
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RecipesTransmutationStone {
 
     private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);

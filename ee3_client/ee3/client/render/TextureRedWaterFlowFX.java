@@ -8,6 +8,15 @@ import cpw.mods.fml.client.FMLTextureFX;
 import ee3.common.block.ModBlocks;
 import ee3.common.lib.Reference;
 
+/**
+ * TextureRedWaterFlowFX
+ * 
+ * TextureFX for flowing Red Water
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TextureRedWaterFlowFX extends FMLTextureFX {
 
     protected float[] red = new float[256];

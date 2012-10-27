@@ -7,6 +7,15 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
+/**
+ * EMCRegistry
+ * 
+ * Registry containing all EMC entries for objects
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class EMCRegistry {
 
 	private static final EMCRegistry emcRegistry = new EMCRegistry();

@@ -14,7 +14,15 @@ import net.minecraft.src.InventoryPlayer;
 import net.minecraft.src.StatCollector;
 import net.minecraft.src.TileEntityFurnace;
 
-@SideOnly(Side.CLIENT)
+/**
+ * GuiCalcinator
+ * 
+ * Calcinator Gui class
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class GuiCalcinator extends GuiContainer {
 
     private TileCalcinator calcinator;

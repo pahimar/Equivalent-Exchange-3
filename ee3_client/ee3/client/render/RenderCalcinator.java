@@ -9,6 +9,15 @@ import net.minecraft.src.ModelRenderer;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.TileEntitySpecialRenderer;
 
+/**
+ * RenderCalcinator
+ * 
+ * Renders the Calcinator in game as a TESR (Tile Entity Special Render)
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RenderCalcinator extends TileEntitySpecialRenderer {
 
     static final float scale = (float) (1.0 / 16.0);

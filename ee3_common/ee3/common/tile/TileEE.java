@@ -5,6 +5,15 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 
+/**
+ * TileEE
+ * 
+ * General tile entity for EE3 related tile entities
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TileEE extends TileEntity {
 	
 	private byte direction;

@@ -9,6 +9,15 @@ import cpw.mods.fml.common.network.Player;
 import net.minecraft.src.INetworkManager;
 import net.minecraftforge.common.ForgeDirection;
 
+/**
+ * PacketTileUpdate
+ * 
+ * Packet specifically for updating/synching tile entities between client and server
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketTileUpdate extends PacketEE {
 
 	public int x, y, z;

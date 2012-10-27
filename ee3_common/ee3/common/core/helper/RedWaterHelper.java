@@ -8,6 +8,15 @@ import net.minecraft.src.EntityLiving;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.World;
 
+/**
+ * RedWaterHelper
+ * 
+ * Helper methods for Red Water related effects
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RedWaterHelper {
 
     public static boolean handleRedWaterDetection(EntityLiving entity) {

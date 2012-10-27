@@ -8,6 +8,15 @@ import net.minecraft.src.Tessellator;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
+/**
+ * RenderItemCalcinator
+ * 
+ * Renders the Calcinator in game as an item (in hand, on the ground, and in inventory)
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RenderItemCalcinator implements IItemRenderer {
 
 	private ModelCalcinator calcinatorModel;

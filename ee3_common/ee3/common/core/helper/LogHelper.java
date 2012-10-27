@@ -8,6 +8,15 @@ import cpw.mods.fml.common.FMLLog;
 import ee3.common.EquivalentExchange3;
 import ee3.common.lib.Reference;
 
+/**
+ * LogHelper
+ * 
+ * Helper methods for logging to the EE3 logger
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class LogHelper {
 
 	private static Logger eeLogger = Logger.getLogger(Reference.MOD_NAME);
