@@ -139,6 +139,10 @@ public class EquivalencyHandler {
     	int i = 0;
 
     	if (list != null) {
+    	    if (list.size() == 1) {
+    	        return list.get(i);
+    	    }
+    	    
 	    	while (i < list.size()) {
 		    	currentStack = list.get(i);
 		    	
@@ -172,6 +176,10 @@ public class EquivalencyHandler {
     	int i = 0;
 
     	if (list != null) {
+    	    if (list.size() == 1) {
+                return list.get(i);
+            }
+    	    
 	    	while (i < list.size()) {
 		    	currentStack = list.get(i);
 		    	
