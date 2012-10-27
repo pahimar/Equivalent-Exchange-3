@@ -1,5 +1,6 @@
 package ee3.common;
 
+import net.minecraft.src.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
+import ee3.common.core.CreativeTabEE3;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
@@ -52,6 +54,8 @@ public class EquivalentExchange3 {
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
+    
+    public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {

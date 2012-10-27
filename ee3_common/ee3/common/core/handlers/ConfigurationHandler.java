@@ -64,6 +64,9 @@ public class ConfigurationHandler {
             ItemIds.MINIUM_SHARD = configuration
             		.getItem(ModItems.MINIUM_SHARD_NAME, ItemIds.MINIUM_SHARD_DEFAULT)
             		.getInt(ItemIds.MINIUM_SHARD_DEFAULT);
+            ItemIds.INERT_STONE = configuration
+            		.getItem(ModItems.INERT_STONE_NAME, ItemIds.INERT_STONE_DEFAULT)
+            		.getInt(ItemIds.INERT_STONE_DEFAULT); 
             ItemIds.MINIUM_STONE = configuration
             		.getItem(ModItems.MINIUM_STONE_NAME, ItemIds.MINIUM_STONE_DEFAULT)
             		.getInt(ItemIds.MINIUM_STONE_DEFAULT);            

@@ -24,7 +24,6 @@ public class BlockCalcinator extends BlockEE {
 	public BlockCalcinator(int id) {
 		super(id, Material.rock);
 		setHardness(5F);
-		setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
 	@Override
