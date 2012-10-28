@@ -8,6 +8,15 @@ import ee3.common.lib.Reference;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
 
+/**
+ * PacketTypeHandler
+ * 
+ * Handler that routes packets to the appropriate destinations depending on what kind of packet they are
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public enum PacketTypeHandler {
 	KEY(PacketKeyPressed.class),
 	TILE(PacketTileUpdate.class);

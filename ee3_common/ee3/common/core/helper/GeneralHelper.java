@@ -6,6 +6,15 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
+/**
+ * GeneralHelper
+ * 
+ * General helper methods for EE3
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class GeneralHelper {
 
     public static ItemStack convertObjectToItemStack(Object obj) {

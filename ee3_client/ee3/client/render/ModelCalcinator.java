@@ -8,6 +8,15 @@ import net.minecraft.src.ModelBase;
 import net.minecraft.src.ModelRenderer;
 import net.minecraftforge.client.ForgeHooksClient;
 
+/**
+ * ModelCalcinator
+ * 
+ * Model for the Calcinator
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ModelCalcinator extends ModelBase {
     
     private static final int TEXTURE_HEIGHT = 128;

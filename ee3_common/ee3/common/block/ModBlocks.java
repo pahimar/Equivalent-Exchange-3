@@ -9,6 +9,15 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 
+/**
+ * ModBlocks
+ * 
+ * Class containing all the EE3 custom blocks
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ModBlocks {
     
     /* Block name constants */

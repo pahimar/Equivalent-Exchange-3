@@ -8,6 +8,15 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * RecipeHelper
+ * 
+ * Helper methods for adding recipes
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RecipeHelper {
 
     public static void addRecipe(ItemStack output, Object... input) {

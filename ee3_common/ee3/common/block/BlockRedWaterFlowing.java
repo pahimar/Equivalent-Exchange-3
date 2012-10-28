@@ -5,6 +5,15 @@ import net.minecraft.src.BlockFlowing;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 
+/**
+ * BlockRedWaterFlowing
+ * 
+ * Class for the flowing version of Red Water
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class BlockRedWaterFlowing extends BlockFlowing {
 
     protected BlockRedWaterFlowing(int id, Material material) {

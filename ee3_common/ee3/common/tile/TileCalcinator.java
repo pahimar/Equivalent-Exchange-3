@@ -6,6 +6,15 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 
+/**
+ * TileCalcinator
+ * 
+ * Calcinator tile entity, and all the logic associated with it
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TileCalcinator extends TileEE implements IInventory {
 	
 	/**

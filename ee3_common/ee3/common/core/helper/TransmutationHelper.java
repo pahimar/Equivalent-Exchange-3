@@ -13,6 +13,15 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
 
+/**
+ * TransmutationHelper
+ * 
+ * Helper methods for transmutation related things
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TransmutationHelper {
 
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z) {
