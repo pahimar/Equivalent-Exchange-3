@@ -3,21 +3,21 @@
 <properties version="1.0">
 	<comment>Swedish (SE) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
-	<entry key="key.release">Släpp</entry>
+	<entry key="key.release">Utgivning</entry>
 	<entry key="key.toggle">Växla</entry>
-	<entry key="key.charge">Laddda</entry>
-	<entry key="item.miniumShard.name">Fragment av Minium</entry>
+	<entry key="key.charge">Ladda</entry>
+	<entry key="item.miniumShard.name">Mönjaskärva</entry>
 	<entry key="item.inertStone.name">Inert Sten</entry>
-	<entry key="item.miniumStone.name">Minium Sten</entry>
-	<entry key="item.philStone.name">Filosofens Sten</entry>
-	<entry key="tile.redWaterStill.name">Rött Vatten (Stilla)</entry>
-	<entry key="tile.redWaterFlowing.name">Rött Vatten (Forsande)</entry>
+	<entry key="item.miniumStone.name">Mönja Sten</entry>
+	<entry key="item.philStone.name">De Vises Sten</entry>
+	<entry key="tile.redWaterStill.name">Rödvatten (Stilla)</entry>
+	<entry key="tile.redWaterFlowing.name">Rödvatten (Forsande)</entry>
 	<entry key="tile.calcinator.name">Kalcinator</entry>
 	<entry key="gui.calcinator.name">Kalcinator</entry>
-	<entry key="version.init_log_message">Initierar versionskontroll mot den fjärrversions auktoritet filen, lokaliserad vid</entry>
-	<entry key="version.uninitialized">Versionskontrollen avslutades inte framgångsrikt (Versionskontrollen initierade inte riktigt)</entry>
-	<entry key="version.current">Du använder för närvarande den mest uppdaterade versionen för din version av Minecraft</entry>
-	<entry key="version.outdated">Du använder för närvarande en utdaterad version; Fundera på att uppdatera här - http://goo.gl/sNcGl</entry>
-	<entry key="version.connection_error">Fel att ansluta till den fjärrversions auktoritets fil (Kolla din internetanslutning?)</entry>
-	<entry key="version.check_disabled">Fjärrversions kontroll inaktiverad, hoppar över</entry>
+	<entry key="version.init_log_message">Initierar versionskontroll mot fjärrversions auktoritetsfil, lokaliserad vid</entry>
+	<entry key="version.uninitialized">Versionskontrollen misslyckades (Versionskontrollen initierades inte korrekt)</entry>
+	<entry key="version.current">Du använder den mest uppdaterade versionen för din version av Minecraft</entry>
+	<entry key="version.outdated">Du använder en utdaterad version; överväg att uppdatera här - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Misslyckades med att ansluta till fjärrversions auktoritetsfil (Kontrollera din internetanslutning?)</entry>
+	<entry key="version.check_disabled">Fjärrversions versionskontroll inaktiverad, hoppar över</entry>
 </properties>

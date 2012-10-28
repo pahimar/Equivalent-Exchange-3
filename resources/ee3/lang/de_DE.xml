@@ -2,14 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 <comment>German (DE) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Freilassen</entry>
+	<entry key="key.toggle">Umschalten</entry>
+	<entry key="key.charge">Aufladen</entry>
 	<entry key="item.miniumShard.name">Miniumscherbe</entry>
+	<entry key="item.inertStone.name">Träger Stein</entry>
 	<entry key="item.miniumStone.name">Miniumstein</entry>
 	<entry key="item.philStone.name">Stein der Weisen</entry>
 	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
-	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fliessend)</entry>
-	<entry key="tile.calcinator.name">Calcinator</entry>
-	<entry key="version.uninitialized">Uninitialisiert</entry>
-	<entry key="version.current">Aktuell</entry>
-	<entry key="version.outdated">Veraltet</entry>
-	<entry key="version.connection_error">Verbindungsfehler</entry>
+	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fließend)</entry>
+	<entry key="tile.calcinator.name">Kalkinator</entry>
+	<entry key="gui.calcinator.name">Kalkinator</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet</entry>
+	<entry key="version.uninitialized">Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)</entry>
+	<entry key="version.current">Du benutzt gerade die aktuellste Version für deine Minecraft-Version</entry>
+	<entry key="version.outdated">Du benutzt gerade eine veraltete Version; bitte ziehe es in Betracht es hier zu updaten - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Fehler bei der Verbindung zur Remoteversion(überprüfe bitte deine Internetverbindung)</entry>
+	<entry key="version.check_disabled">Versionsvergleich mit der Remotedatei deaktiviert, überspringe</entry>
 </properties>

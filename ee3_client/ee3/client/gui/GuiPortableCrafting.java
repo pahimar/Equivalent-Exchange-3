@@ -11,7 +11,15 @@ import net.minecraft.src.GuiContainer;
 import net.minecraft.src.StatCollector;
 import net.minecraft.src.World;
 
-@SideOnly(Side.CLIENT)
+/**
+ * GuiPortableCrafting
+ * 
+ * Portable Crafting Gui class
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class GuiPortableCrafting extends GuiContainer {
 
     public GuiPortableCrafting(EntityPlayer player, World world, int x, int y, int z) {

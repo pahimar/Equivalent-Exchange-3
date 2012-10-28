@@ -10,6 +10,15 @@ import ee3.common.lib.Colours;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 
+/**
+ * VersionCheckTickHandler
+ * 
+ * Class for notifying the player on their client when they get in game the outcome of the remote version check
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class VersionCheckTickHandler implements ITickHandler {
 
 	private static boolean initialized = false;

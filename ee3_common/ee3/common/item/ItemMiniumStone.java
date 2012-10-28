@@ -25,7 +25,7 @@ public class ItemMiniumStone extends ItemEE {
     
     public ItemMiniumStone(int id) {
         super(id);
-        setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY);
+        setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }
 
     @SideOnly(Side.CLIENT)

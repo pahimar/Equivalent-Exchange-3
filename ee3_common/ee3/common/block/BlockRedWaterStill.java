@@ -5,6 +5,15 @@ import net.minecraft.src.BlockStationary;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 
+/**
+ * BlockRedWaterFlowing
+ * 
+ * Class for the still version of Red Water
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class BlockRedWaterStill extends BlockStationary {
 
     protected BlockRedWaterStill(int id, Material material) {
@@ -14,7 +23,6 @@ public class BlockRedWaterStill extends BlockStationary {
         setBlockName("redWaterStill");
         disableStats();
         setRequiresSelfNotify();
-        setCreativeTab(CreativeTabs.tabDecorations);
     }
 
     @Override

@@ -15,6 +15,15 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.INetworkManager;
 import net.minecraft.src.Packet250CustomPayload;
 
+/**
+ * PacketKeyPressed
+ * 
+ * Packet specifically for notifying the server of client key pressed events
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketKeyPressed extends PacketEE {
 
 	public String key;

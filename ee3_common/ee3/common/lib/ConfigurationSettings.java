@@ -2,6 +2,15 @@ package ee3.common.lib;
 
 import ee3.common.item.ModItems;
 
+/**
+ * ConfigurationSettings
+ * 
+ * Stores the various configuration settings read in from configuration files
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ConfigurationSettings {
 
     /* 

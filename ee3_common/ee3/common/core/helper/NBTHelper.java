@@ -3,6 +3,15 @@ package ee3.common.core.helper;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 
+/**
+ * NBTHelper
+ * 
+ * Helper methods for manipulating NBT data on ItemStacks
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class NBTHelper {
 
 	/**

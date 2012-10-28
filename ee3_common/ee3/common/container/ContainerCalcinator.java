@@ -9,6 +9,15 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 import net.minecraft.src.TileEntityFurnace;
 
+/**
+ * ContainerCalcinator
+ * 
+ * The container class for the Calcinator
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ContainerCalcinator extends Container {
 
     private TileCalcinator calcinator;

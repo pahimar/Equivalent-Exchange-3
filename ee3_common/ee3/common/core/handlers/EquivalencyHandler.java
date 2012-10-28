@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import ee3.common.core.helper.GeneralHelper;
 import net.minecraft.src.ItemStack;
 
+/**
+ * EquivalencyHandler
+ * 
+ * Class to handle all the equivalency relationships between items/etc
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class EquivalencyHandler {
 
 	private static final EquivalencyHandler instance = new EquivalencyHandler(); 
@@ -139,6 +148,10 @@ public class EquivalencyHandler {
     	int i = 0;
 
     	if (list != null) {
+    	    if (list.size() == 1) {
+    	        return list.get(i);
+    	    }
+    	    
 	    	while (i < list.size()) {
 		    	currentStack = list.get(i);
 		    	
@@ -172,6 +185,10 @@ public class EquivalencyHandler {
     	int i = 0;
 
     	if (list != null) {
+    	    if (list.size() == 1) {
+                return list.get(i);
+            }
+    	    
 	    	while (i < list.size()) {
 		    	currentStack = list.get(i);
 		    	

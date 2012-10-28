@@ -7,6 +7,15 @@ import java.io.IOException;
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.src.INetworkManager;
 
+/**
+ * PacketEE
+ * 
+ * General packet for EE3 related packets
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketEE {
 	
 	protected PacketTypeHandler packetType;
