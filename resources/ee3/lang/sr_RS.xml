@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+		<comment>Serbian (SV) Localization File</comment>
+        <entry key="key.extra">Екстра</entry>
+        <entry key="key.release">Одпустити</entry>
+        <entry key="key.toggle">Клин</entry>
+        <entry key="key.charge">Напунити</entry>
+        <entry key="item.miniumShard.name">Делић од Миниум</entry>
+        <entry key="item.inertStone.name">Инерт Камен</entry>
+        <entry key="item.miniumStone.name">Миниум Камен</entry>
+        <entry key="item.philStone.name">Философ'сКи Камен</entry>
+        <entry key="tile.redWaterStill.name">Црвена Вода (Извор)</entry>
+        <entry key="tile.redWaterFlowing.name">Црвена Вода (Текућа)</entry>
+        <entry key="tile.calcinator.name">Цалцинатор</entry>
+        <entry key="gui.calcinator.name">Цалцинатор</entry>
+        <entry key="itemGroup.EE3">Иста Размена 3</entry>
+        <entry key="version.init_log_message">Покретање верзије провера према Приступу удаљеним фајловима верзије ауторитета, који се налази у</entry>
+        <entry key="version.uninitialized">Провера Верзије није успешно завршена (верзија провере није покренута правилно)</entry>
+        <entry key="version.current">Ви тренутно користите најновију верзију за мајнкрафт</entry>
+        <entry key="version.outdated">Ви тренутно користите застарелу верзију; Размотрити надоградљу на - http://goo.gl/sNcGl</entry>
+        <entry key="version.connection_error">Грешка у повезивању удаљене верзије ауторетета податка (Погледајте вашу конекцију?)</entry>
+        <entry key="version.check_disabled">Провера верзије је искључено, Прескочено</entry>
+</properties>
