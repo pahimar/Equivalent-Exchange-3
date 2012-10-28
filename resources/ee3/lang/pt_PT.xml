@@ -14,14 +14,6 @@
 	<entry key="tile.redWaterFlowing.name">Água Vermelha (A fluir)</entry>
 	<entry key="tile.calcinator.name">Calcinatório</entry>
 	<entry key="gui.calcinator.name">Calcinatório</entry>
-<<<<<<< HEAD
-	<entry key="version.init_log_message">A iniciar a verificação da versão em relação ao ficheiro de versões remoto, localizado em</entry>
-	<entry key="version.uninitialized">A verificação de versão não teve sucesso porque não foi iniciada correctamente</entry>
-	<entry key="version.current">Estás a usar a versão atual para a tua versão do Minecraft</entry>
-	<entry key="version.outdated">A tua versão está desatualizada, considera atualizar aqui - http://goo.gl/sNcGl</entry>
-	<entry key="version.connection_error">Ocorreu um erro de ligação com o ficheiro de versões remoto (Tenta testar a tua ligação à internet?)</entry>
-	<entry key="version.check_disabled">A saltar a etapa de verificação de versões, porque esta foi desativada</entry>
-=======
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">A inicializar verificação da versão contra o ficheiro autoritário de versão remoto, localizado em</entry>
 	<entry key="version.uninitialized">A verificação da versão não concluiu com sucesso (a verificação da versão não inicializou correctamente)</entry>
@@ -29,5 +21,4 @@
 	<entry key="version.outdated">Estás actualmente a usar uma versão desactualizada; considera actualizar aqui - http://goo.gl/sNcGl</entry>
 	<entry key="version.connection_error">Erro ao ligar ao ficheiro autoritário de versão remoto (verifica a tua ligação de Internet?)</entry>
 	<entry key="version.check_disabled">Verificação de versão remota desactivada, a ignorar</entry>
->>>>>>> upstream/master
 </properties>
