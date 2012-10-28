@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Portuguese (PT) Localization File</comment>
+	<comment>European Portuguese (pt-PT) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Disparar</entry>
 	<entry key="key.toggle">Alternar</entry>
@@ -16,9 +16,9 @@
 	<entry key="gui.calcinator.name">Calcinatório</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">A inicializar verificação da versão contra o ficheiro autoritário de versão remoto, localizado em</entry>
-	<entry key="version.uninitialized">A verificação da versão não concluiu com sucesso (a verificação da versão não inicializou corretamente)</entry>
-	<entry key="version.current">Está atualmente a usar a versão mais atualizada para a sua versão do Minecraft</entry>
-	<entry key="version.outdated">Está atualmente a usar uma versão desatualizada; considere atualizar aqui - http://goo.gl/sNcGl</entry>
-	<entry key="version.connection_error">Erro ao ligar ao ficheiro autoritário de versão remoto (verifique a sua ligação de Internet?)</entry>
-	<entry key="version.check_disabled">Verificação de versão remota desativada, ignorando</entry>
+	<entry key="version.uninitialized">A verificação da versão não concluiu com sucesso (a verificação da versão não inicializou correctamente)</entry>
+	<entry key="version.current">Estás actualmente a usar a versão mais actualizada para a tua versão do Minecraft</entry>
+	<entry key="version.outdated">Estás actualmente a usar uma versão desactualizada; considera actualizar aqui - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Erro ao ligar ao ficheiro autoritário de versão remoto (verifica a tua ligação de Internet?)</entry>
+	<entry key="version.check_disabled">Verificação de versão remota desactivada, a ignorar</entry>
 </properties>
