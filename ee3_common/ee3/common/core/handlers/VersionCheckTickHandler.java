@@ -34,7 +34,9 @@ public class VersionCheckTickHandler implements ITickHandler {
 					if (tickType == TickType.CLIENT) {
 						if (FMLClientHandler.instance().getClient().currentScreen == null) {
 							initialized = true;
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(Colours.VERSION_CHECK_PREFIX + "[" + Reference.MOD_NAME + "] " + VersionHelper.getResultMessage());
+							if (VersionHelper.result != VersionHelper.CURRENT){ 
+							    FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(Colours.VERSION_CHECK_PREFIX + "[" + Reference.MOD_NAME + "] " + VersionHelper.getResultMessage());
+							}
 						}
 					}
 				}

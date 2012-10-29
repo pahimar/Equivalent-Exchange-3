@@ -1,16 +1,22 @@
 package ee3.common.item;
 
+import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.lib.Colours;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
+import ee3.common.lib.GuiIds;
+import ee3.common.network.PacketKeyPressed;
+import ee3.common.network.PacketTypeHandler;
 
 /**
  * ItemMiniumStone
@@ -21,7 +27,7 @@ import ee3.common.lib.CustomItemRarity;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE {
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
     
     public ItemMiniumStone(int id) {
         super(id);
@@ -71,6 +77,15 @@ public class ItemMiniumStone extends ItemEE {
 	@SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public void openPortableCrafting(String keyPressed) {
+        /*
+         * Notify the Server that we opened the GUI. When the server receives the packet, it will open the Gui
+         * server side, and notify the client to open the Gui client side on its own. Magic!
+         */
+        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(keyPressed)));
     }
     
 }
