@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Japanese Localization File</comment>
+	<entry key="key.extra">エクストラ</entry>
+	<entry key="key.release">解き放つ</entry>
+	<entry key="key.toggle">トグル</entry>
+	<entry key="key.charge">充電する</entry>
+	<entry key="item.miniumShard.name">ミニウムの片</entry>
+	<entry key="item.inertStone.name">不活発な石</entry>
+	<entry key="item.miniumStone.name">ミニウム石</entry>
+	<entry key="item.philStone.name">賢者の石</entry>
+	<entry key="tile.redWaterStill.name">赤い水 (動かない)</entry>
+	<entry key="tile.redWaterFlowing.name">赤い水 (流れ出る)</entry>
+	<entry key="tile.calcinator.name">煆焼の鍋</entry>
+	<entry key="gui.calcinator.name">煆焼の鍋</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">EE3版の点検は始める。</entry>
+	<entry key="version.uninitialized">EE3版の点検は失敗しました。 (初期化は失敗しました。)</entry>
+	<entry key="version.current">EE3版は通用している。</entry>
+	<entry key="version.outdated">EE3版は廃れたです。	アップデイトへ http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">リモートバージョンのファイルへの接続でエラーが発生しました。 (インターネット接続を確認。)</entry>
+	<entry key="version.check_disabled">EE3版の遠いの点検は出来なくするです、とばします。</entry>
+</properties>
