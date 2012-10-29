@@ -13,6 +13,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.client.core.helper.KeyBindingHelper;
 import ee3.common.EquivalentExchange3;
+import ee3.common.item.ITransmutationStone;
 import ee3.common.item.ModItems;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
@@ -50,13 +51,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
                     
                     if (currentItem != null) {
-                        if ((currentItem.getItem().shiftedIndex == ModItems.miniumStone.shiftedIndex) || (currentItem.getItem().shiftedIndex == ModItems.philStone.shiftedIndex)) {
-                        	// Notify the Server that we opened the GUI
-                        	PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
-                        	
-                        	// Open the GUI
-                            EntityClientPlayerMP thePlayer = FMLClientHandler.instance().getClient().thePlayer;
-                            thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
+                        if (currentItem.getItem() instanceof ITransmutationStone) {
+                            ((ITransmutationStone)currentItem.getItem()).openPortableCrafting(kb.keyDescription);
                         }
                     }
                 }
