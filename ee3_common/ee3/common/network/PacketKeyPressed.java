@@ -7,6 +7,7 @@ import java.io.IOException;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.EquivalentExchange3;
+import ee3.common.item.ITransmutationStone;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.ItemIds;
 import ee3.common.lib.Reference;
@@ -53,7 +54,7 @@ public class PacketKeyPressed extends PacketEE {
 	public void execute(INetworkManager manager, Player player) {
 		EntityPlayer thePlayer = (EntityPlayer) player;
 
-		if ((this.key.equals(LanguageRegistry.instance().getStringLocalization(Reference.KEYBINDING_EXTRA))) && (thePlayer.getCurrentEquippedItem().getItem().shiftedIndex == ItemIds.MINIUM_STONE)) {
+		if ((this.key.equals(LanguageRegistry.instance().getStringLocalization(Reference.KEYBINDING_EXTRA))) && (thePlayer.getCurrentEquippedItem().getItem() instanceof ITransmutationStone)) {
 			thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
 		}
 	}

@@ -19,7 +19,7 @@ public class ItemDropHelper {
 	private static double rand;
 	
 	public static void dropMiniumShard(EntityPlayer player, EntityLiving entity) {
-		if (!(entity instanceof EntityAgeable) && !(entity instanceof EntityPlayer)) {
+		if (GeneralHelper.isHostileEntity(entity)) {
 			rand = Math.random();
 			
 			if (rand < 0.15d) {

@@ -19,7 +19,7 @@ public class CreativeTabEE3 extends CreativeTabs {
      * the itemID for the item to be displayed on the tab
      */
     public int getTabIconItemIndex() {
-        return ItemIds.PHILOSOPHER_STONE;
+        return ItemIds.MINIUM_SHARD;
     }
 
 }
