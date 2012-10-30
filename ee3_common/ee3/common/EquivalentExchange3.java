@@ -32,6 +32,7 @@ import ee3.common.core.handlers.VersionCheckTickHandler;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.VersionHelper;
 import ee3.common.item.ModItems;
+import ee3.common.lib.BlockIds;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 import ee3.common.recipe.RecipesTransmutationStone;
@@ -128,7 +129,10 @@ public class EquivalentExchange3 {
     public void modsLoaded(FMLPostInitializationEvent event) {
 
         // Initialize the Addon Handler
-        AddonHandler.init(); 
+        AddonHandler.init();
+        
+        buildcraft.api.core.BuildCraftAPI.softBlocks[BlockIds.RED_WATER_STILL] = true;
+        buildcraft.api.core.BuildCraftAPI.softBlocks[BlockIds.RED_WATER_STILL - 1] = true;
 
     }
 }
