@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Polish (PL) Localization File</comment>
+	<entry key="key.extra">Dodatkowa funkcja</entry>
+	<entry key="key.release">Wypuść</entry>
+	<entry key="key.toggle">Przełączanie<entry>
+	<entry key="key.charge">Ładuj</entry>
+	<entry key="item.miniumShard.name">Odłamek Minium</entry>
+	<entry key="item.inertStone.name">Kamień Inercyjny</entry>
+	<entry key="item.miniumStone.name">Kamień Minium</entry>
+	<entry key="item.philStone.name">Kamień Filozoficzny</entry>
+	<entry key="tile.redWaterStill.name">Czerwona Woda (Stojąca)</entry>
+	<entry key="tile.redWaterFlowing.name">Czerwona Woda (Płynąca)</entry>
+	<entry key="tile.calcinator.name">Kalcynator</entry>
+	<entry key="gui.calcinator.name">Kalcynator</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na </entry>
+	<entry key="version.uninitialized">Sprawdzenie wersji nie zakończyło się sukcesem (Sprawdzanie wersji nie zostało poprawnie zainicjowane)</entry>
+	<entry key="version.current">Korzystasz aktualnie z najaktualniejszej wersji dla Twojej wersji Minecraft</entry>
+	<entry key="version.outdated">Korzystasz aktualnie ze starszej wersji moda; Pomyśl nad aktualizacją tutaj - http://goo.gl/sNcGl</entry>
+	<entry key="version.connection_error">Wystąpił bład podczas łaczenia ze zdalnym plikiem wersji (sprawdź Twoje połączenie z Internetem?)</entry>
+	<entry key="version.check_disabled">Zdalne sprawdzanie wersji wyłączone, pomijanie</entry>
+</properties>
