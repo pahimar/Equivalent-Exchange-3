@@ -20,7 +20,7 @@ public class BlockRedWaterStill extends BlockStationary {
         super(id, material);
         this.blockHardness = 100F;
         this.setLightOpacity(3);
-        setBlockName("redWaterStill");
+        this.setBlockName("redWaterStill");
         disableStats();
         setRequiresSelfNotify();
     }
