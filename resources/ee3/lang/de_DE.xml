@@ -12,7 +12,7 @@
 	<entry key="item.philStone.name">Stein der Weisen</entry>
 	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
 	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fließend)</entry>
-	<entry key="tile.calcinator.name">Kalzinierungsofen</entry>
+	<entry key="tile.calcinator.name">Kalzinierer</entry>
 	<entry key="gui.calcinator.name">Kalzinierung</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet</entry>
