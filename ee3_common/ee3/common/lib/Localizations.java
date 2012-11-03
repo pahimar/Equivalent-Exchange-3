@@ -22,9 +22,12 @@ public class Localizations {
 		LANG_RESOURCE_LOCATION + "fr_FR.xml",
 		LANG_RESOURCE_LOCATION + "it_IT.xml",
 		LANG_RESOURCE_LOCATION + "nl_NL.xml",
+		LANG_RESOURCE_LOCATION + "pl_PL.xml",
 		LANG_RESOURCE_LOCATION + "pt_PT.xml",
 		LANG_RESOURCE_LOCATION + "ru_RU.xml",
-		LANG_RESOURCE_LOCATION + "sv_SE.xml"
+		LANG_RESOURCE_LOCATION + "sr_RS.xml",
+		LANG_RESOURCE_LOCATION + "sv_SE.xml",
+		LANG_RESOURCE_LOCATION + "zh_CN.xml"
 	};
 
 }

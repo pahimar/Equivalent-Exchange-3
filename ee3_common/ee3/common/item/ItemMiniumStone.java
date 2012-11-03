@@ -69,7 +69,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-    public int func_82790_a(ItemStack par1ItemStack, int par2)
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {
         return Integer.parseInt(Colours.PURE_RED, 16);
     }
