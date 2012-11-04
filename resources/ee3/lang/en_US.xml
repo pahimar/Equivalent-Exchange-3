@@ -18,7 +18,7 @@
 	<entry key="version.init_log_message">Initializing version check against the remote version authority file, located at</entry>
 	<entry key="version.uninitialized">The version check did not complete successfully (version check did not initialize properly)</entry>
 	<entry key="version.current">You are currently using the most up to date version for your version of Minecraft</entry>
-	<entry key="version.outdated">You are currently using an out of date version; consider updating here - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">You are currently using an out of date version; consider updating here - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Error connecting to the remote version authority file (check your Internet connection?)</entry>
 	<entry key="version.check_disabled">Remote version check disabled, skipping</entry>
 </properties>

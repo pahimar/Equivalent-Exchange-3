@@ -18,7 +18,7 @@
     <entry key="version.init_log_message">Покретање верзије провера према Приступу удаљеним фајловима верзије ауторитета, који се налази у</entry>
     <entry key="version.uninitialized">Провера Верзије није успешно завршена (верзија провере није покренута правилно)</entry>
     <entry key="version.current">Ви тренутно користите најновију верзију за мајнкрафт</entry>
-    <entry key="version.outdated">Ви тренутно користите застарелу верзију; Размотрити надоградљу на - http://goo.gl/sNcGl</entry>
+    <entry key="version.outdated">Ви тренутно користите застарелу верзију; Размотрити надоградљу на - http://goo.gl/Ria2V</entry>
     <entry key="version.connection_error">Грешка у повезивању удаљене верзије ауторетета податка (Погледајте вашу конекцију?)</entry>
     <entry key="version.check_disabled">Провера верзије је искључено, Прескочено</entry>
 </properties>

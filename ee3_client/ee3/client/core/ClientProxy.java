@@ -41,7 +41,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void setKeyBinding(String name, int value) {
-        KeyBindingHelper.addKeyBinding(LanguageRegistry.instance().getStringLocalization(name), value);
+        KeyBindingHelper.addKeyBinding(name, value);
         KeyBindingHelper.addIsRepeating(false);
     }
 

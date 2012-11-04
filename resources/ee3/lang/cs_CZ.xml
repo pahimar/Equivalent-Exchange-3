@@ -20,7 +20,7 @@
 	<entry key="version.init_log_message">Provádím kontrolu verze, vzdálený soubor umístěn na </entry>
 	<entry key="version.uninitialized">Kontrola verze neproběhla úspěšně (nezdařila se inicializace)</entry>
 	<entry key="version.current">Používáte nejaktuálnější verzi, která je pro vaši verzi Minecraftu</entry>
-	<entry key="version.outdated">Používáte neaktuální verzi; zvažte aktualizaci - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">Používáte neaktuální verzi; zvažte aktualizaci - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Chyba při připojování k servru poskytujícímu informace o verzi (je v pořádku vaše připojení k Internetu?)</entry>
 	<entry key="version.check_disabled">Kontrola verze deaktivována, přeskakuji</entry>
 </properties>

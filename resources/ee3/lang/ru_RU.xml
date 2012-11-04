@@ -17,7 +17,7 @@
 	<entry key="version.init_log_message">Инициализация проверки версии в удаленном файле, находящемся на</entry>
 	<entry key="version.uninitialized">Проверка версии не была завершена успешно (проверка версии не инициализирована правильно)</entry>
 	<entry key="version.current">Вы используете самую последнюю версию для вашей версии Minecraft</entry>
-	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Ошибка подключения к удаленному файлу (проверьте подключение к Интернету)</entry>
 	<entry key="version.check_disabled">Удаленная проверка версии отключена, пропуск</entry>
 </properties>
