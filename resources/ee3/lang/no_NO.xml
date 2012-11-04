@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Norwegian (NO) Localization File</comment>
+	<entry key="key.extra">Ekstra</entry>
+	<entry key="key.release">Slipp løs</entry>
+	<entry key="key.toggle">Skift</entry>
+	<entry key="key.charge">Lad Opp</entry>
+	<entry key="item.miniumShard.name">Bit av Mønje</entry>
+	<entry key="item.inertStone.name">Inert Stein</entry>
+	<entry key="item.miniumStone.name">Mønje Stein</entry>
+	<entry key="item.philStone.name">De Vises Stein</entry>
+	<entry key="tile.redWaterStill.name">Rødt Vann (Stille)</entry>
+	<entry key="tile.redWaterFlowing.name">Rødt Vann (rennende)</entry>
+	<entry key="tile.calcinator.name">Kalkbrenner</entry>
+	<entry key="gui.calcinator.name">Kalkbrenner</entry>
+	<entry key="version.init_log_message">Initaliserer versjonskontroll mot fjernversjonens autoritetsfil, plassert i</entry>
+	<entry key="version.uninitialized">Versjonkontrollen mislyktes (Versjonkontrollen initaliserte ikke korrekt)</entry>
+	<entry key="version.current">Du bruker den mest oppdaterte versjonen for din versjon av Minecraft</entry>
+	<entry key="version.outdated">Du bruker en utdatert versjon; Vurder å oppdatere her: - http://goo.gl/Ria2V</entry>
+	<entry key="version.connection_error">Misslykkes med å koble til fjernversjonens autoritetsfil (Kontroller internetttilgangen din?)</entry>
+	<entry key="version.check_disabled">Fjernversjonens versjonsjekk koblet fra, hopper over </entry>
+</properties>
