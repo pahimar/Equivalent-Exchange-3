@@ -15,7 +15,7 @@
 	<entry key="version.init_log_message">Lancement de la vérification de votre version par rapport à cette de reference : </entry>
 	<entry key="version.uninitialized">Le lancement de la vérification a échoué</entry>
 	<entry key="version.current">Vous utilisez la version la plus à jour pour votre version de Minecraft</entry>
-	<entry key="version.outdated">Vous utilisez une verison obsolète, pensez à effecuter une mise a jour ici - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">Vous utilisez une verison obsolète, pensez à effecuter une mise a jour ici - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Erreur de connexion vers la version de référence (vérifiez votre connexion internet ?)</entry>
 	<entry key="version.check_disabled">Verification de version désactiée</entry>
 </properties>

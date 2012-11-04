@@ -1,6 +1,7 @@
 package ee3.client.core.handlers;
 
 import java.util.EnumSet;
+import java.util.logging.Level;
 
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.Item;
@@ -13,6 +14,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.client.core.helper.KeyBindingHelper;
 import ee3.common.EquivalentExchange3;
+import ee3.common.core.helper.LogHelper;
 import ee3.common.item.ITransmutationStone;
 import ee3.common.item.ModItems;
 import ee3.common.lib.GuiIds;
@@ -47,7 +49,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
             if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                if (kb.keyDescription == getLocalizedKey(Reference.KEYBINDING_EXTRA)) {
+                System.out.println(kb.keyDescription);
+                if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
                     
                     if (currentItem != null) {

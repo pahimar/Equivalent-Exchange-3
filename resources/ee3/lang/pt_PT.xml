@@ -18,7 +18,7 @@
 	<entry key="version.init_log_message">A inicializar verificação da versão contra o ficheiro autoritário de versão remoto, localizado em</entry>
 	<entry key="version.uninitialized">A verificação da versão não concluiu com sucesso (a verificação da versão não inicializou correctamente)</entry>
 	<entry key="version.current">Estás actualmente a usar a versão mais actualizada para a tua versão do Minecraft</entry>
-	<entry key="version.outdated">Estás actualmente a usar uma versão desactualizada; considera actualizar aqui - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">Estás actualmente a usar uma versão desactualizada; considera actualizar aqui - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Erro ao ligar ao ficheiro autoritário de versão remoto (verifica a tua ligação de Internet?)</entry>
 	<entry key="version.check_disabled">Verificação de versão remota desactivada, a ignorar</entry>
 </properties>

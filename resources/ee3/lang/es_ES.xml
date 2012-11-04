@@ -17,7 +17,7 @@
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
 	<entry key="version.uninitialized">El chequeo de versiones no se completó exitosamente (el chequeo de versiones no se inicializó correctamente)</entry>
 	<entry key="version.current">Actualmente estás usando la versión más actualizada para tu versión de Minecraft</entry>
-	<entry key="version.outdated">Actualmente estás usando una versión desactualizada; considera actualizarla aquí - http://goo.gl/sNcGl</entry>
+	<entry key="version.outdated">Actualmente estás usando una versión desactualizada; considera actualizarla aquí - http://goo.gl/Ria2V</entry>
 	<entry key="version.connection_error">Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)</entry>
 	<entry key="version.check_disabled">Chequeo remoto de versiones desactivado, omitiendo</entry>
 </properties>
