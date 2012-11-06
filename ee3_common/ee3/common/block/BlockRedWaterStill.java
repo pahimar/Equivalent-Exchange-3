@@ -1,8 +1,8 @@
 package ee3.common.block;
 
+import ee3.common.EquivalentExchange3;
 import ee3.common.lib.Reference;
 import net.minecraft.src.BlockStationary;
-import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 
 /**
@@ -16,13 +16,14 @@ import net.minecraft.src.Material;
  */
 public class BlockRedWaterStill extends BlockStationary {
 
-    protected BlockRedWaterStill(int id, Material material) {
-        super(id, material);
+    protected BlockRedWaterStill(int id) {
+        super(id, Material.water);
         this.blockHardness = 100F;
         this.setLightOpacity(3);
-        setBlockName("redWaterStill");
-        disableStats();
-        setRequiresSelfNotify();
+        this.setBlockName("redWaterStill");
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.disableStats();
+        this.setRequiresSelfNotify();
     }
 
     @Override

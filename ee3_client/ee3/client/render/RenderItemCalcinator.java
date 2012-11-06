@@ -38,7 +38,7 @@ public class RenderItemCalcinator implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
-			case ENTITY: renderCalcinator(-0.5F, 0.5F, -0.5F); break;
+			case ENTITY: renderCalcinator(-0.5F, 0F, -0.5F); break;
 			case EQUIPPED: renderCalcinator(0F, 0.4F, 0F); break;
 			case INVENTORY: renderCalcinator(1F, 0.65F, 1F); break;
 			default: break;

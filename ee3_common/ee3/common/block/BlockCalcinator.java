@@ -3,6 +3,7 @@ package ee3.common.block;
 import ee3.common.EquivalentExchange3;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.RenderIds;
+import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
@@ -23,7 +24,9 @@ public class BlockCalcinator extends BlockEE {
 
 	public BlockCalcinator(int id) {
 		super(id, Material.rock);
-		setHardness(5F);
+		this.setBlockName(Strings.CALCINATOR_NAME);
+		this.setCreativeTab(EquivalentExchange3.tabsEE3);
+		this.setHardness(5F);
 	}
 	
 	@Override

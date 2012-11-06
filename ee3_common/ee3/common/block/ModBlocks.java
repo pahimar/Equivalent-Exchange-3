@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.EquivalentExchange3;
 import ee3.common.lib.BlockIds;
+import ee3.common.lib.Strings;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -19,10 +20,6 @@ import net.minecraft.src.Material;
  * 
  */
 public class ModBlocks {
-    
-    /* Block name constants */
-    public static final String CALCINATOR_NAME = "calcinator";
-    public static final String RED_WATER_STILL_NAME = "redWaterStill";
 	
     /* Mod block instances */
 	public static Block calcinator;
@@ -31,9 +28,9 @@ public class ModBlocks {
 
 	public static void init() {
 
-		calcinator = new BlockCalcinator(BlockIds.CALCINATOR).setBlockName(CALCINATOR_NAME).setCreativeTab(EquivalentExchange3.tabsEE3);
-		redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL, Material.water).setCreativeTab(EquivalentExchange3.tabsEE3);
-		redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1, Material.water).setCreativeTab(EquivalentExchange3.tabsEE3);
+		calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
+		redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL);
+		redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1);
 		
 		GameRegistry.registerBlock(calcinator);
 		GameRegistry.registerBlock(redWaterStill);

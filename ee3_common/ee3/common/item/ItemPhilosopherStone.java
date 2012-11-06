@@ -9,6 +9,7 @@ import ee3.common.core.helper.NBTHelper;
 import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
+import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
 import net.minecraft.src.EntityClientPlayerMP;
@@ -33,7 +34,10 @@ public class ItemPhilosopherStone extends ItemEE
     
     public ItemPhilosopherStone(int id) {
         super(id);
-        maxChargeLevel = 4;
+        this.setIconCoord(3, 0);
+        this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.maxChargeLevel = 4;
     }
 
     @SideOnly(Side.CLIENT)

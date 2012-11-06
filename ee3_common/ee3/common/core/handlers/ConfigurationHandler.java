@@ -10,6 +10,7 @@ import ee3.common.lib.BlockIds;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.ItemIds;
 import ee3.common.lib.Reference;
+import ee3.common.lib.Strings;
 import net.minecraftforge.common.Configuration;
 import static net.minecraftforge.common.Configuration.*;
 
@@ -54,25 +55,28 @@ public class ConfigurationHandler {
             		.get(CATEGORY_BLOCK, Reference.AUTO_RESOLVE_BLOCK_IDS, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT)
             		.getBoolean(ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT);
             BlockIds.CALCINATOR =  configuration
-            		.getBlock(ModBlocks.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT)
+            		.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT)
             		.getInt(BlockIds.CALCINATOR_DEFAULT);
             BlockIds.RED_WATER_STILL = configuration
-            		.getBlock(ModBlocks.RED_WATER_STILL_NAME, BlockIds.RED_WATER_STILL_DEFAULT)
+            		.getBlock(Strings.RED_WATER_STILL_NAME, BlockIds.RED_WATER_STILL_DEFAULT)
             		.getInt(BlockIds.RED_WATER_STILL_DEFAULT);
 
             /* Item Configs */
             ItemIds.MINIUM_SHARD = configuration
-            		.getItem(ModItems.MINIUM_SHARD_NAME, ItemIds.MINIUM_SHARD_DEFAULT)
+            		.getItem(Strings.MINIUM_SHARD_NAME, ItemIds.MINIUM_SHARD_DEFAULT)
             		.getInt(ItemIds.MINIUM_SHARD_DEFAULT);
             ItemIds.INERT_STONE = configuration
-            		.getItem(ModItems.INERT_STONE_NAME, ItemIds.INERT_STONE_DEFAULT)
+            		.getItem(Strings.INERT_STONE_NAME, ItemIds.INERT_STONE_DEFAULT)
             		.getInt(ItemIds.INERT_STONE_DEFAULT); 
             ItemIds.MINIUM_STONE = configuration
-            		.getItem(ModItems.MINIUM_STONE_NAME, ItemIds.MINIUM_STONE_DEFAULT)
+            		.getItem(Strings.MINIUM_STONE_NAME, ItemIds.MINIUM_STONE_DEFAULT)
             		.getInt(ItemIds.MINIUM_STONE_DEFAULT);            
             ItemIds.PHILOSOPHER_STONE = configuration
-            		.getItem(ModItems.PHILOSOPHER_STONE_NAME, ItemIds.PHILOSOPHER_STONE_DEFAULT)
+            		.getItem(Strings.PHILOSOPHER_STONE_NAME, ItemIds.PHILOSOPHER_STONE_DEFAULT)
             		.getInt(ItemIds.PHILOSOPHER_STONE_DEFAULT);
+            ItemIds.ALCHEMY_DUST = configuration
+            		.getItem(Strings.ALCHEMY_DUST_NAME, ItemIds.ALCHEMY_DUST_DEFAULT)
+            		.getInt(ItemIds.ALCHEMY_DUST_DEFAULT);
 
             /* KeyBinding Configs */
             configuration.addCustomCategoryComment(CATEGORY_KEYBIND, "");

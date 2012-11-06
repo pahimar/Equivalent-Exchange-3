@@ -31,7 +31,6 @@ public class Reference {
     public static final String AUTO_RESOLVE_BLOCK_IDS = "auto_resolve_block_ids";
     
     /* KeyBinding related constants */
-    // TODO: Localize keybinding names
     public static final String KEYBINDING_EXTRA = "key.extra";
     public static final int KEYBINDING_EXTRA_DEFAULT = 46;
     public static final String KEYBINDING_RELEASE = "key.release";
@@ -47,9 +46,7 @@ public class Reference {
     public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
     public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
     public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
-    
-    /* Gui related constants */
-    public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
+    public static final String CALCINATOR_TEXTURE_SHEET = "calcinator.png";
     
     /* General Tile Entity related constants */
     public static final String TE_GEN_OWNER_NBT_TAG_LABEL = "owner";

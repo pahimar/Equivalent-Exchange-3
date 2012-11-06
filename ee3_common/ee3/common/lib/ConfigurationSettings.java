@@ -37,12 +37,12 @@ public class ConfigurationSettings {
      */
     // The durability cost for each transmute with the Minium Stone 
     public static int MINIUM_STONE_TRANSMUTE_COST;
-    public static final String MINIUM_STONE_TRANSMUTE_COST_CONFIGNAME = ModItems.MINIUM_STONE_NAME + ".transmuteCost";
+    public static final String MINIUM_STONE_TRANSMUTE_COST_CONFIGNAME = Strings.MINIUM_STONE_NAME + ".transmuteCost";
     public static final int MINIUM_STONE_TRANSMUTE_COST_DEFAULT = 1;
     
     // The maximum durability for the Minium Stone 
     public static int MINIUM_STONE_MAX_DURABILITY;
-    public static final String MINIUM_STONE_MAX_DURABILITY_CONFIGNAME = ModItems.MINIUM_STONE_NAME + ".maxDurability";
+    public static final String MINIUM_STONE_MAX_DURABILITY_CONFIGNAME = Strings.MINIUM_STONE_NAME + ".maxDurability";
     public static final int MINIUM_STONE_MAX_DURABILITY_DEFAULT = 1521;
     
 }
