@@ -8,6 +8,7 @@ import java.util.Map;
  * EMCEntry
  * 
  * Holds the breakdown of how much, and what kinds, of EMC an object has
+ * Each object (item or block) will have one such an EMCEntry associated with it.
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -15,6 +16,16 @@ import java.util.Map;
  */
 public class EMCEntry {
 
+	/**
+	 * cost = total EMC cost of the item.
+	 * recoveryPercentage = What percentage of the cost does the user get when turning this into EMC.
+	 * 
+	 * learnable = Can the user learn to make this?
+	 * recoverable = Can this be converted into EMC?
+	 * 
+	 * breakdown = If you break this down (or make it) what percentage of what EMC type do you get?
+	 *             All of the numbers in this list together should add up to 1.0f (or 100%).
+	 */
 	private float cost, recoveryPercentage;
 	private boolean learnable, recoverable;
 	private Map<EMCType, Float> breakdown;
