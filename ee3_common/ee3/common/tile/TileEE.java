@@ -9,6 +9,7 @@ import net.minecraft.src.TileEntity;
  * TileEE
  * 
  * General tile entity for EE3 related tile entities
+ * Meaning, all EE3 tile entities use this as their base. 
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -48,6 +49,11 @@ public class TileEE extends TileEntity {
 		return owner.equals(player.username);
 	}
 	
+	/**
+	 * When a world/game is loaded from harddisk, this is what reads the saved data.
+	 * We read the direction, state and owner.
+	 * Any additional data that was saved, will be read in the readFromNBT function of the derived class.
+	 */
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
         
@@ -56,6 +62,12 @@ public class TileEE extends TileEntity {
         owner = nbtTagCompound.getString(Reference.TE_GEN_OWNER_NBT_TAG_LABEL);
     }
 
+	/**
+	 * When saving the game/world, this is what writes the tile's (tile = placed block) data to harddisk.
+	 * We specify here that we will save the direction (Up, down, North, etc.) of the block, its owner, 
+	 * and its state. (What states actually means will depend on the type of tile. But we make room for it.)
+	 * Any additional data that is to be saved, will be saved using the readFromNBT function of the derived class.
+	 */
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
         
