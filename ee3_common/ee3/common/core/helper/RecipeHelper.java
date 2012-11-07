@@ -142,7 +142,7 @@ public class RecipeHelper {
         for (int i = 2; i < 9; i++)
             list[i] = new ItemStack(input.getItem(), 1, input.getItemDamage());
 
-        GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), 7, result.getItemDamage()), list);
+        GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize*7), result.getItemDamage()), list);
     }
     
 }
