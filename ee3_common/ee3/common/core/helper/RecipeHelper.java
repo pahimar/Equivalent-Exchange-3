@@ -139,10 +139,16 @@ public class RecipeHelper {
         list[0] = stone;
         list[1] = fuel;
 
-        for (int i = 2; i < 9; i++)
+        for (int i = 2; i < 9; i++) {
             list[i] = new ItemStack(input.getItem(), 1, input.getItemDamage());
+        }
 
-        GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize*7), result.getItemDamage()), list);
+        if (result.stackSize * 7 <= result.getItem().getItemStackLimit()) {
+        	GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize*7), result.getItemDamage()), list);
+        }
+        else {
+        	GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), result.getItem().getItemStackLimit(), result.getItemDamage()), list);
+        }
     }
     
 }
