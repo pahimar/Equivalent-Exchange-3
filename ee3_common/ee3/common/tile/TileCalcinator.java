@@ -1,6 +1,7 @@
 package ee3.common.tile;
 
 import ee3.common.block.ModBlocks;
+import ee3.common.lib.Strings;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
@@ -85,7 +86,7 @@ public class TileCalcinator extends TileEE implements IInventory {
 	}
 
 	public String getInvName() {
-		return "container." + ModBlocks.CALCINATOR_NAME;
+		return "container." + Strings.CALCINATOR_NAME;
 	}
 
 	public int getInventoryStackLimit() {

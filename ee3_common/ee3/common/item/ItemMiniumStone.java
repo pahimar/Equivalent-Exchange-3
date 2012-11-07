@@ -15,6 +15,7 @@ import ee3.common.lib.Colours;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
+import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
 
@@ -31,7 +32,10 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
     
     public ItemMiniumStone(int id) {
         super(id);
-        setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
+        this.setIconCoord(2, 0);
+        this.setItemName(Strings.MINIUM_STONE_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }
 
     @SideOnly(Side.CLIENT)

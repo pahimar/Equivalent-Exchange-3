@@ -7,6 +7,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.container.ContainerCalcinator;
 import ee3.common.lib.Reference;
+import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
 import net.minecraft.src.Container;
 import net.minecraft.src.GuiContainer;
@@ -35,7 +36,7 @@ public class GuiCalcinator extends GuiContainer {
     
     protected void drawGuiContainerForegroundLayer()
     {
-        this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Reference.GUI_CALCINATOR_NAME), 60, 6, 4210752);
+        this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Strings.GUI_CALCINATOR_NAME), 60, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
