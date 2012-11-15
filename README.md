@@ -3,7 +3,7 @@
 The MinecraftForum page can be found [here] (www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
 
 ### Compiling Equivalent Exchange 3
-
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Setup MCP
 1. Create an empty directory for EE3 development. This directory is referenced as mcdev from now on
 2. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp719.zip. Install MCP dependencies as listed on the website if neccessary.
