@@ -1,5 +1,6 @@
 ## Welcome to Equivalent Exchange 3!
 The Compilation part (Setup) was done mostly by Minalien, I just changed it a bit.  Some credit goes to BuildCraft's README.md, which I based this README off of.
+
 The Minecraft Forums page can be found [here] (www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
 
 ### Compiling Equivalent Exchange 3
