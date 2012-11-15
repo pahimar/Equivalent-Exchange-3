@@ -6,7 +6,7 @@ The Minecraft Forums page can be found [here] (www.minecraftforum.net/topic/1540
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (only done on Linux so far, partly on Windows).
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Setup MCP
-1. Create an empty directory for EE3 development. This directory is referenced as `mcdev` from now on
+1. Create an empty directory for EE3 development. This directory is referenced as `mcdev` from now on.
 2. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp719.zip. Install MCP dependencies as listed on the website if neccessary.
 3. Install Apache Ant [here] (ant.apache.org.)
 3. Inside `mcdev`, create a directory named `mcp` and unzip the MCP ZIP file into it
