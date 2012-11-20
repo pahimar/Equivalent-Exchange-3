@@ -23,6 +23,12 @@ public class TileCalcinator extends TileEE implements IInventory {
      */
 	private ItemStack[] calcinatorItemStacks = new ItemStack[3];
 
+
+	/**
+	 * We additionally save all the items that are inside this tile.
+	 * Note: By additionally we mean that the base TileEE class already saves basic data. (See: TileEE)
+	 * So here we read it back from the harddisk.
+	 */
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 		
@@ -39,6 +45,11 @@ public class TileCalcinator extends TileEE implements IInventory {
 		
 	}
 	
+	
+	/**
+	 * We additionally save all the items that are inside this tile.
+	 * Here we write to harddisk.
+	 */
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 		
