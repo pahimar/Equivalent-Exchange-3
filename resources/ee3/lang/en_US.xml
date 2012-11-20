@@ -21,12 +21,10 @@
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="gui.calcinator.name">Calcinator</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="text.impure">Impure</entry>
-	<entry key="text.pure">Pure</entry>
-	<entry key="version.init_log_message">Initializing version check against the remote version authority file, located at</entry>
-	<entry key="version.uninitialized">The version check did not complete successfully (version check did not initialize properly)</entry>
-	<entry key="version.current">You are currently using the most up to date version for your version of Minecraft</entry>
-	<entry key="version.outdated">You are currently using an out of date version; consider updating here - http://goo.gl/Ria2V</entry>
-	<entry key="version.connection_error">Error connecting to the remote version authority file (check your Internet connection?)</entry>
+	<entry key="version.init_log_message">Initializing remote version check against remote version authority, located at</entry>
+	<entry key="version.uninitialized">Remote version check failed to initialize properly</entry>
+	<entry key="version.current">Currently using the most up to date version (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">A new @MOD_NAME@ version exists (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Get it here: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Error checking the remote version authority file</entry>
 	<entry key="version.check_disabled">Remote version check disabled, skipping</entry>
 </properties>
