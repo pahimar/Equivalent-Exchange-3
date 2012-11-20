@@ -12,7 +12,7 @@ ________________________________________________________________________________
 3. Install Apache Ant [here] (ant.apache.org.)
 3. Inside `mcdev`, create a directory named `mcp` and unzip the MCP ZIP file into it
 4. To verify, check if a file name `CHANGELOG` exists inside the mcp directory.
-5. Get a clean (unmodded!) copy of minecraft. Currently EE3 runs on 1.4.5pre but that might have changed.
+5. Get a clean (unmodded!) copy of minecraft. Currently EE3 runs on 1.4.5 but that might have changed.
 6. From your .minecraft directory, copy the bin and the resources directory to the `jars` directory inside `mcp`.
 7. Get a clean (unmodded!) copy of minecraft_server.jar and also place it into `jars`.
 8. Download the latest forge source for Minecraft 1.4.5 and unzip it into `mcp` so that `mcp/forge/install.sh` exists. You need at least Forge 6.4.0.xxx, best way is to get it from [here] (http://files.minecraftforge.net/).
@@ -27,4 +27,4 @@ ________________________________________________________________________________
 4. Execute `ant reobfuscate -Ddir.development=../../`.
 5. If you've done everything right AND the source code currently compiles, you can execute startclient.sh or startclient.bat inside the mcp directory now to start Minecraft with EE3.
 
-(I currently can't find the .jar file anywhere inside `mcdev`, so you can just go into `reobf\minecraft` and zip the ee3 folder.)
+(I currently can't find the .jar file anywhere inside `mcdev`, so you can just go into `mcdev\mcp\reobf\minecraft` and zip the ee3 folder.)
