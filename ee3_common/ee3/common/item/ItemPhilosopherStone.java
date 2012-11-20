@@ -34,7 +34,7 @@ public class ItemPhilosopherStone extends ItemEE
     
     public ItemPhilosopherStone(int id) {
         super(id);
-        this.setIconCoord(3, 0);
+        this.setIconCoord(2, 0);
         this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.maxChargeLevel = 4;
