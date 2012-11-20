@@ -21,12 +21,10 @@
 	<entry key="tile.calcinator.name">Кальцинатор</entry>
 	<entry key="gui.calcinator.name">Кальцинатор</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="text.impure">Нечистый</entry>
-	<entry key="text.pure">Чистый</entry>
 	<entry key="version.init_log_message">Инициализация проверки версии в удаленном файле, находящемся на</entry>
 	<entry key="version.uninitialized">Проверка версии не была завершена успешно (проверка версии не инициализирована правильно)</entry>
 	<entry key="version.current">Вы используете самую последнюю версию для вашей версии Minecraft</entry>
-	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Ошибка подключения к удаленному файлу (проверьте подключение к Интернету)</entry>
 	<entry key="version.check_disabled">Удаленная проверка версии отключена, пропуск</entry>
 </properties>

@@ -18,7 +18,7 @@
 	<entry key="version.init_log_message">Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na</entry>
 	<entry key="version.uninitialized">Sprawdzenie wersji nie zakończyło się sukcesem (Sprawdzanie wersji nie zostało poprawnie zainicjowane)</entry>
 	<entry key="version.current">Korzystasz aktualnie z najaktualniejszej wersji dla Twojej wersji Minecraft</entry>
-	<entry key="version.outdated">Korzystasz aktualnie ze starszej wersji moda; Pomyśl nad aktualizacją tutaj - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Korzystasz aktualnie ze starszej wersji moda; Pomyśl nad aktualizacją tutaj - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Wystąpił bład podczas łaczenia ze zdalnym plikiem wersji (sprawdź Twoje połączenie z Internetem?)</entry>
 	<entry key="version.check_disabled">Zdalne sprawdzanie wersji wyłączone, pomijanie</entry>
 </properties>

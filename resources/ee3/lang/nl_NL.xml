@@ -21,12 +21,10 @@
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="gui.calcinator.name">Calcinator</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="text.impure">Onpuur</entry>
-	<entry key="text.pure">Puur</entry>
 	<entry key="version.init_log_message">Start versiecontrole tegen extern versiebestand, te vinden op</entry>
 	<entry key="version.uninitialized">De versiecontrole is niet geslaagd (versiecontrole niet correct gestart)</entry>
 	<entry key="version.current">Je gebruikt momenteel de meest recente versie voor jouw Minecraft versie</entry>
-	<entry key="version.outdated">Je gebruikt momenteel een verouderde versie; overweeg om up te daten - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Je gebruikt momenteel een verouderde versie; overweeg om up te daten - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Fout bij het verbinden met het extern versiecontrole bestand (controleer je internetverbinding)</entry>
 	<entry key="version.check_disabled">Externe versiecontrole uitgeschakeld, wordt overgeslagen</entry>
 </properties>

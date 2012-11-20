@@ -17,7 +17,7 @@
 	<entry key="version.init_log_message">Initierar versionskontroll mot fjärrversions auktoritetsfil, lokaliserad vid</entry>
 	<entry key="version.uninitialized">Versionskontrollen misslyckades (Versionskontrollen initierades inte korrekt)</entry>
 	<entry key="version.current">Du använder den mest uppdaterade versionen för din version av Minecraft</entry>
-	<entry key="version.outdated">Du använder en utdaterad version; överväg att uppdatera här - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Du använder en utdaterad version; överväg att uppdatera här - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Misslyckades med att ansluta till fjärrversions auktoritetsfil (Kontrollera din internetanslutning?)</entry>
 	<entry key="version.check_disabled">Fjärrversions versionskontroll inaktiverad, hoppar över</entry>
 </properties>

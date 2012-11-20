@@ -18,7 +18,7 @@
 	<entry key="version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet</entry>
 	<entry key="version.uninitialized">Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)</entry>
 	<entry key="version.current">Du benutzt gerade die aktuellste Version für deine Minecraft-Version</entry>
-	<entry key="version.outdated">Du benutzt gerade eine veraltete Version; bitte ziehe es in Betracht sie hier zu updaten - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Du benutzt gerade eine veraltete Version; bitte ziehe es in Betracht sie hier zu updaten - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Fehler bei der Verbindung zur Remotedatei(überprüfe bitte deine Internetverbindung)</entry>
 	<entry key="version.check_disabled">Versionsvergleich mit der Remotedatei deaktiviert, überspringe</entry>
 </properties>

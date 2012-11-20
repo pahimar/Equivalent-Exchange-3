@@ -17,7 +17,7 @@
 	<entry key="version.init_log_message">Ymgychwynnu gwiriad fersiwn yn erbyn y ffeil awdurdod fersiwn o bell, a leolir ar</entry>
 	<entry key="version.uninitialized">Ni gyflawnwyd y gwiriad fersiwn yn llwyddiannus (ni ymgychwynodd y gwiriad fersiwn yn briodol)</entry>
 	<entry key="version.current">Rydych yn defnyddio y fersiwn diweddaraf ar gyfer eich fersiwn o Minecraft</entry>
-	<entry key="version.outdated">Rydych yn defnyddio fersiwn wedi dyddio; cysidrwch diweddaru yma - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Rydych yn defnyddio fersiwn wedi dyddio; cysidrwch diweddaru yma - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Gwall wrth drio cysylltu gyda'r ffeil awdurdod fersiwn o bell (Gwiriwch eich cysylltiad rhwydwaith)</entry>
 	<entry key="version.check_disabled">Gwiriad fersiwn o bell wedi'i ddiffodd, esgusodid</entry>
 </properties>

@@ -26,7 +26,7 @@
 	<entry key="version.init_log_message">オンラインバージョンチェックの初期化中。場所:</entry>
 	<entry key="version.uninitialized">バージョンチェックに失敗しました。 (初期化に失敗しました。)</entry>
 	<entry key="version.current">Minecraft本体に適合する最新バージョンです。</entry>
-	<entry key="version.outdated">古いバージョンが使用されています。 http://goo.gl/Ria2V からアップデートしてください。</entry>
+	<entry key="version.outdated">古いバージョンが使用されています。 @MOD_UPDATE_LOCATION@ からアップデートしてください。</entry>
 	<entry key="version.connection_error">リモートのバージョン情報ファイルへ接続中にエラーが発生しました。インターネット接続を確認してください。</entry>
 	<entry key="version.check_disabled">オンラインバージョンチェックは無効化されています。処理をスキップします。</entry>
 </properties>

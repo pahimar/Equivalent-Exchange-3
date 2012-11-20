@@ -26,7 +26,7 @@
 	<entry key="version.init_log_message">Incipiens senecti quaesitum contra procul senecti auctoritatis scapus, positus ad</entry>
 	<entry key="version.uninitialized">Senecti quaesitum non adimplet cum fortuna (Senecti quaestim non incipit recte)</entry>
 	<entry key="version.current">Iam abutas the most novellissimus senectus tuo senecto Meiarti(Minecraft) </entry>
-	<entry key="version.outdated">Iam abutas non tempore senectus; Consule hic afferte hodie - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Iam abutas non tempore senectus; Consule hic afferte hodie - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Erratum annectans ad procul senecto auctoritatis scapus (Scisa tuum retiacula ad invicem nexus?)</entry>
 	<entry key="version.check_disabled">Procul senectus debilitatus, neglectens</entry>
 </properties>
