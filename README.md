@@ -9,7 +9,7 @@ ________________________________________________________________________________
 #### Setup MCP
 1. Create an empty directory for EE3 development. This directory is referenced as `mcdev` from now on.
 2. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp719.zip. Install MCP dependencies as listed on the website if neccessary.
-3. Install Apache Ant [here] (ant.apache.org.)
+3. Install Apache Ant [here] (http://ant.apache.org.)
 3. Inside `mcdev`, create a directory named `mcp` and unzip the MCP ZIP file into it
 4. To verify, check if a file name `CHANGELOG` exists inside the mcp directory.
 5. Get a clean (unmodded!) copy of minecraft. Currently EE3 runs on 1.4.2 but that might have changed.
