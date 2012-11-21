@@ -65,7 +65,7 @@ ________________________________________________________________________________
 		*	`dir.release=Releases` (what you want it to be)
 		*	`release.minecraft.version=1.4.5` (as of 11/21)
 		*	`release.mod.version=pre2` (or whatever you want it to be)
-5. [FOR WINDOWS] Open up `cmd`.  Type `cmd` in Run.
+5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 6. [FOR WINDOWS] Navigate to `mcdev\source` by executing `cd [wherever your mcdev is located, just copy and paste the path in]`.
 7. Inside `sources\Equivalent-Exchange-3` execute `ant release`. If you've done everything right, BUILD SUCCESSFUL is displayed.
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre2` (or whatever you put into `build.properties` for `dir.release`, `release.minecraft.version`, and `release.mod.version`).  You should see a .jar named `ee3-universal-pre2.jar` (or whatever you put into `release.mod.version`).
