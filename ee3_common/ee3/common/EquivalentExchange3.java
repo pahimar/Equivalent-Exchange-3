@@ -107,6 +107,9 @@ public class EquivalentExchange3 {
 
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+        
+        // Register the DrawBlockHighlight Handler
+        proxy.registerDrawBlockHighlightHandler();
 
         // Initialize mod blocks
         ModBlocks.init();

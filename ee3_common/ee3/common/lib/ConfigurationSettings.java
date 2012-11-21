@@ -32,6 +32,10 @@ public class ConfigurationSettings {
     public static boolean ENABLE_VERSION_CHECK;
     public static final boolean ENABLE_VERSION_CHECK_DEFAULT = true;
     
+    // Whether or not the Philosopher Stone overlay is enabled
+    // TODO Do a proper overlay toggle that is saved between sessions
+    public static boolean ENABLE_OVERLAY_PHILOSOPHER_STONE = false;
+    
     /* 
      * Minium stone config settings
      */
