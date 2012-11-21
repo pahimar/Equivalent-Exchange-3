@@ -11,8 +11,8 @@
 	
 	<target name="build">
 		<copy todir="${dir.development}\mcp\src\common">
-			<fileset dir="${dir.development}\Equivalent-Exchange-3\ee3_client\" />
-			<fileset dir="${dir.development}\Equivalent-Exchange-3\ee3_common\" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
 		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${mc.version}" />
 	</target>
