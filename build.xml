@@ -14,7 +14,7 @@
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
-		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${mc.version}" />
 	</target>
 	
 	<target name="recompile">
@@ -43,8 +43,8 @@
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+		<mkdir dir="${dir.share}\${mc.version}\${ee3.version}" />
+		<jar destfile="${dir.share}\${release.minecraft.version}\${mc.version}\ee3-universal-${ee3.version}.jar">
 			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
 			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
@@ -62,8 +62,8 @@
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+		<mkdir dir="${dir.release}\${mc.version}\${ee3.version}" />
+		<jar destfile="${dir.release}\${mc.version}\${ee3.version}\ee3-universal-${ee3.version}.jar">
 			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
 			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
