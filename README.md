@@ -29,22 +29,32 @@ ________________________________________________________________________________
   * Click `Clone to Windows` near the top-left of the page.
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
 4. Create an empty directory for EE3 development.  This directory is refernced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+
 5. You are now ready to Setup MCP!
 
 
 #### Setup MCP (Linux and Windows 7 tested)
-2. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp723.zip. Install MCP dependencies as listed on the website if neccessary.
-3. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
-4. To verify, check if a file name `CHANGELOG` exists inside the `mcp` directory.
-5. Get a clean (unmodded!) copy of minecraft. Currently EE3 runs on 1.4.5 but that might have changed.
-6. From your `.minecraft` directory (on Windows, defaults to `%appdata%\.minecraft`), copy the `bin` and the `resources` (I don't think you need resources on Windows 7) directory to the `jars` directory inside `mcp`.  (I actually believe Forge's installation might do it for you)
-7. Get a clean (unmodded!) copy of `minecraft_server.jar` and also place it into `jars`.  (Forge might do this for you)
-8. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp` so that `mcp/forge/install.sh` exists. You need at least Forge 6.4.0, best way is to get it from [here] (http://files.minecraftforge.net/).
-9. Execute `mcdev/mcp/forge/install.sh` or `mcp/forge/install.cmd`, depending on your platform. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the forge directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
+1. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp723.zip. Install MCP dependencies as listed on the website if neccessary.
+
+2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
+
+3. To verify, check if a file name `CHANGELOG` exists inside the `mcp` directory.
+
+4. Get a clean (unmodded!) copy of minecraft's `bin` folder. Currently EE3 runs on 1.4.5 but that might have changed.
+
+5. From your `.minecraft` directory (on Windows, defaults to `%appdata%\.minecraft`), copy the `bin` and the `resources` (I don't think you need resources on Windows 7) directory to the `jars` directory inside `mcp`.  (I actually believe Forge's installation might do it for you)
+
+6. Get a clean (unmodded!) copy of `minecraft_server.jar` and also place it into `jars`.  (Forge might do this for you)
+
+7. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp` so that `mcp/forge/install.sh` exists. You need at least Forge 6.4.0, best way is to get it from [here] (http://files.minecraftforge.net/).
+
+8. Execute `mcdev/mcp/forge/install.sh` or `mcp/forge/install.cmd`, depending on your platform. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the forge directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
 
 #### Setup EE3 (Some tested for Linux, some for Windows)
 1. Inside `mcdev`, create a directory named `source`.  If you're doing this from the default clone directory, make two folders:  `source` and `Equivalent-Exchange-3`.  Copy and paste the original files into `Equivalent-Exchange-3`, and then move that into `source`.
+
 2. If you haven't already, move/clone `Equivalent-Exchange-3` into `source`.
+
 3. Right now, you should have a directory something like:
 
 ***
@@ -66,15 +76,24 @@ ________________________________________________________________________________
 		*	`release.minecraft.version=1.4.5` (as of 11/21)
 		*	`release.mod.version=pre2` (or whatever you want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
+
 6. [FOR WINDOWS] Navigate to `mcdev\source` by executing `cd [wherever your mcdev is located, just copy and paste the path in]`.
+
 7. Inside `sources\Equivalent-Exchange-3` execute `ant release`. If you've done everything right, BUILD SUCCESSFUL is displayed.
+
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre2` (or whatever you put into `build.properties` for `dir.release`, `release.minecraft.version`, and `release.mod.version`).  You should see a .jar named `ee3-universal-pre2.jar` (or whatever you put into `release.mod.version`).
+
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
 ### To Update EE3 (For Windows Only?)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he/she did, follow these instructions.
+
 2. Open Github.
+
 3. Double-click on pahimar/Equivalent-Exchange-3.
+
 4. At the top, there is a button named `Sync` (or `Refreshing...` if its still checking).
+
 5. Click `Sync`, and wait for it to finish.
+
 6. Re-compile (or move it to `mcdev\source` then re-compile, depending on what you did.)
