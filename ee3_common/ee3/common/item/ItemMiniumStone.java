@@ -32,7 +32,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
     
     public ItemMiniumStone(int id) {
         super(id);
-        this.setIconCoord(2, 0);
+        this.setIconCoord(1, 0);
         this.setItemName(Strings.MINIUM_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
@@ -72,8 +72,9 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
     }
 	
 	@SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return false;
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    {
+        return Integer.parseInt(Colours.PURE_RED, 16);
     }
 
     @Override

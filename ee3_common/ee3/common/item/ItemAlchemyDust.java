@@ -45,24 +45,15 @@ public class ItemAlchemyDust extends ItemEE {
     }
 	
 	public String getItemNameIS(ItemStack stack) {
-        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 11);
-        return super.getItemName() + "." + alchemyDustNames[meta / 2];
+        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
+        return super.getItemName() + "." + alchemyDustNames[meta];
     }
 	
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 11);
-		
-		String key = (meta % 2 == 0) ? Strings.TEXT_IMPURE : Strings.TEXT_PURE;
-
-		list.add(LanguageRegistry.instance().getStringLocalization(key));
-	}
-	
-	@SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
-		int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 11);
+		int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
         
-		if (meta >= 10) {
+		if (meta == 5) {
 			return true;
 		}
 		else {
@@ -74,7 +65,7 @@ public class ItemAlchemyDust extends ItemEE {
     public EnumRarity getRarity(ItemStack stack) {
 		int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 11);
 		
-		switch(meta / 2) {
+		switch(meta) {
 			case 0: return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.NORMAL);
 			case 1: return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.NORMAL);
 			case 2: return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.UNCOMMON);
@@ -89,7 +80,7 @@ public class ItemAlchemyDust extends ItemEE {
 	@SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs creativeTab, List list)
     {
-        for (int meta = 0; meta < 12; ++meta) {
+        for (int meta = 0; meta < 6; ++meta) {
             list.add(new ItemStack(id, 1, meta));
         }
     }

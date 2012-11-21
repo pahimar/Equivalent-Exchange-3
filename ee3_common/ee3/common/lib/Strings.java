@@ -3,8 +3,14 @@ package ee3.common.lib;
 public class Strings {
 	
 	/* General text keys */
-	public static final String TEXT_IMPURE = "text.impure";
-	public static final String TEXT_PURE = "text.pure";
+    
+    /* Version check related constants */
+    public static final String VERSION_CHECK_DISABLED = "version.check_disabled";
+    public static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.init_log_message";
+    public static final String UNINITIALIZED_MESSAGE = "version.uninitialized";
+    public static final String CURRENT_MESSAGE = "version.current";
+    public static final String OUTDATED_MESSAGE = "version.outdated";
+    public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
 	
 	/* Gui related constants */
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";

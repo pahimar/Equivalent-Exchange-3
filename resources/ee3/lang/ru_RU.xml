@@ -10,14 +10,21 @@
 	<entry key="item.inertStone.name">Инертный Камень</entry>
 	<entry key="item.miniumStone.name">Сурик</entry>
 	<entry key="item.philStone.name">Философский Камень</entry>
+	<entry key="item.alchemyDust.ash.name">Пепел</entry>
+	<entry key="item.alchemyDust.minium.name">Пыль Сурика</entry>
+	<entry key="item.alchemyDust.verdant.name">Изумрудная Пыль</entry>
+	<entry key="item.alchemyDust.azure.name">Лазурная Пыль</entry>
+	<entry key="item.alchemyDust.amaranthine.name">Пурпурная Пыль</entry>
+	<entry key="item.alchemyDust.iridescent.name">Радужная Пыль</entry>
 	<entry key="tile.redWaterStill.name">Красная Вода (Стоящая)</entry>
 	<entry key="tile.redWaterFlowing.name">Красная Вода (Текущая)</entry>
 	<entry key="tile.calcinator.name">Кальцинатор</entry>
 	<entry key="gui.calcinator.name">Кальцинатор</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Инициализация проверки версии в удаленном файле, находящемся на</entry>
 	<entry key="version.uninitialized">Проверка версии не была завершена успешно (проверка версии не инициализирована правильно)</entry>
 	<entry key="version.current">Вы используете самую последнюю версию для вашей версии Minecraft</entry>
-	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - http://goo.gl/Ria2V</entry>
+	<entry key="version.outdated">Вы используете устаревшую версию, обновите здесь - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Ошибка подключения к удаленному файлу (проверьте подключение к Интернету)</entry>
 	<entry key="version.check_disabled">Удаленная проверка версии отключена, пропуск</entry>
 </properties>
