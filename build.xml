@@ -2,10 +2,28 @@
 <project name="Equivalent Exchange 3">
 	
 	<property file="build.properties" />
-	<property name="dir.release"	value="Releases"/>  <!-- Or whatever you want to call it~ -->
-	<property name="mc.version"	value="1.4.5"/>
-	<property name="ee3.version"	value="pre2"/> <!-- Or whatever version you want -->
 	
+	<!--Pahimar, in order to continue, I need to know whether you want me to put all the properties inside build.properties or not-->
+	<!--<property name="download.dir" 	value="download"/>
+	<property name="mcp.version"     	value="723"/>
+	<property name="forge.version"       	value="6.4.0.395"/>
+	<property name="mcp.name" 	     	value="mcp${mcp.version}.zip"/>
+	<property name="forge.name" 	     	value="minecraftforge-src-${release.mod.version}-${forge.version}.zip"/>-->
+
+	<available property="forge-exists" file="${download.dir}/${forge.name}"/>
+	<available property="mcp-exists" file="${download.dir}/${mcp.name}"/>
+
+	<condition property="out-of-date">
+		<not>
+			<and>
+				<available file="${download.dir}/${mcp.name}"/>
+				<available file="${download.dir}/${forge.name}"/>
+				<available file="${mcpsrc.dir}"/>
+			</and>
+		</not>
+	</condition>
+
+<mkdir dir="${download.dir}"/>
 	<target name="clean">
 		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
 		<delete dir="${dir.development}\mcp\src\common\ee3" />
