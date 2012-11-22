@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Chinese (Simplified) Localization File</comment>
+	<comment>Chinese (Simplified)(zh_CN) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">松开</entry>
+	<entry key="key.toggle">切换</entry>
+	<entry key="key.charge">充</entry>
 	<entry key="item.miniumShard.name">铅丹碎片</entry>
 	<entry key="item.inertStone.name">惰性石</entry>
 	<entry key="item.miniumStone.name">铅丹石</entry>
@@ -10,4 +14,17 @@
 	<entry key="tile.redWaterFlowing.name">红水 (流动)</entry>
 	<entry key="tile.calcinator.name">煅烧炉</entry>
 	<entry key="gui.calcinator.name">煅烧炉</entry>
+	<entry key="item.alchemyDust.ash.name">灰</entry>
+	<entry key="item.alchemyDust.minium.name">铅丹灰</entry>
+	<entry key="item.alchemyDust.verdant.name">玉灰</entry>
+	<entry key="item.alchemyDust.azure.name">蔚蓝灰</entry> 
+	<entry key="item.alchemyDust.amaranthine.name">苋属灰</entry> 
+	<entry key="item.alchemyDust.iridescent.name">虹彩灰</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
+	<entry key="version.init_log_message">Initializing version check against the remote version authority file, located at</entry>
+	<entry key="version.uninitialized">The version check did not complete successfully (version check did not initialize properly)</entry>
+	<entry key="version.current">你现在在用@MINECRAFT_VERSION@的Equivalent Exchange 3的最新的现代化 (@REMOTE_MOD_VERSION@)。</entry> 
+	<entry key="version.outdated">A new @MOD_NAME@ version exists (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. 请更新： @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.connection_error">Error connecting to the remote version authority file (check your Internet connection?)</entry>
+	<entry key="version.check_disabled">Remote version check disabled, skipping</entry>
 </properties>
