@@ -1,4 +1,4 @@
-?<?xml version="1.0" encoding="UTF-8"?>
+Ôªø<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Brazilian Portuguese(pt-BR) Localization File</comment>
@@ -11,20 +11,20 @@
 	<entry key="item.miniumStone.name">Pedra de Minium</entry>
 	<entry key="item.philStone.name">Pedra Filosofal</entry>
 	<entry key="item.alchemyDust.ash.name">Cinzas</entry>
-	<entry key="item.alchemyDust.minium.name">PÛ de Minium</entry>
-	<entry key="item.alchemyDust.verdant.name">PÛ Verdejante</entry>
-	<entry key="item.alchemyDust.azure.name">PÛ Õndigo</entry>
-	<entry key="item.alchemyDust.amaranthine.name">PÛ Amarantino</entry>
-	<entry key="item.alchemyDust.iridescent.name">PÛ Iridescente</entry>
-	<entry key="tile.redWaterStill.name">¡gua Vermelha (Parada)</entry>
-	<entry key="tile.redWaterFlowing.name">¡gua Vermelha (Corrente)</entry>
+	<entry key="item.alchemyDust.minium.name">P√≥ de Minium</entry>
+	<entry key="item.alchemyDust.verdant.name">P√≥ Verdejante</entry>
+	<entry key="item.alchemyDust.azure.name">P√≥ √çndigo</entry>
+	<entry key="item.alchemyDust.amaranthine.name">P√≥ Amarantino</entry>
+	<entry key="item.alchemyDust.iridescent.name">P√≥ Iridescente</entry>
+	<entry key="tile.redWaterStill.name">√Ågua Vermelha (Parada)</entry>
+	<entry key="tile.redWaterFlowing.name">√Ågua Vermelha (Corrente)</entry>
 	<entry key="tile.calcinator.name">Calcinador</entry>
 	<entry key="gui.calcinator.name">Calcinador</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="version.init_log_message">Inicializando checagem de vers„o remota contra a vers„o remota mestre, localizada em:</entry>
-	<entry key="version.uninitialized">Checagem de vers„o remota n„o conseguiu ser inicializada adequadamente</entry>
-	<entry key="version.current">Usando a vers„o mais recente(@REMOTE_MOD_VERSION@) de Equivalent Exchange 3 para @MINECRAFT_VERSION@</entry>
-	<entry key="version.outdated">Uma nova vers„o de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consiga-a aqui: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.general_error">Erro checando a vers„o remota mestre</entry>
+	<entry key="version.init_log_message">Inicializando checagem de vers√£o remota contra a vers√£o remota mestre, localizada em:</entry>
+	<entry key="version.uninitialized">Checagem de vers√£o remota n√£o conseguiu ser inicializada adequadamente</entry>
+	<entry key="version.current">Usando a vers√£o mais recente(@REMOTE_MOD_VERSION@) de Equivalent Exchange 3 para @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Uma nova vers√£o de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consiga-a aqui: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Erro checando a vers√£o remota mestre</entry>
 	<entry key="version.check_disabled">Checagem remota desligada, pulando</entry>
 </properties>
