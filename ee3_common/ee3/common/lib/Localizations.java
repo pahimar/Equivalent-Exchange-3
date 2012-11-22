@@ -32,6 +32,7 @@ public class Localizations {
 		LANG_RESOURCE_LOCATION + "sr_RS.xml",
 		LANG_RESOURCE_LOCATION + "sv_SE.xml",
 		LANG_RESOURCE_LOCATION + "zh_CN.xml"
+		LANG_RESOURCE_LOCATION + "zh_TW.xml"
 	};
 
 }
