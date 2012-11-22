@@ -48,20 +48,20 @@ ________________________________________________________________________________
 
 7. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp` so that `mcp/forge/install.sh` exists. You need at least Forge 6.4.0, best way is to get it from [here] (http://files.minecraftforge.net/).
 
-8. Execute `mcdev/mcp/forge/install.sh` or `mcp/forge/install.cmd`, depending on your platform. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the forge directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
+8. Execute `install.sh` (Linux and Mac?) or `install.cmd` (Windows), both found in `mcdev/mcp/forge`. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the `forge` directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
 
 #### Setup EE3 (Some tested for Linux, some for Windows)
 1. Inside `mcdev`, create a directory named `source`.  If you're doing this from the default clone directory, make two folders:  `source` and `Equivalent-Exchange-3`.  Copy and paste the original files into `Equivalent-Exchange-3`, and then move that into `source`.
 
 2. If you haven't already, move/clone `Equivalent-Exchange-3` into `source`.
 
-3. Right now, you should have a directory something like:
+3. Right now, you should have a directory that looks something like:
 
 ***
 
 	mcdev
 	\-mcp
-		\-A whole bunch of mcp files, including CHANGELOG.
+		\-mcp stuff blablabla (should have CHANGELOG).
 		\-forge
 		\-jars
 	\-source
@@ -74,12 +74,12 @@ ________________________________________________________________________________
 		*	`dir.share=Shared` (or what you want it to be)
 		*	`dir.release=Releases` (what you want it to be)
 		*	`release.minecraft.version=1.4.5` (as of 11/21)
-		*	`release.mod.version=pre2` (or whatever you want it to be)
+		*	`release.mod.version=pre2` (or whatever version # want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 
-6. [FOR WINDOWS] Navigate to `mcdev\source` by executing `cd [wherever your mcdev is located, just copy and paste the path in]`.
+6. [FOR WINDOWS] Navigate to `mcdev\source` by executing `cd mcdev's location\source`.
 
-7. Inside `sources\Equivalent-Exchange-3` execute `ant release`. If you've done everything right, BUILD SUCCESSFUL is displayed.
+7. Inside `sources\Equivalent-Exchange-3` execute `ant release`. If you've done everything right, `BUILD SUCCESSFUL` is displayed.  If not, you probably did something wrong.
 
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre2` (or whatever you put into `build.properties` for `dir.release`, `release.minecraft.version`, and `release.mod.version`).  You should see a .jar named `ee3-universal-pre2.jar` (or whatever you put into `release.mod.version`).
 
