@@ -118,6 +118,8 @@
 	<target name="release">
 		<!-- Prep for the release -->
 		<antcall target="clean" />
+		<antcall target="download-files"/>
+		<antcall target="setup"/>
 		<antcall target="build" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
