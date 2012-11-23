@@ -61,11 +61,11 @@
 
 	<!-- Install forge -->
 	<exec dir="${forge.dir}" executable="cmd" osfamily="windows">
-	<arg line="/c install.cmd"/>
+		<arg line="/c install.cmd"/>
 	</exec>
 
 	<exec dir="${forge.dir}" executable="sh" osfamily="unix">
-	<arg value="install.sh"/>
+		<arg value="install.sh"/>
 	</exec>
 
 	</target>
