@@ -107,7 +107,7 @@
 		
 		<!-- Build the jar -->
 		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}"/>
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\Equivalent Exchange 3 ${release.mod.version}.jar">
 			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
 			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
@@ -128,7 +128,7 @@
 		
 		<!-- Build the jar -->
 		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}"/>
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\Equivalent Exchange 3 ${release.mod.version}.jar">
 			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
 			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
