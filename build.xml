@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="Equivalent Exchange 3">
+<project name="Equivalent Exchange 3">  <!--Download-files, setup, and available properties taken from nallar/SirSengir's BuildCraft's build.xml file-->
 	
 	<property file="build.properties" />
 	
