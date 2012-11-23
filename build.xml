@@ -37,15 +37,15 @@
 	<!-- Download necessary files -->
 	<target name="download-files" depends="download-mcp,download-forge"/>
 	
-	<!-- Download mcp -->
-	<target name="download-mcp" unless="mcp-exists">
-		<get src="http://mcp.ocean-labs.de/files/${mcp.name}" dest="${download.dir}" usetimestamp="True"/>
-	</target>
+		<!-- Download mcp -->
+		<target name="download-mcp" unless="mcp-exists">
+			<get src="http://mcp.ocean-labs.de/files/${mcp.name}" dest="${download.dir}" usetimestamp="True"/>
+		</target>
 
-	<!-- Download forge (if it doesn't exist) -->
-	<target name="download-forge" unless="forge-exists" >
-		<get src="http://files.minecraftforge.net/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
-	</target>
+		<!-- Download forge (if it doesn't exist) -->
+		<target name="download-forge" unless="forge-exists" >
+			<get src="http://files.minecraftforge.net/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
+		</target>
 	
 	<!-- Setup mcp and forge -->
 	<target name="setup" depends="download-files" if="out-of-date">
