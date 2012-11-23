@@ -29,9 +29,9 @@
 	<mkdir dir="${download.dir}"/>
 
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\common\ee3" />
-		<delete dir="${dir.development}\mcp\reobf\minecraft" />
+		<delete file="${dir.development}\mcp\src\common\mcmod.info"/>
+		<delete dir="${dir.development}\mcp\src\common\ee3"/>
+		<delete dir="${dir.development}\mcp\reobf\minecraft"/>
 	</target>
 	
 	<!-- Download necessary files -->
@@ -72,18 +72,18 @@
 	
 	<target name="build">
 		<copy todir="${dir.development}\mcp\src\common">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\"/>
 		</copy>
-		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}"/>
 	</target>
 	
 	<target name="recompile">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c recompile.bat" />
+			<arg line="/c recompile.bat"/>
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
+			<arg line="recompile.sh"/>
 		</exec>
 	</target>
 	
@@ -92,44 +92,46 @@
 			<arg line="/c reobfuscate.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate.sh" />
+			<arg line="reobfuscate.sh"/>
 		</exec>
 	</target>
 	
 	<target name="release-shared">
 		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
+		<antcall target="clean"/>
+		<antcall target="download-files"/>
+		<antcall target="setup"/>
+		<antcall target="build"/>
+		<antcall target="recompile"/>		
+		<antcall target="reobfuscate"/>
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}"/>
 		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
+			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
+		<antcall target="clean"/>
 	</target>
 	
 	<target name="release">
 		<!-- Prep for the release -->
-		<antcall target="clean" />
+		<antcall target="clean"/>
 		<antcall target="download-files"/>
 		<antcall target="setup"/>
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
+		<antcall target="build"/>
+		<antcall target="recompile"/>		
+		<antcall target="reobfuscate"/>
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}"/>
 		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
+			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
