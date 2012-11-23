@@ -15,7 +15,7 @@ ________________________________________________________________________________
   * For `Variable Value`, input something similar to `;C:\Program Files (x86)\Java\jdk1.7.0_09` exactly as shown to the end.(or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;C:\Program Files (x86)\Java\jdk1.7.0_09\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
-2. Download and Apache Ant [here] (http://ant.apache.org).
+2. Download Apache Ant [here] (http://ant.apache.org).
 	* Unzip the files anywhere you want, eg `C:\Program Files (x86)\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
   * Under `System Variables`, click `New`.
@@ -27,7 +27,7 @@ ________________________________________________________________________________
 	* Create an account.
   * Go back to the Equivalent-Exchange-3 directory [here] (http://github.com/pahimar/Equivalent-Exchange-3).
   * Click `Clone to Windows` near the top-left of the page.
-  * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
+  * You should see Github pulse and `pahimar/Equivalent-Exchange-3` appear.  (The local repository defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
 4. Create an empty directory for EE3 development.  This directory is refernced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 5. You are now ready to Setup MCP!
@@ -74,7 +74,7 @@ ________________________________________________________________________________
 		*	`dir.share=Shared` (or what you want it to be)
 		*	`dir.release=Releases` (what you want it to be)
 		*	`release.minecraft.version=1.4.5` (as of 11/21)
-		*	`release.mod.version=pre2` (or whatever version # want it to be)
+		*	`release.mod.version=pre2` (or whatever version # you want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 
 6. [FOR WINDOWS] Navigate to `mcdev\source` by executing `cd mcdev's location\source`.
@@ -83,14 +83,14 @@ ________________________________________________________________________________
 
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre2` (or whatever you put into `build.properties` for `dir.release`, `release.minecraft.version`, and `release.mod.version`).  You should see a .jar named `ee3-universal-pre2.jar` (or whatever you put into `release.mod.version`).
 
-9. Copy the jar into your Minecraft mods folder, and play Minecraft!
+9. Copy the jar into your Minecraft mods folder, delete all old versions of EE3, and play Minecraft!  (Please make sure you have all prerequisites for MC installed first)
 
 ### To Update EE3 (For Windows Only?)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he/she did, follow these instructions.
 
 2. Open Github.
 
-3. Double-click on pahimar/Equivalent-Exchange-3.
+3. Double-click on `pahimar/Equivalent-Exchange-3`.
 
 4. At the top, there is a button named `Sync` (or `Refreshing...` if its still checking).
 
