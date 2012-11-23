@@ -4,14 +4,14 @@
 	<property file="build.properties" />
 	
 	<!--Pahimar, do you want me to put the following properties into build.properties?-->
-	<property name="download.dir" 		value="downloads"/>
+	<property name="download.dir" 		value="${dir.development}/downloads"/>
 	<property name="mcp.dir" 		value="${dir.development}/mcp"/>
 	<property name="forge.dir" 		value="${mcp.dir}/forge"/>
 	<property name="mcpsrc.dir" 		value="${mcp.dir}/src/minecraft"/>
 	<property name="mcp.version"     	value="723"/>
 	<property name="forge.version"       	value="6.4.0.395"/>
 	<property name="mcp.name" 	     	value="mcp${mcp.version}.zip"/>
-	<property name="forge.name" 	     	value="minecraftforge-src-${release.mod.version}-${forge.version}.zip"/>
+	<property name="forge.name" 	     	value="minecraftforge-src-${release.minecraft.version}-${forge.version}.zip"/>
 
 	<available property="forge-exists" file="${download.dir}/${forge.name}"/>
 	<available property="mcp-exists" file="${download.dir}/${mcp.name}"/>
@@ -51,22 +51,22 @@
 	<target name="setup" depends="download-files" if="out-of-date">
 		<delete dir="${mcp.dir}"/>
 
-	<!-- Unzip them -->
-	<unzip dest="${mcp.dir}" src="${download.dir}/${mcp.name}"/>
-	<unzip dest="${mcp.dir}" src="${download.dir}/${forge.name}"/>
+		<!-- Unzip them -->
+		<unzip dest="${mcp.dir}" src="${download.dir}/${mcp.name}"/>
+		<unzip dest="${mcp.dir}" src="${download.dir}/${forge.name}"/>
 
-	<!-- Fix executable permissions -->
-	<chmod dir="${mcp.dir}" perm="ugo+rx" includes="**.sh"/>
-	<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="ugo+rx"/>
+		<!-- Fix executable permissions -->
+		<chmod dir="${mcp.dir}" perm="ugo+rx" includes="**.sh"/>
+		<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="ugo+rx"/>
 
-	<!-- Install forge -->
-	<exec dir="${forge.dir}" executable="cmd" osfamily="windows">
-		<arg line="/c install.cmd"/>
-	</exec>
+		<!-- Install forge -->
+		<exec dir="${forge.dir}" executable="cmd" osfamily="windows">
+			<arg line="/c install.cmd"/>
+		</exec>
 
-	<exec dir="${forge.dir}" executable="sh" osfamily="unix">
-		<arg value="install.sh"/>
-	</exec>
+		<exec dir="${forge.dir}" executable="sh" osfamily="unix">
+			<arg value="install.sh"/>
+		</exec>
 
 	</target>
 	
