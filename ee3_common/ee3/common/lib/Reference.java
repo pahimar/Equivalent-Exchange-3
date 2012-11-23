@@ -24,12 +24,6 @@ public class Reference {
     public static final String SERVER_PROXY_CLASS = "ee3.common.core.CommonProxy";
     public static final String CLIENT_PROXY_CLASS = "ee3.client.core.ClientProxy";
 
-    /* Configuration related constants */
-    public static final String ENABLE_VERSION_CHECK = "enable_version_check";
-    public static final String ENABLE_SOUNDS = "enable_sounds";
-    public static final String ENABLE_PARTICLE_FX = "enable_particle_fx";
-    public static final String AUTO_RESOLVE_BLOCK_IDS = "auto_resolve_block_ids";
-
     /* KeyBinding related constants */
     public static final String KEYBINDING_EXTRA = "key.extra";
     public static final int KEYBINDING_EXTRA_DEFAULT = 46;

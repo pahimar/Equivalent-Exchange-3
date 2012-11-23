@@ -23,7 +23,7 @@ import ee3.client.core.handlers.DrawBlockHighlightHandler;
 import ee3.client.core.helper.RenderUtils;
 import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.core.helper.VersionHelper;
-import ee3.common.item.ItemPhilosopherStone;
+import ee3.common.item.ITransmutationStone;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 
@@ -46,7 +46,7 @@ public class RenderTickHandler implements ITickHandler {
                 currentItemStack = player.inventory.getCurrentItem();
             }
 
-            if ((player != null) && (currentItemStack != null) && (minecraft.inGameHasFocus) && (currentItemStack.getItem() instanceof ItemPhilosopherStone) && (ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE)) {
+            if ((player != null) && (currentItemStack != null) && (minecraft.inGameHasFocus) && (currentItemStack.getItem() instanceof ITransmutationStone) && (ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE)) {
                 renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
             }
         }
@@ -66,9 +66,9 @@ public class RenderTickHandler implements ITickHandler {
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
 
-        float overlayScale = 2F;
+        float overlayScale = 2F;                    // TODO config option
         float blockScale = overlayScale / 2;
-        float overlayOpacity = 1F;
+        float overlayOpacity = 1F;                  // TODO config option
         
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
