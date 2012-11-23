@@ -10,6 +10,7 @@ import ee3.client.gui.GuiPortableCrafting;
 import ee3.common.container.ContainerCalcinator;
 import ee3.common.container.ContainerPortableCrafting;
 import ee3.common.lib.GuiIds;
+import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
 
 /**
@@ -25,6 +26,8 @@ import ee3.common.tile.TileCalcinator;
 public class CommonProxy implements IGuiHandler {
 
     public void registerKeyBindingHandler() {}
+    
+    public void registerDrawBlockHighlightHandler() {}
 
     public void setKeyBinding(String name, int value) {}
 
@@ -39,8 +42,7 @@ public class CommonProxy implements IGuiHandler {
     public void initRenderingAndTextures() {}
     
     public void initTileEntities() {
-    	// TODO: Constant
-    	GameRegistry.registerTileEntity(TileCalcinator.class, "tileCalcinator");
+    	GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
     }
     
     @Override

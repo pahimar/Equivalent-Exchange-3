@@ -28,6 +28,7 @@ import ee3.common.core.handlers.ItemPickupHandler;
 import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
+import ee3.common.core.handlers.RenderTickHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.VersionHelper;
@@ -78,6 +79,9 @@ public class EquivalentExchange3 {
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
         
+        // Initialize the Render Tick Handler (Client only)
+        TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
+        
         // Register the KeyBinding Handler (Client only)
         proxy.registerKeyBindingHandler();
 
@@ -103,6 +107,9 @@ public class EquivalentExchange3 {
 
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+        
+        // Register the DrawBlockHighlight Handler
+        proxy.registerDrawBlockHighlightHandler();
 
         // Initialize mod blocks
         ModBlocks.init();

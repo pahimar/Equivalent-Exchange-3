@@ -17,6 +17,7 @@ import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.item.ITransmutationStone;
 import ee3.common.item.ModItems;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
 import ee3.common.network.PacketEE;
@@ -49,13 +50,22 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
             if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                System.out.println(kb.keyDescription);
+                // TODO Clean this up properly
                 if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
                     
                     if (currentItem != null) {
                         if (currentItem.getItem() instanceof ITransmutationStone) {
                             ((ITransmutationStone)currentItem.getItem()).openPortableCrafting(kb.keyDescription);
+                        }
+                    }
+                }
+                else if (kb.keyDescription == Reference.KEYBINDING_TOGGLE) {
+                    ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
+                    
+                    if (currentItem != null) {
+                        if (currentItem.getItem() instanceof ITransmutationStone) {
+                            ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE = !ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE;
                         }
                     }
                 }

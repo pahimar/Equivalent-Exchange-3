@@ -25,5 +25,8 @@ public class Strings {
     public static final String MINIUM_STONE_NAME = "miniumStone";
     public static final String PHILOSOPHER_STONE_NAME = "philStone";
     public static final String ALCHEMY_DUST_NAME = "alchemyDust";
+    
+    /* TileEntity name constants */
+    public static final String TE_CALCINATOR_NAME = "tileCalcinator";
 
 }
