@@ -7,13 +7,13 @@ The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/top
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (only done on Linux so far, partly on Windows).
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Prerequisites  (Tested for Windows 7 ONLY!)
-0. Warning:  Please make sure you know **exactly** what you are doing.  Its not our fault if your system crashes and you lose everything by doing something wrong.
+0. Warning:  Please make sure you know *exactly* what you are doing.  It's not our fault if your system crashes and you lose everything by doing something wrong.
 1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html).  Just scroll down.
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `JAVA_HOME`.
-  * For `Variable Value`, input `;C:\Program Files (x86)\Java\jdk1.7.0_09` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.  *DO NOT FORGET THE SEMICOLON!*
+  * For `Variable Value`, input `;C:\Program Files (x86)\Java\jdk1.7.0_09` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.  **DO NOT FORGET THE SEMICOLON!**
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;C:\Program Files (x86)\Java\jdk1.7.0_09\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
 2. Download Apache Ant [here] (http://ant.apache.org).
@@ -23,7 +23,7 @@ ________________________________________________________________________________
   * For `Variable Name`, input `ANT_HOME`.
   * For `Variable Value`, input `C:\Ant\apache-ant-1.8.4` (or your Ant directory \apache-ant-1.8.4).
   * Scroll down to `Path`, and double-click on it.
-  * Append `;C:\Ant\apache-ant-1.8.4\bin` exactly as shown to the end (or your Ant directory \apache-ant-1.8.4\bin).  *DO NOT FORGET THE SEMICOLON!*
+  * Append `;C:\Ant\apache-ant-1.8.4\bin` exactly as shown to the end (or your Ant directory \apache-ant-1.8.4\bin).  **DO NOT FORGET THE SEMICOLON!**
 3. Download and install Github [here] (http://windows.github.com/).
 	* Create an account.
   * Go back to the Equivalent-Exchange-3 directory [here] (http://github.com/pahimar/Equivalent-Exchange-3).
@@ -34,7 +34,7 @@ ________________________________________________________________________________
 5. You are now ready to Setup MCP!
 
 
-#### Setup MCP (Linux and Windows 7 tested)
+#### Setup MCP (Tested on Linux and Windows 7)
 1. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp723.zip. Install MCP dependencies as listed on the website if neccessary.
 
 2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
