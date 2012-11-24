@@ -8,6 +8,7 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Prerequisites  (Tested for Windows 7 ONLY!)
 0. Warning:  Please make sure you know *exactly* what you are doing.  It's not our fault if your system crashes and you lose everything by doing something wrong.
+
 1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html).  Accept the license agreement and download the file pertaining to your system.  (Latest version=u9 as of 11/24)
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
@@ -31,25 +32,16 @@ ________________________________________________________________________________
   * You should see Github pulse and `pahimar/Equivalent-Exchange-3` appear.  (The local repository defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
 4. Create an empty directory for EE3 development.  This directory is refernced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
-5. You are now ready to Setup MCP!
+5. You are now ready to Setup Jars!
 
 
-#### Setup MCP (Tested on Linux and Windows 7)
-1. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases) , e.g. mcp723.zip. Install MCP dependencies as listed on the website if neccessary.
+#### Setup Jars (Tested on Linux and Windows 7)
+1. Get a clean (unmodded!) copy of Minecraft's `bin` folder (On Windows, defaults to `%appdata%\.minecraft\bin`. You can do this by deleting/moving your `bin` directory, and MC will automatically make a clean one for you.  Currently EE3 runs on 1.4.5 but that might have changed.
 
-2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
+2. From your `.minecraft` directory (on Windows, defaults to `%appdata%\.minecraft`), copy the `bin` and the `resources` (I don't think you need resources on Windows 7) directory to the `jars` directory inside `mcp`.  (I actually believe Forge's installation might do it for you)
 
-3. To verify, check if a file name `CHANGELOG` exists inside the `mcp` directory.
+3. Get a clean (unmodded!) copy of `minecraft_server.jar` and also place it into `mcdev\mcp\jars`.  (Forge might do this for you)
 
-4. Get a clean (unmodded!) copy of minecraft's `bin` folder. Currently EE3 runs on 1.4.5 but that might have changed.
-
-5. From your `.minecraft` directory (on Windows, defaults to `%appdata%\.minecraft`), copy the `bin` and the `resources` (I don't think you need resources on Windows 7) directory to the `jars` directory inside `mcp`.  (I actually believe Forge's installation might do it for you)
-
-6. Get a clean (unmodded!) copy of `minecraft_server.jar` and also place it into `jars`.  (Forge might do this for you)
-
-7. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp` so that `mcp/forge/install.sh` exists. You need at least Forge 6.4.0, best way is to get it from [here] (http://files.minecraftforge.net/).
-
-8. Execute `install.sh` (Linux and Mac?) or `install.cmd` (Windows), both found in `mcdev/mcp/forge`. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the `forge` directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
 
 #### Setup EE3 (Some tested for Linux, some for Windows)
 1. Inside `mcdev`, create a directory named `source`.  If you're doing this from the default clone directory, make two folders:  `source` and `Equivalent-Exchange-3`.  Copy and paste the original files into `Equivalent-Exchange-3`, and then move that into `source`.
