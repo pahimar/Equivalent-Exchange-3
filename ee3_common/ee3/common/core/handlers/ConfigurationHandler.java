@@ -26,6 +26,7 @@ import static net.minecraftforge.common.Configuration.*;
 public class ConfigurationHandler {
 
     private static final String CATEGORY_KEYBIND = "keybinds";
+    private static final String CATEGORY_GRAPHICS = "graphics";
 
     public static void init(File configFile) {
         Configuration configuration = new Configuration(configFile);
@@ -35,14 +36,11 @@ public class ConfigurationHandler {
 
             /* General Configs */
             ConfigurationSettings.ENABLE_VERSION_CHECK = configuration
-            		.get(CATEGORY_GENERAL, Reference.ENABLE_VERSION_CHECK, ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT)
+            		.get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_VERSION_CHECK_CONFIGNAME, ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT)
             		.getBoolean(ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT);
             ConfigurationSettings.ENABLE_SOUNDS = configuration
-            		.get(CATEGORY_GENERAL, Reference.ENABLE_SOUNDS, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT)
+            		.get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT)
             		.getBoolean(ConfigurationSettings.ENABLE_SOUNDS_DEFAULT);
-            ConfigurationSettings.ENABLE_PARTICLE_FX = configuration
-            		.get(CATEGORY_GENERAL, Reference.ENABLE_PARTICLE_FX, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT)
-            		.getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
             ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST = configuration
             		.get(CATEGORY_GENERAL, ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_DEFAULT)
             		.getInt(ConfigurationSettings.MINIUM_STONE_TRANSMUTE_COST_DEFAULT);
@@ -50,9 +48,17 @@ public class ConfigurationHandler {
             		.get(CATEGORY_GENERAL, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT)
             		.getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);
 
+            /* Graphics/Rendering Configs */
+            ConfigurationSettings.ENABLE_PARTICLE_FX = configuration
+                    .get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT)
+                    .getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
+            ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE = configuration
+                    .get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_DEFAULT)
+                    .getBoolean(ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_DEFAULT);
+            
             /* Block Configs */
             ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS = configuration
-            		.get(CATEGORY_BLOCK, Reference.AUTO_RESOLVE_BLOCK_IDS, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT)
+            		.get(CATEGORY_BLOCK, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_CONFIGNAME, ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT)
             		.getBoolean(ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS_DEFAULT);
             BlockIds.CALCINATOR =  configuration
             		.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT)

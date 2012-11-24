@@ -9,6 +9,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import ee3.client.core.handlers.DrawBlockHighlightHandler;
 import ee3.client.core.handlers.KeyBindingHandler;
 import ee3.client.core.handlers.SoundHandler;
 import ee3.client.core.helper.KeyBindingHelper;
@@ -37,6 +38,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerKeyBindingHandler() {
         KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+    }
+    
+    @Override
+    public void registerDrawBlockHighlightHandler() {
+        MinecraftForge.EVENT_BUS.register(new DrawBlockHighlightHandler());
     }
 
     @Override
