@@ -8,7 +8,7 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Prerequisites  (Tested for Windows 7 ONLY!)
 0. Warning:  Please make sure you know *exactly* what you are doing.  It's not our fault if your system crashes and you lose everything by doing something wrong.
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html).  Just scroll down.
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html).  Accept the license agreement and download the file pertaining to your system.  (Latest version=u9 as of 11/24)
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
@@ -16,12 +16,12 @@ ________________________________________________________________________________
   * For `Variable Value`, input `;C:\Program Files (x86)\Java\jdk1.7.0_09` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.  **DO NOT FORGET THE SEMICOLON!**
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;C:\Program Files (x86)\Java\jdk1.7.0_09\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
-2. Download Apache Ant [here] (http://ant.apache.org).
+2. Download Apache Ant [here] (http://ant.apache.org/bindownload.cgi).  Scroll down to "Current Release of Ant" and download an archive.
 	* Unzip the files anywhere you want, eg `C:\Program Files (x86)\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `ANT_HOME`.
-  * For `Variable Value`, input `C:\Ant\apache-ant-1.8.4` (or your Ant directory \apache-ant-1.8.4).
+  * For `Variable Value`, input `C:\Ant\apache-ant-1.8.4` (or your Ant directory \apache-ant-1.8.4).  (This pertains only to Ant 1.8.4!)
   * Scroll down to `Path`, and double-click on it.
   * Append `;C:\Ant\apache-ant-1.8.4\bin` exactly as shown to the end (or your Ant directory \apache-ant-1.8.4\bin).  **DO NOT FORGET THE SEMICOLON!**
 3. Download and install Github [here] (http://windows.github.com/).
@@ -74,7 +74,7 @@ ________________________________________________________________________________
  		* `dir.development=../../`
 		*	`dir.share=Shared` (or what you want it to be)
 		*	`dir.release=Releases` (what you want it to be)
-		*	`release.minecraft.version=1.4.5` (as of 11/21)
+		*	`release.minecraft.version=1.4.5` (as of 11/24)
 		*	`release.mod.version=pre2` (or whatever version # you want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 
