@@ -24,6 +24,9 @@
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
 			<arg line="recompile.sh" />
 		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+			<arg line="recompile.sh" />
+		</exec>
 	</target>
 	
 	<target name="reobfuscate">
@@ -31,6 +34,9 @@
 			<arg line="/c reobfuscate.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+			<arg line="reobfuscate.sh" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
 			<arg line="reobfuscate.sh" />
 		</exec>
 	</target>
