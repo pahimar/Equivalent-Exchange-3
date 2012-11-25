@@ -1,28 +1,89 @@
 <?xml version="1.0" ?> 
-<project name="Equivalent Exchange 3">
+<project name="Equivalent Exchange 3">  <!--Download-files, setup, and available properties taken from nallar/SirSengir's BuildCraft's build.xml file-->
 	
 	<property file="build.properties" />
 	
+	<!--Pahimar, do you want me to put the following properties into build.properties?-->
+	<property name="download.dir" 		value="${dir.development}/downloads"/>
+	<property name="mcp.dir" 		value="${dir.development}/mcp"/>
+	<property name="forge.dir" 		value="${mcp.dir}/forge"/>
+	<property name="mcpsrc.dir" 		value="${mcp.dir}/src/minecraft"/>
+	<property name="mcp.version"     	value="723"/>
+	<property name="forge.version"      	value="6.4.0.396"/>
+	<property name="mcp.name" 	     	value="mcp${mcp.version}.zip"/>
+	<property name="forge.name" 	    	value="minecraftforge-src-${release.minecraft.version}-${forge.version}.zip"/>
+
+	<available property="forge-exists" file="${download.dir}/${forge.name}"/>
+	<available property="mcp-exists" file="${download.dir}/${mcp.name}"/>
+
+	<condition property="out-of-date">
+		<not>
+			<and>
+				<available file="${download.dir}/${mcp.name}"/>
+				<available file="${download.dir}/${forge.name}"/>
+				<available file="${mcpsrc.dir}"/>
+			</and>
+		</not>
+	</condition>
+
+	<mkdir dir="${download.dir}"/>
+
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\common\ee3" />
-		<delete dir="${dir.development}\mcp\reobf\minecraft" />
+		<delete file="${dir.development}\mcp\src\common\mcmod.info"/>
+		<delete dir="${dir.development}\mcp\src\common\ee3"/>
+		<delete dir="${dir.development}\mcp\reobf\minecraft"/>
+	</target>
+	
+	<!-- Download necessary files -->
+	<target name="download-files" depends="download-mcp,download-forge"/>
+	
+		<!-- Download mcp -->
+		<target name="download-mcp" unless="mcp-exists">
+			<get src="http://mcp.ocean-labs.de/files/${mcp.name}" dest="${download.dir}" usetimestamp="True"/>
+		</target>
+
+		<!-- Download forge (if it doesn't exist) -->
+		<target name="download-forge" unless="forge-exists" >
+			<get src="http://files.minecraftforge.net/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
+		</target>
+	
+	<!-- Setup mcp and forge -->
+	<target name="setup" depends="download-files" if="out-of-date">
+		<delete dir="${mcp.dir}"/>
+
+		<!-- Unzip them -->
+		<unzip dest="${mcp.dir}" src="${download.dir}/${mcp.name}"/>
+		<unzip dest="${mcp.dir}" src="${download.dir}/${forge.name}"/>
+
+		<!-- Fix executable permissions -->
+		<chmod dir="${mcp.dir}" perm="ugo+rx" includes="**.sh"/>
+		<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="ugo+rx"/>
+
+		<!-- Install forge -->
+		<exec dir="${forge.dir}" executable="cmd" osfamily="windows">
+			<arg line="/c install.cmd"/>
+		</exec>
+
+		<exec dir="${forge.dir}" executable="sh" osfamily="unix">
+			<arg value="install.sh"/>
+		</exec>
+
 	</target>
 	
 	<target name="build">
 		<copy todir="${dir.development}\mcp\src\common">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\"/>
 		</copy>
-		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}"/>
 	</target>
 	
 	<target name="recompile">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c recompile.bat" />
+			<arg line="/c recompile.bat"/>
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
+			<arg line="recompile.sh"/>
 		</exec>
 	</target>
 	
@@ -31,42 +92,46 @@
 			<arg line="/c reobfuscate.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate.sh" />
+			<arg line="reobfuscate.sh"/>
 		</exec>
 	</target>
 	
 	<target name="release-shared">
 		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
+		<antcall target="clean"/>
+		<antcall target="download-files"/>
+		<antcall target="setup"/>
+		<antcall target="build"/>
+		<antcall target="recompile"/>		
+		<antcall target="reobfuscate"/>
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}"/>
+		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\Equivalent Exchange 3 ${release.mod.version}.jar">
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
+			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
+		<antcall target="clean"/>
 	</target>
 	
 	<target name="release">
 		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
+		<antcall target="clean"/>
+		<antcall target="download-files"/>
+		<antcall target="setup"/>
+		<antcall target="build"/>
+		<antcall target="recompile"/>		
+		<antcall target="reobfuscate"/>
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}"/>
+		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\Equivalent Exchange 3 ${release.mod.version}.jar">
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info"/>
+			<fileset dir="${dir.development}\mcp\reobf\minecraft"/>
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources"/>
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
