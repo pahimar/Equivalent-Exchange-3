@@ -93,7 +93,6 @@ public class RenderTickHandler implements ITickHandler {
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                 GL11.glEnable(GL11.GL_COLOR_MATERIAL);
                 GL11.glEnable(GL11.GL_LIGHTING);
-                RenderItem renderItem = new RenderItem();
                 RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, (int) (sr.getScaledWidth() - (16 * overlayScale)), (int) (sr.getScaledHeight() - (16 * overlayScale)), overlayOpacity / 2, overlayScale);
                 if ((currentBlock != null) && (currentBlock.getItem() instanceof ItemBlock)) {
                     RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8), (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8), -90, blockScale);
