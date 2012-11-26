@@ -38,7 +38,6 @@ public class PacketKeyPressed extends PacketEE {
 		this.key = key;
 	}
 
-	@Override
 	public void writeData(DataOutputStream data) throws IOException {
 		data.writeUTF(key);
 	}

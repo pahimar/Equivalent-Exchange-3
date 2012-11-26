@@ -40,32 +40,38 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerKeyBindingHandler() {
+
         KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
     }
-    
+
     @Override
     public void registerRenderTickHandler() {
+
         TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
     }
-    
+
     @Override
     public void registerDrawBlockHighlightHandler() {
+
         MinecraftForge.EVENT_BUS.register(new DrawBlockHighlightHandler());
     }
 
     @Override
     public void setKeyBinding(String name, int value) {
+
         KeyBindingHelper.addKeyBinding(name, value);
         KeyBindingHelper.addIsRepeating(false);
     }
 
     @Override
     public void registerSoundHandler() {
+
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
     @Override
     public void initCustomRarityTypes() {
+
         EnumHelperClient.addRarity(JUNK, COLOR_JUNK, DISPLAY_NAME_JUNK);
         EnumHelperClient.addRarity(NORMAL, COLOR_NORMAL, DISPLAY_NAME_NORMAL);
         EnumHelperClient.addRarity(UNCOMMON, COLOR_UNCOMMON, DISPLAY_NAME_UNCOMMON);
@@ -77,31 +83,34 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public EnumRarity getCustomRarityType(String customRarity) {
+
         for (EnumRarity rarity : EnumRarity.class.getEnumConstants()) {
             if (rarity.name().equals(customRarity))
                 return rarity;
         }
         return EnumRarity.common;
     }
-    
+
     @Override
     public void initRenderingAndTextures() {
-    	RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
-    	
-    	MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
+
+        RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
+
+        MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
         MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.ITEM_SPRITE_SHEET);
-        
+
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFX());
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
-        
+
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new RenderItemCalcinator());
     }
-    
+
     @Override
     public void initTileEntities() {
-    	super.initTileEntities();
-    	
-    	ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new RenderCalcinator());
-    	
+
+        super.initTileEntities();
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new RenderCalcinator());
     }
+    
 }
