@@ -14,6 +14,9 @@ public class Strings {
 	
 	/* Gui related constants */
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
+    
+    /* NBT related constants */
+    public static final String NBT_CHARGE_LEVEL_KEY = "chargeLevel";
 	
 	/* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
