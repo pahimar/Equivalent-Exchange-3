@@ -12,7 +12,6 @@ import ee3.common.lib.GuiIds;
 import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
-import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;

@@ -3,7 +3,6 @@ package ee3.client.core.handlers;
 import java.util.EnumSet;
 import java.util.logging.Level;
 
-import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.KeyBinding;

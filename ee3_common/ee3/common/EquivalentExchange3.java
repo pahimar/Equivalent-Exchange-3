@@ -80,7 +80,7 @@ public class EquivalentExchange3 {
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
         
         // Initialize the Render Tick Handler (Client only)
-        TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
+        proxy.registerRenderTickHandler();
         
         // Register the KeyBinding Handler (Client only)
         proxy.registerKeyBindingHandler();
