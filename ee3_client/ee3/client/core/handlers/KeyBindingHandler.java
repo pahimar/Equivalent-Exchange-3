@@ -48,7 +48,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
         // Only operate at the end of the tick
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
-            if (FMLClientHandler.instance().getClient().currentScreen == null) {
+            if (FMLClientHandler.instance().getClient().inGameHasFocus) {
                 // TODO Clean this up properly
                 if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
