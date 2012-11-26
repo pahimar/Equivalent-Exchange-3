@@ -4,5 +4,5 @@
 	<comment>Version lookup for Equivalent Exchange 3. Format is "Current Version Number|URL to update page"</comment>
 	<entry key="Minecraft 1.4.2">pre1a|http://goo.gl/Ria2V</entry>
 	<entry key="Minecraft 1.4.4">pre1b|http://goo.gl/Ria2V</entry>
-	<entry key="Minecraft 1.4.5">pre2|http://goo.gl/Ria2V</entry>
+	<entry key="Minecraft 1.4.5">pre1d|http://goo.gl/Ria2V</entry>
 </properties>
