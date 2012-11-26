@@ -73,25 +73,30 @@ public class ItemPhilosopherStone extends ItemEE
          */
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(keyPressed)));
     }
+    
+    @Override
+    public short getCharge(ItemStack stack) {
+        return NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY);
+    }
 
     @Override
-    public void setCharge(ItemStack stone, short charge) {
+    public void setCharge(ItemStack stack, short charge) {
         if (charge <= maxChargeLevel) {
-            NBTHelper.setShort(stone, "chargeLevel", charge);
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, charge);
         }
     }
     
     @Override
-    public void increaseCharge(ItemStack stone) {
-        if (NBTHelper.getShort(stone, "chargeLevel") < maxChargeLevel) {
-            NBTHelper.setShort(stone, "chargeLevel", (short)(NBTHelper.getShort(stone, "chargeLevel") + 1));
+    public void increaseCharge(ItemStack stack) {
+        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) < maxChargeLevel) {
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short)(NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) + 1));
         }
     }
 
     @Override
-    public void decreaseCharge(ItemStack stone) {
-        if (NBTHelper.getShort(stone, "chargeLevel") > 0) {
-            NBTHelper.setShort(stone, "chargeLevel", (short)(NBTHelper.getShort(stone, "chargeLevel") - 1));
+    public void decreaseCharge(ItemStack stack) {
+        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) > 0) {
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short)(NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) - 1));
         }
     }
 
