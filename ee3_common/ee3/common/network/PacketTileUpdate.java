@@ -52,7 +52,6 @@ public class PacketTileUpdate extends PacketEE {
 		this.player = player;
 	}
 	
-	@Override
 	public void writeData(DataOutputStream data) throws IOException {
 		data.writeInt(x);
 		data.writeInt(y);

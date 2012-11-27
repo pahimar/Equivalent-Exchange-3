@@ -38,7 +38,6 @@ public class TransmutationHelper {
         if (nextItem != null) {
             if (Block.blocksList[nextItem.itemID] != null) {
                 world.setBlockAndMetadataWithNotify(x, y, z, nextItem.itemID, nextItem.getItemDamage());
-                // TODO Send the sound event to everyone around the player, and not just play the sound on the current client
                 world.playSoundAtEntity(player, Sounds.TRANSMUTE, 0.5F, 1.0F);
                 return true;
             }

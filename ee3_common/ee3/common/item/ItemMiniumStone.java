@@ -1,6 +1,5 @@
 package ee3.common.item;
 
-import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
@@ -15,6 +14,7 @@ import ee3.common.lib.Colours;
 import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
+import ee3.common.lib.Reference;
 import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
@@ -28,7 +28,8 @@ import ee3.common.network.PacketTypeHandler;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
+public class ItemMiniumStone extends ItemEE 
+    implements ITransmutationStone, IKeyBound {
     
     public ItemMiniumStone(int id) {
         super(id);
@@ -84,6 +85,15 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone {
          * server side, and notify the client to open the Gui client side on its own. Magic!
          */
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(keyPressed)));
+    }
+
+    @Override
+    public void doKeyBindingAction(String keyBinding, boolean isSneaking) {
+
+        if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
+            System.out.println("Extra key");
+        }
+        
     }
     
 }
