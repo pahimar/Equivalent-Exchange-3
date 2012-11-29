@@ -16,8 +16,8 @@
 	<entry key="item.alchemyDust.azure.name">Azuurblauw Stof</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Amarant Stof</entry>
 	<entry key="item.alchemyDust.iridescent.name">Iriserend Stof</entry>
-	<entry key="tile.redWaterStill.name">Rood Water (Stilstaand)</entry>
-	<entry key="tile.redWaterFlowing.name">Rood Water (Vloeiend)</entry>
+	<entry key="tile.redWaterStill.name">Stilstaand Rood Water </entry>
+	<entry key="tile.redWaterFlowing.name">Vloeiend Rood Water </entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="gui.calcinator.name">Calcinator</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
