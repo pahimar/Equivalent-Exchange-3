@@ -1,139 +1,20 @@
 <?xml version="1.0" ?> 
 <project name="Equivalent Exchange 3">
 	
-	<property name="development.dir"	value="../../"/>
-	<property name="mcp.dir"		value="${development.dir}}/mcp"/>
-	<property name="forge.dir"		value="${mcp.dir}/forge"/>
-	<property name="download.dir"		value-"downloads"
-	<property name="mcpsrc.dir"		value="${mcp.dir}/src/minecraft"/>
-	<property name="release.dir"		value="Releases"
+	<property file="build.properties" />
 	
-	<property name="mc.version"		value="1.4.5"/>			
-	<property name="mcp.version"         	value="722"/>
-	<property name="forge.version"		value="${mc.version}-6.4.1.407"/>
-	<property name="ee3.version"		value="pre2"/>
-
-	<available property="forge-exists" file="${download.dir}/minecraftforge-src-${forge.version}.zip"/>
-	<condition property="should-download-ant-contrib">
-		<or>
-			<available file="${download.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-			<available file="${download.dir}/minecraftforge-src-${forge.version}.zip"/>
-		</or>
-	</condition>
-
-	
-
-	<mkdir dir="${download.dir}"/>
-
-	<!-- Targets -->
-
-	<target name="clean1">
-		<delete dir="${release.dir}"/>
-	</target>
-
-	<!-- Download necessary files -->
-	<target name="download-files" depends="download-mcp,download-forge"/>
-
-	<!-- Download ant-contrib, necessary to be able to download forge (only if neither forge zip nor ant-contrib exist) -->
-	<target name="download-ant-contrib" unless="should-download-ant-contrib">
-
-		<echo message="Getting: ant-contrib"/>
-		<mkdir dir="${download.dir}/tmp"/>
-
-		<get src="http://sourceforge.net/projects/ant-contrib/files/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip/download" dest="${download.dir}/tmp/ant-contrib-1.0b3-bin.zip"/>
-		<get src="http://archive.apache.org/dist/commons/codec/binaries/commons-codec-1.6-bin.zip" dest="${download.dir}/tmp/commons-codec-1.6-bin.zip"/>
-
-		<unzip src="${download.dir}/tmp/ant-contrib-1.0b3-bin.zip" dest="${download.dir}"/>
-		<unzip src="${download.dir}/tmp/commons-codec-1.6-bin.zip" dest="${download.dir}/tmp"/>
-
-		<move todir="${download.dir}/ant-contrib/lib">
-			<fileset file="${download.dir}/tmp/commons-codec-1.6/commons-codec-1.6.jar"/>
-		</move>
-
-		<!-- Delete useless files -->
-		<delete dir="${download.dir}/ant-contrib/docs"/>
-		<delete dir="${download.dir}/tmp"/>
-
-	</target>
-
-	<!-- Download mcp -->
-	<target name="download-mcp">
-
-		<get src="http://mcp.ocean-labs.de/files/mcp${mcp.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-
-	</target>
-
-	<!-- Download forge (if it doesn't exist) -->
-	<target name="download-forge" depends="download-ant-contrib" unless="forge-exists" >
-
-		<taskdef resource="net/sf/antcontrib/antlib.xml">
-			<classpath>
-				<pathelement location="${download.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-				<fileset dir="${download.dir}/ant-contrib/lib">
-					<include name="*.jar"/>
-				</fileset>
-			</classpath>
-		</taskdef>
-
-		<getMethod url="http://files.minecraftforge.net/minecraftforge-src-${forge.version}.zip"
-				   responseDataFile="${download.dir}/minecraftforge-src-${forge.version}.zip">
-			<header name="User-Agent" value="Ant-${ant.version}/${ant.java.version}"/>
-		</getMethod>
-
-	</target>
-
-	<!-- Setup mcp and forge -->
-	<target name="setup">
-	
-		<!-- Unzip them -->
-		<unzip dest="${mcp.dir}">
-			<fileset dir="${download.dir}">
-				<include name="mcp${mcp.version}.zip"/>
-			</fileset>
-		</unzip>
-
-		<unzip dest="${mcp.dir}">
-			<fileset dir="${download.dir}">
-				<include name="minecraftforge-src-${forge.version}.zip"/>
-			</fileset>
-		</unzip>
-
-		<!-- Copy the necessary jars -->
-		<copy todir="${mcp.dir}/jars">
-			<fileset dir="${files.minecraft.dir}"/>
-		</copy>
-
-		<!-- Change executables' permitions -->
-		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x"/>
-		<chmod file="${mcp.dir}/recompile.sh" perm="+x"/>
-		<chmod file="${mcp.dir}/reobfuscate.sh" perm="+x"/>
-		<chmod file="${forge.dir}/install.sh" perm="+x"/>
-
-		<!-- if your building on OSX these 2 should be executable -->
-		<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="+x" />
-		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x" />
-
-		<!-- Install forge -->
-		<exec dir="${forge.dir}" executable="cmd" osfamily="windows">
-			<arg line="/c install.cmd"/>
-		</exec>
-
-		<exec dir="${forge.dir}" executable="sh" osfamily="unix">
-			<arg value="install.sh" />
-		</exec>
-	
-	<target name="clean2">
-		<delete file="${development.dir}\mcp\src\common\mcmod.info" />
-		<delete dir="${development.dir}\mcp\src\common\ee3" />
-		<delete dir="${development.dir}\mcp\reobf\minecraft" />
+	<target name="clean">
+		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
+		<delete dir="${dir.development}\mcp\src\common\ee3" />
+		<delete dir="${dir.development}\mcp\reobf\minecraft" />
 	</target>
 	
 	<target name="build">
-		<copy todir="${development.dir}\mcp\src\common">
-			<fileset dir="${development.dir}\source\Equivalent-Exchange-3\ee3_client\" />
-			<fileset dir="${development.dir}\source\Equivalent-Exchange-3\ee3_common\" />
+		<copy todir="${dir.development}\mcp\src\common">
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
-		<replace dir="${development.dir}\mcp\src\common" token="@VERSION@" value="${ee3.version}" />
+		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
 	</target>
 	
 	<target name="recompile">
@@ -160,26 +41,42 @@
 		</exec>
 	</target>
 	
-	<target name="release">
+	<target name="release-shared">
 		<!-- Prep for the release -->
-		<antcall target="clean1" />
-		<antcall target="download-files" />
-		<antcall target="setup" />
-		<antcall target="clean2" />
+		<antcall target="clean" />
 		<antcall target="build" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${release.dir}\${mc.version}\${ee3.version}" />
-		<jar destfile="${release.dir}\${mc.version}\${ee3.version}\Equivalent Exchange 3 ${ee3.version}.jar">
-			<fileset dir="${development.dir}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${development.dir}\mcp\reobf\minecraft" />
-			<fileset dir="${development.dir}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean2" />
+		<antcall target="clean" />
+	</target>
+	
+	<target name="release">
+		<!-- Prep for the release -->
+		<antcall target="clean" />
+		<antcall target="build" />
+		<antcall target="recompile" />		
+		<antcall target="reobfuscate" />
+		
+		<!-- Build the jar -->
+		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		</jar>
+		
+		<!-- Clean up the MCP source now that we are done -->
+		<antcall target="clean" />
 	</target>
 	
 </project>
