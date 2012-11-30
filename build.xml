@@ -133,25 +133,25 @@
 	</target>
 	
 	<target name="recompile">
-		<exec dir="${development.dir}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${development.dir}\mcp" executable="bash" os="Linux">
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
 			<arg line="recompile.sh" />
 		</exec>
-		<exec dir="${develoment.dir}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 	
 	<target name="reobfuscate">
-		<exec dir="${development.dir}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
 			<arg line="/c reobfuscate.bat" />
 		</exec>
-		<exec dir="${development.dir}\mcp" executable="bash" os="Linux">
+		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
 			<arg line="reobfuscate.sh" />
 		</exec>
-		<exec dir="${development.dir}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
 			<arg line="reobfuscate.sh" />
 		</exec>
 	</target>
