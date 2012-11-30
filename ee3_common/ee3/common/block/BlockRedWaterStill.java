@@ -1,7 +1,8 @@
 package ee3.common.block;
 
 import ee3.common.EquivalentExchange3;
-import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
+import ee3.common.lib.Strings;
 import net.minecraft.src.BlockStationary;
 import net.minecraft.src.Material;
 
@@ -20,7 +21,7 @@ public class BlockRedWaterStill extends BlockStationary {
         super(id, Material.water);
         this.blockHardness = 100F;
         this.setLightOpacity(3);
-        this.setBlockName("redWaterStill");
+        this.setBlockName(Strings.RED_WATER_STILL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.disableStats();
         this.setRequiresSelfNotify();
@@ -28,7 +29,7 @@ public class BlockRedWaterStill extends BlockStationary {
 
     @Override
     public String getTextureFile() {
-        return Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET;
+        return Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET;
     }
 
 }

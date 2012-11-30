@@ -13,6 +13,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import ee3.client.core.handlers.DrawBlockHighlightHandler;
 import ee3.client.core.handlers.KeyBindingHandler;
+import ee3.client.core.handlers.RenderTickHandler;
 import ee3.client.core.handlers.SoundHandler;
 import ee3.client.core.helper.KeyBindingHelper;
 import ee3.client.render.RenderCalcinator;
@@ -20,10 +21,9 @@ import ee3.client.render.RenderItemCalcinator;
 import ee3.client.render.TextureRedWaterFX;
 import ee3.client.render.TextureRedWaterFlowFX;
 import ee3.common.core.CommonProxy;
-import ee3.common.core.handlers.RenderTickHandler;
 import ee3.common.lib.BlockIds;
-import ee3.common.lib.Reference;
 import ee3.common.lib.RenderIds;
+import ee3.common.lib.Sprites;
 import ee3.common.tile.TileCalcinator;
 import static ee3.common.lib.CustomItemRarity.*;
 
@@ -96,8 +96,8 @@ public class ClientProxy extends CommonProxy {
 
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET);
-        MinecraftForgeClient.preloadTexture(Reference.SPRITE_SHEET_LOCATION + Reference.ITEM_SPRITE_SHEET);
+        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
+        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
 
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFX());
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());

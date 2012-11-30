@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL12;
 import ee3.common.item.ITransmutationStone;
 import ee3.common.item.IChargeable;
 import ee3.common.lib.ConfigurationSettings;
-import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.Tessellator;
@@ -38,18 +38,18 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Reference.SPRITE_SHEET_LOCATION + "noise.png");
+        int texture = event.context.renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.WORLD_TRANSMUTATION_TEXTURE);
 
         int xScale = 1;
         int yScale = 1;
         int zScale = 1;
         int chargeLevel;
         int itemChargeLevel = 0;
-        
+
         if (event.currentItem.getItem() instanceof IChargeable) {
-            itemChargeLevel = ((IChargeable)event.currentItem.getItem()).getCharge(event.currentItem);
+            itemChargeLevel = ((IChargeable) event.currentItem.getItem()).getCharge(event.currentItem);
         }
-        
+
         chargeLevel = 1 + itemChargeLevel * 2;
 
         if ((event.target.sideHit == 0) || (event.target.sideHit == 1)) {
@@ -132,15 +132,15 @@ public class DrawBlockHighlightHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1, 1, 1, transparency);
+        GL11.glColor4f(1, 1, 1, slide);
 
         tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(1, 1, 1, transparency);
+        tessellator.setColorRGBA_F(1, 1, 1, slide);
 
-        tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, pulse);
-        tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 0, pulse);
-        tessellator.addVertexWithUV(0.5D, -0.5D, 0F, 1, pulse);
-        tessellator.addVertexWithUV(-0.5D, -0.5D, 0F, 1, pulse);
+        tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
+        tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
+        tessellator.addVertexWithUV(0.5D, -0.5D, 0F, 1, 0);
+        tessellator.addVertexWithUV(-0.5D, -0.5D, 0F, 0, 0);
 
         tessellator.draw();
         GL11.glDisable(GL11.GL_BLEND);

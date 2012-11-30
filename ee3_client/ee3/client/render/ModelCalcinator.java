@@ -2,7 +2,7 @@ package ee3.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
 import ee3.common.tile.TileCalcinator;
 import net.minecraft.src.ModelBase;
 import net.minecraft.src.ModelRenderer;
@@ -130,7 +130,7 @@ public class ModelCalcinator extends ModelBase {
         GL11.glDisable(GL11.GL_LIGHTING);
 
         GL11.glTranslated(x, y, z);
-        ForgeHooksClient.bindTexture(Reference.SPRITE_SHEET_LOCATION + Reference.CALCINATOR_TEXTURE_SHEET, 0);
+        ForgeHooksClient.bindTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE, 0);
         
         firePotBottom.render(scale);
         bowlBottom.render(scale);

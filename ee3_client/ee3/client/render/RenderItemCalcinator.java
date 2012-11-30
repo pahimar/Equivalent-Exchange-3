@@ -3,6 +3,7 @@ package ee3.client.render;
 import org.lwjgl.opengl.GL11;
 
 import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Tessellator;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -48,7 +49,7 @@ public class RenderItemCalcinator implements IItemRenderer {
 	
 	private void renderCalcinator(float x, float y, float z)  {
 		Tessellator tesselator = Tessellator.instance;
-		ForgeHooksClient.bindTexture(Reference.SPRITE_SHEET_LOCATION + "calcinator.png", 0);
+		ForgeHooksClient.bindTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE, 0);
 		GL11.glPushMatrix(); //start
 			GL11.glTranslatef(x, y, z); //size
 	        calcinatorModel.render(0.0625F);
