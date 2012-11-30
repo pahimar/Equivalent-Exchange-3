@@ -9,7 +9,7 @@
 	<property name="release.dir"		value="Releases"/>
 	
 	<property name="mc.version"		value="1.4.5"/>			
-	<property name="mcp.version"         	value="723"/>
+	<property name="mcp.version"         	value="722"/>
 	<property name="forge.version"		value="${mc.version}-6.4.1.407"/>
 	<property name="ee3.version"		value="pre2"/>
 
