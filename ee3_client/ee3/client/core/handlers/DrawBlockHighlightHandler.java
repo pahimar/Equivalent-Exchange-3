@@ -123,8 +123,7 @@ public class DrawBlockHighlightHandler {
 
     public static void renderSlidingQuad(int texture, float transparency) {
 
-        float slide = (System.currentTimeMillis() % 3000) / 3000f;
-        double pulse = (double) 1 + slide;
+        float pulse = (System.currentTimeMillis() % 3000) / 3000f;
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
         Tessellator tessellator = Tessellator.instance;
@@ -132,10 +131,10 @@ public class DrawBlockHighlightHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1, 1, 1, slide);
+        GL11.glColor4f(1, 1, 1, pulse);
 
         tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(1, 1, 1, slide);
+        tessellator.setColorRGBA_F(1, 1, 1, pulse);
 
         tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
         tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
