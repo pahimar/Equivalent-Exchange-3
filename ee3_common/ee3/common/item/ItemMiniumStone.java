@@ -28,10 +28,11 @@ import ee3.common.network.PacketTypeHandler;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE 
-    implements ITransmutationStone, IKeyBound {
-    
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
+        IKeyBound {
+
     public ItemMiniumStone(int id) {
+
         super(id);
         this.setIconCoord(1, 0);
         this.setItemName(Strings.MINIUM_STONE_NAME);
@@ -41,59 +42,61 @@ public class ItemMiniumStone extends ItemEE
 
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
+
         return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.MAGICAL);
     }
-    
+
     @Override
     public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemStack) {
-    	return false;
+
+        return false;
     }
-    
+
     @Override
     public boolean getShareTag() {
-    	return true;
+
+        return true;
     }
-    
+
     @Override
     public ItemStack getContainerItemStack(ItemStack itemStack) {
-    	itemStack.setItemDamage(itemStack.getItemDamage() + 1);
-    	
-		return itemStack;
+
+        itemStack.setItemDamage(itemStack.getItemDamage() + 1);
+
+        return itemStack;
     }
-    
-	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
-		boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
-		
-		if (result) {
-			itemStack.damageItem(1, entityPlayer);
-		}
-		
-		return result;
+
+    @Override
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
+
+        boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+
+        if (result) {
+            itemStack.damageItem(1, entityPlayer);
+        }
+
+        return result;
     }
-	
-	@SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
-    {
+
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
+
         return Integer.parseInt(Colours.PURE_RED, 16);
     }
 
     @Override
-    public void openPortableCrafting(String keyPressed) {
-        /*
-         * Notify the Server that we opened the GUI. When the server receives the packet, it will open the Gui
-         * server side, and notify the client to open the Gui client side on its own. Magic!
-         */
-        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(keyPressed)));
+    public void openPortableCrafting(EntityPlayer thePlayer) {
+
+        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
     @Override
-    public void doKeyBindingAction(String keyBinding, boolean isSneaking) {
+    public void doKeyBindingAction(EntityPlayer thePlayer, String keyBinding) {
 
         if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
-            System.out.println("Extra key");
+            openPortableCrafting(thePlayer);
         }
-        
+
     }
-    
+
 }

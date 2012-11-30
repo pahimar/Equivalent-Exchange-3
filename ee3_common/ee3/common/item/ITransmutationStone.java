@@ -1,5 +1,7 @@
 package ee3.common.item;
 
+import net.minecraft.src.EntityPlayer;
+
 /**
  * ITransmutationStone
  * 
@@ -11,6 +13,6 @@ package ee3.common.item;
  */
 public interface ITransmutationStone {
 
-	public abstract void openPortableCrafting(String keyPressed);
+	public abstract void openPortableCrafting(EntityPlayer thePlayer);
 	
 }
