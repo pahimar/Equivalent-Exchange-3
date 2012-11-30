@@ -28,8 +28,8 @@ import net.minecraft.src.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemPhilosopherStone extends ItemEE implements
-        ITransmutationStone, IChargeable, IKeyBound {
+public class ItemPhilosopherStone extends ItemEE
+        implements ITransmutationStone, IChargeable, IKeyBound {
 
     private int maxChargeLevel;
 
@@ -124,7 +124,7 @@ public class ItemPhilosopherStone extends ItemEE implements
                 thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))));
             }
         }
-        
+
     }
 
 }
