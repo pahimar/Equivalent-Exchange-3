@@ -21,6 +21,7 @@ public class Strings {
 	/* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
+    public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
     
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "miniumShard";

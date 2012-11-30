@@ -50,11 +50,11 @@ public class ConfigurationHandler {
 
             /* Graphics/Rendering Configs */
             ConfigurationSettings.ENABLE_PARTICLE_FX = configuration
-                    .get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT)
+                    .get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT)
                     .getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
-            ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE = configuration
-                    .get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_DEFAULT)
-                    .getBoolean(ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE_DEFAULT);
+            ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = configuration
+                    .get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT)
+                    .getBoolean(ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT);
             
             /* Block Configs */
             ConfigurationSettings.AUTO_RESOLVE_BLOCK_IDS = configuration
