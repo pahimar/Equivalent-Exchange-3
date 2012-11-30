@@ -3,7 +3,9 @@ package ee3.client.core.handlers;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import ee3.common.item.ItemPhilosopherStone;
+import ee3.common.item.ITransmutationStone;
+import ee3.common.item.IChargeable;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.Reference;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.RenderEngine;
@@ -18,15 +20,17 @@ public class DrawBlockHighlightHandler {
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
 
         if (event.currentItem != null) {
-            if (event.currentItem.getItem() instanceof ItemPhilosopherStone) {
+            if (event.currentItem.getItem() instanceof ITransmutationStone) {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {
-                    drawPhilosopherStoneOverlay(event);
+                    if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
+                        drawInWorldTransmutationOverlay(event);
+                    }
                 }
             }
         }
     }
 
-    public void drawPhilosopherStoneOverlay(DrawBlockHighlightEvent event) {
+    public void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event) {
 
         double x = event.target.blockX + 0.5F;
         double y = event.target.blockY + 0.5F;
@@ -39,11 +43,14 @@ public class DrawBlockHighlightHandler {
         int xScale = 1;
         int yScale = 1;
         int zScale = 1;
-        int chargeLevel = ((ItemPhilosopherStone)event.currentItem.getItem()).getCharge(event.currentItem);
+        int chargeLevel;
+        int itemChargeLevel = 0;
         
-        if (chargeLevel < 1) {
-            chargeLevel = 1;
+        if (event.currentItem.getItem() instanceof IChargeable) {
+            itemChargeLevel = ((IChargeable)event.currentItem.getItem()).getCharge(event.currentItem);
         }
+        
+        chargeLevel = 1 + itemChargeLevel * 2;
 
         if ((event.target.sideHit == 0) || (event.target.sideHit == 1)) {
             xScale = chargeLevel;

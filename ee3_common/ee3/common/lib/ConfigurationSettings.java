@@ -39,10 +39,10 @@ public class ConfigurationSettings {
     public static final String ENABLE_PARTICLE_FX_CONFIGNAME = "enable_particle_fx";
     public static final boolean ENABLE_PARTICLE_FX_DEFAULT = true;
 
-    // Whether or not the Philosopher Stone overlay is enabled
-    public static boolean ENABLE_OVERLAY_PHILOSOPHER_STONE;
-    public static final String ENABLE_OVERLAY_PHILOSOPHER_STONE_CONFIGNAME = "enable_philosopher_stone_overlay";
-    public static final boolean ENABLE_OVERLAY_PHILOSOPHER_STONE_DEFAULT = true;
+    // Whether or not the in world transmutation overlay is enabled
+    public static boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION;
+    public static final String ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME = "enable_world_transmutation_overlay";
+    public static final boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT = true;
 
     /*
      * Minium stone config settings

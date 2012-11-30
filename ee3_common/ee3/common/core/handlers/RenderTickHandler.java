@@ -44,10 +44,10 @@ public class RenderTickHandler implements ITickHandler {
         if (type.contains(TickType.RENDER)) {
             if (player != null) {
                 currentItemStack = player.inventory.getCurrentItem();
-            }
-
-            if ((player != null) && (currentItemStack != null) && (minecraft.inGameHasFocus) && (currentItemStack.getItem() instanceof ITransmutationStone) && (ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE)) {
-                renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+            
+                if ((currentItemStack != null) && (minecraft.inGameHasFocus) && (currentItemStack.getItem() instanceof ITransmutationStone) && (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)) {
+                    renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+                }
             }
         }
     }
@@ -74,7 +74,7 @@ public class RenderTickHandler implements ITickHandler {
         ItemStack currentBlock = null;
         
         if ((player.worldObj != null) && (rayTrace != null)) {
-            currentBlock = TransmutationHelper.getNextBlock(player.worldObj.getBlockId(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.worldObj.getBlockMetadata(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), true);
+            currentBlock = TransmutationHelper.getNextBlock(player.worldObj.getBlockId(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.worldObj.getBlockMetadata(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.isSneaking());
         }
         
         GL11.glPushMatrix();

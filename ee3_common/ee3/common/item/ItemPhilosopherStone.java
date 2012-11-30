@@ -10,6 +10,7 @@ import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
+import ee3.common.lib.Sounds;
 import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
@@ -38,7 +39,7 @@ public class ItemPhilosopherStone extends ItemEE implements
         this.setIconCoord(2, 0);
         this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.maxChargeLevel = 4;
+        this.maxChargeLevel = 3;
     }
 
     @SideOnly(Side.CLIENT)
@@ -108,12 +109,22 @@ public class ItemPhilosopherStone extends ItemEE implements
     }
 
     @Override
-    public void doKeyBindingAction(EntityPlayer thePlayer, String keyBinding) {
+    public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);
         }
-
+        else if (keyBinding.equals(Reference.KEYBINDING_CHARGE)) {
+            if (!thePlayer.isSneaking()) {
+                increaseCharge(itemStack);
+                thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+            }
+            else {
+                decreaseCharge(itemStack);
+                thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))));
+            }
+        }
+        
     }
 
 }

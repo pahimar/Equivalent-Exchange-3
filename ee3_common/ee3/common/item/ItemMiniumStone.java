@@ -91,7 +91,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
     }
 
     @Override
-    public void doKeyBindingAction(EntityPlayer thePlayer, String keyBinding) {
+    public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);

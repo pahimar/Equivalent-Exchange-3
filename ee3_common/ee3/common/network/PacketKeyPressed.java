@@ -55,7 +55,7 @@ public class PacketKeyPressed extends PacketEE {
 		EntityPlayer thePlayer = (EntityPlayer) player;
 
 		if ((thePlayer.getCurrentEquippedItem() != null) && (thePlayer.getCurrentEquippedItem().getItem() instanceof IKeyBound)) {
-		    ((IKeyBound) thePlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(thePlayer, this.key);
+		    ((IKeyBound) thePlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(thePlayer, thePlayer.getCurrentEquippedItem(), this.key);
 		}
 	}
 }
