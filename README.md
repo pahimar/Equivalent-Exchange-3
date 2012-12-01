@@ -63,7 +63,7 @@ ________________________________________________________________________________
 		\-jars
 	\-source
 		\-Equivalent-Exchange-3
-			\-EE3's files, (should have build.xml).
+			\-EE3's files (should have build.xml).
 ***
 4. Inside `Equivalent-Exchange-3`, create a new file called `build.properties`.
 	* Open it up, and type into it the following:
