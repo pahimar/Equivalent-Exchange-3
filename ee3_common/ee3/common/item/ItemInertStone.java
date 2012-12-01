@@ -14,11 +14,12 @@ import ee3.common.lib.Strings;
  */
 public class ItemInertStone extends ItemEE {
 
-	public ItemInertStone(int id) {
-		super(id);
-		this.setIconCoord(1, 0);
-		this.setItemName(Strings.INERT_STONE_NAME);
-		this.setCreativeTab(EquivalentExchange3.tabsEE3);
-	}
+    public ItemInertStone(int id) {
+
+        super(id);
+        this.setIconCoord(1, 0);
+        this.setItemName(Strings.INERT_STONE_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+    }
 
 }

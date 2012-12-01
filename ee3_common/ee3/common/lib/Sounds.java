@@ -15,10 +15,9 @@ public class Sounds {
     private static final String SOUND_PREFIX = "ee3.sound.";
 
     public static String[] soundFiles = {
-            SOUND_RESOURCE_LOCATION + "break.ogg",
-            SOUND_RESOURCE_LOCATION + "chargetick.ogg",
+            SOUND_RESOURCE_LOCATION + "chargeDown.ogg",
+            SOUND_RESOURCE_LOCATION + "chargeUp.ogg",
             SOUND_RESOURCE_LOCATION + "destruct.ogg",
-            SOUND_RESOURCE_LOCATION + "flash.ogg",
             SOUND_RESOURCE_LOCATION + "gust.ogg",
             SOUND_RESOURCE_LOCATION + "heal.ogg",
             SOUND_RESOURCE_LOCATION + "kinesis.ogg",
@@ -31,10 +30,9 @@ public class Sounds {
             SOUND_RESOURCE_LOCATION + "waterball.ogg",
             SOUND_RESOURCE_LOCATION + "wind.ogg" };
 
-    public static final String BREAK = SOUND_PREFIX + "break";
-    public static final String CHARGE_TICK = SOUND_PREFIX + "chargetick";
+    public static final String CHARGE_DOWN = SOUND_PREFIX + "chargeDown";
+    public static final String CHARGE_UP = SOUND_PREFIX + "chargeUp";
     public static final String DESTRUCTION = SOUND_PREFIX + "destruct";
-    public static final String FLASH = SOUND_PREFIX + "flash";
     public static final String GUST = SOUND_PREFIX + "gust";
     public static final String HEAL = SOUND_PREFIX + "heal";
     public static final String KINESIS = SOUND_PREFIX + "kinesis";

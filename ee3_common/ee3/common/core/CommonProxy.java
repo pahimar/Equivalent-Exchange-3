@@ -27,6 +27,8 @@ public class CommonProxy implements IGuiHandler {
 
     public void registerKeyBindingHandler() {}
     
+    public void registerRenderTickHandler() {}
+    
     public void registerDrawBlockHighlightHandler() {}
 
     public void setKeyBinding(String name, int value) {}

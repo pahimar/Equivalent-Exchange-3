@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLTextureFX;
 import ee3.common.block.ModBlocks;
-import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
 
 /**
  * TextureRedWaterFlowFX
@@ -43,7 +43,7 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
 
     @Override
     public void bindImage(RenderEngine renderEngine) {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, renderEngine.getTexture(Reference.SPRITE_SHEET_LOCATION + Reference.BLOCK_SPRITE_SHEET));
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET));
     }
 
     public void onTick() {

@@ -9,10 +9,11 @@ import ee3.common.core.helper.NBTHelper;
 import ee3.common.core.helper.TransmutationHelper;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
+import ee3.common.lib.Reference;
+import ee3.common.lib.Sounds;
 import ee3.common.lib.Strings;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
-import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
@@ -27,72 +28,103 @@ import net.minecraft.src.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemPhilosopherStone extends ItemEE 
-    implements ITransmutationStone, IChargeable {
+public class ItemPhilosopherStone extends ItemEE
+        implements ITransmutationStone, IChargeable, IKeyBound {
 
     private int maxChargeLevel;
-    
+
     public ItemPhilosopherStone(int id) {
+
         super(id);
         this.setIconCoord(2, 0);
         this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.maxChargeLevel = 4;
+        this.maxChargeLevel = 3;
     }
 
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
+
         return true;
     }
 
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
+
         return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.RARE);
     }
-    
+
     @Override
     public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemStack) {
-    	return false;
+
+        return false;
     }
-    
+
     @Override
     public boolean getShareTag() {
-    	return true;
+
+        return true;
     }
-    
+
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
+
         return TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
     }
-    
+
     @Override
-    public void openPortableCrafting(String keyPressed) {
-        /*
-         * Notify the Server that we opened the GUI. When the server receives the packet, it will open the Gui
-         * server side, and notify the client to open the Gui client side on its own. Magic!
-         */
-        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(keyPressed)));
+    public void openPortableCrafting(EntityPlayer thePlayer) {
+
+        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
     @Override
-    public void setCharge(ItemStack stone, short charge) {
+    public short getCharge(ItemStack stack) {
+
+        return NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY);
+    }
+
+    @Override
+    public void setCharge(ItemStack stack, short charge) {
+
         if (charge <= maxChargeLevel) {
-            NBTHelper.setShort(stone, "chargeLevel", charge);
-        }
-    }
-    
-    @Override
-    public void increaseCharge(ItemStack stone) {
-        if (NBTHelper.getShort(stone, "chargeLevel") < maxChargeLevel) {
-            NBTHelper.setShort(stone, "chargeLevel", (short)(NBTHelper.getShort(stone, "chargeLevel") + 1));
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, charge);
         }
     }
 
     @Override
-    public void decreaseCharge(ItemStack stone) {
-        if (NBTHelper.getShort(stone, "chargeLevel") > 0) {
-            NBTHelper.setShort(stone, "chargeLevel", (short)(NBTHelper.getShort(stone, "chargeLevel") - 1));
+    public void increaseCharge(ItemStack stack) {
+
+        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) < maxChargeLevel) {
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) + 1));
         }
+    }
+
+    @Override
+    public void decreaseCharge(ItemStack stack) {
+
+        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) > 0) {
+            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) - 1));
+        }
+    }
+
+    @Override
+    public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
+
+        if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
+            openPortableCrafting(thePlayer);
+        }
+        else if (keyBinding.equals(Reference.KEYBINDING_CHARGE)) {
+            if (!thePlayer.isSneaking()) {
+                increaseCharge(itemStack);
+                thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+            }
+            else {
+                decreaseCharge(itemStack);
+                thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))));
+            }
+        }
+
     }
 
 }

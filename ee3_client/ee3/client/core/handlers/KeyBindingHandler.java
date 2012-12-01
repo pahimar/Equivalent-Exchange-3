@@ -3,7 +3,7 @@ package ee3.client.core.handlers;
 import java.util.EnumSet;
 import java.util.logging.Level;
 
-import net.minecraft.src.EntityClientPlayerMP;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.KeyBinding;
@@ -15,6 +15,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.client.core.helper.KeyBindingHelper;
 import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.LogHelper;
+import ee3.common.item.IKeyBound;
 import ee3.common.item.ITransmutationStone;
 import ee3.common.item.ModItems;
 import ee3.common.lib.ConfigurationSettings;
@@ -36,36 +37,30 @@ import ee3.common.network.PacketTypeHandler;
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
     public KeyBindingHandler() {
+
         super(KeyBindingHelper.gatherKeyBindings(), KeyBindingHelper.gatherIsRepeating());
     }
 
     @Override
     public String getLabel() {
-    	return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
+
+        return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
     @Override
     public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
+
         // Only operate at the end of the tick
         if (tickEnd) {
             // If we are not in a GUI of any kind, continue execution
-            if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                // TODO Clean this up properly
-                if (kb.keyDescription == Reference.KEYBINDING_EXTRA) {
+            if (FMLClientHandler.instance().getClient().inGameHasFocus) {
+                EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+                if (player != null) {
                     ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
-                    
+
                     if (currentItem != null) {
-                        if (currentItem.getItem() instanceof ITransmutationStone) {
-                            ((ITransmutationStone)currentItem.getItem()).openPortableCrafting(kb.keyDescription);
-                        }
-                    }
-                }
-                else if (kb.keyDescription == Reference.KEYBINDING_TOGGLE) {
-                    ItemStack currentItem = FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem();
-                    
-                    if (currentItem != null) {
-                        if (currentItem.getItem() instanceof ITransmutationStone) {
-                            ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE = !ConfigurationSettings.ENABLE_OVERLAY_PHILOSOPHER_STONE;
+                        if (currentItem.getItem() instanceof IKeyBound) {
+                            PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
                         }
                     }
                 }
@@ -75,14 +70,18 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
     }
 
     @Override
-    public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {}
+    public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
+
+    }
 
     @Override
     public EnumSet<TickType> ticks() {
+
         return EnumSet.of(TickType.CLIENT);
     }
 
     private static String getLocalizedKey(String key) {
-    	return LanguageRegistry.instance().getStringLocalization(key);
+
+        return LanguageRegistry.instance().getStringLocalization(key);
     }
 }

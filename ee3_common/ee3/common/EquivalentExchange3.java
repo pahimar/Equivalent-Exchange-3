@@ -17,6 +17,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
+import ee3.client.core.handlers.RenderTickHandler;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
 import ee3.common.core.CreativeTabEE3;
@@ -28,7 +29,6 @@ import ee3.common.core.handlers.ItemPickupHandler;
 import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
-import ee3.common.core.handlers.RenderTickHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.VersionHelper;
@@ -80,7 +80,7 @@ public class EquivalentExchange3 {
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
         
         // Initialize the Render Tick Handler (Client only)
-        TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
+        proxy.registerRenderTickHandler();
         
         // Register the KeyBinding Handler (Client only)
         proxy.registerKeyBindingHandler();

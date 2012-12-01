@@ -24,12 +24,6 @@ public class Reference {
     public static final String SERVER_PROXY_CLASS = "ee3.common.core.CommonProxy";
     public static final String CLIENT_PROXY_CLASS = "ee3.client.core.ClientProxy";
 
-    /* Configuration related constants */
-    public static final String ENABLE_VERSION_CHECK = "enable_version_check";
-    public static final String ENABLE_SOUNDS = "enable_sounds";
-    public static final String ENABLE_PARTICLE_FX = "enable_particle_fx";
-    public static final String AUTO_RESOLVE_BLOCK_IDS = "auto_resolve_block_ids";
-
     /* KeyBinding related constants */
     public static final String KEYBINDING_EXTRA = "key.extra";
     public static final int KEYBINDING_EXTRA_DEFAULT = 46;
@@ -39,14 +33,6 @@ public class Reference {
     public static final int KEYBINDING_TOGGLE_DEFAULT = 34;
     public static final String KEYBINDING_CHARGE = "key.charge";
     public static final int KEYBINDING_CHARGE_DEFAULT = 47;
-
-    /* Texture related constants */
-    public static final String SPRITE_SHEET_LOCATION = "/ee3/art/sprites/";
-    public static final String ARMOR_SHEET_LOCATION = "/ee3/art/armor/";
-    public static final String GUI_SHEET_LOCATION = "/ee3/art/gui/";
-    public static final String ITEM_SPRITE_SHEET = "ee3_items.png";
-    public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
-    public static final String CALCINATOR_TEXTURE_SHEET = "calcinator.png";
 
     /* General Tile Entity related constants */
     public static final String TE_GEN_OWNER_NBT_TAG_LABEL = "owner";
