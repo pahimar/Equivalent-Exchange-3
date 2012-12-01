@@ -32,8 +32,7 @@ public class ItemAlchemyDust extends ItemEE {
 
         super(id);
         this.setHasSubtypes(true);
-        this.setMaxDamage(0);
-        this.setIconCoord(0, 3);
+        this.setIconCoord(10, 0);
         this.setItemName(Strings.ALCHEMY_DUST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
@@ -42,10 +41,11 @@ public class ItemAlchemyDust extends ItemEE {
     @SideOnly(Side.CLIENT)
     public int getIconFromDamage(int meta) {
 
-        int i = MathHelper.clamp_int(meta, 0, 11);
+        int i = MathHelper.clamp_int(meta, 0, 5);
         return (this.iconIndex + i);
     }
 
+    @SideOnly(Side.CLIENT)
     public String getItemNameIS(ItemStack stack) {
 
         int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);

@@ -83,6 +83,9 @@ public class ConfigurationHandler {
             ItemIds.ALCHEMY_DUST = configuration
             		.getItem(Strings.ALCHEMY_DUST_NAME, ItemIds.ALCHEMY_DUST_DEFAULT)
             		.getInt(ItemIds.ALCHEMY_DUST_DEFAULT);
+            ItemIds.ALCHEMY_BAG = configuration
+                    .getItem(Strings.ALCHEMY_BAG_NAME, ItemIds.ALCHEMY_BAG_DEFAULT)
+                    .getInt(ItemIds.ALCHEMY_BAG_DEFAULT);
 
             /* KeyBinding Configs */
             configuration.addCustomCategoryComment(CATEGORY_KEYBIND, "");

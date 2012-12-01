@@ -27,6 +27,7 @@ public class ModItems {
     public static Item miniumStone;
     public static Item philStone;
     public static Item alchemyDust;
+    public static Item alchemyBag;
 
     public static void init() {
         /* Initialize each mod item individually */
@@ -35,6 +36,7 @@ public class ModItems {
         miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
         philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE);
         alchemyDust = new ItemAlchemyDust(ItemIds.ALCHEMY_DUST);
+        alchemyBag = new ItemAlchemyBag(ItemIds.ALCHEMY_BAG);
 
         miniumStone.setContainerItem(miniumStone);
         philStone.setContainerItem(philStone);
