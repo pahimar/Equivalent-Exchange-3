@@ -24,7 +24,7 @@ ________________________________________________________________________________
   * For `Variable Value`, input `C:\Ant\apache-ant-1.8.4` (or your Ant directory \apache-ant-1.8.4).
   * Scroll down to `Path`, and double-click on it.
   * Append `;C:\Ant\apache-ant-1.8.4\bin` exactly as shown to the end (or your Ant directory \apache-ant-1.8.4\bin).
-3. Download and install Github [here] (http://windows.github.com/) (Windows) or [here] (http://mac.github.com/) (Mac OS X 10.7+).
+3. Download and install Github [here] (http://windows.github.com/) (Windows) or [here] (http://mac.github.com/) (Mac OS X 10.7+).  For Linux, I *guess* you could download it as a .zip/tarball and unzip it?
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` near the top-left of the page..
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
