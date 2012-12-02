@@ -72,15 +72,15 @@ ________________________________________________________________________________
 		*	`dir.share=Shared` (or what you want it to be-optional)
 		*	`dir.release=Releases` (what you want it to be)
 		*	`release.minecraft.version=1.4.5` (as of 11/30)
-		*	`release.mod.version=pre2` (or whatever version # want it to be)
+		*	`release.mod.version=pre1d` (or whatever version # want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 
 6. [FOR WINDOWS] Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 
 7. Execute `ant release`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything, and try again.
-8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre2` (This might be different according to what you put in build.properties).
-	*  You should see a .jar named `ee3-universal-pre2.jar` (Again, might be different).
+8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.5\pre1d` (This might be different according to what you put in build.properties).
+	*  You should see a .jar named `ee3-universal-pre1d.jar` (Again, might be different).
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
 ### To Update EE3 (For Windows/Mac?)
