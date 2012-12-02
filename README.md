@@ -7,7 +7,8 @@ The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/top
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (Linux and Windows tested).
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 #### Prerequisites  (Tested for Windows 7 ONLY!)
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).  Click the one that says `Java Platform (JDK) #u#`, and follow instructions.
+0. WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html).  Scroll down, accept the Oracle Binary Code License Agreement for Java SE, and download the one pertaining to your OS.
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
