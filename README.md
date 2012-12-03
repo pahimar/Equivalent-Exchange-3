@@ -1,5 +1,5 @@
 ## Welcome to Equivalent Exchange 3!
-Setup MCP was done mostly by the people who update the wiki, I just changed it a bit.  Some credit goes to BuildCraft's README.md, which I based this README off of.
+Setup MCP was done mostly by the people who update How to Compile for Beginners on the wiki, I just updated/changed it a bit.  Some credit goes to BuildCraft's README.md, which I based this README off of.
 
 The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
 
@@ -77,7 +77,7 @@ ________________________________________________________________________________
 	*  You should see a .jar named `ee3-universal-pre1d.jar` (Again, might be different).
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
-#### To Update EE3 (For Windows/Mac)
+#### Update EE3 (For Windows/Mac)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he/she did, follow these instructions.
 
 2. Open Github.
