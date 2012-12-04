@@ -56,5 +56,9 @@ public class ConfigurationSettings {
     public static int MINIUM_STONE_MAX_DURABILITY;
     public static final String MINIUM_STONE_MAX_DURABILITY_CONFIGNAME = Strings.MINIUM_STONE_NAME + ".maxDurability";
     public static final int MINIUM_STONE_MAX_DURABILITY_DEFAULT = 1521;
+    
+    public static int PHILOSOPHERS_STONE_MAX_DURABILITY;
+    public static final String PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME = Strings.PHILOSOPHER_STONE_NAME + ".maxDurability";
+    public static final int PHILOSOPHERS_STONE_MAX_DURABILITY_DEFAULT = 10001;
 
 }
