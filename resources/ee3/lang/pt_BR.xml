@@ -34,8 +34,6 @@
 	<entry key="item.alchemyBag.black.name">Bolsa Alquímica Negra</entry>
 	<entry key="tile.redWaterStill.name">Água Vermelha (Parada)</entry>
 	<entry key="tile.redWaterFlowing.name">Água Vermelha (Corrente)</entry>
-	<entry key="tile.redWaterStill.name">Água Vermelha (Parada)</entry>
-	<entry key="tile.redWaterFlowing.name">Água Vermelha (Corrente)</entry>
 	<entry key="tile.calcinator.name">Calcinador</entry>
 	<entry key="gui.calcinator.name">Calcinador</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
