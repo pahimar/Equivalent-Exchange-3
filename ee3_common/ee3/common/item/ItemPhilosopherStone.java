@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.NBTHelper;
 import ee3.common.core.helper.TransmutationHelper;
+import ee3.common.lib.ConfigurationSettings;
 import ee3.common.lib.CustomItemRarity;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
@@ -39,6 +40,7 @@ public class ItemPhilosopherStone extends ItemEE
         this.setIconCoord(2, 0);
         this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
         this.maxChargeLevel = 3;
     }
 
@@ -67,9 +69,23 @@ public class ItemPhilosopherStone extends ItemEE
     }
 
     @Override
+    public ItemStack getContainerItemStack(ItemStack itemStack) {
+
+        itemStack.setItemDamage(itemStack.getItemDamage() + 1);
+
+        return itemStack;
+    }
+
+    @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
 
-        return TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+        boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+
+        if (result) {
+            itemStack.damageItem(1, entityPlayer);
+        }
+
+        return result;
     }
 
     @Override
@@ -81,40 +97,40 @@ public class ItemPhilosopherStone extends ItemEE
     @Override
     public short getCharge(ItemStack stack) {
 
-        return NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY);
+        return NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY);
     }
 
     @Override
     public void setCharge(ItemStack stack, short charge) {
 
         if (charge <= maxChargeLevel) {
-            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, charge);
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, charge);
         }
     }
 
     @Override
     public void increaseCharge(ItemStack stack) {
 
-        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) < maxChargeLevel) {
-            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) + 1));
+        if (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) < maxChargeLevel) {
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) + 1));
         }
     }
 
     @Override
     public void decreaseCharge(ItemStack stack) {
 
-        if (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) > 0) {
-            NBTHelper.setShort(stack, Strings.NBT_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_CHARGE_LEVEL_KEY) - 1));
+        if (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) > 0) {
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) - 1));
         }
     }
 
     @Override
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
-        if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
+        if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);
         }
-        else if (keyBinding.equals(Reference.KEYBINDING_CHARGE)) {
+        else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
             if (!thePlayer.isSneaking()) {
                 increaseCharge(itemStack);
                 thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));

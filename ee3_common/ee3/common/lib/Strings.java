@@ -2,7 +2,7 @@ package ee3.common.lib;
 
 public class Strings {
 	
-	/* General text keys */
+	/* General keys */
     
     /* Version check related constants */
     public static final String VERSION_CHECK_DISABLED = "version.check_disabled";
@@ -16,7 +16,11 @@ public class Strings {
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
     
     /* NBT related constants */
-    public static final String NBT_CHARGE_LEVEL_KEY = "chargeLevel";
+    public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
+    public static final String NBT_ITEM_MODE_KEY = "itemMode";
+    public static final String NBT_TE_OWNER_KEY = "teOwner";
+    public static final String NBT_TE_STATE_KEY = "teState";
+    public static final String NBT_TE_DIRECTION_KEY = "teDirection";
 	
 	/* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
@@ -33,5 +37,11 @@ public class Strings {
     
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
+    
+    /* Transmutation cost related constants */
+    public static final String TRANSMUTATION_COST = "_cost";
+    public static final String TRANSMUTATION_COST_ITEM = "item" + TRANSMUTATION_COST;
+    public static final String TRANSMUTATION_COST_BLOCK = "block" + TRANSMUTATION_COST;
+    public static final String TRANSMUTATION_COST_MOB = "mob" + TRANSMUTATION_COST;
 
 }
