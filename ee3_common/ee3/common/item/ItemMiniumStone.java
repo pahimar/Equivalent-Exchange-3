@@ -93,7 +93,7 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
-        if (keyBinding.equals(Reference.KEYBINDING_EXTRA)) {
+        if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);
         }
 

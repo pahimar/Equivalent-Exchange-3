@@ -19,7 +19,8 @@ import net.minecraft.src.Packet250CustomPayload;
  */
 public enum PacketTypeHandler {
 	KEY(PacketKeyPressed.class),
-	TILE(PacketTileUpdate.class);
+	TILE(PacketTileUpdate.class),
+	WORLD_TRANSMUTATION(PacketWorldTransmutation.class);
 	
 	private Class<? extends PacketEE> clazz;
 	

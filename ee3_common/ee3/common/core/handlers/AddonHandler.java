@@ -1,5 +1,7 @@
 package ee3.common.core.handlers;
 
+import ee3.common.core.addons.AddonRedPower2;
+
 /**
  * AddonHandler
  * 
@@ -12,6 +14,8 @@ package ee3.common.core.handlers;
  */
 public class AddonHandler {
 
-    public static void init() {}
+    public static void init() {
+        AddonRedPower2.initWorld();
+    }
 
 }

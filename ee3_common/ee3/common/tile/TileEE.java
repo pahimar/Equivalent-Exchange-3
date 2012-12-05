@@ -1,6 +1,7 @@
 package ee3.common.tile;
 
 import ee3.common.lib.Reference;
+import ee3.common.lib.Strings;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
@@ -51,18 +52,18 @@ public class TileEE extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
         
-        direction = nbtTagCompound.getByte(Reference.TE_GEN_DIRECTION_NBT_TAG_LABEL);
-        state = nbtTagCompound.getShort(Reference.TE_GEN_STATE_NBT_TAG_LABEL);
-        owner = nbtTagCompound.getString(Reference.TE_GEN_OWNER_NBT_TAG_LABEL);
+        direction = nbtTagCompound.getByte(Strings.NBT_TE_DIRECTION_KEY);
+        state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
+        owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
     }
 
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
         
-        nbtTagCompound.setByte(Reference.TE_GEN_DIRECTION_NBT_TAG_LABEL, direction);
-        nbtTagCompound.setShort(Reference.TE_GEN_STATE_NBT_TAG_LABEL, state);
+        nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, direction);
+        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
         if(owner != null && owner != "") {
-        	nbtTagCompound.setString(Reference.TE_GEN_OWNER_NBT_TAG_LABEL, owner);
+        	nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, owner);
         }
     }
     
