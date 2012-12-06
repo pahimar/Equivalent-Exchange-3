@@ -9,6 +9,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import ee3.client.core.handlers.DrawBlockHighlightHandler;
@@ -24,6 +25,8 @@ import ee3.common.core.CommonProxy;
 import ee3.common.lib.BlockIds;
 import ee3.common.lib.RenderIds;
 import ee3.common.lib.Sprites;
+import ee3.common.network.PacketTypeHandler;
+import ee3.common.network.PacketWorldEvent;
 import ee3.common.tile.TileCalcinator;
 import static ee3.common.lib.CustomItemRarity.*;
 
@@ -112,5 +115,11 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new RenderCalcinator());
     }
-    
+
+    @Override
+    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, int targetID, int targetMeta) {
+
+        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketWorldEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, targetID, targetMeta)));
+    }
+
 }

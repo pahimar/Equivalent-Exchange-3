@@ -25,51 +25,73 @@ import ee3.common.tile.TileCalcinator;
  */
 public class CommonProxy implements IGuiHandler {
 
-    public void registerKeyBindingHandler() {}
-    
-    public void registerRenderTickHandler() {}
-    
-    public void registerDrawBlockHighlightHandler() {}
+    public void registerKeyBindingHandler() {
 
-    public void setKeyBinding(String name, int value) {}
+    }
 
-    public void registerSoundHandler() {}
+    public void registerRenderTickHandler() {
 
-    public void initCustomRarityTypes() {}
+    }
+
+    public void registerDrawBlockHighlightHandler() {
+
+    }
+
+    public void setKeyBinding(String name, int value) {
+
+    }
+
+    public void registerSoundHandler() {
+
+    }
+
+    public void initCustomRarityTypes() {
+
+    }
 
     public EnumRarity getCustomRarityType(String customRarity) {
+
         return null;
     }
-    
-    public void initRenderingAndTextures() {}
-    
-    public void initTileEntities() {
-    	GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
+
+    public void initRenderingAndTextures() {
+
     }
-    
+
+    public void initTileEntities() {
+
+        GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
+    }
+
+    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, int targetID, int targetMeta) {
+
+    }
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+
         if (ID == GuiIds.PORTABLE_CRAFTING) {
             return new ContainerPortableCrafting(player.inventory, world, x, y, z);
         }
         else if (ID == GuiIds.CALCINATOR) {
-            TileCalcinator calcinator = (TileCalcinator)world.getBlockTileEntity(x, y, z);
+            TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new ContainerCalcinator(player.inventory, calcinator);
         }
-        
+
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+
         if (ID == GuiIds.PORTABLE_CRAFTING) {
             return new GuiPortableCrafting(player, world, x, y, z);
         }
         else if (ID == GuiIds.CALCINATOR) {
-            TileCalcinator calcinator = (TileCalcinator)world.getBlockTileEntity(x, y, z);
+            TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new GuiCalcinator(player.inventory, calcinator);
         }
-        
+
         return null;
     }
 
