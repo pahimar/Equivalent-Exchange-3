@@ -92,9 +92,15 @@ public class RenderTickHandler implements ITickHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glEnable(GL11.GL_LIGHTING);
-        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, (int) (sr.getScaledWidth() - (16 * overlayScale)), (int) (sr.getScaledHeight() - (16 * overlayScale)), overlayOpacity, overlayScale);
+        
+        int hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
+        int hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
+        int hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+        int hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+        
+        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
         if ((currentBlock != null) && (currentBlock.getItem() instanceof ItemBlock)) {
-            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8), (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8), -90, blockScale);
+            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, hudBlockX, hudBlockY, -90, blockScale);
         }
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
