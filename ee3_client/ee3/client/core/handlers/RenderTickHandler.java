@@ -65,9 +65,9 @@ public class RenderTickHandler implements ITickHandler {
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
 
-        float overlayScale = 2F; // TODO config option
+        float overlayScale = 2F;
         float blockScale = overlayScale / 2;
-        float overlayOpacity = 1F; // TODO config option
+        float overlayOpacity = 0.5F;
 
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
@@ -92,7 +92,7 @@ public class RenderTickHandler implements ITickHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glEnable(GL11.GL_LIGHTING);
-        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, (int) (sr.getScaledWidth() - (16 * overlayScale)), (int) (sr.getScaledHeight() - (16 * overlayScale)), overlayOpacity / 2, overlayScale);
+        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, (int) (sr.getScaledWidth() - (16 * overlayScale)), (int) (sr.getScaledHeight() - (16 * overlayScale)), overlayOpacity, overlayScale);
         if ((currentBlock != null) && (currentBlock.getItem() instanceof ItemBlock)) {
             RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8), (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8), -90, blockScale);
         }
