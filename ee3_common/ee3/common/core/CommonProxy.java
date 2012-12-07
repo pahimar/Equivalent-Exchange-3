@@ -63,7 +63,7 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
     }
 
-    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, int targetID, int targetMeta) {
+    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
     }
 

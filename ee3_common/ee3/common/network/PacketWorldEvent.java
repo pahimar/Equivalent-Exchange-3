@@ -13,14 +13,14 @@ public class PacketWorldEvent extends PacketEE {
     public int originX, originY, originZ;
     public byte sideHit;
     public byte rangeX, rangeY, rangeZ;
-    public int targetID, targetMeta;
+    public String data;
 
     public PacketWorldEvent() {
 
         super(PacketTypeHandler.WORLD_EVENT, false);
     }
 
-    public PacketWorldEvent(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, int targetID, int targetMeta) {
+    public PacketWorldEvent(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
         super(PacketTypeHandler.WORLD_EVENT, false);
         this.eventType = eventType;
@@ -31,8 +31,7 @@ public class PacketWorldEvent extends PacketEE {
         this.rangeX = rangeX;
         this.rangeY = rangeY;
         this.rangeZ = rangeZ;
-        this.targetID = targetID;
-        this.targetMeta = targetMeta;
+        this.data = data;
     }
 
     public void setEventType(byte eventType) {
@@ -58,10 +57,9 @@ public class PacketWorldEvent extends PacketEE {
         this.rangeZ = rangeZ;
     }
 
-    public void setTransmutationTarget(int targetID, int targetMeta) {
+    public void setData(String data) {
 
-        this.targetID = targetID;
-        this.targetMeta = targetMeta;
+        this.data = data;
     }
 
     public void writeData(DataOutputStream data) throws IOException {
@@ -74,8 +72,7 @@ public class PacketWorldEvent extends PacketEE {
         data.writeByte(rangeX);
         data.writeByte(rangeY);
         data.writeByte(rangeZ);
-        data.writeInt(targetID);
-        data.writeInt(targetMeta);
+        data.writeUTF(this.data);
     }
 
     public void readData(DataInputStream data) throws IOException {
@@ -88,8 +85,7 @@ public class PacketWorldEvent extends PacketEE {
         this.rangeX = data.readByte();
         this.rangeY = data.readByte();
         this.rangeZ = data.readByte();
-        this.targetID = data.readInt();
-        this.targetMeta = data.readInt();
+        this.data = data.readUTF();
     }
 
     public void execute(INetworkManager manager, Player player) {
@@ -102,8 +98,7 @@ public class PacketWorldEvent extends PacketEE {
         System.out.println("rangeX: " + rangeX);
         System.out.println("rangeY: " + rangeY);
         System.out.println("rangeZ: " + rangeZ);
-        System.out.println("targetID: " + targetID);
-        System.out.println("targetMeta: " + targetMeta);
+        System.out.println("data: " + data);
     }
 
 }

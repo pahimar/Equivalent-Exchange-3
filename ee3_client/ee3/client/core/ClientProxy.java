@@ -117,9 +117,9 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, int targetID, int targetMeta) {
+    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
-        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketWorldEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, targetID, targetMeta)));
+        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketWorldEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
     }
 
 }

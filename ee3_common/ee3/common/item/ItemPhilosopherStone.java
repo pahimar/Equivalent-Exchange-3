@@ -80,14 +80,16 @@ public class ItemPhilosopherStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
-        
-        EquivalentExchange3.proxy.sendWorldEventPacket(WorldEvents.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), 50, 0);
-        
+        //boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+        boolean result = true;
+        if (!world.isRemote) {
+            EquivalentExchange3.proxy.sendWorldEventPacket(WorldEvents.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), "50:0");
+        }
+        /*
         if (result) {
             itemStack.damageItem(1, entityPlayer);
         }
-
+        */
         return result;
     }
 
