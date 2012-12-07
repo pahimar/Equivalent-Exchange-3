@@ -4,7 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.INetworkManager;
+import net.minecraft.src.World;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketWorldEvent extends PacketEE {
@@ -91,6 +93,7 @@ public class PacketWorldEvent extends PacketEE {
     public void execute(INetworkManager manager, Player player) {
 
         System.out.println("World Event Packet received");
+        System.out.println("eventType: " + eventType);
         System.out.println("originX: " + originX);
         System.out.println("originY: " + originY);
         System.out.println("originZ: " + originZ);
@@ -99,6 +102,21 @@ public class PacketWorldEvent extends PacketEE {
         System.out.println("rangeY: " + rangeY);
         System.out.println("rangeZ: " + rangeZ);
         System.out.println("data: " + data);
+        
+        EntityPlayer thePlayer = (EntityPlayer) player;
+        World world = thePlayer.worldObj;
+        
+        /*
+         * Server knows the world, the player, and all the packet data
+         * Server checks (for each block);
+         *  1) If the action on that block is allowed for the player
+         *  2) If the action is a valid action
+         *  
+         *  AoE options are; 1x1, 3x3, 5x5, and 7x7
+         *  Charge options; 0, 1, 2, 3
+         *  so Range would be 1, 2, 4, 6
+         *  1 + 0, 1 + 1, 1 + 3, 1 + 5 
+         */
     }
 
 }
