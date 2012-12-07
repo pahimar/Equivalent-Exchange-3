@@ -6,7 +6,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.container.ContainerCalcinator;
-import ee3.common.lib.Reference;
+import ee3.common.lib.Sprites;
 import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
 import net.minecraft.src.Container;
@@ -42,7 +42,7 @@ public class GuiCalcinator extends GuiContainer {
 
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
-        int var4 = this.mc.renderEngine.getTexture(Reference.GUI_SHEET_LOCATION + "calcinator.png");
+        int var4 = this.mc.renderEngine.getTexture(Sprites.GUI_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);
         int var5 = (this.width - this.xSize) / 2;

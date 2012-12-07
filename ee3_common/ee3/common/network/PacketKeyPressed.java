@@ -53,13 +53,9 @@ public class PacketKeyPressed extends PacketEE {
 	
 	public void execute(INetworkManager manager, Player player) {
 		EntityPlayer thePlayer = (EntityPlayer) player;
-		/*
-		if ((this.key.equals(Reference.KEYBINDING_EXTRA)) && (thePlayer.getCurrentEquippedItem().getItem() instanceof ITransmutationStone)) {
-			thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
-		}
-		*/
+
 		if ((thePlayer.getCurrentEquippedItem() != null) && (thePlayer.getCurrentEquippedItem().getItem() instanceof IKeyBound)) {
-		    ((IKeyBound) thePlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(this.key, thePlayer.isSneaking());
+		    ((IKeyBound) thePlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(thePlayer, thePlayer.getCurrentEquippedItem(), this.key);
 		}
 	}
 }

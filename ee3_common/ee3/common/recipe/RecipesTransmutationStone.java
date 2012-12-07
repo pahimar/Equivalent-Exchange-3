@@ -31,7 +31,8 @@ public class RecipesTransmutationStone {
 
     private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);
     private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, -1);
-    private static List<ItemStack> transmutationStones = Arrays.asList(miniumStone, philStone);
+
+    public static List<ItemStack> transmutationStones = Arrays.asList(miniumStone, philStone);
     
     private static ItemStack anyCoal = new ItemStack(Item.coal, 1, -1);  
     private static ItemStack anyWood = new ItemStack(Block.wood, 1, -1);
