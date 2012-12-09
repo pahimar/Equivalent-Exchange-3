@@ -15,6 +15,9 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
 
 public class DrawBlockHighlightHandler {
+    
+    private static int pulse = 0;
+    private static boolean doInc = true;
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
@@ -40,66 +43,69 @@ public class DrawBlockHighlightHandler {
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
         int texture = event.context.renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.WORLD_TRANSMUTATION_TEXTURE);
 
-        int xScale = 1;
-        int yScale = 1;
-        int zScale = 1;
+        float xScale = 1;
+        float yScale = 1;
+        float zScale = 1;
+        float xShift = 0.1F;
+        float yShift = 0.1F;
+        float zShift = 0.1F;
         int chargeLevel;
         int itemChargeLevel = 0;
 
         if (event.currentItem.getItem() instanceof IChargeable) {
             itemChargeLevel = ((IChargeable) event.currentItem.getItem()).getCharge(event.currentItem);
         }
-
         chargeLevel = 1 + itemChargeLevel * 2;
-
-        if ((event.target.sideHit == 0) || (event.target.sideHit == 1)) {
-            xScale = chargeLevel;
-            zScale = chargeLevel;
-        }
-        else if ((event.target.sideHit == 2) || (event.target.sideHit == 3)) {
-            xScale = chargeLevel;
-            yScale = chargeLevel;
-        }
-        else if ((event.target.sideHit == 4) || (event.target.sideHit == 5)) {
-            yScale = chargeLevel;
-            zScale = chargeLevel;
-        }
-
-        float xShift = 0.1F;
-        float yShift = 0.1F;
-        float zShift = 0.1F;
-
-        if (event.target.sideHit == 0) {
-            xShift = 0;
-            yShift = -yShift;
-            zShift = 0;
-        }
-        else if (event.target.sideHit == 1) {
-            xShift = 0;
-            zShift = 0;
-        }
-        else if (event.target.sideHit == 2) {
-            xShift = 0;
-            yShift = 0;
-            if (chargeLevel > 1) {
-                zShift = -zShift - 1;
+        
+        ForgeDirection sideHit = ForgeDirection.getOrientation(event.target.sideHit);
+        
+        switch (sideHit) {
+            case UP: {
+                xScale = chargeLevel + 0.1F;
+                zScale = chargeLevel + 0.1F;
+                xShift = 0;
+                zShift = 0;
+                break;
             }
-            else {
+            case DOWN: {
+                xScale = chargeLevel + 0.1F;
+                zScale = chargeLevel + 0.1F;
+                xShift = 0;
+                yShift = -yShift;
+                zShift = 0;
+                break;
+            }
+            case NORTH: {
+                xScale = chargeLevel + 0.1F;
+                yScale = chargeLevel + 0.1F;
+                xShift = 0;
+                yShift = 0;
                 zShift = -zShift;
+                break;
             }
-        }
-        else if (event.target.sideHit == 3) {
-            xShift = 0;
-            yShift = 0;
-        }
-        else if (event.target.sideHit == 4) {
-            xShift = -xShift;
-            yShift = 0;
-            zShift = 0;
-        }
-        else if (event.target.sideHit == 5) {
-            yShift = 0;
-            zShift = 0;
+            case SOUTH: {
+                xScale = chargeLevel + 0.1F;
+                yScale = chargeLevel + 0.1F;
+                xShift = 0;
+                yShift = 0;
+                break;
+            }
+            case EAST: {
+                yScale = chargeLevel + 0.1F;
+                zScale = chargeLevel + 0.1F;
+                yShift = 0;
+                zShift = 0;
+                break;
+            }
+            case WEST: {
+                yScale = chargeLevel + 0.1F;
+                zScale = chargeLevel + 0.1F;
+                xShift = -xShift;
+                yShift = 0;
+                zShift = 0;
+                break;
+            }
+            default: break;
         }
 
         GL11.glDepthMask(false);
@@ -107,13 +113,14 @@ public class DrawBlockHighlightHandler {
 
         for (int i = 0; i < 6; i++) {
             ForgeDirection forgeDir = ForgeDirection.getOrientation(i);
+            int zCorrection = (i == 2) ? -1 : 1;
             GL11.glPushMatrix();
             GL11.glTranslated(-iPX + x + xShift, -iPY + y + yShift, -iPZ + z + zShift);
             GL11.glScalef(1F * xScale, 1F * yScale, 1F * zScale);
             GL11.glRotatef(90, forgeDir.offsetX, forgeDir.offsetY, forgeDir.offsetZ);
-            GL11.glTranslated(0, 0, 0.5f);
+            GL11.glTranslated(0, 0, 0.5f * zCorrection);
             GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-            renderSlidingQuad(texture, 0.75F);
+            renderPulsingQuad(texture, 0.75F);
             GL11.glPopMatrix();
         }
 
@@ -121,9 +128,8 @@ public class DrawBlockHighlightHandler {
         GL11.glDepthMask(true);
     }
 
-    public static void renderSlidingQuad(int texture, float transparency) {
-
-        float pulse = (System.currentTimeMillis() % 3000) / 3000f;
+    public static void renderPulsingQuad(int texture, float maxTransparency) {
+        float pulseTransparency = (getPulseValue() * maxTransparency) / 3000f;
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
         Tessellator tessellator = Tessellator.instance;
@@ -131,10 +137,10 @@ public class DrawBlockHighlightHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1, 1, 1, pulse);
+        GL11.glColor4f(1, 1, 1, pulseTransparency);
 
         tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(1, 1, 1, pulse);
+        tessellator.setColorRGBA_F(1, 1, 1, pulseTransparency);
 
         tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
         tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
@@ -144,6 +150,26 @@ public class DrawBlockHighlightHandler {
         tessellator.draw();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+    }
+    
+    private static int getPulseValue() {
+        
+        if (doInc) {
+            pulse += 8;
+        }
+        else {
+            pulse -= 8;
+        }
+        
+        if (pulse == 3000) {
+            doInc = false;
+        }
+        
+        if (pulse == 0) {
+            doInc = true;
+        }
+        
+        return pulse;
     }
 
 }
