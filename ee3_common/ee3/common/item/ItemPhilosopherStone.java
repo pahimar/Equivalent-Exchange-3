@@ -3,7 +3,6 @@ package ee3.common.item;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import ee3.common.EquivalentExchange3;
 import ee3.common.core.helper.NBTHelper;
 import ee3.common.core.helper.TransmutationHelper;
@@ -13,8 +12,10 @@ import ee3.common.lib.GuiIds;
 import ee3.common.lib.Reference;
 import ee3.common.lib.Sounds;
 import ee3.common.lib.Strings;
+import ee3.common.lib.WorldEvents;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
+import ee3.common.network.PacketWorldEvent;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
@@ -77,14 +78,18 @@ public class ItemPhilosopherStone extends ItemEE
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
-
+        //boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
+        boolean result = true;
+        if (!world.isRemote) {
+            EquivalentExchange3.proxy.sendWorldEventPacket(WorldEvents.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), "50:0");
+        }
+        /*
         if (result) {
             itemStack.damageItem(1, entityPlayer);
         }
-
+        */
         return result;
     }
 

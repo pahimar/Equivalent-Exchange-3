@@ -67,7 +67,7 @@ public class ItemMiniumStone extends ItemEE
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int l, float f1, float f2, float f3) {
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
         boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
 
