@@ -12,8 +12,6 @@
 	<entry key="item.philStone.name">聖人石</entry>
 	<entry key="tile.redWaterStill.name">紅水 (靜止)</entry>
 	<entry key="tile.redWaterFlowing.name">紅水 (流動)</entry>
-	<entry key="tile.calcinator.name">煅燒爐</entry>
-	<entry key="gui.calcinator.name">煅燒爐</entry>
 	<entry key="item.alchemyDust.ash.name">灰</entry>
 	<entry key="item.alchemyDust.minium.name">鉛丹灰</entry>
 	<entry key="item.alchemyDust.verdant.name">玉灰</entry>
@@ -36,6 +34,8 @@
 	<entry key="item.alchemyBag.green.name">綠色魔力包</entry>
 	<entry key="item.alchemyBag.red.name">紅色魔力包</entry>
 	<entry key="item.alchemyBag.black.name">黑色魔力包</entry>
+	<entry key="tile.calcinator.name">煆燒爐</entry>
+	<entry key="gui.calcinator.name">煆燒爐</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
 	<entry key="version.init_log_message">Initializing version check against the remote version authority file, located at</entry>
 	<entry key="version.uninitialized">The version check did not complete successfully (version check did not initialize properly)</entry>
