@@ -38,7 +38,7 @@
 	<entry key="gui.calcinator.name">Kalcinator</entry>
 	<entry key="version.init_log_message">Initierar versionskontroll mot fjärrversions auktoritetsfil, lokaliserad vid</entry>
 	<entry key="version.uninitialized">Versionskontrollen misslyckades (Versionskontrollen initierades inte korrekt)</entry>
-	<entry key="version.current">Du använder den mest uppdaterade versionen (@REMOTE_MOD_VERSION@) av Equivalent Exchange 3 för @MINECRAFT_VERSION@</entry>
+	<entry key="version.current">Du använder den mest uppdaterade versionen (@REMOTE_MOD_VERSION@) av @MOD_NAME@ för @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Det finns en ny version av @MOD_NAME@ (@REMOTE_MOD_VERSION@) för @MINECRAFT_VERSION@. Hämta den här: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Ett fel uppstod vid kontroll av fjärrversions auktoritetsfilen</entry>
 	<entry key="version.check_disabled">Versionskontroll inaktiverad, hoppar över</entry>
