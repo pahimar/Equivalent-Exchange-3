@@ -39,7 +39,7 @@
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando checagem de versão remota contra a versão remota mestre, localizada em:</entry>
 	<entry key="version.uninitialized">Checagem de versão remota não conseguiu ser inicializada adequadamente</entry>
-	<entry key="version.current">Usando a versão mais recente(@REMOTE_MOD_VERSION@) de Equivalent Exchange 3 para @MINECRAFT_VERSION@</entry>
+	<entry key="version.current">Usando a versão mais recente(@REMOTE_MOD_VERSION@) de @MOD_NAME@ para @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Uma nova versão de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consiga-a aqui: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Erro checando a versão remota mestre</entry>
 	<entry key="version.check_disabled">Checagem remota desligada, pulando</entry>

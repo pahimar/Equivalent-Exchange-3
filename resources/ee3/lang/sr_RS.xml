@@ -23,7 +23,7 @@
     <entry key="itemGroup.EE3">Иста Размена 3</entry>
     <entry key="version.init_log_message">Покретање верзије провера према приступу удаљеним фајловима верзије ауторитета, који се налази у</entry>
     <entry key="version.uninitialized">Провера Верзије није успешно завршена (верзија провере није покренута правилно)</entry>
-    <entry key="version.current">Ви тренутно користите најновију верзинју (@REMOTE_MOD_VERSION@) од Исте Замене 3 за @MINECRAFT_VERSION@</entry>
+    <entry key="version.current">Ви тренутно користите најновију верзинју (@REMOTE_MOD_VERSION@) од @MOD_NAME@ за @MINECRAFT_VERSION@</entry>
     <entry key="version.outdated">Нова @MOD_NAME@ верзија постоји (@REMOTE_MOD_VERSION@) за @MINECRAFT_VERSION@. Узмите овде: @MOD_UPDATE_LOCATION@</entry>
     <entry key="version.connection_error">Грешка у повезивању удаљене верзије ауторетета податка (Погледајте вашу конекцију?)</entry>
     <entry key="version.check_disabled">Провера верзије је искључено, Прескочено</entry>

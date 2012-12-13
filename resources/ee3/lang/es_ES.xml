@@ -39,7 +39,7 @@
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
 	<entry key="version.uninitialized">El chequeo de versiones no se completó exitosamente (el chequeo de versiones no se inicializó correctamente)</entry>
-	<entry key="version.current">Actualmente estás usando la versión de Equivalent Exchange 3 (@REMOTE_MOD_VERSION) más actualizada para @MINECRAFT_VERSION@</entry>
+	<entry key="version.current">Actualmente estás usando la versión de @MOD_NAME@ (@REMOTE_MOD_VERSION) más actualizada para @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Actualmente estás usando una versión desactualizada; considera actualizarla aquí - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)</entry>
 	<entry key="version.check_disabled">Chequeo remoto de versiones desactivado, omitiendo</entry>

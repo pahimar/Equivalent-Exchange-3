@@ -39,7 +39,7 @@
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initializing remote version check against remote version authority, located at</entry>
 	<entry key="version.uninitialized">Remote version check failed to initialize properly</entry>
-	<entry key="version.current">Currently using the most up to date version (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>
+	<entry key="version.current">Currently using the most up to date version (@REMOTE_MOD_VERSION@) of @MOD_NAME@ for @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">A new @MOD_NAME@ version exists (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Get it here: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Error checking the remote version authority file</entry>
 	<entry key="version.check_disabled">Remote version check disabled, skipping</entry>
