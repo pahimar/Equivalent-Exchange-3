@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import cpw.mods.fml.common.network.Player;
 
-import net.minecraft.src.INetworkManager;
+import net.minecraft.network.INetworkManager;
 import net.minecraftforge.common.ForgeDirection;
 
 /**

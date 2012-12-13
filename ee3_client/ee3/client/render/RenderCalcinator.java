@@ -4,10 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import ee3.common.tile.TileCalcinator;
 
-import net.minecraft.src.ModelBase;
-import net.minecraft.src.ModelRenderer;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * RenderCalcinator

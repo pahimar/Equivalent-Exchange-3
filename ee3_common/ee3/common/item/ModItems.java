@@ -5,10 +5,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.EquivalentExchange3;
 import ee3.common.lib.ItemIds;
 import ee3.common.lib.Strings;
-import net.minecraft.src.Block;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * ModItems

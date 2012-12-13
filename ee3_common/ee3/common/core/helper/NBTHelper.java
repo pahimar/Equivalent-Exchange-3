@@ -1,7 +1,7 @@
 package ee3.common.core.helper;
 
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * NBTHelper

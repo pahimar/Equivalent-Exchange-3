@@ -1,6 +1,6 @@
 package ee3.common.core.helper;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 
 /**
  * QualityHelper

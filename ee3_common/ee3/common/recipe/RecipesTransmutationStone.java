@@ -8,10 +8,10 @@ import java.util.Map;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.FurnaceRecipes;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import ee3.common.core.handlers.EquivalencyHandler;
 import ee3.common.core.helper.GeneralHelper;
 import ee3.common.core.helper.RecipeHelper;

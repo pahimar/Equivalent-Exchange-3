@@ -1,6 +1,6 @@
 package ee3.common.core.handlers;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 
 /**

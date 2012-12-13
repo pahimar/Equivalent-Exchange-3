@@ -2,9 +2,9 @@ package ee3.common.tile;
 
 import ee3.common.lib.Reference;
 import ee3.common.lib.Strings;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * TileEE

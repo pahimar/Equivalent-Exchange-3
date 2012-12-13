@@ -16,10 +16,10 @@ import ee3.common.lib.WorldEvents;
 import ee3.common.network.PacketKeyPressed;
 import ee3.common.network.PacketTypeHandler;
 import ee3.common.network.PacketWorldEvent;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumRarity;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * ItemPhilosopherStone

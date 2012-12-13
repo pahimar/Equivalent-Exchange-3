@@ -5,11 +5,10 @@ import ee3.common.lib.GuiIds;
 import ee3.common.lib.RenderIds;
 import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * BlockCalcinator

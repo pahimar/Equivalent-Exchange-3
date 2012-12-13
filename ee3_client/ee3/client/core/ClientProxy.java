@@ -1,6 +1,6 @@
 package ee3.client.core;
 
-import net.minecraft.src.EnumRarity;
+import net.minecraft.item.EnumRarity;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;

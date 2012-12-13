@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import ee3.common.lib.Sprites;
 import ee3.common.tile.TileCalcinator;
-import net.minecraft.src.ModelBase;
-import net.minecraft.src.ModelRenderer;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.client.ForgeHooksClient;
 
 /**
