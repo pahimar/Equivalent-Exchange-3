@@ -7,7 +7,15 @@ import java.io.IOException;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.INetworkManager;
 import net.minecraft.src.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import cpw.mods.fml.common.network.Player;
+import ee3.common.event.ModActionEvent;
+import ee3.common.event.WorldTransmutationEvent;
+import ee3.common.lib.ModAction;
+import ee3.common.lib.WorldEvents;
 
 public class PacketWorldEvent extends PacketEE {
 
@@ -92,20 +100,6 @@ public class PacketWorldEvent extends PacketEE {
 
     public void execute(INetworkManager manager, Player player) {
 
-        System.out.println("World Event Packet received");
-        System.out.println("eventType: " + eventType);
-        System.out.println("originX: " + originX);
-        System.out.println("originY: " + originY);
-        System.out.println("originZ: " + originZ);
-        System.out.println("sideHit: " + sideHit);
-        System.out.println("rangeX: " + rangeX);
-        System.out.println("rangeY: " + rangeY);
-        System.out.println("rangeZ: " + rangeZ);
-        System.out.println("data: " + data);
-        
-        EntityPlayer thePlayer = (EntityPlayer) player;
-        World world = thePlayer.worldObj;
-        
         /*
          * Server knows the world, the player, and all the packet data
          * Server checks (for each block);
@@ -117,6 +111,19 @@ public class PacketWorldEvent extends PacketEE {
          *  so Range would be 1, 2, 4, 6
          *  1 + 0, 1 + 1, 1 + 3, 1 + 5 
          */
+        
+        EntityPlayer thePlayer = (EntityPlayer) player;
+        ModActionEvent modActionEvent;
+        WorldTransmutationEvent worldTransmutationEvent;
+        
+        modActionEvent= new ModActionEvent(thePlayer, ModAction.TRANSMUTATION, originX, originY, originZ, (int) sideHit);
+        MinecraftForge.EVENT_BUS.post(modActionEvent);
+        
+        if (modActionEvent.allowEvent != Result.DENY) {
+            worldTransmutationEvent = new WorldTransmutationEvent(thePlayer, thePlayer.worldObj, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data);
+            MinecraftForge.EVENT_BUS.post(worldTransmutationEvent);
+        }
+        
     }
 
 }
