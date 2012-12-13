@@ -1,8 +1,8 @@
 package ee3.common.core;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumRarity;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ee3.client.gui.GuiCalcinator;

@@ -2,13 +2,13 @@ package ee3.client.core.helper;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.RenderEngine;
-import net.minecraft.src.Tessellator;
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.RenderEngine;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class RenderUtils {
 

@@ -4,8 +4,8 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import ee3.common.item.ModItems;
 import ee3.common.lib.ItemIds;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Item;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class CreativeTabEE3 extends CreativeTabs {
 

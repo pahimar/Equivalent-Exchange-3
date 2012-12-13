@@ -6,15 +6,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemBlock;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.RenderHelper;
-import net.minecraft.src.RenderItem;
-import net.minecraft.src.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.MovingObjectPosition;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;

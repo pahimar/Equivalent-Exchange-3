@@ -1,9 +1,8 @@
 package ee3.common.event;
 
-import static net.minecraftforge.event.Event.Result.DEFAULT;
-import static net.minecraftforge.event.Event.Result.DENY;
+import static net.minecraftforge.event.Event.Result.*;
 import ee3.common.lib.ModAction;
-import net.minecraft.src.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 

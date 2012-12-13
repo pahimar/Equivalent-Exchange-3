@@ -1,9 +1,9 @@
 package ee3.common.container;
 
-import net.minecraft.src.ContainerWorkbench;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.InventoryPlayer;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ContainerWorkbench;
+import net.minecraft.world.World;
 
 /**
  * ContainerPortableCrafting

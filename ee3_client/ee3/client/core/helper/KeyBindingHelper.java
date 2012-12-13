@@ -1,7 +1,8 @@
 package ee3.client.core.helper;
 
 import java.util.ArrayList;
-import net.minecraft.src.KeyBinding;
+
+import net.minecraft.client.settings.KeyBinding;
 
 /**
  * KeyBindings

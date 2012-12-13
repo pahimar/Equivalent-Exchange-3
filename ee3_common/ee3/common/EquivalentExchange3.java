@@ -1,6 +1,6 @@
 package ee3.common;
 
-import net.minecraft.src.CreativeTabs;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;

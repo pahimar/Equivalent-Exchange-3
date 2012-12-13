@@ -1,6 +1,6 @@
 package ee3.common.item;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 
 public interface IChargeable {
 

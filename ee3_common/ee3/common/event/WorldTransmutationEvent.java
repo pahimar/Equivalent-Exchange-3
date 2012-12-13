@@ -1,7 +1,7 @@
 package ee3.common.event;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.event.Event;
 
 public class WorldTransmutationEvent extends Event {
