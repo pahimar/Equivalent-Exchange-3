@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Chinese (Traditional)(zh_TW) Localization File</comment>
-	<entry key="key.extra">Extra</entry>
+	<entry key="key.extra">其他</entry>
 	<entry key="key.release">鬆開</entry>
 	<entry key="key.toggle">切換</entry>
 	<entry key="key.charge">充</entry> 
