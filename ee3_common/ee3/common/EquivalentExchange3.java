@@ -1,6 +1,6 @@
 package ee3.common;
 
-import net.minecraft.src.CreativeTabs;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -21,6 +21,7 @@ import ee3.client.core.handlers.RenderTickHandler;
 import ee3.common.block.ModBlocks;
 import ee3.common.core.CommonProxy;
 import ee3.common.core.CreativeTabEE3;
+import ee3.common.core.handlers.ModActionHandler;
 import ee3.common.core.handlers.AddonHandler;
 import ee3.common.core.handlers.ConfigurationHandler;
 import ee3.common.core.handlers.EntityLivingHandler;
@@ -30,6 +31,7 @@ import ee3.common.core.handlers.LocalizationHandler;
 import ee3.common.core.handlers.PacketHandler;
 import ee3.common.core.handlers.PlayerDestroyItemHandler;
 import ee3.common.core.handlers.VersionCheckTickHandler;
+import ee3.common.core.handlers.WorldTransmutationHandler;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.VersionHelper;
 import ee3.common.item.ModItems;
@@ -107,6 +109,10 @@ public class EquivalentExchange3 {
 
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+        
+        MinecraftForge.EVENT_BUS.register(new ModActionHandler());
+        
+        MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
         
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();

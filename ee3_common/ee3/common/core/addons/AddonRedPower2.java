@@ -8,8 +8,8 @@ import cpw.mods.fml.common.Loader;
 import ee3.common.core.helper.LogHelper;
 import ee3.common.core.helper.RecipeHelper;
 import ee3.common.recipe.RecipesTransmutationStone;
-import net.minecraft.src.Block;
-import net.minecraft.src.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 
 public class AddonRedPower2 {

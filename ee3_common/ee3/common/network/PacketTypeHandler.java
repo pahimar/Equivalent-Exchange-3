@@ -3,10 +3,11 @@ package ee3.common.network;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+
 import ee3.common.lib.Reference;
 
-import net.minecraft.src.Packet;
-import net.minecraft.src.Packet250CustomPayload;
 
 /**
  * PacketTypeHandler

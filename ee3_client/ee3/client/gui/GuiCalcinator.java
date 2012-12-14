@@ -1,5 +1,9 @@
 package ee3.client.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.Side;
@@ -9,11 +13,6 @@ import ee3.common.container.ContainerCalcinator;
 import ee3.common.lib.Sprites;
 import ee3.common.lib.Strings;
 import ee3.common.tile.TileCalcinator;
-import net.minecraft.src.Container;
-import net.minecraft.src.GuiContainer;
-import net.minecraft.src.InventoryPlayer;
-import net.minecraft.src.StatCollector;
-import net.minecraft.src.TileEntityFurnace;
 
 /**
  * GuiCalcinator

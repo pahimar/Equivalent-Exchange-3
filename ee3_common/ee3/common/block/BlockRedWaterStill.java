@@ -3,8 +3,8 @@ package ee3.common.block;
 import ee3.common.EquivalentExchange3;
 import ee3.common.lib.Sprites;
 import ee3.common.lib.Strings;
-import net.minecraft.src.BlockStationary;
-import net.minecraft.src.Material;
+import net.minecraft.block.BlockStationary;
+import net.minecraft.block.material.Material;
 
 /**
  * BlockRedWaterFlowing

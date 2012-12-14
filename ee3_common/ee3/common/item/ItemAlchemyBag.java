@@ -2,9 +2,9 @@ package ee3.common.item;
 
 import java.util.List;
 
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.MathHelper;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;

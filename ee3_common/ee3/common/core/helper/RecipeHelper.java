@@ -2,10 +2,10 @@ package ee3.common.core.helper;
 
 import java.util.ArrayList;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.FurnaceRecipes;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**

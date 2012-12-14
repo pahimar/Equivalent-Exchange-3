@@ -3,7 +3,7 @@ package ee3.common.core.handlers;
 import java.util.ArrayList;
 
 import ee3.common.core.helper.GeneralHelper;
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 
 /**
  * EquivalencyHandler

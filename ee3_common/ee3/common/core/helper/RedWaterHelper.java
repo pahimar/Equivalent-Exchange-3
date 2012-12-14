@@ -2,11 +2,11 @@ package ee3.common.core.helper;
 
 import ee3.common.block.ModBlocks;
 import ee3.common.lib.ConfigurationSettings;
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.World;
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 /**
  * RedWaterHelper

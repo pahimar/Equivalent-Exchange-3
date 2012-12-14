@@ -1,9 +1,8 @@
 package ee3.common.core.helper;
 
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import ee3.common.item.ModItems;
-import net.minecraft.src.EntityAgeable;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
 
 /**
  * ItemDropHelper

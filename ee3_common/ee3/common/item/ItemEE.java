@@ -2,7 +2,7 @@ package ee3.common.item;
 
 import ee3.common.lib.Reference;
 import ee3.common.lib.Sprites;
-import net.minecraft.src.Item;
+import net.minecraft.item.Item;
 
 /**
  * ItemEE

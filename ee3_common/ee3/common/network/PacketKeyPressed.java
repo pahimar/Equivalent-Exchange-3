@@ -4,6 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetworkManager;
+
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import ee3.common.EquivalentExchange3;
@@ -12,10 +15,6 @@ import ee3.common.item.ITransmutationStone;
 import ee3.common.lib.GuiIds;
 import ee3.common.lib.ItemIds;
 import ee3.common.lib.Reference;
-
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.INetworkManager;
-import net.minecraft.src.Packet250CustomPayload;
 
 /**
  * PacketKeyPressed

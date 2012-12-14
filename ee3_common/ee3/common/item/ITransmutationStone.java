@@ -1,6 +1,6 @@
 package ee3.common.item;
 
-import net.minecraft.src.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * ITransmutationStone

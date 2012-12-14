@@ -2,7 +2,7 @@ package ee3.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.src.RenderEngine;
+import net.minecraft.client.renderer.RenderEngine;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.FMLTextureFX;
 import ee3.common.block.ModBlocks;

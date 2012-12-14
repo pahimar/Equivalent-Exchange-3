@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import ee3.common.lib.Reference;
 import ee3.common.lib.Sprites;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 

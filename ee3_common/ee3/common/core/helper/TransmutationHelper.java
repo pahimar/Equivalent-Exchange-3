@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import ee3.common.core.handlers.EquivalencyHandler;
 import ee3.common.lib.Sounds;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockSand;
-import net.minecraft.src.BlockLeaves;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemBlock;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.World;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * TransmutationHelper

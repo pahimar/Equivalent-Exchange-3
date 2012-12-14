@@ -4,9 +4,8 @@ import ee3.common.EquivalentExchange3;
 import ee3.common.lib.Reference;
 import ee3.common.lib.Sprites;
 import ee3.common.lib.Strings;
-import net.minecraft.src.BlockFlowing;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Material;
+import net.minecraft.block.BlockFlowing;
+import net.minecraft.block.material.Material;
 
 /**
  * BlockRedWaterFlowing
