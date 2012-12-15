@@ -1,42 +1,42 @@
 <?xml version="1.0" ?> 
-<project name="Equivalent Exchange 3">
+<project name="Equivalent Exchange 3" basedir="../../">
 	
 	<property file="build.properties" />
 	
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\common\ee3" />
-		<delete dir="${dir.development}\mcp\reobf\minecraft" />
+		<delete file="mcp\src\common\mcmod.info" />
+		<delete dir="mcp\src\common\ee3" />
+		<delete dir="mcp\reobf\minecraft" />
 	</target>
 	
 	<target name="build">
-		<copy todir="${dir.development}\mcp\src\common">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
+		<copy todir="mcp\src\common">
+			<fileset dir="source\Equivalent-Exchange-3\ee3_client\" />
+			<fileset dir="source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
-		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
 	</target>
 	
 	<target name="recompile">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="mcp" executable="cmd" os="Windows 7">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+		<exec dir="mcp" executable="bash" os="Linux">
 			<arg line="recompile.sh" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="mcp" executable="bash" os="Mac OS X">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 	
 	<target name="reobfuscate">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="mcp" executable="cmd" os="Windows 7">
 			<arg line="/c reobfuscate.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
+		<exec dir="mcp" executable="bash" os="Linux">
 			<arg line="reobfuscate.sh" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="mcp" executable="bash" os="Mac OS X">
 			<arg line="reobfuscate.sh" />
 		</exec>
 	</target>
@@ -49,11 +49,11 @@
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="source\Equivalent-Exchange-3\${dir.share}\${release.minecraft.version}\${release.mod.version}" />
+		<jar destfile="source\Equivalent-Exchange-3\${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+			<fileset dir="mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="mcp\reobf\minecraft" />
+			<fileset dir="source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
@@ -68,11 +68,11 @@
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="source\Equivalent-Exchange-3\${dir.release}\${release.minecraft.version}\${release.mod.version}" />
+		<jar destfile="source\Equivalent-Exchange-3\${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
+			<fileset dir="mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="mcp\reobf\minecraft" />
+			<fileset dir="source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
