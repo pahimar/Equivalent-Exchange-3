@@ -7,7 +7,7 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.packet.PacketEE;
 import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
-import com.pahimar.ee3.network.packet.PacketWorldEvent;
+import com.pahimar.ee3.network.packet.PacketRequestEvent;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -26,7 +26,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 public enum PacketTypeHandler {
 	KEY(PacketKeyPressed.class),
 	TILE(PacketTileUpdate.class),
-	WORLD_EVENT(PacketWorldEvent.class);
+	REQUEST_EVENT(PacketRequestEvent.class);
 	
 	private Class<? extends PacketEE> clazz;
 	

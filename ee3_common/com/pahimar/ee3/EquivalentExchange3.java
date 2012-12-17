@@ -7,7 +7,7 @@ import com.pahimar.ee3.core.handlers.EntityLivingHandler;
 import com.pahimar.ee3.core.handlers.FuelHandler;
 import com.pahimar.ee3.core.handlers.ItemPickupHandler;
 import com.pahimar.ee3.core.handlers.LocalizationHandler;
-import com.pahimar.ee3.core.handlers.ModActionHandler;
+import com.pahimar.ee3.core.handlers.ActionRequestHandler;
 import com.pahimar.ee3.core.handlers.PacketHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handlers.RenderTickHandler;
@@ -111,7 +111,7 @@ public class EquivalentExchange3 {
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         
-        MinecraftForge.EVENT_BUS.register(new ModActionHandler());
+        MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
         
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
         

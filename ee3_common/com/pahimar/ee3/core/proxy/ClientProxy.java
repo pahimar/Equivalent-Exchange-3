@@ -13,7 +13,7 @@ import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketWorldEvent;
+import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import net.minecraft.item.EnumRarity;
@@ -119,7 +119,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
-        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketWorldEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
+        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
     }
 
 }

@@ -2,25 +2,24 @@ package com.pahimar.ee3.event;
 
 import static net.minecraftforge.event.Event.Result.*;
 
-import com.pahimar.ee3.lib.ModAction;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.Cancelable;
+import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 @Cancelable
-public class ModActionEvent extends PlayerEvent {
+public class ActionRequestEvent extends PlayerEvent {
     
-    public final ModAction modAction;
+    public final Event modEvent;
     public final int x, y, z;
     public final int sideHit;
     
     public Result allowEvent;
     
-    public ModActionEvent(EntityPlayer player, ModAction modAction, int x, int y, int z, int sideHit) {
+    public ActionRequestEvent(EntityPlayer player, Event modEvent, int x, int y, int z, int sideHit) {
 
         super(player);
-        this.modAction = modAction;
+        this.modEvent = modEvent;
         this.x = x;
         this.y = y;
         this.z = z;

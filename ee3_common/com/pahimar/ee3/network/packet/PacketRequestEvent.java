@@ -4,10 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import com.pahimar.ee3.event.ModActionEvent;
+import com.pahimar.ee3.event.ActionRequestEvent;
 import com.pahimar.ee3.event.WorldTransmutationEvent;
-import com.pahimar.ee3.lib.ModAction;
-import com.pahimar.ee3.lib.WorldEvents;
+import com.pahimar.ee3.lib.RequestEvents;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +18,7 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketWorldEvent extends PacketEE {
+public class PacketRequestEvent extends PacketEE {
 
     public byte eventType;
     public int originX, originY, originZ;
@@ -27,14 +26,14 @@ public class PacketWorldEvent extends PacketEE {
     public byte rangeX, rangeY, rangeZ;
     public String data;
 
-    public PacketWorldEvent() {
+    public PacketRequestEvent() {
 
-        super(PacketTypeHandler.WORLD_EVENT, false);
+        super(PacketTypeHandler.REQUEST_EVENT, false);
     }
 
-    public PacketWorldEvent(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
+    public PacketRequestEvent(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
-        super(PacketTypeHandler.WORLD_EVENT, false);
+        super(PacketTypeHandler.REQUEST_EVENT, false);
         this.eventType = eventType;
         this.originX = originX;
         this.originY = originY;
@@ -102,28 +101,23 @@ public class PacketWorldEvent extends PacketEE {
 
     public void execute(INetworkManager manager, Player player) {
 
-        /*
-         * Server knows the world, the player, and all the packet data
-         * Server checks (for each block);
-         *  1) If the action on that block is allowed for the player
-         *  2) If the action is a valid action
-         *  
-         *  AoE options are; 1x1, 3x3, 5x5, and 7x7
-         *  Charge options; 0, 1, 2, 3
-         *  so Range would be 1, 2, 4, 6
-         *  1 + 0, 1 + 1, 1 + 3, 1 + 5 
-         */
-        
         EntityPlayer thePlayer = (EntityPlayer) player;
-        ModActionEvent modActionEvent;
-        WorldTransmutationEvent worldTransmutationEvent;
+        ActionRequestEvent actionRequestEvent = null;
+        Event actionEvent = null;;
         
-        modActionEvent= new ModActionEvent(thePlayer, ModAction.TRANSMUTATION, originX, originY, originZ, (int) sideHit);
-        MinecraftForge.EVENT_BUS.post(modActionEvent);
+        // TODO Move this logic to a ActionEvent handler to post an appropriate event depending on the request received
         
-        if (modActionEvent.allowEvent != Result.DENY) {
-            worldTransmutationEvent = new WorldTransmutationEvent(thePlayer, thePlayer.worldObj, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data);
-            MinecraftForge.EVENT_BUS.post(worldTransmutationEvent);
+        if (eventType == RequestEvents.TRANSMUTATION) {
+            actionEvent = new WorldTransmutationEvent(thePlayer, thePlayer.worldObj, originX, originY, originZ, data);
+        }
+        
+        if (actionEvent != null) {
+            actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX, originY, originZ, (int) sideHit);
+            MinecraftForge.EVENT_BUS.post(actionRequestEvent);
+            
+            if (actionRequestEvent.allowEvent != Result.DENY) {
+                MinecraftForge.EVENT_BUS.post(actionEvent);
+            }
         }
         
     }
