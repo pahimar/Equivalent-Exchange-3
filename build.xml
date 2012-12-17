@@ -4,21 +4,23 @@
 	<property file="build.properties" />
 	
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\common\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\common\ee3" />
+		<delete file="${dir.development}\mcp\src\minecraft\mcmod.info" />
+		<delete dir="${dir.development}\mcp\src\minecraft\com" />
 		<delete dir="${dir.development}\mcp\reobf\minecraft" />
 	</target>
 	
 	<target name="build">
-		<copy todir="${dir.development}\mcp\src\common">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_client\" />
+		<copy todir="${dir.development}\mcp\src\minecraft">
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
-		<replace dir="${dir.development}\mcp\src\common" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="${dir.development}\mcp\src\minecraft" token="@VERSION@" value="${release.mod.version}" />
 	</target>
 	
 	<target name="recompile">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+			<arg line="/c recompile.bat" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
 			<arg line="/c recompile.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
@@ -31,6 +33,9 @@
 	
 	<target name="reobfuscate">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+			<arg line="/c reobfuscate.bat" />
+		</exec>
+		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
 			<arg line="/c reobfuscate.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
@@ -70,7 +75,7 @@
 		<!-- Build the jar -->
 		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
 		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="${dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
 			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
