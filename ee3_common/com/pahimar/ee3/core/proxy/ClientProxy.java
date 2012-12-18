@@ -6,7 +6,7 @@ import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
-import com.pahimar.ee3.core.handlers.RenderTickHandler;
+import com.pahimar.ee3.core.handlers.TransmutationStoneOverlayHandler;
 import com.pahimar.ee3.core.handlers.SoundHandler;
 import com.pahimar.ee3.core.helper.KeyBindingHelper;
 import com.pahimar.ee3.lib.BlockIds;
@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenderTickHandler() {
 
-        TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
+        TickRegistry.registerTickHandler(new TransmutationStoneOverlayHandler(), Side.CLIENT);
     }
 
     @Override

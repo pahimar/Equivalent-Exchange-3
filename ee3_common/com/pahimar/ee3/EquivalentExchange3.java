@@ -10,7 +10,7 @@ import com.pahimar.ee3.core.handlers.LocalizationHandler;
 import com.pahimar.ee3.core.handlers.ActionRequestHandler;
 import com.pahimar.ee3.core.handlers.PacketHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
-import com.pahimar.ee3.core.handlers.RenderTickHandler;
+import com.pahimar.ee3.core.handlers.TransmutationStoneOverlayHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.core.helper.LogHelper;

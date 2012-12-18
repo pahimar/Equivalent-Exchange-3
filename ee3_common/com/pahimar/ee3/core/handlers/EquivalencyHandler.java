@@ -219,8 +219,19 @@ public class EquivalencyHandler {
     }
 
     public boolean areEquivalent(Object obj1, Object obj2) {
-        
-        return (getEquivalencyList(obj1).equals(getEquivalencyList(obj2)));
+
+        if ((getEquivalencyList(obj1) != null) && (getEquivalencyList(obj2) != null)) {
+            // TODO This could be cleaner
+            if ((GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID) && (GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage())) {
+                return true;
+            }
+            else {
+                return (getEquivalencyList(obj1).equals(getEquivalencyList(obj2)));
+            }
+        }
+        else {
+            return false;
+        }
     }
 
     public void debug() {

@@ -2,31 +2,29 @@ package com.pahimar.ee3.core.handlers;
 
 import java.util.EnumSet;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.pahimar.ee3.core.helper.RenderUtils;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.MovingObjectPosition;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-public class RenderTickHandler implements ITickHandler {
-
+public class TransmutationStoneOverlayHandler implements ITickHandler {
+    
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
 
@@ -71,10 +69,6 @@ public class RenderTickHandler implements ITickHandler {
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
 
-        if ((player.worldObj != null) && (rayTrace != null)) {
-            currentBlock = TransmutationHelper.getNextBlock(player.worldObj.getBlockId(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.worldObj.getBlockMetadata(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.isSneaking());
-        }
-
         GL11.glPushMatrix();
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);
         GL11.glClear(256);
@@ -98,9 +92,11 @@ public class RenderTickHandler implements ITickHandler {
         int hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
         
         RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
-        if ((currentBlock != null) && (currentBlock.getItem() instanceof ItemBlock)) {
-            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, hudBlockX, hudBlockY, -90, blockScale);
+        
+        if ((TransmutationHelper.targetBlockStack != null) && (TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock)) {
+            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
         }
+        
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

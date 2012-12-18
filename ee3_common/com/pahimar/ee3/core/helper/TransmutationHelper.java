@@ -25,6 +25,10 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public class TransmutationHelper {
 
+    public static ItemStack previousBlockStack = null;
+    public static ItemStack currentBlockStack = null;
+    public static ItemStack targetBlockStack = null;
+    
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z) {
 
         int id = world.getBlockId(x, y, z);
@@ -45,6 +49,34 @@ public class TransmutationHelper {
         }
 
         return false;
+    }
+    
+    public static String formatTargetBlockInfo(ItemStack targetBlock) {
+        if (targetBlock != null) {
+            return TransmutationHelper.targetBlockStack.itemID + ":" + TransmutationHelper.targetBlockStack.getItemDamage();
+        }
+        else {
+            return "";
+        }
+    }
+    
+    public static void updateTargetBlock(World world, int x, int y, int z) {
+        currentBlockStack = new ItemStack(world.getBlockId(x, y, z), 1, world.getBlockMetadata(x, y, z));
+        
+        if (previousBlockStack == null) {
+            previousBlockStack = currentBlockStack;
+            targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+        }
+        else {
+            if (!EquivalencyHandler.instance().areEquivalent(TransmutationHelper.previousBlockStack, currentBlockStack)) {
+                previousBlockStack = currentBlockStack;
+                targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+            }
+        }
+    }
+    
+    public static ItemStack getNextBlock(int id, int meta) {
+        return getNextBlock(id, meta, true);
     }
 
     public static ItemStack getNextBlock(int id, int meta, boolean allowFalling) {

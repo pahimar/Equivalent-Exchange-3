@@ -81,17 +81,13 @@ public class ItemPhilosopherStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        //boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
-        boolean result = true;
         if (!world.isRemote) {
-            EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), "50:0");
+            if (TransmutationHelper.targetBlockStack != null) {
+                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
+            }
         }
-        /*
-        if (result) {
-            itemStack.damageItem(1, entityPlayer);
-        }
-        */
-        return result;
+        
+        return true;
     }
 
     @Override
@@ -135,6 +131,9 @@ public class ItemPhilosopherStone extends ItemEE
 
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);
+        }
+        else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
+            TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage(), true);
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
             if (!thePlayer.isSneaking()) {

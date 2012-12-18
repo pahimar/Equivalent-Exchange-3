@@ -3,12 +3,14 @@ package com.pahimar.ee3.core.handlers;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Sprites;
 
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
@@ -18,6 +20,8 @@ public class DrawBlockHighlightHandler {
     
     private static int pulse = 0;
     private static boolean doInc = true;
+    
+    private static ItemStack currentBlockStack = null;
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
@@ -25,6 +29,8 @@ public class DrawBlockHighlightHandler {
         if (event.currentItem != null) {
             if (event.currentItem.getItem() instanceof ITransmutationStone) {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {
+                    TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
+                    
                     if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
                         drawInWorldTransmutationOverlay(event);
                     }
