@@ -15,8 +15,8 @@ import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;

@@ -11,8 +11,8 @@ import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**

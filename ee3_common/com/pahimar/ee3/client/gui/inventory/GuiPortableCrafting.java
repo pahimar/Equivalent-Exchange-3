@@ -9,8 +9,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * GuiPortableCrafting
