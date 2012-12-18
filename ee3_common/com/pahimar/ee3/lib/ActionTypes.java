@@ -1,7 +1,7 @@
 package com.pahimar.ee3.lib;
 
 
-public class RequestEvents {
+public class ActionTypes {
     
     public static final byte TRANSMUTATION = 0;
 

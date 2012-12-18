@@ -9,7 +9,7 @@ import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.lib.RequestEvents;
+import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
@@ -84,7 +84,7 @@ public class ItemPhilosopherStone extends ItemEE
         //boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
         boolean result = true;
         if (!world.isRemote) {
-            EquivalentExchange3.proxy.sendWorldEventPacket(RequestEvents.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), "50:0");
+            EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), "50:0");
         }
         /*
         if (result) {

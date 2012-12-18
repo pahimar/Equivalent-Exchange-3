@@ -4,19 +4,17 @@ import static net.minecraftforge.event.Event.Result.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.Cancelable;
-import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 @Cancelable
 public class ActionRequestEvent extends PlayerEvent {
     
-    public final Event modEvent;
+    public final ActionEvent modEvent;
     public final int x, y, z;
     public final int sideHit;
-    
     public Result allowEvent;
     
-    public ActionRequestEvent(EntityPlayer player, Event modEvent, int x, int y, int z, int sideHit) {
+    public ActionRequestEvent(EntityPlayer player, ActionEvent modEvent, int x, int y, int z, int sideHit) {
 
         super(player);
         this.modEvent = modEvent;

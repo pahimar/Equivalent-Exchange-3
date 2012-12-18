@@ -4,18 +4,16 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionRequestEvent;
-import com.pahimar.ee3.event.WorldTransmutationEvent;
-import com.pahimar.ee3.lib.RequestEvents;
+import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event;
 import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketRequestEvent extends PacketEE {
@@ -103,13 +101,7 @@ public class PacketRequestEvent extends PacketEE {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
         ActionRequestEvent actionRequestEvent = null;
-        Event actionEvent = null;;
-        
-        // TODO Move this logic to a ActionEvent handler to post an appropriate event depending on the request received
-        
-        if (eventType == RequestEvents.TRANSMUTATION) {
-            actionEvent = new WorldTransmutationEvent(thePlayer, thePlayer.worldObj, originX, originY, originZ, data);
-        }
+        ActionEvent actionEvent = new ActionEvent(ActionTypes.TRANSMUTATION, thePlayer, thePlayer.worldObj, originX, originY, originZ, false, data);
         
         if (actionEvent != null) {
             actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX, originY, originZ, (int) sideHit);
