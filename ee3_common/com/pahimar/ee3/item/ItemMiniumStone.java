@@ -100,7 +100,9 @@ public class ItemMiniumStone extends ItemEE
             openPortableCrafting(thePlayer);
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
-            TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage(), true);
+            if (TransmutationHelper.targetBlockStack != null) {
+                TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage(), true);
+            }
         }
 
     }

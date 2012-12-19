@@ -10,6 +10,7 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.packet.PacketEE;
 import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
+import com.pahimar.ee3.network.packet.PacketResultEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
 
@@ -27,7 +28,8 @@ public enum PacketTypeHandler {
     KEY(PacketKeyPressed.class),
     TILE(PacketTileUpdate.class),
     REQUEST_EVENT(PacketRequestEvent.class),
-    SPAWN_PARTICLE(PacketSpawnParticle.class);
+    SPAWN_PARTICLE(PacketSpawnParticle.class),
+    RESULT_EVENT(PacketResultEvent.class);
 
     private Class<? extends PacketEE> clazz;
 
