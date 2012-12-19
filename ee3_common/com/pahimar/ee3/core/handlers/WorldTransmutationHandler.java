@@ -54,23 +54,19 @@ public class WorldTransmutationHandler {
                 break;
             }
             case NORTH: {
-                System.out.println("NORTH");
                 zShift = 1D;
                 zSign = -1;
                 break;
             }
             case SOUTH: {
-                System.out.println("SOUTH");
                 zShift = 1D;
                 break;
             }
             case EAST: {
-                System.out.println("EAST");
                 xShift = 1D;
                 break;
             }
             case WEST: {
-                System.out.println("WEST");
                 xShift = 1D;
                 xSign = -1;
                 break;

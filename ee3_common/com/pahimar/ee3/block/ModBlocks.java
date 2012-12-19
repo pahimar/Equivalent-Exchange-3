@@ -3,6 +3,7 @@ package com.pahimar.ee3.block;
 import net.minecraft.block.Block;
 
 import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -28,9 +29,9 @@ public class ModBlocks {
         redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL);
         redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1);
 
-        GameRegistry.registerBlock(calcinator);
-        GameRegistry.registerBlock(redWaterStill);
-        GameRegistry.registerBlock(redWaterFlowing);
+        GameRegistry.registerBlock(calcinator, Strings.CALCINATOR_NAME);
+        GameRegistry.registerBlock(redWaterStill, Strings.RED_WATER_STILL_NAME);
+        GameRegistry.registerBlock(redWaterFlowing, Strings.RED_WATER_FLOWING_NAME);
 
         initBlockRecipes();
 
