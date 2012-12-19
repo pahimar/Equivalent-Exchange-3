@@ -14,7 +14,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketSpawnParticle extends PacketEE {
 
     public String particleName;
-    public int x, y, z;
+    public double x, y, z;
     public double velocityX, velocityY, velocityZ;
 
     public PacketSpawnParticle() {
@@ -22,7 +22,7 @@ public class PacketSpawnParticle extends PacketEE {
         super(PacketTypeHandler.SPAWN_PARTICLE, false);
     }
 
-    public PacketSpawnParticle(String particleName, int x, int y, int z, double velocityX, double velocityY, double velocityZ) {
+    public PacketSpawnParticle(String particleName, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 
         super(PacketTypeHandler.SPAWN_PARTICLE, false);
         this.particleName = particleName;
@@ -37,9 +37,9 @@ public class PacketSpawnParticle extends PacketEE {
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeUTF(particleName);
-        data.writeInt(x);
-        data.writeInt(y);
-        data.writeInt(z);
+        data.writeDouble(x);
+        data.writeDouble(y);
+        data.writeDouble(z);
         data.writeDouble(velocityX);
         data.writeDouble(velocityY);
         data.writeDouble(velocityZ);
@@ -49,9 +49,9 @@ public class PacketSpawnParticle extends PacketEE {
     public void readData(DataInputStream data) throws IOException {
 
         this.particleName = data.readUTF();
-        this.x = data.readInt();
-        this.y = data.readInt();
-        this.z = data.readInt();
+        this.x = data.readDouble();
+        this.y = data.readDouble();
+        this.z = data.readDouble();
         this.velocityX = data.readDouble();
         this.velocityY = data.readDouble();
         this.velocityZ = data.readDouble();

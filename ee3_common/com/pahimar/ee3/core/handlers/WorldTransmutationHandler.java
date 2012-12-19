@@ -2,6 +2,7 @@ package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -34,6 +35,53 @@ public class WorldTransmutationHandler {
         int upperBoundZ = -1 * lowerBoundZ;
         boolean hasSoundPlayed = false;
 
+        double xShift = 0;
+        double yShift = 0;
+        double zShift = 0;
+
+        int xSign = 1;
+        int ySign = 1;
+        int zSign = 1;
+
+        switch (ForgeDirection.getOrientation(sideHit)) {
+            case UP: {
+                yShift = 1.5D;
+                break;
+            }
+            case DOWN: {
+                yShift = 0.1D;
+                ySign = -1;
+                break;
+            }
+            case NORTH: {
+                System.out.println("NORTH");
+                zShift = 1D;
+                zSign = -1;
+                break;
+            }
+            case SOUTH: {
+                System.out.println("SOUTH");
+                zShift = 1D;
+                break;
+            }
+            case EAST: {
+                System.out.println("EAST");
+                xShift = 1D;
+                break;
+            }
+            case WEST: {
+                System.out.println("WEST");
+                xShift = 1D;
+                xSign = -1;
+                break;
+            }
+            case UNKNOWN: {
+                break;
+            }
+            default:
+                break;
+        }
+
         for (int x = lowerBoundX; x <= upperBoundX; x++) {
             for (int y = lowerBoundY; y <= upperBoundY; y++) {
                 for (int z = lowerBoundZ; z <= upperBoundZ; z++) {
@@ -54,7 +102,8 @@ public class WorldTransmutationHandler {
                                 thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.TRANSMUTE, 0.5F, 1.0F);
                             }
 
-                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x, originY + y + 1, originZ + z, 0, 0.15D, 0)));
+                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.15D * ySign, 0D * zSign)));
                         }
                     }
                 }
@@ -69,9 +118,14 @@ public class WorldTransmutationHandler {
         int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
         boolean result = false;
 
-        if (EquivalencyHandler.instance().areEquivalent(new ItemStack(id, 1, meta), new ItemStack(event.targetID, 1, event.targetMeta))) {
-            if (event.itemStack.getItemDamage() < event.itemStack.getMaxDamage()) {
-                result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
+        ItemStack worldStack = new ItemStack(id, 1, meta);
+        ItemStack targetStack = new ItemStack(event.targetID, 1, event.targetMeta);
+
+        if (!worldStack.isItemEqual(targetStack)) {
+            if (EquivalencyHandler.instance().areEquivalent(worldStack, targetStack)) {
+                if (event.itemStack.getItemDamage() < event.itemStack.getMaxDamage()) {
+                    result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
+                }
             }
         }
 
