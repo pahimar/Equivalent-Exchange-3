@@ -2,9 +2,9 @@ package com.pahimar.ee3.core.handlers;
 
 import java.util.ArrayList;
 
-import com.pahimar.ee3.core.helper.GeneralHelper;
-
 import net.minecraft.item.ItemStack;
+
+import com.pahimar.ee3.core.helper.GeneralHelper;
 
 /**
  * EquivalencyHandler

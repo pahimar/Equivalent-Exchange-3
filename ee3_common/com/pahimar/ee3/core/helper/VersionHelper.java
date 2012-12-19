@@ -11,7 +11,6 @@ import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 

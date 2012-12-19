@@ -1,9 +1,5 @@
 package com.pahimar.ee3.lib;
 
-import com.pahimar.ee3.item.ModItems;
-
-import net.minecraftforge.common.Configuration;
-
 /**
  * ConfigurationSettings
  * 

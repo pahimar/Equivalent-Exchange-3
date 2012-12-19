@@ -3,7 +3,6 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 
-
 /**
  * ItemInertStone
  * 

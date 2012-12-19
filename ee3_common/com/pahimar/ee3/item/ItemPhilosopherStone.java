@@ -1,27 +1,23 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.ConfigurationSettings;
-import com.pahimar.ee3.lib.CustomItemRarity;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Sounds;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.lib.ActionTypes;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketKeyPressed;
-import com.pahimar.ee3.network.packet.PacketRequestEvent;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.lib.ActionTypes;
+import com.pahimar.ee3.lib.ConfigurationSettings;
+import com.pahimar.ee3.lib.CustomItemRarity;
+import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.Sounds;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * ItemPhilosopherStone
@@ -82,6 +78,19 @@ public class ItemPhilosopherStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
+        transmuteBlocks(itemStack, entityPlayer, world, x, y, z, sideHit);
+        return true;
+    }
+
+    @Override
+    public void openPortableCrafting(EntityPlayer thePlayer) {
+
+        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
+    }
+
+    @Override
+    public void transmuteBlocks(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
+
         if (!world.isRemote) {
             if (TransmutationHelper.targetBlockStack != null) {
                 int pnX = 1;
@@ -93,32 +102,32 @@ public class ItemPhilosopherStone extends ItemEE
                         pnZ = 1 + getCharge(itemStack) * 2;
                         break;
                     }
-                    case DOWN:{
+                    case DOWN: {
                         pnX = 1 + getCharge(itemStack) * 2;
                         pnZ = 1 + getCharge(itemStack) * 2;
                         break;
                     }
-                    case NORTH:{
-                        pnX = 1;
-                        pnY = 1;
-                        break;
-                    }
-                    case SOUTH:{
+                    case NORTH: {
                         pnX = 1 + getCharge(itemStack) * 2;
                         pnY = 1 + getCharge(itemStack) * 2;
                         break;
                     }
-                    case EAST:{
+                    case SOUTH: {
+                        pnX = 1 + getCharge(itemStack) * 2;
+                        pnY = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case EAST: {
                         pnY = 1 + getCharge(itemStack) * 2;
                         pnZ = 1 + getCharge(itemStack) * 2;
                         break;
                     }
-                    case WEST:{
+                    case WEST: {
                         pnY = 1 + getCharge(itemStack) * 2;
                         pnZ = 1 + getCharge(itemStack) * 2;
                         break;
                     }
-                    case UNKNOWN:{
+                    case UNKNOWN: {
                         pnX = 0;
                         pnY = 0;
                         pnZ = 0;
@@ -127,18 +136,10 @@ public class ItemPhilosopherStone extends ItemEE
                     default:
                         break;
                 }
-                    
-                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)pnX, (byte)pnY, (byte)pnZ, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
+
+                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte) sideHit, (byte) pnX, (byte) pnY, (byte) pnZ, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
             }
         }
-        
-        return true;
-    }
-
-    @Override
-    public void openPortableCrafting(EntityPlayer thePlayer) {
-
-        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
     @Override

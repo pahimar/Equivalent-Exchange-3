@@ -3,7 +3,6 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 
-
 /**
  * ItemMiniumShard
  * 
@@ -16,6 +15,7 @@ import com.pahimar.ee3.lib.Strings;
 public class ItemMiniumShard extends ItemEE {
 
     public ItemMiniumShard(int id) {
+
         super(id);
         this.setIconCoord(0, 0);
         this.setItemName(Strings.MINIUM_SHARD_NAME);

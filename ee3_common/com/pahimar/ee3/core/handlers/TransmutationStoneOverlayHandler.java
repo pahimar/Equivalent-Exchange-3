@@ -24,7 +24,7 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class TransmutationStoneOverlayHandler implements ITickHandler {
-    
+
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
 
@@ -85,18 +85,18 @@ public class TransmutationStoneOverlayHandler implements ITickHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glEnable(GL11.GL_LIGHTING);
-        
+
         int hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
         int hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
         int hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
         int hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
-        
+
         RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
-        
+
         if ((TransmutationHelper.targetBlockStack != null) && (TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock)) {
             RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
         }
-        
+
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

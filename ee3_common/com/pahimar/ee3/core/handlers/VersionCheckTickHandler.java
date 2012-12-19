@@ -3,15 +3,12 @@ package com.pahimar.ee3.core.handlers;
 import java.util.EnumSet;
 
 import com.pahimar.ee3.core.helper.VersionHelper;
-import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * VersionCheckTickHandler

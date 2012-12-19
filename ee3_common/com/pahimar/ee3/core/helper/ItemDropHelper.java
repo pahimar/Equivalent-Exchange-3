@@ -1,9 +1,9 @@
 package com.pahimar.ee3.core.helper;
 
-import com.pahimar.ee3.item.ModItems;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+
+import com.pahimar.ee3.item.ModItems;
 
 /**
  * ItemDropHelper
@@ -15,17 +15,18 @@ import net.minecraft.entity.player.EntityPlayer;
  * 
  */
 public class ItemDropHelper {
-	
-	private static double rand;
-	
-	public static void dropMiniumShard(EntityPlayer player, EntityLiving entity) {
-		if (GeneralHelper.isHostileEntity(entity)) {
-			rand = Math.random();
-			
-			if (rand < 0.15d) {
-				entity.dropItem(ModItems.miniumShard.shiftedIndex, 1);
-			}
-		}
-	}
+
+    private static double rand;
+
+    public static void dropMiniumShard(EntityPlayer player, EntityLiving entity) {
+
+        if (GeneralHelper.isHostileEntity(entity)) {
+            rand = Math.random();
+
+            if (rand < 0.15d) {
+                entity.dropItem(ModItems.miniumShard.shiftedIndex, 1);
+            }
+        }
+    }
 
 }

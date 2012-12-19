@@ -1,25 +1,17 @@
 package com.pahimar.ee3.core.handlers;
 
 import java.util.EnumSet;
-import java.util.logging.Level;
-
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.KeyBindingHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
-import com.pahimar.ee3.item.IKeyBound;
-import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.lib.ConfigurationSettings;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketEE;
-import com.pahimar.ee3.network.packet.PacketKeyPressed;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.pahimar.ee3.core.helper.KeyBindingHelper;
+import com.pahimar.ee3.item.IKeyBound;
+import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketKeyPressed;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;

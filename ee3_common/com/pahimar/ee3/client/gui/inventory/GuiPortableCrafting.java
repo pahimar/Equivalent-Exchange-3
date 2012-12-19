@@ -9,9 +9,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 /**
  * GuiPortableCrafting
  * 
@@ -24,21 +21,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiPortableCrafting extends GuiContainer {
 
     public GuiPortableCrafting(EntityPlayer player, World world, int x, int y, int z) {
+
         super(new ContainerPortableCrafting(player.inventory, world, x, y, z));
     }
 
     /**
-     * Draw the foreground layer for the GuiContainer (everything in front of the items)
+     * Draw the foreground layer for the GuiContainer (everything in front of
+     * the items)
      */
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.crafting"), 28, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the items)
+     * Draw the background layer for the GuiContainer (everything behind the
+     * items)
      */
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+
         int var4 = this.mc.renderEngine.getTexture("/gui/crafting.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);

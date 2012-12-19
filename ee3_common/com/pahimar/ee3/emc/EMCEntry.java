@@ -15,82 +15,96 @@ import java.util.Map;
  */
 public class EMCEntry {
 
-	private float cost, recoveryPercentage;
-	private boolean learnable, recoverable;
-	private Map<EMCType, Float> breakdown;
+    private float cost, recoveryPercentage;
+    private boolean learnable, recoverable;
+    private Map<EMCType, Float> breakdown;
 
-	public EMCEntry(float cost) {
-		this.cost = cost;
-		recoveryPercentage = 1F;
-		learnable = true;
-		recoverable = true;
-		breakdown = Collections.synchronizedMap(new HashMap<EMCType, Float>());
-	}
+    public EMCEntry(float cost) {
 
-	public EMCEntry(float cost, float recoveryPercentage, boolean learnable, boolean recoverable) {
-		this.cost = cost;
-		this.recoveryPercentage = recoveryPercentage;
-		this.learnable = learnable;
-		this.recoverable = recoverable;
-		breakdown = Collections.synchronizedMap(new HashMap<EMCType, Float>());
-	}
+        this.cost = cost;
+        recoveryPercentage = 1F;
+        learnable = true;
+        recoverable = true;
+        breakdown = Collections.synchronizedMap(new HashMap<EMCType, Float>());
+    }
 
-	public float getCost() {
-		return cost;
-	}
+    public EMCEntry(float cost, float recoveryPercentage, boolean learnable, boolean recoverable) {
 
-	public float getRecoveryPercentage() {
-		return recoveryPercentage;
-	}
+        this.cost = cost;
+        this.recoveryPercentage = recoveryPercentage;
+        this.learnable = learnable;
+        this.recoverable = recoverable;
+        breakdown = Collections.synchronizedMap(new HashMap<EMCType, Float>());
+    }
 
-	public boolean isLearnable() {
-		return learnable;
-	}
+    public float getCost() {
 
-	public boolean isRecoverable() {
-		return recoverable;
-	}
+        return cost;
+    }
 
-	public Map<EMCType, Float> getEMCBreakDown() {
-		return breakdown;
-	}
+    public float getRecoveryPercentage() {
 
-	public float getEMCBreakdownByType(EMCType emcType) {
-		if (breakdown.containsKey(emcType)) {
-			if (breakdown.get(emcType) != null) {
-				return breakdown.get(emcType).floatValue();
-			}
-		}
+        return recoveryPercentage;
+    }
 
-		return -1F;
-	}
+    public boolean isLearnable() {
 
-	public void setCost(float cost) {
-		this.cost = cost;
-	}
+        return learnable;
+    }
 
-	public void setRecoveryPercentage(float recoveryPercentage) {
-		this.recoveryPercentage = recoveryPercentage;
-	}
+    public boolean isRecoverable() {
 
-	public void setLearnable(boolean learnable) {
-		this.learnable = learnable;
-	}
+        return recoverable;
+    }
 
-	public void setRecoverable(boolean recoverable) {
-		this.recoverable = recoverable;
-	}
+    public Map<EMCType, Float> getEMCBreakDown() {
 
-	public void addEMCBreakDown(EMCType emcType, Float breakdownPercentage) {
-		if (!(breakdown.containsKey(emcType))) {
-			breakdown.put(emcType, breakdownPercentage);
-		}
-	}
+        return breakdown;
+    }
 
-	public void setEMCBreakDown(EMCType emcType, Float breakdownPercentage) {
-		if (breakdown.containsKey(emcType)) {
-			breakdown.put(emcType, breakdownPercentage);
-		}
-	}
+    public float getEMCBreakdownByType(EMCType emcType) {
+
+        if (breakdown.containsKey(emcType)) {
+            if (breakdown.get(emcType) != null) {
+                return breakdown.get(emcType).floatValue();
+            }
+        }
+
+        return -1F;
+    }
+
+    public void setCost(float cost) {
+
+        this.cost = cost;
+    }
+
+    public void setRecoveryPercentage(float recoveryPercentage) {
+
+        this.recoveryPercentage = recoveryPercentage;
+    }
+
+    public void setLearnable(boolean learnable) {
+
+        this.learnable = learnable;
+    }
+
+    public void setRecoverable(boolean recoverable) {
+
+        this.recoverable = recoverable;
+    }
+
+    public void addEMCBreakDown(EMCType emcType, Float breakdownPercentage) {
+
+        if (!(breakdown.containsKey(emcType))) {
+            breakdown.put(emcType, breakdownPercentage);
+        }
+    }
+
+    public void setEMCBreakDown(EMCType emcType, Float breakdownPercentage) {
+
+        if (breakdown.containsKey(emcType)) {
+            breakdown.put(emcType, breakdownPercentage);
+        }
+    }
 
 }

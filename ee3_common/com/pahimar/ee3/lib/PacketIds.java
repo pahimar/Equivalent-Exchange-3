@@ -10,9 +10,9 @@ package com.pahimar.ee3.lib;
  * 
  */
 public class PacketIds {
-	
-	public static final int KEYBINDING_PRESSED = 0;
-	public static final int TILEENTITY_UPDATE = 1;
-	public static final int WORLD_TRANSMUTATION_EVENT = 2;
+
+    public static final int KEYBINDING_PRESSED = 0;
+    public static final int TILEENTITY_UPDATE = 1;
+    public static final int WORLD_TRANSMUTATION_EVENT = 2;
 
 }

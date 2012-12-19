@@ -14,10 +14,11 @@ import cpw.mods.fml.common.IFuelHandler;
  */
 public class FuelHandler implements IFuelHandler {
 
-	@Override
-	public int getBurnTime(ItemStack fuel) {
-		// TODO Add in fuel values for EE3 fuel related items
-		return 0;
-	}
+    @Override
+    public int getBurnTime(ItemStack fuel) {
+
+        // TODO Add in fuel values for EE3 fuel related items
+        return 0;
+    }
 
 }

@@ -2,17 +2,14 @@ package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 
-import com.pahimar.ee3.core.handlers.EquivalencyHandler;
-import com.pahimar.ee3.lib.Sounds;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
+
+import com.pahimar.ee3.core.handlers.EquivalencyHandler;
 
 /**
  * TransmutationHelper
@@ -28,19 +25,20 @@ public class TransmutationHelper {
     public static ItemStack previousBlockStack = null;
     public static ItemStack currentBlockStack = null;
     public static ItemStack targetBlockStack = null;
-    
+
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
         if (Block.blocksList[targetID] != null) {
             world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
-            //world.playSoundAtEntity(player, Sounds.TRANSMUTE, 0.5F, 1.0F);
+            world.spawnParticle("largesmoke", x, y + 1, z, 1.0D, 1.0D, 1.0D);
             return true;
         }
 
         return false;
     }
-    
+
     public static String formatTargetBlockInfo(ItemStack targetBlock) {
+
         if (targetBlock != null) {
             return TransmutationHelper.targetBlockStack.itemID + ":" + TransmutationHelper.targetBlockStack.getItemDamage();
         }
@@ -48,10 +46,11 @@ public class TransmutationHelper {
             return "";
         }
     }
-    
+
     public static void updateTargetBlock(World world, int x, int y, int z) {
+
         currentBlockStack = new ItemStack(world.getBlockId(x, y, z), 1, world.getBlockMetadata(x, y, z));
-        
+
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
             targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
@@ -63,8 +62,9 @@ public class TransmutationHelper {
             }
         }
     }
-    
+
     public static ItemStack getNextBlock(int id, int meta) {
+
         return getNextBlock(id, meta, true);
     }
 

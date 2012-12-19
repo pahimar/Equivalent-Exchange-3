@@ -2,17 +2,17 @@ package com.pahimar.ee3.item;
 
 import java.util.List;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.CustomItemRarity;
-import com.pahimar.ee3.lib.Strings;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.CustomItemRarity;
+import com.pahimar.ee3.lib.Strings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * ItemAlchemyDust

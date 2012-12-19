@@ -1,15 +1,12 @@
-package com.pahimar.ee3.core.handlers;
+package com.pahimar.ee3.client.audio;
 
-import java.io.File;
 import java.util.logging.Level;
 
-import com.pahimar.ee3.core.helper.LogHelper;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Sounds;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
+
+import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.lib.Sounds;
 
 /**
  * SoundHandler
