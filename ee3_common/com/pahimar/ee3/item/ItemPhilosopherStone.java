@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * ItemPhilosopherStone
@@ -83,7 +84,51 @@ public class ItemPhilosopherStone extends ItemEE
 
         if (!world.isRemote) {
             if (TransmutationHelper.targetBlockStack != null) {
-                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)getCharge(itemStack), (byte)getCharge(itemStack), (byte)getCharge(itemStack), TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
+                int pnX = 1;
+                int pnY = 1;
+                int pnZ = 1;
+                switch (ForgeDirection.getOrientation(sideHit)) {
+                    case UP: {
+                        pnX = 1 + getCharge(itemStack) * 2;
+                        pnZ = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case DOWN:{
+                        pnX = 1 + getCharge(itemStack) * 2;
+                        pnZ = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case NORTH:{
+                        pnX = 1;
+                        pnY = 1;
+                        break;
+                    }
+                    case SOUTH:{
+                        pnX = 1 + getCharge(itemStack) * 2;
+                        pnY = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case EAST:{
+                        pnY = 1 + getCharge(itemStack) * 2;
+                        pnZ = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case WEST:{
+                        pnY = 1 + getCharge(itemStack) * 2;
+                        pnZ = 1 + getCharge(itemStack) * 2;
+                        break;
+                    }
+                    case UNKNOWN:{
+                        pnX = 0;
+                        pnY = 0;
+                        pnZ = 0;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                    
+                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte)sideHit, (byte)pnX, (byte)pnY, (byte)pnZ, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
             }
         }
         

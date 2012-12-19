@@ -29,23 +29,12 @@ public class TransmutationHelper {
     public static ItemStack currentBlockStack = null;
     public static ItemStack targetBlockStack = null;
     
-    public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z) {
+    public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
-        int id = world.getBlockId(x, y, z);
-        int meta = world.getBlockMetadata(x, y, z);
-
-        if ((world.getBlockMaterial(x, y, z) == Material.leaves) && (Block.blocksList[id] instanceof BlockLeaves)) {
-            meta = meta % 4;
-        }
-
-        ItemStack nextItem = getNextBlock(id, meta, player.isSneaking());
-
-        if (nextItem != null) {
-            if (Block.blocksList[nextItem.itemID] != null) {
-                world.setBlockAndMetadataWithNotify(x, y, z, nextItem.itemID, nextItem.getItemDamage());
-                world.playSoundAtEntity(player, Sounds.TRANSMUTE, 0.5F, 1.0F);
-                return true;
-            }
+        if (Block.blocksList[targetID] != null) {
+            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
+            //world.playSoundAtEntity(player, Sounds.TRANSMUTE, 0.5F, 1.0F);
+            return true;
         }
 
         return false;

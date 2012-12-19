@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionRequestEvent;
+import com.pahimar.ee3.event.WorldTransmutationEvent;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
@@ -54,8 +55,9 @@ public class PacketRequestEvent extends PacketEE {
         this.originY = originY;
         this.originZ = originZ;
     }
-    
+
     public void setSideHit(byte sideHit) {
+
         this.sideHit = sideHit;
     }
 
@@ -101,17 +103,33 @@ public class PacketRequestEvent extends PacketEE {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
         ActionRequestEvent actionRequestEvent = null;
-        ActionEvent actionEvent = new ActionEvent(ActionTypes.TRANSMUTATION, thePlayer, thePlayer.worldObj, originX, originY, originZ, false, data);
-        
-        if (actionEvent != null) {
-            actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX, originY, originZ, (int) sideHit);
-            MinecraftForge.EVENT_BUS.post(actionRequestEvent);
-            
-            if (actionRequestEvent.allowEvent != Result.DENY) {
-                MinecraftForge.EVENT_BUS.post(actionEvent);
+        ActionEvent actionEvent = null;
+
+        int lowerBoundX = -1 * rangeX / 2;
+        int upperBoundX = -1 * lowerBoundX;
+        int lowerBoundY = -1 * rangeY / 2;
+        int upperBoundY = -1 * lowerBoundY;
+        int lowerBoundZ = -1 * rangeZ / 2;
+        int upperBoundZ = -1 * lowerBoundZ;
+
+        for (int x = lowerBoundX; x <= upperBoundX; x++) {
+            for (int y = lowerBoundY; y <= upperBoundY; y++) {
+                for (int z = lowerBoundZ; z <= upperBoundZ; z++) {
+
+                    actionEvent = new WorldTransmutationEvent(ActionTypes.TRANSMUTATION, thePlayer, thePlayer.worldObj, originX + x, originY + y, originZ + z, false, data);
+
+                    if (actionEvent != null) {
+                        actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX + x, originY + y, originZ + z, (int) sideHit);
+                        MinecraftForge.EVENT_BUS.post(actionRequestEvent);
+
+                        if (actionRequestEvent.allowEvent != Result.DENY) {
+                            MinecraftForge.EVENT_BUS.post(actionEvent);
+                        }
+                    }
+
+                }
             }
         }
-        
     }
 
 }
