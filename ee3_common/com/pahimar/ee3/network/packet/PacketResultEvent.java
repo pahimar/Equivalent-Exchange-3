@@ -4,7 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
 import com.pahimar.ee3.core.helper.TransmutationHelper;
@@ -30,7 +29,7 @@ public class PacketResultEvent extends PacketEE {
     }
 
     public void writeData(DataOutputStream data) throws IOException {
-        
+
         data.writeBoolean(shouldChangeNextBlock);
         data.writeBoolean(shouldDestroyCurrentlyHeldItem);
     }
@@ -42,6 +41,7 @@ public class PacketResultEvent extends PacketEE {
     }
 
     public void execute(INetworkManager manager, Player player) {
+
         System.out.println(shouldChangeNextBlock);
         if (shouldChangeNextBlock) {
             System.out.format("previous %d:%d, current %d:%d, target %d:%d\n", TransmutationHelper.previousBlockStack.itemID, TransmutationHelper.previousBlockStack.getItemDamage(), TransmutationHelper.currentBlockStack.itemID, TransmutationHelper.currentBlockStack.getItemDamage(), TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());

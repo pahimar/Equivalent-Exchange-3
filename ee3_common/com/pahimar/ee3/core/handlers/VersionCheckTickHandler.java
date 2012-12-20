@@ -2,8 +2,8 @@ package com.pahimar.ee3.core.handlers;
 
 import java.util.EnumSet;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.VersionHelper;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.client.FMLClientHandler;

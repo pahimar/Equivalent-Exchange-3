@@ -7,10 +7,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.ActionTypes;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Sounds;

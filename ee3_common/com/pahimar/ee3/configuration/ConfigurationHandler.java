@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handlers;
+package com.pahimar.ee3.configuration;
 
 import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
 
@@ -9,7 +9,6 @@ import net.minecraftforge.common.Configuration;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.BlockIds;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
@@ -27,27 +26,29 @@ import cpw.mods.fml.common.FMLLog;
  */
 public class ConfigurationHandler {
 
-    private static final String CATEGORY_KEYBIND = "keybindings";
-    private static final String CATEGORY_GRAPHICS = "graphics";
-    private static final String CATEGORY_TRANSMUTATION = "transmutation";
-    private static final String CATEGORY_BLOCK_PROPERTIES = Configuration.CATEGORY_BLOCK + Configuration.CATEGORY_SPLITTER + "properties";
-    private static final String CATEGORY_RED_WATER_PROPERTIES = CATEGORY_BLOCK_PROPERTIES + Configuration.CATEGORY_SPLITTER + "red_water";
-    private static final String CATEGORY_DURABILITY = Configuration.CATEGORY_ITEM + Configuration.CATEGORY_SPLITTER + "durability";
+    public static Configuration configuration;
+    
+    public static final String CATEGORY_KEYBIND = "keybindings";
+    public static final String CATEGORY_GRAPHICS = "graphics";
+    public static final String CATEGORY_TRANSMUTATION = "transmutation";
+    public static final String CATEGORY_BLOCK_PROPERTIES = Configuration.CATEGORY_BLOCK + Configuration.CATEGORY_SPLITTER + "properties";
+    public static final String CATEGORY_RED_WATER_PROPERTIES = CATEGORY_BLOCK_PROPERTIES + Configuration.CATEGORY_SPLITTER + "red_water";
+    public static final String CATEGORY_DURABILITY = Configuration.CATEGORY_ITEM + Configuration.CATEGORY_SPLITTER + "durability";
 
     public static void init(File configFile) {
 
-        Configuration configuration = new Configuration(configFile);
+        configuration = new Configuration(configFile);
 
         try {
             configuration.load();
 
             /* General configs */
             ConfigurationSettings.ENABLE_VERSION_CHECK = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_VERSION_CHECK_CONFIGNAME, ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT);
-            ConfigurationSettings.ENABLE_SOUNDS = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_SOUNDS_DEFAULT);
 
             /* Graphic configs */
             ConfigurationSettings.ENABLE_PARTICLE_FX = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
             ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT);
+            ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT).getInt(ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT);
 
             /* Block configs */
             BlockIds.CALCINATOR = configuration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
@@ -93,5 +94,16 @@ public class ConfigurationHandler {
         finally {
             configuration.save();
         }
+    }
+    
+    public static void set(String categoryName, String propertyName, String newValue) {
+        
+        configuration.load();
+        if (configuration.categories.containsKey(categoryName)) {
+            if (configuration.categories.get(categoryName).containsKey(propertyName)) {
+                configuration.categories.get(categoryName).get(propertyName).value = newValue;
+            }
+        }
+        configuration.save();
     }
 }

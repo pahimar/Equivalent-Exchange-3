@@ -33,7 +33,6 @@ public class SoundHandler {
                 LogHelper.log(Level.WARNING, "Failed loading sound file: " + soundFile);
             }
         }
-
     }
 
 }

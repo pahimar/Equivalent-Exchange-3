@@ -6,8 +6,8 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 

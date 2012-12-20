@@ -16,11 +16,9 @@ import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.Particles;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketResultEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class WorldTransmutationHandler {
 
@@ -99,11 +97,7 @@ public class WorldTransmutationHandler {
                                 hasSoundPlayed = true;
                                 thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.TRANSMUTE, 0.5F, 1.0F);
                             }
-                            
-                            if ((x == 0) && (y == 0) && (z == 0)) {
-                                PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketResultEvent(true, false)), (Player)thePlayer);
-                            }
-                            
+
                             PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
                             PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.15D * ySign, 0D * zSign)));
                         }
