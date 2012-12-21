@@ -61,11 +61,11 @@ public class TransmutationHelper {
         else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
             meta = 0;
         }
-        
+
         currentBlockStack = new ItemStack(id, 1, meta);
-        
+
         System.out.format("%d %d\n", id, meta);
-        
+
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
             targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
@@ -80,23 +80,18 @@ public class TransmutationHelper {
 
     public static ItemStack getNextBlock(int id, int meta) {
 
-        return getNextBlock(id, meta, true);
-    }
-
-    public static ItemStack getNextBlock(int id, int meta, boolean allowFalling) {
-
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
 
         ItemStack nextStack = null;
 
         if (list != null) {
-            return getNextBlock(id, meta, id, meta, allowFalling);
+            return getNextBlock(id, meta, id, meta);
         }
 
         return nextStack;
     }
 
-    private static ItemStack getNextBlock(int id, int meta, int origId, int origMeta, boolean allowFalling) {
+    private static ItemStack getNextBlock(int id, int meta, int origId, int origMeta) {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
 
@@ -104,7 +99,8 @@ public class TransmutationHelper {
 
         if (list != null) {
             nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
-
+            nextStack.stackSize = 1;
+            
             /*
              * If the current item is the same as the original one we started
              * with, then we have recursed through the entire list and not found
@@ -115,33 +111,11 @@ public class TransmutationHelper {
                 return nextStack;
             }
             else {
-                /*
-                 * If we are allowing any block (including falling ones) just
-                 * check to see if the next item is a block. If it is, return
-                 * it. Otherwise continue the recursion.
-                 */
-                if (allowFalling) {
-                    if (nextStack.getItem() instanceof ItemBlock) {
-                        return nextStack;
-                    }
-                    else {
-                        return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
-                    }
+                if (nextStack.getItem() instanceof ItemBlock) {
+                    return nextStack;
                 }
-                /*
-                 * Else we need to check to make sure the next item is both a
-                 * block and not an instance of BlockSand (which all gravity
-                 * affected blocks are a subclass of. If the next item is a
-                 * block, and is not a subclass of BlockSand return it,
-                 * otherwise, continue the recursion.
-                 */
                 else {
-                    if ((nextStack.getItem() instanceof ItemBlock) && (!(Block.blocksList[nextStack.itemID] instanceof BlockSand))) {
-                        return nextStack;
-                    }
-                    else {
-                        return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
-                    }
+                    return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta);
                 }
             }
         }

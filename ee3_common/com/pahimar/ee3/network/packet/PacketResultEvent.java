@@ -45,7 +45,7 @@ public class PacketResultEvent extends PacketEE {
         System.out.println(shouldChangeNextBlock);
         if (shouldChangeNextBlock) {
             System.out.format("previous %d:%d, current %d:%d, target %d:%d\n", TransmutationHelper.previousBlockStack.itemID, TransmutationHelper.previousBlockStack.getItemDamage(), TransmutationHelper.currentBlockStack.itemID, TransmutationHelper.currentBlockStack.getItemDamage(), TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
-            TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage(), true);
+            TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
             System.out.format("previous %d:%d, current %d:%d, target %d:%d\n", TransmutationHelper.previousBlockStack.itemID, TransmutationHelper.previousBlockStack.getItemDamage(), TransmutationHelper.currentBlockStack.itemID, TransmutationHelper.currentBlockStack.getItemDamage(), TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
         }
     }
