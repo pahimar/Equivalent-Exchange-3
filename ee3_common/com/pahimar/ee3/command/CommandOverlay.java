@@ -25,7 +25,51 @@ public class CommandOverlay {
                 ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, "false");
                 commandSender.sendChatToPlayer("commands.ee3.overlay.turned_off");
             }
-            else if (subCommand.toLowerCase().equals("move")) {
+            else if (subCommand.toLowerCase().equals("opacity")) {
+                if (args.length >= 2) {
+                    try {
+                        float opacity = Float.parseFloat(args[1]);
+                        
+                        if ((opacity < 0F) || (opacity > 1F)) {
+                            throw new WrongUsageException("commands.ee3.overlay.opacity.usage", new Object[0]);
+                        }
+                        else {
+                            ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = opacity;
+                            ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, args[1]);
+                            commandSender.sendChatToPlayer("commands.ee3.overlay.opacity.updated");
+                        }
+                    }
+                    catch (Exception e) {
+                        throw new WrongUsageException("commands.ee3.overlay.opacity.usage", new Object[0]);
+                    }
+                }
+                else {
+                    throw new WrongUsageException("commands.ee3.overlay.opacity.usage", new Object[0]);
+                }
+            }
+            else if (subCommand.toLowerCase().equals("scale")) {
+                if (args.length >= 2) {
+                    try {
+                        float scale = Float.parseFloat(args[1]);
+                        
+                        if (scale <= 0F) {
+                            throw new WrongUsageException("commands.ee3.overlay.scale.usage", new Object[0]);
+                        }
+                        else {
+                            ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = scale;
+                            ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, args[1]);
+                            commandSender.sendChatToPlayer("commands.ee3.overlay.scale.updated");
+                        }
+                    }
+                    catch (Exception e) {
+                        throw new WrongUsageException("commands.ee3.overlay.opacity.usage", new Object[0]);
+                    }
+                }
+                else {
+                    throw new WrongUsageException("commands.ee3.overlay.opacity.usage", new Object[0]);
+                }
+            }
+            else if (subCommand.toLowerCase().equals("position")) {
 
                 String xPosition, yPosition;
 

@@ -37,6 +37,14 @@ public class ConfigurationSettings {
     public static int TARGET_BLOCK_OVERLAY_POSITION;
     public static final String TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME = "block_overlay_position";
     public static final int TARGET_BLOCK_OVERLAY_POSITION_DEFAULT = 3;
+    
+    public static float TARGET_BLOCK_OVERLAY_OPACITY;
+    public static final String TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME = "block_overlay_opacity";
+    public static final float TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT = 0.75F;
+    
+    public static float TARGET_BLOCK_OVERLAY_SCALE;
+    public static final String TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME = "block_overlay_scale";
+    public static final float TARGET_BLOCK_OVERLAY_SCALE_DEFAULT = 2.5F;
 
     /*
      * Block related config settings

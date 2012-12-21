@@ -62,9 +62,9 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
 
-        float overlayScale = 2.5F;
+        float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
-        float overlayOpacity = 0.75F;
+        float overlayOpacity = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY;
 
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
