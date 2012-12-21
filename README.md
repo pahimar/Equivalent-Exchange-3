@@ -3,9 +3,9 @@ Setup MCP was done mostly by the people who update How to Compile for Beginners 
 
 The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
 
-Want to get the latest unreleased version of EE3? [Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)
+[Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)
 
-Want to help? [Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing)
+[Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing)
 
 ### Compiling Equivalent Exchange 3
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (Linux and Windows tested).
