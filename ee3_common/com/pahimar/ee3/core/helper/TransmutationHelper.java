@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -49,8 +51,21 @@ public class TransmutationHelper {
 
     public static void updateTargetBlock(World world, int x, int y, int z) {
 
-        currentBlockStack = new ItemStack(world.getBlockId(x, y, z), 1, world.getBlockMetadata(x, y, z));
+        int id = world.getBlockId(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        Material material = world.getBlockMaterial(x, y, z);
 
+        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
+            meta = meta & 4;
+        }
+        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
+            meta = 0;
+        }
+        
+        currentBlockStack = new ItemStack(id, 1, meta);
+        
+        System.out.format("%d %d\n", id, meta);
+        
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
             targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());

@@ -1,5 +1,7 @@
 package com.pahimar.ee3.core.handlers;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
@@ -112,7 +114,15 @@ public class WorldTransmutationHandler {
 
         int id = event.world.getBlockId(event.x, event.y, event.z);
         int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+        Material material = event.world.getBlockMaterial(event.x, event.y, event.z);
         boolean result = false;
+        
+        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
+            meta = meta & 4;
+        }
+        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
+            meta = 0;
+        }
 
         ItemStack worldStack = new ItemStack(id, 1, meta);
         ItemStack targetStack = new ItemStack(event.targetID, 1, event.targetMeta);
