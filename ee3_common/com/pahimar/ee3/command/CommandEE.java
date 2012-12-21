@@ -6,9 +6,6 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 
-import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-
 public class CommandEE extends CommandBase {
 
     public String getCommandName() {
@@ -30,10 +27,8 @@ public class CommandEE extends CommandBase {
 
     public void processCommand(ICommandSender commandSender, String[] args) {
 
-        String commandName;
-
         if (args.length > 0) {
-            commandName = args[0];
+            String commandName = args[0];
             System.arraycopy(args, 1, args, 0, args.length - 1);
 
             if (commandName.toLowerCase().equals("overlay")) {
@@ -47,6 +42,4 @@ public class CommandEE extends CommandBase {
             throw new WrongUsageException("commands.ee3.usage", new Object[0]);
         }
     }
-
-    
 }

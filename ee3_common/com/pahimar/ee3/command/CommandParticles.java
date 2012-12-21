@@ -16,14 +16,10 @@ public class CommandParticles {
             subCommand = args[0];
 
             if (subCommand.toLowerCase().equals("on")) {
-                ConfigurationSettings.ENABLE_PARTICLE_FX = true;
-                ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "true");
-                commandSender.sendChatToPlayer("commands.ee3.particles.turned_on");
+                processOnCommand(commandSender);
             }
             else if (subCommand.toLowerCase().equals("off")) {
-                ConfigurationSettings.ENABLE_PARTICLE_FX = false;
-                ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "false");
-                commandSender.sendChatToPlayer("commands.ee3.particles.turned_off");
+                processOffCommand(commandSender);
             }
             else {
                 throw new WrongUsageException("commands.ee3.particles.usage", new Object[0]);
@@ -32,5 +28,19 @@ public class CommandParticles {
         else {
             throw new WrongUsageException("commands.ee3.particles.usage", new Object[0]);
         }
+    }
+
+    private static void processOnCommand(ICommandSender commandSender) {
+
+        ConfigurationSettings.ENABLE_PARTICLE_FX = true;
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "true");
+        commandSender.sendChatToPlayer("commands.ee3.particles.turned_on");
+    }
+
+    private static void processOffCommand(ICommandSender commandSender) {
+
+        ConfigurationSettings.ENABLE_PARTICLE_FX = false;
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "false");
+        commandSender.sendChatToPlayer("commands.ee3.particles.turned_off");
     }
 }
