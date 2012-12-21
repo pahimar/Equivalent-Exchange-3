@@ -38,7 +38,7 @@ ________________________________________________________________________________
 
 2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
 	* To verify, check if a file named `CHANGELOG` exists inside `mcp`.
-3. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp`.  You need at least Forge 6.4.0, best way is to get it from [here] (http://files.minecraftforge.net/).
+3. Download the latest forge **source** for Minecraft 1.4.5 and unzip it into `mcp`.  You need at least Forge 6.5.0, best way is to get it from [here] (http://files.minecraftforge.net/).
 	* To verify, check if a application named `install.sh` exists. 
 4. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\mcp\forge`. On Linux you might have to `chmod +x` `install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the `forge` directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
 
