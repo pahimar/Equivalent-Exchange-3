@@ -3,11 +3,8 @@ package com.pahimar.ee3.core.helper;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -53,13 +50,14 @@ public class TransmutationHelper {
 
         int id = world.getBlockId(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
-        Material material = world.getBlockMaterial(x, y, z);
-
-        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
-            meta = meta & 4;
-        }
-        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
-            meta = 0;
+        
+        /**
+         * @author Eurymachus
+         * Here we get the correct Damage Dropped for the block instance
+         */
+        Block currentBlock = Block.blocksList[id];
+        if (currentBlock != null) {
+            meta = currentBlock.damageDropped(meta);
         }
 
         currentBlockStack = new ItemStack(id, 1, meta);
