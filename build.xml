@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="Equivalent Exchange 3">
+<project default="release" name="Equivalent Exchange 3">
 	
 	<property file="build.properties" />
 	
