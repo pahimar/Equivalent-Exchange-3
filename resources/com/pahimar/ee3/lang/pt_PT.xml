@@ -32,8 +32,8 @@
 	<entry key="item.alchemyBag.green.name">Saco Alquímico Verde</entry>
 	<entry key="item.alchemyBag.red.name">Saco Alquímico Vermelho</entry>
 	<entry key="item.alchemyBag.black.name">Saco Alquímico Preto</entry>
-	<entry key="tile.redWaterStill.name">Água Vermelha Estagnada</entry>
-	<entry key="tile.redWaterFlowing.name">Água Vermelha a fluir</entry>
+	<entry key="tile.redWaterStill.name">Água Vermelha (Estagnada)</entry>
+	<entry key="tile.redWaterFlowing.name">Água Vermelha (a Fluir)</entry>
 	<entry key="tile.calcinator.name">Calcinatório</entry>
 	<entry key="gui.calcinator.name">Calcinatório</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
