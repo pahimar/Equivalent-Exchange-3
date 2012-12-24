@@ -3,9 +3,9 @@ package com.pahimar.ee3.core.helper;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -20,10 +20,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RecipeHelper {
 
     public static void addRecipe(ItemStack output, Object... input) {
+
         GameRegistry.addShapelessRecipe(output, input);
     }
 
     public static void addRecipe(ItemStack output, ItemStack transmutationStone, Object... input) {
+
         Object[] inputs = new Object[input.length + 1];
         System.arraycopy(input, 0, inputs, 0, input.length);
         inputs[input.length] = transmutationStone;
@@ -32,22 +34,27 @@ public class RecipeHelper {
     }
 
     public static void addRecipe(Block output, Object... input) {
+
         addRecipe(new ItemStack(output), input);
     }
 
     public static void addRecipe(Block output, int count, Object... input) {
+
         addRecipe(new ItemStack(output, count), input);
     }
 
     public static void addRecipe(Item output, Object... input) {
+
         addRecipe(new ItemStack(output), input);
     }
 
     public static void addRecipe(Item output, int count, Object... input) {
+
         addRecipe(new ItemStack(output, count), input);
     }
 
     public static Object[] getMetaCycle(Object input, int n) {
+
         ArrayList<ItemStack> list = new ArrayList<ItemStack>();
 
         ItemStack stack;
@@ -62,6 +69,7 @@ public class RecipeHelper {
     }
 
     public static Object[] getMetaCycle(Object input, int n, int... excludedMeta) {
+
         ArrayList<ItemStack> list = new ArrayList<ItemStack>();
 
         ItemStack stack;
@@ -89,6 +97,7 @@ public class RecipeHelper {
      * EXCLUDING zero
      */
     protected static void addMetaCycleRecipe(Object input, ItemStack stone, int n) {
+
         int outputI;
 
         /*
@@ -108,6 +117,7 @@ public class RecipeHelper {
     }
 
     protected static void addMetaCycleRecipe(Object input, ItemStack stone, int n, int... excludedMeta) {
+
         int i = 0;
         int outputI = 1;
         while (i < n && outputI != 0) {
@@ -130,6 +140,7 @@ public class RecipeHelper {
     }
 
     public static void addSmeltingRecipe(ItemStack input, ItemStack stone, ItemStack fuel) {
+
         ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(input);
 
         if (result == null)
@@ -144,11 +155,11 @@ public class RecipeHelper {
         }
 
         if (result.stackSize * 7 <= result.getItem().getItemStackLimit()) {
-        	GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize*7), result.getItemDamage()), list);
+            GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize * 7), result.getItemDamage()), list);
         }
         else {
-        	GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), result.getItem().getItemStackLimit(), result.getItemDamage()), list);
+            GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), result.getItem().getItemStackLimit(), result.getItemDamage()), list);
         }
     }
-    
+
 }

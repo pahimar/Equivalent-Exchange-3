@@ -2,30 +2,28 @@ package com.pahimar.ee3.core.handlers;
 
 import java.util.EnumSet;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.pahimar.ee3.core.helper.RenderUtils;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.core.helper.VersionHelper;
-import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.ConfigurationSettings;
-import com.pahimar.ee3.lib.Reference;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.RenderUtils;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.item.ITransmutationStone;
+import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-public class RenderTickHandler implements ITickHandler {
+public class TransmutationTargetOverlayHandler implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
@@ -64,16 +62,12 @@ public class RenderTickHandler implements ITickHandler {
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
 
-        float overlayScale = 2F;
+        float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
-        float overlayOpacity = 0.5F;
+        float overlayOpacity = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY;
 
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
-
-        if ((player.worldObj != null) && (rayTrace != null)) {
-            currentBlock = TransmutationHelper.getNextBlock(player.worldObj.getBlockId(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.worldObj.getBlockMetadata(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ), player.isSneaking());
-        }
 
         GL11.glPushMatrix();
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);
@@ -91,16 +85,52 @@ public class RenderTickHandler implements ITickHandler {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glEnable(GL11.GL_LIGHTING);
+
+        int hudOverlayX = 0;
+        int hudOverlayY = 0;
+        int hudBlockX = 0;
+        int hudBlockY = 0;
         
-        int hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
-        int hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
-        int hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
-        int hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
-        
-        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
-        if ((currentBlock != null) && (currentBlock.getItem() instanceof ItemBlock)) {
-            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, currentBlock, hudBlockX, hudBlockY, -90, blockScale);
+        switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION) {
+            case 0: {
+                hudOverlayX = (int) (overlayScale);
+                hudBlockX = (int) (overlayScale + 12);
+                hudOverlayY = (int) (overlayScale);
+                hudBlockY = (int) (overlayScale + 12);
+                break;
+            }
+            case 1: {
+                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
+                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+                hudOverlayY = (int) (overlayScale);
+                hudBlockY = (int) (overlayScale + 12);
+                break;
+            }
+            case 2: {
+                hudOverlayX = (int) (overlayScale);
+                hudBlockX = (int) (overlayScale + 12);
+                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
+                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                break;
+            }
+            case 3: {
+                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
+                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
+                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                break;
+            }
+            default: {
+                break;
+            }
         }
+
+        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
+
+        if ((TransmutationHelper.targetBlockStack != null) && (TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock)) {
+            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
+        }
+
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

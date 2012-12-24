@@ -17,7 +17,7 @@ public class Colours {
     /* Text colour related constants */
     public static final String TEXT_COLOUR_PREFIX_YELLOW = "\u00a7e";
     public static final String TEXT_COLOUR_PREFIX_WHITE = "\u00a7f";
-    
+
     /* Bag colour related constants */
     public static final String BAG_WHITE = "ffffff";
     public static final String BAG_ORANGE = "db7d3e";

@@ -2,16 +2,17 @@ package com.pahimar.ee3.item;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAlchemyBag extends ItemEE {
 

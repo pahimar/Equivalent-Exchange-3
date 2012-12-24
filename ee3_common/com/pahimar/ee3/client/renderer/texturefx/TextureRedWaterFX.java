@@ -1,12 +1,12 @@
 package com.pahimar.ee3.client.renderer.texturefx;
 
+import net.minecraft.client.renderer.RenderEngine;
+
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.lib.Sprites;
 
-import net.minecraft.client.renderer.RenderEngine;
-import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.FMLTextureFX;
 
 /**
@@ -27,12 +27,14 @@ public class TextureRedWaterFX extends FMLTextureFX {
     private int tickCounter = 0;
 
     public TextureRedWaterFX() {
+
         super(ModBlocks.redWaterStill.blockIndexInTexture);
         setup();
     }
 
     @Override
     public void setup() {
+
         super.setup();
         red = new float[tileSizeSquare];
         green = new float[tileSizeSquare];
@@ -43,10 +45,12 @@ public class TextureRedWaterFX extends FMLTextureFX {
 
     @Override
     public void bindImage(RenderEngine renderEngine) {
+
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET));
     }
 
     public void onTick() {
+
         ++this.tickCounter;
         int var1;
         int var2;
@@ -64,15 +68,13 @@ public class TextureRedWaterFX extends FMLTextureFX {
                     var3 += this.red[var5 + var6 * tileSizeBase];
                 }
 
-                this.green[var1 + var2 * tileSizeBase] = var3 / 3.3F
-                        + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
+                this.green[var1 + var2 * tileSizeBase] = var3 / 3.3F + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
             }
         }
 
         for (var1 = 0; var1 < tileSizeBase; ++var1) {
             for (var2 = 0; var2 < tileSizeBase; ++var2) {
-                this.blue[var1 + var2 * tileSizeBase] += this.alpha[var1 + var2
-                        * tileSizeBase] * 0.05F;
+                this.blue[var1 + var2 * tileSizeBase] += this.alpha[var1 + var2 * tileSizeBase] * 0.05F;
 
                 if (this.blue[var1 + var2 * tileSizeBase] < 0.0F) {
                     this.blue[var1 + var2 * tileSizeBase] = 0.0F;

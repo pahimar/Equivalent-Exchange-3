@@ -6,12 +6,11 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -119,7 +118,7 @@ public class VersionHelper {
                 returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
                 return returnString;
             }
-            else if (result == OUTDATED) {
+            else if ((result == OUTDATED) && (remoteVersion != null) && (remoteUpdateLocation != null)) {
                 String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
                 returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
                 returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);

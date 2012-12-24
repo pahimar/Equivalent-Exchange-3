@@ -1,24 +1,21 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.ConfigurationSettings;
-import com.pahimar.ee3.lib.CustomItemRarity;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketKeyPressed;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-import cpw.mods.fml.common.network.PacketDispatcher;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.lib.ActionTypes;
+import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.CustomItemRarity;
+import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * ItemMiniumStone
@@ -70,13 +67,8 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        boolean result = TransmutationHelper.transmuteInWorld(world, entityPlayer, itemStack, x, y, z);
-
-        if (result) {
-            itemStack.damageItem(1, entityPlayer);
-        }
-
-        return result;
+        transmuteBlocks(itemStack, entityPlayer, world, x, y, z, sideHit);
+        return true;
     }
 
     @SideOnly(Side.CLIENT)
@@ -92,10 +84,25 @@ public class ItemMiniumStone extends ItemEE
     }
 
     @Override
+    public void transmuteBlocks(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
+
+        if (!world.isRemote) {
+            if (TransmutationHelper.targetBlockStack != null) {
+                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte) sideHit, (byte) 0, (byte) 0, (byte) 0, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
+            }
+        }
+    }
+
+    @Override
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
             openPortableCrafting(thePlayer);
+        }
+        else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
+            if (TransmutationHelper.targetBlockStack != null) {
+                TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+            }
         }
 
     }

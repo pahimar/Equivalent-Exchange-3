@@ -4,18 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import com.pahimar.ee3.event.ActionRequestEvent;
-import com.pahimar.ee3.event.WorldTransmutationEvent;
-import com.pahimar.ee3.lib.RequestEvents;
-import com.pahimar.ee3.network.PacketTypeHandler;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+
+import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
+import com.pahimar.ee3.network.PacketTypeHandler;
+
 import cpw.mods.fml.common.network.Player;
 
 public class PacketRequestEvent extends PacketEE {
@@ -56,8 +50,9 @@ public class PacketRequestEvent extends PacketEE {
         this.originY = originY;
         this.originZ = originZ;
     }
-    
+
     public void setSideHit(byte sideHit) {
+
         this.sideHit = sideHit;
     }
 
@@ -102,24 +97,6 @@ public class PacketRequestEvent extends PacketEE {
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
-        ActionRequestEvent actionRequestEvent = null;
-        Event actionEvent = null;;
-        
-        // TODO Move this logic to a ActionEvent handler to post an appropriate event depending on the request received
-        
-        if (eventType == RequestEvents.TRANSMUTATION) {
-            actionEvent = new WorldTransmutationEvent(thePlayer, thePlayer.worldObj, originX, originY, originZ, data);
-        }
-        
-        if (actionEvent != null) {
-            actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX, originY, originZ, (int) sideHit);
-            MinecraftForge.EVENT_BUS.post(actionRequestEvent);
-            
-            if (actionRequestEvent.allowEvent != Result.DENY) {
-                MinecraftForge.EVENT_BUS.post(actionEvent);
-            }
-        }
-        
+        WorldTransmutationHandler.handleWorldTransmutation(thePlayer, originX, originY, originZ, rangeX, rangeY, rangeZ, sideHit, data);
     }
-
 }

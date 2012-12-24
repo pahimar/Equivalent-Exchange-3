@@ -20,18 +20,23 @@ import net.minecraft.item.ItemStack;
 public class GeneralHelper {
 
     public static ItemStack convertObjectToItemStack(Object obj) {
+
         if (obj instanceof Item) {
             return new ItemStack((Item) obj);
-        } else if (obj instanceof Block) {
+        }
+        else if (obj instanceof Block) {
             return new ItemStack((Block) obj);
-        } else if (obj instanceof ItemStack) {
+        }
+        else if (obj instanceof ItemStack) {
             return (ItemStack) obj;
-        } else {
+        }
+        else {
             return null;
         }
     }
 
     public static Object[] convertSingleStackToPluralStacks(ItemStack stack) {
+
         ArrayList<ItemStack> list = new ArrayList<ItemStack>();
         ItemStack currentStack;
 
@@ -42,8 +47,9 @@ public class GeneralHelper {
 
         return list.toArray();
     }
-    
+
     public static boolean isHostileEntity(EntityLiving entity) {
+
         if (entity instanceof EntityMob) {
             return true;
         }

@@ -1,13 +1,19 @@
 package com.pahimar.ee3.core.proxy;
 
+import static com.pahimar.ee3.lib.CustomItemRarity.*;
+import net.minecraft.item.EnumRarity;
+import net.minecraftforge.client.EnumHelperClient;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+
+import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
-import com.pahimar.ee3.core.handlers.RenderTickHandler;
-import com.pahimar.ee3.core.handlers.SoundHandler;
+import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
 import com.pahimar.ee3.core.helper.KeyBindingHelper;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.RenderIds;
@@ -16,19 +22,13 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
-import net.minecraft.item.EnumRarity;
-import net.minecraftforge.client.EnumHelperClient;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
-import static com.pahimar.ee3.lib.CustomItemRarity.*;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * ClientProxy
@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenderTickHandler() {
 
-        TickRegistry.registerTickHandler(new RenderTickHandler(), Side.CLIENT);
+        TickRegistry.registerTickHandler(new TransmutationTargetOverlayHandler(), Side.CLIENT);
     }
 
     @Override

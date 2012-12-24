@@ -11,8 +11,8 @@ package com.pahimar.ee3.lib;
  */
 public class Sounds {
 
-    private static final String SOUND_RESOURCE_LOCATION = "ee3/sound/";
-    private static final String SOUND_PREFIX = "ee3.sound.";
+    private static final String SOUND_RESOURCE_LOCATION = "com/pahimar/ee3/sound/";
+    private static final String SOUND_PREFIX = "com.pahimar.ee3.sound.";
 
     public static String[] soundFiles = {
             SOUND_RESOURCE_LOCATION + "chargeDown.ogg",
@@ -44,5 +44,7 @@ public class Sounds {
     public static final String WALL = SOUND_PREFIX + "wall";
     public static final String WATER_BALL = SOUND_PREFIX + "waterball";
     public static final String WIND = SOUND_PREFIX + "wind";
+    
+    public static final String CHARGE_FAIL = "mob.enderdragon.hit";
 
 }

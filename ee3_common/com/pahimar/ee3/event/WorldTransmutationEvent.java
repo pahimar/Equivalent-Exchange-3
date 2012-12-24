@@ -1,23 +1,19 @@
 package com.pahimar.ee3.event;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.Event;
 
-public class WorldTransmutationEvent extends Event {
-    
-    public final EntityPlayer player; 
-    public final World world;
-    public final int x, y, z;
-    public final String data;
+public class WorldTransmutationEvent extends ActionEvent {
 
-    public WorldTransmutationEvent(EntityPlayer player, World world, int x, int y, int z, String data) {
-        
-        this.player = player;
-        this.world = world;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.data = data;
+    public int targetID, targetMeta;
+
+    public WorldTransmutationEvent(byte actionType, ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, boolean hasActionOccured, String data) {
+
+        super(actionType, itemStack, player, world, x, y, z, hasActionOccured, data);
+        targetID = Integer.parseInt(data.substring(0, data.indexOf(":")));
+        targetMeta = Integer.parseInt(data.substring(data.indexOf(":") + 1));
+        actionResult = ActionResult.DEFAULT;
     }
+
 }
