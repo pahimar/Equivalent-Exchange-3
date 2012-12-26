@@ -87,7 +87,7 @@ ________________________________________________________________________________
 #### Submitting a PR
 So you found a bug in pahimar's code?  Think you can make it more efficient?  Want to help in general?  Great!
 
-0. IMPORTANT:  PAHIMAR DOES **NOT** WANT ANY `build.xml` CHANGES, UNLESS it fixes up something broken (See #90).
+0. IMPORTANT:  PAHIMAR DOES **NOT** WANT ANY `build.xml` CHANGES, UNLESS it fixes up something broken (See [Pull Request #90] (https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
 1. If you haven't already, create a Github account.
 2. Click `Fork` at the top-right of this page (below your username)
 3. Make the changes that you want to.
