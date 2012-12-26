@@ -3,9 +3,9 @@
 <properties version="1.0">
 	<comment>Latina (Italia) Lingua Scapi</comment>
 	<entry key="key.extra">Extra</entry>
-	<entry key="key.release">Libere</entry>
-	<entry key="key.toggle">Mutare</entry>
-	<entry key="key.charge">Tradere</entry>
+	<entry key="key.release">Libe</entry>
+	<entry key="key.toggle">Muta</entry>
+	<entry key="key.charge">Trade</entry>
 	<entry key="item.miniumShard.name">Pars Rufi Plumbi</entry>
 	<entry key="item.inertStone.name">Ignavus Lapidus</entry>
 	<entry key="item.miniumStone.name">Pars Rufi Lapidus</entry>
