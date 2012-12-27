@@ -17,7 +17,7 @@ public class AddonRedPower2 {
 
     public static void initWorld() {
 
-        if (Loader.isModLoaded("RedPowerWorld")) {
+        if (Loader.isModLoaded("RedPowerMechanical")) {
             try {
                 rp2Stone = (Block) Class.forName("RedPowerWorld").getField("blockStone").get(null);
 
