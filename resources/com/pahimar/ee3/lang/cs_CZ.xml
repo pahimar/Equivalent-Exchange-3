@@ -12,10 +12,6 @@
 	<entry key="tile.redWaterStill.name">Rudá voda (v klidu)</entry>
 	<entry key="tile.redWaterFlowing.name">Rudá voda (tekoucí)</entry>
 	<entry key="tile.calcinator.name">Kalcinátor</entry>
-	<entry key="version.uninitialized">Neinicializováno</entry>
-	<entry key="version.current">Proud</entry>
-	<entry key="version.outdated">Zastaralé</entry>
-	<entry key="version.connection_error">Chyba připojení</entry>
 	<entry key="gui.calcinator.name">Kalcinátor</entry>
 	<entry key="version.init_log_message">Provádím kontrolu verze, vzdálený soubor umístěn na </entry>
 	<entry key="version.uninitialized">Kontrola verze neproběhla úspěšně (nezdařila se inicializace)</entry>
