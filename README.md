@@ -1,7 +1,7 @@
 ## Welcome to Equivalent Exchange 3!
 Setup MCP was done mostly by the people who update How to Compile for Beginners on the wiki, I just updated/changed it a bit.  Some credit goes to BuildCraft's README.md, which I based this README off of.
 
-The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
+[Minecraft Forums page] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
 [Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)
 
@@ -37,6 +37,7 @@ ________________________________________________________________________________
 
 
 #### Setup MCP (Tested on Linux and Windows)
+0. Forge now installs MCP automatically for you, if you want to let Forge do it for you, skip steps 1 and 2, and instead unzip Forge to `mcdev`.  The MCP directory will be `mcdev\forge\mcp`.
 1. Download the latest version of MCP from [here] (http://mcp.ocean-labs.de/index.php/MCP_Releases), e.g. mcp725.zip. Install MCP dependencies as listed on the website if neccessary.
 2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
 	* To verify, check if a file named `CHANGELOG` exists inside `mcp`.
@@ -47,7 +48,7 @@ ________________________________________________________________________________
 #### Setup EE3 (Some tested for Linux, tested fully for Windows)
 1. Inside `mcdev`, create a directory named `source`.
 2. Move/clone `Equivalent-Exchange-3` into `source`.
-3. Right now, you should have a directory that looks something like:
+3. Right now, you should have a directory that looks something like (will look different if you let Forge download MCP):
 
 ***
 
@@ -63,17 +64,17 @@ ________________________________________________________________________________
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `build.properties`.
 	* Open it up, and type into it the following:
- 		* `dir.development=../../`
+ 		* `dir.development=../../` (or `../../forge` if you let Forge install MCP)
 		*	`dir.share=Shared` (or what you want it to be-optional)
 		*	`dir.release=Releases` (what you want it to be)
-		*	`release.minecraft.version=1.4.6` (as of 12/25)
+		*	`release.minecraft.version=1.4.6` (as of 12/28)
 		*	`release.mod.version=pre1e` (or whatever version # want it to be)
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 6. [FOR WINDOWS] Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant release`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything, and try again.
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.6\pre1e` (This might be different according to what you put in build.properties).
-	*  You should see a .jar named `ee3-universal-pre1d.jar` (Again, might be different).
+	*  You should see a .jar named `ee3-universal-pre1e.jar` (Again, might be different).
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
 #### Update EE3 (For Windows/Mac)
@@ -85,7 +86,7 @@ ________________________________________________________________________________
 6. Re-compile (or move it to `mcdev\source` then re-compile, depending on what you did.)
 
 ###Contributing
-___________________________________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
 #### Submitting a PR
 So you found a bug in pahimar's code?  Think you can make it more efficient?  Want to help in general?  Great!
 
