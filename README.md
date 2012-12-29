@@ -9,7 +9,7 @@ The Minecraft Forums page can be found [here] (http://www.minecraftforum.net/top
 
 ### Compiling Equivalent Exchange 3
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (Linux and Windows tested).
-____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________________________
 #### Prerequisites  (Tested for Windows ONLY!)
 0. WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
 1. Download and install the Java JDK [here] (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the Oracle Binary Code License Agreement for Java SE, and download the one pertaining to your OS.
@@ -48,6 +48,7 @@ ________________________________________________________________________________
 1. Inside `mcdev`, create a directory named `source`.
 2. Move/clone `Equivalent-Exchange-3` into `source`.
 3. Right now, you should have a directory that looks something like:
+
 ***
 
 	mcdev
@@ -59,6 +60,7 @@ ________________________________________________________________________________
 		\-Equivalent-Exchange-3
 			\-EE3's files (should have build.xml).
 ***
+
 4. Inside `Equivalent-Exchange-3`, create a new file called `build.properties`.
 	* Open it up, and type into it the following:
  		* `dir.development=../../`
