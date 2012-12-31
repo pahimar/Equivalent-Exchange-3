@@ -119,4 +119,41 @@ public class TransmutationHelper {
         return nextStack;
     }
 
+	public static ItemStack getPreviousBlock(int itemID, int meta) {
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(itemID, meta);
+
+        ItemStack prevStack = null;
+
+        if (list != null) {
+            return getPreviousBlock(itemID, meta, itemID, meta);
+        }
+        return prevStack;
+	}
+	
+	private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta) {
+
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
+
+        ItemStack prevStack = null;
+        if (list != null) {
+            prevStack = EquivalencyHandler.instance().getPrevInList(id, meta);
+            prevStack.stackSize = 1;
+
+            if ((prevStack.itemID == origId) && (prevStack.getItemDamage() == origMeta)) {
+                return prevStack;
+            }
+            else {
+                if (prevStack.getItem() instanceof ItemBlock) {
+                    return prevStack;
+                }
+                else {
+                    return getPreviousBlock(prevStack.itemID, prevStack.getItemDamage(), origId, origMeta);
+                }
+            }
+        }
+
+        // In the event the list is null, return null
+        return prevStack;
+    }
+
 }
