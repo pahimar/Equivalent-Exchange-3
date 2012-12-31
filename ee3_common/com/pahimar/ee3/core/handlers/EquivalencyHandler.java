@@ -233,28 +233,6 @@ public class EquivalencyHandler {
             return false;
         }
     }
-    
-    /* Ignores stack size for world transmutation */
-    public boolean areWorldEquivalent(Object obj1, Object obj2) {
-
-    	ItemStack first = GeneralHelper.convertObjectToItemStack(obj1);
-    	if(first == null) return false;
-    	ItemStack second = GeneralHelper.convertObjectToItemStack(obj1);
-    	if(second == null) return false;
-    	
-        if ((getEquivalencyList(first.itemID, first.getItemDamage()) != null) && (getEquivalencyList(second.itemID, second.getItemDamage()) != null)) {
-            if ((first.itemID == second.itemID) && (first.getItemDamage() == second.getItemDamage())) {
-                return true;
-            }
-            else {
-                return (getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage())));
-            }
-        }
-        else {
-            return false;
-        }
-    }
-
 
     public void debug() {
 
