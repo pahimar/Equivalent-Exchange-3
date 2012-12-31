@@ -53,18 +53,14 @@ public class TransmutationHelper {
 
         int id = world.getBlockId(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
-        Material material = world.getBlockMaterial(x, y, z);
 
-        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
-            meta = meta & 4;
-        }
-        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
-            meta = 0;
+        Block currentBlock = Block.blocksList[id];
+
+        if (currentBlock != null) {
+            meta = currentBlock.damageDropped(meta);
         }
 
         currentBlockStack = new ItemStack(id, 1, meta);
-
-        System.out.format("%d %d\n", id, meta);
 
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
@@ -100,7 +96,7 @@ public class TransmutationHelper {
         if (list != null) {
             nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
             nextStack.stackSize = 1;
-            
+
             /*
              * If the current item is the same as the original one we started
              * with, then we have recursed through the entire list and not found

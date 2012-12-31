@@ -24,7 +24,7 @@ public class ItemDropHelper {
             rand = Math.random();
 
             if (rand < 0.15d) {
-                entity.dropItem(ModItems.miniumShard.shiftedIndex, 1);
+                entity.dropItem(ModItems.miniumShard.itemID, 1);
             }
         }
     }
