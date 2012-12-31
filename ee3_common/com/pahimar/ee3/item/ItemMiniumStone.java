@@ -27,8 +27,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
-        IKeyBound {
-
+        IKeyBound , IChargeable {
+        private int maxChargeLevel;
     public ItemMiniumStone(int id) {
 
         super(id);
@@ -36,6 +36,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
         this.setItemName(Strings.MINIUM_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
+        this.maxChargeLevel = 3;
     }
 
     @SideOnly(Side.CLIENT)
@@ -88,7 +89,35 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
 
         EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
     }
+    @Override
+    public short getCharge(ItemStack stack) {
 
+        return NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY);
+    }
+
+    @Override
+    public void setCharge(ItemStack stack, short charge) {
+
+        if (charge <= maxChargeLevel) {
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, charge);
+        }
+    }
+
+    @Override
+    public void increaseCharge(ItemStack stack) {
+
+        if (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) < maxChargeLevel) {
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) + 1));
+        }
+    }
+
+    @Override
+    public void decreaseCharge(ItemStack stack) {
+
+        if (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) > 0) {
+            NBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (NBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) - 1));
+        }
+    }
     @Override
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
@@ -102,6 +131,26 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
             	}else{
             		TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
             	}
+            }
+        }
+        else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
+            if (!thePlayer.isSneaking()) {
+                if (getCharge(itemStack) == maxChargeLevel) {
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                }
+                else {
+                    increaseCharge(itemStack);
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                }
+            }
+            else {
+                if (getCharge(itemStack) == 0) {
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                }
+                else {
+                    decreaseCharge(itemStack);
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))));
+                }
             }
         }
 
