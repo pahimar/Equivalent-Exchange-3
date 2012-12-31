@@ -53,13 +53,17 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
                     if (currentItem != null) {
                         if (currentItem.getItem() instanceof IKeyBound) {
-                            PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
+                            if (!KeyBindingHelper.isClientSided(kb.keyDescription)) {
+                                PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
+                            }
+                            else {
+                                ((IKeyBound) currentItem.getItem()).doKeyBindingAction(player, currentItem, kb.keyDescription);
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 
     @Override

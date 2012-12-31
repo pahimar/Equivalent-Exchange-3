@@ -1,11 +1,16 @@
 package com.pahimar.ee3.core.proxy;
 
 import static com.pahimar.ee3.lib.CustomItemRarity.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
@@ -15,6 +20,9 @@ import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
 import com.pahimar.ee3.core.helper.KeyBindingHelper;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.item.IChargeable;
+import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Sprites;
@@ -117,9 +125,66 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
+    public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
+    }
+
+    @Override
+    public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
+
+        if (TransmutationHelper.targetBlockStack != null) {
+            if (itemStack != null) {
+                int pnX = 1;
+                int pnY = 1;
+                int pnZ = 1;
+                if (itemStack.getItem() instanceof IChargeable) {
+                    int charge = ((IChargeable) itemStack.getItem()).getCharge(itemStack) * 2;
+                    switch (ForgeDirection.getOrientation(sideHit)) {
+                        case UP: {
+                            pnX = 1 + charge;
+                            pnZ = 1 + charge;
+                            break;
+                        }
+                        case DOWN: {
+                            pnX = 1 + charge;
+                            pnZ = 1 + charge;
+                            break;
+                        }
+                        case NORTH: {
+                            pnX = 1 + charge;
+                            pnY = 1 + charge;
+                            break;
+                        }
+                        case SOUTH: {
+                            pnX = 1 + charge;
+                            pnY = 1 + charge;
+                            break;
+                        }
+                        case EAST: {
+                            pnY = 1 + charge;
+                            pnZ = 1 + charge;
+                            break;
+                        }
+                        case WEST: {
+                            pnY = 1 + charge;
+                            pnZ = 1 + charge;
+                            break;
+                        }
+                        case UNKNOWN: {
+                            pnX = 0;
+                            pnY = 0;
+                            pnZ = 0;
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                }
+
+                EquivalentExchange3.proxy.sendRequestEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte) sideHit, (byte) pnX, (byte) pnY, (byte) pnZ, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
+            }
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.pahimar.ee3.core.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
@@ -65,7 +66,11 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
     }
 
-    public void sendWorldEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
+    public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
+        
+    }
+    
+    public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
     }
 

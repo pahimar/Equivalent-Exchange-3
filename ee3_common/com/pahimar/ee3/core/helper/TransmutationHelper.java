@@ -83,7 +83,6 @@ public class TransmutationHelper {
         if (list != null) {
             return getNextBlock(id, meta, id, meta);
         }
-
         return nextStack;
     }
 
