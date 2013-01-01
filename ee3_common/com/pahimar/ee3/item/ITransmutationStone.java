@@ -18,6 +18,6 @@ public interface ITransmutationStone {
 
     public abstract void openPortableCrafting(EntityPlayer thePlayer);
 
-    public abstract void transmuteBlocks(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit);
+    public abstract void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit);
 
 }

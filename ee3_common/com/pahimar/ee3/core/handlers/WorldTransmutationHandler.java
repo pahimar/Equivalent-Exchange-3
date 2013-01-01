@@ -114,14 +114,12 @@ public class WorldTransmutationHandler {
 
         int id = event.world.getBlockId(event.x, event.y, event.z);
         int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
-        Material material = event.world.getBlockMaterial(event.x, event.y, event.z);
         boolean result = false;
         
-        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
-            meta = meta & 4;
-        }
-        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
-            meta = 0;
+        Block currentBlock = Block.blocksList[id];
+        
+        if (currentBlock != null) {
+            meta = currentBlock.damageDropped(meta);
         }
 
         ItemStack worldStack = new ItemStack(id, 1, meta);

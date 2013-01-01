@@ -19,7 +19,7 @@ public class AddonRedPower2 {
 
         if (Loader.isModLoaded("RedPowerWorld")) {
             try {
-                rp2Stone = (Block) Class.forName("RedPowerWorld").getField("blockStone").get(null);
+                rp2Stone = (Block) Class.forName("com.eloraam.redpower.RedPowerWorld").getField("blockStone").get(null);
 
                 for (ItemStack stone : RecipesTransmutationStone.transmutationStones) {
                     // Extremely temporary recipe

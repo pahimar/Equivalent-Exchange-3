@@ -53,18 +53,14 @@ public class TransmutationHelper {
 
         int id = world.getBlockId(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
-        Material material = world.getBlockMaterial(x, y, z);
 
-        if ((material == Material.leaves) && (id == Block.leaves.blockID)) {
-            meta = meta & 4;
-        }
-        else if ((material == Material.pumpkin) && (id == Block.pumpkin.blockID)) {
-            meta = 0;
+        Block currentBlock = Block.blocksList[id];
+
+        if (currentBlock != null) {
+            meta = currentBlock.damageDropped(meta);
         }
 
         currentBlockStack = new ItemStack(id, 1, meta);
-
-        System.out.format("%d %d\n", id, meta);
 
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
@@ -87,7 +83,6 @@ public class TransmutationHelper {
         if (list != null) {
             return getNextBlock(id, meta, id, meta);
         }
-
         return nextStack;
     }
 
@@ -100,7 +95,7 @@ public class TransmutationHelper {
         if (list != null) {
             nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
             nextStack.stackSize = 1;
-            
+
             /*
              * If the current item is the same as the original one we started
              * with, then we have recursed through the entire list and not found
@@ -122,6 +117,43 @@ public class TransmutationHelper {
 
         // In the event the list is null, return null
         return nextStack;
+    }
+
+	public static ItemStack getPreviousBlock(int itemID, int meta) {
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(itemID, meta);
+
+        ItemStack prevStack = null;
+
+        if (list != null) {
+            return getPreviousBlock(itemID, meta, itemID, meta);
+        }
+        return prevStack;
+	}
+	
+	private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta) {
+
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
+
+        ItemStack prevStack = null;
+        if (list != null) {
+            prevStack = EquivalencyHandler.instance().getPrevInList(id, meta);
+            prevStack.stackSize = 1;
+
+            if ((prevStack.itemID == origId) && (prevStack.getItemDamage() == origMeta)) {
+                return prevStack;
+            }
+            else {
+                if (prevStack.getItem() instanceof ItemBlock) {
+                    return prevStack;
+                }
+                else {
+                    return getPreviousBlock(prevStack.itemID, prevStack.getItemDamage(), origId, origMeta);
+                }
+            }
+        }
+
+        // In the event the list is null, return null
+        return prevStack;
     }
 
 }

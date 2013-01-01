@@ -8,7 +8,7 @@ public class ActionRequestHandler {
 
     @ForgeSubscribe
     public void onModActionEvent(ActionRequestEvent event) {
-
+        
     }
 
 }

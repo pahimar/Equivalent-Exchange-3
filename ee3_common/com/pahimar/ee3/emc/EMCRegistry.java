@@ -38,7 +38,7 @@ public class EMCRegistry {
     public EMCEntry getEMCValue(Item item) {
 
         if (item != null) {
-            return getEMCValue(item.shiftedIndex, 0);
+            return getEMCValue(item.itemID, 0);
         }
 
         return null;
@@ -81,7 +81,7 @@ public class EMCRegistry {
 
     public void addEMCValue(Item item, EMCEntry emcEntry) {
 
-        addEMCValue(item.shiftedIndex, 0, emcEntry);
+        addEMCValue(item.itemID, 0, emcEntry);
     }
 
     public void addEMCValue(ItemStack itemStack, EMCEntry emcEntry) {
