@@ -126,7 +126,7 @@ public class WorldTransmutationHandler {
         ItemStack targetStack = new ItemStack(event.targetID, 1, event.targetMeta);
 
         if (!worldStack.isItemEqual(targetStack)) {
-            if (EquivalencyHandler.instance().areEquivalent(worldStack, targetStack)) {
+            if (EquivalencyHandler.instance().areWorldEquivalent(worldStack, targetStack)) {
                 if (event.itemStack.getItemDamage() < event.itemStack.getMaxDamage()) {
                     result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
                 }
