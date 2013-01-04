@@ -1,5 +1,8 @@
 package com.pahimar.ee3.command;
 
+import static com.pahimar.ee3.core.helper.LocalizationHelper.getLocalizedString;
+import static com.pahimar.ee3.lib.Strings.*;
+
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
@@ -10,38 +13,55 @@ public class CommandEE extends CommandBase {
 
     public String getCommandName() {
 
-        return "ee3";
+        return COMMAND_EE3;
     }
 
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 
         switch (args.length) {
             case 1: {
-                return getListOfStringsMatchingLastWord(args, new String[] { "overlay", "particles", "sounds" });
+                return getListOfStringsMatchingLastWord(args, new String[] {
+                        getLocalizedString(COMMAND_OVERLAY),
+                        getLocalizedString(COMMAND_PARTICLES),
+                        getLocalizedString(COMMAND_SOUNDS) });
             }
             case 2: {
-                if (args[0].equalsIgnoreCase("overlay")) {
-                    return getListOfStringsMatchingLastWord(args, new String[] { "on", "off", "position", "scale", "opacity" });
+                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
+                    return getListOfStringsMatchingLastWord(args, new String[] {
+                            getLocalizedString(COMMAND_ON),
+                            getLocalizedString(COMMAND_OFF),
+                            getLocalizedString(COMMAND_POSITION),
+                            getLocalizedString(COMMAND_SCALE),
+                            getLocalizedString(COMMAND_OPACITY) });
                 }
-                else if (args[0].equalsIgnoreCase("particles")) {
-                    return getListOfStringsMatchingLastWord(args, new String[] { "on", "off" });
+                else if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_PARTICLES))) {
+                    return getListOfStringsMatchingLastWord(args, new String[] {
+                            getLocalizedString(COMMAND_ON),
+                            getLocalizedString(COMMAND_OFF) });
                 }
-                else if (args[0].equalsIgnoreCase("sounds")) {
-                    return getListOfStringsMatchingLastWord(args, new String[] { "all", "self", "off" });
+                else if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_SOUNDS))) {
+                    return getListOfStringsMatchingLastWord(args, new String[] {
+                            getLocalizedString(COMMAND_ALL),
+                            getLocalizedString(COMMAND_SELF),
+                            getLocalizedString(COMMAND_OFF) });
                 }
             }
             case 3: {
-                if (args[0].equalsIgnoreCase("overlay")) {
-                    if (args[1].equalsIgnoreCase("position")) {
-                        return getListOfStringsMatchingLastWord(args, new String[] { "top", "bottom" });
+                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
+                    if (args[1].equalsIgnoreCase(getLocalizedString(COMMAND_POSITION))) {
+                        return getListOfStringsMatchingLastWord(args, new String[] {
+                                getLocalizedString(COMMAND_TOP),
+                                getLocalizedString(COMMAND_BOTTOM) });
                     }
                 }
             }
             case 4: {
-                if (args[0].equalsIgnoreCase("overlay")) {
-                    if (args[1].equalsIgnoreCase("position")) {
-                        if (args[2].equalsIgnoreCase("top") || args[2].equalsIgnoreCase("bottom")) {
-                            return getListOfStringsMatchingLastWord(args, new String[] { "left", "right" });
+                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
+                    if (args[1].equalsIgnoreCase(getLocalizedString(COMMAND_POSITION))) {
+                        if (args[2].equalsIgnoreCase(getLocalizedString(COMMAND_TOP)) || args[2].equalsIgnoreCase(getLocalizedString(COMMAND_BOTTOM))) {
+                            return getListOfStringsMatchingLastWord(args, new String[] {
+                                    getLocalizedString(COMMAND_LEFT),
+                                    getLocalizedString(COMMAND_RIGHT) });
                         }
                     }
                 }
@@ -58,18 +78,18 @@ public class CommandEE extends CommandBase {
             String commandName = args[0];
             System.arraycopy(args, 1, args, 0, args.length - 1);
 
-            if (commandName.toLowerCase().equals("overlay")) {
+            if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
                 CommandOverlay.processCommand(commandSender, args);
             }
-            else if (commandName.toLowerCase().equals("particles")) {
+            else if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_PARTICLES))) {
                 CommandParticles.processCommand(commandSender, args);
             }
-            else if (commandName.toLowerCase().equals("sounds")) {
+            else if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_SOUNDS))) {
                 CommandSounds.processCommand(commandSender, args);
             }
         }
         else {
-            throw new WrongUsageException("commands.ee3.usage", new Object[0]);
+            throw new WrongUsageException(getLocalizedString(COMMAND_EE3_USAGE), new Object[0]);
         }
     }
 }

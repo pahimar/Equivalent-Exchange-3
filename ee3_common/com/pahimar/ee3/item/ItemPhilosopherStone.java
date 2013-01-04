@@ -141,6 +141,7 @@ public class ItemPhilosopherStone extends ItemEE implements
             	}
             }
         }
+        // TODO Packet-ize the sounds
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
             if (!thePlayer.isSneaking()) {
                 if (getCharge(itemStack) == maxChargeLevel) {

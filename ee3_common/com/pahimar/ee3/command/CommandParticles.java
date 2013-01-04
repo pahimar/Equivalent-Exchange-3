@@ -1,5 +1,8 @@
 package com.pahimar.ee3.command;
 
+import static com.pahimar.ee3.core.helper.LocalizationHelper.getLocalizedString;
+import static com.pahimar.ee3.lib.Strings.*;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 
@@ -15,32 +18,32 @@ public class CommandParticles {
         if (args.length > 0) {
             subCommand = args[0];
 
-            if (subCommand.toLowerCase().equals("on")) {
+            if (subCommand.toLowerCase().equals(getLocalizedString(COMMAND_ON))) {
                 processOnCommand(commandSender);
             }
-            else if (subCommand.toLowerCase().equals("off")) {
+            else if (subCommand.toLowerCase().equals(getLocalizedString(COMMAND_OFF))) {
                 processOffCommand(commandSender);
             }
             else {
-                throw new WrongUsageException("commands.ee3.particles.usage", new Object[0]);
+                throw new WrongUsageException(getLocalizedString(COMMAND_PARTICLES_USAGE), new Object[0]);
             }
         }
         else {
-            throw new WrongUsageException("commands.ee3.particles.usage", new Object[0]);
+            throw new WrongUsageException(getLocalizedString(COMMAND_PARTICLES_USAGE), new Object[0]);
         }
     }
 
     private static void processOnCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = true;
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "true");
-        commandSender.sendChatToPlayer("commands.ee3.particles.turned_on");
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, TRUE);
+        commandSender.sendChatToPlayer(getLocalizedString(COMMAND_PARTICLES_TURNED_ON));
     }
 
     private static void processOffCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = false;
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "false");
-        commandSender.sendChatToPlayer("commands.ee3.particles.turned_off");
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, FALSE);
+        commandSender.sendChatToPlayer(getLocalizedString(COMMAND_PARTICLES_TURNED_OFF));
     }
 }

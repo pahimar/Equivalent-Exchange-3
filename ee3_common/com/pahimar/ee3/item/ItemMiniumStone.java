@@ -67,7 +67,9 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+        if (world.isRemote) {
+            transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+        }
         return true;
     }
 

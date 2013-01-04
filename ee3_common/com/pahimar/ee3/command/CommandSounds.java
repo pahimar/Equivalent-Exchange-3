@@ -1,5 +1,8 @@
 package com.pahimar.ee3.command;
 
+import static com.pahimar.ee3.core.helper.LocalizationHelper.getLocalizedString;
+import static com.pahimar.ee3.lib.Strings.*;
+
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 
@@ -15,42 +18,42 @@ public class CommandSounds {
         if (args.length > 0) {
             subCommand = args[0];
 
-            if (subCommand.toLowerCase().equals("all")) {
+            if (subCommand.toLowerCase().equals(getLocalizedString(COMMAND_ALL))) {
                 processAllCommand(commandSender);
             }
-            else if (subCommand.toLowerCase().equals("self")) {
+            else if (subCommand.toLowerCase().equals(getLocalizedString(COMMAND_SELF))) {
                 processSelfCommand(commandSender);
             }
-            else if (subCommand.toLowerCase().equals("off")) {
+            else if (subCommand.toLowerCase().equals(getLocalizedString(COMMAND_OFF))) {
                 processOffCommand(commandSender);
             }
             else {
-                throw new WrongUsageException("commands.ee3.sounds.usage", new Object[0]);
+                throw new WrongUsageException(getLocalizedString(COMMAND_SOUNDS_USAGE), new Object[0]);
             }
         }
         else {
-            throw new WrongUsageException("commands.ee3.sounds.usage", new Object[0]);
+            throw new WrongUsageException(getLocalizedString(COMMAND_SOUNDS_USAGE), new Object[0]);
         }
     }
 
     private static void processAllCommand(ICommandSender commandSender) {
 
-        ConfigurationSettings.ENABLE_SOUNDS = "all";
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, "all");
-        commandSender.sendChatToPlayer("commands.ee3.sounds.all");
+        ConfigurationSettings.ENABLE_SOUNDS = ALL;
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ALL);
+        commandSender.sendChatToPlayer(getLocalizedString(COMMAND_SOUNDS_SET_TO_ALL));
     }
-    
+
     private static void processSelfCommand(ICommandSender commandSender) {
 
-        ConfigurationSettings.ENABLE_SOUNDS = "self";
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, "self");
-        commandSender.sendChatToPlayer("commands.ee3.sounds.self");
+        ConfigurationSettings.ENABLE_SOUNDS = SELF;
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, SELF);
+        commandSender.sendChatToPlayer(getLocalizedString(COMMAND_SOUNDS_SET_TO_SELF));
     }
 
     private static void processOffCommand(ICommandSender commandSender) {
 
-        ConfigurationSettings.ENABLE_SOUNDS = "off";
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, "false");
-        commandSender.sendChatToPlayer("commands.ee3.sounds.off");
+        ConfigurationSettings.ENABLE_SOUNDS = OFF;
+        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, OFF);
+        commandSender.sendChatToPlayer(getLocalizedString(COMMAND_SOUNDS_TURNED_OFF));
     }
 }
