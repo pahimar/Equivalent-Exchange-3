@@ -20,12 +20,13 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class WorldTransmutationHandler {
 
     public static void handleWorldTransmutation(EntityPlayer thePlayer, int originX, int originY, int originZ, byte rangeX, byte rangeY, byte rangeZ, byte sideHit, String data) {
-
+        
         ActionRequestEvent actionRequestEvent = null;
         ActionEvent actionEvent = null;
 
@@ -80,7 +81,7 @@ public class WorldTransmutationHandler {
             default:
                 break;
         }
-
+        
         for (int x = lowerBoundX; x <= upperBoundX; x++) {
             for (int y = lowerBoundY; y <= upperBoundY; y++) {
                 for (int z = lowerBoundZ; z <= upperBoundZ; z++) {

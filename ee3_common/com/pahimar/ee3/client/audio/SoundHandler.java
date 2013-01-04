@@ -2,7 +2,6 @@ package com.pahimar.ee3.client.audio;
 
 import java.util.logging.Level;
 
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
@@ -35,11 +34,4 @@ public class SoundHandler {
             }
         }
     }
-    
-    @ForgeSubscribe
-    public void onSoundPlay(PlaySoundEvent event) {
-        if (event.name.contains("com.pahimar.ee3"))
-            System.out.println(event.name);
-    }
-
 }
