@@ -17,7 +17,7 @@ public class CommandEE extends CommandBase {
 
         switch (args.length) {
             case 1: {
-                return getListOfStringsMatchingLastWord(args, new String[] { "overlay", "particles" });
+                return getListOfStringsMatchingLastWord(args, new String[] { "overlay", "particles", "sounds" });
             }
             case 2: {
                 if (args[0].equalsIgnoreCase("overlay")) {
@@ -25,6 +25,9 @@ public class CommandEE extends CommandBase {
                 }
                 else if (args[0].equalsIgnoreCase("particles")) {
                     return getListOfStringsMatchingLastWord(args, new String[] { "on", "off" });
+                }
+                else if (args[0].equalsIgnoreCase("sounds")) {
+                    return getListOfStringsMatchingLastWord(args, new String[] { "all", "self", "off" });
                 }
             }
             case 3: {
@@ -60,6 +63,9 @@ public class CommandEE extends CommandBase {
             }
             else if (commandName.toLowerCase().equals("particles")) {
                 CommandParticles.processCommand(commandSender, args);
+            }
+            else if (commandName.toLowerCase().equals("sounds")) {
+                CommandSounds.processCommand(commandSender, args);
             }
         }
         else {

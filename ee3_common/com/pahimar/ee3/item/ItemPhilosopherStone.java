@@ -142,7 +142,7 @@ public class ItemPhilosopherStone extends ItemEE implements
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
             if (!thePlayer.isSneaking()) {
                 if (getCharge(itemStack) == maxChargeLevel) {
-                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.FAIL, 1.5F, 1.5F);
                 }
                 else {
                     increaseCharge(itemStack);
@@ -151,7 +151,7 @@ public class ItemPhilosopherStone extends ItemEE implements
             }
             else {
                 if (getCharge(itemStack) == 0) {
-                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.FAIL, 1.5F, 1.5F);
                 }
                 else {
                     decreaseCharge(itemStack);

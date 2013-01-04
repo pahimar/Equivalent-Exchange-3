@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
@@ -18,6 +17,7 @@ import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.Particles;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -36,6 +36,7 @@ public class WorldTransmutationHandler {
         int lowerBoundZ = -1 * rangeZ / 2;
         int upperBoundZ = -1 * lowerBoundZ;
         boolean hasSoundPlayed = false;
+        boolean anySuccess = false;
 
         double xShift = 0;
         double yShift = 0;
@@ -95,17 +96,30 @@ public class WorldTransmutationHandler {
                         }
 
                         if (actionEvent.actionResult == ActionResult.SUCCESS) {
-                            if (!hasSoundPlayed) {
-                                hasSoundPlayed = true;
-                                thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.TRANSMUTE, 0.5F, 1.0F);
+                            if (!anySuccess) {
+                                anySuccess = true;
                             }
 
                             PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
                             PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.15D * ySign, 0D * zSign)));
                         }
+                        else if (actionEvent.actionResult == ActionResult.FAILURE) {
+                            if (!(actionEvent.world.getBlockId(originX + x, originY + y, originZ + z) == 0)) {
+                                // TODO Fancy particle motion
+                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.RED_DUST, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.WITCH_MAGIC, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                            }
+                        }
                     }
                 }
             }
+        }
+
+        if (anySuccess) {
+            PacketDispatcher.sendPacketToAllAround(originX, originY, originZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.TRANSMUTE, originX, originY, originZ, 0.5F, 1.0F)));
+        }
+        else {
+            PacketDispatcher.sendPacketToAllAround(originX, originY, originZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.FAIL, originX, originY, originZ, 1.5F, 1.5F)));
         }
     }
 
@@ -115,9 +129,9 @@ public class WorldTransmutationHandler {
         int id = event.world.getBlockId(event.x, event.y, event.z);
         int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
         boolean result = false;
-        
+
         Block currentBlock = Block.blocksList[id];
-        
+
         if (currentBlock != null) {
             meta = currentBlock.damageDropped(meta);
         }
