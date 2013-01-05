@@ -7,9 +7,11 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketRequestEvent extends PacketEE {
@@ -36,35 +38,6 @@ public class PacketRequestEvent extends PacketEE {
         this.rangeX = rangeX;
         this.rangeY = rangeY;
         this.rangeZ = rangeZ;
-        this.data = data;
-    }
-
-    public void setEventType(byte eventType) {
-
-        this.eventType = eventType;
-    }
-
-    public void setOrigin(int originX, int originY, int originZ) {
-
-        this.originX = originX;
-        this.originY = originY;
-        this.originZ = originZ;
-    }
-
-    public void setSideHit(byte sideHit) {
-
-        this.sideHit = sideHit;
-    }
-
-    public void setRange(byte rangeX, byte rangeY, byte rangeZ) {
-
-        this.rangeX = rangeX;
-        this.rangeY = rangeY;
-        this.rangeZ = rangeZ;
-    }
-
-    public void setData(String data) {
-
         this.data = data;
     }
 
@@ -95,7 +68,7 @@ public class PacketRequestEvent extends PacketEE {
     }
 
     public void execute(INetworkManager manager, Player player) {
-
+        
         EntityPlayer thePlayer = (EntityPlayer) player;
         WorldTransmutationHandler.handleWorldTransmutation(thePlayer, originX, originY, originZ, rangeX, rangeY, rangeZ, sideHit, data);
     }

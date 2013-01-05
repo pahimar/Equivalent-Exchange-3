@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
+import com.pahimar.ee3.lib.Sounds;
 
 /**
  * TransmutationHelper
@@ -32,7 +33,6 @@ public class TransmutationHelper {
 
         if (Block.blocksList[targetID] != null) {
             world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
-            world.spawnParticle("largesmoke", x, y + 1, z, 1.0D, 1.0D, 1.0D);
             return true;
         }
 

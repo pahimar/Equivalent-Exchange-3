@@ -1,6 +1,26 @@
 package com.pahimar.ee3.core.proxy;
 
-import static com.pahimar.ee3.lib.CustomItemRarity.*;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_EPIC;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_JUNK;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_LEGENDARY;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_MAGICAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_NORMAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_RARE;
+import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_UNCOMMON;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_EPIC;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_JUNK;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_LEGENDARY;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_MAGICAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_NORMAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_RARE;
+import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_UNCOMMON;
+import static com.pahimar.ee3.lib.CustomItemRarity.EPIC;
+import static com.pahimar.ee3.lib.CustomItemRarity.JUNK;
+import static com.pahimar.ee3.lib.CustomItemRarity.LEGENDARY;
+import static com.pahimar.ee3.lib.CustomItemRarity.MAGICAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.NORMAL;
+import static com.pahimar.ee3.lib.CustomItemRarity.RARE;
+import static com.pahimar.ee3.lib.CustomItemRarity.UNCOMMON;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;

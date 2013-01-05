@@ -30,6 +30,7 @@ public class ConfigurationHandler {
     
     public static final String CATEGORY_KEYBIND = "keybindings";
     public static final String CATEGORY_GRAPHICS = "graphics";
+    public static final String CATEGORY_AUDIO = "audio";
     public static final String CATEGORY_TRANSMUTATION = "transmutation";
     public static final String CATEGORY_BLOCK_PROPERTIES = Configuration.CATEGORY_BLOCK + Configuration.CATEGORY_SPLITTER + "properties";
     public static final String CATEGORY_RED_WATER_PROPERTIES = CATEGORY_BLOCK_PROPERTIES + Configuration.CATEGORY_SPLITTER + "red_water";
@@ -70,6 +71,8 @@ public class ConfigurationHandler {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
             }
             
+            /* Audio configs */
+            ConfigurationSettings.ENABLE_SOUNDS = configuration.get(CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).value;
 
             /* Block configs */
             BlockIds.CALCINATOR = configuration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);

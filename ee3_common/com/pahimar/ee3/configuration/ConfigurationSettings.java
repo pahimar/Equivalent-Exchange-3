@@ -20,6 +20,13 @@ public class ConfigurationSettings {
     public static boolean ENABLE_VERSION_CHECK;
     public static final String ENABLE_VERSION_CHECK_CONFIGNAME = "version_check.enabled";
     public static final boolean ENABLE_VERSION_CHECK_DEFAULT = true;
+    
+    /*
+     * Audio config settings
+     */
+    public static String ENABLE_SOUNDS;
+    public static final String ENABLE_SOUNDS_CONFIGNAME = "sounds.enabled";
+    public static final String ENABLE_SOUNDS_DEFAULT = "all";
 
     /*
      * Graphic config settings

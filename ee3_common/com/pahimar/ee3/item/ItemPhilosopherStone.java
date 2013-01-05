@@ -78,7 +78,9 @@ public class ItemPhilosopherStone extends ItemEE implements
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+        if (world.isRemote) {
+            transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+        }
         return true;
     }
 
@@ -139,10 +141,11 @@ public class ItemPhilosopherStone extends ItemEE implements
             	}
             }
         }
+        // TODO Packet-ize the sounds
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_CHARGE)) {
             if (!thePlayer.isSneaking()) {
                 if (getCharge(itemStack) == maxChargeLevel) {
-                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.FAIL, 1.5F, 1.5F);
                 }
                 else {
                     increaseCharge(itemStack);
@@ -151,7 +154,7 @@ public class ItemPhilosopherStone extends ItemEE implements
             }
             else {
                 if (getCharge(itemStack) == 0) {
-                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.CHARGE_FAIL, 0.5F, 0.5F + (0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)));
+                    thePlayer.worldObj.playSoundAtEntity(thePlayer, Sounds.FAIL, 1.5F, 1.5F);
                 }
                 else {
                     decreaseCharge(itemStack);
