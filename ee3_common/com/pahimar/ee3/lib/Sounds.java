@@ -11,13 +11,14 @@ package com.pahimar.ee3.lib;
  */
 public class Sounds {
 
-    private static final String SOUND_RESOURCE_LOCATION = "ee3/sound/";
-    private static final String SOUND_PREFIX = "ee3.sound.";
+    private static final String SOUND_RESOURCE_LOCATION = "com/pahimar/ee3/sound/";
+    private static final String SOUND_PREFIX = "com.pahimar.ee3.sound.";
 
     public static String[] soundFiles = {
             SOUND_RESOURCE_LOCATION + "chargeDown.ogg",
             SOUND_RESOURCE_LOCATION + "chargeUp.ogg",
             SOUND_RESOURCE_LOCATION + "destruct.ogg",
+            SOUND_RESOURCE_LOCATION + "fail.ogg",
             SOUND_RESOURCE_LOCATION + "gust.ogg",
             SOUND_RESOURCE_LOCATION + "heal.ogg",
             SOUND_RESOURCE_LOCATION + "kinesis.ogg",
@@ -33,6 +34,7 @@ public class Sounds {
     public static final String CHARGE_DOWN = SOUND_PREFIX + "chargeDown";
     public static final String CHARGE_UP = SOUND_PREFIX + "chargeUp";
     public static final String DESTRUCTION = SOUND_PREFIX + "destruct";
+    public static final String FAIL = SOUND_PREFIX + "fail";
     public static final String GUST = SOUND_PREFIX + "gust";
     public static final String HEAL = SOUND_PREFIX + "heal";
     public static final String KINESIS = SOUND_PREFIX + "kinesis";
@@ -44,5 +46,8 @@ public class Sounds {
     public static final String WALL = SOUND_PREFIX + "wall";
     public static final String WATER_BALL = SOUND_PREFIX + "waterball";
     public static final String WIND = SOUND_PREFIX + "wind";
+    
+    //public static final String CHARGE_FAIL = "mob.enderdragon.hit";
+    public static final String CHARGE_FAIL = FAIL;
 
 }

@@ -27,6 +27,7 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
     private int tickCounter = 0;
 
     public TextureRedWaterFlowFX() {
+
         super(ModBlocks.redWaterStill.blockIndexInTexture + 1);
         tileSize = 2;
         setup();
@@ -34,6 +35,7 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
 
     @Override
     public void setup() {
+
         super.setup();
         red = new float[tileSizeSquare];
         green = new float[tileSizeSquare];
@@ -44,10 +46,12 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
 
     @Override
     public void bindImage(RenderEngine renderEngine) {
+
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET));
     }
 
     public void onTick() {
+
         ++this.tickCounter;
         int var1;
         int var2;
@@ -65,15 +69,13 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
                     var3 += this.red[var5 + var6 * tileSizeBase];
                 }
 
-                this.green[var1 + var2 * tileSizeBase] = var3 / 3.2F
-                        + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
+                this.green[var1 + var2 * tileSizeBase] = var3 / 3.2F + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
             }
         }
 
         for (var1 = 0; var1 < tileSizeBase; ++var1) {
             for (var2 = 0; var2 < tileSizeBase; ++var2) {
-                this.blue[var1 + var2 * tileSizeBase] += this.alpha[var1 + var2
-                        * tileSizeBase] * 0.05F;
+                this.blue[var1 + var2 * tileSizeBase] += this.alpha[var1 + var2 * tileSizeBase] * 0.05F;
 
                 if (this.blue[var1 + var2 * tileSizeBase] < 0.0F) {
                     this.blue[var1 + var2 * tileSizeBase] = 0.0F;
@@ -92,8 +94,7 @@ public class TextureRedWaterFlowFX extends FMLTextureFX {
         this.red = var12;
 
         for (var2 = 0; var2 < tileSizeSquare; ++var2) {
-            var3 = this.red[var2 - this.tickCounter * tileSizeBase
-                    & tileSizeSquareMask];
+            var3 = this.red[var2 - this.tickCounter * tileSizeBase & tileSizeSquareMask];
 
             if (var3 > 1.0F) {
                 var3 = 1.0F;

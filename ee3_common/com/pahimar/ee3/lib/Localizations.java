@@ -11,7 +11,7 @@ package com.pahimar.ee3.lib;
  */
 public class Localizations {
 	
-	private static final String LANG_RESOURCE_LOCATION = "/ee3/lang/";
+	private static final String LANG_RESOURCE_LOCATION = "/com/pahimar/ee3/lang/";
 	
 	public static String[] localeFiles = {
 		LANG_RESOURCE_LOCATION + "cs_CZ.xml",
@@ -19,6 +19,7 @@ public class Localizations {
 		LANG_RESOURCE_LOCATION + "de_DE.xml",
 		LANG_RESOURCE_LOCATION + "en_US.xml",
 		LANG_RESOURCE_LOCATION + "es_ES.xml",
+        LANG_RESOURCE_LOCATION + "fi_FI.xml",
 		LANG_RESOURCE_LOCATION + "fr_FR.xml",
 		LANG_RESOURCE_LOCATION + "it_IT.xml",
 		LANG_RESOURCE_LOCATION + "ja_JP.xml",
@@ -31,6 +32,7 @@ public class Localizations {
 		LANG_RESOURCE_LOCATION + "ru_RU.xml",
 		LANG_RESOURCE_LOCATION + "sr_RS.xml",
 		LANG_RESOURCE_LOCATION + "sv_SE.xml",
+		LANG_RESOURCE_LOCATION + "tr_TR.xml",
 		LANG_RESOURCE_LOCATION + "zh_CN.xml",
 		LANG_RESOURCE_LOCATION + "zh_TW.xml"
 	};

@@ -1,9 +1,9 @@
 package com.pahimar.ee3.item;
 
+import net.minecraft.item.Item;
+
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Sprites;
-
-import net.minecraft.item.Item;
 
 /**
  * ItemEE

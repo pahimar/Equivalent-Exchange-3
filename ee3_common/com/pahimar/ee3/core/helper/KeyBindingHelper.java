@@ -2,6 +2,8 @@ package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+
 import net.minecraft.client.settings.KeyBinding;
 
 /**
@@ -19,6 +21,7 @@ public class KeyBindingHelper {
     public static ArrayList<Boolean> isRepeatingList;
 
     public static void addKeyBinding(String name, int value) {
+
         if (keyBindingsList == null) {
             keyBindingsList = new ArrayList<KeyBinding>();
         }
@@ -27,6 +30,7 @@ public class KeyBindingHelper {
     }
 
     public static void addIsRepeating(boolean value) {
+
         if (isRepeatingList == null) {
             isRepeatingList = new ArrayList<Boolean>();
         }
@@ -35,10 +39,12 @@ public class KeyBindingHelper {
     }
 
     public static KeyBinding[] gatherKeyBindings() {
+
         return keyBindingsList.toArray(new KeyBinding[keyBindingsList.size()]);
     }
 
     public static boolean[] gatherIsRepeating() {
+
         boolean[] isRepeating = new boolean[isRepeatingList.size()];
 
         for (int x = 0; x < isRepeating.length; x++) {
@@ -46,5 +52,15 @@ public class KeyBindingHelper {
         }
 
         return isRepeating;
+    }
+    
+    // TODO Still not ideal, won't work for every case. Specifically, make it context sensitive
+    public static boolean isClientSided(String keybinding) {
+        if (keybinding.equalsIgnoreCase(ConfigurationSettings.KEYBINDING_TOGGLE)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Dutch (NL) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Ontlaad</entry>
+	<entry key="key.toggle">Wissel</entry>
+	<entry key="key.charge">Opladen</entry>
+	<entry key="item.miniumShard.name">Minium Scherf</entry>
+	<entry key="item.inertStone.name">Inerte Steen</entry>
+	<entry key="item.miniumStone.name">Minium Steen</entry>
+	<entry key="item.philStone.name">Steen der Wijzen</entry>
+	<entry key="item.alchemyDust.ash.name">As</entry>
+	<entry key="item.alchemyDust.minium.name">Minium Stof</entry>
+	<entry key="item.alchemyDust.verdant.name">Helgroen Stof</entry>
+	<entry key="item.alchemyDust.azure.name">Azuurblauw Stof</entry>
+	<entry key="item.alchemyDust.amaranthine.name">Amarant Stof</entry>
+	<entry key="item.alchemyDust.iridescent.name">Iriserend Stof</entry>
+	<entry key="item.alchemyBag.white.name">Witte Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.orange.name">Oranje Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.magenta.name">Magenta Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.light_blue.name">Licht Blauwe Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.yellow.name">Gele Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.lime.name">Lime Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.pink.name">Roze Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.gray.name">Grijze Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.light_gray.name">Licht Grijze Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.cyan.name">Cyaan Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.purple.name">Paarse Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.blue.name">Blauwe Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.brown.name">Bruine Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.green.name">Groene Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.red.name">Rode Alchemistische Zak</entry>
+	<entry key="item.alchemyBag.black.name">Zwarte Alchemistische Zak</entry>
+	<entry key="tile.redWaterStill.name">Stilstaand Rood Water </entry>
+	<entry key="tile.redWaterFlowing.name">Vloeiend Rood Water </entry>
+	<entry key="tile.calcinator.name">Calcinator</entry>
+	<entry key="gui.calcinator.name">Calcinator</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Start versiecontrole tegen extern versiebestand, te vinden op</entry>
+	<entry key="version.uninitialized">De versiecontrole is niet geslaagd (versiecontrole niet correct gestart)</entry>
+	<entry key="version.current">Je gebruikt momenteel de meest recente versie (@REMOTE_MOD_VERSION@) van Equivalent Exchange 3 voor @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Een nieuwe @MOD_NAME@ versie bestaat (@REMOTE_MOD_VERSION@) voor @MINECRAFT_VERSION@. Je vindt deze hier: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Er deed zich een fout voor tijdens de versiecontrole</entry>
+	<entry key="version.check_disabled">Externe versiecontrole uitgeschakeld, wordt overgeslagen</entry>
+</properties>

@@ -13,9 +13,10 @@ import net.minecraft.block.material.Material;
  * 
  */
 public abstract class BlockEE extends BlockContainer {
-	
-	public BlockEE(int id, Material material) {
-		super(id, material);
-	}
+
+    public BlockEE(int id, Material material) {
+
+        super(id, material);
+    }
 
 }

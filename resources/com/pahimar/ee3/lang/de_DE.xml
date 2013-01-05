@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>German (DE) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Auslösen</entry>
+	<entry key="key.toggle">Umschalten</entry>
+	<entry key="key.charge">Aufladen</entry>
+	<entry key="item.miniumShard.name">Miniumscherbe</entry>
+	<entry key="item.inertStone.name">Träger Stein</entry>
+	<entry key="item.miniumStone.name">Miniumstein</entry>
+	<entry key="item.philStone.name">Stein der Weisen</entry>
+	<entry key="item.alchemyDust.ash.name">Asche</entry>
+	<entry key="item.alchemyDust.minium.name">Miniumstaub</entry>
+	<entry key="item.alchemyDust.verdant.name">Grünstaub</entry>
+	<entry key="item.alchemyDust.azure.name">Azurstaub</entry>
+	<entry key="item.alchemyDust.amaranthine.name">Amarantstaub</entry>
+	<entry key="item.alchemyDust.iridescent.name">Irisierender Staub</entry>
+	<entry key="item.alchemyBag.white.name">Weißer Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.orange.name">Orangefarbener Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.magenta.name">Magentafarbener Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.light_blue.name">Hellblauer Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.yellow.name">Gelber Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.lime.name">Hellgrüner Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.pink.name">Pinker Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.gray.name">Grauer Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.light_gray.name">Hellgrauer Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.cyan.name">Türkiser Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.purple.name">Violetter Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.blue.name">Blauer Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.brown.name">Brauner Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.green.name">Grüner Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.red.name">Roter Alchemiebeutel</entry>
+	<entry key="item.alchemyBag.black.name">Schwarzer Alchemiebeutel</entry>
+	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
+	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fließend)</entry>
+	<entry key="tile.calcinator.name">Kalzinierer</entry>
+	<entry key="gui.calcinator.name">Kalzinierung</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet</entry>
+	<entry key="version.uninitialized">Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)</entry>
+	<entry key="version.current">Du benutzt gerade die aktuellste Version von Equivalent Exchange 3 (@REMOTE_MOD_VERSION@) für @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Eine neue @MOD_NAME@ Version für @MINECRAFT_VERSION@ ist verfügbar (@REMOTE_MOD_VERSION@). Hole sie dir hier: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.connection_error">Fehler bei der Verbindung zur Remotedatei(überprüfe bitte deine Internetverbindung)</entry>
+	<entry key="version.check_disabled">Versionsvergleich mit der Remotedatei deaktiviert, überspringe</entry>
+</properties>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Turkish TR Localization File</comment>
+	<entry key="key.extra">Ekstra</entry>
+	<entry key="key.release">Bırak</entry>
+	<entry key="key.toggle">Aç/Kapa</entry>
+	<entry key="key.charge">Şarj</entry>
+	<entry key="item.miniumShard.name">Minium Parçası</entry>
+	<entry key="item.inertStone.name">Inert Taşı</entry>
+	<entry key="item.miniumStone.name">Minium Taşı</entry>
+	<entry key="item.philStone.name">Felsefe Taşı</entry>
+	<entry key="item.alchemyDust.ash.name">Kül</entry>
+	<entry key="item.alchemyDust.minium.name">Minium Tozu</entry>
+	<entry key="item.alchemyDust.verdant.name">Verdant Tozu</entry>
+	<entry key="item.alchemyDust.azure.name">Azure Tozu</entry>
+	<entry key="item.alchemyDust.amaranthine.name">Amaranthine Tozu</entry>
+	<entry key="item.alchemyDust.iridescent.name">Iridescent Tozu</entry>
+	<entry key="item.alchemyBag.white.name">Beyaz Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.orange.name">Turuncu Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.magenta.name">Majenta Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.light_blue.name">Açık Mavi Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.yellow.name">Sarı Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.lime.name">Açık Yeşil Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.pink.name">Pembe Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.gray.name">Gri Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.light_gray.name">Açık Gri Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.cyan.name">Turkuaz Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.purple.name">Mor Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.blue.name">Mavi Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.brown.name">Kahveremgi Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.green.name">Yeşil Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.red.name">Kırmızı Simyacı Çantası</entry>
+	<entry key="item.alchemyBag.black.name">Siyah Simyacı Çantası</entry>
+	<entry key="tile.redWaterStill.name">Kızıl Su (Sakin)</entry>
+	<entry key="tile.redWaterFlowing.name">Kızıl Su (Akışkan)</entry>
+	<entry key="tile.calcinator.name">Kalsinator</entry>
+	<entry key="gui.calcinator.name">Kalsinator</entry>
+	<entry key="itemGroup.EE3">Eşit Takas 3</entry>
+	<entry key="version.init_log_message">Uzak versiyon denetlemesi, bulundugu yer</entry>
+	<entry key="version.uninitialized">Uzak versiyon denetlemesi başarisiz</entry>
+	<entry key="version.current">En yeni versiyonu kullanıyorsunuz (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Yeni bir @MOD_NAME@ versionu var (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Burdan Indirin: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Error kontrol dosyası bulunamadı</entry>
+	<entry key="version.check_disabled">Uzak versiyon denetlemesi kapalı, geçiliyor...</entry>
+</properties>
