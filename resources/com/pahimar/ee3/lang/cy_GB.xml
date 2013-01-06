@@ -37,10 +37,10 @@
 	<entry key="tile.calcinator.name">Calchyniadwr</entry>
 	<entry key="gui.calcinator.name">Calchyniadwr</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="version.init_log_message">Ymgychwynnu gwiriad fersiwn yn erbyn y ffeil awdurdod fersiwn o bell, a leolir ar</entry>
+	<entry key="version.init_log_message">Ymgychwynnu gwiriad fersiwn yn erbyn yr awdurdod fersiwn pell, a leolir ar</entry>
 	<entry key="version.uninitialized">Ni ymgychwynodd y gwiriad fersiwn yn briodol</entry>
 	<entry key="version.current">Rydych yn defnyddio y fersiwn diweddaraf (@REMOTE_MOD_VERSION@) o Equivalent Exchange 3 ar gyfer @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Mae yna fersiwn mwy diweddar o @MOD_NAME@ ar gael (@REMOTE_MOD_VERSION@) ar gyfer @MINECRAFT_VERSION@. Ffeindiwch o yma: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.connection_error">Gwall wrth drio cysylltu gyda'r ffeil awdurdod fersiwn o bell (Gwiriwch eich cysylltiad rhwydwaith)</entry>
-	<entry key="version.check_disabled">Gwiriad fersiwn o bell wedi'i ddiffodd, esgusodid</entry>
+	<entry key="version.general_error">Gwall wrth drio gwirio y ffeil awdurdod fersiwn pell</entry>
+	<entry key="version.check_disabled">Gwiriad fersiwn pell wedi'i ddiffodd, esgusodid</entry>
 </properties>
