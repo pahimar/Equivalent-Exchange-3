@@ -17,7 +17,7 @@ public class AddonRedPower2 {
 
     public static void initWorld() {
 
-        if (Loader.isModLoaded("RedPowerWorld")) {
+        if (Loader.isModLoaded("com.eloraam.redpower.RedPowerWorld")) {
             try {
                 rp2Stone = (Block) Class.forName("com.eloraam.redpower.RedPowerWorld").getField("blockStone").get(null);
 
