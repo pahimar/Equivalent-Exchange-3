@@ -30,7 +30,7 @@ public class VersionHelper implements Runnable {
     private static VersionHelper instance = new VersionHelper();
 
     // The (publicly available) remote version number authority file
-    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml.z";
+    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml";
 
     public static Properties remoteVersionProperties = new Properties();
 
@@ -42,7 +42,7 @@ public class VersionHelper implements Runnable {
     public static final byte FINAL_ERROR = 4;
 
     // Var to hold the result of the remote version check, initially set to uninitialized
-    public static byte result = UNINITIALIZED;
+    private static byte result = UNINITIALIZED;
     public static String remoteVersion = null;
     public static String remoteUpdateLocation = null;
 
@@ -150,6 +150,10 @@ public class VersionHelper implements Runnable {
         returnString = returnString.replace("@MINECRAFT_VERSION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE);
         returnString = returnString.replace("@MOD_UPDATE_LOCATION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
         return returnString;
+    }
+    
+    public static byte getResult() {
+        return result;
     }
 
     @Override
