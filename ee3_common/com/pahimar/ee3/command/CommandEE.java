@@ -15,6 +15,12 @@ public class CommandEE extends CommandBase {
 
         return COMMAND_EE3;
     }
+    
+    
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
+        return true;
+    }
+    
 
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 
@@ -86,6 +92,9 @@ public class CommandEE extends CommandBase {
             }
             else if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_SOUNDS))) {
                 CommandSounds.processCommand(commandSender, args);
+            }
+            else {
+                throw new WrongUsageException(getLocalizedString(COMMAND_EE3_USAGE), new Object[0]);
             }
         }
         else {

@@ -56,7 +56,7 @@ public class CommandOverlay {
 
     private static void processScaleCommand(ICommandSender commandSender, String[] args) {
 
-        if (args.length >= 2) {
+        if ((args.length > 2) && (args.length < 4)) {
             try {
                 float scale = Float.parseFloat(args[1]);
 
@@ -80,7 +80,7 @@ public class CommandOverlay {
 
     private static void processOpacityCommand(ICommandSender commandSender, String[] args) {
 
-        if (args.length >= 2) {
+        if ((args.length > 2) && (args.length < 4)) {
             try {
                 float opacity = Float.parseFloat(args[1]);
 
@@ -106,7 +106,7 @@ public class CommandOverlay {
 
         String yPosition, xPosition;
 
-        if (args.length >= 3) {
+        if ((args.length > 2) && (args.length < 5)) {
             yPosition = args[1];
             xPosition = args[2];
 
@@ -135,7 +135,7 @@ public class CommandOverlay {
             }
         }
         else {
-            new WrongUsageException(getLocalizedString(COMMAND_OVERLAY_POSITION_USAGE), new Object[0]);
+            throw new WrongUsageException(getLocalizedString(COMMAND_OVERLAY_POSITION_USAGE), new Object[0]);
         }
     }
 }

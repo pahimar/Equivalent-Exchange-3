@@ -25,10 +25,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class VersionHelper {
+public class VersionHelper implements Runnable {
+
+    private static VersionHelper instance = new VersionHelper();
 
     // The (publicly available) remote version number authority file
-    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml";
+    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml.z";
 
     public static Properties remoteVersionProperties = new Properties();
 
@@ -36,7 +38,8 @@ public class VersionHelper {
     public static final byte UNINITIALIZED = 0;
     public static final byte CURRENT = 1;
     public static final byte OUTDATED = 2;
-    public static final byte GENERAL_ERROR = 3;
+    public static final byte ERROR = 3;
+    public static final byte FINAL_ERROR = 4;
 
     // Var to hold the result of the remote version check, initially set to uninitialized
     public static byte result = UNINITIALIZED;
@@ -51,6 +54,7 @@ public class VersionHelper {
     public static void checkVersion() {
 
         InputStream remoteVersionRepoStream = null;
+        result = UNINITIALIZED;
 
         try {
             URL remoteVersionURL = new URL(REMOTE_VERSION_XML_FILE);
@@ -71,12 +75,11 @@ public class VersionHelper {
 
             result = OUTDATED;
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (Exception e) {
         }
         finally {
             if (result == UNINITIALIZED) {
-                result = GENERAL_ERROR;
+                result = ERROR;
             }
 
             try {
@@ -84,8 +87,7 @@ public class VersionHelper {
                     remoteVersionRepoStream.close();
                 }
             }
-            catch (IOException ex) {
-                ex.printStackTrace();
+            catch (Exception ex) {
             }
         }
     }
@@ -93,7 +95,6 @@ public class VersionHelper {
     public static void logResult() {
 
         if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-            LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
             if ((result == CURRENT) || (result == OUTDATED)) {
                 LogHelper.log(Level.INFO, getResultMessage());
             }
@@ -126,8 +127,11 @@ public class VersionHelper {
                 returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
                 return returnString;
             }
-            else if (result == GENERAL_ERROR) {
+            else if (result == ERROR) {
                 return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
+            }
+            else if (result == FINAL_ERROR) {
+                return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
             }
             else {
                 return null;
@@ -146,6 +150,46 @@ public class VersionHelper {
         returnString = returnString.replace("@MINECRAFT_VERSION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE);
         returnString = returnString.replace("@MOD_UPDATE_LOCATION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
         return returnString;
+    }
+
+    @Override
+    public void run() {
+
+        int count = 0;
+
+        LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
+
+        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
+            try {
+                while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result != CURRENT) || (result != OUTDATED))) {
+
+                    checkVersion();
+                    count++;
+                    logResult();
+
+                    if ((result == UNINITIALIZED) || (result == ERROR)) {
+                        Thread.sleep(10000);
+                    }
+                }
+                
+                if (result == ERROR) {
+                    result = FINAL_ERROR;
+                    logResult();
+                }
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            logResult();
+        }
+
+    }
+
+    public static void execute() {
+
+        new Thread(instance).start();
     }
 
 }
