@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>German (DE) Localization File</comment>
@@ -7,7 +7,7 @@
 	<entry key="key.toggle">Umschalten</entry>
 	<entry key="key.charge">Aufladen</entry>
 	<entry key="item.miniumShard.name">Miniumscherbe</entry>
-	<entry key="item.inertStone.name">Träger Stein</entry>
+	<entry key="item.inertStone.name">Trägerstein</entry>
 	<entry key="item.miniumStone.name">Miniumstein</entry>
 	<entry key="item.philStone.name">Stein der Weisen</entry>
 	<entry key="item.alchemyDust.ash.name">Asche</entry>
@@ -43,4 +43,42 @@
 	<entry key="version.outdated">Eine neue @MOD_NAME@ Version für @MINECRAFT_VERSION@ ist verfügbar (@REMOTE_MOD_VERSION@). Hole sie dir hier: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.connection_error">Fehler bei der Verbindung zur Remotedatei(überprüfe bitte deine Internetverbindung)</entry>
 	<entry key="version.check_disabled">Versionsvergleich mit der Remotedatei deaktiviert, überspringe</entry>
+	<!--<entry key="command.ee3.on">an</entry>
+	<entry key="command.ee3.off">aus</entry>
+	<entry key="command.ee3.all">alle</entry>
+	<entry key="command.ee3.self">eigene</entry>
+	<entry key="command.ee3.overlay">overlay</entry>
+	<entry key="command.ee3.position">position</entry>
+	<entry key="command.ee3.opacity">deckkraft</entry>
+	<entry key="command.ee3.scale">skalierung</entry>
+	<entry key="command.ee3.top">oben</entry>
+	<entry key="command.ee3.bottom">unten</entry>
+	<entry key="command.ee3.left">links</entry>
+	<entry key="command.ee3.right">rechts</entry>
+	<entry key="command.ee3.particles">partikel</entry>
+	<entry key="command.ee3.sounds">töne</entry>
+	<entry key="command.ee3.version">version</entry>
+	<entry key="command.ee3.usage">ee3 [ overlay | partikel | töne | version ]</entry>
+	<entry key="command.ee3.overlay.usage">ee3 overlay [ an | aus | position | skalierung | deckkraft ]</entry>-->
+	<entry key="command.ee3.overlay.turned_on">Verwandlungs-Overlay Aktiviert</entry>
+	<entry key="command.ee3.overlay.turned_off">Verwandlungs-Overlay deaktiviert</entry>
+	<!--<entry key="command.ee3.overlay.position.usage">ee3 overlay position [ oben | unten ] [ links | rechts ]</entry>-->
+	<entry key="command.ee3.overlay.position.top_left">Verwandlungsoverlay-Position wurde auf oben links gestellt</entry>
+	<entry key="command.ee3.overlay.position.top_right">Verwandlungsoverlay-Position wurde auf oben rechts gestellt</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Verwandlungsoverlay-Position wurde auf unten links gestellt</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Verwandlungsoverlay-Position wurde auf unten rechts gestellt</entry>
+	<!--<entry key="command.ee3.overlay.opacity.usage">ee3 overlay deckkraft ### (wobei ### eine Zahl zwischen 0.0 und 1.0 ist) </entry>-->
+	<entry key="command.ee3.overlay.opacity.usage">ee3 overlay opacity ### (wobei ### eine Zahl zwischen 0.0 und 1.0 ist) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Deckkraft des Verwandlungs-Overlay erfolgreich geändert</entry>
+	<!--<entry key="command.ee3.overlay.scale.usage">ee3 overlay skalierung ### (wobei ### eine zahl größer als 0.0 sein muss) </entry>-->
+	<entry key="command.ee3.overlay.scale.usage">ee3 overlay scale ### (wobei ### eine zahl größer als 0.0 sein muss) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Skalierung des Verwandlusngs-Overlay erfolgreich geändert</entry>
+	<!--<entry key="command.ee3.particles.usage">ee3 partikel [ an | aus ]</entry>-->
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3-Partikel aktiviert</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3-Partikel deaktiviert</entry>
+	<!--<entry key="command.ee3.sounds.usage">ee3 sounds [ alle | eigene | aus ]</entry>-->
+	<entry key="command.ee3.sounds.set_to_all">Spiele Equivalent Exchange 3 Töne aller Spieler</entry>
+	<entry key="command.ee3.sounds.set_to_self">Spiele nur selbst verursachte Equivalent Exchange 3 Töne</entry>
+	<entry key="command.ee3.sounds.turned_off">Spiele keine Equivalent Exchange 3 Töne</entry>
+	<entry key="command.ee3.version.usage">command.ee3.version.usage</entry>
 </properties>
