@@ -64,9 +64,9 @@
 	<entry key="command.ee3.overlay.turned_off">Verwandlungs-Overlay deaktiviert</entry>
 	<!--<entry key="command.ee3.overlay.position.usage">ee3 overlay position [ oben | unten ] [ links | rechts ]</entry>-->
 	<entry key="command.ee3.overlay.position.top_left">Verwandlungsoverlay-Position wurde auf oben links gestellt</entry>
-	<entry key="command.ee3.overlay.position.top_right">Verwandlungsoverlay-Position wurde auf oben retchs gestellt</entry>
+	<entry key="command.ee3.overlay.position.top_right">Verwandlungsoverlay-Position wurde auf oben rechts gestellt</entry>
 	<entry key="command.ee3.overlay.position.bottom_left">Verwandlungsoverlay-Position wurde auf unten links gestellt</entry>
-	<entry key="command.ee3.overlay.position.bottom_right">Verwandlungsoverlay-Position wurde auf oben rechts gestellt</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Verwandlungsoverlay-Position wurde auf unten rechts gestellt</entry>
 	<!--<entry key="command.ee3.overlay.opacity.usage">ee3 overlay deckkraft ### (wobei ### eine Zahl zwischen 0.0 und 1.0 ist) </entry>-->
 	<entry key="command.ee3.overlay.opacity.usage">ee3 overlay opacity ### (wobei ### eine Zahl zwischen 0.0 und 1.0 ist) </entry>
 	<entry key="command.ee3.overlay.opacity.updated">Deckkraft des Verwandlungs-Overlay erfolgreich geändert</entry>
