@@ -6,7 +6,6 @@ import net.minecraftforge.common.MinecraftForge;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.handlers.ActionRequestHandler;
 import com.pahimar.ee3.core.handlers.AddonHandler;
 import com.pahimar.ee3.core.handlers.EntityLivingHandler;
@@ -86,10 +85,7 @@ public class EquivalentExchange3 {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         // Conduct the version check and log the result
-        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-            VersionHelper.checkVersion();
-        }
-        VersionHelper.logResult();
+        VersionHelper.execute();
 
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
