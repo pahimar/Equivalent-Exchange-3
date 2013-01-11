@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Archivo de Traducción en Español (ES)</comment>
@@ -44,40 +44,19 @@
 	<entry key="version.general_error">Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)</entry>
 	<entry key="version.final_error">Chequeo de versión detenido después de tres intentos de conexión sin éxito</entry>
 	<entry key="version.check_disabled">Chequeo remoto de versiones desactivado, omitiendo</entry>
-	<entry key="command.ee3.on">activado</entry>
-	<entry key="command.ee3.off">desactivado</entry>
-	<entry key="command.ee3.all">todos</entry>
-	<entry key="command.ee3.self">propio</entry>
-	<entry key="command.ee3.overlay">superposición</entry>
-	<entry key="command.ee3.position">posición</entry>
-	<entry key="command.ee3.opacity">opacidad</entry>
-	<entry key="command.ee3.scale">escala</entry>
-	<entry key="command.ee3.top">superior</entry>
-	<entry key="command.ee3.bottom">inferior</entry>
-	<entry key="command.ee3.left">izquierda</entry>
-	<entry key="command.ee3.right">derecha</entry>
-	<entry key="command.ee3.particles">partículas</entry>
-	<entry key="command.ee3.sounds">sonidos</entry>
-	<entry key="command.ee3.version">versión</entry>
-	<entry key="command.ee3.usage">ee3 [ superposición | partículas | sonidos | versión ]</entry>
-	<entry key="command.ee3.overlay.usage">ee3 superposición [ activado | desactivado | posición | escala | opacidad ]</entry>
 	<entry key="command.ee3.overlay.turned_on">Superposicón del objetivo a tranmutar activada</entry>
 	<entry key="command.ee3.overlay.turned_off">Superposicón del objetivo a tranmutar desactivada</entry>
-	<entry key="command.ee3.overlay.position.usage">ee3 superposición posición [ superior | inferior ] [ izquierda | derecha ]</entry>
 	<entry key="command.ee3.overlay.position.top_left">Posición de la superposición del objetivo a transmutar fijada a la parte superior izquierda</entry>
 	<entry key="command.ee3.overlay.position.top_right">Posición de la superposición del objetivo a transmutar fijada a la parte superior derecha</entry>
 	<entry key="command.ee3.overlay.position.bottom_left">Posición de la superposición del objetivo a transmutar fijada a la parte inferior izquierda</entry>
 	<entry key="command.ee3.overlay.position.bottom_right">Posición de la superposición del objetivo a transmutar fijada a la parte inferior derecha</entry>
-	<entry key="command.ee3.overlay.opacity.usage">ee3 superposición opacidad ### (donde ### es un número decimal entre 0.0 y 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(donde ### es un número decimal entre 0.0 y 1.0) </entry>
 	<entry key="command.ee3.overlay.opacity.updated">Opacidad de la superposición del objetivo a transmutar actualizada exitosamente</entry>
-	<entry key="command.ee3.overlay.scale.usage">ee3 superposición escala ### (donde ### es un número decimal mayor que 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(donde ### es un número decimal mayor que 0.0) </entry>
 	<entry key="command.ee3.overlay.scale.updated">Escala de la superposición del objetivo a transmutar actualizada exitosamente</entry>
-	<entry key="command.ee3.particles.usage">ee3 particulas [ activado | desactivado ]</entry>
 	<entry key="command.ee3.particles.turned_on">Particulas de ee3 activadas</entry>
 	<entry key="command.ee3.particles.turned_off">Particulas de ee3 desactivadas</entry>
-	<entry key="command.ee3.sounds.usage">ee3 sonidos [ activado | propio | desactivado ]</entry>
 	<entry key="command.ee3.sounds.set_to_all">Reproduciendo sonidos de Equivalent Exchange 3 provenientes de todos los jugadores</entry>
 	<entry key="command.ee3.sounds.set_to_self">Solo reproduciendo sonidos de Equivalent Exchange 3 propios</entry>
 	<entry key="command.ee3.sounds.turned_off">Desactivados los sonidos de Equivalent Exchange 3</entry>
-	<entry key="command.ee3.version.usage">command.ee3.version.usage</entry>
 </properties>
