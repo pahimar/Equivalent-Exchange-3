@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -63,14 +63,14 @@ public class PacketSoundEvent extends PacketEE {
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
-        
-        if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Strings.ALL)) {
-            FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float)x, (float)y, (float)z, volume, pitch);
+
+        if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.ALL)) {
+            FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float) x, (float) y, (float) z, volume, pitch);
         }
-        else if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Strings.SELF)) {
+        else if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.SELF)) {
             if (thePlayer.username.equalsIgnoreCase(playerName)) {
-                FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float)x, (float)y, (float)z, volume, pitch);
+                FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float) x, (float) y, (float) z, volume, pitch);
             }
-        }    
+        }
     }
 }
