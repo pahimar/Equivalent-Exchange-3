@@ -1,67 +1,54 @@
 package com.pahimar.ee3.command;
 
-import static com.pahimar.ee3.core.helper.LocalizationHelper.getLocalizedString;
-import static com.pahimar.ee3.lib.Strings.*;
-
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 
+import com.pahimar.ee3.lib.Commands;
+
 public class CommandEE extends CommandBase {
 
     public String getCommandName() {
 
-        return COMMAND_EE3;
+        return Commands.COMMAND_EE3;
+    }
+
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
+
+        return true;
     }
 
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 
         switch (args.length) {
             case 1: {
-                return getListOfStringsMatchingLastWord(args, new String[] {
-                        getLocalizedString(COMMAND_OVERLAY),
-                        getLocalizedString(COMMAND_PARTICLES),
-                        getLocalizedString(COMMAND_SOUNDS) });
+                return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_OVERLAY, Commands.COMMAND_PARTICLES, Commands.COMMAND_SOUNDS });
             }
             case 2: {
-                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
-                    return getListOfStringsMatchingLastWord(args, new String[] {
-                            getLocalizedString(COMMAND_ON),
-                            getLocalizedString(COMMAND_OFF),
-                            getLocalizedString(COMMAND_POSITION),
-                            getLocalizedString(COMMAND_SCALE),
-                            getLocalizedString(COMMAND_OPACITY) });
+                if (args[0].equalsIgnoreCase(Commands.COMMAND_OVERLAY)) {
+                    return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_ON, Commands.COMMAND_OFF, Commands.COMMAND_POSITION, Commands.COMMAND_SCALE, Commands.COMMAND_OPACITY });
                 }
-                else if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_PARTICLES))) {
-                    return getListOfStringsMatchingLastWord(args, new String[] {
-                            getLocalizedString(COMMAND_ON),
-                            getLocalizedString(COMMAND_OFF) });
+                else if (args[0].equalsIgnoreCase(Commands.COMMAND_PARTICLES)) {
+                    return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_ON, Commands.COMMAND_OFF });
                 }
-                else if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_SOUNDS))) {
-                    return getListOfStringsMatchingLastWord(args, new String[] {
-                            getLocalizedString(COMMAND_ALL),
-                            getLocalizedString(COMMAND_SELF),
-                            getLocalizedString(COMMAND_OFF) });
+                else if (args[0].equalsIgnoreCase(Commands.COMMAND_SOUNDS)) {
+                    return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_ALL, Commands.COMMAND_SELF, Commands.COMMAND_OFF });
                 }
             }
             case 3: {
-                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
-                    if (args[1].equalsIgnoreCase(getLocalizedString(COMMAND_POSITION))) {
-                        return getListOfStringsMatchingLastWord(args, new String[] {
-                                getLocalizedString(COMMAND_TOP),
-                                getLocalizedString(COMMAND_BOTTOM) });
+                if (args[0].equalsIgnoreCase(Commands.COMMAND_OVERLAY)) {
+                    if (args[1].equalsIgnoreCase(Commands.COMMAND_POSITION)) {
+                        return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_TOP, Commands.COMMAND_BOTTOM });
                     }
                 }
             }
             case 4: {
-                if (args[0].equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
-                    if (args[1].equalsIgnoreCase(getLocalizedString(COMMAND_POSITION))) {
-                        if (args[2].equalsIgnoreCase(getLocalizedString(COMMAND_TOP)) || args[2].equalsIgnoreCase(getLocalizedString(COMMAND_BOTTOM))) {
-                            return getListOfStringsMatchingLastWord(args, new String[] {
-                                    getLocalizedString(COMMAND_LEFT),
-                                    getLocalizedString(COMMAND_RIGHT) });
+                if (args[0].equalsIgnoreCase(Commands.COMMAND_OVERLAY)) {
+                    if (args[1].equalsIgnoreCase(Commands.COMMAND_POSITION)) {
+                        if (args[2].equalsIgnoreCase(Commands.COMMAND_TOP) || args[2].equalsIgnoreCase(Commands.COMMAND_BOTTOM)) {
+                            return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_LEFT, Commands.COMMAND_RIGHT });
                         }
                     }
                 }
@@ -78,18 +65,21 @@ public class CommandEE extends CommandBase {
             String commandName = args[0];
             System.arraycopy(args, 1, args, 0, args.length - 1);
 
-            if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_OVERLAY))) {
+            if (commandName.equalsIgnoreCase(Commands.COMMAND_OVERLAY)) {
                 CommandOverlay.processCommand(commandSender, args);
             }
-            else if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_PARTICLES))) {
+            else if (commandName.equalsIgnoreCase(Commands.COMMAND_PARTICLES)) {
                 CommandParticles.processCommand(commandSender, args);
             }
-            else if (commandName.equalsIgnoreCase(getLocalizedString(COMMAND_SOUNDS))) {
+            else if (commandName.equalsIgnoreCase(Commands.COMMAND_SOUNDS)) {
                 CommandSounds.processCommand(commandSender, args);
+            }
+            else {
+                throw new WrongUsageException(Commands.COMMAND_EE3_USAGE, new Object[0]);
             }
         }
         else {
-            throw new WrongUsageException(getLocalizedString(COMMAND_EE3_USAGE), new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_EE3_USAGE, new Object[0]);
         }
     }
 }

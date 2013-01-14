@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Dutch (NL) Localization File</comment>
@@ -42,6 +42,7 @@
 	<entry key="version.current">Je gebruikt momenteel de meest recente versie (@REMOTE_MOD_VERSION@) van Equivalent Exchange 3 voor @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Een nieuwe @MOD_NAME@ versie bestaat (@REMOTE_MOD_VERSION@) voor @MINECRAFT_VERSION@. Je vindt deze hier: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Er deed zich een fout voor tijdens de versiecontrole</entry>
+	<entry key="version.final_error">Versiecontrole stopt na dire mislukte connectie pogingen</entry>
 	<entry key="version.check_disabled">Externe versiecontrole uitgeschakeld, wordt overgeslagen</entry>
 	<entry key="command.ee3.on">aan</entry>
 	<entry key="command.ee3.off">uit</entry>
