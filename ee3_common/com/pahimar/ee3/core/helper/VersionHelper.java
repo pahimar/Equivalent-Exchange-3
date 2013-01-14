@@ -165,7 +165,7 @@ public class VersionHelper implements Runnable {
 
         if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
             try {
-                while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result != CURRENT) || (result != OUTDATED))) {
+                while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result == UNINITIALIZED) || (result == ERROR))) {
 
                     checkVersion();
                     count++;
