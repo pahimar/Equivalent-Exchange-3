@@ -36,6 +36,7 @@
 	<entry key="tile.redWaterFlowing.name">Rödvatten (Forsande)</entry>
 	<entry key="tile.calcinator.name">Kalcinator</entry>
 	<entry key="gui.calcinator.name">Kalcinator</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initierar versionskontroll mot fjärrversions auktoritetsfil, lokaliserad vid</entry>
 	<entry key="version.uninitialized">Versionskontrollen misslyckades (Versionskontrollen initierades inte korrekt)</entry>
 	<entry key="version.current">Du använder den mest uppdaterade versionen (@REMOTE_MOD_VERSION@) av Equivalent Exchange 3 för @MINECRAFT_VERSION@</entry>
