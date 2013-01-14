@@ -1,4 +1,6 @@
-package com.pahimar.ee3.lib;
+package com.pahimar.ee3.configuration;
+
+import com.pahimar.ee3.lib.Strings;
 
 /**
  * ConfigurationSettings
@@ -14,15 +16,17 @@ public class ConfigurationSettings {
     /*
      * General configuration settings
      */
-    // Whether or not EE3 sounds are enabled
-    public static boolean ENABLE_SOUNDS;
-    public static final String ENABLE_SOUNDS_CONFIGNAME = "sounds.enabled";
-    public static final boolean ENABLE_SOUNDS_DEFAULT = true;
-
     // Whether or not EE3 will do a version check when loaded
     public static boolean ENABLE_VERSION_CHECK;
     public static final String ENABLE_VERSION_CHECK_CONFIGNAME = "version_check.enabled";
     public static final boolean ENABLE_VERSION_CHECK_DEFAULT = true;
+    
+    /*
+     * Audio config settings
+     */
+    public static String ENABLE_SOUNDS;
+    public static final String ENABLE_SOUNDS_CONFIGNAME = "sounds.enabled";
+    public static final String ENABLE_SOUNDS_DEFAULT = "all";
 
     /*
      * Graphic config settings
@@ -32,10 +36,22 @@ public class ConfigurationSettings {
     public static final String ENABLE_PARTICLE_FX_CONFIGNAME = "particle_fx.enabled";
     public static final boolean ENABLE_PARTICLE_FX_DEFAULT = true;
 
-    // Whether or not the in world transmutation overlay is enabled
+    // Whether or not the in world transmutation overlays are enabled
     public static boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION;
     public static final String ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME = "world_transmutation_overlay.enabled";
     public static final boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT = true;
+    
+    public static int TARGET_BLOCK_OVERLAY_POSITION;
+    public static final String TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME = "block_overlay_position";
+    public static final int TARGET_BLOCK_OVERLAY_POSITION_DEFAULT = 3;
+    
+    public static float TARGET_BLOCK_OVERLAY_OPACITY;
+    public static final String TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME = "block_overlay_opacity";
+    public static final float TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT = 0.75F;
+    
+    public static float TARGET_BLOCK_OVERLAY_SCALE;
+    public static final String TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME = "block_overlay_scale";
+    public static final float TARGET_BLOCK_OVERLAY_SCALE_DEFAULT = 2.5F;
 
     /*
      * Block related config settings

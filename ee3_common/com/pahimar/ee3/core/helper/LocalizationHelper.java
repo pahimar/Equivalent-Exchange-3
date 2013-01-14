@@ -1,5 +1,9 @@
 package com.pahimar.ee3.core.helper;
 
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 /**
  * LocalizationHelper
  * 
@@ -34,6 +38,11 @@ public class LocalizationHelper {
     public static String getLocaleFromFileName(String fileName) {
 
         return fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
+    }
+    
+    public static String getLocalizedString(String key) {
+        
+        return LanguageRegistry.instance().getStringLocalization(key);
     }
 
 }

@@ -143,7 +143,7 @@ public class RecipeHelper {
 
         ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(input);
 
-        if (result == null)
+        if ((input == null) || (input.getItem() == null) || (result == null))
             return;
 
         Object[] list = new Object[9];

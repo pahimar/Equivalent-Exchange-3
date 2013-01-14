@@ -40,26 +40,6 @@ public class PacketTileUpdate extends PacketEE {
         this.z = z;
     }
 
-    public void setDirection(ForgeDirection direction) {
-
-        // TODO: Convert from ForgeDirection to the appropriate byte value
-    }
-
-    public void setDirection(byte direction) {
-
-        this.direction = direction;
-    }
-
-    public void setState(short state) {
-
-        this.state = state;
-    }
-
-    public void setPlayerName(String player) {
-
-        this.player = player;
-    }
-
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeInt(x);

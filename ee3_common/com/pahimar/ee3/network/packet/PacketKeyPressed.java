@@ -46,11 +46,6 @@ public class PacketKeyPressed extends PacketEE {
         this.key = data.readUTF();
     }
 
-    public void setKey(String key) {
-
-        this.key = key;
-    }
-
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;

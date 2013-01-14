@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
@@ -26,8 +26,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE
-        implements ITransmutationStone, IKeyBound {
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
+        IKeyBound {
 
     public ItemMiniumStone(int id) {
 
@@ -67,7 +67,9 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ) {
 
-        transmuteBlocks(itemStack, entityPlayer, world, x, y, z, sideHit);
+        if (world.isRemote) {
+            transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+        }
         return true;
     }
 
@@ -84,13 +86,9 @@ public class ItemMiniumStone extends ItemEE
     }
 
     @Override
-    public void transmuteBlocks(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
+    public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
 
-        if (!world.isRemote) {
-            if (TransmutationHelper.targetBlockStack != null) {
-                EquivalentExchange3.proxy.sendWorldEventPacket(ActionTypes.TRANSMUTATION, x, y, z, (byte) sideHit, (byte) 0, (byte) 0, (byte) 0, TransmutationHelper.formatTargetBlockInfo(TransmutationHelper.targetBlockStack));
-            }
-        }
+        EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
     }
 
     @Override
@@ -101,7 +99,11 @@ public class ItemMiniumStone extends ItemEE
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {
-                TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage(), true);
+            	if(!thePlayer.isSneaking()){
+            		TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+            	}else{
+            		TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+            	}
             }
         }
 

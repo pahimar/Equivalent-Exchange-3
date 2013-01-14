@@ -7,7 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.lib.ConfigurationSettings;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 
 /**
  * RedWaterHelper

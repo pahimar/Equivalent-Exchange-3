@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
+import com.pahimar.ee3.lib.Sounds;
 
 /**
  * TransmutationHelper
@@ -30,7 +33,6 @@ public class TransmutationHelper {
 
         if (Block.blocksList[targetID] != null) {
             world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
-            world.spawnParticle("largesmoke", x, y + 1, z, 1.0D, 1.0D, 1.0D);
             return true;
         }
 
@@ -49,7 +51,16 @@ public class TransmutationHelper {
 
     public static void updateTargetBlock(World world, int x, int y, int z) {
 
-        currentBlockStack = new ItemStack(world.getBlockId(x, y, z), 1, world.getBlockMetadata(x, y, z));
+        int id = world.getBlockId(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+
+        Block currentBlock = Block.blocksList[id];
+
+        if (currentBlock != null) {
+            meta = currentBlock.damageDropped(meta);
+        }
+
+        currentBlockStack = new ItemStack(id, 1, meta);
 
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
@@ -65,23 +76,17 @@ public class TransmutationHelper {
 
     public static ItemStack getNextBlock(int id, int meta) {
 
-        return getNextBlock(id, meta, true);
-    }
-
-    public static ItemStack getNextBlock(int id, int meta, boolean allowFalling) {
-
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
 
         ItemStack nextStack = null;
 
         if (list != null) {
-            return getNextBlock(id, meta, id, meta, allowFalling);
+            return getNextBlock(id, meta, id, meta);
         }
-
         return nextStack;
     }
 
-    private static ItemStack getNextBlock(int id, int meta, int origId, int origMeta, boolean allowFalling) {
+    private static ItemStack getNextBlock(int id, int meta, int origId, int origMeta) {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
 
@@ -89,6 +94,7 @@ public class TransmutationHelper {
 
         if (list != null) {
             nextStack = EquivalencyHandler.instance().getNextInList(id, meta);
+            nextStack.stackSize = 1;
 
             /*
              * If the current item is the same as the original one we started
@@ -100,39 +106,54 @@ public class TransmutationHelper {
                 return nextStack;
             }
             else {
-                /*
-                 * If we are allowing any block (including falling ones) just
-                 * check to see if the next item is a block. If it is, return
-                 * it. Otherwise continue the recursion.
-                 */
-                if (allowFalling) {
-                    if (nextStack.getItem() instanceof ItemBlock) {
-                        return nextStack;
-                    }
-                    else {
-                        return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
-                    }
+                if (nextStack.getItem() instanceof ItemBlock) {
+                    return nextStack;
                 }
-                /*
-                 * Else we need to check to make sure the next item is both a
-                 * block and not an instance of BlockSand (which all gravity
-                 * affected blocks are a subclass of. If the next item is a
-                 * block, and is not a subclass of BlockSand return it,
-                 * otherwise, continue the recursion.
-                 */
                 else {
-                    if ((nextStack.getItem() instanceof ItemBlock) && (!(Block.blocksList[nextStack.itemID] instanceof BlockSand))) {
-                        return nextStack;
-                    }
-                    else {
-                        return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta, allowFalling);
-                    }
+                    return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta);
                 }
             }
         }
 
         // In the event the list is null, return null
         return nextStack;
+    }
+
+	public static ItemStack getPreviousBlock(int itemID, int meta) {
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(itemID, meta);
+
+        ItemStack prevStack = null;
+
+        if (list != null) {
+            return getPreviousBlock(itemID, meta, itemID, meta);
+        }
+        return prevStack;
+	}
+	
+	private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta) {
+
+        ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
+
+        ItemStack prevStack = null;
+        if (list != null) {
+            prevStack = EquivalencyHandler.instance().getPrevInList(id, meta);
+            prevStack.stackSize = 1;
+
+            if ((prevStack.itemID == origId) && (prevStack.getItemDamage() == origMeta)) {
+                return prevStack;
+            }
+            else {
+                if (prevStack.getItem() instanceof ItemBlock) {
+                    return prevStack;
+                }
+                else {
+                    return getPreviousBlock(prevStack.itemID, prevStack.getItemDamage(), origId, origMeta);
+                }
+            }
+        }
+
+        // In the event the list is null, return null
+        return prevStack;
     }
 
 }

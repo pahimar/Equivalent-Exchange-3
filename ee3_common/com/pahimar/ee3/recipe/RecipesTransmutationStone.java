@@ -195,10 +195,14 @@ public class RecipesTransmutationStone {
         EquivalencyHandler.instance().addObjects(Block.mushroomRed, Block.mushroomBrown);
         EquivalencyHandler.instance().addObjects(Item.pumpkinSeeds, Item.melonSeeds);
         EquivalencyHandler.instance().addObjects(Block.pumpkin, Block.melon);
+        EquivalencyHandler.instance().addObjects(Block.pumpkinStem, Block.melonStem);
+        EquivalencyHandler.instance().addObjects(Block.stairsWoodSpruce, Block.stairsWoodBirch, Block.stairsWoodJungle);
         EquivalencyHandler.instance().addObjects(new ItemStack(Item.paper, 3), new ItemStack(Item.reed, 3));
         EquivalencyHandler.instance().addObjects(new ItemStack(Item.flint, 2), new ItemStack(Block.gravel, 2), new ItemStack(Block.sandStone, 2, 0), new ItemStack(Block.sandStone, 2, 1), new ItemStack(Block.sandStone, 2, 2));
         EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.planks, 4));
         EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.wood, 4));
+        EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.woodSingleSlab, 4));
+        EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.woodDoubleSlab, 4));
         EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.sapling, 4));
         EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.leaves, 4));
         EquivalencyHandler.instance().addObjects(RecipeHelper.getMetaCycle(Block.tallGrass, 3));

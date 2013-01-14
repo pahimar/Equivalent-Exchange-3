@@ -10,7 +10,7 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.packet.PacketEE;
 import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
-import com.pahimar.ee3.network.packet.PacketResultEvent;
+import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
 
@@ -29,7 +29,7 @@ public enum PacketTypeHandler {
     TILE(PacketTileUpdate.class),
     REQUEST_EVENT(PacketRequestEvent.class),
     SPAWN_PARTICLE(PacketSpawnParticle.class),
-    RESULT_EVENT(PacketResultEvent.class);
+    SOUND_EVENT(PacketSoundEvent.class);
 
     private Class<? extends PacketEE> clazz;
 

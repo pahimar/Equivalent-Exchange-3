@@ -3,6 +3,8 @@ package com.pahimar.ee3.lib;
 public class Strings {
 
     /* General keys */
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
 
     /* Version check related constants */
     public static final String VERSION_CHECK_DISABLED = "version.check_disabled";
@@ -11,6 +13,7 @@ public class Strings {
     public static final String CURRENT_MESSAGE = "version.current";
     public static final String OUTDATED_MESSAGE = "version.outdated";
     public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
+    public static final String FINAL_ERROR_MESSAGE = "version.final_error";
 
     /* Gui related constants */
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";

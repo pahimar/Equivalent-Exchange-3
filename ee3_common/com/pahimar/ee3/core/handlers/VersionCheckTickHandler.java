@@ -2,8 +2,8 @@ package com.pahimar.ee3.core.handlers;
 
 import java.util.EnumSet;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.VersionHelper;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -37,9 +37,13 @@ public class VersionCheckTickHandler implements ITickHandler {
                 for (TickType tickType : type) {
                     if (tickType == TickType.CLIENT) {
                         if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                            initialized = true;
-                            if (VersionHelper.result == VersionHelper.OUTDATED) {
-                                FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(VersionHelper.getResultMessageForClient());
+                            if ((VersionHelper.getResult() != VersionHelper.UNINITIALIZED) || (VersionHelper.getResult() != VersionHelper.FINAL_ERROR)) {
+                                
+                                initialized = true;
+                                
+                                if (VersionHelper.getResult() == VersionHelper.OUTDATED) {
+                                    FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(VersionHelper.getResultMessageForClient());
+                                }
                             }
                         }
                     }

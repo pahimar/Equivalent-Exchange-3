@@ -13,17 +13,17 @@ import net.minecraft.util.MovingObjectPosition;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.RenderUtils;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.ConfigurationSettings;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-public class TransmutationStoneOverlayHandler implements ITickHandler {
+public class TransmutationTargetOverlayHandler implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
@@ -62,9 +62,9 @@ public class TransmutationStoneOverlayHandler implements ITickHandler {
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
 
-        float overlayScale = 2F;
+        float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
-        float overlayOpacity = 0.5F;
+        float overlayOpacity = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY;
 
         MovingObjectPosition rayTrace = minecraft.objectMouseOver;
         ItemStack currentBlock = null;
@@ -86,10 +86,44 @@ public class TransmutationStoneOverlayHandler implements ITickHandler {
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glEnable(GL11.GL_LIGHTING);
 
-        int hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
-        int hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
-        int hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
-        int hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+        int hudOverlayX = 0;
+        int hudOverlayY = 0;
+        int hudBlockX = 0;
+        int hudBlockY = 0;
+        
+        switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION) {
+            case 0: {
+                hudOverlayX = 0;
+                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
+                hudOverlayY = 0;
+                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
+                break;
+            }
+            case 1: {
+                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
+                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+                hudOverlayY = 0;
+                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
+                break;
+            }
+            case 2: {
+                hudOverlayX = 0;
+                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
+                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
+                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                break;
+            }
+            case 3: {
+                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
+                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
+                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
 
         RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
 

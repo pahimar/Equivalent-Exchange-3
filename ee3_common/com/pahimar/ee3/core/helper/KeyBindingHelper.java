@@ -2,6 +2,8 @@ package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+
 import net.minecraft.client.settings.KeyBinding;
 
 /**
@@ -50,5 +52,15 @@ public class KeyBindingHelper {
         }
 
         return isRepeating;
+    }
+    
+    // TODO Still not ideal, won't work for every case. Specifically, make it context sensitive
+    public static boolean isClientSided(String keybinding) {
+        if (keybinding.equalsIgnoreCase(ConfigurationSettings.KEYBINDING_TOGGLE)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
