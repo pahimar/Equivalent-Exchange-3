@@ -55,7 +55,7 @@
 	<entry key="command.ee3.overlay.scale.updated">目標蛻變圖畫大小成功地更新了。</entry>
 	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 的顆粒開了</entry>
 	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 的顆粒關了</entry>
-	<entry key="command.ee3.sounds.set_to_all">播放所有的 Equivalent Exchange 3 的聲音</entry>
-	<entry key="command.ee3.sounds.set_to_self">播放從自己的Equivalent Exchange 3 的聲音</entry>
-	<entry key="command.ee3.sounds.turned_off">播放全無的 Equivalent Exchange 3 的聲音</entry>
+	<entry key="command.ee3.sounds.set_to_all">播放著所有的 Equivalent Exchange 3 的聲音</entry>
+	<entry key="command.ee3.sounds.set_to_self">播放著從自己的Equivalent Exchange 3 的聲音</entry>
+	<entry key="command.ee3.sounds.turned_off">播放著全無的 Equivalent Exchange 3 的聲音</entry>
 </properties>
