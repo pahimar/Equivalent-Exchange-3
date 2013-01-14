@@ -36,7 +36,7 @@
 	<entry key="tile.redWaterFlowing.name">Kızıl Su (Akışkan)</entry>
 	<entry key="tile.calcinator.name">Kalsinator</entry>
 	<entry key="gui.calcinator.name">Kalsinator</entry>
-	<entry key="itemGroup.EE3">Eşit Takas 3</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Uzak versiyon denetlemesi, bulundugu yer</entry>
 	<entry key="version.uninitialized">Uzak versiyon denetlemesi başarisiz</entry>
 	<entry key="version.current">En yeni versiyonu kullanıyorsunuz (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>
