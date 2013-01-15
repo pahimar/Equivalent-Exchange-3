@@ -1,5 +1,5 @@
 ## Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**:  EE3 pre1f for MC 1.4.7
+**LATEST OFFICIAL VERSION**:  EE3 pre1f for Minecraft 1.4.7 ([link] (http://adf.ly/GjT3c))
 
 [Minecraft Forums page] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
@@ -17,9 +17,9 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `JAVA_HOME`.
-  * For `Variable Value`, input something similar to `;C:\Program Files (x86)\Java\jdk1.7.0_10` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
+  * For `Variable Value`, input something similar to `;C:\Program Files (x86)\Java\jdk1.7.0_11` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
-  * Append `;C:\Program Files (x86)\Java\jdk1.7.0_10\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
+  * Append `;C:\Program Files (x86)\Java\jdk1.7.0_11\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
 2. Download Apache Ant [here] (http://ant.apache.org).
 	* Unzip the files anywhere you want, eg `C:\Program Files (x86)\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
@@ -64,18 +64,18 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 	* Open it up with any text editor, and type into it the following (fully customizable except for `dir.development`):
  		* `dir.development=../../`
 		* `dir.release=Releases`
-		* `release.minecraft.version=1.4.7` (as of 1/10)
+		* `release.minecraft.version=1.4.7` (as of 1/15)
 		* `release.mod.version=your version number here`
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 6. [FOR WINDOWS] Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant release`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything, and try again.
-8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.7\[version number]` (This might be different according to what you put in build.properties).
-	*  You should see a .jar named `ee3-universal-[version number]jar`.
+8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.7\version#` (This might be different according to what you put in build.properties).
+	*  You should see a .jar named `ee3-universal-version#.jar`.
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
 #### Update EE3 (For Windows/Mac)
-1. Check to see if pahimar updated EE3 since you last compiled.  If he/she did, follow these instructions.
+1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
 2. Open Github.
 3. Double-click on pahimar/Equivalent-Exchange-3.
 4. At the top, there is a button named `Sync`/`Sync Branch` (Mac) (or `Refreshing...` if it's still checking).
