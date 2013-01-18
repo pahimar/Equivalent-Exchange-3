@@ -163,6 +163,7 @@ public class WorldTransmutationHandler {
             if (event.itemStack.stackSize < 1) {
                 event.player.inventory.setInventorySlotContents(currentSlot, null);
                 PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketItemUpdate((byte) currentSlot, ItemUpdateTypes.DESTROYED)), (Player) event.player);
+                event.player.worldObj.playSoundAtEntity(event.player, "random.break", 0.8F, 0.8F + event.player.worldObj.rand.nextFloat() * 0.4F);
             }
         }
         else {

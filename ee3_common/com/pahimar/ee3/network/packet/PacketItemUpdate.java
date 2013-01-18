@@ -23,11 +23,11 @@ public class PacketItemUpdate extends PacketEE {
         super(PacketTypeHandler.ITEM_UPDATE, false);
     }
 
-    public PacketItemUpdate(byte slot, byte isDestroyed) {
+    public PacketItemUpdate(byte slot, byte updateType) {
 
         super(PacketTypeHandler.ITEM_UPDATE, false);
         this.slot = slot;
-        this.updateType = isDestroyed;
+        this.updateType = updateType;
     }
 
     public void writeData(DataOutputStream data) throws IOException {
