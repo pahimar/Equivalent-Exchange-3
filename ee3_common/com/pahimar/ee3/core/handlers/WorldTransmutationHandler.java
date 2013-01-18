@@ -8,25 +8,29 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionEvent.ActionResult;
 import com.pahimar.ee3.event.ActionRequestEvent;
 import com.pahimar.ee3.event.WorldTransmutationEvent;
 import com.pahimar.ee3.lib.ActionTypes;
+import com.pahimar.ee3.lib.ItemUpdateTypes;
 import com.pahimar.ee3.lib.Particles;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketItemUpdate;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class WorldTransmutationHandler {
 
     public static void handleWorldTransmutation(EntityPlayer thePlayer, int originX, int originY, int originZ, byte rangeX, byte rangeY, byte rangeZ, byte sideHit, String data) {
-        
+
         ActionRequestEvent actionRequestEvent = null;
         ActionEvent actionEvent = null;
 
@@ -81,7 +85,7 @@ public class WorldTransmutationHandler {
             default:
                 break;
         }
-        
+
         for (int x = lowerBoundX; x <= upperBoundX; x++) {
             for (int y = lowerBoundY; y <= upperBoundY; y++) {
                 for (int z = lowerBoundZ; z <= upperBoundZ; z++) {
@@ -142,14 +146,24 @@ public class WorldTransmutationHandler {
 
         if (!worldStack.isItemEqual(targetStack)) {
             if (EquivalencyHandler.instance().areWorldEquivalent(worldStack, targetStack)) {
-                if (event.itemStack.getItemDamage() < event.itemStack.getMaxDamage()) {
-                    result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
+                if (event.itemStack != null) {
+                    if (event.itemStack.getItemDamage() <= event.itemStack.getMaxDamage()) {
+                        result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
+                    }
                 }
             }
         }
 
         if (result) {
             event.actionResult = ActionResult.SUCCESS;
+            
+            int currentSlot = event.player.inventory.currentItem;
+            event.itemStack.damageItem(ConfigurationSettings.TRANSMUTE_COST_BLOCK, event.player);
+
+            if (event.itemStack.stackSize < 1) {
+                event.player.inventory.setInventorySlotContents(currentSlot, null);
+                PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketItemUpdate((byte) currentSlot, ItemUpdateTypes.DESTROYED)), (Player) event.player);
+            }
         }
         else {
             event.actionResult = ActionResult.FAILURE;
