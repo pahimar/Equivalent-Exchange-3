@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
@@ -26,8 +25,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
-        IKeyBound {
+public class ItemMiniumStone extends ItemEE
+        implements ITransmutationStone, IKeyBound {
 
     public ItemMiniumStone(int id) {
 
@@ -99,11 +98,12 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone,
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {
-            	if(!thePlayer.isSneaking()){
-            		TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
-            	}else{
-            		TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
-            	}
+                if (!thePlayer.isSneaking()) {
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                }
+                else {
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                }
             }
         }
 

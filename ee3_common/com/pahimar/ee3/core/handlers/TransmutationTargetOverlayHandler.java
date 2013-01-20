@@ -93,22 +93,22 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
         
         switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION) {
             case 0: {
-                hudOverlayX = (int) (overlayScale);
-                hudBlockX = (int) (overlayScale + 12);
-                hudOverlayY = (int) (overlayScale);
-                hudBlockY = (int) (overlayScale + 12);
+                hudOverlayX = 0;
+                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
+                hudOverlayY = 0;
+                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
                 break;
             }
             case 1: {
                 hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
                 hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
-                hudOverlayY = (int) (overlayScale);
-                hudBlockY = (int) (overlayScale + 12);
+                hudOverlayY = 0;
+                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
                 break;
             }
             case 2: {
-                hudOverlayX = (int) (overlayScale);
-                hudBlockX = (int) (overlayScale + 12);
+                hudOverlayX = 0;
+                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
                 hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
                 hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
                 break;
