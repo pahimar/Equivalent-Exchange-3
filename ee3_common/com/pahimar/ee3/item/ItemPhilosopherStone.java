@@ -4,13 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Sounds;
@@ -28,15 +26,15 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemPhilosopherStone extends ItemEE implements
-        ITransmutationStone, IChargeable, IKeyBound {
+public class ItemPhilosopherStone extends ItemEE
+        implements ITransmutationStone, IChargeable, IKeyBound {
 
     private int maxChargeLevel;
 
     public ItemPhilosopherStone(int id) {
 
         super(id);
-        this.setIconCoord(2, 0);
+        this.setIconCoord(3, 0);
         this.setItemName(Strings.PHILOSOPHER_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
@@ -44,13 +42,13 @@ public class ItemPhilosopherStone extends ItemEE implements
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
+    public boolean hasEffect(ItemStack itemStack) {
 
-        return true;
+        return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
     }
 
     @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getRarity(ItemStack itemStack) {
 
         return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.RARE);
     }
@@ -135,11 +133,12 @@ public class ItemPhilosopherStone extends ItemEE implements
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {
-            	if(!thePlayer.isSneaking()){
-            		TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
-            	}else{
-            		TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
-            	}
+                if (!thePlayer.isSneaking()) {
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                }
+                else {
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                }
             }
         }
         // TODO Packet-ize the sounds

@@ -2,12 +2,15 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
+import com.pahimar.ee3.lib.Strings;
 
 /**
  * GuiPortableCrafting
@@ -47,6 +50,21 @@ public class GuiPortableCrafting extends GuiContainer {
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
+    }
+
+    public void onGuiClosed() {
+
+        super.onGuiClosed();
+
+        if (this.mc.thePlayer != null) {
+            for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
+                if (itemStack != null) {
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
+                    }
+                }
+            }
+        }
     }
 
 }

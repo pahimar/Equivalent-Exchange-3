@@ -9,7 +9,6 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
@@ -32,10 +31,16 @@ public class ItemMiniumStone extends ItemEE
     public ItemMiniumStone(int id) {
 
         super(id);
-        this.setIconCoord(1, 0);
+        this.setIconCoord(2, 0);
         this.setItemName(Strings.MINIUM_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack itemStack) {
+
+        return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
     }
 
     @SideOnly(Side.CLIENT)
@@ -71,12 +76,6 @@ public class ItemMiniumStone extends ItemEE
             transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
         }
         return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-
-        return Integer.parseInt(Colours.PURE_RED, 16);
     }
 
     @Override

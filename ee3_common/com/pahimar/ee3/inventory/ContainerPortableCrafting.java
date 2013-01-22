@@ -1,13 +1,13 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.lib.Strings;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.lib.Strings;
 
 /**
  * ContainerPortableCrafting
@@ -35,7 +35,7 @@ public class ContainerPortableCrafting extends ContainerWorkbench {
     public void onCraftGuiClosed(EntityPlayer player) {
 
         super.onCraftGuiClosed(player);
-        
+
         if (!player.worldObj.isRemote) {
             InventoryPlayer invPlayer = player.inventory;
             for (ItemStack itemStack : invPlayer.mainInventory) {
