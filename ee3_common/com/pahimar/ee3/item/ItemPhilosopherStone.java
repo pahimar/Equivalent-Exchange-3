@@ -85,8 +85,9 @@ public class ItemPhilosopherStone extends ItemEE implements
     }
 
     @Override
-    public void openPortableCrafting(EntityPlayer thePlayer) {
+    public void openPortableCrafting(EntityPlayer thePlayer, ItemStack itemStack) {
 
+        NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
@@ -130,7 +131,7 @@ public class ItemPhilosopherStone extends ItemEE implements
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
-            openPortableCrafting(thePlayer);
+            openPortableCrafting(thePlayer, itemStack);
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {

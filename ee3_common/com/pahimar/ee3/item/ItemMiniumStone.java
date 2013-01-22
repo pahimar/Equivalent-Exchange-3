@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.CustomItemRarity;
@@ -79,8 +80,9 @@ public class ItemMiniumStone extends ItemEE
     }
 
     @Override
-    public void openPortableCrafting(EntityPlayer thePlayer) {
+    public void openPortableCrafting(EntityPlayer thePlayer, ItemStack itemStack) {
 
+        NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
@@ -94,7 +96,7 @@ public class ItemMiniumStone extends ItemEE
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
-            openPortableCrafting(thePlayer);
+            openPortableCrafting(thePlayer, itemStack);
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {

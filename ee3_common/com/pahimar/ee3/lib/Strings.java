@@ -21,9 +21,11 @@ public class Strings {
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
     public static final String NBT_ITEM_MODE_KEY = "itemMode";
+    public static final String NBT_ITEM_TRANS_GUI_OPEN = "itemTransGuiOpen";
     public static final String NBT_TE_OWNER_KEY = "teOwner";
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
+    
 
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
