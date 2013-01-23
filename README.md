@@ -3,16 +3,17 @@
 
 [Minecraft Forums page] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
-[Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)
+[Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)-For those that want the latest unreleased features.
 
-[Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing)
+[Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing)-For those that want to help out.
 
 ### Compiling Equivalent Exchange 3
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (Linux and Windows tested).
 ***
 #### Prerequisites  (Tested for Windows ONLY!)
-0. WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
-1. Download and install the Java JDK [here] (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download the one pertaining to your OS.
+1. WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
+2. Download and install the Java JRE [here] (http://www.java.com/inc/BrowserRedirect1.jsp?locale=en) (necessary for Ant).
+3. Download and install the Java JDK [here] (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download the one pertaining to your OS (necessary for MCP).
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
@@ -20,7 +21,7 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
   * For `Variable Value`, input something similar to `;C:\Program Files (x86)\Java\jdk1.7.0_11` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;C:\Program Files (x86)\Java\jdk1.7.0_11\bin` (or wherever your Java JDK installation is \bin), and click `Ok`.
-2. Download Apache Ant [here] (http://ant.apache.org).
+4. Download Apache Ant [here] (http://ant.apache.org).
 	* Unzip the files anywhere you want, eg `C:\Program Files (x86)\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
   * Under `System Variables`, click `New`.
@@ -28,11 +29,11 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
   * For `Variable Value`, input `C:\Ant\apache-ant-1.8.4` (or your Ant directory \apache-ant-1.8.4).
   * Scroll down to `Path`, and double-click on it.
   * Append `;C:\Ant\apache-ant-1.8.4\bin` exactly as shown to the end (or your Ant directory \apache-ant-1.8.4\bin).
-3. Download and install Github [here] (http://windows.github.com/) (Windows) or [here] (http://mac.github.com/) (Mac OS X 10.7+).  For Linux, I *guess* you could download it as a .zip/tarball and unzip it?
+5. Download and install Github [here] (http://windows.github.com/) (Windows) or [here] (http://mac.github.com/) (Mac OS X 10.7+).  For Linux, I *guess* you could download it as a .zip/tarball and unzip it?
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows/Mac` near the top-left of the page.
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
-4. Create an empty directory for EE3 development.  This directory is refernced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+6. Create an empty directory for EE3 development.  This directory is refernced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 
 #### Setup MCP (Tested on Linux and Windows)
@@ -87,13 +88,13 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 #### Submitting a PR
 So you found a bug in pahimar's code?  Think you can make it more efficient?  Want to help in general?  Great!
 
-0. IMPORTANT:  PAHIMAR DOES **NOT** WANT ANY `build.xml` CHANGES, UNLESS it fixes up something broken (See [Pull Request #90] (https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
-1. If you haven't already, create a Github account.
-2. Click `Fork` at the top-right of this page (below your username)
-3. Make the changes that you want to.
-4. Click `Pull Request` at the top-middle of the page (left of your fork's name, to the right of `Watch` and `Fork`).
-5. Enter your PR's title, and create a detailed description telling pahimar what you changed.
-6. Click `Send pull request`, and you're done!
+1. IMPORTANT:  PAHIMAR DOES **NOT** WANT ANY `build.xml` CHANGES, UNLESS it fixes up something broken (See [Pull Request #90] (https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
+2. If you haven't already, create a Github account.
+3. Click `Fork` at the top-right of this page (below your username)
+4. Make the changes that you want to.
+5. Click `Pull Request` at the top-middle of the page (left of your fork's name, to the right of `Watch` and `Fork`).
+6. Enter your PR's title, and create a detailed description telling pahimar what you changed.
+7. Click `Send pull request`, and you're done!
 
 #### Creating an Issue
 So, maybe you have no idea what Java is, but you **do** know that EE3 crashes each time you enter a world.  Or, maybe you have an idea that you want pahimar to implement.  No problem!  Just create an issue instead of submitting a PR.
