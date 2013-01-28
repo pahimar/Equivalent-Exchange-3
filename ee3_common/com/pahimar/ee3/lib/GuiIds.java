@@ -11,7 +11,8 @@ package com.pahimar.ee3.lib;
  */
 public class GuiIds {
 
-    public static final int PORTABLE_CRAFTING = 1;
+    public static final int PORTABLE_CRAFTING = 0;
+    public static final int PORTABLE_TRANSMUTATION = 1;
     public static final int CALCINATOR = 2;
 
 }

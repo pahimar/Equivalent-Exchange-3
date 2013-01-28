@@ -44,6 +44,7 @@ public class GuiPortableCrafting extends GuiContainer {
      */
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 
+        // TODO Variable-ize this
         int var4 = this.mc.renderEngine.getTexture("/gui/crafting.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);
