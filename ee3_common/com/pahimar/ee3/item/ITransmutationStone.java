@@ -16,7 +16,9 @@ import net.minecraft.world.World;
  */
 public interface ITransmutationStone {
 
-    public abstract void openPortableCrafting(EntityPlayer thePlayer, ItemStack itemStack);
+    public abstract void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack);
+    
+    public abstract void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack);
 
     public abstract void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit);
 

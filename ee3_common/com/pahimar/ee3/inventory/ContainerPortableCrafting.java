@@ -40,8 +40,8 @@ public class ContainerPortableCrafting extends ContainerWorkbench {
             InventoryPlayer invPlayer = player.inventory;
             for (ItemStack itemStack : invPlayer.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
                     }
                 }
             }

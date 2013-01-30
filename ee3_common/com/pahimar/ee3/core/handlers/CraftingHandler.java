@@ -19,7 +19,7 @@ public class CraftingHandler implements ICraftingHandler {
         
         for (ItemStack itemStack : player.inventory.mainInventory) {
             if (itemStack != null) {
-                if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
+                if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                     openStone = itemStack;
                 }
             }
@@ -30,7 +30,7 @@ public class CraftingHandler implements ICraftingHandler {
             for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
                 itemStack = craftMatrix.getStackInSlot(i);
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                         openStone = itemStack;
                     }
                 }

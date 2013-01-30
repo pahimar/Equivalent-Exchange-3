@@ -60,8 +60,8 @@ public class GuiPortableCrafting extends GuiContainer {
         if (this.mc.thePlayer != null) {
             for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
                     }
                 }
             }

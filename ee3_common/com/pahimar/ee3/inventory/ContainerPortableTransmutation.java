@@ -1,7 +1,12 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.lib.Strings;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 
 public class ContainerPortableTransmutation extends Container {
 
@@ -12,4 +17,20 @@ public class ContainerPortableTransmutation extends Container {
         return false;
     }
 
+    @Override
+    public void onCraftGuiClosed(EntityPlayer player) {
+
+        super.onCraftGuiClosed(player);
+
+        if (!player.worldObj.isRemote) {
+            InventoryPlayer invPlayer = player.inventory;
+            for (ItemStack itemStack : invPlayer.mainInventory) {
+                if (itemStack != null) {
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
+                    }
+                }
+            }
+        }
+    }
 }

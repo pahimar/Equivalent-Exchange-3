@@ -44,7 +44,7 @@ public class ItemPhilosopherStone extends ItemEE
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack) {
 
-        return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
+        return (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN));
     }
 
     @SideOnly(Side.CLIENT)
@@ -83,10 +83,17 @@ public class ItemPhilosopherStone extends ItemEE
     }
 
     @Override
-    public void openPortableCrafting(EntityPlayer thePlayer, ItemStack itemStack) {
+    public void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack) {
 
-        NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN, true);
+        NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
+    }
+    
+    @Override
+    public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack) {
+        
+        NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
+        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
     @Override
@@ -129,7 +136,12 @@ public class ItemPhilosopherStone extends ItemEE
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding) {
 
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA)) {
-            openPortableCrafting(thePlayer, itemStack);
+            if (!thePlayer.isSneaking()) {
+                openPortableCraftingGUI(thePlayer, itemStack);
+            }
+            else {
+                openPortableTransmutationGUI(thePlayer, itemStack);
+            }
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {
