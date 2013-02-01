@@ -38,9 +38,9 @@
 	<entry key="gui.calcinator.name">Kalcynator</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na</entry>
-	<entry key="version.uninitialized">Sprawdzenie wersji nie zakończyło się sukcesem</entry>
-	<entry key="version.current">Korzystasz aktualnie z najaktualniejszej wersji (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 dla @MINECRAFT_VERSION@</entry>
+	<entry key="version.uninitialized">Wystąpił błąd podczas sprawdzania wersji</entry>
+	<entry key="version.current">Posiadasz aktualnie najnowszą wersję (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 dla @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Istnieje nowsza wersja @MOD_NAME@ (@REMOTE_MOD_VERSION@) dla @MINECRAFT_VERSION@. Pobierz stąd: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.general_error">Wystąpił bład podczas łaczenia ze zdalnym plikiem wersji</entry>
+	<entry key="version.general_error">Wystąpił błąd podczas łaczenia ze zdalnym plikiem wersji</entry>
 	<entry key="version.check_disabled">Zdalne sprawdzanie wersji wyłączone, pomijanie</entry>
 </properties>

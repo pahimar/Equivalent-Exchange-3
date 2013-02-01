@@ -28,6 +28,22 @@ public class NBTHelper {
         }
     }
 
+    public static boolean hasTag(ItemStack itemStack, String keyName) {
+
+        if (itemStack.stackTagCompound != null) {
+            return itemStack.stackTagCompound.hasKey(keyName);
+        }
+
+        return false;
+    }
+
+    public static void removeTag(ItemStack itemStack, String keyName) {
+
+        if (itemStack.stackTagCompound != null) {
+            itemStack.stackTagCompound.removeTag(keyName);
+        }
+    }
+
     // String
     public static String getString(ItemStack itemStack, String keyName) {
 

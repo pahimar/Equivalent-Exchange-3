@@ -7,8 +7,10 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableCrafting;
+import com.pahimar.ee3.client.gui.inventory.GuiPortableTransmutation;
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
+import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileCalcinator;
@@ -80,6 +82,9 @@ public class CommonProxy implements IGuiHandler {
         if (ID == GuiIds.PORTABLE_CRAFTING) {
             return new ContainerPortableCrafting(player.inventory, world, x, y, z);
         }
+        else if (ID == GuiIds.PORTABLE_TRANSMUTATION) {
+            return new ContainerPortableTransmutation();
+        }
         else if (ID == GuiIds.CALCINATOR) {
             TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new ContainerCalcinator(player.inventory, calcinator);
@@ -93,6 +98,9 @@ public class CommonProxy implements IGuiHandler {
 
         if (ID == GuiIds.PORTABLE_CRAFTING) {
             return new GuiPortableCrafting(player, world, x, y, z);
+        }
+        else if (ID == GuiIds.PORTABLE_TRANSMUTATION) {
+            return new GuiPortableTransmutation(null);
         }
         else if (ID == GuiIds.CALCINATOR) {
             TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);

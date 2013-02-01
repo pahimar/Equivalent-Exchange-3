@@ -8,9 +8,10 @@ import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.core.handlers.ActionRequestHandler;
 import com.pahimar.ee3.core.handlers.AddonHandler;
+import com.pahimar.ee3.core.handlers.CraftingHandler;
 import com.pahimar.ee3.core.handlers.EntityLivingHandler;
 import com.pahimar.ee3.core.handlers.FuelHandler;
-import com.pahimar.ee3.core.handlers.ItemPickupHandler;
+import com.pahimar.ee3.core.handlers.ItemEventHandler;
 import com.pahimar.ee3.core.handlers.LocalizationHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
@@ -24,6 +25,7 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -114,7 +116,7 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
 
         // Register the Item Pickup Handler
-        MinecraftForge.EVENT_BUS.register(new ItemPickupHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
 
         // Register the EntityLiving Handler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
@@ -122,6 +124,8 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
+        
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
 
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
