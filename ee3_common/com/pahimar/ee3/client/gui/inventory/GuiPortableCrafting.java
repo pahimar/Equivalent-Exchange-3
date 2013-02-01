@@ -44,6 +44,7 @@ public class GuiPortableCrafting extends GuiContainer {
      */
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 
+        // TODO Variable-ize this
         int var4 = this.mc.renderEngine.getTexture("/gui/crafting.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(var4);
@@ -59,8 +60,8 @@ public class GuiPortableCrafting extends GuiContainer {
         if (this.mc.thePlayer != null) {
             for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANS_GUI_OPEN);
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
                     }
                 }
             }
