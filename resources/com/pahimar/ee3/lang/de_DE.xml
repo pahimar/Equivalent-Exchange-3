@@ -7,14 +7,14 @@
 	<entry key="key.toggle">Umschalten</entry>
 	<entry key="key.charge">Aufladen</entry>
 	<entry key="item.miniumShard.name">Miniumscherbe</entry>
-	<entry key="item.inertStone.name">Träger Stein</entry>
+	<entry key="item.inertStone.name">Trägerstein</entry>
 	<entry key="item.miniumStone.name">Miniumstein</entry>
 	<entry key="item.philStone.name">Stein der Weisen</entry>
 	<entry key="item.alchemyDust.ash.name">Asche</entry>
 	<entry key="item.alchemyDust.minium.name">Miniumstaub</entry>
-	<entry key="item.alchemyDust.verdant.name">Grünstaub</entry>
+	<entry key="item.alchemyDust.verdant.name">Grüner Staub</entry>
 	<entry key="item.alchemyDust.azure.name">Azurstaub</entry>
-	<entry key="item.alchemyDust.amaranthine.name">Amarantstaub</entry>
+	<entry key="item.alchemyDust.amaranthine.name">Amaranthstaub</entry>
 	<entry key="item.alchemyDust.iridescent.name">Irisierender Staub</entry>
 	<entry key="item.alchemyBag.white.name">Weißer Alchemiebeutel</entry>
 	<entry key="item.alchemyBag.orange.name">Orangefarbener Alchemiebeutel</entry>
