@@ -1,17 +1,17 @@
 ## Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**:  EE3 pre1f for Minecraft 1.4.7 ([link] (http://adf.ly/GjT3c))
+**LATEST OFFICIAL VERSION**:  [EE3 pre1f for Minecraft 1.4.6/1.4.7] (http://adf.ly/GjT3c)
 
 [Minecraft Forums page] (http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
-[Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3)-For those that want the latest unreleased features.
+[Compiling EE3] (https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3) - For those that want the latest unreleased features.
 
-[Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing)-For those that want to help out.
+[Contributing] (https://github.com/pahimar/Equivalent-Exchange-3#contributing) - For those that want to help out.
 
 ### Compiling Equivalent Exchange 3
 IMPORTANT: This is not guaranteed to work as it has not been tested extensively (Linux and Windows tested).
 ***
 #### Prerequisites  (Tested for Windows ONLY!)
-1. WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
+1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
 2. Download and install the Java JRE [here] (http://www.java.com/inc/BrowserRedirect1.jsp?locale=en) (necessary for Ant).
 3. Download and install the Java JDK [here] (http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download the one pertaining to your OS (necessary for MCP).
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
@@ -65,17 +65,17 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 	* Open it up with any text editor, and type into it the following (fully customizable except for `dir.development`):
  		* `dir.development=../../`
 		* `dir.release=Releases`
-		* `release.minecraft.version=1.4.7` (as of 1/15)
-		* `release.mod.version=your version number here`
+		* `release.minecraft.version=1.4.7` (as of 1/31)
+		* `release.mod.version=pre2`
 5. [FOR WINDOWS] Open up `cmd` by typing `cmd` in Run.
 6. [FOR WINDOWS] Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant release`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything, and try again.
-8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.7\version#` (This might be different according to what you put in build.properties).
-	*  You should see a .jar named `ee3-universal-version#.jar`.
+8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.4.7\pre2`.
+	*  You should see a .jar named `ee3-universal-pre2.jar`.
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
-#### Update EE3 (For Windows/Mac)
+#### Updating Your Repo (For Windows/Mac)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
 2. Open Github.
 3. Double-click on pahimar/Equivalent-Exchange-3.
@@ -88,18 +88,18 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 #### Submitting a PR
 So you found a bug in pahimar's code?  Think you can make it more efficient?  Want to help in general?  Great!
 
-1. IMPORTANT:  PAHIMAR DOES **NOT** WANT ANY `build.xml` CHANGES, UNLESS it fixes up something broken (See [Pull Request #90] (https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
+1. **IMPORTANT:  PAHIMAR DOES *NOT* WANT ANY** `build.xml` **CHANGES, UNLESS it fixes up something broken** (See [Pull Request #90] (https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
 2. If you haven't already, create a Github account.
-3. Click `Fork` at the top-right of this page (below your username)
+3. Click the little branch/plus icon at the top-right of this page (below your username).
 4. Make the changes that you want to.
 5. Click `Pull Request` at the top-middle of the page (left of your fork's name, to the right of `Watch` and `Fork`).
 6. Enter your PR's title, and create a detailed description telling pahimar what you changed.
 7. Click `Send pull request`, and you're done!
 
 #### Creating an Issue
-So, maybe you have no idea what Java is, but you **do** know that EE3 crashes each time you enter a world.  Or, maybe you have an idea that you want pahimar to implement.  No problem!  Just create an issue instead of submitting a PR.
+EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 
 1. Go to [the issues page] (http://github.com/pahimar/Equivalent-Exchange-3/issues).
 2. Click `New Issue` right below `Graphs`.
-3. Enter your Issue's title (like EE3 crashes when using Minium Stone), and then create a detailed description telling pahimar what happened (like "When trying to use a minium stone, EE3 crashes.  Here's the error report: [link]).
+3. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey pahimar, could you add/change xxx?" or "Hey, found an exploit:  stuff").
 4. Click `Submit new issue`, and you're done!
