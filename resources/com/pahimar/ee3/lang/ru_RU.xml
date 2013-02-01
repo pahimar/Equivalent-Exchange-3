@@ -41,6 +41,22 @@
 	<entry key="version.uninitialized">Проверка версии не инициализирована правильно</entry>
 	<entry key="version.current">Вы используете последнюю версию @MOD_NAME@ (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Новая версия @MOD_NAME@ (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Скачайте здесь: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.connection_error">Ошибка проверки версии</entry>
+	<entry key="version.general_error">Ошибка подключения к удаленному файлу, переподключение</entry>
+	<entry key="version.final_error">Проверка версии отменена после 3 неудачных попыток соединения</entry>
 	<entry key="version.check_disabled">Удаленная проверка версии отключена, пропуск</entry>
+	<entry key="command.ee3.overlay.turned_on">Панель с целью трансмутации включена</entry>
+	<entry key="command.ee3.overlay.turned_off">Панель с целью трансмутации выключена</entry>
+	<entry key="command.ee3.overlay.position.top_left">Панель с целью трансмутации перемещена в верхний левый угол</entry>
+	<entry key="command.ee3.overlay.position.top_right">Панель с целью трансмутации перемещена в верхний правый угол</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Панель с целью трансмутации перемещена в нижний левый угол</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Панель с целью трансмутации перемещена в нижний правый угол</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(где ### - число между 0,0 и 1,0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Прозрачность панели с целью трансмутации изменена успешно</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(где ### - число больше 0,0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Размер панели с целью трансмутации изменен успешно</entry>
+	<entry key="command.ee3.particles.turned_on">Частицы Equivalent Exchange 3 включены</entry>
+	<entry key="command.ee3.particles.turned_off">Частицы Equivalent Exchange 3 выключены</entry>
+	<entry key="command.ee3.sounds.set_to_all">Звуки Equivalent Exchange 3 играют для всех игроков</entry>
+	<entry key="command.ee3.sounds.set_to_self">Звуки Equivalent Exchange 3 играют только для вас</entry>
+	<entry key="command.ee3.sounds.turned_off">Звуки Equivalent Exchange 3 выключены</entry>
 </properties>
