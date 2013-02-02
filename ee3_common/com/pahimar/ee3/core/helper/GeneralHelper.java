@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -50,7 +50,7 @@ public class GeneralHelper {
 
     public static boolean isHostileEntity(EntityLiving entity) {
 
-        if (entity instanceof EntityMob) {
+        if (entity instanceof IMob) {
             return true;
         }
         else {
