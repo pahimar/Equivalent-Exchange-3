@@ -74,6 +74,7 @@ public class ItemMiniumStone extends ItemEE
 
         if (world.isRemote) {
             transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
+            
         }
         return true;
     }
