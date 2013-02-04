@@ -24,22 +24,22 @@ public class ItemEventHandler {
     @ForgeSubscribe
     public void onItemPickup(EntityItemPickupEvent event) {
 
-        if (NBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
-            NBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
+        if (NBTHelper.hasTag(event.item.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+            NBTHelper.removeTag(event.item.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
         }
-        else if (NBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
-            NBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
+        else if (NBTHelper.hasTag(event.item.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+            NBTHelper.removeTag(event.item.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
         }
     }
 
     @ForgeSubscribe
     public void onItemToss(ItemTossEvent event) {
 
-        if (NBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
-            NBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
+        if (NBTHelper.hasTag(event.entityItem.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+            NBTHelper.removeTag(event.entityItem.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
         }
-        else if (NBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
-            NBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
+        else if (NBTHelper.hasTag(event.entityItem.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+            NBTHelper.removeTag(event.entityItem.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
         }
     }
 
@@ -47,11 +47,11 @@ public class ItemEventHandler {
     public void onPlayerDrop(PlayerDropsEvent event) {
 
         for (EntityItem entityItem : event.drops) {
-            if (NBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
-                NBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
+            if (NBTHelper.hasTag(entityItem.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+                NBTHelper.removeTag(entityItem.func_92014_d(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
             }
-            else if (NBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
-                NBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
+            else if (NBTHelper.hasTag(entityItem.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+                NBTHelper.removeTag(entityItem.func_92014_d(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
             }
         }
     }

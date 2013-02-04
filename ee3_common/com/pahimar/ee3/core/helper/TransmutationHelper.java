@@ -33,6 +33,7 @@ public class TransmutationHelper {
 
         if (Block.blocksList[targetID] != null) {
             world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
+            stack.setItemDamage(stack.getItemDamage() + 1);
             return true;
         }
 
