@@ -39,8 +39,24 @@
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Uzak versiyon denetlemesi, bulundugu yer</entry>
 	<entry key="version.uninitialized">Uzak versiyon denetlemesi başarisiz</entry>
-	<entry key="version.current">En yeni versiyonu kullanıyorsunuz (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>
-	<entry key="version.outdated">Yeni bir @MOD_NAME@ versionu var (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Burdan Indirin: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.general_error">Error kontrol dosyası bulunamadı</entry>
+	<entry key="version.current">Minecraft(@MINECRAFT_VERSION@) için en yeni Equivalent Exchange 3 versiyonunu(@REMOTE_MOD_VERSION@) kullanıyorsunuz.</entry>
+	<entry key="version.outdated"> Minecraft(@MINECRAFT_VERSION@) için yeni bir @MOD_NAME@ versiyonu var (@REMOTE_MOD_VERSION@). Burdan İndirin: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Uzak versiyon yetki dosyasına bağlanılırken hata ile karşılaşıldı; tekrar deneniyor</entry>
+	<entry key="version.final_error">3 başarısız bağlantı denemesi sonucu versiyon kontrolü durduruluyor</entry>
 	<entry key="version.check_disabled">Uzak versiyon denetlemesi kapalı, geçiliyor...</entry>
+	<entry key="command.ee3.overlay.turned_on">Dönüşüm hedef arayüzü kapatıldı</entry>
+	<entry key="command.ee3.overlay.turned_off">Dönüşüm hedef arayüzü açıldı</entry>
+	<entry key="command.ee3.overlay.position.top_left">Dönüşüm hedef arayüzü konumu sol üst'e ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.top_right">Dönüşüm hedef arayüzü konumu sağ üst'e ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Dönüşüm hedef arayüzü konumu sol alt'a ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Dönüşüm hedef arayüzü konumu sağ alt'a ayarlandı</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(### , 0.0 ile 1.0 arasında ondalıklı sayı) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Dönüşüm hedef arayüzü şeffaflığı güncellendi</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(### , 0.0 dan daha büyük ondalıklı sayı) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Dönüşüm hedef arayüzü boyutu güncellendi</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 parçacık efekti açıldı</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 parçacık efekti kapatıldı</entry>
+	<entry key="command.ee3.sounds.set_to_all">Playing Equivalent Exchange 3 sesleri : Bütün Oyuncular</entry>
+	<entry key="command.ee3.sounds.set_to_self">Playing Equivalent Exchange 3 sesleri : Sadece Kendin</entry>
+	<entry key="command.ee3.sounds.turned_off">Playing Equivalent Exchange 3 sesleri : Kapalı</entry>
 </properties>
