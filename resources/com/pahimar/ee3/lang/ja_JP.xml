@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Japanese Localization File</comment>
+	<comment>Japanese (ja_JP) Localization File</comment>
 	<entry key="key.extra">エクストラ</entry>
 	<entry key="key.release">リリース</entry>
 	<entry key="key.toggle">トグル</entry>
@@ -16,26 +16,12 @@
 	<entry key="item.alchemyDust.azure.name">紺碧の粉末</entry>
 	<entry key="item.alchemyDust.amaranthine.name">紫赤色の粉末</entry>
 	<entry key="item.alchemyDust.iridescent.name">玉虫色の粉末</entry>
-	<entry key="item.alchemyBag.white.name">白色の奇術袋</entry>
-	<entry key="item.alchemyBag.orange.name">橙色の奇術袋</entry>
-	<entry key="item.alchemyBag.magenta.name">赤紫色の奇術袋</entry>
-	<entry key="item.alchemyBag.light_blue.name">空色の奇術袋</entry>
-	<entry key="item.alchemyBag.yellow.name">黄色の奇術袋</entry>
-	<entry key="item.alchemyBag.lime.name">黄緑色の奇術袋</entry>
-	<entry key="item.alchemyBag.pink.name">桃色の奇術袋</entry>
-	<entry key="item.alchemyBag.gray.name">灰色の奇術袋</entry>
-	<entry key="item.alchemyBag.light_gray.name">薄灰色の奇術袋</entry>
-	<entry key="item.alchemyBag.cyan.name">水色の奇術袋</entry>
-	<entry key="item.alchemyBag.purple.name">紫色の奇術袋</entry>
-	<entry key="item.alchemyBag.blue.name">青色の奇術袋</entry>
-	<entry key="item.alchemyBag.brown.name">茶色の奇術袋</entry>
-	<entry key="item.alchemyBag.green.name">緑色の奇術袋</entry>
-	<entry key="item.alchemyBag.red.name">赤色の奇術袋</entry>
-	<entry key="item.alchemyBag.black.name">黒色の奇術袋</entry>
+	<entry key="item.alchemyBag.name">の奇術袋</entry>
 	<entry key="tile.redWaterStill.name">赤い水 (水源)</entry>
 	<entry key="tile.redWaterFlowing.name">赤い水 (流水)</entry>
 	<entry key="tile.calcinator.name">煆焼器</entry>
 	<entry key="gui.calcinator.name">煆焼器</entry>
+	<entry key="gui.alchemicalBag.name">の奇術袋</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">オンラインバージョンチェックの初期化中。場所:</entry>
 	<entry key="version.uninitialized">バージョンチェックに失敗しました。 (初期化に失敗しました。)</entry>
