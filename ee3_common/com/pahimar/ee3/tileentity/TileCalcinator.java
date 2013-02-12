@@ -21,41 +21,10 @@ public class TileCalcinator extends TileEE implements IInventory {
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
      */
-    private ItemStack[] calcinatorItemStacks = new ItemStack[3];
+    private ItemStack[] inventory;
 
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
-
-        super.readFromNBT(nbtTagCompound);
-
-        // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
-        this.calcinatorItemStacks = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < tagList.tagCount(); ++i) {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
-            byte slot = tagCompound.getByte("Slot");
-            if (slot >= 0 && slot < this.calcinatorItemStacks.length) {
-                this.calcinatorItemStacks[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
-            }
-        }
-
-    }
-
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-
-        super.writeToNBT(nbtTagCompound);
-
-        // Write the ItemStacks in the inventory to NBT
-        NBTTagList tagList = new NBTTagList();
-        for (int currentIndex = 0; currentIndex < this.calcinatorItemStacks.length; ++currentIndex) {
-            if (this.calcinatorItemStacks[currentIndex] != null) {
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setByte("Slot", (byte) currentIndex);
-                this.calcinatorItemStacks[currentIndex].writeToNBT(tagCompound);
-                tagList.appendTag(tagCompound);
-            }
-        }
-        nbtTagCompound.setTag("Items", tagList);
-
+    public TileCalcinator() {
+        inventory = new ItemStack[3];
     }
 
     /**
@@ -63,33 +32,51 @@ public class TileCalcinator extends TileEE implements IInventory {
      */
     public int getSizeInventory() {
 
-        return this.calcinatorItemStacks.length;
+        return this.inventory.length;
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int i) {
+    public ItemStack getStackInSlot(int slot) {
 
-        return this.calcinatorItemStacks[i];
+        return this.inventory[slot];
     }
 
-    public ItemStack decrStackSize(int i, int j) {
+    public ItemStack decrStackSize(int slot, int amount) {
 
-        // TODO Auto-generated method stub
-        return null;
+        ItemStack itemStack = getStackInSlot(slot);
+        if (itemStack != null) {
+            if (itemStack.stackSize <= amount) {
+                setInventorySlotContents(slot, null);
+            }
+            else {
+                itemStack = itemStack.splitStack(amount);
+                if (itemStack.stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
+            }
+        }
+        
+        return itemStack;
     }
 
-    public ItemStack getStackInSlotOnClosing(int i) {
+    public ItemStack getStackInSlotOnClosing(int slot) {
 
-        return null;
+        ItemStack itemStack = getStackInSlot(slot);
+        if (itemStack != null) {
+                setInventorySlotContents(slot, null);
+        }
+        return itemStack;
     }
 
     @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
+    public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
-        // TODO Auto-generated method stub
-
+        inventory[slot] = itemStack;
+        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
+                itemStack.stackSize = getInventoryStackLimit();
+        }
     }
 
     public String getInvName() {
@@ -107,6 +94,41 @@ public class TileCalcinator extends TileEE implements IInventory {
     }
 
     public void closeChest() {
+
+    }
+    
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+
+        super.readFromNBT(nbtTagCompound);
+
+        // Read in the ItemStacks in the inventory from NBT
+        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        this.inventory = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); ++i) {
+            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            byte slot = tagCompound.getByte("Slot");
+            if (slot >= 0 && slot < this.inventory.length) {
+                this.inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            }
+        }
+
+    }
+
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+
+        super.writeToNBT(nbtTagCompound);
+
+        // Write the ItemStacks in the inventory to NBT
+        NBTTagList tagList = new NBTTagList();
+        for (int currentIndex = 0; currentIndex < this.inventory.length; ++currentIndex) {
+            if (this.inventory[currentIndex] != null) {
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte) currentIndex);
+                this.inventory[currentIndex].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        nbtTagCompound.setTag("Items", tagList);
 
     }
 

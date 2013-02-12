@@ -1,7 +1,10 @@
 package com.pahimar.ee3.block;
 
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -31,7 +34,7 @@ public class BlockCalcinator extends BlockEE {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1) {
+    public TileEntity createNewTileEntity(World world) {
 
         return new TileCalcinator();
     }
@@ -60,6 +63,12 @@ public class BlockCalcinator extends BlockEE {
         return 1;
     }
 
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+        
+        super.breakBlock(world, x, y, z, id, meta);
+    }
+    
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 
         if (!world.isRemote) {
@@ -72,6 +81,27 @@ public class BlockCalcinator extends BlockEE {
 
         return true;
 
+    }
+    
+    private void dropInventory(World world, int x, int y, int z) {
+        
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        
+        if (!(tileEntity instanceof IInventory)) {
+            
+            return;
+        }
+        
+        IInventory inventory = (IInventory) tileEntity;
+
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+            
+            ItemStack itemStack = inventory.getStackInSlot(i);
+            
+            if ((itemStack != null) && (itemStack.stackSize > 0)) {
+                
+            }
+        }
     }
 
 }
