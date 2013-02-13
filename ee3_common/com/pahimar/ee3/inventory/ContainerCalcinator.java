@@ -35,7 +35,7 @@ public class ContainerCalcinator extends Container {
         this.addSlotToContainer(new Slot(calcinator, 1, 56, 62));
 
         // Add the calcined results slot to the container
-        // TODO Add a slot here
+        this.addSlotToContainer(new SlotCalcinator(calcinator, 2, 116, 35));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex) {
@@ -52,7 +52,6 @@ public class ContainerCalcinator extends Container {
 
     public boolean canInteractWith(EntityPlayer player) {
 
-        //return calcinator.isUseableByPlayer(player);
         return true;
     }
 

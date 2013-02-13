@@ -1,4 +1,4 @@
-package com.pahimar.ee3.transmutation;
+package com.pahimar.ee3.item.crafting;
 
 import java.util.ArrayList;
 import java.util.List;
