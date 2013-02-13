@@ -66,7 +66,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
     private void renderCalcinator(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE, 0);
+        ForgeHooksClient.bindTexture(Sprites.CALCINATOR_MODEL_TEXTURE, 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         calcinatorModel.render(0.0625F);

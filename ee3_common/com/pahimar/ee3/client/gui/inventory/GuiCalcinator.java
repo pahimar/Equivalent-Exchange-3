@@ -33,32 +33,20 @@ public class GuiCalcinator extends GuiContainer {
         this.calcinator = calcinator;
     }
 
-    protected void drawGuiContainerForegroundLayer() {
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
 
         this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Strings.GUI_CALCINATOR_NAME), 60, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
-        int var4 = this.mc.renderEngine.getTexture(Sprites.GUI_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE);
+        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.CALCINATOR_GUI_TEXTURE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
-        int var5 = (this.width - this.xSize) / 2;
-        int var6 = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-        int var7;
-
-        /*
-         * This bit shows the "fire" effect in the GUI if
-         * (this.furnaceInventory.isBurning()) { var7 =
-         * this.furnaceInventory.getBurnTimeRemainingScaled(12);
-         * this.drawTexturedModalRect(var5 + 56, var6 + 36 + 12 - var7, 176, 12
-         * - var7, 14, var7 + 2); } This bit shows the progress bar in the GUI
-         * var7 = this.furnaceInventory.getCookProgressScaled(24);
-         * this.drawTexturedModalRect(var5 + 79, var6 + 34, 176, 14, var7 + 1,
-         * 16);
-         */
+        this.mc.renderEngine.bindTexture(backgroundTexture);
+        int xStart = (this.width - this.xSize) / 2;
+        int yStart = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(xStart, yStart, 0, 0, this.xSize, this.ySize);
     }
 
 }
