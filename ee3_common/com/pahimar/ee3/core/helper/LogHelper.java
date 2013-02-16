@@ -18,7 +18,7 @@ import cpw.mods.fml.common.FMLLog;
  */
 public class LogHelper {
 
-    private static Logger eeLogger = Logger.getLogger(Reference.MOD_NAME);
+    private static Logger eeLogger = Logger.getLogger(Reference.MOD_ID);
 
     public static void init() {
 

@@ -1,5 +1,7 @@
 package com.pahimar.ee3;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -84,7 +86,7 @@ public class EquivalentExchange3 {
         LocalizationHandler.loadLanguages();
 
         // Initialize the configuration
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + "\\ee3\\" + Reference.MOD_ID + ".cfg"));
 
         // Conduct the version check and log the result
         VersionHelper.execute();
