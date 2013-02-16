@@ -44,7 +44,8 @@ public class ConfigurationHandler {
             configuration.load();
 
             /* General configs */
-            ConfigurationSettings.ENABLE_VERSION_CHECK = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.ENABLE_VERSION_CHECK_CONFIGNAME, ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_VERSION_CHECK_DEFAULT);
+            ConfigurationSettings.DISPLAY_VERSION_RESULT = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT).getBoolean(ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT);
+            ConfigurationSettings.LAST_DISCOVERED_VERSION = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_DEFAULT).value;
 
             /* Graphic configs */
             ConfigurationSettings.ENABLE_PARTICLE_FX = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);

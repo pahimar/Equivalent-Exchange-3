@@ -6,6 +6,9 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import net.minecraftforge.common.Configuration;
+
+import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Reference;
@@ -67,10 +70,16 @@ public class VersionHelper implements Runnable {
                 remoteVersion = remoteVersionProperty.substring(0, remoteVersionProperty.indexOf("|"));
                 remoteUpdateLocation = remoteVersionProperty.substring(remoteVersionProperty.indexOf("|") + 1);
             }
-
-            if ((remoteVersion != null) && (remoteVersion.equals(Reference.VERSION))) {
-                result = CURRENT;
-                return;
+            
+            if (remoteVersion != null) {
+                if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
+                    ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
+                }
+                
+                if (remoteVersion.equals(Reference.VERSION)) {
+                    result = CURRENT;
+                    return;
+                }
             }
 
             result = OUTDATED;
@@ -94,51 +103,41 @@ public class VersionHelper implements Runnable {
 
     public static void logResult() {
 
-        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-            if ((result == CURRENT) || (result == OUTDATED)) {
-                LogHelper.log(Level.INFO, getResultMessage());
-            }
-            else {
-                LogHelper.log(Level.WARNING, getResultMessage());
-            }
+        if ((result == CURRENT) || (result == OUTDATED)) {
+            LogHelper.log(Level.INFO, getResultMessage());
         }
         else {
-            LogHelper.log(Level.INFO, getResultMessage());
+            LogHelper.log(Level.WARNING, getResultMessage());
         }
     }
 
     public static String getResultMessage() {
 
-        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-            if (result == UNINITIALIZED) {
-                return LanguageRegistry.instance().getStringLocalization(Strings.UNINITIALIZED_MESSAGE);
-            }
-            else if (result == CURRENT) {
-                String returnString = LanguageRegistry.instance().getStringLocalization(Strings.CURRENT_MESSAGE);
-                returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
-                returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-                return returnString;
-            }
-            else if ((result == OUTDATED) && (remoteVersion != null) && (remoteUpdateLocation != null)) {
-                String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
-                returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
-                returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
-                returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-                returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
-                return returnString;
-            }
-            else if (result == ERROR) {
-                return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
-            }
-            else if (result == FINAL_ERROR) {
-                return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
-            }
-            else {
-                return null;
-            }
+        if (result == UNINITIALIZED) {
+            return LanguageRegistry.instance().getStringLocalization(Strings.UNINITIALIZED_MESSAGE);
+        }
+        else if (result == CURRENT) {
+            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.CURRENT_MESSAGE);
+            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
+            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+            return returnString;
+        }
+        else if ((result == OUTDATED) && (remoteVersion != null) && (remoteUpdateLocation != null)) {
+            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
+            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
+            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
+            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+            returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
+            return returnString;
+        }
+        else if (result == ERROR) {
+            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
+        }
+        else if (result == FINAL_ERROR) {
+            return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
         }
         else {
-            return LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_DISABLED);
+            return null;
         }
     }
 
@@ -163,30 +162,25 @@ public class VersionHelper implements Runnable {
 
         LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
 
-        if (ConfigurationSettings.ENABLE_VERSION_CHECK) {
-            try {
-                while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result == UNINITIALIZED) || (result == ERROR))) {
+        try {
+            while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result == UNINITIALIZED) || (result == ERROR))) {
 
-                    checkVersion();
-                    count++;
-                    logResult();
+                checkVersion();
+                count++;
+                logResult();
 
-                    if ((result == UNINITIALIZED) || (result == ERROR)) {
-                        Thread.sleep(10000);
-                    }
-                }
-                
-                if (result == ERROR) {
-                    result = FINAL_ERROR;
-                    logResult();
+                if ((result == UNINITIALIZED) || (result == ERROR)) {
+                    Thread.sleep(10000);
                 }
             }
-            catch (InterruptedException e) {
-                e.printStackTrace();
+            
+            if (result == ERROR) {
+                result = FINAL_ERROR;
+                logResult();
             }
         }
-        else {
-            logResult();
+        catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

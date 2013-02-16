@@ -24,7 +24,8 @@ public class Commands {
     public static final String COMMAND_PARTICLES = "particles";
     public static final String COMMAND_SOUNDS = "sounds";
     public static final String COMMAND_VERSION = "version";
-    public static final String COMMAND_EE3_USAGE = "ee3 [ overlay | particles | sounds ]";
+    public static final String COMMAND_CHANGELOG = "changelog";
+    public static final String COMMAND_EE3_USAGE = "ee3 [ overlay | particles | sounds | version ]";
     public static final String COMMAND_OVERLAY_USAGE = "ee3 overlay [ on | off | position | scale | opacity ]";
     public static final String COMMAND_OVERLAY_POSITION_USAGE = "ee3 overlay position [ top | bottom ] [ left | right ]";
     public static final String COMMAND_OVERLAY_OPACITY_USAGE = "ee3 overlay opacity ### ";

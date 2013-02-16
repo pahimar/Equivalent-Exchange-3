@@ -43,7 +43,6 @@
 	<entry key="version.outdated">A new @MOD_NAME@ version exists (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Get it here: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Error while connecting to remote version authority file; trying again</entry>
 	<entry key="version.final_error">Version check stopping after three unsuccessful connection attempts</entry>
-	<entry key="version.check_disabled">Remote version check disabled, skipping</entry>
 	<entry key="command.ee3.overlay.turned_on">Target transmutation overlay turned on</entry>
 	<entry key="command.ee3.overlay.turned_off">Target transmutation overlay turned off</entry>
 	<entry key="command.ee3.overlay.position.top_left">Target transmutation overlay position set to top left</entry>
