@@ -16,6 +16,7 @@ public class Sprites {
     
     // GUI textures
     public static final String CALCINATOR_GUI_TEXTURE = GUI_SHEET_LOCATION + "calcinator.png";
+    public static final String SHARED_ALCHEMICAL_STORAGE_GUI = GUI_SHEET_LOCATION + "shared_alchemical_storage.png";
     
     // Model textures
     public static final String CALCINATOR_MODEL_TEXTURE = MODEL_SHEET_LOCATION + "calcinator.png";
