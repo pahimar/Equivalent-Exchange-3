@@ -2,7 +2,13 @@ package com.pahimar.ee3.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.RenderIds;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileCalcinator;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,42 +18,28 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileCalcinator;
 
-/**
- * BlockCalcinator
- * 
- * Block class for the Calcinator
- * 
- * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
- */
-public class BlockCalcinator extends BlockEE {
+public class BlockAludel extends BlockEE {
 
     /**
-     * Is the random generator used by calcinator to drop the inventory contents in random directions.
+     * Is the random generator used by aludel to drop the inventory contents in random directions.
      */
     private Random rand = new Random();
     
-    public BlockCalcinator(int id) {
-
+    public BlockAludel(int id) {
+        
         super(id, Material.rock);
-        this.setBlockName(Strings.CALCINATOR_NAME);
+        this.setBlockName(Strings.ALUDEL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(5F);
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TileCalcinator();
+        return new TileAludel();
     }
-
+    
     @Override
     public boolean renderAsNormalBlock() {
 
@@ -63,7 +55,7 @@ public class BlockCalcinator extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.calcinatorRenderId;
+        return RenderIds.aludelRenderId;
     }
 
     @Override
@@ -82,10 +74,10 @@ public class BlockCalcinator extends BlockEE {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 
         if (!world.isRemote) {
-            TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
+            TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
 
-            if (tileCalcinator != null) {
-                player.openGui(EquivalentExchange3.instance, GuiIds.CALCINATOR, world, x, y, z);
+            if (tileAludel != null) {
+                player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
             }
         }
 

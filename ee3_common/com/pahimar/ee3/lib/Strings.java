@@ -29,6 +29,7 @@ public class Strings {
 
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
+    public static final String ALUDEL_NAME = "aludel";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
 

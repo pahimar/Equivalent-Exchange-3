@@ -41,7 +41,7 @@ public class GuiCalcinator extends GuiContainer {
 
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
-        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.CALCINATOR_GUI_TEXTURE);
+        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.GUI_CALCINATOR);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(backgroundTexture);
         int xStart = (this.width - this.xSize) / 2;

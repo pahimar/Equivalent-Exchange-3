@@ -1,49 +1,38 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.lib.Strings;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.pahimar.ee3.lib.Strings;
 
-/**
- * TileCalcinator
- * 
- * Calcinator tile entity, and all the logic associated with it
- * 
- * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
- */
-public class TileCalcinator extends TileEE implements IInventory {
+public class TileAludel extends TileEE implements IInventory {
 
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
      */
     private ItemStack[] inventory;
-
-    public TileCalcinator() {
+    
+    public TileAludel() {
         
-        inventory = new ItemStack[3];
+        inventory = new ItemStack[4];
     }
-
-    /**
-     * Returns the number of slots in the inventory.
-     */
+    
+    @Override
     public int getSizeInventory() {
 
         return this.inventory.length;
     }
 
-    /**
-     * Returns the stack in slot i
-     */
+    @Override
     public ItemStack getStackInSlot(int slot) {
 
         return this.inventory[slot];
     }
 
+    @Override
     public ItemStack decrStackSize(int slot, int amount) {
 
         ItemStack itemStack = getStackInSlot(slot);
@@ -62,6 +51,7 @@ public class TileCalcinator extends TileEE implements IInventory {
         return itemStack;
     }
 
+    @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
 
         ItemStack itemStack = getStackInSlot(slot);
@@ -80,22 +70,26 @@ public class TileCalcinator extends TileEE implements IInventory {
         }
     }
 
+    @Override
     public String getInvName() {
 
-        return "container." + Strings.CALCINATOR_NAME;
+        return "container." + Strings.ALUDEL_NAME;
     }
 
+    @Override
     public int getInventoryStackLimit() {
 
         return 64;
     }
 
+    @Override
     public void openChest() {
-
+        
     }
 
+    @Override
     public void closeChest() {
-
+        
     }
     
     public void readFromNBT(NBTTagCompound nbtTagCompound) {

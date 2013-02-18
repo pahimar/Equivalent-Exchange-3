@@ -126,6 +126,7 @@ public class ClientProxy extends CommonProxy {
     public void initRenderingAndTextures() {
 
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);

@@ -15,11 +15,13 @@ public class Sprites {
     // Armor sprite sheets
     
     // GUI textures
-    public static final String CALCINATOR_GUI_TEXTURE = GUI_SHEET_LOCATION + "calcinator.png";
-    public static final String SHARED_ALCHEMICAL_STORAGE_GUI = GUI_SHEET_LOCATION + "shared_alchemical_storage.png";
+    public static final String GUI_CALCINATOR = GUI_SHEET_LOCATION + "calcinator.png";
+    public static final String GUI_ALUDEL = GUI_SHEET_LOCATION + "aludel.png";
+    public static final String GUI_SHARED_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "shared_alchemical_storage.png";
     
     // Model textures
-    public static final String CALCINATOR_MODEL_TEXTURE = MODEL_SHEET_LOCATION + "calcinator.png";
+    public static final String MODEL_CALCINATOR = MODEL_SHEET_LOCATION + "calcinator.png";
+    public static final String MODEL_ALUDEL = MODEL_SHEET_LOCATION + "aludel.png";
     
     // Misc textures
     public static final String WORLD_TRANSMUTATION_TEXTURE = "noise.png";

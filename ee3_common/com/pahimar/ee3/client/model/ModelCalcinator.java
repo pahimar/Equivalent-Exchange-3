@@ -133,7 +133,7 @@ public class ModelCalcinator extends ModelBase {
         GL11.glDisable(GL11.GL_LIGHTING);
 
         GL11.glTranslated(x, y, z);
-        ForgeHooksClient.bindTexture(Sprites.CALCINATOR_MODEL_TEXTURE, 0);
+        ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
 
         firePotBottom.render(scale);
         bowlBottom.render(scale);
