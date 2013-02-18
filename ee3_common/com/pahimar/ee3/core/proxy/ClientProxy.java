@@ -35,6 +35,7 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
@@ -48,6 +49,7 @@ import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
+import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -143,6 +145,7 @@ public class ClientProxy extends CommonProxy {
         super.initTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
     }
 
     @Override

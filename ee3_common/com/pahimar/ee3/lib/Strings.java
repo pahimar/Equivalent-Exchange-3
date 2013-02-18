@@ -43,6 +43,7 @@ public class Strings {
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
+    public static final String TE_ALUDEL_NAME = "tileAludel";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
