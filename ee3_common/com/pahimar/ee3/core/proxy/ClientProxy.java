@@ -32,6 +32,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
+import com.pahimar.ee3.client.renderer.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
@@ -137,6 +138,7 @@ public class ClientProxy extends CommonProxy {
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
     }
 
     @Override
