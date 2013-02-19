@@ -1,25 +1,25 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.lib.Strings;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import com.pahimar.ee3.lib.Strings;
 
-public class TileAludel extends TileEE implements IInventory {
+public class TileAlchemicalChest extends TileEE implements IInventory {
 
     /**
-     * The ItemStacks that hold the items currently being used in the Aludel
+     * The ItemStacks that hold the items currently being used in the Alchemical
+     * Chest
      */
     private ItemStack[] inventory;
-    
-    public TileAludel() {
-        
-        inventory = new ItemStack[4];
+
+    public TileAlchemicalChest() {
+
+        inventory = new ItemStack[13 * 4];
     }
-    
+
     @Override
     public int getSizeInventory() {
 
@@ -47,7 +47,7 @@ public class TileAludel extends TileEE implements IInventory {
                 }
             }
         }
-        
+
         return itemStack;
     }
 
@@ -73,7 +73,7 @@ public class TileAludel extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return "container." + Strings.ALUDEL_NAME;
+        return "container." + Strings.ALCHEMICAL_CHEST_NAME;
     }
 
     @Override
@@ -84,14 +84,14 @@ public class TileAludel extends TileEE implements IInventory {
 
     @Override
     public void openChest() {
-        
+
     }
 
     @Override
     public void closeChest() {
-        
+
     }
-    
+
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);

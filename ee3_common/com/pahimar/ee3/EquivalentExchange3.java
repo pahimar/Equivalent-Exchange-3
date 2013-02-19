@@ -27,7 +27,6 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -126,7 +125,7 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
-        
+
         GameRegistry.registerCraftingHandler(new CraftingHandler());
 
         // Register the DrawBlockHighlight Handler

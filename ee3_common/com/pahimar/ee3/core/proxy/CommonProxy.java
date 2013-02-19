@@ -13,6 +13,7 @@ import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
@@ -68,6 +69,7 @@ public class CommonProxy implements IGuiHandler {
 
         GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
         GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
+        GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
     }
 
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {

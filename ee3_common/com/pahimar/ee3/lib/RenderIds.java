@@ -13,5 +13,5 @@ public class RenderIds {
 
     public static int calcinatorRenderId;
     public static int aludelRenderId;
-
+    public static int alchemicalChestRenderId;
 }

@@ -5,12 +5,15 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.client.model.ModelAludel;
 import com.pahimar.ee3.lib.Sprites;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
-
+@SideOnly(Side.CLIENT)
 public class ItemAludelRenderer implements IItemRenderer {
     
     private ModelAludel aludelModel;

@@ -78,6 +78,7 @@ public class ConfigurationHandler {
             /* Block configs */
             BlockIds.CALCINATOR = configuration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
             BlockIds.ALUDEL = configuration.getBlock(Strings.ALUDEL_NAME, BlockIds.ALUDEL_DEFAULT).getInt(BlockIds.ALUDEL_DEFAULT);
+            BlockIds.ALCHEMICAL_CHEST = configuration.getBlock(Strings.ALCHEMICAL_CHEST_NAME, BlockIds.ALCHEMICAL_CHEST_DEFAULT).getInt(BlockIds.ALCHEMICAL_CHEST_DEFAULT);
             BlockIds.RED_WATER_STILL = configuration.getBlock(Strings.RED_WATER_STILL_NAME, BlockIds.RED_WATER_STILL_DEFAULT).getInt(BlockIds.RED_WATER_STILL_DEFAULT);
 
             /* Block property configs */

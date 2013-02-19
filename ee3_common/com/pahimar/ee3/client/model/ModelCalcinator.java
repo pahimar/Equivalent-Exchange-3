@@ -23,9 +23,12 @@ public class ModelCalcinator extends ModelBase {
     private static final int TEXTURE_HEIGHT = 128;
     private static final int TEXTURE_WIDTH = 128;
 
-    private ModelRenderer firePotBottom, firePotLeft, firePotRight, firePotFront, firePotBack;
-    private ModelRenderer legFrontLeft, legFrontRight, legBackLeft, legBackRight;
-    private ModelRenderer armFrontLeft, armFrontRight, armBackLeft, armBackRight;
+    private ModelRenderer firePotBottom, firePotLeft, firePotRight,
+            firePotFront, firePotBack;
+    private ModelRenderer legFrontLeft, legFrontRight, legBackLeft,
+            legBackRight;
+    private ModelRenderer armFrontLeft, armFrontRight, armBackLeft,
+            armBackRight;
     private ModelRenderer bowlBottom, bowlLeft, bowlRight, bowlFront, bowlBack;
     private ModelRenderer firePotEmbers, bowlEmbers;
 
@@ -126,7 +129,7 @@ public class ModelCalcinator extends ModelBase {
         this.firePotEmbers.rotateAngleY = (float) (Math.PI / 4F);
 
     }
-    
+
     public void render(float scale) {
 
         firePotBottom.render(scale);
@@ -138,11 +141,11 @@ public class ModelCalcinator extends ModelBase {
     public void render(TileCalcinator calcinator, double x, double y, double z) {
 
         GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glTranslated(x, y, z);
-            ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
-            this.render(scale);
-            GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glTranslated(x, y, z);
+        ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
+        this.render(scale);
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 }

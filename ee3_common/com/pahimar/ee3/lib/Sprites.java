@@ -17,11 +17,13 @@ public class Sprites {
     // GUI textures
     public static final String GUI_CALCINATOR = GUI_SHEET_LOCATION + "calcinator.png";
     public static final String GUI_ALUDEL = GUI_SHEET_LOCATION + "aludel.png";
-    public static final String GUI_SHARED_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "shared_alchemical_storage.png";
+    public static final String GUI_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "alchemicalStorage.png";
+    public static final String GUI_SHARED_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "sharedAlchemicalStorage.png";
     
     // Model textures
     public static final String MODEL_CALCINATOR = MODEL_SHEET_LOCATION + "calcinator.png";
     public static final String MODEL_ALUDEL = MODEL_SHEET_LOCATION + "aludel.png";
+    public static final String MODEL_ALCHEMICAL_CHEST = MODEL_SHEET_LOCATION + "alchemicalChest.png";
     
     // Misc textures
     public static final String WORLD_TRANSMUTATION_TEXTURE = "noise.png";

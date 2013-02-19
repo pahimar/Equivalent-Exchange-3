@@ -16,6 +16,8 @@ public class Strings {
 
     /* Gui related constants */
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
+    public static final String GUI_ALUDEL_NAME = "gui.aludel.name";
+    public static final String GUI_ALCHEMICAL_CHEST_NAME = "gui.alchemicalChest.name";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
@@ -26,10 +28,10 @@ public class Strings {
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
     
-
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String ALUDEL_NAME = "aludel";
+    public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
 
@@ -44,6 +46,7 @@ public class Strings {
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
     public static final String TE_ALUDEL_NAME = "tileAludel";
+    public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
