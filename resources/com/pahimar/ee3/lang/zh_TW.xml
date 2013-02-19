@@ -36,8 +36,10 @@
 	<entry key="item.alchemyBag.black.name">黑色煉金口袋</entry>
 	<entry key="tile.calcinator.name">煅燒爐</entry>
 	<entry key="tile.aludel.name">梨形器</entry>
+	<entry key="tile.alchemicalChest.name">煉金箱子</entry>
 	<entry key="gui.calcinator.name">煅燒爐</entry>
 	<entry key="gui.aludel.name">梨形器</entry>
+	<entry key="tile.alchemicalChest.name">煉金箱子</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
         <entry key="version.init_log_message">遠程版本檢查開始初始化,版本信息文件位于</entry>
 	<entry key="version.uninitialized">遠程版本更新檢查更新失敗</entry>
