@@ -1,6 +1,7 @@
 package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
@@ -137,8 +138,15 @@ public class WorldTransmutationHandler {
 
         Block currentBlock = Block.blocksList[id];
 
+        int metaInWorld = meta;
+        int metaHelper = event.targetMeta;
         if (currentBlock != null) {
             meta = currentBlock.damageDropped(meta);
+            
+            if(currentBlock instanceof BlockHalfSlab) {
+            	if(metaInWorld >= 8)
+            		metaHelper += 8;
+            }
         }
 
         ItemStack worldStack = new ItemStack(id, 1, meta);
@@ -148,7 +156,7 @@ public class WorldTransmutationHandler {
             if (EquivalencyHandler.instance().areWorldEquivalent(worldStack, targetStack)) {
                 if (event.itemStack != null) {
                     if (event.itemStack.getItemDamage() <= event.itemStack.getMaxDamage()) {
-                        result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, event.targetMeta);
+                        result = TransmutationHelper.transmuteInWorld(event.world, event.player, event.player.getCurrentEquippedItem(), event.x, event.y, event.z, event.targetID, metaHelper);
                     }
                 }
             }
@@ -156,6 +164,7 @@ public class WorldTransmutationHandler {
 
         if (result) {
             event.actionResult = ActionResult.SUCCESS;
+            event.targetMeta = metaHelper;
             
             int currentSlot = event.player.inventory.currentItem;
             event.itemStack.damageItem(ConfigurationSettings.TRANSMUTE_COST_BLOCK, event.player);
