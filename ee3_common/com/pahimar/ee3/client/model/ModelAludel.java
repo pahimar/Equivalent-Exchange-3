@@ -9,6 +9,10 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.tileentity.TileAludel;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class ModelAludel extends ModelBase {
 
     private static final int TEXTURE_HEIGHT = 128;

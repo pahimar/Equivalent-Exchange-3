@@ -9,6 +9,9 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * ModelCalcinator
  * 
@@ -18,6 +21,7 @@ import com.pahimar.ee3.tileentity.TileCalcinator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class ModelCalcinator extends ModelBase {
 
     private static final int TEXTURE_HEIGHT = 128;
