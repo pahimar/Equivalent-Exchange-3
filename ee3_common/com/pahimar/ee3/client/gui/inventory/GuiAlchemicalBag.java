@@ -6,45 +6,33 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.inventory.ContainerCalcinator;
+import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-/**
- * GuiCalcinator
- * 
- * Calcinator Gui class
- * 
- * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
- */
 @SideOnly(Side.CLIENT)
-public class GuiCalcinator extends GuiContainer {
+public class GuiAlchemicalBag extends GuiContainer {
+    
+    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer) {
 
-    private TileCalcinator calcinator;
-
-    public GuiCalcinator(InventoryPlayer player, TileCalcinator calcinator) {
-
-        super(new ContainerCalcinator(player, calcinator));
-        this.ySize = 176;
-        this.calcinator = calcinator;
+        super(new ContainerAlchemicalBag(inventoryPlayer));
+        this.xSize = 248;
+        this.ySize = 186;
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-
-        this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Strings.GUI_CALCINATOR_NAME), 60, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        
+        this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Strings.GUI_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 44, this.ySize - 96 + 2, 4210752);
     }
-
+    
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
-        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.GUI_CALCINATOR);
+        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.GUI_ALCHEMICAL_STORAGE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(backgroundTexture);
         int xStart = (this.width - this.xSize) / 2;

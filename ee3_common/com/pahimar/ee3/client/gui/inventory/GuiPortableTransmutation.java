@@ -10,6 +10,10 @@ import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class GuiPortableTransmutation extends GuiContainer {
 
     public GuiPortableTransmutation(Container par1Container) {

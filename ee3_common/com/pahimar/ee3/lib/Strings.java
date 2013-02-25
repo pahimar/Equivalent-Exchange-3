@@ -18,6 +18,7 @@ public class Strings {
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
     public static final String GUI_ALUDEL_NAME = "gui.aludel.name";
     public static final String GUI_ALCHEMICAL_CHEST_NAME = "gui.alchemicalChest.name";
+    public static final String GUI_ALCHEMICAL_BAG_NAME = "gui.alchemicalBag.name";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";

@@ -5,9 +5,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
+import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableCrafting;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableTransmutation;
+import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
+import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
@@ -90,8 +94,16 @@ public class CommonProxy implements IGuiHandler {
             return new ContainerPortableTransmutation();
         }
         else if (ID == GuiIds.CALCINATOR) {
-            TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
-            return new ContainerCalcinator(player.inventory, calcinator);
+            TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
+            return new ContainerCalcinator(player.inventory, tileCalcinator);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST) {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new ContainerAlchemicalChest(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_BAG) {
+            // TODO Alchemical Bag inventory work is incomplete
+            return new ContainerAlchemicalBag(player.inventory);
         }
 
         return null;
@@ -107,8 +119,16 @@ public class CommonProxy implements IGuiHandler {
             return new GuiPortableTransmutation(null);
         }
         else if (ID == GuiIds.CALCINATOR) {
-            TileCalcinator calcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
-            return new GuiCalcinator(player.inventory, calcinator);
+            TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
+            return new GuiCalcinator(player.inventory, tileCalcinator);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST) {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_BAG) {
+            // TODO Alchemical Bag inventory work is incomplete
+            return new GuiAlchemicalBag(player.inventory);
         }
 
         return null;
