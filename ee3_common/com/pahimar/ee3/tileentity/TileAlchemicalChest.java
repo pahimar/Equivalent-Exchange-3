@@ -1,10 +1,12 @@
 package com.pahimar.ee3.tileentity;
 
+import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.lib.Strings;
 
 public class TileAlchemicalChest extends TileEE implements IInventory {
@@ -14,6 +16,12 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     /** The angle of the chest lid last tick */
     public float prevLidAngle;
+    
+    /** The number of players currently using this chest */
+    public int numUsingPlayers;
+
+    /** Server sync counter (once per 20 ticks) */
+    private int ticksSinceSync;
     
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical
@@ -87,15 +95,41 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
         return 64;
     }
+    
+    /**
+     * Called when a client event is received with the event number and argument, see World.sendClientEvent
+     */
+    @Override
+    public void receiveClientEvent(int eventID, int numUsingPlayers)
+    {
+        if (eventID == 1)
+        {
+            this.numUsingPlayers = numUsingPlayers;
+        }
+    }
 
     @Override
     public void openChest() {
 
+        ++this.numUsingPlayers;
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, ModBlocks.alchemicalChest.blockID, 1, this.numUsingPlayers);
     }
 
     @Override
     public void closeChest() {
-
+        
+        --this.numUsingPlayers;
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, ModBlocks.alchemicalChest.blockID, 1, this.numUsingPlayers);
+    }
+    
+    /**
+     * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
+     * ticks and creates a new spawn inside its implementation.
+     */
+    @Override
+    public void updateEntity() {
+        
+        super.updateEntity();
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
