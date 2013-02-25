@@ -9,6 +9,12 @@ import com.pahimar.ee3.lib.Strings;
 
 public class TileAlchemicalChest extends TileEE implements IInventory {
 
+    /** The current angle of the chest lid (between 0 and 1) */
+    public float lidAngle;
+
+    /** The angle of the chest lid last tick */
+    public float prevLidAngle;
+    
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical
      * Chest
