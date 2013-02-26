@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Chinese (Simplified)(zh_CN) Localization File</comment>
+	<comment>Simplified Chinese(zh_CN) Localization File</comment>
 	<entry key="key.extra">额外功能</entry>
 	<entry key="key.release">施放技能</entry>
 	<entry key="key.toggle">切换目标</entry>
@@ -18,27 +18,13 @@
 	<entry key="item.alchemyDust.azure.name">蔚蓝粉末</entry> 
 	<entry key="item.alchemyDust.amaranthine.name">紫红粉末</entry> 
 	<entry key="item.alchemyDust.iridescent.name">虹彩粉末</entry>
-	<entry key="item.alchemyBag.white.name">白色炼金口袋</entry>
-	<entry key="item.alchemyBag.orange.name">橙色炼金口袋</entry>
-	<entry key="item.alchemyBag.magenta.name">品红色炼金口袋</entry>
-	<entry key="item.alchemyBag.light_blue.name">浅蓝色炼金口袋</entry>
-	<entry key="item.alchemyBag.yellow.name">黄色炼金口袋</entry>
-	<entry key="item.alchemyBag.lime.name">柠檬色炼金口袋</entry>
-	<entry key="item.alchemyBag.pink.name">粉色炼金口袋</entry>
-	<entry key="item.alchemyBag.gray.name">灰色炼金口袋</entry>
-	<entry key="item.alchemyBag.light_gray.name">浅灰色炼金口袋</entry>
-	<entry key="item.alchemyBag.cyan.name">青色炼金口袋</entry>
-	<entry key="item.alchemyBag.purple.name">紫色炼金口袋</entry>
-	<entry key="item.alchemyBag.blue.name">蓝色炼金口袋</entry>
-	<entry key="item.alchemyBag.brown.name">棕色炼金口袋</entry>
-	<entry key="item.alchemyBag.green.name">绿色炼金口袋</entry>
-	<entry key="item.alchemyBag.red.name">红色炼金口袋</entry>
-	<entry key="item.alchemyBag.black.name">黑色炼金口袋</entry>
+	<entry key="item.alchemyBag.name">炼金口袋</entry>
 	<entry key="tile.calcinator.name">煅烧炉</entry>
 	<entry key="tile.aludel.name">梨形器</entry>
 	<entry key="tile.alchemicalChest.name">炼金箱子</entry>
 	<entry key="gui.calcinator.name">煅烧炉</entry>
 	<entry key="gui.aludel.name">梨形器</entry>
+	<entry key="gui.alchecimalBag.name">炼金口袋</entry>
 	<entry key="gui.alchemicalChest.name">炼金箱子</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
         <entry key="version.init_log_message">远程版本检查开始初始化,版本信息文件位于</entry>
