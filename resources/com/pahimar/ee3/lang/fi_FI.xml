@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Finnish (FI) Localization File</comment>
+	<comment>Finnish (fi_FI) Localization File</comment>
 	<entry key="key.extra">Ekstra</entry>
 	<entry key="key.release">Vapauta</entry>
 	<entry key="key.toggle">Vaihda</entry>
@@ -16,26 +16,12 @@
 	<entry key="item.alchemyDust.azure.name">Taivaansininen pöly</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Amaranthine -pöly</entry>
 	<entry key="item.alchemyDust.iridescent.name">Sateenkaaren väreissä kimalteleva pöly</entry>
-	<entry key="item.alchemyBag.white.name">Valkoinen Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.orange.name">Oranssi Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.magenta.name">Purppura Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.light_blue.name">Vaaleansininen Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.yellow.name">Keltainen Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.lime.name">Limetti Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.pink.name">Pinkki Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.gray.name">Harmaa Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.light_gray.name">Vaaleanharmaa Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.cyan.name">Turkoosi Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.purple.name">Violetti Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.blue.name">Sininen Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.brown.name">Ruskea Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.green.name">Vihreä Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.red.name">Punainen Alkeminen pussi</entry>
-	<entry key="item.alchemyBag.black.name">Musta Alkeminen pussi</entry>
+	<entry key="item.alchemyBag.name">Alkeminen pussi</entry>
 	<entry key="tile.redWaterStill.name">Punavesi (Lähde)</entry>
 	<entry key="tile.redWaterFlowing.name">Punavesi (Virtaava)</entry>
 	<entry key="tile.calcinator.name">Kalsinaattori</entry>
 	<entry key="gui.calcinator.name">Kalsinaattori</entry>
+	<entry key="gui.alchemicalBag.name">Alkeminen pussi</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Alustetaaan etäversion tarkistusta palvelimeen kohteessa</entry>
 	<entry key="version.uninitialized">Etäversion tarkistusta ei pystytty alustamaan</entry>
