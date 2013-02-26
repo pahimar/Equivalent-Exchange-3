@@ -27,7 +27,7 @@ public class ContainerAlchemicalChest extends Container {
         // Add the Alchemical Chest slots to the container
         for (int chestRowIndex = 0; chestRowIndex < numChestRows; ++chestRowIndex) {
             for (int chestColumnIndex = 0; chestColumnIndex < numChestColumns; ++chestColumnIndex) {
-                this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * 9 + 9, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
+                this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * 13, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
             }
         }
 
