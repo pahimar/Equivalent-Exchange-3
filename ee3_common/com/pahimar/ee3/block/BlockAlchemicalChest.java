@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
@@ -71,16 +72,23 @@ public class BlockAlchemicalChest extends BlockEE {
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 
-        if (!world.isRemote) {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-
-            if (tileAlchemicalChest != null) {
-                player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
-            }
+        if (player.isSneaking()) {
+            return true;
         }
-
-        return true;
-
+        else if (world.isBlockSolidOnSide(x, y + 1, z, ForgeDirection.DOWN)) {
+            return true;
+        }
+        else {
+            if (!world.isRemote) {
+                TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+    
+                if (tileAlchemicalChest != null) {
+                    player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
+                }
+            }
+            
+            return true;
+        }
     }
     
     private void dropInventory(World world, int x, int y, int z) {

@@ -23,6 +23,8 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     /** Server sync counter (once per 20 ticks) */
     private int ticksSinceSync;
+    
+    private final int INVENTORY_SIZE = 13 * 4;
 
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical
@@ -32,7 +34,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     public TileAlchemicalChest() {
 
-        inventory = new ItemStack[13 * 4];
+        inventory = new ItemStack[INVENTORY_SIZE];
     }
 
     @Override
@@ -69,20 +71,26 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
 
-        ItemStack itemStack = getStackInSlot(slot);
-        if (itemStack != null) {
-            setInventorySlotContents(slot, null);
+        if (this.inventory[slot] != null) {
+            ItemStack itemStack = this.inventory[slot];
+            this.inventory[slot] = null;
+            return itemStack;
         }
-        return itemStack;
+        else {
+            return null;
+        }
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
-        inventory[slot] = itemStack;
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
+        this.inventory[slot] = itemStack;
+
+        if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
+            itemStack.stackSize = this.getInventoryStackLimit();
         }
+
+        this.onInventoryChanged();
     }
 
     @Override

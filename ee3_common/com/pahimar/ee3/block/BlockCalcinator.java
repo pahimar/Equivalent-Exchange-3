@@ -81,16 +81,20 @@ public class BlockCalcinator extends BlockEE {
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 
-        if (!world.isRemote) {
-            TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
-
-            if (tileCalcinator != null) {
-                player.openGui(EquivalentExchange3.instance, GuiIds.CALCINATOR, world, x, y, z);
-            }
+        if (player.isSneaking()) {
+            return false;
         }
-
-        return true;
-
+        else {
+            if (!world.isRemote) {
+                TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
+    
+                if (tileCalcinator != null) {
+                    player.openGui(EquivalentExchange3.instance, GuiIds.CALCINATOR, world, x, y, z);
+                }
+            }
+    
+            return true;
+        }
     }
     
     private void dropInventory(World world, int x, int y, int z) {

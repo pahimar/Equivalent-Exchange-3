@@ -3,11 +3,15 @@ package com.pahimar.ee3.item;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -16,15 +20,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAlchemyBag extends ItemEE {
 
-    public static final String[] alchemyBagNames = new String[] { "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black" };
-
     public ItemAlchemyBag(int id) {
 
         super(id);
-        this.setHasSubtypes(true);
         this.setIconCoord(7, 0);
         this.setItemName(Strings.ALCHEMY_BAG_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
+    }
+    
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+
+        if (!world.isRemote) {
+            NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN, true);
+            entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+        }
+
+        return itemStack;
+    }
+    
+    @Override
+    public boolean getShareTag() {
+
+        return true;
     }
 
     @SideOnly(Side.CLIENT)
@@ -33,32 +51,25 @@ public class ItemAlchemyBag extends ItemEE {
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getIconFromDamageForRenderPass(int meta, int renderPass) {
-
-        if (renderPass == 0) {
-            return this.getIconFromDamage(meta);
+    @Override
+    public int getIconIndex(ItemStack itemStack, int renderPass) {
+        
+        if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
+            if (renderPass == 0) {
+                return this.iconIndex + 2;
+            }
+            else {
+                return this.iconIndex + 1 + 2;
+            }
         }
         else {
-            return this.getIconFromDamage(meta) + 1;
+            if (renderPass == 0) {
+                return this.iconIndex;
+            }
+            else {
+                return this.iconIndex + 1;
+            }
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getIconFromDamage(int meta) {
-
-        if (FMLClientHandler.instance().getClient().currentScreen != null) {
-            return (this.iconIndex + 2);
-        }
-
-        return this.iconIndex;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public String getItemNameIS(ItemStack stack) {
-
-        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 15);
-        return super.getItemName() + "." + alchemyBagNames[meta];
     }
 
     @SideOnly(Side.CLIENT)
@@ -120,13 +131,4 @@ public class ItemAlchemyBag extends ItemEE {
         }
         return returnValue;
     }
-
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs creativeTab, List list) {
-
-        for (int meta = 0; meta < 16; ++meta) {
-            list.add(new ItemStack(id, 1, meta));
-        }
-    }
-
 }

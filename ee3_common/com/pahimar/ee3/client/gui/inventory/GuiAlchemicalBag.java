@@ -2,10 +2,12 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
@@ -40,4 +42,18 @@ public class GuiAlchemicalBag extends GuiContainer {
         this.drawTexturedModalRect(xStart, yStart, 0, 0, this.xSize, this.ySize);
     }
 
+    public void onGuiClosed() {
+
+        super.onGuiClosed();
+
+        if (this.mc.thePlayer != null) {
+            for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
+                if (itemStack != null) {
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+                    }
+                }
+            }
+        }
+    }
 }

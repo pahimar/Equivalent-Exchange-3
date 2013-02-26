@@ -7,11 +7,13 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
+import com.pahimar.ee3.client.gui.inventory.GuiAludel;
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableCrafting;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableTransmutation;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
+import com.pahimar.ee3.inventory.ContainerAludel;
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
@@ -105,6 +107,10 @@ public class CommonProxy implements IGuiHandler {
             // TODO Alchemical Bag inventory work is incomplete
             return new ContainerAlchemicalBag(player.inventory);
         }
+        else if (ID == GuiIds.ALUDEL) {
+            TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
+            return new ContainerAludel(player.inventory, tileAludel);
+        }
 
         return null;
     }
@@ -129,6 +135,10 @@ public class CommonProxy implements IGuiHandler {
         else if (ID == GuiIds.ALCHEMICAL_BAG) {
             // TODO Alchemical Bag inventory work is incomplete
             return new GuiAlchemicalBag(player.inventory);
+        }
+        else if (ID == GuiIds.ALUDEL) {
+            TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
+            return new GuiAludel(player.inventory, tileAludel);
         }
 
         return null;
