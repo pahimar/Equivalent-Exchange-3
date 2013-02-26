@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>European Portuguese (pt-PT) Localization File</comment>
+	<comment>European Portuguese (pt_PT) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Disparar</entry>
 	<entry key="key.toggle">Alternar</entry>
@@ -16,26 +16,12 @@
 	<entry key="item.alchemyDust.azure.name">Pó Cerúleo</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Pó Amarantino</entry>
 	<entry key="item.alchemyDust.iridescent.name">Pó Iridescente</entry>
-	<entry key="item.alchemyBag.white.name">Saco Alquímico Branco</entry>
-	<entry key="item.alchemyBag.orange.name">Saco Alquímico Cor-de-Laranja</entry>
-	<entry key="item.alchemyBag.magenta.name">Saco Alquímico Magenta</entry>
-	<entry key="item.alchemyBag.light_blue.name">Saco Alquímico Azul Claro</entry>
-	<entry key="item.alchemyBag.yellow.name">Saco Alquímico Amarelo</entry>
-	<entry key="item.alchemyBag.lime.name">Saco Alquímico Verde Lima</entry>
-	<entry key="item.alchemyBag.pink.name">Saco Alquímico Cor-de-Rosa</entry>
-	<entry key="item.alchemyBag.gray.name">Saco Alquímico Cinzento</entry>
-	<entry key="item.alchemyBag.light_gray.name">Saco Alquímico Cinzento Claro</entry>
-	<entry key="item.alchemyBag.cyan.name">Saco Alquímico Azul Ciano</entry>
-	<entry key="item.alchemyBag.purple.name">Saco Alquímico Roxo</entry>
-	<entry key="item.alchemyBag.blue.name">Saco Alquímico Azul</entry>
-	<entry key="item.alchemyBag.brown.name">Saco Alquímico Castanho</entry>
-	<entry key="item.alchemyBag.green.name">Saco Alquímico Verde</entry>
-	<entry key="item.alchemyBag.red.name">Saco Alquímico Vermelho</entry>
-	<entry key="item.alchemyBag.black.name">Saco Alquímico Preto</entry>
+	<entry key="item.alchemyBag.name">Saco Alquímico</entry>
 	<entry key="tile.redWaterStill.name">Água Vermelha (Estagnada)</entry>
 	<entry key="tile.redWaterFlowing.name">Água Vermelha (a Fluir)</entry>
 	<entry key="tile.calcinator.name">Calcinatório</entry>
 	<entry key="gui.calcinator.name">Calcinatório</entry>
+	<entry key="gui.alchemicalBag.name">Saco Alquímico</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">A inicializar verificação da versão contra o ficheiro autoritário de versão remoto, localizado em</entry>
 	<entry key="version.uninitialized">A verificação da versão não inicializou correctamente</entry>
