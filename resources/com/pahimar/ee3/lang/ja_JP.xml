@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Japanese(ja_JP) Localization File</comment>
+	<comment>Japanese (ja_JP) Localization File</comment>
 	<entry key="key.extra">エクストラ</entry>
 	<entry key="key.release">リリース</entry>
 	<entry key="key.toggle">トグル</entry>
