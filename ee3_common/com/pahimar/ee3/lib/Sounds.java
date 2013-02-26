@@ -47,7 +47,8 @@ public class Sounds {
     public static final String WATER_BALL = SOUND_PREFIX + "waterball";
     public static final String WIND = SOUND_PREFIX + "wind";
     
-    //public static final String CHARGE_FAIL = "mob.enderdragon.hit";
+    public static final String CHEST_OPEN = "random.chestopen";
+    public static final String CHEST_CLOSE = "random.chestclosed";
     public static final String CHARGE_FAIL = FAIL;
 
 }
