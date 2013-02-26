@@ -24,7 +24,7 @@
 	<entry key="gui.alchemicalBag.name">Bolsa de Alquimia</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
-	<entry key="version.uninitialized">El chequeo de versiones no se iniicalizó adecuadamente</entry>
+	<entry key="version.uninitialized">El chequeo de versiones no se inicalizó adecuadamente</entry>
 	<entry key="version.current">Actualmente estás usando la versión de Equivalent Exchange 3 (@REMOTE_MOD_VERSION) más actualizada para @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Existe una nueva versión (@REMOTE_MOD_VERSION@) de @MOD_NAME@ para @MINECRAFT_VERSION@. Consíguela aquí:  @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)</entry>
@@ -42,7 +42,7 @@
 	<entry key="command.ee3.overlay.scale.updated">Escala de la superposición del objetivo a transmutar actualizada exitosamente</entry>
 	<entry key="command.ee3.particles.turned_on">Particulas de ee3 activadas</entry>
 	<entry key="command.ee3.particles.turned_off">Particulas de ee3 desactivadas</entry>
-	<entry key="command.ee3.sounds.set_to_all">Reproduciendo sonidos de Equivalent Exchange 3 provenientes de todos los jugadores</entry>
+	<entry key="command.ee3.sounds.set_to_all">Reproduciendo sonidos de Equivalent Exchange 3 provenientes de uno mismo</entry>
 	<entry key="command.ee3.sounds.set_to_self">Solo reproduciendo sonidos de Equivalent Exchange 3 propios</entry>
-	<entry key="command.ee3.sounds.turned_off">Desactivados los sonidos de Equivalent Exchange 3</entry>
+	<entry key="command.ee3.sounds.turned_off">Los sonidos de Equivalent Exchange 3 han sido descativados</entry>
 </properties>
