@@ -1,5 +1,7 @@
 package com.pahimar.ee3;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -25,7 +27,6 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -84,7 +85,7 @@ public class EquivalentExchange3 {
         LocalizationHandler.loadLanguages();
 
         // Initialize the configuration
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + "\\ee3\\" + Reference.MOD_ID + ".cfg"));
 
         // Conduct the version check and log the result
         VersionHelper.execute();
@@ -124,7 +125,7 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
-        
+
         GameRegistry.registerCraftingHandler(new CraftingHandler());
 
         // Register the DrawBlockHighlight Handler

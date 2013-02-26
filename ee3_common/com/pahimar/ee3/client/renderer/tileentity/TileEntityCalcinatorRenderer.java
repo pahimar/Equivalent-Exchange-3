@@ -6,6 +6,9 @@ import net.minecraft.tileentity.TileEntity;
 import com.pahimar.ee3.client.model.ModelCalcinator;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * RenderCalcinator
  * 
@@ -15,6 +18,7 @@ import com.pahimar.ee3.tileentity.TileCalcinator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
 
     static final float scale = (float) (1.0 / 16.0);

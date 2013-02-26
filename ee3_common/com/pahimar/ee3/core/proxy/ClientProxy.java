@@ -32,9 +32,13 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
+import com.pahimar.ee3.client.renderer.ItemAlchemicalChestRenderer;
+import com.pahimar.ee3.client.renderer.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
 import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
@@ -48,6 +52,8 @@ import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
+import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -126,6 +132,8 @@ public class ClientProxy extends CommonProxy {
     public void initRenderingAndTextures() {
 
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
@@ -134,6 +142,8 @@ public class ClientProxy extends CommonProxy {
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
     }
 
     @Override
@@ -142,6 +152,8 @@ public class ClientProxy extends CommonProxy {
         super.initTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
     }
 
     @Override

@@ -24,7 +24,7 @@ public class CommandEE extends CommandBase {
 
         switch (args.length) {
             case 1: {
-                return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_OVERLAY, Commands.COMMAND_PARTICLES, Commands.COMMAND_SOUNDS });
+                return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_OVERLAY, Commands.COMMAND_PARTICLES, Commands.COMMAND_SOUNDS, Commands.COMMAND_VERSION });
             }
             case 2: {
                 if (args[0].equalsIgnoreCase(Commands.COMMAND_OVERLAY)) {
@@ -35,6 +35,9 @@ public class CommandEE extends CommandBase {
                 }
                 else if (args[0].equalsIgnoreCase(Commands.COMMAND_SOUNDS)) {
                     return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_ALL, Commands.COMMAND_SELF, Commands.COMMAND_OFF });
+                }
+                else if (args[0].equalsIgnoreCase(Commands.COMMAND_VERSION)) {
+                    return getListOfStringsMatchingLastWord(args, new String[] { Commands.COMMAND_CHANGELOG });
                 }
             }
             case 3: {
@@ -73,6 +76,9 @@ public class CommandEE extends CommandBase {
             }
             else if (commandName.equalsIgnoreCase(Commands.COMMAND_SOUNDS)) {
                 CommandSounds.processCommand(commandSender, args);
+            }
+            else if (commandName.equalsIgnoreCase(Commands.COMMAND_VERSION)) {
+                CommandVersion.processCommand(commandSender, args);
             }
             else {
                 throw new WrongUsageException(Commands.COMMAND_EE3_USAGE, new Object[0]);

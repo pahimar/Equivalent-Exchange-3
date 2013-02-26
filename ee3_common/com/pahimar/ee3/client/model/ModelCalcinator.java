@@ -9,6 +9,9 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * ModelCalcinator
  * 
@@ -18,14 +21,18 @@ import com.pahimar.ee3.tileentity.TileCalcinator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class ModelCalcinator extends ModelBase {
 
     private static final int TEXTURE_HEIGHT = 128;
     private static final int TEXTURE_WIDTH = 128;
 
-    private ModelRenderer firePotBottom, firePotLeft, firePotRight, firePotFront, firePotBack;
-    private ModelRenderer legFrontLeft, legFrontRight, legBackLeft, legBackRight;
-    private ModelRenderer armFrontLeft, armFrontRight, armBackLeft, armBackRight;
+    private ModelRenderer firePotBottom, firePotLeft, firePotRight,
+            firePotFront, firePotBack;
+    private ModelRenderer legFrontLeft, legFrontRight, legBackLeft,
+            legBackRight;
+    private ModelRenderer armFrontLeft, armFrontRight, armBackLeft,
+            armBackRight;
     private ModelRenderer bowlBottom, bowlLeft, bowlRight, bowlFront, bowlBack;
     private ModelRenderer firePotEmbers, bowlEmbers;
 
@@ -127,23 +134,6 @@ public class ModelCalcinator extends ModelBase {
 
     }
 
-    public void render(TileCalcinator calcinator, double x, double y, double z) {
-
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
-
-        GL11.glTranslated(x, y, z);
-        ForgeHooksClient.bindTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.CALCINATOR_MODEL_TEXTURE, 0);
-
-        firePotBottom.render(scale);
-        bowlBottom.render(scale);
-        firePotEmbers.render(scale);
-        bowlEmbers.render(scale);
-
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
-    }
-
     public void render(float scale) {
 
         firePotBottom.render(scale);
@@ -152,4 +142,14 @@ public class ModelCalcinator extends ModelBase {
         bowlEmbers.render(scale);
     }
 
+    public void render(TileCalcinator calcinator, double x, double y, double z) {
+
+        GL11.glPushMatrix();
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glTranslated(x, y, z);
+        ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
+        this.render(scale);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glPopMatrix();
+    }
 }

@@ -12,5 +12,6 @@ package com.pahimar.ee3.lib;
 public class RenderIds {
 
     public static int calcinatorRenderId;
-
+    public static int aludelRenderId;
+    public static int alchemicalChestRenderId;
 }

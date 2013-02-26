@@ -15,6 +15,26 @@ public class CraftingHandler implements ICraftingHandler {
     @Override
     public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
 
+        if (player.worldObj.isRemote) {
+            doPortableCrafting(player, craftMatrix);
+            System.out.println(item.toString());
+        }
+    }
+
+    @Override
+    public void onSmelting(EntityPlayer player, ItemStack item) {
+
+    }
+
+    /***
+     * Check to see if the crafting is occurring from the portable crafting interface.
+     * If so, do durability damage to the appropriate transmutation stone that was used
+     * for portable crafting.
+     * @param player The player that is completing the crafting
+     * @param craftMatrix The contents of the crafting matrix
+     */
+    private void doPortableCrafting(EntityPlayer player, IInventory craftMatrix) {
+        
         ItemStack openStone = null;
         
         for (ItemStack itemStack : player.inventory.mainInventory) {
@@ -41,10 +61,4 @@ public class CraftingHandler implements ICraftingHandler {
             openStone.damageItem(ConfigurationSettings.TRANSMUTE_COST_ITEM, player);
         }
     }
-
-    @Override
-    public void onSmelting(EntityPlayer player, ItemStack item) {
-
-    }
-
 }
