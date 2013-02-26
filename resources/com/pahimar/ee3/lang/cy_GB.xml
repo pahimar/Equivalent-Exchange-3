@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Welsh Localization File</comment>
+	<comment>Welsh (cy_GB) Localization File</comment>
 	<entry key="key.extra">Ychwanegol</entry>
 	<entry key="key.release">Rhyddhau</entry>
 	<entry key="key.toggle">Toglo</entry>
@@ -16,26 +16,12 @@
 	<entry key="item.alchemyDust.azure.name">Llwch Asur</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Llwch Amorol</entry>
 	<entry key="item.alchemyDust.iridescent.name">Llwch Symudliw</entry>
-	<entry key="item.alchemyBag.white.name">Bag Alcemaidd Gwyn</entry>
-	<entry key="item.alchemyBag.orange.name">Bag Alcemaidd Oren</entry>
-	<entry key="item.alchemyBag.magenta.name">Bag Alcemaidd Magenta</entry>
-	<entry key="item.alchemyBag.light_blue.name">Bag Alcemaidd Glas Golau</entry>
-	<entry key="item.alchemyBag.yellow.name">Bag Alcemaidd Melyn</entry>
-	<entry key="item.alchemyBag.lime.name">Bag Alcemaidd Leim</entry>
-	<entry key="item.alchemyBag.pink.name">Bag Alcemaidd Pinc</entry>
-	<entry key="item.alchemyBag.gray.name">Bag Alcemaidd Llwyd</entry>
-	<entry key="item.alchemyBag.light_gray.name">Bag Alcemaidd Llwyd Golau</entry>
-	<entry key="item.alchemyBag.cyan.name">Bag Alcemaidd Gwyrddlas</entry>
-	<entry key="item.alchemyBag.purple.name">Bag Alcemaidd Porffor</entry>
-	<entry key="item.alchemyBag.blue.name">Bag Alcemaidd Glas</entry>
-	<entry key="item.alchemyBag.brown.name">Bag Alcemaidd Brown</entry>
-	<entry key="item.alchemyBag.green.name">Bag Alcemaidd Gwyrdd</entry>
-	<entry key="item.alchemyBag.red.name">Bag Alcemaidd Coch</entry>
-	<entry key="item.alchemyBag.black.name">Bag Alcemaidd Du</entry>
+	<entry key="item.alchemyBag.name">Bag Alcemaidd</entry>
 	<entry key="tile.redWaterStill.name">Dŵr Coch (Llonydd)</entry>
 	<entry key="tile.redWaterFlowing.name">Dŵr Coch (Llifeiriol)</entry>
 	<entry key="tile.calcinator.name">Calchyniadwr</entry>
 	<entry key="gui.calcinator.name">Calchyniadwr</entry>
+	<entry key="gui.alchemicalBag.name">Bag Alcemaidd</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Ymgychwynnu gwiriad fersiwn yn erbyn yr awdurdod fersiwn pell, a leolir ar</entry>
 	<entry key="version.uninitialized">Ni ymgychwynodd y gwiriad fersiwn yn briodol</entry>
