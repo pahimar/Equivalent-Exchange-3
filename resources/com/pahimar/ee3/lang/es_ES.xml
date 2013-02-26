@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Archivo de Traducción en Español (ES)</comment>
+	<comment>Spanish (es_ES) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Lanzar</entry>
 	<entry key="key.toggle">Alternar</entry>
@@ -16,26 +16,12 @@
 	<entry key="item.alchemyDust.azure.name">Polvo Azur</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Polvo Purpúreo</entry>
 	<entry key="item.alchemyDust.iridescent.name">Polvo Iridiscente</entry>
-	<entry key="item.alchemyBag.white.name">Bolsa de Alquimia Blanca</entry>
-	<entry key="item.alchemyBag.orange.name">Bolsa de Alquimia Naranja</entry>
-	<entry key="item.alchemyBag.magenta.name">Bolsa de Alquimia Magenta</entry>
-	<entry key="item.alchemyBag.light_blue.name">Bolsa de Alquimia Celeste</entry>
-	<entry key="item.alchemyBag.yellow.name">Bolsa de Alquimia Amarilla</entry>
-	<entry key="item.alchemyBag.lime.name">Bolsa de Alquimia Verde Lima</entry>
-	<entry key="item.alchemyBag.pink.name">Bolsa de Alquimia Rosa</entry>
-	<entry key="item.alchemyBag.gray.name">Bolsa de Alquimia Gris</entry>
-	<entry key="item.alchemyBag.light_gray.name">Bolsa de Alquimia Gris Claro</entry>
-	<entry key="item.alchemyBag.cyan.name">Bolsa de Alquimia Cian</entry>
-	<entry key="item.alchemyBag.purple.name">Bolsa de Alquimia Púrpura</entry>
-	<entry key="item.alchemyBag.blue.name">Bolsa de Alquimia Azul</entry>
-	<entry key="item.alchemyBag.brown.name">Bolsa de Alquimia Marrón</entry>
-	<entry key="item.alchemyBag.green.name">Bolsa de Alquimia Verde</entry>
-	<entry key="item.alchemyBag.red.name">Bolsa de Alquimia Roja</entry>
-	<entry key="item.alchemyBag.black.name">Bolsa de Alquimia Negra</entry>
+	<entry key="item.alchemyBag.name">Bolsa de Alquimia</entry>
 	<entry key="tile.redWaterStill.name">Agua Roja (Quieta)</entry>
 	<entry key="tile.redWaterFlowing.name">Agua Roja (Fluyendo)</entry>
 	<entry key="tile.calcinator.name">Calcinador</entry>
 	<entry key="gui.calcinator.name">Calcinador</entry>
+	<entry key="gui.alchemicalBag.name">Bolsa de Alquimia</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
 	<entry key="version.uninitialized">El chequeo de versiones no se iniicalizó adecuadamente</entry>
