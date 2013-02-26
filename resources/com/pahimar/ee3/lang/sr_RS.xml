@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-    <comment>Serbian (SV) Localization File</comment>
+    <comment>Serbian (sr_RS) Localization File</comment>
     <entry key="key.extra">Екстра</entry>
     <entry key="key.release">Одпустити</entry>
     <entry key="key.toggle">Клин</entry>
@@ -15,12 +15,12 @@
     <entry key="item.alchemyDust.verdant.name">Зелена Прашина</entry>
     <entry key="item.alchemyDust.azure.name">Плава Пашина</entry>
     <entry key="item.alchemyDust.amaranthine.name">Неувенљива Прашина</entry>
-    <entry key="item.alchemyDust.iridescent.name">Преливач боја Прашина  </entry>
+    <entry key="item.alchemyDust.iridescent.name">Преливач боја Прашина</entry>
     <entry key="tile.redWaterStill.name">Црвена Вода (Извор)</entry>
     <entry key="tile.redWaterFlowing.name">Црвена Вода (Текућа)</entry>
     <entry key="tile.calcinator.name">Цалцинатор</entry>
     <entry key="gui.calcinator.name">Цалцинатор</entry>
-    <entry key="itemGroup.EE3">Иста Размена 3</entry>
+    <entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
     <entry key="version.init_log_message">Покретање верзије провера према приступу удаљеним фајловима верзије ауторитета, који се налази у</entry>
     <entry key="version.uninitialized">Провера Верзије није успешно завршена (верзија провере није покренута правилно)</entry>
     <entry key="version.current">Ви тренутно користите најновију верзинју (@REMOTE_MOD_VERSION@) од Исте Замене 3 за @MINECRAFT_VERSION@</entry>
