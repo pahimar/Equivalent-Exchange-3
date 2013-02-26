@@ -12,7 +12,7 @@
 	<entry key="item.philStone.name">贤者之石</entry>
 	<entry key="tile.redWaterStill.name">红水(静止)</entry>
 	<entry key="tile.redWaterFlowing.name">红水(流动)</entry>
-	<entry key="item.alchemyDust.ash.name">粉末</entry>
+	<entry key="item.alchemyDust.ash.name">灰</entry>
 	<entry key="item.alchemyDust.minium.name">铅丹粉末</entry>
 	<entry key="item.alchemyDust.verdant.name">翠绿粉末</entry>
 	<entry key="item.alchemyDust.azure.name">蔚蓝粉末</entry> 
@@ -35,10 +35,10 @@
 	<entry key="item.alchemyBag.red.name">红色炼金口袋</entry>
 	<entry key="item.alchemyBag.black.name">黑色炼金口袋</entry>
 	<entry key="tile.calcinator.name">煅烧炉</entry>
-	<entry key="tile.aludel.name">梨形器</entry>
+	<entry key="tile.aludel.name">梨形容器</entry>
 	<entry key="tile.alchemicalChest.name">炼金箱子</entry>
 	<entry key="gui.calcinator.name">煅烧炉</entry>
-	<entry key="gui.aludel.name">梨形器</entry>
+	<entry key="gui.aludel.name">梨形容器</entry>
 	<entry key="gui.alchemicalChest.name">炼金箱子</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
         <entry key="version.init_log_message">远程版本检查开始初始化,版本信息文件位于</entry>
