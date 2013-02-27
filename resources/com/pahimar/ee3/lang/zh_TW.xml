@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Traditional Chinese(zh_TW) Localization File</comment>
+	<comment>Traditional Chinese (zh_TW) Localization File</comment>
 	<entry key="key.extra">額外功能</entry>
 	<entry key="key.release">施放技能</entry>
 	<entry key="key.toggle">切換目標</entry>
@@ -12,7 +12,7 @@
 	<entry key="item.philStone.name">賢者之石</entry>
 	<entry key="tile.redWaterStill.name">紅水(靜止)</entry>
 	<entry key="tile.redWaterFlowing.name">紅水(流動)</entry>
-	<entry key="item.alchemyDust.ash.name">粉末</entry>
+	<entry key="item.alchemyDust.ash.name">灰</entry>
 	<entry key="item.alchemyDust.minium.name">鉛丹粉末</entry>
 	<entry key="item.alchemyDust.verdant.name">翠綠粉末</entry>
 	<entry key="item.alchemyDust.azure.name">蔚藍粉末</entry> 
@@ -20,17 +20,17 @@
 	<entry key="item.alchemyDust.iridescent.name">虹彩粉末</entry>
 	<entry key="item.alchemyBag.name">煉金口袋</entry>
 	<entry key="tile.calcinator.name">煅燒爐</entry>
-	<entry key="tile.aludel.name">梨形器</entry>
+	<entry key="tile.aludel.name">梨形容器</entry>
 	<entry key="tile.alchemicalChest.name">煉金箱子</entry>
 	<entry key="gui.calcinator.name">煅燒爐</entry>
-	<entry key="gui.aludel.name">梨形器</entry>
+	<entry key="gui.aludel.name">梨形容器</entry>
 	<entry key="gui.alchemicalBag.name">煉金口袋</entry>
 	<entry key="tile.alchemicalChest.name">煉金箱子</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
         <entry key="version.init_log_message">遠程版本檢查開始初始化,版本信息文件位于</entry>
 	<entry key="version.uninitialized">遠程版本更新檢查更新失敗</entry>
-	<entry key="version.current">當前使用的是Equivalent Exchange 3的最新版本(@REMOTE_MOD_VERSION@)，適用于@MINECRAFT_VERSION@版本</entry>
-	<entry key="version.outdated">@MOD_NAME@的最新版本(@REMOTE_MOD_VERSION@)已更新，適用于@MINECRAFT_VERSION@，請在@MOD_UPDATE_LOCATION@下載</entry>
+	<entry key="version.current">當前使用的是 Equivalent Exchange 3 的最新版本 (@REMOTE_MOD_VERSION@)，適用于 @MINECRAFT_VERSION@ 版本</entry>
+	<entry key="version.outdated">@MOD_NAME@的最新版本 (@REMOTE_MOD_VERSION@)已更新，適用于 @MINECRAFT_VERSION@，請在 @MOD_UPDATE_LOCATION@ 下載</entry>
 	<entry key="version.general_error">訪問遠程版本文件失敗；重試中</entry>
 	<entry key="version.final_error">累計三次連接失敗後版本檢查中斷</entry>
 	<entry key="version.check_disabled">禁止遠程版本檢查，略過此步</entry>
@@ -40,13 +40,13 @@
 	<entry key="command.ee3.overlay.position.top_right">將轉換目標快捷視圖設置在屏幕右上角</entry>
 	<entry key="command.ee3.overlay.position.bottom_left">將轉換目標快捷視圖設置在屏幕左下角</entry>
 	<entry key="command.ee3.overlay.position.bottom_right">將轉換目標快捷視圖設置在屏幕右下角</entry>
-	<entry key="command.ee3.overlay.opacity.usage.additional_text">(###是介于0.0與1.0間的小數)</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(### 是介于 0.0 與 1.0 間的小數)</entry>
 	<entry key="command.ee3.overlay.opacity.updated">已成功更新轉換目標快捷視圖透明度</entry>
-	<entry key="command.ee3.overlay.scale.usage.additional_text">(###爲大于0.0的小數) </entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(### 爲大于 0.0 的小數) </entry>
 	<entry key="command.ee3.overlay.scale.updated">已成功更新轉換目標快捷視圖界面大小</entry>
-	<entry key="command.ee3.particles.turned_on">開啓Equivalent Exchange 3粒子渲染效果</entry>
-	<entry key="command.ee3.particles.turned_off">關閉Equivalent Exchange 3粒子渲染效果</entry>
-	<entry key="command.ee3.sounds.set_to_all">允許對所有玩家播放Equivalent Exchange 3音頻</entry>
-	<entry key="command.ee3.sounds.set_to_self">允許對自己播放Equivalent Exchange 3音頻</entry>
-	<entry key="command.ee3.sounds.turned_off">禁止播放Equivalent Exchange 3音頻</entry>
+	<entry key="command.ee3.particles.turned_on">開啓 Equivalent Exchange 3 粒子渲染效果</entry>
+	<entry key="command.ee3.particles.turned_off">關閉 Equivalent Exchange 3 粒子渲染效果</entry>
+	<entry key="command.ee3.sounds.set_to_all">允許對所有玩家播放 Equivalent Exchange 3 音頻</entry>
+	<entry key="command.ee3.sounds.set_to_self">允許對自己播放 Equivalent Exchange 3 音頻</entry>
+	<entry key="command.ee3.sounds.turned_off">禁止播放 Equivalent Exchange 3 音頻</entry>
 </properties>
