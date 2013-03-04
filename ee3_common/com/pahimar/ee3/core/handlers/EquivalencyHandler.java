@@ -259,7 +259,7 @@ public class EquivalencyHandler {
     public void debug() {
 
         int i = 0;
-        for (ArrayList list : equivalencyList) {
+        for (ArrayList<ItemStack> list : equivalencyList) {
             System.out.println("equivalencyList[" + i + "]: " + list.toString());
             ++i;
         }

@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
-import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.network.PacketTypeHandler;
 

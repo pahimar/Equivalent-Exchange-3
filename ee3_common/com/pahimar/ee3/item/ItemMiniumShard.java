@@ -17,10 +17,8 @@ public class ItemMiniumShard extends ItemEE {
     public ItemMiniumShard(int id) {
 
         super(id);
-        this.setIconCoord(0, 0);
         this.setUnlocalizedName(Strings.MINIUM_SHARD_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }
-
 }

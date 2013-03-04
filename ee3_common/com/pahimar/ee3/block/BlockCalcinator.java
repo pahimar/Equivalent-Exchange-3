@@ -2,7 +2,6 @@ package com.pahimar.ee3.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,12 +63,6 @@ public class BlockCalcinator extends BlockEE {
     public int getRenderType() {
 
         return RenderIds.calcinatorRenderId;
-    }
-
-    @Override
-    public int getBlockTextureFromSide(int par1) {
-
-        return 1;
     }
 
     @Override

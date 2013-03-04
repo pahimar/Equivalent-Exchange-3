@@ -1,7 +1,5 @@
 package com.pahimar.ee3.core.helper;
 
-import com.pahimar.ee3.lib.Strings;
-
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**

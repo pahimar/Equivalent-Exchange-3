@@ -10,6 +10,10 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.lib.Sprites;
+
+import cpw.mods.fml.client.FMLClientHandler;
+
 public class RenderUtils {
 
     private static int rotationAngle = 0;
@@ -19,7 +23,7 @@ public class RenderUtils {
         RenderBlocks renderBlocks = new RenderBlocks();
 
         Block block = Block.blocksList[stack.itemID];
-        renderEngine.bindTexture(renderEngine.getTexture(block.getTextureFile()));
+        renderEngine.func_98187_b(block.getTextureFile());
         GL11.glPushMatrix();
         GL11.glTranslatef((float) (x - 2), (float) (y + 3), -3.0F + zLevel);
         GL11.glScalef(10.0F, 10.0F, 10.0F);

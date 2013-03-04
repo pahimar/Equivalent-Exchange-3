@@ -17,7 +17,6 @@ import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
-import com.pahimar.ee3.tileentity.TileAludel;
 
 public class BlockAlchemicalChest extends BlockEE {
 
@@ -55,12 +54,6 @@ public class BlockAlchemicalChest extends BlockEE {
     public int getRenderType() {
 
         return RenderIds.alchemicalChestRenderId;
-    }
-    
-    @Override
-    public int getBlockTextureFromSide(int par1) {
-
-        return 1;
     }
 
     @Override

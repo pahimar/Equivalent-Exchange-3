@@ -2,13 +2,13 @@ package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraftforge.client.ForgeHooksClient;
 
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -147,7 +147,7 @@ public class ModelCalcinator extends ModelBase {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glTranslated(x, y, z);
-        ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_CALCINATOR);
         this.render(scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

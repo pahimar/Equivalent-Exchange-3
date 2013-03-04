@@ -1,8 +1,6 @@
 package com.pahimar.ee3.client.renderer;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -10,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.client.model.ModelCalcinator;
 import com.pahimar.ee3.lib.Sprites;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -69,8 +68,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
 
     private void renderCalcinator(float x, float y, float z) {
 
-        Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture(Sprites.MODEL_CALCINATOR, 0);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_CALCINATOR);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         calcinatorModel.render(0.0625F);

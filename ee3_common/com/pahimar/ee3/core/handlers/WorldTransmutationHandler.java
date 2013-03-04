@@ -23,7 +23,6 @@ import com.pahimar.ee3.network.packet.PacketItemUpdate;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 

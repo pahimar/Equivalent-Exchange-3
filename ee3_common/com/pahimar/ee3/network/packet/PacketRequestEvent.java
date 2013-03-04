@@ -7,11 +7,9 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketRequestEvent extends PacketEE {

@@ -1,5 +1,9 @@
 package com.pahimar.ee3.client.gui.inventory;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
@@ -10,11 +14,6 @@ import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalChest extends GuiContainer {

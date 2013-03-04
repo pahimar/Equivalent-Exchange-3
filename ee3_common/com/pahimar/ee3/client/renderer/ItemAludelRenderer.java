@@ -1,17 +1,16 @@
 package com.pahimar.ee3.client.renderer;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelAludel;
 import com.pahimar.ee3.lib.Sprites;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class ItemAludelRenderer implements IItemRenderer {
@@ -58,8 +57,7 @@ public class ItemAludelRenderer implements IItemRenderer {
     
     private void renderAludel(float x, float y, float z) {
 
-        Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture(Sprites.MODEL_ALUDEL, 0);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALUDEL);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         aludelModel.render(0.0625F);

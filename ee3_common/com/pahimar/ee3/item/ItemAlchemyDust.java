@@ -31,24 +31,16 @@ public class ItemAlchemyDust extends ItemEE {
 
         super(id);
         this.setHasSubtypes(true);
-        this.setIconCoord(11, 0);
         this.setUnlocalizedName(Strings.ALCHEMY_DUST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getIconFromDamage(int meta) {
-
-        int i = MathHelper.clamp_int(meta, 0, 5);
-        return (this.iconIndex + i);
-    }
-
-    @SideOnly(Side.CLIENT)
     public String getItemNameIS(ItemStack stack) {
 
         int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
-        return super.getItemName() + "." + alchemyDustNames[meta];
+        return super.getUnlocalizedName() + "." + alchemyDustNames[meta];
     }
 
     @SideOnly(Side.CLIENT)

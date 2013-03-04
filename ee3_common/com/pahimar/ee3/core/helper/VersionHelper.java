@@ -1,6 +1,5 @@
 package com.pahimar.ee3.core.helper;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;

@@ -58,12 +58,6 @@ public class BlockAludel extends BlockEE {
     }
 
     @Override
-    public int getBlockTextureFromSide(int par1) {
-
-        return 1;
-    }
-
-    @Override
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 
         dropInventory(world, x, y, z);
