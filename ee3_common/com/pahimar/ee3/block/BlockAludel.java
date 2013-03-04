@@ -28,7 +28,7 @@ public class BlockAludel extends BlockEE {
     public BlockAludel(int id) {
 
         super(id, Material.rock);
-        this.setBlockName(Strings.ALUDEL_NAME);
+        this.setUnlocalizedName(Strings.ALUDEL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(5F);
     }

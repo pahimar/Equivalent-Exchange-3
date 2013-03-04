@@ -37,7 +37,7 @@ public class BlockCalcinator extends BlockEE {
     public BlockCalcinator(int id) {
 
         super(id, Material.rock);
-        this.setBlockName(Strings.CALCINATOR_NAME);
+        this.setUnlocalizedName(Strings.CALCINATOR_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(5F);
     }

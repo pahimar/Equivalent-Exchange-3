@@ -19,6 +19,8 @@ public class Sprites {
     public static final String GUI_ALUDEL = GUI_SHEET_LOCATION + "aludel.png";
     public static final String GUI_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "alchemicalStorage.png";
     public static final String GUI_SHARED_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "sharedAlchemicalStorage.png";
+    public static final String GUI_PORTABLE_CRAFTING = "/gui/crafting.png";
+    public static final String GUI_PORTABLE_TRANSMUTATION = GUI_SHEET_LOCATION + "portableTransmutation.png";
     
     // Model textures
     public static final String MODEL_CALCINATOR = MODEL_SHEET_LOCATION + "calcinator.png";

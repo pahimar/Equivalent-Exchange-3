@@ -18,7 +18,7 @@ public class ItemInertStone extends ItemEE {
 
         super(id);
         this.setIconCoord(1, 0);
-        this.setItemName(Strings.INERT_STONE_NAME);
+        this.setUnlocalizedName(Strings.INERT_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 

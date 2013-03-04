@@ -24,7 +24,7 @@ public class ItemAlchemyBag extends ItemEE {
 
         super(id);
         this.setIconCoord(7, 0);
-        this.setItemName(Strings.ALCHEMY_BAG_NAME);
+        this.setUnlocalizedName(Strings.ALCHEMY_BAG_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
     

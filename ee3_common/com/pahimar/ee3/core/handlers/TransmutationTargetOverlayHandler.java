@@ -51,7 +51,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
     @Override
     public EnumSet<TickType> ticks() {
 
-        return EnumSet.of(TickType.CLIENT, TickType.CLIENTGUI, TickType.RENDER);
+        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
     }
 
     @Override

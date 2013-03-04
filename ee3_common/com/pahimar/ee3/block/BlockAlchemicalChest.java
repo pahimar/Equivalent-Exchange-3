@@ -29,7 +29,7 @@ public class BlockAlchemicalChest extends BlockEE {
     public BlockAlchemicalChest(int id) {
 
         super(id, Material.wood);
-        this.setBlockName(Strings.ALCHEMICAL_CHEST_NAME);
+        this.setUnlocalizedName(Strings.ALCHEMICAL_CHEST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 

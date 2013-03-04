@@ -24,7 +24,7 @@ public class BlockRedWaterFlowing extends BlockFlowing {
         this.blockHardness = 100F;
         this.setLightOpacity(3);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setBlockName(Strings.RED_WATER_FLOWING_NAME);
+        this.setUnlocalizedName(Strings.RED_WATER_FLOWING_NAME);
     }
 
     @Override

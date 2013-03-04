@@ -32,7 +32,7 @@ public class ItemMiniumStone extends ItemEE
 
         super(id);
         this.setIconCoord(2, 0);
-        this.setItemName(Strings.MINIUM_STONE_NAME);
+        this.setUnlocalizedName(Strings.MINIUM_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }

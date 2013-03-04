@@ -32,7 +32,7 @@ public class ItemAlchemyDust extends ItemEE {
         super(id);
         this.setHasSubtypes(true);
         this.setIconCoord(11, 0);
-        this.setItemName(Strings.ALCHEMY_DUST_NAME);
+        this.setUnlocalizedName(Strings.ALCHEMY_DUST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }

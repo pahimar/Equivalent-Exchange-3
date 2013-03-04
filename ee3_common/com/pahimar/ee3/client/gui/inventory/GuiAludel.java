@@ -12,7 +12,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
@@ -38,9 +37,9 @@ public class GuiAludel extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 
-        int backgroundTexture = this.mc.renderEngine.getTexture(Sprites.GUI_ALUDEL);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(backgroundTexture);
+        //this.mc.renderEngine.bindTexture(Sprites.GUI_ALUDEL);
+        this.mc.renderEngine.func_98187_b(Sprites.GUI_ALUDEL);
         int xStart = (this.width - this.xSize) / 2;
         int yStart = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, this.xSize, this.ySize);

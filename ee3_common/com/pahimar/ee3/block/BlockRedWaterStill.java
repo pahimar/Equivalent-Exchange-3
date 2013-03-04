@@ -23,10 +23,9 @@ public class BlockRedWaterStill extends BlockStationary {
         super(id, Material.water);
         this.blockHardness = 100F;
         this.setLightOpacity(3);
-        this.setBlockName(Strings.RED_WATER_STILL_NAME);
+        this.setUnlocalizedName(Strings.RED_WATER_STILL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.disableStats();
-        this.setRequiresSelfNotify();
     }
 
     @Override

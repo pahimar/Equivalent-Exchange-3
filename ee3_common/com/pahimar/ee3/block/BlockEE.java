@@ -44,6 +44,6 @@ public abstract class BlockEE extends BlockContainer {
             direction = ForgeDirection.WEST.ordinal();
         }
 
-        world.setBlockMetadataWithNotify(x, y, z, direction);
+        world.setBlockMetadataWithNotify(x, y, z, direction, 3);
     }
 }

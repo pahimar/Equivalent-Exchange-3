@@ -1,14 +1,10 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.LocalizationHelper;
-import com.pahimar.ee3.core.helper.VersionHelper;
-import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.Commands;
-
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+
+import com.pahimar.ee3.core.helper.VersionHelper;
+import com.pahimar.ee3.lib.Commands;
 
 
 public class CommandVersion {

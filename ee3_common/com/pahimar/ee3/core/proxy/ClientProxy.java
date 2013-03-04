@@ -35,8 +35,6 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
@@ -137,9 +135,6 @@ public class ClientProxy extends CommonProxy {
 
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
         MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
-
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFX());
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
