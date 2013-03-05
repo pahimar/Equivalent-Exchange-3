@@ -16,7 +16,6 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * KeyBindingHandler
@@ -75,10 +74,5 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
     public EnumSet<TickType> ticks() {
 
         return EnumSet.of(TickType.CLIENT);
-    }
-
-    private static String getLocalizedKey(String key) {
-
-        return LanguageRegistry.instance().getStringLocalization(key);
     }
 }

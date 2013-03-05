@@ -11,6 +11,8 @@ import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.lib.Sprites;
+
 public class RenderUtils {
 
     private static int rotationAngle = 0;
@@ -43,44 +45,30 @@ public class RenderUtils {
         renderBlocks.useInventoryTint = true;
         GL11.glPopMatrix();
     }
+    
+    public static void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int x, int y, float opacity, float scale) {
 
-    public static void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack stack, int x, int y, float opacity, float scale) {
-
-        int itemID = stack.itemID;
-        int meta = stack.getItemDamage();
-        Icon iconIndex = stack.getIconIndex();
-
+        Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
-
-        // FIXME
-        //renderEngine.bindTexture(renderEngine.getTexture(stack.getItem().getTextureFile()));
-
-        int overlayColour = Item.itemsList[itemID].getColorFromItemStack(stack, 0);
-        float var17 = (float) (overlayColour >> 16 & 255) / 255.0F;
-        float var16 = (float) (overlayColour >> 8 & 255) / 255.0F;
-        float var12 = (float) (overlayColour & 255) / 255.0F;
-
-        GL11.glColor4f(var17, var16, var12, opacity);
-
-        //drawTexturedQuad(x, y, iconIndex % 16 * 16, iconIndex / 16 * 16, 16, 16, -90, scale);
+    	renderEngine.func_98187_b(Sprites.ITEM_SPRITE_SHEET);
+        int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
+        float red = (float)(overlayColour >> 16 & 255) / 255.0F;
+        float green = (float)(overlayColour >> 8 & 255) / 255.0F;
+        float blue = (float)(overlayColour & 255) / 255.0F;
+        GL11.glColor4f(red, green, blue, opacity);       
+        drawTexturedQuad(x, y, icon, 16 * scale, 16 * scale, -90);
         GL11.glEnable(GL11.GL_LIGHTING);
+
     }
-
-    public static void drawTexturedQuad(int x, int y, int u, int v, int width, int height, double zLevel, float scale) {
-
-        u = (int) (u * scale);
-        v = (int) (v * scale);
-        width = (int) (width * scale);
-        height = (int) (height * scale);
-        float var7 = 0.00390625F / scale;
-        float var8 = 0.00390625F / scale;
-        Tessellator var9 = Tessellator.instance;
-        var9.startDrawingQuads();
-        var9.addVertexWithUV(x + 0, y + height, zLevel, (u + 0) * var7, (v + height) * var8);
-        var9.addVertexWithUV(x + width, y + height, zLevel, (u + width) * var7, (v + height) * var8);
-        var9.addVertexWithUV(x + width, y + 0, zLevel, (u + width) * var7, (v + 0) * var8);
-        var9.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * var7, (v + 0) * var8);
-        var9.draw();
+    
+    public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel) {
+    	
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + height), zLevel, (double)icon.func_94209_e(), (double)icon.func_94210_h());
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + height), zLevel, (double)icon.func_94212_f(), (double)icon.func_94210_h());
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + 0), zLevel, (double)icon.func_94212_f(), (double)icon.func_94206_g());
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), zLevel, (double)icon.func_94209_e(), (double)icon.func_94206_g());
+        tessellator.draw();
     }
-
 }

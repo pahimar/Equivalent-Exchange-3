@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -65,9 +64,6 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
         float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
         float overlayOpacity = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY;
-
-        MovingObjectPosition rayTrace = minecraft.objectMouseOver;
-        ItemStack currentBlock = null;
 
         GL11.glPushMatrix();
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);

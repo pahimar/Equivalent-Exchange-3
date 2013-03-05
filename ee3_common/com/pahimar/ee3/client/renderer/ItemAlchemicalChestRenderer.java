@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.renderer;
 
 import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -58,7 +57,6 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
 
     private void renderAlchemicalChest(float x, float y, float z) {
 
-        Tessellator tesselator = Tessellator.instance;
         FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALCHEMICAL_CHEST);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size

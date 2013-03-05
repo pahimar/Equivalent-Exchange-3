@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
@@ -20,8 +19,6 @@ public class DrawBlockHighlightHandler {
 
     private static int pulse = 0;
     private static boolean doInc = true;
-
-    private static ItemStack currentBlockStack = null;
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
@@ -47,7 +44,7 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.WORLD_TRANSMUTATION_TEXTURE);
+        int texture = event.context.renderEngine.getTexture(Sprites.EFFECT_WORLD_TRANSMUTATION);
 
         float xScale = 1;
         float yScale = 1;

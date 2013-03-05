@@ -3,9 +3,6 @@ package com.pahimar.ee3.block;
 import net.minecraft.block.Block;
 
 import com.pahimar.ee3.lib.BlockIds;
-import com.pahimar.ee3.lib.Strings;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * ModBlocks

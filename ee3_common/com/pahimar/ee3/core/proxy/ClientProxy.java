@@ -47,7 +47,6 @@ import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
