@@ -11,8 +11,8 @@ package com.pahimar.ee3.lib;
  */
 public class Sounds {
 
-    private static final String SOUND_RESOURCE_LOCATION = "com/pahimar/ee3/sound/";
-    private static final String SOUND_PREFIX = "com.pahimar.ee3.sound.";
+    private static final String SOUND_RESOURCE_LOCATION = "mods/ee3/sound/";
+    private static final String SOUND_PREFIX = "mods.ee3.sound.";
 
     public static String[] soundFiles = {
             SOUND_RESOURCE_LOCATION + "chargeDown.ogg",

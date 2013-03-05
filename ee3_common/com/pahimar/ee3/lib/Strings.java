@@ -13,6 +13,7 @@ public class Strings {
     public static final String OUTDATED_MESSAGE = "version.outdated";
     public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
     public static final String FINAL_ERROR_MESSAGE = "version.final_error";
+    public static final String MC_VERSION_NOT_FOUND = "version.mc_version_not_found";
 
     /* Gui related constants */
     public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";

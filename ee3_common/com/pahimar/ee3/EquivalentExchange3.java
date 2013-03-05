@@ -53,17 +53,14 @@ import cpw.mods.fml.relauncher.Side;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME,
-        version = Reference.VERSION)
-@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true,
-        serverSideRequired = false, packetHandler = PacketHandler.class)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS,
-            serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
@@ -101,7 +98,12 @@ public class EquivalentExchange3 {
 
         // Register the Sound Handler (Client only)
         proxy.registerSoundHandler();
+        
+        // Initialize mod blocks
+        ModBlocks.init();
 
+        // Initialize mod items
+        ModItems.init();
     }
 
     @Init
@@ -131,12 +133,6 @@ public class EquivalentExchange3 {
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
 
-        // Initialize mod blocks
-        ModBlocks.init();
-
-        // Initialize mod items
-        ModItems.init();
-
         // Initialize mod tile entities
         proxy.initTileEntities();
 
@@ -144,7 +140,7 @@ public class EquivalentExchange3 {
         proxy.initRenderingAndTextures();
 
         // Load the Transmutation Stone recipes
-        //RecipesTransmutationStone.init();
+        RecipesTransmutationStone.init();
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());

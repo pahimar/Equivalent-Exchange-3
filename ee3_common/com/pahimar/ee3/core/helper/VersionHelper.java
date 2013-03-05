@@ -42,6 +42,7 @@ public class VersionHelper implements Runnable {
     public static final byte OUTDATED = 2;
     public static final byte ERROR = 3;
     public static final byte FINAL_ERROR = 4;
+    public static final byte MC_VERSION_NOT_FOUND = 5;
 
     // Var to hold the result of the remote version check, initially set to uninitialized
     private static byte result = UNINITIALIZED;
@@ -81,7 +82,12 @@ public class VersionHelper implements Runnable {
                 }
             }
 
-            result = OUTDATED;
+            if (remoteVersionProperty == null) {
+            	result = MC_VERSION_NOT_FOUND;
+            }
+            else {
+            	result = OUTDATED;
+            }
         }
         catch (Exception e) {
         }
@@ -129,14 +135,29 @@ public class VersionHelper implements Runnable {
             returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
             return returnString;
         }
+        else if ((result == OUTDATED) && (remoteVersion != null) && (remoteUpdateLocation != null)) {
+    		String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
+        	returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
+        	returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
+        	returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+        	returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
+        	return returnString;
+        }
         else if (result == ERROR) {
             return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
         }
         else if (result == FINAL_ERROR) {
             return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
         }
+        else if (result == MC_VERSION_NOT_FOUND) {
+        	String returnString = LanguageRegistry.instance().getStringLocalization(Strings.MC_VERSION_NOT_FOUND);
+        	returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
+        	returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+        	return returnString;
+        }
         else {
-            return null;
+        	result = ERROR;
+        	return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
         }
     }
 

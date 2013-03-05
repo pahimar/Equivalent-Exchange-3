@@ -30,6 +30,6 @@ public class ItemEE extends Item {
     @SideOnly(Side.CLIENT)
     // public void setIconIndex(IconRegister iconRegister)
     public void func_94581_a(IconRegister iconRegister) {
-        this.iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":"+ this.getUnlocalizedName());
+        this.iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":"+ this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 }
