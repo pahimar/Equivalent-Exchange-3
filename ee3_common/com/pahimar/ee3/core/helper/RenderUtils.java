@@ -7,12 +7,9 @@ import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
-
-import com.pahimar.ee3.lib.Sprites;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderUtils {
 
@@ -51,11 +48,12 @@ public class RenderUtils {
 
         int itemID = stack.itemID;
         int meta = stack.getItemDamage();
-        int iconIndex = stack.getIconIndex();
+        Icon iconIndex = stack.getIconIndex();
 
         GL11.glDisable(GL11.GL_LIGHTING);
 
-        renderEngine.bindTexture(renderEngine.getTexture(stack.getItem().getTextureFile()));
+        // FIXME
+        //renderEngine.bindTexture(renderEngine.getTexture(stack.getItem().getTextureFile()));
 
         int overlayColour = Item.itemsList[itemID].getColorFromItemStack(stack, 0);
         float var17 = (float) (overlayColour >> 16 & 255) / 255.0F;
@@ -64,7 +62,7 @@ public class RenderUtils {
 
         GL11.glColor4f(var17, var16, var12, opacity);
 
-        drawTexturedQuad(x, y, iconIndex % 16 * 16, iconIndex / 16 * 16, 16, 16, -90, scale);
+        //drawTexturedQuad(x, y, iconIndex % 16 * 16, iconIndex / 16 * 16, 16, 16, -90, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 

@@ -106,4 +106,18 @@ public class AlchemicalBagSavedData extends WorldSavedData implements IInventory
 
     }
 
+	@Override
+	// public boolean hasCustomName()
+	public boolean func_94042_c() {
+
+		return false;
+	}
+
+	@Override
+    // public boolean canInsertSide(int i, ItemStack itemStack)
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+
+		return false;
+	}
+
 }

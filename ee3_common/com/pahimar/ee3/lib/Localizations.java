@@ -11,7 +11,7 @@ package com.pahimar.ee3.lib;
  */
 public class Localizations {
 	
-	private static final String LANG_RESOURCE_LOCATION = "/com/pahimar/ee3/lang/";
+	private static final String LANG_RESOURCE_LOCATION = "/mods/ee3/lang/";
 	
 	public static String[] localeFiles = {
 		LANG_RESOURCE_LOCATION + "cs_CZ.xml",

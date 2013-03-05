@@ -86,7 +86,7 @@ public class ConfigurationSettings {
 
     // The maximum durability for the Philosophers Stone 
     public static int PHILOSOPHERS_STONE_MAX_DURABILITY;
-    public static final String PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME = Strings.PHILOSOPHER_STONE_NAME;
+    public static final String PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME = Strings.PHILOSOPHERS_STONE_NAME;
     public static final int PHILOSOPHERS_STONE_MAX_DURABILITY_DEFAULT = 10001;
 
     /*

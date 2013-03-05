@@ -130,4 +130,18 @@ public class TileCalcinator extends TileEE implements IInventory {
         }
         nbtTagCompound.setTag("Items", tagList);
     }
+    
+	@Override
+	// public boolean hasCustomName()
+	public boolean func_94042_c() {
+
+		return false;
+	}
+
+	@Override
+    // public boolean canInsertSide(int i, ItemStack itemStack)
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+
+		return true;
+	}
 }

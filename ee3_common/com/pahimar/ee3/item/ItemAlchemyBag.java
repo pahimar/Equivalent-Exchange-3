@@ -1,20 +1,15 @@
 package com.pahimar.ee3.item;
 
-import java.util.List;
-
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -51,22 +46,25 @@ public class ItemAlchemyBag extends ItemEE {
     }
 
     @Override
-    public Icon getIconIndex(ItemStack itemStack, int renderPass) {
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(ItemStack itemStack, int renderPass) {
         
+    	// If the bag is open
         if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
             if (renderPass == 0) {
-                return this.iconIndex + 2;
+                return this.iconIndex;
             }
             else {
-                return this.iconIndex + 1 + 2;
+                return this.iconIndex;
             }
         }
+        // Else, the bag is closed
         else {
             if (renderPass == 0) {
                 return this.iconIndex;
             }
             else {
-                return this.iconIndex + 1;
+                return this.iconIndex;
             }
         }
     }

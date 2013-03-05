@@ -3,16 +3,12 @@ package com.pahimar.ee3.core.helper;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
-import com.pahimar.ee3.lib.Sounds;
 
 /**
  * TransmutationHelper
@@ -32,7 +28,7 @@ public class TransmutationHelper {
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
         if (Block.blocksList[targetID] != null) {
-            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
+            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta, 2);
             return true;
         }
 

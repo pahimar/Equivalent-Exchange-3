@@ -95,7 +95,7 @@ public class ConfigurationHandler {
             ItemIds.MINIUM_SHARD = configuration.getItem(Strings.MINIUM_SHARD_NAME, ItemIds.MINIUM_SHARD_DEFAULT).getInt(ItemIds.MINIUM_SHARD_DEFAULT);
             ItemIds.INERT_STONE = configuration.getItem(Strings.INERT_STONE_NAME, ItemIds.INERT_STONE_DEFAULT).getInt(ItemIds.INERT_STONE_DEFAULT);
             ItemIds.MINIUM_STONE = configuration.getItem(Strings.MINIUM_STONE_NAME, ItemIds.MINIUM_STONE_DEFAULT).getInt(ItemIds.MINIUM_STONE_DEFAULT);
-            ItemIds.PHILOSOPHER_STONE = configuration.getItem(Strings.PHILOSOPHER_STONE_NAME, ItemIds.PHILOSOPHER_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHER_STONE_DEFAULT);
+            ItemIds.PHILOSOPHER_STONE = configuration.getItem(Strings.PHILOSOPHERS_STONE_NAME, ItemIds.PHILOSOPHER_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHER_STONE_DEFAULT);
             ItemIds.ALCHEMY_DUST = configuration.getItem(Strings.ALCHEMY_DUST_NAME, ItemIds.ALCHEMY_DUST_DEFAULT).getInt(ItemIds.ALCHEMY_DUST_DEFAULT);
             ItemIds.ALCHEMY_BAG = configuration.getItem(Strings.ALCHEMY_BAG_NAME, ItemIds.ALCHEMY_BAG_DEFAULT).getInt(ItemIds.ALCHEMY_BAG_DEFAULT);
 

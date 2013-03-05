@@ -3,10 +3,10 @@ package com.pahimar.ee3.lib;
 public class Sprites {
 
     // Base file pathes
-    public static final String SPRITE_SHEET_LOCATION = "/com/pahimar/ee3/art/sprites/";
-    public static final String MODEL_SHEET_LOCATION = "/com/pahimar/ee3/art/models/";
-    public static final String ARMOR_SHEET_LOCATION = "/com/pahimar/ee3/art/armor/";
-    public static final String GUI_SHEET_LOCATION = "/com/pahimar/ee3/art/gui/";
+    public static final String SPRITE_SHEET_LOCATION = "/mods/ee3/textures/items/";
+    public static final String MODEL_SHEET_LOCATION = "/mods/ee3/textures/models/";
+    public static final String ARMOR_SHEET_LOCATION = "/mods/ee3/textures/armor/";
+    public static final String GUI_SHEET_LOCATION = "/mods/ee3/textures/gui/";
     
     // Item/Block sprite sheets
     public static final String ITEM_SPRITE_SHEET = "ee3_items.png";

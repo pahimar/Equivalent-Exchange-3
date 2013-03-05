@@ -132,9 +132,6 @@ public class ClientProxy extends CommonProxy {
         RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
-        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
-
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());

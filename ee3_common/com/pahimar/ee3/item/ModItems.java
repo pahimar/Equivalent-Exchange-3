@@ -30,19 +30,19 @@ public class ModItems {
     public static void init() {
 
         /* Initialize each mod item individually */
-        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
+        //miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
         inertStone = new ItemInertStone(ItemIds.INERT_STONE);
-        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
-        philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE);
-        alchemyDust = new ItemAlchemyDust(ItemIds.ALCHEMY_DUST);
-        alchemyBag = new ItemAlchemyBag(ItemIds.ALCHEMY_BAG);
+        //miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
+        //philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE);
+        //alchemyDust = new ItemAlchemyDust(ItemIds.ALCHEMY_DUST);
+        //alchemyBag = new ItemAlchemyBag(ItemIds.ALCHEMY_BAG);
 
-        miniumStone.setContainerItem(miniumStone);
-        philStone.setContainerItem(philStone);
+        //miniumStone.setContainerItem(miniumStone);
+        //philStone.setContainerItem(philStone);
 
-        GameRegistry.addRecipe(new ItemStack(inertStone), new Object[] { "sis", "igi", "sis", Character.valueOf('s'), Block.stone, Character.valueOf('i'), Item.ingotIron, Character.valueOf('g'), Item.ingotGold });
+        //GameRegistry.addRecipe(new ItemStack(inertStone), new Object[] { "sis", "igi", "sis", Character.valueOf('s'), Block.stone, Character.valueOf('i'), Item.ingotIron, Character.valueOf('g'), Item.ingotGold });
 
-        GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[] { "sss", "sis", "sss", Character.valueOf('s'), miniumShard, Character.valueOf('i'), inertStone });
+        //GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[] { "sss", "sis", "sss", Character.valueOf('s'), miniumShard, Character.valueOf('i'), inertStone });
 
     }
 }

@@ -144,7 +144,7 @@ public class EquivalentExchange3 {
         proxy.initRenderingAndTextures();
 
         // Load the Transmutation Stone recipes
-        RecipesTransmutationStone.init();
+        //RecipesTransmutationStone.init();
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());

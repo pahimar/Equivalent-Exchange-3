@@ -1,9 +1,12 @@
 package com.pahimar.ee3.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
 import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Sprites;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * ItemEE
@@ -20,8 +23,13 @@ public class ItemEE extends Item {
 
         super(id - Reference.SHIFTED_ID_RANGE_CORRECTION);
         maxStackSize = 1;
-        setTextureFile(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
         setNoRepair();
     }
-
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    // public void setIconIndex(IconRegister iconRegister)
+    public void func_94581_a(IconRegister iconRegister) {
+        this.iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":"+ this.getUnlocalizedName());
+    }
 }
