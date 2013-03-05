@@ -6,10 +6,10 @@
 	<entry key="key.release">Release</entry>
 	<entry key="key.toggle">Toggle</entry>
 	<entry key="key.charge">Charge</entry>
-	<entry key="item.miniumShard.name">Shard of Minium</entry>
-	<entry key="item.inertStone.name">Inert Stone</entry>
-	<entry key="item.miniumStone.name">Minium Stone</entry>
-	<entry key="item.philStone.name">Philosopher's Stone</entry>
+	<entry key="item.shardMinium.name">Shard of Minium</entry>
+	<entry key="item.stoneInert.name">Inert Stone</entry>
+	<entry key="item.stoneMinium.name">Minium Stone</entry>
+	<entry key="item.stonePhilosophers.name">Philosopher's Stone</entry>
 	<entry key="item.alchemyDust.ash.name">Ash</entry>
 	<entry key="item.alchemyDust.minium.name">Minium Dust</entry>
 	<entry key="item.alchemyDust.verdant.name">Verdant Dust</entry>
