@@ -49,8 +49,8 @@ public class GuiAlchemicalBag extends GuiContainer {
         if (this.mc.thePlayer != null) {
             for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }

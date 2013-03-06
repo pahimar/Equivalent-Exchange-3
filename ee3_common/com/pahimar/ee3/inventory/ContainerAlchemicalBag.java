@@ -41,8 +41,8 @@ public class ContainerAlchemicalBag extends Container {
             InventoryPlayer invPlayer = player.inventory;
             for (ItemStack itemStack : invPlayer.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }

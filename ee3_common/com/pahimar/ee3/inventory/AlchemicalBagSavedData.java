@@ -73,7 +73,7 @@ public class AlchemicalBagSavedData extends WorldSavedData implements IInventory
     @Override
     public String getInvName() {
 
-        return "worldsaveddata" + "." + Strings.ALCHEMY_BAG_NAME;
+        return "worldsaveddata" + "." + Strings.ALCHEMICAL_BAG_NAME;
     }
 
     @Override

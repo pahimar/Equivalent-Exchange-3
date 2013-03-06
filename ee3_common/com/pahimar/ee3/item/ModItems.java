@@ -24,8 +24,8 @@ public class ModItems {
     public static Item inertStone;
     public static Item miniumStone;
     public static Item philStone;
-    public static Item alchemyDust;
-    public static Item alchemyBag;
+    public static Item alchemicalDust;
+    public static Item alchemicalBag;
 
     public static void init() {
 
@@ -33,9 +33,9 @@ public class ModItems {
         miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
         inertStone = new ItemInertStone(ItemIds.INERT_STONE);
         miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
-        philStone = new ItemPhilosopherStone(ItemIds.PHILOSOPHER_STONE);
-        //alchemyDust = new ItemAlchemyDust(ItemIds.ALCHEMY_DUST);
-        //alchemyBag = new ItemAlchemyBag(ItemIds.ALCHEMY_BAG);
+        philStone = new ItemPhilosophersStone(ItemIds.PHILOSOPHERS_STONE);
+        alchemicalDust = new ItemAlchemicalDust(ItemIds.ALCHEMICAL_DUST);
+        alchemicalBag = new ItemAlchemicalBag(ItemIds.ALCHEMICAL_BAG);
 
         miniumStone.setContainerItem(miniumStone);
         philStone.setContainerItem(philStone);

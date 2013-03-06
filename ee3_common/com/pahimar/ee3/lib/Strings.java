@@ -26,7 +26,7 @@ public class Strings {
     public static final String NBT_ITEM_MODE_KEY = "itemMode";
     public static final String NBT_ITEM_CRAFTING_GUI_OPEN = "itemCraftingGuiOpen";
     public static final String NBT_ITEM_TRANSMUTATION_GUI_OPEN = "itemTransmutationGuiOpen";
-    public static final String NBT_ITEM_ALCHEMY_BAG_GUI_OPEN = "itemAlchemyBagGuiOpen";
+    public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
     public static final String NBT_TE_OWNER_KEY = "teOwner";
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
@@ -43,8 +43,8 @@ public class Strings {
     public static final String INERT_STONE_NAME = "stoneInert";
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
-    public static final String ALCHEMY_DUST_NAME = "dustAlchemy";
-    public static final String ALCHEMY_BAG_NAME = "alchemyBag";
+    public static final String ALCHEMICAL_DUST_NAME = "dustAlchemical";
+    public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";

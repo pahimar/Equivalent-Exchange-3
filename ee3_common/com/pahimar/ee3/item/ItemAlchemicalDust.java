@@ -2,13 +2,16 @@ package com.pahimar.ee3.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.CustomItemRarity;
+import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -23,24 +26,47 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemAlchemyDust extends ItemEE {
+public class ItemAlchemicalDust extends ItemEE {
 
-    public static final String[] alchemyDustNames = new String[] { "ash", "minium", "verdant", "azure", "amaranthine", "iridescent" };
+    private static final String[] ALCHEMICAL_DUST_NAMES = new String[] { "Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent" };
 
-    public ItemAlchemyDust(int id) {
+    @SideOnly(Side.CLIENT)
+    private Icon[] icons;
+
+    public ItemAlchemicalDust(int id) {
 
         super(id);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Strings.ALCHEMY_DUST_NAME);
+        this.setUnlocalizedName(Strings.ALCHEMICAL_DUST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }
 
-    @SideOnly(Side.CLIENT)
-    public String getItemNameIS(ItemStack stack) {
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
 
-        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
-        return super.getUnlocalizedName() + "." + alchemyDustNames[meta];
+        int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
+        return (super.getUnlocalizedName() + ALCHEMICAL_DUST_NAMES[meta]);
+    }
+
+    @SideOnly(Side.CLIENT)
+    /**
+     * Gets an icon index based on an item's damage value
+     */
+    public Icon getIconFromDamage(int meta) {
+
+        int j = MathHelper.clamp_int(meta, 0, 5);
+        return this.icons[j];
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void func_94581_a(IconRegister iconRegister) {
+
+        this.icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
+
+        for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i) {
+            this.icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -87,5 +113,4 @@ public class ItemAlchemyDust extends ItemEE {
             list.add(new ItemStack(id, 1, meta));
         }
     }
-
 }

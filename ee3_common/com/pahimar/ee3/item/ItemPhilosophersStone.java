@@ -29,12 +29,12 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemPhilosopherStone extends ItemEE
+public class ItemPhilosophersStone extends ItemEE
         implements ITransmutationStone, IChargeable, IKeyBound {
 
     private int maxChargeLevel;
 
-    public ItemPhilosopherStone(int id) {
+    public ItemPhilosophersStone(int id) {
 
         super(id);
         this.setUnlocalizedName(Strings.PHILOSOPHERS_STONE_NAME);
