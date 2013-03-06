@@ -126,9 +126,9 @@ public class ConfigurationHandler {
     public static void set(String categoryName, String propertyName, String newValue) {
         
         configuration.load();
-        if (configuration.categories.containsKey(categoryName)) {
-            if (configuration.categories.get(categoryName).containsKey(propertyName)) {
-                configuration.categories.get(categoryName).get(propertyName).value = newValue;
+        if (configuration.getCategoryNames().contains(categoryName)) {
+            if (configuration.getCategory(categoryName).containsKey(propertyName)) {
+                configuration.getCategory(categoryName).get(propertyName).set(newValue);
             }
         }
         configuration.save();
