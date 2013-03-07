@@ -34,6 +34,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     public TileAlchemicalChest() {
 
+    	super();
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 

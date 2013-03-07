@@ -85,6 +85,10 @@ public class CommonProxy implements IGuiHandler {
     public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
     }
+    
+    public void handleTileEntityPacket(int x, int y, int z, short state, String player, String customName) {
+    	
+    }
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {

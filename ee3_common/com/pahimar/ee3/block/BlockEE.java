@@ -63,5 +63,7 @@ public abstract class BlockEE extends BlockContainer {
         if (itemStack.hasDisplayName()) {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
+        
+        ((TileEE) world.getBlockTileEntity(x, y, z)).setOwner(entityLiving.getEntityName());
     }
 }

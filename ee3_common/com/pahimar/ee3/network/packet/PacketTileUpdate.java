@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;
@@ -24,12 +25,23 @@ public class PacketTileUpdate extends PacketEE {
 
     public int x, y, z;
     public short state;
-    public String player;
+    public String owner;
     public String customName;
 
     public PacketTileUpdate() {
 
         super(PacketTypeHandler.TILE, true);
+    }
+    
+    public PacketTileUpdate(int x, int y, int z, short state, String owner, String customName) {
+    	
+    	super(PacketTypeHandler.TILE, true);
+    	this.x = x;
+    	this.y = y;
+    	this.z = z;
+    	this.state = state;
+    	this.owner = owner;
+    	this.customName = customName;
     }
 
     public void writeData(DataOutputStream data) throws IOException {
@@ -38,7 +50,7 @@ public class PacketTileUpdate extends PacketEE {
         data.writeInt(y);
         data.writeInt(z);
         data.writeShort(state);
-        data.writeUTF(player);
+        data.writeUTF(owner);
         data.writeUTF(customName);
     }
 
@@ -48,13 +60,13 @@ public class PacketTileUpdate extends PacketEE {
         this.y = data.readInt();
         this.z = data.readInt();
         this.state = data.readShort();
-        this.player = data.readUTF();
+        this.owner = data.readUTF();
         this.customName = data.readUTF();
     }
 
     public void execute(INetworkManager manager, Player player) {
 
-        // TODO: Stuff here
+        EquivalentExchange3.proxy.handleTileEntityPacket(this.x, this.y, this.z, this.state, this.owner, this.customName);
     }
 
 }

@@ -2,9 +2,12 @@ package com.pahimar.ee3.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileUpdate;
 
 /**
  * TileEE
@@ -20,6 +23,13 @@ public class TileEE extends TileEntity {
     private short state;
     private String owner;
     private String customName;
+    
+    public TileEE() {
+    	
+    	this.state = 0;
+    	this.owner = "";
+    	this.customName = "";
+    }
 
     public short getState() {
 
@@ -96,6 +106,12 @@ public class TileEE extends TileEntity {
         if (this.hasCustomName()) {
             nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, this.customName);
         }
+    }
+    
+    @Override
+    public Packet getDescriptionPacket() {
+
+    	return PacketTypeHandler.populatePacket(new PacketTileUpdate(this.xCoord, this.yCoord, this.zCoord, this.state, this.owner, this.customName));
     }
 
 }

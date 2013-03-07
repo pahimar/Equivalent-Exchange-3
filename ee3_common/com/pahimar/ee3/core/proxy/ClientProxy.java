@@ -24,6 +24,7 @@ import static com.pahimar.ee3.lib.CustomItemRarity.UNCOMMON;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -52,7 +53,9 @@ import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileEE;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -150,6 +153,20 @@ public class ClientProxy extends CommonProxy {
     public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
+    }
+    
+    @Override
+    public void handleTileEntityPacket(int x, int y, int z, short state, String owner, String customName) {
+    	
+    	TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
+    	
+    	if (tileEntity != null) {
+    		if (tileEntity instanceof TileEE) {
+    			((TileEE) tileEntity).setState(state);
+    			((TileEE) tileEntity).setOwner(owner);
+    			((TileEE) tileEntity).setCustomName(customName);
+    		}
+    	}
     }
 
     @Override
