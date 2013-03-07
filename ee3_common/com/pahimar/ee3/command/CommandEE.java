@@ -20,6 +20,7 @@ public class CommandEE extends CommandBase {
         return true;
     }
 
+    @SuppressWarnings("rawtypes")
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 
         switch (args.length) {

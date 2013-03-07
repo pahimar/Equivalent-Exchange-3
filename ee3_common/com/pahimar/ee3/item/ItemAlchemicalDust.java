@@ -106,6 +106,7 @@ public class ItemAlchemicalDust extends ItemEE {
 
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs creativeTab, List list) {
 
