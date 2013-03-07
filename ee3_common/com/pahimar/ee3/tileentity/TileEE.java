@@ -17,19 +17,9 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class TileEE extends TileEntity {
 
-    private byte direction;
     private short state;
     private String owner;
-
-    public byte getDirection() {
-
-        return direction;
-    }
-
-    public void setDirection(byte direction) {
-
-        this.direction = direction;
-    }
+    private String customName;
 
     public short getState() {
 
@@ -45,10 +35,30 @@ public class TileEE extends TileEntity {
 
         return owner;
     }
+    
+    public boolean hasOwner() {
+        
+        return ((owner != null) && (owner.length() > 0));
+    }
 
     public void setOwner(String owner) {
 
         this.owner = owner;
+    }
+    
+    public boolean hasCustomName() {
+        
+        return ((this.customName != null) && (this.customName.length() > 0));
+    }
+    
+    public String getCustomName() {
+        
+        return customName;
+    }
+    
+    public void setCustomName(String customName) {
+        
+        this.customName = customName;
     }
 
     public boolean isUseableByPlayer(EntityPlayer player) {
@@ -59,20 +69,32 @@ public class TileEE extends TileEntity {
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);
-
-        direction = nbtTagCompound.getByte(Strings.NBT_TE_DIRECTION_KEY);
-        state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
-        owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
+        
+        if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE_KEY)) {
+            this.state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
+        }
+        
+        if (nbtTagCompound.hasKey(Strings.NBT_TE_OWNER_KEY)) {
+            this.owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
+        }
+        
+        if (nbtTagCompound.hasKey(Strings.NBT_TE_CUSTOM_NAME)) {
+            this.customName = nbtTagCompound.getString(Strings.NBT_TE_CUSTOM_NAME);
+        }
     }
 
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
         super.writeToNBT(nbtTagCompound);
 
-        nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, direction);
-        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
-        if (owner != null && owner != "") {
-            nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, owner);
+        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, this.state);
+        
+        if (hasOwner()) {
+            nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, this.owner);
+        }
+        
+        if (this.hasCustomName()) {
+            nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, this.customName);
         }
     }
 

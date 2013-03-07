@@ -23,20 +23,13 @@ import cpw.mods.fml.common.network.Player;
 public class PacketTileUpdate extends PacketEE {
 
     public int x, y, z;
-    public byte direction;
     public short state;
     public String player;
+    public String customName;
 
     public PacketTileUpdate() {
 
         super(PacketTypeHandler.TILE, true);
-    }
-
-    public void setCoords(int x, int y, int z) {
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
     }
 
     public void writeData(DataOutputStream data) throws IOException {
@@ -44,9 +37,9 @@ public class PacketTileUpdate extends PacketEE {
         data.writeInt(x);
         data.writeInt(y);
         data.writeInt(z);
-        data.writeByte(direction);
         data.writeShort(state);
         data.writeUTF(player);
+        data.writeUTF(customName);
     }
 
     public void readData(DataInputStream data) throws IOException {
@@ -54,9 +47,9 @@ public class PacketTileUpdate extends PacketEE {
         this.x = data.readInt();
         this.y = data.readInt();
         this.z = data.readInt();
-        this.direction = data.readByte();
         this.state = data.readShort();
         this.player = data.readUTF();
+        this.customName = data.readUTF();
     }
 
     public void execute(INetworkManager manager, Player player) {

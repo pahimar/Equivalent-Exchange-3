@@ -1,9 +1,5 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.lib.Reference;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,6 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+
+import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.tileentity.TileEE;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * BlockEE
@@ -57,5 +59,9 @@ public abstract class BlockEE extends BlockContainer {
         }
 
         world.setBlockMetadataWithNotify(x, y, z, direction, 3);
+        
+        if (itemStack.hasDisplayName()) {
+            ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+        }
     }
 }

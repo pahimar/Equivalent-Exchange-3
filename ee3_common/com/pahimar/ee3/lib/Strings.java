@@ -15,12 +15,6 @@ public class Strings {
     public static final String FINAL_ERROR_MESSAGE = "version.final_error";
     public static final String MC_VERSION_NOT_FOUND = "version.mc_version_not_found";
 
-    /* Gui related constants */
-    public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
-    public static final String GUI_ALUDEL_NAME = "gui.aludel.name";
-    public static final String GUI_ALCHEMICAL_CHEST_NAME = "gui.alchemicalChest.name";
-    public static final String GUI_ALCHEMICAL_BAG_NAME = "gui.alchemicalBag.name";
-
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
     public static final String NBT_ITEM_MODE_KEY = "itemMode";
@@ -29,6 +23,7 @@ public class Strings {
     public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
     public static final String NBT_TE_OWNER_KEY = "teOwner";
     public static final String NBT_TE_STATE_KEY = "teState";
+    public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
     
     /* Block name constants */
@@ -56,5 +51,12 @@ public class Strings {
     public static final String TRANSMUTATION_COST_ITEM = "item" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_BLOCK = "block" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_MOB = "mob" + TRANSMUTATION_COST;
+    
+    /* Container related constants */
+    public static final String CONTAINER_CALCINATOR_NAME = "container." + CALCINATOR_NAME;
+    public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;
+    public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container." + ALCHEMICAL_CHEST_NAME;
+    public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
+    public static final String CONTAINER_INVENTORY = "container.inventory";
 
 }

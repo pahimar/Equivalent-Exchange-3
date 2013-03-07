@@ -39,7 +39,6 @@ public class WorldTransmutationHandler {
         int upperBoundY = -1 * lowerBoundY;
         int lowerBoundZ = -1 * rangeZ / 2;
         int upperBoundZ = -1 * lowerBoundZ;
-        boolean hasSoundPlayed = false;
         boolean anySuccess = false;
 
         double xShift = 0;

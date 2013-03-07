@@ -3,14 +3,13 @@ package com.pahimar.ee3.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
-
 public class ContainerAlchemicalChest extends Container {
 
-    private TileAlchemicalChest tileAlchemicalChest;
+    private IInventory tileAlchemicalChest;
 
     private final int CHEST_INVENTORY_ROWS = 4;
     private final int CHEST_INVENTORY_COLUMNS = 13;
@@ -18,7 +17,7 @@ public class ContainerAlchemicalChest extends Container {
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
 
-    public ContainerAlchemicalChest(InventoryPlayer inventoryPlayer, TileAlchemicalChest tileAlchemicalChest) {
+    public ContainerAlchemicalChest(InventoryPlayer inventoryPlayer, IInventory tileAlchemicalChest) {
 
         this.tileAlchemicalChest = tileAlchemicalChest;
 

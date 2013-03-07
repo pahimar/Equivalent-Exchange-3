@@ -96,7 +96,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return "container." + Strings.ALCHEMICAL_CHEST_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_CHEST_NAME;
     }
 
     @Override
@@ -216,13 +216,14 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
             }
         }
         nbtTagCompound.setTag("Items", tagList);
+        
     }
 
     @Override
     // public boolean hasCustomName()
     public boolean func_94042_c() {
 
-        return false;
+        return this.hasCustomName();
     }
 
     @Override

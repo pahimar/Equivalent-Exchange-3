@@ -10,14 +10,14 @@ import net.minecraft.world.WorldSavedData;
 
 import com.pahimar.ee3.lib.Strings;
 
-public class AlchemicalBagSavedData extends WorldSavedData implements IInventory {
+public class WorldSavedDataEE extends WorldSavedData implements IInventory {
 
     public UUID uuid;
     public ItemStack[] inventory;
     
     private final int INVENTORY_SIZE = 13 * 4;
     
-    public AlchemicalBagSavedData(String filePath) {
+    public WorldSavedDataEE(String filePath) {
 
         super(filePath);
         inventory = new ItemStack[INVENTORY_SIZE];

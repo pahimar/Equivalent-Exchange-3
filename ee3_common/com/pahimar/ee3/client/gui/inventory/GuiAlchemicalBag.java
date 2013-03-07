@@ -12,7 +12,6 @@ import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,8 +27,8 @@ public class GuiAlchemicalBag extends GuiContainer {
 
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         
-        this.fontRenderer.drawString(LanguageRegistry.instance().getStringLocalization(Strings.GUI_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 44, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, this.ySize - 96 + 2, 4210752);
     }
     
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
