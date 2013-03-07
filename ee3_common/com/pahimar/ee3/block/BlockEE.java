@@ -1,8 +1,14 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.lib.Reference;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -23,14 +29,20 @@ public abstract class BlockEE extends BlockContainer {
         super(id, material);
     }
     
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister iconRegister) {
+        
+        this.field_94336_cN = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":"+ this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+    }
+    
     /**
      * Sets the direction of the block when placed
      */
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
         
         int direction = 0;
         int facing = MathHelper.floor_double((double)(entityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
+        
         if (facing == 0) {
             direction = ForgeDirection.NORTH.ordinal();
         }
