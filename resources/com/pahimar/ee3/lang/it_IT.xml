@@ -35,10 +35,10 @@
 	<entry key="version.final_error">Controllo della versione dopo 3 tentativi non riusciti</entry>
 	<entry key="command.ee3.overlay.turned_on">Attivato Overlay di trasmutazione</entry>
 	<entry key="command.ee3.overlay.turned_off">Disattivato Overlay di trasmutazione</entry>
-	<entry key="command.ee3.overlay.position.top_left">Settata la posizione in alto a sinistra per il Overlay di trasmutazione</entry>
-	<entry key="command.ee3.overlay.position.top_right">Settata la posizione in alto a destra per il  Overlay di trasmutazione</entry>
-	<entry key="command.ee3.overlay.position.bottom_left">Settata la posizione in basso a sinistra per il  Overlay di trasmutazione</entry>
-	<entry key="command.ee3.overlay.position.bottom_right">Settata la posizione in basso a destra per il Overlay di trasmutazione</entry>
+	<entry key="command.ee3.overlay.position.top_left">Settata la posizione in alto a sinistra per  l'Overlay di trasmutazione</entry>
+	<entry key="command.ee3.overlay.position.top_right">Settata la posizione in alto a destra per  l'Overlay di trasmutazione</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Settata la posizione in basso a sinistra per l' Overlay di trasmutazione</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Settata la posizione in basso a destra per l'Overlay di trasmutazione</entry>
 	<entry key="command.ee3.overlay.opacity.usage.additional_text">(dove ### è un valore decimale tra 0.0 e 1.0) </entry>
 	<entry key="command.ee3.overlay.opacity.updated">Opacità Overlay di trasmutazione aggiornata correttamente</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(dove ### è un valore decimale maggiore di 0.0) </entry>
