@@ -30,7 +30,8 @@ public class GuiAludel extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         
-        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALUDEL_NAME), 73, 6, 4210752);
+        String containerName = this.tileAludel.func_94042_c() ? this.tileAludel.getInvName() : StatCollector.translateToLocal(this.tileAludel.getInvName());
+        this.fontRenderer.drawString(containerName, this.xSize / 2 - this.fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, this.ySize - 93, 4210752);
     }
 

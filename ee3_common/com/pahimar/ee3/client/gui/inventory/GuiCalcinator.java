@@ -26,18 +26,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiCalcinator extends GuiContainer {
 
-    private TileCalcinator calcinator;
+    private TileCalcinator tileCalcinator;
 
-    public GuiCalcinator(InventoryPlayer player, TileCalcinator calcinator) {
+    public GuiCalcinator(InventoryPlayer player, TileCalcinator tileCalcinator) {
 
-        super(new ContainerCalcinator(player, calcinator));
+        super(new ContainerCalcinator(player, tileCalcinator));
         this.ySize = 176;
-        this.calcinator = calcinator;
+        this.tileCalcinator = tileCalcinator;
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_CALCINATOR_NAME), 60, 6, 4210752);
+        String containerName = this.tileCalcinator.func_94042_c() ? this.tileCalcinator.getInvName() : StatCollector.translateToLocal(this.tileCalcinator.getInvName());
+        this.fontRenderer.drawString(containerName, this.xSize / 2 - this.fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, this.ySize - 96 + 2, 4210752);
     }
 

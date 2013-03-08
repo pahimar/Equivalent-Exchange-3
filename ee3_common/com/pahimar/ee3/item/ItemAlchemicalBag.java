@@ -3,6 +3,7 @@ package com.pahimar.ee3.item;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
@@ -83,5 +84,39 @@ public class ItemAlchemicalBag extends ItemEE {
                 return icons[3];
             }
         }
+    }
+    
+    public void setColor(ItemStack itemStack, int color) {
+        
+        if (itemStack != null) {
+            if (!(itemStack.getItem() instanceof ItemAlchemicalBag)) {
+                
+                // TODO Localize
+                throw new UnsupportedOperationException("Can\'t dye non-bags!");
+            }
+            else {
+                
+                NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
+    
+                if (nbtTagCompound == null) {
+                    
+                    nbtTagCompound = new NBTTagCompound();
+                    itemStack.setTagCompound(nbtTagCompound);
+                }
+    
+                NBTTagCompound colourTagCompound = nbtTagCompound.getCompoundTag(Strings.NBT_ITEM_DISPLAY);
+    
+                if (!nbtTagCompound.hasKey(Strings.NBT_ITEM_DISPLAY)) {
+                    nbtTagCompound.setCompoundTag(Strings.NBT_ITEM_DISPLAY, colourTagCompound);
+                }
+    
+                colourTagCompound.setInteger(Strings.NBT_ITEM_COLOR, color);
+            }
+        }
+    }
+    
+    public boolean hasColor(ItemStack par1ItemStack) {
+        
+        return (!par1ItemStack.hasTagCompound() ? false : (!par1ItemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) ? false : par1ItemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR)));
     }
 }

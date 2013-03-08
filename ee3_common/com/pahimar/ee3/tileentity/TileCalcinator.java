@@ -82,7 +82,7 @@ public class TileCalcinator extends TileEE implements IInventory {
 
     public String getInvName() {
 
-        return "container." + Strings.CALCINATOR_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_CALCINATOR_NAME;
     }
 
     public int getInventoryStackLimit() {
@@ -135,7 +135,7 @@ public class TileCalcinator extends TileEE implements IInventory {
 	// public boolean hasCustomName()
 	public boolean func_94042_c() {
 
-		return false;
+		return this.hasCustomName();
 	}
 
 	@Override

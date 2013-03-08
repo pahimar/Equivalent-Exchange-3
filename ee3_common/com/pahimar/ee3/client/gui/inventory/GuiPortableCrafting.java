@@ -39,8 +39,8 @@ public class GuiPortableCrafting extends GuiContainer {
      */
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.crafting"), 28, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_PORTABLE_CRAFTING), 28, 6, 4210752);
+        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**

@@ -2,7 +2,6 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
@@ -10,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,12 +17,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalChest extends GuiContainer {
 
-    private IInventory tileAlchemicalChest;
+    private TileAlchemicalChest tileAlchemicalChest;
     
-    public GuiAlchemicalChest(InventoryPlayer inventoryPlayer, IInventory tileAlchemicalChest) {
+    public GuiAlchemicalChest(InventoryPlayer inventoryPlayer, TileAlchemicalChest alchemicalChest) {
 
-        super(new ContainerAlchemicalChest(inventoryPlayer, tileAlchemicalChest));
-        this.tileAlchemicalChest = tileAlchemicalChest;
+        super(new ContainerAlchemicalChest(inventoryPlayer, alchemicalChest));
+        this.tileAlchemicalChest = alchemicalChest;
         this.xSize = 248;
         this.ySize = 186;
     }

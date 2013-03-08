@@ -79,7 +79,7 @@ public class TileAludel extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return "container." + Strings.ALUDEL_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALUDEL_NAME;
     }
 
     @Override
@@ -135,7 +135,7 @@ public class TileAludel extends TileEE implements IInventory {
 	// public boolean hasCustomName()
 	public boolean func_94042_c() {
 
-		return false;
+	    return this.hasCustomName();
 	}
 
 	@Override
