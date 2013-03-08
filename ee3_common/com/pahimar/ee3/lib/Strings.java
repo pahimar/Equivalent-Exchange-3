@@ -1,5 +1,14 @@
 package com.pahimar.ee3.lib;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * Strings
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class Strings {
 
     /* General keys */
@@ -27,7 +36,7 @@ public class Strings {
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
-    
+
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String ALUDEL_NAME = "aludel";
@@ -53,7 +62,7 @@ public class Strings {
     public static final String TRANSMUTATION_COST_ITEM = "item" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_BLOCK = "block" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_MOB = "mob" + TRANSMUTATION_COST;
-    
+
     /* Container related constants */
     public static final String CONTAINER_CALCINATOR_NAME = "container." + CALCINATOR_NAME;
     public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;

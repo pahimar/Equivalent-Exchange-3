@@ -9,9 +9,9 @@ import com.pahimar.ee3.lib.ItemIds;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
- * ModItems
+ * Equivalent-Exchange-3
  * 
- * Contains all relevant mod item instances
+ * ModItems
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * RenderIds
+ * Equivalent-Exchange-3
  * 
- * Library containing the various ids for different renders in the mod
+ * RenderIds
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

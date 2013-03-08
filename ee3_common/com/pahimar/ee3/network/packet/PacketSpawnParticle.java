@@ -12,6 +12,15 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * PacketSpawnParticle
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketSpawnParticle extends PacketEE {
 
     public String particleName;
@@ -35,6 +44,7 @@ public class PacketSpawnParticle extends PacketEE {
         this.velocityZ = velocityZ;
     }
 
+    @Override
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeUTF(particleName);
@@ -47,18 +57,20 @@ public class PacketSpawnParticle extends PacketEE {
 
     }
 
+    @Override
     public void readData(DataInputStream data) throws IOException {
 
-        this.particleName = data.readUTF();
-        this.x = data.readDouble();
-        this.y = data.readDouble();
-        this.z = data.readDouble();
-        this.velocityX = data.readDouble();
-        this.velocityY = data.readDouble();
-        this.velocityZ = data.readDouble();
+        particleName = data.readUTF();
+        x = data.readDouble();
+        y = data.readDouble();
+        z = data.readDouble();
+        velocityX = data.readDouble();
+        velocityY = data.readDouble();
+        velocityZ = data.readDouble();
 
     }
 
+    @Override
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;

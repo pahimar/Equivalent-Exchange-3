@@ -18,9 +18,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * ItemAlchemyDust
+ * Equivalent-Exchange-3
  * 
- * General class for Alchemy related dusts
+ * ItemAlchemicalDust
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -46,9 +46,10 @@ public class ItemAlchemicalDust extends ItemEE {
     public String getUnlocalizedName(ItemStack itemStack) {
 
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-        return (super.getUnlocalizedName() + ALCHEMICAL_DUST_NAMES[meta]);
+        return super.getUnlocalizedName() + ALCHEMICAL_DUST_NAMES[meta];
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * Gets an icon index based on an item's damage value
@@ -56,32 +57,33 @@ public class ItemAlchemicalDust extends ItemEE {
     public Icon getIconFromDamage(int meta) {
 
         int j = MathHelper.clamp_int(meta, 0, 5);
-        return this.icons[j];
+        return icons[j];
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void func_94581_a(IconRegister iconRegister) {
 
-        this.icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
+        icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
         for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i) {
-            this.icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
+            icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
 
         int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
 
-        if (meta == 5) {
+        if (meta == 5)
             return true;
-        }
-        else {
+        else
             return false;
-        }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
 
@@ -106,6 +108,7 @@ public class ItemAlchemicalDust extends ItemEE {
 
     }
 
+    @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs creativeTab, List list) {

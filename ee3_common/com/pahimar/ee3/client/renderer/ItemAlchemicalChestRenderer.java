@@ -12,13 +12,22 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ItemAlchemicalChestRenderer
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class ItemAlchemicalChestRenderer implements IItemRenderer {
-    
+
     private ModelChest modelChest;
-    
+
     public ItemAlchemicalChestRenderer() {
-        
+
         modelChest = new ModelChest();
     }
 

@@ -13,10 +13,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * RenderItemCalcinator
+ * Equivalent-Exchange-3
  * 
- * Renders the Calcinator in game as an item (in hand, on the ground, and in
- * inventory)
+ * ItemCalcinatorRenderer
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -74,5 +73,4 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
         calcinatorModel.render(0.0625F);
         GL11.glPopMatrix(); //end
     }
-
 }

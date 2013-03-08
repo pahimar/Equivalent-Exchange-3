@@ -1,5 +1,14 @@
 package com.pahimar.ee3.lib;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * Particles
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class Particles {
 
     /* Vanilla particle names (not necessarily all of them) */

@@ -16,9 +16,9 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.FMLLog;
 
 /**
- * ConfigurationManager
+ * Equivalent-Exchange-3
  * 
- * Loads in configuration data from disk
+ * ConfigurationHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -27,7 +27,7 @@ import cpw.mods.fml.common.FMLLog;
 public class ConfigurationHandler {
 
     public static Configuration configuration;
-    
+
     public static final String CATEGORY_KEYBIND = "keybindings";
     public static final String CATEGORY_GRAPHICS = "graphics";
     public static final String CATEGORY_AUDIO = "audio";
@@ -53,7 +53,7 @@ public class ConfigurationHandler {
             ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT).getInt(ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT);
             try {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT).getString());
-                
+
                 if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE <= 0F) {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT;
                 }
@@ -63,15 +63,15 @@ public class ConfigurationHandler {
             }
             try {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT).getString());
-                
-                if ((ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F) || (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F)) {
+
+                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F || ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F) {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
                 }
             }
             catch (Exception e) {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
             }
-            
+
             /* Audio configs */
             ConfigurationSettings.ENABLE_SOUNDS = configuration.get(CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getString();
 
@@ -122,9 +122,9 @@ public class ConfigurationHandler {
             configuration.save();
         }
     }
-    
+
     public static void set(String categoryName, String propertyName, String newValue) {
-        
+
         configuration.load();
         if (configuration.getCategoryNames().contains(categoryName)) {
             if (configuration.getCategory(categoryName).containsKey(propertyName)) {

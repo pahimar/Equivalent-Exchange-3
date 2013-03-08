@@ -26,6 +26,15 @@ import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * WorldTransmutationHandler
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class WorldTransmutationHandler {
 
     public static void handleWorldTransmutation(EntityPlayer thePlayer, int originX, int originY, int originZ, byte rangeX, byte rangeY, byte rangeZ, byte sideHit, String data) {
@@ -91,7 +100,7 @@ public class WorldTransmutationHandler {
                     actionEvent = new WorldTransmutationEvent(ActionTypes.TRANSMUTATION, thePlayer.getCurrentEquippedItem(), thePlayer, thePlayer.worldObj, originX + x, originY + y, originZ + z, false, data);
 
                     if (actionEvent != null) {
-                        actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX + x, originY + y, originZ + z, (int) sideHit);
+                        actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX + x, originY + y, originZ + z, sideHit);
                         MinecraftForge.EVENT_BUS.post(actionRequestEvent);
 
                         if (actionRequestEvent.allowEvent != Result.DENY) {
@@ -103,14 +112,14 @@ public class WorldTransmutationHandler {
                                 anySuccess = true;
                             }
 
-                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
-                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.15D * ySign, 0D * zSign)));
+                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.15D * ySign, 0D * zSign)));
                         }
                         else if (actionEvent.actionResult == ActionResult.FAILURE) {
                             if (!(actionEvent.world.getBlockId(originX + x, originY + y, originZ + z) == 0)) {
                                 // TODO Fancy particle motion
-                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.RED_DUST, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
-                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.WITCH_MAGIC, originX + x + (xShift * xSign), originY + y + (yShift * ySign), originZ + z + (zShift * zSign), 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.RED_DUST, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.WITCH_MAGIC, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
                             }
                         }
                     }
@@ -154,7 +163,7 @@ public class WorldTransmutationHandler {
 
         if (result) {
             event.actionResult = ActionResult.SUCCESS;
-            
+
             int currentSlot = event.player.inventory.currentItem;
             event.itemStack.damageItem(ConfigurationSettings.TRANSMUTE_COST_BLOCK, event.player);
 

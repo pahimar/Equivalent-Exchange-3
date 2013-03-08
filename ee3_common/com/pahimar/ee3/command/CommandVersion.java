@@ -6,11 +6,19 @@ import net.minecraft.command.WrongUsageException;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.lib.Commands;
 
-
+/**
+ * Equivalent-Exchange-3
+ * 
+ * CommandVersion
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class CommandVersion {
-    
+
     public static void processCommand(ICommandSender commandSender, String[] args) {
-        
+
         String subCommand;
 
         if (args.length > 0) {
@@ -22,23 +30,20 @@ public class CommandVersion {
             else if (subCommand.toLowerCase().equals(Commands.COMMAND_CHANGELOG)) {
                 processChangelogCommand(commandSender);
             }
-            else {
+            else
                 throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE, new Object[0]);
-            }
         }
-        else {
+        else
             throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE, new Object[0]);
-        }
     }
-    
+
     private static void processVersionCommand(ICommandSender commandSender) {
 
         commandSender.sendChatToPlayer(VersionHelper.getResultMessageForClient());
     }
-    
+
     private static void processChangelogCommand(ICommandSender commandSender) {
-        
-        
+
     }
 
 }

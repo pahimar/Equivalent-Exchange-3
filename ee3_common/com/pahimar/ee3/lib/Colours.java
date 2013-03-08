@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * Colours
+ * Equivalent-Exchange-3
  * 
- * Library containing the default colour values used in the mod
+ * Colours
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

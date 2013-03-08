@@ -10,9 +10,9 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
 
 /**
- * TileEE
+ * Equivalent-Exchange-3
  * 
- * General tile entity for EE3 related tile entities
+ * TileEE
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -23,12 +23,12 @@ public class TileEE extends TileEntity {
     private short state;
     private String owner;
     private String customName;
-    
+
     public TileEE() {
-    	
-    	this.state = 0;
-    	this.owner = "";
-    	this.customName = "";
+
+        state = 0;
+        owner = "";
+        customName = "";
     }
 
     public short getState() {
@@ -45,29 +45,29 @@ public class TileEE extends TileEntity {
 
         return owner;
     }
-    
+
     public boolean hasOwner() {
-        
-        return ((owner != null) && (owner.length() > 0));
+
+        return owner != null && owner.length() > 0;
     }
 
     public void setOwner(String owner) {
 
         this.owner = owner;
     }
-    
+
     public boolean hasCustomName() {
-        
-        return ((this.customName != null) && (this.customName.length() > 0));
+
+        return customName != null && customName.length() > 0;
     }
-    
+
     public String getCustomName() {
-        
+
         return customName;
     }
-    
+
     public void setCustomName(String customName) {
-        
+
         this.customName = customName;
     }
 
@@ -76,42 +76,44 @@ public class TileEE extends TileEntity {
         return owner.equals(player.username);
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);
-        
+
         if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE_KEY)) {
-            this.state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
+            state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
         }
-        
+
         if (nbtTagCompound.hasKey(Strings.NBT_TE_OWNER_KEY)) {
-            this.owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
+            owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
         }
-        
+
         if (nbtTagCompound.hasKey(Strings.NBT_TE_CUSTOM_NAME)) {
-            this.customName = nbtTagCompound.getString(Strings.NBT_TE_CUSTOM_NAME);
+            customName = nbtTagCompound.getString(Strings.NBT_TE_CUSTOM_NAME);
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
         super.writeToNBT(nbtTagCompound);
 
-        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, this.state);
-        
+        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
+
         if (hasOwner()) {
-            nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, this.owner);
+            nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, owner);
         }
-        
+
         if (this.hasCustomName()) {
-            nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, this.customName);
+            nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, customName);
         }
     }
-    
+
     @Override
     public Packet getDescriptionPacket() {
 
-    	return PacketTypeHandler.populatePacket(new PacketTileUpdate(this.xCoord, this.yCoord, this.zCoord, this.state, this.owner, this.customName));
+        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, state, owner, customName));
     }
 
 }

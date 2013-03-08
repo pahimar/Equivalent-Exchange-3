@@ -47,9 +47,9 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * EquivalentExchange3
+ * Equivalent-Exchange-3
  * 
- * Main mod class for the Minecraft mod Equivalent Exchange 3
+ * EquivalentExchange3
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -100,7 +100,7 @@ public class EquivalentExchange3 {
 
         // Register the Sound Handler (Client only)
         proxy.registerSoundHandler();
-        
+
         // Initialize mod blocks
         ModBlocks.init();
 
@@ -144,7 +144,7 @@ public class EquivalentExchange3 {
 
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
-        
+
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 

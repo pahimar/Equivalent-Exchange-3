@@ -10,9 +10,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * RenderCalcinator
+ * Equivalent-Exchange-3
  * 
- * Renders the Calcinator in game as a TESR (Tile Entity Special Render)
+ * TileEntityCalcinatorRenderer
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

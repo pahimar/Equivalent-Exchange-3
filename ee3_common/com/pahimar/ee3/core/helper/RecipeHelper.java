@@ -9,9 +9,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
- * RecipeHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for adding recipes
+ * RecipeHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -76,12 +76,14 @@ public class RecipeHelper {
         int i = 0;
         while (i < n) {
             for (int j : excludedMeta) {
-                if (i == j)
+                if (i == j) {
                     ++i;
+                }
             }
 
-            if (!(i < n))
+            if (!(i < n)) {
                 break;
+            }
 
             stack = GeneralHelper.convertObjectToItemStack(input);
             stack.setItemDamage(i);
@@ -105,14 +107,17 @@ public class RecipeHelper {
          * with a PStone
          */
         for (int i = 0; i < n; i++) {
-            outputI = (i == n - 1 ? 0 : i + 1);
+            outputI = i == n - 1 ? 0 : i + 1;
 
-            if (input instanceof Block)
+            if (input instanceof Block) {
                 GameRegistry.addShapelessRecipe(new ItemStack((Block) input, 1, outputI), stone, new ItemStack((Block) input, 1, i));
-            else if (input instanceof Item)
+            }
+            else if (input instanceof Item) {
                 GameRegistry.addShapelessRecipe(new ItemStack((Item) input, 1, outputI), stone, new ItemStack((Item) input, 1, i));
-            else if (input instanceof ItemStack)
+            }
+            else if (input instanceof ItemStack) {
                 GameRegistry.addShapelessRecipe(new ItemStack(((ItemStack) input).itemID, 1, outputI), stone, new ItemStack(((ItemStack) input).itemID, 1, i));
+            }
         }
     }
 
@@ -121,19 +126,23 @@ public class RecipeHelper {
         int i = 0;
         int outputI = 1;
         while (i < n && outputI != 0) {
-            outputI = (i == n - 1 ? 0 : i + 1);
+            outputI = i == n - 1 ? 0 : i + 1;
 
             for (int j : excludedMeta) {
-                if (outputI == j)
+                if (outputI == j) {
                     outputI = (outputI + 1) % 16;
+                }
             }
 
-            if (input instanceof Block)
+            if (input instanceof Block) {
                 GameRegistry.addShapelessRecipe(new ItemStack((Block) input, 1, outputI), stone, new ItemStack((Block) input, 1, i));
-            else if (input instanceof Item)
+            }
+            else if (input instanceof Item) {
                 GameRegistry.addShapelessRecipe(new ItemStack((Item) input, 1, outputI), stone, new ItemStack((Item) input, 1, i));
-            else if (input instanceof ItemStack)
+            }
+            else if (input instanceof ItemStack) {
                 GameRegistry.addShapelessRecipe(new ItemStack(((ItemStack) input).itemID, 1, outputI), stone, new ItemStack(((ItemStack) input).itemID, 1, i));
+            }
 
             i = outputI;
         }
@@ -143,7 +152,7 @@ public class RecipeHelper {
 
         ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(input);
 
-        if ((input == null) || (input.getItem() == null) || (result == null))
+        if (input == null || input.getItem() == null || result == null)
             return;
 
         Object[] list = new Object[9];
@@ -155,7 +164,7 @@ public class RecipeHelper {
         }
 
         if (result.stackSize * 7 <= result.getItem().getItemStackLimit()) {
-            GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), (result.stackSize * 7), result.getItemDamage()), list);
+            GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), result.stackSize * 7, result.getItemDamage()), list);
         }
         else {
             GameRegistry.addShapelessRecipe(new ItemStack(result.getItem(), result.getItem().getItemStackLimit(), result.getItemDamage()), list);

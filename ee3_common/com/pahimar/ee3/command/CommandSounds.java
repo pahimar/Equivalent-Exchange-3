@@ -9,6 +9,15 @@ import com.pahimar.ee3.core.helper.LocalizationHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Commands;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * CommandSounds
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class CommandSounds {
 
     public static void processCommand(ICommandSender commandSender, String[] args) {
@@ -27,13 +36,11 @@ public class CommandSounds {
             else if (subCommand.toLowerCase().equals(Commands.COMMAND_OFF)) {
                 processOffCommand(commandSender);
             }
-            else {
+            else
                 throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE, new Object[0]);
-            }
         }
-        else {
+        else
             throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE, new Object[0]);
-        }
     }
 
     private static void processAllCommand(ICommandSender commandSender) {

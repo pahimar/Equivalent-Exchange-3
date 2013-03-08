@@ -10,6 +10,15 @@ import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.lib.Strings;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * CommandParticles
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class CommandParticles {
 
     public static void processCommand(ICommandSender commandSender, String[] args) {
@@ -25,13 +34,11 @@ public class CommandParticles {
             else if (subCommand.toLowerCase().equals(Commands.COMMAND_OFF)) {
                 processOffCommand(commandSender);
             }
-            else {
+            else
                 throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE, new Object[0]);
-            }
         }
-        else {
+        else
             throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE, new Object[0]);
-        }
     }
 
     private static void processOnCommand(ICommandSender commandSender) {

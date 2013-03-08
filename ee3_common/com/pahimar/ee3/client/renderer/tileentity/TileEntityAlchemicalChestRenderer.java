@@ -15,6 +15,15 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TileEntityAlchemicalChestRenderer
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer {
 
@@ -22,10 +31,9 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 
     public void renderAlchemicalChest(TileAlchemicalChest tileAlchemicalChest, double x, double y, double z, float tick) {
 
-        ForgeDirection direction = null; 
+        ForgeDirection direction = null;
 
-        if (tileAlchemicalChest.getWorldObj() != null)
-        {
+        if (tileAlchemicalChest.getWorldObj() != null) {
             direction = ForgeDirection.getOrientation(tileAlchemicalChest.getBlockMetadata());
         }
 
@@ -33,7 +41,7 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef((float)x, (float)y + 1.0F, (float)z + 1.0F);
+        GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short angle = 0;
@@ -53,13 +61,13 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
             }
         }
 
-        GL11.glRotatef((float)angle, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         float adjustedLidAngle = tileAlchemicalChest.prevLidAngle + (tileAlchemicalChest.lidAngle - tileAlchemicalChest.prevLidAngle) * tick;
         adjustedLidAngle = 1.0F - adjustedLidAngle;
         adjustedLidAngle = 1.0F - adjustedLidAngle * adjustedLidAngle * adjustedLidAngle;
-        this.modelChest.chestLid.rotateAngleX = -(adjustedLidAngle * (float)Math.PI / 2.0F);
-        this.modelChest.renderAll();
+        modelChest.chestLid.rotateAngleX = -(adjustedLidAngle * (float) Math.PI / 2.0F);
+        modelChest.renderAll();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

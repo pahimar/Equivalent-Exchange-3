@@ -12,9 +12,9 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import cpw.mods.fml.common.network.Player;
 
 /**
- * PacketEE
+ * Equivalent-Exchange-3
  * 
- * General packet for EE3 related packets
+ * PacketEE
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

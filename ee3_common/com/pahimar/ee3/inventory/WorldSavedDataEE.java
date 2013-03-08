@@ -10,13 +10,22 @@ import net.minecraft.world.WorldSavedData;
 
 import com.pahimar.ee3.lib.Strings;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * WorldSavedDataEE
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class WorldSavedDataEE extends WorldSavedData implements IInventory {
 
     public UUID uuid;
     public ItemStack[] inventory;
-    
+
     private final int INVENTORY_SIZE = 13 * 4;
-    
+
     public WorldSavedDataEE(String filePath) {
 
         super(filePath);
@@ -27,26 +36,26 @@ public class WorldSavedDataEE extends WorldSavedData implements IInventory {
     public void readFromNBT(NBTTagCompound var1) {
 
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void writeToNBT(NBTTagCompound var1) {
 
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public int getSizeInventory() {
 
-        return this.inventory.length;
+        return inventory.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
 
-        return this.inventory[slot];
+        return inventory[slot];
     }
 
     @Override
@@ -67,7 +76,7 @@ public class WorldSavedDataEE extends WorldSavedData implements IInventory {
     public void setInventorySlotContents(int var1, ItemStack var2) {
 
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -86,7 +95,7 @@ public class WorldSavedDataEE extends WorldSavedData implements IInventory {
     public void onInventoryChanged() {
 
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -98,7 +107,7 @@ public class WorldSavedDataEE extends WorldSavedData implements IInventory {
 
     @Override
     public void openChest() {
-   
+
     }
 
     @Override
@@ -106,18 +115,18 @@ public class WorldSavedDataEE extends WorldSavedData implements IInventory {
 
     }
 
-	@Override
-	// public boolean hasCustomName()
-	public boolean func_94042_c() {
+    @Override
+    // public boolean hasCustomName()
+    public boolean func_94042_c() {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
+    @Override
     // public boolean canInsertSide(int i, ItemStack itemStack)
-	public boolean func_94041_b(int i, ItemStack itemstack) {
+    public boolean func_94041_b(int i, ItemStack itemstack) {
 
-		return false;
-	}
+        return false;
+    }
 
 }

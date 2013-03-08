@@ -18,9 +18,9 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 /**
- * BlockCalcinator
+ * Equivalent-Exchange-3
  * 
- * Block class for the Calcinator
+ * BlockCalcinator
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -29,10 +29,11 @@ import com.pahimar.ee3.tileentity.TileCalcinator;
 public class BlockCalcinator extends BlockEE {
 
     /**
-     * Is the random generator used by calcinator to drop the inventory contents in random directions.
+     * Is the random generator used by calcinator to drop the inventory contents
+     * in random directions.
      */
     private Random rand = new Random();
-    
+
     public BlockCalcinator(int id) {
 
         super(id, Material.rock);
@@ -67,58 +68,57 @@ public class BlockCalcinator extends BlockEE {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
-        
+
         dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
     }
-    
+
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 
-        if (player.isSneaking()) {
+        if (player.isSneaking())
             return false;
-        }
         else {
             if (!world.isRemote) {
                 TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
-    
+
                 if (tileCalcinator != null) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.CALCINATOR, world, x, y, z);
                 }
             }
-    
+
             return true;
         }
     }
-    
+
     private void dropInventory(World world, int x, int y, int z) {
+
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        
-        if (!(tileEntity instanceof IInventory)) {
-            
+
+        if (!(tileEntity instanceof IInventory))
             return;
-        }
-        
+
         IInventory inventory = (IInventory) tileEntity;
 
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
-            
+
             ItemStack itemStack = inventory.getStackInSlot(i);
-            
-            if ((itemStack != null) && (itemStack.stackSize > 0)) {
-                float dX = this.rand.nextFloat() * 0.8F + 0.1F;
-                float dY = this.rand.nextFloat() * 0.8F + 0.1F;
-                float dZ = this.rand.nextFloat() * 0.8F + 0.1F;
-                
+
+            if (itemStack != null && itemStack.stackSize > 0) {
+                float dX = rand.nextFloat() * 0.8F + 0.1F;
+                float dY = rand.nextFloat() * 0.8F + 0.1F;
+                float dZ = rand.nextFloat() * 0.8F + 0.1F;
+
                 EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
-                
+
                 if (itemStack.hasTagCompound()) {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound)itemStack.getTagCompound().copy());
+                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
                 }
 
                 float factor = 0.05F;
-                entityItem.motionX = (this.rand.nextGaussian() * factor);
-                entityItem.motionY = (this.rand.nextGaussian() * factor + 0.2F);
-                entityItem.motionZ = (this.rand.nextGaussian() * factor);
+                entityItem.motionX = rand.nextGaussian() * factor;
+                entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+                entityItem.motionZ = rand.nextGaussian() * factor;
                 world.spawnEntityInWorld(entityItem);
                 itemStack.stackSize = 0;
             }

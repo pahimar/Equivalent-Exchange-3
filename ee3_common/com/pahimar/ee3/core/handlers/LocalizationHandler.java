@@ -6,9 +6,9 @@ import com.pahimar.ee3.lib.Localizations;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
- * LocalizationHandler
+ * Equivalent-Exchange-3
  * 
- * Loads in all specified localizations for the mod
+ * LocalizationHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

@@ -9,9 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * GeneralHelper
+ * Equivalent-Exchange-3
  * 
- * General helper methods for EE3
+ * GeneralHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -21,18 +21,14 @@ public class GeneralHelper {
 
     public static ItemStack convertObjectToItemStack(Object obj) {
 
-        if (obj instanceof Item) {
+        if (obj instanceof Item)
             return new ItemStack((Item) obj);
-        }
-        else if (obj instanceof Block) {
+        else if (obj instanceof Block)
             return new ItemStack((Block) obj);
-        }
-        else if (obj instanceof ItemStack) {
+        else if (obj instanceof ItemStack)
             return (ItemStack) obj;
-        }
-        else {
+        else
             return null;
-        }
     }
 
     public static Object[] convertSingleStackToPluralStacks(ItemStack stack) {
@@ -50,12 +46,10 @@ public class GeneralHelper {
 
     public static boolean isHostileEntity(EntityLiving entity) {
 
-        if (entity instanceof IMob) {
+        if (entity instanceof IMob)
             return true;
-        }
-        else {
+        else
             return false;
-        }
     }
 
 }

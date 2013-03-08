@@ -9,9 +9,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * ItemEE
+ * Equivalent-Exchange-3
  * 
- * Wrapper for mod items
+ * ItemEE
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -25,11 +25,12 @@ public class ItemEE extends Item {
         maxStackSize = 1;
         setNoRepair();
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     // public void setIconIndex(IconRegister iconRegister)
     public void func_94581_a(IconRegister iconRegister) {
-        this.iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":"+ this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+
+        iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 }

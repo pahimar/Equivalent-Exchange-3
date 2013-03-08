@@ -15,6 +15,15 @@ import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Sprites;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * DrawBlockHighlightHandler
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class DrawBlockHighlightHandler {
 
     private static int pulse = 0;
@@ -117,7 +126,7 @@ public class DrawBlockHighlightHandler {
 
         for (int i = 0; i < 6; i++) {
             ForgeDirection forgeDir = ForgeDirection.getOrientation(i);
-            int zCorrection = (i == 2) ? -1 : 1;
+            int zCorrection = i == 2 ? -1 : 1;
             GL11.glPushMatrix();
             GL11.glTranslated(-iPX + x + xShift, -iPY + y + yShift, -iPZ + z + zShift);
             GL11.glScalef(1F * xScale, 1F * yScale, 1F * zScale);
@@ -134,7 +143,7 @@ public class DrawBlockHighlightHandler {
 
     public static void renderPulsingQuad(int texture, float maxTransparency) {
 
-        float pulseTransparency = (getPulseValue() * maxTransparency) / 3000f;
+        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
         Tessellator tessellator = Tessellator.instance;

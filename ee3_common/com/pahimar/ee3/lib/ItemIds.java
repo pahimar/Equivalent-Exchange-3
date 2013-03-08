@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * ItemIds
+ * Equivalent-Exchange-3
  * 
- * Library containing the default values for mod related Item ids
+ * ItemIds
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

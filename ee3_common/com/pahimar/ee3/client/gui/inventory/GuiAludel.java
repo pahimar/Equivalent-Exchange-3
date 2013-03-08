@@ -14,25 +14,34 @@ import com.pahimar.ee3.tileentity.TileAludel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * GuiAludel
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class GuiAludel extends GuiContainer {
-    
+
     private TileAludel tileAludel;
 
     public GuiAludel(InventoryPlayer inventoryPlayer, TileAludel tileAludel) {
 
         super(new ContainerAludel(inventoryPlayer, tileAludel));
         this.tileAludel = tileAludel;
-        this.xSize = 176;
-        this.ySize = 187;
+        xSize = 176;
+        ySize = 187;
     }
-    
+
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        
-        String containerName = this.tileAludel.func_94042_c() ? this.tileAludel.getInvName() : StatCollector.translateToLocal(this.tileAludel.getInvName());
-        this.fontRenderer.drawString(containerName, this.xSize / 2 - this.fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
-        this.fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, this.ySize - 93, 4210752);
+
+        String containerName = tileAludel.func_94042_c() ? tileAludel.getInvName() : StatCollector.translateToLocal(tileAludel.getInvName());
+        fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
+        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
     }
 
     @Override
@@ -40,10 +49,9 @@ public class GuiAludel extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         //this.mc.renderEngine.bindTexture(Sprites.GUI_ALUDEL);
-        this.mc.renderEngine.func_98187_b(Sprites.GUI_ALUDEL);
-        int xStart = (this.width - this.xSize) / 2;
-        int yStart = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(xStart, yStart, 0, 0, this.xSize, this.ySize);
+        mc.renderEngine.func_98187_b(Sprites.GUI_ALUDEL);
+        int xStart = (width - xSize) / 2;
+        int yStart = (height - ySize) / 2;
+        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
     }
-
 }

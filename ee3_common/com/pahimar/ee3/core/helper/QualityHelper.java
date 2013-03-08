@@ -3,9 +3,9 @@ package com.pahimar.ee3.core.helper;
 import net.minecraft.item.ItemStack;
 
 /**
- * QualityHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for determining the quality tier of items
+ * QualityHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -29,10 +29,9 @@ public class QualityHelper {
 
     public static int getDustTierQuality(ItemStack item, ItemStack fuel) {
 
-        if ((getItemTierQuality(item) >= 0) && (getItemTierQuality(item) <= 5)) {
-            if ((getFuelTierQuality(fuel) >= 0) && (getFuelTierQuality(fuel) <= 5)) {
+        if (getItemTierQuality(item) >= 0 && getItemTierQuality(item) <= 5) {
+            if (getFuelTierQuality(fuel) >= 0 && getFuelTierQuality(fuel) <= 5)
                 return dustTable[getItemTierQuality(item)][getFuelTierQuality(fuel)];
-            }
         }
 
         return -1;

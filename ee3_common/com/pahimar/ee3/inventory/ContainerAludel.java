@@ -8,17 +8,22 @@ import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.tileentity.TileAludel;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ContainerAludel
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ContainerAludel extends Container {
 
-    private TileAludel tileAludel;
-    
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
 
     public ContainerAludel(InventoryPlayer inventoryPlayer, TileAludel tileAludel) {
-        
-        this.tileAludel = tileAludel;
-        
+
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.INPUT_INVENTORY_INDEX, 44, 18));
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.DUST_INVENTORY_INDEX, 44, 39));
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.FUEL_INVENTORY_INDEX, 44, 74));
@@ -42,9 +47,10 @@ public class ContainerAludel extends Container {
 
         return true;
     }
-    
+
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
-        
+
         return null;
     }
 }

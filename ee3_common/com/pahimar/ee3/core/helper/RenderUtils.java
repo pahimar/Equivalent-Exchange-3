@@ -13,6 +13,15 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.lib.Sprites;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * RenderUtils
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class RenderUtils {
 
     private static int rotationAngle = 0;
@@ -24,7 +33,7 @@ public class RenderUtils {
         Block block = Block.blocksList[stack.itemID];
         renderEngine.func_98187_b(block.getTextureFile());
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) (x - 2), (float) (y + 3), -3.0F + zLevel);
+        GL11.glTranslatef(x - 2, y + 3, -3.0F + zLevel);
         GL11.glScalef(10.0F, 10.0F, 10.0F);
         GL11.glTranslatef(1.0F, 0.5F, 1.0F);
         GL11.glScalef(1.0F * scale, 1.0F * scale, -1.0F);
@@ -33,9 +42,9 @@ public class RenderUtils {
         rotationAngle = (rotationAngle + 1) % 360;
 
         int var10 = Item.itemsList[stack.itemID].getColorFromItemStack(stack, 0);
-        float var16 = (float) (var10 >> 16 & 255) / 255.0F;
-        float var12 = (float) (var10 >> 8 & 255) / 255.0F;
-        float var13 = (float) (var10 & 255) / 255.0F;
+        float var16 = (var10 >> 16 & 255) / 255.0F;
+        float var12 = (var10 >> 8 & 255) / 255.0F;
+        float var13 = (var10 & 255) / 255.0F;
 
         GL11.glColor4f(var16, var12, var13, 1.0F);
 
@@ -45,30 +54,30 @@ public class RenderUtils {
         renderBlocks.useInventoryTint = true;
         GL11.glPopMatrix();
     }
-    
+
     public static void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int x, int y, float opacity, float scale) {
 
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
-    	renderEngine.func_98187_b(Sprites.ITEM_SPRITE_SHEET);
+        renderEngine.func_98187_b(Sprites.ITEM_SPRITE_SHEET);
         int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
-        float red = (float)(overlayColour >> 16 & 255) / 255.0F;
-        float green = (float)(overlayColour >> 8 & 255) / 255.0F;
-        float blue = (float)(overlayColour & 255) / 255.0F;
-        GL11.glColor4f(red, green, blue, opacity);       
+        float red = (overlayColour >> 16 & 255) / 255.0F;
+        float green = (overlayColour >> 8 & 255) / 255.0F;
+        float blue = (overlayColour & 255) / 255.0F;
+        GL11.glColor4f(red, green, blue, opacity);
         drawTexturedQuad(x, y, icon, 16 * scale, 16 * scale, -90);
         GL11.glEnable(GL11.GL_LIGHTING);
 
     }
-    
+
     public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel) {
-    	
+
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + height), zLevel, (double)icon.func_94209_e(), (double)icon.func_94210_h());
-        tessellator.addVertexWithUV((double)(x + width), (double)(y + height), zLevel, (double)icon.func_94212_f(), (double)icon.func_94210_h());
-        tessellator.addVertexWithUV((double)(x + width), (double)(y + 0), zLevel, (double)icon.func_94212_f(), (double)icon.func_94206_g());
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), zLevel, (double)icon.func_94209_e(), (double)icon.func_94206_g());
+        tessellator.addVertexWithUV(x + 0, y + height, zLevel, icon.func_94209_e(), icon.func_94210_h());
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, icon.func_94212_f(), icon.func_94210_h());
+        tessellator.addVertexWithUV(x + width, y + 0, zLevel, icon.func_94212_f(), icon.func_94206_g());
+        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, icon.func_94209_e(), icon.func_94206_g());
         tessellator.draw();
     }
 }

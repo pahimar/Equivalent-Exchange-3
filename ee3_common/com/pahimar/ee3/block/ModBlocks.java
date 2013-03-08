@@ -8,9 +8,9 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
- * ModBlocks
+ * Equivalent-Exchange-3
  * 
- * Class containing all the EE3 custom blocks
+ * ModBlocks
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -54,5 +54,4 @@ public class ModBlocks {
          * Item.flintAndSteel });
          */
     }
-
 }

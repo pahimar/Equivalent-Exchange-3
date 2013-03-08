@@ -18,9 +18,9 @@ import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 /**
- * KeyBindingHandler
+ * Equivalent-Exchange-3
  * 
- * Client specific handler for handling keybinding related events
+ * KeyBindingHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

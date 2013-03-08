@@ -11,9 +11,9 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 /**
- * ContainerCalcinator
+ * Equivalent-Exchange-3
  * 
- * The container class for the Calcinator
+ * ContainerCalcinator
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -21,12 +21,7 @@ import com.pahimar.ee3.tileentity.TileCalcinator;
  */
 public class ContainerCalcinator extends Container {
 
-    private TileCalcinator calcinator;
-
     public ContainerCalcinator(InventoryPlayer inventoryPlayer, TileCalcinator calcinator) {
-
-        // Set the instance of the TileCalcinator for the container
-        this.calcinator = calcinator;
 
         // Add the calcinator "to be calcined" slot to the container
         this.addSlotToContainer(new Slot(calcinator, 0, 56, 17));
@@ -50,51 +45,47 @@ public class ContainerCalcinator extends Container {
         }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer player) {
 
         return true;
     }
 
     // TODO Write our own version - this is taken from ContainerFurnace
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = (Slot) inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
             if (par2 == 2) {
-                if (!this.mergeItemStack(var5, 3, 39, true)) {
+                if (!this.mergeItemStack(var5, 3, 39, true))
                     return null;
-                }
 
                 var4.onSlotChange(var5, var3);
             }
             else if (par2 != 1 && par2 != 0) {
                 if (FurnaceRecipes.smelting().getSmeltingResult(var5) != null) {
-                    if (!this.mergeItemStack(var5, 0, 1, false)) {
+                    if (!this.mergeItemStack(var5, 0, 1, false))
                         return null;
-                    }
                 }
                 else if (TileEntityFurnace.isItemFuel(var5)) {
-                    if (!this.mergeItemStack(var5, 1, 2, false)) {
+                    if (!this.mergeItemStack(var5, 1, 2, false))
                         return null;
-                    }
                 }
                 else if (par2 >= 3 && par2 < 30) {
-                    if (!this.mergeItemStack(var5, 30, 39, false)) {
+                    if (!this.mergeItemStack(var5, 30, 39, false))
                         return null;
-                    }
                 }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(var5, 3, 30, false)) {
+                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(var5, 3, 30, false))
                     return null;
-                }
             }
-            else if (!this.mergeItemStack(var5, 3, 39, false)) {
+            else if (!this.mergeItemStack(var5, 3, 39, false))
                 return null;
-            }
 
             if (var5.stackSize == 0) {
                 var4.putStack((ItemStack) null);
@@ -103,9 +94,8 @@ public class ContainerCalcinator extends Container {
                 var4.onSlotChanged();
             }
 
-            if (var5.stackSize == var3.stackSize) {
+            if (var5.stackSize == var3.stackSize)
                 return null;
-            }
 
             var4.onPickupFromSlot(par1EntityPlayer, var5);
         }

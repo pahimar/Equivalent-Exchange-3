@@ -9,6 +9,15 @@ import com.pahimar.ee3.tileentity.TileAludel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TileEntityAludelRenderer
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 

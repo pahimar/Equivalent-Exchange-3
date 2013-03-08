@@ -17,6 +17,15 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ItemAlchemicalBag
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ItemAlchemicalBag extends ItemEE {
 
     private static final String[] ALCHEMICAL_BAG_SUBTYPES = new String[] { "Open", "OpenDrawString", "Closed", "ClosedDrawString" };
@@ -31,13 +40,14 @@ public class ItemAlchemicalBag extends ItemEE {
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void func_94581_a(IconRegister iconRegister) {
 
-        this.icons = new Icon[ALCHEMICAL_BAG_SUBTYPES.length];
+        icons = new Icon[ALCHEMICAL_BAG_SUBTYPES.length];
 
         for (int i = 0; i < ALCHEMICAL_BAG_SUBTYPES.length; ++i) {
-            this.icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_SUBTYPES[i]);
+            icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_SUBTYPES[i]);
         }
     }
 
@@ -58,6 +68,7 @@ public class ItemAlchemicalBag extends ItemEE {
         return true;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses() {
 
@@ -69,30 +80,26 @@ public class ItemAlchemicalBag extends ItemEE {
 
         // If the bag is open
         if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
-            if (renderPass != 1) {
+            if (renderPass != 1)
                 return icons[0];
-            }
-            else {
+            else
                 return icons[1];
-            }
         }
         // Else, the bag is closed
         else {
-            if (renderPass != 1) {
+            if (renderPass != 1)
                 return icons[2];
-            }
-            else {
+            else
                 return icons[3];
-            }
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack itemStack, int renderPass) {
 
-        if (renderPass == 1) {
+        if (renderPass == 1)
             return Integer.parseInt(Colours.PURE_WHITE, 16);
-        }
         else {
             int bagColor = this.getColor(itemStack);
 
@@ -106,31 +113,28 @@ public class ItemAlchemicalBag extends ItemEE {
 
     public boolean hasColor(ItemStack itemStack) {
 
-        return (!itemStack.hasTagCompound() ? false : (!itemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) ? false : itemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR)));
+        return !itemStack.hasTagCompound() ? false : !itemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) ? false : itemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR);
     }
 
     public int getColor(ItemStack itemStack) {
 
         NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
 
-        if (nbtTagCompound == null) {
+        if (nbtTagCompound == null)
             return Integer.parseInt(Colours.PURE_WHITE, 16);
-        }
         else {
 
             NBTTagCompound displayTagCompound = nbtTagCompound.getCompoundTag(Strings.NBT_ITEM_DISPLAY);
-            return displayTagCompound == null ? Integer.parseInt(Colours.PURE_WHITE, 16) : (displayTagCompound.hasKey(Strings.NBT_ITEM_COLOR) ? displayTagCompound.getInteger(Strings.NBT_ITEM_COLOR) : Integer.parseInt(Colours.PURE_WHITE, 16));
+            return displayTagCompound == null ? Integer.parseInt(Colours.PURE_WHITE, 16) : displayTagCompound.hasKey(Strings.NBT_ITEM_COLOR) ? displayTagCompound.getInteger(Strings.NBT_ITEM_COLOR) : Integer.parseInt(Colours.PURE_WHITE, 16);
         }
     }
 
     public void setColor(ItemStack itemStack, int color) {
 
         if (itemStack != null) {
-            if (!(itemStack.getItem() instanceof ItemAlchemicalBag)) {
-
+            if (!(itemStack.getItem() instanceof ItemAlchemicalBag))
                 // TODO Localize
                 throw new UnsupportedOperationException("Can\'t dye non-bags!");
-            }
             else {
 
                 NBTTagCompound nbtTagCompound = itemStack.getTagCompound();

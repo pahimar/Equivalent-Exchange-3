@@ -64,9 +64,9 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * ClientProxy
+ * Equivalent-Exchange-3
  * 
- * Client specific functionality that cannot be put into CommonProxy
+ * ClientProxy
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -154,19 +154,19 @@ public class ClientProxy extends CommonProxy {
 
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
     }
-    
+
     @Override
     public void handleTileEntityPacket(int x, int y, int z, short state, String owner, String customName) {
-    	
-    	TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
-    	
-    	if (tileEntity != null) {
-    		if (tileEntity instanceof TileEE) {
-    			((TileEE) tileEntity).setState(state);
-    			((TileEE) tileEntity).setOwner(owner);
-    			((TileEE) tileEntity).setCustomName(customName);
-    		}
-    	}
+
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (tileEntity instanceof TileEE) {
+                ((TileEE) tileEntity).setState(state);
+                ((TileEE) tileEntity).setOwner(owner);
+                ((TileEE) tileEntity).setCustomName(customName);
+            }
+        }
     }
 
     @Override

@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 import com.pahimar.ee3.core.helper.GeneralHelper;
 
 /**
- * EquivalencyHandler
+ * Equivalent-Exchange-3
  * 
- * Class to handle all the equivalency relationships between items/etc
+ * EquivalencyHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -41,20 +41,19 @@ public class EquivalencyHandler {
         Integer stack1Index = getIndexInList(stack1);
         Integer stack2Index = getIndexInList(stack2);
 
-        if ((stack1Index != null) && (stack2Index != null)) {
+        if (stack1Index != null && stack2Index != null)
             return;
-        }
-        else if ((stack1Index != null) && (stack2Index == null)) {
+        else if (stack1Index != null && stack2Index == null) {
             currentList = equivalencyList.get(stack1Index.intValue());
             currentList.add(stack2);
             equivalencyList.set(stack1Index.intValue(), currentList);
         }
-        else if ((stack1Index == null) && (stack2Index != null)) {
+        else if (stack1Index == null && stack2Index != null) {
             currentList = equivalencyList.get(stack2Index.intValue());
             currentList.add(stack1);
             equivalencyList.set(stack2Index.intValue(), currentList);
         }
-        else if ((stack1Index == null) && (stack2Index == null)) {
+        else if (stack1Index == null && stack2Index == null) {
             currentList.add(stack1);
             currentList.add(stack2);
             equivalencyList.add(currentList);
@@ -80,9 +79,8 @@ public class EquivalencyHandler {
         while (i < equivalencyList.size()) {
             currentList = equivalencyList.get(i);
             for (ItemStack currentStack : currentList) {
-                if (ItemStack.areItemStacksEqual(checkStack, currentStack)) {
+                if (ItemStack.areItemStacksEqual(checkStack, currentStack))
                     return new Integer(i);
-                }
             }
             ++i;
         }
@@ -98,9 +96,8 @@ public class EquivalencyHandler {
         while (i < equivalencyList.size()) {
             currentList = equivalencyList.get(i);
             for (ItemStack currentStack : currentList) {
-                if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
+                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
                     return new Integer(i);
-                }
             }
             ++i;
         }
@@ -117,9 +114,8 @@ public class EquivalencyHandler {
 
         for (ArrayList<ItemStack> list : equivalencyList) {
             for (ItemStack currentStack : list) {
-                if (ItemStack.areItemStacksEqual(checkStack, currentStack)) {
+                if (ItemStack.areItemStacksEqual(checkStack, currentStack))
                     return list;
-                }
             }
         }
 
@@ -130,9 +126,8 @@ public class EquivalencyHandler {
 
         for (ArrayList<ItemStack> list : equivalencyList) {
             for (ItemStack currentStack : list) {
-                if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
+                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
                     return list;
-                }
             }
         }
 
@@ -143,9 +138,8 @@ public class EquivalencyHandler {
 
         ItemStack checkStack = GeneralHelper.convertObjectToItemStack(obj);
 
-        if (checkStack != null) {
+        if (checkStack != null)
             return getNextInList(checkStack.itemID, checkStack.getItemDamage());
-        }
 
         return null;
     }
@@ -159,14 +153,13 @@ public class EquivalencyHandler {
         int i = 0;
 
         if (list != null) {
-            if (list.size() == 1) {
+            if (list.size() == 1)
                 return list.get(i);
-            }
 
             while (i < list.size()) {
                 currentStack = list.get(i);
 
-                if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
+                if (id == currentStack.itemID && meta == currentStack.getItemDamage()) {
                     returnStack = list.get((i + 1) % list.size());
                     break;
                 }
@@ -182,9 +175,8 @@ public class EquivalencyHandler {
 
         ItemStack checkStack = GeneralHelper.convertObjectToItemStack(obj);
 
-        if (checkStack != null) {
+        if (checkStack != null)
             return getPrevInList(checkStack.itemID, checkStack.getItemDamage());
-        }
 
         return null;
     }
@@ -198,15 +190,14 @@ public class EquivalencyHandler {
         int i = 0;
 
         if (list != null) {
-            if (list.size() == 1) {
+            if (list.size() == 1)
                 return list.get(i);
-            }
 
             while (i < list.size()) {
                 currentStack = list.get(i);
 
-                if ((id == currentStack.itemID) && (meta == currentStack.getItemDamage())) {
-                    int index = ((i - 1) + list.size()) % list.size();
+                if (id == currentStack.itemID && meta == currentStack.getItemDamage()) {
+                    int index = (i - 1 + list.size()) % list.size();
                     returnStack = list.get(index);
                     break;
                 }
@@ -220,41 +211,36 @@ public class EquivalencyHandler {
 
     public boolean areEquivalent(Object obj1, Object obj2) {
 
-        if ((getEquivalencyList(obj1) != null) && (getEquivalencyList(obj2) != null)) {
+        if (getEquivalencyList(obj1) != null && getEquivalencyList(obj2) != null) {
             // TODO This could be cleaner
-            if ((GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID) && (GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage())) {
+            if (GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID && GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage())
                 return true;
-            }
-            else {
-                return (getEquivalencyList(obj1).equals(getEquivalencyList(obj2)));
-            }
+            else
+                return getEquivalencyList(obj1).equals(getEquivalencyList(obj2));
         }
-        else {
+        else
             return false;
-        }
     }
-    
+
     /* Ignores stack size for world transmutation */
     public boolean areWorldEquivalent(Object obj1, Object obj2) {
 
-    	ItemStack first = GeneralHelper.convertObjectToItemStack(obj1);
-    	if(first == null) return false;
-    	ItemStack second = GeneralHelper.convertObjectToItemStack(obj2);
-    	if(second == null) return false;
-    	
-        if ((getEquivalencyList(first.itemID, first.getItemDamage()) != null) && (getEquivalencyList(second.itemID, second.getItemDamage()) != null)) {
-            if ((first.itemID == second.itemID) && (first.getItemDamage() == second.getItemDamage())) {
-                return true;
-            }
-            else {
-                return (getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage())));
-            }
-        }
-        else {
+        ItemStack first = GeneralHelper.convertObjectToItemStack(obj1);
+        if (first == null)
             return false;
-        }
-    }
+        ItemStack second = GeneralHelper.convertObjectToItemStack(obj2);
+        if (second == null)
+            return false;
 
+        if (getEquivalencyList(first.itemID, first.getItemDamage()) != null && getEquivalencyList(second.itemID, second.getItemDamage()) != null) {
+            if (first.itemID == second.itemID && first.getItemDamage() == second.getItemDamage())
+                return true;
+            else
+                return getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage()));
+        }
+        else
+            return false;
+    }
 
     public void debug() {
 

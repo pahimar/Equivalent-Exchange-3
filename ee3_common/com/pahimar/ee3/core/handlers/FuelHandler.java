@@ -4,9 +4,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 
 /**
- * FuelHandler
+ * Equivalent-Exchange-3
  * 
- * Class for querying and returning fuel values for items
+ * FuelHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
