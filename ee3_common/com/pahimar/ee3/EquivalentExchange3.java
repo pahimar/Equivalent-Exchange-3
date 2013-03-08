@@ -3,6 +3,7 @@ package com.pahimar.ee3;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.block.ModBlocks;
@@ -23,6 +24,7 @@ import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
@@ -106,6 +108,7 @@ public class EquivalentExchange3 {
         ModItems.init();
     }
 
+    @SuppressWarnings("unchecked")
     @Init
     public void load(FMLInitializationEvent event) {
 
@@ -141,6 +144,9 @@ public class EquivalentExchange3 {
 
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
+        
+        // Add in the ability to dye Alchemical Bags
+        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());
