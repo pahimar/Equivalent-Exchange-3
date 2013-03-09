@@ -2,14 +2,14 @@ package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-
 import net.minecraft.client.settings.KeyBinding;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+
 /**
- * KeyBindings
+ * Equivalent-Exchange-3
  * 
- * Client specific library for a general collection of mod related KeyBindings
+ * KeyBindingHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -53,14 +53,13 @@ public class KeyBindingHelper {
 
         return isRepeating;
     }
-    
+
     // TODO Still not ideal, won't work for every case. Specifically, make it context sensitive
     public static boolean isClientSided(String keybinding) {
-        if (keybinding.equalsIgnoreCase(ConfigurationSettings.KEYBINDING_TOGGLE)) {
+
+        if (keybinding.equalsIgnoreCase(ConfigurationSettings.KEYBINDING_TOGGLE))
             return true;
-        }
-        else {
+        else
             return false;
-        }
     }
 }

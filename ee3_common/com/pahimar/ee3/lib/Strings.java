@@ -1,5 +1,14 @@
 package com.pahimar.ee3.lib;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * Strings
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class Strings {
 
     /* General keys */
@@ -13,23 +22,21 @@ public class Strings {
     public static final String OUTDATED_MESSAGE = "version.outdated";
     public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
     public static final String FINAL_ERROR_MESSAGE = "version.final_error";
-
-    /* Gui related constants */
-    public static final String GUI_CALCINATOR_NAME = "gui.calcinator.name";
-    public static final String GUI_ALUDEL_NAME = "gui.aludel.name";
-    public static final String GUI_ALCHEMICAL_CHEST_NAME = "gui.alchemicalChest.name";
-    public static final String GUI_ALCHEMICAL_BAG_NAME = "gui.alchemicalBag.name";
+    public static final String MC_VERSION_NOT_FOUND = "version.mc_version_not_found";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
     public static final String NBT_ITEM_MODE_KEY = "itemMode";
     public static final String NBT_ITEM_CRAFTING_GUI_OPEN = "itemCraftingGuiOpen";
     public static final String NBT_ITEM_TRANSMUTATION_GUI_OPEN = "itemTransmutationGuiOpen";
-    public static final String NBT_ITEM_ALCHEMY_BAG_GUI_OPEN = "itemAlchemyBagGuiOpen";
+    public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
+    public static final String NBT_ITEM_DISPLAY = "display";
+    public static final String NBT_ITEM_COLOR = "color";
     public static final String NBT_TE_OWNER_KEY = "teOwner";
     public static final String NBT_TE_STATE_KEY = "teState";
+    public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
-    
+
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String ALUDEL_NAME = "aludel";
@@ -38,12 +45,12 @@ public class Strings {
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
 
     /* Item name constants */
-    public static final String MINIUM_SHARD_NAME = "miniumShard";
-    public static final String INERT_STONE_NAME = "inertStone";
-    public static final String MINIUM_STONE_NAME = "miniumStone";
-    public static final String PHILOSOPHER_STONE_NAME = "philStone";
-    public static final String ALCHEMY_DUST_NAME = "alchemyDust";
-    public static final String ALCHEMY_BAG_NAME = "alchemyBag";
+    public static final String MINIUM_SHARD_NAME = "shardMinium";
+    public static final String INERT_STONE_NAME = "stoneInert";
+    public static final String MINIUM_STONE_NAME = "stoneMinium";
+    public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
+    public static final String ALCHEMICAL_DUST_NAME = "dustAlchemical";
+    public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
@@ -55,5 +62,13 @@ public class Strings {
     public static final String TRANSMUTATION_COST_ITEM = "item" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_BLOCK = "block" + TRANSMUTATION_COST;
     public static final String TRANSMUTATION_COST_MOB = "mob" + TRANSMUTATION_COST;
+
+    /* Container related constants */
+    public static final String CONTAINER_CALCINATOR_NAME = "container." + CALCINATOR_NAME;
+    public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;
+    public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container." + ALCHEMICAL_CHEST_NAME;
+    public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
+    public static final String CONTAINER_INVENTORY = "container.inventory";
+    public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
 
 }

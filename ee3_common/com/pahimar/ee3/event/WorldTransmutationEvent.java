@@ -4,6 +4,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * WorldTransmutationEvent
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class WorldTransmutationEvent extends ActionEvent {
 
     public int targetID, targetMeta;

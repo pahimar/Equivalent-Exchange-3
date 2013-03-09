@@ -7,15 +7,24 @@ import net.minecraft.nbt.NBTTagList;
 
 import com.pahimar.ee3.lib.Strings;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TileAludel
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TileAludel extends TileEE implements IInventory {
 
     /**
      * The ItemStacks that hold the items currently being used in the Aludel
      */
     private ItemStack[] inventory;
-    
+
     private final int INVENTORY_SIZE = 4;
-    
+
     public static final int INPUT_INVENTORY_INDEX = 0;
     public static final int DUST_INVENTORY_INDEX = 1;
     public static final int FUEL_INVENTORY_INDEX = 2;
@@ -29,13 +38,13 @@ public class TileAludel extends TileEE implements IInventory {
     @Override
     public int getSizeInventory() {
 
-        return this.inventory.length;
+        return inventory.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
 
-        return this.inventory[slot];
+        return inventory[slot];
     }
 
     @Override
@@ -79,7 +88,7 @@ public class TileAludel extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return "container." + Strings.ALUDEL_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALUDEL_NAME;
     }
 
     @Override
@@ -98,36 +107,52 @@ public class TileAludel extends TileEE implements IInventory {
 
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
         NBTTagList tagList = nbtTagCompound.getTagList("Items");
-        this.inventory = new ItemStack[this.getSizeInventory()];
+        inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i) {
             NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
             byte slot = tagCompound.getByte("Slot");
-            if (slot >= 0 && slot < this.inventory.length) {
-                this.inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            if (slot >= 0 && slot < inventory.length) {
+                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
         super.writeToNBT(nbtTagCompound);
 
         // Write the ItemStacks in the inventory to NBT
         NBTTagList tagList = new NBTTagList();
-        for (int currentIndex = 0; currentIndex < this.inventory.length; ++currentIndex) {
-            if (this.inventory[currentIndex] != null) {
+        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
+            if (inventory[currentIndex] != null) {
                 NBTTagCompound tagCompound = new NBTTagCompound();
                 tagCompound.setByte("Slot", (byte) currentIndex);
-                this.inventory[currentIndex].writeToNBT(tagCompound);
+                inventory[currentIndex].writeToNBT(tagCompound);
                 tagList.appendTag(tagCompound);
             }
         }
         nbtTagCompound.setTag("Items", tagList);
+    }
+
+    @Override
+    // public boolean hasCustomName()
+    public boolean func_94042_c() {
+
+        return this.hasCustomName();
+    }
+
+    @Override
+    // public boolean canInsertSide(int i, ItemStack itemStack)
+    public boolean func_94041_b(int i, ItemStack itemstack) {
+
+        return true;
     }
 }

@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * EMCRegistry
+ * Equivalent-Exchange-3
  * 
- * Registry containing all EMC entries for objects
+ * EMCRegistry
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -28,27 +28,24 @@ public class EMCRegistry {
 
     public EMCEntry getEMCValue(Block block) {
 
-        if (block != null) {
+        if (block != null)
             return getEMCValue(block.blockID, 0);
-        }
 
         return null;
     }
 
     public EMCEntry getEMCValue(Item item) {
 
-        if (item != null) {
+        if (item != null)
             return getEMCValue(item.itemID, 0);
-        }
 
         return null;
     }
 
     public EMCEntry getEMCValue(ItemStack itemStack) {
 
-        if (itemStack != null) {
+        if (itemStack != null)
             return getEMCValue(itemStack.itemID, itemStack.getItemDamage());
-        }
 
         return null;
     }
@@ -61,9 +58,8 @@ public class EMCRegistry {
     public EMCEntry getEMCValue(int id, int meta) {
 
         if (emcMap.containsKey(id)) {
-            if (emcMap.get(id).containsKey(meta)) {
+            if (emcMap.get(id).containsKey(meta))
                 return emcMap.get(id).get(meta);
-            }
         }
 
         return null;
@@ -101,9 +97,8 @@ public class EMCRegistry {
         if (emcMap.containsKey(id)) {
             tempMap = emcMap.get(id);
 
-            if (tempMap.containsKey(meta)) {
+            if (tempMap.containsKey(meta))
                 return;
-            }
         }
 
         tempMap.put(meta, emcEntry);

@@ -8,30 +8,26 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.packet.PacketEE;
+import com.pahimar.ee3.network.packet.PacketItemUpdate;
 import com.pahimar.ee3.network.packet.PacketKeyPressed;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
-import com.pahimar.ee3.network.packet.PacketItemUpdate;
 
 /**
- * PacketTypeHandler
+ * Equivalent-Exchange-3
  * 
- * Handler that routes packets to the appropriate destinations depending on what
- * kind of packet they are
+ * PacketTypeHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
 public enum PacketTypeHandler {
-    KEY(PacketKeyPressed.class),
-    TILE(PacketTileUpdate.class),
-    REQUEST_EVENT(PacketRequestEvent.class),
-    SPAWN_PARTICLE(PacketSpawnParticle.class),
-    SOUND_EVENT(PacketSoundEvent.class),
-    ITEM_UPDATE(PacketItemUpdate.class);
+    KEY(PacketKeyPressed.class), TILE(PacketTileUpdate.class), REQUEST_EVENT(
+            PacketRequestEvent.class), SPAWN_PARTICLE(PacketSpawnParticle.class), SOUND_EVENT(
+            PacketSoundEvent.class), ITEM_UPDATE(PacketItemUpdate.class);
 
     private Class<? extends PacketEE> clazz;
 

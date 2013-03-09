@@ -20,9 +20,9 @@ import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
 /**
- * RecipesTransmutationStone
+ * Equivalent-Exchange-3
  * 
- * Transmutation Stone recipes
+ * RecipesTransmutationStone
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -129,7 +129,7 @@ public class RecipesTransmutationStone {
             currentList = itemStackList.toArray(currentList);
 
             for (int i = 0; i < currentList.length; i++) {
-                outputI = (i == currentList.length - 1 ? 0 : i + 1);
+                outputI = i == currentList.length - 1 ? 0 : i + 1;
 
                 RecipeHelper.addRecipe(currentList[outputI], stone, GeneralHelper.convertSingleStackToPluralStacks(currentList[i]));
             }

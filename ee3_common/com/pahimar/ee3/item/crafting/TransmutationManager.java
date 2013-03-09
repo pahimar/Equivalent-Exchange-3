@@ -3,6 +3,15 @@ package com.pahimar.ee3.item.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TransmutationManager
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TransmutationManager {
 
     /** The static instance of this class */
@@ -18,16 +27,16 @@ public class TransmutationManager {
 
         return instance;
     }
-    
+
     private TransmutationManager() {
-        
+
     }
 
     /**
      * returns the List<> of all recipes
      */
-    public List getRecipeList()
-    {
-        return this.recipes;
+    public List getRecipeList() {
+
+        return recipes;
     }
 }

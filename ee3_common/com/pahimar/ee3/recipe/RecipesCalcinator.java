@@ -1,9 +1,9 @@
 package com.pahimar.ee3.recipe;
 
 /**
- * RecipesCalcinator
+ * Equivalent-Exchange-3
  * 
- * Calcinator recipes
+ * RecipesCalcinator
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

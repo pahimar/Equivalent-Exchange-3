@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
@@ -16,12 +15,19 @@ import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Sprites;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * DrawBlockHighlightHandler
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class DrawBlockHighlightHandler {
 
     private static int pulse = 0;
     private static boolean doInc = true;
-
-    private static ItemStack currentBlockStack = null;
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
@@ -47,7 +53,7 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.WORLD_TRANSMUTATION_TEXTURE);
+        int texture = event.context.renderEngine.getTexture(Sprites.EFFECT_WORLD_TRANSMUTATION);
 
         float xScale = 1;
         float yScale = 1;
@@ -120,7 +126,7 @@ public class DrawBlockHighlightHandler {
 
         for (int i = 0; i < 6; i++) {
             ForgeDirection forgeDir = ForgeDirection.getOrientation(i);
-            int zCorrection = (i == 2) ? -1 : 1;
+            int zCorrection = i == 2 ? -1 : 1;
             GL11.glPushMatrix();
             GL11.glTranslated(-iPX + x + xShift, -iPY + y + yShift, -iPZ + z + zShift);
             GL11.glScalef(1F * xScale, 1F * yScale, 1F * zScale);
@@ -137,7 +143,7 @@ public class DrawBlockHighlightHandler {
 
     public static void renderPulsingQuad(int texture, float maxTransparency) {
 
-        float pulseTransparency = (getPulseValue() * maxTransparency) / 3000f;
+        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
         Tessellator tessellator = Tessellator.instance;

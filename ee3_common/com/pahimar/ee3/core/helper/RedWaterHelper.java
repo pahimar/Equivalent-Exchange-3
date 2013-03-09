@@ -10,9 +10,9 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 
 /**
- * RedWaterHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for Red Water related effects
+ * RedWaterHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -22,7 +22,7 @@ public class RedWaterHelper {
 
     public static boolean handleRedWaterDetection(EntityLiving entity) {
 
-        return (isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterFlowing) || isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterStill));
+        return isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterFlowing) || isBlockInBB(entity.worldObj, entity.boundingBox, ModBlocks.redWaterStill);
     }
 
     public static boolean isBlockInBB(World world, AxisAlignedBB par1AxisAlignedBB, Block block) {
@@ -38,9 +38,8 @@ public class RedWaterHelper {
             for (int j = minY; j < maxY; ++j) {
                 for (int k = minZ; k < maxZ; ++k) {
                     Block currentBlock = Block.blocksList[world.getBlockId(i, j, k)];
-                    if (currentBlock != null && currentBlock.blockID == block.blockID) {
+                    if (currentBlock != null && currentBlock.blockID == block.blockID)
                         return true;
-                    }
                 }
             }
         }

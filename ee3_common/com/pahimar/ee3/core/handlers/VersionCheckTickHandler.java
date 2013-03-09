@@ -15,10 +15,9 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 /**
- * VersionCheckTickHandler
+ * Equivalent-Exchange-3
  * 
- * Class for notifying the player on their client when they get in game the
- * outcome of the remote version check
+ * VersionCheckTickHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -41,10 +40,10 @@ public class VersionCheckTickHandler implements ITickHandler {
                 for (TickType tickType : type) {
                     if (tickType == TickType.CLIENT) {
                         if (FMLClientHandler.instance().getClient().currentScreen == null) {
-                            if ((VersionHelper.getResult() != VersionHelper.UNINITIALIZED) || (VersionHelper.getResult() != VersionHelper.FINAL_ERROR)) {
-                                
+                            if (VersionHelper.getResult() != VersionHelper.UNINITIALIZED || VersionHelper.getResult() != VersionHelper.FINAL_ERROR) {
+
                                 initialized = true;
-                                
+
                                 if (VersionHelper.getResult() == VersionHelper.OUTDATED) {
                                     FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(VersionHelper.getResultMessageForClient());
                                     ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, Strings.FALSE);

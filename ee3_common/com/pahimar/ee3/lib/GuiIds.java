@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * GuiIds
+ * Equivalent-Exchange-3
  * 
- * Library containing the various ids for different Guis in the mod
+ * GuiIds
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

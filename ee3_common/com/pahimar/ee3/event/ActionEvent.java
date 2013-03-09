@@ -5,6 +5,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.Event;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ActionEvent
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ActionEvent extends Event {
 
     public enum ActionResult {

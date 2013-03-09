@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import com.pahimar.ee3.core.helper.ItemDropHelper;
 
 /**
- * EntityLivingHandler
+ * Equivalent-Exchange-3
  * 
- * Class containing all EE3 custom event related logic for EntityLiving events
+ * EntityLivingHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

@@ -13,6 +13,15 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * PacketItemUpdate
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketItemUpdate extends PacketEE {
 
     public byte slot;
@@ -30,18 +39,21 @@ public class PacketItemUpdate extends PacketEE {
         this.updateType = updateType;
     }
 
+    @Override
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeByte(slot);
         data.writeByte(updateType);
     }
 
+    @Override
     public void readData(DataInputStream data) throws IOException {
 
-        this.slot = data.readByte();
-        this.updateType = data.readByte();
+        slot = data.readByte();
+        updateType = data.readByte();
     }
 
+    @Override
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;

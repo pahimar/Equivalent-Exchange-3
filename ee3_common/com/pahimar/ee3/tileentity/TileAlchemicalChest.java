@@ -10,6 +10,15 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TileAlchemicalChest
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TileAlchemicalChest extends TileEE implements IInventory {
 
     /** The current angle of the chest lid (between 0 and 1) */
@@ -23,7 +32,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     /** Server sync counter (once per 20 ticks) */
     private int ticksSinceSync;
-    
+
     private final int INVENTORY_SIZE = 13 * 4;
 
     /**
@@ -34,19 +43,20 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
     public TileAlchemicalChest() {
 
+        super();
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
     @Override
     public int getSizeInventory() {
 
-        return this.inventory.length;
+        return inventory.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
 
-        return this.inventory[slot];
+        return inventory[slot];
     }
 
     @Override
@@ -71,20 +81,19 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
 
-        if (this.inventory[slot] != null) {
-            ItemStack itemStack = this.inventory[slot];
-            this.inventory[slot] = null;
+        if (inventory[slot] != null) {
+            ItemStack itemStack = inventory[slot];
+            inventory[slot] = null;
             return itemStack;
         }
-        else {
+        else
             return null;
-        }
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
-        this.inventory[slot] = itemStack;
+        inventory[slot] = itemStack;
 
         if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
             itemStack.stackSize = this.getInventoryStackLimit();
@@ -96,7 +105,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return "container." + Strings.ALCHEMICAL_CHEST_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_CHEST_NAME;
     }
 
     @Override
@@ -110,25 +119,28 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
      * argument, see World.sendClientEvent
      */
     @Override
-    public void receiveClientEvent(int eventID, int numUsingPlayers) {
+    public boolean receiveClientEvent(int eventID, int numUsingPlayers) {
 
         if (eventID == 1) {
             this.numUsingPlayers = numUsingPlayers;
+            return true;
         }
+        else
+            return super.receiveClientEvent(eventID, numUsingPlayers);
     }
 
     @Override
     public void openChest() {
 
-        ++this.numUsingPlayers;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, ModBlocks.alchemicalChest.blockID, 1, this.numUsingPlayers);
+        ++numUsingPlayers;
+        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
     }
 
     @Override
     public void closeChest() {
 
-        --this.numUsingPlayers;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, ModBlocks.alchemicalChest.blockID, 1, this.numUsingPlayers);
+        --numUsingPlayers;
+        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
     }
 
     /**
@@ -141,76 +153,93 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
         super.updateEntity();
 
-        if (++this.ticksSinceSync % 20 * 4 == 0) {
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.enderChest.blockID, 1, this.numUsingPlayers);
+        if (++ticksSinceSync % 20 * 4 == 0) {
+            worldObj.addBlockEvent(xCoord, yCoord, zCoord, Block.enderChest.blockID, 1, numUsingPlayers);
         }
 
-        this.prevLidAngle = this.lidAngle;
+        prevLidAngle = lidAngle;
         float angleIncrement = 0.1F;
         double adjustedXCoord, adjustedZCoord;
 
-        if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F) {
-            adjustedXCoord = (double) this.xCoord + 0.5D;
-            adjustedZCoord = (double) this.zCoord + 0.5D;
-            this.worldObj.playSoundEffect(adjustedXCoord, (double) this.yCoord + 0.5D, adjustedZCoord, Sounds.CHEST_OPEN, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+        if (numUsingPlayers > 0 && lidAngle == 0.0F) {
+            adjustedXCoord = xCoord + 0.5D;
+            adjustedZCoord = zCoord + 0.5D;
+            worldObj.playSoundEffect(adjustedXCoord, yCoord + 0.5D, adjustedZCoord, Sounds.CHEST_OPEN, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
         }
 
-        if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F) {
-            float var8 = this.lidAngle;
+        if (numUsingPlayers == 0 && lidAngle > 0.0F || numUsingPlayers > 0 && lidAngle < 1.0F) {
+            float var8 = lidAngle;
 
-            if (this.numUsingPlayers > 0) {
-                this.lidAngle += angleIncrement;
+            if (numUsingPlayers > 0) {
+                lidAngle += angleIncrement;
             }
             else {
-                this.lidAngle -= angleIncrement;
+                lidAngle -= angleIncrement;
             }
 
-            if (this.lidAngle > 1.0F) {
-                this.lidAngle = 1.0F;
+            if (lidAngle > 1.0F) {
+                lidAngle = 1.0F;
             }
 
-            if (this.lidAngle < 0.5F && var8 >= 0.5F) {
-                adjustedXCoord = (double) this.xCoord + 0.5D;
-                adjustedZCoord = (double) this.zCoord + 0.5D;
-                this.worldObj.playSoundEffect(adjustedXCoord, (double) this.yCoord + 0.5D, adjustedZCoord, Sounds.CHEST_CLOSE, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+            if (lidAngle < 0.5F && var8 >= 0.5F) {
+                adjustedXCoord = xCoord + 0.5D;
+                adjustedZCoord = zCoord + 0.5D;
+                worldObj.playSoundEffect(adjustedXCoord, yCoord + 0.5D, adjustedZCoord, Sounds.CHEST_CLOSE, 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
 
-            if (this.lidAngle < 0.0F) {
-                this.lidAngle = 0.0F;
+            if (lidAngle < 0.0F) {
+                lidAngle = 0.0F;
             }
         }
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
         NBTTagList tagList = nbtTagCompound.getTagList("Items");
-        this.inventory = new ItemStack[this.getSizeInventory()];
+        inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i) {
             NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
             byte slot = tagCompound.getByte("Slot");
-            if (slot >= 0 && slot < this.inventory.length) {
-                this.inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            if (slot >= 0 && slot < inventory.length) {
+                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
 
         super.writeToNBT(nbtTagCompound);
 
         // Write the ItemStacks in the inventory to NBT
         NBTTagList tagList = new NBTTagList();
-        for (int currentIndex = 0; currentIndex < this.inventory.length; ++currentIndex) {
-            if (this.inventory[currentIndex] != null) {
+        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
+            if (inventory[currentIndex] != null) {
                 NBTTagCompound tagCompound = new NBTTagCompound();
                 tagCompound.setByte("Slot", (byte) currentIndex);
-                this.inventory[currentIndex].writeToNBT(tagCompound);
+                inventory[currentIndex].writeToNBT(tagCompound);
                 tagList.appendTag(tagCompound);
             }
         }
         nbtTagCompound.setTag("Items", tagList);
+
+    }
+
+    @Override
+    // public boolean hasCustomName()
+    public boolean func_94042_c() {
+
+        return this.hasCustomName();
+    }
+
+    @Override
+    // public boolean canInsertSide(int i, ItemStack itemStack)
+    public boolean func_94041_b(int side, ItemStack itemStack) {
+
+        return true;
     }
 }

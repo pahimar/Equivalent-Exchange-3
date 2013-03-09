@@ -11,6 +11,15 @@ import com.pahimar.ee3.recipe.RecipesTransmutationStone;
 
 import cpw.mods.fml.common.Loader;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * AddonRedPower2
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class AddonRedPower2 {
 
     public static Block rp2Stone = null;

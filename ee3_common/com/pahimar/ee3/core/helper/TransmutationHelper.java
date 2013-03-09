@@ -3,21 +3,17 @@ package com.pahimar.ee3.core.helper;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemLeaves;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
-import com.pahimar.ee3.lib.Sounds;
 
 /**
- * TransmutationHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for transmutation related things
+ * TransmutationHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -32,7 +28,7 @@ public class TransmutationHelper {
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
         if (Block.blocksList[targetID] != null) {
-            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta);
+            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta, 2);
             return true;
         }
 
@@ -41,12 +37,10 @@ public class TransmutationHelper {
 
     public static String formatTargetBlockInfo(ItemStack targetBlock) {
 
-        if (targetBlock != null) {
+        if (targetBlock != null)
             return TransmutationHelper.targetBlockStack.itemID + ":" + TransmutationHelper.targetBlockStack.getItemDamage();
-        }
-        else {
+        else
             return "";
-        }
     }
 
     public static void updateTargetBlock(World world, int x, int y, int z) {
@@ -80,9 +74,8 @@ public class TransmutationHelper {
 
         ItemStack nextStack = null;
 
-        if (list != null) {
+        if (list != null)
             return getNextBlock(id, meta, id, meta);
-        }
         return nextStack;
     }
 
@@ -102,16 +95,13 @@ public class TransmutationHelper {
              * a next block so return the original. This is the "base case" for
              * the recursion.
              */
-            if ((nextStack.itemID == origId) && (nextStack.getItemDamage() == origMeta)) {
+            if (nextStack.itemID == origId && nextStack.getItemDamage() == origMeta)
                 return nextStack;
-            }
             else {
-                if (nextStack.getItem() instanceof ItemBlock) {
+                if (nextStack.getItem() instanceof ItemBlock)
                     return nextStack;
-                }
-                else {
+                else
                     return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta);
-                }
             }
         }
 
@@ -119,18 +109,18 @@ public class TransmutationHelper {
         return nextStack;
     }
 
-	public static ItemStack getPreviousBlock(int itemID, int meta) {
+    public static ItemStack getPreviousBlock(int itemID, int meta) {
+
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(itemID, meta);
 
         ItemStack prevStack = null;
 
-        if (list != null) {
+        if (list != null)
             return getPreviousBlock(itemID, meta, itemID, meta);
-        }
         return prevStack;
-	}
-	
-	private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta) {
+    }
+
+    private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta) {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
 
@@ -139,16 +129,13 @@ public class TransmutationHelper {
             prevStack = EquivalencyHandler.instance().getPrevInList(id, meta);
             prevStack.stackSize = 1;
 
-            if ((prevStack.itemID == origId) && (prevStack.getItemDamage() == origMeta)) {
+            if (prevStack.itemID == origId && prevStack.getItemDamage() == origMeta)
                 return prevStack;
-            }
             else {
-                if (prevStack.getItem() instanceof ItemBlock) {
+                if (prevStack.getItem() instanceof ItemBlock)
                     return prevStack;
-                }
-                else {
+                else
                     return getPreviousBlock(prevStack.itemID, prevStack.getItemDamage(), origId, origMeta);
-                }
             }
         }
 

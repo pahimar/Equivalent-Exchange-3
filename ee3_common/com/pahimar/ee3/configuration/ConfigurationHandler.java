@@ -16,9 +16,9 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.FMLLog;
 
 /**
- * ConfigurationManager
+ * Equivalent-Exchange-3
  * 
- * Loads in configuration data from disk
+ * ConfigurationHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -27,7 +27,7 @@ import cpw.mods.fml.common.FMLLog;
 public class ConfigurationHandler {
 
     public static Configuration configuration;
-    
+
     public static final String CATEGORY_KEYBIND = "keybindings";
     public static final String CATEGORY_GRAPHICS = "graphics";
     public static final String CATEGORY_AUDIO = "audio";
@@ -45,15 +45,15 @@ public class ConfigurationHandler {
 
             /* General configs */
             ConfigurationSettings.DISPLAY_VERSION_RESULT = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT).getBoolean(ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT);
-            ConfigurationSettings.LAST_DISCOVERED_VERSION = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_DEFAULT).value;
+            ConfigurationSettings.LAST_DISCOVERED_VERSION = configuration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_DEFAULT).getString();
 
             /* Graphic configs */
             ConfigurationSettings.ENABLE_PARTICLE_FX = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
             ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT);
             ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT).getInt(ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT);
             try {
-                ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT).value);
-                
+                ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT).getString());
+
                 if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE <= 0F) {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT;
                 }
@@ -62,18 +62,18 @@ public class ConfigurationHandler {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT;
             }
             try {
-                ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT).value);
-                
-                if ((ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F) || (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F)) {
+                ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = Float.parseFloat(configuration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT).getString());
+
+                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F || ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F) {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
                 }
             }
             catch (Exception e) {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
             }
-            
+
             /* Audio configs */
-            ConfigurationSettings.ENABLE_SOUNDS = configuration.get(CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).value;
+            ConfigurationSettings.ENABLE_SOUNDS = configuration.get(CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getString();
 
             /* Block configs */
             BlockIds.CALCINATOR = configuration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
@@ -95,9 +95,9 @@ public class ConfigurationHandler {
             ItemIds.MINIUM_SHARD = configuration.getItem(Strings.MINIUM_SHARD_NAME, ItemIds.MINIUM_SHARD_DEFAULT).getInt(ItemIds.MINIUM_SHARD_DEFAULT);
             ItemIds.INERT_STONE = configuration.getItem(Strings.INERT_STONE_NAME, ItemIds.INERT_STONE_DEFAULT).getInt(ItemIds.INERT_STONE_DEFAULT);
             ItemIds.MINIUM_STONE = configuration.getItem(Strings.MINIUM_STONE_NAME, ItemIds.MINIUM_STONE_DEFAULT).getInt(ItemIds.MINIUM_STONE_DEFAULT);
-            ItemIds.PHILOSOPHER_STONE = configuration.getItem(Strings.PHILOSOPHER_STONE_NAME, ItemIds.PHILOSOPHER_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHER_STONE_DEFAULT);
-            ItemIds.ALCHEMY_DUST = configuration.getItem(Strings.ALCHEMY_DUST_NAME, ItemIds.ALCHEMY_DUST_DEFAULT).getInt(ItemIds.ALCHEMY_DUST_DEFAULT);
-            ItemIds.ALCHEMY_BAG = configuration.getItem(Strings.ALCHEMY_BAG_NAME, ItemIds.ALCHEMY_BAG_DEFAULT).getInt(ItemIds.ALCHEMY_BAG_DEFAULT);
+            ItemIds.PHILOSOPHERS_STONE = configuration.getItem(Strings.PHILOSOPHERS_STONE_NAME, ItemIds.PHILOSOPHERS_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHERS_STONE_DEFAULT);
+            ItemIds.ALCHEMICAL_DUST = configuration.getItem(Strings.ALCHEMICAL_DUST_NAME, ItemIds.ALCHEMICAL_DUST_DEFAULT).getInt(ItemIds.ALCHEMICAL_DUST_DEFAULT);
+            ItemIds.ALCHEMICAL_BAG = configuration.getItem(Strings.ALCHEMICAL_BAG_NAME, ItemIds.ALCHEMICAL_BAG_DEFAULT).getInt(ItemIds.ALCHEMICAL_BAG_DEFAULT);
 
             /* Item durability configs */
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = configuration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);
@@ -122,13 +122,13 @@ public class ConfigurationHandler {
             configuration.save();
         }
     }
-    
+
     public static void set(String categoryName, String propertyName, String newValue) {
-        
+
         configuration.load();
-        if (configuration.categories.containsKey(categoryName)) {
-            if (configuration.categories.get(categoryName).containsKey(propertyName)) {
-                configuration.categories.get(categoryName).get(propertyName).value = newValue;
+        if (configuration.getCategoryNames().contains(categoryName)) {
+            if (configuration.getCategory(categoryName).containsKey(propertyName)) {
+                configuration.getCategory(categoryName).get(propertyName).set(newValue);
             }
         }
         configuration.save();

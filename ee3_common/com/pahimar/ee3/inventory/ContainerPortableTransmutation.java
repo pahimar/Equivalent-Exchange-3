@@ -1,13 +1,22 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.lib.Strings;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.lib.Strings;
+
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ContainerPortableTransmutation
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ContainerPortableTransmutation extends Container {
 
     @Override

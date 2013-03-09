@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * Reference
+ * Equivalent-Exchange-3
  * 
- * General purpose library to contain mod related constants
+ * Reference
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

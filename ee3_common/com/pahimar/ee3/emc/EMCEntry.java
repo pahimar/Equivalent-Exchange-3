@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * EMCEntry
+ * Equivalent-Exchange-3
  * 
- * Holds the breakdown of how much, and what kinds, of EMC an object has
+ * EMCEntry
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -65,9 +65,8 @@ public class EMCEntry {
     public float getEMCBreakdownByType(EMCType emcType) {
 
         if (breakdown.containsKey(emcType)) {
-            if (breakdown.get(emcType) != null) {
+            if (breakdown.get(emcType) != null)
                 return breakdown.get(emcType).floatValue();
-            }
         }
 
         return -1F;
@@ -95,7 +94,7 @@ public class EMCEntry {
 
     public void addEMCBreakDown(EMCType emcType, Float breakdownPercentage) {
 
-        if (!(breakdown.containsKey(emcType))) {
+        if (!breakdown.containsKey(emcType)) {
             breakdown.put(emcType, breakdownPercentage);
         }
     }

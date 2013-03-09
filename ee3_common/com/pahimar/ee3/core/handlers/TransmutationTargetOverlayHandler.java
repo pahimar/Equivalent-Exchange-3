@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -23,6 +22,15 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TransmutationTargetOverlayHandler
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class TransmutationTargetOverlayHandler implements ITickHandler {
 
     @Override
@@ -41,7 +49,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
             if (player != null) {
                 currentItemStack = player.inventory.getCurrentItem();
 
-                if ((currentItemStack != null) && (minecraft.inGameHasFocus) && (currentItemStack.getItem() instanceof ITransmutationStone) && (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)) {
+                if (currentItemStack != null && minecraft.inGameHasFocus && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
                     renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
                 }
             }
@@ -51,7 +59,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
     @Override
     public EnumSet<TickType> ticks() {
 
-        return EnumSet.of(TickType.CLIENT, TickType.CLIENTGUI, TickType.RENDER);
+        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
     }
 
     @Override
@@ -65,9 +73,6 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
         float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
         float overlayOpacity = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY;
-
-        MovingObjectPosition rayTrace = minecraft.objectMouseOver;
-        ItemStack currentBlock = null;
 
         GL11.glPushMatrix();
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);
@@ -90,34 +95,34 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
         int hudOverlayY = 0;
         int hudBlockX = 0;
         int hudBlockY = 0;
-        
+
         switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION) {
             case 0: {
                 hudOverlayX = 0;
-                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
+                hudBlockX = (int) (16 * overlayScale / 2 - 8);
                 hudOverlayY = 0;
-                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
+                hudBlockY = (int) (16 * overlayScale / 2 - 8);
                 break;
             }
             case 1: {
-                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
-                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
+                hudOverlayX = (int) (sr.getScaledWidth() - 16 * overlayScale);
+                hudBlockX = (int) (sr.getScaledWidth() - 16 * overlayScale / 2 - 8);
                 hudOverlayY = 0;
-                hudBlockY = (int) ((16 * overlayScale) / 2 - 8);
+                hudBlockY = (int) (16 * overlayScale / 2 - 8);
                 break;
             }
             case 2: {
                 hudOverlayX = 0;
-                hudBlockX = (int) ((16 * overlayScale) / 2 - 8);
-                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
-                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                hudBlockX = (int) (16 * overlayScale / 2 - 8);
+                hudOverlayY = (int) (sr.getScaledHeight() - 16 * overlayScale);
+                hudBlockY = (int) (sr.getScaledHeight() - 16 * overlayScale / 2 - 8);
                 break;
             }
             case 3: {
-                hudOverlayX = (int) (sr.getScaledWidth() - (16 * overlayScale));
-                hudBlockX = (int) (sr.getScaledWidth() - (16 * overlayScale) / 2 - 8);
-                hudOverlayY = (int) (sr.getScaledHeight() - (16 * overlayScale));
-                hudBlockY = (int) (sr.getScaledHeight() - (16 * overlayScale) / 2 - 8);
+                hudOverlayX = (int) (sr.getScaledWidth() - 16 * overlayScale);
+                hudBlockX = (int) (sr.getScaledWidth() - 16 * overlayScale / 2 - 8);
+                hudOverlayY = (int) (sr.getScaledHeight() - 16 * overlayScale);
+                hudBlockY = (int) (sr.getScaledHeight() - 16 * overlayScale / 2 - 8);
                 break;
             }
             default: {
@@ -127,7 +132,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
 
         RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
 
-        if ((TransmutationHelper.targetBlockStack != null) && (TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock)) {
+        if (TransmutationHelper.targetBlockStack != null && TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock) {
             RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
         }
 
