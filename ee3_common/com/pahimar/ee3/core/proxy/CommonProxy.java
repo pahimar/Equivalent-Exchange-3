@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
@@ -85,7 +86,7 @@ public class CommonProxy implements IGuiHandler {
 
     }
 
-    public void handleTileEntityPacket(int x, int y, int z, short state, String player, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String player, String customName) {
 
     }
 

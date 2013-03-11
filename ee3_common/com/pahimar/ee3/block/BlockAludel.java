@@ -40,6 +40,7 @@ public class BlockAludel extends BlockEE {
         this.setUnlocalizedName(Strings.ALUDEL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(5F);
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.66F, 1.0F);
     }
 
     @Override

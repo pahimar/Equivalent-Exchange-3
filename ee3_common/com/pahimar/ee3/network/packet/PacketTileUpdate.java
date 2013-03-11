@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketTileUpdate extends PacketEE {
 
     public int x, y, z;
+    public byte orientation;
     public short state;
     public String owner;
     public String customName;
@@ -32,12 +34,13 @@ public class PacketTileUpdate extends PacketEE {
         super(PacketTypeHandler.TILE, true);
     }
 
-    public PacketTileUpdate(int x, int y, int z, short state, String owner, String customName) {
+    public PacketTileUpdate(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
 
         super(PacketTypeHandler.TILE, true);
         this.x = x;
         this.y = y;
         this.z = z;
+        this.orientation = (byte) orientation.ordinal();
         this.state = state;
         this.owner = owner;
         this.customName = customName;
@@ -49,6 +52,7 @@ public class PacketTileUpdate extends PacketEE {
         data.writeInt(x);
         data.writeInt(y);
         data.writeInt(z);
+        data.writeByte(orientation);
         data.writeShort(state);
         data.writeUTF(owner);
         data.writeUTF(customName);
@@ -60,6 +64,7 @@ public class PacketTileUpdate extends PacketEE {
         x = data.readInt();
         y = data.readInt();
         z = data.readInt();
+        orientation = data.readByte();
         state = data.readShort();
         owner = data.readUTF();
         customName = data.readUTF();
@@ -68,7 +73,7 @@ public class PacketTileUpdate extends PacketEE {
     @Override
     public void execute(INetworkManager manager, Player player) {
 
-        EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, state, owner, customName);
+        EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, owner, customName);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.pahimar.ee3.client.renderer;
 
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -28,7 +29,8 @@ public class ItemAludelRenderer implements IItemRenderer {
 
     public ItemAludelRenderer() {
 
-        aludelModel = new ModelAludel(1 / 16F);
+        //aludelModel = new ModelAludel(1 / 16F);
+        aludelModel = new ModelAludel();
     }
 
     @Override
@@ -48,15 +50,16 @@ public class ItemAludelRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
+                //renderAludel(-0.5F, 0F, -0.5F);
                 renderAludel(-0.5F, 0F, -0.5F);
                 break;
             }
             case EQUIPPED: {
-                renderAludel(0F, 0.4F, 0F);
+                renderAludel(0F, 0.0F, 1F);
                 break;
             }
             case INVENTORY: {
-                renderAludel(1F, 0.65F, 1F);
+                renderAludel(-1.0F, -1.0F, 0.0F);
                 break;
             }
             default:
@@ -69,7 +72,9 @@ public class ItemAludelRenderer implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALUDEL);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
-        aludelModel.render(0.0625F);
+        GL11.glRotatef(-90F, 1F, 0, 0);
+        //aludelModel.render(0.0625F);
+        aludelModel.render(Tessellator.instance, 0.0625F);
         GL11.glPopMatrix(); //end
     }
 }

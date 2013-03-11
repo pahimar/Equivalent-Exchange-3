@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -20,15 +21,32 @@ import com.pahimar.ee3.network.packet.PacketTileUpdate;
  */
 public class TileEE extends TileEntity {
 
+    private ForgeDirection orientation;
     private short state;
     private String owner;
     private String customName;
 
     public TileEE() {
 
+        orientation = ForgeDirection.SOUTH;
         state = 0;
         owner = "";
         customName = "";
+    }
+    
+    public ForgeDirection getOrientation() {
+        
+        return orientation;
+    }
+    
+    public void setOrientation(ForgeDirection orientation) {
+        
+        this.orientation = orientation;
+    }
+    
+    public void setOrientation(int orientation) {
+        
+        this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
     public short getState() {
@@ -81,6 +99,10 @@ public class TileEE extends TileEntity {
 
         super.readFromNBT(nbtTagCompound);
 
+        if (nbtTagCompound.hasKey(Strings.NBT_TE_DIRECTION_KEY)) {
+            orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte(Strings.NBT_TE_DIRECTION_KEY));
+        }
+        
         if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE_KEY)) {
             state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
         }
@@ -99,6 +121,7 @@ public class TileEE extends TileEntity {
 
         super.writeToNBT(nbtTagCompound);
 
+        nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, (byte)orientation.ordinal());
         nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
 
         if (hasOwner()) {
@@ -113,7 +136,7 @@ public class TileEE extends TileEntity {
     @Override
     public Packet getDescriptionPacket() {
 
-        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, state, owner, customName));
+        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, owner, customName));
     }
 
 }

@@ -156,12 +156,13 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void handleTileEntityPacket(int x, int y, int z, short state, String owner, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
 
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (tileEntity instanceof TileEE) {
+                ((TileEE) tileEntity).setOrientation(orientation);
                 ((TileEE) tileEntity).setState(state);
                 ((TileEE) tileEntity).setOwner(owner);
                 ((TileEE) tileEntity).setCustomName(customName);
