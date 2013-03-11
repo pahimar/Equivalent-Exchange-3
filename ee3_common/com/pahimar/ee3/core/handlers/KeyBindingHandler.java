@@ -16,12 +16,11 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
- * KeyBindingHandler
+ * Equivalent-Exchange-3
  * 
- * Client specific handler for handling keybinding related events
+ * KeyBindingHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -75,10 +74,5 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
     public EnumSet<TickType> ticks() {
 
         return EnumSet.of(TickType.CLIENT);
-    }
-
-    private static String getLocalizedKey(String key) {
-
-        return LanguageRegistry.instance().getStringLocalization(key);
     }
 }

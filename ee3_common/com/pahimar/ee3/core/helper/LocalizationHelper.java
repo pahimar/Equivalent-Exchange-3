@@ -1,13 +1,11 @@
 package com.pahimar.ee3.core.helper;
 
-import com.pahimar.ee3.lib.Strings;
-
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
- * LocalizationHelper
+ * Equivalent-Exchange-3
  * 
- * Helper class for looking up localized strings in the Language Registry
+ * LocalizationHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -39,9 +37,9 @@ public class LocalizationHelper {
 
         return fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
     }
-    
+
     public static String getLocalizedString(String key) {
-        
+
         return LanguageRegistry.instance().getStringLocalization(key);
     }
 

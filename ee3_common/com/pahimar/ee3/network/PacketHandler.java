@@ -9,9 +9,9 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
 /**
- * PacketHandler
+ * Equivalent-Exchange-3
  * 
- * Handles the dispatch and receipt of packets for the mod
+ * PacketHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

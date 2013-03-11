@@ -9,9 +9,9 @@ import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.lib.Sounds;
 
 /**
- * SoundHandler
+ * Equivalent-Exchange-3
  * 
- * Client specific handler for sound related events
+ * SoundHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

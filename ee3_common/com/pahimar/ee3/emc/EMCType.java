@@ -1,9 +1,9 @@
 package com.pahimar.ee3.emc;
 
 /**
- * EMCType
+ * Equivalent-Exchange-3
  * 
- * Enum containing the different types of EMC available in the mod
+ * EMCType
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

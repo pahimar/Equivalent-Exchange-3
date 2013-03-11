@@ -3,6 +3,7 @@ package com.pahimar.ee3;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.block.ModBlocks;
@@ -23,6 +24,7 @@ import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
@@ -45,25 +47,22 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * EquivalentExchange3
+ * Equivalent-Exchange-3
  * 
- * Main mod class for the Minecraft mod Equivalent Exchange 3
+ * EquivalentExchange3
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME,
-        version = Reference.VERSION)
-@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true,
-        serverSideRequired = false, packetHandler = PacketHandler.class)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS,
-            serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
@@ -102,8 +101,14 @@ public class EquivalentExchange3 {
         // Register the Sound Handler (Client only)
         proxy.registerSoundHandler();
 
+        // Initialize mod blocks
+        ModBlocks.init();
+
+        // Initialize mod items
+        ModItems.init();
     }
 
+    @SuppressWarnings("unchecked")
     @Init
     public void load(FMLInitializationEvent event) {
 
@@ -131,12 +136,6 @@ public class EquivalentExchange3 {
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
 
-        // Initialize mod blocks
-        ModBlocks.init();
-
-        // Initialize mod items
-        ModItems.init();
-
         // Initialize mod tile entities
         proxy.initTileEntities();
 
@@ -145,6 +144,9 @@ public class EquivalentExchange3 {
 
         // Load the Transmutation Stone recipes
         RecipesTransmutationStone.init();
+
+        // Add in the ability to dye Alchemical Bags
+        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());

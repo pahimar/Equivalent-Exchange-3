@@ -8,6 +8,15 @@ import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * ContainerAlchemicalChest
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class ContainerAlchemicalChest extends Container {
 
     private TileAlchemicalChest tileAlchemicalChest;
@@ -53,29 +62,29 @@ public class ContainerAlchemicalChest extends Container {
     /**
      * Callback for when the crafting gui is closed.
      */
+    @Override
     public void onCraftGuiClosed(EntityPlayer entityPlayer) {
 
         super.onCraftGuiClosed(entityPlayer);
-        this.tileAlchemicalChest.closeChest();
+        tileAlchemicalChest.closeChest();
     }
 
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
 
         ItemStack newItemStack = null;
-        Slot slot = (Slot) this.inventorySlots.get(slotIndex);
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemStack = slot.getStack();
             newItemStack = itemStack.copy();
 
-            if (slotIndex < (CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS)) {
-                if (!this.mergeItemStack(itemStack, (CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS), this.inventorySlots.size(), true)) {
+            if (slotIndex < CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS) {
+                if (!this.mergeItemStack(itemStack, CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS, inventorySlots.size(), true))
                     return null;
-                }
             }
-            else if (!this.mergeItemStack(itemStack, 0, (CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS), false)) {
+            else if (!this.mergeItemStack(itemStack, 0, CHEST_INVENTORY_ROWS * CHEST_INVENTORY_COLUMNS, false))
                 return null;
-            }
 
             if (itemStack.stackSize == 0) {
                 slot.putStack((ItemStack) null);

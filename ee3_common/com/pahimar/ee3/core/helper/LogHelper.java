@@ -8,9 +8,9 @@ import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
 
 /**
- * LogHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for logging to the EE3 logger
+ * LogHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

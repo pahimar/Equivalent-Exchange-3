@@ -10,10 +10,9 @@ import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**
- * ItemPickupHandler
+ * Equivalent-Exchange-3
  * 
- * Listens for item pickup events and executes custom code on receiving these
- * events
+ * ItemEventHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -30,8 +29,8 @@ public class ItemEventHandler {
         else if (NBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
             NBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
         }
-        else if (NBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
-            NBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+        else if (NBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+            NBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
         }
     }
 
@@ -44,8 +43,8 @@ public class ItemEventHandler {
         else if (NBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
             NBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
         }
-        else if (NBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
-            NBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+        else if (NBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+            NBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
         }
     }
 
@@ -59,8 +58,8 @@ public class ItemEventHandler {
             else if (NBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                 NBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
             }
-            else if (NBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN)) {
-                NBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMY_BAG_GUI_OPEN);
+            else if (NBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                NBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
             }
         }
     }

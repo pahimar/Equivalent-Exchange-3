@@ -7,6 +7,15 @@ import com.pahimar.ee3.lib.ItemIds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * CreativeTabEE3
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class CreativeTabEE3 extends CreativeTabs {
 
     public CreativeTabEE3(int par1, String par2Str) {
@@ -14,6 +23,7 @@ public class CreativeTabEE3 extends CreativeTabs {
         super(par1, par2Str);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * the itemID for the item to be displayed on the tab

@@ -7,13 +7,20 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.Player;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * PacketRequestEvent
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketRequestEvent extends PacketEE {
 
     public byte eventType;
@@ -41,6 +48,7 @@ public class PacketRequestEvent extends PacketEE {
         this.data = data;
     }
 
+    @Override
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeByte(eventType);
@@ -54,21 +62,23 @@ public class PacketRequestEvent extends PacketEE {
         data.writeUTF(this.data);
     }
 
+    @Override
     public void readData(DataInputStream data) throws IOException {
 
-        this.eventType = data.readByte();
-        this.originX = data.readInt();
-        this.originY = data.readInt();
-        this.originZ = data.readInt();
-        this.sideHit = data.readByte();
-        this.rangeX = data.readByte();
-        this.rangeY = data.readByte();
-        this.rangeZ = data.readByte();
+        eventType = data.readByte();
+        originX = data.readInt();
+        originY = data.readInt();
+        originZ = data.readInt();
+        sideHit = data.readByte();
+        rangeX = data.readByte();
+        rangeY = data.readByte();
+        rangeZ = data.readByte();
         this.data = data.readUTF();
     }
 
+    @Override
     public void execute(INetworkManager manager, Player player) {
-        
+
         EntityPlayer thePlayer = (EntityPlayer) player;
         WorldTransmutationHandler.handleWorldTransmutation(thePlayer, originX, originY, originZ, rangeX, rangeY, rangeZ, sideHit, data);
     }

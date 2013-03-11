@@ -2,15 +2,23 @@ package com.pahimar.ee3.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.tileentity.TileEE;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
- * BlockEE
+ * Equivalent-Exchange-3
  * 
- * Parent block class for Equivalent Exchange blocks
+ * BlockEE
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -22,14 +30,22 @@ public abstract class BlockEE extends BlockContainer {
 
         super(id, material);
     }
-    
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister iconRegister) {
+
+        field_94336_cN = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+    }
+
     /**
      * Sets the direction of the block when placed
      */
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving) {
-        
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
+
         int direction = 0;
-        int facing = MathHelper.floor_double((double)(entityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
         if (facing == 0) {
             direction = ForgeDirection.NORTH.ordinal();
@@ -44,6 +60,13 @@ public abstract class BlockEE extends BlockContainer {
             direction = ForgeDirection.WEST.ordinal();
         }
 
-        world.setBlockMetadataWithNotify(x, y, z, direction);
+        world.setBlockMetadataWithNotify(x, y, z, direction, 3);
+
+        if (itemStack.hasDisplayName()) {
+            ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+        }
+
+        ((TileEE) world.getBlockTileEntity(x, y, z)).setOwner(entityLiving.getEntityName());
+        ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
     }
 }

@@ -13,6 +13,15 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * GuiPortableTransmutation
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class GuiPortableTransmutation extends GuiContainer {
 
@@ -25,21 +34,21 @@ public class GuiPortableTransmutation extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 
-        // TODO Auto-generated method stub
-        int var4 = this.mc.renderEngine.getTexture(Sprites.GUI_SHEET_LOCATION + "portable_transmutation.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
-        int var5 = (this.width - this.xSize) / 2;
-        int var6 = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
+        //this.mc.renderEngine.bindTexture(Sprites.GUI_PORTABLE_TRANSMUTATION);
+        mc.renderEngine.func_98187_b(Sprites.GUI_PORTABLE_TRANSMUTATION);
+        int var5 = (width - xSize) / 2;
+        int var6 = (height - ySize) / 2;
+        this.drawTexturedModalRect(var5, var6, 0, 0, xSize, ySize);
     }
 
+    @Override
     public void onGuiClosed() {
 
         super.onGuiClosed();
 
-        if (this.mc.thePlayer != null) {
-            for (ItemStack itemStack : this.mc.thePlayer.inventory.mainInventory) {
+        if (mc.thePlayer != null) {
+            for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
                     if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                         NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
@@ -48,5 +57,4 @@ public class GuiPortableTransmutation extends GuiContainer {
             }
         }
     }
-
 }

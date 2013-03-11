@@ -17,32 +17,32 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * ItemMiniumStone
+ * Equivalent-Exchange-3
  * 
- * The "lesser" or "imperfect" Philosophers Stone
+ * ItemMiniumStone
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE
-        implements ITransmutationStone, IKeyBound {
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound {
 
     public ItemMiniumStone(int id) {
 
         super(id);
-        this.setIconCoord(2, 0);
-        this.setItemName(Strings.MINIUM_STONE_NAME);
+        this.setUnlocalizedName(Strings.MINIUM_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }
-    
+
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack) {
 
-        return (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN));
+        return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public EnumRarity getRarity(ItemStack stack) {
 
@@ -84,10 +84,10 @@ public class ItemMiniumStone extends ItemEE
         NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
-    
+
     @Override
     public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack) {
-        
+
         NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }

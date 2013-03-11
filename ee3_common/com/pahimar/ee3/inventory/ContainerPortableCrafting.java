@@ -10,9 +10,9 @@ import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**
- * ContainerPortableCrafting
+ * Equivalent-Exchange-3
  * 
- * Container class for the portable crafting interface
+ * ContainerPortableCrafting
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

@@ -1,6 +1,5 @@
 package com.pahimar.ee3.core.helper;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
@@ -18,11 +17,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
- * VersionHelper
+ * Equivalent-Exchange-3
  * 
- * Contains methods for checking the version of the currently running instance
- * of the mod against a remote version number authority. Meant to help users by
- * notifying them if they are behind the latest published version of the mod
+ * VersionHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -43,6 +40,7 @@ public class VersionHelper implements Runnable {
     public static final byte OUTDATED = 2;
     public static final byte ERROR = 3;
     public static final byte FINAL_ERROR = 4;
+    public static final byte MC_VERSION_NOT_FOUND = 5;
 
     // Var to hold the result of the remote version check, initially set to uninitialized
     private static byte result = UNINITIALIZED;
@@ -70,19 +68,24 @@ public class VersionHelper implements Runnable {
                 remoteVersion = remoteVersionProperty.substring(0, remoteVersionProperty.indexOf("|"));
                 remoteUpdateLocation = remoteVersionProperty.substring(remoteVersionProperty.indexOf("|") + 1);
             }
-            
+
             if (remoteVersion != null) {
                 if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
                     ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
                 }
-                
+
                 if (remoteVersion.equals(Reference.VERSION)) {
                     result = CURRENT;
                     return;
                 }
             }
 
-            result = OUTDATED;
+            if (remoteVersionProperty == null) {
+                result = MC_VERSION_NOT_FOUND;
+            }
+            else {
+                result = OUTDATED;
+            }
         }
         catch (Exception e) {
         }
@@ -103,7 +106,7 @@ public class VersionHelper implements Runnable {
 
     public static void logResult() {
 
-        if ((result == CURRENT) || (result == OUTDATED)) {
+        if (result == CURRENT || result == OUTDATED) {
             LogHelper.log(Level.INFO, getResultMessage());
         }
         else {
@@ -113,16 +116,15 @@ public class VersionHelper implements Runnable {
 
     public static String getResultMessage() {
 
-        if (result == UNINITIALIZED) {
+        if (result == UNINITIALIZED)
             return LanguageRegistry.instance().getStringLocalization(Strings.UNINITIALIZED_MESSAGE);
-        }
         else if (result == CURRENT) {
             String returnString = LanguageRegistry.instance().getStringLocalization(Strings.CURRENT_MESSAGE);
             returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
             returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
             return returnString;
         }
-        else if ((result == OUTDATED) && (remoteVersion != null) && (remoteUpdateLocation != null)) {
+        else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
             String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
             returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
             returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
@@ -130,14 +132,27 @@ public class VersionHelper implements Runnable {
             returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
             return returnString;
         }
-        else if (result == ERROR) {
-            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
+        else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
+            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
+            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
+            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
+            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+            returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
+            return returnString;
         }
-        else if (result == FINAL_ERROR) {
+        else if (result == ERROR)
+            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
+        else if (result == FINAL_ERROR)
             return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
+        else if (result == MC_VERSION_NOT_FOUND) {
+            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.MC_VERSION_NOT_FOUND);
+            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
+            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
+            return returnString;
         }
         else {
-            return null;
+            result = ERROR;
+            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
         }
     }
 
@@ -150,8 +165,9 @@ public class VersionHelper implements Runnable {
         returnString = returnString.replace("@MOD_UPDATE_LOCATION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
         return returnString;
     }
-    
+
     public static byte getResult() {
+
         return result;
     }
 
@@ -163,17 +179,17 @@ public class VersionHelper implements Runnable {
         LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
 
         try {
-            while ((count < Reference.VERSION_CHECK_ATTEMPTS) && ((result == UNINITIALIZED) || (result == ERROR))) {
+            while (count < Reference.VERSION_CHECK_ATTEMPTS && (result == UNINITIALIZED || result == ERROR)) {
 
                 checkVersion();
                 count++;
                 logResult();
 
-                if ((result == UNINITIALIZED) || (result == ERROR)) {
+                if (result == UNINITIALIZED || result == ERROR) {
                     Thread.sleep(10000);
                 }
             }
-            
+
             if (result == ERROR) {
                 result = FINAL_ERROR;
                 logResult();

@@ -4,9 +4,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * NBTHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for manipulating NBT data on ItemStacks
+ * NBTHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -30,9 +30,8 @@ public class NBTHelper {
 
     public static boolean hasTag(ItemStack itemStack, String keyName) {
 
-        if (itemStack.stackTagCompound != null) {
+        if (itemStack.stackTagCompound != null)
             return itemStack.stackTagCompound.hasKey(keyName);
-        }
 
         return false;
     }

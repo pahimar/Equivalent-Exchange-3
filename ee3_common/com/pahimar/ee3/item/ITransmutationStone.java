@@ -5,10 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
- * ITransmutationStone
+ * Equivalent-Exchange-3
  * 
- * Transmutation Stone interface, for use amongst all different kinds of
- * transmutation stones
+ * ITransmutationStone
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -17,7 +16,7 @@ import net.minecraft.world.World;
 public interface ITransmutationStone {
 
     public abstract void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack);
-    
+
     public abstract void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack);
 
     public abstract void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit);

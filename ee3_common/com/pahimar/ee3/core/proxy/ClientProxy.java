@@ -24,6 +24,7 @@ import static com.pahimar.ee3.lib.CustomItemRarity.UNCOMMON;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -35,8 +36,6 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
@@ -49,12 +48,12 @@ import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileEE;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -65,9 +64,9 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 /**
- * ClientProxy
+ * Equivalent-Exchange-3
  * 
- * Client specific functionality that cannot be put into CommonProxy
+ * ClientProxy
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -135,12 +134,6 @@ public class ClientProxy extends CommonProxy {
         RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET);
-        MinecraftForgeClient.preloadTexture(Sprites.SPRITE_SHEET_LOCATION + Sprites.ITEM_SPRITE_SHEET);
-
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFX());
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRedWaterFlowFX());
-
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
@@ -160,6 +153,21 @@ public class ClientProxy extends CommonProxy {
     public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data) {
 
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
+    }
+
+    @Override
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
+
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (tileEntity instanceof TileEE) {
+                ((TileEE) tileEntity).setOrientation(orientation);
+                ((TileEE) tileEntity).setState(state);
+                ((TileEE) tileEntity).setOwner(owner);
+                ((TileEE) tileEntity).setCustomName(customName);
+            }
+        }
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * BlockIds
+ * Equivalent-Exchange-3
  * 
- * Library containing the default values for mod related Block ids
+ * BlockIds
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

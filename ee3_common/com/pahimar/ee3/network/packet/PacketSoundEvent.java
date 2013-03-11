@@ -14,6 +14,15 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.Player;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * PacketSoundEvent
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 public class PacketSoundEvent extends PacketEE {
 
     public String playerName;
@@ -38,6 +47,7 @@ public class PacketSoundEvent extends PacketEE {
         this.pitch = pitch;
     }
 
+    @Override
     public void writeData(DataOutputStream data) throws IOException {
 
         data.writeUTF(playerName);
@@ -49,17 +59,19 @@ public class PacketSoundEvent extends PacketEE {
         data.writeFloat(pitch);
     }
 
+    @Override
     public void readData(DataInputStream data) throws IOException {
 
-        this.playerName = data.readUTF();
-        this.soundName = data.readUTF();
-        this.x = data.readDouble();
-        this.y = data.readDouble();
-        this.z = data.readDouble();
-        this.volume = data.readFloat();
-        this.pitch = data.readFloat();
+        playerName = data.readUTF();
+        soundName = data.readUTF();
+        x = data.readDouble();
+        y = data.readDouble();
+        z = data.readDouble();
+        volume = data.readFloat();
+        pitch = data.readFloat();
     }
 
+    @Override
     public void execute(INetworkManager manager, Player player) {
 
         EntityPlayer thePlayer = (EntityPlayer) player;

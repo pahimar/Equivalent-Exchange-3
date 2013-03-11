@@ -9,17 +9,28 @@ import com.pahimar.ee3.tileentity.TileAludel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Equivalent-Exchange-3
+ * 
+ * TileEntityAludelRenderer
+ * 
+ * @author pahimar
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * 
+ */
 @SideOnly(Side.CLIENT)
 public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 
     static final float scale = (float) (1.0 / 16.0);
 
-    private ModelAludel modelAludel = new ModelAludel(scale);
+    //private ModelAludel modelAludel = new ModelAludel(scale);
+    private ModelAludel modelAludelObj = new ModelAludel();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
 
-        modelAludel.render((TileAludel) tileEntity, x, y, z);
+        //modelAludel.render((TileAludel) tileEntity, x, y, z);
+        modelAludelObj.render((TileAludel) tileEntity, x, y, z);
     }
 
 }

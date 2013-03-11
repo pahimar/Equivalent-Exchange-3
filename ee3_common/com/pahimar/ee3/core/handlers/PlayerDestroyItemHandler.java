@@ -4,10 +4,9 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 
 /**
- * PlayerDestroyItemHandler
+ * Equivalent-Exchange-3
  * 
- * Class containing all EE3 custom event related logic for PlayerDestroyItem
- * events
+ * PlayerDestroyItemHandler
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

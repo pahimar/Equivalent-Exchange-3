@@ -1,9 +1,9 @@
 package com.pahimar.ee3.lib;
 
 /**
- * CustomItemRarity
+ * Equivalent-Exchange-3
  * 
- * Library containing references to custom colour codes for item rarity
+ * CustomItemRarity
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)

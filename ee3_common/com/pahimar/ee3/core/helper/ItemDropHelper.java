@@ -6,9 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.pahimar.ee3.item.ModItems;
 
 /**
- * ItemDropHelper
+ * Equivalent-Exchange-3
  * 
- * Helper methods for dropping items in game
+ * ItemDropHelper
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
