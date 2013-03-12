@@ -35,14 +35,14 @@ public class ModelCalcinator extends ModelBase {
 
     public ModelCalcinator() {
 
-        this.scale = 1F;
-        this.modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
+        scale = 1F;
+        modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
     }
 
     public ModelCalcinator(float scale) {
 
         this.scale = scale;
-        this.modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
+        modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
     }
 
     public void render(Tessellator tessellator, float scale) {
@@ -53,27 +53,27 @@ public class ModelCalcinator extends ModelBase {
                     if (group.getFaces().size() != 0) {
                         for (Face face : group.getFaces()) {
                             tessellator.startDrawing(GL11.GL_TRIANGLES);
-    
+
                             float sumU = 0F;
                             float sumV = 0F;
-    
+
                             for (int i = 0; i < face.getTextures().length; ++i) {
                                 sumU += face.getTextures()[i].getU();
                                 sumV += face.getTextures()[i].getV();
                             }
-    
+
                             for (int i = 0; i < 3; ++i) {
                                 float offsetU = Reference.MODEL_TEXTURE_OFFSET;
                                 float offsetV = Reference.MODEL_TEXTURE_OFFSET;
-                                if (face.getTextures()[i].getU() > (sumU / face.getTextures().length)) {
+                                if (face.getTextures()[i].getU() > sumU / face.getTextures().length) {
                                     offsetU = -offsetU;
                                 }
-                                if (face.getTextures()[i].getV() > (sumV / face.getTextures().length)) {
+                                if (face.getTextures()[i].getV() > sumV / face.getTextures().length) {
                                     offsetV = -offsetV;
                                 }
                                 tessellator.addVertexWithUV(face.getVertices()[i].getX() * scale, face.getVertices()[i].getY() * scale, face.getVertices()[i].getZ() * scale, face.getTextures()[i].getU() + offsetU, face.getTextures()[i].getV() + offsetV);
                             }
-    
+
                             tessellator.draw();
                         }
                     }
@@ -81,16 +81,16 @@ public class ModelCalcinator extends ModelBase {
             }
         }
     }
-    
+
     public void render(TileCalcinator calcinator, double x, double y, double z) {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glTranslatef((float)x + 0.5F, (float)y + 0.0F, (float)z + 1.2F);
+        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
         GL11.glRotatef(45F, 0F, 1F, 0F);
         GL11.glRotatef(-90F, 1F, 0F, 0F);
         FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_CALCINATOR);
-        this.render(Tessellator.instance, this.scale);
+        this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }

@@ -31,47 +31,49 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ModelAludel extends ModelBase {
 
     private float scale;
-    
+
     private WavefrontObject modelAludelOBJ;
 
     public ModelAludel() {
-        this.scale = 1F;
-        this.modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
+
+        scale = 1F;
+        modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
     }
-    
+
     public ModelAludel(float scale) {
+
         this.scale = scale;
-        this.modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
+        modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
     }
-    
+
     public void render(Tessellator tessellator, float scale) {
-        
+
         if (modelAludelOBJ.getGroups().size() != 0) {
             for (Group group : modelAludelOBJ.getGroups()) {
                 if (group.getFaces().size() != 0) {
                     for (Face face : group.getFaces()) {
                         tessellator.startDrawing(GL11.GL_TRIANGLES);
-                        
+
                         float sumU = 0F;
                         float sumV = 0F;
-                        
+
                         for (int i = 0; i < face.getTextures().length; ++i) {
                             sumU += face.getTextures()[i].getU();
                             sumV += face.getTextures()[i].getV();
                         }
-                        
+
                         for (int i = 0; i < 3; ++i) {
                             float offsetU = Reference.MODEL_TEXTURE_OFFSET;
                             float offsetV = Reference.MODEL_TEXTURE_OFFSET;
-                            if (face.getTextures()[i].getU() > (sumU / face.getTextures().length)) {
+                            if (face.getTextures()[i].getU() > sumU / face.getTextures().length) {
                                 offsetU = -offsetU;
                             }
-                            if (face.getTextures()[i].getV() > (sumV / face.getTextures().length)) {
+                            if (face.getTextures()[i].getV() > sumV / face.getTextures().length) {
                                 offsetV = -offsetV;
                             }
                             tessellator.addVertexWithUV(face.getVertices()[i].getX() * scale, face.getVertices()[i].getY() * scale, face.getVertices()[i].getZ() * scale, face.getTextures()[i].getU() + offsetU, face.getTextures()[i].getV() + offsetV);
                         }
-                        
+
                         tessellator.draw();
                     }
                 }
@@ -85,13 +87,13 @@ public class ModelAludel extends ModelBase {
         GL11.glDisable(GL11.GL_LIGHTING);
         correctRotation(x, y, z, aludel.getOrientation());
         FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALUDEL);
-        this.render(Tessellator.instance, this.scale);
+        this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
-    
-    private void correctRotation(double x, double y, double z, ForgeDirection orientation) { 
-        
+
+    private void correctRotation(double x, double y, double z, ForgeDirection orientation) {
+
         if (orientation == ForgeDirection.NORTH) {
             GL11.glTranslated(x + 1, y, z);
             GL11.glRotatef(180F, 0F, 1F, 0F);

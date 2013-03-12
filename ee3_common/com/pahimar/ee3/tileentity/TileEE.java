@@ -33,19 +33,19 @@ public class TileEE extends TileEntity {
         owner = "";
         customName = "";
     }
-    
+
     public ForgeDirection getOrientation() {
-        
+
         return orientation;
     }
-    
+
     public void setOrientation(ForgeDirection orientation) {
-        
+
         this.orientation = orientation;
     }
-    
+
     public void setOrientation(int orientation) {
-        
+
         this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
@@ -102,7 +102,7 @@ public class TileEE extends TileEntity {
         if (nbtTagCompound.hasKey(Strings.NBT_TE_DIRECTION_KEY)) {
             orientation = ForgeDirection.getOrientation(nbtTagCompound.getByte(Strings.NBT_TE_DIRECTION_KEY));
         }
-        
+
         if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE_KEY)) {
             state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
         }
@@ -121,7 +121,7 @@ public class TileEE extends TileEntity {
 
         super.writeToNBT(nbtTagCompound);
 
-        nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, (byte)orientation.ordinal());
+        nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, (byte) orientation.ordinal());
         nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
 
         if (hasOwner()) {
