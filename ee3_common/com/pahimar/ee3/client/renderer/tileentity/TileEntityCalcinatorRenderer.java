@@ -21,9 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
 
-    static final float scale = (float) (1.0 / 16.0);
-
-    private ModelCalcinator modelCalcinator = new ModelCalcinator(scale);
+    private ModelCalcinator modelCalcinator = new ModelCalcinator();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {

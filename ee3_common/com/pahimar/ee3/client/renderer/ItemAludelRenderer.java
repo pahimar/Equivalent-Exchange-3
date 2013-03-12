@@ -29,7 +29,6 @@ public class ItemAludelRenderer implements IItemRenderer {
 
     public ItemAludelRenderer() {
 
-        //aludelModel = new ModelAludel(1 / 16F);
         aludelModel = new ModelAludel();
     }
 
@@ -48,18 +47,21 @@ public class ItemAludelRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
+        float scale;
         switch (type) {
             case ENTITY: {
-                //renderAludel(-0.5F, 0F, -0.5F);
-                renderAludel(-0.5F, 0F, -0.5F);
+                scale = 0.66F;
+                renderAludel(-0.5F * scale, 0.0F * scale, 0.5F * scale, scale);
                 break;
             }
             case EQUIPPED: {
-                renderAludel(0F, 0.0F, 1F);
+                scale = 0.66F;
+                renderAludel(0.5F * scale, 0.0F * scale, 1.25F * scale, scale);
                 break;
             }
             case INVENTORY: {
-                renderAludel(-1.0F, -1.0F, 0.0F);
+                scale = 0.85F;
+                renderAludel(-1.0F * scale, -1.2F * scale, 0.0F * scale, scale);
                 break;
             }
             default:
@@ -67,14 +69,15 @@ public class ItemAludelRenderer implements IItemRenderer {
         }
     }
 
-    private void renderAludel(float x, float y, float z) {
+    private void renderAludel(float x, float y, float z, float scale) {
 
         FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALUDEL);
         GL11.glPushMatrix(); //start
+        GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glTranslatef(x, y, z); //size
         GL11.glRotatef(-90F, 1F, 0, 0);
-        //aludelModel.render(0.0625F);
-        aludelModel.render(Tessellator.instance, 0.0625F);
+        aludelModel.render(Tessellator.instance, scale);
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix(); //end
     }
 }

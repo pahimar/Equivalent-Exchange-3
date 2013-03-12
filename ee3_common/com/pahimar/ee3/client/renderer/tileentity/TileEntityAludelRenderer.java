@@ -21,16 +21,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 
-    static final float scale = (float) (1.0 / 16.0);
-
-    //private ModelAludel modelAludel = new ModelAludel(scale);
-    private ModelAludel modelAludelObj = new ModelAludel();
+    private ModelAludel modelAludel = new ModelAludel();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
 
-        //modelAludel.render((TileAludel) tileEntity, x, y, z);
-        modelAludelObj.render((TileAludel) tileEntity, x, y, z);
+        modelAludel.render((TileAludel) tileEntity, x, y, z);
     }
 
 }
