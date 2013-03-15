@@ -94,7 +94,7 @@ public class FaceParser extends LineParser {
             currentValue = Integer.parseInt(rawFaces[2]);
 
             nindices[i - 1] = currentValue - 1;
-            normals[i - 1] = object.getNormals().get(currentValue - 1); // -1 because references starts at 1
+            normals[i - 1] = object.getVertexNormals().get(currentValue - 1); // -1 because references starts at 1
         }
         //System.out.println("");
     }
@@ -124,23 +124,23 @@ public class FaceParser extends LineParser {
             group.vertices.add(vertices[0]);
             group.vertices.add(vertices[1]);
             group.vertices.add(vertices[2]);
-            group.normals.add(normals[0]);
-            group.normals.add(normals[1]);
-            group.normals.add(normals[2]);
-            group.texcoords.add(textures[0]);
-            group.texcoords.add(textures[1]);
-            group.texcoords.add(textures[2]);
+            group.vertexNormals.add(normals[0]);
+            group.vertexNormals.add(normals[1]);
+            group.vertexNormals.add(normals[2]);
+            group.textureCoordinates.add(textures[0]);
+            group.textureCoordinates.add(textures[1]);
+            group.textureCoordinates.add(textures[2]);
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++); // create index list for current object
 
-            face.vertIndices = vindices;
-            face.normIndices = nindices;
-            face.texIndices = tindices;
-            face.setNormals(normals);
-            face.setNormals(normals);
+            face.vertexIndices = vindices;
+            face.vertexNormalIndices = nindices;
+            face.textureCoordinateIndices = tindices;
+            face.setVertexNormals(normals);
+            face.setVertexNormals(normals);
             face.setVertices(vertices);
-            face.setTextures(textures);
+            face.setTextureCoordinates(textures);
 
             wavefrontObject.getCurrentGroup().addFace(face);
         }
@@ -151,26 +151,26 @@ public class FaceParser extends LineParser {
             group.vertices.add(vertices[1]);
             group.vertices.add(vertices[2]);
             group.vertices.add(vertices[3]);
-            group.normals.add(normals[0]);
-            group.normals.add(normals[1]);
-            group.normals.add(normals[2]);
-            group.normals.add(normals[3]);
-            group.texcoords.add(textures[0]);
-            group.texcoords.add(textures[1]);
-            group.texcoords.add(textures[2]);
-            group.texcoords.add(textures[3]);
+            group.vertexNormals.add(normals[0]);
+            group.vertexNormals.add(normals[1]);
+            group.vertexNormals.add(normals[2]);
+            group.vertexNormals.add(normals[3]);
+            group.textureCoordinates.add(textures[0]);
+            group.textureCoordinates.add(textures[1]);
+            group.textureCoordinates.add(textures[2]);
+            group.textureCoordinates.add(textures[3]);
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++); // create index list for current object
 
-            face.vertIndices = vindices;
-            face.normIndices = nindices;
-            face.texIndices = tindices;
-            face.setNormals(normals);
-            face.setNormals(normals);
+            face.vertexIndices = vindices;
+            face.vertexNormalIndices = nindices;
+            face.textureCoordinateIndices = tindices;
+            face.setVertexNormals(normals);
+            face.setVertexNormals(normals);
             face.setVertices(vertices);
-            face.setTextures(textures);
+            face.setTextureCoordinates(textures);
 
             wavefrontObject.getCurrentGroup().addFace(face);
         }

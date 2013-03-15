@@ -14,8 +14,8 @@ public class Group {
 
     public ArrayList<Integer> indices = new ArrayList<Integer>();
     public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-    public ArrayList<Vertex> normals = new ArrayList<Vertex>();
-    public ArrayList<TextureCoordinate> texcoords = new ArrayList<TextureCoordinate>();
+    public ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
+    public ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
     public int indexCount;
 
     public Group(String name) {
@@ -40,14 +40,14 @@ public class Group {
             currentFace = faces.get(i);
             for (int j = 0; j < currentFace.getVertices().length; j++) {
                 currentVertex = currentFace.getVertices()[j];
-                if (Math.abs(currentVertex.getX()) > minX) {
-                    minX = Math.abs(currentVertex.getX());
+                if (Math.abs(currentVertex.x) > minX) {
+                    minX = Math.abs(currentVertex.x);
                 }
-                if (Math.abs(currentVertex.getY()) > minY) {
-                    minY = Math.abs(currentVertex.getY());
+                if (Math.abs(currentVertex.y) > minY) {
+                    minY = Math.abs(currentVertex.y);
                 }
-                if (Math.abs(currentVertex.getZ()) > minZ) {
-                    minZ = Math.abs(currentVertex.getZ());
+                if (Math.abs(currentVertex.z) > minZ) {
+                    minZ = Math.abs(currentVertex.z);
                 }
             }
         }

@@ -11,8 +11,6 @@ public class NormalParser extends LineParser {
     Vertex vertex = null;
 
     public NormalParser() {
-
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -21,9 +19,9 @@ public class NormalParser extends LineParser {
         vertex = new Vertex();
 
         try {
-            vertex.setX(Float.parseFloat(words[1]));
-            vertex.setY(Float.parseFloat(words[2]));
-            vertex.setZ(Float.parseFloat(words[3]));
+            vertex.x = (Float.parseFloat(words[1]));
+            vertex.y = (Float.parseFloat(words[2]));
+            vertex.z = (Float.parseFloat(words[3]));
         }
         catch (Exception e) {
             throw new RuntimeException("NormalParser Error");
@@ -34,8 +32,6 @@ public class NormalParser extends LineParser {
     @Override
     public void incoporateResults(WavefrontObject wavefrontObject) {
 
-        wavefrontObject.getNormals().add(vertex);
-
+        wavefrontObject.getVertexNormals().add(vertex);
     }
-
 }

@@ -6,18 +6,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class Face {
 
-    public int[] vertIndices;
-    public int[] normIndices;
-    public int[] texIndices;
+    public int[] vertexIndices;
+    public int[] vertexNormalIndices;
+    public int[] textureCoordinateIndices;
+    
     private Vertex[] vertices;
-    private Vertex[] normals;
-    private TextureCoordinate[] textures;
+    private Vertex[] vertexNormals;
+    private TextureCoordinate[] textureCoordinates;
 
     private int glDrawingMode;
 
-    public int[] getIndices() {
+    public int[] getVertexIndices() {
 
-        return vertIndices;
+        return vertexIndices;
     }
 
     public Vertex[] getVertices() {
@@ -25,9 +26,9 @@ public class Face {
         return vertices;
     }
 
-    public void setIndices(int[] indices) {
+    public void setVertexIndices(int[] vertexIndices) {
 
-        vertIndices = indices;
+        this.vertexIndices = vertexIndices;
     }
 
     public void setVertices(Vertex[] vertices) {
@@ -45,23 +46,23 @@ public class Face {
         this.glDrawingMode = glDrawingMode;
     }
 
-    public Vertex[] getNormals() {
+    public Vertex[] getVertexNormals() {
 
-        return normals;
+        return vertexNormals;
     }
 
-    public void setNormals(Vertex[] normals) {
+    public void setVertexNormals(Vertex[] vertexNormals) {
 
-        this.normals = normals;
+        this.vertexNormals = vertexNormals;
     }
 
-    public TextureCoordinate[] getTextures() {
+    public TextureCoordinate[] getTextureCoordinates() {
 
-        return textures;
+        return textureCoordinates;
     }
 
-    public void setTextures(TextureCoordinate[] textures) {
+    public void setTextureCoordinates(TextureCoordinate[] textureCoordinates) {
 
-        this.textures = textures;
+        this.textureCoordinates = textureCoordinates;
     }
 }

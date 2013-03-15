@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class WavefrontObject {
 
     private ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-    private ArrayList<Vertex> normals = new ArrayList<Vertex>();
+    private ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
     private ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
     private ArrayList<Group> groups = new ArrayList<Group>();
     private Hashtable<String, Group> groupsDirectAccess = new Hashtable<String, Group>();
@@ -68,24 +68,10 @@ public class WavefrontObject {
             this.zScale = zScale;
 
             parse(fileName);
-
-            calculateRadius();
         }
         catch (Exception e) {
             System.out.println("Error, could not load obj:" + fileName);
         }
-    }
-
-    private void calculateRadius() {
-
-        double currentNorm = 0;
-        for (Vertex vertex : vertices) {
-            currentNorm = vertex.norm();
-            if (currentNorm > radius) {
-                radius = currentNorm;
-            }
-        }
-
     }
 
     public void parse(String fileName) {
@@ -128,9 +114,9 @@ public class WavefrontObject {
         }
     }
 
-    public void setTextureCoordinates(ArrayList<TextureCoordinate> textures) {
+    public void setTextureCoordinates(ArrayList<TextureCoordinate> textureCoordinates) {
 
-        textureCoordinates = textures;
+        this.textureCoordinates = textureCoordinates;
     }
 
     public ArrayList<TextureCoordinate> getTextureCoordinates() {
@@ -148,14 +134,14 @@ public class WavefrontObject {
         return vertices;
     }
 
-    public void setNormals(ArrayList<Vertex> normals) {
+    public void setVertexNormals(ArrayList<Vertex> vertexNormals) {
 
-        this.normals = normals;
+        this.vertexNormals = vertexNormals;
     }
 
-    public ArrayList<Vertex> getNormals() {
+    public ArrayList<Vertex> getVertexNormals() {
 
-        return normals;
+        return vertexNormals;
     }
 
     public ArrayList<Group> getGroups() {
@@ -190,25 +176,25 @@ public class WavefrontObject {
         Vertex currentVertex = null;
         for (int i = 0; i < getVertices().size(); i++) {
             currentVertex = getVertices().get(i);
-            if (currentVertex.getX() > maxX) {
-                maxX = currentVertex.getX();
+            if (currentVertex.x > maxX) {
+                maxX = currentVertex.x;
             }
-            if (currentVertex.getX() < minX) {
-                minX = currentVertex.getX();
-            }
-
-            if (currentVertex.getY() > maxY) {
-                maxY = currentVertex.getY();
-            }
-            if (currentVertex.getY() < minY) {
-                minY = currentVertex.getY();
+            if (currentVertex.x < minX) {
+                minX = currentVertex.x;
             }
 
-            if (currentVertex.getZ() > maxZ) {
-                maxZ = currentVertex.getZ();
+            if (currentVertex.y > maxY) {
+                maxY = currentVertex.y;
             }
-            if (currentVertex.getZ() < minZ) {
-                minZ = currentVertex.getZ();
+            if (currentVertex.y < minY) {
+                minY = currentVertex.y;
+            }
+
+            if (currentVertex.z > maxZ) {
+                maxZ = currentVertex.z;
+            }
+            if (currentVertex.z < minZ) {
+                minZ = currentVertex.z;
             }
 
         }

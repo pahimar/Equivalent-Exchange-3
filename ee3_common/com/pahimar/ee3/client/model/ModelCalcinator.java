@@ -57,21 +57,21 @@ public class ModelCalcinator extends ModelBase {
                             float sumU = 0F;
                             float sumV = 0F;
 
-                            for (int i = 0; i < face.getTextures().length; ++i) {
-                                sumU += face.getTextures()[i].getU();
-                                sumV += face.getTextures()[i].getV();
+                            for (int i = 0; i < face.getTextureCoordinates().length; ++i) {
+                                sumU += face.getTextureCoordinates()[i].u;
+                                sumV += face.getTextureCoordinates()[i].v;
                             }
 
                             for (int i = 0; i < face.getVertices().length; ++i) {
                                 float offsetU = Reference.MODEL_TEXTURE_OFFSET;
                                 float offsetV = Reference.MODEL_TEXTURE_OFFSET;
-                                if (face.getTextures()[i].getU() > sumU / face.getTextures().length) {
+                                if (face.getTextureCoordinates()[i].u > sumU / face.getTextureCoordinates().length) {
                                     offsetU = -offsetU;
                                 }
-                                if (face.getTextures()[i].getV() > sumV / face.getTextures().length) {
+                                if (face.getTextureCoordinates()[i].v > sumV / face.getTextureCoordinates().length) {
                                     offsetV = -offsetV;
                                 }
-                                tessellator.addVertexWithUV(face.getVertices()[i].getX() * scale, face.getVertices()[i].getY() * scale, face.getVertices()[i].getZ() * scale, face.getTextures()[i].getU() + offsetU, face.getTextures()[i].getV() + offsetV);
+                                tessellator.addVertexWithUV(face.getVertices()[i].x * scale, face.getVertices()[i].y * scale, face.getVertices()[i].z * scale, face.getTextureCoordinates()[i].u + offsetU, face.getTextureCoordinates()[i].v + offsetV);
                             }
 
                             tessellator.draw();
