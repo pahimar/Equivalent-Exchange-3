@@ -4,7 +4,6 @@ import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
 
 /**

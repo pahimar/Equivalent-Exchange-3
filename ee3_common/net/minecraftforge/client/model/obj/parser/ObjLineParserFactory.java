@@ -1,8 +1,8 @@
 package net.minecraftforge.client.model.obj.parser;
 
+import net.minecraftforge.client.model.obj.WavefrontObject;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.client.model.obj.WavefrontObject;
 
 @SideOnly(Side.CLIENT)
 public class ObjLineParserFactory extends LineParserFactory {

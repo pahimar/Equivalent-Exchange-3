@@ -7,8 +7,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.inventory.ContainerCalcinator;
-import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.relauncher.Side;

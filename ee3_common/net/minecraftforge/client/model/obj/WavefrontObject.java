@@ -7,11 +7,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraftforge.client.model.obj.parser.LineParser;
 import net.minecraftforge.client.model.obj.parser.ObjLineParserFactory;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class WavefrontObject {
@@ -107,21 +106,21 @@ public class WavefrontObject {
     }
 
     public void parse(String fileName) {
-        
+
         BufferedReader reader = null;
         InputStream inputStream = null;
-        
+
         parserFactory = new ObjLineParserFactory(this);
-        
+
         try {
             inputStream = this.getClass().getResource(fileName).openStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
-            
+
             String currentLine = null;
             while ((currentLine = reader.readLine()) != null) {
                 parseLine(currentLine);
             }
-            
+
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -148,7 +147,7 @@ public class WavefrontObject {
 
     public void setTextureCoordinates(ArrayList<TextureCoordinate> textures) {
 
-        this.textureCoordinates = textures;
+        textureCoordinates = textures;
     }
 
     public ArrayList<TextureCoordinate> getTextureCoordinates() {

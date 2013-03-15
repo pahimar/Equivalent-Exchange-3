@@ -81,7 +81,7 @@ public class ModelCalcinator extends ModelBase {
             }
         }
     }
-    
+
     public void render(TileCalcinator calcinator, double x, double y, double z) {
 
         GL11.glPushMatrix();
