@@ -1,12 +1,13 @@
 package net.minecraftforge.client.model.obj.parser;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraftforge.client.model.obj.Face;
 import net.minecraftforge.client.model.obj.Group;
 import net.minecraftforge.client.model.obj.TextureCoordinate;
 import net.minecraftforge.client.model.obj.Vertex;
 import net.minecraftforge.client.model.obj.WavefrontObject;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
