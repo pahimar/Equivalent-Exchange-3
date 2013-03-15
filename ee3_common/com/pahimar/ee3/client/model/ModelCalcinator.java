@@ -36,13 +36,13 @@ public class ModelCalcinator extends ModelBase {
     public ModelCalcinator() {
 
         scale = 1F;
-        modelCalcinatorOBJ = new WavefrontObject("/" + Models.CALCINATOR);
+        modelCalcinatorOBJ = new WavefrontObject(Models.CALCINATOR);
     }
 
     public ModelCalcinator(float scale) {
 
         this.scale = scale;
-        modelCalcinatorOBJ = new WavefrontObject("/" + Models.CALCINATOR);
+        modelCalcinatorOBJ = new WavefrontObject(Models.CALCINATOR);
     }
 
     public void render(Tessellator tessellator, float scale) {

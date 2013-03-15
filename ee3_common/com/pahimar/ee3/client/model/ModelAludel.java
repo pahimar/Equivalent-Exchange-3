@@ -37,13 +37,13 @@ public class ModelAludel extends ModelBase {
     public ModelAludel() {
 
         scale = 1F;
-        modelAludelOBJ = new WavefrontObject("/" + Models.ALUDEL);
+        modelAludelOBJ = new WavefrontObject(Models.ALUDEL);
     }
 
     public ModelAludel(float scale) {
 
         this.scale = scale;
-        modelAludelOBJ = new WavefrontObject("/" + Models.ALUDEL);
+        modelAludelOBJ = new WavefrontObject(Models.ALUDEL);
     }
 
     public void render(Tessellator tessellator, float scale) {

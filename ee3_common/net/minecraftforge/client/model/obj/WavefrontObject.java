@@ -136,61 +136,14 @@ public class WavefrontObject {
             }
         }
     }
-    
-    /*
-    public void parse(String fileName) {
-
-        parserFactory = new ObjLineParserFactory(this);
-
-        InputStream fileInput = this.getClass().getResourceAsStream(fileName);
-
-        if (fileInput == null) {
-            try {
-                File file = new File(fileName);
-                if (file.exists()) {
-                    fileInput = new FileInputStream(file);
-                }
-            }
-            catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-
-        BufferedReader in = null;
-
-        if (fileInput != null) {
-            try {
-                in = new BufferedReader(new InputStreamReader(fileInput));
-    
-                String currentLine = null;
-                while ((currentLine = in.readLine()) != null) {
-                    parseLine(currentLine);
-                }
-    
-                if (in != null) {
-                    in.close();
-                }
-    
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException("Error reading file :'" + fileName + "'");
-            }
-        }
-        else {
-            throw new RuntimeException("Error reading file :'" + fileName + "'");
-        }
-    }
-    */
 
     private void parseLine(String currentLine) {
 
-        if ("".equals(currentLine))
-            return;
-        System.out.println(currentLine);
-        LineParser parser = parserFactory.getLineParser(currentLine);
-        parser.parse();
-        parser.incoporateResults(this);
+        if (currentLine.length() > 0) {
+            LineParser parser = parserFactory.getLineParser(currentLine);
+            parser.parse();
+            parser.incoporateResults(this);
+        }
     }
 
     public void setTextureCoordinates(ArrayList<TextureCoordinate> textures) {
