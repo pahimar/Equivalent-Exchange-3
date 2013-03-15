@@ -52,7 +52,7 @@ public class ModelCalcinator extends ModelBase {
                 if (group.getName().equalsIgnoreCase("calcinator")) {
                     if (group.getFaces().size() != 0) {
                         for (Face face : group.getFaces()) {
-                            tessellator.startDrawing(GL11.GL_TRIANGLES);
+                            tessellator.startDrawing(face.getDrawingMode());
 
                             float sumU = 0F;
                             float sumV = 0F;
@@ -62,7 +62,7 @@ public class ModelCalcinator extends ModelBase {
                                 sumV += face.getTextures()[i].getV();
                             }
 
-                            for (int i = 0; i < 3; ++i) {
+                            for (int i = 0; i < face.getVertices().length; ++i) {
                                 float offsetU = Reference.MODEL_TEXTURE_OFFSET;
                                 float offsetV = Reference.MODEL_TEXTURE_OFFSET;
                                 if (face.getTextures()[i].getU() > sumU / face.getTextures().length) {

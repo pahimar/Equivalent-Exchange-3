@@ -1,5 +1,7 @@
 package net.minecraftforge.client.model.obj.parser;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraftforge.client.model.obj.Face;
 import net.minecraftforge.client.model.obj.Group;
 import net.minecraftforge.client.model.obj.TextureCoordinate;
@@ -45,7 +47,7 @@ public class FaceParser extends LineParser {
 
     private void parseTriangles() {
 
-        face.setType(Face.GL_TRIANGLES);
+        face.setDrawingMode(GL11.GL_TRIANGLES);
         parseLine(3);
     }
 
@@ -98,7 +100,7 @@ public class FaceParser extends LineParser {
 
     private void parseQuad() {
 
-        face.setType(Face.GL_QUADS);
+        face.setDrawingMode(GL11.GL_QUADS);
         parseLine(4);
     }
 

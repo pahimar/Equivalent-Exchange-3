@@ -6,9 +6,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class Face {
 
-    public static int GL_TRIANGLES = 1;
-    public static int GL_QUADS = 2;
-
     public int[] vertIndices;
     public int[] normIndices;
     public int[] texIndices;
@@ -16,7 +13,7 @@ public class Face {
     private Vertex[] normals;
     private TextureCoordinate[] textures;
 
-    private int type;
+    private int glDrawingMode;
 
     public int[] getIndices() {
 
@@ -38,14 +35,14 @@ public class Face {
         this.vertices = vertices;
     }
 
-    public int getType() {
+    public int getDrawingMode() {
 
-        return type;
+        return glDrawingMode;
     }
 
-    public void setType(int type) {
+    public void setDrawingMode(int glDrawingMode) {
 
-        this.type = type;
+        this.glDrawingMode = glDrawingMode;
     }
 
     public Vertex[] getNormals() {
