@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.pahimar.ee3.client.renderer.RenderUtils;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.RenderUtils;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Reference;

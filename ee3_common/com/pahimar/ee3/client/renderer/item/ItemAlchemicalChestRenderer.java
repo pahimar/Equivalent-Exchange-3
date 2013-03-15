@@ -1,4 +1,4 @@
-package com.pahimar.ee3.client.renderer;
+package com.pahimar.ee3.client.renderer.item;
 
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.item.ItemStack;
@@ -6,7 +6,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -66,7 +66,7 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
 
     private void renderAlchemicalChest(float x, float y, float z) {
 
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALCHEMICAL_CHEST);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_ALCHEMICAL_CHEST);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         GL11.glRotatef(180, 1, 0, 0);

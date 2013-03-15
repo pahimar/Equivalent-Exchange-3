@@ -4,7 +4,6 @@ import net.minecraft.block.BlockStationary;
 import net.minecraft.block.material.Material;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Sprites;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -26,11 +25,5 @@ public class BlockRedWaterStill extends BlockStationary {
         this.setUnlocalizedName(Strings.RED_WATER_STILL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.disableStats();
-    }
-
-    @Override
-    public String getTextureFile() {
-
-        return Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET;
     }
 }

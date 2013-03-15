@@ -9,18 +9,18 @@ package com.pahimar.ee3.lib;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class Sprites {
+public class Textures {
 
     // Base file pathes
-    public static final String SPRITE_SHEET_LOCATION = "/mods/ee3/textures/items/";
+    public static final String ITEM_TEXTURE_LOCATION = "/mods/ee3/textures/items/";
     public static final String MODEL_SHEET_LOCATION = "/mods/ee3/textures/models/";
     public static final String ARMOR_SHEET_LOCATION = "/mods/ee3/textures/armor/";
     public static final String GUI_SHEET_LOCATION = "/mods/ee3/textures/gui/";
     public static final String EFFECTS_LOCATION = "/mods/ee3/textures/effects/";
 
     // Item/Block sprite sheets
-    public static final String ITEM_SPRITE_SHEET = "/gui/items.png";
-    public static final String BLOCK_SPRITE_SHEET = "ee3_blocks.png";
+    public static final String VANILLA_ITEM_TEXTURE_SHEET = "/gui/items.png";
+    public static final String VANILLA_BLOCK_TEXTURE_SHEET = "/terrain.png";
 
     // Armor sprite sheets
 

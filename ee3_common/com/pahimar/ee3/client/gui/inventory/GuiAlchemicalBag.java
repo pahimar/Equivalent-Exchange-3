@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -46,7 +46,7 @@ public class GuiAlchemicalBag extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         //this.mc.renderEngine.bindTexture(Sprites.GUI_ALCHEMICAL_STORAGE);
-        mc.renderEngine.func_98187_b(Sprites.GUI_ALCHEMICAL_STORAGE);
+        mc.renderEngine.func_98187_b(Textures.GUI_ALCHEMICAL_STORAGE);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

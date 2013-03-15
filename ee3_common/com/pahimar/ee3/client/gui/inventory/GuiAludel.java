@@ -7,7 +7,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.inventory.ContainerAludel;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAludel;
 
@@ -49,7 +49,7 @@ public class GuiAludel extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         //this.mc.renderEngine.bindTexture(Sprites.GUI_ALUDEL);
-        mc.renderEngine.func_98187_b(Sprites.GUI_ALUDEL);
+        mc.renderEngine.func_98187_b(Textures.GUI_ALUDEL);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

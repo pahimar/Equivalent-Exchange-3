@@ -33,9 +33,9 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
-import com.pahimar.ee3.client.renderer.ItemAlchemicalChestRenderer;
-import com.pahimar.ee3.client.renderer.ItemAludelRenderer;
-import com.pahimar.ee3.client.renderer.ItemCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;

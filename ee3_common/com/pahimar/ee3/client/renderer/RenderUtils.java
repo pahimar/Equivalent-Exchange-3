@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.client.renderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,7 +11,7 @@ import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 
 /**
  * Equivalent-Exchange-3
@@ -31,7 +31,7 @@ public class RenderUtils {
         RenderBlocks renderBlocks = new RenderBlocks();
 
         Block block = Block.blocksList[stack.itemID];
-        renderEngine.func_98187_b(block.getTextureFile());
+        renderEngine.func_98187_b(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
         GL11.glPushMatrix();
         GL11.glTranslatef(x - 2, y + 3, -3.0F + zLevel);
         GL11.glScalef(10.0F, 10.0F, 10.0F);
@@ -59,7 +59,7 @@ public class RenderUtils {
 
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
-        renderEngine.func_98187_b(Sprites.ITEM_SPRITE_SHEET);
+        renderEngine.func_98187_b(Textures.VANILLA_ITEM_TEXTURE_SHEET);
         int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
         float red = (overlayColour >> 16 & 255) / 255.0F;
         float green = (overlayColour >> 8 & 255) / 255.0F;

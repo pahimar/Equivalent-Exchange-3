@@ -2,16 +2,16 @@ package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraftforge.client.model.obj.Face;
+import net.minecraftforge.client.model.obj.Group;
+import net.minecraftforge.client.model.obj.WavefrontObject;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import com.obj.Face;
-import com.obj.Group;
-import com.obj.WavefrontObject;
 import com.pahimar.ee3.lib.Models;
 import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAludel;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -37,13 +37,13 @@ public class ModelAludel extends ModelBase {
     public ModelAludel() {
 
         scale = 1F;
-        modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
+        modelAludelOBJ = new WavefrontObject("/" + Models.ALUDEL);
     }
 
     public ModelAludel(float scale) {
 
         this.scale = scale;
-        modelAludelOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.ALUDEL).getFile());
+        modelAludelOBJ = new WavefrontObject("/" + Models.ALUDEL);
     }
 
     public void render(Tessellator tessellator, float scale) {
@@ -86,7 +86,7 @@ public class ModelAludel extends ModelBase {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         correctRotation(x, y, z, aludel.getOrientation());
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_ALUDEL);
         this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

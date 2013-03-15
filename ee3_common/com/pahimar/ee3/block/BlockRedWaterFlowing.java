@@ -4,7 +4,7 @@ import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -25,11 +25,5 @@ public class BlockRedWaterFlowing extends BlockFlowing {
         this.setLightOpacity(3);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setUnlocalizedName(Strings.RED_WATER_FLOWING_NAME);
-    }
-
-    @Override
-    public String getTextureFile() {
-
-        return Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET;
     }
 }

@@ -2,15 +2,15 @@ package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraftforge.client.model.obj.Face;
+import net.minecraftforge.client.model.obj.Group;
+import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
 
-import com.obj.Face;
-import com.obj.Group;
-import com.obj.WavefrontObject;
 import com.pahimar.ee3.lib.Models;
 import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -36,13 +36,13 @@ public class ModelCalcinator extends ModelBase {
     public ModelCalcinator() {
 
         scale = 1F;
-        modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
+        modelCalcinatorOBJ = new WavefrontObject("/" + Models.CALCINATOR);
     }
 
     public ModelCalcinator(float scale) {
 
         this.scale = scale;
-        modelCalcinatorOBJ = new WavefrontObject(this.getClass().getResource("/" + Models.CALCINATOR).getFile());
+        modelCalcinatorOBJ = new WavefrontObject("/" + Models.CALCINATOR);
     }
 
     public void render(Tessellator tessellator, float scale) {
@@ -81,7 +81,7 @@ public class ModelCalcinator extends ModelBase {
             }
         }
     }
-
+    
     public void render(TileCalcinator calcinator, double x, double y, double z) {
 
         GL11.glPushMatrix();
@@ -89,7 +89,7 @@ public class ModelCalcinator extends ModelBase {
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
         GL11.glRotatef(45F, 0F, 1F, 0F);
         GL11.glRotatef(-90F, 1F, 0F, 0F);
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Sprites.MODEL_CALCINATOR);
+        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_CALCINATOR);
         this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

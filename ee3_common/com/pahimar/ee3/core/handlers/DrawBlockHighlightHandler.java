@@ -13,7 +13,7 @@ import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 
 /**
  * Equivalent-Exchange-3
@@ -53,7 +53,7 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Sprites.EFFECT_WORLD_TRANSMUTATION);
+        int texture = event.context.renderEngine.getTexture(Textures.EFFECT_WORLD_TRANSMUTATION);
 
         float xScale = 1;
         float yScale = 1;

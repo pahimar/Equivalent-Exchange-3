@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -53,7 +53,7 @@ public class GuiPortableCrafting extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         // this.mc.renderEngine.bindTexture(Sprites.GUI_PORTABLE_CRAFTING);
-        mc.renderEngine.func_98187_b(Sprites.GUI_PORTABLE_CRAFTING);
+        mc.renderEngine.func_98187_b(Textures.GUI_PORTABLE_CRAFTING);
         int var5 = (width - xSize) / 2;
         int var6 = (height - ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, xSize, ySize);
