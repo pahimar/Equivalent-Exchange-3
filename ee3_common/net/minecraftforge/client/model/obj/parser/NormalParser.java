@@ -11,6 +11,7 @@ public class NormalParser extends LineParser {
     Vertex vertex = null;
 
     public NormalParser() {
+
     }
 
     @Override
@@ -19,9 +20,9 @@ public class NormalParser extends LineParser {
         vertex = new Vertex();
 
         try {
-            vertex.x = (Float.parseFloat(words[1]));
-            vertex.y = (Float.parseFloat(words[2]));
-            vertex.z = (Float.parseFloat(words[3]));
+            vertex.x = Float.parseFloat(words[1]);
+            vertex.y = Float.parseFloat(words[2]);
+            vertex.z = Float.parseFloat(words[3]);
         }
         catch (Exception e) {
             throw new RuntimeException("NormalParser Error");

@@ -20,15 +20,15 @@ public class TextureCoordinateParser extends LineParser {
         coordinate = new TextureCoordinate();
         try {
             if (words.length >= 2) {
-                coordinate.u = (Float.parseFloat(words[1]));
+                coordinate.u = Float.parseFloat(words[1]);
             }
 
             if (words.length >= 3) {
-                coordinate.v = (1 - Float.parseFloat(words[2])); // OBJ origin is at upper left, OpenGL origin is	 at lower left.
+                coordinate.v = 1 - Float.parseFloat(words[2]); // OBJ origin is at upper left, OpenGL origin is	 at lower left.
             }
 
             if (words.length >= 4) {
-                coordinate.w = (Float.parseFloat(words[3]));
+                coordinate.w = Float.parseFloat(words[3]);
             }
 
         }

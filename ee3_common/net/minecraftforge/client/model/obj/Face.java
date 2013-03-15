@@ -9,7 +9,7 @@ public class Face {
     public int[] vertexIndices;
     public int[] vertexNormalIndices;
     public int[] textureCoordinateIndices;
-    
+
     private Vertex[] vertices;
     private Vertex[] vertexNormals;
     private TextureCoordinate[] textureCoordinates;

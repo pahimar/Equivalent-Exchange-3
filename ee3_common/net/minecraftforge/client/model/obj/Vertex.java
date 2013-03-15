@@ -21,11 +21,12 @@ public class Vertex {
 
     public Vertex(Vertex vertex) {
 
-        this.x = vertex.x;
-        this.y = vertex.y;
-        this.z = vertex.z;
+        x = vertex.x;
+        y = vertex.y;
+        z = vertex.z;
     }
 
+    @Override
     public String toString() {
 
         return "x: " + x + ", y: " + y + ", z: " + z;

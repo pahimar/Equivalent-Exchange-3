@@ -20,9 +20,9 @@ public class VertexParser extends LineParser {
         vertex = new Vertex();
 
         try {
-            vertex.x = (Float.parseFloat(words[1]));
-            vertex.y = (Float.parseFloat(words[2]));
-            vertex.z = (Float.parseFloat(words[3]));
+            vertex.x = Float.parseFloat(words[1]);
+            vertex.y = Float.parseFloat(words[2]);
+            vertex.z = Float.parseFloat(words[3]);
         }
         catch (Exception e) {
             throw new RuntimeException("VertexParser Error");
@@ -32,9 +32,9 @@ public class VertexParser extends LineParser {
     @Override
     public void incoporateResults(WavefrontObject wavefrontObject) {
 
-        vertex.x = ((vertex.x + wavefrontObject.translate.x) * wavefrontObject.xScale);
-        vertex.y = ((vertex.y + wavefrontObject.translate.y) * wavefrontObject.yScale);
-        vertex.z = ((vertex.z + wavefrontObject.translate.z) * wavefrontObject.zScale);
+        vertex.x = (vertex.x + wavefrontObject.translate.x) * wavefrontObject.xScale;
+        vertex.y = (vertex.y + wavefrontObject.translate.y) * wavefrontObject.yScale;
+        vertex.z = (vertex.z + wavefrontObject.translate.z) * wavefrontObject.zScale;
         wavefrontObject.getVertices().add(vertex);
     }
 
