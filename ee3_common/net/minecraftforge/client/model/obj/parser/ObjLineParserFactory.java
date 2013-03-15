@@ -12,7 +12,6 @@ public class ObjLineParserFactory extends LineParserFactory {
         this.object = object;
         parsers.put("v", new VertexParser());
         parsers.put("vn", new NormalParser());
-        parsers.put("vp", new FreeFormParser());
         parsers.put("vt", new TextureCoordinateParser());
         parsers.put("f", new FaceParser(object));
         parsers.put("g", new GroupParser());
