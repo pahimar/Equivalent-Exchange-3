@@ -26,8 +26,6 @@ public class WavefrontObject {
 
     private Group currentGroup;
 
-    private String contextfolder = "";
-
     public double radius = 0;
 
     public float xScale;
@@ -69,16 +67,6 @@ public class WavefrontObject {
             this.yScale = yScale;
             this.zScale = zScale;
 
-            int lastSlashIndex = fileName.lastIndexOf('/');
-            if (lastSlashIndex != -1) {
-                contextfolder = fileName.substring(0, lastSlashIndex + 1);
-            }
-
-            lastSlashIndex = fileName.lastIndexOf('\\');
-            if (lastSlashIndex != -1) {
-                contextfolder = fileName.substring(0, lastSlashIndex + 1);
-            }
-
             parse(fileName);
 
             calculateRadius();
@@ -98,11 +86,6 @@ public class WavefrontObject {
             }
         }
 
-    }
-
-    public String getContextfolder() {
-
-        return contextfolder;
     }
 
     public void parse(String fileName) {
