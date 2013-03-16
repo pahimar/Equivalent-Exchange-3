@@ -2,10 +2,10 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Chinese (Simplified)(zh_CN) Localization File</comment>
-	<entry key="key.extra">额外</entry>
-	<entry key="key.release">施放</entry>
+	<entry key="key.extra">额外功能</entry>
+	<entry key="key.release">施放技能</entry>
 	<entry key="key.toggle">切换目标</entry>
-	<entry key="key.charge">充</entry>
+	<entry key="key.charge">充能</entry>
 	<entry key="item.shardMinium.name ">铅丹碎片</entry>
 	<entry key="item.stoneInert.name ">惰性石</entry>
 	<entry key="item.stoneMinium.name ">铅丹石</entry>
