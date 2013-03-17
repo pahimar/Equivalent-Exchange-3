@@ -119,7 +119,9 @@ public class ConfigurationHandler {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");
         }
         finally {
-            configuration.save();
+            if (configuration.hasChanged()) {
+                configuration.save();
+            }
         }
     }
 
@@ -131,6 +133,8 @@ public class ConfigurationHandler {
                 configuration.getCategory(categoryName).get(propertyName).set(newValue);
             }
         }
-        configuration.save();
+        if (configuration.hasChanged()) {
+            configuration.save();
+        }
     }
 }
