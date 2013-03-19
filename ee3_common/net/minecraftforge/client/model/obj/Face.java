@@ -11,28 +11,41 @@ public class Face {
     public Vertex[] vertices;
     public Vertex[] vertexNormals;
     public TextureCoordinate[] textureCoordinates;
-
-    public boolean invertNormal = false;
     public int glDrawingMode;
 
-    public Vec3 getFaceNormal() {
+    /**
+     * @return
+     */
+    public Vertex getFaceNormal() {
 
         Vec3 v1 = Vec3.createVectorHelper(vertices[1].x - vertices[0].x, vertices[1].y - vertices[0].y, vertices[1].z - vertices[0].z);
         Vec3 v2 = Vec3.createVectorHelper(vertices[2].x - vertices[0].x, vertices[2].y - vertices[0].y, vertices[2].z - vertices[0].z);
-
-        return v1.crossProduct(v2).normalize();
+        Vec3 normalVector = null;
+        
+        normalVector = v1.crossProduct(v2).normalize();
+        
+        return new Vertex((float)normalVector.xCoord, (float)normalVector.yCoord, (float)normalVector.zCoord);
     }
 
+    /**
+     * @param tessellator
+     * @param scale
+     */
     public void render(Tessellator tessellator, float scale) {
 
         this.render(tessellator, 0F, scale);
     }
 
+    /**
+     * @param tessellator
+     * @param textureOffset
+     * @param scale
+     */
     public void render(Tessellator tessellator, float textureOffset, float scale) {
 
         tessellator.startDrawing(glDrawingMode);
 
-        tessellator.setNormal((float) getFaceNormal().xCoord, (float) getFaceNormal().yCoord, (float) getFaceNormal().zCoord);
+        tessellator.setNormal((float) getFaceNormal().x, (float) getFaceNormal().y, (float) getFaceNormal().z);
 
         float averageU = 0F;
         float averageV = 0F;

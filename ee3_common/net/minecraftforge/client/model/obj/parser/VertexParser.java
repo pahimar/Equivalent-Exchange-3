@@ -32,9 +32,6 @@ public class VertexParser extends LineParser {
     @Override
     public void incoporateResults(WavefrontObject wavefrontObject) {
 
-        vertex.x = (vertex.x + wavefrontObject.translate.x) * wavefrontObject.xScale;
-        vertex.y = (vertex.y + wavefrontObject.translate.y) * wavefrontObject.yScale;
-        vertex.z = (vertex.z + wavefrontObject.translate.z) * wavefrontObject.zScale;
         wavefrontObject.getVertices().add(vertex);
     }
 

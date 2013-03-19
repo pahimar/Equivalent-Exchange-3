@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.logging.Level;
+
+import com.pahimar.ee3.core.helper.LogHelper;
 
 import net.minecraftforge.client.model.obj.parser.LineParser;
 import net.minecraftforge.client.model.obj.parser.ObjLineParserFactory;
@@ -26,55 +30,18 @@ public class WavefrontObject {
 
     private Group currentGroup;
 
-    public double radius = 0;
-
-    public float xScale;
-    public float yScale;
-    public float zScale;
-
-    public Vertex translate;
-    public Vertex rotate;
-
     public WavefrontObject(String fileName) {
 
-        this(fileName, 1f, 1f, 1f, new Vertex(), new Vertex());
+        this.fileName = fileName;
+        parseObjModel(fileName);
     }
 
-    public WavefrontObject(String fileName, float xScale, float yScale, float zScale) {
+    public void parseObjModel(String fileName) {
 
-        this(fileName, xScale, yScale, zScale, new Vertex(), new Vertex());
+        parseObjModel(this.getClass().getResource(fileName));
     }
-
-    public WavefrontObject(String fileName, float scale) {
-
-        this(fileName, scale, scale, scale, new Vertex(), new Vertex());
-    }
-
-    public WavefrontObject(String fileName, float scale, Vertex translation, Vertex rotation) {
-
-        this(fileName, scale, scale, scale, translation, rotation);
-    }
-
-    public WavefrontObject(String fileName, float xScale, float yScale, float zScale, Vertex translation, Vertex rotation) {
-
-        try {
-            this.fileName = fileName;
-
-            translate = translation;
-            rotate = rotation;
-
-            this.xScale = xScale;
-            this.yScale = yScale;
-            this.zScale = zScale;
-
-            parse(fileName);
-        }
-        catch (Exception e) {
-            System.out.println("Error, could not load obj:" + fileName);
-        }
-    }
-
-    public void parse(String fileName) {
+    
+    public void parseObjModel(URL fileURL) {
 
         BufferedReader reader = null;
         InputStream inputStream = null;
@@ -82,12 +49,33 @@ public class WavefrontObject {
         parserFactory = new ObjLineParserFactory(this);
 
         try {
-            inputStream = this.getClass().getResource(fileName).openStream();
+            inputStream = fileURL.openStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String currentLine = null;
             while ((currentLine = reader.readLine()) != null) {
-                parseLine(currentLine);
+                //parseLine(currentLine);
+
+                currentLine = currentLine.replaceAll("\\s+", " ").trim();
+
+                if (currentLine.startsWith("#") || currentLine.length() == 0) {
+                    continue;
+                }
+                else if (currentLine.startsWith("v ")) {
+                    LogHelper.log(Level.INFO, "Vertex");    
+                }
+                else if (currentLine.startsWith("vn ")) {
+                    LogHelper.log(Level.INFO, "Vertex Normal");
+                }
+                else if (currentLine.startsWith("vt ")) {
+                    LogHelper.log(Level.INFO, "Texture Coordinate");
+                }
+                else if (currentLine.startsWith("f ")) {
+                    LogHelper.log(Level.INFO, "Face");
+                }
+                else if (currentLine.startsWith("g ")) {
+                    LogHelper.log(Level.INFO, "Group");
+                }
             }
 
         }
@@ -104,6 +92,8 @@ public class WavefrontObject {
             }
         }
     }
+    
+    
 
     private void parseLine(String currentLine) {
 
@@ -162,49 +152,5 @@ public class WavefrontObject {
     public void setCurrentGroup(Group currentGroup) {
 
         this.currentGroup = currentGroup;
-    }
-
-    public String getBoudariesText() {
-
-        float minX = 0;
-        float maxX = 0;
-        float minY = 0;
-        float maxY = 0;
-        float minZ = 0;
-        float maxZ = 0;
-
-        Vertex currentVertex = null;
-        for (int i = 0; i < getVertices().size(); i++) {
-            currentVertex = getVertices().get(i);
-            if (currentVertex.x > maxX) {
-                maxX = currentVertex.x;
-            }
-            if (currentVertex.x < minX) {
-                minX = currentVertex.x;
-            }
-
-            if (currentVertex.y > maxY) {
-                maxY = currentVertex.y;
-            }
-            if (currentVertex.y < minY) {
-                minY = currentVertex.y;
-            }
-
-            if (currentVertex.z > maxZ) {
-                maxZ = currentVertex.z;
-            }
-            if (currentVertex.z < minZ) {
-                minZ = currentVertex.z;
-            }
-
-        }
-
-        return "maxX=" + maxX + " minX=" + minX + " maxY=" + maxY + " minY=" + minY + " maxZ=" + maxZ + " minZ=" + minZ;
-    }
-
-    public void printBoudariesText() {
-
-        System.out.println(getBoudariesText());
-
     }
 }

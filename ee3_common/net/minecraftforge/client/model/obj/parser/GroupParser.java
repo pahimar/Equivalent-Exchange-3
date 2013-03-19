@@ -13,12 +13,8 @@ public class GroupParser extends LineParser {
     @Override
     public void incoporateResults(WavefrontObject wavefrontObject) {
 
-        if (wavefrontObject.getCurrentGroup() != null) {
-            wavefrontObject.getCurrentGroup().pack();
-        }
-
         wavefrontObject.getGroups().add(newGroup);
-        wavefrontObject.getGroupsDirectAccess().put(newGroup.getName(), newGroup);
+        wavefrontObject.getGroupsDirectAccess().put(newGroup.name, newGroup);
 
         wavefrontObject.setCurrentGroup(newGroup);
     }

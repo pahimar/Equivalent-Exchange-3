@@ -48,7 +48,7 @@ public class ModelCalcinator extends ModelBase {
 
         if (modelCalcinatorOBJ.getGroups().size() != 0) {
             for (Group group : modelCalcinatorOBJ.getGroups()) {
-                if (group.getName().equalsIgnoreCase("calcinator")) {
+                if (group.name.equalsIgnoreCase("calcinator")) {
                     group.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
                 }
             }

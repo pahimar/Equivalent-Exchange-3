@@ -114,7 +114,7 @@ public class FaceParser extends LineParser {
         if (group == null) {
             group = new Group("Default created by loader");
             wavefrontObject.getGroups().add(group);
-            wavefrontObject.getGroupsDirectAccess().put(group.getName(), group);
+            wavefrontObject.getGroupsDirectAccess().put(group.name, group);
             wavefrontObject.setCurrentGroup(group);
         }
 
@@ -138,7 +138,7 @@ public class FaceParser extends LineParser {
             face.vertices = vertices;
             face.textureCoordinates = textures;
 
-            wavefrontObject.getCurrentGroup().addFace(face);
+            wavefrontObject.getCurrentGroup().faces.add(face);
         }
         else {
             // Add list of vertex/normal/texcoord to current group
@@ -164,7 +164,7 @@ public class FaceParser extends LineParser {
             face.vertices = vertices;
             face.textureCoordinates = textures;
 
-            wavefrontObject.getCurrentGroup().addFace(face);
+            wavefrontObject.getCurrentGroup().faces.add(face);
         }
     }
 
