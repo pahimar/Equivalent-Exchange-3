@@ -18,7 +18,6 @@ public class Reference {
     public static final String MOD_ID = "EE3";
     public static final String MOD_NAME = "Equivalent Exchange 3";
     public static final String VERSION = "@VERSION@";
-    public static final String VERSION_TYPE = "@VERSION_TYPE@";
     public static final String CHANNEL_NAME = MOD_ID;
     public static final int SECOND_IN_TICKS = 20;
     public static final int SHIFTED_ID_RANGE_CORRECTION = 256;

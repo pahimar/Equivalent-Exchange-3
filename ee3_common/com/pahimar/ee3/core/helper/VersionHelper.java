@@ -46,7 +46,6 @@ public class VersionHelper implements Runnable {
     private static byte result = UNINITIALIZED;
     public static String remoteVersion = null;
     public static String remoteUpdateLocation = null;
-    public static String remoteVersionType = null;
 
     /***
      * Checks the version of the currently running instance of the mod against
@@ -66,67 +65,33 @@ public class VersionHelper implements Runnable {
             String remoteVersionProperty = remoteVersionProperties.getProperty(Loader.instance().getMCVersionString());
 
             if (remoteVersionProperty != null) {
-                String[] remoteVersionTokens = remoteVersionProperty.split("|");
+                String[] remoteVersionTokens = remoteVersionProperty.split("\\|");
 
-                if (remoteVersionTokens.length == 2) {
+                if (remoteVersionTokens.length >= 2) {
                     remoteVersion = remoteVersionTokens[0];
                     remoteUpdateLocation = remoteVersionTokens[1];
-                }
-                else if (remoteVersionTokens.length == 3) {
-                    remoteVersion = remoteVersionTokens[0];
-                    remoteUpdateLocation = remoteVersionTokens[1];
-                    remoteVersionType = remoteVersionTokens[2];
                 }
                 else {
                     result = ERROR;
-                    return;
                 }
 
                 if (remoteVersion != null) {
                     if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
                         ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
-
-                        if (remoteVersionType != null) {
-                            ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME, remoteVersionType);
-                        }
                     }
 
-                    if (remoteVersion.equalsIgnoreCase(Reference.VERSION)) {
-                        if (remoteVersionType != null) {
-                            if (remoteVersionType.equalsIgnoreCase(Reference.VERSION_TYPE) && remoteVersionType.equalsIgnoreCase(Strings.RECOMMENDED_VERSION)) {
-                                result = CURRENT;
-                                return;
-                            }
-                        }
-                        else {
-                            result = CURRENT;
-                            return;
-                        }
+                    if (remoteVersion.equals(Reference.VERSION)) {
+                        result = CURRENT;
                     }
                     else {
                         result = OUTDATED;
-                        return;
                     }
                 }
-                else {
-                    result = ERROR;
-                    return;
-                }
+
             }
             else {
                 result = MC_VERSION_NOT_FOUND;
             }
-
-            /*
-             * if (remoteVersion != null) { if
-             * (!ConfigurationSettings.LAST_DISCOVERED_VERSION
-             * .equalsIgnoreCase(remoteVersion)) {
-             * ConfigurationHandler.set(Configuration.CATEGORY_GENERAL,
-             * ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME,
-             * remoteVersion); } if (remoteVersion.equals(Reference.VERSION)) {
-             * result = CURRENT; return; } } if (remoteVersionProperty == null)
-             * { result = MC_VERSION_NOT_FOUND; } else { result = OUTDATED; }
-             */
         }
         catch (Exception e) {
         }
@@ -220,7 +185,7 @@ public class VersionHelper implements Runnable {
         LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
 
         try {
-            while (count < Reference.VERSION_CHECK_ATTEMPTS && (result == UNINITIALIZED || result == ERROR)) {
+            while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR)) {
 
                 checkVersion();
                 count++;

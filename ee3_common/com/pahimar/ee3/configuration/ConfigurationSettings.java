@@ -23,7 +23,7 @@ public class ConfigurationSettings {
     public static String LAST_DISCOVERED_VERSION;
     public static final String LAST_DISCOVERED_VERSION_CONFIGNAME = "version_check.last_discovered_version";
     public static final String LAST_DISCOVERED_VERSION_DEFAULT = "";
-    
+
     public static String LAST_DISCOVERED_VERSION_TYPE;
     public static final String LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME = "version_check.last_discovered_version_type";
     public static final String LAST_DISCOVERED_VERSION_TYPE_DEFAULT = "";

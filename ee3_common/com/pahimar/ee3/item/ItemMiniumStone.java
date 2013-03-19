@@ -25,8 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE
-        implements ITransmutationStone, IKeyBound {
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound {
 
     public ItemMiniumStone(int id) {
 

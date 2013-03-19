@@ -70,16 +70,16 @@ public class Group {
 
         return min;
     }
-    
+
     public void render(Tessellator tessellator, float scale) {
-        
+
         for (Face face : faces) {
             face.render(tessellator, 0F, scale);
         }
     }
-    
+
     public void render(Tessellator tessellator, float textureOffset, float scale) {
-        
+
         for (Face face : faces) {
             face.render(tessellator, textureOffset, scale);
         }

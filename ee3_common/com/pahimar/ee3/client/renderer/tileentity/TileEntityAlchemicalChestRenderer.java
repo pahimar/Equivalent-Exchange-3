@@ -25,8 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class TileEntityAlchemicalChestRenderer extends
-        TileEntitySpecialRenderer {
+public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer {
 
     private ModelChest modelChest = new ModelChest();
 
