@@ -14,13 +14,13 @@
 	<entry key="item.dustAlchemicalMinium.name">Mönjäinen pöly</entry>
 	<entry key="item.dustAlchemicalVerdant.name">Vehreä pöly</entry>
 	<entry key="item.dustAlchemicalAzure.name">Taivaansininen pöly</entry>
-	<entry key="item.dustAlchemicalAmaranthine.name">Ikikukkaispöly</entry><
+	<entry key="item.dustAlchemicalAmaranthine.name">Ikikukkaispöly</entry>
 	<entry key="item.dustAlchemicalIridescent.name">Sateenkaarenkirjava pöly</entry>
 	<entry key="item.alchemicalBag.name">Alkeminen pussi</entry>
 	<entry key="tile.redWaterStill.name">Punavesi (Liikkumaton)</entry>
 	<entry key="tile.redWaterFlowing.name">Punavesi (Virtaava)</entry>
 	<entry key="tile.calcinator.name">Kalsinaattori</entry>
-	<entry key="tile.aludel.name">Aludeli</entry> <comment>This needs better translation!</comment>
+	<entry key="tile.aludel.name">Aludeli</entry>
 	<entry key="tile.alchemicalChest.name">Alchemical Chest</entry>
 	<entry key="container.calcinator">Calcinator</entry>
 	<entry key="container.aludel">Aludel</entry>

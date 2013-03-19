@@ -46,6 +46,7 @@ public class VersionHelper implements Runnable {
     private static byte result = UNINITIALIZED;
     public static String remoteVersion = null;
     public static String remoteUpdateLocation = null;
+    public static String remoteVersionType = null;
 
     /***
      * Checks the version of the currently running instance of the mod against
@@ -65,27 +66,67 @@ public class VersionHelper implements Runnable {
             String remoteVersionProperty = remoteVersionProperties.getProperty(Loader.instance().getMCVersionString());
 
             if (remoteVersionProperty != null) {
-                remoteVersion = remoteVersionProperty.substring(0, remoteVersionProperty.indexOf("|"));
-                remoteUpdateLocation = remoteVersionProperty.substring(remoteVersionProperty.indexOf("|") + 1);
-            }
+                String[] remoteVersionTokens = remoteVersionProperty.split("|");
 
-            if (remoteVersion != null) {
-                if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
-                    ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
+                if (remoteVersionTokens.length == 2) {
+                    remoteVersion = remoteVersionTokens[0];
+                    remoteUpdateLocation = remoteVersionTokens[1];
+                }
+                else if (remoteVersionTokens.length == 3) {
+                    remoteVersion = remoteVersionTokens[0];
+                    remoteUpdateLocation = remoteVersionTokens[1];
+                    remoteVersionType = remoteVersionTokens[2];
+                }
+                else {
+                    result = ERROR;
+                    return;
                 }
 
-                if (remoteVersion.equals(Reference.VERSION)) {
-                    result = CURRENT;
+                if (remoteVersion != null) {
+                    if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
+                        ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
+
+                        if (remoteVersionType != null) {
+                            ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME, remoteVersionType);
+                        }
+                    }
+
+                    if (remoteVersion.equalsIgnoreCase(Reference.VERSION)) {
+                        if (remoteVersionType != null) {
+                            if (remoteVersionType.equalsIgnoreCase(Reference.VERSION_TYPE) && remoteVersionType.equalsIgnoreCase(Strings.RECOMMENDED_VERSION)) {
+                                result = CURRENT;
+                                return;
+                            }
+                        }
+                        else {
+                            result = CURRENT;
+                            return;
+                        }
+                    }
+                    else {
+                        result = OUTDATED;
+                        return;
+                    }
+                }
+                else {
+                    result = ERROR;
                     return;
                 }
             }
-
-            if (remoteVersionProperty == null) {
+            else {
                 result = MC_VERSION_NOT_FOUND;
             }
-            else {
-                result = OUTDATED;
-            }
+
+            /*
+             * if (remoteVersion != null) { if
+             * (!ConfigurationSettings.LAST_DISCOVERED_VERSION
+             * .equalsIgnoreCase(remoteVersion)) {
+             * ConfigurationHandler.set(Configuration.CATEGORY_GENERAL,
+             * ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME,
+             * remoteVersion); } if (remoteVersion.equals(Reference.VERSION)) {
+             * result = CURRENT; return; } } if (remoteVersionProperty == null)
+             * { result = MC_VERSION_NOT_FOUND; } else { result = OUTDATED; }
+             */
         }
         catch (Exception e) {
         }

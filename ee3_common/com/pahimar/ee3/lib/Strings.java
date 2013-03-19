@@ -23,6 +23,8 @@ public class Strings {
     public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
     public static final String FINAL_ERROR_MESSAGE = "version.final_error";
     public static final String MC_VERSION_NOT_FOUND = "version.mc_version_not_found";
+    public static final String DEVELOPMENT_VERSION = "Development";
+    public static final String RECOMMENDED_VERSION = "Recommended";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
