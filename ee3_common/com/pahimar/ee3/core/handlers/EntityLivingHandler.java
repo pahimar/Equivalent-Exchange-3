@@ -1,6 +1,7 @@
 package com.pahimar.ee3.core.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
