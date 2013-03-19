@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Russian (RU) Localization File</comment>
@@ -6,12 +6,12 @@
 	<entry key="key.release">Выпуск</entry>
 	<entry key="key.toggle">Переключение</entry>
 	<entry key="key.charge">Заряд</entry>
-	<entry key="item.miniumShard.name">Осколок Сурика</entry>
+	<entry key="item.miniumShard.name">Алхимический Осколок</entry>
 	<entry key="item.inertStone.name">Инертный Камень</entry>
-	<entry key="item.miniumStone.name">Сурик</entry>
+	<entry key="item.miniumStone.name">Алхимический Камень</entry>
 	<entry key="item.philStone.name">Философский Камень</entry>
 	<entry key="item.alchemyDust.ash.name">Пепел</entry>
-	<entry key="item.alchemyDust.minium.name">Толченый Сурик</entry>
+	<entry key="item.alchemyDust.minium.name">Алхимическая Пыль</entry>
 	<entry key="item.alchemyDust.verdant.name">Изумрудная Пыль</entry>
 	<entry key="item.alchemyDust.azure.name">Лазурная Пыль</entry>
 	<entry key="item.alchemyDust.amaranthine.name">Пурпурная Пыль</entry>
@@ -40,23 +40,23 @@
 	<entry key="version.init_log_message">Инициализация проверки версии в удаленном файле, находящемся на</entry>
 	<entry key="version.uninitialized">Проверка версии не инициализирована правильно</entry>
 	<entry key="version.current">Вы используете последнюю версию @MOD_NAME@ (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@</entry>
-	<entry key="version.outdated">Новая версия @MOD_NAME@ (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Скачайте здесь: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.outdated">Появилась новая версия @MOD_NAME@ (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Скачать её можно здесь: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Ошибка подключения к удаленному файлу, переподключение</entry>
 	<entry key="version.final_error">Проверка версии отменена после 3 неудачных попыток соединения</entry>
 	<entry key="version.check_disabled">Удаленная проверка версии отключена, пропуск</entry>
-	<entry key="command.ee3.overlay.turned_on">Панель с целью трансмутации включена</entry>
-	<entry key="command.ee3.overlay.turned_off">Панель с целью трансмутации выключена</entry>
-	<entry key="command.ee3.overlay.position.top_left">Панель с целью трансмутации перемещена в верхний левый угол</entry>
-	<entry key="command.ee3.overlay.position.top_right">Панель с целью трансмутации перемещена в верхний правый угол</entry>
-	<entry key="command.ee3.overlay.position.bottom_left">Панель с целью трансмутации перемещена в нижний левый угол</entry>
-	<entry key="command.ee3.overlay.position.bottom_right">Панель с целью трансмутации перемещена в нижний правый угол</entry>
+	<entry key="command.ee3.overlay.turned_on">Панель цели трансмутации включена</entry>
+	<entry key="command.ee3.overlay.turned_off">Панель цели трансмутации выключена</entry>
+	<entry key="command.ee3.overlay.position.top_left">Панель цели трансмутации перемещена в верхний левый угол</entry>
+	<entry key="command.ee3.overlay.position.top_right">Панель цели трансмутации перемещена в верхний правый угол</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Панель цели трансмутации перемещена в нижний левый угол</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Панель цели трансмутации перемещена в нижний правый угол</entry>
 	<entry key="command.ee3.overlay.opacity.usage.additional_text">(где ### - число между 0,0 и 1,0) </entry>
-	<entry key="command.ee3.overlay.opacity.updated">Прозрачность панели с целью трансмутации изменена успешно</entry>
+	<entry key="command.ee3.overlay.opacity.updated">Прозрачность панели цели трансмутации изменена успешно</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(где ### - число больше 0,0) </entry>
-	<entry key="command.ee3.overlay.scale.updated">Размер панели с целью трансмутации изменен успешно</entry>
+	<entry key="command.ee3.overlay.scale.updated">Размер панели цели трансмутации изменен успешно</entry>
 	<entry key="command.ee3.particles.turned_on">Частицы Equivalent Exchange 3 включены</entry>
 	<entry key="command.ee3.particles.turned_off">Частицы Equivalent Exchange 3 выключены</entry>
-	<entry key="command.ee3.sounds.set_to_all">Звуки Equivalent Exchange 3 играют для всех игроков</entry>
-	<entry key="command.ee3.sounds.set_to_self">Звуки Equivalent Exchange 3 играют только для вас</entry>
+	<entry key="command.ee3.sounds.set_to_all">Звуки Equivalent Exchange 3 слышны всем игрокам</entry>
+	<entry key="command.ee3.sounds.set_to_self">Звуки Equivalent Exchange 3 слышны только вам</entry>
 	<entry key="command.ee3.sounds.turned_off">Звуки Equivalent Exchange 3 выключены</entry>
 </properties>
