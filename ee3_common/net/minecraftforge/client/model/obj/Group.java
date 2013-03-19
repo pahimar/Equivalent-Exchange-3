@@ -2,6 +2,7 @@ package net.minecraftforge.client.model.obj;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -38,8 +39,8 @@ public class Group {
         Vertex currentVertex = null;
         for (int i = 0; i < faces.size(); i++) {
             currentFace = faces.get(i);
-            for (int j = 0; j < currentFace.getVertices().length; j++) {
-                currentVertex = currentFace.getVertices()[j];
+            for (int j = 0; j < currentFace.vertices.length; j++) {
+                currentVertex = currentFace.vertices[j];
                 if (Math.abs(currentVertex.x) > minX) {
                     minX = Math.abs(currentVertex.x);
                 }
@@ -68,5 +69,19 @@ public class Group {
     public Vertex getMin() {
 
         return min;
+    }
+    
+    public void render(Tessellator tessellator, float scale) {
+        
+        for (Face face : faces) {
+            face.render(tessellator, 0F, scale);
+        }
+    }
+    
+    public void render(Tessellator tessellator, float textureOffset, float scale) {
+        
+        for (Face face : faces) {
+            face.render(tessellator, textureOffset, scale);
+        }
     }
 }

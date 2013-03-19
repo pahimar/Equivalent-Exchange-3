@@ -48,7 +48,7 @@ public class FaceParser extends LineParser {
 
     private void parseTriangles() {
 
-        face.setDrawingMode(GL11.GL_TRIANGLES);
+        face.glDrawingMode = GL11.GL_TRIANGLES;
         parseLine(3);
     }
 
@@ -101,7 +101,7 @@ public class FaceParser extends LineParser {
 
     private void parseQuad() {
 
-        face.setDrawingMode(GL11.GL_QUADS);
+        face.glDrawingMode = GL11.GL_QUADS;
         parseLine(4);
     }
 
@@ -134,13 +134,9 @@ public class FaceParser extends LineParser {
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++); // create index list for current object
 
-            face.vertexIndices = vindices;
-            face.vertexNormalIndices = nindices;
-            face.textureCoordinateIndices = tindices;
-            face.setVertexNormals(normals);
-            face.setVertexNormals(normals);
-            face.setVertices(vertices);
-            face.setTextureCoordinates(textures);
+            face.vertexNormals = normals;
+            face.vertices = vertices;
+            face.textureCoordinates = textures;
 
             wavefrontObject.getCurrentGroup().addFace(face);
         }
@@ -164,13 +160,9 @@ public class FaceParser extends LineParser {
             group.indices.add(group.indexCount++);
             group.indices.add(group.indexCount++); // create index list for current object
 
-            face.vertexIndices = vindices;
-            face.vertexNormalIndices = nindices;
-            face.textureCoordinateIndices = tindices;
-            face.setVertexNormals(normals);
-            face.setVertexNormals(normals);
-            face.setVertices(vertices);
-            face.setTextureCoordinates(textures);
+            face.vertexNormals = normals;
+            face.vertices = vertices;
+            face.textureCoordinates = textures;
 
             wavefrontObject.getCurrentGroup().addFace(face);
         }
