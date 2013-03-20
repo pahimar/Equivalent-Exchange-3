@@ -9,16 +9,24 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.logging.Level;
 
-import com.pahimar.ee3.core.helper.LogHelper;
+import org.lwjgl.opengl.GL11;
 
 import net.minecraftforge.client.model.obj.parser.LineParser;
 import net.minecraftforge.client.model.obj.parser.ObjLineParserFactory;
+
+import com.pahimar.ee3.core.helper.LogHelper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class WavefrontObject {
 
+    private static final String REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL = "f(?: ((?:\\d*)(?:/\\d*)(?:/\\d*)))+";
+    private static final String REGEX_FACE_VERTEX_TEXTURECOORD = "f(?: ((?:\\d*)(?:/\\d*)))+";
+    private static final String REGEX_FACE_VERTEX_VERTEXNORMAL = "f(?: ((?:\\d*)(?://\\d*)))+";
+    private static final String REGEX_FACE_VERTEX = "f(?: ((?:\\d*)))+";
+    
     private ArrayList<Vertex> vertices = new ArrayList<Vertex>();
     private ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
     private ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
@@ -62,22 +70,39 @@ public class WavefrontObject {
                     continue;
                 }
                 else if (currentLine.startsWith("v ")) {
-                    LogHelper.log(Level.INFO, "Vertex");    
+                    Vertex vertex = parseVertex(currentLine);
+                    if (vertex != null) {
+                        vertices.add(vertex);
+                    }
                 }
                 else if (currentLine.startsWith("vn ")) {
-                    LogHelper.log(Level.INFO, "Vertex Normal");
+                    Vertex vertex = parseVertexNormal(currentLine);
+                    if (vertex != null) {
+                        vertexNormals.add(vertex);
+                    }
                 }
                 else if (currentLine.startsWith("vt ")) {
-                    LogHelper.log(Level.INFO, "Texture Coordinate");
+                    TextureCoordinate textureCoordinate = parseTextureCoordinate(currentLine);
+                    if (textureCoordinate != null) {
+                        textureCoordinates.add(textureCoordinate);
+                    }
                 }
                 else if (currentLine.startsWith("f ")) {
-                    LogHelper.log(Level.INFO, "Face");
+                    Face face = parseFace(currentLine);
+                    if (face != null) {
+                        if (currentGroup == null) {
+                            currentGroup = new Group("Default");
+                        }
+
+                        currentGroup.faces.add(face);
+                    }
                 }
                 else if (currentLine.startsWith("g ")) {
-                    LogHelper.log(Level.INFO, "Group");
+                    
                 }
             }
-
+            
+            groups.add(currentGroup);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -91,9 +116,126 @@ public class WavefrontObject {
                 e.printStackTrace();
             }
         }
+        
+        int faceSum = 0;
+        for (Group group : groups) {
+            faceSum += group.faces.size();
+        }
+        
+        LogHelper.log(Level.INFO, "filename: " + fileName);
+        LogHelper.log(Level.INFO, "vertex count: " + vertices.size());
+        LogHelper.log(Level.INFO, "vertex normal count: " + vertexNormals.size());
+        LogHelper.log(Level.INFO, "texture coordinate count: " + textureCoordinates.size());
+        LogHelper.log(Level.INFO, "face count: " + faceSum);
+        LogHelper.log(Level.INFO, "group count: " + groups.size());
     }
     
+    private Vertex parseVertex(String line) {
+        Vertex vertex = null;
+        
+        line = line.substring(line.indexOf(" ") + 1);
+        String[] tokens = line.split(" ");
+        
+        try {
+            if (tokens.length == 3) {
+                return new Vertex(Float.parseFloat(tokens[0]), Float.parseFloat(tokens[1]), Float.parseFloat(tokens[2]));
+            }
+        }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        
+        return vertex;
+    }
     
+    private Vertex parseVertexNormal(String line) {
+        
+        return parseVertex(line);
+    }
+    
+    private TextureCoordinate parseTextureCoordinate(String line) {
+        TextureCoordinate textureCoordinate = null;
+        
+        line = line.substring(line.indexOf(" ") + 1);
+        String[] tokens = line.split(" ");
+        
+        try {
+            if (tokens.length == 2) {
+                return new TextureCoordinate(Float.parseFloat(tokens[0]), Float.parseFloat(tokens[1]));
+            }
+            else if (tokens.length == 3) {
+                return new TextureCoordinate(Float.parseFloat(tokens[0]), Float.parseFloat(tokens[1]), Float.parseFloat(tokens[2]));
+            }
+        }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        
+        return textureCoordinate;
+    }
+    
+    private Face parseFace(String line) {
+        Face face = null;
+        
+        if (validateFaceLine(line)) {
+            face = new Face();
+            
+            String trimmedLine = line.substring(line.indexOf(" ") + 1);
+            String[] tokens = trimmedLine.split(" ");
+            String[] subTokens = null;
+            
+            if (tokens.length == 3) {
+                face.glDrawingMode = GL11.GL_TRIANGLES;
+            }
+            else if (tokens.length == 4) {
+                face.glDrawingMode = GL11.GL_QUADS;
+            }
+            else {
+                
+            }
+            
+            face.vertices = new Vertex[tokens.length];
+            face.textureCoordinates = new TextureCoordinate[tokens.length];
+            face.vertexNormals = new Vertex[tokens.length];
+    
+            // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 ...
+            if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL)) {
+                for (int i = 0; i < tokens.length; ++i) {
+                    subTokens = tokens[i].split("/");
+                    
+                    face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
+                    face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
+                    face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[2]) - 1);
+                }
+    
+            }
+            // f v1/vt1 v2/vt2 v3/vt3 ...
+            else if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD)) {
+                // @TODO Finish
+            }
+            // f v1//vn1 v2//vn2 v3//vn3 ...
+            else if (line.matches(REGEX_FACE_VERTEX_VERTEXNORMAL)) {
+             // @TODO Finish
+            }
+            // f v1 v2 v3 ...
+            else if (line.matches(REGEX_FACE_VERTEX)) {
+             // @TODO Finish
+            }
+            else {
+                throw new IllegalArgumentException();
+            }
+        }
+                
+        return face;
+    }
+    
+    private static boolean validateFaceLine(String faceLine) {
+        
+        return (faceLine.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL) ||
+                faceLine.matches(REGEX_FACE_VERTEX_TEXTURECOORD) ||
+                faceLine.matches(REGEX_FACE_VERTEX_VERTEXNORMAL) ||
+                faceLine.matches(REGEX_FACE_VERTEX));
+    }
 
     private void parseLine(String currentLine) {
 

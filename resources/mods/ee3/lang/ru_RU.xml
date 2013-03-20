@@ -30,7 +30,7 @@
 	<entry key="version.init_log_message">Инициализация проверки версии файла по удалённому экземпляру, расположенному на</entry>
 	<entry key="version.uninitialized">Не удалась инициализация удалённой проверки версии</entry>
 	<entry key="version.current">Используется самая свежая версия (@REMOTE_MOD_VERSION@) модификации Equivalent Exchange 3 для @MINECRAFT_VERSION@</entry>
-	<entry key="version.outdated"Новая версия модификации @MOD_NAME@ существует (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Вы можите скачать её здесь: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.outdated">Новая версия модификации @MOD_NAME@ существует (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Вы можите скачать её здесь: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Ошибка подключения к удалённому файлу проверки версии; новая попытка</entry>
 	<entry key="version.final_error">Проверка версии отменена после 3х неудачных попыток</entry>
 	<entry key="version.mc_version_not_found">Не удаётся найти версию модификации @MOD_NAME@ для @MINECRAFT_VERSION@ в удалённом хранилище версий</entry>
