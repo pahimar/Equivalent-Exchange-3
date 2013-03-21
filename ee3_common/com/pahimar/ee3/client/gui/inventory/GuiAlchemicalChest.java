@@ -39,7 +39,7 @@ public class GuiAlchemicalChest extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-        fontRenderer.drawString(tileAlchemicalChest.func_94042_c() ? tileAlchemicalChest.getInvName() : StatCollector.translateToLocal(tileAlchemicalChest.getInvName()), 8, 6, 4210752);
+        fontRenderer.drawString(tileAlchemicalChest.isInvNameLocalized() ? tileAlchemicalChest.getInvName() : StatCollector.translateToLocal(tileAlchemicalChest.getInvName()), 8, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 96 + 2, 4210752);
     }
 
@@ -47,8 +47,7 @@ public class GuiAlchemicalChest extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        //this.mc.renderEngine.bindTexture(Sprites.GUI_ALCHEMICAL_STORAGE);
-        mc.renderEngine.func_98187_b(Textures.GUI_ALCHEMICAL_STORAGE);
+        mc.renderEngine.bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

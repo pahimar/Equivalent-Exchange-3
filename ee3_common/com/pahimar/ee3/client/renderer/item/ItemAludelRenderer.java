@@ -71,7 +71,7 @@ public class ItemAludelRenderer implements IItemRenderer {
 
     private void renderAludel(float x, float y, float z, float scale) {
 
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
         GL11.glPushMatrix(); //start
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glTranslatef(x, y, z); //size

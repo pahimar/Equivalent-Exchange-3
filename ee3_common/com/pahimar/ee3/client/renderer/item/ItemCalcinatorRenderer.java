@@ -72,7 +72,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
 
     private void renderCalcinator(float x, float y, float z, float scale) {
 
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_CALCINATOR);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
         GL11.glPushMatrix(); //start
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glTranslatef(x, y, z); //size

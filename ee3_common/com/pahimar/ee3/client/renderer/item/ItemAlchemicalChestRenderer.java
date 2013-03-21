@@ -66,7 +66,7 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
 
     private void renderAlchemicalChest(float x, float y, float z) {
 
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_ALCHEMICAL_CHEST);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         GL11.glRotatef(180, 1, 0, 0);

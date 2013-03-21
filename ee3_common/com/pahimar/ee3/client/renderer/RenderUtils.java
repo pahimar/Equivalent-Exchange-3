@@ -31,7 +31,7 @@ public class RenderUtils {
         RenderBlocks renderBlocks = new RenderBlocks();
 
         Block block = Block.blocksList[stack.itemID];
-        renderEngine.func_98187_b(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
+        renderEngine.bindTexture(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
         GL11.glPushMatrix();
         GL11.glTranslatef(x - 2, y + 3, -3.0F + zLevel);
         GL11.glScalef(10.0F, 10.0F, 10.0F);
@@ -59,7 +59,7 @@ public class RenderUtils {
 
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
-        renderEngine.func_98187_b(Textures.VANILLA_ITEM_TEXTURE_SHEET);
+        renderEngine.bindTexture(Textures.VANILLA_ITEM_TEXTURE_SHEET);
         int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
         float red = (overlayColour >> 16 & 255) / 255.0F;
         float green = (overlayColour >> 8 & 255) / 255.0F;
@@ -74,10 +74,10 @@ public class RenderUtils {
 
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0, y + height, zLevel, icon.func_94209_e(), icon.func_94210_h());
-        tessellator.addVertexWithUV(x + width, y + height, zLevel, icon.func_94212_f(), icon.func_94210_h());
-        tessellator.addVertexWithUV(x + width, y + 0, zLevel, icon.func_94212_f(), icon.func_94206_g());
-        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, icon.func_94209_e(), icon.func_94206_g());
+        tessellator.addVertexWithUV(x + 0, y + height, zLevel, icon.getMinU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + width, y + height, zLevel, icon.getMaxU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + width, y + 0, zLevel, icon.getMaxU(), icon.getMinV());
+        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, icon.getMinU(), icon.getMinV());
         tessellator.draw();
     }
 }

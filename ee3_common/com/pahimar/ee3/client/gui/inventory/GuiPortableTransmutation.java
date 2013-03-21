@@ -35,8 +35,7 @@ public class GuiPortableTransmutation extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        //this.mc.renderEngine.bindTexture(Sprites.GUI_PORTABLE_TRANSMUTATION);
-        mc.renderEngine.func_98187_b(Textures.GUI_PORTABLE_TRANSMUTATION);
+        mc.renderEngine.bindTexture(Textures.GUI_PORTABLE_TRANSMUTATION);
         int var5 = (width - xSize) / 2;
         int var6 = (height - ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, xSize, ySize);

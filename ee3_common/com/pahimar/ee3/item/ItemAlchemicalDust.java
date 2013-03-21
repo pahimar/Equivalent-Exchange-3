@@ -62,12 +62,12 @@ public class ItemAlchemicalDust extends ItemEE {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister iconRegister) {
+    public void updateIcons(IconRegister iconRegister) {
 
         icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
         for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i) {
-            icons[i] = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
+            icons[i] = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
         }
     }
 

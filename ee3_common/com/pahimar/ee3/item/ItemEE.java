@@ -28,9 +28,8 @@ public class ItemEE extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    // public void setIconIndex(IconRegister iconRegister)
-    public void func_94581_a(IconRegister iconRegister) {
+    public void updateIcons(IconRegister iconRegister) {
 
-        iconIndex = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        iconIndex = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 }

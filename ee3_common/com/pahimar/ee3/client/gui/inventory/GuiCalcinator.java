@@ -38,7 +38,7 @@ public class GuiCalcinator extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-        String containerName = tileCalcinator.func_94042_c() ? tileCalcinator.getInvName() : StatCollector.translateToLocal(tileCalcinator.getInvName());
+        String containerName = tileCalcinator.isInvNameLocalized() ? tileCalcinator.getInvName() : StatCollector.translateToLocal(tileCalcinator.getInvName());
         fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 96 + 2, 4210752);
     }
@@ -47,8 +47,7 @@ public class GuiCalcinator extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        //this.mc.renderEngine.bindTexture(Sprites.GUI_CALCINATOR);
-        mc.renderEngine.func_98187_b(Textures.GUI_CALCINATOR);
+        mc.renderEngine.bindTexture(Textures.GUI_CALCINATOR);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

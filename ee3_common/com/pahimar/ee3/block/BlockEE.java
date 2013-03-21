@@ -33,9 +33,9 @@ public abstract class BlockEE extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister iconRegister) {
+    public void registerIcons(IconRegister iconRegister) {
 
-        field_94336_cN = iconRegister.func_94245_a(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 
     /**

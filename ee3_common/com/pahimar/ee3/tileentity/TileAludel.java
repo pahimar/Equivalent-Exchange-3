@@ -143,15 +143,13 @@ public class TileAludel extends TileEE implements IInventory {
     }
 
     @Override
-    // public boolean hasCustomName()
-    public boolean func_94042_c() {
+    public boolean isInvNameLocalized() {
 
         return this.hasCustomName();
     }
 
     @Override
-    // public boolean canInsertSide(int i, ItemStack itemStack)
-    public boolean func_94041_b(int i, ItemStack itemstack) {
+    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 
         return true;
     }

@@ -62,7 +62,7 @@ public class ModelCalcinator extends ModelBase {
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
         GL11.glRotatef(45F, 0F, 1F, 0F);
         GL11.glRotatef(-90F, 1F, 0F, 0F);
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_CALCINATOR);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
         this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

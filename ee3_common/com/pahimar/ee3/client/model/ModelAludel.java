@@ -59,7 +59,7 @@ public class ModelAludel extends ModelBase {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         correctRotation(x, y, z, aludel.getOrientation());
-        FMLClientHandler.instance().getClient().renderEngine.func_98187_b(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
         this.render(Tessellator.instance, scale);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
