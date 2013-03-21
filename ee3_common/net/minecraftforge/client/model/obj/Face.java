@@ -50,29 +50,36 @@ public class Face {
         float averageU = 0F;
         float averageV = 0F;
 
-        for (int i = 0; i < textureCoordinates.length; ++i) {
-            averageU += textureCoordinates[i].u;
-            averageV += textureCoordinates[i].v;
+        if (textureCoordinates.length != 0) {
+            for (int i = 0; i < textureCoordinates.length; ++i) {
+                averageU += textureCoordinates[i].u;
+                averageV += textureCoordinates[i].v;
+            }
+    
+            averageU = averageU / textureCoordinates.length;
+            averageV = averageV / textureCoordinates.length;
         }
-
-        averageU = averageU / textureCoordinates.length;
-        averageV = averageV / textureCoordinates.length;
 
         float offsetU, offsetV;
 
         for (int i = 0; i < vertices.length; ++i) {
 
-            offsetU = textureOffset;
-            offsetV = textureOffset;
-
-            if (textureCoordinates[i].u > averageU) {
-                offsetU = -offsetU;
+            if (textureCoordinates.length != 0) {
+                offsetU = textureOffset;
+                offsetV = textureOffset;
+    
+                if (textureCoordinates[i].u > averageU) {
+                    offsetU = -offsetU;
+                }
+                if (textureCoordinates[i].v > averageV) {
+                    offsetV = -offsetV;
+                }
+    
+                tessellator.addVertexWithUV(vertices[i].x * scale, vertices[i].y * scale, vertices[i].z * scale, textureCoordinates[i].u + offsetU, textureCoordinates[i].v + offsetV);
             }
-            if (textureCoordinates[i].v > averageV) {
-                offsetV = -offsetV;
+            else {
+                tessellator.addVertex(vertices[i].x * scale, vertices[i].y * scale, vertices[i].z * scale);
             }
-
-            tessellator.addVertexWithUV(vertices[i].x * scale, vertices[i].y * scale, vertices[i].z * scale, textureCoordinates[i].u + offsetU, textureCoordinates[i].v + offsetV);
         }
 
         tessellator.draw();

@@ -7,25 +7,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class Group {
+public class GroupObject {
 
     public String name;
     public ArrayList<Face> faces = new ArrayList<Face>();
-    public ArrayList<Integer> indices = new ArrayList<Integer>();
-    public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-    public ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
-    public ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
-    public int indexCount;
     
-    public Group() {
+    public GroupObject() {
         
-        indexCount = 0;
         name = "";
     }
     
-    public Group(String name) {
+    public GroupObject(String name) {
 
-        indexCount = 0;
         this.name = name;
     }
 

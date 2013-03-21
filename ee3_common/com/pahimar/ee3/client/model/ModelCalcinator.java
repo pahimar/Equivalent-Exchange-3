@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraftforge.client.model.obj.Group;
+import net.minecraftforge.client.model.obj.GroupObject;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
@@ -46,8 +46,8 @@ public class ModelCalcinator extends ModelBase {
 
     public void render(Tessellator tessellator, float scale) {
 
-        if (modelCalcinatorOBJ.getGroups().size() != 0) {
-            for (Group group : modelCalcinatorOBJ.getGroups()) {
+        if (modelCalcinatorOBJ.groupObjects.size() != 0) {
+            for (GroupObject group : modelCalcinatorOBJ.groupObjects) {
                 if (group.name.equalsIgnoreCase("calcinator")) {
                     group.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
                 }

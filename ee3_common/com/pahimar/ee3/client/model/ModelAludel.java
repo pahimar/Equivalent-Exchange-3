@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraftforge.client.model.obj.Group;
+import net.minecraftforge.client.model.obj.GroupObject;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -47,8 +47,8 @@ public class ModelAludel extends ModelBase {
 
     public void render(Tessellator tessellator, float scale) {
 
-        if (modelAludelOBJ.getGroups().size() != 0) {
-            for (Group group : modelAludelOBJ.getGroups()) {
+        if (modelAludelOBJ.groupObjects.size() != 0) {
+            for (GroupObject group : modelAludelOBJ.groupObjects) {
                 group.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
             }
         }
