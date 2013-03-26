@@ -124,7 +124,7 @@ public class ConfigurationSettings {
     public static final String TRANSMUTE_COST_BLOCK_CONFIGNAME = Strings.TRANSMUTATION_COST_BLOCK;
     public static final int TRANSMUTE_COST_BLOCK_DEFAULT = 1;
 
-    // The durability cost for each block transmutation 
+    // The durability cost for each mob transmutation 
     public static int TRANSMUTE_COST_MOB;
     public static final String TRANSMUTE_COST_MOB_CONFIGNAME = Strings.TRANSMUTATION_COST_MOB;
     public static final int TRANSMUTE_COST_MOB_DEFAULT = 1;
