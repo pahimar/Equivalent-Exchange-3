@@ -48,8 +48,8 @@ public class ModelAludel extends ModelBase {
     public void render(Tessellator tessellator, float scale) {
 
         if (modelAludelOBJ.groupObjects.size() != 0) {
-            for (GroupObject group : modelAludelOBJ.groupObjects) {
-                group.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
+            for (GroupObject groupObject : modelAludelOBJ.groupObjects) {
+                groupObject.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
             }
         }
     }

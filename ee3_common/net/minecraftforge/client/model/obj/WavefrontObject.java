@@ -189,7 +189,8 @@ public class WavefrontObject {
                     face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
                     face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[2]) - 1);
                 }
-    
+                
+                face.faceNormal = face.calculateFaceNormal();
             }
             // f v1/vt1 v2/vt2 v3/vt3 ...
             else if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD)) {
@@ -199,6 +200,8 @@ public class WavefrontObject {
                     face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
                     face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
                 }
+                
+                face.faceNormal = face.calculateFaceNormal();
             }
             // f v1//vn1 v2//vn2 v3//vn3 ...
             else if (line.matches(REGEX_FACE_VERTEX_VERTEXNORMAL)) {
@@ -208,12 +211,16 @@ public class WavefrontObject {
                     face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
                     face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[1]) - 1);
                 }
+                
+                face.faceNormal = face.calculateFaceNormal();
             }
             // f v1 v2 v3 ...
             else if (line.matches(REGEX_FACE_VERTEX)) {
                 for (int i = 0; i < tokens.length; ++i) {
                     face.vertices[i] = vertices.get(Integer.parseInt(tokens[i]) - 1);
                 }
+                
+                face.faceNormal = face.calculateFaceNormal();
             }
             else {
                 throw new IllegalArgumentException();

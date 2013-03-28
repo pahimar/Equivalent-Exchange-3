@@ -35,4 +35,18 @@ public class GroupObject {
             face.render(tessellator, textureOffset, scale);
         }
     }
+    
+    public void render(Tessellator tessellator, int glDrawingMode, float scale) {
+
+        for (Face face : faces) {
+            face.render(tessellator, glDrawingMode, 0F, scale);
+        }
+    }
+
+    public void render(Tessellator tessellator, int glDrawingMode, float textureOffset, float scale) {
+
+        for (Face face : faces) {
+            face.render(tessellator, glDrawingMode, textureOffset, scale);
+        }
+    }
 }
