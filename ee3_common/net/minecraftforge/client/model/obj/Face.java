@@ -44,8 +44,8 @@ public class Face {
     public void render(Tessellator tessellator, float textureOffset, float scale) {
 
         tessellator.startDrawing(glDrawingMode);
-
-        tessellator.setNormal((float) getFaceNormal().x, (float) getFaceNormal().y, (float) getFaceNormal().z);
+        Vertex faceNormal = getFaceNormal();
+        tessellator.setNormal(faceNormal.x, faceNormal.y, faceNormal.z);
 
         float averageU = 0F;
         float averageV = 0F;
