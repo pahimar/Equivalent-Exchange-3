@@ -6,8 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import org.lwjgl.opengl.GL11;
+
+import com.pahimar.ee3.core.helper.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,10 +18,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class WavefrontObject {
 
-    private static final String REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL = "f(?: ((?:\\d*)(?:/\\d*)(?:/\\d*)))+";
-    private static final String REGEX_FACE_VERTEX_TEXTURECOORD = "f(?: ((?:\\d*)(?:/\\d*)))+";
-    private static final String REGEX_FACE_VERTEX_VERTEXNORMAL = "f(?: ((?:\\d*)(?://\\d*)))+";
-    private static final String REGEX_FACE_VERTEX = "f(?: ((?:\\d*)))+";
+    private static final String REGEX_VERTEX = "(v( (\\-){0,1}\\d+\\.\\d+){3,4} *\\n)|(v( (\\-){0,1}\\d+\\.\\d+){3,4} *$)";
+    private static final String REGEX_VERTEX_NORMAL = "(vn( (\\-){0,1}\\d+\\.\\d+){3,4} *\\n)|(vn( (\\-){0,1}\\d+\\.\\d+){3,4} *$)";
+    private static final String REGEX_TEXTURE_COORDINATE = "(vt( (\\-){0,1}\\d+\\.\\d+){3,4} *\\n)|(vt( (\\-){0,1}\\d+\\.\\d+){3,4} *$)";
+    private static final String REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL = "(f( \\d+/\\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+/\\d+){3,4} *$)";
+    private static final String REGEX_FACE_VERTEX_TEXTURECOORD = "(f( \\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+){3,4} *$)";
+    private static final String REGEX_FACE_VERTEX_VERTEXNORMAL = "(f( \\d+//\\d+){3,4} *\\n)|(f( \\d+//\\d+){3,4} *$)";
+    private static final String REGEX_FACE_VERTEX = "(f( \\d+){3,4} *\\n)|(f( \\d+){3,4} *$)";
+    private static final String REGEX_GROUP_OBJECT = "([go]( [\\w\\d]+){1} *\\n)|([go]( [\\w\\d]+){1} *$)";
     
     public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
     public ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
@@ -55,25 +62,25 @@ public class WavefrontObject {
                 if (currentLine.startsWith("#") || currentLine.length() == 0) {
                     continue;
                 }
-                else if (currentLine.startsWith("v ")) {
+                else if (isValidVertexLine(currentLine)) {
                     Vertex vertex = parseVertex(currentLine);
                     if (vertex != null) {
                         vertices.add(vertex);
                     }
                 }
-                else if (currentLine.startsWith("vn ")) {
+                else if (isValidVertexNormalLine(currentLine)) {
                     Vertex vertex = parseVertexNormal(currentLine);
                     if (vertex != null) {
                         vertexNormals.add(vertex);
                     }
                 }
-                else if (currentLine.startsWith("vt ")) {
+                else if (isValidTextureCoordinateLine(currentLine)) {
                     TextureCoordinate textureCoordinate = parseTextureCoordinate(currentLine);
                     if (textureCoordinate != null) {
                         textureCoordinates.add(textureCoordinate);
                     }
                 }
-                else if (currentLine.startsWith("f ")) {
+                else if (isValidFaceLine(currentLine)) {
                     Face face = parseFace(currentLine);
                     if (face != null) {
                         if (currentGroupObject == null) {
@@ -83,13 +90,16 @@ public class WavefrontObject {
                         currentGroupObject.faces.add(face);
                     }
                 }
-                else if (currentLine.startsWith("g ") || currentLine.startsWith("o ")) {
+                else if (isValidGroupObjectLine(currentLine)) {
                     GroupObject group = parseGroupObject(currentLine);
                     
                     if (currentGroupObject != null) {
                         groupObjects.add(currentGroupObject);
                     }
                     currentGroupObject = group;
+                }
+                else {
+                    // @TODO throw an exception if there is an error parsing something
                 }
             }
             
@@ -111,8 +121,6 @@ public class WavefrontObject {
     
     private Vertex parseVertex(String line) {
         Vertex vertex = null;
-        
-        // @TODO Validate vertex format with regex
         
         line = line.substring(line.indexOf(" ") + 1);
         String[] tokens = line.split(" ");
@@ -137,7 +145,6 @@ public class WavefrontObject {
     private TextureCoordinate parseTextureCoordinate(String line) {
         TextureCoordinate textureCoordinate = null;
         
-        // @TODO Validate texture coordinate format with regex
         line = line.substring(line.indexOf(" ") + 1);
         String[] tokens = line.split(" ");
         
@@ -158,73 +165,71 @@ public class WavefrontObject {
     
     private Face parseFace(String line) {
         Face face = null;
+
+        face = new Face();
         
-        if (validateFaceLine(line)) {
-            face = new Face();
+        String trimmedLine = line.substring(line.indexOf(" ") + 1);
+        String[] tokens = trimmedLine.split(" ");
+        String[] subTokens = null;
+        
+        if (tokens.length == 3) {
+            face.glDrawingMode = GL11.GL_TRIANGLES;
+        }
+        else if (tokens.length == 4) {
+            face.glDrawingMode = GL11.GL_QUADS;
+        }
+        else {
             
-            String trimmedLine = line.substring(line.indexOf(" ") + 1);
-            String[] tokens = trimmedLine.split(" ");
-            String[] subTokens = null;
+        }
+        
+        face.vertices = new Vertex[tokens.length];
+        face.textureCoordinates = new TextureCoordinate[tokens.length];
+        face.vertexNormals = new Vertex[tokens.length];
+
+        // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 ...
+        if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL)) {
+            for (int i = 0; i < tokens.length; ++i) {
+                subTokens = tokens[i].split("/");
+                
+                face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
+                face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
+                face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[2]) - 1);
+            }
             
-            if (tokens.length == 3) {
-                face.glDrawingMode = GL11.GL_TRIANGLES;
-            }
-            else if (tokens.length == 4) {
-                face.glDrawingMode = GL11.GL_QUADS;
-            }
-            else {
+            face.faceNormal = face.calculateFaceNormal();
+        }
+        // f v1/vt1 v2/vt2 v3/vt3 ...
+        else if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD)) {
+            for (int i = 0; i < tokens.length; ++i) {
+                subTokens = tokens[i].split("/");
                 
+                face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
+                face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
             }
             
-            face.vertices = new Vertex[tokens.length];
-            face.textureCoordinates = new TextureCoordinate[tokens.length];
-            face.vertexNormals = new Vertex[tokens.length];
-    
-            // f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 ...
-            if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL)) {
-                for (int i = 0; i < tokens.length; ++i) {
-                    subTokens = tokens[i].split("/");
-                    
-                    face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
-                    face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
-                    face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[2]) - 1);
-                }
+            face.faceNormal = face.calculateFaceNormal();
+        }
+        // f v1//vn1 v2//vn2 v3//vn3 ...
+        else if (line.matches(REGEX_FACE_VERTEX_VERTEXNORMAL)) {
+            for (int i = 0; i < tokens.length; ++i) {
+                subTokens = tokens[i].split("//");
                 
-                face.faceNormal = face.calculateFaceNormal();
+                face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
+                face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[1]) - 1);
             }
-            // f v1/vt1 v2/vt2 v3/vt3 ...
-            else if (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD)) {
-                for (int i = 0; i < tokens.length; ++i) {
-                    subTokens = tokens[i].split("/");
-                    
-                    face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
-                    face.textureCoordinates[i] = textureCoordinates.get(Integer.parseInt(subTokens[1]) - 1);
-                }
-                
-                face.faceNormal = face.calculateFaceNormal();
+            
+            face.faceNormal = face.calculateFaceNormal();
+        }
+        // f v1 v2 v3 ...
+        else if (line.matches(REGEX_FACE_VERTEX)) {
+            for (int i = 0; i < tokens.length; ++i) {
+                face.vertices[i] = vertices.get(Integer.parseInt(tokens[i]) - 1);
             }
-            // f v1//vn1 v2//vn2 v3//vn3 ...
-            else if (line.matches(REGEX_FACE_VERTEX_VERTEXNORMAL)) {
-                for (int i = 0; i < tokens.length; ++i) {
-                    subTokens = tokens[i].split("//");
-                    
-                    face.vertices[i] = vertices.get(Integer.parseInt(subTokens[0]) - 1);
-                    face.vertexNormals[i] = vertexNormals.get(Integer.parseInt(subTokens[1]) - 1);
-                }
-                
-                face.faceNormal = face.calculateFaceNormal();
-            }
-            // f v1 v2 v3 ...
-            else if (line.matches(REGEX_FACE_VERTEX)) {
-                for (int i = 0; i < tokens.length; ++i) {
-                    face.vertices[i] = vertices.get(Integer.parseInt(tokens[i]) - 1);
-                }
-                
-                face.faceNormal = face.calculateFaceNormal();
-            }
-            else {
-                throw new IllegalArgumentException();
-            }
+            
+            face.faceNormal = face.calculateFaceNormal();
+        }
+        else {
+            throw new IllegalArgumentException();
         }
                 
         return face;
@@ -244,11 +249,31 @@ public class WavefrontObject {
         
     }
     
-    private static boolean validateFaceLine(String faceLine) {
+    private static boolean isValidVertexLine(String line) {
         
-        return (faceLine.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL) ||
-                faceLine.matches(REGEX_FACE_VERTEX_TEXTURECOORD) ||
-                faceLine.matches(REGEX_FACE_VERTEX_VERTEXNORMAL) ||
-                faceLine.matches(REGEX_FACE_VERTEX));
+        return line.matches(REGEX_VERTEX);
+    }
+    
+    private static boolean isValidVertexNormalLine(String line) {
+        
+        return line.matches(REGEX_VERTEX_NORMAL);
+    }
+    
+    private static boolean isValidTextureCoordinateLine(String line) {
+        
+        return line.matches(REGEX_TEXTURE_COORDINATE);
+    }
+    
+    private static boolean isValidFaceLine(String line) {
+        
+        return (line.matches(REGEX_FACE_VERTEX_TEXTURECOORD_VERTEXNORMAL) ||
+                line.matches(REGEX_FACE_VERTEX_TEXTURECOORD) ||
+                line.matches(REGEX_FACE_VERTEX_VERTEXNORMAL) ||
+                line.matches(REGEX_FACE_VERTEX));
+    }
+    
+    private static boolean isValidGroupObjectLine(String line) {
+        
+        return line.matches(REGEX_GROUP_OBJECT);
     }
 }
