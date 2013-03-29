@@ -34,7 +34,10 @@ public class ContainerAlchemicalBag extends Container {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 162));
         }
     }
-
+    @Override
+    public void retrySlotClick(int par1, int par2, boolean par3, EntityPlayer par4EntityPlayer) { 
+    	//Prevents Bag Shift-Click Crash By Overriding retrySlotClick(). Not A Great Solution, Will Improve Soon 
+    }
     @Override
     public boolean canInteractWith(EntityPlayer var1) {
 
