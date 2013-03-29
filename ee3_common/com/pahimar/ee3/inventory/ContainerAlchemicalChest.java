@@ -21,8 +21,8 @@ public class ContainerAlchemicalChest extends Container {
 
     private TileAlchemicalChest tileAlchemicalChest;
 
-    private final int CHEST_INVENTORY_ROWS = 4;
-    private final int CHEST_INVENTORY_COLUMNS = 13;
+    private final int CHEST_INVENTORY_ROWS = 5;
+    private final int CHEST_INVENTORY_COLUMNS = 11;
 
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
@@ -36,7 +36,7 @@ public class ContainerAlchemicalChest extends Container {
         // Add the Alchemical Chest slots to the container
         for (int chestRowIndex = 0; chestRowIndex < CHEST_INVENTORY_ROWS; ++chestRowIndex) {
             for (int chestColumnIndex = 0; chestColumnIndex < CHEST_INVENTORY_COLUMNS; ++chestColumnIndex) {
-                this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * 13, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
+                this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * 11, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
             }
         }
 
