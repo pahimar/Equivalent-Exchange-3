@@ -21,8 +21,8 @@ public class ContainerAlchemicalChest extends Container {
 
     private TileAlchemicalChest tileAlchemicalChest;
 
-    private final int CHEST_INVENTORY_ROWS = 4;
-    private final int CHEST_INVENTORY_COLUMNS = 13;
+    private final int CHEST_INVENTORY_ROWS = 5;
+    private final int CHEST_INVENTORY_COLUMNS = 11;
 
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
