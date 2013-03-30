@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
 import com.pahimar.ee3.core.helper.GeneralHelper;
@@ -30,8 +31,8 @@ import cpw.mods.fml.common.ObfuscationReflectionHelper;
  */
 public class RecipesTransmutationStone {
 
-    private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);
-    private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, -1);
+    private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, OreDictionary.WILDCARD_VALUE);
 
     public static List<ItemStack> transmutationStones = Arrays.asList(miniumStone, philStone);
 
