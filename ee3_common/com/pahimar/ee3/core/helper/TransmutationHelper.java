@@ -26,9 +26,10 @@ public class TransmutationHelper {
     public static ItemStack targetBlockStack = null;
 
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
-
+        
         if (Block.blocksList[targetID] != null) {
-            world.setBlockAndMetadataWithNotify(x, y, z, targetID, targetMeta, 2);
+            
+            world.setBlock(x, y, z, targetID, targetMeta, 2);
             return true;
         }
 
