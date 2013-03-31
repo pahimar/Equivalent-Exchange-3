@@ -2,10 +2,12 @@ package com.pahimar.ee3.block;
 
 import net.minecraft.block.BlockStationary;
 import net.minecraft.block.material.Material;
-
+import net.minecraft.client.renderer.texture.IconRegister;
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Sprites;
+import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -27,10 +29,11 @@ public class BlockRedWaterStill extends BlockStationary {
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.disableStats();
     }
-
+    
     @Override
-    public String getTextureFile() {
-
-        return Sprites.SPRITE_SHEET_LOCATION + Sprites.BLOCK_SPRITE_SHEET;
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister iconRegister)
+    {
+        this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":" + this.getUnlocalizedName2());
     }
 }
