@@ -13,7 +13,7 @@ public class CopperTransmute
     
     public static void copper(ItemStack transmutationStone)
     {   
-        ArrayList<ItemStack > copperOres = OreDictionary.getOres("copper");
+        ArrayList<ItemStack > copperOres = OreDictionary.getOres("ingotCopper");
         ItemStack copperItem = copperOres.get(0);
         try
         {
