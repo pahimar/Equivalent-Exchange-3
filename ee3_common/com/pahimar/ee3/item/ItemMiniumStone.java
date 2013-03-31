@@ -54,7 +54,11 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
 
         return false;
     }
-
+    @Override
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
+    {
+        return true;
+    }
     @Override
     public boolean getShareTag() {
 
