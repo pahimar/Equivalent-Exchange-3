@@ -36,10 +36,10 @@ public class RecipesTransmutationStone {
 
     public static List<ItemStack> transmutationStones = Arrays.asList(miniumStone, philStone);
 
-    private static ItemStack anyCoal = new ItemStack(Item.coal, 1, -1);
-    private static ItemStack anyWood = new ItemStack(Block.wood, 1, -1);
-    private static ItemStack anyPlank = new ItemStack(Block.planks, 1, -1);
-    private static ItemStack anySandStone = new ItemStack(Block.sandStone, 1, -1);
+    private static ItemStack anyCoal = new ItemStack(Item.coal, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anyWood = new ItemStack(Block.wood, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anyPlank = new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anySandStone = new ItemStack(Block.sandStone, 1, OreDictionary.WILDCARD_VALUE);
     private static ItemStack dyeBoneMeal = new ItemStack(Item.dyePowder, 1, 15);
 
     public static void init() {
