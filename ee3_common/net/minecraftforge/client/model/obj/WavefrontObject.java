@@ -62,25 +62,25 @@ public class WavefrontObject {
                 if (currentLine.startsWith("#") || currentLine.length() == 0) {
                     continue;
                 }
-                else if (isValidVertexLine(currentLine)) {
+                else if (currentLine.startsWith("v ")) {
                     Vertex vertex = parseVertex(currentLine);
                     if (vertex != null) {
                         vertices.add(vertex);
                     }
                 }
-                else if (isValidVertexNormalLine(currentLine)) {
+                else if (currentLine.startsWith("vn ")) {
                     Vertex vertex = parseVertexNormal(currentLine);
                     if (vertex != null) {
                         vertexNormals.add(vertex);
                     }
                 }
-                else if (isValidTextureCoordinateLine(currentLine)) {
+                else if (currentLine.startsWith("vt ")) {
                     TextureCoordinate textureCoordinate = parseTextureCoordinate(currentLine);
                     if (textureCoordinate != null) {
                         textureCoordinates.add(textureCoordinate);
                     }
                 }
-                else if (isValidFaceLine(currentLine)) {
+                else if (currentLine.startsWith("f ")) {
                     Face face = parseFace(currentLine);
                     if (face != null) {
                         if (currentGroupObject == null) {
@@ -90,16 +90,13 @@ public class WavefrontObject {
                         currentGroupObject.faces.add(face);
                     }
                 }
-                else if (isValidGroupObjectLine(currentLine)) {
+                else if (currentLine.startsWith("g ") | currentLine.startsWith("o ")) {
                     GroupObject group = parseGroupObject(currentLine);
                     
                     if (currentGroupObject != null) {
                         groupObjects.add(currentGroupObject);
                     }
                     currentGroupObject = group;
-                }
-                else {
-                    // @TODO throw an exception if there is an error parsing something
                 }
             }
             

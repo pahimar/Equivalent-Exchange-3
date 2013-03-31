@@ -1,7 +1,5 @@
 package net.minecraftforge.client.model.obj;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Vec3;
 import cpw.mods.fml.relauncher.Side;
