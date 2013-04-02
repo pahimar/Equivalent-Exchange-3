@@ -15,7 +15,7 @@ public class Face {
     
     public void addFaceForRender(Tessellator tessellator) {
         
-        addFaceForRender(tessellator, 0.0002F);
+        addFaceForRender(tessellator, 0.0005F);
     }
 
     public void addFaceForRender(Tessellator tessellator, float textureOffset) {

@@ -112,9 +112,6 @@ public class EquivalentExchange3 {
     @Init
     public void load(FMLInitializationEvent event) {
 
-        // Initialize the custom item rarity types
-        proxy.initCustomRarityTypes();
-
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 

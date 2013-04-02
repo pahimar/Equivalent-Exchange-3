@@ -4,13 +4,12 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
@@ -82,30 +81,28 @@ public class ItemAlchemicalDust extends ItemEE {
         else
             return false;
     }
-
+    
     @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack) {
-
-        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 11);
-
+    public String getItemDisplayName(ItemStack itemStack) {
+        
+        int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
+        
         switch (meta) {
             case 0:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.NORMAL);
+                return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
             case 1:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.NORMAL);
+                return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
             case 2:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.UNCOMMON);
+                return EnumChatFormatting.GREEN + super.getItemDisplayName(itemStack);
             case 3:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.MAGICAL);
+                return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
             case 4:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.EPIC);
+                return EnumChatFormatting.DARK_PURPLE + super.getItemDisplayName(itemStack);
             case 5:
-                return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.LEGENDARY);
+                return EnumChatFormatting.GOLD + super.getItemDisplayName(itemStack);
             default:
-                return EnumRarity.common;
+                return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
         }
-
     }
 
     @Override

@@ -1,32 +1,9 @@
 package com.pahimar.ee3.core.proxy;
 
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_UNCOMMON;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_UNCOMMON;
-import static com.pahimar.ee3.lib.CustomItemRarity.EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.UNCOMMON;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
@@ -103,28 +80,6 @@ public class ClientProxy extends CommonProxy {
     public void registerSoundHandler() {
 
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
-    }
-
-    @Override
-    public void initCustomRarityTypes() {
-
-        EnumHelperClient.addRarity(JUNK, COLOR_JUNK, DISPLAY_NAME_JUNK);
-        EnumHelperClient.addRarity(NORMAL, COLOR_NORMAL, DISPLAY_NAME_NORMAL);
-        EnumHelperClient.addRarity(UNCOMMON, COLOR_UNCOMMON, DISPLAY_NAME_UNCOMMON);
-        EnumHelperClient.addRarity(MAGICAL, COLOR_MAGICAL, DISPLAY_NAME_MAGICAL);
-        EnumHelperClient.addRarity(RARE, COLOR_RARE, DISPLAY_NAME_RARE);
-        EnumHelperClient.addRarity(EPIC, COLOR_EPIC, DISPLAY_NAME_EPIC);
-        EnumHelperClient.addRarity(LEGENDARY, COLOR_LEGENDARY, DISPLAY_NAME_LEGENDARY);
-    }
-
-    @Override
-    public EnumRarity getCustomRarityType(String customRarity) {
-
-        for (EnumRarity rarity : EnumRarity.class.getEnumConstants()) {
-            if (rarity.name().equals(customRarity))
-                return rarity;
-        }
-        return EnumRarity.common;
     }
 
     @Override

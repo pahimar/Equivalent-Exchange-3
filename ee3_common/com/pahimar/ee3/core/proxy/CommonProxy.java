@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -56,15 +55,6 @@ public class CommonProxy implements IGuiHandler {
 
     public void registerSoundHandler() {
 
-    }
-
-    public void initCustomRarityTypes() {
-
-    }
-
-    public EnumRarity getCustomRarityType(String customRarity) {
-
-        return null;
     }
 
     public void initRenderingAndTextures() {
