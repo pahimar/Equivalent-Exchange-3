@@ -6,11 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import org.lwjgl.opengl.GL11;
-
-import com.pahimar.ee3.core.helper.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -81,12 +78,14 @@ public class WavefrontObject {
                     }
                 }
                 else if (currentLine.startsWith("f ")) {
+                    
+                    if (currentGroupObject == null) {
+                        currentGroupObject = new GroupObject("Default");
+                    }
+                    
                     Face face = parseFace(currentLine);
+                    
                     if (face != null) {
-                        if (currentGroupObject == null) {
-                            currentGroupObject = new GroupObject("Default");
-                        }
-
                         currentGroupObject.faces.add(face);
                     }
                 }
@@ -96,6 +95,7 @@ public class WavefrontObject {
                     if (currentGroupObject != null) {
                         groupObjects.add(currentGroupObject);
                     }
+                    
                     currentGroupObject = group;
                 }
             }
@@ -112,6 +112,35 @@ public class WavefrontObject {
             }
             catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+    
+    public void renderAll() {
+        
+        for (GroupObject groupObject : groupObjects) {
+            groupObject.render();
+        }
+    }
+    
+    public void renderOnly(String ... groupNames) {
+        
+        for (GroupObject groupObject : groupObjects) {
+            for (String groupName : groupNames) {
+                if (groupName.equalsIgnoreCase(groupObject.name)) {
+                    groupObject.render();
+                }
+            }
+        }
+    }
+    
+    public void renderAllExcept(String ... excludedGroupNames) {
+        
+        for (GroupObject groupObject : groupObjects) {
+            for (String excludedGroupName : excludedGroupNames) {
+                if (!excludedGroupName.equalsIgnoreCase(groupObject.name)) {
+                    groupObject.render();
+                }
             }
         }
     }
@@ -170,13 +199,10 @@ public class WavefrontObject {
         String[] subTokens = null;
         
         if (tokens.length == 3) {
-            face.glDrawingMode = GL11.GL_TRIANGLES;
+            currentGroupObject.glDrawingMode = GL11.GL_TRIANGLES;
         }
         else if (tokens.length == 4) {
-            face.glDrawingMode = GL11.GL_QUADS;
-        }
-        else {
-            
+            currentGroupObject.glDrawingMode = GL11.GL_QUADS;
         }
         
         face.vertices = new Vertex[tokens.length];

@@ -1,6 +1,5 @@
 package com.pahimar.ee3.client.renderer.item;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -47,37 +46,41 @@ public class ItemAludelRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
-        float scale;
         switch (type) {
             case ENTITY: {
-                scale = 0.66F;
-                renderAludel(-0.5F * scale, 0.0F * scale, 0.5F * scale, scale);
-                break;
+                renderAludel(-0.5F, 0.0F, 0.5F, 0.66F);
+                return;
             }
             case EQUIPPED: {
-                scale = 0.66F;
-                renderAludel(0.5F * scale, 0.0F * scale, 1.25F * scale, scale);
-                break;
+                renderAludel(0.5F, 0.0F, 1.25F, 0.66F);
+                return;
             }
             case INVENTORY: {
-                scale = 0.85F;
-                renderAludel(-1.0F * scale, -1.2F * scale, 0.0F * scale, scale);
-                break;
+                renderAludel(-1.0F, -1.2F, 0.0F, 0.85F);
+                return;
             }
             default:
-                break;
+                return;
         }
     }
 
     private void renderAludel(float x, float y, float z, float scale) {
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
-        GL11.glPushMatrix(); //start
+        GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glTranslatef(x, y, z); //size
+        
+        // Scale, Translate, Rotate
+        GL11.glScalef(scale, scale, scale);
+        GL11.glTranslatef(x, y, z);
         GL11.glRotatef(-90F, 1F, 0, 0);
-        aludelModel.render(Tessellator.instance, scale);
+        
+        // Bind texture
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
+        
+        // Render
+        aludelModel.render();
+        
         GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix(); //end
+        GL11.glPopMatrix();
     }
 }
