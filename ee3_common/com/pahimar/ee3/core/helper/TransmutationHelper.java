@@ -28,7 +28,7 @@ public class TransmutationHelper {
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
         if (Block.blocksList[targetID] != null) {
-            world.setBlockMetadataWithNotify(x, y, z, targetID, targetMeta);
+            world.setBlock(x, y, z, targetID, targetMeta, 2);
             return true;
         }
 
