@@ -44,7 +44,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
         
-        return EnumChatFormatting.DARK_PURPLE + super.getItemDisplayName(itemStack);
+        return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
 
-        return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
+        return EnumChatFormatting.YELLOW + super.getItemDisplayName(itemStack);
     }
 
     @Override
