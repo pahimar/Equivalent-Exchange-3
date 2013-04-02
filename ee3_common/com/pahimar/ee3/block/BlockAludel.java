@@ -125,4 +125,9 @@ public class BlockAludel extends BlockEE {
             }
         }
     }
+    
+    @Override
+    public boolean canPlaceBlockAt(World w, int x, int y, int z) {
+    	return w.isAirBlock(x, y+1, z);
+    }
 }
