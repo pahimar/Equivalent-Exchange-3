@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.Tessellator;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -28,21 +30,24 @@ public class WavefrontObject {
     public ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
     public ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
     public ArrayList<GroupObject> groupObjects = new ArrayList<GroupObject>();
-    public String fileName;
     private GroupObject currentGroupObject;
 
     public WavefrontObject(String fileName) {
 
-        this.fileName = fileName;
         parseObjModel(fileName);
     }
+    
+    public WavefrontObject(URL fileURL) {
+        
+        parseObjModel(fileURL);
+    }
 
-    public void parseObjModel(String fileName) {
+    private void parseObjModel(String fileName) {
 
         parseObjModel(this.getClass().getResource(fileName));
     }
     
-    public void parseObjModel(URL fileURL) {
+    private void parseObjModel(URL fileURL) {
 
         BufferedReader reader = null;
         InputStream inputStream = null;
@@ -118,9 +123,20 @@ public class WavefrontObject {
     
     public void renderAll() {
         
-        for (GroupObject groupObject : groupObjects) {
-            groupObject.render();
+        Tessellator tessellator = Tessellator.instance;
+        
+        if (currentGroupObject != null) {
+            tessellator.startDrawing(currentGroupObject.glDrawingMode);    
         }
+        else {
+            tessellator.startDrawing(GL11.GL_TRIANGLES);
+        }
+        
+        for (GroupObject groupObject : groupObjects) {
+            groupObject.render(tessellator);
+        }
+        
+        tessellator.draw();
     }
     
     public void renderOnly(String ... groupNames) {

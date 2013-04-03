@@ -47,4 +47,14 @@ public class GroupObject {
             tessellator.draw();
         }
     }
+    
+    public void render(Tessellator tessellator) {
+        
+        if (faces.size() > 0) {
+            
+            for (Face face : faces) {
+                face.addFaceForRender(tessellator);
+            }
+        }
+    }
 }
