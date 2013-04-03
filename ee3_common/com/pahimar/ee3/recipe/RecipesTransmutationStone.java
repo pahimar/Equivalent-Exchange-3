@@ -190,7 +190,7 @@ public class RecipesTransmutationStone {
 
     protected static void initEquivalencyList() {
 
-        EquivalencyHandler.instance().addObjects(Block.sand, Block.dirt, Block.cobblestone, Block.grass);
+        EquivalencyHandler.instance().addObjects(Block.grass, Block.dirt, Block.cobblestone, Block.sand);
         EquivalencyHandler.instance().addObjects(Block.plantYellow, Block.plantRed);
         EquivalencyHandler.instance().addObjects(Block.mushroomRed, Block.mushroomBrown);
         EquivalencyHandler.instance().addObjects(Item.pumpkinSeeds, Item.melonSeeds);
