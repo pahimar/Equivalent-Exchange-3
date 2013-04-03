@@ -3,9 +3,6 @@ package net.minecraftforge.client.model.obj;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.Tessellator;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,7 +21,7 @@ public class GroupObject
 
     public GroupObject(String name)
     {
-        this(name, GL11.GL_TRIANGLES);
+        this(name, -1);
     }
 
     public GroupObject(String name, int glDrawingMode)
