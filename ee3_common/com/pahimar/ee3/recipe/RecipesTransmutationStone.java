@@ -86,6 +86,8 @@ public class RecipesTransmutationStone {
         RecipeHelper.addRecipe(Item.clay, transmutationStone, anySandStone, anySandStone, anySandStone, anySandStone);
         RecipeHelper.addRecipe(Item.clay, transmutationStone, Item.flint, Item.flint, Item.flint, Item.flint);
         RecipeHelper.addRecipe(new ItemStack(Block.gravel, 4), transmutationStone, Item.clay);
+        //gravel directly to flint
+        RecipeHelper.addRecipe(new ItemStack(Item.flint, 3), transmutationStone, Block.gravel, Block.gravel, Block.gravel);
 
         /* 2 Wood Log <-> 1 Obsidian */
         RecipeHelper.addRecipe(Block.obsidian, transmutationStone, anyWood, anyWood);
