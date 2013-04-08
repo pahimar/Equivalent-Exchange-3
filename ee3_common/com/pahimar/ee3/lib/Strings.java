@@ -15,6 +15,9 @@ public class Strings {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
+    /* Fingerprint check related constants */
+    public static final String INVALID_FINGERPRINT_MESSAGE = "fingerprint_check.invalid";
+    
     /* Version check related constants */
     public static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.init_log_message";
     public static final String UNINITIALIZED_MESSAGE = "version.uninitialized";

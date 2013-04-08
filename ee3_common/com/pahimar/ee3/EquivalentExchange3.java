@@ -1,6 +1,7 @@
 package com.pahimar.ee3;
 
 import java.io.File;
+import java.util.logging.Level;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.CraftingManager;
@@ -26,16 +27,19 @@ import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.recipe.RecipesTransmutationStone;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -43,6 +47,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -55,7 +60,7 @@ import cpw.mods.fml.relauncher.Side;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, certificateFingerprint = Reference.FINGERPRINT)
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
@@ -67,6 +72,13 @@ public class EquivalentExchange3 {
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
+    @FingerprintWarning
+    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
+        
+        // Report (log) to the user that the version of Equivalent Exchange 3 they are using has been changed/tampered with
+        LogHelper.log(Level.SEVERE, LanguageRegistry.instance().getStringLocalization(Strings.INVALID_FINGERPRINT_MESSAGE));
+    }
+    
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event) {
 
@@ -155,6 +167,5 @@ public class EquivalentExchange3 {
 
         // Initialize the Addon Handler
         AddonHandler.init();
-
     }
 }

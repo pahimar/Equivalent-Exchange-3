@@ -14,6 +14,7 @@
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
 		<replace dir="${dir.development}\mcp\src\minecraft" token="@VERSION@" value="${release.mod.version}" />
+		<replace dir="${dir.development}\mcp\src\minecraft" token="@FINGERPRINT@" value="${release.mod.fingerprint}" />
 	</target>
 	
 	<target name="recompile">
@@ -33,16 +34,16 @@
 	
 	<target name="reobfuscate">
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c reobfuscate.bat" />
+			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c reobfuscate.bat" />
+			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate.sh" />
+			<arg line="reobfuscate_srg.sh" />
 		</exec>
 		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
-			<arg line="reobfuscate.sh" />
+			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
 	
@@ -80,8 +81,10 @@
 			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
+		<!-- Sign the jar -->
+		<signjar jar="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar" keystore="${keystore.location}" alias="${keystore.alias}" storepass="${keystore.password}" />
+		
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
-	
 </project>
