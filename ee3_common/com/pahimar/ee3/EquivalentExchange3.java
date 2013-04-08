@@ -47,7 +47,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -76,7 +75,7 @@ public class EquivalentExchange3 {
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
         
         // Report (log) to the user that the version of Equivalent Exchange 3 they are using has been changed/tampered with
-        LogHelper.log(Level.SEVERE, LanguageRegistry.instance().getStringLocalization(Strings.INVALID_FINGERPRINT_MESSAGE));
+        LogHelper.log(Level.SEVERE, Strings.INVALID_FINGERPRINT_MESSAGE);
     }
     
     @ServerStarting

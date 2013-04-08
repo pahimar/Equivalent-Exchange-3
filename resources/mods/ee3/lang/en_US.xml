@@ -27,7 +27,6 @@
 	<entry key="container.alchemicalChest">Alchemical Chest</entry>
 	<entry key="container.alchemicalBag">Alchemical Bag</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="fingerprint_check.invalid">The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.</entry>
 	<entry key="version.init_log_message">Initializing remote version check against remote version authority, located at</entry>
 	<entry key="version.uninitialized">Remote version check failed to initialize properly</entry>
 	<entry key="version.current">Currently using the most up to date version (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@</entry>

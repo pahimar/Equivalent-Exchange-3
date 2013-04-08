@@ -16,7 +16,7 @@ public class Strings {
     public static final String FALSE = "false";
 
     /* Fingerprint check related constants */
-    public static final String INVALID_FINGERPRINT_MESSAGE = "fingerprint_check.invalid";
+    public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
     
     /* Version check related constants */
     public static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.init_log_message";
