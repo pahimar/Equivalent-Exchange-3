@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.Tessellator;
@@ -25,7 +26,7 @@ public class WavefrontObject
     private static final String REGEX_FACE_VERTEX_TEXTURECOORD = "(f( \\d+/\\d+){3,4} *\\n)|(f( \\d+/\\d+){3,4} *$)";
     private static final String REGEX_FACE_VERTEX_VERTEXNORMAL = "(f( \\d+//\\d+){3,4} *\\n)|(f( \\d+//\\d+){3,4} *$)";
     private static final String REGEX_FACE_VERTEX = "(f( \\d+){3,4} *\\n)|(f( \\d+){3,4} *$)";
-    private static final String REGEX_GROUP_OBJECT = "([go]( [\\w\\d]+){1} *\\n)|([go]( [\\w\\d]+){1} *$)";
+    private static final String REGEX_GROUP_OBJECT = "([go]( [\\w\\d]+) *\\n)|([go]( [\\w\\d]+) *$)";
 
     public ArrayList<Vertex> vertices = new ArrayList<Vertex>();
     public ArrayList<Vertex> vertexNormals = new ArrayList<Vertex>();
@@ -35,32 +36,44 @@ public class WavefrontObject
 
     public WavefrontObject(String fileName)
     {
-        parseObjModel(fileName);
+        try
+        {
+            parseObjModel(this.getClass().getResource(fileName));
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public WavefrontObject(URL fileURL)
     {
-        parseObjModel(fileURL);
+        try
+        {
+            parseObjModel(fileURL);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    private void parseObjModel(String fileName)
-    {
-        parseObjModel(this.getClass().getResource(fileName));
-    }
-
-    private void parseObjModel(URL fileURL)
+    private void parseObjModel(URL fileURL) throws ParseException
     {
         BufferedReader reader = null;
         InputStream inputStream = null;
+        
+        String currentLine = null;
+        int lineCount = 0;
 
         try
         {
             inputStream = fileURL.openStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String currentLine = null;
             while ((currentLine = reader.readLine()) != null)
             {
+                lineCount++;
                 currentLine = currentLine.replaceAll("\\s+", " ").trim();
 
                 if (currentLine.startsWith("#") || currentLine.length() == 0)
@@ -74,6 +87,10 @@ public class WavefrontObject
                     {
                         vertices.add(vertex);
                     }
+                    else
+                    {
+                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
+                    }
                 }
                 else if (currentLine.startsWith("vn "))
                 {
@@ -82,6 +99,10 @@ public class WavefrontObject
                     {
                         vertexNormals.add(vertex);
                     }
+                    else
+                    {
+                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
+                    }
                 }
                 else if (currentLine.startsWith("vt "))
                 {
@@ -89,6 +110,10 @@ public class WavefrontObject
                     if (textureCoordinate != null)
                     {
                         textureCoordinates.add(textureCoordinate);
+                    }
+                    else
+                    {
+                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
                     }
                 }
                 else if (currentLine.startsWith("f "))
@@ -105,14 +130,25 @@ public class WavefrontObject
                     {
                         currentGroupObject.faces.add(face);
                     }
+                    else
+                    {
+                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
+                    }
                 }
                 else if (currentLine.startsWith("g ") | currentLine.startsWith("o "))
                 {
                     GroupObject group = parseGroupObject(currentLine);
 
-                    if (currentGroupObject != null)
+                    if (group != null)
                     {
-                        groupObjects.add(currentGroupObject);
+                        if (currentGroupObject != null)
+                        {
+                            groupObjects.add(currentGroupObject);
+                        }
+                    }
+                    else
+                    {
+                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
                     }
 
                     currentGroupObject = group;
@@ -130,6 +166,13 @@ public class WavefrontObject
             try
             {
                 reader.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            try
+            {
                 inputStream.close();
             }
             catch (IOException e)
@@ -279,7 +322,7 @@ public class WavefrontObject
                 }
                 else if (currentGroupObject.glDrawingMode != GL11.GL_TRIANGLES)
                 {
-                    // @TODO throw new exception (of some sort)
+                    return null;
                 }
             }
             else if (tokens.length == 4)
@@ -290,7 +333,7 @@ public class WavefrontObject
                 }
                 else if (currentGroupObject.glDrawingMode != GL11.GL_QUADS)
                 {
-                    // @TODO throw new exception (of some sort)
+                    return null;
                 }
             }
 
