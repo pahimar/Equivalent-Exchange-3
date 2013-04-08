@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Slovak (SK) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Vypustiť</entry>
+	<entry key="key.toggle">Prepnúť</entry>
+	<entry key="key.charge">Nabiť</entry>
+	<entry key="item.miniumShard.name">Úlomok Suríku</entry>
+	<entry key="item.inertStone.name">Inertný Kameň</entry>
+	<entry key="item.miniumStone.name">Kameň suríku</entry>
+	<entry key="item.stonePhilosophers.name">Kameň mudrcov</entry>
+	<entry key="item.dustAlchemicalAsh.name">Popol</entry>
+	<entry key="item.dustAlchemicalMinium.name">Suríkový Prášek</entry>
+	<entry key="item.dustAlchemicalVerdant.name">Nazelenaný Prášok</entry>
+	<entry key="item.dustAlchemicalAzure.name">Azurový Prášok</entry>
+	<entry key="item.dustAlchemicalAmaranthine.name">Amarantový Prášok</entry>
+	<entry key="item.dustAlchemicalIridescent.name">Dúhový Prášok</entry>
+	<entry key="item.alchemyBag.name">Alchymistická Taška</entry>
+	<entry key="tile.redWaterStill.name">Červená voda (zdroj)</entry>
+	<entry key="tile.redWaterFlowing.name">Črevená voda(tečúca)</entry>
+	<entry key="tile.calcinator.name">Kalcinátor</entry>
+	<entry key="tile.aludel.name">Sublimačná Nádoba</entry>
+	<entry key="tile.alchemicalChest.name">Alchymistická Truhla</entry>
+	<entry key="container.calcinator">Kalcinátor</entry>
+	<entry key="container.aludel">Sublimačná Nádoba</entry>
+	<entry key="container.alchemicalChest">Alchymistická Truhla</entry>
+	<entry key="container.alchemicalBag">Alchymistická Taška</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Prebieha kontrola verzie, vzdialený soúbor je umiestnený na</entry>
+	<entry key="version.uninitialized">Kontrola veruie nebola úspešná(nepodarila sa inicializácia)</entry>
+	<entry key="version.current">Používate najaktuálnejšiu verziu (@REMOTE_MOD_VERSION@) módu Equivalent Exchange 3, ktorá je pre vašu verziu Minecraftu (@MINECRAFT_VERSION@) k dispozicií</entry>
+	<entry key="version.outdated">Je k dispozicií nová verzia @MOD_NAME@ (@REMOTE_MOD_VERSION@) pre MC @MINECRAFT_VERSION@, stiahnuteľná tu: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Chyba pri pripojovaní k servru, ktorý poskytuje informácie o verzii, skúšam sa znovu pripojiť</entry>
+	<entry key="version.final_error">Kontrola verzie deaktivovaná po troch neúspešných pokusoch</entry>
+	<entry key="version.mc_version_not_found">Nepodarilo sa nájsť verziu @MOD_NAME@ pre @MINECRAFT_VERSION@</entry>
+	<entry key="command.ee3.overlay.turned_on">Zobrazenie výsledku transmutácie zapnuté</entry>
+	<entry key="command.ee3.overlay.turned_off">Zobrazenie výsledku transmutácie vypnuté</entry>
+	<entry key="command.ee3.overlay.position.top_left">Pozícia zobrazenia výsledku transmutáce nastavená na ľavý horný kút</entry>
+	<entry key="command.ee3.overlay.position.top_right">Pozícia zobrazenia výsledku transmutáce nastavená na pravý horný kút</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Pozícia zobrazenia výsledku transmutáce nastavená na ľavý spodný kút</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Pozícia zobrazenia výsledku transmutáce nastavená na pravý spodný kút</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(kde ### je desetinná hodnota medzi 0,0 a 1,0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Priehľadnosť výsledku transmutácie úspešne zmenená</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(kde ### je desetinná hodnota vetšia než 0,0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Mierka výsledku transmutácie úspešne zmenená</entry>
+	<entry key="command.ee3.particles.turned_on">Časticové efekty módu Equivalent Exchange 3 zapnuté</entry>
+	<entry key="command.ee3.particles.turned_off">Časticové efekty módu Equivalent Exchange 3 vypnuté</entry>
+	<entry key="command.ee3.sounds.set_to_all">Prehrávane zvukov Equivalent Exchange 3: počuješ všetkých hráčov</entry>
+	<entry key="command.ee3.sounds.set_to_self">Prehrávane zvukov Equivalent Exchange 3:  počuješ iba seba</entry>
+	<entry key="command.ee3.sounds.turned_off">Prehrávane zvukov Equivalent Exchange 3: vypnuté</entry>
+</properties>
