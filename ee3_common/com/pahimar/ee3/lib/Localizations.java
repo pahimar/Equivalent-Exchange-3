@@ -31,6 +31,7 @@ public class Localizations {
         LANG_RESOURCE_LOCATION + "pt_BR.xml", 
         LANG_RESOURCE_LOCATION + "pt_PT.xml", 
         LANG_RESOURCE_LOCATION + "ru_RU.xml", 
+        LANG_RESOURCE_LOCATION + "sk_SK.xml",
         LANG_RESOURCE_LOCATION + "sr_RS.xml", 
         LANG_RESOURCE_LOCATION + "sv_SE.xml", 
         LANG_RESOURCE_LOCATION + "tr_TR.xml", 

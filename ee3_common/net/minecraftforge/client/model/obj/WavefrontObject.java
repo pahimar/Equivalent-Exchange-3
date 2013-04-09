@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 import net.minecraft.client.renderer.Tessellator;
 
@@ -33,14 +33,17 @@ public class WavefrontObject
     public ArrayList<TextureCoordinate> textureCoordinates = new ArrayList<TextureCoordinate>();
     public ArrayList<GroupObject> groupObjects = new ArrayList<GroupObject>();
     private GroupObject currentGroupObject;
+    private String fileName;
 
     public WavefrontObject(String fileName)
     {
+        this.fileName = fileName;
+        
         try
         {
             parseObjModel(this.getClass().getResource(fileName));
         }
-        catch (ParseException e)
+        catch (DataFormatException e)
         {
             e.printStackTrace();
         }
@@ -48,17 +51,19 @@ public class WavefrontObject
 
     public WavefrontObject(URL fileURL)
     {
+        this.fileName = fileURL.getFile();
+        
         try
         {
             parseObjModel(fileURL);
         }
-        catch (ParseException e)
+        catch (DataFormatException e)
         {
             e.printStackTrace();
         }
     }
 
-    private void parseObjModel(URL fileURL) throws ParseException
+    private void parseObjModel(URL fileURL) throws DataFormatException
     {
         BufferedReader reader = null;
         InputStream inputStream = null;
@@ -82,38 +87,26 @@ public class WavefrontObject
                 }
                 else if (currentLine.startsWith("v "))
                 {
-                    Vertex vertex = parseVertex(currentLine);
+                    Vertex vertex = parseVertex(currentLine, lineCount);
                     if (vertex != null)
                     {
                         vertices.add(vertex);
                     }
-                    else
-                    {
-                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
-                    }
                 }
                 else if (currentLine.startsWith("vn "))
                 {
-                    Vertex vertex = parseVertexNormal(currentLine);
+                    Vertex vertex = parseVertexNormal(currentLine, lineCount);
                     if (vertex != null)
                     {
                         vertexNormals.add(vertex);
                     }
-                    else
-                    {
-                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
-                    }
                 }
                 else if (currentLine.startsWith("vt "))
                 {
-                    TextureCoordinate textureCoordinate = parseTextureCoordinate(currentLine);
+                    TextureCoordinate textureCoordinate = parseTextureCoordinate(currentLine, lineCount);
                     if (textureCoordinate != null)
                     {
                         textureCoordinates.add(textureCoordinate);
-                    }
-                    else
-                    {
-                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
                     }
                 }
                 else if (currentLine.startsWith("f "))
@@ -124,20 +117,16 @@ public class WavefrontObject
                         currentGroupObject = new GroupObject("Default");
                     }
 
-                    Face face = parseFace(currentLine);
+                    Face face = parseFace(currentLine, lineCount);
 
                     if (face != null)
                     {
                         currentGroupObject.faces.add(face);
                     }
-                    else
-                    {
-                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
-                    }
                 }
                 else if (currentLine.startsWith("g ") | currentLine.startsWith("o "))
                 {
-                    GroupObject group = parseGroupObject(currentLine);
+                    GroupObject group = parseGroupObject(currentLine, lineCount);
 
                     if (group != null)
                     {
@@ -145,10 +134,6 @@ public class WavefrontObject
                         {
                             groupObjects.add(currentGroupObject);
                         }
-                    }
-                    else
-                    {
-                        throw new ParseException("Error parsing entry ('" + currentLine + "'" + ", line " + lineCount + ") in file '" + fileURL.getFile() + "'", lineCount);
                     }
 
                     currentGroupObject = group;
@@ -171,6 +156,7 @@ public class WavefrontObject
             {
                 e.printStackTrace();
             }
+            
             try
             {
                 inputStream.close();
@@ -231,7 +217,7 @@ public class WavefrontObject
         }
     }
 
-    private Vertex parseVertex(String line)
+    private Vertex parseVertex(String line, int lineCount) throws DataFormatException
     {
         Vertex vertex = null;
 
@@ -243,18 +229,28 @@ public class WavefrontObject
             try
             {
                 if (tokens.length == 3)
+                {
                     return new Vertex(Float.parseFloat(tokens[0]), Float.parseFloat(tokens[1]), Float.parseFloat(tokens[2]));
+                }
+                else if (tokens.length == 4)
+                {
+                    return new Vertex(Float.parseFloat(tokens[0]), Float.parseFloat(tokens[1]), Float.parseFloat(tokens[2]), Float.parseFloat(tokens[3]));
+                }
             }
             catch (NumberFormatException e)
             {
                 e.printStackTrace();
             }
         }
+        else
+        {
+            throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
+        }
 
         return vertex;
     }
 
-    private Vertex parseVertexNormal(String line)
+    private Vertex parseVertexNormal(String line, int lineCount) throws DataFormatException
     {
         Vertex vertexNormal = null;
 
@@ -273,11 +269,15 @@ public class WavefrontObject
                 e.printStackTrace();
             }
         }
+        else
+        {
+            throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
+        }
 
         return vertexNormal;
     }
 
-    private TextureCoordinate parseTextureCoordinate(String line)
+    private TextureCoordinate parseTextureCoordinate(String line, int lineCount) throws DataFormatException
     {
         TextureCoordinate textureCoordinate = null;
 
@@ -298,11 +298,15 @@ public class WavefrontObject
                 e.printStackTrace();
             }
         }
+        else
+        {
+            throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
+        }
 
         return textureCoordinate;
     }
 
-    private Face parseFace(String line)
+    private Face parseFace(String line, int lineCount) throws DataFormatException
     {
         Face face = null;
 
@@ -322,7 +326,7 @@ public class WavefrontObject
                 }
                 else if (currentGroupObject.glDrawingMode != GL11.GL_TRIANGLES)
                 {
-                    return null;
+                    throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Invalid number of points for face (expected 4, found " + tokens.length + ")");
                 }
             }
             else if (tokens.length == 4)
@@ -333,7 +337,7 @@ public class WavefrontObject
                 }
                 else if (currentGroupObject.glDrawingMode != GL11.GL_QUADS)
                 {
-                    return null;
+                    throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Invalid number of points for face (expected 3, found " + tokens.length + ")");
                 }
             }
 
@@ -392,13 +396,19 @@ public class WavefrontObject
                 face.faceNormal = face.calculateFaceNormal();
             }
             else
-                throw new IllegalArgumentException();
+            {
+                throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
+            }
+        }
+        else
+        {
+            throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
         }
 
         return face;
     }
 
-    private GroupObject parseGroupObject(String line)
+    private GroupObject parseGroupObject(String line, int lineCount) throws DataFormatException
     {
         GroupObject group = null;
 
@@ -410,6 +420,10 @@ public class WavefrontObject
             {
                 group = new GroupObject(trimmedLine);
             }
+        }
+        else
+        {
+            throw new DataFormatException("Error parsing entry ('" + line + "'" + ", line " + lineCount + ") in file '" + fileName + "' - Incorrect format");
         }
 
         return group;
