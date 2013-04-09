@@ -15,6 +15,11 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/***
+ * 
+ *  Wavefront Object importer; based heavily off of the specifications found at http://en.wikipedia.org/wiki/Wavefront_.obj_file
+ *  
+ */
 @SideOnly(Side.CLIENT)
 public class WavefrontObject
 {
