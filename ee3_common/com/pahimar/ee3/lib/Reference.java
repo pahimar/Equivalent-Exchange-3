@@ -15,7 +15,7 @@ public class Reference {
     public static final boolean DEBUG_MODE = false;
 
     /* General Mod related constants */
-    public static final String MOD_ID = "EE3";
+    public static final String MOD_ID = "ee3";
     public static final String MOD_NAME = "Equivalent Exchange 3";
     public static final String VERSION = "@VERSION@";
     public static final String CHANNEL_NAME = MOD_ID;

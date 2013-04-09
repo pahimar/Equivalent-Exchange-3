@@ -95,7 +95,7 @@ public class EquivalentExchange3 {
         LocalizationHandler.loadLanguages();
 
         // Initialize the configuration
-        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + "\\ee3\\" + Reference.MOD_ID + ".cfg"));
+        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 
         // Conduct the version check and log the result
         VersionHelper.execute();
