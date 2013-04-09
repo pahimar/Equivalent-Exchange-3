@@ -26,7 +26,7 @@ public class Localizations {
         LANG_RESOURCE_LOCATION + "ja_JP.xml", 
         LANG_RESOURCE_LOCATION + "la_IT.xml", 
         LANG_RESOURCE_LOCATION + "nl_NL.xml", 
-        LANG_RESOURCE_LOCATION + "no_NO.xml", 
+        LANG_RESOURCE_LOCATION + "nb_NO.xml", 
         LANG_RESOURCE_LOCATION + "pl_PL.xml", 
         LANG_RESOURCE_LOCATION + "pt_BR.xml", 
         LANG_RESOURCE_LOCATION + "pt_PT.xml", 
