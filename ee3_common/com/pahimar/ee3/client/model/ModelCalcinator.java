@@ -1,6 +1,7 @@
 package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraftforge.client.model.ICustomModel;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
@@ -23,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ModelCalcinator extends ModelBase {
+public class ModelCalcinator extends ModelBase implements ICustomModel {
 
     private WavefrontObject modelCalcinatorOBJ;
 
