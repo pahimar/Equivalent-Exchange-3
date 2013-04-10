@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraftforge.client.model.ICustomModel;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
 import org.lwjgl.opengl.GL11;
@@ -24,18 +23,19 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ModelCalcinator extends ModelBase implements ICustomModel {
+public class ModelCalcinator extends ModelBase {
 
-    private WavefrontObject modelCalcinatorOBJ;
+    private WavefrontObject modelCalcinatorObj;
 
     public ModelCalcinator() {
 
-        modelCalcinatorOBJ = new WavefrontObject(Models.CALCINATOR);
+        modelCalcinatorObj = new WavefrontObject(Models.CALCINATOR);
+        modelCalcinatorObj.load();
     }
     
     public void render() {
         
-        modelCalcinatorOBJ.renderAll();
+        modelCalcinatorObj.renderAll();
     }
 
     public void render(TileCalcinator calcinator, double x, double y, double z) {

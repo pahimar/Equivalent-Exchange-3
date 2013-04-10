@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraftforge.client.model.ICustomModel;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -25,18 +24,19 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ModelAludel extends ModelBase implements ICustomModel {
+public class ModelAludel extends ModelBase {
 
-    private WavefrontObject modelAludelOBJ;
+    private WavefrontObject modelAludelObj;
 
     public ModelAludel() {
 
-        modelAludelOBJ = new WavefrontObject(Models.ALUDEL);
+        modelAludelObj = new WavefrontObject(Models.ALUDEL);
+        modelAludelObj.load();
     }
 
     public void render() {
 
-        modelAludelOBJ.renderAll();
+        modelAludelObj.renderAll();
     }
 
     public void render(TileAludel aludel, double x, double y, double z) {
