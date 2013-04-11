@@ -24,7 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound {
+public class ItemMiniumStone extends ItemEE
+        implements ITransmutationStone, IKeyBound {
 
     public ItemMiniumStone(int id) {
 
@@ -40,10 +41,10 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
 
         return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
     }
-    
+
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
-        
+
         return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
     }
 

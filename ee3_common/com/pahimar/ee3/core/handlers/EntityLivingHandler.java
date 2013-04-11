@@ -33,7 +33,7 @@ public class EntityLivingHandler {
         if (event.source.getSourceOfDamage() instanceof EntityArrow) {
             if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity != null) {
                 if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer) {
-                    ItemDropHelper.dropMiniumShard((EntityPlayer) ((EntityArrow)event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
+                    ItemDropHelper.dropMiniumShard((EntityPlayer) ((EntityArrow) event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
                 }
             }
         }

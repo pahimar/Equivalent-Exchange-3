@@ -61,7 +61,7 @@ public class ItemAlchemicalDust extends ItemEE {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister iconRegister) {
+    public void registerIcons(IconRegister iconRegister) {
 
         icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
@@ -81,12 +81,12 @@ public class ItemAlchemicalDust extends ItemEE {
         else
             return false;
     }
-    
+
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
-        
+
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-        
+
         switch (meta) {
             case 0:
                 return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);

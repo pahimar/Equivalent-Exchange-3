@@ -109,8 +109,8 @@ public class RecipesTransmutationStone {
         RecipeHelper.addRecipe(new ItemStack(Item.ingotGold, 4), transmutationStone, Item.diamond);
 
         /* 8 Iron Block <-> 1 Gold Block */
-        RecipeHelper.addRecipe(Block.blockGold, transmutationStone, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel);
-        RecipeHelper.addRecipe(new ItemStack(Block.blockSteel, 8), transmutationStone, Block.blockGold);
+        RecipeHelper.addRecipe(Block.blockGold, transmutationStone, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron);
+        RecipeHelper.addRecipe(new ItemStack(Block.blockIron, 8), transmutationStone, Block.blockGold);
 
         /* 4 Gold Block <-> 1 Diamond Block */
         RecipeHelper.addRecipe(Block.blockDiamond, transmutationStone, Block.blockGold, Block.blockGold, Block.blockGold, Block.blockGold);

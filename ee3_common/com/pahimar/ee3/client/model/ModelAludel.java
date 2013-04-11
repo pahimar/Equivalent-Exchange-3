@@ -1,7 +1,8 @@
 package com.pahimar.ee3.client.model;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraftforge.client.model.obj.WavefrontObject;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -26,33 +27,32 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelAludel extends ModelBase {
 
-    private WavefrontObject modelAludelObj;
+    private IModelCustom modelAludel;
 
     public ModelAludel() {
 
-        modelAludelObj = new WavefrontObject(Models.ALUDEL);
-        modelAludelObj.load();
+        modelAludel = AdvancedModelLoader.loadModel(Models.ALUDEL);
     }
 
     public void render() {
 
-        modelAludelObj.renderAll();
+        modelAludel.renderAll();
     }
 
     public void render(TileAludel aludel, double x, double y, double z) {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
-        
+
         // Scale, Translate, Rotate
         scaleTranslateRotate(x, y, z, aludel.getOrientation());
-        
+
         // Bind texture
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
-        
+
         // Render
         this.render();
-        
+
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }

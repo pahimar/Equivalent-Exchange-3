@@ -68,18 +68,18 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
-        
+
         // Scale, Translate, Rotate
         GL11.glScalef(scale, scale, scale);
         GL11.glTranslatef(x, y, z);
         GL11.glRotatef(-90F, 1F, 0, 0);
-        
+
         // Bind texture
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
-        
+
         // Render
         calcinatorModel.render();
-        
+
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }

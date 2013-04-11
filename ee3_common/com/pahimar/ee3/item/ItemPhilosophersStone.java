@@ -48,7 +48,7 @@ public class ItemPhilosophersStone extends ItemEE
 
         return NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
     }
-    
+
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
 

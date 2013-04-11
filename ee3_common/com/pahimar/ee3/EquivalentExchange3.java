@@ -59,25 +59,37 @@ import cpw.mods.fml.relauncher.Side;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, certificateFingerprint = Reference.FINGERPRINT)
-@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
+
+@Mod(
+        modid = Reference.MOD_ID,
+        name = Reference.MOD_NAME,
+        version = Reference.VERSION,
+        dependencies = Reference.DEPENDENCIES,
+        certificateFingerprint = Reference.FINGERPRINT)
+@NetworkMod(
+        channels = { Reference.CHANNEL_NAME },
+        clientSideRequired = true,
+        serverSideRequired = false,
+        packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(
+            clientSide = Reference.CLIENT_PROXY_CLASS,
+            serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
     @FingerprintWarning
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
-        
+
         // Report (log) to the user that the version of Equivalent Exchange 3 they are using has been changed/tampered with
         LogHelper.log(Level.SEVERE, Strings.INVALID_FINGERPRINT_MESSAGE);
     }
-    
+
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event) {
 

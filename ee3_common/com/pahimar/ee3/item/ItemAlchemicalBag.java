@@ -42,7 +42,7 @@ public class ItemAlchemicalBag extends ItemEE {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister iconRegister) {
+    public void registerIcons(IconRegister iconRegister) {
 
         icons = new Icon[ALCHEMICAL_BAG_SUBTYPES.length];
 
