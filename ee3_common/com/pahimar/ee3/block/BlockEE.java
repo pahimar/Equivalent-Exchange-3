@@ -35,7 +35,7 @@ public abstract class BlockEE extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
 
-        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName2()));
     }
 
     /**
