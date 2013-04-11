@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
-
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
@@ -18,6 +17,7 @@ import com.pahimar.ee3.core.handlers.FuelHandler;
 import com.pahimar.ee3.core.handlers.ItemEventHandler;
 import com.pahimar.ee3.core.handlers.LocalizationHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
+import com.pahimar.ee3.core.handlers.PlayerInteractHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.core.helper.LogHelper;
@@ -150,6 +150,8 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
+        
+        MinecraftForge.EVENT_BUS.register(new PlayerInteractHandler());
 
         GameRegistry.registerCraftingHandler(new CraftingHandler());
 
