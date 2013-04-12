@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-  <comment>Danish Localization File</comment>
+  <comment>Danish (da_DK) Localization File</comment>
 	<entry key="key.extra">Ekstra</entry>
 	<entry key="key.release">Slip</entry>
 	<entry key="key.toggle">Skift</entry>
