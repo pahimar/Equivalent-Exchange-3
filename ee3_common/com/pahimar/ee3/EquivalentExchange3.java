@@ -63,7 +63,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(
         modid = Reference.MOD_ID,
         name = Reference.MOD_NAME,
-        version = Reference.VERSION,
+        version = Reference.VERSION_NUMBER,
         dependencies = Reference.DEPENDENCIES,
         certificateFingerprint = Reference.FINGERPRINT)
 @NetworkMod(

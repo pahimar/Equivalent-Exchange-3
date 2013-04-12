@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Czech (CS) Localization File</comment>
+	<comment>Czech (cs_CZ) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Vypustit</entry>
 	<entry key="key.toggle">Přepnout</entry>

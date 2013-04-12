@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Brazilian Portuguese(pt-BR) Localization File</comment>
+	<comment>Brazilian Portuguese (pt_BR) Localization File</comment>
+	<!--REQUIRES UPDATING-->
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Liberar</entry>
 	<entry key="key.toggle">Alternar</entry>
@@ -10,55 +11,21 @@
 	<entry key="item.inertStone.name">Pedra Inerte</entry>
 	<entry key="item.miniumStone.name">Pedra de Minium</entry>
 	<entry key="item.philStone.name">Pedra Filosofal</entry>
-	<entry key="item.alchemyDust.ash.name">Cinzas</entry>
-	<entry key="item.alchemyDust.minium.name">Pó de Minium</entry>
-	<entry key="item.alchemyDust.verdant.name">Pó Verdejante</entry>
-	<entry key="item.alchemyDust.azure.name">Pó Índigo</entry>
-	<entry key="item.alchemyDust.amaranthine.name">Pó Amarantino</entry>
-	<entry key="item.alchemyDust.iridescent.name">Pó Iridescente</entry>
-	<entry key="item.alchemyBag.white.name">Bolsa Alquímica Branca</entry>
-	<entry key="item.alchemyBag.orange.name">Bolsa Alquímica Laranja</entry>
-	<entry key="item.alchemyBag.magenta.name">Bolsa Alquímica Magenta</entry>
-	<entry key="item.alchemyBag.light_blue.name">Bolsa Alquímica Azul-Claro</entry>
-	<entry key="item.alchemyBag.yellow.name">Bolsa Alquímica Amarela</entry>
-	<entry key="item.alchemyBag.lime.name">Bolsa Alquímica Lima</entry>
-	<entry key="item.alchemyBag.pink.name">Bolsa Alquímica Rosa</entry>
-	<entry key="item.alchemyBag.gray.name">Bolsa Alquímica Cinza</entry>
-	<entry key="item.alchemyBag.light_gray.name">Bolsa Alquímica Cinza-Claro</entry>
-	<entry key="item.alchemyBag.cyan.name">Bolsa Alquímica Ciano</entry>
-	<entry key="item.alchemyBag.purple.name">Bolsa Alquímica Roxa</entry>
-	<entry key="item.alchemyBag.blue.name">Bolsa Alquímica Azul</entry>
-	<entry key="item.alchemyBag.brown.name">Bolsa Alquímica Marrom</entry>
-	<entry key="item.alchemyBag.green.name">Bolsa Alquímica Verde</entry>
-	<entry key="item.alchemyBag.red.name">Bolsa Alquímica Vermelha</entry>
-	<entry key="item.alchemyBag.black.name">Bolsa Alquímica Negra</entry>
+	<entry key="item.dustAlchemicalAsh.name">Cinzas</entry>
+	<entry key="item.dustAlchemicalMinium.name">Pó de Minium</entry>
+	<entry key="item.dustAlchemicalVerdant.name">Pó Verdejante</entry>
+	<entry key="item.dustAlchemicalAzure.name">Pó Índigo</entry>
+	<entry key="item.dustAlchemicalAmaranthine.name">Pó Amarantino</entry>
+	<entry key="item.dustAlchemicalIridescent.name">Pó Iridescente</entry>
+	<entry key="item.alchemicalBag.name">Bolsa Alquímica</entry>
 	<entry key="tile.redWaterStill.name">Água Vermelha (Parada)</entry>
 	<entry key="tile.redWaterFlowing.name">Água Vermelha (Corrente)</entry>
 	<entry key="tile.calcinator.name">Calcinador</entry>
-	<entry key="gui.calcinator.name">Calcinador</entry>
+	<entry key="container.calcinator">Calcinador</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando checagem de versão remota contra a versão remota mestre, localizada em:</entry>
 	<entry key="version.uninitialized">Checagem de versão remota não conseguiu ser inicializada adequadamente</entry>
 	<entry key="version.current">Usando a versão mais recente(@REMOTE_MOD_VERSION@) de Equivalent Exchange 3 para @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Uma nova versão de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consiga-a aqui: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Erro checando a versão remota mestre</entry>
-	<entry key="version.check_disabled">Checagem remota desligada, pulando</entry>
-	<entry key="command.ee3.overlay.turned_on"> </entry>
-	<entry key="command.ee3.overlay.turned_off"> </entry>
-	<entry key="command.ee3.overlay.position.usage"> </entry>
-	<entry key="command.ee3.overlay.position.top_left"> </entry>
-	<entry key="command.ee3.overlay.position.top_right"> </entry>
-	<entry key="command.ee3.overlay.position.bottom_left"> </entry>
-	<entry key="command.ee3.overlay.position.bottom_right"> </entry>
-	<entry key="command.ee3.overlay.opacity.usage"> </entry>
-	<entry key="command.ee3.overlay.opacity.updated"> </entry>
-	<entry key="command.ee3.overlay.scale.usage"> </entry>
-	<entry key="command.ee3.overlay.scale.updated"> </entry>
-	<entry key="command.ee3.particles.usage"> </entry>
-	<entry key="command.ee3.particles.turned_on"> </entry>
-	<entry key="command.ee3.particles.turned_off"> </entry>
-	<entry key="command.ee3.sounds.usage"> </entry>
-	<entry key="command.ee3.sounds.set_to_all"> </entry>
-	<entry key="command.ee3.sounds.set_to_self"> </entry>
-	<entry key="command.ee3.sounds.turned_off"> </entry>
 </properties>

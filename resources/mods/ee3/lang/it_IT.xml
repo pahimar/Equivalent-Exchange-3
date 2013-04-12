@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Italian (IT) Localization File</comment>
+	<comment>Italian (it_IT) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Rilascia</entry>
 	<entry key="key.toggle">Toggle</entry>
@@ -19,6 +19,9 @@
 	<entry key="item.alchemicalBag.name">Borsa Alchemica</entry>
 	<entry key="tile.redWaterStill.name">Acqua Rossa (Ferma)</entry>
 	<entry key="tile.redWaterFlowing.name">Acqua Rossa (Fluente)</entry>
+	<entry key="tile.calcinator.name">Calcinatore</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.achemicalChest.name">Cesta Alchemica</entry>
 	<entry key="container.calcinator">Calcinatore</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Cesta Alchemica</entry>
@@ -30,6 +33,7 @@
 	<entry key="version.outdated">C'è una nuova versione per la @MOD_NAME@: (@REMOTE_MOD_VERSION@) per @MINECRAFT_VERSION@. Prendila qua: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Errore nel controllo della versione remota, riprovo</entry>
 	<entry key="version.final_error">Controllo della versione dopo 3 tentativi non riusciti</entry>
+	<entry key="version.mc_version_not_found">Non riesco a trovare una versione per la @MOD_NAME@ per @MINECRAFT_VERSION@ dal file remoto</entry>
 	<entry key="command.ee3.overlay.turned_on">Attivato Overlay di trasmutazione</entry>
 	<entry key="command.ee3.overlay.turned_off">Disattivato Overlay di trasmutazione</entry>
 	<entry key="command.ee3.overlay.position.top_left">Settata la posizione in alto a sinistra per  l'Overlay di trasmutazione</entry>
@@ -45,5 +49,4 @@
 	<entry key="command.ee3.sounds.set_to_all">Riproduzione audio Equivalent Exchange 3 per tutti i giocatori</entry>
 	<entry key="command.ee3.sounds.set_to_self">Riproduzione audio Equivalent Exchange 3 solo per te</entry>
 	<entry key="command.ee3.sounds.turned_off">Riproduzione audio Equivalent Exchange 3 disabilitata</entry>
-	<entry key="version.mc_version_not_found">Non riesco a trovare una versione per la @MOD_NAME@ per @MINECRAFT_VERSION@ dal file remoto</entry>
 </properties>

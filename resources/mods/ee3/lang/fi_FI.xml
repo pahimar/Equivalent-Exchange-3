@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Finnish (FI) Localization File</comment>
+	<comment>Finnish (fi_FI) Localization File</comment>
 	<entry key="key.extra">Ekstra</entry>
 	<entry key="key.release">Vapauta</entry>
 	<entry key="key.toggle">Muuta</entry>
