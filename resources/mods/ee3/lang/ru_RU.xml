@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Russian (RU) Localization File</comment>
+	<comment>Russian (ru_RU) Localization File</comment>
 	<entry key="key.extra">Экстра</entry>
 	<entry key="key.release">Сброс</entry>
 	<entry key="key.toggle">Переключение</entry>
