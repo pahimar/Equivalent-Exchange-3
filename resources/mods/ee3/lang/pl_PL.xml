@@ -1,41 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Polish (PL) Localization File</comment>
+	<comment>Polish (pl_PL) Localization File</comment>
+	<!--REQUIRES UPDATING!-->
 	<entry key="key.extra">Dodatkowa funkcja</entry>
 	<entry key="key.release">Wypuść</entry>
 	<entry key="key.toggle">Przełącz</entry>
 	<entry key="key.charge">Ładuj</entry>
-	<entry key="item.miniumShard.name">Odłam Minium</entry>
-	<entry key="item.inertStone.name">Nieaktywny Kamień</entry>
-	<entry key="item.miniumStone.name">Minium</entry>
-	<entry key="item.philStone.name">Kamień Filozoficzny</entry>
-	<entry key="item.alchemyDust.ash.name">Popiół</entry>
-	<entry key="item.alchemyDust.minium.name">Proszek Minium</entry>
-	<entry key="item.alchemyDust.verdant.name">Zielony Proszek</entry>
-	<entry key="item.alchemyDust.azure.name">Lazurowy Proszek</entry>
-	<entry key="item.alchemyDust.amaranthine.name">Amarantowy Proszek</entry>
-	<entry key="item.alchemyDust.iridescent.name">Opalowy Proszek</entry>
-	<entry key="item.alchemyBag.white.name">Biała Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.orange.name">Pomarańczowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.magenta.name">Karmazynowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.light_blue.name">Jasno-niebieska Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.yellow.name">Zółta Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.lime.name">Limonkowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.pink.name">Różowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.gray.name">Szara Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.light_gray.name">Jasno-szara Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.cyan.name">Turkusowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.purple.name">Purpurowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.blue.name">Niebieska Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.brown.name">Brązowa Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.green.name">Zielona Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.red.name">Czerwona Torba Alchemiczna</entry>
-	<entry key="item.alchemyBag.black.name">Czarna Torba Alchemiczna</entry>
+	<entry key="item.shardMinium.name">Odłam Minium</entry>
+	<entry key="item.stoneInert.name">Nieaktywny Kamień</entry>
+	<entry key="item.stoneMinium.name">Minium</entry>
+	<entry key="item.stonePhilosophers.name">Kamień Filozoficzny</entry>
+	<entry key="item.dustAlchemicalAsh.name">Popiół</entry>
+	<entry key="item.dustAlchemicalMinium.name">Proszek Minium</entry>
+	<entry key="item.dustAlchemicalVerdant.name">Zielony Proszek</entry>
+	<entry key="item.dustAlchemicalAzure.name">Lazurowy Proszek</entry>
+	<entry key="item.dustAlchemicalAmaranthine.name">Amarantowy Proszek</entry>
+	<entry key="item.dustAlchemicalIridescent.name">Opalowy Proszek</entry>
+	<entry key="item.alchemicalBag.name">Torba Alchemiczna</entry>
 	<entry key="tile.redWaterStill.name">Czerwona Woda (Stojąca)</entry>
 	<entry key="tile.redWaterFlowing.name">Czerwona Woda (Płynąca)</entry>
 	<entry key="tile.calcinator.name">Kalcynator</entry>
-	<entry key="gui.calcinator.name">Kalcynator</entry>
+	<entry key="container.calcinator">Kalcynator</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na</entry>
 	<entry key="version.uninitialized">Wystąpił błąd podczas sprawdzania wersji</entry>

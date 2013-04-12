@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Slovak (SK) Localization File</comment>
+	<comment>Slovak (sk_SK) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Vypustiť</entry>
 	<entry key="key.toggle">Prepnúť</entry>
 	<entry key="key.charge">Nabiť</entry>
-	<entry key="item.miniumShard.name">Úlomok Suríku</entry>
-	<entry key="item.inertStone.name">Inertný Kameň</entry>
-	<entry key="item.miniumStone.name">Suríkoý Kameň</entry>
+	<entry key="item.shardMinium.name">Úlomok Suríku</entry>
+	<entry key="item.stoneInert.name">Inertný Kameň</entry>
+	<entry key="item.stoneMinium.name">Suríkoý Kameň</entry>
 	<entry key="item.stonePhilosophers.name">Kameň mudrcov</entry>
 	<entry key="item.dustAlchemicalAsh.name">Popol</entry>
 	<entry key="item.dustAlchemicalMinium.name">Suríkový Prach</entry>
@@ -16,7 +16,7 @@
 	<entry key="item.dustAlchemicalAzure.name">Azurový Prach</entry>
 	<entry key="item.dustAlchemicalAmaranthine.name">Amarantový Prach</entry>
 	<entry key="item.dustAlchemicalIridescent.name">Dúhový Prach</entry>
-	<entry key="item.alchemyBag.name">Alchemystická Taška</entry>
+	<entry key="item.alchemicalBag.name">Alchemystická Taška</entry>
 	<entry key="tile.redWaterStill.name">Červená voda (zdroj)</entry>
 	<entry key="tile.redWaterFlowing.name">Červená voda (tečúca)</entry>
 	<entry key="tile.calcinator.name">Kalcinátor</entry>
