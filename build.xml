@@ -1,53 +1,62 @@
 <?xml version="1.0" ?> 
 <project name="Equivalent Exchange 3">
 	
-	<property file="build.properties" />
+	<property file="build.properties" prefix="build"/>
+	<property file="build_number.properties" prefix="build_number"/>
+	
+	<target name="increment">
+		<propertyfile file="build_number.properties">
+			<entry key="build_number" type="int" operation="+" default="1"/>
+		</propertyfile>
+	</target>
 	
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\minecraft\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\minecraft\com" />
-		<delete dir="${dir.development}\mcp\reobf\minecraft" />
+		<delete file="${build.dir.development}\mcp\src\minecraft\mcmod.info" />
+		<delete dir="${build.dir.development}\mcp\src\minecraft\com" />
+		<delete dir="${build.dir.development}\mcp\reobf\minecraft" />
 	</target>
 	
 	<target name="build">
-		<copy todir="${dir.development}\mcp\src\minecraft">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
+		<copy todir="${build.dir.development}\mcp\src\minecraft">
+			<fileset dir="${build.dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
-		<replace dir="${dir.development}\mcp\src\minecraft" token="@VERSION@" value="${release.mod.version}" />
-		<replace dir="${dir.development}\mcp\src\minecraft" token="@FINGERPRINT@" value="${release.mod.fingerprint}" />
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@VERSION@" value="${build.release.mod.version}" />
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@BUILD_NUMBER@" value="${build_number.build_number}" />
 	</target>
 	
 	<target name="recompile">
-		<exec dir="${dir.development}\mcp" executable="cmd" osfamily="windows">
+		<exec dir="${build.dir.development}\mcp" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" osfamily="unix">
+		<exec dir="${build.dir.development}\mcp" executable="bash" osfamily="unix">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 	
 	<target name="reobfuscate">
-		<exec dir="${dir.development}\mcp" executable="cmd" osfamily="windows">
+		<exec dir="${build.dir.development}\mcp" executable="cmd" osfamily="windows">
 			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" osfamily="unix">
+		<exec dir="${build.dir.development}\mcp" executable="bash" osfamily="unix">
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
 	
 	<target name="release-shared">
 		<!-- Prep for the release -->
+		<antcall target="increment" />
 		<antcall target="clean" />
 		<antcall target="build" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${build.dir.share}\${build.release.minecraft.version}\${build.release.mod.version}" />
+		<jar destfile="${build.dir.share}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}.${build_number.build_number}.jar">
+			<fileset dir="${build.dir.development}\mcp\src\common\"	includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
@@ -56,21 +65,22 @@
 	
 	<target name="release">
 		<!-- Prep for the release -->
+		<antcall target="increment" />
 		<antcall target="clean" />
 		<antcall target="build" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
+		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}-${build_number.build_number}.jar">
+			<fileset dir="${build.dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\source\Equivalent-Exchange-3\resources" />
 		</jar>
 		
 		<!-- Sign the jar -->
-		<signjar jar="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar" keystore="${keystore.location}" alias="${keystore.alias}" storepass="${keystore.password}" />
+		<signjar jar="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}-${build_number.build_number}.jar" keystore="${build.keystore.location}" alias="${build.keystore.alias}" storepass="${build.keystore.password}" />
 		
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
