@@ -80,7 +80,7 @@ public class VersionHelper implements Runnable {
                         ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
                     }
 
-                    if (remoteVersion.equals(Reference.VERSION)) {
+                    if (remoteVersion.equalsIgnoreCase(getVersionForCheck())) {
                         result = CURRENT;
                     }
                     else {
@@ -107,6 +107,17 @@ public class VersionHelper implements Runnable {
             }
             catch (Exception ex) {
             }
+        }
+    }
+    
+    private static String getVersionForCheck() {
+        String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
+        
+        if (versionTokens.length >= 1) {
+            return versionTokens[0];
+        }
+        else {
+            return Reference.VERSION_NUMBER;
         }
     }
 

@@ -39,7 +39,7 @@ public class CommandVersion {
 
     private static void processVersionCommand(ICommandSender commandSender) {
 
-        commandSender.sendChatToPlayer(VersionHelper.getResultMessageForClient());
+        commandSender.sendChatToPlayer(VersionHelper.getResultMessage());
     }
 
     private static void processChangelogCommand(ICommandSender commandSender) {
