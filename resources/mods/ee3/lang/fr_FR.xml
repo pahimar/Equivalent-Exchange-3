@@ -1,48 +1,33 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-<comment>French (FR) Localization File</comment>
+<comment>French (fr_FR) Localization File</comment>
+	<!--REQUIRES ADDITIONAL UPDATING-->
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Libérer</entry>
 	<entry key="key.toggle">Baculer</entry>
 	<entry key="key.charge">Charger</entry>
-	<entry key="item.miniumShard.name">Eclat de Minium</entry>
-	<entry key="item.inertStone.name">Pierre inerte</entry>
-	<entry key="item.miniumStone.name">Pierre de Minium</entry>
-	<entry key="item.philStone.name">Pierre Philosophale</entry>
-	<entry key="item.alchemyDust.ash.name">Cendres</entry>
-	<entry key="item.alchemyDust.minium.name">Poussière de Minium</entry>
-	<entry key="item.alchemyDust.verdant.name">Poussière verdoyante</entry>
-	<entry key="item.alchemyDust.azure.name">Poussière azur</entry>
-	<entry key="item.alchemyDust.amaranthine.name">Poussière amarante</entry>
-	<entry key="item.alchemyDust.iridescent.name">Poussière iridescente</entry>
-	<entry key="item.alchemyBag.white.name">Sac alchimique blanc</entry>
-	<entry key="item.alchemyBag.orange.name">Sac alchimique orange</entry>
-	<entry key="item.alchemyBag.magenta.name">Sac alchimique magenta</entry>
-	<entry key="item.alchemyBag.light_blue.name">Sac alchimique bleu clair</entry>
-	<entry key="item.alchemyBag.yellow.name">Sac alchimique jaune</entry>
-	<entry key="item.alchemyBag.lime.name">Sac alchimique vert clair</entry>
-	<entry key="item.alchemyBag.pink.name">Sac alchimique rose</entry>
-	<entry key="item.alchemyBag.gray.name">Sac alchimique gris</entry>
-	<entry key="item.alchemyBag.light_gray.name">Sac alchimique gris clair</entry>
-	<entry key="item.alchemyBag.cyan.name">Sac alchimique cyan</entry>
-	<entry key="item.alchemyBag.purple.name">Sac alchimique violet</entry>
-	<entry key="item.alchemyBag.blue.name">Sac alchimique bleu</entry>
-	<entry key="item.alchemyBag.brown.name">Sac alchimique marron</entry>
-	<entry key="item.alchemyBag.green.name">Sac alchimique vert</entry>
-	<entry key="item.alchemyBag.red.name">Sac alchimique rouge</entry>
-	<entry key="item.alchemyBag.black.name">Sac alchimique noir</entry>
+	<entry key="item.shardMinium.name">Eclat de Minium</entry>
+	<entry key="item.stoneInert.name">Pierre inerte</entry>
+	<entry key="item.stoneMinium.name">Pierre de Minium</entry>
+	<entry key="item.stonePhilosophers.name">Pierre Philosophale</entry>
+	<entry key="item.dustAlchemicalAsh.name">Cendres</entry>
+	<entry key="item.dustAlchemicalMinium.name">Poussière de Minium</entry>
+	<entry key="item.dustAlchemicalVerdant.name">Poussière verdoyante</entry>
+	<entry key="item.dustAlchemicalAzure.name">Poussière azur</entry>
+	<entry key="item.dustAlchemicalAmaranthine.name">Poussière amarante</entry>
+	<entry key="item.dustAlchemicalIridescent.name">Poussière iridescente</entry>
+	<entry key="item.alchemicalBag.name">Sac alchimique</entry>
 	<entry key="tile.redWaterStill.name">Eau rouge (Immobile)</entry>
 	<entry key="tile.redWaterFlowing.name">Eau rouge (Ruisselante)</entry>
 	<entry key="tile.calcinator.name">Calcinateur</entry>
-	<entry key="gui.calcinator.name">Calcinateur</entry>
+	<entry key="container.calcinator">Calcinateur</entry>
 	<entry key="version.init_log_message">Lancement de la vérification de votre version par rapport à celle de réference : </entry>
 	<entry key="version.uninitialized">Le lancement de la vérification a échoué</entry>
 	<entry key="version.current">Vous utilisez la version (@REMOTE_MOD_VERSION@) la plus récente pour votre version de Minecraft (@MINECRAFT_VERSION)</entry>
 	<entry key="version.outdated">Vous utilisez une version obsolète, pensez à effectuer une mise à jour ici - @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Erreur de connexion vers la version de référence; réessai...</entry>
 	<entry key="version.final_error">Vérification de version abandonnée apres trois échecs de connection</entry>
-	<entry key="version.check_disabled">Vérification de version désactivée</entry>
 	<entry key="command.ee3.overlay.turned_on">Affichage de cible de transmutation activé</entry>
 	<entry key="command.ee3.overlay.turned_off">Affichage de cible de transmutation désactivé</entry>
 	<entry key="command.ee3.overlay.position.top_left">Affichage de cible de transmutation mis en haut à gauche</entry>

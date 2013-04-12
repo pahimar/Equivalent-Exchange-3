@@ -1,27 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Swedish (SE) Localization File</comment>
+	<comment>Swedish (sv_SE) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Utgivning</entry>
 	<entry key="key.toggle">Växla</entry>
 	<entry key="key.charge">Ladda</entry>
-	<entry key="item.miniumShard.name">Mönjaskärva</entry>
-	<entry key="item.inertStone.name">Inert Sten</entry>
-	<entry key="item.miniumStone.name">Mönjasten</entry>
-	<entry key="item.philStone.name">De Vises Sten</entry>
-	<entry key="item.alchemyDust.ash.name">Aska</entry>
-	<entry key="item.alchemyDust.minium.name">Mönjapulver</entry>
-	<entry key="item.alchemyDust.verdant.name">Grönskande Pulver</entry>
-	<entry key="item.alchemyDust.azure.name">Azurblå Pulver</entry>
-	<entry key="item.alchemyDust.amaranthine.name">Amarant Pulver</entry>
-	<entry key="item.alchemyDust.iridescent.name">Skimmrande Pulver</entry>
-	<entry key="item.alchemyBag.name">Alkemisk Påse</entry>
+	<entry key="item.shardMinium.name">Mönjaskärva</entry>
+	<entry key="item.stoneInert.name">Inert Sten</entry>
+	<entry key="item.stoneMinium.name">Mönjasten</entry>
+	<entry key="item.stonePhilosophers.name">De Vises Sten</entry>
+	<entry key="item.dustAlchemicalAsh.name">Aska</entry>
+	<entry key="item.dustAlchemicalMinium.name">Mönjapulver</entry>
+	<entry key="item.dustAlchemicalVerdant.name">Grönskande Pulver</entry>
+	<entry key="item.dustAlchemicalAzure.name">Azurblå Pulver</entry>
+	<entry key="item.dustAlchemicalAmaranthine.name">Amarant Pulver</entry>
+	<entry key="item.dustAlchemicalIridescent.name">Skimmrande Pulver</entry>
+	<entry key="item.alchemicalBag.name">Alkemisk Påse</entry>
 	<entry key="tile.redWaterStill.name">Rödvatten (Stilla)</entry>
 	<entry key="tile.redWaterFlowing.name">Rödvatten (Forsande)</entry>
 	<entry key="tile.calcinator.name">Kalcinator</entry>
-	<entry key="gui.calcinator.name">Kalcinator</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.alchemicalChest.name">Alkemisk Kista</entry>
+	<entry key="container.calcinator">Kalcinator</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Alkemisk Kista</entry>
 	<entry key="container.alchemicalBag">Alkemisk Påse</entry>
