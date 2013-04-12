@@ -18,31 +18,19 @@
 	</target>
 	
 	<target name="recompile">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${dir.development}\mcp" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c recompile.bat" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${dir.development}\mcp" executable="bash" osfamily="unix">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 	
 	<target name="reobfuscate">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${dir.development}\mcp" executable="cmd" osfamily="windows">
 			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c reobfuscate_srg.bat" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate_srg.sh" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${dir.development}\mcp" executable="bash" osfamily="unix">
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
