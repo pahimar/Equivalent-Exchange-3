@@ -2,12 +2,12 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ *
  * Strings
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
+ *
  */
 public class Strings {
 
@@ -33,6 +33,9 @@ public class Strings {
     public static final String NBT_ITEM_CRAFTING_GUI_OPEN = "itemCraftingGuiOpen";
     public static final String NBT_ITEM_TRANSMUTATION_GUI_OPEN = "itemTransmutationGuiOpen";
     public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
+    public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_SHARE = "itemAlchemicalBagGuiShare";
+    public static final String NBT_ITEM_ALCHEMICAL_BAG_CONNECTED_CHEST = "itemAlchemicalBagConnectedChest";
+
     public static final String NBT_ITEM_DISPLAY = "display";
     public static final String NBT_ITEM_COLOR = "color";
     public static final String NBT_TE_OWNER_KEY = "teOwner";
