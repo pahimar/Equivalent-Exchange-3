@@ -7,10 +7,13 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.core.helper.LocalizationHelper;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
+import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,18 +29,20 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalBag extends GuiContainer {
+    
+    private ItemAlchemicalBag itemABag;
 
-    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer) {
+    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer, ItemAlchemicalBag alchemicalBag) {
 
         super(new ContainerAlchemicalBag(inventoryPlayer));
+        itemABag = alchemicalBag;
         xSize = 248;
         ySize = 186;
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
+        fontRenderer.drawString(StatCollector.translateToLocal(itemABag.hasCustomName() ? itemABag.getCustomName() : itemABag.getCustomName()), 8, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 96 + 2, 4210752);
     }
 
