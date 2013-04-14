@@ -19,15 +19,12 @@ public class InventoryAlchemicalBag implements IInventory{
 
     private ItemStack[] inventory;
     private final int INVENTORY_SIZE = 13 * 4;
-//    private ItemStack openBag;
 
     public InventoryAlchemicalBag(ItemStack stack) {
         if(stack.getItem() != ModItems.alchemicalBag) return;
-//        openBag = stack;
         boolean success = readFromNBT(stack.getTagCompound());
-        if(!success){
+        if(!success)
             inventory = new ItemStack[INVENTORY_SIZE];
-        }
     }
 
     @Override
@@ -74,7 +71,7 @@ public class InventoryAlchemicalBag implements IInventory{
 
     @Override
     public String getInvName() {
-        return "Hello world";
+        return "I need a name";
     }
 
     @Override

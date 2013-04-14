@@ -60,7 +60,6 @@ public class ItemAlchemicalBag extends ItemEE {
      */
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-//        if(world.isRemote) return false;
         int blockId = world.getBlockId(x, y, z);
         if(player.isSneaking() && blockId == ModBlocks.alchemicalChest.blockID){
             NBTTagCompound tag = player.getCurrentEquippedItem().getTagCompound();
@@ -73,27 +72,30 @@ public class ItemAlchemicalBag extends ItemEE {
             nbt.setInteger("y", y);
             nbt.setInteger("z", z);
             tag.setCompoundTag(Strings.NBT_ITEM_ALCHEMICAL_BAG_CONNECTED_CHEST, nbt);
-            System.out.println("Linked! " + FMLCommonHandler.instance().getEffectiveSide() + ", " + world.isRemote);
 
-//            if(!world.isRemote) return true;
-//            return true;
+            tag.setBoolean(NBT_TEMP_BAG_LOCK, true);//Tag is used to keep the bags gui from opening when shift clicking.
+
+            if(!world.isRemote) return true;
         }
         return false;
     }
 
-
+    private final String NBT_TEMP_BAG_LOCK = "TempNBTForLock";
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+        boolean t = NBTHelper.hasTag(itemStack, NBT_TEMP_BAG_LOCK);
 
         //If the player is sneaking(a.k.a holding shift) will open the sharing window.
-        if(entityPlayer.isSneaking() && NBTHelper.hasTag(entityPlayer.getCurrentEquippedItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_CONNECTED_CHEST)) {
+        if(entityPlayer.isSneaking() && !t && NBTHelper.hasTag(entityPlayer.getCurrentEquippedItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_CONNECTED_CHEST))
             NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_SHARE, true);
-        }
 
-        if (!world.isRemote) {
+        if (!world.isRemote && !t) {
             NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
             entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
+
+        if(t)
+            NBTHelper.removeTag(itemStack, NBT_TEMP_BAG_LOCK);
 
         return itemStack;
     }

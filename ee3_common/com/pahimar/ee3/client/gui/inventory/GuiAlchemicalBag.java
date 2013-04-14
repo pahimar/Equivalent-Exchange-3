@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -32,7 +31,6 @@ public class GuiAlchemicalBag extends GuiContainer {
 
     private final int BAG_GUI_X_SIZE = 248, BAG_GUI_Y_SIZE = 186;
     private final int SHARED_GUI_X_SIZE = 256, SHARED_GUI_Y_SIZE = 256;
-//    private final int SHARED_GUI_X_SIZE = 270, SHARED_GUI_Y_SIZE = 262;
 
     private String renderTexture = Textures.GUI_ALCHEMICAL_STORAGE;//Texture to be rendered based on wether the bag is sharing with a chest or not.
     private String containerName = Strings.CONTAINER_ALCHEMICAL_BAG_NAME;
@@ -42,10 +40,8 @@ public class GuiAlchemicalBag extends GuiContainer {
     public GuiAlchemicalBag(ItemStack stack, EntityPlayer ep) {
 
         super(new ContainerAlchemicalBag(stack, ep));
-//        this.stack = stack;
-        boolean shared = ((ItemAlchemicalBag)ModItems.alchemicalBag).isSharing(stack);
-        if(shared) {
-            System.out.println("Sharing");
+        
+        if(((ItemAlchemicalBag)ModItems.alchemicalBag).isSharing(stack)) {
             renderTexture = Textures.GUI_SHARED_ALCHEMICAL_STORAGE;
             guiSizeX = SHARED_GUI_X_SIZE;
             guiSizeY = SHARED_GUI_Y_SIZE;
@@ -67,8 +63,6 @@ public class GuiAlchemicalBag extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(renderTexture);
-//        int xStart = (width - xSize) / 2;
-//        int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
