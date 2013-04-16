@@ -13,9 +13,11 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemGlassDomeRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassDomeRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
@@ -31,6 +33,7 @@ import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileEE;
+import com.pahimar.ee3.tileentity.TileGlassDome;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -88,20 +91,23 @@ public class ClientProxy extends CommonProxy {
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.glassDomeId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_DOME, new ItemGlassDomeRenderer());
     }
 
     @Override
-    public void initTileEntities() {
+    public void registerTileEntities() {
 
-        super.initTileEntities();
+        super.registerTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileGlassDome.class, new TileEntityGlassDomeRenderer());
     }
 
     @Override

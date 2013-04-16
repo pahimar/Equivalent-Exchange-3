@@ -44,6 +44,7 @@ public class Strings {
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
+    public static final String GLASS_DOME_NAME = "glassDome";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
 
@@ -59,6 +60,7 @@ public class Strings {
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
     public static final String TE_ALUDEL_NAME = "tileAludel";
     public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
+    public static final String TE_GLASS_DOME_NAME = "tileGlassDome";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
@@ -71,6 +73,7 @@ public class Strings {
     public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;
     public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container." + ALCHEMICAL_CHEST_NAME;
     public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
+    public static final String CONTAINER_GLASS_DOME_NAME = "container." + GLASS_DOME_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
 
