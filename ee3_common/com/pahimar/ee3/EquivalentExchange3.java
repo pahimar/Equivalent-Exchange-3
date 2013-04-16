@@ -157,7 +157,7 @@ public class EquivalentExchange3 {
         proxy.registerDrawBlockHighlightHandler();
 
         // Initialize mod tile entities
-        proxy.initTileEntities();
+        proxy.registerTileEntities();
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
