@@ -5,14 +5,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.core.helper.LocalizationHelper;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileEE;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,6 +30,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 public class ItemAlchemicalBag extends ItemEE {
+    
+    private String customName;
 
     private static final String[] ALCHEMICAL_BAG_SUBTYPES = new String[] { "Open", "OpenDrawString", "Closed", "ClosedDrawString" };
 
@@ -55,6 +60,9 @@ public class ItemAlchemicalBag extends ItemEE {
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
         if (!world.isRemote) {
+            if (itemStack.hasDisplayName()) {
+                this.setCustomName(itemStack.getDisplayName());
+            }
             NBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
             entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
@@ -133,8 +141,7 @@ public class ItemAlchemicalBag extends ItemEE {
 
         if (itemStack != null) {
             if (!(itemStack.getItem() instanceof ItemAlchemicalBag))
-                // TODO Localize
-                throw new UnsupportedOperationException("Can\'t dye non-bags!");
+                throw new UnsupportedOperationException(StatCollector.translateToLocal(Strings.NOT_A_BAG));
             else {
 
                 NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
@@ -172,5 +179,17 @@ public class ItemAlchemicalBag extends ItemEE {
                 }
             }
         }
+    }
+    
+    public void setCustomName(String customName) {
+        this.customName = customName;
+    }
+    
+    public boolean hasCustomName() {
+        return customName != null && customName.length() > 0;
+    }
+
+    public String getCustomName() {
+        return this.hasCustomName() ? customName : Strings.CONTAINER_ALCHEMICAL_BAG_NAME;
     }
 }

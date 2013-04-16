@@ -73,5 +73,7 @@ public class Strings {
     public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
-
+    
+    /* Error related constants */
+    public static final String NOT_A_BAG = "error.ee3.noBag";
 }

@@ -17,6 +17,7 @@ import com.pahimar.ee3.inventory.ContainerAludel;
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
@@ -121,10 +122,11 @@ public class CommonProxy implements IGuiHandler {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
             return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
         }
-        else if (ID == GuiIds.ALCHEMICAL_BAG)
+        else if (ID == GuiIds.ALCHEMICAL_BAG){
             // TODO Alchemical Bag inventory work is incomplete
-            return new GuiAlchemicalBag(player.inventory);
-        else if (ID == GuiIds.ALUDEL) {
+            ItemAlchemicalBag itemABag = (ItemAlchemicalBag) player.getCurrentEquippedItem().getItem();
+            return new GuiAlchemicalBag(player.inventory, itemABag);
+        }else if (ID == GuiIds.ALUDEL) {
             TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
             return new GuiAludel(player.inventory, tileAludel);
         }
