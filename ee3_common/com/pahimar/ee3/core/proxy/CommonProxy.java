@@ -28,12 +28,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Equivalent-Exchange-3
- * 
+ *
  * CommonProxy
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
+ *
  */
 public class CommonProxy implements IGuiHandler {
 
@@ -97,7 +97,7 @@ public class CommonProxy implements IGuiHandler {
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
             // TODO Alchemical Bag inventory work is incomplete
-            return new ContainerAlchemicalBag(player.inventory);
+            return new ContainerAlchemicalBag(player.getCurrentEquippedItem(), player);
         else if (ID == GuiIds.ALUDEL) {
             TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
             return new ContainerAludel(player.inventory, tileAludel);
@@ -123,7 +123,7 @@ public class CommonProxy implements IGuiHandler {
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
             // TODO Alchemical Bag inventory work is incomplete
-            return new GuiAlchemicalBag(player.inventory);
+            return new GuiAlchemicalBag(player.getCurrentEquippedItem(), player);
         else if (ID == GuiIds.ALUDEL) {
             TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
             return new GuiAludel(player.inventory, tileAludel);
