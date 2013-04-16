@@ -39,6 +39,7 @@ public class BlockAlchemicalChest extends BlockEE {
 
         super(id, Material.wood);
         this.setUnlocalizedName(Strings.ALCHEMICAL_CHEST_NAME);
+        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
