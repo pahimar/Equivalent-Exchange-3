@@ -46,7 +46,11 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
 
             // Render
-            modelCalcinator.render();
+            modelCalcinator.renderPart("Calcinator");
+            
+            if (tileCalcinator.getStackInSlot(TileCalcinator.DUST_INVENTORY_INDEX) != null) {
+                modelCalcinator.renderPart("Dust");
+            }
 
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();

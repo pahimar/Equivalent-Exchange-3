@@ -80,7 +80,7 @@ public class CommonProxy implements IGuiHandler {
 
     }
 
-    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String player, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
     }
 

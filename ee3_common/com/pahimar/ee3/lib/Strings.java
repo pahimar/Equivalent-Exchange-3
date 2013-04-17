@@ -35,7 +35,6 @@ public class Strings {
     public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
     public static final String NBT_ITEM_DISPLAY = "display";
     public static final String NBT_ITEM_COLOR = "color";
-    public static final String NBT_TE_OWNER_KEY = "teOwner";
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";

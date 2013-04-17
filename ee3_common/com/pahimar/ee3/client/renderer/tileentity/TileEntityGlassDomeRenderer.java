@@ -30,8 +30,12 @@ public class TileEntityGlassDomeRenderer extends TileEntitySpecialRenderer {
 
     private ModelGlassDome modelGlassDome = new ModelGlassDome();
     private final RenderItem customRenderItem;
+    private EntityItem ghostEntityItem;
     
     public TileEntityGlassDomeRenderer() {
+        
+        ghostEntityItem = null;
+        
         customRenderItem = new RenderItem() {
             public boolean shouldBob() {
                 return false;
@@ -47,9 +51,10 @@ public class TileEntityGlassDomeRenderer extends TileEntitySpecialRenderer {
         if (tileEntity instanceof TileGlassDome) {
             TileGlassDome tileGlassDome = (TileGlassDome) tileEntity;
             
-            GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
+            
+            GL11.glPushMatrix();
 
             // Scale, Translate, Rotate
             GL11.glScalef(1.0F, 1.0F, 1.0F);
@@ -63,20 +68,34 @@ public class TileEntityGlassDomeRenderer extends TileEntitySpecialRenderer {
             // Render
             modelGlassDome.render();
             
+            GL11.glPopMatrix();
+            
+            GL11.glPushMatrix();
             for (int i = 0; i < tileGlassDome.getSizeInventory(); i++) {
-                EntityItem entityItem = new EntityItem(tileGlassDome.worldObj, tileGlassDome.xCoord, tileGlassDome.yCoord, tileGlassDome.zCoord);
+                
+                GL11.glTranslatef((float) x + 0.5F, (float) y + 0.1F, (float) z + 0.5F);
+                GL11.glScalef(0.5F, 0.5F, 0.5F);
+                
+                if (ghostEntityItem == null) {
+                    ghostEntityItem = new EntityItem(tileGlassDome.worldObj, tileGlassDome.xCoord, tileGlassDome.yCoord, tileGlassDome.zCoord);
+                }
                 
                 if (tileGlassDome.getStackInSlot(i) != null) {
                     
-                    FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.VANILLA_ITEM_TEXTURE_SHEET);
-                    entityItem.setEntityItemStack(tileGlassDome.getStackInSlot(i));
-                    customRenderItem.doRenderItem(entityItem, 0, 0, 0, 0, tick);
+                    ghostEntityItem.setEntityItemStack(tileGlassDome.getStackInSlot(i));
+                    
+                    if (ghostEntityItem.getEntityItem() != null) {
+                        ghostEntityItem.onUpdate();
+                        customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+                    }
                 }
+                
             }
+            GL11.glPopMatrix();
 
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glPopMatrix();
+            
         }
     }
 }
