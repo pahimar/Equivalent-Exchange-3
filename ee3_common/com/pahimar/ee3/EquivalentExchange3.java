@@ -65,7 +65,7 @@ import cpw.mods.fml.relauncher.Side;
         name = Reference.MOD_NAME,
         version = Reference.VERSION_NUMBER,
         dependencies = Reference.DEPENDENCIES,
-        certificateFingerprint = Reference.FINGERPRINT)
+        certificateFingerprint = "@FINGERPRINT@")
 @NetworkMod(
         channels = { Reference.CHANNEL_NAME },
         clientSideRequired = true,
