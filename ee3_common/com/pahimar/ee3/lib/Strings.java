@@ -43,7 +43,7 @@ public class Strings {
     public static final String CALCINATOR_NAME = "calcinator";
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
-    public static final String GLASS_DOME_NAME = "glassDome";
+    public static final String GLASS_BELL_NAME = "glassBell";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
 
@@ -52,14 +52,14 @@ public class Strings {
     public static final String INERT_STONE_NAME = "stoneInert";
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
-    public static final String ALCHEMICAL_DUST_NAME = "dustAlchemical";
+    public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
     public static final String TE_ALUDEL_NAME = "tileAludel";
     public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
-    public static final String TE_GLASS_DOME_NAME = "tileGlassDome";
+    public static final String TE_GLASS_BELL_NAME = "tileGlassBell";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
@@ -72,7 +72,7 @@ public class Strings {
     public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;
     public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container." + ALCHEMICAL_CHEST_NAME;
     public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
-    public static final String CONTAINER_GLASS_DOME_NAME = "container." + GLASS_DOME_NAME;
+    public static final String CONTAINER_GLASS_BELL_NAME = "container." + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
 

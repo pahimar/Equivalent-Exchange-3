@@ -31,9 +31,9 @@ public class ModelCalcinator {
 
         modelCalcinator.renderAll();
     }
-    
+
     public void renderPart(String partName) {
-        
+
         modelCalcinator.renderPart(partName);
     }
 }

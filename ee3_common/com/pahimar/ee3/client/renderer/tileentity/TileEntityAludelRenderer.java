@@ -1,10 +1,10 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelAludel;
 import com.pahimar.ee3.lib.Textures;
@@ -32,9 +32,9 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
 
         if (tileEntity instanceof TileAludel) {
-            
+
             TileAludel tileAludel = (TileAludel) tileEntity;
-            
+
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
 

@@ -15,30 +15,29 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileGlassDome;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
-
-public class BlockGlassDome extends BlockEE {
+public class BlockGlassBell extends BlockEE {
 
     /**
-     * Is the random generator used by glass dome to drop the inventory contents in
-     * random directions.
+     * Is the random generator used by glass bell to drop the inventory contents
+     * in random directions.
      */
     private Random rand = new Random();
-    
-    public BlockGlassDome(int id) {
+
+    public BlockGlassBell(int id) {
 
         super(id, Material.glass);
-        this.setUnlocalizedName(Strings.GLASS_DOME_NAME);
+        this.setUnlocalizedName(Strings.GLASS_BELL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.66F, 0.875F);
         this.setHardness(1.0F);
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TileGlassDome();
+        return new TileGlassBell();
     }
 
     @Override
@@ -56,7 +55,7 @@ public class BlockGlassDome extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.glassDomeId;
+        return RenderIds.glassBellId;
     }
 
     @Override
@@ -73,10 +72,10 @@ public class BlockGlassDome extends BlockEE {
             return false;
         else {
             if (!world.isRemote) {
-                TileGlassDome tileGlassDome = (TileGlassDome) world.getBlockTileEntity(x, y, z);
+                TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
 
-                if (tileGlassDome != null) {
-                    player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_DOME, world, x, y, z);
+                if (tileGlassBell != null) {
+                    player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
                 }
             }
 

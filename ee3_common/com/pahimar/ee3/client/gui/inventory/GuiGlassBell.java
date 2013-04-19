@@ -6,10 +6,10 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.inventory.ContainerGlassDome;
+import com.pahimar.ee3.inventory.ContainerGlassBell;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
-import com.pahimar.ee3.tileentity.TileGlassDome;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,21 +17,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Equivalent-Exchange-3
  * 
- * GuiGlassDome
+ * GuiGlassBell
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
 @SideOnly(Side.CLIENT)
-public class GuiGlassDome extends GuiContainer {
+public class GuiGlassBell extends GuiContainer {
 
-    private TileGlassDome tileGlassDome;
+    private TileGlassBell tileGlassBell;
 
-    public GuiGlassDome(InventoryPlayer inventoryPlayer, TileGlassDome tileGlassDome) {
+    public GuiGlassBell(InventoryPlayer inventoryPlayer, TileGlassBell tileGlassBell) {
 
-        super(new ContainerGlassDome(inventoryPlayer, tileGlassDome));
-        this.tileGlassDome = tileGlassDome;
+        super(new ContainerGlassBell(inventoryPlayer, tileGlassBell));
+        this.tileGlassBell = tileGlassBell;
         xSize = 176;
         ySize = 140;
     }
@@ -39,7 +39,7 @@ public class GuiGlassDome extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-        String containerName = tileGlassDome.isInvNameLocalized() ? tileGlassDome.getInvName() : StatCollector.translateToLocal(tileGlassDome.getInvName());
+        String containerName = tileGlassBell.isInvNameLocalized() ? tileGlassBell.getInvName() : StatCollector.translateToLocal(tileGlassBell.getInvName());
         fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
     }
@@ -48,7 +48,7 @@ public class GuiGlassDome extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture(Textures.GUI_GLASS_DOME);
+        mc.renderEngine.bindTexture(Textures.GUI_GLASS_BELL);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

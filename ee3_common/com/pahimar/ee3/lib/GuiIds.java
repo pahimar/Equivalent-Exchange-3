@@ -18,6 +18,6 @@ public class GuiIds {
     public static final int ALCHEMICAL_CHEST = 4;
     public static final int ALCHEMICAL_BAG = 5;
     public static final int SHARED_ALCHEMICAL_INVENTORY = 6;
-    public static final int GLASS_DOME = 7;
+    public static final int GLASS_BELL = 7;
 
 }

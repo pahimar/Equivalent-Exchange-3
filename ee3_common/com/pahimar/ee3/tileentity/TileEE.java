@@ -71,7 +71,7 @@ public class TileEE extends TileEntity {
 
         this.customName = customName;
     }
-    
+
     public boolean isUseableByPlayer(EntityPlayer player) {
 
         return true;

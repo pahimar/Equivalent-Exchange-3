@@ -32,7 +32,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
 
         if (tileEntity instanceof TileCalcinator) {
             TileCalcinator tileCalcinator = (TileCalcinator) tileEntity;
-            
+
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
 
@@ -47,7 +47,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
 
             // Render
             modelCalcinator.renderPart("Calcinator");
-            
+
             if (tileCalcinator.getStackInSlot(TileCalcinator.DUST_INVENTORY_INDEX) != null) {
                 modelCalcinator.renderPart("Dust");
             }

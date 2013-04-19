@@ -31,9 +31,9 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
-        
+
         if (tileEntity instanceof TileAlchemicalChest) {
-            
+
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) tileEntity;
             ForgeDirection direction = null;
 
