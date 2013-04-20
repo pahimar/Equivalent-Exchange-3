@@ -52,7 +52,7 @@ public class Strings {
     public static final String INERT_STONE_NAME = "stoneInert";
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
-    public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
+    public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust"; 
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
 
     /* TileEntity name constants */
