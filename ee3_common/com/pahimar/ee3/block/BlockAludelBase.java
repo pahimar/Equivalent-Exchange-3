@@ -26,7 +26,7 @@ import com.pahimar.ee3.tileentity.TileAludel;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class BlockAludel extends BlockEE {
+public class BlockAludelBase extends BlockEE {
 
     /**
      * Is the random generator used by aludel to drop the inventory contents in
@@ -34,13 +34,13 @@ public class BlockAludel extends BlockEE {
      */
     private Random rand = new Random();
 
-    public BlockAludel(int id) {
+    public BlockAludelBase(int id) {
 
         super(id, Material.rock);
         this.setUnlocalizedName(Strings.ALUDEL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);
         this.setHardness(5F);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.66F, 1.0F);
     }
 
     @Override

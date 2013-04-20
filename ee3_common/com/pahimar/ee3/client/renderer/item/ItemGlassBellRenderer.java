@@ -5,7 +5,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.client.model.ModelAludel;
+import com.pahimar.ee3.client.model.ModelGlassBell;
 import com.pahimar.ee3.lib.Textures;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -15,20 +15,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Equivalent-Exchange-3
  * 
- * ItemAludelRenderer
+ * ItemGlassBellRenderer
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ItemAludelRenderer implements IItemRenderer {
+public class ItemGlassBellRenderer implements IItemRenderer {
 
-    private ModelAludel modelAludel;
+    private ModelGlassBell modelGlassBell;
 
-    public ItemAludelRenderer() {
+    public ItemGlassBellRenderer() {
 
-        modelAludel = new ModelAludel();
+        modelGlassBell = new ModelGlassBell();
     }
 
     @Override
@@ -48,15 +48,15 @@ public class ItemAludelRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
-                renderAludel(-0.5F, -0.38F, 0.5F, 1.0F);
+                renderGlassBell(-0.5F, -1.2F, 0.5F, 1.4F);
                 return;
             }
             case EQUIPPED: {
-                renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
+                renderGlassBell(-0.2F, -0.85F, 0.8F, 1.4F);
                 return;
             }
             case INVENTORY: {
-                renderAludel(-1.0F, -0.9F, 0.0F, 1.0F);
+                renderGlassBell(-1.0F, -1.675F, 0.0F, 1.4F);
                 return;
             }
             default:
@@ -64,7 +64,7 @@ public class ItemAludelRenderer implements IItemRenderer {
         }
     }
 
-    private void renderAludel(float x, float y, float z, float scale) {
+    private void renderGlassBell(float x, float y, float z, float scale) {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -75,10 +75,10 @@ public class ItemAludelRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_GLASS_BELL);
 
         // Render
-        modelAludel.render();
+        modelGlassBell.render();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

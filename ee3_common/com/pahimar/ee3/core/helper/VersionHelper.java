@@ -109,10 +109,11 @@ public class VersionHelper implements Runnable {
             }
         }
     }
-    
+
     private static String getVersionForCheck() {
+
         String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
-        
+
         if (versionTokens.length >= 1) {
             return versionTokens[0];
         }

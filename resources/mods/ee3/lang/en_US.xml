@@ -22,10 +22,12 @@
 	<entry key="tile.calcinator.name">Calcinator</entry>
 	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.alchemicalChest.name">Alchemical Chest</entry>
+	<entry key="tile.glassBell.name">Glass Bell</entry>
 	<entry key="container.calcinator">Calcinator</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Alchemical Chest</entry>
 	<entry key="container.alchemicalBag">Alchemical Bag</entry>
+	<entry key="container.glassBell">Glass Bell</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initializing remote version check against remote version authority, located at</entry>
 	<entry key="version.uninitialized">Remote version check failed to initialize properly</entry>

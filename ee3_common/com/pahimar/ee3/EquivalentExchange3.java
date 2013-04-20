@@ -59,26 +59,14 @@ import cpw.mods.fml.relauncher.Side;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-
-@Mod(
-        modid = Reference.MOD_ID,
-        name = Reference.MOD_NAME,
-        version = Reference.VERSION_NUMBER,
-        dependencies = Reference.DEPENDENCIES,
-        certificateFingerprint = Reference.FINGERPRINT)
-@NetworkMod(
-        channels = { Reference.CHANNEL_NAME },
-        clientSideRequired = true,
-        serverSideRequired = false,
-        packetHandler = PacketHandler.class)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION_NUMBER, dependencies = Reference.DEPENDENCIES, certificateFingerprint = Reference.FINGERPRINT)
+@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(
-            clientSide = Reference.CLIENT_PROXY_CLASS,
-            serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
@@ -157,7 +145,7 @@ public class EquivalentExchange3 {
         proxy.registerDrawBlockHighlightHandler();
 
         // Initialize mod tile entities
-        proxy.initTileEntities();
+        proxy.registerTileEntities();
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();

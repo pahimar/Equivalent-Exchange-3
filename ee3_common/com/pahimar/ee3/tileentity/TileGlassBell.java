@@ -7,45 +7,28 @@ import net.minecraft.nbt.NBTTagList;
 
 import com.pahimar.ee3.lib.Strings;
 
-/**
- * Equivalent-Exchange-3
- * 
- * TileCalcinator
- * 
- * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
- */
-public class TileCalcinator extends TileEE implements IInventory {
+public class TileGlassBell extends TileEE implements IInventory {
 
     /**
-     * The ItemStacks that hold the items currently being used in the Calcinator
+     * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 3;
+    private final int INVENTORY_SIZE = 1;
 
-    public static final int FUEL_INVENTORY_INDEX = 0;
-    public static final int INPUT_INVENTORY_INDEX = 1;
-    public static final int DUST_INVENTORY_INDEX = 2;
+    public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
 
-    public TileCalcinator() {
+    public TileGlassBell() {
 
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     @Override
     public int getSizeInventory() {
 
         return inventory.length;
     }
 
-    /**
-     * Returns the stack in slot i
-     */
     @Override
     public ItemStack getStackInSlot(int slot) {
 
@@ -93,7 +76,7 @@ public class TileCalcinator extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_CALCINATOR_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_GLASS_BELL_NAME;
     }
 
     @Override
