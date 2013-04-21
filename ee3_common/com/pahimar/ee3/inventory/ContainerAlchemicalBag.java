@@ -40,6 +40,69 @@ public class ContainerAlchemicalBag extends Container {
 
         return true;
     }
+    
+    // Code for Shift-Clicking, Should Work! Added by AppleBloomModder
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int i)
+    {
+     ItemStack stack = null;
+     Slot slot = (Slot)this.inventorySlots.get(i);
+     if(slot != null && slot.getHasStack())
+     {
+      ItemStack stack1 = slot.getStack();
+      stack = stack1.copy();
+      
+      if(i == 0)
+      {
+       if(!this.mergeItemStack(stack1, 9, 45, true))
+       {
+        return null;
+       }
+       slot.onSlotChange(stack1, stack);
+      }else if(i >= 1 && i < 5)
+      {
+       if(!this.mergeItemStack(stack1, 9, 45, false))  
+       {
+        return null;
+       }
+      }else if(i >= 5 && i < 9)
+      {
+       if(!this.mergeItemStack(stack1, 9, 45, false))
+       {
+        return null;
+       }
+      }else if(i >= 9 && i < 36)
+      {
+       if(!this.mergeItemStack(stack1, 36, 45, false))
+       {
+        return null;
+       }
+      }else if(i >= 36 && i < 45)
+      {
+       if(!this.mergeItemStack(stack1, 9, 36, false))
+       {
+        return null;
+       }
+      }else if(!this.mergeItemStack(stack1, 9, 45, false))
+      {
+       return null;
+      }
+      
+      if(stack1.stackSize == 0)
+      {
+       slot.putStack((ItemStack)null);
+      }else{
+       slot.onSlotChanged();
+      }
+      
+      if(stack1.stackSize == stack.stackSize)
+      {
+       return null;
+      }
+      slot.onPickupFromSlot(player, stack1);
+     }
+     return stack;
+    }
 
     @Override
     public void onCraftGuiClosed(EntityPlayer player) {
