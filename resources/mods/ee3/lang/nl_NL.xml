@@ -47,6 +47,6 @@
 	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 deeltjes aangezet</entry>
 	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 deeltjes uitgezet</entry>
 	<entry key="command.ee3.sounds.set_to_all">Equivalent Exchange 3 geluiden van alle spelers worden afgespeeld</entry>
-	<entry key="command.ee3.sounds.set_to_self">Equivalent Exchange 3 geluiden van alle spelers worden afgespeeld</entry>
+	<entry key="command.ee3.sounds.set_to_self">Alleen Equivalent Exchange 3 geluiden van jezelf worden afgespeeld</entry>
 	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 geluiden worden niet afgespeeld</entry>
 </properties>
