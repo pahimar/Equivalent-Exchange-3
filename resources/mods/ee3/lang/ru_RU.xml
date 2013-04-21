@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Russian (RU) Localization File</comment>
+	<comment>Russian (ru_RU) Localization File</comment>
 	<entry key="key.extra">Экстра</entry>
 	<entry key="key.release">Сброс</entry>
 	<entry key="key.toggle">Переключение</entry>
@@ -10,27 +10,29 @@
 	<entry key="item.stoneInert.name">Инертный Камень</entry>
 	<entry key="item.stoneMinium.name">Алхимический Камень</entry>
 	<entry key="item.stonePhilosophers.name">Философский Камень</entry>
-	<entry key="item.dustAlchemicalAsh.name">Пыль</entry>
-	<entry key="item.dustAlchemicalMinium.name">Алхимический Порошок</entry>
-	<entry key="item.dustAlchemicalVerdant.name">Зелёный Порошок</entry>
-	<entry key="item.dustAlchemicalAzure.name">Лазурный Порошок</entry>
-	<entry key="item.dustAlchemicalAmaranthine.name">Пурпурный Порошок</entry>
-	<entry key="item.dustAlchemicalIridescent.name">Радужный Порошок</entry>
+	<entry key="item.alchemicalDustAsh.name">Пыль</entry>
+	<entry key="item.alchemicalDustMinium.name">Алхимический Порошок</entry>
+	<entry key="item.alchemicalDustVerdant.name">Зелёный Порошок</entry>
+	<entry key="item.alchemicalDustAzure.name">Лазурный Порошок</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Пурпурный Порошок</entry>
+	<entry key="item.alchemicalDustIridescent.name">Радужный Порошок</entry>
 	<entry key="item.alchemicalBag.name">Алхимическая Сумка</entry>
 	<entry key="tile.redWaterStill.name">Красная Вода (Стоящая)</entry>
 	<entry key="tile.redWaterFlowing.name">Красная Вода (Текущая)</entry>
 	<entry key="tile.calcinator.name">Кальцинатор</entry>
 	<entry key="tile.aludel.name">Алюдель</entry>
 	<entry key="tile.alchemicalChest.name">Алхимический Сундук</entry>
+	<entry key="tile.glassBell.name">Стеклянный Колокол</entry>
 	<entry key="container.calcinator">Кальцинатор</entry>
 	<entry key="container.aludel">Алюдель</entry>
 	<entry key="container.alchemicalChest">Алхимический Сундук</entry>
 	<entry key="container.alchemicalBag">Алхимическая Сумка</entry>
+	<entry key="container.glassBell">Стеклянный Колокол</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Инициализация проверки версии файла по удалённому экземпляру, расположенному на</entry>
 	<entry key="version.uninitialized">Не удалась инициализация удалённой проверки версии</entry>
 	<entry key="version.current">Используется самая свежая версия (@REMOTE_MOD_VERSION@) модификации Equivalent Exchange 3 для @MINECRAFT_VERSION@</entry>
-	<entry key="version.outdated"Новая версия модификации @MOD_NAME@ существует (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Вы можите скачать её здесь: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.outdated">Новая версия модификации @MOD_NAME@ существует (@REMOTE_MOD_VERSION@) для @MINECRAFT_VERSION@. Вы можите скачать её здесь: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Ошибка подключения к удалённому файлу проверки версии; новая попытка</entry>
 	<entry key="version.final_error">Проверка версии отменена после 3х неудачных попыток</entry>
 	<entry key="version.mc_version_not_found">Не удаётся найти версию модификации @MOD_NAME@ для @MINECRAFT_VERSION@ в удалённом хранилище версий</entry>
