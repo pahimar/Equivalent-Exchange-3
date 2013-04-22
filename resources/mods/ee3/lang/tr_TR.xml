@@ -2,8 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Turkish (tr_TR) Localization File</comment>
-	
-	<!-- Entries -->
 	<entry key="key.extra">Ekstra</entry>
 	<entry key="key.release">Bırak</entry>
 	<entry key="key.toggle">Aç/Kapa</entry>
