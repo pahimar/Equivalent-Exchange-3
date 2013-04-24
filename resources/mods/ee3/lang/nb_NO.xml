@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Norwegian Bokmål (no_NO) Localisation File</comment>
+	<comment>Norwegian Bokmål (nb_NO) Localisation File</comment>
 	<entry key="key.extra">Ekstra</entry>
 	<entry key="key.release">Slipp</entry>
 	<entry key="key.toggle">Veksle</entry>
@@ -22,10 +22,12 @@
 	<entry key="tile.calcinator.name">Kalsinator</entry>
 	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.alchemicalChest.name">Alkymisk kiste</entry>
+	<entry key="tile.glassBell.name">Glassklokke</entry>
 	<entry key="container.calcinator">Kalsinator</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Alkymisk kiste</entry>
 	<entry key="container.alchemicalBag">Alkymisk pose</entry>
+	<entry key="container.glassBell">Glassklokke</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initialiserer versjonskontroll mot fjernversjonens autoritetsfil, plassert i</entry>
 	<entry key="version.uninitialized">Feil under initialisering av versjonskontroll</entry>
