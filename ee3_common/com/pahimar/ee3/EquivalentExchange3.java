@@ -1,4 +1,4 @@
-package com.pahimar.ee3; 
+package com.pahimar.ee3;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -90,7 +90,7 @@ public class EquivalentExchange3 {
 
         // Initialize the log helper
         LogHelper.init();
-
+        
         // Load the localization files into the LanguageRegistry
         LocalizationHandler.loadLanguages();
 
