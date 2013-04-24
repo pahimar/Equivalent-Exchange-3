@@ -17,7 +17,7 @@ import com.pahimar.ee3.core.helper.LogHelper;
 public class Localizations {
 
     private static final String LANG_RESOURCE_LOCATION = "/mods/ee3/lang/";
-
+    
     public static String[] localeFiles;
     
     /**
