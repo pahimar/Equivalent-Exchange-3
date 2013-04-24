@@ -22,12 +22,12 @@
 	<entry key="tile.calcinator.name">Кальцинатор</entry>
 	<entry key="tile.aludel.name">Алюдель</entry>
 	<entry key="tile.alchemicalChest.name">Алхимический Сундук</entry>
-	<entry key="tile.glassBell.name">Стеклянный Колокол</entry>
+	<entry key="tile.glassBell.name">Стеклянный Колпак</entry>
 	<entry key="container.calcinator">Кальцинатор</entry>
 	<entry key="container.aludel">Алюдель</entry>
 	<entry key="container.alchemicalChest">Алхимический Сундук</entry>
 	<entry key="container.alchemicalBag">Алхимическая Сумка</entry>
-	<entry key="container.glassBell">Стеклянный Колокол</entry>
+	<entry key="container.glassBell">Стеклянный Колпак</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Инициализация проверки версии файла по удалённому экземпляру, расположенному на</entry>
 	<entry key="version.uninitialized">Не удалась инициализация удалённой проверки версии</entry>
