@@ -3,9 +3,9 @@
 <properties version="1.0">
     <comment>Serbian (sr_RS) Localization File</comment>
     <entry key="key.extra">Dodatno</entry>
-    <entry key="key.release">Pustiti</entry>
+    <entry key="key.release">Oslabiti</entry>
     <entry key="key.toggle">Menjati</entry>
-    <entry key="key.charge">Napuniti</entry>
+    <entry key="key.charge">Pojačati</entry>
     <entry key="item.shardMinium.name">Odlomak Miniuma</entry>
     <entry key="item.stoneInert.name">Inertni Kamen</entry>
     <entry key="item.stoneMinium.name">Miniumski Kamen</entry>
@@ -14,8 +14,8 @@
     <entry key="item.alchemicalDustMinium.name">Miniumska Prašina</entry>
     <entry key="item.alchemicalDustVerdant.name">Verdantna Prašina</entry>
     <entry key="item.alchemicalDustAzure.name">Azurna Prašina</entry>
-    <entry key="item.alchemicalDustAmaranthine.name">Večna Prašina</entry>
-    <entry key="item.alchemicalDustIridescent.name">Šarena Prašina</entry>
+    <entry key="item.alchemicalDustAmaranthine.name">Amarantinska Prašina</entry>
+    <entry key="item.alchemicalDustIridescent.name">Iridesentna Prašina</entry>
     <entry key="item.alchemicalBag.name">Alhemijska Vreća</entry>
     <entry key="tile.redWaterStill.name">Crvena Voda (Stajaća)</entry>
     <entry key="tile.redWaterFlowing.name">Crvena Voda (Tekuća)</entry>
@@ -29,13 +29,13 @@
     <entry key="container.alchemicalBag">Alhemijska Vreća</entry>
     <entry key="container.glassBell">Stakleno Zvono</entry>
     <entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-    <entry key="version.init_log_message">Započinjem proveru verzije u poređenju sa autoritetom, koji se nalazi u</entry>
+    <entry key="version.init_log_message">Započinjem proveru verzije u poređenju sa naj novijom, koji se nalazi u</entry>
     <entry key="version.uninitialized">Provera verzije neuspešna</entry>
     <entry key="version.current">Trenutno koristite naj noviju verziju (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 moda za @MINECRAFT_VERSION@</entry>
     <entry key="version.outdated">Nova @MOD_NAME@ verzija postoji (@REMOTE_MOD_VERSION@) za @MINECRAFT_VERSION@. Skinite je ovde: @MOD_UPDATE_LOCATION@</entry>
-    <entry key="version.general_error">Greška u konektovanju sa fajlom autoriteta; pokusavam ponovo</entry>
+    <entry key="version.general_error">Greška u konektovanju sa serverom; pokusavam ponovo</entry>
     <entry key="version.final_error">Provera verzije zaustavljena posle tri neušpesna pokušaja</entry>
-    <entry key="version.mc_version_not_found">Potraga za verziju @MOD_NAME@ za @MINECRAFT_VERSION@ u autoritetu, neuspešna</entry>
+    <entry key="version.mc_version_not_found">Potraga za verziju @MOD_NAME@ za @MINECRAFT_VERSION@, neuspešna</entry>
     <entry key="command.ee3.overlay.turned_on">Prikaz mete transmutacije uključen</entry>
     <entry key="command.ee3.overlay.turned_off">Prikaz mete transmutacije isključen</entry>
     <entry key="command.ee3.overlay.position.top_left">Prikaz mete transmutacije stavljen na gornji levi ugao</entry>
