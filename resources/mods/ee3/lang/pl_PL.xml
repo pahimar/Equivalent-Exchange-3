@@ -29,4 +29,11 @@
 	<entry key="version.outdated">Istnieje nowsza wersja @MOD_NAME@ (@REMOTE_MOD_VERSION@) dla @MINECRAFT_VERSION@. Pobierz stąd: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Wystąpił błąd podczas łaczenia ze zdalnym plikiem wersji</entry>
 	<entry key="version.check_disabled">Zdalne sprawdzanie wersji wyłączone, pomijanie</entry>
+	<entry key="tile.aludel.name">Sublimację Nagrodę</entry>
+	<entry key="tile.alchemicalChest.name">Alchemiczny Pojemnik</entry>
+	<entry key="tile.glassBell.name">Szklana Kopuła</entry>
+	<entry key="container.calcinator">Kalcynator</entry>
+	<entry key="container.alchemicalChest">Alchemiczny Pojemnik</entry>
+	<entry key="container.alchemicalBag">Alchemiczny Torba</entry>
+	<entry key="container.glassBell">Szklana Kopuła</entry>
 </properties>
