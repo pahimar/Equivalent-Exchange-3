@@ -129,6 +129,11 @@ public class ClientProxy extends CommonProxy {
             }
         }
     }
+    
+    @Override
+    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData) {
+        
+    }
 
     @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
