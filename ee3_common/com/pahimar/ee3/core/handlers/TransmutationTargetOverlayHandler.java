@@ -21,6 +21,8 @@ import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -31,6 +33,7 @@ import cpw.mods.fml.common.TickType;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class TransmutationTargetOverlayHandler implements ITickHandler {
 
     @Override
@@ -49,8 +52,10 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
             if (player != null) {
                 currentItemStack = player.inventory.getCurrentItem();
 
-                if (currentItemStack != null && minecraft.inGameHasFocus && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
-                    renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+                if (minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
+                    if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
+                        renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+                    }
                 }
             }
         }

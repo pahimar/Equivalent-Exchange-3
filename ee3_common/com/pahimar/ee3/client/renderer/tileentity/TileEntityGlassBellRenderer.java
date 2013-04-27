@@ -100,7 +100,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
 
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_LIGHTING);
-
         }
     }
     
