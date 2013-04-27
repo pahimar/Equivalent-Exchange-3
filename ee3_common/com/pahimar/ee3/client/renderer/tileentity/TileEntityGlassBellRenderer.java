@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -51,7 +52,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
 
         if (tileEntity instanceof TileGlassBell) {
             TileGlassBell tileGlassBell = (TileGlassBell) tileEntity;
-
+            
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
 
@@ -61,10 +62,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
             GL11.glPushMatrix();
 
             // Scale, Translate, Rotate
-            GL11.glScalef(1.0F, 1.0F, 1.0F);
-            GL11.glTranslatef((float) x + 0.0F, (float) y + -1.0F, (float) z + 1.0F);
-            GL11.glRotatef(0F, 0F, 1F, 0F);
-            GL11.glRotatef(-90F, 1F, 0F, 0F);
+            renderGlassBellByOrientation(x, y, z, tileGlassBell.getOrientation());
 
             // Bind texture
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_GLASS_BELL);
@@ -84,10 +82,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                     float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(i));
                     float rotationAngle = (float) (720.0 * (double) (System.currentTimeMillis() & 0x3FFFL) / (double) 0x3FFFL);
                     
-                    if (tileGlassBell.getStackInSlot(i).itemID < 4096) {
-                        
-                    }
-                    
                     EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
                     ghostEntityItem.hoverStart = 0.0F;
                     ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(i));
@@ -106,6 +100,50 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_LIGHTING);
 
+        }
+    }
+    
+    private void renderGlassBellByOrientation(double x, double y, double z, ForgeDirection forgeDirection) {
+        
+        switch (forgeDirection) {
+            case DOWN: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + 0.0F, (float) y + 2.0F, (float) z + 0.0F);
+                GL11.glRotatef(90F, 1F, 0F, 0F);
+                break;
+            }
+            case UP: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + 0.0F, (float) y + -1.0F, (float) z + 1.0F);
+                GL11.glRotatef(-90F, 1F, 0F, 0F);
+                break;
+            }
+            case NORTH: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + 1.0F, (float) y + 0.0F, (float) z + 2.0F);
+                GL11.glRotatef(180F, 0F, 1F, 0F);
+                break;
+            }
+            case SOUTH: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + -1.0F);
+                GL11.glRotatef(0F, 0F, 1F, 0F);
+                break;
+            }
+            case EAST: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + -1.0F, (float) y + 1.0F, (float) z + 1.0F);
+                GL11.glRotatef(-90F, 0F, 0F, 1F);
+                GL11.glRotatef(-90F, 1F, 0F, 0F);
+                break;
+            }
+            case WEST: {
+                GL11.glScalef(1.0F, 1.0F, 1.0F);
+                GL11.glTranslatef((float) x + 2.0F, (float) y + 0.0F, (float) z + 1.0F);
+                GL11.glRotatef(90F, 0F, 0F, 1F);
+                GL11.glRotatef(-90F, 1F, 0F, 0F);
+                break;
+            }
         }
     }
     
