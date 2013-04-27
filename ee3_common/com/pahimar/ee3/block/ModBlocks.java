@@ -1,6 +1,7 @@
 package com.pahimar.ee3.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.Strings;
@@ -48,13 +49,6 @@ public class ModBlocks {
 
     private static void initBlockRecipes() {
 
-        // Calcinator Recipe
-        /*
-         * Temporarily disabled for pre-release 1, as it is not completely
-         * functional GameRegistry.addRecipe(new ItemStack(calcinator), new
-         * Object[] {"i i","iii","sfs", Character.valueOf('i'), Item.ingotIron,
-         * Character.valueOf('s'), Block.stone, Character.valueOf('f'),
-         * Item.flintAndSteel });
-         */
+        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), Block.glass });
     }
 }

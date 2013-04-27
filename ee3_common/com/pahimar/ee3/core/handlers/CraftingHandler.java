@@ -26,7 +26,6 @@ public class CraftingHandler implements ICraftingHandler {
 
         if (player.worldObj.isRemote) {
             doPortableCrafting(player, craftMatrix);
-            System.out.println(item.toString());
         }
     }
 
