@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -86,7 +87,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                     ghostEntityItem.hoverStart = 0.0F;
                     ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(i));
 
-                    GL11.glTranslatef((float) x + 0.5F, (float) y + getGhostItemYTranslateFactor(tileGlassBell.getStackInSlot(i)), (float) z + 0.5F);
+                    translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                     GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
                     
@@ -110,76 +111,109 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + 0.0F, (float) y + 2.0F, (float) z + 0.0F);
                 GL11.glRotatef(90F, 1F, 0F, 0F);
-                break;
+                return;
             }
             case UP: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + 0.0F, (float) y + -1.0F, (float) z + 1.0F);
                 GL11.glRotatef(-90F, 1F, 0F, 0F);
-                break;
+                return;
             }
             case NORTH: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + 1.0F, (float) y + 0.0F, (float) z + 2.0F);
                 GL11.glRotatef(180F, 0F, 1F, 0F);
-                break;
+                return;
             }
             case SOUTH: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + -1.0F);
-                GL11.glRotatef(0F, 0F, 1F, 0F);
-                break;
+                return;
             }
             case EAST: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + -1.0F, (float) y + 1.0F, (float) z + 1.0F);
                 GL11.glRotatef(-90F, 0F, 0F, 1F);
                 GL11.glRotatef(-90F, 1F, 0F, 0F);
-                break;
+                return;
             }
             case WEST: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef((float) x + 2.0F, (float) y + 0.0F, (float) z + 1.0F);
                 GL11.glRotatef(90F, 0F, 0F, 1F);
                 GL11.glRotatef(-90F, 1F, 0F, 0F);
-                break;
+                return;
             }
         }
     }
     
-    private float getGhostItemYTranslateFactor(ItemStack itemStack) {
-        float scaleFactor = 0.1F;
+    private void translateGhostItemByOrientation(ItemStack ghostItemStack, double x, double y, double z, ForgeDirection forgeDirection) {
         
-        if (itemStack != null) {
-            if (itemStack.itemID < 4096) {
-                switch (customRenderItem.getMiniBlockCount(itemStack)) {
-                    case 1: return 0.25F;
-                    case 2: return 0.25F;
-                    case 3: return 0.25F;
-                    case 4: return 0.25F;
-                    case 5: return 0.25F;
-                    default: return 0.1F;
+        if (ghostItemStack != null) {
+            if (ghostItemStack.getItem() instanceof ItemBlock) {
+                switch (forgeDirection) {
+                    case DOWN: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.7F, (float) z + 0.5F);
+                        return;
+                    }
+                    case UP: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.5F);
+                        return;
+                    }
+                    case NORTH: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.7F);
+                        return;
+                    }
+                    case SOUTH: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.3F);
+                        return;
+                    }
+                    case EAST: {
+                        GL11.glTranslatef((float) x + 0.3F, (float) y + 0.5F, (float) z + 0.5F);
+                        return;
+                    }
+                    case WEST: {
+                        GL11.glTranslatef((float) x + 0.70F, (float) y + 0.5F, (float) z + 0.5F);
+                        return;
+                    }
                 }
             }
             else {
-                switch (customRenderItem.getMiniItemCount(itemStack)) {
-                    case 1: return 0.175F;
-                    case 2: return 0.15F;
-                    case 3: return 0.1F;
-                    case 4: return 0.1F;
-                    default: return 0.1F;
+                switch (forgeDirection) {
+                    case DOWN: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.6F, (float) z + 0.5F);
+                        return;
+                    }
+                    case UP: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.20F, (float) z + 0.5F);
+                        return;
+                    }
+                    case NORTH: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.4F, (float) z + 0.7F);
+                        return;
+                    }
+                    case SOUTH: {
+                        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.4F, (float) z + 0.3F);
+                        return;
+                    }
+                    case EAST: {
+                        GL11.glTranslatef((float) x + 0.3F, (float) y + 0.4F, (float) z + 0.5F);
+                        return;
+                    }
+                    case WEST: {
+                        GL11.glTranslatef((float) x + 0.70F, (float) y + 0.4F, (float) z + 0.5F);
+                        return;
+                    }
                 }
             }
         }
-        
-        return scaleFactor;
     }
     
     private float getGhostItemScaleFactor(ItemStack itemStack) {
         float scaleFactor = 1.0F;
         
         if (itemStack != null) {
-            if (itemStack.itemID < 4096) {
+            if (itemStack.getItem() instanceof ItemBlock) {
                 switch (customRenderItem.getMiniBlockCount(itemStack)) {
                     case 1: return 0.90F;
                     case 2: return 0.90F;
