@@ -23,10 +23,12 @@
 	<entry key="tile.calcinator.name">煆焼器</entry>
 	<entry key="tile.aludel.name">アルデル</entry>
 	<entry key="tile.alchemicalChest.name">奇術チェスト</entry>
+	<entry key="title.glassBell.name">グラスの鐘</entry>
 	<entry key="container.calcinator">煆焼器</entry>
 	<entry key="container.aludel">アルデル</entry>
 	<entry key="container.alchemicalChest">奇術チェスト</entry>
 	<entry key="container.alchemicalBag">奇術袋</entry>
+	<entry key="container.glassBell.name">グラスの鐘</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">オンラインバージョンチェックの初期化中。場所:</entry>
 	<entry key="version.uninitialized">バージョンチェックに失敗しました。 (初期化に失敗しました。)</entry>
