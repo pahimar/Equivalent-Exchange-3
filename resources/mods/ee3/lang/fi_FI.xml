@@ -21,11 +21,13 @@
 	<entry key="tile.redWaterFlowing.name">Punavesi (Virtaava)</entry>
 	<entry key="tile.calcinator.name">Kalsinaattori</entry>
 	<entry key="tile.aludel.name">Aludeli</entry>
-	<entry key="tile.alchemicalChest.name">Alchemical Chest</entry>
-	<entry key="container.calcinator">Calcinator</entry>
-	<entry key="container.aludel">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Alkeminen arkku</entry>
+	<entry key="tile.glassBell.name">Lasitiuku</entry>
+	<entry key="container.calcinator">Kalsinaattori</entry>
+	<entry key="container.aludel">Aludeli</entry>
 	<entry key="container.alchemicalChest">Alkeminen arkku</entry>
 	<entry key="container.alchemicalBag">Alkeminen pussi</entry>
+	<entry key="container.glassBell">Lasitiuku</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Alustetaaan etäversion tarkistusta palvelimeen kohteessa</entry>
 	<entry key="version.uninitialized">Etäversion tarkistusta ei pystytty alustamaan</entry>
