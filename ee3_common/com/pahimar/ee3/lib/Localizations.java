@@ -1,5 +1,20 @@
 package com.pahimar.ee3.lib;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.logging.Level;
+
+import com.pahimar.ee3.core.helper.LogHelper;
+
 /**
  * Equivalent-Exchange-3
  * 
@@ -12,7 +27,100 @@ package com.pahimar.ee3.lib;
 public class Localizations {
 
     private static final String LANG_RESOURCE_LOCATION = "/mods/ee3/lang/";
-
-    public static String[] localeFiles = { LANG_RESOURCE_LOCATION + "cs_CZ.xml", LANG_RESOURCE_LOCATION + "cy_GB.xml", LANG_RESOURCE_LOCATION + "da_DK.xml", LANG_RESOURCE_LOCATION + "de_DE.xml", LANG_RESOURCE_LOCATION + "en_US.xml", LANG_RESOURCE_LOCATION + "es_ES.xml", LANG_RESOURCE_LOCATION + "fi_FI.xml", LANG_RESOURCE_LOCATION + "fr_FR.xml", LANG_RESOURCE_LOCATION + "it_IT.xml", LANG_RESOURCE_LOCATION + "ja_JP.xml", LANG_RESOURCE_LOCATION + "la_IT.xml", LANG_RESOURCE_LOCATION + "nl_NL.xml", LANG_RESOURCE_LOCATION + "nb_NO.xml", LANG_RESOURCE_LOCATION + "pl_PL.xml", LANG_RESOURCE_LOCATION + "pt_BR.xml", LANG_RESOURCE_LOCATION + "pt_PT.xml", LANG_RESOURCE_LOCATION + "ru_RU.xml", LANG_RESOURCE_LOCATION + "sk_SK.xml", LANG_RESOURCE_LOCATION + "sr_RS.xml", LANG_RESOURCE_LOCATION + "sv_SE.xml", LANG_RESOURCE_LOCATION + "tr_TR.xml", LANG_RESOURCE_LOCATION + "zh_CN.xml", LANG_RESOURCE_LOCATION + "zh_TW.xml" };
+    private static final String JAR_SUBDIRECTORY = "mods/ee3/lang/";
+    
+    public static String[] localeFiles;
+    
+    /**
+     * parseDir
+     * 
+     * Parses LANG_RESOURCE_LOCATION for any localizations and loads them into localeFiles
+     * 
+     * @author Robotic-Brain
+     * 
+     */
+    public static void parseDir() {
+        try {
+            URL resourceURL = Localizations.class.getResource(LANG_RESOURCE_LOCATION);
+            
+            if (resourceURL == null) {
+                throw new Exception("NULL POINTER!");
+            }
+            
+            if (resourceURL.getProtocol().equals("file")) {
+                parseNormalDirectory(resourceURL);
+                
+            } else if (resourceURL.getProtocol().equals("jar")) {
+                parseJarFile(resourceURL);
+            }
+            
+            LogHelper.log(Level.INFO, "Loaded " + localeFiles.length + " localizations");
+        } catch (Exception e) {
+            LogHelper.log(Level.SEVERE, "Unable to load language files!");
+            e.printStackTrace(System.err);
+        }
+    }
+    
+    /**
+     * parseNormalDirectory
+     * 
+     * Parses a normal Directory on the filesystem into localeFiles
+     * @author Robotic-Brain
+     * 
+     * @param resourceURL Parent directory URL
+     * @throws URISyntaxException
+     */
+    private static void parseNormalDirectory(URL resourceURL) throws URISyntaxException {
+        LogHelper.log(Level.INFO, "Loading FILE");
+        
+        File resourceFolder = new File(resourceURL.toURI());
+        File[] files = resourceFolder.listFiles();
+        
+        localeFiles = new String[files.length];
+        
+        int i = 0;
+        for (File resource : files) {
+            localeFiles[i++] = LANG_RESOURCE_LOCATION + resource.getName();
+            LogHelper.log(Level.INFO, "Added localization file: " + resource.getName());
+        }
+    }
+    
+    
+    /**
+     * parseJarFile
+     * 
+     * Walks a jar file and ads all files in given "subdirectory" (JAR_SUBDIRECTORY) to localeFiles
+     * @author Robotic-Brain
+     * 
+     * @param resourceURL
+     * @throws UnsupportedEncodingException
+     * @throws IOException
+     */
+    private static void parseJarFile(URL resourceURL) throws UnsupportedEncodingException, IOException {
+        LogHelper.log(Level.INFO, "Loading JAR");
+        
+        // Getting Jar file Object
+        String jarFileString = resourceURL.getPath().substring(5, resourceURL.getPath().indexOf("!"));
+        JarFile jarFile = new JarFile(URLDecoder.decode(jarFileString, "UTF-8"));
+        
+        // Iterate over entries
+        ArrayList<String> files = new ArrayList<String>();
+        Enumeration<JarEntry> entries = jarFile.entries();
+        while (entries.hasMoreElements()) {
+            String jarSubPath = entries.nextElement().getName();
+            
+            // Only search specific Directory
+            if (jarSubPath.startsWith(JAR_SUBDIRECTORY)) {
+                jarSubPath = jarSubPath.substring(JAR_SUBDIRECTORY.length());
+                if (!jarSubPath.trim().isEmpty() && jarSubPath.indexOf("/") < 0) {
+                    // If file and not dir add to list
+                    files.add(LANG_RESOURCE_LOCATION + jarSubPath);
+                    LogHelper.log(Level.INFO, "Added localization file: " + jarSubPath);
+                }
+            }
+        }
+        
+        localeFiles = files.toArray(new String[files.size()]);
+    }
 
 }

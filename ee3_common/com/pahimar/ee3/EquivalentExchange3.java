@@ -90,7 +90,7 @@ public class EquivalentExchange3 {
 
         // Initialize the log helper
         LogHelper.init();
-
+        
         // Load the localization files into the LanguageRegistry
         LocalizationHandler.loadLanguages();
 
