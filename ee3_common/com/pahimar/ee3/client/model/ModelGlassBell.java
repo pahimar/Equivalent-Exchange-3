@@ -5,18 +5,17 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import com.pahimar.ee3.lib.Models;
 
+public class ModelGlassBell {
 
-public class ModelGlassDome {
+    private IModelCustom modelGlassBell;
 
-    private IModelCustom modelGlassDome;
+    public ModelGlassBell() {
 
-    public ModelGlassDome() {
-
-        modelGlassDome = AdvancedModelLoader.loadModel(Models.GLASS_DOME);
+        modelGlassBell = AdvancedModelLoader.loadModel(Models.GLASS_BELL);
     }
 
     public void render() {
 
-        modelGlassDome.renderPart("Dome");
+        modelGlassBell.renderPart("Bell");
     }
 }

@@ -10,13 +10,14 @@
 	<entry key="item.stoneInert.name">Inert Steen</entry>
 	<entry key="item.stoneMinium.name">Minium Steen</entry>
 	<entry key="item.stonePhilosophers.name">Steen der Wijzen</entry>
-	<entry key="item.dustAlchemicalAsh.name">As</entry>
-	<entry key="item.dustAlchemicalMinium.name">Minium Poeder</entry>
-	<entry key="item.dustAlchemicalVerdant.name">Helgroen Poeder</entry>
-	<entry key="item.dustAlchemicalAzure.name">Azuurblauw Poeder</entry>
-	<entry key="item.dustAlchemicalAmaranthine.name">Amarant Poeder</entry>
-	<entry key="item.dustAlchemicalIridescent.name">Iriserend Poeder</entry>
+	<entry key="item.alchemicalDustAsh.name">As</entry>
+	<entry key="item.alchemicalDustMinium.name">Minium Poeder</entry>
+	<entry key="item.alchemicalDustVerdant.name">Helgroen Poeder</entry>
+	<entry key="item.alchemicalDustAzure.name">Azuurblauw Poeder</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amarant Poeder</entry>
+	<entry key="item.alchemicalDustIridescent.name">Iriserend Poeder</entry>
 	<entry key="item.alchemicalBag.name">Alchemische Tas</entry>
+	<entry key="tile.glassBell.name">Glazen Stolp</entry>
 	<entry key="tile.redWaterStill.name">Stilstaand Rood Water</entry>
 	<entry key="tile.redWaterFlowing.name">Stromend Rood Water</entry>
 	<entry key="tile.calcinator.name">Calcinator</entry>
@@ -47,6 +48,6 @@
 	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 deeltjes aangezet</entry>
 	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 deeltjes uitgezet</entry>
 	<entry key="command.ee3.sounds.set_to_all">Equivalent Exchange 3 geluiden van alle spelers worden afgespeeld</entry>
-	<entry key="command.ee3.sounds.set_to_self">Equivalent Exchange 3 geluiden van alle spelers worden afgespeeld</entry>
+	<entry key="command.ee3.sounds.set_to_self">Alleen Equivalent Exchange 3 geluiden van jezelf worden afgespeeld</entry>
 	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 geluiden worden niet afgespeeld</entry>
 </properties>

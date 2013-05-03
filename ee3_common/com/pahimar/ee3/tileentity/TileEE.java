@@ -22,15 +22,13 @@ import com.pahimar.ee3.network.packet.PacketTileUpdate;
 public class TileEE extends TileEntity {
 
     private ForgeDirection orientation;
-    private short state;
-    private String owner;
+    private byte state;
     private String customName;
 
     public TileEE() {
 
         orientation = ForgeDirection.SOUTH;
         state = 0;
-        owner = "";
         customName = "";
     }
 
@@ -54,24 +52,9 @@ public class TileEE extends TileEntity {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(byte state) {
 
         this.state = state;
-    }
-
-    public String getOwner() {
-
-        return owner;
-    }
-
-    public boolean hasOwner() {
-
-        return owner != null && owner.length() > 0;
-    }
-
-    public void setOwner(String owner) {
-
-        this.owner = owner;
     }
 
     public boolean hasCustomName() {
@@ -91,7 +74,7 @@ public class TileEE extends TileEntity {
 
     public boolean isUseableByPlayer(EntityPlayer player) {
 
-        return owner.equals(player.username);
+        return true;
     }
 
     @Override
@@ -104,11 +87,7 @@ public class TileEE extends TileEntity {
         }
 
         if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE_KEY)) {
-            state = nbtTagCompound.getShort(Strings.NBT_TE_STATE_KEY);
-        }
-
-        if (nbtTagCompound.hasKey(Strings.NBT_TE_OWNER_KEY)) {
-            owner = nbtTagCompound.getString(Strings.NBT_TE_OWNER_KEY);
+            state = nbtTagCompound.getByte(Strings.NBT_TE_STATE_KEY);
         }
 
         if (nbtTagCompound.hasKey(Strings.NBT_TE_CUSTOM_NAME)) {
@@ -122,11 +101,7 @@ public class TileEE extends TileEntity {
         super.writeToNBT(nbtTagCompound);
 
         nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, (byte) orientation.ordinal());
-        nbtTagCompound.setShort(Strings.NBT_TE_STATE_KEY, state);
-
-        if (hasOwner()) {
-            nbtTagCompound.setString(Strings.NBT_TE_OWNER_KEY, owner);
-        }
+        nbtTagCompound.setByte(Strings.NBT_TE_STATE_KEY, state);
 
         if (this.hasCustomName()) {
             nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, customName);
@@ -136,7 +111,7 @@ public class TileEE extends TileEntity {
     @Override
     public Packet getDescriptionPacket() {
 
-        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, owner, customName));
+        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
     }
 
 }

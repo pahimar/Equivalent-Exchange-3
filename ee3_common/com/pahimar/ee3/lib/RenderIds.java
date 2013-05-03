@@ -14,5 +14,5 @@ public class RenderIds {
     public static int calcinatorRenderId;
     public static int aludelRenderId;
     public static int alchemicalChestRenderId;
-    public static int glassDomeId;
+    public static int glassBellId;
 }

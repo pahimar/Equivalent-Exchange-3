@@ -5,7 +5,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.client.model.ModelGlassDome;
+import com.pahimar.ee3.client.model.ModelGlassBell;
 import com.pahimar.ee3.lib.Textures;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -15,20 +15,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Equivalent-Exchange-3
  * 
- * ItemAludelRenderer
+ * ItemGlassBellRenderer
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ItemGlassDomeRenderer implements IItemRenderer {
+public class ItemGlassBellRenderer implements IItemRenderer {
 
-    private ModelGlassDome modelGlassDome;
+    private ModelGlassBell modelGlassBell;
 
-    public ItemGlassDomeRenderer() {
+    public ItemGlassBellRenderer() {
 
-        modelGlassDome = new ModelGlassDome();
+        modelGlassBell = new ModelGlassBell();
     }
 
     @Override
@@ -48,15 +48,15 @@ public class ItemGlassDomeRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
-                renderGlassDome(-0.5F, -1.2F, 0.5F, 1.4F);
+                renderGlassBell(-0.5F, -1.2F, 0.5F, 1.4F);
                 return;
             }
             case EQUIPPED: {
-                renderGlassDome(-0.2F, -0.85F, 0.8F, 1.4F);
+                renderGlassBell(-0.2F, -0.85F, 0.8F, 1.4F);
                 return;
             }
             case INVENTORY: {
-                renderGlassDome(-1.0F, -1.675F, 0.0F, 1.4F);
+                renderGlassBell(-1.0F, -1.675F, 0.0F, 1.4F);
                 return;
             }
             default:
@@ -64,7 +64,7 @@ public class ItemGlassDomeRenderer implements IItemRenderer {
         }
     }
 
-    private void renderGlassDome(float x, float y, float z, float scale) {
+    private void renderGlassBell(float x, float y, float z, float scale) {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -75,10 +75,10 @@ public class ItemGlassDomeRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_GLASS_BELL);
 
         // Render
-        modelGlassDome.render();
+        modelGlassBell.render();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

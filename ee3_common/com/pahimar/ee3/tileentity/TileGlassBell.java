@@ -7,11 +7,10 @@ import net.minecraft.nbt.NBTTagList;
 
 import com.pahimar.ee3.lib.Strings;
 
-
-public class TileGlassDome extends TileEE implements IInventory {
+public class TileGlassBell extends TileEE implements IInventory {
 
     /**
-     * The ItemStacks that hold the items currently being used in the Glass Dome
+     * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
 
@@ -19,7 +18,7 @@ public class TileGlassDome extends TileEE implements IInventory {
 
     public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
 
-    public TileGlassDome() {
+    public TileGlassBell() {
 
         inventory = new ItemStack[INVENTORY_SIZE];
     }
@@ -77,7 +76,7 @@ public class TileGlassDome extends TileEE implements IInventory {
     @Override
     public String getInvName() {
 
-        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_GLASS_DOME_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_GLASS_BELL_NAME;
     }
 
     @Override

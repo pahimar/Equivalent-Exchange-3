@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>German (de_DE) Localization File</comment>
@@ -10,22 +10,24 @@
 	<entry key="item.stoneInert.name">Inerter Stein</entry>
 	<entry key="item.stoneMinium.name">Miniumstein</entry>
 	<entry key="item.stonePhilosophers.name">Stein der Weisen</entry>
-	<entry key="item.dustAlchemicalAsh.name">Asche</entry>
-	<entry key="item.dustAlchemicalMinium.name">Miniumstaub</entry>
-	<entry key="item.dustAlchemicalVerdant.name">Grüner Staub</entry>
-	<entry key="item.dustAlchemicalAzure.name">Azurstaub</entry>
-	<entry key="item.dustAlchemicalAmaranthine.name">Amaranthstaub</entry>
-	<entry key="item.dustAlchemicalIridescent.name">Irisierender Staub</entry>
+	<entry key="item.alchemicalDustAsh.name">Asche</entry>
+	<entry key="item.alchemicalDustMinium.name">Minium Staub</entry>
+	<entry key="item.alchemicalDustVerdant.name">Grüner Staub</entry>
+	<entry key="item.alchemicalDustAzure.name">Azurer Staub</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amaranthiner Staub</entry>
+	<entry key="item.alchemicalDustIridescent.name">Irisierender Staub</entry>
 	<entry key="item.alchemicalBag.name">Alchemiebeutel</entry>
 	<entry key="tile.redWaterStill.name">Rotes Wasser (Still)</entry>
-	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fließend)</entry>
+	<entry key="tile.redWaterFlowing.name">Rotes Wasser (Fliessend)</entry>
 	<entry key="tile.calcinator.name">Kalzinierer</entry>
 	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.alchemicalChest.name">Alchemietruhe</entry>
-	<entry key="container.calcinator">Kalzinierung</entry>
+	<entry key="tile.glassBell.name">Glasglocke</entry>
+	<entry key="container.calcinator">Kalzinierer</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Alchemietruhe</entry>
 	<entry key="container.alchemicalBag">Alchemiebeutel</entry>
+	<entry key="container.glassBell">Glasglocke</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet</entry>
 	<entry key="version.uninitialized">Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)</entry>
@@ -36,10 +38,10 @@
 	<entry key="version.mc_version_not_found">Keine Version von @MOD_NAME@ für @MINECRAFT_VERSION@ in der Remotedatei gefunden</entry>
 	<entry key="command.ee3.overlay.turned_on">Transmutationsanzeige an</entry>
 	<entry key="command.ee3.overlay.turned_off">Transmutationsanzeige aus</entry>
-	<entry key="command.ee3.overlay.position.top_left">Transmutationsanzeige wurde oben links positioniert</entry>
-	<entry key="command.ee3.overlay.position.top_right">Transmutationsanzeige wurde oben rechts positioniert</entry>
-	<entry key="command.ee3.overlay.position.bottom_left">Transmutationsanzeige wurde unten links positioniert</entry>
-	<entry key="command.ee3.overlay.position.bottom_right">Transmutationsanzeige wurde unten rechts positioniert</entry>
+	<entry key="command.ee3.overlay.position.top_left">Transmutationsanzeige wurde eingestellt nach links oben</entry>
+	<entry key="command.ee3.overlay.position.top_right">Transmutationsanzeige wurde eingestellt nach rechts oben</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Transmutationsanzeige wurde eingestellt nach links unten</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Transmutationsanzeige wurde eingestellt nach rechts unten</entry>
 	<entry key="command.ee3.overlay.opacity.usage.additional_text">(### ist ein Dezimalwert zwischen 0.0 und 1.0) </entry>
 	<entry key="command.ee3.overlay.opacity.updated">Transparenz der Transmutationsanzeige wurde erfolgreich geändert</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(### ist ein Dezimalwert über 0.0) </entry>
