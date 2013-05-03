@@ -36,7 +36,7 @@ public class BlockAludelBase extends BlockEE {
 
     public BlockAludelBase(int id) {
 
-        super(id, Material.rock);
+        super(id, Material.anvil);
         this.setUnlocalizedName(Strings.ALUDEL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 1.0F, 0.9375F);

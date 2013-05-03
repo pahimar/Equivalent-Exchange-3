@@ -94,7 +94,7 @@ public class ClientProxy extends CommonProxy {
         RenderIds.glassBellId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
     }
