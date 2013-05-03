@@ -47,7 +47,7 @@
     <entry key="command.ee3.overlay.scale.usage.additional_text">(gde je ### decimalna vrednost veća nego 0.0) </entry>
     <entry key="command.ee3.overlay.scale.updated">Veličina prikaza mete transmutacije uspešno promenjena</entry>
     <entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 čestice uključene</entry>
-    <entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 čestice isključene/entry>
+    <entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 čestice isključene</entry>
     <entry key="command.ee3.sounds.set_to_all">Čućete Equivalent Exchange 3 zvukove od svih igrača</entry>
     <entry key="command.ee3.sounds.set_to_self">Čućete samo svoje Equivalent Exchange 3 zvukove</entry>
     <entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 zvukovi isključeni</entry>
