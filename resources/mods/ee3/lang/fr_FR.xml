@@ -21,7 +21,15 @@
 	<entry key="tile.redWaterStill.name">Eau rouge (Immobile)</entry>
 	<entry key="tile.redWaterFlowing.name">Eau rouge (Ruisselante)</entry>
 	<entry key="tile.calcinator.name">Calcinateur</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Coffre d'alchimie</entry>
+	<entry key="tile.glassBell.name">Cloche en verre</entry>
 	<entry key="container.calcinator">Calcinateur</entry>
+	<entry key="container.aludel">Aludel</entry>
+	<entry key="container.alchemicalChest">Coffre d'alchimie</entry>
+	<entry key="container.alchemicalBag">Sac alchimique</entry>
+	<entry key="container.glassBell">Cloche en verre</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Lancement de la vérification de votre version par rapport à celle de réference : </entry>
 	<entry key="version.uninitialized">Le lancement de la vérification a échoué</entry>
 	<entry key="version.current">Vous utilisez la version (@REMOTE_MOD_VERSION@) la plus récente pour votre version de Minecraft (@MINECRAFT_VERSION)</entry>
