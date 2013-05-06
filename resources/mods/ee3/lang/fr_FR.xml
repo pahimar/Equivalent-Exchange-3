@@ -5,7 +5,7 @@
 	<!--REQUIRES ADDITIONAL UPDATING-->
 	<entry key="key.extra">Extra</entry>
 	<entry key="key.release">Libérer</entry>
-	<entry key="key.toggle">Baculer</entry>
+	<entry key="key.toggle">Basculer</entry>
 	<entry key="key.charge">Charger</entry>
 	<entry key="item.shardMinium.name">Eclat de Minium</entry>
 	<entry key="item.stoneInert.name">Pierre inerte</entry>
