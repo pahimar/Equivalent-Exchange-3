@@ -2,8 +2,6 @@ package com.pahimar.ee3.block;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -13,7 +11,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -116,7 +113,6 @@ public class BlockGlassBell extends BlockEE {
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
     {
         int metaData = world.getBlockMetadata(x, y, z) & 7;
-        float f = 0.15F;
 
         switch (ForgeDirection.getOrientation(metaData)) {
             case DOWN: {
@@ -141,6 +137,9 @@ public class BlockGlassBell extends BlockEE {
             }
             case WEST: {
                 this.setBlockBounds(0.33F, 0.125F, 0.125F, 1.0F, 0.875F, 0.875F);
+                break;
+            }
+            case UNKNOWN: {
                 break;
             }
         }

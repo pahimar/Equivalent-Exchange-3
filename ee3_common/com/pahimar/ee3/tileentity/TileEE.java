@@ -21,9 +21,9 @@ import com.pahimar.ee3.network.packet.PacketTileUpdate;
  */
 public class TileEE extends TileEntity {
 
-    private ForgeDirection orientation;
-    private byte state;
-    private String customName;
+    protected ForgeDirection orientation;
+    protected byte state;
+    protected String customName;
 
     public TileEE() {
 

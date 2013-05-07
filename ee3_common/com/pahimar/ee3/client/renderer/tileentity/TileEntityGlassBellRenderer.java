@@ -76,10 +76,11 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
              * Render the ghost item inside of the Glass Bell, slowly spinning
              */
             GL11.glPushMatrix();
-
+            
             for (int i = 0; i < tileGlassBell.getSizeInventory(); i++) {
+                
                 if (tileGlassBell.getStackInSlot(i) != null) {
-
+                    
                     float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(i));
                     float rotationAngle = (float) (720.0 * (double) (System.currentTimeMillis() & 0x3FFFL) / (double) 0x3FFFL);
                     
@@ -93,7 +94,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                     
                     customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
                 }
-
             }
             
             GL11.glPopMatrix();
@@ -143,6 +143,12 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(-90F, 1F, 0F, 0F);
                 return;
             }
+            case UNKNOWN: {
+                return;
+            }
+            default: {
+                return;
+            }
         }
     }
     
@@ -175,6 +181,12 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                         GL11.glTranslatef((float) x + 0.70F, (float) y + 0.5F, (float) z + 0.5F);
                         return;
                     }
+                    case UNKNOWN: {
+                        return;
+                    }
+                    default: {
+                        return;
+                    }
                 }
             }
             else {
@@ -201,6 +213,12 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
                     }
                     case WEST: {
                         GL11.glTranslatef((float) x + 0.70F, (float) y + 0.4F, (float) z + 0.5F);
+                        return;
+                    }
+                    case UNKNOWN: {
+                        return;
+                    }
+                    default: {
                         return;
                     }
                 }

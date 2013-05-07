@@ -6,7 +6,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-import com.pahimar.ee3.core.helper.ItemDropHelper;
+import com.pahimar.ee3.core.helper.ItemHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -28,12 +28,12 @@ public class EntityLivingHandler {
     public void onEntityLivingDeath(LivingDeathEvent event) {
 
         if (event.source.getDamageType().equals("player")) {
-            ItemDropHelper.dropMiniumShard((EntityPlayer) event.source.getSourceOfDamage(), event.entityLiving);
+            ItemHelper.dropMiniumShard((EntityPlayer) event.source.getSourceOfDamage(), event.entityLiving);
         }
         if (event.source.getSourceOfDamage() instanceof EntityArrow) {
             if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity != null) {
                 if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer) {
-                    ItemDropHelper.dropMiniumShard((EntityPlayer) ((EntityArrow) event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
+                    ItemHelper.dropMiniumShard((EntityPlayer) ((EntityArrow) event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
                 }
             }
         }

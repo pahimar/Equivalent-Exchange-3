@@ -21,6 +21,7 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.core.helper.KeyBindingHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
@@ -131,8 +132,21 @@ public class ClientProxy extends CommonProxy {
     }
     
     @Override
-    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData) {
+    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
         
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
+        
+        this.handleTileEntityPacket(x, y, z, orientation, state, customName);
+        
+        if (tileEntity != null) {
+            if (tileEntity instanceof TileGlassBell) {
+                
+                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+                ItemHelper.setColor(itemStack, color);
+                
+                ((TileGlassBell) tileEntity).setInventorySlotContents(0, itemStack);
+            }
+        }
     }
 
     @Override
