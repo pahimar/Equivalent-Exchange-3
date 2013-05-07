@@ -52,7 +52,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
             if (player != null) {
                 currentItemStack = player.inventory.getCurrentItem();
 
-                if (minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
+                if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
                     if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
                         renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
                     }

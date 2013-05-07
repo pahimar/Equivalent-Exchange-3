@@ -45,7 +45,7 @@ public class DrawBlockHighlightHandler {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {
                     TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
 
-                    if (minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
+                    if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
                         if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
                             drawInWorldTransmutationOverlay(event);
                         }

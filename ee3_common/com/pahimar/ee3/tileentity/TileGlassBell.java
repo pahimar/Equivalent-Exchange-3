@@ -4,8 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 
 public class TileGlassBell extends TileEE implements IInventory {
 
@@ -13,6 +17,7 @@ public class TileGlassBell extends TileEE implements IInventory {
      * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
+    private ItemStack ghostItemStack;
 
     private final int INVENTORY_SIZE = 1;
 
@@ -21,6 +26,7 @@ public class TileGlassBell extends TileEE implements IInventory {
     public TileGlassBell() {
 
         inventory = new ItemStack[INVENTORY_SIZE];
+        ghostItemStack = null;
     }
 
     @Override
@@ -94,6 +100,16 @@ public class TileGlassBell extends TileEE implements IInventory {
     public void closeChest() {
 
     }
+    
+    public ItemStack getGhostItemStack() {
+        
+        return ghostItemStack;
+    }
+    
+    public void setGhostItemStack(ItemStack ghostItemStack) {
+        
+        this.ghostItemStack = ghostItemStack;
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -140,5 +156,16 @@ public class TileGlassBell extends TileEE implements IInventory {
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 
         return true;
+    }
+    
+    @Override
+    public Packet getDescriptionPacket() {
+
+        if ((inventory[0] != null) && (inventory[0].stackSize > 0)) {
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, inventory[0].itemID, inventory[0].getItemDamage(), inventory[0].stackSize, ItemHelper.getColor(inventory[0])));
+        }
+        else {
+            return super.getDescriptionPacket();
+        }
     }
 }

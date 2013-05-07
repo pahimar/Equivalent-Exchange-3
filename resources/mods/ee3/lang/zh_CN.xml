@@ -22,10 +22,12 @@
 	<entry key="tile.calcinator.name">煅烧炉</entry>
 	<entry key="tile.aludel.name">梨形器皿</entry>
 	<entry key="tile.alchemicalChest.name">炼金箱子</entry>
+	<entry key="tile.glassDome.name">玻璃罩</entry>
 	<entry key="tile.glassBell.name">玻璃钟</entry>
 	<entry key="container.calcinator">煅烧炉</entry>
 	<entry key="container.aludel">梨形器皿</entry>
 	<entry key="container.alchemicalChest">炼金箱子</entry>
+	<entry key="container.glassDome.name">玻璃罩</entry>
 	<entry key="container.alchemicalBag">炼金袋</entry>
 	<entry key="container.glassBell.name">玻璃钟</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 

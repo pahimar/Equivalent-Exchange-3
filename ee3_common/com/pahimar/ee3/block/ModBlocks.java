@@ -45,7 +45,6 @@ public class ModBlocks {
         //GameRegistry.registerBlock(redWaterFlowing, Strings.RED_WATER_FLOWING_NAME);
 
         initBlockRecipes();
-
     }
 
     private static void initBlockRecipes() {

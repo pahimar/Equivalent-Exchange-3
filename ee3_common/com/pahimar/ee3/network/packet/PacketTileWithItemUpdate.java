@@ -13,21 +13,32 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import cpw.mods.fml.common.network.Player;
 
 
-public class PacketTileWithItemUpdate extends PacketTileUpdate {
+public class PacketTileWithItemUpdate extends PacketEE {
     
-    public int itemID;
-    public int metaData;
+    public int x, y, z;
+    public byte orientation;
+    public byte state;
+    public String customName;
+    public int itemID, metaData, stackSize, color;
     
     public PacketTileWithItemUpdate() {
 
-        super();
+        super(PacketTypeHandler.TILE_WITH_ITEM, true);
     }
     
-    public PacketTileWithItemUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData) {
+    public PacketTileWithItemUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
         
-        super(x, y, z, orientation, state, customName);
+        super(PacketTypeHandler.TILE_WITH_ITEM, true);
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.orientation = (byte) orientation.ordinal();
+        this.state = state;
+        this.customName = customName;
         this.itemID = itemID;
         this.metaData = metaData;
+        this.stackSize = stackSize;
+        this.color = color;
     }
     
     @Override
@@ -41,6 +52,8 @@ public class PacketTileWithItemUpdate extends PacketTileUpdate {
         data.writeUTF(customName);
         data.writeInt(itemID);
         data.writeInt(metaData);
+        data.writeInt(stackSize);
+        data.writeInt(color);
     }
 
     @Override
@@ -54,11 +67,14 @@ public class PacketTileWithItemUpdate extends PacketTileUpdate {
         customName = data.readUTF();
         itemID = data.readInt();
         metaData = data.readInt();
+        stackSize = data.readInt();
+        color = data.readInt();
     }
 
     @Override
     public void execute(INetworkManager manager, Player player) {
 
-        EquivalentExchange3.proxy.handleTileWithItemPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, itemID, metaData);
+        System.out.println("PacketTileWithItemUpdate - Execute");
+        EquivalentExchange3.proxy.handleTileWithItemPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, itemID, metaData, stackSize, color);
     }
 }
