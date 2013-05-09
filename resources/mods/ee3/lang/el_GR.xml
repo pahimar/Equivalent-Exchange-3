@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English (en_US) Localization File</comment>
+	<entry key="key.extra">Επιπλέον</entry>
+	<entry key="key.release">Άφισε</entry>
+	<entry key="key.toggle">εναλλαγή</entry>
+	<entry key="key.charge">Φόρτιση</entry>
+	<entry key="item.shardMinium.name">Θραύσμα μινίου</entry>
+	<entry key="item.stoneInert.name">Aδρανής πέτρα</entry>
+	<entry key="item.stoneMinium.name">Πέτρα μινίου</entry>
+	<entry key="item.stonePhilosophers.name">Φυλοσοφική λίθος</entry>
+	<entry key="item.alchemicalDustAsh.name">Στάχτη</entry>
+	<entry key="item.alchemicalDustMinium.name">Σκόνη μινίου</entry>
+	<entry key="item.alchemicalDustVerdant.name">Χλοερή σκόνη</entry>
+	<entry key="item.alchemicalDustAzure.name">Γαλανή σκόνη</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Σκόνη αμάραντου</entry>
+	<entry key="item.alchemicalDustIridescent.name">Σκόνη ιριδύου</entry>
+	<entry key="item.alchemicalBag.name">Τσάντα αλχημιστή</entry>
+	<entry key="tile.redWaterStill.name">Κόκκινο νερό</entry>
+	<entry key="tile.redWaterFlowing.name">Κόκκινο νερό</entry>
+	<entry key="tile.calcinator.name">Καζάνι</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Κασέλα αλχιμιστή</entry>
+	<entry key="tile.glassBell.name">Γυαλινη καμπάνα</entry>
+	<entry key="container.calcinator">Καζάνι</entry>
+	<entry key="container.aludel">Aludel</entry>
+	<entry key="container.alchemicalChest">Κασέλα αλχιμιστή</entry>
+	<entry key="container.alchemicalBag">Τσάντα αλχημιστή</entry>
+	<entry key="container.glassBell">Γυαλινη καμπάνα</entry>
+	<entry key="itemGroup.EE3">Ισότιμη αντλαγή 3</entry>
+	<entry key="version.init_log_message">Initializing remote version check against remote version authority, located at</entry>
+	<entry key="version.uninitialized">Remote version check failed to initialize properly</entry>
+	<entry key="version.current">Χρυσιμοποιήται την πιο εγκυρη έκδοση (@REMOTE_MOD_VERSION@) του Ισότιμη αντλαγή 3 για @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Μια νεα έκδοση @MOD_NAME@ υπάρχει (@REMOTE_MOD_VERSION@) για το @MINECRAFT_VERSION@. Πάρτην εδώ: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Error while connecting to remote version authority file; trying again</entry>
+	<entry key="version.final_error">Version check stopping after three unsuccessful connection attempts</entry>
+	<entry key="version.mc_version_not_found">Unable to find a version of @MOD_NAME@ for @MINECRAFT_VERSION@ in the remote version authority</entry>
+	<entry key="command.ee3.overlay.turned_on">Target transmutation overlay turned on</entry>
+	<entry key="command.ee3.overlay.turned_off">Target transmutation overlay turned off</entry>
+	<entry key="command.ee3.overlay.position.top_left">Target transmutation overlay position set to top left</entry>
+	<entry key="command.ee3.overlay.position.top_right">Target transmutation overlay position set to top right</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Target transmutation overlay position set to bottom left</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Target transmutation overlay position set to bottom right</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(where ### is a decimal value between 0.0 and 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Target transmutation overlay opacity updated successfully</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(where ### is a decimal value greater than 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Target transmutation overlay scale updated successfully</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 particles turned on</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 particles turned off</entry>
+	<entry key="command.ee3.sounds.set_to_all">Playing Equivalent Exchange 3 sounds from all players</entry>
+	<entry key="command.ee3.sounds.set_to_self">Playing Equivalent Exchange 3 sounds from self only</entry>
+	<entry key="command.ee3.sounds.turned_off">Playing Equivalent Exchange 3 sounds disabled</entry>
+</properties>
