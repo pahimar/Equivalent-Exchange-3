@@ -28,10 +28,10 @@
 	<entry key="container.alchemicalChest">Κασέλα αλχιμιστή</entry>
 	<entry key="container.alchemicalBag">Τσάντα αλχημιστή</entry>
 	<entry key="container.glassBell">Γυαλινη καμπάνα</entry>
-	<entry key="itemGroup.EE3">Ισότιμη αντλαγή 3</entry>
+	<entry key="itemGroup.EE3">Equival Exchange 3</entry>
 	<entry key="version.init_log_message">Έλενχος εκδοσης</entry>
 	<entry key="version.uninitialized">Έλενχος έκδοσης απέτηχε</entry>
-	<entry key="version.current">Χρυσιμοποιήται την πιο εγκυρη έκδοση (@REMOTE_MOD_VERSION@) του Ισότιμη αντλαγή 3 για @MINECRAFT_VERSION@</entry>
+	<entry key="version.current">Χρυσιμοποιήται την πιο εγκυρη έκδοση (@REMOTE_MOD_VERSION@) του Equival Exchange 3 για @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Μια νεα έκδοση @MOD_NAME@ υπάρχει (@REMOTE_MOD_VERSION@) για το @MINECRAFT_VERSION@. Πάρτην εδώ: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Σφάλμα στην σύνδεση ελένχου έκδοσης</entry>
 	<entry key="version.final_error">Ο έλενχος εκδοσης σταματησε στις τρεις αποτυχιμενες προσπάθειες</entry>
@@ -46,9 +46,9 @@
 	<entry key="command.ee3.overlay.opacity.updated">Η αδιαφάνεια μεταλαγής άλαξε</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(where ### is a decimal value greater than 0.0) </entry>
 	<entry key="command.ee3.overlay.scale.updated">Η κλίμακα αδιαφάνεια μεταλαγής άλαξε</entry>
-	<entry key="command.ee3.particles.turned_on">Τα σωματίδια του Ισότιμη Αντλαγή 3 άνειξαν</entry>
-	<entry key="command.ee3.particles.turned_off">Τα σωματίδια του Ισότιμη Αντλαγή 3 έκλεισαν</entry>
+	<entry key="command.ee3.particles.turned_on">Τα σωματίδια του Equival Exchange 3 άνειξαν</entry>
+	<entry key="command.ee3.particles.turned_off">Τα σωματίδια του Equival Exchange 3 έκλεισαν</entry>
 	<entry key="command.ee3.sounds.set_to_all">Παίζουν ήχους απο όλους τους παιχτες</entry>
 	<entry key="command.ee3.sounds.set_to_self">Παίζουν ήχους απο μονο εσάς</entry>
-	<entry key="command.ee3.sounds.turned_off">Οι ήχοι του Ισότιμη αντλαγή 3 απενεργοποίηθικαν</entry>
+	<entry key="command.ee3.sounds.turned_off">Οι ήχοι του Equival Exchange 3 απενεργοποίηθικαν</entry>
 </properties>
