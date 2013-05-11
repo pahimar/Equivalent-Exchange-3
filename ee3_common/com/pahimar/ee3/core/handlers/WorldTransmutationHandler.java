@@ -147,6 +147,12 @@ public class WorldTransmutationHandler {
         if (currentBlock != null) {
             meta = currentBlock.damageDropped(meta);
         }
+        
+        // Check if block is air, or we won't be able to transmute it.
+        if (id == 0) {
+            event.actionResult = ActionResult.FAILURE;
+            return;
+        }
 
         ItemStack worldStack = new ItemStack(id, 1, meta);
         ItemStack targetStack = new ItemStack(event.targetID, 1, event.targetMeta);
