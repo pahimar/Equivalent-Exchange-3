@@ -40,7 +40,7 @@ IMPORTANT: This is not guaranteed to work as it has not been tested extensively 
 2. Inside `mcdev`, create a directory named `mcp` and unzip the MCP .zip file into it.
 	* To verify, check if a file named `CHANGELOG` exists inside `mcp`.
 3. Download the latest forge **source** for Minecraft 1.5.2 and unzip it into `mcp`.  You need at least Forge 7.7.1.500 (Forge 7.8.0.684 if using 1.5.2), best way is to get it from [here] (http://files.minecraftforge.net/).
-	* To verify, check if a applications named `install.sh` and `install.cmd` exists. 
+	* To verify, check if a application named `install.sh` or `install.cmd` exists. 
 4. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\mcp\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it. On some system configurations you need to execute `install.sh` from within the `forge` directory whereas on others it doesn't matter. Just check the output for error messages to find out what you need to do.
 
 #### Setup EE3 (Some tested for Linux, tested fully for Windows)
