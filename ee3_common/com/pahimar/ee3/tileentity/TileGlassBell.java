@@ -18,7 +18,6 @@ public class TileGlassBell extends TileEE implements IInventory {
      * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
-    private ItemStack ghostItemStack;
 
     private final int INVENTORY_SIZE = 1;
 
@@ -27,7 +26,6 @@ public class TileGlassBell extends TileEE implements IInventory {
     public TileGlassBell() {
 
         inventory = new ItemStack[INVENTORY_SIZE];
-        ghostItemStack = null;
     }
 
     @Override
@@ -102,16 +100,6 @@ public class TileGlassBell extends TileEE implements IInventory {
 
     }
 
-    public ItemStack getGhostItemStack() {
-
-        return ghostItemStack;
-    }
-
-    public void setGhostItemStack(ItemStack ghostItemStack) {
-
-        this.ghostItemStack = ghostItemStack;
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 
@@ -162,19 +150,23 @@ public class TileGlassBell extends TileEE implements IInventory {
     @Override
     public Packet getDescriptionPacket() {
 
-        if (inventory[0] != null && inventory[0].stackSize > 0)
-            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, inventory[0].itemID, inventory[0].getItemDamage(), inventory[0].stackSize, ItemHelper.getColor(inventory[0])));
-        else
+        ItemStack itemStack = getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX);
+        
+        if (itemStack != null && itemStack.stackSize > 0) {
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
+        }
+        else {
             return super.getDescriptionPacket();
+        }
     }
 
     @Override
     public void onInventoryChanged() {
+        
+        ItemStack itemStack = getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX);
 
-        if (inventory[0] != null) {
-            if (inventory[0].itemID < 4096) {
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[inventory[0].itemID], 2);
-            }
+        if ((itemStack != null) && (itemStack.itemID < 4096)) {
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[itemStack.itemID], 2);
         }
         else {
             worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);

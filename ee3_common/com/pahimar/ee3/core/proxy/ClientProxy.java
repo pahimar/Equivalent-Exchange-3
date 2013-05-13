@@ -148,7 +148,17 @@ public class ClientProxy extends CommonProxy {
                     ItemHelper.setColor(itemStack, color);
                 }
 
-                ((TileGlassBell) tileEntity).setInventorySlotContents(0, itemStack);
+                ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
+                world.updateAllLightTypes(x, y, z);
+            }
+            else if (tileEntity instanceof TileAludel) {
+
+                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemHelper.setColor(itemStack, color);
+                }
+
+                ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
                 world.updateAllLightTypes(x, y, z);
             }
         }

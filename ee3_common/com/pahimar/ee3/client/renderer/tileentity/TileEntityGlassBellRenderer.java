@@ -77,23 +77,20 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
              */
             GL11.glPushMatrix();
 
-            for (int i = 0; i < tileGlassBell.getSizeInventory(); i++) {
+            if (tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX) != null) {
 
-                if (tileGlassBell.getStackInSlot(i) != null) {
+                float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
+                float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                    float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(i));
-                    float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+                EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
+                ghostEntityItem.hoverStart = 0.0F;
+                ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
 
-                    EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
-                    ghostEntityItem.hoverStart = 0.0F;
-                    ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(i));
+                translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
+                GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+                GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 
-                    translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
-                    GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
-                    GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-
-                    customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
-                }
+                customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
             }
 
             GL11.glPopMatrix();

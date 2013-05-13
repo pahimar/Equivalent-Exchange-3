@@ -1,11 +1,16 @@
 package com.pahimar.ee3.tileentity;
 
+import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 
 /**
  * Equivalent-Exchange-3
@@ -152,5 +157,31 @@ public class TileAludel extends TileEE implements IInventory {
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 
         return true;
+    }
+    
+    @Override
+    public Packet getDescriptionPacket() {
+
+        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
+        
+        if (itemStack != null && itemStack.stackSize > 0) {
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
+        }
+        else {
+            return super.getDescriptionPacket();
+        }
+    }
+    
+    @Override
+    public void onInventoryChanged() {
+        
+        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
+
+        if ((itemStack != null) && (itemStack.itemID < 4096)) {
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[itemStack.itemID], 2);
+        }
+        else {
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+        }
     }
 }

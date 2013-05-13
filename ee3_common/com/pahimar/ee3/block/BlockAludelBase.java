@@ -3,6 +3,7 @@ package com.pahimar.ee3.block;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -10,12 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 /**
  * Equivalent-Exchange-3
@@ -89,6 +92,30 @@ public class BlockAludelBase extends BlockEE {
             }
 
             return true;
+        }
+    }
+    
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
+
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+        
+        if ((world.getBlockTileEntity(x, y + 1, z) != null) && (world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell)) {
+            
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y + 1, z);
+            
+            tileGlassBell.setOrientation(ForgeDirection.UP);
+
+            if ((world.getBlockTileEntity(x, y, z) != null) && (world.getBlockTileEntity(x, y, z) instanceof TileAludel)) {
+                
+                TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
+                
+                ItemStack itemStackGlassBell = tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX);
+                
+                tileGlassBell.setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, null);
+                
+                tileAludel.setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStackGlassBell);
+            }
         }
     }
 

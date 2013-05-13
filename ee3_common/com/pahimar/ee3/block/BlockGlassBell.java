@@ -19,6 +19,7 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileEE;
 import com.pahimar.ee3.tileentity.TileGlassBell;
 
@@ -77,7 +78,13 @@ public class BlockGlassBell extends BlockEE {
         else {
             if (!world.isRemote) {
                 TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+                TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
 
+                if ((tileAludel != null) && (tileGlassBell != null)) {
+                    player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
+                    return true;
+                }
+                
                 if (tileGlassBell != null) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
                 }
