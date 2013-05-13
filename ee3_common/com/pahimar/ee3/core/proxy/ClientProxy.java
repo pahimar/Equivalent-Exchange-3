@@ -27,6 +27,7 @@ import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
@@ -130,21 +131,25 @@ public class ClientProxy extends CommonProxy {
             }
         }
     }
-    
+
     @Override
     public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
-        
-        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
-        
+
+        World world = FMLClientHandler.instance().getClient().theWorld;
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
         this.handleTileEntityPacket(x, y, z, orientation, state, customName);
-        
+
         if (tileEntity != null) {
             if (tileEntity instanceof TileGlassBell) {
-                
+
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-                ItemHelper.setColor(itemStack, color);
-                
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemHelper.setColor(itemStack, color);
+                }
+
                 ((TileGlassBell) tileEntity).setInventorySlotContents(0, itemStack);
+                world.updateAllLightTypes(x, y, z);
             }
         }
     }

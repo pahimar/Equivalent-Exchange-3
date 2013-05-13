@@ -26,12 +26,12 @@ import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
  * 
  */
 public enum PacketTypeHandler {
-    KEY(PacketKeyPressed.class), 
+    KEY(PacketKeyPressed.class),
     TILE(PacketTileUpdate.class),
     REQUEST_EVENT(PacketRequestEvent.class),
-    SPAWN_PARTICLE(PacketSpawnParticle.class), 
-    SOUND_EVENT(PacketSoundEvent.class), 
-    ITEM_UPDATE(PacketItemUpdate.class), 
+    SPAWN_PARTICLE(PacketSpawnParticle.class),
+    SOUND_EVENT(PacketSoundEvent.class),
+    ITEM_UPDATE(PacketItemUpdate.class),
     TILE_WITH_ITEM(PacketTileWithItemUpdate.class);
 
     private Class<? extends PacketEE> clazz;

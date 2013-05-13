@@ -1,5 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
+import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -100,14 +101,14 @@ public class TileGlassBell extends TileEE implements IInventory {
     public void closeChest() {
 
     }
-    
+
     public ItemStack getGhostItemStack() {
-        
+
         return ghostItemStack;
     }
-    
+
     public void setGhostItemStack(ItemStack ghostItemStack) {
-        
+
         this.ghostItemStack = ghostItemStack;
     }
 
@@ -157,15 +158,26 @@ public class TileGlassBell extends TileEE implements IInventory {
 
         return true;
     }
-    
+
     @Override
     public Packet getDescriptionPacket() {
 
-        if ((inventory[0] != null) && (inventory[0].stackSize > 0)) {
+        if (inventory[0] != null && inventory[0].stackSize > 0)
             return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, inventory[0].itemID, inventory[0].getItemDamage(), inventory[0].stackSize, ItemHelper.getColor(inventory[0])));
+        else
+            return super.getDescriptionPacket();
+    }
+
+    @Override
+    public void onInventoryChanged() {
+
+        if (inventory[0] != null) {
+            if (inventory[0].itemID < 4096) {
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[inventory[0].itemID], 2);
+            }
         }
         else {
-            return super.getDescriptionPacket();
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
         }
     }
 }

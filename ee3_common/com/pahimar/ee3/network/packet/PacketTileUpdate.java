@@ -69,7 +69,6 @@ public class PacketTileUpdate extends PacketEE {
     @Override
     public void execute(INetworkManager manager, Player player) {
 
-        System.out.println("PacketTileUpdate - Execute");
         EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName);
     }
 

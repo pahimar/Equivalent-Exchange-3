@@ -114,12 +114,10 @@ public class VersionHelper implements Runnable {
 
         String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
 
-        if (versionTokens.length >= 1) {
+        if (versionTokens.length >= 1)
             return versionTokens[0];
-        }
-        else {
+        else
             return Reference.VERSION_NUMBER;
-        }
     }
 
     public static void logResult() {

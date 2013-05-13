@@ -39,7 +39,7 @@ public class DrawBlockHighlightHandler {
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
-        
+
         if (event.currentItem != null) {
             if (event.currentItem.getItem() instanceof ITransmutationStone) {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {

@@ -23,12 +23,12 @@ public class ItemHelper {
     private static double rand;
 
     public static boolean hasColor(ItemStack itemStack) {
-        
+
         return !itemStack.hasTagCompound() ? false : !itemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) ? false : itemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR);
     }
-    
+
     public static int getColor(ItemStack itemStack) {
-        
+
         NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
 
         if (nbtTagCompound == null)
@@ -39,9 +39,9 @@ public class ItemHelper {
             return displayTagCompound == null ? Integer.parseInt(Colours.PURE_WHITE, 16) : displayTagCompound.hasKey(Strings.NBT_ITEM_COLOR) ? displayTagCompound.getInteger(Strings.NBT_ITEM_COLOR) : Integer.parseInt(Colours.PURE_WHITE, 16);
         }
     }
-    
+
     public static void setColor(ItemStack itemStack, int color) {
-        
+
         if (itemStack != null) {
 
             NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
@@ -61,7 +61,7 @@ public class ItemHelper {
             colourTagCompound.setInteger(Strings.NBT_ITEM_COLOR, color);
         }
     }
-    
+
     public static void dropMiniumShard(EntityPlayer player, EntityLiving entity) {
 
         if (GeneralHelper.isHostileEntity(entity)) {
