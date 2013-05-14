@@ -10,6 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -74,6 +75,12 @@ public class BlockAludelBase extends BlockEE {
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 
         dropInventory(world, x, y, z);
+
+        if (world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell) {
+            world.markBlockForUpdate(x, y + 1, z);
+            world.updateAllLightTypes(x, y + 1, z);
+        }
+
         super.breakBlock(world, x, y, z, id, meta);
     }
 
@@ -94,29 +101,35 @@ public class BlockAludelBase extends BlockEE {
             return true;
         }
     }
-    
+
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
 
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
-        
-        if ((world.getBlockTileEntity(x, y + 1, z) != null) && (world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell)) {
-            
+
+        if (world.getBlockTileEntity(x, y + 1, z) != null && world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell) {
+
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y + 1, z);
-            
+
             tileGlassBell.setOrientation(ForgeDirection.UP);
 
-            if ((world.getBlockTileEntity(x, y, z) != null) && (world.getBlockTileEntity(x, y, z) instanceof TileAludel)) {
-                
+            if (world.getBlockTileEntity(x, y, z) != null && world.getBlockTileEntity(x, y, z) instanceof TileAludel) {
+
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
-                
+
                 ItemStack itemStackGlassBell = tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX);
-                
+
                 tileGlassBell.setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, null);
-                
+
                 tileAludel.setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStackGlassBell);
             }
         }
+    }
+
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+
+        return 0;
     }
 
     private void dropInventory(World world, int x, int y, int z) {

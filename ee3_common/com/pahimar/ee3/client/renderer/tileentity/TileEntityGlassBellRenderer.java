@@ -224,6 +224,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
     }
 
     private float getGhostItemScaleFactor(ItemStack itemStack) {
+
         float scaleFactor = 1.0F;
 
         if (itemStack != null) {

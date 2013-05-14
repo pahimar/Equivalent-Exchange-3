@@ -34,7 +34,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 
     private ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
-    
+
     public TileEntityAludelRenderer() {
 
         customRenderItem = new RenderItem() {
@@ -69,34 +69,34 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
             modelAludel.render();
 
             GL11.glPopMatrix();
-            
+
             /**
              * Render the ghost item inside of the Aludel, slowly spinning
              */
             GL11.glPushMatrix();
 
             TileEntity tileGlassBell = tileAludel.worldObj.getBlockTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
-            
-            if ((tileGlassBell != null) && (tileGlassBell instanceof TileGlassBell)) {
+
+            if (tileGlassBell != null && tileGlassBell instanceof TileGlassBell) {
                 if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null) {
-    
+
                     float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
                     float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
-    
+
                     EntityItem ghostEntityItem = new EntityItem(tileAludel.worldObj);
                     ghostEntityItem.hoverStart = 0.0F;
                     ghostEntityItem.setEntityItemStack(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
-    
+
                     GL11.glTranslatef((float) x + 0.5F, (float) y + 1.2F, (float) z + 0.5F);
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                     GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-    
+
                     customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
                 }
             }
 
             GL11.glPopMatrix();
-            
+
             GL11.glEnable(GL11.GL_LIGHTING);
         }
     }
@@ -124,8 +124,9 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(-90F, 1F, 0F, 0F);
         }
     }
-    
+
     private float getGhostItemScaleFactor(ItemStack itemStack) {
+
         float scaleFactor = 1.0F;
 
         if (itemStack != null) {

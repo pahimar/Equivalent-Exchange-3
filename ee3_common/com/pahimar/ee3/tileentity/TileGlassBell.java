@@ -1,6 +1,5 @@
 package com.pahimar.ee3.tileentity;
 
-import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -151,25 +150,41 @@ public class TileGlassBell extends TileEE implements IInventory {
     public Packet getDescriptionPacket() {
 
         ItemStack itemStack = getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX);
-        
-        if (itemStack != null && itemStack.stackSize > 0) {
+
+        if (itemStack != null && itemStack.stackSize > 0)
             return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
-        }
-        else {
+        else
             return super.getDescriptionPacket();
-        }
     }
 
     @Override
     public void onInventoryChanged() {
-        
-        ItemStack itemStack = getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX);
 
-        if ((itemStack != null) && (itemStack.itemID < 4096)) {
-            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[itemStack.itemID], 2);
+        worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.toString());
+
+        stringBuilder.append("TileGlassBell Data - ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
+            if (inventory[i] != null) {
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
+            }
+            else {
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
+            }
         }
-        else {
-            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
-        }
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 }

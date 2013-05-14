@@ -240,4 +240,29 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
 
         return true;
     }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.toString());
+
+        stringBuilder.append("TileAlchemicalChest Data - ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
+            if (inventory[i] != null) {
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
+            }
+            else {
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
+            }
+        }
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
+    }
 }

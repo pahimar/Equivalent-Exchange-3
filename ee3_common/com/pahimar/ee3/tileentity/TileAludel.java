@@ -1,8 +1,5 @@
 package com.pahimar.ee3.tileentity;
 
-import java.util.logging.Level;
-
-import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +7,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 
 import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
@@ -161,49 +157,50 @@ public class TileAludel extends TileEE implements IInventory {
 
         return true;
     }
-    
+
     @Override
     public Packet getDescriptionPacket() {
 
         ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
-        
-        if (itemStack != null && itemStack.stackSize > 0) {
+
+        if (itemStack != null && itemStack.stackSize > 0)
             return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
-        }
-        else {
+        else
             return super.getDescriptionPacket();
-        }
     }
-    
+
     @Override
     public void onInventoryChanged() {
-        
-        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
 
-        if ((itemStack != null) && (itemStack.itemID < 4096)) {
-            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, Block.lightValue[itemStack.itemID], 2);
-        }
-        else {
-            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
+        worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+
+        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell) {
+            worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
         }
     }
-    
+
     @Override
     public String toString() {
+
         StringBuilder stringBuilder = new StringBuilder();
-        
-        stringBuilder.append("TileEE Type: TileAludel\n");
+
         stringBuilder.append(super.toString());
-        
+
+        stringBuilder.append("TileAludel Data - ");
         for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
             if (inventory[i] != null) {
-                stringBuilder.append("inventory[" + i + "]: " + inventory[i].toString() + "\n");
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
             }
             else {
-                stringBuilder.append("inventory[" + i + "]: empty\n");
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
             }
         }
-        
+        stringBuilder.append("\n");
+
         return stringBuilder.toString();
     }
 }

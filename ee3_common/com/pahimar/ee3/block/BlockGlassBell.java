@@ -2,6 +2,7 @@ package com.pahimar.ee3.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -80,12 +81,12 @@ public class BlockGlassBell extends BlockEE {
             if (!world.isRemote) {
                 TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
-                
-                if ((tileAludel != null) && (tileGlassBell != null)) {
+
+                if (tileAludel != null && tileGlassBell != null) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
                     return true;
                 }
-                
+
                 if (tileGlassBell != null) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
                 }
@@ -102,7 +103,7 @@ public class BlockGlassBell extends BlockEE {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
 
-        if ((world.getBlockTileEntity(x, y - 1, z) != null) && (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)) {
+        if (world.getBlockTileEntity(x, y - 1, z) != null && world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel) {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.UP);
         }
         else {
@@ -124,6 +125,7 @@ public class BlockGlassBell extends BlockEE {
      */
     @Override
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec) {
+
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null) {
@@ -169,7 +171,28 @@ public class BlockGlassBell extends BlockEE {
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
 
-        return world.getBlockMetadata(x, y, z);
+        ItemStack itemStack;
+
+        if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell) {
+
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+
+            if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel) {
+                TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
+
+                itemStack = tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX);
+
+                if (itemStack != null && itemStack.itemID < 4096)
+                    return Block.lightValue[itemStack.itemID];
+            }
+
+            itemStack = tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX);
+
+            if (itemStack != null && itemStack.itemID < 4096)
+                return Block.lightValue[itemStack.itemID];
+        }
+
+        return 0;
     }
 
     private void dropInventory(World world, int x, int y, int z) {
