@@ -18,7 +18,7 @@ public class TileGlassBell extends TileEE implements IInventory {
      */
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 1;
+    public static final int INVENTORY_SIZE = 1;
 
     public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
 

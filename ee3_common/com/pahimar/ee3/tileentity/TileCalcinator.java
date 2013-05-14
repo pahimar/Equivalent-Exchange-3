@@ -23,7 +23,7 @@ public class TileCalcinator extends TileEE implements IInventory {
      */
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 3;
+    public static final int INVENTORY_SIZE = 3;
 
     public static final int FUEL_INVENTORY_INDEX = 0;
     public static final int INPUT_INVENTORY_INDEX = 1;

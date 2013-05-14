@@ -87,7 +87,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
                     ghostEntityItem.hoverStart = 0.0F;
                     ghostEntityItem.setEntityItemStack(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
 
-                    GL11.glTranslatef((float) x + 0.5F, (float) y + 1.2F, (float) z + 0.5F);
+                    GL11.glTranslatef((float) x + 0.5F, (float) y + 1.25F, (float) z + 0.5F);
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                     GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 

@@ -33,7 +33,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     /** Server sync counter (once per 20 ticks) */
     private int ticksSinceSync;
 
-    private final int INVENTORY_SIZE = 13 * 4;
+    public static final int INVENTORY_SIZE = 13 * 4;
 
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical

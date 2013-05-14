@@ -27,7 +27,7 @@ public class TileAludel extends TileEE implements IInventory {
      */
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 4;
+    public static final int INVENTORY_SIZE = 4;
 
     public static final int INPUT_INVENTORY_INDEX = 0;
     public static final int DUST_INVENTORY_INDEX = 1;
