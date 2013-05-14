@@ -14,6 +14,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
@@ -79,7 +80,7 @@ public class BlockGlassBell extends BlockEE {
             if (!world.isRemote) {
                 TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
-
+                
                 if ((tileAludel != null) && (tileGlassBell != null)) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
                     return true;
@@ -101,7 +102,12 @@ public class BlockGlassBell extends BlockEE {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
 
-        ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+        if ((world.getBlockTileEntity(x, y - 1, z) != null) && (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)) {
+            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.UP);
+        }
+        else {
+            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+        }
 
         world.setBlockMetadataWithNotify(x, y, z, 0, 3);
     }

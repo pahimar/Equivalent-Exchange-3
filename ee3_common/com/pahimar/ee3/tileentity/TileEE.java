@@ -113,5 +113,17 @@ public class TileEE extends TileEntity {
 
         return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.append("x: " + xCoord + ", y: " + yCoord + ", z: " + zCoord + "\n");
+        stringBuilder.append("customName: " + customName + "\n");
+        stringBuilder.append("orientation: " + orientation.toString() + "\n");
+        stringBuilder.append("state: " + state + "\n");
+        
+        return stringBuilder.toString();
+    }
 
 }

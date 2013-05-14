@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import com.pahimar.ee3.client.model.ModelAludel;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -74,20 +75,24 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
              */
             GL11.glPushMatrix();
 
-            if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null) {
-
-                float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
-                float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
-
-                EntityItem ghostEntityItem = new EntityItem(tileAludel.worldObj);
-                ghostEntityItem.hoverStart = 0.0F;
-                ghostEntityItem.setEntityItemStack(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
-
-                GL11.glTranslatef((float) x + 0.5F, (float) y + 1.2F, (float) z + 0.5F);
-                GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
-                GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-
-                customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+            TileEntity tileGlassBell = tileAludel.worldObj.getBlockTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
+            
+            if ((tileGlassBell != null) && (tileGlassBell instanceof TileGlassBell)) {
+                if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null) {
+    
+                    float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
+                    float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+    
+                    EntityItem ghostEntityItem = new EntityItem(tileAludel.worldObj);
+                    ghostEntityItem.hoverStart = 0.0F;
+                    ghostEntityItem.setEntityItemStack(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
+    
+                    GL11.glTranslatef((float) x + 0.5F, (float) y + 1.2F, (float) z + 0.5F);
+                    GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+                    GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
+    
+                    customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+                }
             }
 
             GL11.glPopMatrix();

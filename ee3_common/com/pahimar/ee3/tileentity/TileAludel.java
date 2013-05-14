@@ -1,5 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
+import java.util.logging.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,6 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 
 import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
@@ -183,5 +186,24 @@ public class TileAludel extends TileEE implements IInventory {
         else {
             worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
         }
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.append("TileEE Type: TileAludel\n");
+        stringBuilder.append(super.toString());
+        
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
+                stringBuilder.append("inventory[" + i + "]: " + inventory[i].toString() + "\n");
+            }
+            else {
+                stringBuilder.append("inventory[" + i + "]: empty\n");
+            }
+        }
+        
+        return stringBuilder.toString();
     }
 }
