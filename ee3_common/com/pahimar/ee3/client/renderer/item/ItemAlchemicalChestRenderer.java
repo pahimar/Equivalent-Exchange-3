@@ -55,6 +55,10 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
                 renderAlchemicalChest(1.0F, 1.0F, 1.0F);
                 break;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F);
+                break;
+            }
             case INVENTORY: {
                 renderAlchemicalChest(0.0F, 0.075F, 0.0F);
                 break;
