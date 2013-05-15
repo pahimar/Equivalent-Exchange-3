@@ -79,15 +79,15 @@ public class BlockGlassBell extends BlockEE {
             return false;
         else {
             if (!world.isRemote) {
-                TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
-                TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
+                TileEntity tileEntityGlassBell = world.getBlockTileEntity(x, y, z);
+                TileEntity tileEntityAludel = world.getBlockTileEntity(x, y - 1, z);
 
-                if (tileAludel != null && tileGlassBell != null) {
+                if (tileEntityAludel instanceof TileAludel && tileEntityGlassBell instanceof TileGlassBell) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
                     return true;
                 }
 
-                if (tileGlassBell != null) {
+                if (tileEntityGlassBell != null) {
                     player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
                 }
             }

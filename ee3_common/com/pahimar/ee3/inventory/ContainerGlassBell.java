@@ -25,7 +25,7 @@ public class ContainerGlassBell extends Container {
 
     public ContainerGlassBell(InventoryPlayer inventoryPlayer, TileGlassBell tileGlassBell) {
 
-        this.addSlotToContainer(new Slot(tileGlassBell, TileAludel.INPUT_INVENTORY_INDEX, 80, 22));
+        this.addSlotToContainer(new Slot(tileGlassBell, TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, 80, 22));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex) {

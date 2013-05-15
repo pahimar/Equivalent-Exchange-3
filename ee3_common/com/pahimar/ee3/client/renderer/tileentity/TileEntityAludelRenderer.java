@@ -77,7 +77,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 
             TileEntity tileGlassBell = tileAludel.worldObj.getBlockTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
 
-            if (tileGlassBell != null && tileGlassBell instanceof TileGlassBell) {
+            if (tileGlassBell instanceof TileGlassBell) {
                 if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null) {
 
                     float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));

@@ -48,7 +48,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            if (tileCalcinator.getStackInSlot(TileCalcinator.DUST_INVENTORY_INDEX) != null) {
+            if (tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_INVENTORY_INDEX) != null) {
                 modelCalcinator.renderPart("Dust");
             }
 

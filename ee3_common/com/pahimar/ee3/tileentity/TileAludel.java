@@ -29,9 +29,9 @@ public class TileAludel extends TileEE implements IInventory {
 
     public static final int INVENTORY_SIZE = 4;
 
-    public static final int INPUT_INVENTORY_INDEX = 0;
-    public static final int DUST_INVENTORY_INDEX = 1;
-    public static final int FUEL_INVENTORY_INDEX = 2;
+    public static final int FUEL_INVENTORY_INDEX = 0;
+    public static final int INPUT_INVENTORY_INDEX = 1;
+    public static final int DUST_INVENTORY_INDEX = 2;
     public static final int OUTPUT_INVENTORY_INDEX = 3;
 
     public TileAludel() {
