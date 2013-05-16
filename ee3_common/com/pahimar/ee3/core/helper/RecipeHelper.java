@@ -1,11 +1,18 @@
 package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -18,6 +25,62 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * 
  */
 public class RecipeHelper {
+    
+    @SuppressWarnings("unchecked")
+    // TODO: Not ideal, can be cleaned up further
+    public static List getRecipeInputs(IRecipe recipe) {
+        
+        if (recipe instanceof ShapedRecipes) {
+            ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
+            ArrayList<ItemStack> recipeInputs = new ArrayList<ItemStack>();
+            
+            for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
+                if (shapedRecipe.recipeItems[i] != null) {
+                    recipeInputs.add(shapedRecipe.recipeItems[i]);
+                }
+            }
+            
+            return recipeInputs;
+        }
+        else if (recipe instanceof ShapelessRecipes) {
+            return ((ShapelessRecipes) recipe).recipeItems;
+        }
+        else if (recipe instanceof ShapedOreRecipe) {
+            ShapedOreRecipe shapedRecipe = (ShapedOreRecipe) recipe;
+            ArrayList recipeInputs = new ArrayList<ItemStack>();
+            
+            for (int i = 0; i < shapedRecipe.getInput().length; i++) {
+                if (shapedRecipe.getInput()[i] != null) {
+                    recipeInputs.add(shapedRecipe.getInput()[i]);
+                }
+            }
+            
+            return recipeInputs;
+        }
+        else if (recipe instanceof ShapelessOreRecipe) {
+            return ((ShapelessOreRecipe) recipe).getInput();
+        }
+        
+        return null;
+    }
+    
+    public static List<ItemStack> getReverseRecipes(ItemStack itemStack) {
+        
+        @SuppressWarnings("unchecked")
+        ArrayList<IRecipe> recipeList = (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList();
+        
+        for (IRecipe recipe : recipeList) {
+            if (recipe.getRecipeOutput() != null) {
+                if ((recipe.getRecipeOutput().itemID == itemStack.itemID) && (recipe.getRecipeOutput().getItemDamage() == itemStack.getItemDamage())) {
+                    System.out.println(recipe);
+                    System.out.println(recipe.getRecipeOutput());
+                    System.out.println(getRecipeInputs(recipe));
+                }
+            }
+        }
+        
+        return null;
+    }
 
     public static void addRecipe(ItemStack output, Object... input) {
 
