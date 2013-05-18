@@ -26,13 +26,19 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class RecipeHelper {
     
-    @SuppressWarnings("unchecked")
-    // TODO: Not ideal, can be cleaned up further
-    public static List getRecipeInputs(IRecipe recipe) {
+    /**
+     * Returns a list of ItemStacks that represent the itemstacks that make up the given IRecipe
+     * 
+     * @param recipe The IRecipe being examined
+     * @return List of ItemStacks that constitute the inputs of the recipe, null if unable to access the inputs of the given IRecipe
+     */
+    public static ArrayList<ItemStack> getRecipeInputs(IRecipe recipe) {
+        ArrayList<ItemStack> recipeInputs = null;
         
         if (recipe instanceof ShapedRecipes) {
+            
             ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
-            ArrayList<ItemStack> recipeInputs = new ArrayList<ItemStack>();
+            recipeInputs = new ArrayList<ItemStack>();
             
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
                 if (shapedRecipe.recipeItems[i] != null) {
@@ -43,43 +49,67 @@ public class RecipeHelper {
             return recipeInputs;
         }
         else if (recipe instanceof ShapelessRecipes) {
-            return ((ShapelessRecipes) recipe).recipeItems;
+
+            ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
+            
+            recipeInputs = new ArrayList<ItemStack>(shapelessRecipe.recipeItems);
+            
+            return recipeInputs;
         }
         else if (recipe instanceof ShapedOreRecipe) {
-            ShapedOreRecipe shapedRecipe = (ShapedOreRecipe) recipe;
-            ArrayList recipeInputs = new ArrayList<ItemStack>();
+
+            ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
+            recipeInputs = new ArrayList<ItemStack>();
             
-            for (int i = 0; i < shapedRecipe.getInput().length; i++) {
-                if (shapedRecipe.getInput()[i] != null) {
-                    recipeInputs.add(shapedRecipe.getInput()[i]);
+            for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
+                if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
+                    ArrayList<ItemStack> shapedOreRecipeInputs = (ArrayList<ItemStack>) shapedOreRecipe.getInput()[i];
+                    
+                    for (ItemStack itemStack : shapedOreRecipeInputs) {
+                        recipeInputs.add(itemStack);
+                    }
                 }
             }
             
             return recipeInputs;
         }
+        // TODO: Ore Dict recipes should populate some sort of equivalency portion of the dynEMC system
+        // TODO: Recipe Inputs should populate into separate lists, so that the emc of the lists can be determined and minimized
         else if (recipe instanceof ShapelessOreRecipe) {
+
+            ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
+            recipeInputs = new ArrayList<ItemStack>();
+            
+            for (Object recipeInput : shapelessOreRecipe.getInput()) {
+                if (recipeInput instanceof ArrayList) {
+                    ArrayList<ItemStack> shapelessOreRecipeInputs = (ArrayList<ItemStack>) recipeInput;
+                    
+                    for (ItemStack itemStack : shapelessOreRecipeInputs) {
+                        recipeInputs.add(itemStack);
+                    }
+                }
+            }
+            
             return ((ShapelessOreRecipe) recipe).getInput();
         }
-        
+
         return null;
     }
     
-    public static List<ItemStack> getReverseRecipes(ItemStack itemStack) {
+    public static ArrayList<IRecipe> getReverseRecipes(ItemStack itemStack) {
         
-        @SuppressWarnings("unchecked")
-        ArrayList<IRecipe> recipeList = (ArrayList<IRecipe>) CraftingManager.getInstance().getRecipeList();
+        ArrayList<IRecipe> craftingManagerRecipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
+        ArrayList<IRecipe> reverseRecipeList = new ArrayList<IRecipe>();
         
-        for (IRecipe recipe : recipeList) {
+        for (IRecipe recipe : craftingManagerRecipeList) {
             if (recipe.getRecipeOutput() != null) {
-                if ((recipe.getRecipeOutput().itemID == itemStack.itemID) && (recipe.getRecipeOutput().getItemDamage() == itemStack.getItemDamage())) {
-                    System.out.println(recipe);
-                    System.out.println(recipe.getRecipeOutput());
-                    System.out.println(getRecipeInputs(recipe));
+                if (ItemHelper.compare(itemStack, recipe.getRecipeOutput())) {
+                    reverseRecipeList.add(recipe);
                 }
             }
         }
         
-        return null;
+        return reverseRecipeList;
     }
 
     public static void addRecipe(ItemStack output, Object... input) {

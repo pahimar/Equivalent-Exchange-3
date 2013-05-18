@@ -2,6 +2,7 @@ package com.pahimar.ee3.core.helper;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -21,6 +22,19 @@ import com.pahimar.ee3.lib.Strings;
 public class ItemHelper {
 
     private static double rand;
+    
+    public static boolean compare(ItemStack first, ItemStack second) {
+        
+        if ((first != null) && (second != null)) {
+            if (first.itemID == second.itemID) {
+                if (first.getItemDamage() == second.getItemDamage()) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
 
     public static boolean hasColor(ItemStack itemStack) {
 
