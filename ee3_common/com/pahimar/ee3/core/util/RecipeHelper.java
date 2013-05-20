@@ -1,7 +1,6 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -11,6 +10,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,70 +27,80 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RecipeHelper {
     
     /**
-     * Returns a list of ItemStacks that represent the itemstacks that make up the given IRecipe
+     * Returns a list of elements that constitute the input in a crafting recipe
      * 
-     * @param recipe The IRecipe being examined
-     * @return List of ItemStacks that constitute the inputs of the recipe, null if unable to access the inputs of the given IRecipe
+     * @param recipe 
+     *      The IRecipe being examined
+     * @return 
+     *      List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
      */
-    public static ArrayList<ItemStack> getRecipeInputs(IRecipe recipe) {
-        ArrayList<ItemStack> recipeInputs = null;
+    public static ArrayList getRecipeInputs(IRecipe recipe) {
         
         if (recipe instanceof ShapedRecipes) {
             
             ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
-            recipeInputs = new ArrayList<ItemStack>();
+            ArrayList<ItemStack> recipeInputs = new ArrayList<ItemStack>();
             
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
                 if (shapedRecipe.recipeItems[i] != null) {
-                    recipeInputs.add(shapedRecipe.recipeItems[i]);
+                    ItemStack shapedRecipeStack = shapedRecipe.recipeItems[i];
+                    shapedRecipeStack.stackSize = 1;
+                    
+                    recipeInputs.add(shapedRecipeStack);
                 }
             }
             
-            return recipeInputs;
+            return ItemHelper.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessRecipes) {
 
             ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
             
-            recipeInputs = new ArrayList<ItemStack>(shapelessRecipe.recipeItems);
-            
-            return recipeInputs;
+            return ItemHelper.collateStacks(new ArrayList(shapelessRecipe.recipeItems));
         }
         else if (recipe instanceof ShapedOreRecipe) {
 
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
-            recipeInputs = new ArrayList<ItemStack>();
+            ArrayList recipeInputs = new ArrayList();
             
             for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
                 if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                    ArrayList<ItemStack> shapedOreRecipeInputs = (ArrayList<ItemStack>) shapedOreRecipe.getInput()[i];
+                    ArrayList shapedOreRecipeList = (ArrayList) shapedOreRecipe.getInput()[i];
                     
-                    for (ItemStack itemStack : shapedOreRecipeInputs) {
-                        recipeInputs.add(itemStack);
+                    if (shapedOreRecipeList.size() > 0) {
+                        recipeInputs.add(new OreDictionaryStack((ItemStack)shapedOreRecipeList.get(0)));
+                    }
+                }
+                else {
+                    if (shapedOreRecipe.getInput()[i] != null) {
+                        recipeInputs.add(shapedOreRecipe.getInput()[i]);
                     }
                 }
             }
             
-            return recipeInputs;
+            return ItemHelper.collateStacks(recipeInputs);
         }
-        // TODO: Ore Dict recipes should populate some sort of equivalency portion of the dynEMC system
-        // TODO: Recipe Inputs should populate into separate lists, so that the emc of the lists can be determined and minimized
         else if (recipe instanceof ShapelessOreRecipe) {
 
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
-            recipeInputs = new ArrayList<ItemStack>();
+            ArrayList recipeInputs = new ArrayList();
             
-            for (Object recipeInput : shapelessOreRecipe.getInput()) {
-                if (recipeInput instanceof ArrayList) {
-                    ArrayList<ItemStack> shapelessOreRecipeInputs = (ArrayList<ItemStack>) recipeInput;
+            for (Object o : shapelessOreRecipe.getInput()) {
+                if (o instanceof ArrayList) {
+                    ArrayList shapelessOreRecipeList = (ArrayList) o;
                     
-                    for (ItemStack itemStack : shapelessOreRecipeInputs) {
-                        recipeInputs.add(itemStack);
+                    if (shapelessOreRecipeList.size() > 0) {
+                        recipeInputs.add(new OreDictionaryStack((ItemStack) shapelessOreRecipeList.get(0)));
+                    }
+                }
+                else {
+                    if (o != null) {
+                        recipeInputs.add(o);
                     }
                 }
             }
             
-            return ((ShapelessOreRecipe) recipe).getInput();
+            return ItemHelper.collateStacks(recipeInputs);
         }
 
         return null;

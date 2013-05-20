@@ -5,7 +5,7 @@ import net.minecraft.command.WrongUsageException;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.LocalizationHelper;
+import com.pahimar.ee3.core.util.LocalizationHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.lib.Strings;

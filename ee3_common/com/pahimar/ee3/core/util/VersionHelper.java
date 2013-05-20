@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.util;
 
 import java.io.InputStream;
 import java.net.URL;

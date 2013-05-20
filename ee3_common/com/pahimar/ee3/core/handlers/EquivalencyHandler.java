@@ -5,8 +5,8 @@ import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.GeneralHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.core.util.GeneralHelper;
+import com.pahimar.ee3.core.util.LogHelper;
 
 /**
  * Equivalent-Exchange-3

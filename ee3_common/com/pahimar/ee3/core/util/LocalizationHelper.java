@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.util;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 

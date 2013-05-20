@@ -1,6 +1,6 @@
 package com.pahimar.ee3.core.handlers;
 
-import com.pahimar.ee3.core.helper.LocalizationHelper;
+import com.pahimar.ee3.core.util.LocalizationHelper;
 import com.pahimar.ee3.lib.Localizations;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;

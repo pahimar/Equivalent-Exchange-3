@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**

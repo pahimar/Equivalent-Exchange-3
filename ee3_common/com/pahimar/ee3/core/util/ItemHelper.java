@@ -1,8 +1,10 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -34,6 +36,47 @@ public class ItemHelper {
         }
         
         return false;
+    }
+    
+    public static ArrayList collateStacks(List unCollatedStacks) {
+        ArrayList collatedStacks = new ArrayList();
+        
+        for (int i = 0; i < unCollatedStacks.size(); i++) {
+            
+            if (collatedStacks.size() == 0) {
+                collatedStacks.add(unCollatedStacks.get(i));
+            }
+            else {
+                boolean found = false;
+                
+                for (int j = 0; j < collatedStacks.size(); j++) {
+                    if ((unCollatedStacks.get(i) instanceof ItemStack) && (collatedStacks.get(j) instanceof ItemStack)) {
+                        ItemStack unCollatedStack = (ItemStack) unCollatedStacks.get(i);
+                        ItemStack collatedStack = (ItemStack) collatedStacks.get(j);
+                        
+                        if (compare(unCollatedStack, collatedStack)) {
+                            ((ItemStack) collatedStacks.get(j)).stackSize += 1;
+                            found = true;
+                        }
+                    }
+                    else if ((unCollatedStacks.get(i) instanceof OreDictionaryStack) && (collatedStacks.get(j) instanceof OreDictionaryStack)) {
+                        OreDictionaryStack unCollatedStack = (OreDictionaryStack) unCollatedStacks.get(i);
+                        OreDictionaryStack collatedStack = (OreDictionaryStack) collatedStacks.get(j);
+                        
+                        if (OreDictionaryStack.compareStacks(unCollatedStack, collatedStack)) {
+                            ((OreDictionaryStack) collatedStacks.get(j)).stackSize += 1;
+                            found = true;
+                        }
+                    }
+                }
+                
+                if (!found) {
+                    collatedStacks.add(unCollatedStacks.get(i));
+                }
+            }
+        }
+        
+        return collatedStacks;
     }
 
     public static boolean hasColor(ItemStack itemStack) {

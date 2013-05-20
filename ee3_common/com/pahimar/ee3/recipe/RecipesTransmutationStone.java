@@ -13,8 +13,8 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
-import com.pahimar.ee3.core.helper.GeneralHelper;
-import com.pahimar.ee3.core.helper.RecipeHelper;
+import com.pahimar.ee3.core.util.GeneralHelper;
+import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Reference;
 

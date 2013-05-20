@@ -6,7 +6,7 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**

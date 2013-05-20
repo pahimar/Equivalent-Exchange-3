@@ -6,7 +6,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.KeyBindingHelper;
+import com.pahimar.ee3.core.util.KeyBindingHelper;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketTypeHandler;

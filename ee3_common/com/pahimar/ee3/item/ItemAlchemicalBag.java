@@ -8,8 +8,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.ItemHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Reference;

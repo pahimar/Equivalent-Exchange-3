@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 

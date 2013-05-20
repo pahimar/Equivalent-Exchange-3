@@ -6,7 +6,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.core.util.ItemHelper;
 
 /**
  * Equivalent-Exchange-3
