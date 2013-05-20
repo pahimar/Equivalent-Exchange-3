@@ -38,6 +38,7 @@ public class ItemHelper {
         return false;
     }
     
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static ArrayList collateStacks(List unCollatedStacks) {
         ArrayList collatedStacks = new ArrayList();
         
@@ -59,12 +60,12 @@ public class ItemHelper {
                             found = true;
                         }
                     }
-                    else if ((unCollatedStacks.get(i) instanceof OreDictionaryStack) && (collatedStacks.get(j) instanceof OreDictionaryStack)) {
-                        OreDictionaryStack unCollatedStack = (OreDictionaryStack) unCollatedStacks.get(i);
-                        OreDictionaryStack collatedStack = (OreDictionaryStack) collatedStacks.get(j);
+                    else if ((unCollatedStacks.get(i) instanceof OreStack) && (collatedStacks.get(j) instanceof OreStack)) {
+                        OreStack unCollatedStack = (OreStack) unCollatedStacks.get(i);
+                        OreStack collatedStack = (OreStack) collatedStacks.get(j);
                         
-                        if (OreDictionaryStack.compareStacks(unCollatedStack, collatedStack)) {
-                            ((OreDictionaryStack) collatedStacks.get(j)).stackSize += 1;
+                        if (OreStack.compareStacks(unCollatedStack, collatedStack)) {
+                            ((OreStack) collatedStacks.get(j)).stackSize += 1;
                             found = true;
                         }
                     }

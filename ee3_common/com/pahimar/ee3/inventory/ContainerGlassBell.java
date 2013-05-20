@@ -6,7 +6,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileGlassBell;
 
 /**

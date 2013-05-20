@@ -49,7 +49,7 @@ public class RecipesTransmutationStone {
         for (ItemStack stone : transmutationStones) {
             initTransmutationRecipes(stone);
             initEquivalenceRecipes(stone);
-            initReconstructiveRecipes(stone);
+            //initReconstructiveRecipes(stone);
             initDestructorRecipes(stone);
             initPortableSmeltingRecipes(stone);
         }
@@ -161,6 +161,7 @@ public class RecipesTransmutationStone {
         RecipeHelper.addRecipe(new ItemStack(Item.brick, 4), stone, Block.brick);
     }
 
+    @SuppressWarnings("rawtypes")
     public static void initPortableSmeltingRecipes(ItemStack stone) {
 
         Map furnaceMap = FurnaceRecipes.smelting().getSmeltingList();

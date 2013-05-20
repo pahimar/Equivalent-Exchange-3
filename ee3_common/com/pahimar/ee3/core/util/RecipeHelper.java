@@ -10,7 +10,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -34,6 +33,7 @@ public class RecipeHelper {
      * @return 
      *      List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static ArrayList getRecipeInputs(IRecipe recipe) {
         
         if (recipe instanceof ShapedRecipes) {
@@ -56,19 +56,19 @@ public class RecipeHelper {
 
             ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
             
-            return ItemHelper.collateStacks(new ArrayList(shapelessRecipe.recipeItems));
+            return ItemHelper.collateStacks(new ArrayList<Object>(shapelessRecipe.recipeItems));
         }
         else if (recipe instanceof ShapedOreRecipe) {
 
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
-            ArrayList recipeInputs = new ArrayList();
+            ArrayList recipeInputs = new ArrayList<Object>();
             
             for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
                 if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                    ArrayList shapedOreRecipeList = (ArrayList) shapedOreRecipe.getInput()[i];
+                    ArrayList shapedOreRecipeList = (ArrayList<?>) shapedOreRecipe.getInput()[i];
                     
                     if (shapedOreRecipeList.size() > 0) {
-                        recipeInputs.add(new OreDictionaryStack((ItemStack)shapedOreRecipeList.get(0)));
+                        recipeInputs.add(new OreStack((ItemStack)shapedOreRecipeList.get(0)));
                     }
                 }
                 else {
@@ -83,14 +83,14 @@ public class RecipeHelper {
         else if (recipe instanceof ShapelessOreRecipe) {
 
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
-            ArrayList recipeInputs = new ArrayList();
+            ArrayList recipeInputs = new ArrayList<Object>();
             
             for (Object o : shapelessOreRecipe.getInput()) {
                 if (o instanceof ArrayList) {
-                    ArrayList shapelessOreRecipeList = (ArrayList) o;
+                    ArrayList shapelessOreRecipeList = (ArrayList<?>) o;
                     
                     if (shapelessOreRecipeList.size() > 0) {
-                        recipeInputs.add(new OreDictionaryStack((ItemStack) shapelessOreRecipeList.get(0)));
+                        recipeInputs.add(new OreStack((ItemStack) shapelessOreRecipeList.get(0)));
                     }
                 }
                 else {
@@ -106,6 +106,7 @@ public class RecipeHelper {
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     public static ArrayList<IRecipe> getReverseRecipes(ItemStack itemStack) {
         
         ArrayList<IRecipe> craftingManagerRecipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
