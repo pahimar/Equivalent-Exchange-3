@@ -55,6 +55,14 @@ public class TransmutationHelper {
         }
 
         currentBlockStack = new ItemStack(id, 1, meta);
+        
+        //if a block doesn't have an associated item, treat it as untargetable
+        //this is to solve a compatability issue with Mystcraft
+        if(currentBlockStack.getItem() == null){
+            currentBlockStack = null;
+        	previousBlockStack = null;
+        	return;
+        }
 
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
