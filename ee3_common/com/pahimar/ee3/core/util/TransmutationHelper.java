@@ -61,6 +61,7 @@ public class TransmutationHelper {
         if(currentBlockStack.getItem() == null){
             currentBlockStack = null;
         	previousBlockStack = null;
+            targetBlockStack = null;
         	return;
         }
 
@@ -69,7 +70,7 @@ public class TransmutationHelper {
             targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
         }
         else {
-            if (!EquivalencyHandler.instance().areEquivalent(TransmutationHelper.previousBlockStack, currentBlockStack)) {
+            if (previousBlockStack.itemID != currentBlockStack.itemID || previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()){
                 previousBlockStack = currentBlockStack;
                 targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
             }
