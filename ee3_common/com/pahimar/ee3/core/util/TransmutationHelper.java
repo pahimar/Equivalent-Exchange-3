@@ -55,13 +55,22 @@ public class TransmutationHelper {
         }
 
         currentBlockStack = new ItemStack(id, 1, meta);
+        
+        //if a block doesn't have an associated item, treat it as untargetable
+        //this is to solve a compatability issue with Mystcraft
+        if(currentBlockStack.getItem() == null){
+            currentBlockStack = null;
+        	previousBlockStack = null;
+            targetBlockStack = null;
+        	return;
+        }
 
         if (previousBlockStack == null) {
             previousBlockStack = currentBlockStack;
             targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
         }
         else {
-            if (!EquivalencyHandler.instance().areEquivalent(TransmutationHelper.previousBlockStack, currentBlockStack)) {
+            if (previousBlockStack.itemID != currentBlockStack.itemID || previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()){
                 previousBlockStack = currentBlockStack;
                 targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
             }
