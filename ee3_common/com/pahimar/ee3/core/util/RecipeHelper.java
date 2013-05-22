@@ -50,13 +50,13 @@ public class RecipeHelper {
                 }
             }
             
-            return ItemHelper.collateStacks(recipeInputs);
+            return ItemUtil.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessRecipes) {
 
             ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
             
-            return ItemHelper.collateStacks(new ArrayList<Object>(shapelessRecipe.recipeItems));
+            return ItemUtil.collateStacks(new ArrayList<Object>(shapelessRecipe.recipeItems));
         }
         else if (recipe instanceof ShapedOreRecipe) {
 
@@ -78,7 +78,7 @@ public class RecipeHelper {
                 }
             }
             
-            return ItemHelper.collateStacks(recipeInputs);
+            return ItemUtil.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessOreRecipe) {
 
@@ -100,7 +100,7 @@ public class RecipeHelper {
                 }
             }
             
-            return ItemHelper.collateStacks(recipeInputs);
+            return ItemUtil.collateStacks(recipeInputs);
         }
 
         return null;
@@ -114,7 +114,7 @@ public class RecipeHelper {
         
         for (IRecipe recipe : craftingManagerRecipeList) {
             if (recipe.getRecipeOutput() != null) {
-                if (ItemHelper.compare(itemStack, recipe.getRecipeOutput())) {
+                if (ItemUtil.compare(itemStack, recipe.getRecipeOutput())) {
                     reverseRecipeList.add(recipe);
                 }
             }

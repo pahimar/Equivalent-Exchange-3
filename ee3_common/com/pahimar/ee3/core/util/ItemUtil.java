@@ -1,6 +1,7 @@
 package com.pahimar.ee3.core.util;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
@@ -21,7 +22,7 @@ import com.pahimar.ee3.lib.Strings;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemHelper {
+public class ItemUtil {
 
     private static double rand;
     
