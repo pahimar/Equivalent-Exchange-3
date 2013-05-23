@@ -21,8 +21,8 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
-import com.pahimar.ee3.core.util.ItemHelper;
-import com.pahimar.ee3.core.util.KeyBindingHelper;
+import com.pahimar.ee3.core.util.ItemUtil;
+import com.pahimar.ee3.core.util.KeyBindingUtil;
 import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
@@ -77,8 +77,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void setKeyBinding(String name, int value) {
 
-        KeyBindingHelper.addKeyBinding(name, value);
-        KeyBindingHelper.addIsRepeating(false);
+        KeyBindingUtil.addKeyBinding(name, value);
+        KeyBindingUtil.addIsRepeating(false);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ClientProxy extends CommonProxy {
 
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
-                    ItemHelper.setColor(itemStack, color);
+                    ItemUtil.setColor(itemStack, color);
                 }
 
                 ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
@@ -155,7 +155,7 @@ public class ClientProxy extends CommonProxy {
 
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
-                    ItemHelper.setColor(itemStack, color);
+                    ItemUtil.setColor(itemStack, color);
                 }
 
                 ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);

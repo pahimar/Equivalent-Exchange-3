@@ -11,7 +11,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class LocalizationHelper {
+public class LocalizationUtil {
 
     /***
      * Simple test to determine if a specified file name represents a XML file

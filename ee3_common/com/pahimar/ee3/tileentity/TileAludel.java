@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 
-import com.pahimar.ee3.core.util.ItemHelper;
+import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
@@ -164,7 +164,7 @@ public class TileAludel extends TileEE implements IInventory {
         ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
 
         if (itemStack != null && itemStack.stackSize > 0)
-            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemUtil.getColor(itemStack)));
         else
             return super.getDescriptionPacket();
     }

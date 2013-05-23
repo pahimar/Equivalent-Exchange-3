@@ -52,7 +52,7 @@ public class TransmutationHelper {
 
         if (currentBlock != null) {
             meta = currentBlock.damageDropped(meta);
-        }
+        
 
         currentBlockStack = new ItemStack(id, 1, meta);
         
@@ -64,15 +64,16 @@ public class TransmutationHelper {
             targetBlockStack = null;
         	return;
         }
-
-        if (previousBlockStack == null) {
-            previousBlockStack = currentBlockStack;
-            targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
-        }
-        else {
-            if (previousBlockStack.itemID != currentBlockStack.itemID || previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()){
+    
+            if (previousBlockStack == null) {
                 previousBlockStack = currentBlockStack;
                 targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+            }
+            else {
+				if (previousBlockStack.itemID != currentBlockStack.itemID || previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()){
+                    previousBlockStack = currentBlockStack;
+                    targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                }
             }
         }
     }
