@@ -1,6 +1,7 @@
 package com.pahimar.ee3.core.util;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,27 @@ public class TransmutationHelper {
     public static ItemStack previousBlockStack = null;
     public static ItemStack currentBlockStack = null;
     public static ItemStack targetBlockStack = null;
+	
+	public static class TransmutationMemory{
+		public final ItemStack current;
+		public final ItemStack target;
+		public final long timeStamp;
+		
+		public TransmutationMemory(ItemStack current, ItemStack target){
+			this.current = current;
+			this.target = target;
+			timeStamp = java.lang.System.currentTimeMillis();
+		}
+		
+		public TransmutationMemory(){
+			current = currentBlockStack;
+			target = targetBlockStack;
+			timeStamp = java.lang.System.currentTimeMillis();
+		}
+		
+	}
+	
+	public static ArrayList<TransmutationMemory> memories= new ArrayList<TransmutationMemory>();
 
     public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta) {
 
@@ -54,25 +76,40 @@ public class TransmutationHelper {
             meta = currentBlock.damageDropped(meta);
         
 
-        currentBlockStack = new ItemStack(id, 1, meta);
+            currentBlockStack = new ItemStack(id, 1, meta);
         
-        //if a block doesn't have an associated item, treat it as untargetable
-        //this is to solve a compatability issue with Mystcraft
-        if(currentBlockStack.getItem() == null){
-            currentBlockStack = null;
-        	previousBlockStack = null;
-            targetBlockStack = null;
-        	return;
-        }
+	        //if a block doesn't have an associated item, treat it as untargetable
+	        //this is to solve a compatability issue with Mystcraft
+	        if(currentBlockStack.getItem() == null){
+	            currentBlockStack = null;
+	        	previousBlockStack = null;
+	            targetBlockStack = null;
+	        	return;
+	        }
     
-            if (previousBlockStack == null) {
+            if (previousBlockStack == null
+            		|| previousBlockStack.itemID != currentBlockStack.itemID
+            		|| previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()) {
                 previousBlockStack = currentBlockStack;
-                targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
-            }
-            else {
-				if (previousBlockStack.itemID != currentBlockStack.itemID || previousBlockStack.getItemDamage() != currentBlockStack.getItemDamage()){
-                    previousBlockStack = currentBlockStack;
-                    targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                
+                int i;
+                for(i=0; i<memories.size(); i++){
+                	if(ItemStack.areItemStacksEqual(memories.get(i).current, currentBlockStack)){
+                		break;
+                	}
+                }
+                if(i<memories.size()){
+                	if((java.lang.System.currentTimeMillis() - memories.get(i).timeStamp) < 3000){
+                		targetBlockStack = memories.get(i).target;
+                	}
+                	else {
+                		targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                		memories.set(i, new TransmutationMemory());
+                	}
+                }
+                else {
+                	targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                	memories.add(new TransmutationMemory());
                 }
             }
         }
