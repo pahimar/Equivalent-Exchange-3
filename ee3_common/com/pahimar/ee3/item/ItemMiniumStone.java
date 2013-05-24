@@ -93,7 +93,13 @@ public class ItemMiniumStone extends ItemEE
 
     @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
-
+        int i;
+        for(i=0; i<TransmutationHelper.memories.size(); i++){
+        	if(ItemStack.areItemStacksEqual(TransmutationHelper.memories.get(i).current, TransmutationHelper.currentBlockStack)){
+        		break;
+        	}
+        }
+        TransmutationHelper.memories.set(i, new TransmutationHelper.TransmutationMemory());
         EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
     }
 
@@ -110,12 +116,19 @@ public class ItemMiniumStone extends ItemEE
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE)) {
             if (TransmutationHelper.targetBlockStack != null) {
+                int i;
+                for(i=0; i<TransmutationHelper.memories.size(); i++){
+                	if(ItemStack.areItemStacksEqual(TransmutationHelper.memories.get(i).current, TransmutationHelper.currentBlockStack)){
+                		break;
+                	}
+                }
                 if (!thePlayer.isSneaking()) {
                     TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
                 }
                 else {
                     TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
                 }
+                TransmutationHelper.memories.set(i, new TransmutationHelper.TransmutationMemory());
             }
         }
 
