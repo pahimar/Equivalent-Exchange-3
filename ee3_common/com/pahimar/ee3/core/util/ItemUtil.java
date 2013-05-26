@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
@@ -51,6 +52,11 @@ public class ItemUtil {
             // Check the item IDs
             if (first.itemID == second.itemID) {
                 // Check the meta data
+                
+                if ((first.getItemDamage() == OreDictionary.WILDCARD_VALUE) || (second.getItemDamage() == OreDictionary.WILDCARD_VALUE)) {
+                    return true;
+                }
+                
                 if (first.getItemDamage() == second.getItemDamage()) {
                     // Check the stack size
                     if (first.stackSize == second.stackSize) {

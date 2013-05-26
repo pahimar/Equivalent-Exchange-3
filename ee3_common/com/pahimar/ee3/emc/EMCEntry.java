@@ -14,6 +14,10 @@ import java.util.Map;
  * 
  */
 public class EMCEntry {
+    
+    public enum EMCType {
+        CORPOREAL, KINETIC, TEMPORAL, ESSENTIA, AMORPHOUS, VOID, OMNI;
+    }
 
     private float cost, recoveryPercentage;
     private boolean learnable, recoverable;

@@ -4,11 +4,11 @@ import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.core.util.ItemUtil;
 
-public class ItemStackWrapper {
+public class CustomStackWrapper {
 
     public ItemStack itemStack;
 
-    public ItemStackWrapper(ItemStack itemStack) {
+    public CustomStackWrapper(ItemStack itemStack) {
 
         this.itemStack = itemStack;
     }
@@ -16,11 +16,11 @@ public class ItemStackWrapper {
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof ItemStackWrapper)) {
+        if (!(object instanceof CustomStackWrapper)) {
             return false;
         }
 
-        ItemStackWrapper wrappedItemStack = (ItemStackWrapper) object;
+        CustomStackWrapper wrappedItemStack = (CustomStackWrapper) object;
 
         return ItemUtil.compare(this.itemStack, wrappedItemStack.itemStack);
     }
