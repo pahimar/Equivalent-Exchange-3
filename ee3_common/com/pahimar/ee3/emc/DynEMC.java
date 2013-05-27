@@ -1,20 +1,11 @@
 package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.core.util.ItemUtil;
-import com.pahimar.ee3.core.util.LogHelper;
-import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.item.CustomStackWrapper;
 
 public class DynEMC {
@@ -81,7 +72,7 @@ public class DynEMC {
         /**
          * Now that we have discovered as many items as possible, trim out the items that are black listed
          */
-        for (CustomStackWrapper customStackWrapper : EMCBlackList.getInstance().getBlackListStacks()) {
+        for (CustomStackWrapper customStackWrapper : EmcBlackList.getInstance().getBlackListStacks()) {
 
             while (discoveredItems.contains(customStackWrapper)) {
                 discoveredItems.remove(customStackWrapper);

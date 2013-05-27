@@ -10,21 +10,21 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.item.CustomStackWrapper;
 
-public class EMCBlackList {
+public class EmcBlackList {
 
-    private static EMCBlackList emcBlackList = null;
+    private static EmcBlackList emcBlackList = null;
 
     private ArrayList<CustomStackWrapper> stackBlackList = new ArrayList<CustomStackWrapper>();
 
-    private EMCBlackList() {
+    private EmcBlackList() {
 
     }
 
-    public static EMCBlackList getInstance() {
+    public static EmcBlackList getInstance() {
 
         if (emcBlackList == null) {
             
-            emcBlackList = new EMCBlackList();
+            emcBlackList = new EmcBlackList();
             emcBlackList.init();
         }
         
