@@ -63,9 +63,11 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public ItemStack getContainerItemStack(ItemStack itemStack) {
 
-        itemStack.setItemDamage(itemStack.getItemDamage() + 1);
+        ItemStack copiedStack = itemStack.copy();
+        
+        copiedStack.setItemDamage(copiedStack.getItemDamage() + 1);
 
-        return itemStack;
+        return copiedStack;
     }
 
     @Override

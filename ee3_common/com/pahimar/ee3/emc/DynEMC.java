@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.item.CustomStackWrapper;
 
 public class DynEMC {
