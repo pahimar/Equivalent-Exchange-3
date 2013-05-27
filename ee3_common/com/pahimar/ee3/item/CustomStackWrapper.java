@@ -9,8 +9,12 @@ public class CustomStackWrapper {
     public ItemStack itemStack;
 
     public CustomStackWrapper(ItemStack itemStack) {
-
+        
         this.itemStack = itemStack;
+        
+        if (this.itemStack != null) {
+            this.itemStack.stackSize = 1;
+        }
     }
 
     @Override

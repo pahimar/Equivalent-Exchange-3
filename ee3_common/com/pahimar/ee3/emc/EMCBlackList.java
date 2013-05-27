@@ -38,10 +38,6 @@ public class EmcBlackList {
 
     public void add(ItemStack itemStack) {
 
-        if (itemStack != null) {
-            itemStack.stackSize = 1;
-        }
-
         CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
 
         if (!stackBlackList.contains(customStackWrapper)) {
@@ -100,10 +96,6 @@ public class EmcBlackList {
     }
 
     public void remove(ItemStack itemStack) {
-
-        if (itemStack != null) {
-            itemStack.stackSize = 1;
-        }
 
         CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
 

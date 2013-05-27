@@ -20,6 +20,13 @@ public class EmcValue {
 
     private float value, recoveryPercentage;
     private List<EmcComponent> emcComponents;
+    
+    public EmcValue() {
+
+        value = 0F;;
+        recoveryPercentage = 1F;
+        emcComponents = new ArrayList<EmcComponent>();
+    }
 
     public EmcValue(float value) {
 
