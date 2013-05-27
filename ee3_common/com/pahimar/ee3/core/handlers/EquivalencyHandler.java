@@ -234,6 +234,7 @@ public class EquivalencyHandler {
         if (second == null)
             return false;
 
+        // if i transmt sand in to sand i crash
         if (getEquivalencyList(first.itemID, first.getItemDamage()) != null && getEquivalencyList(second.itemID, second.getItemDamage()) != null) {
             if (first.itemID == second.itemID && first.getItemDamage() == second.getItemDamage())
                 return true;
