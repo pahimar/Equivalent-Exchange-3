@@ -22,12 +22,12 @@
 	<entry key="tile.calcinator.name">Calcinador</entry>
 	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.alchemicalChest.name">Cofre de Alquimia</entry>
-	<entry key="tile.glassBell.name">Campana de Crystal</entry>
+	<entry key="tile.glassBell.name">Campana de Cristal</entry>
 	<entry key="container.calcinator">Calcinator</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Cofre de Alquimia</entry>
 	<entry key="container.alchemicalBag">Bolsa de Alquimia</entry>
-	<entry key="container.glassBell">Campana de Crystal</entry>
+	<entry key="container.glassBell">Campana de Cristal</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
 	<entry key="version.uninitialized">El chequeo de versiones no se iniicalizó adecuadamente</entry>
