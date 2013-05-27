@@ -19,9 +19,9 @@ import com.pahimar.ee3.item.CustomStackWrapper;
 
 public class DynEMC {
 
-    private static final DynEMC dynEMC = new DynEMC();
+    private static DynEMC dynEMC = null;
 
-    private static final ArrayList<CustomStackWrapper> discoveredItems = new ArrayList<CustomStackWrapper>();
+    private ArrayList<CustomStackWrapper> discoveredItems = new ArrayList<CustomStackWrapper>();
 
     private DynEMC() {
 
@@ -29,13 +29,26 @@ public class DynEMC {
 
     public static DynEMC getInstance() {
 
+        if (dynEMC == null) {
+            dynEMC = new DynEMC();
+            dynEMC.init();
+        }
+        
         return dynEMC;
     }
+    
+    public List<CustomStackWrapper> getDiscoveredItems() {
+        
+        return discoveredItems;
+    }
 
-    public void init() {
+    private void init() {
 
         ArrayList<ItemStack> subItems = new ArrayList<ItemStack>();
 
+        /*
+         * For every possible item (and sub item), add them to the discovered items list
+         */
         for (int i = 0; i < Item.itemsList.length; i++) {
             if (Item.itemsList[i] != null) {
                 if (Item.itemsList[i].getHasSubtypes()) {
@@ -65,22 +78,13 @@ public class DynEMC {
             }
         }
 
+        /**
+         * Now that we have discovered as many items as possible, trim out the items that are black listed
+         */
         for (CustomStackWrapper customStackWrapper : EMCBlackList.getInstance().getBlackListStacks()) {
 
             while (discoveredItems.contains(customStackWrapper)) {
                 discoveredItems.remove(customStackWrapper);
-            }
-        }
-
-        for (CustomStackWrapper customStackWrapper : discoveredItems) {
-            ArrayList<IRecipe> recipes = RecipeHelper.getReverseRecipes(customStackWrapper.itemStack);
-            if (recipes.size() > 0) {
-                for (IRecipe recipe : recipes) {
-                    LogHelper.log(Level.INFO, ItemUtil.toString(customStackWrapper.itemStack) + " <-- " + RecipeHelper.getRecipeInputs(recipe));
-                }
-            }
-            else {
-                LogHelper.log(Level.INFO, ItemUtil.toString(customStackWrapper.itemStack));
             }
         }
     }

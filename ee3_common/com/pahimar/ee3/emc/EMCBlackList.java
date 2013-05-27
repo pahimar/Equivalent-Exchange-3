@@ -12,9 +12,9 @@ import com.pahimar.ee3.item.CustomStackWrapper;
 
 public class EMCBlackList {
 
-    private static final EMCBlackList emcBlackList = new EMCBlackList();
+    private static EMCBlackList emcBlackList = null;
 
-    private static final ArrayList<CustomStackWrapper> stackBlackList = new ArrayList<CustomStackWrapper>();
+    private ArrayList<CustomStackWrapper> stackBlackList = new ArrayList<CustomStackWrapper>();
 
     private EMCBlackList() {
 
@@ -22,6 +22,12 @@ public class EMCBlackList {
 
     public static EMCBlackList getInstance() {
 
+        if (emcBlackList == null) {
+            
+            emcBlackList = new EMCBlackList();
+            emcBlackList.init();
+        }
+        
         return emcBlackList;
     }
     
@@ -126,37 +132,38 @@ public class EMCBlackList {
         this.remove(id, OreDictionary.WILDCARD_VALUE);
     }
     
-    static {
-        getInstance().add(Block.bed);
-        getInstance().add(Block.pistonExtension);
-        getInstance().add(Block.pistonMoving);
-        getInstance().add(Block.mobSpawner);
-        getInstance().add(Block.redstoneWire);
-        getInstance().add(Block.crops);
-        getInstance().add(Block.furnaceBurning);
-        getInstance().add(Block.signPost);
-        getInstance().add(Block.doorWood);
-        getInstance().add(Block.signWall);
-        getInstance().add(Block.doorIron);
-        getInstance().add(Block.torchRedstoneIdle);
-        getInstance().add(Block.reed);
-        getInstance().add(Block.portal);
-        getInstance().add(Block.cake);
-        getInstance().add(Block.redstoneRepeaterIdle);
-        getInstance().add(Block.redstoneRepeaterActive);
-        getInstance().add(Block.lockedChest);
-        getInstance().add(Block.pumpkinStem);
-        getInstance().add(Block.melonStem);
-        getInstance().add(Block.netherStalk);
-        getInstance().add(Block.brewingStand);
-        getInstance().add(Block.cauldron);
-        getInstance().add(Block.endPortal);
-        getInstance().add(Block.redstoneLampActive);
-        getInstance().add(Block.commandBlock);
-        getInstance().add(Block.carrot);
-        getInstance().add(Block.potato);
-        getInstance().add(Block.skull);
-        getInstance().add(Block.redstoneComparatorIdle);
-        getInstance().add(Block.redstoneComparatorActive);
+    private void init() {
+        
+        add(Block.bed);
+        add(Block.pistonExtension);
+        add(Block.pistonMoving);
+        add(Block.mobSpawner);
+        add(Block.redstoneWire);
+        add(Block.crops);
+        add(Block.furnaceBurning);
+        add(Block.signPost);
+        add(Block.doorWood);
+        add(Block.signWall);
+        add(Block.doorIron);
+        add(Block.torchRedstoneIdle);
+        add(Block.reed);
+        add(Block.portal);
+        add(Block.cake);
+        add(Block.redstoneRepeaterIdle);
+        add(Block.redstoneRepeaterActive);
+        add(Block.lockedChest);
+        add(Block.pumpkinStem);
+        add(Block.melonStem);
+        add(Block.netherStalk);
+        add(Block.brewingStand);
+        add(Block.cauldron);
+        add(Block.endPortal);
+        add(Block.redstoneLampActive);
+        add(Block.commandBlock);
+        add(Block.carrot);
+        add(Block.potato);
+        add(Block.skull);
+        add(Block.redstoneComparatorIdle);
+        add(Block.redstoneComparatorActive);
     }
 }
