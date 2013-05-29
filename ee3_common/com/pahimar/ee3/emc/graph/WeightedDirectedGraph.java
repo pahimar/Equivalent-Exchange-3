@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class WeightedDirectedGraph<T, E> implements Iterable<T> {
+public class WeightedDirectedGraph<T, E extends WeightedEdge<T>> implements Iterable<T> {
 
     private final Map<T, SortedSet<E>> graph = new HashMap<T, SortedSet<E>>();
     private List<T> orderedNodes = new ArrayList<T>();
@@ -39,8 +39,24 @@ public class WeightedDirectedGraph<T, E> implements Iterable<T> {
         {
             throw new NoSuchElementException("Missing nodes from graph");
         }
+        
+        @SuppressWarnings("unchecked")
+        E edge = (E) new WeightedEdge<T>(1, to);
 
-        //graph.get(from).add((E) to);
+        graph.get(from).add(edge);
+    }
+    
+    public void addEdge(T from, T to, int weight)
+    {
+        if (!(graph.containsKey(from) && graph.containsKey(to)))
+        {
+            throw new NoSuchElementException("Missing nodes from graph");
+        }
+        
+        @SuppressWarnings("unchecked")
+        E edge = (E) new WeightedEdge<T>(weight, to);
+
+        graph.get(from).add(edge);
     }
     
     @Override
