@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class WeightedDirectedGraph<T, E extends WeightedEdge<T>> implements Iterable<T> {
+public class WeightedDirectedGraph<T> implements Iterable<T> {
 
-    private final Map<T, SortedSet<E>> graph = new HashMap<T, SortedSet<E>>();
+    private final Map<T, SortedSet<WeightedEdge<T>>> graph = new HashMap<T, SortedSet<WeightedEdge<T>>>();
     private List<T> orderedNodes = new ArrayList<T>();
 
     public boolean addNode(T node)
@@ -23,9 +23,9 @@ public class WeightedDirectedGraph<T, E extends WeightedEdge<T>> implements Iter
         }
 
         orderedNodes.add(node);
-        graph.put(node, new TreeSet<E>(new Comparator<E>()
+        graph.put(node, new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>()
         {
-            public int compare(E o1, E o2) {
+            public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
                 return orderedNodes.indexOf(o1)-orderedNodes.indexOf(o2);
             }
         }));
@@ -35,15 +35,7 @@ public class WeightedDirectedGraph<T, E extends WeightedEdge<T>> implements Iter
     
     public void addEdge(T from, T to)
     {
-        if (!(graph.containsKey(from) && graph.containsKey(to)))
-        {
-            throw new NoSuchElementException("Missing nodes from graph");
-        }
-        
-        @SuppressWarnings("unchecked")
-        E edge = (E) new WeightedEdge<T>(1, to);
-
-        graph.get(from).add(edge);
+        addEdge(from, to, 1);
     }
     
     public void addEdge(T from, T to, int weight)
@@ -53,8 +45,7 @@ public class WeightedDirectedGraph<T, E extends WeightedEdge<T>> implements Iter
             throw new NoSuchElementException("Missing nodes from graph");
         }
         
-        @SuppressWarnings("unchecked")
-        E edge = (E) new WeightedEdge<T>(weight, to);
+        WeightedEdge<T> edge = new WeightedEdge<T>(weight, to);
 
         graph.get(from).add(edge);
     }
