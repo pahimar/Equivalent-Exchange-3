@@ -26,7 +26,7 @@
 	<entry key="container.calcinator">Calcinator</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Alchemische Kist</entry>
-	<entry key="container.alchemicalBag">Alchemische Tas</entry>
+	<entry key="container.alchemicalBag">Alchemische zak</entry>
 	<entry key="container.glassBell">Glazen Stolp</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Start met externe versiecontrole tegen extern versiebestand, te vinden op</entry>
