@@ -29,7 +29,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
             public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
 
-                return orderedNodes.indexOf(o1) - orderedNodes.indexOf(o2);
+                return orderedNodes.indexOf(o1.getTarget()) - orderedNodes.indexOf(o2.getTarget());
             }
         }));
 
@@ -76,6 +76,11 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         return graph.get(from).contains(new WeightedEdge<T>(weight, to));
     }
 
+    public boolean nodeExists(T node) {
+
+        return graph.containsKey(node);
+    }
+
     public Set<WeightedEdge<T>> edgesFrom(T from) {
 
         if (!graph.containsKey(from)) {
@@ -84,23 +89,105 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         return Collections.unmodifiableSortedSet(graph.get(from));
     }
-    
-    public void removeEdge(T from, T to) {
-        
-        removeEdge(from, to, 1);
+
+    public Set<WeightedEdge<T>> edgesTo(T to) {
+
+        if (!graph.containsKey(to)) {
+            throw new NoSuchElementException("Missing node from graph");
+        }
+
+        Set<WeightedEdge<T>> edgesTo = new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>() {
+
+            public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
+
+                return orderedNodes.indexOf(o1.getTarget()) - orderedNodes.indexOf(o2.getTarget());
+            }
+        });
+
+        for (T node : graph.keySet()) {
+            Set<WeightedEdge<T>> edgesFrom = edgesFrom(node);
+
+            for (WeightedEdge<T> fromEdge : edgesFrom) {
+                if (fromEdge.getTarget().equals(to)) {
+                    edgesTo.add(fromEdge);
+                }
+            }
+        }
+
+        return Collections.unmodifiableSet(edgesTo);
     }
     
-    public void removeEdge(T from, T to, int weight) {
+    public void removeNode(T node) {
         
+        if (!(graph.containsKey(node))) {
+            throw new NoSuchElementException("Missing node from graph");
+        }
+        
+        // Remove all edges from and to the node
+        removeAllEdgesFrom(node);
+        removeAllEdgesTo(node);
+        
+        // Remove the node
+        graph.remove(node);
+    }
+
+    public void removeEdge(T from, T to) {
+
+        removeEdge(from, to, 1);
+    }
+
+    public void removeEdge(T from, T to, float weight) {
+
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             throw new NoSuchElementException("Missing nodes from graph");
         }
-        
-//        TODO Finish this
+
+        graph.get(from).remove(new WeightedEdge<T>(weight, to));
+    }
+
+    public void removeAllEdgesFrom(T node) {
+
+        if (!(graph.containsKey(node))) {
+            throw new NoSuchElementException("Missing node from graph");
+        }
+
+        graph.get(node).clear();
     }
     
-    public void removeAllEdges(T from, T to) {
-//        TODO Finish this
+    public void removeAllEdgesTo(T node) {
+
+        if (!(graph.containsKey(node))) {
+            throw new NoSuchElementException("Missing node from graph");
+        }
+
+        for (T aNode : graph.keySet()) {
+            Set<WeightedEdge<T>> edgesFrom = edgesFrom(aNode);
+
+            for (WeightedEdge<T> fromEdge : edgesFrom) {
+                if (fromEdge.getTarget().equals(node)) {
+                    graph.get(aNode).remove(fromEdge);
+                }
+            }
+        }
+    }
+
+    public void removeAllEdgesBetween(T firstNode, T secondNode) {
+
+        if (!(graph.containsKey(firstNode) && graph.containsKey(secondNode))) {
+            throw new NoSuchElementException("Missing nodes from graph");
+        }
+
+        for (WeightedEdge<T> edgeFrom : edgesFrom(firstNode)) {
+            if (edgeFrom.getTarget().equals(secondNode)) {
+                graph.get(firstNode).remove(edgeFrom);
+            }
+        }
+
+        for (WeightedEdge<T> edgeFrom : edgesFrom(secondNode)) {
+            if (edgeFrom.getTarget().equals(firstNode)) {
+                graph.get(secondNode).remove(edgeFrom);
+            }
+        }
     }
 
     @Override
