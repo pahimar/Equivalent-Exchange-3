@@ -47,7 +47,10 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
             throw new NoSuchElementException("Missing nodes from graph");
         }
 
-        graph.get(from).add(new WeightedEdge<T>(weight, to));
+        // If a directed edge of the same weight doesn't already exist, add the new edge
+        if (!edgeExists(from, to, weight)) {
+            graph.get(from).add(new WeightedEdge<T>(weight, to));
+        }
     }
 
     public boolean edgeExists(T from, T to) {
