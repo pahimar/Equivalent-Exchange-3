@@ -41,7 +41,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         addEdge(from, to, 1);
     }
 
-    public void addEdge(T from, T to, int weight) {
+    public void addEdge(T from, T to, float weight) {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             throw new NoSuchElementException("Missing nodes from graph");
@@ -70,7 +70,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         return false;
     }
 
-    public boolean edgeExists(T from, T to, int weight) {
+    public boolean edgeExists(T from, T to, float weight) {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             throw new NoSuchElementException("Missing nodes from graph");
