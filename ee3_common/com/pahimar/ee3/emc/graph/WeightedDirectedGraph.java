@@ -84,6 +84,24 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         return Collections.unmodifiableSortedSet(graph.get(from));
     }
+    
+    public void removeEdge(T from, T to) {
+        
+        removeEdge(from, to, 1);
+    }
+    
+    public void removeEdge(T from, T to, int weight) {
+        
+        if (!(graph.containsKey(from) && graph.containsKey(to))) {
+            throw new NoSuchElementException("Missing nodes from graph");
+        }
+        
+//        TODO Finish this
+    }
+    
+    public void removeAllEdges(T from, T to) {
+//        TODO Finish this
+    }
 
     @Override
     public Iterator<T> iterator() {

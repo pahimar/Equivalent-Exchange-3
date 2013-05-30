@@ -2,16 +2,16 @@ package com.pahimar.ee3.emc.graph;
 
 public class WeightedEdge<T> {
 
-    private int weight;
+    private float weight;
     private T target;
 
-    public WeightedEdge(int weight, T target) {
+    public WeightedEdge(float weight, T target) {
 
         this.weight = weight;
         this.target = target;
     }
 
-    public int getWeight() {
+    public float getWeight() {
 
         return weight;
     }
@@ -21,7 +21,7 @@ public class WeightedEdge<T> {
         return target;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
 
         this.weight = weight;
     }
