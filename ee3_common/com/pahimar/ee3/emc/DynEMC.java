@@ -1,15 +1,14 @@
 package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.pahimar.ee3.core.util.OreStack;
+import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.item.CustomStackWrapper;
 
 public class DynEMC {
@@ -17,18 +16,14 @@ public class DynEMC {
     private static DynEMC dynEMC = null;
 
     private ArrayList<CustomStackWrapper> discoveredItems;
-    private HashMap<EquivalencyGroup, EmcValue> emcMap;
+    private WeightedDirectedGraph<CustomStackWrapper> graph;
 
     private DynEMC() {
         
         discoveredItems = new ArrayList<CustomStackWrapper>();
-        emcMap = new HashMap<EquivalencyGroup, EmcValue>();
+        graph = new WeightedDirectedGraph<CustomStackWrapper>();
         
         init();
-        
-        for (String oreName : OreDictionary.getOreNames()) {
-            emcMap.put(new EquivalencyGroup(OreDictionary.getOres(oreName)), new EmcValue());
-        }
     }
 
     public static DynEMC getInstance() {
@@ -44,11 +39,27 @@ public class DynEMC {
 
         return discoveredItems;
     }
-
+    
     private void init() {
 
+        populateItemList();
+    }
+    
+    private void populateItemList() {
         ArrayList<ItemStack> subItems = new ArrayList<ItemStack>();
 
+        /*
+         * Add all entries from the OreDictionary
+         */
+        for (String oreName: OreDictionary.getOreNames()) {
+
+            CustomStackWrapper customWrappedStack = new CustomStackWrapper(new OreStack(oreName));
+            
+            if (!discoveredItems.contains(customWrappedStack)) {
+                discoveredItems.add(customWrappedStack);
+            }
+        }
+        
         /*
          * For every possible item (and sub item), add them to the discovered
          * items list
@@ -81,7 +92,7 @@ public class DynEMC {
                 }
             }
         }
-
+        
         /**
          * Now that we have discovered as many items as possible, trim out the
          * items that are black listed
@@ -98,13 +109,6 @@ public class DynEMC {
     public String toString() {
         
         StringBuilder stringBuilder = new StringBuilder();
-        
-        Set<EquivalencyGroup> keySet = emcMap.keySet();
-        Iterator<EquivalencyGroup> iter = keySet.iterator();
-        
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
         
         return stringBuilder.toString();
     }

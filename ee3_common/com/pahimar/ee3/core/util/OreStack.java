@@ -8,7 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreStack implements Comparator<OreStack> {
 
-    private String oreName;
+    public String oreName;
     public int stackSize;
     
     public OreStack() {
@@ -45,6 +45,18 @@ public class OreStack implements Comparator<OreStack> {
     
     public String toString() {
         return "" + stackSize + "xoreDictionary." + oreName;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        
+        if (!(object instanceof OreStack)) {
+            return false;
+        }
+        
+        OreStack oreStackObject = (OreStack) object;
+        
+        return ((stackSize == oreStackObject.stackSize) && (oreName.equals(oreStackObject.oreName)));
     }
 
     @Override

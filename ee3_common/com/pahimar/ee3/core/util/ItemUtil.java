@@ -11,6 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -30,7 +31,13 @@ public class ItemUtil {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, itemName: %s, className: %s", itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, itemStack.getItemName(), itemStack.getItem().getClass().toString()));
+        stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, ", itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize));
+        
+        if (itemStack.hasTagCompound()) {
+            stringBuilder.append(String.format("nbtTagCompound: %s, ", itemStack.getTagCompound().toString()));
+        }
+        
+        stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
 
         return stringBuilder.toString();
     }
@@ -46,7 +53,7 @@ public class ItemUtil {
      *      true if the two ItemStacks are equivalent, false otherwise
      */
     public static boolean compare(ItemStack first, ItemStack second) {
-
+        
         // Check to see if either argument is null
         if ((first != null) && (second != null)) {
             // Check the item IDs
@@ -81,6 +88,11 @@ public class ItemUtil {
             }
         }
 
+        if (first.itemID == ItemIds.MINIUM_STONE && second.itemID == ItemIds.MINIUM_STONE) {
+            System.out.println("First: " + ItemUtil.toString(first));
+            System.out.println("Second: " + ItemUtil.toString(second));
+            System.out.println("False Default");
+        }
         return false;
     }
 

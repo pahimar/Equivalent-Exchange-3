@@ -12,6 +12,9 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import com.pahimar.ee3.item.CustomStackWrapper;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -24,98 +27,133 @@ import cpw.mods.fml.common.registry.GameRegistry;
  * 
  */
 public class RecipeHelper {
-    
+
     /**
      * Returns a list of elements that constitute the input in a crafting recipe
      * 
-     * @param recipe 
-     *      The IRecipe being examined
-     * @return 
-     *      List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
+     * @param recipe
+     *            The IRecipe being examined
+     * @return List of elements that constitute the input of the given IRecipe.
+     *         Could be an ItemStack or an Arraylist
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static ArrayList getRecipeInputs(IRecipe recipe) {
-        
+    public static ArrayList<CustomStackWrapper> getRecipeInputs(IRecipe recipe) {
+
+        ArrayList<CustomStackWrapper> recipeInputs = new ArrayList<CustomStackWrapper>();
+
         if (recipe instanceof ShapedRecipes) {
-            
+
             ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
-            ArrayList<ItemStack> recipeInputs = new ArrayList<ItemStack>();
-            
+
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
                 if (shapedRecipe.recipeItems[i] != null) {
-                    ItemStack shapedRecipeStack = shapedRecipe.recipeItems[i];
-                    shapedRecipeStack.stackSize = 1;
-                    
-                    recipeInputs.add(shapedRecipeStack);
+
+                    ItemStack itemStack = shapedRecipe.recipeItems[i];
+                    itemStack.stackSize = 1;
+
+                    recipeInputs.add(new CustomStackWrapper(itemStack));
                 }
             }
-            
+
             return ItemUtil.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessRecipes) {
 
             ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
-            
-            return ItemUtil.collateStacks(new ArrayList<Object>(shapelessRecipe.recipeItems));
+
+            for (Object object : shapelessRecipe.recipeItems) {
+                if (object instanceof ItemStack) {
+
+                    ItemStack itemStack = (ItemStack) object;
+                    itemStack.stackSize = 1;
+
+                    recipeInputs.add(new CustomStackWrapper(itemStack));
+                }
+            }
         }
         else if (recipe instanceof ShapedOreRecipe) {
 
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
-            ArrayList recipeInputs = new ArrayList<Object>();
-            
+
             for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
+                /*
+                 * If the element is a list, then it is an OreStack
+                 */
                 if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
                     ArrayList shapedOreRecipeList = (ArrayList<?>) shapedOreRecipe.getInput()[i];
-                    
-                    if (shapedOreRecipeList.size() > 0) {
-                        recipeInputs.add(new OreStack((ItemStack)shapedOreRecipeList.get(0)));
+
+                    if (!shapedOreRecipeList.isEmpty()) {
+
+                        OreStack oreStack = new OreStack((ItemStack) shapedOreRecipeList.get(0));
+                        oreStack.stackSize = 1;
+
+                        recipeInputs.add(new CustomStackWrapper(oreStack));
                     }
                 }
-                else {
-                    if (shapedOreRecipe.getInput()[i] != null) {
-                        recipeInputs.add(shapedOreRecipe.getInput()[i]);
-                    }
+                /*
+                 * Else it is possibly an ItemStack
+                 */
+                else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
+
+                    ItemStack itemStack = (ItemStack) shapedOreRecipe.getInput()[i];
+                    itemStack.stackSize = 1;
+
+                    recipeInputs.add(new CustomStackWrapper(itemStack));
                 }
             }
-            
-            return ItemUtil.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessOreRecipe) {
 
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
-            ArrayList recipeInputs = new ArrayList<Object>();
-            
-            for (Object o : shapelessOreRecipe.getInput()) {
-                if (o instanceof ArrayList) {
-                    ArrayList shapelessOreRecipeList = (ArrayList<?>) o;
-                    
-                    if (shapelessOreRecipeList.size() > 0) {
-                        recipeInputs.add(new OreStack((ItemStack) shapelessOreRecipeList.get(0)));
+
+            for (Object object : shapelessOreRecipe.getInput()) {
+                if (object instanceof ArrayList) {
+                    ArrayList shapelessOreRecipeList = (ArrayList<?>) object;
+
+                    if (!shapelessOreRecipeList.isEmpty()) {
+
+                        OreStack oreStack = new OreStack((ItemStack) shapelessOreRecipeList.get(0));
+                        oreStack.stackSize = 1;
+
+                        recipeInputs.add(new CustomStackWrapper(oreStack));
                     }
                 }
-                else {
-                    if (o != null) {
-                        recipeInputs.add(o);
-                    }
+                else if (object instanceof ItemStack) {
+                    ItemStack itemStack = (ItemStack) object;
+                    itemStack.stackSize = 1;
+
+                    recipeInputs.add(new CustomStackWrapper(itemStack));
                 }
             }
-            
-            return ItemUtil.collateStacks(recipeInputs);
         }
 
-        return null;
+        return recipeInputs;
     }
     
     @SuppressWarnings("unchecked")
+    public static ArrayList<CustomStackWrapper> getCollatedRecipeInputs(IRecipe recipe) {
+        
+        return ItemUtil.collateStacks(getRecipeInputs(recipe));
+    }
+    
+    public static ArrayList<IRecipe> getReverseRecipes(CustomStackWrapper customStackWrapper) {
+        
+        return getReverseRecipes(customStackWrapper.getItemStack());
+    }
+
+    @SuppressWarnings("unchecked")
     public static ArrayList<IRecipe> getReverseRecipes(ItemStack itemStack) {
         
-        ArrayList<IRecipe> craftingManagerRecipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
         ArrayList<IRecipe> reverseRecipeList = new ArrayList<IRecipe>();
         
-        for (IRecipe recipe : craftingManagerRecipeList) {
-            if (recipe.getRecipeOutput() != null) {
-                if (ItemUtil.compare(itemStack, recipe.getRecipeOutput())) {
-                    reverseRecipeList.add(recipe);
+        if (itemStack != null) {
+            ArrayList<IRecipe> craftingManagerRecipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());    
+    
+            for (IRecipe recipe : craftingManagerRecipeList) {
+                if (recipe.getRecipeOutput() != null) {
+                    if (ItemUtil.compare(itemStack, recipe.getRecipeOutput())) {
+                        reverseRecipeList.add(recipe);
+                    }
                 }
             }
         }
