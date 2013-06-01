@@ -36,7 +36,7 @@ public class RecipeHelper {
      * @return List of elements that constitute the input of the given IRecipe.
      *         Could be an ItemStack or an Arraylist
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({ "rawtypes" })
     public static ArrayList<CustomStackWrapper> getRecipeInputs(IRecipe recipe) {
 
         ArrayList<CustomStackWrapper> recipeInputs = new ArrayList<CustomStackWrapper>();
@@ -54,8 +54,6 @@ public class RecipeHelper {
                     recipeInputs.add(new CustomStackWrapper(itemStack));
                 }
             }
-
-            return ItemUtil.collateStacks(recipeInputs);
         }
         else if (recipe instanceof ShapelessRecipes) {
 

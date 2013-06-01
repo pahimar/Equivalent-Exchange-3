@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.pahimar.ee3.item.CustomStackWrapper;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -61,7 +61,7 @@ public class ItemUtil {
                 // Check the meta data
                 
                 if ((first.getItemDamage() == OreDictionary.WILDCARD_VALUE) || (second.getItemDamage() == OreDictionary.WILDCARD_VALUE)) {
-                    return true;
+                    //return true;
                 }
                 
                 if (first.getItemDamage() == second.getItemDamage()) {
@@ -88,16 +88,11 @@ public class ItemUtil {
             }
         }
 
-        if (first.itemID == ItemIds.MINIUM_STONE && second.itemID == ItemIds.MINIUM_STONE) {
-            System.out.println("First: " + ItemUtil.toString(first));
-            System.out.println("Second: " + ItemUtil.toString(second));
-            System.out.println("False Default");
-        }
         return false;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static ArrayList collateStacks(List unCollatedStacks) {
+    public static ArrayList<CustomStackWrapper> collateStacks(List<CustomStackWrapper> unCollatedStacks) {
 
         ArrayList collatedStacks = new ArrayList();
 

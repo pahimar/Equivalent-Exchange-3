@@ -17,10 +17,15 @@ public class OreStack implements Comparator<OreStack> {
         oreName = null;
     }
     
-    public OreStack(String oreName) {
+    public OreStack(String oreName, int stackSize) {
         
         this.oreName = oreName;
-        stackSize = 1;
+        this.stackSize = stackSize;
+    }
+    
+    public OreStack(String oreName) {
+        
+        this(oreName, 1);
     }
     
     public OreStack(int oreID) {
@@ -28,9 +33,14 @@ public class OreStack implements Comparator<OreStack> {
         this(OreDictionary.getOreName(oreID));
     }
     
+    public OreStack(int oreID, int stackSize) {
+        
+        this(OreDictionary.getOreName(oreID), stackSize);
+    }
+    
     public OreStack(ItemStack itemStack) {
         
-        this(OreDictionary.getOreID(itemStack));
+        this(OreDictionary.getOreID(itemStack), itemStack.stackSize);
     }
     
     public ArrayList<ItemStack> getOres() {
