@@ -5,64 +5,64 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.item.CustomStackWrapper;
+import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EquivalencyGroup {
 
-    private List<CustomStackWrapper> equivalentItems;
+    private List<CustomWrappedStack> equivalentItems;
 
     public EquivalencyGroup() {
 
-        equivalentItems = new ArrayList<CustomStackWrapper>();
+        equivalentItems = new ArrayList<CustomWrappedStack>();
     }
     
     public EquivalencyGroup(List<ItemStack> equivalentItems) {
         
-        this.equivalentItems = new ArrayList<CustomStackWrapper>();
+        this.equivalentItems = new ArrayList<CustomWrappedStack>();
         
         for (ItemStack itemStack : equivalentItems) {
-            this.equivalentItems.add(new CustomStackWrapper(itemStack));
+            this.equivalentItems.add(new CustomWrappedStack(itemStack));
         }
     }
 
-    public List<CustomStackWrapper> getMembers() {
+    public List<CustomWrappedStack> getMembers() {
 
         return equivalentItems;
     }
 
     public boolean containsMember(ItemStack itemStack) {
 
-        return containsMember(new CustomStackWrapper(itemStack));
+        return containsMember(new CustomWrappedStack(itemStack));
     }
 
-    public boolean containsMember(CustomStackWrapper customStackWrapper) {
+    public boolean containsMember(CustomWrappedStack customStackWrapper) {
 
         return equivalentItems.contains(customStackWrapper);
     }
 
     public void addMember(ItemStack itemStack) {
 
-        this.addMember(new CustomStackWrapper(itemStack));
+        this.addMember(new CustomWrappedStack(itemStack));
     }
 
-    public void addMember(CustomStackWrapper customStackWrapper) {
+    public void addMember(CustomWrappedStack customStackWrapper) {
 
         if (!containsMember(customStackWrapper)) {
             equivalentItems.add(customStackWrapper);
         }
     }
     
-    public void setEquivalentItems(List<CustomStackWrapper> equivalentItems) {
+    public void setEquivalentItems(List<CustomWrappedStack> equivalentItems) {
         
         this.equivalentItems = equivalentItems;
     }
 
     public void removeMember(ItemStack itemStack) {
 
-        removeMember(new CustomStackWrapper(itemStack));
+        removeMember(new CustomWrappedStack(itemStack));
     }
 
-    public void removeMember(CustomStackWrapper customStackWrapper) {
+    public void removeMember(CustomWrappedStack customStackWrapper) {
 
         while (containsMember(customStackWrapper)) {
             equivalentItems.remove(customStackWrapper);
@@ -71,7 +71,7 @@ public class EquivalencyGroup {
 
     public void clearMembers() {
 
-        equivalentItems = new ArrayList<CustomStackWrapper>();
+        equivalentItems = new ArrayList<CustomWrappedStack>();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class EquivalencyGroup {
         StringBuilder stringBuilder = new StringBuilder();
         
         stringBuilder.append("Equivalent Group Members: ");
-        for (CustomStackWrapper customStackWrapper : equivalentItems) {
+        for (CustomWrappedStack customStackWrapper : equivalentItems) {
             stringBuilder.append(String.format("%s ", customStackWrapper));
         }
 
@@ -104,7 +104,7 @@ public class EquivalencyGroup {
 
         int hashCode = 1;
 
-        for (CustomStackWrapper customStackWrapper : equivalentItems) {
+        for (CustomWrappedStack customStackWrapper : equivalentItems) {
             hashCode = 37 * hashCode + customStackWrapper.hashCode();
         }
 

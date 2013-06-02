@@ -18,19 +18,19 @@ import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.emc.graph.WeightedEdge;
-import com.pahimar.ee3.item.CustomStackWrapper;
+import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class DynEMC {
 
     private static DynEMC dynEMC = null;
 
-    private ArrayList<CustomStackWrapper> discoveredItems;
-    private WeightedDirectedGraph<CustomStackWrapper> graph;
+    private ArrayList<CustomWrappedStack> discoveredItems;
+    private WeightedDirectedGraph<CustomWrappedStack> graph;
 
     private DynEMC() {
 
-        discoveredItems = new ArrayList<CustomStackWrapper>();
-        graph = new WeightedDirectedGraph<CustomStackWrapper>();
+        discoveredItems = new ArrayList<CustomWrappedStack>();
+        graph = new WeightedDirectedGraph<CustomWrappedStack>();
 
         init();
     }
@@ -44,7 +44,7 @@ public class DynEMC {
         return dynEMC;
     }
 
-    public List<CustomStackWrapper> getDiscoveredItems() {
+    public List<CustomWrappedStack> getDiscoveredItems() {
 
         return discoveredItems;
     }
@@ -62,7 +62,7 @@ public class DynEMC {
          */
         for (String oreName : OreDictionary.getOreNames()) {
 
-            CustomStackWrapper customWrappedStack = new CustomStackWrapper(new OreStack(oreName));
+            CustomWrappedStack customWrappedStack = new CustomWrappedStack(new OreStack(oreName));
 
             if (!discoveredItems.contains(customWrappedStack)) {
                 discoveredItems.add(customWrappedStack);
@@ -75,17 +75,17 @@ public class DynEMC {
 
                 if (craftingResult != null) {
                     if (craftingResult.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                        CustomStackWrapper wrappedCraftingResult = new CustomStackWrapper(craftingResult);
+                        CustomWrappedStack wrappedCraftingResult = new CustomWrappedStack(craftingResult);
 
                         if (!discoveredItems.contains(wrappedCraftingResult)) {
                             discoveredItems.add(wrappedCraftingResult);
                         }
                     }
 
-                    for (CustomStackWrapper wrappedRecipeInput : RecipeHelper.getCollatedRecipeInputs((IRecipe) recipe)) {
+                    for (CustomWrappedStack wrappedRecipeInput : RecipeHelper.getCollatedRecipeInputs((IRecipe) recipe)) {
                         if ((wrappedRecipeInput.getItemStack() != null) && (wrappedRecipeInput.getItemStack().getItemDamage() == OreDictionary.WILDCARD_VALUE)) {
 
-                            wrappedRecipeInput.setWrappedStackSize(1);
+                            wrappedRecipeInput.setStackSize(1);
                             if (!discoveredItems.contains(wrappedRecipeInput)) {
                                 discoveredItems.add(wrappedRecipeInput);
                             }
@@ -109,7 +109,7 @@ public class DynEMC {
                     for (ItemStack itemStack : subItems) {
                         if (itemStack != null) {
 
-                            CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
+                            CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
 
                             if (!discoveredItems.contains(customStackWrapper)) {
                                 discoveredItems.add(customStackWrapper);
@@ -121,7 +121,7 @@ public class DynEMC {
 
                     ItemStack itemStack = new ItemStack(Item.itemsList[i]);
 
-                    CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
+                    CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
                     if (!discoveredItems.contains(customStackWrapper)) {
                         discoveredItems.add(customStackWrapper);
                     }
@@ -133,42 +133,41 @@ public class DynEMC {
          * Now that we have discovered as many items as possible, trim out the
          * items that are black listed
          */
-        for (CustomStackWrapper customStackWrapper : EmcBlackList.getInstance().getBlackListStacks()) {
+        for (CustomWrappedStack customStackWrapper : EmcBlackList.getInstance().getBlackListStacks()) {
 
             while (discoveredItems.contains(customStackWrapper)) {
                 discoveredItems.remove(customStackWrapper);
             }
         }
 
-        for (CustomStackWrapper customWrappedStack : discoveredItems) {
+        for (CustomWrappedStack customWrappedStack : discoveredItems) {
 
             if (!graph.nodeExists(customWrappedStack)) {
                 graph.addNode(customWrappedStack);
             }
         }
 
-        for (CustomStackWrapper customWrappedStack : discoveredItems) {
+        for (CustomWrappedStack customWrappedStack : discoveredItems) {
 
             ArrayList<IRecipe> recipes = RecipeHelper.getReverseRecipes(customWrappedStack);
 
             for (IRecipe recipe : recipes) {
 
-                ArrayList<CustomStackWrapper> recipeInputs = RecipeHelper.getCollatedRecipeInputs(recipe);
-
-                System.out.println(recipeInputs);
+                ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getCollatedRecipeInputs(recipe);
                 
-                for (CustomStackWrapper wrappedRecipeInput : recipeInputs) {
+                for (CustomWrappedStack wrappedRecipeInput : recipeInputs) {
 
                     if (wrappedRecipeInput.getItemStack() != null) {
                         ItemStack itemStack = wrappedRecipeInput.getItemStack();
+                        itemStack.stackSize = wrappedRecipeInput.getStackSize();
 
                         if (OreDictionary.getOreID(itemStack) != -1) {
-                            wrappedRecipeInput = new CustomStackWrapper(new OreStack(itemStack));
+                            wrappedRecipeInput = new CustomWrappedStack(new OreStack(itemStack));
                         }
                     }
 
-                    float weight = wrappedRecipeInput.getWrappedStackSize();
-                    wrappedRecipeInput.setWrappedStackSize(1);
+                    float weight = wrappedRecipeInput.getStackSize();
+                    wrappedRecipeInput.setStackSize(1);
 
                     try {
                         graph.addEdge(customWrappedStack, wrappedRecipeInput, weight);
@@ -187,9 +186,9 @@ public class DynEMC {
         StringBuilder stringBuilder = new StringBuilder();
         
         LogHelper.log(Level.INFO, "***** START NODES *****");
-        Iterator<CustomStackWrapper> nodeIter = graph.iterator();
+        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
-            CustomStackWrapper node = nodeIter.next();
+            CustomWrappedStack node = nodeIter.next();
             LogHelper.log(Level.INFO, "Node: " + node);
         }
         LogHelper.log(Level.INFO, "***** END NODES *****");
@@ -197,9 +196,9 @@ public class DynEMC {
         LogHelper.log(Level.INFO, "***** START EDGES FROM *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
-            CustomStackWrapper node = nodeIter.next();
-            Set<WeightedEdge<CustomStackWrapper>> edgesFrom = graph.edgesFrom(node);
-            for (WeightedEdge<CustomStackWrapper> edge : edgesFrom) {
+            CustomWrappedStack node = nodeIter.next();
+            Set<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
+            for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
                 LogHelper.log(Level.INFO, "Crafting Output: " + node);
                 LogHelper.log(Level.INFO, "Crafting Input: " + edge.getTarget());
                 LogHelper.log(Level.INFO, "Weight: " + edge.getWeight());

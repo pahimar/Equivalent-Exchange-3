@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.item.CustomStackWrapper;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
@@ -91,10 +91,9 @@ public class ItemUtil {
         return false;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static ArrayList<CustomStackWrapper> collateStacks(List<CustomStackWrapper> unCollatedStacks) {
+    public static ArrayList<CustomWrappedStack> collateStacks(List<CustomWrappedStack> unCollatedStacks) {
 
-        ArrayList collatedStacks = new ArrayList();
+        ArrayList<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
 
         for (int i = 0; i < unCollatedStacks.size(); i++) {
 
@@ -105,21 +104,15 @@ public class ItemUtil {
                 boolean found = false;
 
                 for (int j = 0; j < collatedStacks.size(); j++) {
-                    if ((unCollatedStacks.get(i) instanceof ItemStack) && (collatedStacks.get(j) instanceof ItemStack)) {
-                        ItemStack unCollatedStack = (ItemStack) unCollatedStacks.get(i);
-                        ItemStack collatedStack = (ItemStack) collatedStacks.get(j);
-
-                        if (compare(unCollatedStack, collatedStack)) {
-                            ((ItemStack) collatedStacks.get(j)).stackSize += 1;
+                    if (unCollatedStacks.get(i).getItemStack() != null && collatedStacks.get(j).getItemStack() != null) {
+                        if (compare(unCollatedStacks.get(i).getItemStack(), collatedStacks.get(j).getItemStack())) {
+                            collatedStacks.get(j).setStackSize(collatedStacks.get(j).getStackSize() + 1);
                             found = true;
                         }
                     }
-                    else if ((unCollatedStacks.get(i) instanceof OreStack) && (collatedStacks.get(j) instanceof OreStack)) {
-                        OreStack unCollatedStack = (OreStack) unCollatedStacks.get(i);
-                        OreStack collatedStack = (OreStack) collatedStacks.get(j);
-
-                        if (OreStack.compareStacks(unCollatedStack, collatedStack)) {
-                            ((OreStack) collatedStacks.get(j)).stackSize += 1;
+                    else if (unCollatedStacks.get(i).getOreStack() != null && collatedStacks.get(j).getOreStack() != null) {
+                        if (OreStack.compareStacks(unCollatedStacks.get(i).getOreStack(), collatedStacks.get(j).getOreStack())) {
+                            collatedStacks.get(j).setStackSize(collatedStacks.get(j).getStackSize() + 1);
                             found = true;
                         }
                     }

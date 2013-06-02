@@ -6,51 +6,42 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.OreStack;
 
-public class CustomStackWrapper {
+public class CustomWrappedStack {
 
+    private int stackSize;
     private ItemStack itemStack;
     private OreStack oreStack;
 
-    public CustomStackWrapper(ItemStack itemStack) {
+    public CustomWrappedStack(ItemStack itemStack) {
 
         this.itemStack = itemStack;
         this.oreStack = null;
+        stackSize = itemStack.stackSize;
 
         if (this.itemStack != null) {
             this.itemStack.stackSize = 1;
         }
     }
 
-    public CustomStackWrapper(OreStack oreStack) {
+    public CustomWrappedStack(OreStack oreStack) {
 
         this.itemStack = null;
         this.oreStack = oreStack;
+        stackSize = oreStack.stackSize;
 
         if (this.oreStack != null) {
             this.oreStack.stackSize = 1;
         }
     }
 
-    public int getWrappedStackSize() {
+    public int getStackSize() {
 
-        if (itemStack != null) {
-            return itemStack.stackSize;
-        }
-        else if (oreStack != null) {
-            return oreStack.stackSize;
-        }
-
-        return -1;
+        return stackSize;
     }
     
-    public void setWrappedStackSize(int stackSize) {
+    public void setStackSize(int stackSize) {
         
-        if (itemStack != null) {
-            itemStack.stackSize = stackSize;
-        }
-        else if (oreStack != null) {
-            oreStack.stackSize = stackSize;
-        }
+        this.stackSize = stackSize;
     }
 
     public ItemStack getItemStack() {
@@ -66,19 +57,19 @@ public class CustomStackWrapper {
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof CustomStackWrapper)) {
+        if (!(object instanceof CustomWrappedStack)) {
             return false;
         }
 
-        CustomStackWrapper customWrappedStack = (CustomStackWrapper) object;
+        CustomWrappedStack customWrappedStack = (CustomWrappedStack) object;
 
         if (itemStack != null) {
             if (customWrappedStack.itemStack != null) {
-                return ItemUtil.compare(this.itemStack, customWrappedStack.itemStack);
+                return (ItemUtil.compare(this.itemStack, customWrappedStack.itemStack) && stackSize == customWrappedStack.itemStack.stackSize);
             }
             else if (customWrappedStack.oreStack != null) {
                 for (ItemStack oreDictItemStack : OreDictionary.getOres(customWrappedStack.oreStack.oreName)) {
-                    if (ItemUtil.compare(itemStack, oreDictItemStack)) {
+                    if (ItemUtil.compare(itemStack, oreDictItemStack) && stackSize == oreDictItemStack.stackSize) {
                         return true;
                     }
                 }
@@ -87,13 +78,13 @@ public class CustomStackWrapper {
         else if (oreStack != null) {
             if (customWrappedStack.itemStack != null) {
                 for (ItemStack oreDictItemStack : OreDictionary.getOres(oreStack.oreName)) {
-                    if (ItemUtil.compare(customWrappedStack.itemStack, oreDictItemStack)) {
+                    if (ItemUtil.compare(customWrappedStack.itemStack, oreDictItemStack) && stackSize == oreDictItemStack.stackSize) {
                         return true;
                     }
                 }
             }
             else if (customWrappedStack.oreStack != null) {
-                return oreStack.equals(customWrappedStack.oreStack);
+                return (oreStack.equals(customWrappedStack.oreStack) && stackSize == oreStack.stackSize);
             }
         }
 
@@ -117,6 +108,8 @@ public class CustomStackWrapper {
     public int hashCode() {
 
         int hashCode = 1;
+        
+        hashCode = 37 * hashCode + stackSize;
 
         if (itemStack != null) {
             hashCode = 37 * hashCode + itemStack.itemID;
@@ -127,12 +120,10 @@ public class CustomStackWrapper {
             else {
                 hashCode = 37 * hashCode + itemStack.getItemDamage();
             }
-
-            hashCode = 37 * hashCode + itemStack.stackSize;
+            
             hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
         }
         else if (oreStack != null) {
-            hashCode = 37 * hashCode + oreStack.stackSize;
             hashCode = 37 * hashCode + oreStack.oreName.hashCode();
         }
 

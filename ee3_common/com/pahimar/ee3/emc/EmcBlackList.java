@@ -8,13 +8,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.item.CustomStackWrapper;
+import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcBlackList {
 
     private static EmcBlackList emcBlackList = null;
 
-    private ArrayList<CustomStackWrapper> stackBlackList = new ArrayList<CustomStackWrapper>();
+    private ArrayList<CustomWrappedStack> stackBlackList = new ArrayList<CustomWrappedStack>();
 
     private EmcBlackList() {
 
@@ -31,14 +31,14 @@ public class EmcBlackList {
         return emcBlackList;
     }
     
-    public List<CustomStackWrapper> getBlackListStacks() {
+    public List<CustomWrappedStack> getBlackListStacks() {
         
         return stackBlackList;
     }
 
     public void add(ItemStack itemStack) {
 
-        CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
+        CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
 
         if (!stackBlackList.contains(customStackWrapper)) {
             stackBlackList.add(customStackWrapper);
@@ -72,7 +72,7 @@ public class EmcBlackList {
             itemStack.stackSize = 1;
         }
 
-        return stackBlackList.contains(new CustomStackWrapper(itemStack));
+        return stackBlackList.contains(new CustomWrappedStack(itemStack));
     }
 
     public boolean contains(Item item) {
@@ -97,7 +97,7 @@ public class EmcBlackList {
 
     public void remove(ItemStack itemStack) {
 
-        CustomStackWrapper customStackWrapper = new CustomStackWrapper(itemStack);
+        CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
 
         while (stackBlackList.contains(customStackWrapper)) {
             stackBlackList.remove(customStackWrapper);
