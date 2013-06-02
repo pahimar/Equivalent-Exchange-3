@@ -11,7 +11,7 @@ public class CustomWrappedStack {
     private int stackSize;
     private ItemStack itemStack;
     private OreStack oreStack;
-
+    
     public CustomWrappedStack(ItemStack itemStack) {
 
         this.itemStack = itemStack;

@@ -157,23 +157,31 @@ public class DynEMC {
                 
                 for (CustomWrappedStack wrappedRecipeInput : recipeInputs) {
 
+                    float weight = wrappedRecipeInput.getStackSize();
+                    
+                    CustomWrappedStack recipeInput = null;
+                    
                     if (wrappedRecipeInput.getItemStack() != null) {
                         ItemStack itemStack = wrappedRecipeInput.getItemStack();
-                        itemStack.stackSize = wrappedRecipeInput.getStackSize();
 
                         if (OreDictionary.getOreID(itemStack) != -1) {
-                            wrappedRecipeInput = new CustomWrappedStack(new OreStack(itemStack));
+                            recipeInput = new CustomWrappedStack(new OreStack(itemStack));
+                        }
+                        else {
+                            recipeInput = new CustomWrappedStack(itemStack);
                         }
                     }
-
-                    float weight = wrappedRecipeInput.getStackSize();
-                    wrappedRecipeInput.setStackSize(1);
+                    else if (wrappedRecipeInput.getOreStack() != null) {
+                        recipeInput = new CustomWrappedStack(wrappedRecipeInput.getOreStack());
+                    }
 
                     try {
-                        graph.addEdge(customWrappedStack, wrappedRecipeInput, weight);
+                        if (recipeInput != null) {
+                            graph.addEdge(customWrappedStack, recipeInput, weight);
+                        }
                     }
                     catch (NoSuchElementException e) {
-                        LogHelper.log(Level.SEVERE, e.getMessage() + " from: [" + customWrappedStack + "], to: [" + wrappedRecipeInput + "]");
+                        LogHelper.log(Level.SEVERE, e.getMessage() + ";\nFrom: [" + customWrappedStack + "]\nTo: [" + wrappedRecipeInput + "]");
                     }
                 }
             }

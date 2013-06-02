@@ -11,8 +11,7 @@ package com.pahimar.ee3.lib;
  */
 public class Textures {
 
-    // Base file pathes
-    public static final String ITEM_TEXTURE_LOCATION = "/mods/ee3/textures/items/";
+    // Base file paths
     public static final String MODEL_SHEET_LOCATION = "/mods/ee3/textures/models/";
     public static final String ARMOR_SHEET_LOCATION = "/mods/ee3/textures/armor/";
     public static final String GUI_SHEET_LOCATION = "/mods/ee3/textures/gui/";
