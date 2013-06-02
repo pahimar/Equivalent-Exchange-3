@@ -119,17 +119,18 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         Set<WeightedEdge<T>> edgesTo = new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>() {
 
             public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
-
-                return orderedNodes.indexOf(o1.getTarget()) - orderedNodes.indexOf(o2.getTarget());
+                return o1.hashCode() - o2.hashCode();
             }
         });
 
         for (T node : graph.keySet()) {
-            Set<WeightedEdge<T>> edgesFrom = edgesFrom(node);
-
-            for (WeightedEdge<T> fromEdge : edgesFrom) {
-                if (fromEdge.getTarget().equals(to)) {
-                    edgesTo.add(fromEdge);
+            if (!node.equals(to)) {
+                Set<WeightedEdge<T>> edgesFrom = edgesFrom(node);
+    
+                for (WeightedEdge<T> fromEdge : edgesFrom) {
+                    if (fromEdge.getTarget().equals(to)) {
+                        edgesTo.add(new WeightedEdge<T>(fromEdge.getWeight(), node));
+                    }
                 }
             }
         }

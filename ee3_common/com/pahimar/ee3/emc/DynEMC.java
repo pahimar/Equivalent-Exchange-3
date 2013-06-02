@@ -207,19 +207,21 @@ public class DynEMC {
         }
         LogHelper.log(Level.INFO, "***** END EDGES FROM *****");
         
-//        LogHelper.log(Level.INFO, "***** START EDGES TO *****");
-//        nodeIter = graph.iterator();
-//        while (nodeIter.hasNext()) {
-//            CustomStackWrapper node = nodeIter.next();
-//            Set<WeightedEdge<CustomStackWrapper>> edgesTo = graph.edgesTo(node);
-//            for (WeightedEdge<CustomStackWrapper> edge : edgesTo) {
-//                LogHelper.log(Level.INFO, "From: " + node);
-//                LogHelper.log(Level.INFO, "To: " + edge.getTarget());
-//                LogHelper.log(Level.INFO, "Weight: " + edge.getWeight());
-//                LogHelper.log(Level.INFO, "");
-//            }
-//        }
-//        LogHelper.log(Level.INFO, "***** END EDGES TO *****");
+        LogHelper.log(Level.INFO, "***** START EDGES TO *****");
+        nodeIter = graph.iterator();
+        while (nodeIter.hasNext()) {
+            CustomWrappedStack node = nodeIter.next();
+            Set<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
+            Iterator<WeightedEdge<CustomWrappedStack>> edgeIter = edgesTo.iterator();
+            while (edgeIter.hasNext()) {
+                WeightedEdge<CustomWrappedStack> edge = edgeIter.next();
+                LogHelper.log(Level.INFO, "From: " + node);
+                LogHelper.log(Level.INFO, "To: " + edge.getTarget());
+                LogHelper.log(Level.INFO, "Weight: " + edge.getWeight());
+                LogHelper.log(Level.INFO, "");
+            }
+        }
+        LogHelper.log(Level.INFO, "***** END EDGES TO *****");
 
         return stringBuilder.toString();
     }
