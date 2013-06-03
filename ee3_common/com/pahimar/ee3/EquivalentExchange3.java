@@ -167,6 +167,7 @@ public class EquivalentExchange3 {
         // Initialize the Addon Handler
         AddonHandler.init();
         
-        DynEMC.getInstance().toString();
+        // Initialize the DynEMC system
+        DynEMC dynEMC = DynEMC.getInstance();
     }
 }

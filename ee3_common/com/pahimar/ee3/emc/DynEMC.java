@@ -52,6 +52,7 @@ public class DynEMC {
     private void init() {
 
         populateItemList();
+        populateGraph();
     }
 
     private void populateItemList() {
@@ -146,7 +147,10 @@ public class DynEMC {
                 graph.addNode(customWrappedStack);
             }
         }
-
+    }
+    
+    private void populateGraph() {
+        
         for (CustomWrappedStack customWrappedStack : discoveredItems) {
 
             ArrayList<IRecipe> recipes = RecipeHelper.getReverseRecipes(customWrappedStack);
@@ -189,6 +193,7 @@ public class DynEMC {
     }
 
     @Override
+    // TODO Make this an actual toString and take out the logging into a debug method
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
