@@ -119,6 +119,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         Set<WeightedEdge<T>> edgesTo = new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>() {
 
             public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
+
                 return o1.hashCode() - o2.hashCode();
             }
         });
@@ -126,7 +127,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         for (T node : graph.keySet()) {
             if (!node.equals(to)) {
                 Set<WeightedEdge<T>> edgesFrom = edgesFrom(node);
-    
+
                 for (WeightedEdge<T> fromEdge : edgesFrom) {
                     if (fromEdge.getTarget().equals(to)) {
                         edgesTo.add(new WeightedEdge<T>(fromEdge.getWeight(), node));
@@ -137,17 +138,17 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         return Collections.unmodifiableSet(edgesTo);
     }
-    
+
     public void removeNode(T node) {
-        
+
         if (!(graph.containsKey(node))) {
             throw new NoSuchElementException("Missing node from graph");
         }
-        
+
         // Remove all edges from and to the node
         removeAllEdgesFrom(node);
         removeAllEdgesTo(node);
-        
+
         // Remove the node
         graph.remove(node);
     }
@@ -174,7 +175,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         graph.get(node).clear();
     }
-    
+
     public void removeAllEdgesTo(T node) {
 
         if (!(graph.containsKey(node))) {

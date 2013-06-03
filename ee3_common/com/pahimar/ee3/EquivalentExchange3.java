@@ -149,7 +149,7 @@ public class EquivalentExchange3 {
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
-        
+
         // Load the Transmutation Stone recipes
         //RecipesTransmutationStone.init();
 
@@ -166,7 +166,7 @@ public class EquivalentExchange3 {
 
         // Initialize the Addon Handler
         AddonHandler.init();
-        
+
         // Initialize the DynEMC system
         DynEMC dynEMC = DynEMC.getInstance();
     }

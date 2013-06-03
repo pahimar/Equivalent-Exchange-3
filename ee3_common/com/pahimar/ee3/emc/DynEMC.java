@@ -56,6 +56,7 @@ public class DynEMC {
     }
 
     private void populateItemList() {
+
         ArrayList<ItemStack> subItems = new ArrayList<ItemStack>();
 
         /*
@@ -148,9 +149,9 @@ public class DynEMC {
             }
         }
     }
-    
+
     private void populateGraph() {
-        
+
         for (CustomWrappedStack customWrappedStack : discoveredItems) {
 
             ArrayList<IRecipe> recipes = RecipeHelper.getReverseRecipes(customWrappedStack);
@@ -158,13 +159,13 @@ public class DynEMC {
             for (IRecipe recipe : recipes) {
 
                 ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getCollatedRecipeInputs(recipe);
-                
+
                 for (CustomWrappedStack wrappedRecipeInput : recipeInputs) {
 
                     float weight = wrappedRecipeInput.getStackSize();
-                    
+
                     CustomWrappedStack recipeInput = null;
-                    
+
                     if (wrappedRecipeInput.getItemStack() != null) {
                         ItemStack itemStack = wrappedRecipeInput.getItemStack();
 
@@ -192,12 +193,60 @@ public class DynEMC {
         }
     }
 
-    @Override
-    // TODO Make this an actual toString and take out the logging into a debug method
-    public String toString() {
+    public int size() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        
+        return graph.size();
+    }
+
+    public List<CustomWrappedStack> getAllNodes() {
+
+        ArrayList<CustomWrappedStack> allNodes = new ArrayList<CustomWrappedStack>();
+
+        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
+
+        while (nodeIter.hasNext()) {
+            allNodes.add(nodeIter.next());
+        }
+
+        return allNodes;
+    }
+
+    public List<CustomWrappedStack> getCriticalNodes() {
+
+        ArrayList<CustomWrappedStack> criticalNodes = new ArrayList<CustomWrappedStack>();
+
+        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
+
+        while (nodeIter.hasNext()) {
+            CustomWrappedStack currentNode = nodeIter.next();
+
+            if (graph.edgesFrom(currentNode).size() == 0) {
+                criticalNodes.add(currentNode);
+            }
+        }
+
+        return criticalNodes;
+    }
+
+    public List<CustomWrappedStack> getOrphanNodes() {
+
+        ArrayList<CustomWrappedStack> criticalNodes = new ArrayList<CustomWrappedStack>();
+
+        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
+
+        while (nodeIter.hasNext()) {
+            CustomWrappedStack currentNode = nodeIter.next();
+
+            if ((graph.edgesFrom(currentNode).size() == 0) && (graph.edgesTo(currentNode).size() == 0)) {
+                criticalNodes.add(currentNode);
+            }
+        }
+
+        return criticalNodes;
+    }
+
+    public void printDebugDump() {
+
         LogHelper.log(Level.INFO, "***** START NODES *****");
         Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
@@ -205,7 +254,7 @@ public class DynEMC {
             LogHelper.log(Level.INFO, "Node: " + node);
         }
         LogHelper.log(Level.INFO, "***** END NODES *****");
-        
+
         LogHelper.log(Level.INFO, "***** START EDGES FROM *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
@@ -219,7 +268,7 @@ public class DynEMC {
             }
         }
         LogHelper.log(Level.INFO, "***** END EDGES FROM *****");
-        
+
         LogHelper.log(Level.INFO, "***** START EDGES TO *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
@@ -235,6 +284,14 @@ public class DynEMC {
             }
         }
         LogHelper.log(Level.INFO, "***** END EDGES TO *****");
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("DynEMC Node Count: %s", graph.size()));
 
         return stringBuilder.toString();
     }
