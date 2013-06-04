@@ -91,7 +91,7 @@ So you found a bug in pahimar's code?  Think you can make it more efficient?  Wa
 2. If you haven't already, create a Github account.
 3. Click the little branch/plus icon at the top-right of this page (below your username).
 4. Make the changes that you want to.
-5. Click `Pull Request` at the top-middle of the page (left of your fork's name, to the right of `Watch` and `Fork`).
+5. Click `Pull Request` at the top-middle of the page (right of your fork's name, to the left of `Watch` and `Fork`).
 6. Enter your PR's title, and create a detailed description telling pahimar what you changed.
 7. Click `Send pull request`, and you're done!
 
