@@ -15,6 +15,7 @@ import com.pahimar.ee3.core.handlers.AddonHandler;
 import com.pahimar.ee3.core.handlers.CraftingHandler;
 import com.pahimar.ee3.core.handlers.EntityLivingHandler;
 import com.pahimar.ee3.core.handlers.FuelHandler;
+import com.pahimar.ee3.core.handlers.InterModCommsHandler;
 import com.pahimar.ee3.core.handlers.ItemEventHandler;
 import com.pahimar.ee3.core.handlers.LocalizationHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
@@ -33,6 +34,7 @@ import com.pahimar.ee3.network.PacketHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
+import cpw.mods.fml.common.Mod.IMCCallback;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -41,6 +43,7 @@ import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -158,7 +161,6 @@ public class EquivalentExchange3 {
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());
-
     }
 
     @PostInit
@@ -169,5 +171,11 @@ public class EquivalentExchange3 {
 
         // Initialize the DynEMC system
         DynEMC dynEMC = DynEMC.getInstance();
+    }
+
+    @IMCCallback
+    public void handleIMCMessages(IMCEvent event) {
+
+        InterModCommsHandler.processIMCMessages(event);
     }
 }
