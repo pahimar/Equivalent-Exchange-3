@@ -10,12 +10,12 @@ import com.pahimar.ee3.core.util.LogHelper;
 
 /**
  * Equivalent-Exchange-3
- * 
+ *
  * EquivalencyHandler
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
+ *
  */
 public class EquivalencyHandler {
 
@@ -228,10 +228,10 @@ public class EquivalencyHandler {
     public boolean areWorldEquivalent(Object obj1, Object obj2) {
 
         ItemStack first = GeneralHelper.convertObjectToItemStack(obj1);
-        if (first == null)
+        if (first == null || first.getItem() == null)
             return false;
         ItemStack second = GeneralHelper.convertObjectToItemStack(obj2);
-        if (second == null)
+        if (second == null || second.getItem() == null)
             return false;
 
         if (getEquivalencyList(first.itemID, first.getItemDamage()) != null && getEquivalencyList(second.itemID, second.getItemDamage()) != null) {

@@ -6,18 +6,19 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
 
 /**
  * Equivalent-Exchange-3
- * 
+ *
  * TransmutationHelper
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
+ *
  */
 public class TransmutationHelper {
 
@@ -50,12 +51,12 @@ public class TransmutationHelper {
 
         Block currentBlock = Block.blocksList[id];
 
-        if (currentBlock != null) {
+        if (currentBlock != null && Item.itemsList[id] != null) {
             meta = currentBlock.damageDropped(meta);
-        
+
 
             currentBlockStack = new ItemStack(id, 1, meta);
-    
+
             if (previousBlockStack == null) {
                 previousBlockStack = currentBlockStack;
                 targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
