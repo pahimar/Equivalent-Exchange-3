@@ -55,7 +55,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
                 renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
-            case EQUIPPED_FIRST_PERSON: {
+            case FIRST_PERSON_MAP: {
                 renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
