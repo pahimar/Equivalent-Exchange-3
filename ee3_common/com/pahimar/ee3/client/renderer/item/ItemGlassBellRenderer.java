@@ -55,7 +55,7 @@ public class ItemGlassBellRenderer implements IItemRenderer {
                 renderGlassBell(-0.2F, -0.85F, 0.8F, 1.4F);
                 return;
             }
-            case EQUIPPED_FIRST_PERSON: {
+            case FIRST_PERSON_MAP: {
                 renderGlassBell(-0.2F, -0.85F, 0.8F, 1.4F);
                 return;
             }
