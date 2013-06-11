@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.handlers;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 
@@ -248,7 +247,7 @@ public class EquivalencyHandler {
 
         int i = 0;
         for (ArrayList<ItemStack> list : equivalencyList) {
-            LogHelper.log(Level.INFO, "equivalencyList[" + i + "]: " + list.toString());
+            LogHelper.info("equivalencyList[" + i + "]: " + list.toString());
             ++i;
         }
     }

@@ -38,10 +38,10 @@ public class EmcBlackList {
 
     public void add(ItemStack itemStack) {
 
-        CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
+        CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
 
-        if (!stackBlackList.contains(customStackWrapper)) {
-            stackBlackList.add(customStackWrapper);
+        if (!stackBlackList.contains(customWrappedStack)) {
+            stackBlackList.add(customWrappedStack);
         }
     }
 
@@ -97,10 +97,10 @@ public class EmcBlackList {
 
     public void remove(ItemStack itemStack) {
 
-        CustomWrappedStack customStackWrapper = new CustomWrappedStack(itemStack);
+        CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
 
-        while (stackBlackList.contains(customStackWrapper)) {
-            stackBlackList.remove(customStackWrapper);
+        while (stackBlackList.contains(customWrappedStack)) {
+            stackBlackList.remove(customWrappedStack);
         }
     }
 

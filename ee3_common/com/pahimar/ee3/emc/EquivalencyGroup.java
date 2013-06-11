@@ -35,9 +35,9 @@ public class EquivalencyGroup {
         return containsMember(new CustomWrappedStack(itemStack));
     }
 
-    public boolean containsMember(CustomWrappedStack customStackWrapper) {
+    public boolean containsMember(CustomWrappedStack customWrappedStack) {
 
-        return equivalentItems.contains(customStackWrapper);
+        return equivalentItems.contains(customWrappedStack);
     }
 
     public void addMember(ItemStack itemStack) {
@@ -45,10 +45,10 @@ public class EquivalencyGroup {
         this.addMember(new CustomWrappedStack(itemStack));
     }
 
-    public void addMember(CustomWrappedStack customStackWrapper) {
+    public void addMember(CustomWrappedStack customWrappedStack) {
 
-        if (!containsMember(customStackWrapper)) {
-            equivalentItems.add(customStackWrapper);
+        if (!containsMember(customWrappedStack)) {
+            equivalentItems.add(customWrappedStack);
         }
     }
     
@@ -62,10 +62,10 @@ public class EquivalencyGroup {
         removeMember(new CustomWrappedStack(itemStack));
     }
 
-    public void removeMember(CustomWrappedStack customStackWrapper) {
+    public void removeMember(CustomWrappedStack customWrappedStack) {
 
-        while (containsMember(customStackWrapper)) {
-            equivalentItems.remove(customStackWrapper);
+        while (containsMember(customWrappedStack)) {
+            equivalentItems.remove(customWrappedStack);
         }
     }
 
@@ -92,8 +92,8 @@ public class EquivalencyGroup {
         StringBuilder stringBuilder = new StringBuilder();
         
         stringBuilder.append("Equivalent Group Members: ");
-        for (CustomWrappedStack customStackWrapper : equivalentItems) {
-            stringBuilder.append(String.format("%s ", customStackWrapper));
+        for (CustomWrappedStack customWrappedStack : equivalentItems) {
+            stringBuilder.append(String.format("%s ", customWrappedStack));
         }
 
         return stringBuilder.toString();
@@ -104,8 +104,8 @@ public class EquivalencyGroup {
 
         int hashCode = 1;
 
-        for (CustomWrappedStack customStackWrapper : equivalentItems) {
-            hashCode = 37 * hashCode + customStackWrapper.hashCode();
+        for (CustomWrappedStack customWrappedStack : equivalentItems) {
+            hashCode = 37 * hashCode + customWrappedStack.hashCode();
         }
 
         return hashCode;

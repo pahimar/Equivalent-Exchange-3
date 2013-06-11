@@ -1,7 +1,5 @@
 package com.pahimar.ee3.core.addons;
 
-import java.util.logging.Level;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -35,10 +33,10 @@ public class AddonRedPower2 {
                     RecipeHelper.addRecipe(new ItemStack(rp2Stone.blockID, 1, 3), stone, Block.cobblestone, Block.cobblestone, Block.cobblestone, Block.cobblestone, Block.cobblestone, Block.cobblestone);
                 }
 
-                LogHelper.log(Level.INFO, "Loaded RP2 World addon");
+                LogHelper.info("Loaded RP2 World addon");
             }
             catch (Exception e) {
-                LogHelper.log(Level.SEVERE, "Could not load RP2 World addon");
+                LogHelper.severe("Could not load RP2 World addon");
                 e.printStackTrace(System.err);
             }
         }

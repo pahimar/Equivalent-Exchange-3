@@ -104,14 +104,14 @@ public class ItemUtil {
                 boolean found = false;
 
                 for (int j = 0; j < collatedStacks.size(); j++) {
-                    if (unCollatedStacks.get(i).getItemStack() != null && collatedStacks.get(j).getItemStack() != null) {
-                        if (compare(unCollatedStacks.get(i).getItemStack(), collatedStacks.get(j).getItemStack())) {
+                    if (unCollatedStacks.get(i).getWrappedStack() instanceof ItemStack && collatedStacks.get(j).getWrappedStack() instanceof ItemStack) {
+                        if (compare((ItemStack) unCollatedStacks.get(i).getWrappedStack(), (ItemStack) collatedStacks.get(j).getWrappedStack())) {
                             collatedStacks.get(j).setStackSize(collatedStacks.get(j).getStackSize() + 1);
                             found = true;
                         }
                     }
-                    else if (unCollatedStacks.get(i).getOreStack() != null && collatedStacks.get(j).getOreStack() != null) {
-                        if (OreStack.compareStacks(unCollatedStacks.get(i).getOreStack(), collatedStacks.get(j).getOreStack())) {
+                    else if (unCollatedStacks.get(i).getWrappedStack() instanceof OreStack && collatedStacks.get(j).getWrappedStack() instanceof OreStack) {
+                        if (OreStack.compareStacks((OreStack) unCollatedStacks.get(i).getWrappedStack(), (OreStack) collatedStacks.get(j).getWrappedStack())) {
                             collatedStacks.get(j).setStackSize(collatedStacks.get(j).getStackSize() + 1);
                             found = true;
                         }

@@ -43,15 +43,15 @@ public class CustomWrappedStack {
         
         this.stackSize = stackSize;
     }
-
-    public ItemStack getItemStack() {
-
-        return itemStack;
-    }
-
-    public OreStack getOreStack() {
-
-        return oreStack;
+    
+    public Object getWrappedStack() {
+        
+        if (itemStack != null) {
+            return itemStack;
+        }
+        else {
+            return oreStack;
+        }
     }
 
     @Override

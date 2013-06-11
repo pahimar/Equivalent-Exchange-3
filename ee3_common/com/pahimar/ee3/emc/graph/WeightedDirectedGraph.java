@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Level;
 
 import com.pahimar.ee3.core.util.LogHelper;
 
@@ -48,10 +47,10 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             if (!(graph.containsKey(from))) {
-                LogHelper.log(Level.SEVERE, "From node doesn't exist: " + from.toString());
+                LogHelper.severe("From node doesn't exist: " + from.toString());
             }
             if (!(graph.containsKey(to))) {
-                LogHelper.log(Level.SEVERE, "To node doesn't exist: " + to.toString());
+                LogHelper.severe("To node doesn't exist: " + to.toString());
             }
             throw new NoSuchElementException("Missing nodes from graph");
         }
@@ -83,12 +82,12 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             if (!(graph.containsKey(from))) {
-                LogHelper.log(Level.SEVERE, "From node doesn't exist: " + from.toString());
-                LogHelper.log(Level.SEVERE, "To node: " + to.toString());
+                LogHelper.severe("From node doesn't exist: " + from.toString());
+                LogHelper.severe("To node: " + to.toString());
             }
             if (!(graph.containsKey(to))) {
-                LogHelper.log(Level.SEVERE, "To node doesn't exist: " + to.toString());
-                LogHelper.log(Level.SEVERE, "From node: " + from.toString());
+                LogHelper.severe("To node doesn't exist: " + to.toString());
+                LogHelper.severe("From node: " + from.toString());
             }
             throw new NoSuchElementException("Missing nodes from graph");
         }

@@ -133,9 +133,13 @@ public class RecipeHelper {
         return ItemUtil.collateStacks(getRecipeInputs(recipe));
     }
     
-    public static ArrayList<IRecipe> getReverseRecipes(CustomWrappedStack customStackWrapper) {
+    public static ArrayList<IRecipe> getReverseRecipes(CustomWrappedStack customWrappedStack) {
         
-        return getReverseRecipes(customStackWrapper.getItemStack());
+        if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
+            return getReverseRecipes((ItemStack) customWrappedStack.getWrappedStack());
+        }
+
+        return new ArrayList<IRecipe>();
     }
 
     @SuppressWarnings("unchecked")

@@ -1,7 +1,6 @@
 package com.pahimar.ee3;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.CraftingManager;
@@ -78,7 +77,7 @@ public class EquivalentExchange3 {
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
         // Report (log) to the user that the version of Equivalent Exchange 3 they are using has been changed/tampered with
-        LogHelper.log(Level.SEVERE, Strings.INVALID_FINGERPRINT_MESSAGE);
+        LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
     }
 
     @ServerStarting
