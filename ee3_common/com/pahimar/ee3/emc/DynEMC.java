@@ -18,6 +18,7 @@ import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.emc.graph.WeightedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.crafting.RecipeManager;
 
 public class DynEMC {
 
@@ -49,56 +50,8 @@ public class DynEMC {
     }
 
     private void init() {
-        
-    }
 
-    /**
-     * Discovers all instances of ItemStacks with wild card meta values in the vanilla Crafting Manager
-     * @return A list of CustomWrappedStacks that contains all wild card meta ItemStacks in the vanilla Crafting Manager
-     */
-    private ArrayList<CustomWrappedStack> findWildCards() {
-        
-        ArrayList<CustomWrappedStack> wildCards = new ArrayList<CustomWrappedStack>();
-        
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            
-            if (recipe instanceof IRecipe) {
-                if (((IRecipe) recipe).getRecipeOutput() instanceof ItemStack) {
-                    CustomWrappedStack recipeOutput = new CustomWrappedStack(((IRecipe) recipe).getRecipeOutput());
-                    ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs((IRecipe) recipe);
-                    ItemStack itemStack = null;
-                    
-                    if (recipeOutput.getWrappedStack() instanceof ItemStack) {
-                        
-                        itemStack = (ItemStack) recipeOutput.getWrappedStack();
-                        
-                        if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && OreDictionary.getOreID(itemStack) == -1) {
-                            
-                            if (!wildCards.contains(recipeOutput)) {
-                                wildCards.add(recipeOutput);
-                            }
-                        }
-                    }
-                    
-                    for (CustomWrappedStack inputStack : recipeInputs) {
-                        
-                        if (inputStack.getWrappedStack() instanceof ItemStack) {
-                            
-                            itemStack = (ItemStack) inputStack.getWrappedStack();
-                            
-                            if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && OreDictionary.getOreID(itemStack) == -1) {
-                                
-                                if (!wildCards.contains(inputStack)) {
-                                    wildCards.add(inputStack);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        return wildCards;
+        RecipeManager recipeManager = RecipeManager.getInstance();
     }
 
     private void populateItemList() {
@@ -134,9 +87,9 @@ public class DynEMC {
                         if (wrappedRecipeInput.getWrappedStack() instanceof ItemStack) {
                             ItemStack wrappedItemStack = (ItemStack) wrappedRecipeInput.getWrappedStack();
                             if (wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                        
+
                                 wrappedRecipeInput.setStackSize(1);
-                                
+
                                 if (!discoveredItems.contains(wrappedRecipeInput)) {
                                     discoveredItems.add(wrappedRecipeInput);
                                 }

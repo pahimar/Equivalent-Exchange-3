@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -29,6 +30,52 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RecipeHelper {
 
     /**
+     * Discovers all instances of ItemStacks with wild card meta values in the vanilla Crafting Manager
+     * 
+     * @return A list of CustomWrappedStacks that contains all wild card meta ItemStacks in the vanilla Crafting Manager
+     */
+    public static ArrayList<CustomWrappedStack> discoverWildCards() {
+        
+        ArrayList<CustomWrappedStack> wildCards = new ArrayList<CustomWrappedStack>();
+        
+        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
+            
+            if (recipe instanceof IRecipe) {
+                
+                if (((IRecipe) recipe).getRecipeOutput() instanceof ItemStack) {
+                    
+                    CustomWrappedStack recipeOutput = new CustomWrappedStack(((IRecipe) recipe).getRecipeOutput());
+                    ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs((IRecipe) recipe);
+                    ItemStack itemStack = null;
+                    
+                    if (recipeOutput.getWrappedStack() instanceof ItemStack) {
+                        
+                        itemStack = (ItemStack) recipeOutput.getWrappedStack();
+                        
+                        if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(recipeOutput)) {
+                            wildCards.add(recipeOutput);
+                        }
+                    }
+                    
+                    for (CustomWrappedStack inputStack : recipeInputs) {
+                        
+                        if (inputStack.getWrappedStack() instanceof ItemStack) {
+                            
+                            itemStack = (ItemStack) inputStack.getWrappedStack();
+                            
+                            if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(inputStack)) {
+                                wildCards.add(inputStack);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return wildCards;
+    }
+    
+    /**
      * Returns a list of elements that constitute the input in a crafting recipe
      * 
      * @param recipe
@@ -40,15 +87,17 @@ public class RecipeHelper {
     public static ArrayList<CustomWrappedStack> getRecipeInputs(IRecipe recipe) {
 
         ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
+        ItemStack itemStack = null;
+        OreStack oreStack = null;
 
         if (recipe instanceof ShapedRecipes) {
 
             ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
 
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
-                if (shapedRecipe.recipeItems[i] != null) {
+                if (shapedRecipe.recipeItems[i] instanceof ItemStack) {
 
-                    ItemStack itemStack = shapedRecipe.recipeItems[i];
+                    itemStack = shapedRecipe.recipeItems[i];
                     itemStack.stackSize = 1;
 
                     recipeInputs.add(new CustomWrappedStack(itemStack));
@@ -62,7 +111,7 @@ public class RecipeHelper {
             for (Object object : shapelessRecipe.recipeItems) {
                 if (object instanceof ItemStack) {
 
-                    ItemStack itemStack = (ItemStack) object;
+                    itemStack = (ItemStack) object;
                     itemStack.stackSize = 1;
 
                     recipeInputs.add(new CustomWrappedStack(itemStack));
@@ -82,7 +131,7 @@ public class RecipeHelper {
 
                     if (!shapedOreRecipeList.isEmpty()) {
 
-                        OreStack oreStack = new OreStack((ItemStack) shapedOreRecipeList.get(0));
+                        oreStack = new OreStack((ItemStack) shapedOreRecipeList.get(0));
                         oreStack.stackSize = 1;
 
                         recipeInputs.add(new CustomWrappedStack(oreStack));
@@ -93,7 +142,7 @@ public class RecipeHelper {
                  */
                 else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
 
-                    ItemStack itemStack = (ItemStack) shapedOreRecipe.getInput()[i];
+                    itemStack = (ItemStack) shapedOreRecipe.getInput()[i];
                     itemStack.stackSize = 1;
 
                     recipeInputs.add(new CustomWrappedStack(itemStack));
@@ -110,14 +159,14 @@ public class RecipeHelper {
 
                     if (!shapelessOreRecipeList.isEmpty()) {
 
-                        OreStack oreStack = new OreStack((ItemStack) shapelessOreRecipeList.get(0));
+                        oreStack = new OreStack((ItemStack) shapelessOreRecipeList.get(0));
                         oreStack.stackSize = 1;
 
                         recipeInputs.add(new CustomWrappedStack(oreStack));
                     }
                 }
                 else if (object instanceof ItemStack) {
-                    ItemStack itemStack = (ItemStack) object;
+                    itemStack = (ItemStack) object;
                     itemStack.stackSize = 1;
 
                     recipeInputs.add(new CustomWrappedStack(itemStack));
