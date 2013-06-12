@@ -28,7 +28,7 @@
 	<entry key="container.alchemicalChest">Cofre Alquimico</entry>
 	<entry key="container.alchemicalBag">Bolsa Alquimico</entry>
 	<entry key="container.glassBell">Campana Virido</entry>
-	<entry key="itemGroup.EE3">Equivalente Cambio 3</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inicializando chequeo de versión contra el archivo autoritario remoto, ubicado en</entry>
 	<entry key="version.uninitialized">El chequeo de versiones no se iniicalizó adecuadamente</entry>
 	<entry key="version.current">Actualmente estás usando la versión de Equivalent Exchange 3 (@REMOTE_MOD_VERSION) más actualizada para @MINECRAFT_VERSION@</entry>
