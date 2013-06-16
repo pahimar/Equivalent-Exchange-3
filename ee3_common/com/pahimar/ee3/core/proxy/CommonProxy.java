@@ -83,9 +83,9 @@ public class CommonProxy implements IGuiHandler {
     public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
     }
-    
+
     public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
-        
+
     }
 
     @Override

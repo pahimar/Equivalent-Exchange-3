@@ -29,12 +29,12 @@
 	<entry key="container.alchemicalBag">Alkeminen pussi</entry>
 	<entry key="container.glassBell">Lasitiuku</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
-	<entry key="version.init_log_message">Alustetaaan etäversion tarkistusta palvelimeen kohteessa</entry>
-	<entry key="version.uninitialized">Etäversion tarkistusta ei pystytty alustamaan</entry>
+	<entry key="version.init_log_message">Aloitetaan etäversion tarkistusta kohteesta</entry>
+	<entry key="version.uninitialized">Etäversion tarkistuksen aloittaminen epäonnistui</entry>
 	<entry key="version.current">Käytät tällä hetkellä uusinta (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 -versiota, joka on tarkoitettu Minecraft @MINECRAFT_VERSION@:lle</entry>
 	<entry key="version.outdated">Uusi @MOD_NAME@ versio on saatavilla (@REMOTE_MOD_VERSION@) Minecraftin versiolle @MINECRAFT_VERSION@. Lataa se täältä: @MOD_UPDATE_LOCATION@</entry>
-	<entry key="version.general_error">Virhe yhdistettäessä etäversiopalvelimeen; yritetään uudelleen</entry>
-	<entry key="version.final_error">Version tarkistus pysäytetään kolmen epäonnistuneen yrityksen jälkeen</entry>
+	<entry key="version.general_error">Tapahtui virhe yhdistettäessä etäversion palvelimeen; yritetään uudelleen</entry>
+	<entry key="version.final_error">Version tarkistus lopetettu kolmen epäonnistuneen yrityksen jälkeen</entry>
 	<entry key="version.mc_version_not_found">@MOD_NAME@:a @MINECRAFT_VERSION@:lle ei löytynyt</entry>
 	<entry key="command.ee3.overlay.turned_on">Kohdistetun transmutoinnin peitevalikko käytössä</entry>
 	<entry key="command.ee3.overlay.turned_off">Kohdistetun transmutoinnin peitevalikko poissa käytössä</entry>

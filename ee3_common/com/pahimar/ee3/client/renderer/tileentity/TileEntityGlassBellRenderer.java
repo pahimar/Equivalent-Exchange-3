@@ -53,7 +53,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
 
         if (tileEntity instanceof TileGlassBell) {
             TileGlassBell tileGlassBell = (TileGlassBell) tileEntity;
-            
+
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
 
@@ -76,35 +76,32 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
              * Render the ghost item inside of the Glass Bell, slowly spinning
              */
             GL11.glPushMatrix();
-            
-            for (int i = 0; i < tileGlassBell.getSizeInventory(); i++) {
-                
-                if (tileGlassBell.getStackInSlot(i) != null) {
-                    
-                    float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(i));
-                    float rotationAngle = (float) (720.0 * (double) (System.currentTimeMillis() & 0x3FFFL) / (double) 0x3FFFL);
-                    
-                    EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
-                    ghostEntityItem.hoverStart = 0.0F;
-                    ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(i));
 
-                    translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
-                    GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
-                    GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-                    
-                    customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
-                }
+            if (tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX) != null) {
+
+                float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
+                float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
+                EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
+                ghostEntityItem.hoverStart = 0.0F;
+                ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
+
+                translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
+                GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+                GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
+
+                customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
             }
-            
+
             GL11.glPopMatrix();
 
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_LIGHTING);
         }
     }
-    
+
     private void renderGlassBellByOrientation(double x, double y, double z, ForgeDirection forgeDirection) {
-        
+
         switch (forgeDirection) {
             case DOWN: {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
@@ -151,9 +148,9 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
             }
         }
     }
-    
+
     private void translateGhostItemByOrientation(ItemStack ghostItemStack, double x, double y, double z, ForgeDirection forgeDirection) {
-        
+
         if (ghostItemStack != null) {
             if (ghostItemStack.getItem() instanceof ItemBlock) {
                 switch (forgeDirection) {
@@ -225,32 +222,44 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
             }
         }
     }
-    
+
     private float getGhostItemScaleFactor(ItemStack itemStack) {
+
         float scaleFactor = 1.0F;
-        
+
         if (itemStack != null) {
             if (itemStack.getItem() instanceof ItemBlock) {
                 switch (customRenderItem.getMiniBlockCount(itemStack)) {
-                    case 1: return 0.90F;
-                    case 2: return 0.90F;
-                    case 3: return 0.90F;
-                    case 4: return 0.90F;
-                    case 5: return 0.80F;
-                    default: return 0.90F;
+                    case 1:
+                        return 0.90F;
+                    case 2:
+                        return 0.90F;
+                    case 3:
+                        return 0.90F;
+                    case 4:
+                        return 0.90F;
+                    case 5:
+                        return 0.80F;
+                    default:
+                        return 0.90F;
                 }
             }
             else {
                 switch (customRenderItem.getMiniItemCount(itemStack)) {
-                    case 1: return 0.65F;
-                    case 2: return 0.65F;
-                    case 3: return 0.65F;
-                    case 4: return 0.65F;
-                    default: return 0.65F;
+                    case 1:
+                        return 0.65F;
+                    case 2:
+                        return 0.65F;
+                    case 3:
+                        return 0.65F;
+                    case 4:
+                        return 0.65F;
+                    default:
+                        return 0.65F;
                 }
             }
         }
-        
+
         return scaleFactor;
     }
 }

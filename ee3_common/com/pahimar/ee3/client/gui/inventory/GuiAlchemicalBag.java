@@ -7,7 +7,7 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;

@@ -1,9 +1,8 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.util;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import net.minecraftforge.common.Configuration;
 
@@ -114,21 +113,19 @@ public class VersionHelper implements Runnable {
 
         String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
 
-        if (versionTokens.length >= 1) {
+        if (versionTokens.length >= 1)
             return versionTokens[0];
-        }
-        else {
+        else
             return Reference.VERSION_NUMBER;
-        }
     }
 
     public static void logResult() {
 
         if (result == CURRENT || result == OUTDATED) {
-            LogHelper.log(Level.INFO, getResultMessage());
+            LogHelper.info(getResultMessage());
         }
         else {
-            LogHelper.log(Level.WARNING, getResultMessage());
+            LogHelper.warning(getResultMessage());
         }
     }
 
@@ -194,7 +191,7 @@ public class VersionHelper implements Runnable {
 
         int count = 0;
 
-        LogHelper.log(Level.INFO, LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
+        LogHelper.info(LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
 
         try {
             while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR)) {

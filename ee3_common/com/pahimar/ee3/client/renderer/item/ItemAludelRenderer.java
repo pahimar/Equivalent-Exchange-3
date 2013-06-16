@@ -55,6 +55,10 @@ public class ItemAludelRenderer implements IItemRenderer {
                 renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
+                return;
+            }
             case INVENTORY: {
                 renderAludel(-1.0F, -0.9F, 0.0F, 1.0F);
                 return;

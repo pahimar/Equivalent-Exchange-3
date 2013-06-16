@@ -43,7 +43,7 @@ public abstract class BlockEE extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
-        
+
         int direction = 0;
         int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 

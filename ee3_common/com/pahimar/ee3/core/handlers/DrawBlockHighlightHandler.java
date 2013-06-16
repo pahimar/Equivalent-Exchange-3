@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Textures;
@@ -39,7 +39,7 @@ public class DrawBlockHighlightHandler {
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
-        
+
         if (event.currentItem != null) {
             if (event.currentItem.getItem() instanceof ITransmutationStone) {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {

@@ -6,7 +6,7 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**

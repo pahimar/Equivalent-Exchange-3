@@ -21,12 +21,13 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.KeyBindingHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.ItemUtil;
+import com.pahimar.ee3.core.util.KeyBindingUtil;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
@@ -76,8 +77,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void setKeyBinding(String name, int value) {
 
-        KeyBindingHelper.addKeyBinding(name, value);
-        KeyBindingHelper.addIsRepeating(false);
+        KeyBindingUtil.addKeyBinding(name, value);
+        KeyBindingUtil.addIsRepeating(false);
     }
 
     @Override
@@ -130,21 +131,35 @@ public class ClientProxy extends CommonProxy {
             }
         }
     }
-    
+
     @Override
     public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
-        
-        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
-        
+
+        World world = FMLClientHandler.instance().getClient().theWorld;
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
         this.handleTileEntityPacket(x, y, z, orientation, state, customName);
-        
+
         if (tileEntity != null) {
             if (tileEntity instanceof TileGlassBell) {
-                
+
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-                ItemHelper.setColor(itemStack, color);
-                
-                ((TileGlassBell) tileEntity).setInventorySlotContents(0, itemStack);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemUtil.setColor(itemStack, color);
+                }
+
+                ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
+                world.updateAllLightTypes(x, y, z);
+            }
+            else if (tileEntity instanceof TileAludel) {
+
+                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemUtil.setColor(itemStack, color);
+                }
+
+                ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
+                world.updateAllLightTypes(x, y, z);
             }
         }
     }

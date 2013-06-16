@@ -4,8 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 
+import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 
 /**
  * Equivalent-Exchange-3
@@ -23,11 +27,11 @@ public class TileAludel extends TileEE implements IInventory {
      */
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 4;
+    public static final int INVENTORY_SIZE = 4;
 
-    public static final int INPUT_INVENTORY_INDEX = 0;
-    public static final int DUST_INVENTORY_INDEX = 1;
-    public static final int FUEL_INVENTORY_INDEX = 2;
+    public static final int FUEL_INVENTORY_INDEX = 0;
+    public static final int INPUT_INVENTORY_INDEX = 1;
+    public static final int DUST_INVENTORY_INDEX = 2;
     public static final int OUTPUT_INVENTORY_INDEX = 3;
 
     public TileAludel() {
@@ -152,5 +156,51 @@ public class TileAludel extends TileEE implements IInventory {
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 
         return true;
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+
+        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
+
+        if (itemStack != null && itemStack.stackSize > 0)
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemUtil.getColor(itemStack)));
+        else
+            return super.getDescriptionPacket();
+    }
+
+    @Override
+    public void onInventoryChanged() {
+
+        worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+
+        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell) {
+            worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
+        }
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.toString());
+
+        stringBuilder.append("TileAludel Data - ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
+            if (inventory[i] != null) {
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
+            }
+            else {
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
+            }
+        }
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 }
