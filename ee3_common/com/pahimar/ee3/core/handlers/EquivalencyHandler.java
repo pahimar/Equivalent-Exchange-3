@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.GeneralHelper;
+import com.pahimar.ee3.core.util.GeneralHelper;
+import com.pahimar.ee3.core.util.LogHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -246,7 +247,7 @@ public class EquivalencyHandler {
 
         int i = 0;
         for (ArrayList<ItemStack> list : equivalencyList) {
-            System.out.println("equivalencyList[" + i + "]: " + list.toString());
+            LogHelper.info("equivalencyList[" + i + "]: " + list.toString());
             ++i;
         }
     }

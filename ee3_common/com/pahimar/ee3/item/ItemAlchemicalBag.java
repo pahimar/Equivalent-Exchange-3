@@ -8,7 +8,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.ItemUtil;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Reference;
@@ -113,20 +114,12 @@ public class ItemAlchemicalBag extends ItemEE {
 
     public boolean hasColor(ItemStack itemStack) {
 
-        return !itemStack.hasTagCompound() ? false : !itemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) ? false : itemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR);
+        return ItemUtil.hasColor(itemStack);
     }
 
     public int getColor(ItemStack itemStack) {
 
-        NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
-
-        if (nbtTagCompound == null)
-            return Integer.parseInt(Colours.PURE_WHITE, 16);
-        else {
-
-            NBTTagCompound displayTagCompound = nbtTagCompound.getCompoundTag(Strings.NBT_ITEM_DISPLAY);
-            return displayTagCompound == null ? Integer.parseInt(Colours.PURE_WHITE, 16) : displayTagCompound.hasKey(Strings.NBT_ITEM_COLOR) ? displayTagCompound.getInteger(Strings.NBT_ITEM_COLOR) : Integer.parseInt(Colours.PURE_WHITE, 16);
-        }
+        return ItemUtil.getColor(itemStack);
     }
 
     public void setColor(ItemStack itemStack, int color) {
@@ -136,22 +129,7 @@ public class ItemAlchemicalBag extends ItemEE {
                 // TODO Localize
                 throw new UnsupportedOperationException("Can\'t dye non-bags!");
             else {
-
-                NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
-
-                if (nbtTagCompound == null) {
-
-                    nbtTagCompound = new NBTTagCompound();
-                    itemStack.setTagCompound(nbtTagCompound);
-                }
-
-                NBTTagCompound colourTagCompound = nbtTagCompound.getCompoundTag(Strings.NBT_ITEM_DISPLAY);
-
-                if (!nbtTagCompound.hasKey(Strings.NBT_ITEM_DISPLAY)) {
-                    nbtTagCompound.setCompoundTag(Strings.NBT_ITEM_DISPLAY, colourTagCompound);
-                }
-
-                colourTagCompound.setInteger(Strings.NBT_ITEM_COLOR, color);
+                ItemUtil.setColor(itemStack, color);
             }
         }
     }

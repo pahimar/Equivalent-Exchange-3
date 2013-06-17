@@ -23,9 +23,15 @@ public class TileCalcinator extends TileEE implements IInventory {
      */
     private ItemStack[] inventory;
 
+    public static final int INVENTORY_SIZE = 3;
+
+    public static final int FUEL_INVENTORY_INDEX = 0;
+    public static final int INPUT_INVENTORY_INDEX = 1;
+    public static final int OUTPUT_INVENTORY_INDEX = 2;
+
     public TileCalcinator() {
 
-        inventory = new ItemStack[3];
+        inventory = new ItemStack[INVENTORY_SIZE];
     }
 
     /**
@@ -151,5 +157,30 @@ public class TileCalcinator extends TileEE implements IInventory {
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.toString());
+
+        stringBuilder.append("TileCalcinator Data - ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
+            if (inventory[i] != null) {
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
+            }
+            else {
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
+            }
+        }
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 }

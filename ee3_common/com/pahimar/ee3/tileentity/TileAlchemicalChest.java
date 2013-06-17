@@ -33,7 +33,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     /** Server sync counter (once per 20 ticks) */
     private int ticksSinceSync;
 
-    private final int INVENTORY_SIZE = 13 * 4;
+    public static final int INVENTORY_SIZE = 13 * 4;
 
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical
@@ -239,5 +239,30 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     public boolean isStackValidForSlot(int side, ItemStack itemStack) {
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.toString());
+
+        stringBuilder.append("TileAlchemicalChest Data - ");
+        for (int i = 0; i < inventory.length; i++) {
+            if (i != 0) {
+                stringBuilder.append(", ");
+            }
+
+            if (inventory[i] != null) {
+                stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
+            }
+            else {
+                stringBuilder.append(String.format("inventory[%d]: empty", i));
+            }
+        }
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.command.WrongUsageException;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.LocalizationHelper;
+import com.pahimar.ee3.core.util.LocalizationUtil;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.lib.Strings;
@@ -45,13 +45,13 @@ public class CommandParticles {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = true;
         ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.TRUE);
-        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationHelper.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_ON));
+        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationUtil.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_ON));
     }
 
     private static void processOffCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = false;
         ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.FALSE);
-        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationHelper.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_OFF));
+        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationUtil.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_OFF));
     }
 }

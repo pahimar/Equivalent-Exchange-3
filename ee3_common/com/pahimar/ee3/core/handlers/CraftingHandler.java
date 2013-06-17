@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.common.ICraftingHandler;
@@ -26,7 +26,6 @@ public class CraftingHandler implements ICraftingHandler {
 
         if (player.worldObj.isRemote) {
             doPortableCrafting(player, craftMatrix);
-            System.out.println(item.toString());
         }
     }
 

@@ -25,8 +25,7 @@ public class PacketTileUpdate extends PacketEE {
 
     public int x, y, z;
     public byte orientation;
-    public short state;
-    public String owner;
+    public byte state;
     public String customName;
 
     public PacketTileUpdate() {
@@ -34,7 +33,7 @@ public class PacketTileUpdate extends PacketEE {
         super(PacketTypeHandler.TILE, true);
     }
 
-    public PacketTileUpdate(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
+    public PacketTileUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
         super(PacketTypeHandler.TILE, true);
         this.x = x;
@@ -42,7 +41,6 @@ public class PacketTileUpdate extends PacketEE {
         this.z = z;
         this.orientation = (byte) orientation.ordinal();
         this.state = state;
-        this.owner = owner;
         this.customName = customName;
     }
 
@@ -53,8 +51,7 @@ public class PacketTileUpdate extends PacketEE {
         data.writeInt(y);
         data.writeInt(z);
         data.writeByte(orientation);
-        data.writeShort(state);
-        data.writeUTF(owner);
+        data.writeByte(state);
         data.writeUTF(customName);
     }
 
@@ -65,15 +62,14 @@ public class PacketTileUpdate extends PacketEE {
         y = data.readInt();
         z = data.readInt();
         orientation = data.readByte();
-        state = data.readShort();
-        owner = data.readUTF();
+        state = data.readByte();
         customName = data.readUTF();
     }
 
     @Override
     public void execute(INetworkManager manager, Player player) {
 
-        EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, owner, customName);
+        EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName);
     }
 
 }

@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.NBTHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.NBTHelper;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 
@@ -63,9 +63,14 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public ItemStack getContainerItemStack(ItemStack itemStack) {
 
-        itemStack.setItemDamage(itemStack.getItemDamage() + 1);
+        ItemStack copiedStack = itemStack.copy();
+        
+        copiedStack.setItemDamage(copiedStack.getItemDamage() + 1);
+        
+        // Hacky hacky hack hack
+        copiedStack.stackSize = 1; 
 
-        return itemStack;
+        return copiedStack;
     }
 
     @Override

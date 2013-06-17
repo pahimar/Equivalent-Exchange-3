@@ -24,11 +24,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemCalcinatorRenderer implements IItemRenderer {
 
-    private ModelCalcinator calcinatorModel;
+    private ModelCalcinator modelCalcinator;
 
     public ItemCalcinatorRenderer() {
 
-        calcinatorModel = new ModelCalcinator();
+        modelCalcinator = new ModelCalcinator();
     }
 
     @Override
@@ -55,6 +55,10 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
                 renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
+                return;
+            }
             case INVENTORY: {
                 renderCalcinator(0.0F, -0.1F, 1.0F, 1.0F);
                 return;
@@ -78,7 +82,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
 
         // Render
-        calcinatorModel.render();
+        modelCalcinator.render();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

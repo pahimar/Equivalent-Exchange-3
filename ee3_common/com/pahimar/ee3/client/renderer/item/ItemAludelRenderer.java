@@ -24,11 +24,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemAludelRenderer implements IItemRenderer {
 
-    private ModelAludel aludelModel;
+    private ModelAludel modelAludel;
 
     public ItemAludelRenderer() {
 
-        aludelModel = new ModelAludel();
+        modelAludel = new ModelAludel();
     }
 
     @Override
@@ -48,15 +48,19 @@ public class ItemAludelRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
-                renderAludel(-0.5F, 0.0F, 0.5F, 0.66F);
+                renderAludel(-0.5F, -0.38F, 0.5F, 1.0F);
                 return;
             }
             case EQUIPPED: {
-                renderAludel(0.5F, 0.0F, 1.25F, 0.66F);
+                renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
+                return;
+            }
+            case EQUIPPED_FIRST_PERSON: {
+                renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
             case INVENTORY: {
-                renderAludel(-1.0F, -1.2F, 0.0F, 0.85F);
+                renderAludel(-1.0F, -0.9F, 0.0F, 1.0F);
                 return;
             }
             default:
@@ -78,7 +82,7 @@ public class ItemAludelRenderer implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
 
         // Render
-        aludelModel.render();
+        modelAludel.render();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

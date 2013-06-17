@@ -13,17 +13,21 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
-import com.pahimar.ee3.core.helper.KeyBindingHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.ItemUtil;
+import com.pahimar.ee3.core.util.KeyBindingUtil;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
@@ -31,6 +35,7 @@ import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileEE;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -72,8 +77,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void setKeyBinding(String name, int value) {
 
-        KeyBindingHelper.addKeyBinding(name, value);
-        KeyBindingHelper.addIsRepeating(false);
+        KeyBindingUtil.addKeyBinding(name, value);
+        KeyBindingUtil.addIsRepeating(false);
     }
 
     @Override
@@ -88,20 +93,23 @@ public class ClientProxy extends CommonProxy {
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.glassBellId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
     }
 
     @Override
-    public void initTileEntities() {
+    public void registerTileEntities() {
 
-        super.initTileEntities();
+        super.registerTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
     }
 
     @Override
@@ -111,7 +119,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
 
@@ -119,8 +127,39 @@ public class ClientProxy extends CommonProxy {
             if (tileEntity instanceof TileEE) {
                 ((TileEE) tileEntity).setOrientation(orientation);
                 ((TileEE) tileEntity).setState(state);
-                ((TileEE) tileEntity).setOwner(owner);
                 ((TileEE) tileEntity).setCustomName(customName);
+            }
+        }
+    }
+
+    @Override
+    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color) {
+
+        World world = FMLClientHandler.instance().getClient().theWorld;
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+        this.handleTileEntityPacket(x, y, z, orientation, state, customName);
+
+        if (tileEntity != null) {
+            if (tileEntity instanceof TileGlassBell) {
+
+                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemUtil.setColor(itemStack, color);
+                }
+
+                ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
+                world.updateAllLightTypes(x, y, z);
+            }
+            else if (tileEntity instanceof TileAludel) {
+
+                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
+                    ItemUtil.setColor(itemStack, color);
+                }
+
+                ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
+                world.updateAllLightTypes(x, y, z);
             }
         }
     }

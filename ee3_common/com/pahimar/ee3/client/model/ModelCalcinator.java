@@ -1,16 +1,10 @@
 package com.pahimar.ee3.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
-import org.lwjgl.opengl.GL11;
-
 import com.pahimar.ee3.lib.Models;
-import com.pahimar.ee3.lib.Textures;
-import com.pahimar.ee3.tileentity.TileCalcinator;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -24,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ModelCalcinator extends ModelBase {
+public class ModelCalcinator {
 
     private IModelCustom modelCalcinator;
 
@@ -38,25 +32,8 @@ public class ModelCalcinator extends ModelBase {
         modelCalcinator.renderAll();
     }
 
-    public void render(TileCalcinator calcinator, double x, double y, double z) {
+    public void renderPart(String partName) {
 
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
-
-        // Scale, Translate, Rotate
-        GL11.glScalef(1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
-        GL11.glRotatef(45F, 0F, 1F, 0F);
-        GL11.glRotatef(-90F, 1F, 0F, 0F);
-
-        // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
-
-        // Render
-        this.render();
-
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
+        modelCalcinator.renderPart(partName);
     }
-
 }

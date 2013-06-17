@@ -35,7 +35,7 @@ public abstract class BlockEE extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
 
-        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName2());
     }
 
     /**
@@ -66,7 +66,6 @@ public abstract class BlockEE extends BlockContainer {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
 
-        ((TileEE) world.getBlockTileEntity(x, y, z)).setOwner(entityLiving.getEntityName());
         ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
     }
 }
