@@ -35,6 +35,11 @@ public class LogHelper {
         log(Level.SEVERE, message);
     }
     
+    public static void debug(String message) {
+        
+        log(Level.WARNING, "[DEBUG] " + message);
+    }
+    
     public static void warning(String message) {
         
         log(Level.WARNING, message);

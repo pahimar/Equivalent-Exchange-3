@@ -169,6 +169,7 @@ public class EquivalentExchange3 {
         AddonHandler.init();
 
         // Initialize the DynEMC system
+        @SuppressWarnings("unused")
         DynEMC dynEMC = DynEMC.getInstance();
     }
 

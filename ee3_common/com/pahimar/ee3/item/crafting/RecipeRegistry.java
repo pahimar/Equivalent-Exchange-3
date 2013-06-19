@@ -4,34 +4,39 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.core.util.LogHelper;
+import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
-public class RecipeManager {
+public class RecipeRegistry {
 
-    private static RecipeManager recipeManager = null;
+    private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMap;
 
-    private List<CustomWrappedStack> wildCardStacks;
+    @SuppressWarnings("unused")
+    private List<CustomWrappedStack> wildCardList;
 
-    private RecipeManager() {
+    private RecipeRegistry() {
 
         recipeMap = HashMultimap.create();
-        wildCardStacks = RecipeHelper.discoverWildCards();
+        wildCardList = RecipeHelper.populateWildCards();
     }
 
-    public static RecipeManager getInstance() {
+    public static RecipeRegistry getInstance() {
 
-        if (recipeManager == null) {
-            recipeManager = new RecipeManager();
+        if (recipeRegistry == null) {
+            recipeRegistry = new RecipeRegistry();
         }
 
-        return recipeManager;
+        return recipeRegistry;
     }
 
     public boolean hasRecipe(CustomWrappedStack customWrappedStack) {
@@ -68,9 +73,10 @@ public class RecipeManager {
 
     public void addRecipe(CustomWrappedStack recipeOutput, List<?> recipeInputs) {
 
+        @SuppressWarnings("unused")
         ArrayList<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
 
-        CustomWrappedStack wrappedInput = null;
+        CustomWrappedStack wrappedInputStack = null;
 
         /**
          * For every input in the input list, check to see if we have discovered
@@ -79,6 +85,24 @@ public class RecipeManager {
          */
         for (Object object : recipeInputs) {
 
+            if (object instanceof ItemStack || object instanceof OreStack) {
+                wrappedInputStack = new CustomWrappedStack(object);
+            }
+            else if (object instanceof CustomWrappedStack) {
+                wrappedInputStack = (CustomWrappedStack) object;
+            }
+            
+            LogHelper.warning(wrappedInputStack.toString());
+        }
+    }
+    
+    // TODO Temporary for testing, remove this later
+    static {
+        CustomWrappedStack recipeOutput = new CustomWrappedStack(new ItemStack(Item.stick));
+        List<IRecipe> recipes = RecipeHelper.getReverseRecipes(recipeOutput);
+
+        for (IRecipe recipe : recipes) {
+            recipeRegistry.addRecipe(recipeOutput, RecipeHelper.getRecipeInputs(recipe));
         }
     }
 }

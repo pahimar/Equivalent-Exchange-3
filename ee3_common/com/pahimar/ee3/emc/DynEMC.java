@@ -18,7 +18,7 @@ import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.emc.graph.WeightedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
-import com.pahimar.ee3.item.crafting.RecipeManager;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
 public class DynEMC {
 
@@ -51,7 +51,7 @@ public class DynEMC {
 
     private void init() {
 
-        RecipeManager recipeManager = RecipeManager.getInstance();
+        RecipeRegistry recipeManager = RecipeRegistry.getInstance();
     }
 
     private void populateItemList() {
@@ -250,29 +250,29 @@ public class DynEMC {
 
     public void printDebugDump() {
 
-        LogHelper.info("***** START NODES *****");
+        LogHelper.debug("***** START NODES *****");
         Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
-            LogHelper.info("Node: " + node);
+            LogHelper.debug("Node: " + node);
         }
-        LogHelper.info("***** END NODES *****");
+        LogHelper.debug("***** END NODES *****");
 
-        LogHelper.info("***** START EDGES FROM *****");
+        LogHelper.debug("***** START EDGES FROM *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
             Set<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
             for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
-                LogHelper.info("Crafting Output: " + node);
-                LogHelper.info("Crafting Input: " + edge.getTarget());
-                LogHelper.info("Weight: " + edge.getWeight());
-                LogHelper.info("");
+                LogHelper.debug("Crafting Output: " + node);
+                LogHelper.debug("Crafting Input: " + edge.getTarget());
+                LogHelper.debug("Weight: " + edge.getWeight());
+                LogHelper.debug("");
             }
         }
-        LogHelper.info("***** END EDGES FROM *****");
+        LogHelper.debug("***** END EDGES FROM *****");
 
-        LogHelper.info("***** START EDGES TO *****");
+        LogHelper.debug("***** START EDGES TO *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
@@ -280,13 +280,13 @@ public class DynEMC {
             Iterator<WeightedEdge<CustomWrappedStack>> edgeIter = edgesTo.iterator();
             while (edgeIter.hasNext()) {
                 WeightedEdge<CustomWrappedStack> edge = edgeIter.next();
-                LogHelper.info("From: " + node);
-                LogHelper.info("To: " + edge.getTarget());
-                LogHelper.info("Weight: " + edge.getWeight());
-                LogHelper.info("");
+                LogHelper.debug("From: " + node);
+                LogHelper.debug("To: " + edge.getTarget());
+                LogHelper.debug("Weight: " + edge.getWeight());
+                LogHelper.debug("");
             }
         }
-        LogHelper.info("***** END EDGES TO *****");
+        LogHelper.debug("***** END EDGES TO *****");
     }
 
     @Override

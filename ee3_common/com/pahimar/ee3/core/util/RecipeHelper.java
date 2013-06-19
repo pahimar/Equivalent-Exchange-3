@@ -34,7 +34,7 @@ public class RecipeHelper {
      * 
      * @return A list of CustomWrappedStacks that contains all wild card meta ItemStacks in the vanilla Crafting Manager
      */
-    public static ArrayList<CustomWrappedStack> discoverWildCards() {
+    public static ArrayList<CustomWrappedStack> populateWildCards() {
         
         ArrayList<CustomWrappedStack> wildCards = new ArrayList<CustomWrappedStack>();
         
@@ -87,7 +87,6 @@ public class RecipeHelper {
     public static ArrayList<CustomWrappedStack> getRecipeInputs(IRecipe recipe) {
 
         ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
-        ItemStack itemStack = null;
         OreStack oreStack = null;
 
         if (recipe instanceof ShapedRecipes) {
@@ -96,11 +95,7 @@ public class RecipeHelper {
 
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
                 if (shapedRecipe.recipeItems[i] instanceof ItemStack) {
-
-                    itemStack = shapedRecipe.recipeItems[i];
-                    itemStack.stackSize = 1;
-
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new CustomWrappedStack(shapedRecipe.recipeItems[i]));
                 }
             }
         }
@@ -110,11 +105,7 @@ public class RecipeHelper {
 
             for (Object object : shapelessRecipe.recipeItems) {
                 if (object instanceof ItemStack) {
-
-                    itemStack = (ItemStack) object;
-                    itemStack.stackSize = 1;
-
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new CustomWrappedStack(object));
                 }
             }
         }
@@ -132,7 +123,6 @@ public class RecipeHelper {
                     if (!shapedOreRecipeList.isEmpty()) {
 
                         oreStack = new OreStack((ItemStack) shapedOreRecipeList.get(0));
-                        oreStack.stackSize = 1;
 
                         recipeInputs.add(new CustomWrappedStack(oreStack));
                     }
@@ -141,11 +131,7 @@ public class RecipeHelper {
                  * Else it is possibly an ItemStack
                  */
                 else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
-
-                    itemStack = (ItemStack) shapedOreRecipe.getInput()[i];
-                    itemStack.stackSize = 1;
-
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
                 }
             }
         }
@@ -160,16 +146,12 @@ public class RecipeHelper {
                     if (!shapelessOreRecipeList.isEmpty()) {
 
                         oreStack = new OreStack((ItemStack) shapelessOreRecipeList.get(0));
-                        oreStack.stackSize = 1;
 
                         recipeInputs.add(new CustomWrappedStack(oreStack));
                     }
                 }
                 else if (object instanceof ItemStack) {
-                    itemStack = (ItemStack) object;
-                    itemStack.stackSize = 1;
-
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new CustomWrappedStack(object));
                 }
             }
         }
@@ -186,6 +168,10 @@ public class RecipeHelper {
         
         if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
             return getReverseRecipes((ItemStack) customWrappedStack.getWrappedStack());
+        }
+        else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
+            // TODO Return recipes for OreStacks
+            LogHelper.debug("ReverseRecipe for OreStack: " + customWrappedStack.toString());
         }
 
         return new ArrayList<IRecipe>();
