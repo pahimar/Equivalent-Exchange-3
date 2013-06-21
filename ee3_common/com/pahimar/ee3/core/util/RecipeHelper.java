@@ -164,31 +164,29 @@ public class RecipeHelper {
         return ItemUtil.collateStacks(getRecipeInputs(recipe));
     }
     
-    public static ArrayList<IRecipe> getReverseRecipes(CustomWrappedStack customWrappedStack) {
-        
-        if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
-            return getReverseRecipes((ItemStack) customWrappedStack.getWrappedStack());
-        }
-        else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
-            // TODO Return recipes for OreStacks
-            LogHelper.debug("ReverseRecipe for OreStack: " + customWrappedStack.toString());
-        }
-
-        return new ArrayList<IRecipe>();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static ArrayList<IRecipe> getReverseRecipes(ItemStack itemStack) {
-        
+    public static ArrayList<IRecipe> getReverseRecipes(CustomWrappedStack wrappedStack) {
+       
         ArrayList<IRecipe> reverseRecipeList = new ArrayList<IRecipe>();
         
-        if (itemStack != null) {
-            ArrayList<IRecipe> craftingManagerRecipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());    
-    
-            for (IRecipe recipe : craftingManagerRecipeList) {
-                if (recipe.getRecipeOutput() != null) {
-                    if (ItemUtil.compare(itemStack, recipe.getRecipeOutput())) {
+        ArrayList<IRecipe> recipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
+        
+        for (IRecipe recipe : recipeList) {
+            
+            if (recipe.getRecipeOutput() != null) {
+                
+                if (wrappedStack.getWrappedStack() instanceof ItemStack) {
+                    
+                    if (ItemUtil.compare((ItemStack) wrappedStack.getWrappedStack(), recipe.getRecipeOutput())) {
                         reverseRecipeList.add(recipe);
+                    }
+                }
+                else if (wrappedStack.getWrappedStack() instanceof OreStack) {
+                    
+                    if (OreDictionary.getOreID(recipe.getRecipeOutput()) != -1) {
+                        // TODO Generalize comparison of OreStacks and OreStacks|ItemStacks
+                        if (OreDictionary.getOreID(((OreStack)wrappedStack.getWrappedStack()).oreName) == OreDictionary.getOreID(recipe.getRecipeOutput())) {
+                            reverseRecipeList.add(recipe);
+                        }
                     }
                 }
             }

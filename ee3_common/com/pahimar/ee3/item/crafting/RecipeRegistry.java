@@ -21,7 +21,6 @@ public class RecipeRegistry {
 
     private Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMap;
 
-    @SuppressWarnings("unused")
     private List<CustomWrappedStack> wildCardList;
 
     private RecipeRegistry() {
@@ -71,13 +70,20 @@ public class RecipeRegistry {
         return getRecipes(new CustomWrappedStack(itemStack));
     }
 
+    /*
+     * Item:
+     *  Item (Output) <- { ... }
+     * 
+     */
     public void addRecipe(CustomWrappedStack recipeOutput, List<?> recipeInputs) {
 
-        @SuppressWarnings("unused")
         ArrayList<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
 
         CustomWrappedStack wrappedInputStack = null;
 
+        LogHelper.debug("Recipe Output: " + recipeOutput.toString() + ", size: " + recipeOutput.getStackSize());
+        LogHelper.debug("Recipe Inputs: " + recipeInputs.toString());
+        
         /**
          * For every input in the input list, check to see if we have discovered
          * it already - If we have, add it to the one we already have - If we
@@ -92,17 +98,22 @@ public class RecipeRegistry {
                 wrappedInputStack = (CustomWrappedStack) object;
             }
             
-            LogHelper.warning(wrappedInputStack.toString());
+            for (CustomWrappedStack collatedStack : collatedStacks) {
+                
+            }
         }
+        
+        LogHelper.debug("Collated Recipe Inputs: " + collatedStacks.toString());
     }
     
     // TODO Temporary for testing, remove this later
     static {
+        recipeRegistry = new RecipeRegistry();
         CustomWrappedStack recipeOutput = new CustomWrappedStack(new ItemStack(Item.stick));
         List<IRecipe> recipes = RecipeHelper.getReverseRecipes(recipeOutput);
 
         for (IRecipe recipe : recipes) {
-            recipeRegistry.addRecipe(recipeOutput, RecipeHelper.getRecipeInputs(recipe));
+            recipeRegistry.addRecipe(new CustomWrappedStack(recipe.getRecipeOutput()), RecipeHelper.getRecipeInputs(recipe));
         }
     }
 }
