@@ -138,10 +138,20 @@ public class CustomWrappedStack {
     public String toString() {
 
         if (itemStack != null) {
-            return ItemUtil.toString(itemStack);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, ", itemStack.itemID, itemStack.getItemDamage(), stackSize));
+            
+            if (itemStack.hasTagCompound()) {
+                stringBuilder.append(String.format("nbtTagCompound: %s, ", itemStack.getTagCompound().toString()));
+            }
+            
+            stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
+
+            return stringBuilder.toString();
         }
         else if (oreStack != null) {
-            return oreStack.toString();
+            return stackSize + "xoreDictionary." + oreStack.oreName;
         }
 
         return null;

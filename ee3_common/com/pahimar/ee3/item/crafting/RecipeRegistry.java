@@ -2,14 +2,17 @@ package com.pahimar.ee3.item.crafting;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.core.util.RecipeHelper;
@@ -80,8 +83,9 @@ public class RecipeRegistry {
         ArrayList<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
 
         CustomWrappedStack wrappedInputStack = null;
+        boolean found = false;
 
-        LogHelper.debug("Recipe Output: " + recipeOutput.toString() + ", size: " + recipeOutput.getStackSize());
+        LogHelper.debug("Recipe Output: " + recipeOutput.toString());
         LogHelper.debug("Recipe Inputs: " + recipeInputs.toString());
         
         /**
@@ -98,18 +102,56 @@ public class RecipeRegistry {
                 wrappedInputStack = (CustomWrappedStack) object;
             }
             
-            for (CustomWrappedStack collatedStack : collatedStacks) {
+            if (wildCardList.contains(wrappedInputStack)) {
+                Iterator<CustomWrappedStack> wildIter = wildCardList.iterator();
+                while (wildIter.hasNext()) {
+                    CustomWrappedStack wildCard = wildIter.next();
+                    if (wildCard.equals(wrappedInputStack)) {
+                        wrappedInputStack = wildCard;
+                        break;
+                    }
+                }
+            }
+            
+            if (collatedStacks.size() == 0) {
+                collatedStacks.add(wrappedInputStack);
+            }
+            else {
+                found = false;
                 
+                for (int i = 0; i < collatedStacks.size(); i++) {
+                    if (collatedStacks.get(i) != null) {
+                        if (wrappedInputStack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack) {
+                            if (ItemUtil.compare((ItemStack) wrappedInputStack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
+                                collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + wrappedInputStack.getStackSize());
+                                found = true;
+                            }
+                        }
+                        else if (wrappedInputStack.getWrappedStack() instanceof OreStack && collatedStacks.get(i).getWrappedStack() instanceof OreStack) {
+                            if (OreStack.compareStacks((OreStack) wrappedInputStack.getWrappedStack(), (OreStack) collatedStacks.get(i).getWrappedStack())) {
+                                collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + wrappedInputStack.getStackSize());
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                
+                if (!found) {
+                    collatedStacks.add(wrappedInputStack);
+                }
             }
         }
         
-        LogHelper.debug("Collated Recipe Inputs: " + collatedStacks.toString());
+        // TODO Once we have a collated set of inputs for the given output, check to see if we have it registered already and if not add it to the recipeMap
+        for (CustomWrappedStack collatedStack : collatedStacks) {
+            LogHelper.debug("Collated Recipe Input: " + collatedStack);
+        }
     }
     
     // TODO Temporary for testing, remove this later
     static {
         recipeRegistry = new RecipeRegistry();
-        CustomWrappedStack recipeOutput = new CustomWrappedStack(new ItemStack(Item.stick));
+        CustomWrappedStack recipeOutput = new CustomWrappedStack(new ItemStack(61,1,0));
         List<IRecipe> recipes = RecipeHelper.getReverseRecipes(recipeOutput);
 
         for (IRecipe recipe : recipes) {
