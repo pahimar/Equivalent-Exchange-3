@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.OreStack;
@@ -132,6 +132,12 @@ public class RecipeRegistry {
                                 found = true;
                             }
                         }
+                        else if (wrappedInputStack.getWrappedStack() instanceof EnergyStack && collatedStacks.get(i).getWrappedStack() instanceof EnergyStack) {
+                            if (((EnergyStack)wrappedInputStack.getWrappedStack()).energyName.equalsIgnoreCase(((EnergyStack) collatedStacks.get(i).getWrappedStack()).energyName)) {
+                                collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + wrappedInputStack.getStackSize());
+                                found = true;
+                            }
+                        }
                     }
                 }
                 
@@ -151,16 +157,17 @@ public class RecipeRegistry {
     static {
         recipeRegistry = new RecipeRegistry();
         
-        Multimap<ItemStack, List<ItemStack>> potionRecipes = RecipesPotions.getPotionRecipes();
+        //Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesPotions.getPotionRecipes();
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesSmeltable.getSmeltingRecipes();
         
-        Set<ItemStack> keySet = potionRecipes.keySet();
-        Iterator<ItemStack> keySetIter = keySet.iterator();
-        ItemStack key = null;
+        Set<CustomWrappedStack> keySet = potionRecipes.keySet();
+        Iterator<CustomWrappedStack> keySetIter = keySet.iterator();
+        CustomWrappedStack key = null;
         while (keySetIter.hasNext()) {
             key = keySetIter.next();
             
-            for (List<ItemStack> potionInputs : potionRecipes.get(key)) {
-                recipeRegistry.addRecipe(new CustomWrappedStack(key), potionInputs);
+            for (List<CustomWrappedStack> potionInputs : potionRecipes.get(key)) {
+                recipeRegistry.addRecipe(key, potionInputs);
             }
         }
     }

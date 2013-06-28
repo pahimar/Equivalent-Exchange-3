@@ -168,6 +168,7 @@ public class RecipeHelper {
        
         ArrayList<IRecipe> reverseRecipeList = new ArrayList<IRecipe>();
         
+        @SuppressWarnings("unchecked")
         ArrayList<IRecipe> recipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
         
         for (IRecipe recipe : recipeList) {
