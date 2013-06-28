@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 
@@ -151,11 +150,18 @@ public class RecipeRegistry {
     // TODO Temporary for testing, remove this later
     static {
         recipeRegistry = new RecipeRegistry();
-        CustomWrappedStack recipeOutput = new CustomWrappedStack(new ItemStack(61,1,0));
-        List<IRecipe> recipes = RecipeHelper.getReverseRecipes(recipeOutput);
-
-        for (IRecipe recipe : recipes) {
-            recipeRegistry.addRecipe(new CustomWrappedStack(recipe.getRecipeOutput()), RecipeHelper.getRecipeInputs(recipe));
+        
+        Multimap<ItemStack, List<ItemStack>> potionRecipes = RecipesPotions.getPotionRecipes();
+        
+        Set<ItemStack> keySet = potionRecipes.keySet();
+        Iterator<ItemStack> keySetIter = keySet.iterator();
+        ItemStack key = null;
+        while (keySetIter.hasNext()) {
+            key = keySetIter.next();
+            
+            for (List<ItemStack> potionInputs : potionRecipes.get(key)) {
+                recipeRegistry.addRecipe(new CustomWrappedStack(key), potionInputs);
+            }
         }
     }
 }
