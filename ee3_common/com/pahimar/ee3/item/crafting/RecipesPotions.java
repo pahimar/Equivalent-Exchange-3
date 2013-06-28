@@ -28,8 +28,10 @@ public class RecipesPotions {
     public static ItemStack bottleWater = new ItemStack(Item.potion.itemID, 1, 0);
     public static ItemStack potionAwkward = new ItemStack(Item.potion.itemID, 1, 16);
     public static ItemStack potionThick = new ItemStack(Item.potion.itemID, 1, 32);
-    public static ItemStack potionMundaneBase = new ItemStack(Item.potion.itemID, 1, 64);
-    public static ItemStack potionMundaneExtended = new ItemStack(Item.potion.itemID, 1, 128);
+    public static ItemStack potionMundane = new ItemStack(Item.potion.itemID, 1, 128);
+    public static ItemStack potionMundaneExtended = new ItemStack(Item.potion.itemID, 1, 64);
+    public static ItemStack potionMundaneSplash = new ItemStack(Item.potion.itemID, 1, 16512);
+    public static ItemStack potionMundaneSplashExtended = new ItemStack(Item.potion.itemID, 1, 16448);
 
     public static ItemStack potionRegeneration = new ItemStack(Item.potion.itemID, 1, 8193);
     public static ItemStack potionRegenerationEnhanced = new ItemStack(Item.potion.itemID, 1, 8225);
@@ -106,7 +108,7 @@ public class RecipesPotions {
         potionRecipes.put(potionNightVision, Arrays.asList(potionNightVisionExtended, glowstoneDust));
         potionRecipes.put(potionNightVisionSplash, Arrays.asList(potionNightVisionSplashExtended, glowstoneDust));
         potionRecipes.put(potionNightVisionSplash, Arrays.asList(potionNightVision, gunpowder));
-        
+
         potionRecipes.put(potionNightVisionExtended, Arrays.asList(potionNightVision, redstoneDust));
         potionRecipes.put(potionNightVisionSplashExtended, Arrays.asList(potionNightVisionSplash, redstoneDust));
         potionRecipes.put(potionNightVisionSplashExtended, Arrays.asList(potionNightVisionExtended, gunpowder));
@@ -116,7 +118,7 @@ public class RecipesPotions {
         potionRecipes.put(potionInvisibilitySplash, Arrays.asList(potionNightVisionSplash, fermentedSpiderEye));
         potionRecipes.put(potionInvisibilitySplash, Arrays.asList(potionInvisibilitySplashExtended, glowstoneDust));
         potionRecipes.put(potionInvisibilitySplash, Arrays.asList(potionInvisibility, gunpowder));
-        
+
         potionRecipes.put(potionInvisibilityExtended, Arrays.asList(potionInvisibility, redstoneDust));
         potionRecipes.put(potionInvisibilityExtended, Arrays.asList(potionNightVisionExtended, fermentedSpiderEye));
         potionRecipes.put(potionInvisibilitySplashExtended, Arrays.asList(potionInvisibilitySplash, redstoneDust));
@@ -127,11 +129,11 @@ public class RecipesPotions {
         potionRecipes.put(potionFireResist, Arrays.asList(potionFireResistExtended, glowstoneDust));
         potionRecipes.put(potionFireResistSplash, Arrays.asList(potionFireResistSplashExtended, glowstoneDust));
         potionRecipes.put(potionFireResistSplash, Arrays.asList(potionFireResist, gunpowder));
-        
+
         potionRecipes.put(potionFireResistExtended, Arrays.asList(potionFireResist, redstoneDust));
         potionRecipes.put(potionFireResistSplashExtended, Arrays.asList(potionFireResistSplash, redstoneDust));
         potionRecipes.put(potionFireResistSplashExtended, Arrays.asList(potionFireResistExtended, gunpowder));
-        
+
         potionRecipes.put(potionSlowness, Arrays.asList(potionFireResist, fermentedSpiderEye));
         potionRecipes.put(potionSlowness, Arrays.asList(potionSlownessExtended, glowstoneDust));
         potionRecipes.put(potionSlowness, Arrays.asList(potionSwiftness, fermentedSpiderEye));
@@ -141,37 +143,37 @@ public class RecipesPotions {
         potionRecipes.put(potionSlownessSplash, Arrays.asList(potionSwiftnessSplash, fermentedSpiderEye));
         potionRecipes.put(potionSlownessSplash, Arrays.asList(potionSwiftnessSplashExtended, fermentedSpiderEye));
         potionRecipes.put(potionSlownessSplash, Arrays.asList(potionSlowness, gunpowder));
-        
+
         potionRecipes.put(potionSlownessExtended, Arrays.asList(potionFireResistExtended, fermentedSpiderEye));
         potionRecipes.put(potionSlownessExtended, Arrays.asList(potionSwiftnessEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionSlownessSplashExtended, Arrays.asList(potionFireResistSplashExtended, fermentedSpiderEye));
         potionRecipes.put(potionSlownessSplashExtended, Arrays.asList(potionSwiftnessSplashEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionSlownessSplashExtended, Arrays.asList(potionSlownessExtended, gunpowder));
-        
+
         potionRecipes.put(potionSwiftness, Arrays.asList(potionAwkward, sugar));
         potionRecipes.put(potionSwiftnessSplash, Arrays.asList(potionSwiftness, gunpowder));
-        
+
         potionRecipes.put(potionSwiftnessExtended, Arrays.asList(potionSwiftness, redstoneDust));
         potionRecipes.put(potionSwiftnessExtended, Arrays.asList(potionSwiftnessEnhanced, redstoneDust));
         potionRecipes.put(potionSwiftnessSplashExtended, Arrays.asList(potionSwiftnessSplash, redstoneDust));
         potionRecipes.put(potionSwiftnessSplashExtended, Arrays.asList(potionSwiftnessSplashEnhanced, redstoneDust));
         potionRecipes.put(potionSwiftnessSplashExtended, Arrays.asList(potionSwiftnessExtended, gunpowder));
-        
+
         potionRecipes.put(potionSwiftnessEnhanced, Arrays.asList(potionSwiftness, glowstoneDust));
         potionRecipes.put(potionSwiftnessEnhanced, Arrays.asList(potionSwiftnessExtended, glowstoneDust));
         potionRecipes.put(potionSwiftnessSplashEnhanced, Arrays.asList(potionSwiftnessSplash, glowstoneDust));
         potionRecipes.put(potionSwiftnessSplashEnhanced, Arrays.asList(potionSwiftnessSplashExtended, glowstoneDust));
         potionRecipes.put(potionSwiftnessSplashEnhanced, Arrays.asList(potionSwiftnessEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionHealing, Arrays.asList(potionAwkward, glisteringMelon));
         potionRecipes.put(potionHealing, Arrays.asList(potionHealingEnhanced, redstoneDust));
         potionRecipes.put(potionHealingSplash, Arrays.asList(potionHealingSplashEnhanced, redstoneDust));
         potionRecipes.put(potionHealingSplash, Arrays.asList(potionHealing, gunpowder));
-        
+
         potionRecipes.put(potionHealingEnhanced, Arrays.asList(potionHealing, glowstoneDust));
         potionRecipes.put(potionHealingSplashEnhanced, Arrays.asList(potionHealingSplash, glowstoneDust));
         potionRecipes.put(potionHealingSplashEnhanced, Arrays.asList(potionHealingEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionHarming, Arrays.asList(potionHealing, fermentedSpiderEye));
         potionRecipes.put(potionHarming, Arrays.asList(potionPoison, fermentedSpiderEye));
         potionRecipes.put(potionHarming, Arrays.asList(potionPoisonExtended, fermentedSpiderEye));
@@ -181,7 +183,7 @@ public class RecipesPotions {
         potionRecipes.put(potionHarmingSplash, Arrays.asList(potionPoisonSplashExtended, fermentedSpiderEye));
         potionRecipes.put(potionHarmingSplash, Arrays.asList(potionHarmingSplashEnhanced, redstoneDust));
         potionRecipes.put(potionHarmingSplash, Arrays.asList(potionHarming, gunpowder));
-        
+
         potionRecipes.put(potionHarmingEnhanced, Arrays.asList(potionHealingEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionHarmingEnhanced, Arrays.asList(potionHarming, glowstoneDust));
         potionRecipes.put(potionHarmingEnhanced, Arrays.asList(potionPoisonEnhanced, fermentedSpiderEye));
@@ -189,51 +191,52 @@ public class RecipesPotions {
         potionRecipes.put(potionHarmingSplashEnhanced, Arrays.asList(potionHarmingSplash, glowstoneDust));
         potionRecipes.put(potionHarmingSplashEnhanced, Arrays.asList(potionPoisonSplashEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionHarmingSplashEnhanced, Arrays.asList(potionHarmingEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionPoison, Arrays.asList(potionAwkward, spiderEye));
         potionRecipes.put(potionPoisonSplash, Arrays.asList(potionPoison, gunpowder));
-        
+
         potionRecipes.put(potionPoisonExtended, Arrays.asList(potionPoisonExtended, redstoneDust));
         potionRecipes.put(potionPoisonExtended, Arrays.asList(potionPoisonEnhanced, redstoneDust));
         potionRecipes.put(potionPoisonSplashExtended, Arrays.asList(potionPoisonSplashExtended, redstoneDust));
         potionRecipes.put(potionPoisonSplashExtended, Arrays.asList(potionPoisonSplashEnhanced, redstoneDust));
         potionRecipes.put(potionPoisonSplashExtended, Arrays.asList(potionPoisonExtended, gunpowder));
-        
+
         potionRecipes.put(potionPoisonEnhanced, Arrays.asList(potionPoison, glowstoneDust));
         potionRecipes.put(potionPoisonEnhanced, Arrays.asList(potionPoisonExtended, glowstoneDust));
         potionRecipes.put(potionPoisonSplashEnhanced, Arrays.asList(potionPoisonSplash, glowstoneDust));
         potionRecipes.put(potionPoisonSplashEnhanced, Arrays.asList(potionPoisonSplashExtended, glowstoneDust));
         potionRecipes.put(potionPoisonSplashEnhanced, Arrays.asList(potionPoisonEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionRegeneration, Arrays.asList(potionAwkward, ghastTear));
         potionRecipes.put(potionRegenerationSplash, Arrays.asList(potionRegeneration, gunpowder));
-        
+
         potionRecipes.put(potionRegenerationExtended, Arrays.asList(potionRegeneration, redstoneDust));
         potionRecipes.put(potionRegenerationExtended, Arrays.asList(potionRegenerationEnhanced, redstoneDust));
         potionRecipes.put(potionRegenerationSplashExtended, Arrays.asList(potionRegenerationSplash, redstoneDust));
         potionRecipes.put(potionRegenerationSplashExtended, Arrays.asList(potionRegenerationSplashEnhanced, redstoneDust));
         potionRecipes.put(potionRegenerationSplashExtended, Arrays.asList(potionRegenerationExtended, gunpowder));
-        
+
         potionRecipes.put(potionRegenerationEnhanced, Arrays.asList(potionRegeneration, glowstoneDust));
         potionRecipes.put(potionRegenerationEnhanced, Arrays.asList(potionRegenerationExtended, glowstoneDust));
         potionRecipes.put(potionRegenerationSplashEnhanced, Arrays.asList(potionRegenerationSplash, glowstoneDust));
         potionRecipes.put(potionRegenerationSplashEnhanced, Arrays.asList(potionRegenerationSplashExtended, glowstoneDust));
         potionRecipes.put(potionRegenerationSplashEnhanced, Arrays.asList(potionRegenerationEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionWeakness, Arrays.asList(potionAwkward, fermentedSpiderEye));
         potionRecipes.put(potionWeakness, Arrays.asList(potionRegeneration, fermentedSpiderEye));
         potionRecipes.put(potionWeakness, Arrays.asList(potionRegenerationEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionWeakness, Arrays.asList(potionStrength, fermentedSpiderEye));
         potionRecipes.put(potionWeakness, Arrays.asList(potionStrengthEnhanced, fermentedSpiderEye));
-        potionRecipes.put(potionWeakness, Arrays.asList(potionMundaneBase, fermentedSpiderEye));
+        potionRecipes.put(potionWeakness, Arrays.asList(potionMundane, fermentedSpiderEye));
         potionRecipes.put(potionWeakness, Arrays.asList(potionWeaknessExtended, glowstoneDust));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionRegenerationSplash, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionRegenerationSplashEnhanced, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionStrengthSplash, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionStrengthSplashEnhanced, fermentedSpiderEye));
+        potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionMundaneSplash, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionWeaknessSplashExtended, glowstoneDust));
         potionRecipes.put(potionWeaknessSplash, Arrays.asList(potionWeakness, gunpowder));
-        
+
         potionRecipes.put(potionWeaknessExtended, Arrays.asList(potionWeakness, redstoneDust));
         potionRecipes.put(potionWeaknessExtended, Arrays.asList(potionRegenerationExtended, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessExtended, Arrays.asList(potionStrengthExtended, fermentedSpiderEye));
@@ -241,35 +244,36 @@ public class RecipesPotions {
         potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionWeaknessSplash, redstoneDust));
         potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionRegenerationSplashExtended, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionStrengthSplashExtended, fermentedSpiderEye));
-        // TODO Figure out the meta for the mundane splash potions
-        // potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionMundaneSplashExtended, fermentedSpiderEye));
+        potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionMundaneSplashExtended, fermentedSpiderEye));
         potionRecipes.put(potionWeaknessSplashExtended, Arrays.asList(potionWeaknessExtended, gunpowder));
-        
+
         potionRecipes.put(potionStrength, Arrays.asList(potionAwkward, blazePowder));
         potionRecipes.put(potionStrengthSplash, Arrays.asList(potionStrength, gunpowder));
-        
+
         potionRecipes.put(potionStrengthEnhanced, Arrays.asList(potionStrength, glowstoneDust));
         potionRecipes.put(potionStrengthEnhanced, Arrays.asList(potionStrengthExtended, glowstoneDust));
         potionRecipes.put(potionStrengthSplashEnhanced, Arrays.asList(potionStrengthSplash, glowstoneDust));
         potionRecipes.put(potionStrengthSplashEnhanced, Arrays.asList(potionStrengthSplashExtended, glowstoneDust));
         potionRecipes.put(potionStrengthSplashEnhanced, Arrays.asList(potionStrengthEnhanced, gunpowder));
-        
+
         potionRecipes.put(potionStrengthExtended, Arrays.asList(potionStrength, redstoneDust));
         potionRecipes.put(potionStrengthExtended, Arrays.asList(potionStrengthEnhanced, redstoneDust));
         potionRecipes.put(potionStrengthSplashExtended, Arrays.asList(potionStrengthSplash, redstoneDust));
         potionRecipes.put(potionStrengthSplashExtended, Arrays.asList(potionStrengthSplashEnhanced, redstoneDust));
         potionRecipes.put(potionStrengthSplashExtended, Arrays.asList(potionStrengthExtended, gunpowder));
-        
+
         potionRecipes.put(potionThick, Arrays.asList(bottleWater, glowstoneDust));
-        
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, sugar));
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, glisteringMelon));
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, spiderEye));
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, blazePowder));
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, magmaCream));
-        potionRecipes.put(potionMundaneBase, Arrays.asList(bottleWater, ghastTear));
-        
+
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, sugar));
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, glisteringMelon));
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, spiderEye));
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, blazePowder));
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, magmaCream));
+        potionRecipes.put(potionMundane, Arrays.asList(bottleWater, ghastTear));
+        potionRecipes.put(potionMundaneSplash, Arrays.asList(potionMundane, gunpowder));
+
         potionRecipes.put(potionMundaneExtended, Arrays.asList(bottleWater, redstoneDust));
+        potionRecipes.put(potionMundaneSplashExtended, Arrays.asList(potionMundaneExtended, gunpowder));
 
         return potionRecipes;
     }
