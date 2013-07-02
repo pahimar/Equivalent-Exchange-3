@@ -13,6 +13,8 @@ import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class RecipesPotions {
 
+    private static Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = null;
+
     private static CustomWrappedStack reagentWater = new CustomWrappedStack(new ItemStack(Block.waterStill));
     private static CustomWrappedStack reagentNetherWart = new CustomWrappedStack(new ItemStack(372, 1, 0));
     private static CustomWrappedStack reagentGlowstoneDust = new CustomWrappedStack(new ItemStack(Item.lightStoneDust));
@@ -28,7 +30,7 @@ public class RecipesPotions {
     private static CustomWrappedStack reagentBlazePowder = new CustomWrappedStack(new ItemStack(Item.blazePowder));
 
     private static CustomWrappedStack bottleWater = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 0));
-    
+
     private static CustomWrappedStack potionAwkward = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 16));
     private static CustomWrappedStack potionThick = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 32));
     private static CustomWrappedStack potionMundane = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 128));
@@ -101,7 +103,16 @@ public class RecipesPotions {
 
     public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getPotionRecipes() {
 
-        Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = HashMultimap.create();
+        if (potionRecipes == null) {
+            init();
+        }
+
+        return potionRecipes;
+    }
+
+    private static void init() {
+
+        potionRecipes = HashMultimap.create();
 
         potionRecipes.put(bottleWater, Arrays.asList(reagentWater));
 
@@ -277,7 +288,5 @@ public class RecipesPotions {
 
         potionRecipes.put(potionMundaneExtended, Arrays.asList(bottleWater, reagentRedstoneDust));
         potionRecipes.put(potionMundaneSplashExtended, Arrays.asList(potionMundaneExtended, reagentGunpowder));
-
-        return potionRecipes;
     }
 }

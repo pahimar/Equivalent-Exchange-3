@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.core.util.RecipeHelper;
@@ -19,6 +20,8 @@ import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.emc.graph.WeightedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import com.pahimar.ee3.item.crafting.RecipesPotions;
+import com.pahimar.ee3.item.crafting.RecipesSmelting;
 
 public class DynEMC {
 
@@ -44,16 +47,54 @@ public class DynEMC {
         return dynEMC;
     }
 
-    public List<CustomWrappedStack> getDiscoveredItems() {
-
-        return discoveredItems;
-    }
-
     private void init() {
 
         RecipeRegistry recipeManager = RecipeRegistry.getInstance();
+        
+        Set<CustomWrappedStack> keySet = null;
+        Iterator<CustomWrappedStack> keySetIter = null;
+        CustomWrappedStack key = null;
+        
+        /* Add Potions */
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesPotions.getPotionRecipes();
+
+        keySet = potionRecipes.keySet();
+        keySetIter = keySet.iterator();
+        key = null;
+        
+        while (keySetIter.hasNext()) {
+            key = keySetIter.next();
+
+            for (List<CustomWrappedStack> potionInputs : potionRecipes.get(key)) {
+                recipeManager.addRecipe(key, potionInputs);
+            }
+        }
+        
+        /* Add Smelting */
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> smeltingRecipes = RecipesSmelting.getSmeltingRecipes();
+
+        keySet = smeltingRecipes.keySet();
+        keySetIter = keySet.iterator();
+        key = null;
+        
+        while (keySetIter.hasNext()) {
+            key = keySetIter.next();
+
+            for (List<CustomWrappedStack> smeltingInputs : smeltingRecipes.get(key)) {
+                recipeManager.addRecipe(key, smeltingInputs);
+            }
+        }
+        
+        /* Add vanilla crafting */
+        
+        /* Add recipes sent via IMC */
+        
+        /* Add all other items that don't have some method of crafting */
+        
+        LogHelper.debug(recipeManager.toString());
     }
 
+    @SuppressWarnings("unused")
     private void populateItemList() {
 
         ArrayList<ItemStack> subItems = new ArrayList<ItemStack>();
@@ -153,6 +194,7 @@ public class DynEMC {
         }
     }
 
+    @SuppressWarnings("unused")
     private void populateGraph() {
 
         for (CustomWrappedStack customWrappedStack : discoveredItems) {
@@ -199,53 +241,6 @@ public class DynEMC {
     public int size() {
 
         return graph.size();
-    }
-
-    public List<CustomWrappedStack> getAllNodes() {
-
-        ArrayList<CustomWrappedStack> allNodes = new ArrayList<CustomWrappedStack>();
-
-        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
-
-        while (nodeIter.hasNext()) {
-            allNodes.add(nodeIter.next());
-        }
-
-        return allNodes;
-    }
-
-    public List<CustomWrappedStack> getCriticalNodes() {
-
-        ArrayList<CustomWrappedStack> criticalNodes = new ArrayList<CustomWrappedStack>();
-
-        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
-
-        while (nodeIter.hasNext()) {
-            CustomWrappedStack currentNode = nodeIter.next();
-
-            if (graph.edgesFrom(currentNode).size() == 0) {
-                criticalNodes.add(currentNode);
-            }
-        }
-
-        return criticalNodes;
-    }
-
-    public List<CustomWrappedStack> getOrphanNodes() {
-
-        ArrayList<CustomWrappedStack> criticalNodes = new ArrayList<CustomWrappedStack>();
-
-        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
-
-        while (nodeIter.hasNext()) {
-            CustomWrappedStack currentNode = nodeIter.next();
-
-            if ((graph.edgesFrom(currentNode).size() == 0) && (graph.edgesTo(currentNode).size() == 0)) {
-                criticalNodes.add(currentNode);
-            }
-        }
-
-        return criticalNodes;
     }
 
     public void printDebugDump() {

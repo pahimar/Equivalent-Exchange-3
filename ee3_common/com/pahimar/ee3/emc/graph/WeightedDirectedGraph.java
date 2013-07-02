@@ -21,13 +21,13 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
     public boolean addNode(T node) {
 
         // Ignore nodes already added
-        if (graph.containsKey(node)) {
+        if (graph.containsKey(node))
             return false;
-        }
 
         orderedNodes.add(node);
         graph.put(node, new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>() {
 
+            @Override
             public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
 
                 return orderedNodes.indexOf(o1.getTarget()) - orderedNodes.indexOf(o2.getTarget());
@@ -45,10 +45,10 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
     public void addEdge(T from, T to, float weight) {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
-            if (!(graph.containsKey(from))) {
+            if (!graph.containsKey(from)) {
                 LOGGER.severe("From node doesn't exist: " + from.toString());
             }
-            if (!(graph.containsKey(to))) {
+            if (!graph.containsKey(to)) {
                 LOGGER.severe("To node doesn't exist: " + to.toString());
             }
             throw new NoSuchElementException("Missing nodes from graph");
@@ -62,16 +62,14 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     public boolean edgeExists(T from, T to) {
 
-        if (!(graph.containsKey(from) && graph.containsKey(to))) {
+        if (!(graph.containsKey(from) && graph.containsKey(to)))
             throw new NoSuchElementException("Missing nodes from graph");
-        }
 
         Iterator<WeightedEdge<T>> edgeIterator = graph.get(from).iterator();
 
         while (edgeIterator.hasNext()) {
-            if (edgeIterator.next().getTarget().equals(to)) {
+            if (edgeIterator.next().getTarget().equals(to))
                 return true;
-            }
         }
 
         return false;
@@ -80,11 +78,11 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
     public boolean edgeExists(T from, T to, float weight) {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
-            if (!(graph.containsKey(from))) {
+            if (!graph.containsKey(from)) {
                 LOGGER.severe("From node doesn't exist: " + from.toString());
                 LOGGER.severe("To node: " + to.toString());
             }
-            if (!(graph.containsKey(to))) {
+            if (!graph.containsKey(to)) {
                 LOGGER.severe("To node doesn't exist: " + to.toString());
                 LOGGER.severe("From node: " + from.toString());
             }
@@ -101,21 +99,20 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     public Set<WeightedEdge<T>> edgesFrom(T from) {
 
-        if (!graph.containsKey(from)) {
+        if (!graph.containsKey(from))
             throw new NoSuchElementException("Missing node from graph");
-        }
 
         return Collections.unmodifiableSortedSet(graph.get(from));
     }
 
     public Set<WeightedEdge<T>> edgesTo(T to) {
 
-        if (!graph.containsKey(to)) {
+        if (!graph.containsKey(to))
             throw new NoSuchElementException("Missing node from graph");
-        }
 
         Set<WeightedEdge<T>> edgesTo = new TreeSet<WeightedEdge<T>>(new Comparator<WeightedEdge<T>>() {
 
+            @Override
             public int compare(WeightedEdge<T> o1, WeightedEdge<T> o2) {
 
                 return o1.hashCode() - o2.hashCode();
@@ -139,9 +136,8 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     public void removeNode(T node) {
 
-        if (!(graph.containsKey(node))) {
+        if (!graph.containsKey(node))
             throw new NoSuchElementException("Missing node from graph");
-        }
 
         // Remove all edges from and to the node
         removeAllEdgesFrom(node);
@@ -158,27 +154,24 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     public void removeEdge(T from, T to, float weight) {
 
-        if (!(graph.containsKey(from) && graph.containsKey(to))) {
+        if (!(graph.containsKey(from) && graph.containsKey(to)))
             throw new NoSuchElementException("Missing nodes from graph");
-        }
 
         graph.get(from).remove(new WeightedEdge<T>(weight, to));
     }
 
     public void removeAllEdgesFrom(T node) {
 
-        if (!(graph.containsKey(node))) {
+        if (!graph.containsKey(node))
             throw new NoSuchElementException("Missing node from graph");
-        }
 
         graph.get(node).clear();
     }
 
     public void removeAllEdgesTo(T node) {
 
-        if (!(graph.containsKey(node))) {
+        if (!graph.containsKey(node))
             throw new NoSuchElementException("Missing node from graph");
-        }
 
         for (T aNode : graph.keySet()) {
             Set<WeightedEdge<T>> edgesFrom = edgesFrom(aNode);
@@ -193,9 +186,8 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     public void removeAllEdgesBetween(T firstNode, T secondNode) {
 
-        if (!(graph.containsKey(firstNode) && graph.containsKey(secondNode))) {
+        if (!(graph.containsKey(firstNode) && graph.containsKey(secondNode)))
             throw new NoSuchElementException("Missing nodes from graph");
-        }
 
         for (WeightedEdge<T> edgeFrom : edgesFrom(firstNode)) {
             if (edgeFrom.getTarget().equals(secondNode)) {
@@ -208,6 +200,45 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
                 graph.get(secondNode).remove(edgeFrom);
             }
         }
+    }
+
+    public List<T> getAllNodes() {
+
+        return orderedNodes;
+    }
+
+    public List<T> getCriticalNodes() {
+
+        ArrayList<T> criticalNodes = new ArrayList<T>();
+
+        Iterator<T> nodeIter = orderedNodes.iterator();
+
+        while (nodeIter.hasNext()) {
+            T currentNode = nodeIter.next();
+
+            if (this.edgesFrom(currentNode).size() == 0) {
+                criticalNodes.add(currentNode);
+            }
+        }
+
+        return criticalNodes;
+    }
+
+    public List<T> getOrphanNodes() {
+
+        ArrayList<T> orphanedNodes = new ArrayList<T>();
+
+        Iterator<T> nodeIter = orderedNodes.iterator();
+
+        while (nodeIter.hasNext()) {
+            T currentNode = nodeIter.next();
+
+            if (this.edgesFrom(currentNode).size() == 0 && this.edgesTo(currentNode).size() == 0) {
+                orphanedNodes.add(currentNode);
+            }
+        }
+
+        return orphanedNodes;
     }
 
     @Override

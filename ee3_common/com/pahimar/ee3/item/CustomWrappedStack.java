@@ -142,7 +142,7 @@ public class CustomWrappedStack {
                 return ItemUtil.compare(itemStack, customWrappedStack.itemStack) && stackSize == customWrappedStack.itemStack.stackSize;
             else if (customWrappedStack.oreStack != null) {
                 for (ItemStack oreDictItemStack : OreDictionary.getOres(customWrappedStack.oreStack.oreName)) {
-                    if (ItemUtil.compare(itemStack, oreDictItemStack) && stackSize == oreDictItemStack.stackSize)
+                    if (ItemUtil.compare(itemStack, oreDictItemStack) && stackSize == customWrappedStack.stackSize)
                         return true;
                 }
             }
@@ -150,16 +150,16 @@ public class CustomWrappedStack {
         else if (oreStack != null) {
             if (customWrappedStack.itemStack != null) {
                 for (ItemStack oreDictItemStack : OreDictionary.getOres(oreStack.oreName)) {
-                    if (ItemUtil.compare(customWrappedStack.itemStack, oreDictItemStack) && stackSize == oreDictItemStack.stackSize)
+                    if (ItemUtil.compare(customWrappedStack.itemStack, oreDictItemStack) && stackSize == customWrappedStack.stackSize)
                         return true;
                 }
             }
             else if (customWrappedStack.oreStack != null)
-                return oreStack.equals(customWrappedStack.oreStack) && stackSize == oreStack.stackSize;
+                return oreStack.oreName.equalsIgnoreCase(customWrappedStack.oreStack.oreName) && stackSize == customWrappedStack.stackSize;
         }
         else if (energyStack != null) {
             if (customWrappedStack.energyStack != null) {
-                return energyStack.equals(customWrappedStack.energyStack) && stackSize == energyStack.stackSize;
+                return energyStack.energyName.equalsIgnoreCase(customWrappedStack.energyStack.energyName) && stackSize == customWrappedStack.stackSize;
             }
         }
 

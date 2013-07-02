@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import net.minecraft.item.ItemStack;
 
@@ -12,7 +11,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.ItemUtil;
-import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
@@ -23,7 +21,7 @@ public class RecipeRegistry {
 
     private Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMap;
 
-    private List<CustomWrappedStack> wildCardList;
+    public List<CustomWrappedStack> wildCardList;
 
     private RecipeRegistry() {
 
@@ -73,9 +71,7 @@ public class RecipeRegistry {
     }
 
     /*
-     * Item:
-     *  Item (Output) <- { ... }
-     * 
+     * Item: Item (Output) <- { ... }
      */
     public void addRecipe(CustomWrappedStack recipeOutput, List<?> recipeInputs) {
 
@@ -84,9 +80,6 @@ public class RecipeRegistry {
         CustomWrappedStack wrappedInputStack = null;
         boolean found = false;
 
-        LogHelper.debug("Recipe Output: " + recipeOutput.toString());
-        LogHelper.debug("Recipe Inputs: " + recipeInputs.toString());
-        
         /**
          * For every input in the input list, check to see if we have discovered
          * it already - If we have, add it to the one we already have - If we
@@ -100,7 +93,7 @@ public class RecipeRegistry {
             else if (object instanceof CustomWrappedStack) {
                 wrappedInputStack = (CustomWrappedStack) object;
             }
-            
+
             if (wildCardList.contains(wrappedInputStack)) {
                 Iterator<CustomWrappedStack> wildIter = wildCardList.iterator();
                 while (wildIter.hasNext()) {
@@ -111,13 +104,13 @@ public class RecipeRegistry {
                     }
                 }
             }
-            
+
             if (collatedStacks.size() == 0) {
                 collatedStacks.add(wrappedInputStack);
             }
             else {
                 found = false;
-                
+
                 for (int i = 0; i < collatedStacks.size(); i++) {
                     if (collatedStacks.get(i) != null) {
                         if (wrappedInputStack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack) {
@@ -133,42 +126,49 @@ public class RecipeRegistry {
                             }
                         }
                         else if (wrappedInputStack.getWrappedStack() instanceof EnergyStack && collatedStacks.get(i).getWrappedStack() instanceof EnergyStack) {
-                            if (((EnergyStack)wrappedInputStack.getWrappedStack()).energyName.equalsIgnoreCase(((EnergyStack) collatedStacks.get(i).getWrappedStack()).energyName)) {
+                            if (((EnergyStack) wrappedInputStack.getWrappedStack()).energyName.equalsIgnoreCase(((EnergyStack) collatedStacks.get(i).getWrappedStack()).energyName)) {
                                 collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + wrappedInputStack.getStackSize());
                                 found = true;
                             }
                         }
                     }
                 }
-                
+
                 if (!found) {
                     collatedStacks.add(wrappedInputStack);
                 }
             }
         }
         
-        // TODO Once we have a collated set of inputs for the given output, check to see if we have it registered already and if not add it to the recipeMap
-        for (CustomWrappedStack collatedStack : collatedStacks) {
-            LogHelper.debug("Collated Recipe Input: " + collatedStack);
+        if (!recipeMap.containsEntry(recipeOutput, collatedStacks)) {
+            recipeMap.put(recipeOutput, collatedStacks);
         }
     }
     
-    // TODO Temporary for testing, remove this later
-    static {
-        recipeRegistry = new RecipeRegistry();
+    public int size() {
         
-        //Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesPotions.getPotionRecipes();
-        Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesSmeltable.getSmeltingRecipes();
+        return recipeMap.size();
+    }
+    
+    @Override
+    public String toString() {
         
-        Set<CustomWrappedStack> keySet = potionRecipes.keySet();
-        Iterator<CustomWrappedStack> keySetIter = keySet.iterator();
-        CustomWrappedStack key = null;
-        while (keySetIter.hasNext()) {
-            key = keySetIter.next();
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        for (CustomWrappedStack key : recipeMap.keySet()) {
+
+            Iterator<List<CustomWrappedStack>> recipeIterator = recipeMap.get(key).iterator();
             
-            for (List<CustomWrappedStack> potionInputs : potionRecipes.get(key)) {
-                recipeRegistry.addRecipe(key, potionInputs);
+            while (recipeIterator.hasNext()) {
+                List<CustomWrappedStack> values = recipeIterator.next();
+                stringBuilder.append(String.format("Recipe Output: %s, Recipe Input: %s", key.toString(), values.toString()));
+                
+                if (recipeIterator.hasNext()) {
+                    stringBuilder.append("\n");
+                }
             }
         }
+        
+        return stringBuilder.toString();
     }
 }
