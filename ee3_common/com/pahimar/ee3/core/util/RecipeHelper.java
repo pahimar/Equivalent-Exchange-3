@@ -94,8 +94,16 @@ public class RecipeHelper {
             ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
 
             for (int i = 0; i < shapedRecipe.recipeItems.length; i++) {
+                
                 if (shapedRecipe.recipeItems[i] instanceof ItemStack) {
-                    recipeInputs.add(new CustomWrappedStack(shapedRecipe.recipeItems[i]));
+                    
+                    ItemStack itemStack = shapedRecipe.recipeItems[i].copy();
+                    
+                    if (itemStack.stackSize > 1) {
+                        itemStack.stackSize = 1;
+                    }
+                    
+                    recipeInputs.add(new CustomWrappedStack(itemStack));
                 }
             }
         }
@@ -104,8 +112,16 @@ public class RecipeHelper {
             ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
 
             for (Object object : shapelessRecipe.recipeItems) {
+                
                 if (object instanceof ItemStack) {
-                    recipeInputs.add(new CustomWrappedStack(object));
+                    
+                    ItemStack itemStack = ((ItemStack) object).copy();
+                    
+                    if (itemStack.stackSize > 1) {
+                        itemStack.stackSize = 1;
+                    }
+                    
+                    recipeInputs.add(new CustomWrappedStack(itemStack));
                 }
             }
         }
@@ -117,8 +133,18 @@ public class RecipeHelper {
                 /*
                  * If the element is a list, then it is an OreStack
                  */
-                if (shapedOreRecipe.getInput()[i] instanceof ArrayList || shapedOreRecipe.getInput()[i] instanceof ItemStack) {
+                if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
                     recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
+                }
+                else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
+                
+                    ItemStack itemStack = ((ItemStack) shapedOreRecipe.getInput()[i]).copy();
+                    
+                    if (itemStack.stackSize > 1) {
+                        itemStack.stackSize = 1;
+                    }
+                    
+                    recipeInputs.add(new CustomWrappedStack(itemStack));
                 }
             }
         }
@@ -127,8 +153,19 @@ public class RecipeHelper {
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
 
             for (Object object : shapelessOreRecipe.getInput()) {
-                if (object instanceof ArrayList || object instanceof ItemStack) {
+                
+                if (object instanceof ArrayList) { 
                     recipeInputs.add(new CustomWrappedStack(object));
+                }
+                else if (object instanceof ItemStack) {
+                    
+                    ItemStack itemStack = ((ItemStack) object).copy();
+                    
+                    if (itemStack.stackSize > 1) {
+                        itemStack.stackSize = 1;
+                    }
+                    
+                    recipeInputs.add(new CustomWrappedStack(itemStack));
                 }
             }
         }

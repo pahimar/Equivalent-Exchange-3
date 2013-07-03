@@ -8,7 +8,6 @@ import java.util.Set;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -29,12 +28,15 @@ public class DynEMC {
 
     private static DynEMC dynEMC = null;
 
-    private ArrayList<CustomWrappedStack> discoveredItems;
+    private ArrayList<CustomWrappedStack> discoveredStacks;
+    private ArrayList<CustomWrappedStack> stacksWithoutRecipes;
+    
     private WeightedDirectedGraph<CustomWrappedStack> graph;
 
     private DynEMC() {
 
-        discoveredItems = new ArrayList<CustomWrappedStack>();
+        discoveredStacks = new ArrayList<CustomWrappedStack>();
+        stacksWithoutRecipes = new ArrayList<CustomWrappedStack>();
         graph = new WeightedDirectedGraph<CustomWrappedStack>();
 
         init();
@@ -54,9 +56,6 @@ public class DynEMC {
         RecipeRegistry recipeManager = RecipeRegistry.getInstance();
 
         Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes = HashMultimap.create();
-        Set<CustomWrappedStack> recipeKeySet = null;
-        Iterator<CustomWrappedStack> recipeKeySetIterator = null;
-        CustomWrappedStack recipeOutput = null;
 
         // Add potion recipes
         recipes.putAll(RecipesPotions.getPotionRecipes());
@@ -70,120 +69,81 @@ public class DynEMC {
         // Add recipes gathered via IMC
         // TODO Gather IMC recipes
 
-        // Add items that have no recipe
+        // Populate the discovered stacks list with all stacks that we are involved in a recipe we are aware of 
+        discoverStacks(recipes);
+        
+        // Add items that have no recipe, using the list of discovered stacks to determine if it's in a recipe or not
+        for (CustomWrappedStack stack : stacksWithoutRecipes) {
+            recipes.put(stack, new ArrayList<CustomWrappedStack>());
+        }
 
         // Iterate through every recipe in the map, and add them to the registry
-        recipeKeySet = recipes.keySet();
-        recipeKeySetIterator = recipeKeySet.iterator();
-        recipeOutput = null;
+        Set<CustomWrappedStack> recipeKeySet = recipes.keySet();
+        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
+        CustomWrappedStack recipeOutput = null;
 
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
-
+            
             for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
                 recipeManager.addRecipe(recipeOutput, recipeInputs);
             }
         }
-
-        LogHelper.debug(recipeManager.toString());
     }
 
-    @SuppressWarnings("unused")
-    private void populateItemList() {
-
-        ArrayList<ItemStack> subItems = new ArrayList<ItemStack>();
-
-        /*
-         * Add all entries from the OreDictionary
-         */
-        for (String oreName : OreDictionary.getOreNames()) {
-
-            CustomWrappedStack customWrappedStack = new CustomWrappedStack(new OreStack(oreName));
-
-            if (!discoveredItems.contains(customWrappedStack)) {
-                discoveredItems.add(customWrappedStack);
+    private void discoverStacks(Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes) {
+        
+        Set<CustomWrappedStack> recipeKeySet = recipes.keySet();
+        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
+        CustomWrappedStack recipeOutput = null;
+        
+        while (recipeKeySetIterator.hasNext()) {
+            recipeOutput = recipeKeySetIterator.next();
+            
+            if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack()))) {
+                discoveredStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
             }
-        }
-
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            if (recipe instanceof IRecipe) {
-                ItemStack craftingResult = ((IRecipe) recipe).getRecipeOutput();
-
-                if (craftingResult != null) {
-                    if (craftingResult.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                        CustomWrappedStack wrappedCraftingResult = new CustomWrappedStack(craftingResult);
-
-                        if (!discoveredItems.contains(wrappedCraftingResult)) {
-                            discoveredItems.add(wrappedCraftingResult);
-                        }
-                    }
-
-                    for (CustomWrappedStack wrappedRecipeInput : RecipeHelper.getCollatedRecipeInputs((IRecipe) recipe)) {
-                        if (wrappedRecipeInput.getWrappedStack() instanceof ItemStack) {
-                            ItemStack wrappedItemStack = (ItemStack) wrappedRecipeInput.getWrappedStack();
-                            if (wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-
-                                wrappedRecipeInput.setStackSize(1);
-
-                                if (!discoveredItems.contains(wrappedRecipeInput)) {
-                                    discoveredItems.add(wrappedRecipeInput);
-                                }
-                            }
-                        }
+            
+            for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
+                for (CustomWrappedStack recipeInput : recipeInputs) {
+                    
+                    if (!discoveredStacks.contains(new CustomWrappedStack(recipeInput.getWrappedStack()))) {
+                        discoveredStacks.add(new CustomWrappedStack(recipeInput.getWrappedStack()));
                     }
                 }
             }
         }
 
-        /*
-         * For every possible item (and sub item), add them to the discovered
-         * items list
-         */
+        ArrayList<ItemStack> subItemList = new ArrayList<ItemStack>();
+        
         for (int i = 0; i < Item.itemsList.length; i++) {
             if (Item.itemsList[i] != null) {
                 if (Item.itemsList[i].getHasSubtypes()) {
 
-                    subItems.clear();
-                    Item.itemsList[i].getSubItems(i, Item.itemsList[i].getCreativeTab(), subItems);
+                    subItemList.clear();
+                    Item.itemsList[i].getSubItems(i, Item.itemsList[i].getCreativeTab(), subItemList);
 
-                    for (ItemStack itemStack : subItems) {
+                    for (ItemStack itemStack : subItemList) {
                         if (itemStack != null) {
 
                             CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
 
-                            if (!discoveredItems.contains(customWrappedStack)) {
-                                discoveredItems.add(customWrappedStack);
+                            if (!discoveredStacks.contains(customWrappedStack)) {
+                                discoveredStacks.add(customWrappedStack);
+                                stacksWithoutRecipes.add(customWrappedStack);
                             }
                         }
                     }
                 }
                 else {
-
-                    ItemStack itemStack = new ItemStack(Item.itemsList[i]);
-
-                    CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
-                    if (!discoveredItems.contains(customWrappedStack)) {
-                        discoveredItems.add(customWrappedStack);
+                    
+                    CustomWrappedStack customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i]));
+                    
+                    if (!discoveredStacks.contains(customWrappedStack)) {
+                        discoveredStacks.add(customWrappedStack);
+                        stacksWithoutRecipes.add(customWrappedStack);
                     }
                 }
-            }
-        }
-
-        /**
-         * Now that we have discovered as many items as possible, trim out the
-         * items that are black listed
-         */
-        for (CustomWrappedStack customWrappedStack : EmcBlackList.getInstance().getBlackListStacks()) {
-
-            while (discoveredItems.contains(customWrappedStack)) {
-                discoveredItems.remove(customWrappedStack);
-            }
-        }
-
-        for (CustomWrappedStack customWrappedStack : discoveredItems) {
-
-            if (!graph.nodeExists(customWrappedStack)) {
-                graph.addNode(customWrappedStack);
             }
         }
     }
@@ -191,7 +151,7 @@ public class DynEMC {
     @SuppressWarnings("unused")
     private void populateGraph() {
 
-        for (CustomWrappedStack customWrappedStack : discoveredItems) {
+        for (CustomWrappedStack customWrappedStack : discoveredStacks) {
 
             ArrayList<IRecipe> recipes = RecipeHelper.getReverseRecipes(customWrappedStack);
 
