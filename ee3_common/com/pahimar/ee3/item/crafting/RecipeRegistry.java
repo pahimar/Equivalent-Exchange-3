@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.HashMultimap;
@@ -20,22 +22,121 @@ public class RecipeRegistry {
     private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMap;
-
-    public List<CustomWrappedStack> wildCardList;
+    private ArrayList<CustomWrappedStack> discoveredStacks;
+    private ArrayList<CustomWrappedStack> recipelessStacks;
+    private List<CustomWrappedStack> wildCardStacks;
 
     private RecipeRegistry() {
 
         recipeMap = HashMultimap.create();
-        wildCardList = RecipeHelper.populateWildCards();
+        wildCardStacks = RecipeHelper.populateWildCards();
+        discoveredStacks = new ArrayList<CustomWrappedStack>();
+        recipelessStacks = new ArrayList<CustomWrappedStack>();
     }
 
     public static RecipeRegistry getInstance() {
 
         if (recipeRegistry == null) {
             recipeRegistry = new RecipeRegistry();
+            recipeRegistry.init();
         }
 
         return recipeRegistry;
+    }
+    
+    private void init() {
+        
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes = HashMultimap.create();
+
+        // Add potion recipes
+        recipes.putAll(RecipesPotions.getPotionRecipes());
+
+        // Add smelting recipes in the vanilla smelting manager
+        recipes.putAll(RecipesSmelting.getSmeltingRecipes());
+
+        // Add recipes in the vanilla crafting manager
+        recipes.putAll(RecipesVanilla.getVanillaRecipes());
+
+        // Add recipes gathered via IMC
+        // TODO Gather IMC recipes
+
+        // Populate the discovered stacks list with all stacks that we are involved in a recipe we are aware of 
+        discoverStacks(recipes);
+        
+        // Add items that have no recipe, using the list of discovered stacks to determine if it's in a recipe or not
+        for (CustomWrappedStack stack : recipelessStacks) {
+            recipes.put(stack, new ArrayList<CustomWrappedStack>());
+        }
+
+        // Iterate through every recipe in the map, and add them to the registry
+        Set<CustomWrappedStack> recipeKeySet = recipes.keySet();
+        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
+        CustomWrappedStack recipeOutput = null;
+
+        while (recipeKeySetIterator.hasNext()) {
+            recipeOutput = recipeKeySetIterator.next();
+            
+            for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
+                addRecipe(recipeOutput, recipeInputs);
+            }
+        }
+    }
+    
+    private void discoverStacks(Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes) {
+        
+        Set<CustomWrappedStack> recipeKeySet = recipes.keySet();
+        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
+        CustomWrappedStack recipeOutput = null;
+        
+        while (recipeKeySetIterator.hasNext()) {
+            recipeOutput = recipeKeySetIterator.next();
+            
+            if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack()))) {
+                discoveredStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
+            }
+            
+            for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
+                for (CustomWrappedStack recipeInput : recipeInputs) {
+                    
+                    if (!discoveredStacks.contains(new CustomWrappedStack(recipeInput.getWrappedStack()))) {
+                        discoveredStacks.add(new CustomWrappedStack(recipeInput.getWrappedStack()));
+                    }
+                }
+            }
+        }
+
+        ArrayList<ItemStack> subItemList = new ArrayList<ItemStack>();
+        
+        for (int i = 0; i < Item.itemsList.length; i++) {
+            if (Item.itemsList[i] != null) {
+                if (Item.itemsList[i].getHasSubtypes()) {
+
+                    subItemList.clear();
+                    Item.itemsList[i].getSubItems(i, Item.itemsList[i].getCreativeTab(), subItemList);
+
+                    for (ItemStack itemStack : subItemList) {
+                        if (itemStack != null) {
+
+                            CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
+
+                            if (!discoveredStacks.contains(customWrappedStack)) {
+                                discoveredStacks.add(customWrappedStack);
+                                recipelessStacks.add(customWrappedStack);
+                            }
+                        }
+                    }
+                }
+                else {
+                    
+                    CustomWrappedStack customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i]));
+                    
+                    if (!discoveredStacks.contains(customWrappedStack)) {
+                        discoveredStacks.add(customWrappedStack);
+                        recipelessStacks.add(customWrappedStack);
+                    }
+                }
+            }
+        }
     }
 
     public boolean hasRecipe(CustomWrappedStack customWrappedStack) {
@@ -48,26 +149,26 @@ public class RecipeRegistry {
         return hasRecipe(new CustomWrappedStack(itemStack));
     }
 
-    public int countRecipes(CustomWrappedStack customWrappedStack) {
+    public int countRecipesFor(CustomWrappedStack customWrappedStack) {
 
         Collection<List<CustomWrappedStack>> keys = recipeMap.get(customWrappedStack);
 
         return keys.size();
     }
 
-    public int countRecipes(ItemStack itemStack) {
+    public int countRecipesFor(ItemStack itemStack) {
 
-        return countRecipes(new CustomWrappedStack(itemStack));
+        return countRecipesFor(new CustomWrappedStack(itemStack));
     }
 
-    public Collection<List<CustomWrappedStack>> getRecipes(CustomWrappedStack customWrappedStack) {
+    public Collection<List<CustomWrappedStack>> getRecipesFor(CustomWrappedStack customWrappedStack) {
 
         return recipeMap.get(customWrappedStack);
     }
 
-    public Collection<List<CustomWrappedStack>> getRecipes(ItemStack itemStack) {
+    public Collection<List<CustomWrappedStack>> getRecipesFor(ItemStack itemStack) {
 
-        return getRecipes(new CustomWrappedStack(itemStack));
+        return getRecipesFor(new CustomWrappedStack(itemStack));
     }
 
     /*
@@ -94,8 +195,8 @@ public class RecipeRegistry {
                 wrappedInputStack = (CustomWrappedStack) object;
             }
 
-            if (wildCardList.contains(wrappedInputStack)) {
-                Iterator<CustomWrappedStack> wildIter = wildCardList.iterator();
+            if (wildCardStacks.contains(wrappedInputStack)) {
+                Iterator<CustomWrappedStack> wildIter = wildCardStacks.iterator();
                 while (wildIter.hasNext()) {
                     CustomWrappedStack wildCard = wildIter.next();
                     if (wildCard.equals(wrappedInputStack)) {
@@ -165,5 +266,25 @@ public class RecipeRegistry {
         }
 
         return stringBuilder.toString();
+    }
+    
+    public Multimap<CustomWrappedStack, List<CustomWrappedStack>> getRecipeMappings() {
+        
+        return recipeMap;
+    }
+    
+    public List<CustomWrappedStack> getDiscoveredStacks() {
+        
+        return discoveredStacks;
+    }
+    
+    public List<CustomWrappedStack> getRecipelessStacks() {
+        
+        return recipelessStacks;
+    }
+    
+    public List<CustomWrappedStack> getWildCardStacks() {
+        
+        return wildCardStacks;
     }
 }
