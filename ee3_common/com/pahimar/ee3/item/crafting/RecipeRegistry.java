@@ -88,6 +88,7 @@ public class RecipeRegistry {
         Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
         CustomWrappedStack recipeOutput = null;
         
+        // Discover all stacks involved in the recipes we know about
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
             
@@ -98,13 +99,16 @@ public class RecipeRegistry {
             for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
                 for (CustomWrappedStack recipeInput : recipeInputs) {
                     
-                    if (!discoveredStacks.contains(new CustomWrappedStack(recipeInput.getWrappedStack()))) {
-                        discoveredStacks.add(new CustomWrappedStack(recipeInput.getWrappedStack()));
+                    CustomWrappedStack unwrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
+                    
+                    if (!discoveredStacks.contains(unwrappedRecipeInput)) {
+                        discoveredStacks.add(unwrappedRecipeInput);
                     }
                 }
             }
         }
 
+        // Discover all stacks from the vanilla Items array
         ArrayList<ItemStack> subItemList = new ArrayList<ItemStack>();
         
         for (int i = 0; i < Item.itemsList.length; i++) {
@@ -121,7 +125,6 @@ public class RecipeRegistry {
 
                             if (!discoveredStacks.contains(customWrappedStack)) {
                                 discoveredStacks.add(customWrappedStack);
-                                recipelessStacks.add(customWrappedStack);
                             }
                         }
                     }
@@ -132,9 +135,20 @@ public class RecipeRegistry {
                     
                     if (!discoveredStacks.contains(customWrappedStack)) {
                         discoveredStacks.add(customWrappedStack);
-                        recipelessStacks.add(customWrappedStack);
                     }
                 }
+            }
+        }
+        
+        /*
+         * For every stack we have discovered, check to see if we know a recipe for it. If we don't
+         * and we haven't already added it to the recipeless stack list, add it to the recipeless stack
+         * list
+         */
+        for (CustomWrappedStack discoveredStack : discoveredStacks) {
+            
+            if (recipes.get(discoveredStack).size() == 0 && !recipelessStacks.contains(discoveredStack)) {
+                recipelessStacks.add(discoveredStack);
             }
         }
     }

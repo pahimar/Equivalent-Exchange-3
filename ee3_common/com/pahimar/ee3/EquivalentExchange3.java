@@ -152,9 +152,6 @@ public class EquivalentExchange3 {
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
 
-        // Load the Transmutation Stone recipes
-        //RecipesTransmutationStone.init();
-
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
