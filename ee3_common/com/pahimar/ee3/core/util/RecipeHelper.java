@@ -30,39 +30,41 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class RecipeHelper {
 
     /**
-     * Discovers all instances of ItemStacks with wild card meta values in the vanilla Crafting Manager
+     * Discovers all instances of ItemStacks with wild card meta values in the
+     * vanilla Crafting Manager
      * 
-     * @return A list of CustomWrappedStacks that contains all wild card meta ItemStacks in the vanilla Crafting Manager
+     * @return A list of CustomWrappedStacks that contains all wild card meta
+     *         ItemStacks in the vanilla Crafting Manager
      */
     public static ArrayList<CustomWrappedStack> populateWildCards() {
-        
+
         ArrayList<CustomWrappedStack> wildCards = new ArrayList<CustomWrappedStack>();
-        
+
         for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            
+
             if (recipe instanceof IRecipe) {
-                
+
                 if (((IRecipe) recipe).getRecipeOutput() instanceof ItemStack) {
-                    
+
                     CustomWrappedStack recipeOutput = new CustomWrappedStack(((IRecipe) recipe).getRecipeOutput());
                     ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs((IRecipe) recipe);
                     ItemStack itemStack = null;
-                    
+
                     if (recipeOutput.getWrappedStack() instanceof ItemStack) {
-                        
+
                         itemStack = (ItemStack) recipeOutput.getWrappedStack();
-                        
+
                         if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(recipeOutput)) {
                             wildCards.add(recipeOutput);
                         }
                     }
-                    
+
                     for (CustomWrappedStack inputStack : recipeInputs) {
-                        
+
                         if (inputStack.getWrappedStack() instanceof ItemStack) {
-                            
+
                             itemStack = (ItemStack) inputStack.getWrappedStack();
-                            
+
                             if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(inputStack)) {
                                 wildCards.add(inputStack);
                             }
@@ -71,10 +73,10 @@ public class RecipeHelper {
                 }
             }
         }
-        
+
         return wildCards;
     }
-    
+
     /**
      * Returns a list of elements that constitute the input in a crafting recipe
      * 
@@ -83,11 +85,9 @@ public class RecipeHelper {
      * @return List of elements that constitute the input of the given IRecipe.
      *         Could be an ItemStack or an Arraylist
      */
-    @SuppressWarnings({ "rawtypes" })
     public static ArrayList<CustomWrappedStack> getRecipeInputs(IRecipe recipe) {
 
         ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
-        OreStack oreStack = null;
 
         if (recipe instanceof ShapedRecipes) {
 
@@ -117,20 +117,7 @@ public class RecipeHelper {
                 /*
                  * If the element is a list, then it is an OreStack
                  */
-                if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                    ArrayList shapedOreRecipeList = (ArrayList<?>) shapedOreRecipe.getInput()[i];
-
-                    if (!shapedOreRecipeList.isEmpty()) {
-
-                        oreStack = new OreStack((ItemStack) shapedOreRecipeList.get(0));
-
-                        recipeInputs.add(new CustomWrappedStack(oreStack));
-                    }
-                }
-                /*
-                 * Else it is possibly an ItemStack
-                 */
-                else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
+                if (shapedOreRecipe.getInput()[i] instanceof ArrayList || shapedOreRecipe.getInput()[i] instanceof ItemStack) {
                     recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
                 }
             }
@@ -140,17 +127,7 @@ public class RecipeHelper {
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
 
             for (Object object : shapelessOreRecipe.getInput()) {
-                if (object instanceof ArrayList) {
-                    ArrayList shapelessOreRecipeList = (ArrayList<?>) object;
-
-                    if (!shapelessOreRecipeList.isEmpty()) {
-
-                        oreStack = new OreStack((ItemStack) shapelessOreRecipeList.get(0));
-
-                        recipeInputs.add(new CustomWrappedStack(oreStack));
-                    }
-                }
-                else if (object instanceof ItemStack) {
+                if (object instanceof ArrayList || object instanceof ItemStack) {
                     recipeInputs.add(new CustomWrappedStack(object));
                 }
             }
@@ -158,41 +135,41 @@ public class RecipeHelper {
 
         return recipeInputs;
     }
-    
+
     public static ArrayList<CustomWrappedStack> getCollatedRecipeInputs(IRecipe recipe) {
-        
+
         return ItemUtil.collateStacks(getRecipeInputs(recipe));
     }
-    
+
     public static ArrayList<IRecipe> getReverseRecipes(CustomWrappedStack wrappedStack) {
-       
+
         ArrayList<IRecipe> reverseRecipeList = new ArrayList<IRecipe>();
-        
+
         @SuppressWarnings("unchecked")
         ArrayList<IRecipe> recipeList = new ArrayList<IRecipe>(CraftingManager.getInstance().getRecipeList());
-        
+
         for (IRecipe recipe : recipeList) {
-            
+
             if (recipe.getRecipeOutput() != null) {
-                
+
                 if (wrappedStack.getWrappedStack() instanceof ItemStack) {
-                    
+
                     if (ItemUtil.compare((ItemStack) wrappedStack.getWrappedStack(), recipe.getRecipeOutput())) {
                         reverseRecipeList.add(recipe);
                     }
                 }
                 else if (wrappedStack.getWrappedStack() instanceof OreStack) {
-                    
+
                     if (OreDictionary.getOreID(recipe.getRecipeOutput()) != -1) {
                         // TODO Generalize comparison of OreStacks and OreStacks|ItemStacks
-                        if (OreDictionary.getOreID(((OreStack)wrappedStack.getWrappedStack()).oreName) == OreDictionary.getOreID(recipe.getRecipeOutput())) {
+                        if (OreDictionary.getOreID(((OreStack) wrappedStack.getWrappedStack()).oreName) == OreDictionary.getOreID(recipe.getRecipeOutput())) {
                             reverseRecipeList.add(recipe);
                         }
                     }
                 }
             }
         }
-        
+
         return reverseRecipeList;
     }
 

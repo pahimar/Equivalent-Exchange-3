@@ -32,38 +32,38 @@ public class ItemUtil {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, ", itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize));
-        
+
         if (itemStack.hasTagCompound()) {
             stringBuilder.append(String.format("nbtTagCompound: %s, ", itemStack.getTagCompound().toString()));
         }
-        
+
         stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
 
         return stringBuilder.toString();
     }
 
     /**
-     * Compares two ItemStacks for equality, testing itemID, metaData, stackSize, and their NBTTagCompounds (if they are present)
+     * Compares two ItemStacks for equality, testing itemID, metaData,
+     * stackSize, and their NBTTagCompounds (if they are present)
      * 
      * @param first
-     *      The first ItemStack being tested for equality
+     *            The first ItemStack being tested for equality
      * @param second
-     *      The second ItemStack being tested for equality
-     * @return
-     *      true if the two ItemStacks are equivalent, false otherwise
+     *            The second ItemStack being tested for equality
+     * @return true if the two ItemStacks are equivalent, false otherwise
      */
     public static boolean compare(ItemStack first, ItemStack second) {
-        
+
         // Check to see if either argument is null
         if ((first != null) && (second != null)) {
             // Check the item IDs
             if (first.itemID == second.itemID) {
                 // Check the meta data
-                
+
                 if ((first.getItemDamage() == OreDictionary.WILDCARD_VALUE) || (second.getItemDamage() == OreDictionary.WILDCARD_VALUE)) {
                     //return true;
                 }
-                
+
                 if (first.getItemDamage() == second.getItemDamage()) {
                     // Check the stack size
                     if (first.stackSize == second.stackSize) {

@@ -23,16 +23,16 @@ public class EmcBlackList {
     public static EmcBlackList getInstance() {
 
         if (emcBlackList == null) {
-            
+
             emcBlackList = new EmcBlackList();
             emcBlackList.init();
         }
-        
+
         return emcBlackList;
     }
-    
+
     public List<CustomWrappedStack> getBlackListStacks() {
-        
+
         return stackBlackList;
     }
 
@@ -54,18 +54,17 @@ public class EmcBlackList {
 
         this.add(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
     }
-    
+
     public void add(int id, int meta) {
-        
+
         this.add(new ItemStack(id, 1, meta));
     }
-    
+
     public void add(int id) {
-        
+
         this.add(id, OreDictionary.WILDCARD_VALUE);
     }
-    
-    
+
     public boolean contains(ItemStack itemStack) {
 
         if (itemStack != null) {
@@ -84,14 +83,14 @@ public class EmcBlackList {
 
         return this.contains(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
     }
-    
+
     public boolean contains(int id, int meta) {
-        
+
         return this.contains(new ItemStack(id, 1, meta));
     }
-    
+
     public boolean contains(int id) {
-        
+
         return this.contains(id, OreDictionary.WILDCARD_VALUE);
     }
 
@@ -113,19 +112,19 @@ public class EmcBlackList {
 
         this.remove(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
     }
-    
+
     public void remove(int id, int meta) {
-        
+
         this.remove(new ItemStack(id, 1, meta));
     }
-    
+
     public void remove(int id) {
-        
+
         this.remove(id, OreDictionary.WILDCARD_VALUE);
     }
-    
+
     private void init() {
-        
+
         add(Block.bed);
         add(Block.pistonExtension);
         add(Block.pistonMoving);

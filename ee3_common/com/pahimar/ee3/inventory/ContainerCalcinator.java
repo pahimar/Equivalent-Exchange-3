@@ -24,7 +24,7 @@ public class ContainerCalcinator extends Container {
 
         // Add the fuel slot to the container
         this.addSlotToContainer(new Slot(calcinator, TileCalcinator.FUEL_INVENTORY_INDEX, 56, 62));
-        
+
         // Add the input slot to the container
         this.addSlotToContainer(new Slot(calcinator, TileCalcinator.INPUT_INVENTORY_INDEX, 56, 17));
 
@@ -57,32 +57,35 @@ public class ContainerCalcinator extends Container {
         Slot slot = (Slot) inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack()) {
-            
+
             ItemStack slotItemStack = slot.getStack();
             itemStack = slotItemStack.copy();
 
             /**
-             * If we are shift-clicking an item out of the Aludel's container, attempt to put it in the first available slot in the
-             * player's inventory 
+             * If we are shift-clicking an item out of the Aludel's container,
+             * attempt to put it in the first available slot in the player's
+             * inventory
              */
             if (slotIndex < TileCalcinator.INVENTORY_SIZE) {
-                
+
                 if (!this.mergeItemStack(slotItemStack, TileCalcinator.INVENTORY_SIZE, inventorySlots.size(), false)) {
                     return null;
                 }
             }
             else {
-                
+
                 /**
-                 * If the stack being shift-clicked into the Aludel's container is a fuel, first try to put it in the fuel slot.
-                 * If it cannot be merged into the fuel slot, try to put it in the input slot.
+                 * If the stack being shift-clicked into the Aludel's container
+                 * is a fuel, first try to put it in the fuel slot. If it cannot
+                 * be merged into the fuel slot, try to put it in the input
+                 * slot.
                  */
                 if (TileEntityFurnace.isItemFuel(slotItemStack)) {
                     if (!this.mergeItemStack(slotItemStack, TileCalcinator.FUEL_INVENTORY_INDEX, TileCalcinator.OUTPUT_INVENTORY_INDEX, false)) {
                         return null;
                     }
                 }
-                
+
                 /**
                  * Finally, attempt to put stack into the input slot
                  */

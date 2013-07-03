@@ -139,36 +139,31 @@ public class RecipeRegistry {
                 }
             }
         }
-        
+
         if (!recipeMap.containsEntry(recipeOutput, collatedStacks)) {
             recipeMap.put(recipeOutput, collatedStacks);
         }
     }
-    
+
     public int size() {
-        
+
         return recipeMap.size();
     }
-    
+
     @Override
     public String toString() {
-        
+
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         for (CustomWrappedStack key : recipeMap.keySet()) {
 
-            Iterator<List<CustomWrappedStack>> recipeIterator = recipeMap.get(key).iterator();
-            
-            while (recipeIterator.hasNext()) {
-                List<CustomWrappedStack> values = recipeIterator.next();
-                stringBuilder.append(String.format("Recipe Output: %s, Recipe Input: %s", key.toString(), values.toString()));
-                
-                if (recipeIterator.hasNext()) {
-                    stringBuilder.append("\n");
-                }
+            Collection<List<CustomWrappedStack>> recipeMappings = recipeMap.get(key);
+
+            for (List<CustomWrappedStack> recipeList : recipeMappings) {
+                stringBuilder.append(String.format("Recipe Output: %s, Recipe Input: %s\n", key.toString(), recipeList.toString()));
             }
         }
-        
+
         return stringBuilder.toString();
     }
 }

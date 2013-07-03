@@ -15,11 +15,11 @@ public class EquivalencyGroup {
 
         equivalentItems = new ArrayList<CustomWrappedStack>();
     }
-    
+
     public EquivalencyGroup(List<ItemStack> equivalentItems) {
-        
+
         this.equivalentItems = new ArrayList<CustomWrappedStack>();
-        
+
         for (ItemStack itemStack : equivalentItems) {
             this.equivalentItems.add(new CustomWrappedStack(itemStack));
         }
@@ -51,9 +51,9 @@ public class EquivalencyGroup {
             equivalentItems.add(customWrappedStack);
         }
     }
-    
+
     public void setEquivalentItems(List<CustomWrappedStack> equivalentItems) {
-        
+
         this.equivalentItems = equivalentItems;
     }
 
@@ -90,7 +90,7 @@ public class EquivalencyGroup {
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         stringBuilder.append("Equivalent Group Members: ");
         for (CustomWrappedStack customWrappedStack : equivalentItems) {
             stringBuilder.append(String.format("%s ", customWrappedStack));

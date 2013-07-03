@@ -1,11 +1,14 @@
 package com.pahimar.ee3.item;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.OreStack;
+import com.pahimar.ee3.lib.Reference;
 
 public class CustomWrappedStack {
 
@@ -37,11 +40,11 @@ public class CustomWrappedStack {
              * If the ItemStack does not exist in the OreDictionary, wrap it as
              * an ItemStack
              */
-            if (OreDictionary.getOreID(itemStack) == -1) {
-                this.itemStack = itemStack;
+            if (OreDictionary.getOreID(itemStack) == Reference.ORE_DICTIONARY_NOT_FOUND) {
+                this.itemStack = itemStack.copy();
                 oreStack = null;
                 energyStack = null;
-                stackSize = itemStack.stackSize;
+                stackSize = this.itemStack.stackSize;
                 this.itemStack.stackSize = 1;
             }
             /*
@@ -66,6 +69,29 @@ public class CustomWrappedStack {
             energyStack = null;
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
+        }
+        else if (object instanceof ArrayList) {
+
+            itemStack = null;
+
+            ArrayList<?> objectList = (ArrayList<?>) object;
+
+            if (!objectList.isEmpty()) {
+                for (Object listElement : objectList) {
+                    if (listElement instanceof ItemStack) {
+                        ItemStack stack = (ItemStack) listElement;
+
+                        if (OreDictionary.getOreID(stack) != Reference.ORE_DICTIONARY_NOT_FOUND) {
+                            oreStack = new OreStack(stack);
+                            stackSize = oreStack.stackSize;
+                            oreStack.stackSize = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            energyStack = null;
         }
         /*
          * Or we are given an EnergyStack to wrap
@@ -170,17 +196,9 @@ public class CustomWrappedStack {
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         if (itemStack != null) {
-
-            stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, ", itemStack.itemID, itemStack.getItemDamage(), stackSize));
-
-            if (itemStack.hasTagCompound()) {
-                stringBuilder.append(String.format("nbtTagCompound: %s, ", itemStack.getTagCompound().toString()));
-            }
-
-            stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
-
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getItemName(), itemStack.getItem().getClass().getCanonicalName()));
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));

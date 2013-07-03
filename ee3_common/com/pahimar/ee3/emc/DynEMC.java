@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.OreStack;
@@ -22,6 +23,7 @@ import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesPotions;
 import com.pahimar.ee3.item.crafting.RecipesSmelting;
+import com.pahimar.ee3.item.crafting.RecipesVanilla;
 
 public class DynEMC {
 
@@ -50,47 +52,39 @@ public class DynEMC {
     private void init() {
 
         RecipeRegistry recipeManager = RecipeRegistry.getInstance();
-        
-        Set<CustomWrappedStack> keySet = null;
-        Iterator<CustomWrappedStack> keySetIter = null;
-        CustomWrappedStack key = null;
-        
-        /* Add Potions */
-        Multimap<CustomWrappedStack, List<CustomWrappedStack>> potionRecipes = RecipesPotions.getPotionRecipes();
 
-        keySet = potionRecipes.keySet();
-        keySetIter = keySet.iterator();
-        key = null;
-        
-        while (keySetIter.hasNext()) {
-            key = keySetIter.next();
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes = HashMultimap.create();
+        Set<CustomWrappedStack> recipeKeySet = null;
+        Iterator<CustomWrappedStack> recipeKeySetIterator = null;
+        CustomWrappedStack recipeOutput = null;
 
-            for (List<CustomWrappedStack> potionInputs : potionRecipes.get(key)) {
-                recipeManager.addRecipe(key, potionInputs);
+        // Add potion recipes
+        recipes.putAll(RecipesPotions.getPotionRecipes());
+
+        // Add smelting recipes in the vanilla smelting manager
+        recipes.putAll(RecipesSmelting.getSmeltingRecipes());
+
+        // Add recipes in the vanilla crafting manager
+        recipes.putAll(RecipesVanilla.getVanillaRecipes());
+
+        // Add recipes gathered via IMC
+        // TODO Gather IMC recipes
+
+        // Add items that have no recipe
+
+        // Iterate through every recipe in the map, and add them to the registry
+        recipeKeySet = recipes.keySet();
+        recipeKeySetIterator = recipeKeySet.iterator();
+        recipeOutput = null;
+
+        while (recipeKeySetIterator.hasNext()) {
+            recipeOutput = recipeKeySetIterator.next();
+
+            for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
+                recipeManager.addRecipe(recipeOutput, recipeInputs);
             }
         }
-        
-        /* Add Smelting */
-        Multimap<CustomWrappedStack, List<CustomWrappedStack>> smeltingRecipes = RecipesSmelting.getSmeltingRecipes();
 
-        keySet = smeltingRecipes.keySet();
-        keySetIter = keySet.iterator();
-        key = null;
-        
-        while (keySetIter.hasNext()) {
-            key = keySetIter.next();
-
-            for (List<CustomWrappedStack> smeltingInputs : smeltingRecipes.get(key)) {
-                recipeManager.addRecipe(key, smeltingInputs);
-            }
-        }
-        
-        /* Add vanilla crafting */
-        
-        /* Add recipes sent via IMC */
-        
-        /* Add all other items that don't have some method of crafting */
-        
         LogHelper.debug(recipeManager.toString());
     }
 

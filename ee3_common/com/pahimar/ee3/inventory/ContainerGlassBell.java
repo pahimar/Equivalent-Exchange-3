@@ -47,17 +47,16 @@ public class ContainerGlassBell extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
-        
+
         ItemStack itemStack = null;
         Slot slot = (Slot) inventorySlots.get(slotIndex);
 
-        if (slot != null && slot.getHasStack())
-        {
+        if (slot != null && slot.getHasStack()) {
             ItemStack slotItemStack = slot.getStack();
             itemStack = slotItemStack.copy();
 
             if (slotIndex < TileGlassBell.INVENTORY_SIZE) {
-                
+
                 if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true)) {
                     return null;
                 }

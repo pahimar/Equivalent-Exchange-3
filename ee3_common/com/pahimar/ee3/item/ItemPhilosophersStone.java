@@ -71,9 +71,9 @@ public class ItemPhilosophersStone extends ItemEE
     public ItemStack getContainerItemStack(ItemStack itemStack) {
 
         ItemStack copiedStack = itemStack.copy();
-        
+
         copiedStack.setItemDamage(copiedStack.getItemDamage() + 1);
-        
+
         // Hacky hacky hack hack
         copiedStack.stackSize = 1;
 

@@ -19,7 +19,7 @@ import com.pahimar.ee3.lib.Strings;
  * 
  */
 public class ContainerAlchemicalBag extends Container {
-    
+
     private final int BAG_INVENTORY_ROWS = 4;
     private final int BAG_INVENTORY_COLUMNS = 13;
 
@@ -63,7 +63,7 @@ public class ContainerAlchemicalBag extends Container {
             }
         }
     }
-    
+
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
 

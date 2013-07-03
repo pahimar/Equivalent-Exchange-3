@@ -30,26 +30,26 @@ public class WeightedEdge<T> {
 
         this.target = target;
     }
-    
+
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof WeightedEdge<?>)) {
             return false;
         }
-        
+
         WeightedEdge<?> edge = (WeightedEdge<?>) object;
-        
+
         return ((this.weight == edge.weight) && (target.equals(edge.target)));
     }
-    
+
     @Override
     public String toString() {
-        
+
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         stringBuilder.append(String.format("Weight: %s, Target: %s ", weight, target));
-        
+
         return stringBuilder.toString();
     }
 }
