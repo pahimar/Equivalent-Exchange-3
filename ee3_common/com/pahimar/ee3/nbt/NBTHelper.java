@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.nbt;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +14,8 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class NBTHelper {
 
+    // TODO Write a method to encode a given stack (ItemStack | OreStack | EnergyStack) as a NBTTagList
+    
     /**
      * Initializes the NBT Tag Compound for the given ItemStack if it is null
      * 
