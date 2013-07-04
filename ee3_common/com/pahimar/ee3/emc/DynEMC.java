@@ -1,8 +1,10 @@
 package com.pahimar.ee3.emc;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
 import com.pahimar.ee3.emc.graph.WeightedEdge;
@@ -13,10 +15,12 @@ public class DynEMC {
 
     private static DynEMC dynEMC = null;
     
+    private RecipeRegistry recipeRegistry;
     private WeightedDirectedGraph<CustomWrappedStack> graph;
 
     private DynEMC() {
 
+        recipeRegistry = RecipeRegistry.getInstance();
         graph = new WeightedDirectedGraph<CustomWrappedStack>();
 
         init();
@@ -32,15 +36,40 @@ public class DynEMC {
     }
 
     private void init() {
-
-        @SuppressWarnings("unused")
-        RecipeRegistry recipeManager = RecipeRegistry.getInstance();
         
         populateGraph();
+        //printDebugDump();
     }
 
     private void populateGraph() {
-
+        
+        for (CustomWrappedStack discoveredStack : recipeRegistry.getDiscoveredStacks()) {
+            graph.addNode(discoveredStack);
+        }
+        
+        Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMappings = recipeRegistry.getRecipeMappings();
+        
+        Set<CustomWrappedStack> recipeKeySet = recipeMappings.keySet();
+        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
+        CustomWrappedStack recipeOutput = null;
+        
+        while (recipeKeySetIterator.hasNext()) {
+            recipeOutput = recipeKeySetIterator.next();
+            
+            for (List<CustomWrappedStack> recipeInputs : recipeMappings.get(recipeOutput)) {
+                for (CustomWrappedStack recipeInput : recipeInputs) {
+                    
+                    // Unwrapped the wrapped stacks so that we actually find them in the graph
+                    CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
+                    CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
+                    
+                    if (recipeOutput.getStackSize() != 0) {
+                        
+                        graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
+                    }
+                }
+            }
+        }
     }
 
     public int size() {
@@ -50,6 +79,15 @@ public class DynEMC {
 
     public void printDebugDump() {
 
+        LogHelper.debug("Total node count: " + graph.getAllNodes().size());
+        LogHelper.debug("Critical node count: " + graph.getCriticalNodes().size());
+        LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
+        
+        List<CustomWrappedStack> critsMinusOrphans = graph.getCriticalNodes();
+        critsMinusOrphans.removeAll(graph.getOrphanNodes());
+        
+        LogHelper.debug("[Critical - Orphans] node count: " + critsMinusOrphans.size());
+        
         LogHelper.debug("***** START NODES *****");
         Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {

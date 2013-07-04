@@ -13,6 +13,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
+import com.pahimar.ee3.core.util.LogHelper;
+
 public class WeightedDirectedGraph<T> implements Iterable<T> {
 
     private final Map<T, SortedSet<WeightedEdge<T>>> graph = new HashMap<T, SortedSet<WeightedEdge<T>>>();
@@ -46,10 +48,10 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         if (!(graph.containsKey(from) && graph.containsKey(to))) {
             if (!graph.containsKey(from)) {
-                LOGGER.severe("From node doesn't exist: " + from.toString());
+                LogHelper.severe("From node doesn't exist: " + from.toString());
             }
             if (!graph.containsKey(to)) {
-                LOGGER.severe("To node doesn't exist: " + to.toString());
+                LogHelper.severe("To node doesn't exist: " + to.toString());
             }
             throw new NoSuchElementException("Missing nodes from graph");
         }
