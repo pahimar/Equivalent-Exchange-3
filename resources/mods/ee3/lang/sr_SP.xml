@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+    <comment>Serbian (sr_SP) Localization File</comment>
+    <entry key="key.extra">Dodatno</entry>
+    <entry key="key.release">Oslabiti</entry>
+    <entry key="key.toggle">Menjati</entry>
+    <entry key="key.charge">Pojačati</entry>
+    <entry key="item.shardMinium.name">Odlomak Miniuma</entry>
+    <entry key="item.stoneInert.name">Inertni Kamen</entry>
+    <entry key="item.stoneMinium.name">Miniumski Kamen</entry>
+    <entry key="item.stonePhilosophers.name">Filozofski Kamen</entry>
+    <entry key="item.alchemicalDustAsh.name">Pepeo</entry>
+    <entry key="item.alchemicalDustMinium.name">Miniumska Prašina</entry>
+    <entry key="item.alchemicalDustVerdant.name">Verdantna Prašina</entry>
+    <entry key="item.alchemicalDustAzure.name">Azurna Prašina</entry>
+    <entry key="item.alchemicalDustAmaranthine.name">Amarantinska Prašina</entry>
+    <entry key="item.alchemicalDustIridescent.name">Iridesentna Prašina</entry>
+    <entry key="item.alchemicalBag.name">Alhemijska Vreća</entry>
+    <entry key="tile.redWaterStill.name">Crvena Voda (Stajaća)</entry>
+    <entry key="tile.redWaterFlowing.name">Crvena Voda (Tekuća)</entry>
+    <entry key="tile.calcinator.name">Kalcinator</entry>
+    <entry key="tile.aludel.name">Aludel</entry>
+    <entry key="tile.alchemicalChest.name">Alhemijski Kovčeg</entry>
+    <entry key="tile.glassBell.name">Stakleno Zvono</entry>
+    <entry key="container.calcinator">Kalcinator</entry>
+    <entry key="container.aludel">Aludel</entry>
+    <entry key="container.alchemicalChest">Alhemijski Kovčeg</entry>
+    <entry key="container.alchemicalBag">Alhemijska Vreća</entry>
+    <entry key="container.glassBell">Stakleno Zvono</entry>
+    <entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+    <entry key="version.init_log_message">Započinjem proveru verzije u poređenju sa naj novijom, koji se nalazi u</entry>
+    <entry key="version.uninitialized">Provera verzije neuspešna</entry>
+    <entry key="version.current">Trenutno koristite naj noviju verziju (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 moda za @MINECRAFT_VERSION@</entry>
+    <entry key="version.outdated">Nova @MOD_NAME@ verzija postoji (@REMOTE_MOD_VERSION@) za @MINECRAFT_VERSION@. Skinite je ovde: @MOD_UPDATE_LOCATION@</entry>
+    <entry key="version.general_error">Greška u konektovanju sa serverom; pokusavam ponovo</entry>
+    <entry key="version.final_error">Provera verzije zaustavljena posle tri neušpesna pokušaja</entry>
+    <entry key="version.mc_version_not_found">Potraga za verziju @MOD_NAME@ za @MINECRAFT_VERSION@, neuspešna</entry>
+    <entry key="command.ee3.overlay.turned_on">Prikaz mete transmutacije uključen</entry>
+    <entry key="command.ee3.overlay.turned_off">Prikaz mete transmutacije isključen</entry>
+    <entry key="command.ee3.overlay.position.top_left">Prikaz mete transmutacije stavljen na gornji levi ugao</entry>
+    <entry key="command.ee3.overlay.position.top_right">Prikaz mete transmutacije stavljen na gornji desni ugao</entry>
+    <entry key="command.ee3.overlay.position.bottom_left">Prikaz mete transmutacije stavljen na donji levi ugao</entry>
+    <entry key="command.ee3.overlay.position.bottom_right">Prikaz mete transmutacije stavljen na donji desni ugao</entry>
+    <entry key="command.ee3.overlay.opacity.usage.additional_text">(gde je ### decimalna vrednost izmedju 0.0 i 1.0) </entry>
+    <entry key="command.ee3.overlay.opacity.updated">Prozirnost prikaza mete transmutacije uspešno promenjena</entry>
+    <entry key="command.ee3.overlay.scale.usage.additional_text">(gde je ### decimalna vrednost veća nego 0.0) </entry>
+    <entry key="command.ee3.overlay.scale.updated">Veličina prikaza mete transmutacije uspešno promenjena</entry>
+    <entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 čestice uključene</entry>
+    <entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 čestice isključene</entry>
+    <entry key="command.ee3.sounds.set_to_all">Čućete Equivalent Exchange 3 zvukove od svih igrača</entry>
+    <entry key="command.ee3.sounds.set_to_self">Čućete samo svoje Equivalent Exchange 3 zvukove</entry>
+    <entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 zvukovi isključeni</entry>
+</properties>
