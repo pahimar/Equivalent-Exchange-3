@@ -1,7 +1,18 @@
 package com.pahimar.ee3.nbt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+
+import com.pahimar.ee3.core.util.EnergyStack;
+import com.pahimar.ee3.core.util.OreStack;
+import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.lib.Strings;
 
 /**
  * Equivalent-Exchange-3
@@ -14,8 +25,160 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class NBTHelper {
 
-    // TODO Write a method to encode a given stack (ItemStack | OreStack | EnergyStack) as a NBTTagList
+    // TODO Do a (String,String) version of encodeStackAsNBT. Remember to validate the format in regex
+    // TODO Link this method to some API stuffs
     
+    public static NBTTagCompound encodeStackAsNBT(String name, Object stackObject) {
+
+        NBTTagCompound encodedStack = new NBTTagCompound(name);
+
+        CustomWrappedStack wrappedStack = null;
+
+        if (stackObject instanceof ItemStack || stackObject instanceof OreStack || stackObject instanceof EnergyStack) {
+            wrappedStack = new CustomWrappedStack(stackObject);
+        }
+        else if (stackObject instanceof CustomWrappedStack) {
+            wrappedStack = (CustomWrappedStack) stackObject;
+        }
+
+        if (wrappedStack != null) {
+            if (wrappedStack.getWrappedStack() instanceof ItemStack) {
+                
+                ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
+                encodedStack.setString(Strings.NBT_ENCODED_ATTR_TYPE, Strings.NBT_ENCODED_ATTR_TYPE_ITEM);
+                itemStack.writeToNBT(encodedStack);
+            }
+            else if (wrappedStack.getWrappedStack() instanceof OreStack) {
+                OreStack oreStack = (OreStack) wrappedStack.getWrappedStack();
+
+                encodedStack.setString(Strings.NBT_ENCODED_ATTR_TYPE, Strings.NBT_ENCODED_ATTR_TYPE_ORE);
+                encodedStack.setString(Strings.NBT_ENCODED_ATTR_ORE_NAME, oreStack.oreName);
+                encodedStack.setShort(Strings.NBT_ENCODED_ATTR_SIZE, (short) wrappedStack.getStackSize());
+            }
+            else if (wrappedStack.getWrappedStack() instanceof EnergyStack) {
+                EnergyStack energyStack = (EnergyStack) wrappedStack.getWrappedStack();
+
+                encodedStack.setString(Strings.NBT_ENCODED_ATTR_TYPE, Strings.NBT_ENCODED_ATTR_TYPE_ENERGY);
+                encodedStack.setString(Strings.NBT_ENCODED_ATTR_ENERGY_NAME, energyStack.energyName);
+                encodedStack.setShort(Strings.NBT_ENCODED_ATTR_SIZE, (short) wrappedStack.getStackSize());
+            }
+        }
+
+        return encodedStack;
+    }
+
+    public static NBTTagCompound encodeRecipeAsNBT(Object recipeOutput, List<?> recipeInputs) {
+
+        NBTTagCompound encodedRecipe = new NBTTagCompound();
+
+        NBTTagCompound recipeOutputNBTCompound = encodeStackAsNBT(Strings.NBT_ENCODED_RECIPE_OUTPUT, recipeOutput);
+        NBTTagList recipeInputsNBTList = new NBTTagList(Strings.NBT_ENCODED_RECIPE_INPUTS);
+
+        for (int i = 0; i < recipeInputs.size(); i++) {
+            recipeInputsNBTList.appendTag(encodeStackAsNBT(Strings.NBT_ENCODED_RECIPE_INPUT_PREFIX.concat(Integer.toString(i)), recipeInputs.get(i)));
+        }
+
+        encodedRecipe.setCompoundTag(Strings.NBT_ENCODED_RECIPE_OUTPUT, recipeOutputNBTCompound);
+        encodedRecipe.setTag(Strings.NBT_ENCODED_RECIPE_INPUTS, recipeInputsNBTList);
+
+        return encodedRecipe;
+    }
+
+    /**
+     * 
+     * @param encodedStack
+     *            A NBTTagCompound containing the encoded information of either
+     *            a ItemStack, OreStack, or EnergyStack
+     * @return A CustomWrappedStack containing the encoded stack provided in the
+     *         NBTTagCompound (could be ItemStack, OreStack, or EnergyStack).
+     *         Returns null in the event that no valid stack was able to be
+     *         parsed from the encoded NBTTagCompound.
+     */
+    public static CustomWrappedStack decodeStackFromNBT(NBTTagCompound encodedStack) {
+
+        CustomWrappedStack decodedStack = null;
+
+        // If the encoded tag compound is of type ItemStack, parse out the ItemStack info
+        if (encodedStack.hasKey(Strings.NBT_ENCODED_ATTR_TYPE)) {
+            if (encodedStack.getString(Strings.NBT_ENCODED_ATTR_TYPE).equalsIgnoreCase(Strings.NBT_ENCODED_ATTR_TYPE_ITEM)) {
+
+                ItemStack itemStack = new ItemStack(0, 0, 0);
+                itemStack.readFromNBT(encodedStack);
+                decodedStack = new CustomWrappedStack(itemStack);
+            }
+            // Else if the encoded tag compound is of type OreStack, parse out the OreStack info
+            else if (encodedStack.getString(Strings.NBT_ENCODED_ATTR_TYPE).equalsIgnoreCase(Strings.NBT_ENCODED_ATTR_TYPE_ORE)) {
+
+                if (encodedStack.hasKey(Strings.NBT_ENCODED_ATTR_ORE_NAME) && encodedStack.hasKey(Strings.NBT_ENCODED_ATTR_SIZE)) {
+                    if ((encodedStack.getString(Strings.NBT_ENCODED_ATTR_ORE_NAME).length() > 0) && (encodedStack.getShort(Strings.NBT_ENCODED_ATTR_SIZE) >= 0)) {
+                        decodedStack = new CustomWrappedStack(new OreStack(encodedStack.getString(Strings.NBT_ENCODED_ATTR_ORE_NAME), encodedStack.getShort(Strings.NBT_ENCODED_ATTR_SIZE)));
+                    }
+                }
+            }
+            // Else if the encoded tag compound is of type EnergyStack, parse out the EnergyStack info
+            else if (encodedStack.getString(Strings.NBT_ENCODED_ATTR_TYPE).equalsIgnoreCase(Strings.NBT_ENCODED_ATTR_TYPE_ENERGY)) {
+
+                if (encodedStack.hasKey(Strings.NBT_ENCODED_ATTR_ENERGY_NAME) && encodedStack.hasKey(Strings.NBT_ENCODED_ATTR_SIZE)) {
+                    if ((encodedStack.getString(Strings.NBT_ENCODED_ATTR_ENERGY_NAME).length() > 0) && (encodedStack.getShort(Strings.NBT_ENCODED_ATTR_SIZE) >= 0)) {
+                        decodedStack = new CustomWrappedStack(new EnergyStack(encodedStack.getString(Strings.NBT_ENCODED_ATTR_ENERGY_NAME), encodedStack.getShort(Strings.NBT_ENCODED_ATTR_SIZE)));
+                    }
+                }
+            }
+        }
+
+        /*
+         * This will only return non-null in the event that a proper
+         * ItemStack|OreStack|EnergyStack was decoded from the encoded
+         * NBTTagCompound
+         */
+        return decodedStack;
+    }
+
+    public static Map<CustomWrappedStack, List<CustomWrappedStack>> decodeRecipeFromNBT(NBTTagCompound encodedRecipe) {
+
+        HashMap<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipe = new HashMap<CustomWrappedStack, List<CustomWrappedStack>>();
+        
+        CustomWrappedStack recipeOutput = null;
+        ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
+        
+        CustomWrappedStack decodedStack = null; 
+        NBTTagCompound encodedStack = null;
+
+        // Decode the recipe output
+        if (encodedRecipe.hasKey(Strings.NBT_ENCODED_RECIPE_OUTPUT)) {
+            
+            decodedStack = decodeStackFromNBT(encodedRecipe.getCompoundTag(Strings.NBT_ENCODED_RECIPE_OUTPUT));
+            
+            if (decodedStack != null) {
+                recipeOutput = decodedStack;
+            }
+        }
+        
+        // Decode the recipe inputs
+        if (encodedRecipe.hasKey("recipeInputs")) {
+            NBTTagList recipeInputsTagList = encodedRecipe.getTagList(Strings.NBT_ENCODED_RECIPE_INPUTS);
+            
+            for (int i = 0; i < recipeInputsTagList.tagCount(); i++) {
+                if (recipeInputsTagList.tagAt(i) instanceof NBTTagCompound) {
+                    
+                    encodedStack = (NBTTagCompound) recipeInputsTagList.tagAt(i);
+                    decodedStack = decodeStackFromNBT(encodedStack);
+                    
+                    if (decodedStack != null) {
+                        recipeInputs.add(decodedStack);
+                    }
+                }
+            }
+        }
+        
+        // If we decoded both a recipe output and some inputs for it, add it to the map
+        if (recipeOutput != null && recipeInputs.size() > 0) {
+            decodedRecipe.put(recipeOutput, recipeInputs);
+        }
+
+        return decodedRecipe;
+    }
+
     /**
      * Initializes the NBT Tag Compound for the given ItemStack if it is null
      * 

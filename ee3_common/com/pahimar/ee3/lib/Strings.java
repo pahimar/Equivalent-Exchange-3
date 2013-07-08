@@ -38,6 +38,19 @@ public class Strings {
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
+    public static final String NBT_ENCODED_RECIPE_OUTPUT = "recipeOutput";
+    public static final String NBT_ENCODED_RECIPE_INPUTS = "recipeInputs";
+    public static final String NBT_ENCODED_RECIPE_INPUT_PREFIX = "recipeInput_";
+    public static final String NBT_ENCODED_ATTR_TYPE = "type";
+    public static final String NBT_ENCODED_ATTR_TYPE_ITEM = "ItemStack";
+    public static final String NBT_ENCODED_ATTR_TYPE_ORE = "OreStack";
+    public static final String NBT_ENCODED_ATTR_TYPE_ENERGY = "EnergyStack";
+    public static final String NBT_ENCODED_ATTR_SIZE = "Count";
+    public static final String NBT_ENCODED_ATTR_ITEM_ID = "id";
+    public static final String NBT_ENCODED_ATTR_ITEM_META = "Damage";
+    public static final String NBT_ENCODED_ATTR_ITEM_TAG_COMPOUND = "tag";
+    public static final String NBT_ENCODED_ATTR_ORE_NAME = "oreName";
+    public static final String NBT_ENCODED_ATTR_ENERGY_NAME = "energyName";
 
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
