@@ -1,9 +1,15 @@
 package com.pahimar.ee3;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.pahimar.ee3.block.ModBlocks;
@@ -25,10 +31,12 @@ import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.DynEMC;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.nbt.NBTHelper;
 import com.pahimar.ee3.network.PacketHandler;
 
 import cpw.mods.fml.common.Mod;
@@ -42,6 +50,7 @@ import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -157,6 +166,10 @@ public class EquivalentExchange3 {
 
         // Register the Fuel Handler
         GameRegistry.registerFuelHandler(new FuelHandler());
+        
+        // Quick test to see that sending an encoded recipe to be added to the recipe registry works
+        NBTTagCompound encodedItemStack = NBTHelper.encodeRecipeAsNBT(new ItemStack(Item.bucketWater), Arrays.asList(new ItemStack(Item.bucketEmpty), new ItemStack(Block.waterStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, Strings.IMC_ADD_RECIPE_KEY, encodedItemStack);
     }
 
     @PostInit

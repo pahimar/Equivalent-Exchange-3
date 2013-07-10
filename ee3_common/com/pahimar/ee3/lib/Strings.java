@@ -88,5 +88,10 @@ public class Strings {
     public static final String CONTAINER_GLASS_BELL_NAME = "container." + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
+    
+    /* InterModCommunications related constants */
+    public static final String IMC_ADD_RECIPE_KEY = "add-recipe";
+    public static final String IMC_SET_EMC_VALUE = "set-emc-value";
+    public static final String IMC_ADD_BLACKLIST_ENTRY = "add-entry-emc-blacklist";
 
 }
