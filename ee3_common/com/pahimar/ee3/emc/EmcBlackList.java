@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.item.CustomWrappedStack;
 
@@ -31,96 +28,58 @@ public class EmcBlackList {
         return emcBlackList;
     }
 
-    public List<CustomWrappedStack> getBlackListStacks() {
+    public List<CustomWrappedStack> getBlackList() {
 
         return stackBlackList;
     }
 
-    public void add(ItemStack itemStack) {
+    public boolean add(Object object) {
 
-        CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
-
-        if (!stackBlackList.contains(customWrappedStack)) {
-            stackBlackList.add(customWrappedStack);
-        }
-    }
-
-    public void add(Item item) {
-
-        this.add(new ItemStack(item.itemID, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    public void add(Block block) {
-
-        this.add(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    public void add(int id, int meta) {
-
-        this.add(new ItemStack(id, 1, meta));
-    }
-
-    public void add(int id) {
-
-        this.add(id, OreDictionary.WILDCARD_VALUE);
-    }
-
-    public boolean contains(ItemStack itemStack) {
-
-        if (itemStack != null) {
-            itemStack.stackSize = 1;
+        boolean wasAdded = false;
+        
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            
+            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            wrappedStack.setStackSize(1);
+    
+            if (!stackBlackList.contains(wrappedStack)) {
+                stackBlackList.add(wrappedStack);
+                wasAdded = true;
+            }
         }
 
-        return stackBlackList.contains(new CustomWrappedStack(itemStack));
+        return wasAdded;
     }
 
-    public boolean contains(Item item) {
+    public boolean contains(Object object) {
 
-        return this.contains(new ItemStack(item.itemID, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    public boolean contains(Block block) {
-
-        return this.contains(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    public boolean contains(int id, int meta) {
-
-        return this.contains(new ItemStack(id, 1, meta));
-    }
-
-    public boolean contains(int id) {
-
-        return this.contains(id, OreDictionary.WILDCARD_VALUE);
-    }
-
-    public void remove(ItemStack itemStack) {
-
-        CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
-
-        while (stackBlackList.contains(customWrappedStack)) {
-            stackBlackList.remove(customWrappedStack);
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            
+            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            wrappedStack.setStackSize(1);
+            
+            return stackBlackList.contains(wrappedStack);
         }
+
+        return false;
     }
 
-    public void remove(Item item) {
+    public boolean remove(Object object) {
 
-        this.remove(new ItemStack(item.itemID, 1, OreDictionary.WILDCARD_VALUE));
-    }
+        boolean wasRemoved = false;
+        
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            
+            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            wrappedStack.setStackSize(1);
+    
+            if (stackBlackList.contains(wrappedStack)) {
+                stackBlackList.remove(wrappedStack);
+                wasRemoved = true;
+            }
+        }
 
-    public void remove(Block block) {
-
-        this.remove(new ItemStack(block.blockID, 1, OreDictionary.WILDCARD_VALUE));
-    }
-
-    public void remove(int id, int meta) {
-
-        this.remove(new ItemStack(id, 1, meta));
-    }
-
-    public void remove(int id) {
-
-        this.remove(id, OreDictionary.WILDCARD_VALUE);
+        return wasRemoved;
     }
 
     private void init() {

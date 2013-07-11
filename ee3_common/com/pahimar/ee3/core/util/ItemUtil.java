@@ -1,5 +1,7 @@
 package com.pahimar.ee3.core.util;
 
+import java.util.StringTokenizer;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,6 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.nbt.NBTHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -36,6 +39,32 @@ public class ItemUtil {
         stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
 
         return stringBuilder.toString();
+    }
+
+    public static String encodeItemStackAsString(ItemStack itemStack) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.append(String.format("ID:%s%sMETA:%s%s", itemStack.itemID, Strings.TOKEN_DELIMITER, itemStack.getItemDamage(), Strings.TOKEN_DELIMITER));
+        
+        if (itemStack.hasTagCompound()) {
+            stringBuilder.append(String.format("NBT:[%s]", NBTHelper.encodeNBTAsString(itemStack.getTagCompound())));
+        }
+        
+        return stringBuilder.toString();
+    }
+    
+    public static ItemStack decodeItemStackFromString(String encodedItemStack) {
+        
+        ItemStack decodedItemStack = null;
+        
+        StringTokenizer stringTokenizer = new StringTokenizer(encodedItemStack, Strings.TOKEN_DELIMITER);
+        
+        while (stringTokenizer.hasMoreTokens()) {
+            LogHelper.debug(stringTokenizer.nextToken());
+        }
+        
+        return decodedItemStack;
     }
 
     /**

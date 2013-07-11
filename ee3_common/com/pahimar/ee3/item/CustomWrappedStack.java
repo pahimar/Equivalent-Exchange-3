@@ -2,6 +2,8 @@ package com.pahimar.ee3.item;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -29,6 +31,16 @@ public class CustomWrappedStack {
      */
     public CustomWrappedStack(Object object) {
 
+        /*
+         * If we are given an Item or a Block, convert it to an ItemStack for further inspection
+         */
+        if (object instanceof Item) {
+            object = new ItemStack((Item) object);
+        }
+        else if (object instanceof Block) {
+            object = new ItemStack((Block) object);
+        }
+        
         /*
          * We are given an ItemStack to wrap
          */
@@ -102,6 +114,14 @@ public class CustomWrappedStack {
             energyStack = (EnergyStack) object;
             stackSize = energyStack.stackSize;
             energyStack.stackSize = 1;
+        }
+        else if (object instanceof CustomWrappedStack) {
+            CustomWrappedStack wrappedStack = (CustomWrappedStack) object;
+            
+            itemStack = wrappedStack.itemStack;
+            oreStack = wrappedStack.oreStack;
+            energyStack = wrappedStack.energyStack;
+            stackSize = wrappedStack.stackSize;
         }
         /*
          * Else, we are given something we cannot wrap
@@ -237,5 +257,10 @@ public class CustomWrappedStack {
         }
 
         return hashCode;
+    }
+    
+    public static boolean canBeWrapped(Object object) {
+        
+        return (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block);
     }
 }

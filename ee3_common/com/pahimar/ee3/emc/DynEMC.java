@@ -38,7 +38,6 @@ public class DynEMC {
     private void init() {
         
         populateGraph();
-        //printDebugDump();
     }
 
     private void populateGraph() {

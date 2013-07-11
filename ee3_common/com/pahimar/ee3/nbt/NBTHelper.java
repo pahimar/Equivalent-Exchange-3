@@ -2,12 +2,24 @@ package com.pahimar.ee3.nbt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagEnd;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagLong;
+import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.nbt.NBTTagString;
 
 import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.OreStack;
@@ -25,25 +37,156 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class NBTHelper {
 
-    // TODO Do a (String,String) version of encodeStackAsNBT. Remember to validate the format in regex
-    // TODO Link this method to some API stuffs
+    /**
+     * Encodes the given NBT object as a String
+     * @param nbtBase 
+     * @return String encoding of the given NBT object
+     */
+    public static String encodeNBTAsString(NBTBase nbtBase) {
+        
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Encode the name of the tag, and the type of the tag
+        stringBuilder.append(String.format("%s:%s:", nbtBase.getName(), NBTBase.getTagName(nbtBase.getId())));
+        
+        // Encode the value of the tag, depending on the type of the tag
+        switch (nbtBase.getId())
+        {
+            case 0: {
+                stringBuilder.append(((NBTTagEnd) nbtBase).toString());
+                break;
+            }
+            case 1: {
+                stringBuilder.append(String.format("%s", ((NBTTagByte) nbtBase).data));
+                break;
+            }
+            case 2: {
+                stringBuilder.append(String.format("%s", ((NBTTagShort) nbtBase).data));
+                break;
+            }
+            case 3: {
+                stringBuilder.append(String.format("%s", ((NBTTagInt) nbtBase).data));
+                break;
+            }
+            case 4: {
+                stringBuilder.append(String.format("%s", ((NBTTagLong) nbtBase).data));
+                break;
+            }
+            case 5: {
+                stringBuilder.append(String.format("%s", ((NBTTagFloat) nbtBase).data));
+                break;
+            }
+            case 6: {
+                stringBuilder.append(String.format("%s", ((NBTTagDouble) nbtBase).data));
+                break;
+            }
+            case 7: {
+                NBTTagByteArray byteArray = (NBTTagByteArray) nbtBase;
+                
+                stringBuilder.append("[");
+                
+                for (int i = 0; i < byteArray.byteArray.length; i++) {
+                    stringBuilder.append(byteArray.byteArray[i]);
+                    
+                    if (i < byteArray.byteArray.length - 1) {
+                        stringBuilder.append(",");
+                    }
+                }
+                
+                stringBuilder.append("]");
+                
+                break;
+            }
+            case 8: {
+                stringBuilder.append(String.format("%s", ((NBTTagString) nbtBase).data));
+                break;
+            }
+            case 9: {
+                NBTTagList tagList = (NBTTagList) nbtBase;
+                
+                stringBuilder.append("[");
+                
+                for (int i = 0; i < tagList.tagCount(); i++) {
+                    Object tagObject = tagList.tagAt(i);
+                    
+                    if (tagObject instanceof NBTBase) {
+                        stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
+                    }
+                    
+                    if (i < tagList.tagCount() - 1) {
+                        stringBuilder.append(",");
+                    }
+                }
+                
+                stringBuilder.append("]");
+                
+                break;
+            }
+            case 10: {
+                NBTTagCompound tagCompound = (NBTTagCompound) nbtBase;
+                
+                stringBuilder.append("[");
+                
+                Iterator<?> tagIterator = tagCompound.getTags().iterator();
+                
+                while (tagIterator.hasNext()) {
+                    Object tagObject = tagIterator.next();
+                    
+                    if (tagObject instanceof NBTBase) {
+                        stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
+                    }
+                    
+                    if (tagIterator.hasNext()) {
+                        stringBuilder.append(",");
+                    }
+                }
+                
+                stringBuilder.append("]");
+                
+                break;
+            }
+            case 11: {
+                NBTTagIntArray intArray = (NBTTagIntArray) nbtBase;
+                
+                stringBuilder.append("[");
+                
+                for (int i = 0; i < intArray.intArray.length; i++) {
+                    stringBuilder.append(intArray.intArray[i]);
+                    
+                    if (i < intArray.intArray.length - 1) {
+                        stringBuilder.append(",");
+                    }
+                }
+                
+                stringBuilder.append("]");
+                
+                break;
+            }
+            default: {
+                stringBuilder.append("UNKNOWN");
+                break;
+            }
+        }
+        
+        return stringBuilder.toString();
+    }
     
-    public static NBTTagCompound encodeStackAsNBT(String name, Object stackObject) {
+    // TODO Link this method to some API stuffs
+    public static NBTTagCompound encodeStackAsNBT(Object stackObject) {
+
+        return encodeStackAsNBT("", stackObject);
+    }
+
+    public static NBTTagCompound encodeStackAsNBT(String name, Object object) {
 
         NBTTagCompound encodedStack = new NBTTagCompound(name);
 
-        CustomWrappedStack wrappedStack = null;
-
-        if (stackObject instanceof ItemStack || stackObject instanceof OreStack || stackObject instanceof EnergyStack) {
-            wrappedStack = new CustomWrappedStack(stackObject);
-        }
-        else if (stackObject instanceof CustomWrappedStack) {
-            wrappedStack = (CustomWrappedStack) stackObject;
-        }
-
-        if (wrappedStack != null) {
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            
+            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            
             if (wrappedStack.getWrappedStack() instanceof ItemStack) {
-                
+
                 ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
                 encodedStack.setString(Strings.NBT_ENCODED_ATTR_TYPE, Strings.NBT_ENCODED_ATTR_TYPE_ITEM);
                 itemStack.writeToNBT(encodedStack);
@@ -137,40 +280,40 @@ public class NBTHelper {
     public static Map<CustomWrappedStack, List<CustomWrappedStack>> decodeRecipeFromNBT(NBTTagCompound encodedRecipe) {
 
         HashMap<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipe = new HashMap<CustomWrappedStack, List<CustomWrappedStack>>();
-        
+
         CustomWrappedStack recipeOutput = null;
         ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
-        
-        CustomWrappedStack decodedStack = null; 
+
+        CustomWrappedStack decodedStack = null;
         NBTTagCompound encodedStack = null;
 
         // Decode the recipe output
         if (encodedRecipe.hasKey(Strings.NBT_ENCODED_RECIPE_OUTPUT)) {
-            
+
             decodedStack = decodeStackFromNBT(encodedRecipe.getCompoundTag(Strings.NBT_ENCODED_RECIPE_OUTPUT));
-            
+
             if (decodedStack != null) {
                 recipeOutput = decodedStack;
             }
         }
-        
+
         // Decode the recipe inputs
         if (encodedRecipe.hasKey("recipeInputs")) {
             NBTTagList recipeInputsTagList = encodedRecipe.getTagList(Strings.NBT_ENCODED_RECIPE_INPUTS);
-            
+
             for (int i = 0; i < recipeInputsTagList.tagCount(); i++) {
                 if (recipeInputsTagList.tagAt(i) instanceof NBTTagCompound) {
-                    
+
                     encodedStack = (NBTTagCompound) recipeInputsTagList.tagAt(i);
                     decodedStack = decodeStackFromNBT(encodedStack);
-                    
+
                     if (decodedStack != null) {
                         recipeInputs.add(decodedStack);
                     }
                 }
             }
         }
-        
+
         // If we decoded both a recipe output and some inputs for it, add it to the map
         if (recipeOutput != null && recipeInputs.size() > 0) {
             decodedRecipe.put(recipeOutput, recipeInputs);

@@ -14,6 +14,7 @@ public class Strings {
     /* General keys */
     public static final String TRUE = "true";
     public static final String FALSE = "false";
+    public static final String TOKEN_DELIMITER = ",";
 
     /* Fingerprint check related constants */
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
@@ -88,10 +89,4 @@ public class Strings {
     public static final String CONTAINER_GLASS_BELL_NAME = "container." + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
-    
-    /* InterModCommunications related constants */
-    public static final String IMC_ADD_RECIPE_KEY = "add-recipe";
-    public static final String IMC_SET_EMC_VALUE = "set-emc-value";
-    public static final String IMC_ADD_BLACKLIST_ENTRY = "add-entry-emc-blacklist";
-
 }

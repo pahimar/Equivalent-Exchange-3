@@ -3,6 +3,8 @@ package com.pahimar.ee3.emc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pahimar.ee3.lib.Strings;
+
 /**
  * Equivalent-Exchange-3
  * 
@@ -20,7 +22,6 @@ public class EmcValue {
     public EmcValue() {
 
         value = 0F;
-        ;
         recoveryPercentage = 1F;
         emcComponents = new ArrayList<EmcComponent>();
     }
@@ -127,12 +128,21 @@ public class EmcValue {
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.format("EMC Value: %s, Recovery Percentage: %s, ", value, (recoveryPercentage * 100)));
-
-        for (EmcComponent emcComponent : emcComponents) {
-            stringBuilder.append(String.format("%s ", emcComponent));
+        
+        stringBuilder.append(String.format("V:%s", value));
+        stringBuilder.append(Strings.TOKEN_DELIMITER);
+        stringBuilder.append(String.format("RP:%s", recoveryPercentage));
+        stringBuilder.append(Strings.TOKEN_DELIMITER);
+        stringBuilder.append("[");
+        
+        for (int i = 0; i < emcComponents.size(); i++) {
+            if (i > 0) {
+                stringBuilder.append(Strings.TOKEN_DELIMITER);
+            }
+            stringBuilder.append(String.format("%s:%s", emcComponents.get(i).getEmcType(), emcComponents.get(i).getPercentage()));
         }
+        
+        stringBuilder.append("]");
 
         return stringBuilder.toString();
     }
