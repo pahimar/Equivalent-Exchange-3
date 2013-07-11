@@ -3,7 +3,6 @@ package com.pahimar.ee3.core.handlers;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.pahimar.ee3.core.util.LogHelper;
@@ -25,7 +24,7 @@ public class InterModCommsHandler {
                 processAddRecipeMessage(imcMessage);
             }
             else if (imcMessage.key.equalsIgnoreCase(Strings.IMC_ADD_BLACKLIST_ENTRY)) {
-                // TODO Handle EMC blacklist IMC messages
+                processAddEMCBlacklist(imcMessage);
             }
             else if (imcMessage.key.equalsIgnoreCase(Strings.IMC_SET_EMC_VALUE)) {
                 processSetEMCValueMessage(imcMessage);
@@ -35,13 +34,8 @@ public class InterModCommsHandler {
     
     private static void processAddRecipeMessage(IMCMessage imcMessage) {
         
-        if (imcMessage.getMessageType() == String.class) {
-            // TODO Verify if the string we received is a valid encoded string
-        }
-        else if (imcMessage.getMessageType() == ItemStack.class) {
-            LogHelper.severe("Mod: '" + imcMessage.getSender() + "' attempting to add a recipe to the recipe registry via InterModCommunications with an invalid argument: ItemStack (expected String or NBTTagCompound)");
-        }
-        else if (imcMessage.getMessageType() == NBTTagCompound.class) {
+        if (imcMessage.getMessageType() == NBTTagCompound.class) {
+            
             NBTTagCompound encodedRecipe = imcMessage.getNBTValue();
             
             Map<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipe = NBTHelper.decodeRecipeFromNBT(encodedRecipe);
@@ -49,25 +43,51 @@ public class InterModCommsHandler {
             if (!decodedRecipe.isEmpty()) {
                 for (CustomWrappedStack key : decodedRecipe.keySet()) {
                     RecipeRegistry.getInstance().addRecipe(key, decodedRecipe.get(key));
-                    LogHelper.info("Mod: '" + imcMessage.getSender() + "' added recipe with output '" + key.toString() + "' and inputs '" + decodedRecipe.get(key) + "'");
+                    LogHelper.info("Mod '" + imcMessage.getSender() + "' added recipe with output '" + key.toString() + "' and inputs '" + decodedRecipe.get(key) + "'");
                 }
             }
             else {
-                LogHelper.severe("Mod: '" + imcMessage.getSender() + "' attempting to add a NBT encoded recipe to the recipe registry via InterModCommunications, but the encoded recipe is invalid");
+                LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to add a NBT encoded recipe to the recipe registry via InterModCommunications, but the encoded recipe is invalid");
             }
         }
+        else {
+            LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to add a recipe to the recipe registry via InterModCommunications with an invalid argument type (received " + imcMessage.getMessageType().getSimpleName() + ", expected NBTTagCompound)");
+        }
+    }
+    
+    private static void processAddEMCBlacklist(IMCMessage imcMessage) {
+        
+        if (imcMessage.getMessageType() == NBTTagCompound.class) {
+            
+//          NBTTagCompound encodedRecipe = imcMessage.getNBTValue();
+//          
+//          if (VALID_EMC_ASSIGNMENT) {
+//              LogHelper.info("Mod '" + imcMessage.getSender() + "' added '" + OBJECT + "' to the EMC blacklist'");
+//          }
+//          else {
+//              LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to add to the EMC blacklist via InterModCommunications, but the encoded value assignment is invalid");
+//          }
+      }
+      else {
+          LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to add to the EMC blacklist via InterModCommunications with an invalid argument type (received " + imcMessage.getMessageType().getSimpleName() + ", expected NBTTagCompound)");
+      }
     }
     
     private static void processSetEMCValueMessage(IMCMessage imcMessage) {
         
-        if (imcMessage.getMessageType() == String.class) {
-            // TODO Verify if the string we received is a valid encoded string
+        if (imcMessage.getMessageType() == NBTTagCompound.class) {
+            
+//            NBTTagCompound encodedRecipe = imcMessage.getNBTValue();
+//            
+//            if (VALID_EMC_ASSIGNMENT) {
+//                LogHelper.info("Mod '" + imcMessage.getSender() + "' set EMC value '" + EMC_VALUE + "' to object '" + OBJECT + "'");
+//            }
+//            else {
+//                LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to set an EMC value via InterModCommunications, but the encoded value assignment is invalid");
+//            }
         }
-        else if (imcMessage.getMessageType() == ItemStack.class) {
-            LogHelper.severe("Mod: '" + imcMessage.getSender() + "' attempting to set an EMC value via InterModCommunications with an invalid argument: ItemStack (expected String or NBTTagCompound)");
-        }
-        else if (imcMessage.getMessageType() == NBTTagCompound.class) {
-            // TODO Handle setting an EMC value with the provided NBTTagCompound
+        else {
+            LogHelper.severe("Mod '" + imcMessage.getSender() + "' attempting to set an EMC value via InterModCommunications with an invalid argument type (received " + imcMessage.getMessageType().getSimpleName() + ", expected NBTTagCompound)");
         }
     }
 }

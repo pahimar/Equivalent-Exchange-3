@@ -1,7 +1,6 @@
 package com.pahimar.ee3;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import net.minecraft.block.Block;
@@ -31,7 +30,6 @@ import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.DynEMC;
-import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
@@ -169,7 +167,7 @@ public class EquivalentExchange3 {
         
         // Quick test to see that sending an encoded recipe to be added to the recipe registry works
         NBTTagCompound encodedItemStack = NBTHelper.encodeRecipeAsNBT(new ItemStack(Item.bucketWater), Arrays.asList(new ItemStack(Item.bucketEmpty), new ItemStack(Block.waterStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, Strings.IMC_ADD_RECIPE_KEY, encodedItemStack);
+        FMLInterModComms.sendMessage(Reference.MOD_ID, Strings.IMC_ADD_RECIPE_KEY, encodedItemStack.toString());
     }
 
     @PostInit
