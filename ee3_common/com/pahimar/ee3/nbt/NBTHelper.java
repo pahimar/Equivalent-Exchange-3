@@ -46,125 +46,127 @@ public class NBTHelper {
         
         StringBuilder stringBuilder = new StringBuilder();
 
-        // Encode the name of the tag, and the type of the tag
-        stringBuilder.append(String.format("%s:%s:", nbtBase.getName(), NBTBase.getTagName(nbtBase.getId())));
-        
-        // Encode the value of the tag, depending on the type of the tag
-        switch (nbtBase.getId())
-        {
-            case 0: {
-                stringBuilder.append(((NBTTagEnd) nbtBase).toString());
-                break;
-            }
-            case 1: {
-                stringBuilder.append(String.format("%s", ((NBTTagByte) nbtBase).data));
-                break;
-            }
-            case 2: {
-                stringBuilder.append(String.format("%s", ((NBTTagShort) nbtBase).data));
-                break;
-            }
-            case 3: {
-                stringBuilder.append(String.format("%s", ((NBTTagInt) nbtBase).data));
-                break;
-            }
-            case 4: {
-                stringBuilder.append(String.format("%s", ((NBTTagLong) nbtBase).data));
-                break;
-            }
-            case 5: {
-                stringBuilder.append(String.format("%s", ((NBTTagFloat) nbtBase).data));
-                break;
-            }
-            case 6: {
-                stringBuilder.append(String.format("%s", ((NBTTagDouble) nbtBase).data));
-                break;
-            }
-            case 7: {
-                NBTTagByteArray byteArray = (NBTTagByteArray) nbtBase;
-                
-                stringBuilder.append("[");
-                
-                for (int i = 0; i < byteArray.byteArray.length; i++) {
-                    stringBuilder.append(byteArray.byteArray[i]);
-                    
-                    if (i < byteArray.byteArray.length - 1) {
-                        stringBuilder.append(",");
-                    }
+        if (nbtBase != null) {
+            // Encode the name of the tag, and the type of the tag
+            stringBuilder.append(String.format("'%s':%s:", nbtBase.getName(), NBTBase.getTagName(nbtBase.getId())));
+            
+            // Encode the value of the tag, depending on the type of the tag
+            switch (nbtBase.getId())
+            {
+                case 0: {
+                    stringBuilder.append(((NBTTagEnd) nbtBase).toString());
+                    break;
                 }
-                
-                stringBuilder.append("]");
-                
-                break;
-            }
-            case 8: {
-                stringBuilder.append(String.format("%s", ((NBTTagString) nbtBase).data));
-                break;
-            }
-            case 9: {
-                NBTTagList tagList = (NBTTagList) nbtBase;
-                
-                stringBuilder.append("[");
-                
-                for (int i = 0; i < tagList.tagCount(); i++) {
-                    Object tagObject = tagList.tagAt(i);
-                    
-                    if (tagObject instanceof NBTBase) {
-                        stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
-                    }
-                    
-                    if (i < tagList.tagCount() - 1) {
-                        stringBuilder.append(",");
-                    }
+                case 1: {
+                    stringBuilder.append(String.format("%s", ((NBTTagByte) nbtBase).data));
+                    break;
                 }
-                
-                stringBuilder.append("]");
-                
-                break;
-            }
-            case 10: {
-                NBTTagCompound tagCompound = (NBTTagCompound) nbtBase;
-                
-                stringBuilder.append("[");
-                
-                Iterator<?> tagIterator = tagCompound.getTags().iterator();
-                
-                while (tagIterator.hasNext()) {
-                    Object tagObject = tagIterator.next();
-                    
-                    if (tagObject instanceof NBTBase) {
-                        stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
-                    }
-                    
-                    if (tagIterator.hasNext()) {
-                        stringBuilder.append(",");
-                    }
+                case 2: {
+                    stringBuilder.append(String.format("%s", ((NBTTagShort) nbtBase).data));
+                    break;
                 }
-                
-                stringBuilder.append("]");
-                
-                break;
-            }
-            case 11: {
-                NBTTagIntArray intArray = (NBTTagIntArray) nbtBase;
-                
-                stringBuilder.append("[");
-                
-                for (int i = 0; i < intArray.intArray.length; i++) {
-                    stringBuilder.append(intArray.intArray[i]);
-                    
-                    if (i < intArray.intArray.length - 1) {
-                        stringBuilder.append(",");
-                    }
+                case 3: {
+                    stringBuilder.append(String.format("%s", ((NBTTagInt) nbtBase).data));
+                    break;
                 }
-                
-                stringBuilder.append("]");
-                
-                break;
-            }
-            default: {
-                stringBuilder.append("UNKNOWN");
-                break;
+                case 4: {
+                    stringBuilder.append(String.format("%s", ((NBTTagLong) nbtBase).data));
+                    break;
+                }
+                case 5: {
+                    stringBuilder.append(String.format("%s", ((NBTTagFloat) nbtBase).data));
+                    break;
+                }
+                case 6: {
+                    stringBuilder.append(String.format("%s", ((NBTTagDouble) nbtBase).data));
+                    break;
+                }
+                case 7: {
+                    NBTTagByteArray byteArray = (NBTTagByteArray) nbtBase;
+                    
+                    stringBuilder.append("[");
+                    
+                    for (int i = 0; i < byteArray.byteArray.length; i++) {
+                        stringBuilder.append(byteArray.byteArray[i]);
+                        
+                        if (i < byteArray.byteArray.length - 1) {
+                            stringBuilder.append("|");
+                        }
+                    }
+                    
+                    stringBuilder.append("]");
+                    
+                    break;
+                }
+                case 8: {
+                    stringBuilder.append(String.format("%s", ((NBTTagString) nbtBase).data));
+                    break;
+                }
+                case 9: {
+                    NBTTagList tagList = (NBTTagList) nbtBase;
+                    
+                    stringBuilder.append("[");
+                    
+                    for (int i = 0; i < tagList.tagCount(); i++) {
+                        Object tagObject = tagList.tagAt(i);
+                        
+                        if (tagObject instanceof NBTBase) {
+                            stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
+                        }
+                        
+                        if (i < tagList.tagCount() - 1) {
+                            stringBuilder.append("|");
+                        }
+                    }
+                    
+                    stringBuilder.append("]");
+                    
+                    break;
+                }
+                case 10: {
+                    NBTTagCompound tagCompound = (NBTTagCompound) nbtBase;
+                    
+                    stringBuilder.append("[");
+                    
+                    Iterator<?> tagIterator = tagCompound.getTags().iterator();
+                    
+                    while (tagIterator.hasNext()) {
+                        Object tagObject = tagIterator.next();
+                        
+                        if (tagObject instanceof NBTBase) {
+                            stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
+                        }
+                        
+                        if (tagIterator.hasNext()) {
+                            stringBuilder.append("|");
+                        }
+                    }
+                    
+                    stringBuilder.append("]");
+                    
+                    break;
+                }
+                case 11: {
+                    NBTTagIntArray intArray = (NBTTagIntArray) nbtBase;
+                    
+                    stringBuilder.append("[");
+                    
+                    for (int i = 0; i < intArray.intArray.length; i++) {
+                        stringBuilder.append(intArray.intArray[i]);
+                        
+                        if (i < intArray.intArray.length - 1) {
+                            stringBuilder.append("|");
+                        }
+                    }
+                    
+                    stringBuilder.append("]");
+                    
+                    break;
+                }
+                default: {
+                    stringBuilder.append("UNKNOWN");
+                    break;
+                }
             }
         }
         

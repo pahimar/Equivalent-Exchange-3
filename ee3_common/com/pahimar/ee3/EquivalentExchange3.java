@@ -1,9 +1,11 @@
 package com.pahimar.ee3;
 
 import java.io.File;
+import java.util.Arrays;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -22,15 +24,16 @@ import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.core.proxy.CommonProxy;
-import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.DynEMC;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
+import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.nbt.NBTHelper;
 import com.pahimar.ee3.network.PacketHandler;
 
 import cpw.mods.fml.common.Mod;
@@ -44,6 +47,7 @@ import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -161,10 +165,8 @@ public class EquivalentExchange3 {
         GameRegistry.registerFuelHandler(new FuelHandler());
 
         // Quick test to see that sending an encoded recipe to be added to the recipe registry works
-        //FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-        //FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-        
-        ItemUtil.decodeItemStackFromString(ItemUtil.encodeItemStackAsString(new ItemStack(64,1,0)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
     }
 
     @PostInit

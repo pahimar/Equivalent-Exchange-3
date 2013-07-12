@@ -1,7 +1,5 @@
 package com.pahimar.ee3.core.util;
 
-import java.util.StringTokenizer;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,13 +28,21 @@ public class ItemUtil {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("itemID: %d, metaData: %d, stackSize: %d, ", itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize));
-
-        if (itemStack.hasTagCompound()) {
-            stringBuilder.append(String.format("nbtTagCompound: %s, ", itemStack.getTagCompound().toString()));
+        stringBuilder.append("ItemStack(");
+        
+        if (itemStack != null) {
+            
+            stringBuilder.append(String.format("%s", encodeItemStackAsString(itemStack)));
+            
+            if (itemStack.hasTagCompound()) {
+                stringBuilder.append(String.format("%s%s", Strings.TOKEN_DELIMITER, NBTHelper.encodeNBTAsString((itemStack.getTagCompound()))));
+            }
         }
-
-        stringBuilder.append(String.format("itemName: %s, className: %s ", itemStack.getItemName(), itemStack.getItem().getClass().toString()));
+        else {
+            stringBuilder.append("null");
+        }
+        
+        stringBuilder.append(")");
 
         return stringBuilder.toString();
     }
@@ -45,11 +51,7 @@ public class ItemUtil {
 
         StringBuilder stringBuilder = new StringBuilder();
         
-        stringBuilder.append(String.format("ID:%s%sMETA:%s%s", itemStack.itemID, Strings.TOKEN_DELIMITER, itemStack.getItemDamage(), Strings.TOKEN_DELIMITER));
-        
-        if (itemStack.hasTagCompound()) {
-            stringBuilder.append(String.format("NBT:[%s]", NBTHelper.encodeNBTAsString(itemStack.getTagCompound())));
-        }
+        stringBuilder.append(String.format("%s%s%s", itemStack.itemID, Strings.TOKEN_DELIMITER, itemStack.getItemDamage()));
         
         return stringBuilder.toString();
     }
@@ -58,10 +60,42 @@ public class ItemUtil {
         
         ItemStack decodedItemStack = null;
         
-        StringTokenizer stringTokenizer = new StringTokenizer(encodedItemStack, Strings.TOKEN_DELIMITER);
+        final int UNDEFINED = -1;
+        final int ERROR = -2;
         
-        while (stringTokenizer.hasMoreTokens()) {
-            LogHelper.debug(stringTokenizer.nextToken());
+        int itemId = UNDEFINED;
+        int meta = UNDEFINED;
+        
+        String[] splitString = encodedItemStack.split(Strings.TOKEN_DELIMITER);
+        
+        // Grab itemId
+        if (splitString.length >= 1) {
+            
+            try {
+                itemId = Integer.parseInt(splitString[0]);
+            } catch (NumberFormatException e) {
+                itemId = ERROR;
+            }
+        }
+        
+        // Grab meta
+        if (splitString.length >= 2) {
+            
+            try {
+                meta = Integer.parseInt(splitString[1]);
+            } catch (NumberFormatException e) {
+                meta = ERROR;
+            }
+        }
+        
+        if (meta == UNDEFINED) {
+            meta = OreDictionary.WILDCARD_VALUE;
+        }
+        
+        if (itemId != UNDEFINED && itemId != ERROR) {
+            if (meta != ERROR) {
+                decodedItemStack = new ItemStack(itemId, 1, meta);
+            }
         }
         
         return decodedItemStack;
