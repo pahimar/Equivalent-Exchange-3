@@ -229,6 +229,23 @@ public class CustomWrappedStack {
 
         return stringBuilder.toString();
     }
+    
+    public String encodeAsPropertyKey() {
+        
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (itemStack != null) {
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getItemName(), itemStack.getItem().getClass().getCanonicalName()));
+        }
+        else if (oreStack != null) {
+            stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
+        }
+        else if (energyStack != null) {
+            stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyStack.energyName));
+        }
+
+        return stringBuilder.toString();
+    }
 
     @Override
     public int hashCode() {

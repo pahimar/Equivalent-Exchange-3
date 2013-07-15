@@ -75,6 +75,11 @@ public class DynEMC {
             }
         }
     }
+    
+    public List<CustomWrappedStack> getCriticalNodes() {
+        
+        return graph.getCriticalNodes();
+    }
 
     public int size() {
 
