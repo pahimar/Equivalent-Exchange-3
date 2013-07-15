@@ -3,10 +3,12 @@ package com.pahimar.ee3.client.gui.inventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
@@ -45,7 +47,10 @@ public class GuiAlchemicalBag extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
+
+        // this.mc.getTextureManager().bindTexture(...)
+        this.mc.func_110434_K().func_110577_a(Textures.GUI_ALCHEMICAL_STORAGE);
+        
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

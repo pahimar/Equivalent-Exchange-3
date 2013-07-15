@@ -2,6 +2,7 @@ package com.pahimar.ee3.command;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+import net.minecraft.util.ChatMessageComponent;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
@@ -45,13 +46,13 @@ public class CommandParticles {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = true;
         ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.TRUE);
-        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationUtil.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_ON));
+        commandSender.sendChatToPlayer(ChatMessageComponent.func_111077_e(Commands.COMMAND_PARTICLES_TURNED_ON));
     }
 
     private static void processOffCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = false;
         ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.FALSE);
-        commandSender.sendChatToPlayer(Colours.TEXT_COLOUR_PREFIX_GRAY + LocalizationUtil.getLocalizedString(Commands.COMMAND_PARTICLES_TURNED_OFF));
+        commandSender.sendChatToPlayer(ChatMessageComponent.func_111077_e(Commands.COMMAND_PARTICLES_TURNED_OFF));
     }
 }

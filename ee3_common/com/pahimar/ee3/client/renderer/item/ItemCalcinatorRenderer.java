@@ -1,11 +1,13 @@
 package com.pahimar.ee3.client.renderer.item;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelCalcinator;
+import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.lib.Textures;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -79,7 +81,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_CALCINATOR);
 
         // Render
         modelCalcinator.render();

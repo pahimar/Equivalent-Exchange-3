@@ -37,6 +37,7 @@ import com.pahimar.ee3.nbt.NBTHelper;
 import com.pahimar.ee3.network.PacketHandler;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.FingerprintWarning;
 import cpw.mods.fml.common.Mod.IMCCallback;
 import cpw.mods.fml.common.Mod.Init;
@@ -79,21 +80,21 @@ public class EquivalentExchange3 {
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
-    @FingerprintWarning
+    @EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
         // Report (log) to the user that the version of Equivalent Exchange 3 they are using has been changed/tampered with
         LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
     }
 
-    @ServerStarting
+    @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
 
         // Initialize the custom commands
         CommandHandler.initCommands(event);
     }
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
         // Initialize the log helper
@@ -127,8 +128,8 @@ public class EquivalentExchange3 {
         ModItems.init();
     }
 
+    @EventHandler
     @SuppressWarnings("unchecked")
-    @Init
     public void load(FMLInitializationEvent event) {
 
         // Register the GUI Handler
@@ -169,18 +170,18 @@ public class EquivalentExchange3 {
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
     }
 
-    @PostInit
+    @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event) {
 
         // Initialize the Addon Handler
         AddonHandler.init();
 
         // Initialize the DynEMC system
-        @SuppressWarnings("unused")
+        // TODO Seems like this happens earlier than it should now, investigate where this should go
         DynEMC dynEMC = DynEMC.getInstance();
     }
 
-    @IMCCallback
+    @EventHandler
     public void handleIMCMessages(IMCEvent event) {
 
         InterModCommsHandler.processIMCMessages(event);

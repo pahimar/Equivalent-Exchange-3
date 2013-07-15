@@ -2,10 +2,12 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelCalcinator;
+import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
@@ -43,7 +45,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(-90F, 1F, 0F, 0F);
 
             // Bind texture
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
+            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_CALCINATOR);
 
             // Render
             modelCalcinator.renderPart("Calcinator");

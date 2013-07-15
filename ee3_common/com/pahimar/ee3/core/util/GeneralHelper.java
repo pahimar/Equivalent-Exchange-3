@@ -3,7 +3,7 @@ package com.pahimar.ee3.core.util;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,7 +44,7 @@ public class GeneralHelper {
         return list.toArray();
     }
 
-    public static boolean isHostileEntity(EntityLiving entity) {
+    public static boolean isHostileEntity(EntityLivingBase entity) {
 
         if (entity instanceof IMob)
             return true;

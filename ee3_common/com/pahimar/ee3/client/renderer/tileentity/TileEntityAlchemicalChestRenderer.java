@@ -3,11 +3,14 @@ package com.pahimar.ee3.client.renderer.tileentity;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.pahimar.ee3.core.util.ResourceLocationHelper;
+import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 
@@ -42,7 +45,7 @@ public class TileEntityAlchemicalChestRenderer extends
                 direction = ForgeDirection.getOrientation(tileAlchemicalChest.getBlockMetadata());
             }
 
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
+            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALCHEMICAL_CHEST);
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

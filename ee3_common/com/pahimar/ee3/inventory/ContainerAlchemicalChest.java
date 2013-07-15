@@ -63,9 +63,9 @@ public class ContainerAlchemicalChest extends Container {
      * Callback for when the crafting gui is closed.
      */
     @Override
-    public void onCraftGuiClosed(EntityPlayer entityPlayer) {
+    public void onContainerClosed(EntityPlayer entityPlayer) {
 
-        super.onCraftGuiClosed(entityPlayer);
+        super.onContainerClosed(entityPlayer);
         tileAlchemicalChest.closeChest();
     }
 

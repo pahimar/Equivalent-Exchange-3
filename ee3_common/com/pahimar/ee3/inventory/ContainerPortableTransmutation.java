@@ -27,9 +27,9 @@ public class ContainerPortableTransmutation extends Container {
     }
 
     @Override
-    public void onCraftGuiClosed(EntityPlayer player) {
+    public void onContainerClosed(EntityPlayer player) {
 
-        super.onCraftGuiClosed(player);
+        super.onContainerClosed(player);
 
         if (!player.worldObj.isRemote) {
             InventoryPlayer invPlayer = player.inventory;

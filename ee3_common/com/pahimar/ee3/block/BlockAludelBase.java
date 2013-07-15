@@ -3,7 +3,7 @@ package com.pahimar.ee3.block;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -103,7 +103,7 @@ public class BlockAludelBase extends BlockEE {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
 
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 

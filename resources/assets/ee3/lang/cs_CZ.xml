@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Czech (cs_CZ) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Vypustit</entry>
+	<entry key="key.toggle">Přepnout</entry>
+	<entry key="key.charge">Nabít</entry>
+	<entry key="item.miniumShard.name">Úlomek suříku</entry>
+	<entry key="item.inertStone.name">Inertní Kámen</entry>
+	<entry key="item.miniumStone.name">Kámen suříku</entry>
+	<entry key="item.stonePhilosophers.name">Kámen mudrců</entry>
+	<entry key="item.alchemicalDustAsh.name">Popel</entry>
+	<entry key="item.alchemicalDustMinium.name">Suříkový Prášek</entry>
+	<entry key="item.alchemicalDustVerdant.name">Nazelenalý Prášek</entry>
+	<entry key="item.alchemicalDustAzure.name">Azurový Prášek</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amarantový Prášek</entry>
+	<entry key="item.alchemicalDustIridescent.name">Duhový Prášek</entry>
+	<entry key="item.alchemyBag.name">Alchymistický Pytlík</entry>
+	<entry key="tile.redWaterStill.name">Rudá voda (v klidu)</entry>
+	<entry key="tile.redWaterFlowing.name">Rudá voda (tekoucí)</entry>
+	<entry key="tile.calcinator.name">Kalcinátor</entry>
+	<entry key="tile.aludel.name">Sublimační Nádoba</entry>
+	<entry key="tile.alchemicalChest.name">Alchymistická Truhla</entry>
+	<entry key="container.calcinator">Kalcinátor</entry>
+	<entry key="container.aludel">Sublimační Nádoba</entry> <!-- nádoba na zachycování kondenzátu -->
+	<entry key="container.alchemicalChest">Alchymistická Truhla</entry>
+	<entry key="container.alchemicalBag">Alchymistický Pytlík</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Provádím kontrolu verze, vzdálený soubor umístěn na</entry>
+	<entry key="version.uninitialized">Kontrola verze neproběhla úspěšně (nezdařila se inicializace)</entry>
+	<entry key="version.current">Používáte nejaktuálnější verzi (@REMOTE_MOD_VERSION@) modu Equivalent Exchange 3, která je pro vaši verzi Minecraftu (@MINECRAFT_VERSION@) k dispozici</entry>
+	<entry key="version.outdated">Je k dispozici nová verze @MOD_NAME@ (@REMOTE_MOD_VERSION@) pro MC @MINECRAFT_VERSION@. Ke stažení zde: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Chyba při připojování k servru poskytujícímu informace o verzi, zkouším se znovu připojit</entry>
+	<entry key="version.final_error">Kontrola verze deaktivována po třech neúspěšných pokusech, přeskakuji</entry>
+	<entry key="version.mc_version_not_found">Nepodařilo se nalézt verzi @MOD_NAME@ pro @MINECRAFT_VERSION@</entry>
+	<entry key="command.ee3.overlay.turned_on">Zobrazení výsledku transmutace zapnuto</entry>
+	<entry key="command.ee3.overlay.turned_off">Zobrazení výsledku transmutace vypnuto</entry>
+	<entry key="command.ee3.overlay.position.top_left">Pozice zobrazení výsledku transmutace nastavena na levý horní roh</entry>
+	<entry key="command.ee3.overlay.position.top_right">Pozice zobrazení výsledku transmutace nastavena na pravý horní roh</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Pozice zobrazení výsledku transmutace nastavena na levý dolní roh</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Pozice zobrazení výsledku transmutace nastavena na pravý dolní roh</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(kde ### je desetinná hodnota mezi 0,0 a 1,0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Průhlednost výsledku transmutace úspěšně změněna</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(kde ### je desetinná hodnota větší než 0,0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Měřítko výsledku transmutace úspěšné změněno</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 částice zapnuty</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 částice vypnuty</entry>
+	<entry key="command.ee3.sounds.set_to_all">Přehrávání zvuků z Equivalent Exchange 3 od všech hráčů</entry>
+	<entry key="command.ee3.sounds.set_to_self">Přehrávání zvuků z Equivalent Exchange 3 pouze od aktuálního hráče</entry>
+	<entry key="command.ee3.sounds.turned_off">Přehrávání zvuků z Equivalent Exchange 3 vypnuto</entry>
+</properties>

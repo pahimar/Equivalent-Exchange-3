@@ -3,6 +3,7 @@ package com.pahimar.ee3.core.handlers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -63,7 +64,6 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Textures.EFFECT_WORLD_TRANSMUTATION);
 
         float xScale = 1;
         float yScale = 1;
@@ -143,7 +143,7 @@ public class DrawBlockHighlightHandler {
             GL11.glRotatef(90, forgeDir.offsetX, forgeDir.offsetY, forgeDir.offsetZ);
             GL11.glTranslated(0, 0, 0.5f * zCorrection);
             GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-            renderPulsingQuad(texture, 0.75F);
+            renderPulsingQuad(Textures.EFFECT_WORLD_TRANSMUTATION, 0.75F);
             GL11.glPopMatrix();
         }
 
@@ -151,11 +151,11 @@ public class DrawBlockHighlightHandler {
         GL11.glDepthMask(true);
     }
 
-    public static void renderPulsingQuad(int texture, float maxTransparency) {
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency) {
 
         float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
         Tessellator tessellator = Tessellator.instance;
 
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

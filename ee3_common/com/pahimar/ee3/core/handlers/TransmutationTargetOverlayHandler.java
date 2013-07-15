@@ -135,10 +135,10 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
             }
         }
 
-        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
+        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
 
         if (TransmutationHelper.targetBlockStack != null && TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock) {
-            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
+            RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
         }
 
         GL11.glDisable(GL11.GL_LIGHTING);

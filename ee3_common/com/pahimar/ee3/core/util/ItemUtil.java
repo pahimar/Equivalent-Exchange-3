@@ -1,6 +1,6 @@
 package com.pahimar.ee3.core.util;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -190,7 +190,7 @@ public class ItemUtil {
         }
     }
 
-    public static void dropMiniumShard(EntityPlayer player, EntityLiving entity) {
+    public static void dropMiniumShard(EntityPlayer player, EntityLivingBase entity) {
 
         if (GeneralHelper.isHostileEntity(entity)) {
             rand = Math.random();

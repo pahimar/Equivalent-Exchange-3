@@ -236,7 +236,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory {
     }
 
     @Override
-    public boolean isStackValidForSlot(int side, ItemStack itemStack) {
+    public boolean isItemValidForSlot(int side, ItemStack itemStack) {
 
         return true;
     }
