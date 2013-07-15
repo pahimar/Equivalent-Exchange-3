@@ -93,7 +93,7 @@ So you found a bug in pahimar's code?  Think you can make it more efficient?  Wa
 3. Click the `Fork` icon at the top-right of this page (below your username).
 4. Make the changes that you want to.
 5. Click `Pull Request` at the right-hand side of the gray bar directly below your fork's name.
-6. Enter your PR's title, and create a detailed description telling pahimar what you changed.
+6. Click `Click to create a pull request for this comparison`, enter your PR's title, and create a detailed description telling pahimar what you changed.
 7. Click `Send pull request`, and you're done!
 
 #### Creating an Issue
