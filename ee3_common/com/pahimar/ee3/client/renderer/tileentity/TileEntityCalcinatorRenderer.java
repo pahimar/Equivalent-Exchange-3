@@ -2,12 +2,9 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelCalcinator;
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 

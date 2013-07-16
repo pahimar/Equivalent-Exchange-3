@@ -3,11 +3,8 @@ package com.pahimar.ee3.client.gui.inventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.nbt.NBTHelper;

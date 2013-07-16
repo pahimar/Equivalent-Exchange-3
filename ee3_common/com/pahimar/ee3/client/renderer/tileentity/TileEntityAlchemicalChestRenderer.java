@@ -3,14 +3,11 @@ package com.pahimar.ee3.client.renderer.tileentity;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
-import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 

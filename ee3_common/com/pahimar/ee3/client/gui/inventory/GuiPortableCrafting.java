@@ -3,13 +3,11 @@ package com.pahimar.ee3.client.gui.inventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;

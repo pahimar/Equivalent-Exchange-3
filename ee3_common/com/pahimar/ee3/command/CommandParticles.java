@@ -6,8 +6,6 @@ import net.minecraft.util.ChatMessageComponent;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.util.LocalizationUtil;
-import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.lib.Strings;
 

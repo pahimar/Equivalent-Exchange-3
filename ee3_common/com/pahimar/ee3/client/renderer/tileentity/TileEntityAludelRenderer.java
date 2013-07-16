@@ -7,13 +7,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelAludel;
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileGlassBell;
