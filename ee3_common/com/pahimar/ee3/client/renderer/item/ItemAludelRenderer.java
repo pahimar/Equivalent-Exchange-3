@@ -79,7 +79,7 @@ public class ItemAludelRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALUDEL);
 
         // Render
         modelAludel.render();

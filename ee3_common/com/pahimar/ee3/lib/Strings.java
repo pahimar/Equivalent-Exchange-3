@@ -14,7 +14,7 @@ public class Strings {
     /* General keys */
     public static final String TRUE = "true";
     public static final String FALSE = "false";
-    public static final String TOKEN_DELIMITER = ",";
+    public static final String TOKEN_DELIMITER = ".";
 
     /* Fingerprint check related constants */
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";

@@ -79,7 +79,7 @@ public class ItemGlassBellRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_GLASS_BELL);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_GLASS_BELL);
 
         // Render
         modelGlassBell.render();

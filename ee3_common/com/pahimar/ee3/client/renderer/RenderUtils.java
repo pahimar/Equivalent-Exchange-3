@@ -3,7 +3,6 @@ package com.pahimar.ee3.client.renderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,8 @@ import net.minecraft.util.Icon;
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.lib.Textures;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 /**
  * Equivalent-Exchange-3
@@ -26,12 +27,12 @@ public class RenderUtils {
 
     private static int rotationAngle = 0;
 
-    public static void renderRotatingBlockIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack stack, int x, int y, float zLevel, float scale) {
+    public static void renderRotatingBlockIntoGUI(FontRenderer fontRenderer, ItemStack stack, int x, int y, float zLevel, float scale) {
 
         RenderBlocks renderBlocks = new RenderBlocks();
 
         Block block = Block.blocksList[stack.itemID];
-        renderEngine.bindTexture(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
         GL11.glPushMatrix();
         GL11.glTranslatef(x - 2, y + 3, -3.0F + zLevel);
         GL11.glScalef(10.0F, 10.0F, 10.0F);
@@ -55,11 +56,11 @@ public class RenderUtils {
         GL11.glPopMatrix();
     }
 
-    public static void renderItemIntoGUI(FontRenderer fontRenderer, RenderEngine renderEngine, ItemStack itemStack, int x, int y, float opacity, float scale) {
+    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale) {
 
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
-        renderEngine.bindTexture(Textures.VANILLA_ITEM_TEXTURE_SHEET);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.VANILLA_ITEM_TEXTURE_SHEET);
         int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
         float red = (overlayColour >> 16 & 255) / 255.0F;
         float green = (overlayColour >> 8 & 255) / 255.0F;

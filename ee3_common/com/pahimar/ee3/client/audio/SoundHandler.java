@@ -24,7 +24,7 @@ public class SoundHandler {
         for (String soundFile : Sounds.soundFiles) {
             // Try to add the custom sound file to the pool of sounds
             try {
-                event.manager.soundPoolSounds.addSound(soundFile, this.getClass().getResource("/" + soundFile));
+                event.manager.addSound(soundFile);
             }
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e) {

@@ -17,7 +17,7 @@ public class RecipesPotions {
 
     private static CustomWrappedStack reagentWater = new CustomWrappedStack(new ItemStack(Block.waterStill));
     private static CustomWrappedStack reagentNetherWart = new CustomWrappedStack(new ItemStack(372, 1, 0));
-    private static CustomWrappedStack reagentGlowstoneDust = new CustomWrappedStack(new ItemStack(Item.lightStoneDust));
+    private static CustomWrappedStack reagentGlowstoneDust = new CustomWrappedStack(new ItemStack(Item.glowstone));
     private static CustomWrappedStack reagentRedstoneDust = new CustomWrappedStack(new ItemStack(331, 1, 0));
     private static CustomWrappedStack reagentGunpowder = new CustomWrappedStack(new ItemStack(Item.gunpowder));
     private static CustomWrappedStack reagentGoldenCarrot = new CustomWrappedStack(new ItemStack(Item.goldenCarrot));

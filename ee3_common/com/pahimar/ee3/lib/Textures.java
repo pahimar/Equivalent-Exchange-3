@@ -1,5 +1,10 @@
 package com.pahimar.ee3.lib;
 
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.util.ResourceLocation;
+
+import com.pahimar.ee3.core.util.ResourceLocationHelper;
+
 /**
  * Equivalent-Exchange-3
  * 
@@ -12,33 +17,33 @@ package com.pahimar.ee3.lib;
 public class Textures {
 
     // Base file paths
-    public static final String MODEL_SHEET_LOCATION = "/mods/ee3/textures/models/";
-    public static final String ARMOR_SHEET_LOCATION = "/mods/ee3/textures/armor/";
-    public static final String GUI_SHEET_LOCATION = "/mods/ee3/textures/gui/";
-    public static final String EFFECTS_LOCATION = "/mods/ee3/textures/effects/";
+    public static final String MODEL_SHEET_LOCATION = "textures/models/";
+    public static final String ARMOR_SHEET_LOCATION = "textures/armor/";
+    public static final String GUI_SHEET_LOCATION = "textures/gui/";
+    public static final String EFFECTS_LOCATION = "textures/effects/";
 
     // Item/Block sprite sheets
-    public static final String VANILLA_ITEM_TEXTURE_SHEET = "/gui/items.png";
-    public static final String VANILLA_BLOCK_TEXTURE_SHEET = "/terrain.png";
+    public static final ResourceLocation VANILLA_BLOCK_TEXTURE_SHEET = TextureMap.field_110575_b;
+    public static final ResourceLocation VANILLA_ITEM_TEXTURE_SHEET = TextureMap.field_110576_c;
 
     // Armor sprite sheets
 
     // GUI textures
-    public static final String GUI_CALCINATOR = GUI_SHEET_LOCATION + "calcinator.png";
-    public static final String GUI_ALUDEL = GUI_SHEET_LOCATION + "aludel.png";
-    public static final String GUI_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "alchemicalStorage.png";
-    public static final String GUI_SHARED_ALCHEMICAL_STORAGE = GUI_SHEET_LOCATION + "sharedAlchemicalStorage.png";
-    public static final String GUI_PORTABLE_CRAFTING = "/gui/crafting.png";
-    public static final String GUI_PORTABLE_TRANSMUTATION = GUI_SHEET_LOCATION + "portableTransmutation.png";
-    public static final String GUI_GLASS_BELL = GUI_SHEET_LOCATION + "glassBell.png";
+    public static final ResourceLocation GUI_CALCINATOR = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "calcinator.png");
+    public static final ResourceLocation GUI_ALUDEL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "aludel.png");
+    public static final ResourceLocation GUI_ALCHEMICAL_STORAGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage.png");
+    public static final ResourceLocation GUI_SHARED_ALCHEMICAL_STORAGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "sharedAlchemicalStorage.png");
+    public static final ResourceLocation GUI_PORTABLE_CRAFTING = ResourceLocationHelper.getResourceLocation("/gui/crafting.png");
+    public static final ResourceLocation GUI_PORTABLE_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "portableTransmutation.png");
+    public static final ResourceLocation GUI_GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
 
     // Model textures
-    public static final String MODEL_CALCINATOR = MODEL_SHEET_LOCATION + "calcinator.png";
-    public static final String MODEL_ALUDEL = MODEL_SHEET_LOCATION + "aludel.png";
-    public static final String MODEL_ALCHEMICAL_CHEST = MODEL_SHEET_LOCATION + "alchemicalChest.png";
-    public static final String MODEL_GLASS_BELL = MODEL_SHEET_LOCATION + "aludel.png";
+    public static final ResourceLocation MODEL_CALCINATOR = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "calcinator.png");
+    public static final ResourceLocation MODEL_ALUDEL = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "aludel.png");
+    public static final ResourceLocation MODEL_ALCHEMICAL_CHEST = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "alchemicalChest.png");
+    public static final ResourceLocation MODEL_GLASS_BELL = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "aludel.png");
 
     // Effect textures
-    public static final String EFFECT_WORLD_TRANSMUTATION = EFFECTS_LOCATION + "noise.png";
+    public static final ResourceLocation EFFECT_WORLD_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(EFFECTS_LOCATION + "noise.png");
 
 }

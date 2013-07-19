@@ -2,6 +2,7 @@ package com.pahimar.ee3.emc;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import com.google.common.collect.Multimap;
@@ -64,11 +65,20 @@ public class DynEMC {
                     
                     if (recipeOutput.getStackSize() != 0) {
                         
-                        graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
+                    	try {
+                    		graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
+                    	} catch (NoSuchElementException e) {
+                    		LogHelper.severe(e.getLocalizedMessage());
+                    	}
                     }
                 }
             }
         }
+    }
+    
+    public List<CustomWrappedStack> getCriticalNodes() {
+        
+        return graph.getCriticalNodes();
     }
 
     public int size() {
