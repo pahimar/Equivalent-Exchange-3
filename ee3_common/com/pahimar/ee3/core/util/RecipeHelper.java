@@ -125,11 +125,16 @@ public class RecipeHelper {
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
 
             for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
+            	
                 /*
                  * If the element is a list, then it is an OreStack
                  */
                 if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                    recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
+                	CustomWrappedStack oreStack = new CustomWrappedStack(shapedOreRecipe.getInput()[i]);
+                	
+                	if (oreStack.getWrappedStack() instanceof OreStack) {
+                		recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
+                	}
                 }
                 else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
                 

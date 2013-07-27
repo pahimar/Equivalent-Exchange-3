@@ -92,7 +92,7 @@ public class RecipeRegistry {
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
             
-            if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack()))) {
+            if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack())) && recipeOutput.getWrappedStack() != null) {
                 discoveredStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
             }
             
@@ -101,37 +101,34 @@ public class RecipeRegistry {
                     
                     CustomWrappedStack unwrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
                     
-                    if (!discoveredStacks.contains(unwrappedRecipeInput)) {
+                    if (!discoveredStacks.contains(unwrappedRecipeInput) && recipeInput.getWrappedStack() != null) {
                         discoveredStacks.add(unwrappedRecipeInput);
                     }
                 }
             }
         }
 
-        // Discover all stacks from the vanilla Items array
-        ArrayList<ItemStack> subItemList = new ArrayList<ItemStack>();
+        CustomWrappedStack customWrappedStack;
         
+        // Discover all stacks from the vanilla Items array
         for (int i = 0; i < Item.itemsList.length; i++) {
+        	
             if (Item.itemsList[i] != null) {
+            	
                 if (Item.itemsList[i].getHasSubtypes()) {
-
-                    subItemList.clear();
-                    Item.itemsList[i].getSubItems(i, Item.itemsList[i].getCreativeTab(), subItemList);
-
-                    for (ItemStack itemStack : subItemList) {
-                        if (itemStack != null) {
-
-                            CustomWrappedStack customWrappedStack = new CustomWrappedStack(itemStack);
-
-                            if (!discoveredStacks.contains(customWrappedStack)) {
-                                discoveredStacks.add(customWrappedStack);
-                            }
+                	
+                	for (int meta = 0; meta < 16; meta++) {
+                		
+                		customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
+                		
+                		if (!discoveredStacks.contains(customWrappedStack)) {
+                            discoveredStacks.add(customWrappedStack);
                         }
-                    }
+                	}
                 }
                 else {
                     
-                    CustomWrappedStack customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i]));
+                    customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i]));
                     
                     if (!discoveredStacks.contains(customWrappedStack)) {
                         discoveredStacks.add(customWrappedStack);

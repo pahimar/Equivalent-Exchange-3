@@ -226,6 +226,9 @@ public class CustomWrappedStack {
         else if (energyStack != null) {
             stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyStack.energyName));
         }
+        else {
+        	stringBuilder.append("null");
+        }
 
         return stringBuilder.toString();
     }
@@ -264,7 +267,11 @@ public class CustomWrappedStack {
                 hashCode = 37 * hashCode + itemStack.getItemDamage();
             }
 
-            hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
+            try {
+            	hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
+            } catch (ArrayIndexOutOfBoundsException e) { 
+            	
+            }
         }
         else if (oreStack != null) {
             hashCode = 37 * hashCode + oreStack.oreName.hashCode();

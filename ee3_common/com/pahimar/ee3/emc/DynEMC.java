@@ -57,21 +57,34 @@ public class DynEMC {
             recipeOutput = recipeKeySetIterator.next();
             
             for (List<CustomWrappedStack> recipeInputs : recipeMappings.get(recipeOutput)) {
-                for (CustomWrappedStack recipeInput : recipeInputs) {
-                    
-                    // Unwrapped the wrapped stacks so that we actually find them in the graph
-                    CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
-                    CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
-                    
-                    if (recipeOutput.getStackSize() != 0) {
-                        
-                    	try {
-                    		graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
-                    	} catch (NoSuchElementException e) {
-                    		LogHelper.severe(e.getLocalizedMessage());
-                    	}
-                    }
-                }
+            	
+            	CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
+            	
+            	if (graph.nodeExists(unWrappedRecipeOutput)) {
+	                for (CustomWrappedStack recipeInput : recipeInputs) {
+	                    
+	                    // Unwrapped the wrapped stacks so that we actually find them in the graph
+	                    
+	                    CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
+	                    
+	                    if (graph.nodeExists(unWrappedRecipeInput)) {
+		                    if (recipeOutput.getStackSize() != 0) {		                        
+		                    	try {
+		                			graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
+		                    	} catch (NoSuchElementException e) {
+		                    		LogHelper.severe(e.getLocalizedMessage());
+		                    	}
+		                    }
+	                    }
+	                    else {
+	                    	LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' exists in the crafting relationship graph");
+	                    	LogHelper.debug("Recipe input '" + unWrappedRecipeInput.toString() + "' does not exist in the crafting relationship graph");
+	                    }
+	                }
+	            }
+            	else {
+            		LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' does not exist in the crafting relationship graph");
+            	}
             }
         }
     }
