@@ -22,6 +22,8 @@
 	<entry key="tile.calcinator.name">Kalcinátor</entry>
 	<entry key="tile.aludel.name">Sublimační Nádoba</entry>
 	<entry key="tile.alchemicalChest.name">Alchymistická Truhla</entry>
+	<entry key="tile.glassBell.name">Skleněný zvon</entry>
+	<entry key="container.glassBell">Skleněný zvon</entry>
 	<entry key="container.calcinator">Kalcinátor</entry>
 	<entry key="container.aludel">Sublimační Nádoba</entry> <!-- nádoba na zachycování kondenzátu -->
 	<entry key="container.alchemicalChest">Alchymistická Truhla</entry>
