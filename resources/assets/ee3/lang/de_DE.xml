@@ -3,11 +3,11 @@
 <properties version="1.0">
 	<comment>German (de_DE) Localization File</comment>
 	<entry key="key.extra">Extra</entry>
-	<entry key="key.release">Auslösen</entry>
+	<entry key="key.release">Auflösen</entry>
 	<entry key="key.toggle">Umschalten</entry>
 	<entry key="key.charge">Aufladen</entry>
 	<entry key="item.shardMinium.name">Miniumscherbe</entry>
-	<entry key="item.stoneInert.name">Inerter Stein</entry>
+	<entry key="item.stoneInert.name">Inaktiver Stein</entry>
 	<entry key="item.stoneMinium.name">Miniumstein</entry>
 	<entry key="item.stonePhilosophers.name">Stein der Weisen</entry>
 	<entry key="item.alchemicalDustAsh.name">Asche</entry>
