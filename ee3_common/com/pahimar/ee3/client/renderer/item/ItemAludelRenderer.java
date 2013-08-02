@@ -55,6 +55,10 @@ public class ItemAludelRenderer implements IItemRenderer {
                 renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderAludel(0.0F, 0.0F, 1.0F, 1.0F);
+                return;
+            }
             case INVENTORY: {
                 renderAludel(-1.0F, -0.9F, 0.0F, 1.0F);
                 return;
@@ -75,7 +79,7 @@ public class ItemAludelRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALUDEL);
 
         // Render
         modelAludel.render();

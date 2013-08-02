@@ -5,8 +5,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.nbt.NBTHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -27,9 +27,9 @@ public class ContainerPortableTransmutation extends Container {
     }
 
     @Override
-    public void onCraftGuiClosed(EntityPlayer player) {
+    public void onContainerClosed(EntityPlayer player) {
 
-        super.onCraftGuiClosed(player);
+        super.onContainerClosed(player);
 
         if (!player.worldObj.isRemote) {
             InventoryPlayer invPlayer = player.inventory;

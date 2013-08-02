@@ -6,7 +6,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileGlassBell;
 
 /**
@@ -25,7 +24,7 @@ public class ContainerGlassBell extends Container {
 
     public ContainerGlassBell(InventoryPlayer inventoryPlayer, TileGlassBell tileGlassBell) {
 
-        this.addSlotToContainer(new Slot(tileGlassBell, TileAludel.INPUT_INVENTORY_INDEX, 80, 22));
+        this.addSlotToContainer(new Slot(tileGlassBell, TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, 80, 22));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex) {
@@ -49,6 +48,33 @@ public class ContainerGlassBell extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
 
-        return null;
+        ItemStack itemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack slotItemStack = slot.getStack();
+            itemStack = slotItemStack.copy();
+
+            if (slotIndex < TileGlassBell.INVENTORY_SIZE) {
+
+                if (!this.mergeItemStack(slotItemStack, 1, inventorySlots.size(), true)) {
+                    return null;
+                }
+            }
+            else {
+                if (!this.mergeItemStack(slotItemStack, 0, TileGlassBell.INVENTORY_SIZE, false)) {
+                    return null;
+                }
+            }
+
+            if (slotItemStack.stackSize == 0) {
+                slot.putStack((ItemStack) null);
+            }
+            else {
+                slot.onSlotChanged();
+            }
+        }
+
+        return itemStack;
     }
 }

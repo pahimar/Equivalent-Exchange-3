@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Simplified Chinese (zh_CN) Localization File</comment>
+	<entry key="key.extra">额外功能</entry>
+	<entry key="key.release">施放技能</entry>
+	<entry key="key.toggle">切换目标</entry>
+	<entry key="key.charge">充能</entry>
+	<entry key="item.shardMinium.name">铅丹碎片</entry>
+	<entry key="item.stoneInert.name">惰性石</entry>
+	<entry key="item.stoneMinium.name">铅丹石</entry>
+	<entry key="item.stonePhilosophers.name">贤者之石</entry>
+	<entry key="item.alchemicalDustAsh.name">灰烬</entry>
+	<entry key="item.alchemicalDustMinium.name">铅丹粉末</entry>
+	<entry key="item.alchemicalDustVerdant.name">翠绿粉末</entry>
+	<entry key="item.alchemicalDustAzure.name">蔚蓝粉末</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">紫红粉末</entry>
+	<entry key="item.alchemicalDustIridescent.name">虹彩粉末</entry>
+	<entry key="item.alchemicalBag.name">炼金袋</entry>
+	<entry key="tile.redWaterStill.name">红水(静止)</entry>
+	<entry key="tile.redWaterFlowing.name">红水(流动)</entry>
+	<entry key="tile.calcinator.name">煅烧炉</entry>
+	<entry key="tile.aludel.name">梨形器皿</entry>
+	<entry key="tile.alchemicalChest.name">炼金箱子</entry>
+	<entry key="tile.glassDome.name">玻璃罩</entry>
+	<entry key="tile.glassBell.name">玻璃钟</entry>
+	<entry key="container.calcinator">煅烧炉</entry>
+	<entry key="container.aludel">梨形器皿</entry>
+	<entry key="container.alchemicalChest">炼金箱子</entry>
+	<entry key="container.glassDome.name">玻璃罩</entry>
+	<entry key="container.alchemicalBag">炼金袋</entry>
+	<entry key="container.glassBell.name">玻璃钟</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry> 
+	<entry key="version.init_log_message">远程版本检查开始初始化,版本信息文件位于</entry>
+	<entry key="version.uninitialized">远程版本更新检查更新失败</entry>
+	<entry key="version.current">当前使用的是 Equivalent Exchange 3 的最新版本 (@REMOTE_MOD_VERSION@)，适用于 @MINECRAFT_VERSION@ 版本</entry>
+	<entry key="version.outdated">@MOD_NAME@ 的最新版本 (@REMOTE_MOD_VERSION@) 已更新，适用于 @MINECRAFT_VERSION@，请在 @MOD_UPDATE_LOCATION@ 下载</entry>
+	<entry key="version.general_error">访问远程版本文件失败；重试中</entry>
+	<entry key="version.final_error">累计三次连接失败后版本检查中断</entry>
+	<entry key="version.check_disabled">禁止远程版本检查，略过此步</entry>
+	<entry key="command.ee3.overlay.turned_on">开启转换目标快捷视图</entry>
+	<entry key="command.ee3.overlay.turned_off">关闭转换目标快捷视图</entry>
+	<entry key="command.ee3.overlay.position.top_left">将转换目标快捷视图设置在屏幕左上角</entry>
+	<entry key="command.ee3.overlay.position.top_right">将转换目标快捷视图设置在屏幕右上角</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">将转换目标快捷视图设置在屏幕左下角</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">将转换目标快捷视图设置在屏幕右下角</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(### 是介于 0.0 与 1.0 间的小数 )</entry>
+	<entry key="command.ee3.overlay.opacity.updated">已成功更新转换目标快捷视图透明度</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(### 为大于 0.0 的小数) </entry>
+	<entry key="command.ee3.overlay.scale.updated">已成功更新转换目标快捷视图界面大小</entry>
+	<entry key="command.ee3.particles.turned_on">开启 Equivalent Exchange 3 粒子渲染效果</entry>
+	<entry key="command.ee3.particles.turned_off">关闭 Equivalent Exchange 3 粒子渲染效果</entry>
+	<entry key="command.ee3.sounds.set_to_all">允许对所有玩家播放 Equivalent Exchange 3 音频</entry>
+	<entry key="command.ee3.sounds.set_to_self">允许对自己播放 Equivalent Exchange 3 音频</entry>
+	<entry key="command.ee3.sounds.turned_off">禁止播放 Equivalent Exchange 3 音频</entry>
+</properties>

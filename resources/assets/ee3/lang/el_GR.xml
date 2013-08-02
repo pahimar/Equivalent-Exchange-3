@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>English (en_US) Localization File</comment>
+	<entry key="key.extra">Επιπλέον</entry>
+	<entry key="key.release">Άφισε</entry>
+	<entry key="key.toggle">εναλλαγή</entry>
+	<entry key="key.charge">Φόρτιση</entry>
+	<entry key="item.shardMinium.name">Θραύσμα μινίου</entry>
+	<entry key="item.stoneInert.name">Aδρανής πέτρα</entry>
+	<entry key="item.stoneMinium.name">Πέτρα μινίου</entry>
+	<entry key="item.stonePhilosophers.name">Φυλοσοφική λίθος</entry>
+	<entry key="item.alchemicalDustAsh.name">Στάχτη</entry>
+	<entry key="item.alchemicalDustMinium.name">Σκόνη μινίου</entry>
+	<entry key="item.alchemicalDustVerdant.name">Χλοερή σκόνη</entry>
+	<entry key="item.alchemicalDustAzure.name">Γαλανή σκόνη</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Σκόνη αμάραντου</entry>
+	<entry key="item.alchemicalDustIridescent.name">Σκόνη ιριδύου</entry>
+	<entry key="item.alchemicalBag.name">Τσάντα αλχημιστή</entry>
+	<entry key="tile.redWaterStill.name">Κόκκινο νερό</entry>
+	<entry key="tile.redWaterFlowing.name">Κόκκινο νερό</entry>
+	<entry key="tile.calcinator.name">Καζάνι</entry>
+	<entry key="tile.aludel.name">Βάζο αλχημιστή</entry>
+	<entry key="tile.alchemicalChest.name">Κασέλα αλχιμιστή</entry>
+	<entry key="tile.glassBell.name">Γυαλινη καμπάνα</entry>
+	<entry key="container.calcinator">Καζάνι</entry>
+	<entry key="container.aludel">Βάζο αλχημιστή</entry>
+	<entry key="container.alchemicalChest">Κασέλα αλχιμιστή</entry>
+	<entry key="container.alchemicalBag">Τσάντα αλχημιστή</entry>
+	<entry key="container.glassBell">Γυαλινη καμπάνα</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Έλενχος εκδοσης</entry>
+	<entry key="version.uninitialized">Έλενχος έκδοσης απέτηχε</entry>
+	<entry key="version.current">Χρυσιμοποιήται την πιο εγκυρη έκδοση (@REMOTE_MOD_VERSION@) του Equivalent Exchange 3 για @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Μια νεα έκδοση @MOD_NAME@ υπάρχει (@REMOTE_MOD_VERSION@) για το @MINECRAFT_VERSION@. Πάρτην εδώ: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Σφάλμα στην σύνδεση ελένχου έκδοσης</entry>
+	<entry key="version.final_error">Ο έλενχος εκδοσης σταματησε στις τρεις αποτυχιμενες προσπάθειες</entry>
+	<entry key="version.mc_version_not_found">Δεν μπορούσε να βρεθεί η έκδοση @MOD_NAME@ για @MINECRAFT_VERSION@ στο δύκτιο</entry>
+	<entry key="command.ee3.overlay.turned_on">Η ένδειξη μεταλαγής άνηξε</entry>
+	<entry key="command.ee3.overlay.turned_off">Η ένδειξη μεταλαγής έκλεισε</entry>
+	<entry key="command.ee3.overlay.position.top_left">Target transmutation overlay position set to top left</entry>
+	<entry key="command.ee3.overlay.position.top_right">Target transmutation overlay position set to top right</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Target transmutation overlay position set to bottom left</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Target transmutation overlay position set to bottom right</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(where ### is a decimal value between 0.0 and 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Η αδιαφάνεια μεταλαγής άλαξε</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(where ### is a decimal value greater than 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Η κλίμακα αδιαφάνεια μεταλαγής άλαξε</entry>
+	<entry key="command.ee3.particles.turned_on">Τα σωματίδια του Equivalent Exchange 3 άνειξαν</entry>
+	<entry key="command.ee3.particles.turned_off">Τα σωματίδια του Equivalent Exchange 3 έκλεισαν</entry>
+	<entry key="command.ee3.sounds.set_to_all">Παίζουν ήχους απο όλους τους παιχτες</entry>
+	<entry key="command.ee3.sounds.set_to_self">Παίζουν ήχους απο μονο εσάς</entry>
+	<entry key="command.ee3.sounds.turned_off">Οι ήχοι του Equivalent Exchange 3 απενεργοποίηθικαν</entry>
+</properties>

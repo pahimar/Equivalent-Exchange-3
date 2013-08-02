@@ -55,6 +55,10 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
                 renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
                 return;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderCalcinator(0.0F, 0.0F, 1.0F, 1.0F);
+                return;
+            }
             case INVENTORY: {
                 renderCalcinator(0.0F, -0.1F, 1.0F, 1.0F);
                 return;
@@ -75,7 +79,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
         GL11.glRotatef(-90F, 1F, 0, 0);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_CALCINATOR);
 
         // Render
         modelCalcinator.render();

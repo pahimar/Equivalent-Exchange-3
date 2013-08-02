@@ -21,9 +21,9 @@ import com.pahimar.ee3.network.packet.PacketTileUpdate;
  */
 public class TileEE extends TileEntity {
 
-    private ForgeDirection orientation;
-    private byte state;
-    private String customName;
+    protected ForgeDirection orientation;
+    protected byte state;
+    protected String customName;
 
     public TileEE() {
 
@@ -112,6 +112,16 @@ public class TileEE extends TileEntity {
     public Packet getDescriptionPacket() {
 
         return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("TileEE Data - xCoord: %d, yCoord: %d, zCoord: %d, customName: '%s', orientation: %s, state: %d\n", xCoord, yCoord, zCoord, customName, orientation, state));
+
+        return stringBuilder.toString();
     }
 
 }

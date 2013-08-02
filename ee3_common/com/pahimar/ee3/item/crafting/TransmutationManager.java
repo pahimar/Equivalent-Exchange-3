@@ -18,7 +18,7 @@ public class TransmutationManager {
     private static final TransmutationManager instance = new TransmutationManager();
 
     /** A list of all the recipes added */
-    private List recipes = new ArrayList();
+    private List<?> recipes = new ArrayList<Object>();
 
     /**
      * Returns the static instance of this class
@@ -35,7 +35,7 @@ public class TransmutationManager {
     /**
      * returns the List<> of all recipes
      */
-    public List getRecipeList() {
+    public List<?> getRecipeList() {
 
         return recipes;
     }

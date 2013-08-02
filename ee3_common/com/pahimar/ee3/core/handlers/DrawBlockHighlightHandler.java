@@ -1,7 +1,9 @@
 package com.pahimar.ee3.core.handlers;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -10,10 +12,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Textures;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -24,6 +30,7 @@ import com.pahimar.ee3.lib.Textures;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class DrawBlockHighlightHandler {
 
     private static int pulse = 0;
@@ -32,13 +39,17 @@ public class DrawBlockHighlightHandler {
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
 
+        Minecraft minecraft = FMLClientHandler.instance().getClient();
+
         if (event.currentItem != null) {
             if (event.currentItem.getItem() instanceof ITransmutationStone) {
                 if (event.target.typeOfHit == EnumMovingObjectType.TILE) {
                     TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
 
-                    if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
-                        drawInWorldTransmutationOverlay(event);
+                    if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
+                        if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
+                            drawInWorldTransmutationOverlay(event);
+                        }
                     }
                 }
             }
@@ -53,7 +64,6 @@ public class DrawBlockHighlightHandler {
         double iPX = event.player.prevPosX + (event.player.posX - event.player.prevPosX) * event.partialTicks;
         double iPY = event.player.prevPosY + (event.player.posY - event.player.prevPosY) * event.partialTicks;
         double iPZ = event.player.prevPosZ + (event.player.posZ - event.player.prevPosZ) * event.partialTicks;
-        int texture = event.context.renderEngine.getTexture(Textures.EFFECT_WORLD_TRANSMUTATION);
 
         float xScale = 1;
         float yScale = 1;
@@ -133,7 +143,7 @@ public class DrawBlockHighlightHandler {
             GL11.glRotatef(90, forgeDir.offsetX, forgeDir.offsetY, forgeDir.offsetZ);
             GL11.glTranslated(0, 0, 0.5f * zCorrection);
             GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-            renderPulsingQuad(texture, 0.75F);
+            renderPulsingQuad(Textures.EFFECT_WORLD_TRANSMUTATION, 0.75F);
             GL11.glPopMatrix();
         }
 
@@ -141,11 +151,11 @@ public class DrawBlockHighlightHandler {
         GL11.glDepthMask(true);
     }
 
-    public static void renderPulsingQuad(int texture, float maxTransparency) {
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency) {
 
         float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
         Tessellator tessellator = Tessellator.instance;
 
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

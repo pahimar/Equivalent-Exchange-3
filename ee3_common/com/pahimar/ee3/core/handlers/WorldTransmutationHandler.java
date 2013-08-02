@@ -9,7 +9,7 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.core.util.TransmutationHelper;
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionEvent.ActionResult;
 import com.pahimar.ee3.event.ActionRequestEvent;

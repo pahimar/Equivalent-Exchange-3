@@ -55,6 +55,10 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
                 renderAlchemicalChest(1.0F, 1.0F, 1.0F);
                 break;
             }
+            case EQUIPPED_FIRST_PERSON: {
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F);
+                break;
+            }
             case INVENTORY: {
                 renderAlchemicalChest(0.0F, 0.075F, 0.0F);
                 break;
@@ -66,7 +70,7 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer {
 
     private void renderAlchemicalChest(float x, float y, float z) {
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALCHEMICAL_CHEST);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         GL11.glRotatef(180, 1, 0, 0);

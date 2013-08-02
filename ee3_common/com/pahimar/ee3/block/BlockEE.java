@@ -3,7 +3,7 @@ package com.pahimar.ee3.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -35,14 +35,19 @@ public abstract class BlockEE extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
 
-        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName2());
+        blockIcon = iconRegister.registerIcon(String.format("%s:%s", Reference.MOD_ID.toLowerCase(), getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+    }
+    
+    protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
+    	
+    	return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
     /**
      * Sets the direction of the block when placed
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
 
         int direction = 0;
         int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;

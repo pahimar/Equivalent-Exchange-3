@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Polish (pl_PL) Localization File</comment>
+	<entry key="key.extra">Dodatkowa funkcja</entry>
+	<entry key="key.release">Wypuść</entry>
+	<entry key="key.toggle">Przełącz</entry>
+	<entry key="key.charge">Ładuj</entry>
+	<entry key="item.shardMinium.name">Odłam Minium</entry>
+	<entry key="item.stoneInert.name">Nieaktywny kamień</entry>
+	<entry key="item.stoneMinium.name">Minium</entry>
+	<entry key="item.stonePhilosophers.name">Kamień filozoficzny</entry>
+	<entry key="item.alchemicalDustAsh.name">Popiół</entry>
+	<entry key="item.alchemicalDustMinium.name">Proszek Minium</entry>
+	<entry key="item.alchemicalDustVerdant.name">Zielony proszek</entry>
+	<entry key="item.alchemicalDustAzure.name">Lazurowy proszek</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amarantowy proszek</entry>
+	<entry key="item.alchemicalDustIridescent.name">Opalowy Proszek</entry>
+	<entry key="item.alchemicalBag.name">Torba alchemiczna</entry>
+	<entry key="tile.redWaterStill.name">Czerwona woda (Stojąca)</entry>
+	<entry key="tile.redWaterFlowing.name">Czerwona woda (Płynąca)</entry>
+	<entry key="tile.calcinator.name">Kalcynator</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Skrzynia alchemiczna</entry>
+	<entry key="tile.glassBell.name">Szklany dzwon</entry>
+	<entry key="container.calcinator">Kalcynator</entry>
+	<entry key="container.aludel">Aludel</entry>
+	<entry key="container.alchemicalChest">Skrzynia alchemiczna</entry>
+	<entry key="container.alchemicalBag">Torba alchemiczna</entry>
+	<entry key="container.glassBell">Szklany dzwon</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Rozpoczynanie zdalnego sprawdzania wersji, według</entry>
+	<entry key="version.uninitialized">Zdalne sprawdzanie wersji nie rozpoczęło się poprawnie</entry>
+	<entry key="version.current">Używasz najnowszej wersji (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 dla @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Nowa wersja @MOD_NAME@ (@REMOTE_MOD_VERSION@) dla @MINECRAFT_VERSION@ dostępna. Pobierz ją tutaj: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Błąd podczas sprawdzania wersji; ponawianie próby</entry>
+	<entry key="version.final_error">Sprawdzanie wersji przerwane po trzech nieudanych próbach</entry>
+	<entry key="version.mc_version_not_found">Odnalezienie wersji @MOD_NAME@ dla @MINECRAFT_VERSION@ niemożliwe</entry>
+	<entry key="command.ee3.overlay.turned_on">Nakładka transmutacji włączona</entry>
+	<entry key="command.ee3.overlay.turned_off">Nakładka transmutacji wyłączona</entry>
+	<entry key="command.ee3.overlay.position.top_left">Nakładka transmutacji przeniesona w lewy górny róg</entry>
+	<entry key="command.ee3.overlay.position.top_right">Nakładka transmutacji przeniesona w prawy górny róg</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Nakładka transmutacji przeniesona w lewy dolny róg</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Nakładka transmutacji przeniesona w prawy dolny róg</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(gdzie ### to wartość dziesiętna pomiędzy 0.0 i 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Przezroczystość nakładki transmutacji zmieniona pomyślnie</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(gdzie ### to wartość dziesiętna powyżej 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Skala nakładki transmutacji zmieniona pomyślnie</entry>
+	<entry key="command.ee3.particles.turned_on">Efekty cząsteczek Equivalent Exchange 3 włączone</entry>
+	<entry key="command.ee3.particles.turned_off">Efekty cząsteczek Equivalent Exchange 3 wyłączone</entry>
+	<entry key="command.ee3.sounds.set_to_all">Odtwarzanie dźwięków Equivalent Exchange 3 od wszystkich graczy</entry>
+	<entry key="command.ee3.sounds.set_to_self">Odtwarzanie dźwięków Equivalent Exchange 3 tylko od siebie</entry>
+	<entry key="command.ee3.sounds.turned_off">Odtwarzanie dźwięków Equivalent Exchange 3 wyłączone</entry>
+</properties>

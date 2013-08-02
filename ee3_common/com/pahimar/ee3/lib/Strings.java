@@ -14,6 +14,7 @@ public class Strings {
     /* General keys */
     public static final String TRUE = "true";
     public static final String FALSE = "false";
+    public static final String TOKEN_DELIMITER = ".";
 
     /* Fingerprint check related constants */
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
@@ -38,6 +39,19 @@ public class Strings {
     public static final String NBT_TE_STATE_KEY = "teState";
     public static final String NBT_TE_CUSTOM_NAME = "CustomName";
     public static final String NBT_TE_DIRECTION_KEY = "teDirection";
+    public static final String NBT_ENCODED_RECIPE_OUTPUT = "recipeOutput";
+    public static final String NBT_ENCODED_RECIPE_INPUTS = "recipeInputs";
+    public static final String NBT_ENCODED_RECIPE_INPUT_PREFIX = "recipeInput_";
+    public static final String NBT_ENCODED_ATTR_TYPE = "type";
+    public static final String NBT_ENCODED_ATTR_TYPE_ITEM = "ItemStack";
+    public static final String NBT_ENCODED_ATTR_TYPE_ORE = "OreStack";
+    public static final String NBT_ENCODED_ATTR_TYPE_ENERGY = "EnergyStack";
+    public static final String NBT_ENCODED_ATTR_SIZE = "Count";
+    public static final String NBT_ENCODED_ATTR_ITEM_ID = "id";
+    public static final String NBT_ENCODED_ATTR_ITEM_META = "Damage";
+    public static final String NBT_ENCODED_ATTR_ITEM_TAG_COMPOUND = "tag";
+    public static final String NBT_ENCODED_ATTR_ORE_NAME = "oreName";
+    public static final String NBT_ENCODED_ATTR_ENERGY_NAME = "energyName";
 
     /* Block name constants */
     public static final String CALCINATOR_NAME = "calcinator";
@@ -52,7 +66,7 @@ public class Strings {
     public static final String INERT_STONE_NAME = "stoneInert";
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
-    public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust"; 
+    public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
 
     /* TileEntity name constants */
@@ -75,5 +89,4 @@ public class Strings {
     public static final String CONTAINER_GLASS_BELL_NAME = "container." + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
-
 }
