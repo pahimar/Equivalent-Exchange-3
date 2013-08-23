@@ -3,3 +3,4 @@ build.properties
 .DS_Store?
 .Spotlight-V100
 .Trashes
+/bin
