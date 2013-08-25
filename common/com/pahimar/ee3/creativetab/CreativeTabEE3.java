@@ -18,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class CreativeTabEE3 extends CreativeTabs {
 
-	public CreativeTabEE3(int par1, String par2Str) {
+	public CreativeTabEE3(int tabID, String tabLabel) {
 
-		super(par1, par2Str);
+		super(tabID, tabLabel);
 	}
 
 	@Override

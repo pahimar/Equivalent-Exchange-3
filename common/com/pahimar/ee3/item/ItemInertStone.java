@@ -17,7 +17,7 @@ public class ItemInertStone extends ItemEE {
     public ItemInertStone(int id) {
 
         super(id);
-        this.setUnlocalizedName(Strings.INERT_STONE_NAME);
+        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.INERT_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 }

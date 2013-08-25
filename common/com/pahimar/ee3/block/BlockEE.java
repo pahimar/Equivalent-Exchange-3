@@ -40,7 +40,7 @@ public abstract class BlockEE extends BlockContainer {
     
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
     	
-    	return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+    	return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
     }
 
     /**

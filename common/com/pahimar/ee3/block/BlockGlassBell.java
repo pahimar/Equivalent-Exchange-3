@@ -40,6 +40,18 @@ public class BlockGlassBell extends BlockEE {
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(1.0F);
     }
+    
+    @Override
+    public String getUnlocalizedName() {
+    	
+        StringBuilder unlocalizedName = new StringBuilder();
+        
+        unlocalizedName.append("tile.");
+        unlocalizedName.append(Strings.RESOURCE_PREFIX);
+        unlocalizedName.append(Strings.GLASS_BELL_NAME);
+        
+        return unlocalizedName.toString();
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world) {

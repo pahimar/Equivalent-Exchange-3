@@ -11,7 +11,6 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.nbt.NBTHelper;
 
@@ -37,7 +36,7 @@ public class ItemAlchemicalBag extends ItemEE {
     public ItemAlchemicalBag(int id) {
 
         super(id);
-        this.setUnlocalizedName(Strings.ALCHEMICAL_BAG_NAME);
+        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
@@ -48,7 +47,7 @@ public class ItemAlchemicalBag extends ItemEE {
         icons = new Icon[ALCHEMICAL_BAG_SUBTYPES.length];
 
         for (int i = 0; i < ALCHEMICAL_BAG_SUBTYPES.length; ++i) {
-            icons[i] = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_SUBTYPES[i]);
+            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_SUBTYPES[i]);
         }
     }
 
@@ -127,7 +126,7 @@ public class ItemAlchemicalBag extends ItemEE {
         if (itemStack != null) {
             if (!(itemStack.getItem() instanceof ItemAlchemicalBag))
                 // TODO Localize
-                throw new UnsupportedOperationException("Can\'t dye non-bags!");
+                throw new UnsupportedOperationException("Cannot dye non-bags!");
             else {
                 ItemUtil.setColor(itemStack, color);
             }

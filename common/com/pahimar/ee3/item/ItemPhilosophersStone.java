@@ -36,7 +36,7 @@ public class ItemPhilosophersStone extends ItemEE
     public ItemPhilosophersStone(int id) {
 
         super(id);
-        this.setUnlocalizedName(Strings.PHILOSOPHERS_STONE_NAME);
+        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.PHILOSOPHERS_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
         maxChargeLevel = 3;

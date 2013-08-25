@@ -26,4 +26,16 @@ public class BlockRedWaterStill extends BlockStationary {
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.disableStats();
     }
+    
+    @Override
+    public String getUnlocalizedName() {
+    	
+        StringBuilder unlocalizedName = new StringBuilder();
+        
+        unlocalizedName.append("tile.");
+        unlocalizedName.append(Strings.RESOURCE_PREFIX);
+        unlocalizedName.append(Strings.RED_WATER_STILL_NAME);
+        
+        return unlocalizedName.toString();
+    }
 }

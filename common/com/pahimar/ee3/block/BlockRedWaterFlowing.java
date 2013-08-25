@@ -25,4 +25,16 @@ public class BlockRedWaterFlowing extends BlockFlowing {
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setUnlocalizedName(Strings.RED_WATER_FLOWING_NAME);
     }
+    
+    @Override
+    public String getUnlocalizedName() {
+    	
+        StringBuilder unlocalizedName = new StringBuilder();
+        
+        unlocalizedName.append("tile.");
+        unlocalizedName.append(Strings.RESOURCE_PREFIX);
+        unlocalizedName.append(Strings.RED_WATER_FLOWING_NAME);
+        
+        return unlocalizedName.toString();
+    }
 }

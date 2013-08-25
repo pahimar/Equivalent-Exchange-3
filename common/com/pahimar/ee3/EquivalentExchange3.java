@@ -19,7 +19,6 @@ import com.pahimar.ee3.core.handlers.EntityLivingHandler;
 import com.pahimar.ee3.core.handlers.FuelHandler;
 import com.pahimar.ee3.core.handlers.InterModCommsHandler;
 import com.pahimar.ee3.core.handlers.ItemEventHandler;
-import com.pahimar.ee3.core.handlers.LocalizationHandler;
 import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
@@ -72,15 +71,19 @@ public class EquivalentExchange3 {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 
-	public static CreativeTabs tabsEE3 = new CreativeTabEE3(
-			CreativeTabs.getNextID(), Reference.MOD_ID);
+	public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
 	@EventHandler
 	public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
 		// Report (log) to the user that the version of Equivalent Exchange 3
 		// they are using has been changed/tampered with
-		LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
+		if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
+			LogHelper.warning(Strings.NO_FINGERPRINT_MESSAGE);
+		}
+		else {
+			LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
+		}
 	}
 
 	@EventHandler
@@ -97,7 +100,7 @@ public class EquivalentExchange3 {
 		LogHelper.init();
 
 		// Load the localization files into the LanguageRegistry
-		LocalizationHandler.loadLanguages();
+		//LocalizationHandler.loadLanguages();
 
 		// Initialize the configuration
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory()

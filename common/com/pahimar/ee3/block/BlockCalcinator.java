@@ -42,6 +42,18 @@ public class BlockCalcinator extends BlockEE {
         this.setHardness(5F);
         this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 1.0F, 0.9F);
     }
+    
+    @Override
+    public String getUnlocalizedName() {
+    	
+        StringBuilder unlocalizedName = new StringBuilder();
+        
+        unlocalizedName.append("tile.");
+        unlocalizedName.append(Strings.RESOURCE_PREFIX);
+        unlocalizedName.append(Strings.CALCINATOR_NAME);
+        
+        return unlocalizedName.toString();
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world) {

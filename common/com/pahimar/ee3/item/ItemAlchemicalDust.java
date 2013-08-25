@@ -10,7 +10,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +35,6 @@ public class ItemAlchemicalDust extends ItemEE {
 
         super(id);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Strings.ALCHEMICAL_DUST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }
@@ -44,8 +42,15 @@ public class ItemAlchemicalDust extends ItemEE {
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
 
+    	StringBuilder unlocalizedName = new StringBuilder();
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-        return super.getUnlocalizedName() + ALCHEMICAL_DUST_NAMES[meta];
+        
+        unlocalizedName.append("item.");
+        unlocalizedName.append(Strings.RESOURCE_PREFIX);
+        unlocalizedName.append(Strings.ALCHEMICAL_DUST_NAME);
+        unlocalizedName.append(ALCHEMICAL_DUST_NAMES[meta]);
+        
+        return unlocalizedName.toString();
     }
 
     @Override
@@ -66,7 +71,7 @@ public class ItemAlchemicalDust extends ItemEE {
         icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
         for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i) {
-            icons[i] = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
+            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
         }
     }
 
