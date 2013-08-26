@@ -1,0 +1,56 @@
+
+key.extra=Extra
+key.release=Release
+key.toggle=Toggle
+key.charge=Charge
+
+item.ee3:shardMinium.name=Shard of Minium
+item.ee3:stoneInert.name=Inert Stone
+item.ee3:stoneMinium.name=Minium Stone
+item.ee3:stonePhilosophers.name=Philosopher's Stone
+item.ee3:alchemicalDustAsh.name=Ash
+item.ee3:alchemicalDustMinium.name=Minium Dust
+item.ee3:alchemicalDustVerdant.name=Verdant Dust
+item.ee3:alchemicalDustAzure.name=Azure Dust
+item.ee3:alchemicalDustAmaranthine.name=Amaranthine Dust
+item.ee3:alchemicalDustIridescent.name=Iridescent Dust
+item.ee3:alchemicalBag.name=Alchemical Bag
+
+tile.ee3:redWaterStill.name=Red Water (Still)
+tile.ee3:redWaterFlowing.name=Red Water (Flowing)
+tile.ee3:calcinator.name=Calcinator
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Alchemical Chest
+tile.ee3:glassBell.name=Glass Bell
+
+container.calcinator=Calcinator
+container.aludel=Aludel
+container.alchemicalChest=Alchemical Chest
+container.alchemicalBag=Alchemical Bag
+container.glassBell=Glass Bell
+
+command.ee3.overlay.turned_on=Target transmutation overlay turned on
+command.ee3.overlay.turned_off=Target transmutation overlay turned off
+command.ee3.overlay.position.top_left=Target transmutation overlay position set to top left
+command.ee3.overlay.position.top_right=Target transmutation overlay position set to top right
+command.ee3.overlay.position.bottom_left=Target transmutation overlay position set to bottom left
+command.ee3.overlay.position.bottom_right=Target transmutation overlay position set to bottom right
+command.ee3.overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
+command.ee3.overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3.overlay.scale.usage.additional_text=(where ### is a decimal value greater than 0.0) 
+command.ee3.overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3.particles.turned_on=Equivalent Exchange 3 particles turned on
+command.ee3.particles.turned_off=Equivalent Exchange 3 particles turned off
+command.ee3.sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
+command.ee3.sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
+command.ee3.sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+
+itemGroup.EE3=Equivalent Exchange 3
+
+version.init_log_message=Initializing remote version check against remote version authority, located at
+version.uninitialized=Remote version check failed to initialize properly
+version.current=Currently using the most up to date version (@REMOTE_MOD_VERSION@) of Equivalent Exchange 3 for @MINECRAFT_VERSION@
+version.outdated=A new @MOD_NAME@ version exists (@REMOTE_MOD_VERSION@) for @MINECRAFT_VERSION@. Get it here: @MOD_UPDATE_LOCATION@
+version.general_error=Error while connecting to remote version authority file; trying again
+version.final_error=Version check stopping after three unsuccessful connection attempts
+version.mc_version_not_found=Unable to find a version of @MOD_NAME@ for @MINECRAFT_VERSION@ in the remote version authority
