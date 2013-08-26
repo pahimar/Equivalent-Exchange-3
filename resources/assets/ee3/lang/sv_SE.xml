@@ -44,9 +44,9 @@
 	<entry key="command.ee3.overlay.opacity.updated">Förhandvisningen av omvandlingens genomskinlighet är uppdaterad</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(där ### är ett decimalvärde, minst 0.0) </entry>
 	<entry key="command.ee3.overlay.scale.updated">Förhandvisningen av omvandlingens skala är uppdaterad</entry>
-	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3partiklar på</entry>
-	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3partiklar av</entry>
-	<entry key="command.ee3.sounds.set_to_all">Playing Equivalent Exchange 3ljud från alla spelare</entry>
-	<entry key="command.ee3.sounds.set_to_self">Playing Equivalent Exchange 3ljud från bara dig</entry>
-	<entry key="command.ee3.sounds.turned_off">Playing Equivalent Exchange 3ljud av</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 partiklar på</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 partiklar av</entry>
+	<entry key="command.ee3.sounds.set_to_all">Spelar Equivalent Exchange 3 ljud från alla spelare</entry>
+	<entry key="command.ee3.sounds.set_to_self">Spelar Equivalent Exchange 3 ljud från bara dig</entry>
+	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 ljud av</entry>
 </properties>
