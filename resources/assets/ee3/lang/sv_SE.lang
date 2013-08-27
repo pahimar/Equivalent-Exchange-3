@@ -32,7 +32,7 @@
 	<entry key="version.current">Du använder den mest uppdaterade versionen (@REMOTE_MOD_VERSION@) av Equivalent Exchange 3 för @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Det finns en ny version av @MOD_NAME@ (@REMOTE_MOD_VERSION@) för @MINECRAFT_VERSION@. Hämta den här: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Fel med att läsa fjärrverisonsverifierinsfilen; försöker igen</entry>
-	<entry key="version.final_error">Verisonskontroll avslutas efter tre misslyckade anslutningsförsök</entry>
+	<entry key="version.final_error">Versionskontroll avslutas efter tre misslyckade anslutningsförsök</entry>
 	<entry key="version.mc_version_not_found">Kunde inte hitta verison @MOD_NAME@ för @MINECRAFT_VERSION@ på fjärrplatsen.</entry>
 	<entry key="command.ee3.overlay.turned_on">Förhandvisningen av omvandlingen är på</entry>
 	<entry key="command.ee3.overlay.turned_off">Förhandvisningen av omvandlingen är av</entry>
