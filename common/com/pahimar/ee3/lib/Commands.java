@@ -51,7 +51,7 @@ public class Commands {
     public static final String COMMAND_OVERLAY_POSITION_BOTTOM_RIGHT = "command.ee3.overlay.position.bottom_right";
     public static final String COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT = "command.ee3.overlay.opacity.usage.additional_text";
     public static final String COMMAND_OVERLAY_OPACITY_UPDATED = "command.ee3.overlay.opacity.updated";
-    public static final String COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT = "command.ee3.overlay.opacity.usage.additional_text";
+    public static final String COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT = "command.ee3.overlay.scale.usage.additional_text";
     public static final String COMMAND_OVERLAY_SCALE_UPDATED = "command.ee3.overlay.scale.updated";
     public static final String COMMAND_PARTICLES_TURNED_ON = "command.ee3.particles.turned_on";
     public static final String COMMAND_PARTICLES_TURNED_OFF = "command.ee3.particles.turned_off";
