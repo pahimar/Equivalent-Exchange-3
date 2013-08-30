@@ -99,9 +99,6 @@ public class EquivalentExchange3 {
 		// Initialize the log helper
 		LogHelper.init();
 
-		// Load the localization files into the LanguageRegistry
-		//LocalizationHandler.loadLanguages();
-
 		// Initialize the configuration
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory()
 				.getAbsolutePath()

@@ -68,8 +68,9 @@ public class CommandOverlay {
             try {
                 float scale = Float.parseFloat(args[1]);
 
-                if (scale <= 0F)
-                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT), new Object[0]);
+                if (scale <= 0F) {
+                	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
+                }
                 else {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = scale;
                     ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, args[1]);
@@ -77,11 +78,12 @@ public class CommandOverlay {
                 }
             }
             catch (Exception e) {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT), new Object[0]);
+            	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
             }
         }
-        else
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT), new Object[0]);
+        else {
+        	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
+        }
     }
 
     private static void processOpacityCommand(ICommandSender commandSender, String[] args) {
