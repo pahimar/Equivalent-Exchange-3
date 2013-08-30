@@ -1,6 +1,5 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
