@@ -81,7 +81,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
 
         GL11.glPushMatrix();
         ScaledResolution sr = new ScaledResolution(minecraft.gameSettings, minecraft.displayWidth, minecraft.displayHeight);
-        GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+        GL11.glClear(256);
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
         GL11.glOrtho(0.0D, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 0.0D, 1000.0D, 3000.0D);
