@@ -47,7 +47,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 #### Setup EE3
 1. Inside `mcdev`, create a directory named `source`.
 2. Move/clone `Equivalent-Exchange-3` into `source`.
-	* **WARNING: Use 77c1560c24083d9a6dfe864158eeee70b55088a0 or it will not work!** (Later versions are for 1.6.2)
+	* **WARNING: Use pahimar@77c1560c24083d9a6dfe864158eeee70b55088a0 or it will not work!** (Later versions are for 1.6.2)
 3. Right now, you should have a directory that looks something like:
 
 ***
