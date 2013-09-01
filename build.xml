@@ -18,7 +18,7 @@
 	
 	<target name="prep">
 		<copy todir="${build.dir.development}\mcp\src\minecraft">
-			<fileset dir="${build.dir.development}\source\Equivalent-Exchange-3\common\" />
+			<fileset dir="${build.dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
 		</copy>
 	</target>
 	
