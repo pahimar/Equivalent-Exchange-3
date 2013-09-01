@@ -1,0 +1,21 @@
+[
+{
+  "modid": "EE3",
+  "name": "Equivalent Exchange 3",
+  "description": "Transmute stuff into other stuff! Become a Minecraft God!",
+  "version": "@VERSION@",
+  "url": "http://www.minecraftforum.net/topic/1106178-",
+  "updateUrl": "",
+  "authorList": [
+    "pahimar",
+    "x3n0ph0b3"
+  ],
+  "credits": "By pahimar, based on Equivalent Exchange 1 & 2 by x3n0ph0b3",
+  "logoFile": "/assets/ee3/textures/logo/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
