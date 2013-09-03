@@ -53,9 +53,9 @@ command.ee3.sounds.turned_off=Das Abspielen von Equivalent Exchange 3 Geräusche
 itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
-version.init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet
+version.init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet: %s
 version.uninitialized=Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)
-version.current=Du benutzt gerade die aktuellste Version von Equivalent Exchange 3 (@REMOTE_MOD_VERSION@) für @MINECRAFT_VERSION@
+version.current=Du benutzt gerade die aktuellste Version von Equivalent Exchange 3 (%s) für %s
 version.outdated=Eine neue %s Version (%s) für %s ist verfügbar. Hole sie dir hier: %s
 version.general_error=Fehler bei der Verbindung zur Remotedatei (überprüfe bitte deine Internetverbindung)
 version.final_error=Versionsvergleich mit der Remotedatei deaktiviert, überspringe
