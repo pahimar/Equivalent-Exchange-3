@@ -19,7 +19,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
   * For `Variable Name`, input `JAVA_HOME`.
   * For `Variable Value`, input something similar to `;C:\Program Files (x86)\Java\jdk1.7.0_25` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
-  * Append `;C:\Program Files (x86)\Java\jdk1.7.0_25\bin` (or your Java JDK installation directory\bin), and click `Ok`.
+  * Append `;%JAVA_HOME%\bin`, and click `Ok`.
 3. Download Apache Ant [here](http://ant.apache.org).
 	* Unzip the files anywhere you want, eg `C:\Program Files (x86)\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
@@ -27,7 +27,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
   * For `Variable Name`, input `ANT_HOME`.
   * For `Variable Value`, input `C:\Ant\apache-ant-1.9.0` (or your Ant directory\apache-ant-1.9.0).
   * Scroll down to `Path`, and double-click on it.
-  * Append `;C:\Ant\apache-ant-1.9.0\bin` exactly as shown to the end (or your Ant directory\apache-ant-1.9.0\bin).
+  * Append `;%ANT_HOME%\bin` exactly as shown to the end.
 4. Download and install Github [here](http://windows.github.com/) (Windows) or [here](http://mac.github.com/) (Mac OS X 10.7+).  For Linux, you can use a different Git application.  NOTE:  Github For Windows/Mac is OPTIONAL.  You can use your own Git application.
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows/Mac` at the bottom of the right-hand toolbar.
