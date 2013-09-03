@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Danish (da_DK) Localization File</comment>
+	<entry key="key.extra">Ekstra</entry>
+	<entry key="key.release">Slip</entry>
+	<entry key="key.toggle">Skift</entry>
+	<entry key="key.charge">Oplad</entry>
+	<entry key="item.shardMinium.name">Skår af Mønje</entry>
+	<entry key="item.stoneInert.name">Inert Sten</entry>
+	<entry key="item.stoneMinium.name">Mønje Sten</entry>
+	<entry key="item.stonePhilosophers.name">De Vises Sten</entry>
+	<entry key="item.alchemicalDustAsh.name">Aske</entry>
+	<entry key="item.alchemicalDustMinium.name">Mønje Støv</entry>
+	<entry key="item.alchemicalDustVerdant.name">Frodigt Støv</entry>
+	<entry key="item.alchemicalDustAzure.name">Azur Støv</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Evigtvarende Støv</entry>
+	<entry key="item.alchemicalDustIridescent.name">Iriserende Støv</entry>
+	<entry key="item.alchemicalBag.name">Alkymistisk Taske</entry>
+	<entry key="tile.redWaterStill.name">Rødt Vand (Stille)</entry>
+	<entry key="tile.redWaterFlowing.name">Rødt Vand (Stømmende)</entry>
+	<entry key="tile.calcinator.name">Kalkbrænder</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Alkymistisk Kiste</entry>
+	<entry key="tile.glassBell.name">Glasklokke</entry>
+	<entry key="container.calcinator">Kalkbrænder</entry>
+	<entry key="container.aludel">Aludel</entry>
+	<entry key="container.alchemicalChest">Alkymistisk Kiste</entry>
+	<entry key="container.alchemicalBag">Alkymistisk Taske</entry>
+	<entry key="container.glassBell">Glasklokke</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Initialiserer fjernversionstjek mod fjernversionens autoritetsfil, placeret i</entry>
+	<entry key="version.uninitialized">Versionskontrollen mislykkedes (Fjernversionstjekket initialiserede ikke korrekt)</entry>
+	<entry key="version.current">Bruger i øjeblikket den nyeste version (@REMOTE_MOD_VERSION@) af Equivalent Exchange 3 til @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">En ny version af @MOD_NAME@ findes (@REMOTE_MOD_VERSION@) til @MINECRAFT_VERSION@. Få den her: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Der skete en fejl i forsøg på at forbinde til fjernversionens autoritetsfil; prøver igen</entry>
+	<entry key="version.final_error">Versionstjekket stopper efter tre mislykkede forsøg</entry>
+	<entry key="version.mc_version_not_found">Kunne ikke finde en version af @MOD_NAME@ til @MINECRAFT_VERSION@ i fjernversionens autoritetsfil</entry>
+	<entry key="command.ee3.overlay.turned_on">Forvandlingsoverlæg slået til</entry>
+	<entry key="command.ee3.overlay.turned_off">Forvandlingsoverlæg slået fra</entry>
+	<entry key="command.ee3.overlay.position.top_left">Forvandlingsoverlæggets position er sat til øverst til venstre</entry>
+	<entry key="command.ee3.overlay.position.top_right">Forvandlingsoverlæggets position er sat til øverst til højre</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Forvandlingsoverlæggets position er sat til nederst til venstre</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Forvandlingsoverlæggets position er sat til nederst til højre</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(hvor ### er en decimalværdi imellem 0.0 og 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Forvandlingsoverlæggets gennemsigtighed opdaterede vellykket</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(hvor ### er en decimalværdi større end 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Forvandlingsoverlæggets skala opdaterede vellykket</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 partikler slået til</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 partikler slået fra</entry>
+	<entry key="command.ee3.sounds.set_to_all">Afspiller Equivalent Exchange 3 lyde fra alle spillere</entry>
+	<entry key="command.ee3.sounds.set_to_self">Afspiller kun Equivalent Exchange 3 lyde fra en selv</entry>
+	<entry key="command.ee3.sounds.turned_off">Afspiller ikke Equivalent Exchange 3 lyde</entry>
+</properties>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Turkish (tr_TR) Localization File</comment>
+	<entry key="key.extra">Ekstra</entry>
+	<entry key="key.release">Bırak</entry>
+	<entry key="key.toggle">Aç/Kapa</entry>
+	<entry key="key.charge">Şarj</entry>
+	<entry key="item.shardMinium.name">Minium Parçası</entry>
+	<entry key="item.stoneInert.name">Inert Taşı</entry>
+	<entry key="item.stoneMinium.name">Minium Taşı</entry>
+	<entry key="item.stonePhilosophers.name">Felsefe Taşı</entry>
+	<entry key="item.alchemicalDustAsh.name">Kül</entry>
+	<entry key="item.alchemicalDustMinium.name">Minium Tozu</entry>
+	<entry key="item.alchemicalDustVerdant.name">Verdant Tozu</entry>
+	<entry key="item.alchemicalDustAzure.name">Azure Tozu</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amaranthine Tozu</entry>
+	<entry key="item.alchemicalDustIridescent.name">Iridescent Tozu</entry>
+	<entry key="item.alchemicalBag.name">Simyacı Çantası</entry>
+	<entry key="tile.redWaterStill.name">Kızıl Su (Sakin)</entry>
+	<entry key="tile.redWaterFlowing.name">Kızıl Su (Akışkan)</entry>
+	<entry key="tile.calcinator.name">Kalsinator</entry>
+	<entry key="tile.aludel.name">Aludel</entry>
+	<entry key="tile.alchemicalChest.name">Simyacı Sandığı</entry>
+	<entry key="tile.glassBell.name">Camdan Çan</entry>
+	<entry key="container.calcinator">Kalsinator</entry>
+	<entry key="container.aludel">Aludel</entry>
+	<entry key="container.alchemicalChest">Simyacı Sandığı</entry>
+	<entry key="container.alchemicalBag">Simyacı Çantası</entry>
+	<entry key="container.glassBell">Camdan Çan</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Uzak versiyon denetlemesi, bulundugu yer</entry>
+	<entry key="version.uninitialized">Uzak versiyon denetlemesi başarisiz</entry>
+	<entry key="version.current">Minecraft(@MINECRAFT_VERSION@) için en yeni Equivalent Exchange 3 versiyonunu(@REMOTE_MOD_VERSION@) kullanıyorsunuz.</entry>
+	<entry key="version.outdated">Minecraft(@MINECRAFT_VERSION@) için yeni bir @MOD_NAME@ versiyonu var (@REMOTE_MOD_VERSION@). Burdan İndirin: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Uzak versiyon yetki dosyasına bağlanılırken hata ile karşılaşıldı; tekrar deneniyor</entry>
+	<entry key="version.final_error">3 başarısız bağlantı denemesi sonucu versiyon kontrolü durduruluyor</entry>
+	<entry key="version.mc_version_not_found">Uzak versiyon yetkisinde @MOD_NAME@ 'in @MINECRAFT_VERSION@ için versiyon bulunamadı.</entry>
+	<entry key="command.ee3.overlay.turned_on">Dönüşüm hedef arayüzü kapatıldı</entry>
+	<entry key="command.ee3.overlay.turned_off">Dönüşüm hedef arayüzü açıldı</entry>
+	<entry key="command.ee3.overlay.position.top_left">Dönüşüm hedef arayüzü konumu sol üst'e ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.top_right">Dönüşüm hedef arayüzü konumu sağ üst'e ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Dönüşüm hedef arayüzü konumu sol alt'a ayarlandı</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Dönüşüm hedef arayüzü konumu sağ alt'a ayarlandı</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(###, 0.0 ile 1.0 arasında ondalıklı sayı) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Dönüşüm hedef arayüzü şeffaflığı güncellendi</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(###, 0.0 dan daha büyük ondalıklı sayı) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Dönüşüm hedef arayüzü boyutu güncellendi</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 parçacık efekti açıldı</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 parçacık efekti kapatıldı</entry>
+	<entry key="command.ee3.sounds.set_to_all">Equivalent Exchange 3 sesleri bütün oyuncular için açık</entry>
+	<entry key="command.ee3.sounds.set_to_self">Equivalent Exchange 3 sesleri sadece kendinde açık</entry>
+	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 sesleri kapalı</entry>
+</properties>

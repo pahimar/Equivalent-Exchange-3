@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Portuguese (pt_BR) Localization File</comment>
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Liberar</entry>
+	<entry key="key.toggle">Alterar</entry>
+	<entry key="key.charge">Carregar</entry>
+	<entry key="item.shardMinium.name">Fragmento de Minium</entry>
+	<entry key="item.stoneInert.name">Pedra Inerte</entry>
+	<entry key="item.stoneMinium.name">Pedra de Minium</entry>
+	<entry key="item.stonePhilosophers.name">Pedra Filosofal</entry>
+	<entry key="item.alchemicalDustAsh.name">Cinzas</entry>
+	<entry key="item.alchemicalDustMinium.name">Pó de Minium</entry>
+	<entry key="item.alchemicalDustVerdant.name">Pó Verdejantet</entry>
+	<entry key="item.alchemicalDustAzure.name">Pó Indigo</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Pó Amarantino</entry>
+	<entry key="item.alchemicalDustIridescent.name">Pó Iridescente</entry>
+	<entry key="item.alchemicalBag.name">Bolsa Alquímica</entry>
+	<entry key="tile.redWaterStill.name">Água vermelha (Parada)</entry>
+	<entry key="tile.redWaterFlowing.name">Água Vermelha(Corrente)</entry>
+	<entry key="tile.calcinator.name">Calcinador</entry>
+	<entry key="tile.aludel.name">Sublimador</entry>
+	<entry key="tile.alchemicalChest.name">Baú Alquímico</entry>
+	<entry key="tile.glassBell.name">Sino Vítreo</entry>
+	<entry key="container.calcinator">Calcinador</entry>
+	<entry key="container.aludel">Sublimador</entry>
+	<entry key="container.alchemicalChest">Baú Alquímico</entry>
+	<entry key="container.alchemicalBag">Bolsa Alquímica</entry>
+	<entry key="container.glassBell">Sino Vítreo</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Iniciando checagem da versão remota contra a versão remota autorítaria,localizada em</entry>
+	<entry key="version.uninitialized">Checagem da versão remota não pode ser feita adequadamente</entry>
+	<entry key="version.current">Atualmente usando a versão mais recente (@REMOTE_MOD_VERSION@) de Equivalent Exchange 3 para @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Uma nova versão de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consigam-na aqui: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Erro enquanto conectando à versão remota do arquivo autoritário; tentando novamente</entry>
+	<entry key="version.final_error">Checagem de versão finalizada com erros após várias tentativas sem sucesso</entry>
+	<entry key="version.mc_version_not_found">Não foi possível achar a versão de @MOD_NAME@ para @MINECRAFT_VERSION@ na versão remota autoritária</entry>
+	<entry key="command.ee3.overlay.turned_on">Camdada do alvo de transmutação ligada</entry>
+	<entry key="command.ee3.overlay.turned_off">Camada do alvo de transmutação desligada</entry>
+	<entry key="command.ee3.overlay.position.top_left">Posição da camada alvo de transmutação configurada para noroeste</entry>
+	<entry key="command.ee3.overlay.position.top_right">Posição da camada alvo de transmutação configurada para nordeste</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Posição da camada alvo de transmutação configurada para sudoeste</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Posição da camada alvo de transmutação configurada para sudeste</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(onde ### é um valor decimal entre 0.0 e 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Opacidade da camada alvo de transmutação configurada com sucesso</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(onde ### é um valor decimal maior que 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Escala da camada alvo de transmutação configurada com sucesso</entry>
+	<entry key="command.ee3.particles.turned_on">Partículas do Equivalent Exchange 3 ligadas</entry>
+	<entry key="command.ee3.particles.turned_off">Partículas do Equivalent Exchange 3 desligadas</entry>
+	<entry key="command.ee3.sounds.set_to_all">Tocando sons do Equivalent Exchange 3 para todos os jogadores</entry>
+	<entry key="command.ee3.sounds.set_to_self">Tocando sons do Equivalent Exchange 3 para si mesmo</entry>
+	<entry key="command.ee3.sounds.turned_off">Sons do Equivalent Exchange 3 desabilitados</entry>
+</properties>

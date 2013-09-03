@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Finnish (fi_FI) Localization File</comment>
+	<entry key="key.extra">Ekstra</entry>
+	<entry key="key.release">Vapauta</entry>
+	<entry key="key.toggle">Muuta</entry>
+	<entry key="key.charge">Lataa</entry>
+	<entry key="item.shardMinium.name">Mönjäinen sirpale</entry>
+	<entry key="item.stoneInert.name">Eloton kivi</entry>
+	<entry key="item.stoneMinium.name">Mönjäinen kivi</entry>
+	<entry key="item.stonePhilosophers.name">Viisasten kivi</entry>
+	<entry key="item.alchemicalDustAsh.name">Tuhka</entry>
+	<entry key="item.alchemicalDustMinium.name">Mönjäinen pöly</entry>
+	<entry key="item.alchemicalDustVerdant.name">Vehreä pöly</entry>
+	<entry key="item.alchemicalDustAzure.name">Taivaansininen pöly</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Ikikukkaispöly</entry>
+	<entry key="item.alchemicalDustIridescent.name">Sateenkaarenkirjava pöly</entry>
+	<entry key="item.alchemicalBag.name">Alkeminen pussi</entry>
+	<entry key="tile.redWaterStill.name">Punavesi (Liikkumaton)</entry>
+	<entry key="tile.redWaterFlowing.name">Punavesi (Virtaava)</entry>
+	<entry key="tile.calcinator.name">Kalsinaattori</entry>
+	<entry key="tile.aludel.name">Aludeli</entry>
+	<entry key="tile.alchemicalChest.name">Alkeminen arkku</entry>
+	<entry key="tile.glassBell.name">Lasitiuku</entry>
+	<entry key="container.calcinator">Kalsinaattori</entry>
+	<entry key="container.aludel">Aludeli</entry>
+	<entry key="container.alchemicalChest">Alkeminen arkku</entry>
+	<entry key="container.alchemicalBag">Alkeminen pussi</entry>
+	<entry key="container.glassBell">Lasitiuku</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Aloitetaan etäversion tarkistusta kohteesta</entry>
+	<entry key="version.uninitialized">Etäversion tarkistuksen aloittaminen epäonnistui</entry>
+	<entry key="version.current">Käytät tällä hetkellä uusinta (@REMOTE_MOD_VERSION@) Equivalent Exchange 3 -versiota, joka on tarkoitettu Minecraft @MINECRAFT_VERSION@:lle</entry>
+	<entry key="version.outdated">Uusi @MOD_NAME@ versio on saatavilla (@REMOTE_MOD_VERSION@) Minecraftin versiolle @MINECRAFT_VERSION@. Lataa se täältä: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Tapahtui virhe yhdistettäessä etäversion palvelimeen; yritetään uudelleen</entry>
+	<entry key="version.final_error">Version tarkistus lopetettu kolmen epäonnistuneen yrityksen jälkeen</entry>
+	<entry key="version.mc_version_not_found">@MOD_NAME@:a @MINECRAFT_VERSION@:lle ei löytynyt</entry>
+	<entry key="command.ee3.overlay.turned_on">Kohdistetun transmutoinnin peitevalikko käytössä</entry>
+	<entry key="command.ee3.overlay.turned_off">Kohdistetun transmutoinnin peitevalikko poissa käytössä</entry>
+	<entry key="command.ee3.overlay.position.top_left">Kohdistetun transmutoinnin peitevalikko asetettu ylös vasemmalle</entry>
+	<entry key="command.ee3.overlay.position.top_right">Kohdistetun transmutoinnin peitevalikko asetettu ylös oikealle</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Kohdistetun transmutoinnin peitevalikko asetettu alas vasemmalle</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Kohdistetun transmutoinnin peitevalikko asetettu alas oikealle</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(missä ### on desimaaliluku väliltä 0.0 ja 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Kohdistetun transmutoinnin peitevalikon läpinäkyvyys päivitetty onnistuneesti.</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(missä ### on desimaaliluku arvoltaan suurempi kuin 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Kohdistetun transmutoinnin peitevalikon koko päivitetty onnistuneesti</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 hiukkaset käytössä</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 hiukkaset poistettu käytöstä</entry>
+	<entry key="command.ee3.sounds.set_to_all">Toistetaan kaikkien pelaajien Equivalent Exchange 3 äänet</entry>
+	<entry key="command.ee3.sounds.set_to_self">Toistetaan vain omat Equivalent Exchange 3 äänet</entry>
+	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 äänet poistettu käytöstä</entry>
+</properties>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Welsh (cy_GB) Localization File</comment>
+	<!--REQUIRES ADDITIONAL UPDATING-->
+	<entry key="key.extra">Ychwanegol</entry>
+	<entry key="key.release">Rhyddhau</entry>
+	<entry key="key.toggle">Toglo</entry>
+	<entry key="key.charge">Gwefru</entry>
+	<entry key="item.shardMinium.name">Darn o Finiwm</entry>
+	<entry key="item.stoneInert.name">Carreg Anadweithiol</entry>
+	<entry key="item.stoneMinium.name">Carreg Miniwm</entry>
+	<entry key="item.stonePhilosophers.name">Maen Athronwyr</entry>
+	<entry key="item.alchemicalDustAsh.name">Lludw</entry>
+	<entry key="item.alchemicalDustMinium.name">Llwch Miniwm</entry>
+	<entry key="item.alchemicalDustVerdant.name">Llwch Werdd</entry>
+	<entry key="item.alchemicalDustAzure.name">Llwch Asur</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Llwch Amorol</entry>
+	<entry key="item.alchemicalDustIridescent.name">Llwch Symudliw</entry>
+	<entry key="item.alchemicalBag.name">Bag Alcemaidd</entry>
+	<entry key="tile.redWaterStill.name">Dŵr Coch (Llonydd)</entry>
+	<entry key="tile.redWaterFlowing.name">Dŵr Coch (Llifeiriol)</entry>
+	<entry key="tile.calcinator.name">Calchyniadwr</entry>
+	<entry key="container.calcinator">Calchyniadwr</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">Ymgychwynnu gwiriad fersiwn yn erbyn yr awdurdod fersiwn pell, a leolir ar</entry>
+	<entry key="version.uninitialized">Ni ymgychwynodd y gwiriad fersiwn yn briodol</entry>
+	<entry key="version.current">Rydych yn defnyddio y fersiwn diweddaraf (@REMOTE_MOD_VERSION@) o Equivalent Exchange 3 ar gyfer @MINECRAFT_VERSION@</entry>
+	<entry key="version.outdated">Mae yna fersiwn mwy diweddar o @MOD_NAME@ ar gael (@REMOTE_MOD_VERSION@) ar gyfer @MINECRAFT_VERSION@. Ffeindiwch o yma: @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.general_error">Gwall wrth drio gysylltu gyda'r ffeil awdurdod fersiwn pell; trio eto</entry>
+	<entry key="version.final_error">Gwiriad fersiwn yn stopio ar ôl tri tro aflwyddiannus</entry>
+	<entry key="command.ee3.overlay.turned_on">Wedi troi troshaen targed trawsnewidiad ymlaen</entry>
+	<entry key="command.ee3.overlay.turned_off">Wedi diffodd troshaen targed trawsnewidiad</entry>
+	<entry key="command.ee3.overlay.position.top_left">Safle troshaen targed trawsnewidiad wedi ei osod i'r top chwith</entry>
+	<entry key="command.ee3.overlay.position.top_right">Safle troshaen targed trawsnewidiad wedi ei osod i'r top dde</entry>
+	<entry key="command.ee3.overlay.position.bottom_left">Safle troshaen targed trawsnewidiad wedi ei osod i'r gwaelod chwith</entry>
+	<entry key="command.ee3.overlay.position.bottom_right">Safle troshaen targed trawsnewidiad wedi ei osod i'r gwaelod dde</entry>
+	<entry key="command.ee3.overlay.opacity.usage.additional_text">(ble mae ### yn werth degol rhwng 0.0 ac 1.0) </entry>
+	<entry key="command.ee3.overlay.opacity.updated">Didreiddedd troshaen targed trawsnewidiad wedi'i ddiweddaru yn llwyddiannus</entry>
+	<entry key="command.ee3.overlay.scale.usage.additional_text">(ble mae ### yn werth degol mwy na 0.0) </entry>
+	<entry key="command.ee3.overlay.scale.updated">Graddfa troshaen targed trawsnewidiad wedi'i ddiweddaru yn llwyddiannus</entry>
+	<entry key="command.ee3.particles.turned_on">Wedi troi gronynnau Equivalent Exchange 3 ymlaen</entry>
+	<entry key="command.ee3.particles.turned_off">Wedi diffodd gronynnau Equivalent Exchange 3</entry>
+	<entry key="command.ee3.sounds.set_to_all">Chwaraeir seiniau Equivalent Exchange 3 o holl chwaraewyr</entry>
+	<entry key="command.ee3.sounds.set_to_self">Chwaraeir seiniau Equivalent Exchange 3 o'n hunan yn unig</entry>
+	<entry key="command.ee3.sounds.turned_off">Ni chwaraeir seiniau Equivalent Exchange 3 o gwbl</entry>
+</properties>
