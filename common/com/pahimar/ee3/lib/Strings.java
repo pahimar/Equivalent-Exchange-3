@@ -24,13 +24,13 @@ public class Strings {
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
 
     /* Version check related constants */
-    public static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.init_log_message";
-    public static final String UNINITIALIZED_MESSAGE = "version.uninitialized";
-    public static final String CURRENT_MESSAGE = "version.current";
-    public static final String OUTDATED_MESSAGE = "version.outdated";
-    public static final String GENERAL_ERROR_MESSAGE = "version.general_error";
-    public static final String FINAL_ERROR_MESSAGE = "version.final_error";
-    public static final String MC_VERSION_NOT_FOUND = "version.mc_version_not_found";
+    public static final String VERSION_CHECK_INIT_LOG_MESSAGE = "version.ee3:init_log_message";
+    public static final String UNINITIALIZED_MESSAGE = "version.ee3:uninitialized";
+    public static final String CURRENT_MESSAGE = "version.ee3:current";
+    public static final String OUTDATED_MESSAGE = "version.ee3:outdated";
+    public static final String GENERAL_ERROR_MESSAGE = "version.ee3:general_error";
+    public static final String FINAL_ERROR_MESSAGE = "version.ee3:final_error";
+    public static final String MC_VERSION_NOT_FOUND = "version.ee3:mc_version_not_found";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
@@ -64,6 +64,7 @@ public class Strings {
     public static final String GLASS_BELL_NAME = "glassBell";
     public static final String RED_WATER_STILL_NAME = "redWaterStill";
     public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
+    public static final String ALCHEMY_TABLE_NAME = "alchemyTable";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";
@@ -78,6 +79,7 @@ public class Strings {
     public static final String TE_ALUDEL_NAME = "tileAludel";
     public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
     public static final String TE_GLASS_BELL_NAME = "tileGlassBell";
+    public static final String TE_ALCHEMY_TABLE_NAME = "tileAlchemyTable";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
@@ -86,11 +88,12 @@ public class Strings {
     public static final String TRANSMUTATION_COST_MOB = "mob" + TRANSMUTATION_COST;
 
     /* Container related constants */
-    public static final String CONTAINER_CALCINATOR_NAME = "container." + CALCINATOR_NAME;
-    public static final String CONTAINER_ALUDEL_NAME = "container." + ALUDEL_NAME;
-    public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container." + ALCHEMICAL_CHEST_NAME;
-    public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container." + ALCHEMICAL_BAG_NAME;
-    public static final String CONTAINER_GLASS_BELL_NAME = "container." + GLASS_BELL_NAME;
+    public static final String CONTAINER_CALCINATOR_NAME = "container.ee3:" + CALCINATOR_NAME;
+    public static final String CONTAINER_ALUDEL_NAME = "container.ee3:" + ALUDEL_NAME;
+    public static final String CONTAINER_ALCHEMICAL_CHEST_NAME = "container.ee3:" + ALCHEMICAL_CHEST_NAME;
+    public static final String CONTAINER_ALCHEMICAL_BAG_NAME = "container.ee3:" + ALCHEMICAL_BAG_NAME;
+    public static final String CONTAINER_GLASS_BELL_NAME = "container.ee3:" + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
+    public static final String CONTAINER_ALCHEMY_TABLE = "container.ee3:" + ALCHEMY_TABLE_NAME;
 }
