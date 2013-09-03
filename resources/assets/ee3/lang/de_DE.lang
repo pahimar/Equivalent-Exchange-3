@@ -1,0 +1,62 @@
+﻿# Key localizations 
+key.extra=Extra
+key.release=Auflösen
+key.toggle=Umschalten
+key.charge=Aufladen
+
+# Item localizations
+item.ee3:shardMinium.name=Miniumscherbe
+item.ee3:stoneInert.name=Inerter Stein
+item.ee3:stoneMinium.name=Miniumstein
+item.ee3:stonePhilosophers.name=Stein der Weisen
+item.ee3:alchemicalDustAsh.name=Asche
+item.ee3:alchemicalDustMinium.name=Miniumstaub
+item.ee3:alchemicalDustVerdant.name=Grüner Staub
+item.ee3:alchemicalDustAzure.name=Azurer Staub
+item.ee3:alchemicalDustAmaranthine.name=Amaranther Staub
+item.ee3:alchemicalDustIridescent.name=Irisierender Staub
+item.ee3:alchemicalBag.name=Alchemiebeutel
+
+# Block localizations
+tile.ee3:redWaterStill.name=Rotes Wasser
+tile.ee3:redWaterFlowing.name=Rotes Wasser
+tile.ee3:calcinator.name=Kalzinierer
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Alchemietruhe
+tile.ee3:glassBell.name=Glasglocke
+
+# GUI localizations
+container.calcinator=Kalzinierer
+container.aludel=Aludel
+container.alchemicalChest=Alchemietruhe
+container.alchemicalBag=Alchemiebeutel
+container.glassBell=Glasglocke
+
+# Command localizations
+command.ee3.overlay.turned_on=Transmutationsanzeige an
+command.ee3.overlay.turned_off=Transmutationsanzeige aus
+command.ee3.overlay.position.top_left=Transmutationsanzeige wurde eingestellt nach links oben
+command.ee3.overlay.position.top_right=Transmutationsanzeige wurde eingestellt nach rechts oben
+command.ee3.overlay.position.bottom_left=Transmutationsanzeige wurde eingestellt nach links unten
+command.ee3.overlay.position.bottom_right=Transmutationsanzeige wurde eingestellt nach rechts unten
+command.ee3.overlay.opacity.usage.additional_text=(wobei ### ein Dezimalwert zwischen 0.0 und 1.0 ist) 
+command.ee3.overlay.opacity.updated=Transparenz der Transmutationsanzeige wurde erfolgreich geändert
+command.ee3.overlay.scale.usage.additional_text=%s (wobei ### ein Dezimalwert über 0.0 ist) 
+command.ee3.overlay.scale.updated=Größe der Transmutationsanzeige wurde erfolgreich geändert
+command.ee3.particles.turned_on=Equivalent Exchange 3 Partikel angeschaltet
+command.ee3.particles.turned_off=Equivalent Exchange 3 partikel ausgeschaltet
+command.ee3.sounds.set_to_all=Spiele Equivalent Exchange 3 Geräusche von allen Spielern
+command.ee3.sounds.set_to_self=Spiele Equivalent Exchange 3 Geräusche nur von dem Spieler selbst
+command.ee3.sounds.turned_off=Das Abspielen von Equivalent Exchange 3 Geräuschen wurde deaktiviert
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet
+version.uninitialized=Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)
+version.current=Du benutzt gerade die aktuellste Version von Equivalent Exchange 3 (@REMOTE_MOD_VERSION@) für @MINECRAFT_VERSION@
+version.outdated=Eine neue @MOD_NAME@ Version für @MINECRAFT_VERSION@ ist verfügbar (@REMOTE_MOD_VERSION@). Hole sie dir hier: @MOD_UPDATE_LOCATION@
+version.general_error=Fehler bei der Verbindung zur Remotedatei (überprüfe bitte deine Internetverbindung)
+version.final_error=Versionsvergleich mit der Remotedatei deaktiviert, überspringe
+version.mc_version_not_found=Keine Version von @MOD_NAME@ für @MINECRAFT_VERSION@ in der Remotedatei gefunden
