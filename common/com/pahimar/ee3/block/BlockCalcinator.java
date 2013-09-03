@@ -76,7 +76,7 @@ public class BlockCalcinator extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.calcinatorRenderId;
+        return RenderIds.calcinatorRender;
     }
 
     @Override

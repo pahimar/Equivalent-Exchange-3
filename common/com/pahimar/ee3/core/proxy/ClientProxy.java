@@ -18,6 +18,7 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRende
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityRenderingTankRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
@@ -36,6 +37,7 @@ import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileEE;
 import com.pahimar.ee3.tileentity.TileGlassBell;
+import com.pahimar.ee3.tileentity.TileRenderingTank;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -90,15 +92,19 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void initRenderingAndTextures() {
 
-        RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.glassBellId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.calcinatorRender = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.aludelRender = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.alchemicalChestRender = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.glassBell = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.alchemyTable = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.renderingTank = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
+        // TODO Alchemy Table item renderer
+        // TODO Rendering Tank item renderer
     }
 
     @Override
@@ -110,6 +116,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
+        // TODO Alchemy Table TESR
+        // FIXME Get Rorax to export faces as triangles: ClientRegistry.bindTileEntitySpecialRenderer(TileRenderingTank.class, new TileEntityRenderingTankRenderer());
     }
 
     @Override

@@ -11,8 +11,11 @@ package com.pahimar.ee3.lib;
  */
 public class RenderIds {
 
-    public static int calcinatorRenderId;
-    public static int aludelRenderId;
-    public static int alchemicalChestRenderId;
-    public static int glassBellId;
+    public static int calcinatorRender;
+    public static int aludelRender;
+    public static int alchemicalChestRender;
+    public static int glassBell;
+    public static int alchemyTable;
+    public static int renderingTank;
+    
 }

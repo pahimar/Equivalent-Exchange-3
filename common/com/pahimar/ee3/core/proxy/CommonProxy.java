@@ -22,9 +22,11 @@ import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileAlchemyTable;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileGlassBell;
+import com.pahimar.ee3.tileentity.TileRenderingTank;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -70,6 +72,8 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
         GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerTileEntity(TileGlassBell.class, Strings.TE_GLASS_BELL_NAME);
+        GameRegistry.registerTileEntity(TileAlchemyTable.class, Strings.TE_ALCHEMY_TABLE_NAME);
+        GameRegistry.registerTileEntity(TileRenderingTank.class, Strings.TE_RENDERING_TANK_NAME);
     }
 
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {

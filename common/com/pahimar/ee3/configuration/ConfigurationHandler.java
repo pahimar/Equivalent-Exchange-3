@@ -81,6 +81,8 @@ public class ConfigurationHandler {
             BlockIds.ALUDEL_BASE = configuration.getBlock(Strings.ALUDEL_NAME, BlockIds.ALUDEL_BASE_DEFAULT).getInt(BlockIds.ALUDEL_BASE_DEFAULT);
             BlockIds.ALCHEMICAL_CHEST = configuration.getBlock(Strings.ALCHEMICAL_CHEST_NAME, BlockIds.ALCHEMICAL_CHEST_DEFAULT).getInt(BlockIds.ALCHEMICAL_CHEST_DEFAULT);
             BlockIds.GLASS_BELL = configuration.getBlock(Strings.GLASS_BELL_NAME, BlockIds.GLASS_BELL_DEFAULT).getInt(BlockIds.GLASS_BELL_DEFAULT);
+            BlockIds.ALCHEMY_TABLE = configuration.getBlock(Strings.ALCHEMY_TABLE_NAME, BlockIds.ALCHEMY_TABLE_DEFAULT).getInt(BlockIds.ALCHEMY_TABLE_DEFAULT);
+            BlockIds.RENDERING_TANK = configuration.getBlock(Strings.RENDERING_TANK_NAME, BlockIds.RENDERING_TANK_DEFAULT).getInt(BlockIds.RENDERING_TANK_DEFAULT);
             BlockIds.RED_WATER_STILL = configuration.getBlock(Strings.RED_WATER_STILL_NAME, BlockIds.RED_WATER_STILL_DEFAULT).getInt(BlockIds.RED_WATER_STILL_DEFAULT);
 
             /* Block property configs */
@@ -100,6 +102,7 @@ public class ConfigurationHandler {
             ItemIds.PHILOSOPHERS_STONE = configuration.getItem(Strings.PHILOSOPHERS_STONE_NAME, ItemIds.PHILOSOPHERS_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHERS_STONE_DEFAULT);
             ItemIds.ALCHEMICAL_DUST = configuration.getItem(Strings.ALCHEMICAL_DUST_NAME, ItemIds.ALCHEMICAL_DUST_DEFAULT).getInt(ItemIds.ALCHEMICAL_DUST_DEFAULT);
             ItemIds.ALCHEMICAL_BAG = configuration.getItem(Strings.ALCHEMICAL_BAG_NAME, ItemIds.ALCHEMICAL_BAG_DEFAULT).getInt(ItemIds.ALCHEMICAL_BAG_DEFAULT);
+            ItemIds.ALCHEMICAL_CHALK = configuration.getItem(Strings.ALCHEMICAL_CHALK_NAME, ItemIds.ALCHEMICAL_CHALK_DEFAULT).getInt(ItemIds.ALCHEMICAL_CHALK_DEFAULT);
 
             /* Item durability configs */
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = configuration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);

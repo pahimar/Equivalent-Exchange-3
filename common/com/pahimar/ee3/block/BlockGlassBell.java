@@ -74,7 +74,7 @@ public class BlockGlassBell extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.glassBellId;
+        return RenderIds.glassBell;
     }
 
     @Override

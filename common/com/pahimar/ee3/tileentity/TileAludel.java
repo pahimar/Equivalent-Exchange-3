@@ -46,23 +46,23 @@ public class TileAludel extends TileEE implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlot(int slot) {
+    public ItemStack getStackInSlot(int slotIndex) {
 
-        return inventory[slot];
+        return inventory[slotIndex];
     }
 
     @Override
-    public ItemStack decrStackSize(int slot, int amount) {
+    public ItemStack decrStackSize(int slotIndex, int decrementAmount) {
 
-        ItemStack itemStack = getStackInSlot(slot);
+        ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null) {
-            if (itemStack.stackSize <= amount) {
-                setInventorySlotContents(slot, null);
+            if (itemStack.stackSize <= decrementAmount) {
+                setInventorySlotContents(slotIndex, null);
             }
             else {
-                itemStack = itemStack.splitStack(amount);
+                itemStack = itemStack.splitStack(decrementAmount);
                 if (itemStack.stackSize == 0) {
-                    setInventorySlotContents(slot, null);
+                    setInventorySlotContents(slotIndex, null);
                 }
             }
         }
@@ -71,19 +71,19 @@ public class TileAludel extends TileEE implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int slot) {
+    public ItemStack getStackInSlotOnClosing(int slotIndex) {
 
-        ItemStack itemStack = getStackInSlot(slot);
+        ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null) {
-            setInventorySlotContents(slot, null);
+            setInventorySlotContents(slotIndex, null);
         }
         return itemStack;
     }
 
     @Override
-    public void setInventorySlotContents(int slot, ItemStack itemStack) {
+    public void setInventorySlotContents(int slotIndex, ItemStack itemStack) {
 
-        inventory[slot] = itemStack;
+        inventory[slotIndex] = itemStack;
         if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
             itemStack.stackSize = getInventoryStackLimit();
         }
@@ -121,9 +121,9 @@ public class TileAludel extends TileEE implements IInventory {
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i) {
             NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
-            byte slot = tagCompound.getByte("Slot");
-            if (slot >= 0 && slot < inventory.length) {
-                inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+            byte slotIndex = tagCompound.getByte("Slot");
+            if (slotIndex >= 0 && slotIndex < inventory.length) {
+                inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
     }
@@ -153,7 +153,7 @@ public class TileAludel extends TileEE implements IInventory {
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack) {
 
         return true;
     }

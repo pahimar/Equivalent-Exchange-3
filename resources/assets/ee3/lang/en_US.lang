@@ -8,29 +8,34 @@ key.charge=Charge
 item.ee3:shardMinium.name=Shard of Minium
 item.ee3:stoneInert.name=Inert Stone
 item.ee3:stoneMinium.name=Minium Stone
-item.ee3:stonePhilosophers.name=Philosopher's Stone
-item.ee3:alchemicalDustAsh.name=Ash
-item.ee3:alchemicalDustMinium.name=Minium Dust
-item.ee3:alchemicalDustVerdant.name=Verdant Dust
-item.ee3:alchemicalDustAzure.name=Azure Dust
-item.ee3:alchemicalDustAmaranthine.name=Amaranthine Dust
-item.ee3:alchemicalDustIridescent.name=Iridescent Dust
-item.ee3:alchemicalBag.name=Alchemical Bag
+item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
+item.ee3:alchemicalDustAsh.name=Ash [WIP]
+item.ee3:alchemicalDustMinium.name=Minium Dust [WIP]
+item.ee3:alchemicalDustVerdant.name=Verdant Dust [WIP]
+item.ee3:alchemicalDustAzure.name=Azure Dust [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amaranthine Dust [WIP]
+item.ee3:alchemicalDustIridescent.name=Iridescent Dust [WIP]
+item.ee3:alchemicalBag.name=Alchemical Bag [WIP]
+item.ee3:alchemicalChalk.name=Alchemical Chalk [WIP]
 
 # Block localizations
 tile.ee3:redWaterStill.name=Red Water (Still)
 tile.ee3:redWaterFlowing.name=Red Water (Flowing)
-tile.ee3:calcinator.name=Calcinator
-tile.ee3:aludel.name=Aludel
-tile.ee3:alchemicalChest.name=Alchemical Chest
-tile.ee3:glassBell.name=Glass Bell
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
+tile.ee3:glassBell.name=Glass Bell [WIP]
+tile.ee3:alchemyTable.name=Alchemy Table [WIP]
+tile.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calcinator
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Alchemical Chest
-container.ee3:alchemicalBag=Alchemical Bag
-container.ee3:glassBell=Glass Bell
+container.ee3:calcinator=Calcinator [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemical Chest [WIP]
+container.ee3:alchemicalBag=Alchemical Bag [WIP]
+container.ee3:glassBell=Glass Bell [WIP]
+container.ee3:alchemyTable.name=Alchemy Table [WIP]
+container.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Target transmutation overlay turned on

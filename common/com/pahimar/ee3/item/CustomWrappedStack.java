@@ -268,16 +268,22 @@ public class CustomWrappedStack {
             }
 
             try {
-            	hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
+            	if (itemStack.getItemName() != null) {
+            		hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
+            	}
             } catch (ArrayIndexOutOfBoundsException e) { 
             	
             }
         }
         else if (oreStack != null) {
-            hashCode = 37 * hashCode + oreStack.oreName.hashCode();
+        	if (oreStack.oreName != null) {
+        		hashCode = 37 * hashCode + oreStack.oreName.hashCode();
+        	}
         }
         else if (energyStack != null) {
-            hashCode = 37 * hashCode + energyStack.energyName.hashCode();
+        	if (energyStack.energyName != null) {
+        		hashCode = 37 * hashCode + energyStack.energyName.hashCode();
+        	}
         }
 
         return hashCode;

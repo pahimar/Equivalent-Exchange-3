@@ -80,7 +80,7 @@ public class BlockAludelBase extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.aludelRenderId;
+        return RenderIds.aludelRender;
     }
 
     @Override

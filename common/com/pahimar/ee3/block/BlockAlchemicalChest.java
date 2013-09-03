@@ -76,7 +76,7 @@ public class BlockAlchemicalChest extends BlockEE {
     @Override
     public int getRenderType() {
 
-        return RenderIds.alchemicalChestRenderId;
+        return RenderIds.alchemicalChestRender;
     }
 
     @Override

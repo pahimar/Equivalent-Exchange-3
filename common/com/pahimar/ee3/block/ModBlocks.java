@@ -25,6 +25,8 @@ public class ModBlocks {
     public static Block aludelBase;
     public static Block alchemicalChest;
     public static Block glassBell;
+    public static Block alchemyTable;
+    public static Block renderingTank;
     public static Block redWaterStill;
     public static Block redWaterFlowing;
 
@@ -34,6 +36,8 @@ public class ModBlocks {
         aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
         alchemicalChest = new BlockAlchemicalChest(BlockIds.ALCHEMICAL_CHEST);
         glassBell = new BlockGlassBell(BlockIds.GLASS_BELL);
+        alchemyTable = new BlockAlchemyTable(BlockIds.ALCHEMY_TABLE);
+        renderingTank = new BlockRenderingTank(BlockIds.RENDERING_TANK);
         redWaterStill = new BlockRedWaterStill(BlockIds.RED_WATER_STILL);
         redWaterFlowing = new BlockRedWaterFlowing(BlockIds.RED_WATER_STILL - 1);
 
@@ -41,6 +45,8 @@ public class ModBlocks {
         GameRegistry.registerBlock(aludelBase, Strings.ALUDEL_NAME);
         GameRegistry.registerBlock(alchemicalChest, Strings.ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerBlock(glassBell, Strings.GLASS_BELL_NAME);
+        GameRegistry.registerBlock(alchemyTable, Strings.ALCHEMY_TABLE_NAME);
+        GameRegistry.registerBlock(renderingTank, Strings.RENDERING_TANK_NAME);
         //GameRegistry.registerBlock(redWaterStill, Strings.RED_WATER_STILL_NAME);
         //GameRegistry.registerBlock(redWaterFlowing, Strings.RED_WATER_FLOWING_NAME);
 
