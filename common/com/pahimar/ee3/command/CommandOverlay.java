@@ -6,7 +6,6 @@ import net.minecraft.util.ChatMessageComponent;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.util.LocalizationUtil;
 import com.pahimar.ee3.lib.Commands;
 import com.pahimar.ee3.lib.Strings;
 
@@ -92,8 +91,9 @@ public class CommandOverlay {
             try {
                 float opacity = Float.parseFloat(args[1]);
 
-                if (opacity < 0F || opacity > 1F)
-                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT), new Object[0]);
+                if (opacity < 0F || opacity > 1F) {
+                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
+                }
                 else {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = opacity;
                     ConfigurationHandler.set(ConfigurationHandler.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, args[1]);
@@ -101,11 +101,11 @@ public class CommandOverlay {
                 }
             }
             catch (Exception e) {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT), new Object[0]);
+            	throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
             }
         }
         else
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE + " " + LocalizationUtil.getLocalizedString(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT), new Object[0]);
+        	throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
     }
 
     private static void processPositionCommand(ICommandSender commandSender, String[] args) {
