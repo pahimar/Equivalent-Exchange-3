@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.common.Configuration;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
@@ -13,7 +14,6 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * Equivalent-Exchange-3
@@ -132,53 +132,39 @@ public class VersionHelper implements Runnable {
     public static String getResultMessage() {
 
         if (result == UNINITIALIZED)
-            return LanguageRegistry.instance().getStringLocalization(Strings.UNINITIALIZED_MESSAGE);
+        	return new ChatMessageComponent().func_111080_a(Strings.UNINITIALIZED_MESSAGE, new Object[0]).toString();
         else if (result == CURRENT) {
-            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.CURRENT_MESSAGE);
-            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
-            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-            return returnString;
+            return new ChatMessageComponent().func_111080_a(Strings.CURRENT_MESSAGE, new Object[] { remoteVersion, Loader.instance().getMCVersionString() }).toString();
         }
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
-            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
-            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
-            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-            returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
-            return returnString;
+            return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, new Object[] { Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation }).toString();
         }
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
-            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
-            returnString = returnString.replace("@REMOTE_MOD_VERSION@", remoteVersion);
-            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-            returnString = returnString.replace("@MOD_UPDATE_LOCATION@", remoteUpdateLocation);
-            return returnString;
+        	return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, new Object[] { Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation }).toString();
         }
-        else if (result == ERROR)
-            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
-        else if (result == FINAL_ERROR)
-            return LanguageRegistry.instance().getStringLocalization(Strings.FINAL_ERROR_MESSAGE);
+        else if (result == ERROR) {
+        	return new ChatMessageComponent().func_111080_a(Strings.GENERAL_ERROR_MESSAGE, new Object[0]).toString();
+        }
+        else if (result == FINAL_ERROR) {
+        	return new ChatMessageComponent().func_111080_a(Strings.FINAL_ERROR_MESSAGE, new Object[0]).toString();
+        }
         else if (result == MC_VERSION_NOT_FOUND) {
-            String returnString = LanguageRegistry.instance().getStringLocalization(Strings.MC_VERSION_NOT_FOUND);
-            returnString = returnString.replace("@MOD_NAME@", Reference.MOD_NAME);
-            returnString = returnString.replace("@MINECRAFT_VERSION@", Loader.instance().getMCVersionString());
-            return returnString;
+        	return new ChatMessageComponent().func_111080_a(Strings.MC_VERSION_NOT_FOUND, new Object[] { Reference.MOD_NAME, Loader.instance().getMCVersionString() }).toString();
         }
         else {
             result = ERROR;
-            return LanguageRegistry.instance().getStringLocalization(Strings.GENERAL_ERROR_MESSAGE);
+            return new ChatMessageComponent().func_111080_a(Strings.GENERAL_ERROR_MESSAGE, new Object[0]).toString();
         }
     }
 
     public static String getResultMessageForClient() {
 
-        String returnString = LanguageRegistry.instance().getStringLocalization(Strings.OUTDATED_MESSAGE);
-        returnString = returnString.replace("@MOD_NAME@", Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE);
-        returnString = returnString.replace("@REMOTE_MOD_VERSION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE);
-        returnString = returnString.replace("@MINECRAFT_VERSION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE);
-        returnString = returnString.replace("@MOD_UPDATE_LOCATION@", Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
-        return returnString;
+        return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, 
+        		new Object[] { Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, 
+        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, 
+        		Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, 
+        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE })
+        		.toString();
     }
 
     public static byte getResult() {
@@ -191,7 +177,7 @@ public class VersionHelper implements Runnable {
 
         int count = 0;
 
-        LogHelper.info(LanguageRegistry.instance().getStringLocalization(Strings.VERSION_CHECK_INIT_LOG_MESSAGE) + " " + REMOTE_VERSION_XML_FILE);
+        LogHelper.info(new ChatMessageComponent().func_111080_a(Strings.VERSION_CHECK_INIT_LOG_MESSAGE, new Object[] { REMOTE_VERSION_XML_FILE }).toString());
 
         try {
             while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR)) {
@@ -213,12 +199,10 @@ public class VersionHelper implements Runnable {
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void execute() {
 
         new Thread(instance).start();
     }
-
 }
