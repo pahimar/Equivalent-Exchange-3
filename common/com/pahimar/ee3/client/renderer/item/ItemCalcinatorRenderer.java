@@ -83,8 +83,75 @@ public class ItemCalcinatorRenderer implements IItemRenderer {
 
         // Render
         modelCalcinator.render();
+        this.renderChain();
+        
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
+    }
+    private void renderChain(){
+    	GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		GL11.glBegin(GL11.GL_TRIANGLES);{
+			//face1 quad1
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.347500, 0.613300, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.125000);
+			GL11.glVertex3d(0.387700, 0.653500, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.356900, 0.685500, 0.397000);
+			//face2 quad1
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.356900, 0.685500, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.296900);
+			GL11.glVertex3d(0.316600, 0.645300, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.347500, 0.613300, 0.294500);
+			//face3 quad2
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.613300, 0.652500, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.125000);
+			GL11.glVertex3d(0.653500, 0.612300, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.685500, 0.643100, 0.397000);
+			//face4 quad2
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.685500, 0.643100, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.296900);
+			GL11.glVertex3d(0.645300, 0.683400, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.613300, 0.652500, 0.294500);
+			//face5 quad3
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.386700, 0.347500, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.125000);
+			GL11.glVertex3d(0.346500, 0.387700, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.314500, 0.356900, 0.397000);
+			//face6 quad3
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.314500, 0.356900, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.296900);
+			GL11.glVertex3d(0.354700, 0.316600, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.386700, 0.347500, 0.294500);
+			//face7 quad4
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.652500, 0.386700, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.125000);
+			GL11.glVertex3d(0.612300, 0.346500, 0.294500);
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.643100, 0.314500, 0.397000);
+			//face8 quad4
+			GL11.glTexCoord2d(0.468800, 1-0.296900);
+			GL11.glVertex3d(0.643100, 0.314500, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.296900);
+			GL11.glVertex3d(0.683400, 0.354700, 0.397000);
+			GL11.glTexCoord2d(0.390600, 1-0.125000);
+			GL11.glVertex3d(0.652500, 0.386700, 0.294500);
+		}
+		GL11.glEnd();
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glPopMatrix();
     }
 }
