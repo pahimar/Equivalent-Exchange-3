@@ -22,10 +22,12 @@
 	<entry key="tile.calcinator.name">Calcinatore</entry>
 	<entry key="tile.aludel.name">Aludel</entry>
 	<entry key="tile.achemicalChest.name">Cesta Alchemica</entry>
+	<entry key="tile.glassBell.name">Campana di Cristallo</entry>
 	<entry key="container.calcinator">Calcinatore</entry>
 	<entry key="container.aludel">Aludel</entry>
 	<entry key="container.alchemicalChest">Cesta Alchemica</entry>
 	<entry key="container.alchemicalBag">Borsa Alchemica</entry>
+	<entry key="container.glassBell">Campana di Cristallo</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Inizializzazione controllo remoto versione remota, che si trova a</entry>
 	<entry key="version.uninitialized">Controllo di versione remota non correttamente inizializzato</entry>
