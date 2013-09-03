@@ -33,7 +33,7 @@ public class Textures {
     public static final ResourceLocation GUI_ALUDEL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "aludel.png");
     public static final ResourceLocation GUI_ALCHEMICAL_STORAGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage.png");
     public static final ResourceLocation GUI_SHARED_ALCHEMICAL_STORAGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "sharedAlchemicalStorage.png");
-    public static final ResourceLocation GUI_PORTABLE_CRAFTING = ResourceLocationHelper.getResourceLocation("/gui/crafting.png");
+    public static final ResourceLocation GUI_PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
     public static final ResourceLocation GUI_PORTABLE_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "portableTransmutation.png");
     public static final ResourceLocation GUI_GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
 

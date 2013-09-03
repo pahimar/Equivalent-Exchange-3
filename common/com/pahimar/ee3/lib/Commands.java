@@ -43,19 +43,19 @@ public class Commands {
     public static final String COMMAND_SOUNDS_USAGE = "ee3 sounds [ all | self | off ]";
     public static final String COMMAND_VERSION_USAGE = "command.ee3.version.usage";
 
-    public static final String COMMAND_OVERLAY_TURNED_ON = "command.ee3.overlay.turned_on";
-    public static final String COMMAND_OVERLAY_TURNED_OFF = "command.ee3.overlay.turned_off";
-    public static final String COMMAND_OVERLAY_POSITION_TOP_LEFT = "command.ee3.overlay.position.top_left";
-    public static final String COMMAND_OVERLAY_POSITION_TOP_RIGHT = "command.ee3.overlay.position.top_right";
-    public static final String COMMAND_OVERLAY_POSITION_BOTTOM_LEFT = "command.ee3.overlay.position.bottom_left";
-    public static final String COMMAND_OVERLAY_POSITION_BOTTOM_RIGHT = "command.ee3.overlay.position.bottom_right";
-    public static final String COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT = "command.ee3.overlay.opacity.usage.additional_text";
-    public static final String COMMAND_OVERLAY_OPACITY_UPDATED = "command.ee3.overlay.opacity.updated";
-    public static final String COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT = "command.ee3.overlay.scale.usage.additional_text";
-    public static final String COMMAND_OVERLAY_SCALE_UPDATED = "command.ee3.overlay.scale.updated";
-    public static final String COMMAND_PARTICLES_TURNED_ON = "command.ee3.particles.turned_on";
-    public static final String COMMAND_PARTICLES_TURNED_OFF = "command.ee3.particles.turned_off";
-    public static final String COMMAND_SOUNDS_SET_TO_ALL = "command.ee3.sounds.set_to_all";
-    public static final String COMMAND_SOUNDS_SET_TO_SELF = "command.ee3.sounds.set_to_self";
-    public static final String COMMAND_SOUNDS_TURNED_OFF = "command.ee3.sounds.turned_off";
+    public static final String COMMAND_OVERLAY_TURNED_ON = "command.ee3:overlay.turned_on";
+    public static final String COMMAND_OVERLAY_TURNED_OFF = "command.ee3:overlay.turned_off";
+    public static final String COMMAND_OVERLAY_POSITION_TOP_LEFT = "command.ee3:overlay.position.top_left";
+    public static final String COMMAND_OVERLAY_POSITION_TOP_RIGHT = "command.ee3:overlay.position.top_right";
+    public static final String COMMAND_OVERLAY_POSITION_BOTTOM_LEFT = "command.ee3:overlay.position.bottom_left";
+    public static final String COMMAND_OVERLAY_POSITION_BOTTOM_RIGHT = "command.ee3:overlay.position.bottom_right";
+    public static final String COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT = "command.ee3:overlay.opacity.usage.additional_text";
+    public static final String COMMAND_OVERLAY_OPACITY_UPDATED = "command.ee3:overlay.opacity.updated";
+    public static final String COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT = "command.ee3:overlay.scale.usage.additional_text";
+    public static final String COMMAND_OVERLAY_SCALE_UPDATED = "command.ee3:overlay.scale.updated";
+    public static final String COMMAND_PARTICLES_TURNED_ON = "command.ee3:particles.turned_on";
+    public static final String COMMAND_PARTICLES_TURNED_OFF = "command.ee3:particles.turned_off";
+    public static final String COMMAND_SOUNDS_SET_TO_ALL = "command.ee3:sounds.set_to_all";
+    public static final String COMMAND_SOUNDS_SET_TO_SELF = "command.ee3:sounds.set_to_self";
+    public static final String COMMAND_SOUNDS_TURNED_OFF = "command.ee3:sounds.turned_off";
 }
