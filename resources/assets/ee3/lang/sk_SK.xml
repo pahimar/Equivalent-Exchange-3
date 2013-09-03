@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>Slovak (sk_SK) Localization File</comment>
@@ -6,26 +6,28 @@
 	<entry key="key.release">Vypustiť</entry>
 	<entry key="key.toggle">Prepnúť</entry>
 	<entry key="key.charge">Nabiť</entry>
-	<entry key="item.shardMinium.name">Úlomok Suríku</entry>
-	<entry key="item.stoneInert.name">Inertný Kameň</entry>
-	<entry key="item.stoneMinium.name">Suríkoý Kameň</entry>
+	<entry key="item.shardMinium.name">Úlomok suríku</entry>
+	<entry key="item.stoneInert.name">Inertný kameň</entry>
+	<entry key="item.stoneMinium.name">Suríkový kameň</entry>
 	<entry key="item.stonePhilosophers.name">Kameň mudrcov</entry>
 	<entry key="item.alchemicalDustAsh.name">Popol</entry>
-	<entry key="item.alchemicalDustMinium.name">Suríkový Prach</entry>
-	<entry key="item.alchemicalDustVerdant.name">Nazelenaný Prach</entry>
-	<entry key="item.alchemicalDustAzure.name">Azurový Prach</entry>
-	<entry key="item.alchemicalDustAmaranthine.name">Amarantový Prach</entry>
-	<entry key="item.alchemicalDustIridescent.name">Dúhový Prach</entry>
-	<entry key="item.alchemicalBag.name">Alchemystická Taška</entry>
+	<entry key="item.alchemicalDustMinium.name">Suríkový prach</entry>
+	<entry key="item.alchemicalDustVerdant.name">Nazelenaný prach</entry>
+	<entry key="item.alchemicalDustAzure.name">Azurový prach</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amarantový prach</entry>
+	<entry key="item.alchemicalDustIridescent.name">Dúhový prach</entry>
+	<entry key="item.alchemicalBag.name">Alchemystická taška</entry>
 	<entry key="tile.redWaterStill.name">Červená voda (zdroj)</entry>
 	<entry key="tile.redWaterFlowing.name">Červená voda (tečúca)</entry>
 	<entry key="tile.calcinator.name">Kalcinátor</entry>
-	<entry key="tile.aludel.name">Sublimačná Nádoba</entry>
-	<entry key="tile.alchemicalChest.name">Alchemystická Truhla</entry>
+	<entry key="tile.aludel.name">Sublimačná nádoba</entry>
+	<entry key="tile.alchemicalChest.name">Alchemystická truhla</entry>
+	<entry key="tile.glassBell.name">Sklenený zvon</entry>
+	<entry key="container.glassBell">Sklenený zvon</entry>
 	<entry key="container.calcinator">Kalcinátor</entry>
-	<entry key="container.aludel">Sublimačná Nádoba</entry>
-	<entry key="container.alchemicalChest">Alchemystická Truhla</entry>
-	<entry key="container.alchemicalBag">Alchemystická Taška</entry>
+	<entry key="container.aludel">Sublimačná nádoba</entry>
+	<entry key="container.alchemicalChest">Alchemystická truhla</entry>
+	<entry key="container.alchemicalBag">Alchemystická taška</entry>
 	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
 	<entry key="version.init_log_message">Prebieha kontrola verzie, vzdialený soúbor je umiestnený na</entry>
 	<entry key="version.uninitialized">Kontrola veruie nebola úspešná(nepodarila sa inicializácia)</entry>
