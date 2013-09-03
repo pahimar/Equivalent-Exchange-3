@@ -1,0 +1,62 @@
+# Key localizations 
+key.extra=Ekstra
+key.release=Vapauta
+key.toggle=Muuta
+key.charge=Lataa
+
+# Item localizations
+item.ee3:shardMinium.name=Mönjäinen sirpale
+item.ee3:stoneInert.name=Eloton kivi
+item.ee3:stoneMinium.name=Mönjäinen kivi
+item.ee3:stonePhilosophers.name=Viisasten kivi
+item.ee3:alchemicalDustAsh.name=Tuhka
+item.ee3:alchemicalDustMinium.name=Mönjäinen pöly
+item.ee3:alchemicalDustVerdant.name=Vehreä pöly
+item.ee3:alchemicalDustAzure.name=Taivaansinen pöly
+item.ee3:alchemicalDustAmaranthine.name=Ikikukkaispöly
+item.ee3:alchemicalDustIridescent.name=Sateenkaarenkirjava pöly
+item.ee3:alchemicalBag.name=Alkeminen pussi
+
+# Block localizations
+tile.ee3:redWaterStill.name=Punavesi (Liikkumaton)
+tile.ee3:redWaterFlowing.name=Punavesi (Virtaava)
+tile.ee3:calcinator.name=Kalsinaattori
+tile.ee3:aludel.name=Aludeli
+tile.ee3:alchemicalChest.name=Alkeminen arkku
+tile.ee3:glassBell.name=Lasitiuku
+
+# GUI localizations
+container.calcinator=Kalsinaattori
+container.aludel=Aludeli
+container.alchemicalChest=Alkeminen arkku
+container.alchemicalBag=Alkeminen pussi
+container.glassBell=Lasitiuku
+
+# Command localizations
+command.ee3.overlay.turned_on=Target transmutation overlay turned on
+command.ee3.overlay.turned_off=Target transmutation overlay turned off
+command.ee3.overlay.position.top_left=Target transmutation overlay position set to top left
+command.ee3.overlay.position.top_right=Target transmutation overlay position set to top right
+command.ee3.overlay.position.bottom_left=Target transmutation overlay position set to bottom left
+command.ee3.overlay.position.bottom_right=Target transmutation overlay position set to bottom right
+command.ee3.overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
+command.ee3.overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3.overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0) 
+command.ee3.overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3.particles.turned_on=Equivalent Exchange 3 particles turned on
+command.ee3.particles.turned_off=Equivalent Exchange 3 particles turned off
+command.ee3.sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
+command.ee3.sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
+command.ee3.sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.init_log_message=Initializing remote version check against remote version authority, located at: %s
+version.uninitialized=Remote version check failed to initialize properly
+version.current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
+version.outdated=A new %s version exists (%s) for %s. Get it here: %s
+version.general_error=Error while connecting to remote version authority file; trying again
+version.final_error=Version check stopping after three unsuccessful connection attempts
+version.mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
