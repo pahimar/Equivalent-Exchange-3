@@ -1,0 +1,56 @@
+
+key.extra=Extra
+key.release=Vypustit
+key.toggle=Přepnout
+key.charge=Nabít
+
+item.ee3:shardMinium.name=Úlomek suříku
+item.ee3:stoneInert.name=Inertní kámen
+item.ee3:stoneMinium.name=Kámen suříku
+item.ee3:stonePhilosophers.name=Kámen mudrců
+item.ee3:alchemicalDustAsh.name=Popel
+item.ee3:alchemicalDustMinium.name=Suříkový prášek
+item.ee3:alchemicalDustVerdant.name=Nazelenalý prášek
+item.ee3:alchemicalDustAzure.name=Azurový prášek
+item.ee3:alchemicalDustAmaranthine.name=Amarantový prášek
+item.ee3:alchemicalDustIridescent.name=Duhový prášek
+item.ee3:alchemicalBag.name=Alchymistický pytlík
+
+tile.ee3:redWaterStill.name=Rudá voda (v klidu)
+tile.ee3:redWaterFlowing.name=Rudá voda (tekoucí)
+tile.ee3:calcinator.name=Kalcinátor
+tile.ee3:aludel.name=Sublimační nádoba
+tile.ee3:alchemicalChest.name=Alchymistická truhla
+tile.ee3:glassBell.name=Skleněný zvon
+
+container.calcinator=Kalcinátor
+container.aludel=Sublimační nádoba
+container.alchemicalChest=Alchymistická truhla
+container.alchemicalBag=Alchymistický pytlík
+container.glassBell=Skleněný zvon
+
+command.ee3.overlay.turned_on=Zobrazení výsledku transmutace zapnuto
+command.ee3.overlay.turned_off=Zobrazení výsledku transmutace vypnuto
+command.ee3.overlay.position.top_left=Pozice zobrazení výsledku transmutace nastavena na levý horní roh
+command.ee3.overlay.position.top_right=Pozice zobrazení výsledku transmutace nastavena na pravý horní roh
+command.ee3.overlay.position.bottom_left=Pozice zobrazení výsledku transmutace nastavena na levý dolní roh
+command.ee3.overlay.position.bottom_right=Pozice zobrazení výsledku transmutace nastavena na pravý dolní roh
+command.ee3.overlay.opacity.usage.additional_text=(kde ### je desetinná hodnota mezi 0,0 a 1,0) 
+command.ee3.overlay.opacity.updated=Průhlednost výsledku transmutace úspěšně změněna
+command.ee3.overlay.scale.usage.additional_text=(kde ### je desetinná hodnota větší než 0,0) 
+command.ee3.overlay.scale.updated=Měřítko výsledku transmutace úspěšné změněno
+command.ee3.particles.turned_on=Equivalent Exchange 3 částice zapnuty
+command.ee3.particles.turned_off=Equivalent Exchange 3 částice vypnuty
+command.ee3.sounds.set_to_all=Přehrávání zvuků z Equivalent Exchange 3 od všech hráčů
+command.ee3.sounds.set_to_self=Přehrávání zvuků z Equivalent Exchange 3 pouze od aktuálního hráče
+command.ee3.sounds.turned_off=Přehrávání zvuků z Equivalent Exchange 3 vypnuto
+
+itemGroup.EE3=Equivalent Exchange 3
+
+version.init_log_message=Provádím kontrolu verze, vzdálený soubor umístěn na
+version.uninitialized=Kontrola verze neproběhla úspěšně (nezdařila se inicializace)
+version.current=Používáte nejaktuálnější verzi (@REMOTE_MOD_VERSION@) modu Equivalent Exchange 3, která je pro vaši verzi Minecraftu (@MINECRAFT_VERSION@) k dispozici
+version.outdated=Je k dispozici nová verze @MOD_NAME@ (@REMOTE_MOD_VERSION@) pro MC @MINECRAFT_VERSION@. Ke stažení zde: @MOD_UPDATE_LOCATION@</entry>
+version.general_error=Chyba při připojování k servru poskytujícímu informace o verzi, zkouším se znovu připojit
+version.final_error=Kontrola verze deaktivována po třech neúspěšných pokusech, přeskakuji
+version.mc_version_not_found=Nepodařilo se nalézt verzi @MOD_NAME@ pro @MINECRAFT_VERSION@
