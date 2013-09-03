@@ -32,7 +32,7 @@
 	<entry key="version.current">Du använder den mest uppdaterade versionen (@REMOTE_MOD_VERSION@) av Equivalent Exchange 3 för @MINECRAFT_VERSION@</entry>
 	<entry key="version.outdated">Det finns en ny version av @MOD_NAME@ (@REMOTE_MOD_VERSION@) för @MINECRAFT_VERSION@. Hämta den här: @MOD_UPDATE_LOCATION@</entry>
 	<entry key="version.general_error">Fel med att läsa fjärrverisonsverifierinsfilen; försöker igen</entry>
-	<entry key="version.final_error">Verisonskontroll avslutas efter tre misslyckade anslutningsförsök</entry>
+	<entry key="version.final_error">Versionskontroll avslutas efter tre misslyckade anslutningsförsök</entry>
 	<entry key="version.mc_version_not_found">Kunde inte hitta verison @MOD_NAME@ för @MINECRAFT_VERSION@ på fjärrplatsen.</entry>
 	<entry key="command.ee3.overlay.turned_on">Förhandvisningen av omvandlingen är på</entry>
 	<entry key="command.ee3.overlay.turned_off">Förhandvisningen av omvandlingen är av</entry>
@@ -44,9 +44,9 @@
 	<entry key="command.ee3.overlay.opacity.updated">Förhandvisningen av omvandlingens genomskinlighet är uppdaterad</entry>
 	<entry key="command.ee3.overlay.scale.usage.additional_text">(där ### är ett decimalvärde, minst 0.0) </entry>
 	<entry key="command.ee3.overlay.scale.updated">Förhandvisningen av omvandlingens skala är uppdaterad</entry>
-	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3partiklar på</entry>
-	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3partiklar av</entry>
-	<entry key="command.ee3.sounds.set_to_all">Playing Equivalent Exchange 3ljud från alla spelare</entry>
-	<entry key="command.ee3.sounds.set_to_self">Playing Equivalent Exchange 3ljud från bara dig</entry>
-	<entry key="command.ee3.sounds.turned_off">Playing Equivalent Exchange 3ljud av</entry>
+	<entry key="command.ee3.particles.turned_on">Equivalent Exchange 3 partiklar på</entry>
+	<entry key="command.ee3.particles.turned_off">Equivalent Exchange 3 partiklar av</entry>
+	<entry key="command.ee3.sounds.set_to_all">Spelar Equivalent Exchange 3 ljud från alla spelare</entry>
+	<entry key="command.ee3.sounds.set_to_self">Spelar Equivalent Exchange 3 ljud från bara dig</entry>
+	<entry key="command.ee3.sounds.turned_off">Equivalent Exchange 3 ljud av</entry>
 </properties>
