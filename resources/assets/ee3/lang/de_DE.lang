@@ -8,29 +8,34 @@ key.charge=Aufladen
 item.ee3:shardMinium.name=Miniumscherbe
 item.ee3:stoneInert.name=Inerter Stein
 item.ee3:stoneMinium.name=Miniumstein
-item.ee3:stonePhilosophers.name=Stein der Weisen
-item.ee3:alchemicalDustAsh.name=Asche
-item.ee3:alchemicalDustMinium.name=Miniumstaub
-item.ee3:alchemicalDustVerdant.name=Grüner Staub
-item.ee3:alchemicalDustAzure.name=Azurer Staub
-item.ee3:alchemicalDustAmaranthine.name=Amaranther Staub
-item.ee3:alchemicalDustIridescent.name=Irisierender Staub
-item.ee3:alchemicalBag.name=Alchemiebeutel
+item.ee3:stonePhilosophers.name=Stein der Weisen [WIP]
+item.ee3:alchemicalDustAsh.name=Asche [WIP]
+item.ee3:alchemicalDustMinium.name=Miniumstaub [WIP]
+item.ee3:alchemicalDustVerdant.name=Grüner Staub [WIP]
+item.ee3:alchemicalDustAzure.name=Azurer Staub [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amaranther Staub [WIP]
+item.ee3:alchemicalDustIridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
+item.ee3:alchemicalChalk.name=Alchemical Chalk [WIP]
 
 # Block localizations
 tile.ee3:redWaterStill.name=Rotes Wasser
 tile.ee3:redWaterFlowing.name=Rotes Wasser
-tile.ee3:calcinator.name=Kalzinierer
-tile.ee3:aludel.name=Aludel
-tile.ee3:alchemicalChest.name=Alchemietruhe
-tile.ee3:glassBell.name=Glasglocke
+tile.ee3:calcinator.name=Kalzinierer [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemietruhe [WIP]
+tile.ee3:glassBell.name=Glasglocke [WIP]
+tile.ee3:alchemyTable.name=Alchemietisch [WIP]
+tile.ee3:renderingTank.name=Darstellungstank [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalzinierer
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Alchemietruhe
-container.ee3:alchemicalBag=Alchemiebeutel
-container.ee3:glassBell=Glasglocke
+container.ee3:calcinator=Kalzinierer [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemietruhe [WIP]
+container.ee3:alchemicalBag=Alchemiebeutel [WIP]
+container.ee3:glassBell=Glasglocke [WIP]
+container.ee3:alchemyTable.name=Alchemietisch [WIP]
+container.ee3:renderingTank.name=Darstellungstank [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Transmutationsanzeige an
