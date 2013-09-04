@@ -117,7 +117,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
         // TODO Alchemy Table TESR
-        // FIXME Get Rorax to export faces as triangles: ClientRegistry.bindTileEntitySpecialRenderer(TileRenderingTank.class, new TileEntityRenderingTankRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileRenderingTank.class, new TileEntityRenderingTankRenderer());
     }
 
     @Override

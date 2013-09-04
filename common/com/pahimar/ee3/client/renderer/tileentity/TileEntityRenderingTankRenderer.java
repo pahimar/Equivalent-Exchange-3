@@ -23,23 +23,26 @@ public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
 
 		if (tileEntity instanceof TileRenderingTank) {
 
+			GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_CULL_FACE);
+			
             GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_LIGHTING);
 
             // Scale, Translate, Rotate
             GL11.glScalef(1.0F, 1.0F, 1.0F);
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
-            GL11.glRotatef(45F, 0F, 1F, 0F);
-            GL11.glRotatef(-90F, 1F, 0F, 0F);
+            GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + 1.0F);
+            //GL11.glRotatef(90F, 0F, 1F, 0F);
 
             // Bind texture
             FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_RENDERING_TANK);
 
             // Render
             modelRenderingTank.render();
-
-            GL11.glEnable(GL11.GL_LIGHTING);
+            
             GL11.glPopMatrix();
+            
+            GL11.glEnable(GL11.GL_CULL_FACE);
+            GL11.glEnable(GL11.GL_LIGHTING);
         }
 	}
 

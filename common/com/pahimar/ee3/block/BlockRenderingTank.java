@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileRenderingTank;
 
@@ -14,6 +15,7 @@ public class BlockRenderingTank extends BlockEE {
 		
 		super(id, Material.anvil);
 		this.setUnlocalizedName(Strings.RENDERING_TANK_NAME);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 3.0F, 1.0F);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
 	}
 	
@@ -30,23 +32,23 @@ public class BlockRenderingTank extends BlockEE {
     }
 	
 	// TODO Finish getting the rendering nice looking
-//	@Override
-//    public boolean renderAsNormalBlock() {
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isOpaqueCube() {
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public int getRenderType() {
-//
-//        return RenderIds.renderingTank;
-//    }
+	@Override
+    public boolean renderAsNormalBlock() {
+
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+
+        return RenderIds.renderingTank;
+    }
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
