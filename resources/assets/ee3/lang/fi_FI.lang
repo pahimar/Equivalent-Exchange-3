@@ -33,21 +33,21 @@ container.alchemicalBag=Alkeminen pussi
 container.glassBell=Lasitiuku
 
 # Command localizations
-command.ee3.overlay.turned_on=Target transmutation overlay turned on
-command.ee3.overlay.turned_off=Target transmutation overlay turned off
-command.ee3.overlay.position.top_left=Target transmutation overlay position set to top left
-command.ee3.overlay.position.top_right=Target transmutation overlay position set to top right
-command.ee3.overlay.position.bottom_left=Target transmutation overlay position set to bottom left
-command.ee3.overlay.position.bottom_right=Target transmutation overlay position set to bottom right
-command.ee3.overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
-command.ee3.overlay.opacity.updated=Target transmutation overlay opacity updated successfully
-command.ee3.overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0) 
-command.ee3.overlay.scale.updated=Target transmutation overlay scale updated successfully
-command.ee3.particles.turned_on=Equivalent Exchange 3 particles turned on
-command.ee3.particles.turned_off=Equivalent Exchange 3 particles turned off
-command.ee3.sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
-command.ee3.sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
-command.ee3.sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+command.ee3.overlay.turned_on=Kohdistetun transmutoinnin peitevalikko käytössä
+command.ee3.overlay.turned_off=Kohdistetun transmutoinnin peitevalikko poissa käytössä
+command.ee3.overlay.position.top_left=Kohdistetun transmutoinnin peitevalikko asetettu ylös vasemmalle
+command.ee3.overlay.position.top_right=Kohdistetun transmutoinnin peitevalikko asetettu ylös oikealle
+command.ee3.overlay.position.bottom_left=Kohdistetun transmutoinnin peitevalikko asetettu alas vasemmalle
+command.ee3.overlay.position.bottom_right=Kohdistetun transmutoinnin peitevalikko asetettu alas oikealle
+command.ee3.overlay.opacity.usage.additional_text=(missä ### on desimaaliluku väliltä 0.0 ja 1.0) 
+command.ee3.overlay.opacity.updated=Kohdistetun transmutoinnin peitevalikon läpinäkyvyys päivitetty onnistuneesti.
+command.ee3.overlay.scale.usage.additional_text=%s (missä ### on desimaaliluku arvoltaan suurempi kuin 0.0) 
+command.ee3.overlay.scale.updated=Kohdistetun transmutoinnin peitevalikon koko päivitetty onnistuneesti
+command.ee3.particles.turned_on=Equivalent Exchange 3 hiukkaset käytössä
+command.ee3.particles.turned_off=Equivalent Exchange 3 hiukkaset poistettu käytöstä
+command.ee3.sounds.set_to_all=Toistetaan kaikkien pelaajien Equivalent Exchange 3 äänet
+command.ee3.sounds.set_to_self=Toistetaan vain omat Equivalent Exchange 3 äänet
+command.ee3.sounds.turned_off=Equivalent Exchange 3 äänet poistettu käytöstä
 
 # Creative Tab localizations
 itemGroup.EE3=Equivalent Exchange 3
