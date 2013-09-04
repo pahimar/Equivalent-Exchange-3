@@ -1,0 +1,62 @@
+# Teclas 
+key.extra=Extra
+key.release=Disparar
+key.toggle=Alternar
+key.charge=Carregar
+
+# Itens
+item.ee3:shardMinium.name=Fragmento de Mínio
+item.ee3:stoneInert.name=Pedra Inerte
+item.ee3:stoneMinium.name=Pedra de Mínio
+item.ee3:stonePhilosophers.name=Pedra Filosofal
+item.ee3:alchemicalDustAsh.name=Cinza
+item.ee3:alchemicalDustMinium.name=Pó de Mínio
+item.ee3:alchemicalDustVerdant.name=Pó Virente
+item.ee3:alchemicalDustAzure.name=Pó Cerúleo
+item.ee3:alchemicalDustAmaranthine.name=Pó Amarantino
+item.ee3:alchemicalDustIridescent.name=Pó Iridescente
+item.ee3:alchemicalBag.name=Saco Alquímico
+
+# Blocos
+tile.ee3:redWaterStill.name=Água Vermelha (Estagnada)
+tile.ee3:redWaterFlowing.name=Água Vermelha (A Fluir)
+tile.ee3:calcinator.name=Calcinatório
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Baú Alquímico
+tile.ee3:glassBell.name=Sino de Vidro
+
+# Títulos das janelas
+container.ee3:calcinator=Calcinatório
+container.ee3:aludel=Aludel
+container.ee3:alchemicalChest=Baú Alquímico
+container.ee3:alchemicalBag=Saco Alquímico
+container.ee3:glassBell=Sino de Vidro
+
+# Comandos
+command.ee3:overlay.turned_on=O alvo de transmutação foi ligado
+command.ee3:overlay.turned_off=O alvo de transmutação foi desligado
+command.ee3:overlay.position.top_left=A posição do alvo de transmutação foi definida para o canto superior-esquerdo
+command.ee3:overlay.position.top_right=A posição do alvo de transmutação foi definida para o canto superior-direito
+command.ee3:overlay.position.bottom_left=A posição do alvo de transmutação foi definida para o canto inferior-esquerdo
+command.ee3:overlay.position.bottom_right=A posição do alvo de transmutação foi definida para o canto inferior-direito
+command.ee3:overlay.opacity.usage.additional_text=(onde ### é um número decimal entre 0.0 e 1.0) 
+command.ee3:overlay.opacity.updated=A opacidade do alvo de transmutação foi actualizada com sucesso
+command.ee3:overlay.scale.usage.additional_text=%s (onde ### é um número decimal entre 0.0 e 1.0) 
+command.ee3:overlay.scale.updated=O tamanho do alvo de transmutação foi actualizado com sucesso
+command.ee3:particles.turned_on=As partículas do Equivalent Exchange 3 foram ligadas
+command.ee3:particles.turned_off=As partículas do Equivalent Exchange 3 foram desligadas
+command.ee3:sounds.set_to_all=A reproduzir os sons do Equivalente Exchange 3 de todos os jogadores
+command.ee3:sounds.set_to_self=A reproduzir os sons do Equivalente Exchange 3 apenas do próprio
+command.ee3:sounds.turned_off=Os sons do Equivalent Exchange 3 foram desligados
+
+# Separadores do modo criativo
+itemGroup.EE3=Equivalent Exchange 3
+
+# Verificador de actualizações
+version.ee3:init_log_message=A iniciar a verificação de versões em relação à autoridade remota, localizada em: %s
+version.ee3:uninitialized=A verificação de versões não foi inicializada correctamente
+version.ee3:current=Estas a jogar a versão actual (%s) do Equivalent Exchange 3 para o %s
+version.ee3:outdated=Existe uma versão do %s mais recente (%s) para o %s. Obtém-na aqui: %s
+version.ee3:general_error=Houve um erro a ligar à autoridade remota. A tentar novamente
+version.ee3:final_error=A abortar a verificação de versões após três tentativas mal-sucedidas
+version.ee3:mc_version_not_found=Foi impossível encontrar uma versão do %s para o %s na autoridade remota
