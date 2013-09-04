@@ -16,14 +16,17 @@ item.ee3:alchemicalDustAzure.name=蔚蓝粉末
 item.ee3:alchemicalDustAmaranthine.name=紫红粉末
 item.ee3:alchemicalDustIridescent.name=虹彩粉末
 item.ee3:alchemicalBag.name=炼金袋
+item.ee3:alchemicalChalk.name=炼金粉笔
 
 # Block localizations
-tile.ee3:redWaterStill.name=红水 (静止)
-tile.ee3:redWaterFlowing.name=红水 (流动)
+tile.ee3:redWaterStill.name=红水(静止)
+tile.ee3:redWaterFlowing.name=红水(流动)
 tile.ee3:calcinator.name=煅烧炉
 tile.ee3:aludel.name=梨形器皿
 tile.ee3:alchemicalChest.name=炼金箱子
 tile.ee3:glassBell.name=玻璃钟罩
+tile.ee3:alchemyTable.name=炼金台
+tile.ee3:renderingTank.name=渲染罐
 
 # GUI localizations
 container.ee3:calcinator=煅烧炉
@@ -31,6 +34,8 @@ container.ee3:aludel=梨形器皿
 container.ee3:alchemicalChest=炼金箱子
 container.ee3:alchemicalBag=炼金袋
 container.ee3:glassBell=玻璃钟罩
+container.ee3:alchemyTable.name=炼金台
+container.ee3:renderingTank.name=渲染罐
 
 # Command localizations
 command.ee3:overlay.turned_on=开启转换目标快捷视图
@@ -39,15 +44,15 @@ command.ee3:overlay.position.top_left=将转换目标快捷视图设置在屏幕
 command.ee3:overlay.position.top_right=将转换目标快捷视图设置在屏幕右上角
 command.ee3:overlay.position.bottom_left=将转换目标快捷视图设置在屏幕左下角
 command.ee3:overlay.position.bottom_right=将转换目标快捷视图设置在屏幕右下角
-command.ee3:overlay.opacity.usage.additional_text=(### 是介于 0.0 与 1.0 间的小数)
+command.ee3:overlay.opacity.usage.additional_text=(### 是介于0.0与1.0间的小数)
 command.ee3:overlay.opacity.updated=已成功更新转换目标快捷视图透明度
 command.ee3:overlay.scale.usage.additional_text=%s (### 为大于 0.0 的小数)
 command.ee3:overlay.scale.updated=已成功更新转换目标快捷视图界面大小
 command.ee3:particles.turned_on=开启 Equivalent Exchange 3 粒子渲染效果
 command.ee3:particles.turned_off=关闭 Equivalent Exchange 3 粒子渲染效果
-command.ee3:sounds.set_to_all=允许播放所有玩家Equivalent Exchange 3 音频
-command.ee3:sounds.set_to_self=允许播放自己Equivalent Exchange 3 音频
-command.ee3:sounds.turned_off=禁止播放 Equivalent Exchange 3 音频
+command.ee3:sounds.set_to_all=允许播放所有玩家 Equivalent Exchange 3 音频文件
+command.ee3:sounds.set_to_self=允许播放自己 Equivalent Exchange 3 音频文件
+command.ee3:sounds.turned_off=禁止播放 Equivalent Exchange 3 音频文件
 
 # Creative Tab localizations
 itemGroup.EE3=Equivalent Exchange 3
