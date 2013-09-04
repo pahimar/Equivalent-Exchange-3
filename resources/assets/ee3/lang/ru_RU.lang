@@ -8,29 +8,34 @@ key.charge=Заряд
 item.ee3:shardMinium.name=Алхимический осколок
 item.ee3:stoneInert.name=Инертный камень
 item.ee3:stoneMinium.name=Алхимический камень
-item.ee3:stonePhilosophers.name=Философский камень
-item.ee3:alchemicalDustAsh.name=Пыль
-item.ee3:alchemicalDustMinium.name=Алхимический порошок
-item.ee3:alchemicalDustVerdant.name=Зелёный порошок
-item.ee3:alchemicalDustAzure.name=Лазурный порошок
-item.ee3:alchemicalDustAmaranthine.name=Пурпурный порошок
-item.ee3:alchemicalDustIridescent.name=Радужный порошок
-item.ee3:alchemicalBag.name=Алхимическая сумка
+item.ee3:stonePhilosophers.name=Философский камень [WIP]
+item.ee3:alchemicalDustAsh.name=Пыль [WIP]
+item.ee3:alchemicalDustMinium.name=Алхимический порошок [WIP]
+item.ee3:alchemicalDustVerdant.name=Зелёный порошок [WIP]
+item.ee3:alchemicalDustAzure.name=Лазурный порошок [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Пурпурный порошок [WIP]
+item.ee3:alchemicalDustIridescent.name=Радужный порошок [WIP]
+item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
+item.ee3:alchemicalChalk.name=Алхимический мел [WIP]
 
 # Block localizations
 tile.ee3:redWaterStill.name=Красная вода (Стоящая)
 tile.ee3:redWaterFlowing.name=Красная вода (Текущая)
-tile.ee3:calcinator.name=Кальцинатор
-tile.ee3:aludel.name=Алюдель
-tile.ee3:alchemicalChest.name=Алхимический сундук
-tile.ee3:glassBell.name=Стеклянный колпак
+tile.ee3:calcinator.name=Кальцинатор [WIP]
+tile.ee3:aludel.name=Алюдель [WIP]
+tile.ee3:alchemicalChest.name=Алхимический сундук [WIP]
+tile.ee3:glassBell.name=Стеклянный колпак [WIP]
+tile.ee3:alchemyTable.name=Алхимический стол [WIP]
+tile.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Кальцинатор
-container.ee3:aludel=Алюдель
-container.ee3:alchemicalChest=Алхимический сундук
-container.ee3:alchemicalBag=Алхимическая сумка
-container.ee3:glassBell=Стеклянный колпак
+container.ee3:calcinator=Кальцинатор [WIP]
+container.ee3:aludel=Алюдель [WIP]
+container.ee3:alchemicalChest=Алхимический сундук [WIP]
+container.ee3:alchemicalBag=Алхимическая сумка [WIP]
+container.ee3:glassBell=Стеклянный колпак [WIP]
+container.ee3:alchemyTable.name=Алхимический стол [WIP]
+container.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Панель цели трансмутации включена
