@@ -64,7 +64,8 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `build.properties`.
 	* Open it up with any text editor, and type into it the following (fully customizable except for `dir.development`):
- 		* `dir.development=../../`
+ 		* `dir.mcp=../../mcp/`
+ 		* `dir.mod=/`
 		* `dir.release=Releases`
 		* `release.minecraft.version=1.5.2`
 		* `release.mod.version=pre2`
