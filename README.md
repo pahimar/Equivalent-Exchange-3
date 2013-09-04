@@ -67,13 +67,13 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
  		* `dir.mcp=../../mcp/`
  		* `dir.mod=/`
 		* `dir.release=Releases`
-		* `release.minecraft.version=1.6.2`
+		* `release.minecraft.version=1.5.2`
 		* `release.mod.version=pre2`
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
 6. Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant build`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything, and try again.
-8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.6.2\pre2`.
+8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\1.5.2\pre2`.
 	*  You should see a `.jar` file named `ee3-universal-pre2.jar`.
 9. Copy the jar into your Minecraft mods folder, and play Minecraft!
 
