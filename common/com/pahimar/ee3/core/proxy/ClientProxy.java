@@ -14,6 +14,7 @@ import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemRenderingTankRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
@@ -104,7 +105,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
         // TODO Alchemy Table item renderer
-        // TODO Rendering Tank item renderer
+        MinecraftForgeClient.registerItemRenderer(BlockIds.RENDERING_TANK, new ItemRenderingTankRenderer());
     }
 
     @Override

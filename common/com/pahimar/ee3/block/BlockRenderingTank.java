@@ -31,7 +31,6 @@ public class BlockRenderingTank extends BlockEE {
         return unlocalizedName.toString();
     }
 	
-	// TODO Finish getting the rendering nice looking
 	@Override
     public boolean renderAsNormalBlock() {
 
