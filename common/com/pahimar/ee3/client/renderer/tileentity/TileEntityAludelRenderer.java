@@ -63,7 +63,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
             scaleTranslateRotate(x, y, z, tileAludel.getOrientation());
 
             // Bind texture
-            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALUDEL);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALUDEL);
 
             // Render
             modelAludel.render();

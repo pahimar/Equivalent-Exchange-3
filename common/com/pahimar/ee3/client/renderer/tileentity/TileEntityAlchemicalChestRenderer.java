@@ -42,7 +42,7 @@ public class TileEntityAlchemicalChestRenderer extends
                 direction = ForgeDirection.getOrientation(tileAlchemicalChest.getBlockMetadata());
             }
 
-            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_ALCHEMICAL_CHEST);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

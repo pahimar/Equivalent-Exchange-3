@@ -34,7 +34,7 @@ public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
             //GL11.glRotatef(90F, 0F, 1F, 0F);
 
             // Bind texture
-            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_RENDERING_TANK);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_RENDERING_TANK);
 
             // Render
             modelRenderingTank.render();

@@ -66,7 +66,7 @@ public class ItemRenderingTankRenderer implements IItemRenderer {
         GL11.glTranslatef(x, y, z);
 
         // Bind texture
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_RENDERING_TANK);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_RENDERING_TANK);
 
         // Render
         modelRenderingTank.render();

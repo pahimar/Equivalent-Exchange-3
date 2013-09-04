@@ -66,7 +66,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer {
             renderGlassBellByOrientation(x, y, z, tileGlassBell.getOrientation());
 
             // Bind texture
-            FMLClientHandler.instance().getClient().renderEngine.func_110577_a(Textures.MODEL_GLASS_BELL);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_GLASS_BELL);
 
             modelGlassBell.render();
 

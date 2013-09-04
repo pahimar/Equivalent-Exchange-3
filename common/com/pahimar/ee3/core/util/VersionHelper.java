@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.Configuration;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
@@ -131,40 +131,40 @@ public class VersionHelper implements Runnable {
 
     public static String getResultMessage() {
 
-        if (result == UNINITIALIZED)
-        	return new ChatMessageComponent().func_111080_a(Strings.UNINITIALIZED_MESSAGE, new Object[0]).toString();
+        if (result == UNINITIALIZED) {
+        	return StatCollector.translateToLocal(Strings.UNINITIALIZED_MESSAGE);
+        }
         else if (result == CURRENT) {
-            return new ChatMessageComponent().func_111080_a(Strings.CURRENT_MESSAGE, new Object[] { remoteVersion, Loader.instance().getMCVersionString() }).toString();
+            return StatCollector.translateToLocalFormatted(Strings.CURRENT_MESSAGE, Reference.MOD_NAME, Loader.instance().getMCVersionString());
         }
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-            return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, new Object[] { Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation }).toString();
+            return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-        	return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, new Object[] { Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation }).toString();
+        	return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
         else if (result == ERROR) {
-        	return new ChatMessageComponent().func_111080_a(Strings.GENERAL_ERROR_MESSAGE, new Object[0]).toString();
+        	return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
         else if (result == FINAL_ERROR) {
-        	return new ChatMessageComponent().func_111080_a(Strings.FINAL_ERROR_MESSAGE, new Object[0]).toString();
+        	return StatCollector.translateToLocal(Strings.FINAL_ERROR_MESSAGE);
         }
         else if (result == MC_VERSION_NOT_FOUND) {
-        	return new ChatMessageComponent().func_111080_a(Strings.MC_VERSION_NOT_FOUND, new Object[] { Reference.MOD_NAME, Loader.instance().getMCVersionString() }).toString();
+        	return StatCollector.translateToLocalFormatted(Strings.MC_VERSION_NOT_FOUND, Reference.MOD_NAME, Loader.instance().getMCVersionString());
         }
         else {
             result = ERROR;
-            return new ChatMessageComponent().func_111080_a(Strings.GENERAL_ERROR_MESSAGE, new Object[0]).toString();
+            return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
     }
 
     public static String getResultMessageForClient() {
 
-        return new ChatMessageComponent().func_111080_a(Strings.OUTDATED_MESSAGE, 
-        		new Object[] { Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, 
+        return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE,
+        		Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, 
         		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, 
         		Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, 
-        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE })
-        		.toString();
+        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
     }
 
     public static byte getResult() {
@@ -177,7 +177,7 @@ public class VersionHelper implements Runnable {
 
         int count = 0;
 
-        LogHelper.info(new ChatMessageComponent().func_111080_a(Strings.VERSION_CHECK_INIT_LOG_MESSAGE, new Object[] { REMOTE_VERSION_XML_FILE }).toString());
+        LogHelper.info(StatCollector.translateToLocalFormatted(Strings.VERSION_CHECK_INIT_LOG_MESSAGE, REMOTE_VERSION_XML_FILE));
 
         try {
             while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR)) {

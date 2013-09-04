@@ -155,7 +155,7 @@ public class DrawBlockHighlightHandler {
 
         float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         Tessellator tessellator = Tessellator.instance;
 
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

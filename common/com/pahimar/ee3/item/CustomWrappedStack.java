@@ -218,7 +218,7 @@ public class CustomWrappedStack {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getItemName(), itemStack.getItem().getClass().getCanonicalName()));
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
@@ -238,7 +238,7 @@ public class CustomWrappedStack {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getItemName(), itemStack.getItem().getClass().getCanonicalName()));
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
@@ -268,8 +268,8 @@ public class CustomWrappedStack {
             }
 
             try {
-            	if (itemStack.getItemName() != null) {
-            		hashCode = 37 * hashCode + itemStack.getItemName().hashCode();
+            	if (itemStack.getUnlocalizedName() != null) {
+            		hashCode = 37 * hashCode + itemStack.getUnlocalizedName().hashCode();
             	}
             } catch (ArrayIndexOutOfBoundsException e) { 
             	

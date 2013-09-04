@@ -23,8 +23,8 @@ public class Textures {
     public static final String EFFECTS_LOCATION = "textures/effects/";
 
     // Item/Block sprite sheets
-    public static final ResourceLocation VANILLA_BLOCK_TEXTURE_SHEET = TextureMap.field_110575_b;
-    public static final ResourceLocation VANILLA_ITEM_TEXTURE_SHEET = TextureMap.field_110576_c;
+    public static final ResourceLocation VANILLA_BLOCK_TEXTURE_SHEET = TextureMap.locationBlocksTexture;
+    public static final ResourceLocation VANILLA_ITEM_TEXTURE_SHEET = TextureMap.locationItemsTexture;
 
     // Armor sprite sheets
 

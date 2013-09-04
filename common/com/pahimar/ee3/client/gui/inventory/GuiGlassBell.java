@@ -48,7 +48,7 @@ public class GuiGlassBell extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.func_110434_K().func_110577_a(Textures.GUI_GLASS_BELL);
+        this.mc.getTextureManager().bindTexture(Textures.GUI_GLASS_BELL);
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
