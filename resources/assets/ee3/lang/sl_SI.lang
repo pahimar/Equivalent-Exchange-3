@@ -53,10 +53,10 @@ command.ee3:sounds.turned_off=Predvajanje Equivalent Exchange 3 zvokov je izklju
 itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
-version.ee3:init_log_message=Inicializiram oddaljeno preverjanje različice z različico oddaljenega strežnika, ki se nahaja na %1$s
+version.ee3:init_log_message=Inicializiram oddaljeno preverjanje različice z različico oddaljenega strežnika, ki se nahaja na %s
 version.ee3:uninitialized=Oddaljeno preverjanje različice se ni inicializiralo pravilno
-version.ee3:current=Trenutno je v uporabi zadnja različica Equivalent Exchange 3 (%1$s) za %2$s
-version.ee3:outdated=Obstaja nova različica %1$s (%2$s) za %3$s. Dobite jo tukaj: %4$s
+version.ee3:current=Trenutno je v uporabi zadnja različica Equivalent Exchange 3 (%s) za %s
+version.ee3:outdated=Obstaja nova različica %s (%s) za %s. Dobite jo tukaj: %s
 version.ee3:general_error=Napaka pri pridobivanju datoteke z različico z oddaljenega strežnika; poskušam znova
 version.ee3:final_error=Preverjanje različice ustavljeno po treh neuspešnih preverjanjih
-version.ee3:mc_version_not_found=Ne morem najti različice %1$s za %2$s na oddaljenem strežniku
+version.ee3:mc_version_not_found=Ne morem najti različice %s za %s na oddaljenem strežniku
