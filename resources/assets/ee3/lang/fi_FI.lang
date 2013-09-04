@@ -53,10 +53,10 @@ command.ee3.sounds.turned_off=Equivalent Exchange 3 äänet poistettu käytöst�
 itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
-version.init_log_message=Initializing remote version check against remote version authority, located at: %s
-version.uninitialized=Remote version check failed to initialize properly
-version.current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
-version.outdated=A new %s version exists (%s) for %s. Get it here: %s
-version.general_error=Error while connecting to remote version authority file; trying again
-version.final_error=Version check stopping after three unsuccessful connection attempts
-version.mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
+version.init_log_message=Aloitetaan etäversion tarkistusta kohteesta: %s
+version.uninitialized=Etäversion tarkistuksen aloittaminen epäonnistui
+version.current=Käytät tällä hetkellä uusinta (%s) Equivalent Exchange 3 -versiota, joka on tarkoitettu Minecraft %s:lle
+version.outdated=Uusi %s versio on saatavilla (%s) Minecraftin versiolle %s. Lataa se täältä:: %s
+version.general_error=Tapahtui virhe yhdistettäessä etäversion palvelimeen; yritetään uudelleen
+version.final_error=Version tarkistus lopetettu kolmen epäonnistuneen yrityksen jälkeen
+version.mc_version_not_found=%s:a %s:lle ei löytynyt
