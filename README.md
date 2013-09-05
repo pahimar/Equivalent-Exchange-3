@@ -1,5 +1,5 @@
 ## Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**:  [EE3 pre1h for 1.5.1/1.5.2](http://adf.ly/PdBNy)
+**LATEST OFFICIAL VERSION**:  [EE3 pre1h for 1.5.1/1.5.2](http://adf.ly/PdBNy)  
 **WARNING**: The current repository version is highly in development! The last official version is `77c1560c24083d9a6dfe864158eeee70b55088a0`
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
