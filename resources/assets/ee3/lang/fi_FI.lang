@@ -1,0 +1,67 @@
+# Key localizations 
+key.extra=Ekstra
+key.release=Vapauta
+key.toggle=Muuta
+key.charge=Lataa
+
+# Item localizations
+item.ee3:shardMinium.name=Mönjäinen sirpale
+item.ee3:stoneInert.name=Eloton kivi
+item.ee3:stoneMinium.name=Mönjäinen kivi
+item.ee3:stonePhilosophers.name=Viisasten kivi [Ei valmis]
+item.ee3:alchemicalDustAsh.name=Tuhka [Ei valmis]
+item.ee3:alchemicalDustMinium.name=Mönjäinen pöly [Ei valmis]
+item.ee3:alchemicalDustVerdant.name=Vehreä pöly [Ei valmis]
+item.ee3:alchemicalDustAzure.name=Taivaansinen pöly [Ei valmis]
+item.ee3:alchemicalDustAmaranthine.name=Ikikukkaispöly [Ei valmis]
+item.ee3:alchemicalDustIridescent.name=Sateenkaarenkirjava pöly [Ei valmis]
+item.ee3:alchemicalBag.name=Alkeminen pussi [Ei valmis]
+item.ee3:alchemicalChalk.name=Alkeminen liitu [Ei valmis]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Punavesi (Liikkumaton)
+tile.ee3:redWaterFlowing.name=Punavesi (Virtaava)
+tile.ee3:calcinator.name=Kalsinaattori [Ei valmis]
+tile.ee3:aludel.name=Aludeli [Ei valmis]
+tile.ee3:alchemicalChest.name=Alkeminen arkku [Ei valmis]
+tile.ee3:glassBell.name=Lasitiuku [Ei valmis]
+tile.ee3:alchemyTable.name=Alkeminen pöytä [Ei valmis]
+tile.ee3:renderingTank.name=Mallinustankki [Ei valmis]
+
+# GUI localizations
+container.calcinator=Kalsinaattori [Ei valmis]
+container.aludel=Aludeli [Ei valmis]
+container.alchemicalChest=Alkeminen arkku [Ei valmis]
+container.alchemicalBag=Alkeminen pussi [Ei valmis]
+container.glassBell=Lasitiuku [Ei valmis]
+container.ee3:alchemyTable.name=Alkeminen pöytä [Ei valmis]
+container.ee3:renderingTank.name=Mallinustankki [Ei valmis]
+
+# Command localizations
+command.ee3.overlay.turned_on=Kohdistetun transmutoinnin peitevalikko käytössä
+command.ee3.overlay.turned_off=Kohdistetun transmutoinnin peitevalikko poissa käytössä
+command.ee3.overlay.position.top_left=Kohdistetun transmutoinnin peitevalikko asetettu ylös vasemmalle
+command.ee3.overlay.position.top_right=Kohdistetun transmutoinnin peitevalikko asetettu ylös oikealle
+command.ee3.overlay.position.bottom_left=Kohdistetun transmutoinnin peitevalikko asetettu alas vasemmalle
+command.ee3.overlay.position.bottom_right=Kohdistetun transmutoinnin peitevalikko asetettu alas oikealle
+command.ee3.overlay.opacity.usage.additional_text=(missä ### on desimaaliluku väliltä 0.0 ja 1.0) 
+command.ee3.overlay.opacity.updated=Kohdistetun transmutoinnin peitevalikon läpinäkyvyys päivitetty onnistuneesti.
+command.ee3.overlay.scale.usage.additional_text=%s (missä ### on desimaaliluku arvoltaan suurempi kuin 0.0) 
+command.ee3.overlay.scale.updated=Kohdistetun transmutoinnin peitevalikon koko päivitetty onnistuneesti
+command.ee3.particles.turned_on=Equivalent Exchange 3 hiukkaset käytössä
+command.ee3.particles.turned_off=Equivalent Exchange 3 hiukkaset poistettu käytöstä
+command.ee3.sounds.set_to_all=Toistetaan kaikkien pelaajien Equivalent Exchange 3 äänet
+command.ee3.sounds.set_to_self=Toistetaan vain omat Equivalent Exchange 3 äänet
+command.ee3.sounds.turned_off=Equivalent Exchange 3 äänet poistettu käytöstä
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.init_log_message=Aloitetaan etäversion tarkistusta kohteesta: %s
+version.uninitialized=Etäversion tarkistuksen aloittaminen epäonnistui
+version.current=Käytät tällä hetkellä uusinta (%s) Equivalent Exchange 3 -versiota, joka on tarkoitettu Minecraft %s:lle
+version.outdated=Uusi %s versio on saatavilla (%s) Minecraftin versiolle %s. Lataa se täältä:: %s
+version.general_error=Tapahtui virhe yhdistettäessä etäversion palvelimeen; yritetään uudelleen
+version.final_error=Version tarkistus lopetettu kolmen epäonnistuneen yrityksen jälkeen
+version.mc_version_not_found=%s:a %s:lle ei löytynyt
