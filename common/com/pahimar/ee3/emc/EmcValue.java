@@ -1,6 +1,8 @@
 package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.pahimar.ee3.lib.Strings;
@@ -16,94 +18,45 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
-    private float value, recoveryPercentage;
-    private List<EmcComponent> emcComponents;
+    public final float value; 
+    public final float recoveryPercent;
+    private final List<EmcComponent> components;
 
     public EmcValue() {
 
-        value = 0F;
-        recoveryPercentage = 1F;
-        emcComponents = new ArrayList<EmcComponent>();
+        this(0F, 1F, new ArrayList<EmcComponent>());
     }
 
     public EmcValue(float value) {
 
+        this(value, 1F, new ArrayList<EmcComponent>());
+    }
+
+    public EmcValue(float value, float recoveryPercent) {
+        this(value, recoveryPercent, new ArrayList<EmcComponent>());
+    }
+    
+    public EmcValue(float value, List<EmcComponent> components) {
+
+        this(value, 1F, components);
+    }
+
+    public EmcValue(float value, float recoveryPercent, List<EmcComponent> components) {
+
         this.value = value;
-        recoveryPercentage = 1F;
-        emcComponents = new ArrayList<EmcComponent>();
-    }
-
-    public EmcValue(float value, float recoveryPercentage) {
-
-        this.value = value;
-        this.recoveryPercentage = recoveryPercentage;
-        emcComponents = new ArrayList<EmcComponent>();
-    }
-
-    public EmcValue(float value, float recoveryPercentage, List<EmcComponent> emcComponents) {
-
-        this.value = value;
-        this.recoveryPercentage = recoveryPercentage;
-        this.emcComponents = emcComponents;
-    }
-
-    public float getValue() {
-
-        return value;
-    }
-
-    public float getRecoveryPercentage() {
-
-        return recoveryPercentage;
+        this.recoveryPercent = recoveryPercent;
+        this.components = components;
     }
 
     public List<EmcComponent> getComponents() {
-
-        return emcComponents;
+        return components;
     }
+    
+    public EmcComponent getComponentByType(EmcType type) {
 
-    public EmcComponent getComponent(EmcType emcType) {
-
-        for (EmcComponent emcComponent : emcComponents) {
-            if (emcComponent.getEmcType().equals(emcType)) {
-                return emcComponent;
-            }
-        }
-
-        return null;
-    }
-
-    public boolean containsEmcType(EmcType emcType) {
-
-        for (EmcComponent emcComponent : emcComponents) {
-            if (emcComponent.getEmcType().equals(emcType)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void setValue(float cost) {
-
-        this.value = cost;
-    }
-
-    public void setRecoveryPercentage(float recoveryPercentage) {
-
-        this.recoveryPercentage = recoveryPercentage;
-    }
-
-    public void addEmcComponent(EmcComponent emcComponent) {
-
-        if (!containsEmcType(emcComponent.getEmcType())) {
-            emcComponents.add(emcComponent);
-        }
-    }
-
-    public void addEmcComponent(EmcType emcType, float percentage) {
-
-        addEmcComponent(new EmcComponent(emcType, percentage));
+        EmcComponent[] componentArray = (EmcComponent[]) components.toArray();
+        Arrays.sort(componentArray);
+        return componentArray[type.ordinal()];
     }
 
     @Override
@@ -115,13 +68,7 @@ public class EmcValue implements Comparable<EmcValue> {
 
         EmcValue emcValue = (EmcValue) object;
 
-        if (value == emcValue.value) {
-            if (recoveryPercentage == emcValue.recoveryPercentage) {
-                return emcComponents.equals(emcValue.getComponents());
-            }
-        }
-
-        return false;
+        return ((value == emcValue.value) && (recoveryPercent == emcValue.recoveryPercent) && (components.equals(emcValue.getComponents())));
     }
 
     @Override
@@ -129,17 +76,13 @@ public class EmcValue implements Comparable<EmcValue> {
 
         StringBuilder stringBuilder = new StringBuilder();
         
-        stringBuilder.append(String.format("V:%s", value));
-        stringBuilder.append(Strings.TOKEN_DELIMITER);
-        stringBuilder.append(String.format("RP:%s", recoveryPercentage));
-        stringBuilder.append(Strings.TOKEN_DELIMITER);
-        stringBuilder.append("[");
+        stringBuilder.append(String.format("V:%s%sRP:%s%s[", value, Strings.TOKEN_DELIMITER, recoveryPercent, Strings.TOKEN_DELIMITER));
         
-        for (int i = 0; i < emcComponents.size(); i++) {
-            if (i > 0) {
-                stringBuilder.append(Strings.TOKEN_DELIMITER);
-            }
-            stringBuilder.append(String.format("%s:%s", emcComponents.get(i).getEmcType(), emcComponents.get(i).getPercentage()));
+        List<EmcComponent> componentArray = this.components;
+        Collections.sort(componentArray);
+        
+        for (EmcComponent component : componentArray) {
+            stringBuilder.append(String.format("<%s:%s>", component.getType(), component.getRatioWeight()));
         }
         
         stringBuilder.append("]");
@@ -153,8 +96,8 @@ public class EmcValue implements Comparable<EmcValue> {
         int hashCode = 1;
 
         hashCode = 37 * hashCode + Float.floatToIntBits(value);
-        hashCode = 37 * hashCode + Float.floatToIntBits(recoveryPercentage);
-        hashCode = 37 * hashCode + emcComponents.hashCode();
+        hashCode = 37 * hashCode + Float.floatToIntBits(recoveryPercent);
+        hashCode = 37 * hashCode + components.hashCode();
 
         return hashCode;
     }

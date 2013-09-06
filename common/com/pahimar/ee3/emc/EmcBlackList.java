@@ -20,7 +20,6 @@ public class EmcBlackList {
     public static EmcBlackList getInstance() {
 
         if (emcBlackList == null) {
-
             emcBlackList = new EmcBlackList();
             emcBlackList.init();
         }

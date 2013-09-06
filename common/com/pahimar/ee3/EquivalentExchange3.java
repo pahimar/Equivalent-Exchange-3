@@ -100,11 +100,7 @@ public class EquivalentExchange3 {
 		LogHelper.init();
 
 		// Initialize the configuration
-		ConfigurationHandler.init(new File(event.getModConfigurationDirectory()
-				.getAbsolutePath()
-				+ File.separator
-				+ Reference.CHANNEL_NAME
-				+ File.separator + Reference.MOD_ID + ".cfg"));
+		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 
 		// Conduct the version check and log the result
 		VersionHelper.execute();
@@ -161,24 +157,15 @@ public class EquivalentExchange3 {
 		proxy.initRenderingAndTextures();
 
 		// Add in the ability to dye Alchemical Bags
-		CraftingManager.getInstance().getRecipeList()
-				.add(new RecipesAlchemicalBagDyes());
+		CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
 		// Register the Fuel Handler
 		GameRegistry.registerFuelHandler(new FuelHandler());
 
 		// Quick test to see that sending an encoded recipe to be added to the
 		// recipe registry works
-		FMLInterModComms.sendMessage(
-				Reference.MOD_ID,
-				InterModComms.ADD_RECIPE,
-				NBTHelper.encodeRecipeAsNBT(Item.bucketWater,
-						Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-		FMLInterModComms.sendMessage(
-				Reference.MOD_ID,
-				InterModComms.ADD_RECIPE,
-				NBTHelper.encodeRecipeAsNBT(Item.bucketLava,
-						Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+		FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
+		FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
 	}
 
 	@EventHandler
@@ -188,9 +175,7 @@ public class EquivalentExchange3 {
 		AddonHandler.init();
 
 		// Initialize the DynEMC system
-		// TODO Seems like this happens earlier than it should now, investigate
-		// where this should go
-		DynEMC dynEMC = DynEMC.getInstance();
+        DynEMC dynEMC = DynEMC.getInstance();
 	}
 
 	@EventHandler
