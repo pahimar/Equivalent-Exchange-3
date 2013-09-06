@@ -113,44 +113,9 @@ public class ItemUtil {
      *            The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
-    // FIXME Update to correspond with the new Comparator stuff for ItemStacks, and make NBT sensitive
     public static boolean compare(ItemStack first, ItemStack second) {
 
-        // Check to see if either argument is null
-        if ((first != null) && (second != null)) {
-            // Check the item IDs
-            if (first.itemID == second.itemID) {
-                // Check the meta data
-
-                if ((first.getItemDamage() == OreDictionary.WILDCARD_VALUE) || (second.getItemDamage() == OreDictionary.WILDCARD_VALUE)) {
-                    //return true;
-                }
-
-                if (first.getItemDamage() == second.getItemDamage()) {
-                    // Check the stack size
-                    if (first.stackSize == second.stackSize) {
-                        // If at least one of the ItemStacks has a NBTTagCompound, test for equality
-                        if (first.hasTagCompound() || second.hasTagCompound()) {
-
-                            // If one of the stacks has a tag compound, but not both, they are not equal
-                            if (!(first.hasTagCompound() && second.hasTagCompound())) {
-                                return false;
-                            }
-                            // Otherwise, they both have tag compounds and we need to test them for equality
-                            else {
-                                return first.getTagCompound().equals(second.getTagCompound());
-                            }
-                        }
-                        // Otherwise, they must be equal if we have gotten this far (item IDs, meta data, and stack size all match)
-                        else {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
+        return (ItemStackComparator.compare(first, second) == 0);
     }
 
     public static boolean hasColor(ItemStack itemStack) {
@@ -204,50 +169,56 @@ public class ItemUtil {
         }
     }
     
-    // FIXME Make NBT sensitive
     public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>() {
     	
     	public int compare(ItemStack itemStack1, ItemStack itemStack2) {
     		
-    		if (itemStack1.itemID == itemStack2.itemID) {
-    			
-    			if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
-    				
-    				if ((itemStack1.getUnlocalizedName() != null) && (itemStack2.getUnlocalizedName() != null)) {
-    					
-    					if (!(itemStack1.hasTagCompound()) && !(itemStack2.hasTagCompound())) {
-    						return itemStack1.getUnlocalizedName().toLowerCase().compareTo(itemStack2.getUnlocalizedName().toLowerCase());
-    					}
-    					else if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
-    						// TODO We may have to go deeper with comparing NBTTagCompounds
-    						return 0;
-    					}
-    					else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
-    						return 1;
-    					}
-    					else {
-    						return -1;
-    					}
-    				}
-    				else if ((itemStack1.getUnlocalizedName() == null) && (itemStack2.getUnlocalizedName() == null)) {
-    					return 0;
-    				}
-    				else {
-    					if (itemStack1.getUnlocalizedName() == null) {
-    						return -1;
-    					}
-    					else {
-    						return 1;
-    					}
-    				}
-    			}
-    			else {
-    				return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
-    			}
-    		}
-    		else {
-    			return (itemStack1.itemID - itemStack2.itemID);
-    		}
+    	    if (itemStack1 != null && itemStack2 != null) {
+        		// Sort on itemID
+        		if (itemStack1.itemID == itemStack2.itemID) {
+        			
+        			// Then sort on meta
+        			if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
+        				
+        				// Then sort on NBT
+        				if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
+        					
+        					// Then sort on stack size
+        					if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound())) {
+        						return (itemStack1.stackSize - itemStack2.stackSize);
+        					}
+        					else {
+        						return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+        					}
+        				}
+        				else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
+        					return -1;
+        				}
+        				else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
+        					return 1;
+        				}
+        				else {
+        					return (itemStack1.stackSize - itemStack2.stackSize);
+        				}
+        			}
+        			else {
+        				return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+        			}
+        		}
+        		else {
+        			return (itemStack1.itemID - itemStack2.itemID);
+        		}
+        	}
+    	    else if (itemStack1 != null && itemStack2 == null) {
+    	        return -1;
+    	    }
+    	    else if (itemStack1 == null && itemStack2 != null) {
+                return 1;
+            }
+    	    else {
+    	        return 0;
+    	    }
+    	    
     	}
     	
     };

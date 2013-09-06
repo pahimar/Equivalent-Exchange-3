@@ -15,9 +15,9 @@ import com.pahimar.ee3.lib.Reference;
 public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
     private int stackSize;
-    private ItemStack itemStack;
-    private OreStack oreStack;
-    private EnergyStack energyStack;
+    private final ItemStack itemStack;
+    private final OreStack oreStack;
+    private final EnergyStack energyStack;
 
     /**
      * Creates a new CustomWrappedStack object which wraps the given input.
@@ -32,7 +32,8 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     public CustomWrappedStack(Object object) {
 
         /*
-         * If we are given an Item or a Block, convert it to an ItemStack for further inspection
+         * If we are given an Item or a Block, convert it to an ItemStack for
+         * further inspection
          */
         if (object instanceof Item) {
             object = new ItemStack((Item) object);
@@ -40,7 +41,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         else if (object instanceof Block) {
             object = new ItemStack((Block) object);
         }
-        
+
         /*
          * We are given an ItemStack to wrap
          */
@@ -88,19 +89,15 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
             ArrayList<?> objectList = (ArrayList<?>) object;
 
-            if (!objectList.isEmpty()) {
-                for (Object listElement : objectList) {
-                    if (listElement instanceof ItemStack) {
-                        ItemStack stack = (ItemStack) listElement;
+            OreStack tempOreStack = getOreStackFromList(objectList);
 
-                        if (OreDictionary.getOreID(stack) != Reference.ORE_DICTIONARY_NOT_FOUND) {
-                            oreStack = new OreStack(stack);
-                            stackSize = oreStack.stackSize;
-                            oreStack.stackSize = 1;
-                            break;
-                        }
-                    }
-                }
+            if (tempOreStack != null) {
+                oreStack = new OreStack(tempOreStack.oreName, 1);
+                stackSize = tempOreStack.stackSize;
+            }
+            else {
+                oreStack = null;
+                stackSize = -1;
             }
 
             energyStack = null;
@@ -117,7 +114,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         }
         else if (object instanceof CustomWrappedStack) {
             CustomWrappedStack wrappedStack = (CustomWrappedStack) object;
-            
+
             itemStack = wrappedStack.itemStack;
             oreStack = wrappedStack.oreStack;
             energyStack = wrappedStack.energyStack;
@@ -127,6 +124,9 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
          * Else, we are given something we cannot wrap
          */
         else {
+            itemStack = null;
+            oreStack = null;
+            energyStack = null;
             stackSize = -1;
         }
     }
@@ -162,15 +162,12 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
      */
     public Object getWrappedStack() {
 
-        if (itemStack != null) {
+        if (itemStack != null)
             return itemStack;
-        }
-        else if (oreStack != null) {
+        else if (oreStack != null)
             return oreStack;
-        }
-        else if (energyStack != null) {
+        else if (energyStack != null)
             return energyStack;
-        }
 
         return null;
     }
@@ -178,35 +175,20 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof CustomWrappedStack))
+        if (!(object instanceof CustomWrappedStack)) {
             return false;
+        }
 
         CustomWrappedStack customWrappedStack = (CustomWrappedStack) object;
 
-        if (itemStack != null) {
-            if (customWrappedStack.itemStack != null)
-                return ItemUtil.compare(itemStack, customWrappedStack.itemStack) && stackSize == customWrappedStack.itemStack.stackSize;
-            else if (customWrappedStack.oreStack != null) {
-                for (ItemStack oreDictItemStack : OreDictionary.getOres(customWrappedStack.oreStack.oreName)) {
-                    if (ItemUtil.compare(itemStack, oreDictItemStack) && stackSize == customWrappedStack.stackSize)
-                        return true;
-                }
-            }
+        if ((this.getWrappedStack() instanceof ItemStack) && (customWrappedStack.getWrappedStack() instanceof ItemStack)) {
+            return (ItemUtil.compare(itemStack, customWrappedStack.itemStack) && (stackSize == customWrappedStack.itemStack.stackSize));
         }
-        else if (oreStack != null) {
-            if (customWrappedStack.itemStack != null) {
-                for (ItemStack oreDictItemStack : OreDictionary.getOres(oreStack.oreName)) {
-                    if (ItemUtil.compare(customWrappedStack.itemStack, oreDictItemStack) && stackSize == customWrappedStack.stackSize)
-                        return true;
-                }
-            }
-            else if (customWrappedStack.oreStack != null)
-                return oreStack.oreName.equalsIgnoreCase(customWrappedStack.oreStack.oreName) && stackSize == customWrappedStack.stackSize;
+        else if ((this.getWrappedStack() instanceof OreStack) && (customWrappedStack.getWrappedStack() instanceof OreStack)) {
+            return (oreStack.equals(customWrappedStack.getWrappedStack()) && (stackSize == customWrappedStack.stackSize));
         }
-        else if (energyStack != null) {
-            if (customWrappedStack.energyStack != null) {
-                return energyStack.energyName.equalsIgnoreCase(customWrappedStack.energyStack.energyName) && stackSize == customWrappedStack.stackSize;
-            }
+        else if ((this.getWrappedStack() instanceof EnergyStack) && (customWrappedStack.getWrappedStack() instanceof EnergyStack)) {
+            return (energyStack.equals(customWrappedStack.energyStack) && (stackSize == customWrappedStack.stackSize));
         }
 
         return false;
@@ -218,7 +200,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
@@ -227,18 +209,18 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyStack.energyName));
         }
         else {
-        	stringBuilder.append("null");
+            stringBuilder.append("null");
         }
 
         return stringBuilder.toString();
     }
-    
+
     public String encodeAsPropertyKey() {
-        
+
         StringBuilder stringBuilder = new StringBuilder();
 
         if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", this.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
+            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
@@ -268,110 +250,105 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             }
 
             try {
-            	if (itemStack.getUnlocalizedName() != null) {
-            		hashCode = 37 * hashCode + itemStack.getUnlocalizedName().hashCode();
-            	}
-            } catch (ArrayIndexOutOfBoundsException e) { 
-            	
+                if (itemStack.getUnlocalizedName() != null) {
+                    hashCode = 37 * hashCode + itemStack.getUnlocalizedName().hashCode();
+                }
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+
             }
         }
         else if (oreStack != null) {
-        	if (oreStack.oreName != null) {
-        		hashCode = 37 * hashCode + oreStack.oreName.hashCode();
-        	}
+            if (oreStack.oreName != null) {
+                hashCode = 37 * hashCode + oreStack.oreName.hashCode();
+            }
         }
         else if (energyStack != null) {
-        	if (energyStack.energyName != null) {
-        		hashCode = 37 * hashCode + energyStack.energyName.hashCode();
-        	}
+            if (energyStack.energyName != null) {
+                hashCode = 37 * hashCode + energyStack.energyName.hashCode();
+            }
         }
 
         return hashCode;
     }
-    
+
     public static boolean canBeWrapped(Object object) {
-        
-        return (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block);
+
+        return object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block;
     }
 
-	@Override
-	/*
-	 * Sort order (class-wise) goes null, EnergyStack, OreStack, ItemStack
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	public int compareTo(CustomWrappedStack customWrappedStack) {
+    @Override
+    /*
+     * Sort order (class-wise) goes null, EnergyStack, OreStack, ItemStack
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    public int compareTo(CustomWrappedStack customWrappedStack) {
 
-		if (this.getWrappedStack() instanceof EnergyStack) {
-		
-			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
-				
-				if (this.energyStack.equals(customWrappedStack.energyStack)) {
-					return (this.stackSize - customWrappedStack.stackSize);
-				}
-				else {
-					return this.energyStack.compareTo(customWrappedStack.energyStack);
-				}
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
-				return -1;
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
-				return -1;
-			}
-			else {
-				return 1;
-			}
-		}
-		else if (this.getWrappedStack() instanceof OreStack) {
-			
-			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
-				return 1;
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
-				
-				if (this.oreStack.equals(customWrappedStack.oreStack)) {
-					return (this.stackSize - customWrappedStack.stackSize);
-				}
-				else {
-					return this.oreStack.compareTo(customWrappedStack.oreStack);
-				}
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
-				return -1;
-			}
-			else {
-				return 1;
-			}
-		}
-		else if (this.getWrappedStack() instanceof ItemStack) {
-			
-			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
-				return 1;
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
-				
-				return 1;
-			}
-			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
-				
-				if (ItemUtil.compare(this.itemStack, customWrappedStack.itemStack)) {
-					return (this.stackSize - customWrappedStack.stackSize);
-				}
-				else {
-					return ItemUtil.ItemStackComparator.compare(this.itemStack, customWrappedStack.itemStack);
-				}
-			}
-			else {
-				return 1;
-			}
-		}
-		else {
-			if (customWrappedStack.getWrappedStack() != null) {
-				return -1;
-			}
-			else {
-				return 0;
-			}
-		}
-	}
+        if (this.getWrappedStack() instanceof EnergyStack) {
+
+            if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
+                if (energyStack.equals(customWrappedStack.energyStack))
+                    return stackSize - customWrappedStack.stackSize;
+                else
+                    return energyStack.compareTo(customWrappedStack.energyStack);
+            }
+            else if (customWrappedStack.getWrappedStack() instanceof OreStack)
+                return -1;
+            else if (customWrappedStack.getWrappedStack() instanceof ItemStack)
+                return -1;
+            else
+                return 1;
+        }
+        else if (this.getWrappedStack() instanceof OreStack) {
+
+            if (customWrappedStack.getWrappedStack() instanceof EnergyStack)
+                return 1;
+            else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
+                if (oreStack.equals(customWrappedStack.oreStack))
+                    return stackSize - customWrappedStack.stackSize;
+                else
+                    return oreStack.compareTo(customWrappedStack.oreStack);
+            }
+            else if (customWrappedStack.getWrappedStack() instanceof ItemStack)
+                return -1;
+            else
+                return 1;
+        }
+        else if (this.getWrappedStack() instanceof ItemStack) {
+
+            if (customWrappedStack.getWrappedStack() instanceof EnergyStack)
+                return 1;
+            else if (customWrappedStack.getWrappedStack() instanceof OreStack)
+                return 1;
+            else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
+                if (ItemUtil.compare(itemStack, customWrappedStack.itemStack))
+                    return stackSize - customWrappedStack.stackSize;
+                else
+                    return ItemUtil.ItemStackComparator.compare(itemStack, customWrappedStack.itemStack);
+            }
+            else
+                return 1;
+        }
+        else {
+            if (customWrappedStack.getWrappedStack() != null)
+                return -1;
+            else
+                return 0;
+        }
+    }
+
+    private static OreStack getOreStackFromList(ArrayList<?> objectList) {
+
+        for (Object listElement : objectList) {
+            if (listElement instanceof ItemStack) {
+                ItemStack stack = (ItemStack) listElement;
+
+                if (OreDictionary.getOreID(stack) != Reference.ORE_DICTIONARY_NOT_FOUND) {
+                    return new OreStack(stack);
+                }
+            }
+        }
+
+        return null;
+    }
 }

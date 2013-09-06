@@ -16,12 +16,12 @@ public class EnergyStack implements Comparable<EnergyStack> {
 
     public EnergyStack() {
 
-        this("", 0);
+        this(null, 0);
     }
 
     public EnergyStack(String energyName) {
 
-        this(energyName, 1);
+        this(energyName, 0);
     }
 
     @Override
@@ -43,18 +43,41 @@ public class EnergyStack implements Comparable<EnergyStack> {
 
         EnergyStack energyStack = (EnergyStack) object;
 
-        return (this.stackSize == energyStack.stackSize && this.energyName.equalsIgnoreCase(energyStack.energyName));
+        if ((this.energyName != null) && (energyStack.energyName != null)) {
+            return (stackSize == energyStack.stackSize) && energyName.equalsIgnoreCase(energyStack.energyName);
+        }
+        else if ((this.energyName == null) && (energyStack.energyName == null)) {
+            return (stackSize == energyStack.stackSize);
+        }
+        else {
+            return false;
+        }
     }
 
-	@Override
-	public int compareTo(EnergyStack energyStack) {
+    @Override
+    public int compareTo(EnergyStack energyStack) {
 
-		if (this.energyName.equalsIgnoreCase(energyStack.energyName)) {
-			return (this.stackSize - energyStack.stackSize);
-		}
-		else {
-			return this.energyName.toLowerCase().compareTo(energyStack.energyName.toLowerCase());
-		}
-	}
-
+        if (energyStack != null) {
+            if ((this.energyName != null) && (energyStack.energyName != null)) {
+                if (this.energyName.equalsIgnoreCase(energyStack.energyName)) {
+                    return (this.stackSize - energyStack.stackSize);
+                }
+                else {
+                    return this.energyName.compareToIgnoreCase(energyStack.energyName);
+                }
+            }
+            else if ((this.energyName != null) && (energyStack.energyName == null)) {
+                return 1;
+            }
+            else if ((this.energyName == null) && (energyStack.energyName != null)) {
+                return -1;
+            }
+            else {
+                return (this.stackSize - energyStack.stackSize);
+            }
+        }
+        else {
+            return 1;
+        }
+    }
 }
