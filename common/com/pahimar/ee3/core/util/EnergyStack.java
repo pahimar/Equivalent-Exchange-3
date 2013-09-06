@@ -1,6 +1,6 @@
 package com.pahimar.ee3.core.util;
 
-public class EnergyStack {
+public class EnergyStack implements Comparable<EnergyStack> {
 
     public static final String VANILLA_SMELTING_ENERGY_NAME = "vanillaFuelValueUnits";
     public static final int VANILLA_SMELTING_ENERGY_THRESHOLD = 200;
@@ -45,5 +45,16 @@ public class EnergyStack {
 
         return (this.stackSize == energyStack.stackSize && this.energyName.equalsIgnoreCase(energyStack.energyName));
     }
+
+	@Override
+	public int compareTo(EnergyStack energyStack) {
+
+		if (this.energyName.equalsIgnoreCase(energyStack.energyName)) {
+			return (this.stackSize - energyStack.stackSize);
+		}
+		else {
+			return this.energyName.toLowerCase().compareTo(energyStack.energyName.toLowerCase());
+		}
+	}
 
 }

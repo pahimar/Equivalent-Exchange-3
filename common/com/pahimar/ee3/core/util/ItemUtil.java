@@ -1,5 +1,7 @@
 package com.pahimar.ee3.core.util;
 
+import java.util.Comparator;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -111,6 +113,7 @@ public class ItemUtil {
      *            The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
+    // FIXME Update to correspond with the new Comparator stuff for ItemStacks, and make NBT sensitive
     public static boolean compare(ItemStack first, ItemStack second) {
 
         // Check to see if either argument is null
@@ -200,5 +203,52 @@ public class ItemUtil {
             }
         }
     }
-
+    
+    // FIXME Make NBT sensitive
+    public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>() {
+    	
+    	public int compare(ItemStack itemStack1, ItemStack itemStack2) {
+    		
+    		if (itemStack1.itemID == itemStack2.itemID) {
+    			
+    			if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
+    				
+    				if ((itemStack1.getUnlocalizedName() != null) && (itemStack2.getUnlocalizedName() != null)) {
+    					
+    					if (!(itemStack1.hasTagCompound()) && !(itemStack2.hasTagCompound())) {
+    						return itemStack1.getUnlocalizedName().toLowerCase().compareTo(itemStack2.getUnlocalizedName().toLowerCase());
+    					}
+    					else if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
+    						// TODO We may have to go deeper with comparing NBTTagCompounds
+    						return 0;
+    					}
+    					else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
+    						return 1;
+    					}
+    					else {
+    						return -1;
+    					}
+    				}
+    				else if ((itemStack1.getUnlocalizedName() == null) && (itemStack2.getUnlocalizedName() == null)) {
+    					return 0;
+    				}
+    				else {
+    					if (itemStack1.getUnlocalizedName() == null) {
+    						return -1;
+    					}
+    					else {
+    						return 1;
+    					}
+    				}
+    			}
+    			else {
+    				return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+    			}
+    		}
+    		else {
+    			return (itemStack1.itemID - itemStack2.itemID);
+    		}
+    	}
+    	
+    };
 }

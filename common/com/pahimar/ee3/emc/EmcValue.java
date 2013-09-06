@@ -14,7 +14,7 @@ import com.pahimar.ee3.lib.Strings;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class EmcValue {
+public class EmcValue implements Comparable<EmcValue> {
 
     private float value, recoveryPercentage;
     private List<EmcComponent> emcComponents;
@@ -158,4 +158,10 @@ public class EmcValue {
 
         return hashCode;
     }
+
+	@Override
+	public int compareTo(EmcValue o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

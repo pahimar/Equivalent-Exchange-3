@@ -232,7 +232,7 @@ public class RecipeRegistry {
                             }
                         }
                         else if (wrappedInputStack.getWrappedStack() instanceof OreStack && collatedStacks.get(i).getWrappedStack() instanceof OreStack) {
-                            if (OreStack.compareStacks((OreStack) wrappedInputStack.getWrappedStack(), (OreStack) collatedStacks.get(i).getWrappedStack())) {
+                            if (OreStack.compareOreNames((OreStack) wrappedInputStack.getWrappedStack(), (OreStack) collatedStacks.get(i).getWrappedStack())) {
                                 collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + wrappedInputStack.getStackSize());
                                 found = true;
                             }

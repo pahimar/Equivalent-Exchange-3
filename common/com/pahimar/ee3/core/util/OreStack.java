@@ -1,12 +1,11 @@
 package com.pahimar.ee3.core.util;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class OreStack implements Comparator<OreStack> {
+public class OreStack implements Comparable<OreStack> {
 
     public String oreName;
     public int stackSize;
@@ -71,27 +70,27 @@ public class OreStack implements Comparator<OreStack> {
 
         OreStack oreStackObject = (OreStack) object;
 
-        return stackSize == oreStackObject.stackSize && oreName.equals(oreStackObject.oreName);
+        return stackSize == oreStackObject.stackSize && oreName.equalsIgnoreCase(oreStackObject.oreName);
     }
 
-    @Override
-    public int compare(OreStack oreStack1, OreStack oreStack2) {
+    public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2) {
 
-        if (oreStack1 != null && oreStack2 != null) {
-            if (oreStack1.oreName.equals(oreStack2.oreName))
-                return 0;
+    	if (oreStack1 != null && oreStack2 != null) {
+            if (oreStack1.oreName.equalsIgnoreCase(oreStack2.oreName))
+                return true;
         }
 
-        return -1;
+        return false;
     }
 
-    public static boolean compareStacks(OreStack oreStack1, OreStack oreStack2) {
-
-        return oreStack1.compareToStack(oreStack2);
-    }
-
-    public boolean compareToStack(OreStack oreStack) {
-
-        return compare(this, oreStack) == 0;
-    }
+	@Override
+	public int compareTo(OreStack oreStack) {
+		
+		if (this.oreName.equalsIgnoreCase(oreStack.oreName)) {
+			return (this.stackSize - oreStack.stackSize);
+		}
+		else {
+			return this.oreName.toLowerCase().compareTo(oreStack.oreName.toLowerCase());
+		}
+	}
 }

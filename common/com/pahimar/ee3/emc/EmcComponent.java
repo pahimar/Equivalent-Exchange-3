@@ -1,6 +1,6 @@
 package com.pahimar.ee3.emc;
 
-public class EmcComponent {
+public class EmcComponent implements Comparable<EmcComponent> {
 
     private final EmcType emcType;
     private final float percentage;
@@ -43,4 +43,10 @@ public class EmcComponent {
 
         return stringBuilder.toString();
     }
+
+	@Override
+	public int compareTo(EmcComponent o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

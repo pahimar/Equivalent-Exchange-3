@@ -12,7 +12,7 @@ import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.lib.Reference;
 
-public class CustomWrappedStack {
+public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
     private int stackSize;
     private ItemStack itemStack;
@@ -293,4 +293,85 @@ public class CustomWrappedStack {
         
         return (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block);
     }
+
+	@Override
+	/*
+	 * Sort order (class-wise) goes null, EnergyStack, OreStack, ItemStack
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CustomWrappedStack customWrappedStack) {
+
+		if (this.getWrappedStack() instanceof EnergyStack) {
+		
+			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
+				
+				if (this.energyStack.equals(customWrappedStack.energyStack)) {
+					return (this.stackSize - customWrappedStack.stackSize);
+				}
+				else {
+					return this.energyStack.compareTo(customWrappedStack.energyStack);
+				}
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
+				return -1;
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
+				return -1;
+			}
+			else {
+				return 1;
+			}
+		}
+		else if (this.getWrappedStack() instanceof OreStack) {
+			
+			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
+				return 1;
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
+				
+				if (this.oreStack.equals(customWrappedStack.oreStack)) {
+					return (this.stackSize - customWrappedStack.stackSize);
+				}
+				else {
+					return this.oreStack.compareTo(customWrappedStack.oreStack);
+				}
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
+				return -1;
+			}
+			else {
+				return 1;
+			}
+		}
+		else if (this.getWrappedStack() instanceof ItemStack) {
+			
+			if (customWrappedStack.getWrappedStack() instanceof EnergyStack) {
+				return 1;
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof OreStack) {
+				
+				return 1;
+			}
+			else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
+				
+				if (ItemUtil.compare(this.itemStack, customWrappedStack.itemStack)) {
+					return (this.stackSize - customWrappedStack.stackSize);
+				}
+				else {
+					return ItemUtil.ItemStackComparator.compare(this.itemStack, customWrappedStack.itemStack);
+				}
+			}
+			else {
+				return 1;
+			}
+		}
+		else {
+			if (customWrappedStack.getWrappedStack() != null) {
+				return -1;
+			}
+			else {
+				return 0;
+			}
+		}
+	}
 }
