@@ -31,11 +31,11 @@ public class ItemUtil {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("ItemStack(");
-        
+
         if (itemStack != null) {
-            
+
             stringBuilder.append(String.format("%s", encodeItemStackAsString(itemStack)));
-            
+
             if (itemStack.hasTagCompound()) {
                 stringBuilder.append(String.format("%s%s", Strings.TOKEN_DELIMITER, NBTHelper.encodeNBTAsString((itemStack.getTagCompound()))));
             }
@@ -43,7 +43,7 @@ public class ItemUtil {
         else {
             stringBuilder.append("null");
         }
-        
+
         stringBuilder.append(")");
 
         return stringBuilder.toString();
@@ -52,54 +52,56 @@ public class ItemUtil {
     public static String encodeItemStackAsString(ItemStack itemStack) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         stringBuilder.append(String.format("%s%s%s", itemStack.itemID, Strings.TOKEN_DELIMITER, itemStack.getItemDamage()));
-        
+
         return stringBuilder.toString();
     }
-    
+
     public static ItemStack decodeItemStackFromString(String encodedItemStack) {
-        
+
         ItemStack decodedItemStack = null;
-        
+
         final int UNDEFINED = -1;
         final int ERROR = -2;
-        
+
         int itemId = UNDEFINED;
         int meta = UNDEFINED;
-        
+
         String[] splitString = encodedItemStack.split(Strings.TOKEN_DELIMITER);
-        
+
         // Grab itemId
         if (splitString.length >= 1) {
-            
+
             try {
                 itemId = Integer.parseInt(splitString[0]);
-            } catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
                 itemId = ERROR;
             }
         }
-        
+
         // Grab meta
         if (splitString.length >= 2) {
-            
+
             try {
                 meta = Integer.parseInt(splitString[1]);
-            } catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
                 meta = ERROR;
             }
         }
-        
+
         if (meta == UNDEFINED) {
             meta = OreDictionary.WILDCARD_VALUE;
         }
-        
+
         if (itemId != UNDEFINED && itemId != ERROR) {
             if (meta != ERROR) {
                 decodedItemStack = new ItemStack(itemId, 1, meta);
             }
         }
-        
+
         return decodedItemStack;
     }
 
@@ -168,58 +170,58 @@ public class ItemUtil {
             }
         }
     }
-    
+
     public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>() {
-    	
-    	public int compare(ItemStack itemStack1, ItemStack itemStack2) {
-    		
-    	    if (itemStack1 != null && itemStack2 != null) {
-        		// Sort on itemID
-        		if (itemStack1.itemID == itemStack2.itemID) {
-        			
-        			// Then sort on meta
-        			if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
-        				
-        				// Then sort on NBT
-        				if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
-        					
-        					// Then sort on stack size
-        					if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound())) {
-        						return (itemStack1.stackSize - itemStack2.stackSize);
-        					}
-        					else {
-        						return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
-        					}
-        				}
-        				else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
-        					return -1;
-        				}
-        				else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
-        					return 1;
-        				}
-        				else {
-        					return (itemStack1.stackSize - itemStack2.stackSize);
-        				}
-        			}
-        			else {
-        				return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
-        			}
-        		}
-        		else {
-        			return (itemStack1.itemID - itemStack2.itemID);
-        		}
-        	}
-    	    else if (itemStack1 != null && itemStack2 == null) {
-    	        return -1;
-    	    }
-    	    else if (itemStack1 == null && itemStack2 != null) {
+
+        public int compare(ItemStack itemStack1, ItemStack itemStack2) {
+
+            if (itemStack1 != null && itemStack2 != null) {
+                // Sort on itemID
+                if (itemStack1.itemID == itemStack2.itemID) {
+
+                    // Then sort on meta
+                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage()) {
+
+                        // Then sort on NBT
+                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
+
+                            // Then sort on stack size
+                            if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound())) {
+                                return (itemStack1.stackSize - itemStack2.stackSize);
+                            }
+                            else {
+                                return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                            }
+                        }
+                        else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
+                            return -1;
+                        }
+                        else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
+                            return 1;
+                        }
+                        else {
+                            return (itemStack1.stackSize - itemStack2.stackSize);
+                        }
+                    }
+                    else {
+                        return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+                    }
+                }
+                else {
+                    return (itemStack1.itemID - itemStack2.itemID);
+                }
+            }
+            else if (itemStack1 != null && itemStack2 == null) {
+                return -1;
+            }
+            else if (itemStack1 == null && itemStack2 != null) {
                 return 1;
             }
-    	    else {
-    	        return 0;
-    	    }
-    	    
-    	}
-    	
+            else {
+                return 0;
+            }
+
+        }
+
     };
 }

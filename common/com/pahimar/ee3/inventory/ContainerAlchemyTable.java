@@ -8,17 +8,18 @@ import com.pahimar.ee3.tileentity.TileAlchemyTable;
 
 public class ContainerAlchemyTable extends Container {
 
-	private TileAlchemyTable tileAlchemyTable;
-	
-	public ContainerAlchemyTable(InventoryPlayer inventoryPlayer, TileAlchemyTable tileAlchemyTable) {
-		
-		this.tileAlchemyTable = tileAlchemyTable;
-	}
-	
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    private TileAlchemyTable tileAlchemyTable;
+
+    public ContainerAlchemyTable(InventoryPlayer inventoryPlayer, TileAlchemyTable tileAlchemyTable) {
+
+        this.tileAlchemyTable = tileAlchemyTable;
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

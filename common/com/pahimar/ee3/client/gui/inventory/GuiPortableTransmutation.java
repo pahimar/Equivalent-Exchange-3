@@ -3,6 +3,7 @@ package com.pahimar.ee3.client.gui.inventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.lib.Strings;

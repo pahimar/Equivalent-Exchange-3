@@ -39,7 +39,7 @@ public class RecipesVanilla {
                 ItemStack recipeOutput = recipe.getRecipeOutput();
 
                 if (recipeOutput != null) {
-                	
+
                     ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
                     vanillaRecipes.put(new CustomWrappedStack(recipeOutput), recipeInputs);
                 }

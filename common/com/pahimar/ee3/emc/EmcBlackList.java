@@ -35,12 +35,12 @@ public class EmcBlackList {
     public boolean add(Object object) {
 
         boolean wasAdded = false;
-        
+
         if (CustomWrappedStack.canBeWrapped(object)) {
-            
+
             CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
             wrappedStack.setStackSize(1);
-    
+
             if (!stackBlackList.contains(wrappedStack)) {
                 stackBlackList.add(wrappedStack);
                 wasAdded = true;
@@ -53,10 +53,10 @@ public class EmcBlackList {
     public boolean contains(Object object) {
 
         if (CustomWrappedStack.canBeWrapped(object)) {
-            
+
             CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
             wrappedStack.setStackSize(1);
-            
+
             return stackBlackList.contains(wrappedStack);
         }
 
@@ -66,12 +66,12 @@ public class EmcBlackList {
     public boolean remove(Object object) {
 
         boolean wasRemoved = false;
-        
+
         if (CustomWrappedStack.canBeWrapped(object)) {
-            
+
             CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
             wrappedStack.setStackSize(1);
-    
+
             if (stackBlackList.contains(wrappedStack)) {
                 stackBlackList.remove(wrappedStack);
                 wasRemoved = true;

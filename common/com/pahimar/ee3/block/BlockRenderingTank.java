@@ -11,27 +11,27 @@ import com.pahimar.ee3.tileentity.TileRenderingTank;
 
 public class BlockRenderingTank extends BlockEE {
 
-	public BlockRenderingTank(int id) {
-		
-		super(id, Material.anvil);
-		this.setUnlocalizedName(Strings.RENDERING_TANK_NAME);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 3.0F, 1.0F);
+    public BlockRenderingTank(int id) {
+
+        super(id, Material.anvil);
+        this.setUnlocalizedName(Strings.RENDERING_TANK_NAME);
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 3.0F, 1.0F);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-	}
-	
-	@Override
+    }
+
+    @Override
     public String getUnlocalizedName() {
-    	
+
         StringBuilder unlocalizedName = new StringBuilder();
-        
+
         unlocalizedName.append("tile.");
         unlocalizedName.append(Strings.RESOURCE_PREFIX);
         unlocalizedName.append(Strings.RENDERING_TANK_NAME);
-        
+
         return unlocalizedName.toString();
     }
-	
-	@Override
+
+    @Override
     public boolean renderAsNormalBlock() {
 
         return false;
@@ -49,10 +49,10 @@ public class BlockRenderingTank extends BlockEE {
         return RenderIds.renderingTank;
     }
 
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		
-		return new TileRenderingTank();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+
+        return new TileRenderingTank();
+    }
 
 }

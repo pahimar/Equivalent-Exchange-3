@@ -16,16 +16,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
 
-	private ModelRenderingTank modelRenderingTank = new ModelRenderingTank();
-	
-	@Override
-	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
+    private ModelRenderingTank modelRenderingTank = new ModelRenderingTank();
 
-		if (tileEntity instanceof TileRenderingTank) {
+    @Override
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
 
-			GL11.glDisable(GL11.GL_LIGHTING);
+        if (tileEntity instanceof TileRenderingTank) {
+
+            GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
-			
+
             GL11.glPushMatrix();
 
             // Scale, Translate, Rotate
@@ -38,12 +38,12 @@ public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
 
             // Render
             modelRenderingTank.render();
-            
+
             GL11.glPopMatrix();
-            
+
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_LIGHTING);
         }
-	}
+    }
 
 }

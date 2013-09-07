@@ -15,7 +15,7 @@ public class Strings {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
     public static final String TOKEN_DELIMITER = ",";
-    
+
     /* Localization Prefixes */
     public static final String RESOURCE_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 

@@ -47,9 +47,9 @@ public class GuiAlchemicalChest extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        
+
         this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
-        
+
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);

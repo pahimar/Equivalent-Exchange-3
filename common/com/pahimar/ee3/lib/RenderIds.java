@@ -17,5 +17,5 @@ public class RenderIds {
     public static int glassBell;
     public static int alchemyTable;
     public static int renderingTank;
-    
+
 }

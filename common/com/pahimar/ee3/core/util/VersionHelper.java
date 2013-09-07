@@ -132,7 +132,7 @@ public class VersionHelper implements Runnable {
     public static String getResultMessage() {
 
         if (result == UNINITIALIZED) {
-        	return StatCollector.translateToLocal(Strings.UNINITIALIZED_MESSAGE);
+            return StatCollector.translateToLocal(Strings.UNINITIALIZED_MESSAGE);
         }
         else if (result == CURRENT) {
             return StatCollector.translateToLocalFormatted(Strings.CURRENT_MESSAGE, Reference.MOD_NAME, Loader.instance().getMCVersionString());
@@ -141,16 +141,16 @@ public class VersionHelper implements Runnable {
             return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-        	return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
+            return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
         else if (result == ERROR) {
-        	return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
+            return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
         else if (result == FINAL_ERROR) {
-        	return StatCollector.translateToLocal(Strings.FINAL_ERROR_MESSAGE);
+            return StatCollector.translateToLocal(Strings.FINAL_ERROR_MESSAGE);
         }
         else if (result == MC_VERSION_NOT_FOUND) {
-        	return StatCollector.translateToLocalFormatted(Strings.MC_VERSION_NOT_FOUND, Reference.MOD_NAME, Loader.instance().getMCVersionString());
+            return StatCollector.translateToLocalFormatted(Strings.MC_VERSION_NOT_FOUND, Reference.MOD_NAME, Loader.instance().getMCVersionString());
         }
         else {
             result = ERROR;
@@ -160,11 +160,7 @@ public class VersionHelper implements Runnable {
 
     public static String getResultMessageForClient() {
 
-        return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE,
-        		Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, 
-        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, 
-        		Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, 
-        		Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
+        return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
     }
 
     public static byte getResult() {

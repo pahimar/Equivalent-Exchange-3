@@ -10,5 +10,5 @@ public class Models {
     public static final String GLASS_BELL = MODEL_LOCATION + "aludel.obj";
     public static final String ALCHEMY_TABLE = MODEL_LOCATION + "alchemyTable.obj";
     public static final String RENDERING_TANK = MODEL_LOCATION + "renderingTank.obj";
-    
+
 }

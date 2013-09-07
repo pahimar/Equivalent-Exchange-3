@@ -18,7 +18,7 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
-    public final float value; 
+    public final float value;
     public final float recoveryPercent;
     private final List<EmcComponent> components;
 
@@ -33,10 +33,10 @@ public class EmcValue implements Comparable<EmcValue> {
     }
 
     public EmcValue(float value, float recoveryPercent) {
-    	
+
         this(value, recoveryPercent, new ArrayList<EmcComponent>());
     }
-    
+
     public EmcValue(float value, List<EmcComponent> components) {
 
         this(value, 1F, collateComponents(components));
@@ -50,10 +50,10 @@ public class EmcValue implements Comparable<EmcValue> {
     }
 
     public List<EmcComponent> getComponents() {
-        
-    	return components;
+
+        return components;
     }
-    
+
     public EmcComponent getComponentByType(EmcType type) {
 
         EmcComponent[] componentArray = (EmcComponent[]) components.toArray();
@@ -77,25 +77,25 @@ public class EmcValue implements Comparable<EmcValue> {
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         stringBuilder.append(String.format("V:%s%sRP:%s%s[", value, Strings.TOKEN_DELIMITER, recoveryPercent, Strings.TOKEN_DELIMITER));
-        
+
         List<EmcComponent> componentArray = this.components;
         Collections.sort(componentArray);
-        
+
         int i = 0;
-        
+
         for (EmcComponent component : componentArray) {
-        
-        	stringBuilder.append(String.format("%s:%s", component.getType(), component.getRatioWeight()));
-        	
-        	i++;
-            
-        	if (i < componentArray.size()) {
-            	stringBuilder.append(String.format("%s", Strings.TOKEN_DELIMITER));
+
+            stringBuilder.append(String.format("%s:%s", component.getType(), component.getRatioWeight()));
+
+            i++;
+
+            if (i < componentArray.size()) {
+                stringBuilder.append(String.format("%s", Strings.TOKEN_DELIMITER));
             }
         }
-        
+
         stringBuilder.append("]");
 
         return stringBuilder.toString();
@@ -113,42 +113,42 @@ public class EmcValue implements Comparable<EmcValue> {
         return hashCode;
     }
 
-	@Override
-	public int compareTo(EmcValue emcValue) {
-		
-		if (Float.compare(this.value, emcValue.value) == 0) {
-			if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
-				return (this.components.hashCode() - emcValue.components.hashCode());
-			}
-			else {
-				return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
-			}
-		}
-		else {
-			return Float.compare(this.value, emcValue.value);
-		}
-	}
-	
-	private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents) {
-		
-		Integer[] componentCount = new Integer[7];
-		
-		for (EmcComponent emcComponent : uncollatedComponents) {
-			if (componentCount[emcComponent.getType().ordinal()] == null) {
-				componentCount[emcComponent.getType().ordinal()] = new Integer(0);
-			}
-			
-			componentCount[emcComponent.getType().ordinal()] = new Integer(componentCount[emcComponent.getType().ordinal()].intValue() + emcComponent.getRatioWeight());
-		}
-		
-		List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
-		
-		for (int i = 0; i < 7; i++) {
-			if (componentCount[i] != null) {
-				collatedComponents.add(new EmcComponent(EmcType.values()[i], componentCount[i].intValue()));
-			}
-		}
-		
-		return collatedComponents;
-	}
+    @Override
+    public int compareTo(EmcValue emcValue) {
+
+        if (Float.compare(this.value, emcValue.value) == 0) {
+            if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
+                return (this.components.hashCode() - emcValue.components.hashCode());
+            }
+            else {
+                return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
+            }
+        }
+        else {
+            return Float.compare(this.value, emcValue.value);
+        }
+    }
+
+    private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents) {
+
+        Integer[] componentCount = new Integer[7];
+
+        for (EmcComponent emcComponent : uncollatedComponents) {
+            if (componentCount[emcComponent.getType().ordinal()] == null) {
+                componentCount[emcComponent.getType().ordinal()] = new Integer(0);
+            }
+
+            componentCount[emcComponent.getType().ordinal()] = new Integer(componentCount[emcComponent.getType().ordinal()].intValue() + emcComponent.getRatioWeight());
+        }
+
+        List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
+
+        for (int i = 0; i < 7; i++) {
+            if (componentCount[i] != null) {
+                collatedComponents.add(new EmcComponent(EmcType.values()[i], componentCount[i].intValue()));
+            }
+        }
+
+        return collatedComponents;
+    }
 }

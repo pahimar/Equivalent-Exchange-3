@@ -9,29 +9,29 @@ import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
 
-	private static EmcRegistry emcRegistry = null;
-	
-	private Map<CustomWrappedStack, EmcValue> stackMappings;
-	private TreeMap<EmcValue, List<CustomWrappedStack>> valueMappings;
+    private static EmcRegistry emcRegistry = null;
 
-	private EmcRegistry() {
+    private Map<CustomWrappedStack, EmcValue> stackMappings;
+    private TreeMap<EmcValue, List<CustomWrappedStack>> valueMappings;
 
-		stackMappings = new HashMap<CustomWrappedStack, EmcValue>();
-		valueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
-	}
+    private EmcRegistry() {
 
-	public static EmcRegistry getInstance() {
+        stackMappings = new HashMap<CustomWrappedStack, EmcValue>();
+        valueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
+    }
 
-		if (emcRegistry == null) {
-			emcRegistry = new EmcRegistry();
-			emcRegistry.init();
-		}
+    public static EmcRegistry getInstance() {
 
-		return emcRegistry;
-	}
+        if (emcRegistry == null) {
+            emcRegistry = new EmcRegistry();
+            emcRegistry.init();
+        }
 
-	private void init() {
+        return emcRegistry;
+    }
 
-	}
+    private void init() {
+
+    }
 
 }

@@ -43,9 +43,9 @@ public class RecipeRegistry {
 
         return recipeRegistry;
     }
-    
+
     private void init() {
-        
+
         Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes = HashMultimap.create();
 
         // Add potion recipes
@@ -62,7 +62,7 @@ public class RecipeRegistry {
 
         // Populate the discovered stacks list with all stacks that we are involved in a recipe we are aware of 
         discoverStacks(recipes);
-        
+
         // Add items that have no recipe, using the list of discovered stacks to determine if it's in a recipe or not
         for (CustomWrappedStack stack : recipelessStacks) {
             recipes.put(stack, new ArrayList<CustomWrappedStack>());
@@ -75,32 +75,32 @@ public class RecipeRegistry {
 
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
-            
+
             for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
                 addRecipe(recipeOutput, recipeInputs);
             }
         }
     }
-    
+
     private void discoverStacks(Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipes) {
-        
+
         Set<CustomWrappedStack> recipeKeySet = recipes.keySet();
         Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
         CustomWrappedStack recipeOutput = null;
-        
+
         // Discover all stacks involved in the recipes we know about
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
-            
+
             if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack())) && recipeOutput.getWrappedStack() != null) {
                 discoveredStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
             }
-            
+
             for (List<CustomWrappedStack> recipeInputs : recipes.get(recipeOutput)) {
                 for (CustomWrappedStack recipeInput : recipeInputs) {
-                    
+
                     CustomWrappedStack unwrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
-                    
+
                     if (!discoveredStacks.contains(unwrappedRecipeInput) && recipeInput.getWrappedStack() != null) {
                         discoveredStacks.add(unwrappedRecipeInput);
                     }
@@ -109,41 +109,41 @@ public class RecipeRegistry {
         }
 
         CustomWrappedStack customWrappedStack;
-        
+
         // Discover all stacks from the vanilla Items array
         for (int i = 0; i < Item.itemsList.length; i++) {
-        	
+
             if (Item.itemsList[i] != null) {
-            	
+
                 if (Item.itemsList[i].getHasSubtypes()) {
-                	
-                	for (int meta = 0; meta < 16; meta++) {
-                		
-                		customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
-                		
-                		if (!discoveredStacks.contains(customWrappedStack)) {
+
+                    for (int meta = 0; meta < 16; meta++) {
+
+                        customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
+
+                        if (!discoveredStacks.contains(customWrappedStack)) {
                             discoveredStacks.add(customWrappedStack);
                         }
-                	}
+                    }
                 }
                 else {
-                    
+
                     customWrappedStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i]));
-                    
+
                     if (!discoveredStacks.contains(customWrappedStack)) {
                         discoveredStacks.add(customWrappedStack);
                     }
                 }
             }
         }
-        
+
         /*
-         * For every stack we have discovered, check to see if we know a recipe for it. If we don't
-         * and we haven't already added it to the recipeless stack list, add it to the recipeless stack
-         * list
+         * For every stack we have discovered, check to see if we know a recipe
+         * for it. If we don't and we haven't already added it to the recipeless
+         * stack list, add it to the recipeless stack list
          */
         for (CustomWrappedStack discoveredStack : discoveredStacks) {
-            
+
             if (recipes.get(discoveredStack).size() == 0 && !recipelessStacks.contains(discoveredStack)) {
                 recipelessStacks.add(discoveredStack);
             }
@@ -278,24 +278,24 @@ public class RecipeRegistry {
 
         return stringBuilder.toString();
     }
-    
+
     public Multimap<CustomWrappedStack, List<CustomWrappedStack>> getRecipeMappings() {
-        
+
         return recipeMap;
     }
-    
+
     public List<CustomWrappedStack> getDiscoveredStacks() {
-        
+
         return discoveredStacks;
     }
-    
+
     public List<CustomWrappedStack> getRecipelessStacks() {
-        
+
         return recipelessStacks;
     }
-    
+
     public List<CustomWrappedStack> getWildCardStacks() {
-        
+
         return wildCardStacks;
     }
 }

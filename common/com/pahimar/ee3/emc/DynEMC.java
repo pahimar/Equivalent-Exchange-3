@@ -15,7 +15,7 @@ import com.pahimar.ee3.item.crafting.RecipeRegistry;
 public class DynEMC {
 
     private static DynEMC dynEMC = null;
-    
+
     private RecipeRegistry recipeRegistry;
     private WeightedDirectedGraph<CustomWrappedStack> graph;
 
@@ -37,60 +37,61 @@ public class DynEMC {
     }
 
     private void init() {
-        
+
         populateGraph();
     }
 
     private void populateGraph() {
-        
+
         for (CustomWrappedStack discoveredStack : recipeRegistry.getDiscoveredStacks()) {
             graph.addNode(discoveredStack);
         }
-        
+
         Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMappings = recipeRegistry.getRecipeMappings();
-        
+
         Set<CustomWrappedStack> recipeKeySet = recipeMappings.keySet();
         Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
         CustomWrappedStack recipeOutput = null;
-        
+
         while (recipeKeySetIterator.hasNext()) {
             recipeOutput = recipeKeySetIterator.next();
-            
+
             for (List<CustomWrappedStack> recipeInputs : recipeMappings.get(recipeOutput)) {
-            	
-            	CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
-            	
-            	if (graph.nodeExists(unWrappedRecipeOutput)) {
-	                for (CustomWrappedStack recipeInput : recipeInputs) {
-	                    
-	                    // Unwrapped the wrapped stacks so that we actually find them in the graph
-	                    
-	                    CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
-	                    
-	                    if (graph.nodeExists(unWrappedRecipeInput)) {
-		                    if (recipeOutput.getStackSize() != 0) {		                        
-		                    	try {
-		                			graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
-		                    	} catch (NoSuchElementException e) {
-		                    		LogHelper.severe(e.getLocalizedMessage());
-		                    	}
-		                    }
-	                    }
-	                    else {
-	                    	LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' exists in the crafting relationship graph");
-	                    	LogHelper.debug("Recipe input '" + unWrappedRecipeInput.toString() + "' does not exist in the crafting relationship graph");
-	                    }
-	                }
-	            }
-            	else {
-            		LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' does not exist in the crafting relationship graph");
-            	}
+
+                CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
+
+                if (graph.nodeExists(unWrappedRecipeOutput)) {
+                    for (CustomWrappedStack recipeInput : recipeInputs) {
+
+                        // Unwrapped the wrapped stacks so that we actually find them in the graph
+
+                        CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
+
+                        if (graph.nodeExists(unWrappedRecipeInput)) {
+                            if (recipeOutput.getStackSize() != 0) {
+                                try {
+                                    graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
+                                }
+                                catch (NoSuchElementException e) {
+                                    LogHelper.severe(e.getLocalizedMessage());
+                                }
+                            }
+                        }
+                        else {
+                            LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' exists in the crafting relationship graph");
+                            LogHelper.debug("Recipe input '" + unWrappedRecipeInput.toString() + "' does not exist in the crafting relationship graph");
+                        }
+                    }
+                }
+                else {
+                    LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' does not exist in the crafting relationship graph");
+                }
             }
         }
     }
-    
+
     public List<CustomWrappedStack> getCriticalNodes() {
-        
+
         return graph.getCriticalNodes();
     }
 
@@ -104,12 +105,12 @@ public class DynEMC {
         LogHelper.debug("Total node count: " + graph.getAllNodes().size());
         LogHelper.debug("Critical node count: " + graph.getCriticalNodes().size());
         LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
-        
+
         List<CustomWrappedStack> critsMinusOrphans = graph.getCriticalNodes();
         critsMinusOrphans.removeAll(graph.getOrphanNodes());
-        
+
         LogHelper.debug("[Critical - Orphans] node count: " + critsMinusOrphans.size());
-        
+
         LogHelper.debug("***** START NODES *****");
         Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {

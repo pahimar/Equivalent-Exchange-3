@@ -43,19 +43,19 @@ public class EmcComponent implements Comparable<EmcComponent> {
         return stringBuilder.toString();
     }
 
-	@Override
-	public int compareTo(EmcComponent emcComponent) {
+    @Override
+    public int compareTo(EmcComponent emcComponent) {
 
-	    if (emcComponent != null) {
-	        if (this.type == emcComponent.type) {
-	            return (this.ratioWeight - emcComponent.ratioWeight);
-	        }
-	        else {
-	            return this.type.compareTo(emcComponent.type);
-	        }
-	    }
-	    else {
-	        return 1;
-	    }
-	}
+        if (emcComponent != null) {
+            if (this.type == emcComponent.type) {
+                return (this.ratioWeight - emcComponent.ratioWeight);
+            }
+            else {
+                return this.type.compareTo(emcComponent.type);
+            }
+        }
+        else {
+            return 1;
+        }
+    }
 }

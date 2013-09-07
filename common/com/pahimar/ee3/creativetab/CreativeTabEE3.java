@@ -18,19 +18,19 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class CreativeTabEE3 extends CreativeTabs {
 
-	public CreativeTabEE3(int tabID, String tabLabel) {
+    public CreativeTabEE3(int tabID, String tabLabel) {
 
-		super(tabID, tabLabel);
-	}
+        super(tabID, tabLabel);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	/**
-	 * the itemID for the item to be displayed on the tab
-	 */
-	public int getTabIconItemIndex() {
+    @Override
+    @SideOnly(Side.CLIENT)
+    /**
+     * the itemID for the item to be displayed on the tab
+     */
+    public int getTabIconItemIndex() {
 
-		return ItemIds.MINIUM_SHARD;
-	}
+        return ItemIds.MINIUM_SHARD;
+    }
 
 }

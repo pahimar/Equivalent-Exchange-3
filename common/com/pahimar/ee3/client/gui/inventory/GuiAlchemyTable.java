@@ -12,18 +12,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemyTable extends GuiContainer {
 
-	private TileAlchemyTable tileAlchemyTable;
-	
-	public GuiAlchemyTable(InventoryPlayer inventoryPlayer, TileAlchemyTable tileAlchemyTable) {
-		
-		super(new ContainerAlchemyTable(inventoryPlayer, tileAlchemyTable));
-		this.tileAlchemyTable = tileAlchemyTable;
-	}
+    private TileAlchemyTable tileAlchemyTable;
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
+    public GuiAlchemyTable(InventoryPlayer inventoryPlayer, TileAlchemyTable tileAlchemyTable) {
+
+        super(new ContainerAlchemyTable(inventoryPlayer, tileAlchemyTable));
+        this.tileAlchemyTable = tileAlchemyTable;
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+
+        // TODO Auto-generated method stub
+
+    }
 
 }

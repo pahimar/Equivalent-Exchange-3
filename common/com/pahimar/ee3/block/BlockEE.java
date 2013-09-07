@@ -37,10 +37,10 @@ public abstract class BlockEE extends BlockContainer {
 
         blockIcon = iconRegister.registerIcon(String.format("%s:%s", Reference.MOD_ID.toLowerCase(), getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
-    
+
     protected String getUnwrappedUnlocalizedName(String unlocalizedName) {
-    	
-    	return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
+
+        return unlocalizedName.substring(unlocalizedName.indexOf(":") + 1);
     }
 
     /**

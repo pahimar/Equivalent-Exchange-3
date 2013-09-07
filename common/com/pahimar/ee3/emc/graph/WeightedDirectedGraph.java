@@ -52,7 +52,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
                 LogHelper.severe("To node: " + to.toString());
             }
             if (!graph.containsKey(to)) {
-            	LogHelper.severe("From node: " + from.toString());
+                LogHelper.severe("From node: " + from.toString());
                 LogHelper.severe("To node doesn't exist: " + to.toString());
             }
             throw new NoSuchElementException("Missing nodes from graph");

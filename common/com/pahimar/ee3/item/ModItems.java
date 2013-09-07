@@ -43,7 +43,7 @@ public class ModItems {
         philStone.setContainerItem(philStone);
 
         // TODO Register items with the GameRegistry
-        
+
         GameRegistry.addRecipe(new ItemStack(inertStone), new Object[] { "sis", "igi", "sis", Character.valueOf('s'), Block.stone, Character.valueOf('i'), Item.ingotIron, Character.valueOf('g'), Item.ingotGold });
 
         GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[] { "sss", "sis", "sss", Character.valueOf('s'), miniumShard, Character.valueOf('i'), inertStone });

@@ -27,52 +27,46 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalBag extends GuiContainer {
 
-	public GuiAlchemicalBag(InventoryPlayer inventoryPlayer) {
+    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer) {
 
-		super(new ContainerAlchemicalBag(inventoryPlayer));
-		xSize = 248;
-		ySize = 186;
-	}
+        super(new ContainerAlchemicalBag(inventoryPlayer));
+        xSize = 248;
+        ySize = 186;
+    }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
+    @Override
+    protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-		fontRenderer.drawString(StatCollector
-				.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6,
-				4210752);
-		fontRenderer.drawString(
-				StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY),
-				44, ySize - 96 + 2, 4210752);
-	}
+        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
+        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 96 + 2, 4210752);
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		// this.mc.getTextureManager().bindTexture(...)
-		this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
+        // this.mc.getTextureManager().bindTexture(...)
+        this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
 
-		int xStart = (width - xSize) / 2;
-		int yStart = (height - ySize) / 2;
-		this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
-	}
+        int xStart = (width - xSize) / 2;
+        int yStart = (height - ySize) / 2;
+        this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+    }
 
-	@Override
-	public void onGuiClosed() {
+    @Override
+    public void onGuiClosed() {
 
-		super.onGuiClosed();
+        super.onGuiClosed();
 
-		if (mc.thePlayer != null) {
-			for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
-				if (itemStack != null) {
-					if (NBTHelper.hasTag(itemStack,
-							Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
-						NBTHelper.removeTag(itemStack,
-								Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
-					}
-				}
-			}
-		}
-	}
+        if (mc.thePlayer != null) {
+            for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
+                if (itemStack != null) {
+                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
+                    }
+                }
+            }
+        }
+    }
 }

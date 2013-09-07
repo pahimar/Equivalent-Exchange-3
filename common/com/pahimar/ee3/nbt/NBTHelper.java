@@ -39,20 +39,20 @@ public class NBTHelper {
 
     /**
      * Encodes the given NBT object as a String
-     * @param nbtBase 
+     * 
+     * @param nbtBase
      * @return String encoding of the given NBT object
      */
     public static String encodeNBTAsString(NBTBase nbtBase) {
-        
+
         StringBuilder stringBuilder = new StringBuilder();
 
         if (nbtBase != null) {
             // Encode the name of the tag, and the type of the tag
             stringBuilder.append(String.format("'%s':%s:", nbtBase.getName(), NBTBase.getTagName(nbtBase.getId())));
-            
+
             // Encode the value of the tag, depending on the type of the tag
-            switch (nbtBase.getId())
-            {
+            switch (nbtBase.getId()) {
                 case 0: {
                     stringBuilder.append(((NBTTagEnd) nbtBase).toString());
                     break;
@@ -83,19 +83,19 @@ public class NBTHelper {
                 }
                 case 7: {
                     NBTTagByteArray byteArray = (NBTTagByteArray) nbtBase;
-                    
+
                     stringBuilder.append("[");
-                    
+
                     for (int i = 0; i < byteArray.byteArray.length; i++) {
                         stringBuilder.append(byteArray.byteArray[i]);
-                        
+
                         if (i < byteArray.byteArray.length - 1) {
                             stringBuilder.append("|");
                         }
                     }
-                    
+
                     stringBuilder.append("]");
-                    
+
                     break;
                 }
                 case 8: {
@@ -104,63 +104,63 @@ public class NBTHelper {
                 }
                 case 9: {
                     NBTTagList tagList = (NBTTagList) nbtBase;
-                    
+
                     stringBuilder.append("[");
-                    
+
                     for (int i = 0; i < tagList.tagCount(); i++) {
                         Object tagObject = tagList.tagAt(i);
-                        
+
                         if (tagObject instanceof NBTBase) {
                             stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
                         }
-                        
+
                         if (i < tagList.tagCount() - 1) {
                             stringBuilder.append("|");
                         }
                     }
-                    
+
                     stringBuilder.append("]");
-                    
+
                     break;
                 }
                 case 10: {
                     NBTTagCompound tagCompound = (NBTTagCompound) nbtBase;
-                    
+
                     stringBuilder.append("[");
-                    
+
                     Iterator<?> tagIterator = tagCompound.getTags().iterator();
-                    
+
                     while (tagIterator.hasNext()) {
                         Object tagObject = tagIterator.next();
-                        
+
                         if (tagObject instanceof NBTBase) {
                             stringBuilder.append(encodeNBTAsString((NBTBase) tagObject));
                         }
-                        
+
                         if (tagIterator.hasNext()) {
                             stringBuilder.append("|");
                         }
                     }
-                    
+
                     stringBuilder.append("]");
-                    
+
                     break;
                 }
                 case 11: {
                     NBTTagIntArray intArray = (NBTTagIntArray) nbtBase;
-                    
+
                     stringBuilder.append("[");
-                    
+
                     for (int i = 0; i < intArray.intArray.length; i++) {
                         stringBuilder.append(intArray.intArray[i]);
-                        
+
                         if (i < intArray.intArray.length - 1) {
                             stringBuilder.append("|");
                         }
                     }
-                    
+
                     stringBuilder.append("]");
-                    
+
                     break;
                 }
                 default: {
@@ -169,10 +169,10 @@ public class NBTHelper {
                 }
             }
         }
-        
+
         return stringBuilder.toString();
     }
-    
+
     // TODO Link this method to some API stuffs
     public static NBTTagCompound encodeStackAsNBT(Object stackObject) {
 
@@ -184,9 +184,9 @@ public class NBTHelper {
         NBTTagCompound encodedStack = new NBTTagCompound(name);
 
         if (CustomWrappedStack.canBeWrapped(object)) {
-            
+
             CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
-            
+
             if (wrappedStack.getWrappedStack() instanceof ItemStack) {
 
                 ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();

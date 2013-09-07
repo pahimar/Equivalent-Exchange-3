@@ -65,122 +65,121 @@ import cpw.mods.fml.relauncher.Side;
 @NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3 {
 
-	@Instance(Reference.MOD_ID)
-	public static EquivalentExchange3 instance;
+    @Instance(Reference.MOD_ID)
+    public static EquivalentExchange3 instance;
 
-	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-	public static CommonProxy proxy;
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    public static CommonProxy proxy;
 
-	public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
+    public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
-	@EventHandler
-	public void invalidFingerprint(FMLFingerprintViolationEvent event) {
+    @EventHandler
+    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
-		// Report (log) to the user that the version of Equivalent Exchange 3
-		// they are using has been changed/tampered with
-		if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
-			LogHelper.warning(Strings.NO_FINGERPRINT_MESSAGE);
-		}
-		else {
-			LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
-		}
-	}
+        // Report (log) to the user that the version of Equivalent Exchange 3
+        // they are using has been changed/tampered with
+        if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
+            LogHelper.warning(Strings.NO_FINGERPRINT_MESSAGE);
+        }
+        else {
+            LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
+        }
+    }
 
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event) {
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
 
-		// Initialize the custom commands
-		CommandHandler.initCommands(event);
-	}
+        // Initialize the custom commands
+        CommandHandler.initCommands(event);
+    }
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
 
-		// Initialize the log helper
-		LogHelper.init();
+        // Initialize the log helper
+        LogHelper.init();
 
-		// Initialize the configuration
-		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
+        // Initialize the configuration
+        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 
-		// Conduct the version check and log the result
-		VersionHelper.execute();
+        // Conduct the version check and log the result
+        VersionHelper.execute();
 
-		// Initialize the Version Check Tick Handler (Client only)
-		TickRegistry.registerTickHandler(new VersionCheckTickHandler(),
-				Side.CLIENT);
+        // Initialize the Version Check Tick Handler (Client only)
+        TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
 
-		// Initialize the Render Tick Handler (Client only)
-		proxy.registerRenderTickHandler();
+        // Initialize the Render Tick Handler (Client only)
+        proxy.registerRenderTickHandler();
 
-		// Register the KeyBinding Handler (Client only)
-		proxy.registerKeyBindingHandler();
+        // Register the KeyBinding Handler (Client only)
+        proxy.registerKeyBindingHandler();
 
-		// Register the Sound Handler (Client only)
-		proxy.registerSoundHandler();
+        // Register the Sound Handler (Client only)
+        proxy.registerSoundHandler();
 
-		// Initialize mod blocks
-		ModBlocks.init();
+        // Initialize mod blocks
+        ModBlocks.init();
 
-		// Initialize mod items
-		ModItems.init();
-	}
+        // Initialize mod items
+        ModItems.init();
+    }
 
-	@EventHandler
-	@SuppressWarnings("unchecked")
-	public void load(FMLInitializationEvent event) {
+    @EventHandler
+    @SuppressWarnings("unchecked")
+    public void load(FMLInitializationEvent event) {
 
-		// Register the GUI Handler
-		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+        // Register the GUI Handler
+        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 
-		// Register the PlayerDestroyItem Handler
-		MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
+        // Register the PlayerDestroyItem Handler
+        MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
 
-		// Register the Item Pickup Handler
-		MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
+        // Register the Item Pickup Handler
+        MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
 
-		// Register the EntityLiving Handler
-		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+        // Register the EntityLiving Handler
+        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
-		MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
+        MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
-		MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
+        MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
 
-		GameRegistry.registerCraftingHandler(new CraftingHandler());
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
 
-		// Register the DrawBlockHighlight Handler
-		proxy.registerDrawBlockHighlightHandler();
+        // Register the DrawBlockHighlight Handler
+        proxy.registerDrawBlockHighlightHandler();
 
-		// Initialize mod tile entities
-		proxy.registerTileEntities();
+        // Initialize mod tile entities
+        proxy.registerTileEntities();
 
-		// Initialize custom rendering and pre-load textures (Client only)
-		proxy.initRenderingAndTextures();
+        // Initialize custom rendering and pre-load textures (Client only)
+        proxy.initRenderingAndTextures();
 
-		// Add in the ability to dye Alchemical Bags
-		CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
+        // Add in the ability to dye Alchemical Bags
+        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
-		// Register the Fuel Handler
-		GameRegistry.registerFuelHandler(new FuelHandler());
+        // Register the Fuel Handler
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
-		// Quick test to see that sending an encoded recipe to be added to the
-		// recipe registry works
-		FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-		FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-	}
+        // Quick test to see that sending an encoded recipe to be added to the
+        // recipe registry works
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+    }
 
-	@EventHandler
-	public void modsLoaded(FMLPostInitializationEvent event) {
+    @EventHandler
+    public void modsLoaded(FMLPostInitializationEvent event) {
 
-		// Initialize the Addon Handler
-		AddonHandler.init();
+        // Initialize the Addon Handler
+        AddonHandler.init();
 
-		// Initialize the DynEMC system
+        // Initialize the DynEMC system
         DynEMC dynEMC = DynEMC.getInstance();
-	}
+    }
 
-	@EventHandler
-	public void handleIMCMessages(IMCEvent event) {
+    @EventHandler
+    public void handleIMCMessages(IMCEvent event) {
 
-		InterModCommsHandler.processIMCMessages(event);
-	}
+        InterModCommsHandler.processIMCMessages(event);
+    }
 }

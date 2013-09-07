@@ -42,14 +42,14 @@ public class ItemAlchemicalDust extends ItemEE {
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
 
-    	StringBuilder unlocalizedName = new StringBuilder();
+        StringBuilder unlocalizedName = new StringBuilder();
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-        
+
         unlocalizedName.append("item.");
         unlocalizedName.append(Strings.RESOURCE_PREFIX);
         unlocalizedName.append(Strings.ALCHEMICAL_DUST_NAME);
         unlocalizedName.append(ALCHEMICAL_DUST_NAMES[meta]);
-        
+
         return unlocalizedName.toString();
     }
 

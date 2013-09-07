@@ -42,16 +42,16 @@ public class BlockAlchemicalChest extends BlockEE {
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
-    
+
     @Override
     public String getUnlocalizedName() {
-    	
+
         StringBuilder unlocalizedName = new StringBuilder();
-        
+
         unlocalizedName.append("tile.");
         unlocalizedName.append(Strings.RESOURCE_PREFIX);
         unlocalizedName.append(Strings.ALCHEMICAL_CHEST_NAME);
-        
+
         return unlocalizedName.toString();
     }
 

@@ -68,7 +68,7 @@ public class CommandOverlay {
                 float scale = Float.parseFloat(args[1]);
 
                 if (scale <= 0F) {
-                	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
+                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
                 }
                 else {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = scale;
@@ -77,11 +77,11 @@ public class CommandOverlay {
                 }
             }
             catch (Exception e) {
-            	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
             }
         }
         else {
-        	throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_SCALE_USAGE });
         }
     }
 
@@ -101,11 +101,11 @@ public class CommandOverlay {
                 }
             }
             catch (Exception e) {
-            	throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
             }
         }
         else
-        	throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[] { Commands.COMMAND_OVERLAY_OPACITY_USAGE });
     }
 
     private static void processPositionCommand(ICommandSender commandSender, String[] args) {

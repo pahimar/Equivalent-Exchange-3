@@ -95,9 +95,10 @@ public class CommandEE extends CommandBase {
             throw new WrongUsageException(Commands.COMMAND_EE3_USAGE, new Object[0]);
     }
 
-	@Override
-	public String getCommandUsage(ICommandSender icommandsender) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String getCommandUsage(ICommandSender icommandsender) {
+
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
