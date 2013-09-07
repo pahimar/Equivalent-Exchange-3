@@ -33,23 +33,25 @@ public class EmcValue implements Comparable<EmcValue> {
     }
 
     public EmcValue(float value, float recoveryPercent) {
+    	
         this(value, recoveryPercent, new ArrayList<EmcComponent>());
     }
     
     public EmcValue(float value, List<EmcComponent> components) {
 
-        this(value, 1F, components);
+        this(value, 1F, collateComponents(components));
     }
 
     public EmcValue(float value, float recoveryPercent, List<EmcComponent> components) {
 
         this.value = value;
         this.recoveryPercent = recoveryPercent;
-        this.components = components;
+        this.components = collateComponents(components);
     }
 
     public List<EmcComponent> getComponents() {
-        return components;
+        
+    	return components;
     }
     
     public EmcComponent getComponentByType(EmcType type) {
@@ -81,8 +83,17 @@ public class EmcValue implements Comparable<EmcValue> {
         List<EmcComponent> componentArray = this.components;
         Collections.sort(componentArray);
         
+        int i = 0;
+        
         for (EmcComponent component : componentArray) {
-            stringBuilder.append(String.format("<%s:%s>", component.getType(), component.getRatioWeight()));
+        
+        	stringBuilder.append(String.format("%s:%s", component.getType(), component.getRatioWeight()));
+        	
+        	i++;
+            
+        	if (i < componentArray.size()) {
+            	stringBuilder.append(String.format("%s", Strings.TOKEN_DELIMITER));
+            }
         }
         
         stringBuilder.append("]");
@@ -103,8 +114,41 @@ public class EmcValue implements Comparable<EmcValue> {
     }
 
 	@Override
-	public int compareTo(EmcValue o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(EmcValue emcValue) {
+		
+		if (Float.compare(this.value, emcValue.value) == 0) {
+			if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
+				return (this.components.hashCode() - emcValue.components.hashCode());
+			}
+			else {
+				return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
+			}
+		}
+		else {
+			return Float.compare(this.value, emcValue.value);
+		}
+	}
+	
+	private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents) {
+		
+		Integer[] componentCount = new Integer[7];
+		
+		for (EmcComponent emcComponent : uncollatedComponents) {
+			if (componentCount[emcComponent.getType().ordinal()] == null) {
+				componentCount[emcComponent.getType().ordinal()] = new Integer(0);
+			}
+			
+			componentCount[emcComponent.getType().ordinal()] = new Integer(componentCount[emcComponent.getType().ordinal()].intValue() + emcComponent.getRatioWeight());
+		}
+		
+		List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
+		
+		for (int i = 0; i < 7; i++) {
+			if (componentCount[i] != null) {
+				collatedComponents.add(new EmcComponent(EmcType.values()[i], componentCount[i].intValue()));
+			}
+		}
+		
+		return collatedComponents;
 	}
 }

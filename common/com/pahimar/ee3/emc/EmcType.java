@@ -1,7 +1,7 @@
 package com.pahimar.ee3.emc;
 
 public enum EmcType {
-    OMNI,
+	OMNI,
     CORPOREAL, 
     KINETIC, 
     TEMPORAL, 
