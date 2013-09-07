@@ -31,6 +31,8 @@ public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
             // Scale, Translate, Rotate
             GL11.glScalef(1.0F, 1.0F, 1.0F);
             GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + 1.0F);
+            GL11.glTranslated(0, -tileEntity.getBlockMetadata(), 0);
+            GL11.glScaled(1 - (tileEntity.getBlockMetadata()/10000D), 1 - (tileEntity.getBlockMetadata()/10000D), 1 - (tileEntity.getBlockMetadata()/10000D));
             //GL11.glRotatef(90F, 0F, 1F, 0F);
 
             // Bind texture
