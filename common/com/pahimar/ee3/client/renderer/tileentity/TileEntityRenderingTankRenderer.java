@@ -27,7 +27,7 @@ public class TileEntityRenderingTankRenderer extends TileEntitySpecialRenderer {
             GL11.glDisable(GL11.GL_CULL_FACE);
 
             GL11.glPushMatrix();
-
+            
             // Scale, Translate, Rotate
             GL11.glScalef(1.0F, 1.0F, 1.0F);
             GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + 1.0F);
