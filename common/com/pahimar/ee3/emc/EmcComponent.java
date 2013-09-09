@@ -5,10 +5,15 @@ public class EmcComponent implements Comparable<EmcComponent> {
     private final EmcType type;
     private final int ratioWeight;
 
-    public EmcComponent(EmcType emcType, int ratioWeight) {
+    public EmcComponent(EmcType type, int ratioWeight) {
 
-        this.type = emcType;
+        this.type = type;
         this.ratioWeight = ratioWeight;
+    }
+    
+    public EmcComponent(EmcType type) {
+        
+        this(type, 1);
     }
 
     public EmcType getType() {
