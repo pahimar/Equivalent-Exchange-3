@@ -53,7 +53,7 @@ public class WeightedEdge<T> implements Comparable<WeightedEdge<T>> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("Target: %s, Weight: %s ", target, weight));
+        stringBuilder.append(String.format("Target: %s, Weight: %s", target, weight));
 
         return stringBuilder.toString();
     }

@@ -3,7 +3,6 @@ package com.pahimar.ee3.emc.graph;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -111,7 +110,7 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
         
         if (containsNode(targetNode)) {
     
-            for (T graphNode : graph.keySet()) {
+            for (T graphNode : getAllNodes()) {
                 
                 if (!graphNode.equals(targetNode)) {
                     
@@ -259,14 +258,8 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
 
         return graph.toString();
     }
-
-    // TODO Finish
-    public WeightedDirectedGraph<T> DepthFirstSearch(Set<T> nodes) {
-
-        for (T node : nodes) {
-
-        }
-
-        return null;
+    
+    public void DepthFirstSearch(T node) {
+        // TODO
     }
 }

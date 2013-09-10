@@ -18,7 +18,7 @@ public class DynEMC {
     private static DynEMC dynEMC = null;
 
     private RecipeRegistry recipeRegistry;
-    private WeightedDirectedGraph<CustomWrappedStack> graph;
+    public final WeightedDirectedGraph<CustomWrappedStack> graph;
 
     private DynEMC() {
 
@@ -91,27 +91,12 @@ public class DynEMC {
         }
     }
 
-    public List<CustomWrappedStack> getCriticalNodes() {
-
-        return graph.getCriticalNodes();
-    }
-
-    public int size() {
-
-        return graph.size();
-    }
-
     public void printDebugDump() {
 
         LogHelper.debug("Total node count: " + graph.getAllNodes().size());
         LogHelper.debug("Critical node count: " + graph.getCriticalNodes().size());
         LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
-
-        List<CustomWrappedStack> critsMinusOrphans = graph.getCriticalNodes();
-        critsMinusOrphans.removeAll(graph.getOrphanNodes());
-
-        LogHelper.debug("[Critical - Orphans] node count: " + critsMinusOrphans.size());
-
+        LogHelper.debug("");
         LogHelper.debug("***** START NODES *****");
         Iterator<CustomWrappedStack> nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
@@ -119,33 +104,25 @@ public class DynEMC {
             LogHelper.debug("Node: " + node);
         }
         LogHelper.debug("***** END NODES *****");
-
+        LogHelper.debug("");
         LogHelper.debug("***** START EDGES FROM *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
             ImmutableList<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
             for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
-                LogHelper.debug("Crafting Output: " + node);
-                LogHelper.debug("Crafting Input: " + edge.target);
-                LogHelper.debug("Weight: " + edge.weight);
-                LogHelper.debug("");
+                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.target + ", Weight: " + edge.weight);
             }
         }
         LogHelper.debug("***** END EDGES FROM *****");
-
+        LogHelper.debug("");
         LogHelper.debug("***** START EDGES TO *****");
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
             ImmutableList<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
-            Iterator<WeightedEdge<CustomWrappedStack>> edgeIter = edgesTo.iterator();
-            while (edgeIter.hasNext()) {
-                WeightedEdge<CustomWrappedStack> edge = edgeIter.next();
-                LogHelper.debug("From: " + node);
-                LogHelper.debug("To: " + edge.target);
-                LogHelper.debug("Weight: " + edge.weight);
-                LogHelper.debug("");
+            for (WeightedEdge<CustomWrappedStack> edge : edgesTo) {
+                LogHelper.debug("Crafting Input: " + node + ", Crafting Output: " + edge.target + ", Weight: " + edge.weight);
             }
         }
         LogHelper.debug("***** END EDGES TO *****");

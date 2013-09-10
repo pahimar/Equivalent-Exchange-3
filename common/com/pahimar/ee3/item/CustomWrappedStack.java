@@ -200,7 +200,11 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
+            try {
+                stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
+            } catch (ArrayIndexOutOfBoundsException e) { 
+                
+            }
         }
         else if (oreStack != null) {
             stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
