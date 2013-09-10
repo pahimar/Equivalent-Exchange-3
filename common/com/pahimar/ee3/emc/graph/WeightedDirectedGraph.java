@@ -260,6 +260,14 @@ public class WeightedDirectedGraph<T> implements Iterable<T> {
     }
     
     public void DepthFirstSearch(T node) {
-        // TODO
+
+        /**
+         * The following is specified to EE3 (as opposed to this generalized Weighted Directed Graph implementation
+         * 
+         * - The edges from a node depict what "makes" that node
+         * - If there are no edges from a node, then nothing "makes the node"
+         * - If nothing "makes" the node the node, then it is a critical node
+         * - A Depth First Search using using critical nodes will return a spanning tree of the graph
+         */
     }
 }
