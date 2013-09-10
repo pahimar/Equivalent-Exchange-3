@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
@@ -60,14 +61,14 @@ public class DynEMC {
 
                 CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
 
-                if (graph.nodeExists(unWrappedRecipeOutput)) {
+                if (graph.containsNode(unWrappedRecipeOutput)) {
                     for (CustomWrappedStack recipeInput : recipeInputs) {
 
                         // Unwrapped the wrapped stacks so that we actually find them in the graph
 
                         CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
 
-                        if (graph.nodeExists(unWrappedRecipeInput)) {
+                        if (graph.containsNode(unWrappedRecipeInput)) {
                             if (recipeOutput.getStackSize() != 0) {
                                 try {
                                     graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
@@ -123,11 +124,11 @@ public class DynEMC {
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
-            Set<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
+            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
             for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
                 LogHelper.debug("Crafting Output: " + node);
-                LogHelper.debug("Crafting Input: " + edge.getTarget());
-                LogHelper.debug("Weight: " + edge.getWeight());
+                LogHelper.debug("Crafting Input: " + edge.target);
+                LogHelper.debug("Weight: " + edge.weight);
                 LogHelper.debug("");
             }
         }
@@ -137,13 +138,13 @@ public class DynEMC {
         nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             CustomWrappedStack node = nodeIter.next();
-            Set<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
+            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
             Iterator<WeightedEdge<CustomWrappedStack>> edgeIter = edgesTo.iterator();
             while (edgeIter.hasNext()) {
                 WeightedEdge<CustomWrappedStack> edge = edgeIter.next();
                 LogHelper.debug("From: " + node);
-                LogHelper.debug("To: " + edge.getTarget());
-                LogHelper.debug("Weight: " + edge.getWeight());
+                LogHelper.debug("To: " + edge.target);
+                LogHelper.debug("Weight: " + edge.weight);
                 LogHelper.debug("");
             }
         }

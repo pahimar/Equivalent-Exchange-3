@@ -1,33 +1,18 @@
 package com.pahimar.ee3.emc.graph;
 
-public class WeightedEdge<T> {
+public class WeightedEdge<T> implements Comparable<WeightedEdge<T>> {
 
-    private float weight;
-    private T target;
+    public final float weight;
+    public final T target;
 
-    public WeightedEdge(float weight, T target) {
+    public WeightedEdge(T target) {
+
+        this(target, 1);
+    }
+
+    public WeightedEdge(T target, float weight) {
 
         this.weight = weight;
-        this.target = target;
-    }
-
-    public float getWeight() {
-
-        return weight;
-    }
-
-    public T getTarget() {
-
-        return target;
-    }
-
-    public void setWeight(float weight) {
-
-        this.weight = weight;
-    }
-
-    public void setTarget(T target) {
-
         this.target = target;
     }
 
@@ -40,7 +25,27 @@ public class WeightedEdge<T> {
 
         WeightedEdge<?> edge = (WeightedEdge<?>) object;
 
-        return ((this.weight == edge.weight) && (target.equals(edge.target)));
+        return (Float.compare(this.weight, edge.weight) == 0) && target.equals(edge.target);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(WeightedEdge<T> weightedEdge) {
+
+        if (weightedEdge instanceof WeightedEdge) {
+            if (Float.compare(this.weight, weightedEdge.weight) == 0) {
+                return (this.target.hashCode() - weightedEdge.target.hashCode());
+            }
+            else {
+                return Float.compare(this.weight, weightedEdge.weight);
+            }
+        }
+        else {
+            return 1;
+        }
     }
 
     @Override
@@ -48,7 +53,7 @@ public class WeightedEdge<T> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("Weight: %s, Target: %s ", weight, target));
+        stringBuilder.append(String.format("Target: %s, Weight: %s ", target, weight));
 
         return stringBuilder.toString();
     }
