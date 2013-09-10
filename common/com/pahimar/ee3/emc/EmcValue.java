@@ -75,7 +75,9 @@ public class EmcValue implements Comparable<EmcValue> {
 
         EmcValue emcValue = (EmcValue) object;
 
-        return ((value == emcValue.value) && (recoveryPercent == emcValue.recoveryPercent) && (components.equals(emcValue.getComponents())));
+        return (Float.compare(this.value, emcValue.value) == 0) && 
+                (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) && 
+                components.equals(emcValue.getComponents());
     }
 
     @Override
@@ -121,16 +123,21 @@ public class EmcValue implements Comparable<EmcValue> {
     @Override
     public int compareTo(EmcValue emcValue) {
 
-        if (Float.compare(this.value, emcValue.value) == 0) {
-            if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
-                return (this.components.hashCode() - emcValue.components.hashCode());
+        if (emcValue instanceof EmcValue) {
+            if (Float.compare(this.value, emcValue.value) == 0) {
+                if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
+                    return (this.components.hashCode() - emcValue.components.hashCode());
+                }
+                else {
+                    return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
+                }
             }
             else {
-                return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
+                return Float.compare(this.value, emcValue.value);
             }
         }
         else {
-            return Float.compare(this.value, emcValue.value);
+            return 1;
         }
     }
 
