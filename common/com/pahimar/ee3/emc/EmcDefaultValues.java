@@ -1,23 +1,41 @@
 package com.pahimar.ee3.emc;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcDefaultValues {
-
-    // Unit components for the various EmcTypes
-    public static final EmcComponent OMNI_UNIT_COMPONENT = new EmcComponent(EmcType.OMNI);
-    public static final EmcComponent CORPOREAL_UNIT_COMPONENT = new EmcComponent(EmcType.CORPOREAL);
-    public static final EmcComponent KINETIC_UNIT_COMPONENT = new EmcComponent(EmcType.KINETIC);
-    public static final EmcComponent TEMPORAL_UNIT_COMPONENT = new EmcComponent(EmcType.TEMPORAL);
-    public static final EmcComponent ESSENTIA_UNIT_COMPONENT = new EmcComponent(EmcType.ESSENTIA);
-    public static final EmcComponent AMORPHOUS_UNIT_COMPONENT = new EmcComponent(EmcType.AMORPHOUS);
-    public static final EmcComponent VOID_UNIT_COMPONENT = new EmcComponent(EmcType.VOID);
     
-    private static HashMap<CustomWrappedStack, EmcValue> defaultEmcValues = new HashMap<CustomWrappedStack, EmcValue>();
+    private static EmcDefaultValues defaultValues = null;
+    private Map<CustomWrappedStack, EmcValue> defaultValueMap;
 
-    public static void init() {
-
+    private EmcDefaultValues() {
+        
+        defaultValueMap = new HashMap<CustomWrappedStack, EmcValue>();
+    }
+    
+    public static EmcDefaultValues getInstance() {
+        
+        if (defaultValues == null) {
+            defaultValues = new EmcDefaultValues();
+            defaultValues.init();
+        }
+        
+        return defaultValues;
+    }
+    
+    private void init() {
+        
+        defaultValueMap.put(
+            new CustomWrappedStack(new EnergyStack(EnergyStack.VANILLA_SMELTING_ENERGY_NAME, 1)), 
+            new EmcValue(1, EmcComponent.KINETIC_UNIT_COMPONENT)
+        );
+    }
+    
+    public Map<CustomWrappedStack, EmcValue> getDefaultValueMap() {
+        
+        return defaultValueMap;
     }
 }

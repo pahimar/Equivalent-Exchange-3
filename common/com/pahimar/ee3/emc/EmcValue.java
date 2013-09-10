@@ -41,6 +41,11 @@ public class EmcValue implements Comparable<EmcValue> {
 
         this(value, 1F, collateComponents(components));
     }
+    
+    public EmcValue(float value, EmcComponent component) {
+        
+        this(value, 1F, Arrays.asList(component));
+    }
 
     public EmcValue(float value, float recoveryPercent, List<EmcComponent> components) {
 
