@@ -1,96 +1,139 @@
-<?xml version="1.0" ?> 
+<?xml version="1.0" ?>
 <project name="Equivalent Exchange 3" default="build">
-	
-	<property file="build.properties" prefix="build"/>
-	<property file="build_number.properties" prefix="build_number"/>
-	
-	<target name="clean">
-		<delete file="${build.dir.mcp}\src\minecraft\mcmod.info" />
-		<delete file="${build.dir.mcp}\src\minecraft\pack.mcmeta" />
-		<delete dir="${build.dir.mcp}\src\minecraft\com\pahimar" />
-		<delete dir="${build.dir.mcp}\reobf\minecraft" />
+
+	<!-- Public property files-->
+	<property file="build.properties" prefix="build" />
+	<property file="build_number.properties" prefix="build_number" />
+
+	<!-- Private property files 
+		private.properties only contains the following properties; 
+ 			fingerprint_signature
+ 			keystore_location
+			keystore_user_alias
+			keystore_user_password
+		These properties are used to properly sign the compiled jar in the 'release' target
+		For the majority of you this is not a concern and you will not need values for these - just use the 'build' target 
+	-->
+	<property file="private.properties" prefix="private" />
+
+	<!-- Minecraft Forge -->
+	<property name="minecraftforge_src_archive" value="minecraftforge-src-${build.minecraft_version}-${build.forge_version}.zip" />
+	<property name="minecraftforge_src_archive_location" value="http://files.minecraftforge.net/minecraftforge/${minecraftforge_src_archive}" />
+
+	<target name="forge-clean">
+		<delete dir="${build.base_location}/forge" />
 	</target>
-	
-	<target name="increment_build_number">
-		<propertyfile file="build_number.properties">
-			<entry key="build_number" type="int" operation="+" default="1"/>
-		</propertyfile>
+
+	<target name="forge-download">
+		<mkdir dir="${build.base_location}/temp" />
+		<get src="${minecraftforge_src_archive_location}" dest="${build.base_location}/temp/" verbose="true" usetimestamp="true" />
 	</target>
-	
-	<target name="prep">
-		<copy todir="${build.dir.mcp}\src\minecraft">
-			<fileset dir="${build.dir.mod}\common\" />
-		</copy>
+
+	<target name="forge-uncompress" depends="forge-download, forge-clean">
+		<unzip src="${build.base_location}/temp/${minecraftforge_src_archive}" dest="${build.base_location}" />
+		<delete dir="${build.base_location}/temp" />
 	</target>
-	
-	<target name="replace_tokens">
-		<replace dir="${build.dir.mcp}\src\minecraft\com\pahimar" token="@VERSION@" value="${build.release.mod.version}" />
-		<replace dir="${build.dir.mcp}\src\minecraft\com\pahimar" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
-		<replace dir="${build.dir.mcp}\src\minecraft\com\pahimar" token="@BUILD_NUMBER@" value="${build_number.build_number}" />
-	</target>
-	
-	<target name="recompile">
-		<exec dir="${build.dir.mcp}" executable="cmd" osfamily="windows">
-			<arg line="/c recompile.bat" />
+
+	<target name="forge-install" depends="forge-uncompress">
+		<exec dir="${build.base_location}/forge/" executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg value="/c" />
+			<arg value="${build.base_location}\forge\install.cmd" />
 		</exec>
-		<exec dir="${build.dir.mcp}" executable="bash" osfamily="unix">
-			<arg line="recompile.sh" />
-		</exec>
-	</target>
-	
-	<target name="reobfuscate">
-		<exec dir="${build.dir.mcp}" executable="cmd" osfamily="windows">
-			<arg line="/c reobfuscate_srg.bat" />
-		</exec>
-		<exec dir="${build.dir.mcp}" executable="bash" osfamily="unix">
+		<exec dir="${build.base_location}/forge/" executable="bash" osfamily="unix">
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
-	
-	<target name="sign_jar">
-		<signjar jar="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}-${build_number.build_number}.jar" keystore="${build.keystore.location}" alias="${build.keystore.alias}" storepass="${build.keystore.password}" />
+
+	<target name="clean">
+		<delete dir="${build.base_location}/temp" />
+		<delete file="${build.mcp_location}/src/minecraft/mcmod.info" />
+		<delete file="${build.mcp_location}/src/minecraft/pack.mcmeta" />
+		<delete dir="${build.mcp_location}/src/minecraft/com/pahimar" />
+		<delete dir="${build.mcp_location}/reobf/minecraft" />
 	</target>
-	
+
+	<target name="increment_build_number">
+		<propertyfile file="build_number.properties">
+			<entry key="build_number" type="int" operation="+" default="1" />
+		</propertyfile>
+	</target>
+
+	<target name="prep">
+		<copy todir="${build.mcp_location}/src/minecraft">
+			<fileset dir="${build.source_location}/common/" />
+		</copy>
+	</target>
+
+	<target name="replace_tokens">
+		<replace dir="${build.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${build.mcp_location}/src/minecraft/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
+		<replace dir="${build.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build_number.build_number}" />
+	</target>
+
+	<target name="recompile">
+		<exec dir="${build.mcp_location}" executable="cmd" osfamily="windows">
+			<arg line="/c recompile.bat" />
+		</exec>
+		<exec dir="${build.mcp_location}" executable="bash" osfamily="unix">
+			<arg line="recompile.sh" />
+		</exec>
+	</target>
+
+	<target name="reobfuscate">
+		<exec dir="${build.mcp_location}" executable="cmd" osfamily="windows">
+			<arg line="/c reobfuscate_srg.bat" />
+		</exec>
+		<exec dir="${build.mcp_location}" executable="bash" osfamily="unix">
+			<arg line="reobfuscate_srg.sh" />
+		</exec>
+	</target>
+
+	<target name="sign_jar">
+		<signjar jar="${build.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build_number.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
+	</target>
+
 	<target name="build">
 		<!-- Prep for the build -->
 		<antcall target="clean" />
 		<antcall target="increment_build_number" />
 		<antcall target="prep" />
-		<antcall target="recompile" />		
+		<antcall target="recompile" />
 		<antcall target="reobfuscate" />
-		
+
 		<!-- Build the jar -->
-		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
-		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}-${build_number.build_number}.jar">
-			<fileset dir="${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.mod}\resources" excludes="**/xcf/**" />
+		<mkdir dir="${build.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
+		<jar destfile="${build.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build_number.build_number}.jar">
+			<fileset dir="${build.mcp_location}/src/minecraft/" includes="mcmod.info" />
+			<fileset dir="${build.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
+			<fileset dir="${build.mcp_location}/reobf/minecraft" />
+			<fileset dir="${build.source_location}/resources" excludes="**/xcf/**" />
 		</jar>
-		
+
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
-	
+
 	<target name="release">
 		<!-- Prep for the build -->
 		<antcall target="clean" />
 		<antcall target="increment_build_number" />
 		<antcall target="prep" />
 		<antcall target="replace_tokens" />
-		<antcall target="recompile" />		
+		<antcall target="recompile" />
 		<antcall target="reobfuscate" />
-		
+
 		<!-- Build the jar -->
-		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
-		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\ee3-universal-${build.release.mod.version}-${build_number.build_number}.jar">
-			<fileset dir="${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.mod}\resources" excludes="**/xcf/**" />
+		<mkdir dir="${build.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
+		<jar destfile="${build.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build_number.build_number}.jar">
+			<fileset dir="${build.mcp_location}/src/minecraft/" includes="mcmod.info" />
+			<fileset dir="${build.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
+			<fileset dir="${build.mcp_location}/reobf/minecraft" />
+			<fileset dir="${build.source_location}/resources" excludes="**/xcf/**" />
 		</jar>
-		
+
 		<!-- Sign the finished jar -->
 		<antcall target="sign_jar" />
-		
+
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
