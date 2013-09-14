@@ -22,7 +22,7 @@ public class ItemRenderingTankRenderer implements IItemRenderer {
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 
-        return true;
+        return type != ItemRenderType.FIRST_PERSON_HOLDING && type != ItemRenderType.FIRST_PERSON_MAP;
     }
 
     @Override
