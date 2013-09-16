@@ -43,6 +43,8 @@
 			<arg line="install.sh" />
 		</exec>
 	</target>
+	
+	<target name="forge-clean-install" depends="forge-clean, forge-install" />
 
 	<target name="clean">
 		<delete dir="${build.base_location}/temp" />

@@ -1,9 +1,12 @@
 package com.pahimar.ee3.emc.graph;
 
-public class WeightedEdge<T> implements Comparable<WeightedEdge<T>> {
+public class WeightedEdge<T extends Comparable<T>> implements Comparable<WeightedEdge<T>> {
 
+	public enum EdgeTraversalStatus { UNDISCOVERED, DISCOVERY_EDGE, BACK_EDGE }
+	
     public final float weight;
     public final T target;
+    public EdgeTraversalStatus edgeTraversalStatus;
 
     public WeightedEdge(T target) {
 
@@ -14,6 +17,7 @@ public class WeightedEdge<T> implements Comparable<WeightedEdge<T>> {
 
         this.weight = weight;
         this.target = target;
+        this.edgeTraversalStatus = EdgeTraversalStatus.UNDISCOVERED;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class WeightedEdge<T> implements Comparable<WeightedEdge<T>> {
 
         if (weightedEdge instanceof WeightedEdge) {
             if (Float.compare(this.weight, weightedEdge.weight) == 0) {
-                return (this.target.hashCode() - weightedEdge.target.hashCode());
+                return this.target.compareTo(weightedEdge.target);
             }
             else {
                 return Float.compare(this.weight, weightedEdge.weight);

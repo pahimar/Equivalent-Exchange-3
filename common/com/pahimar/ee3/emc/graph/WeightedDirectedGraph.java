@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableList;
 
-public class WeightedDirectedGraph<T> implements Iterable<T> {
+public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<T> {
 
     private final Map<T, SortedSet<WeightedEdge<T>>> graph = new HashMap<T, SortedSet<WeightedEdge<T>>>();
 
