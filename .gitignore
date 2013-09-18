@@ -1,5 +1,5 @@
-build.properties
 private.properties
+environment.properties
 .DS_Store
 .DS_Store?
 .Spotlight-V100
