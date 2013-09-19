@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemyTable;
 
@@ -29,24 +30,23 @@ public class BlockAlchemyTable extends BlockEE {
         return unlocalizedName.toString();
     }
 
-    // TODO Finish getting the rendering nice looking
-    //	@Override
-    //    public boolean renderAsNormalBlock() {
-    //
-    //        return false;
-    //    }
-    //
-    //    @Override
-    //    public boolean isOpaqueCube() {
-    //
-    //        return false;
-    //    }
-    //
-    //    @Override
-    //    public int getRenderType() {
-    //
-    //        return RenderIds.alchemyTable;
-    //    }
+    @Override
+    public boolean renderAsNormalBlock() {
+
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+
+        return RenderIds.alchemyTable;
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
