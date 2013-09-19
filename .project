@@ -17,12 +17,21 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1378220747136</id>
+			<id>1379552633805</id>
 			<name></name>
 			<type>6</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-true-COPYING|COPYING.LESSER|README.md</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1379552633810</id>
+			<name></name>
+			<type>14</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-eclipse</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
