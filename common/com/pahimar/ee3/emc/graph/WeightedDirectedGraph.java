@@ -10,7 +10,9 @@ import com.google.common.collect.ImmutableList;
 
 public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<T> {
 
-    private final Map<T, SortedSet<WeightedEdge<T>>> graph = new HashMap<T, SortedSet<WeightedEdge<T>>>();
+    // FIXME This whole class should be considered very broken right now, as it needs to be adjusted now that we are wrapping objects into Nodes
+    
+    private final Map<Node<T>, SortedSet<WeightedEdge<T>>> graph = new HashMap<Node<T>, SortedSet<WeightedEdge<T>>>();
 
     public boolean addNode(T node) {
 
@@ -18,7 +20,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
             return false;
         }
 
-        graph.put(node, new TreeSet<WeightedEdge<T>>());
+        graph.put(new Node<T>(node), new TreeSet<WeightedEdge<T>>());
 
         return true;
     }
