@@ -10,9 +10,9 @@
 ### Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 ***
-#### Prerequisites (Windows/Mac)
+#### Windows Prerequisites
 1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
-2. Download and install the Java JDK (If you have a 64bit OS, install the 64bit version) [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download the one pertaining to your OS (necessary for MCP).
+2. Download and install the Java JDK (If you have a 64bit OS, install the 64bit version) [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it.
 	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
@@ -28,13 +28,13 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
   * For `Variable Value`, input `C:\Ant\apache-ant-1.9.2` (or your Ant directory\apache-ant-1.9.2).
   * Scroll down to `Path`, and double-click on it.
   * Append `;%ANT_HOME%\bin` exactly as shown to the end.
-4. Download and install Github [here](http://windows.github.com/) (Windows) For Mac OSX (10.7+) [here](http://mac.github.com/) (Mac) NOTE: The Github application is optional, you can use whatever you want, e.g. TortoiseGit
+4. Download and install Github [here](http://windows.github.com/) (Windows) NOTE: The Github application is optional, you can use whatever you want, e.g. TortoiseGit
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows/Mac` at the bottom of the right-hand toolbar.
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
 5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
-#### Linux prerequisites
+#### Linux Prerequisites
 1. Make sure you have the latest Java JDK installed
 	* In Gentoo, `emerge dev-java/oracle-jdk-bin`
 	* In Archlinux, `pacman -S jdk7-openjdk`
@@ -56,6 +56,16 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 		* etc.
 4. Open your shell and move to a convenient directory, then run `git clone https://github.com/pahimar/Equivalent-Exchange-3`.  This will download the repository.
 5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+
+#### Mac Prerequisites
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but it is often Java 6, which does not always work.)
+2. Apache Ant should already be installed on your computer.  To check, go into the Terminal, and type `ant --version`.  It should return a version string.  If you get a "command not found" error, it's not installed.
+3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) (Mac) NOTE: The Github application is optional, you can use whatever you want.
+	* Create an account.
+  * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows/Mac` at the bottom of the right-hand toolbar.
+  * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
+5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+
 
 #### Setup MCP
 1. Download the latest version of Forge source from here: http://files.minecraftforge.net
@@ -84,15 +94,15 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `environment.properties`.
 	* Open it up with any text editor, and type into it the following (change the base_location to wherever you have "mcdev."):
- 		* base_location=C:/mcdev/
- 		* source_location=${base_location}/source/Equivalent-Exchange-3
- 		* mcp_location=${base_location}/forge/mcp
- 		* release_location=${base_location}/source/Equivalent-Exchange-3/Releases
- 	* You may also edit the build.properties to show what build string and minecraft version you are building for.
- 		* minecraft_version=1.6.3
- 		* forge_version=9.11.0.878
- 		* mod_version=pre2
- 		* build_number=1
+ 		* `base_location=C:/mcdev/`
+ 		* `source_location=${base_location}/source/Equivalent-Exchange-3`
+ 		* `mcp_location=${base_location}/forge/mcp`
+ 		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
+ 	* You may also edit the build.properties to show what the build string is and what minecraft version you are building for.
+ 		* `minecraft_version=1.6.3`
+ 		* `forge_version=9.11.0.878`
+ 		* `mod_version=pre2`
+ 		* `build_number=1`
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
 6. Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant build`. This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
@@ -109,7 +119,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 5. Click `Sync`, and wait for it to finish.
 6. Re-compile (or move it to `mcdev\source` then re-compile, depending on what you did.)
 
-### Updating Your Repo (For Linux)
+#### Updating Your Repo (For Linux)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
 2. cd to your repository
 3. run "git pull"
