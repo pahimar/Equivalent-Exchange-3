@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableList;
 
-public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<T> {
+public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<Node<T>> {
 
     // FIXME This whole class should be considered very broken right now, as it needs to be adjusted now that we are wrapping objects into Nodes
     
@@ -64,7 +64,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
             Iterator<WeightedEdge<T>> edgeIterator = graph.get(from).iterator();
 
             while (edgeIterator.hasNext()) {
-                if (edgeIterator.next().target.equals(to)) {
+                if (edgeIterator.next().targetNode.equals(to)) {
                     return true;
                 }
             }
@@ -112,14 +112,14 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
         
         if (containsNode(targetNode)) {
     
-            for (T graphNode : getAllNodes()) {
+            for (Node<T> graphNode : getAllNodes()) {
                 
                 if (!graphNode.equals(targetNode)) {
                     
-                    ImmutableList<WeightedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
+                    ImmutableList<WeightedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode.nodeObject);
     
                     for (WeightedEdge<T> edgeFromGraphNode : edgesFromGraphNode) {
-                        if (edgeFromGraphNode.target.equals(targetNode)) {
+                        if (edgeFromGraphNode.targetNode.equals(targetNode)) {
                             edgesToTargetNodeList.add(new WeightedEdge<T>(graphNode, edgeFromGraphNode.weight));
                         }
                     }
@@ -165,12 +165,12 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
     public void removeEdgesTo(T targetNode) {
 
         if (containsNode(targetNode)) {
-            for (T graphNode : graph.keySet()) {
+            for (Node<T> graphNode : graph.keySet()) {
                 
-                ImmutableList<WeightedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
+                ImmutableList<WeightedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode.nodeObject);
     
                 for (WeightedEdge<T> edgeFromGraphNode : edgesFromGraphNode) {
-                    if (edgeFromGraphNode.target.equals(targetNode)) {
+                    if (edgeFromGraphNode.targetNode.equals(targetNode)) {
                         graph.get(graphNode).remove(edgeFromGraphNode);
                     }
                 }
@@ -182,20 +182,20 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
 
         if (containsNode(firstNode) && containsNode(secondNode)) {
             for (WeightedEdge<T> edgeFromFirstNode : edgesFrom(firstNode)) {
-                if (edgeFromFirstNode.target.equals(secondNode)) {
+                if (edgeFromFirstNode.targetNode.equals(secondNode)) {
                     graph.get(firstNode).remove(edgeFromFirstNode);
                 }
             }
     
             for (WeightedEdge<T> edgeFromSecondNode : edgesFrom(secondNode)) {
-                if (edgeFromSecondNode.target.equals(firstNode)) {
+                if (edgeFromSecondNode.targetNode.equals(firstNode)) {
                     graph.get(secondNode).remove(edgeFromSecondNode);
                 }
             }
         }
     }
 
-    public ImmutableList<T> getAllNodes() {
+    public ImmutableList<Node<T>> getAllNodes() {
 
         if (graph.keySet() != null) {
             return ImmutableList.copyOf(graph.keySet());
@@ -205,16 +205,16 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
         }
     }
 
-    public ImmutableList<T> getCriticalNodes() {
+    public ImmutableList<Node<T>> getCriticalNodes() {
 
-        ImmutableList.Builder<T> criticalNodesList = ImmutableList.builder();
+        ImmutableList.Builder<Node<T>> criticalNodesList = ImmutableList.builder();
 
-        Iterator<T> nodeIterator = this.iterator();
+        Iterator<Node<T>> nodeIterator = this.iterator();
 
         while (nodeIterator.hasNext()) {
-            T currentNode = nodeIterator.next();
+            Node<T> currentNode = nodeIterator.next();
 
-            if (this.edgesFrom(currentNode).size() == 0) {
+            if (this.edgesFrom(currentNode.nodeObject).size() == 0) {
                 criticalNodesList.add(currentNode);
             }
         }
@@ -222,16 +222,16 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
         return criticalNodesList.build();
     }
 
-    public ImmutableList<T> getOrphanNodes() {
+    public ImmutableList<Node<T>> getOrphanNodes() {
 
-        ImmutableList.Builder<T> orphanNodesList = ImmutableList.builder();
+        ImmutableList.Builder<Node<T>> orphanNodesList = ImmutableList.builder();
 
-        Iterator<T> nodeIterator = this.iterator();
+        Iterator<Node<T>> nodeIterator = this.iterator();
 
         while (nodeIterator.hasNext()) {
-            T currentNode = nodeIterator.next();
+            Node<T> currentNode = nodeIterator.next();
 
-            if (this.edgesFrom(currentNode).size() == 0 && this.edgesTo(currentNode).size() == 0) {
+            if (this.edgesFrom(currentNode.nodeObject).size() == 0 && this.edgesTo(currentNode.nodeObject).size() == 0) {
                 orphanNodesList.add(currentNode);
             }
         }
@@ -240,7 +240,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>> implements Iterable<
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Node<T>> iterator() {
 
         return this.getAllNodes().iterator();
     }

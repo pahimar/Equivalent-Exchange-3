@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
-import com.pahimar.ee3.emc.graph.WeightedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
@@ -93,39 +91,40 @@ public class DynEMC {
 
     public void printDebugDump() {
 
-        LogHelper.debug("Total node count: " + graph.getAllNodes().size());
-        LogHelper.debug("Critical node count: " + graph.getCriticalNodes().size());
-        LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
-        LogHelper.debug("");
-        LogHelper.debug("***** START NODES *****");
-        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            CustomWrappedStack node = nodeIter.next();
-            LogHelper.debug("Node: " + node);
-        }
-        LogHelper.debug("***** END NODES *****");
-        LogHelper.debug("");
-        LogHelper.debug("***** START EDGES FROM *****");
-        nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            CustomWrappedStack node = nodeIter.next();
-            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
-            for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
-                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.target + ", Weight: " + edge.weight);
-            }
-        }
-        LogHelper.debug("***** END EDGES FROM *****");
-        LogHelper.debug("");
-        LogHelper.debug("***** START EDGES TO *****");
-        nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            CustomWrappedStack node = nodeIter.next();
-            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
-            for (WeightedEdge<CustomWrappedStack> edge : edgesTo) {
-                LogHelper.debug("Crafting Input: " + node + ", Crafting Output: " + edge.target + ", Weight: " + edge.weight);
-            }
-        }
-        LogHelper.debug("***** END EDGES TO *****");
+        // TODO Temporarily commented out - come back and fix this proper
+//        LogHelper.debug("Total node count: " + graph.getAllNodes().size());
+//        LogHelper.debug("Critical node count: " + graph.getCriticalNodes().size());
+//        LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
+//        LogHelper.debug("");
+//        LogHelper.debug("***** START NODES *****");
+//        Iterator<CustomWrappedStack> nodeIter = graph.iterator();
+//        while (nodeIter.hasNext()) {
+//            CustomWrappedStack node = nodeIter.next();
+//            LogHelper.debug("Node: " + node);
+//        }
+//        LogHelper.debug("***** END NODES *****");
+//        LogHelper.debug("");
+//        LogHelper.debug("***** START EDGES FROM *****");
+//        nodeIter = graph.iterator();
+//        while (nodeIter.hasNext()) {
+//            CustomWrappedStack node = nodeIter.next();
+//            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
+//            for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
+//                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.targetNode + ", Weight: " + edge.weight);
+//            }
+//        }
+//        LogHelper.debug("***** END EDGES FROM *****");
+//        LogHelper.debug("");
+//        LogHelper.debug("***** START EDGES TO *****");
+//        nodeIter = graph.iterator();
+//        while (nodeIter.hasNext()) {
+//            CustomWrappedStack node = nodeIter.next();
+//            ImmutableList<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
+//            for (WeightedEdge<CustomWrappedStack> edge : edgesTo) {
+//                LogHelper.debug("Crafting Input: " + node + ", Crafting Output: " + edge.targetNode + ", Weight: " + edge.weight);
+//            }
+//        }
+//        LogHelper.debug("***** END EDGES TO *****");
     }
 
     @Override
