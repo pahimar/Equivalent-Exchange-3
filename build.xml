@@ -4,16 +4,6 @@
 	<!-- Public property files-->
 	<property file="build.properties" prefix="build" />
 	<property file="environment.properties" prefix="environment" />
-
-	<!-- Private property files 
-		private.properties only contains the following properties; 
- 			fingerprint_signature
- 			keystore_location
-			keystore_user_alias
-			keystore_user_password
-		These properties are used to properly sign the compiled jar in the 'release' target
-		For the majority of you this is not a concern and you will not need values for these - just use the 'build' target 
-	-->
 	<property file="private.properties" prefix="private" />
 
 	<!-- Minecraft Forge -->
@@ -29,7 +19,7 @@
 		<get src="${minecraftforge_src_archive_location}" dest="${environment.base_location}/temp/" verbose="true" usetimestamp="true" />
 	</target>
 
-	<target name="forge-uncompress" depends="forge-download, forge-clean">
+	<target name="forge-uncompress" depends="forge-download">
 		<unzip src="${environment.base_location}/temp/${minecraftforge_src_archive}" dest="${environment.base_location}" />
 		<delete dir="${environment.base_location}/temp" />
 	</target>
@@ -94,13 +84,7 @@
 		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
 	</target>
 
-	<target name="build">
-		<!-- Prep for the build -->
-		<antcall target="clean" />
-		<antcall target="increment_build_number" />
-		<antcall target="prep" />
-		<antcall target="recompile" />
-		<antcall target="reobfuscate" />
+	<target name="build" depends="clean, increment_build_number, prep, recompile, reobfuscate">
 
 		<!-- Build the jar -->
 		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
@@ -115,14 +99,7 @@
 		<antcall target="clean" />
 	</target>
 
-	<target name="release">
-		<!-- Prep for the build -->
-		<antcall target="clean" />
-		<antcall target="increment_build_number" />
-		<antcall target="prep" />
-		<antcall target="replace_tokens" />
-		<antcall target="recompile" />
-		<antcall target="reobfuscate" />
+	<target name="release" depends="clean, increment_build_number, prep, replace_tokens, recompile, reobfuscate">
 
 		<!-- Build the jar -->
 		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
