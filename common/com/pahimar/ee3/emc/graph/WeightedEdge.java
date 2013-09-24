@@ -7,7 +7,7 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
     }
 
     public final float weight;
-    public final Node<T> targetNode;
+    public final Node<T> destinationNode;
     public EdgeTraversalStatus edgeTraversalStatus;
 
     public WeightedEdge(T nodeObject) {
@@ -19,11 +19,16 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
 
         this(new Node<T>(nodeObject), weight);
     }
+    
+    public WeightedEdge(Node<T> destinationNode) {
+    	
+    	this(destinationNode, 1);
+    }
 
-    public WeightedEdge(Node<T> targetNode, float weight) {
+    public WeightedEdge(Node<T> destinationNode, float weight) {
 
         this.weight = weight;
-        this.targetNode = targetNode;
+        this.destinationNode = destinationNode;
         this.edgeTraversalStatus = EdgeTraversalStatus.UNDISCOVERED;
     }
 
@@ -38,7 +43,7 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
 
         return (Float.compare(this.weight, edge.weight) == 0) && 
                 (this.edgeTraversalStatus == edge.edgeTraversalStatus) && 
-                targetNode.equals(edge.targetNode);
+                destinationNode.equals(edge.destinationNode);
     }
 
     /*
@@ -50,7 +55,7 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
 
         if (weightedEdge instanceof WeightedEdge) {
             if (Float.compare(this.weight, weightedEdge.weight) == 0) {
-                return this.targetNode.compareTo(weightedEdge.targetNode);
+                return this.destinationNode.compareTo(weightedEdge.destinationNode);
             }
             else {
                 return Float.compare(this.weight, weightedEdge.weight);
@@ -66,7 +71,7 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("Target: %s, Weight: %s", targetNode, weight));
+        stringBuilder.append(String.format("Target: %s, Weight: %s", destinationNode, weight));
 
         return stringBuilder.toString();
     }

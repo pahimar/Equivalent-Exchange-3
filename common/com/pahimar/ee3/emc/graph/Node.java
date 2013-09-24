@@ -57,6 +57,12 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     }
     
     @Override
+    public int hashCode() {
+    	
+    	return this.nodeObject.hashCode();
+    }
+    
+    @Override
     public String toString() {
         
         return nodeObject.toString();
