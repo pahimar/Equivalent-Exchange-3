@@ -1,4 +1,4 @@
-package com.pahimar.ee3.emc.graph;
+package com.pahimar.ee3.graph;
 
 public class WeightedEdge<T extends Comparable<T>> implements Comparable<WeightedEdge<T>> {
 

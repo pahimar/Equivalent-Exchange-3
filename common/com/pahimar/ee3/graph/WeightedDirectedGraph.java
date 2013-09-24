@@ -1,4 +1,4 @@
-package com.pahimar.ee3.emc.graph;
+package com.pahimar.ee3.graph;
 
 import java.util.HashMap;
 import java.util.Iterator;

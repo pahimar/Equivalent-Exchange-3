@@ -6,9 +6,9 @@ import java.util.Set;
 
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
-import com.pahimar.ee3.emc.graph.Node;
-import com.pahimar.ee3.emc.graph.WeightedDirectedGraph;
-import com.pahimar.ee3.emc.graph.WeightedEdge;
+import com.pahimar.ee3.graph.Node;
+import com.pahimar.ee3.graph.WeightedDirectedGraph;
+import com.pahimar.ee3.graph.WeightedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
