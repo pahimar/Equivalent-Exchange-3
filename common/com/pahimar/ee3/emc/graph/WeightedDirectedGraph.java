@@ -259,13 +259,14 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             graph.remove(node);
         }
     }
-    
+
     /**
      * Removes the Node that contains the specified node object
      * 
      * @param nodeObject
      */
     public void removeNode(T nodeObject) {
+
         this.removeNode(new Node<T>(nodeObject));
     }
 
@@ -302,8 +303,9 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             graph.get(node).clear();
         }
     }
-    
+
     public void removeEdgesFrom(T nodeObject) {
+
         this.removeEdgesFrom(new Node<T>(nodeObject));
     }
 
@@ -332,8 +334,9 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             }
         }
     }
-    
+
     public void removeEdgesTo(T nodeObject) {
+
         this.removeEdgesTo(new Node<T>(nodeObject));
     }
 
@@ -360,8 +363,9 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             }
         }
     }
-    
+
     public void removeEdgesBetween(T firstObject, T secondObject) {
+
         this.removeEdgesBetween(new Node<T>(firstObject), new Node<T>(secondObject));
     }
 
@@ -393,6 +397,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
                     List<WeightedEdge<Node<T>>> edgesFromGraphNode = edgesFrom(graphNode);
 
                     for (WeightedEdge<Node<T>> fromEdge : edgesFromGraphNode) {
+                        
                         if (fromEdge.destinationNode.equals(destinationNode)) {
                             edgesToTargetNodeList.add(new WeightedEdge<Node<T>>(graphNode, fromEdge.weight));
                         }

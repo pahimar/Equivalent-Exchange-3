@@ -177,6 +177,7 @@ public class EquivalentExchange3 {
         DynEMC dynEMC = DynEMC.getInstance();
         
         LogHelper.debug(dynEMC.graph.getAllNodes().size());
+        dynEMC.printDebugDump();
     }
 
     @EventHandler
