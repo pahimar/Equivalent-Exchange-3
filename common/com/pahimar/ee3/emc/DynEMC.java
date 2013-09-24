@@ -64,7 +64,6 @@ public class DynEMC {
                     for (CustomWrappedStack recipeInput : recipeInputs) {
 
                         // Unwrapped the wrapped stacks so that we actually find them in the graph
-
                         CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
 
                         if (graph.containsNode(unWrappedRecipeInput)) {
@@ -72,14 +71,7 @@ public class DynEMC {
                                 graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
                             }
                         }
-                        else {
-                            LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' exists in the crafting relationship graph");
-                            LogHelper.debug("Recipe input '" + unWrappedRecipeInput.toString() + "' does not exist in the crafting relationship graph");
-                        }
                     }
-                }
-                else {
-                    LogHelper.debug("Recipe output '" + unWrappedRecipeOutput.toString() + "' does not exist in the crafting relationship graph");
                 }
             }
         }
@@ -91,52 +83,21 @@ public class DynEMC {
         LogHelper.debug("Leaf node count: " + graph.getLeafNodes().size());
         LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
         LogHelper.debug("Compound node count: " + graph.getCompoundNodes().size());
+        LogHelper.debug("'Critical' node count: " + (graph.getLeafNodes().size() - graph.getOrphanNodes().size()));
+        
         LogHelper.debug("");
-        LogHelper.debug("***** START NODES *****");
-
-        Iterator<Node<CustomWrappedStack>> nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            Node<CustomWrappedStack> node = nodeIter.next();
+        
+        for (Node<CustomWrappedStack> node : graph.getAllNodes()) {
             LogHelper.debug("Node: " + node);
-        }
-        LogHelper.debug("***** END NODES *****");
-
-        LogHelper.debug("");
-
-        LogHelper.debug("***** START EDGES FROM *****");
-        nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            Node<CustomWrappedStack> node = nodeIter.next();
-            List<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
-            for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
-                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.destinationNode + ", Weight: " + edge.weight);
+            LogHelper.debug("Edges FROM Node");
+            for (WeightedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
+                LogHelper.debug(" * " + fromEdge);
             }
-        }
-        LogHelper.debug("***** END EDGES FROM *****");
-
-        LogHelper.debug("");
-
-        LogHelper.debug("***** START EDGES TO *****");
-        nodeIter = graph.iterator();
-        while (nodeIter.hasNext()) {
-            
-            Node<CustomWrappedStack> node = nodeIter.next();
-            List<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
-            
-            for (WeightedEdge<CustomWrappedStack> edge : edgesTo) {
-                LogHelper.debug("Crafting Input: " + node + ", Crafting Output: " + edge.destinationNode + ", Weight: " + edge.weight);
+            LogHelper.debug("Edges TO Node");
+            for (WeightedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
+                LogHelper.debug(" * " + toEdge);
             }
+            LogHelper.debug("");
         }
-        LogHelper.debug("***** END EDGES TO *****");
-    }
-
-    @Override
-    public String toString() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.format("DynEMC Node Count: %s", graph.size()));
-
-        return stringBuilder.toString();
     }
 }
