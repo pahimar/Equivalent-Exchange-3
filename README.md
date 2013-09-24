@@ -38,7 +38,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 1. Make sure you have the latest Java JDK installed.  To install manually, go [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Otherwise, install from the package manager or the terminal (listed).
 	* In Gentoo, `emerge dev-java/oracle-jdk-bin`
 	* In Archlinux, `pacman -S jdk7-openjdk`
-	* In Ubuntu/Debian, `apt-get install openjdk7-jdk`
+	* In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
 	* In Fedora, `yum install java-1.7.0-openjdk`
 		* If your distribution is not listed, follow the instructions specific to your package manager.
 2. Install Apache Ant.  To install manually, go [here](http://ant.apache.org).
