@@ -42,7 +42,6 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
         WeightedEdge<?> edge = (WeightedEdge<?>) object;
 
         return (Float.compare(this.weight, edge.weight) == 0) && 
-                (this.edgeTraversalStatus == edge.edgeTraversalStatus) && 
                 destinationNode.equals(edge.destinationNode);
     }
 

@@ -33,7 +33,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 
         Node<?> node = (Node<?>) object;
 
-        return this.traversalState == node.traversalState && this.nodeObject.equals(node.nodeObject);
+        return this.nodeObject.equals(node.nodeObject);
     }
 
     /*

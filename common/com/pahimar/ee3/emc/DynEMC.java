@@ -91,39 +91,39 @@ public class DynEMC {
         LogHelper.debug("Leaf node count: " + graph.getLeafNodes().size());
         LogHelper.debug("Orphan node count: " + graph.getOrphanNodes().size());
         LogHelper.debug("Compound node count: " + graph.getCompoundNodes().size());
-//        LogHelper.debug("");
-//        LogHelper.debug("***** START NODES *****");
-//
-//        Iterator<Node<CustomWrappedStack>> nodeIter = graph.iterator();
-//        while (nodeIter.hasNext()) {
-//            Node<CustomWrappedStack> node = nodeIter.next();
-//            LogHelper.debug("Node: " + node);
-//        }
-//        LogHelper.debug("***** END NODES *****");
-//
-//        LogHelper.debug("");
-//
-//        LogHelper.debug("***** START EDGES FROM *****");
-//        nodeIter = graph.iterator();
-//        while (nodeIter.hasNext()) {
-//            Node<CustomWrappedStack> node = nodeIter.next();
-//            List<WeightedEdge<Node<CustomWrappedStack>>> edgesFrom = graph.edgesFrom(node);
-//            for (WeightedEdge<Node<CustomWrappedStack>> edge : edgesFrom) {
-//                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.destinationNode + ", Weight: " + edge.weight);
-//            }
-//        }
-//        LogHelper.debug("***** END EDGES FROM *****");
+        LogHelper.debug("");
+        LogHelper.debug("***** START NODES *****");
+
+        Iterator<Node<CustomWrappedStack>> nodeIter = graph.iterator();
+        while (nodeIter.hasNext()) {
+            Node<CustomWrappedStack> node = nodeIter.next();
+            LogHelper.debug("Node: " + node);
+        }
+        LogHelper.debug("***** END NODES *****");
+
+        LogHelper.debug("");
+
+        LogHelper.debug("***** START EDGES FROM *****");
+        nodeIter = graph.iterator();
+        while (nodeIter.hasNext()) {
+            Node<CustomWrappedStack> node = nodeIter.next();
+            List<WeightedEdge<CustomWrappedStack>> edgesFrom = graph.edgesFrom(node);
+            for (WeightedEdge<CustomWrappedStack> edge : edgesFrom) {
+                LogHelper.debug("Crafting Output: " + node + ", Crafting Input: " + edge.destinationNode + ", Weight: " + edge.weight);
+            }
+        }
+        LogHelper.debug("***** END EDGES FROM *****");
 
         LogHelper.debug("");
 
         LogHelper.debug("***** START EDGES TO *****");
-        Iterator<Node<CustomWrappedStack>> nodeIter = graph.iterator();
+        nodeIter = graph.iterator();
         while (nodeIter.hasNext()) {
             
             Node<CustomWrappedStack> node = nodeIter.next();
-            List<WeightedEdge<Node<CustomWrappedStack>>> edgesTo = graph.edgesTo(node);
+            List<WeightedEdge<CustomWrappedStack>> edgesTo = graph.edgesTo(node);
             
-            for (WeightedEdge<Node<CustomWrappedStack>> edge : edgesTo) {
+            for (WeightedEdge<CustomWrappedStack> edge : edgesTo) {
                 LogHelper.debug("Crafting Input: " + node + ", Crafting Output: " + edge.destinationNode + ", Weight: " + edge.weight);
             }
         }

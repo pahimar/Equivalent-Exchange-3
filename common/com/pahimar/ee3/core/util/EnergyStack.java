@@ -14,14 +14,9 @@ public class EnergyStack implements Comparable<EnergyStack> {
         this.stackSize = stackSize;
     }
 
-    public EnergyStack() {
-
-        this(null, 0);
-    }
-
     public EnergyStack(String energyName) {
 
-        this(energyName, 0);
+        this(energyName, 1);
     }
 
     @Override
