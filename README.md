@@ -60,7 +60,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 #### Mac Prerequisites
 1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but it is often Java 6, which does not always work.)
 2. Apache Ant should already be installed on your computer.  To check, go into Terminal, and type `ant --version`.  It should return a version string.  If you get a "command not found" error, it's not installed.
-3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: The Github application is optional, you can use whatever you want.
+3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
