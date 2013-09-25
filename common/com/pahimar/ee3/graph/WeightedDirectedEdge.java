@@ -1,6 +1,6 @@
 package com.pahimar.ee3.graph;
 
-public class WeightedEdge<T extends Comparable<T>> implements Comparable<WeightedEdge<T>> {
+public class WeightedDirectedEdge<T extends Comparable<T>> implements Comparable<WeightedDirectedEdge<T>> {
 
     public enum EdgeTraversalStatus {
         UNDISCOVERED, DISCOVERY_EDGE, BACK_EDGE
@@ -10,22 +10,22 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
     public final Node<T> destinationNode;
     public EdgeTraversalStatus edgeTraversalStatus;
 
-    public WeightedEdge(T nodeObject) {
+    public WeightedDirectedEdge(T nodeObject) {
 
         this(nodeObject, 1);
     }
 
-    public WeightedEdge(T nodeObject, float weight) {
+    public WeightedDirectedEdge(T nodeObject, float weight) {
 
         this(new Node<T>(nodeObject), weight);
     }
     
-    public WeightedEdge(Node<T> destinationNode) {
+    public WeightedDirectedEdge(Node<T> destinationNode) {
     	
     	this(destinationNode, 1);
     }
 
-    public WeightedEdge(Node<T> destinationNode, float weight) {
+    public WeightedDirectedEdge(Node<T> destinationNode, float weight) {
 
         this.weight = weight;
         this.destinationNode = destinationNode;
@@ -35,11 +35,11 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof WeightedEdge<?>)) {
+        if (!(object instanceof WeightedDirectedEdge<?>)) {
             return false;
         }
 
-        WeightedEdge<?> edge = (WeightedEdge<?>) object;
+        WeightedDirectedEdge<?> edge = (WeightedDirectedEdge<?>) object;
 
         return (Float.compare(this.weight, edge.weight) == 0) && 
                 destinationNode.equals(edge.destinationNode);
@@ -50,9 +50,9 @@ public class WeightedEdge<T extends Comparable<T>> implements Comparable<Weighte
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(WeightedEdge<T> weightedEdge) {
+    public int compareTo(WeightedDirectedEdge<T> weightedEdge) {
 
-        if (weightedEdge instanceof WeightedEdge) {
+        if (weightedEdge instanceof WeightedDirectedEdge) {
             if (Float.compare(this.weight, weightedEdge.weight) == 0) {
                 return this.destinationNode.compareTo(weightedEdge.destinationNode);
             }

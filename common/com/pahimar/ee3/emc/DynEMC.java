@@ -8,7 +8,7 @@ import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.graph.Node;
 import com.pahimar.ee3.graph.WeightedDirectedGraph;
-import com.pahimar.ee3.graph.WeightedEdge;
+import com.pahimar.ee3.graph.WeightedDirectedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
@@ -90,11 +90,11 @@ public class DynEMC {
         for (Node<CustomWrappedStack> node : graph.getAllNodes()) {
             LogHelper.debug("Node: " + node);
             LogHelper.debug("Edges FROM Node");
-            for (WeightedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
+            for (WeightedDirectedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
                 LogHelper.debug(" * " + fromEdge);
             }
             LogHelper.debug("Edges TO Node");
-            for (WeightedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
+            for (WeightedDirectedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
                 LogHelper.debug(" * " + toEdge);
             }
             LogHelper.debug("");

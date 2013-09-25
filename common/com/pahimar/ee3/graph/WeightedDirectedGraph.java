@@ -1,5 +1,6 @@
 package com.pahimar.ee3.graph;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     // FIXME This whole class should be considered very broken right now, as it
     // needs to be adjusted now that we are wrapping objects into Nodes
 
-    private final Map<Node<T>, SortedSet<WeightedEdge<T>>> graph = new HashMap<Node<T>, SortedSet<WeightedEdge<T>>>();
+    private final Map<Node<T>, SortedSet<WeightedDirectedEdge<T>>> graph = new HashMap<Node<T>, SortedSet<WeightedDirectedEdge<T>>>();
 
     /**
      * Checks whether or not the provided Node exists in the graph
@@ -58,7 +59,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         if (this.containsNode(sourceNode) && this.containsNode(destinationNode)) {
 
-            Iterator<WeightedEdge<T>> edgeIterator = graph.get(sourceNode).iterator();
+            Iterator<WeightedDirectedEdge<T>> edgeIterator = graph.get(sourceNode).iterator();
 
             while (edgeIterator.hasNext()) {
                 if (edgeIterator.next().destinationNode.equals(destinationNode)) {
@@ -103,7 +104,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     public boolean containsEdge(Node<T> sourceNode, Node<T> targetNode, float edgeWeight) {
 
         if (this.containsNode(sourceNode) && this.containsNode(targetNode)) {
-            return graph.get(sourceNode).contains(new WeightedEdge<T>(targetNode, edgeWeight));
+            return graph.get(sourceNode).contains(new WeightedDirectedEdge<T>(targetNode, edgeWeight));
         }
 
         return false;
@@ -141,7 +142,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             return false;
         }
 
-        graph.put(node, new TreeSet<WeightedEdge<T>>());
+        graph.put(node, new TreeSet<WeightedDirectedEdge<T>>());
 
         return true;
     }
@@ -174,7 +175,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     public void addEdge(Node<T> sourceNode, Node<T> destinationNode, float edgeWeight) {
 
         if (this.containsNode(sourceNode) && this.containsNode(destinationNode) && !this.containsEdge(sourceNode, destinationNode, edgeWeight)) {
-            graph.get(sourceNode).add(new WeightedEdge<T>(destinationNode, edgeWeight));
+            graph.get(sourceNode).add(new WeightedDirectedEdge<T>(destinationNode, edgeWeight));
         }
     }
 
@@ -235,7 +236,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
      * @return An ImmutableList of all the WeightedEdges that start from the
      *         from Node
      */
-    public ImmutableList<WeightedEdge<T>> edgesFrom(Node<T> sourceNode) {
+    public ImmutableList<WeightedDirectedEdge<T>> edgesFrom(Node<T> sourceNode) {
 
         if (this.containsNode(sourceNode)) {
             return ImmutableList.copyOf(graph.get(sourceNode));
@@ -273,7 +274,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     public void removeEdge(Node<T> sourceNode, Node<T> destinationNode, float weight) {
 
         if (this.containsNode(sourceNode) && this.containsNode(destinationNode)) {
-            graph.get(sourceNode).remove(new WeightedEdge<T>(destinationNode, weight));
+            graph.get(sourceNode).remove(new WeightedDirectedEdge<T>(destinationNode, weight));
         }
     }
 
@@ -324,9 +325,9 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
                 Node<T> graphNode = nodeIterator.next();
 
-                List<WeightedEdge<T>> fromEdges = this.edgesFrom(graphNode);
+                List<WeightedDirectedEdge<T>> fromEdges = this.edgesFrom(graphNode);
 
-                for (WeightedEdge<T> fromEdge : fromEdges) {
+                for (WeightedDirectedEdge<T> fromEdge : fromEdges) {
                     if (fromEdge.destinationNode.equals(node)) {
                         graph.get(graphNode).remove(fromEdge);
                     }
@@ -350,13 +351,13 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         if (this.containsNode(firstNode) && this.containsNode(secondNode)) {
 
-            for (WeightedEdge<T> fromEdge : this.edgesFrom(firstNode)) {
+            for (WeightedDirectedEdge<T> fromEdge : this.edgesFrom(firstNode)) {
                 if (fromEdge.destinationNode.equals(secondNode)) {
                     graph.get(firstNode).remove(fromEdge);
                 }
             }
 
-            for (WeightedEdge<T> fromEdge : this.edgesFrom(secondNode)) {
+            for (WeightedDirectedEdge<T> fromEdge : this.edgesFrom(secondNode)) {
                 if (fromEdge.destinationNode.equals(firstNode)) {
                     graph.get(secondNode).remove(fromEdge);
                 }
@@ -374,7 +375,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
      * @param sourceObject
      * @return
      */
-    public ImmutableList<WeightedEdge<T>> edgesFrom(T sourceObject) {
+    public ImmutableList<WeightedDirectedEdge<T>> edgesFrom(T sourceObject) {
 
         return this.edgesFrom(new Node<T>(sourceObject));
     }
@@ -384,9 +385,9 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
      * @param destinationNode
      * @return
      */
-    public ImmutableList<WeightedEdge<T>> edgesTo(Node<T> destinationNode) {
+    public ImmutableList<WeightedDirectedEdge<T>> edgesTo(Node<T> destinationNode) {
 
-        ImmutableList.Builder<WeightedEdge<T>> edgesToTargetNodeList = ImmutableList.builder();
+        ImmutableList.Builder<WeightedDirectedEdge<T>> edgesToTargetNodeList = ImmutableList.builder();
 
         if (this.containsNode(destinationNode)) {
 
@@ -394,12 +395,12 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
                 if (!graphNode.equals(destinationNode)) {
 
-                    List<WeightedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
+                    List<WeightedDirectedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
 
-                    for (WeightedEdge<T> fromEdge : edgesFromGraphNode) {
+                    for (WeightedDirectedEdge<T> fromEdge : edgesFromGraphNode) {
                         
                         if (fromEdge.destinationNode.equals(destinationNode)) {
-                            edgesToTargetNodeList.add(new WeightedEdge<T>(graphNode, fromEdge.weight));
+                            edgesToTargetNodeList.add(new WeightedDirectedEdge<T>(graphNode, fromEdge.weight));
                         }
                     }
                 }
@@ -414,7 +415,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
      * @param destinationObject
      * @return
      */
-    public ImmutableList<WeightedEdge<T>> edgesTo(T destinationObject) {
+    public ImmutableList<WeightedDirectedEdge<T>> edgesTo(T destinationObject) {
 
         return this.edgesTo(new Node<T>(destinationObject));
     }
@@ -505,6 +506,15 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         return compoundNodeList.build();
     }
+    
+    public ImmutableList<Node<T>> getNonOrphanLeafNodes() {
+        
+        List<Node<T>> nonOrphanLeafNodes = new ArrayList<Node<T>>();
+        nonOrphanLeafNodes.addAll(this.getLeafNodes());
+        nonOrphanLeafNodes.removeAll(this.getOrphanNodes());
+        
+        return ImmutableList.copyOf(nonOrphanLeafNodes);
+    }
 
     /**
      * Returns the Node count of the graph
@@ -543,4 +553,6 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         return this.getAllNodes().iterator();
     }
+    
+    
 }

@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
@@ -42,32 +43,37 @@ public class EmcRegistry {
         // Grab the default value map
         Map<CustomWrappedStack, EmcValue> defaultValueMap = EmcDefaultValues.getInstance().getDefaultValueMap();
         
-        stackMappings.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        // stackMappings.put(new CustomWrappedStack(), new EmcValue());
         
-        immutableStackMappings = ImmutableMap.copyOf(stackMappings);
-        immutableValueMappings = ImmutableSortedMap.copyOf(valueMappings);
-        stackMappings.clear();
-        valueMappings.clear();
+        // Vanilla Smelting Energy
+        stackMappings.put(new CustomWrappedStack(new EnergyStack(EnergyStack.VANILLA_SMELTING_ENERGY_NAME)), 
+                new EmcValue((32 * 0.2F / 1600), EmcComponent.KINETIC_UNIT_COMPONENT));
+        
+        stackMappings.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.wood), new EmcValue(32, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
     }
     
     public boolean hasEmcValue(CustomWrappedStack wrappedStack) {
         
-        return immutableStackMappings.containsKey(wrappedStack) ? immutableStackMappings.get(wrappedStack) instanceof EmcValue : false;
+        return stackMappings.containsKey(wrappedStack) ? stackMappings.get(wrappedStack) instanceof EmcValue : false;
     }
     
     public boolean hasStacksForValue(EmcValue emcValue) {
         
-        return immutableValueMappings.containsKey(emcValue) ? immutableValueMappings.get(emcValue).size() > 0 : false;
+        return valueMappings.containsKey(emcValue) ? valueMappings.get(emcValue).size() > 0 : false;
     }
     
     public EmcValue getEmcValue(CustomWrappedStack wrappedStack) {
         
-        return immutableStackMappings.get(wrappedStack);
+        return stackMappings.get(wrappedStack);
     }
     
     public List<CustomWrappedStack> getStacksFromValue(EmcValue emcValue) {
         
-        return immutableValueMappings.get(emcValue);
+        return valueMappings.get(emcValue);
     }
     
     public List<CustomWrappedStack> getStacksInEmcRange(EmcValue fromValue, EmcValue toValue) {
