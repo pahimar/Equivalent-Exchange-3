@@ -48,6 +48,17 @@ public class EnergyStack implements Comparable<EnergyStack> {
             return false;
         }
     }
+    
+    public static boolean compareEnergyNames(EnergyStack energyStack1, EnergyStack energyStack2) {
+
+        if (energyStack1 != null && energyStack2 != null) {
+            if ((energyStack1.energyName != null) && (energyStack2.energyName != null)) {
+                return energyStack1.energyName.equalsIgnoreCase(energyStack2.energyName);
+            }
+        }
+
+        return false;
+    }
 
     @Override
     public int compareTo(EnergyStack energyStack) {

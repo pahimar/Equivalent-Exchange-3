@@ -1,5 +1,7 @@
 package com.pahimar.ee3.emc;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -51,10 +53,10 @@ public class DynEMC {
 
         Set<CustomWrappedStack> recipeKeySet = recipeMappings.keySet();
         Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
-        CustomWrappedStack recipeOutput = null;
 
         while (recipeKeySetIterator.hasNext()) {
-            recipeOutput = recipeKeySetIterator.next();
+            
+            CustomWrappedStack recipeOutput = recipeKeySetIterator.next();
 
             for (List<CustomWrappedStack> recipeInputs : recipeMappings.get(recipeOutput)) {
 
@@ -87,13 +89,17 @@ public class DynEMC {
         
         LogHelper.debug("");
         
-        for (Node<CustomWrappedStack> node : graph.getAllNodes()) {
+        List<Node<CustomWrappedStack>> nodes = new ArrayList<Node<CustomWrappedStack>>();
+        nodes.addAll(graph.getAllNodes());
+        Collections.sort(nodes);
+        
+        for (Node<CustomWrappedStack> node : nodes) {
             LogHelper.debug("Node: " + node);
-            LogHelper.debug("Edges FROM Node");
+            LogHelper.debug("Edges FROM this Node:");
             for (WeightedDirectedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
                 LogHelper.debug(" * " + fromEdge);
             }
-            LogHelper.debug("Edges TO Node");
+            LogHelper.debug("Edges TO this Node:");
             for (WeightedDirectedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
                 LogHelper.debug(" * " + toEdge);
             }

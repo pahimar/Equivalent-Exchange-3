@@ -341,7 +341,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         }
     }
 
-    private static OreStack getOreStackFromList(ArrayList<?> objectList) {
+    private OreStack getOreStackFromList(ArrayList<?> objectList) {
 
         for (Object listElement : objectList) {
             if (listElement instanceof ItemStack) {
