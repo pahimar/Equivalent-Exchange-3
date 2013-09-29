@@ -11,18 +11,18 @@ import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
-public class CustomWrappedRecipe {
+public class CondensedRecipe {
 
     public CustomWrappedStack output;
     public List<CustomWrappedStack> inputs;
 
-    public CustomWrappedRecipe(Object output, List<?> inputs) {
+    public CondensedRecipe(Object output, List<?> inputs) {
 
         this.output = new CustomWrappedStack(output);
         this.inputs = collateInputStacks(inputs);
     }
 
-    public CustomWrappedRecipe(Object output, Object... inputs) {
+    public CondensedRecipe(Object output, Object... inputs) {
 
         this(output, Arrays.asList(inputs));
     }
