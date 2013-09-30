@@ -2,6 +2,7 @@ package com.pahimar.ee3.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -470,17 +471,45 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         ImmutableList.Builder<Node<T>> orphanNodeList = ImmutableList.builder();
 
-        Iterator<Node<T>> nodeIterator = this.iterator();
+        Iterator<Node<T>> nodeIterator = this.getRootNodes().iterator();
 
         while (nodeIterator.hasNext()) {
             Node<T> currentNode = nodeIterator.next();
 
-            if ((this.edgesFrom(currentNode).size() == 0) && (this.edgesTo(currentNode).size() == 0)) {
+            if (this.edgesFrom(currentNode).size() == 0) {
                 orphanNodeList.add(currentNode);
             }
         }
 
         return orphanNodeList.build();
+    }
+    
+    /**
+     * Helper function for getOrphanNodes
+     * Retrieves a Set of all root nodes
+     * root nodes are defined as having no edges pointing to them
+     * 
+     * @return Set of root Nodes
+     */
+    private HashSet<Node<T>> getRootNodes() {
+        HashSet<Node<T>> knownSet = new HashSet<Node<T>>();     // Keeps track of discovered non root nodes
+        HashSet<Node<T>> rootsSet = new HashSet<Node<T>>();
+        
+        for (Node<T> graphNode : this.getAllNodes()) {
+            
+            if (!knownSet.contains(graphNode)) {
+                rootsSet.add(graphNode);
+            }
+            
+            List<WeightedDirectedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
+            for (WeightedDirectedEdge<T> edge : edgesFromGraphNode) {
+                
+                knownSet.add(edge.destinationNode);
+                rootsSet.remove(edge.destinationNode);
+            }
+        }
+        
+        return rootsSet;
     }
 
     /**
