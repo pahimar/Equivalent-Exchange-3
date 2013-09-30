@@ -2,6 +2,7 @@ package com.pahimar.ee3.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -277,7 +278,13 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             graph.get(sourceNode).remove(new WeightedDirectedEdge<T>(destinationNode, weight));
         }
     }
-
+    
+    /**
+     * Removes specified edge with default weight 1
+     * 
+     * @param sourceNode
+     * @param destinationNode
+     */
     public void removeEdge(Node<T> sourceNode, Node<T> destinationNode) {
 
         this.removeEdge(sourceNode, destinationNode, 1);
@@ -288,6 +295,12 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
         this.removeEdge(new Node<T>(sourceObject), new Node<T>(destinationObject), weight);
     }
 
+    /**
+     * Removes specified edge with default weight 1
+     * 
+     * @param sourceNode
+     * @param destinationNode
+     */
     public void removeEdge(T sourceObject, T destinationObject) {
 
         this.removeEdge(sourceObject, destinationObject, 1);
@@ -383,7 +396,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     /**
      * 
      * @param destinationNode
-     * @return
+     * @return An ImmutableList of all Edges pointing to specified node (edges.destination contains sourceNode!)
      */
     public ImmutableList<WeightedDirectedEdge<T>> edgesTo(Node<T> destinationNode) {
 
@@ -437,7 +450,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
     /**
      * Retrieves an ImmutableList of all leaf Nodes in the graph A leaf node is
-     * defined as a Node that has no edges from edge
+     * defined as a Node that has no edges pointing away from it
      * 
      * @return An ImmutableList of all leaf Nodes in the graph
      */
@@ -470,17 +483,45 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
         ImmutableList.Builder<Node<T>> orphanNodeList = ImmutableList.builder();
 
-        Iterator<Node<T>> nodeIterator = this.iterator();
+        Iterator<Node<T>> nodeIterator = this.getRootNodes().iterator();
 
         while (nodeIterator.hasNext()) {
             Node<T> currentNode = nodeIterator.next();
 
-            if ((this.edgesFrom(currentNode).size() == 0) && (this.edgesTo(currentNode).size() == 0)) {
+            if (this.edgesFrom(currentNode).size() == 0) {
                 orphanNodeList.add(currentNode);
             }
         }
 
         return orphanNodeList.build();
+    }
+    
+    /**
+     * Helper function for getOrphanNodes
+     * Retrieves a Set of all root nodes
+     * root nodes are defined as having no edges pointing to them
+     * 
+     * @return Set of root Nodes
+     */
+    private HashSet<Node<T>> getRootNodes() {
+        HashSet<Node<T>> knownSet = new HashSet<Node<T>>();     // Keeps track of discovered non root nodes
+        HashSet<Node<T>> rootsSet = new HashSet<Node<T>>();
+        
+        for (Node<T> graphNode : this.getAllNodes()) {
+            
+            if (!knownSet.contains(graphNode)) {
+                rootsSet.add(graphNode);
+            }
+            
+            List<WeightedDirectedEdge<T>> edgesFromGraphNode = edgesFrom(graphNode);
+            for (WeightedDirectedEdge<T> edge : edgesFromGraphNode) {
+                
+                knownSet.add(edge.destinationNode);
+                rootsSet.remove(edge.destinationNode);
+            }
+        }
+        
+        return rootsSet;
     }
 
     /**
