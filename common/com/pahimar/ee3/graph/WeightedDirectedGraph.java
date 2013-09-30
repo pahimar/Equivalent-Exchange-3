@@ -278,7 +278,13 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
             graph.get(sourceNode).remove(new WeightedDirectedEdge<T>(destinationNode, weight));
         }
     }
-
+    
+    /**
+     * Removes specified edge with default weight 1
+     * 
+     * @param sourceNode
+     * @param destinationNode
+     */
     public void removeEdge(Node<T> sourceNode, Node<T> destinationNode) {
 
         this.removeEdge(sourceNode, destinationNode, 1);
@@ -289,6 +295,12 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
         this.removeEdge(new Node<T>(sourceObject), new Node<T>(destinationObject), weight);
     }
 
+    /**
+     * Removes specified edge with default weight 1
+     * 
+     * @param sourceNode
+     * @param destinationNode
+     */
     public void removeEdge(T sourceObject, T destinationObject) {
 
         this.removeEdge(sourceObject, destinationObject, 1);
@@ -384,7 +396,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
     /**
      * 
      * @param destinationNode
-     * @return
+     * @return An ImmutableList of all Edges pointing to specified node (edges.destination contains sourceNode!)
      */
     public ImmutableList<WeightedDirectedEdge<T>> edgesTo(Node<T> destinationNode) {
 
