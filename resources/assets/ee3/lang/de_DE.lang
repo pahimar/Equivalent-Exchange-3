@@ -38,16 +38,16 @@ container.ee3:alchemyTable.name=Alchemietisch [WIP]
 container.ee3:renderingTank.name=Darstellungstank [WIP]
 
 # Command localizations
-command.ee3:overlay.turned_on=Transmutationsanzeige an
-command.ee3:overlay.turned_off=Transmutationsanzeige aus
-command.ee3:overlay.position.top_left=Transmutationsanzeige wurde nach links oben eingestellt
-command.ee3:overlay.position.top_rightTransmutationsanzeige wurde nach rechts oben eingestellt
-command.ee3:overlay.position.bottom_left=Transmutationsanzeige wurde nach links unten eingestellt
-command.ee3:overlay.position.bottom_right=Transmutationsanzeige wurde nach rechts unten eingestellt
+command.ee3:overlay.turned_on=Transmutationsvorschau an
+command.ee3:overlay.turned_off=Transmutationsvorschau aus
+command.ee3:overlay.position.top_left=Transmutationsvorschau wurde nach links oben eingestellt
+command.ee3:overlay.position.top_rightTransmutationsvorschau wurde nach rechts oben eingestellt
+command.ee3:overlay.position.bottom_left=Transmutationsvorschau wurde nach links unten eingestellt
+command.ee3:overlay.position.bottom_right=Transmutationsvorschau wurde nach rechts unten eingestellt
 command.ee3:overlay.opacity.usage.additional_text=(wobei ### ein Dezimalwert zwischen 0.0 und 1.0 ist) 
-command.ee3:overlay.opacity.updated=Transparenz der Transmutationsanzeige wurde erfolgreich geändert
+command.ee3:overlay.opacity.updated=Transparenz der Transmutationsvorschau wurde erfolgreich geändert
 command.ee3:overlay.scale.usage.additional_text=%s (wobei ### ein Dezimalwert über 0.0 ist) 
-command.ee3:overlay.scale.updated=Größe der Transmutationsanzeige wurde erfolgreich geändert
+command.ee3:overlay.scale.updated=Größe der Transmutationsvorschau wurde erfolgreich geändert
 command.ee3:particles.turned_on=Equivalent-Exchange-3-Partikel angeschaltet
 command.ee3:particles.turned_off=Equivalent-Exchange-3-Partikel ausgeschaltet
 command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen Spielern
