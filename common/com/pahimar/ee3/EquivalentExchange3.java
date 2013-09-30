@@ -23,10 +23,13 @@ import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
 import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
 import com.pahimar.ee3.core.proxy.CommonProxy;
+import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.DynEMC;
+import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
@@ -175,7 +178,8 @@ public class EquivalentExchange3 {
 
         // Initialize the DynEMC system
         DynEMC dynEMC = DynEMC.getInstance();
-        dynEMC.printDebugDump();
+        
+        LogHelper.debug(EmcRegistry.getInstance().getEmcValue(new CustomWrappedStack(new EnergyStack(EnergyStack.VANILLA_SMELTING_ENERGY_NAME))));
     }
 
     @EventHandler
