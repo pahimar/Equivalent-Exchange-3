@@ -450,7 +450,7 @@ public class WeightedDirectedGraph<T extends Comparable<T>>
 
     /**
      * Retrieves an ImmutableList of all leaf Nodes in the graph A leaf node is
-     * defined as a Node that has no edges from edge
+     * defined as a Node that has no edges pointing away from it
      * 
      * @return An ImmutableList of all leaf Nodes in the graph
      */
