@@ -2,38 +2,38 @@
 key.extra=Ekstra
 key.release=Utgivelse
 key.toggle=Veksle
-key.charge=Lade opp
+key.charge=Lad
 
 # Item localizations
-item.ee3:shardMinium.name=Minium Fragment
+item.ee3:shardMinium.name=Mønjeskår
 item.ee3:stoneInert.name=Inert Stein
-item.ee3:stoneMinium.name=Minium Stein
-item.ee3:stonePhilosophers.name=Filosofens Stein [WIP]
+item.ee3:stoneMinium.name=Mønjestein
+item.ee3:stonePhilosophers.name=De vises Stein [WIP]
 item.ee3:alchemicalDustAsh.name=Aske [WIP]
-item.ee3:alchemicalDustMinium.name=Minium Pulver [WIP]
-item.ee3:alchemicalDustVerdant.name=Verdant Pulver [WIP]
-item.ee3:alchemicalDustAzure.name=Azure Pulver [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Amaranthine Pulver [WIP]
-item.ee3:alchemicalDustIridescent.name=Iridescent Pulver [WIP]
-item.ee3:alchemicalBag.name=Alkymistisk Sekk [WIP]
-item.ee3:alchemicalChalk.name=Alkymistisk Kritt [WIP]
+item.ee3:alchemicalDustMinium.name=Mønjestøv [WIP]
+item.ee3:alchemicalDustVerdant.name=Verdant Støv [WIP]
+item.ee3:alchemicalDustAzure.name=Azurblått Støv [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amarant Støv [WIP]
+item.ee3:alchemicalDustIridescent.name=Iriserende Støv [WIP]
+item.ee3:alchemicalBag.name=Alkymisk Sekk [WIP]
+item.ee3:alchemicalChalk.name=Alkymisk Kritt [WIP]
 
 # Block localizations
 tile.ee3:redWaterStill.name=Rødt Vann (Stille)
 tile.ee3:redWaterFlowing.name=Rødt Vann (Rennende)
 tile.ee3:calcinator.name=Calcinator [WIP]
 tile.ee3:aludel.name=Aludel [WIP]
-tile.ee3:alchemicalChest.name=Alkymistisk Kiste [WIP]
-tile.ee3:glassBell.name=Glass Bjelle [WIP]
+tile.ee3:alchemicalChest.name=Alkymisk Kiste [WIP]
+tile.ee3:glassBell.name=Glassklokke [WIP]
 tile.ee3:alchemyTable.name=Alkymi Bord [WIP]
 tile.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calcinator [WIP]
+container.ee3:calcinator=Kalsinator [WIP]
 container.ee3:aludel=Aludel [WIP]
-container.ee3:alchemicalChest=Alkymistisk Kiste [WIP]
-container.ee3:alchemicalBag=Alkymistisk Sekk [WIP]
-container.ee3:glassBell=Glass Bjelle [WIP]
+container.ee3:alchemicalChest=Alkymisk Kiste [WIP]
+container.ee3:alchemicalBag=Alkymisk Sekk [WIP]
+container.ee3:glassBell=Glassklokke [WIP]
 container.ee3:alchemyTable.name=Alkymi Bord [WIP]
 container.ee3:renderingTank.name=Rendering Tank [WIP]
 
@@ -58,10 +58,10 @@ command.ee3:sounds.turned_off=Avspilling av Equivalent Exchange 3 lyder skrudd a
 itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
-version.ee3:init_log_message=Initialiserer ekstern version sjekk mot den eksterne versionens myndighet, localisert i: %s 
-version.ee3:uninitialized=Ekstern version sjekk feilet med å initialisere seg som den skal
-version.ee3:current=Bruker for øyeblikket den mest opdaterte version (%s) av Equivalent Exchange 3 for %s
-version.ee3:outdated=En ny %s version eksisterer (%s) for %s. Skaff deb her: %s
-version.ee3:general_error=Feil under tilkobling til ekstern version myndighetsfil; prøver igjen
-version.ee3:final_error=Version sjekk stopper etter tre mislykkede forsøk på å tilkoble seg
-version.ee3:mc_version_not_found=Ikke i stand til å finne version av %s for %s i ekstern myndighetsfil
+version.ee3:init_log_message=Initialiserer ekstern version sjekk mot den eksterne versionens autoritetsfil, plassert i: %s 
+version.ee3:uninitialized=Feil under initialisering av versjonskontroll
+version.ee3:current=Bruker nå den mest oppdaterte versjonen (%s) av Equivalent Exchange 3 for %s
+version.ee3:outdated=En ny versjon av %s ble funnet (%s) for %s. Last ned her: %s
+version.ee3:general_error=Mislyktes med å koble til fjernversjonens autoritetsfil; prøver igjen
+version.ee3:final_error=Versjonssjekk stoppes etter tre mislykkede forsøk
+version.ee3:mc_version_not_found=Kunne ikke finne ny versjon av %s for %s i fjernversjonens autoritetsfil
