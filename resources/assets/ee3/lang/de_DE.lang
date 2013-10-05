@@ -48,10 +48,10 @@ command.ee3:overlay.opacity.usage.additional_text=(wobei ### ein Dezimalwert zwi
 command.ee3:overlay.opacity.updated=Transparenz der Transmutationsvorschau wurde erfolgreich geändert
 command.ee3:overlay.scale.usage.additional_text=%s (wobei ### ein Dezimalwert über 0.0 ist) 
 command.ee3:overlay.scale.updated=Größe der Transmutationsvorschau wurde erfolgreich geändert
-command.ee3:particles.turned_on=Equivalent-Exchange-3-Partikel angeschaltet
+command.ee3:particles.turned_on=Equivalent-Exchange-3-Partikel eingeschaltet
 command.ee3:particles.turned_off=Equivalent-Exchange-3-Partikel ausgeschaltet
-command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen Spielern
-command.ee3:sounds.set_to_self=Spiele nur Equivalent-Exchange-3-Geräusche vom eigenen Spieler
+command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen Spielern ab
+command.ee3:sounds.set_to_self=Spiele nur Equivalent-Exchange-3-Geräusche vom eigenen Spieler ab
 command.ee3:sounds.turned_off=Das Abspielen von Equivalent-Exchange-3-Geräuschen wurde deaktiviert
 
 # Creative Tab localizations
