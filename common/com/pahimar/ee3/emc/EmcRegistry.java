@@ -2,6 +2,7 @@ package com.pahimar.ee3.emc;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,9 +10,8 @@ import java.util.TreeMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.core.util.EnergyStack;
+import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
@@ -20,9 +20,6 @@ public class EmcRegistry {
 
     private Map<CustomWrappedStack, EmcValue> stackMappings;
     private TreeMap<EmcValue, List<CustomWrappedStack>> valueMappings;
-    
-    private ImmutableMap<CustomWrappedStack, EmcValue> immutableStackMappings;
-    private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> immutableValueMappings;
 
     private EmcRegistry() {
 
@@ -90,5 +87,15 @@ public class EmcRegistry {
     public void addEmcValueMapping(CustomWrappedStack wrappedStack, EmcValue emcValue) {
         
         
+    }
+    
+    public static void printDebugDump() {
+        
+        Iterator<CustomWrappedStack> stackIter = EmcRegistry.getInstance().stackMappings.keySet().iterator();
+        CustomWrappedStack stack = null;
+        while (stackIter.hasNext()) {
+            stack = stackIter.next();
+            LogHelper.debug(stack + ": " + EmcRegistry.getInstance().stackMappings.get(stack));
+        }
     }
 }
