@@ -1,20 +1,33 @@
 package com.pahimar.ee3.emc;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
 
     private static EmcRegistry emcRegistry = null;
+
+    private Map<CustomWrappedStack, EmcValue> stackMappings;
+    private TreeMap<EmcValue, List<CustomWrappedStack>> valueMappings;
     
-    private ImmutableMap<CustomWrappedStack, EmcValue> stackMappings;
-    private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> valueMappings;
+    private ImmutableMap<CustomWrappedStack, EmcValue> immutableStackMappings;
+    private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> immutableValueMappings;
 
     private EmcRegistry() {
 
+        stackMappings = new HashMap<CustomWrappedStack, EmcValue>();
+        valueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
     }
 
     public static EmcRegistry getInstance() {
@@ -30,9 +43,23 @@ public class EmcRegistry {
     private void init() {
 
         // Grab the default value map
-        ImmutableMap.Builder<CustomWrappedStack, EmcValue> stackMappingsBuilder = ImmutableMap.builder();
-        stackMappingsBuilder.putAll(EmcDefaultValues.getInstance().getDefaultValueMap());
-        stackMappings = stackMappingsBuilder.build();
+        Map<CustomWrappedStack, EmcValue> defaultValueMap = EmcDefaultValues.getInstance().getDefaultValueMap();
+        
+        // stackMappings.put(new CustomWrappedStack(), new EmcValue());
+        
+        // Vanilla Smelting Energy
+        stackMappings.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.wood), new EmcValue(32, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        stackMappings.put(new CustomWrappedStack(Item.coal), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.KINETIC, 1))));
+        
+        stackMappings.put(
+                new CustomWrappedStack(new EnergyStack(EnergyStack.VANILLA_SMELTING_ENERGY_NAME)), 
+                new EmcValue(
+                        getEmcValue(new CustomWrappedStack(Item.coal)).getComponentValueByType(EmcType.KINETIC) / (8 * EnergyStack.VANILLA_SMELTING_ENERGY_THRESHOLD), 
+                        EmcComponent.KINETIC_UNIT_COMPONENT));
     }
     
     public boolean hasEmcValue(CustomWrappedStack wrappedStack) {
@@ -62,10 +89,6 @@ public class EmcRegistry {
     
     public void addEmcValueMapping(CustomWrappedStack wrappedStack, EmcValue emcValue) {
         
-        
-    }
-    
-    private void printDebugDump() {
         
     }
 }

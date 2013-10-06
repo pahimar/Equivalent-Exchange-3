@@ -21,6 +21,7 @@ public class EmcValue implements Comparable<EmcValue> {
     public final float value;
     public final float recoveryPercent;
     private final List<EmcComponent> components;
+    public final int sumComponentRatios;
 
     public EmcValue() {
 
@@ -52,6 +53,13 @@ public class EmcValue implements Comparable<EmcValue> {
         this.value = value;
         this.recoveryPercent = recoveryPercent;
         this.components = collateComponents(components);
+        
+        int count = 0;
+        for (EmcComponent component : components) {
+            count += component.getRatioWeight();
+        }
+        
+        this.sumComponentRatios = count;
     }
 
     public List<EmcComponent> getComponents() {
@@ -61,9 +69,25 @@ public class EmcValue implements Comparable<EmcValue> {
 
     public EmcComponent getComponentByType(EmcType type) {
 
-        EmcComponent[] componentArray = (EmcComponent[]) components.toArray();
-        Arrays.sort(componentArray);
-        return componentArray[type.ordinal()];
+        for (EmcComponent component : components) {
+            if (component.getType().equals(type)) {
+                return component;
+            }
+        }
+        
+        return null;
+    }
+    
+    public float getComponentValueByType(EmcType type) {
+        
+        EmcComponent emcComponent = getComponentByType(type);
+        if (emcComponent != null) {
+            if (sumComponentRatios > 0) {
+                return value * (emcComponent.getRatioWeight() / (float)this.sumComponentRatios);
+            }
+        }
+        
+        return 0f;
     }
 
     @Override
@@ -154,13 +178,15 @@ public class EmcValue implements Comparable<EmcValue> {
         }
 
         List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
-
-        for (int i = 0; i < 7; i++) {
+        
+        for (int i = 0; i < EmcType.TYPES.length; i++) {
             if (componentCount[i] != null) {
-                collatedComponents.add(new EmcComponent(EmcType.values()[i], componentCount[i].intValue()));
+                collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i].intValue()));
             }
         }
 
+        Collections.sort(collatedComponents);
+        
         return collatedComponents;
     }
 }
