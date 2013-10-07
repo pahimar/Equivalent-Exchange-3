@@ -16,8 +16,6 @@ public class RecipesVanilla {
 
     private static Multimap<CustomWrappedStack, List<CustomWrappedStack>> vanillaRecipes = null;
 
-    ArrayList<CustomWrappedStack> discoveredItems = new ArrayList<CustomWrappedStack>();
-
     public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getVanillaRecipes() {
 
         if (vanillaRecipes == null) {

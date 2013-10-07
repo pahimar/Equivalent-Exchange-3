@@ -1,6 +1,8 @@
 package com.pahimar.ee3.core.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -171,5 +173,68 @@ public class RecipeHelper {
         }
 
         return recipeInputs;
+    }
+
+    /**
+     * Collates an uncollated, unsorted List of Objects into a sorted, collated
+     * List of CustomWrappedStacks
+     * 
+     * @param uncollatedStacks
+     *            List of objects for collating
+     * @return A sorted, collated List of CustomWrappedStacks
+     */
+    public static List<CustomWrappedStack> collateInputStacks(List<?> uncollatedStacks) {
+
+        List<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
+
+        CustomWrappedStack stack = null;
+        boolean found = false;
+
+        for (Object object : uncollatedStacks) {
+
+            found = false;
+
+            if (CustomWrappedStack.canBeWrapped(object)) {
+
+                stack = new CustomWrappedStack(object);
+
+                if (collatedStacks.isEmpty()) {
+                    collatedStacks.add(stack);
+                }
+                else {
+
+                    for (int i = 0; i < collatedStacks.size(); i++) {
+                        if (collatedStacks.get(i).getWrappedStack() != null) {
+                            if (stack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack) {
+                                if (ItemUtil.compare((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
+                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    found = true;
+                                }
+                            }
+                            else if (stack.getWrappedStack() instanceof OreStack && collatedStacks.get(i).getWrappedStack() instanceof OreStack) {
+                                if (OreStack.compareOreNames((OreStack) stack.getWrappedStack(), (OreStack) collatedStacks.get(i).getWrappedStack())) {
+                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    found = true;
+                                }
+
+                            }
+                            else if (stack.getWrappedStack() instanceof EnergyStack && collatedStacks.get(i).getWrappedStack() instanceof EnergyStack) {
+                                if (EnergyStack.compareEnergyNames((EnergyStack) stack.getWrappedStack(), (EnergyStack) collatedStacks.get(i).getWrappedStack())) {
+                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    found = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (!found) {
+                        collatedStacks.add(stack);
+                    }
+                }
+            }
+
+        }
+        Collections.sort(collatedStacks);
+        return collatedStacks;
     }
 }

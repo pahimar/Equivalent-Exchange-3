@@ -2,15 +2,11 @@ package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.graph.Node;
 import com.pahimar.ee3.graph.WeightedDirectedGraph;
-import com.pahimar.ee3.graph.WeightedDirectedEdge;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
@@ -44,39 +40,7 @@ public class DynEMC {
     }
 
     private void populateGraph() {
-
-        for (CustomWrappedStack discoveredStack : recipeRegistry.getDiscoveredStacks()) {
-            graph.addNode(discoveredStack);
-        }
-
-        Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMappings = recipeRegistry.getRecipeMappings();
-
-        Set<CustomWrappedStack> recipeKeySet = recipeMappings.keySet();
-        Iterator<CustomWrappedStack> recipeKeySetIterator = recipeKeySet.iterator();
-
-        while (recipeKeySetIterator.hasNext()) {
-            
-            CustomWrappedStack recipeOutput = recipeKeySetIterator.next();
-
-            for (List<CustomWrappedStack> recipeInputs : recipeMappings.get(recipeOutput)) {
-
-                CustomWrappedStack unWrappedRecipeOutput = new CustomWrappedStack(recipeOutput.getWrappedStack());
-
-                if (graph.containsNode(unWrappedRecipeOutput)) {
-                    for (CustomWrappedStack recipeInput : recipeInputs) {
-
-                        // Unwrapped the wrapped stacks so that we actually find them in the graph
-                        CustomWrappedStack unWrappedRecipeInput = new CustomWrappedStack(recipeInput.getWrappedStack());
-
-                        if (graph.containsNode(unWrappedRecipeInput)) {
-                            if (recipeOutput.getStackSize() != 0) {
-                                graph.addEdge(unWrappedRecipeOutput, unWrappedRecipeInput, (recipeInput.getStackSize() * 1.0f) / recipeOutput.getStackSize());
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
     }
 
     public void printDebugDump() {
@@ -90,20 +54,20 @@ public class DynEMC {
         LogHelper.debug("");
         
         List<Node<CustomWrappedStack>> nodes = new ArrayList<Node<CustomWrappedStack>>();
-        nodes.addAll(graph.getAllNodes());
+        nodes.addAll(graph.getLeafNodes());
         Collections.sort(nodes);
         
         for (Node<CustomWrappedStack> node : nodes) {
             LogHelper.debug("Node: " + node);
-            LogHelper.debug("Edges FROM this Node:");
-            for (WeightedDirectedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
-                LogHelper.debug(" * " + fromEdge);
-            }
-            LogHelper.debug("Edges TO this Node:");
-            for (WeightedDirectedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
-                LogHelper.debug(" * " + toEdge);
-            }
-            LogHelper.debug("");
+//            LogHelper.debug("Edges FROM this Node:");
+//            for (WeightedDirectedEdge<CustomWrappedStack> fromEdge : graph.edgesFrom(node)) {
+//                LogHelper.debug(" * " + fromEdge);
+//            }
+//            LogHelper.debug("Edges TO this Node:");
+//            for (WeightedDirectedEdge<CustomWrappedStack> toEdge : graph.edgesTo(node)) {
+//                LogHelper.debug(" * " + toEdge);
+//            }
+//            LogHelper.debug("");
         }
     }
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -166,6 +167,8 @@ public class EquivalentExchange3 {
         // recipe registry works
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.coal, Arrays.asList(Block.oreCoal)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(new ItemStack(Item.coal.itemID, 1, 1), Arrays.asList(Item.coal)));
     }
 
     @EventHandler
@@ -176,9 +179,9 @@ public class EquivalentExchange3 {
 
         // Initialize the DynEMC system
         DynEMC dynEMC = DynEMC.getInstance();
-        //dynEMC.printDebugDump();
+        dynEMC.printDebugDump();
         
-        EmcRegistry.printDebugDump();
+        EmcRegistry.getInstance().printDebugDump();
     }
 
     @EventHandler

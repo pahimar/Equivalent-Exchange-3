@@ -14,7 +14,6 @@ import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.ItemUtil;
 import com.pahimar.ee3.core.util.OreStack;
-import com.pahimar.ee3.core.util.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class RecipeRegistry {
@@ -29,7 +28,6 @@ public class RecipeRegistry {
     private RecipeRegistry() {
 
         recipeMap = HashMultimap.create();
-        wildCardStacks = RecipeHelper.populateWildCards();
         discoveredStacks = new ArrayList<CustomWrappedStack>();
         recipelessStacks = new ArrayList<CustomWrappedStack>();
     }

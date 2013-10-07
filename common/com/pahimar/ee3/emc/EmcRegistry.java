@@ -1,16 +1,12 @@
 package com.pahimar.ee3.emc;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-
-import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
@@ -42,21 +38,7 @@ public class EmcRegistry {
         // Grab the default value map
         Map<CustomWrappedStack, EmcValue> defaultValueMap = EmcDefaultValues.getInstance().getDefaultValueMap();
         
-        // stackMappings.put(new CustomWrappedStack(), new EmcValue());
-        
-        // Vanilla Smelting Energy
-        stackMappings.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        stackMappings.put(new CustomWrappedStack(Block.wood), new EmcValue(32, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        stackMappings.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        stackMappings.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        stackMappings.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        stackMappings.put(new CustomWrappedStack(Item.coal), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.KINETIC, 1))));
-        
-        stackMappings.put(
-                new CustomWrappedStack(new EnergyStack(EnergyStack.VANILLA_SMELTING_ENERGY_NAME)), 
-                new EmcValue(
-                        getEmcValue(new CustomWrappedStack(Item.coal)).getComponentValueByType(EmcType.KINETIC) / (8 * EnergyStack.VANILLA_SMELTING_ENERGY_THRESHOLD), 
-                        EmcComponent.KINETIC_UNIT_COMPONENT));
+        stackMappings.putAll(defaultValueMap);
     }
     
     public boolean hasEmcValue(CustomWrappedStack wrappedStack) {
@@ -89,13 +71,14 @@ public class EmcRegistry {
         
     }
     
-    public static void printDebugDump() {
+    public void printDebugDump() {
         
-        Iterator<CustomWrappedStack> stackIter = EmcRegistry.getInstance().stackMappings.keySet().iterator();
-        CustomWrappedStack stack = null;
-        while (stackIter.hasNext()) {
-            stack = stackIter.next();
-            LogHelper.debug(stack + ": " + EmcRegistry.getInstance().stackMappings.get(stack));
+        List<CustomWrappedStack> keyList = new ArrayList<CustomWrappedStack>();
+        keyList.addAll(stackMappings.keySet());
+        Collections.sort(keyList);
+        
+        for (CustomWrappedStack stack : keyList) {
+            LogHelper.debug(stack + " == " + stackMappings.get(stack));
         }
     }
 }
