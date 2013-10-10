@@ -95,14 +95,14 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 ***
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `environment.properties`.
-	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev".  All of the variables are changeable for your setup.):
+	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE:Paths must use forward slashes.  All of the variables are changeable for your setup.):
  		* `base_location=C:/mcdev/`
  		* `source_location=${base_location}/source/Equivalent-Exchange-3`
  		* `mcp_location=${base_location}/forge/mcp`
  		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
  	* You may also edit the build.properties to change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (`forge_version` is only used when running `ant forge-install`)
  		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.0.886`
+ 		* `forge_version=9.11.1.923`
  		* `mod_version=pre2`
  		* `build_number=1`
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
