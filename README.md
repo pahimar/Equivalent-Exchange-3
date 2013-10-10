@@ -68,11 +68,17 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 #### Setup MCP
 NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP for you.  Simply run `ant forge-install`, then `ant build`.
+
 1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
+
 2. Inside `mcdev`, unzip the zip file.
+
 	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc.
+
 3. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it.
+
 	* This will take some time, be patient.
+
 
 #### Setup EE3
 1. Inside `mcdev`, create a directory named `source`.
@@ -95,7 +101,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 ***
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `environment.properties`.
-	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE:Paths must use forward slashes.  All of the variables are changeable for your setup.):
+	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE: Paths must use forward slashes.  All of the variables are changeable for your setup.):
  		* `base_location=C:/mcdev/`
  		* `source_location=${base_location}/source/Equivalent-Exchange-3`
  		* `mcp_location=${base_location}/forge/mcp`
