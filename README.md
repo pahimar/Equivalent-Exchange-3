@@ -68,17 +68,11 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 #### Setup MCP
 NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP for you.  Simply run `ant forge-install`, then `ant build`.
-
 1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
-
 2. Inside `mcdev`, unzip the zip file.
-
 	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc.
-
 3. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it.
-
 	* This will take some time, be patient.
-
 
 #### Setup EE3
 1. Inside `mcdev`, create a directory named `source`.
