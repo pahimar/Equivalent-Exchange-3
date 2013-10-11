@@ -30,6 +30,7 @@ public class RecipeRegistry {
         recipeMap = HashMultimap.create();
         discoveredStacks = new ArrayList<CustomWrappedStack>();
         recipelessStacks = new ArrayList<CustomWrappedStack>();
+        wildCardStacks = new ArrayList<CustomWrappedStack>();
     }
 
     public static RecipeRegistry getInstance() {
