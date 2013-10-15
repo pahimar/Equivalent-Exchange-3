@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.emc.EmcBlackList;
 import com.pahimar.ee3.item.CustomWrappedStack;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.nbt.NBTHelper;
 
@@ -50,7 +50,7 @@ public class InterModCommsHandler {
 
         if (!decodedRecipe.isEmpty()) {
             for (CustomWrappedStack key : decodedRecipe.keySet()) {
-                RecipeRegistry.getInstance().addRecipe(key, decodedRecipe.get(key));
+                RecipesIMC.addRecipe(key, decodedRecipe.get(key));
                 LogHelper.info("[IMC] Mod '" + imcMessage.getSender() + "' added recipe with output '" + key.toString() + "' and inputs '" + decodedRecipe.get(key) + "'");
             }
         }

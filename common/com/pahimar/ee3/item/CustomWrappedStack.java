@@ -245,22 +245,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
         if (itemStack != null) {
             hashCode = 37 * hashCode + itemStack.itemID;
-
-            if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                hashCode = 37 * hashCode;
-            }
-            else {
-                hashCode = 37 * hashCode + itemStack.getItemDamage();
-            }
-
-            try {
-                if (itemStack.getUnlocalizedName() != null) {
-                    hashCode = 37 * hashCode + itemStack.getUnlocalizedName().hashCode();
-                }
-            }
-            catch (ArrayIndexOutOfBoundsException e) {
-
-            }
+            hashCode = 37 * hashCode + itemStack.getItemDamage();
         }
         else if (oreStack != null) {
             if (oreStack.oreName != null) {

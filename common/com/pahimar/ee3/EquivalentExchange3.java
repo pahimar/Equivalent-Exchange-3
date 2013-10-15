@@ -6,7 +6,6 @@ import java.util.Arrays;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -27,9 +26,9 @@ import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.emc.DynEMC;
-import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
@@ -167,8 +166,6 @@ public class EquivalentExchange3 {
         // recipe registry works
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.coal, Arrays.asList(Block.oreCoal)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(new ItemStack(Item.coal.itemID, 1, 1), Arrays.asList(Item.coal)));
     }
 
     @EventHandler
@@ -176,12 +173,13 @@ public class EquivalentExchange3 {
 
         // Initialize the Addon Handler
         AddonHandler.init();
-
-        // Initialize the DynEMC system
-        DynEMC dynEMC = DynEMC.getInstance();
-        dynEMC.printDebugDump();
         
-        EmcRegistry.getInstance().printDebugDump();
+        RecipeRegistry recipeRegistry = RecipeRegistry.getInstance();
+        //LogHelper.debug(recipeRegistry);
+        
+        for (CustomWrappedStack stack : RecipeRegistry.getInstance().discoveredStacks) {
+            LogHelper.debug(stack);
+        }
     }
 
     @EventHandler

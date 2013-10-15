@@ -5,11 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -25,54 +23,6 @@ import com.pahimar.ee3.item.CustomWrappedStack;
  * 
  */
 public class RecipeHelper {
-
-    /**
-     * Discovers all instances of ItemStacks with wild card meta values in the
-     * vanilla Crafting Manager
-     * 
-     * @return A list of CustomWrappedStacks that contains all wild card meta
-     *         ItemStacks in the vanilla Crafting Manager
-     */
-    public static ArrayList<CustomWrappedStack> populateWildCards() {
-
-        ArrayList<CustomWrappedStack> wildCards = new ArrayList<CustomWrappedStack>();
-
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-
-            if (recipe instanceof IRecipe) {
-
-                if (((IRecipe) recipe).getRecipeOutput() instanceof ItemStack) {
-
-                    CustomWrappedStack recipeOutput = new CustomWrappedStack(((IRecipe) recipe).getRecipeOutput());
-                    ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs((IRecipe) recipe);
-                    ItemStack itemStack = null;
-
-                    if (recipeOutput.getWrappedStack() instanceof ItemStack) {
-
-                        itemStack = (ItemStack) recipeOutput.getWrappedStack();
-
-                        if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(recipeOutput)) {
-                            wildCards.add(recipeOutput);
-                        }
-                    }
-
-                    for (CustomWrappedStack inputStack : recipeInputs) {
-
-                        if (inputStack.getWrappedStack() instanceof ItemStack) {
-
-                            itemStack = (ItemStack) inputStack.getWrappedStack();
-
-                            if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && !wildCards.contains(inputStack)) {
-                                wildCards.add(inputStack);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return wildCards;
-    }
 
     /**
      * Returns a list of elements that constitute the input in a crafting recipe
