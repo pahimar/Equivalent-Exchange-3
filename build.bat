@@ -7,4 +7,5 @@ echo Done installing Forge!
 
 echo Building EE3 (part 2/2)...
 ant build
+echo Done!
 pause
