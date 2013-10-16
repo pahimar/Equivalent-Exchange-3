@@ -26,7 +26,6 @@ import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
@@ -174,12 +173,7 @@ public class EquivalentExchange3 {
         // Initialize the Addon Handler
         AddonHandler.init();
         
-        RecipeRegistry recipeRegistry = RecipeRegistry.getInstance();
-        //LogHelper.debug(recipeRegistry);
-        
-        for (CustomWrappedStack stack : RecipeRegistry.getInstance().discoveredStacks) {
-            LogHelper.debug(stack);
-        }
+        LogHelper.debug(RecipeRegistry.getDiscoveredStacks().size());
     }
 
     @EventHandler
