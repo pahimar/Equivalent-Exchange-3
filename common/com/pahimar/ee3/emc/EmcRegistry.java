@@ -2,10 +2,8 @@ package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -40,11 +38,8 @@ public class EmcRegistry {
 
         // Handle the value mappings
         SortedMap<EmcValue, List<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
-        Set<CustomWrappedStack> stacks = defaultValues.keySet();
-        Iterator<CustomWrappedStack> stackIter = stacks.iterator();
 
-        while (stackIter.hasNext()) {
-            CustomWrappedStack stack = stackIter.next();
+        for (CustomWrappedStack stack : defaultValues.keySet()) {
             EmcValue value = defaultValues.get(stack);
 
             if (tempValueMappings.containsKey(value)) {
@@ -96,9 +91,7 @@ public class EmcRegistry {
                 biggerMap = tailMap;
             }
 
-            Iterator<EmcValue> valueIterator = smallerMap.keySet().iterator();
-            while (valueIterator.hasNext()) {
-                EmcValue value = valueIterator.next();
+            for (EmcValue value : smallerMap.keySet()) {
                 if (biggerMap.containsKey(value)) {
                     stacksInRange.addAll(emcRegistry.valueMappings.get(value));
                 }
