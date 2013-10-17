@@ -28,7 +28,6 @@ import com.pahimar.ee3.core.util.LogHelper;
 import com.pahimar.ee3.core.util.VersionHelper;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
@@ -144,7 +143,7 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
-        
+
         MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
 
         GameRegistry.registerCraftingHandler(new CraftingHandler());
@@ -175,8 +174,6 @@ public class EquivalentExchange3 {
 
         // Initialize the Addon Handler
         AddonHandler.init();
-        
-        LogHelper.debug(RecipeRegistry.getDiscoveredStacks().size());
     }
 
     @EventHandler

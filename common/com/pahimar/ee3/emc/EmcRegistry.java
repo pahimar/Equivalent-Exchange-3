@@ -1,25 +1,23 @@
 package com.pahimar.ee3.emc;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
 
     private static EmcRegistry emcRegistry = null;
 
-    private Map<CustomWrappedStack, EmcValue> stackMappings;
-    private SortedMap<EmcValue, List<CustomWrappedStack>> valueMappings;
-
-    private EmcRegistry() {
-
-        stackMappings = new HashMap<CustomWrappedStack, EmcValue>();
-        valueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
-    }
+    private ImmutableSortedMap<CustomWrappedStack, EmcValue> stackMappings;
+    private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> valueMappings;
 
     private static void lazyInit() {
 
@@ -30,19 +28,83 @@ public class EmcRegistry {
     }
 
     private void init() {
-        
-        stackMappings.putAll(EmcDefaultValues.getInstance().getDefaultValueMap());
+
+        ImmutableSortedMap.Builder<CustomWrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        ImmutableSortedMap.Builder<EmcValue, List<CustomWrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
+
+        Map<CustomWrappedStack, EmcValue> defaultValues = EmcDefaultValues.getDefaultValueMap();
+
+        // Handle the stack mappings
+        stackMappingsBuilder.putAll(defaultValues);
+        stackMappings = stackMappingsBuilder.build();
+
+        // Handle the value mappings
+        SortedMap<EmcValue, List<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
+        Set<CustomWrappedStack> stacks = defaultValues.keySet();
+        Iterator<CustomWrappedStack> stackIter = stacks.iterator();
+
+        while (stackIter.hasNext()) {
+            CustomWrappedStack stack = stackIter.next();
+            EmcValue value = defaultValues.get(stack);
+
+            if (tempValueMappings.containsKey(value)) {
+                if (!(tempValueMappings.get(value).contains(stack))) {
+                    tempValueMappings.get(value).add(stack);
+                }
+            }
+            else {
+                tempValueMappings.put(value, Arrays.asList(stack));
+            }
+        }
+
+        valueMappingsBuilder.putAll(tempValueMappings);
+        valueMappings = valueMappingsBuilder.build();
     }
-    
+
     public static boolean hasEmcValue(CustomWrappedStack stack) {
-        
+
         lazyInit();
         return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
     }
-    
+
     public static EmcValue getEmcValue(CustomWrappedStack stack) {
-        
+
         lazyInit();
         return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+    }
+
+    public static List<CustomWrappedStack> getStacksInRange(EmcValue start, EmcValue finish) {
+
+        lazyInit();
+
+        List<CustomWrappedStack> stacksInRange = new ArrayList<CustomWrappedStack>();
+
+        SortedMap<EmcValue, List<CustomWrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);
+        SortedMap<EmcValue, List<CustomWrappedStack>> headMap = emcRegistry.valueMappings.headMap(finish);
+
+        SortedMap<EmcValue, List<CustomWrappedStack>> smallerMap;
+        SortedMap<EmcValue, List<CustomWrappedStack>> biggerMap;
+
+        if (!tailMap.isEmpty() && !headMap.isEmpty()) {
+
+            if (tailMap.size() <= headMap.size()) {
+                smallerMap = tailMap;
+                biggerMap = headMap;
+            }
+            else {
+                smallerMap = headMap;
+                biggerMap = tailMap;
+            }
+
+            Iterator<EmcValue> valueIterator = smallerMap.keySet().iterator();
+            while (valueIterator.hasNext()) {
+                EmcValue value = valueIterator.next();
+                if (biggerMap.containsKey(value)) {
+                    stacksInRange.addAll(emcRegistry.valueMappings.get(value));
+                }
+            }
+        }
+
+        return stacksInRange;
     }
 }
