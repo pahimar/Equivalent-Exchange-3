@@ -140,9 +140,6 @@ public class VersionHelper implements Runnable {
         else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
             return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
-        else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
-            return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
-        }
         else if (result == ERROR) {
             return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
