@@ -4,8 +4,8 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatMessageComponent;
 
-import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Commands;
 
 /**
@@ -45,21 +45,21 @@ public class CommandSounds {
     private static void processAllCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.ALL;
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.ALL);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.ALL);
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_SET_TO_ALL));
     }
 
     private static void processSelfCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.SELF;
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.SELF);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.SELF);
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_SET_TO_SELF));
     }
 
     private static void processOffCommand(ICommandSender commandSender) {
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.OFF;
-        ConfigurationHandler.set(ConfigurationHandler.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.OFF);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.OFF);
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_TURNED_OFF));
     }
 }

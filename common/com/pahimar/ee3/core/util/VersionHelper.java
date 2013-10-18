@@ -7,8 +7,8 @@ import java.util.Properties;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.Configuration;
 
-import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
@@ -76,7 +76,7 @@ public class VersionHelper implements Runnable {
 
                 if (remoteVersion != null) {
                     if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
-                        ConfigurationHandler.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
+                        GeneralConfiguration.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
                     }
 
                     if (remoteVersion.equalsIgnoreCase(getVersionForCheck())) {

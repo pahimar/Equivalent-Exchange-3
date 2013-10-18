@@ -63,21 +63,6 @@ public class ConfigurationSettings {
     /*
      * Block related config settings
      */
-    public static int RED_WATER_DURATION_BASE;
-    public static String RED_WATER_DURATION_BASE_CONFIGNAME = "duration.base";
-    public static final int RED_WATER_DURATION_BASE_DEFAULT = 5;
-
-    public static int RED_WATER_DURATION_MODIFIER;
-    public static String RED_WATER_DURATION_MODIFIER_CONFIGNAME = "duration.modifier";
-    public static final int RED_WATER_DURATION_MODIFIER_DEFAULT = 2;
-
-    public static int RED_WATER_RANGE_BASE;
-    public static String RED_WATER_RANGE_BASE_CONFIGNAME = "range.base";
-    public static final int RED_WATER_RANGE_BASE_DEFAULT = 1;
-
-    public static int RED_WATER_RANGE_MODIFIER;
-    public static String RED_WATER_RANGE_MODIFIER_CONFIGNAME = "range.modifier";
-    public static final int RED_WATER_RANGE_MODIFIER_DEFAULT = 3;
 
     /*
      * Item related config settings

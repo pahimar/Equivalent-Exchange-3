@@ -100,7 +100,7 @@ public class EquivalentExchange3 {
         LogHelper.init();
 
         // Initialize the configuration
-        ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
+        ConfigurationHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME.toLowerCase() + File.separator);
 
         // Conduct the version check and log the result
         VersionHelper.execute();
