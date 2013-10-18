@@ -56,16 +56,38 @@ public class EmcRegistry {
         valueMappings = valueMappingsBuilder.build();
     }
 
-    public static boolean hasEmcValue(CustomWrappedStack stack) {
+    public static boolean hasEmcValue(Object object) {
 
         lazyInit();
-        return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
+
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            CustomWrappedStack stack = new CustomWrappedStack(object);
+            return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
+        }
+
+        return false;
     }
 
-    public static EmcValue getEmcValue(CustomWrappedStack stack) {
+    public static EmcValue getEmcValue(Object object) {
 
         lazyInit();
-        return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            CustomWrappedStack stack = new CustomWrappedStack(object);
+            return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+        }
+
+        return null;
+    }
+
+    public static List<CustomWrappedStack> getStacksInRange(int start, int finish) {
+
+        return getStacksInRange(new EmcValue(start), new EmcValue(finish));
+    }
+
+    public static List<CustomWrappedStack> getStacksInRange(float start, float finish) {
+
+        return getStacksInRange(new EmcValue(start), new EmcValue(finish));
     }
 
     public static List<CustomWrappedStack> getStacksInRange(EmcValue start, EmcValue finish) {

@@ -28,6 +28,11 @@ public class EmcValue implements Comparable<EmcValue> {
         this(0F, 1F, new ArrayList<EmcComponent>());
     }
 
+    public EmcValue(int value) {
+
+        this(Integer.valueOf(value).floatValue(), 1F, new ArrayList<EmcComponent>());
+    }
+
     public EmcValue(float value) {
 
         this(value, 1F, new ArrayList<EmcComponent>());
@@ -42,9 +47,9 @@ public class EmcValue implements Comparable<EmcValue> {
 
         this(value, 1F, collateComponents(components));
     }
-    
+
     public EmcValue(float value, EmcComponent component) {
-        
+
         this(value, 1F, Arrays.asList(component));
     }
 
@@ -53,12 +58,12 @@ public class EmcValue implements Comparable<EmcValue> {
         this.value = value;
         this.recoveryPercent = recoveryPercent;
         this.components = collateComponents(components);
-        
+
         int count = 0;
         for (EmcComponent component : components) {
             count += component.getRatioWeight();
         }
-        
+
         this.sumComponentRatios = count;
     }
 
@@ -74,19 +79,19 @@ public class EmcValue implements Comparable<EmcValue> {
                 return component;
             }
         }
-        
+
         return null;
     }
-    
+
     public float getComponentValueByType(EmcType type) {
-        
+
         EmcComponent emcComponent = getComponentByType(type);
         if (emcComponent != null) {
             if (sumComponentRatios > 0) {
-                return value * (emcComponent.getRatioWeight() / (float)this.sumComponentRatios);
+                return value * (emcComponent.getRatioWeight() / (float) this.sumComponentRatios);
             }
         }
-        
+
         return 0f;
     }
 
@@ -99,9 +104,7 @@ public class EmcValue implements Comparable<EmcValue> {
 
         EmcValue emcValue = (EmcValue) object;
 
-        return (Float.compare(this.value, emcValue.value) == 0) && 
-                (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) && 
-                components.equals(emcValue.getComponents());
+        return (Float.compare(this.value, emcValue.value) == 0) && (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) && components.equals(emcValue.getComponents());
     }
 
     @Override
@@ -178,7 +181,7 @@ public class EmcValue implements Comparable<EmcValue> {
         }
 
         List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
-        
+
         for (int i = 0; i < EmcType.TYPES.length; i++) {
             if (componentCount[i] != null) {
                 collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i].intValue()));
@@ -186,7 +189,7 @@ public class EmcValue implements Comparable<EmcValue> {
         }
 
         Collections.sort(collatedComponents);
-        
+
         return collatedComponents;
     }
 }
