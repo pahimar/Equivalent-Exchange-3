@@ -1,0 +1,67 @@
+# Key localizations 
+key.extra=Ekstra
+key.release=Utgivelse
+key.toggle=Veksle
+key.charge=Lad
+
+# Item localizations
+item.ee3:shardMinium.name=Mønjeskår
+item.ee3:stoneInert.name=Inert Stein
+item.ee3:stoneMinium.name=Mønjestein
+item.ee3:stonePhilosophers.name=De vises Stein [WIP]
+item.ee3:alchemicalDustAsh.name=Aske [WIP]
+item.ee3:alchemicalDustMinium.name=Mønjestøv [WIP]
+item.ee3:alchemicalDustVerdant.name=Verdant Støv [WIP]
+item.ee3:alchemicalDustAzure.name=Azurblått Støv [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amarant Støv [WIP]
+item.ee3:alchemicalDustIridescent.name=Iriserende Støv [WIP]
+item.ee3:alchemicalBag.name=Alkymisk Sekk [WIP]
+item.ee3:alchemicalChalk.name=Alkymisk Kritt [WIP]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Rødt Vann (Stille)
+tile.ee3:redWaterFlowing.name=Rødt Vann (Rennende)
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alkymisk Kiste [WIP]
+tile.ee3:glassBell.name=Glassklokke [WIP]
+tile.ee3:alchemyTable.name=Alkymi Bord [WIP]
+tile.ee3:renderingTank.name=Rendering Tank [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalsinator [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alkymisk Kiste [WIP]
+container.ee3:alchemicalBag=Alkymisk Sekk [WIP]
+container.ee3:glassBell=Glassklokke [WIP]
+container.ee3:alchemyTable.name=Alkymi Bord [WIP]
+container.ee3:renderingTank.name=Rendering Tank [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Mal for omdanning av målet er skrudd på
+command.ee3:overlay.turned_off=Mal for omdanning av målet er skrudd av
+command.ee3:overlay.position.top_left=Mal for omdanning av målet er satt til å være øverst til venstre
+command.ee3:overlay.position.top_right=Mal for omdanning av målet er satt til å være øverst til høyre
+command.ee3:overlay.position.bottom_left=Mal for omdanning av målet er satt til å være nederst til venstre
+command.ee3:overlay.position.bottom_right=Mal for omdanning av målet er satt til å være nederst til høyre
+command.ee3:overlay.opacity.usage.additional_text=(hvor ### er en desimal verdi mellom 0.0 og 1.0)
+command.ee3:overlay.opacity.updated=Malens gjennomsiktighet oppdaterte uten problemer
+command.ee3:overlay.scale.usage.additional_text=%s (hvor ### er en desimal verdi større enn 0.0) 
+command.ee3:overlay.scale.updated=Malens skala oppdaterte uten problemer
+command.ee3:particles.turned_on=Equivalent Exchange 3 partikler skrudd på
+command.ee3:particles.turned_off=Equivalent Exchange 3 partikler skrudd av
+command.ee3:sounds.set_to_all=Spiller av Equivalent Exchange 3 lyder fra alle spillere
+command.ee3:sounds.set_to_self=Spiller av Equivalent Exchange 3 lyder bare fra seg selv
+command.ee3:sounds.turned_off=Avspilling av Equivalent Exchange 3 lyder skrudd av
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Initialiserer ekstern version sjekk mot den eksterne versionens autoritetsfil, plassert i: %s 
+version.ee3:uninitialized=Feil under initialisering av versjonskontroll
+version.ee3:current=Bruker nå den mest oppdaterte versjonen (%s) av Equivalent Exchange 3 for %s
+version.ee3:outdated=En ny versjon av %s ble funnet (%s) for %s. Last ned her: %s
+version.ee3:general_error=Mislyktes med å koble til fjernversjonens autoritetsfil; prøver igjen
+version.ee3:final_error=Versjonssjekk stoppes etter tre mislykkede forsøk
+version.ee3:mc_version_not_found=Kunne ikke finne ny versjon av %s for %s i fjernversjonens autoritetsfil
