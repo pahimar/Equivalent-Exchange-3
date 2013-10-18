@@ -2,7 +2,6 @@ package com.pahimar.ee3.item.crafting;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -69,23 +68,14 @@ public class RecipeRegistry {
         List<CustomWrappedStack> foundStacks = new ArrayList<CustomWrappedStack>();
 
         // Scan stacks from known recipes
-        SortedSet<CustomWrappedStack> recipeOutputSet = new TreeSet<CustomWrappedStack>();
-        recipeOutputSet.addAll(recipeMap.keySet());
-
-        Iterator<CustomWrappedStack> recipeOutputIterator = recipeOutputSet.iterator();
-
-        while (recipeOutputIterator.hasNext()) {
-            CustomWrappedStack recipeOutput = recipeOutputIterator.next();
-
-            if (recipeOutput.getWrappedStack() != null) {
-                if (!foundStacks.contains(recipeOutput.getWrappedStack())) {
-                    foundStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
-                }
+        for (CustomWrappedStack recipeOutput : recipeMap.keySet()) {
+            if (!foundStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack()))) {
+                foundStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
             }
-
+            
             for (List<CustomWrappedStack> recipeInputList : recipeMap.get(recipeOutput)) {
                 for (CustomWrappedStack recipeInput : recipeInputList) {
-                    if (!foundStacks.contains(recipeInput.getWrappedStack())) {
+                    if (!foundStacks.contains(new CustomWrappedStack(recipeInput.getWrappedStack()))) {
                         foundStacks.add(new CustomWrappedStack(recipeInput.getWrappedStack()));
                     }
                 }
@@ -99,16 +89,16 @@ public class RecipeRegistry {
                     for (int meta = 0; meta < 16; meta++) {
                         CustomWrappedStack wrappedItemStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
 
-                        if (!foundStacks.contains(wrappedItemStack.getWrappedStack())) {
-                            foundStacks.add(new CustomWrappedStack(wrappedItemStack.getWrappedStack()));
+                        if (!foundStacks.contains(wrappedItemStack)) {
+                            foundStacks.add(wrappedItemStack);
                         }
                     }
                 }
                 else {
                     CustomWrappedStack wrappedItemStack = new CustomWrappedStack(Item.itemsList[i]);
 
-                    if (!foundStacks.contains(wrappedItemStack.getWrappedStack())) {
-                        foundStacks.add(new CustomWrappedStack(wrappedItemStack.getWrappedStack()));
+                    if (!foundStacks.contains(wrappedItemStack)) {
+                        foundStacks.add(wrappedItemStack);
                     }
                 }
             }

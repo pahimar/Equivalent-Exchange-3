@@ -40,5 +40,4 @@ public class EmcHelper {
     public static List<CustomWrappedStack> filterStacksByEmcAndRange(float start, float end, EmcValue filterValue) {
         return filterStacksByEmc(EmcRegistry.getStacksInRange(start, end), filterValue);
     }
-
-}
+} 
