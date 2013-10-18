@@ -3,7 +3,7 @@ package com.pahimar.ee3.lib;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 
-import com.pahimar.ee3.core.util.ResourceLocationHelper;
+import com.pahimar.ee3.core.helper.ResourceLocationHelper;
 
 /**
  * Equivalent-Exchange-3

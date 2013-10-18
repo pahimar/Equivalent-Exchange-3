@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.core.helper;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.item;
 
 public class EnergyStack implements Comparable<EnergyStack> {
 

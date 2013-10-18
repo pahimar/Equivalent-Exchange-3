@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.util.GeneralHelper;
-import com.pahimar.ee3.core.util.LogHelper;
+import com.pahimar.ee3.core.helper.GeneralHelper;
+import com.pahimar.ee3.core.helper.LogHelper;
 
 /**
  * Equivalent-Exchange-3

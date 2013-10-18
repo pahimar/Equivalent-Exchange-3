@@ -6,7 +6,7 @@ import net.minecraftforge.common.Configuration;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
-import com.pahimar.ee3.core.util.VersionHelper;
+import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 

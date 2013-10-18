@@ -21,9 +21,9 @@ import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
 
-import com.pahimar.ee3.core.util.EnergyStack;
-import com.pahimar.ee3.core.util.OreStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.EnergyStack;
+import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.lib.Strings;
 
 /**

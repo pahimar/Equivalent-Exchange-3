@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import com.pahimar.ee3.configuration.ConfigurationSettings;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class KeyBindingUtil {
+public class KeyBindingHelper {
 
     public static ArrayList<KeyBinding> keyBindingsList;
     public static ArrayList<Boolean> isRepeatingList;

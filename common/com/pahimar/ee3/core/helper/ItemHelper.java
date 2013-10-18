@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.core.helper;
 
 import java.util.Comparator;
 
@@ -11,7 +11,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.nbt.NBTHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -22,32 +21,9 @@ import com.pahimar.ee3.nbt.NBTHelper;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class ItemUtil {
+public class ItemHelper {
 
     private static double rand;
-
-    public static String toString(ItemStack itemStack) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("ItemStack(");
-
-        if (itemStack != null) {
-
-            stringBuilder.append(String.format("%s", encodeItemStackAsString(itemStack)));
-
-            if (itemStack.hasTagCompound()) {
-                stringBuilder.append(String.format("%s%s", Strings.TOKEN_DELIMITER, NBTHelper.encodeNBTAsString((itemStack.getTagCompound()))));
-            }
-        }
-        else {
-            stringBuilder.append("null");
-        }
-
-        stringBuilder.append(")");
-
-        return stringBuilder.toString();
-    }
 
     public static String encodeItemStackAsString(ItemStack itemStack) {
 

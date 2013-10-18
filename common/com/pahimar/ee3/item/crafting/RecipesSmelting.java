@@ -9,8 +9,8 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.EnergyStack;
 
 public class RecipesSmelting {
 

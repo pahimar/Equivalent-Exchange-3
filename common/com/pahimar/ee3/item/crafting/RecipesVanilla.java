@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.IRecipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.core.util.RecipeHelper;
+import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class RecipesVanilla {

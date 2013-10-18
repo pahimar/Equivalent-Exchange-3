@@ -25,9 +25,9 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityRenderingTankRendere
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
-import com.pahimar.ee3.core.util.ItemUtil;
-import com.pahimar.ee3.core.util.KeyBindingUtil;
-import com.pahimar.ee3.core.util.TransmutationHelper;
+import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.core.helper.KeyBindingHelper;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.BlockIds;
@@ -83,8 +83,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void setKeyBinding(String name, int value) {
 
-        KeyBindingUtil.addKeyBinding(name, value);
-        KeyBindingUtil.addIsRepeating(false);
+        KeyBindingHelper.addKeyBinding(name, value);
+        KeyBindingHelper.addIsRepeating(false);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ClientProxy extends CommonProxy {
 
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
-                    ItemUtil.setColor(itemStack, color);
+                    ItemHelper.setColor(itemStack, color);
                 }
 
                 ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
@@ -167,7 +167,7 @@ public class ClientProxy extends CommonProxy {
 
                 ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16)) {
-                    ItemUtil.setColor(itemStack, color);
+                    ItemHelper.setColor(itemStack, color);
                 }
 
                 ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);

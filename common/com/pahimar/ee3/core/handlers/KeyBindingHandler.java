@@ -6,7 +6,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.util.KeyBindingUtil;
+import com.pahimar.ee3.core.helper.KeyBindingHelper;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -30,7 +30,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
     public KeyBindingHandler() {
 
-        super(KeyBindingUtil.gatherKeyBindings(), KeyBindingUtil.gatherIsRepeating());
+        super(KeyBindingHelper.gatherKeyBindings(), KeyBindingHelper.gatherIsRepeating());
     }
 
     @Override
@@ -52,7 +52,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler {
 
                     if (currentItem != null) {
                         if (currentItem.getItem() instanceof IKeyBound) {
-                            if (!KeyBindingUtil.isClientSided(kb.keyDescription)) {
+                            if (!KeyBindingHelper.isClientSided(kb.keyDescription)) {
                                 PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
                             }
                             else {

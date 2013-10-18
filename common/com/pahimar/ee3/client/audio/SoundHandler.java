@@ -3,7 +3,7 @@ package com.pahimar.ee3.client.audio;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
-import com.pahimar.ee3.core.util.LogHelper;
+import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.lib.Sounds;
 
 /**

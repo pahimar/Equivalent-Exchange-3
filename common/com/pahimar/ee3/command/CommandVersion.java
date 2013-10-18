@@ -4,7 +4,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatMessageComponent;
 
-import com.pahimar.ee3.core.util.VersionHelper;
+import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.lib.Commands;
 
 /**

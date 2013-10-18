@@ -7,9 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.core.util.EnergyStack;
-import com.pahimar.ee3.core.util.ItemUtil;
-import com.pahimar.ee3.core.util.OreStack;
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.lib.Reference;
 
 public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
@@ -182,7 +180,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         CustomWrappedStack customWrappedStack = (CustomWrappedStack) object;
 
         if ((this.getWrappedStack() instanceof ItemStack) && (customWrappedStack.getWrappedStack() instanceof ItemStack)) {
-            return (ItemUtil.compare(itemStack, customWrappedStack.itemStack) && (stackSize == customWrappedStack.itemStack.stackSize));
+            return (ItemHelper.compare(itemStack, customWrappedStack.itemStack) && (stackSize == customWrappedStack.itemStack.stackSize));
         }
         else if ((this.getWrappedStack() instanceof OreStack) && (customWrappedStack.getWrappedStack() instanceof OreStack)) {
             return (oreStack.equals(customWrappedStack.getWrappedStack()) && (stackSize == customWrappedStack.stackSize));
@@ -310,10 +308,10 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             else if (customWrappedStack.getWrappedStack() instanceof OreStack)
                 return 1;
             else if (customWrappedStack.getWrappedStack() instanceof ItemStack) {
-                if (ItemUtil.compare(itemStack, customWrappedStack.itemStack))
+                if (ItemHelper.compare(itemStack, customWrappedStack.itemStack))
                     return stackSize - customWrappedStack.stackSize;
                 else
-                    return ItemUtil.ItemStackComparator.compare(itemStack, customWrappedStack.itemStack);
+                    return ItemHelper.ItemStackComparator.compare(itemStack, customWrappedStack.itemStack);
             }
             else
                 return 1;

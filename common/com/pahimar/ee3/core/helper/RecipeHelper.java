@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.util;
+package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +12,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.EnergyStack;
+import com.pahimar.ee3.item.OreStack;
 
 /**
  * Equivalent-Exchange-3
@@ -156,7 +158,7 @@ public class RecipeHelper {
                     for (int i = 0; i < collatedStacks.size(); i++) {
                         if (collatedStacks.get(i).getWrappedStack() != null) {
                             if (stack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack) {
-                                if (ItemUtil.compare((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
+                                if (ItemHelper.compare((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
                                     collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
                                     found = true;
                                 }

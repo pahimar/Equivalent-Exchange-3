@@ -8,7 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.util.ItemUtil;
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
@@ -113,12 +113,12 @@ public class ItemAlchemicalBag extends ItemEE {
 
     public boolean hasColor(ItemStack itemStack) {
 
-        return ItemUtil.hasColor(itemStack);
+        return ItemHelper.hasColor(itemStack);
     }
 
     public int getColor(ItemStack itemStack) {
 
-        return ItemUtil.getColor(itemStack);
+        return ItemHelper.getColor(itemStack);
     }
 
     public void setColor(ItemStack itemStack, int color) {
@@ -128,7 +128,7 @@ public class ItemAlchemicalBag extends ItemEE {
                 // TODO Localize
                 throw new UnsupportedOperationException("Cannot dye non-bags!");
             else {
-                ItemUtil.setColor(itemStack, color);
+                ItemHelper.setColor(itemStack, color);
             }
         }
     }

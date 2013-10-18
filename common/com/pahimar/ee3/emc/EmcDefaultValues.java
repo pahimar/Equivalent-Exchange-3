@@ -6,8 +6,8 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 
-import com.pahimar.ee3.core.util.EnergyStack;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.EnergyStack;
 
 public class EmcDefaultValues {
 

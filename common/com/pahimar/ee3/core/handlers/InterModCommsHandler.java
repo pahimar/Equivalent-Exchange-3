@@ -5,7 +5,7 @@ import java.util.Map;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.pahimar.ee3.core.util.LogHelper;
+import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.emc.EmcBlackList;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipesIMC;
