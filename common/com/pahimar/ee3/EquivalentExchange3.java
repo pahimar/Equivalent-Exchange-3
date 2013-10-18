@@ -16,7 +16,6 @@ import com.pahimar.ee3.core.handlers.ActionRequestHandler;
 import com.pahimar.ee3.core.handlers.AddonHandler;
 import com.pahimar.ee3.core.handlers.CraftingHandler;
 import com.pahimar.ee3.core.handlers.EntityLivingHandler;
-import com.pahimar.ee3.core.handlers.FuelHandler;
 import com.pahimar.ee3.core.handlers.InterModCommsHandler;
 import com.pahimar.ee3.core.handlers.ItemEventHandler;
 import com.pahimar.ee3.core.handlers.ItemTooltipEventHandler;
@@ -159,9 +158,6 @@ public class EquivalentExchange3 {
 
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
-
-        // Register the Fuel Handler
-        GameRegistry.registerFuelHandler(new FuelHandler());
 
         // Quick test to see that sending an encoded recipe to be added to the
         // recipe registry works

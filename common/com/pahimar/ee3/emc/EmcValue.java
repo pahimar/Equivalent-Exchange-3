@@ -94,6 +94,17 @@ public class EmcValue implements Comparable<EmcValue> {
 
         return 0f;
     }
+    
+    public float[] getComponentSubValues() {
+        
+        float[] componentSubValues = new float[EmcType.TYPES.length];
+        
+        for (int i = 0; i < componentSubValues.length; i++) {
+            componentSubValues[i] = getComponentValueByType(EmcType.TYPES[i]);
+        }
+        
+        return componentSubValues;
+    }
 
     @Override
     public boolean equals(Object object) {
