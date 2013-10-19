@@ -68,6 +68,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 #### Setup MCP
 NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP for you.  Simply run `ant forge-install`, then `ant build`.
+
 1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
 2. Inside `mcdev`, unzip the zip file. 
 	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc. 
@@ -102,7 +103,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
  		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
  	* You may also edit the build.properties to change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (`forge_version` is only used when running `ant forge-install`)
  		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.1.933`
+ 		* `forge_version=9.11.1.934`
  		* `mod_version=pre2`
  		* `build_number=1`
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
