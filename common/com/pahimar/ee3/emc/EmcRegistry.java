@@ -1,6 +1,8 @@
 package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -8,7 +10,9 @@ import java.util.TreeMap;
 
 import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
 public class EmcRegistry {
 
@@ -37,21 +41,20 @@ public class EmcRegistry {
         stackMappings = stackMappingsBuilder.build();
 
         // Handle the value mappings
-        SortedMap<EmcValue, List<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
+        SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
 
-        // FIXME Crashes when uncommented at the moment
-//        for (CustomWrappedStack stack : defaultValues.keySet()) {
-//            EmcValue value = defaultValues.get(stack);
-//
-//            if (tempValueMappings.containsKey(value)) {
-//                if (!(tempValueMappings.get(value).contains(stack))) {
-//                    tempValueMappings.get(value).add(stack);
-//                }
-//            }
-//            else {
-//                tempValueMappings.put(value, Arrays.asList(stack));
-//            }
-//        }
+        for (CustomWrappedStack stack : defaultValues.keySet()) {
+            EmcValue value = defaultValues.get(stack);
+
+            if (tempValueMappings.containsKey(value)) {
+                if (!(tempValueMappings.get(value).contains(stack))) {
+                    tempValueMappings.get(value).add(stack);
+                }
+            }
+            else {
+                tempValueMappings.put(value, new ArrayList<CustomWrappedStack>(Arrays.asList(stack)));
+            }
+        }
 
         valueMappingsBuilder.putAll(tempValueMappings);
         valueMappings = valueMappingsBuilder.build();
@@ -123,12 +126,33 @@ public class EmcRegistry {
 
         return stacksInRange;
     }
-    
-    public static void printDebug() {
-        
+
+    public static void printStackValueMappings() {
+
         lazyInit();
+        
         for (CustomWrappedStack stack : emcRegistry.stackMappings.keySet()) {
             LogHelper.debug("Stack: " + stack + ", Value: " + emcRegistry.stackMappings.get(stack));
         }
     }
+    
+    public static void printUnmappedStacks() {
+        
+        lazyInit();
+        List<CustomWrappedStack> discoveredStacks = new ArrayList<CustomWrappedStack>(RecipeRegistry.getDiscoveredStacks());
+        Collections.sort(discoveredStacks);
+        for (CustomWrappedStack stack : discoveredStacks) {
+            if (!hasEmcValue(stack)) {
+                if (RecipeRegistry.getRecipeMappings().get(stack).size() > 0) {
+                    for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(stack)) {
+                        LogHelper.debug(stack + ": " + RecipeHelper.collateInputStacks(recipeInputs));
+                    }
+                }
+                else {
+                    LogHelper.debug(stack);
+                }
+            }
+        }
+    }
+    
 }

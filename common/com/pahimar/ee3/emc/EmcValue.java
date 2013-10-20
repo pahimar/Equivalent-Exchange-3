@@ -15,12 +15,11 @@ import java.util.List;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
-    public final float recoveryPercent;
     public final float[] components;
 
     public EmcValue() {
 
-        this(1F, new float[EmcType.TYPES.length]);
+        this(new float[EmcType.TYPES.length]);
     }
 
     public EmcValue(int value) {
@@ -30,41 +29,22 @@ public class EmcValue implements Comparable<EmcValue> {
 
     public EmcValue(float value) {
 
-        this(value, 1F);
+        this(value, EmcType.DEFAULT);
     }
 
     public EmcValue(float value, EmcComponent component) {
 
-        this(value, 1F, component);
+        this(value, component.type);
     }
+    
+    public EmcValue(float value, EmcType emcType) {
 
-    public EmcValue(float value, float recoveryPercent, EmcComponent component) {
-
-        this.recoveryPercent = recoveryPercent;
         this.components = new float[EmcType.TYPES.length];
-        this.components[component.type.ordinal()] = value;
-    }
-
-    public EmcValue(int value, float recoveryPercent) {
-
-        this((float) value, recoveryPercent);
-    }
-
-    public EmcValue(float value, float recoveryPercent) {
-
-        this.recoveryPercent = recoveryPercent;
-        this.components = new float[EmcType.TYPES.length];
-        this.components[EmcType.DEFAULT.ordinal()] = value;
+        this.components[emcType.ordinal()] = value;
     }
 
     public EmcValue(float[] components) {
 
-        this(1F, components);
-    }
-
-    public EmcValue(float recoveryPercent, float[] components) {
-
-        this.recoveryPercent = recoveryPercent;
         this.components = components;
     }
 
@@ -75,12 +55,6 @@ public class EmcValue implements Comparable<EmcValue> {
 
     public EmcValue(float value, List<EmcComponent> componentList) {
 
-        this(value, 1F, componentList);
-    }
-
-    public EmcValue(float value, float recoveryPercent, List<EmcComponent> componentList) {
-
-        this.recoveryPercent = recoveryPercent;
         this.components = new float[EmcType.TYPES.length];
 
         List<EmcComponent> collatedComponents = collateComponents(componentList);
@@ -134,7 +108,15 @@ public class EmcValue implements Comparable<EmcValue> {
         StringBuilder stringBuilder = new StringBuilder();
         
         // TODO Intelligible output
-        stringBuilder.append(String.format("%s @ %s", components.toString(), recoveryPercent));
+        stringBuilder.append("[");
+        
+        for (EmcType emcType : EmcType.TYPES) {
+            if (components[emcType.ordinal()] > 0) {
+                stringBuilder.append(String.format(" %s:%s ", emcType, components[emcType.ordinal()]));
+            }
+        }
+        
+        stringBuilder.append("]");
 
         return stringBuilder.toString();
     }
@@ -145,7 +127,6 @@ public class EmcValue implements Comparable<EmcValue> {
         int hashCode = 1;
 
         hashCode = 37 * hashCode + Float.floatToIntBits(getValue());
-        hashCode = 37 * hashCode + Float.floatToIntBits(recoveryPercent);
         for (float subValue : components) {
             hashCode = 37 * hashCode + Float.floatToIntBits(subValue);
         }
@@ -157,17 +138,7 @@ public class EmcValue implements Comparable<EmcValue> {
     public int compareTo(EmcValue emcValue) {
 
         if (emcValue instanceof EmcValue) {
-            if (Float.compare(this.getValue(), emcValue.getValue()) == 0) {
-                if (Float.compare(this.recoveryPercent, emcValue.recoveryPercent) == 0) {
-                    return compareComponents(this.components, emcValue.components);
-                }
-                else {
-                    return Float.compare(this.recoveryPercent, emcValue.recoveryPercent);
-                }
-            }
-            else {
-                return Float.compare(this.getValue(), emcValue.getValue());
-            }
+            return compareComponents(this.components, emcValue.components);
         }
         else {
             return 1;
@@ -204,6 +175,7 @@ public class EmcValue implements Comparable<EmcValue> {
     private static int compareComponents(float[] first, float[] second) {
 
         if (first.length == EmcType.TYPES.length && second.length == EmcType.TYPES.length) {
+
             for (EmcType emcType : EmcType.TYPES) {
                 if (Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]) != 0) {
                     return Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]);

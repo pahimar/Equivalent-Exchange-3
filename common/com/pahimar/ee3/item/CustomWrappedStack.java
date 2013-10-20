@@ -47,28 +47,11 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
             ItemStack itemStack = (ItemStack) object;
 
-            /*
-             * If the ItemStack does not exist in the OreDictionary, wrap it as
-             * an ItemStack
-             */
-            if (OreDictionary.getOreID(itemStack) == Reference.ORE_DICTIONARY_NOT_FOUND) {
-                this.itemStack = itemStack.copy();
-                oreStack = null;
-                energyStack = null;
-                stackSize = this.itemStack.stackSize;
-                this.itemStack.stackSize = 1;
-            }
-            /*
-             * Else the ItemStack exists in the OreDictionary, so wrap it as an
-             * OreStack instead of an ItemStack
-             */
-            else {
-                this.itemStack = null;
-                oreStack = new OreStack(itemStack);
-                energyStack = null;
-                stackSize = oreStack.stackSize;
-                oreStack.stackSize = 1;
-            }
+            this.itemStack = itemStack.copy();
+            oreStack = null;
+            energyStack = null;
+            stackSize = this.itemStack.stackSize;
+            this.itemStack.stackSize = 1;
         }
         /*
          * Or we are given an OreStack to wrap
