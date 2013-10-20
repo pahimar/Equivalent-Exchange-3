@@ -4,8 +4,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
-import com.pahimar.ee3.emc.EmcComponent;
 import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.OreStack;
@@ -42,11 +42,13 @@ public class ItemTooltipEventHandler {
             EmcValue emcValue = EmcRegistry.getEmcValue(stack);
 
             event.toolTip.add("");
-            event.toolTip.add("EMC: " + emcValue.value);
+            event.toolTip.add("EMC: " + emcValue.getValue());
          
             if (debug) {
-                for (EmcComponent emcComponent : emcValue.getComponents()) {
-                    event.toolTip.add("  * " + emcComponent.getType() + ": " + emcValue.getComponentValueByType(emcComponent.getType()));
+                for (EmcType emcType : EmcType.TYPES) {
+                    if (emcValue.components[emcType.ordinal()] > 0) {
+                        event.toolTip.add("  * " + emcType + ": " + emcValue.components[emcType.ordinal()]);
+                    }
                 }
             }
         }

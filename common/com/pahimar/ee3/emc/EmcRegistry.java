@@ -1,13 +1,13 @@
 package com.pahimar.ee3.emc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 public class EmcRegistry {
@@ -39,18 +39,19 @@ public class EmcRegistry {
         // Handle the value mappings
         SortedMap<EmcValue, List<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, List<CustomWrappedStack>>();
 
-        for (CustomWrappedStack stack : defaultValues.keySet()) {
-            EmcValue value = defaultValues.get(stack);
-
-            if (tempValueMappings.containsKey(value)) {
-                if (!(tempValueMappings.get(value).contains(stack))) {
-                    tempValueMappings.get(value).add(stack);
-                }
-            }
-            else {
-                tempValueMappings.put(value, Arrays.asList(stack));
-            }
-        }
+        // FIXME Crashes when uncommented at the moment
+//        for (CustomWrappedStack stack : defaultValues.keySet()) {
+//            EmcValue value = defaultValues.get(stack);
+//
+//            if (tempValueMappings.containsKey(value)) {
+//                if (!(tempValueMappings.get(value).contains(stack))) {
+//                    tempValueMappings.get(value).add(stack);
+//                }
+//            }
+//            else {
+//                tempValueMappings.put(value, Arrays.asList(stack));
+//            }
+//        }
 
         valueMappingsBuilder.putAll(tempValueMappings);
         valueMappings = valueMappingsBuilder.build();
@@ -121,5 +122,13 @@ public class EmcRegistry {
         }
 
         return stacksInRange;
+    }
+    
+    public static void printDebug() {
+        
+        lazyInit();
+        for (CustomWrappedStack stack : emcRegistry.stackMappings.keySet()) {
+            LogHelper.debug("Stack: " + stack + ", Value: " + emcRegistry.stackMappings.get(stack));
+        }
     }
 }

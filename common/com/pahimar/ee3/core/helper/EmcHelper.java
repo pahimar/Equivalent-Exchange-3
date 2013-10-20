@@ -19,8 +19,8 @@ public class EmcHelper {
                 
                 EmcValue value = EmcRegistry.getEmcValue(stack);
                 boolean satisfiesFilter = true;
-                float[] valueSubValues = value.getComponentSubValues();
-                float[] filterValueSubValues = filterValue.getComponentSubValues();
+                float[] valueSubValues = value.components;
+                float[] filterValueSubValues = filterValue.components;
                 
                 for (int i = 0; i < valueSubValues.length; i++) {
                     if (Float.compare(valueSubValues[i], filterValueSubValues[i]) < 0) {

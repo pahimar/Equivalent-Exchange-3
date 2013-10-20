@@ -11,28 +11,24 @@ public class EmcComponent implements Comparable<EmcComponent> {
     public static final EmcComponent AMORPHOUS_UNIT_COMPONENT = new EmcComponent(EmcType.AMORPHOUS);
     public static final EmcComponent VOID_UNIT_COMPONENT = new EmcComponent(EmcType.VOID);
     
-    private final EmcType type;
-    private final int ratioWeight;
+    public final EmcType type;
+    public final int weight;
 
-    public EmcComponent(EmcType type, int ratioWeight) {
+    public EmcComponent(EmcType type, int weight) {
 
         this.type = type;
-        this.ratioWeight = ratioWeight;
+        
+        if (weight > 0) {
+            this.weight = weight;
+        }
+        else {
+            this.weight = -1;
+        }
     }
     
     public EmcComponent(EmcType type) {
         
         this(type, 1);
-    }
-
-    public EmcType getType() {
-
-        return type;
-    }
-
-    public int getRatioWeight() {
-
-        return ratioWeight;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class EmcComponent implements Comparable<EmcComponent> {
 
         EmcComponent emcComponent = (EmcComponent) object;
 
-        return ((this.type == emcComponent.type) && (this.ratioWeight == emcComponent.ratioWeight));
+        return ((this.type == emcComponent.type) && (this.weight == emcComponent.weight));
     }
 
     @Override
@@ -52,7 +48,7 @@ public class EmcComponent implements Comparable<EmcComponent> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("<EMC Type: %s, Ratio Weight: %s>", type, ratioWeight));
+        stringBuilder.append(String.format("<EMC Type: %s, Weight: %s>", type, weight));
 
         return stringBuilder.toString();
     }
@@ -62,7 +58,7 @@ public class EmcComponent implements Comparable<EmcComponent> {
 
         if (emcComponent != null) {
             if (this.type == emcComponent.type) {
-                return (this.ratioWeight - emcComponent.ratioWeight);
+                return (this.weight - emcComponent.weight);
             }
             else {
                 return this.type.compareTo(emcComponent.type);
