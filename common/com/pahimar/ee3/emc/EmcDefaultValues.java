@@ -50,7 +50,7 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Block.deadBush), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
         valueMap.put(new CustomWrappedStack(Block.ice), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
 
-        valueMap.put(new CustomWrappedStack(Block.wood), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
+        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
         valueMap.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcComponent.CORPOREAL_UNIT_COMPONENT));
         valueMap.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcComponent.CORPOREAL_UNIT_COMPONENT));
         valueMap.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
@@ -101,10 +101,15 @@ public class EmcDefaultValues {
             EmcValue stackValue = valueMap.get(unitStack);
             
             if (stackValue == null && unitStack.getWrappedStack() instanceof ItemStack) {
+                
                 if (OreDictionary.getOreID((ItemStack) unitStack.getWrappedStack()) != -1) {
-                    // TODO Detect if other stacks that are part of this OreStack have values, and nab them
-                    unitStack = new CustomWrappedStack(new OreStack(OreDictionary.getOreID((ItemStack) unitStack.getWrappedStack())));
+
+                    // Attempt to find the value from the OreStack itself
+                    OreStack oreStack = new OreStack(OreDictionary.getOreID((ItemStack) unitStack.getWrappedStack()), 1);
+                    unitStack = new CustomWrappedStack(oreStack);
                     stackValue = valueMap.get(unitStack);
+                    
+                    // Attempt to find the value from an ItemStack in the OreDictionary entry for the OreStack
                 }
             }
 

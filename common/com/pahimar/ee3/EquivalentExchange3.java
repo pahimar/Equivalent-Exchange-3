@@ -173,7 +173,7 @@ public class EquivalentExchange3 {
         AddonHandler.init();
         
         EmcRegistry.printStackValueMappings();
-        EmcRegistry.printUnmappedStacks();
+        //EmcRegistry.printUnmappedStacks();
     }
 
     @EventHandler
