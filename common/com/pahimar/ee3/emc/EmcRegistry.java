@@ -8,10 +8,14 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
 public class EmcRegistry {
@@ -39,7 +43,7 @@ public class EmcRegistry {
         // Handle the stack mappings
         stackMappingsBuilder.putAll(defaultValues);
         stackMappings = stackMappingsBuilder.build();
-
+        
         // Handle the value mappings
         SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
 
@@ -55,7 +59,7 @@ public class EmcRegistry {
                 tempValueMappings.put(value, new ArrayList<CustomWrappedStack>(Arrays.asList(stack)));
             }
         }
-
+        
         valueMappingsBuilder.putAll(tempValueMappings);
         valueMappings = valueMappingsBuilder.build();
     }
@@ -65,8 +69,48 @@ public class EmcRegistry {
         lazyInit();
 
         if (CustomWrappedStack.canBeWrapped(object)) {
+            
             CustomWrappedStack stack = new CustomWrappedStack(object);
-            return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
+            
+            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()))) {
+                return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
+            }
+            else {
+                
+                /*
+                 * If the wrapped stack is an ItemStack, check to see if it has an entry in the OreDictionary.
+                 * If it does, check every ItemStack that shares the entry in the OreDictionary with the wrapped
+                 * stack
+                 */
+                if (stack.getWrappedStack() instanceof ItemStack) {
+                    
+                    ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
+                    OreStack oreStack = new OreStack(wrappedItemStack);
+                    boolean hasValue = false;
+                    
+                    if (oreStack.oreId != -1) {
+                        List<ItemStack> oreItemStacks = OreDictionary.getOres(oreStack.oreId);
+                        
+                        // Scan all ItemStacks in the OreDictionary entry for equality
+                        for (ItemStack oreItemStack : oreItemStacks) {
+                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreItemStack)) && !hasValue) {
+                                hasValue = true;
+                            }
+                        }
+                        
+                        // Lastly, scan all ItemStacks in the OreDictionary entry for wildcard equality
+                        if (!hasValue) {
+                            for (ItemStack oreItemStack : oreItemStacks) {
+                                if ((oreItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && (wrappedItemStack.itemID == oreItemStack.itemID) && (!hasValue)) {
+                                    hasValue = true;
+                                }
+                            }
+                        }
+                    }
+                    
+                    return hasValue;
+                }
+            }
         }
 
         return false;
@@ -76,9 +120,49 @@ public class EmcRegistry {
 
         lazyInit();
 
-        if (CustomWrappedStack.canBeWrapped(object)) {
+        if (hasEmcValue(object)) {
+            
             CustomWrappedStack stack = new CustomWrappedStack(object);
-            return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+            
+            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()))) {
+                return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+            }
+            else {
+                
+                /*
+                 * If the wrapped stack is an ItemStack, check to see if it has an entry in the OreDictionary.
+                 * If it does, check every ItemStack that shares the entry in the OreDictionary with the wrapped
+                 * stack
+                 */
+                if (stack.getWrappedStack() instanceof ItemStack) {
+                    OreStack oreStack = new OreStack((ItemStack) stack.getWrappedStack());
+                    
+                    if (oreStack.oreId != -1) {
+                        List<ItemStack> oreItemStacks = OreDictionary.getOres(oreStack.oreId);
+                        EmcValue lowestValue = null;
+                        
+                        for (ItemStack oreItemStack : oreItemStacks) {
+                            
+                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreItemStack))) {
+                                EmcValue currentValue = emcRegistry.stackMappings.get(new CustomWrappedStack(oreItemStack));
+                                
+                                if (lowestValue == null) {
+                                    lowestValue = currentValue;
+                                }
+                                else {
+                                    if (currentValue.compareTo(lowestValue) < 0) {
+                                        lowestValue = currentValue;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // TODO Handle the OreDictionary wildcard meta case
+                        
+                        return lowestValue;
+                    }
+                }
+            }
         }
 
         return null;

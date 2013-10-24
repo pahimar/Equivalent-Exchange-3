@@ -7,47 +7,48 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreStack implements Comparable<OreStack> {
 
+    public int oreId;
     public String oreName;
     public int stackSize;
 
     public OreStack(String oreName, int stackSize) {
-
-        this.oreName = oreName;
+        
+        if (oreName != null && oreName.length() > 0) {
+            
+            if (this.oreName == null) {
+                
+                for (String oreDictionaryName : OreDictionary.getOreNames()) {
+                    
+                    if (oreDictionaryName.equalsIgnoreCase(oreName)) {
+                        
+                        this.oreId = OreDictionary.getOreID(oreDictionaryName);
+                        this.oreName = oreDictionaryName;
+                    }
+                }
+            }
+        }
+        else {
+            
+            this.oreId = -1;
+            this.oreName = OreDictionary.getOreName(oreId);
+        }
+        
         this.stackSize = stackSize;
-    }
-
-    public OreStack() {
-
-        this(null, 0);
     }
 
     public OreStack(String oreName) {
 
-        this(oreName, 0);
+        this(oreName, 1);
     }
 
-    public OreStack(int oreID) {
+    public OreStack(int oreId) {
 
-        if (oreID != -1) {
-            this.oreName = OreDictionary.getOreName(oreID);
-        }
-        else {
-            this.oreName = null;
-        }
-
-        this.stackSize = 0;
+        this(oreId, 1);
     }
-
-    public OreStack(int oreID, int stackSize) {
-
-        if (oreID != -1) {
-            this.oreName = OreDictionary.getOreName(oreID);
-        }
-        else {
-            this.oreName = null;
-        }
-
-        this.stackSize = stackSize;
+    
+    public OreStack(int oreId, int stackSize) {
+        
+        this(OreDictionary.getOreName(oreId), stackSize);
     }
 
     public OreStack(ItemStack itemStack) {
@@ -57,12 +58,11 @@ public class OreStack implements Comparable<OreStack> {
 
     public ArrayList<ItemStack> getOres() {
 
-        return OreDictionary.getOres(oreName);
-    }
-
-    public int getOreID() {
-
-        return OreDictionary.getOreID(oreName);
+        if (this.oreId != -1) {
+            return OreDictionary.getOres(this.oreId);
+        }
+        
+        return new ArrayList<ItemStack>();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class OreStack implements Comparable<OreStack> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreName));
+        stringBuilder.append(String.format("%dxoreDictionary.%s[%s]", stackSize, oreName, oreId));
 
         return stringBuilder.toString();
     }
@@ -83,15 +83,7 @@ public class OreStack implements Comparable<OreStack> {
 
         OreStack oreStackObject = (OreStack) object;
 
-        if ((this.oreName != null) && (oreStackObject.oreName != null)) {
-            return (stackSize == oreStackObject.stackSize) && oreName.equalsIgnoreCase(oreStackObject.oreName);
-        }
-        else if ((this.oreName == null) && (oreStackObject.oreName == null)) {
-            return (stackSize == oreStackObject.stackSize);
-        }
-        else {
-            return false;
-        }
+        return (compareTo(oreStackObject) == 0);
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2) {
@@ -109,22 +101,33 @@ public class OreStack implements Comparable<OreStack> {
     public int compareTo(OreStack oreStack) {
 
         if (oreStack != null) {
-            if ((this.oreName != null) && (oreStack.oreName != null)) {
-                if (this.oreName.equalsIgnoreCase(oreStack.oreName)) {
-                    return (this.stackSize - oreStack.stackSize);
+            
+            if (this.oreId != oreStack.oreId) {
+                if (this.oreId > oreStack.oreId) {
+                    return 1;
                 }
                 else {
-                    return this.oreName.compareToIgnoreCase(oreStack.oreName);
+                    return -1;
                 }
             }
-            else if ((this.oreName != null) && (oreStack.oreName == null)) {
-                return 1;
-            }
-            else if ((this.oreName == null) && (oreStack.oreName != null)) {
-                return -1;
-            }
             else {
-                return (this.stackSize - oreStack.stackSize);
+                if ((this.oreName != null) && (oreStack.oreName != null)) {
+                    if (this.oreName.equalsIgnoreCase(oreStack.oreName)) {
+                        return (this.stackSize - oreStack.stackSize);
+                    }
+                    else {
+                        return this.oreName.compareToIgnoreCase(oreStack.oreName);
+                    }
+                }
+                else if ((this.oreName != null) && (oreStack.oreName == null)) {
+                    return 1;
+                }
+                else if ((this.oreName == null) && (oreStack.oreName != null)) {
+                    return -1;
+                }
+                else {
+                    return (this.stackSize - oreStack.stackSize);
+                }
             }
         }
         else {
