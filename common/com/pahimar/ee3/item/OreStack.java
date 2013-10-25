@@ -70,7 +70,7 @@ public class OreStack implements Comparable<OreStack> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(String.format("%dxoreDictionary.%s[%s]", stackSize, oreName, oreId));
+        stringBuilder.append(String.format("%dxoreDictionary.%s[oreId:%s]", stackSize, oreName, oreId));
 
         return stringBuilder.toString();
     }

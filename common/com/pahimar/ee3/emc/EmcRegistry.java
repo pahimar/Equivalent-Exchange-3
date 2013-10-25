@@ -77,38 +77,25 @@ public class EmcRegistry {
             }
             else {
                 
-                /*
-                 * If the wrapped stack is an ItemStack, check to see if it has an entry in the OreDictionary.
-                 * If it does, check every ItemStack that shares the entry in the OreDictionary with the wrapped
-                 * stack
-                 */
                 if (stack.getWrappedStack() instanceof ItemStack) {
                     
                     ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
-                    OreStack oreStack = new OreStack(wrappedItemStack);
-                    boolean hasValue = false;
                     
-                    if (oreStack.oreId != -1) {
-                        List<ItemStack> oreItemStacks = OreDictionary.getOres(oreStack.oreId);
+                    if (OreDictionary.getOreID(wrappedItemStack) != -1) {
                         
-                        // Scan all ItemStacks in the OreDictionary entry for equality
-                        for (ItemStack oreItemStack : oreItemStacks) {
-                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreItemStack)) && !hasValue) {
-                                hasValue = true;
-                            }
+                        OreStack oreStack = new OreStack(wrappedItemStack);
+                        
+                        if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
+                            return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack));
                         }
-                        
-                        // Lastly, scan all ItemStacks in the OreDictionary entry for wildcard equality
-                        if (!hasValue) {
-                            for (ItemStack oreItemStack : oreItemStacks) {
-                                if ((oreItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && (wrappedItemStack.itemID == oreItemStack.itemID) && (!hasValue)) {
-                                    hasValue = true;
+                        else {
+                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
+                                if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
+                                    return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack));
                                 }
                             }
                         }
                     }
-                    
-                    return hasValue;
                 }
             }
         }
@@ -129,37 +116,38 @@ public class EmcRegistry {
             }
             else {
                 
-                /*
-                 * If the wrapped stack is an ItemStack, check to see if it has an entry in the OreDictionary.
-                 * If it does, check every ItemStack that shares the entry in the OreDictionary with the wrapped
-                 * stack
-                 */
                 if (stack.getWrappedStack() instanceof ItemStack) {
-                    OreStack oreStack = new OreStack((ItemStack) stack.getWrappedStack());
                     
-                    if (oreStack.oreId != -1) {
-                        List<ItemStack> oreItemStacks = OreDictionary.getOres(oreStack.oreId);
-                        EmcValue lowestValue = null;
+                    ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
+                    
+                    if (OreDictionary.getOreID(wrappedItemStack) != -1) {
                         
-                        for (ItemStack oreItemStack : oreItemStacks) {
+                        OreStack oreStack = new OreStack(wrappedItemStack);
+                        
+                        if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
+                            return emcRegistry.stackMappings.get(new CustomWrappedStack(oreStack));
+                        }
+                        else {
+                            EmcValue lowestValue = null;
                             
-                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreItemStack))) {
-                                EmcValue currentValue = emcRegistry.stackMappings.get(new CustomWrappedStack(oreItemStack));
+                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
                                 
-                                if (lowestValue == null) {
-                                    lowestValue = currentValue;
-                                }
-                                else {
-                                    if (currentValue.compareTo(lowestValue) < 0) {
-                                        lowestValue = currentValue;
+                                if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
+                                    if (lowestValue == null) {
+                                        lowestValue = emcRegistry.stackMappings.get(new CustomWrappedStack(itemStack));
+                                    }
+                                    else {
+                                        EmcValue itemValue = emcRegistry.stackMappings.get(new CustomWrappedStack(itemStack));
+                                        
+                                        if (itemValue.compareTo(lowestValue) < 0) {
+                                            lowestValue = itemValue;
+                                        }
                                     }
                                 }
                             }
+                            
+                            return lowestValue;
                         }
-                        
-                        // TODO Handle the OreDictionary wildcard meta case
-                        
-                        return lowestValue;
                     }
                 }
             }

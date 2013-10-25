@@ -42,12 +42,14 @@ public class ItemTooltipEventHandler {
             EmcValue emcValue = EmcRegistry.getEmcValue(stack);
 
             event.toolTip.add("");
-            event.toolTip.add("EMC: " + emcValue.getValue());
-         
-            if (debug) {
-                for (EmcType emcType : EmcType.TYPES) {
-                    if (emcValue.components[emcType.ordinal()] > 0) {
-                        event.toolTip.add("  * " + emcType + ": " + emcValue.components[emcType.ordinal()]);
+            if (emcValue != null) {
+                event.toolTip.add("EMC: " + emcValue.getValue());
+             
+                if (debug) {
+                    for (EmcType emcType : EmcType.TYPES) {
+                        if (emcValue.components[emcType.ordinal()] > 0) {
+                            event.toolTip.add("  * " + emcType + ": " + emcValue.components[emcType.ordinal()]);
+                        }
                     }
                 }
             }
