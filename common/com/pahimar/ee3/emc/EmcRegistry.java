@@ -3,6 +3,7 @@ package com.pahimar.ee3.emc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.CustomWrappedStack;
@@ -44,6 +46,26 @@ public class EmcRegistry {
         stackMappingsBuilder.putAll(defaultValues);
         stackMappings = stackMappingsBuilder.build();
         
+        // Attempt auto-assignment
+        int passNumber = 0;
+        Map<CustomWrappedStack, EmcValue> computedStackValues = computeStackMappings();
+
+        while ((computedStackValues.size() > 0) && (passNumber < 16)) {
+            
+            passNumber++;
+            computedStackValues = computeStackMappings();
+            
+            LogHelper.debug(String.format("pass number=%s, count=%s", passNumber, computedStackValues.size()));
+            for (CustomWrappedStack key : computedStackValues.keySet()) {
+                LogHelper.debug(String.format("Pass = %s, Stack = %s, Computed Value = %s", passNumber, key, computedStackValues.get(key)));
+            }
+            
+            stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+            stackMappingsBuilder.putAll(stackMappings);                
+            stackMappingsBuilder.putAll(computedStackValues);
+            stackMappings = stackMappingsBuilder.build();
+        }
+        
         // Handle the value mappings
         SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
 
@@ -63,8 +85,39 @@ public class EmcRegistry {
         valueMappingsBuilder.putAll(tempValueMappings);
         valueMappings = valueMappingsBuilder.build();
     }
+    
+    private static Map<CustomWrappedStack, EmcValue> computeStackMappings() {
+        
+        Map<CustomWrappedStack, EmcValue> computedStackMap = new HashMap<CustomWrappedStack, EmcValue>();
+        
+        for (CustomWrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
+            
+            if (!hasEmcValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput.getWrappedStack())) {
+                
+                EmcValue lowestValue = null;
+                
+                for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
+                    
+                    EmcValue computedValue = EmcHelper.computeEmcValueFromList(recipeInputs);
+                    computedValue = EmcHelper.factorEmcValue(computedValue, recipeOutput.getStackSize());
+                    
+                    if (computedValue != null) {
+                        if (computedValue.compareTo(lowestValue) < 0) {
+                            lowestValue = computedValue;
+                        }
+                    }
+                }
+                
+                if ((lowestValue != null) && (lowestValue.getValue() > 0f)) {
+                    computedStackMap.put(new CustomWrappedStack(recipeOutput.getWrappedStack()), lowestValue);
+                }
+            }
+        }
+        
+        return computedStackMap;
+    }
 
-    public static boolean hasEmcValue(Object object) {
+    public static boolean hasEmcValue(Object object, boolean strict) {
 
         lazyInit();
 
@@ -77,21 +130,23 @@ public class EmcRegistry {
             }
             else {
                 
-                if (stack.getWrappedStack() instanceof ItemStack) {
-                    
-                    ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
-                    
-                    if (OreDictionary.getOreID(wrappedItemStack) != -1) {
+                if (!strict) {
+                    if (stack.getWrappedStack() instanceof ItemStack) {                  
                         
-                        OreStack oreStack = new OreStack(wrappedItemStack);
+                        ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
                         
-                        if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
-                            return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack));
-                        }
-                        else {
-                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
-                                if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
-                                    return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack));
+                        if (OreDictionary.getOreID(wrappedItemStack) != -1) {
+                            
+                            OreStack oreStack = new OreStack(wrappedItemStack);
+                            
+                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
+                                return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack));
+                            }
+                            else {
+                                for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
+                                    if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
+                                        return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack));
+                                    }
                                 }
                             }
                         }
@@ -102,12 +157,16 @@ public class EmcRegistry {
 
         return false;
     }
+    
+    public static boolean hasEmcValue(Object object) {
+        return hasEmcValue(object, false);
+    }
 
-    public static EmcValue getEmcValue(Object object) {
+    public static EmcValue getEmcValue(Object object, boolean strict) {
 
         lazyInit();
 
-        if (hasEmcValue(object)) {
+        if (hasEmcValue(object, strict)) {
             
             CustomWrappedStack stack = new CustomWrappedStack(object);
             
@@ -154,6 +213,10 @@ public class EmcRegistry {
         }
 
         return null;
+    }
+    
+    public static EmcValue getEmcValue(Object object) {
+        return getEmcValue(object, false);
     }
 
     public static List<CustomWrappedStack> getStacksInRange(int start, int finish) {

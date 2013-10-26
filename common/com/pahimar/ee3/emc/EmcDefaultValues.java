@@ -32,26 +32,30 @@ public class EmcDefaultValues {
 
     private void init() {
 
-        valueMap.put(new CustomWrappedStack(Block.stone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.grass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
-        valueMap.put(new CustomWrappedStack(Block.dirt), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.sand), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), EmcComponent.AMORPHOUS_UNIT_COMPONENT)));
-        valueMap.put(new CustomWrappedStack(Block.leaves), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
-        valueMap.put(new CustomWrappedStack(Block.glass), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(new ItemStack(Block.glass.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.tallGrass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
+        valueMap.put(new CustomWrappedStack(Block.stone), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.grass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new CustomWrappedStack(Block.dirt), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.sand), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new CustomWrappedStack(Block.leaves), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new CustomWrappedStack(Block.glass), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(new ItemStack(Block.glass.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.tallGrass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
         for (int meta = 0; meta < 16; meta++) {
-            valueMap.put(new CustomWrappedStack(new ItemStack(Block.tallGrass.blockID, 1, meta)), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
+            valueMap.put(new CustomWrappedStack(new ItemStack(Block.tallGrass.blockID, 1, meta)), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
         }
-        valueMap.put(new CustomWrappedStack(Block.deadBush), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.ice), new EmcValue(1, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        valueMap.put(new CustomWrappedStack(Block.deadBush), new EmcValue(1, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.ice), new EmcValue(1, EmcType.CORPOREAL));
 
-        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), EmcComponent.ESSENTIA_UNIT_COMPONENT)));
-        valueMap.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
-        valueMap.put(new CustomWrappedStack(Item.diamond), new EmcValue(8192, EmcComponent.CORPOREAL_UNIT_COMPONENT));
+        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.planks))), new EmcValue(8, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Item.stick))), new EmcValue(4, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Item.ingotIron), new EmcValue(256, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Item.ingotGold), new EmcValue(2048, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.oreGold), new EmcValue(2048, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Block.oreDiamond), new EmcValue(8192, EmcType.CORPOREAL));
+        valueMap.put(new CustomWrappedStack(Item.diamond), new EmcValue(8192, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(Block.oreCoal), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.KINETIC, 1))));
 
     }

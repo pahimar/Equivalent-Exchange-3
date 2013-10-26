@@ -37,6 +37,10 @@ public class EmcValue implements Comparable<EmcValue> {
         this(value, component.type);
     }
     
+    public EmcValue(int value, EmcType emcType) {
+        this((float) value, emcType);
+    }
+    
     public EmcValue(float value, EmcType emcType) {
 
         this.components = new float[EmcType.TYPES.length];
@@ -141,7 +145,7 @@ public class EmcValue implements Comparable<EmcValue> {
             return compareComponents(this.components, emcValue.components);
         }
         else {
-            return 1;
+            return -1;
         }
     }
 

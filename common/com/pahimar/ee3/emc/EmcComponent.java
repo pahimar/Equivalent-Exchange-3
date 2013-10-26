@@ -1,15 +1,6 @@
 package com.pahimar.ee3.emc;
 
 public class EmcComponent implements Comparable<EmcComponent> {
-
-    // Unit components for the various EmcTypes
-    public static final EmcComponent OMNI_UNIT_COMPONENT = new EmcComponent(EmcType.OMNI);
-    public static final EmcComponent CORPOREAL_UNIT_COMPONENT = new EmcComponent(EmcType.CORPOREAL);
-    public static final EmcComponent KINETIC_UNIT_COMPONENT = new EmcComponent(EmcType.KINETIC);
-    public static final EmcComponent TEMPORAL_UNIT_COMPONENT = new EmcComponent(EmcType.TEMPORAL);
-    public static final EmcComponent ESSENTIA_UNIT_COMPONENT = new EmcComponent(EmcType.ESSENTIA);
-    public static final EmcComponent AMORPHOUS_UNIT_COMPONENT = new EmcComponent(EmcType.AMORPHOUS);
-    public static final EmcComponent VOID_UNIT_COMPONENT = new EmcComponent(EmcType.VOID);
     
     public final EmcType type;
     public final int weight;
