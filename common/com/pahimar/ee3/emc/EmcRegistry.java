@@ -22,12 +22,14 @@ import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
 public class EmcRegistry {
 
+    private int MAX_ATTEMPTED_ASSIGNMENT_PASSES = 16;
+    
     private static EmcRegistry emcRegistry = null;
 
     private ImmutableSortedMap<CustomWrappedStack, EmcValue> stackMappings;
     private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> valueMappings;
 
-    private static void lazyInit() {
+    public static void lazyInit() {
 
         if (emcRegistry == null) {
             emcRegistry = new EmcRegistry();
@@ -50,15 +52,10 @@ public class EmcRegistry {
         int passNumber = 0;
         Map<CustomWrappedStack, EmcValue> computedStackValues = computeStackMappings();
 
-        while ((computedStackValues.size() > 0) && (passNumber < 16)) {
+        while ((computedStackValues.size() > 0) && (passNumber < MAX_ATTEMPTED_ASSIGNMENT_PASSES)) {
             
             passNumber++;
             computedStackValues = computeStackMappings();
-            
-//            LogHelper.debug(String.format("pass number=%s, count=%s", passNumber, computedStackValues.size()));
-//            for (CustomWrappedStack key : computedStackValues.keySet()) {
-//                LogHelper.debug(String.format("Pass = %s, Stack = %s, Computed Value = %s", passNumber, key, computedStackValues.get(key)));
-//            }
             
             stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(stackMappings);                
@@ -326,24 +323,30 @@ public class EmcRegistry {
         }
     }
     
-    public static List<CustomWrappedStack> printDebugStats() {
+    public static void findUnmappedCompoundStacks() {
         
         lazyInit();
         
-        List<CustomWrappedStack> couldBeMapped = new ArrayList<CustomWrappedStack>();
+        List<CustomWrappedStack> unmappedStacks = new ArrayList<CustomWrappedStack>();
         
-        for (CustomWrappedStack stack : RecipeRegistry.getRecipeMappings().keySet()) {
+        for (CustomWrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
             
-            CustomWrappedStack unitStack = new CustomWrappedStack(stack.getWrappedStack());
+            CustomWrappedStack unitStack = new CustomWrappedStack(recipeOutput.getWrappedStack());
             
-            if (!couldBeMapped.contains(unitStack)) {
-                if (!EmcRegistry.hasEmcValue(unitStack)) {
-                    couldBeMapped.add(unitStack);
-                }
+            if (!hasEmcValue(unitStack)) {
+                unmappedStacks.add(recipeOutput);
             }
         }
         
-        return couldBeMapped;
+        Collections.sort(unmappedStacks);
+        
+        for (CustomWrappedStack recipeOutput : unmappedStacks) {
+            
+            for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
+                LogHelper.debug(String.format("Recipe Output: %s, Recipe Inputs: %s", recipeOutput, RecipeHelper.collateInputStacks(recipeInputs)));
+            }
+        }
+        
     }
     
 }

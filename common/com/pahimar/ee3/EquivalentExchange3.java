@@ -1,13 +1,17 @@
 package com.pahimar.ee3;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
@@ -27,7 +31,9 @@ import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
@@ -172,7 +178,8 @@ public class EquivalentExchange3 {
         // Initialize the Addon Handler
         AddonHandler.init();
         
-        EmcRegistry.getStacksInRange(0, 10000);
+        EmcRegistry.lazyInit();
+        EmcRegistry.findUnmappedCompoundStacks();
     }
 
     @EventHandler

@@ -5,5 +5,5 @@ public enum EmcType {
     
     public static final EmcType[] TYPES = EmcType.values();
     
-    public static final EmcType DEFAULT = EmcType.OMNI;
+    public static final EmcType DEFAULT = EmcType.CORPOREAL;
 }
