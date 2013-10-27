@@ -47,10 +47,8 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Block.deadBush), new EmcValue(1, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(Block.ice), new EmcValue(1, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(new ItemStack(Block.sandStone.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(4, EmcType.CORPOREAL));
-        valueMap.put(new CustomWrappedStack(new ItemStack(Block.anvil.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(2, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
         valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.planks))), new EmcValue(8, EmcType.CORPOREAL));
-        valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Item.stick))), new EmcValue(4, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(Item.ingotIron), new EmcValue(256, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(Block.oreIron), new EmcValue(256, EmcType.CORPOREAL));
         valueMap.put(new CustomWrappedStack(Item.ingotGold), new EmcValue(2048, EmcType.CORPOREAL));
