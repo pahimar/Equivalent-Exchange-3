@@ -2,10 +2,13 @@ package com.pahimar.ee3;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -26,8 +29,9 @@ import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
@@ -164,6 +168,7 @@ public class EquivalentExchange3 {
         // recipe registry works
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(new ItemStack(Item.glassBottle.itemID, 3, 0), Arrays.asList(Block.glass, Block.glass, Block.glass)));
     }
 
     @EventHandler
@@ -172,8 +177,11 @@ public class EquivalentExchange3 {
         // Initialize the Addon Handler
         AddonHandler.init();
         
-        EmcRegistry.printStackValueMappings();
-        //EmcRegistry.printUnmappedStacks();
+        Set<CustomWrappedStack> recipeOutputs = new TreeSet<CustomWrappedStack>(RecipeRegistry.getRecipeMappings().keySet());
+        
+        for (CustomWrappedStack recipeOutput : recipeOutputs) {
+            LogHelper.debug(String.format("Recipe Output: %s, Recipe Inputs: %s", recipeOutput, RecipeRegistry.getRecipeMappings().get(recipeOutput)));
+        }
     }
 
     @EventHandler

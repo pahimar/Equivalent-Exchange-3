@@ -43,12 +43,12 @@ public class ItemTooltipEventHandler {
 
             event.toolTip.add("");
             if (emcValue != null) {
-                event.toolTip.add("EMC: " + stack.getStackSize() * emcValue.getValue());
+                event.toolTip.add("EMC: " + String.format("%.3f", stack.getStackSize() * emcValue.getValue()));
              
                 if (debug) {
                     for (EmcType emcType : EmcType.TYPES) {
                         if (emcValue.components[emcType.ordinal()] > 0) {
-                            event.toolTip.add("  * " + emcType + ": " + stack.getStackSize() * emcValue.components[emcType.ordinal()]);
+                            event.toolTip.add("  * " + emcType + ": " + String.format("%.3f", stack.getStackSize() * emcValue.components[emcType.ordinal()]));
                         }
                     }
                 }

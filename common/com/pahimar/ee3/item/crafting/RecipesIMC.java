@@ -28,5 +28,4 @@ public class RecipesIMC {
         
         imcRecipes.put(recipeOutput, RecipeHelper.collateInputStacks(recipeInputs));
     }
-
 }

@@ -190,6 +190,7 @@ public class NBTHelper {
             if (wrappedStack.getWrappedStack() instanceof ItemStack) {
 
                 ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
+                itemStack.stackSize = wrappedStack.getStackSize();
                 encodedStack.setString(Strings.NBT_ENCODED_ATTR_TYPE, Strings.NBT_ENCODED_ATTR_TYPE_ITEM);
                 itemStack.writeToNBT(encodedStack);
             }

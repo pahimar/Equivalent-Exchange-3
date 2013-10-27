@@ -45,10 +45,7 @@ public class RecipeRegistry {
         ImmutableMultimap.Builder<CustomWrappedStack, List<CustomWrappedStack>> immutableRecipeMap = ImmutableMultimap.builder();
 
         // Add potion recipes
-        //immutableRecipeMap.putAll(RecipesPotions.getPotionRecipes());
-
-        // Add smelting recipes in the vanilla smelting manager
-        //immutableRecipeMap.putAll(RecipesSmelting.getSmeltingRecipes());
+        immutableRecipeMap.putAll(RecipesPotions.getPotionRecipes());
 
         // Add recipes in the vanilla crafting manager
         immutableRecipeMap.putAll(RecipesVanilla.getVanillaRecipes());

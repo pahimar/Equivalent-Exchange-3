@@ -29,6 +29,7 @@ public class RecipesPotions {
     private static CustomWrappedStack reagentFermentedSpiderEye = new CustomWrappedStack(new ItemStack(Item.fermentedSpiderEye));
     private static CustomWrappedStack reagentBlazePowder = new CustomWrappedStack(new ItemStack(Item.blazePowder));
 
+    private static CustomWrappedStack bottleEmpty = new CustomWrappedStack(Item.glassBottle);
     private static CustomWrappedStack bottleWater = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 0));
 
     private static CustomWrappedStack potionAwkward = new CustomWrappedStack(new ItemStack(Item.potion.itemID, 1, 16));
@@ -114,7 +115,7 @@ public class RecipesPotions {
 
         potionRecipes = HashMultimap.create();
 
-        potionRecipes.put(bottleWater, Arrays.asList(reagentWater));
+        potionRecipes.put(bottleWater, Arrays.asList(bottleEmpty, reagentWater));
 
         potionRecipes.put(potionAwkward, Arrays.asList(bottleWater, reagentNetherWart));
 
