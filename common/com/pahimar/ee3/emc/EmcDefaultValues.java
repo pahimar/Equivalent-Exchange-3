@@ -177,6 +177,39 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Item.netherQuartz), new EmcValue(256));
         
         /* Equivalent Exchange 3 */
+        
+        /* Industrial Craft */
+        valueMap.put(new CustomWrappedStack(new OreStack("oreUranium")), new EmcValue(4096));
+        valueMap.put(new CustomWrappedStack(new OreStack("oreCopper")), new EmcValue(85));
+        valueMap.put(new CustomWrappedStack(new OreStack("oreTin")), new EmcValue(256));
+        valueMap.put(new CustomWrappedStack(new OreStack("oreSilver")), new EmcValue(512));
+        valueMap.put(new CustomWrappedStack(new OreStack("oreLead")), new EmcValue(1024));
+        
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotCopper")), new EmcValue(85));
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotTin")), new EmcValue(256));
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotSilver")), new EmcValue(512));
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotLead")), new EmcValue(1024));
+        
+        valueMap.put(new CustomWrappedStack(new OreStack("itemRubber")), new EmcValue(32));
+        
+        /* Applied Energistics */
+        valueMap.put(new CustomWrappedStack(new OreStack("oreCertusQuartz")), new EmcValue(2560));
+        
+        valueMap.put(new CustomWrappedStack(new OreStack("crystalCertusQuartz")), new EmcValue(2048));
+        valueMap.put(new CustomWrappedStack(new OreStack("dustCertusQuartz")), new EmcValue(512));
+        
+        /* Tinkers Construct */
+        valueMap.put(new CustomWrappedStack(new OreStack("oreAluminium")), new EmcValue(256));
+        
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotAluminium")), new EmcValue(256));
+        
+        /* Forestry */
+        valueMap.put(new CustomWrappedStack(new OreStack("oreApatite")), new EmcValue(144));
+        
+        valueMap.put(new CustomWrappedStack(new OreStack("gemApatite")), new EmcValue(144));
+        
+        /* Railcraft */
+        valueMap.put(new CustomWrappedStack(new OreStack("ingotSteel")), new EmcValue(288));
     }
 
     public static Map<CustomWrappedStack, EmcValue> getDefaultValueMap() {
