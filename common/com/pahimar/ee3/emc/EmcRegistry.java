@@ -42,7 +42,7 @@ public class EmcRegistry {
         ImmutableSortedMap.Builder<CustomWrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         ImmutableSortedMap.Builder<EmcValue, List<CustomWrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
 
-        Map<CustomWrappedStack, EmcValue> defaultValues = EmcDefaultValues.getDefaultValueMap();
+        Map<CustomWrappedStack, EmcValue> defaultValues = EmcValuesDefault.getDefaultValueMap();
 
         // Handle the stack mappings
         stackMappingsBuilder.putAll(defaultValues);

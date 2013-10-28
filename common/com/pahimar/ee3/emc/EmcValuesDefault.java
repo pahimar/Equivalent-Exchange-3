@@ -12,12 +12,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.OreStack;
 
-public class EmcDefaultValues {
+public class EmcValuesDefault {
 
-    private static EmcDefaultValues emcDefaultValues = null;
+    private static EmcValuesDefault emcDefaultValues = null;
     private Map<CustomWrappedStack, EmcValue> valueMap;
 
-    private EmcDefaultValues() {
+    private EmcValuesDefault() {
 
         valueMap = new HashMap<CustomWrappedStack, EmcValue>();
     }
@@ -25,7 +25,7 @@ public class EmcDefaultValues {
     private static void lazyInit() {
 
         if (emcDefaultValues == null) {
-            emcDefaultValues = new EmcDefaultValues();
+            emcDefaultValues = new EmcValuesDefault();
             emcDefaultValues.init();
         }
     }

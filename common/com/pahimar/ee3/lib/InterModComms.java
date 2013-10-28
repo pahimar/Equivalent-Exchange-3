@@ -10,5 +10,6 @@ public class InterModComms {
     public static final String REMOVE_BLACKLIST_ENTRY = "remove-blacklist-entry";
 
     // Interacting with the EMC value mappings
-    public static final String SET_EMC_VALUE = "set-emc-value";
+    public static final String ASSIGN_EMC_VALUE_PRE = "assign-emc-value-pre";
+    public static final String ASSIGN_EMC_VALUE_POST = "assign-emc-value-post";
 }

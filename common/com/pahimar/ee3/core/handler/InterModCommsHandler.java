@@ -32,8 +32,11 @@ public class InterModCommsHandler {
                 else if (imcMessage.key.equalsIgnoreCase(InterModComms.REMOVE_BLACKLIST_ENTRY)) {
                     processRemoveBlackListMessage(imcMessage);
                 }
-                else if (imcMessage.key.equalsIgnoreCase(InterModComms.SET_EMC_VALUE)) {
-                    processSetEmcValueMessage(imcMessage);
+                else if (imcMessage.key.equalsIgnoreCase(InterModComms.ASSIGN_EMC_VALUE_PRE)) {
+                    processPreAssignEmcValueMessage(imcMessage);
+                }
+                else if (imcMessage.key.equalsIgnoreCase(InterModComms.ASSIGN_EMC_VALUE_POST)) {
+                    processPostAssignEmcValueMessage(imcMessage);
                 }
             }
             else {
@@ -91,7 +94,12 @@ public class InterModCommsHandler {
         }
     }
 
-    private static void processSetEmcValueMessage(IMCMessage imcMessage) {
+    private static void processPreAssignEmcValueMessage(IMCMessage imcMessage) {
+
+        // TODO Set an EMC Value via IMC
+    }
+    
+    private static void processPostAssignEmcValueMessage(IMCMessage imcMessage) {
 
         // TODO Set an EMC Value via IMC
     }
