@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handlers;
+package com.pahimar.ee3.core.handler;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraftforge.event.ForgeSubscribe;

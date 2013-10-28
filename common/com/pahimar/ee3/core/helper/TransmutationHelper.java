@@ -8,7 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.pahimar.ee3.core.handlers.EquivalencyHandler;
+import com.pahimar.ee3.core.handler.EquivalencyHandler;
 
 /**
  * Equivalent-Exchange-3

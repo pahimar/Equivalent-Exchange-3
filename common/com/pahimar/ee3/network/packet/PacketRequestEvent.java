@@ -7,7 +7,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 
-import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
+import com.pahimar.ee3.core.handler.WorldTransmutationHandler;
 import com.pahimar.ee3.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;

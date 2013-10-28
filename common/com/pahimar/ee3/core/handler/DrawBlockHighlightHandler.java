@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handlers;
+package com.pahimar.ee3.core.handler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;

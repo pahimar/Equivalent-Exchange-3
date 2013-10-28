@@ -1,44 +1,33 @@
 package com.pahimar.ee3;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.core.handlers.ActionRequestHandler;
-import com.pahimar.ee3.core.handlers.AddonHandler;
-import com.pahimar.ee3.core.handlers.CraftingHandler;
-import com.pahimar.ee3.core.handlers.EntityLivingHandler;
-import com.pahimar.ee3.core.handlers.InterModCommsHandler;
-import com.pahimar.ee3.core.handlers.ItemEventHandler;
-import com.pahimar.ee3.core.handlers.ItemTooltipEventHandler;
-import com.pahimar.ee3.core.handlers.PlayerDestroyItemHandler;
-import com.pahimar.ee3.core.handlers.VersionCheckTickHandler;
-import com.pahimar.ee3.core.handlers.WorldTransmutationHandler;
+import com.pahimar.ee3.core.handler.ActionRequestHandler;
+import com.pahimar.ee3.core.handler.CraftingHandler;
+import com.pahimar.ee3.core.handler.EntityLivingHandler;
+import com.pahimar.ee3.core.handler.InterModCommsHandler;
+import com.pahimar.ee3.core.handler.ItemEventHandler;
+import com.pahimar.ee3.core.handler.ItemTooltipEventHandler;
+import com.pahimar.ee3.core.handler.PlayerDestroyItemHandler;
+import com.pahimar.ee3.core.handler.VersionCheckTickHandler;
+import com.pahimar.ee3.core.handler.WorldTransmutationHandler;
+import com.pahimar.ee3.core.handler.addon.AddonIMCHandler;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
-import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.nbt.NBTHelper;
 import com.pahimar.ee3.network.PacketHandler;
 
 import cpw.mods.fml.common.Mod;
@@ -47,7 +36,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -165,23 +153,16 @@ public class EquivalentExchange3 {
 
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
-
-        // Quick test to see that sending an encoded recipe to be added to the
-        // recipe registry works
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Block.pumpkinLantern, Arrays.asList(Block.pumpkin, Block.torchWood)));
+        
+        // Initialize EE3 addons (which work with IMC, and must be used in Init)
+        AddonIMCHandler.init();
     }
 
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event) {
-
-        // Initialize the Addon Handler
-        AddonHandler.init();
         
         EmcRegistry.lazyInit();
         EmcRegistry.printUnmappedCompoundStacks();
-        EmcRegistry.printStackValueMappings();
     }
 
     @EventHandler

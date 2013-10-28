@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handlers;
+package com.pahimar.ee3.core.handler.addon;
 
 /**
  * Equivalent-Exchange-3
@@ -9,10 +9,10 @@ package com.pahimar.ee3.core.handlers;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class AddonHandler {
+public class AddonIMCHandler {
 
     public static void init() {
-
+        AddonIMCVanilla.init();
     }
 
 }

@@ -55,47 +55,70 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.leaves))), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
         valueMap.put(new CustomWrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
         
-        // Fluid Blocks        
-        valueMap.put(new CustomWrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));        
+        // Fluids      
+        valueMap.put(new CustomWrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new CustomWrappedStack(Block.lavaStill), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
 
         /* Building Blocks */
         valueMap.put(new CustomWrappedStack(Block.stone), new EmcValue(1));
         valueMap.put(new CustomWrappedStack(Block.grass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
         valueMap.put(new CustomWrappedStack(Block.dirt), new EmcValue(1));
         valueMap.put(new CustomWrappedStack(Block.cobblestone), new EmcValue(1));
+        // Bedrock (7:0)
         valueMap.put(new CustomWrappedStack(Block.sand), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new CustomWrappedStack(Block.gravel), new EmcValue(4, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new CustomWrappedStack(Block.oreCoal), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.KINETIC, 1))));
+        // Sponge (19:0)
         valueMap.put(new CustomWrappedStack(Block.glass), new EmcValue(1));
-        valueMap.put(new CustomWrappedStack(Block.sandStone), new EmcValue(4, EmcType.CORPOREAL));
-        // Moss Stone (48:0)
-        // Obsidian (49:0)
+        valueMap.put(new CustomWrappedStack(Block.sandStone), new EmcValue(4));
+        valueMap.put(new CustomWrappedStack(Block.cobblestoneMossy), new EmcValue(1));
+        valueMap.put(new CustomWrappedStack(Block.obsidian), new EmcValue(64));
         valueMap.put(new CustomWrappedStack(Block.ice), new EmcValue(1));
-        // Snow (80:0)
         valueMap.put(new CustomWrappedStack(Block.pumpkin), new EmcValue(144));
         valueMap.put(new CustomWrappedStack(Block.netherrack), new EmcValue(1));
         valueMap.put(new CustomWrappedStack(Block.slowSand), new EmcValue(49));
-        // Mossy Stone Bricks (98:1)
-        // Cracked Stone Bricks (98:2)
-        // Chiseled Stone Bricks (98:3)
-        // Mycelium (110:0)
-        // End Stone (121:0)
-        // Mossy Cobblestone Wall (139:1)
+        valueMap.put(new CustomWrappedStack(new ItemStack(Block.stoneBrick, 1, 1)), new EmcValue(1));
+        valueMap.put(new CustomWrappedStack(new ItemStack(Block.stoneBrick, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1));
+        valueMap.put(new CustomWrappedStack(Block.mycelium), new EmcValue(1));
+        valueMap.put(new CustomWrappedStack(Block.whiteStone), new EmcValue(1));
         valueMap.put(new CustomWrappedStack(Block.hardenedClay), new EmcValue(256));
         
         /* Decoration Blocks */
-        valueMap.put(new CustomWrappedStack(Block.tallGrass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new CustomWrappedStack(Block.web), new EmcValue(12));
+        valueMap.put(new CustomWrappedStack(new ItemStack(Block.tallGrass.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
         valueMap.put(new CustomWrappedStack(Block.deadBush), new EmcValue(1));
+        valueMap.put(new CustomWrappedStack(Block.plantYellow), new EmcValue(16));
+        valueMap.put(new CustomWrappedStack(Block.plantRed), new EmcValue(16));
         valueMap.put(new CustomWrappedStack(Block.mushroomBrown), new EmcValue(32));
         valueMap.put(new CustomWrappedStack(Block.mushroomRed), new EmcValue(32));
+        valueMap.put(new CustomWrappedStack(Block.snow), new EmcValue(0.5f));
+        valueMap.put(new CustomWrappedStack(Block.cactus), new EmcValue(8));
+        // Stone Monster Egg (97:0)
+        // Cobblestone Monster Egg (97:1)
+        // Stone Brick Monster Egg (97:2)
+        valueMap.put(new CustomWrappedStack(Block.vine), new EmcValue(8));
+        valueMap.put(new CustomWrappedStack(Block.waterlily), new EmcValue(16));
+        // End Portal (120:0)
+        // Skeleton Skull (397:0)
+        // Wither Skeleton Skull (391:1)
+        // Zombie Head (397:2)
+        // Head (397:3)
+        // Creeper Head (397:4)
         
         /* Redstone */
         valueMap.put(new CustomWrappedStack(Item.redstone), new EmcValue(32));
         
         /* Transportation */
+        valueMap.put(new CustomWrappedStack(Item.saddle), new EmcValue(192));
         
         /* Miscellaneous */
+        valueMap.put(new CustomWrappedStack(Item.snowball), new EmcValue(0.25f));
+        valueMap.put(new CustomWrappedStack(Item.bucketMilk), new EmcValue(832)); 
         valueMap.put(new CustomWrappedStack(Item.slimeBall), new EmcValue(24));
+        valueMap.put(new CustomWrappedStack(Item.bone), new EmcValue(24));
+        valueMap.put(new CustomWrappedStack(Item.enderPearl), new EmcValue(1024));
+        // Bottle o'Enchanting (384:0)
+        // Firework Star (402:0)
         
         /* Foodstuffs */
         valueMap.put(new CustomWrappedStack(Item.appleRed), new EmcValue(128));
@@ -103,7 +126,6 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Item.porkCooked), new EmcValue(64));
         valueMap.put(new CustomWrappedStack(Item.fishRaw), new EmcValue(64));
         valueMap.put(new CustomWrappedStack(Item.fishCooked), new EmcValue(64));
-        // Cake
         valueMap.put(new CustomWrappedStack(Item.melon), new EmcValue(16));
         valueMap.put(new CustomWrappedStack(Item.beefRaw), new EmcValue(64));
         valueMap.put(new CustomWrappedStack(Item.beefCooked), new EmcValue(64));
@@ -117,8 +139,13 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Item.poisonousPotato), new EmcValue(24));
         
         /* Tools */
+        // Name Tag (421:0)
         
         /* Combat */
+        // Chain Helmet (302:0)
+        // Chain Chestplate (303:0)
+        // Chain Leggings (304:0)
+        // Chain Boots (305:0)
         
         /* Brewing */
         valueMap.put(new CustomWrappedStack(Item.ghastTear), new EmcValue(4096));
@@ -145,7 +172,7 @@ public class EmcDefaultValues {
         valueMap.put(new CustomWrappedStack(Item.blazeRod), new EmcValue(1536));
         valueMap.put(new CustomWrappedStack(Item.netherStalkSeeds), new EmcValue(24));
         valueMap.put(new CustomWrappedStack(Item.emerald), new EmcValue(8192));
-        // Nether Star
+        valueMap.put(new CustomWrappedStack(Item.netherStar), new EmcValue(24576));
         valueMap.put(new CustomWrappedStack(Item.netherrackBrick), new EmcValue(1));
         valueMap.put(new CustomWrappedStack(Item.netherQuartz), new EmcValue(256));
         
