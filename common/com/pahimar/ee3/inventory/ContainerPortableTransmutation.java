@@ -5,8 +5,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.nbt.NBTHelper;
 
 /**
  * Equivalent-Exchange-3

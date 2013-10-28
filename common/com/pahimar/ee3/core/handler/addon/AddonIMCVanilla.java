@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.nbt.NBTHelper;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 

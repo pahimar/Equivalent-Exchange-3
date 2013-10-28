@@ -6,11 +6,11 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.emc.EmcBlackList;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.InterModComms;
-import com.pahimar.ee3.nbt.NBTHelper;
 
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;

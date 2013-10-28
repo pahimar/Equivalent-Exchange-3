@@ -1,4 +1,4 @@
-package com.pahimar.ee3.nbt;
+package com.pahimar.ee3.core.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
