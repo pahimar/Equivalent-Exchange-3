@@ -3,12 +3,12 @@ package com.pahimar.ee3;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -33,7 +33,7 @@ import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
@@ -170,6 +170,7 @@ public class EquivalentExchange3 {
         // recipe registry works
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Block.pumpkinLantern, Arrays.asList(Block.pumpkin, Block.torchWood)));
     }
 
     @EventHandler
@@ -179,7 +180,8 @@ public class EquivalentExchange3 {
         AddonHandler.init();
         
         EmcRegistry.lazyInit();
-        EmcRegistry.findUnmappedCompoundStacks();
+        EmcRegistry.printUnmappedCompoundStacks();
+        EmcRegistry.printStackValueMappings();
     }
 
     @EventHandler

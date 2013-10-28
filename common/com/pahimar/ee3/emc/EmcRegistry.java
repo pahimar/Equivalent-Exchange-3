@@ -156,7 +156,7 @@ public class EmcRegistry {
                                 if (valuedStack.getWrappedStack() instanceof ItemStack) {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
                                     
-                                    if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && valuedItemStack.itemID == wrappedItemStack.itemID) {
+                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID) {
                                         return true;
                                     }
                                 }
@@ -230,7 +230,7 @@ public class EmcRegistry {
                                 
                                 ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
                                 
-                                if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE && valuedItemStack.itemID == wrappedItemStack.itemID) {
+                                if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID) {
                                     
                                     if (stackValue.compareTo(lowestValue) < 0) {
                                         lowestValue = stackValue;
@@ -323,7 +323,7 @@ public class EmcRegistry {
         }
     }
     
-    public static void findUnmappedCompoundStacks() {
+    public static void printUnmappedCompoundStacks() {
         
         lazyInit();
         
