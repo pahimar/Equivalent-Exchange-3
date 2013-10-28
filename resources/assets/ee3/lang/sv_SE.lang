@@ -1,0 +1,67 @@
+# Key localizations 
+key.extra=Extra
+key.release=Släppa
+key.toggle=Växla
+key.charge=Ladda
+
+# Item localizations
+item.ee3:shardMinium.name=Skärva av mönja
+item.ee3:stoneInert.name=Inertsten
+item.ee3:stoneMinium.name=Mönjasten
+item.ee3:stonePhilosophers.name=Vises sten [WIP]
+item.ee3:alchemicalDustAsh.name=Aska [WIP]
+item.ee3:alchemicalDustMinium.name=Mönjadamm [WIP]
+item.ee3:alchemicalDustVerdant.name=Grönskande damm [WIP]
+item.ee3:alchemicalDustAzure.name=Azurdamm [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amarantdamm [WIP]
+item.ee3:alchemicalDustIridescent.name=Iriserande damm [WIP]
+item.ee3:alchemicalBag.name=Alkemisk ryggsäck [WIP]
+item.ee3:alchemicalChalk.name=Alkemisk krita [WIP]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Röd vatten (Stilla)
+tile.ee3:redWaterFlowing.name=Röd vatten (Rinnande)
+tile.ee3:calcinator.name=Kalcinerare [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alkemisk kista [WIP]
+tile.ee3:glassBell.name=Glas bell [WIP]
+tile.ee3:alchemyTable.name=Alkemi bord [WIP]
+tile.ee3:renderingTank.name=Framställning behållare [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalcinerare [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alkemisk kista [WIP]
+container.ee3:alchemicalBag=Alkemisk ryggsäck [WIP]
+container.ee3:glassBell=Glas bell [WIP]
+container.ee3:alchemyTable.name=Alkemi bord [WIP]
+container.ee3:renderingTank.name=Framställning behållare [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Mål transmutation överlagring påslagen
+command.ee3:overlay.turned_off=Mål transmutation överlagring avslagen
+command.ee3:overlay.position.top_left=Mål transmutation överlagring läge satt till övre vänstra
+command.ee3:overlay.position.top_right=Mål transmutation överlagring läge satt till övre högra
+command.ee3:overlay.position.bottom_left=Mål transmutation överlagring läge satt till nedre vänstra
+command.ee3:overlay.position.bottom_right=Mål transmutation överlagring läge satt till nedre högra
+command.ee3:overlay.opacity.usage.additional_text=(var ### är ett decimalvärde mellan 0,0 och 1,0) 
+command.ee3:overlay.opacity.updated=Mål transmutation överlagring opacitet har uppdaterats
+command.ee3:overlay.scale.usage.additional_text=%s (var ### är ett decimalvärde högre än 0,0) 
+command.ee3:overlay.scale.updated=Mål transmutation överlagring skala har uppdaterats
+command.ee3:particles.turned_on=Equivalent Exchange 3 partiklar påslagen
+command.ee3:particles.turned_off=Equivalent Exchange 3 partiklar avslagen
+command.ee3:sounds.set_to_all=Spelar Equivalent Exchange 3 ljud från alla spelare
+command.ee3:sounds.set_to_self=Spelar Equivalent Exchange 3 ljud från bara dig
+command.ee3:sounds.turned_off=Spelar av Equivalent Exchange 3 ljud avslagen
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Initierar version avstämning mot fjärr version myndighet, belägen vid: %s
+version.ee3:uninitialized=Fjärr version avstämning misslyckade
+version.ee3:current=Närvarande använder den senaste publika versionen (%s) av Equivalent Exchange 3 för %s
+version.ee3:outdated=En ny %s version existerar (%s) för %s. Få den här: %s
+version.ee3:general_error=Fel när anslutar till fjärr version myndighet; försöker igen
+version.ee3:final_error=Version avstäming slutar efter tre misslyckades anslutningsförsök
+version.ee3:mc_version_not_found=Kan inte hitta en version av %s för %s i den fjärr version myndigheten

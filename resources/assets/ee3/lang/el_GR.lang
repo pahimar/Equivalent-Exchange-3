@@ -1,0 +1,62 @@
+# Key localizations 
+key.extra=Επιπλέον
+key.release=Ελευθέρωση
+key.toggle=Εναλλαγή
+key.charge=Φόρτωση
+
+# Item localizations
+item.ee3:shardMinium.name=Θραύσμα Μίνιουμ
+item.ee3:stoneInert.name=Αδρανής Λίθος
+item.ee3:stoneMinium.name=Μίνιουμ Λίθος
+item.ee3:stonePhilosophers.name=Φιλοσοφική Λίθος
+item.ee3:alchemicalDustAsh.name=Στάχτη
+item.ee3:alchemicalDustMinium.name=Στάχτη Μίνιουμ
+item.ee3:alchemicalDustVerdant.name=Πρασινωπή Στάχτη
+item.ee3:alchemicalDustAzure.name=Γαλανή Στάχτη
+item.ee3:alchemicalDustAmaranthine.name=Αμαράντινη Στάχτη
+item.ee3:alchemicalDustIridescent.name=Ιριδίζουσα Στάχτη
+item.ee3:alchemicalBag.name=Σάκος του Αλχημιστή
+
+# Block localizations
+tile.ee3:redWaterStill.name=Ερυθρό Νερό (Στάσιμο)
+tile.ee3:redWaterFlowing.name=Ερυθρό Νερό (Ρέον)
+tile.ee3:calcinator.name=Χύτρα Διαπύρωσης
+tile.ee3:aludel.name=Δοχείο
+tile.ee3:alchemicalChest.name=Σεντούκι του Αλχημιστή
+tile.ee3:glassBell.name=Γυάλινο Κουδούνι
+
+# GUI localizations
+container.ee3:calcinator=Χύτρα Διαπύρωσης
+container.ee3:aludel=Δοχείο
+container.ee3:alchemicalChest=Σεντούκι του Αλχημιστή
+container.ee3:alchemicalBag=Σάκος του Αλχημιστή
+container.ee3:glassBell=Γυάλινο Κουδούνι
+
+# Command localizations
+command.ee3:overlay.turned_on=Η επικάλυψη μετατροπής του στόχου ενεργοποιήθηκε
+command.ee3:overlay.turned_off=Η επικάλυψη μετατροπής του στόχου απενεργοποιήθηκε
+command.ee3:overlay.position.top_left=Η επικάλυψη μετατροπής του στόχου τέθηκε πάνω αριστερά
+command.ee3:overlay.position.top_right=Η επικάλυψη μετατροπής του στόχου τέθηκε πάνω δεξιά
+command.ee3:overlay.position.bottom_left=Η επικάλυψη μετατροπής του στόχου τέθηκε κάτω αριστερά
+command.ee3:overlay.position.bottom_right=Η επικάλυψη μετατροπής του στόχου τέθηκε κάτω δεξιά
+command.ee3:overlay.opacity.usage.additional_text=(όπου ### είναι δεκαδική τιμή μεταξύ 0.0 και 1.0) 
+command.ee3:overlay.opacity.updated=Η αδιαφάνεια της επικάλυψης μετατροπής του στόχου ενημερώθηκε επιτυχώς
+command.ee3:overlay.scale.usage.additional_text=%s (όπου ### είναι δεκαδική τιμή μεγαλύτερη του 0.0) 
+command.ee3:overlay.scale.updated=Η κλίμακα επικάλυψης μετατροπής του στόχου ενημερώθηκε επιτυχώς
+command.ee3:particles.turned_on=Σωματίδια του EE3 ενεργοποιήθηκαν
+command.ee3:particles.turned_off=Σωματίδια του ΕΕ3 απενεργοποιήθηκαν
+command.ee3:sounds.set_to_all=Αναπαραγωγή ήχων του ΕΕ3 από όλους τους παίκτες
+command.ee3:sounds.set_to_self=Αναπαραγωγή ήχων του ΕΕ3 μόνο από τον παίκτη
+command.ee3:sounds.turned_off=Αναπαραγωγή ήχων του ΕΕ3 απενεργοποιήθηκαν
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Εκκίνηση απομακρυσμένου ελέγχου έκδοσης ενάντια στην έκδοση του διακομιστή, τοποθεσία στο: %s
+version.ee3:uninitialized=Αδυναμία σωστής εκκίνησης απομακρυσμένου ελέγχου έκδοσης
+version.ee3:current=Την τρέχουσα στιγμή χρησιμοποιείται η νεότερη έκδοση (%s) του Equivalent Exchange 3 για %s
+version.ee3:outdated=Μια νεότερη %s έκδοση υπάρχει (%s) για %s. Κάντε λήψη από εδώ: %s
+version.ee3:general_error=Σφάλμα κατά τη σύνδεση στο απομακρυσμένο αρχείο έκδοσης του διακομιστή, γίνεται πάλι προσπάθεια
+version.ee3:final_error=Τερματισμός του ελέγχου έκδοσης μετά από τρεις ανεπιτυχείς προσπάθειες σύνδεσης
+version.ee3:mc_version_not_found=Αδυναμία εύρεσης έκδοσης του %s για %s στην απομακρυσμένη έκδοση του διακομιστή

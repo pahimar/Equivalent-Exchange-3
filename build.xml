@@ -1,87 +1,119 @@
-<?xml version="1.0" ?> 
-<project name="Equivalent Exchange 3">
+<?xml version="1.0" ?>
+<project name="Equivalent Exchange 3" default="build">
+
+	<!-- Public property files-->
+	<property file="build.properties" prefix="build" />
+	<property file="environment.properties" prefix="environment" />
+	<property file="private.properties" prefix="private" />
+
+	<!-- Minecraft Forge -->
+	<property name="minecraftforge_src_archive" value="minecraftforge-src-${build.minecraft_version}-${build.forge_version}.zip" />
+	<property name="minecraftforge_src_archive_location" value="http://files.minecraftforge.net/minecraftforge/${minecraftforge_src_archive}" />
+
+	<target name="forge-clean">
+		<delete dir="${environment.base_location}/forge" />
+	</target>
+
+	<target name="forge-download">
+		<mkdir dir="${environment.base_location}/temp" />
+		<get src="${minecraftforge_src_archive_location}" dest="${environment.base_location}/temp/" verbose="true" usetimestamp="true" />
+	</target>
+
+	<target name="forge-uncompress" depends="forge-download">
+		<unzip src="${environment.base_location}/temp/${minecraftforge_src_archive}" dest="${environment.base_location}" />
+		<delete dir="${environment.base_location}/temp" />
+	</target>
+
+	<target name="forge-install" depends="forge-uncompress">
+		<exec dir="${environment.base_location}/forge/" executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg value="/c" />
+			<arg value="${environment.base_location}\forge\install.cmd" />
+		</exec>
+		<exec dir="${environment.base_location}/forge/" executable="bash" osfamily="unix" failonerror="true">
+			<arg line="install.sh" />
+		</exec>
+	</target>
 	
-	<property file="build.properties" />
-	
+	<target name="forge-clean-install" depends="forge-clean, forge-install" />
+
 	<target name="clean">
-		<delete file="${dir.development}\mcp\src\minecraft\mcmod.info" />
-		<delete dir="${dir.development}\mcp\src\minecraft\com" />
-		<delete dir="${dir.development}\mcp\reobf\minecraft" />
+		<delete dir="${environment.base_location}/temp" />
+		<delete file="${environment.mcp_location}/src/minecraft/mcmod.info" />
+		<delete file="${environment.mcp_location}/src/minecraft/pack.mcmeta" />
+		<delete dir="${environment.mcp_location}/src/minecraft/com/pahimar" />
+		<delete dir="${environment.mcp_location}/reobf/minecraft" />
 	</target>
-	
-	<target name="build">
-		<copy todir="${dir.development}\mcp\src\minecraft">
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\ee3_common\" />
+
+	<target name="increment_build_number">
+		<propertyfile file="build.properties">
+			<entry key="build_number" type="int" operation="+" default="1" />
+		</propertyfile>
+	</target>
+
+	<target name="prep">
+		<copy todir="${environment.mcp_location}/src/minecraft">
+			<fileset dir="${environment.source_location}/common/" />
 		</copy>
-		<replace dir="${dir.development}\mcp\src\minecraft" token="@VERSION@" value="${release.mod.version}" />
 	</target>
-	
+
+	<target name="replace_tokens">
+		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
+		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
+	</target>
+
 	<target name="recompile">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${environment.mcp_location}" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c recompile.bat" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${environment.mcp_location}" executable="bash" osfamily="unix">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
-	
+
 	<target name="reobfuscate">
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c reobfuscate.bat" />
+		<exec dir="${environment.mcp_location}" executable="cmd" osfamily="windows">
+			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
-		<exec dir="${dir.development}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c reobfuscate.bat" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate.sh" />
-		</exec>
-		<exec dir="${dir.development}\mcp" executable="bash" os="Mac OS X">
-			<arg line="reobfuscate.sh" />
+		<exec dir="${environment.mcp_location}" executable="bash" osfamily="unix">
+			<arg line="reobfuscate_srg.sh" />
 		</exec>
 	</target>
-	
-	<target name="release-shared">
-		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
-		
+
+	<target name="sign_jar">
+		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
+	</target>
+
+	<target name="build" depends="clean, increment_build_number, prep, recompile, reobfuscate">
+
 		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\common\"	includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
+		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="mcmod.info" />
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
+			<fileset dir="${environment.mcp_location}/reobf/minecraft" />
+			<fileset dir="${environment.source_location}/resources" excludes="**/xcf/**" />
 		</jar>
-		
+
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
-	
-	<target name="release">
-		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate" />
-		
+
+	<target name="release" depends="clean, increment_build_number, prep, replace_tokens, recompile, reobfuscate">
+
 		<!-- Build the jar -->
-		<mkdir dir="${dir.release}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.release}\${release.minecraft.version}\${release.mod.version}\ee3-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
-			<fileset dir="${dir.development}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.development}\source\Equivalent-Exchange-3\resources" />
+		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
+		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="mcmod.info" />
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
+			<fileset dir="${environment.mcp_location}/reobf/minecraft" />
+			<fileset dir="${environment.source_location}/resources" excludes="**/xcf/**" />
 		</jar>
-		
+
+		<!-- Sign the finished jar -->
+		<antcall target="sign_jar" />
+
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
-	
 </project>

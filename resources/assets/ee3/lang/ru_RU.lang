@@ -1,0 +1,67 @@
+# Key localizations
+key.extra=Экстра
+key.release=Сброс
+key.toggle=Переключение
+key.charge=Заряд
+
+# Item localizations
+item.ee3:shardMinium.name=Алхимический осколок
+item.ee3:stoneInert.name=Инертный камень
+item.ee3:stoneMinium.name=Алхимический камень
+item.ee3:stonePhilosophers.name=Философский камень [WIP]
+item.ee3:alchemicalDustAsh.name=Пыль [WIP]
+item.ee3:alchemicalDustMinium.name=Алхимический порошок [WIP]
+item.ee3:alchemicalDustVerdant.name=Зелёный порошок [WIP]
+item.ee3:alchemicalDustAzure.name=Лазурный порошок [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Пурпурный порошок [WIP]
+item.ee3:alchemicalDustIridescent.name=Радужный порошок [WIP]
+item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
+item.ee3:alchemicalChalk.name=Алхимический мел [WIP]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Красная вода (Стоящая)
+tile.ee3:redWaterFlowing.name=Красная вода (Текущая)
+tile.ee3:calcinator.name=Кальцинатор [WIP]
+tile.ee3:aludel.name=Алюдель [WIP]
+tile.ee3:alchemicalChest.name=Алхимический сундук [WIP]
+tile.ee3:glassBell.name=Стеклянный колпак [WIP]
+tile.ee3:alchemyTable.name=Алхимический стол [WIP]
+tile.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Кальцинатор [WIP]
+container.ee3:aludel=Алюдель [WIP]
+container.ee3:alchemicalChest=Алхимический сундук [WIP]
+container.ee3:alchemicalBag=Алхимическая сумка [WIP]
+container.ee3:glassBell=Стеклянный колпак [WIP]
+container.ee3:alchemyTable.name=Алхимический стол [WIP]
+container.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Панель цели трансмутации включена
+command.ee3:overlay.turned_off=Панель цели трансмутации выключена
+command.ee3:overlay.position.top_left=Позиция панели цели трансмутации установленна на верхний левый угол
+command.ee3:overlay.position.top_right=Позиция панели цели трансмутации установленна на верхний правый угол
+command.ee3:overlay.position.bottom_left=Позиция панели цели трансмутации установленна на нижний левый угол
+command.ee3:overlay.position.bottom_right=Позиция панели цели трансмутации установленна на нижний правый угол
+command.ee3:overlay.opacity.usage.additional_text=(где ### - десятичное значение между 0.0 и 1.0)
+command.ee3:overlay.opacity.updated=Прозрачность панели цели трансмутации успешно обновлена
+command.ee3:overlay.scale.usage.additional_text=%s (где ### - десятичное значение, больше 0.0)
+command.ee3:overlay.scale.updated=Размер панели цели трансмутации успешно обновлён
+command.ee3:particles.turned_on=Частицы Equivalent Exchange 3 включены
+command.ee3:particles.turned_off=Частицы Equivalent Exchange 3 выключены
+command.ee3:sounds.set_to_all=Звуки Equivalent Exchange 3 слышны всем
+command.ee3:sounds.set_to_self=Звуки Equivalent Exchange 3 слышны только вам
+command.ee3:sounds.turned_off=Звуки Equivalent Exchange 3 выключены
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Инициализация проверки версии файла по удалённому экземпляру, расположенному на: %s
+version.ee3:uninitialized=Не удалась инициализация удалённой проверки версии
+version.ee3:current=Используется самая новая версия (%s) модификации Equivalent Exchange 3 для %s
+version.ee3:outdated=Новая версия модификации %s доступна (%s) для %s. Вы можете найти её здесь: %s
+version.ee3:general_error=Ошибка подключения к удалённому файлу проверки версии; повторная попытка
+version.ee3:final_error=Проверка версии отменена после трёх неудачных попыток
+version.ee3:mc_version_not_found=Не удаётся найти версию модификации %s для %s в удалённом хранилище версий

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Japanese (ja_JP) Localization File</comment>
+	<!--REQUIRES ADDITIONAL UPDATING-->
+	<entry key="key.extra">エクストラ</entry>
+	<entry key="key.release">リリース</entry>
+	<entry key="key.toggle">トグル</entry>
+	<entry key="key.charge">チャージ</entry>
+	<entry key="item.shardMinium.name">鉛丹の欠片</entry>
+	<entry key="item.stoneInert.name">不活性な石</entry>
+	<entry key="item.stoneMinium.name">鉛丹石</entry>
+	<entry key="item.stonePhilosophers.name">賢者の石</entry>
+	<entry key="item.alchemicalDustAsh.name">灰</entry>
+	<entry key="item.alchemicalDustMinium.name">鉛丹の粉末</entry>
+	<entry key="item.alchemicalDustVerdant.name">新緑の粉末</entry>
+	<entry key="item.alchemicalDustAzure.name">紺碧の粉末</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">紫赤色の粉末</entry>
+	<entry key="item.alchemicalDustIridescent.name">玉虫色の粉末</entry>
+	<entry key="item.alchemicalBag.name">奇術袋</entry>
+	<entry key="tile.redWaterStill.name">赤い水 (水源)</entry>
+	<entry key="tile.redWaterFlowing.name">赤い水 (流水)</entry>
+	<entry key="tile.calcinator.name">煆焼器</entry>
+	<entry key="tile.aludel.name">アルデル</entry>
+	<entry key="tile.alchemicalChest.name">奇術チェスト</entry>
+	<entry key="title.glassBell.name">グラスの鐘</entry>
+	<entry key="container.calcinator">煆焼器</entry>
+	<entry key="container.aludel">アルデル</entry>
+	<entry key="container.alchemicalChest">奇術チェスト</entry>
+	<entry key="container.alchemicalBag">奇術袋</entry>
+	<entry key="container.glassBell.name">グラスの鐘</entry>
+	<entry key="itemGroup.EE3">Equivalent Exchange 3</entry>
+	<entry key="version.init_log_message">オンラインバージョンチェックの初期化中。場所:</entry>
+	<entry key="version.uninitialized">バージョンチェックに失敗しました。 (初期化に失敗しました。)</entry>
+	<entry key="version.current">MINECRAFT (バージョン @REMOTE_MOD_VERSION@) ため @MOD_NAME@ の最新バージョンを使用しています。</entry>
+	<entry key="version.outdated">@MINECRAFT_VERSION@ ため @MOD_NAME@ の新しいバージョン (@REMOTE_MOD_VERSION@) があります。 @MOD_UPDATE_LOCATION@ からアップデートしてください。</entry>
+</properties>

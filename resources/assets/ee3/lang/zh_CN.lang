@@ -1,0 +1,67 @@
+# Key localizations 
+key.extra=额外功能
+key.release=施放技能
+key.toggle=切换目标
+key.charge=充能
+
+# Item localizations
+item.ee3:shardMinium.name=铅丹碎片
+item.ee3:stoneInert.name=惰性石
+item.ee3:stoneMinium.name=铅丹石
+item.ee3:stonePhilosophers.name=贤者之石
+item.ee3:alchemicalDustAsh.name=灰烬
+item.ee3:alchemicalDustMinium.name=铅丹粉末
+item.ee3:alchemicalDustVerdant.name=翠绿粉末
+item.ee3:alchemicalDustAzure.name=蔚蓝粉末
+item.ee3:alchemicalDustAmaranthine.name=紫红粉末
+item.ee3:alchemicalDustIridescent.name=虹彩粉末
+item.ee3:alchemicalBag.name=炼金袋
+item.ee3:alchemicalChalk.name=炼金粉笔
+
+# Block localizations
+tile.ee3:redWaterStill.name=红水(静止)
+tile.ee3:redWaterFlowing.name=红水(流动)
+tile.ee3:calcinator.name=煅烧炉
+tile.ee3:aludel.name=梨形器皿
+tile.ee3:alchemicalChest.name=炼金箱子
+tile.ee3:glassBell.name=玻璃钟罩
+tile.ee3:alchemyTable.name=炼金台
+tile.ee3:renderingTank.name=渲染罐
+
+# GUI localizations
+container.ee3:calcinator=煅烧炉
+container.ee3:aludel=梨形器皿
+container.ee3:alchemicalChest=炼金箱子
+container.ee3:alchemicalBag=炼金袋
+container.ee3:glassBell=玻璃钟罩
+container.ee3:alchemyTable.name=炼金台
+container.ee3:renderingTank.name=渲染罐
+
+# Command localizations
+command.ee3:overlay.turned_on=开启转换目标快捷视图
+command.ee3:overlay.turned_off=关闭转换目标快捷视图
+command.ee3:overlay.position.top_left=将转换目标快捷视图设置在屏幕左上角
+command.ee3:overlay.position.top_right=将转换目标快捷视图设置在屏幕右上角
+command.ee3:overlay.position.bottom_left=将转换目标快捷视图设置在屏幕左下角
+command.ee3:overlay.position.bottom_right=将转换目标快捷视图设置在屏幕右下角
+command.ee3:overlay.opacity.usage.additional_text=(### 是介于0.0与1.0间的小数)
+command.ee3:overlay.opacity.updated=已成功更新转换目标快捷视图透明度
+command.ee3:overlay.scale.usage.additional_text=%s (### 为大于 0.0 的小数)
+command.ee3:overlay.scale.updated=已成功更新转换目标快捷视图界面大小
+command.ee3:particles.turned_on=开启 Equivalent Exchange 3 粒子渲染效果
+command.ee3:particles.turned_off=关闭 Equivalent Exchange 3 粒子渲染效果
+command.ee3:sounds.set_to_all=允许播放所有玩家 Equivalent Exchange 3 音频文件
+command.ee3:sounds.set_to_self=允许播放自己 Equivalent Exchange 3 音频文件
+command.ee3:sounds.turned_off=禁止播放 Equivalent Exchange 3 音频文件
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=远程版本检查开始初始化, 版本信息文件位于：%s
+version.ee3:uninitialized=远程版本更新检查初始化失败
+version.ee3:current=当前使用的是 Equivalent Exchange 3 的最新版本 (%s)，适用于 %s
+version.ee3:outdated=最新 %s 版本已存在 (%s) 适用于 %s，请在此下载：%s
+version.ee3:general_error=访问远程版本文件失败；重试中
+version.ee3:final_error=累计三次连接失败后版本检查中断
+version.ee3:mc_version_not_found=%s 适用于 %s 的远程版本文件寻找失败

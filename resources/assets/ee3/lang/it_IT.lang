@@ -1,0 +1,62 @@
+# Key localizations 
+key.extra=Extra
+key.release=Rilascia
+key.toggle=Alterna
+key.charge=Carica
+
+# Item localizations
+item.ee3:shardMinium.name=Frammento di Minio
+item.ee3:stoneInert.name=Pietra Inerte
+item.ee3:stoneMinium.name=Pietra di Minio
+item.ee3:stonePhilosophers.name=Pietra Filosofale
+item.ee3:alchemicalDustAsh.name=Cenere
+item.ee3:alchemicalDustMinium.name=Polvere di Minio
+item.ee3:alchemicalDustVerdant.name=Polvere Verdeggiante
+item.ee3:alchemicalDustAzure.name=Polvere Azzurra
+item.ee3:alchemicalDustAmaranthine.name=Polvere d'Amaranto
+item.ee3:alchemicalDustIridescent.name=Polvere Irridescente
+item.ee3:alchemicalBag.name=Borsa Alchemica
+
+# Block localizations
+tile.ee3:redWaterStill.name=Acqua Rossa (Ferma)
+tile.ee3:redWaterFlowing.name=Red Water (Scorrevole)
+tile.ee3:calcinator.name=Calcinatore
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Cesta Alchemica
+tile.ee3:glassBell.name=Campana di Vetro
+
+# GUI localizations
+container.ee3:calcinator=Calcinatore
+container.ee3:aludel=Aludel
+container.ee3:alchemicalChest=Cesta Alchemica
+container.ee3:alchemicalBag=Borsa Alchemica
+container.ee3:glassBell=Campana di Vetro
+
+# Command localizations
+command.ee3:overlay.turned_on=Selezione del bersaglio da trasmutare attivata
+command.ee3:overlay.turned_off=Selezione del bersaglio da trasmutare disattivata
+command.ee3:overlay.position.top_left=Selezione del bersaglio da trasmutare impostata in alto a sinistra
+command.ee3:overlay.position.top_right=Selezione del bersaglio da trasmutare impostata in alto a destra
+command.ee3:overlay.position.bottom_left=Selezione del bersaglio da trasmutare impostata in basso a sinistra
+command.ee3:overlay.position.bottom_right=Selezione del bersaglio da trasmutare impostata in basso a destra
+command.ee3:overlay.opacity.usage.additional_text=(dove ### è un valore decimale tra 0.0 e 1.0) 
+command.ee3:overlay.opacity.updated=Opacità selezione del bersaglio da trasmutare aggiornata correttamente
+command.ee3:overlay.scale.usage.additional_text=%s (dove ### è un valore decimale più grande di 0.0) 
+command.ee3:overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3:particles.turned_on=Particelle della Equivalent Exchange 3 accese
+command.ee3:particles.turned_off=Particelle della Equivalent Exchange 3 spenta
+command.ee3:sounds.set_to_all=Riproduzione dei suoni dell'Equivalent Exchange 3 per tutti i giocatori
+command.ee3:sounds.set_to_self=Riproduzione dei suoni dell'Equivalent Exchange 3 per te stesso
+command.ee3:sounds.turned_off=Riproduzione dei suoni dell'Equivalent Exchange 3 disabilitata
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
+version.ee3:uninitialized=Remote version check failed to initialize properly
+version.ee3:current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
+version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
+version.ee3:general_error=Error while connecting to remote version authority file; trying again
+version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority

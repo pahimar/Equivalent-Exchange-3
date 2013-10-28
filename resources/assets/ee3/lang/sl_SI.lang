@@ -1,0 +1,62 @@
+# Key localizations
+key.extra=Dodatno
+key.release=Sproži
+key.toggle=Preklopi
+key.charge=Nabij
+
+# Item localizations
+item.ee3:shardMinium.name=Drobec Minija
+item.ee3:stoneInert.name=Nedejaven Kamen
+item.ee3:stoneMinium.name=Minijev Kamen
+item.ee3:stonePhilosophers.name=Kamen Modrosti
+item.ee3:alchemicalDustAsh.name=Pepel
+item.ee3:alchemicalDustMinium.name=Minijev Prah
+item.ee3:alchemicalDustVerdant.name=Zelen Prah
+item.ee3:alchemicalDustAzure.name=Moder Prah
+item.ee3:alchemicalDustAmaranthine.name=Vijoličen Prah
+item.ee3:alchemicalDustIridescent.name=Mavrični Prah
+item.ee3:alchemicalBag.name=Alkimistična Vreča
+
+# Block localizations
+tile.ee3:redWaterStill.name=Rdeča Voda (Mirujoča)
+tile.ee3:redWaterFlowing.name=Rdeča Voda (Pretočna)
+tile.ee3:calcinator.name=Kalcinator
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Alkimistični Zaboj
+tile.ee3:glassBell.name=Stekleni Zvonec
+
+# GUI localizations
+container.ee3:calcinator=Kalcinator
+container.ee3:aludel=Aludel
+container.ee3:alchemicalChest=Alkimistični Zaboj
+container.ee3:alchemicalBag=Alkimistična Vreča
+container.ee3:glassBell=Stekleni Zvonec
+
+# Command localizations
+command.ee3:overlay.turned_on=Prikaz transmutacije je vključen
+command.ee3:overlay.turned_off=Prikaz transmutacije je izključen
+command.ee3:overlay.position.top_left=Mesto prikaza transmutacije je bilo nastavljeno na zgoraj levo
+command.ee3:overlay.position.top_right=Mesto prikaza transmutacije je bilo nastavljeno na zgoraj desno
+command.ee3:overlay.position.bottom_left=Mesto prikaza transmutacije je bilo nastavljeno na spodaj levo
+command.ee3:overlay.position.bottom_right=Mesto prikaza transmutacije je bilo nastavljeno na spodaj desno
+command.ee3:overlay.opacity.usage.additional_text=(kjer je ### decimalna vrednost med 0.0 in 1.0)
+command.ee3:overlay.opacity.updated=Prosojnost prikaza transmutacije je bila uspešno posodobljena
+command.ee3:overlay.scale.usage.additional_text=%1$s (kjer je ### decimalna vrednost večja od 0.0)
+command.ee3:overlay.scale.updated=Velikost prikaza transmutacije je bila uspešno posodobljena
+command.ee3:particles.turned_on=Equivalent Exchange 3 delci so vključeni
+command.ee3:particles.turned_off=Equivalent Exchange 3 delci so izključeni
+command.ee3:sounds.set_to_all=Predvajam Equivalent Exchange 3 zvoke vseh igralcev
+command.ee3:sounds.set_to_self=Predvajam Equivalent Exchange 3 zvoke samo od sebe
+command.ee3:sounds.turned_off=Predvajanje Equivalent Exchange 3 zvokov je izključeno
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Inicializiram oddaljeno preverjanje različice z različico oddaljenega strežnika, ki se nahaja na %s
+version.ee3:uninitialized=Oddaljeno preverjanje različice se ni inicializiralo pravilno
+version.ee3:current=Trenutno je v uporabi zadnja različica Equivalent Exchange 3 (%s) za %s
+version.ee3:outdated=Obstaja nova različica %s (%s) za %s. Dobite jo tukaj: %s
+version.ee3:general_error=Napaka pri pridobivanju datoteke z različico z oddaljenega strežnika; poskušam znova
+version.ee3:final_error=Preverjanje različice ustavljeno po treh neuspešnih preverjanjih
+version.ee3:mc_version_not_found=Ne morem najti različice %s za %s na oddaljenem strežniku

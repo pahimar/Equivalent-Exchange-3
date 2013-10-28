@@ -1,0 +1,67 @@
+# Key localizations
+key.extra=Extra
+key.release=Ontlaad
+key.toggle=Wissel
+key.charge=Opladen
+
+# Item localizations
+item.ee3:shardMinium.name=Miniumscherf
+item.ee3:stoneInert.name=Inerte Steen
+item.ee3:stoneMinium.name=Miniumsteen
+item.ee3:stonePhilosophers.name=Steen Der Wijzen [WiP]
+item.ee3:alchemicalDustAsh.name=As [WiP]
+item.ee3:alchemicalDustMinium.name=Miniumpoeder [WiP]
+item.ee3:alchemicalDustVerdant.name=Helgroen Poeder [WiP]
+item.ee3:alchemicalDustAzure.name=Azuurblauw Poeder [WiP]
+item.ee3:alchemicalDustAmaranthine.name=Amarant Poeder [WiP]
+item.ee3:alchemicalDustIridescent.name=Iriserend Poeder [WiP]
+item.ee3:alchemicalBag.name=Alchemistische Tas [WiP]
+item.ee3:alchemicalChalk.name=Alchemistische Krijt [WiP]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Rood Water (Stilstaand)
+tile.ee3:redWaterFlowing.name=Rood Water (Stromende)
+tile.ee3:calcinator.name=Calcinator [WiP]
+tile.ee3:aludel.name=Aludel [WiP]
+tile.ee3:alchemicalChest.name=Alchemistische Kist [WiP]
+tile.ee3:glassBell.name=Glazen Stolp [WiP]
+tile.ee3:alchemyTable.name=Alchemietafel [WiP]
+tile.ee3:renderingTank.name=Rendering Tank [WiP]
+
+# GUI localizations
+container.ee3:calcinator=Calcinator [WiP]
+container.ee3:aludel=Aludel [WiP]
+container.ee3:alchemicalChest=Alchemistische Chest [WiP]
+container.ee3:alchemicalBag=Alchemistische Bag [WiP]
+container.ee3:glassBell=Glass Stolp [WiP]
+container.ee3:alchemyTable.name=Alchemietafel [WiP]
+container.ee3:renderingTank.name=Rendering Tank [WiP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Doelwit transmutatie overlapping aangezet
+command.ee3:overlay.turned_off=Doelwit transmutatie overlapping uitgezet
+command.ee3:overlay.position.top_left=Doelwit transmutatie overlapping positie op links boven gezet
+command.ee3:overlay.position.top_right=Doelwit transmutatie overlapping positie op rechts boven gezet
+command.ee3:overlay.position.bottom_left=Doelwit transmutatie overlapping positie op links beneden gezet
+command.ee3:overlay.position.bottom_right=Doelwit transmutatie overlapping positie op rechts beneden gezet
+command.ee3:overlay.opacity.usage.additional_text=(waar ### een decimale waarde heeft tussen 0.0 en 1.0)
+command.ee3:overlay.opacity.updated=Doelwit transmutatie overlapping doorzichtigheid successvol bewerkt
+command.ee3:overlay.scale.usage.additional_text=%s (waar ### een decimale waarde heeft groter dan 0.0)
+command.ee3:overlay.scale.updated=Doelwit transmutatie overlapping school successvol bewerkt
+command.ee3:particles.turned_on=Equivalent Exchange 3 deeltjes aangezet
+command.ee3:particles.turned_off=Equivalent Exchange 3 deeltjes aangezet
+command.ee3:sounds.set_to_all=Speelt Equivalent Exchange 3 geluiden van alle spelers af
+command.ee3:sounds.set_to_self=Speelt Equivalent Exchange 3 geluiden enkel van jezelf af
+command.ee3:sounds.turned_off=Equivalent Exchange 3 geluiden uitgezet
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Initialiseer afgelegen versie controle tegen afgelegen versie autoriteit, gelokaliseerd op: %s
+version.ee3:uninitialized=Initialisatie van afgelegen versie mislukt
+version.ee3:current=Gebruikt momenteel de meest recente versie (%s) van Equivalent Exchange 3 voor %s
+version.ee3:outdated=Een nieuwe %s version bestaat (%s) voor %s. Download het op: %s
+version.ee3:general_error=Er heeft zich een fout voorgedaan tijdens de versiecontrole; opnieuw proberen..
+version.ee3:final_error=Versiecontrole gestopt na drie mislukte verbindingspogingen
+version.ee3:mc_version_not_found=Kon geen versie vinden van %s voor %s in de versiecontrole

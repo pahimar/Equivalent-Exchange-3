@@ -1,0 +1,62 @@
+# Key localizations 
+key.extra=Extra
+key.release=Lanzar
+key.toggle=Mueva
+key.charge=Cargar
+
+# Item localizations
+item.ee3:shardMinium.name=Fragmento de Minio
+item.ee3:stoneInert.name=Piedra Inerte
+item.ee3:stoneMinium.name=Piedra de Minio
+item.ee3:stonePhilosophers.name=Piedra Filosofal
+item.ee3:alchemicalDustAsh.name=Ceniza
+item.ee3:alchemicalDustMinium.name=Polvo de Minio
+item.ee3:alchemicalDustVerdant.name=Polvo Verdante
+item.ee3:alchemicalDustAzure.name=Polvo Azur
+item.ee3:alchemicalDustAmaranthine.name=Polvo Purpúreo
+item.ee3:alchemicalDustIridescent.name=Polvo Iridiscente
+item.ee3:alchemicalBag.name=Bolsa Alquímica
+
+# Block localizations
+tile.ee3:redWaterStill.name=Agua Roja (Quieta)
+tile.ee3:redWaterFlowing.name=Agua Roja (Fluyendo)
+tile.ee3:calcinator.name=Calcinador
+tile.ee3:aludel.name=Aludel
+tile.ee3:alchemicalChest.name=Cofre Alquímico
+tile.ee3:glassBell.name=Campana de Cristal
+
+# GUI localizations
+container.ee3:calcinator=Calcinator
+container.ee3:aludel=Aludel
+container.ee3:alchemicalChest=Cofre Alquímico
+container.ee3:alchemicalBag=Bolsa Alquímica
+container.ee3:glassBell=Campana de Cristal
+
+# Command localizations
+command.ee3:overlay.turned_on=Superposicón del objetivo a transmutar activada
+command.ee3:overlay.turned_off=Superposicón del objetivo a transmutar desactivada
+command.ee3:overlay.position.top_left=Posición de la superposición del objetivo a transmutar fijada a la parte superior izquierda
+command.ee3:overlay.position.top_right=Posición de la superposición del objetivo a transmutar fijada a la parte superior derecha
+command.ee3:overlay.position.bottom_left=Posición de la superposición del objetivo a transmutar fijada a la parte inferior izquierda
+command.ee3:overlay.position.bottom_right=Posición de la superposición del objetivo a transmutar fijada a la parte inferior derecha
+command.ee3:overlay.opacity.usage.additional_text=(donde ### es un número decimal entre 0.0 y 1.0)
+command.ee3:overlay.opacity.updated=Opacidad de la superposición del objetivo a transmutar actualizada exitosamente
+command.ee3:overlay.scale.usage.additional_text=%s (donde ### es un número decimal mayor que 0.0)
+command.ee3:overlay.scale.updated=Escala de la superposición del objetivo a transmutar actualizada exitosamente
+command.ee3:particles.turned_on=Particulas de Equivalent Exchange 3 activadas
+command.ee3:particles.turned_off=Particulas de Equivalent Exchange 3 desactivadas
+command.ee3:sounds.set_to_all=Reproduciendo sonidos de Equivalent Exchange 3 provenientes de todos los jugadores
+command.ee3:sounds.set_to_self=Reproduciendo sonidos de Equivalent Exchange 3 provenientes de uno mismo
+command.ee3:sounds.turned_off=La reproducción de los sonidos de Equivalent Exchange 3 ha sido desactivada
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Iniciando comprobación de la versión de forma remota de un archivo, ubicado en: %s
+version.ee3:uninitialized=La comprobación de versiones no se inició adecuadamente
+version.ee3:current=Actualmente estás usando la versión (%s) de Equivalent Exchange 3 más actualizada para %s
+version.ee3:outdated=Existe una nueva versión %s (%s) para %s. Consíguela aquí:  %s
+version.ee3:general_error=Error al conectar con el archivo autoritario remoto (¿Comprueba tu conexión a internet?)
+version.ee3:final_error=Comprobación de versión detenida después de tres intentos de conexión sin éxito
+version.ee3:mc_version_not_found=No se pudo encontrar una versión de %s para %s en la autoridad versión remota.

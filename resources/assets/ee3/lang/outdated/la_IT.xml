@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Latin Italian (la_IT) Localization File</comment>
+	<!--REQUIRES ADDITIONAL UPDATING-->
+	<entry key="key.extra">Extra</entry>
+	<entry key="key.release">Libe</entry>
+	<entry key="key.toggle">Muta</entry>
+	<entry key="key.charge">Trade</entry>
+	<entry key="item.shardMinium.name">Pars Rufi Plumbi</entry>
+	<entry key="item.stoneInert.name">Ignavus Lapidus</entry>
+	<entry key="item.stoneMinium.name">Pars Rufi Lapidus</entry>
+	<entry key="item.stonePhilosophers.name">Lapis Philosophi</entry>
+	<entry key="item.alchemicalDustAsh.name">Fraxinus</entry>
+	<entry key="item.alchemicalDustMinium.name">Afa Rufi Plumbi</entry>
+	<entry key="item.alchemicalDustVerdant.name">Viridis Afae</entry>
+	<entry key="item.alchemicalDustAzure.name">Caeruleus Afae</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Amarantus Afae</entry>
+	<entry key="item.alchemicalDustIridescent.name">Iris Afae</entry>
+	<entry key="item.alchemicalBag.name">Saccus Alchimiae</entry>
+	<entry key="tile.redWaterStill.name">Rufi Aqua (Residans)</entry>
+	<entry key="tile.redWaterFlowing.name">Rufi Aqua (Fluens)</entry>
+	<entry key="tile.calcinator.name">Auctor Calcus</entry>
+	<entry key="container.calcinator">Auctor Calcus</entry>
+	<entry key="itemGroup.EE3">Aequipollens Conlubi Trium</entry>
+	<entry key="version.init_log_message">Incipiens senecti quaesitum contra procul senecti auctoritatis scapus, positus ad</entry>
+	<entry key="version.uninitialized">Senecti quaesitum non adimplet cum fortuna (Senecti quaestim non incipit recte)</entry>
+	<entry key="version.current">Iam abutas the most novellissimus senectus tuo senecto Meiarti(Minecraft) </entry>
+	<entry key="version.outdated">Iam abutas non tempore senectus; Consule hic afferte hodie - @MOD_UPDATE_LOCATION@</entry>
+	<entry key="version.connection_error">Erratum annectans ad procul senecto auctoritatis scapus (Scisa tuum retiacula ad invicem nexus?)</entry>
+	<entry key="version.check_disabled">Procul senectus debilitatus, neglectens</entry>
+</properties>

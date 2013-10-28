@@ -1,0 +1,62 @@
+# Key localizations 
+key.extra=額外功能
+key.release=施放技能
+key.toggle=切換目標
+key.charge=充能
+
+# Item localizations
+item.ee3:shardMinium.name=鉛丹碎片
+item.ee3:stoneInert.name=惰性石
+item.ee3:stoneMinium.name=鉛丹石
+item.ee3:stonePhilosophers.name=賢者之石
+item.ee3:alchemicalDustAsh.name=灰燼
+item.ee3:alchemicalDustMinium.name=鉛丹粉末
+item.ee3:alchemicalDustVerdant.name=翠綠粉末
+item.ee3:alchemicalDustAzure.name=蔚藍粉末
+item.ee3:alchemicalDustAmaranthine.name=紫紅粉末
+item.ee3:alchemicalDustIridescent.name=虹彩粉末
+item.ee3:alchemicalBag.name=煉金袋
+
+# Block localizations
+tile.ee3:redWaterStill.name=紅水 (靜止)
+tile.ee3:redWaterFlowing.name=紅水 (流動)
+tile.ee3:calcinator.name=煅燒爐
+tile.ee3:aludel.name=梨形器皿
+tile.ee3:alchemicalChest.name=煉金箱子
+tile.ee3:glassBell.name=玻璃鐘罩
+
+# GUI localizations
+container.ee3:calcinator=煅燒爐
+container.ee3:aludel=梨形器皿
+container.ee3:alchemicalChest=煉金箱子
+container.ee3:alchemicalBag=煉金袋
+container.ee3:glassBell=玻璃鐘罩
+
+# Command localizations
+command.ee3:overlay.turned_on=開啟轉換目標快捷視圖
+command.ee3:overlay.turned_off=關閉轉換目標快捷視圖
+command.ee3:overlay.position.top_left=將轉換目標快捷視圖設置在屏幕左上角
+command.ee3:overlay.position.top_right=將轉換目標快捷視圖設置在屏幕右上角
+command.ee3:overlay.position.bottom_left=將轉換目標快捷視圖設置在屏幕左下角
+command.ee3:overlay.position.bottom_right=將轉換目標快捷視圖設置在屏幕右下角
+command.ee3:overlay.opacity.usage.additional_text=(### 是介於 0.0 與 1.0 間的小數)
+command.ee3:overlay.opacity.updated=已成功更新轉換目標快捷視圖透明度
+command.ee3:overlay.scale.usage.additional_text=%s (### 為大於 0.0 的小數)
+command.ee3:overlay.scale.updated=已成功更新轉換目標快捷視圖界面大小
+command.ee3:particles.turned_on=開啟 Equivalent Exchange 3 粒子渲染效果
+command.ee3:particles.turned_off=關閉 Equivalent Exchange 3 粒子渲染效果
+command.ee3:sounds.set_to_all=允許播放所有玩家Equivalent Exchange 3 音頻
+command.ee3:sounds.set_to_self=允許播放自己Equivalent Exchange 3 音頻
+command.ee3:sounds.turned_off=禁止播放 Equivalent Exchange 3 音頻
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=遠程版本檢查開始初始化, 版本信息文件位於：%s
+version.ee3:uninitialized=遠程版本更新檢查初始化失敗
+version.ee3:current=當前使用的是 Equivalent Exchange 3 的最新版本 (%s)，適用於 %s
+version.ee3:outdated=最新 %s 版本已存在 (%s) 適用於 %s，請在此下載：%s
+version.ee3:general_error=訪問遠程版本文件失敗；重試中
+version.ee3:final_error=累計三次連接失敗後版本檢查中斷
+version.ee3:mc_version_not_found=%s適用於 %s 的遠程版本文件尋找失敗

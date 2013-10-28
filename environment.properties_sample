@@ -1,0 +1,4 @@
+base_location=D:/development/
+source_location=${base_location}/eclipse/Equivalent-Exchange-3
+mcp_location=${base_location}/forge/mcp
+release_location=D:/Dropbox/Public/EE3

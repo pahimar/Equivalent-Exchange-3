@@ -1,0 +1,67 @@
+# Key localizations 
+key.extra=Extra
+key.release=Auflösen
+key.toggle=Umschalten
+key.charge=Aufladen
+
+# Item localizations
+item.ee3:shardMinium.name=Miniumscherbe
+item.ee3:stoneInert.name=Inerter Stein
+item.ee3:stoneMinium.name=Miniumstein
+item.ee3:stonePhilosophers.name=Stein der Weisen [WIP]
+item.ee3:alchemicalDustAsh.name=Asche [WIP]
+item.ee3:alchemicalDustMinium.name=Miniumstaub [WIP]
+item.ee3:alchemicalDustVerdant.name=Grüner Staub [WIP]
+item.ee3:alchemicalDustAzure.name=Azurblauer Staub [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amaranther Staub [WIP]
+item.ee3:alchemicalDustIridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
+item.ee3:alchemicalChalk.name=Alchemiekreide [WIP]
+
+# Block localizations
+tile.ee3:redWaterStill.name=Rotes Wasser
+tile.ee3:redWaterFlowing.name=Rotes Wasser
+tile.ee3:calcinator.name=Kalzinierer [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemietruhe [WIP]
+tile.ee3:glassBell.name=Glasglocke [WIP]
+tile.ee3:alchemyTable.name=Alchemietisch [WIP]
+tile.ee3:renderingTank.name=Darstellungstank [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalzinierer [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemietruhe [WIP]
+container.ee3:alchemicalBag=Alchemiebeutel [WIP]
+container.ee3:glassBell=Glasglocke [WIP]
+container.ee3:alchemyTable.name=Alchemietisch [WIP]
+container.ee3:renderingTank.name=Darstellungstank [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Transmutationsvorschau an
+command.ee3:overlay.turned_off=Transmutationsvorschau aus
+command.ee3:overlay.position.top_left=Transmutationsvorschau wurde nach links oben eingestellt
+command.ee3:overlay.position.top_rightTransmutationsvorschau wurde nach rechts oben eingestellt
+command.ee3:overlay.position.bottom_left=Transmutationsvorschau wurde nach links unten eingestellt
+command.ee3:overlay.position.bottom_right=Transmutationsvorschau wurde nach rechts unten eingestellt
+command.ee3:overlay.opacity.usage.additional_text=(wobei ### ein Dezimalwert zwischen 0.0 und 1.0 ist) 
+command.ee3:overlay.opacity.updated=Transparenz der Transmutationsvorschau wurde erfolgreich geändert
+command.ee3:overlay.scale.usage.additional_text=%s (wobei ### ein Dezimalwert über 0.0 ist) 
+command.ee3:overlay.scale.updated=Größe der Transmutationsvorschau wurde erfolgreich geändert
+command.ee3:particles.turned_on=Equivalent-Exchange-3-Partikel eingeschaltet
+command.ee3:particles.turned_off=Equivalent-Exchange-3-Partikel ausgeschaltet
+command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen Spielern ab
+command.ee3:sounds.set_to_self=Spiele nur Equivalent-Exchange-3-Geräusche vom eigenen Spieler ab
+command.ee3:sounds.turned_off=Das Abspielen von Equivalent-Exchange-3-Geräuschen wurde deaktiviert
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet: %s
+version.ee3:uninitialized=Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)
+version.ee3:current=Du benutzt gerade die aktuellste Version von Equivalent Exchange 3 (%s) für %s
+version.ee3:outdated=Eine neue %s Version (%s) für %s ist verfügbar. Hole sie dir hier: %s
+version.ee3:general_error=Fehler bei der Verbindung zur Remotedatei (überprüfe bitte deine Internetverbindung)
+version.ee3:final_error=Versionsvergleich mit der Remotedatei deaktiviert, überspringe
+version.ee3:mc_version_not_found=Keine Version von %s für %s in der Remotedatei gefunden
