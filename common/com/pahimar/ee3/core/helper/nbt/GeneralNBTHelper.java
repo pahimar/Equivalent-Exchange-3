@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.core.helper.nbt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import com.pahimar.ee3.lib.Strings;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class NBTHelper {
+public class GeneralNBTHelper {
 
     public static NBTTagCompound encodeEmcValue(EmcValue emcValue) {
         
@@ -130,8 +130,8 @@ public class NBTHelper {
         Map<CustomWrappedStack, EmcValue> decodedEmcValueMapping = new HashMap<CustomWrappedStack, EmcValue>();
         
         if (encodedEmcValueMapping.hasKey(InterModComms.STACK_TAG_NAME) && encodedEmcValueMapping.hasKey(InterModComms.EMC_VALUE_TAG_NAME)) {
-            CustomWrappedStack stack = NBTHelper.decodeStackFromNBT(encodedEmcValueMapping.getCompoundTag(InterModComms.STACK_TAG_NAME));
-            EmcValue emcValue = NBTHelper.decodeEmcValue(encodedEmcValueMapping.getCompoundTag(InterModComms.EMC_VALUE_TAG_NAME));
+            CustomWrappedStack stack = GeneralNBTHelper.decodeStackFromNBT(encodedEmcValueMapping.getCompoundTag(InterModComms.STACK_TAG_NAME));
+            EmcValue emcValue = GeneralNBTHelper.decodeEmcValue(encodedEmcValueMapping.getCompoundTag(InterModComms.EMC_VALUE_TAG_NAME));
             
             if (stack != null && emcValue != null) {
                 if (stack.getWrappedStack() != null && emcValue.getValue() > 0) {

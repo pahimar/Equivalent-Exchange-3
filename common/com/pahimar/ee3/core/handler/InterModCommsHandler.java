@@ -6,7 +6,7 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.pahimar.ee3.core.helper.LogHelper;
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
 import com.pahimar.ee3.emc.EmcBlackList;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
@@ -53,7 +53,7 @@ public class InterModCommsHandler {
 
         NBTTagCompound encodedRecipe = imcMessage.getNBTValue();
 
-        Map<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipe = NBTHelper.decodeRecipeFromNBT(encodedRecipe);
+        Map<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipe = GeneralNBTHelper.decodeRecipeFromNBT(encodedRecipe);
 
         if (!decodedRecipe.isEmpty()) {
             for (CustomWrappedStack key : decodedRecipe.keySet()) {
@@ -70,7 +70,7 @@ public class InterModCommsHandler {
 
         NBTTagCompound encodedStack = imcMessage.getNBTValue();
 
-        CustomWrappedStack decodedStack = NBTHelper.decodeStackFromNBT(encodedStack);
+        CustomWrappedStack decodedStack = GeneralNBTHelper.decodeStackFromNBT(encodedStack);
 
         if (decodedStack != null) {
             if (EmcBlackList.getInstance().add(decodedStack)) {
@@ -86,7 +86,7 @@ public class InterModCommsHandler {
 
         NBTTagCompound encodedStack = imcMessage.getNBTValue();
 
-        CustomWrappedStack decodedStack = NBTHelper.decodeStackFromNBT(encodedStack);
+        CustomWrappedStack decodedStack = GeneralNBTHelper.decodeStackFromNBT(encodedStack);
 
         if (decodedStack != null) {
             if (EmcBlackList.getInstance().remove(decodedStack)) {
@@ -104,7 +104,7 @@ public class InterModCommsHandler {
         
         NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
         
-        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = GeneralNBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
         
         if (emcValueMapping != null && emcValueMapping.size() > 0) {
             for (CustomWrappedStack stack : emcValueMapping.keySet()) {
@@ -128,7 +128,7 @@ public class InterModCommsHandler {
 
 NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
         
-        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = GeneralNBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
         
         if (emcValueMapping != null && emcValueMapping.size() > 0) {
             for (CustomWrappedStack stack : emcValueMapping.keySet()) {
