@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
@@ -45,12 +44,14 @@ public class EmcRegistry {
 
         Map<CustomWrappedStack, EmcValue> defaultValues = EmcValuesDefault.getDefaultValueMap();
 
-        // Handle the stack mappings
+        // Grab the default stack:value mappings
         stackMappingsBuilder.putAll(defaultValues);
-        stackMappings = stackMappingsBuilder.build();
+
+        // Grab the pre-auto assignment values gathered from IMC
+        stackMappingsBuilder.putAll(EmcValuesIMC.getPreAssignedValues());
         
-        // Pass in the pre-auto assignment values gathered from IMC
-        Multimap<CustomWrappedStack, EmcValue> preAssignedValues = EmcValuesIMC.getPreAssignedValues();
+        // Build the Immutable stack:value map
+        stackMappings = stackMappingsBuilder.build();
         
         // Attempt auto-assignment
         int passNumber = 0;
@@ -67,8 +68,11 @@ public class EmcRegistry {
             stackMappings = stackMappingsBuilder.build();
         }
         
-        // Pass in the post-auto assignment values gathered from IMC
-        Multimap<CustomWrappedStack, EmcValue> postAssignedValues = EmcValuesIMC.getPreAssignedValues();
+        // Grab the post-auto assignment values gathered from IMC
+        stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        stackMappingsBuilder.putAll(stackMappings); 
+        stackMappingsBuilder.putAll(EmcValuesIMC.getPostAssignedValues());
+        stackMappings = stackMappingsBuilder.build();
         
         // Handle the value mappings
         SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
@@ -273,7 +277,6 @@ public class EmcRegistry {
 
         lazyInit();
 
-        // FIXME Doesn't work properly, fix me!
         List<CustomWrappedStack> stacksInRange = new ArrayList<CustomWrappedStack>();
 
         SortedMap<EmcValue, List<CustomWrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);

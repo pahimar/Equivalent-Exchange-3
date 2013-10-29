@@ -162,7 +162,6 @@ public class EquivalentExchange3 {
     public void modsLoaded(FMLPostInitializationEvent event) {
         
         EmcRegistry.lazyInit();
-        EmcRegistry.printUnmappedCompoundStacks();
     }
 
     @EventHandler

@@ -1,7 +1,8 @@
 package com.pahimar.ee3.emc;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.pahimar.ee3.item.CustomWrappedStack;
 
 /**
@@ -15,22 +16,28 @@ import com.pahimar.ee3.item.CustomWrappedStack;
  */
 public class EmcValuesIMC {
 
-    private static Multimap<CustomWrappedStack, EmcValue> preAssignedValueMap = HashMultimap.create();
-    private static Multimap<CustomWrappedStack, EmcValue> postAssignedValueMap = HashMultimap.create();
+    private static Map<CustomWrappedStack, EmcValue> preAssignedValueMap = new TreeMap<CustomWrappedStack, EmcValue>();
+    private static Map<CustomWrappedStack, EmcValue> postAssignedValueMap = new TreeMap<CustomWrappedStack, EmcValue>();
     
-    public static Multimap<CustomWrappedStack, EmcValue> getPreAssignedValues() {
+    public static Map<CustomWrappedStack, EmcValue> getPreAssignedValues() {
         return preAssignedValueMap;
     }
     
-    public static Multimap<CustomWrappedStack, EmcValue> getPostAssignedValues() {
+    public static Map<CustomWrappedStack, EmcValue> getPostAssignedValues() {
         return postAssignedValueMap;
     }
     
     public static void addPreAssignedValued(CustomWrappedStack wrappedStack, EmcValue emcValue) {
-        
+
+        if (!preAssignedValueMap.containsKey(wrappedStack)) {
+            preAssignedValueMap.put(wrappedStack, emcValue);
+        }
     }
 
     public static void addPostAssignedValued(CustomWrappedStack wrappedStack, EmcValue emcValue) {
-        
+
+        if (!postAssignedValueMap.containsKey(wrappedStack)) {
+            postAssignedValueMap.put(wrappedStack, emcValue);
+        }
     }
 }

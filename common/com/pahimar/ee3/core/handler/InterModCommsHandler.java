@@ -19,6 +19,8 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
 public class InterModCommsHandler {
 
+    // TODO Revisit logging levels and the use of String.format for logging messages
+    
     public static void processIMCMessages(IMCEvent event) {
 
         for (IMCMessage imcMessage : event.getMessages()) {
@@ -98,9 +100,11 @@ public class InterModCommsHandler {
 
     private static void processPreAssignEmcValueMessage(IMCMessage imcMessage) {
 
+        // FIXME Not all methods of passing mappings work, and logging not 100% yet
+        
         NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
         
-        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMapping(encodedEmcValueMapping);
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
         
         if (emcValueMapping != null && emcValueMapping.size() > 0) {
             for (CustomWrappedStack stack : emcValueMapping.keySet()) {
@@ -108,16 +112,23 @@ public class InterModCommsHandler {
                 
                 if (stack.getWrappedStack() != null && emcValue != null && emcValue.getValue() > 0) {
                     EmcValuesIMC.addPreAssignedValued(stack, emcValue);
+                    LogHelper.fine(String.format("[IMC] Mod '%s' added a pre auto assignment EmcValue of %s (%s) for object '%s'",imcMessage.getSender(), emcValue.getValue(), emcValue.toString(), stack));
+                }
+                else {
+                    LogHelper.severe(String.format("[IMC] Mod '%s' failed in attempting to add a pre auto assignment EmcValue of %s (%s) for object '%s'",imcMessage.getSender(), emcValue.getValue(), emcValue.toString(), stack));
                 }
             }
+        }
+        else {
+            LogHelper.severe(String.format("[IMC] Mod failed in attempting to add a pre auto assignment: %s", encodedEmcValueMapping));
         }
     }
     
     private static void processPostAssignEmcValueMessage(IMCMessage imcMessage) {
 
-        NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
+NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
         
-        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMapping(encodedEmcValueMapping);
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMappings(encodedEmcValueMapping);
         
         if (emcValueMapping != null && emcValueMapping.size() > 0) {
             for (CustomWrappedStack stack : emcValueMapping.keySet()) {
@@ -125,6 +136,10 @@ public class InterModCommsHandler {
                 
                 if (stack.getWrappedStack() != null && emcValue != null && emcValue.getValue() > 0) {
                     EmcValuesIMC.addPostAssignedValued(stack, emcValue);
+                    LogHelper.fine(String.format("[IMC] Mod '%s' added a post auto assignment EmcValue of %s (%s) for object '%s'",imcMessage.getSender(), emcValue.getValue(), emcValue.toString(), stack));
+                }
+                else {
+                    LogHelper.severe(String.format("[IMC] Mod '%s' failed in attempting to add a post auto assignment EmcValue of %s (%s) for object '%s'",imcMessage.getSender(), emcValue.getValue(), emcValue.toString(), stack));
                 }
             }
         }

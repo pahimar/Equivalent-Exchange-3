@@ -14,6 +14,7 @@ import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.EnergyStack;
 import com.pahimar.ee3.item.OreStack;
+import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -29,7 +30,7 @@ public class NBTHelper {
 
     public static NBTTagCompound encodeEmcValue(EmcValue emcValue) {
         
-        return encodeEmcValue("", emcValue);
+        return encodeEmcValue(InterModComms.EMC_VALUE_TAG_NAME, emcValue);
     }
     
     public static NBTTagCompound encodeEmcValue(String compoundName, EmcValue emcValue) {
@@ -37,7 +38,7 @@ public class NBTHelper {
         NBTTagCompound encodedValue = new NBTTagCompound(compoundName);
         
         for (EmcType emcType: EmcType.TYPES) {
-            encodedValue.setFloat(String.format("componentOrdinal_%s", emcType.ordinal()), emcValue.components[emcType.ordinal()]);
+            encodedValue.setFloat(String.format(InterModComms.EMC_VALUE_COMPONENT_ORDINAL_TEMPLATE, emcType.ordinal()), emcValue.components[emcType.ordinal()]);
         }
         
         return encodedValue;
@@ -48,8 +49,8 @@ public class NBTHelper {
         float[] subValues = new float[EmcType.TYPES.length];
         
         for (EmcType emcType : EmcType.TYPES) {
-            if (encodedValue.hasKey(String.format("componentOrdinal_%s", emcType.ordinal())) && emcType.ordinal() < subValues.length) {
-                subValues[emcType.ordinal()] = encodedValue.getFloat(String.format("componentOrdinal_%s", emcType.ordinal()));
+            if (encodedValue.hasKey(String.format(InterModComms.EMC_VALUE_COMPONENT_ORDINAL_TEMPLATE, emcType.ordinal())) && emcType.ordinal() < subValues.length) {
+                subValues[emcType.ordinal()] = encodedValue.getFloat(String.format(InterModComms.EMC_VALUE_COMPONENT_ORDINAL_TEMPLATE, emcType.ordinal()));
             }
         }
         
@@ -58,33 +59,89 @@ public class NBTHelper {
     
     public static NBTTagCompound encodeEmcValueMapping(Object object, EmcValue emcValue) {
         
-        NBTTagCompound tagCompound = new NBTTagCompound("emcValueMapping");
+        return encodeEmcValueMapping(InterModComms.STACK_VALUE_MAPPING_TAG_NAME, object, emcValue);
+    }
+    
+    private static NBTTagCompound encodeEmcValueMapping(String compoundName, Object object, EmcValue emcValue) {
         
-        tagCompound.setCompoundTag("customWrappedStack", encodeStackAsNBT("stack", object));
-        tagCompound.setCompoundTag("emcValue", encodeEmcValue("value", emcValue));
+        NBTTagCompound tagCompound = new NBTTagCompound(compoundName);
+        
+        tagCompound.setCompoundTag(InterModComms.STACK_TAG_NAME, encodeStackAsNBT(InterModComms.STACK_TAG_NAME, object));
+        tagCompound.setCompoundTag(InterModComms.EMC_VALUE_TAG_NAME, encodeEmcValue(InterModComms.EMC_VALUE_TAG_NAME, emcValue));
         
         return tagCompound;
     }
     
-    public static Map<CustomWrappedStack, EmcValue> decodeEmcValueMapping(NBTTagCompound encodedEmcValueMapping) {
+    public static NBTTagCompound encodeEmcValueMappings(String compoundName, Map<CustomWrappedStack, EmcValue> stackValueMap) {
+        
+        NBTTagCompound tagCompound = new NBTTagCompound(compoundName);
+        
+        tagCompound.setInteger(InterModComms.COUNT_TAG_NAME, stackValueMap.keySet().size());
+        int i = 0;
+        for (CustomWrappedStack stack : stackValueMap.keySet()) {
+            tagCompound.setCompoundTag(String.format(InterModComms.STACK_VALUE_MAPPING_TEMPLATE, i), encodeEmcValueMapping(stack, stackValueMap.get(stack)));
+        }
+        
+        return tagCompound;
+    }
+    
+    public static NBTTagCompound encodeEmcValueMappings(Map<CustomWrappedStack, EmcValue> stackValueMap) {
+        return encodeEmcValueMappings(InterModComms.STACK_VALUE_MAPPING_TAG_NAME, stackValueMap);
+    }
+    
+    public static NBTTagCompound encodeEmcValueMappings(String compoundName, Object object, EmcValue emcValue) {
+        
+        HashMap<CustomWrappedStack, EmcValue> stackValueMap = new HashMap<CustomWrappedStack, EmcValue>();
+        
+        if (CustomWrappedStack.canBeWrapped(object)) {
+            CustomWrappedStack wrappedObject = new CustomWrappedStack(object);
+            stackValueMap.put(wrappedObject, emcValue);
+            return encodeEmcValueMappings(compoundName, stackValueMap);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public static Map<CustomWrappedStack, EmcValue> decodeEmcValueMappings(NBTTagCompound encodedEmcValueMap) {
         
         Map<CustomWrappedStack, EmcValue> decodedEmcValueMapping = new HashMap<CustomWrappedStack, EmcValue>();
         
-        if (encodedEmcValueMapping.getName().equals("emcValueMapping")) {
-            if (encodedEmcValueMapping.hasKey("customWrappedStack") && encodedEmcValueMapping.hasKey("emcValue")) {
-                CustomWrappedStack wrappedStack = decodeStackFromNBT(encodedEmcValueMapping.getCompoundTag("customWrappedStack"));
-                EmcValue emcValue = decodeEmcValue(encodedEmcValueMapping.getCompoundTag("emcValue"));
-                
-                if (wrappedStack.getWrappedStack() != null && emcValue.getValue() > 0f) {
-                    decodedEmcValueMapping.put(wrappedStack, emcValue);
-                }
-                else {
-                    decodedEmcValueMapping = null;
+        if (encodedEmcValueMap.getName().equals(InterModComms.STACK_VALUE_MAPPING_TAG_NAME)) {
+            int count = encodedEmcValueMap.getInteger(InterModComms.COUNT_TAG_NAME);
+            
+            for (int i = 0; i < count; i++) {
+                if (encodedEmcValueMap.hasKey(String.format(InterModComms.STACK_VALUE_MAPPING_TEMPLATE, i))) {
+                    
+                    Map<CustomWrappedStack, EmcValue> decodedMapping = decodeEmcValueMapping(encodedEmcValueMap.getCompoundTag(String.format(InterModComms.STACK_VALUE_MAPPING_TEMPLATE, i)));
+                    
+                    if (decodedMapping != null && decodedMapping.size() > 0) {
+                        decodedEmcValueMapping.putAll(decodedMapping);
+                    }
                 }
             }
         }
         
         return decodedEmcValueMapping;
+    }
+    
+    public static Map<CustomWrappedStack, EmcValue> decodeEmcValueMapping(NBTTagCompound encodedEmcValueMapping) {
+
+        Map<CustomWrappedStack, EmcValue> decodedEmcValueMapping = new HashMap<CustomWrappedStack, EmcValue>();
+        
+        if (encodedEmcValueMapping.hasKey(InterModComms.STACK_TAG_NAME) && encodedEmcValueMapping.hasKey(InterModComms.EMC_VALUE_TAG_NAME)) {
+            CustomWrappedStack stack = NBTHelper.decodeStackFromNBT(encodedEmcValueMapping.getCompoundTag(InterModComms.STACK_TAG_NAME));
+            EmcValue emcValue = NBTHelper.decodeEmcValue(encodedEmcValueMapping.getCompoundTag(InterModComms.EMC_VALUE_TAG_NAME));
+            
+            if (stack != null && emcValue != null) {
+                if (stack.getWrappedStack() != null && emcValue.getValue() > 0) {
+                    decodedEmcValueMapping.put(stack, emcValue);
+                    return decodedEmcValueMapping;
+                }
+            }
+        }
+        
+        return null;
     }
 
     // TODO Link this method to some API stuffs
