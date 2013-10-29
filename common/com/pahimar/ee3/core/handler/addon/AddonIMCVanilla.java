@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
 import com.pahimar.ee3.lib.InterModComms;
 import com.pahimar.ee3.lib.Reference;
 
@@ -25,12 +25,12 @@ public class AddonIMCVanilla {
 
     public static void init() {
 
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 1), Arrays.asList(new ItemStack(Item.ingotIron, 20))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 2), Arrays.asList(new ItemStack(Item.ingotIron, 10))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.horseArmorIron, Arrays.asList(new ItemStack(Item.ingotIron, 6))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.horseArmorGold, Arrays.asList(new ItemStack(Item.ingotGold, 6))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, NBTHelper.encodeRecipeAsNBT(Item.horseArmorDiamond, Arrays.asList(new ItemStack(Item.diamond, 6))));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 1), Arrays.asList(new ItemStack(Item.ingotIron, 20))));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 2), Arrays.asList(new ItemStack(Item.ingotIron, 10))));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorIron, Arrays.asList(new ItemStack(Item.ingotIron, 6))));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorGold, Arrays.asList(new ItemStack(Item.ingotGold, 6))));
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorDiamond, Arrays.asList(new ItemStack(Item.diamond, 6))));
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.core.helper.NBTHelper;
+import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
@@ -62,8 +62,8 @@ public class GuiAlchemicalBag extends GuiContainer {
         if (mc.thePlayer != null) {
             for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
+                    if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                        GeneralNBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }
