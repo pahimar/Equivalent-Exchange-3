@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
@@ -48,6 +49,9 @@ public class EmcRegistry {
         stackMappingsBuilder.putAll(defaultValues);
         stackMappings = stackMappingsBuilder.build();
         
+        // Pass in the pre-auto assignment values gathered from IMC
+        Multimap<CustomWrappedStack, EmcValue> preAssignedValues = EmcValuesIMC.getPreAssignedValues();
+        
         // Attempt auto-assignment
         int passNumber = 0;
         Map<CustomWrappedStack, EmcValue> computedStackValues = computeStackMappings();
@@ -62,6 +66,9 @@ public class EmcRegistry {
             stackMappingsBuilder.putAll(computedStackValues);
             stackMappings = stackMappingsBuilder.build();
         }
+        
+        // Pass in the post-auto assignment values gathered from IMC
+        Multimap<CustomWrappedStack, EmcValue> postAssignedValues = EmcValuesIMC.getPreAssignedValues();
         
         // Handle the value mappings
         SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
@@ -266,6 +273,7 @@ public class EmcRegistry {
 
         lazyInit();
 
+        // FIXME Doesn't work properly, fix me!
         List<CustomWrappedStack> stacksInRange = new ArrayList<CustomWrappedStack>();
 
         SortedMap<EmcValue, List<CustomWrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);

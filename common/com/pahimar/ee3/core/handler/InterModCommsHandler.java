@@ -8,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.emc.EmcBlackList;
+import com.pahimar.ee3.emc.EmcValue;
+import com.pahimar.ee3.emc.EmcValuesIMC;
 import com.pahimar.ee3.item.CustomWrappedStack;
 import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.InterModComms;
@@ -96,11 +98,35 @@ public class InterModCommsHandler {
 
     private static void processPreAssignEmcValueMessage(IMCMessage imcMessage) {
 
-        // TODO Set an EMC Value via IMC
+        NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
+        
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMapping(encodedEmcValueMapping);
+        
+        if (emcValueMapping != null && emcValueMapping.size() > 0) {
+            for (CustomWrappedStack stack : emcValueMapping.keySet()) {
+                EmcValue emcValue = emcValueMapping.get(stack);
+                
+                if (stack.getWrappedStack() != null && emcValue != null && emcValue.getValue() > 0) {
+                    EmcValuesIMC.addPreAssignedValued(stack, emcValue);
+                }
+            }
+        }
     }
     
     private static void processPostAssignEmcValueMessage(IMCMessage imcMessage) {
 
-        // TODO Set an EMC Value via IMC
+        NBTTagCompound encodedEmcValueMapping = imcMessage.getNBTValue();
+        
+        Map<CustomWrappedStack, EmcValue> emcValueMapping = NBTHelper.decodeEmcValueMapping(encodedEmcValueMapping);
+        
+        if (emcValueMapping != null && emcValueMapping.size() > 0) {
+            for (CustomWrappedStack stack : emcValueMapping.keySet()) {
+                EmcValue emcValue = emcValueMapping.get(stack);
+                
+                if (stack.getWrappedStack() != null && emcValue != null && emcValue.getValue() > 0) {
+                    EmcValuesIMC.addPostAssignedValued(stack, emcValue);
+                }
+            }
+        }
     }
 }
