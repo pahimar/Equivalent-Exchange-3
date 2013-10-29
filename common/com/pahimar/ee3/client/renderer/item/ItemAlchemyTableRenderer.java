@@ -99,7 +99,7 @@ public class ItemAlchemyTableRenderer implements IItemRenderer {
         // Scale, Translate, Rotate
         GL11.glScalef(scale, scale, scale);
         GL11.glTranslatef(x, y, z);
-        GL11.glRotatef(-90F, 1F, 0, 0);
+        GL11.glRotatef(0F, 1F, 0, 0);
 
         // Bind texture
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMY_TABLE);
