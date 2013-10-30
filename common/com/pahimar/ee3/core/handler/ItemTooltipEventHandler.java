@@ -27,28 +27,30 @@ public class ItemTooltipEventHandler {
     @ForgeSubscribe
     public void handleItemTooltipEvent(ItemTooltipEvent event) {
 
-        CustomWrappedStack stack = new CustomWrappedStack(event.itemStack);
-        if (debug) {
-            event.toolTip.add(EnumChatFormatting.AQUA + "ID: " + event.itemStack.itemID + ", Meta: " + event.itemStack.getItemDamage());
-            if (stack.getWrappedStack() instanceof OreStack) {
-                event.toolTip.add(EnumChatFormatting.AQUA + "OreDictionary Item");
+        if (com.pahimar.ee3.configuration.ConfigurationSettings.ENABLE_DEBUG_TOOLTIP) {
+            CustomWrappedStack stack = new CustomWrappedStack(event.itemStack);
+            if (debug) {
+                event.toolTip.add(EnumChatFormatting.AQUA + "ID: " + event.itemStack.itemID + ", Meta: " + event.itemStack.getItemDamage());
+                if (stack.getWrappedStack() instanceof OreStack) {
+                    event.toolTip.add(EnumChatFormatting.AQUA + "OreDictionary Item");
+                }
+                if (RecipeRegistry.getRecipeMappings().containsKey(stack)) {
+                    event.toolTip.add(EnumChatFormatting.AQUA + "Made from a recipe");
+                }
             }
-            if (RecipeRegistry.getRecipeMappings().containsKey(stack)) {
-                event.toolTip.add(EnumChatFormatting.AQUA + "Made from a recipe");
-            }
-        }
         
-        if (EmcRegistry.hasEmcValue(stack)) {
-            EmcValue emcValue = EmcRegistry.getEmcValue(stack);
+            if (EmcRegistry.hasEmcValue(stack)) {
+                EmcValue emcValue = EmcRegistry.getEmcValue(stack);
 
-            event.toolTip.add("");
-            if (emcValue != null) {
-                event.toolTip.add("EMC: " + String.format("%.3f", stack.getStackSize() * emcValue.getValue()));
+                event.toolTip.add("");
+                if (emcValue != null) {
+                    event.toolTip.add("EMC: " + String.format("%.3f", stack.getStackSize() * emcValue.getValue()));
              
-                if (debug) {
-                    for (EmcType emcType : EmcType.TYPES) {
-                        if (emcValue.components[emcType.ordinal()] > 0) {
-                            event.toolTip.add("  * " + emcType + ": " + String.format("%.3f", stack.getStackSize() * emcValue.components[emcType.ordinal()]));
+                    if (debug) {
+                        for (EmcType emcType : EmcType.TYPES) {
+                            if (emcValue.components[emcType.ordinal()] > 0) {
+                                event.toolTip.add("  * " + emcType + ": " + String.format("%.3f", stack.getStackSize() * emcValue.components[emcType.ordinal()]));
+                            }
                         }
                     }
                 }

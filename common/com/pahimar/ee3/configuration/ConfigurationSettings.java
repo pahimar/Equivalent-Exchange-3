@@ -38,6 +38,12 @@ public class ConfigurationSettings {
     /*
      * Graphic config settings
      */
+    //Whether or not the (temporary test) item id + meta and EMC tooltip on items is enabled
+    public static boolean ENABLE_DEBUG_TOOLTIP;
+    public static final String ENABLE_DEBUG_TOOLTIP_CONFIGNAME = "debug_tooltip.enabled";
+    //TODO: If publicly released version, DISABLE ME!
+    public static final boolean ENABLE_DEBUG_TOOLTIP_DEFAULT = true;
+
     // Whether or not EE3 particle fx are enabled
     public static boolean ENABLE_PARTICLE_FX;
     public static final String ENABLE_PARTICLE_FX_CONFIGNAME = "particle_fx.enabled";
