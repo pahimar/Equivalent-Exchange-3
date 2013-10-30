@@ -17,7 +17,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `JAVA_HOME`.
-  * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_40` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
+  * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` (; then installation directory), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;%JAVA_HOME%\bin`, and click `Ok`.
 3. Download Apache Ant [here](http://ant.apache.org).
@@ -25,7 +25,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
   * Again, go to `Environment Variables` just like you did for the Java JDK.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `ANT_HOME`.
-  * For `Variable Value`, input `C:\Ant\apache-ant-1.9.2` (or your Ant directory\apache-ant-1.9.2).
+  * For `Variable Value`, input `C:\Program Files\Ant\apache-ant-1.9.2` (or where you unzipped it.)
   * Scroll down to `Path`, and double-click on it.
   * Append `;%ANT_HOME%\bin` exactly as shown to the end.
 4. Download and install Github [here](http://windows.github.com/) NOTE: This Github application is optional, you can use whatever you want, e.g. TortoiseGit.
@@ -57,7 +57,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Mac Prerequisites
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but it is often Java 6, which does not always work.)
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but not the JDK.)
 2. Apache Ant should already be installed on your computer.  To check, go into Terminal, and type `ant --version`.  It should return a version string.  If you get a "command not found" error, it's not installed.
 3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
 	* Create an account.
@@ -72,7 +72,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
 2. Inside `mcdev`, unzip the zip file. 
 	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc. 
-3. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it. 
+3. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev/forge`. On Linux you might have to `chmod +x install.sh` before you can execute it. 
 	* This will take some time, be patient. 
 
 #### Setup EE3
@@ -96,14 +96,14 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 ***
 
 4. Inside `Equivalent-Exchange-3`, create a new file called `environment.properties`.
-	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE: Paths must use forward slashes.  All of the variables are changeable for your setup.):
- 		* `base_location=C:/mcdev/`
+	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE: Paths must use forward slashes, even if on Windows!  All of the variables are changeable for your setup.):
+ 		* `base_location=C:/mcdev/` (Or wherever you have the source code)
  		* `source_location=${base_location}/source/Equivalent-Exchange-3`
  		* `mcp_location=${base_location}/forge/mcp`
  		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
  	* You may also edit the build.properties to change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (`forge_version` is only used when running `ant forge-install`)
  		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.1.934`
+ 		* `forge_version=9.11.1.938`
  		* `mod_version=pre2`
  		* `build_number=1`
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
