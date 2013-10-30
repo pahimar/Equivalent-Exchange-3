@@ -34,11 +34,14 @@ public class EncodedNBTHelper {
     public static final String TAG_NAME_RECIPE_INPUTS = "recipeInputs";
     public static final String TAG_NAME_RECIPE_INPUTS_LIST = "recipeInputsList";
     public static final String TAG_NAME_RECIPE_OUTPUT = "recipeOutput";
-    public static final String TAG_NAME_RECIPE = "recipe";
+    public static final String TAG_NAME_RECIPES = "recipes";
+    public static final String TAG_NAME_RECIPES_LIST = "recipesList";
     public static final String TAG_NAME_STACK_VALUE_MAP = "stackValueMap";
     
     public static final String TEMPLATE_EMCVALUE_COMPONENT_ENTRY = "componentOrdinal_%s";
-    public static final String TEMPLATE_RECIPE_INPUT_ENTRY = "recipeInput_%s";
+    public static final String TEMPLATE_RECIPE_LIST_ENTRY = "recipeListEntry_%s";
+    public static final String TEMPLATE_RECIPE_INPUT_LIST = "recipeInputsList_%s";
+    public static final String TEMPLATE_RECIPE_INPUT_ENTRY = "recipeInputsEntry_%s";
     public static final String TEMPLATE_STACK_VALUE_MAPPING_ENTRY = "stackValueMapping_%s";
     
     /*
@@ -119,11 +122,10 @@ public class EncodedNBTHelper {
      * @return
      */
     public static NBTTagCompound encodeStack(String tagCompoundName, Object object) {
-
-        NBTTagCompound encodedStack = new NBTTagCompound(tagCompoundName);
         
         if (CustomWrappedStack.canBeWrapped(object)) {
-
+            
+            NBTTagCompound encodedStack = new NBTTagCompound(tagCompoundName);
             CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
 
             if (wrappedStack.getWrappedStack() instanceof ItemStack) {
@@ -147,9 +149,12 @@ public class EncodedNBTHelper {
                 encodedStack.setString(Strings.NBT_ENCODED_ATTR_ENERGY_NAME, energyStack.energyName);
                 encodedStack.setShort(Strings.NBT_ENCODED_ATTR_SIZE, (short) wrappedStack.getStackSize());
             }
+            
+            return encodedStack;
         }
-
-        return encodedStack;
+        else {
+            return null;
+        }
     }
 
     /**
@@ -259,7 +264,10 @@ public class EncodedNBTHelper {
      */
     public static NBTTagCompound encodeRecipe(Object recipeOutput, List<?> recipeInputs) {
 
-        return encodeRecipe(TAG_NAME_RECIPE, recipeOutput, recipeInputs);
+        Map<Object, List<?>> recipeMap = new HashMap<Object, List<?>>();
+        recipeMap.put(recipeOutput, recipeInputs);
+        
+        return encodeRecipe(TAG_NAME_RECIPES, recipeMap);
     }
 
     /**
@@ -271,25 +279,58 @@ public class EncodedNBTHelper {
      */
     public static NBTTagCompound encodeRecipe(String tagCompoundName, Object recipeOutput, List<?> recipeInputs) {
 
-        NBTTagCompound encodedRecipe = new NBTTagCompound(tagCompoundName);
-
-        // TODO Work this into encodeRecipe(String, Map<Object, List<?>>)
+        Map<Object, List<?>> recipeMap = new HashMap<Object, List<?>>();
+        recipeMap.put(recipeOutput, recipeInputs);
         
-        return encodedRecipe;
+        return encodeRecipe(tagCompoundName, recipeMap);
     }
     
     public static NBTTagCompound encodeRecipe(Map<Object, List<?>> recipes) {
         
-        return encodeRecipe(TAG_NAME_RECIPE, recipes);
+        return encodeRecipe(TAG_NAME_RECIPES, recipes);
     }
     
-    public static NBTTagCompound encodeRecipe(String tagCompoundName, Map<Object, List<?>> recipes) {
+    public static NBTTagCompound encodeRecipe(String tagCompoundName, Map<Object, List<?>> recipeMap) {
         
         NBTTagCompound encodedRecipes = new NBTTagCompound(tagCompoundName);
-
-        // TODO Support for encoding multiple recipes into a single NBTTagCompound
         
-        return encodedRecipes;
+        int i = 0;
+        for (Object recipeOutput : recipeMap.keySet()) {
+            
+            boolean recipeMapEntryValid = true;
+            List<?> recipeInputs = recipeMap.get(recipeOutput);
+            
+            // Check to make sure that the given recipe map entry is valid (can be wrapped)
+            if (CustomWrappedStack.canBeWrapped(recipeOutput)) {
+                for (Object recipeInput : recipeInputs) {
+                    if (recipeMapEntryValid && !CustomWrappedStack.canBeWrapped(recipeInput)) {
+                        recipeMapEntryValid = false;
+                    }
+                }
+            }
+            else {
+                recipeMapEntryValid = false;
+            }
+            
+            // Add the proven valid recipe map entry to the encoding
+            if (recipeMapEntryValid) {
+                
+                NBTTagCompound recipeListEntry = new NBTTagCompound(String.format(TEMPLATE_RECIPE_LIST_ENTRY, i));
+                
+                recipeListEntry.setCompoundTag(TAG_NAME_RECIPE_OUTPUT, encodeStack(TAG_NAME_RECIPE_OUTPUT, recipeOutput));
+                recipeListEntry.setCompoundTag(TAG_NAME_RECIPE_INPUTS, encodeRecipeInputs(recipeInputs));
+                
+                encodedRecipes.setCompoundTag(String.format(TEMPLATE_RECIPE_LIST_ENTRY, i), recipeListEntry);
+                i++;
+            }
+        }
+        
+        if (encodedRecipes.hasNoTags()) {
+            return null;
+        }
+        else {
+            return encodedRecipes;
+        }
     }
 
     /**
