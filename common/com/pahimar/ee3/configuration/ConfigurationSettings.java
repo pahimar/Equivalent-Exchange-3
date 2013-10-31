@@ -42,7 +42,7 @@ public class ConfigurationSettings {
     public static boolean ENABLE_DEBUG_TOOLTIP;
     public static final String ENABLE_DEBUG_TOOLTIP_CONFIGNAME = "debug_tooltip.enabled";
     //TODO: If publicly released version, DISABLE ME!
-    public static final boolean ENABLE_DEBUG_TOOLTIP_DEFAULT = true;
+    public static final boolean ENABLE_DEBUG_TOOLTIP_DEFAULT = false;
 
     // Whether or not EE3 particle fx are enabled
     public static boolean ENABLE_PARTICLE_FX;
