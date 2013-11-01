@@ -6,24 +6,28 @@
 	<property file="environment.properties" prefix="environment" />
 	<property file="private.properties" prefix="private" />
 
-	<!-- Minecraft Forge -->
+	<!-- Minecraft Forge properties-->
 	<property name="minecraftforge_src_archive" value="minecraftforge-src-${build.minecraft_version}-${build.forge_version}.zip" />
 	<property name="minecraftforge_src_archive_location" value="http://files.minecraftforge.net/minecraftforge/${minecraftforge_src_archive}" />
 
+	<!-- Delete Forge -->
 	<target name="forge-clean">
 		<delete dir="${environment.base_location}/forge" />
 	</target>
 
+	<!-- Download Forge -->
 	<target name="forge-download">
 		<mkdir dir="${environment.base_location}/temp" />
 		<get src="${minecraftforge_src_archive_location}" dest="${environment.base_location}/temp/" verbose="true" usetimestamp="true" />
 	</target>
 
+	<!-- Uncompress Forge -->
 	<target name="forge-uncompress" depends="forge-download">
 		<unzip src="${environment.base_location}/temp/${minecraftforge_src_archive}" dest="${environment.base_location}" />
 		<delete dir="${environment.base_location}/temp" />
 	</target>
 
+	<!-- Install Forge -->
 	<target name="forge-install" depends="forge-uncompress">
 		<exec dir="${environment.base_location}/forge/" executable="cmd.exe" osfamily="windows" failonerror="true">
 			<arg value="/c" />
@@ -33,9 +37,11 @@
 			<arg line="install.sh" />
 		</exec>
 	</target>
-	
+
+	<!-- Delete and re-install Forge -->
 	<target name="forge-clean-install" depends="forge-clean, forge-install" />
 
+	<!-- Delete temp and MCP files -->
 	<target name="clean">
 		<delete dir="${environment.base_location}/temp" />
 		<delete file="${environment.mcp_location}/src/minecraft/mcmod.info" />
@@ -44,29 +50,34 @@
 		<delete dir="${environment.mcp_location}/reobf/minecraft" />
 	</target>
 
-	<target name="increment_build_number">
+	<!-- Increment the build number -->
+	<target name="increment-build-number">
 		<propertyfile file="build.properties">
 			<entry key="build_number" type="int" operation="+" default="1" />
 		</propertyfile>
 	</target>
 
+	<!-- Begin the compilation process -->
 	<target name="prep">
 		<copy todir="${environment.mcp_location}/src/minecraft">
 			<fileset dir="${environment.source_location}/common/" />
 		</copy>
 	</target>
 
+	<!-- Provide the version and build numbers -->
 	<target name="replace_tokens_build">
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
+	<!-- Provide the version, build, and fingerprint numbers -->
 	<target name="replace_tokens_release">
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
+	<!-- Compile the classes -->
 	<target name="recompile">
 		<exec dir="${environment.mcp_location}" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
@@ -76,6 +87,7 @@
 		</exec>
 	</target>
 
+	<!-- Reobfuscate the compiled classes -->
 	<target name="reobfuscate">
 		<exec dir="${environment.mcp_location}" executable="cmd" osfamily="windows">
 			<arg line="/c reobfuscate_srg.bat" />
@@ -85,6 +97,7 @@
 		</exec>
 	</target>
 
+	<!-- Pack the compiled classes into a jar -->
 	<target name="pack">
 		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
 		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
@@ -95,20 +108,16 @@
 		</jar>
 	</target>
 
-	<target name="sign_jar">
+	<!-- Sign the official release jar -->
+	<target name="sign-jar">
 		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
 	</target>
 
-	<target name="build" depends="clean, increment_build_number, prep, replace_tokens_build, recompile, reobfuscate">
-		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
+	<!-- Use for unofficial builds -->
+	<target name="build" depends="clean, increment-build-number, prep, replace_tokens_build, recompile, reobfuscate, pack, clean">
 	</target>
 
-	<target name="release" depends="clean, increment_build_number, prep, replace_tokens_release, recompile, reobfuscate">
-		<!-- Sign the finished jar -->
-		<antcall target="sign_jar" />
-
-		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
+	<!-- Use for official releases ONLY -->
+	<target name="release" depends="clean, increment-build-number, prep, replace_tokens_release, recompile, reobfuscate, pack, sign-jar, clean">
 	</target>
 </project>
