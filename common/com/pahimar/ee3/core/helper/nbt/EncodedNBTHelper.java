@@ -7,7 +7,6 @@ import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -29,24 +28,36 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class EncodedNBTHelper {
 
+    // Constants for encoding/decoding EmcValues as NBT
     public static final String TAG_NAME_EMCVALUE = "emcValue";
-    public static final String TAG_NAME_STACK = "stack";
-    public static final String TAG_NAME_RECIPE_INPUTS = "recipeInputs";
-    public static final String TAG_NAME_RECIPE_INPUTS_LIST = "recipeInputsList";
-    public static final String TAG_NAME_RECIPE_OUTPUT = "recipeOutput";
-    public static final String TAG_NAME_RECIPES = "recipes";
-    public static final String TAG_NAME_RECIPES_LIST = "recipesList";
-    public static final String TAG_NAME_STACK_VALUE_MAP = "stackValueMap";
-    
     public static final String TEMPLATE_EMCVALUE_COMPONENT_ENTRY = "componentOrdinal_%s";
+    
+    // Constants for encoding/decoding "stacks" as NBT
+    public static final String TAG_NAME_STACK = "stack";
+    
+    // Constants for encoding/decoding recipes as NBT
+    public static final String TAG_NAME_RECIPES = "recipes";
+    public static final String TAG_NAME_RECIPE_OUTPUT = "recipeOutput";
+    public static final String TAG_NAME_RECIPE_INPUTS = "recipeInputs";
     public static final String TEMPLATE_RECIPE_LIST_ENTRY = "recipeListEntry_%s";
-    public static final String TEMPLATE_RECIPE_INPUT_LIST = "recipeInputsList_%s";
-    public static final String TEMPLATE_RECIPE_INPUT_ENTRY = "recipeInputsEntry_%s";
-    public static final String TEMPLATE_STACK_VALUE_MAPPING_ENTRY = "stackValueMapping_%s";
+    public static final String TEMPLATE_RECIPE_INPUT_ENTRY = "recipeInput_%s";
+    
+    // Constants for encoding/decoding Object:EmcValue mappings as NBT
+    public static final String TAG_NAME_STACK_VALUE_MAP = "stackValueMap";
+    public static final String TEMPLATE_STACK_VALUE_MAP_ENTRY = "stackValueMapEntry_%s";
     
     /*
      * Begin NBT encode/decode helper methods for EmcValue
      */
+    
+    public static NBTTagCompound encodeEmcValue(float[] subValueArray) {
+        
+        if (subValueArray.length == EmcType.TYPES.length) {
+            return encodeEmcValue(new EmcValue(subValueArray));
+        }
+        
+        return null;
+    }
 
     /**
      * 
@@ -121,6 +132,7 @@ public class EncodedNBTHelper {
      * @param object
      * @return
      */
+    // TODO Come back and move related NBT constants from Strings to this class
     public static NBTTagCompound encodeStack(String tagCompoundName, Object object) {
         
         if (CustomWrappedStack.canBeWrapped(object)) {
@@ -162,6 +174,7 @@ public class EncodedNBTHelper {
      * @param nbtEncodedStack
      * @return
      */
+    // TODO Come back and move NBT related constants from Strings to this class
     public static CustomWrappedStack decodeStack(NBTTagCompound nbtEncodedStack) {
 
         CustomWrappedStack decodedStack = null;
@@ -226,13 +239,17 @@ public class EncodedNBTHelper {
     public static NBTTagCompound encodeRecipeInputs(String tagCompoundName, List<?> recipeInputs) {
 
         NBTTagCompound encodedRecipeInputs = new NBTTagCompound(tagCompoundName);
-        NBTTagList encodedRecipeInputsList = new NBTTagList(TAG_NAME_RECIPE_INPUTS_LIST);
         
         for (int i = 0; i < recipeInputs.size(); i++) {
-            encodedRecipeInputsList.appendTag(encodeStack(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), recipeInputs.get(i)));
+
+            // TODO Not sure if this should fail entirely in the event that an object in the provided list can't be encoded, investigate further
+            
+            Object recipeInput = recipeInputs.get(i);
+            
+            if (CustomWrappedStack.canBeWrapped(recipeInput)) {
+                encodedRecipeInputs.setCompoundTag(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), encodeStack(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), recipeInput));
+            }
         }
-        
-        encodedRecipeInputs.setTag(TAG_NAME_RECIPE_INPUTS_LIST, encodedRecipeInputsList);
 
         return encodedRecipeInputs;
     }
@@ -246,7 +263,21 @@ public class EncodedNBTHelper {
 
         List<CustomWrappedStack> decodedRecipeInputs = new ArrayList<CustomWrappedStack>();
 
-        // TODO Pick up here
+        if (encodedRecipeInputs.getName().equalsIgnoreCase(TAG_NAME_RECIPE_INPUTS)) {
+            
+            for (int i = 0; i < encodedRecipeInputs.getTags().size(); i++) {
+                
+                NBTTagCompound encodedRecipeInput = encodedRecipeInputs.getCompoundTag(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i));
+                
+                if (!encodedRecipeInput.hasNoTags()) {
+                    CustomWrappedStack decodedRecipeInput = decodeStack(encodedRecipeInput);
+                    
+                    if (decodedRecipeInput.getWrappedStack() != null) {
+                        decodedRecipeInputs.add(decodedRecipeInput);
+                    }
+                }
+            }
+        }
         
         return decodedRecipeInputs;
     }
