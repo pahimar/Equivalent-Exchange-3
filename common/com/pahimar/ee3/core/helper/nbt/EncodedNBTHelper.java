@@ -77,13 +77,17 @@ public class EncodedNBTHelper {
      */
     public static NBTTagCompound encodeEmcValue(String tagCompoundName, EmcValue emcValue) {
 
-        NBTTagCompound encodedEmcValue = new NBTTagCompound(tagCompoundName);
-        
-        for (EmcType emcType: EmcType.TYPES) {
-            encodedEmcValue.setFloat(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal()), emcValue.components[emcType.ordinal()]);
+        if (emcValue.getValue() > 0f) {
+            NBTTagCompound encodedEmcValue = new NBTTagCompound(tagCompoundName);
+            
+            for (EmcType emcType: EmcType.TYPES) {
+                encodedEmcValue.setFloat(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal()), emcValue.components[emcType.ordinal()]);
+            }
+    
+            return encodedEmcValue;
         }
-
-        return encodedEmcValue;
+        
+        return null;
     }
 
     /**
@@ -93,22 +97,27 @@ public class EncodedNBTHelper {
      */
     public static EmcValue decodeEmcValue(NBTTagCompound nbtEncodedEmcValue) {
 
-        float[] components = new float[EmcType.TYPES.length];
-
-        for (EmcType emcType : EmcType.TYPES) {
-            if (nbtEncodedEmcValue.hasKey(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal())) && emcType.ordinal() < components.length) {
-                components[emcType.ordinal()] = nbtEncodedEmcValue.getFloat(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal()));
+        if (nbtEncodedEmcValue != null) {
+            
+            float[] components = new float[EmcType.TYPES.length];
+    
+            for (EmcType emcType : EmcType.TYPES) {
+                if (nbtEncodedEmcValue.hasKey(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal())) && emcType.ordinal() < components.length) {
+                    components[emcType.ordinal()] = nbtEncodedEmcValue.getFloat(String.format(TEMPLATE_EMCVALUE_COMPONENT_ENTRY, emcType.ordinal()));
+                }
+            }
+            
+            EmcValue decodedEmcValue = new EmcValue(components);
+            
+            if (decodedEmcValue.getValue() > 0f) {
+                return decodedEmcValue;
+            }
+            else {
+                return null;
             }
         }
         
-        EmcValue decodedEmcValue = new EmcValue(components);
-        
-        if (decodedEmcValue.getValue() > 0f) {
-            return decodedEmcValue;
-        }
-        else {
-            return null;
-        }
+        return null;
     }
 
     
@@ -238,20 +247,36 @@ public class EncodedNBTHelper {
      */
     public static NBTTagCompound encodeRecipeInputs(String tagCompoundName, List<?> recipeInputs) {
 
-        NBTTagCompound encodedRecipeInputs = new NBTTagCompound(tagCompoundName);
-        
-        for (int i = 0; i < recipeInputs.size(); i++) {
+        // Check each element of the provided list to see if it can be wrapped as a CustomWrappedStack
+        boolean validList = true;
 
-            // TODO Not sure if this should fail entirely in the event that an object in the provided list can't be encoded, investigate further
+        if (recipeInputs != null && recipeInputs.size() > 0) {
             
-            Object recipeInput = recipeInputs.get(i);
-            
-            if (CustomWrappedStack.canBeWrapped(recipeInput)) {
-                encodedRecipeInputs.setCompoundTag(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), encodeStack(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), recipeInput));
+            for (Object recipeInput : recipeInputs) {
+                
+                if (validList && !CustomWrappedStack.canBeWrapped(recipeInput)) {
+                    validList = false;
+                }
             }
         }
-
-        return encodedRecipeInputs;
+        else {
+            
+            validList = false;
+        }
+        
+        // If all elements in the list can be wrapped, then proceed with encoding
+        if (validList) {
+            
+            NBTTagCompound encodedRecipeInputs = new NBTTagCompound(tagCompoundName);
+            
+            for (int i = 0; i < recipeInputs.size(); i++) {
+                encodedRecipeInputs.setCompoundTag(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), encodeStack(String.format(TEMPLATE_RECIPE_INPUT_ENTRY, i), recipeInputs.get(i)));
+            }
+            
+            return encodedRecipeInputs;
+        }
+        
+        return null;
     }
 
     /**
@@ -259,6 +284,7 @@ public class EncodedNBTHelper {
      * @param encodedRecipeInputs
      * @return
      */
+    // TODO We could be doing more validation on the decoding, and should something fail we should return null
     public static List<CustomWrappedStack> decodeRecipeInputs(NBTTagCompound encodedRecipeInputs) {
 
         List<CustomWrappedStack> decodedRecipeInputs = new ArrayList<CustomWrappedStack>();
