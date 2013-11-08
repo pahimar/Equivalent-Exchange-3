@@ -404,6 +404,8 @@ public class EncodedNBTHelper {
 
         Multimap<CustomWrappedStack, List<CustomWrappedStack>> decodedRecipes = HashMultimap.create();
 
+        // TODO Finish
+        
         return decodedRecipes;
     }
 
@@ -463,6 +465,8 @@ public class EncodedNBTHelper {
     public static NBTTagCompound encodeStackValueMap(String tagCompoundName, Map<CustomWrappedStack, EmcValue> stackValueMap) {
 
         NBTTagCompound encodedStackValueMap = new NBTTagCompound(tagCompoundName);
+        
+        // TODO Finish
 
         return encodedStackValueMap;
     }
@@ -475,6 +479,8 @@ public class EncodedNBTHelper {
     public static Map<CustomWrappedStack, EmcValue> decodeStackValueMap(NBTTagCompound encodedStackValueMap) {
         
         Map<CustomWrappedStack, EmcValue> decodedStackValueMap = new HashMap<CustomWrappedStack, EmcValue>();
+        
+        // TODO Finish
         
         return decodedStackValueMap;
     }
