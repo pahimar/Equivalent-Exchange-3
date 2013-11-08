@@ -284,7 +284,6 @@ public class EncodedNBTHelper {
      * @param encodedRecipeInputs
      * @return
      */
-    // TODO We could be doing more validation on the decoding, and should something fail we should return null
     public static List<CustomWrappedStack> decodeRecipeInputs(NBTTagCompound encodedRecipeInputs) {
 
         List<CustomWrappedStack> decodedRecipeInputs = new ArrayList<CustomWrappedStack>();
@@ -300,6 +299,9 @@ public class EncodedNBTHelper {
                     
                     if (decodedRecipeInput.getWrappedStack() != null) {
                         decodedRecipeInputs.add(decodedRecipeInput);
+                    }
+                    else {
+                        return null;
                     }
                 }
             }
@@ -379,6 +381,9 @@ public class EncodedNBTHelper {
                 
                 encodedRecipes.setCompoundTag(String.format(TEMPLATE_RECIPE_LIST_ENTRY, i), recipeListEntry);
                 i++;
+            }
+            else {
+                // Log the failure
             }
         }
         

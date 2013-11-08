@@ -25,6 +25,11 @@ public class OreStack implements Comparable<OreStack> {
                         this.oreName = oreDictionaryName;
                     }
                 }
+                
+                if (this.oreName == null) {
+                    this.oreId = -1;
+                    this.oreName = OreDictionary.getOreName(oreId);
+                }
             }
         }
         else {

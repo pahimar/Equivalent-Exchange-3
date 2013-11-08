@@ -1,6 +1,8 @@
 package com.pahimar.ee3.item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -9,6 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.lib.Strings;
 
 public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
@@ -82,6 +85,56 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             }
 
             energyStack = null;
+        }
+        else if (object instanceof String) {
+            
+            String objectString = (String) object;
+            
+            if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ORE_NAME + ":")) {
+                
+                String possibleOreName = objectString.substring(Strings.NBT_ENCODED_ATTR_ORE_NAME.length() + 1);
+                OreStack possibleOreStack = new OreStack(possibleOreName);
+                
+                if (possibleOreStack.oreId != -1) {
+                    
+                    itemStack = null;
+                    oreStack = possibleOreStack;
+                    energyStack = null;
+                    stackSize = possibleOreStack.stackSize;
+                }
+                else {
+                    
+                    itemStack = null;
+                    oreStack = null;
+                    energyStack = null;
+                    stackSize = -1;
+                }
+            }
+            else if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ENERGY_NAME + ":")) {
+                
+                String possibleEnergyName = objectString.substring(Strings.NBT_ENCODED_ATTR_ENERGY_NAME.length() + 1);
+                
+                if (possibleEnergyName.length() > 0) {
+                    
+                    itemStack = null;
+                    oreStack = null;
+                    energyStack = new EnergyStack(possibleEnergyName);
+                    stackSize = 1;
+                }
+                else {
+                    
+                    itemStack = null;
+                    oreStack = null;
+                    energyStack = null;
+                    stackSize = -1;
+                }
+            }
+            else {
+                itemStack = null;
+                oreStack = null;
+                energyStack = null;
+                stackSize = -1;
+            }
         }
         /*
          * Or we are given an EnergyStack to wrap
@@ -243,8 +296,44 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     }
 
     public static boolean canBeWrapped(Object object) {
-
-        return object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block;
+        
+        // Simple case
+        if (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block) {
+            return true;
+        }
+        // If it's a List, check to see if it could possibly be an OreStack
+        else if (object instanceof List) {
+            if (getOreStackFromList((List<?>) object) != null) {
+                return true;
+            }
+        }
+        // If it's a String, check to see if it could be the encoded name for a custom stack (OreStack, EnergyStack, etc)
+        else if (object instanceof String) {
+            
+            String objectString = (String) object;
+            
+            if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ORE_NAME + ":")) {
+                
+                String possibleOreName = objectString.substring(Strings.NBT_ENCODED_ATTR_ORE_NAME.length() + 1);
+                List<String> oreNames = Arrays.asList(OreDictionary.getOreNames());
+                
+                for (String oreName : oreNames) {
+                    if (oreName.equalsIgnoreCase(possibleOreName)) {
+                        return true;
+                    }
+                }
+            }
+            else if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ENERGY_NAME + ":")) {
+                
+                String possibleEnergyName = objectString.substring(Strings.NBT_ENCODED_ATTR_ENERGY_NAME.length() + 1);
+                
+                if (possibleEnergyName.length() > 0) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     @Override
@@ -307,7 +396,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         }
     }
 
-    private OreStack getOreStackFromList(ArrayList<?> objectList) {
+    private static OreStack getOreStackFromList(List<?> objectList) {
 
         for (Object listElement : objectList) {
             if (listElement instanceof ItemStack) {
