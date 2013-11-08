@@ -326,7 +326,7 @@ public class EncodedNBTHelper {
         Map<Object, List<?>> recipeMap = new HashMap<Object, List<?>>();
         recipeMap.put(recipeOutput, recipeInputs);
         
-        return encodeRecipe(TAG_NAME_RECIPES, recipeMap);
+        return encodeRecipes(TAG_NAME_RECIPES, recipeMap);
     }
 
     /**
@@ -341,15 +341,15 @@ public class EncodedNBTHelper {
         Map<Object, List<?>> recipeMap = new HashMap<Object, List<?>>();
         recipeMap.put(recipeOutput, recipeInputs);
         
-        return encodeRecipe(tagCompoundName, recipeMap);
+        return encodeRecipes(tagCompoundName, recipeMap);
     }
     
     public static NBTTagCompound encodeRecipe(Map<Object, List<?>> recipes) {
         
-        return encodeRecipe(TAG_NAME_RECIPES, recipes);
+        return encodeRecipes(TAG_NAME_RECIPES, recipes);
     }
     
-    public static NBTTagCompound encodeRecipe(String tagCompoundName, Map<Object, List<?>> recipeMap) {
+    public static NBTTagCompound encodeRecipes(String tagCompoundName, Map<Object, List<?>> recipeMap) {
         
         NBTTagCompound encodedRecipes = new NBTTagCompound(tagCompoundName);
         
@@ -383,16 +383,15 @@ public class EncodedNBTHelper {
                 i++;
             }
             else {
-                // Log the failure
+                // TODO Log the failure
             }
         }
         
         if (encodedRecipes.hasNoTags()) {
             return null;
         }
-        else {
-            return encodedRecipes;
-        }
+
+        return encodedRecipes;
     }
 
     /**
@@ -434,16 +433,10 @@ public class EncodedNBTHelper {
      */
     public static NBTTagCompound encodeStackValueMap(String tagCompoundName, Object object, EmcValue emcValue) {
 
-        NBTTagCompound encodedStackValueMap = new NBTTagCompound(tagCompoundName);
+        Map<Object, EmcValue> stackValueMap = new HashMap<Object, EmcValue>();
+        stackValueMap.put(object, emcValue);
 
-        if (CustomWrappedStack.canBeWrapped(object) && (emcValue != null && emcValue.getValue() > 0f)) {
-
-            Map<CustomWrappedStack, EmcValue> stackValueMap = new HashMap<CustomWrappedStack, EmcValue>();
-            stackValueMap.put(new CustomWrappedStack(object), emcValue);
-            encodedStackValueMap = encodeStackValueMap(tagCompoundName, stackValueMap);
-        }
-
-        return encodedStackValueMap;
+        return encodeStackValueMap(tagCompoundName, stackValueMap);
     }
 
     /**
@@ -451,7 +444,7 @@ public class EncodedNBTHelper {
      * @param stackValueMap
      * @return
      */
-    public static NBTTagCompound encodeStackValueMap(Map<CustomWrappedStack, EmcValue> stackValueMap) {
+    public static NBTTagCompound encodeStackValueMap(Map<?, EmcValue> stackValueMap) {
 
         return encodeStackValueMap(TAG_NAME_STACK_VALUE_MAP, stackValueMap);
     }
@@ -462,12 +455,44 @@ public class EncodedNBTHelper {
      * @param stackValueMap
      * @return
      */
-    public static NBTTagCompound encodeStackValueMap(String tagCompoundName, Map<CustomWrappedStack, EmcValue> stackValueMap) {
+    public static NBTTagCompound encodeStackValueMap(String tagCompoundName, Map<?, EmcValue> stackValueMap) {
 
         NBTTagCompound encodedStackValueMap = new NBTTagCompound(tagCompoundName);
         
-        // TODO Finish
-
+        int i = 0;
+        for (Object object : stackValueMap.keySet()) {
+            
+            // Check to see if the mapping is a valid CustomWrappedStack:EmcValue mapping
+            boolean validStackValueAssignment = true;
+            if (CustomWrappedStack.canBeWrapped(object)) {
+                if (stackValueMap.get(object) == null || stackValueMap.get(object).getValue() <= 0f) {
+                    validStackValueAssignment = false;
+                }
+            }
+            else {
+                validStackValueAssignment = false;
+            }
+            
+            // If it is a valid mapping, encode the mapping and add it to the NBTTagCompound
+            if (validStackValueAssignment) {
+                
+                NBTTagCompound stackValueMapEntry = new NBTTagCompound(String.format(TEMPLATE_STACK_VALUE_MAP_ENTRY, i));
+                
+                stackValueMapEntry.setCompoundTag(TAG_NAME_STACK, encodeStack(object));
+                stackValueMapEntry.setCompoundTag(TAG_NAME_EMCVALUE, encodeEmcValue(stackValueMap.get(object)));
+                
+                encodedStackValueMap.setCompoundTag(String.format(TEMPLATE_STACK_VALUE_MAP_ENTRY, i), stackValueMapEntry);
+                i++;
+            }
+            else {
+                // TODO Log the failure
+            }
+        }
+        
+        if (encodedStackValueMap.hasNoTags()) {
+            return null;
+        }
+        
         return encodedStackValueMap;
     }
     

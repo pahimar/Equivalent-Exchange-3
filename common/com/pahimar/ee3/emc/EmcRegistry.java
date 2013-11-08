@@ -39,6 +39,8 @@ public class EmcRegistry {
 
     private void init() {
 
+        // TODO Duplicate protection?
+        
         ImmutableSortedMap.Builder<CustomWrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         ImmutableSortedMap.Builder<EmcValue, List<CustomWrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
 

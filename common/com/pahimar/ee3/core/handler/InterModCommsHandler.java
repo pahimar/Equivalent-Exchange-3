@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 public class InterModCommsHandler {
 
     // TODO Revisit logging levels and the use of String.format for logging messages
+    // TODO Add more IMC functions (has-emc, get-emc) with return messages
     
     public static void processIMCMessages(IMCEvent event) {
 
