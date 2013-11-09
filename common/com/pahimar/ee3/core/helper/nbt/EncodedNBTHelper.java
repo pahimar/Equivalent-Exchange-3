@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -503,10 +504,44 @@ public class EncodedNBTHelper {
      */
     public static Map<CustomWrappedStack, EmcValue> decodeStackValueMap(NBTTagCompound encodedStackValueMap) {
         
-        Map<CustomWrappedStack, EmcValue> decodedStackValueMap = new HashMap<CustomWrappedStack, EmcValue>();
+        Map<CustomWrappedStack, EmcValue> decodedStackValueMap = new TreeMap<CustomWrappedStack, EmcValue>();
         
-        // TODO Finish
+        if (!encodedStackValueMap.hasNoTags()) {
+            if (encodedStackValueMap.getName().equalsIgnoreCase(TAG_NAME_STACK_VALUE_MAP)) {
+                for (int i = 0; i < encodedStackValueMap.getTags().size(); i++) {
+                    
+                    NBTTagCompound encodedStackValueMapEntry = encodedStackValueMap.getCompoundTag(String.format(TEMPLATE_STACK_VALUE_MAP_ENTRY, i));
+                    
+                    if (encodedStackValueMapEntry.hasKey(TAG_NAME_STACK) && encodedStackValueMapEntry.hasKey(TAG_NAME_EMCVALUE)) {
+                        CustomWrappedStack decodedStack = decodeStack(encodedStackValueMapEntry.getCompoundTag(TAG_NAME_STACK));
+                        EmcValue decodedEmcValue = decodeEmcValue(encodedStackValueMapEntry.getCompoundTag(TAG_NAME_EMCVALUE));
+                        
+                        if (decodedStack != null && decodedEmcValue != null) {
+                            if (!decodedStackValueMap.containsKey(decodedStack)) {
+                                decodedStackValueMap.put(decodedStack, decodedEmcValue);
+                            }
+                            else {
+                                // TODO Log the duplicate entry
+                            }
+                        }
+                    }
+                    else {
+                        // TODO Log the failure
+                    }
+                }
+            }
+            else {
+                // TODO Log the failure
+            }
+        }
+        else {
+            // TODO Log the failure
+        }
         
-        return decodedStackValueMap;
+        if (decodedStackValueMap.size() > 0) {
+            return decodedStackValueMap;
+        }
+        
+        return null;
     }
 }
