@@ -40,8 +40,8 @@ public class RecipesVanilla {
 
                     ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
                     
-                    if (!recipeInputs.isEmpty())
-                    {
+                    if (!recipeInputs.isEmpty()) {
+                        
                         vanillaRecipes.put(new CustomWrappedStack(recipeOutput), recipeInputs);
                     }
                 }
