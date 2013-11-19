@@ -85,7 +85,6 @@
 	</target>
 
 	<target name="build" depends="clean, increment_build_number, prep, recompile, reobfuscate">
-
 		<!-- Build the jar -->
 		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
 		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
@@ -100,7 +99,6 @@
 	</target>
 
 	<target name="release" depends="clean, increment_build_number, prep, replace_tokens, recompile, reobfuscate">
-
 		<!-- Build the jar -->
 		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
 		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
