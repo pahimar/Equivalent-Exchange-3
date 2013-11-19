@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <project name="Equivalent Exchange 3" default="build">
 
-	<!-- Public property files-->
+	<!-- Property files-->
 	<property file="build.properties" prefix="build" />
 	<property file="environment.properties" prefix="environment" />
 	<property file="private.properties" prefix="private" />
@@ -56,7 +56,12 @@
 		</copy>
 	</target>
 
-	<target name="replace_tokens">
+	<target name="replace_tokens_build">
+		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
+	</target>
+
+	<target name="replace_tokens_release">
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
 		<replace dir="${environment.mcp_location}/src/minecraft/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
@@ -80,34 +85,26 @@
 		</exec>
 	</target>
 
+	<target name="pack">
+		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
+		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="mcmod.info" />
+			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
+			<fileset dir="${environment.mcp_location}/reobf/minecraft" />
+			<fileset dir="${environment.source_location}/resources" excludes="**/xcf/**" />
+		</jar>
+	</target>
+
 	<target name="sign_jar">
 		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
 	</target>
 
-	<target name="build" depends="clean, increment_build_number, prep, recompile, reobfuscate">
-		<!-- Build the jar -->
-		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
-		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
-			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="mcmod.info" />
-			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
-			<fileset dir="${environment.mcp_location}/reobf/minecraft" />
-			<fileset dir="${environment.source_location}/resources" excludes="**/xcf/**" />
-		</jar>
-
+	<target name="build" depends="clean, increment_build_number, prep, replace_tokens_build, recompile, reobfuscate">
 		<!-- Clean up the MCP source now that we are done -->
 		<antcall target="clean" />
 	</target>
 
-	<target name="release" depends="clean, increment_build_number, prep, replace_tokens, recompile, reobfuscate">
-		<!-- Build the jar -->
-		<mkdir dir="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}" />
-		<jar destfile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar">
-			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="mcmod.info" />
-			<fileset dir="${environment.mcp_location}/src/minecraft/" includes="pack.mcmeta" />
-			<fileset dir="${environment.mcp_location}/reobf/minecraft" />
-			<fileset dir="${environment.source_location}/resources" excludes="**/xcf/**" />
-		</jar>
-
+	<target name="release" depends="clean, increment_build_number, prep, replace_tokens_release, recompile, reobfuscate">
 		<!-- Sign the finished jar -->
 		<antcall target="sign_jar" />
 
