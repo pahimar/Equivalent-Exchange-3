@@ -39,7 +39,11 @@ public class RecipesVanilla {
                 if (recipeOutput != null) {
 
                     ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
-                    vanillaRecipes.put(new CustomWrappedStack(recipeOutput), recipeInputs);
+                    
+                    if (!recipeInputs.isEmpty())
+                    {
+                        vanillaRecipes.put(new CustomWrappedStack(recipeOutput), recipeInputs);
+                    }
                 }
             }
         }
