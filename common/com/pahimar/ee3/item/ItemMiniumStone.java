@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 
@@ -39,7 +39,7 @@ public class ItemMiniumStone extends ItemEE
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack) {
 
-        return GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
+        return ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
     }
 
     @Override
@@ -85,14 +85,14 @@ public class ItemMiniumStone extends ItemEE
     @Override
     public void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack) {
 
-        GeneralNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN, true);
+        ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 
     @Override
     public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack) {
 
-        GeneralNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
+        ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
 

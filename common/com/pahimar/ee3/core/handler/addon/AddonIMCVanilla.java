@@ -1,17 +1,5 @@
 package com.pahimar.ee3.core.handler.addon;
 
-import java.util.Arrays;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
-import com.pahimar.ee3.lib.InterModComms;
-import com.pahimar.ee3.lib.Reference;
-
-import cpw.mods.fml.common.event.FMLInterModComms;
-
 /**
  * Equivalent-Exchange-3
  * 
@@ -25,12 +13,8 @@ public class AddonIMCVanilla {
 
     public static void init() {
 
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.bucketWater, Arrays.asList(Item.bucketEmpty, Block.waterStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.bucketLava, Arrays.asList(Item.bucketEmpty, Block.lavaStill)));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 1), Arrays.asList(new ItemStack(Item.ingotIron, 20))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(new ItemStack(Block.anvil, 1, 2), Arrays.asList(new ItemStack(Item.ingotIron, 10))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorIron, Arrays.asList(new ItemStack(Item.ingotIron, 6))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorGold, Arrays.asList(new ItemStack(Item.ingotGold, 6))));
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, GeneralNBTHelper.encodeRecipeAsNBT(Item.horseArmorDiamond, Arrays.asList(new ItemStack(Item.diamond, 6))));
+        // TODO Once the API is more solid, add examples here for proper IMC calls
+        // FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, "");
+
     }
 }

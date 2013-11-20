@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
+import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
@@ -66,8 +66,8 @@ public class GuiPortableCrafting extends GuiContainer {
         if (mc.thePlayer != null) {
             for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
                 if (itemStack != null) {
-                    if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
-                        GeneralNBTHelper.removeTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
+                    if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN)) {
+                        ItemStackNBTHelper.removeTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
                     }
                 }
             }

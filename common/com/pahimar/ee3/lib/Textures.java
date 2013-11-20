@@ -36,16 +36,12 @@ public class Textures {
     public static final ResourceLocation GUI_PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
     public static final ResourceLocation GUI_PORTABLE_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "portableTransmutation.png");
     public static final ResourceLocation GUI_GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
-    public static final ResourceLocation GUI_ALCHEMY_TABLE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemyTable.png");
-    public static final ResourceLocation GUI_RENDERING_TANK = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "renderingTank.png");
 
     // Model textures
     public static final ResourceLocation MODEL_CALCINATOR = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "calcinator.png");
     public static final ResourceLocation MODEL_ALUDEL = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "aludel.png");
     public static final ResourceLocation MODEL_ALCHEMICAL_CHEST = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "alchemicalChest.png");
     public static final ResourceLocation MODEL_GLASS_BELL = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "aludel.png");
-    public static final ResourceLocation MODEL_ALCHEMY_TABLE = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "alchemyTable.png");
-    public static final ResourceLocation MODEL_RENDERING_TANK = ResourceLocationHelper.getResourceLocation(MODEL_SHEET_LOCATION + "renderingTank.png");
 
     // Effect textures
     public static final ResourceLocation EFFECT_WORLD_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(EFFECTS_LOCATION + "noise.png");

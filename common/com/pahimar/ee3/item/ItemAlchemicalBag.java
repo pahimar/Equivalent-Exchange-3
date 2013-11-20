@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
+import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
@@ -55,7 +55,7 @@ public class ItemAlchemicalBag extends ItemEE {
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
         if (!world.isRemote) {
-            GeneralNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
+            ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
             entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 
@@ -79,7 +79,7 @@ public class ItemAlchemicalBag extends ItemEE {
     public Icon getIcon(ItemStack itemStack, int renderPass) {
 
         // If the bag is open
-        if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+        if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
             if (renderPass != 1)
                 return icons[0];
             else

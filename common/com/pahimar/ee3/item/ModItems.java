@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.lib.ItemIds;
+import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -19,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModItems {
 
-    /* Mod item instances */
+    // Mod item instances
     public static Item miniumShard;
     public static Item inertStone;
     public static Item miniumStone;
@@ -30,7 +31,7 @@ public class ModItems {
 
     public static void init() {
 
-        /* Initialize each mod item individually */
+        // Initialize each mod item individually
         miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
         inertStone = new ItemInertStone(ItemIds.INERT_STONE);
         miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
@@ -39,14 +40,22 @@ public class ModItems {
         alchemicalBag = new ItemAlchemicalBag(ItemIds.ALCHEMICAL_BAG);
         alchemicalChalk = new ItemAlchemicalChalk(ItemIds.ALCHEMICAL_CHALK);
 
+        // Set container items
         miniumStone.setContainerItem(miniumStone);
         philStone.setContainerItem(philStone);
-
-        // TODO Register items with the GameRegistry
-
+        
+        // Register items with the GameRegistry
+        GameRegistry.registerItem(miniumShard, Strings.MINIUM_SHARD_NAME);
+        GameRegistry.registerItem(inertStone, Strings.INERT_STONE_NAME);
+        GameRegistry.registerItem(miniumStone, Strings.MINIUM_STONE_NAME);
+        GameRegistry.registerItem(philStone, Strings.PHILOSOPHERS_STONE_NAME);
+        GameRegistry.registerItem(alchemicalDust, Strings.ALCHEMICAL_DUST_NAME);
+        GameRegistry.registerItem(alchemicalBag, Strings.ALCHEMICAL_BAG_NAME);
+        GameRegistry.registerItem(alchemicalChalk, Strings.ALCHEMICAL_CHALK_NAME);
+        
+        // Add recipes for items
         GameRegistry.addRecipe(new ItemStack(inertStone), new Object[] { "sis", "igi", "sis", Character.valueOf('s'), Block.stone, Character.valueOf('i'), Item.ingotIron, Character.valueOf('g'), Item.ingotGold });
-
         GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[] { "sss", "sis", "sss", Character.valueOf('s'), miniumShard, Character.valueOf('i'), inertStone });
-
+        GameRegistry.addShapelessRecipe(new ItemStack(alchemicalChalk), new ItemStack(Item.clay), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15));
     }
 }

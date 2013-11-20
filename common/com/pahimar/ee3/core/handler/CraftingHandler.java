@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
+import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 import cpw.mods.fml.common.ICraftingHandler;
@@ -50,7 +50,7 @@ public class CraftingHandler implements ICraftingHandler {
 
         for (ItemStack itemStack : player.inventory.mainInventory) {
             if (itemStack != null) {
-                if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+                if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                     openStone = itemStack;
                 }
             }
@@ -61,7 +61,7 @@ public class CraftingHandler implements ICraftingHandler {
             for (int i = 0; i < craftMatrix.getSizeInventory(); i++) {
                 itemStack = craftMatrix.getStackInSlot(i);
                 if (itemStack != null) {
-                    if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
+                    if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN)) {
                         openStone = itemStack;
                     }
                 }

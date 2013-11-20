@@ -11,17 +11,13 @@ import net.minecraftforge.common.MinecraftForge;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
-import com.pahimar.ee3.client.renderer.item.ItemAlchemyTableRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
-import com.pahimar.ee3.client.renderer.item.ItemRenderingTankRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemyTableRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityRenderingTankRenderer;
 import com.pahimar.ee3.core.handler.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handler.KeyBindingHandler;
 import com.pahimar.ee3.core.handler.TransmutationTargetOverlayHandler;
@@ -36,12 +32,10 @@ import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
-import com.pahimar.ee3.tileentity.TileAlchemyTable;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileEE;
 import com.pahimar.ee3.tileentity.TileGlassBell;
-import com.pahimar.ee3.tileentity.TileRenderingTank;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -100,15 +94,11 @@ public class ClientProxy extends CommonProxy {
         RenderIds.aludelRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.glassBell = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.alchemyTable = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.renderingTank = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMY_TABLE, new ItemAlchemyTableRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.RENDERING_TANK, new ItemRenderingTankRenderer());
     }
 
     @Override
@@ -120,8 +110,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemyTable.class, new TileEntityAlchemyTableRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileRenderingTank.class, new TileEntityRenderingTankRenderer());
     }
 
     @Override

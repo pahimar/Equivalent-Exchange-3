@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.core.helper.nbt.GeneralNBTHelper;
+import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -56,8 +56,8 @@ public class ContainerAlchemicalBag extends Container {
             InventoryPlayer invPlayer = player.inventory;
             for (ItemStack itemStack : invPlayer.mainInventory) {
                 if (itemStack != null) {
-                    if (GeneralNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
-                        GeneralNBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
+                    if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN)) {
+                        ItemStackNBTHelper.removeTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }

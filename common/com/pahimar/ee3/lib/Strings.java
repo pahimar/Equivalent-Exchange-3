@@ -62,10 +62,6 @@ public class Strings {
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String GLASS_BELL_NAME = "glassBell";
-    public static final String RED_WATER_STILL_NAME = "redWaterStill";
-    public static final String RED_WATER_FLOWING_NAME = "redWaterFlowing";
-    public static final String ALCHEMY_TABLE_NAME = "alchemyTable";
-    public static final String RENDERING_TANK_NAME = "renderingTank";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";
@@ -81,8 +77,6 @@ public class Strings {
     public static final String TE_ALUDEL_NAME = "tileAludel";
     public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
     public static final String TE_GLASS_BELL_NAME = "tileGlassBell";
-    public static final String TE_ALCHEMY_TABLE_NAME = "tileAlchemyTable";
-    public static final String TE_RENDERING_TANK_NAME = "tileRenderingTank";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
@@ -98,6 +92,4 @@ public class Strings {
     public static final String CONTAINER_GLASS_BELL_NAME = "container.ee3:" + GLASS_BELL_NAME;
     public static final String CONTAINER_INVENTORY = "container.inventory";
     public static final String CONTAINER_PORTABLE_CRAFTING = "container.crafting";
-    public static final String CONTAINER_ALCHEMY_TABLE = "container.ee3:" + ALCHEMY_TABLE_NAME;
-    public static final String CONTAINER_RENDERING_TANK = "container.ee3:" + RENDERING_TANK_NAME;
 }
