@@ -27,7 +27,9 @@ import com.google.gson.JsonSyntaxException;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
-    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue().new EmcValueJsonSerializer()).create();
+    // Gson serializer for serializing to/deserializing from json
+    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue().new EmcValueJsonSerializer()).create();
+    
     public final float[] components;
 
     public EmcValue() {
@@ -171,7 +173,7 @@ public class EmcValue implements Comparable<EmcValue> {
     public static EmcValue createFromJson(String jsonEmcValue) {
         
         try {
-            return (EmcValue) gson.fromJson(jsonEmcValue, EmcValue.class);
+            return (EmcValue) gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
         }
         catch (JsonSyntaxException exception) {
             // TODO Log something regarding the failed parse
@@ -186,7 +188,7 @@ public class EmcValue implements Comparable<EmcValue> {
      * @return Json serialized String of this EmcValue
      */
     public String toJson() {
-        return gson.toJson(this);
+        return gsonSerializer.toJson(this);
     }
 
     private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents) {

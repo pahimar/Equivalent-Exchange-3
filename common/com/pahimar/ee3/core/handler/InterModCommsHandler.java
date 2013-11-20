@@ -1,6 +1,5 @@
 package com.pahimar.ee3.core.handler;
 
-import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.lib.InterModComms;
 
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
@@ -8,33 +7,34 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
 public class InterModCommsHandler {
 
-    // TODO Revisit logging levels and the use of String.format for logging messages
-    // TODO Add more IMC functions (has-emc, get-emc) with return messages
+    // TODO Logging
     
     public static void processIMCMessages(IMCEvent event) {
-
+        
         for (IMCMessage imcMessage : event.getMessages()) {
 
-            if (imcMessage.getMessageType() == String.class) {
+            String requestedOperation = imcMessage.key;
 
-                if (imcMessage.key.equalsIgnoreCase(InterModComms.ADD_RECIPE)) {
-                    processAddRecipeMessage(imcMessage);
-                }
-                else if (imcMessage.key.equalsIgnoreCase(InterModComms.ADD_BLACKLIST_ENTRY)) {
-                    processAddBlackListMessage(imcMessage);
-                }
-                else if (imcMessage.key.equalsIgnoreCase(InterModComms.REMOVE_BLACKLIST_ENTRY)) {
-                    processRemoveBlackListMessage(imcMessage);
-                }
-                else if (imcMessage.key.equalsIgnoreCase(InterModComms.ASSIGN_EMC_VALUE_PRE)) {
-                    processPreAssignEmcValueMessage(imcMessage);
-                }
-                else if (imcMessage.key.equalsIgnoreCase(InterModComms.ASSIGN_EMC_VALUE_POST)) {
-                    processPostAssignEmcValueMessage(imcMessage);
-                }
+            if (requestedOperation.equalsIgnoreCase(InterModComms.RECIPE_ADD)) {
+                processAddRecipeMessage(imcMessage);
             }
-            else {
-                LogHelper.severe("[IMC] Mod '" + imcMessage.getSender() + "' sent a message with key '" + imcMessage.key + "' with an invalid argument type (received " + imcMessage.getMessageType().getSimpleName() + ", expected String)");
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.BLACKLIST_ADD_ENTRY)) {
+                processAddBlackListMessage(imcMessage);
+            }
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.BLACKLIST_REMOVE_ENTRY)) {
+                processRemoveBlackListMessage(imcMessage);
+            }
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_ASSIGN_VALUE_PRE)) {
+                processPreAssignEmcValueMessage(imcMessage);
+            }
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_ASSIGN_VALUE_POST)) {
+                processPostAssignEmcValueMessage(imcMessage);
+            }
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_HAS_VALUE)) {
+                processHasEmcValueMessage(imcMessage);
+            }
+            else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_GET_VALUE)) {
+                processGetEmcValueMessage(imcMessage);
             }
         }
     }
@@ -61,6 +61,16 @@ public class InterModCommsHandler {
     
     private static void processPostAssignEmcValueMessage(IMCMessage imcMessage) {
 
+        // TODO
+    }
+    
+    private static void processHasEmcValueMessage(IMCMessage imcMessage) {
+
+        // TODO
+    }
+    
+    private static void processGetEmcValueMessage(IMCMessage imcMessage) {
+        
         // TODO
     }
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.gson.Gson;
@@ -25,12 +27,14 @@ import com.pahimar.ee3.lib.Strings;
 
 public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
-    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(CustomWrappedStack.class, new CustomWrappedStack(null).new CustomWrappedStackJsonSerializer()).create();
+    // Gson serializer for serializing to/deserializing from json
+    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(CustomWrappedStack.class, new CustomWrappedStack(null).new CustomWrappedStackJsonSerializer()).create();
 
     private int stackSize;
     private final ItemStack itemStack;
     private final OreStack oreStack;
     private final EnergyStack energyStack;
+    private final FluidStack fluidStack;
 
     /**
      * Creates a new CustomWrappedStack object which wraps the given input.
@@ -54,6 +58,9 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         else if (object instanceof Block) {
             object = new ItemStack((Block) object);
         }
+        else if (object instanceof Fluid) {
+            object = new FluidStack((Fluid) object, 1);
+        }
 
         /*
          * We are given an ItemStack to wrap
@@ -65,6 +72,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             this.itemStack = itemStack.copy();
             oreStack = null;
             energyStack = null;
+            fluidStack = null;
             stackSize = this.itemStack.stackSize;
             this.itemStack.stackSize = 1;
         }
@@ -76,6 +84,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             itemStack = null;
             oreStack = (OreStack) object;
             energyStack = null;
+            fluidStack = null;
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
         }
@@ -97,6 +106,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             }
 
             energyStack = null;
+            fluidStack = null;
         }
         else if (object instanceof String) {
 
@@ -112,6 +122,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                     itemStack = null;
                     oreStack = possibleOreStack;
                     energyStack = null;
+                    fluidStack = null;
                     stackSize = possibleOreStack.stackSize;
                 }
                 else {
@@ -119,6 +130,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                     itemStack = null;
                     oreStack = null;
                     energyStack = null;
+                    fluidStack = null;
                     stackSize = -1;
                 }
             }
@@ -131,6 +143,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                     itemStack = null;
                     oreStack = null;
                     energyStack = new EnergyStack(possibleEnergyName);
+                    fluidStack = null;
                     stackSize = 1;
                 }
                 else {
@@ -138,6 +151,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                     itemStack = null;
                     oreStack = null;
                     energyStack = null;
+                    fluidStack = null;
                     stackSize = -1;
                 }
             }
@@ -145,6 +159,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                 itemStack = null;
                 oreStack = null;
                 energyStack = null;
+                fluidStack = null;
                 stackSize = -1;
             }
         }
@@ -155,8 +170,17 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             itemStack = null;
             oreStack = null;
             energyStack = (EnergyStack) object;
+            fluidStack = null;
             stackSize = energyStack.stackSize;
             energyStack.stackSize = 1;
+        }
+        else if (object instanceof FluidStack) {
+            itemStack = null;
+            oreStack = null;
+            energyStack = null;
+            fluidStack = (FluidStack) object;
+            stackSize = fluidStack.amount;
+            fluidStack.amount = 1;
         }
         else if (object instanceof CustomWrappedStack) {
             CustomWrappedStack wrappedStack = (CustomWrappedStack) object;
@@ -164,6 +188,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             itemStack = wrappedStack.itemStack;
             oreStack = wrappedStack.oreStack;
             energyStack = wrappedStack.energyStack;
+            fluidStack = wrappedStack.fluidStack;
             stackSize = wrappedStack.stackSize;
         }
         /*
@@ -173,6 +198,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             itemStack = null;
             oreStack = null;
             energyStack = null;
+            fluidStack = null;
             stackSize = -1;
         }
     }
@@ -214,6 +240,8 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             return oreStack;
         else if (energyStack != null)
             return energyStack;
+        else if (fluidStack != null)
+            return fluidStack;
 
         return null;
     }
@@ -259,25 +287,11 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
         else if (energyStack != null) {
             stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyStack.energyName));
         }
+        else if (fluidStack != null) {
+            stringBuilder.append(String.format("%dxfluidStack.%s", stackSize, fluidStack.getFluid().getName()));
+        }
         else {
             stringBuilder.append("null");
-        }
-
-        return stringBuilder.toString();
-    }
-
-    public String encodeAsPropertyKey() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (itemStack != null) {
-            stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
-        }
-        else if (oreStack != null) {
-            stringBuilder.append(String.format("%dxoreDictionary.%s", stackSize, oreStack.oreName));
-        }
-        else if (energyStack != null) {
-            stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyStack.energyName));
         }
 
         return stringBuilder.toString();
@@ -304,6 +318,9 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
                 hashCode = 37 * hashCode + energyStack.energyName.hashCode();
             }
         }
+        else if (fluidStack != null) {
+            // TODO FluidStack hash
+        }
 
         return hashCode;
     }
@@ -311,7 +328,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     public static boolean canBeWrapped(Object object) {
 
         // Simple case
-        if (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof Item || object instanceof Block) {
+        if (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof FluidStack || object instanceof Item || object instanceof Block || object instanceof Fluid) {
             return true;
         }
         // If it's a List, check to see if it could possibly be an OreStack
@@ -321,6 +338,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             }
         }
         // If it's a String, check to see if it could be the encoded name for a custom stack (OreStack, EnergyStack, etc)
+        // TODO Revisit this now that we aren't using NBTTagCompounds to encode objects
         else if (object instanceof String) {
 
             String objectString = (String) object;
@@ -401,6 +419,10 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             else
                 return 1;
         }
+        else if (this.getWrappedStack() instanceof FluidStack) {
+            // TODO Finish this
+            return 0;
+        }
         else {
             if (customWrappedStack.getWrappedStack() != null)
                 return -1;
@@ -436,12 +458,12 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     public static CustomWrappedStack createFromJson(String jsonCustomWrappedStack) {
 
         try {
-            return (CustomWrappedStack) gson.fromJson(jsonCustomWrappedStack, CustomWrappedStack.class);
+            return (CustomWrappedStack) gsonSerializer.fromJson(jsonCustomWrappedStack, CustomWrappedStack.class);
         }
         catch (JsonSyntaxException exception) {
             // TODO Log something regarding the failed parse
         }
-        
+
         return null;
     }
 
@@ -452,7 +474,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
      */
     public String toJson() {
 
-        return gson.toJson(this);
+        return gsonSerializer.toJson(this);
     }
 
     public class CustomWrappedStackJsonSerializer
