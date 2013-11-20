@@ -1,13 +1,20 @@
 package com.pahimar.ee3.emc;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.api.EmcValueSerializer;
 
 /**
  * Equivalent-Exchange-3
@@ -20,7 +27,7 @@ import com.pahimar.ee3.api.EmcValueSerializer;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
-    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValueSerializer()).create();
+    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue().new EmcValueJsonSerializer()).create();
     public final float[] components;
 
     public EmcValue() {
@@ -223,6 +230,48 @@ public class EmcValue implements Comparable<EmcValue> {
         }
         else {
             throw new ArrayIndexOutOfBoundsException();
+        }
+    }
+    
+    public class EmcValueJsonSerializer implements JsonDeserializer<EmcValue>, JsonSerializer<EmcValue> {
+        
+        @Override
+        public JsonElement serialize(EmcValue emcValue, Type type, JsonSerializationContext context) {
+
+            JsonObject jsonEmcValue = new JsonObject();
+            
+            for (EmcType emcType : EmcType.TYPES) {
+                jsonEmcValue.addProperty(emcType.toString(), emcValue.components[emcType.ordinal()]);
+            }
+            
+            return jsonEmcValue;
+        }
+
+        @Override
+        public EmcValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+
+            float[] emcValueComponents = new float[EmcType.TYPES.length];
+            JsonObject jsonEmcValue = (JsonObject) jsonElement; 
+            
+            for (EmcType emcType : EmcType.TYPES) {
+                if ((jsonEmcValue.get(emcType.toString()) != null) && (jsonEmcValue.get(emcType.toString()).isJsonPrimitive())) {
+                    try {
+                        emcValueComponents[emcType.ordinal()] = jsonEmcValue.get(emcType.toString()).getAsFloat();
+                    }
+                    catch (UnsupportedOperationException exception) {
+                        // TODO Better logging/handling of the exception
+                        exception.printStackTrace(System.err);
+                    }
+                }
+            }
+            
+            EmcValue emcValue = new EmcValue(emcValueComponents);
+            
+            if (emcValue.getValue() > 0f) {
+                return emcValue;
+            }
+            
+            return null;
         }
     }
 }
