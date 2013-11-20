@@ -33,6 +33,7 @@ public class GeneralConfiguration {
             ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_DEFAULT).getString();
 
             /* Graphics */
+            ConfigurationSettings.ENABLE_DEBUG_TOOLTIP = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_DEBUG_TOOLTIP_CONFIGNAME, ConfigurationSettings.ENABLE_DEBUG_TOOLTIP_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_DEBUG_TOOLTIP_DEFAULT);
             ConfigurationSettings.ENABLE_PARTICLE_FX = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
             ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT);
             ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT).getInt(ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT);
