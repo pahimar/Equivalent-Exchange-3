@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.pahimar.ee3.api.EmcValueSerializer;
+
 /**
  * Equivalent-Exchange-3
  * 
@@ -15,6 +20,7 @@ import java.util.List;
  */
 public class EmcValue implements Comparable<EmcValue> {
 
+    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValueSerializer()).create();
     public final float[] components;
 
     public EmcValue() {
@@ -147,6 +153,33 @@ public class EmcValue implements Comparable<EmcValue> {
         else {
             return -1;
         }
+    }
+    
+    /**
+     * Deserializes an EmcValue object from the given serialized json String
+     * 
+     * @param jsonEmcValue Json encoded String representing a EmcValue object
+     * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
+     */
+    public static EmcValue createFromJson(String jsonEmcValue) {
+        
+        try {
+            return (EmcValue) gson.fromJson(jsonEmcValue, EmcValue.class);
+        }
+        catch (JsonSyntaxException exception) {
+            // TODO Log something regarding the failed parse
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Returns this EmcValue as a json serialized String
+     * 
+     * @return Json serialized String of this EmcValue
+     */
+    public String toJson() {
+        return gson.toJson(this);
     }
 
     private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents) {
