@@ -11,10 +11,7 @@ package com.pahimar.ee3.lib;
  */
 public class Reference {
 
-    /* Debug Mode On-Off */
-    public static final boolean DEBUG_MODE = false;
-
-    /* General Mod related constants */
+    // General Mod related constants
     public static final String MOD_ID = "EE3";
     public static final String MOD_NAME = "Equivalent Exchange 3";
     public static final String VERSION_NUMBER = "@VERSION@ (build @BUILD_NUMBER@)";
@@ -27,6 +24,9 @@ public class Reference {
     public static final String CLIENT_PROXY_CLASS = "com.pahimar.ee3.core.proxy.ClientProxy";
     public static final int VERSION_CHECK_ATTEMPTS = 3;
 
-    public static final int ORE_DICTIONARY_NOT_FOUND = -1;
+    // Comparator stuff
+    public static final int SMALLER_THAN = -1;
+    public static final int EQUAL_TO = 0;
+    public static final int LARGER_THAN = 1;
 
 }

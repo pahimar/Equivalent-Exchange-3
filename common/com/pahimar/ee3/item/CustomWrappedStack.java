@@ -1,8 +1,6 @@
 package com.pahimar.ee3.item;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -13,28 +11,21 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Strings;
 
 public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
     // Gson serializer for serializing to/deserializing from json
-    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(CustomWrappedStack.class, new CustomWrappedStack(null).new CustomWrappedStackJsonSerializer()).create();
+    private static final Gson gsonSerializer = new Gson();
 
     private int stackSize;
     private final ItemStack itemStack;
     private final OreStack oreStack;
     private final EnergyStack energyStack;
     private final FluidStack fluidStack;
+
+    private static final int ORE_DICTIONARY_NOT_FOUND = -1;
 
     /**
      * Creates a new CustomWrappedStack object which wraps the given input.
@@ -107,61 +98,6 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
             energyStack = null;
             fluidStack = null;
-        }
-        else if (object instanceof String) {
-
-            String objectString = (String) object;
-
-            if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ORE_NAME + ":")) {
-
-                String possibleOreName = objectString.substring(Strings.NBT_ENCODED_ATTR_ORE_NAME.length() + 1);
-                OreStack possibleOreStack = new OreStack(possibleOreName);
-
-                if (possibleOreStack.oreId != -1) {
-
-                    itemStack = null;
-                    oreStack = possibleOreStack;
-                    energyStack = null;
-                    fluidStack = null;
-                    stackSize = possibleOreStack.stackSize;
-                }
-                else {
-
-                    itemStack = null;
-                    oreStack = null;
-                    energyStack = null;
-                    fluidStack = null;
-                    stackSize = -1;
-                }
-            }
-            else if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ENERGY_NAME + ":")) {
-
-                String possibleEnergyName = objectString.substring(Strings.NBT_ENCODED_ATTR_ENERGY_NAME.length() + 1);
-
-                if (possibleEnergyName.length() > 0) {
-
-                    itemStack = null;
-                    oreStack = null;
-                    energyStack = new EnergyStack(possibleEnergyName);
-                    fluidStack = null;
-                    stackSize = 1;
-                }
-                else {
-
-                    itemStack = null;
-                    oreStack = null;
-                    energyStack = null;
-                    fluidStack = null;
-                    stackSize = -1;
-                }
-            }
-            else {
-                itemStack = null;
-                oreStack = null;
-                energyStack = null;
-                fluidStack = null;
-                stackSize = -1;
-            }
         }
         /*
          * Or we are given an EnergyStack to wrap
@@ -327,41 +263,25 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
 
     public static boolean canBeWrapped(Object object) {
 
-        // Simple case
-        if (object instanceof CustomWrappedStack || object instanceof ItemStack || object instanceof OreStack || object instanceof EnergyStack || object instanceof FluidStack || object instanceof Item || object instanceof Block || object instanceof Fluid) {
+        if (object instanceof CustomWrappedStack) {
             return true;
         }
-        // If it's a List, check to see if it could possibly be an OreStack
+        else if (object instanceof Item || object instanceof Block || object instanceof ItemStack) {
+            return true;
+        }
+        else if (object instanceof OreStack) {
+            return true;
+        }
         else if (object instanceof List) {
             if (getOreStackFromList((List<?>) object) != null) {
                 return true;
             }
         }
-        // If it's a String, check to see if it could be the encoded name for a custom stack (OreStack, EnergyStack, etc)
-        // TODO Revisit this now that we aren't using NBTTagCompounds to encode objects
-        else if (object instanceof String) {
-
-            String objectString = (String) object;
-
-            if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ORE_NAME + ":")) {
-
-                String possibleOreName = objectString.substring(Strings.NBT_ENCODED_ATTR_ORE_NAME.length() + 1);
-                List<String> oreNames = Arrays.asList(OreDictionary.getOreNames());
-
-                for (String oreName : oreNames) {
-                    if (oreName.equalsIgnoreCase(possibleOreName)) {
-                        return true;
-                    }
-                }
-            }
-            else if (objectString.startsWith(Strings.NBT_ENCODED_ATTR_ENERGY_NAME + ":")) {
-
-                String possibleEnergyName = objectString.substring(Strings.NBT_ENCODED_ATTR_ENERGY_NAME.length() + 1);
-
-                if (possibleEnergyName.length() > 0) {
-                    return true;
-                }
-            }
+        else if (object instanceof EnergyStack) {
+            return true;
+        }
+        else if (object instanceof Fluid || object instanceof FluidStack) {
+            return true;
         }
 
         return false;
@@ -437,7 +357,7 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
             if (listElement instanceof ItemStack) {
                 ItemStack stack = (ItemStack) listElement;
 
-                if (OreDictionary.getOreID(stack) != Reference.ORE_DICTIONARY_NOT_FOUND) {
+                if (OreDictionary.getOreID(stack) != CustomWrappedStack.ORE_DICTIONARY_NOT_FOUND) {
                     return new OreStack(stack);
                 }
             }
@@ -452,8 +372,8 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
      * 
      * @param jsonEmcValue
      *            Json encoded String representing a CustomWrappedStack object
-     * @return The EmcValue that was encoded as json, or null if a valid
-     *         CustomWrappedStack could not be decoded from given String
+     * @return The CustomWrappedStack that was encoded as json, or null if a
+     *         valid CustomWrappedStack could not be decoded from given String
      */
     public static CustomWrappedStack createFromJson(String jsonCustomWrappedStack) {
 
@@ -475,24 +395,5 @@ public class CustomWrappedStack implements Comparable<CustomWrappedStack> {
     public String toJson() {
 
         return gsonSerializer.toJson(this);
-    }
-
-    public class CustomWrappedStackJsonSerializer
-            implements JsonDeserializer<CustomWrappedStack>,
-            JsonSerializer<CustomWrappedStack> {
-
-        @Override
-        public JsonElement serialize(CustomWrappedStack customWrappedStack, Type type, JsonSerializationContext context) {
-
-            // TODO Auto-generated method stub
-            return null;
-        }
-
-        @Override
-        public CustomWrappedStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
-
-            // TODO Auto-generated method stub
-            return null;
-        }
     }
 }

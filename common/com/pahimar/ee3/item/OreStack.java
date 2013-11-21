@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 public class OreStack implements Comparable<OreStack> {
 
+    // Gson serializer for serializing to/deserializing from json
+    private static final Gson gsonSerializer = new Gson();
+    
     public int oreId;
     public String oreName;
     public int stackSize;
@@ -138,5 +144,36 @@ public class OreStack implements Comparable<OreStack> {
         else {
             return 1;
         }
+    }
+    
+    /**
+     * Deserializes a OreStack object from the given serialized json
+     * String
+     * 
+     * @param jsonEmcValue
+     *            Json encoded String representing a OreStack object
+     * @return The OreStack that was encoded as json, or null if a valid
+     *         OreStack could not be decoded from given String
+     */
+    public static OreStack createFromJson(String jsonOreStack) {
+
+        try {
+            return (OreStack) gsonSerializer.fromJson(jsonOreStack, OreStack.class);
+        }
+        catch (JsonSyntaxException exception) {
+            // TODO Log something regarding the failed parse
+        }
+
+        return null;
+    }
+    
+    /**
+     * Returns this OreStack as a json serialized String
+     * 
+     * @return Json serialized String of this OreStack
+     */
+    public String toJson() {
+
+        return gsonSerializer.toJson(this);
     }
 }

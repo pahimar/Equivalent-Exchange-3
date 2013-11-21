@@ -29,7 +29,7 @@ public class EmcValue implements Comparable<EmcValue> {
 
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue().new EmcValueJsonSerializer()).create();
-    
+
     public final float[] components;
 
     public EmcValue() {
@@ -51,11 +51,12 @@ public class EmcValue implements Comparable<EmcValue> {
 
         this(value, component.type);
     }
-    
+
     public EmcValue(int value, EmcType emcType) {
+
         this((float) value, emcType);
     }
-    
+
     public EmcValue(float value, EmcType emcType) {
 
         this.components = new float[EmcType.TYPES.length];
@@ -125,16 +126,16 @@ public class EmcValue implements Comparable<EmcValue> {
     public String toString() {
 
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         // TODO Intelligible output
         stringBuilder.append("[");
-        
+
         for (EmcType emcType : EmcType.TYPES) {
             if (components[emcType.ordinal()] > 0) {
                 stringBuilder.append(String.format(" %s:%s ", emcType, components[emcType.ordinal()]));
             }
         }
-        
+
         stringBuilder.append("]");
 
         return stringBuilder.toString();
@@ -163,31 +164,34 @@ public class EmcValue implements Comparable<EmcValue> {
             return -1;
         }
     }
-    
+
     /**
      * Deserializes an EmcValue object from the given serialized json String
      * 
-     * @param jsonEmcValue Json encoded String representing a EmcValue object
-     * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
+     * @param jsonEmcValue
+     *            Json encoded String representing a EmcValue object
+     * @return The EmcValue that was encoded as json, or null if a valid
+     *         EmcValue could not be decoded from given String
      */
     public static EmcValue createFromJson(String jsonEmcValue) {
-        
+
         try {
             return (EmcValue) gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
         }
         catch (JsonSyntaxException exception) {
             // TODO Log something regarding the failed parse
         }
-        
+
         return null;
     }
-    
+
     /**
      * Returns this EmcValue as a json serialized String
      * 
      * @return Json serialized String of this EmcValue
      */
     public String toJson() {
+
         return gsonSerializer.toJson(this);
     }
 
@@ -234,18 +238,19 @@ public class EmcValue implements Comparable<EmcValue> {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
-    
-    public class EmcValueJsonSerializer implements JsonDeserializer<EmcValue>, JsonSerializer<EmcValue> {
-        
+
+    private class EmcValueJsonSerializer
+            implements JsonDeserializer<EmcValue>, JsonSerializer<EmcValue> {
+
         @Override
         public JsonElement serialize(EmcValue emcValue, Type type, JsonSerializationContext context) {
 
             JsonObject jsonEmcValue = new JsonObject();
-            
+
             for (EmcType emcType : EmcType.TYPES) {
                 jsonEmcValue.addProperty(emcType.toString(), emcValue.components[emcType.ordinal()]);
             }
-            
+
             return jsonEmcValue;
         }
 
@@ -253,8 +258,8 @@ public class EmcValue implements Comparable<EmcValue> {
         public EmcValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
 
             float[] emcValueComponents = new float[EmcType.TYPES.length];
-            JsonObject jsonEmcValue = (JsonObject) jsonElement; 
-            
+            JsonObject jsonEmcValue = (JsonObject) jsonElement;
+
             for (EmcType emcType : EmcType.TYPES) {
                 if ((jsonEmcValue.get(emcType.toString()) != null) && (jsonEmcValue.get(emcType.toString()).isJsonPrimitive())) {
                     try {
@@ -266,13 +271,13 @@ public class EmcValue implements Comparable<EmcValue> {
                     }
                 }
             }
-            
+
             EmcValue emcValue = new EmcValue(emcValueComponents);
-            
+
             if (emcValue.getValue() > 0f) {
                 return emcValue;
             }
-            
+
             return null;
         }
     }

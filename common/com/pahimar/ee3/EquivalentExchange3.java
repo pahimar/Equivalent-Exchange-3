@@ -24,7 +24,6 @@ import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
