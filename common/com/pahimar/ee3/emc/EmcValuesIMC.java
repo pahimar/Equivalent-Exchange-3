@@ -32,12 +32,18 @@ public class EmcValuesIMC {
         if (!preAssignedValueMap.containsKey(wrappedStack)) {
             preAssignedValueMap.put(wrappedStack, emcValue);
         }
+        else {
+            // TODO Log that we already have a value for that
+        }
     }
 
     public static void addPostAssignedValued(CustomWrappedStack wrappedStack, EmcValue emcValue) {
 
         if (!postAssignedValueMap.containsKey(wrappedStack)) {
             postAssignedValueMap.put(wrappedStack, emcValue);
+        }
+        else {
+            // TODO Log that we already have a value for that
         }
     }
 }
