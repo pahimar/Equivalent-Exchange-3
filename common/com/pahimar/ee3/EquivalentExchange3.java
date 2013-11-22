@@ -17,13 +17,13 @@ import com.pahimar.ee3.core.handler.ItemEventHandler;
 import com.pahimar.ee3.core.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.core.handler.PlayerDestroyItemHandler;
 import com.pahimar.ee3.core.handler.VersionCheckTickHandler;
+import com.pahimar.ee3.core.handler.WorldEventHandler;
 import com.pahimar.ee3.core.handler.WorldTransmutationHandler;
 import com.pahimar.ee3.core.handler.addon.AddonIMCHandler;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
@@ -139,6 +139,8 @@ public class EquivalentExchange3 {
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
 
         MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
+        
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
         GameRegistry.registerCraftingHandler(new CraftingHandler());
 
@@ -161,7 +163,6 @@ public class EquivalentExchange3 {
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event) {
         
-        EmcRegistry.lazyInit();
     }
 
     @EventHandler
