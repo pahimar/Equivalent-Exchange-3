@@ -27,11 +27,10 @@
 
 	<target name="forge-install" depends="forge-uncompress">
 		<exec dir="${environment.base_location}/forge/" executable="cmd.exe" osfamily="windows" failonerror="true">
-			<arg value="/c" />
-			<arg value="${environment.base_location}\forge\install.cmd" />
+			<arg line="/c ${environment.base_location}\forge\gradlew.bat setupDevWorkspace" />
 		</exec>
 		<exec dir="${environment.base_location}/forge/" executable="bash" osfamily="unix" failonerror="true">
-			<arg line="install.sh" />
+			<arg line="gradlew setupDevWorkspace" />
 		</exec>
 	</target>
 	
