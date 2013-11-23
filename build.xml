@@ -7,8 +7,9 @@
 	<property file="private.properties" prefix="private" />
 
 	<!-- Minecraft Forge -->
-	<property name="minecraftforge_src_archive" value="minecraftforge-src-${build.minecraft_version}-${build.forge_version}.zip" />
-	<property name="minecraftforge_src_archive_location" value="http://files.minecraftforge.net/minecraftforge/${minecraftforge_src_archive}" />
+	<property name="minecraftforge_version_string" value="${build.minecraft_version}-${build.forge_version}" />
+	<property name="minecraftforge_src_archive" value="forge-${minecraftforge_version_string}-src.zip" />
+	<property name="minecraftforge_src_archive_location" value="http://files.minecraftforge.net/maven/net/minecraftforge/forge/${minecraftforge_version_string}/${minecraftforge_src_archive}" />
 
 	<target name="forge-clean">
 		<delete dir="${environment.base_location}/forge" />
@@ -20,7 +21,7 @@
 	</target>
 
 	<target name="forge-uncompress" depends="forge-download">
-		<unzip src="${environment.base_location}/temp/${minecraftforge_src_archive}" dest="${environment.base_location}" />
+		<unzip src="${environment.base_location}/temp/${minecraftforge_src_archive}" dest="${environment.base_location}/forge/" />
 		<delete dir="${environment.base_location}/temp" />
 	</target>
 
