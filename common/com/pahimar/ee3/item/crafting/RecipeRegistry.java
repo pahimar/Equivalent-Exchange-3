@@ -53,6 +53,9 @@ public class RecipeRegistry {
 
         // Add recipes gathered via IMC
         recipeMap.putAll(RecipesIMC.getIMCRecipes());
+        
+        // Add fluid container recipes
+        recipeMap.putAll(RecipesFluidContainers.getFluidContainerRecipes());
 
         // Discover all stacks that we can
         discoverStacks();
