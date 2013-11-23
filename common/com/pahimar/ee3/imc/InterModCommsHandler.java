@@ -1,23 +1,28 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.imc;
+
+import java.util.EnumSet;
 
 import net.minecraft.item.ItemStack;
 
+import com.google.common.collect.ImmutableList;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.StackValueMapping;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
 import com.pahimar.ee3.item.CustomWrappedStack;
-import com.pahimar.ee3.lib.InterModComms;
+import com.pahimar.ee3.lib.Reference;
 
+import cpw.mods.fml.common.IScheduledTickHandler;
+import cpw.mods.fml.common.ITickHandler;
+import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
-public class InterModCommsHandler {
+public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler{
 
     // TODO Logging
-    // TODO Tick handler to grab runtime messages
     
     public static void processIMCMessages(IMCEvent event) {
         
@@ -30,25 +35,25 @@ public class InterModCommsHandler {
         
         String requestedOperation = imcMessage.key;
 
-        if (requestedOperation.equalsIgnoreCase(InterModComms.RECIPE_ADD)) {
+        if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.RECIPE_ADD)) {
             processAddRecipeMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.BLACKLIST_ADD_ENTRY)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.BLACKLIST_ADD_ENTRY)) {
             processAddBlackListMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.BLACKLIST_REMOVE_ENTRY)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.BLACKLIST_REMOVE_ENTRY)) {
             processRemoveBlackListMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_ASSIGN_VALUE_PRE)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_ASSIGN_VALUE_PRE)) {
             processPreAssignEmcValueMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_ASSIGN_VALUE_POST)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_ASSIGN_VALUE_POST)) {
             processPostAssignEmcValueMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_HAS_VALUE)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_HAS_VALUE)) {
             processHasEmcValueMessage(imcMessage);
         }
-        else if (requestedOperation.equalsIgnoreCase(InterModComms.EMC_GET_VALUE)) {
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_GET_VALUE)) {
             processGetEmcValueMessage(imcMessage);
         }
     }
@@ -131,7 +136,7 @@ public class InterModCommsHandler {
             /*
              * Reply back to the mod that queried for the existance of an EmcValue for the given ItemStack
              */
-            FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModComms.EMC_RETURN_HAS_VALUE, String.valueOf(EmcRegistry.hasEmcValue(imcMessage.getItemStackValue())));
+            FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModCommsOperations.EMC_RETURN_HAS_VALUE, String.valueOf(EmcRegistry.hasEmcValue(imcMessage.getItemStackValue())));
         }
         else {
             // TODO Log that the message payload is of an invalid type
@@ -160,14 +165,56 @@ public class InterModCommsHandler {
             EmcValue emcValue = EmcRegistry.getEmcValue(imcMessage.getItemStackValue());
             
             if (emcValue != null) {
-                FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModComms.EMC_RETURN_GET_VALUE, emcValue.toJson());
+                FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModCommsOperations.EMC_RETURN_GET_VALUE, emcValue.toJson());
             }
             else {
-                FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModComms.EMC_RETURN_GET_VALUE, "null");
+                FMLInterModComms.sendRuntimeMessage(EquivalentExchange3.instance, imcMessage.getSender(), InterModCommsOperations.EMC_RETURN_GET_VALUE, "null");
             }
         }
         else {
             // TODO Log that the message payload is of an invalid type
         }
+    }
+    
+    /**
+     * Runtime fetching and processing of IMC messages
+     */
+    @Override
+    public void tickStart(EnumSet<TickType> type, Object... tickData) {
+
+    }
+
+    @Override
+    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+
+        for (TickType tickType : type) {
+            
+            if (tickType == TickType.SERVER) {
+                
+                ImmutableList<IMCMessage> runtimeIMCMessages = FMLInterModComms.fetchRuntimeMessages(EquivalentExchange3.instance);
+                
+                for (IMCMessage imcMessage : runtimeIMCMessages) {
+                    InterModCommsHandler.processIMCMessage(imcMessage);
+                }
+            }
+        }
+    }
+
+    @Override
+    public EnumSet<TickType> ticks() {
+
+        return EnumSet.of(TickType.SERVER);
+    }
+
+    @Override
+    public String getLabel() {
+
+        return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
+    }
+
+    @Override
+    public int nextTickSpacing() {
+
+        return 10;
     }
 }

@@ -12,7 +12,6 @@ import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.core.handler.ActionRequestHandler;
 import com.pahimar.ee3.core.handler.CraftingHandler;
 import com.pahimar.ee3.core.handler.EntityLivingHandler;
-import com.pahimar.ee3.core.handler.InterModCommsHandler;
 import com.pahimar.ee3.core.handler.ItemEventHandler;
 import com.pahimar.ee3.core.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.core.handler.PlayerDestroyItemHandler;
@@ -24,6 +23,7 @@ import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
@@ -101,6 +101,9 @@ public class EquivalentExchange3 {
 
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
+        
+        // Initialize the InterModCommunications Tick Handler (Server only)
+        TickRegistry.registerScheduledTickHandler(new InterModCommsHandler(), Side.SERVER);
 
         // Initialize the Render Tick Handler (Client only)
         proxy.registerRenderTickHandler();
@@ -154,7 +157,7 @@ public class EquivalentExchange3 {
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
         
-        // Initialize EE3 addons (which work with IMC, and must be used in Init)
+        // Initialize addons (which work with IMC, and must be used in Init)
         AddonIMCHandler.init();
     }
 
