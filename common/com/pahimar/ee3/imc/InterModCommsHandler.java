@@ -1,16 +1,19 @@
 package com.pahimar.ee3.imc;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.ImmutableList;
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.api.StackValueMapping;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
 import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.common.IScheduledTickHandler;
@@ -60,7 +63,24 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processAddRecipeMessage(IMCMessage imcMessage) {
 
-        // TODO 
+        if (imcMessage.getMessageType() == String.class) {
+            
+            RecipeMapping recipeMapping = RecipeMapping.createFromJson(imcMessage.getStringValue());
+            
+            if (recipeMapping != null) {
+                
+                CustomWrappedStack outputWrappedStack = recipeMapping.outputWrappedStack;
+                List<CustomWrappedStack> inputWrappedStacks = recipeMapping.inputWrappedStacks;
+                
+                RecipesIMC.addRecipe(outputWrappedStack, inputWrappedStacks);
+            }
+            else {
+                // TODO Log that the message payloads json was invalid
+            }
+        }
+        else {
+            // TODO Log that the message payload is of an invalid type
+        }
     }
 
     private static void processAddBlackListMessage(IMCMessage imcMessage) {
