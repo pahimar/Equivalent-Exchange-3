@@ -39,7 +39,6 @@
 	<!-- Compilation -->
 	<target name="clean">
 		<delete dir="${environment.base_location}/temp" />
-		<delete dir="${environment.forge_location}/build" />
 		<delete dir="${environment.forge_location}/src/main/java" />
 		<delete dir="${environment.forge_location}/src/main/resources"/>
 	</target>
@@ -60,14 +59,14 @@
 	</target>
 
 	<target name="replace_tokens_build">
-		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
-		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
+		<replace dir="${environment.forge_location}/src/main/java/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${environment.forge_location}/src/main/java/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
 	<target name="replace_tokens_release">
-		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
-		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
-		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
+		<replace dir="${environment.forge_location}/src/main/java/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${environment.forge_location}/src/main/java/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
+		<replace dir="${environment.forge_location}/src/main/java/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
 	<target name="compile">
@@ -83,7 +82,7 @@
 		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
 	</target>
 
-	<target name="build" depends="clean, forge-install, increment_build_number, prep, replace_tokens_build, compile">
+	<target name="build" depends="clean, increment_build_number, prep, replace_tokens_build, compile">
 
 		<!-- Copy the jar that forge made to the Release directory -->
 		<copy file="${environment.forge_location}/build/tmp/reobf/jarIn.jar" tofile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar"/>
@@ -92,7 +91,7 @@
 		<antcall target="clean" />
 	</target>
 
-	<target name="release" depends="clean, forge-install, increment_build_number, prep, replace_tokens_release, compile">
+	<target name="release" depends="clean, increment_build_number, prep, replace_tokens_release, compile">
 
 		<!-- Copy the jar that forge made to the Release directory -->
 		<copy file="${environment.forge_location}/build/tmp/reobf/jarIn.jar" tofile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar"/>
