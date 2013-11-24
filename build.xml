@@ -38,9 +38,9 @@
 
 	<target name="clean">
 		<delete dir="${environment.base_location}/temp" />
-		<delete file="${environment.forge_location}/src/main/resources/*" />
-		<delete file="${environment.forge_location}/src/main/java/*" />
 		<delete dir="${environment.forge_location}/build/classes" />
+		<delete file="${environment.forge_location}/src/main/java/**/*" />
+		<delete file="${environment.forge_location}/src/main/resources/**/*"/>
 	</target>
 
 	<target name="increment_build_number">
