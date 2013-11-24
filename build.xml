@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <project name="Equivalent Exchange 3" default="build">
 
-	<!-- Public property files-->
+	<!-- Property files-->
 	<property file="build.properties" prefix="build" />
 	<property file="environment.properties" prefix="environment" />
 	<property file="private.properties" prefix="private" />
@@ -27,7 +27,7 @@
 
 	<target name="forge-install" depends="forge-uncompress">
 		<exec dir="${environment.base_location}/forge/" executable="cmd.exe" osfamily="windows" failonerror="true">
-			<arg line="/c ${environment.base_location}\forge\gradlew.bat setupDevWorkspace" />
+			<arg line="/c gradlew.bat setupDevWorkspace" />
 		</exec>
 		<exec dir="${environment.base_location}/forge/" executable="bash" osfamily="unix" failonerror="true">
 			<arg line="gradlew setupDevWorkspace" />
@@ -36,11 +36,12 @@
 	
 	<target name="forge-clean-install" depends="forge-clean, forge-install" />
 
+	<!-- Compilation -->
 	<target name="clean">
 		<delete dir="${environment.base_location}/temp" />
-		<delete dir="${environment.forge_location}/build/classes" />
-		<delete file="${environment.forge_location}/src/main/java/**/*" />
-		<delete file="${environment.forge_location}/src/main/resources/**/*"/>
+		<delete dir="${environment.forge_location}/build" />
+		<delete dir="${environment.forge_location}/src/main/java" />
+		<delete dir="${environment.forge_location}/src/main/resources"/>
 	</target>
 
 	<target name="increment_build_number">
@@ -58,14 +59,19 @@
 		</copy>
 	</target>
 
-	<target name="replace_tokens">
+	<target name="replace_tokens_build">
+		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
+		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
+	</target>
+
+	<target name="replace_tokens_release">
 		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@VERSION@" value="${build.mod_version}" />
 		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@FINGERPRINT@" value="${private.fingerprint_signature}" />
 		<replace dir="${environment.forge_location}/src/main/com/pahimar" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
 	<target name="compile">
-		<exec dir="${environment.forge_location}" executable="cmd" osfamily="windows">
+		<exec dir="${environment.forge_location}" executable="cmd.exe" osfamily="windows">
 			<arg line="/c gradlew.bat build" />
 		</exec>
 		<exec dir="${environment.forge_location}" executable="bash" osfamily="unix">
@@ -77,16 +83,16 @@
 		<signjar jar="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar" keystore="${private.keystore_location}" alias="${private.keystore_user_alias}" storepass="${private.keystore_user_password}" />
 	</target>
 
-	<target name="build" depends="clean, increment_build_number, prep, compile">
+	<target name="build" depends="clean, forge-install, increment_build_number, prep, replace_tokens_build, compile">
 
 		<!-- Copy the jar that forge made to the Release directory -->
 		<copy file="${environment.forge_location}/build/tmp/reobf/jarIn.jar" tofile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar"/>
 
-		<!-- Clean up the MCP source now that we are done -->
+		<!-- Clean up the forge source now that we are done -->
 		<antcall target="clean" />
 	</target>
 
-	<target name="release" depends="clean, increment_build_number, prep, replace_tokens, compile">
+	<target name="release" depends="clean, forge-install, increment_build_number, prep, replace_tokens_release, compile">
 
 		<!-- Copy the jar that forge made to the Release directory -->
 		<copy file="${environment.forge_location}/build/tmp/reobf/jarIn.jar" tofile="${environment.release_location}/MC ${build.minecraft_version}/${build.mod_version}/ee3-universal-${build.mod_version}-${build.build_number}.jar"/>
@@ -94,7 +100,7 @@
 		<!-- Sign the finished jar -->
 		<antcall target="sign_jar" />
 
-		<!-- Clean up the MCP source now that we are done -->
+		<!-- Clean up the forge source now that we are done -->
 		<antcall target="clean" />
 	</target>
 </project>
