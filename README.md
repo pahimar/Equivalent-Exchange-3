@@ -72,7 +72,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
 2. Inside `mcdev`, unzip the zip file. 
 	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc. 
-3. Execute `gradlew setupDevWorkspace` (Linux and Mac) or `gradlew.bat setupDevWorkspace` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it. 
+3. Execute `gradlew setupDevWorkspace` (Linux and Mac) or `gradlew.bat setupDevWorkspace` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x gradlew` before you can execute it. 
 	* This will take some time, be patient. 
 
 #### Setup EE3
