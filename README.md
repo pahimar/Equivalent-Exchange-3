@@ -17,7 +17,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 	* Click on `Environment Variables`.
   * Under `System Variables`, click `New`.
   * For `Variable Name`, input `JAVA_HOME`.
-  * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_40` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
+  * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;%JAVA_HOME%\bin`, and click `Ok`.
 3. Download Apache Ant [here](http://ant.apache.org).
@@ -84,12 +84,13 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 
 	mcdev
 	\-forge
-		\-mcp
-			\-jars
-			\-CHANGELOG, etc.
-		\-install.cmd
-		\-install.sh
-		\-MinecraftForge-Changelog.txt, etc.
+		\-src
+			\-main
+				\-java
+				\-resources
+		\-gradlew.bat
+		\-gradlew
+		\-MinecraftForge-Credits.txt, etc.
 	\-source
 		\-Equivalent-Exchange-3
 			\-EE3's files (should have build.xml).
@@ -99,7 +100,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE: Paths must use forward slashes.  All of the variables are changeable for your setup.):
  		* `base_location=C:/mcdev/`
  		* `source_location=${base_location}/source/Equivalent-Exchange-3`
- 		* `forge_location=${base_location}/forge/mcp`
+ 		* `forge_location=${base_location}/forge`
  		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
  	* You may also edit the build.properties to change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (`forge_version` is only used when running `ant forge-install`)
  		* `minecraft_version=1.6.4`
@@ -109,7 +110,7 @@ NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP
 5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
 6. Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
 7. Execute `ant build`. (If you want EE3 to setup Forge, run `ant forge-install` first.) This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
-	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
+	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix what you can, and try again.
 8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\MC 1.6.4\pre2`.
 	*  You should see a `.jar` file named `ee3-universal-pre2.jar`.
 9. Copy the jar into your Minecraft mods folder, and play Minecraft (If you have Forge installed on your client).
