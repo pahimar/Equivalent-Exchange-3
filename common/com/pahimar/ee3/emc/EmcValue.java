@@ -25,10 +25,10 @@ import com.google.gson.JsonSyntaxException;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class EmcValue implements Comparable<EmcValue> {
+public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue>, JsonSerializer<EmcValue> {
 
     // Gson serializer for serializing to/deserializing from json
-    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue().new EmcValueJsonSerializer()).create();
+    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue()).create();
 
     public final float[] components;
 
@@ -239,46 +239,42 @@ public class EmcValue implements Comparable<EmcValue> {
         }
     }
 
-    private class EmcValueJsonSerializer
-            implements JsonDeserializer<EmcValue>, JsonSerializer<EmcValue> {
+    @Override
+    public JsonElement serialize(EmcValue emcValue, Type type, JsonSerializationContext context) {
 
-        @Override
-        public JsonElement serialize(EmcValue emcValue, Type type, JsonSerializationContext context) {
+        JsonObject jsonEmcValue = new JsonObject();
 
-            JsonObject jsonEmcValue = new JsonObject();
-
-            for (EmcType emcType : EmcType.TYPES) {
-                jsonEmcValue.addProperty(emcType.toString(), emcValue.components[emcType.ordinal()]);
-            }
-
-            return jsonEmcValue;
+        for (EmcType emcType : EmcType.TYPES) {
+            jsonEmcValue.addProperty(emcType.toString(), emcValue.components[emcType.ordinal()]);
         }
 
-        @Override
-        public EmcValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+        return jsonEmcValue;
+    }
 
-            float[] emcValueComponents = new float[EmcType.TYPES.length];
-            JsonObject jsonEmcValue = (JsonObject) jsonElement;
+    @Override
+    public EmcValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
 
-            for (EmcType emcType : EmcType.TYPES) {
-                if ((jsonEmcValue.get(emcType.toString()) != null) && (jsonEmcValue.get(emcType.toString()).isJsonPrimitive())) {
-                    try {
-                        emcValueComponents[emcType.ordinal()] = jsonEmcValue.get(emcType.toString()).getAsFloat();
-                    }
-                    catch (UnsupportedOperationException exception) {
-                        // TODO Better logging/handling of the exception
-                        exception.printStackTrace(System.err);
-                    }
+        float[] emcValueComponents = new float[EmcType.TYPES.length];
+        JsonObject jsonEmcValue = (JsonObject) jsonElement;
+
+        for (EmcType emcType : EmcType.TYPES) {
+            if ((jsonEmcValue.get(emcType.toString()) != null) && (jsonEmcValue.get(emcType.toString()).isJsonPrimitive())) {
+                try {
+                    emcValueComponents[emcType.ordinal()] = jsonEmcValue.get(emcType.toString()).getAsFloat();
+                }
+                catch (UnsupportedOperationException exception) {
+                    // TODO Better logging/handling of the exception
+                    exception.printStackTrace(System.err);
                 }
             }
-
-            EmcValue emcValue = new EmcValue(emcValueComponents);
-
-            if (emcValue.getValue() > 0f) {
-                return emcValue;
-            }
-
-            return null;
         }
+
+        EmcValue emcValue = new EmcValue(emcValueComponents);
+
+        if (emcValue.getValue() > 0f) {
+            return emcValue;
+        }
+
+        return null;
     }
 }

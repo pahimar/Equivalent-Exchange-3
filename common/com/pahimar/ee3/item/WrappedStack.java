@@ -203,7 +203,6 @@ public class WrappedStack
      * @return
      */
     public String toJson() {
-
         return gsonSerializer.toJson(this);
     }
 
@@ -289,7 +288,7 @@ public class WrappedStack
         }
         else if (wrappedStack instanceof OreStack) {
             OreStack oreStack = (OreStack) wrappedStack;
-            stringBuilder.append(String.format("%sxoreDictionary.%s[oreId:%s]", stackSize, oreStack.oreName, oreStack.oreId));
+            stringBuilder.append(String.format("%sxoreStack.%s", stackSize, oreStack.oreName));
         }
         else if (wrappedStack instanceof EnergyStack) {
             EnergyStack energyStack = (EnergyStack) wrappedStack;

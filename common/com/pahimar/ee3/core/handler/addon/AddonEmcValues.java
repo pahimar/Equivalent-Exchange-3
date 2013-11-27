@@ -5,6 +5,7 @@ public class AddonEmcValues {
 
     public static void init() {
 
-        //FMLInterModComms.sendMessage(Reference.MOD_ID, InterModCommsOperations.EMC_ASSIGN_VALUE_PRE, new StackValueMapping(new OreStack("ingotTin"), new EmcValue(256)).toJson());
+        // Some example of how you can use IMC to interface with the mod
+        // FMLInterModComms.sendMessage(Reference.MOD_ID, InterModCommsOperations.EMC_ASSIGN_VALUE_PRE, new StackValueMapping(new WrappedStack(), new EmcValue()).toJson());
     }
 }

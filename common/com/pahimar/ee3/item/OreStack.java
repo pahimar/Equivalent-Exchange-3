@@ -1,6 +1,5 @@
 package com.pahimar.ee3.item;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,37 +17,12 @@ public class OreStack implements Comparable<OreStack> {
     
     private static final int ORE_DICTIONARY_NOT_FOUND = -1;
     
-    public int oreId;
     public String oreName;
     public int stackSize;
 
     public OreStack(String oreName, int stackSize) {
         
-        if (oreName != null && oreName.length() > 0) {
-            
-            if (this.oreName == null) {
-                
-                for (String oreDictionaryName : OreDictionary.getOreNames()) {
-                    
-                    if (oreDictionaryName.equalsIgnoreCase(oreName)) {
-                        
-                        this.oreId = OreDictionary.getOreID(oreDictionaryName);
-                        this.oreName = oreDictionaryName;
-                    }
-                }
-                
-                if (this.oreName == null) {
-                    this.oreId = -1;
-                    this.oreName = OreDictionary.getOreName(oreId);
-                }
-            }
-        }
-        else {
-            
-            this.oreId = -1;
-            this.oreName = OreDictionary.getOreName(oreId);
-        }
-        
+        this.oreName = oreName;
         this.stackSize = stackSize;
     }
 
@@ -57,33 +31,14 @@ public class OreStack implements Comparable<OreStack> {
         this(oreName, 1);
     }
 
-    public OreStack(int oreId) {
-
-        this(oreId, 1);
-    }
-    
-    public OreStack(int oreId, int stackSize) {
-        
-        this(OreDictionary.getOreName(oreId), stackSize);
-    }
-
     public OreStack(ItemStack itemStack) {
 
-        this(OreDictionary.getOreID(itemStack), itemStack.stackSize);
-    }
-
-    public ArrayList<ItemStack> getOres() {
-
-        if (this.oreId != -1) {
-            return OreDictionary.getOres(this.oreId);
-        }
-        
-        return new ArrayList<ItemStack>();
+        this(OreDictionary.getOreName(OreDictionary.getOreID(itemStack)), itemStack.stackSize);
     }
 
     @Override
     public String toString() {
-        return String.format("%sxoreDictionary.%s[oreId:%s]", stackSize, oreName, oreId);
+        return String.format("%sxoreStack.%s", stackSize, oreName);
     }
 
     @Override
@@ -169,16 +124,11 @@ public class OreStack implements Comparable<OreStack> {
             
             if (oreStack1 != null) {
                 if (oreStack2 != null) {
-                    if (oreStack1.oreId == oreStack2.oreId) {
-                        if (oreStack1.oreName.equalsIgnoreCase(oreStack2.oreName)) {
-                            return oreStack1.stackSize - oreStack2.stackSize;
-                        }
-                        else {
-                            return oreStack1.oreName.compareToIgnoreCase(oreStack2.oreName);
-                        }
+                    if (oreStack1.oreName.equalsIgnoreCase(oreStack2.oreName)) {
+                        return oreStack1.stackSize - oreStack2.stackSize;
                     }
                     else {
-                        return oreStack1.oreId - oreStack2.oreId;
+                        return oreStack1.oreName.compareToIgnoreCase(oreStack2.oreName);
                     }
                 }
                 else {
