@@ -68,10 +68,10 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 1. Move/clone `Equivalent-Exchange-3` into whatever directory you want.
 2. Inside `Equivalent-Exchange-3`, edit the file called `build.properties`.
  	* You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for.
- 		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.1.964`
- 		* `mod_version=pre2a`
- 		* `build_number=1`
+ 		* `minecraftVersion=1.6.4`
+ 		* `forgeVersion=9.11.1.964`
+ 		* `modVersion=pre2a`
+ 		* `buildNumber=1`
 3. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
 4. Navigate to `Equivalent-Exchange-3` by executing `cd Equivalent-Exchange-3`.
 5. Execute `gradlew.bat setupDevWorkspace` or `gradlew setupDevWorkspace` in Linux and Mac OS X. (This sets up forge.)
