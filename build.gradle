@@ -33,17 +33,12 @@ loadProperties 'private.properties'
 // stuff specific to ee3
 group = 'com.pahimar.ee3'
 archivesBaseName = 'ee3-universal'
-
-// spit out the version for debugging sake
-logger.lifecycle ""+modVersion
+version = "$modVersion-$buildNumber"
 
 minecraft {
     version = "$minecraftVersion-$forgeVersion" // grab latest forge
     assetDir = "build/vanilla/assets"
 }
-
-// add some stuff to the version
-version = "$modVersion-$buildNumber"
 
 processResources {
     exclude '**/xcf/**'
