@@ -9,7 +9,7 @@ package com.pahimar.ee3.core.handler.addon;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
-public class AddonIMCVanilla {
+public class AddonRecipes {
 
     public static void init() {
 

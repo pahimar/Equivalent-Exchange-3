@@ -12,7 +12,8 @@ package com.pahimar.ee3.core.handler.addon;
 public class AddonIMCHandler {
 
     public static void init() {
-        AddonIMCVanilla.init();
+        AddonRecipes.init();
+        AddonEmcValues.init();
     }
 
 }

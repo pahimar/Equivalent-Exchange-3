@@ -12,8 +12,8 @@ public class StackValueMapping {
     public final WrappedStack wrappedStack;
     public final EmcValue emcValue;
     
-    public StackValueMapping(WrappedStack wrappedStack, EmcValue emcValue) {
-        this.wrappedStack = wrappedStack;
+    public StackValueMapping(Object object, EmcValue emcValue) {
+        this.wrappedStack = new WrappedStack(object);
         this.emcValue = emcValue;
     }
     
