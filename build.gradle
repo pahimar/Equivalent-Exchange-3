@@ -34,11 +34,37 @@ loadProperties 'private.properties'
 group = 'com.pahimar.ee3'
 archivesBaseName = 'ee3-universal'
 version = "$modVersion-$buildNumber"
+def filteredSourceDir = file("build/filtered")
 
 minecraft {
     version = "$minecraftVersion-$forgeVersion" // grab latest forge
     assetDir = "build/vanilla/assets"
 }
+
+sourceSets {
+    filtered {
+        java {
+            srcDirs = [filteredSourceDir]
+        }
+    }
+}
+
+task processTokens (type: Copy) {
+    into filteredSourceDir
+    from(sourceSets.main.java.srcDirs) {
+        include '**/EquivalentExchange3.java'
+        include '**/Reference.java'
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens:[VERSION: project.modVersion, BUILD_NUMBER: project.buildNumber])
+        if (hasProperty('keystoreLocation'))
+            filter(org.apache.tools.ant.filters.ReplaceTokens, tokens:[FINGERPRINT: project.fingerprintSignature])
+    }
+    from(sourceSets.main.java.srcDirs) {
+        exclude '**/Reference.java'
+	exclude '**/EquivalentExchange3.java'
+    }
+}
+
+compileJava.dependsOn processTokens
 
 processResources {
     exclude '**/xcf/**'
@@ -47,7 +73,7 @@ processResources {
         include '**/*.info'
 
         // Fix those tokens
-        expand 'VERSION':project.version
+        expand 'VERSION':project.modVersion
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.info'
