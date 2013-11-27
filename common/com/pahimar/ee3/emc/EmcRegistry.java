@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.configuration.EmcValueConfiguration;
 import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
@@ -51,6 +52,9 @@ public class EmcRegistry {
 
         // Grab the pre-auto assignment values gathered from IMC
         stackMappingsBuilder.putAll(EmcValuesIMC.getPreAssignedValues());
+        
+        // Grab the configuration file values
+        stackMappingsBuilder.putAll(EmcValueConfiguration.getConfigValues());
         
         // Build the Immutable stack:value map
         stackMappings = stackMappingsBuilder.build();
@@ -94,6 +98,9 @@ public class EmcRegistry {
         
         valueMappingsBuilder.putAll(tempValueMappings);
         valueMappings = valueMappingsBuilder.build();
+        
+        //Create a configuration file with all the unassigned values for user assignment
+        EmcValueConfiguration.create();
     }
     
     private static Map<WrappedStack, EmcValue> computeStackMappings() {
