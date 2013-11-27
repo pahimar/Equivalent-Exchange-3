@@ -19,7 +19,7 @@ import com.pahimar.ee3.emc.EmcComponent;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.lib.Reference;
 
 import cpw.mods.fml.common.FMLLog;
@@ -76,9 +76,9 @@ public class EmcValueConfiguration
         }
     }
     
-    public static Map<CustomWrappedStack, EmcValue> getConfigValues() {
+    public static Map<WrappedStack, EmcValue> getConfigValues() {
         
-        Map<CustomWrappedStack, EmcValue> valueMap = new HashMap<CustomWrappedStack, EmcValue>();
+        Map<WrappedStack, EmcValue> valueMap = new HashMap<WrappedStack, EmcValue>();
         
         if (configFile != null && configFile.exists()) {
             
@@ -132,7 +132,7 @@ public class EmcValueConfiguration
                                         }
                                         if (value != 0F) {
                                             
-                                            valueMap.put(new CustomWrappedStack(stack), new EmcValue(value, components));
+                                            valueMap.put(new WrappedStack(stack), new EmcValue(value, components));
                                         }
                                     }
                                     else {
@@ -140,7 +140,7 @@ public class EmcValueConfiguration
                                         value = Float.parseFloat(string);
                                         if (value != 0F) {
                                             
-                                            valueMap.put(new CustomWrappedStack(stack), new EmcValue(value));
+                                            valueMap.put(new WrappedStack(stack), new EmcValue(value));
                                         }
                                     }
                                 }
