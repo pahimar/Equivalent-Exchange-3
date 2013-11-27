@@ -67,7 +67,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 #### Setup EE3
 1. Move/clone `Equivalent-Exchange-3` into whatever directory you want.
 2. Inside `Equivalent-Exchange-3`, edit the file called `build.properties`.
- 	* You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for.
+ 	* You may change the build string (`modVersion` and `buildNumber`), and the Minecraft and Forge version you are building for.
  		* `minecraftVersion=1.6.4`
  		* `forgeVersion=9.11.1.964`
  		* `modVersion=pre2a`
