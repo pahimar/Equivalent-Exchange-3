@@ -15,10 +15,8 @@ buildscript {
 apply plugin: "forge"
 
 // Somewhat of a hack -- increments build number.
-if (hasTask('release')) {
-    ant.propertyfile(file: "build.properties") {
-        entry(key: 'buildNumber', type: 'int', operation: '+', value: 1)
-    }
+ant.propertyfile(file: "build.properties") {
+    entry(key: 'buildNumber', type: 'int', operation: '+', value: 1)
 }
 
  // Load properties from arbitrary files.
