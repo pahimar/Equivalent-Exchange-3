@@ -119,11 +119,11 @@ public class WrappedStack
         }
         else if (object instanceof WrappedStack) {
 
-            WrappedStack wrappedStack = (WrappedStack) object;
+            WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            className = object.getClass().getSimpleName();
-            this.stackSize = wrappedStack.stackSize;
-            this.wrappedStack = wrappedStack.wrappedStack;
+            className = wrappedStackObject.wrappedStack.getClass().getSimpleName();
+            this.stackSize = wrappedStackObject.stackSize;
+            this.wrappedStack = wrappedStackObject.wrappedStack;
         }
         else if (object instanceof String) {
 
@@ -414,7 +414,6 @@ public class WrappedStack
                     }
                     wrappedStack = fluidStack;
                 }
-
             }
 
             if (wrappedStack != null) {
