@@ -1,0 +1,70 @@
+// this part adds in ForgeGradle
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+    }
+}
+
+apply plugin: "forge"
+
+ // Load properties from arbitrary files.
+def loadProperties(String sourceFileName) {
+    def config = new Properties()
+        def propFile = new File(sourceFileName)
+            if (propFile.canRead()) {
+                config.load(new FileInputStream(propFile))
+                    for (Map.Entry property in config) {
+                        ext[property.key] = property.value;
+                    }
+            }
+}
+
+// Load the user properties
+loadProperties 'build.properties'
+loadProperties 'private.properties'
+
+// stuff specific to ee3
+group = 'com.pahimar.ee3'
+archivesBaseName = 'ee3-universal'
+
+// spit out the version for debugging sake
+logger.lifecycle ""+modVersion
+
+minecraft {
+    version = "$minecraftVersion-$forgeVersion" // grab latest forge
+    assetDir = "build/vanilla/assets"
+}
+
+// add some stuff to the version
+version = "$modVersion-$buildNumber"
+
+processResources {
+    exclude '**/xcf/**'
+
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+
+        // Fix those tokens
+        expand 'VERSION':project.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+task release (dependsOn: [build]) {
+    // Only does the jar signing if you have a keystore. Otherwise, build and release are the same.
+    if (hasProperty('keystoreLocation'))
+        ant.signjar(jar: 'build/libs/ee3-universal-$modVersion-$buildNumber.jar', keystore: "$keystoreLocation", alias: "$keystoreAlias", storepass: "$keystorePassword")
+}

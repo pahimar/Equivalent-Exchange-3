@@ -101,4 +101,10 @@ public class CommandEE extends CommandBase {
         // TODO Auto-generated method stub
         return null;
     }
+    
+    @Override
+    public int compareTo(Object o) {
+        // Dummy method to fix compilation
+        return 0;
+    }
 }

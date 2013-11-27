@@ -3,7 +3,7 @@
   "modid": "EE3",
   "name": "Equivalent Exchange 3",
   "description": "Transmute stuff into other stuff! Become a Minecraft God!",
-  "version": "@VERSION@",
+  "version": "VERSION",
   "url": "http://www.minecraftforum.net/topic/1106178-",
   "updateUrl": "",
   "authorList": [
