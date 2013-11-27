@@ -129,11 +129,11 @@ public class RecipeHelper {
 
     /**
      * Collates an uncollated, unsorted List of Objects into a sorted, collated
-     * List of CustomWrappedStacks
+     * List of WrappedStacks
      * 
      * @param uncollatedStacks
      *            List of objects for collating
-     * @return A sorted, collated List of CustomWrappedStacks
+     * @return A sorted, collated List of WrappedStacks
      */
     public static List<WrappedStack> collateInputStacks(List<?> uncollatedStacks) {
 

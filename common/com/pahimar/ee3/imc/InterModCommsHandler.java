@@ -101,10 +101,10 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
             
             if (stackValueMapping != null) {
                 
-                WrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
+                WrappedStack wrappedStack = stackValueMapping.wrappedStack;
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
-                EmcValuesIMC.addPreAssignedValued(customWrappedStack, emcValue);
+                EmcValuesIMC.addPreAssignedValued(wrappedStack, emcValue);
             }
             else {
                 // TODO Log that the message payloads json was invalid
@@ -123,10 +123,10 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
             
             if (stackValueMapping != null) {
                 
-                WrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
+                WrappedStack wrappedStack = stackValueMapping.wrappedStack;
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
-                EmcValuesIMC.addPostAssignedValued(customWrappedStack, emcValue);
+                EmcValuesIMC.addPostAssignedValued(wrappedStack, emcValue);
             }
             else {
                 // TODO Log that the message payloads json was invalid
@@ -142,9 +142,9 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         if (imcMessage.getMessageType() == String.class) {
             
             // TODO What if it is an encoded ItemStack | OreStack | EnergyStack | FluidStack
-            WrappedStack customWrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
+            WrappedStack wrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
             
-            if (customWrappedStack != null) {
+            if (wrappedStack != null) {
                 
             }
             else {
@@ -168,9 +168,9 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         if (imcMessage.getMessageType() == String.class) {
             
             // TODO What if it is an encoded ItemStack | OreStack | EnergyStack | FluidStack
-            WrappedStack customWrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
+            WrappedStack wrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
             
-            if (customWrappedStack != null) {
+            if (wrappedStack != null) {
                 
             }
             else {

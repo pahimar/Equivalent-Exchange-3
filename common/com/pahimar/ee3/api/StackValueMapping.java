@@ -9,11 +9,11 @@ public class StackValueMapping {
 
     private static Gson gsonSerializer = new Gson();
     
-    public final WrappedStack customWrappedStack;
+    public final WrappedStack wrappedStack;
     public final EmcValue emcValue;
     
-    public StackValueMapping(WrappedStack customWrappedStack, EmcValue emcValue) {
-        this.customWrappedStack = customWrappedStack;
+    public StackValueMapping(WrappedStack wrappedStack, EmcValue emcValue) {
+        this.wrappedStack = wrappedStack;
         this.emcValue = emcValue;
     }
     
