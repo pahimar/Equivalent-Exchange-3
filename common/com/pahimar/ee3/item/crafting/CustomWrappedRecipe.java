@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 /**
  * Equivalent-Exchange-3
@@ -18,23 +18,23 @@ import com.pahimar.ee3.item.CustomWrappedStack;
  */
 public class CustomWrappedRecipe {
 
-    public CustomWrappedStack output;
-    public List<CustomWrappedStack> inputs;
+    public WrappedStack output;
+    public List<WrappedStack> inputs;
     
-    public CustomWrappedRecipe(CustomWrappedStack output, List<CustomWrappedStack> inputs) {
+    public CustomWrappedRecipe(WrappedStack output, List<WrappedStack> inputs) {
         this.output = output;
         this.inputs = collateStacks(inputs);
     }
     
-    public CustomWrappedRecipe(CustomWrappedStack output, CustomWrappedStack ... inputs) {
+    public CustomWrappedRecipe(WrappedStack output, WrappedStack ... inputs) {
         this(output, Arrays.asList(inputs));
     }
     
-    private List<CustomWrappedStack> collateStacks(List<CustomWrappedStack> uncollatedStacks) {
+    private List<WrappedStack> collateStacks(List<WrappedStack> uncollatedStacks) {
         
-        List<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
+        List<WrappedStack> collatedStacks = new ArrayList<WrappedStack>();
         
-        for (CustomWrappedStack stack : uncollatedStacks) {
+        for (WrappedStack stack : uncollatedStacks) {
             
             if (collatedStacks.isEmpty()) {
                 collatedStacks.add(stack);

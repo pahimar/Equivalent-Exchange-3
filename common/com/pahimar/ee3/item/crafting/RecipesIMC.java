@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.helper.RecipeHelper;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 /**
  * Equivalent-Exchange-3
@@ -18,13 +18,13 @@ import com.pahimar.ee3.item.CustomWrappedStack;
  */
 public class RecipesIMC {
     
-    private static Multimap<CustomWrappedStack, List<CustomWrappedStack>> imcRecipes = HashMultimap.create();
+    private static Multimap<WrappedStack, List<WrappedStack>> imcRecipes = HashMultimap.create();
     
-    public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getIMCRecipes() {
+    public static Multimap<WrappedStack, List<WrappedStack>> getIMCRecipes() {
         return imcRecipes;
     }
     
-    public static void addRecipe(CustomWrappedStack recipeOutput, List<?> recipeInputs) {
+    public static void addRecipe(WrappedStack recipeOutput, List<?> recipeInputs) {
         
         imcRecipes.put(recipeOutput, RecipeHelper.collateInputStacks(recipeInputs));
     }

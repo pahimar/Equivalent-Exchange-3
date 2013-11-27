@@ -3,7 +3,7 @@ package com.pahimar.ee3.emc;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 /**
  * Equivalent-Exchange-3
@@ -16,18 +16,18 @@ import com.pahimar.ee3.item.CustomWrappedStack;
  */
 public class EmcValuesIMC {
 
-    private static Map<CustomWrappedStack, EmcValue> preAssignedValueMap = new TreeMap<CustomWrappedStack, EmcValue>();
-    private static Map<CustomWrappedStack, EmcValue> postAssignedValueMap = new TreeMap<CustomWrappedStack, EmcValue>();
+    private static Map<WrappedStack, EmcValue> preAssignedValueMap = new TreeMap<WrappedStack, EmcValue>();
+    private static Map<WrappedStack, EmcValue> postAssignedValueMap = new TreeMap<WrappedStack, EmcValue>();
     
-    public static Map<CustomWrappedStack, EmcValue> getPreAssignedValues() {
+    public static Map<WrappedStack, EmcValue> getPreAssignedValues() {
         return preAssignedValueMap;
     }
     
-    public static Map<CustomWrappedStack, EmcValue> getPostAssignedValues() {
+    public static Map<WrappedStack, EmcValue> getPostAssignedValues() {
         return postAssignedValueMap;
     }
     
-    public static void addPreAssignedValued(CustomWrappedStack wrappedStack, EmcValue emcValue) {
+    public static void addPreAssignedValued(WrappedStack wrappedStack, EmcValue emcValue) {
 
         if (!preAssignedValueMap.containsKey(wrappedStack)) {
             preAssignedValueMap.put(wrappedStack, emcValue);
@@ -37,7 +37,7 @@ public class EmcValuesIMC {
         }
     }
 
-    public static void addPostAssignedValued(CustomWrappedStack wrappedStack, EmcValue emcValue) {
+    public static void addPostAssignedValued(WrappedStack wrappedStack, EmcValue emcValue) {
 
         if (!postAssignedValueMap.containsKey(wrappedStack)) {
             postAssignedValueMap.put(wrappedStack, emcValue);

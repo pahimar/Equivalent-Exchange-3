@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
@@ -27,7 +27,7 @@ public class ItemTooltipEventHandler {
     @ForgeSubscribe
     public void handleItemTooltipEvent(ItemTooltipEvent event) {
 
-        CustomWrappedStack stack = new CustomWrappedStack(event.itemStack);
+        WrappedStack stack = new WrappedStack(event.itemStack);
         if (debug) {
             event.toolTip.add(EnumChatFormatting.AQUA + "ID: " + event.itemStack.itemID + ", Meta: " + event.itemStack.getItemDamage());
             if (stack.getWrappedStack() instanceof OreStack) {

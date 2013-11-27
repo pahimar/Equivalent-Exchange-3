@@ -23,10 +23,4 @@ public class Reference {
     public static final String SERVER_PROXY_CLASS = "com.pahimar.ee3.core.proxy.CommonProxy";
     public static final String CLIENT_PROXY_CLASS = "com.pahimar.ee3.core.proxy.ClientProxy";
     public static final int VERSION_CHECK_ATTEMPTS = 3;
-
-    // Comparator stuff
-    public static final int SMALLER_THAN = -1;
-    public static final int EQUAL_TO = 0;
-    public static final int LARGER_THAN = 1;
-
 }

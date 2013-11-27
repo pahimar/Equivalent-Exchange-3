@@ -1,17 +1,22 @@
 package com.pahimar.ee3.item;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.pahimar.ee3.lib.Compare;
 
 public class OreStack implements Comparable<OreStack> {
 
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = new Gson();
+    
+    private static final int ORE_DICTIONARY_NOT_FOUND = -1;
     
     public int oreId;
     public String oreName;
@@ -78,12 +83,7 @@ public class OreStack implements Comparable<OreStack> {
 
     @Override
     public String toString() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.format("%dxoreDictionary.%s[oreId:%s]", stackSize, oreName, oreId));
-
-        return stringBuilder.toString();
+        return String.format("%sxoreDictionary.%s[oreId:%s]", stackSize, oreName, oreId);
     }
 
     @Override
@@ -92,9 +92,7 @@ public class OreStack implements Comparable<OreStack> {
         if (!(object instanceof OreStack))
             return false;
 
-        OreStack oreStackObject = (OreStack) object;
-
-        return (compareTo(oreStackObject) == 0);
+        return (comparator.compare(this, (OreStack) object) == Compare.EQUALS);
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2) {
@@ -111,39 +109,7 @@ public class OreStack implements Comparable<OreStack> {
     @Override
     public int compareTo(OreStack oreStack) {
 
-        if (oreStack != null) {
-            
-            if (this.oreId != oreStack.oreId) {
-                if (this.oreId > oreStack.oreId) {
-                    return 1;
-                }
-                else {
-                    return -1;
-                }
-            }
-            else {
-                if ((this.oreName != null) && (oreStack.oreName != null)) {
-                    if (this.oreName.equalsIgnoreCase(oreStack.oreName)) {
-                        return (this.stackSize - oreStack.stackSize);
-                    }
-                    else {
-                        return this.oreName.compareToIgnoreCase(oreStack.oreName);
-                    }
-                }
-                else if ((this.oreName != null) && (oreStack.oreName == null)) {
-                    return 1;
-                }
-                else if ((this.oreName == null) && (oreStack.oreName != null)) {
-                    return -1;
-                }
-                else {
-                    return (this.stackSize - oreStack.stackSize);
-                }
-            }
-        }
-        else {
-            return 1;
-        }
+        return comparator.compare(this, oreStack);
     }
     
     /**
@@ -176,4 +142,58 @@ public class OreStack implements Comparable<OreStack> {
 
         return gsonSerializer.toJson(this);
     }
+    
+    public static OreStack getOreStackFromList(List<?> objectList) {
+
+        for (Object listElement : objectList) {
+            if (listElement instanceof ItemStack) {
+                ItemStack stack = (ItemStack) listElement;
+
+                if (OreDictionary.getOreID(stack) != ORE_DICTIONARY_NOT_FOUND) {
+                    return new OreStack(stack);
+                }
+            }
+        }
+
+        return null;
+    }
+    
+    public static int compare(OreStack oreStack1, OreStack oreStack2) {
+        return comparator.compare(oreStack1, oreStack2);
+    }
+    
+    public static Comparator<OreStack> comparator = new Comparator<OreStack>() {
+
+        @Override
+        public int compare(OreStack oreStack1, OreStack oreStack2) {
+            
+            if (oreStack1 != null) {
+                if (oreStack2 != null) {
+                    if (oreStack1.oreId == oreStack2.oreId) {
+                        if (oreStack1.oreName.equalsIgnoreCase(oreStack2.oreName)) {
+                            return oreStack1.stackSize - oreStack2.stackSize;
+                        }
+                        else {
+                            return oreStack1.oreName.compareToIgnoreCase(oreStack2.oreName);
+                        }
+                    }
+                    else {
+                        return oreStack1.oreId - oreStack2.oreId;
+                    }
+                }
+                else {
+                    return Compare.LESSER_THAN;
+                }
+            }
+            else {
+                if (oreStack2 != null) {
+                    return Compare.GREATER_THAN;
+                }
+                else {
+                    return Compare.EQUALS;
+                }
+            }
+        }
+        
+    };
 }

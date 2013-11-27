@@ -10,13 +10,13 @@ import net.minecraft.item.crafting.IRecipe;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.core.helper.RecipeHelper;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class RecipesVanilla {
 
-    private static Multimap<CustomWrappedStack, List<CustomWrappedStack>> vanillaRecipes = null;
+    private static Multimap<WrappedStack, List<WrappedStack>> vanillaRecipes = null;
 
-    public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getVanillaRecipes() {
+    public static Multimap<WrappedStack, List<WrappedStack>> getVanillaRecipes() {
 
         if (vanillaRecipes == null) {
             init();
@@ -38,11 +38,11 @@ public class RecipesVanilla {
 
                 if (recipeOutput != null) {
 
-                    ArrayList<CustomWrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
+                    ArrayList<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
                     
                     if (!recipeInputs.isEmpty())
                     {
-                        vanillaRecipes.put(new CustomWrappedStack(recipeOutput), recipeInputs);
+                        vanillaRecipes.put(new WrappedStack(recipeOutput), recipeInputs);
                     }
                 }
             }

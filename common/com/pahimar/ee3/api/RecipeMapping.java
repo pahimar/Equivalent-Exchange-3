@@ -4,16 +4,16 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class RecipeMapping
 {
     private static Gson gsonSerializer = new Gson();
     
-    public final CustomWrappedStack outputWrappedStack;
-    public final List<CustomWrappedStack> inputWrappedStacks;
+    public final WrappedStack outputWrappedStack;
+    public final List<WrappedStack> inputWrappedStacks;
     
-    public RecipeMapping(CustomWrappedStack outputWrappedStack, List<CustomWrappedStack> inputWrappedStacks) {
+    public RecipeMapping(WrappedStack outputWrappedStack, List<WrappedStack> inputWrappedStacks) {
         this.outputWrappedStack = outputWrappedStack;
         this.inputWrappedStacks = inputWrappedStacks;
     }

@@ -91,9 +91,22 @@ public class ItemHelper {
      *            The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
-    public static boolean compare(ItemStack first, ItemStack second) {
+    public static boolean equals(ItemStack first, ItemStack second) {
 
-        return (ItemStackComparator.compare(first, second) == 0);
+        return (comparator.compare(first, second) == 0);
+    }
+    
+    public static int compare(ItemStack itemStack1, ItemStack itemStack2) {
+        return comparator.compare(itemStack1, itemStack2);
+    }
+    
+    public static String toString(ItemStack itemStack) {
+        
+        if (itemStack != null) {
+             return String.format("%sxitemStack[%s:%s:%s:%s]", itemStack.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName());
+        }
+        
+        return "itemStack[null]";
     }
 
     public static boolean hasColor(ItemStack itemStack) {
@@ -147,7 +160,7 @@ public class ItemHelper {
         }
     }
 
-    public static Comparator<ItemStack> ItemStackComparator = new Comparator<ItemStack>() {
+    public static Comparator<ItemStack> comparator = new Comparator<ItemStack>() {
 
         public int compare(ItemStack itemStack1, ItemStack itemStack2) {
 

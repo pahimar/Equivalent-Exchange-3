@@ -9,13 +9,13 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class RecipesFluidContainers
 {
-    private static Multimap<CustomWrappedStack, List<CustomWrappedStack>> fluidContainerRecipes = null;
+    private static Multimap<WrappedStack, List<WrappedStack>> fluidContainerRecipes = null;
     
-    public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getFluidContainerRecipes() {
+    public static Multimap<WrappedStack, List<WrappedStack>> getFluidContainerRecipes() {
         
         if (fluidContainerRecipes == null) {
             init();
@@ -35,7 +35,7 @@ public class RecipesFluidContainers
                 
                 if (fluidBlock != null) {
                     
-                    fluidContainerRecipes.put(new CustomWrappedStack(data.filledContainer), Arrays.asList(new CustomWrappedStack(fluidBlock), new CustomWrappedStack(data.emptyContainer)));
+                    fluidContainerRecipes.put(new WrappedStack(data.filledContainer), Arrays.asList(new WrappedStack(fluidBlock), new WrappedStack(data.emptyContainer)));
                 }
             }
         }

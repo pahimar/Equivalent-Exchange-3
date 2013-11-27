@@ -5,13 +5,13 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class EmcBlackList {
 
     private static EmcBlackList emcBlackList = null;
 
-    private ArrayList<CustomWrappedStack> stackBlackList = new ArrayList<CustomWrappedStack>();
+    private ArrayList<WrappedStack> stackBlackList = new ArrayList<WrappedStack>();
 
     private EmcBlackList() {
 
@@ -27,7 +27,7 @@ public class EmcBlackList {
         return emcBlackList;
     }
 
-    public List<CustomWrappedStack> getBlackList() {
+    public List<WrappedStack> getBlackList() {
 
         return stackBlackList;
     }
@@ -36,9 +36,9 @@ public class EmcBlackList {
 
         boolean wasAdded = false;
 
-        if (CustomWrappedStack.canBeWrapped(object)) {
+        if (WrappedStack.canBeWrapped(object)) {
 
-            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            WrappedStack wrappedStack = new WrappedStack(object);
             wrappedStack.setStackSize(1);
 
             if (!stackBlackList.contains(wrappedStack)) {
@@ -52,9 +52,9 @@ public class EmcBlackList {
 
     public boolean contains(Object object) {
 
-        if (CustomWrappedStack.canBeWrapped(object)) {
+        if (WrappedStack.canBeWrapped(object)) {
 
-            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            WrappedStack wrappedStack = new WrappedStack(object);
             wrappedStack.setStackSize(1);
 
             return stackBlackList.contains(wrappedStack);
@@ -67,9 +67,9 @@ public class EmcBlackList {
 
         boolean wasRemoved = false;
 
-        if (CustomWrappedStack.canBeWrapped(object)) {
+        if (WrappedStack.canBeWrapped(object)) {
 
-            CustomWrappedStack wrappedStack = new CustomWrappedStack(object);
+            WrappedStack wrappedStack = new WrappedStack(object);
             wrappedStack.setStackSize(1);
 
             if (stackBlackList.contains(wrappedStack)) {

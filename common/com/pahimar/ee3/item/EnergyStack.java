@@ -1,5 +1,9 @@
 package com.pahimar.ee3.item;
 
+import java.util.Comparator;
+
+import com.pahimar.ee3.lib.Compare;
+
 public class EnergyStack implements Comparable<EnergyStack> {
 
     public static final String VANILLA_SMELTING_ENERGY_NAME = "vanillaFuelValueUnits";
@@ -21,12 +25,7 @@ public class EnergyStack implements Comparable<EnergyStack> {
 
     @Override
     public String toString() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.format("%dxenergyStack.%s", stackSize, energyName));
-
-        return stringBuilder.toString();
+        return String.format("%dxenergyStack.%s", stackSize, energyName);
     }
 
     @Override
@@ -36,17 +35,7 @@ public class EnergyStack implements Comparable<EnergyStack> {
             return false;
         }
 
-        EnergyStack energyStack = (EnergyStack) object;
-
-        if ((this.energyName != null) && (energyStack.energyName != null)) {
-            return (stackSize == energyStack.stackSize) && energyName.equalsIgnoreCase(energyStack.energyName);
-        }
-        else if ((this.energyName == null) && (energyStack.energyName == null)) {
-            return (stackSize == energyStack.stackSize);
-        }
-        else {
-            return false;
-        }
+        return (this.compareTo((EnergyStack) object) == Compare.EQUALS);
     }
     
     public static boolean compareEnergyNames(EnergyStack energyStack1, EnergyStack energyStack2) {
@@ -63,27 +52,40 @@ public class EnergyStack implements Comparable<EnergyStack> {
     @Override
     public int compareTo(EnergyStack energyStack) {
 
-        if (energyStack != null) {
-            if ((this.energyName != null) && (energyStack.energyName != null)) {
-                if (this.energyName.equalsIgnoreCase(energyStack.energyName)) {
-                    return (this.stackSize - energyStack.stackSize);
+        return comparator.compare(this, energyStack);
+    }
+    
+    public static int compare(EnergyStack energyStack1, EnergyStack energyStack2) {
+        return comparator.compare(energyStack1, energyStack2);
+    }
+
+    public static Comparator<EnergyStack> comparator = new Comparator<EnergyStack>() {
+
+        @Override
+        public int compare(EnergyStack energyStack1, EnergyStack energyStack2) {
+
+            if (energyStack1 != null) {
+                if (energyStack2 != null) {
+                    if (energyStack1.energyName.equalsIgnoreCase(energyStack2.energyName)) {
+                        return energyStack1.stackSize - energyStack2.stackSize;
+                    }
+                    else {
+                        return energyStack1.energyName.compareToIgnoreCase(energyStack2.energyName);
+                    }
                 }
                 else {
-                    return this.energyName.compareToIgnoreCase(energyStack.energyName);
+                    return Compare.LESSER_THAN;
                 }
             }
-            else if ((this.energyName != null) && (energyStack.energyName == null)) {
-                return 1;
-            }
-            else if ((this.energyName == null) && (energyStack.energyName != null)) {
-                return -1;
-            }
             else {
-                return (this.stackSize - energyStack.stackSize);
+                if (energyStack2 != null) {
+                    return Compare.GREATER_THAN;
+                }
+                else {
+                    return Compare.EQUALS;
+                }
             }
         }
-        else {
-            return 1;
-        }
-    }
+        
+    };
 }

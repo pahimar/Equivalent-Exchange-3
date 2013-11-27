@@ -6,15 +6,15 @@ import java.util.List;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class EmcHelper {
 
-    public static List<CustomWrappedStack> filterStacksByEmc(List<CustomWrappedStack> unfilteredStacks, EmcValue filterValue) {
+    public static List<WrappedStack> filterStacksByEmc(List<WrappedStack> unfilteredStacks, EmcValue filterValue) {
 
-        List<CustomWrappedStack> filteredStacks = new ArrayList<CustomWrappedStack>();
+        List<WrappedStack> filteredStacks = new ArrayList<WrappedStack>();
         
-        for (CustomWrappedStack stack : unfilteredStacks) {
+        for (WrappedStack stack : unfilteredStacks) {
             
             if (EmcRegistry.hasEmcValue(stack)) {
                 
@@ -38,15 +38,15 @@ public class EmcHelper {
         return filteredStacks;
     }
     
-    public static List<CustomWrappedStack> filterStacksByEmcAndRange(float start, float end, EmcValue filterValue) {
+    public static List<WrappedStack> filterStacksByEmcAndRange(float start, float end, EmcValue filterValue) {
         return filterStacksByEmc(EmcRegistry.getStacksInRange(start, end), filterValue);
     }
     
-    public static EmcValue computeEmcValueFromList(List<CustomWrappedStack> wrappedStacks) {
+    public static EmcValue computeEmcValueFromList(List<WrappedStack> wrappedStacks) {
         
         float[] computedSubValues = new float[EmcType.TYPES.length];
         
-        for (CustomWrappedStack wrappedStack : wrappedStacks) {
+        for (WrappedStack wrappedStack : wrappedStacks) {
             
             EmcValue wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
             

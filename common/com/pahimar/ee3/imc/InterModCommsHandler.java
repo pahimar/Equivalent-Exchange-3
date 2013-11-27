@@ -12,7 +12,7 @@ import com.pahimar.ee3.api.StackValueMapping;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.Reference;
 
@@ -69,8 +69,8 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
             
             if (recipeMapping != null) {
                 
-                CustomWrappedStack outputWrappedStack = recipeMapping.outputWrappedStack;
-                List<CustomWrappedStack> inputWrappedStacks = recipeMapping.inputWrappedStacks;
+                WrappedStack outputWrappedStack = recipeMapping.outputWrappedStack;
+                List<WrappedStack> inputWrappedStacks = recipeMapping.inputWrappedStacks;
                 
                 RecipesIMC.addRecipe(outputWrappedStack, inputWrappedStacks);
             }
@@ -101,7 +101,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
             
             if (stackValueMapping != null) {
                 
-                CustomWrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
+                WrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
                 EmcValuesIMC.addPreAssignedValued(customWrappedStack, emcValue);
@@ -123,7 +123,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
             
             if (stackValueMapping != null) {
                 
-                CustomWrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
+                WrappedStack customWrappedStack = stackValueMapping.customWrappedStack;
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
                 EmcValuesIMC.addPostAssignedValued(customWrappedStack, emcValue);
@@ -142,7 +142,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         if (imcMessage.getMessageType() == String.class) {
             
             // TODO What if it is an encoded ItemStack | OreStack | EnergyStack | FluidStack
-            CustomWrappedStack customWrappedStack = CustomWrappedStack.createFromJson(imcMessage.getStringValue());
+            WrappedStack customWrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
             
             if (customWrappedStack != null) {
                 
@@ -168,7 +168,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         if (imcMessage.getMessageType() == String.class) {
             
             // TODO What if it is an encoded ItemStack | OreStack | EnergyStack | FluidStack
-            CustomWrappedStack customWrappedStack = CustomWrappedStack.createFromJson(imcMessage.getStringValue());
+            WrappedStack customWrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
             
             if (customWrappedStack != null) {
                 

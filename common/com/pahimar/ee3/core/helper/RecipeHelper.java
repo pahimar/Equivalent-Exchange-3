@@ -11,7 +11,7 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.EnergyStack;
 import com.pahimar.ee3.item.OreStack;
 
@@ -34,9 +34,9 @@ public class RecipeHelper {
      * @return List of elements that constitute the input of the given IRecipe.
      *         Could be an ItemStack or an Arraylist
      */
-    public static ArrayList<CustomWrappedStack> getRecipeInputs(IRecipe recipe) {
+    public static ArrayList<WrappedStack> getRecipeInputs(IRecipe recipe) {
 
-        ArrayList<CustomWrappedStack> recipeInputs = new ArrayList<CustomWrappedStack>();
+        ArrayList<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
 
         if (recipe instanceof ShapedRecipes) {
 
@@ -52,7 +52,7 @@ public class RecipeHelper {
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new WrappedStack(itemStack));
                 }
             }
         }
@@ -70,7 +70,7 @@ public class RecipeHelper {
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new WrappedStack(itemStack));
                 }
             }
         }
@@ -84,10 +84,10 @@ public class RecipeHelper {
                  * If the element is a list, then it is an OreStack
                  */
                 if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                    CustomWrappedStack oreStack = new CustomWrappedStack(shapedOreRecipe.getInput()[i]);
+                    WrappedStack oreStack = new WrappedStack(shapedOreRecipe.getInput()[i]);
 
                     if (oreStack.getWrappedStack() instanceof OreStack) {
-                        recipeInputs.add(new CustomWrappedStack(shapedOreRecipe.getInput()[i]));
+                        recipeInputs.add(new WrappedStack(shapedOreRecipe.getInput()[i]));
                     }
                 }
                 else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
@@ -98,7 +98,7 @@ public class RecipeHelper {
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new WrappedStack(itemStack));
                 }
             }
         }
@@ -109,7 +109,7 @@ public class RecipeHelper {
             for (Object object : shapelessOreRecipe.getInput()) {
 
                 if (object instanceof ArrayList) {
-                    recipeInputs.add(new CustomWrappedStack(object));
+                    recipeInputs.add(new WrappedStack(object));
                 }
                 else if (object instanceof ItemStack) {
 
@@ -119,7 +119,7 @@ public class RecipeHelper {
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new CustomWrappedStack(itemStack));
+                    recipeInputs.add(new WrappedStack(itemStack));
                 }
             }
         }
@@ -135,20 +135,20 @@ public class RecipeHelper {
      *            List of objects for collating
      * @return A sorted, collated List of CustomWrappedStacks
      */
-    public static List<CustomWrappedStack> collateInputStacks(List<?> uncollatedStacks) {
+    public static List<WrappedStack> collateInputStacks(List<?> uncollatedStacks) {
 
-        List<CustomWrappedStack> collatedStacks = new ArrayList<CustomWrappedStack>();
+        List<WrappedStack> collatedStacks = new ArrayList<WrappedStack>();
 
-        CustomWrappedStack stack = null;
+        WrappedStack stack = null;
         boolean found = false;
 
         for (Object object : uncollatedStacks) {
 
             found = false;
 
-            if (CustomWrappedStack.canBeWrapped(object)) {
+            if (WrappedStack.canBeWrapped(object)) {
 
-                stack = new CustomWrappedStack(object);
+                stack = new WrappedStack(object);
 
                 if (collatedStacks.isEmpty()) {
                     collatedStacks.add(stack);
@@ -158,7 +158,7 @@ public class RecipeHelper {
                     for (int i = 0; i < collatedStacks.size(); i++) {
                         if (collatedStacks.get(i).getWrappedStack() != null) {
                             if (stack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack) {
-                                if (ItemHelper.compare((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
+                                if (ItemHelper.equals((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack())) {
                                     collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
                                     found = true;
                                 }

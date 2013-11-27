@@ -12,22 +12,22 @@ import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class RecipeRegistry {
 
     private static RecipeRegistry recipeRegistry = null;
 
-    private Multimap<CustomWrappedStack, List<CustomWrappedStack>> recipeMap;
-    private List<CustomWrappedStack> discoveredStacks;
+    private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
+    private List<WrappedStack> discoveredStacks;
 
-    public static Multimap<CustomWrappedStack, List<CustomWrappedStack>> getRecipeMappings() {
+    public static Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings() {
 
         lazyInit();
         return recipeRegistry.recipeMap;
     }
 
-    public static List<CustomWrappedStack> getDiscoveredStacks() {
+    public static List<WrappedStack> getDiscoveredStacks() {
 
         lazyInit();
         return Collections.unmodifiableList(recipeRegistry.discoveredStacks);
@@ -63,18 +63,18 @@ public class RecipeRegistry {
 
     private void discoverStacks() {
 
-        discoveredStacks = new ArrayList<CustomWrappedStack>();
+        discoveredStacks = new ArrayList<WrappedStack>();
 
         // Scan stacks from known recipes
-        for (CustomWrappedStack recipeOutput : recipeMap.keySet()) {
-            if (!discoveredStacks.contains(new CustomWrappedStack(recipeOutput.getWrappedStack()))) {
-                discoveredStacks.add(new CustomWrappedStack(recipeOutput.getWrappedStack()));
+        for (WrappedStack recipeOutput : recipeMap.keySet()) {
+            if (!discoveredStacks.contains(new WrappedStack(recipeOutput.getWrappedStack()))) {
+                discoveredStacks.add(new WrappedStack(recipeOutput.getWrappedStack()));
             }
             
-            for (List<CustomWrappedStack> recipeInputList : recipeMap.get(recipeOutput)) {
-                for (CustomWrappedStack recipeInput : recipeInputList) {
-                    if (!discoveredStacks.contains(new CustomWrappedStack(recipeInput.getWrappedStack()))) {
-                        discoveredStacks.add(new CustomWrappedStack(recipeInput.getWrappedStack()));
+            for (List<WrappedStack> recipeInputList : recipeMap.get(recipeOutput)) {
+                for (WrappedStack recipeInput : recipeInputList) {
+                    if (!discoveredStacks.contains(new WrappedStack(recipeInput.getWrappedStack()))) {
+                        discoveredStacks.add(new WrappedStack(recipeInput.getWrappedStack()));
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class RecipeRegistry {
             if (Item.itemsList[i] != null) {
                 if (Item.itemsList[i].getHasSubtypes()) {
                     for (int meta = 0; meta < 16; meta++) {
-                        CustomWrappedStack wrappedItemStack = new CustomWrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
+                        WrappedStack wrappedItemStack = new WrappedStack(new ItemStack(Item.itemsList[i].itemID, 1, meta));
 
                         if (!discoveredStacks.contains(wrappedItemStack)) {
                             discoveredStacks.add(wrappedItemStack);
@@ -93,7 +93,7 @@ public class RecipeRegistry {
                     }
                 }
                 else {
-                    CustomWrappedStack wrappedItemStack = new CustomWrappedStack(Item.itemsList[i]);
+                    WrappedStack wrappedItemStack = new WrappedStack(Item.itemsList[i]);
 
                     if (!discoveredStacks.contains(wrappedItemStack)) {
                         discoveredStacks.add(wrappedItemStack);
@@ -109,14 +109,14 @@ public class RecipeRegistry {
         StringBuilder stringBuilder = new StringBuilder();
 
         // Sort the keys for output to console
-        SortedSet<CustomWrappedStack> set = new TreeSet<CustomWrappedStack>();
+        SortedSet<WrappedStack> set = new TreeSet<WrappedStack>();
         set.addAll(recipeMap.keySet());
 
-        for (CustomWrappedStack key : set) {
+        for (WrappedStack key : set) {
 
-            Collection<List<CustomWrappedStack>> recipeMappings = recipeMap.get(key);
+            Collection<List<WrappedStack>> recipeMappings = recipeMap.get(key);
 
-            for (List<CustomWrappedStack> recipeList : recipeMappings) {
+            for (List<WrappedStack> recipeList : recipeMappings) {
                 stringBuilder.append(String.format("Recipe Output: %s, Recipe Input: %s\n", key.toString(), recipeList.toString()));
             }
         }

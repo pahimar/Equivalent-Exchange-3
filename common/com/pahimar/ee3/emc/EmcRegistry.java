@@ -16,7 +16,7 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
-import com.pahimar.ee3.item.CustomWrappedStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
@@ -26,8 +26,8 @@ public class EmcRegistry {
     
     private static EmcRegistry emcRegistry = null;
 
-    private ImmutableSortedMap<CustomWrappedStack, EmcValue> stackMappings;
-    private ImmutableSortedMap<EmcValue, List<CustomWrappedStack>> valueMappings;
+    private ImmutableSortedMap<WrappedStack, EmcValue> stackMappings;
+    private ImmutableSortedMap<EmcValue, List<WrappedStack>> valueMappings;
 
     public static void lazyInit() {
 
@@ -41,10 +41,10 @@ public class EmcRegistry {
 
         // TODO Duplicate protection?
         
-        ImmutableSortedMap.Builder<CustomWrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        ImmutableSortedMap.Builder<EmcValue, List<CustomWrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        ImmutableSortedMap.Builder<WrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        ImmutableSortedMap.Builder<EmcValue, List<WrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
 
-        Map<CustomWrappedStack, EmcValue> defaultValues = EmcValuesDefault.getDefaultValueMap();
+        Map<WrappedStack, EmcValue> defaultValues = EmcValuesDefault.getDefaultValueMap();
 
         // Grab the default stack:value mappings
         stackMappingsBuilder.putAll(defaultValues);
@@ -57,7 +57,7 @@ public class EmcRegistry {
         
         // Attempt auto-assignment
         int passNumber = 0;
-        Map<CustomWrappedStack, EmcValue> computedStackValues = computeStackMappings();
+        Map<WrappedStack, EmcValue> computedStackValues = computeStackMappings();
 
         while ((computedStackValues.size() > 0) && (passNumber < MAX_ATTEMPTED_ASSIGNMENT_PASSES)) {
             
@@ -77,9 +77,9 @@ public class EmcRegistry {
         stackMappings = stackMappingsBuilder.build();
         
         // Handle the value mappings
-        SortedMap<EmcValue, ArrayList<CustomWrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<CustomWrappedStack>>();
+        SortedMap<EmcValue, ArrayList<WrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<WrappedStack>>();
 
-        for (CustomWrappedStack stack : defaultValues.keySet()) {
+        for (WrappedStack stack : defaultValues.keySet()) {
             EmcValue value = defaultValues.get(stack);
 
             if (tempValueMappings.containsKey(value)) {
@@ -88,7 +88,7 @@ public class EmcRegistry {
                 }
             }
             else {
-                tempValueMappings.put(value, new ArrayList<CustomWrappedStack>(Arrays.asList(stack)));
+                tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
             }
         }
         
@@ -96,17 +96,17 @@ public class EmcRegistry {
         valueMappings = valueMappingsBuilder.build();
     }
     
-    private static Map<CustomWrappedStack, EmcValue> computeStackMappings() {
+    private static Map<WrappedStack, EmcValue> computeStackMappings() {
         
-        Map<CustomWrappedStack, EmcValue> computedStackMap = new HashMap<CustomWrappedStack, EmcValue>();
+        Map<WrappedStack, EmcValue> computedStackMap = new HashMap<WrappedStack, EmcValue>();
         
-        for (CustomWrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
+        for (WrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
             
             if (!hasEmcValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput.getWrappedStack())) {
                 
                 EmcValue lowestValue = null;
                 
-                for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
+                for (List<WrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
                     
                     EmcValue computedValue = EmcHelper.computeEmcValueFromList(recipeInputs);
                     computedValue = EmcHelper.factorEmcValue(computedValue, recipeOutput.getStackSize());
@@ -119,7 +119,7 @@ public class EmcRegistry {
                 }
                 
                 if ((lowestValue != null) && (lowestValue.getValue() > 0f)) {
-                    computedStackMap.put(new CustomWrappedStack(recipeOutput.getWrappedStack()), lowestValue);
+                    computedStackMap.put(new WrappedStack(recipeOutput.getWrappedStack()), lowestValue);
                 }
             }
         }
@@ -131,12 +131,12 @@ public class EmcRegistry {
 
         lazyInit();
 
-        if (CustomWrappedStack.canBeWrapped(object)) {
+        if (WrappedStack.canBeWrapped(object)) {
             
-            CustomWrappedStack stack = new CustomWrappedStack(object);
+            WrappedStack stack = new WrappedStack(object);
             
-            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()))) {
-                return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()));
+            if (emcRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack()))) {
+                return emcRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack()));
             }
             else {
                 
@@ -150,13 +150,13 @@ public class EmcRegistry {
                             
                             OreStack oreStack = new OreStack(wrappedItemStack);
                             
-                            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
-                                return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack));
+                            if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack))) {
+                                return emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack));
                             }
                             else {
                                 for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
-                                    if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
-                                        return emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack));
+                                    if (emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack))) {
+                                        return emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack));
                                     }
                                 }
                             }
@@ -164,7 +164,7 @@ public class EmcRegistry {
                         // Else, scan for if there is a wildcard value for it
                         else {
                             
-                            for (CustomWrappedStack valuedStack : emcRegistry.stackMappings.keySet()) {
+                            for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet()) {
                                 
                                 if (valuedStack.getWrappedStack() instanceof ItemStack) {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
@@ -193,10 +193,10 @@ public class EmcRegistry {
 
         if (hasEmcValue(object, strict)) {
             
-            CustomWrappedStack stack = new CustomWrappedStack(object);
+            WrappedStack stack = new WrappedStack(object);
             
-            if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(stack.getWrappedStack()))) {
-                return emcRegistry.stackMappings.get(new CustomWrappedStack(stack.getWrappedStack()));
+            if (emcRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack()))) {
+                return emcRegistry.stackMappings.get(new WrappedStack(stack.getWrappedStack()));
             }
             else {
                 
@@ -209,19 +209,19 @@ public class EmcRegistry {
                         
                         OreStack oreStack = new OreStack(wrappedItemStack);
                         
-                        if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(oreStack))) {
-                            return emcRegistry.stackMappings.get(new CustomWrappedStack(oreStack));
+                        if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack))) {
+                            return emcRegistry.stackMappings.get(new WrappedStack(oreStack));
                         }
                         else {
                             
                             for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack))) {
                                 
-                                if (emcRegistry.stackMappings.containsKey(new CustomWrappedStack(itemStack))) {
+                                if (emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack))) {
                                     if (lowestValue == null) {
-                                        lowestValue = emcRegistry.stackMappings.get(new CustomWrappedStack(itemStack));
+                                        lowestValue = emcRegistry.stackMappings.get(new WrappedStack(itemStack));
                                     }
                                     else {
-                                        EmcValue itemValue = emcRegistry.stackMappings.get(new CustomWrappedStack(itemStack));
+                                        EmcValue itemValue = emcRegistry.stackMappings.get(new WrappedStack(itemStack));
                                         
                                         if (itemValue.compareTo(lowestValue) < 0) {
                                             lowestValue = itemValue;
@@ -235,7 +235,7 @@ public class EmcRegistry {
                     }
                     else {
                         
-                        for (CustomWrappedStack valuedStack : emcRegistry.stackMappings.keySet()) {
+                        for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet()) {
                             
                             EmcValue stackValue = emcRegistry.stackMappings.get(valuedStack);
                             
@@ -265,27 +265,27 @@ public class EmcRegistry {
         return getEmcValue(object, false);
     }
 
-    public static List<CustomWrappedStack> getStacksInRange(int start, int finish) {
+    public static List<WrappedStack> getStacksInRange(int start, int finish) {
 
         return getStacksInRange(new EmcValue(start), new EmcValue(finish));
     }
 
-    public static List<CustomWrappedStack> getStacksInRange(float start, float finish) {
+    public static List<WrappedStack> getStacksInRange(float start, float finish) {
 
         return getStacksInRange(new EmcValue(start), new EmcValue(finish));
     }
 
-    public static List<CustomWrappedStack> getStacksInRange(EmcValue start, EmcValue finish) {
+    public static List<WrappedStack> getStacksInRange(EmcValue start, EmcValue finish) {
 
         lazyInit();
 
-        List<CustomWrappedStack> stacksInRange = new ArrayList<CustomWrappedStack>();
+        List<WrappedStack> stacksInRange = new ArrayList<WrappedStack>();
 
-        SortedMap<EmcValue, List<CustomWrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);
-        SortedMap<EmcValue, List<CustomWrappedStack>> headMap = emcRegistry.valueMappings.headMap(finish);
+        SortedMap<EmcValue, List<WrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);
+        SortedMap<EmcValue, List<WrappedStack>> headMap = emcRegistry.valueMappings.headMap(finish);
 
-        SortedMap<EmcValue, List<CustomWrappedStack>> smallerMap;
-        SortedMap<EmcValue, List<CustomWrappedStack>> biggerMap;
+        SortedMap<EmcValue, List<WrappedStack>> smallerMap;
+        SortedMap<EmcValue, List<WrappedStack>> biggerMap;
 
         if (!tailMap.isEmpty() && !headMap.isEmpty()) {
 
@@ -312,7 +312,7 @@ public class EmcRegistry {
 
         lazyInit();
         
-        for (CustomWrappedStack stack : emcRegistry.stackMappings.keySet()) {
+        for (WrappedStack stack : emcRegistry.stackMappings.keySet()) {
             LogHelper.debug("Stack: " + stack + ", Value: " + emcRegistry.stackMappings.get(stack));
         }
     }
@@ -320,12 +320,12 @@ public class EmcRegistry {
     public static void printUnmappedStacks() {
         
         lazyInit();
-        List<CustomWrappedStack> discoveredStacks = new ArrayList<CustomWrappedStack>(RecipeRegistry.getDiscoveredStacks());
+        List<WrappedStack> discoveredStacks = new ArrayList<WrappedStack>(RecipeRegistry.getDiscoveredStacks());
         Collections.sort(discoveredStacks);
-        for (CustomWrappedStack stack : discoveredStacks) {
+        for (WrappedStack stack : discoveredStacks) {
             if (!hasEmcValue(stack)) {
                 if (RecipeRegistry.getRecipeMappings().get(stack).size() > 0) {
-                    for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(stack)) {
+                    for (List<WrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(stack)) {
                         LogHelper.debug(stack + ": " + RecipeHelper.collateInputStacks(recipeInputs));
                     }
                 }
@@ -340,11 +340,11 @@ public class EmcRegistry {
         
         lazyInit();
         
-        List<CustomWrappedStack> unmappedStacks = new ArrayList<CustomWrappedStack>();
+        List<WrappedStack> unmappedStacks = new ArrayList<WrappedStack>();
         
-        for (CustomWrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
+        for (WrappedStack recipeOutput : RecipeRegistry.getRecipeMappings().keySet()) {
             
-            CustomWrappedStack unitStack = new CustomWrappedStack(recipeOutput.getWrappedStack());
+            WrappedStack unitStack = new WrappedStack(recipeOutput.getWrappedStack());
             
             if (!hasEmcValue(unitStack)) {
                 unmappedStacks.add(recipeOutput);
@@ -353,9 +353,9 @@ public class EmcRegistry {
         
         Collections.sort(unmappedStacks);
         
-        for (CustomWrappedStack recipeOutput : unmappedStacks) {
+        for (WrappedStack recipeOutput : unmappedStacks) {
             
-            for (List<CustomWrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
+            for (List<WrappedStack> recipeInputs : RecipeRegistry.getRecipeMappings().get(recipeOutput)) {
                 LogHelper.debug(String.format("Recipe Output: %s, Recipe Inputs: %s", recipeOutput, RecipeHelper.collateInputStacks(recipeInputs)));
             }
         }
