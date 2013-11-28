@@ -49,6 +49,8 @@ sourceSets {
     }
 }
 
+compileJava.source = sourceSets.filtered.java
+
 task processTokens (type: Copy) {
     into filteredSourceDir
     from(sourceSets.main.java.srcDirs) {
