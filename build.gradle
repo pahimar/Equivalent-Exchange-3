@@ -87,9 +87,12 @@ repositories {
 }
 
 task Buildnumber {
-    // Somewhat of a hack -- increments build number.
-    ant.propertyfile(file: "build.properties") {
-        entry(key: 'buildNumber', type: 'int', operation: '+', value: 1)
+    doFirst {
+        // Somewhat of a hack -- increments build number.
+        buildNumber++
+        ant.propertyfile(file: "build.properties") {
+            entry(key: 'buildNumber', type: 'int', operation: '=', value: project.buildNumber)
+        }
     }
 }
 
