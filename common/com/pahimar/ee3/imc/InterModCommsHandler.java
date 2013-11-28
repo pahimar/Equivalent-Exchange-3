@@ -4,12 +4,14 @@ import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.api.StackValueMapping;
+import com.pahimar.ee3.core.helper.FluidHelper;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
@@ -92,6 +94,11 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
                 EmcValuesIMC.addPreAssignedValued(wrappedStack, emcValue);
+                
+                if (wrappedStack.getWrappedStack() instanceof FluidStack) {
+                    
+                    EmcValuesIMC.addPreAssignedValued(FluidHelper.getFluidBlock(wrappedStack), emcValue);
+                }
             }
             else {
                 // TODO Log that the message payloads json was invalid
@@ -114,6 +121,11 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                 EmcValue emcValue = stackValueMapping.emcValue;
                 
                 EmcValuesIMC.addPostAssignedValued(wrappedStack, emcValue);
+                
+                if (wrappedStack.getWrappedStack() instanceof FluidStack) {
+                    
+                    EmcValuesIMC.addPostAssignedValued(FluidHelper.getFluidBlock(wrappedStack), emcValue);
+                }
             }
             else {
                 // TODO Log that the message payloads json was invalid

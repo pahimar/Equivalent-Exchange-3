@@ -7,10 +7,11 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.OreStack;
+import com.pahimar.ee3.item.WrappedStack;
 
 public class EmcValuesDefault {
 
@@ -56,7 +57,9 @@ public class EmcValuesDefault {
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
         
         // Fluids      
+        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(Block.lavaStill), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
 
         /* Building Blocks */
