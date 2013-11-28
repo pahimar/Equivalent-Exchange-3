@@ -14,6 +14,9 @@ buildscript {
 
 apply plugin: "forge"
 
+// I can't get expand to agree with me.
+import org.apache.tools.ant.filters.ReplaceTokens
+
  // Load properties from arbitrary files.
 def loadProperties(String sourceFileName) {
     def config = new Properties()
@@ -41,6 +44,8 @@ minecraft {
     assetDir = "build/vanilla/assets"
 }
 
+// Token replacing stuff {
+
 sourceSets {
     filtered {
         java {
@@ -56,9 +61,9 @@ task processTokens (type: Copy) {
     from(sourceSets.main.java.srcDirs) {
         include '**/EquivalentExchange3.java'
         include '**/Reference.java'
-        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens:[VERSION: project.modVersion, BUILD_NUMBER: project.buildNumber])
-        if (hasProperty('keystoreLocation'))
-            filter(org.apache.tools.ant.filters.ReplaceTokens, tokens:[FINGERPRINT: project.fingerprintSignature])
+        filter(ReplaceTokens, tokens:[VERSION: project.modVersion, BUILD_NUMBER: project.buildNumber])
+        if (hasProperty('fingerprintSignature'))
+            filter(ReplaceTokens, tokens:[FINGERPRINT: project.fingerprintSignature])
     }
     from(sourceSets.main.java.srcDirs) {
         exclude '**/Reference.java'
@@ -75,19 +80,21 @@ processResources {
         include '**/*.info'
 
         // Fix those tokens
-        expand 'VERSION':project.modVersion
+        expand 'VERSION':project.version
     }
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.info'
     }
 }
 
+// }
+
 repositories {
     mavenCentral()
 }
 
 task Buildnumber {
-    // Somewhat of a hack -- increments build number.
+    // Increments build number using the ant method.
     ant.propertyfile(file: "build.properties") {
         entry(key: 'buildNumber', type: 'int', operation: '+', value: 1)
     }
