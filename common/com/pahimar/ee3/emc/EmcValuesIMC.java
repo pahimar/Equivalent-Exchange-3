@@ -29,21 +29,31 @@ public class EmcValuesIMC {
     
     public static void addPreAssignedValued(WrappedStack wrappedStack, EmcValue emcValue) {
 
-        if (!preAssignedValueMap.containsKey(wrappedStack)) {
-            preAssignedValueMap.put(wrappedStack, emcValue);
+        if (wrappedStack != null) {
+            if (!preAssignedValueMap.containsKey(wrappedStack)) {
+                preAssignedValueMap.put(wrappedStack, emcValue);
+            }
+            else {
+                // TODO Log that we already have a value for that
+            }
         }
         else {
-            // TODO Log that we already have a value for that
+            // TODO Logging
         }
     }
 
     public static void addPostAssignedValued(WrappedStack wrappedStack, EmcValue emcValue) {
 
-        if (!postAssignedValueMap.containsKey(wrappedStack)) {
-            postAssignedValueMap.put(wrappedStack, emcValue);
+        if (wrappedStack != null) {
+            if (!postAssignedValueMap.containsKey(wrappedStack)) {
+                postAssignedValueMap.put(wrappedStack, emcValue);
+            }
+            else {
+                // TODO Log that we already have a value for that
+            }
         }
         else {
-            // TODO Log that we already have a value for that
+            // TODO Logging
         }
     }
 }
