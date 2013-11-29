@@ -1,0 +1,107 @@
+// this part adds in ForgeGradle
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+    }
+}
+
+apply plugin: "forge"
+
+// I can't get expand to agree with me.
+import org.apache.tools.ant.filters.ReplaceTokens
+
+ // Load properties from arbitrary files.
+def loadProperties(String sourceFileName) {
+    def config = new Properties()
+        def propFile = new File(sourceFileName)
+            if (propFile.canRead()) {
+                config.load(new FileInputStream(propFile))
+                    for (Map.Entry property in config) {
+                        ext[property.key] = property.value;
+                    }
+            }
+}
+
+// Load the user properties
+loadProperties 'build.properties'
+loadProperties 'private.properties'
+
+// stuff specific to ee3
+group = 'com.pahimar.ee3'
+archivesBaseName = 'ee3-universal'
+version = "$modVersion-$buildNumber"
+def filteredSourceDir = file("build/filtered")
+
+minecraft {
+    version = "$minecraftVersion-$forgeVersion" // grab latest forge
+    assetDir = "build/vanilla/assets"
+}
+
+// Token replacing stuff {
+
+sourceSets {
+    filtered {
+        java {
+            srcDirs = [filteredSourceDir]
+        }
+    }
+}
+
+compileJava.source = sourceSets.filtered.java
+
+task processTokens (type: Copy) {
+    into filteredSourceDir
+    from(sourceSets.main.java.srcDirs) {
+        include '**/EquivalentExchange3.java'
+        include '**/Reference.java'
+        filter(ReplaceTokens, tokens:[VERSION: project.modVersion, BUILD_NUMBER: project.buildNumber])
+        if (hasProperty('fingerprintSignature'))
+            filter(ReplaceTokens, tokens:[FINGERPRINT: project.fingerprintSignature])
+    }
+    from(sourceSets.main.java.srcDirs) {
+        exclude '**/Reference.java'
+	exclude '**/EquivalentExchange3.java'
+    }
+}
+
+compileJava.dependsOn processTokens
+
+processResources {
+    exclude '**/xcf/**'
+
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+
+        // Fix those tokens
+        expand 'VERSION':project.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+    }
+}
+
+// }
+
+repositories {
+    mavenCentral()
+}
+
+task Buildnumber {
+    // Increments build number using the ant method.
+    ant.propertyfile(file: "build.properties") {
+        entry(key: 'buildNumber', type: 'int', operation: '+', value: 1)
+    }
+}
+
+task release (dependsOn: [build, Buildnumber]) {
+    // Only does the jar signing if you have a keystore. Otherwise, build and release are the same.
+    if (hasProperty('keystoreLocation'))
+        ant.signjar(jar: 'build/libs/ee3-universal-$modVersion-$buildNumber.jar', keystore: "$keystoreLocation", alias: "$keystoreAlias", storepass: "$keystorePassword")
+}

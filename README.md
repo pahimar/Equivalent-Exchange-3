@@ -20,7 +20,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
   * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_40` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
   * Scroll down to a variable named `Path`, and double-click on it.
   * Append `;%JAVA_HOME%\bin`, and click `Ok`.
-3. Download Apache Ant [here](http://ant.apache.org).
+3. Download Apache Ant [here](http://ant.apache.org). NOTE: Ant is currently needed only if signing the jar file.
 	* Unzip the files anywhere you want, eg `C:\Program Files\Ant`.
   * Again, go to `Environment Variables` just like you did for the Java JDK.
   * Under `System Variables`, click `New`.
@@ -41,7 +41,7 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 	* In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
 	* In Fedora, `yum install java-1.7.0-openjdk`
 		* If your distribution is not listed, follow the instructions specific to your package manager.
-2. Install Apache Ant.  To install manually, go [here](http://ant.apache.org).
+2. Install Apache Ant.  To install manually, go [here](http://ant.apache.org). NOTE: Ant is currently needed only if signing the jar file.
 	* In Gentoo, `emerge dev-java/ant`
 	* In Archlinux, `pacman -S apache-ant`
 	* In Ubuntu/Debian, `apt-get install ant`
@@ -57,62 +57,29 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Mac Prerequisites
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but it is often Java 6, which does not always work.)
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but not the JDK.)
 2. Apache Ant should already be installed on your computer.  To check, go into Terminal, and type `ant --version`.  It should return a version string.  If you get a "command not found" error, it's not installed.
 3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
 	* Create an account.
   * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
   * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Mac defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
-5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
-
-
-#### Setup MCP
-NOTE: You may skip to "Setup EE3" if you want to let EE3 download and set up MCP for you.  Simply run `ant forge-install`, then `ant build`.
-
-1. Download the latest version of Forge source from [here](http://files.minecraftforge.net)
-2. Inside `mcdev`, unzip the zip file. 
-	* You should get a folder named "forge" inside "mcdev" containing the forge patches and licenses, etc. 
-3. Execute `install.sh` (Linux and Mac) or `install.cmd` (Windows), both found in `mcdev\forge`. On Linux you might have to `chmod +x install.sh` before you can execute it. 
-	* This will take some time, be patient. 
 
 #### Setup EE3
-1. Inside `mcdev`, create a directory named `source`.
-2. Move/clone `Equivalent-Exchange-3` into `source`.
-3. Right now, you should have a directory that looks something like:
-
-***
-
-	mcdev
-	\-forge
-		\-mcp
-			\-jars
-			\-CHANGELOG, etc.
-		\-install.cmd
-		\-install.sh
-		\-MinecraftForge-Changelog.txt, etc.
-	\-source
-		\-Equivalent-Exchange-3
-			\-EE3's files (should have build.xml).
-***
-
-4. Inside `Equivalent-Exchange-3`, create a new file called `environment.properties`.
-	* Open it up with any text editor, and type the following into it (change `base_location` to wherever you have "mcdev". NOTE: Paths must use forward slashes.  All of the variables are changeable for your setup.):
- 		* `base_location=C:/mcdev/`
- 		* `source_location=${base_location}/source/Equivalent-Exchange-3`
- 		* `mcp_location=${base_location}/forge/mcp`
- 		* `release_location=${base_location}/source/Equivalent-Exchange-3/Releases`
- 	* You may also edit the build.properties to change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (`forge_version` is only used when running `ant forge-install`)
- 		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.1.934`
- 		* `mod_version=pre2`
- 		* `build_number=1`
-5. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
-6. Navigate to `mcdev\source\Equivalent-Exchange-3` by executing `cd mcdev's location\source\Equivalent-Exchange-3`.
-7. Execute `ant build`. (If you want EE3 to setup Forge, run `ant forge-install` first.) This will generally take around 5-15 minutes, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
+1. Move/clone `Equivalent-Exchange-3` into whatever directory you want.
+2. Inside `Equivalent-Exchange-3`, edit the file called `build.properties`.
+ 	* You may change the build string (`modVersion` and `buildNumber`), and the Minecraft and Forge version you are building for.
+ 		* `minecraftVersion=1.6.4`
+ 		* `forgeVersion=9.11.1.964`
+ 		* `modVersion=pre2a`
+ 		* `buildNumber=1`
+3. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
+4. Navigate to `Equivalent-Exchange-3` by executing `cd Equivalent-Exchange-3`.
+5. Execute `gradlew.bat setupDevWorkspace` or `gradlew setupDevWorkspace` in Linux and Mac OS X. (This sets up forge.)
+6. Execute `gradlew.bat release` or `gradlew release` in Linux and Mac OS X. This will generally take around 1 minute, depending on your computer.  If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes.
 	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
-8. Go to `mcdev\source\Equivalent-Exchange-3\Releases\MC 1.6.4\pre2`.
-	*  You should see a `.jar` file named `ee3-universal-pre2.jar`.
-9. Copy the jar into your Minecraft mods folder, and play Minecraft (If you have Forge installed on your client).
+7. Go to `Equivalent-Exchange-3\build\libs`.
+	*  You should see a `.jar` file named `ee3-universal-pre2a-1.jar`.
+8. Copy the jar into your Minecraft mods folder, and play Minecraft (If you have Forge installed on your client).
 
 #### Updating Your Repo (For Windows/Mac)
 1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
