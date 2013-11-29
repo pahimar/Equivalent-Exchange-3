@@ -51,6 +51,11 @@ public class EmcRegistry {
                     EmcValue emcValue = defaultValuesMap.get(wrappedStack);
                     
                     if (emcValue != null && emcValue.getValue() > 0f) {
+                        if (wrappedStack.getStackSize() > 1) {
+                            
+                            emcValue.divideBy(wrappedStack.getStackSize());
+                            wrappedStack.setStackSize(1);
+                        }
                         stackValueMap.put(wrappedStack, emcValue);
                     }
                 }
@@ -67,6 +72,11 @@ public class EmcRegistry {
                     EmcValue emcValue = preAssignedValuesMap.get(wrappedStack);
                     
                     if (emcValue != null && emcValue.getValue() > 0f) {
+                        if (wrappedStack.getStackSize() > 1) {
+                            
+                            emcValue.divideBy(wrappedStack.getStackSize());
+                            wrappedStack.setStackSize(1);
+                        }
                         stackValueMap.put(wrappedStack, emcValue);
                     }
                 }
@@ -106,6 +116,11 @@ public class EmcRegistry {
                 EmcValue emcValue = postAssignedValuesMap.get(wrappedStack);
                 
                 if (emcValue != null && emcValue.getValue() > 0f) {
+                    if (wrappedStack.getStackSize() > 1) {
+                        
+                        emcValue.divideBy(wrappedStack.getStackSize());
+                        wrappedStack.setStackSize(1);
+                    }
                     stackValueMap.put(wrappedStack, emcValue);
                 }
             }

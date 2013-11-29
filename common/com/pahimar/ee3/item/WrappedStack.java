@@ -58,7 +58,7 @@ public class WrappedStack
             object = new ItemStack((Block) object);
         }
         else if (object instanceof Fluid) {
-            object = new FluidStack((Fluid) object, 1);
+            object = new FluidStack((Fluid) object, 1000);
         }
 
         if (object instanceof ItemStack) {

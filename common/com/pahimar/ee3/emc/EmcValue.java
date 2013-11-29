@@ -111,6 +111,68 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
         return sumSubValues;
     }
+    
+    /**
+     * Adds the given EmcValue to this EmcValue
+     * 
+     * @param The EmcValue to add
+     */
+    public void add(EmcValue emcValue) {
+        
+        for (int i = 0; i < components.length; i++) {
+            
+            components[i] += emcValue.components[i];
+        }
+    }
+    
+    /**
+     * Subtracts the given EmcValue from this EmcValue
+     * If a new EmcComponent will have a value lower than 0 this will return false
+     * 
+     * @param The EmcValue to subtract
+     * @return Subtraction succeeded
+     */
+    public boolean subtract(EmcValue emcValue) {
+        
+        for (int i = 0; i < components.length; i++) {
+            
+            if (components[i] - emcValue.components[i] < 0) {
+                
+                return false;
+            }
+        }
+        for (int i = 0; i < components.length; i++) {
+            
+            components[i] -= emcValue.components[i];
+        }
+        return true;
+    }
+    
+    /**
+     * Divides this EmcValue with the given divisor
+     * 
+     * @param divisor
+     */
+    public void divideBy(float divisor) {
+        
+        for (int i = 0; i < components.length; i++) {
+            
+            components[i] /= divisor;
+        }
+    }
+    
+    /**
+     * Multiplies this EmcValue with the given factor
+     * 
+     * @param factor
+     */
+    public void multiplyBy(float factor) {
+        
+        for (int i = 0; i < components.length; i++) {
+            
+            components[i] *= factor;
+        }
+    }
 
     @Override
     public boolean equals(Object object) {

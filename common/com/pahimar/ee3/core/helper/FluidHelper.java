@@ -2,8 +2,11 @@ package com.pahimar.ee3.core.helper;
 
 import java.util.Comparator;
 
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.lib.Compare;
 
+import net.minecraft.block.Block;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidHelper {
@@ -19,6 +22,31 @@ public class FluidHelper {
         }
         
         return "fluidStack[null]";
+    }
+    
+    public static Block getFluidBlock(Fluid fluid) {
+        
+        if (fluid != null && fluid.getBlockID() > 0) {
+            
+            Block block = Block.blocksList[fluid.getBlockID()];
+            return block;
+        }
+        
+        return null;
+    }
+    
+    public static WrappedStack getFluidBlock(WrappedStack wrappedStack) {
+        
+        if (wrappedStack.getWrappedStack() instanceof FluidStack) {
+            
+            Block block = getFluidBlock(((FluidStack)wrappedStack.getWrappedStack()).getFluid());
+            if (block != null) {
+                
+                return new WrappedStack(block);
+            }
+        }
+        
+        return null;
     }
     
     public static Comparator<FluidStack> comparator = new Comparator<FluidStack>() {
