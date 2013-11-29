@@ -29,10 +29,7 @@ public class FluidHelper {
         if (fluid != null && fluid.getBlockID() > 0) {
             
             Block block = Block.blocksList[fluid.getBlockID()];
-            if (block != null) {
-                
-                return block;
-            }
+            return block;
         }
         
         return null;
@@ -42,14 +39,10 @@ public class FluidHelper {
         
         if (wrappedStack.getWrappedStack() instanceof FluidStack) {
             
-            FluidStack fluidStack = (FluidStack)wrappedStack.getWrappedStack();
-            if (fluidStack != null) {
+            Block block = getFluidBlock(((FluidStack)wrappedStack.getWrappedStack()).getFluid());
+            if (block != null) {
                 
-                Block block = getFluidBlock(fluidStack.getFluid());
-                if (block != null)
-                {
-                    return new WrappedStack(block);
-                }
+                return new WrappedStack(block);
             }
         }
         

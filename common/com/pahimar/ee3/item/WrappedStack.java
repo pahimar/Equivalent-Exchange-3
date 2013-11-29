@@ -113,7 +113,7 @@ public class WrappedStack
             FluidStack fluidStack = (FluidStack) object;
 
             className = object.getClass().getSimpleName();
-            stackSize = fluidStack.amount/1000;
+            stackSize = fluidStack.amount;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
