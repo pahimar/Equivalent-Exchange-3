@@ -16,8 +16,8 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.core.helper.EmcHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
-import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.OreStack;
+import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 
 public class EmcRegistry {
@@ -39,23 +39,48 @@ public class EmcRegistry {
 
     private void init() {
 
-        // TODO Duplicate protection?
+        HashMap<WrappedStack, EmcValue> stackValueMap = new HashMap<WrappedStack, EmcValue>();
         
+        /*
+         *  Default values
+         */
+        Map<WrappedStack, EmcValue> defaultValuesMap = EmcValuesDefault.getDefaultValueMap();
+        for (WrappedStack wrappedStack : defaultValuesMap.keySet()) {
+            if (wrappedStack != null) {
+                if (!stackValueMap.keySet().contains(wrappedStack)) {
+                    EmcValue emcValue = defaultValuesMap.get(wrappedStack);
+                    
+                    if (emcValue != null && emcValue.getValue() > 0f) {
+                        stackValueMap.put(wrappedStack, emcValue);
+                    }
+                }
+            }
+        }
+        
+        /*
+         *  IMC Pre-assigned values
+         */
+        Map<WrappedStack, EmcValue> preAssignedValuesMap = EmcValuesIMC.getPreAssignedValues();
+        for (WrappedStack wrappedStack : preAssignedValuesMap.keySet()) {
+            if (wrappedStack != null) {
+                if (!stackValueMap.keySet().contains(wrappedStack)) {
+                    EmcValue emcValue = preAssignedValuesMap.get(wrappedStack);
+                    
+                    if (emcValue != null && emcValue.getValue() > 0f) {
+                        stackValueMap.put(wrappedStack, emcValue);
+                    }
+                }
+            }
+        }
+        
+        /*
+         *  Auto-assignment
+         */
         ImmutableSortedMap.Builder<WrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        ImmutableSortedMap.Builder<EmcValue, List<WrappedStack>> valueMappingsBuilder = ImmutableSortedMap.naturalOrder();
-
-        Map<WrappedStack, EmcValue> defaultValues = EmcValuesDefault.getDefaultValueMap();
-
-        // Grab the default stack:value mappings
-        stackMappingsBuilder.putAll(defaultValues);
-
-        // Grab the pre-auto assignment values gathered from IMC
-        stackMappingsBuilder.putAll(EmcValuesIMC.getPreAssignedValues());
-        
-        // Build the Immutable stack:value map
+        stackMappingsBuilder.putAll(stackValueMap);
+        stackValueMap.clear();
         stackMappings = stackMappingsBuilder.build();
         
-        // Attempt auto-assignment
         int passNumber = 0;
         Map<WrappedStack, EmcValue> computedStackValues = computeStackMappings();
 
@@ -70,17 +95,32 @@ public class EmcRegistry {
             stackMappings = stackMappingsBuilder.build();
         }
         
-        // Grab the post-auto assignment values gathered from IMC
+        /*
+         *  IMC Post-assigned values
+         */
+        stackValueMap.putAll(stackMappings);
+        Map<WrappedStack, EmcValue> postAssignedValuesMap = EmcValuesIMC.getPostAssignedValues();
+        for (WrappedStack wrappedStack : postAssignedValuesMap.keySet()) {
+            if (wrappedStack != null) {
+                
+                EmcValue emcValue = postAssignedValuesMap.get(wrappedStack);
+                
+                if (emcValue != null && emcValue.getValue() > 0f) {
+                    stackValueMap.put(wrappedStack, emcValue);
+                }
+            }
+        }
         stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackMappings); 
-        stackMappingsBuilder.putAll(EmcValuesIMC.getPostAssignedValues());
+        stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
         
-        // Handle the value mappings
-        SortedMap<EmcValue, ArrayList<WrappedStack>> tempValueMappings = new TreeMap<EmcValue, ArrayList<WrappedStack>>();
+        /*
+         *  Value map resolution
+         */
+        SortedMap<EmcValue, List<WrappedStack>> tempValueMappings = new TreeMap<EmcValue, List<WrappedStack>>();
 
-        for (WrappedStack stack : defaultValues.keySet()) {
-            EmcValue value = defaultValues.get(stack);
+        for (WrappedStack stack : stackMappings.keySet()) {
+            EmcValue value = stackMappings.get(stack);
 
             if (tempValueMappings.containsKey(value)) {
                 if (!(tempValueMappings.get(value).contains(stack))) {
@@ -92,8 +132,7 @@ public class EmcRegistry {
             }
         }
         
-        valueMappingsBuilder.putAll(tempValueMappings);
-        valueMappings = valueMappingsBuilder.build();
+        valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
     
     private static Map<WrappedStack, EmcValue> computeStackMappings() {
