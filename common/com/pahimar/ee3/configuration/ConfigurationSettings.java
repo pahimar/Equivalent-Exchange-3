@@ -114,4 +114,15 @@ public class ConfigurationSettings {
     public static final String TRANSMUTE_COST_MOB_CONFIGNAME = Strings.TRANSMUTATION_COST_MOB;
     public static final int TRANSMUTE_COST_MOB_DEFAULT = 1;
 
+    public static int RED_WATER_DENSITY;
+    public static final String RED_WATER_DENSITY_CONFIGNAME = "redWaterDensityConfigName";
+    public static final int RED_WATER_DENSITY_DEFAULT = 1000;
+
+    public static int RED_WATER_VISCOSITY;
+    public static final String RED_WATER_VISCOSITY_CONFIGNAME = "redWaterViscosityConfigname";
+    public static final int RED_WATER_VISCOSITY_DEFAULT = 1000;
+
+
+
+
 }

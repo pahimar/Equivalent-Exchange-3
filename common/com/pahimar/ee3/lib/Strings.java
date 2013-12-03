@@ -62,6 +62,7 @@ public class Strings {
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String GLASS_BELL_NAME = "glassBell";
+    public static final String BLOCK_RED_WATER_NAME = "blockRedWater";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";
@@ -71,6 +72,9 @@ public class Strings {
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
     public static final String ALCHEMICAL_CHALK_NAME = "alchemicalChalk";
+
+    /* Fluid name constants */
+    public static final String FLUID_RED_WATER_NAME = "redWater";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";

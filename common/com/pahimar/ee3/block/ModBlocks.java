@@ -1,5 +1,6 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.fluid.BlockRedWater;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,7 @@ public class ModBlocks {
     public static Block aludelBase;
     public static Block alchemicalChest;
     public static Block glassBell;
+    public static Block blockRedWater;
 
     public static void init() {
 
@@ -32,11 +34,13 @@ public class ModBlocks {
         aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
         alchemicalChest = new BlockAlchemicalChest(BlockIds.ALCHEMICAL_CHEST);
         glassBell = new BlockGlassBell(BlockIds.GLASS_BELL);
+        blockRedWater = new BlockRedWater(BlockIds.BLOCK_RED_WATER);
 
         GameRegistry.registerBlock(calcinator, Strings.CALCINATOR_NAME);
         GameRegistry.registerBlock(aludelBase, Strings.ALUDEL_NAME);
         GameRegistry.registerBlock(alchemicalChest, Strings.ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerBlock(glassBell, Strings.GLASS_BELL_NAME);
+        GameRegistry.registerBlock(blockRedWater, Strings.BLOCK_RED_WATER_NAME);
 
         initBlockRecipes();
     }

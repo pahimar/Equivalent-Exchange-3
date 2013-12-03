@@ -1,15 +1,13 @@
 package com.pahimar.ee3.configuration;
 
-import java.io.File;
-import java.util.logging.Level;
-
-import net.minecraftforge.common.Configuration;
-
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-
 import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.common.Configuration;
+
+import java.io.File;
+import java.util.logging.Level;
 
 public class BlockConfiguration {
 
@@ -27,6 +25,7 @@ public class BlockConfiguration {
             BlockIds.ALUDEL_BASE = blockConfiguration.getBlock(Strings.ALUDEL_NAME, BlockIds.ALUDEL_BASE_DEFAULT).getInt(BlockIds.ALUDEL_BASE_DEFAULT);
             BlockIds.ALCHEMICAL_CHEST = blockConfiguration.getBlock(Strings.ALCHEMICAL_CHEST_NAME, BlockIds.ALCHEMICAL_CHEST_DEFAULT).getInt(BlockIds.ALCHEMICAL_CHEST_DEFAULT);
             BlockIds.GLASS_BELL = blockConfiguration.getBlock(Strings.GLASS_BELL_NAME, BlockIds.GLASS_BELL_DEFAULT).getInt(BlockIds.GLASS_BELL_DEFAULT);
+            BlockIds.BLOCK_RED_WATER = blockConfiguration.getBlock(Strings.BLOCK_RED_WATER_NAME, BlockIds.BLOCK_RED_WATER_DEFAULT).getInt(BlockIds.BLOCK_RED_WATER_DEFAULT);
         }
         catch (Exception e) {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its block configuration");
