@@ -19,14 +19,10 @@ item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
 item.ee3:alchemicalChalk.name=Алхимический мел [WIP]
 
 # Block localizations
-tile.ee3:redWaterStill.name=Красная вода (Стоящая)
-tile.ee3:redWaterFlowing.name=Красная вода (Текущая)
 tile.ee3:calcinator.name=Кальцинатор [WIP]
 tile.ee3:aludel.name=Алюдель [WIP]
 tile.ee3:alchemicalChest.name=Алхимический сундук [WIP]
 tile.ee3:glassBell.name=Стеклянный колпак [WIP]
-tile.ee3:alchemyTable.name=Алхимический стол [WIP]
-tile.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
 
 # GUI localizations
 container.ee3:calcinator=Кальцинатор [WIP]
@@ -34,8 +30,6 @@ container.ee3:aludel=Алюдель [WIP]
 container.ee3:alchemicalChest=Алхимический сундук [WIP]
 container.ee3:alchemicalBag=Алхимическая сумка [WIP]
 container.ee3:glassBell=Стеклянный колпак [WIP]
-container.ee3:alchemyTable.name=Алхимический стол [WIP]
-container.ee3:renderingTank.name=Котёл для вытопки жира [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Панель цели трансмутации включена
