@@ -1,16 +1,14 @@
 package com.pahimar.ee3.configuration;
 
-import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.Reference;
+import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.common.Configuration;
 
 import java.io.File;
 import java.util.logging.Level;
 
-import net.minecraftforge.common.Configuration;
-
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Reference;
-
-import cpw.mods.fml.common.FMLLog;
+import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
 
 public class GeneralConfiguration {
 
@@ -26,6 +24,11 @@ public class GeneralConfiguration {
 
         try {
             generalConfiguration.load();
+
+            /*Fluids*/
+            ConfigurationSettings.RED_WATER_DENSITY = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.RED_WATER_DENSITY_CONFIGNAME, ConfigurationSettings.RED_WATER_DENSITY_DEFAULT).getInt(ConfigurationSettings.RED_WATER_DENSITY_DEFAULT);
+            ConfigurationSettings.RED_WATER_VISCOSITY = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.RED_WATER_VISCOSITY_CONFIGNAME, ConfigurationSettings.RED_WATER_VISCOSITY_DEFAULT).getInt(ConfigurationSettings.RED_WATER_VISCOSITY_DEFAULT);
+
             
             /* Version check */
             ConfigurationSettings.DISPLAY_VERSION_RESULT = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT).getBoolean(ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT);
