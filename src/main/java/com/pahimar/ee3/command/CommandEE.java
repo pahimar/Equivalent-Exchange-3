@@ -3,6 +3,7 @@ package com.pahimar.ee3.command;
 import java.util.List;
 
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 
@@ -100,5 +101,13 @@ public class CommandEE extends CommandBase {
 
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    @Override
+    public int compareTo(Object obj) {
+        if (obj instanceof ICommand)
+            return this.compareTo((ICommand)obj);
+        else
+            return 0;
     }
 }

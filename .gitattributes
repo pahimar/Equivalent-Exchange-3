@@ -1,1 +1,20 @@
-build.properties text
+# text stuff
+* text=auto
+*.java text eol=lf
+*.groovy text eol=lf
+*.scala text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.md text
+*.properties text
+
+#binary
+*.dat binary
+*.bin binary
+*.png binary
+*.exe binary
+*.dll binary
+*.zip binary
+*.jar binary
+*.7z binary
+*.db binary

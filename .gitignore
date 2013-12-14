@@ -1,6 +1,18 @@
+## gradle
+/.gradle
+/build
+
+## ForgeGradle
+/run
+
+## eclipse
+/.settings
+/.metadata
+/.classpath
+/.project
 /bin
-.classpath
-.project
-private.properties
-environment.properties
-/eclipse
+
+## intellij
+/out
+/.idea
+/*.iml
