@@ -26,16 +26,16 @@ configFile.withReader {
 }
 
 group = "com.pahimar.ee3"    
-version = config.mod_version + "-" + config.build_number
-archivesBaseName = "ee3"
+version = config.mod_version + "." + config.build_number
+archivesBaseName = "EquivalentExchange3"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
     assetDir = "run/assets"
     
     replaceIn "lib/Reference.java"
-    if (project.hasProperty("signature"))
-        replace "@FINGERPRINT@", project.signature
+    if (project.hasProperty("ee3_signature"))
+        replace "@FINGERPRINT@", project.ee3_signature
 }
 
 processResources
@@ -63,11 +63,11 @@ processResources
 if (!project.hasProperty("keystore_location")) // keystore stuff
     ext.keystore_location = ".";
     
-if (!project.hasProperty("keystore_user_alias")) // keystore stuff
-    ext.keystore_user_alias = "";
+if (!project.hasProperty("ee3_keystore_alias")) // keystore stuff
+    ext.ee3_keystore_alias = "";
     
-if (!project.hasProperty("keystore_user_password")) // keystore stuff
-    ext.keystore_user_password = "";
+if (!project.hasProperty("keystore_password")) // keystore stuff
+    ext.keystore_password = "";
 
 if (!project.hasProperty("ee3_release_loc")) // release loc
     ext.ee3_release_loc = ".";
@@ -78,8 +78,8 @@ task("signJar", dependsOn: "reobf")
 {
     inputs.file jar.getArchivePath()
     inputs.file keystore_location
-    inputs.property "keystore_user_alias", keystore_user_alias
-    inputs.property "keystore_user_password", keystore_user_password
+    inputs.property "ee3_keystore_alias", ee3_keystore_alias
+    inputs.property "keystore_password", keystore_password
     outputs.file jar.getArchivePath()
     
     // only sign if the keystore exists
@@ -93,8 +93,8 @@ task("signJar", dependsOn: "reobf")
             destDir: jar.destinationDir,
             jar: jar.getArchivePath(),
             keystore: keystore_location,
-            alias: keystore_user_alias,
-            storepass: keystore_user_password
+            alias: ee3_keystore_alias,
+            storepass: keystore_password
         )
     }
 }
