@@ -3,6 +3,7 @@ package com.pahimar.ee3.imc;
 import java.util.EnumSet;
 import java.util.List;
 
+import com.pahimar.ee3.core.helper.LogHelper;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.ImmutableList;

@@ -11,8 +11,6 @@ buildscript {
     }
 }
 
-project.ext.ee3_release_loc = "release"
-
 apply plugin: "forge"
 
 // define the properties file
@@ -117,9 +115,10 @@ task("release", type: Copy)
 {
     dependsOn "incrementBuildNumber"
     dependsOn "signJar"
-    
-    from project.tasks.jar.destinationDir
-    into project.file(project.ee3_release_loc)
+
+    eachFile { file ->
+        logger.info "copying ${file}"
+    }
     
     // only if the release location isnt empty.
     onlyIf {
