@@ -7,10 +7,9 @@ import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
-import java.awt.peer.LabelPeer;
-
 public class AddonEmcValues {
 
+    // TODO Clean up these EmcValues and give them some proper breakdowns
     private static final EmcValue RUBBER_EMC_VALUE = new EmcValue(24);
     private static final EmcValue COPPER_EMC_VALUE = new EmcValue(85);
     private static final EmcValue TIN_EMC_VALUE = new EmcValue(256);
