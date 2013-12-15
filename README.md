@@ -13,41 +13,41 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 #### Windows Prerequisites
 1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
 2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it.  (If you have a 64-bit OS, please download the 64-bit version.)
-	* Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
-	* Click on `Environment Variables`.
-  * Under `System Variables`, click `New`.
-  * For `Variable Name`, input `JAVA_HOME`.
-  * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
-  * Scroll down to a variable named `Path`, and double-click on it.
-  * Append `;%JAVA_HOME%\bin`, and click `Ok`.
+    * Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
+    * Click on `Environment Variables`.
+    * Under `System Variables`, click `New`.
+    * For `Variable Name`, input `JAVA_HOME`.
+    * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
+    * Scroll down to a variable named `Path`, and double-click on it.
+    * Append `;%JAVA_HOME%\bin`, and click `Ok`.
 3. Download and install Github [here](http://windows.github.com/) NOTE: This Github application is optional, you can use whatever you want, e.g. TortoiseGit.
-	* Create an account.
-  * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` at the bottom of the right-hand toolbar.
-  * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
+    * Create an account.
+    * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` at the bottom of the right-hand toolbar.
+    * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
 4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Linux Prerequisites
 1. Make sure you have the latest Java JDK installed.  To install manually, go [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Otherwise, install from the package manager or the terminal (listed).
-	* In Gentoo, `emerge dev-java/oracle-jdk-bin`
-	* In Archlinux, `pacman -S jdk7-openjdk`
-	* In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
-	* In Fedora, `yum install java-1.7.0-openjdk`
-		* If your distribution is not listed, follow the instructions specific to your package manager.
+    * In Gentoo, `emerge dev-java/oracle-jdk-bin`
+    * In Archlinux, `pacman -S jdk7-openjdk`
+    * In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
+    * In Fedora, `yum install java-1.7.0-openjdk`
+        * If your distribution is not listed, follow the instructions specific to your package manager.
 2. Install Git.  To install manually, go [here](http://git-scm.com/).
-	* In Gentoo, `emerge dev-vcs/git`
-	* In Archlinux, `pacman -S git`
-	* In Ubuntu/Debian, `apt-get install git`
-	* In Fedora, `yum install git`
-		* If your distribution is not listed, follow the instructions specific to your package manager.
+    * In Gentoo, `emerge dev-vcs/git`
+    * In Archlinux, `pacman -S git`
+    * In Ubuntu/Debian, `apt-get install git`
+    * In Fedora, `yum install git`
+        * If your distribution is not listed, follow the instructions specific to your package manager.
 3. Open your shell and move to a convenient directory, then run `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download the repository.
 4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Mac Prerequisites
 1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but not the JDK.)
 2. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
-	* Create an account.
-  * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
-  * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Mac defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
+    * Create an account.
+    * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
+    * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Mac defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
 3. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Setup EE3
@@ -57,24 +57,23 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 ***
 
 	mcdev
-	\-source
-		\-Equivalent-Exchange-3
-			\-EE3's files (should have build.gradle).
+	\-Equivalent-Exchange-3
+		\-EE3's files (should have build.gradle).
 ***
 
 3. Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.
- 	* You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (but only down to 9.11.1.960).
- 		* `minecraft_version=1.6.4`
- 		* `forge_version=9.11.1.964`
- 		* `mod_version=0.0`
- 		* `build_number=1`
+    * You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (but only down to 9.11.1.960).
+        * `minecraft_version=1.6.4`
+        * `forge_version=9.11.1.964`
+        * `mod_version=0.0`
+        * `build_number=1`
 4. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
 5. Navigate to `mcdev\Equivalent-Exchange-3` by executing `cd mcdev's location\Equivalent-Exchange-3`.
 6. Execute `gradle setupDevWorkspace`. This sets up Forge, and downloads the necessary libraries to build EE3. (Takes about 2 minutes the first time).
 7. Execute `gradle build`. If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes. (Takes about 1 minute, depending on your computer).
-	* If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
+    * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
 8. Go to `mcdev\Equivalent-Exchange-3\build\libs`.
-	*  You should see a `.jar` file named `EquivalentExchange3-0.0.1.jar`.
+    *  You should see a `.jar` file named `EquivalentExchange3-0.0.1.jar`.
 9. Copy the jar into your Minecraft mods folder, and play Minecraft (If you have Forge installed on your client).
 
 #### Updating Your Repo (For Windows/Mac)
