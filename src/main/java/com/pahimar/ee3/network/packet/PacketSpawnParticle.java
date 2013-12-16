@@ -1,38 +1,38 @@
 package com.pahimar.ee3.network.packet;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import cpw.mods.fml.common.network.Player;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetworkManager;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-
-import cpw.mods.fml.common.network.Player;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * PacketSpawnParticle
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class PacketSpawnParticle extends PacketEE {
+public class PacketSpawnParticle extends PacketEE
+{
 
     public String particleName;
     public double x, y, z;
     public double velocityX, velocityY, velocityZ;
 
-    public PacketSpawnParticle() {
+    public PacketSpawnParticle()
+    {
 
         super(PacketTypeHandler.SPAWN_PARTICLE, false);
     }
 
-    public PacketSpawnParticle(String particleName, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+    public PacketSpawnParticle(String particleName, double x, double y, double z, double velocityX, double velocityY, double velocityZ)
+    {
 
         super(PacketTypeHandler.SPAWN_PARTICLE, false);
         this.particleName = particleName;
@@ -45,7 +45,8 @@ public class PacketSpawnParticle extends PacketEE {
     }
 
     @Override
-    public void writeData(DataOutputStream data) throws IOException {
+    public void writeData(DataOutputStream data) throws IOException
+    {
 
         data.writeUTF(particleName);
         data.writeDouble(x);
@@ -58,7 +59,8 @@ public class PacketSpawnParticle extends PacketEE {
     }
 
     @Override
-    public void readData(DataInputStream data) throws IOException {
+    public void readData(DataInputStream data) throws IOException
+    {
 
         particleName = data.readUTF();
         x = data.readDouble();
@@ -71,11 +73,13 @@ public class PacketSpawnParticle extends PacketEE {
     }
 
     @Override
-    public void execute(INetworkManager manager, Player player) {
+    public void execute(INetworkManager manager, Player player)
+    {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
 
-        if (ConfigurationSettings.ENABLE_PARTICLE_FX) {
+        if (ConfigurationSettings.ENABLE_PARTICLE_FX)
+        {
             thePlayer.worldObj.spawnParticle(particleName, x, y, z, velocityX, velocityY, velocityZ);
         }
     }

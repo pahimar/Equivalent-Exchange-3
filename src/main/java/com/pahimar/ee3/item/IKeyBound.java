@@ -5,14 +5,14 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * IKeyBound
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public interface IKeyBound {
+public interface IKeyBound
+{
 
     public abstract void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding);
 

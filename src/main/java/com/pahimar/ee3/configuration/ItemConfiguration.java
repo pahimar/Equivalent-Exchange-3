@@ -1,26 +1,28 @@
 package com.pahimar.ee3.configuration;
 
-import java.io.File;
-import java.util.logging.Level;
-
 import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-
 import cpw.mods.fml.common.FMLLog;
 import net.minecraftforge.common.Configuration;
 
-public class ItemConfiguration {
+import java.io.File;
+import java.util.logging.Level;
+
+public class ItemConfiguration
+{
 
     private static Configuration itemConfiguration;
-    
+
     private static final String CATEGORY_DURABILITY = "durability";
-    
-    protected static void init(File configFile) {
+
+    protected static void init(File configFile)
+    {
 
         itemConfiguration = new Configuration(configFile);
-        
-        try {
+
+        try
+        {
             itemConfiguration.load();
             
             /* Item configs */
@@ -36,10 +38,12 @@ public class ItemConfiguration {
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = itemConfiguration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);
             ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY = itemConfiguration.get(CATEGORY_DURABILITY, ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY_DEFAULT);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its item configuration");
         }
-        finally {
+        finally
+        {
             itemConfiguration.save();
         }
     }

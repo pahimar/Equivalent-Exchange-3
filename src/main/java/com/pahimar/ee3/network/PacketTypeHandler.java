@@ -1,31 +1,23 @@
 package com.pahimar.ee3.network;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
+import com.pahimar.ee3.lib.Reference;
+import com.pahimar.ee3.network.packet.*;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.network.packet.PacketEE;
-import com.pahimar.ee3.network.packet.PacketItemUpdate;
-import com.pahimar.ee3.network.packet.PacketKeyPressed;
-import com.pahimar.ee3.network.packet.PacketRequestEvent;
-import com.pahimar.ee3.network.packet.PacketSoundEvent;
-import com.pahimar.ee3.network.packet.PacketSpawnParticle;
-import com.pahimar.ee3.network.packet.PacketTileUpdate;
-import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * PacketTypeHandler
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public enum PacketTypeHandler {
+public enum PacketTypeHandler
+{
     KEY(PacketKeyPressed.class),
     TILE(PacketTileUpdate.class),
     REQUEST_EVENT(PacketRequestEvent.class),
@@ -36,12 +28,14 @@ public enum PacketTypeHandler {
 
     private Class<? extends PacketEE> clazz;
 
-    PacketTypeHandler(Class<? extends PacketEE> clazz) {
+    PacketTypeHandler(Class<? extends PacketEE> clazz)
+    {
 
         this.clazz = clazz;
     }
 
-    public static PacketEE buildPacket(byte[] data) {
+    public static PacketEE buildPacket(byte[] data)
+    {
 
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         int selector = bis.read();
@@ -49,10 +43,12 @@ public enum PacketTypeHandler {
 
         PacketEE packet = null;
 
-        try {
+        try
+        {
             packet = values()[selector].clazz.newInstance();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace(System.err);
         }
 
@@ -61,21 +57,25 @@ public enum PacketTypeHandler {
         return packet;
     }
 
-    public static PacketEE buildPacket(PacketTypeHandler type) {
+    public static PacketEE buildPacket(PacketTypeHandler type)
+    {
 
         PacketEE packet = null;
 
-        try {
+        try
+        {
             packet = values()[type.ordinal()].clazz.newInstance();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace(System.err);
         }
 
         return packet;
     }
 
-    public static Packet populatePacket(PacketEE packetEE) {
+    public static Packet populatePacket(PacketEE packetEE)
+    {
 
         byte[] data = packetEE.populate();
 

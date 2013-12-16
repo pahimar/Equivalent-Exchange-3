@@ -1,20 +1,22 @@
 package com.pahimar.ee3.client.model;
 
+import com.pahimar.ee3.lib.Models;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
-import com.pahimar.ee3.lib.Models;
-
-public class ModelGlassBell {
+public class ModelGlassBell
+{
 
     private IModelCustom modelGlassBell;
 
-    public ModelGlassBell() {
+    public ModelGlassBell()
+    {
 
         modelGlassBell = AdvancedModelLoader.loadModel(Models.GLASS_BELL);
     }
 
-    public void render() {
+    public void render()
+    {
 
         modelGlassBell.renderPart("Bell");
     }

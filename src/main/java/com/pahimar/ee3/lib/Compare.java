@@ -1,6 +1,7 @@
 package com.pahimar.ee3.lib;
 
-public class Compare {
+public class Compare
+{
 
     // Comparator stuff
     public static final int LESSER_THAN = -1;

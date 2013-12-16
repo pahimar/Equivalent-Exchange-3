@@ -1,23 +1,11 @@
 package com.pahimar.ee3;
 
-import java.io.File;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraftforge.common.MinecraftForge;
-
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.core.handler.ActionRequestHandler;
-import com.pahimar.ee3.core.handler.CraftingHandler;
-import com.pahimar.ee3.core.handler.EntityLivingHandler;
-import com.pahimar.ee3.core.handler.ItemEventHandler;
-import com.pahimar.ee3.core.handler.ItemTooltipEventHandler;
-import com.pahimar.ee3.core.handler.PlayerDestroyItemHandler;
-import com.pahimar.ee3.core.handler.VersionCheckTickHandler;
-import com.pahimar.ee3.core.handler.WorldTransmutationHandler;
+import com.pahimar.ee3.core.handler.*;
 import com.pahimar.ee3.core.handler.addon.AddonIMCHandler;
+import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
@@ -25,39 +13,46 @@ import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.OreStack;
+import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * EquivalentExchange3
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, dependencies = Reference.DEPENDENCIES, certificateFingerprint = Reference.FINGERPRINT)
-@NetworkMod(channels = { Reference.CHANNEL_NAME }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
-public class EquivalentExchange3 {
+@NetworkMod(channels = {Reference.CHANNEL_NAME}, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
+public class EquivalentExchange3
+{
 
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
@@ -68,28 +63,33 @@ public class EquivalentExchange3 {
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
     @EventHandler
-    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
+    public void invalidFingerprint(FMLFingerprintViolationEvent event)
+    {
 
         // Report (log) to the user that the version of Equivalent Exchange 3
         // they are using has been changed/tampered with
-        if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
+        if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
+        {
             LogHelper.warning(Strings.NO_FINGERPRINT_MESSAGE);
         }
-        else {
+        else
+        {
             LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
         }
     }
 
     @EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
+    public void serverStarting(FMLServerStartingEvent event)
+    {
 
         // Initialize the custom commands
         CommandHandler.initCommands(event);
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        
+    public void preInit(FMLPreInitializationEvent event)
+    {
+
         // set version number
         event.getModMetadata().version = Reference.VERSION_NUMBER;
 
@@ -104,7 +104,7 @@ public class EquivalentExchange3 {
 
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
-        
+
         // Initialize the InterModCommunications Tick Handler (Server only)
         TickRegistry.registerScheduledTickHandler(new InterModCommsHandler(), Side.SERVER);
 
@@ -126,7 +126,8 @@ public class EquivalentExchange3 {
 
     @EventHandler
     @SuppressWarnings("unchecked")
-    public void load(FMLInitializationEvent event) {
+    public void load(FMLInitializationEvent event)
+    {
 
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
@@ -159,19 +160,36 @@ public class EquivalentExchange3 {
 
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
-        
+
         // Initialize addons (which work with IMC, and must be used in Init)
         AddonIMCHandler.init();
     }
 
     @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent event) {
-        
+    public void modsLoaded(FMLPostInitializationEvent event)
+    {
+
+        LogHelper.debug(RecipeRegistry.getInstance().toString());
+
         EmcRegistry.lazyInit();
+
+        List<String> oreNames = Arrays.asList(OreDictionary.getOreNames());
+        Collections.sort(oreNames);
+        for (String oreName : oreNames)
+        {
+            if (!EmcRegistry.hasEmcValue(new OreStack(oreName)))
+            {
+                for (ItemStack itemStack : OreDictionary.getOres(oreName))
+                {
+                    LogHelper.debug(String.format("%s: %s", oreName, ItemHelper.toString(itemStack)));
+                }
+            }
+        }
     }
 
     @EventHandler
-    public void handleIMCMessages(IMCEvent event) {
+    public void handleIMCMessages(IMCEvent event)
+    {
 
         InterModCommsHandler.processIMCMessages(event);
     }

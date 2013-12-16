@@ -1,5 +1,12 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
+import com.pahimar.ee3.client.model.ModelAludel;
+import com.pahimar.ee3.lib.Textures;
+import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileGlassBell;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -8,51 +15,46 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-
 import org.lwjgl.opengl.GL11;
-
-import com.pahimar.ee3.client.model.ModelAludel;
-import com.pahimar.ee3.lib.Textures;
-import com.pahimar.ee3.tileentity.TileAludel;
-import com.pahimar.ee3.tileentity.TileGlassBell;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * TileEntityAludelRenderer
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
+public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
+{
 
     private ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
 
-    public TileEntityAludelRenderer() {
+    public TileEntityAludelRenderer()
+    {
 
-        customRenderItem = new RenderItem() {
+        customRenderItem = new RenderItem()
+        {
 
             @Override
-            public boolean shouldBob() {
+            public boolean shouldBob()
+            {
 
                 return false;
-            };
+            }
         };
 
         customRenderItem.setRenderManager(RenderManager.instance);
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
+    {
 
-        if (tileEntity instanceof TileAludel) {
+        if (tileEntity instanceof TileAludel)
+        {
 
             TileAludel tileAludel = (TileAludel) tileEntity;
 
@@ -77,8 +79,10 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
 
             TileEntity tileGlassBell = tileAludel.worldObj.getBlockTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
 
-            if (tileGlassBell instanceof TileGlassBell) {
-                if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null) {
+            if (tileGlassBell instanceof TileGlassBell)
+            {
+                if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null)
+                {
 
                     float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
                     float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
@@ -101,37 +105,46 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
         }
     }
 
-    private void scaleTranslateRotate(double x, double y, double z, ForgeDirection orientation) {
+    private void scaleTranslateRotate(double x, double y, double z, ForgeDirection orientation)
+    {
 
-        if (orientation == ForgeDirection.NORTH) {
+        if (orientation == ForgeDirection.NORTH)
+        {
             GL11.glTranslated(x + 1, y, z);
             GL11.glRotatef(180F, 0F, 1F, 0F);
             GL11.glRotatef(-90F, 1F, 0F, 0F);
         }
-        else if (orientation == ForgeDirection.EAST) {
+        else if (orientation == ForgeDirection.EAST)
+        {
             GL11.glTranslated(x + 1, y, z + 1);
             GL11.glRotatef(90F, 0F, 1F, 0F);
             GL11.glRotatef(-90F, 1F, 0F, 0F);
         }
-        else if (orientation == ForgeDirection.SOUTH) {
+        else if (orientation == ForgeDirection.SOUTH)
+        {
             GL11.glTranslated(x, y, z + 1);
             GL11.glRotatef(0F, 0F, 1F, 0F);
             GL11.glRotatef(-90F, 1F, 0F, 0F);
         }
-        else if (orientation == ForgeDirection.WEST) {
+        else if (orientation == ForgeDirection.WEST)
+        {
             GL11.glTranslated(x, y, z);
             GL11.glRotatef(-90F, 0F, 1F, 0F);
             GL11.glRotatef(-90F, 1F, 0F, 0F);
         }
     }
 
-    private float getGhostItemScaleFactor(ItemStack itemStack) {
+    private float getGhostItemScaleFactor(ItemStack itemStack)
+    {
 
         float scaleFactor = 1.0F;
 
-        if (itemStack != null) {
-            if (itemStack.getItem() instanceof ItemBlock) {
-                switch (customRenderItem.getMiniBlockCount(itemStack)) {
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() instanceof ItemBlock)
+            {
+                switch (customRenderItem.getMiniBlockCount(itemStack))
+                {
                     case 1:
                         return 0.90F;
                     case 2:
@@ -146,8 +159,10 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer {
                         return 0.90F;
                 }
             }
-            else {
-                switch (customRenderItem.getMiniItemCount(itemStack)) {
+            else
+            {
+                switch (customRenderItem.getMiniItemCount(itemStack))
+                {
                     case 1:
                         return 0.65F;
                     case 2:

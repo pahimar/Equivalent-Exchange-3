@@ -1,18 +1,17 @@
 package com.pahimar.ee3.configuration;
 
-import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.Reference;
+import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.common.Configuration;
 
 import java.io.File;
 import java.util.logging.Level;
 
-import net.minecraftforge.common.Configuration;
+import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Reference;
-
-import cpw.mods.fml.common.FMLLog;
-
-public class GeneralConfiguration {
+public class GeneralConfiguration
+{
 
     private static Configuration generalConfiguration;
 
@@ -20,11 +19,13 @@ public class GeneralConfiguration {
     public static final String CATEGORY_GRAPHICS = "graphics";
     public static final String CATEGORY_AUDIO = "audio";
 
-    protected static void init(File configFile) {
+    protected static void init(File configFile)
+    {
 
         generalConfiguration = new Configuration(configFile);
 
-        try {
+        try
+        {
             generalConfiguration.load();
             
             /* Version check */
@@ -36,24 +37,30 @@ public class GeneralConfiguration {
             ConfigurationSettings.ENABLE_PARTICLE_FX = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
             ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT);
             ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT).getInt(ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_DEFAULT);
-            try {
+            try
+            {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = Float.parseFloat(generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT).getString());
 
-                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE <= 0F) {
+                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE <= 0F)
+                {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_DEFAULT;
             }
-            try {
+            try
+            {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = Float.parseFloat(generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT).getString());
 
-                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F || ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F) {
+                if (ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY < 0F || ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY > 1F)
+                {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT;
             }
 
@@ -67,19 +74,24 @@ public class GeneralConfiguration {
             EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_TOGGLE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_TOGGLE, ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT));
             EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_RELEASE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_RELEASE, ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT));
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its general configuration");
         }
-        finally {
+        finally
+        {
             generalConfiguration.save();
         }
     }
-    
-    public static void set(String categoryName, String propertyName, String newValue) {
+
+    public static void set(String categoryName, String propertyName, String newValue)
+    {
 
         generalConfiguration.load();
-        if (generalConfiguration.getCategoryNames().contains(categoryName)) {
-            if (generalConfiguration.getCategory(categoryName).containsKey(propertyName)) {
+        if (generalConfiguration.getCategoryNames().contains(categoryName))
+        {
+            if (generalConfiguration.getCategory(categoryName).containsKey(propertyName))
+            {
                 generalConfiguration.getCategory(categoryName).get(propertyName).set(newValue);
             }
         }

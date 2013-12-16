@@ -1,22 +1,21 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.lib.Strings;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.pahimar.ee3.lib.Strings;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * TileCalcinator
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class TileCalcinator extends TileEE implements IInventory {
+public class TileCalcinator extends TileEE implements IInventory
+{
 
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
@@ -29,7 +28,8 @@ public class TileCalcinator extends TileEE implements IInventory {
     public static final int INPUT_INVENTORY_INDEX = 1;
     public static final int OUTPUT_INVENTORY_INDEX = 2;
 
-    public TileCalcinator() {
+    public TileCalcinator()
+    {
 
         inventory = new ItemStack[INVENTORY_SIZE];
     }
@@ -38,7 +38,8 @@ public class TileCalcinator extends TileEE implements IInventory {
      * Returns the number of slots in the inventory.
      */
     @Override
-    public int getSizeInventory() {
+    public int getSizeInventory()
+    {
 
         return inventory.length;
     }
@@ -47,22 +48,28 @@ public class TileCalcinator extends TileEE implements IInventory {
      * Returns the stack in slot i
      */
     @Override
-    public ItemStack getStackInSlot(int slotIndex) {
+    public ItemStack getStackInSlot(int slotIndex)
+    {
 
         return inventory[slotIndex];
     }
 
     @Override
-    public ItemStack decrStackSize(int slotIndex, int decrementAmount) {
+    public ItemStack decrStackSize(int slotIndex, int decrementAmount)
+    {
 
         ItemStack itemStack = getStackInSlot(slotIndex);
-        if (itemStack != null) {
-            if (itemStack.stackSize <= decrementAmount) {
+        if (itemStack != null)
+        {
+            if (itemStack.stackSize <= decrementAmount)
+            {
                 setInventorySlotContents(slotIndex, null);
             }
-            else {
+            else
+            {
                 itemStack = itemStack.splitStack(decrementAmount);
-                if (itemStack.stackSize == 0) {
+                if (itemStack.stackSize == 0)
+                {
                     setInventorySlotContents(slotIndex, null);
                 }
             }
@@ -72,72 +79,86 @@ public class TileCalcinator extends TileEE implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int slotIndex) {
+    public ItemStack getStackInSlotOnClosing(int slotIndex)
+    {
 
         ItemStack itemStack = getStackInSlot(slotIndex);
-        if (itemStack != null) {
+        if (itemStack != null)
+        {
             setInventorySlotContents(slotIndex, null);
         }
         return itemStack;
     }
 
     @Override
-    public void setInventorySlotContents(int slotIndex, ItemStack itemStack) {
+    public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
+    {
 
         inventory[slotIndex] = itemStack;
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
+        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
+        {
             itemStack.stackSize = getInventoryStackLimit();
         }
     }
 
     @Override
-    public String getInvName() {
+    public String getInvName()
+    {
 
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_CALCINATOR_NAME;
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getInventoryStackLimit()
+    {
 
         return 64;
     }
 
     @Override
-    public void openChest() {
+    public void openChest()
+    {
 
     }
 
     @Override
-    public void closeChest() {
+    public void closeChest()
+    {
 
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
 
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
         NBTTagList tagList = nbtTagCompound.getTagList("Items");
         inventory = new ItemStack[this.getSizeInventory()];
-        for (int i = 0; i < tagList.tagCount(); ++i) {
+        for (int i = 0; i < tagList.tagCount(); ++i)
+        {
             NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
-            if (slotIndex >= 0 && slotIndex < inventory.length) {
+            if (slotIndex >= 0 && slotIndex < inventory.length)
+            {
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
 
         super.writeToNBT(nbtTagCompound);
 
         // Write the ItemStacks in the inventory to NBT
         NBTTagList tagList = new NBTTagList();
-        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
-            if (inventory[currentIndex] != null) {
+        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
+        {
+            if (inventory[currentIndex] != null)
+            {
                 NBTTagCompound tagCompound = new NBTTagCompound();
                 tagCompound.setByte("Slot", (byte) currentIndex);
                 inventory[currentIndex].writeToNBT(tagCompound);
@@ -148,34 +169,41 @@ public class TileCalcinator extends TileEE implements IInventory {
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean isInvNameLocalized()
+    {
 
         return this.hasCustomName();
     }
 
     @Override
-    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack) {
+    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
+    {
 
         return true;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
 
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(super.toString());
 
         stringBuilder.append("TileCalcinator Data - ");
-        for (int i = 0; i < inventory.length; i++) {
-            if (i != 0) {
+        for (int i = 0; i < inventory.length; i++)
+        {
+            if (i != 0)
+            {
                 stringBuilder.append(", ");
             }
 
-            if (inventory[i] != null) {
+            if (inventory[i] != null)
+            {
                 stringBuilder.append(String.format("inventory[%d]: %s", i, inventory[i].toString()));
             }
-            else {
+            else
+            {
                 stringBuilder.append(String.format("inventory[%d]: empty", i));
             }
         }

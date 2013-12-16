@@ -1,59 +1,62 @@
 package com.pahimar.ee3.core.handler;
 
-import java.util.EnumSet;
-
+import com.pahimar.ee3.client.renderer.RenderUtils;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.item.ITransmutationStone;
+import com.pahimar.ee3.lib.Reference;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.ITickHandler;
+import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.pahimar.ee3.client.renderer.RenderUtils;
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.Reference;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.EnumSet;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * TransmutationTargetOverlayHandler
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class TransmutationTargetOverlayHandler implements ITickHandler {
+public class TransmutationTargetOverlayHandler implements ITickHandler
+{
 
     @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData) {
+    public void tickStart(EnumSet<TickType> type, Object... tickData)
+    {
 
     }
 
     @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+    public void tickEnd(EnumSet<TickType> type, Object... tickData)
+    {
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
         EntityPlayer player = minecraft.thePlayer;
         ItemStack currentItemStack = null;
 
-        if (type.contains(TickType.RENDER)) {
-            if (player != null) {
+        if (type.contains(TickType.RENDER))
+        {
+            if (player != null)
+            {
                 currentItemStack = player.inventory.getCurrentItem();
 
-                if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
-                    if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
+                if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
+                {
+                    if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
+                    {
                         renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
                     }
                 }
@@ -62,18 +65,21 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
     }
 
     @Override
-    public EnumSet<TickType> ticks() {
+    public EnumSet<TickType> ticks()
+    {
 
         return EnumSet.of(TickType.CLIENT, TickType.RENDER);
     }
 
     @Override
-    public String getLabel() {
+    public String getLabel()
+    {
 
         return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
-    private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks) {
+    private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks)
+    {
 
         float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;
         float blockScale = overlayScale / 2;
@@ -101,43 +107,50 @@ public class TransmutationTargetOverlayHandler implements ITickHandler {
         int hudBlockX = 0;
         int hudBlockY = 0;
 
-        switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION) {
-            case 0: {
+        switch (ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION)
+        {
+            case 0:
+            {
                 hudOverlayX = 0;
                 hudBlockX = (int) (16 * overlayScale / 2 - 8);
                 hudOverlayY = 0;
                 hudBlockY = (int) (16 * overlayScale / 2 - 8);
                 break;
             }
-            case 1: {
+            case 1:
+            {
                 hudOverlayX = (int) (sr.getScaledWidth() - 16 * overlayScale);
                 hudBlockX = (int) (sr.getScaledWidth() - 16 * overlayScale / 2 - 8);
                 hudOverlayY = 0;
                 hudBlockY = (int) (16 * overlayScale / 2 - 8);
                 break;
             }
-            case 2: {
+            case 2:
+            {
                 hudOverlayX = 0;
                 hudBlockX = (int) (16 * overlayScale / 2 - 8);
                 hudOverlayY = (int) (sr.getScaledHeight() - 16 * overlayScale);
                 hudBlockY = (int) (sr.getScaledHeight() - 16 * overlayScale / 2 - 8);
                 break;
             }
-            case 3: {
+            case 3:
+            {
                 hudOverlayX = (int) (sr.getScaledWidth() - 16 * overlayScale);
                 hudBlockX = (int) (sr.getScaledWidth() - 16 * overlayScale / 2 - 8);
                 hudOverlayY = (int) (sr.getScaledHeight() - 16 * overlayScale);
                 hudBlockY = (int) (sr.getScaledHeight() - 16 * overlayScale / 2 - 8);
                 break;
             }
-            default: {
+            default:
+            {
                 break;
             }
         }
 
         RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, stack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
 
-        if (TransmutationHelper.targetBlockStack != null && TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock) {
+        if (TransmutationHelper.targetBlockStack != null && TransmutationHelper.targetBlockStack.getItem() instanceof ItemBlock)
+        {
             RenderUtils.renderRotatingBlockIntoGUI(minecraft.fontRenderer, TransmutationHelper.targetBlockStack, hudBlockX, hudBlockY, -90, blockScale);
         }
 

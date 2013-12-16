@@ -1,35 +1,38 @@
 package com.pahimar.ee3.lib;
 
+import com.google.common.base.Throwables;
+
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.google.common.base.Throwables;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * Reference
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class Reference {
-    
-    static {
-        
+public class Reference
+{
+
+    static
+    {
+
         Properties prop = new Properties();
-        
-        try {
+
+        try
+        {
             InputStream stream = Reference.class.getClassLoader().getResourceAsStream("version.properties");
             prop.load(stream);
             stream.close();
         }
-        catch(Exception e) {
+        catch (Exception e)
+        {
             Throwables.propagate(e); // just throw it...
         }
-        
-        VERSION_NUMBER = prop.getProperty("version") + " (build " +prop.getProperty("build_number") + ")";
+
+        VERSION_NUMBER = prop.getProperty("version") + " (build " + prop.getProperty("build_number") + ")";
     }
 
     // General Mod related constants

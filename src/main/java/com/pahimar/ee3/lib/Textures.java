@@ -1,20 +1,19 @@
 package com.pahimar.ee3.lib;
 
+import com.pahimar.ee3.core.helper.ResourceLocationHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 
-import com.pahimar.ee3.core.helper.ResourceLocationHelper;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * Sprites
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class Textures {
+public class Textures
+{
 
     // Base file paths
     public static final String MODEL_SHEET_LOCATION = "textures/models/";

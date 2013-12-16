@@ -1,34 +1,32 @@
 package com.pahimar.ee3.client.gui.inventory;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * GuiCalcinator
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class GuiCalcinator extends GuiContainer {
+public class GuiCalcinator extends GuiContainer
+{
 
     private TileCalcinator tileCalcinator;
 
-    public GuiCalcinator(InventoryPlayer player, TileCalcinator tileCalcinator) {
+    public GuiCalcinator(InventoryPlayer player, TileCalcinator tileCalcinator)
+    {
 
         super(new ContainerCalcinator(player, tileCalcinator));
         ySize = 176;
@@ -36,7 +34,8 @@ public class GuiCalcinator extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
+    protected void drawGuiContainerForegroundLayer(int x, int y)
+    {
 
         String containerName = tileCalcinator.isInvNameLocalized() ? tileCalcinator.getInvName() : StatCollector.translateToLocal(tileCalcinator.getInvName());
         fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
@@ -44,7 +43,8 @@ public class GuiCalcinator extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
+    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
+    {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 

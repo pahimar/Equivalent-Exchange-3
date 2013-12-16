@@ -1,24 +1,22 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Strings;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.pahimar.ee3.lib.BlockIds;
-import com.pahimar.ee3.lib.Strings;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ModBlocks
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class ModBlocks {
+public class ModBlocks
+{
 
     /* Mod block instances */
     public static Block calcinator;
@@ -26,7 +24,8 @@ public class ModBlocks {
     public static Block alchemicalChest;
     public static Block glassBell;
 
-    public static void init() {
+    public static void init()
+    {
 
         calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
         aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
@@ -41,9 +40,10 @@ public class ModBlocks {
         initBlockRecipes();
     }
 
-    private static void initBlockRecipes() {
+    private static void initBlockRecipes()
+    {
 
-        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[] { "iii", "i i", "i i", Character.valueOf('i'), Block.glass });
-        GameRegistry.addRecipe(new ItemStack(aludelBase), new Object[] { "iii", "sis", "iii", Character.valueOf('i'), Item.ingotIron, Character.valueOf('s'), Block.stone });
+        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[] {"iii", "i i", "i i", 'i', Block.glass});
+        GameRegistry.addRecipe(new ItemStack(aludelBase), new Object[] {"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
     }
 }

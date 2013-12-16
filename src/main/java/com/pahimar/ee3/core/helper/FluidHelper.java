@@ -1,68 +1,89 @@
 package com.pahimar.ee3.core.helper;
 
-import java.util.Comparator;
-
 import com.pahimar.ee3.lib.Compare;
-
 import net.minecraftforge.fluids.FluidStack;
 
-public class FluidHelper {
+import java.util.Comparator;
 
-    public static int compare(FluidStack fluidStack1, FluidStack fluidStack2) {
+public class FluidHelper
+{
+
+    public static int compare(FluidStack fluidStack1, FluidStack fluidStack2)
+    {
         return comparator.compare(fluidStack1, fluidStack2);
     }
-    
-    public static String toString(FluidStack fluidStack) {
-        
-        if (fluidStack != null) {
+
+    public static String toString(FluidStack fluidStack)
+    {
+
+        if (fluidStack != null)
+        {
             return String.format("%sxfluidStack.%s", fluidStack.amount, fluidStack.getFluid().getName());
         }
-        
+
         return "fluidStack[null]";
     }
-    
-    public static Comparator<FluidStack> comparator = new Comparator<FluidStack>() {
 
-        public int compare(FluidStack fluidStack1, FluidStack fluidStack2) {
+    public static Comparator<FluidStack> comparator = new Comparator<FluidStack>()
+    {
 
-            if (fluidStack1 != null) {
-                if (fluidStack2 != null) {
-                    if (fluidStack1.fluidID == fluidStack2.fluidID) {
-                        if (fluidStack1.amount == fluidStack2.amount) {
-                            if (fluidStack1.tag != null) {
-                                if (fluidStack2.tag != null) {
+        public int compare(FluidStack fluidStack1, FluidStack fluidStack2)
+        {
+
+            if (fluidStack1 != null)
+            {
+                if (fluidStack2 != null)
+                {
+                    if (fluidStack1.fluidID == fluidStack2.fluidID)
+                    {
+                        if (fluidStack1.amount == fluidStack2.amount)
+                        {
+                            if (fluidStack1.tag != null)
+                            {
+                                if (fluidStack2.tag != null)
+                                {
                                     return (fluidStack1.tag.hashCode() - fluidStack2.tag.hashCode());
                                 }
-                                else {
+                                else
+                                {
                                     return Compare.LESSER_THAN;
                                 }
                             }
-                            else {
-                                if (fluidStack2.tag != null) {
+                            else
+                            {
+                                if (fluidStack2.tag != null)
+                                {
                                     return Compare.GREATER_THAN;
                                 }
-                                else {
+                                else
+                                {
                                     return Compare.EQUALS;
                                 }
                             }
                         }
-                        else {
+                        else
+                        {
                             return (fluidStack1.amount - fluidStack2.amount);
                         }
                     }
-                    else {
+                    else
+                    {
                         return (fluidStack1.fluidID - fluidStack2.fluidID);
                     }
                 }
-                else {
+                else
+                {
                     return Compare.LESSER_THAN;
                 }
             }
-            else {
-                if (fluidStack2 != null) {
+            else
+            {
+                if (fluidStack2 != null)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else {
+                else
+                {
                     return Compare.EQUALS;
                 }
             }

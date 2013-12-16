@@ -6,14 +6,14 @@ import net.minecraft.world.World;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ITransmutationStone
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public interface ITransmutationStone {
+public interface ITransmutationStone
+{
 
     public abstract void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack);
 

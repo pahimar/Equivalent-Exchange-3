@@ -1,41 +1,41 @@
 package com.pahimar.ee3.network.packet;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.lib.Commands;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.network.Player;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetworkManager;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.lib.Commands;
-import com.pahimar.ee3.network.PacketTypeHandler;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.Player;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * PacketSoundEvent
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class PacketSoundEvent extends PacketEE {
+public class PacketSoundEvent extends PacketEE
+{
 
     public String playerName;
     public String soundName;
     public double x, y, z;
     public float volume, pitch;
 
-    public PacketSoundEvent() {
+    public PacketSoundEvent()
+    {
 
         super(PacketTypeHandler.SOUND_EVENT, false);
     }
 
-    public PacketSoundEvent(String playerName, String soundName, double x, double y, double z, float volume, float pitch) {
+    public PacketSoundEvent(String playerName, String soundName, double x, double y, double z, float volume, float pitch)
+    {
 
         super(PacketTypeHandler.SOUND_EVENT, false);
         this.playerName = playerName;
@@ -48,7 +48,8 @@ public class PacketSoundEvent extends PacketEE {
     }
 
     @Override
-    public void writeData(DataOutputStream data) throws IOException {
+    public void writeData(DataOutputStream data) throws IOException
+    {
 
         data.writeUTF(playerName);
         data.writeUTF(soundName);
@@ -60,7 +61,8 @@ public class PacketSoundEvent extends PacketEE {
     }
 
     @Override
-    public void readData(DataInputStream data) throws IOException {
+    public void readData(DataInputStream data) throws IOException
+    {
 
         playerName = data.readUTF();
         soundName = data.readUTF();
@@ -72,15 +74,19 @@ public class PacketSoundEvent extends PacketEE {
     }
 
     @Override
-    public void execute(INetworkManager manager, Player player) {
+    public void execute(INetworkManager manager, Player player)
+    {
 
         EntityPlayer thePlayer = (EntityPlayer) player;
 
-        if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.ALL)) {
+        if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.ALL))
+        {
             FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float) x, (float) y, (float) z, volume, pitch);
         }
-        else if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.SELF)) {
-            if (thePlayer.username.equalsIgnoreCase(playerName)) {
+        else if (ConfigurationSettings.ENABLE_SOUNDS.equalsIgnoreCase(Commands.SELF))
+        {
+            if (thePlayer.username.equalsIgnoreCase(playerName))
+            {
                 FMLClientHandler.instance().getClient().sndManager.playSound(soundName, (float) x, (float) y, (float) z, volume, pitch);
             }
         }

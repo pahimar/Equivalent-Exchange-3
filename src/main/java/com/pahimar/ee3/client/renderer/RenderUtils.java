@@ -1,5 +1,7 @@
 package com.pahimar.ee3.client.renderer;
 
+import com.pahimar.ee3.lib.Textures;
+import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -7,27 +9,23 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-
 import org.lwjgl.opengl.GL11;
-
-import com.pahimar.ee3.lib.Textures;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * RenderUtils
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class RenderUtils {
+public class RenderUtils
+{
 
     private static int rotationAngle = 0;
 
-    public static void renderRotatingBlockIntoGUI(FontRenderer fontRenderer, ItemStack stack, int x, int y, float zLevel, float scale) {
+    public static void renderRotatingBlockIntoGUI(FontRenderer fontRenderer, ItemStack stack, int x, int y, float zLevel, float scale)
+    {
 
         RenderBlocks renderBlocks = new RenderBlocks();
 
@@ -39,7 +37,7 @@ public class RenderUtils {
         GL11.glTranslatef(1.0F, 0.5F, 1.0F);
         GL11.glScalef(1.0F * scale, 1.0F * scale, -1.0F);
         GL11.glRotatef(210.0F, 1.0F, 0.0F, 0.0F);
-        GL11.glRotatef(0F + 1 * rotationAngle, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(0F + rotationAngle, 0.0F, 1.0F, 0.0F);
         rotationAngle = (rotationAngle + 1) % 360;
 
         int var10 = Item.itemsList[stack.itemID].getColorFromItemStack(stack, 0);
@@ -56,7 +54,8 @@ public class RenderUtils {
         GL11.glPopMatrix();
     }
 
-    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale) {
+    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale)
+    {
 
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -71,14 +70,15 @@ public class RenderUtils {
 
     }
 
-    public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel) {
+    public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel)
+    {
 
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0, y + height, zLevel, icon.getMinU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getMaxV());
         tessellator.addVertexWithUV(x + width, y + height, zLevel, icon.getMaxU(), icon.getMaxV());
-        tessellator.addVertexWithUV(x + width, y + 0, zLevel, icon.getMaxU(), icon.getMinV());
-        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, icon.getMinU(), icon.getMinV());
+        tessellator.addVertexWithUV(x + width, y, zLevel, icon.getMaxU(), icon.getMinV());
+        tessellator.addVertexWithUV(x, y, zLevel, icon.getMinU(), icon.getMinV());
         tessellator.draw();
     }
 }

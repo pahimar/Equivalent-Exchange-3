@@ -1,31 +1,38 @@
 package com.pahimar.ee3.emc;
 
-public class EmcComponent implements Comparable<EmcComponent> {
-    
+public class EmcComponent implements Comparable<EmcComponent>
+{
+
     public final EmcType type;
     public final int weight;
 
-    public EmcComponent(EmcType type, int weight) {
+    public EmcComponent(EmcType type, int weight)
+    {
 
         this.type = type;
-        
-        if (weight > 0) {
+
+        if (weight > 0)
+        {
             this.weight = weight;
         }
-        else {
+        else
+        {
             this.weight = -1;
         }
     }
-    
-    public EmcComponent(EmcType type) {
-        
+
+    public EmcComponent(EmcType type)
+    {
+
         this(type, 1);
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
 
-        if (!(object instanceof EmcComponent)) {
+        if (!(object instanceof EmcComponent))
+        {
             return false;
         }
 
@@ -35,27 +42,28 @@ public class EmcComponent implements Comparable<EmcComponent> {
     }
 
     @Override
-    public String toString() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.format("<EMC Type: %s, Weight: %s>", type, weight));
-
-        return stringBuilder.toString();
+    public String toString()
+    {
+        return String.format("<EMC Type: %s, Weight: %s>", type, weight);
     }
 
     @Override
-    public int compareTo(EmcComponent emcComponent) {
+    public int compareTo(EmcComponent emcComponent)
+    {
 
-        if (emcComponent != null) {
-            if (this.type == emcComponent.type) {
+        if (emcComponent != null)
+        {
+            if (this.type == emcComponent.type)
+            {
                 return (this.weight - emcComponent.weight);
             }
-            else {
+            else
+            {
                 return this.type.compareTo(emcComponent.type);
             }
         }
-        else {
+        else
+        {
             return 1;
         }
     }

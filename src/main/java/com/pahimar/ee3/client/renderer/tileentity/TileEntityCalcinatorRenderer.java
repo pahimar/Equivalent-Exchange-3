@@ -1,36 +1,35 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-
-import org.lwjgl.opengl.GL11;
-
 import com.pahimar.ee3.client.model.ModelCalcinator;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
-
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * TileEntityCalcinatorRenderer
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
+public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
+{
 
     private ModelCalcinator modelCalcinator = new ModelCalcinator();
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
+    {
 
-        if (tileEntity instanceof TileCalcinator) {
+        if (tileEntity instanceof TileCalcinator)
+        {
             TileCalcinator tileCalcinator = (TileCalcinator) tileEntity;
 
             GL11.glPushMatrix();
@@ -48,7 +47,8 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer {
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            if (tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_INVENTORY_INDEX) != null) {
+            if (tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_INVENTORY_INDEX) != null)
+            {
                 modelCalcinator.renderPart("Dust");
             }
 

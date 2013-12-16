@@ -1,5 +1,13 @@
 package com.pahimar.ee3.core.handler;
 
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.item.IChargeable;
+import com.pahimar.ee3.item.ITransmutationStone;
+import com.pahimar.ee3.lib.Textures;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.EnumMovingObjectType;
@@ -7,47 +15,42 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.item.IChargeable;
-import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.Textures;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * DrawBlockHighlightHandler
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class DrawBlockHighlightHandler {
+public class DrawBlockHighlightHandler
+{
 
     private static int pulse = 0;
     private static boolean doInc = true;
 
     @ForgeSubscribe
-    public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
+    public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event)
+    {
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
 
-        if (event.currentItem != null) {
-            if (event.currentItem.getItem() instanceof ITransmutationStone) {
-                if (event.target.typeOfHit == EnumMovingObjectType.TILE) {
+        if (event.currentItem != null)
+        {
+            if (event.currentItem.getItem() instanceof ITransmutationStone)
+            {
+                if (event.target.typeOfHit == EnumMovingObjectType.TILE)
+                {
                     TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
 
-                    if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus) {
-                        if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION) {
+                    if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
+                    {
+                        if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
+                        {
                             drawInWorldTransmutationOverlay(event);
                         }
                     }
@@ -56,7 +59,8 @@ public class DrawBlockHighlightHandler {
         }
     }
 
-    public void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event) {
+    public void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event)
+    {
 
         double x = event.target.blockX + 0.5F;
         double y = event.target.blockY + 0.5F;
@@ -74,22 +78,26 @@ public class DrawBlockHighlightHandler {
         int chargeLevel;
         int itemChargeLevel = 0;
 
-        if (event.currentItem.getItem() instanceof IChargeable) {
+        if (event.currentItem.getItem() instanceof IChargeable)
+        {
             itemChargeLevel = ((IChargeable) event.currentItem.getItem()).getCharge(event.currentItem);
         }
         chargeLevel = 1 + itemChargeLevel * 2;
 
         ForgeDirection sideHit = ForgeDirection.getOrientation(event.target.sideHit);
 
-        switch (sideHit) {
-            case UP: {
+        switch (sideHit)
+        {
+            case UP:
+            {
                 xScale = chargeLevel + 0.1F;
                 zScale = chargeLevel + 0.1F;
                 xShift = 0;
                 zShift = 0;
                 break;
             }
-            case DOWN: {
+            case DOWN:
+            {
                 xScale = chargeLevel + 0.1F;
                 zScale = chargeLevel + 0.1F;
                 xShift = 0;
@@ -97,7 +105,8 @@ public class DrawBlockHighlightHandler {
                 zShift = 0;
                 break;
             }
-            case NORTH: {
+            case NORTH:
+            {
                 xScale = chargeLevel + 0.1F;
                 yScale = chargeLevel + 0.1F;
                 xShift = 0;
@@ -105,21 +114,24 @@ public class DrawBlockHighlightHandler {
                 zShift = -zShift;
                 break;
             }
-            case SOUTH: {
+            case SOUTH:
+            {
                 xScale = chargeLevel + 0.1F;
                 yScale = chargeLevel + 0.1F;
                 xShift = 0;
                 yShift = 0;
                 break;
             }
-            case EAST: {
+            case EAST:
+            {
                 yScale = chargeLevel + 0.1F;
                 zScale = chargeLevel + 0.1F;
                 yShift = 0;
                 zShift = 0;
                 break;
             }
-            case WEST: {
+            case WEST:
+            {
                 yScale = chargeLevel + 0.1F;
                 zScale = chargeLevel + 0.1F;
                 xShift = -xShift;
@@ -134,7 +146,8 @@ public class DrawBlockHighlightHandler {
         GL11.glDepthMask(false);
         GL11.glDisable(GL11.GL_CULL_FACE);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++)
+        {
             ForgeDirection forgeDir = ForgeDirection.getOrientation(i);
             int zCorrection = i == 2 ? -1 : 1;
             GL11.glPushMatrix();
@@ -151,7 +164,8 @@ public class DrawBlockHighlightHandler {
         GL11.glDepthMask(true);
     }
 
-    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency) {
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency)
+    {
 
         float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
 
@@ -176,20 +190,25 @@ public class DrawBlockHighlightHandler {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
     }
 
-    private static int getPulseValue() {
+    private static int getPulseValue()
+    {
 
-        if (doInc) {
+        if (doInc)
+        {
             pulse += 8;
         }
-        else {
+        else
+        {
             pulse -= 8;
         }
 
-        if (pulse == 3000) {
+        if (pulse == 3000)
+        {
             doInc = false;
         }
 
-        if (pulse == 0) {
+        if (pulse == 0)
+        {
             doInc = true;
         }
 

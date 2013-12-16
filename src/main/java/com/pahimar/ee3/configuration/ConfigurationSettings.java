@@ -4,14 +4,14 @@ import com.pahimar.ee3.lib.Strings;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ConfigurationSettings
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class ConfigurationSettings {
+public class ConfigurationSettings
+{
 
     /*
      * Version check related settings

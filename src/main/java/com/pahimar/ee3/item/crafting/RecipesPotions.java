@@ -1,17 +1,17 @@
 package com.pahimar.ee3.item.crafting;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.pahimar.ee3.item.WrappedStack;
+import java.util.Arrays;
+import java.util.List;
 
-public class RecipesPotions {
+public class RecipesPotions
+{
 
     private static Multimap<WrappedStack, List<WrappedStack>> potionRecipes = null;
 
@@ -102,16 +102,19 @@ public class RecipesPotions {
     private static WrappedStack potionInvisibilitySplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16398));
     private static WrappedStack potionInvisibilitySplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16462));
 
-    public static Multimap<WrappedStack, List<WrappedStack>> getPotionRecipes() {
+    public static Multimap<WrappedStack, List<WrappedStack>> getPotionRecipes()
+    {
 
-        if (potionRecipes == null) {
+        if (potionRecipes == null)
+        {
             init();
         }
 
         return potionRecipes;
     }
 
-    private static void init() {
+    private static void init()
+    {
 
         potionRecipes = HashMultimap.create();
 

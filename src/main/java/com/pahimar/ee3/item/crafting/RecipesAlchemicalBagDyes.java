@@ -1,7 +1,6 @@
 package com.pahimar.ee3.item.crafting;
 
-import java.util.ArrayList;
-
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.inventory.InventoryCrafting;
@@ -10,42 +9,51 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-import com.pahimar.ee3.item.ItemAlchemicalBag;
+import java.util.ArrayList;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * RecipesAlchemicalBagDyes
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class RecipesAlchemicalBagDyes implements IRecipe {
+public class RecipesAlchemicalBagDyes implements IRecipe
+{
 
     @Override
-    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
+    public boolean matches(InventoryCrafting inventoryCrafting, World world)
+    {
 
         ItemStack itemStack = null;
         ArrayList<ItemStack> arrayList = new ArrayList<ItemStack>();
 
-        for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+        for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i)
+        {
 
             ItemStack currentStack = inventoryCrafting.getStackInSlot(i);
 
-            if (currentStack != null) {
+            if (currentStack != null)
+            {
 
-                if (currentStack.getItem() instanceof ItemAlchemicalBag) {
+                if (currentStack.getItem() instanceof ItemAlchemicalBag)
+                {
 
                     if (itemStack != null)
+                    {
                         return false;
+                    }
 
                     itemStack = currentStack;
                 }
-                else {
+                else
+                {
 
                     if (currentStack.itemID != Item.dyePowder.itemID)
+                    {
                         return false;
+                    }
 
                     arrayList.add(currentStack);
                 }
@@ -56,7 +64,8 @@ public class RecipesAlchemicalBagDyes implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
+    {
 
         ItemStack itemStack = null;
         ItemAlchemicalBag itemAlchemicalBag = null;
@@ -67,23 +76,29 @@ public class RecipesAlchemicalBagDyes implements IRecipe {
         int currentColor, newColor;
         float red, green, blue;
 
-        for (k = 0; k < inventoryCrafting.getSizeInventory(); ++k) {
+        for (k = 0; k < inventoryCrafting.getSizeInventory(); ++k)
+        {
 
             ItemStack currentStack = inventoryCrafting.getStackInSlot(k);
 
-            if (currentStack != null) {
+            if (currentStack != null)
+            {
 
-                if (currentStack.getItem() instanceof ItemAlchemicalBag) {
+                if (currentStack.getItem() instanceof ItemAlchemicalBag)
+                {
 
                     itemAlchemicalBag = (ItemAlchemicalBag) currentStack.getItem();
 
                     if (itemStack != null)
+                    {
                         return null;
+                    }
 
                     itemStack = currentStack.copy();
                     itemStack.stackSize = 1;
 
-                    if (itemAlchemicalBag.hasColor(currentStack)) {
+                    if (itemAlchemicalBag.hasColor(currentStack))
+                    {
 
                         currentColor = itemAlchemicalBag.getColor(itemStack);
                         red = (currentColor >> 16 & 255) / 255.0F;
@@ -96,10 +111,13 @@ public class RecipesAlchemicalBagDyes implements IRecipe {
                         ++j;
                     }
                 }
-                else {
+                else
+                {
 
                     if (currentStack.itemID != Item.dyePowder.itemID)
+                    {
                         return null;
+                    }
 
                     float[] dyeColorChannels = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(currentStack.getItemDamage())];
                     j1 = (int) (dyeColorChannels[0] * 255.0F);
@@ -115,8 +133,11 @@ public class RecipesAlchemicalBagDyes implements IRecipe {
         }
 
         if (itemAlchemicalBag == null)
+        {
             return null;
-        else {
+        }
+        else
+        {
 
             k = colorChannels[0] / j;
             l1 = colorChannels[1] / j;
@@ -134,13 +155,15 @@ public class RecipesAlchemicalBagDyes implements IRecipe {
     }
 
     @Override
-    public int getRecipeSize() {
+    public int getRecipeSize()
+    {
 
         return 10;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getRecipeOutput()
+    {
 
         return null;
     }

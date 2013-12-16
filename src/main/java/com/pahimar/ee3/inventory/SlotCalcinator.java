@@ -6,22 +6,24 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * SlotCalcinator
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class SlotCalcinator extends Slot {
+public class SlotCalcinator extends Slot
+{
 
-    public SlotCalcinator(IInventory inventory, int x, int y, int z) {
+    public SlotCalcinator(IInventory inventory, int x, int y, int z)
+    {
 
         super(inventory, x, y, z);
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack) {
+    public boolean isItemValid(ItemStack par1ItemStack)
+    {
 
         return false;
     }

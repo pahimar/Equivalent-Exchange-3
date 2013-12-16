@@ -1,31 +1,24 @@
 package com.pahimar.ee3.item;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
+import com.google.gson.*;
+import com.pahimar.ee3.core.helper.FluidHelper;
+import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.lib.Compare;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.core.helper.FluidHelper;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
-import com.pahimar.ee3.lib.Compare;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class WrappedStack
-        implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack> {
+        implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>
+{
 
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
 
@@ -36,9 +29,10 @@ public class WrappedStack
     private final Object wrappedStack;
 
     /**
-     * 
+     *
      */
-    public WrappedStack() {
+    public WrappedStack()
+    {
 
         className = null;
         stackSize = -1;
@@ -46,22 +40,26 @@ public class WrappedStack
     }
 
     /**
-     * 
      * @param object
      */
-    public WrappedStack(Object object) {
+    public WrappedStack(Object object)
+    {
 
-        if (object instanceof Item) {
+        if (object instanceof Item)
+        {
             object = new ItemStack((Item) object);
         }
-        else if (object instanceof Block) {
+        else if (object instanceof Block)
+        {
             object = new ItemStack((Block) object);
         }
-        else if (object instanceof Fluid) {
+        else if (object instanceof Fluid)
+        {
             object = new FluidStack((Fluid) object, 1);
         }
 
-        if (object instanceof ItemStack) {
+        if (object instanceof ItemStack)
+        {
 
             ItemStack itemStack = ((ItemStack) object).copy();
 
@@ -70,7 +68,8 @@ public class WrappedStack
             itemStack.stackSize = 1;
             wrappedStack = itemStack;
         }
-        else if (object instanceof OreStack) {
+        else if (object instanceof OreStack)
+        {
 
             OreStack oreStack = (OreStack) object;
 
@@ -79,27 +78,31 @@ public class WrappedStack
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
         }
-        else if (object instanceof ArrayList) {
+        else if (object instanceof ArrayList)
+        {
 
             ArrayList<?> objectList = (ArrayList<?>) object;
 
             OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
 
-            if (possibleOreStack != null) {
+            if (possibleOreStack != null)
+            {
 
                 className = possibleOreStack.getClass().getSimpleName();
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
             }
-            else {
+            else
+            {
 
                 stackSize = -1;
                 className = null;
                 wrappedStack = null;
             }
         }
-        else if (object instanceof EnergyStack) {
+        else if (object instanceof EnergyStack)
+        {
 
             EnergyStack energyStack = (EnergyStack) object;
 
@@ -108,7 +111,8 @@ public class WrappedStack
             energyStack.stackSize = 1;
             wrappedStack = energyStack;
         }
-        else if (object instanceof FluidStack) {
+        else if (object instanceof FluidStack)
+        {
 
             FluidStack fluidStack = (FluidStack) object;
 
@@ -117,7 +121,8 @@ public class WrappedStack
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
-        else if (object instanceof WrappedStack) {
+        else if (object instanceof WrappedStack)
+        {
 
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
@@ -125,24 +130,28 @@ public class WrappedStack
             this.stackSize = wrappedStackObject.stackSize;
             this.wrappedStack = wrappedStackObject.wrappedStack;
         }
-        else if (object instanceof String) {
+        else if (object instanceof String)
+        {
 
             WrappedStack wrappedStack = createFromJson((String) object);
 
-            if (wrappedStack != null) {
+            if (wrappedStack != null)
+            {
 
                 className = object.getClass().getSimpleName();
                 stackSize = wrappedStack.stackSize;
                 this.wrappedStack = wrappedStack.wrappedStack;
             }
-            else {
+            else
+            {
 
                 className = null;
                 stackSize = -1;
                 this.wrappedStack = null;
             }
         }
-        else {
+        else
+        {
 
             className = null;
             stackSize = -1;
@@ -151,47 +160,50 @@ public class WrappedStack
     }
 
     /**
-     * 
      * @return
      */
-    public int getStackSize() {
+    public int getStackSize()
+    {
 
         return stackSize;
     }
 
     /**
-     * 
      * @param stackSize
      */
-    public void setStackSize(int stackSize) {
+    public void setStackSize(int stackSize)
+    {
 
         this.stackSize = stackSize;
     }
 
     /**
-     * 
      * @return
      */
-    public Object getWrappedStack() {
+    public Object getWrappedStack()
+    {
 
         return wrappedStack;
     }
 
     /**
-     * 
      * @param jsonWrappedObject
      * @return
      * @throws JsonParseException
      */
-    public static WrappedStack createFromJson(String jsonWrappedObject) throws JsonParseException {
+    public static WrappedStack createFromJson(String jsonWrappedObject) throws JsonParseException
+    {
 
-        try {
+        try
+        {
             return (WrappedStack) gsonSerializer.fromJson(jsonWrappedObject, WrappedStack.class);
         }
-        catch (JsonSyntaxException exception) {
+        catch (JsonSyntaxException exception)
+        {
             LogHelper.warning(exception.getMessage());
         }
-        catch (JsonParseException exception) {
+        catch (JsonParseException exception)
+        {
             LogHelper.warning(exception.getMessage());
         }
 
@@ -199,10 +211,10 @@ public class WrappedStack
     }
 
     /**
-     * 
      * @return
      */
-    public String toJson() {
+    public String toJson()
+    {
         return gsonSerializer.toJson(this);
     }
 
@@ -212,46 +224,56 @@ public class WrappedStack
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(WrappedStack wrappedStack) {
+    public int compareTo(WrappedStack wrappedStack)
+    {
 
         return comparator.compare(this, wrappedStack);
     }
 
     /**
-     * 
+     *
      */
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
 
         int hashCode = 1;
         hashCode = (37 * hashCode) + stackSize;
 
-        if (wrappedStack instanceof ItemStack) {
+        if (wrappedStack instanceof ItemStack)
+        {
 
             hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).itemID;
             hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
 
-            if (((ItemStack) wrappedStack).getTagCompound() != null) {
+            if (((ItemStack) wrappedStack).getTagCompound() != null)
+            {
                 hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getTagCompound().hashCode();
             }
         }
-        else if (wrappedStack instanceof OreStack) {
+        else if (wrappedStack instanceof OreStack)
+        {
 
-            if (((OreStack) wrappedStack).oreName != null) {
+            if (((OreStack) wrappedStack).oreName != null)
+            {
                 hashCode = (37 * hashCode) + ((OreStack) wrappedStack).oreName.hashCode();
             }
         }
-        else if (wrappedStack instanceof EnergyStack) {
+        else if (wrappedStack instanceof EnergyStack)
+        {
 
-            if (((EnergyStack) wrappedStack).energyName != null) {
+            if (((EnergyStack) wrappedStack).energyName != null)
+            {
                 hashCode = (37 * hashCode) + ((EnergyStack) wrappedStack).energyName.hashCode();
             }
         }
-        else if (wrappedStack instanceof FluidStack) {
+        else if (wrappedStack instanceof FluidStack)
+        {
 
             hashCode = (37 * hashCode) + ((FluidStack) wrappedStack).hashCode();
 
-            if (((FluidStack) wrappedStack).tag != null) {
+            if (((FluidStack) wrappedStack).tag != null)
+            {
                 hashCode = (37 * hashCode) + ((FluidStack) wrappedStack).tag.hashCode();
             }
         }
@@ -260,9 +282,11 @@ public class WrappedStack
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
 
-        if (!(object instanceof WrappedStack)) {
+        if (!(object instanceof WrappedStack))
+        {
             return false;
         }
 
@@ -270,35 +294,43 @@ public class WrappedStack
     }
 
     /**
-     * 
      * @return a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (wrappedStack instanceof ItemStack) {
+        if (wrappedStack instanceof ItemStack)
+        {
             ItemStack itemStack = (ItemStack) wrappedStack;
-            try {
+            try
+            {
                 stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
             }
-            catch (ArrayIndexOutOfBoundsException e) {
+            catch (ArrayIndexOutOfBoundsException e)
+            {
+                // NOOP
             }
         }
-        else if (wrappedStack instanceof OreStack) {
+        else if (wrappedStack instanceof OreStack)
+        {
             OreStack oreStack = (OreStack) wrappedStack;
             stringBuilder.append(String.format("%sxoreStack.%s", stackSize, oreStack.oreName));
         }
-        else if (wrappedStack instanceof EnergyStack) {
+        else if (wrappedStack instanceof EnergyStack)
+        {
             EnergyStack energyStack = (EnergyStack) wrappedStack;
             stringBuilder.append(String.format("%sxenergyStack.%s", stackSize, energyStack.energyName));
         }
-        else if (wrappedStack instanceof FluidStack) {
+        else if (wrappedStack instanceof FluidStack)
+        {
             FluidStack fluidStack = (FluidStack) wrappedStack;
             stringBuilder.append(String.format("%sxfluidStack.%s", stackSize, fluidStack.getFluid().getName()));
         }
-        else {
+        else
+        {
             stringBuilder.append("null");
         }
 
@@ -306,30 +338,37 @@ public class WrappedStack
     }
 
     /**
-     * 
      * @param object
      * @return
      */
-    public static boolean canBeWrapped(Object object) {
+    public static boolean canBeWrapped(Object object)
+    {
 
-        if (object instanceof WrappedStack) {
+        if (object instanceof WrappedStack)
+        {
             return true;
         }
-        else if (object instanceof Item || object instanceof Block || object instanceof ItemStack) {
+        else if (object instanceof Item || object instanceof Block || object instanceof ItemStack)
+        {
             return true;
         }
-        else if (object instanceof OreStack) {
+        else if (object instanceof OreStack)
+        {
             return true;
         }
-        else if (object instanceof List) {
-            if (OreStack.getOreStackFromList((List<?>) object) != null) {
+        else if (object instanceof List)
+        {
+            if (OreStack.getOreStackFromList((List<?>) object) != null)
+            {
                 return true;
             }
         }
-        else if (object instanceof EnergyStack) {
+        else if (object instanceof EnergyStack)
+        {
             return true;
         }
-        else if (object instanceof Fluid || object instanceof FluidStack) {
+        else if (object instanceof Fluid || object instanceof FluidStack)
+        {
             return true;
         }
 
@@ -337,12 +376,14 @@ public class WrappedStack
     }
 
     /**
-     * 
+     *
      */
     @Override
-    public WrappedStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public WrappedStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
 
-        if (!jsonElement.isJsonPrimitive()) {
+        if (!jsonElement.isJsonPrimitive())
+        {
 
             JsonObject jsonWrappedStack = (JsonObject) jsonElement;
 
@@ -350,166 +391,203 @@ public class WrappedStack
             String className = null;
             Object wrappedStack = null;
 
-            if (jsonWrappedStack.get("className") != null) {
+            if (jsonWrappedStack.get("className") != null)
+            {
                 className = jsonWrappedStack.get("className").getAsString();
             }
 
-            if (jsonWrappedStack.get("stackSize") != null) {
+            if (jsonWrappedStack.get("stackSize") != null)
+            {
                 stackSize = jsonWrappedStack.get("stackSize").getAsInt();
             }
 
-            if (jsonWrappedStack.get("wrappedStack") != null && !jsonWrappedStack.get("wrappedStack").isJsonPrimitive()) {
+            if (jsonWrappedStack.get("wrappedStack") != null && !jsonWrappedStack.get("wrappedStack").isJsonPrimitive())
+            {
 
-                if (className.equalsIgnoreCase(Item.class.getSimpleName())) {
-
-                    Item item = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
-
-                    wrappedStack = item;
+                if (className.equalsIgnoreCase(Item.class.getSimpleName()))
+                {
+                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
                 }
-                else if (className.equalsIgnoreCase(Block.class.getSimpleName())) {
-
-                    Block block = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
-
-                    wrappedStack = block;
+                else if (className.equalsIgnoreCase(Block.class.getSimpleName()))
+                {
+                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
                 }
-                else if (className.equalsIgnoreCase(Fluid.class.getSimpleName())) {
-
-                    Fluid fluid = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
-
-                    wrappedStack = fluid;
+                else if (className.equalsIgnoreCase(Fluid.class.getSimpleName()))
+                {
+                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
                 }
-                else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName())) {
+                else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
+                {
 
                     ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 
-                    if (stackSize > 0) {
+                    if (stackSize > 0)
+                    {
                         itemStack.stackSize = stackSize;
                     }
                     wrappedStack = itemStack;
                 }
-                else if (className.equalsIgnoreCase(OreStack.class.getSimpleName())) {
+                else if (className.equalsIgnoreCase(OreStack.class.getSimpleName()))
+                {
 
                     OreStack oreStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), OreStack.class);
 
-                    if (stackSize > 0) {
+                    if (stackSize > 0)
+                    {
                         oreStack.stackSize = stackSize;
                     }
                     wrappedStack = oreStack;
                 }
-                else if (className.equalsIgnoreCase(EnergyStack.class.getSimpleName())) {
+                else if (className.equalsIgnoreCase(EnergyStack.class.getSimpleName()))
+                {
 
                     EnergyStack energyStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), EnergyStack.class);
 
-                    if (stackSize > 0) {
+                    if (stackSize > 0)
+                    {
                         energyStack.stackSize = stackSize;
                     }
                     wrappedStack = energyStack;
                 }
-                else if (className.equalsIgnoreCase(FluidStack.class.getSimpleName())) {
+                else if (className.equalsIgnoreCase(FluidStack.class.getSimpleName()))
+                {
 
                     FluidStack fluidStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), FluidStack.class);
 
-                    if (stackSize > 0) {
+                    if (stackSize > 0)
+                    {
                         fluidStack.amount = stackSize;
                     }
                     wrappedStack = fluidStack;
                 }
             }
 
-            if (wrappedStack != null) {
+            if (wrappedStack != null)
+            {
                 return new WrappedStack(wrappedStack);
             }
-            else {
+            else
+            {
                 throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
             }
         }
-        else {
+        else
+        {
             throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
         }
     }
 
-    public static Comparator<WrappedStack> comparator = new Comparator<WrappedStack>() {
+    public static Comparator<WrappedStack> comparator = new Comparator<WrappedStack>()
+    {
 
         @Override
-        public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2) {
+        public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
+        {
 
-            if (wrappedStack1.wrappedStack instanceof ItemStack) {
-                if (wrappedStack2.wrappedStack instanceof ItemStack) {
+            if (wrappedStack1.wrappedStack instanceof ItemStack)
+            {
+                if (wrappedStack2.wrappedStack instanceof ItemStack)
+                {
                     return ItemHelper.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack) {
+                else if (wrappedStack2.wrappedStack instanceof OreStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack) {
+                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack) {
+                else if (wrappedStack2.wrappedStack instanceof FluidStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else {
+                else
+                {
                     return Compare.GREATER_THAN;
                 }
             }
-            else if (wrappedStack1.wrappedStack instanceof OreStack) {
+            else if (wrappedStack1.wrappedStack instanceof OreStack)
+            {
 
-                if (wrappedStack2.wrappedStack instanceof ItemStack) {
+                if (wrappedStack2.wrappedStack instanceof ItemStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack) {
+                else if (wrappedStack2.wrappedStack instanceof OreStack)
+                {
                     return OreStack.compare((OreStack) wrappedStack1.wrappedStack, (OreStack) wrappedStack2.wrappedStack);
                 }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack) {
+                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack) {
+                else if (wrappedStack2.wrappedStack instanceof FluidStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else {
+                else
+                {
                     return Compare.GREATER_THAN;
                 }
             }
-            else if (wrappedStack1.wrappedStack instanceof EnergyStack) {
+            else if (wrappedStack1.wrappedStack instanceof EnergyStack)
+            {
 
-                if (wrappedStack2.wrappedStack instanceof ItemStack) {
+                if (wrappedStack2.wrappedStack instanceof ItemStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack) {
+                else if (wrappedStack2.wrappedStack instanceof OreStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack) {
+                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
+                {
                     return EnergyStack.compare((EnergyStack) wrappedStack1.wrappedStack, (EnergyStack) wrappedStack2.wrappedStack);
                 }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack) {
+                else if (wrappedStack2.wrappedStack instanceof FluidStack)
+                {
                     return Compare.GREATER_THAN;
                 }
-                else {
+                else
+                {
                     return Compare.GREATER_THAN;
                 }
             }
-            else if (wrappedStack1.wrappedStack instanceof FluidStack) {
+            else if (wrappedStack1.wrappedStack instanceof FluidStack)
+            {
 
-                if (wrappedStack2.wrappedStack instanceof ItemStack) {
+                if (wrappedStack2.wrappedStack instanceof ItemStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack) {
+                else if (wrappedStack2.wrappedStack instanceof OreStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack) {
+                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack) {
+                else if (wrappedStack2.wrappedStack instanceof FluidStack)
+                {
                     return FluidHelper.compare((FluidStack) wrappedStack1.wrappedStack, (FluidStack) wrappedStack2.wrappedStack);
                 }
-                else {
+                else
+                {
                     return Compare.GREATER_THAN;
                 }
             }
-            else if (wrappedStack1.wrappedStack == null) {
+            else if (wrappedStack1.wrappedStack == null)
+            {
 
-                if (wrappedStack2.wrappedStack != null) {
+                if (wrappedStack2.wrappedStack != null)
+                {
                     return Compare.LESSER_THAN;
                 }
-                else {
+                else
+                {
                     return Compare.EQUALS;
                 }
             }

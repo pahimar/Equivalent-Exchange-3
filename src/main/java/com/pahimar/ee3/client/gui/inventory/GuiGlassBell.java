@@ -1,34 +1,32 @@
 package com.pahimar.ee3.client.gui.inventory;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import com.pahimar.ee3.inventory.ContainerGlassBell;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileGlassBell;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * GuiGlassBell
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
 @SideOnly(Side.CLIENT)
-public class GuiGlassBell extends GuiContainer {
+public class GuiGlassBell extends GuiContainer
+{
 
     private TileGlassBell tileGlassBell;
 
-    public GuiGlassBell(InventoryPlayer inventoryPlayer, TileGlassBell tileGlassBell) {
+    public GuiGlassBell(InventoryPlayer inventoryPlayer, TileGlassBell tileGlassBell)
+    {
 
         super(new ContainerGlassBell(inventoryPlayer, tileGlassBell));
         this.tileGlassBell = tileGlassBell;
@@ -37,7 +35,8 @@ public class GuiGlassBell extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
+    protected void drawGuiContainerForegroundLayer(int x, int y)
+    {
 
         String containerName = tileGlassBell.isInvNameLocalized() ? tileGlassBell.getInvName() : StatCollector.translateToLocal(tileGlassBell.getInvName());
         fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
@@ -45,7 +44,8 @@ public class GuiGlassBell extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Textures.GUI_GLASS_BELL);

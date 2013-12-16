@@ -1,7 +1,12 @@
 package com.pahimar.ee3.block;
 
-import java.util.Random;
-
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.RenderIds;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileEE;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,15 +22,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileAludel;
-import com.pahimar.ee3.tileentity.TileEE;
-import com.pahimar.ee3.tileentity.TileGlassBell;
+import java.util.Random;
 
-public class BlockGlassBell extends BlockEE {
+public class BlockGlassBell extends BlockEE
+{
 
     /**
      * Is the random generator used by glass bell to drop the inventory contents
@@ -33,7 +33,8 @@ public class BlockGlassBell extends BlockEE {
      */
     private Random rand = new Random();
 
-    public BlockGlassBell(int id) {
+    public BlockGlassBell(int id)
+    {
 
         super(id, Material.glass);
         this.setUnlocalizedName(Strings.GLASS_BELL_NAME);
@@ -42,64 +43,70 @@ public class BlockGlassBell extends BlockEE {
     }
 
     @Override
-    public String getUnlocalizedName() {
-
-        StringBuilder unlocalizedName = new StringBuilder();
-
-        unlocalizedName.append("tile.");
-        unlocalizedName.append(Strings.RESOURCE_PREFIX);
-        unlocalizedName.append(Strings.GLASS_BELL_NAME);
-
-        return unlocalizedName.toString();
+    public String getUnlocalizedName()
+    {
+        return String.format("tile.%s%s", Strings.RESOURCE_PREFIX, Strings.GLASS_BELL_NAME);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world)
+    {
 
         return new TileGlassBell();
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean renderAsNormalBlock()
+    {
 
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
 
         return false;
     }
 
     @Override
-    public int getRenderType() {
+    public int getRenderType()
+    {
 
         return RenderIds.glassBell;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+    public void breakBlock(World world, int x, int y, int z, int id, int meta)
+    {
 
         dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
 
         if (player.isSneaking())
+        {
             return false;
-        else {
-            if (!world.isRemote) {
+        }
+        else
+        {
+            if (!world.isRemote)
+            {
                 TileEntity tileEntityGlassBell = world.getBlockTileEntity(x, y, z);
                 TileEntity tileEntityAludel = world.getBlockTileEntity(x, y - 1, z);
 
-                if (tileEntityAludel instanceof TileAludel && tileEntityGlassBell instanceof TileGlassBell) {
+                if (tileEntityAludel instanceof TileAludel && tileEntityGlassBell instanceof TileGlassBell)
+                {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
                     return true;
                 }
 
-                if (tileEntityGlassBell != null) {
+                if (tileEntityGlassBell != null)
+                {
                     player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
                 }
             }
@@ -109,16 +116,20 @@ public class BlockGlassBell extends BlockEE {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
 
-        if (itemStack.hasDisplayName()) {
+        if (itemStack.hasDisplayName())
+        {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
 
-        if (world.getBlockTileEntity(x, y - 1, z) != null && world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel) {
+        if (world.getBlockTileEntity(x, y - 1, z) != null && world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
+        {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.UP);
         }
-        else {
+        else
+        {
             ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
         }
 
@@ -126,7 +137,8 @@ public class BlockGlassBell extends BlockEE {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
+    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData)
+    {
 
         return sideHit;
     }
@@ -136,41 +148,52 @@ public class BlockGlassBell extends BlockEE {
      * returning a ray trace hit. Args: world, x, y, z, startVec, endVec
      */
     @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec) {
+    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    {
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if (tileEntity != null) {
-            if (tileEntity instanceof TileGlassBell) {
+        if (tileEntity != null)
+        {
+            if (tileEntity instanceof TileGlassBell)
+            {
 
                 TileGlassBell tileGlassBell = (TileGlassBell) tileEntity;
 
-                switch (tileGlassBell.getOrientation()) {
-                    case DOWN: {
+                switch (tileGlassBell.getOrientation())
+                {
+                    case DOWN:
+                    {
                         this.setBlockBounds(0.125F, 0.33F, 0.125F, 0.875F, 1.0F, 0.875F);
                         break;
                     }
-                    case UP: {
+                    case UP:
+                    {
                         this.setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.66F, 0.875F);
                         break;
                     }
-                    case NORTH: {
+                    case NORTH:
+                    {
                         this.setBlockBounds(0.125F, 0.125F, 0.33F, 0.875F, 0.875F, 1.0F);
                         break;
                     }
-                    case SOUTH: {
+                    case SOUTH:
+                    {
                         this.setBlockBounds(0.125F, 0.125F, 0.0F, 0.875F, 0.875F, 0.66F);
                         break;
                     }
-                    case EAST: {
+                    case EAST:
+                    {
                         this.setBlockBounds(0.0F, 0.125F, 0.125F, 0.66F, 0.875F, 0.875F);
                         break;
                     }
-                    case WEST: {
+                    case WEST:
+                    {
                         this.setBlockBounds(0.33F, 0.125F, 0.125F, 1.0F, 0.875F, 0.875F);
                         break;
                     }
-                    case UNKNOWN: {
+                    case UNKNOWN:
+                    {
                         break;
                     }
                 }
@@ -181,53 +204,66 @@ public class BlockGlassBell extends BlockEE {
     }
 
     @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
 
         ItemStack itemStack;
 
-        if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell) {
+        if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell)
+        {
 
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
 
-            if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel) {
+            if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
+            {
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
 
                 itemStack = tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX);
 
                 if (itemStack != null && itemStack.itemID < 4096)
+                {
                     return Block.lightValue[itemStack.itemID];
+                }
             }
 
             itemStack = tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX);
 
             if (itemStack != null && itemStack.itemID < 4096)
+            {
                 return Block.lightValue[itemStack.itemID];
+            }
         }
 
         return 0;
     }
 
-    private void dropInventory(World world, int x, int y, int z) {
+    private void dropInventory(World world, int x, int y, int z)
+    {
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if (!(tileEntity instanceof IInventory))
+        {
             return;
+        }
 
         IInventory inventory = (IInventory) tileEntity;
 
-        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        {
 
             ItemStack itemStack = inventory.getStackInSlot(i);
 
-            if (itemStack != null && itemStack.stackSize > 0) {
+            if (itemStack != null && itemStack.stackSize > 0)
+            {
                 float dX = rand.nextFloat() * 0.8F + 0.1F;
                 float dY = rand.nextFloat() * 0.8F + 0.1F;
                 float dZ = rand.nextFloat() * 0.8F + 0.1F;
 
                 EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
 
-                if (itemStack.hasTagCompound()) {
+                if (itemStack.hasTagCompound())
+                {
                     entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
                 }
 

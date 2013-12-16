@@ -1,7 +1,11 @@
 package com.pahimar.ee3.block;
 
-import java.util.Random;
-
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.RenderIds;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -14,23 +18,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.GuiIds;
-import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileAludel;
-import com.pahimar.ee3.tileentity.TileGlassBell;
+import java.util.Random;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * BlockAludel
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class BlockAludelBase extends BlockEE {
+public class BlockAludelBase extends BlockEE
+{
 
     /**
      * Is the random generator used by aludel to drop the inventory contents in
@@ -38,7 +37,8 @@ public class BlockAludelBase extends BlockEE {
      */
     private Random rand = new Random();
 
-    public BlockAludelBase(int id) {
+    public BlockAludelBase(int id)
+    {
 
         super(id, Material.anvil);
         this.setUnlocalizedName(Strings.ALUDEL_NAME);
@@ -48,47 +48,44 @@ public class BlockAludelBase extends BlockEE {
     }
 
     @Override
-    public String getUnlocalizedName() {
-
-        StringBuilder unlocalizedName = new StringBuilder();
-
-        unlocalizedName.append("tile.");
-        unlocalizedName.append(Strings.RESOURCE_PREFIX);
-        unlocalizedName.append(Strings.ALUDEL_NAME);
-
-        return unlocalizedName.toString();
+    public String getUnlocalizedName()
+    {
+        return String.format("tile.%s%s", Strings.RESOURCE_PREFIX, Strings.ALUDEL_NAME);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
-
+    public TileEntity createNewTileEntity(World world)
+    {
         return new TileAludel();
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-
+    public boolean renderAsNormalBlock()
+    {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube() {
-
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
     @Override
-    public int getRenderType() {
+    public int getRenderType()
+    {
 
         return RenderIds.aludelRender;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+    public void breakBlock(World world, int x, int y, int z, int id, int meta)
+    {
 
         dropInventory(world, x, y, z);
 
-        if (world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell) {
+        if (world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell)
+        {
             world.markBlockForUpdate(x, y + 1, z);
             world.updateAllLightTypes(x, y + 1, z);
         }
@@ -97,15 +94,21 @@ public class BlockAludelBase extends BlockEE {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
 
         if (player.isSneaking())
+        {
             return false;
-        else {
-            if (!world.isRemote) {
+        }
+        else
+        {
+            if (!world.isRemote)
+            {
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
 
-                if (tileAludel != null) {
+                if (tileAludel != null)
+                {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
                 }
             }
@@ -115,17 +118,20 @@ public class BlockAludelBase extends BlockEE {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
 
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
-        if (world.getBlockTileEntity(x, y + 1, z) != null && world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell) {
+        if (world.getBlockTileEntity(x, y + 1, z) != null && world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell)
+        {
 
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y + 1, z);
 
             tileGlassBell.setOrientation(ForgeDirection.UP);
 
-            if (world.getBlockTileEntity(x, y, z) != null && world.getBlockTileEntity(x, y, z) instanceof TileAludel) {
+            if (world.getBlockTileEntity(x, y, z) != null && world.getBlockTileEntity(x, y, z) instanceof TileAludel)
+            {
 
                 TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
 
@@ -139,32 +145,39 @@ public class BlockAludelBase extends BlockEE {
     }
 
     @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
 
         return 0;
     }
 
-    private void dropInventory(World world, int x, int y, int z) {
+    private void dropInventory(World world, int x, int y, int z)
+    {
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if (!(tileEntity instanceof IInventory))
+        {
             return;
+        }
 
         IInventory inventory = (IInventory) tileEntity;
 
-        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        {
 
             ItemStack itemStack = inventory.getStackInSlot(i);
 
-            if (itemStack != null && itemStack.stackSize > 0) {
+            if (itemStack != null && itemStack.stackSize > 0)
+            {
                 float dX = rand.nextFloat() * 0.8F + 0.1F;
                 float dY = rand.nextFloat() * 0.8F + 0.1F;
                 float dZ = rand.nextFloat() * 0.8F + 0.1F;
 
                 EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
 
-                if (itemStack.hasTagCompound()) {
+                if (itemStack.hasTagCompound())
+                {
                     entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
                 }
 

@@ -4,14 +4,14 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * IChargeable
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public interface IChargeable {
+public interface IChargeable
+{
 
     public abstract short getCharge(ItemStack stack);
 

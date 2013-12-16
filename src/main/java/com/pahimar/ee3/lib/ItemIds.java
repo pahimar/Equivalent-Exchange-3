@@ -2,14 +2,13 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ItemIds
- * 
+ *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class ItemIds {
+public class ItemIds
+{
 
     /* Default item ids */
     public static int MINIUM_SHARD_DEFAULT = 27000;

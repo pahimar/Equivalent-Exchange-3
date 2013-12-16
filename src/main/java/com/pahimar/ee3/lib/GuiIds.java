@@ -2,14 +2,13 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * GuiIds
- * 
+ *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class GuiIds {
+public class GuiIds
+{
 
     public static final int PORTABLE_CRAFTING = 0;
     public static final int PORTABLE_TRANSMUTATION = 1;

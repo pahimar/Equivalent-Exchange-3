@@ -1,7 +1,9 @@
 package com.pahimar.ee3.item;
 
-import java.util.List;
-
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.Strings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -9,29 +11,26 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Strings;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ItemAlchemicalDust
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class ItemAlchemicalDust extends ItemEE {
+public class ItemAlchemicalDust extends ItemEE
+{
 
-    private static final String[] ALCHEMICAL_DUST_NAMES = new String[] { "Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent" };
+    private static final String[] ALCHEMICAL_DUST_NAMES = new String[] {"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
 
-    public ItemAlchemicalDust(int id) {
+    public ItemAlchemicalDust(int id)
+    {
 
         super(id);
         this.setHasSubtypes(true);
@@ -40,7 +39,8 @@ public class ItemAlchemicalDust extends ItemEE {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
+    public String getUnlocalizedName(ItemStack itemStack)
+    {
 
         StringBuilder unlocalizedName = new StringBuilder();
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
@@ -58,7 +58,8 @@ public class ItemAlchemicalDust extends ItemEE {
     /**
      * Gets an icon index based on an item's damage value
      */
-    public Icon getIconFromDamage(int meta) {
+    public Icon getIconFromDamage(int meta)
+    {
 
         int j = MathHelper.clamp_int(meta, 0, 5);
         return icons[j];
@@ -66,33 +67,35 @@ public class ItemAlchemicalDust extends ItemEE {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) {
+    public void registerIcons(IconRegister iconRegister)
+    {
 
         icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
-        for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i) {
+        for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i)
+        {
             icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
+    public boolean hasEffect(ItemStack stack)
+    {
 
         int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
 
-        if (meta == 5)
-            return true;
-        else
-            return false;
+        return meta == 5;
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemStack) {
+    public String getItemDisplayName(ItemStack itemStack)
+    {
 
         int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
 
-        switch (meta) {
+        switch (meta)
+        {
             case 0:
                 return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
             case 1:
@@ -111,11 +114,13 @@ public class ItemAlchemicalDust extends ItemEE {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs creativeTab, List list) {
+    public void getSubItems(int id, CreativeTabs creativeTab, List list)
+    {
 
-        for (int meta = 0; meta < 6; ++meta) {
+        for (int meta = 0; meta < 6; ++meta)
+        {
             list.add(new ItemStack(id, 1, meta));
         }
     }

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.lib;
 
-public class Models {
+public class Models
+{
 
     // Base file paths
     public static final String MODEL_LOCATION = "/assets/ee3/models/";

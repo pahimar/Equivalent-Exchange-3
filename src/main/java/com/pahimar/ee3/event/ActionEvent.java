@@ -7,16 +7,17 @@ import net.minecraftforge.event.Event;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * ActionEvent
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class ActionEvent extends Event {
+public class ActionEvent extends Event
+{
 
-    public enum ActionResult {
+    public enum ActionResult
+    {
         SUCCESS, DEFAULT, FAILURE
     }
 
@@ -29,7 +30,8 @@ public class ActionEvent extends Event {
     public final String data;
     public ActionResult actionResult;
 
-    public ActionEvent(byte actionType, ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, boolean hasActionOccured, String data) {
+    public ActionEvent(byte actionType, ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, boolean hasActionOccured, String data)
+    {
 
         this.actionType = actionType;
         this.itemStack = itemStack;

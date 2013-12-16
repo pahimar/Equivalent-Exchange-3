@@ -1,6 +1,7 @@
 package com.pahimar.ee3.imc;
 
-public class InterModCommsOperations {
+public class InterModCommsOperations
+{
 
     // Interacting with the Recipe Registry
     public static final String RECIPE_ADD = "recipe-add";

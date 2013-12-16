@@ -2,19 +2,18 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * Sounds
- * 
+ *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class Sounds {
+public class Sounds
+{
 
     private static final String SOUND_RESOURCE_LOCATION = Reference.MOD_ID.toLowerCase() + ":";
     private static final String SOUND_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 
-    public static String[] soundFiles = { SOUND_RESOURCE_LOCATION + "chargeDown.ogg", SOUND_RESOURCE_LOCATION + "chargeUp.ogg", SOUND_RESOURCE_LOCATION + "destruct.ogg", SOUND_RESOURCE_LOCATION + "fail.ogg", SOUND_RESOURCE_LOCATION + "gust.ogg", SOUND_RESOURCE_LOCATION + "heal.ogg", SOUND_RESOURCE_LOCATION + "kinesis.ogg", SOUND_RESOURCE_LOCATION + "launch.ogg", SOUND_RESOURCE_LOCATION + "nova.ogg", SOUND_RESOURCE_LOCATION + "philball.ogg", SOUND_RESOURCE_LOCATION + "tock.ogg", SOUND_RESOURCE_LOCATION + "transmute.ogg", SOUND_RESOURCE_LOCATION + "wall.ogg", SOUND_RESOURCE_LOCATION + "waterball.ogg", SOUND_RESOURCE_LOCATION + "wind.ogg" };
+    public static String[] soundFiles = {SOUND_RESOURCE_LOCATION + "chargeDown.ogg", SOUND_RESOURCE_LOCATION + "chargeUp.ogg", SOUND_RESOURCE_LOCATION + "destruct.ogg", SOUND_RESOURCE_LOCATION + "fail.ogg", SOUND_RESOURCE_LOCATION + "gust.ogg", SOUND_RESOURCE_LOCATION + "heal.ogg", SOUND_RESOURCE_LOCATION + "kinesis.ogg", SOUND_RESOURCE_LOCATION + "launch.ogg", SOUND_RESOURCE_LOCATION + "nova.ogg", SOUND_RESOURCE_LOCATION + "philball.ogg", SOUND_RESOURCE_LOCATION + "tock.ogg", SOUND_RESOURCE_LOCATION + "transmute.ogg", SOUND_RESOURCE_LOCATION + "wall.ogg", SOUND_RESOURCE_LOCATION + "waterball.ogg", SOUND_RESOURCE_LOCATION + "wind.ogg"};
 
     public static final String CHARGE_DOWN = SOUND_PREFIX + "chargeDown";
     public static final String CHARGE_UP = SOUND_PREFIX + "chargeUp";

@@ -2,15 +2,13 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * BlockIds
- * 
+ *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class BlockIds {
-
+public class BlockIds
+{
     /* Default block ids */
     public static int CALCINATOR_DEFAULT = 2451;
     public static int ALUDEL_BASE_DEFAULT = 2454;

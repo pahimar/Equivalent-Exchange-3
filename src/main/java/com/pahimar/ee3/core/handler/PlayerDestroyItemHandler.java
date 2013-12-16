@@ -5,17 +5,18 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * PlayerDestroyItemHandler
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class PlayerDestroyItemHandler {
+public class PlayerDestroyItemHandler
+{
 
     @ForgeSubscribe
-    public void onPlayerDestroyItemEvent(PlayerDestroyItemEvent event) {
+    public void onPlayerDestroyItemEvent(PlayerDestroyItemEvent event)
+    {
 
         // TODO Come back and actually do what I want here
 

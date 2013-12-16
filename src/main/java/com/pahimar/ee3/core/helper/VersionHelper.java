@@ -1,30 +1,28 @@
 package com.pahimar.ee3.core.helper;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Properties;
-
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.Configuration;
-
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-
 import cpw.mods.fml.common.Loader;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.Configuration;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * VersionHelper
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class VersionHelper implements Runnable {
+public class VersionHelper implements Runnable
+{
 
     private static VersionHelper instance = new VersionHelper();
 
@@ -46,155 +44,198 @@ public class VersionHelper implements Runnable {
     public static String remoteVersion = null;
     public static String remoteUpdateLocation = null;
 
-    /***
+    /**
      * Checks the version of the currently running instance of the mod against
      * the remote version authority, and sets the result of the check
      * appropriately
      */
-    public static void checkVersion() {
+    public static void checkVersion()
+    {
 
         InputStream remoteVersionRepoStream = null;
         result = UNINITIALIZED;
 
-        try {
+        try
+        {
             URL remoteVersionURL = new URL(REMOTE_VERSION_XML_FILE);
             remoteVersionRepoStream = remoteVersionURL.openStream();
             remoteVersionProperties.loadFromXML(remoteVersionRepoStream);
 
             String remoteVersionProperty = remoteVersionProperties.getProperty(Loader.instance().getMCVersionString());
 
-            if (remoteVersionProperty != null) {
+            if (remoteVersionProperty != null)
+            {
                 String[] remoteVersionTokens = remoteVersionProperty.split("\\|");
 
-                if (remoteVersionTokens.length >= 2) {
+                if (remoteVersionTokens.length >= 2)
+                {
                     remoteVersion = remoteVersionTokens[0];
                     remoteUpdateLocation = remoteVersionTokens[1];
                 }
-                else {
+                else
+                {
                     result = ERROR;
                 }
 
-                if (remoteVersion != null) {
-                    if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion)) {
+                if (remoteVersion != null)
+                {
+                    if (!ConfigurationSettings.LAST_DISCOVERED_VERSION.equalsIgnoreCase(remoteVersion))
+                    {
                         GeneralConfiguration.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, remoteVersion);
                     }
 
-                    if (remoteVersion.equalsIgnoreCase(getVersionForCheck())) {
+                    if (remoteVersion.equalsIgnoreCase(getVersionForCheck()))
+                    {
                         result = CURRENT;
                     }
-                    else {
+                    else
+                    {
                         result = OUTDATED;
                     }
                 }
 
             }
-            else {
+            else
+            {
                 result = MC_VERSION_NOT_FOUND;
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
+            // NOOP
         }
-        finally {
-            if (result == UNINITIALIZED) {
+        finally
+        {
+            if (result == UNINITIALIZED)
+            {
                 result = ERROR;
             }
 
-            try {
-                if (remoteVersionRepoStream != null) {
+            try
+            {
+                if (remoteVersionRepoStream != null)
+                {
                     remoteVersionRepoStream.close();
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
+                // NOOP
             }
         }
     }
 
-    private static String getVersionForCheck() {
+    private static String getVersionForCheck()
+    {
 
         String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
 
         if (versionTokens.length >= 1)
+        {
             return versionTokens[0];
+        }
         else
+        {
             return Reference.VERSION_NUMBER;
+        }
     }
 
-    public static void logResult() {
+    public static void logResult()
+    {
 
-        if (result == CURRENT || result == OUTDATED) {
+        if (result == CURRENT || result == OUTDATED)
+        {
             LogHelper.info(getResultMessage());
         }
-        else {
+        else
+        {
             LogHelper.warning(getResultMessage());
         }
     }
 
-    public static String getResultMessage() {
+    public static String getResultMessage()
+    {
 
-        if (result == UNINITIALIZED) {
+        if (result == UNINITIALIZED)
+        {
             return StatCollector.translateToLocal(Strings.UNINITIALIZED_MESSAGE);
         }
-        else if (result == CURRENT) {
+        else if (result == CURRENT)
+        {
             return StatCollector.translateToLocalFormatted(Strings.CURRENT_MESSAGE, Reference.MOD_NAME, Loader.instance().getMCVersionString());
         }
-        else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null) {
+        else if (result == OUTDATED && remoteVersion != null && remoteUpdateLocation != null)
+        {
             return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Reference.MOD_NAME, remoteVersion, Loader.instance().getMCVersionString(), remoteUpdateLocation);
         }
-        else if (result == ERROR) {
+        else if (result == ERROR)
+        {
             return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
-        else if (result == FINAL_ERROR) {
+        else if (result == FINAL_ERROR)
+        {
             return StatCollector.translateToLocal(Strings.FINAL_ERROR_MESSAGE);
         }
-        else if (result == MC_VERSION_NOT_FOUND) {
+        else if (result == MC_VERSION_NOT_FOUND)
+        {
             return StatCollector.translateToLocalFormatted(Strings.MC_VERSION_NOT_FOUND, Reference.MOD_NAME, Loader.instance().getMCVersionString());
         }
-        else {
+        else
+        {
             result = ERROR;
             return StatCollector.translateToLocal(Strings.GENERAL_ERROR_MESSAGE);
         }
     }
 
-    public static String getResultMessageForClient() {
+    public static String getResultMessageForClient()
+    {
 
         return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
     }
 
-    public static byte getResult() {
+    public static byte getResult()
+    {
 
         return result;
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
 
         int count = 0;
 
         LogHelper.info(StatCollector.translateToLocalFormatted(Strings.VERSION_CHECK_INIT_LOG_MESSAGE, REMOTE_VERSION_XML_FILE));
 
-        try {
-            while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR)) {
+        try
+        {
+            while (count < Reference.VERSION_CHECK_ATTEMPTS - 1 && (result == UNINITIALIZED || result == ERROR))
+            {
 
                 checkVersion();
                 count++;
                 logResult();
 
-                if (result == UNINITIALIZED || result == ERROR) {
+                if (result == UNINITIALIZED || result == ERROR)
+                {
                     Thread.sleep(10000);
                 }
             }
 
-            if (result == ERROR) {
+            if (result == ERROR)
+            {
                 result = FINAL_ERROR;
                 logResult();
             }
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static void execute() {
+    public static void execute()
+    {
 
         new Thread(instance).start();
     }

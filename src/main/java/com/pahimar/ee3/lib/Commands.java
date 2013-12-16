@@ -2,15 +2,13 @@ package com.pahimar.ee3.lib;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * Commands
- * 
+ *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class Commands {
-
+public class Commands
+{
     /* Command related contants */
     public static final String ALL = "all";
     public static final String SELF = "self";

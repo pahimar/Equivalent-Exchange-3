@@ -5,37 +5,44 @@ import java.util.List;
 
 /**
  * Equivalent-Exchange-3
- * 
+ * <p/>
  * TransmutationManager
- * 
+ *
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
  */
-public class TransmutationManager {
+public class TransmutationManager
+{
 
-    /** The static instance of this class */
+    /**
+     * The static instance of this class
+     */
     private static final TransmutationManager instance = new TransmutationManager();
 
-    /** A list of all the recipes added */
+    /**
+     * A list of all the recipes added
+     */
     private List<?> recipes = new ArrayList<Object>();
 
     /**
      * Returns the static instance of this class
      */
-    public static final TransmutationManager getInstance() {
+    public static TransmutationManager getInstance()
+    {
 
         return instance;
     }
 
-    private TransmutationManager() {
+    private TransmutationManager()
+    {
 
     }
 
     /**
      * returns the List<> of all recipes
      */
-    public List<?> getRecipeList() {
+    public List<?> getRecipeList()
+    {
 
         return recipes;
     }
