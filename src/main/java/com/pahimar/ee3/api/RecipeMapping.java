@@ -1,18 +1,24 @@
 package com.pahimar.ee3.api;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import com.pahimar.ee3.item.WrappedStack;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeMapping
+public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeserializer<RecipeMapping>
 {
-    private static Gson gsonSerializer = new Gson();
+    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(RecipeMapping.class, new RecipeMapping()).create();
 
     public final WrappedStack outputWrappedStack;
     public final List<WrappedStack> inputWrappedStacks;
+
+    private RecipeMapping()
+    {
+        outputWrappedStack = null;
+        inputWrappedStacks = null;
+    }
 
     public RecipeMapping(Object outputStack, List<?> inputStacks)
     {
@@ -58,5 +64,53 @@ public class RecipeMapping
     public String toJson()
     {
         return gsonSerializer.toJson(this);
+    }
+
+    @Override
+    public RecipeMapping deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+
+        if (!jsonElement.isJsonPrimitive()) {
+
+            JsonObject jsonRecipeMapping = (JsonObject) jsonElement;
+
+            WrappedStack outputStack = null;
+            List<WrappedStack> inputStacks = new ArrayList<WrappedStack>();
+
+            if (jsonRecipeMapping.get("outputWrappedStack") != null) {
+                outputStack = new WrappedStack().deserialize(jsonRecipeMapping.get("outputWrappedStack").getAsJsonObject(), type, context);
+            }
+
+            if (jsonRecipeMapping.get("inputWrappedStacks") != null) {
+                JsonArray jsonInputStacks = jsonRecipeMapping.get("inputWrappedStacks").getAsJsonArray();
+
+                for (int i = 0; i < jsonInputStacks.size(); i++) {
+                    WrappedStack inputStack = new WrappedStack().deserialize(jsonInputStacks.get(i).getAsJsonObject(), type, context);
+                    inputStacks.add(inputStack);
+                }
+            }
+
+            return new RecipeMapping(outputStack, inputStacks);
+        }
+
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(RecipeMapping recipeMapping, Type type, JsonSerializationContext context) {
+
+        JsonObject jsonRecipeMapping = new JsonObject();
+
+        Gson gsonWrappedStack = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+
+        JsonArray jsonArray = new JsonArray();
+        for (WrappedStack inputStack : recipeMapping.inputWrappedStacks)
+        {
+            jsonArray.add(gsonWrappedStack.toJsonTree(inputStack));
+        }
+
+        jsonRecipeMapping.add("outputWrappedStack", gsonWrappedStack.toJsonTree(recipeMapping.outputWrappedStack));
+        jsonRecipeMapping.add("inputWrappedStacks", jsonArray);
+
+        return jsonRecipeMapping;
     }
 }

@@ -5,7 +5,6 @@ import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.core.handler.*;
 import com.pahimar.ee3.core.handler.addon.AddonIMCHandler;
-import com.pahimar.ee3.core.helper.ItemHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
@@ -13,8 +12,6 @@ import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.OreStack;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
@@ -31,15 +28,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -53,7 +45,6 @@ import java.util.List;
 @NetworkMod(channels = {Reference.CHANNEL_NAME}, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3
 {
-
     @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
@@ -65,7 +56,6 @@ public class EquivalentExchange3
     @EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
-
         // Report (log) to the user that the version of Equivalent Exchange 3
         // they are using has been changed/tampered with
         if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
@@ -81,7 +71,6 @@ public class EquivalentExchange3
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event)
     {
-
         // Initialize the custom commands
         CommandHandler.initCommands(event);
     }
@@ -89,7 +78,6 @@ public class EquivalentExchange3
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-
         // set version number
         event.getModMetadata().version = Reference.VERSION_NUMBER;
 
@@ -128,7 +116,6 @@ public class EquivalentExchange3
     @SuppressWarnings("unchecked")
     public void load(FMLInitializationEvent event)
     {
-
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 
@@ -168,29 +155,12 @@ public class EquivalentExchange3
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event)
     {
-
-        LogHelper.debug(RecipeRegistry.getInstance().toString());
-
         EmcRegistry.lazyInit();
-
-        List<String> oreNames = Arrays.asList(OreDictionary.getOreNames());
-        Collections.sort(oreNames);
-        for (String oreName : oreNames)
-        {
-            if (!EmcRegistry.hasEmcValue(new OreStack(oreName)))
-            {
-                for (ItemStack itemStack : OreDictionary.getOres(oreName))
-                {
-                    LogHelper.debug(String.format("%s: %s", oreName, ItemHelper.toString(itemStack)));
-                }
-            }
-        }
     }
 
     @EventHandler
     public void handleIMCMessages(IMCEvent event)
     {
-
         InterModCommsHandler.processIMCMessages(event);
     }
 }

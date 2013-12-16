@@ -41,10 +41,6 @@ public class AddonEmcValues
         sendPreValueAssignment(new OreStack("dustCopper"), COPPER_EMC_VALUE);
         sendPreValueAssignment(new OreStack("dustTin"), TIN_EMC_VALUE);
 
-        // Gems
-        sendPreValueAssignment(new StackValueMapping(new OreStack("gemApatite"), APATITE_EMC_VALUE));
-        sendPreValueAssignment(new StackValueMapping(new OreStack("gemDiamond"), DIAMOND_EMC_VALUE));
-
         /**
          * Post-Value Assignment Mapping
          */

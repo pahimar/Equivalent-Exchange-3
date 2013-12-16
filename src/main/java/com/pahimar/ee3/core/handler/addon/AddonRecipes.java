@@ -5,6 +5,9 @@ import com.pahimar.ee3.imc.InterModCommsOperations;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,22 +18,24 @@ import java.util.List;
  * AddonVanilla
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class AddonRecipes
 {
 
     public static void init()
     {
-
-        // TODO Once the API is more solid, add examples here for proper IMC calls
-        // FMLInterModComms.sendMessage(Reference.MOD_ID, InterModComms.ADD_RECIPE, "");
-        sendAddRecipe(new OreStack("dustBronze"), Arrays.asList(new OreStack("dustTin"), new OreStack("dustCopper"), new OreStack("dustCopper"), new OreStack("dustCopper")));
-        sendAddRecipe(new OreStack("dustGold"), Arrays.asList(new OreStack("ingotGold")));
+        // TODO Work on more recipe mappings
+        sendAddRecipe(new OreStack("dustBronze"), new OreStack("dustTin"), new OreStack("dustCopper", 3));
+        sendAddRecipe(new OreStack("dustGold"), Item.ingotGold);
+        sendAddRecipe(new OreStack("dustDiamond"), Item.diamond);
+        sendAddRecipe(new OreStack("dustObsidian"), Block.obsidian);
+        sendAddRecipe(new OreStack("dustClay"), new ItemStack(Item.coal, 1, 0));
+        sendAddRecipe(new OreStack("dustCoal"), Item.clay);
     }
 
-    private static void sendAddRecipe(Object outputObject, List<?> inputObjects)
+    private static void sendAddRecipe(Object outputObject, Object ... inputObjects)
     {
-        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModCommsOperations.RECIPE_ADD, new RecipeMapping(outputObject, inputObjects).toJson());
+        List<?> inputObjectsList = Arrays.asList(inputObjects);
+        FMLInterModComms.sendMessage(Reference.MOD_ID, InterModCommsOperations.RECIPE_ADD, new RecipeMapping(outputObject, inputObjectsList).toJson());
     }
 }

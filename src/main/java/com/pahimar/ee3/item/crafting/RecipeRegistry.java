@@ -38,19 +38,33 @@ public class RecipeRegistry
 
     private void init()
     {
-
         // Add potion recipes
-        recipeMap.putAll(RecipesPotions.getPotionRecipes());
+        for (WrappedStack outputStack : RecipesPotions.getPotionRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesPotions.getPotionRecipes().get(outputStack)) {
+                recipeMap.put(outputStack, inputStacks);
+            }
+        }
 
         // Add recipes in the vanilla crafting manager
-        recipeMap.putAll(RecipesVanilla.getVanillaRecipes());
+        for (WrappedStack outputStack : RecipesVanilla.getVanillaRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesVanilla.getVanillaRecipes().get(outputStack)) {
+                recipeMap.put(outputStack, inputStacks);
+            }
+        }
 
         // Add recipes gathered via IMC
-        // TODO Not working as expected, fix me
-        recipeMap.putAll(RecipesIMC.getIMCRecipes());
+        for (WrappedStack outputStack : RecipesIMC.getIMCRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesIMC.getIMCRecipes().get(outputStack)) {
+                recipeMap.put(outputStack, inputStacks);
+            }
+        }
 
         // Add fluid container recipes
-        recipeMap.putAll(RecipesFluidContainers.getFluidContainerRecipes());
+        for (WrappedStack outputStack : RecipesFluidContainers.getFluidContainerRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesFluidContainers.getFluidContainerRecipes().get(outputStack)) {
+                recipeMap.put(outputStack, inputStacks);
+            }
+        }
 
         // Discover all stacks that we can
         discoverStacks();

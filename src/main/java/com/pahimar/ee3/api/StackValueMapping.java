@@ -31,7 +31,7 @@ public class StackValueMapping implements JsonSerializer<StackValueMapping>, Jso
 
         try
         {
-            return (StackValueMapping) gsonSerializer.fromJson(jsonStackValueMapping, StackValueMapping.class);
+            return gsonSerializer.fromJson(jsonStackValueMapping, StackValueMapping.class);
         }
         catch (JsonSyntaxException exception)
         {

@@ -70,7 +70,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
         if (imcMessage.getMessageType() == String.class)
         {
-
             RecipeMapping recipeMapping = RecipeMapping.createFromJson(imcMessage.getStringValue());
 
             if (recipeMapping != null)
