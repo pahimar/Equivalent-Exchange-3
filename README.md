@@ -10,6 +10,12 @@
 ### Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 ***
+[Windows Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#windows-prerequisites)
+
+[Linux Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#linux-prerequisites)
+
+[Mac Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#mac-prerequisites)
+
 #### Windows Prerequisites
 1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
 2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
@@ -21,10 +27,10 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
     * Under `System Variables`, click `New`.
     * For `Variable Name`, input `JAVA_HOME`.
     * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
-	* Create another new System Variable, name it GRADLE_HOME, and input where your Gradle directory is.
+	* Create another new System Variable, name it `GRADLE_HOME`, and input where your Gradle directory is (eg `C:\Gradle`).
     * Scroll down to a variable named `Path`, and double-click on it.
     * Append `;%JAVA_HOME%\bin; %GRADLE_HOME%\bin`, and click `Ok`.  Make sure the locations are correct; double-check just to make sure.
-5. Download and install Github [here](http://windows.github.com/) NOTE: This Github application is optional, you can use whatever you want, e.g. TortoiseGit.
+5. Download and install Github [here](http://windows.github.com/).  NOTE: This Github application is optional, you can use whatever you want, eg TortoiseGit or SmartGitHg.
     * Create an account.
     * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` at the bottom of the right-hand toolbar.
     * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
