@@ -2,6 +2,7 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
@@ -34,9 +35,12 @@ public class RecipesVanilla
 
         for (Object recipeObject : CraftingManager.getInstance().getRecipeList())
         {
-
             if (recipeObject instanceof IRecipe)
             {
+
+                // TODO Handle different IRecipe types here
+                LogHelper.debug(recipeObject.getClass().getCanonicalName());
+
 
                 IRecipe recipe = (IRecipe) recipeObject;
                 ItemStack recipeOutput = recipe.getRecipeOutput();

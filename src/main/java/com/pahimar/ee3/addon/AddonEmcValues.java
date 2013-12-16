@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handler.addon;
+package com.pahimar.ee3.addon;
 
 import com.pahimar.ee3.api.StackValueMapping;
 import com.pahimar.ee3.emc.EmcValue;

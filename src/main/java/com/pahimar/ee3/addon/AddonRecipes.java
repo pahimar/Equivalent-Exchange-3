@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handler.addon;
+package com.pahimar.ee3.addon;
 
 import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.imc.InterModCommsOperations;
@@ -98,6 +98,7 @@ public class AddonRecipes
         /**
          * Tin
          */
+        sendAddRecipe(new OreStack("ingotTin"), new OreStack("dustTin"));
 
         /**
          * Uranium

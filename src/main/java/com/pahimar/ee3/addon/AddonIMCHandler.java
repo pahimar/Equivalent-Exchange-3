@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handler.addon;
+package com.pahimar.ee3.addon;
 
 /**
  * Equivalent-Exchange-3

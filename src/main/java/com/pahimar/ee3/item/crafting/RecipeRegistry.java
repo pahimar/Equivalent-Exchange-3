@@ -38,31 +38,41 @@ public class RecipeRegistry
 
     private void init()
     {
-        // Add potion recipes
-        for (WrappedStack outputStack : RecipesPotions.getPotionRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesPotions.getPotionRecipes().get(outputStack)) {
-                recipeMap.put(outputStack, inputStacks);
-            }
-        }
+        // TODO Decide if all recipe registration should be handled via IMC
 
         // Add recipes in the vanilla crafting manager
         for (WrappedStack outputStack : RecipesVanilla.getVanillaRecipes().keySet()) {
             for (List<WrappedStack> inputStacks : RecipesVanilla.getVanillaRecipes().get(outputStack)) {
-                recipeMap.put(outputStack, inputStacks);
-            }
-        }
-
-        // Add recipes gathered via IMC
-        for (WrappedStack outputStack : RecipesIMC.getIMCRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesIMC.getIMCRecipes().get(outputStack)) {
-                recipeMap.put(outputStack, inputStacks);
+                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+                    recipeMap.put(outputStack, inputStacks);
+                }
             }
         }
 
         // Add fluid container recipes
         for (WrappedStack outputStack : RecipesFluidContainers.getFluidContainerRecipes().keySet()) {
             for (List<WrappedStack> inputStacks : RecipesFluidContainers.getFluidContainerRecipes().get(outputStack)) {
-                recipeMap.put(outputStack, inputStacks);
+                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+                    recipeMap.put(outputStack, inputStacks);
+                }
+            }
+        }
+
+        // Add potion recipes
+        for (WrappedStack outputStack : RecipesPotions.getPotionRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesPotions.getPotionRecipes().get(outputStack)) {
+                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+                    recipeMap.put(outputStack, inputStacks);
+                }
+            }
+        }
+
+        // Add recipes gathered via IMC
+        for (WrappedStack outputStack : RecipesIMC.getIMCRecipes().keySet()) {
+            for (List<WrappedStack> inputStacks : RecipesIMC.getIMCRecipes().get(outputStack)) {
+                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+                    recipeMap.put(outputStack, inputStacks);
+                }
             }
         }
 
