@@ -16,6 +16,8 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
 
 [Mac Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#mac-prerequisites)
 
+[Setup EE3](https://github.com/pahimar/Equivalent-Exchange-3#setup-ee3)
+
 #### Windows Prerequisites
 1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
 2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
@@ -43,10 +45,11 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
     * In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
     * In Fedora, `yum install java-1.7.0-openjdk`
         * If your distribution is not listed, follow the instructions specific to your package manager.
-2. Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
-	* In Gentoo, `dev-java/gradle-bin`
-	* In Ubuntu/Debian/Fedora, `gradle`
-	* In Archlinux, you'll have to manually install from the unsupported packages
+2. Install Gradle.  To install manually, go [here](http://www.gradle.org/downloads).
+	* In Gentoo, `emerge dev-java/gradle-bin`
+	* In Archlinux, you'll have to download it from the [AUR](https://aur.archlinux.org/packages/gradle)
+	* In Ubuntu/Debian, `apt-get install gradle`
+	* In Fedora, `yum install gradle`
 3. Install Git.  To install manually, go [here](http://git-scm.com/).
     * In Gentoo, `emerge dev-vcs/git`
     * In Archlinux, `pacman -S git`
