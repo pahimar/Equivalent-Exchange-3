@@ -10,21 +10,33 @@
 ### Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 ***
+[Windows Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#windows-prerequisites)
+
+[Linux Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#linux-prerequisites)
+
+[Mac Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#mac-prerequisites)
+
+[Setup EE3](https://github.com/pahimar/Equivalent-Exchange-3#setup-ee3)
+
 #### Windows Prerequisites
 1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
-2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it.  (If you have a 64-bit OS, please download the 64-bit version.)
+2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
+3. Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
+	* Install by extracting the contents, and then placing the resulting folder wherever you want.
+4. Set environment variables.
     * Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
     * Click on `Environment Variables`.
     * Under `System Variables`, click `New`.
     * For `Variable Name`, input `JAVA_HOME`.
     * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
+	* Create another new System Variable, name it `GRADLE_HOME`, and input where your Gradle directory is (eg `C:\Gradle`).
     * Scroll down to a variable named `Path`, and double-click on it.
-    * Append `;%JAVA_HOME%\bin`, and click `Ok`.
-3. Download and install Github [here](http://windows.github.com/) NOTE: This Github application is optional, you can use whatever you want, e.g. TortoiseGit.
+    * Append `;%JAVA_HOME%\bin; %GRADLE_HOME%\bin`, and click `Ok`.  Make sure the locations are correct; double-check just to make sure.
+5. Download and install Github [here](http://windows.github.com/).  NOTE: This Github application is optional, you can use whatever you want, eg TortoiseGit or SmartGitHg.
     * Create an account.
     * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` at the bottom of the right-hand toolbar.
     * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
-4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+6. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Linux Prerequisites
 1. Make sure you have the latest Java JDK installed.  To install manually, go [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Otherwise, install from the package manager or the terminal (listed).
@@ -33,35 +45,41 @@ IMPORTANT: Please report any issues you have, there might be some problems with 
     * In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
     * In Fedora, `yum install java-1.7.0-openjdk`
         * If your distribution is not listed, follow the instructions specific to your package manager.
-2. Install Git.  To install manually, go [here](http://git-scm.com/).
+2. Install Gradle.  To install manually, go [here](http://www.gradle.org/downloads).
+	* In Gentoo, `emerge dev-java/gradle-bin`
+	* In Archlinux, you'll have to download it from the [AUR](https://aur.archlinux.org/packages/gradle)
+	* In Ubuntu/Debian, `apt-get install gradle`
+	* In Fedora, `yum install gradle`
+3. Install Git.  To install manually, go [here](http://git-scm.com/).
     * In Gentoo, `emerge dev-vcs/git`
     * In Archlinux, `pacman -S git`
     * In Ubuntu/Debian, `apt-get install git`
     * In Fedora, `yum install git`
         * If your distribution is not listed, follow the instructions specific to your package manager.
-3. Open your shell and move to a convenient directory, then run `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download the repository.
-4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+4. Open your shell and move to a convenient directory, then run `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download the repository.
+5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Mac Prerequisites
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it. (Mac OS X comes with the JRE, but not the JDK.)
-2. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
+1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (Mac OS X comes with the JRE, but not the JDK).
+2. Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
+	* If you're having trouble, try going [here](http://www.cerebro.com.au/2013/08/01/java-gradle-install-gradle-in-mac-osx/) for help.
+3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
     * Create an account.
     * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
     * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Mac defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
-3. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
 
 #### Setup EE3
 1. Move/clone `Equivalent-Exchange-3` into `mcdev`.
 2. Right now, you should have a directory that looks something like:
 
 ***
-
 	mcdev
 	\-Equivalent-Exchange-3
 		\-EE3's files (should have build.gradle).
 ***
 
-3. Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.
+3. Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.  **THIS IS OPTIONAL**
     * You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (but only down to 9.11.1.960).
         * `minecraft_version=1.6.4`
         * `forge_version=9.11.1.964`
