@@ -119,7 +119,6 @@ public class WrappedStack
         }
         else if (object instanceof FluidStack)
         {
-
             FluidStack fluidStack = (FluidStack) object;
 
             className = object.getClass().getSimpleName();
@@ -127,30 +126,40 @@ public class WrappedStack
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
+        // TODO EquivalencyStack handling
+//        else if (object instanceof EquivalencyStack)
+//        {
+//
+//        }
         else if (object instanceof WrappedStack)
         {
-
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            className = wrappedStackObject.wrappedStack.getClass().getSimpleName();
-            this.stackSize = wrappedStackObject.stackSize;
-            this.wrappedStack = wrappedStackObject.wrappedStack;
+            if (wrappedStackObject.getWrappedStack() != null)
+            {
+                className = wrappedStackObject.wrappedStack.getClass().getSimpleName();
+                this.stackSize = wrappedStackObject.stackSize;
+                this.wrappedStack = wrappedStackObject.wrappedStack;
+            }
+            else
+            {
+                className = null;
+                stackSize = -1;
+                wrappedStack = null;
+            }
         }
         else if (object instanceof String)
         {
-
             WrappedStack wrappedStack = createFromJson((String) object);
 
             if (wrappedStack != null)
             {
-
                 className = object.getClass().getSimpleName();
                 stackSize = wrappedStack.stackSize;
                 this.wrappedStack = wrappedStack.wrappedStack;
             }
             else
             {
-
                 className = null;
                 stackSize = -1;
                 this.wrappedStack = null;
@@ -158,7 +167,6 @@ public class WrappedStack
         }
         else
         {
-
             className = null;
             stackSize = -1;
             wrappedStack = null;
