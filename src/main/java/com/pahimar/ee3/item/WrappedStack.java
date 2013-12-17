@@ -1,9 +1,9 @@
 package com.pahimar.ee3.item;
 
 import com.google.gson.*;
-import com.pahimar.ee3.core.helper.FluidHelper;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.helper.FluidHelper;
+import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

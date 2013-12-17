@@ -1,6 +1,6 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.helper.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraftforge.event.ForgeSubscribe;

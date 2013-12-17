@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
@@ -19,10 +19,11 @@ import java.util.Properties;
  * VersionHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class VersionHelper implements Runnable
 {
+
+    // TODO Switch how versions are looked up from xml to json (for changelog support)
 
     private static VersionHelper instance = new VersionHelper();
 

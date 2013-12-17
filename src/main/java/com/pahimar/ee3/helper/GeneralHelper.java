@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;

@@ -4,7 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.addon.AddonIndustrialCraft2;
 import com.pahimar.ee3.api.RecipeMapping;
-import com.pahimar.ee3.core.helper.RecipeHelper;
+import com.pahimar.ee3.helper.RecipeHelper;
 import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;

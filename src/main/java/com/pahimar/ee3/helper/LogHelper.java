@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
@@ -21,7 +21,6 @@ public class LogHelper
 
     public static void init()
     {
-
         eeLogger.setParent(FMLLog.getLogger());
     }
 
@@ -39,8 +38,7 @@ public class LogHelper
 
     public static void severe(Object object)
     {
-
-        log(Level.SEVERE, object.toString());
+        log(Level.SEVERE, object);
     }
 
     public static void debug(Object object)
@@ -57,37 +55,31 @@ public class LogHelper
 
     public static void warning(Object object)
     {
-
-        log(Level.WARNING, object.toString());
+        log(Level.WARNING, object);
     }
 
     public static void info(Object object)
     {
-
-        log(Level.INFO, object.toString());
+        log(Level.INFO, object);
     }
 
     public static void config(Object object)
     {
-
-        log(Level.CONFIG, object.toString());
+        log(Level.CONFIG, object);
     }
 
     public static void fine(Object object)
     {
-
-        log(Level.FINE, object.toString());
+        log(Level.FINE, object);
     }
 
     public static void finer(Object object)
     {
-
-        log(Level.FINER, object.toString());
+        log(Level.FINER, object);
     }
 
     public static void finest(Object object)
     {
-
-        log(Level.FINEST, object.toString());
+        log(Level.FINEST, object);
     }
 }

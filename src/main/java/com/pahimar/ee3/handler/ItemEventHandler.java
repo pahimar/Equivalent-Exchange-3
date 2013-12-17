@@ -1,6 +1,6 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraftforge.event.ForgeSubscribe;

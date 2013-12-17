@@ -1,6 +1,6 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
-import com.pahimar.ee3.core.handler.EquivalencyHandler;
+import com.pahimar.ee3.handler.EquivalencyHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;

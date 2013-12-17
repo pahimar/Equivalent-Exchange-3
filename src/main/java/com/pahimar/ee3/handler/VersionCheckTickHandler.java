@@ -1,8 +1,8 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
-import com.pahimar.ee3.core.helper.VersionHelper;
+import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.client.FMLClientHandler;

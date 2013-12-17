@@ -1,7 +1,7 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.ICraftingHandler;
 import net.minecraft.entity.player.EntityPlayer;

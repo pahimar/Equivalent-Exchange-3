@@ -1,6 +1,6 @@
 package com.pahimar.ee3.lib;
 
-import com.pahimar.ee3.core.helper.ResourceLocationHelper;
+import com.pahimar.ee3.helper.ResourceLocationHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 

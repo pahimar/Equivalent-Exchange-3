@@ -1,6 +1,6 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

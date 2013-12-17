@@ -1,6 +1,6 @@
 package com.pahimar.ee3.client.gui.inventory;
 
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
 import cpw.mods.fml.relauncher.Side;

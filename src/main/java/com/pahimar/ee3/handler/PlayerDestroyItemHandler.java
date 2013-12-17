@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;

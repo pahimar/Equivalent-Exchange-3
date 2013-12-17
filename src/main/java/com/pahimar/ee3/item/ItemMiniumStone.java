@@ -2,8 +2,8 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;

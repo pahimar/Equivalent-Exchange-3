@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import net.minecraft.client.settings.KeyBinding;

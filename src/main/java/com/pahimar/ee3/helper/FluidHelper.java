@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.helper;
+package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.lib.Compare;
 import net.minecraftforge.fluids.FluidStack;

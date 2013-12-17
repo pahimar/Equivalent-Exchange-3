@@ -1,8 +1,8 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.client.renderer.RenderUtils;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
+import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.client.FMLClientHandler;

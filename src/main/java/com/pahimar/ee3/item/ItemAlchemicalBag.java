@@ -1,8 +1,8 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;

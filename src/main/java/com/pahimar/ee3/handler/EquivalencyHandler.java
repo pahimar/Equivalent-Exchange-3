@@ -1,7 +1,7 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.core.helper.GeneralHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.helper.GeneralHelper;
+import com.pahimar.ee3.helper.LogHelper;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

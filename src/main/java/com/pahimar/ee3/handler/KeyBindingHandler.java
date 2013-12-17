@@ -1,6 +1,6 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.core.helper.KeyBindingHelper;
+import com.pahimar.ee3.helper.KeyBindingHelper;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketTypeHandler;

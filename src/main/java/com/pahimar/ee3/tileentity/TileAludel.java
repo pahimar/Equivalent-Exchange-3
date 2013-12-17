@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.core.helper.ItemHelper;
+import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;

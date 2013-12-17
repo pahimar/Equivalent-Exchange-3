@@ -1,11 +1,11 @@
-package com.pahimar.ee3.core.handler;
+package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.core.helper.TransmutationHelper;
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionEvent.ActionResult;
 import com.pahimar.ee3.event.ActionRequestEvent;
 import com.pahimar.ee3.event.WorldTransmutationEvent;
+import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.ItemUpdateTypes;
 import com.pahimar.ee3.lib.Particles;

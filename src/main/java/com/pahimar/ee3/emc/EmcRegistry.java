@@ -1,9 +1,9 @@
 package com.pahimar.ee3.emc;
 
 import com.google.common.collect.ImmutableSortedMap;
-import com.pahimar.ee3.core.helper.EmcHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
-import com.pahimar.ee3.core.helper.RecipeHelper;
+import com.pahimar.ee3.helper.EmcHelper;
+import com.pahimar.ee3.helper.LogHelper;
+import com.pahimar.ee3.helper.RecipeHelper;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;

@@ -1,4 +1,4 @@
-package com.pahimar.ee3.core.proxy;
+package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.client.gui.inventory.*;
 import com.pahimar.ee3.inventory.*;
