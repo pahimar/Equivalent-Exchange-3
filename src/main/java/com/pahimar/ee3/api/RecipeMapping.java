@@ -113,4 +113,10 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
 
         return jsonRecipeMapping;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Output: %s, Input: %s", outputWrappedStack, inputWrappedStacks);
+    }
 }

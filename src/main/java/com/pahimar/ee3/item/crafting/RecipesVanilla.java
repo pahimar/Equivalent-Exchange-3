@@ -2,19 +2,19 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.core.helper.ItemHelper;
-import com.pahimar.ee3.core.helper.LogHelper;
+import com.pahimar.ee3.addon.AddonIndustrialCraft2;
+import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.core.helper.RecipeHelper;
 import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RecipesVanilla
@@ -35,23 +35,20 @@ public class RecipesVanilla
 
     private static void init()
     {
-
         vanillaRecipes = HashMultimap.create();
 
         for (Object recipeObject : CraftingManager.getInstance().getRecipeList())
         {
-            if (recipeObject instanceof IRecipe)
+            /**
+             * Vanilla
+             */
+            if (recipeObject instanceof ShapedRecipes || recipeObject instanceof ShapelessRecipes || recipeObject instanceof ShapedOreRecipe || recipeObject instanceof ShapelessOreRecipe)
             {
-
-                // TODO Handle different IRecipe types here
-                experimentalHandleIC2AdvRecipe((IRecipe) recipeObject);
-
                 IRecipe recipe = (IRecipe) recipeObject;
                 ItemStack recipeOutput = recipe.getRecipeOutput();
 
                 if (recipeOutput != null)
                 {
-
                     ArrayList<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
 
                     if (!recipeInputs.isEmpty())
@@ -60,29 +57,16 @@ public class RecipesVanilla
                     }
                 }
             }
-        }
-    }
-
-    private static void experimentalHandleIC2AdvRecipe(IRecipe recipeObject)
-    {
-        if (recipeObject.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvRecipe"))
-        {
-            try
+            /**
+             * IndustrialCraft2
+             */
+            else if (recipeObject.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvRecipe") || recipeObject.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvShapelessRecipe"))
             {
-                Object object = Class.forName("ic2.core.AdvRecipe").getDeclaredField("output").get(recipeObject);
-                LogHelper.debug(object);
-            }
-            catch (IllegalAccessException e)
-            {
-                e.printStackTrace();
-            }
-            catch (NoSuchFieldException e)
-            {
-                e.printStackTrace();
-            }
-            catch (ClassNotFoundException e)
-            {
-                e.printStackTrace();
+                RecipeMapping recipeMapping = AddonIndustrialCraft2.getIC2RecipeMapping((IRecipe) recipeObject);
+                if (recipeMapping != null)
+                {
+                    vanillaRecipes.put(recipeMapping.outputWrappedStack, recipeMapping.inputWrappedStacks);
+                }
             }
         }
     }

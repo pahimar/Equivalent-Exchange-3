@@ -1,11 +1,10 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.addon.AddonHandler;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.core.handler.*;
-import com.pahimar.ee3.addon.AddonIMCHandler;
-import com.pahimar.ee3.core.helper.DebugHelper;
 import com.pahimar.ee3.core.helper.LogHelper;
 import com.pahimar.ee3.core.helper.VersionHelper;
 import com.pahimar.ee3.core.proxy.CommonProxy;
@@ -150,7 +149,7 @@ public class EquivalentExchange3
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
         // Initialize addons (which work with IMC, and must be used in Init)
-        AddonIMCHandler.init();
+        AddonHandler.init();
     }
 
     @EventHandler

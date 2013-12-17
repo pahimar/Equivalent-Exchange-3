@@ -4,6 +4,7 @@ import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -51,6 +52,40 @@ public class DebugHelper {
             for (List<WrappedStack> inputStacks : RecipeRegistry.getInstance().getRecipeMappings().get(outputStack))
             {
                 LogHelper.debug(String.format("%s <--- %s", outputStack, inputStacks));
+            }
+        }
+    }
+
+    public static void printItemsWithoutEmcValues()
+    {
+        printItemsWithoutEmcValues(null);
+    }
+
+    public static void printItemsWithoutEmcValues(String modid)
+    {
+        for (WrappedStack wrappedStack : RecipeRegistry.getInstance().getDiscoveredStacks())
+        {
+            if (!EmcRegistry.hasEmcValue(wrappedStack))
+            {
+                if (wrappedStack.getWrappedStack() instanceof ItemStack)
+                {
+                    ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
+                    GameRegistry.UniqueIdentifier uniqueIdentifier = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
+                    if (uniqueIdentifier != null)
+                    {
+                        if (modid != null)
+                        {
+                            if (uniqueIdentifier.modId.equalsIgnoreCase(modid))
+                            {
+                                LogHelper.debug(String.format("Mod '%s': Object '%s' is lacking an EmcValue", uniqueIdentifier.modId, wrappedStack));
+                            }
+                        }
+                        else
+                        {
+                            LogHelper.debug(String.format("Mod '%s': Object '%s' is lacking an EmcValue", uniqueIdentifier.modId, wrappedStack));
+                        }
+                    }
+                }
             }
         }
     }

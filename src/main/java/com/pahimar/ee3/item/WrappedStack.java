@@ -29,11 +29,14 @@ public class WrappedStack
     private final Object wrappedStack;
 
     /**
+     * TODO Think of ways to handle recipes where a single input could be a list of possibilities, but that the list is not in the OreDictionary (they are not OreDictionary equivalent)
+     */
+
+    /**
      *
      */
     public WrappedStack()
     {
-
         className = null;
         stackSize = -1;
         wrappedStack = null;
@@ -70,7 +73,6 @@ public class WrappedStack
         }
         else if (object instanceof OreStack)
         {
-
             OreStack oreStack = (OreStack) object;
 
             className = object.getClass().getSimpleName();
@@ -80,22 +82,26 @@ public class WrappedStack
         }
         else if (object instanceof ArrayList)
         {
-
             ArrayList<?> objectList = (ArrayList<?>) object;
 
             OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
 
             if (possibleOreStack != null)
             {
-
                 className = possibleOreStack.getClass().getSimpleName();
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
             }
+            else if (canBeWrapped(objectList))
+            {
+                // TODO Switch to EquivalencyStack
+                stackSize = 1;
+                className = ArrayList.class.getSimpleName();
+                wrappedStack = objectList;
+            }
             else
             {
-
                 stackSize = -1;
                 className = null;
                 wrappedStack = null;
@@ -329,6 +335,10 @@ public class WrappedStack
             FluidStack fluidStack = (FluidStack) wrappedStack;
             stringBuilder.append(String.format("%sxfluidStack.%s", stackSize, fluidStack.getFluid().getName()));
         }
+        else if (wrappedStack instanceof ArrayList)
+        {
+            stringBuilder.append(String.format("%sxlistStack.%s", stackSize, wrappedStack));
+        }
         else
         {
             stringBuilder.append("null");
@@ -362,6 +372,21 @@ public class WrappedStack
             {
                 return true;
             }
+            else
+            {
+                // TODO Switch to EquivalencyStack
+                boolean canBeWrapped = true;
+                List<?> listObject = (List) object;
+                for (Object individualObject : listObject)
+                {
+                    if (!canBeWrapped(individualObject))
+                    {
+                        canBeWrapped = false;
+                    }
+                }
+
+                return canBeWrapped;
+            }
         }
         else if (object instanceof EnergyStack)
         {
@@ -381,10 +406,8 @@ public class WrappedStack
     @Override
     public WrappedStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-
         if (!jsonElement.isJsonPrimitive())
         {
-
             JsonObject jsonWrappedStack = (JsonObject) jsonElement;
 
             int stackSize = -1;
@@ -403,7 +426,6 @@ public class WrappedStack
 
             if (jsonWrappedStack.get("wrappedStack") != null && !jsonWrappedStack.get("wrappedStack").isJsonPrimitive())
             {
-
                 if (className.equalsIgnoreCase(Item.class.getSimpleName()))
                 {
                     wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
@@ -418,7 +440,6 @@ public class WrappedStack
                 }
                 else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                 {
-
                     ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 
                     if (stackSize > 0)
@@ -429,7 +450,6 @@ public class WrappedStack
                 }
                 else if (className.equalsIgnoreCase(OreStack.class.getSimpleName()))
                 {
-
                     OreStack oreStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), OreStack.class);
 
                     if (stackSize > 0)
@@ -440,7 +460,6 @@ public class WrappedStack
                 }
                 else if (className.equalsIgnoreCase(EnergyStack.class.getSimpleName()))
                 {
-
                     EnergyStack energyStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), EnergyStack.class);
 
                     if (stackSize > 0)
@@ -451,7 +470,6 @@ public class WrappedStack
                 }
                 else if (className.equalsIgnoreCase(FluidStack.class.getSimpleName()))
                 {
-
                     FluidStack fluidStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), FluidStack.class);
 
                     if (stackSize > 0)
@@ -459,6 +477,10 @@ public class WrappedStack
                         fluidStack.amount = stackSize;
                     }
                     wrappedStack = fluidStack;
+                }
+                else if (className.equalsIgnoreCase(ArrayList.class.getSimpleName()))
+                {
+                    // TODO ArrayList deserialization here
                 }
             }
 
@@ -490,18 +512,6 @@ public class WrappedStack
                 {
                     return ItemHelper.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack)
-                {
-                    return Compare.GREATER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
-                {
-                    return Compare.GREATER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack)
-                {
-                    return Compare.GREATER_THAN;
-                }
                 else
                 {
                     return Compare.GREATER_THAN;
@@ -509,7 +519,6 @@ public class WrappedStack
             }
             else if (wrappedStack1.wrappedStack instanceof OreStack)
             {
-
                 if (wrappedStack2.wrappedStack instanceof ItemStack)
                 {
                     return Compare.LESSER_THAN;
@@ -518,14 +527,6 @@ public class WrappedStack
                 {
                     return OreStack.compare((OreStack) wrappedStack1.wrappedStack, (OreStack) wrappedStack2.wrappedStack);
                 }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
-                {
-                    return Compare.GREATER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack)
-                {
-                    return Compare.GREATER_THAN;
-                }
                 else
                 {
                     return Compare.GREATER_THAN;
@@ -533,22 +534,13 @@ public class WrappedStack
             }
             else if (wrappedStack1.wrappedStack instanceof EnergyStack)
             {
-
-                if (wrappedStack2.wrappedStack instanceof ItemStack)
-                {
-                    return Compare.LESSER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof OreStack)
+                if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack)
                 {
                     return Compare.LESSER_THAN;
                 }
                 else if (wrappedStack2.wrappedStack instanceof EnergyStack)
                 {
                     return EnergyStack.compare((EnergyStack) wrappedStack1.wrappedStack, (EnergyStack) wrappedStack2.wrappedStack);
-                }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack)
-                {
-                    return Compare.GREATER_THAN;
                 }
                 else
                 {
@@ -557,16 +549,7 @@ public class WrappedStack
             }
             else if (wrappedStack1.wrappedStack instanceof FluidStack)
             {
-
-                if (wrappedStack2.wrappedStack instanceof ItemStack)
-                {
-                    return Compare.LESSER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof OreStack)
-                {
-                    return Compare.LESSER_THAN;
-                }
-                else if (wrappedStack2.wrappedStack instanceof EnergyStack)
+                if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack || wrappedStack2.wrappedStack instanceof EnergyStack)
                 {
                     return Compare.LESSER_THAN;
                 }
@@ -579,9 +562,41 @@ public class WrappedStack
                     return Compare.GREATER_THAN;
                 }
             }
+            // TODO Switch to EquivalencyStack
+            else if (wrappedStack1.wrappedStack instanceof ArrayList)
+            {
+                if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack || wrappedStack2.wrappedStack instanceof EnergyStack || wrappedStack2.wrappedStack instanceof FluidStack)
+                {
+                    return Compare.LESSER_THAN;
+                }
+                else if (wrappedStack2.wrappedStack instanceof ArrayList)
+                {
+                    ArrayList firstList = (ArrayList) wrappedStack1.wrappedStack;
+                    ArrayList secondList = (ArrayList) wrappedStack2.wrappedStack;
+
+                    if (firstList.size() == secondList.size())
+                    {
+                        if (firstList.hashCode() == secondList.hashCode())
+                        {
+                            return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                        }
+                        else
+                        {
+                            return firstList.hashCode() - secondList.hashCode();
+                        }
+                    }
+                    else
+                    {
+                        return firstList.size() - secondList.size();
+                    }
+                }
+                else
+                {
+                    return Compare.GREATER_THAN;
+                }
+            }
             else if (wrappedStack1.wrappedStack == null)
             {
-
                 if (wrappedStack2.wrappedStack != null)
                 {
                     return Compare.LESSER_THAN;
@@ -594,6 +609,5 @@ public class WrappedStack
 
             return Compare.EQUALS;
         }
-
     };
 }

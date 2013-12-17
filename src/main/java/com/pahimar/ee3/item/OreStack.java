@@ -11,7 +11,6 @@ import java.util.List;
 
 public class OreStack implements Comparable<OreStack>
 {
-
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = new Gson();
 
@@ -22,20 +21,17 @@ public class OreStack implements Comparable<OreStack>
 
     public OreStack(String oreName, int stackSize)
     {
-
         this.oreName = oreName;
         this.stackSize = stackSize;
     }
 
     public OreStack(String oreName)
     {
-
         this(oreName, 1);
     }
 
     public OreStack(ItemStack itemStack)
     {
-
         this(OreDictionary.getOreName(OreDictionary.getOreID(itemStack)), itemStack.stackSize);
     }
 
@@ -48,7 +44,6 @@ public class OreStack implements Comparable<OreStack>
     @Override
     public boolean equals(Object object)
     {
-
         if (!(object instanceof OreStack))
         {
             return false;
@@ -59,7 +54,6 @@ public class OreStack implements Comparable<OreStack>
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)
     {
-
         if (oreStack1 != null && oreStack2 != null)
         {
             if ((oreStack1.oreName != null) && (oreStack2.oreName != null))
@@ -74,7 +68,6 @@ public class OreStack implements Comparable<OreStack>
     @Override
     public int compareTo(OreStack oreStack)
     {
-
         return comparator.compare(this, oreStack);
     }
 
@@ -88,7 +81,6 @@ public class OreStack implements Comparable<OreStack>
      */
     public static OreStack createFromJson(String jsonOreStack)
     {
-
         try
         {
             return (OreStack) gsonSerializer.fromJson(jsonOreStack, OreStack.class);
@@ -108,13 +100,11 @@ public class OreStack implements Comparable<OreStack>
      */
     public String toJson()
     {
-
         return gsonSerializer.toJson(this);
     }
 
     public static OreStack getOreStackFromList(List<?> objectList)
     {
-
         for (Object listElement : objectList)
         {
             if (listElement instanceof ItemStack)
