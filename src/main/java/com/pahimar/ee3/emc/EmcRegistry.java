@@ -22,6 +22,7 @@ public class EmcRegistry
     private ImmutableSortedMap<WrappedStack, EmcValue> stackMappings;
     private ImmutableSortedMap<EmcValue, List<WrappedStack>> valueMappings;
 
+    // TODO Change this into a proper registry
     public static void lazyInit()
     {
 

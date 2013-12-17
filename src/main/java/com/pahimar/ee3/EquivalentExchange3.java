@@ -5,7 +5,6 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
@@ -114,7 +113,7 @@ public class EquivalentExchange3
 
     @EventHandler
     @SuppressWarnings("unchecked")
-    public void load(FMLInitializationEvent event)
+    public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, proxy);
@@ -133,6 +132,8 @@ public class EquivalentExchange3
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
 
         MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
+
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
         GameRegistry.registerCraftingHandler(new CraftingHandler());
 
@@ -153,9 +154,9 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent event)
+    public void postInit(FMLPostInitializationEvent event)
     {
-        EmcRegistry.lazyInit();
+        // NOOP
     }
 
     @EventHandler
