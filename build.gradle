@@ -96,12 +96,14 @@ task signJar(dependsOn: "reobf") {
 }
 
 task incrementBuildNumber() {
-    // increment
-    config.build_number = (config.build_number.toString().toInteger()) + 1
+    doLast {
+        // increment
+        config.build_number = (config.build_number.toString().toInteger()) + 1
 
-    // write back to the file
-    configFile.withWriter {
-        config.toProperties().store(it, "")
+        // write back to the file
+        configFile.withWriter {
+            config.toProperties().store(it, "")
+        }
     }
 }
 
