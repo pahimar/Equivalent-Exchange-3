@@ -1,5 +1,5 @@
-## Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**:  [EE3 pre1h for 1.5.1/1.5.2](http://adf.ly/PdBNy)
+##Welcome to Equivalent Exchange 3!
+**LATEST OFFICIAL VERSION**: [EE3 pre1h for 1.5.1/1.5.2](http://adf.ly/PdBNy)
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
@@ -7,125 +7,138 @@
 
 [Contributing](https://github.com/pahimar/Equivalent-Exchange-3#contributing) - For those that want to help out.
 
-### Compiling Equivalent Exchange 3
+[FAQ](https://github.com/pahimar/Equivalent-exchange-3#faq) - For those that have questions.
+
+###Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
+Also make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
 ***
-[Windows Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#windows-prerequisites)
+[Setup Java](https://github.com/pahimar/Equivalent-Exchange-3#setup-java)
 
-[Linux Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#linux-prerequisites)
+[Setup Gradle](https://github.com/pahimar/Equivalent-Exchange-3#setup-gradle)
 
-[Mac Prerequisites](https://github.com/pahimar/Equivalent-Exchange-3#mac-prerequisites)
+[Setup Git](https://github.com/pahimar/Equivalent-Exchange-3#setup-git)
 
 [Setup EE3](https://github.com/pahimar/Equivalent-Exchange-3#setup-ee3)
 
-#### Windows Prerequisites
-1. **WARNING:  Make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.**
-2. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
-3. Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
-	* Install by extracting the contents, and then placing the resulting folder wherever you want.
-4. Set environment variables.
+[Compile EE3](https://github.com/pahimar/Equivalent-Exchange-3#compile-ee3)
+
+[Updating Your Repository](https://github.com/pahimar/Equivalent-Exchange-3#updating-your-repository)
+
+####Setup Java
+The Java JDK is used to compile EE3.
+1a. Windows/Mac: Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
+1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
+	* Gentoo: `emerge dev-java/oracle-jdk-bin`
+    * Archlinux: `pacman -S jdk7-openjdk`
+    * Ubuntu/Debian: `apt-get install openjdk-7-jdk`
+    * Fedora: `yum install java-1.7.0-openjdk`
+2. Windows: Set environment variables for the JDK.
     * Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
     * Click on `Environment Variables`.
     * Under `System Variables`, click `New`.
     * For `Variable Name`, input `JAVA_HOME`.
-    * For `Variable Value`, input something similar to `;C:\Program Files\Java\jdk1.7.0_45` exactly as shown to the end (or wherever your Java JDK installation is), and click `Ok`.
-	* Create another new System Variable, name it `GRADLE_HOME`, and input where your Gradle directory is (eg `C:\Gradle`).
+    * For `Variable Value`, input something similar to `C:\Program Files\Java\jdk1.7.0_45` exactly as shown (or wherever your Java JDK installation is), and click `Ok`.
     * Scroll down to a variable named `Path`, and double-click on it.
-    * Append `;%JAVA_HOME%\bin; %GRADLE_HOME%\bin`, and click `Ok`.  Make sure the locations are correct; double-check just to make sure.
-5. Download and install Github [here](http://windows.github.com/).  NOTE: This Github application is optional, you can use whatever you want, eg TortoiseGit or SmartGitHg.
-    * Create an account.
-    * Scroll to the top of this page, login at the top-right, and then click `Clone to Windows` at the bottom of the right-hand toolbar.
-    * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Windows defaults to `C:\Users\(username)\Documents\GitHub\Equivalent-Exchange-3`, you can change it if you want but then you have to find it again on Github).
-6. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+    * Append `;%JAVA_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Make sure the location is correct; double-check just to make sure.
+3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
 
-#### Linux Prerequisites
-1. Make sure you have the latest Java JDK installed.  To install manually, go [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Otherwise, install from the package manager or the terminal (listed).
-    * In Gentoo, `emerge dev-java/oracle-jdk-bin`
-    * In Archlinux, `pacman -S jdk7-openjdk`
-    * In Ubuntu/Debian, `apt-get install openjdk-7-jdk`
-    * In Fedora, `yum install java-1.7.0-openjdk`
-        * If your distribution is not listed, follow the instructions specific to your package manager.
-2. Install Gradle.  To install manually, go [here](http://www.gradle.org/downloads).
-	* In Gentoo, `emerge dev-java/gradle-bin`
-	* In Archlinux, you'll have to download it from the [AUR](https://aur.archlinux.org/packages/gradle)
-	* In Ubuntu/Debian, `apt-get install gradle`
-	* In Fedora, `yum install gradle`
-3. Install Git.  To install manually, go [here](http://git-scm.com/).
-    * In Gentoo, `emerge dev-vcs/git`
-    * In Archlinux, `pacman -S git`
-    * In Ubuntu/Debian, `apt-get install git`
-    * In Fedora, `yum install git`
-        * If your distribution is not listed, follow the instructions specific to your package manager.
-4. Open your shell and move to a convenient directory, then run `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download the repository.
-5. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+####Setup Gradle
+Gradle is used to execute the various build tasks when compiling EE3.
+1a. Windows/Mac: Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
+	* Unzip the package and put it wherever you want, eg `C:\Gradle`.
+1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
+	* Gentoo: `emerge dev-java/gradle-bin`
+	* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle)
+	* Ubuntu/Debian: `apt-get install gradle`
+	* Fedora: `yum install gradle`
+2. Windows: Set environment variables for Gradle.
+	* Go back to `Environment Variables` and then create a new system variable.
+	* For `Variable Name`, input `GRADLE_HOME`.
+	* For `Variable Value`, input something similar to `C:\Gradle-1.10` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
+	* Scroll down to `Path` again, and append `;%GRADLE_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Once again, double-check the location.
+3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
 
-#### Mac Prerequisites
-1. Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (Mac OS X comes with the JRE, but not the JDK).
-2. Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
-	* If you're having trouble, try going [here](http://www.cerebro.com.au/2013/08/01/java-gradle-install-gradle-in-mac-osx/) for help.
-3. Download and install Github for Mac OSX (10.7+) [here](http://mac.github.com/) NOTE: This Github application is optional, you can use whatever you want.
-    * Create an account.
-    * Scroll to the top of this page, login at the top-right, and then click `Clone to Mac` at the bottom of the right-hand toolbar.
-    * You should see Github flash and `pahimar/Equivalent-Exchange-3` appear.  (The local repository on Mac defaults to `/Users/[username]/github/Equivalent-Exchange-3/`.  To change it, change the "Local Path")
-4. Create an empty directory for EE3 development.  This directory is referenced as `mcdev` from now on.  It can be where you cloned EE3, but it'll be a little messy.
+####Setup Git
+Git is used to clone EE3 and update your local copy.
+1. Download and install Git [here](http://git-scm.com/download/).
+2. _Optional_: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
 
-#### Setup EE3
-1. Move/clone `Equivalent-Exchange-3` into `mcdev`.
-2. Right now, you should have a directory that looks something like:
+####Setup EE3
+This section assumes that you're using the command-line version of Git.
+1. Open up your command line.
+2. Navigate to a place where you want to download EE3's source (eg `C:\Github\Equivalent-Exchange-3\`) by executing `cd [folder location]`.  This location is known as `mcdev` from now on.
+3. Execute `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download EE3's source into `mcdev`.
+4. Right now, you should have a directory that looks something like:
 
 ***
 	mcdev
 	\-Equivalent-Exchange-3
-		\-EE3's files (should have build.gradle).
+		\-EE3's files (should have `build.gradle`)
 ***
 
-3. Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.  **THIS IS OPTIONAL**
+5. _Optional_: Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.
     * You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (but only down to 9.11.1.960).
         * `minecraft_version=1.6.4`
         * `forge_version=9.11.1.964`
         * `mod_version=0.0`
         * `build_number=1`
-4. Open up your OS's command line (Command Prompt in Windows, Terminal in Linux and Mac).
-5. Navigate to `mcdev\Equivalent-Exchange-3` by executing `cd mcdev's location\Equivalent-Exchange-3`.
-6. Execute `gradle setupDevWorkspace`. This sets up Forge, and downloads the necessary libraries to build EE3. (Takes about 2 minutes the first time).
-7. Execute `gradle build`. If you've done everything right, `BUILD SUCCESSFUL` is displayed after it finishes. (Takes about 1 minute, depending on your computer).
+
+####Compile EE3
+1. Execute `gradle setupDevWorkspace`. This sets up Forge and downloads the necessary libraries to build EE3.  This might take some time, be patient.
+	* You will generally only have to do this once until the Forge version in `build.properties` changes.
+2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
-8. Go to `mcdev\Equivalent-Exchange-3\build\libs`.
-    *  You should see a `.jar` file named `EquivalentExchange3-0.0.1.jar`.
-9. Copy the jar into your Minecraft mods folder, and play Minecraft (If you have Forge installed on your client).
+3. Go to `mcdev\Equivalent-Exchange-3\build\libs`.
+    *  You should see a `.jar` file named `EquivalentExchange3-0.0.#.jar`, where # is the `build_number` value in `build.properties`.
+4. Copy the jar into your Minecraft mods folder, and you are done!
 
-#### Updating Your Repo (For Windows/Mac)
-1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
-2. Open Github.
-3. Double-click on pahimar/Equivalent-Exchange-3.
-4. At the top, there is a button named `Sync`/`Sync Branch` (or `Refreshing...` if it's still checking).
-5. Click `Sync`, and wait for it to finish.
-6. Re-compile (or move it to `mcdev` then re-compile, depending on what you did.)
-
-#### Updating Your Repo (For Linux)
-1. Check to see if pahimar updated EE3 since you last compiled.  If he did, follow these instructions.
-2. Navigate to the repository location.
-3. Run `git pull` in Terminal.
-4. Re-compile (or move it to `mcdev` then re-compile, depending on what you did).
+####Updating Your Repository
+In order to get the most up-to-date builds, you'll have to periodically update your local repository.
+1. Open up your command line.
+2. Navigate to `mcdev` in the console.
+3. Make sure you have not made any changes to the local repository, or else there might be issues with Git.
+	* If you have, try reverting them to the status that they were when you last updated your repository.
+4. Execute `git pull master`.  This pulls all commits from the official repository that do not yet exist on your local repository and updates it.
 
 ###Contributing
 ***
-#### Submitting a PR
+####Submitting a PR
 So you found a bug in pahimar's code?  Think you can make it more efficient?  Want to help in general?  Great!
 
-1. **IMPORTANT:  PAHIMAR DOES *NOT* WANT ANY** `build.xml` **CHANGES, UNLESS it fixes up something broken** (See [Pull Request #90](https://github.com/pahimar/Equivalent-Exchange-3/pull/90)).
-2. If you haven't already, create a Github account.
-3. Click the `Fork` icon at the top-right of this page (below your username).
-4. Make the changes that you want to (In Linux, you'll have to run `git commit -a`, and `git push` after cloning your forked repository to upload the changes).
-5. Click `Pull Request` at the right-hand side of the gray bar directly below your fork's name.
-6. Click `Click to create a pull request for this comparison`, enter your PR's title, and create a detailed description telling pahimar what you changed.
-7. Click `Send pull request`, and you're done!
+1. If you haven't already, create a Github account.
+2. Click the `Fork` icon located at the top-right of this page (below your username).
+3. Make the changes that you want to and commit them.
+	* If you're making changes locally, you'll have to do `git commit -a` and `git push` in your command line.
+4. Click `Pull Request` at the right-hand side of the gray bar directly below your fork's name.
+5. Click `Click to create a pull request for this comparison`, enter your PR's title, and create a detailed description telling pahimar what you changed.
+6. Click `Send pull request`, and wait for feedback!
 
-#### Creating an Issue
+####Creating an Issue
 EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 
-1. Please, please don't make any frivolous issues!  If it's a crash, try asking the people in IRC or MCF before creating an issue.  If it's a bug/suggestion, make sure it hasn't been reported/suggested already.  Thanks! :smile:
+1. Make sure your issue hasn't already been answered or fixed.  Also think about whether your issue is a valid one before submitting it.
 2. Go to [the issues page](http://github.com/pahimar/Equivalent-Exchange-3/issues).
 3. Click `New Issue` right below `Star` and `Fork`.
 4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey pahimar, could you add/change xxx?" or "Hey, found an exploit:  stuff").
-5. Click `Submit new issue`, and you're done!
+	* If you are reporting a bug report from an unofficial version, make sure you include the following:
+		* Commit SHA (usually located in a changelog or the jar name itself)
+		* ForgeModLoader log
+		* Server log (if applicable)
+		* Detailed description of the bug
+5. Click `Submit new issue`, and wait for feedback!
+
+###FAQ
+Answers to frequently reported issues and/or questions.
+***
+*Q:* What's a command line?
+*A:* The command line is at the heart of every operating system.  It's `Command Prompt` for Windows and `Terminal` for Mac and Linux.
+
+*Q:* `javac` or `gradle` keeps giving me an error!
+*A:* Make sure the locations you typed are correct.  For example, if you typed `C:\Java` for `JAVA_HOME`, make sure `C:\Java` exists, and there's a `bin` folder inside of it.
+
+*Q:* Gradle keeps saying `BUILD FAILED` and I don't know how to fix it!
+*A*: Make sure you executed `gradle setupDevWorkspace`.  If you already did, try doing it again.  If it still fails, try creating an issue.
+
+*Q:* My issue/PR was closed!
+*A*: Somebody probably commented and solved your issue, or it was opened a long time ago.  If it's a PR, check to see if there's a commit message right before it was closed.  If so, pahimar either pulled your PR or found a different way to do it.
