@@ -28,12 +28,13 @@ Also make sure you know EXACTLY what you're doing!  It's not any of our faults i
 ####Setup Java
 The Java JDK is used to compile EE3.
 
-1a. Windows/Mac: Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
-1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
-	* Gentoo: `emerge dev-java/oracle-jdk-bin`
-    * Archlinux: `pacman -S jdk7-openjdk`
-    * Ubuntu/Debian: `apt-get install openjdk-7-jdk`
-    * Fedora: `yum install java-1.7.0-openjdk`
+1. Download and install the Java JDK.
+	* [Windows/Mac](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
+	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
+		* Gentoo: `emerge dev-java/oracle-jdk-bin`
+		* Archlinux: `pacman -S jdk7-openjdk`
+		* Ubuntu/Debian: `apt-get install openjdk-7-jdk`
+		* Fedora: `yum install java-1.7.0-openjdk`
 2. Windows: Set environment variables for the JDK.
     * Go to `Control Panel\System and Security\System`, and click on `Advanced System Settings` on the left-hand side.
     * Click on `Environment Variables`.
@@ -47,13 +48,14 @@ The Java JDK is used to compile EE3.
 ####Setup Gradle
 Gradle is used to execute the various build tasks when compiling EE3.
 
-1a. Windows/Mac: Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
-	* Unzip the package and put it wherever you want, eg `C:\Gradle`.
-1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
-	* Gentoo: `emerge dev-java/gradle-bin`
-	* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle)
-	* Ubuntu/Debian: `apt-get install gradle`
-	* Fedora: `yum install gradle`
+1. Download and install Gradle.
+	* [Windows/Mac](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
+		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
+	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
+		* Gentoo: `emerge dev-java/gradle-bin`
+		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle)
+		* Ubuntu/Debian: `apt-get install gradle`
+		* Fedora: `yum install gradle`
 2. Windows: Set environment variables for Gradle.
 	* Go back to `Environment Variables` and then create a new system variable.
 	* For `Variable Name`, input `GRADLE_HOME`.
@@ -80,13 +82,6 @@ This section assumes that you're using the command-line version of Git.
 	\-Equivalent-Exchange-3
 		\-EE3's files (should have `build.gradle`)
 ***
-
-5. _Optional_: Inside `Equivalent-Exchange-3`, edit the file named `build.properties`.
-    * You may change the build string (`mod_version` and `build_number`), and the Minecraft and Forge version you are building for (but only down to 9.11.1.960).
-        * `minecraft_version=1.6.4`
-        * `forge_version=9.11.1.964`
-        * `mod_version=0.0`
-        * `build_number=1`
 
 ####Compile EE3
 1. Execute `gradle setupDevWorkspace`. This sets up Forge and downloads the necessary libraries to build EE3.  This might take some time, be patient.
@@ -136,14 +131,14 @@ EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 ###FAQ
 Answers to frequently reported issues and/or questions.
 ***
-*Q:* What's a command line?
-*A:* The command line is at the heart of every operating system.  It's `Command Prompt` for Windows and `Terminal` for Mac and Linux.
+**Q:** What's a command line?
+**A:** The command line is at the heart of every operating system.  It's `Command Prompt` for Windows and `Terminal` for Mac and Linux.
 
-*Q:* `javac` or `gradle` keeps giving me an error!
-*A:* Make sure the locations you typed are correct.  For example, if you typed `C:\Java` for `JAVA_HOME`, make sure `C:\Java` exists, and there's a `bin` folder inside of it.
+**Q:** `javac` or `gradle` keeps giving me an error!
+**A:** Make sure the locations you typed are correct.  For example, if you typed `C:\Java` for `JAVA_HOME`, make sure `C:\Java` exists, and there's a `bin` folder inside of it.
 
-*Q:* Gradle keeps saying `BUILD FAILED` and I don't know how to fix it!
-*A*: Make sure you executed `gradle setupDevWorkspace`.  If you already did, try doing it again.  If it still fails, try creating an issue.
+**Q:** Gradle keeps saying `BUILD FAILED` and I don't know how to fix it!
+**A:** Make sure you executed `gradle setupDevWorkspace`.  If you already did, try doing it again.  If it still fails, try creating an issue.
 
-*Q:* My issue/PR was closed!
-*A*: Somebody probably commented and solved your issue, or it was opened a long time ago.  If it's a PR, check to see if there's a commit message right before it was closed.  If so, pahimar either pulled your PR or found a different way to do it.
+**Q:** My issue/PR was closed!
+**A:** Somebody probably commented and solved your issue, or it was opened a long time ago.  If it's a PR, check to see if there's a commit message right before it was closed.  If so, pahimar either pulled your PR or found a different way to do it.
