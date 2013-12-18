@@ -9,7 +9,9 @@ import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.imc.InterModCommsHandler;
+import com.pahimar.ee3.item.EquivalencyStack;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
@@ -26,11 +28,15 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * Equivalent-Exchange-3
@@ -157,6 +163,12 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
+        EquivalencyStack equivalencyStack = new EquivalencyStack(Arrays.asList(new OreStack("ingotGold"), new ItemStack(Item.coal), Block.oreLapis));
+        EquivalencyStack equivalencyStack2 = new EquivalencyStack(Arrays.asList(new OreStack("ingotGold"), new ItemStack(Item.coal), Block.oreLapis, equivalencyStack));
+        LogHelper.debug(equivalencyStack2);
+        LogHelper.debug(equivalencyStack2.toJson());
+        EquivalencyStack equivalencyStack3 = EquivalencyStack.createFromJson(equivalencyStack2.toJson());
+        LogHelper.debug(equivalencyStack3);
     }
 
     @EventHandler

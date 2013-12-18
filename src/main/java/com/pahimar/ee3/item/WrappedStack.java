@@ -66,7 +66,7 @@ public class WrappedStack
 
             ItemStack itemStack = ((ItemStack) object).copy();
 
-            className = object.getClass().getSimpleName();
+            className = ItemStack.class.getSimpleName();
             stackSize = itemStack.stackSize;
             itemStack.stackSize = 1;
             wrappedStack = itemStack;
@@ -75,7 +75,7 @@ public class WrappedStack
         {
             OreStack oreStack = (OreStack) object;
 
-            className = object.getClass().getSimpleName();
+            className = OreStack.class.getSimpleName();
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -88,17 +88,16 @@ public class WrappedStack
 
             if (possibleOreStack != null)
             {
-                className = possibleOreStack.getClass().getSimpleName();
+                className = OreStack.class.getSimpleName();
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
             }
             else if (canBeWrapped(objectList))
             {
-                // TODO Switch to EquivalencyStack
                 stackSize = 1;
-                className = ArrayList.class.getSimpleName();
-                wrappedStack = objectList;
+                className = EquivalencyStack.class.getSimpleName();
+                wrappedStack = new EquivalencyStack(objectList);
             }
             else
             {
@@ -109,10 +108,9 @@ public class WrappedStack
         }
         else if (object instanceof EnergyStack)
         {
-
             EnergyStack energyStack = (EnergyStack) object;
 
-            className = object.getClass().getSimpleName();
+            className = EnergyStack.class.getSimpleName();
             stackSize = energyStack.stackSize;
             energyStack.stackSize = 1;
             wrappedStack = energyStack;
@@ -121,16 +119,20 @@ public class WrappedStack
         {
             FluidStack fluidStack = (FluidStack) object;
 
-            className = object.getClass().getSimpleName();
+            className = FluidStack.class.getSimpleName();
             stackSize = fluidStack.amount;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
-        // TODO EquivalencyStack handling
-//        else if (object instanceof EquivalencyStack)
-//        {
-//
-//        }
+        else if (object instanceof EquivalencyStack)
+        {
+            EquivalencyStack equivalencyStack = (EquivalencyStack) object;
+
+            className = EquivalencyStack.class.getSimpleName();
+            stackSize = equivalencyStack.stackSize;
+            equivalencyStack.stackSize = 1;
+            wrappedStack = equivalencyStack;
+        }
         else if (object instanceof WrappedStack)
         {
             WrappedStack wrappedStackObject = (WrappedStack) object;
@@ -152,9 +154,9 @@ public class WrappedStack
         {
             WrappedStack wrappedStack = createFromJson((String) object);
 
-            if (wrappedStack != null)
+            if (wrappedStack != null && wrappedStack.getWrappedStack() != null)
             {
-                className = object.getClass().getSimpleName();
+                className = wrappedStack.getWrappedStack().getClass().getSimpleName();
                 stackSize = wrappedStack.stackSize;
                 this.wrappedStack = wrappedStack.wrappedStack;
             }
@@ -343,9 +345,10 @@ public class WrappedStack
             FluidStack fluidStack = (FluidStack) wrappedStack;
             stringBuilder.append(String.format("%sxfluidStack.%s", stackSize, fluidStack.getFluid().getName()));
         }
-        else if (wrappedStack instanceof ArrayList)
+        else if (wrappedStack instanceof EquivalencyStack)
         {
-            stringBuilder.append(String.format("%sxlistStack.%s", stackSize, wrappedStack));
+            EquivalencyStack equivalencyStack = (EquivalencyStack) wrappedStack;
+            stringBuilder.append(String.format("%sxlistStack.%s", stackSize, equivalencyStack.equivalencyList));
         }
         else
         {
@@ -382,7 +385,6 @@ public class WrappedStack
             }
             else
             {
-                // TODO Switch to EquivalencyStack
                 boolean canBeWrapped = true;
                 List<?> listObject = (List) object;
                 for (Object individualObject : listObject)
@@ -404,6 +406,10 @@ public class WrappedStack
         {
             return true;
         }
+        else if (object instanceof EquivalencyStack)
+        {
+            return true;
+        }
 
         return false;
     }
@@ -420,7 +426,7 @@ public class WrappedStack
 
             int stackSize = -1;
             String className = null;
-            Object wrappedStack = null;
+            Object stackObject = null;
 
             if (jsonWrappedStack.get("className") != null)
             {
@@ -436,15 +442,15 @@ public class WrappedStack
             {
                 if (className.equalsIgnoreCase(Item.class.getSimpleName()))
                 {
-                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
+                    stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
                 }
                 else if (className.equalsIgnoreCase(Block.class.getSimpleName()))
                 {
-                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
+                    stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
                 }
                 else if (className.equalsIgnoreCase(Fluid.class.getSimpleName()))
                 {
-                    wrappedStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
+                    stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
                 }
                 else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                 {
@@ -454,7 +460,7 @@ public class WrappedStack
                     {
                         itemStack.stackSize = stackSize;
                     }
-                    wrappedStack = itemStack;
+                    stackObject = itemStack;
                 }
                 else if (className.equalsIgnoreCase(OreStack.class.getSimpleName()))
                 {
@@ -464,7 +470,7 @@ public class WrappedStack
                     {
                         oreStack.stackSize = stackSize;
                     }
-                    wrappedStack = oreStack;
+                    stackObject = oreStack;
                 }
                 else if (className.equalsIgnoreCase(EnergyStack.class.getSimpleName()))
                 {
@@ -474,7 +480,7 @@ public class WrappedStack
                     {
                         energyStack.stackSize = stackSize;
                     }
-                    wrappedStack = energyStack;
+                    stackObject = energyStack;
                 }
                 else if (className.equalsIgnoreCase(FluidStack.class.getSimpleName()))
                 {
@@ -484,17 +490,23 @@ public class WrappedStack
                     {
                         fluidStack.amount = stackSize;
                     }
-                    wrappedStack = fluidStack;
+                    stackObject = fluidStack;
                 }
-                else if (className.equalsIgnoreCase(ArrayList.class.getSimpleName()))
+                else if (className.equalsIgnoreCase(EquivalencyStack.class.getSimpleName()))
                 {
-                    // TODO ArrayList deserialization here
+                    EquivalencyStack equivalencyStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), EquivalencyStack.class);
+
+                    if (stackSize > 0)
+                    {
+                        equivalencyStack.stackSize = stackSize;
+                    }
+                    stackObject = equivalencyStack;
                 }
             }
 
-            if (wrappedStack != null)
+            if (stackObject != null)
             {
-                return new WrappedStack(wrappedStack);
+                return new WrappedStack(stackObject);
             }
             else
             {

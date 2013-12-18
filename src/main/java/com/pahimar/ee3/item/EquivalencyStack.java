@@ -1,8 +1,10 @@
 package com.pahimar.ee3.item;
 
 import com.google.gson.*;
+import com.pahimar.ee3.helper.LogHelper;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,12 +13,13 @@ public class EquivalencyStack implements Comparable<EquivalencyStack>, JsonDeser
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EquivalencyStack.class, new EquivalencyStack()).create();
 
-    public List<?> equivalencyList;
+    public List<WrappedStack> equivalencyList;
     public int stackSize;
 
     public EquivalencyStack()
     {
-        this(null, -1);
+        equivalencyList = null;
+        stackSize = -1;
     }
 
     public EquivalencyStack(List<?> equivalencyList)
@@ -24,10 +27,27 @@ public class EquivalencyStack implements Comparable<EquivalencyStack>, JsonDeser
         this(equivalencyList, 1);
     }
 
-    public EquivalencyStack(List equivalencyList, int stackSize)
+    public EquivalencyStack(List<?> list, int stackSize)
     {
-        this.equivalencyList = equivalencyList;
-        this.stackSize = stackSize;
+        List<WrappedStack> equivalencyList = new ArrayList<WrappedStack>();
+        for (Object listObject : list)
+        {
+            if (WrappedStack.canBeWrapped(listObject))
+            {
+                equivalencyList.add(new WrappedStack(listObject));
+            }
+        }
+
+        if (equivalencyList.size() == list.size())
+        {
+            this.equivalencyList = equivalencyList;
+            this.stackSize = stackSize;
+        }
+        else
+        {
+            this.equivalencyList = null;
+            this.stackSize = -1;
+        }
     }
 
     @Override
@@ -63,7 +83,7 @@ public class EquivalencyStack implements Comparable<EquivalencyStack>, JsonDeser
         }
         catch (JsonSyntaxException exception)
         {
-            // TODO Log something regarding the failed parse
+            LogHelper.severe(String.format("Failed to create an EquivalencyStack object for String = '%s'", jsonEquivalencyStack));
         }
 
         return null;
@@ -91,7 +111,6 @@ public class EquivalencyStack implements Comparable<EquivalencyStack>, JsonDeser
 
     public static Comparator<EquivalencyStack> comparator = new Comparator<EquivalencyStack>()
     {
-
         @Override
         public int compare(EquivalencyStack equivalencyStack1, EquivalencyStack equivalencyStack2)
         {
@@ -114,12 +133,55 @@ public class EquivalencyStack implements Comparable<EquivalencyStack>, JsonDeser
     };
 
     @Override
-    public EquivalencyStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public EquivalencyStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
+        if (!jsonElement.isJsonPrimitive())
+        {
+            JsonObject jsonEquivalencyStack = (JsonObject) jsonElement;
+
+            List<WrappedStack> equivalencyList = new ArrayList<WrappedStack>();
+            int stackSize = -1;
+
+            if (jsonEquivalencyStack.get("equivalencyList") != null)
+            {
+                JsonArray jsonEquivalencyList = jsonEquivalencyStack.get("equivalencyList").getAsJsonArray();
+
+                for (int i = 0; i < jsonEquivalencyList.size(); i++)
+                {
+                    WrappedStack wrappedStack = new WrappedStack().deserialize(jsonEquivalencyList.get(i).getAsJsonObject(), type, context);
+                    equivalencyList.add(wrappedStack);
+                }
+            }
+
+            if (jsonEquivalencyStack.get("stackSize") != null)
+            {
+                stackSize = jsonEquivalencyStack.get("stackSize").getAsInt();
+            }
+
+            return new EquivalencyStack(equivalencyList, stackSize);
+        }
+
         return null;
     }
 
     @Override
-    public JsonElement serialize(EquivalencyStack src, Type typeOfSrc, JsonSerializationContext context) {
-        return null;
+    public JsonElement serialize(EquivalencyStack equivalencyStack, Type type, JsonSerializationContext context)
+    {
+        JsonObject jsonEquivalencyStack = new JsonObject();
+
+        Gson gsonWrappedStack = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+        JsonArray jsonArray = new JsonArray();
+        if (equivalencyStack.equivalencyList != null)
+        {
+            for (WrappedStack wrappedStack : equivalencyStack.equivalencyList)
+            {
+                jsonArray.add(gsonWrappedStack.toJsonTree(wrappedStack));
+            }
+        }
+
+        jsonEquivalencyStack.addProperty("stackSize", equivalencyStack.stackSize);
+        jsonEquivalencyStack.add("equivalencyList", jsonArray);
+
+        return jsonEquivalencyStack;
     }
 }
