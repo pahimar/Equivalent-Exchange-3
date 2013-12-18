@@ -29,7 +29,7 @@ Also make sure you know EXACTLY what you're doing!  It's not any of our faults i
 The Java JDK is used to compile EE3.
 
 1. Download and install the Java JDK.
-	* [Windows/Mac](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
+	* [Windows/Mac download link](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
 	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
 		* Gentoo: `emerge dev-java/oracle-jdk-bin`
 		* Archlinux: `pacman -S jdk7-openjdk`
@@ -49,7 +49,7 @@ The Java JDK is used to compile EE3.
 Gradle is used to execute the various build tasks when compiling EE3.
 
 1. Download and install Gradle.
-	* [Windows/Mac](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
+	* [Windows/Mac download link](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
 		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
 	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
 		* Gentoo: `emerge dev-java/gradle-bin`
@@ -67,7 +67,7 @@ Gradle is used to execute the various build tasks when compiling EE3.
 Git is used to clone EE3 and update your local copy.
 
 1. Download and install Git [here](http://git-scm.com/download/).
-2. _Optional_: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
+2. *Optional*: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
 
 ####Setup EE3
 This section assumes that you're using the command-line version of Git.
