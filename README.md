@@ -3,30 +3,31 @@
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
-[Compiling EE3](https://github.com/pahimar/Equivalent-Exchange-3#compiling-equivalent-exchange-3) - For those that want the latest unreleased features.
+[Compiling EE3](#compiling-equivalent-exchange-3) - For those that want the latest unreleased features.
 
-[Contributing](https://github.com/pahimar/Equivalent-Exchange-3#contributing) - For those that want to help out.
+[Contributing](#contributing) - For those that want to help out.
 
-[FAQ](https://github.com/pahimar/Equivalent-exchange-3#faq) - For those that have questions.
+[FAQ](#faq) - For those that have questions.
 
 ###Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
 Also make sure you know EXACTLY what you're doing!  It's not any of our faults if your OS crashes, becomes corrupted, etc.
 ***
-[Setup Java](https://github.com/pahimar/Equivalent-Exchange-3#setup-java)
+[Setup Java](#setup-java)
 
-[Setup Gradle](https://github.com/pahimar/Equivalent-Exchange-3#setup-gradle)
+[Setup Gradle](#setup-gradle)
 
-[Setup Git](https://github.com/pahimar/Equivalent-Exchange-3#setup-git)
+[Setup Git](#setup-git)
 
-[Setup EE3](https://github.com/pahimar/Equivalent-Exchange-3#setup-ee3)
+[Setup EE3](#setup-ee3)
 
-[Compile EE3](https://github.com/pahimar/Equivalent-Exchange-3#compile-ee3)
+[Compile EE3](#compile-ee3)
 
-[Updating Your Repository](https://github.com/pahimar/Equivalent-Exchange-3#updating-your-repository)
+[Updating Your Repository](#updating-your-repository)
 
 ####Setup Java
 The Java JDK is used to compile EE3.
+
 1a. Windows/Mac: Download and install the Java JDK [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).  Scroll down, accept the `Oracle Binary Code License Agreement for Java SE`, and download it (if you have a 64-bit OS, please download the 64-bit version).
 1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
 	* Gentoo: `emerge dev-java/oracle-jdk-bin`
@@ -45,6 +46,7 @@ The Java JDK is used to compile EE3.
 
 ####Setup Gradle
 Gradle is used to execute the various build tasks when compiling EE3.
+
 1a. Windows/Mac: Download and install Gradle [here](http://www.gradle.org/downloads).  You only need the binaries, but choose whatever flavor you want.
 	* Unzip the package and put it wherever you want, eg `C:\Gradle`.
 1b. Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
@@ -61,11 +63,13 @@ Gradle is used to execute the various build tasks when compiling EE3.
 
 ####Setup Git
 Git is used to clone EE3 and update your local copy.
+
 1. Download and install Git [here](http://git-scm.com/download/).
 2. _Optional_: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
 
 ####Setup EE3
 This section assumes that you're using the command-line version of Git.
+
 1. Open up your command line.
 2. Navigate to a place where you want to download EE3's source (eg `C:\Github\Equivalent-Exchange-3\`) by executing `cd [folder location]`.  This location is known as `mcdev` from now on.
 3. Execute `git clone https://github.com/pahimar/Equivalent-Exchange-3.git`.  This will download EE3's source into `mcdev`.
@@ -95,6 +99,7 @@ This section assumes that you're using the command-line version of Git.
 
 ####Updating Your Repository
 In order to get the most up-to-date builds, you'll have to periodically update your local repository.
+
 1. Open up your command line.
 2. Navigate to `mcdev` in the console.
 3. Make sure you have not made any changes to the local repository, or else there might be issues with Git.
