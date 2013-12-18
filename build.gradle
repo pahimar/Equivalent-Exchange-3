@@ -20,7 +20,7 @@ configFile.withReader {
     // read config.  it shall from now on be referenced as simply config or as project.config
     def prop = new Properties()
     prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
+    ext.config = new ConfigSlurper().parse prop
 }
 
 group = "com.pahimar.ee3"
@@ -36,92 +36,85 @@ minecraft {
         replace "@FINGERPRINT@", project.ee3_signature
 }
 
-processResources
-        {
-            // replace stuff in the files we want.
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-                include 'version.properties'
+processResources {
+    // replace stuff in the files we want.
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        include 'version.properties'
 
-                // replaces
-                expand 'version': project.config.mod_version, 'buildnumber': project.config.build_number
-            }
+        // replaces
+        expand 'version': project.config.mod_version, 'buildnumber': project.config.build_number
+    }
 
-            // copy everything else, thats we didnt do before
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-                exclude 'version.properties'
-            }
-        }
+    // copy everything else, thats we didnt do before
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+        exclude 'version.properties'
+    }
+}
 
 // BEYOND THIS POINT.. 
 // IS STUFF THATS FOR RELEASING...
 
 // verify the properties exist.. or initialize.
 if (!project.hasProperty("keystore_location")) // keystore stuff
-    ext.keystore_location = ".";
+    ext.keystore_location = "."
 
 if (!project.hasProperty("ee3_keystore_alias")) // keystore stuff
-    ext.ee3_keystore_alias = "";
+    ext.ee3_keystore_alias = ""
 
 if (!project.hasProperty("keystore_password")) // keystore stuff
-    ext.keystore_password = "";
+    ext.keystore_password = ""
 
 if (!project.hasProperty("ee3_release_loc")) // release loc
-    ext.ee3_release_loc = ".";
+    ext.ee3_release_loc = "."
 else
     ee3_release_loc = ee3_release_loc.replace('{MC}', minecraft.version).replace('{MODVER}', config.mod_version).replace('{BUILD}', config.build_number)
 
-task("signJar", dependsOn: "reobf")
-        {
-            inputs.file jar.getArchivePath()
-            inputs.file keystore_location
-            inputs.property "ee3_keystore_alias", ee3_keystore_alias
-            inputs.property "keystore_password", keystore_password
-            outputs.file jar.getArchivePath()
+task signJar(dependsOn: "reobf") {
+    inputs.file jar.getArchivePath()
+    inputs.file keystore_location
+    inputs.property "ee3_keystore_alias", ee3_keystore_alias
+    inputs.property "keystore_password", keystore_password
+    outputs.file jar.getArchivePath()
 
-            // only sign if the keystore exists
-            onlyIf {
-                return keystore_location != "."
-            }
+    // only sign if the keystore exists
+    onlyIf {
+        return keystore_location != "."
+    }
 
-            // the actual action.. sign the jar.
-            doLast {
-                ant.signjar(
-                        destDir: jar.destinationDir,
-                        jar: jar.getArchivePath(),
-                        keystore: keystore_location,
-                        alias: ee3_keystore_alias,
-                        storepass: keystore_password
-                )
-            }
-        }
+    // the actual action.. sign the jar.
+    doLast {
+        ant.signjar(
+                destDir: jar.destinationDir,
+                jar: jar.getArchivePath(),
+                keystore: keystore_location,
+                alias: ee3_keystore_alias,
+                storepass: keystore_password
+        )
+    }
+}
 
-task("incrementBuildNumber")
-        {
-            // increment build number
-            doFirst {
-                // increment
-                config.build_number = (config.build_number.toString().toInteger()) + 1
+task incrementBuildNumber() {
+    // increment
+    config.build_number = (config.build_number.toString().toInteger()) + 1
 
-                // write back to the file
-                configFile.withWriter {
-                    config.toProperties().store(it, "")
-                }
-            }
-        }
+    // write back to the file
+    configFile.withWriter {
+        config.toProperties().store(it, "")
+    }
+}
 
-task("release", type: Copy)
-        {
-            dependsOn "incrementBuildNumber"
-            dependsOn "signJar"
+task release(type: Copy) {
+    dependsOn "incrementBuildNumber"
+    dependsOn "signJar"
 
-            eachFile { file ->
-                logger.info "copying ${file}"
-            }
+    eachFile { file ->
+        logger.info "copying ${file}"
+    }
 
-            // only if the release location isnt empty.
-            onlyIf {
-                return project.ee3_release_loc != "."
-            }
-        }
+    // only if the release location isn't empty.
+    onlyIf {
+        return project.ee3_release_loc != "."
+    }
+}
