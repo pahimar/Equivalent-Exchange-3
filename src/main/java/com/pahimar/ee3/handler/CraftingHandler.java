@@ -22,7 +22,6 @@ public class CraftingHandler implements ICraftingHandler
     @Override
     public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix)
     {
-
         if (player.worldObj.isRemote)
         {
             doPortableCrafting(player, craftMatrix);
@@ -45,7 +44,6 @@ public class CraftingHandler implements ICraftingHandler
      */
     private void doPortableCrafting(EntityPlayer player, IInventory craftMatrix)
     {
-
         ItemStack openStone = null;
 
         for (ItemStack itemStack : player.inventory.mainInventory)

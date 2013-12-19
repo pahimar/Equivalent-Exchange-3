@@ -38,8 +38,6 @@ public class RecipeRegistry
 
     private void init()
     {
-        // TODO Decide if all recipe registration should be handled via IMC
-
         // Add recipes in the vanilla crafting manager
         for (WrappedStack outputStack : RecipesVanilla.getVanillaRecipes().keySet()) {
             for (List<WrappedStack> inputStacks : RecipesVanilla.getVanillaRecipes().get(outputStack)) {

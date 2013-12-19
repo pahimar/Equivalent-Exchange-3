@@ -1,18 +1,12 @@
 package com.pahimar.ee3.addon;
 
-import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * Equivalent-Exchange-3
@@ -51,7 +45,7 @@ public class AddonIndustrialCraft2
          * Coal
          */
         AddonHandler.sendAddRecipe(new OreStack("dustCoal"), new ItemStack(Item.coal, 1));
-        AddonHandler.sendAddRecipe(new OreStack("dustHydratedCoal"), new OreStack("dustCoal"));
+        AddonHandler.sendAddRecipe(new OreStack("dustHydratedCoal"), new OreStack("dustCoal"), new WrappedStack(FluidRegistry.WATER));
 
         /**
          * Copper
@@ -189,77 +183,6 @@ public class AddonIndustrialCraft2
     public static void addPostAssignmentEmcValues()
     {
 
-    }
-
-    public static RecipeMapping getIC2RecipeMapping(IRecipe iRecipe)
-    {
-        String recipeClassName = iRecipe.getClass().getCanonicalName();
-
-        RecipeMapping recipeMapping = null;
-        WrappedStack outputStack = null;
-        List<WrappedStack> inputStacks = new ArrayList<WrappedStack>();
-
-        if (recipeClassName.equalsIgnoreCase("ic2.core.AdvRecipe") || recipeClassName.equalsIgnoreCase("ic2.core.AdvShapelessRecipe"))
-        {
-            try {
-                outputStack = new WrappedStack(Class.forName(recipeClassName).getDeclaredField("output").get(iRecipe));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            Object[] recipeInputObjects = null;
-            try {
-                recipeInputObjects = (Object[]) Class.forName(recipeClassName).getDeclaredField("input").get(iRecipe);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-
-            List<WrappedStack> tempRecipeInputs = new ArrayList<WrappedStack>();
-            try {
-                for (Object recipeInputObject : recipeInputObjects)
-                {
-                    List<ItemStack> recipeInputs = (List<ItemStack>) Class.forName("ic2.core.AdvRecipe").getDeclaredMethod("expand", Object.class).invoke(iRecipe, recipeInputObject);
-                    // TODO Handle individual and equivalency stacks
-                    if (recipeInputs.size() == 1)
-                    {
-                        tempRecipeInputs.add(new WrappedStack(recipeInputs.get(0)));
-                    }
-                    else if (recipeInputs.size() > 1)
-                    {
-                        LogHelper.debug("Testing: " + new WrappedStack(recipeInputs));
-                    }
-                }
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            if (recipeInputObjects != null && recipeInputObjects.length == tempRecipeInputs.size())
-            {
-                inputStacks = tempRecipeInputs;
-            }
-
-            if (outputStack instanceof WrappedStack && inputStacks.size() > 0)
-            {
-                recipeMapping = new RecipeMapping(outputStack, inputStacks);
-            }
-        }
-
-        return recipeMapping;
     }
 
     /**

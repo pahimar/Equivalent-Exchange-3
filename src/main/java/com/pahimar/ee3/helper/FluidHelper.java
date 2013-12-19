@@ -1,12 +1,34 @@
 package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.lib.Compare;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Comparator;
 
 public class FluidHelper
 {
+
+    public static void registerFluids()
+    {
+        // Register Milk in the FluidRegistry if it hasn't already been done
+        if (!FluidRegistry.isFluidRegistered("milk"))
+        {
+            Fluid milk = new Fluid("milk") {
+                @Override
+                public String getLocalizedName() {
+                    return StatCollector.translateToLocal("item.milk.name");
+                }
+            }.setUnlocalizedName(Item.bucketMilk.getUnlocalizedName());
+            FluidRegistry.registerFluid(milk);
+            FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketEmpty));
+        }
+    }
 
     public static int compare(FluidStack fluidStack1, FluidStack fluidStack2)
     {

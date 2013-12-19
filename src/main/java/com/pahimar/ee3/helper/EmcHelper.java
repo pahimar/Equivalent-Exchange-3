@@ -4,6 +4,8 @@ import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.WrappedStack;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +15,12 @@ public class EmcHelper
 
     public static List<WrappedStack> filterStacksByEmc(List<WrappedStack> unfilteredStacks, EmcValue filterValue)
     {
-
         List<WrappedStack> filteredStacks = new ArrayList<WrappedStack>();
 
         for (WrappedStack stack : unfilteredStacks)
         {
-
             if (EmcRegistry.hasEmcValue(stack))
             {
-
                 EmcValue value = EmcRegistry.getEmcValue(stack);
                 boolean satisfiesFilter = true;
                 float[] valueSubValues = value.components;
@@ -45,6 +44,7 @@ public class EmcHelper
         return filteredStacks;
     }
 
+    @SuppressWarnings("unused")
     public static List<WrappedStack> filterStacksByEmcAndRange(float start, float end, EmcValue filterValue)
     {
         return filterStacksByEmc(EmcRegistry.getStacksInRange(start, end), filterValue);
@@ -52,19 +52,48 @@ public class EmcHelper
 
     public static EmcValue computeEmcValueFromList(List<WrappedStack> wrappedStacks)
     {
-
         float[] computedSubValues = new float[EmcType.TYPES.length];
 
         for (WrappedStack wrappedStack : wrappedStacks)
         {
+            EmcValue wrappedStackValue;
+            int stackSize = -1;
+            if (wrappedStack.getWrappedStack() instanceof ItemStack)
+            {
+                ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
 
-            EmcValue wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                if (FluidContainerRegistry.getFluidForFilledItem(itemStack) != null)
+                {
+                    if (itemStack.getItem().getContainerItemStack(itemStack) != null)
+                    {
+                        stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
+                        wrappedStackValue = EmcRegistry.getEmcValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
+                    }
+                    else
+                    {
+                        wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                    }
+                }
+                else
+                {
+                    wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                }
+            }
+            else
+            {
+                wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+            }
 
             if (wrappedStackValue != null)
             {
+                if (stackSize == -1)
+                {
+                    stackSize = wrappedStack.getStackSize();
+                }
+
                 for (EmcType emcType : EmcType.TYPES)
                 {
-                    computedSubValues[emcType.ordinal()] += wrappedStackValue.components[emcType.ordinal()] * wrappedStack.getStackSize();
+                    computedSubValues[emcType.ordinal()] += wrappedStackValue.components[emcType.ordinal()] * stackSize;
                 }
             }
             else
@@ -84,7 +113,7 @@ public class EmcHelper
     public static EmcValue factorEmcValue(EmcValue emcValue, float factor)
     {
 
-        if ((Float.compare(factor, 0f) != 0) && (emcValue instanceof EmcValue))
+        if ((Float.compare(factor, 0f) != 0) && (emcValue != null))
         {
             float[] factorSubValues = emcValue.components;
 

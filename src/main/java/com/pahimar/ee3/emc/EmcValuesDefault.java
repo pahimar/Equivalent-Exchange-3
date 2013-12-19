@@ -5,6 +5,7 @@ import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
@@ -19,13 +20,11 @@ public class EmcValuesDefault
 
     private EmcValuesDefault()
     {
-
         valueMap = new HashMap<WrappedStack, EmcValue>();
     }
 
     private static void lazyInit()
     {
-
         if (emcDefaultValues == null)
         {
             emcDefaultValues = new EmcValuesDefault();
@@ -35,7 +34,6 @@ public class EmcValuesDefault
 
     private void init()
     {
-
         // OreDictionary assignment
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.cobblestone))), new EmcValue(1));
         for (int meta = 0; meta < 16; meta++)
@@ -60,9 +58,13 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.leaves))), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
 
-        // Fluids      
-        valueMap.put(new WrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
-        valueMap.put(new WrappedStack(Block.lavaStill), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        // Fluids
+        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new WrappedStack(FluidRegistry.getFluid("milk")), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 3), new EmcComponent(EmcType.AMORPHOUS, 1))));
+
+//        valueMap.put(new WrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
+//        valueMap.put(new WrappedStack(Block.lavaStill), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
 
         /* Building Blocks */
         valueMap.put(new WrappedStack(Block.stone), new EmcValue(1));
@@ -118,7 +120,6 @@ public class EmcValuesDefault
         
         /* Miscellaneous */
         valueMap.put(new WrappedStack(Item.snowball), new EmcValue(0.25f));
-        valueMap.put(new WrappedStack(Item.bucketMilk), new EmcValue(832));
         valueMap.put(new WrappedStack(Item.slimeBall), new EmcValue(24));
         valueMap.put(new WrappedStack(Item.bone), new EmcValue(24));
         valueMap.put(new WrappedStack(Item.enderPearl), new EmcValue(1024));

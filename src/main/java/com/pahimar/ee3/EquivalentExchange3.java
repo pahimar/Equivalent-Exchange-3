@@ -5,13 +5,13 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
+import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.handler.*;
+import com.pahimar.ee3.helper.FluidHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.imc.InterModCommsHandler;
-import com.pahimar.ee3.item.EquivalencyStack;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.OreStack;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
@@ -28,15 +28,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
-import java.util.Arrays;
 
 /**
  * Equivalent-Exchange-3
@@ -141,19 +137,23 @@ public class EquivalentExchange3
 
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
-
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
-
-        // Initialize mod tile entities
-        proxy.registerTileEntities();
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
 
+        // Register the Crafting Handler
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
+
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
+
+        // Handle fluid registration
+        FluidHelper.registerFluids();
+
+        // Initialize mod tile entities
+        proxy.registerTileEntities();
 
         // Initialize addons (which work with IMC, and must be used in Init)
         AddonHandler.init();
@@ -163,12 +163,7 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
-        EquivalencyStack equivalencyStack = new EquivalencyStack(Arrays.asList(new OreStack("ingotGold"), new ItemStack(Item.coal), Block.oreLapis));
-        EquivalencyStack equivalencyStack2 = new EquivalencyStack(Arrays.asList(new OreStack("ingotGold"), new ItemStack(Item.coal), Block.oreLapis, equivalencyStack));
-        LogHelper.debug(equivalencyStack2);
-        LogHelper.debug(equivalencyStack2.toJson());
-        EquivalencyStack equivalencyStack3 = EquivalencyStack.createFromJson(equivalencyStack2.toJson());
-        LogHelper.debug(equivalencyStack3);
+        EmcRegistry.lazyInit();
     }
 
     @EventHandler

@@ -2,8 +2,6 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.addon.AddonIndustrialCraft2;
-import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.helper.RecipeHelper;
 import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
@@ -55,17 +53,6 @@ public class RecipesVanilla
                     {
                         vanillaRecipes.put(new WrappedStack(recipeOutput), recipeInputs);
                     }
-                }
-            }
-            /**
-             * IndustrialCraft2
-             */
-            else if (recipeObject.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvRecipe") || recipeObject.getClass().getCanonicalName().equalsIgnoreCase("ic2.core.AdvShapelessRecipe"))
-            {
-                RecipeMapping recipeMapping = AddonIndustrialCraft2.getIC2RecipeMapping((IRecipe) recipeObject);
-                if (recipeMapping != null)
-                {
-                    vanillaRecipes.put(recipeMapping.outputWrappedStack, recipeMapping.inputWrappedStacks);
                 }
             }
         }

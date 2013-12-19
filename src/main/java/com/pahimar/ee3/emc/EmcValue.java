@@ -1,6 +1,7 @@
 package com.pahimar.ee3.emc;
 
 import com.google.gson.*;
+import com.pahimar.ee3.lib.Compare;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.List;
  * EMCEntry
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue>, JsonSerializer<EmcValue>
 {
@@ -124,19 +124,12 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     @Override
     public boolean equals(Object object)
     {
-
-        if (!(object instanceof EmcValue))
-        {
-            return false;
-        }
-
-        return (compareTo((EmcValue) object) == 0);
+        return object instanceof EmcValue && (compareTo((EmcValue) object) == 0);
     }
 
     @Override
     public String toString()
     {
-
         StringBuilder stringBuilder = new StringBuilder();
 
         // TODO Intelligible output
@@ -173,14 +166,13 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     @Override
     public int compareTo(EmcValue emcValue)
     {
-
-        if (emcValue instanceof EmcValue)
+        if (emcValue != null)
         {
             return compareComponents(this.components, emcValue.components);
         }
         else
         {
-            return -1;
+            return Compare.LESSER_THAN;
         }
     }
 
@@ -191,12 +183,12 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
      * @return The EmcValue that was encoded as json, or null if a valid
      * EmcValue could not be decoded from given String
      */
+    @SuppressWarnings("unused")
     public static EmcValue createFromJson(String jsonEmcValue)
     {
-
         try
         {
-            return (EmcValue) gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
+            return gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
         }
         catch (JsonSyntaxException exception)
         {
@@ -231,7 +223,7 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
             if (emcComponent.weight >= 0)
             {
-                componentCount[emcComponent.type.ordinal()] = componentCount[emcComponent.type.ordinal()].intValue() + emcComponent.weight;
+                componentCount[emcComponent.type.ordinal()] = componentCount[emcComponent.type.ordinal()] + emcComponent.weight;
             }
         }
 
@@ -241,7 +233,7 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
         {
             if (componentCount[i] != null)
             {
-                collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i].intValue()));
+                collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i]));
             }
         }
 
