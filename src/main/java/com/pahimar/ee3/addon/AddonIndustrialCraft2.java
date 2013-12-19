@@ -186,6 +186,10 @@ public class AddonIndustrialCraft2
     }
 
     /**
+     * TODO Helper method to grab items from IC2's API
+     */
+
+    /**
      * EmcValues for various IC2 things
      */
     private static final EmcValue COPPER_EMC_VALUE = new EmcValue(72);
