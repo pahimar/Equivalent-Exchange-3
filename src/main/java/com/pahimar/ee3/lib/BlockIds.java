@@ -20,5 +20,4 @@ public class BlockIds
     public static int ALUDEL_BASE;
     public static int ALCHEMICAL_CHEST;
     public static int GLASS_BELL;
-
 }

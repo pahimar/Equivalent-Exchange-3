@@ -8,7 +8,6 @@ import com.pahimar.ee3.lib.Strings;
  * ConfigurationSettings
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ConfigurationSettings
 {
@@ -113,5 +112,4 @@ public class ConfigurationSettings
     public static int TRANSMUTE_COST_MOB;
     public static final String TRANSMUTE_COST_MOB_CONFIGNAME = Strings.TRANSMUTATION_COST_MOB;
     public static final int TRANSMUTE_COST_MOB_DEFAULT = 1;
-
 }

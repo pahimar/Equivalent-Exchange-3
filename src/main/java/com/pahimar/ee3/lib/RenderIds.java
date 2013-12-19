@@ -6,7 +6,6 @@ package com.pahimar.ee3.lib;
  * RenderIds
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class RenderIds
 {
@@ -15,5 +14,4 @@ public class RenderIds
     public static int aludelRender;
     public static int alchemicalChestRender;
     public static int glassBell;
-
 }

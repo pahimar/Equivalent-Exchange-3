@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
  * CraftingHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CraftingHandler implements ICraftingHandler
 {
@@ -35,12 +34,13 @@ public class CraftingHandler implements ICraftingHandler
     }
 
     /**
-     * Check to see if the crafting is occurring from the portable crafting
-     * interface. If so, do durability damage to the appropriate transmutation
-     * stone that was used for portable crafting.
+     * Check to see if the crafting is occurring from the portable crafting interface. If so, do durability damage to
+     * the appropriate transmutation stone that was used for portable crafting.
      *
-     * @param player      The player that is completing the crafting
-     * @param craftMatrix The contents of the crafting matrix
+     * @param player
+     *         The player that is completing the crafting
+     * @param craftMatrix
+     *         The contents of the crafting matrix
      */
     private void doPortableCrafting(EntityPlayer player, IInventory craftMatrix)
     {

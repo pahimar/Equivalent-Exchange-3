@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
  * SlotCalcinator
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class SlotCalcinator extends Slot
 {
@@ -27,5 +26,4 @@ public class SlotCalcinator extends Slot
 
         return false;
     }
-
 }

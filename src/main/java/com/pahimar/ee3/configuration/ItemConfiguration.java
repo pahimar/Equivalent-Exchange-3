@@ -47,5 +47,4 @@ public class ItemConfiguration
             itemConfiguration.save();
         }
     }
-
 }

@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * KeyBindingHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class KeyBindingHelper
 {
@@ -54,7 +53,7 @@ public class KeyBindingHelper
 
         for (int x = 0; x < isRepeating.length; x++)
         {
-            isRepeating[x] = isRepeatingList.get(x).booleanValue();
+            isRepeating[x] = isRepeatingList.get(x);
         }
 
         return isRepeating;

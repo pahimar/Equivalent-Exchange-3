@@ -1,6 +1,6 @@
 package com.pahimar.ee3.emc;
 
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.api.WrappedStack;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,7 +11,6 @@ import java.util.TreeMap;
  * EmcIMCValues
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class EmcValuesIMC
 {

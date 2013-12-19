@@ -21,7 +21,6 @@ import net.minecraftforge.common.ForgeDirection;
  * CommonProxy
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommonProxy implements IGuiHandler
 {
@@ -166,5 +165,4 @@ public class CommonProxy implements IGuiHandler
 
         return null;
     }
-
 }

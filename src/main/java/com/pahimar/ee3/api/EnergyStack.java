@@ -1,4 +1,4 @@
-package com.pahimar.ee3.item;
+package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.lib.Compare;
 
@@ -15,14 +15,12 @@ public class EnergyStack implements Comparable<EnergyStack>
 
     public EnergyStack(String energyName, int stackSize)
     {
-
         this.energyName = energyName;
         this.stackSize = stackSize;
     }
 
     public EnergyStack(String energyName)
     {
-
         this(energyName, 1);
     }
 
@@ -35,18 +33,11 @@ public class EnergyStack implements Comparable<EnergyStack>
     @Override
     public boolean equals(Object object)
     {
-
-        if (!(object instanceof EnergyStack))
-        {
-            return false;
-        }
-
-        return (this.compareTo((EnergyStack) object) == Compare.EQUALS);
+        return object instanceof EnergyStack && (this.compareTo((EnergyStack) object) == Compare.EQUALS);
     }
 
     public static boolean compareEnergyNames(EnergyStack energyStack1, EnergyStack energyStack2)
     {
-
         if (energyStack1 != null && energyStack2 != null)
         {
             if ((energyStack1.energyName != null) && (energyStack2.energyName != null))
@@ -61,7 +52,6 @@ public class EnergyStack implements Comparable<EnergyStack>
     @Override
     public int compareTo(EnergyStack energyStack)
     {
-
         return comparator.compare(this, energyStack);
     }
 
@@ -72,11 +62,9 @@ public class EnergyStack implements Comparable<EnergyStack>
 
     public static Comparator<EnergyStack> comparator = new Comparator<EnergyStack>()
     {
-
         @Override
         public int compare(EnergyStack energyStack1, EnergyStack energyStack2)
         {
-
             if (energyStack1 != null)
             {
                 if (energyStack2 != null)
@@ -107,6 +95,5 @@ public class EnergyStack implements Comparable<EnergyStack>
                 }
             }
         }
-
     };
 }

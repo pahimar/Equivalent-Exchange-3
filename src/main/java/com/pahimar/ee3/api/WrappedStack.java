@@ -1,4 +1,4 @@
-package com.pahimar.ee3.item;
+package com.pahimar.ee3.api;
 
 import com.google.gson.*;
 import com.pahimar.ee3.helper.FluidHelper;
@@ -290,11 +290,11 @@ public class WrappedStack
         }
         catch (JsonSyntaxException exception)
         {
-            LogHelper.warning(exception.getMessage());
+            LogHelper.severe(exception.getMessage());
         }
         catch (JsonParseException exception)
         {
-            LogHelper.warning(exception.getMessage());
+            LogHelper.severe(exception.getMessage());
         }
 
         return null;

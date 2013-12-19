@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
  * ContainerAlchemicalBag
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ContainerAlchemicalBag extends Container
 {

@@ -2,8 +2,8 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.RecipeHelper;
-import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;

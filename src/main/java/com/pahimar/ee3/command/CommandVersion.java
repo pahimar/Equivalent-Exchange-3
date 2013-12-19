@@ -12,7 +12,6 @@ import net.minecraft.util.ChatMessageComponent;
  * CommandVersion
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommandVersion
 {
@@ -55,5 +54,4 @@ public class CommandVersion
     {
 
     }
-
 }

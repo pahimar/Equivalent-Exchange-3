@@ -13,7 +13,6 @@ import static net.minecraftforge.event.Event.Result.DENY;
  * ActionRequestEvent
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @Cancelable
 public class ActionRequestEvent extends PlayerEvent
@@ -46,5 +45,4 @@ public class ActionRequestEvent extends PlayerEvent
         super.setCanceled(cancel);
         allowEvent = cancel ? DENY : allowEvent == DENY ? DENY : DEFAULT;
     }
-
 }

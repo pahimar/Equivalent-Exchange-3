@@ -12,11 +12,9 @@ import net.minecraft.nbt.NBTTagList;
  * TileCalcinator
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileCalcinator extends TileEE implements IInventory
 {
-
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
      */
@@ -30,7 +28,6 @@ public class TileCalcinator extends TileEE implements IInventory
 
     public TileCalcinator()
     {
-
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
@@ -50,14 +47,12 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
-
         return inventory[slotIndex];
     }
 
     @Override
     public ItemStack decrStackSize(int slotIndex, int decrementAmount)
     {
-
         ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null)
         {

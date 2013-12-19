@@ -11,7 +11,6 @@ import net.minecraft.creativetab.CreativeTabs;
  * CreativeTabEE3
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CreativeTabEE3 extends CreativeTabs
 {
@@ -32,5 +31,4 @@ public class CreativeTabEE3 extends CreativeTabs
 
         return ItemIds.MINIUM_SHARD;
     }
-
 }

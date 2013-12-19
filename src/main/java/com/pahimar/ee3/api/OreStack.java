@@ -1,7 +1,9 @@
-package com.pahimar.ee3.item;
+package com.pahimar.ee3.api;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -44,12 +46,7 @@ public class OreStack implements Comparable<OreStack>
     @Override
     public boolean equals(Object object)
     {
-        if (!(object instanceof OreStack))
-        {
-            return false;
-        }
-
-        return (comparator.compare(this, (OreStack) object) == Compare.EQUALS);
+        return object instanceof OreStack && (comparator.compare(this, (OreStack) object) == Compare.EQUALS);
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)
@@ -72,12 +69,12 @@ public class OreStack implements Comparable<OreStack>
     }
 
     /**
-     * Deserializes a OreStack object from the given serialized json
-     * String
+     * Deserializes a OreStack object from the given serialized json String
      *
-     * @param jsonOreStack Json encoded String representing a OreStack object
-     * @return The OreStack that was encoded as json, or null if a valid
-     * OreStack could not be decoded from given String
+     * @param jsonOreStack
+     *         Json encoded String representing a OreStack object
+     *
+     * @return The OreStack that was encoded as json, or null if a valid OreStack could not be decoded from given String
      */
     public static OreStack createFromJson(String jsonOreStack)
     {
@@ -87,7 +84,11 @@ public class OreStack implements Comparable<OreStack>
         }
         catch (JsonSyntaxException exception)
         {
-            // TODO Log something regarding the failed parse
+            LogHelper.severe(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.severe(exception.getMessage());
         }
 
         return null;
@@ -163,6 +164,5 @@ public class OreStack implements Comparable<OreStack>
                 }
             }
         }
-
     };
 }

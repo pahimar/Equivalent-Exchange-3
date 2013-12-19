@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * EquivalencyHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class EquivalencyHandler
 {
@@ -51,13 +50,13 @@ public class EquivalencyHandler
         {
             currentList = equivalencyList.get(stack1Index.intValue());
             currentList.add(stack2);
-            equivalencyList.set(stack1Index.intValue(), currentList);
+            equivalencyList.set(stack1Index, currentList);
         }
         else if (stack1Index == null && stack2Index != null)
         {
             currentList = equivalencyList.get(stack2Index.intValue());
             currentList.add(stack1);
-            equivalencyList.set(stack2Index.intValue(), currentList);
+            equivalencyList.set(stack2Index, currentList);
         }
         else if (stack1Index == null && stack2Index == null)
         {
@@ -262,18 +261,9 @@ public class EquivalencyHandler
 
     public boolean areEquivalent(Object obj1, Object obj2)
     {
-
         if (getEquivalencyList(obj1) != null && getEquivalencyList(obj2) != null)
         {
-            // TODO This could be cleaner
-            if (GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID && GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage())
-            {
-                return true;
-            }
-            else
-            {
-                return getEquivalencyList(obj1).equals(getEquivalencyList(obj2));
-            }
+            return GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID && GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage() || getEquivalencyList(obj1).equals(getEquivalencyList(obj2));
         }
         else
         {
@@ -298,14 +288,7 @@ public class EquivalencyHandler
 
         if (getEquivalencyList(first.itemID, first.getItemDamage()) != null && getEquivalencyList(second.itemID, second.getItemDamage()) != null)
         {
-            if (first.itemID == second.itemID && first.getItemDamage() == second.getItemDamage())
-            {
-                return true;
-            }
-            else
-            {
-                return getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage()));
-            }
+            return first.itemID == second.itemID && first.getItemDamage() == second.getItemDamage() || getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage()));
         }
         else
         {

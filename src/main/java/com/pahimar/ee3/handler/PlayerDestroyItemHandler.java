@@ -9,7 +9,6 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
  * PlayerDestroyItemHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PlayerDestroyItemHandler
 {
@@ -21,5 +20,4 @@ public class PlayerDestroyItemHandler
         // TODO Come back and actually do what I want here
 
     }
-
 }

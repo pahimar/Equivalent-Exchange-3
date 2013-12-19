@@ -36,5 +36,4 @@ public class BlockConfiguration
             blockConfiguration.save();
         }
     }
-
 }

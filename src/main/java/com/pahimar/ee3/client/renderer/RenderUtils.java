@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
  * RenderUtils
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class RenderUtils
 {
@@ -67,7 +66,6 @@ public class RenderUtils
         GL11.glColor4f(red, green, blue, opacity);
         drawTexturedQuad(x, y, icon, 16 * scale, 16 * scale, -90);
         GL11.glEnable(GL11.GL_LIGHTING);
-
     }
 
     public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel)

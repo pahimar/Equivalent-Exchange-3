@@ -19,9 +19,11 @@ public class FluidHelper
         // Register Milk in the FluidRegistry if it hasn't already been done
         if (!FluidRegistry.isFluidRegistered("milk"))
         {
-            Fluid milk = new Fluid("milk") {
+            Fluid milk = new Fluid("milk")
+            {
                 @Override
-                public String getLocalizedName() {
+                public String getLocalizedName()
+                {
                     return StatCollector.translateToLocal("item.milk.name");
                 }
             }.setUnlocalizedName(Item.bucketMilk.getUnlocalizedName());

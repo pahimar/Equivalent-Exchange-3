@@ -27,7 +27,6 @@ import java.util.EnumSet;
  * TransmutationTargetOverlayHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
 public class TransmutationTargetOverlayHandler implements ITickHandler
@@ -158,5 +157,4 @@ public class TransmutationTargetOverlayHandler implements ITickHandler
         GL11.glPopMatrix();
         GL11.glPopMatrix();
     }
-
 }

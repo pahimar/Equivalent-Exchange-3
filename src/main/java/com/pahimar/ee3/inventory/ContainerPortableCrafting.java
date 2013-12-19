@@ -14,7 +14,6 @@ import net.minecraft.world.World;
  * ContainerPortableCrafting
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ContainerPortableCrafting extends ContainerWorkbench
 {
@@ -53,5 +52,4 @@ public class ContainerPortableCrafting extends ContainerWorkbench
             }
         }
     }
-
 }

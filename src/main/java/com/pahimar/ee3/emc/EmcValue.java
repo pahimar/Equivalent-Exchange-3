@@ -179,9 +179,10 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     /**
      * Deserializes an EmcValue object from the given serialized json String
      *
-     * @param jsonEmcValue Json encoded String representing a EmcValue object
-     * @return The EmcValue that was encoded as json, or null if a valid
-     * EmcValue could not be decoded from given String
+     * @param jsonEmcValue
+     *         Json encoded String representing a EmcValue object
+     *
+     * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
      */
     @SuppressWarnings("unused")
     public static EmcValue createFromJson(String jsonEmcValue)

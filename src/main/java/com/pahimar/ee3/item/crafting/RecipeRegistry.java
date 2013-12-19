@@ -2,7 +2,7 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.api.WrappedStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -39,36 +39,48 @@ public class RecipeRegistry
     private void init()
     {
         // Add recipes in the vanilla crafting manager
-        for (WrappedStack outputStack : RecipesVanilla.getVanillaRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesVanilla.getVanillaRecipes().get(outputStack)) {
-                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+        for (WrappedStack outputStack : RecipesVanilla.getVanillaRecipes().keySet())
+        {
+            for (List<WrappedStack> inputStacks : RecipesVanilla.getVanillaRecipes().get(outputStack))
+            {
+                if (!recipeMap.get(outputStack).contains(inputStacks))
+                {
                     recipeMap.put(outputStack, inputStacks);
                 }
             }
         }
 
         // Add fluid container recipes
-        for (WrappedStack outputStack : RecipesFluidContainers.getFluidContainerRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesFluidContainers.getFluidContainerRecipes().get(outputStack)) {
-                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+        for (WrappedStack outputStack : RecipesFluidContainers.getFluidContainerRecipes().keySet())
+        {
+            for (List<WrappedStack> inputStacks : RecipesFluidContainers.getFluidContainerRecipes().get(outputStack))
+            {
+                if (!recipeMap.get(outputStack).contains(inputStacks))
+                {
                     recipeMap.put(outputStack, inputStacks);
                 }
             }
         }
 
         // Add potion recipes
-        for (WrappedStack outputStack : RecipesPotions.getPotionRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesPotions.getPotionRecipes().get(outputStack)) {
-                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+        for (WrappedStack outputStack : RecipesPotions.getPotionRecipes().keySet())
+        {
+            for (List<WrappedStack> inputStacks : RecipesPotions.getPotionRecipes().get(outputStack))
+            {
+                if (!recipeMap.get(outputStack).contains(inputStacks))
+                {
                     recipeMap.put(outputStack, inputStacks);
                 }
             }
         }
 
         // Add recipes gathered via IMC
-        for (WrappedStack outputStack : RecipesIMC.getIMCRecipes().keySet()) {
-            for (List<WrappedStack> inputStacks : RecipesIMC.getIMCRecipes().get(outputStack)) {
-                if (!recipeMap.get(outputStack).contains(inputStacks)) {
+        for (WrappedStack outputStack : RecipesIMC.getIMCRecipes().keySet())
+        {
+            for (List<WrappedStack> inputStacks : RecipesIMC.getIMCRecipes().get(outputStack))
+            {
+                if (!recipeMap.get(outputStack).contains(inputStacks))
+                {
                     recipeMap.put(outputStack, inputStacks);
                 }
             }

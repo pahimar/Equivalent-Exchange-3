@@ -19,7 +19,6 @@ import net.minecraftforge.common.ForgeDirection;
  * BlockEE
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public abstract class BlockEE extends BlockContainer
 {

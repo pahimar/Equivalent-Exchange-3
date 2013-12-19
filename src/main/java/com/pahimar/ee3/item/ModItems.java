@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
  * ModItems
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ModItems
 {
@@ -53,8 +52,8 @@ public class ModItems
         GameRegistry.registerItem(alchemicalChalk, Strings.ALCHEMICAL_CHALK_NAME);
 
         // Add recipes for items
-        GameRegistry.addRecipe(new ItemStack(inertStone), new Object[] {"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
-        GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[] {"sss", "sis", "sss", 's', miniumShard, 'i', inertStone});
+        GameRegistry.addRecipe(new ItemStack(inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
+        GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[]{"sss", "sis", "sss", 's', miniumShard, 'i', inertStone});
         GameRegistry.addShapelessRecipe(new ItemStack(alchemicalChalk), new ItemStack(Item.clay), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15));
     }
 }

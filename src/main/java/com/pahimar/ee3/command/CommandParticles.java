@@ -14,7 +14,6 @@ import net.minecraft.util.ChatMessageComponent;
  * CommandParticles
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommandParticles
 {

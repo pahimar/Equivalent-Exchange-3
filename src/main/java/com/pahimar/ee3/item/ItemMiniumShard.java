@@ -9,7 +9,6 @@ import com.pahimar.ee3.lib.Strings;
  * ItemMiniumShard
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemMiniumShard extends ItemEE
 {

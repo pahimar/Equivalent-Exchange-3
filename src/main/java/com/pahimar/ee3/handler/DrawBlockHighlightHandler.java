@@ -24,7 +24,6 @@ import org.lwjgl.opengl.GL12;
  * DrawBlockHighlightHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
 public class DrawBlockHighlightHandler
@@ -214,5 +213,4 @@ public class DrawBlockHighlightHandler
 
         return pulse;
     }
-
 }

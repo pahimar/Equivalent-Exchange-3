@@ -5,10 +5,10 @@ import com.google.gson.Gson;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.api.StackValueMapping;
+import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
-import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipesIMC;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.IScheduledTickHandler;
@@ -224,7 +224,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                     imcMessage.getSender(),
                     InterModCommsOperations.EMC_RETURN_GET_VALUE,
                     String.format("%s==%s", gson.toJson(itemStack), EmcRegistry.getEmcValue(itemStack).toJson()));
-
         }
         else
         {

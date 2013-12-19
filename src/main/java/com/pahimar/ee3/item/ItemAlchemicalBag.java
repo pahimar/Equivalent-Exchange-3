@@ -21,12 +21,11 @@ import net.minecraft.world.World;
  * ItemAlchemicalBag
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemAlchemicalBag extends ItemEE
 {
 
-    private static final String[] ALCHEMICAL_BAG_SUBTYPES = new String[] {"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
+    private static final String[] ALCHEMICAL_BAG_SUBTYPES = new String[]{"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;

@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
  * NBTHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemStackNBTHelper
 {
@@ -17,8 +16,8 @@ public class ItemStackNBTHelper
     /**
      * Initializes the NBT Tag Compound for the given ItemStack if it is null
      *
-     * @param itemStack The ItemStack for which its NBT Tag Compound is being checked
-     *                  for initialization
+     * @param itemStack
+     *         The ItemStack for which its NBT Tag Compound is being checked for initialization
      */
     private static void initNBTTagCompound(ItemStack itemStack)
     {
@@ -31,13 +30,7 @@ public class ItemStackNBTHelper
 
     public static boolean hasTag(ItemStack itemStack, String keyName)
     {
-
-        if (itemStack.stackTagCompound != null)
-        {
-            return itemStack.stackTagCompound.hasKey(keyName);
-        }
-
-        return false;
+        return itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
     }
 
     public static void removeTag(ItemStack itemStack, String keyName)
@@ -224,5 +217,4 @@ public class ItemStackNBTHelper
 
         itemStack.stackTagCompound.setDouble(keyName, keyValue);
     }
-
 }

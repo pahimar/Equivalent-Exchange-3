@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * TransmutationHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TransmutationHelper
 {
@@ -177,5 +176,4 @@ public class TransmutationHelper
         // In the event the list is null, return null
         return prevStack;
     }
-
 }

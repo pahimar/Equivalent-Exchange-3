@@ -13,7 +13,6 @@ import net.minecraft.util.ChatMessageComponent;
  * CommandSounds
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommandSounds
 {

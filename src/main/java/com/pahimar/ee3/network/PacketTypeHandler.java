@@ -14,7 +14,6 @@ import java.io.DataInputStream;
  * PacketTypeHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public enum PacketTypeHandler
 {

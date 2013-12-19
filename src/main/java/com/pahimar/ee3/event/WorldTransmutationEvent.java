@@ -10,7 +10,6 @@ import net.minecraft.world.World;
  * WorldTransmutationEvent
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class WorldTransmutationEvent extends ActionEvent
 {
@@ -25,5 +24,4 @@ public class WorldTransmutationEvent extends ActionEvent
         targetMeta = Integer.parseInt(data.substring(data.indexOf(":") + 1));
         actionResult = ActionResult.DEFAULT;
     }
-
 }

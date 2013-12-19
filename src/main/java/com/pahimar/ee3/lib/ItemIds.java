@@ -27,5 +27,4 @@ public class ItemIds
     public static int ALCHEMICAL_DUST;
     public static int ALCHEMICAL_BAG;
     public static int ALCHEMICAL_CHALK;
-
 }

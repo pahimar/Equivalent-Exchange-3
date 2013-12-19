@@ -19,12 +19,11 @@ import java.util.List;
  * ItemAlchemicalDust
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemAlchemicalDust extends ItemEE
 {
 
-    private static final String[] ALCHEMICAL_DUST_NAMES = new String[] {"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
+    private static final String[] ALCHEMICAL_DUST_NAMES = new String[]{"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;

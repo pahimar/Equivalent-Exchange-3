@@ -1,7 +1,7 @@
 package com.pahimar.ee3.emc;
 
-import com.pahimar.ee3.item.OreStack;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.api.OreStack;
+import com.pahimar.ee3.api.WrappedStack;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

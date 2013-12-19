@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
  * IChargeable
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public interface IChargeable
 {
@@ -20,5 +19,4 @@ public interface IChargeable
     public abstract void increaseCharge(ItemStack stack);
 
     public abstract void decreaseCharge(ItemStack stack);
-
 }

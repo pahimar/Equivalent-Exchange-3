@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
  * QualityHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class QualityHelper
 {
@@ -42,5 +41,4 @@ public class QualityHelper
 
         return -1;
     }
-
 }

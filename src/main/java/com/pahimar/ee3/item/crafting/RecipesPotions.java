@@ -2,7 +2,7 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.api.WrappedStack;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -13,5 +13,4 @@ public class ItemAlchemicalChalk extends ItemEE
         this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_CHALK_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
-
 }

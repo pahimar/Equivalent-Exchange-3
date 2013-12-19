@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
  * GuiGlassBell
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
 public class GuiGlassBell extends GuiContainer

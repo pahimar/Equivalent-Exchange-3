@@ -23,14 +23,12 @@ import java.util.Random;
  * BlockAlchemicalChest
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockAlchemicalChest extends BlockEE
 {
 
     /**
-     * Is the random generator used by alchemical chest to drop the inventory
-     * contents in random directions.
+     * Is the random generator used by alchemical chest to drop the inventory contents in random directions.
      */
     private Random rand = new Random();
 

@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * GeneralHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GeneralHelper
 {
@@ -60,5 +59,4 @@ public class GeneralHelper
 
         return entity instanceof IMob;
     }
-
 }

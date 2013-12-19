@@ -16,7 +16,6 @@ import net.minecraft.network.packet.Packet;
  * TileAludel
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileAludel extends TileEE implements IInventory
 {

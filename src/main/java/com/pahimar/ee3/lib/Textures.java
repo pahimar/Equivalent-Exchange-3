@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
  * Sprites
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Textures
 {
@@ -44,5 +43,4 @@ public class Textures
 
     // Effect textures
     public static final ResourceLocation EFFECT_WORLD_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(EFFECTS_LOCATION + "noise.png");
-
 }

@@ -37,5 +37,4 @@ public class TransmutationConfiguration
             transmutationConfiguration.save();
         }
     }
-
 }

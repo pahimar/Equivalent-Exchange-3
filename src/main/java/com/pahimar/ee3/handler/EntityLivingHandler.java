@@ -13,7 +13,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
  * EntityLivingHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class EntityLivingHandler
 {
@@ -43,5 +42,4 @@ public class EntityLivingHandler
             }
         }
     }
-
 }

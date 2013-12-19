@@ -1,9 +1,9 @@
 package com.pahimar.ee3.helper;
 
+import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 

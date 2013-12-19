@@ -11,7 +11,6 @@ import net.minecraftforge.event.Event;
  * ActionEvent
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ActionEvent extends Event
 {
@@ -43,5 +42,4 @@ public class ActionEvent extends Event
         this.hasActionOccured = hasActionOccured;
         this.data = data;
     }
-
 }

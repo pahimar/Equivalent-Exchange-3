@@ -26,14 +26,12 @@ import java.util.Random;
  * BlockAludel
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockAludelBase extends BlockEE
 {
 
     /**
-     * Is the random generator used by aludel to drop the inventory contents in
-     * random directions.
+     * Is the random generator used by aludel to drop the inventory contents in random directions.
      */
     private Random rand = new Random();
 

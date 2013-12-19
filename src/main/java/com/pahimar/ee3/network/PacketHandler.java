@@ -12,19 +12,19 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  * PacketHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PacketHandler implements IPacketHandler
 {
 
     /**
-     * Handles Packet250CustomPayload packets that are registered to an
-     * Equivalent Exchange 3 network channel
+     * Handles Packet250CustomPayload packets that are registered to an Equivalent Exchange 3 network channel
      *
-     * @param manager The NetworkManager associated with the current platform
-     *                (client/server)
-     * @param packet  The Packet250CustomPayload that was received
-     * @param player  The Player associated with the packet
+     * @param manager
+     *         The NetworkManager associated with the current platform (client/server)
+     * @param packet
+     *         The Packet250CustomPayload that was received
+     * @param player
+     *         The Player associated with the packet
      */
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
@@ -36,5 +36,4 @@ public class PacketHandler implements IPacketHandler
         // Execute the appropriate actions based on the PacketEE type
         packetEE.execute(manager, player);
     }
-
 }

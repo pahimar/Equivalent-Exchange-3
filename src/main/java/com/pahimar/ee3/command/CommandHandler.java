@@ -8,7 +8,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
  * CommandHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommandHandler
 {

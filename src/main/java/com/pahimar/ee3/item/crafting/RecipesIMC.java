@@ -2,8 +2,8 @@ package com.pahimar.ee3.item.crafting;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.RecipeHelper;
-import com.pahimar.ee3.item.WrappedStack;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import java.util.List;
  * RecipesIMC
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class RecipesIMC
 {

@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
  * GuiCalcinator
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
 public class GuiCalcinator extends GuiContainer

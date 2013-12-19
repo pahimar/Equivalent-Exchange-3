@@ -15,7 +15,6 @@ import net.minecraft.nbt.NBTTagList;
  * TileAlchemicalChest
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileAlchemicalChest extends TileEE implements IInventory
 {
@@ -43,8 +42,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     public static final int INVENTORY_SIZE = 13 * 4;
 
     /**
-     * The ItemStacks that hold the items currently being used in the Alchemical
-     * Chest
+     * The ItemStacks that hold the items currently being used in the Alchemical Chest
      */
     private ItemStack[] inventory;
 
@@ -138,8 +136,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     }
 
     /**
-     * Called when a client event is received with the event number and
-     * argument, see World.sendClientEvent
+     * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
     @Override
     public boolean receiveClientEvent(int eventID, int numUsingPlayers)
@@ -173,9 +170,8 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     }
 
     /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
+     * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
+     * ticks and creates a new spawn inside its implementation.
      */
     @Override
     public void updateEntity()
@@ -270,7 +266,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
             }
         }
         nbtTagCompound.setTag("Items", tagList);
-
     }
 
     @Override

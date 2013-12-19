@@ -15,7 +15,6 @@ import java.io.IOException;
  * PacketEE
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PacketEE
 {

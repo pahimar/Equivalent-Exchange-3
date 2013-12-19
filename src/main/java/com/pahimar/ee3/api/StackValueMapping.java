@@ -2,7 +2,7 @@ package com.pahimar.ee3.api;
 
 import com.google.gson.*;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.helper.LogHelper;
 
 import java.lang.reflect.Type;
 
@@ -35,7 +35,11 @@ public class StackValueMapping implements JsonSerializer<StackValueMapping>, Jso
         }
         catch (JsonSyntaxException exception)
         {
-            // TODO Log something regarding the failed parse
+            LogHelper.severe(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.severe(exception.getMessage());
         }
 
         return null;

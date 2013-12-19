@@ -15,7 +15,6 @@ import net.minecraftforge.common.ForgeDirection;
  * TileEE
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileEE extends TileEntity
 {
@@ -135,5 +134,4 @@ public class TileEE extends TileEntity
     {
         return String.format("TileEE Data - xCoord: %d, yCoord: %d, zCoord: %d, customName: '%s', orientation: %s, state: %d\n", xCoord, yCoord, zCoord, customName, orientation, state);
     }
-
 }

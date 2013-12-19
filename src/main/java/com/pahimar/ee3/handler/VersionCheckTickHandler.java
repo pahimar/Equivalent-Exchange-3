@@ -18,7 +18,6 @@ import java.util.EnumSet;
  * VersionCheckTickHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class VersionCheckTickHandler implements ITickHandler
 {
@@ -76,5 +75,4 @@ public class VersionCheckTickHandler implements ITickHandler
 
         return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
-
 }

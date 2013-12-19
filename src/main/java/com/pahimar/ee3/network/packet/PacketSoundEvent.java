@@ -18,7 +18,6 @@ import java.io.IOException;
  * PacketSoundEvent
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PacketSoundEvent extends PacketEE
 {

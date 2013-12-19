@@ -16,7 +16,6 @@ import java.io.IOException;
  * PacketSpawnParticle
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PacketSpawnParticle extends PacketEE
 {
@@ -55,7 +54,6 @@ public class PacketSpawnParticle extends PacketEE
         data.writeDouble(velocityX);
         data.writeDouble(velocityY);
         data.writeDouble(velocityZ);
-
     }
 
     @Override
@@ -69,7 +67,6 @@ public class PacketSpawnParticle extends PacketEE
         velocityX = data.readDouble();
         velocityY = data.readDouble();
         velocityZ = data.readDouble();
-
     }
 
     @Override
@@ -83,5 +80,4 @@ public class PacketSpawnParticle extends PacketEE
             thePlayer.worldObj.spawnParticle(particleName, x, y, z, velocityX, velocityY, velocityZ);
         }
     }
-
 }

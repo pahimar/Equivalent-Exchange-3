@@ -21,7 +21,6 @@ import java.util.EnumSet;
  * KeyBindingHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {

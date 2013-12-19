@@ -25,7 +25,7 @@ public class AddonHandler
         AddonIndustrialCraft2.init();
     }
 
-    public static void sendAddRecipe(Object outputObject, Object ... inputObjects)
+    public static void sendAddRecipe(Object outputObject, Object... inputObjects)
     {
         List<?> inputObjectsList = Arrays.asList(inputObjects);
         FMLInterModComms.sendMessage(Reference.MOD_ID, InterModCommsOperations.RECIPE_ADD, new RecipeMapping(outputObject, inputObjectsList).toJson());

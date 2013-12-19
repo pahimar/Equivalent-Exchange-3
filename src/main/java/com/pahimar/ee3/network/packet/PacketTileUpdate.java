@@ -16,7 +16,6 @@ import java.io.IOException;
  * PacketTileUpdate
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class PacketTileUpdate extends PacketEE
 {
@@ -74,5 +73,4 @@ public class PacketTileUpdate extends PacketEE
 
         EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName);
     }
-
 }

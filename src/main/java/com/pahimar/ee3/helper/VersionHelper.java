@@ -46,9 +46,8 @@ public class VersionHelper implements Runnable
     public static String remoteUpdateLocation = null;
 
     /**
-     * Checks the version of the currently running instance of the mod against
-     * the remote version authority, and sets the result of the check
-     * appropriately
+     * Checks the version of the currently running instance of the mod against the remote version authority, and sets
+     * the result of the check appropriately
      */
     public static void checkVersion()
     {
@@ -94,7 +93,6 @@ public class VersionHelper implements Runnable
                         result = OUTDATED;
                     }
                 }
-
             }
             else
             {

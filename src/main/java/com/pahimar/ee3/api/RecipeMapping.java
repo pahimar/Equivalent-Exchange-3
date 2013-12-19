@@ -1,7 +1,7 @@
 package com.pahimar.ee3.api;
 
 import com.google.gson.*;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.helper.LogHelper;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -54,8 +54,11 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
         }
         catch (JsonSyntaxException exception)
         {
-            exception.printStackTrace();
-            // TODO Log something regarding the failed parse
+            LogHelper.severe(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.severe(exception.getMessage());
         }
 
         return null;
@@ -67,23 +70,28 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
     }
 
     @Override
-    public RecipeMapping deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public RecipeMapping deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
 
-        if (!jsonElement.isJsonPrimitive()) {
+        if (!jsonElement.isJsonPrimitive())
+        {
 
             JsonObject jsonRecipeMapping = (JsonObject) jsonElement;
 
             WrappedStack outputStack = null;
             List<WrappedStack> inputStacks = new ArrayList<WrappedStack>();
 
-            if (jsonRecipeMapping.get("outputWrappedStack") != null) {
+            if (jsonRecipeMapping.get("outputWrappedStack") != null)
+            {
                 outputStack = new WrappedStack().deserialize(jsonRecipeMapping.get("outputWrappedStack").getAsJsonObject(), type, context);
             }
 
-            if (jsonRecipeMapping.get("inputWrappedStacks") != null) {
+            if (jsonRecipeMapping.get("inputWrappedStacks") != null)
+            {
                 JsonArray jsonInputStacks = jsonRecipeMapping.get("inputWrappedStacks").getAsJsonArray();
 
-                for (int i = 0; i < jsonInputStacks.size(); i++) {
+                for (int i = 0; i < jsonInputStacks.size(); i++)
+                {
                     WrappedStack inputStack = new WrappedStack().deserialize(jsonInputStacks.get(i).getAsJsonObject(), type, context);
                     inputStacks.add(inputStack);
                 }
@@ -96,7 +104,8 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
     }
 
     @Override
-    public JsonElement serialize(RecipeMapping recipeMapping, Type type, JsonSerializationContext context) {
+    public JsonElement serialize(RecipeMapping recipeMapping, Type type, JsonSerializationContext context)
+    {
 
         JsonObject jsonRecipeMapping = new JsonObject();
 

@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
  * ModBlocks
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ModBlocks
 {
@@ -43,7 +42,7 @@ public class ModBlocks
     private static void initBlockRecipes()
     {
 
-        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[] {"iii", "i i", "i i", 'i', Block.glass});
-        GameRegistry.addRecipe(new ItemStack(aludelBase), new Object[] {"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
+        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
+        GameRegistry.addRecipe(new ItemStack(aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
     }
 }

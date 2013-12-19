@@ -1,8 +1,8 @@
 package com.pahimar.ee3.helper;
 
+import com.pahimar.ee3.api.OreStack;
+import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.item.OreStack;
-import com.pahimar.ee3.item.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class DebugHelper {
+public class DebugHelper
+{
 
     public static void printOreDictionaryContents()
     {
@@ -36,7 +37,8 @@ public class DebugHelper {
 
         for (String oreName : oreNames)
         {
-            if (!EmcRegistry.hasEmcValue(new OreStack(oreName))) {
+            if (!EmcRegistry.hasEmcValue(new OreStack(oreName)))
+            {
                 LogHelper.debug(String.format("OreStack '%s' requires an EmcValue", oreName));
             }
         }

@@ -30,7 +30,6 @@ import net.minecraftforge.event.ForgeSubscribe;
  * WorldTransmutationHandler
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class WorldTransmutationHandler
 {
@@ -204,5 +203,4 @@ public class WorldTransmutationHandler
             event.actionResult = ActionResult.FAILURE;
         }
     }
-
 }

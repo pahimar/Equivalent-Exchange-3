@@ -1,8 +1,8 @@
 package com.pahimar.ee3.helper;
 
-import com.pahimar.ee3.item.EnergyStack;
-import com.pahimar.ee3.item.OreStack;
-import com.pahimar.ee3.item.WrappedStack;
+import com.pahimar.ee3.api.EnergyStack;
+import com.pahimar.ee3.api.OreStack;
+import com.pahimar.ee3.api.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -20,7 +20,6 @@ import java.util.List;
  * RecipeHelper
  *
  * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class RecipeHelper
 {
@@ -28,9 +27,10 @@ public class RecipeHelper
     /**
      * Returns a list of elements that constitute the input in a crafting recipe
      *
-     * @param recipe The IRecipe being examined
-     * @return List of elements that constitute the input of the given IRecipe.
-     * Could be an ItemStack or an Arraylist
+     * @param recipe
+     *         The IRecipe being examined
+     *
+     * @return List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
      */
     public static ArrayList<WrappedStack> getRecipeInputs(IRecipe recipe)
     {
@@ -146,10 +146,11 @@ public class RecipeHelper
     }
 
     /**
-     * Collates an uncollated, unsorted List of Objects into a sorted, collated
-     * List of WrappedStacks
+     * Collates an uncollated, unsorted List of Objects into a sorted, collated List of WrappedStacks
      *
-     * @param uncollatedStacks List of objects for collating
+     * @param uncollatedStacks
+     *         List of objects for collating
+     *
      * @return A sorted, collated List of WrappedStacks
      */
     public static List<WrappedStack> collateInputStacks(List<?> uncollatedStacks)
@@ -196,7 +197,6 @@ public class RecipeHelper
                                     collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
                                     found = true;
                                 }
-
                             }
                             else if (stack.getWrappedStack() instanceof EnergyStack && collatedStacks.get(i).getWrappedStack() instanceof EnergyStack)
                             {
@@ -215,7 +215,6 @@ public class RecipeHelper
                     }
                 }
             }
-
         }
         Collections.sort(collatedStacks);
         return collatedStacks;
