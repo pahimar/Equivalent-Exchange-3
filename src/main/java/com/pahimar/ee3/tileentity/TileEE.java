@@ -18,14 +18,12 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public class TileEE extends TileEntity
 {
-
     protected ForgeDirection orientation;
     protected byte state;
     protected String customName;
 
     public TileEE()
     {
-
         orientation = ForgeDirection.SOUTH;
         state = 0;
         customName = "";
@@ -45,7 +43,6 @@ public class TileEE extends TileEntity
 
     public void setOrientation(int orientation)
     {
-
         this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
@@ -63,7 +60,6 @@ public class TileEE extends TileEntity
 
     public boolean hasCustomName()
     {
-
         return customName != null && customName.length() > 0;
     }
 
@@ -81,14 +77,12 @@ public class TileEE extends TileEntity
 
     public boolean isUseableByPlayer(EntityPlayer player)
     {
-
         return true;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.readFromNBT(nbtTagCompound);
 
         if (nbtTagCompound.hasKey(Strings.NBT_TE_DIRECTION_KEY))
@@ -110,7 +104,6 @@ public class TileEE extends TileEntity
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.writeToNBT(nbtTagCompound);
 
         nbtTagCompound.setByte(Strings.NBT_TE_DIRECTION_KEY, (byte) orientation.ordinal());
@@ -125,7 +118,6 @@ public class TileEE extends TileEntity
     @Override
     public Packet getDescriptionPacket()
     {
-
         return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
     }
 

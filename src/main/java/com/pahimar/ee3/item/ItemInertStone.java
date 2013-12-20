@@ -12,10 +12,8 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class ItemInertStone extends ItemEE
 {
-
     public ItemInertStone(int id)
     {
-
         super(id);
         this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.INERT_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);

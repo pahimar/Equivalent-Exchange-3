@@ -5,7 +5,6 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.helper.FluidHelper;
 import com.pahimar.ee3.helper.LogHelper;
@@ -162,7 +161,6 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
-        EmcRegistry.lazyInit();
     }
 
     @EventHandler

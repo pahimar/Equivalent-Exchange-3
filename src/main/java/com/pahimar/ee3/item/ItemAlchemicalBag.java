@@ -24,15 +24,13 @@ import net.minecraft.world.World;
  */
 public class ItemAlchemicalBag extends ItemEE
 {
-
-    private static final String[] ALCHEMICAL_BAG_SUBTYPES = new String[]{"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
+    private static final String[] ALCHEMICAL_BAG_ICONS = {"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
 
     public ItemAlchemicalBag(int id)
     {
-
         super(id);
         this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
@@ -42,19 +40,17 @@ public class ItemAlchemicalBag extends ItemEE
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
+        icons = new Icon[ALCHEMICAL_BAG_ICONS.length];
 
-        icons = new Icon[ALCHEMICAL_BAG_SUBTYPES.length];
-
-        for (int i = 0; i < ALCHEMICAL_BAG_SUBTYPES.length; ++i)
+        for (int i = 0; i < ALCHEMICAL_BAG_ICONS.length; ++i)
         {
-            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_SUBTYPES[i]);
+            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_ICONS[i]);
         }
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-
         if (!world.isRemote)
         {
             ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
@@ -67,7 +63,6 @@ public class ItemAlchemicalBag extends ItemEE
     @Override
     public boolean getShareTag()
     {
-
         return true;
     }
 
@@ -75,14 +70,12 @@ public class ItemAlchemicalBag extends ItemEE
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses()
     {
-
         return true;
     }
 
     @Override
     public Icon getIcon(ItemStack itemStack, int renderPass)
     {
-
         // If the bag is open
         if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
         {
@@ -113,7 +106,6 @@ public class ItemAlchemicalBag extends ItemEE
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack itemStack, int renderPass)
     {
-
         if (renderPass == 1)
         {
             return Integer.parseInt(Colours.PURE_WHITE, 16);
@@ -133,27 +125,19 @@ public class ItemAlchemicalBag extends ItemEE
 
     public boolean hasColor(ItemStack itemStack)
     {
-
         return ItemHelper.hasColor(itemStack);
     }
 
     public int getColor(ItemStack itemStack)
     {
-
         return ItemHelper.getColor(itemStack);
     }
 
     public void setColor(ItemStack itemStack, int color)
     {
-
         if (itemStack != null)
         {
-            if (!(itemStack.getItem() instanceof ItemAlchemicalBag))
-            // TODO Localize
-            {
-                throw new UnsupportedOperationException("Cannot dye non-bags!");
-            }
-            else
+            if (itemStack.getItem() instanceof ItemAlchemicalBag)
             {
                 ItemHelper.setColor(itemStack, color);
             }
@@ -162,20 +146,16 @@ public class ItemAlchemicalBag extends ItemEE
 
     public void removeColor(ItemStack itemStack)
     {
-
         if (itemStack != null)
         {
-
             NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
 
             if (nbtTagCompound != null)
             {
-
                 NBTTagCompound displayTagCompound = nbtTagCompound.getCompoundTag(Strings.NBT_ITEM_DISPLAY);
 
                 if (displayTagCompound.hasKey(Strings.NBT_ITEM_COLOR))
                 {
-
                     displayTagCompound.removeTag(Strings.NBT_ITEM_COLOR);
                 }
             }

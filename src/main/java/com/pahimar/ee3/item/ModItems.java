@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
  */
 public class ModItems
 {
-
     // Mod item instances
     public static Item miniumShard;
     public static Item inertStone;
@@ -28,7 +27,6 @@ public class ModItems
 
     public static void init()
     {
-
         // Initialize each mod item individually
         miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
         inertStone = new ItemInertStone(ItemIds.INERT_STONE);

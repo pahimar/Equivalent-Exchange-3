@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class AddonHandler
 {
-
     public static void init()
     {
+        AddonEquivalentExchange3.init();
         AddonIndustrialCraft2.init();
     }
 

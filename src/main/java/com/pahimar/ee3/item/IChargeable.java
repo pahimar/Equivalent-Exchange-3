@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface IChargeable
 {
-
     public abstract short getCharge(ItemStack stack);
 
     public abstract void setCharge(ItemStack stack, short charge);

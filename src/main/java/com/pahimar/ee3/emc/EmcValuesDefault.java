@@ -2,6 +2,7 @@ package com.pahimar.ee3.emc;
 
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
+import com.pahimar.ee3.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -183,6 +184,12 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(Item.netherQuartz), new EmcValue(256));
         
         /* Equivalent Exchange 3 */
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 0)), new EmcValue(0.001f));
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 1)), new EmcValue(256));
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 2)), new EmcValue(2048));
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 3)), new EmcValue(8192));
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 4)), new EmcValue(73728));
+        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 5)), new EmcValue(4718592));
     }
 
     public static Map<WrappedStack, EmcValue> getDefaultValueMap()

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,6 +12,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,15 +24,21 @@ import java.util.List;
  */
 public class ItemAlchemicalDust extends ItemEE
 {
-
-    private static final String[] ALCHEMICAL_DUST_NAMES = new String[]{"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
+    public static final String[] ALCHEMICAL_DUST_NAMES = {"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
+    public static final EmcValue[] DEFAULT_EMC_VALUES = {
+            new EmcValue(0.1f),
+            new EmcValue(256),
+            new EmcValue(2048),
+            new EmcValue(8192),
+            new EmcValue(73728),
+            new EmcValue(4718592)
+    };
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
 
     public ItemAlchemicalDust(int id)
     {
-
         super(id);
         this.setHasSubtypes(true);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
@@ -40,16 +48,7 @@ public class ItemAlchemicalDust extends ItemEE
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-
-        StringBuilder unlocalizedName = new StringBuilder();
-        int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-
-        unlocalizedName.append("item.");
-        unlocalizedName.append(Strings.RESOURCE_PREFIX);
-        unlocalizedName.append(Strings.ALCHEMICAL_DUST_NAME);
-        unlocalizedName.append(ALCHEMICAL_DUST_NAMES[meta]);
-
-        return unlocalizedName.toString();
+        return String.format("item.%s%s%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, ALCHEMICAL_DUST_NAMES[MathHelper.clamp_int(itemStack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1)]);
     }
 
     @Override
@@ -59,56 +58,61 @@ public class ItemAlchemicalDust extends ItemEE
      */
     public Icon getIconFromDamage(int meta)
     {
-
-        int j = MathHelper.clamp_int(meta, 0, 5);
-        return icons[j];
+        return icons[MathHelper.clamp_int(meta, 0, ALCHEMICAL_DUST_NAMES.length - 1)];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-
         icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
 
         for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i)
         {
-            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_DUST_NAME + ALCHEMICAL_DUST_NAMES[i]);
+            icons[i] = iconRegister.registerIcon(String.format("%s%s%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, ALCHEMICAL_DUST_NAMES[i]));
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack)
+    public boolean hasEffect(ItemStack stack, int renderPass)
     {
-
-        int meta = MathHelper.clamp_int(stack.getItemDamage(), 0, 5);
-
-        return meta == 5;
+        return MathHelper.clamp_int(stack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1) == 5;
     }
 
     @Override
     public String getItemDisplayName(ItemStack itemStack)
     {
-
-        int meta = MathHelper.clamp_int(itemStack.getItemDamage(), 0, 5);
-
-        switch (meta)
+        switch (MathHelper.clamp_int(itemStack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1))
         {
             case 0:
+            {
                 return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
+            }
             case 1:
+            {
                 return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
+            }
             case 2:
+            {
                 return EnumChatFormatting.GREEN + super.getItemDisplayName(itemStack);
+            }
             case 3:
+            {
                 return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
+            }
             case 4:
+            {
                 return EnumChatFormatting.DARK_PURPLE + super.getItemDisplayName(itemStack);
+            }
             case 5:
+            {
                 return EnumChatFormatting.GOLD + super.getItemDisplayName(itemStack);
+            }
             default:
+            {
                 return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
+            }
         }
     }
 
@@ -117,10 +121,17 @@ public class ItemAlchemicalDust extends ItemEE
     @SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs creativeTab, List list)
     {
-
-        for (int meta = 0; meta < 6; ++meta)
+        for (int meta = 0; meta < ALCHEMICAL_DUST_NAMES.length; ++meta)
         {
             list.add(new ItemStack(id, 1, meta));
         }
+    }
+
+    @Override
+    public List<ItemStack> getSubTypes()
+    {
+        List<ItemStack> alchemicalDustStacks = new ArrayList<ItemStack>();
+
+        return alchemicalDustStacks;
     }
 }

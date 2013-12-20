@@ -17,10 +17,8 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class ContainerCalcinator extends Container
 {
-
     public ContainerCalcinator(InventoryPlayer inventoryPlayer, TileCalcinator calcinator)
     {
-
         // Add the fuel slot to the container
         this.addSlotToContainer(new Slot(calcinator, TileCalcinator.FUEL_INVENTORY_INDEX, 56, 62));
 
@@ -28,7 +26,8 @@ public class ContainerCalcinator extends Container
         this.addSlotToContainer(new Slot(calcinator, TileCalcinator.INPUT_INVENTORY_INDEX, 56, 17));
 
         // Add the output results slot to the container
-        this.addSlotToContainer(new SlotCalcinator(calcinator, TileCalcinator.OUTPUT_INVENTORY_INDEX, 116, 35));
+        this.addSlotToContainer(new SlotCalcinator(calcinator, TileCalcinator.OUTPUT_LEFT_INVENTORY_INDEX, 116, 35));
+        this.addSlotToContainer(new SlotCalcinator(calcinator, TileCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX, 136, 35));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
@@ -49,14 +48,12 @@ public class ContainerCalcinator extends Container
     @Override
     public boolean canInteractWith(EntityPlayer player)
     {
-
         return true;
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
-
         ItemStack itemStack = null;
         Slot slot = (Slot) inventorySlots.get(slotIndex);
 
@@ -73,7 +70,6 @@ public class ContainerCalcinator extends Container
              */
             if (slotIndex < TileCalcinator.INVENTORY_SIZE)
             {
-
                 if (!this.mergeItemStack(slotItemStack, TileCalcinator.INVENTORY_SIZE, inventorySlots.size(), false))
                 {
                     return null;
@@ -81,7 +77,6 @@ public class ContainerCalcinator extends Container
             }
             else
             {
-
                 /**
                  * If the stack being shift-clicked into the Aludel's container
                  * is a fuel, first try to put it in the fuel slot. If it cannot
@@ -90,7 +85,7 @@ public class ContainerCalcinator extends Container
                  */
                 if (TileEntityFurnace.isItemFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileCalcinator.FUEL_INVENTORY_INDEX, TileCalcinator.OUTPUT_INVENTORY_INDEX, false))
+                    if (!this.mergeItemStack(slotItemStack, TileCalcinator.FUEL_INVENTORY_INDEX, TileCalcinator.OUTPUT_LEFT_INVENTORY_INDEX, false))
                     {
                         return null;
                     }
@@ -99,7 +94,7 @@ public class ContainerCalcinator extends Container
                 /**
                  * Finally, attempt to put stack into the input slot
                  */
-                else if (!this.mergeItemStack(slotItemStack, TileCalcinator.INPUT_INVENTORY_INDEX, TileCalcinator.OUTPUT_INVENTORY_INDEX, false))
+                else if (!this.mergeItemStack(slotItemStack, TileCalcinator.INPUT_INVENTORY_INDEX, TileCalcinator.OUTPUT_LEFT_INVENTORY_INDEX, false))
                 {
                     return null;
                 }

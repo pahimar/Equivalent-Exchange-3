@@ -3,10 +3,13 @@ package com.pahimar.ee3.addon;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcValue;
+import com.pahimar.ee3.helper.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Equivalent-Exchange-3
@@ -17,6 +20,18 @@ import net.minecraftforge.fluids.FluidRegistry;
  */
 public class AddonIndustrialCraft2
 {
+    /**
+     * EmcValues for various IC2 things
+     */
+    private static final EmcValue COPPER_EMC_VALUE = new EmcValue(72);
+    private static final EmcValue TIN_EMC_VALUE = new EmcValue(256);
+    private static final EmcValue LEAD_EMC_VALUE = new EmcValue(512);
+    private static final EmcValue SILVER_EMC_VALUE = new EmcValue(1024);
+    private static final EmcValue URANIUM_EMC_VALUE = new EmcValue(4096);
+    private static final EmcValue SULFUR_EMC_VALUE = new EmcValue(512);
+    private static final EmcValue LITHIUM_EMC_VALUE = new EmcValue(512);
+    private static final EmcValue SILICON_DIOXIDE_EMC_VALUE = new EmcValue(256);
+    private static final EmcValue RUBBER_WOOD_EMC_VALUE = new EmcValue(24);
 
     public static void init()
     {
@@ -25,7 +40,7 @@ public class AddonIndustrialCraft2
         addPostAssignmentEmcValues();
     }
 
-    public static void addRecipes()
+    private static void addRecipes()
     {
         /**
          * Bronze
@@ -167,7 +182,7 @@ public class AddonIndustrialCraft2
         AddonHandler.sendAddRecipe(new OreStack("itemRubber"), new OreStack("woodRubber"));
     }
 
-    public static void addPreAssignmentEmcValues()
+    private static void addPreAssignmentEmcValues()
     {
         AddonHandler.sendPreValueAssignment(new OreStack("oreCopper"), COPPER_EMC_VALUE);
         AddonHandler.sendPreValueAssignment(new OreStack("oreTin"), TIN_EMC_VALUE);
@@ -180,26 +195,35 @@ public class AddonIndustrialCraft2
         AddonHandler.sendPreValueAssignment(new OreStack("woodRubber"), RUBBER_WOOD_EMC_VALUE);
     }
 
-    public static void addPostAssignmentEmcValues()
+    private static void addPostAssignmentEmcValues()
     {
 
     }
 
-    /**
-     * TODO Helper method to grab items from IC2's API
-     *
-     */
+    public static Item grabIC2ItemByName(String name)
+    {
+        try
+        {
+            Object object = Class.forName("ic2.api.item.Items").getDeclaredMethod("getItem", String.class).invoke(null, name);
+            LogHelper.debug(object);
+        }
+        catch (NoSuchMethodException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
 
-    /**
-     * EmcValues for various IC2 things
-     */
-    private static final EmcValue COPPER_EMC_VALUE = new EmcValue(72);
-    private static final EmcValue TIN_EMC_VALUE = new EmcValue(256);
-    private static final EmcValue LEAD_EMC_VALUE = new EmcValue(512);
-    private static final EmcValue SILVER_EMC_VALUE = new EmcValue(1024);
-    private static final EmcValue URANIUM_EMC_VALUE = new EmcValue(4096);
-    private static final EmcValue SULFUR_EMC_VALUE = new EmcValue(512);
-    private static final EmcValue LITHIUM_EMC_VALUE = new EmcValue(512);
-    private static final EmcValue SILICON_DIOXIDE_EMC_VALUE = new EmcValue(256);
-    private static final EmcValue RUBBER_WOOD_EMC_VALUE = new EmcValue(24);
+        return null;
+    }
 }

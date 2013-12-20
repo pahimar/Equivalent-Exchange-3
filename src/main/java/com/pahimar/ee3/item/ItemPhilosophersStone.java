@@ -24,15 +24,12 @@ import net.minecraft.world.World;
  *
  * @author pahimar
  */
-public class ItemPhilosophersStone extends ItemEE
-        implements ITransmutationStone, IChargeable, IKeyBound
+public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone, IChargeable, IKeyBound
 {
-
     private int maxChargeLevel;
 
     public ItemPhilosophersStone(int id)
     {
-
         super(id);
         this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.PHILOSOPHERS_STONE_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
@@ -42,42 +39,37 @@ public class ItemPhilosophersStone extends ItemEE
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack itemStack)
+    public boolean hasEffect(ItemStack itemStack, int renderPass)
     {
-
         return ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
     }
 
     @Override
     public String getItemDisplayName(ItemStack itemStack)
     {
-
         return EnumChatFormatting.YELLOW + super.getItemDisplayName(itemStack);
     }
 
     @Override
     public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemStack)
     {
-
         return false;
     }
 
     @Override
     public boolean getShareTag()
     {
-
         return true;
     }
 
     @Override
     public ItemStack getContainerItemStack(ItemStack itemStack)
     {
-
         ItemStack copiedStack = itemStack.copy();
 
         copiedStack.setItemDamage(copiedStack.getItemDamage() + 1);
 
-        // Hacky hacky hack hack
+        // TODO Is this still necessary?
         copiedStack.stackSize = 1;
 
         return copiedStack;
@@ -86,7 +78,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int sideHit, float hitVecX, float hitVecY, float hitVecZ)
     {
-
         if (world.isRemote)
         {
             transmuteBlock(itemStack, entityPlayer, world, x, y, z, sideHit);
@@ -97,7 +88,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void openPortableCraftingGUI(EntityPlayer thePlayer, ItemStack itemStack)
     {
-
         ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_CRAFTING, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
@@ -105,7 +95,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack)
     {
-
         ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
         thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
     }
@@ -113,21 +102,18 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit)
     {
-
         EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
     }
 
     @Override
     public short getCharge(ItemStack stack)
     {
-
         return ItemStackNBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY);
     }
 
     @Override
     public void setCharge(ItemStack stack, short charge)
     {
-
         if (charge <= maxChargeLevel)
         {
             ItemStackNBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, charge);
@@ -137,7 +123,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void increaseCharge(ItemStack stack)
     {
-
         if (ItemStackNBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) < maxChargeLevel)
         {
             ItemStackNBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (ItemStackNBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) + 1));
@@ -147,7 +132,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void decreaseCharge(ItemStack stack)
     {
-
         if (ItemStackNBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) > 0)
         {
             ItemStackNBTHelper.setShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY, (short) (ItemStackNBTHelper.getShort(stack, Strings.NBT_ITEM_CHARGE_LEVEL_KEY) - 1));
@@ -157,7 +141,6 @@ public class ItemPhilosophersStone extends ItemEE
     @Override
     public void doKeyBindingAction(EntityPlayer thePlayer, ItemStack itemStack, String keyBinding)
     {
-
         if (keyBinding.equals(ConfigurationSettings.KEYBINDING_EXTRA))
         {
             if (!thePlayer.isSneaking())
