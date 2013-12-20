@@ -226,4 +226,8 @@ public class AddonIndustrialCraft2
 
         return null;
     }
+
+    /***
+     * TODO Investigate ways to scope out IC2 recipes and auto-add them
+     */
 }

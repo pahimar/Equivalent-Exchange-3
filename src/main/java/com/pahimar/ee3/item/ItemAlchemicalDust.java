@@ -132,6 +132,11 @@ public class ItemAlchemicalDust extends ItemEE
     {
         List<ItemStack> alchemicalDustStacks = new ArrayList<ItemStack>();
 
+        for (int meta = 0; meta < ALCHEMICAL_DUST_NAMES.length; meta++)
+        {
+            alchemicalDustStacks.add(new ItemStack(ModItems.alchemicalDust, 1, meta));
+        }
+
         return alchemicalDustStacks;
     }
 }

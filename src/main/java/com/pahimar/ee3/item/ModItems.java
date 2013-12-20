@@ -17,13 +17,13 @@ import net.minecraft.item.ItemStack;
 public class ModItems
 {
     // Mod item instances
-    public static Item miniumShard;
-    public static Item inertStone;
-    public static Item miniumStone;
-    public static Item philStone;
-    public static Item alchemicalDust;
-    public static Item alchemicalBag;
-    public static Item alchemicalChalk;
+    public static ItemEE miniumShard;
+    public static ItemEE inertStone;
+    public static ItemEE miniumStone;
+    public static ItemEE philStone;
+    public static ItemEE alchemicalDust;
+    public static ItemEE alchemicalBag;
+    public static ItemEE alchemicalChalk;
 
     public static void init()
     {

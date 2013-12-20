@@ -1,6 +1,7 @@
 package com.pahimar.ee3.emc;
 
 import com.google.gson.*;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
 
 import java.lang.reflect.Type;
@@ -17,7 +18,6 @@ import java.util.List;
  */
 public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue>, JsonSerializer<EmcValue>
 {
-
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue()).create();
 
@@ -25,44 +25,37 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
     public EmcValue()
     {
-
         this(new float[EmcType.TYPES.length]);
     }
 
     public EmcValue(int value)
     {
-
         this((float) value);
     }
 
     public EmcValue(float value)
     {
-
         this(value, EmcType.DEFAULT);
     }
 
     public EmcValue(float value, EmcComponent component)
     {
-
         this(value, component.type);
     }
 
     public EmcValue(int value, EmcType emcType)
     {
-
         this((float) value, emcType);
     }
 
     public EmcValue(float value, EmcType emcType)
     {
-
         this.components = new float[EmcType.TYPES.length];
         this.components[emcType.ordinal()] = value;
     }
 
     public EmcValue(float[] components)
     {
-
         this.components = components;
     }
 
@@ -193,7 +186,11 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
         }
         catch (JsonSyntaxException exception)
         {
-            // TODO Log something regarding the failed parse
+            LogHelper.severe(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.severe(exception.getMessage());
         }
 
         return null;
@@ -206,13 +203,11 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
      */
     public String toJson()
     {
-
         return gsonSerializer.toJson(this);
     }
 
     private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents)
     {
-
         Integer[] componentCount = new Integer[EmcType.TYPES.length];
 
         for (EmcComponent emcComponent : uncollatedComponents)
@@ -245,7 +240,6 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
     private static int compareComponents(float[] first, float[] second)
     {
-
         if (first.length == EmcType.TYPES.length && second.length == EmcType.TYPES.length)
         {
 
@@ -268,7 +262,6 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     @Override
     public JsonElement serialize(EmcValue emcValue, Type type, JsonSerializationContext context)
     {
-
         JsonObject jsonEmcValue = new JsonObject();
 
         for (EmcType emcType : EmcType.TYPES)

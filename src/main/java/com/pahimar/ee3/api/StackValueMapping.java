@@ -93,7 +93,7 @@ public class StackValueMapping implements JsonSerializer<StackValueMapping>, Jso
                 emcValue = new EmcValue().deserialize(jsonStackValueMapping.get("emcValue").getAsJsonObject(), type, context);
             }
 
-            if (wrappedStack instanceof WrappedStack && emcValue instanceof EmcValue)
+            if (wrappedStack != null && emcValue != null)
             {
                 return new StackValueMapping(wrappedStack, emcValue);
             }
