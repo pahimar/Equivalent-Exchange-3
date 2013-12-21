@@ -3,6 +3,7 @@ package com.pahimar.ee3.recipe;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.lib.Compare;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -34,66 +35,20 @@ public class CalcinationManager
         List<ItemStack> calcinationResults = new ArrayList<ItemStack>();
         EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(itemStack);
 
+        EmcValue ashEmcValue = EmcRegistry.getInstance().getEmcValue(ASH_DUST_STACK);
+        EmcValue miniumEmcValue = EmcRegistry.getInstance().getEmcValue(MINIUM_DUST_STACK);
+        EmcValue verdantEmcValue = EmcRegistry.getInstance().getEmcValue(VERDANT_DUST_STACK);
+        EmcValue azureEmcValue = EmcRegistry.getInstance().getEmcValue(AZURE_DUST_STACK);
+        EmcValue amarathineEmcValue = EmcRegistry.getInstance().getEmcValue(AMARANTHINE_DUST_STACK);
+        EmcValue iridescentEmcValue = EmcRegistry.getInstance().getEmcValue(IRIDESCENT_DUST_STACK);
+
         if (emcValue != null)
         {
-//            // ASH
-//            if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(ASH_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(ASH_DUST_STACK).getValue()) == Compare.EQUALS)
-//            {
-//
-//            }
-//            // MINIUM
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(MINIUM_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(MINIUM_DUST_STACK).getValue()) == Compare.EQUALS)
-//            {
-//
-//            }
-//            // VERDANT
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(VERDANT_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(VERDANT_DUST_STACK).getValue()) == Compare.EQUALS)
-//            {
-//
-//            }
-//            // AZURE
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(AZURE_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(AZURE_DUST_STACK).getValue()) == Compare.EQUALS)
-//            {
-//
-//            }
-//            // AMARATHINE
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(AMARANTHINE_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(AMARANTHINE_DUST_STACK).getValue()) == Compare.EQUALS)
-//            {
-//
-//            }
-//            // IRIDESCENT
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(IRIDESCENT_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(IRIDESCENT_DUST_STACK).getValue()) == Compare.LESSER_THAN)
-//            {
-//
-//            }
-//            else if (Float.compare(emcValue.getValue(), EmcRegistry.getEmcValue(IRIDESCENT_DUST_STACK).getValue()) == Compare.GREATER_THAN)
-//            {
-//
-//            }
+            if (Float.compare(emcValue.getValue(), ashEmcValue.getValue()) <= Compare.EQUALS)
+            {
+
+            }
+            else if
         }
         else
         {

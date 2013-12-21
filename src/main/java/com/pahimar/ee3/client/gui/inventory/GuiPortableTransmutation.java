@@ -23,15 +23,12 @@ public class GuiPortableTransmutation extends GuiContainer
 
     public GuiPortableTransmutation(Container par1Container)
     {
-
         super(par1Container);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Textures.GUI_PORTABLE_TRANSMUTATION);
         int var5 = (width - xSize) / 2;
@@ -42,7 +39,6 @@ public class GuiPortableTransmutation extends GuiContainer
     @Override
     public void onGuiClosed()
     {
-
         super.onGuiClosed();
 
         if (mc.thePlayer != null)
