@@ -60,7 +60,7 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
 
         // Fluids
-        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(FluidRegistry.getFluid("milk")), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 3), new EmcComponent(EmcType.AMORPHOUS, 1))));
 

@@ -5,6 +5,7 @@ import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +22,7 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 {
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue()).create();
-    private static final int PRECISION = 100;
+    private static final int PRECISION = 4;
 
     public final float[] components;
 
@@ -59,11 +60,12 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     {
         if (components.length == EmcType.TYPES.length)
         {
-            this.components = new float[EmcType.TYPES.length];
-            for (int i = 0; i < components.length; i++)
+//            this.components = components;
+            this.components = new float[components.length];
+            for (int i = 0; i < this.components.length; i++)
             {
-                //this.components[i] = (float) Math.round(components[i]) * PRECISION / PRECISION;
-                this.components[i] = components[i];
+                BigDecimal bigComponent = BigDecimal.valueOf(components[i]).setScale(PRECISION, BigDecimal.ROUND_HALF_DOWN);
+                this.components[i] = bigComponent.floatValue();
             }
         }
         else
@@ -108,10 +110,11 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
             this.components[EmcType.DEFAULT.ordinal()] = value;
         }
 
-//        for (int i = 0; i < this.components.length; i++)
-//        {
-//            this.components[i] = (float) Math.round(this.components[i]) * PRECISION / PRECISION;
-//        }
+        for (int i = 0; i < this.components.length; i++)
+        {
+            BigDecimal bigComponent = BigDecimal.valueOf(this.components[i]).setScale(PRECISION, BigDecimal.ROUND_HALF_DOWN);
+            this.components[i] = bigComponent.floatValue();
+        }
     }
 
     public float getValue()

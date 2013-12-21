@@ -3,6 +3,7 @@ package com.pahimar.ee3.helper;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
@@ -94,9 +95,19 @@ public class DebugHelper
 
     public static void printStackToEmcValueMappings()
     {
+        LogHelper.debug(String.format("There are %s entries in the Stack to EmcValue map", EmcRegistry.getInstance().getStackToEmcValueMap().keySet().size()));
         for (WrappedStack wrappedStack : EmcRegistry.getInstance().getStackToEmcValueMap().keySet())
         {
             LogHelper.debug(String.format("EmcValue for stack '%s': %s", wrappedStack, EmcRegistry.getInstance().getStackToEmcValueMap().get(wrappedStack)));
+        }
+    }
+
+    public static void printEmcValueToStackMappings()
+    {
+        LogHelper.debug(String.format("There are %s entries in the EmcValue to Stack map", EmcRegistry.getInstance().getEmcValueToStackMap().keySet().size()));
+        for (EmcValue emcValue : EmcRegistry.getInstance().getEmcValueToStackMap().keySet())
+        {
+            LogHelper.debug(String.format("Stacks(s) for EmcValue '%s': %s", emcValue, EmcRegistry.getInstance().getEmcValueToStackMap().get(emcValue)));
         }
     }
 }

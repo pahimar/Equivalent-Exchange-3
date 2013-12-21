@@ -26,7 +26,7 @@ public class ItemAlchemicalDust extends ItemEE
 {
     public static final String[] ALCHEMICAL_DUST_NAMES = {"Ash", "Minium", "Verdant", "Azure", "Amaranthine", "Iridescent"};
     public static final EmcValue[] DEFAULT_EMC_VALUES = {
-            new EmcValue(0.1f),
+            new EmcValue(1),
             new EmcValue(256),
             new EmcValue(2048),
             new EmcValue(8192),
