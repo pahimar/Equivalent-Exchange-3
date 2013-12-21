@@ -10,8 +10,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
 
-import static com.pahimar.ee3.item.crafting.RecipeRegistry.getInstance;
-
 public class EmcRegistry
 {
     private static EmcRegistry emcRegistry = null;
@@ -19,20 +17,23 @@ public class EmcRegistry
     private ImmutableSortedMap<WrappedStack, EmcValue> stackMappings;
     private ImmutableSortedMap<EmcValue, List<WrappedStack>> valueMappings;
 
-    // TODO Change this into a proper registry
-    public static void lazyInit()
+    private EmcRegistry()
     {
+    }
 
+    public static EmcRegistry getInstance()
+    {
         if (emcRegistry == null)
         {
             emcRegistry = new EmcRegistry();
             emcRegistry.init();
         }
+
+        return emcRegistry;
     }
 
     private void init()
     {
-
         HashMap<WrappedStack, EmcValue> stackValueMap = new HashMap<WrappedStack, EmcValue>();
         
         /*
@@ -153,13 +154,13 @@ public class EmcRegistry
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
 
-    private static Map<WrappedStack, EmcValue> computeStackMappings()
+    private Map<WrappedStack, EmcValue> computeStackMappings()
     {
         Map<WrappedStack, EmcValue> computedStackMap = new HashMap<WrappedStack, EmcValue>();
 
-        for (WrappedStack recipeOutput : getInstance().getRecipeMappings().keySet())
+        for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet())
         {
-            if (!hasEmcValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput.getWrappedStack()))
+            if (!hasEmcValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput))
             {
                 EmcValue lowestValue = null;
 
@@ -187,10 +188,8 @@ public class EmcRegistry
         return computedStackMap;
     }
 
-    public static boolean hasEmcValue(Object object, boolean strict)
+    public boolean hasEmcValue(Object object, boolean strict)
     {
-        lazyInit();
-
         if (WrappedStack.canBeWrapped(object))
         {
             WrappedStack stack = new WrappedStack(object);
@@ -253,15 +252,13 @@ public class EmcRegistry
         return false;
     }
 
-    public static boolean hasEmcValue(Object object)
+    public boolean hasEmcValue(Object object)
     {
         return hasEmcValue(object, false);
     }
 
-    public static EmcValue getEmcValue(Object object, boolean strict)
+    public EmcValue getEmcValue(Object object, boolean strict)
     {
-        lazyInit();
-
         if (hasEmcValue(object, strict))
         {
             WrappedStack stack = new WrappedStack(object);
@@ -339,25 +336,24 @@ public class EmcRegistry
         return null;
     }
 
-    public static EmcValue getEmcValue(Object object)
+    public EmcValue getEmcValue(Object object)
     {
         return getEmcValue(object, false);
     }
 
-    public static List<WrappedStack> getStacksInRange(int start, int finish)
+    @SuppressWarnings("unused")
+    public List<WrappedStack> getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EmcValue(start), new EmcValue(finish));
     }
 
-    public static List<WrappedStack> getStacksInRange(float start, float finish)
+    public List<WrappedStack> getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EmcValue(start), new EmcValue(finish));
     }
 
-    public static List<WrappedStack> getStacksInRange(EmcValue start, EmcValue finish)
+    public List<WrappedStack> getStacksInRange(EmcValue start, EmcValue finish)
     {
-        lazyInit();
-
         List<WrappedStack> stacksInRange = new ArrayList<WrappedStack>();
 
         SortedMap<EmcValue, List<WrappedStack>> tailMap = emcRegistry.valueMappings.tailMap(start);
@@ -390,5 +386,15 @@ public class EmcRegistry
         }
 
         return stacksInRange;
+    }
+
+    public ImmutableSortedMap<WrappedStack, EmcValue> getStackToEmcValueMap()
+    {
+        return stackMappings;
+    }
+
+    public ImmutableSortedMap<EmcValue, List<WrappedStack>> getEmcValueToStackMap()
+    {
+        return valueMappings;
     }
 }

@@ -24,24 +24,20 @@ import java.util.EnumSet;
  */
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
-
     public KeyBindingHandler()
     {
-
         super(KeyBindingHelper.gatherKeyBindings(), KeyBindingHelper.gatherIsRepeating());
     }
 
     @Override
     public String getLabel()
     {
-
         return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
     @Override
     public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat)
     {
-
         // Only operate at the end of the tick
         if (tickEnd)
         {
@@ -81,7 +77,6 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
     @Override
     public EnumSet<TickType> ticks()
     {
-
         return EnumSet.of(TickType.CLIENT);
     }
 }

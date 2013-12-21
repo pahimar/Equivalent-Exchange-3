@@ -6,10 +6,9 @@ import net.minecraftforge.event.world.WorldEvent;
 
 public class WorldEventHandler
 {
-
     @ForgeSubscribe
     public void onWorldLoaded(WorldEvent.Load event)
     {
-        EmcRegistry.lazyInit();
+        EmcRegistry.getInstance();
     }
 }

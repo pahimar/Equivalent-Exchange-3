@@ -159,7 +159,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                         EquivalentExchange3.instance,
                         imcMessage.getSender(),
                         InterModCommsOperations.EMC_RETURN_HAS_VALUE,
-                        String.format("%s==%s", imcMessage.getStringValue(), String.valueOf(EmcRegistry.hasEmcValue(wrappedStack))));
+                        String.format("%s==%s", imcMessage.getStringValue(), String.valueOf(EmcRegistry.getInstance().hasEmcValue(wrappedStack))));
             }
             else
             {
@@ -177,7 +177,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                         EquivalentExchange3.instance,
                         imcMessage.getSender(),
                         InterModCommsOperations.EMC_RETURN_HAS_VALUE,
-                        String.format("%s==%s", gson.toJson(itemStack), String.valueOf(EmcRegistry.hasEmcValue(itemStack))));
+                        String.format("%s==%s", gson.toJson(itemStack), String.valueOf(EmcRegistry.getInstance().hasEmcValue(itemStack))));
             }
             else
             {
@@ -204,7 +204,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                         EquivalentExchange3.instance,
                         imcMessage.getSender(),
                         InterModCommsOperations.EMC_RETURN_GET_VALUE,
-                        String.format("%s==%s", imcMessage.getStringValue(), EmcRegistry.getEmcValue(wrappedStack).toJson()));
+                        String.format("%s==%s", imcMessage.getStringValue(), EmcRegistry.getInstance().getEmcValue(wrappedStack).toJson()));
             }
             else
             {
@@ -223,7 +223,7 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
                     EquivalentExchange3.instance,
                     imcMessage.getSender(),
                     InterModCommsOperations.EMC_RETURN_GET_VALUE,
-                    String.format("%s==%s", gson.toJson(itemStack), EmcRegistry.getEmcValue(itemStack).toJson()));
+                    String.format("%s==%s", gson.toJson(itemStack), EmcRegistry.getInstance().getEmcValue(itemStack).toJson()));
         }
         else
         {

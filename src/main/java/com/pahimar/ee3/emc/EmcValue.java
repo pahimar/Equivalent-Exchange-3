@@ -6,6 +6,7 @@ import com.pahimar.ee3.lib.Compare;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 {
     // Gson serializer for serializing to/deserializing from json
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EmcValue.class, new EmcValue()).create();
+    private static final int PRECISION = 100;
 
     public final float[] components;
 
@@ -50,24 +52,33 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
     public EmcValue(float value, EmcType emcType)
     {
-        this.components = new float[EmcType.TYPES.length];
-        this.components[emcType.ordinal()] = value;
+        this(value, Arrays.asList(new EmcComponent(emcType)));
     }
 
     public EmcValue(float[] components)
     {
-        this.components = components;
+        if (components.length == EmcType.TYPES.length)
+        {
+            this.components = new float[EmcType.TYPES.length];
+            for (int i = 0; i < components.length; i++)
+            {
+                //this.components[i] = (float) Math.round(components[i]) * PRECISION / PRECISION;
+                this.components[i] = components[i];
+            }
+        }
+        else
+        {
+            this.components = null;
+        }
     }
 
     public EmcValue(int value, List<EmcComponent> componentList)
     {
-
         this((float) value, componentList);
     }
 
     public EmcValue(float value, List<EmcComponent> componentList)
     {
-
         this.components = new float[EmcType.TYPES.length];
 
         List<EmcComponent> collatedComponents = collateComponents(componentList);
@@ -96,11 +107,15 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
         {
             this.components[EmcType.DEFAULT.ordinal()] = value;
         }
+
+//        for (int i = 0; i < this.components.length; i++)
+//        {
+//            this.components[i] = (float) Math.round(this.components[i]) * PRECISION / PRECISION;
+//        }
     }
 
     public float getValue()
     {
-
         float sumSubValues = 0;
 
         for (float subValue : this.components)
@@ -144,7 +159,6 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     @Override
     public int hashCode()
     {
-
         int hashCode = 1;
 
         hashCode = 37 * hashCode + Float.floatToIntBits(getValue());

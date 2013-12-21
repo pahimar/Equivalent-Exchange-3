@@ -2,6 +2,7 @@ package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
+import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
@@ -17,10 +18,7 @@ import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.KeyBindingHelper;
 import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
-import com.pahimar.ee3.lib.ActionTypes;
-import com.pahimar.ee3.lib.BlockIds;
-import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.RenderIds;
+import com.pahimar.ee3.lib.*;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.*;
@@ -29,8 +27,10 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -46,34 +46,30 @@ import net.minecraftforge.common.MinecraftForge;
  *
  * @author pahimar
  */
-public class ClientProxy extends CommonProxy
+@SideOnly(Side.CLIENT)
+public class ClientProxy implements IProxy
 {
-
     @Override
     public void registerKeyBindingHandler()
     {
-
         KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
     }
 
     @Override
     public void registerRenderTickHandler()
     {
-
         TickRegistry.registerTickHandler(new TransmutationTargetOverlayHandler(), Side.CLIENT);
     }
 
     @Override
     public void registerDrawBlockHighlightHandler()
     {
-
         MinecraftForge.EVENT_BUS.register(new DrawBlockHighlightHandler());
     }
 
     @Override
     public void setKeyBinding(String name, int value)
     {
-
         KeyBindingHelper.addKeyBinding(name, value);
         KeyBindingHelper.addIsRepeating(false);
     }
@@ -81,14 +77,12 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerSoundHandler()
     {
-
         MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
     @Override
     public void initRenderingAndTextures()
     {
-
         RenderIds.calcinatorRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludelRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRender = RenderingRegistry.getNextAvailableRenderId();
@@ -98,13 +92,6 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
-    }
-
-    @Override
-    public void registerTileEntities()
-    {
-
-        super.registerTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
@@ -113,16 +100,29 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
+    public void registerTileEntities()
+    {
+        GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
+        GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
+        GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
+        GameRegistry.registerTileEntity(TileGlassBell.class, Strings.TE_GLASS_BELL_NAME);
+    }
+
+    @Override
+    public void registerItemTooltipHandler()
+    {
+        MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
+    }
+
+    @Override
     public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data)
     {
-
         PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
     }
 
     @Override
     public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName)
     {
-
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null)
@@ -139,7 +139,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color)
     {
-
         World world = FMLClientHandler.instance().getClient().theWorld;
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
@@ -177,7 +176,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit)
     {
-
         if (TransmutationHelper.targetBlockStack != null)
         {
             if (itemStack != null)

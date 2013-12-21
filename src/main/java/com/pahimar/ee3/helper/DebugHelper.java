@@ -37,7 +37,7 @@ public class DebugHelper
 
         for (String oreName : oreNames)
         {
-            if (!EmcRegistry.hasEmcValue(new OreStack(oreName)))
+            if (!EmcRegistry.getInstance().hasEmcValue(new OreStack(oreName)))
             {
                 LogHelper.debug(String.format("OreStack '%s' requires an EmcValue", oreName));
             }
@@ -67,7 +67,7 @@ public class DebugHelper
     {
         for (WrappedStack wrappedStack : RecipeRegistry.getInstance().getDiscoveredStacks())
         {
-            if (!EmcRegistry.hasEmcValue(wrappedStack))
+            if (!EmcRegistry.getInstance().hasEmcValue(wrappedStack))
             {
                 if (wrappedStack.getWrappedStack() instanceof ItemStack)
                 {
@@ -89,6 +89,14 @@ public class DebugHelper
                     }
                 }
             }
+        }
+    }
+
+    public static void printStackToEmcValueMappings()
+    {
+        for (WrappedStack wrappedStack : EmcRegistry.getInstance().getStackToEmcValueMap().keySet())
+        {
+            LogHelper.debug(String.format("EmcValue for stack '%s': %s", wrappedStack, EmcRegistry.getInstance().getStackToEmcValueMap().get(wrappedStack)));
         }
     }
 }

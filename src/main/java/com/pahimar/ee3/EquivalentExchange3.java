@@ -15,7 +15,7 @@ import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
-import com.pahimar.ee3.proxy.CommonProxy;
+import com.pahimar.ee3.proxy.IProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -48,7 +48,7 @@ public class EquivalentExchange3
     public static EquivalentExchange3 instance;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-    public static CommonProxy proxy;
+    public static IProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
@@ -116,7 +116,7 @@ public class EquivalentExchange3
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
-        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+        NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
 
         // Register the PlayerDestroyItem Handler
         MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
@@ -131,9 +131,11 @@ public class EquivalentExchange3
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
 
-        MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
-
+        // Register the hook to initialize the EmcRegistry
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+
+        // Register the ItemTooltipEvent Handler
+        proxy.registerItemTooltipHandler();
 
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();

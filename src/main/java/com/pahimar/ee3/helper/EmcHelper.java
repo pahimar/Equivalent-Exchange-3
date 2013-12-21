@@ -19,9 +19,9 @@ public class EmcHelper
 
         for (WrappedStack stack : unfilteredStacks)
         {
-            if (EmcRegistry.hasEmcValue(stack))
+            if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
-                EmcValue value = EmcRegistry.getEmcValue(stack);
+                EmcValue value = EmcRegistry.getInstance().getEmcValue(stack);
                 boolean satisfiesFilter = true;
                 float[] valueSubValues = value.components;
                 float[] filterValueSubValues = filterValue.components;
@@ -47,7 +47,7 @@ public class EmcHelper
     @SuppressWarnings("unused")
     public static List<WrappedStack> filterStacksByEmcAndRange(float start, float end, EmcValue filterValue)
     {
-        return filterStacksByEmc(EmcRegistry.getStacksInRange(start, end), filterValue);
+        return filterStacksByEmc(EmcRegistry.getInstance().getStacksInRange(start, end), filterValue);
     }
 
     public static EmcValue computeEmcValueFromList(List<WrappedStack> wrappedStacks)
@@ -68,11 +68,11 @@ public class EmcHelper
                     if (itemStack.getItem().getContainerItemStack(itemStack) != null)
                     {
                         stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
-                        wrappedStackValue = EmcRegistry.getEmcValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
+                        wrappedStackValue = EmcRegistry.getInstance().getEmcValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
                     }
                     else
                     {
-                        wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                        wrappedStackValue = EmcRegistry.getInstance().getEmcValue(wrappedStack);
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
@@ -82,12 +82,12 @@ public class EmcHelper
                 }
                 else
                 {
-                    wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                    wrappedStackValue = EmcRegistry.getInstance().getEmcValue(wrappedStack);
                 }
             }
             else
             {
-                wrappedStackValue = EmcRegistry.getEmcValue(wrappedStack);
+                wrappedStackValue = EmcRegistry.getInstance().getEmcValue(wrappedStack);
             }
 
             if (wrappedStackValue != null)
