@@ -259,13 +259,13 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
 
             for (EmcType emcType : EmcType.TYPES)
             {
-                if (Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]) != 0)
+                if (Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]) != Compare.EQUALS)
                 {
                     return Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]);
                 }
             }
 
-            return 0;
+            return Compare.EQUALS;
         }
         else
         {
