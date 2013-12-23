@@ -24,6 +24,7 @@ public class CalcinationManager
     public static List<ItemStack> getCalcinationResult(ItemStack calcinedStack)
     {
         ItemStack itemStack = calcinedStack.copy();
+        itemStack.stackSize = 1;
         List<ItemStack> calcinationResults = new ArrayList<ItemStack>();
         TreeMap<EmcValue, ItemStack> sortedItems = new TreeMap<EmcValue, ItemStack>();
 
@@ -45,15 +46,13 @@ public class CalcinationManager
             {
                 sortedItems.put(EmcRegistry.getInstance().getEmcValue(itemStack), itemStack);
 
-                TreeMap<EmcValue, ItemStack> lessThanMap = new TreeMap<EmcValue, ItemStack>(sortedItems.headMap(EmcRegistry.getInstance().getEmcValue(itemStack)));
-
-                if (lessThanMap.size() == 0)
+                if (sortedItems.lowerEntry(EmcRegistry.getInstance().getEmcValue(itemStack)) == null)
                 {
                     calcinationResults.add(new ItemStack(ModItems.alchemicalDust, 1, 0));
                 }
                 else
                 {
-                    calcinationResults.add(lessThanMap.lastEntry().getValue());
+                    calcinationResults.add(sortedItems.lowerEntry(EmcRegistry.getInstance().getEmcValue(itemStack)).getValue());
                 }
             }
         }
