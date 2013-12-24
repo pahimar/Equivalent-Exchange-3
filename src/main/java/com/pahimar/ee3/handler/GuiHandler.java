@@ -38,7 +38,7 @@ public class GuiHandler implements IGuiHandler
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete
         {
-            return new ContainerAlchemicalBag(player.inventory);
+            return new ContainerAlchemicalBag(player.inventory, new InventoryAlchemicalBag(player.inventory.getCurrentItem(), player.inventory.currentItem));
         }
         else if (ID == GuiIds.ALUDEL)
         {
@@ -79,7 +79,7 @@ public class GuiHandler implements IGuiHandler
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete
         {
-            return new GuiAlchemicalBag(player.inventory);
+            return new GuiAlchemicalBag(player.inventory, player.inventory.getCurrentItem(), player.inventory.currentItem);
         }
         else if (ID == GuiIds.ALUDEL)
         {

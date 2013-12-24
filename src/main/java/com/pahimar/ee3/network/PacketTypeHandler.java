@@ -23,7 +23,8 @@ public enum PacketTypeHandler
     SPAWN_PARTICLE(PacketSpawnParticle.class),
     SOUND_EVENT(PacketSoundEvent.class),
     ITEM_UPDATE(PacketItemUpdate.class),
-    TILE_WITH_ITEM(PacketTileWithItemUpdate.class);
+    TILE_WITH_ITEM(PacketTileWithItemUpdate.class),
+    BAG_UPDATE(PacketBagUpdate.class);
 
     private Class<? extends PacketEE> clazz;
 

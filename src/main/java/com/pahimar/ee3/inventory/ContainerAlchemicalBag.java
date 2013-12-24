@@ -23,9 +23,21 @@ public class ContainerAlchemicalBag extends Container
 
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
+    
+    public InventoryAlchemicalBag inv;
 
-    public ContainerAlchemicalBag(InventoryPlayer inventoryPlayer)
+    public ContainerAlchemicalBag(InventoryPlayer inventoryPlayer, InventoryAlchemicalBag inventoryAlchemicalBag)
     {
+        this.inv = inventoryAlchemicalBag;
+        
+        // Add the Alchemical Bag slots to the container
+        for (int chestRowIndex = 0; chestRowIndex < BAG_INVENTORY_ROWS; ++chestRowIndex)
+        {
+            for (int chestColumnIndex = 0; chestColumnIndex < BAG_INVENTORY_COLUMNS; ++chestColumnIndex)
+            {
+                this.addSlotToContainer(new Slot(inventoryAlchemicalBag, chestColumnIndex + chestRowIndex * 13, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
+            }
+        }
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
@@ -39,7 +51,11 @@ public class ContainerAlchemicalBag extends Container
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
-            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 162));
+        	if (actionBarSlotIndex == inventoryAlchemicalBag.getSlot())
+        	    // Nessessary to prevent player from placing the alchemical bag inside itself.
+        	    this.addSlotToContainer(new SlotReadonly(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 162));
+        	else
+                this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 162));
         }
     }
 
