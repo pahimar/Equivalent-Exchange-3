@@ -2,12 +2,10 @@ package com.pahimar.ee3.recipe;
 
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
+import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.item.ModItems;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -19,17 +17,22 @@ import java.util.TreeMap;
  */
 public class CalcinationManager
 {
-    private static Random random = new Random();
-
-    public static List<ItemStack> getCalcinationResult(ItemStack calcinedStack)
+    // TODO Random chance to get an extra item in the stack
+    public static ItemStack getCalcinationResult(ItemStack calcinedStack)
     {
         ItemStack itemStack = calcinedStack.copy();
         itemStack.stackSize = 1;
-        List<ItemStack> calcinationResults = new ArrayList<ItemStack>();
+
         TreeMap<EmcValue, ItemStack> sortedItems = new TreeMap<EmcValue, ItemStack>();
 
         for (ItemStack dustStack : ModItems.alchemicalDust.getSubTypes())
         {
+            // If the item to be calcined is an alchemical dust, return null (you cannot calcine what's already been calcined)
+            if (ItemHelper.equals(itemStack, dustStack))
+            {
+                return null;
+            }
+
             if (EmcRegistry.getInstance().hasEmcValue(dustStack))
             {
                 sortedItems.put(EmcRegistry.getInstance().getEmcValue(dustStack), dustStack);
@@ -40,7 +43,7 @@ public class CalcinationManager
         {
             if (sortedItems.containsKey(EmcRegistry.getInstance().getEmcValue(itemStack)))
             {
-                calcinationResults.add(sortedItems.get(EmcRegistry.getInstance().getEmcValue(itemStack)));
+                return sortedItems.get(EmcRegistry.getInstance().getEmcValue(itemStack));
             }
             else
             {
@@ -48,19 +51,17 @@ public class CalcinationManager
 
                 if (sortedItems.lowerEntry(EmcRegistry.getInstance().getEmcValue(itemStack)) == null)
                 {
-                    calcinationResults.add(new ItemStack(ModItems.alchemicalDust, 1, 0));
+                    return new ItemStack(ModItems.alchemicalDust, 1, 0);
                 }
                 else
                 {
-                    calcinationResults.add(sortedItems.lowerEntry(EmcRegistry.getInstance().getEmcValue(itemStack)).getValue());
+                    return sortedItems.lowerEntry(EmcRegistry.getInstance().getEmcValue(itemStack)).getValue();
                 }
             }
         }
         else
         {
-            calcinationResults.add(new ItemStack(ModItems.alchemicalDust, 1, 0));
+            return new ItemStack(ModItems.alchemicalDust, 1, 0);
         }
-
-        return calcinationResults;
     }
 }

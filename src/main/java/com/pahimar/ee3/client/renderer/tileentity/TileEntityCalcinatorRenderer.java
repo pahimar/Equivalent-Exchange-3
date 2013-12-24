@@ -26,7 +26,6 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-
         if (tileEntity instanceof TileCalcinator)
         {
             TileCalcinator tileCalcinator = (TileCalcinator) tileEntity;
@@ -46,9 +45,39 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            if (tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_LEFT_INVENTORY_INDEX) != null || tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX) != null)
+            if (tileCalcinator.getCombinedOutputSize() > 0)
             {
+                GL11.glPushMatrix();
+
+                // Reverse previous rotation to get back into a workable frame of reference
+                GL11.glRotatef(90F, 1F, 0F, 0F);
+                GL11.glRotatef(-45F, 0F, 1F, 0F);
+
+                // TODO Handle colouring the dusts as per their meta in the calcinator inventory
+                GL11.glColor3b((byte) 32, (byte) 128, (byte) 192);
+
+                if (tileCalcinator.getCombinedOutputSize() <= 32)
+                {
+                    GL11.glScalef(0.25F, 0.25F, 0.25F);
+                    GL11.glTranslatef(0.0F, 2.20F, -2.1125F);
+                }
+                else if (tileCalcinator.getCombinedOutputSize() <= 64)
+                {
+                    GL11.glScalef(0.5F, 0.5F, 0.5F);
+                    GL11.glTranslatef(-0.0125F, 0.75F, -0.7125F);
+                }
+                else if (tileCalcinator.getCombinedOutputSize() <= 128)
+                {
+                    // NOOP
+                }
+
+                // Reapply previous rotation to get it back to a viewable state
+                GL11.glRotatef(45F, 0F, 1F, 0F);
+                GL11.glRotatef(-90F, 1F, 0F, 0F);
+
+                // Render the dust in the Calcinator bowl
                 modelCalcinator.renderPart("Dust");
+                GL11.glPopMatrix();
             }
 
             GL11.glEnable(GL11.GL_LIGHTING);

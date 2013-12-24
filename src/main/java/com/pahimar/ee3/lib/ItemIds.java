@@ -18,6 +18,7 @@ public class ItemIds
     public static int ALCHEMICAL_DUST_DEFAULT = 27004;
     public static int ALCHEMICAL_BAG_DEFAULT = 27005;
     public static int ALCHEMICAL_CHALK_DEFAULT = 27006;
+    public static int DIVINING_ROD_DEFAULT = 27007;
 
     /* Current item ids */
     public static int MINIUM_SHARD;
@@ -27,4 +28,5 @@ public class ItemIds
     public static int ALCHEMICAL_DUST;
     public static int ALCHEMICAL_BAG;
     public static int ALCHEMICAL_CHALK;
+    public static int DIVINING_ROD;
 }

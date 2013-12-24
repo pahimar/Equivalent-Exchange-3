@@ -35,7 +35,6 @@ public class ItemHelper
      */
     public static boolean equals(ItemStack first, ItemStack second)
     {
-
         return (comparator.compare(first, second) == 0);
     }
 
@@ -46,24 +45,21 @@ public class ItemHelper
 
     public static String toString(ItemStack itemStack)
     {
-
         if (itemStack != null)
         {
             return String.format("%sxitemStack[%s:%s:%s:%s]", itemStack.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName());
         }
 
-        return "itemStack[null]";
+        return "null";
     }
 
     public static boolean hasColor(ItemStack itemStack)
     {
-
         return itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey(Strings.NBT_ITEM_DISPLAY) && itemStack.getTagCompound().getCompoundTag(Strings.NBT_ITEM_DISPLAY).hasKey(Strings.NBT_ITEM_COLOR);
     }
 
     public static int getColor(ItemStack itemStack)
     {
-
         NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
 
         if (nbtTagCompound == null)
@@ -80,7 +76,6 @@ public class ItemHelper
 
     public static void setColor(ItemStack itemStack, int color)
     {
-
         if (itemStack != null)
         {
 
@@ -106,7 +101,6 @@ public class ItemHelper
 
     public static void dropMiniumShard(EntityPlayer player, EntityLivingBase entity)
     {
-
         if (GeneralHelper.isHostileEntity(entity))
         {
             rand = Math.random();

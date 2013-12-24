@@ -33,6 +33,7 @@ public class ItemConfiguration
             ItemIds.ALCHEMICAL_DUST = itemConfiguration.getItem(Strings.ALCHEMICAL_DUST_NAME, ItemIds.ALCHEMICAL_DUST_DEFAULT).getInt(ItemIds.ALCHEMICAL_DUST_DEFAULT);
             ItemIds.ALCHEMICAL_BAG = itemConfiguration.getItem(Strings.ALCHEMICAL_BAG_NAME, ItemIds.ALCHEMICAL_BAG_DEFAULT).getInt(ItemIds.ALCHEMICAL_BAG_DEFAULT);
             ItemIds.ALCHEMICAL_CHALK = itemConfiguration.getItem(Strings.ALCHEMICAL_CHALK_NAME, ItemIds.ALCHEMICAL_CHALK_DEFAULT).getInt(ItemIds.ALCHEMICAL_CHALK_DEFAULT);
+            ItemIds.DIVINING_ROD = itemConfiguration.getItem(Strings.DIVINING_ROD_NAME, ItemIds.DIVINING_ROD_DEFAULT).getInt(ItemIds.DIVINING_ROD_DEFAULT);
 
             /* Item durability configs */
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = itemConfiguration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);

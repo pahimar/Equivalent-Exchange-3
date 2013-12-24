@@ -1,10 +1,9 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.lib.Strings;
-import net.minecraft.block.BlockFurnace;
+import com.pahimar.ee3.recipe.CalcinationManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -183,30 +182,32 @@ public class TileCalcinator extends TileEE implements IInventory
     public void updateEntity()
     {
         boolean isBurning = this.remainingBurnTime > 0;
-        boolean calcinationOccured = false;
+        boolean inventoryChanged = false;
 
+        // If the Calcinator still has burn time, decrement it
         if (this.remainingBurnTime > 0)
         {
-            --this.remainingBurnTime;
+            this.remainingBurnTime--;
         }
 
         if (!this.worldObj.isRemote)
         {
             if (this.remainingBurnTime == 0 && this.canCalcinate())
             {
+                // TODO Effect burn speed by fuel quality
                 this.currentFuelsFuelValue = this.remainingBurnTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
 
                 if (this.remainingBurnTime > 0)
                 {
-                    calcinationOccured = true;
+                    inventoryChanged = true;
 
-                    if (this.inventory[INPUT_INVENTORY_INDEX] != null)
+                    if (this.inventory[FUEL_INVENTORY_INDEX] != null)
                     {
-                        --this.inventory[INPUT_INVENTORY_INDEX].stackSize;
+                        --this.inventory[FUEL_INVENTORY_INDEX].stackSize;
 
-                        if (this.inventory[INPUT_INVENTORY_INDEX].stackSize == 0)
+                        if (this.inventory[FUEL_INVENTORY_INDEX].stackSize == 0)
                         {
-                            this.inventory[INPUT_INVENTORY_INDEX] = this.inventory[INPUT_INVENTORY_INDEX].getItem().getContainerItemStack(inventory[INPUT_INVENTORY_INDEX]);
+                            this.inventory[FUEL_INVENTORY_INDEX] = this.inventory[FUEL_INVENTORY_INDEX].getItem().getContainerItemStack(inventory[FUEL_INVENTORY_INDEX]);
                         }
                     }
                 }
@@ -214,13 +215,13 @@ public class TileCalcinator extends TileEE implements IInventory
 
             if (this.isBurning() && this.canCalcinate())
             {
-                ++this.currentItemCookTime;
+                this.currentItemCookTime++;
 
                 if (this.currentItemCookTime == 200)
                 {
                     this.currentItemCookTime = 0;
                     this.calcinateItem();
-                    calcinationOccured = true;
+                    inventoryChanged = true;
                 }
             }
             else
@@ -230,12 +231,12 @@ public class TileCalcinator extends TileEE implements IInventory
 
             if (isBurning != this.remainingBurnTime > 0)
             {
-                calcinationOccured = true;
-                BlockFurnace.updateFurnaceBlockState(this.remainingBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord); // TODO Customize
+                inventoryChanged = true;
+                // TODO Add in world effects to show that we are making dust
             }
         }
 
-        if (calcinationOccured)
+        if (inventoryChanged)
         {
             this.onInventoryChanged();
         }
@@ -259,13 +260,12 @@ public class TileCalcinator extends TileEE implements IInventory
         }
         else
         {
-            // TODO Calcination Manager integration
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
+            ItemStack alchemicalDustStack = CalcinationManager.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
 
             /**
              * If we don't get a calcination result, then return false
              */
-            if (itemstack == null)
+            if (alchemicalDustStack == null)
             {
                 return false;
             }
@@ -278,14 +278,35 @@ public class TileCalcinator extends TileEE implements IInventory
                 return true;
             }
 
-            if (!this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(itemstack) && !this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(itemstack))
+            boolean leftEquals = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack);
+            int leftResult = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize + alchemicalDustStack.stackSize;
+
+            boolean rightEquals = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack);
+            int rightResult = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize + alchemicalDustStack.stackSize;
+
+            if (!leftEquals && !rightEquals)
             {
                 return false;
             }
-
-            int result = inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize + itemstack.stackSize;
-
-            return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+            else if (leftEquals && !rightEquals)
+            {
+                return leftResult <= getInventoryStackLimit() && leftResult <= alchemicalDustStack.getMaxStackSize();
+            }
+            else if (!leftEquals && rightEquals)
+            {
+                return rightResult <= getInventoryStackLimit() && rightResult <= alchemicalDustStack.getMaxStackSize();
+            }
+            else
+            {
+                if (leftResult <= getInventoryStackLimit() && leftResult <= alchemicalDustStack.getMaxStackSize())
+                {
+                    return true;
+                }
+                else
+                {
+                    return rightResult <= getInventoryStackLimit() && rightResult <= alchemicalDustStack.getMaxStackSize();
+                }
+            }
         }
     }
 
@@ -293,18 +314,26 @@ public class TileCalcinator extends TileEE implements IInventory
     {
         if (this.canCalcinate())
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
+            ItemStack alchemicalDustStack = CalcinationManager.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
 
             if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] == null)
             {
-                this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = itemstack.copy();
+                this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = alchemicalDustStack.copy();
             }
-            else if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(itemstack))
+            else if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack))
             {
-                inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += itemstack.stackSize;
+                inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
+            }
+            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] == null)
+            {
+                this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] = alchemicalDustStack.copy();
+            }
+            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack))
+            {
+                inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
             }
 
-            --this.inventory[INPUT_INVENTORY_INDEX].stackSize;
+            this.inventory[INPUT_INVENTORY_INDEX].stackSize--;
 
             if (this.inventory[INPUT_INVENTORY_INDEX].stackSize <= 0)
             {
@@ -348,5 +377,22 @@ public class TileCalcinator extends TileEE implements IInventory
         stringBuilder.append("\n");
 
         return stringBuilder.toString();
+    }
+
+    public int getCombinedOutputSize()
+    {
+        int result = 0;
+
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
+        {
+            result += this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
+        }
+
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        {
+            result += this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
+        }
+
+        return result;
     }
 }

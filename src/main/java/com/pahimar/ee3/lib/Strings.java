@@ -57,6 +57,7 @@ public class Strings
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
     public static final String ALCHEMICAL_CHALK_NAME = "alchemicalChalk";
+    public static final String DIVINING_ROD_NAME = "diviningRod";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
