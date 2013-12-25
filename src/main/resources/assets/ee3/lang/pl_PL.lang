@@ -1,0 +1,35 @@
+# Key localizations 
+key.extra=Dodatkowa funkcja
+key.release=Wypuść
+key.toggle=Przełącz
+key.charge=Ładuj
+
+# Item localizations
+item.ee3:shardMinium.name=Odłam Minium
+item.ee3:stoneInert.name=Nieaktywny Kamień
+item.ee3:stoneMinium.name=Minium Kamień
+item.ee3:stonePhilosophers.name=Kamień Filozoficzny [WIP]
+item.ee3:alchemicalDustAsh.name=Popiół [WIP]
+item.ee3:alchemicalDustMinium.name=Proszek Minium [WIP]
+item.ee3:alchemicalDustVerdant.name=Zielony Proszek [WIP]
+item.ee3:alchemicalDustAzure.name=Lazurowy Proszek [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amarantowy Proszek [WIP]
+item.ee3:alchemicalDustIridescent.name=Opalowy Proszek [WIP]
+item.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Kalcynator [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalcynator [WIP]
+container.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na: %s
+version.ee3:uninitialized=Wystąpił błąd podczas sprawdzania wersji
+version.ee3:current=Posiadasz aktualnie najnowszą wersję (%s) Equivalent Exchange 3 dla %s
+version.ee3:outdated=Istnieje nowsza wersja %s (%s) dla %s. Pobierz stąd: %s
+version.ee3:general_error=Wystąpił błąd podczas łaczenia ze zdalnym plikiem wersji; trying again
