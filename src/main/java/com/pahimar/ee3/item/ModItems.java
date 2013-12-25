@@ -27,6 +27,9 @@ public class ModItems
     public static ItemEE alchemicalBag;
     public static ItemEE alchemicalChalk;
     public static ItemEE diviningRod;
+    public static ItemEE alchemicalCoal;
+    public static ItemEE mobiusFuel;
+    public static ItemEE aeternalisFuel;
 
     public static void init()
     {
@@ -39,6 +42,9 @@ public class ModItems
         alchemicalBag = new ItemAlchemicalBag(ItemIds.ALCHEMICAL_BAG);
         alchemicalChalk = new ItemAlchemicalChalk(ItemIds.ALCHEMICAL_CHALK);
         diviningRod = new ItemDiviningRod(ItemIds.DIVINING_ROD);
+        alchemicalCoal = new ItemAlchemicalCoal(ItemIds.ALCHEMICAL_COAL);
+        mobiusFuel = new ItemMobiusFuel(ItemIds.MOBIUS_FUEL);
+        aeternalisFuel = new ItemAeternalisFuel(ItemIds.AETERNALIS_FUEL);
 
         // Set container items
         miniumStone.setContainerItem(miniumStone);
@@ -53,6 +59,9 @@ public class ModItems
         GameRegistry.registerItem(alchemicalBag, Strings.ALCHEMICAL_BAG_NAME);
         GameRegistry.registerItem(alchemicalChalk, Strings.ALCHEMICAL_CHALK_NAME);
         GameRegistry.registerItem(diviningRod, Strings.DIVINING_ROD_NAME);
+        GameRegistry.registerItem(alchemicalCoal, Strings.ALCHEMICAL_COAL_NAME);
+        GameRegistry.registerItem(mobiusFuel, Strings.MOBIUS_FUEL_NAME);
+        GameRegistry.registerItem(aeternalisFuel, Strings.AETERNALIS_FUEL_NAME);
 
         // Add recipes for items
         GameRegistry.addRecipe(new ItemStack(inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});

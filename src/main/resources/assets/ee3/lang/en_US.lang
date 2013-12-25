@@ -18,6 +18,9 @@ item.ee3:alchemicalDustIridescent.name=Iridescent Dust [WIP]
 item.ee3:alchemicalBag.name=Alchemical Bag [WIP]
 item.ee3:alchemicalChalk.name=Alchemical Chalk [WIP]
 item.ee3:diviningRod.name=Divining Rod [WIP]
+item.ee3:alchemicalCoal.name=Alchemical Coal [WIP]
+item.ee3:mobiusFuel.name=Mobius Fuel [WIP]
+item.ee3:aeternalisFuel.name=Aeternalis Fuel [WIP]
 
 # Block localizations
 tile.ee3:calcinator.name=Calcinator [WIP]

@@ -58,6 +58,9 @@ public class Strings
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
     public static final String ALCHEMICAL_CHALK_NAME = "alchemicalChalk";
     public static final String DIVINING_ROD_NAME = "diviningRod";
+    public static final String ALCHEMICAL_COAL_NAME = "alchemicalCoal";
+    public static final String MOBIUS_FUEL_NAME = "mobiusFuel";
+    public static final String AETERNALIS_FUEL_NAME = "aeternalisFuel";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";
