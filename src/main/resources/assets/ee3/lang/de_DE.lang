@@ -18,6 +18,9 @@ item.ee3:alchemicalDustIridescent.name=Irisierender Staub [WIP]
 item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
 item.ee3:alchemicalChalk.name=Alchemiekreide [WIP]
 item.ee3:diviningRod.name=Wünschelrute [WIP]
+item.ee3:alchemicalCoal.name=Alchemiekohle [WIP]
+item.ee3:mobiusFuel.name=Mobius-Brennstoff [WIP]
+item.ee3:aeternalisFuel.name=Aeternalis-Brennstoff [WIP]
 
 # Block localizations
 tile.ee3:calcinator.name=Kalzinierer [WIP]
