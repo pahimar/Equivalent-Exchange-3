@@ -23,7 +23,7 @@ import java.util.Random;
  *
  * @author pahimar
  */
-public class BlockCalcinator extends BlockEE
+public class BlockCalcinator extends BlockContainerEE
 {
     /**
      * Is the random generator used by calcinator to drop the inventory contents in random directions.

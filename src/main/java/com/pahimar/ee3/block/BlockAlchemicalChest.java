@@ -24,7 +24,7 @@ import java.util.Random;
  *
  * @author pahimar
  */
-public class BlockAlchemicalChest extends BlockEE
+public class BlockAlchemicalChest extends BlockContainerEE
 {
 
     /**

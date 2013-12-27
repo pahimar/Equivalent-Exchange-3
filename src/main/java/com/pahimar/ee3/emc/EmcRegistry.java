@@ -97,7 +97,7 @@ public class EmcRegistry
         {
             passNumber++;
             computedStackValues = computeStackMappings();
-
+            // TODO Duplicate entry protection
             stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(stackMappings);
             stackMappingsBuilder.putAll(computedStackValues);

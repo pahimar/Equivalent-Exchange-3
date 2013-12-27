@@ -24,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Random;
 
-public class BlockGlassBell extends BlockEE
+public class BlockGlassBell extends BlockContainerEE
 {
 
     /**

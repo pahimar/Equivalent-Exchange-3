@@ -27,7 +27,7 @@ import java.util.Random;
  *
  * @author pahimar
  */
-public class BlockAludelBase extends BlockEE
+public class BlockAludelBase extends BlockContainerEE
 {
 
     /**
