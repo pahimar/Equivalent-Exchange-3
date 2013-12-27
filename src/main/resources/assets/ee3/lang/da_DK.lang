@@ -1,0 +1,60 @@
+# Key localizations 
+key.extra=Ekstra
+key.release=Slip
+key.toggle=Skift
+key.charge=Oplad
+
+# Item localizations
+item.ee3:shardMinium.name=Skår af Mønje
+item.ee3:stoneInert.name=Inert Sten
+item.ee3:stoneMinium.name=Mønje Sten
+item.ee3:stonePhilosophers.name=De Vises Sten [WIP]
+item.ee3:alchemicalDustAsh.name=Aske [WIP]
+item.ee3:alchemicalDustMinium.name=Mønje Støv [WIP]
+item.ee3:alchemicalDustVerdant.name=Frodigt Støv [WIP]
+item.ee3:alchemicalDustAzure.name=Azur Støv [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Evigtvarende Støv [WIP]
+item.ee3:alchemicalDustIridescent.name=Iriserende Støv [WIP]
+item.ee3:alchemicalBag.name=Alkymistisk Taske [WIP]
+
+# Block localizations
+tile.redWaterStill.name=Rødt Vand (Stille)
+tile.redWaterFlowing.name=Rødt Vand (Stømmende)
+tile.ee3:calcinator.name=Kalkbrænder [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alkymistisk Kiste [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalkbrænder [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alkymistisk Kiste [WIP]
+container.ee3:alchemicalBag=Alkymistisk Taskeo [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Forvandlingsoverlæg slået til
+command.ee3:overlay.turned_off=Forvandlingsoverlæg slået fra
+command.ee3:overlay.position.top_left=Forvandlingsoverlæggets position er sat til øverst til venstre
+command.ee3:overlay.position.top_right=Forvandlingsoverlæggets position er sat til øverst til højre
+command.ee3:overlay.position.bottom_left=Forvandlingsoverlæggets position er sat til nederst til venstre
+command.ee3:overlay.position.bottom_right=Forvandlingsoverlæggets position er sat til nederst til højre
+command.ee3:overlay.opacity.usage.additional_text=(hvor ### er en decimalværdi imellem 0.0 og 1.0)
+command.ee3:overlay.opacity.updated=Forvandlingsoverlæggets gennemsigtighed opdaterede vellykket
+command.ee3:overlay.scale.usage.additional_text=%s (hvor ### er en decimalværdi større end 0.0)
+command.ee3:overlay.scale.updated=Forvandlingsoverlæggets skala opdaterede vellykket</entry>
+command.ee3:particles.turned_on=Equivalent Exchange 3 partikler slået til
+command.ee3:particles.turned_off=Equivalent Exchange 3 partikler slået fra
+command.ee3:sounds.set_to_all=Afspiller Equivalent Exchange 3 lyde fra alle spillere
+command.ee3:sounds.set_to_self=Afspiller kun Equivalent Exchange 3 lyde fra en selv
+command.ee3:sounds.turned_off=Afspiller ikke Equivalent Exchange 3 lyde
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Initialiserer fjernversionstjek mod fjernversionens autoritetsfil, placeret i: %s
+version.ee3:uninitialized=Fjernversionstjekket initialiserede ikke korrekt
+version.ee3:current=Bruger i øjeblikket den nyeste version (@REMOTE_MOD_VERSION@) af Equivalent Exchange 3 til @MINECRAFT_VERSION@
+version.ee3:outdated=En ny version af @MOD_NAME@ findes (@REMOTE_MOD_VERSION@) til @MINECRAFT_VERSION@. Få den her: %s
+version.ee3:general_error=Der skete en fejl i forsøg på at forbinde til fjernversionens autoritetsfil; prøver igen
+version.ee3:final_error=Versionstjekket stopper efter tre mislykkede forsøg
+version.ee3:mc_version_not_found=Kunne ikke finde en version af @MOD_NAME@ til @MINECRAFT_VERSION@ i fjernversionens autoritetsfil
