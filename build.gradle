@@ -110,6 +110,8 @@ task incrementBuildNumber() {
 task buildnumber << {
     env = System.getenv()
 
+    println env.get(BUILD_NUMBER)
+
     env.each {
         key, value -> println "$key = $value";
     }
