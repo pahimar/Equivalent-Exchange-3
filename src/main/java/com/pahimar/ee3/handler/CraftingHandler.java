@@ -1,12 +1,20 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.ICraftingHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 /**
  * Equivalent-Exchange-3
@@ -17,6 +25,18 @@ import net.minecraft.item.ItemStack;
  */
 public class CraftingHandler implements ICraftingHandler
 {
+    public static void init()
+    {
+        // Register the Crafting Handler
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
+
+        // Add in the ability to dye Alchemical Bags
+        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
+
+        // Register our recipes
+        initBlockRecipes();
+        initItemRecipes();
+    }
 
     @Override
     public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix)
@@ -77,5 +97,27 @@ public class CraftingHandler implements ICraftingHandler
         {
             openStone.damageItem(ConfigurationSettings.TRANSMUTE_COST_ITEM, player);
         }
+    }
+
+    private static void initBlockRecipes()
+    {
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalCoal), new Object[]{"iii", "iii", "iii", 'i', ModItems.alchemicalCoal});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.mobiusFuel), new Object[]{"iii", "iii", "iii", 'i', ModItems.mobiusFuel});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.aeternalisFuel), new Object[]{"iii", "iii", "iii", 'i', ModItems.aeternalisFuel});
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
+    }
+
+    private static void initItemRecipes()
+    {
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.alchemicalCoal, 9), ModBlocks.alchemicalCoal);
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.mobiusFuel, 9), ModBlocks.mobiusFuel);
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.aeternalisFuel, 9), ModBlocks.aeternalisFuel);
+
+        GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
+        GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
+        CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', Item.stick}));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.alchemicalChalk), new ItemStack(Item.clay), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15));
     }
 }

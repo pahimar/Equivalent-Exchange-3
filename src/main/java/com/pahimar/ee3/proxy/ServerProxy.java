@@ -1,11 +1,5 @@
 package com.pahimar.ee3.proxy;
 
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
-import com.pahimar.ee3.tileentity.TileAludel;
-import com.pahimar.ee3.tileentity.TileCalcinator;
-import com.pahimar.ee3.tileentity.TileGlassBell;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -18,7 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
  *
  * @author pahimar
  */
-public class ServerProxy implements IProxy
+public class ServerProxy extends CommonProxy
 {
     public void registerKeyBindingHandler()
     {
@@ -48,14 +42,6 @@ public class ServerProxy implements IProxy
     public void initRenderingAndTextures()
     {
         // NOOP
-    }
-
-    public void registerTileEntities()
-    {
-        GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
-        GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
-        GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
-        GameRegistry.registerTileEntity(TileGlassBell.class, Strings.TE_GLASS_BELL_NAME);
     }
 
     @Override

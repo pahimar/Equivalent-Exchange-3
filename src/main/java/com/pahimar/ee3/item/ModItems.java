@@ -3,11 +3,6 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 /**
  * Equivalent-Exchange-3
@@ -51,22 +46,16 @@ public class ModItems
         philStone.setContainerItem(philStone);
 
         // Register items with the GameRegistry
-        GameRegistry.registerItem(miniumShard, Strings.MINIUM_SHARD_NAME);
-        GameRegistry.registerItem(inertStone, Strings.INERT_STONE_NAME);
-        GameRegistry.registerItem(miniumStone, Strings.MINIUM_STONE_NAME);
-        GameRegistry.registerItem(philStone, Strings.PHILOSOPHERS_STONE_NAME);
-        GameRegistry.registerItem(alchemicalDust, Strings.ALCHEMICAL_DUST_NAME);
-        GameRegistry.registerItem(alchemicalBag, Strings.ALCHEMICAL_BAG_NAME);
-        GameRegistry.registerItem(alchemicalChalk, Strings.ALCHEMICAL_CHALK_NAME);
-        GameRegistry.registerItem(diviningRod, Strings.DIVINING_ROD_NAME);
-        GameRegistry.registerItem(alchemicalCoal, Strings.ALCHEMICAL_COAL_NAME);
-        GameRegistry.registerItem(mobiusFuel, Strings.MOBIUS_FUEL_NAME);
-        GameRegistry.registerItem(aeternalisFuel, Strings.AETERNALIS_FUEL_NAME);
-
-        // Add recipes for items
-        GameRegistry.addRecipe(new ItemStack(inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
-        GameRegistry.addRecipe(new ItemStack(miniumStone), new Object[]{"sss", "sis", "sss", 's', miniumShard, 'i', inertStone});
-        CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(diviningRod), new Object[]{" s ", " s ", "s s", 's', Item.stick}));
-        GameRegistry.addShapelessRecipe(new ItemStack(alchemicalChalk), new ItemStack(Item.clay), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15), new ItemStack(Item.dyePowder.itemID, 1, 15));
+        GameRegistry.registerItem(miniumShard, "item." + Strings.MINIUM_SHARD_NAME);
+        GameRegistry.registerItem(inertStone, "item." + Strings.INERT_STONE_NAME);
+        GameRegistry.registerItem(miniumStone, "item." + Strings.MINIUM_STONE_NAME);
+        GameRegistry.registerItem(philStone, "item." + Strings.PHILOSOPHERS_STONE_NAME);
+        GameRegistry.registerItem(alchemicalDust, "item." + Strings.ALCHEMICAL_DUST_NAME);
+        GameRegistry.registerItem(alchemicalBag, "item." + Strings.ALCHEMICAL_BAG_NAME);
+        GameRegistry.registerItem(alchemicalChalk, "item." + Strings.ALCHEMICAL_CHALK_NAME);
+        GameRegistry.registerItem(diviningRod, "item." + Strings.DIVINING_ROD_NAME);
+        GameRegistry.registerItem(alchemicalCoal, "item." + Strings.ALCHEMICAL_COAL_NAME);
+        GameRegistry.registerItem(mobiusFuel, "item." + Strings.MOBIUS_FUEL_NAME);
+        GameRegistry.registerItem(aeternalisFuel, "item." + Strings.AETERNALIS_FUEL_NAME);
     }
 }

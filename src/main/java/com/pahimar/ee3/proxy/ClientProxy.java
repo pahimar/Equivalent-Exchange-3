@@ -18,7 +18,10 @@ import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.KeyBindingHelper;
 import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
-import com.pahimar.ee3.lib.*;
+import com.pahimar.ee3.lib.ActionTypes;
+import com.pahimar.ee3.lib.BlockIds;
+import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketRequestEvent;
 import com.pahimar.ee3.tileentity.*;
@@ -27,7 +30,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,7 +49,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @author pahimar
  */
 @SideOnly(Side.CLIENT)
-public class ClientProxy implements IProxy
+public class ClientProxy extends CommonProxy
 {
     @Override
     public void registerKeyBindingHandler()
@@ -97,15 +99,6 @@ public class ClientProxy implements IProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
-    }
-
-    @Override
-    public void registerTileEntities()
-    {
-        GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
-        GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
-        GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
-        GameRegistry.registerTileEntity(TileGlassBell.class, Strings.TE_GLASS_BELL_NAME);
     }
 
     @Override

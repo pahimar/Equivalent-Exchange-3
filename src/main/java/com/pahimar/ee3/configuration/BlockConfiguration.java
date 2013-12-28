@@ -22,6 +22,10 @@ public class BlockConfiguration
             blockConfiguration.load();
 
             /* Block configs */
+            BlockIds.ALCHEMICAL_COAL = blockConfiguration.getBlock(Strings.ALCHEMICAL_COAL_NAME, BlockIds.ALCHEMICAL_COAL_DEFAULT).getInt(BlockIds.ALCHEMICAL_COAL_DEFAULT);
+            BlockIds.MOBIUS_FUEL = blockConfiguration.getBlock(Strings.MOBIUS_FUEL_NAME, BlockIds.MOBIUS_FUEL_DEFAULT).getInt(BlockIds.MOBIUS_FUEL_DEFAULT);
+            BlockIds.AETERNALIS_FUEL = blockConfiguration.getBlock(Strings.AETERNALIS_FUEL_NAME, BlockIds.AETERNALIS_FUEL_DEFAULT).getInt(BlockIds.AETERNALIS_FUEL_DEFAULT);
+
             BlockIds.CALCINATOR = blockConfiguration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
             BlockIds.ALUDEL_BASE = blockConfiguration.getBlock(Strings.ALUDEL_NAME, BlockIds.ALUDEL_BASE_DEFAULT).getInt(BlockIds.ALUDEL_BASE_DEFAULT);
             BlockIds.ALCHEMICAL_CHEST = blockConfiguration.getBlock(Strings.ALCHEMICAL_CHEST_NAME, BlockIds.ALCHEMICAL_CHEST_DEFAULT).getInt(BlockIds.ALCHEMICAL_CHEST_DEFAULT);

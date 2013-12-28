@@ -11,7 +11,6 @@ import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
@@ -28,7 +27,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
@@ -143,17 +141,17 @@ public class EquivalentExchange3
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
 
-        // Register the Crafting Handler
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
-
-        // Add in the ability to dye Alchemical Bags
-        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
+        // Initialize our Crafting Handler
+        CraftingHandler.init();
 
         // Handle fluid registration
         FluidHelper.registerFluids();
 
         // Initialize mod tile entities
         proxy.registerTileEntities();
+
+        // Register our fuels
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
         // Initialize addons (which work with IMC, and must be used in Init)
         AddonHandler.init();
