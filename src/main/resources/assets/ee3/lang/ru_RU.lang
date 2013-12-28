@@ -17,6 +17,10 @@ item.ee3:alchemicalDustAmaranthine.name=Пурпурный порошок [WIP]
 item.ee3:alchemicalDustIridescent.name=Радужный порошок [WIP]
 item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
 item.ee3:alchemicalChalk.name=Алхимический мел [WIP]
+item.ee3:diviningRod.name=Волшебная лоза [WIP]
+item.ee3:alchemicalCoal.name=Алхимический уголь [WIP]
+item.ee3:mobiusFuel.name=Топливо Мёбиуса [WIP]
+item.ee3:aeternalisFuel.name=Эфирное топливо [WIP]
 
 # Block localizations
 tile.ee3:calcinator.name=Кальцинатор [WIP]
