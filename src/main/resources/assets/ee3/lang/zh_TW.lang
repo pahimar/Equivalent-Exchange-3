@@ -5,7 +5,7 @@ key.release=施放技能
 key.toggle=切換目標
 
 # Item localizations
-item.ee3:alchemicalBag.name=煉金袋
+item.ee3:alchemicalBag.name=煉丹袋
 item.ee3:alchemicalDust.Ash.name=灰燼
 item.ee3:alchemicalDust.Minium.name=鉛丹粉末
 item.ee3:alchemicalDust.Verdant.name=翠綠粉末
@@ -22,7 +22,7 @@ item.ee3:stoneMinium.name=鉛丹石
 item.ee3:stonePhilosophers.name=賢者之石
 
 # Block localizations
-tile.ee3:alchemicalChest.name=煉金箱子
+tile.ee3:alchemicalChest.name=煉丹箱子
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=煉丹煤炭
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=莫比烏斯燃料
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永恆燃料
