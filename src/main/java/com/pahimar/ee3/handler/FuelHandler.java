@@ -9,32 +9,49 @@ import net.minecraft.tileentity.TileEntityFurnace;
 
 public class FuelHandler implements IFuelHandler
 {
+    private static final ItemStack ALCHEMICAL_COAL_STACK = new ItemStack(ModItems.alchemicalFuel, 1, 0);
+    private static final ItemStack MOBIUS_FUEL_STACK = new ItemStack(ModItems.alchemicalFuel, 1, 1);
+    private static final ItemStack AETERNALIS_FUEL_STACK = new ItemStack(ModItems.alchemicalFuel, 1, 2);
+
+    private static final ItemStack ALCHEMICAL_COAL_BLOCK_STACK = new ItemStack(ModBlocks.alchemicalFuel, 1, 0);
+    private static final ItemStack MOBIUS_FUEL_BLOCK_STACK = new ItemStack(ModBlocks.alchemicalFuel, 1, 1);
+    private static final ItemStack AETERNALIS_FUEL_BLOCK_STACK = new ItemStack(ModBlocks.alchemicalFuel, 1, 2);
+
     @Override
     public int getBurnTime(ItemStack fuel)
     {
-        if (fuel.itemID == ModItems.alchemicalCoal.itemID)
+        /**
+         * Alchemical Coal
+         */
+        if (fuel.itemID == ALCHEMICAL_COAL_STACK.itemID && fuel.getItemDamage() == ALCHEMICAL_COAL_STACK.getItemDamage())
         {
             return 8 * TileEntityFurnace.getItemBurnTime(new ItemStack(Item.coal));
         }
-        else if (fuel.itemID == ModBlocks.alchemicalCoal.blockID)
+        else if (fuel.itemID == ALCHEMICAL_COAL_BLOCK_STACK.itemID && fuel.getItemDamage() == ALCHEMICAL_COAL_BLOCK_STACK.getItemDamage())
         {
-            return 9 * getBurnTime(new ItemStack(ModItems.alchemicalCoal));
+            return 9 * getBurnTime(ALCHEMICAL_COAL_STACK);
         }
-        else if (fuel.itemID == ModItems.mobiusFuel.itemID)
+        /**
+         * Mobius Fuel
+         */
+        else if (fuel.itemID == MOBIUS_FUEL_STACK.itemID && fuel.getItemDamage() == MOBIUS_FUEL_STACK.getItemDamage())
         {
-            return 8 * getBurnTime(new ItemStack(ModItems.alchemicalCoal));
+            return 8 * getBurnTime(new ItemStack(ModItems.alchemicalFuelBlock.itemID, 1, 0));
         }
-        else if (fuel.itemID == ModBlocks.mobiusFuel.blockID)
+        else if (fuel.itemID == MOBIUS_FUEL_BLOCK_STACK.itemID && fuel.getItemDamage() == MOBIUS_FUEL_BLOCK_STACK.getItemDamage())
         {
-            return 9 * getBurnTime(new ItemStack(ModItems.mobiusFuel));
+            return 9 * getBurnTime(MOBIUS_FUEL_STACK);
         }
-        else if (fuel.itemID == ModItems.aeternalisFuel.itemID)
+        /**
+         * Aeternalis Fuel
+         */
+        else if (fuel.itemID == AETERNALIS_FUEL_STACK.itemID && fuel.getItemDamage() == AETERNALIS_FUEL_STACK.getItemDamage())
         {
-            return 8 * getBurnTime(new ItemStack(ModItems.mobiusFuel));
+            return 8 * getBurnTime(new ItemStack(ModItems.alchemicalFuelBlock.itemID, 1, 1));
         }
-        else if (fuel.itemID == ModBlocks.aeternalisFuel.blockID)
+        else if (fuel.itemID == AETERNALIS_FUEL_BLOCK_STACK.itemID && fuel.getItemDamage() == AETERNALIS_FUEL_BLOCK_STACK.getItemDamage())
         {
-            return 9 * getBurnTime(new ItemStack(ModItems.aeternalisFuel));
+            return 9 * getBurnTime(AETERNALIS_FUEL_STACK);
         }
 
         return 0;

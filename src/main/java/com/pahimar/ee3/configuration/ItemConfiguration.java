@@ -32,11 +32,9 @@ public class ItemConfiguration
             ItemIds.PHILOSOPHERS_STONE = itemConfiguration.getItem(Strings.PHILOSOPHERS_STONE_NAME, ItemIds.PHILOSOPHERS_STONE_DEFAULT).getInt(ItemIds.PHILOSOPHERS_STONE_DEFAULT);
             ItemIds.ALCHEMICAL_DUST = itemConfiguration.getItem(Strings.ALCHEMICAL_DUST_NAME, ItemIds.ALCHEMICAL_DUST_DEFAULT).getInt(ItemIds.ALCHEMICAL_DUST_DEFAULT);
             ItemIds.ALCHEMICAL_BAG = itemConfiguration.getItem(Strings.ALCHEMICAL_BAG_NAME, ItemIds.ALCHEMICAL_BAG_DEFAULT).getInt(ItemIds.ALCHEMICAL_BAG_DEFAULT);
-            ItemIds.ALCHEMICAL_CHALK = itemConfiguration.getItem(Strings.ALCHEMICAL_CHALK_NAME, ItemIds.ALCHEMICAL_CHALK_DEFAULT).getInt(ItemIds.ALCHEMICAL_CHALK_DEFAULT);
+            ItemIds.CHALK = itemConfiguration.getItem(Strings.CHALK_NAME, ItemIds.CHALK_DEFAULT).getInt(ItemIds.CHALK_DEFAULT);
             ItemIds.DIVINING_ROD = itemConfiguration.getItem(Strings.DIVINING_ROD_NAME, ItemIds.DIVINING_ROD_DEFAULT).getInt(ItemIds.DIVINING_ROD_DEFAULT);
-            ItemIds.ALCHEMICAL_COAL = itemConfiguration.getItem(Strings.ALCHEMICAL_COAL_NAME, ItemIds.ALCHEMICAL_COAL_DEFAULT).getInt(ItemIds.ALCHEMICAL_COAL_DEFAULT);
-            ItemIds.MOBIUS_FUEL = itemConfiguration.getItem(Strings.MOBIUS_FUEL_NAME, ItemIds.MOBIUS_FUEL_DEFAULT).getInt(ItemIds.MOBIUS_FUEL_DEFAULT);
-            ItemIds.AETERNALIS_FUEL = itemConfiguration.getItem(Strings.AETERNALIS_FUEL_NAME, ItemIds.AETERNALIS_FUEL_DEFAULT).getInt(ItemIds.AETERNALIS_FUEL_DEFAULT);
+            ItemIds.ALCHEMICAL_FUEL = itemConfiguration.getItem(Strings.ALCHEMICAL_FUEL_NAME, ItemIds.ALCHEMICAL_FUEL_DEFAULT).getInt(ItemIds.ALCHEMICAL_FUEL_DEFAULT);
 
             /* Item durability configs */
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = itemConfiguration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);

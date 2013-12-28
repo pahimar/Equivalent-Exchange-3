@@ -55,12 +55,16 @@ public class Strings
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
+    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"Ash", "Verdant", "Azure", "Minium", "Iridescent"};
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
-    public static final String ALCHEMICAL_CHALK_NAME = "alchemicalChalk";
+    public static final String CHALK_NAME = "chalk";
     public static final String DIVINING_ROD_NAME = "diviningRod";
     public static final String ALCHEMICAL_COAL_NAME = "alchemicalCoal";
     public static final String MOBIUS_FUEL_NAME = "mobiusFuel";
     public static final String AETERNALIS_FUEL_NAME = "aeternalisFuel";
+    public static final String[] ALCHEMICAL_FUEL_SUBTYPE_NAMES = {ALCHEMICAL_COAL_NAME, MOBIUS_FUEL_NAME, AETERNALIS_FUEL_NAME};
+    public static final String ALCHEMICAL_FUEL_NAME = "alchemicalFuel";
+    public static final String ALCHEMICAL_FUEL_BLOCK_NAME = "alchemicalFuelBlock";
 
     /* TileEntity name constants */
     public static final String TE_CALCINATOR_NAME = "tileCalcinator";

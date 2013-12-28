@@ -24,13 +24,11 @@ import java.util.List;
  */
 public class ItemAlchemicalDust extends ItemEE
 {
-    public static final String[] ALCHEMICAL_DUST_NAMES = {"Ash", "Verdant", "Azure", "Minium", "Amaranthine", "Iridescent"};
     public static final EmcValue[] DEFAULT_EMC_VALUES = {
             new EmcValue(1),
             new EmcValue(256),
             new EmcValue(2048),
             new EmcValue(8192),
-            new EmcValue(73728),
             new EmcValue(4718592)
     };
 
@@ -48,7 +46,7 @@ public class ItemAlchemicalDust extends ItemEE
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-        return String.format("item.%s%s%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, ALCHEMICAL_DUST_NAMES[MathHelper.clamp_int(itemStack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1)]);
+        return String.format("item.%s%s.%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1)]);
     }
 
     @Override
@@ -58,18 +56,18 @@ public class ItemAlchemicalDust extends ItemEE
      */
     public Icon getIconFromDamage(int meta)
     {
-        return icons[MathHelper.clamp_int(meta, 0, ALCHEMICAL_DUST_NAMES.length - 1)];
+        return icons[MathHelper.clamp_int(meta, 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1)];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-        icons = new Icon[ALCHEMICAL_DUST_NAMES.length];
+        icons = new Icon[Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length];
 
-        for (int i = 0; i < ALCHEMICAL_DUST_NAMES.length; ++i)
+        for (int i = 0; i < Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length; ++i)
         {
-            icons[i] = iconRegister.registerIcon(String.format("%s%s%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, ALCHEMICAL_DUST_NAMES[i]));
+            icons[i] = iconRegister.registerIcon(String.format("%s%s.%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES[i]));
         }
     }
 
@@ -77,13 +75,13 @@ public class ItemAlchemicalDust extends ItemEE
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack, int renderPass)
     {
-        return MathHelper.clamp_int(stack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1) == 5;
+        return MathHelper.clamp_int(stack.getItemDamage(), 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1) == (Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1);
     }
 
     @Override
     public String getItemDisplayName(ItemStack itemStack)
     {
-        switch (MathHelper.clamp_int(itemStack.getItemDamage(), 0, ALCHEMICAL_DUST_NAMES.length - 1))
+        switch (MathHelper.clamp_int(itemStack.getItemDamage(), 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1))
         {
             case 0:
             {
@@ -103,10 +101,6 @@ public class ItemAlchemicalDust extends ItemEE
             }
             case 4:
             {
-                return EnumChatFormatting.LIGHT_PURPLE + super.getItemDisplayName(itemStack);
-            }
-            case 5:
-            {
                 return EnumChatFormatting.GOLD + super.getItemDisplayName(itemStack);
             }
             default:
@@ -121,7 +115,7 @@ public class ItemAlchemicalDust extends ItemEE
     @SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs creativeTab, List list)
     {
-        for (int meta = 0; meta < ALCHEMICAL_DUST_NAMES.length; ++meta)
+        for (int meta = 0; meta < Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length; ++meta)
         {
             list.add(new ItemStack(id, 1, meta));
         }
@@ -132,7 +126,7 @@ public class ItemAlchemicalDust extends ItemEE
     {
         List<ItemStack> alchemicalDustStacks = new ArrayList<ItemStack>();
 
-        for (int meta = 0; meta < ALCHEMICAL_DUST_NAMES.length; meta++)
+        for (int meta = 0; meta < Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length; meta++)
         {
             alchemicalDustStacks.add(new ItemStack(ModItems.alchemicalDust, 1, meta));
         }

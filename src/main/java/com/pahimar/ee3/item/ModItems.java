@@ -20,11 +20,11 @@ public class ModItems
     public static ItemEE philStone;
     public static ItemEE alchemicalDust;
     public static ItemEE alchemicalBag;
-    public static ItemEE alchemicalChalk;
+    public static ItemEE chalk;
     public static ItemEE diviningRod;
-    public static ItemEE alchemicalCoal;
-    public static ItemEE mobiusFuel;
-    public static ItemEE aeternalisFuel;
+    public static ItemEE alchemicalFuel;
+
+    public static ItemMultiTextureBlockEE alchemicalFuelBlock;
 
     public static void init()
     {
@@ -35,11 +35,9 @@ public class ModItems
         philStone = new ItemPhilosophersStone(ItemIds.PHILOSOPHERS_STONE);
         alchemicalDust = new ItemAlchemicalDust(ItemIds.ALCHEMICAL_DUST);
         alchemicalBag = new ItemAlchemicalBag(ItemIds.ALCHEMICAL_BAG);
-        alchemicalChalk = new ItemAlchemicalChalk(ItemIds.ALCHEMICAL_CHALK);
+        chalk = new ItemChalk(ItemIds.CHALK);
         diviningRod = new ItemDiviningRod(ItemIds.DIVINING_ROD);
-        alchemicalCoal = new ItemAlchemicalCoal(ItemIds.ALCHEMICAL_COAL);
-        mobiusFuel = new ItemMobiusFuel(ItemIds.MOBIUS_FUEL);
-        aeternalisFuel = new ItemAeternalisFuel(ItemIds.AETERNALIS_FUEL);
+        alchemicalFuel = new ItemAlchemicalFuel(ItemIds.ALCHEMICAL_FUEL);
 
         // Set container items
         miniumStone.setContainerItem(miniumStone);
@@ -52,10 +50,8 @@ public class ModItems
         GameRegistry.registerItem(philStone, "item." + Strings.PHILOSOPHERS_STONE_NAME);
         GameRegistry.registerItem(alchemicalDust, "item." + Strings.ALCHEMICAL_DUST_NAME);
         GameRegistry.registerItem(alchemicalBag, "item." + Strings.ALCHEMICAL_BAG_NAME);
-        GameRegistry.registerItem(alchemicalChalk, "item." + Strings.ALCHEMICAL_CHALK_NAME);
+        GameRegistry.registerItem(chalk, "item." + Strings.CHALK_NAME);
         GameRegistry.registerItem(diviningRod, "item." + Strings.DIVINING_ROD_NAME);
-        GameRegistry.registerItem(alchemicalCoal, "item." + Strings.ALCHEMICAL_COAL_NAME);
-        GameRegistry.registerItem(mobiusFuel, "item." + Strings.MOBIUS_FUEL_NAME);
-        GameRegistry.registerItem(aeternalisFuel, "item." + Strings.AETERNALIS_FUEL_NAME);
+        GameRegistry.registerItem(alchemicalFuel, "item." + Strings.ALCHEMICAL_FUEL_NAME);
     }
 }
