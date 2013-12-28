@@ -36,7 +36,7 @@ public class FuelHandler implements IFuelHandler
          */
         else if (fuel.itemID == MOBIUS_FUEL_STACK.itemID && fuel.getItemDamage() == MOBIUS_FUEL_STACK.getItemDamage())
         {
-            return 8 * getBurnTime(new ItemStack(ModItems.alchemicalFuelBlock.itemID, 1, 0));
+            return 8 * getBurnTime(ALCHEMICAL_COAL_BLOCK_STACK);
         }
         else if (fuel.itemID == MOBIUS_FUEL_BLOCK_STACK.itemID && fuel.getItemDamage() == MOBIUS_FUEL_BLOCK_STACK.getItemDamage())
         {
