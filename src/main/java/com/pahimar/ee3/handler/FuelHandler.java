@@ -47,7 +47,7 @@ public class FuelHandler implements IFuelHandler
          */
         else if (fuel.itemID == AETERNALIS_FUEL_STACK.itemID && fuel.getItemDamage() == AETERNALIS_FUEL_STACK.getItemDamage())
         {
-            return 8 * getBurnTime(new ItemStack(ModItems.alchemicalFuelBlock.itemID, 1, 1));
+            return 8 * getBurnTime(MOBIUS_FUEL_BLOCK_STACK);
         }
         else if (fuel.itemID == AETERNALIS_FUEL_BLOCK_STACK.itemID && fuel.getItemDamage() == AETERNALIS_FUEL_BLOCK_STACK.getItemDamage())
         {
