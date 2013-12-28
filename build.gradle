@@ -110,7 +110,7 @@ task incrementBuildNumber() {
 task ci_incrementBuildNumber() {
     doLast {
         // increment
-        config.build_number = $ { System.getenv().BUILD_NUMBER }
+        config.build_number = "${System.getenv().BUILD_NUMBER}"
 
         // write back to the file
         configFile.withWriter {
