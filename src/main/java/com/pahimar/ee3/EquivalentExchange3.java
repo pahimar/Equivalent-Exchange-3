@@ -161,7 +161,6 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
-        // Test
     }
 
     @EventHandler
