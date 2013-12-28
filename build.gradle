@@ -107,18 +107,33 @@ task incrementBuildNumber() {
     }
 }
 
-task buildnumber << {
-    env = System.getenv()
+task ci_incrementBuildNumber() {
+    doLast {
+        // increment
+        config.build_number = $ { System.getenv().BUILD_NUMBER }
 
-    println env.get(BUILD_NUMBER)
-
-    env.each {
-        key, value -> println "$key = $value";
+        // write back to the file
+        configFile.withWriter {
+            config.toProperties().store(it, "")
+        }
     }
 }
 
 task release(type: Copy) {
     dependsOn "incrementBuildNumber"
+    dependsOn "signJar"
+
+    eachFile { file ->
+        logger.info "copying ${file}"
+    }
+
+    // only if the release location isn't empty.
+    onlyIf {
+        return project.ee3_release_loc != "."
+    }
+}
+task ci_release(type: Copy) {
+    dependsOn "ci_incrementBuildNumber"
     dependsOn "signJar"
 
     eachFile { file ->
