@@ -107,6 +107,14 @@ task incrementBuildNumber() {
     }
 }
 
+task buildnumber << {
+    env = System.getenv()
+
+    env.each {
+        key, value -> println "$key = $value";
+    }
+}
+
 task release(type: Copy) {
     dependsOn "incrementBuildNumber"
     dependsOn "signJar"
