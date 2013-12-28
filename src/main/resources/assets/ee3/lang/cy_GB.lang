@@ -1,30 +1,30 @@
-# Key localizations 
+# Key localizations
+key.charge=Gwefru
 key.extra=Ychwanegol
 key.release=Rhyddhau
 key.toggle=Toglo
-key.charge=Gwefru
 
 # Item localizations
+item.ee3:alchemicalBag.name=Bag Alcemaidd [WIP]
+item.ee3:alchemicalDust.Ash.name=Lludw [WIP]
+item.ee3:alchemicalDust.Minium.name=Llwch Miniwm [WIP]
+item.ee3:alchemicalDust.Verdant.name=Llwch Werdd [WIP]
+item.ee3:alchemicalDust.Azure.name=Llwch Asur [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Llwch Symudliw [WIP]
+item.ee3:chalk.name=Sialc [WIP]
 item.ee3:shardMinium.name=Darn o Finiwm
 item.ee3:stoneInert.name=Carreg Anadweithiol
 item.ee3:stoneMinium.name=Carreg Miniwm
 item.ee3:stonePhilosophers.name=Maen Athronwyr [WIP]
-item.ee3:alchemicalDustAsh.name=Lludw [WIP]
-item.ee3:alchemicalDustMinium.name=Llwch Miniwm [WIP]
-item.ee3:alchemicalDustVerdant.name=Llwch Werdd [WIP]
-item.ee3:alchemicalDustAzure.name=Llwch Asur [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Llwch Amorol [WIP]
-item.ee3:alchemicalDustIridescent.name=Llwch Symudliw [WIP]
-item.ee3:alchemicalBag.name=Bag Alcemaidd [WIP]
-item.ee3:alchemicalChalk.name=Sialc Alcemaidd [WIP]
 
 # Block localizations
 tile.ee3:calcinator.name=Calchyniadwr [WIP]
+tile.ee3:chalk.name=Sialc [WIP]
 tile.ee3:glassBell.name=Glass Bell [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calchyniadwr [WIP]
 container.ee3:alchemicalBag=Bag Alcemaidd [WIP]
+container.ee3:calcinator=Calchyniadwr [WIP]
 
 # Creative Tab localizations
 itemGroup.EE3=Equivalent Exchange 3

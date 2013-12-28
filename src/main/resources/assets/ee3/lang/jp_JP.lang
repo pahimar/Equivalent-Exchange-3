@@ -1,34 +1,41 @@
-# Key localizations 
+# Key localizations
+key.charge=チャージ
 key.extra=エクストラ
 key.release=リリース
 key.toggle=トグル
-key.charge=チャージ
 
 # Item localizations
+item.ee3:alchemicalBag.name=錬金術袋 [WIP]
+item.ee3:alchemicalDust.Ash.name=灰 [WIP]
+item.ee3:alchemicalDust.Minium.name=鉛丹の粉末 [WIP]
+item.ee3:alchemicalDust.Verdant.name=新緑の粉末 [WIP]
+item.ee3:alchemicalDust.Azure.name=紺碧の粉末 [WIP]
+item.ee3:alchemicalDust.Iridescent.name=玉虫色の粉末 [WIP]
+item.ee3:alchemicalFuel.alchemicalCoal.name=錬金術石炭
+item.ee3:alchemicalFuel.mobiusFuel.name=メビウス燃料
+item.ee3:alchemicalFuel.aeternalisFuel.name=永遠燃料
+item.ee3:chalk.name=チョーク [WIP]
+item.ee3:diviningRod.name=探测杖
 item.ee3:shardMinium.name=鉛丹の欠片
 item.ee3:stoneInert.name=不活性な石
 item.ee3:stoneMinium.name=鉛丹石
 item.ee3:stonePhilosophers.name=賢者の石 [WIP]
-item.ee3:alchemicalDustAsh.name=灰 [WIP]
-item.ee3:alchemicalDustMinium.name=鉛丹の粉末 [WIP]
-item.ee3:alchemicalDustVerdant.name=新緑の粉末 [WIP]
-item.ee3:alchemicalDustAzure.name=紺碧の粉末 [WIP]
-item.ee3:alchemicalDustAmaranthine.name=紫赤色の粉末 [WIP]
-item.ee3:alchemicalDustIridescent.name=玉虫色の粉末 [WIP]
-item.ee3:alchemicalBag.name=奇術袋 [WIP]
-item.ee3:alchemicalChalk.name=奇術チョーク[WIP]
 
 # Block localizations
-tile.ee3:calcinator.name=煆焼器 [WIP]
-tile.ee3:aludel.name=アルデル [WIP]
 tile.ee3:alchemicalChest.name=奇術チェスト [WIP]
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=錬金術石炭
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=メビウス燃料
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永遠燃料
+tile.ee3:aludel.name=アルデル [WIP]
+tile.ee3:calcinator.name=煆焼器 [WIP]
+tile.ee3:chalk.name=チョーク [WIP]
 tile.ee3:glassBell.name=ガラス鐘 [WIP]
 
 # GUI localizations
-container.ee3:calcinator=煆焼器 [WIP]
-container.ee3:aludel=アルデル [WIP]
-container.ee3:alchemicalChest=奇術チェスト [WIP]
 container.ee3:alchemicalBag=奇術袋 [WIP]
+container.ee3:alchemicalChest=奇術チェスト [WIP]
+container.ee3:aludel=アルデル [WIP]
+container.ee3:calcinator=煆焼器 [WIP]
 container.ee3:glassBell=ガラス鐘 [WIP]
 
 # Command localizations

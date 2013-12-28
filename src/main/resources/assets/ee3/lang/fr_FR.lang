@@ -1,34 +1,34 @@
-# Key localizations 
+# Key localizations
+key.charge=Charger
 key.extra=Extra
 key.release=Libérer
 key.toggle=Basculer
-key.charge=Charger
 
 # Item localizations
+item.ee3:alchemicalBag.name=Sac d'alchimie [WIP]
+item.ee3:alchemicalDust.Ash.name=Ash [WIP]
+item.ee3:alchemicalDust.Minium.name=Poussière de minium [WIP]
+item.ee3:alchemicalDust.Verdant.name=Poussière verdoyante [WIP]
+item.ee3:alchemicalDust.Azure.name=Poussière d'azure [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Poussière irisé [WIP]
+item.ee3:chalk.name=Craie [WIP]
 item.ee3:shardMinium.name=Fragment de minium
 item.ee3:stoneInert.name=Pierre inerte
 item.ee3:stoneMinium.name=Pierre de minium
 item.ee3:stonePhilosophers.name=Pierre philosophale [WIP]
-item.ee3:alchemicalDustAsh.name=Ash [WIP]
-item.ee3:alchemicalDustMinium.name=Poussière de minium [WIP]
-item.ee3:alchemicalDustVerdant.name=Poussière verdoyante [WIP]
-item.ee3:alchemicalDustAzure.name=Poussière d'azure [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Poussière d'amaranthe [WIP]
-item.ee3:alchemicalDustIridescent.name=Poussière irisé [WIP]
-item.ee3:alchemicalBag.name=Sac d'alchimie [WIP]
-item.ee3:alchemicalChalk.name=Craie alchimique [WIP]
 
 # Block localizations
-tile.ee3:calcinator.name=Calcinateur [WIP]
-tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:alchemicalChest.name=Coffre alchimique [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinateur [WIP]
+tile.ee3:chalk.name=Craie [WIP]
 tile.ee3:glassBell.name=Cloche de verre [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calcinateur [WIP]
-container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalBag=Alchemical Bag [WIP]
 container.ee3:alchemicalChest=Coffre alchimique [WIP]
-container.ee3:alchemicalBag=Sac d'alchimie [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinateur [WIP]
 container.ee3:glassBell=Cloche de verre [WIP]
 
 # Command localizations

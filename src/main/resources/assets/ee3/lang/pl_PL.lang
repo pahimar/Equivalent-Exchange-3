@@ -1,28 +1,27 @@
-# Key localizations 
+# Key localizations
+key.charge=Ładuj
 key.extra=Dodatkowa funkcja
 key.release=Wypuść
 key.toggle=Przełącz
-key.charge=Ładuj
 
 # Item localizations
+item.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+item.ee3:alchemicalDust.Ash.name=Popiół [WIP]
+item.ee3:alchemicalDust.Minium.name=Proszek Minium [WIP]
+item.ee3:alchemicalDust.Verdant.name=Zielony Proszek [WIP]
+item.ee3:alchemicalDust.Azure.name=Lazurowy Proszek [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Opalowy Proszek [WIP]
 item.ee3:shardMinium.name=Odłam Minium
 item.ee3:stoneInert.name=Nieaktywny Kamień
 item.ee3:stoneMinium.name=Minium Kamień
 item.ee3:stonePhilosophers.name=Kamień Filozoficzny [WIP]
-item.ee3:alchemicalDustAsh.name=Popiół [WIP]
-item.ee3:alchemicalDustMinium.name=Proszek Minium [WIP]
-item.ee3:alchemicalDustVerdant.name=Zielony Proszek [WIP]
-item.ee3:alchemicalDustAzure.name=Lazurowy Proszek [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Amarantowy Proszek [WIP]
-item.ee3:alchemicalDustIridescent.name=Opalowy Proszek [WIP]
-item.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
 
 # Block localizations
 tile.ee3:calcinator.name=Kalcynator [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalcynator [WIP]
 container.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+container.ee3:calcinator=Kalcynator [WIP]
 
 # Creative Tab localizations
 itemGroup.EE3=Equivalent Exchange 3

@@ -1,34 +1,33 @@
-# Key localizations 
+# Key localizations
+key.charge=Oplad
 key.extra=Ekstra
 key.release=Slip
 key.toggle=Skift
-key.charge=Oplad
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alkymistisk Taske [WIP]
+item.ee3:alchemicalDust.Ash.name=Aske [WIP]
+item.ee3:alchemicalDust.Minium.name=Mønje Støv [WIP]
+item.ee3:alchemicalDust.Verdant.name=Frodigt Støv [WIP]
+item.ee3:alchemicalDust.Azure.name=Azur Støv [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Iriserende Støv [WIP]
 item.ee3:shardMinium.name=Skår af Mønje
 item.ee3:stoneInert.name=Inert Sten
 item.ee3:stoneMinium.name=Mønje Sten
 item.ee3:stonePhilosophers.name=De Vises Sten [WIP]
-item.ee3:alchemicalDustAsh.name=Aske [WIP]
-item.ee3:alchemicalDustMinium.name=Mønje Støv [WIP]
-item.ee3:alchemicalDustVerdant.name=Frodigt Støv [WIP]
-item.ee3:alchemicalDustAzure.name=Azur Støv [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Evigtvarende Støv [WIP]
-item.ee3:alchemicalDustIridescent.name=Iriserende Støv [WIP]
-item.ee3:alchemicalBag.name=Alkymistisk Taske [WIP]
 
 # Block localizations
-tile.redWaterStill.name=Rødt Vand (Stille)
-tile.redWaterFlowing.name=Rødt Vand (Stømmende)
-tile.ee3:calcinator.name=Kalkbrænder [WIP]
-tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:alchemicalChest.name=Alkymistisk Kiste [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Kalkbrænder [WIP]
+tile.redWaterFlowing.name=Rødt Vand (Stømmende)
+tile.redWaterStill.name=Rødt Vand (Stille)
 
 # GUI localizations
-container.ee3:calcinator=Kalkbrænder [WIP]
-container.ee3:aludel=Aludel [WIP]
-container.ee3:alchemicalChest=Alkymistisk Kiste [WIP]
 container.ee3:alchemicalBag=Alkymistisk Taskeo [WIP]
+container.ee3:alchemicalChest=Alkymistisk Kiste [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalkbrænder [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Forvandlingsoverlæg slået til

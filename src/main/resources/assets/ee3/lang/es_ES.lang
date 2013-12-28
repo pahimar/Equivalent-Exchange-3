@@ -1,35 +1,34 @@
-# Key localizations 
+# Key localizations
+key.charge=Cargar
 key.extra=Extra
 key.release=Lanzar
 key.toggle=Mueva
-key.charge=Cargar
 
 # Item localizations
+item.ee3:alchemicalBag.name=Bolsa Alquímica
+item.ee3:alchemicalDust.Ash.name=Ceniza
+item.ee3:alchemicalDust.Minium.name=Polvo de Minio
+item.ee3:alchemicalDust.Verdant.name=Polvo Verdante
+item.ee3:alchemicalDust.Azure.name=Polvo Azur
+item.ee3:alchemicalDust.Iridescent.name=Polvo Iridiscente
 item.ee3:shardMinium.name=Fragmento de Minio
 item.ee3:stoneInert.name=Piedra Inerte
 item.ee3:stoneMinium.name=Piedra de Minio
 item.ee3:stonePhilosophers.name=Piedra Filosofal
-item.ee3:alchemicalDustAsh.name=Ceniza
-item.ee3:alchemicalDustMinium.name=Polvo de Minio
-item.ee3:alchemicalDustVerdant.name=Polvo Verdante
-item.ee3:alchemicalDustAzure.name=Polvo Azur
-item.ee3:alchemicalDustAmaranthine.name=Polvo Purpúreo
-item.ee3:alchemicalDustIridescent.name=Polvo Iridiscente
-item.ee3:alchemicalBag.name=Bolsa Alquímica
 
 # Block localizations
-tile.ee3:redWaterStill.name=Agua Roja (Quieta)
-tile.ee3:redWaterFlowing.name=Agua Roja (Fluyendo)
-tile.ee3:calcinator.name=Calcinador
-tile.ee3:aludel.name=Aludel
 tile.ee3:alchemicalChest.name=Cofre Alquímico
+tile.ee3:aludel.name=Aludel
+tile.ee3:calcinator.name=Calcinador
 tile.ee3:glassBell.name=Campana de Cristal
+tile.ee3:redWaterFlowing.name=Agua Roja (Fluyendo)
+tile.ee3:redWaterStill.name=Agua Roja (Quieta)
 
 # GUI localizations
-container.ee3:calcinator=Calcinator
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Cofre Alquímico
 container.ee3:alchemicalBag=Bolsa Alquímica
+container.ee3:alchemicalChest=Cofre Alquímico
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Campana de Cristal
 
 # Command localizations

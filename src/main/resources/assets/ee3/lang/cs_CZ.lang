@@ -1,34 +1,37 @@
-
+# Key localizations
+key.charge=Nabít
 key.extra=Extra
 key.release=Vypustit
 key.toggle=Přepnout
-key.charge=Nabít
 
+# Item localizations
+item.ee3:alchemicalBag.name=Alchymistický pytlík
+item.ee3:alchemicalDust.Ash.name=Popel
+item.ee3:alchemicalDust.Minium.name=Suříkový prášek
+item.ee3:alchemicalDust.Verdant.name=Nazelenalý prášek
+item.ee3:alchemicalDust.Azure.name=Azurový prášek
+item.ee3:alchemicalDust.Iridescent.name=Duhový prášek
 item.ee3:shardMinium.name=Úlomek suříku
 item.ee3:stoneInert.name=Inertní kámen
 item.ee3:stoneMinium.name=Kámen suříku
 item.ee3:stonePhilosophers.name=Kámen mudrců
-item.ee3:alchemicalDustAsh.name=Popel
-item.ee3:alchemicalDustMinium.name=Suříkový prášek
-item.ee3:alchemicalDustVerdant.name=Nazelenalý prášek
-item.ee3:alchemicalDustAzure.name=Azurový prášek
-item.ee3:alchemicalDustAmaranthine.name=Amarantový prášek
-item.ee3:alchemicalDustIridescent.name=Duhový prášek
-item.ee3:alchemicalBag.name=Alchymistický pytlík
 
-tile.ee3:redWaterStill.name=Rudá voda (v klidu)
-tile.ee3:redWaterFlowing.name=Rudá voda (tekoucí)
-tile.ee3:calcinator.name=Kalcinátor
-tile.ee3:aludel.name=Sublimační nádoba
+# Block localizations
 tile.ee3:alchemicalChest.name=Alchymistická truhla
+tile.ee3:aludel.name=Sublimační nádoba
+tile.ee3:calcinator.name=Kalcinátor
 tile.ee3:glassBell.name=Skleněný zvon
+tile.ee3:redWaterFlowing.name=Rudá voda (tekoucí)
+tile.ee3:redWaterStill.name=Rudá voda (v klidu)
 
-container.calcinator=Kalcinátor
-container.aludel=Sublimační nádoba
-container.alchemicalChest=Alchymistická truhla
+# GUI localizations
 container.alchemicalBag=Alchymistický pytlík
+container.alchemicalChest=Alchymistická truhla
+container.aludel=Sublimační nádoba
+container.calcinator=Kalcinátor
 container.glassBell=Skleněný zvon
 
+# Command localizatoins
 command.ee3.overlay.turned_on=Zobrazení výsledku transmutace zapnuto
 command.ee3.overlay.turned_off=Zobrazení výsledku transmutace vypnuto
 command.ee3.overlay.position.top_left=Pozice zobrazení výsledku transmutace nastavena na levý horní roh
@@ -45,8 +48,10 @@ command.ee3.sounds.set_to_all=Přehrávání zvuků z Equivalent Exchange 3 od v
 command.ee3.sounds.set_to_self=Přehrávání zvuků z Equivalent Exchange 3 pouze od aktuálního hráče
 command.ee3.sounds.turned_off=Přehrávání zvuků z Equivalent Exchange 3 vypnuto
 
+# Creative Tab localizations
 itemGroup.EE3=Equivalent Exchange 3
 
+# Version Check localizations
 version.init_log_message=Provádím kontrolu verze, vzdálený soubor umístěn na
 version.uninitialized=Kontrola verze neproběhla úspěšně (nezdařila se inicializace)
 version.current=Používáte nejaktuálnější verzi (@REMOTE_MOD_VERSION@) modu Equivalent Exchange 3, která je pro vaši verzi Minecraftu (@MINECRAFT_VERSION@) k dispozici

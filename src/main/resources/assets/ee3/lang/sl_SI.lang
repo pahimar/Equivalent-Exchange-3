@@ -1,35 +1,34 @@
 # Key localizations
+key.charge=Nabij
 key.extra=Dodatno
 key.release=Sproži
 key.toggle=Preklopi
-key.charge=Nabij
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alkimistična Vreča
+item.ee3:alchemicalDust.Ash.name=Pepel
+item.ee3:alchemicalDust.Minium.name=Minijev Prah
+item.ee3:alchemicalDust.Verdant.name=Zelen Prah
+item.ee3:alchemicalDust.Azure.name=Moder Prah
+item.ee3:alchemicalDust.Iridescent.name=Mavrični Prah
 item.ee3:shardMinium.name=Drobec Minija
 item.ee3:stoneInert.name=Nedejaven Kamen
 item.ee3:stoneMinium.name=Minijev Kamen
 item.ee3:stonePhilosophers.name=Kamen Modrosti
-item.ee3:alchemicalDustAsh.name=Pepel
-item.ee3:alchemicalDustMinium.name=Minijev Prah
-item.ee3:alchemicalDustVerdant.name=Zelen Prah
-item.ee3:alchemicalDustAzure.name=Moder Prah
-item.ee3:alchemicalDustAmaranthine.name=Vijoličen Prah
-item.ee3:alchemicalDustIridescent.name=Mavrični Prah
-item.ee3:alchemicalBag.name=Alkimistična Vreča
 
 # Block localizations
-tile.ee3:redWaterStill.name=Rdeča Voda (Mirujoča)
-tile.ee3:redWaterFlowing.name=Rdeča Voda (Pretočna)
-tile.ee3:calcinator.name=Kalcinator
-tile.ee3:aludel.name=Aludel
 tile.ee3:alchemicalChest.name=Alkimistični Zaboj
+tile.ee3:aludel.name=Aludel
+tile.ee3:calcinator.name=Kalcinator
 tile.ee3:glassBell.name=Stekleni Zvonec
+tile.ee3:redWaterFlowing.name=Rdeča Voda (Pretočna)
+tile.ee3:redWaterStill.name=Rdeča Voda (Mirujoča)
 
 # GUI localizations
-container.ee3:calcinator=Kalcinator
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Alkimistični Zaboj
 container.ee3:alchemicalBag=Alkimistična Vreča
+container.ee3:alchemicalChest=Alkimistični Zaboj
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Kalcinator
 container.ee3:glassBell=Stekleni Zvonec
 
 # Command localizations
