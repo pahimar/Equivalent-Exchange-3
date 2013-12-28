@@ -1,38 +1,41 @@
-# Key localizations 
+# Key localizations
+key.charge=Aufladen
 key.extra=Extra
 key.release=Auflösen
 key.toggle=Umschalten
-key.charge=Aufladen
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
+item.ee3:alchemicalDust.Ash.name=Asche [WIP]
+item.ee3:alchemicalDust.Verdant.name=Grüner Staub [WIP]
+item.ee3:alchemicalDust.Azure.name=Azurblauer Staub [WIP]
+item.ee3:alchemicalDust.Minium.name=Miniumstaub [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemiekohle
+item.ee3:alchemicalFuel.mobiusFuel.name=Mobius-Brennstoff
+item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis-Brennstoff
+item.ee3:chalk.name=Kreide [WIP]
+item.ee3:diviningRod.name=Wünschelrute [WIP]
 item.ee3:shardMinium.name=Miniumscherbe
 item.ee3:stoneInert.name=Inerter Stein
 item.ee3:stoneMinium.name=Miniumstein
 item.ee3:stonePhilosophers.name=Stein der Weisen [WIP]
-item.ee3:alchemicalDustAsh.name=Asche [WIP]
-item.ee3:alchemicalDustMinium.name=Miniumstaub [WIP]
-item.ee3:alchemicalDustVerdant.name=Grüner Staub [WIP]
-item.ee3:alchemicalDustAzure.name=Azurblauer Staub [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Amaranther Staub [WIP]
-item.ee3:alchemicalDustIridescent.name=Irisierender Staub [WIP]
-item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
-item.ee3:alchemicalChalk.name=Alchemiekreide [WIP]
-item.ee3:diviningRod.name=Wünschelrute [WIP]
-item.ee3:alchemicalCoal.name=Alchemiekohle [WIP]
-item.ee3:mobiusFuel.name=Mobius-Brennstoff [WIP]
-item.ee3:aeternalisFuel.name=Aeternalis-Brennstoff [WIP]
 
 # Block localizations
-tile.ee3:calcinator.name=Kalzinierer [WIP]
-tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:alchemicalChest.name=Alchemietruhe [WIP]
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemiekohle
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius-Brennstoff
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis-Brennstoff
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Kalzinierer [WIP]
+tile.ee3:chalk.name=Kreide
 tile.ee3:glassBell.name=Glasglocke [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalzinierer [WIP]
-container.ee3:aludel=Aludel [WIP]
-container.ee3:alchemicalChest=Alchemietruhe [WIP]
 container.ee3:alchemicalBag=Alchemiebeutel [WIP]
+container.ee3:alchemicalChest=Alchemietruhe [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalzinierer [WIP]
 container.ee3:glassBell=Glasglocke [WIP]
 
 # Command localizations
