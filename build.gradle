@@ -104,7 +104,7 @@ task release(type: Copy) {
     eachFile { file ->
         logger.info "copying ${file}"
     }
-
+    logger.info "release dir ${project.ee3_release_loc}"
     // only if the release location isn't empty.
     onlyIf {
         return project.ee3_release_loc != "."
