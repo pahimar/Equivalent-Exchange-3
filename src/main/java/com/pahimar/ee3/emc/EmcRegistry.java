@@ -121,6 +121,7 @@ public class EmcRegistry
                     EmcValue factoredEmcValue = EmcHelper.factorEmcValue(emcValue, wrappedStack.getStackSize());
                     WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack);
                     factoredWrappedStack.setStackSize(1);
+                    // TODO Duplicate entry protection
                     stackValueMap.put(factoredWrappedStack, factoredEmcValue);
                 }
             }
@@ -138,16 +139,19 @@ public class EmcRegistry
         {
             EmcValue value = stackMappings.get(stack);
 
-            if (tempValueMappings.containsKey(value))
+            if (value != null)
             {
-                if (!(tempValueMappings.get(value).contains(stack)))
+                if (tempValueMappings.containsKey(value))
                 {
-                    tempValueMappings.get(value).add(stack);
+                    if (!(tempValueMappings.get(value).contains(stack)))
+                    {
+                        tempValueMappings.get(value).add(stack);
+                    }
                 }
-            }
-            else
-            {
-                tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                else
+                {
+                    tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                }
             }
         }
 
