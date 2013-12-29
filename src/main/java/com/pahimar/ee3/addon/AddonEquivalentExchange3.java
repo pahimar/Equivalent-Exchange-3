@@ -1,8 +1,8 @@
 package com.pahimar.ee3.addon;
 
+import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.ModItems;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class AddonEquivalentExchange3
@@ -19,7 +19,7 @@ public class AddonEquivalentExchange3
         /**
          * Chalk
          */
-        AddonHandler.sendAddRecipe(new ItemStack(ModItems.chalk, 4), new ItemStack(Item.clay, 4), new ItemStack(Item.dyePowder.itemID, 1, 15));
+        AddonHandler.sendAddRecipe(new ItemStack(ModItems.chalk, 4), new ItemStack(ModBlocks.chalk));
     }
 
     private static void addPreAssignmentEmcValues()
