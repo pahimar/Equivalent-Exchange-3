@@ -36,7 +36,7 @@ minecraft {
         replace "@FINGERPRINT@", project.ee3_signature
 }
 
-version = "MC_${config.minecraft_version}-${config.mod_version}.${System.getenv().BUILD_NUMBER}"
+version = "${config.minecraft_version}-${config.mod_version}.${System.getenv().BUILD_NUMBER}"
 
 processResources {
     // replace stuff in the files we want.
