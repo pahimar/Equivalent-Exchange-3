@@ -108,47 +108,86 @@ public class EmcRegistry
         /*
          *  Auto-assignment
          */
+        // Initialize the maps for the first pass to happen
         ImmutableSortedMap.Builder<WrappedStack, EmcValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
-        stackValueMap.clear();
         stackMappings = stackMappingsBuilder.build();
-
-        int passNumber = 0;
         Map<WrappedStack, EmcValue> computedStackValues = computeStackMappings();
+
+        // Initialize the pass counter
+        int passNumber = 0;
 
         while ((computedStackValues.size() > 0) && (passNumber < 16))
         {
+            // Increment the pass counter
             passNumber++;
-            computedStackValues = computeStackMappings();
-            // TODO Duplicate entry protection
+
+            // Set the values for getEmcValue calls in the auto-assignment computation
             stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-            stackMappingsBuilder.putAll(stackMappings);
-            stackMappingsBuilder.putAll(computedStackValues);
+            stackMappingsBuilder.putAll(stackValueMap);
             stackMappings = stackMappingsBuilder.build();
+
+            // Compute stack mappings from existing stack mappings
+            computedStackValues = computeStackMappings();
+            for (WrappedStack keyStack : computedStackValues.keySet())
+            {
+                EmcValue factoredEmcValue = null;
+                WrappedStack factoredKeyStack = null;
+
+                if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
+                {
+                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getValue(), 0f) > Compare.EQUALS)
+                    {
+                        factoredEmcValue = EmcHelper.factorEmcValue(computedStackValues.get(keyStack), keyStack.getStackSize());
+                        factoredKeyStack = new WrappedStack(keyStack, 1);
+                    }
+                }
+
+                if (factoredEmcValue != null && factoredKeyStack != null)
+                {
+                    if (stackValueMap.containsKey(factoredKeyStack))
+                    {
+                        if (factoredEmcValue.compareTo(stackValueMap.get(factoredKeyStack)) == Compare.LESSER_THAN)
+                        {
+                            stackValueMap.put(factoredKeyStack, factoredEmcValue);
+                        }
+                    }
+                    else
+                    {
+                        stackValueMap.put(factoredKeyStack, factoredEmcValue);
+                    }
+                }
+            }
         }
         
         /*
          *  IMC Post-assigned values
          */
-        stackValueMap.putAll(stackMappings);
         Map<WrappedStack, EmcValue> postAssignedValuesMap = EmcValuesIMC.getPostAssignedValues();
-        for (WrappedStack wrappedStack : postAssignedValuesMap.keySet())
+        for (WrappedStack keyStack : postAssignedValuesMap.keySet())
         {
-            if (wrappedStack != null && wrappedStack.getStackSize() > 0)
+            EmcValue factoredEmcValue = null;
+            WrappedStack factoredKeyStack = null;
+
+            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
             {
-
-                EmcValue emcValue = postAssignedValuesMap.get(wrappedStack);
-
-                if (emcValue != null && emcValue.getValue() > 0f)
+                if (postAssignedValuesMap.get(keyStack) != null && Float.compare(postAssignedValuesMap.get(keyStack).getValue(), 0f) > Compare.EQUALS)
                 {
-                    EmcValue factoredEmcValue = EmcHelper.factorEmcValue(emcValue, wrappedStack.getStackSize());
-                    WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack);
-                    factoredWrappedStack.setStackSize(1);
-                    // TODO Duplicate entry protection
-                    stackValueMap.put(factoredWrappedStack, factoredEmcValue);
+                    factoredEmcValue = EmcHelper.factorEmcValue(postAssignedValuesMap.get(keyStack), keyStack.getStackSize());
+                    factoredKeyStack = new WrappedStack(keyStack, 1);
                 }
             }
+
+            // Post auto assignment values are meant to override all over values, so we just take the value given
+            if (factoredEmcValue != null && factoredKeyStack != null)
+            {
+                stackValueMap.put(factoredKeyStack, factoredEmcValue);
+            }
         }
+
+        /**
+         * Finalize the stack to value map
+         */
         stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
