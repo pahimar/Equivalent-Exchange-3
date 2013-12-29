@@ -5,6 +5,7 @@ import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.EmcHelper;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import com.pahimar.ee3.lib.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -40,21 +41,32 @@ public class EmcRegistry
          *  Default values
          */
         Map<WrappedStack, EmcValue> defaultValuesMap = EmcValuesDefault.getDefaultValueMap();
-        for (WrappedStack wrappedStack : defaultValuesMap.keySet())
+        for (WrappedStack keyStack : defaultValuesMap.keySet())
         {
-            if (wrappedStack != null && wrappedStack.getStackSize() > 0)
-            {
-                if (!stackValueMap.keySet().contains(wrappedStack))
-                {
-                    EmcValue emcValue = defaultValuesMap.get(wrappedStack);
+            EmcValue factoredEmcValue = null;
+            WrappedStack factoredKeyStack = null;
 
-                    if (emcValue != null && emcValue.getValue() > 0f)
+            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
+            {
+                if (defaultValuesMap.get(keyStack) != null && Float.compare(defaultValuesMap.get(keyStack).getValue(), 0f) > Compare.EQUALS)
+                {
+                    factoredEmcValue = EmcHelper.factorEmcValue(defaultValuesMap.get(keyStack), keyStack.getStackSize());
+                    factoredKeyStack = new WrappedStack(keyStack, 1);
+                }
+            }
+
+            if (factoredEmcValue != null && factoredKeyStack != null)
+            {
+                if (stackValueMap.containsKey(factoredKeyStack))
+                {
+                    if (factoredEmcValue.compareTo(stackValueMap.get(factoredKeyStack)) == Compare.LESSER_THAN)
                     {
-                        EmcValue factoredEmcValue = EmcHelper.factorEmcValue(emcValue, wrappedStack.getStackSize());
-                        WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack);
-                        factoredWrappedStack.setStackSize(1);
-                        stackValueMap.put(factoredWrappedStack, factoredEmcValue);
+                        stackValueMap.put(factoredKeyStack, factoredEmcValue);
                     }
+                }
+                else
+                {
+                    stackValueMap.put(factoredKeyStack, factoredEmcValue);
                 }
             }
         }
@@ -63,21 +75,32 @@ public class EmcRegistry
          *  IMC Pre-assigned values
          */
         Map<WrappedStack, EmcValue> preAssignedValuesMap = EmcValuesIMC.getPreAssignedValues();
-        for (WrappedStack wrappedStack : preAssignedValuesMap.keySet())
+        for (WrappedStack keyStack : preAssignedValuesMap.keySet())
         {
-            if (wrappedStack != null && wrappedStack.getStackSize() > 0)
-            {
-                if (!stackValueMap.keySet().contains(wrappedStack))
-                {
-                    EmcValue emcValue = preAssignedValuesMap.get(wrappedStack);
+            EmcValue factoredEmcValue = null;
+            WrappedStack factoredKeyStack = null;
 
-                    if (emcValue != null && emcValue.getValue() > 0f)
+            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
+            {
+                if (preAssignedValuesMap.get(keyStack) != null && Float.compare(preAssignedValuesMap.get(keyStack).getValue(), 0f) > Compare.EQUALS)
+                {
+                    factoredEmcValue = EmcHelper.factorEmcValue(preAssignedValuesMap.get(keyStack), keyStack.getStackSize());
+                    factoredKeyStack = new WrappedStack(keyStack, 1);
+                }
+            }
+
+            if (factoredEmcValue != null && factoredKeyStack != null)
+            {
+                if (stackValueMap.containsKey(factoredKeyStack))
+                {
+                    if (factoredEmcValue.compareTo(stackValueMap.get(factoredKeyStack)) == Compare.LESSER_THAN)
                     {
-                        EmcValue factoredEmcValue = EmcHelper.factorEmcValue(emcValue, wrappedStack.getStackSize());
-                        WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack);
-                        factoredWrappedStack.setStackSize(1);
-                        stackValueMap.put(factoredWrappedStack, factoredEmcValue);
+                        stackValueMap.put(factoredKeyStack, factoredEmcValue);
                     }
+                }
+                else
+                {
+                    stackValueMap.put(factoredKeyStack, factoredEmcValue);
                 }
             }
         }
@@ -137,20 +160,23 @@ public class EmcRegistry
 
         for (WrappedStack stack : stackMappings.keySet())
         {
-            EmcValue value = stackMappings.get(stack);
-
-            if (value != null)
+            if (stack != null)
             {
-                if (tempValueMappings.containsKey(value))
+                EmcValue value = stackMappings.get(stack);
+
+                if (value != null)
                 {
-                    if (!(tempValueMappings.get(value).contains(stack)))
+                    if (tempValueMappings.containsKey(value))
                     {
-                        tempValueMappings.get(value).add(stack);
+                        if (!(tempValueMappings.get(value).contains(stack)))
+                        {
+                            tempValueMappings.get(value).add(stack);
+                        }
                     }
-                }
-                else
-                {
-                    tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                    else
+                    {
+                        tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                    }
                 }
             }
         }
