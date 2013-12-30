@@ -7,7 +7,7 @@
 
 [Contributing](#contributing) - For those that want to help out.
 
-[FAQ](#faq) - For those that have questions.
+[FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Reported-Questions) - For those that have questions.
 
 ###Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
@@ -43,7 +43,7 @@ The Java JDK is used to compile EE3.
     * For `Variable Value`, input something similar to `C:\Program Files\Java\jdk1.7.0_45` exactly as shown (or wherever your Java JDK installation is), and click `Ok`.
     * Scroll down to a variable named `Path`, and double-click on it.
     * Append `;%JAVA_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Make sure the location is correct; double-check just to make sure.
-3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
+3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Reported-Questions).
 
 ####Setup Gradle
 Gradle is used to execute the various build tasks when compiling EE3.
@@ -61,7 +61,7 @@ Gradle is used to execute the various build tasks when compiling EE3.
 	* For `Variable Name`, input `GRADLE_HOME`.
 	* For `Variable Value`, input something similar to `C:\Gradle-1.10` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
 	* Scroll down to `Path` again, and append `;%GRADLE_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Once again, double-check the location.
-3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
+3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Reported-Questions).
 
 ####Setup Git
 Git is used to clone EE3 and update your local copy.
@@ -127,6 +127,3 @@ EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 		* Server log (if applicable)
 		* Detailed description of the bug
 5. Click `Submit new issue`, and wait for feedback!
-
-###FAQ
-The FAQ is now located on the [wiki](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Reported-Questions).
