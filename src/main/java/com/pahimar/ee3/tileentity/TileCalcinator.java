@@ -1,5 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.client.helper.ColourUtils;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.recipe.CalcinationManager;
 import cpw.mods.fml.relauncher.Side;
@@ -349,13 +350,6 @@ public class TileCalcinator extends TileEE implements IInventory
         }
     }
 
-    @Override
-    // TODO This is not an ideal toString
-    public String toString()
-    {
-        return super.toString();
-    }
-
     public int getCombinedOutputSize()
     {
         int result = 0;
@@ -371,5 +365,34 @@ public class TileCalcinator extends TileEE implements IInventory
         }
 
         return result;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public float[] getBlendedDustColour()
+    {
+        if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null && inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        {
+            int leftStackColour = inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
+            int rightStackColour = inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
+
+            int stackSizeStepRange = 8;
+            int leftStackSize = inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
+            int rightStackSize = inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
+            float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 2 * stackSizeStepRange - 1);
+
+            return blendedColours[stackSizeStepRange + (leftStackSize - rightStackSize)];
+        }
+        else if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
+        {
+            return ColourUtils.convertIntColourToFloatArray(inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1));
+        }
+        else if (inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        {
+            return ColourUtils.convertIntColourToFloatArray(inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1));
+        }
+        else
+        {
+            return new float[]{1F, 1F, 1F};
+        }
     }
 }

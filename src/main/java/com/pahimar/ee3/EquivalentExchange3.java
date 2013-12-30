@@ -51,6 +51,7 @@ public class EquivalentExchange3
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
         // Report (log) to the user that the version of Equivalent Exchange 3
@@ -66,6 +67,7 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStarting(FMLServerStartingEvent event)
     {
         // Initialize the custom commands
@@ -73,6 +75,7 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void preInit(FMLPreInitializationEvent event)
     {
         // set version number
@@ -110,7 +113,7 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked, unused")
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
@@ -155,12 +158,14 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void handleIMCMessages(IMCEvent event)
     {
         InterModCommsHandler.processIMCMessages(event);

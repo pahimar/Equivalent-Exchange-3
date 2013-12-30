@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class EmcValuesDefault
 {
-
     private static EmcValuesDefault emcDefaultValues = null;
     private Map<WrappedStack, EmcValue> valueMap;
 
@@ -63,9 +62,6 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
         valueMap.put(new WrappedStack(FluidRegistry.getFluid("milk")), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 3), new EmcComponent(EmcType.AMORPHOUS, 1))));
-
-//        valueMap.put(new WrappedStack(Block.waterStill), new EmcValue(0.1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
-//        valueMap.put(new WrappedStack(Block.lavaStill), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
 
         /* Building Blocks */
         valueMap.put(new WrappedStack(Block.stone), new EmcValue(1));
@@ -189,12 +185,10 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 2)), new EmcValue(2048));
         valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 3)), new EmcValue(8192));
         valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 4)), new EmcValue(73728));
-        valueMap.put(new WrappedStack(new ItemStack(ModItems.alchemicalDust, 1, 5)), new EmcValue(4718592));
     }
 
     public static Map<WrappedStack, EmcValue> getDefaultValueMap()
     {
-
         lazyInit();
         return emcDefaultValues.valueMap;
     }

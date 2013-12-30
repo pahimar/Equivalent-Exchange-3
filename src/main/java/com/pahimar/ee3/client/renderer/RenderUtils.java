@@ -18,14 +18,13 @@ import org.lwjgl.opengl.GL11;
  *
  * @author pahimar
  */
+//@SideOnly(Side.CLIENT)
 public class RenderUtils
 {
-
     private static int rotationAngle = 0;
 
     public static void renderRotatingBlockIntoGUI(FontRenderer fontRenderer, ItemStack stack, int x, int y, float zLevel, float scale)
     {
-
         RenderBlocks renderBlocks = new RenderBlocks();
 
         Block block = Block.blocksList[stack.itemID];
@@ -55,7 +54,6 @@ public class RenderUtils
 
     public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale)
     {
-
         Icon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.VANILLA_ITEM_TEXTURE_SHEET);
@@ -70,7 +68,6 @@ public class RenderUtils
 
     public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel)
     {
-
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getMaxV());
