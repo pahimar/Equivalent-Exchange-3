@@ -53,9 +53,9 @@ Gradle is used to execute the various build tasks when compiling EE3.
 		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
 	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
 		* Gentoo: `emerge dev-java/gradle-bin`
-		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle)
+		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle).
 		* Ubuntu/Debian: `apt-get install gradle`
-		* Fedora: `yum install gradle`
+		* Fedora: Install Gradle manually from its website (see above), as Fedora ships a "broken" version of Gradle.  Use `yum install gradle` only if you know what you're doing.
 2. Windows: Set environment variables for Gradle.
 	* Go back to `Environment Variables` and then create a new system variable.
 	* For `Variable Name`, input `GRADLE_HOME`.
@@ -129,16 +129,4 @@ EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 5. Click `Submit new issue`, and wait for feedback!
 
 ###FAQ
-Answers to frequently reported issues and/or questions.
-***
-**Q:** What's a command line?
-**A:** The command line is at the heart of every operating system.  It's `Command Prompt` for Windows and `Terminal` for Mac and Linux.
-
-**Q:** `javac` or `gradle` keeps giving me an error!
-**A:** Make sure the locations you typed are correct.  For example, if you typed `C:\Java` for `JAVA_HOME`, make sure `C:\Java` exists, and there's a `bin` folder inside of it.
-
-**Q:** Gradle keeps saying `BUILD FAILED` and I don't know how to fix it!
-**A:** Make sure you executed `gradle setupDevWorkspace`.  If you already did, try doing it again.  If it still fails, try creating an issue.
-
-**Q:** My issue/PR was closed!
-**A:** Somebody probably commented and solved your issue, or it was opened a long time ago.  If it's a PR, check to see if there's a commit message right before it was closed.  If so, pahimar either pulled your PR or found a different way to do it.
+The FAQ is now located on the [wiki](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Reported-Questions).
