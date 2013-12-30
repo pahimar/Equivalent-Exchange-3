@@ -26,7 +26,6 @@ public class EntityLivingHandler
     @ForgeSubscribe
     public void onEntityLivingDeath(LivingDeathEvent event)
     {
-
         if (event.source.getDamageType().equals("player"))
         {
             ItemHelper.dropMiniumShard((EntityPlayer) event.source.getSourceOfDamage(), event.entityLiving);

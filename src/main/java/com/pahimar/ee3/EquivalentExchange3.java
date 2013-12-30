@@ -116,9 +116,6 @@ public class EquivalentExchange3
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
 
-        // Register the PlayerDestroyItem Handler
-        MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
-
         // Register the Item Pickup Handler
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
 

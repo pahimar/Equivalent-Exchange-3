@@ -26,7 +26,7 @@ public class ItemAlchemicalDust extends ItemEE
 {
     public static final EmcValue[] DEFAULT_EMC_VALUES = {
             new EmcValue(1),
-            new EmcValue(256),
+            new EmcValue(64),
             new EmcValue(2048),
             new EmcValue(8192),
             new EmcValue(4718592)
