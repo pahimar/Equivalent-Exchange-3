@@ -2,14 +2,13 @@ package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.recipe.CalcinationManager;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -32,9 +31,9 @@ public class TileCalcinator extends TileEE implements IInventory
     public static final int OUTPUT_LEFT_INVENTORY_INDEX = 2;
     public static final int OUTPUT_RIGHT_INVENTORY_INDEX = 3;
 
-    public int remainingBurnTime;           // How much longer the Calcinator will burn
-    public int currentFuelsFuelValue;       // The fuel value for the currently burning fuel
-    public int currentItemCookTime;         // How long the current item has been "cooking"
+    public int calcinatorCookTime;          // How much longer the Calcinator will cook
+    public int fuelBurnTime;                // The fuel value for the currently burning fuel
+    public int itemCookTime;                // How long the current item has been "cooking"
 
     public TileCalcinator()
     {
@@ -181,23 +180,23 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public void updateEntity()
     {
-        boolean isBurning = this.remainingBurnTime > 0;
+        boolean isBurning = this.calcinatorCookTime > 0;
         boolean inventoryChanged = false;
 
         // If the Calcinator still has burn time, decrement it
-        if (this.remainingBurnTime > 0)
+        if (this.calcinatorCookTime > 0)
         {
-            this.remainingBurnTime--;
+            this.calcinatorCookTime--;
         }
 
         if (!this.worldObj.isRemote)
         {
-            if (this.remainingBurnTime == 0 && this.canCalcinate())
+            if (this.calcinatorCookTime == 0 && this.canCalcinate())
             {
                 // TODO Effect burn speed by fuel quality
-                this.currentFuelsFuelValue = this.remainingBurnTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
+                this.fuelBurnTime = this.calcinatorCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
 
-                if (this.remainingBurnTime > 0)
+                if (this.calcinatorCookTime > 0)
                 {
                     inventoryChanged = true;
 
@@ -215,21 +214,21 @@ public class TileCalcinator extends TileEE implements IInventory
 
             if (this.isBurning() && this.canCalcinate())
             {
-                this.currentItemCookTime++;
+                this.itemCookTime++;
 
-                if (this.currentItemCookTime == 200)
+                if (this.itemCookTime == 200)
                 {
-                    this.currentItemCookTime = 0;
+                    this.itemCookTime = 0;
                     this.calcinateItem();
                     inventoryChanged = true;
                 }
             }
             else
             {
-                this.currentItemCookTime = 0;
+                this.itemCookTime = 0;
             }
 
-            if (isBurning != this.remainingBurnTime > 0)
+            if (isBurning != this.calcinatorCookTime > 0)
             {
                 inventoryChanged = true;
                 // TODO Add in world effects to show that we are making dust
@@ -244,13 +243,28 @@ public class TileCalcinator extends TileEE implements IInventory
 
     public boolean isBurning()
     {
-        return this.remainingBurnTime > 0;
+        return this.calcinatorCookTime > 0;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int scale)
+    {
+        return this.itemCookTime * scale / 200;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBurnTimeRemainingScaled(int scale)
+    {
+        if (this.itemCookTime == 0)
+        {
+            this.itemCookTime = 200;
+        }
+
+        return this.calcinatorCookTime * scale / this.fuelBurnTime;
     }
 
     /**
      * Determines if with the current inventory we can calcinate an item into dusts
-     *
-     * @return
      */
     private boolean canCalcinate()
     {
@@ -292,20 +306,13 @@ public class TileCalcinator extends TileEE implements IInventory
             {
                 return leftResult <= getInventoryStackLimit() && leftResult <= alchemicalDustStack.getMaxStackSize();
             }
-            else if (!leftEquals && rightEquals)
+            else if (!leftEquals)
             {
                 return rightResult <= getInventoryStackLimit() && rightResult <= alchemicalDustStack.getMaxStackSize();
             }
             else
             {
-                if (leftResult <= getInventoryStackLimit() && leftResult <= alchemicalDustStack.getMaxStackSize())
-                {
-                    return true;
-                }
-                else
-                {
-                    return rightResult <= getInventoryStackLimit() && rightResult <= alchemicalDustStack.getMaxStackSize();
-                }
+                return leftResult <= getInventoryStackLimit() && leftResult <= alchemicalDustStack.getMaxStackSize() || rightResult <= getInventoryStackLimit() && rightResult <= alchemicalDustStack.getMaxStackSize();
             }
         }
     }
@@ -342,22 +349,11 @@ public class TileCalcinator extends TileEE implements IInventory
         }
     }
 
-    private List<ItemStack> getDustForItemStack(ItemStack cookedItemStack)
-    {
-        List<ItemStack> dustList = new ArrayList<ItemStack>();
-
-        return null;
-    }
-
     @Override
     // TODO This is not an ideal toString
     public String toString()
     {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(super.toString());
-
-        return stringBuilder.toString();
+        return super.toString();
     }
 
     public int getCombinedOutputSize()

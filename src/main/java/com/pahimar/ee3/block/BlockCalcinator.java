@@ -100,6 +100,12 @@ public class BlockCalcinator extends BlockContainerEE
         }
     }
 
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    {
+        // TODO Spawn particles
+    }
+
     private void dropInventory(World world, int x, int y, int z)
     {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
