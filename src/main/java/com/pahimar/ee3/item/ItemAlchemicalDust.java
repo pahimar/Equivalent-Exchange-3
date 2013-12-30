@@ -29,6 +29,7 @@ public class ItemAlchemicalDust extends ItemEE
             new EmcValue(64),
             new EmcValue(2048),
             new EmcValue(8192),
+            new EmcValue(73728),
             new EmcValue(4718592)
     };
 
