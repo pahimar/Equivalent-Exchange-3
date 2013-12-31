@@ -89,7 +89,7 @@ public class ItemCalcinatorRenderer implements IItemRenderer
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
 
         // Render
-        modelCalcinator.render();
+        modelCalcinator.renderPart("Calcinator");
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
