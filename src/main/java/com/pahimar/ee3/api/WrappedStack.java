@@ -457,7 +457,8 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         if (wrappedStack.wrappedStack instanceof ItemStack)
         {
-            jsonWrappedStack.add("wrappedStack", new GsonItemStackSerialization().serialize((ItemStack) wrappedStack.wrappedStack, type, context));
+            Gson gsonItemStackSerializer = (new GsonBuilder()).registerTypeAdapter(ItemStack.class, new GsonItemStackSerialization()).create();
+            jsonWrappedStack.add("wrappedStack", gsonItemStackSerializer.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof OreStack)
         {
@@ -505,7 +506,8 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                 {
                     if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                     {
-                        ItemStack itemStack = new GsonItemStackSerialization().deserialize(jsonWrappedStack.get("wrappedStack"), type, context);
+                        Gson gsonItemStackSerializer = (new GsonBuilder()).registerTypeAdapter(ItemStack.class, new GsonItemStackSerialization()).create();
+                        ItemStack itemStack = gsonItemStackSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 
                         if (stackSize > 0)
                         {

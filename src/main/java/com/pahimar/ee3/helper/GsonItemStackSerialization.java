@@ -2,6 +2,7 @@ package com.pahimar.ee3.helper;
 
 import com.google.gson.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.lang.reflect.Type;
 
@@ -17,6 +18,7 @@ public class GsonItemStackSerialization implements JsonDeserializer<ItemStack>, 
             int stackSize = -1;
             int itemID = -1;
             Integer itemDamage = null;
+            NBTTagCompound stackTagCompound = null;
 
             if (jsonItemStack.get("stackSize") != null)
             {
@@ -33,16 +35,30 @@ public class GsonItemStackSerialization implements JsonDeserializer<ItemStack>, 
                 itemDamage = jsonItemStack.get("itemDamage").getAsInt();
             }
 
+            if (jsonItemStack.get("stackTagCompound") != null && !jsonItemStack.get("stackTagCompound").isJsonPrimitive())
+            {
+                stackTagCompound = new Gson().fromJson(jsonItemStack.get("stackTagCompound"), NBTTagCompound.class);
+            }
+
             if (stackSize != -1 && itemID != -1)
             {
+                ItemStack itemStack;
+
                 if (itemDamage != null)
                 {
-                    return new ItemStack(itemID, stackSize, itemDamage);
+                    itemStack = new ItemStack(itemID, stackSize, itemDamage);
                 }
                 else
                 {
-                    return new ItemStack(itemID, stackSize, 0);
+                    itemStack = new ItemStack(itemID, stackSize, 0);
                 }
+
+                if (stackTagCompound != null)
+                {
+                    itemStack.setTagCompound(stackTagCompound);
+                }
+
+                return itemStack;
             }
         }
 
@@ -59,6 +75,7 @@ public class GsonItemStackSerialization implements JsonDeserializer<ItemStack>, 
             jsonItemStack.addProperty("stackSize", itemStack.stackSize);
             jsonItemStack.addProperty("itemID", itemStack.itemID);
             jsonItemStack.addProperty("itemDamage", itemStack.getItemDamage());
+            jsonItemStack.add("stackTagCompound", new Gson().toJsonTree(itemStack.getTagCompound()));
         }
 
         return jsonItemStack;
