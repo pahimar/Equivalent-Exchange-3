@@ -111,10 +111,10 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
         JsonArray jsonArray = new JsonArray();
         for (WrappedStack inputStack : recipeMapping.inputWrappedStacks)
         {
-            jsonArray.add(new WrappedStack().serialize(inputStack, WrappedStack.class, context));
+            jsonArray.add(new WrappedStack().serialize(inputStack, type, context));
         }
 
-        jsonRecipeMapping.add("outputWrappedStack", gsonWrappedStack.toJsonTree(recipeMapping.outputWrappedStack, WrappedStack.class));
+        jsonRecipeMapping.add("outputWrappedStack", new WrappedStack().serialize(recipeMapping.outputWrappedStack, type, context));
         jsonRecipeMapping.add("inputWrappedStacks", jsonArray);
 
         return jsonRecipeMapping;
