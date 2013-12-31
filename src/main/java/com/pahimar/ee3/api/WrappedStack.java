@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class WrappedStack
-        implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>
+public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>, JsonSerializer<WrappedStack>
 {
-
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
 
     @SuppressWarnings("unused")
@@ -245,7 +243,7 @@ public class WrappedStack
 
             if (wrappedStack != null && wrappedStack.getWrappedStack() != null)
             {
-                className = wrappedStack.getWrappedStack().getClass().getSimpleName();
+                className = wrappedStack.wrappedStack.getClass().getSimpleName();
                 this.stackSize = stackSize;
                 this.wrappedStack = wrappedStack.wrappedStack;
             }
@@ -300,6 +298,7 @@ public class WrappedStack
         return null;
     }
 
+    @SuppressWarnings("unused")
     public String toJson()
     {
         return gsonSerializer.toJson(this);
@@ -443,6 +442,27 @@ public class WrappedStack
         }
 
         return false;
+    }
+
+    @Override
+    public JsonElement serialize(WrappedStack wrappedStack, Type type, JsonSerializationContext context)
+    {
+        JsonObject jsonWrappedStack = new JsonObject();
+
+        Gson gsonWrappedStack = new Gson();
+
+        jsonWrappedStack.addProperty("className", wrappedStack.className);
+        jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
+        if (gsonWrappedStack != null)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack));
+        }
+        else
+        {
+            jsonWrappedStack.add("wrappedStack", JsonNull.INSTANCE);
+        }
+
+        return jsonWrappedStack;
     }
 
     /**

@@ -106,7 +106,6 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
     @Override
     public JsonElement serialize(RecipeMapping recipeMapping, Type type, JsonSerializationContext context)
     {
-
         JsonObject jsonRecipeMapping = new JsonObject();
 
         Gson gsonWrappedStack = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();

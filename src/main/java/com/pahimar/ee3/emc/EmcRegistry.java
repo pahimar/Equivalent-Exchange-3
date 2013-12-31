@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.EmcHelper;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.lib.Compare;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
