@@ -106,10 +106,7 @@ public class CraftingHandler implements ICraftingHandler
         GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalFuel, 1, 2), new Object[]{"iii", "iii", "iii", 'i', new ItemStack(ModItems.alchemicalFuel, 1, 2)});
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"bcb", "cbc", "bcb", 'b', new ItemStack(Item.dyePowder.itemID, 1, 15), 'c', new ItemStack(Item.clay)});
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"cc ", "cc ", "   ", 'c', new ItemStack(ModItems.chalk)});
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"   ", "cc ", "cc ", 'c', new ItemStack(ModItems.chalk)});
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{" cc", " cc", "   ", 'c', new ItemStack(ModItems.chalk)});
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"    ", " cc", " cc", 'c', new ItemStack(ModItems.chalk)});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"cc", "cc", 'c', new ItemStack(ModItems.chalk)});
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
         GameRegistry.addRecipe(new ItemStack(ModBlocks.aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
