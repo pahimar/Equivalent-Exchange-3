@@ -1,4 +1,4 @@
-package com.pahimar.ee3.handler;
+package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.helper.TransmutationHelper;

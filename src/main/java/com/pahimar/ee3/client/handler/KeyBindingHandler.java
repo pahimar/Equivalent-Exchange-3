@@ -1,6 +1,6 @@
-package com.pahimar.ee3.handler;
+package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.helper.KeyBindingHelper;
+import com.pahimar.ee3.client.helper.KeyBindingHelper;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -9,6 +9,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,6 +24,7 @@ import java.util.EnumSet;
  *
  * @author pahimar
  */
+@SideOnly(Side.CLIENT)
 public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
     public KeyBindingHandler()
@@ -53,7 +56,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
                     {
                         if (currentItem.getItem() instanceof IKeyBound)
                         {
-                            if (!KeyBindingHelper.isClientSided(kb.keyDescription))
+                            if (player.worldObj.isRemote)
                             {
                                 PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketKeyPressed(kb.keyDescription)));
                             }

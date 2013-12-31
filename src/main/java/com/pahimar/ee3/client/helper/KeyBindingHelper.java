@@ -1,6 +1,7 @@
-package com.pahimar.ee3.helper;
+package com.pahimar.ee3.client.helper;
 
-import com.pahimar.ee3.configuration.ConfigurationSettings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.settings.KeyBinding;
 
 import java.util.ArrayList;
@@ -12,15 +13,14 @@ import java.util.ArrayList;
  *
  * @author pahimar
  */
+@SideOnly(Side.CLIENT)
 public class KeyBindingHelper
 {
-
-    public static ArrayList<KeyBinding> keyBindingsList;
-    public static ArrayList<Boolean> isRepeatingList;
+    private static ArrayList<KeyBinding> keyBindingsList;
+    private static ArrayList<Boolean> isRepeatingList;
 
     public static void addKeyBinding(String name, int value)
     {
-
         if (keyBindingsList == null)
         {
             keyBindingsList = new ArrayList<KeyBinding>();
@@ -31,7 +31,6 @@ public class KeyBindingHelper
 
     public static void addIsRepeating(boolean value)
     {
-
         if (isRepeatingList == null)
         {
             isRepeatingList = new ArrayList<Boolean>();
@@ -42,13 +41,11 @@ public class KeyBindingHelper
 
     public static KeyBinding[] gatherKeyBindings()
     {
-
         return keyBindingsList.toArray(new KeyBinding[keyBindingsList.size()]);
     }
 
     public static boolean[] gatherIsRepeating()
     {
-
         boolean[] isRepeating = new boolean[isRepeatingList.size()];
 
         for (int x = 0; x < isRepeating.length; x++)
@@ -57,12 +54,5 @@ public class KeyBindingHelper
         }
 
         return isRepeating;
-    }
-
-    // TODO Still not ideal, won't work for every case. Specifically, make it context sensitive
-    public static boolean isClientSided(String keybinding)
-    {
-
-        return keybinding.equalsIgnoreCase(ConfigurationSettings.KEYBINDING_TOGGLE);
     }
 }

@@ -1,4 +1,4 @@
-package com.pahimar.ee3.client.renderer;
+package com.pahimar.ee3.client.helper;
 
 import com.pahimar.ee3.lib.Textures;
 import cpw.mods.fml.client.FMLClientHandler;

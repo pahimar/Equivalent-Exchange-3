@@ -2,7 +2,11 @@ package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.client.audio.SoundHandler;
+import com.pahimar.ee3.client.handler.DrawBlockHighlightHandler;
 import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
+import com.pahimar.ee3.client.handler.KeyBindingHandler;
+import com.pahimar.ee3.client.handler.TransmutationTargetOverlayHandler;
+import com.pahimar.ee3.client.helper.KeyBindingHelper;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
@@ -11,11 +15,7 @@ import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRende
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
-import com.pahimar.ee3.handler.DrawBlockHighlightHandler;
-import com.pahimar.ee3.handler.KeyBindingHandler;
-import com.pahimar.ee3.handler.TransmutationTargetOverlayHandler;
 import com.pahimar.ee3.helper.ItemHelper;
-import com.pahimar.ee3.helper.KeyBindingHelper;
 import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.lib.ActionTypes;
