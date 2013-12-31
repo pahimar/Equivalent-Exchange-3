@@ -17,6 +17,7 @@ item.ee3:alchemicalDustAmaranthine.name=紫红粉末
 item.ee3:alchemicalDustIridescent.name=虹彩粉末
 item.ee3:alchemicalBag.name=炼金袋
 item.ee3:alchemicalChalk.name=炼金粉笔
+item.ee3:diviningRod.name=探测杖
 
 # Block localizations
 tile.ee3:redWaterStill.name=红水(静止)

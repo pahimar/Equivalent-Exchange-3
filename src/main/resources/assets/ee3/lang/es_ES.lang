@@ -1,16 +1,16 @@
 # Key localizations 
 key.extra=Extra
 key.release=Lanzar
-key.toggle=Mueva
+key.toggle=Cambiar
 key.charge=Cargar
 
 # Item localizations
-item.ee3:shardMinium.name=Fragmento de Minio
+item.ee3:shardMinium.name=Fragmento Minio
 item.ee3:stoneInert.name=Piedra Inerte
-item.ee3:stoneMinium.name=Piedra de Minio
+item.ee3:stoneMinium.name=Piedra Minio
 item.ee3:stonePhilosophers.name=Piedra Filosofal
 item.ee3:alchemicalDustAsh.name=Ceniza
-item.ee3:alchemicalDustMinium.name=Polvo de Minio
+item.ee3:alchemicalDustMinium.name=Polvo Minio
 item.ee3:alchemicalDustVerdant.name=Polvo Verdante
 item.ee3:alchemicalDustAzure.name=Polvo Azur
 item.ee3:alchemicalDustAmaranthine.name=Polvo Purpúreo
