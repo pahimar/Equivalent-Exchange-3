@@ -17,12 +17,10 @@ import java.util.List;
 
 public class RecipesVanilla
 {
-
     private static Multimap<WrappedStack, List<WrappedStack>> vanillaRecipes = null;
 
     public static Multimap<WrappedStack, List<WrappedStack>> getVanillaRecipes()
     {
-
         if (vanillaRecipes == null)
         {
             init();

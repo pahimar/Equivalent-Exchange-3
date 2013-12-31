@@ -18,7 +18,6 @@ public class RecipeRegistry
 
     private RecipeRegistry()
     {
-
         recipeMap = HashMultimap.create();
         discoveredStacks = new ArrayList<WrappedStack>();
 
@@ -27,7 +26,6 @@ public class RecipeRegistry
 
     public static RecipeRegistry getInstance()
     {
-
         if (recipeRegistry == null)
         {
             recipeRegistry = new RecipeRegistry();
@@ -104,7 +102,6 @@ public class RecipeRegistry
 
     private void discoverStacks()
     {
-
         discoveredStacks = new ArrayList<WrappedStack>();
 
         // Scan stacks from known recipes

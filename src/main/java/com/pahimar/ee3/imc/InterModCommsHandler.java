@@ -278,6 +278,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
     public int nextTickSpacing()
     {
 
-        return 10;
+        return 20;
     }
 }

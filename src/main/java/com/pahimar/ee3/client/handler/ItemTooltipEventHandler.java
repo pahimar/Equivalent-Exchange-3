@@ -27,22 +27,25 @@ public class ItemTooltipEventHandler
     @ForgeSubscribe
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        WrappedStack stack = new WrappedStack(event.itemStack);
-
-        if (EmcRegistry.getInstance().hasEmcValue(stack))
+        if (debug)
         {
-            EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);
+            WrappedStack stack = new WrappedStack(event.itemStack);
 
-            event.toolTip.add("");
-            if (emcValue != null && debug)
+            if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
-                event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);
 
-                for (EmcType emcType : EmcType.TYPES)
+                event.toolTip.add("");
+                if (emcValue != null)
                 {
-                    if (emcValue.components[emcType.ordinal()] > 0)
+                    event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+
+                    for (EmcType emcType : EmcType.TYPES)
                     {
-                        event.toolTip.add("  * " + emcType + ": " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.components[emcType.ordinal()])));
+                        if (emcValue.components[emcType.ordinal()] > 0)
+                        {
+                            event.toolTip.add("  * " + emcType + ": " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.components[emcType.ordinal()])));
+                        }
                     }
                 }
             }

@@ -27,7 +27,7 @@ public class EmcRegistry
         if (emcRegistry == null)
         {
             emcRegistry = new EmcRegistry();
-            emcRegistry.init();
+            //emcRegistry.init();
         }
 
         return emcRegistry;
