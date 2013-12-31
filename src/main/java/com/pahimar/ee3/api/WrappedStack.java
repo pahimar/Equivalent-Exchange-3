@@ -453,14 +453,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         jsonWrappedStack.addProperty("className", wrappedStack.className);
         jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
-        if (gsonWrappedStack != null)
-        {
-            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack));
-        }
-        else
-        {
-            jsonWrappedStack.add("wrappedStack", JsonNull.INSTANCE);
-        }
+        jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack));
 
         return jsonWrappedStack;
     }
@@ -493,19 +486,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             {
                 if (className != null)
                 {
-                    if (className.equalsIgnoreCase(Item.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
-                    }
-                    else if (className.equalsIgnoreCase(Block.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
-                    }
-                    else if (className.equalsIgnoreCase(Fluid.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
-                    }
-                    else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
+                    if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                     {
                         ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 

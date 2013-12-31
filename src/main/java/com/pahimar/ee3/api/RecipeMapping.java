@@ -108,7 +108,7 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
     {
         JsonObject jsonRecipeMapping = new JsonObject();
 
-        Gson gsonWrappedStack = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+        Gson gsonWrappedStack = new Gson();
 
         JsonArray jsonArray = new JsonArray();
         for (WrappedStack inputStack : recipeMapping.inputWrappedStacks)
