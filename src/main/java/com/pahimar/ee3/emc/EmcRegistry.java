@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.EmcHelper;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.crafting.RecipeRegistry;
 import com.pahimar.ee3.lib.Compare;
 import net.minecraft.item.ItemStack;
@@ -27,7 +28,7 @@ public class EmcRegistry
         if (emcRegistry == null)
         {
             emcRegistry = new EmcRegistry();
-            //emcRegistry.init();
+            emcRegistry.init();
         }
 
         return emcRegistry;
@@ -35,6 +36,7 @@ public class EmcRegistry
 
     private void init()
     {
+        LogHelper.debug("Init-ing");
         HashMap<WrappedStack, EmcValue> stackValueMap = new HashMap<WrappedStack, EmcValue>();
         
         /*
