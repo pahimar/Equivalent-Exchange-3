@@ -2,14 +2,22 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
+import com.pahimar.ee3.inventory.InventoryAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketBagUpdate;
+import com.pahimar.ee3.network.packet.PacketEE;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -22,11 +30,14 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalBag extends GuiContainer
 {
+    ItemStack bag;
+    InventoryAlchemicalBag inv;
 
-    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer)
+    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer, ItemStack bag, int slot)
     {
-
-        super(new ContainerAlchemicalBag(inventoryPlayer));
+        super(new ContainerAlchemicalBag(inventoryPlayer, new InventoryAlchemicalBag(bag, slot)));
+        this.inv = ((ContainerAlchemicalBag)this.inventorySlots).inv;
+        this.bag = this.inv.bag;
         xSize = 248;
         ySize = 186;
     }
@@ -58,6 +69,15 @@ public class GuiAlchemicalBag extends GuiContainer
     {
 
         super.onGuiClosed();
+        
+        if (this.bag.stackTagCompound == null)
+        {
+            this.bag.setTagCompound(new NBTTagCompound());
+        }
+        this.inv.writeToNBT(this.bag.getTagCompound());
+        
+        PacketEE packet = new PacketBagUpdate(this.bag.getTagCompound());
+        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(packet));
 
         if (mc.thePlayer != null)
         {

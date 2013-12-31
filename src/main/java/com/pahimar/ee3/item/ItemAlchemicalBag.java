@@ -6,12 +6,14 @@ import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
@@ -160,5 +162,13 @@ public class ItemAlchemicalBag extends ItemEE
                 }
             }
         }
+    }
+    
+    @Override
+    public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    {
+        if( par1ItemStack.stackTagCompound == null )
+            par1ItemStack.setTagCompound(new NBTTagCompound());
+        par1ItemStack.getTagCompound().setTag("Items", new NBTTagList());
     }
 }
