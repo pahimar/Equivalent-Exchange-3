@@ -21,7 +21,7 @@ import java.text.DecimalFormat;
 @SideOnly(Side.CLIENT)
 public class ItemTooltipEventHandler
 {
-    private static boolean debug = true;
+    private static boolean debug = false;
     private static DecimalFormat emcDecimalFormat = new DecimalFormat("#.###");
 
     @ForgeSubscribe

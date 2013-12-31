@@ -2,7 +2,6 @@ package com.pahimar.ee3.api;
 
 import com.google.gson.*;
 import com.pahimar.ee3.helper.FluidHelper;
-import com.pahimar.ee3.helper.GsonItemStackSerialization;
 import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
@@ -457,8 +456,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         if (wrappedStack.wrappedStack instanceof ItemStack)
         {
-            Gson gsonItemStackSerializer = (new GsonBuilder()).registerTypeAdapter(ItemStack.class, new GsonItemStackSerialization()).create();
-            jsonWrappedStack.add("wrappedStack", gsonItemStackSerializer.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof OreStack)
         {
@@ -506,8 +504,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                 {
                     if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                     {
-                        Gson gsonItemStackSerializer = (new GsonBuilder()).registerTypeAdapter(ItemStack.class, new GsonItemStackSerialization()).create();
-                        ItemStack itemStack = gsonItemStackSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
+                        ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 
                         if (stackSize > 0)
                         {
