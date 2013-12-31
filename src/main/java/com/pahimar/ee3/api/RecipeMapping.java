@@ -72,10 +72,8 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
     @Override
     public RecipeMapping deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-
         if (!jsonElement.isJsonPrimitive())
         {
-
             JsonObject jsonRecipeMapping = (JsonObject) jsonElement;
 
             WrappedStack outputStack = null;
@@ -83,7 +81,7 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
 
             if (jsonRecipeMapping.get("outputWrappedStack") != null)
             {
-                outputStack = new WrappedStack().deserialize(jsonRecipeMapping.get("outputWrappedStack").getAsJsonObject(), type, context);
+                outputStack = new WrappedStack().deserialize(jsonRecipeMapping.get("outputWrappedStack").getAsJsonObject(), WrappedStack.class, context);
             }
 
             if (jsonRecipeMapping.get("inputWrappedStacks") != null)
@@ -92,7 +90,7 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
 
                 for (int i = 0; i < jsonInputStacks.size(); i++)
                 {
-                    WrappedStack inputStack = new WrappedStack().deserialize(jsonInputStacks.get(i).getAsJsonObject(), type, context);
+                    WrappedStack inputStack = new WrappedStack().deserialize(jsonInputStacks.get(i).getAsJsonObject(), WrappedStack.class, context);
                     inputStacks.add(inputStack);
                 }
             }
