@@ -453,7 +453,23 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         jsonWrappedStack.addProperty("className", wrappedStack.className);
         jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
-        jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack));
+
+        if (wrappedStack.wrappedStack instanceof ItemStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof OreStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, OreStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof EnergyStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, EnergyStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof FluidStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, FluidStack.class));
+        }
 
         return jsonWrappedStack;
     }
