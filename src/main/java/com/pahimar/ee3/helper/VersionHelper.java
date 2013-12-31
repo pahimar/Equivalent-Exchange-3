@@ -235,7 +235,6 @@ public class VersionHelper implements Runnable
 
     public static void execute()
     {
-
         new Thread(instance).start();
     }
 }
