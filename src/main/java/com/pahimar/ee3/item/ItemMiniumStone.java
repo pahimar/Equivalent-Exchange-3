@@ -107,10 +107,6 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
             {
                 openPortableCraftingGUI(thePlayer, itemStack);
             }
-            else
-            {
-                openPortableTransmutationGUI(thePlayer, itemStack);
-            }
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE))
         {
