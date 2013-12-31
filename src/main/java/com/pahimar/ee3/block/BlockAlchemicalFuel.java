@@ -20,7 +20,9 @@ public class BlockAlchemicalFuel extends BlockEE
     public BlockAlchemicalFuel(int id)
     {
         super(id);
-        setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_FUEL_BLOCK_NAME);
+        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_FUEL_BLOCK_NAME);
+        this.setHardness(5.0F);
+        this.setResistance(10.0F);
     }
 
     @SideOnly(Side.CLIENT)

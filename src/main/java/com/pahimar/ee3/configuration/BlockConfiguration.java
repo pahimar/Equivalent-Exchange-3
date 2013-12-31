@@ -24,6 +24,7 @@ public class BlockConfiguration
             /* Block configs */
             BlockIds.ALCHEMICAL_FUEL = blockConfiguration.getBlock(Strings.ALCHEMICAL_FUEL_NAME, BlockIds.ALCHEMICAL_FUEL_DEFAULT).getInt(BlockIds.ALCHEMICAL_FUEL_DEFAULT);
             BlockIds.CHALK = blockConfiguration.getBlock(Strings.CHALK_NAME, BlockIds.CHALK_DEFAULT).getInt(BlockIds.CHALK_DEFAULT);
+            BlockIds.TRANSMUTATION_SQUARE = blockConfiguration.getBlock(Strings.TRANSMUTATION_SQUARE_NAME, BlockIds.TRANSMUTATION_SQUARE_DEFAULT).getInt(BlockIds.TRANSMUTATION_SQUARE_DEFAULT);
 
             BlockIds.CALCINATOR = blockConfiguration.getBlock(Strings.CALCINATOR_NAME, BlockIds.CALCINATOR_DEFAULT).getInt(BlockIds.CALCINATOR_DEFAULT);
             BlockIds.ALUDEL_BASE = blockConfiguration.getBlock(Strings.ALUDEL_NAME, BlockIds.ALUDEL_BASE_DEFAULT).getInt(BlockIds.ALUDEL_BASE_DEFAULT);

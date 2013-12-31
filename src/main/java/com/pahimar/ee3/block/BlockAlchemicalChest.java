@@ -34,8 +34,8 @@ public class BlockAlchemicalChest extends BlockContainerEE
 
     public BlockAlchemicalChest(int id)
     {
-
         super(id, Material.wood);
+        this.setHardness(2.5F);
         this.setUnlocalizedName(Strings.ALCHEMICAL_CHEST_NAME);
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
@@ -50,21 +50,18 @@ public class BlockAlchemicalChest extends BlockContainerEE
     @Override
     public TileEntity createNewTileEntity(World world)
     {
-
         return new TileAlchemicalChest();
     }
 
     @Override
     public boolean renderAsNormalBlock()
     {
-
         return false;
     }
 
     @Override
     public boolean isOpaqueCube()
     {
-
         return false;
     }
 
@@ -78,7 +75,6 @@ public class BlockAlchemicalChest extends BlockContainerEE
     @Override
     public void breakBlock(World world, int x, int y, int z, int id, int meta)
     {
-
         dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
     }
@@ -86,7 +82,6 @@ public class BlockAlchemicalChest extends BlockContainerEE
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-
         if (player.isSneaking())
         {
             return true;
@@ -113,7 +108,6 @@ public class BlockAlchemicalChest extends BlockContainerEE
 
     private void dropInventory(World world, int x, int y, int z)
     {
-
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if (!(tileEntity instanceof IInventory))

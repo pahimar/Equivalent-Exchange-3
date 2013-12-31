@@ -48,6 +48,7 @@ public class Strings
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String GLASS_BELL_NAME = "glassBell";
+    public static final String TRANSMUTATION_SQUARE_NAME = "transmutationSquare";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";

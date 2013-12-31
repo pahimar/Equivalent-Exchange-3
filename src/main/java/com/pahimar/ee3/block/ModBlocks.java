@@ -16,6 +16,7 @@ public class ModBlocks
 {
     public static BlockEE alchemicalFuel;
     public static BlockEE chalk;
+    public static BlockEE transmutationSquare;
 
     public static BlockContainerEE calcinator;
     public static BlockContainerEE aludelBase;
@@ -26,6 +27,7 @@ public class ModBlocks
     {
         chalk = new BlockChalk(BlockIds.CHALK);
         alchemicalFuel = new BlockAlchemicalFuel(BlockIds.ALCHEMICAL_FUEL);
+        transmutationSquare = new BlockTransmutationSquare(BlockIds.TRANSMUTATION_SQUARE);
 
         calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
         aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
@@ -38,5 +40,6 @@ public class ModBlocks
         GameRegistry.registerBlock(aludelBase, "block." + Strings.ALUDEL_NAME);
         GameRegistry.registerBlock(alchemicalChest, "block." + Strings.ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerBlock(glassBell, "block." + Strings.GLASS_BELL_NAME);
+        GameRegistry.registerBlock(transmutationSquare, "block." + Strings.TRANSMUTATION_SQUARE_NAME);
     }
 }
