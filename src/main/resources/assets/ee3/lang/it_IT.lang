@@ -17,19 +17,17 @@ item.ee3:stoneMinium.name=Pietra di Minio
 item.ee3:stonePhilosophers.name=Pietra Filosofale [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Cesta Alchemica
-tile.ee3:aludel.name=Aludel
-tile.ee3:calcinator.name=Calcinatore
-tile.ee3:glassBell.name=Campana di Vetro
-tile.ee3:redWaterFlowing.name=Red Water (Scorrevole)
-tile.ee3:redWaterStill.name=Acqua Rossa (Ferma)
+tile.ee3:alchemicalChest.name=Cesta Alchemica [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinatore [WIP]
+tile.ee3:glassBell.name=Campana di Vetro [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=Borsa Alchemica
-container.ee3:alchemicalChest=Cesta Alchemica
-container.ee3:aludel=Aludel
-container.ee3:calcinator=Calcinatore
-container.ee3:glassBell=Campana di Vetro
+container.ee3:alchemicalBag=Borsa Alchemica [WIP]
+container.ee3:alchemicalChest=Cesta Alchemica [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinatore [WIP]
+container.ee3:glassBell=Campana di Vetro [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Selezione del bersaglio da trasmutare attivata

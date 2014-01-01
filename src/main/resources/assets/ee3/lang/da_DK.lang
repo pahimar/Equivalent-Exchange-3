@@ -20,8 +20,6 @@ item.ee3:stonePhilosophers.name=De Vises Sten [WIP]
 tile.ee3:alchemicalChest.name=Alkymistisk Kiste [WIP]
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Kalkbrænder [WIP]
-tile.redWaterFlowing.name=Rødt Vand (Stømmende)
-tile.redWaterStill.name=Rødt Vand (Stille)
 
 # GUI localizations
 container.ee3:alchemicalBag=Alkymistisk Taskeo [WIP]

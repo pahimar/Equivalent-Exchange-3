@@ -5,40 +5,38 @@ key.release=施放技能
 key.toggle=切换目标
 
 # Item localizations
-item.ee3:alchemicalBag.name=炼丹袋
-item.ee3:alchemicalDust.Ash.name=灰烬
-item.ee3:alchemicalDust.Minium.name=铅丹粉末
-item.ee3:alchemicalDust.Verdant.name=翠绿粉末
-item.ee3:alchemicalDustAzure.name=蔚蓝粉末
-item.ee3:alchemicalDust.Iridescent.name=虹彩粉末
+item.ee3:alchemicalBag.name=炼丹袋 [WIP]
+item.ee3:alchemicalDust.Ash.name=灰烬 [WIP]
+item.ee3:alchemicalDust.Minium.name=铅丹粉末 [WIP]
+item.ee3:alchemicalDust.Verdant.name=翠绿粉末 [WIP]
+item.ee3:alchemicalDustAzure.name=蔚蓝粉末 [WIP]
+item.ee3:alchemicalDust.Iridescent.name=虹彩粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=炼丹煤炭
 item.ee3:alchemicalFuel.mobiusFuel.name=莫比乌斯燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永恒燃料
-item.ee3:chalk.name=粉笔
-item.ee3:diviningRod.name=探测杖
+item.ee3:chalk.name=粉笔 [WIP]
+item.ee3:diviningRod.name=探测杖 [WIP]
 item.ee3:shardMinium.name=铅丹碎片
 item.ee3:stoneInert.name=惰性石
 item.ee3:stoneMinium.name=铅丹石
-item.ee3:stonePhilosophers.name=贤者之石
+item.ee3:stonePhilosophers.name=贤者之石 [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=炼丹箱子
+tile.ee3:alchemicalChest.name=炼丹箱子 [WIP]
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=炼丹煤炭
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=莫比乌斯燃料
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永恒燃料
-tile.ee3:aludel.name=梨形器皿
-tile.ee3:calcinator.name=煅烧炉
+tile.ee3:aludel.name=梨形器皿 [WIP]
+tile.ee3:calcinator.name=煅烧炉 [WIP]
 tile.ee3:chalk.name=粉笔
-tile.ee3:glassBell.name=玻璃钟罩
-tile.ee3:redWaterFlowing.name=红水(流动)
-tile.ee3:redWaterStill.name=红水(静止)
+tile.ee3:glassBell.name=玻璃钟罩 [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=炼金袋
-container.ee3:alchemicalChest=炼金箱子
-container.ee3:aludel=梨形器皿
-container.ee3:calcinator=煅烧炉
-container.ee3:glassBell=玻璃钟罩
+container.ee3:alchemicalBag=炼金袋 [WIP]
+container.ee3:alchemicalChest=炼金箱子 [WIP]
+container.ee3:aludel=梨形器皿 [WIP]
+container.ee3:calcinator=煅烧炉 [WIP]
+container.ee3:glassBell=玻璃钟罩 [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=开启转换目标快捷视图

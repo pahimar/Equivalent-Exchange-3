@@ -26,6 +26,6 @@ itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Покретање верзије провера према приступу удаљеним фајловима верзије ауторитета, који се налази у: %s
-version.ee3:uninitialized=Провера Верзије није успешно завршена
-version.ee3:current=Ви тренутно користите најновију верзинју (%s) од Исте Замене 3 за %s
-version.ee3:outdated=Нова @MOD_NAME@ верзија постоји (%s) за %s. Узмите овде: %s
+version.ee3:uninitialized=Провера Верзије није успешно завршена.
+version.ee3:current=Ви тренутно користите најновију верзинју (%s) од Исте Замене 3 за %s.
+version.ee3:outdated=Нова %s верзија постоји (%s) за %s. Узмите овде: %s

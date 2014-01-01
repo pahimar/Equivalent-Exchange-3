@@ -5,40 +5,38 @@ key.release=施放技能
 key.toggle=切換目標
 
 # Item localizations
-item.ee3:alchemicalBag.name=煉丹袋
-item.ee3:alchemicalDust.Ash.name=灰燼
-item.ee3:alchemicalDust.Minium.name=鉛丹粉末
-item.ee3:alchemicalDust.Verdant.name=翠綠粉末
-item.ee3:alchemicalDustAzure.name=蔚藍粉末
-item.ee3:alchemicalDust.Iridescent.name=虹彩粉末
+item.ee3:alchemicalBag.name=煉丹袋 [WIP]
+item.ee3:alchemicalDust.Ash.name=灰燼 [WIP]
+item.ee3:alchemicalDust.Minium.name=鉛丹粉末 [WIP]
+item.ee3:alchemicalDust.Verdant.name=翠綠粉末 [WIP]
+item.ee3:alchemicalDustAzure.name=蔚藍粉末 [WIP]
+item.ee3:alchemicalDust.Iridescent.name=虹彩粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=煉丹煤炭
 item.ee3:alchemicalFuel.mobiusFuel.name=莫比烏斯燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永恆燃料
-item.ee3:chalk.name=粉筆
-item.ee3:diviningRod.name=探測杖
+item.ee3:chalk.name=粉筆 [WIP]
+item.ee3:diviningRod.name=探測杖 [WIP]
 item.ee3:shardMinium.name=鉛丹碎片
 item.ee3:stoneInert.name=惰性石
 item.ee3:stoneMinium.name=鉛丹石
-item.ee3:stonePhilosophers.name=賢者之石
+item.ee3:stonePhilosophers.name=賢者之石 [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=煉丹箱子
+tile.ee3:alchemicalChest.name=煉丹箱子 [WIP]
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=煉丹煤炭
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=莫比烏斯燃料
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永恆燃料
-tile.ee3:aludel.name=梨形器皿
-tile.ee3:calcinator.name=煅燒爐
-tile.ee3:chalk.name=粉筆
-tile.ee3:glassBell.name=玻璃鐘罩
-tile.ee3:redWaterFlowing.name=紅水(流動)
-tile.ee3:redWaterStill.name=紅水(靜止)
+tile.ee3:aludel.name=梨形器皿 [WIP]
+tile.ee3:calcinator.name=煅燒爐 [WIP]
+tile.ee3:chalk.name=粉筆 [WIP]
+tile.ee3:glassBell.name=玻璃鐘罩 [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=煉金袋
-container.ee3:alchemicalChest=煉金箱子
-container.ee3:aludel=梨形器皿
-container.ee3:calcinator=煅燒爐
-container.ee3:glassBell=玻璃鐘罩
+container.ee3:alchemicalBag=煉金袋 [WIP]
+container.ee3:alchemicalChest=煉金箱子 [WIP]
+container.ee3:aludel=梨形器皿 [WIP]
+container.ee3:calcinator=煅燒爐 [WIP]
+container.ee3:glassBell=玻璃鐘罩 [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=開啟轉換目標快捷視圖

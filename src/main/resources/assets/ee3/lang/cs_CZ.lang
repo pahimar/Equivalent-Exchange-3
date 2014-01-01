@@ -5,31 +5,29 @@ key.release=Vypustit
 key.toggle=Přepnout
 
 # Item localizations
-item.ee3:alchemicalBag.name=Alchymistický pytlík
-item.ee3:alchemicalDust.Ash.name=Popel
-item.ee3:alchemicalDust.Minium.name=Suříkový prášek
-item.ee3:alchemicalDust.Verdant.name=Nazelenalý prášek
-item.ee3:alchemicalDust.Azure.name=Azurový prášek
-item.ee3:alchemicalDust.Iridescent.name=Duhový prášek
-item.ee3:shardMinium.name=Úlomek suříku
-item.ee3:stoneInert.name=Inertní kámen
-item.ee3:stoneMinium.name=Kámen suříku
-item.ee3:stonePhilosophers.name=Kámen mudrců
+item.ee3:alchemicalBag.name=Alchymistický Pytlík [WIP]
+item.ee3:alchemicalDust.Ash.name=Popel [WIP]
+item.ee3:alchemicalDust.Minium.name=Suříkový Prášek [WIP]
+item.ee3:alchemicalDust.Verdant.name=Nazelenalý Prášek [WIP]
+item.ee3:alchemicalDust.Azure.name=Azurový Prášek [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Duhový Prášek [WIP]
+item.ee3:shardMinium.name=Úlomek Suříku
+item.ee3:stoneInert.name=Inertní Kámen
+item.ee3:stoneMinium.name=Kámen Suříku
+item.ee3:stonePhilosophers.name=Kámen Mudrců [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Alchymistická truhla
-tile.ee3:aludel.name=Sublimační nádoba
-tile.ee3:calcinator.name=Kalcinátor
-tile.ee3:glassBell.name=Skleněný zvon
-tile.ee3:redWaterFlowing.name=Rudá voda (tekoucí)
-tile.ee3:redWaterStill.name=Rudá voda (v klidu)
+tile.ee3:alchemicalChest.name=Alchymistická Truhla [WIP]
+tile.ee3:aludel.name=Sublimační Nádoba [WIP]
+tile.ee3:calcinator.name=Kalcinátor [WIP]
+tile.ee3:glassBell.name=Skleněný Zvon [WIP]
 
 # GUI localizations
-container.alchemicalBag=Alchymistický pytlík
-container.alchemicalChest=Alchymistická truhla
-container.aludel=Sublimační nádoba
-container.calcinator=Kalcinátor
-container.glassBell=Skleněný zvon
+container.alchemicalBag=Alchymistický Pytlík [WIP]
+container.alchemicalChest=Alchymistická Truhla [WIP]
+container.aludel=Sublimační Nádoba [WIP]
+container.calcinator=Kalcinátor [WIP]
+container.glassBell=Skleněný Zvon [WIP]
 
 # Command localizatoins
 command.ee3.overlay.turned_on=Zobrazení výsledku transmutace zapnuto

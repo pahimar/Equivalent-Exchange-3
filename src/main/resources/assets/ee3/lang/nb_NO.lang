@@ -23,8 +23,6 @@ tile.ee3:alchemicalChest.name=Alkymisk Kiste [WIP]
 tile.ee3:calcinator.name=Calcinator [WIP]
 tile.ee3:chalk.name=Kritt [WIP]
 tile.ee3:glassBell.name=Glassklokke [WIP]
-tile.ee3:redWaterFlowing.name=Rødt Vann (Rennende)
-tile.ee3:redWaterStill.name=Rødt Vann (Stille)
 
 # GUI localizations
 container.ee3:alchemicalBag=Alkymisk Sekk [WIP]

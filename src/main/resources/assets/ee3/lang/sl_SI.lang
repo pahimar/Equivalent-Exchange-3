@@ -5,31 +5,29 @@ key.release=Sproži
 key.toggle=Preklopi
 
 # Item localizations
-item.ee3:alchemicalBag.name=Alkimistična Vreča
-item.ee3:alchemicalDust.Ash.name=Pepel
-item.ee3:alchemicalDust.Minium.name=Minijev Prah
-item.ee3:alchemicalDust.Verdant.name=Zelen Prah
-item.ee3:alchemicalDust.Azure.name=Moder Prah
-item.ee3:alchemicalDust.Iridescent.name=Mavrični Prah
+item.ee3:alchemicalBag.name=Alkimistična Vreča [WIP]
+item.ee3:alchemicalDust.Ash.name=Pepel [WIP]
+item.ee3:alchemicalDust.Minium.name=Minijev Prah [WIP]
+item.ee3:alchemicalDust.Verdant.name=Zelen Prah [WIP]
+item.ee3:alchemicalDust.Azure.name=Moder Prah [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Mavrični Prah [WIP]
 item.ee3:shardMinium.name=Drobec Minija
 item.ee3:stoneInert.name=Nedejaven Kamen
 item.ee3:stoneMinium.name=Minijev Kamen
-item.ee3:stonePhilosophers.name=Kamen Modrosti
+item.ee3:stonePhilosophers.name=Kamen Modrosti [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Alkimistični Zaboj
-tile.ee3:aludel.name=Aludel
-tile.ee3:calcinator.name=Kalcinator
-tile.ee3:glassBell.name=Stekleni Zvonec
-tile.ee3:redWaterFlowing.name=Rdeča Voda (Pretočna)
-tile.ee3:redWaterStill.name=Rdeča Voda (Mirujoča)
+tile.ee3:alchemicalChest.name=Alkimistični Zaboj [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Kalcinator [WIP]
+tile.ee3:glassBell.name=Stekleni Zvonec [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=Alkimistična Vreča
-container.ee3:alchemicalChest=Alkimistični Zaboj
-container.ee3:aludel=Aludel
-container.ee3:calcinator=Kalcinator
-container.ee3:glassBell=Stekleni Zvonec
+container.ee3:alchemicalBag=Alkimistična Vreča [WIP]
+container.ee3:alchemicalChest=Alkimistični Zaboj [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalcinator [WIP]
+container.ee3:glassBell=Stekleni Zvonec [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Prikaz transmutacije je vključen

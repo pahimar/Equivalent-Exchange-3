@@ -5,31 +5,29 @@ key.release=Ελευθέρωση
 key.toggle=Εναλλαγή
 
 # Item localizations
-item.ee3:alchemicalBag.name=Σάκος του Αλχημιστή
-item.ee3:alchemicalDust.Ash.name=Στάχτη
-item.ee3:alchemicalDust.Minium.name=Στάχτη Μίνιουμ
-item.ee3:alchemicalDust.Verdant.name=Πρασινωπή Στάχτη
-item.ee3:alchemicalDust.Azure.name=Γαλανή Στάχτη
-item.ee3:alchemicalDust.Iridescent.name=Ιριδίζουσα Στάχτη
+item.ee3:alchemicalBag.name=Σάκος του Αλχημιστή [WIP]
+item.ee3:alchemicalDust.Ash.name=Στάχτη [WIP]
+item.ee3:alchemicalDust.Minium.name=Στάχτη Μίνιουμ [WIP]
+item.ee3:alchemicalDust.Verdant.name=Πρασινωπή Στάχτη [WIP]
+item.ee3:alchemicalDust.Azure.name=Γαλανή Στάχτη [WIP]
+item.ee3:alchemicalDust.Iridescent.name=Ιριδίζουσα Στάχτη [WIP]
 item.ee3:shardMinium.name=Θραύσμα Μίνιουμ
 item.ee3:stoneInert.name=Αδρανής Λίθος
 item.ee3:stoneMinium.name=Μίνιουμ Λίθος
-item.ee3:stonePhilosophers.name=Φιλοσοφική Λίθος
+item.ee3:stonePhilosophers.name=Φιλοσοφική Λίθος [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Σεντούκι του Αλχημιστή
-tile.ee3:aludel.name=Δοχείο
-tile.ee3:calcinator.name=Χύτρα Διαπύρωσης
-tile.ee3:glassBell.name=Γυάλινο Κουδούνι
-tile.ee3:redWaterFlowing.name=Ερυθρό Νερό (Ρέον)
-tile.ee3:redWaterStill.name=Ερυθρό Νερό (Στάσιμο)
+tile.ee3:alchemicalChest.name=Σεντούκι του Αλχημιστή [WIP]
+tile.ee3:aludel.name=Δοχείο [WIP]
+tile.ee3:calcinator.name=Χύτρα Διαπύρωσης [WIP]
+tile.ee3:glassBell.name=Γυάλινο Κουδούνι [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=Σάκος του Αλχημιστή
-container.ee3:alchemicalChest=Σεντούκι του Αλχημιστή
-container.ee3:aludel=Δοχείο
-container.ee3:calcinator=Χύτρα Διαπύρωσης
-container.ee3:glassBell=Γυάλινο Κουδούνι
+container.ee3:alchemicalBag=Σάκος του Αλχημιστή [WIP]
+container.ee3:alchemicalChest=Σεντούκι του Αλχημιστή [WIP]
+container.ee3:aludel=Δοχείο [WIP]
+container.ee3:calcinator=Χύτρα Διαπύρωσης [WIP]
+container.ee3:glassBell=Γυάλινο Κουδούνι [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Η επικάλυψη μετατροπής του στόχου ενεργοποιήθηκε

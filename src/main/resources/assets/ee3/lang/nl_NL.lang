@@ -23,8 +23,6 @@ tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Calcinator [WIP]
 tile.ee3:chalk.name=Krijt [WIP]
 tile.ee3:glassBell.name=Glazen Stolp [WIP]
-tile.ee3:redWaterFlowing.name=Rood Water (Stromende)
-tile.ee3:redWaterStill.name=Rood Water (Stilstaand)
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemistische Bag [WIP]

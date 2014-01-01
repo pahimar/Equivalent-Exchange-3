@@ -21,8 +21,6 @@ tile.ee3:alchemicalChest.name=Baú Alquímico [WIP]
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Calcinador [WIP]
 tile.ee3:glassBell.name=Sino Vítreo [WIP]
-tile.redWaterFlowing.name=Água Vermelha (Corrente)
-tile.redWaterStill.name=Água Vermelha (Parada)
 
 # GUI localizations
 container.ee3:alchemicalBag=Bolsa Alquímica [WIP]

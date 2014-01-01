@@ -24,8 +24,6 @@ tile.ee3:aludel.name=Aludeli [Ei valmis]
 tile.ee3:calcinator.name=Kalsinaattori [Ei valmis]
 tile.ee3:chalk.name=Liitu [Ei valmis]
 tile.ee3:glassBell.name=Lasitiuku [Ei valmis]
-tile.ee3:redWaterFlowing.name=Punavesi (Virtaava)
-tile.ee3:redWaterStill.name=Punavesi (Liikkumaton)
 
 # GUI localizations
 container.alchemicalBag=Alkeminen pussi [Ei valmis]
