@@ -3,7 +3,6 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Commands;
-import com.pahimar.ee3.lib.Strings;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatMessageComponent;
@@ -60,7 +59,7 @@ public class CommandOverlay
     {
 
         ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = true;
-        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, Strings.TRUE);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, "true");
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_TURNED_ON));
     }
 
@@ -68,7 +67,7 @@ public class CommandOverlay
     {
 
         ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = false;
-        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, Strings.FALSE);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, "false");
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_TURNED_OFF));
     }
 

@@ -11,9 +11,9 @@ public abstract class CommonProxy implements IProxy
 {
     public void registerTileEntities()
     {
-        GameRegistry.registerTileEntity(TileCalcinator.class, "tile." + Strings.TE_CALCINATOR_NAME);
-        GameRegistry.registerTileEntity(TileAludel.class, "tile." + Strings.TE_ALUDEL_NAME);
-        GameRegistry.registerTileEntity(TileAlchemicalChest.class, "tile." + Strings.TE_ALCHEMICAL_CHEST_NAME);
-        GameRegistry.registerTileEntity(TileGlassBell.class, "tile." + Strings.TE_GLASS_BELL_NAME);
+        GameRegistry.registerTileEntity(TileCalcinator.class, "tile." + Strings.CALCINATOR_NAME);
+        GameRegistry.registerTileEntity(TileAludel.class, "tile." + Strings.ALUDEL_NAME);
+        GameRegistry.registerTileEntity(TileAlchemicalChest.class, "tile." + Strings.ALCHEMICAL_CHEST_NAME);
+        GameRegistry.registerTileEntity(TileGlassBell.class, "tile." + Strings.GLASS_BELL_NAME);
     }
 }

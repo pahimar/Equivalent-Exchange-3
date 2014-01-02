@@ -85,13 +85,6 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     }
 
     @Override
-    public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack)
-    {
-        ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
-        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
-    }
-
-    @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit)
     {
         EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
