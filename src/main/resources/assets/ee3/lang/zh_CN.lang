@@ -19,20 +19,7 @@ item.ee3:diviningRod.name=探测杖 [WIP]
 item.ee3:shardMinium.name=铅丹碎片
 item.ee3:stoneInert.name=惰性石
 item.ee3:stoneMinium.name=铅丹石
-<<<<<<< HEAD
 item.ee3:stonePhilosophers.name=贤者之石 [WIP]
-=======
-item.ee3:stonePhilosophers.name=贤者之石
-item.ee3:alchemicalDustAsh.name=灰烬
-item.ee3:alchemicalDustMinium.name=铅丹粉末
-item.ee3:alchemicalDustVerdant.name=翠绿粉末
-item.ee3:alchemicalDustAzure.name=蔚蓝粉末
-item.ee3:alchemicalDustAmaranthine.name=紫红粉末
-item.ee3:alchemicalDustIridescent.name=虹彩粉末
-item.ee3:alchemicalBag.name=炼金袋
-item.ee3:alchemicalChalk.name=炼金粉笔
-item.ee3:diviningRod.name=探测杖
->>>>>>> upstream/master
 
 # Block localizations
 tile.ee3:alchemicalChest.name=炼丹箱子 [WIP]
