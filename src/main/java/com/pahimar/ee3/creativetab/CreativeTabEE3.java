@@ -14,21 +14,23 @@ import net.minecraft.creativetab.CreativeTabs;
  */
 public class CreativeTabEE3 extends CreativeTabs
 {
-
     public CreativeTabEE3(int tabID, String tabLabel)
     {
-
         super(tabID, tabLabel);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * the itemID for the item to be displayed on the tab
-     */
     public int getTabIconItemIndex()
     {
 
         return ItemIds.MINIUM_SHARD;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getTranslatedTabLabel()
+    {
+        return "Equivalent Exchange 3";
     }
 }

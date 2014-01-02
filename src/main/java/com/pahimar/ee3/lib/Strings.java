@@ -56,7 +56,7 @@ public class Strings
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
-    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"Ash", "Verdant", "Azure", "Minium", "Iridescent"};
+    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"ash", "verdant", "azure", "minium", "iridescent"};
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
     public static final String CHALK_NAME = "chalk";
     public static final String DIVINING_ROD_NAME = "diviningRod";

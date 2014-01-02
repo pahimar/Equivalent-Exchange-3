@@ -6,11 +6,11 @@ key.toggle=Toggle
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemical Bag [WIP]
-item.ee3:alchemicalDust.Ash.name=Ash [WIP]
-item.ee3:alchemicalDust.Verdant.name=Verdant Dust [WIP]
-item.ee3:alchemicalDust.Azure.name=Azure Dust [WIP]
-item.ee3:alchemicalDust.Minium.name=Minium Dust [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Iridescent Dust [WIP]
+item.ee3:alchemicalDust.ash.name=Ash [WIP]
+item.ee3:alchemicalDust.verdant.name=Verdant Dust [WIP]
+item.ee3:alchemicalDust.azure.name=Azure Dust [WIP]
+item.ee3:alchemicalDust.minium.name=Minium Dust [WIP]
+item.ee3:alchemicalDust.iridescent.name=Iridescent Dust [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemical Coal
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Fuel
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Fuel
@@ -54,9 +54,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 particles turned off
 command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
 command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
 command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
