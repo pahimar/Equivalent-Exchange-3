@@ -16,7 +16,7 @@ public class ModBlocks
 {
     public static BlockEE alchemicalFuel;
     public static BlockEE chalk;
-    public static BlockEE alchemySquare;
+    public static BlockContainerEE alchemySquare;
 
     public static BlockContainerEE calcinator;
     public static BlockContainerEE aludelBase;
