@@ -6,11 +6,11 @@ key.toggle=Переключение
 
 # Item localizations
 item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
-item.ee3:alchemicalDust.Ash.name=Пыль [WIP]
-item.ee3:alchemicalDust.Verdant.name=Зелёный порошок [WIP]
-item.ee3:alchemicalDust.Azure.name=Лазурный порошок [WIP]
-item.ee3:alchemicalDust.Minium.name=Алхимический порошок [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Радужный порошок [WIP]
+item.ee3:alchemicalDust.ash.name=Пыль [WIP]
+item.ee3:alchemicalDust.verdant.name=Зелёный порошок [WIP]
+item.ee3:alchemicalDust.azure.name=Лазурный порошок [WIP]
+item.ee3:alchemicalDust.minium.name=Алхимический порошок [WIP]
+item.ee3:alchemicalDust.iridescent.name=Радужный порошок [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Алхимический уголь
 item.ee3:alchemicalFuel.mobiusFuel.name=Топливо Мёбиуса
 item.ee3:alchemicalFuel.aeternalisFuel.name=Эфирное топливо
