@@ -31,8 +31,7 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     public ItemPhilosophersStone(int id)
     {
         super(id);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.PHILOSOPHERS_STONE_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setUnlocalizedName(Strings.PHILOSOPHERS_STONE_NAME);
         this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
         maxChargeLevel = 3;
     }

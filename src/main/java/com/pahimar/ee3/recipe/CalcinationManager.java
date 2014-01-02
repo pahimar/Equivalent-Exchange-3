@@ -3,6 +3,7 @@ package com.pahimar.ee3.recipe;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.ModItems;
 import net.minecraft.item.ItemStack;
 
@@ -25,7 +26,7 @@ public class CalcinationManager
 
         TreeMap<EmcValue, ItemStack> sortedItems = new TreeMap<EmcValue, ItemStack>();
 
-        for (ItemStack dustStack : ModItems.alchemicalDust.getSubTypes())
+        for (ItemStack dustStack : ItemAlchemicalDust.getAlchemicalDusts())
         {
             // If the item to be calcined is an alchemical dust, return null (you cannot calcine what's already been calcined)
             if (ItemHelper.equals(itemStack, dustStack))

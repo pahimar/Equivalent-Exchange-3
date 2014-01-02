@@ -25,8 +25,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     public ItemMiniumStone(int id)
     {
         super(id);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.MINIUM_STONE_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setUnlocalizedName(Strings.MINIUM_STONE_NAME);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }
 

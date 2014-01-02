@@ -1,6 +1,5 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemAlchemicalFuel extends ItemEE
@@ -22,7 +20,6 @@ public class ItemAlchemicalFuel extends ItemEE
     {
         super(id);
         this.setHasSubtypes(true);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.maxStackSize = 64;
     }
 
@@ -60,18 +57,5 @@ public class ItemAlchemicalFuel extends ItemEE
         {
             list.add(new ItemStack(id, 1, meta));
         }
-    }
-
-    @Override
-    public List<ItemStack> getSubTypes()
-    {
-        List<ItemStack> alchemicalFuelStacks = new ArrayList<ItemStack>();
-
-        for (int meta = 0; meta < Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length; meta++)
-        {
-            alchemicalFuelStacks.add(new ItemStack(ModItems.alchemicalFuel, 1, meta));
-        }
-
-        return alchemicalFuelStacks;
     }
 }

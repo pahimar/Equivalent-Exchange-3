@@ -1,6 +1,5 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 
 /**
@@ -15,8 +14,7 @@ public class ItemMiniumShard extends ItemEE
     public ItemMiniumShard(int id)
     {
         super(id);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.MINIUM_SHARD_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setUnlocalizedName(Strings.MINIUM_SHARD_NAME);
         maxStackSize = 64;
     }
 }

@@ -1,6 +1,5 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
@@ -26,8 +25,6 @@ public class ItemAlchemicalDust extends ItemEE
     {
         super(id);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_DUST_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 64;
     }
 
@@ -64,6 +61,12 @@ public class ItemAlchemicalDust extends ItemEE
         }
 
         return Integer.parseInt(Colours.PURE_WHITE, 16);
+    }
+
+    @Override
+    public String getUnlocalizedName()
+    {
+        return String.format("item.%s%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME);
     }
 
     @Override
@@ -122,8 +125,7 @@ public class ItemAlchemicalDust extends ItemEE
         }
     }
 
-    @Override
-    public List<ItemStack> getSubTypes()
+    public static List<ItemStack> getAlchemicalDusts()
     {
         List<ItemStack> alchemicalDustStacks = new ArrayList<ItemStack>();
 
