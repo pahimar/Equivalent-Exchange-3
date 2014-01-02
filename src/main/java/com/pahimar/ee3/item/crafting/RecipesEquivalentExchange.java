@@ -1,13 +1,12 @@
 package com.pahimar.ee3.item.crafting;
 
 import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.helper.CraftingHelper;
 import com.pahimar.ee3.item.ModItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class RecipesEquivalentExchange
 {
@@ -38,6 +37,7 @@ public class RecipesEquivalentExchange
 
         GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
         GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
-        CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"}));
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"iii", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
     }
 }
