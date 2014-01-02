@@ -27,20 +27,16 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 {
-
     private ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
 
     public TileEntityAludelRenderer()
     {
-
         customRenderItem = new RenderItem()
         {
-
             @Override
             public boolean shouldBob()
             {
-
                 return false;
             }
         };
@@ -51,10 +47,8 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-
         if (tileEntity instanceof TileAludel)
         {
-
             TileAludel tileAludel = (TileAludel) tileEntity;
 
             GL11.glPushMatrix();

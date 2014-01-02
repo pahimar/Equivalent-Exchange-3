@@ -26,7 +26,6 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     {
         super(id, Material.glass);
         this.setUnlocalizedName(Strings.GLASS_BELL_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(1.0F);
     }
 

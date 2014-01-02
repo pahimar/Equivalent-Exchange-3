@@ -1,5 +1,6 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileEE;
 import cpw.mods.fml.relauncher.Side;
@@ -29,6 +30,7 @@ public class BlockEE extends Block
     public BlockEE(int id, Material material)
     {
         super(id, material);
+        setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
     @Override
@@ -59,34 +61,35 @@ public class BlockEE extends Block
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
-        int direction = 0;
-        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        if (world.getBlockTileEntity(x, y, z) instanceof TileEE)
+        {
+            int direction = 0;
+            int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if (facing == 0)
-        {
-            direction = ForgeDirection.NORTH.ordinal();
-        }
-        else if (facing == 1)
-        {
-            direction = ForgeDirection.EAST.ordinal();
-        }
-        else if (facing == 2)
-        {
-            direction = ForgeDirection.SOUTH.ordinal();
-        }
-        else if (facing == 3)
-        {
-            direction = ForgeDirection.WEST.ordinal();
-        }
+            if (facing == 0)
+            {
+                direction = ForgeDirection.NORTH.ordinal();
+            }
+            else if (facing == 1)
+            {
+                direction = ForgeDirection.EAST.ordinal();
+            }
+            else if (facing == 2)
+            {
+                direction = ForgeDirection.SOUTH.ordinal();
+            }
+            else if (facing == 3)
+            {
+                direction = ForgeDirection.WEST.ordinal();
+            }
 
-        world.setBlockMetadataWithNotify(x, y, z, direction, 3);
+            if (itemStack.hasDisplayName())
+            {
+                ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+            }
 
-        if (itemStack.hasDisplayName())
-        {
-            ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
         }
-
-        ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
     }
 
     protected void dropInventory(World world, int x, int y, int z)
