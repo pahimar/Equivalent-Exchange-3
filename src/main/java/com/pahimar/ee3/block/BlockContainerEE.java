@@ -22,6 +22,11 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public abstract class BlockContainerEE extends BlockContainer
 {
+    public BlockContainerEE(int id)
+    {
+        this(id, Material.rock);
+    }
+
     public BlockContainerEE(int id, Material material)
     {
         super(id, material);

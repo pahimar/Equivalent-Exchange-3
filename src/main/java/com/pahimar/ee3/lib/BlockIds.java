@@ -16,7 +16,7 @@ public class BlockIds
     public static int ALCHEMICAL_CHEST_DEFAULT = 2454;
     public static int ALCHEMICAL_FUEL_DEFAULT = 2455;
     public static int CHALK_DEFAULT = 2456;
-    public static int TRANSMUTATION_SQUARE_DEFAULT = 2457;
+    public static int ALCHEMY_SQUARE_DEFAULT = 2457;
 
     /* Current block ids */
     public static int CALCINATOR;
@@ -25,5 +25,5 @@ public class BlockIds
     public static int ALCHEMICAL_CHEST;
     public static int ALCHEMICAL_FUEL;
     public static int CHALK;
-    public static int TRANSMUTATION_SQUARE;
+    public static int ALCHEMY_SQUARE;
 }
