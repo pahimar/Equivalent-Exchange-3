@@ -12,7 +12,7 @@ public class BlockChalk extends BlockEE
     {
         super(id, Material.clay);
         setHardness(0.6F);
-        setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.CHALK_NAME);
+        setUnlocalizedName(Strings.CHALK_NAME);
         setStepSound(soundGravelFootstep);
     }
 

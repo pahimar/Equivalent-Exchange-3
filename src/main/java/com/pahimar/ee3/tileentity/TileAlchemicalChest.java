@@ -18,7 +18,6 @@ import net.minecraft.nbt.NBTTagList;
  */
 public class TileAlchemicalChest extends TileEE implements IInventory
 {
-
     /**
      * The current angle of the chest lid (between 0 and 1)
      */
@@ -48,7 +47,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
 
     public TileAlchemicalChest()
     {
-
         super();
         inventory = new ItemStack[INVENTORY_SIZE];
     }
@@ -63,14 +61,12 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
-
         return inventory[slotIndex];
     }
 
     @Override
     public ItemStack decrStackSize(int slotIndex, int decrementAmount)
     {
-
         ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null)
         {
@@ -94,7 +90,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlotOnClosing(int slotIndex)
     {
-
         if (inventory[slotIndex] != null)
         {
             ItemStack itemStack = inventory[slotIndex];
@@ -110,7 +105,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
     {
-
         inventory[slotIndex] = itemStack;
 
         if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit())
@@ -124,14 +118,12 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public String getInvName()
     {
-
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_CHEST_NAME;
     }
 
     @Override
     public int getInventoryStackLimit()
     {
-
         return 64;
     }
 
@@ -141,7 +133,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public boolean receiveClientEvent(int eventID, int numUsingPlayers)
     {
-
         if (eventID == 1)
         {
             this.numUsingPlayers = numUsingPlayers;
@@ -156,7 +147,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void openChest()
     {
-
         ++numUsingPlayers;
         worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
     }
@@ -164,7 +154,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void closeChest()
     {
-
         --numUsingPlayers;
         worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
     }
@@ -176,7 +165,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void updateEntity()
     {
-
         super.updateEntity();
 
         if (++ticksSinceSync % 20 * 4 == 0)
@@ -230,7 +218,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
@@ -250,7 +237,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.writeToNBT(nbtTagCompound);
 
         // Write the ItemStacks in the inventory to NBT
@@ -271,21 +257,18 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public boolean isInvNameLocalized()
     {
-
         return this.hasCustomName();
     }
 
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-
         return true;
     }
 
     @Override
     public String toString()
     {
-
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(super.toString());
