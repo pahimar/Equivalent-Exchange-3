@@ -4,7 +4,7 @@ import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
-import com.pahimar.ee3.item.crafting.RecipeRegistry;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

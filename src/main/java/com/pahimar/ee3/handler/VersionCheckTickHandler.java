@@ -4,7 +4,6 @@ import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -52,7 +51,7 @@ public class VersionCheckTickHandler implements ITickHandler
                                 if (VersionHelper.getResult() == VersionHelper.OUTDATED)
                                 {
                                     FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(VersionHelper.getResultMessageForClient());
-                                    GeneralConfiguration.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, Strings.FALSE);
+                                    GeneralConfiguration.set(Configuration.CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, "false");
                                 }
                             }
                         }

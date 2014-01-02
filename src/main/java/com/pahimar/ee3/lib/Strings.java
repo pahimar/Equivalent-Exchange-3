@@ -9,12 +9,6 @@ package com.pahimar.ee3.lib;
  */
 public class Strings
 {
-
-    /* General keys */
-    public static final String TRUE = "true";
-    public static final String FALSE = "false";
-    public static final String TOKEN_DELIMITER = ",";
-
     /* Localization Prefixes */
     public static final String RESOURCE_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 
@@ -48,6 +42,7 @@ public class Strings
     public static final String ALUDEL_NAME = "aludel";
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String GLASS_BELL_NAME = "glassBell";
+    public static final String ALCHEMY_SQUARE_NAME = "alchemySquare";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";
@@ -55,18 +50,16 @@ public class Strings
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
+    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"ash", "verdant", "azure", "minium", "iridescent"};
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
-    public static final String ALCHEMICAL_CHALK_NAME = "alchemicalChalk";
+    public static final String CHALK_NAME = "chalk";
     public static final String DIVINING_ROD_NAME = "diviningRod";
     public static final String ALCHEMICAL_COAL_NAME = "alchemicalCoal";
     public static final String MOBIUS_FUEL_NAME = "mobiusFuel";
     public static final String AETERNALIS_FUEL_NAME = "aeternalisFuel";
-
-    /* TileEntity name constants */
-    public static final String TE_CALCINATOR_NAME = "tileCalcinator";
-    public static final String TE_ALUDEL_NAME = "tileAludel";
-    public static final String TE_ALCHEMICAL_CHEST_NAME = "tileAlchemicalChest";
-    public static final String TE_GLASS_BELL_NAME = "tileGlassBell";
+    public static final String[] ALCHEMICAL_FUEL_SUBTYPE_NAMES = {ALCHEMICAL_COAL_NAME, MOBIUS_FUEL_NAME, AETERNALIS_FUEL_NAME};
+    public static final String ALCHEMICAL_FUEL_NAME = "alchemicalFuel";
+    public static final String ALCHEMICAL_FUEL_BLOCK_NAME = "alchemicalFuelBlock";
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";

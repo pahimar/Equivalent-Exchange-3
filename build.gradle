@@ -24,7 +24,7 @@ configFile.withReader {
 }
 
 group = "com.pahimar.ee3"
-version = config.mod_version + "." + config.build_number
+version = config.mod_version
 archivesBaseName = "EquivalentExchange3"
 
 minecraft {
@@ -36,6 +36,8 @@ minecraft {
         replace "@FINGERPRINT@", project.ee3_signature
 }
 
+version = "${config.minecraft_version}-${config.mod_version}.${System.getenv().BUILD_NUMBER}"
+
 processResources {
     // replace stuff in the files we want.
     from(sourceSets.main.resources.srcDirs) {
@@ -43,7 +45,7 @@ processResources {
         include 'version.properties'
 
         // replaces
-        expand 'version': project.config.mod_version, 'buildnumber': project.config.build_number
+        expand 'version': project.config.mod_version, 'buildnumber': "${System.getenv().BUILD_NUMBER}"
     }
 
     // copy everything else, thats we didnt do before
@@ -69,7 +71,7 @@ if (!project.hasProperty("keystore_password")) // keystore stuff
 if (!project.hasProperty("ee3_release_loc")) // release loc
     ext.ee3_release_loc = "."
 else
-    ee3_release_loc = ee3_release_loc.replace('{MC}', minecraft.version).replace('{MODVER}', config.mod_version).replace('{BUILD}', config.build_number)
+    ext.ee3_release_loc = ee3_release_loc.replace('{MC}', minecraft.version).replace('{MODVER}', config.mod_version).replace('{BUILD}', "${System.getenv().BUILD_NUMBER}")
 
 task signJar(dependsOn: "reobf") {
     inputs.file jar.getArchivePath()
@@ -95,21 +97,11 @@ task signJar(dependsOn: "reobf") {
     }
 }
 
-task incrementBuildNumber() {
-    doLast {
-        // increment
-        config.build_number = (config.build_number.toString().toInteger()) + 1
-
-        // write back to the file
-        configFile.withWriter {
-            config.toProperties().store(it, "")
-        }
-    }
-}
-
 task release(type: Copy) {
-    dependsOn "incrementBuildNumber"
     dependsOn "signJar"
+
+    from project.tasks.jar.destinationDir
+    into project.file(project.ee3_release_loc)
 
     eachFile { file ->
         logger.info "copying ${file}"

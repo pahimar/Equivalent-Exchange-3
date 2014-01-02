@@ -31,8 +31,7 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     public ItemPhilosophersStone(int id)
     {
         super(id);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.PHILOSOPHERS_STONE_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setUnlocalizedName(Strings.PHILOSOPHERS_STONE_NAME);
         this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
         maxChargeLevel = 3;
     }
@@ -93,13 +92,6 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     }
 
     @Override
-    public void openPortableTransmutationGUI(EntityPlayer thePlayer, ItemStack itemStack)
-    {
-        ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN, true);
-        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.PORTABLE_TRANSMUTATION, thePlayer.worldObj, (int) thePlayer.posX, (int) thePlayer.posY, (int) thePlayer.posZ);
-    }
-
-    @Override
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit)
     {
         EquivalentExchange3.proxy.transmuteBlock(itemStack, player, world, x, y, z, sideHit);
@@ -146,10 +138,6 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
             if (!thePlayer.isSneaking())
             {
                 openPortableCraftingGUI(thePlayer, itemStack);
-            }
-            else
-            {
-                openPortableTransmutationGUI(thePlayer, itemStack);
             }
         }
         else if (keyBinding.equals(ConfigurationSettings.KEYBINDING_TOGGLE))

@@ -17,11 +17,10 @@ import net.minecraftforge.event.entity.player.PlayerDropsEvent;
  */
 public class ItemEventHandler
 {
-
     @ForgeSubscribe
+    @SuppressWarnings("unused")
     public void onItemPickup(EntityItemPickupEvent event)
     {
-
         if (ItemStackNBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
         {
             ItemStackNBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
@@ -37,9 +36,9 @@ public class ItemEventHandler
     }
 
     @ForgeSubscribe
+    @SuppressWarnings("unused")
     public void onItemToss(ItemTossEvent event)
     {
-
         if (ItemStackNBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
         {
             ItemStackNBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
@@ -55,9 +54,9 @@ public class ItemEventHandler
     }
 
     @ForgeSubscribe
+    @SuppressWarnings("unused")
     public void onPlayerDrop(PlayerDropsEvent event)
     {
-
         for (EntityItem entityItem : event.drops)
         {
             if (ItemStackNBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))

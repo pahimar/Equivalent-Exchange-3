@@ -20,25 +20,21 @@ import org.lwjgl.opengl.GL12;
  * @author pahimar
  */
 @SideOnly(Side.CLIENT)
-public class TileEntityAlchemicalChestRenderer extends
-        TileEntitySpecialRenderer
+public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 {
-
     private ModelChest modelChest = new ModelChest();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-
         if (tileEntity instanceof TileAlchemicalChest)
         {
-
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) tileEntity;
             ForgeDirection direction = null;
 
             if (tileAlchemicalChest.getWorldObj() != null)
             {
-                direction = ForgeDirection.getOrientation(tileAlchemicalChest.getBlockMetadata());
+                direction = tileAlchemicalChest.getOrientation();
             }
 
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);

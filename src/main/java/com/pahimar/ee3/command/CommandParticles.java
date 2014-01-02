@@ -3,7 +3,6 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Commands;
-import com.pahimar.ee3.lib.Strings;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.util.ChatMessageComponent;
@@ -50,7 +49,7 @@ public class CommandParticles
     {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = true;
-        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.TRUE);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "true");
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_PARTICLES_TURNED_ON));
     }
 
@@ -58,7 +57,7 @@ public class CommandParticles
     {
 
         ConfigurationSettings.ENABLE_PARTICLE_FX = false;
-        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, Strings.FALSE);
+        GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, "false");
         commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_PARTICLES_TURNED_OFF));
     }
 }

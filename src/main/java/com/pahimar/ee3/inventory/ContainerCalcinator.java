@@ -1,9 +1,12 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.tileentity.TileCalcinator;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -17,8 +20,15 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class ContainerCalcinator extends Container
 {
+    private TileCalcinator calcinator;
+    private int lastCookTime;          // How much longer the Calcinator will burn
+    private int lastBurnTime;                // The fuel value for the currently burning fuel
+    private int lastItemCookTime;                // How long the current item has been "cooking"
+
     public ContainerCalcinator(InventoryPlayer inventoryPlayer, TileCalcinator calcinator)
     {
+        this.calcinator = calcinator;
+
         // Add the fuel slot to the container
         this.addSlotToContainer(new Slot(calcinator, TileCalcinator.FUEL_INVENTORY_INDEX, 56, 62));
 
@@ -111,5 +121,63 @@ public class ContainerCalcinator extends Container
         }
 
         return itemStack;
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting)
+    {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, this.calcinator.calcinatorCookTime);
+        iCrafting.sendProgressBarUpdate(this, 1, this.calcinator.fuelBurnTime);
+        iCrafting.sendProgressBarUpdate(this, 2, this.calcinator.itemCookTime);
+    }
+
+    @Override
+    public void detectAndSendChanges()
+    {
+        super.detectAndSendChanges();
+
+        for (int i = 0; i < this.crafters.size(); ++i)
+        {
+            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+
+            if (this.lastCookTime != this.calcinator.calcinatorCookTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 0, this.calcinator.calcinatorCookTime);
+            }
+
+            if (this.lastBurnTime != this.calcinator.fuelBurnTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 1, this.calcinator.fuelBurnTime);
+            }
+
+            if (this.lastItemCookTime != this.calcinator.itemCookTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 2, this.calcinator.itemCookTime);
+            }
+        }
+
+        this.lastCookTime = this.calcinator.calcinatorCookTime;
+        this.lastBurnTime = this.calcinator.fuelBurnTime;
+        this.lastItemCookTime = this.calcinator.itemCookTime;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int valueType, int updatedValue)
+    {
+        if (valueType == 0)
+        {
+            this.calcinator.calcinatorCookTime = updatedValue;
+        }
+
+        if (valueType == 1)
+        {
+            this.calcinator.fuelBurnTime = updatedValue;
+        }
+
+        if (valueType == 2)
+        {
+            this.calcinator.itemCookTime = updatedValue;
+        }
     }
 }

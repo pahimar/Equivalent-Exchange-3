@@ -17,11 +17,9 @@ public class ItemIds
     public static int PHILOSOPHERS_STONE_DEFAULT = 27003;
     public static int ALCHEMICAL_DUST_DEFAULT = 27004;
     public static int ALCHEMICAL_BAG_DEFAULT = 27005;
-    public static int ALCHEMICAL_CHALK_DEFAULT = 27006;
+    public static int CHALK_DEFAULT = 27006;
     public static int DIVINING_ROD_DEFAULT = 27007;
-    public static int ALCHEMICAL_COAL_DEFAULT = 27008;
-    public static int MOBIUS_FUEL_DEFAULT = 27009;
-    public static int AETERNALIS_FUEL_DEFAULT = 27010;
+    public static int ALCHEMICAL_FUEL_DEFAULT = 27008;
 
     /* Current item ids */
     public static int MINIUM_SHARD;
@@ -30,9 +28,7 @@ public class ItemIds
     public static int PHILOSOPHERS_STONE;
     public static int ALCHEMICAL_DUST;
     public static int ALCHEMICAL_BAG;
-    public static int ALCHEMICAL_CHALK;
+    public static int CHALK;
     public static int DIVINING_ROD;
-    public static int ALCHEMICAL_COAL;
-    public static int MOBIUS_FUEL;
-    public static int AETERNALIS_FUEL;
+    public static int ALCHEMICAL_FUEL;
 }

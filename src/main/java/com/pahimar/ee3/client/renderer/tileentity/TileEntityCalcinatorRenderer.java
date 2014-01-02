@@ -20,6 +20,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
 {
+    // TODO Show the firepot as being "lit"
+    // TODO Packet for display dust size/colour and calcinator state
 
     private ModelCalcinator modelCalcinator = new ModelCalcinator();
 
@@ -53,8 +55,8 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-                // TODO Handle colouring the dusts as per their meta in the calcinator inventory
-                GL11.glColor3b((byte) 32, (byte) 128, (byte) 192);
+                float[] dustColour = tileCalcinator.getBlendedDustColour();
+                GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 
                 if (tileCalcinator.getCombinedOutputSize() <= 32)
                 {

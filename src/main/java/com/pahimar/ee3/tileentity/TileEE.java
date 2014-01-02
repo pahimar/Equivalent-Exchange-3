@@ -124,6 +124,6 @@ public class TileEE extends TileEntity
     @Override
     public String toString()
     {
-        return String.format("TileEE Data - xCoord: %d, yCoord: %d, zCoord: %d, customName: '%s', orientation: %s, state: %d\n", xCoord, yCoord, zCoord, customName, orientation, state);
+        return String.format("TileEE Data - Class: %s, xCoord: %d, yCoord: %d, zCoord: %d, customName: '%s', orientation: %s, state: %d\n", this.getClass().getSimpleName(), xCoord, yCoord, zCoord, customName, orientation, state);
     }
 }

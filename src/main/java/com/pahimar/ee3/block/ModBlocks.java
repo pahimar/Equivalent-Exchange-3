@@ -1,11 +1,9 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.item.ItemAlchemicalFuelBlock;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  * Equivalent-Exchange-3
@@ -16,33 +14,30 @@ import net.minecraft.item.ItemStack;
  */
 public class ModBlocks
 {
-
-    /* Mod block instances */
-    public static Block calcinator;
-    public static Block aludelBase;
-    public static Block alchemicalChest;
-    public static Block glassBell;
+    public static BlockEE alchemicalChest;
+    public static BlockEE alchemicalFuel;
+    public static BlockEE alchemySquare;
+    public static BlockEE aludelBase;
+    public static BlockEE calcinator;
+    public static BlockEE chalk;
+    public static BlockEE glassBell;
 
     public static void init()
     {
-
-        calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
-        aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
         alchemicalChest = new BlockAlchemicalChest(BlockIds.ALCHEMICAL_CHEST);
+        alchemicalFuel = new BlockAlchemicalFuel(BlockIds.ALCHEMICAL_FUEL);
+        alchemySquare = new BlockAlchemySquare(BlockIds.ALCHEMY_SQUARE);
+        aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
+        calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
+        chalk = new BlockChalk(BlockIds.CHALK);
         glassBell = new BlockGlassBell(BlockIds.GLASS_BELL);
 
-        GameRegistry.registerBlock(calcinator, Strings.CALCINATOR_NAME);
-        GameRegistry.registerBlock(aludelBase, Strings.ALUDEL_NAME);
-        GameRegistry.registerBlock(alchemicalChest, Strings.ALCHEMICAL_CHEST_NAME);
-        GameRegistry.registerBlock(glassBell, Strings.GLASS_BELL_NAME);
-
-        initBlockRecipes();
-    }
-
-    private static void initBlockRecipes()
-    {
-
-        GameRegistry.addRecipe(new ItemStack(glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
-        GameRegistry.addRecipe(new ItemStack(aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
+        GameRegistry.registerBlock(alchemicalChest, "block." + Strings.ALCHEMICAL_CHEST_NAME);
+        GameRegistry.registerBlock(alchemicalFuel, ItemAlchemicalFuelBlock.class, "block." + Strings.ALCHEMICAL_FUEL_NAME);
+        GameRegistry.registerBlock(alchemySquare, "block." + Strings.ALCHEMY_SQUARE_NAME);
+        GameRegistry.registerBlock(aludelBase, "block." + Strings.ALUDEL_NAME);
+        GameRegistry.registerBlock(calcinator, "block." + Strings.CALCINATOR_NAME);
+        GameRegistry.registerBlock(chalk, "block." + Strings.CHALK_NAME);
+        GameRegistry.registerBlock(glassBell, "block." + Strings.GLASS_BELL_NAME);
     }
 }

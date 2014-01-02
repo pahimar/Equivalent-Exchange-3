@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class WrappedStack
-        implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>
+public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>, JsonSerializer<WrappedStack>
 {
-
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
 
     @SuppressWarnings("unused")
@@ -245,7 +243,7 @@ public class WrappedStack
 
             if (wrappedStack != null && wrappedStack.getWrappedStack() != null)
             {
-                className = wrappedStack.getWrappedStack().getClass().getSimpleName();
+                className = wrappedStack.wrappedStack.getClass().getSimpleName();
                 this.stackSize = stackSize;
                 this.wrappedStack = wrappedStack.wrappedStack;
             }
@@ -300,6 +298,7 @@ public class WrappedStack
         return null;
     }
 
+    @SuppressWarnings("unused")
     public String toJson()
     {
         return gsonSerializer.toJson(this);
@@ -445,6 +444,36 @@ public class WrappedStack
         return false;
     }
 
+    @Override
+    public JsonElement serialize(WrappedStack wrappedStack, Type type, JsonSerializationContext context)
+    {
+        JsonObject jsonWrappedStack = new JsonObject();
+
+        Gson gsonWrappedStack = new Gson();
+
+        jsonWrappedStack.addProperty("className", wrappedStack.className);
+        jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
+
+        if (wrappedStack.wrappedStack instanceof ItemStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof OreStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, OreStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof EnergyStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, EnergyStack.class));
+        }
+        else if (wrappedStack.wrappedStack instanceof FluidStack)
+        {
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, FluidStack.class));
+        }
+
+        return jsonWrappedStack;
+    }
+
     /**
      *
      */
@@ -473,19 +502,7 @@ public class WrappedStack
             {
                 if (className != null)
                 {
-                    if (className.equalsIgnoreCase(Item.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Item.class);
-                    }
-                    else if (className.equalsIgnoreCase(Block.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Block.class);
-                    }
-                    else if (className.equalsIgnoreCase(Fluid.class.getSimpleName()))
-                    {
-                        stackObject = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), Fluid.class);
-                    }
-                    else if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
+                    if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                     {
                         ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
 

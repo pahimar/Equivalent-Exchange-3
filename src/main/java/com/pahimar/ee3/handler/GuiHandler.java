@@ -21,10 +21,6 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerPortableCrafting(player.inventory, world, x, y, z);
         }
-        else if (ID == GuiIds.PORTABLE_TRANSMUTATION)
-        {
-            return new ContainerPortableTransmutation();
-        }
         else if (ID == GuiIds.CALCINATOR)
         {
             TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
@@ -61,10 +57,6 @@ public class GuiHandler implements IGuiHandler
         if (ID == GuiIds.PORTABLE_CRAFTING)
         {
             return new GuiPortableCrafting(player, world, x, y, z);
-        }
-        else if (ID == GuiIds.PORTABLE_TRANSMUTATION)
-        {
-            return new GuiPortableTransmutation(null);
         }
         else if (ID == GuiIds.CALCINATOR)
         {

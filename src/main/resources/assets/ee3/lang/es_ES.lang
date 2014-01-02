@@ -3,6 +3,7 @@ key.charge=Cargar
 key.extra=Extra
 key.release=Lanzar
 key.toggle=Cambiar
+<<<<<<< HEAD
 
 # Item localizations
 item.ee3:alchemicalBag.name=Bolsa Alquímica [WIP]
@@ -15,6 +16,22 @@ item.ee3:shardMinium.name=Fragmento Minio
 item.ee3:stoneInert.name=Piedra Inerte
 item.ee3:stoneMinium.name=Piedra Minio
 item.ee3:stonePhilosophers.name=Piedra Filosofal [WIP]
+=======
+key.charge=Cargar
+
+# Item localizations
+item.ee3:shardMinium.name=Fragmento Minio
+item.ee3:stoneInert.name=Piedra Inerte
+item.ee3:stoneMinium.name=Piedra Minio
+item.ee3:stonePhilosophers.name=Piedra Filosofal
+item.ee3:alchemicalDustAsh.name=Ceniza
+item.ee3:alchemicalDustMinium.name=Polvo Minio
+item.ee3:alchemicalDustVerdant.name=Polvo Verdante
+item.ee3:alchemicalDustAzure.name=Polvo Azur
+item.ee3:alchemicalDustAmaranthine.name=Polvo Purpúreo
+item.ee3:alchemicalDustIridescent.name=Polvo Iridiscente
+item.ee3:alchemicalBag.name=Bolsa Alquímica
+>>>>>>> upstream/master
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Cofre Alquímico [WIP]

@@ -11,7 +11,6 @@ import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
@@ -28,7 +27,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
@@ -53,6 +51,7 @@ public class EquivalentExchange3
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
         // Report (log) to the user that the version of Equivalent Exchange 3
@@ -68,6 +67,7 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void serverStarting(FMLServerStartingEvent event)
     {
         // Initialize the custom commands
@@ -75,6 +75,7 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void preInit(FMLPreInitializationEvent event)
     {
         // set version number
@@ -112,14 +113,11 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked, unused")
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
         NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
-
-        // Register the PlayerDestroyItem Handler
-        MinecraftForge.EVENT_BUS.register(new PlayerDestroyItemHandler());
 
         // Register the Item Pickup Handler
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
@@ -143,11 +141,8 @@ public class EquivalentExchange3
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
 
-        // Register the Crafting Handler
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
-
-        // Add in the ability to dye Alchemical Bags
-        CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
+        // Initialize our Crafting Handler
+        CraftingHandler.init();
 
         // Handle fluid registration
         FluidHelper.registerFluids();
@@ -155,17 +150,22 @@ public class EquivalentExchange3
         // Initialize mod tile entities
         proxy.registerTileEntities();
 
+        // Register our fuels
+        GameRegistry.registerFuelHandler(new FuelHandler());
+
         // Initialize addons (which work with IMC, and must be used in Init)
         AddonHandler.init();
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
     }
 
     @EventHandler
+    @SuppressWarnings("unused")
     public void handleIMCMessages(IMCEvent event)
     {
         InterModCommsHandler.processIMCMessages(event);

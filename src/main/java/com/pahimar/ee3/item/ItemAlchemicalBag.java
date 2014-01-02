@@ -22,7 +22,7 @@ import net.minecraft.world.World;
  *
  * @author pahimar
  */
-public class ItemAlchemicalBag extends ItemEE
+public class ItemAlchemicalBag extends ItemEE implements IDyeable
 {
     private static final String[] ALCHEMICAL_BAG_ICONS = {"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
 
@@ -32,8 +32,7 @@ public class ItemAlchemicalBag extends ItemEE
     public ItemAlchemicalBag(int id)
     {
         super(id);
-        this.setUnlocalizedName(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setUnlocalizedName(Strings.ALCHEMICAL_BAG_NAME);
     }
 
     @Override
@@ -123,16 +122,19 @@ public class ItemAlchemicalBag extends ItemEE
         }
     }
 
+    @Override
     public boolean hasColor(ItemStack itemStack)
     {
         return ItemHelper.hasColor(itemStack);
     }
 
+    @Override
     public int getColor(ItemStack itemStack)
     {
         return ItemHelper.getColor(itemStack);
     }
 
+    @Override
     public void setColor(ItemStack itemStack, int color)
     {
         if (itemStack != null)
@@ -144,6 +146,7 @@ public class ItemAlchemicalBag extends ItemEE
         }
     }
 
+    @Override
     public void removeColor(ItemStack itemStack)
     {
         if (itemStack != null)

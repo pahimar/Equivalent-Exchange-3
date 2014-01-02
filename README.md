@@ -7,7 +7,7 @@
 
 [Contributing](#contributing) - For those that want to help out.
 
-[FAQ](#faq) - For those that have questions.
+[FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions) - For those that have questions.
 
 ###Compiling Equivalent Exchange 3
 IMPORTANT: Please report any issues you have, there might be some problems with the documentation!
@@ -43,7 +43,7 @@ The Java JDK is used to compile EE3.
     * For `Variable Value`, input something similar to `C:\Program Files\Java\jdk1.7.0_45` exactly as shown (or wherever your Java JDK installation is), and click `Ok`.
     * Scroll down to a variable named `Path`, and double-click on it.
     * Append `;%JAVA_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Make sure the location is correct; double-check just to make sure.
-3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
+3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions).
 
 ####Setup Gradle
 Gradle is used to execute the various build tasks when compiling EE3.
@@ -53,15 +53,15 @@ Gradle is used to execute the various build tasks when compiling EE3.
 		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
 	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
 		* Gentoo: `emerge dev-java/gradle-bin`
-		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle)
+		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle).
 		* Ubuntu/Debian: `apt-get install gradle`
-		* Fedora: `yum install gradle`
+		* Fedora: Install Gradle manually from its website (see above), as Fedora ships a "broken" version of Gradle.  Use `yum install gradle` only if you know what you're doing.
 2. Windows: Set environment variables for Gradle.
 	* Go back to `Environment Variables` and then create a new system variable.
 	* For `Variable Name`, input `GRADLE_HOME`.
 	* For `Variable Value`, input something similar to `C:\Gradle-1.10` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
 	* Scroll down to `Path` again, and append `;%GRADLE_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Once again, double-check the location.
-3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](#faq).
+3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions).
 
 ####Setup Git
 Git is used to clone EE3 and update your local copy.
@@ -127,18 +127,3 @@ EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 		* Server log (if applicable)
 		* Detailed description of the bug
 5. Click `Submit new issue`, and wait for feedback!
-
-###FAQ
-Answers to frequently reported issues and/or questions.
-***
-**Q:** What's a command line?
-**A:** The command line is at the heart of every operating system.  It's `Command Prompt` for Windows and `Terminal` for Mac and Linux.
-
-**Q:** `javac` or `gradle` keeps giving me an error!
-**A:** Make sure the locations you typed are correct.  For example, if you typed `C:\Java` for `JAVA_HOME`, make sure `C:\Java` exists, and there's a `bin` folder inside of it.
-
-**Q:** Gradle keeps saying `BUILD FAILED` and I don't know how to fix it!
-**A:** Make sure you executed `gradle setupDevWorkspace`.  If you already did, try doing it again.  If it still fails, try creating an issue.
-
-**Q:** My issue/PR was closed!
-**A:** Somebody probably commented and solved your issue, or it was opened a long time ago.  If it's a PR, check to see if there's a commit message right before it was closed.  If so, pahimar either pulled your PR or found a different way to do it.
