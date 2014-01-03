@@ -6,11 +6,11 @@ key.toggle=Skift
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alkymistisk Taske [WIP]
-item.ee3:alchemicalDust.Ash.name=Aske [WIP]
-item.ee3:alchemicalDust.Minium.name=Mønje Støv [WIP]
-item.ee3:alchemicalDust.Verdant.name=Frodigt Støv [WIP]
-item.ee3:alchemicalDust.Azure.name=Azur Støv [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Iriserende Støv [WIP]
+item.ee3:alchemicalDust.ash.name=Aske [WIP]
+item.ee3:alchemicalDust.minium.name=Mønje Støv [WIP]
+item.ee3:alchemicalDust.verdant.name=Frodigt Støv [WIP]
+item.ee3:alchemicalDust.azure.name=Azur Støv [WIP]
+item.ee3:alchemicalDust.iridescent.name=Iriserende Støv [WIP]
 item.ee3:shardMinium.name=Skår af Mønje
 item.ee3:stoneInert.name=Inert Sten
 item.ee3:stoneMinium.name=Mønje Sten

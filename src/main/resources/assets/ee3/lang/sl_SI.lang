@@ -6,11 +6,11 @@ key.toggle=Preklopi
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alkimistična Vreča [WIP]
-item.ee3:alchemicalDust.Ash.name=Pepel [WIP]
-item.ee3:alchemicalDust.Minium.name=Minijev Prah [WIP]
-item.ee3:alchemicalDust.Verdant.name=Zelen Prah [WIP]
-item.ee3:alchemicalDust.Azure.name=Moder Prah [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Mavrični Prah [WIP]
+item.ee3:alchemicalDust.ash.name=Pepel [WIP]
+item.ee3:alchemicalDust.minium.name=Minijev Prah [WIP]
+item.ee3:alchemicalDust.verdant.name=Zelen Prah [WIP]
+item.ee3:alchemicalDust.azure.name=Moder Prah [WIP]
+item.ee3:alchemicalDust.iridescent.name=Mavrični Prah [WIP]
 item.ee3:shardMinium.name=Drobec Minija
 item.ee3:stoneInert.name=Nedejaven Kamen
 item.ee3:stoneMinium.name=Minijev Kamen

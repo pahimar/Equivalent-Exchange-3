@@ -6,11 +6,11 @@ key.toggle=Alternar
 
 # Item localizations
 item.ee3:alchemicalBag.name=Saco Alquímico [WIP]
-item.ee3:alchemicalDust.Ash.name=Cinza [WIP]
-item.ee3:alchemicalDust.Minium.name=Pó de Mínio [WIP]
-item.ee3:alchemicalDust.Verdant.name=Pó Virente [WIP]
-item.ee3:alchemicalDust.Azure.name=Pó Cerúleo [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Pó Iridescente [WIP]
+item.ee3:alchemicalDust.ash.name=Cinza [WIP]
+item.ee3:alchemicalDust.minium.name=Pó de Mínio [WIP]
+item.ee3:alchemicalDust.verdant.name=Pó Virente [WIP]
+item.ee3:alchemicalDust.azure.name=Pó Cerúleo [WIP]
+item.ee3:alchemicalDust.iridescent.name=Pó Iridescente [WIP]
 item.ee3:shardMinium.name=Fragmento de Mínio
 item.ee3:stoneInert.name=Pedra Inerte
 item.ee3:stoneMinium.name=Pedra de Mínio

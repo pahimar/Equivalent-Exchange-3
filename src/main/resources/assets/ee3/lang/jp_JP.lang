@@ -6,11 +6,11 @@ key.toggle=トグル
 
 # Item localizations
 item.ee3:alchemicalBag.name=錬金術袋 [WIP]
-item.ee3:alchemicalDust.Ash.name=灰 [WIP]
-item.ee3:alchemicalDust.Minium.name=鉛丹の粉末 [WIP]
-item.ee3:alchemicalDust.Verdant.name=新緑の粉末 [WIP]
-item.ee3:alchemicalDust.Azure.name=紺碧の粉末 [WIP]
-item.ee3:alchemicalDust.Iridescent.name=玉虫色の粉末 [WIP]
+item.ee3:alchemicalDust.ash.name=灰 [WIP]
+item.ee3:alchemicalDust.minium.name=鉛丹の粉末 [WIP]
+item.ee3:alchemicalDust.verdant.name=新緑の粉末 [WIP]
+item.ee3:alchemicalDust.azure.name=紺碧の粉末 [WIP]
+item.ee3:alchemicalDust.iridescent.name=玉虫色の粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=錬金術石炭
 item.ee3:alchemicalFuel.mobiusFuel.name=メビウス燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永遠燃料

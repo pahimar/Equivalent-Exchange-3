@@ -6,11 +6,11 @@ key.toggle=Přepnout
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchymistický Pytlík [WIP]
-item.ee3:alchemicalDust.Ash.name=Popel [WIP]
-item.ee3:alchemicalDust.Minium.name=Suříkový Prášek [WIP]
-item.ee3:alchemicalDust.Verdant.name=Nazelenalý Prášek [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurový Prášek [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Duhový Prášek [WIP]
+item.ee3:alchemicalDust.ash.name=Popel [WIP]
+item.ee3:alchemicalDust.minium.name=Suříkový Prášek [WIP]
+item.ee3:alchemicalDust.verdant.name=Nazelenalý Prášek [WIP]
+item.ee3:alchemicalDust.azure.name=Azurový Prášek [WIP]
+item.ee3:alchemicalDust.iridescent.name=Duhový Prášek [WIP]
 item.ee3:shardMinium.name=Úlomek Suříku
 item.ee3:stoneInert.name=Inertní Kámen
 item.ee3:stoneMinium.name=Kámen Suříku

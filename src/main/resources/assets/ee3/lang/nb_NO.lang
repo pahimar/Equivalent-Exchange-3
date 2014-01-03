@@ -6,11 +6,11 @@ key.toggle=Veksle
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alkymisk Sekk [WIP]
-item.ee3:alchemicalDust.Ash.name=Aske [WIP]
-item.ee3:alchemicalDust.Minium.name=Mønjestøv [WIP]
-item.ee3:alchemicalDust.Verdant.name=Verdant Støv [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurblått Støv [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Iriserende Støv [WIP]
+item.ee3:alchemicalDust.ash.name=Aske [WIP]
+item.ee3:alchemicalDust.minium.name=Mønjestøv [WIP]
+item.ee3:alchemicalDust.verdant.name=Verdant Støv [WIP]
+item.ee3:alchemicalDust.azure.name=Azurblått Støv [WIP]
+item.ee3:alchemicalDust.iridescent.name=Iriserende Støv [WIP]
 item.ee3:chalk.name=Kritt [WIP]
 item.ee3:shardMinium.name=Mønjeskår
 item.ee3:stoneInert.name=Inert Stein

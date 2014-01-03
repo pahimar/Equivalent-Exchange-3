@@ -6,11 +6,11 @@ key.toggle=切換目標
 
 # Item localizations
 item.ee3:alchemicalBag.name=煉丹袋 [WIP]
-item.ee3:alchemicalDust.Ash.name=灰燼 [WIP]
-item.ee3:alchemicalDust.Minium.name=鉛丹粉末 [WIP]
-item.ee3:alchemicalDust.Verdant.name=翠綠粉末 [WIP]
-item.ee3:alchemicalDustAzure.name=蔚藍粉末 [WIP]
-item.ee3:alchemicalDust.Iridescent.name=虹彩粉末 [WIP]
+item.ee3:alchemicalDust.ash.name=灰燼 [WIP]
+item.ee3:alchemicalDust.minium.name=鉛丹粉末 [WIP]
+item.ee3:alchemicalDust.verdant.name=翠綠粉末 [WIP]
+item.ee3:alchemicalDustazure.name=蔚藍粉末 [WIP]
+item.ee3:alchemicalDust.iridescent.name=虹彩粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=煉丹煤炭
 item.ee3:alchemicalFuel.mobiusFuel.name=莫比烏斯燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永恆燃料

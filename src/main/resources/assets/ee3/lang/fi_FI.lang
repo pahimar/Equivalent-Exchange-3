@@ -6,12 +6,12 @@ key.toggle=Muuta
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alkeminen pussi [Ei valmis]
-item.ee3:alchemicalDustAsh.name=Tuhka [Ei valmis]
+item.ee3:alchemicalDustash.name=Tuhka [Ei valmis]
 item.ee3:alchemicalDustMinium.name=Mönjäinen pöly [Ei valmis]
-item.ee3:alchemicalDustVerdant.name=Vehreä pöly [Ei valmis]
-item.ee3:alchemicalDustAzure.name=Taivaansinen pöly [Ei valmis]
+item.ee3:alchemicalDustverdant.name=Vehreä pöly [Ei valmis]
+item.ee3:alchemicalDustazure.name=Taivaansinen pöly [Ei valmis]
 item.ee3:alchemicalDustAmaranthine.name=Ikikukkaispöly [Ei valmis]
-item.ee3:alchemicalDustIridescent.name=Sateenkaarenkirjava pöly [Ei valmis]
+item.ee3:alchemicalDustiridescent.name=Sateenkaarenkirjava pöly [Ei valmis]
 item.ee3:chalk.name=Liitu [Ei valmis]
 item.ee3:shardMinium.name=Mönjäinen sirpale
 item.ee3:stoneInert.name=Eloton kivi

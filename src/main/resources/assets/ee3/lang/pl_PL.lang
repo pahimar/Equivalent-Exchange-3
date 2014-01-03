@@ -6,11 +6,11 @@ key.toggle=Przełącz
 
 # Item localizations
 item.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
-item.ee3:alchemicalDust.Ash.name=Popiół [WIP]
-item.ee3:alchemicalDust.Minium.name=Proszek Minium [WIP]
-item.ee3:alchemicalDust.Verdant.name=Zielony Proszek [WIP]
-item.ee3:alchemicalDust.Azure.name=Lazurowy Proszek [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Opalowy Proszek [WIP]
+item.ee3:alchemicalDust.ash.name=Popiół [WIP]
+item.ee3:alchemicalDust.minium.name=Proszek Minium [WIP]
+item.ee3:alchemicalDust.verdant.name=Zielony Proszek [WIP]
+item.ee3:alchemicalDust.azure.name=Lazurowy Proszek [WIP]
+item.ee3:alchemicalDust.iridescent.name=Opalowy Proszek [WIP]
 item.ee3:shardMinium.name=Odłam Minium
 item.ee3:stoneInert.name=Nieaktywny Kamień
 item.ee3:stoneMinium.name=Minium Kamień

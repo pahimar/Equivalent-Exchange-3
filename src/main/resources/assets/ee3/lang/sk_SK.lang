@@ -6,11 +6,11 @@ key.toggle=Prepnúť
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemystická Taška [WIP]
-item.ee3:alchemicalDust.Ash.name=Popol [WIP]
-item.ee3:alchemicalDust.Minium.name=Suríkový Prach [WIP]
-item.ee3:alchemicalDust.Verdant.name=Nazelenaný Prach [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurový Prach [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Dúhový Prach [WIP]
+item.ee3:alchemicalDust.ash.name=Popol [WIP]
+item.ee3:alchemicalDust.minium.name=Suríkový Prach [WIP]
+item.ee3:alchemicalDust.verdant.name=Nazelenaný Prach [WIP]
+item.ee3:alchemicalDust.azure.name=Azurový Prach [WIP]
+item.ee3:alchemicalDust.iridescent.name=Dúhový Prach [WIP]
 item.ee3:shardMinium.name=Úlomok Suríku
 item.ee3:stoneInert.name=Inertný Kameň
 item.ee3:stoneMinium.name=Suríkoý Kameň

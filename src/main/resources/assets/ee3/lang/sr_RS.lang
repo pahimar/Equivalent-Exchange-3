@@ -5,11 +5,11 @@ key.release=Одпустити
 key.toggle=Клин
 
 # Item localizations
-item.ee3:alchemicalDust.Ash.name=Пепео [WIP]
-item.ee3:alchemicalDust.Minium.name=Миниум Прашина [WIP]
-item.ee3:alchemicalDust.Verdant.name=Зелена Прашина [WIP]
-item.ee3:alchemicalDust.Azure.name=Плава Пашина [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Преливач боја Прашина [WIP]
+item.ee3:alchemicalDust.ash.name=Пепео [WIP]
+item.ee3:alchemicalDust.minium.name=Миниум Прашина [WIP]
+item.ee3:alchemicalDust.verdant.name=Зелена Прашина [WIP]
+item.ee3:alchemicalDust.azure.name=Плава Пашина [WIP]
+item.ee3:alchemicalDust.iridescent.name=Преливач боја Прашина [WIP]
 item.ee3:shardMinium.name=Делић од Миниум
 item.ee3:stoneInert.name=Инерт Камен
 item.ee3:stoneMinium.name=Миниум Камен

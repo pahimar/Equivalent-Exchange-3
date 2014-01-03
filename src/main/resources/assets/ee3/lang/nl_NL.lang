@@ -6,11 +6,11 @@ key.toggle=Wissel
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemistische Tas [WIP]
-item.ee3:alchemicalDust.Ash.name=As [WIP]
-item.ee3:alchemicalDust.Minium.name=Miniumpoeder [WIP]
-item.ee3:alchemicalDust.Verdant.name=Helgroen Poeder [WIP]
-item.ee3:alchemicalDust.Azure.name=Azuurblauw Poeder [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Iriserend Poeder [WIP]
+item.ee3:alchemicalDust.ash.name=As [WIP]
+item.ee3:alchemicalDust.minium.name=Miniumpoeder [WIP]
+item.ee3:alchemicalDust.verdant.name=Helgroen Poeder [WIP]
+item.ee3:alchemicalDust.azure.name=Azuurblauw Poeder [WIP]
+item.ee3:alchemicalDust.iridescent.name=Iriserend Poeder [WIP]
 item.ee3:chalk.name=Krijt [WIP]
 item.ee3:shardMinium.name=Miniumscherf
 item.ee3:stoneInert.name=Inerte Steen

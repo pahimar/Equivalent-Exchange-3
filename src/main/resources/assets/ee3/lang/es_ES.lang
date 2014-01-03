@@ -6,11 +6,11 @@ key.toggle=Cambiar
 
 # Item localizations
 item.ee3:alchemicalBag.name=Bolsa Alquímica [WIP]
-item.ee3:alchemicalDust.Ash.name=Ceniza [WIP]
-item.ee3:alchemicalDust.Minium.name=Polvo Minio [WIP]
-item.ee3:alchemicalDust.Verdant.name=Polvo Verdante [WIP]
-item.ee3:alchemicalDust.Azure.name=Polvo Azur [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Polvo Iridiscente [WIP]
+item.ee3:alchemicalDust.ash.name=Ceniza [WIP]
+item.ee3:alchemicalDust.minium.name=Polvo Minio [WIP]
+item.ee3:alchemicalDust.verdant.name=Polvo Verdante [WIP]
+item.ee3:alchemicalDust.azure.name=Polvo Azur [WIP]
+item.ee3:alchemicalDust.iridescent.name=Polvo Iridiscente [WIP]
 item.ee3:shardMinium.name=Fragmento Minio
 item.ee3:stoneInert.name=Piedra Inerte
 item.ee3:stoneMinium.name=Piedra Minio

@@ -6,11 +6,11 @@ key.toggle=Toglo
 
 # Item localizations
 item.ee3:alchemicalBag.name=Bag Alcemaidd [WIP]
-item.ee3:alchemicalDust.Ash.name=Lludw [WIP]
-item.ee3:alchemicalDust.Minium.name=Llwch Miniwm [WIP]
-item.ee3:alchemicalDust.Verdant.name=Llwch Werdd [WIP]
-item.ee3:alchemicalDust.Azure.name=Llwch Asur [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Llwch Symudliw [WIP]
+item.ee3:alchemicalDust.ash.name=Lludw [WIP]
+item.ee3:alchemicalDust.minium.name=Llwch Miniwm [WIP]
+item.ee3:alchemicalDust.verdant.name=Llwch Werdd [WIP]
+item.ee3:alchemicalDust.azure.name=Llwch Asur [WIP]
+item.ee3:alchemicalDust.iridescent.name=Llwch Symudliw [WIP]
 item.ee3:chalk.name=Sialc [WIP]
 item.ee3:shardMinium.name=Darn o Finiwm
 item.ee3:stoneInert.name=Carreg Anadweithiol

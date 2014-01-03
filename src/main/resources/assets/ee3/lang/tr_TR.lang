@@ -5,8 +5,8 @@ key.release=Bırak
 
 # Item localizations
 item.ee3:alchemicalBag.name=Simyacı Çantası [WIP]
-item.ee3:alchemicalDust.Ash.name=Kül [WIP]
-item.ee3:alchemicalDust.Minium.name=Minium Tozu [WIP]
+item.ee3:alchemicalDust.ash.name=Kül [WIP]
+item.ee3:alchemicalDust.minium.name=Minium Tozu [WIP]
 item.ee3:shardMinium.name=Minium Parçası
 item.ee3:stoneInert.name=Atıl Taşı
 item.ee3:stoneMinium.name=Minium Taşı

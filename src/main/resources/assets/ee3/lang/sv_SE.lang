@@ -6,11 +6,11 @@ key.toggle=Växla
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alkemisk Ryggsäck [WIP]
-item.ee3:alchemicalDust.Ash.name=Aska [WIP]
-item.ee3:alchemicalDust.Minium.name=Mönjadamm [WIP]
-item.ee3:alchemicalDust.Verdant.name=Grönskande Damm [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurdamm [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Iriserande Damm [WIP]
+item.ee3:alchemicalDust.ash.name=Aska [WIP]
+item.ee3:alchemicalDust.minium.name=Mönjadamm [WIP]
+item.ee3:alchemicalDust.verdant.name=Grönskande Damm [WIP]
+item.ee3:alchemicalDust.azure.name=Azurdamm [WIP]
+item.ee3:alchemicalDust.iridescent.name=Iriserande Damm [WIP]
 item.ee3:chalk.name=Krita [WIP]
 item.ee3:shardMinium.name=Skärva av mönja
 item.ee3:stoneInert.name=Inertsten

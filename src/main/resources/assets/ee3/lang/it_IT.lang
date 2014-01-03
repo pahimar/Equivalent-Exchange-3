@@ -6,11 +6,11 @@ key.toggle=Alterna
 
 # Item localizations
 item.ee3:alchemicalBag.name=Borsa Alchemica [WIP]
-item.ee3:alchemicalDust.Ash.name=Cenere [WIP]
-item.ee3:alchemicalDust.Minium.name=Polvere di Minio [WIP]
-item.ee3:alchemicalDust.Verdant.name=Polvere Verdeggiante [WIP]
-item.ee3:alchemicalDust.Azure.name=Polvere Azzurra [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Polvere Irridescente [WIP]
+item.ee3:alchemicalDust.ash.name=Cenere [WIP]
+item.ee3:alchemicalDust.minium.name=Polvere di Minio [WIP]
+item.ee3:alchemicalDust.verdant.name=Polvere Verdeggiante [WIP]
+item.ee3:alchemicalDust.azure.name=Polvere Azzurra [WIP]
+item.ee3:alchemicalDust.iridescent.name=Polvere Irridescente [WIP]
 item.ee3:shardMinium.name=Frammento di Minio
 item.ee3:stoneInert.name=Pietra Inerte
 item.ee3:stoneMinium.name=Pietra di Minio

@@ -6,11 +6,11 @@ key.toggle=Εναλλαγή
 
 # Item localizations
 item.ee3:alchemicalBag.name=Σάκος του Αλχημιστή [WIP]
-item.ee3:alchemicalDust.Ash.name=Στάχτη [WIP]
-item.ee3:alchemicalDust.Minium.name=Στάχτη Μίνιουμ [WIP]
-item.ee3:alchemicalDust.Verdant.name=Πρασινωπή Στάχτη [WIP]
-item.ee3:alchemicalDust.Azure.name=Γαλανή Στάχτη [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Ιριδίζουσα Στάχτη [WIP]
+item.ee3:alchemicalDust.ash.name=Στάχτη [WIP]
+item.ee3:alchemicalDust.minium.name=Στάχτη Μίνιουμ [WIP]
+item.ee3:alchemicalDust.verdant.name=Πρασινωπή Στάχτη [WIP]
+item.ee3:alchemicalDust.azure.name=Γαλανή Στάχτη [WIP]
+item.ee3:alchemicalDust.iridescent.name=Ιριδίζουσα Στάχτη [WIP]
 item.ee3:shardMinium.name=Θραύσμα Μίνιουμ
 item.ee3:stoneInert.name=Αδρανής Λίθος
 item.ee3:stoneMinium.name=Μίνιουμ Λίθος
