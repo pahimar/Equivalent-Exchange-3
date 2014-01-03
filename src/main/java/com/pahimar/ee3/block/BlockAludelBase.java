@@ -71,7 +71,7 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int faceHit, float par7, float par8, float par9)
     {
         if (player.isSneaking())
         {
@@ -84,6 +84,13 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
                 if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell)
                 {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
+                }
+                else if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+                {
+                    if (player.getHeldItem().itemID == ModBlocks.glassBell.blockID)
+                    {
+                        player.getHeldItem().getItem().onItemUse(player.getHeldItem(), player, world, x, y, z, faceHit, par7, par8, par9);
+                    }
                 }
             }
 
