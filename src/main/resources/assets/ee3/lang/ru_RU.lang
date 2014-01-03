@@ -30,6 +30,7 @@ tile.ee3:aludel.name=Алюдель [WIP]
 tile.ee3:calcinator.name=Кальцинатор [WIP]
 tile.ee3:chalk.name=Мел
 tile.ee3:glassBell.name=Стеклянный колпак [WIP]
+tile.ee3:researchStation.name=Станция исследований [WIP]
 
 # GUI localizations
 container.ee3:alchemicalBag=Алхимическая сумка [WIP]
@@ -37,6 +38,7 @@ container.ee3:alchemicalChest=Алхимический сундук [WIP]
 container.ee3:aludel=Алюдель [WIP]
 container.ee3:calcinator=Кальцинатор [WIP]
 container.ee3:glassBell=Стеклянный колпак [WIP]
+container.ee3:researchStation=Станция исследований [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Панель цели трансмутации включена
@@ -54,9 +56,6 @@ command.ee3:particles.turned_off=Частицы Equivalent Exchange 3 выклю
 command.ee3:sounds.set_to_all=Звуки Equivalent Exchange 3 слышны всем
 command.ee3:sounds.set_to_self=Звуки Equivalent Exchange 3 слышны только вам
 command.ee3:sounds.turned_off=Звуки Equivalent Exchange 3 выключены
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Инициализация проверки версии файла по удалённому экземпляру, расположенному на: %s
