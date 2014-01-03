@@ -27,7 +27,7 @@ public class ItemTooltipEventHandler
     @ForgeSubscribe
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        if (Keyboard.isKeyDown(29))
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 

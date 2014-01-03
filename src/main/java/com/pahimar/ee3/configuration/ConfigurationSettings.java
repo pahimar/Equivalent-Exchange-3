@@ -1,6 +1,7 @@
 package com.pahimar.ee3.configuration;
 
 import com.pahimar.ee3.lib.Strings;
+import org.lwjgl.input.Keyboard;
 
 /**
  * Equivalent-Exchange-3
@@ -81,19 +82,19 @@ public class ConfigurationSettings
      */
     // Extra key
     public static final String KEYBINDING_EXTRA = "key.extra";
-    public static final int KEYBINDING_EXTRA_DEFAULT = 46;
+    public static final int KEYBINDING_EXTRA_DEFAULT = Keyboard.KEY_C;
 
     // Release key
     public static final String KEYBINDING_RELEASE = "key.release";
-    public static final int KEYBINDING_RELEASE_DEFAULT = 19;
+    public static final int KEYBINDING_RELEASE_DEFAULT = Keyboard.KEY_R;
 
     // Toggle key
     public static final String KEYBINDING_TOGGLE = "key.toggle";
-    public static final int KEYBINDING_TOGGLE_DEFAULT = 34;
+    public static final int KEYBINDING_TOGGLE_DEFAULT = Keyboard.KEY_G;
 
     // Charge key
     public static final String KEYBINDING_CHARGE = "key.charge";
-    public static final int KEYBINDING_CHARGE_DEFAULT = 47;
+    public static final int KEYBINDING_CHARGE_DEFAULT = Keyboard.KEY_V;
 
     /*
      * Transmutation related config settings
