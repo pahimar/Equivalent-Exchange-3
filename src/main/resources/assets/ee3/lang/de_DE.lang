@@ -6,11 +6,11 @@ key.toggle=Umschalten
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
-item.ee3:alchemicalDust.Ash.name=Asche [WIP]
-item.ee3:alchemicalDust.Verdant.name=Grüner Staub [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurblauer Staub [WIP]
-item.ee3:alchemicalDust.Minium.name=Miniumstaub [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalDust.ash.name=Asche [WIP]
+item.ee3:alchemicalDust.verdant.name=Grüner Staub [WIP]
+item.ee3:alchemicalDust.azure.name=Azurblauer Staub [WIP]
+item.ee3:alchemicalDust.minium.name=Miniumstaub [WIP]
+item.ee3:alchemicalDust.iridescent.name=Irisierender Staub [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemiekohle
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius-Brennstoff
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis-Brennstoff
@@ -30,6 +30,7 @@ tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Kalzinierer [WIP]
 tile.ee3:chalk.name=Kreide
 tile.ee3:glassBell.name=Glasglocke [WIP]
+tile.ee3:researchStation.name=Forschungsstation [WIP]
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemiebeutel [WIP]
@@ -37,6 +38,7 @@ container.ee3:alchemicalChest=Alchemietruhe [WIP]
 container.ee3:aludel=Aludel [WIP]
 container.ee3:calcinator=Kalzinierer [WIP]
 container.ee3:glassBell=Glasglocke [WIP]
+container.ee3:researchStation=Forschungsstation [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Transmutationsvorschau an
@@ -54,9 +56,6 @@ command.ee3:particles.turned_off=Equivalent-Exchange-3-Partikel ausgeschaltet
 command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen Spielern ab
 command.ee3:sounds.set_to_self=Spiele nur Equivalent-Exchange-3-Geräusche vom eigenen Spieler ab
 command.ee3:sounds.turned_off=Das Abspielen von Equivalent-Exchange-3-Geräuschen wurde deaktiviert
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet: %s
