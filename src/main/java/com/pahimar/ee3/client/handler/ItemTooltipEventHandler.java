@@ -2,12 +2,12 @@ package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.emc.EmcValue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import org.lwjgl.input.Keyboard;
 
 import java.text.DecimalFormat;
 
@@ -27,27 +27,18 @@ public class ItemTooltipEventHandler
     @ForgeSubscribe
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        if (debug)
+        if (Keyboard.isKeyDown(29))
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
             if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
                 EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);
-
-                event.toolTip.add("");
-                if (emcValue != null)
-                {
-                    event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
-
-                    for (EmcType emcType : EmcType.TYPES)
-                    {
-                        if (emcValue.components[emcType.ordinal()] > 0)
-                        {
-                            event.toolTip.add("  * " + emcType + ": " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.components[emcType.ordinal()])));
-                        }
-                    }
-                }
+                event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+            }
+            else
+            {
+                event.toolTip.add("No EMC value");
             }
         }
     }
