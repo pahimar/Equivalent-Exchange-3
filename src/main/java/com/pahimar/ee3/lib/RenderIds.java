@@ -9,9 +9,9 @@ package com.pahimar.ee3.lib;
  */
 public class RenderIds
 {
-
     public static int calcinatorRender;
     public static int aludelRender;
     public static int alchemicalChestRender;
     public static int glassBell;
+    public static int researchStation;
 }

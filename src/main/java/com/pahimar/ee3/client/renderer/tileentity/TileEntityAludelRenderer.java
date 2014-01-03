@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 {
-    private ModelAludel modelAludel = new ModelAludel();
+    private final ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
 
     public TileEntityAludelRenderer()

@@ -19,33 +19,28 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ItemAlchemicalChestRenderer implements IItemRenderer
 {
-
-    private ModelChest modelChest;
+    private final ModelChest modelChest;
 
     public ItemAlchemicalChestRenderer()
     {
-
         modelChest = new ModelChest();
     }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
-
         return true;
     }
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
     {
-
         return true;
     }
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-
         switch (type)
         {
             case ENTITY:
@@ -75,7 +70,6 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer
 
     private void renderAlchemicalChest(float x, float y, float z)
     {
-
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size

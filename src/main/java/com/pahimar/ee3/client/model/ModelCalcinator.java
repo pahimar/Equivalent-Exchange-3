@@ -16,24 +16,20 @@ import net.minecraftforge.client.model.IModelCustom;
 @SideOnly(Side.CLIENT)
 public class ModelCalcinator
 {
-
     private IModelCustom modelCalcinator;
 
     public ModelCalcinator()
     {
-
         modelCalcinator = AdvancedModelLoader.loadModel(Models.CALCINATOR);
     }
 
     public void render()
     {
-
         modelCalcinator.renderAll();
     }
 
     public void renderPart(String partName)
     {
-
         modelCalcinator.renderPart(partName);
     }
 }

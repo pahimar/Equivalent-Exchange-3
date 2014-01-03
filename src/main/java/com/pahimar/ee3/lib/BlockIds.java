@@ -17,6 +17,7 @@ public class BlockIds
     public static int ALCHEMICAL_FUEL_DEFAULT = 2455;
     public static int CHALK_DEFAULT = 2456;
     public static int ALCHEMY_SQUARE_DEFAULT = 2457;
+    public static int RESEARCH_STATION_DEFAULT = 2458;
 
     /* Current block ids */
     public static int CALCINATOR;
@@ -26,4 +27,5 @@ public class BlockIds
     public static int ALCHEMICAL_FUEL;
     public static int CHALK;
     public static int ALCHEMY_SQUARE;
+    public static int RESEARCH_STATION;
 }

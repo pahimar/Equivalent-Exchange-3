@@ -23,7 +23,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
     // TODO Show the firepot as being "lit"
     // TODO Packet for display dust size/colour and calcinator state
 
-    private ModelCalcinator modelCalcinator = new ModelCalcinator();
+    private final ModelCalcinator modelCalcinator = new ModelCalcinator();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
@@ -67,10 +67,6 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 {
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
                     GL11.glTranslatef(-0.0125F, 0.75F, -0.7125F);
-                }
-                else if (tileCalcinator.getCombinedOutputSize() <= 128)
-                {
-                    // NOOP
                 }
 
                 // Reapply previous rotation to get it back to a viewable state

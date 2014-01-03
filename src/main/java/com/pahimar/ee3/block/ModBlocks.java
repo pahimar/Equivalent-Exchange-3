@@ -21,6 +21,7 @@ public class ModBlocks
     public static BlockEE calcinator;
     public static BlockEE chalk;
     public static BlockEE glassBell;
+    public static BlockEE researchStation;
 
     public static void init()
     {
@@ -31,6 +32,7 @@ public class ModBlocks
         calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
         chalk = new BlockChalk(BlockIds.CHALK);
         glassBell = new BlockGlassBell(BlockIds.GLASS_BELL);
+        researchStation = new BlockResearchStation((BlockIds.RESEARCH_STATION));
 
         GameRegistry.registerBlock(alchemicalChest, "block." + Strings.ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerBlock(alchemicalFuel, ItemAlchemicalFuelBlock.class, "block." + Strings.ALCHEMICAL_FUEL_NAME);
@@ -39,5 +41,6 @@ public class ModBlocks
         GameRegistry.registerBlock(calcinator, "block." + Strings.CALCINATOR_NAME);
         GameRegistry.registerBlock(chalk, "block." + Strings.CHALK_NAME);
         GameRegistry.registerBlock(glassBell, "block." + Strings.GLASS_BELL_NAME);
+        GameRegistry.registerBlock(researchStation, "block." + Strings.RESEARCH_STATION_NAME);
     }
 }

@@ -43,6 +43,7 @@ public class Strings
     public static final String ALCHEMICAL_CHEST_NAME = "alchemicalChest";
     public static final String GLASS_BELL_NAME = "glassBell";
     public static final String ALCHEMY_SQUARE_NAME = "alchemySquare";
+    public static final String RESEARCH_STATION_NAME = "researchStation";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";

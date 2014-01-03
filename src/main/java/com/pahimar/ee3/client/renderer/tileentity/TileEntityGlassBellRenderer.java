@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
 {
 
-    private ModelGlassBell modelGlassBell = new ModelGlassBell();
+    private final ModelGlassBell modelGlassBell = new ModelGlassBell();
     private final RenderItem customRenderItem;
 
     public TileEntityGlassBellRenderer()

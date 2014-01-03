@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 {
-    private ModelChest modelChest = new ModelChest();
+    private final ModelChest modelChest = new ModelChest();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)

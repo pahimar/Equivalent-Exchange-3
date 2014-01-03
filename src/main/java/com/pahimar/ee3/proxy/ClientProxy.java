@@ -7,14 +7,8 @@ import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyBindingHandler;
 import com.pahimar.ee3.client.handler.TransmutationTargetOverlayHandler;
 import com.pahimar.ee3.client.helper.KeyBindingHelper;
-import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
-import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
-import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
-import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
-import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
+import com.pahimar.ee3.client.renderer.item.*;
+import com.pahimar.ee3.client.renderer.tileentity.*;
 import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
@@ -89,16 +83,19 @@ public class ClientProxy extends CommonProxy
         RenderIds.aludelRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRender = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.glassBell = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.researchStation = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.RESEARCH_STATION, new ItemResearchStationRenderer());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileResearchStation.class, new TileEntityResearchStationRenderer());
     }
 
     @Override

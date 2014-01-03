@@ -195,6 +195,7 @@ public class TileCalcinator extends TileEE implements IInventory
             if (this.calcinatorCookTime == 0 && this.canCalcinate())
             {
                 // TODO Effect burn speed by fuel quality
+                // TODO Notify the client that we are still burning
                 this.fuelBurnTime = this.calcinatorCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
 
                 if (this.calcinatorCookTime > 0)
