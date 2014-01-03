@@ -24,14 +24,12 @@ import java.util.List;
 
 public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 {
-
     private static Gson gson = new Gson();
 
     // TODO Logging
 
     public static void processIMCMessages(IMCEvent event)
     {
-
         for (IMCMessage imcMessage : event.getMessages())
         {
             processIMCMessage(imcMessage);
@@ -40,7 +38,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     public static void processIMCMessage(IMCMessage imcMessage)
     {
-
         String requestedOperation = imcMessage.key;
 
         if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.RECIPE_ADD))
@@ -67,7 +64,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processAddRecipeMessage(IMCMessage imcMessage)
     {
-
         if (imcMessage.getMessageType() == String.class)
         {
             RecipeMapping recipeMapping = RecipeMapping.createFromJson(imcMessage.getStringValue());
@@ -93,17 +89,14 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processPreAssignEmcValueMessage(IMCMessage imcMessage)
     {
-
         if (imcMessage.getMessageType() == String.class)
         {
-
             StackValueMapping stackValueMapping = StackValueMapping.createFromJson(imcMessage.getStringValue());
 
             if (stackValueMapping != null)
             {
-
                 WrappedStack wrappedStack = stackValueMapping.wrappedStack;
-                EmcValue emcValue = stackValueMapping.emcValue;
+                EmcValue emcValue = new EmcValue(stackValueMapping.emcValue.getValue());
 
                 EmcValuesIMC.addPreAssignedValued(wrappedStack, emcValue);
             }
@@ -120,17 +113,14 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processPostAssignEmcValueMessage(IMCMessage imcMessage)
     {
-
         if (imcMessage.getMessageType() == String.class)
         {
-
             StackValueMapping stackValueMapping = StackValueMapping.createFromJson(imcMessage.getStringValue());
 
             if (stackValueMapping != null)
             {
-
                 WrappedStack wrappedStack = stackValueMapping.wrappedStack;
-                EmcValue emcValue = stackValueMapping.emcValue;
+                EmcValue emcValue = new EmcValue(stackValueMapping.emcValue.getValue());
 
                 EmcValuesIMC.addPostAssignedValued(wrappedStack, emcValue);
             }
@@ -147,10 +137,8 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processHasEmcValueMessage(IMCMessage imcMessage)
     {
-
         if (imcMessage.getMessageType() == String.class)
         {
-
             WrappedStack wrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
 
             if (wrappedStack != null)
@@ -168,7 +156,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         }
         else if (imcMessage.getMessageType() == ItemStack.class)
         {
-
             ItemStack itemStack = imcMessage.getItemStackValue();
 
             if (itemStack != null)
@@ -192,10 +179,8 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 
     private static void processGetEmcValueMessage(IMCMessage imcMessage)
     {
-
         if (imcMessage.getMessageType() == String.class)
         {
-
             WrappedStack wrappedStack = WrappedStack.createFromJson(imcMessage.getStringValue());
 
             if (wrappedStack != null)
@@ -213,7 +198,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         }
         else if (imcMessage.getMessageType() == ItemStack.class)
         {
-            
             /*
              * Reply back to the mod that queried for the existance of an EmcValue for the given ItemStack
              */
@@ -243,13 +227,10 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData)
     {
-
         for (TickType tickType : type)
         {
-
             if (tickType == TickType.SERVER)
             {
-
                 ImmutableList<IMCMessage> runtimeIMCMessages = FMLInterModComms.fetchRuntimeMessages(EquivalentExchange3.instance);
 
                 for (IMCMessage imcMessage : runtimeIMCMessages)
@@ -263,14 +244,12 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
     @Override
     public EnumSet<TickType> ticks()
     {
-
         return EnumSet.of(TickType.SERVER);
     }
 
     @Override
     public String getLabel()
     {
-
         return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
@@ -278,6 +257,6 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
     public int nextTickSpacing()
     {
 
-        return 20;
+        return Reference.ONE_SECOND_IN_TICKS;
     }
 }

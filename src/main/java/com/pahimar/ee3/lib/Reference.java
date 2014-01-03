@@ -41,7 +41,7 @@ public class Reference
     public static final String CHANNEL_NAME = MOD_ID;
     public static final String DEPENDENCIES = "required-after:Forge@[9.10.1.849,)";
     public static final String FINGERPRINT = "@FINGERPRINT@";
-    public static final int SECOND_IN_TICKS = 20;
+    public static final int ONE_SECOND_IN_TICKS = 20;
     public static final String SERVER_PROXY_CLASS = "com.pahimar.ee3.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "com.pahimar.ee3.proxy.ClientProxy";
     public static final int VERSION_CHECK_ATTEMPTS = 3;
