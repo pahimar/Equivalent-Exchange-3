@@ -30,7 +30,6 @@ public class EmcValuesIMC
 
     public static void addPreAssignedValued(WrappedStack wrappedStack, EmcValue emcValue)
     {
-
         if (wrappedStack != null)
         {
             if (!preAssignedValueMap.containsKey(wrappedStack))

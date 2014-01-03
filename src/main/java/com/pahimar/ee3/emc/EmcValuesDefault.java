@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +39,7 @@ public class EmcValuesDefault
         {
             valueMap.put(new WrappedStack(new OreStack(new ItemStack(Item.dyePowder, 1, meta))), new EmcValue(8));
         }
-        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.wood))), new EmcValue(32));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.oreDiamond))), new EmcValue(8192));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.oreEmerald))), new EmcValue(8192));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.oreGold))), new EmcValue(2048));
@@ -55,23 +54,23 @@ public class EmcValuesDefault
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.stairsWoodOak))), new EmcValue(12));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Item.stick))), new EmcValue(4));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.stone))), new EmcValue(1));
-        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.leaves))), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
-        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.leaves))), new EmcValue(1));
+        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Block.sapling))), new EmcValue(32));
 
         // Fluids
-        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(1f, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 1), new EmcComponent(EmcType.AMORPHOUS, 1))));
-        valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.AMORPHOUS, 1))));
-        valueMap.put(new WrappedStack(FluidRegistry.getFluid("milk")), new EmcValue(64, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 3), new EmcComponent(EmcType.AMORPHOUS, 1))));
+        valueMap.put(new WrappedStack(FluidRegistry.WATER), new EmcValue(1));
+        valueMap.put(new WrappedStack(FluidRegistry.LAVA), new EmcValue(64));
+        valueMap.put(new WrappedStack(FluidRegistry.getFluid("milk")), new EmcValue(64));
 
         /* Building Blocks */
         valueMap.put(new WrappedStack(Block.stone), new EmcValue(1));
-        valueMap.put(new WrappedStack(Block.grass), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new WrappedStack(Block.grass), new EmcValue(1));
         valueMap.put(new WrappedStack(Block.dirt), new EmcValue(1));
         valueMap.put(new WrappedStack(Block.cobblestone), new EmcValue(1));
         // Bedrock (7:0)
-        valueMap.put(new WrappedStack(Block.sand), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));
-        valueMap.put(new WrappedStack(Block.gravel), new EmcValue(4, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.AMORPHOUS, 1))));
-        valueMap.put(new WrappedStack(Block.oreCoal), new EmcValue(32, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 4), new EmcComponent(EmcType.KINETIC, 1))));
+        valueMap.put(new WrappedStack(Block.sand), new EmcValue(1));
+        valueMap.put(new WrappedStack(Block.gravel), new EmcValue(4));
+        valueMap.put(new WrappedStack(Block.oreCoal), new EmcValue(32));
         // Sponge (19:0)
         valueMap.put(new WrappedStack(Block.glass), new EmcValue(1));
         valueMap.put(new WrappedStack(Block.sandStone), new EmcValue(4));
@@ -89,7 +88,7 @@ public class EmcValuesDefault
         
         /* Decoration Blocks */
         valueMap.put(new WrappedStack(Block.web), new EmcValue(12));
-        valueMap.put(new WrappedStack(new ItemStack(Block.tallGrass.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1, Arrays.asList(new EmcComponent(EmcType.CORPOREAL, 9), new EmcComponent(EmcType.ESSENTIA, 1))));
+        valueMap.put(new WrappedStack(new ItemStack(Block.tallGrass.blockID, 1, OreDictionary.WILDCARD_VALUE)), new EmcValue(1));
         valueMap.put(new WrappedStack(Block.deadBush), new EmcValue(1));
         valueMap.put(new WrappedStack(Block.plantYellow), new EmcValue(16));
         valueMap.put(new WrappedStack(Block.plantRed), new EmcValue(16));
