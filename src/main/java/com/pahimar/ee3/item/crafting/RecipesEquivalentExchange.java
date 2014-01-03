@@ -39,5 +39,6 @@ public class RecipesEquivalentExchange
         GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"iii", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.researchStation), new Object[]{"ipi", " s ", "sss", 'p', "plankWood", 'i', Item.ingotIron, 's', "stone"});
     }
 }
