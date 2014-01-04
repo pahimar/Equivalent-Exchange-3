@@ -10,7 +10,7 @@ item.ee3:alchemicalDust.ash.name=Asche [WIP]
 item.ee3:alchemicalDust.verdant.name=Grüner Staub [WIP]
 item.ee3:alchemicalDust.azure.name=Azurblauer Staub [WIP]
 item.ee3:alchemicalDust.minium.name=Miniumstaub [WIP]
-item.ee3:alchemicalDust.iridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalDust.shimmering.name=Schimmernder Staub [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemiekohle
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius-Brennstoff
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis-Brennstoff
@@ -31,6 +31,10 @@ tile.ee3:calcinator.name=Kalzinierer [WIP]
 tile.ee3:chalk.name=Kreide
 tile.ee3:glassBell.name=Glasglocke [WIP]
 tile.ee3:researchStation.name=Forschungsstation [WIP]
+tile.ee3:infusedCloth.name=Erfüllter Stoff [WIP]
+tile.ee3:infusedOre.name=Erfülltes Erz [WIP]
+tile.ee3:infusedStone.name=Erfüllter Stein [WIP]
+tile.ee3:infusedWood.name=Erfülltes Holz [WIP]
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemiebeutel [WIP]
