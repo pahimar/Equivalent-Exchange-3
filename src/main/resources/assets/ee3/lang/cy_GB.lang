@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Lludw [WIP]
 item.ee3:alchemicalDust.minium.name=Llwch Miniwm [WIP]
 item.ee3:alchemicalDust.verdant.name=Llwch Werdd [WIP]
 item.ee3:alchemicalDust.azure.name=Llwch Asur [WIP]
-item.ee3:alchemicalDust.iridescent.name=Llwch Symudliw [WIP]
 item.ee3:chalk.name=Sialc [WIP]
 item.ee3:shardMinium.name=Darn o Finiwm
 item.ee3:stoneInert.name=Carreg Anadweithiol
@@ -25,9 +24,6 @@ tile.ee3:glassBell.name=Glass Bell [WIP]
 # GUI localizations
 container.ee3:alchemicalBag=Bag Alcemaidd [WIP]
 container.ee3:calcinator=Calchyniadwr [WIP]
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Ymgychwynnu gwiriad fersiwn yn erbyn yr awdurdod fersiwn pell, a leolir ar %s

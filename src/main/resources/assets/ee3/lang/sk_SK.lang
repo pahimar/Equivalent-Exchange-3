@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Popol [WIP]
 item.ee3:alchemicalDust.minium.name=Suríkový Prach [WIP]
 item.ee3:alchemicalDust.verdant.name=Nazelenaný Prach [WIP]
 item.ee3:alchemicalDust.azure.name=Azurový Prach [WIP]
-item.ee3:alchemicalDust.iridescent.name=Dúhový Prach [WIP]
 item.ee3:shardMinium.name=Úlomok Suríku
 item.ee3:stoneInert.name=Inertný Kameň
 item.ee3:stoneMinium.name=Suríkoý Kameň
@@ -42,9 +41,6 @@ command.ee3:overlay.scale.usage.additional_text=%s (kde ### je desetinná hodnot
 command.ee3:overlay.scale.updated=Veľkosť výsledku transmutácie úspešne zmenená
 command.ee3:particles.turned_on=Časticové efekty módu Equivalent Exchange 3 zapnuté
 command.ee3:particles.turned_off=Časticové efekty módu Equivalent Exchange 3 vypnuté
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Prebieha kontrola verzie, vzdialený soúbor je umiestnený na: %s

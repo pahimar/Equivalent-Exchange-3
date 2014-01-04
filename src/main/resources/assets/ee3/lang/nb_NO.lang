@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Aske [WIP]
 item.ee3:alchemicalDust.minium.name=Mønjestøv [WIP]
 item.ee3:alchemicalDust.verdant.name=Verdant Støv [WIP]
 item.ee3:alchemicalDust.azure.name=Azurblått Støv [WIP]
-item.ee3:alchemicalDust.iridescent.name=Iriserende Støv [WIP]
 item.ee3:chalk.name=Kritt [WIP]
 item.ee3:shardMinium.name=Mønjeskår
 item.ee3:stoneInert.name=Inert Stein
@@ -47,9 +46,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 partikler skrudd av
 command.ee3:sounds.set_to_all=Spiller av Equivalent Exchange 3 lyder fra alle spillere
 command.ee3:sounds.set_to_self=Spiller av Equivalent Exchange 3 lyder bare fra seg selv
 command.ee3:sounds.turned_off=Avspilling av Equivalent Exchange 3 lyder skrudd av
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initialiserer ekstern version sjekk mot den eksterne versionens autoritetsfil, plassert i: %s 

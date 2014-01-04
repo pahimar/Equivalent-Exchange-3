@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=As [WIP]
 item.ee3:alchemicalDust.minium.name=Miniumpoeder [WIP]
 item.ee3:alchemicalDust.verdant.name=Helgroen Poeder [WIP]
 item.ee3:alchemicalDust.azure.name=Azuurblauw Poeder [WIP]
-item.ee3:alchemicalDust.iridescent.name=Iriserend Poeder [WIP]
 item.ee3:chalk.name=Krijt [WIP]
 item.ee3:shardMinium.name=Miniumscherf
 item.ee3:stoneInert.name=Inerte Steen
@@ -47,9 +46,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 deeltjes aangezet
 command.ee3:sounds.set_to_all=Speelt Equivalent Exchange 3 geluiden van alle spelers af
 command.ee3:sounds.set_to_self=Speelt Equivalent Exchange 3 geluiden enkel van jezelf af
 command.ee3:sounds.turned_off=Equivalent Exchange 3 geluiden uitgezet
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initialiseer afgelegen versie controle tegen afgelegen versie autoriteit, gelokaliseerd op: %s

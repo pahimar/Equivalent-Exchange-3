@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Cendre [WIP]
 item.ee3:alchemicalDust.verdant.name=Poussière Verdoyante [WIP]
 item.ee3:alchemicalDust.azure.name=Poussière Azur [WIP]
 item.ee3:alchemicalDust.minium.name=Poussière de Minium [WIP]
-item.ee3:alchemicalDust.iridescent.name=Poussière Irisé [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon Alchimique
 item.ee3:alchemicalFuel.mobiusFuel.name=Carburant de Mobius
 item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant d'Aeternalis
@@ -54,9 +53,6 @@ command.ee3:particles.turned_off=Particules Equivalent Exchange 3 désactivées
 command.ee3:sounds.set_to_all=Lecture des sons Equivalent Exchange 3 de tous les joueurs
 command.ee3:sounds.set_to_self=Lecture des sons Equivalent Exchange 3 pour vous seulement
 command.ee3:sounds.turned_off=Lecture des sons Equivalent Exchange 3 désactivée
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Démarrage de la vérification de version distante avec l'autorité de version distance situé à: %s

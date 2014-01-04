@@ -9,8 +9,8 @@ item.ee3:alchemicalBag.name=炼丹袋 [WIP]
 item.ee3:alchemicalDust.ash.name=灰烬 [WIP]
 item.ee3:alchemicalDust.minium.name=铅丹粉末 [WIP]
 item.ee3:alchemicalDust.verdant.name=翠绿粉末 [WIP]
-item.ee3:alchemicalDustazure.name=蔚蓝粉末 [WIP]
-item.ee3:alchemicalDust.iridescent.name=虹彩粉末 [WIP]
+item.ee3:alchemicalDust.azure.name=蔚蓝粉末 [WIP]
+item.ee3:alchemicalDust.shimmering.name=闪耀粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=炼丹煤炭
 item.ee3:alchemicalFuel.mobiusFuel.name=莫比乌斯燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永恒燃料
@@ -54,9 +54,6 @@ command.ee3:particles.turned_off=关闭 Equivalent Exchange 3 粒子渲染效果
 command.ee3:sounds.set_to_all=允许播放所有玩家 Equivalent Exchange 3 音频文件
 command.ee3:sounds.set_to_self=允许播放自己 Equivalent Exchange 3 音频文件
 command.ee3:sounds.turned_off=禁止播放 Equivalent Exchange 3 音频文件
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=远程版本检查开始初始化, 版本信息文件位于：%s

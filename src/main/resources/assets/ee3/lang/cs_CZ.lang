@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Popel [WIP]
 item.ee3:alchemicalDust.minium.name=Suříkový Prášek [WIP]
 item.ee3:alchemicalDust.verdant.name=Nazelenalý Prášek [WIP]
 item.ee3:alchemicalDust.azure.name=Azurový Prášek [WIP]
-item.ee3:alchemicalDust.iridescent.name=Duhový Prášek [WIP]
 item.ee3:shardMinium.name=Úlomek Suříku
 item.ee3:stoneInert.name=Inertní Kámen
 item.ee3:stoneMinium.name=Kámen Suříku
@@ -45,9 +44,6 @@ command.ee3.particles.turned_off=Equivalent Exchange 3 částice vypnuty
 command.ee3.sounds.set_to_all=Přehrávání zvuků z Equivalent Exchange 3 od všech hráčů
 command.ee3.sounds.set_to_self=Přehrávání zvuků z Equivalent Exchange 3 pouze od aktuálního hráče
 command.ee3.sounds.turned_off=Přehrávání zvuků z Equivalent Exchange 3 vypnuto
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version Check localizations
 version.init_log_message=Provádím kontrolu verze, vzdálený soubor umístěn na

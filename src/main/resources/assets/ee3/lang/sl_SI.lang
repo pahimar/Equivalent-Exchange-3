@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Pepel [WIP]
 item.ee3:alchemicalDust.minium.name=Minijev Prah [WIP]
 item.ee3:alchemicalDust.verdant.name=Zelen Prah [WIP]
 item.ee3:alchemicalDust.azure.name=Moder Prah [WIP]
-item.ee3:alchemicalDust.iridescent.name=Mavrični Prah [WIP]
 item.ee3:shardMinium.name=Drobec Minija
 item.ee3:stoneInert.name=Nedejaven Kamen
 item.ee3:stoneMinium.name=Minijev Kamen
@@ -45,9 +44,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 delci so izključeni
 command.ee3:sounds.set_to_all=Predvajam Equivalent Exchange 3 zvoke vseh igralcev
 command.ee3:sounds.set_to_self=Predvajam Equivalent Exchange 3 zvoke samo od sebe
 command.ee3:sounds.turned_off=Predvajanje Equivalent Exchange 3 zvokov je izključeno
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Inicializiram oddaljeno preverjanje različice z različico oddaljenega strežnika, ki se nahaja na %s

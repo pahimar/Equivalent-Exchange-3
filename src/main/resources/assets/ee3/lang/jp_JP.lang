@@ -10,7 +10,7 @@ item.ee3:alchemicalDust.ash.name=灰 [WIP]
 item.ee3:alchemicalDust.minium.name=鉛丹の粉末 [WIP]
 item.ee3:alchemicalDust.verdant.name=新緑の粉末 [WIP]
 item.ee3:alchemicalDust.azure.name=紺碧の粉末 [WIP]
-item.ee3:alchemicalDust.iridescent.name=玉虫色の粉末 [WIP]
+item.ee3:alchemicalDust.shimmering.name=ギラギラの粉末 [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=錬金術石炭
 item.ee3:alchemicalFuel.mobiusFuel.name=メビウス燃料
 item.ee3:alchemicalFuel.aeternalisFuel.name=永遠燃料
@@ -54,9 +54,6 @@ command.ee3:particles.turned_off=EE3 のパーティクルをオフにした
 command.ee3:sounds.set_to_all=すべてのプレイヤーからのEE3の音を再生している
 command.ee3:sounds.set_to_self=自分だけからのEE3の音を再生している
 command.ee3:sounds.turned_off=EE3の音を再生することを無効になっている
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=オンラインバージョンチェックの初期化中。場所: %s

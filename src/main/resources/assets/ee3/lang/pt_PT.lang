@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Cinza [WIP]
 item.ee3:alchemicalDust.minium.name=Pó de Mínio [WIP]
 item.ee3:alchemicalDust.verdant.name=Pó Virente [WIP]
 item.ee3:alchemicalDust.azure.name=Pó Cerúleo [WIP]
-item.ee3:alchemicalDust.iridescent.name=Pó Iridescente [WIP]
 item.ee3:shardMinium.name=Fragmento de Mínio
 item.ee3:stoneInert.name=Pedra Inerte
 item.ee3:stoneMinium.name=Pedra de Mínio
@@ -45,9 +44,6 @@ command.ee3:particles.turned_off=As partículas do Equivalent Exchange 3 foram d
 command.ee3:sounds.set_to_all=A reproduzir os sons do Equivalente Exchange 3 de todos os jogadores
 command.ee3:sounds.set_to_self=A reproduzir os sons do Equivalente Exchange 3 apenas do próprio
 command.ee3:sounds.turned_off=Os sons do Equivalent Exchange 3 foram desligados
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version Check localizations
 version.ee3:init_log_message=A iniciar a verificação de versões em relação à autoridade remota, localizada em: %s

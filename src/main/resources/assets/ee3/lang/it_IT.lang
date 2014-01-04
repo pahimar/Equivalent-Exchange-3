@@ -10,7 +10,6 @@ item.ee3:alchemicalDust.ash.name=Cenere [WIP]
 item.ee3:alchemicalDust.minium.name=Polvere di Minio [WIP]
 item.ee3:alchemicalDust.verdant.name=Polvere Verdeggiante [WIP]
 item.ee3:alchemicalDust.azure.name=Polvere Azzurra [WIP]
-item.ee3:alchemicalDust.iridescent.name=Polvere Irridescente [WIP]
 item.ee3:shardMinium.name=Frammento di Minio
 item.ee3:stoneInert.name=Pietra Inerte
 item.ee3:stoneMinium.name=Pietra di Minio
@@ -45,9 +44,6 @@ command.ee3:particles.turned_off=Particelle della Equivalent Exchange 3 spenta
 command.ee3:sounds.set_to_all=Riproduzione dei suoni dell'Equivalent Exchange 3 per tutti i giocatori
 command.ee3:sounds.set_to_self=Riproduzione dei suoni dell'Equivalent Exchange 3 per te stesso
 command.ee3:sounds.turned_off=Riproduzione dei suoni dell'Equivalent Exchange 3 disabilitata
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
