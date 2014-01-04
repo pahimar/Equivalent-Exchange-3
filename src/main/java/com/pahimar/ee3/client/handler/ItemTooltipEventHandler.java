@@ -31,6 +31,7 @@ public class ItemTooltipEventHandler
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
+            event.toolTip.add(String.format("id: %s, Meta: %s", event.itemStack.itemID, event.itemStack.getItemDamage()));
             if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
                 EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);

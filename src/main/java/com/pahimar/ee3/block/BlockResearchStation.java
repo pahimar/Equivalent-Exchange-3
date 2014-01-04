@@ -1,5 +1,6 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileResearchStation;
@@ -13,6 +14,7 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
     {
         super(id);
         this.setUnlocalizedName(Strings.RESEARCH_STATION_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
     @Override

@@ -44,6 +44,10 @@ public class Strings
     public static final String GLASS_BELL_NAME = "glassBell";
     public static final String ALCHEMY_SQUARE_NAME = "alchemySquare";
     public static final String RESEARCH_STATION_NAME = "researchStation";
+    public static final String INFUSED_STONE_NAME = "infusedStone";
+    public static final String INFUSED_CLOTH_NAME = "infusedCloth";
+    public static final String INFUSED_WOOD_NAME = "infusedWood";
+    public static final String INFUSED_ORE_NAME = "infusedOre";
 
     /* Item name constants */
     public static final String MINIUM_SHARD_NAME = "shardMinium";
@@ -51,7 +55,7 @@ public class Strings
     public static final String MINIUM_STONE_NAME = "stoneMinium";
     public static final String PHILOSOPHERS_STONE_NAME = "stonePhilosophers";
     public static final String ALCHEMICAL_DUST_NAME = "alchemicalDust";
-    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"ash", "verdant", "azure", "minium", "iridescent"};
+    public static final String[] ALCHEMICAL_DUST_SUBTYPE_NAMES = {"ash", "verdant", "azure", "minium", "shimmering"};
     public static final String ALCHEMICAL_BAG_NAME = "alchemicalBag";
     public static final String CHALK_NAME = "chalk";
     public static final String DIVINING_ROD_NAME = "diviningRod";

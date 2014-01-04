@@ -28,12 +28,12 @@ public class ItemAlchemicalDust extends ItemEE
         maxStackSize = 64;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses()
-    {
-        return true;
-    }
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public boolean requiresMultipleRenderPasses()
+//    {
+//        return true;
+//    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -57,7 +57,7 @@ public class ItemAlchemicalDust extends ItemEE
         }
         else if (itemStack.getItemDamage() == 4)
         {
-            return Integer.parseInt(Colours.DUST_IRIDESCENT, 16);
+            return Integer.parseInt(Colours.DUST_SHIMMERING, 16);
         }
 
         return Integer.parseInt(Colours.PURE_WHITE, 16);
@@ -73,13 +73,6 @@ public class ItemAlchemicalDust extends ItemEE
     public String getUnlocalizedName(ItemStack itemStack)
     {
         return String.format("item.%s%s.%s", Strings.RESOURCE_PREFIX, Strings.ALCHEMICAL_DUST_NAME, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1)]);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack, int renderPass)
-    {
-        return MathHelper.clamp_int(stack.getItemDamage(), 0, Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1) == (Strings.ALCHEMICAL_DUST_SUBTYPE_NAMES.length - 1);
     }
 
     @Override

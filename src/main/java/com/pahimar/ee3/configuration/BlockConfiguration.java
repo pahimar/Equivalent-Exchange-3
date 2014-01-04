@@ -11,10 +11,8 @@ import java.util.logging.Level;
 
 public class BlockConfiguration
 {
-
     protected static void init(File configFile)
     {
-
         Configuration blockConfiguration = new Configuration(configFile);
 
         try
@@ -29,6 +27,11 @@ public class BlockConfiguration
             BlockIds.ALCHEMICAL_CHEST = blockConfiguration.getBlock(Strings.ALCHEMICAL_CHEST_NAME, BlockIds.ALCHEMICAL_CHEST_DEFAULT).getInt(BlockIds.ALCHEMICAL_CHEST_DEFAULT);
             BlockIds.GLASS_BELL = blockConfiguration.getBlock(Strings.GLASS_BELL_NAME, BlockIds.GLASS_BELL_DEFAULT).getInt(BlockIds.GLASS_BELL_DEFAULT);
             BlockIds.RESEARCH_STATION = blockConfiguration.getBlock(Strings.RESEARCH_STATION_NAME, BlockIds.RESEARCH_STATION_DEFAULT).getInt(BlockIds.RESEARCH_STATION_DEFAULT);
+
+            BlockIds.INFUSED_CLOTH = blockConfiguration.getBlock(Strings.INFUSED_CLOTH_NAME, BlockIds.INFUSED_CLOTH_DEFAULT).getInt(BlockIds.INFUSED_CLOTH_DEFAULT);
+            BlockIds.INFUSED_ORE = blockConfiguration.getBlock(Strings.INFUSED_ORE_NAME, BlockIds.INFUSED_ORE_DEFAULT).getInt(BlockIds.INFUSED_ORE_DEFAULT);
+            BlockIds.INFUSED_STONE = blockConfiguration.getBlock(Strings.INFUSED_STONE_NAME, BlockIds.INFUSED_STONE_DEFAULT).getInt(BlockIds.INFUSED_STONE_DEFAULT);
+            BlockIds.INFUSED_WOOD = blockConfiguration.getBlock(Strings.INFUSED_WOOD_NAME, BlockIds.INFUSED_WOOD_DEFAULT).getInt(BlockIds.INFUSED_WOOD_DEFAULT);
         }
         catch (Exception e)
         {

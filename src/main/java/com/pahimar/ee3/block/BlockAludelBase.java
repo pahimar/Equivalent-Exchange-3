@@ -29,6 +29,7 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     {
         super(id, Material.anvil);
         this.setUnlocalizedName(Strings.ALUDEL_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setBlockBounds(0.10F, 0.0F, 0.10F, 0.90F, 1.0F, 0.90F);
         this.setHardness(5F);
     }

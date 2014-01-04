@@ -1,6 +1,5 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileEE;
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +29,6 @@ public class BlockEE extends Block
     public BlockEE(int id, Material material)
     {
         super(id, material);
-        setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
     @Override

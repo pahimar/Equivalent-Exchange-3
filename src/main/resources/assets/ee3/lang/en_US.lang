@@ -10,7 +10,7 @@ item.ee3:alchemicalDust.ash.name=Ash [WIP]
 item.ee3:alchemicalDust.verdant.name=Verdant Dust [WIP]
 item.ee3:alchemicalDust.azure.name=Azure Dust [WIP]
 item.ee3:alchemicalDust.minium.name=Minium Dust [WIP]
-item.ee3:alchemicalDust.iridescent.name=Iridescent Dust [WIP]
+item.ee3:alchemicalDust.shimmering.name=Shimmering Dust [WIP]
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemical Coal
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Fuel
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Fuel
@@ -31,6 +31,10 @@ tile.ee3:calcinator.name=Calcinator [WIP]
 tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell [WIP]
 tile.ee3:researchStation.name=Research Station [WIP]
+tile.ee3:infusedCloth.name=Infused Cloth [WIP]
+tile.ee3:infusedOre.name=Infused Ore [WIP]
+tile.ee3:infusedStone.name=Infused Stone [WIP]
+tile.ee3:infusedWood.name=Infused Wood [WIP]
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemical Bag [WIP]

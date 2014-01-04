@@ -1,5 +1,6 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +22,7 @@ public class BlockAlchemicalFuel extends BlockEE
     {
         super(id);
         this.setUnlocalizedName(Strings.ALCHEMICAL_FUEL_BLOCK_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(5.0F);
         this.setResistance(10.0F);
     }

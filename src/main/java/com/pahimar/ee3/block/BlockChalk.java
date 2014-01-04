@@ -1,5 +1,6 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.block.material.Material;
@@ -11,9 +12,10 @@ public class BlockChalk extends BlockEE
     public BlockChalk(int id)
     {
         super(id, Material.clay);
-        setHardness(0.6F);
-        setUnlocalizedName(Strings.CHALK_NAME);
-        setStepSound(soundGravelFootstep);
+        this.setHardness(0.6F);
+        this.setUnlocalizedName(Strings.CHALK_NAME);
+        this.setCreativeTab(EquivalentExchange3.tabsEE3);
+        this.setStepSound(soundGravelFootstep);
     }
 
     @Override

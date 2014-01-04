@@ -16,7 +16,7 @@ public class Colours
     public static final String DUST_VERDANT = "45CC39";
     public static final String DUST_AZURE = "35A6DE";
     public static final String DUST_MINIUM = "FF4545";
-    public static final String DUST_IRIDESCENT = "FFF459";
+    public static final String DUST_SHIMMERING = "FFF459";
 
     /* Text colour related constants */
     public static final String TEXT_COLOUR_PREFIX_YELLOW = "\u00a7e";
