@@ -18,10 +18,9 @@ public class BlockIds
     public static int CHALK_DEFAULT = 2456;
     public static int ALCHEMY_SQUARE_DEFAULT = 2457;
     public static int RESEARCH_STATION_DEFAULT = 2458;
-    public static int INFUSED_STONE_DEFAULT = 2459;
     public static int INFUSED_CLOTH_DEFAULT = 2460;
     public static int INFUSED_WOOD_DEFAULT = 2461;
-    public static int INFUSED_ORE_DEFAULT = 2462;
+    public static int INFUSED_PLANKS_DEFAULT = 2462;
 
     /* Current block ids */
     public static int CALCINATOR;
@@ -32,8 +31,7 @@ public class BlockIds
     public static int CHALK;
     public static int ALCHEMY_SQUARE;
     public static int RESEARCH_STATION;
-    public static int INFUSED_STONE;
     public static int INFUSED_CLOTH;
     public static int INFUSED_WOOD;
-    public static int INFUSED_ORE;
+    public static int INFUSED_PLANKS;
 }

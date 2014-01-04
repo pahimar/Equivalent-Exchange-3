@@ -13,21 +13,21 @@ import net.minecraft.world.IBlockAccess;
 
 import java.util.List;
 
-public class BlockInfusedCloth extends BlockEE
+public class BlockInfusedPlanks extends BlockEE
 {
-    public BlockInfusedCloth(int id)
+    public BlockInfusedPlanks(int id)
     {
-        super(id, Material.cloth);
-        this.setUnlocalizedName(Strings.INFUSED_CLOTH_NAME);
+        super(id, Material.wood);
+        this.setUnlocalizedName(Strings.INFUSED_PLANKS_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setStepSound(soundClothFootstep);
+        this.setStepSound(soundWoodFootstep);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon("wool_colored_white");
+        blockIcon = iconRegister.registerIcon("planks_oak");
     }
 
     @SideOnly(Side.CLIENT)
@@ -37,15 +37,15 @@ public class BlockInfusedCloth extends BlockEE
 
         if (metaData == 0)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_VERDANT, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_VERDANT, 16);
         }
         else if (metaData == 1)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_AZURE, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_AZURE, 16);
         }
         else if (metaData == 2)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_MINIUM, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_MINIUM, 16);
         }
         else
         {
@@ -58,15 +58,15 @@ public class BlockInfusedCloth extends BlockEE
     {
         if (metaData == 0)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_VERDANT, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_VERDANT, 16);
         }
         else if (metaData == 1)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_AZURE, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_AZURE, 16);
         }
         else if (metaData == 2)
         {
-            return Integer.parseInt(Colours.INFUSED_CLOTH_MINIUM, 16);
+            return Integer.parseInt(Colours.INFUSED_PLANKS_MINIUM, 16);
         }
         else
         {

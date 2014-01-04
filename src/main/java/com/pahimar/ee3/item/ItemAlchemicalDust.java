@@ -28,13 +28,6 @@ public class ItemAlchemicalDust extends ItemEE
         maxStackSize = 64;
     }
 
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public boolean requiresMultipleRenderPasses()
-//    {
-//        return true;
-//    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack itemStack, int renderPass)
@@ -54,10 +47,6 @@ public class ItemAlchemicalDust extends ItemEE
         else if (itemStack.getItemDamage() == 3)
         {
             return Integer.parseInt(Colours.DUST_MINIUM, 16);
-        }
-        else if (itemStack.getItemDamage() == 4)
-        {
-            return Integer.parseInt(Colours.DUST_SHIMMERING, 16);
         }
 
         return Integer.parseInt(Colours.PURE_WHITE, 16);
@@ -82,7 +71,7 @@ public class ItemAlchemicalDust extends ItemEE
         {
             case 0:
             {
-                return EnumChatFormatting.WHITE + super.getItemDisplayName(itemStack);
+                return EnumChatFormatting.GRAY + super.getItemDisplayName(itemStack);
             }
             case 1:
             {
@@ -95,10 +84,6 @@ public class ItemAlchemicalDust extends ItemEE
             case 3:
             {
                 return EnumChatFormatting.RED + super.getItemDisplayName(itemStack);
-            }
-            case 4:
-            {
-                return EnumChatFormatting.GOLD + super.getItemDisplayName(itemStack);
             }
             default:
             {

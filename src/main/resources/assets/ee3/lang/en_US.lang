@@ -6,11 +6,10 @@ key.toggle=Toggle
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemical Bag [WIP]
-item.ee3:alchemicalDust.ash.name=Ash [WIP]
-item.ee3:alchemicalDust.verdant.name=Verdant Dust [WIP]
-item.ee3:alchemicalDust.azure.name=Azure Dust [WIP]
-item.ee3:alchemicalDust.minium.name=Minium Dust [WIP]
-item.ee3:alchemicalDust.shimmering.name=Shimmering Dust [WIP]
+item.ee3:alchemicalDust.ash.name=Ash
+item.ee3:alchemicalDust.verdant.name=Verdant Dust
+item.ee3:alchemicalDust.azure.name=Azure Dust
+item.ee3:alchemicalDust.minium.name=Minium Dust
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemical Coal
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Fuel
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Fuel
@@ -18,7 +17,7 @@ item.ee3:chalk.name=Chalk [WIP]
 item.ee3:diviningRod.name=Divining Rod [WIP]
 item.ee3:shardMinium.name=Shard of Minium
 item.ee3:stoneInert.name=Inert Stone
-item.ee3:stoneMinium.name=Minium Stone
+item.ee3:stoneMinium.name=Minium Stone [WIP]
 item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 
 # Block localizations
@@ -32,9 +31,8 @@ tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell [WIP]
 tile.ee3:researchStation.name=Research Station [WIP]
 tile.ee3:infusedCloth.name=Infused Cloth [WIP]
-tile.ee3:infusedOre.name=Infused Ore [WIP]
-tile.ee3:infusedStone.name=Infused Stone [WIP]
-tile.ee3:infusedWood.name=Infused Wood [WIP]
+tile.ee3:infusedWood.name=Infused Wood
+tile.ee3:infusedPlanks.name=Infused Wood Planks
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemical Bag [WIP]
@@ -69,3 +67,6 @@ version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
 version.ee3:general_error=Error while connecting to remote version authority file; trying again
 version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
 version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Infused with
