@@ -456,7 +456,15 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         if (wrappedStack.wrappedStack instanceof ItemStack)
         {
-            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(wrappedStack.wrappedStack, ItemStack.class));
+            JsonItemStack jsonItemStack = new JsonItemStack();
+            jsonItemStack.itemID = ((ItemStack) wrappedStack.wrappedStack).itemID;
+            jsonItemStack.itemDamage = ((ItemStack) wrappedStack.wrappedStack).getItemDamage();
+            jsonItemStack.stackSize = ((ItemStack) wrappedStack.wrappedStack).stackSize;
+            if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
+            {
+                jsonItemStack.stackTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
+            }
+            jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(jsonItemStack, JsonItemStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof OreStack)
         {
@@ -504,11 +512,15 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                 {
                     if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
                     {
-                        ItemStack itemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), ItemStack.class);
-
+                        JsonItemStack jsonItemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), JsonItemStack.class);
+                        ItemStack itemStack = null;
                         if (stackSize > 0)
                         {
-                            itemStack.stackSize = stackSize;
+                            itemStack = new ItemStack(jsonItemStack.itemID, stackSize, jsonItemStack.itemDamage);
+                            if (jsonItemStack.stackTagCompound != null)
+                            {
+                                itemStack.stackTagCompound = jsonItemStack.stackTagCompound;
+                            }
                         }
                         stackObject = itemStack;
                     }
