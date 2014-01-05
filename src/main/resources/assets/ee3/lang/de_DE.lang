@@ -6,11 +6,10 @@ key.toggle=Umschalten
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
-item.ee3:alchemicalDust.ash.name=Asche [WIP]
-item.ee3:alchemicalDust.verdant.name=Grüner Staub [WIP]
-item.ee3:alchemicalDust.azure.name=Azurblauer Staub [WIP]
-item.ee3:alchemicalDust.minium.name=Miniumstaub [WIP]
-item.ee3:alchemicalDust.shimmering.name=Schimmernder Staub [WIP]
+item.ee3:alchemicalDust.ash.name=Asche
+item.ee3:alchemicalDust.verdant.name=Grüner Staub
+item.ee3:alchemicalDust.azure.name=Azurblauer Staub
+item.ee3:alchemicalDust.minium.name=Miniumstaub
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemiekohle
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius-Brennstoff
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis-Brennstoff
@@ -18,7 +17,7 @@ item.ee3:chalk.name=Kreide [WIP]
 item.ee3:diviningRod.name=Wünschelrute [WIP]
 item.ee3:shardMinium.name=Miniumscherbe
 item.ee3:stoneInert.name=Inerter Stein
-item.ee3:stoneMinium.name=Miniumstein
+item.ee3:stoneMinium.name=Miniumstein [WIP]
 item.ee3:stonePhilosophers.name=Stein der Weisen [WIP]
 
 # Block localizations
@@ -32,9 +31,8 @@ tile.ee3:chalk.name=Kreide
 tile.ee3:glassBell.name=Glasglocke [WIP]
 tile.ee3:researchStation.name=Forschungsstation [WIP]
 tile.ee3:infusedCloth.name=Infundierter Stoff [WIP]
-tile.ee3:infusedOre.name=Infundiertes Erz [WIP]
-tile.ee3:infusedStone.name=Infundierter Stein [WIP]
-tile.ee3:infusedWood.name=Infundiertes Holz [WIP]
+tile.ee3:infusedWood.name=Infundiertes Holz
+tile.ee3:infusedPlanks.name=Infundierte Holzbretter
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemiebeutel [WIP]
@@ -69,3 +67,6 @@ version.ee3:outdated=Eine neue %s Version (%s) für %s ist verfügbar. Hole sie 
 version.ee3:general_error=Fehler bei der Verbindung zur Remotedatei (überprüfe bitte deine Internetverbindung)
 version.ee3:final_error=Versionsvergleich mit der Remotedatei deaktiviert, überspringe
 version.ee3:mc_version_not_found=Keine Version von %s für %s in der Remotedatei gefunden
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Infundiert mit
