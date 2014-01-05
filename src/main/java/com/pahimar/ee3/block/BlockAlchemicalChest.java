@@ -37,6 +37,12 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     }
 
     @Override
+    public TileEntity createTileEntity(World world, int metaData)
+    {
+        return new TileAlchemicalChest(metaData);
+    }
+
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
@@ -68,7 +74,18 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
             {
                 if (world.getBlockTileEntity(x, y, z) instanceof TileAlchemicalChest)
                 {
-                    player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
+                    if (world.getBlockMetadata(x, y, z) == 0)
+                    {
+                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_SMALL, world, x, y, z);
+                    }
+                    else if (world.getBlockMetadata(x, y, z) == 1)
+                    {
+                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_MEDIUM, world, x, y, z);
+                    }
+                    else if (world.getBlockMetadata(x, y, z) == 2)
+                    {
+                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_LARGE, world, x, y, z);
+                    }
                 }
             }
 

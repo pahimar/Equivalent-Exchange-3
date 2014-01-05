@@ -37,7 +37,24 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
                 direction = tileAlchemicalChest.getOrientation();
             }
 
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
+            if (tileAlchemicalChest.getState() == 0)
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_SMALL);
+            }
+            else if (tileAlchemicalChest.getState() == 1)
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_MEDIUM);
+            }
+            else if (tileAlchemicalChest.getState() == 2)
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
+            }
+            else
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
+            }
+
+
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

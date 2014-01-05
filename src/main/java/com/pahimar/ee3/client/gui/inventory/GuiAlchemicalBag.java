@@ -3,7 +3,6 @@ package com.pahimar.ee3.client.gui.inventory;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.lib.Textures;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -46,7 +45,7 @@ public class GuiAlchemicalBag extends GuiContainer
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         // this.mc.getTextureManager().bindTexture(...)
-        this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
+        //this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;

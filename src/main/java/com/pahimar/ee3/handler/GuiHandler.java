@@ -26,10 +26,20 @@ public class GuiHandler implements IGuiHandler
             TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new ContainerCalcinator(player.inventory, tileCalcinator);
         }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST)
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_SMALL)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            return new ContainerAlchemicalChest(player.inventory, tileAlchemicalChest);
+            return new ContainerAlchemicalChestSmall(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_MEDIUM)
+        {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new ContainerAlchemicalChestMedium(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_LARGE)
+        {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new ContainerAlchemicalChestLarge(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete
@@ -63,10 +73,20 @@ public class GuiHandler implements IGuiHandler
             TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new GuiCalcinator(player.inventory, tileCalcinator);
         }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST)
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_SMALL)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
+            return new GuiAlchemicalChestSmall(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_MEDIUM)
+        {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new GuiAlchemicalChestMedium(player.inventory, tileAlchemicalChest);
+        }
+        else if (ID == GuiIds.ALCHEMICAL_CHEST_LARGE)
+        {
+            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            return new GuiAlchemicalChestLarge(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete

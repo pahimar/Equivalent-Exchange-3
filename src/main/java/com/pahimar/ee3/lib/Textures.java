@@ -29,7 +29,9 @@ public class Textures
     // GUI textures
     public static final ResourceLocation GUI_CALCINATOR = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "calcinator.png");
     public static final ResourceLocation GUI_ALUDEL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "aludel.png");
-    public static final ResourceLocation GUI_ALCHEMICAL_STORAGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage.png");
+    public static final ResourceLocation GUI_ALCHEMICAL_STORAGE_SMALL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage_Small.png");
+    public static final ResourceLocation GUI_ALCHEMICAL_STORAGE_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage_Medium.png");
+    public static final ResourceLocation GUI_ALCHEMICAL_STORAGE_LARGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalStorage_Large.png");
     public static final ResourceLocation GUI_PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
     public static final ResourceLocation GUI_GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
 
@@ -37,6 +39,11 @@ public class Textures
     public static final ResourceLocation MODEL_CALCINATOR = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "calcinator.png");
     public static final ResourceLocation MODEL_ALUDEL = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "aludel.png");
     public static final ResourceLocation MODEL_ALCHEMICAL_CHEST = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "alchemicalChest.png");
+
+    public static final ResourceLocation MODEL_ALCHEMICAL_CHEST_SMALL = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "alchemicalChest_Small.png");
+    public static final ResourceLocation MODEL_ALCHEMICAL_CHEST_MEDIUM = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "alchemicalChest_Medium.png");
+    public static final ResourceLocation MODEL_ALCHEMICAL_CHEST_LARGE = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "alchemicalChest_Large.png");
+
     public static final ResourceLocation MODEL_GLASS_BELL = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "aludel.png");
     public static final ResourceLocation MODEL_RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "researchStation.png");
 
