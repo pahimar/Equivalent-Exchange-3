@@ -1,6 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.block.Block;
@@ -49,11 +50,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
      */
     private ItemStack[] inventory;
 
-    public TileAlchemicalChest()
-    {
-        this(0);
-    }
-
     public TileAlchemicalChest(int metaData)
     {
         super();
@@ -71,10 +67,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
         {
             inventory = new ItemStack[LARGE_INVENTORY_SIZE];
         }
-        else
-        {
-            inventory = new ItemStack[SMALL_INVENTORY_SIZE];
-        }
     }
 
     @Override
@@ -87,6 +79,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
+        LogHelper.debug(inventory.length);
         return inventory[slotIndex];
     }
 

@@ -1,5 +1,6 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -27,7 +28,7 @@ public class ContainerAlchemicalChestLarge extends Container
     public ContainerAlchemicalChestLarge(InventoryPlayer inventoryPlayer, TileAlchemicalChest tileAlchemicalChest)
     {
         this.tileAlchemicalChest = tileAlchemicalChest;
-
+        LogHelper.debug("State: " + this.tileAlchemicalChest.getState() + ", Inventory size: " + this.tileAlchemicalChest.getSizeInventory());
         tileAlchemicalChest.openChest();
 
         // Add the Alchemical Chest slots to the container

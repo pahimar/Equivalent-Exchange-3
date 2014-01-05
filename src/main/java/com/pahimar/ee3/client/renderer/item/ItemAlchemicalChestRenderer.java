@@ -45,22 +45,22 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer
         {
             case ENTITY:
             {
-                renderAlchemicalChest(0.5F, 0.5F, 0.5F);
+                renderAlchemicalChest(0.5F, 0.5F, 0.5F, item.getItemDamage());
                 break;
             }
             case EQUIPPED:
             {
-                renderAlchemicalChest(1.0F, 1.0F, 1.0F);
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F, item.getItemDamage());
                 break;
             }
             case EQUIPPED_FIRST_PERSON:
             {
-                renderAlchemicalChest(1.0F, 1.0F, 1.0F);
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F, item.getItemDamage());
                 break;
             }
             case INVENTORY:
             {
-                renderAlchemicalChest(0.0F, 0.075F, 0.0F);
+                renderAlchemicalChest(0.0F, 0.075F, 0.0F, item.getItemDamage());
                 break;
             }
             default:
@@ -68,9 +68,21 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer
         }
     }
 
-    private void renderAlchemicalChest(float x, float y, float z)
+    private void renderAlchemicalChest(float x, float y, float z, int metaData)
     {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
+        if (metaData == 0)
+        {
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_SMALL);
+        }
+        else if (metaData == 1)
+        {
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_MEDIUM);
+        }
+        else if (metaData == 2)
+        {
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
+        }
+
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         GL11.glRotatef(180, 1, 0, 0);

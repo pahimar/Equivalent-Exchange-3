@@ -1,9 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.item.ItemAlchemicalFuelBlock;
-import com.pahimar.ee3.item.ItemInfusedClothBlock;
-import com.pahimar.ee3.item.ItemInfusedPlanksBlock;
-import com.pahimar.ee3.item.ItemInfusedWoodBlock;
+import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -43,16 +40,16 @@ public class ModBlocks
         infusedCloth = new BlockInfusedCloth(BlockIds.INFUSED_CLOTH);
         infusedPlanks = new BlockInfusedPlanks(BlockIds.INFUSED_PLANKS);
 
-        GameRegistry.registerBlock(alchemicalChest, "block." + Strings.ALCHEMICAL_CHEST_NAME);
-        GameRegistry.registerBlock(alchemicalFuel, ItemAlchemicalFuelBlock.class, "block." + Strings.ALCHEMICAL_FUEL_NAME);
+        GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, "block." + Strings.ALCHEMICAL_CHEST_NAME);
+        GameRegistry.registerBlock(alchemicalFuel, ItemBlockAlchemicalFuel.class, "block." + Strings.ALCHEMICAL_FUEL_NAME);
         GameRegistry.registerBlock(alchemySquare, "block." + Strings.ALCHEMY_SQUARE_NAME);
         GameRegistry.registerBlock(aludelBase, "block." + Strings.ALUDEL_NAME);
         GameRegistry.registerBlock(calcinator, "block." + Strings.CALCINATOR_NAME);
         GameRegistry.registerBlock(chalk, "block." + Strings.CHALK_NAME);
         GameRegistry.registerBlock(glassBell, "block." + Strings.GLASS_BELL_NAME);
         GameRegistry.registerBlock(researchStation, "block." + Strings.RESEARCH_STATION_NAME);
-        GameRegistry.registerBlock(infusedCloth, ItemInfusedClothBlock.class, "block." + Strings.INFUSED_CLOTH_NAME);
-        GameRegistry.registerBlock(infusedWood, ItemInfusedWoodBlock.class, "block." + Strings.INFUSED_WOOD_NAME);
-        GameRegistry.registerBlock(infusedPlanks, ItemInfusedPlanksBlock.class, "block." + Strings.INFUSED_PLANKS_NAME);
+        GameRegistry.registerBlock(infusedCloth, ItemBlockInfusedCloth.class, "block." + Strings.INFUSED_CLOTH_NAME);
+        GameRegistry.registerBlock(infusedWood, ItemBlockInfusedWood.class, "block." + Strings.INFUSED_WOOD_NAME);
+        GameRegistry.registerBlock(infusedPlanks, ItemBlockInfusedPlanks.class, "block." + Strings.INFUSED_PLANKS_NAME);
     }
 }

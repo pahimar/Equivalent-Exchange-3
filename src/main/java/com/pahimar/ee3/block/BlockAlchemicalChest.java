@@ -5,12 +5,18 @@ import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -33,13 +39,22 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(World world)
     {
-        return new TileAlchemicalChest();
+        return null;
     }
 
     @Override
     public TileEntity createTileEntity(World world, int metaData)
     {
         return new TileAlchemicalChest(metaData);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int id, CreativeTabs creativeTabs, List list)
+    {
+        for (int meta = 0; meta < 3; meta++)
+        {
+            list.add(new ItemStack(id, 1, meta));
+        }
     }
 
     @Override

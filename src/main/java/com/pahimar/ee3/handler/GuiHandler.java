@@ -1,6 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.client.gui.inventory.*;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.inventory.*;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
@@ -29,16 +30,19 @@ public class GuiHandler implements IGuiHandler
         else if (ID == GuiIds.ALCHEMICAL_CHEST_SMALL)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            LogHelper.debug("State: " + tileAlchemicalChest.getState());
             return new ContainerAlchemicalChestSmall(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_CHEST_MEDIUM)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            LogHelper.debug("State: " + tileAlchemicalChest.getState());
             return new ContainerAlchemicalChestMedium(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_CHEST_LARGE)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
+            LogHelper.debug("State: " + tileAlchemicalChest.getState());
             return new ContainerAlchemicalChestLarge(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)

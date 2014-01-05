@@ -2,9 +2,9 @@ package com.pahimar.ee3.item;
 
 import net.minecraft.item.ItemBlock;
 
-public class ItemInfusedClothBlock extends ItemBlock
+public class ItemBlockInfusedCloth extends ItemBlock
 {
-    public ItemInfusedClothBlock(int id)
+    public ItemBlockInfusedCloth(int id)
     {
         super(id);
         this.setHasSubtypes(true);

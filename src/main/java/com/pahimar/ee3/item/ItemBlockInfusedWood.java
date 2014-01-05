@@ -11,9 +11,9 @@ import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
-public class ItemInfusedPlanksBlock extends ItemBlock
+public class ItemBlockInfusedWood extends ItemBlock
 {
-    public ItemInfusedPlanksBlock(int id)
+    public ItemBlockInfusedWood(int id)
     {
         super(id);
         this.setHasSubtypes(true);
