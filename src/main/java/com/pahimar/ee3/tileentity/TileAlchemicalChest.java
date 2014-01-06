@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.helper.LogHelper;
+import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.block.Block;
@@ -39,11 +39,9 @@ public class TileAlchemicalChest extends TileEE implements IInventory
      */
     private int ticksSinceSync;
 
-    public static final int INVENTORY_SIZE = 13 * 9;
-
-    public static final int SMALL_INVENTORY_SIZE = 12 * 4;
-    public static final int MEDIUM_INVENTORY_SIZE = 12 * 7;
-    public static final int LARGE_INVENTORY_SIZE = 13 * 9;
+    public static final int SMALL_INVENTORY_SIZE = ContainerAlchemicalChest.SMALL_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.SMALL_CHEST_INVENTORY_COLUMNS;
+    public static final int MEDIUM_INVENTORY_SIZE = ContainerAlchemicalChest.MEDIUM_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.MEDIUM_CHEST_INVENTORY_COLUMNS;
+    public static final int LARGE_INVENTORY_SIZE = ContainerAlchemicalChest.LARGE_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.LARGE_CHEST_INVENTORY_COLUMNS;
 
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical Chest
@@ -79,7 +77,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
-        LogHelper.debug(inventory.length);
         return inventory[slotIndex];
     }
 

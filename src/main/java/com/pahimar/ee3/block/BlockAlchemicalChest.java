@@ -85,23 +85,9 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
         }
         else
         {
-            if (!world.isRemote)
+            if (!world.isRemote && world.getBlockTileEntity(x, y, z) instanceof TileAlchemicalChest)
             {
-                if (world.getBlockTileEntity(x, y, z) instanceof TileAlchemicalChest)
-                {
-                    if (world.getBlockMetadata(x, y, z) == 0)
-                    {
-                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_SMALL, world, x, y, z);
-                    }
-                    else if (world.getBlockMetadata(x, y, z) == 1)
-                    {
-                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_MEDIUM, world, x, y, z);
-                    }
-                    else if (world.getBlockMetadata(x, y, z) == 2)
-                    {
-                        player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST_LARGE, world, x, y, z);
-                    }
-                }
+                player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
             }
 
             return true;

@@ -1,7 +1,6 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.client.gui.inventory.*;
-import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.inventory.*;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
@@ -27,23 +26,10 @@ public class GuiHandler implements IGuiHandler
             TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new ContainerCalcinator(player.inventory, tileCalcinator);
         }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_SMALL)
+        else if (ID == GuiIds.ALCHEMICAL_CHEST)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            LogHelper.debug("State: " + tileAlchemicalChest.getState());
-            return new ContainerAlchemicalChestSmall(player.inventory, tileAlchemicalChest);
-        }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_MEDIUM)
-        {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            LogHelper.debug("State: " + tileAlchemicalChest.getState());
-            return new ContainerAlchemicalChestMedium(player.inventory, tileAlchemicalChest);
-        }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_LARGE)
-        {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            LogHelper.debug("State: " + tileAlchemicalChest.getState());
-            return new ContainerAlchemicalChestLarge(player.inventory, tileAlchemicalChest);
+            return new ContainerAlchemicalChest(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete
@@ -77,20 +63,10 @@ public class GuiHandler implements IGuiHandler
             TileCalcinator tileCalcinator = (TileCalcinator) world.getBlockTileEntity(x, y, z);
             return new GuiCalcinator(player.inventory, tileCalcinator);
         }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_SMALL)
+        else if (ID == GuiIds.ALCHEMICAL_CHEST)
         {
             TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            return new GuiAlchemicalChestSmall(player.inventory, tileAlchemicalChest);
-        }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_MEDIUM)
-        {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            return new GuiAlchemicalChestMedium(player.inventory, tileAlchemicalChest);
-        }
-        else if (ID == GuiIds.ALCHEMICAL_CHEST_LARGE)
-        {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getBlockTileEntity(x, y, z);
-            return new GuiAlchemicalChestLarge(player.inventory, tileAlchemicalChest);
+            return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         // TODO Alchemical Bag inventory work is incomplete
