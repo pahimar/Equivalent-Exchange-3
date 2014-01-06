@@ -1,42 +1,46 @@
 # Key localizations
-key.charge=Promjeni
+key.charge=Napuni
 key.extra=Dodatno
-key.release=Objava
+key.release=Ispusti
 key.toggle=Odaberi
 
 # Item localizations
-item.ee3:alchemicalBag.name=Alkemijska VrečaWIP]
-item.ee3:alchemicalDust.Ash.name=Pepeo [WIP]
-item.ee3:alchemicalDust.Verdant.name=Zelena Prašina [WIP]
-item.ee3:alchemicalDust.Azure.name=Plava Prašina [WIP]
-item.ee3:alchemicalDust.Minium.name=Prašina Miniuma [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Prelijevna Prašina [WIP]
+item.ee3:alchemicalBag.name=Alkemijska Vreča [WIP]
+item.ee3:alchemicalDust.ash.name=Pepeo 
+item.ee3:alchemicalDust.verdant.name=Zelena Prašina
+item.ee3:alchemicalDust.azure.name=Plava Prašina
+item.ee3:alchemicalDust.minium.name=Prašina Miniuma
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alkemijski Ugljen
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Gorivo
 item.ee3:alchemicalFuel.aeternalisFuel.name=Vječno gorivo
-item.ee3:chalk.name=Kreda [WIP]
+item.ee3:chalk.name=Kreda  [WIP]
 item.ee3:diviningRod.name=Vračarski štap [WIP]
 item.ee3:shardMinium.name=Krhotina Miniuma
 item.ee3:stoneInert.name=Neaktivan Kamen
-item.ee3:stoneMinium.name=Kamen Miniuma
+item.ee3:stoneMinium.name=Kamen Miniuma [WIP]
 item.ee3:stonePhilosophers.name=Kamen Mudraca [WIP]
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alkemijska Škrinja [WIP]
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alkemijski ugljen
-tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Fuel
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius gorivo
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Vječno Gorivo
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Kalcinator  [WIP]
 tile.ee3:chalk.name=Kreda
 tile.ee3:glassBell.name=Stakleno zvono [WIP]
+tile.ee3:researchStation.name=Istraživačka stanica [WIP]
+tile.ee3:infusedCloth.name=Prožeta tkanina [WIP]
+tile.ee3:infusedWood.name=Prožeto drvo
+tile.ee3:infusedPlanks.name=Prožeta daska
 
 # GUI localizations
 container.ee3:alchemicalBag=Alkemijska Vreča [WIP]
 container.ee3:alchemicalChest=Alkemijska Škrinja [WIP]
 container.ee3:aludel=Aludel [WIP]
-container.ee3:calcinator=Kalcinator [WIP]
+container.ee3:calcinator=Kalcinator  [WIP]
 container.ee3:glassBell=Stakleno Zvono [WIP]
+container.ee3:researchStation=Istraživačka stanica [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Preklapanje tranzmutacije uključen
@@ -55,14 +59,14 @@ command.ee3:sounds.set_to_all=Reprodukcija Equivalent Exchange 3 zvukova od svih
 command.ee3:sounds.set_to_self=Reprodukcija Equivalent Exchange 3 zvukova samo za sebe
 command.ee3:sounds.turned_off=Isključena reprodukcija Equivalent Exchange 3 zvukova
 
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
-
 # Version check localizations
 version.ee3:init_log_message=Pokretanje daljinske provjere verzije koja se nalazi na: %s
 version.ee3:uninitialized=Neuspijela daljinska provjera veze
 version.ee3:current=Trenutno koristite najnoviju verziju %s od Equivalent Exchange 3 za %s
-version.ee3:outdated=Pstoji nova %s verzija (%s) za %s. Nabavite ju ovdje: %s
+version.ee3:outdated=Postoji nova %s verzija (%s) za %s. Nabavite ju ovdje: %s
 version.ee3:general_error=Neuspjelo povezivanje s vanjskim serverom; pokušavam opet
 version.ee3:final_error=Zaustavljena provjera verzije nakon tri neuspjela pokušaja
 version.ee3:mc_version_not_found=Nemoguće pronači verziju %s za %s na vanjskom serveru
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Prožeto sa
