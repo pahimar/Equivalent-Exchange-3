@@ -5,7 +5,7 @@ key.release=Сброс
 key.toggle=Переключение
 
 # Item localizations
-item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
+item.ee3:alchemicalBag.name=Алхимическая мешок [WIP]
 item.ee3:alchemicalDust.ash.name=Пыль [WIP]
 item.ee3:alchemicalDust.verdant.name=Зелёный порошок [WIP]
 item.ee3:alchemicalDust.azure.name=Лазурный порошок [WIP]
