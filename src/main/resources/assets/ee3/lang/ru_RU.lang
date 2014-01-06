@@ -6,11 +6,10 @@ key.toggle=Переключение
 
 # Item localizations
 item.ee3:alchemicalBag.name=Алхимическая сумка [WIP]
-item.ee3:alchemicalDust.ash.name=Пыль [WIP]
-item.ee3:alchemicalDust.verdant.name=Зелёный порошок [WIP]
-item.ee3:alchemicalDust.azure.name=Лазурный порошок [WIP]
-item.ee3:alchemicalDust.minium.name=Алхимический порошок [WIP]
-item.ee3:alchemicalDust.iridescent.name=Радужный порошок [WIP]
+item.ee3:alchemicalDust.ash.name=Пыль
+item.ee3:alchemicalDust.verdant.name=Зелёный порошок
+item.ee3:alchemicalDust.azure.name=Лазурный порошок
+item.ee3:alchemicalDust.minium.name=Алхимический порошок
 item.ee3:alchemicalFuel.alchemicalCoal.name=Алхимический уголь
 item.ee3:alchemicalFuel.mobiusFuel.name=Топливо Мёбиуса
 item.ee3:alchemicalFuel.aeternalisFuel.name=Эфирное топливо
@@ -18,7 +17,7 @@ item.ee3:chalk.name=Мел [WIP]
 item.ee3:diviningRod.name=Волшебная лоза [WIP]
 item.ee3:shardMinium.name=Алхимический осколок
 item.ee3:stoneInert.name=Инертный камень
-item.ee3:stoneMinium.name=Алхимический камень
+item.ee3:stoneMinium.name=Алхимический камень [WIP]
 item.ee3:stonePhilosophers.name=Философский камень [WIP]
 
 # Block localizations
@@ -30,6 +29,10 @@ tile.ee3:aludel.name=Алюдель [WIP]
 tile.ee3:calcinator.name=Кальцинатор [WIP]
 tile.ee3:chalk.name=Мел
 tile.ee3:glassBell.name=Стеклянный колпак [WIP]
+tile.ee3:researchStation.name=Станция исследований [WIP]
+tile.ee3:infusedCloth.name=Заряженная ткань [WIP]
+tile.ee3:infusedWood.name=Заряженная древесина
+tile.ee3:infusedPlanks.name=Заряженные доски
 
 # GUI localizations
 container.ee3:alchemicalBag=Алхимическая сумка [WIP]
@@ -37,6 +40,7 @@ container.ee3:alchemicalChest=Алхимический сундук [WIP]
 container.ee3:aludel=Алюдель [WIP]
 container.ee3:calcinator=Кальцинатор [WIP]
 container.ee3:glassBell=Стеклянный колпак [WIP]
+container.ee3:researchStation=Станция исследований [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Панель цели трансмутации включена
@@ -55,9 +59,6 @@ command.ee3:sounds.set_to_all=Звуки Equivalent Exchange 3 слышны вс
 command.ee3:sounds.set_to_self=Звуки Equivalent Exchange 3 слышны только вам
 command.ee3:sounds.turned_off=Звуки Equivalent Exchange 3 выключены
 
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
-
 # Version check localizations
 version.ee3:init_log_message=Инициализация проверки версии файла по удалённому экземпляру, расположенному на: %s
 version.ee3:uninitialized=Не удалась инициализация удалённой проверки версии
@@ -66,3 +67,6 @@ version.ee3:outdated=Новая версия модификации %s дост�
 version.ee3:general_error=Ошибка подключения к удалённому файлу проверки версии; повторная попытка
 version.ee3:final_error=Проверка версии отменена после трёх неудачных попыток
 version.ee3:mc_version_not_found=Не удаётся найти версию модификации %s для %s в удалённом хранилище версий
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Заряжено
