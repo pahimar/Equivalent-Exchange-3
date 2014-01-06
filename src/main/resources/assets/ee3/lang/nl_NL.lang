@@ -8,34 +8,34 @@ key.charge=Opladen
 item.ee3:shardMinium.name=Miniumscherf
 item.ee3:stoneInert.name=Inerte Steen
 item.ee3:stoneMinium.name=Miniumsteen
-item.ee3:stonePhilosophers.name=Steen Der Wijzen [WiP]
-item.ee3:alchemicalDustAsh.name=As [WiP]
-item.ee3:alchemicalDustMinium.name=Miniumpoeder [WiP]
-item.ee3:alchemicalDustVerdant.name=Helgroen Poeder [WiP]
-item.ee3:alchemicalDustAzure.name=Azuurblauw Poeder [WiP]
-item.ee3:alchemicalDustAmaranthine.name=Amarant Poeder [WiP]
-item.ee3:alchemicalDustIridescent.name=Iriserend Poeder [WiP]
-item.ee3:alchemicalBag.name=Alchemistische Tas [WiP]
-item.ee3:alchemicalChalk.name=Alchemistische Krijt [WiP]
+item.ee3:stonePhilosophers.name=Steen Der Wijzen [WIP]
+item.ee3:alchemicalDustAsh.name=As [WIP]
+item.ee3:alchemicalDustMinium.name=Miniumpoeder [WIP]
+item.ee3:alchemicalDustVerdant.name=Helgroen Poeder [WIP]
+item.ee3:alchemicalDustAzure.name=Azuurblauw Poeder [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amarant Poeder [WIP]
+item.ee3:alchemicalDustIridescent.name=Iriserend Poeder [WIP]
+item.ee3:alchemicalBag.name=Alchemische Tas [WIP]
+item.ee3:alchemicalChalk.name=Alchemische Krijt [WIP]
 
 # Block localizations
 tile.ee3:redWaterStill.name=Rood Water (Stilstaand)
-tile.ee3:redWaterFlowing.name=Rood Water (Stromende)
-tile.ee3:calcinator.name=Calcinator [WiP]
-tile.ee3:aludel.name=Aludel [WiP]
-tile.ee3:alchemicalChest.name=Alchemistische Kist [WiP]
-tile.ee3:glassBell.name=Glazen Stolp [WiP]
-tile.ee3:alchemyTable.name=Alchemietafel [WiP]
-tile.ee3:renderingTank.name=Rendering Tank [WiP]
+tile.ee3:redWaterFlowing.name=Rood Water (Stromend)
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemische Kist [WIP]
+tile.ee3:glassBell.name=Glazen Stolp [WIP]
+tile.ee3:alchemyTable.name=Alchemietafel [WIP]
+tile.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calcinator [WiP]
-container.ee3:aludel=Aludel [WiP]
-container.ee3:alchemicalChest=Alchemistische Chest [WiP]
-container.ee3:alchemicalBag=Alchemistische Bag [WiP]
-container.ee3:glassBell=Glass Stolp [WiP]
-container.ee3:alchemyTable.name=Alchemietafel [WiP]
-container.ee3:renderingTank.name=Rendering Tank [WiP]
+container.ee3:calcinator=Calcinator [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemische Kist [WIP]
+container.ee3:alchemicalBag=Alchemische Tas [WIP]
+container.ee3:glassBell=Glass Stolp [WIP]
+container.ee3:alchemyTable.name=Alchemietafel [WIP]
+container.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Doelwit transmutatie overlapping aangezet
@@ -61,7 +61,7 @@ itemGroup.EE3=Equivalent Exchange 3
 version.ee3:init_log_message=Initialiseer afgelegen versie controle tegen afgelegen versie autoriteit, gelokaliseerd op: %s
 version.ee3:uninitialized=Initialisatie van afgelegen versie mislukt
 version.ee3:current=Gebruikt momenteel de meest recente versie (%s) van Equivalent Exchange 3 voor %s
-version.ee3:outdated=Een nieuwe %s version bestaat (%s) voor %s. Download het op: %s
+version.ee3:outdated=Een nieuwe %s versie bestaat (%s) voor %s. Download op: %s
 version.ee3:general_error=Er heeft zich een fout voorgedaan tijdens de versiecontrole; opnieuw proberen..
 version.ee3:final_error=Versiecontrole gestopt na drie mislukte verbindingspogingen
 version.ee3:mc_version_not_found=Kon geen versie vinden van %s voor %s in de versiecontrole
