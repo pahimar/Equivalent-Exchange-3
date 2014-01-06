@@ -6,11 +6,10 @@ key.toggle=Umschalten
 
 # Item localizations
 item.ee3:alchemicalBag.name=Alchemiebeutel [WIP]
-item.ee3:alchemicalDust.Ash.name=Asche [WIP]
-item.ee3:alchemicalDust.Verdant.name=Grüner Staub [WIP]
-item.ee3:alchemicalDust.Azure.name=Azurblauer Staub [WIP]
-item.ee3:alchemicalDust.Minium.name=Miniumstaub [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Irisierender Staub [WIP]
+item.ee3:alchemicalDust.ash.name=Asche
+item.ee3:alchemicalDust.verdant.name=Grüner Staub
+item.ee3:alchemicalDust.azure.name=Azurblauer Staub
+item.ee3:alchemicalDust.minium.name=Miniumstaub
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemiekohle
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius-Brennstoff
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis-Brennstoff
@@ -18,7 +17,7 @@ item.ee3:chalk.name=Kreide [WIP]
 item.ee3:diviningRod.name=Wünschelrute [WIP]
 item.ee3:shardMinium.name=Miniumscherbe
 item.ee3:stoneInert.name=Inerter Stein
-item.ee3:stoneMinium.name=Miniumstein
+item.ee3:stoneMinium.name=Miniumstein [WIP]
 item.ee3:stonePhilosophers.name=Stein der Weisen [WIP]
 
 # Block localizations
@@ -30,6 +29,10 @@ tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Kalzinierer [WIP]
 tile.ee3:chalk.name=Kreide
 tile.ee3:glassBell.name=Glasglocke [WIP]
+tile.ee3:researchStation.name=Forschungsstation [WIP]
+tile.ee3:infusedCloth.name=Infundierter Stoff [WIP]
+tile.ee3:infusedWood.name=Infundiertes Holz
+tile.ee3:infusedPlanks.name=Infundierte Holzbretter
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemiebeutel [WIP]
@@ -37,6 +40,7 @@ container.ee3:alchemicalChest=Alchemietruhe [WIP]
 container.ee3:aludel=Aludel [WIP]
 container.ee3:calcinator=Kalzinierer [WIP]
 container.ee3:glassBell=Glasglocke [WIP]
+container.ee3:researchStation=Forschungsstation [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Transmutationsvorschau an
@@ -55,9 +59,6 @@ command.ee3:sounds.set_to_all=Spiele Equivalent-Exchange-3-Geräusche von allen 
 command.ee3:sounds.set_to_self=Spiele nur Equivalent-Exchange-3-Geräusche vom eigenen Spieler ab
 command.ee3:sounds.turned_off=Das Abspielen von Equivalent-Exchange-3-Geräuschen wurde deaktiviert
 
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
-
 # Version check localizations
 version.ee3:init_log_message=version.init_log_message">Initialisiere Versionsvergleich mit der Remotedatei, die sich auf folgendem Server befindet: %s
 version.ee3:uninitialized=Die Versionsprüfung wurde nicht erfolgreich abgeschlossen (Versionsprüfung wurde nicht entsprechend initialisiert)
@@ -66,3 +67,6 @@ version.ee3:outdated=Eine neue %s Version (%s) für %s ist verfügbar. Hole sie 
 version.ee3:general_error=Fehler bei der Verbindung zur Remotedatei (überprüfe bitte deine Internetverbindung)
 version.ee3:final_error=Versionsvergleich mit der Remotedatei deaktiviert, überspringe
 version.ee3:mc_version_not_found=Keine Version von %s für %s in der Remotedatei gefunden
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Infundiert mit
