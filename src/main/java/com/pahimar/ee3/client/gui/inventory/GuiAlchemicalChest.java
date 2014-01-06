@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
-import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import cpw.mods.fml.relauncher.Side;
@@ -51,7 +50,8 @@ public class GuiAlchemicalChest extends GuiContainer
         if (tileAlchemicalChest.getState() == 0 || tileAlchemicalChest.getState() == 1)
         {
             fontRenderer.drawString(tileAlchemicalChest.isInvNameLocalized() ? tileAlchemicalChest.getInvName() : StatCollector.translateToLocal(tileAlchemicalChest.getInvName()), 8, 6, 4210752);
-            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 35, ySize - 95 + 2, 4210752);
+//            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 35, ySize - 95 + 2, 4210752);
+            fontRenderer.drawString(tileAlchemicalChest.getOrientation().toString(), 35, ySize - 95 + 2, 4210752);
         }
     }
 

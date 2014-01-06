@@ -39,10 +39,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
      */
     private int ticksSinceSync;
 
-    public static final int SMALL_INVENTORY_SIZE = ContainerAlchemicalChest.SMALL_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.SMALL_CHEST_INVENTORY_COLUMNS;
-    public static final int MEDIUM_INVENTORY_SIZE = ContainerAlchemicalChest.MEDIUM_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.MEDIUM_CHEST_INVENTORY_COLUMNS;
-    public static final int LARGE_INVENTORY_SIZE = ContainerAlchemicalChest.LARGE_CHEST_INVENTORY_ROWS * ContainerAlchemicalChest.LARGE_CHEST_INVENTORY_COLUMNS;
-
     /**
      * The ItemStacks that hold the items currently being used in the Alchemical Chest
      */
@@ -55,15 +51,15 @@ public class TileAlchemicalChest extends TileEE implements IInventory
 
         if (metaData == 0)
         {
-            inventory = new ItemStack[SMALL_INVENTORY_SIZE];
+            inventory = new ItemStack[ContainerAlchemicalChest.SMALL_INVENTORY_SIZE];
         }
         else if (metaData == 1)
         {
-            inventory = new ItemStack[MEDIUM_INVENTORY_SIZE];
+            inventory = new ItemStack[ContainerAlchemicalChest.MEDIUM_INVENTORY_SIZE];
         }
         else if (metaData == 2)
         {
-            inventory = new ItemStack[LARGE_INVENTORY_SIZE];
+            inventory = new ItemStack[ContainerAlchemicalChest.LARGE_INVENTORY_SIZE];
         }
     }
 

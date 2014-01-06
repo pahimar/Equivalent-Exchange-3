@@ -37,6 +37,12 @@ public class BlockInfusedWood extends BlockEE
     }
 
     @Override
+    public int damageDropped(int metaData)
+    {
+        return metaData;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public Icon getIcon(int side, int metaData)
     {

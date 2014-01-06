@@ -30,6 +30,12 @@ public class BlockInfusedCloth extends BlockEE
         blockIcon = iconRegister.registerIcon("wool_colored_white");
     }
 
+    @Override
+    public int damageDropped(int metaData)
+    {
+        return metaData;
+    }
+
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess blockAccess, int x, int y, int z)
     {

@@ -11,6 +11,7 @@ public class AludelRecipes
 {
     private static AludelRecipes aludelRegistry = null;
 
+    // TODO Handle that the input stack could be an OreStack
     private SortedMap<ItemStack, ItemStack[]> aludelRecipes;
 
     private AludelRecipes()

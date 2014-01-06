@@ -37,6 +37,12 @@ public class BlockAlchemicalFuel extends BlockEE
     }
 
     @Override
+    public int damageDropped(int metaData)
+    {
+        return metaData;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {

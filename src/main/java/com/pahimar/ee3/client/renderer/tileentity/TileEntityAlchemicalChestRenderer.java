@@ -49,11 +49,6 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
             {
                 FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
             }
-            else
-            {
-                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST);
-            }
-
 
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);

@@ -53,6 +53,12 @@ public class BlockInfusedPlanks extends BlockEE
         }
     }
 
+    @Override
+    public int damageDropped(int metaData)
+    {
+        return metaData;
+    }
+
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int metaData)
     {

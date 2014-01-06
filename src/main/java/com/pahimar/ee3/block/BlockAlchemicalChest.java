@@ -5,6 +5,9 @@ import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileAlchemicalChestLarge;
+import com.pahimar.ee3.tileentity.TileAlchemicalChestMedium;
+import com.pahimar.ee3.tileentity.TileAlchemicalChestSmall;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
@@ -45,7 +48,20 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     @Override
     public TileEntity createTileEntity(World world, int metaData)
     {
-        return new TileAlchemicalChest(metaData);
+        if (metaData == 0)
+        {
+            return new TileAlchemicalChestSmall();
+        }
+        else if (metaData == 1)
+        {
+            return new TileAlchemicalChestMedium();
+        }
+        else if (metaData == 2)
+        {
+            return new TileAlchemicalChestLarge();
+        }
+
+        return null;
     }
 
     @SideOnly(Side.CLIENT)
@@ -55,6 +71,12 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
         {
             list.add(new ItemStack(id, 1, meta));
         }
+    }
+
+    @Override
+    public int damageDropped(int metaData)
+    {
+        return metaData;
     }
 
     @Override

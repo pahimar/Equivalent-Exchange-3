@@ -24,14 +24,17 @@ public class ContainerAlchemicalChest extends Container
     // Small Chest
     public static final int SMALL_CHEST_INVENTORY_ROWS = 4;
     public static final int SMALL_CHEST_INVENTORY_COLUMNS = 12;
+    public static final int SMALL_INVENTORY_SIZE = SMALL_CHEST_INVENTORY_ROWS * SMALL_CHEST_INVENTORY_COLUMNS;
 
     // Medium Chest
     public static final int MEDIUM_CHEST_INVENTORY_ROWS = 7;
     public static final int MEDIUM_CHEST_INVENTORY_COLUMNS = 12;
+    public static final int MEDIUM_INVENTORY_SIZE = MEDIUM_CHEST_INVENTORY_ROWS * MEDIUM_CHEST_INVENTORY_COLUMNS;
 
     // Large Chest
     public static final int LARGE_CHEST_INVENTORY_ROWS = 9;
     public static final int LARGE_CHEST_INVENTORY_COLUMNS = 13;
+    public static final int LARGE_INVENTORY_SIZE = LARGE_CHEST_INVENTORY_ROWS * LARGE_CHEST_INVENTORY_COLUMNS;
 
     // Player Inventory
     private final int PLAYER_INVENTORY_ROWS = 3;

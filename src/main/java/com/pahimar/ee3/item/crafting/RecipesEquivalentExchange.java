@@ -27,6 +27,17 @@ public class RecipesEquivalentExchange
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
         GameRegistry.addRecipe(new ItemStack(ModBlocks.aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.infusedPlanks, 4, 0), new ItemStack(ModBlocks.infusedWood, 1, 0));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.infusedPlanks, 4, 1), new ItemStack(ModBlocks.infusedWood, 1, 1));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.infusedPlanks, 4, 2), new ItemStack(ModBlocks.infusedWood, 1, 2));
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 0), new Object[]{"ppp", "p p", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 0)});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 1), new Object[]{"ppp", "p p", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 1)});
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new Object[]{"ppp", "p p", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 2)});
+
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"iii", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.researchStation), new Object[]{"ipi", " s ", "sss", 'p', "plankWood", 'i', Item.ingotIron, 's', "stone"});
     }
 
     private static void initItemRecipes()
@@ -37,8 +48,7 @@ public class RecipesEquivalentExchange
 
         GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
         GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
+
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"iii", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.researchStation), new Object[]{"ipi", " s ", "sss", 'p', "plankWood", 'i', Item.ingotIron, 's', "stone"});
     }
 }
