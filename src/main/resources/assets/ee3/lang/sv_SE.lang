@@ -1,41 +1,34 @@
-# Key localizations 
+# Key localizations
+key.charge=Ladda
 key.extra=Extra
 key.release=Släppa
 key.toggle=Växla
-key.charge=Ladda
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alkemisk Ryggsäck [WIP]
+item.ee3:alchemicalDust.ash.name=Aska [WIP]
+item.ee3:alchemicalDust.minium.name=Mönjadamm [WIP]
+item.ee3:alchemicalDust.verdant.name=Grönskande Damm [WIP]
+item.ee3:alchemicalDust.azure.name=Azurdamm [WIP]
+item.ee3:chalk.name=Krita [WIP]
 item.ee3:shardMinium.name=Skärva av mönja
 item.ee3:stoneInert.name=Inertsten
 item.ee3:stoneMinium.name=Mönjasten
 item.ee3:stonePhilosophers.name=Vises sten [WIP]
-item.ee3:alchemicalDustAsh.name=Aska [WIP]
-item.ee3:alchemicalDustMinium.name=Mönjadamm [WIP]
-item.ee3:alchemicalDustVerdant.name=Grönskande damm [WIP]
-item.ee3:alchemicalDustAzure.name=Azurdamm [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Amarantdamm [WIP]
-item.ee3:alchemicalDustIridescent.name=Iriserande damm [WIP]
-item.ee3:alchemicalBag.name=Alkemisk ryggsäck [WIP]
-item.ee3:alchemicalChalk.name=Alkemisk krita [WIP]
 
 # Block localizations
-tile.ee3:redWaterStill.name=Röd vatten (Stilla)
-tile.ee3:redWaterFlowing.name=Röd vatten (Rinnande)
-tile.ee3:calcinator.name=Kalcinerare [WIP]
-tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:alchemicalChest.name=Alkemisk kista [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Kalcinerare [WIP]
+tile.ee3:chalk.name=Krita [WIP]
 tile.ee3:glassBell.name=Glas bell [WIP]
-tile.ee3:alchemyTable.name=Alkemi bord [WIP]
-tile.ee3:renderingTank.name=Framställning behållare [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalcinerare [WIP]
-container.ee3:aludel=Aludel [WIP]
-container.ee3:alchemicalChest=Alkemisk kista [WIP]
 container.ee3:alchemicalBag=Alkemisk ryggsäck [WIP]
+container.ee3:alchemicalChest=Alkemisk kista [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalcinerare [WIP]
 container.ee3:glassBell=Glas kupol [WIP]
-container.ee3:alchemyTable.name=Alkemi bord [WIP]
-container.ee3:renderingTank.name=Framställning behållare [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Mål transmutation överlagring påslagen
@@ -53,9 +46,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 partiklar avslagen
 command.ee3:sounds.set_to_all=Spelar Equivalent Exchange 3 ljud från alla spelare
 command.ee3:sounds.set_to_self=Spelar Equivalent Exchange 3 ljud från bara dig
 command.ee3:sounds.turned_off=Spelar av Equivalent Exchange 3 ljud avslagen
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initierar version avstämning mot fjärr version myndighet, belägen vid: %s

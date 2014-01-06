@@ -1,0 +1,34 @@
+# Key localizations
+key.charge=Gwefru
+key.extra=Ychwanegol
+key.release=Rhyddhau
+key.toggle=Toglo
+
+# Item localizations
+item.ee3:alchemicalBag.name=Bag Alcemaidd [WIP]
+item.ee3:alchemicalDust.ash.name=Lludw [WIP]
+item.ee3:alchemicalDust.minium.name=Llwch Miniwm [WIP]
+item.ee3:alchemicalDust.verdant.name=Llwch Werdd [WIP]
+item.ee3:alchemicalDust.azure.name=Llwch Asur [WIP]
+item.ee3:chalk.name=Sialc [WIP]
+item.ee3:shardMinium.name=Darn o Finiwm
+item.ee3:stoneInert.name=Carreg Anadweithiol
+item.ee3:stoneMinium.name=Carreg Miniwm
+item.ee3:stonePhilosophers.name=Maen Athronwyr [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Calchyniadwr [WIP]
+tile.ee3:chalk.name=Sialc [WIP]
+tile.ee3:glassBell.name=Glass Bell [WIP]
+
+# GUI localizations
+container.ee3:alchemicalBag=Bag Alcemaidd [WIP]
+container.ee3:calcinator=Calchyniadwr [WIP]
+
+# Version check localizations
+version.ee3:init_log_message=Ymgychwynnu gwiriad fersiwn yn erbyn yr awdurdod fersiwn pell, a leolir ar %s
+version.ee3:uninitialized=Ni ymgychwynodd y gwiriad fersiwn yn briodol
+version.ee3:current=Rydych yn defnyddio y fersiwn diweddaraf (%s) o Equivalent Exchange 3 ar gyfer %s
+version.ee3:outdated=Mae yna fersiwn mwy diweddar o %s ar gael (%s) ar gyfer %s. Ffeindiwch o yma: %s
+version.ee3:general_error=Gwall wrth drio gysylltu gyda'r ffeil awdurdod fersiwn pell; trio eto
+version.ee3:final_error=Gwiriad fersiwn yn stopio ar ôl tri tro aflwyddiannus

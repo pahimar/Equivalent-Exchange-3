@@ -1,0 +1,27 @@
+# Key localizations
+key.charge=Напунити
+key.extra=Екстра
+key.release=Одпустити
+key.toggle=Клин
+
+# Item localizations
+item.ee3:alchemicalDust.ash.name=Пепео [WIP]
+item.ee3:alchemicalDust.minium.name=Миниум Прашина [WIP]
+item.ee3:alchemicalDust.verdant.name=Зелена Прашина [WIP]
+item.ee3:alchemicalDust.azure.name=Плава Пашина [WIP]
+item.ee3:shardMinium.name=Делић од Миниум
+item.ee3:stoneInert.name=Инерт Камен
+item.ee3:stoneMinium.name=Миниум Камен
+item.ee3:stonePhilosophers.name=>Философ'сКи Камен [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Калсинатор [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Калсинатор [WIP]
+
+# Version check localizations
+version.ee3:init_log_message=Покретање верзије провера према приступу удаљеним фајловима верзије ауторитета, који се налази у: %s
+version.ee3:uninitialized=Провера Верзије није успешно завршена.
+version.ee3:current=Ви тренутно користите најновију верзинју (%s) од Исте Замене 3 за %s.
+version.ee3:outdated=Нова %s верзија постоји (%s) за %s. Узмите овде: %s

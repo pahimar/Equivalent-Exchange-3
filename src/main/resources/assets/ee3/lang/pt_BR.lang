@@ -1,0 +1,55 @@
+# Key localizations
+key.charge=Carregar
+key.extra=Extra
+key.release=Liberar
+key.toggle=Alterar
+
+# Item localizations
+item.ee3:alchemicalBag.name=Bolsa Alquímica [WIP]
+item.ee3:alchemicalDust.ash.name=Cinzas [WIP]
+item.ee3:alchemicalDust.minium.name=Pó de Mínio [WIP]
+item.ee3:alchemicalDust.verdant.name=Pó Verdejante [WIP]
+item.ee3:alchemicalDust.azure.name=Pó Indigo [WIP]
+item.ee3:shardMinium.name=Fragmento de Mínio
+item.ee3:stoneInert.name=Pedra Inerte
+item.ee3:stoneMinium.name=Petra de Mínio
+item.ee3:stonePhilosophers.name=Pedra Filosofal [WIP]
+
+# Block localizations
+tile.ee3:alchemicalChest.name=Baú Alquímico [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinador [WIP]
+tile.ee3:glassBell.name=Sino Vítreo [WIP]
+
+# GUI localizations
+container.ee3:alchemicalBag=Bolsa Alquímica [WIP]
+container.ee3:alchemicalChest=Baú Alquímico [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinador [WIP]
+container.ee3:glassBell=Sino Vítreo [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Camdada do alvo de transmutação ligada
+command.ee3:overlay.turned_off=Camada do alvo de transmutação desligada
+command.ee3:overlay.position.top_left=Posição da camada alvo de transmutação configurada para noroeste
+command.ee3:overlay.position.top_right=Posição da camada alvo de transmutação configurada para nordeste
+command.ee3:overlay.position.bottom_left=Posição da camada alvo de transmutação configurada para sudoeste
+command.ee3:overlay.position.bottom_right=Posição da camada alvo de transmutação configurada para sudeste
+command.ee3:overlay.opacity.usage.additional_text=(onde ### é um valor decimal entre 0.0 e 1.0)
+command.ee3:overlay.opacity.updated=Opacidade da camada alvo de transmutação configurada com sucesso
+command.ee3:overlay.scale.usage.additional_text=%s (onde ### é um valor decimal maior que 0.0)
+command.ee3:overlay.scale.updated=Escala da camada alvo de transmutação configurada com sucesso
+command.ee3:particles.turned_on=Partículas do Equivalent Exchange 3 ligadas
+command.ee3:particles.turned_off=Partículas do Equivalent Exchange 3 desligadas
+command.ee3:sounds.set_to_all=Tocando sons do Equivalent Exchange 3 para todos os jogadores
+command.ee3:sounds.set_to_self=Tocando sons do Equivalent Exchange 3 para si mesmo
+command.ee3:sounds.turned_off=Sons do Equivalent Exchange 3 desabilitados
+
+# Version check localizations
+version.ee3:init_log_message=Iniciando checagem da versão remota contra a versão remota autorítaria, localizada em: %s
+version.ee3:uninitialized=Checagem da versão remota não é inicializado corretamente
+version.ee3:current=Atualmente usando a versão mais recente (%s) de Equivalent Exchange 3 para %s
+version.ee3:outdated=Uma nova versão de @MOD_NAME@ existe (@REMOTE_MOD_VERSION@) para @MINECRAFT_VERSION@. Consigam-na aqui: @MOD_UPDATE_LOCATION@
+version.ee3:general_error=Erro enquanto conectando à versão remota do arquivo autoritário; tentando novamente
+version.ee3:final_error=Checagem de versão parando após três tentativas sem sucesso
+version.ee3:mc_version_not_found=Incapaz de encontrar uma versão do @MOD_NAME@ para o @MINECRAFT_VERSION@ no ficheiro autoritário de versão remoto

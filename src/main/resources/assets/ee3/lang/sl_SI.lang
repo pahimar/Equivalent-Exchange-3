@@ -1,36 +1,32 @@
 # Key localizations
+key.charge=Nabij
 key.extra=Dodatno
 key.release=Sproži
 key.toggle=Preklopi
-key.charge=Nabij
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alkimistična Vreča [WIP]
+item.ee3:alchemicalDust.ash.name=Pepel [WIP]
+item.ee3:alchemicalDust.minium.name=Minijev Prah [WIP]
+item.ee3:alchemicalDust.verdant.name=Zelen Prah [WIP]
+item.ee3:alchemicalDust.azure.name=Moder Prah [WIP]
 item.ee3:shardMinium.name=Drobec Minija
 item.ee3:stoneInert.name=Nedejaven Kamen
 item.ee3:stoneMinium.name=Minijev Kamen
-item.ee3:stonePhilosophers.name=Kamen Modrosti
-item.ee3:alchemicalDustAsh.name=Pepel
-item.ee3:alchemicalDustMinium.name=Minijev Prah
-item.ee3:alchemicalDustVerdant.name=Zelen Prah
-item.ee3:alchemicalDustAzure.name=Moder Prah
-item.ee3:alchemicalDustAmaranthine.name=Vijoličen Prah
-item.ee3:alchemicalDustIridescent.name=Mavrični Prah
-item.ee3:alchemicalBag.name=Alkimistična Vreča
+item.ee3:stonePhilosophers.name=Kamen Modrosti [WIP]
 
 # Block localizations
-tile.ee3:redWaterStill.name=Rdeča Voda (Mirujoča)
-tile.ee3:redWaterFlowing.name=Rdeča Voda (Pretočna)
-tile.ee3:calcinator.name=Kalcinator
-tile.ee3:aludel.name=Aludel
-tile.ee3:alchemicalChest.name=Alkimistični Zaboj
-tile.ee3:glassBell.name=Stekleni Zvonec
+tile.ee3:alchemicalChest.name=Alkimistični Zaboj [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Kalcinator [WIP]
+tile.ee3:glassBell.name=Stekleni Zvonec [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalcinator
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Alkimistični Zaboj
-container.ee3:alchemicalBag=Alkimistična Vreča
-container.ee3:glassBell=Stekleni Zvonec
+container.ee3:alchemicalBag=Alkimistična Vreča [WIP]
+container.ee3:alchemicalChest=Alkimistični Zaboj [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalcinator [WIP]
+container.ee3:glassBell=Stekleni Zvonec [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Prikaz transmutacije je vključen
@@ -48,9 +44,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 delci so izključeni
 command.ee3:sounds.set_to_all=Predvajam Equivalent Exchange 3 zvoke vseh igralcev
 command.ee3:sounds.set_to_self=Predvajam Equivalent Exchange 3 zvoke samo od sebe
 command.ee3:sounds.turned_off=Predvajanje Equivalent Exchange 3 zvokov je izključeno
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Inicializiram oddaljeno preverjanje različice z različico oddaljenega strežnika, ki se nahaja na %s

@@ -1,0 +1,30 @@
+# Key localizations
+key.charge=Ładuj
+key.extra=Dodatkowa Funkcja
+key.release=Wypuść
+key.toggle=Przełącz
+
+# Item localizations
+item.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+item.ee3:alchemicalDust.ash.name=Popiół [WIP]
+item.ee3:alchemicalDust.minium.name=Proszek Minium [WIP]
+item.ee3:alchemicalDust.verdant.name=Zielony Proszek [WIP]
+item.ee3:alchemicalDust.azure.name=Lazurowy Proszek [WIP]
+item.ee3:shardMinium.name=Odłam Minium
+item.ee3:stoneInert.name=Nieaktywny Kamień
+item.ee3:stoneMinium.name=Minium Kamień
+item.ee3:stonePhilosophers.name=Kamień Filozoficzny [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Kalcynator [WIP]
+
+# GUI localizations
+container.ee3:alchemicalBag.name=Torba Alchemiczna [WIP]
+container.ee3:calcinator=Kalcynator [WIP]
+
+# Version check localizations
+version.ee3:init_log_message=Inicjowanie sprawdzania wersji względem zdalnego pliku autoryzacji, umieszczonego na: %s
+version.ee3:uninitialized=Wystąpił błąd podczas sprawdzania wersji
+version.ee3:current=Posiadasz aktualnie najnowszą wersję (%s) Equivalent Exchange 3 dla %s
+version.ee3:outdated=Istnieje nowsza wersja %s (%s) dla %s. Pobierz stąd: %s
+version.ee3:general_error=Wystąpił błąd podczas łaczenia ze zdalnym plikiem wersji; trying again

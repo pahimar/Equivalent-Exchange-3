@@ -1,35 +1,41 @@
-# Key localizations
-key.charge=Charger
+# Key localizations 
 key.extra=Extra
 key.release=Libérer
 key.toggle=Basculer
+key.charge=Charger
 
 # Item localizations
-item.ee3:alchemicalBag.name=Sac d'alchimie [WIP]
-item.ee3:alchemicalDust.Ash.name=Ash [WIP]
-item.ee3:alchemicalDust.Minium.name=Poussière de minium [WIP]
-item.ee3:alchemicalDust.Verdant.name=Poussière verdoyante [WIP]
-item.ee3:alchemicalDust.Azure.name=Poussière d'azure [WIP]
-item.ee3:alchemicalDust.Iridescent.name=Poussière irisé [WIP]
+item.ee3:alchemicalBag.name=Sac Alchimique [WIP]
+item.ee3:alchemicalDust.ash.name=Cendre [WIP]
+item.ee3:alchemicalDust.verdant.name=Poussière Verdoyante [WIP]
+item.ee3:alchemicalDust.azure.name=Poussière Azur [WIP]
+item.ee3:alchemicalDust.minium.name=Poussière de Minium [WIP]
+item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon Alchimique
+item.ee3:alchemicalFuel.mobiusFuel.name=Carburant de Mobius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant d'Aeternalis
 item.ee3:chalk.name=Craie [WIP]
-item.ee3:shardMinium.name=Fragment de minium
-item.ee3:stoneInert.name=Pierre inerte
-item.ee3:stoneMinium.name=Pierre de minium
-item.ee3:stonePhilosophers.name=Pierre philosophale [WIP]
+item.ee3:diviningRod.name=Bâton de Divination [WIP]
+item.ee3:shardMinium.name=Fragment de Minium
+item.ee3:stoneInert.name=Pierre Inerte
+item.ee3:stoneMinium.name=Pierre de Minium
+item.ee3:stonePhilosophers.name=Pierre Philosophale [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Coffre alchimique [WIP]
+tile.ee3:alchemicalChest.name=Coffre Alchimique [WIP]
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Charbon Alchimique
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Carburant de Mobius
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Carburant d'Aeternalis
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Calcinateur [WIP]
-tile.ee3:chalk.name=Craie [WIP]
-tile.ee3:glassBell.name=Cloche de verre [WIP]
+tile.ee3:chalk.name=Craie
+tile.ee3:glassBell.name=Cloche en Verre [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=Alchemical Bag [WIP]
-container.ee3:alchemicalChest=Coffre alchimique [WIP]
+container.ee3:alchemicalBag=Sac Alchimique [WIP]
+container.ee3:alchemicalChest=Coffre Alchimique [WIP]
 container.ee3:aludel=Aludel [WIP]
 container.ee3:calcinator=Calcinateur [WIP]
-container.ee3:glassBell=Cloche de verre [WIP]
+container.ee3:glassBell=Cloche en Verre [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Calque de cible de transmutation activé
@@ -47,9 +53,6 @@ command.ee3:particles.turned_off=Particules Equivalent Exchange 3 désactivées
 command.ee3:sounds.set_to_all=Lecture des sons Equivalent Exchange 3 de tous les joueurs
 command.ee3:sounds.set_to_self=Lecture des sons Equivalent Exchange 3 pour vous seulement
 command.ee3:sounds.turned_off=Lecture des sons Equivalent Exchange 3 désactivée
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Démarrage de la vérification de version distante avec l'autorité de version distance situé à: %s

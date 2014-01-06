@@ -1,36 +1,33 @@
-# Key localizations 
+# Key localizations
+key.charge=Cargar
 key.extra=Extra
 key.release=Lanzar
 key.toggle=Cambiar
-key.charge=Cargar
 
 # Item localizations
+item.ee3:alchemicalBag.name=Bolsa Alquímica [WIP]
+item.ee3:alchemicalDust.ash.name=Ceniza [WIP]
+item.ee3:alchemicalDust.minium.name=Polvo Minio [WIP]
+item.ee3:alchemicalDust.verdant.name=Polvo Verdante [WIP]
+item.ee3:alchemicalDust.azure.name=Polvo Azur [WIP]
+item.ee3:alchemicalDust.iridescent.name=Polvo Iridiscente [WIP]
 item.ee3:shardMinium.name=Fragmento Minio
 item.ee3:stoneInert.name=Piedra Inerte
 item.ee3:stoneMinium.name=Piedra Minio
-item.ee3:stonePhilosophers.name=Piedra Filosofal
-item.ee3:alchemicalDustAsh.name=Ceniza
-item.ee3:alchemicalDustMinium.name=Polvo Minio
-item.ee3:alchemicalDustVerdant.name=Polvo Verdante
-item.ee3:alchemicalDustAzure.name=Polvo Azur
-item.ee3:alchemicalDustAmaranthine.name=Polvo Purpúreo
-item.ee3:alchemicalDustIridescent.name=Polvo Iridiscente
-item.ee3:alchemicalBag.name=Bolsa Alquímica
+item.ee3:stonePhilosophers.name=Piedra Filosofal [WIP]
 
 # Block localizations
-tile.ee3:redWaterStill.name=Agua Roja (Quieta)
-tile.ee3:redWaterFlowing.name=Agua Roja (Fluyendo)
-tile.ee3:calcinator.name=Calcinador
-tile.ee3:aludel.name=Aludel
-tile.ee3:alchemicalChest.name=Cofre Alquímico
-tile.ee3:glassBell.name=Campana de Cristal
+tile.ee3:alchemicalChest.name=Cofre Alquímico [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinador [WIP]
+tile.ee3:glassBell.name=Campana de Cristal [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Calcinator
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Cofre Alquímico
-container.ee3:alchemicalBag=Bolsa Alquímica
-container.ee3:glassBell=Campana de Cristal
+container.ee3:alchemicalBag=Bolsa Alquímica [WIP]
+container.ee3:alchemicalChest=Cofre Alquímico [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinator [WIP]
+container.ee3:glassBell=Campana de Cristal [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Superposicón del objetivo a transmutar activada

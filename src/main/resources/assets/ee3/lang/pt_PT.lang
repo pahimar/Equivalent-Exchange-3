@@ -1,38 +1,34 @@
-# Teclas 
+# Key localizations
+key.charge=Carregar
 key.extra=Extra
 key.release=Disparar
 key.toggle=Alternar
-key.charge=Carregar
 
-# Itens
+# Item localizations
+item.ee3:alchemicalBag.name=Saco Alquímico [WIP]
+item.ee3:alchemicalDust.ash.name=Cinza [WIP]
+item.ee3:alchemicalDust.minium.name=Pó de Mínio [WIP]
+item.ee3:alchemicalDust.verdant.name=Pó Virente [WIP]
+item.ee3:alchemicalDust.azure.name=Pó Cerúleo [WIP]
 item.ee3:shardMinium.name=Fragmento de Mínio
 item.ee3:stoneInert.name=Pedra Inerte
 item.ee3:stoneMinium.name=Pedra de Mínio
-item.ee3:stonePhilosophers.name=Pedra Filosofal
-item.ee3:alchemicalDustAsh.name=Cinza
-item.ee3:alchemicalDustMinium.name=Pó de Mínio
-item.ee3:alchemicalDustVerdant.name=Pó Virente
-item.ee3:alchemicalDustAzure.name=Pó Cerúleo
-item.ee3:alchemicalDustAmaranthine.name=Pó Amarantino
-item.ee3:alchemicalDustIridescent.name=Pó Iridescente
-item.ee3:alchemicalBag.name=Saco Alquímico
+item.ee3:stonePhilosophers.name=Pedra Filosofal [WIP]
 
-# Blocos
-tile.ee3:redWaterStill.name=Água Vermelha (Estagnada)
-tile.ee3:redWaterFlowing.name=Água Vermelha (A Fluir)
-tile.ee3:calcinator.name=Calcinatório
-tile.ee3:aludel.name=Aludel
-tile.ee3:alchemicalChest.name=Baú Alquímico
-tile.ee3:glassBell.name=Sino de Vidro
+# Block localizations
+tile.ee3:alchemicalChest.name=Baú Alquímico [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinatório [WIP]
+tile.ee3:glassBell.name=Sino de Vidro [WIP]
 
-# Títulos das janelas
-container.ee3:calcinator=Calcinatório
-container.ee3:aludel=Aludel
-container.ee3:alchemicalChest=Baú Alquímico
-container.ee3:alchemicalBag=Saco Alquímico
-container.ee3:glassBell=Sino de Vidro
+# GUI localizations
+container.ee3:alchemicalBag=Saco Alquímico [WIP]
+container.ee3:alchemicalChest=Baú Alquímico [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinatório [WIP]
+container.ee3:glassBell=Sino de Vidro [WIP]
 
-# Comandos
+# Command localizations
 command.ee3:overlay.turned_on=O alvo de transmutação foi ligado
 command.ee3:overlay.turned_off=O alvo de transmutação foi desligado
 command.ee3:overlay.position.top_left=A posição do alvo de transmutação foi definida para o canto superior-esquerdo
@@ -49,10 +45,7 @@ command.ee3:sounds.set_to_all=A reproduzir os sons do Equivalente Exchange 3 de 
 command.ee3:sounds.set_to_self=A reproduzir os sons do Equivalente Exchange 3 apenas do próprio
 command.ee3:sounds.turned_off=Os sons do Equivalent Exchange 3 foram desligados
 
-# Separadores do modo criativo
-itemGroup.EE3=Equivalent Exchange 3
-
-# Verificador de actualizações
+# Version Check localizations
 version.ee3:init_log_message=A iniciar a verificação de versões em relação à autoridade remota, localizada em: %s
 version.ee3:uninitialized=A verificação de versões não foi inicializada correctamente
 version.ee3:current=Estas a jogar a versão actual (%s) do Equivalent Exchange 3 para o %s

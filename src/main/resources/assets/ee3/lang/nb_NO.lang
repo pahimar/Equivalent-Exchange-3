@@ -1,41 +1,34 @@
-# Key localizations 
+# Key localizations
+key.charge=Lad
 key.extra=Ekstra
 key.release=Utgivelse
 key.toggle=Veksle
-key.charge=Lad
 
 # Item localizations
+item.ee3:alchemicalBag.name=Alkymisk Sekk [WIP]
+item.ee3:alchemicalDust.ash.name=Aske [WIP]
+item.ee3:alchemicalDust.minium.name=Mønjestøv [WIP]
+item.ee3:alchemicalDust.verdant.name=Verdant Støv [WIP]
+item.ee3:alchemicalDust.azure.name=Azurblått Støv [WIP]
+item.ee3:chalk.name=Kritt [WIP]
 item.ee3:shardMinium.name=Mønjeskår
 item.ee3:stoneInert.name=Inert Stein
 item.ee3:stoneMinium.name=Mønjestein
 item.ee3:stonePhilosophers.name=De vises Stein [WIP]
-item.ee3:alchemicalDustAsh.name=Aske [WIP]
-item.ee3:alchemicalDustMinium.name=Mønjestøv [WIP]
-item.ee3:alchemicalDustVerdant.name=Verdant Støv [WIP]
-item.ee3:alchemicalDustAzure.name=Azurblått Støv [WIP]
-item.ee3:alchemicalDustAmaranthine.name=Amarant Støv [WIP]
-item.ee3:alchemicalDustIridescent.name=Iriserende Støv [WIP]
-item.ee3:alchemicalBag.name=Alkymisk Sekk [WIP]
-item.ee3:alchemicalChalk.name=Alkymisk Kritt [WIP]
 
 # Block localizations
-tile.ee3:redWaterStill.name=Rødt Vann (Stille)
-tile.ee3:redWaterFlowing.name=Rødt Vann (Rennende)
-tile.ee3:calcinator.name=Calcinator [WIP]
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:alchemicalChest.name=Alkymisk Kiste [WIP]
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:chalk.name=Kritt [WIP]
 tile.ee3:glassBell.name=Glassklokke [WIP]
-tile.ee3:alchemyTable.name=Alkymi Bord [WIP]
-tile.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # GUI localizations
-container.ee3:calcinator=Kalsinator [WIP]
-container.ee3:aludel=Aludel [WIP]
-container.ee3:alchemicalChest=Alkymisk Kiste [WIP]
 container.ee3:alchemicalBag=Alkymisk Sekk [WIP]
+container.ee3:alchemicalChest=Alkymisk Kiste [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Kalsinator [WIP]
 container.ee3:glassBell=Glassklokke [WIP]
-container.ee3:alchemyTable.name=Alkymi Bord [WIP]
-container.ee3:renderingTank.name=Rendering Tank [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Mal for omdanning av målet er skrudd på
@@ -53,9 +46,6 @@ command.ee3:particles.turned_off=Equivalent Exchange 3 partikler skrudd av
 command.ee3:sounds.set_to_all=Spiller av Equivalent Exchange 3 lyder fra alle spillere
 command.ee3:sounds.set_to_self=Spiller av Equivalent Exchange 3 lyder bare fra seg selv
 command.ee3:sounds.turned_off=Avspilling av Equivalent Exchange 3 lyder skrudd av
-
-# Creative Tab localizations
-itemGroup.EE3=Equivalent Exchange 3
 
 # Version check localizations
 version.ee3:init_log_message=Initialiserer ekstern version sjekk mot den eksterne versionens autoritetsfil, plassert i: %s 
