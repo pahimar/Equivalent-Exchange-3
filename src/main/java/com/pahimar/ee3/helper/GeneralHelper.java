@@ -1,8 +1,6 @@
 package com.pahimar.ee3.helper;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -52,11 +50,5 @@ public class GeneralHelper
         }
 
         return list.toArray();
-    }
-
-    public static boolean isHostileEntity(EntityLivingBase entity)
-    {
-
-        return entity instanceof IMob;
     }
 }

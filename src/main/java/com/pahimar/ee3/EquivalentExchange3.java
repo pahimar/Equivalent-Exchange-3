@@ -122,9 +122,6 @@ public class EquivalentExchange3
         // Register the Item Pickup Handler
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
 
-        // Register the EntityLiving Handler
-        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
-
         MinecraftForge.EVENT_BUS.register(new ActionRequestHandler());
 
         MinecraftForge.EVENT_BUS.register(new WorldTransmutationHandler());
