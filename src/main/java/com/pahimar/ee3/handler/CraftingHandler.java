@@ -3,9 +3,10 @@ package com.pahimar.ee3.handler;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
-import com.pahimar.ee3.item.crafting.RecipesEquivalentExchange;
 import com.pahimar.ee3.item.crafting.RecipesTransmutationStones;
+import com.pahimar.ee3.item.crafting.RecipesVanilla;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.recipe.RecipesAludel;
 import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,8 +32,11 @@ public class CraftingHandler implements ICraftingHandler
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
 
         // Register our recipes
-        RecipesEquivalentExchange.init();
+        RecipesVanilla.init();
         RecipesTransmutationStones.init();
+        RecipesAludel.getInstance();
+
+        RecipesAludel.getInstance().debugDumpMap();
     }
 
     @Override

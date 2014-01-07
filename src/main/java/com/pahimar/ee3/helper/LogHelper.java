@@ -44,11 +44,11 @@ public class LogHelper
     {
         if (object != null)
         {
-            log(Level.WARNING, String.format("[DEBUG] %s", object.toString()));
+            log(Level.INFO, String.format("[DEBUG] %s", object.toString()));
         }
         else
         {
-            log(Level.WARNING, "[DEBUG] null");
+            log(Level.INFO, "[DEBUG] null");
         }
     }
 

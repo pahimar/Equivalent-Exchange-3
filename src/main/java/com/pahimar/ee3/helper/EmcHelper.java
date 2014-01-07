@@ -76,7 +76,7 @@ public class EmcHelper
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
-                else if (itemStack.getItem().getContainerItemStack(itemStack) != null)
+                else if (itemStack.getItem() != null && itemStack.getItem().getContainerItemStack(itemStack) != null)
                 {
                     wrappedStackValue = new EmcValue(0);
                 }

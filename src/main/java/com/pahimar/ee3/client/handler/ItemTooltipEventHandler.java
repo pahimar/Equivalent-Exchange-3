@@ -22,7 +22,6 @@ import java.text.DecimalFormat;
 @SideOnly(Side.CLIENT)
 public class ItemTooltipEventHandler
 {
-    private static boolean debug = true;
     private static DecimalFormat emcDecimalFormat = new DecimalFormat("#.###");
 
     @ForgeSubscribe(priority = EventPriority.LOWEST)
@@ -32,7 +31,6 @@ public class ItemTooltipEventHandler
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
-            event.toolTip.add(String.format("id: %s, Meta: %s", event.itemStack.itemID, event.itemStack.getItemDamage()));
             if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
                 EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);

@@ -8,6 +8,7 @@ import com.pahimar.ee3.lib.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -104,6 +105,11 @@ public class OreStack implements Comparable<OreStack>
     public String toJson()
     {
         return gsonSerializer.toJson(this);
+    }
+
+    public static OreStack getOreStackFromList(Object... objects)
+    {
+        return getOreStackFromList(Arrays.asList(objects));
     }
 
     public static OreStack getOreStackFromList(List<?> objectList)
