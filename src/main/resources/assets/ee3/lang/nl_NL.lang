@@ -1,0 +1,72 @@
+# Key localizations
+key.charge=Laden
+key.extra=Extra
+key.release=Release
+key.toggle=Verander
+
+# Item localizations
+item.ee3:alchemicalBag.name=Alchemistische Tas[WIP]
+item.ee3:alchemicalDust.ash.name=As
+item.ee3:alchemicalDust.verdant.name=Groene Stof
+item.ee3:alchemicalDust.azure.name=Azure Stof
+item.ee3:alchemicalDust.minium.name=Minimum Stof
+item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemistische Kool
+item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Brandstof
+item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Brandstof
+item.ee3:chalk.name=Krijt [WIP]
+item.ee3:diviningRod.name=Divining Rod [WIP]
+item.ee3:shardMinium.name=Scherf van Minium
+item.ee3:stoneInert.name=Inerte Steen
+item.ee3:stoneMinium.name=Minimum Stijn [WIP]
+item.ee3:stonePhilosophers.name=Philosopher's Steen [WIP]
+
+# Block localizations
+tile.ee3:alchemicalChest.name=Alchemistische Kist [WIP]
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemistische Kool
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Brandstof
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Alchemistische Fuel
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:chalk.name=Krijt
+tile.ee3:glassBell.name=Glazen Stolp [WIP]
+tile.ee3:researchStation.name=Onderzoeks Station [WIP]
+tile.ee3:infusedCloth.name=Infused Doek [WIP]
+tile.ee3:infusedWood.name=Infused Hout
+tile.ee3:infusedPlanks.name=Infused Houten Planken
+
+# GUI localizations
+container.ee3:alchemicalBag=Alchemistische Zak [WIP]
+container.ee3:alchemicalChest=Alchemistische Kit [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:calcinator=Calcinator [WIP]
+container.ee3:glassBell=Glazen Stolp [WIP]
+container.ee3:researchStation=Onderzoeks Station [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Transmutatiedoel overlay aangezet
+command.ee3:overlay.turned_off=Transmutatiedoel overlay uitgezet
+command.ee3:overlay.position.top_left=Positie ransmutatiedoel overlay naar links boven gezet
+command.ee3:overlay.position.top_right=Positie transmutatiedoel overlay naar rechts boven gezet
+command.ee3:overlay.position.bottom_left=Positie transmutatiedoel overlay naar links onder gezet
+command.ee3:overlay.position.bottom_right=Positie transmutatiedoel overlay naar rechts onder gezet
+command.ee3:overlay.opacity.usage.additional_text=(waarbij ### een decimale waarde tussen 0.0 en 1.0 is) 
+command.ee3:overlay.opacity.updated=(waarbij ### een decimale waarde groter dan 0.0 is) 
+command.ee3:overlay.scale.usage.additional_text=%s (waarbij ### een decimale waarde groter dan 0.0 is) 
+command.ee3:overlay.scale.updated=Schaal transmutatiedoel overlay succesvol bijgewerkt
+command.ee3:particles.turned_on=Equivalent Exchange 3 deeltjes aangezet
+command.ee3:particles.turned_off=Equivalent Exchange 3 deeltjes uitgezet
+command.ee3:sounds.set_to_all=PEquivalent Exchange 3 geluiden worden gespeeld van alle spelers
+command.ee3:sounds.set_to_self=Equivalent Exchange 3 geluiden worden alleen van jezelf gespeeld
+command.ee3:sounds.turned_off=Equivalent Exchange 3 geluiden worden niet gespeeld
+
+# Version check localizations
+version.ee3:init_log_message=Start versiecontrole tegen extern versiebestand, te vinden op: %s
+version.ee3:uninitialized=De versiecontrole is niet geslaagd
+version.ee3:current=Je gebruikt de nieuwste versie (%s) van Equivalent Exchange 3 for %s
+version.ee3:outdated=Een nieuwe %s versie bestaat (%s) voor %s. Download het hier: %s
+version.ee3:general_error=Er deed zich een fout voor tijdens de versiecontrole
+version.ee3:final_error=Versiecontrole gestopt na drie mislukte connectie pogingen
+version.ee3:mc_version_not_found=Niet in staat om een versie van% s voor% s vinden in de afgelegen versie autoriteit
+
+# Tooltip localizations
+tooltip.ee3:infusedPrefix=Infused met
