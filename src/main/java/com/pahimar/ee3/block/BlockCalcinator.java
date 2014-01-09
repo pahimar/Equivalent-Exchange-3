@@ -24,7 +24,8 @@ import java.util.Random;
  */
 public class BlockCalcinator extends BlockEE implements ITileEntityProvider
 {
-    public BlockCalcinator(int id)
+    public static final int LIGHT_ADD = 6;
+	public BlockCalcinator(int id)
     {
         super(id, Material.rock);
         this.setUnlocalizedName(Strings.CALCINATOR_NAME);
@@ -54,8 +55,9 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        // TODO Vary light levels depending on whether or not we are calcinating something
-        return super.getLightValue(world, x, y, z);
+        // TODO <DONE>Vary light levels depending on whether or not we are calcinating something
+    	return ((TileCalcinator) world.getBlockTileEntity(x, y, z)).isBurning() ? super.getLightValue(world, x, y, z) + LIGHT_ADD : super.getLightValue(world, x, y, z);
+
     }
 
     @Override
