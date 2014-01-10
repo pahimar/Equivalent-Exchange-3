@@ -1,25 +1,23 @@
 package com.pahimar.ee3.recipe;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.pahimar.ee3.api.OreStack;
-import com.pahimar.ee3.api.WrappedStack;
+import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.LogHelper;
-import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecipesAludel
 {
     private static RecipesAludel aludelRegistry = null;
 
-    // TODO Handle that the input stack could be an OreStack
-    private Multimap<WrappedStack, WrappedStack[]> aludelRecipes;
+    private Map<AludelRecipeInputPair, ItemStack> aludelRecipes;
 
     private RecipesAludel()
     {
-        aludelRecipes = HashMultimap.create();
+        aludelRecipes = new HashMap<AludelRecipeInputPair, ItemStack>();
     }
 
     public static RecipesAludel getInstance()
@@ -35,6 +33,7 @@ public class RecipesAludel
 
     private void init()
     {
+        // TODO Trim recipes
         // Alchemical Coal
         aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 32, 1));
         aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
@@ -61,97 +60,72 @@ public class RecipesAludel
     }
 
 
-    public void addRecipe(ItemStack recipeOutput, Object recipeInputStack, ItemStack recipeInputDust)
+    public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
-        WrappedStack wrappedInputStack = new WrappedStack(recipeInputStack);
+        AludelRecipeInputPair recipeInputPair = new AludelRecipeInputPair(recipeInputStack, recipeInputDust);
 
-        if (recipeOutput != null && (wrappedInputStack.getWrappedStack() instanceof ItemStack || wrappedInputStack.getWrappedStack() instanceof OreStack) && recipeInputDust.getItem() instanceof ItemAlchemicalDust)
+        if (recipeInputPair.isValid() && recipeOutput != null)
         {
-            WrappedStack wrappedRecipeOutput = new WrappedStack(recipeOutput);
-            WrappedStack wrappedDustStack = new WrappedStack(recipeInputDust);
+            boolean similiarRecipeExists = false;
 
-            if (!aludelRecipes.containsKey(wrappedRecipeOutput))
+            for (AludelRecipeInputPair existingRecipeInput : aludelRecipes.keySet())
             {
-                boolean recipeInputsExistAlready = false;
+                if (existingRecipeInput.equalsIgnoreStackSize(recipeInputPair))
+                {
+                    similiarRecipeExists = true;
+                }
+            }
 
-                for (WrappedStack outputStack : aludelRecipes.keySet())
-                {
-                    if (!recipeInputsExistAlready)
-                    {
-                        for (WrappedStack[] recipeInputs : aludelRecipes.get(outputStack))
-                        {
-                            if (recipeInputs.length == 2 && !recipeInputsExistAlready)
-                            {
-                                if (recipeInputs[0].equals(wrappedInputStack) && recipeInputs[1].equals(wrappedDustStack))
-                                {
-                                    recipeInputsExistAlready = true;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (!recipeInputsExistAlready)
-                {
-                    aludelRecipes.put(wrappedRecipeOutput, new WrappedStack[]{wrappedInputStack, wrappedDustStack});
-                }
-                else
-                {
-                    LogHelper.warning(String.format("Failed to add - O: %s, I: %s, D: %s", wrappedRecipeOutput, wrappedInputStack, wrappedDustStack));
-                }
+            if (!similiarRecipeExists)
+            {
+                aludelRecipes.put(recipeInputPair, recipeOutput);
             }
         }
     }
 
     public ItemStack getResult(ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
-        OreStack possibleOreStack = OreStack.getOreStackFromList(recipeInputStack);
-        WrappedStack wrappedInputStack;
+        AludelRecipeInputPair recipeInputPair = new AludelRecipeInputPair(recipeInputStack, recipeInputDust);
 
-        if (possibleOreStack != null)
+        if (recipeInputPair.isValid())
         {
-            wrappedInputStack = new WrappedStack(possibleOreStack);
-        }
-        else
-        {
-            wrappedInputStack = new WrappedStack(recipeInputStack);
-        }
-
-        WrappedStack wrappedDustStack = new WrappedStack(recipeInputDust);
-
-        if (wrappedInputStack.getWrappedStack() != null && wrappedDustStack.getWrappedStack() != null)
-        {
-            for (WrappedStack recipeOutput : aludelRecipes.keySet())
+            // TODO Check for keys that are similiar but smaller in size than the provided inputs
+            if (aludelRecipes.containsKey(recipeInputPair))
             {
-                for (WrappedStack[] recipeInputs : aludelRecipes.get(recipeOutput))
-                {
-                    if (recipeInputs.length == 2)
-                    {
-                        if (recipeInputs[0].equals(wrappedInputStack) && recipeInputs[1].equals(wrappedDustStack))
-                        {
-                            return (ItemStack) recipeOutput.getWrappedStack();
-                        }
-                    }
-                }
+                return aludelRecipes.get(recipeInputPair);
+            }
+            else
+            {
+
             }
         }
 
         return null;
     }
 
-    public Multimap<WrappedStack, WrappedStack[]> getRecipeMap()
+    public AludelRecipeInputPair getRecipeInputs(ItemStack itemStack)
+    {
+        for (AludelRecipeInputPair recipeInputPair : aludelRecipes.keySet())
+        {
+            if (ItemHelper.equals(aludelRecipes.get(recipeInputPair), itemStack))
+            {
+                return recipeInputPair;
+            }
+        }
+
+        return null;
+    }
+
+    public Map<AludelRecipeInputPair, ItemStack> getRecipeMap()
     {
         return aludelRecipes;
     }
 
     public void debugDumpMap()
     {
-        for (WrappedStack recipeOutput : aludelRecipes.keySet())
+        for (AludelRecipeInputPair recipeInputPair : aludelRecipes.keySet())
         {
-            for (WrappedStack[] recipeInputs : aludelRecipes.get(recipeOutput))
-            {
-                LogHelper.debug(String.format("Output: %s, Input Stack: %s, Dust Stack: %s", recipeOutput, recipeInputs[0], recipeInputs[1]));
-            }
+            LogHelper.debug(String.format("Output: %s, Input Stack: %s, Dust Stack: %s", ItemHelper.toString(aludelRecipes.get(recipeInputPair)), ItemHelper.toString(recipeInputPair.inputStack), ItemHelper.toString(recipeInputPair.dustStack)));
         }
     }
 }

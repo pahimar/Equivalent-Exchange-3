@@ -96,7 +96,6 @@ public class ItemHelper
     {
         public int compare(ItemStack itemStack1, ItemStack itemStack2)
         {
-
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
