@@ -1,27 +1,10 @@
-package com.pahimar.ee3.helper;
+package com.pahimar.ee3.client.helper;
 
 import java.util.regex.Pattern;
 
 public class ColourUtils
 {
     private static final Pattern HEX_COLOUR_PATTERN = Pattern.compile("[0-9a-fA-F]{6}");
-
-    @SuppressWarnings("unused")
-    public static byte[] convertHexColorToByteArray(String hexColor)
-    {
-        if (HEX_COLOUR_PATTERN.matcher(hexColor).matches())
-        {
-            byte[] colourByteArray = new byte[3];
-
-            colourByteArray[0] = (byte) Integer.parseInt(hexColor.substring(0, 2), 16);
-            colourByteArray[1] = (byte) Integer.parseInt(hexColor.substring(2, 4), 16);
-            colourByteArray[2] = (byte) Integer.parseInt(hexColor.substring(4, 6), 16);
-
-            return colourByteArray;
-        }
-
-        return null;
-    }
 
     public static byte[] convertIntColourToByteArray(int intColour)
     {
@@ -43,63 +26,6 @@ public class ColourUtils
         colourFloatArray[2] = (float) (intColour & 255) / 255F;
 
         return colourFloatArray;
-    }
-
-    public static float[] convertByteArrayToFloatArray(byte[] byteArray)
-    {
-        float[] colourFloatArray = new float[3];
-
-        colourFloatArray[0] = (float) byteArray[0] / 255F;
-        colourFloatArray[1] = (float) byteArray[1] / 255F;
-        colourFloatArray[2] = (float) byteArray[2] / 255F;
-
-        return colourFloatArray;
-    }
-
-    @SuppressWarnings("unused")
-    public static byte[] getBlendedColours(String firstColour, String secondColour)
-    {
-        byte[] firstColourByteArray = convertHexColorToByteArray(firstColour);
-        byte[] secondColourByteArray = convertHexColorToByteArray(secondColour);
-
-        if (firstColourByteArray != null && secondColourByteArray != null)
-        {
-            return getBlendedColours(firstColourByteArray, secondColourByteArray);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public static byte[] getBlendedColours(byte[] firstColour, byte[] secondColour)
-    {
-        byte[][] blendedColours = getByteBlendedColours(firstColour, secondColour, 3);
-
-        if (blendedColours.length == 3)
-        {
-            return blendedColours[1];
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public static byte[][] getByteBlendedColours(String firstColour, String secondColour, int steps)
-    {
-        byte[] firstColourByteArray = convertHexColorToByteArray(firstColour);
-        byte[] secondColourByteArray = convertHexColorToByteArray(secondColour);
-
-        if (firstColourByteArray != null && secondColourByteArray != null)
-        {
-            return getByteBlendedColours(firstColourByteArray, secondColourByteArray, steps);
-        }
-        else
-        {
-            return null;
-        }
     }
 
     public static byte[][] getByteBlendedColours(byte[] firstColour, byte[] secondColour, int steps)
@@ -143,21 +69,6 @@ public class ColourUtils
             }
 
             return floatBlendedColours;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public static float[][] getFloatBlendedColours(String firstColour, String secondColour, int steps)
-    {
-        byte[] firstColourByteArray = convertHexColorToByteArray(firstColour);
-        byte[] secondColourByteArray = convertHexColorToByteArray(secondColour);
-
-        if (firstColourByteArray != null && secondColourByteArray != null)
-        {
-            return getFloatBlendedColours(firstColourByteArray, secondColourByteArray, steps);
         }
         else
         {

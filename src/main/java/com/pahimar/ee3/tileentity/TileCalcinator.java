@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.helper.ColourUtils;
+import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileCalcinator;
@@ -39,8 +39,8 @@ public class TileCalcinator extends TileEE implements IInventory
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
 
-    public int dustStackSize;
-    public byte dustColourRedChannel, dustColourGreenChannel, dustColourBlueChannel;
+    public int leftStackSize, leftStackColour;
+    public int rightStackSize, rightStackColour;
 
     public TileCalcinator()
     {
@@ -215,7 +215,6 @@ public class TileCalcinator extends TileEE implements IInventory
             // Start "cooking" a new item, if we can
             if (this.deviceCookTime == 0 && this.canCalcinate())
             {
-                // TODO Effect burn speed by fuel quality
                 this.fuelBurnTime = this.deviceCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
 
                 if (this.deviceCookTime > 0)
@@ -263,6 +262,7 @@ public class TileCalcinator extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
+            // TODO Send stack sizes and colours on update
         }
     }
 
@@ -369,56 +369,25 @@ public class TileCalcinator extends TileEE implements IInventory
         }
     }
 
-    public int getCombinedOutputSize()
-    {
-        int result = 0;
-
-        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
-        {
-            result += this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
-        }
-
-        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
-        {
-            result += this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
-        }
-
-        return result;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public byte[] getBlendedDustColour()
-    {
-        if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null && inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
-        {
-            int leftStackColour = inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
-            int rightStackColour = inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
-
-            int stackSizeStepRange = 8;
-            int leftStackSize = inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
-            int rightStackSize = inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
-            byte[][] blendedByteColours = ColourUtils.getByteBlendedColours(ColourUtils.convertIntColourToByteArray(leftStackColour), ColourUtils.convertIntColourToByteArray(rightStackColour), 2 * stackSizeStepRange - 1);
-
-            return blendedByteColours[stackSizeStepRange + (leftStackSize - rightStackSize)];
-        }
-        else if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
-        {
-            return ColourUtils.convertIntColourToByteArray(inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1));
-        }
-        else if (inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
-        {
-            return ColourUtils.convertIntColourToByteArray(inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1));
-        }
-        else
-        {
-            return new byte[]{(byte) 255, (byte) 255, (byte) 255};
-        }
-    }
-
     @Override
     public Packet getDescriptionPacket()
     {
-        byte[] colourChannels = getBlendedDustColour();
-        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getCombinedOutputSize(), colourChannels[0], colourChannels[1], colourChannels[2]));
+        int leftStackSize = 0;
+        int leftStackColour = Integer.parseInt(Colours.PURE_WHITE, 16);
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
+        {
+            leftStackSize = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
+            leftStackColour = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
+        }
+
+        int rightStackSize = 0;
+        int rightStackColour = Integer.parseInt(Colours.PURE_WHITE, 16);
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        {
+            rightStackSize = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
+            rightStackColour = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
+        }
+
+        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, leftStackSize, leftStackColour, rightStackSize, rightStackColour));
     }
 }
