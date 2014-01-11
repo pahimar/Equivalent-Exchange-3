@@ -15,7 +15,6 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  */
 public class PacketHandler implements IPacketHandler
 {
-
     /**
      * Handles Packet250CustomPayload packets that are registered to an Equivalent Exchange 3 network channel
      *
@@ -29,7 +28,6 @@ public class PacketHandler implements IPacketHandler
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
     {
-
         // Build a PacketEE object from the data contained within the Packet250CustomPayload packet
         PacketEE packetEE = PacketTypeHandler.buildPacket(packet.data);
 

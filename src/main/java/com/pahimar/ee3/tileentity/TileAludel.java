@@ -19,7 +19,6 @@ import net.minecraft.network.packet.Packet;
  */
 public class TileAludel extends TileEE implements IInventory
 {
-
     /**
      * The ItemStacks that hold the items currently being used in the Aludel
      */
@@ -32,9 +31,12 @@ public class TileAludel extends TileEE implements IInventory
     public static final int DUST_INVENTORY_INDEX = 2;
     public static final int OUTPUT_INVENTORY_INDEX = 3;
 
+    public int deviceCookTime;              // How much longer the Aludel will cook
+    public int fuelBurnTime;                // The fuel value for the currently burning fuel
+    public int itemCookTime;                // How long the current item has been "cooking"
+
     public TileAludel()
     {
-
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
@@ -48,14 +50,12 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
-
         return inventory[slotIndex];
     }
 
     @Override
     public ItemStack decrStackSize(int slotIndex, int decrementAmount)
     {
-
         ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null)
         {
@@ -79,7 +79,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlotOnClosing(int slotIndex)
     {
-
         ItemStack itemStack = getStackInSlot(slotIndex);
         if (itemStack != null)
         {
@@ -91,7 +90,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
     {
-
         inventory[slotIndex] = itemStack;
         if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
         {
@@ -102,33 +100,30 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public String getInvName()
     {
-
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALUDEL_NAME;
     }
 
     @Override
     public int getInventoryStackLimit()
     {
-
         return 64;
     }
 
     @Override
     public void openChest()
     {
-
+        // NOOP
     }
 
     @Override
     public void closeChest()
     {
-
+        // NOOP
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
@@ -148,7 +143,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-
         super.writeToNBT(nbtTagCompound);
 
         // Write the ItemStacks in the inventory to NBT
@@ -169,21 +163,18 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public boolean isInvNameLocalized()
     {
-
         return this.hasCustomName();
     }
 
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-
         return true;
     }
 
     @Override
     public Packet getDescriptionPacket()
     {
-
         ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
 
         if (itemStack != null && itemStack.stackSize > 0)
@@ -199,7 +190,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public void onInventoryChanged()
     {
-
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
         if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
@@ -211,7 +201,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public String toString()
     {
-
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(super.toString());

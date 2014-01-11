@@ -50,7 +50,7 @@ public class GuiCalcinator extends GuiContainer
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
         int scaleAdjustment;
 
-        if (this.tileCalcinator.isBurning())
+        if (this.tileCalcinator.getState() == 1)
         {
             scaleAdjustment = this.tileCalcinator.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(xStart + 57, yStart + 36 + 23 - scaleAdjustment, 176, 12 - scaleAdjustment, 14, scaleAdjustment + 2);

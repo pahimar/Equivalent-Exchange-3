@@ -19,7 +19,6 @@ import java.io.IOException;
  */
 public class PacketTileUpdate extends PacketEE
 {
-
     public int x, y, z;
     public byte orientation;
     public byte state;
@@ -27,13 +26,11 @@ public class PacketTileUpdate extends PacketEE
 
     public PacketTileUpdate()
     {
-
         super(PacketTypeHandler.TILE, true);
     }
 
     public PacketTileUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName)
     {
-
         super(PacketTypeHandler.TILE, true);
         this.x = x;
         this.y = y;
@@ -46,7 +43,6 @@ public class PacketTileUpdate extends PacketEE
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
-
         data.writeInt(x);
         data.writeInt(y);
         data.writeInt(z);
@@ -58,7 +54,6 @@ public class PacketTileUpdate extends PacketEE
     @Override
     public void readData(DataInputStream data) throws IOException
     {
-
         x = data.readInt();
         y = data.readInt();
         z = data.readInt();

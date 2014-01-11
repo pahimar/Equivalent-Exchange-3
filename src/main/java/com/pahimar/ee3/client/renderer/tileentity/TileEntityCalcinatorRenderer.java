@@ -42,7 +42,14 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             GL11.glRotatef(-90F, 1F, 0F, 0F);
 
             // Bind texture
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
+            if (tileCalcinator.getState() == 1)
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR_ACTIVE);
+            }
+            else
+            {
+                FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR_IDLE);
+            }
 
             // Render
             modelCalcinator.renderPart("Calcinator");

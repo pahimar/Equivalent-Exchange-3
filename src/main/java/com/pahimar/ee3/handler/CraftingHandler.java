@@ -35,8 +35,6 @@ public class CraftingHandler implements ICraftingHandler
         RecipesVanilla.init();
         RecipesTransmutationStones.init();
         RecipesAludel.getInstance();
-
-        RecipesAludel.getInstance().debugDumpMap();
     }
 
     @Override

@@ -127,7 +127,7 @@ public class ContainerCalcinator extends Container
     public void addCraftingToCrafters(ICrafting iCrafting)
     {
         super.addCraftingToCrafters(iCrafting);
-        iCrafting.sendProgressBarUpdate(this, 0, this.calcinator.calcinatorCookTime);
+        iCrafting.sendProgressBarUpdate(this, 0, this.calcinator.deviceCookTime);
         iCrafting.sendProgressBarUpdate(this, 1, this.calcinator.fuelBurnTime);
         iCrafting.sendProgressBarUpdate(this, 2, this.calcinator.itemCookTime);
     }
@@ -141,9 +141,9 @@ public class ContainerCalcinator extends Container
         {
             ICrafting icrafting = (ICrafting) this.crafters.get(i);
 
-            if (this.lastCookTime != this.calcinator.calcinatorCookTime)
+            if (this.lastCookTime != this.calcinator.deviceCookTime)
             {
-                icrafting.sendProgressBarUpdate(this, 0, this.calcinator.calcinatorCookTime);
+                icrafting.sendProgressBarUpdate(this, 0, this.calcinator.deviceCookTime);
             }
 
             if (this.lastBurnTime != this.calcinator.fuelBurnTime)
@@ -157,7 +157,7 @@ public class ContainerCalcinator extends Container
             }
         }
 
-        this.lastCookTime = this.calcinator.calcinatorCookTime;
+        this.lastCookTime = this.calcinator.deviceCookTime;
         this.lastBurnTime = this.calcinator.fuelBurnTime;
         this.lastItemCookTime = this.calcinator.itemCookTime;
     }
@@ -167,7 +167,7 @@ public class ContainerCalcinator extends Container
     {
         if (valueType == 0)
         {
-            this.calcinator.calcinatorCookTime = updatedValue;
+            this.calcinator.deviceCookTime = updatedValue;
         }
 
         if (valueType == 1)

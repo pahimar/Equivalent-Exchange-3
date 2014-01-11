@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class PacketTileWithItemUpdate extends PacketEE
 {
-
     public int x, y, z;
     public byte orientation;
     public byte state;
@@ -21,13 +20,11 @@ public class PacketTileWithItemUpdate extends PacketEE
 
     public PacketTileWithItemUpdate()
     {
-
         super(PacketTypeHandler.TILE_WITH_ITEM, true);
     }
 
     public PacketTileWithItemUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color)
     {
-
         super(PacketTypeHandler.TILE_WITH_ITEM, true);
         this.x = x;
         this.y = y;
@@ -44,7 +41,6 @@ public class PacketTileWithItemUpdate extends PacketEE
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
-
         data.writeInt(x);
         data.writeInt(y);
         data.writeInt(z);
@@ -60,7 +56,6 @@ public class PacketTileWithItemUpdate extends PacketEE
     @Override
     public void readData(DataInputStream data) throws IOException
     {
-
         x = data.readInt();
         y = data.readInt();
         z = data.readInt();
@@ -76,7 +71,6 @@ public class PacketTileWithItemUpdate extends PacketEE
     @Override
     public void execute(INetworkManager manager, Player player)
     {
-
         EquivalentExchange3.proxy.handleTileWithItemPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, itemID, metaData, stackSize, color);
     }
 }

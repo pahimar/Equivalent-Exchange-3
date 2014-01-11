@@ -32,9 +32,12 @@ public class TileCalcinator extends TileEE implements IInventory
     public static final int OUTPUT_LEFT_INVENTORY_INDEX = 2;
     public static final int OUTPUT_RIGHT_INVENTORY_INDEX = 3;
 
-    public int calcinatorCookTime;          // How much longer the Calcinator will cook
+    public int deviceCookTime;              // How much longer the Calcinator will cook
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
+
+    public String dustColour;
+    public int dustPileSize;
 
     public TileCalcinator()
     {
@@ -116,6 +119,20 @@ public class TileCalcinator extends TileEE implements IInventory
     }
 
     @Override
+    public boolean receiveClientEvent(int eventId, int eventData)
+    {
+        if (eventId == 1)
+        {
+            this.state = (byte) eventData;
+            return true;
+        }
+        else
+        {
+            return super.receiveClientEvent(eventId, eventData);
+        }
+    }
+
+    @Override
     public void openChest()
     {
 
@@ -181,24 +198,27 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public void updateEntity()
     {
-        boolean isBurning = this.calcinatorCookTime > 0;
+        boolean isBurning = this.deviceCookTime > 0;
+        this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
         boolean inventoryChanged = false;
 
         // If the Calcinator still has burn time, decrement it
-        if (this.calcinatorCookTime > 0)
+        if (this.deviceCookTime > 0)
         {
-            this.calcinatorCookTime--;
+            this.deviceCookTime--;
         }
+
+        // TODO Make this less network spammy
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
 
         if (!this.worldObj.isRemote)
         {
-            if (this.calcinatorCookTime == 0 && this.canCalcinate())
+            if (this.deviceCookTime == 0 && this.canCalcinate())
             {
                 // TODO Effect burn speed by fuel quality
-                // TODO Notify the client that we are still burning
-                this.fuelBurnTime = this.calcinatorCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
+                this.fuelBurnTime = this.deviceCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
 
-                if (this.calcinatorCookTime > 0)
+                if (this.deviceCookTime > 0)
                 {
                     inventoryChanged = true;
 
@@ -214,7 +234,7 @@ public class TileCalcinator extends TileEE implements IInventory
                 }
             }
 
-            if (this.isBurning() && this.canCalcinate())
+            if (this.deviceCookTime > 0 && this.canCalcinate())
             {
                 this.itemCookTime++;
 
@@ -230,10 +250,9 @@ public class TileCalcinator extends TileEE implements IInventory
                 this.itemCookTime = 0;
             }
 
-            if (isBurning != this.calcinatorCookTime > 0)
+            if (isBurning != this.deviceCookTime > 0)
             {
                 inventoryChanged = true;
-                // TODO Add in world effects to show that we are making dust
             }
         }
 
@@ -241,11 +260,6 @@ public class TileCalcinator extends TileEE implements IInventory
         {
             this.onInventoryChanged();
         }
-    }
-
-    public boolean isBurning()
-    {
-        return this.calcinatorCookTime > 0;
     }
 
     @SideOnly(Side.CLIENT)
@@ -262,7 +276,7 @@ public class TileCalcinator extends TileEE implements IInventory
             this.itemCookTime = 200;
         }
 
-        return this.calcinatorCookTime * scale / this.fuelBurnTime;
+        return this.deviceCookTime * scale / this.fuelBurnTime;
     }
 
     /**

@@ -29,13 +29,11 @@ public enum PacketTypeHandler
 
     PacketTypeHandler(Class<? extends PacketEE> clazz)
     {
-
         this.clazz = clazz;
     }
 
     public static PacketEE buildPacket(byte[] data)
     {
-
         ByteArrayInputStream bis = new ByteArrayInputStream(data);
         int selector = bis.read();
         DataInputStream dis = new DataInputStream(bis);
@@ -58,7 +56,6 @@ public enum PacketTypeHandler
 
     public static PacketEE buildPacket(PacketTypeHandler type)
     {
-
         PacketEE packet = null;
 
         try
@@ -75,7 +72,6 @@ public enum PacketTypeHandler
 
     public static Packet populatePacket(PacketEE packetEE)
     {
-
         byte[] data = packetEE.populate();
 
         Packet250CustomPayload packet250 = new Packet250CustomPayload();
