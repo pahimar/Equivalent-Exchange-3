@@ -1,7 +1,9 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.client.helper.ColourUtils;
+import com.pahimar.ee3.helper.ColourUtils;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileCalcinator;
 import com.pahimar.ee3.recipe.CalcinationManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
@@ -36,8 +39,8 @@ public class TileCalcinator extends TileEE implements IInventory
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
 
-    public String dustColour;
-    public int dustPileSize;
+    public int dustStackSize;
+    public byte dustColourRedChannel, dustColourGreenChannel, dustColourBlueChannel;
 
     public TileCalcinator()
     {
@@ -199,8 +202,7 @@ public class TileCalcinator extends TileEE implements IInventory
     public void updateEntity()
     {
         boolean isBurning = this.deviceCookTime > 0;
-        this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
-        boolean inventoryChanged = false;
+        boolean sendUpdate = false;
 
         // If the Calcinator still has burn time, decrement it
         if (this.deviceCookTime > 0)
@@ -208,11 +210,9 @@ public class TileCalcinator extends TileEE implements IInventory
             this.deviceCookTime--;
         }
 
-        // TODO Make this less network spammy
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-
         if (!this.worldObj.isRemote)
         {
+            // Start "cooking" a new item, if we can
             if (this.deviceCookTime == 0 && this.canCalcinate())
             {
                 // TODO Effect burn speed by fuel quality
@@ -220,7 +220,7 @@ public class TileCalcinator extends TileEE implements IInventory
 
                 if (this.deviceCookTime > 0)
                 {
-                    inventoryChanged = true;
+                    sendUpdate = true;
 
                     if (this.inventory[FUEL_INVENTORY_INDEX] != null)
                     {
@@ -234,6 +234,7 @@ public class TileCalcinator extends TileEE implements IInventory
                 }
             }
 
+            // Continue "cooking" the same item, if we can
             if (this.deviceCookTime > 0 && this.canCalcinate())
             {
                 this.itemCookTime++;
@@ -242,7 +243,7 @@ public class TileCalcinator extends TileEE implements IInventory
                 {
                     this.itemCookTime = 0;
                     this.calcinateItem();
-                    inventoryChanged = true;
+                    sendUpdate = true;
                 }
             }
             else
@@ -250,15 +251,18 @@ public class TileCalcinator extends TileEE implements IInventory
                 this.itemCookTime = 0;
             }
 
+            // If the state has changed, catch that something changed
             if (isBurning != this.deviceCookTime > 0)
             {
-                inventoryChanged = true;
+                sendUpdate = true;
             }
         }
 
-        if (inventoryChanged)
+        if (sendUpdate)
         {
             this.onInventoryChanged();
+            this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
         }
     }
 
@@ -383,7 +387,7 @@ public class TileCalcinator extends TileEE implements IInventory
     }
 
     @SideOnly(Side.CLIENT)
-    public float[] getBlendedDustColour()
+    public byte[] getBlendedDustColour()
     {
         if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null && inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
         {
@@ -393,21 +397,28 @@ public class TileCalcinator extends TileEE implements IInventory
             int stackSizeStepRange = 8;
             int leftStackSize = inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
             int rightStackSize = inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize / stackSizeStepRange;
-            float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 2 * stackSizeStepRange - 1);
+            byte[][] blendedByteColours = ColourUtils.getByteBlendedColours(ColourUtils.convertIntColourToByteArray(leftStackColour), ColourUtils.convertIntColourToByteArray(rightStackColour), 2 * stackSizeStepRange - 1);
 
-            return blendedColours[stackSizeStepRange + (leftStackSize - rightStackSize)];
+            return blendedByteColours[stackSizeStepRange + (leftStackSize - rightStackSize)];
         }
         else if (inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
         {
-            return ColourUtils.convertIntColourToFloatArray(inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1));
+            return ColourUtils.convertIntColourToByteArray(inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1));
         }
         else if (inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
         {
-            return ColourUtils.convertIntColourToFloatArray(inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1));
+            return ColourUtils.convertIntColourToByteArray(inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1));
         }
         else
         {
-            return new float[]{1F, 1F, 1F};
+            return new byte[]{(byte) 255, (byte) 255, (byte) 255};
         }
+    }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        byte[] colourChannels = getBlendedDustColour();
+        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getCombinedOutputSize(), colourChannels[0], colourChannels[1], colourChannels[2]));
     }
 }

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.model.ModelCalcinator;
+import com.pahimar.ee3.helper.ColourUtils;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -54,7 +55,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            if (tileCalcinator.getCombinedOutputSize() > 0)
+            if (tileCalcinator.dustStackSize > 0)
             {
                 GL11.glPushMatrix();
 
@@ -62,15 +63,15 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-                float[] dustColour = tileCalcinator.getBlendedDustColour();
+                float[] dustColour = ColourUtils.convertByteArrayToFloatArray(new byte[]{tileCalcinator.dustColourRedChannel, tileCalcinator.dustColourGreenChannel, tileCalcinator.dustColourBlueChannel});
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 
-                if (tileCalcinator.getCombinedOutputSize() <= 32)
+                if (tileCalcinator.dustStackSize <= 32)
                 {
                     GL11.glScalef(0.25F, 0.25F, 0.25F);
                     GL11.glTranslatef(0.0F, 2.20F, -2.1125F);
                 }
-                else if (tileCalcinator.getCombinedOutputSize() <= 64)
+                else if (tileCalcinator.dustStackSize <= 64)
                 {
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
                     GL11.glTranslatef(-0.0125F, 0.75F, -0.7125F);

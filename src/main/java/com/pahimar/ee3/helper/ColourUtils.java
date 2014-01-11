@@ -1,4 +1,4 @@
-package com.pahimar.ee3.client.helper;
+package com.pahimar.ee3.helper;
 
 import java.util.regex.Pattern;
 
@@ -41,6 +41,17 @@ public class ColourUtils
         colourFloatArray[0] = (float) (intColour >> 16 & 255) / 255F;
         colourFloatArray[1] = (float) (intColour >> 8 & 255) / 255F;
         colourFloatArray[2] = (float) (intColour & 255) / 255F;
+
+        return colourFloatArray;
+    }
+
+    public static float[] convertByteArrayToFloatArray(byte[] byteArray)
+    {
+        float[] colourFloatArray = new float[3];
+
+        colourFloatArray[0] = (float) byteArray[0] / 255F;
+        colourFloatArray[1] = (float) byteArray[1] / 255F;
+        colourFloatArray[2] = (float) byteArray[2] / 255F;
 
         return colourFloatArray;
     }

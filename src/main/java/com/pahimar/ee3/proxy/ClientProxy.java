@@ -134,32 +134,45 @@ public class ClientProxy extends CommonProxy
 
         this.handleTileEntityPacket(x, y, z, orientation, state, customName);
 
-        if (tileEntity != null)
+        if (tileEntity instanceof TileGlassBell)
         {
-            if (tileEntity instanceof TileGlassBell)
+            ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+            if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
             {
-
-                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-                if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
-                {
-                    ItemHelper.setColor(itemStack, color);
-                }
-
-                ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
-                world.updateAllLightTypes(x, y, z);
+                ItemHelper.setColor(itemStack, color);
             }
-            else if (tileEntity instanceof TileAludel)
+
+            ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
+            world.updateAllLightTypes(x, y, z);
+        }
+        else if (tileEntity instanceof TileAludel)
+        {
+            ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
+            if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
             {
-
-                ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-                if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
-                {
-                    ItemHelper.setColor(itemStack, color);
-                }
-
-                ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
-                world.updateAllLightTypes(x, y, z);
+                ItemHelper.setColor(itemStack, color);
             }
+
+            ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
+            world.updateAllLightTypes(x, y, z);
+        }
+    }
+
+    @Override
+    public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int dustStackSize, byte redChannel, byte greenChannel, byte blueChannel)
+    {
+        World world = FMLClientHandler.instance().getClient().theWorld;
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+        this.handleTileEntityPacket(x, y, z, orientation, state, customName);
+
+        if (tileEntity instanceof TileCalcinator)
+        {
+            ((TileCalcinator) tileEntity).dustStackSize = dustStackSize;
+            ((TileCalcinator) tileEntity).dustColourRedChannel = redChannel;
+            ((TileCalcinator) tileEntity).dustColourGreenChannel = greenChannel;
+            ((TileCalcinator) tileEntity).dustColourBlueChannel = blueChannel;
+            world.updateAllLightTypes(x, y, z);
         }
     }
 

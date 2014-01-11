@@ -10,34 +10,33 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * PacketTileUpdate
- *
- * @author pahimar
- */
-public class PacketTileUpdate extends PacketEE
+public class PacketTileCalcinator extends PacketEE
 {
     public int x, y, z;
     public byte orientation;
     public byte state;
     public String customName;
+    public int dustStackSize;
+    public byte redChannel, greenChannel, blueChannel;
 
-    public PacketTileUpdate()
+    public PacketTileCalcinator()
     {
-        super(PacketTypeHandler.TILE, true);
+        super(PacketTypeHandler.TILE_CALCINATOR, true);
     }
 
-    public PacketTileUpdate(int x, int y, int z, ForgeDirection orientation, byte state, String customName)
+    public PacketTileCalcinator(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int dustStackSize, byte redChannel, byte greenChannel, byte blueChannel)
     {
-        super(PacketTypeHandler.TILE, true);
+        super(PacketTypeHandler.TILE_CALCINATOR, true);
         this.x = x;
         this.y = y;
         this.z = z;
         this.orientation = (byte) orientation.ordinal();
         this.state = state;
         this.customName = customName;
+        this.dustStackSize = dustStackSize;
+        this.redChannel = redChannel;
+        this.greenChannel = greenChannel;
+        this.blueChannel = blueChannel;
     }
 
     @Override
@@ -49,6 +48,10 @@ public class PacketTileUpdate extends PacketEE
         data.writeByte(orientation);
         data.writeByte(state);
         data.writeUTF(customName);
+        data.writeInt(dustStackSize);
+        data.writeByte(redChannel);
+        data.writeByte(greenChannel);
+        data.writeByte(blueChannel);
     }
 
     @Override
@@ -60,11 +63,15 @@ public class PacketTileUpdate extends PacketEE
         orientation = data.readByte();
         state = data.readByte();
         customName = data.readUTF();
+        dustStackSize = data.readInt();
+        redChannel = data.readByte();
+        greenChannel = data.readByte();
+        blueChannel = data.readByte();
     }
 
     @Override
     public void execute(INetworkManager manager, Player player)
     {
-        EquivalentExchange3.proxy.handleTileEntityPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName);
+        EquivalentExchange3.proxy.handleTileCalcinatorPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, dustStackSize, redChannel, greenChannel, blueChannel);
     }
 }
