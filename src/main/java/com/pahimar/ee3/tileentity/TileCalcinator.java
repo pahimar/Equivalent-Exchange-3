@@ -195,7 +195,9 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+        if (slotIndex == OUTPUT_LEFT_INVENTORY_INDEX || slotIndex == OUTPUT_RIGHT_INVENTORY_INDEX || slotIndex == FUEL_INVENTORY_INDEX)return false;
+        if (true);
+    	return true;
     }
 
     @Override
