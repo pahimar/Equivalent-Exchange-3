@@ -1,15 +1,20 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+
+import org.lwjgl.opengl.GL11;
+
 import com.pahimar.ee3.client.helper.ColourUtils;
 import com.pahimar.ee3.client.model.ModelCalcinator;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Equivalent-Exchange-3
@@ -27,6 +32,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
     private final ModelCalcinator modelCalcinator = new ModelCalcinator();
 
     @Override
+    // TODO Fix bug: https://github.com/pahimar/Equivalent-Exchange-3/issues/573
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
         if (tileEntity instanceof TileCalcinator)
@@ -65,7 +71,12 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-                float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, tileCalcinator.leftStackColour, tileCalcinator.rightStackSize, tileCalcinator.rightStackColour);
+                ItemStack dustLeft = tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_LEFT_INVENTORY_INDEX);
+                int dustLeftColour = dustLeft != null && tileCalcinator.leftStackItemID > 0 ? Item.itemsList[tileCalcinator.leftStackItemID].getColorFromItemStack(dustLeft, 1) : 16777215;
+                ItemStack dustRight = tileCalcinator.getStackInSlot(TileCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX);
+                int dustRightColour = dustRight != null && tileCalcinator.rightStackItemID > 0 ? Item.itemsList[tileCalcinator.rightStackItemID].getColorFromItemStack(dustRight, 1) : 16777215;
+                float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, dustLeftColour, tileCalcinator.rightStackSize, dustRightColour);
+
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 
                 if (dustStackSize <= 32)
@@ -103,7 +114,14 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
 
             float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 2 * stackSizeStepRange - 1);
 
-            return blendedColours[stackSizeStepRange + (factoredLeftStackSize - factoredRightStackSize)];
+            if (blendedColours != null)
+            {
+                return blendedColours[stackSizeStepRange + (factoredLeftStackSize - factoredRightStackSize)];
+            }
+            else
+            {
+                return new float[]{1F, 1F, 1F};
+            }
         }
         else if (leftStackSize > 0)
         {
