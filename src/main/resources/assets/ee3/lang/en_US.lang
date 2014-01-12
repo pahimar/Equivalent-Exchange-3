@@ -28,9 +28,9 @@ tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis Fuel Block
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk
-tile.ee3:glassBell.name=Glass Bell [WIP]
+tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station [WIP]
-tile.ee3:infusedCloth.name=Infused Cloth [WIP]
+tile.ee3:infusedCloth.name=Infused Cloth
 tile.ee3:infusedWood.name=Infused Wood
 tile.ee3:infusedPlanks.name=Infused Wood Planks
 
@@ -39,7 +39,7 @@ container.ee3:alchemicalBag=Alchemical Bag [WIP]
 container.ee3:alchemicalChest=Alchemical Chest [WIP]
 container.ee3:aludel=Aludel [WIP]
 container.ee3:calcinator=Calcinator
-container.ee3:glassBell=Glass Bell [WIP]
+container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station [WIP]
 
 # Command localizations

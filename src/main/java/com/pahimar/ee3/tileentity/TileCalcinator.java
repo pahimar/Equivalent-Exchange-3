@@ -226,7 +226,6 @@ public class TileCalcinator extends TileEE implements IInventory
     }
 
     @Override
-    // TODO BUG: When Calcinator begins burning at night, client doesn't immediately reflect that the light level has changed
     public void updateEntity()
     {
         boolean isBurning = this.deviceCookTime > 0;

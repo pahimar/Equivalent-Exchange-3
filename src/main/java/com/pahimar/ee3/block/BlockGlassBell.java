@@ -176,7 +176,6 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
 
         if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell)
         {
-
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
 
             if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
