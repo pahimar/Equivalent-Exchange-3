@@ -16,6 +16,7 @@ public class Colours
     public static final String DUST_VERDANT = "45CC39";
     public static final String DUST_AZURE = "35A6DE";
     public static final String DUST_MINIUM = "FF4545";
+    public static final String[] DUST_COLOURS = new String[]{DUST_ASH, DUST_VERDANT, DUST_AZURE, DUST_MINIUM};
 
     // Infused Planks
     public static final String INFUSED_PLANKS_VERDANT = "3D822A";

@@ -66,6 +66,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
                 float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, tileCalcinator.leftStackColour, tileCalcinator.rightStackSize, tileCalcinator.rightStackColour);
+
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 
                 if (dustStackSize <= 32)
@@ -103,7 +104,14 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
 
             float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 2 * stackSizeStepRange - 1);
 
-            return blendedColours[stackSizeStepRange + (factoredLeftStackSize - factoredRightStackSize)];
+            if (blendedColours != null)
+            {
+                return blendedColours[stackSizeStepRange + (factoredLeftStackSize - factoredRightStackSize)];
+            }
+            else
+            {
+                return new float[]{1F, 1F, 1F};
+            }
         }
         else if (leftStackSize > 0)
         {

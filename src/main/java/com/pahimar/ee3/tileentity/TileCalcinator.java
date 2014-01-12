@@ -1,5 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.MathHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -61,6 +63,7 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
+        sendDustPileData();
         return inventory[slotIndex];
     }
 
@@ -289,10 +292,7 @@ public class TileCalcinator extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackColour());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackColour());
+            sendDustPileData();
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
@@ -420,10 +420,15 @@ public class TileCalcinator extends TileEE implements IInventory
     {
         if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
         {
-            return this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
+            ItemStack itemStack = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX];
+
+            if (itemStack.getItem() instanceof ItemAlchemicalDust)
+            {
+                return Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
+            }
         }
 
-        return Integer.parseInt(Colours.PURE_WHITE, 16);
+        return 16777215;
     }
 
     private int getRightStackSize()
@@ -440,9 +445,22 @@ public class TileCalcinator extends TileEE implements IInventory
     {
         if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
         {
-            return this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
+            ItemStack itemStack = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX];
+
+            if (itemStack.getItem() instanceof ItemAlchemicalDust)
+            {
+                return Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
+            }
         }
 
-        return Integer.parseInt(Colours.PURE_WHITE, 16);
+        return 16777215;
+    }
+
+    private void sendDustPileData()
+    {
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackColour());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackColour());
     }
 }

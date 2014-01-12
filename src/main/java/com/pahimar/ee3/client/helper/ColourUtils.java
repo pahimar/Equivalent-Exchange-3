@@ -1,11 +1,7 @@
 package com.pahimar.ee3.client.helper;
 
-import java.util.regex.Pattern;
-
 public class ColourUtils
 {
-    private static final Pattern HEX_COLOUR_PATTERN = Pattern.compile("[0-9a-fA-F]{6}");
-
     public static byte[] convertIntColourToByteArray(int intColour)
     {
         byte[] colourByteArray = new byte[3];
@@ -21,9 +17,9 @@ public class ColourUtils
     {
         float[] colourFloatArray = new float[3];
 
-        colourFloatArray[0] = (float) (intColour >> 16 & 255) / 255F;
-        colourFloatArray[1] = (float) (intColour >> 8 & 255) / 255F;
-        colourFloatArray[2] = (float) (intColour & 255) / 255F;
+        colourFloatArray[0] = ((intColour >> 16 & 0xFF) / 255F);
+        colourFloatArray[1] = ((intColour >> 8 & 0xFF) / 255F);
+        colourFloatArray[2] = ((intColour & 0xFF) / 255F);
 
         return colourFloatArray;
     }
