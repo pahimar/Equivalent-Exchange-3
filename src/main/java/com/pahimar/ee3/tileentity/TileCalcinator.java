@@ -39,8 +39,7 @@ public class TileCalcinator extends TileEE implements IInventory
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
 
-    public int leftStackSize, leftStackColour;
-    public int rightStackSize, rightStackColour;
+    public int leftStackSize, leftStackColour, rightStackSize, rightStackColour;
 
     public TileCalcinator()
     {
@@ -129,6 +128,26 @@ public class TileCalcinator extends TileEE implements IInventory
             this.state = (byte) eventData;
             return true;
         }
+        else if (eventId == 2)
+        {
+            this.leftStackSize = eventData;
+            return true;
+        }
+        else if (eventId == 3)
+        {
+            this.leftStackColour = eventData;
+            return true;
+        }
+        else if (eventId == 4)
+        {
+            this.rightStackSize = eventData;
+            return true;
+        }
+        else if (eventId == 5)
+        {
+            this.rightStackColour = eventData;
+            return true;
+        }
         else
         {
             return super.receiveClientEvent(eventId, eventData);
@@ -164,6 +183,10 @@ public class TileCalcinator extends TileEE implements IInventory
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
+
+        deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
+        fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
+        itemCookTime = nbtTagCompound.getInteger("itemCookTime");
     }
 
     @Override
@@ -184,6 +207,9 @@ public class TileCalcinator extends TileEE implements IInventory
             }
         }
         nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
+        nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
+        nbtTagCompound.setInteger("itemCookTime", itemCookTime);
     }
 
     @Override
@@ -199,6 +225,7 @@ public class TileCalcinator extends TileEE implements IInventory
     }
 
     @Override
+    // TODO BUG: When Calcinator begins burning at night, client doesn't immediately reflect that the light level has changed
     public void updateEntity()
     {
         boolean isBurning = this.deviceCookTime > 0;
@@ -262,7 +289,11 @@ public class TileCalcinator extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-            // TODO Send stack sizes and colours on update
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackColour());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackColour());
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
 
@@ -372,22 +403,46 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        int leftStackSize = 0;
-        int leftStackColour = Integer.parseInt(Colours.PURE_WHITE, 16);
+        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getLeftStackSize(), getLeftStackColour(), getRightStackSize(), getRightStackColour()));
+    }
+
+    private int getLeftStackSize()
+    {
         if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
         {
-            leftStackSize = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
-            leftStackColour = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
+            return leftStackSize = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
         }
 
-        int rightStackSize = 0;
-        int rightStackColour = Integer.parseInt(Colours.PURE_WHITE, 16);
+        return 0;
+    }
+
+    private int getLeftStackColour()
+    {
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
+        {
+            return this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
+        }
+
+        return Integer.parseInt(Colours.PURE_WHITE, 16);
+    }
+
+    private int getRightStackSize()
+    {
         if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
         {
-            rightStackSize = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
-            rightStackColour = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
+            return leftStackSize = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
         }
 
-        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, leftStackSize, leftStackColour, rightStackSize, rightStackColour));
+        return 0;
+    }
+
+    private int getRightStackColour()
+    {
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        {
+            return this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
+        }
+
+        return Integer.parseInt(Colours.PURE_WHITE, 16);
     }
 }

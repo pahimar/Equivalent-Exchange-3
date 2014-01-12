@@ -54,7 +54,14 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        // TODO Vary light levels depending on whether or not we are calcinating something
+        if (world.getBlockTileEntity(x, y, z) instanceof TileCalcinator)
+        {
+            if (((TileCalcinator) world.getBlockTileEntity(x, y, z)).getState() == 1)
+            {
+                return 15;
+            }
+        }
+
         return super.getLightValue(world, x, y, z);
     }
 
