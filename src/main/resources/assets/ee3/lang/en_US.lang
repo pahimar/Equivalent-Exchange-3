@@ -22,9 +22,9 @@ item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
-tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemical Coal
-tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Fuel
-tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis Fuel
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemical Coal Block
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Fuel Block
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis Fuel Block
 tile.ee3:aludel.name=Aludel [WIP]
 tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk
