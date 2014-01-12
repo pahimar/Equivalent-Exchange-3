@@ -159,7 +159,7 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int leftStackSize, int leftStackColour, int rightStackSize, int rightStackColour)
+    public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int leftStackSize, int leftStackItemID, int rightStackSize, int rightStackItemID)
     {
         World world = FMLClientHandler.instance().getClient().theWorld;
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
@@ -169,9 +169,9 @@ public class ClientProxy extends CommonProxy
         if (tileEntity instanceof TileCalcinator)
         {
             ((TileCalcinator) tileEntity).leftStackSize = leftStackSize;
-            ((TileCalcinator) tileEntity).leftStackColour = leftStackColour;
+            ((TileCalcinator) tileEntity).leftStackItemID = leftStackItemID;
             ((TileCalcinator) tileEntity).rightStackSize = rightStackSize;
-            ((TileCalcinator) tileEntity).rightStackColour = rightStackColour;
+            ((TileCalcinator) tileEntity).rightStackItemID = rightStackItemID;
             world.updateAllLightTypes(x, y, z);
         }
     }
