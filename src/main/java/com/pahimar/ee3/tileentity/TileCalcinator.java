@@ -1,5 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.MathHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -39,7 +41,7 @@ public class TileCalcinator extends TileEE implements IInventory
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
 
-    public int leftStackSize, leftStackColour, rightStackSize, rightStackColour;
+    public int leftStackSize, leftStackItemID, rightStackSize, rightStackItemID;
 
     public TileCalcinator()
     {
@@ -61,6 +63,7 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public ItemStack getStackInSlot(int slotIndex)
     {
+        sendDustPileData();
         return inventory[slotIndex];
     }
 
@@ -126,6 +129,7 @@ public class TileCalcinator extends TileEE implements IInventory
         if (eventId == 1)
         {
             this.state = (byte) eventData;
+            this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
             return true;
         }
         else if (eventId == 2)
@@ -135,7 +139,7 @@ public class TileCalcinator extends TileEE implements IInventory
         }
         else if (eventId == 3)
         {
-            this.leftStackColour = eventData;
+            this.leftStackItemID = eventData;
             return true;
         }
         else if (eventId == 4)
@@ -145,7 +149,7 @@ public class TileCalcinator extends TileEE implements IInventory
         }
         else if (eventId == 5)
         {
-            this.rightStackColour = eventData;
+            this.rightStackItemID = eventData;
             return true;
         }
         else
@@ -225,7 +229,6 @@ public class TileCalcinator extends TileEE implements IInventory
     }
 
     @Override
-    // TODO BUG: When Calcinator begins burning at night, client doesn't immediately reflect that the light level has changed
     public void updateEntity()
     {
         boolean isBurning = this.deviceCookTime > 0;
@@ -289,10 +292,7 @@ public class TileCalcinator extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackColour());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackColour());
+            sendDustPileData();
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
@@ -403,7 +403,7 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getLeftStackSize(), getLeftStackColour(), getRightStackSize(), getRightStackColour()));
+        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getLeftStackSize(), getLeftStackItemID(), getRightStackSize(), getRightStackItemID()));
     }
 
     private int getLeftStackSize()
@@ -416,14 +416,9 @@ public class TileCalcinator extends TileEE implements IInventory
         return 0;
     }
 
-    private int getLeftStackColour()
+    private int getLeftStackItemID()
     {
-        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
-        {
-            return this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX], 1);
-        }
-
-        return Integer.parseInt(Colours.PURE_WHITE, 16);
+    	return this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null ? inventory[OUTPUT_LEFT_INVENTORY_INDEX].itemID : -1;
     }
 
     private int getRightStackSize()
@@ -436,13 +431,16 @@ public class TileCalcinator extends TileEE implements IInventory
         return 0;
     }
 
-    private int getRightStackColour()
+    private int getRightStackItemID()
     {
-        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
-        {
-            return this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItem().getColorFromItemStack(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX], 1);
-        }
+    	return this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null ? inventory[OUTPUT_RIGHT_INVENTORY_INDEX].itemID : -1;
+    }
 
-        return Integer.parseInt(Colours.PURE_WHITE, 16);
+    private void sendDustPileData()
+    {
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackItemID());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackItemID());
     }
 }
