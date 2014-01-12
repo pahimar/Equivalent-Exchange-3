@@ -126,6 +126,7 @@ public class TileCalcinator extends TileEE implements IInventory
         if (eventId == 1)
         {
             this.state = (byte) eventData;
+            this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
             return true;
         }
         else if (eventId == 2)
