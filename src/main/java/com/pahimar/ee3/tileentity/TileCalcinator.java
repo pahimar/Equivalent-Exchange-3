@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.item.ItemAlchemicalDust;
+import com.pahimar.ee3.helper.ColourUtils;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -41,7 +41,8 @@ public class TileCalcinator extends TileEE implements IInventory
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
 
-    public int leftStackSize, leftStackColour, rightStackSize, rightStackColour;
+    public int dustStackSize;
+    public byte dustRedChannel, dustGreenChannel, dustBlueChannel;
 
     public TileCalcinator()
     {
@@ -134,22 +135,22 @@ public class TileCalcinator extends TileEE implements IInventory
         }
         else if (eventId == 2)
         {
-            this.leftStackSize = eventData;
+            this.dustStackSize = eventData;
             return true;
         }
         else if (eventId == 3)
         {
-            this.leftStackColour = eventData;
+            this.dustRedChannel = (byte) eventData;
             return true;
         }
         else if (eventId == 4)
         {
-            this.rightStackSize = eventData;
+            this.dustGreenChannel = (byte) eventData;
             return true;
         }
         else if (eventId == 5)
         {
-            this.rightStackColour = eventData;
+            this.dustBlueChannel = (byte) eventData;
             return true;
         }
         else
@@ -403,64 +404,74 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getLeftStackSize(), getLeftStackColour(), getRightStackSize(), getRightStackColour()));
+        byte[] blendedColours = getBlendedColour();
+        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, getLeftStackSize() + getRightStackSize(), blendedColours[0], blendedColours[1], blendedColours[2]));
     }
 
     private int getLeftStackSize()
     {
         if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
         {
-            return leftStackSize = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
+            return this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize;
         }
 
         return 0;
-    }
-
-    private int getLeftStackColour()
-    {
-        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] != null)
-        {
-            ItemStack itemStack = this.inventory[OUTPUT_LEFT_INVENTORY_INDEX];
-
-            if (itemStack.getItem() instanceof ItemAlchemicalDust)
-            {
-                return Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
-            }
-        }
-
-        return 16777215;
     }
 
     private int getRightStackSize()
     {
         if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
         {
-            return leftStackSize = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
+            return this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize;
         }
 
         return 0;
     }
 
-    private int getRightStackColour()
+    private byte[] getBlendedColour()
     {
-        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] != null)
+        if (getLeftStackSize() > 0 & getRightStackSize() > 0)
         {
-            ItemStack itemStack = this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX];
+            int stepSize = 8;
+            int factoredLeftStackSize = getLeftStackSize() / stepSize;
+            int factoredRightStackSize = getRightStackSize() / stepSize;
 
-            if (itemStack.getItem() instanceof ItemAlchemicalDust)
+            byte[] leftColours = ColourUtils.convertIntColourToByteArray(Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16));
+            byte[] rightColours = ColourUtils.convertIntColourToByteArray(Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16));
+
+            byte[][] blendedColours = ColourUtils.getByteBlendedColours(leftColours, rightColours, stepSize);
+
+            if (blendedColours != null)
             {
-                return Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(itemStack.getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
+                return blendedColours[stepSize + (factoredLeftStackSize - factoredRightStackSize)];
+            }
+            else
+            {
+                return new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
             }
         }
-
-        return 16777215;
+        else if (getLeftStackSize() > 0)
+        {
+            int stackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
+            return ColourUtils.convertIntColourToByteArray(stackColour);
+        }
+        else if (getRightStackSize() > 0)
+        {
+            int stackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
+            return ColourUtils.convertIntColourToByteArray(stackColour);
+        }
+        else
+        {
+            return new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
+        }
     }
 
     private void sendDustPileData()
     {
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackColour());
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackColour());
+        byte[] blendedColours = getBlendedColour();
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize() + getRightStackSize());
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, blendedColours[0]);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, blendedColours[1]);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, blendedColours[2]);
     }
 }
