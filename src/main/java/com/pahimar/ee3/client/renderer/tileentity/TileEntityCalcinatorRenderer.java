@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.pahimar.ee3.client.model.ModelCalcinator;
 import com.pahimar.ee3.helper.ColourUtils;
-import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
