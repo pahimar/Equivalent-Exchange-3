@@ -64,8 +64,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-//                float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, tileCalcinator.leftStackColour, tileCalcinator.rightStackSize, tileCalcinator.rightStackColour);
-                float[] dustColour = new float[]{(tileCalcinator.dustRedChannel / 255F), (tileCalcinator.dustGreenChannel / 255F), (tileCalcinator.dustBlueChannel / 255F), 1F};
+                float[] dustColour = new float[]{((tileCalcinator.dustRedChannel & 0xFF) / 255F), ((tileCalcinator.dustGreenChannel & 0xFF) / 255F), ((tileCalcinator.dustBlueChannel & 0xFF) / 255F), 1F};
 
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 

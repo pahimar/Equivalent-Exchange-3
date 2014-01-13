@@ -95,14 +95,15 @@ public class RecipesAludel
 
         if (recipeInputPair.isValid())
         {
-            // TODO Check for keys that are similiar but smaller in size than the provided inputs
-            if (aludelRecipes.containsKey(recipeInputPair))
+            for (AludelRecipeInputPair recipeInputs : aludelRecipes.keySet())
             {
-                return aludelRecipes.get(recipeInputPair);
-            }
-            else
-            {
-
+                if (recipeInputPair.equalsIgnoreStackSize(recipeInputPair))
+                {
+                    if (recipeInputPair.inputStack.stackSize >= recipeInputs.inputStack.stackSize && recipeInputPair.dustStack.stackSize >= recipeInputs.dustStack.stackSize)
+                    {
+                        return aludelRecipes.get(recipeInputs);
+                    }
+                }
             }
         }
 
