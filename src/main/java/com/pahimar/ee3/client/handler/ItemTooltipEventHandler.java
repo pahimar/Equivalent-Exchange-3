@@ -1,16 +1,20 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.api.WrappedStack;
-import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.emc.EmcValue;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+
 import org.lwjgl.input.Keyboard;
 
-import java.text.DecimalFormat;
+import com.pahimar.ee3.api.WrappedStack;
+import com.pahimar.ee3.emc.EmcRegistry;
+import com.pahimar.ee3.emc.EmcValue;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -23,6 +27,14 @@ import java.text.DecimalFormat;
 public class ItemTooltipEventHandler
 {
     private static DecimalFormat emcDecimalFormat = new DecimalFormat("#.###");
+    private static DecimalFormatSymbols emcDecimalFormatSymbols = new DecimalFormatSymbols();
+    static {
+    	emcDecimalFormat.setGroupingSize(3);
+    	emcDecimalFormat.setGroupingUsed(true);
+    	emcDecimalFormatSymbols.setDecimalSeparator('.');
+    	emcDecimalFormatSymbols.setGroupingSeparator(',');
+    	emcDecimalFormat.setDecimalFormatSymbols(emcDecimalFormatSymbols);
+    }
 
     @ForgeSubscribe(priority = EventPriority.LOWEST)
     public void handleItemTooltipEvent(ItemTooltipEvent event)
