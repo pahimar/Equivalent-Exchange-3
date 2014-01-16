@@ -44,7 +44,7 @@ public class TransmutationTargetOverlayHandler implements ITickHandler
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
         EntityPlayer player = minecraft.thePlayer;
-        ItemStack currentItemStack = null;
+        ItemStack currentItemStack;
 
         if (type.contains(TickType.RENDER))
         {

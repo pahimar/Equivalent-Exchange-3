@@ -112,7 +112,7 @@ public class ContainerCalcinator extends Container
 
             if (slotItemStack.stackSize == 0)
             {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             }
             else
             {
@@ -137,9 +137,9 @@ public class ContainerCalcinator extends Container
     {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.crafters.size(); ++i)
+        for (Object crafter : this.crafters)
         {
-            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+            ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != this.calcinator.deviceCookTime)
             {

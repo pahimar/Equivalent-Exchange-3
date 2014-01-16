@@ -55,7 +55,7 @@ public class EmcRegistry
                 }
             }
 
-            if (factoredEmcValue != null && factoredKeyStack != null)
+            if (factoredEmcValue != null)
             {
                 if (stackValueMap.containsKey(factoredKeyStack))
                 {
@@ -89,7 +89,7 @@ public class EmcRegistry
                 }
             }
 
-            if (factoredEmcValue != null && factoredKeyStack != null)
+            if (factoredEmcValue != null)
             {
                 if (stackValueMap.containsKey(factoredKeyStack))
                 {
@@ -143,7 +143,7 @@ public class EmcRegistry
                     }
                 }
 
-                if (factoredEmcValue != null && factoredKeyStack != null)
+                if (factoredEmcValue != null)
                 {
                     if (stackValueMap.containsKey(factoredKeyStack))
                     {
@@ -179,7 +179,7 @@ public class EmcRegistry
             }
 
             // Post auto assignment values are meant to override all over values, so we just take the value given
-            if (factoredEmcValue != null && factoredKeyStack != null)
+            if (factoredEmcValue != null)
             {
                 stackValueMap.put(factoredKeyStack, factoredEmcValue);
             }

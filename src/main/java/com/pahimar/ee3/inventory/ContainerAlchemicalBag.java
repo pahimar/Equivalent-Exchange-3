@@ -96,7 +96,7 @@ public class ContainerAlchemicalBag extends Container
 
             if (itemStack.stackSize == 0)
             {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             }
             else
             {

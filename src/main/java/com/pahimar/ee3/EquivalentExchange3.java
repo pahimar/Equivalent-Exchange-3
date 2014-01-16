@@ -48,7 +48,7 @@ public class EquivalentExchange3
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
 
-    public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID(), Reference.MOD_ID);
+    public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID());
 
     @EventHandler
     @SuppressWarnings("unused")

@@ -40,12 +40,12 @@ public class CommandSounds
             }
             else
             {
-                throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE, new Object[0]);
+                throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE, new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_SOUNDS_USAGE);
         }
     }
 

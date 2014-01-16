@@ -14,9 +14,9 @@ import net.minecraft.creativetab.CreativeTabs;
  */
 public class CreativeTabEE3 extends CreativeTabs
 {
-    public CreativeTabEE3(int tabID, String tabLabel)
+    public CreativeTabEE3(int tabID)
     {
-        super(tabID, tabLabel);
+        super(tabID, com.pahimar.ee3.lib.Reference.MOD_ID);
     }
 
     @Override

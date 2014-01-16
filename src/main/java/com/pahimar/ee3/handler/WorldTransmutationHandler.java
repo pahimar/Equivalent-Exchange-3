@@ -37,8 +37,8 @@ public class WorldTransmutationHandler
     public static void handleWorldTransmutation(EntityPlayer thePlayer, int originX, int originY, int originZ, byte rangeX, byte rangeY, byte rangeZ, byte sideHit, String data)
     {
 
-        ActionRequestEvent actionRequestEvent = null;
-        ActionEvent actionEvent = null;
+        ActionRequestEvent actionRequestEvent;
+        ActionEvent actionEvent;
 
         int lowerBoundX = -1 * rangeX / 2;
         int upperBoundX = -1 * lowerBoundX;

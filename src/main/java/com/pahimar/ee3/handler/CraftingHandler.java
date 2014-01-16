@@ -76,7 +76,7 @@ public class CraftingHandler implements ICraftingHandler
             }
         }
 
-        ItemStack itemStack = null;
+        ItemStack itemStack;
         if (openStone != null)
         {
             for (int i = 0; i < craftMatrix.getSizeInventory(); i++)

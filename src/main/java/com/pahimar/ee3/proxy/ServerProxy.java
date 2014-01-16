@@ -70,7 +70,7 @@ public class ServerProxy extends CommonProxy
         // NOOP
     }
 
-    public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int dustStackSize, byte dustRedChannel, byte dustGreenChannel, byte dustBlueChannel)
+    public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, byte leftStackSize, byte leftStackMeta, byte rightStackSize, byte rightStackMeta)
     {
         // NOOP
     }

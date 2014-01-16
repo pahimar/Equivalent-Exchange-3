@@ -158,8 +158,8 @@ public class RecipeHelper
 
         List<WrappedStack> collatedStacks = new ArrayList<WrappedStack>();
 
-        WrappedStack stack = null;
-        boolean found = false;
+        WrappedStack stack;
+        boolean found;
 
         for (Object object : uncollatedStacks)
         {
@@ -178,31 +178,31 @@ public class RecipeHelper
                 else
                 {
 
-                    for (int i = 0; i < collatedStacks.size(); i++)
+                    for (WrappedStack collatedStack : collatedStacks)
                     {
-                        if (collatedStacks.get(i).getWrappedStack() != null)
+                        if (collatedStack.getWrappedStack() != null)
                         {
-                            if (stack.getWrappedStack() instanceof ItemStack && collatedStacks.get(i).getWrappedStack() instanceof ItemStack)
+                            if (stack.getWrappedStack() instanceof ItemStack && collatedStack.getWrappedStack() instanceof ItemStack)
                             {
-                                if (ItemHelper.equals((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStacks.get(i).getWrappedStack()))
+                                if (ItemHelper.equals((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStack.getWrappedStack()))
                                 {
-                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;
                                 }
                             }
-                            else if (stack.getWrappedStack() instanceof OreStack && collatedStacks.get(i).getWrappedStack() instanceof OreStack)
+                            else if (stack.getWrappedStack() instanceof OreStack && collatedStack.getWrappedStack() instanceof OreStack)
                             {
-                                if (OreStack.compareOreNames((OreStack) stack.getWrappedStack(), (OreStack) collatedStacks.get(i).getWrappedStack()))
+                                if (OreStack.compareOreNames((OreStack) stack.getWrappedStack(), (OreStack) collatedStack.getWrappedStack()))
                                 {
-                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;
                                 }
                             }
-                            else if (stack.getWrappedStack() instanceof EnergyStack && collatedStacks.get(i).getWrappedStack() instanceof EnergyStack)
+                            else if (stack.getWrappedStack() instanceof EnergyStack && collatedStack.getWrappedStack() instanceof EnergyStack)
                             {
-                                if (EnergyStack.compareEnergyNames((EnergyStack) stack.getWrappedStack(), (EnergyStack) collatedStacks.get(i).getWrappedStack()))
+                                if (EnergyStack.compareEnergyNames((EnergyStack) stack.getWrappedStack(), (EnergyStack) collatedStack.getWrappedStack()))
                                 {
-                                    collatedStacks.get(i).setStackSize(collatedStacks.get(i).getStackSize() + stack.getStackSize());
+                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;
                                 }
                             }

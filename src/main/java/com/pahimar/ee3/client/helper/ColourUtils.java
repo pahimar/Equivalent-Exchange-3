@@ -1,4 +1,4 @@
-package com.pahimar.ee3.helper;
+package com.pahimar.ee3.client.helper;
 
 public class ColourUtils
 {

@@ -16,15 +16,14 @@ public class PacketTileCalcinator extends PacketEE
     public byte orientation;
     public byte state;
     public String customName;
-    public int dustStackSize;
-    public byte dustRedChannel, dustGreenChannel, dustBlueChannel;
+    public byte leftStackSize, leftStackMeta, rightStackSize, rightStackMeta;
 
     public PacketTileCalcinator()
     {
         super(PacketTypeHandler.TILE_CALCINATOR, true);
     }
 
-    public PacketTileCalcinator(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int dustStackSize, byte dustRedChannel, byte dustGreenChannel, byte dustBlueChannel)
+    public PacketTileCalcinator(int x, int y, int z, ForgeDirection orientation, byte state, String customName, byte leftStackSize, byte leftStackMeta, byte rightStackSize, byte rightStackMeta)
     {
         super(PacketTypeHandler.TILE_CALCINATOR, true);
         this.x = x;
@@ -33,10 +32,10 @@ public class PacketTileCalcinator extends PacketEE
         this.orientation = (byte) orientation.ordinal();
         this.state = state;
         this.customName = customName;
-        this.dustStackSize = dustStackSize;
-        this.dustRedChannel = dustRedChannel;
-        this.dustGreenChannel = dustGreenChannel;
-        this.dustBlueChannel = dustBlueChannel;
+        this.leftStackSize = leftStackSize;
+        this.leftStackMeta = leftStackMeta;
+        this.rightStackSize = rightStackSize;
+        this.rightStackMeta = rightStackMeta;
     }
 
     @Override
@@ -48,10 +47,10 @@ public class PacketTileCalcinator extends PacketEE
         data.writeByte(orientation);
         data.writeByte(state);
         data.writeUTF(customName);
-        data.writeInt(dustStackSize);
-        data.writeByte(dustRedChannel);
-        data.writeByte(dustGreenChannel);
-        data.writeByte(dustBlueChannel);
+        data.writeByte(leftStackSize);
+        data.writeByte(leftStackMeta);
+        data.writeByte(rightStackSize);
+        data.writeByte(rightStackMeta);
     }
 
     @Override
@@ -63,15 +62,15 @@ public class PacketTileCalcinator extends PacketEE
         orientation = data.readByte();
         state = data.readByte();
         customName = data.readUTF();
-        dustStackSize = data.readInt();
-        dustRedChannel = data.readByte();
-        dustGreenChannel = data.readByte();
-        dustBlueChannel = data.readByte();
+        leftStackSize = data.readByte();
+        leftStackMeta = data.readByte();
+        rightStackSize = data.readByte();
+        rightStackMeta = data.readByte();
     }
 
     @Override
     public void execute(INetworkManager manager, Player player)
     {
-        EquivalentExchange3.proxy.handleTileCalcinatorPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, dustStackSize, dustRedChannel, dustGreenChannel, dustBlueChannel);
+        EquivalentExchange3.proxy.handleTileCalcinatorPacket(x, y, z, ForgeDirection.getOrientation(orientation), state, customName, leftStackSize, leftStackMeta, rightStackSize, rightStackMeta);
     }
 }

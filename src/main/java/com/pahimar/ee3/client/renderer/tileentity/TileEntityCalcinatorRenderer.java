@@ -1,7 +1,8 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
+import com.pahimar.ee3.client.helper.ColourUtils;
 import com.pahimar.ee3.client.model.ModelCalcinator;
-import com.pahimar.ee3.helper.ColourUtils;
+import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Textures;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -9,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -56,7 +58,9 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            if (tileCalcinator.dustStackSize > 0)
+            int dustStackSize = tileCalcinator.leftStackSize + tileCalcinator.rightStackSize;
+
+            if (dustStackSize > 0)
             {
                 GL11.glPushMatrix();
 
@@ -64,16 +68,16 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-                float[] dustColour = new float[]{((tileCalcinator.dustRedChannel & 0xFF) / 255F), ((tileCalcinator.dustGreenChannel & 0xFF) / 255F), ((tileCalcinator.dustBlueChannel & 0xFF) / 255F), 1F};
+                float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, tileCalcinator.leftStackMeta, tileCalcinator.rightStackSize, tileCalcinator.rightStackMeta);
 
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 
-                if (tileCalcinator.dustStackSize <= 32)
+                if (dustStackSize <= 32)
                 {
                     GL11.glScalef(0.25F, 0.25F, 0.25F);
                     GL11.glTranslatef(0.0F, 2.20F, -2.1125F);
                 }
-                else if (tileCalcinator.dustStackSize <= 64)
+                else if (dustStackSize <= 64)
                 {
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
                     GL11.glTranslatef(-0.0125F, 0.75F, -0.7125F);
@@ -93,36 +97,33 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
         }
     }
 
-    private static float[] getBlendedDustColour(int leftStackSize, int leftStackColour, int rightStackSize, int rightStackColour)
+    private static float[] getBlendedDustColour(int leftStackSize, int leftStackMeta, int rightStackSize, int rightStackMeta)
     {
-        if (leftStackSize > 0 && rightStackSize > 0)
-        {
-            int stackSizeStepRange = 8;
-            int factoredLeftStackSize = leftStackSize / stackSizeStepRange;
-            int factoredRightStackSize = rightStackSize / stackSizeStepRange;
+        int totalDustStacksSize = leftStackSize + rightStackSize;
 
-            float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 2 * stackSizeStepRange - 1);
+        if (totalDustStacksSize > 0)
+        {
+            int leftStackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(leftStackMeta, 0, Colours.DUST_COLOURS.length)], 16);
+            int rightStackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(rightStackMeta, 0, Colours.DUST_COLOURS.length)], 16);
 
-            if (blendedColours != null)
+            float leftStackRatio = leftStackSize * 1f / totalDustStacksSize;
+            float rightStackRatio = rightStackSize * 1f / totalDustStacksSize;
+
+            float[][] blendedColours = ColourUtils.getFloatBlendedColours(leftStackColour, rightStackColour, 32);
+
+            if (blendedColours.length > 0)
             {
-                return blendedColours[stackSizeStepRange + (factoredLeftStackSize - factoredRightStackSize)];
+                if (Float.compare(leftStackRatio, rightStackRatio) > 0)
+                {
+                    return blendedColours[Math.round((1 - leftStackRatio) * (blendedColours.length - 1))];
+                }
+                else
+                {
+                    return blendedColours[Math.round(rightStackRatio * (blendedColours.length - 1))];
+                }
             }
-            else
-            {
-                return new float[]{1F, 1F, 1F};
-            }
         }
-        else if (leftStackSize > 0)
-        {
-            return ColourUtils.convertIntColourToFloatArray(leftStackColour);
-        }
-        else if (rightStackSize > 0)
-        {
-            return ColourUtils.convertIntColourToFloatArray(rightStackColour);
-        }
-        else
-        {
-            return new float[]{1F, 1F, 1F};
-        }
+
+        return new float[]{1F, 1F, 1F};
     }
 }

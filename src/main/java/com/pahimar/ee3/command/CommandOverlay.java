@@ -46,12 +46,12 @@ public class CommandOverlay
             }
             else
             {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_USAGE, new Object[0]);
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_USAGE, new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_USAGE);
         }
     }
 
@@ -82,7 +82,7 @@ public class CommandOverlay
 
                 if (scale <= 0F)
                 {
-                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_SCALE_USAGE});
+                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_SCALE_USAGE);
                 }
                 else
                 {
@@ -93,12 +93,12 @@ public class CommandOverlay
             }
             catch (Exception e)
             {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_SCALE_USAGE});
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_SCALE_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_SCALE_USAGE});
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_SCALE_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_SCALE_USAGE);
         }
     }
 
@@ -113,7 +113,7 @@ public class CommandOverlay
 
                 if (opacity < 0F || opacity > 1F)
                 {
-                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_OPACITY_USAGE});
+                    throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_OPACITY_USAGE);
                 }
                 else
                 {
@@ -124,12 +124,12 @@ public class CommandOverlay
             }
             catch (Exception e)
             {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_OPACITY_USAGE});
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_OPACITY_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, new Object[]{Commands.COMMAND_OVERLAY_OPACITY_USAGE});
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_OPACITY_USAGE_ADDITIONAL_TEXT, Commands.COMMAND_OVERLAY_OPACITY_USAGE);
         }
     }
 
@@ -169,12 +169,12 @@ public class CommandOverlay
             }
             else
             {
-                throw new WrongUsageException(Commands.COMMAND_OVERLAY_POSITION_USAGE, new Object[0]);
+                throw new WrongUsageException(Commands.COMMAND_OVERLAY_POSITION_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_OVERLAY_POSITION_USAGE, new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_OVERLAY_POSITION_USAGE);
         }
     }
 }

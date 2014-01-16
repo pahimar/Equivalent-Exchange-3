@@ -29,7 +29,7 @@ public interface IProxy
 
     public abstract void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color);
 
-    public abstract void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int dustStackSize, byte dustRedChannel, byte dustGreenChannel, byte dustBlueChannel);
+    public abstract void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, byte leftStackSize, byte leftStackMeta, byte rightStackSize, byte rightStackMeta);
 
     public abstract void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit);
 }

@@ -35,12 +35,12 @@ public class CommandVersion
             }
             else
             {
-                throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE, new Object[0]);
+                throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE, new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_VERSION_USAGE);
         }
     }
 

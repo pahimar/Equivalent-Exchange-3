@@ -121,7 +121,7 @@ public class ContainerAludel extends Container
 
             if (slotItemStack.stackSize == 0)
             {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             }
             else
             {

@@ -36,12 +36,12 @@ public class CommandParticles
             }
             else
             {
-                throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE, new Object[0]);
+                throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE);
             }
         }
         else
         {
-            throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE, new Object[0]);
+            throw new WrongUsageException(Commands.COMMAND_PARTICLES_USAGE);
         }
     }
 
