@@ -303,11 +303,6 @@ public class TileCalcinator extends TileEE implements IInventory
     @SideOnly(Side.CLIENT)
     public int getBurnTimeRemainingScaled(int scale)
     {
-        if (this.itemCookTime == 0)
-        {
-            this.itemCookTime = 200;
-        }
-
         return this.deviceCookTime * scale / this.fuelBurnTime;
     }
 
@@ -442,44 +437,6 @@ public class TileCalcinator extends TileEE implements IInventory
 
         return 0;
     }
-
-//    private byte[] getBlendedColour()
-//    {
-//        if (getLeftStackSize() > 0 & getRightStackSize() > 0)
-//        {
-//            int stepSize = 8;
-//            int factoredLeftStackSize = getLeftStackSize() / stepSize;
-//            int factoredRightStackSize = getRightStackSize() / stepSize;
-//
-//            byte[] leftColours = ColourUtils.convertIntColourToByteArray(Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16));
-//            byte[] rightColours = ColourUtils.convertIntColourToByteArray(Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16));
-//
-//            byte[][] blendedColours = ColourUtils.getByteBlendedColours(leftColours, rightColours, stepSize);
-//
-//            if (blendedColours != null)
-//            {
-//                return blendedColours[stepSize + (factoredLeftStackSize - factoredRightStackSize)];
-//            }
-//            else
-//            {
-//                return new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
-//            }
-//        }
-//        else if (getLeftStackSize() > 0)
-//        {
-//            int stackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
-//            return ColourUtils.convertIntColourToByteArray(stackColour);
-//        }
-//        else if (getRightStackSize() > 0)
-//        {
-//            int stackColour = Integer.parseInt(Colours.DUST_COLOURS[MathHelper.clamp_int(this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getItemDamage(), 0, Colours.DUST_COLOURS.length - 1)], 16);
-//            return ColourUtils.convertIntColourToByteArray(stackColour);
-//        }
-//        else
-//        {
-//            return new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
-//        }
-//    }
 
     private void sendDustPileData()
     {
