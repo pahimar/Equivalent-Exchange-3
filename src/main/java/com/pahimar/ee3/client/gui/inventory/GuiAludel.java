@@ -21,12 +21,10 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAludel extends GuiContainer
 {
-
     private TileAludel tileAludel;
 
     public GuiAludel(InventoryPlayer inventoryPlayer, TileAludel tileAludel)
     {
-
         super(new ContainerAludel(inventoryPlayer, tileAludel));
         this.tileAludel = tileAludel;
         xSize = 176;
@@ -36,7 +34,6 @@ public class GuiAludel extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-
         String containerName = tileAludel.isInvNameLocalized() ? tileAludel.getInvName() : StatCollector.translateToLocal(tileAludel.getInvName());
         fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
@@ -45,11 +42,22 @@ public class GuiAludel extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.mc.getTextureManager().bindTexture(Textures.GUI_ALUDEL);
+
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+        int scaleAdjustment;
+
+        if (this.tileAludel.getState() == 1)
+        {
+            scaleAdjustment = this.tileAludel.getBurnTimeRemainingScaled(12);
+            this.drawTexturedModalRect(xStart + 45, yStart + 36 + 34 - scaleAdjustment, 176, 12 - scaleAdjustment, 14, scaleAdjustment + 2);
+        }
+
+        scaleAdjustment = this.tileAludel.getCookProgressScaled(24);
+        this.drawTexturedModalRect(xStart + 76, yStart + 39, 176, 14, scaleAdjustment + 1, 16);
     }
 }

@@ -100,7 +100,6 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 
     private void scaleTranslateRotate(double x, double y, double z, ForgeDirection orientation)
     {
-
         if (orientation == ForgeDirection.NORTH)
         {
             GL11.glTranslated(x + 1, y, z);
@@ -129,7 +128,6 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 
     private float getGhostItemScaleFactor(ItemStack itemStack)
     {
-
         float scaleFactor = 1.0F;
 
         if (itemStack != null)

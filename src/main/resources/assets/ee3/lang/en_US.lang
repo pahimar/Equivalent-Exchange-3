@@ -21,11 +21,11 @@ item.ee3:stoneMinium.name=Minium Stone [WIP]
 item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
+tile.ee3:alchemicalChest.name=Alchemical Chest
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemical Coal Block
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Fuel Block
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis Fuel Block
-tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:aludel.name=Aludel Base
 tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell
@@ -36,8 +36,8 @@ tile.ee3:infusedPlanks.name=Infused Wood Planks
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemical Bag [WIP]
-container.ee3:alchemicalChest=Alchemical Chest [WIP]
-container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemical Chest
+container.ee3:aludel=Aludel
 container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station [WIP]

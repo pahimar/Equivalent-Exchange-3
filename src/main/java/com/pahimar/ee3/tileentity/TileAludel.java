@@ -4,11 +4,16 @@ import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
+import com.pahimar.ee3.recipe.AludelRecipeInputPair;
+import com.pahimar.ee3.recipe.RecipesAludel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
  * Equivalent-Exchange-3
@@ -43,7 +48,6 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public int getSizeInventory()
     {
-
         return inventory.length;
     }
 
@@ -110,6 +114,21 @@ public class TileAludel extends TileEE implements IInventory
     }
 
     @Override
+    public boolean receiveClientEvent(int eventId, int eventData)
+    {
+        if (eventId == 1)
+        {
+            this.state = (byte) eventData;
+            this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
+            return true;
+        }
+        else
+        {
+            return super.receiveClientEvent(eventId, eventData);
+        }
+    }
+
+    @Override
     public void openChest()
     {
         // NOOP
@@ -138,6 +157,10 @@ public class TileAludel extends TileEE implements IInventory
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
+
+        deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
+        fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
+        itemCookTime = nbtTagCompound.getInteger("itemCookTime");
     }
 
     @Override
@@ -158,6 +181,9 @@ public class TileAludel extends TileEE implements IInventory
             }
         }
         nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
+        nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
+        nbtTagCompound.setInteger("itemCookTime", itemCookTime);
     }
 
     @Override
@@ -170,6 +196,145 @@ public class TileAludel extends TileEE implements IInventory
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
         return true;
+    }
+
+    @Override
+    public void updateEntity()
+    {
+        boolean isBurning = this.deviceCookTime > 0;
+        boolean sendUpdate = false;
+
+        // If the Aludel still has burn time, decrement it
+        if (this.deviceCookTime > 0)
+        {
+            this.deviceCookTime--;
+        }
+
+        if (!this.worldObj.isRemote)
+        {
+            // Start "cooking" a new item, if we can
+            if (this.deviceCookTime == 0 && this.canInfuse())
+            {
+                this.fuelBurnTime = this.deviceCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
+
+                if (this.deviceCookTime > 0)
+                {
+                    sendUpdate = true;
+
+                    if (this.inventory[FUEL_INVENTORY_INDEX] != null)
+                    {
+                        --this.inventory[FUEL_INVENTORY_INDEX].stackSize;
+
+                        if (this.inventory[FUEL_INVENTORY_INDEX].stackSize == 0)
+                        {
+                            this.inventory[FUEL_INVENTORY_INDEX] = this.inventory[FUEL_INVENTORY_INDEX].getItem().getContainerItemStack(inventory[FUEL_INVENTORY_INDEX]);
+                        }
+                    }
+                }
+            }
+
+            // Continue "cooking" the same item, if we can
+            if (this.deviceCookTime > 0 && this.canInfuse())
+            {
+                this.itemCookTime++;
+
+                if (this.itemCookTime == 200)
+                {
+                    this.itemCookTime = 0;
+                    this.infuseItem();
+                    sendUpdate = true;
+                }
+            }
+            else
+            {
+                this.itemCookTime = 0;
+            }
+
+            // If the state has changed, catch that something changed
+            if (isBurning != this.deviceCookTime > 0)
+            {
+                sendUpdate = true;
+            }
+        }
+
+        if (sendUpdate)
+        {
+            this.onInventoryChanged();
+            this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int scale)
+    {
+        return this.itemCookTime * scale / 200;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBurnTimeRemainingScaled(int scale)
+    {
+        if (this.fuelBurnTime > 0)
+        {
+            return this.deviceCookTime * scale / this.fuelBurnTime;
+        }
+        return 0;
+    }
+
+    private boolean canInfuse()
+    {
+        if (inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
+        {
+            return false;
+        }
+        else
+        {
+            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+
+            if (infusedItemStack == null)
+            {
+                return false;
+            }
+
+            if (inventory[OUTPUT_INVENTORY_INDEX] == null)
+            {
+                return true;
+            }
+            else
+            {
+                boolean outputEquals = this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack);
+                int mergedOutputStackSize = this.inventory[OUTPUT_INVENTORY_INDEX].stackSize + infusedItemStack.stackSize;
+
+                if (outputEquals)
+                {
+                    return mergedOutputStackSize <= getInventoryStackLimit() && mergedOutputStackSize <= infusedItemStack.getMaxStackSize();
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void infuseItem()
+    {
+        if (this.canInfuse())
+        {
+            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+            AludelRecipeInputPair inputPair = RecipesAludel.getInstance().getRecipeInputs(infusedItemStack);
+
+            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
+            {
+                this.inventory[OUTPUT_INVENTORY_INDEX] = infusedItemStack.copy();
+            }
+            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack))
+            {
+                inventory[OUTPUT_INVENTORY_INDEX].stackSize += infusedItemStack.stackSize;
+            }
+
+            decrStackSize(INPUT_INVENTORY_INDEX, inputPair.inputStack.stackSize);
+            decrStackSize(DUST_INVENTORY_INDEX, inputPair.dustStack.stackSize);
+        }
     }
 
     @Override

@@ -109,12 +109,8 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
             if (((TileCalcinator) world.getBlockTileEntity(x, y, z)).getState() == 1)
             {
                 // Fire pot particles
-                // TODO TileEntity.onClientEvent to update particles
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);
                 world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.4F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
-
-                // Bowl particle effects
-                // TODO Decide if the bowl should have particle effects
             }
         }
     }

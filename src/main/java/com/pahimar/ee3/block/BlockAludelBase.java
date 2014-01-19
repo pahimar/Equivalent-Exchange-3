@@ -2,6 +2,7 @@ package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
+import com.pahimar.ee3.lib.Particles;
 import com.pahimar.ee3.lib.RenderIds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAludel;
@@ -15,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Random;
 
 /**
  * Equivalent-Exchange-3
@@ -57,6 +60,14 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     {
 
         return RenderIds.aludelRender;
+    }
+
+    @Override
+    public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+        super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
+        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        return tileentity != null ? tileentity.receiveClientEvent(par5, par6) : false;
     }
 
     @Override
@@ -126,7 +137,31 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        // TODO Vary light levels depending on if we are burning or not
-        return 0;
+        if (world.getBlockTileEntity(x, y, z) instanceof TileAludel)
+        {
+            if (((TileAludel) world.getBlockTileEntity(x, y, z)).getState() == 1)
+            {
+                return 15;
+            }
+        }
+
+        return super.getLightValue(world, x, y, z);
+    }
+
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    {
+        if (world.getBlockTileEntity(x, y, z) instanceof TileAludel)
+        {
+            if (((TileAludel) world.getBlockTileEntity(x, y, z)).getState() == 1)
+            {
+                world.spawnParticle(Particles.FLAME, (double) x + 0.175F, (double) y + 0.33F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
+
+                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.7F, (double) z + 0.0F, 0.0D, 0.05D, 0.0D);
+                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.7F, (double) z + 1.0F, 0.0D, 0.05D, 0.0D);
+                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.0F, (double) y + 0.7F, (double) z + 0.5F, 0.0D, 0.05D, 0.0D);
+                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 1.0F, (double) y + 0.7F, (double) z + 0.5F, 0.0D, 0.05D, 0.0D);
+            }
+        }
     }
 }

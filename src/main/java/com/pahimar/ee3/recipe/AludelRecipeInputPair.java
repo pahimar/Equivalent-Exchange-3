@@ -1,9 +1,10 @@
 package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class AludelRecipeInputPair
 {
@@ -19,7 +20,28 @@ public class AludelRecipeInputPair
     @Override
     public boolean equals(Object object)
     {
-        return object instanceof AludelRecipeInputPair && ItemHelper.equals(((AludelRecipeInputPair) object).inputStack, this.inputStack) && ItemHelper.equals(((AludelRecipeInputPair) object).dustStack, this.dustStack);
+        if (object instanceof AludelRecipeInputPair)
+        {
+            AludelRecipeInputPair recipeInputPair = (AludelRecipeInputPair) object;
+
+            LogHelper.debug(String.format("input - this.itemId: %s, object.inputStack.itemId: %s", this.inputStack.itemID, recipeInputPair.inputStack.itemID));
+            LogHelper.debug(String.format("input - this.meta: %s, object.inputStack.meta: %s", this.inputStack.getItemDamage(), recipeInputPair.inputStack.getItemDamage()));
+            LogHelper.debug(String.format("input - this.stackSize: %s, object.inputStack.stackSize: %s", this.inputStack.stackSize, recipeInputPair.inputStack.stackSize));
+
+            LogHelper.debug(String.format("dust - this.itemId: %s, object.inputStack.itemId: %s", this.dustStack.itemID, recipeInputPair.dustStack.itemID));
+            LogHelper.debug(String.format("dust - this.meta: %s, object.inputStack.meta: %s", this.dustStack.getItemDamage(), recipeInputPair.dustStack.getItemDamage()));
+            LogHelper.debug(String.format("dust - this.stackSize: %s, object.inputStack.stackSize: %s", this.dustStack.stackSize, recipeInputPair.dustStack.stackSize));
+
+            if (this.inputStack.itemID == recipeInputPair.inputStack.itemID && (this.inputStack.getItemDamage() == recipeInputPair.inputStack.getItemDamage() || this.inputStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || recipeInputPair.inputStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && this.inputStack.stackSize <= recipeInputPair.inputStack.stackSize)
+            {
+                if (this.dustStack.itemID == recipeInputPair.dustStack.itemID && this.dustStack.getItemDamage() == recipeInputPair.dustStack.getItemDamage() && this.dustStack.stackSize <= recipeInputPair.dustStack.stackSize)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public boolean isValid()
@@ -27,43 +49,9 @@ public class AludelRecipeInputPair
         return inputStack != null && dustStack != null && dustStack.getItem() instanceof ItemAlchemicalDust;
     }
 
-    public boolean equalsIgnoreStackSize(AludelRecipeInputPair inputPair)
+    @Override
+    public String toString()
     {
-        if (this.isValid() && inputPair.isValid())
-        {
-            return equalsIgnoreStackSize(this.inputStack, inputPair.inputStack) && equalsIgnoreStackSize(this.dustStack, inputPair.dustStack);
-        }
-
-        return false;
-    }
-
-    private static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2)
-    {
-        if (itemStack1 != null && itemStack2 != null)
-        {
-            if (itemStack1.itemID == itemStack2.itemID && itemStack1.getItemDamage() == itemStack2.getItemDamage())
-            {
-                if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
-                {
-                    return itemStack1.getTagCompound().equals(itemStack2.getTagCompound());
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                OreStack oreStack1 = OreStack.getOreStackFromList(itemStack1);
-                OreStack oreStack2 = OreStack.getOreStackFromList(itemStack2);
-
-                if (oreStack1 != null && oreStack2 != null)
-                {
-                    return OreStack.compareOreNames(oreStack1, oreStack2);
-                }
-            }
-        }
-
-        return false;
+        return String.format("Input stack: %s, Dust stack: %s", ItemHelper.toString(this.inputStack), ItemHelper.toString(this.dustStack));
     }
 }

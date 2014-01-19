@@ -2,9 +2,12 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.tileentity.TileAludel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -18,12 +21,16 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class ContainerAludel extends Container
 {
-
+    private TileAludel tileAludel;
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
+    private int lastDeviceCookTime;
+    private int lastFuelBurnTime;
+    private int lastItemCookTime;
 
     public ContainerAludel(InventoryPlayer inventoryPlayer, TileAludel tileAludel)
     {
+        this.tileAludel = tileAludel;
 
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.FUEL_INVENTORY_INDEX, 44, 74));
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.INPUT_INVENTORY_INDEX, 44, 18));
@@ -49,20 +56,17 @@ public class ContainerAludel extends Container
     @Override
     public boolean canInteractWith(EntityPlayer var1)
     {
-
         return true;
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
-
         ItemStack itemStack = null;
         Slot slot = (Slot) inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack())
         {
-
             ItemStack slotItemStack = slot.getStack();
             itemStack = slotItemStack.copy();
 
@@ -73,7 +77,6 @@ public class ContainerAludel extends Container
              */
             if (slotIndex < TileAludel.INVENTORY_SIZE)
             {
-
                 if (!this.mergeItemStack(slotItemStack, TileAludel.INVENTORY_SIZE, inventorySlots.size(), false))
                 {
                     return null;
@@ -81,7 +84,6 @@ public class ContainerAludel extends Container
             }
             else
             {
-
                 /**
                  * If the stack being shift-clicked into the Aludel's container
                  * is a fuel, first try to put it in the fuel slot. If it cannot
@@ -130,5 +132,63 @@ public class ContainerAludel extends Container
         }
 
         return itemStack;
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting)
+    {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, this.tileAludel.deviceCookTime);
+        iCrafting.sendProgressBarUpdate(this, 1, this.tileAludel.fuelBurnTime);
+        iCrafting.sendProgressBarUpdate(this, 2, this.tileAludel.itemCookTime);
+    }
+
+    @Override
+    public void detectAndSendChanges()
+    {
+        super.detectAndSendChanges();
+
+        for (Object crafter : this.crafters)
+        {
+            ICrafting icrafting = (ICrafting) crafter;
+
+            if (this.lastDeviceCookTime != this.tileAludel.deviceCookTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 0, this.tileAludel.deviceCookTime);
+            }
+
+            if (this.lastFuelBurnTime != this.tileAludel.fuelBurnTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 1, this.tileAludel.fuelBurnTime);
+            }
+
+            if (this.lastItemCookTime != this.tileAludel.itemCookTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 2, this.tileAludel.itemCookTime);
+            }
+        }
+
+        this.lastDeviceCookTime = this.tileAludel.deviceCookTime;
+        this.lastFuelBurnTime = this.tileAludel.fuelBurnTime;
+        this.lastItemCookTime = this.tileAludel.itemCookTime;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int valueType, int updatedValue)
+    {
+        if (valueType == 0)
+        {
+            this.tileAludel.deviceCookTime = updatedValue;
+        }
+
+        if (valueType == 1)
+        {
+            this.tileAludel.fuelBurnTime = updatedValue;
+        }
+
+        if (valueType == 2)
+        {
+            this.tileAludel.itemCookTime = updatedValue;
+        }
     }
 }

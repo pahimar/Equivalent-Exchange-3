@@ -1,26 +1,26 @@
 package com.pahimar.ee3.recipe;
 
 import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesAludel
 {
     private static RecipesAludel aludelRegistry = null;
 
-    private Map<AludelRecipeInputPair, ItemStack> aludelRecipes;
+    private List<RecipeAludel> aludelRecipes;
 
     private RecipesAludel()
     {
-        aludelRecipes = new HashMap<AludelRecipeInputPair, ItemStack>();
+        aludelRecipes = new ArrayList<RecipeAludel>();
     }
 
     public static RecipesAludel getInstance()
@@ -68,71 +68,31 @@ public class RecipesAludel
 
     public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
-        AludelRecipeInputPair recipeInputPair = new AludelRecipeInputPair(recipeInputStack, recipeInputDust);
-
-        if (recipeInputPair.isValid() && recipeOutput != null)
-        {
-            boolean similiarRecipeExists = false;
-
-            for (AludelRecipeInputPair existingRecipeInput : aludelRecipes.keySet())
-            {
-                if (existingRecipeInput.equalsIgnoreStackSize(recipeInputPair))
-                {
-                    similiarRecipeExists = true;
-                }
-            }
-
-            if (!similiarRecipeExists)
-            {
-                aludelRecipes.put(recipeInputPair, recipeOutput);
-            }
-        }
+        // TODO Finish
     }
 
     public ItemStack getResult(ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
-        AludelRecipeInputPair recipeInputPair = new AludelRecipeInputPair(recipeInputStack, recipeInputDust);
-
-        if (recipeInputPair.isValid())
-        {
-            for (AludelRecipeInputPair recipeInputs : aludelRecipes.keySet())
-            {
-                if (recipeInputPair.equalsIgnoreStackSize(recipeInputPair))
-                {
-                    if (recipeInputPair.inputStack.stackSize >= recipeInputs.inputStack.stackSize && recipeInputPair.dustStack.stackSize >= recipeInputs.dustStack.stackSize)
-                    {
-                        return aludelRecipes.get(recipeInputs);
-                    }
-                }
-            }
-        }
-
+        // TODO Finish
         return null;
     }
 
     public AludelRecipeInputPair getRecipeInputs(ItemStack itemStack)
     {
-        for (AludelRecipeInputPair recipeInputPair : aludelRecipes.keySet())
-        {
-            if (ItemHelper.equals(aludelRecipes.get(recipeInputPair), itemStack))
-            {
-                return recipeInputPair;
-            }
-        }
-
+        // TODO Finish
         return null;
     }
 
-    public Map<AludelRecipeInputPair, ItemStack> getRecipeMap()
+    public List<RecipeAludel> getRecipeMap()
     {
         return aludelRecipes;
     }
 
     public void debugDumpMap()
     {
-        for (AludelRecipeInputPair recipeInputPair : aludelRecipes.keySet())
+        for (RecipeAludel recipeAludel : aludelRecipes)
         {
-            LogHelper.debug(String.format("Output: %s, Input Stack: %s, Dust Stack: %s", ItemHelper.toString(aludelRecipes.get(recipeInputPair)), ItemHelper.toString(recipeInputPair.inputStack), ItemHelper.toString(recipeInputPair.dustStack)));
+            LogHelper.debug(String.format("Output: %s, Input Stacks: %s", recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputs()));
         }
     }
 }
