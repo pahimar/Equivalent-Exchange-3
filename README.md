@@ -84,7 +84,7 @@ This section assumes that you're using the command-line version of Git.
 ***
 
 ####Compile EE3
-1.Download the minecraftforge source file from [here](http://files.minecraftforge.net/). Make sure it is the same version as in build.properties under "forge_version", and put it in `mcdev`.
+1. Download the minecraftforge source file from [here](http://files.minecraftforge.net/). Make sure it is the same version as in build.properties under `forge_version`, and put it in `mcdev`.
 2. Execute `gradle setupDevWorkspace`. This sets up Forge and downloads the necessary libraries to build EE3.  This might take some time, be patient.
 	* You will generally only have to do this once until the Forge version in `build.properties` changes.
 3. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
