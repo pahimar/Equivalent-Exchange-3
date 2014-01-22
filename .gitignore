@@ -1,11 +1,15 @@
 ## gradle
 /.gradle
 /build
+/gradle
+/gradlew
+/gradlew.bat
 
 ## ForgeGradle
 /run
 
 ## eclipse
+/eclipse
 /.settings
 /.metadata
 /.classpath
@@ -16,4 +20,6 @@
 /out
 /.idea
 /*.iml
+/*.ipr
+/*.iws
 /atlassian-ide-plugin.xml
