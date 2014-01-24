@@ -1,8 +1,15 @@
 package com.pahimar.ee3.imc;
 
+import java.util.EnumSet;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.api.StackValueMapping;
 import com.pahimar.ee3.api.WrappedStack;
@@ -11,16 +18,13 @@ import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.emc.EmcValuesIMC;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.recipe.RecipesIMC;
+
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import net.minecraft.item.ItemStack;
-
-import java.util.EnumSet;
-import java.util.List;
 
 public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
 {
@@ -59,6 +63,14 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_GET_VALUE))
         {
             processGetEmcValueMessage(imcMessage);
+        }
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_SIMPLE_ASSIGN_VALUE_PRE))
+        {
+            processSimplePreAssignEmcValueMessage(imcMessage);
+        }
+        else if (requestedOperation.equalsIgnoreCase(InterModCommsOperations.EMC_SIMPLE_ASSIGN_VALUE_POST))
+        {
+            processSimplePostAssignEmcValueMessage(imcMessage);
         }
     }
 
@@ -213,6 +225,66 @@ public class InterModCommsHandler implements ITickHandler, IScheduledTickHandler
         {
             // TODO Log that the message payload is of an invalid type
         }
+    }
+    
+    private static void processSimplePreAssignEmcValueMessage(IMCMessage imcMessage)
+    {
+    	NBTTagCompound tagCompound = imcMessage.getNBTValue();
+    	if(tagCompound.hasKey("emcValue"))
+    	{
+    		WrappedStack wrappedStack;
+    		EmcValue emcValue = new EmcValue(tagCompound.getFloat("emcValue"));
+    		
+	    	if(tagCompound.hasKey("itemStack"))
+	    	{
+	    		wrappedStack = new WrappedStack(ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("itemStack")));
+	    	}
+	    	else if(tagCompound.hasKey("oreName"))
+	    	{
+	    		wrappedStack = new WrappedStack(new OreStack(tagCompound.getString("oreName")));
+	    	}
+	    	else
+	    	{
+	    		// TODO log that the message didn't contain either a itemstack or a ore dictionary name
+	    		return;
+	    	}
+	    	
+	    	EmcValuesIMC.addPreAssignedValued(wrappedStack, emcValue);
+    	}
+    	else
+    	{
+    		// TODO log that no EMC value was sent in the message
+    	}
+    }
+    
+    private static void processSimplePostAssignEmcValueMessage(IMCMessage imcMessage)
+    {
+    	NBTTagCompound tagCompound = imcMessage.getNBTValue();
+    	if(tagCompound.hasKey("emcValue"))
+    	{
+    		WrappedStack wrappedStack;
+    		EmcValue emcValue = new EmcValue(tagCompound.getFloat("emcValue"));
+    		
+	    	if(tagCompound.hasKey("itemStack"))
+	    	{
+	    		wrappedStack = new WrappedStack(ItemStack.loadItemStackFromNBT(tagCompound.getCompoundTag("itemStack")));
+	    	}
+	    	else if(tagCompound.hasKey("oreName"))
+	    	{
+	    		wrappedStack = new WrappedStack(new OreStack(tagCompound.getString("oreName")));
+	    	}
+	    	else
+	    	{
+	    		// TODO log that the message didn't contain either a itemstack or a ore dictionary name
+	    		return;
+	    	}
+	    	
+	    	EmcValuesIMC.addPostAssignedValued(wrappedStack, emcValue);
+    	}
+    	else
+    	{
+    		// TODO log that no EMC value was sent in the message
+    	}
     }
 
     /**

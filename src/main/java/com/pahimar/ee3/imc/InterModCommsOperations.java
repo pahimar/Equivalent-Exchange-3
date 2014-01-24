@@ -13,4 +13,6 @@ public class InterModCommsOperations
     public static final String EMC_RETURN_HAS_VALUE = "emc-return-has-value";
     public static final String EMC_GET_VALUE = "emc-get-value";
     public static final String EMC_RETURN_GET_VALUE = "emc-return-get-value";
+    public static final String EMC_SIMPLE_ASSIGN_VALUE_PRE = "emc-simple-assign-value-pre";
+    public static final String EMC_SIMPLE_ASSIGN_VALUE_POST = "emc-simple-assign-value-post";
 }
