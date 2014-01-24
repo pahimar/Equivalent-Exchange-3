@@ -314,6 +314,17 @@ public class EmcRegistry
                             }
                         }
                     }
+                    else if (stack.getWrappedStack() instanceof OreStack)
+                    {
+                        OreStack oreStack = (OreStack)stack.getWrappedStack();
+                        for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
+                        {
+                            if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
+                            {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -397,6 +408,17 @@ public class EmcRegistry
                         }
 
                         return lowestValue;
+                    }
+                }
+                else if (stack.getWrappedStack() instanceof OreStack)
+                {
+                    OreStack oreStack = (OreStack)stack.getWrappedStack();
+                    for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
+                    {
+                        if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
+                        {
+                            return emcRegistry.stackMappings.get(new WrappedStack(oreItemStack));
+                        }
                     }
                 }
             }
