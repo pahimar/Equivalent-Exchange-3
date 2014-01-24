@@ -8,9 +8,11 @@ import com.pahimar.ee3.lib.Compare;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -462,7 +464,14 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             jsonItemStack.stackSize = ((ItemStack) wrappedStack.wrappedStack).stackSize;
             if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
             {
-                jsonItemStack.stackTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
+                try
+                {
+                    jsonItemStack.compressedStackTagCompound = CompressedStreamTools.compress(((ItemStack) wrappedStack.wrappedStack).stackTagCompound);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
             jsonWrappedStack.add("wrappedStack", gsonWrappedStack.toJsonTree(jsonItemStack, JsonItemStack.class));
         }
@@ -517,9 +526,16 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                         if (stackSize > 0)
                         {
                             itemStack = new ItemStack(jsonItemStack.itemID, stackSize, jsonItemStack.itemDamage);
-                            if (jsonItemStack.stackTagCompound != null)
+                            if (jsonItemStack.compressedStackTagCompound != null)
                             {
-                                itemStack.stackTagCompound = jsonItemStack.stackTagCompound;
+                                try
+                                {
+                                    itemStack.stackTagCompound = CompressedStreamTools.decompress(jsonItemStack.compressedStackTagCompound);
+                                }
+                                catch (IOException e)
+                                {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                         stackObject = itemStack;
