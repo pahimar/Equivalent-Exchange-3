@@ -98,7 +98,7 @@ public class RecipeHelper
 
                     if (oreStack.getWrappedStack() instanceof OreStack)
                     {
-                        recipeInputs.add(new WrappedStack(shapedOreRecipe.getInput()[i]));
+                        recipeInputs.add(oreStack);
                     }
                 }
                 else if (shapedOreRecipe.getInput()[i] instanceof ItemStack)
