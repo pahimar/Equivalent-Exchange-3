@@ -46,6 +46,10 @@ public class GuiHandler implements IGuiHandler
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
             return new ContainerGlassBell(player.inventory, tileGlassBell);
         }
+        else if (ID == GuiIds.EMC_ASSIGNMENT)
+        {
+            return null;
+        }
 
         return null;
     }
@@ -82,6 +86,10 @@ public class GuiHandler implements IGuiHandler
         {
             TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
             return new GuiGlassBell(player.inventory, tileGlassBell);
+        }
+        else if (ID == GuiIds.EMC_ASSIGNMENT)
+        {
+            return new GuiEmcAssignment();
         }
 
         return null;

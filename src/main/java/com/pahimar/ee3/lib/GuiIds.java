@@ -15,4 +15,5 @@ public class GuiIds
     public static final int ALCHEMICAL_CHEST = 3;
     public static final int ALCHEMICAL_BAG = 4;
     public static final int GLASS_BELL = 5;
+    public static final int EMC_ASSIGNMENT = 6;
 }
