@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class PacketOpenGuiScreen extends PacketEE
 {
-    public int guiId;
+    public byte guiId;
 
     public PacketOpenGuiScreen()
     {
@@ -31,19 +31,19 @@ public class PacketOpenGuiScreen extends PacketEE
     @Override
     public void writeData(DataOutputStream data) throws IOException
     {
-        data.writeInt(guiId);
+        data.writeByte(guiId);
     }
 
     @Override
     public void readData(DataInputStream data) throws IOException
     {
-        guiId = data.readInt();
+        guiId = data.readByte();
     }
 
     @Override
     public void execute(INetworkManager manager, Player player)
     {
         EntityPlayer thePlayer = (EntityPlayer) player;
-        thePlayer.openGui(EquivalentExchange3.instance, GuiIds.EMC_ASSIGNMENT, thePlayer.getEntityWorld(), (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
+        thePlayer.openGui(EquivalentExchange3.instance, guiId, thePlayer.getEntityWorld(), (int)thePlayer.posX, (int)thePlayer.posY, (int)thePlayer.posZ);
     }
 }
