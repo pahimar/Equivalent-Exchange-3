@@ -85,6 +85,8 @@ public class Strings
 
     /* Gui related constants */
     public static final String SET = "gui.ee3:set";
+    public static final String SHOW_ALL = "gui.ee3:showAll";
+    public static final String SHOW_ONLY_NO_VALUE = "gui.ee3:showOnlyNoValue";
     public static final String HAS_EMC_VALUE = "gui.ee3:hasEmcValue";
     public static final String HAS_NO_EMC_VALUE = "gui.ee3:hasNoEmcValue";
     public static final String ITEM_INFORMATION = "gui.ee3:itemInformation";

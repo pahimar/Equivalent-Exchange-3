@@ -12,7 +12,7 @@ public class GuiItemList extends GuiScrollingList
 
     public GuiItemList(GuiEmcAssignment parent, int listWidth)
     {
-        super(parent.getMinecraftInstance(), listWidth, parent.getWidth(), 32, parent.getHeight() - 64, 10, 35);
+        super(parent.getMinecraftInstance(), listWidth, parent.getWidth(), 40, parent.getHeight() - 40, 10, 35);
         this.parent = parent;
     }
 

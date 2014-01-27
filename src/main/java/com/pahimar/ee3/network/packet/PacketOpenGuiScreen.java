@@ -23,7 +23,6 @@ public class PacketOpenGuiScreen extends PacketEE
 
     public PacketOpenGuiScreen(byte guiId)
     {
-
         super(PacketTypeHandler.OPEN_GUI_SCREEN, false);
         this.guiId = guiId;
     }

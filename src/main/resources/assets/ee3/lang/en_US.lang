@@ -73,6 +73,8 @@ tooltip.ee3:infusedPrefix=Infused with
 
 # Gui localizations
 gui.ee3:set=Set
+gui.ee3:showAll=Show All
+gui.ee3:showOnlyNoValue=Show Only No EMC Value
 gui.ee3:hasEmcValue=Has EMC value
 gui.ee3:hasNoEmcValue=Has no EMC value
 gui.ee3:itemInformation=Unlocalized name: %s, Metadata: %d

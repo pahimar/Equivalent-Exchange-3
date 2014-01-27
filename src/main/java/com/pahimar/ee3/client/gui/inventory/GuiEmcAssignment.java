@@ -2,7 +2,9 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
+import com.pahimar.ee3.handler.ValueFilesHandler;
 import com.pahimar.ee3.lib.Strings;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -22,6 +24,8 @@ public class GuiEmcAssignment extends GuiScreen
     private GuiItemList itemList;
     private GuiTextField filterField;
     private GuiTextField valueField;
+    private GuiButton buttonFilterType;
+    private boolean showOnlyNoValue = false;
 
     private ArrayList<ItemStack> filteredItemStackList;
     private ItemStack selectedItemStack;
@@ -59,19 +63,14 @@ public class GuiEmcAssignment extends GuiScreen
     {
         super.initGui();
         itemList = new GuiItemList(this, 150);
-        filterField = new GuiTextField(fontRenderer, 10, getHeight() - 42, 150, 20);
+        filterField = new GuiTextField(fontRenderer, 10, getHeight() - 30, 150, 20);
         filterField.setFocused(true);
 
         valueField = new GuiTextField(fontRenderer, getWidth()/2 + 25, 140, 150, 20);
 
-        this.buttonList.add(new GuiButton(0, getWidth() / 2, getHeight() - 42, I18n.getStringParams("gui.done")));
-        this.buttonList.add(new GuiButton(1, getWidth() / 2, getHeight() - 72, StatCollector.translateToLocal(Strings.SET)));
-    }
-
-    @Override
-    public void updateScreen()
-    {
-        super.updateScreen();
+        this.buttonList.add(new GuiButton(0, getWidth() / 2, getHeight() - 30, I18n.getStringParams("gui.done")));
+        this.buttonList.add(new GuiButton(1, getWidth() / 2, getHeight() - 60, StatCollector.translateToLocal(Strings.SET)));
+        this.buttonList.add(buttonFilterType = new GuiButton(2, 10, 10, 150, 20, StatCollector.translateToLocal(Strings.SHOW_ALL)));
     }
 
     @Override
@@ -116,7 +115,18 @@ public class GuiEmcAssignment extends GuiScreen
                     this.mc.setIngameFocus();
                     break;
                 case 1:
-                    //Save value to file!
+                    GameRegistry.UniqueIdentifier identifier = GameRegistry.findUniqueIdentifierFor(selectedItemStack.getItem());
+                    String modid = identifier != null? identifier.modId: "minecraft";
+
+                    if (!valueField.getText().isEmpty() && (selectedItemStackValue == null || selectedItemStackValue.getValue() != Float.parseFloat(valueField.getText())))
+                    {
+                        ValueFilesHandler.addFileValue(modid, selectedItemStack, new EmcValue(Float.parseFloat(valueField.getText())));
+                    }
+                    break;
+                case 2:
+                    showOnlyNoValue = !showOnlyNoValue;
+                    buttonFilterType.displayString = showOnlyNoValue? StatCollector.translateToLocal(Strings.SHOW_ONLY_NO_VALUE): StatCollector.translateToLocal(Strings.SHOW_ALL);
+                    onFilterChanged();
                     break;
             }
         }
@@ -155,9 +165,12 @@ public class GuiEmcAssignment extends GuiScreen
         filteredItemStackList.clear();
         for (ItemStack itemStack : itemStackList)
         {
-            if (itemStack.getDisplayName().toLowerCase().contains(filterField.getText().toLowerCase()))
+            if (filterField.getText().isEmpty() || itemStack.getDisplayName().toLowerCase().contains(filterField.getText().toLowerCase()))
             {
-                filteredItemStackList.add(itemStack);
+                if (!showOnlyNoValue || !EmcRegistry.getInstance().hasEmcValue(itemStack))
+                {
+                    filteredItemStackList.add(itemStack);
+                }
             }
         }
     }
