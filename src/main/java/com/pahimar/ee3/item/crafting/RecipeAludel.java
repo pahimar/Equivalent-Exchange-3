@@ -25,6 +25,11 @@ public class RecipeAludel
     {
         return compareItemStacks(this.inputStack, inputStack) && compareItemStacks(this.dustStack, dustStack);
     }
+    
+    public boolean isInput(ItemStack itemStack)
+    {
+    	return compareItemStacks(this.inputStack, itemStack);
+    }
 
     public ItemStack getRecipeOutput()
     {

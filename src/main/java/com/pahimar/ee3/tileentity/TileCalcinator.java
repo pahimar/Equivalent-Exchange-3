@@ -1,17 +1,21 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileCalcinator;
-import com.pahimar.ee3.recipe.CalcinationManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileCalcinator;
+import com.pahimar.ee3.recipe.CalcinationManager;
+import com.pahimar.ee3.recipe.RecipesAludel;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -20,7 +24,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  *
  * @author pahimar
  */
-public class TileCalcinator extends TileEE implements IInventory
+public class TileCalcinator extends TileEE implements ISidedInventory
 {
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
@@ -222,8 +226,33 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+    	switch (slotIndex)
+		{
+			case FUEL_INVENTORY_INDEX:
+				return TileEntityFurnace.isItemFuel(itemStack);
+			case INPUT_INVENTORY_INDEX:
+				return CalcinationManager.getCalcinationResult(itemStack) != null;
+			default:
+				return false;
+		}
     }
+    
+    @Override
+	public int[] getAccessibleSlotsFromSide(int side)
+    {
+		return side == 0 ? new int[] {OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX} : side == 1 ? new int[] {INPUT_INVENTORY_INDEX} : new int[] {FUEL_INVENTORY_INDEX};
+	}
+
+	@Override
+	public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+	{
+		return isItemValidForSlot(slotIndex, itemStack);
+	}
+
+	@Override
+	public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side) {
+		return slotIndex == OUTPUT_LEFT_INVENTORY_INDEX || slotIndex == OUTPUT_RIGHT_INVENTORY_INDEX;
+	}
 
     @Override
     public void updateEntity()

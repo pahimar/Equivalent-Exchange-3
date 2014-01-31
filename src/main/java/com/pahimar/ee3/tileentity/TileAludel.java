@@ -1,18 +1,21 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.helper.ItemHelper;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
-import com.pahimar.ee3.recipe.RecipesAludel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.PacketTypeHandler;
+import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
+import com.pahimar.ee3.recipe.RecipesAludel;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -21,7 +24,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  *
  * @author pahimar
  */
-public class TileAludel extends TileEE implements IInventory
+public class TileAludel extends TileEE implements ISidedInventory
 {
     /**
      * The ItemStacks that hold the items currently being used in the Aludel
@@ -194,8 +197,43 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+		switch (slotIndex)
+		{
+			case FUEL_INVENTORY_INDEX:
+				return TileEntityFurnace.isItemFuel(itemStack);
+			case INPUT_INVENTORY_INDEX:
+				return RecipesAludel.getInstance().isValidInput(itemStack);
+			case DUST_INVENTORY_INDEX:
+				return itemStack.getItem().itemID == ModItems.alchemicalDust.itemID;
+			default:
+				return false;
+		}
     }
+    
+    @Override
+	public int[] getAccessibleSlotsFromSide(int side)
+	{
+		return side == 0 ? new int[] {FUEL_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX} : new int[] {INPUT_INVENTORY_INDEX, DUST_INVENTORY_INDEX};
+	}
+
+	@Override
+	public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+	{
+		if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+		{
+			return isItemValidForSlot(slotIndex, itemStack);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean canExtractItem(int slotIndex, ItemStack itemstack, int side)
+	{
+		return slotIndex == OUTPUT_INVENTORY_INDEX;
+	}
 
     @Override
     public void updateEntity()
