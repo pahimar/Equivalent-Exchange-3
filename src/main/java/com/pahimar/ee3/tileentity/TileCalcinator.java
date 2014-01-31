@@ -240,7 +240,7 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     @Override
 	public int[] getAccessibleSlotsFromSide(int side)
     {
-		return side == 0 ? new int[] {OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX} : side == 1 ? new int[] {INPUT_INVENTORY_INDEX} : new int[] {FUEL_INVENTORY_INDEX};
+		return side == 0 ? new int[] {FUEL_INVENTORY_INDEX, OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX} : new int[] {INPUT_INVENTORY_INDEX, OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX};
 	}
 
 	@Override
