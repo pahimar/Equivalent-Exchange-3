@@ -92,7 +92,7 @@ public class ContainerAludel extends Container
                  */
                 if (TileEntityFurnace.isItemFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileAludel.FUEL_INVENTORY_INDEX, TileAludel.INPUT_INVENTORY_INDEX, false))
+                    if (!this.mergeItemStack(slotItemStack, TileAludel.FUEL_INVENTORY_INDEX, TileAludel.OUTPUT_INVENTORY_INDEX, false))
                     {
                         return null;
                     }
