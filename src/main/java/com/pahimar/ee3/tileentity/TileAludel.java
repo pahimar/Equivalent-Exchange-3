@@ -213,7 +213,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     @Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
-		return side == 0 ? new int[] {FUEL_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX} : new int[] {INPUT_INVENTORY_INDEX, DUST_INVENTORY_INDEX};
+		return side == 0 ? new int[] {FUEL_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX} : new int[] {INPUT_INVENTORY_INDEX, DUST_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX};
 	}
 
 	@Override
