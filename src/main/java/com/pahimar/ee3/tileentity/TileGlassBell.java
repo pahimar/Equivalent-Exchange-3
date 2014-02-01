@@ -4,6 +4,7 @@ import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +14,11 @@ import net.minecraft.network.packet.Packet;
 public class TileGlassBell extends TileEE implements IInventory
 {
     /**
+     * Server sync counter (once per 20 ticks)
+     */
+    private int ticksSinceSync;
+
+    /**
      * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
@@ -20,6 +26,8 @@ public class TileGlassBell extends TileEE implements IInventory
     public static final int INVENTORY_SIZE = 1;
 
     public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
+
+    public ItemStack outputItemStack;
 
     public TileGlassBell()
     {
@@ -29,7 +37,6 @@ public class TileGlassBell extends TileEE implements IInventory
     @Override
     public int getSizeInventory()
     {
-
         return inventory.length;
     }
 
@@ -159,9 +166,24 @@ public class TileGlassBell extends TileEE implements IInventory
     }
 
     @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+        ItemStack displayStack = this.inventory[DISPLAY_SLOT_INVENTORY_INDEX];
+
+        if (!this.worldObj.isRemote)
+        {
+            if (++ticksSinceSync % 20 == 0)
+            {
+                PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128d, this.worldObj.provider.dimensionId, getDescriptionPacket());
+            }
+        }
+    }
+
+    @Override
     public Packet getDescriptionPacket()
     {
-        ItemStack itemStack = getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX);
+        ItemStack itemStack = this.inventory[DISPLAY_SLOT_INVENTORY_INDEX];
 
         if (itemStack != null && itemStack.stackSize > 0)
         {
@@ -169,7 +191,7 @@ public class TileGlassBell extends TileEE implements IInventory
         }
         else
         {
-            return super.getDescriptionPacket();
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, -1, 0, 0, 0));
         }
     }
 

@@ -136,13 +136,17 @@ public class ClientProxy extends CommonProxy
 
         if (tileEntity instanceof TileGlassBell)
         {
-            ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-            if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
+            ItemStack itemStack = null;
+            if (itemID != -1)
             {
-                ItemHelper.setColor(itemStack, color);
+                itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
+                {
+                    ItemHelper.setColor(itemStack, color);
+                }
             }
 
-            ((TileGlassBell) tileEntity).setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, itemStack);
+            ((TileGlassBell) tileEntity).outputItemStack = itemStack;
             world.updateAllLightTypes(x, y, z);
         }
         else if (tileEntity instanceof TileAludel)
