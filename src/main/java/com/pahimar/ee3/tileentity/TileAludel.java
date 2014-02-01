@@ -6,6 +6,7 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 import com.pahimar.ee3.recipe.RecipesAludel;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.inventory.IInventory;
@@ -39,6 +40,8 @@ public class TileAludel extends TileEE implements IInventory
     public int deviceCookTime;              // How much longer the Aludel will cook
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
+
+    public ItemStack outputItemStack;
 
     public TileAludel()
     {
@@ -262,6 +265,7 @@ public class TileAludel extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
+            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
@@ -339,7 +343,7 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
+        ItemStack itemStack = getStackInSlot(OUTPUT_INVENTORY_INDEX);
 
         if (itemStack != null && itemStack.stackSize > 0)
         {

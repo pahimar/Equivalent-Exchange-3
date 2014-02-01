@@ -153,7 +153,7 @@ public class ClientProxy extends CommonProxy
                 ItemHelper.setColor(itemStack, color);
             }
 
-            ((TileAludel) tileEntity).setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStack);
+            ((TileAludel) tileEntity).outputItemStack = itemStack;
             world.updateAllLightTypes(x, y, z);
         }
     }
