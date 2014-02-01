@@ -1,6 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
@@ -319,20 +320,19 @@ public class TileAludel extends TileEE implements IInventory
     {
         if (this.canInfuse())
         {
-            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
-            ItemStack[] inputPair = RecipesAludel.getInstance().getRecipeInputs(infusedItemStack);
+            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
 
             if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
             {
-                this.inventory[OUTPUT_INVENTORY_INDEX] = infusedItemStack.copy();
+                this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
             }
-            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack))
+            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput()))
             {
-                inventory[OUTPUT_INVENTORY_INDEX].stackSize += infusedItemStack.stackSize;
+                inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
             }
 
-            decrStackSize(INPUT_INVENTORY_INDEX, inputPair[0].stackSize);
-            decrStackSize(DUST_INVENTORY_INDEX, inputPair[1].stackSize);
+            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].stackSize);
+            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].stackSize);
         }
     }
 
