@@ -49,6 +49,10 @@ public class RecipesVanilla
         GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
         GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
 
+        // TODO Proper recipes for the different bag sizes
+        // TODO Also, decide if we want different sizes, and appropriate recipes
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag), new Object[]{"ccc", "c c", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 2)});
+
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
     }
 }

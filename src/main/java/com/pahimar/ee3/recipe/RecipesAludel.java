@@ -35,6 +35,8 @@ public class RecipesAludel
         return aludelRegistry;
     }
 
+    // TODO Think about rebalancing dust:wood logs ratios for better alchemical chest EMC values
+    // TODO Method to auto-pull these into the RecipeRegistry for DynEMC
     private void init()
     {
         // Alchemical Coal
@@ -64,6 +66,9 @@ public class RecipesAludel
         aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 0), new ItemStack(Block.planks.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1));
         aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 1), new ItemStack(Block.planks.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
         aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 2), new ItemStack(Block.planks.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 3));
+
+        // Minium Stone
+        aludelRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new ItemStack(ModItems.inertStone), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
     }
 
     public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)

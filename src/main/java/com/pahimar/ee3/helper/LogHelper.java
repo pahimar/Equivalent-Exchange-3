@@ -35,7 +35,7 @@ public class LogHelper
 
     public static void debug(Object object)
     {
-        log(Level.INFO, String.format("[DEBUG] %s", String.valueOf(object.toString)));
+        log(Level.INFO, String.format("[DEBUG] %s", String.valueOf(object)));
     }
 
     public static void warning(Object object)

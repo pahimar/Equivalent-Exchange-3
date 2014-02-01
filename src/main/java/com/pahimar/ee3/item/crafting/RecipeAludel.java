@@ -6,8 +6,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class RecipeAludel
 {
     private ItemStack recipeOutput;
+    private ItemStack inputStack;       // TODO Allow this to match on OreDictionary items (so all wood works, rather than just vanilla wood)
     private ItemStack dustStack;
-    private ItemStack inputStack;
 
     public RecipeAludel(ItemStack recipeOutput, ItemStack inputStack, ItemStack dustStack)
     {
