@@ -147,10 +147,15 @@ public class ClientProxy extends CommonProxy
         }
         else if (tileEntity instanceof TileAludel)
         {
-            ItemStack itemStack = new ItemStack(itemID, stackSize, metaData);
-            if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
+            ItemStack itemStack = null;
+
+            if (itemID != -1)
             {
-                ItemHelper.setColor(itemStack, color);
+                itemStack = new ItemStack(itemID, stackSize, metaData);
+                if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
+                {
+                    ItemHelper.setColor(itemStack, color);
+                }
             }
 
             ((TileAludel) tileEntity).outputItemStack = itemStack;

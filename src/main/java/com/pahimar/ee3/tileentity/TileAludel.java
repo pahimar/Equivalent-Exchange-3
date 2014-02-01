@@ -265,7 +265,7 @@ public class TileAludel extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
+            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128d, this.worldObj.provider.dimensionId, getDescriptionPacket());
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
@@ -343,7 +343,7 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        ItemStack itemStack = getStackInSlot(OUTPUT_INVENTORY_INDEX);
+        ItemStack itemStack = this.inventory[OUTPUT_INVENTORY_INDEX];
 
         if (itemStack != null && itemStack.stackSize > 0)
         {
@@ -351,13 +351,15 @@ public class TileAludel extends TileEE implements IInventory
         }
         else
         {
-            return super.getDescriptionPacket();
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, -1, 0, 0, 0));
         }
     }
 
     @Override
     public void onInventoryChanged()
     {
+        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
+
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
         if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)

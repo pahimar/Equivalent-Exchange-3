@@ -13,17 +13,14 @@ import net.minecraft.item.ItemStack;
  */
 public class SlotCalcinator extends Slot
 {
-
     public SlotCalcinator(IInventory inventory, int x, int y, int z)
     {
-
         super(inventory, x, y, z);
     }
 
     @Override
     public boolean isItemValid(ItemStack par1ItemStack)
     {
-
         return false;
     }
 }
