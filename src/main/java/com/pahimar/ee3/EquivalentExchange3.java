@@ -15,7 +15,6 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
-import com.pahimar.ee3.recipe.RecipesAludel;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -160,7 +159,6 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         // NOOP
-        RecipesAludel.getInstance().debugDumpMap();
     }
 
     @EventHandler

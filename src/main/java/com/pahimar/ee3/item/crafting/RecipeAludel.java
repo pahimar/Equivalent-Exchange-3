@@ -1,7 +1,11 @@
 package com.pahimar.ee3.item.crafting;
 
+import com.pahimar.ee3.api.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeAludel
 {
@@ -34,6 +38,14 @@ public class RecipeAludel
     public ItemStack[] getRecipeInputs()
     {
         return new ItemStack[]{inputStack, dustStack};
+    }
+
+    public List<WrappedStack> getRecipeInputsAsWrappedStacks()
+    {
+        List<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
+        recipeInputs.add(new WrappedStack(inputStack));
+        recipeInputs.add(new WrappedStack(dustStack));
+        return recipeInputs;
     }
 
     @Override

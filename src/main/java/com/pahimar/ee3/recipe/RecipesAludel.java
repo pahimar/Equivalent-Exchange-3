@@ -1,7 +1,6 @@
 package com.pahimar.ee3.recipe;
 
 import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
@@ -114,7 +113,7 @@ public class RecipesAludel
         return null;
     }
 
-    public List<RecipeAludel> getRecipeMap()
+    public List<RecipeAludel> getRecipes()
     {
         return aludelRecipes;
     }
