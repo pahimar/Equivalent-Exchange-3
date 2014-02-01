@@ -331,8 +331,8 @@ public class TileAludel extends TileEE implements IInventory
                 inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
             }
 
-            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].stackSize);
-            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].stackSize);
+            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
+            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
         }
     }
 

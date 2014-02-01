@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 @SideOnly(Side.CLIENT)
 public class ItemTooltipEventHandler
 {
-    private static DecimalFormat emcDecimalFormat = new DecimalFormat("#.###");
+    private static DecimalFormat emcDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     @ForgeSubscribe(priority = EventPriority.LOWEST)
     public void handleItemTooltipEvent(ItemTooltipEvent event)
