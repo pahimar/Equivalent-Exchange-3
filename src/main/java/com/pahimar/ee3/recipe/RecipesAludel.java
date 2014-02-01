@@ -96,13 +96,13 @@ public class RecipesAludel
         return null;
     }
 
-    public ItemStack[] getRecipeInputs(ItemStack itemStack)
+    public RecipeAludel getRecipe(ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
         for (RecipeAludel recipeAludel : aludelRecipes)
         {
-            if (ItemHelper.equals(recipeAludel.getRecipeOutput(), itemStack))
+            if (recipeAludel.matches(recipeInputStack, recipeInputDust))
             {
-                return recipeAludel.getRecipeInputs();
+                return recipeAludel;
             }
         }
 
