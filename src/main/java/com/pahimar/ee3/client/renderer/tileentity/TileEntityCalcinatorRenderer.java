@@ -23,13 +23,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
 {
-    // TODO Show the firepot as being "lit"
-    // TODO Packet for display dust size/colour and calcinator state
-
     private final ModelCalcinator modelCalcinator = new ModelCalcinator();
 
     @Override
-    // TODO Fix bug: https://github.com/pahimar/Equivalent-Exchange-3/issues/573
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
         if (tileEntity instanceof TileCalcinator)

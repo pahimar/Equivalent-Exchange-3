@@ -35,8 +35,6 @@ public class RecipesAludel
         return aludelRegistry;
     }
 
-    // TODO Think about rebalancing dust:wood logs ratios for better alchemical chest EMC values
-    // TODO Method to auto-pull these into the RecipeRegistry for DynEMC
     private void init()
     {
         // Alchemical Coal
