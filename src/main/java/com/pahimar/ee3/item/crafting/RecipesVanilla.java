@@ -26,7 +26,6 @@ public class RecipesVanilla
         GameRegistry.addRecipe(new ItemStack(ModBlocks.chalk), new Object[]{"cc", "cc", 'c', new ItemStack(ModItems.chalk)});
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.glassBell), new Object[]{"iii", "i i", "i i", 'i', Block.glass});
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', Block.stone});
 
         GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.infusedPlanks, 4, 0), new ItemStack(ModBlocks.infusedWood, 1, 0));
         GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.infusedPlanks, 4, 1), new ItemStack(ModBlocks.infusedWood, 1, 1));
@@ -36,7 +35,8 @@ public class RecipesVanilla
         GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 1), new Object[]{"ppp", "p p", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 1)});
         GameRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new Object[]{"ppp", "p p", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 2)});
 
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"iii", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.calcinator), new Object[]{"i i", "sis", "s s", 'i', Item.ingotIron, 's', "stone"});
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.aludelBase), new Object[]{"iii", "sis", "iii", 'i', Item.ingotIron, 's', "stone"});
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.researchStation), new Object[]{"ipi", " s ", "sss", 'p', "plankWood", 'i', Item.ingotIron, 's', "stone"});
     }
 
@@ -47,7 +47,6 @@ public class RecipesVanilla
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.alchemicalFuel, 9, 2), new ItemStack(ModBlocks.alchemicalFuel, 1, 2));
 
         GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
-        GameRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new Object[]{"sss", "sis", "sss", 's', ModItems.miniumShard, 'i', ModItems.inertStone});
 
         // TODO Proper recipes for the different bag sizes
         // TODO Also, decide if we want different sizes, and appropriate recipes

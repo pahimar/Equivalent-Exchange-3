@@ -3,6 +3,7 @@ package com.pahimar.ee3.client.gui.inventory;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.lib.Textures;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -21,10 +22,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalBag extends GuiContainer
 {
-
     public GuiAlchemicalBag(InventoryPlayer inventoryPlayer)
     {
-
         super(new ContainerAlchemicalBag(inventoryPlayer));
         xSize = 248;
         ySize = 186;
@@ -33,7 +32,6 @@ public class GuiAlchemicalBag extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 96 + 2, 4210752);
     }
@@ -41,11 +39,10 @@ public class GuiAlchemicalBag extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
     {
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         // this.mc.getTextureManager().bindTexture(...)
-        //this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE);
+        this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE_SMALL);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
@@ -55,7 +52,6 @@ public class GuiAlchemicalBag extends GuiContainer
     @Override
     public void onGuiClosed()
     {
-
         super.onGuiClosed();
 
         if (mc.thePlayer != null)
