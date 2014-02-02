@@ -48,9 +48,9 @@ public class RecipesVanilla
 
         GameRegistry.addRecipe(new ItemStack(ModItems.inertStone), new Object[]{"sis", "igi", "sis", 's', Block.stone, 'i', Item.ingotIron, 'g', Item.ingotGold});
 
-        // TODO Proper recipes for the different bag sizes
-        // TODO Also, decide if we want different sizes, and appropriate recipes
-        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag), new Object[]{"ccc", "c c", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 2)});
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 0), new Object[]{"ccc", "cdc", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 0), 'd', new ItemStack(ModItems.alchemicalDust, 1, 1)});
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 1), new Object[]{"ccc", "cdc", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 1), 'd', new ItemStack(ModItems.alchemicalDust, 1, 2)});
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 2), new Object[]{"ccc", "cdc", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 2), 'd', new ItemStack(ModItems.alchemicalDust, 1, 3)});
 
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
     }
