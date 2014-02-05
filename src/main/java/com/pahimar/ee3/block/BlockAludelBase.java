@@ -130,8 +130,19 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
                 tileGlassBell.setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, null);
 
                 tileAludel.setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStackGlassBell);
+
+                tileAludel.hasGlassBell = true;
             }
         }
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, int blockID)
+    {
+        TileAludel aludel = (TileAludel)world.getBlockTileEntity(x, y, z);
+        aludel.hasGlassBell = world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell;
+
+        super.onNeighborBlockChange(world, x, y, z, blockID);
     }
 
     @Override

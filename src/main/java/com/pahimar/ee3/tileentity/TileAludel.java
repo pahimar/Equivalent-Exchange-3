@@ -43,6 +43,8 @@ public class TileAludel extends TileEE implements IInventory
 
     public ItemStack outputItemStack;
 
+    public boolean hasGlassBell = false;
+
     public TileAludel()
     {
         inventory = new ItemStack[INVENTORY_SIZE];
@@ -164,6 +166,7 @@ public class TileAludel extends TileEE implements IInventory
         deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
         fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
         itemCookTime = nbtTagCompound.getInteger("itemCookTime");
+        hasGlassBell = nbtTagCompound.getBoolean("hasGlassBell");
     }
 
     @Override
@@ -187,6 +190,7 @@ public class TileAludel extends TileEE implements IInventory
         nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
         nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
         nbtTagCompound.setInteger("itemCookTime", itemCookTime);
+        nbtTagCompound.setBoolean("hasGlassBell", hasGlassBell);
     }
 
     @Override
@@ -288,7 +292,7 @@ public class TileAludel extends TileEE implements IInventory
 
     private boolean canInfuse()
     {
-        if (inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
+        if (!hasGlassBell || inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
         {
             return false;
         }
@@ -362,7 +366,7 @@ public class TileAludel extends TileEE implements IInventory
 
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
-        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        if (hasGlassBell)
         {
             worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
         }
