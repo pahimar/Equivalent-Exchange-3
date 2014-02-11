@@ -377,27 +377,7 @@ public class TileCalcinator extends TileEE implements IInventory
         if (this.canCalcinate())
         {
             ItemStack alchemicalDustStack = CalcinationManager.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
-
-            if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] == null)
-            {
-                this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = alchemicalDustStack.copy();
-            }
-            else if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
-                    && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < getInventoryStackLimit()
-                    && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getMaxStackSize())
-            {
-                inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
-            }
-            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] == null)
-            {
-                this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] = alchemicalDustStack.copy();
-            }
-            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
-                    && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < getInventoryStackLimit()
-                    && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getMaxStackSize())
-            {
-                inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
-            }
+            addItemStackToOutput(alchemicalDustStack.copy());
 
             this.inventory[INPUT_INVENTORY_INDEX].stackSize--;
 
@@ -405,6 +385,40 @@ public class TileCalcinator extends TileEE implements IInventory
             {
                 this.inventory[INPUT_INVENTORY_INDEX] = null;
             }
+        }
+    }
+
+    private void addItemStackToOutput(ItemStack alchemicalDustStack)
+    {
+        int maxStackSize = Math.min(getInventoryStackLimit(), alchemicalDustStack.getMaxStackSize());
+
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] == null)
+        {
+            this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = alchemicalDustStack;
+            return;
+        }
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
+                && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < maxStackSize)
+        {
+            int addedSize = Math.min(alchemicalDustStack.stackSize, maxStackSize - this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize);
+            alchemicalDustStack.stackSize -= addedSize;
+            this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += addedSize;
+            if (alchemicalDustStack == null || alchemicalDustStack.stackSize == 0)
+            {
+                return;
+            }
+        }
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] == null)
+        {
+            this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] = alchemicalDustStack;
+            return;
+        }
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
+                && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < maxStackSize)
+        {
+            int addedSize = Math.min(alchemicalDustStack.stackSize, maxStackSize - this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize);
+            alchemicalDustStack.stackSize -= addedSize;
+            this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += addedSize;
         }
     }
 
