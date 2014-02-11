@@ -382,7 +382,9 @@ public class TileCalcinator extends TileEE implements IInventory
             {
                 this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = alchemicalDustStack.copy();
             }
-            else if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack))
+            else if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
+                    && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < getInventoryStackLimit()
+                    && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].getMaxStackSize())
             {
                 inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
             }
@@ -390,7 +392,9 @@ public class TileCalcinator extends TileEE implements IInventory
             {
                 this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] = alchemicalDustStack.copy();
             }
-            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack))
+            else if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
+                    && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < getInventoryStackLimit()
+                    && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].getMaxStackSize())
             {
                 inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += alchemicalDustStack.stackSize;
             }
