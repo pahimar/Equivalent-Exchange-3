@@ -6,6 +6,7 @@ import com.pahimar.ee3.network.packet.PacketTileCalcinator;
 import com.pahimar.ee3.recipe.CalcinationManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -118,6 +119,17 @@ public class TileCalcinator extends TileEE implements IInventory
     public int getInventoryStackLimit()
     {
         return 64;
+    }
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     *
+     * @param entityplayer
+     */
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return true;
     }
 
     @Override

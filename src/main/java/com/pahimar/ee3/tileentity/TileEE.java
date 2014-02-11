@@ -3,7 +3,6 @@ package com.pahimar.ee3.tileentity;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileUpdate;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
@@ -73,11 +72,6 @@ public class TileEE extends TileEntity
     {
 
         this.customName = customName;
-    }
-
-    public boolean isUseableByPlayer(EntityPlayer player)
-    {
-        return true;
     }
 
     @Override

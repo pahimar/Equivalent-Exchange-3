@@ -5,6 +5,7 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -199,6 +200,17 @@ public class TileGlassBell extends TileEE implements IInventory
     public void onInventoryChanged()
     {
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+    }
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     *
+     * @param entityplayer
+     */
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return true;
     }
 
     @Override

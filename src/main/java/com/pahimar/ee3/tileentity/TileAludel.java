@@ -9,6 +9,7 @@ import com.pahimar.ee3.recipe.RecipesAludel;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -370,6 +371,17 @@ public class TileAludel extends TileEE implements IInventory
         {
             worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
         }
+    }
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     *
+     * @param entityplayer
+     */
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return true;
     }
 
     @Override
