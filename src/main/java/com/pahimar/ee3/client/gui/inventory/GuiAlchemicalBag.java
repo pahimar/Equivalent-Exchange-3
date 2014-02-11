@@ -22,18 +22,43 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalBag extends GuiContainer
 {
-    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer)
+    private ItemStack alchemicalBag;
+
+    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer, ItemStack alchemicalBag)
     {
-        super(new ContainerAlchemicalBag(inventoryPlayer));
-        xSize = 248;
-        ySize = 186;
+        super(new ContainerAlchemicalBag(inventoryPlayer, alchemicalBag));
+        this.alchemicalBag = alchemicalBag;
+
+        if (this.alchemicalBag.getItemDamage() == 0)
+        {
+            xSize = 230;
+            ySize = 186;
+        }
+        else if (this.alchemicalBag.getItemDamage() == 1)
+        {
+            xSize = 230;
+            ySize = 240;
+        }
+        else if (this.alchemicalBag.getItemDamage() == 2)
+        {
+            xSize = 248;
+            ySize = 256;
+        }
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 96 + 2, 4210752);
+        if (this.alchemicalBag.getItemDamage() == 0 || alchemicalBag.getItemDamage() == 1)
+        {
+            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
+            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 35, ySize - 94 + 2, 4210752);
+        }
+        else
+        {
+            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
+            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 94 + 2, 4210752);
+        }
     }
 
     @Override
@@ -41,8 +66,18 @@ public class GuiAlchemicalBag extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        // this.mc.getTextureManager().bindTexture(...)
-        this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE_SMALL);
+        if (this.alchemicalBag.getItemDamage() == 0)
+        {
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_SMALL);
+        }
+        else if (this.alchemicalBag.getItemDamage() == 1)
+        {
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_MEDIUM);
+        }
+        else if (this.alchemicalBag.getItemDamage() == 2)
+        {
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_LARGE);
+        }
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;

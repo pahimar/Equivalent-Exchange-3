@@ -2,6 +2,7 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.item.crafting.RecipesTransmutationStones;
 import com.pahimar.ee3.item.crafting.RecipesVanilla;
@@ -13,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+
+import java.util.UUID;
 
 /**
  * Equivalent-Exchange-3
@@ -38,16 +41,27 @@ public class CraftingHandler implements ICraftingHandler
     }
 
     @Override
-    public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix)
+    public void onCrafting(EntityPlayer player, ItemStack itemStack, IInventory craftMatrix)
     {
         if (player.worldObj.isRemote)
         {
             doPortableCrafting(player, craftMatrix);
         }
+
+        if (!player.worldObj.isRemote)
+        {
+            // Set the UUID on an Alchemical Bag when picked up from crafting
+            if (itemStack.getItem() instanceof ItemAlchemicalBag)
+            {
+                UUID itemUUID = UUID.randomUUID();
+                ItemStackNBTHelper.setLong(itemStack, Strings.NBT_ITEM_UUID_MOST_SIG, itemUUID.getMostSignificantBits());
+                ItemStackNBTHelper.setLong(itemStack, Strings.NBT_ITEM_UUID_LEAST_SIG, itemUUID.getLeastSignificantBits());
+            }
+        }
     }
 
     @Override
-    public void onSmelting(EntityPlayer player, ItemStack item)
+    public void onSmelting(EntityPlayer player, ItemStack itemStack)
     {
 
     }

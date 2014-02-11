@@ -34,6 +34,8 @@ public class Strings
     public static final String NBT_ITEM_CRAFTING_GUI_OPEN = "itemCraftingGuiOpen";
     public static final String NBT_ITEM_TRANSMUTATION_GUI_OPEN = "itemTransmutationGuiOpen";
     public static final String NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN = "itemAlchemicalBagGuiOpen";
+    public static final String NBT_ITEM_UUID_MOST_SIG = "itemUUIDMostSig";
+    public static final String NBT_ITEM_UUID_LEAST_SIG = "itemUUIDLeastSig";
     public static final String NBT_ITEM_DISPLAY = "display";
     public static final String NBT_ITEM_COLOR = "color";
     public static final String NBT_TE_STATE_KEY = "teState";

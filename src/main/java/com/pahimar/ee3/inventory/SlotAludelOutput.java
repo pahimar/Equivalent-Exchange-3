@@ -6,16 +6,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * SlotCalcinator
- *
- * @author pahimar
- */
-public class SlotCalcinator extends Slot
+public class SlotAludelOutput extends Slot
 {
-    public SlotCalcinator(IInventory inventory, int x, int y, int z)
+    public SlotAludelOutput(IInventory inventory, int x, int y, int z)
     {
         super(inventory, x, y, z);
     }
