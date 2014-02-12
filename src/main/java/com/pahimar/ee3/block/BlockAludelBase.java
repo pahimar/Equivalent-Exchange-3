@@ -97,12 +97,13 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
                 {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
                 }
-                else if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+            }
+
+            if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+            {
+                if (player.getHeldItem() != null && player.getHeldItem().itemID == ModBlocks.glassBell.blockID)
                 {
-                    if (player.getHeldItem() != null && player.getHeldItem().itemID == ModBlocks.glassBell.blockID)
-                    {
-                        player.getHeldItem().getItem().onItemUse(player.getHeldItem(), player, world, x, y, z, faceHit, par7, par8, par9);
-                    }
+                    return false;
                 }
             }
 
