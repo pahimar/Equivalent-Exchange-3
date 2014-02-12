@@ -6,6 +6,7 @@ import com.pahimar.ee3.network.packet.PacketTileCalcinator;
 import com.pahimar.ee3.recipe.CalcinationManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.tileentity.TileEntityHopper;
 
 /**
  * Equivalent-Exchange-3
@@ -40,6 +42,8 @@ public class TileCalcinator extends TileEE implements IInventory
     public int itemCookTime;                // How long the current item has been "cooking"
 
     public byte leftStackSize, leftStackMeta, rightStackSize, rightStackMeta;
+
+    public int itemSuckCooldown = 0;
 
     public TileCalcinator()
     {
@@ -294,6 +298,20 @@ public class TileCalcinator extends TileEE implements IInventory
             {
                 sendUpdate = true;
             }
+
+            //Item sucking
+            if (this.itemSuckCooldown > 0)
+            {
+                itemSuckCooldown--;
+            }
+            else
+            {
+                if (suckItemsIntoCalcinator(this))
+                {
+                    onInventoryChanged();
+                }
+                itemSuckCooldown = 2;
+            }
         }
 
         if (sendUpdate)
@@ -420,6 +438,16 @@ public class TileCalcinator extends TileEE implements IInventory
             alchemicalDustStack.stackSize -= addedSize;
             this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += addedSize;
         }
+    }
+
+    /**
+     * Sucks one item into the given hopper from an inventory or EntityItem above it.
+     */
+    public static boolean suckItemsIntoCalcinator(TileCalcinator calcinator)
+    {
+        EntityItem entityitem = TileEntityHopper.getEntityAbove(calcinator.getWorldObj(), calcinator.xCoord, calcinator.yCoord + 1.0D, calcinator.zCoord);
+
+        return entityitem != null && TileEntityHopper.insertStackFromEntity(calcinator, entityitem);
     }
 
     @Override
