@@ -525,6 +525,12 @@ public class TileCalcinator extends TileEE implements ISidedInventory
         }
     }
 
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     *
+     * @param side
+     */
     @Override
     public int[] getAccessibleSlotsFromSide(int side)
     {

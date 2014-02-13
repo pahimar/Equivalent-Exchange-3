@@ -1,6 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
@@ -10,12 +11,13 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -24,7 +26,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  *
  * @author pahimar
  */
-public class TileAludel extends TileEE implements IInventory
+public class TileAludel extends TileEE implements ISidedInventory
 {
     /**
      * The ItemStacks that hold the items currently being used in the Aludel
@@ -203,7 +205,25 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+        switch (slotIndex)
+        {
+            case FUEL_INVENTORY_INDEX:
+            {
+                return TileEntityFurnace.isItemFuel(itemStack);
+            }
+            case INPUT_INVENTORY_INDEX:
+            {
+                return true;
+            }
+            case DUST_INVENTORY_INDEX:
+            {
+                return itemStack.getItem() instanceof ItemAlchemicalDust;
+            }
+            default:
+            {
+                return false;
+            }
+        }
     }
 
     @Override
@@ -411,5 +431,52 @@ public class TileAludel extends TileEE implements IInventory
         stringBuilder.append("\n");
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     *
+     * @param side
+     */
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side)
+    {
+        return side == ForgeDirection.DOWN.ordinal() ? new int[]{FUEL_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX} : new int[]{INPUT_INVENTORY_INDEX, DUST_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX};
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     *
+     * @param slotIndex
+     * @param itemStack
+     * @param side
+     */
+    @Override
+    public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        {
+            return isItemValidForSlot(slotIndex, itemStack);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     *
+     * @param slotIndex
+     * @param itemStack
+     * @param side
+     */
+    @Override
+    public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return slotIndex == OUTPUT_INVENTORY_INDEX;
     }
 }
