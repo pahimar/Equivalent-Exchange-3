@@ -8,13 +8,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityHopper;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -23,7 +24,7 @@ import net.minecraft.tileentity.TileEntityHopper;
  *
  * @author pahimar
  */
-public class TileCalcinator extends TileEE implements IInventory
+public class TileCalcinator extends TileEE implements ISidedInventory
 {
     /**
      * The ItemStacks that hold the items currently being used in the Calcinator
@@ -43,7 +44,8 @@ public class TileCalcinator extends TileEE implements IInventory
 
     public byte leftStackSize, leftStackMeta, rightStackSize, rightStackMeta;
 
-    public int itemSuckCooldown = 0;
+    public int itemSuckCoolDown = 0;
+    private static final int DEFAULT_ITEM_SUCK_COOL_DOWN = 20;
 
     public TileCalcinator()
     {
@@ -204,6 +206,7 @@ public class TileCalcinator extends TileEE implements IInventory
         deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
         fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
         itemCookTime = nbtTagCompound.getInteger("itemCookTime");
+        itemSuckCoolDown = nbtTagCompound.getInteger("itemSuckCoolDown");
     }
 
     @Override
@@ -227,6 +230,7 @@ public class TileCalcinator extends TileEE implements IInventory
         nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
         nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
         nbtTagCompound.setInteger("itemCookTime", itemCookTime);
+        nbtTagCompound.setInteger("itemSuckCoolDown", itemSuckCoolDown);
     }
 
     @Override
@@ -238,7 +242,21 @@ public class TileCalcinator extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+        switch (slotIndex)
+        {
+            case FUEL_INVENTORY_INDEX:
+            {
+                return TileEntityFurnace.isItemFuel(itemStack);
+            }
+            case INPUT_INVENTORY_INDEX:
+            {
+                return true;
+            }
+            default:
+            {
+                return false;
+            }
+        }
     }
 
     @Override
@@ -300,9 +318,9 @@ public class TileCalcinator extends TileEE implements IInventory
             }
 
             //Item sucking
-            if (this.itemSuckCooldown > 0)
+            if (this.itemSuckCoolDown > 0)
             {
-                itemSuckCooldown--;
+                itemSuckCoolDown--;
             }
             else
             {
@@ -310,7 +328,7 @@ public class TileCalcinator extends TileEE implements IInventory
                 {
                     onInventoryChanged();
                 }
-                itemSuckCooldown = 2;
+                itemSuckCoolDown = DEFAULT_ITEM_SUCK_COOL_DOWN;
             }
         }
 
@@ -505,5 +523,23 @@ public class TileCalcinator extends TileEE implements IInventory
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackMeta());
         }
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side)
+    {
+        return side == ForgeDirection.DOWN.ordinal() ? new int[]{FUEL_INVENTORY_INDEX, OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX} : new int[]{INPUT_INVENTORY_INDEX, OUTPUT_LEFT_INVENTORY_INDEX, OUTPUT_RIGHT_INVENTORY_INDEX};
+    }
+
+    @Override
+    public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return isItemValidForSlot(slotIndex, itemStack);
+    }
+
+    @Override
+    public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return slotIndex == OUTPUT_LEFT_INVENTORY_INDEX || slotIndex == OUTPUT_RIGHT_INVENTORY_INDEX;
     }
 }
