@@ -34,8 +34,15 @@ public class ItemTooltipEventHandler
             if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
                 EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);
-                event.toolTip.add("EMC (Item): " + String.format("%s", emcDecimalFormat.format(emcValue.getValue())));
-                event.toolTip.add("EMC (Stack): " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                if (stack.getStackSize() > 1)
+                {
+                    event.toolTip.add("EMC (Item): " + String.format("%s", emcDecimalFormat.format(emcValue.getValue())));
+                    event.toolTip.add("EMC (Stack): " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                }
+                else
+                {
+                    event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                }
             }
             else
             {
