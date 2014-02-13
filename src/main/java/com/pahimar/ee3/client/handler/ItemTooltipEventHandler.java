@@ -24,6 +24,7 @@ public class ItemTooltipEventHandler
 {
     private static DecimalFormat emcDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
+    @SuppressWarnings("unused")
     @ForgeSubscribe(priority = EventPriority.LOWEST)
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
