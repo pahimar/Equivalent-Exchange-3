@@ -1,21 +1,30 @@
 package com.pahimar.ee3.addon;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.fluids.FluidRegistry;
+
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.LogHelper;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidRegistry;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Equivalent-Exchange-3
  * <p/>
  * AddonIndustrialCraft2
- *
+ * 
  * @author pahimar
  */
 public class AddonIndustrialCraft2
@@ -52,14 +61,8 @@ public class AddonIndustrialCraft2
         AddonHandler.sendAddRecipe(new OreStack("plateDenseBronze"), new OreStack("ingotBronze", 9));
 
         /**
-         * Clay
-         */
-        AddonHandler.sendAddRecipe(new OreStack("dustClay", 2), Block.blockClay);
-
-        /**
          * Coal
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustCoal"), new ItemStack(Item.coal, 1));
         AddonHandler.sendAddRecipe(new OreStack("dustHydratedCoal"), new OreStack("dustCoal"), new WrappedStack(FluidRegistry.WATER));
 
         /**
@@ -107,13 +110,6 @@ public class AddonIndustrialCraft2
         AddonHandler.sendAddRecipe(new OreStack("plateDenseIron"), new ItemStack(Item.ingotIron, 9));
 
         /**
-         * Lapis
-         */
-        AddonHandler.sendAddRecipe(new OreStack("dustLapis"), new ItemStack(Item.dyePowder, 1, 4));
-        AddonHandler.sendAddRecipe(new OreStack("plateLapis"), new OreStack("dustLapis"));
-        AddonHandler.sendAddRecipe(new OreStack("plateDenseLapis"), new OreStack("plateLapis", 9));
-
-        /**
          * Lead
          */
         AddonHandler.sendAddRecipe(new OreStack("crushedLead"), new OreStack("oreLead"));
@@ -129,13 +125,6 @@ public class AddonIndustrialCraft2
          * Lithium
          */
         AddonHandler.sendAddRecipe(new OreStack("dustTinyLithium", 9), new OreStack("dustLithium"));
-
-        /**
-         * Obsidian
-         */
-        AddonHandler.sendAddRecipe(new OreStack("dustObsidian", 4), Block.obsidian);
-        AddonHandler.sendAddRecipe(new OreStack("plateObsidian"), new OreStack("dustObsidian"));
-        AddonHandler.sendAddRecipe(new OreStack("plateDenseObsidian"), new OreStack("plateObsidian", 9));
 
         /**
          * Silver
@@ -171,15 +160,111 @@ public class AddonIndustrialCraft2
         AddonHandler.sendAddRecipe(new OreStack("blockUranium"), new OreStack("oreUranium", 9));
 
         /**
-         * Tools
-         */
-        AddonHandler.sendAddRecipe(new OreStack("craftingToolForgeHammer"), new ItemStack(Item.ingotIron, 5), new OreStack("stickWood", 2));
-        AddonHandler.sendAddRecipe(new OreStack("craftingToolWireCutter"), new ItemStack(Item.ingotIron, 2), new OreStack("plateIron", 3));
-
-        /**
          * Items
          */
         AddonHandler.sendAddRecipe(new OreStack("itemRubber"), new OreStack("woodRubber"));
+
+        /**
+         * Shaped and Shapeless Recipes
+         */
+        try
+        {
+            for (IRecipe irecipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList())
+            {
+                if ((irecipe.getClass() == Class.forName("ic2.core.AdvRecipe") || irecipe.getClass() == Class.forName("ic2.core.AdvShapelessRecipe")))
+                {
+                    Object[] inputs = (Object[]) irecipe.getClass().getDeclaredField("input").get(irecipe);
+                    ItemStack output = (ItemStack) irecipe.getClass().getDeclaredField("output").get(irecipe);
+
+                    ArrayList list = new ArrayList();
+                    for (Object input : inputs)
+                    {
+                        if (input instanceof String)
+                            list.add(new OreStack((String) input));
+                        else if (input instanceof ItemStack || input instanceof Item || input instanceof Block)
+                            list.add(new WrappedStack(input));
+                    }
+                    if (!list.isEmpty())
+                        AddonHandler.sendAddRecipe(new WrappedStack(output), list.toArray());
+                }
+            }
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
+        catch (SecurityException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        catch (NoSuchFieldException e)
+        {
+            e.printStackTrace();
+        }
+
+        /**
+         * Machines
+         */
+        try
+        {
+            for (Field field : Class.forName("ic2.api.recipe.Recipes").getFields())
+            {
+                if (!field.getName().equals("Scanner") && !field.getName().equals("matterAmplifier") && !field.getName().equals("recycler") && !field.getName().equals("oreWashing") && !field.getName().equals("centrifuge"))
+                {
+                    Object recipeManager = field.get(null);
+                    if (Class.forName("ic2.api.recipe.IMachineRecipeManager").isAssignableFrom(recipeManager.getClass()))
+                    {
+                        Map recipeMap = (Map) recipeManager.getClass().getMethod("getRecipes").invoke(recipeManager);
+                        for (Entry entry : (Set<Entry>) recipeMap.entrySet())
+                        {
+                            Object input = entry.getKey().getClass().getDeclaredField("input").get(entry.getKey());
+                            int amount = (Integer) entry.getKey().getClass().getDeclaredField("amount").get(entry.getKey());
+                            if (input instanceof String)
+                                input = new OreStack((String) input, amount);
+                            List<ItemStack> output = (List<ItemStack>) entry.getValue().getClass().getDeclaredField("items").get(entry.getValue());
+
+                            AddonHandler.sendAddRecipe(new WrappedStack(output.get(0)), new WrappedStack(input, amount));
+                        }
+                    }
+                }
+            }
+        }
+        catch (SecurityException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+        catch (NoSuchMethodException e)
+        {
+            e.printStackTrace();
+        }
+        catch (NoSuchFieldException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private static void addPreAssignmentEmcValues()
