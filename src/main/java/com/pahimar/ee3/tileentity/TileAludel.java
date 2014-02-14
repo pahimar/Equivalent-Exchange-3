@@ -1,19 +1,23 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.ItemAlchemicalDust;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
-import com.pahimar.ee3.recipe.AludelRecipeInputPair;
 import com.pahimar.ee3.recipe.RecipesAludel;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -22,7 +26,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  *
  * @author pahimar
  */
-public class TileAludel extends TileEE implements IInventory
+public class TileAludel extends TileEE implements ISidedInventory
 {
     /**
      * The ItemStacks that hold the items currently being used in the Aludel
@@ -39,6 +43,10 @@ public class TileAludel extends TileEE implements IInventory
     public int deviceCookTime;              // How much longer the Aludel will cook
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
+
+    public ItemStack outputItemStack;
+
+    public boolean hasGlassBell = false;
 
     public TileAludel()
     {
@@ -161,6 +169,7 @@ public class TileAludel extends TileEE implements IInventory
         deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
         fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
         itemCookTime = nbtTagCompound.getInteger("itemCookTime");
+        hasGlassBell = nbtTagCompound.getBoolean("hasGlassBell");
     }
 
     @Override
@@ -184,6 +193,7 @@ public class TileAludel extends TileEE implements IInventory
         nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
         nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
         nbtTagCompound.setInteger("itemCookTime", itemCookTime);
+        nbtTagCompound.setBoolean("hasGlassBell", hasGlassBell);
     }
 
     @Override
@@ -195,7 +205,25 @@ public class TileAludel extends TileEE implements IInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return true;
+        switch (slotIndex)
+        {
+            case FUEL_INVENTORY_INDEX:
+            {
+                return TileEntityFurnace.isItemFuel(itemStack);
+            }
+            case INPUT_INVENTORY_INDEX:
+            {
+                return true;
+            }
+            case DUST_INVENTORY_INDEX:
+            {
+                return itemStack.getItem() instanceof ItemAlchemicalDust;
+            }
+            default:
+            {
+                return false;
+            }
+        }
     }
 
     @Override
@@ -262,6 +290,7 @@ public class TileAludel extends TileEE implements IInventory
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
+            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128d, this.worldObj.provider.dimensionId, getDescriptionPacket());
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
         }
     }
@@ -284,7 +313,7 @@ public class TileAludel extends TileEE implements IInventory
 
     private boolean canInfuse()
     {
-        if (inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
+        if (!hasGlassBell || inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
         {
             return false;
         }
@@ -320,27 +349,26 @@ public class TileAludel extends TileEE implements IInventory
     {
         if (this.canInfuse())
         {
-            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
-            AludelRecipeInputPair inputPair = RecipesAludel.getInstance().getRecipeInputs(infusedItemStack);
+            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
 
             if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
             {
-                this.inventory[OUTPUT_INVENTORY_INDEX] = infusedItemStack.copy();
+                this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
             }
-            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack))
+            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput()))
             {
-                inventory[OUTPUT_INVENTORY_INDEX].stackSize += infusedItemStack.stackSize;
+                inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
             }
 
-            decrStackSize(INPUT_INVENTORY_INDEX, inputPair.inputStack.stackSize);
-            decrStackSize(DUST_INVENTORY_INDEX, inputPair.dustStack.stackSize);
+            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
+            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
         }
     }
 
     @Override
     public Packet getDescriptionPacket()
     {
-        ItemStack itemStack = getStackInSlot(INPUT_INVENTORY_INDEX);
+        ItemStack itemStack = this.inventory[OUTPUT_INVENTORY_INDEX];
 
         if (itemStack != null && itemStack.stackSize > 0)
         {
@@ -348,19 +376,32 @@ public class TileAludel extends TileEE implements IInventory
         }
         else
         {
-            return super.getDescriptionPacket();
+            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, -1, 0, 0, 0));
         }
     }
 
     @Override
     public void onInventoryChanged()
     {
+        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
+
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
 
-        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        if (hasGlassBell)
         {
             worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
         }
+    }
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     *
+     * @param entityplayer
+     */
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return true;
     }
 
     @Override
@@ -390,5 +431,52 @@ public class TileAludel extends TileEE implements IInventory
         stringBuilder.append("\n");
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     *
+     * @param side
+     */
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side)
+    {
+        return side == ForgeDirection.DOWN.ordinal() ? new int[]{FUEL_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX} : new int[]{INPUT_INVENTORY_INDEX, DUST_INVENTORY_INDEX, OUTPUT_INVENTORY_INDEX};
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     *
+     * @param slotIndex
+     * @param itemStack
+     * @param side
+     */
+    @Override
+    public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        {
+            return isItemValidForSlot(slotIndex, itemStack);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     *
+     * @param slotIndex
+     * @param itemStack
+     * @param side
+     */
+    @Override
+    public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return slotIndex == OUTPUT_INVENTORY_INDEX;
     }
 }

@@ -26,13 +26,11 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
 {
-
     private final ModelGlassBell modelGlassBell = new ModelGlassBell();
     private final RenderItem customRenderItem;
 
     public TileEntityGlassBellRenderer()
     {
-
         customRenderItem = new RenderItem()
         {
             @Override
@@ -49,7 +47,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-
         if (tileEntity instanceof TileGlassBell)
         {
             TileGlassBell tileGlassBell = (TileGlassBell) tileEntity;
@@ -77,15 +74,14 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
              */
             GL11.glPushMatrix();
 
-            if (tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX) != null)
+            if (tileGlassBell.outputItemStack != null)
             {
-
-                float scaleFactor = getGhostItemScaleFactor(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
+                float scaleFactor = getGhostItemScaleFactor(tileGlassBell.outputItemStack);
                 float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
                 EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
                 ghostEntityItem.hoverStart = 0.0F;
-                ghostEntityItem.setEntityItemStack(tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX));
+                ghostEntityItem.setEntityItemStack(tileGlassBell.outputItemStack);
 
                 translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
                 GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
@@ -103,7 +99,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
 
     private void renderGlassBellByOrientation(double x, double y, double z, ForgeDirection forgeDirection)
     {
-
         switch (forgeDirection)
         {
             case DOWN:
@@ -161,7 +156,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
 
     private void translateGhostItemByOrientation(ItemStack ghostItemStack, double x, double y, double z, ForgeDirection forgeDirection)
     {
-
         if (ghostItemStack != null)
         {
             if (ghostItemStack.getItem() instanceof ItemBlock)
@@ -255,7 +249,6 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
 
     private float getGhostItemScaleFactor(ItemStack itemStack)
     {
-
         float scaleFactor = 1.0F;
 
         if (itemStack != null)

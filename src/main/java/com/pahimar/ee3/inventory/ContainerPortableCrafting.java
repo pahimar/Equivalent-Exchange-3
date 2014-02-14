@@ -17,24 +17,20 @@ import net.minecraft.world.World;
  */
 public class ContainerPortableCrafting extends ContainerWorkbench
 {
-
     public ContainerPortableCrafting(InventoryPlayer inventoryPlayer, World world, int x, int y, int z)
     {
-
         super(inventoryPlayer, world, x, y, z);
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer var1)
     {
-
         return true;
     }
 
     @Override
     public void onContainerClosed(EntityPlayer player)
     {
-
         super.onContainerClosed(player);
 
         if (!player.worldObj.isRemote)

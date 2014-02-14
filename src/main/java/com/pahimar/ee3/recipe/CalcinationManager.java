@@ -18,7 +18,6 @@ import java.util.TreeMap;
  */
 public class CalcinationManager
 {
-    // TODO Random chance to get an extra item in the stack
     public static ItemStack getCalcinationResult(ItemStack calcinedStack)
     {
         ItemStack itemStack = calcinedStack.copy();

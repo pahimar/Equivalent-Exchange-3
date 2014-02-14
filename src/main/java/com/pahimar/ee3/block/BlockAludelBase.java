@@ -97,12 +97,13 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
                 {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
                 }
-                else if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+            }
+
+            if (world.getBlockTileEntity(x, y, z) instanceof TileAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+            {
+                if (player.getHeldItem() != null && player.getHeldItem().itemID == ModBlocks.glassBell.blockID)
                 {
-                    if (player.getHeldItem() != null && player.getHeldItem().itemID == ModBlocks.glassBell.blockID)
-                    {
-                        player.getHeldItem().getItem().onItemUse(player.getHeldItem(), player, world, x, y, z, faceHit, par7, par8, par9);
-                    }
+                    return false;
                 }
             }
 
@@ -130,8 +131,19 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
                 tileGlassBell.setInventorySlotContents(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, null);
 
                 tileAludel.setInventorySlotContents(TileAludel.INPUT_INVENTORY_INDEX, itemStackGlassBell);
+
+                tileAludel.hasGlassBell = true;
             }
         }
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, int blockID)
+    {
+        TileAludel aludel = (TileAludel)world.getBlockTileEntity(x, y, z);
+        aludel.hasGlassBell = world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell;
+
+        super.onNeighborBlockChange(world, x, y, z, blockID);
     }
 
     @Override
@@ -151,11 +163,26 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        if (world.getBlockTileEntity(x, y, z) instanceof TileAludel)
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileAludel)
         {
-            if (((TileAludel) world.getBlockTileEntity(x, y, z)).getState() == 1)
+            if (((TileAludel) tile).getState() == 1)
             {
-                world.spawnParticle(Particles.FLAME, (double) x + 0.175F, (double) y + 0.33F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
+                switch(((TileAludel) tile).getOrientation())
+                {
+                    case NORTH:
+                        world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.33F, (double) z + 0.175F, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case SOUTH:
+                        world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.33F, (double) z + 0.825F, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case WEST:
+                        world.spawnParticle(Particles.FLAME, (double) x + 0.175F, (double) y + 0.33F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
+                        break;
+                    case EAST:
+                        world.spawnParticle(Particles.FLAME, (double) x + 0.825F, (double) y + 0.33F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
+                        break;
+                }
 
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.7F, (double) z + 0.0F, 0.0D, 0.05D, 0.0D);
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.7F, (double) z + 1.0F, 0.0D, 0.05D, 0.0D);

@@ -15,7 +15,7 @@ public class BlockChalk extends BlockEE
         this.setHardness(0.6F);
         this.setUnlocalizedName(Strings.CHALK_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setStepSound(soundGravelFootstep);
+        this.setStepSound(soundStoneFootstep);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class ContainerAludel extends Container
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.FUEL_INVENTORY_INDEX, 44, 74));
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.INPUT_INVENTORY_INDEX, 44, 18));
         this.addSlotToContainer(new Slot(tileAludel, TileAludel.DUST_INVENTORY_INDEX, 44, 39));
-        this.addSlotToContainer(new Slot(tileAludel, TileAludel.OUTPUT_INVENTORY_INDEX, 120, 39));
+        this.addSlotToContainer(new SlotAludelOutput(tileAludel, TileAludel.OUTPUT_INVENTORY_INDEX, 120, 39));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
@@ -92,7 +92,7 @@ public class ContainerAludel extends Container
                  */
                 if (TileEntityFurnace.isItemFuel(slotItemStack))
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileAludel.FUEL_INVENTORY_INDEX, TileAludel.INPUT_INVENTORY_INDEX, false))
+                    if (!this.mergeItemStack(slotItemStack, TileAludel.FUEL_INVENTORY_INDEX, TileAludel.OUTPUT_INVENTORY_INDEX, false))
                     {
                         return null;
                     }

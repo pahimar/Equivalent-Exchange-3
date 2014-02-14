@@ -62,15 +62,15 @@ public class GuiAlchemicalChest extends GuiContainer
 
         if (tileAlchemicalChest.getState() == 0)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE_SMALL);
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_CHEST_SMALL);
         }
         else if (tileAlchemicalChest.getState() == 1)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE_MEDIUM);
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_CHEST_MEDIUM);
         }
         else if (tileAlchemicalChest.getState() == 2)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_STORAGE_LARGE);
+            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_CHEST_LARGE);
         }
 
         int xStart = (width - xSize) / 2;

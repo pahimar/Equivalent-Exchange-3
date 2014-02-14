@@ -17,41 +17,110 @@ import net.minecraft.item.ItemStack;
  */
 public class ContainerAlchemicalBag extends Container
 {
-    private final int BAG_INVENTORY_ROWS = 9;
-    private final int BAG_INVENTORY_COLUMNS = 13;
+    private int bagInventoryRows;
+    private int bagInventoryColumns;
 
+    // Small Bag
+    public static final int SMALL_BAG_INVENTORY_ROWS = 4;
+    public static final int SMALL_BAG_INVENTORY_COLUMNS = 12;
+
+    // Medium Bag
+    public static final int MEDIUM_BAG_INVENTORY_ROWS = 7;
+    public static final int MEDIUM_BAG_INVENTORY_COLUMNS = 12;
+
+    // Large Bag
+    public static final int LARGE_BAG_INVENTORY_ROWS = 9;
+    public static final int LARGE_BAG_INVENTORY_COLUMNS = 13;
+
+    // Player Inventory
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
 
-    public ContainerAlchemicalBag(InventoryPlayer inventoryPlayer)
+    public ContainerAlchemicalBag(InventoryPlayer inventoryPlayer, ItemStack alchemicalBag)
     {
+        if (alchemicalBag.getItemDamage() == 0)
+        {
+            bagInventoryRows = SMALL_BAG_INVENTORY_ROWS;
+            bagInventoryColumns = SMALL_BAG_INVENTORY_COLUMNS;
+        }
+        else if (alchemicalBag.getItemDamage() == 1)
+        {
+            bagInventoryRows = MEDIUM_BAG_INVENTORY_ROWS;
+            bagInventoryColumns = MEDIUM_BAG_INVENTORY_COLUMNS;
+        }
+        else if (alchemicalBag.getItemDamage() == 2)
+        {
+            bagInventoryRows = LARGE_BAG_INVENTORY_ROWS;
+            bagInventoryColumns = LARGE_BAG_INVENTORY_COLUMNS;
+        }
+
+        // Add the Alchemical Chest slots to the container
+        for (int bagRowIndex = 0; bagRowIndex < bagInventoryRows; ++bagRowIndex)
+        {
+            for (int bagColumnIndex = 0; bagColumnIndex < bagInventoryColumns; ++bagColumnIndex)
+            {
+                if (alchemicalBag.getItemDamage() == 0)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
+                }
+                else if (alchemicalBag.getItemDamage() == 1)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
+                }
+                else if (alchemicalBag.getItemDamage() == 2)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 8 + bagRowIndex * 18));
+                }
+            }
+        }
+
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * PLAYER_INVENTORY_COLUMNS + PLAYER_INVENTORY_COLUMNS, 44 + inventoryColumnIndex * 18, 104 + inventoryRowIndex * 18));
+                if (alchemicalBag.getItemDamage() == 0)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 104 + inventoryRowIndex * 18));
+                }
+                else if (alchemicalBag.getItemDamage() == 1)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 158 + inventoryRowIndex * 18));
+                }
+                else if (alchemicalBag.getItemDamage() == 2)
+                {
+                    this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 44 + inventoryColumnIndex * 18, 174 + inventoryRowIndex * 18));
+                }
             }
         }
 
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
-            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 162));
+            if (alchemicalBag.getItemDamage() == 0)
+            {
+                this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
+            }
+            else if (alchemicalBag.getItemDamage() == 1)
+            {
+                this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
+            }
+            else if (alchemicalBag.getItemDamage() == 2)
+            {
+                this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
+            }
         }
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer var1)
     {
-
         return true;
     }
 
     @Override
     public void onContainerClosed(EntityPlayer player)
     {
-
         super.onContainerClosed(player);
 
         if (!player.worldObj.isRemote)
@@ -73,37 +142,7 @@ public class ContainerAlchemicalBag extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
-
-        ItemStack newItemStack = null;
-        Slot slot = (Slot) inventorySlots.get(slotIndex);
-
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemStack = slot.getStack();
-            newItemStack = itemStack.copy();
-
-            if (slotIndex < BAG_INVENTORY_ROWS * BAG_INVENTORY_COLUMNS)
-            {
-                if (!this.mergeItemStack(itemStack, BAG_INVENTORY_ROWS * BAG_INVENTORY_COLUMNS, inventorySlots.size(), false))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(itemStack, 0, BAG_INVENTORY_ROWS * BAG_INVENTORY_COLUMNS, false))
-            {
-                return null;
-            }
-
-            if (itemStack.stackSize == 0)
-            {
-                slot.putStack(null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
-        }
-
-        return newItemStack;
+        // TODO
+        return null;
     }
 }

@@ -16,7 +16,6 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-
         if (ID == GuiIds.PORTABLE_CRAFTING)
         {
             return new ContainerPortableCrafting(player.inventory, world, x, y, z);
@@ -32,9 +31,8 @@ public class GuiHandler implements IGuiHandler
             return new ContainerAlchemicalChest(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
-        // TODO Alchemical Bag inventory work is incomplete
         {
-            return new ContainerAlchemicalBag(player.inventory);
+            return new ContainerAlchemicalBag(player.inventory, player.getHeldItem());
         }
         else if (ID == GuiIds.ALUDEL)
         {
@@ -57,7 +55,6 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-
         if (ID == GuiIds.PORTABLE_CRAFTING)
         {
             return new GuiPortableCrafting(player, world, x, y, z);
@@ -73,9 +70,8 @@ public class GuiHandler implements IGuiHandler
             return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
-        // TODO Alchemical Bag inventory work is incomplete
         {
-            return new GuiAlchemicalBag(player.inventory);
+            return new GuiAlchemicalBag(player.inventory, player.getHeldItem());
         }
         else if (ID == GuiIds.ALUDEL)
         {

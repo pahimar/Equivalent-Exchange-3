@@ -11,6 +11,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class BlockInfusedWood extends BlockEE
 {
     @SideOnly(Side.CLIENT)
-    private Icon logTop, logSide;
+    private Icon logEnd, logSide;
 
     public BlockInfusedWood(int id)
     {
@@ -32,14 +33,14 @@ public class BlockInfusedWood extends BlockEE
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-        logTop = iconRegister.registerIcon("log_oak_top");
+        logEnd = iconRegister.registerIcon("log_oak_top");
         logSide = iconRegister.registerIcon("log_oak");
     }
 
     @Override
     public int damageDropped(int metaData)
     {
-        return metaData;
+        return metaData & 3;
     }
 
     @Override
@@ -48,18 +49,72 @@ public class BlockInfusedWood extends BlockEE
     {
         if (ForgeDirection.getOrientation(side) == ForgeDirection.UP || ForgeDirection.getOrientation(side) == ForgeDirection.DOWN)
         {
-            return logTop;
+            if (metaData >> 2 == 0)
+            {
+                return logEnd;
+            }
+            else
+            {
+                return logSide;
+            }
+        }
+        else if (ForgeDirection.getOrientation(side) == ForgeDirection.NORTH || ForgeDirection.getOrientation(side) == ForgeDirection.SOUTH)
+        {
+            if (metaData >> 2 == 2)
+            {
+                return logEnd;
+            }
+            else
+            {
+                return logSide;
+            }
         }
         else
         {
-            return logSide;
+            if (metaData >> 2 == 1)
+            {
+                return logEnd;
+            }
+            else
+            {
+                return logSide;
+            }
         }
+    }
+
+    /**
+     * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
+     */
+    @Override
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metaData)
+    {
+        int logType = metaData & 3;
+        byte rotation = 0;
+
+        switch (side)
+        {
+            case 0:
+            case 1:
+                rotation = 0;
+                break;
+            case 2:
+            case 3:
+                rotation = 8;
+                break;
+            case 4:
+            case 5:
+                rotation = 4;
+        }
+
+        int newMetaData = logType | rotation;
+        world.setBlockMetadataWithNotify(x, y, z, newMetaData, 3);
+        return newMetaData;
     }
 
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess blockAccess, int x, int y, int z)
     {
-        int metaData = blockAccess.getBlockMetadata(x, y, z);
+        int metaData = blockAccess.getBlockMetadata(x, y, z) & 3;
 
         if (metaData == 0)
         {
@@ -82,15 +137,16 @@ public class BlockInfusedWood extends BlockEE
     @SideOnly(Side.CLIENT)
     public int getRenderColor(int metaData)
     {
-        if (metaData == 0)
+        int adjustedMetaData = metaData & 3;
+        if (adjustedMetaData == 0)
         {
             return Integer.parseInt(Colours.INFUSED_WOOD_VERDANT, 16);
         }
-        else if (metaData == 1)
+        else if (adjustedMetaData == 1)
         {
             return Integer.parseInt(Colours.INFUSED_WOOD_AZURE, 16);
         }
-        else if (metaData == 2)
+        else if (adjustedMetaData == 2)
         {
             return Integer.parseInt(Colours.INFUSED_WOOD_MINIUM, 16);
         }

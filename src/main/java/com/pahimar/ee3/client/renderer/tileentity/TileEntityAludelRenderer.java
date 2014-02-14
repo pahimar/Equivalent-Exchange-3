@@ -74,15 +74,14 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 
             if (tileGlassBell instanceof TileGlassBell)
             {
-                if (tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX) != null)
+                if (tileAludel.outputItemStack != null)
                 {
-
-                    float scaleFactor = getGhostItemScaleFactor(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
+                    float scaleFactor = getGhostItemScaleFactor(tileAludel.outputItemStack);
                     float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
                     EntityItem ghostEntityItem = new EntityItem(tileAludel.worldObj);
                     ghostEntityItem.hoverStart = 0.0F;
-                    ghostEntityItem.setEntityItemStack(tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX));
+                    ghostEntityItem.setEntityItemStack(tileAludel.outputItemStack);
 
                     GL11.glTranslatef((float) x + 0.5F, (float) y + 1.25F, (float) z + 0.5F);
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);

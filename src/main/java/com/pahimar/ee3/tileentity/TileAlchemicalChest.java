@@ -4,7 +4,7 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
-import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -140,6 +140,17 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     }
 
     /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     *
+     * @param entityplayer
+     */
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return true;
+    }
+
+    /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
     @Override
@@ -181,7 +192,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory
 
         if (++ticksSinceSync % 20 * 4 == 0)
         {
-            worldObj.addBlockEvent(xCoord, yCoord, zCoord, Block.enderChest.blockID, 1, numUsingPlayers);
+            worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
         }
 
         prevLidAngle = lidAngle;

@@ -22,8 +22,9 @@ import java.text.DecimalFormat;
 @SideOnly(Side.CLIENT)
 public class ItemTooltipEventHandler
 {
-    private static DecimalFormat emcDecimalFormat = new DecimalFormat("#.###");
+    private static DecimalFormat emcDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
+    @SuppressWarnings("unused")
     @ForgeSubscribe(priority = EventPriority.LOWEST)
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
@@ -34,7 +35,15 @@ public class ItemTooltipEventHandler
             if (EmcRegistry.getInstance().hasEmcValue(stack))
             {
                 EmcValue emcValue = EmcRegistry.getInstance().getEmcValue(stack);
-                event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                if (stack.getStackSize() > 1)
+                {
+                    event.toolTip.add("EMC (Item): " + String.format("%s", emcDecimalFormat.format(emcValue.getValue())));
+                    event.toolTip.add("EMC (Stack): " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                }
+                else
+                {
+                    event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                }
             }
             else
             {

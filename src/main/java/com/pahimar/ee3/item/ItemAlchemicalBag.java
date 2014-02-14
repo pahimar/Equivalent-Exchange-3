@@ -1,19 +1,22 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -24,7 +27,7 @@ import net.minecraft.world.World;
  */
 public class ItemAlchemicalBag extends ItemEE implements IDyeable
 {
-    private static final String[] ALCHEMICAL_BAG_ICONS = {"Open", "OpenDrawString", "Closed", "ClosedDrawString"};
+    private static final String[] ALCHEMICAL_BAG_ICONS = {"open", "closed", "symbolTier1", "symbolTier2", "symbolTier3"};
 
     @SideOnly(Side.CLIENT)
     private Icon[] icons;
@@ -32,7 +35,19 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     public ItemAlchemicalBag(int id)
     {
         super(id);
+        this.setHasSubtypes(true);
         this.setUnlocalizedName(Strings.ALCHEMICAL_BAG_NAME);
+    }
+
+    @Override
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(int id, CreativeTabs creativeTab, List list)
+    {
+        for (int meta = 0; meta < 3; ++meta)
+        {
+            list.add(new ItemStack(id, 1, meta));
+        }
     }
 
     @Override
@@ -43,17 +58,22 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
 
         for (int i = 0; i < ALCHEMICAL_BAG_ICONS.length; ++i)
         {
-            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME + ALCHEMICAL_BAG_ICONS[i]);
+            icons[i] = iconRegister.registerIcon(Strings.RESOURCE_PREFIX + Strings.ALCHEMICAL_BAG_NAME + "." + ALCHEMICAL_BAG_ICONS[i]);
         }
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-        if (!world.isRemote)
+//        if (!world.isRemote)
+//        {
+//            ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
+//            entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+//        }
+
+        if (world.isRemote)
         {
-            ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
-            entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+            entityPlayer.sendChatToPlayer(ChatMessageComponent.createFromText("Pahimar: Sorry not ready yet!"));
         }
 
         return itemStack;
@@ -75,10 +95,9 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     @Override
     public Icon getIcon(ItemStack itemStack, int renderPass)
     {
-        // If the bag is open
-        if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
+        if (renderPass == 0)
         {
-            if (renderPass != 1)
+            if (ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
             {
                 return icons[0];
             }
@@ -87,17 +106,9 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
                 return icons[1];
             }
         }
-        // Else, the bag is closed
         else
         {
-            if (renderPass != 1)
-            {
-                return icons[2];
-            }
-            else
-            {
-                return icons[3];
-            }
+            return icons[2 + MathHelper.clamp_int(itemStack.getItemDamage(), 0, 3)];
         }
     }
 
@@ -105,21 +116,14 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack itemStack, int renderPass)
     {
-        if (renderPass == 1)
-        {
-            return Integer.parseInt(Colours.PURE_WHITE, 16);
-        }
-        else
-        {
-            int bagColor = this.getColor(itemStack);
+        int bagColor = this.getColor(itemStack);
 
-            if (bagColor < 0)
-            {
-                bagColor = Integer.parseInt(Colours.PURE_WHITE, 16);
-            }
-
-            return bagColor;
+        if (bagColor < 0)
+        {
+            bagColor = Integer.parseInt(Colours.PURE_WHITE, 16);
         }
+
+        return bagColor;
     }
 
     @Override

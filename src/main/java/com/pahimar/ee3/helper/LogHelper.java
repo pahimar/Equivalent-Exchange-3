@@ -25,14 +25,7 @@ public class LogHelper
 
     public static void log(Level logLevel, Object object)
     {
-        if (object != null)
-        {
-            eeLogger.log(logLevel, object.toString());
-        }
-        else
-        {
-            eeLogger.log(logLevel, "null");
-        }
+        eeLogger.log(logLevel, String.valueOf(object));
     }
 
     public static void severe(Object object)
@@ -42,14 +35,7 @@ public class LogHelper
 
     public static void debug(Object object)
     {
-        if (object != null)
-        {
-            log(Level.INFO, String.format("[DEBUG] %s", object.toString()));
-        }
-        else
-        {
-            log(Level.INFO, "[DEBUG] null");
-        }
+        log(Level.INFO, String.format("[DEBUG] %s", String.valueOf(object)));
     }
 
     public static void warning(Object object)

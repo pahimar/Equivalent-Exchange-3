@@ -155,7 +155,6 @@ public class ItemStackNBTHelper
     // long
     public static long getLong(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -168,7 +167,6 @@ public class ItemStackNBTHelper
 
     public static void setLong(ItemStack itemStack, String keyName, long keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setLong(keyName, keyValue);
@@ -177,7 +175,6 @@ public class ItemStackNBTHelper
     // float
     public static float getFloat(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
