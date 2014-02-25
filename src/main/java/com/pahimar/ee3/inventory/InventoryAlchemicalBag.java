@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.google.common.base.Strings;
+import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.item.ItemAlchemicalBag;
 
 public class InventoryAlchemicalBag implements IInventory, INBTTaggable
