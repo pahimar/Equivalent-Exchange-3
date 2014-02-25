@@ -89,9 +89,9 @@ public class TileEE extends TileEntity
             state = nbtTagCompound.getByte(Strings.NBT_TE_STATE_KEY);
         }
 
-        if (nbtTagCompound.hasKey(Strings.NBT_TE_CUSTOM_NAME))
+        if (nbtTagCompound.hasKey(Strings.NBT_CUSTOM_NAME))
         {
-            customName = nbtTagCompound.getString(Strings.NBT_TE_CUSTOM_NAME);
+            customName = nbtTagCompound.getString(Strings.NBT_CUSTOM_NAME);
         }
     }
 
@@ -105,7 +105,7 @@ public class TileEE extends TileEntity
 
         if (this.hasCustomName())
         {
-            nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, customName);
+            nbtTagCompound.setString(Strings.NBT_CUSTOM_NAME, customName);
         }
     }
 
