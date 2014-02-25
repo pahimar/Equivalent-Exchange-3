@@ -325,11 +325,15 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
     {
         int hashCode = 1;
         hashCode = (37 * hashCode) + stackSize;
-
+        
         if (wrappedStack instanceof ItemStack)
         {
-            hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).itemID;
-            hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
+        	ItemStack stack = (ItemStack) wrappedStack;
+        	if (stack.getItem() != null)
+        	{
+        		hashCode = (37 * hashCode) + Item.getIdFromItem(stack.getItem());
+        		hashCode = (37 * hashCode) + stack.getItemDamage();
+        	}
 
             if (((ItemStack) wrappedStack).getTagCompound() != null)
             {
@@ -383,7 +387,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             ItemStack itemStack = (ItemStack) wrappedStack;
             try
             {
-                stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
+                stringBuilder.append(String.format("%sxitemStack[%s:%s:%s:%s]", stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName()));
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
@@ -459,7 +463,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         if (wrappedStack.wrappedStack instanceof ItemStack)
         {
             JsonItemStack jsonItemStack = new JsonItemStack();
-            jsonItemStack.itemID = ((ItemStack) wrappedStack.wrappedStack).itemID;
+            jsonItemStack.item = ((ItemStack) wrappedStack.wrappedStack).getItem();
             jsonItemStack.itemDamage = ((ItemStack) wrappedStack.wrappedStack).getItemDamage();
             jsonItemStack.stackSize = ((ItemStack) wrappedStack.wrappedStack).stackSize;
             if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
@@ -525,7 +529,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                         ItemStack itemStack = null;
                         if (stackSize > 0)
                         {
-                            itemStack = new ItemStack(jsonItemStack.itemID, stackSize, jsonItemStack.itemDamage);
+                            itemStack = new ItemStack(jsonItemStack.item, stackSize, jsonItemStack.itemDamage);
                             if (jsonItemStack.compressedStackTagCompound != null)
                             {
                                 try

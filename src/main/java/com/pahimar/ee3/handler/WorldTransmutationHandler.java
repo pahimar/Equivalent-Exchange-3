@@ -1,5 +1,14 @@
 package com.pahimar.ee3.handler;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionEvent.ActionResult;
@@ -10,19 +19,13 @@ import com.pahimar.ee3.lib.ActionTypes;
 import com.pahimar.ee3.lib.ItemUpdateTypes;
 import com.pahimar.ee3.lib.Particles;
 import com.pahimar.ee3.lib.Sounds;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketItemUpdate;
-import com.pahimar.ee3.network.packet.PacketSoundEvent;
-import com.pahimar.ee3.network.packet.PacketSpawnParticle;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
+import com.pahimar.ee3.network.packet.PacketEEItemUpdate;
+import com.pahimar.ee3.network.packet.PacketEESoundEvent;
+import com.pahimar.ee3.network.packet.PacketEESpawnParticle;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 /**
  * Equivalent-Exchange-3
@@ -124,17 +127,17 @@ public class WorldTransmutationHandler
                             {
                                 anySuccess = true;
                             }
-
-                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_SMOKE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
-                            PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.LARGE_EXPLODE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.15D * ySign, 0D * zSign)));
+                            
+                        	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESpawnParticle(Particles.LARGE_SMOKE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX + x, originY + y, originZ + z, 64D));
+                        	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESpawnParticle(Particles.LARGE_EXPLODE, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.15D * ySign, 0D * zSign), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX + x, originY + y, originZ + z, 64D));
                         }
                         else if (actionEvent.actionResult == ActionResult.FAILURE)
                         {
-                            if (!(actionEvent.world.getBlockId(originX + x, originY + y, originZ + z) == 0))
+                            if (!(actionEvent.world.getBlock(originX + x, originY + y, originZ + z) == Blocks.air))
                             {
                                 // TODO Fancy particle motion
-                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.RED_DUST, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
-                                PacketDispatcher.sendPacketToAllAround(originX + x, originY + y, originZ + z, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSpawnParticle(Particles.WITCH_MAGIC, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign)));
+                            	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESpawnParticle(Particles.RED_DUST, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX + x, originY + y, originZ + z, 64D));
+                            	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESpawnParticle(Particles.WITCH_MAGIC, originX + x + xShift * xSign, originY + y + yShift * ySign, originZ + z + zShift * zSign, 0D * xSign, 0.05D * ySign, 0D * zSign), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX + x, originY + y, originZ + z, 64D));
                             }
                         }
                     }
@@ -144,27 +147,25 @@ public class WorldTransmutationHandler
 
         if (anySuccess)
         {
-            PacketDispatcher.sendPacketToAllAround(originX, originY, originZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.TRANSMUTE, originX, originY, originZ, 0.5F, 1.0F)));
+        	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.TRANSMUTE, originX, originY, originZ, 0.5F, 1.0F), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX, originY, originZ, 64D));
         }
         else
         {
-            PacketDispatcher.sendPacketToAllAround(originX, originY, originZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.FAIL, originX, originY, originZ, 1.5F, 1.5F)));
+        	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.FAIL, originX, originY, originZ, 1.5F, 1.5F), new TargetPoint(thePlayer.worldObj.provider.dimensionId, originX, originY, originZ, 64D));
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onWorldTransmutationEvent(WorldTransmutationEvent event)
     {
 
-        int id = event.world.getBlockId(event.x, event.y, event.z);
+        Block id = event.world.getBlock(event.x, event.y, event.z);
         int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
         boolean result = false;
 
-        Block currentBlock = Block.blocksList[id];
-
-        if (currentBlock != null)
+        if (id != null)
         {
-            meta = currentBlock.damageDropped(meta);
+            meta = id.damageDropped(meta);
         }
 
         ItemStack worldStack = new ItemStack(id, 1, meta);
@@ -194,7 +195,7 @@ public class WorldTransmutationHandler
             if (event.itemStack.stackSize < 1)
             {
                 event.player.inventory.setInventorySlotContents(currentSlot, null);
-                PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketItemUpdate((byte) currentSlot, ItemUpdateTypes.DESTROYED)), (Player) event.player);
+                EquivalentExchange3.packetpipeline.sendTo(new PacketEEItemUpdate((byte) currentSlot, ItemUpdateTypes.DESTROYED), (EntityPlayerMP) event.player);
                 event.player.worldObj.playSoundAtEntity(event.player, "random.break", 0.8F, 0.8F + event.player.worldObj.rand.nextFloat() * 0.4F);
             }
         }

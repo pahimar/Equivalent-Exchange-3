@@ -1,24 +1,27 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-import java.util.List;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAlchemicalFuel extends ItemEE
 {
     @SideOnly(Side.CLIENT)
-    private Icon[] icons;
+    private IIcon[] icons;
 
-    public ItemAlchemicalFuel(int id)
+    public ItemAlchemicalFuel()
     {
-        super(id);
+        super();
         this.setHasSubtypes(true);
         this.maxStackSize = 64;
     }
@@ -31,16 +34,16 @@ public class ItemAlchemicalFuel extends ItemEE
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int meta)
+    public IIcon getIconFromDamage(int meta)
     {
         return icons[MathHelper.clamp_int(meta, 0, Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length - 1)];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerIcons(IIconRegister iconRegister)
     {
-        icons = new Icon[Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length];
+        icons = new IIcon[Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length];
 
         for (int i = 0; i < Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length; ++i)
         {
@@ -51,7 +54,7 @@ public class ItemAlchemicalFuel extends ItemEE
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs creativeTab, List list)
+    public void getSubItems(Item id, CreativeTabs creativeTab, List list)
     {
         for (int meta = 0; meta < Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES.length; ++meta)
         {

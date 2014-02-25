@@ -5,16 +5,18 @@ import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Textures;
+
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -32,7 +34,7 @@ public class DrawBlockHighlightHandler
     private static int pulse = 0;
     private static boolean doInc = true;
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event)
     {
 
@@ -42,7 +44,7 @@ public class DrawBlockHighlightHandler
         {
             if (event.currentItem.getItem() instanceof ITransmutationStone)
             {
-                if (event.target.typeOfHit == EnumMovingObjectType.TILE)
+                if (event.target.typeOfHit == MovingObjectType.BLOCK)
                 {
                     TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
 

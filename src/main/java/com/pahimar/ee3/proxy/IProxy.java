@@ -3,7 +3,7 @@ package com.pahimar.ee3.proxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IProxy
 {
@@ -13,7 +13,7 @@ public interface IProxy
 
     public abstract void registerDrawBlockHighlightHandler();
 
-    public abstract void setKeyBinding(String name, int value);
+    public abstract void setKeyBinding(String name, int value, String Category);
 
     public abstract void registerSoundHandler();
 
@@ -27,7 +27,7 @@ public interface IProxy
 
     public abstract void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName);
 
-    public abstract void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color);
+    public abstract void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, String itemName, int metaData, int stackSize, int color);
 
     public abstract void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, byte leftStackSize, byte leftStackMeta, byte rightStackSize, byte rightStackMeta);
 

@@ -1,21 +1,23 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.lib.ItemIds;
-import com.pahimar.ee3.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import java.util.List;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBlockInfusedPlanks extends ItemBlock
 {
-    public ItemBlockInfusedPlanks(int id)
+    public ItemBlockInfusedPlanks(Block b)
     {
-        super(id);
+        super(b);
         this.setHasSubtypes(true);
     }
 
@@ -25,10 +27,11 @@ public class ItemBlockInfusedPlanks extends ItemBlock
         return meta;
     }
 
-    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean flag)
     {
         int dustMetaData = (itemStack.getItemDamage() % 3) + 1;
-        list.add(String.format("%s %s", StatCollector.translateToLocal(Strings.TOOLTIP_INFUSED_WITH), new ItemStack(ItemIds.ALCHEMICAL_DUST, 1, dustMetaData).getDisplayName()));
+        list.add(String.format("%s %s", StatCollector.translateToLocal(Strings.TOOLTIP_INFUSED_WITH), new ItemStack(ModItems.alchemicalDust, 1, dustMetaData).getDisplayName()));
     }
 }

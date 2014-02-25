@@ -4,6 +4,7 @@ import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -123,14 +124,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
         {
             itemStack.stackSize = this.getInventoryStackLimit();
         }
-
-        this.onInventoryChanged();
-    }
-
-    @Override
-    public String getInvName()
-    {
-        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_CHEST_NAME;
     }
 
     @Override
@@ -167,20 +160,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
         }
     }
 
-    @Override
-    public void openChest()
-    {
-        ++numUsingPlayers;
-        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
-    }
-
-    @Override
-    public void closeChest()
-    {
-        --numUsingPlayers;
-        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
-    }
-
     /**
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
@@ -192,7 +171,7 @@ public class TileAlchemicalChest extends TileEE implements IInventory
 
         if (++ticksSinceSync % 20 * 4 == 0)
         {
-            worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest.blockID, 1, numUsingPlayers);
+            worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest, 1, numUsingPlayers);
         }
 
         prevLidAngle = lidAngle;
@@ -244,11 +223,11 @@ public class TileAlchemicalChest extends TileEE implements IInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", numUsingPlayers);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
             if (slotIndex >= 0 && slotIndex < inventory.length)
             {
@@ -275,12 +254,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
             }
         }
         nbtTagCompound.setTag("Items", tagList);
-    }
-
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return this.hasCustomName();
     }
 
     @Override
@@ -317,4 +290,30 @@ public class TileAlchemicalChest extends TileEE implements IInventory
 
         return stringBuilder.toString();
     }
+
+	@Override
+	public String getInventoryName() 
+	{
+		return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_CHEST_NAME;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() 
+	{
+		return this.hasCustomName();
+	}
+
+	@Override
+	public void openInventory() 
+	{
+		++numUsingPlayers;
+        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest, 1, numUsingPlayers);
+	}
+
+	@Override
+	public void closeInventory() 
+	{
+		--numUsingPlayers;
+        worldObj.addBlockEvent(xCoord, yCoord, zCoord, ModBlocks.alchemicalChest, 1, numUsingPlayers);
+	}
 }

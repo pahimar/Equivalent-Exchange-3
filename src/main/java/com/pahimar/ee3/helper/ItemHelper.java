@@ -2,6 +2,8 @@ package com.pahimar.ee3.helper;
 
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
+
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -43,7 +45,7 @@ public class ItemHelper
     {
         if (itemStack != null)
         {
-            return String.format("%sxitemStack[%s:%s:%s:%s]", itemStack.stackSize, itemStack.itemID, itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName());
+            return String.format("%sxitemStack[%s:%s:%s:%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getUnlocalizedName(), itemStack.getItem().getClass().getCanonicalName());
         }
 
         return "null";
@@ -85,7 +87,7 @@ public class ItemHelper
 
             if (!nbtTagCompound.hasKey(Strings.NBT_ITEM_DISPLAY))
             {
-                nbtTagCompound.setCompoundTag(Strings.NBT_ITEM_DISPLAY, colourTagCompound);
+                nbtTagCompound.setTag(Strings.NBT_ITEM_DISPLAY, colourTagCompound);
             }
 
             colourTagCompound.setInteger(Strings.NBT_ITEM_COLOR, color);
@@ -99,7 +101,7 @@ public class ItemHelper
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
-                if (itemStack1.itemID == itemStack2.itemID)
+                if (itemStack1.getItem() == itemStack2.getItem())
                 {
 
                     // Then sort on meta
@@ -140,7 +142,7 @@ public class ItemHelper
                 }
                 else
                 {
-                    return (itemStack1.itemID - itemStack2.itemID);
+                    return (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()));
                 }
             }
             else if (itemStack1 != null && itemStack2 == null)

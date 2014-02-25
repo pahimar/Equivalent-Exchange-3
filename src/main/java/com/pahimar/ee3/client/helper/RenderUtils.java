@@ -1,15 +1,17 @@
 package com.pahimar.ee3.client.helper;
 
-import com.pahimar.ee3.lib.Textures;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
+
 import org.lwjgl.opengl.GL11;
+
+import com.pahimar.ee3.lib.Textures;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 /**
  * Equivalent-Exchange-3
@@ -27,7 +29,7 @@ public class RenderUtils
     {
         RenderBlocks renderBlocks = new RenderBlocks();
 
-        Block block = Block.blocksList[stack.itemID];
+        Block block = Block.getBlockFromItem(stack.getItem());
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.VANILLA_BLOCK_TEXTURE_SHEET);
         GL11.glPushMatrix();
         GL11.glTranslatef(x - 2, y + 3, -3.0F + zLevel);
@@ -38,7 +40,7 @@ public class RenderUtils
         GL11.glRotatef(0F + rotationAngle, 0.0F, 1.0F, 0.0F);
         rotationAngle = (rotationAngle + 1) % 360;
 
-        int var10 = Item.itemsList[stack.itemID].getColorFromItemStack(stack, 0);
+        int var10 = stack.getItem().getColorFromItemStack(stack, 0);
         float var16 = (var10 >> 16 & 255) / 255.0F;
         float var12 = (var10 >> 8 & 255) / 255.0F;
         float var13 = (var10 & 255) / 255.0F;
@@ -54,7 +56,7 @@ public class RenderUtils
 
     public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale)
     {
-        Icon icon = itemStack.getIconIndex();
+        IIcon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.VANILLA_ITEM_TEXTURE_SHEET);
         int overlayColour = itemStack.getItem().getColorFromItemStack(itemStack, 0);
@@ -66,7 +68,7 @@ public class RenderUtils
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    public static void drawTexturedQuad(int x, int y, Icon icon, float width, float height, double zLevel)
+    public static void drawTexturedQuad(int x, int y, IIcon icon, float width, float height, double zLevel)
     {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();

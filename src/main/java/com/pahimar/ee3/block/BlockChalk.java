@@ -1,27 +1,29 @@
 package com.pahimar.ee3.block;
 
+import java.util.Random;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
+
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Strings;
-import net.minecraft.block.material.Material;
-
-import java.util.Random;
 
 public class BlockChalk extends BlockEE
 {
-    public BlockChalk(int id)
+    public BlockChalk()
     {
-        super(id, Material.clay);
+        super(Material.clay);
         this.setHardness(0.6F);
-        this.setUnlocalizedName(Strings.CHALK_NAME);
+        this.setBlockName(Strings.CHALK_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setStepSound(soundStoneFootstep);
+        this.setStepSound(soundTypeStone);
     }
 
     @Override
-    public int idDropped(int par1, Random random, int par2)
+    public Item getItemDropped(int par1, Random random, int par2)
     {
-        return ModItems.chalk.itemID;
+        return ModItems.chalk;
     }
 
     @Override

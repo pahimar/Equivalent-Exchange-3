@@ -1,17 +1,18 @@
 package com.pahimar.ee3.recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RecipesAludel
 {
@@ -38,35 +39,35 @@ public class RecipesAludel
     private void init()
     {
         // Alchemical Coal
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 32, 1));
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 4, 0), new ItemStack(Item.coal, 4, 0), new ItemStack(ModItems.alchemicalDust.itemID, 1, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 0), new ItemStack(Items.coal, 1, 0), new ItemStack(ModItems.alchemicalDust, 32, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 0), new ItemStack(Items.coal, 1, 0), new ItemStack(ModItems.alchemicalDust, 1, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 4, 0), new ItemStack(Items.coal, 4, 0), new ItemStack(ModItems.alchemicalDust, 1, 3));
 
         // Mobius Fuel
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 1), new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 7, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 1), new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 2, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 1), new ItemStack(ModItems.alchemicalFuel, 1, 0), new ItemStack(ModItems.alchemicalDust, 7, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 1), new ItemStack(ModItems.alchemicalFuel, 1, 0), new ItemStack(ModItems.alchemicalDust, 2, 3));
 
         // Aeternalis Fuel
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 2), new ItemStack(ModItems.alchemicalFuel.itemID, 1, 1), new ItemStack(ModItems.alchemicalDust.itemID, 56, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 2), new ItemStack(ModItems.alchemicalFuel.itemID, 1, 1), new ItemStack(ModItems.alchemicalDust.itemID, 14, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 2), new ItemStack(ModItems.alchemicalFuel, 1, 1), new ItemStack(ModItems.alchemicalDust, 56, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel, 1, 2), new ItemStack(ModItems.alchemicalFuel, 1, 1), new ItemStack(ModItems.alchemicalDust, 14, 3));
 
         // Infused Cloth
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth.blockID, 1, 0), new ItemStack(Block.cloth.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth.blockID, 1, 1), new ItemStack(Block.cloth.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth.blockID, 1, 2), new ItemStack(Block.cloth.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 1, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth, 1, 0), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 1, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth, 1, 1), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 1, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedCloth, 1, 2), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 1, 3));
 
         // Infused Wood
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood.blockID, 1, 0), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust.itemID, 4, 1));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood.blockID, 1, 1), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust.itemID, 4, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood.blockID, 1, 2), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust.itemID, 4, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood, 1, 0), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust, 4, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood, 1, 1), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust, 4, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedWood, 1, 2), new OreStack("logWood"), new ItemStack(ModItems.alchemicalDust, 4, 3));
 
         // Infused Planks
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 0), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 1), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
-        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 2), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust.itemID, 1, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks, 1, 0), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust, 1, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks, 1, 1), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust, 1, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks, 1, 2), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust, 1, 3));
 
         // Minium Stone
-        aludelRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new ItemStack(ModItems.inertStone), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new ItemStack(ModItems.inertStone), new ItemStack(ModItems.alchemicalDust, 8, 3));
     }
 
     public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)

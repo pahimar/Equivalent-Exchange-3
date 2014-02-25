@@ -1,25 +1,27 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.client.helper.RenderUtils;
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.helper.TransmutationHelper;
-import com.pahimar.ee3.item.ITransmutationStone;
-import com.pahimar.ee3.lib.Reference;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.EnumSet;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.EnumSet;
+import com.pahimar.ee3.client.helper.RenderUtils;
+import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.helper.TransmutationHelper;
+import com.pahimar.ee3.item.ITransmutationStone;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -29,25 +31,18 @@ import java.util.EnumSet;
  * @author pahimar
  */
 @SideOnly(Side.CLIENT)
-public class TransmutationTargetOverlayHandler implements ITickHandler
+public class TransmutationTargetOverlayHandler
 {
 
-    @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData)
-    {
-
-    }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData)
+    @SubscribeEvent
+    public void tickEnd(TickEvent.RenderTickEvent event)
     {
 
         Minecraft minecraft = FMLClientHandler.instance().getClient();
         EntityPlayer player = minecraft.thePlayer;
         ItemStack currentItemStack;
 
-        if (type.contains(TickType.RENDER))
-        {
+
             if (player != null)
             {
                 currentItemStack = player.inventory.getCurrentItem();
@@ -56,28 +51,13 @@ public class TransmutationTargetOverlayHandler implements ITickHandler
                 {
                     if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
                     {
-                        renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+                        renderStoneHUD(minecraft, player, currentItemStack);
                     }
                 }
             }
-        }
     }
 
-    @Override
-    public EnumSet<TickType> ticks()
-    {
-
-        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
-    }
-
-    @Override
-    public String getLabel()
-    {
-
-        return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
-    }
-
-    private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks)
+    private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack)
     {
 
         float overlayScale = ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE;

@@ -1,10 +1,12 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.helper.GeneralHelper;
-import com.pahimar.ee3.helper.LogHelper;
+import java.util.ArrayList;
+
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
+import com.pahimar.ee3.helper.GeneralHelper;
+import com.pahimar.ee3.helper.LogHelper;
 
 /**
  * Equivalent-Exchange-3
@@ -103,7 +105,7 @@ public class EquivalencyHandler
         return null;
     }
 
-    public Integer getIndexInList(int id, int meta)
+    public Integer getIndexInList(Item id, int meta)
     {
 
         ArrayList<ItemStack> currentList;
@@ -114,7 +116,7 @@ public class EquivalencyHandler
             currentList = equivalencyList.get(i);
             for (ItemStack currentStack : currentList)
             {
-                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
+                if (id == currentStack.getItem() && meta == currentStack.getItemDamage())
                 {
                     return i;
                 }
@@ -149,14 +151,14 @@ public class EquivalencyHandler
         return null;
     }
 
-    public ArrayList<ItemStack> getEquivalencyList(int id, int meta)
+    public ArrayList<ItemStack> getEquivalencyList(Item id, int meta)
     {
 
         for (ArrayList<ItemStack> list : equivalencyList)
         {
             for (ItemStack currentStack : list)
             {
-                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
+                if (id == currentStack.getItem() && meta == currentStack.getItemDamage())
                 {
                     return list;
                 }
@@ -173,13 +175,13 @@ public class EquivalencyHandler
 
         if (checkStack != null)
         {
-            return getNextInList(checkStack.itemID, checkStack.getItemDamage());
+            return getNextInList(checkStack.getItem(), checkStack.getItemDamage());
         }
 
         return null;
     }
 
-    public ItemStack getNextInList(int id, int meta)
+    public ItemStack getNextInList(Item id, int meta)
     {
 
         ArrayList<ItemStack> list = getEquivalencyList(id, meta);
@@ -199,7 +201,7 @@ public class EquivalencyHandler
             {
                 currentStack = list.get(i);
 
-                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
+                if (id == currentStack.getItem() && meta == currentStack.getItemDamage())
                 {
                     returnStack = list.get((i + 1) % list.size());
                     break;
@@ -219,13 +221,13 @@ public class EquivalencyHandler
 
         if (checkStack != null)
         {
-            return getPrevInList(checkStack.itemID, checkStack.getItemDamage());
+            return getPrevInList(checkStack.getItem(), checkStack.getItemDamage());
         }
 
         return null;
     }
 
-    public ItemStack getPrevInList(int id, int meta)
+    public ItemStack getPrevInList(Item id, int meta)
     {
 
         ArrayList<ItemStack> list = getEquivalencyList(id, meta);
@@ -245,7 +247,7 @@ public class EquivalencyHandler
             {
                 currentStack = list.get(i);
 
-                if (id == currentStack.itemID && meta == currentStack.getItemDamage())
+                if (id == currentStack.getItem() && meta == currentStack.getItemDamage())
                 {
                     int index = (i - 1 + list.size()) % list.size();
                     returnStack = list.get(index);
@@ -263,7 +265,7 @@ public class EquivalencyHandler
     {
         if (getEquivalencyList(obj1) != null && getEquivalencyList(obj2) != null)
         {
-            return GeneralHelper.convertObjectToItemStack(obj1).itemID == GeneralHelper.convertObjectToItemStack(obj2).itemID && GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage() || getEquivalencyList(obj1).equals(getEquivalencyList(obj2));
+            return GeneralHelper.convertObjectToItemStack(obj1).getItem() == GeneralHelper.convertObjectToItemStack(obj2).getItem() && GeneralHelper.convertObjectToItemStack(obj1).getItemDamage() == GeneralHelper.convertObjectToItemStack(obj2).getItemDamage() || getEquivalencyList(obj1).equals(getEquivalencyList(obj2));
         }
         else
         {
@@ -286,9 +288,9 @@ public class EquivalencyHandler
             return false;
         }
 
-        if (getEquivalencyList(first.itemID, first.getItemDamage()) != null && getEquivalencyList(second.itemID, second.getItemDamage()) != null)
+        if (getEquivalencyList(first.getItem(), first.getItemDamage()) != null && getEquivalencyList(second.getItem(), second.getItemDamage()) != null)
         {
-            return first.itemID == second.itemID && first.getItemDamage() == second.getItemDamage() || getEquivalencyList(first.itemID, first.getItemDamage()).equals(getEquivalencyList(second.itemID, second.getItemDamage()));
+            return first.getItem() == second.getItem() && first.getItemDamage() == second.getItemDamage() || getEquivalencyList(first.getItem(), first.getItemDamage()).equals(getEquivalencyList(second.getItem(), second.getItemDamage()));
         }
         else
         {

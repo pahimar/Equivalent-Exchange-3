@@ -1,15 +1,17 @@
 package com.pahimar.ee3.item.crafting;
 
-import com.pahimar.ee3.item.ItemAlchemicalBag;
+import java.util.ArrayList;
+
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 
 /**
  * Equivalent-Exchange-3
@@ -49,7 +51,7 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                 else
                 {
 
-                    if (currentStack.itemID != Item.dyePowder.itemID)
+                    if (currentStack.getItem() != Items.dye)
                     {
                         return false;
                     }
@@ -113,12 +115,12 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                 else
                 {
 
-                    if (currentStack.itemID != Item.dyePowder.itemID)
+                    if (currentStack.getItem() != Items.dye)
                     {
                         return null;
                     }
 
-                    float[] dyeColorChannels = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(currentStack.getItemDamage())];
+                    float[] dyeColorChannels = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(currentStack.getItemDamage())];
                     j1 = (int) (dyeColorChannels[0] * 255.0F);
                     k1 = (int) (dyeColorChannels[1] * 255.0F);
                     newColor = (int) (dyeColorChannels[2] * 255.0F);

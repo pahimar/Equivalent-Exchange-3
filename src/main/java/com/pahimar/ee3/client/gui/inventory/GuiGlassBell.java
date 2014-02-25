@@ -37,9 +37,9 @@ public class GuiGlassBell extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
 
-        String containerName = tileGlassBell.isInvNameLocalized() ? tileGlassBell.getInvName() : StatCollector.translateToLocal(tileGlassBell.getInvName());
-        fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
+        String containerName = tileGlassBell.hasCustomInventoryName() ? tileGlassBell.getInventoryName() : StatCollector.translateToLocal(tileGlassBell.getInventoryName());
+        fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
     }
 
     @Override

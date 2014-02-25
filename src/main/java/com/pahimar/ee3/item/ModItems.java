@@ -1,9 +1,10 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.lib.ItemIds;
+import net.minecraft.item.ItemMultiTexture;
+
 import com.pahimar.ee3.lib.Strings;
+
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.ItemMultiTextureTile;
 
 /**
  * Equivalent-Exchange-3
@@ -25,20 +26,20 @@ public class ModItems
     public static ItemEE diviningRod;
     public static ItemEE alchemicalFuel;
 
-    public static ItemMultiTextureTile alchemicalFuelBlock;
+    public static ItemMultiTexture alchemicalFuelBlock;
 
     public static void init()
     {
         // Initialize each mod item individually
-        miniumShard = new ItemMiniumShard(ItemIds.MINIUM_SHARD);
-        inertStone = new ItemInertStone(ItemIds.INERT_STONE);
-        miniumStone = new ItemMiniumStone(ItemIds.MINIUM_STONE);
-        philStone = new ItemPhilosophersStone(ItemIds.PHILOSOPHERS_STONE);
-        alchemicalDust = new ItemAlchemicalDust(ItemIds.ALCHEMICAL_DUST);
-        alchemicalBag = new ItemAlchemicalBag(ItemIds.ALCHEMICAL_BAG);
-        chalk = new ItemChalk(ItemIds.CHALK);
-        diviningRod = new ItemDiviningRod(ItemIds.DIVINING_ROD);
-        alchemicalFuel = new ItemAlchemicalFuel(ItemIds.ALCHEMICAL_FUEL);
+        miniumShard = new ItemMiniumShard();
+        inertStone = new ItemInertStone();
+        miniumStone = new ItemMiniumStone();
+        philStone = new ItemPhilosophersStone();
+        alchemicalDust = new ItemAlchemicalDust();
+        alchemicalBag = new ItemAlchemicalBag();
+        chalk = new ItemChalk();
+        diviningRod = new ItemDiviningRod();
+        alchemicalFuel = new ItemAlchemicalFuel();
 
         // Set container items
         miniumStone.setContainerItem(miniumStone);

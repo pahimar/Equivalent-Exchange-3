@@ -1,14 +1,16 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.tileentity.TileAlchemySquare;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockAlchemySquare extends BlockEE implements ITileEntityProvider
 {
-    public BlockAlchemySquare(int id)
+    public BlockAlchemySquare()
     {
-        super(id);
+        super();
     }
 
     public TileEntity createNewTileEntity(World world)
@@ -21,4 +23,10 @@ public class BlockAlchemySquare extends BlockEE implements ITileEntityProvider
     {
         return null;
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) 
+	{
+		return new TileAlchemySquare();
+	}
 }

@@ -3,12 +3,12 @@ package com.pahimar.ee3.configuration;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 import java.util.logging.Level;
 
-import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
+import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
 
 public class GeneralConfiguration
 {
@@ -69,14 +69,14 @@ public class GeneralConfiguration
 
             /* KeyBindings */
             generalConfiguration.addCustomCategoryComment(CATEGORY_KEYBIND, "Keybindings for Equivalent Exchange 3. See http://www.minecraftwiki.net/wiki/Key_codes for mapping of key codes to keyboard keys");
-            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_EXTRA, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_EXTRA, ConfigurationSettings.KEYBINDING_EXTRA_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_EXTRA_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_CHARGE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_CHARGE, ConfigurationSettings.KEYBINDING_CHARGE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_CHARGE_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_TOGGLE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_TOGGLE, ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT));
-            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_RELEASE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_RELEASE, ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT));
+            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_EXTRA, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_EXTRA, ConfigurationSettings.KEYBINDING_EXTRA_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_EXTRA_DEFAULT), "EE3");
+            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_CHARGE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_CHARGE, ConfigurationSettings.KEYBINDING_CHARGE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_CHARGE_DEFAULT), "EE3");
+            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_TOGGLE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_TOGGLE, ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_TOGGLE_DEFAULT), "EE3");
+            EquivalentExchange3.proxy.setKeyBinding(ConfigurationSettings.KEYBINDING_RELEASE, generalConfiguration.get(CATEGORY_KEYBIND, ConfigurationSettings.KEYBINDING_RELEASE, ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT).getInt(ConfigurationSettings.KEYBINDING_RELEASE_DEFAULT), "EE3");
         }
         catch (Exception e)
         {
-            FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its general configuration");
+        	FMLLog.severe("the mod %s has had a problem loading its general configuration", Reference.MOD_NAME);
         }
         finally
         {

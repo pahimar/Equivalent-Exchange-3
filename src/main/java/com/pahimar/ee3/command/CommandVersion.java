@@ -1,10 +1,11 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.helper.VersionHelper;
-import com.pahimar.ee3.lib.Commands;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.IChatComponent;
+
+import com.pahimar.ee3.helper.VersionHelper;
+import com.pahimar.ee3.lib.Commands;
 
 /**
  * Equivalent-Exchange-3
@@ -47,7 +48,7 @@ public class CommandVersion
     private static void processVersionCommand(ICommandSender commandSender)
     {
 
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(VersionHelper.getResultMessage()));
+    	commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(VersionHelper.getResultMessage()));
     }
 
     private static void processChangelogCommand(ICommandSender commandSender)

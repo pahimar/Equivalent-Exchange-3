@@ -1,5 +1,17 @@
 package com.pahimar.ee3.block;
 
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.RenderIds;
@@ -8,18 +20,9 @@ import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAlchemicalChestLarge;
 import com.pahimar.ee3.tileentity.TileAlchemicalChestMedium;
 import com.pahimar.ee3.tileentity.TileAlchemicalChestSmall;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-
-import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -30,17 +33,17 @@ import java.util.List;
  */
 public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
 {
-    public BlockAlchemicalChest(int id)
+    public BlockAlchemicalChest()
     {
-        super(id, Material.wood);
+        super(Material.wood);
         this.setHardness(2.5F);
-        this.setUnlocalizedName(Strings.ALCHEMICAL_CHEST_NAME);
+        this.setBlockName(Strings.ALCHEMICAL_CHEST_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int i)
     {
         return null;
     }
@@ -64,12 +67,13 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
         return null;
     }
 
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs creativeTabs, List list)
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+    public void getSubBlocks(Block block, CreativeTabs creativeTabs, List list)
     {
         for (int meta = 0; meta < 3; meta++)
         {
-            list.add(new ItemStack(id, 1, meta));
+            list.add(new ItemStack(block, 1, meta));
         }
     }
 
@@ -101,13 +105,13 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if (player.isSneaking() || world.isBlockSolidOnSide(x, y + 1, z, ForgeDirection.DOWN))
+        if (player.isSneaking() || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))
         {
             return true;
         }
         else
         {
-            if (!world.isRemote && world.getBlockTileEntity(x, y, z) instanceof TileAlchemicalChest)
+            if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileAlchemicalChest)
             {
                 player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
             }

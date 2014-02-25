@@ -1,5 +1,10 @@
 package com.pahimar.ee3.item;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
+
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
@@ -7,15 +12,11 @@ import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketSoundEvent;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import com.pahimar.ee3.network.packet.PacketEESoundEvent;
+
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
 
 /**
  * Equivalent-Exchange-3
@@ -28,9 +29,9 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
 {
     private int maxChargeLevel;
 
-    public ItemPhilosophersStone(int id)
+    public ItemPhilosophersStone()
     {
-        super(id);
+        super();
         this.setUnlocalizedName(Strings.PHILOSOPHERS_STONE_NAME);
         this.setMaxDamage(ConfigurationSettings.PHILOSOPHERS_STONE_MAX_DURABILITY - 1);
         maxChargeLevel = 3;
@@ -44,9 +45,9 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemStack)
+    public String getItemStackDisplayName(ItemStack itemStack)
     {
-        return EnumChatFormatting.YELLOW + super.getItemDisplayName(itemStack);
+        return EnumChatFormatting.YELLOW + super.getItemStackDisplayName(itemStack);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     }
 
     @Override
-    public ItemStack getContainerItemStack(ItemStack itemStack)
+    public ItemStack getContainerItem(ItemStack itemStack)
     {
         ItemStack copiedStack = itemStack.copy();
 
@@ -146,11 +147,11 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
             {
                 if (!thePlayer.isSneaking())
                 {
-                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.getItem(), TransmutationHelper.targetBlockStack.getItemDamage());
                 }
                 else
                 {
-                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.getItem(), TransmutationHelper.targetBlockStack.getItemDamage());
                 }
             }
         }
@@ -160,24 +161,24 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
             {
                 if (getCharge(itemStack) == maxChargeLevel)
                 {
-                    PacketDispatcher.sendPacketToAllAround(thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.FAIL, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 1.5F, 1.5F)));
+                	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.FAIL, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 1.5F, 1.5F), new TargetPoint(thePlayer.worldObj.provider.dimensionId, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D));
                 }
                 else
                 {
                     increaseCharge(itemStack);
-                    PacketDispatcher.sendPacketToAllAround(thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.CHARGE_UP, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 0.5F, 0.5F + 0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))));
+                    EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.CHARGE_UP, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 0.5F, 0.5F + 0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)), new TargetPoint(thePlayer.worldObj.provider.dimensionId, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D));
                 }
             }
             else
             {
                 if (getCharge(itemStack) == 0)
                 {
-                    PacketDispatcher.sendPacketToAllAround(thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.FAIL, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 1.5F, 1.5F)));
+                	EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.FAIL, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 1.5F, 1.5F), new TargetPoint(thePlayer.worldObj.provider.dimensionId, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D));
                 }
                 else
                 {
                     decreaseCharge(itemStack);
-                    PacketDispatcher.sendPacketToAllAround(thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D, thePlayer.worldObj.provider.dimensionId, PacketTypeHandler.populatePacket(new PacketSoundEvent(thePlayer.username, Sounds.CHARGE_DOWN, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 0.5F, 1.0F - (0.5F - 0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel)))));
+                    EquivalentExchange3.packetpipeline.sendToAllAround(new PacketEESoundEvent(thePlayer.getDisplayName(), Sounds.CHARGE_DOWN, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 0.5F, 1.0F - (0.5F - 0.5F * (getCharge(itemStack) * 1.0F / maxChargeLevel))), new TargetPoint(thePlayer.worldObj.provider.dimensionId, thePlayer.posX, thePlayer.posY, thePlayer.posZ, 64D));
                 }
             }
         }

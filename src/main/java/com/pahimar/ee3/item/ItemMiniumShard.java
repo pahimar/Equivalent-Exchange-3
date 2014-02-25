@@ -11,9 +11,9 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class ItemMiniumShard extends ItemEE
 {
-    public ItemMiniumShard(int id)
+    public ItemMiniumShard()
     {
-        super(id);
+        super();
         this.setUnlocalizedName(Strings.MINIUM_SHARD_NAME);
         maxStackSize = 64;
     }

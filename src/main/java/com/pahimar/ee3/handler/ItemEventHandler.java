@@ -1,12 +1,14 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.helper.ItemStackNBTHelper;
-import com.pahimar.ee3.lib.Strings;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Equivalent-Exchange-3
@@ -17,8 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerDropsEvent;
  */
 public class ItemEventHandler
 {
-    @ForgeSubscribe
-    @SuppressWarnings("unused")
+    @SubscribeEvent
     public void onItemPickup(EntityItemPickupEvent event)
     {
         if (ItemStackNBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
@@ -35,8 +36,7 @@ public class ItemEventHandler
         }
     }
 
-    @ForgeSubscribe
-    @SuppressWarnings("unused")
+    @SubscribeEvent
     public void onItemToss(ItemTossEvent event)
     {
         if (ItemStackNBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
@@ -53,8 +53,7 @@ public class ItemEventHandler
         }
     }
 
-    @ForgeSubscribe
-    @SuppressWarnings("unused")
+    @SubscribeEvent
     public void onPlayerDrop(PlayerDropsEvent event)
     {
         for (EntityItem entityItem : event.drops)

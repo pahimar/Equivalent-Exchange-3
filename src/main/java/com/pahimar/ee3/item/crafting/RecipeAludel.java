@@ -115,7 +115,7 @@ public class RecipeAludel
     {
         if (itemStack1 != null && itemStack2 != null)
         {
-            if (itemStack1.itemID == itemStack2.itemID)
+            if (itemStack1.getItem() == itemStack2.getItem())
             {
                 if (itemStack1.getItemDamage() == itemStack2.getItemDamage() || itemStack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemStack2.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                 {

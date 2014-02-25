@@ -1,12 +1,12 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileUpdate;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.packet.IPacket;
+import com.pahimar.ee3.network.packet.PacketEETileUpdate;
 
 /**
  * Equivalent-Exchange-3
@@ -89,9 +89,9 @@ public class TileEE extends TileEntity
             state = nbtTagCompound.getByte(Strings.NBT_TE_STATE_KEY);
         }
 
-        if (nbtTagCompound.hasKey(Strings.NBT_TE_CUSTOM_NAME))
+        if (nbtTagCompound.hasKey(Strings.NBT_CUSTOM_NAME))
         {
-            customName = nbtTagCompound.getString(Strings.NBT_TE_CUSTOM_NAME);
+            customName = nbtTagCompound.getString(Strings.NBT_CUSTOM_NAME);
         }
     }
 
@@ -105,14 +105,14 @@ public class TileEE extends TileEntity
 
         if (this.hasCustomName())
         {
-            nbtTagCompound.setString(Strings.NBT_TE_CUSTOM_NAME, customName);
+            nbtTagCompound.setString(Strings.NBT_CUSTOM_NAME, customName);
         }
     }
 
     @Override
-    public Packet getDescriptionPacket()
+    public IPacket getDescriptionPacket()
     {
-        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
+        return new PacketEETileUpdate(xCoord, yCoord, zCoord, orientation, state, customName);
     }
 
     @Override

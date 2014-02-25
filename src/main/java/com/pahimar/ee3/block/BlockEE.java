@@ -1,12 +1,10 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.tileentity.TileEE;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -15,20 +13,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Random;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.tileentity.TileEE;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEE extends Block
 {
-    public BlockEE(int id)
+    public BlockEE()
     {
-        this(id, Material.rock);
+        this(Material.rock);
     }
 
-    public BlockEE(int id, Material material)
+    public BlockEE( Material material)
     {
-        super(id, material);
+        super(material);
     }
 
     @Override
@@ -39,7 +41,7 @@ public class BlockEE extends Block
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerBlockIcons(IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
@@ -50,7 +52,7 @@ public class BlockEE extends Block
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int id, int meta)
+    public void breakBlock(World world, int x, int y, int z, Block id, int meta)
     {
         dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
@@ -59,7 +61,7 @@ public class BlockEE extends Block
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
-        if (world.getBlockTileEntity(x, y, z) instanceof TileEE)
+        if (world.getTileEntity(x, y, z) instanceof TileEE)
         {
             int direction = 0;
             int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
@@ -83,16 +85,16 @@ public class BlockEE extends Block
 
             if (itemStack.hasDisplayName())
             {
-                ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+                ((TileEE) world.getTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
             }
 
-            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(direction);
+            ((TileEE) world.getTileEntity(x, y, z)).setOrientation(direction);
         }
     }
 
     protected void dropInventory(World world, int x, int y, int z)
     {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (!(tileEntity instanceof IInventory))
         {
@@ -114,7 +116,7 @@ public class BlockEE extends Block
                 float dY = rand.nextFloat() * 0.8F + 0.1F;
                 float dZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
+                EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.getItem(), itemStack.stackSize, itemStack.getItemDamage()));
 
                 if (itemStack.hasTagCompound())
                 {

@@ -1,23 +1,25 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.helper.ItemHelper;
-import com.pahimar.ee3.item.ItemAlchemicalDust;
-import com.pahimar.ee3.item.crafting.RecipeAludel;
-import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
-import com.pahimar.ee3.recipe.RecipesAludel;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.item.ItemAlchemicalDust;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
+import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.network.packet.IPacket;
+import com.pahimar.ee3.network.packet.PacketEETileWithItemUpdate;
+import com.pahimar.ee3.recipe.RecipesAludel;
+
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -110,7 +112,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALUDEL_NAME;
     }
@@ -127,7 +129,7 @@ public class TileAludel extends TileEE implements ISidedInventory
         if (eventId == 1)
         {
             this.state = (byte) eventData;
-            this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
+            this.worldObj.func_147451_t(this.xCoord, this.yCoord, this.zCoord);
             return true;
         }
         else
@@ -137,13 +139,13 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
         // NOOP
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
         // NOOP
     }
@@ -154,11 +156,11 @@ public class TileAludel extends TileEE implements ISidedInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", deviceCookTime);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
             if (slotIndex >= 0 && slotIndex < inventory.length)
             {
@@ -194,12 +196,6 @@ public class TileAludel extends TileEE implements ISidedInventory
         nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
         nbtTagCompound.setInteger("itemCookTime", itemCookTime);
         nbtTagCompound.setBoolean("hasGlassBell", hasGlassBell);
-    }
-
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return this.hasCustomName();
     }
 
     @Override
@@ -255,7 +251,7 @@ public class TileAludel extends TileEE implements ISidedInventory
 
                         if (this.inventory[FUEL_INVENTORY_INDEX].stackSize == 0)
                         {
-                            this.inventory[FUEL_INVENTORY_INDEX] = this.inventory[FUEL_INVENTORY_INDEX].getItem().getContainerItemStack(inventory[FUEL_INVENTORY_INDEX]);
+                            this.inventory[FUEL_INVENTORY_INDEX] = this.inventory[FUEL_INVENTORY_INDEX].getItem().getContainerItem(inventory[FUEL_INVENTORY_INDEX]);
                         }
                     }
                 }
@@ -289,9 +285,9 @@ public class TileAludel extends TileEE implements ISidedInventory
         {
             this.onInventoryChanged();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
-            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128d, this.worldObj.provider.dimensionId, getDescriptionPacket());
-            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
+            EquivalentExchange3.packetpipeline.sendToAllAround(getDescriptionPacket(), new TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 128d));
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         }
     }
 
@@ -366,30 +362,30 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public Packet getDescriptionPacket()
+    public IPacket getDescriptionPacket()
     {
         ItemStack itemStack = this.inventory[OUTPUT_INVENTORY_INDEX];
 
         if (itemStack != null && itemStack.stackSize > 0)
         {
-            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.itemID, itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack)));
+            return new PacketEETileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, itemStack.getItem().getUnlocalizedName(), itemStack.getItemDamage(), itemStack.stackSize, ItemHelper.getColor(itemStack));
         }
         else
         {
-            return PacketTypeHandler.populatePacket(new PacketTileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, -1, 0, 0, 0));
+            return new PacketEETileWithItemUpdate(xCoord, yCoord, zCoord, orientation, state, customName, "", 0, 0, 0);
         }
     }
 
-    @Override
+    //@Override
     public void onInventoryChanged()
     {
-        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
+    	EquivalentExchange3.packetpipeline.sendToAllAround(getDescriptionPacket(), new TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 128D));
 
-        worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+        worldObj.func_147451_t(xCoord, yCoord, zCoord);
 
         if (hasGlassBell)
         {
-            worldObj.updateAllLightTypes(xCoord, yCoord + 1, zCoord);
+            worldObj.func_147451_t(xCoord, yCoord + 1, zCoord);
         }
     }
 
@@ -456,7 +452,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     @Override
     public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
         {
             return isItemValidForSlot(slotIndex, itemStack);
         }
@@ -479,4 +475,11 @@ public class TileAludel extends TileEE implements ISidedInventory
     {
         return slotIndex == OUTPUT_INVENTORY_INDEX;
     }
+
+	@Override
+	public boolean hasCustomInventoryName() 
+	{
+		// TODO Auto-generated method stub
+		return this.hasCustomName();
+	}
 }

@@ -3,7 +3,7 @@ package com.pahimar.ee3.proxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -25,11 +25,6 @@ public class ServerProxy extends CommonProxy
     }
 
     public void registerDrawBlockHighlightHandler()
-    {
-        // NOOP
-    }
-
-    public void setKeyBinding(String name, int value)
     {
         // NOOP
     }
@@ -65,7 +60,7 @@ public class ServerProxy extends CommonProxy
         // NOOP
     }
 
-    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color)
+    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, String itemName, int metaData, int stackSize, int color)
     {
         // NOOP
     }
@@ -74,4 +69,10 @@ public class ServerProxy extends CommonProxy
     {
         // NOOP
     }
+
+	@Override
+	public void setKeyBinding(String name, int value, String Category) {
+		// TODO Auto-generated method stub
+		
+	}
 }

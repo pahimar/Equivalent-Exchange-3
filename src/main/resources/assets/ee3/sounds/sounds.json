@@ -1,0 +1,17 @@
+{
+	"chargeDown": {"category": "EE3", "Sound": [{"name": "chargeDown", "stream": false}]},
+	"chargeUp": {"category": "EE3", "Sound": [{"name": "chargeDown", "stream": false}]},
+	"destruct": {"category": "EE3", "Sound": [{"name": "destruct", "stream": false}]},
+	"fail": {"category": "EE3", "Sound": [{"name": "fail", "stream": false}]},
+	"gust": {"category": "EE3", "Sound": [{"name": "gust", "stream": false}]},
+	"heal": {"category": "EE3", "Sound": [{"name": "heal", "stream": false}]},
+	"kinesis": {"category": "EE3", "Sound": [{"name": "kinesis", "stream": false}]},
+	"launch": {"category": "EE3", "Sound": [{"name": "launch", "stream": false}]},
+	"nova": {"category": "EE3", "Sound": [{"name": "nova", "stream": false}]},
+	"philball": {"category": "EE3", "Sound": [{"name": "philball", "stream": false}]},
+	"tock": {"category": "EE3", "Sound": [{"name": "tock", "stream": false}]},
+	"transmute": {"category": "EE3", "Sound": [{"name": "transmute", "stream": false}]},
+	"wall": {"category": "EE3", "Sound": [{"name": "wall", "stream": false}]},
+	"waterball": {"category": "EE3", "Sound": [{"name": "waterball", "stream": false}]},
+	"wind": {"category": "EE3", "Sound": [{"name": "wind", "stream": false}]},
+}

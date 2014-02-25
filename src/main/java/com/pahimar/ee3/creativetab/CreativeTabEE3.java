@@ -1,9 +1,12 @@
 package com.pahimar.ee3.creativetab;
 
-import com.pahimar.ee3.lib.ItemIds;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
+import com.pahimar.ee3.item.ModItems;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
 
 /**
  * Equivalent-Exchange-3
@@ -19,13 +22,6 @@ public class CreativeTabEE3 extends CreativeTabs
         super(tabID, com.pahimar.ee3.lib.Reference.MOD_ID);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getTabIconItemIndex()
-    {
-
-        return ItemIds.MINIUM_SHARD;
-    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -33,4 +29,12 @@ public class CreativeTabEE3 extends CreativeTabs
     {
         return "Equivalent Exchange 3";
     }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getTabIconItem() 
+	{
+		// TODO Auto-generated method stub
+		return ModItems.miniumShard;
+	}
 }

@@ -43,7 +43,7 @@ public class ContainerAlchemicalChest extends Container
     public ContainerAlchemicalChest(InventoryPlayer inventoryPlayer, TileAlchemicalChest tileAlchemicalChest)
     {
         this.tileAlchemicalChest = tileAlchemicalChest;
-        tileAlchemicalChest.openChest();
+        tileAlchemicalChest.openInventory();
 
         if (this.tileAlchemicalChest.getState() == 0)
         {
@@ -132,7 +132,7 @@ public class ContainerAlchemicalChest extends Container
     public void onContainerClosed(EntityPlayer entityPlayer)
     {
         super.onContainerClosed(entityPlayer);
-        tileAlchemicalChest.closeChest();
+        tileAlchemicalChest.closeInventory();
     }
 
     @Override

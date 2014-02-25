@@ -1,6 +1,6 @@
 package com.pahimar.ee3.configuration;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
@@ -22,7 +22,6 @@ public class ConfigurationHandler
     {
 
         GeneralConfiguration.init(new File(configPath + "general.properties"));
-        BlockConfiguration.init(new File(configPath + "block.properties"));
         ItemConfiguration.init(new File(configPath + "item.properties"));
         TransmutationConfiguration.init(new File(configPath + "transmutation.properties"));
     }

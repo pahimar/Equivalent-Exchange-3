@@ -3,7 +3,10 @@ package com.pahimar.ee3.recipe;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.api.WrappedStack;
+
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -15,92 +18,92 @@ public class RecipesPotions
 
     private static Multimap<WrappedStack, List<WrappedStack>> potionRecipes = null;
 
-    private static WrappedStack reagentWater = new WrappedStack(new ItemStack(Block.waterStill));
-    private static WrappedStack reagentNetherWart = new WrappedStack(new ItemStack(372, 1, 0));
-    private static WrappedStack reagentGlowstoneDust = new WrappedStack(new ItemStack(Item.glowstone));
-    private static WrappedStack reagentRedstoneDust = new WrappedStack(new ItemStack(331, 1, 0));
-    private static WrappedStack reagentGunpowder = new WrappedStack(new ItemStack(Item.gunpowder));
-    private static WrappedStack reagentGoldenCarrot = new WrappedStack(new ItemStack(Item.goldenCarrot));
-    private static WrappedStack reagentMagmaCream = new WrappedStack(new ItemStack(Item.magmaCream));
-    private static WrappedStack reagentSugar = new WrappedStack(new ItemStack(Item.sugar));
-    private static WrappedStack reagentGlisteringMelon = new WrappedStack(new ItemStack(Item.speckledMelon));
-    private static WrappedStack reagentSpiderEye = new WrappedStack(new ItemStack(Item.spiderEye));
-    private static WrappedStack reagentGhastTear = new WrappedStack(new ItemStack(Item.ghastTear));
-    private static WrappedStack reagentFermentedSpiderEye = new WrappedStack(new ItemStack(Item.fermentedSpiderEye));
-    private static WrappedStack reagentBlazePowder = new WrappedStack(new ItemStack(Item.blazePowder));
+    private static WrappedStack reagentWater = new WrappedStack(new ItemStack(Blocks.water));
+    private static WrappedStack reagentNetherWart = new WrappedStack(new ItemStack(Items.nether_wart, 1, 0));
+    private static WrappedStack reagentGlowstoneDust = new WrappedStack(new ItemStack(Items.glowstone_dust));
+    private static WrappedStack reagentRedstoneDust = new WrappedStack(new ItemStack(Items.redstone, 1, 0));
+    private static WrappedStack reagentGunpowder = new WrappedStack(new ItemStack(Items.gunpowder));
+    private static WrappedStack reagentGoldenCarrot = new WrappedStack(new ItemStack(Items.golden_carrot));
+    private static WrappedStack reagentMagmaCream = new WrappedStack(new ItemStack(Items.magma_cream));
+    private static WrappedStack reagentSugar = new WrappedStack(new ItemStack(Items.sugar));
+    private static WrappedStack reagentGlisteringMelon = new WrappedStack(new ItemStack(Items.speckled_melon));
+    private static WrappedStack reagentSpiderEye = new WrappedStack(new ItemStack(Items.spider_eye));
+    private static WrappedStack reagentGhastTear = new WrappedStack(new ItemStack(Items.ghast_tear));
+    private static WrappedStack reagentFermentedSpiderEye = new WrappedStack(new ItemStack(Items.fermented_spider_eye));
+    private static WrappedStack reagentBlazePowder = new WrappedStack(new ItemStack(Items.blaze_powder));
 
-    private static WrappedStack bottleEmpty = new WrappedStack(Item.glassBottle);
-    private static WrappedStack bottleWater = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 0));
+    private static WrappedStack bottleEmpty = new WrappedStack(Items.glass_bottle);
+    private static WrappedStack bottleWater = new WrappedStack(new ItemStack(Items.potionitem, 1, 0));
 
-    private static WrappedStack potionAwkward = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16));
-    private static WrappedStack potionThick = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 32));
-    private static WrappedStack potionMundane = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 128));
-    private static WrappedStack potionMundaneExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 64));
-    private static WrappedStack potionMundaneSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16512));
-    private static WrappedStack potionMundaneSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16448));
+    private static WrappedStack potionAwkward = new WrappedStack(new ItemStack(Items.potionitem, 1, 16));
+    private static WrappedStack potionThick = new WrappedStack(new ItemStack(Items.potionitem, 1, 32));
+    private static WrappedStack potionMundane = new WrappedStack(new ItemStack(Items.potionitem, 1, 128));
+    private static WrappedStack potionMundaneExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 64));
+    private static WrappedStack potionMundaneSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16512));
+    private static WrappedStack potionMundaneSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16448));
 
-    private static WrappedStack potionRegeneration = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8193));
-    private static WrappedStack potionRegenerationEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8225));
-    private static WrappedStack potionRegenerationExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8257));
-    private static WrappedStack potionRegenerationSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16385));
-    private static WrappedStack potionRegenerationSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16417));
-    private static WrappedStack potionRegenerationSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16449));
+    private static WrappedStack potionRegeneration = new WrappedStack(new ItemStack(Items.potionitem, 1, 8193));
+    private static WrappedStack potionRegenerationEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8225));
+    private static WrappedStack potionRegenerationExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8257));
+    private static WrappedStack potionRegenerationSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16385));
+    private static WrappedStack potionRegenerationSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16417));
+    private static WrappedStack potionRegenerationSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16449));
 
-    private static WrappedStack potionSwiftness = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8194));
-    private static WrappedStack potionSwiftnessEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8226));
-    private static WrappedStack potionSwiftnessExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8258));
-    private static WrappedStack potionSwiftnessSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16386));
-    private static WrappedStack potionSwiftnessSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16418));
-    private static WrappedStack potionSwiftnessSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16450));
+    private static WrappedStack potionSwiftness = new WrappedStack(new ItemStack(Items.potionitem, 1, 8194));
+    private static WrappedStack potionSwiftnessEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8226));
+    private static WrappedStack potionSwiftnessExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8258));
+    private static WrappedStack potionSwiftnessSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16386));
+    private static WrappedStack potionSwiftnessSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16418));
+    private static WrappedStack potionSwiftnessSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16450));
 
-    private static WrappedStack potionFireResist = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8195));
-    private static WrappedStack potionFireResistExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8259));
-    private static WrappedStack potionFireResistSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16387));
-    private static WrappedStack potionFireResistSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16451));
+    private static WrappedStack potionFireResist = new WrappedStack(new ItemStack(Items.potionitem, 1, 8195));
+    private static WrappedStack potionFireResistExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8259));
+    private static WrappedStack potionFireResistSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16387));
+    private static WrappedStack potionFireResistSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16451));
 
-    private static WrappedStack potionPoison = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8196));
-    private static WrappedStack potionPoisonEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8228));
-    private static WrappedStack potionPoisonExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8260));
-    private static WrappedStack potionPoisonSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16388));
-    private static WrappedStack potionPoisonSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16420));
-    private static WrappedStack potionPoisonSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16452));
+    private static WrappedStack potionPoison = new WrappedStack(new ItemStack(Items.potionitem, 1, 8196));
+    private static WrappedStack potionPoisonEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8228));
+    private static WrappedStack potionPoisonExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8260));
+    private static WrappedStack potionPoisonSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16388));
+    private static WrappedStack potionPoisonSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16420));
+    private static WrappedStack potionPoisonSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16452));
 
-    private static WrappedStack potionHealing = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8197));
-    private static WrappedStack potionHealingEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8229));
-    private static WrappedStack potionHealingSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16389));
-    private static WrappedStack potionHealingSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16421));
+    private static WrappedStack potionHealing = new WrappedStack(new ItemStack(Items.potionitem, 1, 8197));
+    private static WrappedStack potionHealingEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8229));
+    private static WrappedStack potionHealingSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16389));
+    private static WrappedStack potionHealingSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16421));
 
-    private static WrappedStack potionNightVision = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8198));
-    private static WrappedStack potionNightVisionExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8262));
-    private static WrappedStack potionNightVisionSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16390));
-    private static WrappedStack potionNightVisionSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16454));
+    private static WrappedStack potionNightVision = new WrappedStack(new ItemStack(Items.potionitem, 1, 8198));
+    private static WrappedStack potionNightVisionExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8262));
+    private static WrappedStack potionNightVisionSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16390));
+    private static WrappedStack potionNightVisionSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16454));
 
-    private static WrappedStack potionWeakness = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8200));
-    private static WrappedStack potionWeaknessExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8264));
-    private static WrappedStack potionWeaknessSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16392));
-    private static WrappedStack potionWeaknessSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16456));
+    private static WrappedStack potionWeakness = new WrappedStack(new ItemStack(Items.potionitem, 1, 8200));
+    private static WrappedStack potionWeaknessExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8264));
+    private static WrappedStack potionWeaknessSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16392));
+    private static WrappedStack potionWeaknessSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16456));
 
-    private static WrappedStack potionStrength = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8201));
-    private static WrappedStack potionStrengthEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8233));
-    private static WrappedStack potionStrengthExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8265));
-    private static WrappedStack potionStrengthSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16393));
-    private static WrappedStack potionStrengthSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16425));
-    private static WrappedStack potionStrengthSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16457));
+    private static WrappedStack potionStrength = new WrappedStack(new ItemStack(Items.potionitem, 1, 8201));
+    private static WrappedStack potionStrengthEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8233));
+    private static WrappedStack potionStrengthExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8265));
+    private static WrappedStack potionStrengthSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16393));
+    private static WrappedStack potionStrengthSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16425));
+    private static WrappedStack potionStrengthSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16457));
 
-    private static WrappedStack potionSlowness = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8202));
-    private static WrappedStack potionSlownessExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8266));
-    private static WrappedStack potionSlownessSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16394));
-    private static WrappedStack potionSlownessSplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16458));
+    private static WrappedStack potionSlowness = new WrappedStack(new ItemStack(Items.potionitem, 1, 8202));
+    private static WrappedStack potionSlownessExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8266));
+    private static WrappedStack potionSlownessSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16394));
+    private static WrappedStack potionSlownessSplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16458));
 
-    private static WrappedStack potionHarming = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8204));
-    private static WrappedStack potionHarmingEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8236));
-    private static WrappedStack potionHarmingSplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16396));
-    private static WrappedStack potionHarmingSplashEnhanced = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16428));
+    private static WrappedStack potionHarming = new WrappedStack(new ItemStack(Items.potionitem, 1, 8204));
+    private static WrappedStack potionHarmingEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 8236));
+    private static WrappedStack potionHarmingSplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16396));
+    private static WrappedStack potionHarmingSplashEnhanced = new WrappedStack(new ItemStack(Items.potionitem, 1, 16428));
 
-    private static WrappedStack potionInvisibility = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8206));
-    private static WrappedStack potionInvisibilityExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 8270));
-    private static WrappedStack potionInvisibilitySplash = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16398));
-    private static WrappedStack potionInvisibilitySplashExtended = new WrappedStack(new ItemStack(Item.potion.itemID, 1, 16462));
+    private static WrappedStack potionInvisibility = new WrappedStack(new ItemStack(Items.potionitem, 1, 8206));
+    private static WrappedStack potionInvisibilityExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 8270));
+    private static WrappedStack potionInvisibilitySplash = new WrappedStack(new ItemStack(Items.potionitem, 1, 16398));
+    private static WrappedStack potionInvisibilitySplashExtended = new WrappedStack(new ItemStack(Items.potionitem, 1, 16462));
 
     public static Multimap<WrappedStack, List<WrappedStack>> getPotionRecipes()
     {

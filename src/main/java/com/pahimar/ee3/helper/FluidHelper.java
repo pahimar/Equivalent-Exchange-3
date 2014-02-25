@@ -1,6 +1,8 @@
 package com.pahimar.ee3.helper;
 
-import com.pahimar.ee3.lib.Compare;
+import java.util.Comparator;
+
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -9,7 +11,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Comparator;
+import com.pahimar.ee3.lib.Compare;
 
 public class FluidHelper
 {
@@ -26,9 +28,9 @@ public class FluidHelper
                 {
                     return StatCollector.translateToLocal("item.milk.name");
                 }
-            }.setUnlocalizedName(Item.bucketMilk.getUnlocalizedName());
+            }.setUnlocalizedName(Items.milk_bucket.getUnlocalizedName());
             FluidRegistry.registerFluid(milk);
-            FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketEmpty));
+            FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
         }
     }
 

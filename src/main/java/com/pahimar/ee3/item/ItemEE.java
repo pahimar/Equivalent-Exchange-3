@@ -1,12 +1,14 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -17,16 +19,17 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemEE extends Item
 {
-    private static final int SHIFTED_ID_RANGE_CORRECTION = 256;
+    @SuppressWarnings("unused")
+	private static final int SHIFTED_ID_RANGE_CORRECTION = 256;
 
-    public ItemEE(int id)
+    public ItemEE()
     {
-        super(id - SHIFTED_ID_RANGE_CORRECTION);
+        super();
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         maxStackSize = 1;
         setNoRepair();
     }
-
+    
     @Override
     public String getUnlocalizedName()
     {
@@ -46,7 +49,7 @@ public class ItemEE extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }

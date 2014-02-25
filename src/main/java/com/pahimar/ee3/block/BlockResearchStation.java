@@ -10,15 +10,15 @@ import net.minecraft.world.World;
 
 public class BlockResearchStation extends BlockEE implements ITileEntityProvider
 {
-    public BlockResearchStation(int id)
+    public BlockResearchStation()
     {
-        super(id);
-        this.setUnlocalizedName(Strings.RESEARCH_STATION_NAME);
+        super();
+        this.setBlockName(Strings.RESEARCH_STATION_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileResearchStation();
     }

@@ -45,7 +45,7 @@ public class GeneralHelper
 
         for (int i = 0; i < stack.stackSize; i++)
         {
-            currentStack = new ItemStack(stack.itemID, 1, stack.getItemDamage());
+            currentStack = new ItemStack(stack.getItem(), 1, stack.getItemDamage());
             list.add(currentStack);
         }
 

@@ -20,7 +20,7 @@ public class LogHelper
 
     public static void init()
     {
-        eeLogger.setParent(FMLLog.getLogger());
+        //eeLogger.setParent(FMLLog.getLogger());
     }
 
     public static void log(Level logLevel, Object object)

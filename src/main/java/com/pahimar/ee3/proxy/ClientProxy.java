@@ -1,39 +1,49 @@
 package com.pahimar.ee3.proxy;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.client.audio.SoundHandler;
-import com.pahimar.ee3.client.handler.DrawBlockHighlightHandler;
-import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
-import com.pahimar.ee3.client.handler.KeyBindingHandler;
-import com.pahimar.ee3.client.handler.TransmutationTargetOverlayHandler;
-import com.pahimar.ee3.client.helper.KeyBindingHelper;
-import com.pahimar.ee3.client.renderer.item.*;
-import com.pahimar.ee3.client.renderer.tileentity.*;
-import com.pahimar.ee3.helper.ItemHelper;
-import com.pahimar.ee3.helper.TransmutationHelper;
-import com.pahimar.ee3.item.IChargeable;
-import com.pahimar.ee3.lib.ActionTypes;
-import com.pahimar.ee3.lib.BlockIds;
-import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.RenderIds;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketRequestEvent;
-import com.pahimar.ee3.tileentity.*;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.client.handler.DrawBlockHighlightHandler;
+import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
+import com.pahimar.ee3.client.helper.KeyBindingHelper;
+import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemResearchStationRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityResearchStationRenderer;
+import com.pahimar.ee3.helper.ItemHelper;
+import com.pahimar.ee3.helper.TransmutationHelper;
+import com.pahimar.ee3.item.IChargeable;
+import com.pahimar.ee3.lib.ActionTypes;
+import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.RenderIds;
+import com.pahimar.ee3.network.packet.PacketEERequestEvent;
+import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileAludel;
+import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileEE;
+import com.pahimar.ee3.tileentity.TileGlassBell;
+import com.pahimar.ee3.tileentity.TileResearchStation;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Equivalent-Exchange-3
@@ -48,13 +58,12 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerKeyBindingHandler()
     {
-        KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+        //KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
     }
 
     @Override
     public void registerRenderTickHandler()
     {
-        TickRegistry.registerTickHandler(new TransmutationTargetOverlayHandler(), Side.CLIENT);
     }
 
     @Override
@@ -64,16 +73,10 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void setKeyBinding(String name, int value)
+    public void setKeyBinding(String name, int value, String Category)
     {
-        KeyBindingHelper.addKeyBinding(name, value);
+        KeyBindingHelper.addKeyBinding(name, value, Category);
         KeyBindingHelper.addIsRepeating(false);
-    }
-
-    @Override
-    public void registerSoundHandler()
-    {
-        MinecraftForge.EVENT_BUS.register(new SoundHandler());
     }
 
     @Override
@@ -85,11 +88,11 @@ public class ClientProxy extends CommonProxy
         RenderIds.glassBell = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.researchStation = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL_BASE, new ItemAludelRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
-        MinecraftForgeClient.registerItemRenderer(BlockIds.RESEARCH_STATION, new ItemResearchStationRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock( ModBlocks.calcinator), new ItemCalcinatorRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.aludelBase), new ItemAludelRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.alchemicalChest), new ItemAlchemicalChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.glassBell), new ItemGlassBellRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.researchStation), new ItemResearchStationRenderer());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
@@ -107,13 +110,13 @@ public class ClientProxy extends CommonProxy
     @Override
     public void sendRequestEventPacket(byte eventType, int originX, int originY, int originZ, byte sideHit, byte rangeX, byte rangeY, byte rangeZ, String data)
     {
-        PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketRequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data)));
+    	EquivalentExchange3.packetpipeline.sendToServer(new PacketEERequestEvent(eventType, originX, originY, originZ, sideHit, rangeX, rangeY, rangeZ, data));
     }
 
     @Override
     public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName)
     {
-        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(x, y, z);
 
         if (tileEntity != null)
         {
@@ -127,19 +130,19 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, int itemID, int metaData, int stackSize, int color)
+    public void handleTileWithItemPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, String itemName, int metaData, int stackSize, int color)
     {
         World world = FMLClientHandler.instance().getClient().theWorld;
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         this.handleTileEntityPacket(x, y, z, orientation, state, customName);
 
         if (tileEntity instanceof TileGlassBell)
         {
             ItemStack itemStack = null;
-            if (itemID != -1)
+            if (itemName != "")
             {
-                itemStack = new ItemStack(itemID, stackSize, metaData);
+                itemStack = new ItemStack(Block.getBlockFromName(itemName), stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
                 {
                     ItemHelper.setColor(itemStack, color);
@@ -147,15 +150,16 @@ public class ClientProxy extends CommonProxy
             }
 
             ((TileGlassBell) tileEntity).outputItemStack = itemStack;
-            world.updateAllLightTypes(x, y, z);
+            
+            world.func_147451_t(x, y, z);
         }
         else if (tileEntity instanceof TileAludel)
         {
             ItemStack itemStack = null;
 
-            if (itemID != -1)
+            if (itemName != "")
             {
-                itemStack = new ItemStack(itemID, stackSize, metaData);
+                itemStack = new ItemStack(Block.getBlockFromName(itemName), stackSize, metaData);
                 if (color != Integer.parseInt(Colours.PURE_WHITE, 16))
                 {
                     ItemHelper.setColor(itemStack, color);
@@ -163,7 +167,7 @@ public class ClientProxy extends CommonProxy
             }
 
             ((TileAludel) tileEntity).outputItemStack = itemStack;
-            world.updateAllLightTypes(x, y, z);
+            world.func_147451_t(x, y, z);
         }
     }
 
@@ -171,7 +175,7 @@ public class ClientProxy extends CommonProxy
     public void handleTileCalcinatorPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName, byte leftStackSize, byte leftStackMeta, byte rightStackSize, byte rightStackMeta)
     {
         World world = FMLClientHandler.instance().getClient().theWorld;
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         this.handleTileEntityPacket(x, y, z, orientation, state, customName);
 
@@ -181,7 +185,7 @@ public class ClientProxy extends CommonProxy
             ((TileCalcinator) tileEntity).leftStackMeta = leftStackMeta;
             ((TileCalcinator) tileEntity).rightStackSize = rightStackSize;
             ((TileCalcinator) tileEntity).rightStackMeta = rightStackMeta;
-            world.updateAllLightTypes(x, y, z);
+            world.func_147451_t(x, y, z);
         }
     }
 
@@ -252,4 +256,10 @@ public class ClientProxy extends CommonProxy
             }
         }
     }
+
+	@Override
+	public void registerSoundHandler() {
+		// TODO Auto-generated method stub
+		
+	}
 }

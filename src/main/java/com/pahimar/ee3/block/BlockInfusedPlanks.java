@@ -1,31 +1,34 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Colours;
-import com.pahimar.ee3.lib.Strings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
-import java.util.List;
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockInfusedPlanks extends BlockEE
 {
-    public BlockInfusedPlanks(int id)
+    public BlockInfusedPlanks()
     {
-        super(id, Material.wood);
-        this.setUnlocalizedName(Strings.INFUSED_PLANKS_NAME);
+        super(Material.wood);
+        this.setBlockName(Strings.INFUSED_PLANKS_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setStepSound(soundWoodFootstep);
+        this.setStepSound(soundTypeWood);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerBlockIcons(IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon("planks_oak");
     }
@@ -80,9 +83,10 @@ public class BlockInfusedPlanks extends BlockEE
         }
     }
 
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs creativeTab, List list)
+    public void getSubBlocks(Item id, CreativeTabs creativeTab, List list)
     {
         for (int meta = 0; meta < 3; ++meta)
         {

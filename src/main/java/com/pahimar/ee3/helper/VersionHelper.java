@@ -1,17 +1,20 @@
 package com.pahimar.ee3.helper;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
+
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.config.Configuration;
+
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-import cpw.mods.fml.common.Loader;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.Configuration;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Properties;
+import cpw.mods.fml.common.Loader;
 
 /**
  * Equivalent-Exchange-3
@@ -188,7 +191,6 @@ public class VersionHelper implements Runnable
 
     public static String getResultMessageForClient()
     {
-
         return StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Reference.MOD_NAME + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteVersion + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + Loader.instance().getMCVersionString() + Colours.TEXT_COLOUR_PREFIX_WHITE, Colours.TEXT_COLOUR_PREFIX_YELLOW + VersionHelper.remoteUpdateLocation + Colours.TEXT_COLOUR_PREFIX_WHITE);
     }
 

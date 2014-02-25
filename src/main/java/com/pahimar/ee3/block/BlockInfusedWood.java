@@ -1,37 +1,40 @@
 package com.pahimar.ee3.block;
 
+import java.util.List;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-
-import java.util.List;
 
 public class BlockInfusedWood extends BlockEE
 {
     @SideOnly(Side.CLIENT)
-    private Icon logEnd, logSide;
+    private IIcon logEnd, logSide;
 
-    public BlockInfusedWood(int id)
+    public BlockInfusedWood()
     {
-        super(id, Material.wood);
-        this.setUnlocalizedName(Strings.INFUSED_WOOD_NAME);
+        super(Material.wood);
+        this.setBlockName(Strings.INFUSED_WOOD_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        this.setStepSound(soundWoodFootstep);
+        this.setStepSound(soundTypeWood);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerBlockIcons(IIconRegister iconRegister)
     {
         logEnd = iconRegister.registerIcon("log_oak_top");
         logSide = iconRegister.registerIcon("log_oak");
@@ -45,7 +48,7 @@ public class BlockInfusedWood extends BlockEE
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int side, int metaData)
+    public IIcon getIcon(int side, int metaData)
     {
         if (ForgeDirection.getOrientation(side) == ForgeDirection.UP || ForgeDirection.getOrientation(side) == ForgeDirection.DOWN)
         {
@@ -157,9 +160,9 @@ public class BlockInfusedWood extends BlockEE
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs creativeTab, List list)
+    public void getSubBlocks(Item id, CreativeTabs creativeTab, List list)
     {
         for (int meta = 0; meta < 3; ++meta)
         {

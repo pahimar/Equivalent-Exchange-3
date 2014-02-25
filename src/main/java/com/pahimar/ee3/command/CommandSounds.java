@@ -1,11 +1,12 @@
 package com.pahimar.ee3.command;
 
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
+import net.minecraft.util.IChatComponent;
+
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Commands;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.WrongUsageException;
-import net.minecraft.util.ChatMessageComponent;
 
 /**
  * Equivalent-Exchange-3
@@ -54,7 +55,7 @@ public class CommandSounds
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.ALL;
         GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.ALL);
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_SET_TO_ALL));
+        commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_SOUNDS_SET_TO_ALL));
     }
 
     private static void processSelfCommand(ICommandSender commandSender)
@@ -62,7 +63,7 @@ public class CommandSounds
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.SELF;
         GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.SELF);
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_SET_TO_SELF));
+        commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_SOUNDS_SET_TO_SELF));
     }
 
     private static void processOffCommand(ICommandSender commandSender)
@@ -70,6 +71,6 @@ public class CommandSounds
 
         ConfigurationSettings.ENABLE_SOUNDS = Commands.OFF;
         GeneralConfiguration.set(GeneralConfiguration.CATEGORY_AUDIO, ConfigurationSettings.ENABLE_SOUNDS_CONFIGNAME, Commands.OFF);
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_SOUNDS_TURNED_OFF));
+        commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_SOUNDS_TURNED_OFF));
     }
 }

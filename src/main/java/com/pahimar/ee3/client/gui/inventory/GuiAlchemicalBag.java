@@ -51,13 +51,13 @@ public class GuiAlchemicalBag extends GuiContainer
     {
         if (this.alchemicalBag.getItemDamage() == 0 || alchemicalBag.getItemDamage() == 1)
         {
-            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
-            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 35, ySize - 94 + 2, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 35, ySize - 94 + 2, 4210752);
         }
         else
         {
-            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
-            fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 94 + 2, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_ALCHEMICAL_BAG_NAME), 8, 8, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 44, ySize - 94 + 2, 4210752);
         }
     }
 

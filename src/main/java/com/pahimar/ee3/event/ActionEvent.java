@@ -3,7 +3,7 @@ package com.pahimar.ee3.event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.Event;
+import cpw.mods.fml.common.eventhandler.Event;;
 
 /**
  * Equivalent-Exchange-3

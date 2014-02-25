@@ -1,22 +1,25 @@
 package com.pahimar.ee3.item;
 
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
 import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Colours;
 import com.pahimar.ee3.lib.Strings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-
-import java.util.List;
 
 /**
  * Equivalent-Exchange-3
@@ -30,11 +33,11 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     private static final String[] ALCHEMICAL_BAG_ICONS = {"open", "closed", "symbolTier1", "symbolTier2", "symbolTier3"};
 
     @SideOnly(Side.CLIENT)
-    private Icon[] icons;
+    private IIcon[] icons;
 
-    public ItemAlchemicalBag(int id)
+    public ItemAlchemicalBag()
     {
-        super(id);
+        super();
         this.setHasSubtypes(true);
         this.setUnlocalizedName(Strings.ALCHEMICAL_BAG_NAME);
     }
@@ -42,7 +45,7 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs creativeTab, List list)
+    public void getSubItems(Item id, CreativeTabs creativeTab, List list)
     {
         for (int meta = 0; meta < 3; ++meta)
         {
@@ -52,9 +55,9 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister)
+    public void registerIcons(IIconRegister iconRegister)
     {
-        icons = new Icon[ALCHEMICAL_BAG_ICONS.length];
+        icons = new IIcon[ALCHEMICAL_BAG_ICONS.length];
 
         for (int i = 0; i < ALCHEMICAL_BAG_ICONS.length; ++i)
         {
@@ -73,7 +76,7 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
 
         if (world.isRemote)
         {
-            entityPlayer.sendChatToPlayer(ChatMessageComponent.createFromText("Pahimar: Sorry not ready yet!"));
+            entityPlayer.addChatMessage(IChatComponent.Serializer.func_150699_a("Pahimar: Sorry not ready yet!"));
         }
 
         return itemStack;
@@ -93,7 +96,7 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     }
 
     @Override
-    public Icon getIcon(ItemStack itemStack, int renderPass)
+    public IIcon getIcon(ItemStack itemStack, int renderPass)
     {
         if (renderPass == 0)
         {

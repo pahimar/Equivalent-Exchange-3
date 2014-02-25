@@ -1,11 +1,11 @@
 package com.pahimar.ee3.event;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.Cancelable;
+import cpw.mods.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-import static net.minecraftforge.event.Event.Result.DEFAULT;
-import static net.minecraftforge.event.Event.Result.DENY;
+import static cpw.mods.fml.common.eventhandler.Event.Result.DEFAULT;
+import static cpw.mods.fml.common.eventhandler.Event.Result.DENY;
 
 /**
  * Equivalent-Exchange-3

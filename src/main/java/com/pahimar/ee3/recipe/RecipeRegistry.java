@@ -4,9 +4,13 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
+
+import cpw.mods.fml.common.registry.GameData;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.awt.event.ItemListener;
 import java.util.*;
 
 public class RecipeRegistry
@@ -113,7 +117,8 @@ public class RecipeRegistry
         return Collections.unmodifiableList(recipeRegistry.discoveredStacks);
     }
 
-    private void discoverStacks()
+    @SuppressWarnings("rawtypes")
+	private void discoverStacks()
     {
         discoveredStacks = new ArrayList<WrappedStack>();
 
@@ -136,10 +141,38 @@ public class RecipeRegistry
                 }
             }
         }
-
-        // Scan stacks from vanilla item array
-        for (int i = 0; i < Item.itemsList.length; i++)
+        for (Object o : GameData.itemRegistry)
         {
+        	if (o instanceof Item)
+        	{
+        		Item i = (Item)o;
+                if (i.getHasSubtypes())
+                {
+                    for (int meta = 0; meta < 16; meta++)
+                    {
+                        WrappedStack wrappedItemStack = new WrappedStack(new ItemStack(i, 1, meta));
+
+                        if (!discoveredStacks.contains(wrappedItemStack))
+                        {
+                            discoveredStacks.add(wrappedItemStack);
+                        }
+                    }
+                }
+                else
+                {
+                    WrappedStack wrappedItemStack = new WrappedStack(i);
+
+                    if (!discoveredStacks.contains(wrappedItemStack))
+                    {
+                        discoveredStacks.add(wrappedItemStack);
+                    }
+                }
+            }
+        }
+        // Scan stacks from vanilla item array
+        /*for (int i = 0; i < Item.itemsList.length; i++)
+        {
+        	
             if (Item.itemsList[i] != null)
             {
                 if (Item.itemsList[i].getHasSubtypes())
@@ -164,7 +197,7 @@ public class RecipeRegistry
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override

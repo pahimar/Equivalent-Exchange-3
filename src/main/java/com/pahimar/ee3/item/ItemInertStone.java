@@ -11,9 +11,9 @@ import com.pahimar.ee3.lib.Strings;
  */
 public class ItemInertStone extends ItemEE
 {
-    public ItemInertStone(int id)
+    public ItemInertStone()
     {
-        super(id);
+        super();
         this.setUnlocalizedName(Strings.INERT_STONE_NAME);
     }
 }

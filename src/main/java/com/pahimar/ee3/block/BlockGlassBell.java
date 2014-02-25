@@ -7,31 +7,33 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileEE;
 import com.pahimar.ee3.tileentity.TileGlassBell;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockGlassBell extends BlockEE implements ITileEntityProvider
 {
-    public BlockGlassBell(int id)
+    public BlockGlassBell()
     {
-        super(id, Material.glass);
-        this.setUnlocalizedName(Strings.GLASS_BELL_NAME);
+        super(Material.glass);
+        this.setBlockName(Strings.GLASS_BELL_NAME);
         this.setCreativeTab(EquivalentExchange3.tabsEE3);
         this.setHardness(1.0F);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int var2)
     {
         return new TileGlassBell();
     }
@@ -56,7 +58,7 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int id, int meta)
+    public void breakBlock(World world, int x, int y, int z, Block id, int meta)
     {
         dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
@@ -73,9 +75,9 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-                if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell)
+                if (world.getTileEntity(x, y, z) instanceof TileGlassBell)
                 {
-                    if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
+                    if (world.getTileEntity(x, y - 1, z) instanceof TileAludel)
                     {
                         player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
                     }
@@ -95,16 +97,16 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     {
         if (itemStack.hasDisplayName())
         {
-            ((TileEE) world.getBlockTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
+            ((TileEE) world.getTileEntity(x, y, z)).setCustomName(itemStack.getDisplayName());
         }
 
-        if (world.getBlockTileEntity(x, y - 1, z) != null && world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
+        if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileAludel)
         {
-            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.UP);
+            ((TileEE) world.getTileEntity(x, y, z)).setOrientation(ForgeDirection.UP);
         }
         else
         {
-            ((TileEE) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+            ((TileEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
         }
 
         world.setBlockMetadataWithNotify(x, y, z, 0, 3);
@@ -123,9 +125,9 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     @Override
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
     {
-        if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell)
+        if (world.getTileEntity(x, y, z) instanceof TileGlassBell)
         {
-            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getTileEntity(x, y, z);
 
             switch (tileGlassBell.getOrientation())
             {
@@ -174,27 +176,29 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     {
         ItemStack itemStack;
 
-        if (world.getBlockTileEntity(x, y, z) instanceof TileGlassBell)
+        if (world.getTileEntity(x, y, z) instanceof TileGlassBell)
         {
-            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getTileEntity(x, y, z);
 
-            if (world.getBlockTileEntity(x, y - 1, z) instanceof TileAludel)
+            if (world.getTileEntity(x, y - 1, z) instanceof TileAludel)
             {
-                TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y - 1, z);
+                TileAludel tileAludel = (TileAludel) world.getTileEntity(x, y - 1, z);
 
                 itemStack = tileAludel.getStackInSlot(TileAludel.INPUT_INVENTORY_INDEX);
 
-                if (itemStack != null && itemStack.itemID < 4096)
+                if (itemStack != null && itemStack.getItem() != null)
                 {
-                    return Block.lightValue[itemStack.itemID];
+                    //return itemStack.getItem().
+                	return Block.getBlockFromItem(itemStack.getItem()).getLightValue();
                 }
             }
 
             itemStack = tileGlassBell.getStackInSlot(TileGlassBell.DISPLAY_SLOT_INVENTORY_INDEX);
 
-            if (itemStack != null && itemStack.itemID < 4096)
+            if (itemStack != null && itemStack.getItem() != null)
             {
-                return Block.lightValue[itemStack.itemID];
+                //return Block.lightValue[itemStack.itemID];
+            	return Block.getBlockFromItem(itemStack.getItem()).getLightValue();
             }
         }
 

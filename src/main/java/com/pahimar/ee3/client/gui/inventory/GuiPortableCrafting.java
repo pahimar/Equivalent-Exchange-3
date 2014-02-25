@@ -37,8 +37,8 @@ public class GuiPortableCrafting extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
 
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_PORTABLE_CRAFTING), 28, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 96 + 2, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_PORTABLE_CRAFTING), 28, 6, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 96 + 2, 4210752);
     }
 
     /**

@@ -1,13 +1,15 @@
 package com.pahimar.ee3.helper;
 
-import com.pahimar.ee3.handler.EquivalencyHandler;
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+import com.pahimar.ee3.handler.EquivalencyHandler;
 
 /**
  * Equivalent-Exchange-3
@@ -23,10 +25,10 @@ public class TransmutationHelper
     public static ItemStack currentBlockStack = null;
     public static ItemStack targetBlockStack = null;
 
-    public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, int targetID, int targetMeta)
+    public static boolean transmuteInWorld(World world, EntityPlayer player, ItemStack stack, int x, int y, int z, Block targetID, int targetMeta)
     {
 
-        if (Block.blocksList[targetID] != null)
+        if (targetID != null)
         {
             world.setBlock(x, y, z, targetID, targetMeta, 2);
             return true;
@@ -40,7 +42,7 @@ public class TransmutationHelper
 
         if (targetBlock != null)
         {
-            return TransmutationHelper.targetBlockStack.itemID + ":" + TransmutationHelper.targetBlockStack.getItemDamage();
+            return TransmutationHelper.targetBlockStack.getUnlocalizedName() + ":" + TransmutationHelper.targetBlockStack.getItemDamage();
         }
         else
         {
@@ -51,34 +53,32 @@ public class TransmutationHelper
     public static void updateTargetBlock(World world, int x, int y, int z)
     {
 
-        int id = world.getBlockId(x, y, z);
+        Block id = world.getBlock(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
 
-        Block currentBlock = Block.blocksList[id];
-
-        if (currentBlock != null)
+        if (id != null)
         {
-            meta = currentBlock.damageDropped(meta);
+            meta = id.damageDropped(meta);
 
             currentBlockStack = new ItemStack(id, 1, meta);
 
             if (previousBlockStack == null)
             {
                 previousBlockStack = currentBlockStack;
-                targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                targetBlockStack = getNextBlock(currentBlockStack.getItem(), currentBlockStack.getItemDamage());
             }
             else
             {
                 if (!EquivalencyHandler.instance().areEquivalent(TransmutationHelper.previousBlockStack, currentBlockStack))
                 {
                     previousBlockStack = currentBlockStack;
-                    targetBlockStack = getNextBlock(currentBlockStack.itemID, currentBlockStack.getItemDamage());
+                    targetBlockStack = getNextBlock(currentBlockStack.getItem(), currentBlockStack.getItemDamage());
                 }
             }
         }
     }
 
-    public static ItemStack getNextBlock(int id, int meta)
+    public static ItemStack getNextBlock(Item id, int meta)
     {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
@@ -92,7 +92,7 @@ public class TransmutationHelper
         return nextStack;
     }
 
-    private static ItemStack getNextBlock(int id, int meta, int origId, int origMeta)
+    private static ItemStack getNextBlock(Item id, int meta, Item origId, int origMeta)
     {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
@@ -110,7 +110,7 @@ public class TransmutationHelper
              * a next block so return the original. This is the "base case" for
              * the recursion.
              */
-            if (nextStack.itemID == origId && nextStack.getItemDamage() == origMeta)
+            if (nextStack.getItem() == origId && nextStack.getItemDamage() == origMeta)
             {
                 return nextStack;
             }
@@ -122,7 +122,7 @@ public class TransmutationHelper
                 }
                 else
                 {
-                    return getNextBlock(nextStack.itemID, nextStack.getItemDamage(), origId, origMeta);
+                    return getNextBlock(nextStack.getItem(), nextStack.getItemDamage(), origId, origMeta);
                 }
             }
         }
@@ -131,7 +131,7 @@ public class TransmutationHelper
         return nextStack;
     }
 
-    public static ItemStack getPreviousBlock(int itemID, int meta)
+    public static ItemStack getPreviousBlock(Item itemID, int meta)
     {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(itemID, meta);
@@ -145,7 +145,7 @@ public class TransmutationHelper
         return prevStack;
     }
 
-    private static ItemStack getPreviousBlock(int id, int meta, int origId, int origMeta)
+    private static ItemStack getPreviousBlock(Item id, int meta, Item origId, int origMeta)
     {
 
         ArrayList<ItemStack> list = EquivalencyHandler.instance().getEquivalencyList(id, meta);
@@ -156,7 +156,7 @@ public class TransmutationHelper
             prevStack = EquivalencyHandler.instance().getPrevInList(id, meta);
             prevStack.stackSize = 1;
 
-            if (prevStack.itemID == origId && prevStack.getItemDamage() == origMeta)
+            if (prevStack.getItem() == origId && prevStack.getItemDamage() == origMeta)
             {
                 return prevStack;
             }
@@ -168,7 +168,7 @@ public class TransmutationHelper
                 }
                 else
                 {
-                    return getPreviousBlock(prevStack.itemID, prevStack.getItemDamage(), origId, origMeta);
+                    return getPreviousBlock(prevStack.getItem(), prevStack.getItemDamage(), origId, origMeta);
                 }
             }
         }

@@ -1,15 +1,22 @@
 package com.pahimar.ee3.emc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.EmcHelper;
 import com.pahimar.ee3.lib.Compare;
 import com.pahimar.ee3.recipe.RecipeRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.*;
 
 public class EmcRegistry
 {
@@ -265,7 +272,7 @@ public class EmcRegistry
 
             if (emcRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
             {
-                return emcRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack()));
+                return true;
             }
             else
             {
@@ -283,7 +290,7 @@ public class EmcRegistry
 
                             if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
                             {
-                                return emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack));
+                                return true;
                             }
                             else
                             {
@@ -291,7 +298,7 @@ public class EmcRegistry
                                 {
                                     if (emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
                                     {
-                                        return emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack));
+                                        return true;
                                     }
                                 }
                             }
@@ -306,7 +313,7 @@ public class EmcRegistry
                                 {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
 
-                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID)
+                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.getItem() == wrappedItemStack.getItem())
                                     {
                                         return true;
                                     }
@@ -339,7 +346,7 @@ public class EmcRegistry
 
     public EmcValue getEmcValue(Object object, boolean strict)
     {
-        if (hasEmcValue(object, strict))
+        if (WrappedStack.canBeWrapped(object))
         {
             WrappedStack stack = new WrappedStack(object);
 
@@ -349,21 +356,24 @@ public class EmcRegistry
             }
             else
             {
-                if (stack.getWrappedStack() instanceof ItemStack)
+                if (!strict)
                 {
-                    EmcValue lowestValue = null;
-                    ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
+                    
 
-                    if (OreDictionary.getOreID(wrappedItemStack) != -1)
+                    if (stack.getWrappedStack() instanceof ItemStack)
                     {
-                        OreStack oreStack = new OreStack(wrappedItemStack);
+                    	EmcValue lowestValue = null;
+                        ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
+                        //OreStack oreStack = new OreStack(wrappedItemStack);
 
-                        if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                        
+                        if (OreDictionary.getOreID(wrappedItemStack) != -1)
                         {
-                            return emcRegistry.stackMappings.get(new WrappedStack(oreStack));
-                        }
-                        else
-                        {
+                        	OreStack oreStack = new OreStack(wrappedItemStack);
+                        	if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                        	{
+                        		return emcRegistry.stackMappings.get(new WrappedStack(oreStack));
+                        	}
                             for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack)))
                             {
                                 if (emcRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
@@ -386,39 +396,39 @@ public class EmcRegistry
 
                             return lowestValue;
                         }
-                    }
-                    else
-                    {
-                        for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet())
+                        else
                         {
-                            EmcValue stackValue = emcRegistry.stackMappings.get(valuedStack);
-
-                            if (valuedStack.getWrappedStack() instanceof ItemStack)
+                            for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet())
                             {
-                                ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
+                                EmcValue stackValue = emcRegistry.stackMappings.get(valuedStack);
 
-                                if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID)
+                                if (valuedStack.getWrappedStack() instanceof ItemStack)
                                 {
-                                    if (stackValue.compareTo(lowestValue) < 0)
+                                    ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
+
+                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.getItem() == wrappedItemStack.getItem())
                                     {
-                                        lowestValue = stackValue;
+                                        if (stackValue.compareTo(lowestValue) < 0)
+                                        {
+                                            lowestValue = stackValue;
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        return lowestValue;
-                    }
-                }
-                else if (stack.getWrappedStack() instanceof OreStack)
-                {
-                    OreStack oreStack = (OreStack)stack.getWrappedStack();
-                    for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
-                    {
-                        if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
-                        {
-                            return emcRegistry.stackMappings.get(new WrappedStack(oreItemStack));
+                            return lowestValue;
                         }
+                    }
+                    else if (stack.getWrappedStack() instanceof OreStack)
+                    {
+                    	OreStack oreStack = (OreStack)stack.getWrappedStack();
+                    	for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
+                    	{
+                    		if (emcRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
+                    		{
+                    			return emcRegistry.stackMappings.get(new WrappedStack(oreItemStack));
+                    		}
+                    	}
                     }
                 }
             }
@@ -432,7 +442,6 @@ public class EmcRegistry
         return getEmcValue(object, false);
     }
 
-    @SuppressWarnings("unused")
     public List<WrappedStack> getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EmcValue(start), new EmcValue(finish));

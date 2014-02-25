@@ -19,14 +19,14 @@ public class KeyBindingHelper
     private static ArrayList<KeyBinding> keyBindingsList;
     private static ArrayList<Boolean> isRepeatingList;
 
-    public static void addKeyBinding(String name, int value)
+    public static void addKeyBinding(String name, int value, String category)
     {
         if (keyBindingsList == null)
         {
             keyBindingsList = new ArrayList<KeyBinding>();
         }
 
-        keyBindingsList.add(new KeyBinding(name, value));
+        keyBindingsList.add(new KeyBinding(name, value, category));
     }
 
     public static void addIsRepeating(boolean value)

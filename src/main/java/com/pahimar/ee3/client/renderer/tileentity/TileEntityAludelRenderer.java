@@ -14,7 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -70,7 +70,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
              */
             GL11.glPushMatrix();
 
-            TileEntity tileGlassBell = tileAludel.worldObj.getBlockTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
+            TileEntity tileGlassBell = tileAludel.getWorldObj().getTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
 
             if (tileGlassBell instanceof TileGlassBell)
             {
@@ -79,7 +79,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
                     float scaleFactor = getGhostItemScaleFactor(tileAludel.outputItemStack);
                     float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                    EntityItem ghostEntityItem = new EntityItem(tileAludel.worldObj);
+                    EntityItem ghostEntityItem = new EntityItem(tileAludel.getWorldObj());
                     ghostEntityItem.hoverStart = 0.0F;
                     ghostEntityItem.setEntityItemStack(tileAludel.outputItemStack);
 
@@ -87,7 +87,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                     GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 
-                    customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+                    customRenderItem.doRender(ghostEntityItem, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -133,7 +133,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
         {
             if (itemStack.getItem() instanceof ItemBlock)
             {
-                switch (customRenderItem.getMiniBlockCount(itemStack))
+                switch (customRenderItem.getMiniBlockCount(itemStack, (byte) 1))
                 {
                     case 1:
                         return 0.90F;
@@ -151,7 +151,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
             }
             else
             {
-                switch (customRenderItem.getMiniItemCount(itemStack))
+                switch (customRenderItem.getMiniItemCount(itemStack, (byte) 1))
                 {
                     case 1:
                         return 0.65F;

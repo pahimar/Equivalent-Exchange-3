@@ -1,13 +1,15 @@
 package com.pahimar.ee3.item;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemMultiTexture;
+
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.lib.Strings;
-import net.minecraft.item.ItemMultiTextureTile;
 
-public class ItemBlockAlchemicalFuel extends ItemMultiTextureTile
+public class ItemBlockAlchemicalFuel extends ItemMultiTexture
 {
-    public ItemBlockAlchemicalFuel(int id)
+    public ItemBlockAlchemicalFuel(Block b)
     {
-        super(id, ModBlocks.alchemicalFuel, Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES);
+        super(b, ModBlocks.alchemicalFuel, Strings.ALCHEMICAL_FUEL_SUBTYPE_NAMES);
     }
 }

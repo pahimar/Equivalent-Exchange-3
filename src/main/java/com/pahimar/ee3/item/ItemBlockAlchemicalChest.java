@@ -2,17 +2,20 @@ package com.pahimar.ee3.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
+import com.pahimar.ee3.block.ModBlocks;
+
 public class ItemBlockAlchemicalChest extends ItemBlock
 {
-    public ItemBlockAlchemicalChest(int id)
+    public ItemBlockAlchemicalChest(Block b)
     {
-        super(id);
+        super(b);
         this.setHasSubtypes(true);
     }
 
@@ -22,7 +25,8 @@ public class ItemBlockAlchemicalChest extends ItemBlock
         return meta;
     }
 
-    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean flag)
     {
         // TODO Localize and add more descriptive text

@@ -22,9 +22,9 @@ import net.minecraft.world.World;
  */
 public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound
 {
-    public ItemMiniumStone(int id)
+    public ItemMiniumStone()
     {
-        super(id);
+        super();
         this.setUnlocalizedName(Strings.MINIUM_STONE_NAME);
         this.setMaxDamage(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY - 1);
     }
@@ -37,9 +37,9 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemStack)
+    public String getItemStackDisplayName(ItemStack itemStack)
     {
-        return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
+        return EnumChatFormatting.BLUE + super.getItemStackDisplayName(itemStack);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     }
 
     @Override
-    public ItemStack getContainerItemStack(ItemStack itemStack)
+    public ItemStack getContainerItem(ItemStack itemStack)
     {
         ItemStack copiedStack = itemStack.copy();
 
@@ -106,11 +106,11 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
             {
                 if (!thePlayer.isSneaking())
                 {
-                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getNextBlock(TransmutationHelper.targetBlockStack.getItem(), TransmutationHelper.targetBlockStack.getItemDamage());
                 }
                 else
                 {
-                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.itemID, TransmutationHelper.targetBlockStack.getItemDamage());
+                    TransmutationHelper.targetBlockStack = TransmutationHelper.getPreviousBlock(TransmutationHelper.targetBlockStack.getItem(), TransmutationHelper.targetBlockStack.getItemDamage());
                 }
             }
         }

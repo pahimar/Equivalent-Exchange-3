@@ -4,7 +4,10 @@ import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.LogHelper;
+
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -54,12 +57,12 @@ public class AddonIndustrialCraft2
         /**
          * Clay
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustClay", 2), Block.blockClay);
+        AddonHandler.sendAddRecipe(new OreStack("dustClay", 2), Blocks.clay);
 
         /**
          * Coal
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustCoal"), new ItemStack(Item.coal, 1));
+        AddonHandler.sendAddRecipe(new OreStack("dustCoal"), new ItemStack(Items.coal, 1));
         AddonHandler.sendAddRecipe(new OreStack("dustHydratedCoal"), new OreStack("dustCoal"), new WrappedStack(FluidRegistry.WATER));
 
         /**
@@ -77,39 +80,39 @@ public class AddonIndustrialCraft2
         /**
          * Diamond
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustDiamond"), Item.diamond);
+        AddonHandler.sendAddRecipe(new OreStack("dustDiamond"), Items.diamond);
 
         /**
          * Gold
          */
-        AddonHandler.sendAddRecipe(new OreStack("crushedGold"), Block.oreGold);
+        AddonHandler.sendAddRecipe(new OreStack("crushedGold"), Blocks.gold_ore);
         AddonHandler.sendAddRecipe(new OreStack("crushedPurifiedGold"), new OreStack("crushedGold"));
         AddonHandler.sendAddRecipe(new OreStack("dustGold"), new OreStack("crushedPurifiedGold"));
-        AddonHandler.sendAddRecipe(new OreStack("dustTinyGold", 9), Block.oreGold);
-        AddonHandler.sendAddRecipe(new OreStack("plateGold"), Item.ingotGold);
-        AddonHandler.sendAddRecipe(new OreStack("plateDenseGold"), new ItemStack(Item.ingotGold, 9));
+        AddonHandler.sendAddRecipe(new OreStack("dustTinyGold", 9), Blocks.gold_ore);
+        AddonHandler.sendAddRecipe(new OreStack("plateGold"), Items.gold_ingot);
+        AddonHandler.sendAddRecipe(new OreStack("plateDenseGold"), new ItemStack(Items.gold_ingot, 9));
 
         /**
          * Industrial Diamond
          */
-        AddonHandler.sendAddRecipe(new OreStack("gemDiamond"), Item.diamond);
+        AddonHandler.sendAddRecipe(new OreStack("gemDiamond"), Items.diamond);
 
         /**
          * Iron
          */
-        AddonHandler.sendAddRecipe(new OreStack("crushedIron"), Block.oreIron);
+        AddonHandler.sendAddRecipe(new OreStack("crushedIron"), Blocks.iron_ore);
         AddonHandler.sendAddRecipe(new OreStack("crushedPurifiedIron"), new OreStack("crushedIron"));
         AddonHandler.sendAddRecipe(new OreStack("dustIron"), new OreStack("crushedPurifiedIron"));
-        AddonHandler.sendAddRecipe(new OreStack("dustTinyIron", 9), Block.oreIron);
-        AddonHandler.sendAddRecipe(new OreStack("ingotRefinedIron"), Item.ingotIron);
-        AddonHandler.sendAddRecipe(new OreStack("plateIron"), Item.ingotIron);
+        AddonHandler.sendAddRecipe(new OreStack("dustTinyIron", 9), Blocks.iron_ore);
+        AddonHandler.sendAddRecipe(new OreStack("ingotRefinedIron"), Items.iron_ingot);
+        AddonHandler.sendAddRecipe(new OreStack("plateIron"), Items.iron_ingot);
         AddonHandler.sendAddRecipe(new OreStack("plateRefinedIron"), new OreStack("ingotRefinedIron"));
-        AddonHandler.sendAddRecipe(new OreStack("plateDenseIron"), new ItemStack(Item.ingotIron, 9));
+        AddonHandler.sendAddRecipe(new OreStack("plateDenseIron"), new ItemStack(Items.iron_ingot, 9));
 
         /**
          * Lapis
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustLapis"), new ItemStack(Item.dyePowder, 1, 4));
+        AddonHandler.sendAddRecipe(new OreStack("dustLapis"), new ItemStack(Items.dye, 1, 4));
         AddonHandler.sendAddRecipe(new OreStack("plateLapis"), new OreStack("dustLapis"));
         AddonHandler.sendAddRecipe(new OreStack("plateDenseLapis"), new OreStack("plateLapis", 9));
 
@@ -133,7 +136,7 @@ public class AddonIndustrialCraft2
         /**
          * Obsidian
          */
-        AddonHandler.sendAddRecipe(new OreStack("dustObsidian", 4), Block.obsidian);
+        AddonHandler.sendAddRecipe(new OreStack("dustObsidian", 4), Blocks.obsidian);
         AddonHandler.sendAddRecipe(new OreStack("plateObsidian"), new OreStack("dustObsidian"));
         AddonHandler.sendAddRecipe(new OreStack("plateDenseObsidian"), new OreStack("plateObsidian", 9));
 
@@ -173,8 +176,8 @@ public class AddonIndustrialCraft2
         /**
          * Tools
          */
-        AddonHandler.sendAddRecipe(new OreStack("craftingToolForgeHammer"), new ItemStack(Item.ingotIron, 5), new OreStack("stickWood", 2));
-        AddonHandler.sendAddRecipe(new OreStack("craftingToolWireCutter"), new ItemStack(Item.ingotIron, 2), new OreStack("plateIron", 3));
+        AddonHandler.sendAddRecipe(new OreStack("craftingToolForgeHammer"), new ItemStack(Items.iron_ingot, 5), new OreStack("stickWood", 2));
+        AddonHandler.sendAddRecipe(new OreStack("craftingToolWireCutter"), new ItemStack(Items.iron_ingot, 2), new OreStack("plateIron", 3));
 
         /**
          * Items

@@ -34,9 +34,9 @@ public class GuiAludel extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        String containerName = tileAludel.isInvNameLocalized() ? tileAludel.getInvName() : StatCollector.translateToLocal(tileAludel.getInvName());
-        fontRenderer.drawString(containerName, xSize / 2 - fontRenderer.getStringWidth(containerName) / 2, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
+        String containerName = tileAludel.hasCustomInventoryName() ? tileAludel.getInventoryName() : StatCollector.translateToLocal(tileAludel.getInventoryName());
+        fontRendererObj.drawString(containerName, xSize / 2 - fontRendererObj.getStringWidth(containerName) / 2, 6, 4210752);
+        fontRendererObj.drawString(StatCollector.translateToLocal(Strings.CONTAINER_INVENTORY), 8, ySize - 93, 4210752);
     }
 
     @Override

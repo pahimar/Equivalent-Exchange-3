@@ -65,7 +65,7 @@ public class EmcHelper
                 // Check if we are dealing with a potential fluid
                 if (FluidContainerRegistry.getFluidForFilledItem(itemStack) != null)
                 {
-                    if (itemStack.getItem().getContainerItemStack(itemStack) != null)
+                    if (itemStack.getItem().getContainerItem(itemStack) != null)
                     {
                         stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
                         wrappedStackValue = EmcRegistry.getInstance().getEmcValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
@@ -76,7 +76,7 @@ public class EmcHelper
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
-                else if (itemStack.getItem() != null && itemStack.getItem().getContainerItemStack(itemStack) != null)
+                else if (itemStack.getItem() != null && itemStack.getItem().getContainerItem(itemStack) != null)
                 {
                     wrappedStackValue = new EmcValue(0);
                 }

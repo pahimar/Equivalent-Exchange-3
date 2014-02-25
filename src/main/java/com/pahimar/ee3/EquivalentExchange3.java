@@ -1,11 +1,21 @@
 package com.pahimar.ee3;
 
+import java.io.File;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
+
 import com.pahimar.ee3.addon.AddonHandler;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.handler.*;
+import com.pahimar.ee3.handler.ActionRequestHandler;
+import com.pahimar.ee3.handler.CraftingHandler;
+import com.pahimar.ee3.handler.FuelHandler;
+import com.pahimar.ee3.handler.ItemEventHandler;
+import com.pahimar.ee3.handler.WorldEventHandler;
+import com.pahimar.ee3.handler.WorldTransmutationHandler;
 import com.pahimar.ee3.helper.FluidHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
@@ -13,23 +23,20 @@ import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.PacketPipelineEE;
 import com.pahimar.ee3.proxy.IProxy;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-
-import java.io.File;
 
 /**
  * Equivalent-Exchange-3
@@ -39,7 +46,6 @@ import java.io.File;
  * @author pahimar
  */
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, dependencies = Reference.DEPENDENCIES, certificateFingerprint = Reference.FINGERPRINT)
-@NetworkMod(channels = {Reference.CHANNEL_NAME}, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class EquivalentExchange3
 {
     @Instance(Reference.MOD_ID)
@@ -49,6 +55,8 @@ public class EquivalentExchange3
     public static IProxy proxy;
 
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID());
+    
+    public static final PacketPipelineEE packetpipeline = new PacketPipelineEE();
 
     @EventHandler
     @SuppressWarnings("unused")
@@ -91,10 +99,10 @@ public class EquivalentExchange3
         VersionHelper.execute();
 
         // Initialize the Version Check Tick Handler (Client only)
-        TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
+        //TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
 
         // Initialize the InterModCommunications Tick Handler (Server only)
-        TickRegistry.registerScheduledTickHandler(new InterModCommsHandler(), Side.SERVER);
+        //TickRegistry.registerScheduledTickHandler(new InterModCommsHandler(), Side.SERVER);
 
         // Initialize the Render Tick Handler (Client only)
         proxy.registerRenderTickHandler();
@@ -113,11 +121,10 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unchecked, unused")
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
-        NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
+        //NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
 
         // Register the Item Pickup Handler
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
@@ -140,6 +147,8 @@ public class EquivalentExchange3
 
         // Initialize our Crafting Handler
         CraftingHandler.init();
+        
+        packetpipeline.initalise();
 
         // Handle fluid registration
         FluidHelper.registerFluids();
@@ -155,14 +164,12 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void postInit(FMLPostInitializationEvent event)
     {
-        // NOOP
+        packetpipeline.postInitialise();
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void handleIMCMessages(IMCEvent event)
     {
         InterModCommsHandler.processIMCMessages(event);

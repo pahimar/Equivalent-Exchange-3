@@ -76,19 +76,9 @@ public class TileAlchemySquare extends TileEE implements IInventory
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return null;
-    }
-
-    /**
-     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
-     * language. Otherwise it will be used directly.
-     */
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
     }
 
     /**
@@ -112,18 +102,6 @@ public class TileAlchemySquare extends TileEE implements IInventory
         return true;
     }
 
-    @Override
-    public void openChest()
-    {
-        // NOOP
-    }
-
-    @Override
-    public void closeChest()
-    {
-        // NOOP
-    }
-
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      *
@@ -135,4 +113,25 @@ public class TileAlchemySquare extends TileEE implements IInventory
     {
         return false;
     }
+
+	@Override
+	public boolean hasCustomInventoryName() 
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void openInventory() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,11 +1,12 @@
 package com.pahimar.ee3.command;
 
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
+import net.minecraft.util.IChatComponent;
+
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.lib.Commands;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.WrongUsageException;
-import net.minecraft.util.ChatMessageComponent;
 
 /**
  * Equivalent-Exchange-3
@@ -60,7 +61,7 @@ public class CommandOverlay
 
         ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = true;
         GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, "true");
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_TURNED_ON));
+        commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_TURNED_ON));
     }
 
     private static void processOffCommand(ICommandSender commandSender)
@@ -68,7 +69,7 @@ public class CommandOverlay
 
         ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION = false;
         GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME, "false");
-        commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_TURNED_OFF));
+        commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_TURNED_OFF));
     }
 
     private static void processScaleCommand(ICommandSender commandSender, String[] args)
@@ -88,7 +89,7 @@ public class CommandOverlay
                 {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE = scale;
                     GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME, args[1]);
-                    commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_SCALE_UPDATED));
+                    commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_SCALE_UPDATED));
                 }
             }
             catch (Exception e)
@@ -119,7 +120,7 @@ public class CommandOverlay
                 {
                     ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY = opacity;
                     GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME, args[1]);
-                    commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_OPACITY_UPDATED));
+                    commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_OPACITY_UPDATED));
                 }
             }
             catch (Exception e)
@@ -147,25 +148,25 @@ public class CommandOverlay
             {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = 0;
                 GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, "0");
-                commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_POSITION_TOP_LEFT));
+                commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_POSITION_TOP_LEFT));
             }
             else if (yPosition.equalsIgnoreCase(Commands.COMMAND_TOP) && xPosition.equalsIgnoreCase(Commands.COMMAND_RIGHT))
             {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = 1;
                 GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, "1");
-                commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_POSITION_TOP_RIGHT));
+                commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_POSITION_TOP_RIGHT));
             }
             else if (yPosition.equalsIgnoreCase(Commands.COMMAND_BOTTOM) && xPosition.equalsIgnoreCase(Commands.COMMAND_LEFT))
             {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = 2;
                 GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, "2");
-                commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_POSITION_BOTTOM_LEFT));
+                commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_POSITION_BOTTOM_LEFT));
             }
             else if (yPosition.equalsIgnoreCase(Commands.COMMAND_BOTTOM) && xPosition.equalsIgnoreCase(Commands.COMMAND_RIGHT))
             {
                 ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION = 3;
                 GeneralConfiguration.set(GeneralConfiguration.CATEGORY_GRAPHICS, ConfigurationSettings.TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME, "3");
-                commandSender.sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(Commands.COMMAND_OVERLAY_POSITION_BOTTOM_RIGHT));
+                commandSender.addChatMessage(IChatComponent.Serializer.func_150699_a(Commands.COMMAND_OVERLAY_POSITION_BOTTOM_RIGHT));
             }
             else
             {

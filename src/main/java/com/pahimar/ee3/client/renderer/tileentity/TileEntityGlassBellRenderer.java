@@ -13,7 +13,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -79,7 +79,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
                 float scaleFactor = getGhostItemScaleFactor(tileGlassBell.outputItemStack);
                 float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                EntityItem ghostEntityItem = new EntityItem(tileGlassBell.worldObj);
+                EntityItem ghostEntityItem = new EntityItem(tileGlassBell.getWorldObj());
                 ghostEntityItem.hoverStart = 0.0F;
                 ghostEntityItem.setEntityItemStack(tileGlassBell.outputItemStack);
 
@@ -87,7 +87,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
                 GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                 GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 
-                customRenderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+                customRenderItem.doRender(ghostEntityItem, 0, 0, 0, 0, 0);
             }
 
             GL11.glPopMatrix();
@@ -255,7 +255,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
         {
             if (itemStack.getItem() instanceof ItemBlock)
             {
-                switch (customRenderItem.getMiniBlockCount(itemStack))
+                switch (customRenderItem.getMiniBlockCount(itemStack, (byte) 1))
                 {
                     case 1:
                         return 0.90F;
@@ -273,7 +273,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
             }
             else
             {
-                switch (customRenderItem.getMiniItemCount(itemStack))
+                switch (customRenderItem.getMiniItemCount(itemStack, (byte) 1))
                 {
                     case 1:
                         return 0.65F;

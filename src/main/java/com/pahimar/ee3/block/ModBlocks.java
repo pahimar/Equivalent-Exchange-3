@@ -28,17 +28,17 @@ public class ModBlocks
 
     public static void init()
     {
-        alchemicalChest = new BlockAlchemicalChest(BlockIds.ALCHEMICAL_CHEST);
-        alchemicalFuel = new BlockAlchemicalFuel(BlockIds.ALCHEMICAL_FUEL);
-        alchemySquare = new BlockAlchemySquare(BlockIds.ALCHEMY_SQUARE);
-        aludelBase = new BlockAludelBase(BlockIds.ALUDEL_BASE);
-        calcinator = new BlockCalcinator(BlockIds.CALCINATOR);
-        chalk = new BlockChalk(BlockIds.CHALK);
-        glassBell = new BlockGlassBell(BlockIds.GLASS_BELL);
-        researchStation = new BlockResearchStation((BlockIds.RESEARCH_STATION));
-        infusedWood = new BlockInfusedWood(BlockIds.INFUSED_WOOD);
-        infusedCloth = new BlockInfusedCloth(BlockIds.INFUSED_CLOTH);
-        infusedPlanks = new BlockInfusedPlanks(BlockIds.INFUSED_PLANKS);
+        alchemicalChest = new BlockAlchemicalChest();
+        alchemicalFuel = new BlockAlchemicalFuel();
+        alchemySquare = new BlockAlchemySquare();
+        aludelBase = new BlockAludelBase();
+        calcinator = new BlockCalcinator();
+        chalk = new BlockChalk();
+        glassBell = new BlockGlassBell();
+        researchStation = new BlockResearchStation();
+        infusedWood = new BlockInfusedWood();
+        infusedCloth = new BlockInfusedCloth();
+        infusedPlanks = new BlockInfusedPlanks();
 
         GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, "block." + Strings.ALCHEMICAL_CHEST_NAME);
         GameRegistry.registerBlock(alchemicalFuel, ItemBlockAlchemicalFuel.class, "block." + Strings.ALCHEMICAL_FUEL_NAME);
