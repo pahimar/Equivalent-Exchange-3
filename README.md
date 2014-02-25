@@ -40,7 +40,7 @@ The Java JDK is used to compile EE3.
     * Click on `Environment Variables`.
     * Under `System Variables`, click `New`.
     * For `Variable Name`, input `JAVA_HOME`.
-    * For `Variable Value`, input something similar to `C:\Program Files\Java\jdk1.7.0_45` exactly as shown (or wherever your Java JDK installation is), and click `Ok`.
+    * For `Variable Value`, input something similar to `C:\Program Files\Java\jdk1.7.0_51` exactly as shown (or wherever your Java JDK installation is), and click `Ok`.
     * Scroll down to a variable named `Path`, and double-click on it.
     * Append `;%JAVA_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Make sure the location is correct; double-check just to make sure.
 3. Open up your command line and run `javac`.  If it spews out a bunch of possible options and the usage, then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions).
@@ -59,7 +59,7 @@ Gradle is used to execute the various build tasks when compiling EE3.
 2. Windows: Set environment variables for Gradle.
 	* Go back to `Environment Variables` and then create a new system variable.
 	* For `Variable Name`, input `GRADLE_HOME`.
-	* For `Variable Value`, input something similar to `C:\Gradle-1.10` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
+	* For `Variable Value`, input something similar to `C:\Gradle-1.11` exactly as shown (or wherever your Gradle installation is), and click `Ok`.
 	* Scroll down to `Path` again, and append `;%GRADLE_HOME%\bin` EXACTLY AS SHOWN and click `Ok`.  Once again, double-check the location.
 3. Open up your command line and run `gradle`.  If it says "Welcome to Gradle [version].", then you're good to go.  If not, either try the steps again or check the [FAQ](https://github.com/pahimar/Equivalent-Exchange-3/wiki/Frequently-Asked-Questions).
 
@@ -88,8 +88,9 @@ This section assumes that you're using the command-line version of Git.
 	* You will generally only have to do this once until the Forge version in `build.properties` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
-3. Go to `mcdev\Equivalent-Exchange-3\build\libs`.
-    *  You should see a `.jar` file named `EquivalentExchange3-0.0.#.jar`, where # is the `build_number` value in `build.properties`.
+3. Navigate to `mcdev\Equivalent-Exchange-3\build\libs`.
+    *  You should see a `.jar` file named `EquivalentExchange3-1.6.4-0.1.#.jar`, where # is the `build_number` value in `build.properties`.
+		* NOTE: `null` means that you are missing a `build_number` value in `build.properties` or that your CI environment is set up incorrectly.
 4. Copy the jar into your Minecraft mods folder, and you are done!
 
 ####Updating Your Repository
@@ -109,7 +110,7 @@ So you found a bug in pahimar's code?  Think you can make it more efficient?  Wa
 1. If you haven't already, create a Github account.
 2. Click the `Fork` icon located at the top-right of this page (below your username).
 3. Make the changes that you want to and commit them.
-	* If you're making changes locally, you'll have to do `git commit -a` and `git push` in your command line.
+	* If you're making changes locally, you'll have to execute `git commit -a` and `git push` in your command line.
 4. Click `Pull Request` at the right-hand side of the gray bar directly below your fork's name.
 5. Click `Click to create a pull request for this comparison`, enter your PR's title, and create a detailed description telling pahimar what you changed.
 6. Click `Send pull request`, and wait for feedback!
@@ -118,12 +119,13 @@ So you found a bug in pahimar's code?  Think you can make it more efficient?  Wa
 EE3 crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 
 1. Make sure your issue hasn't already been answered or fixed.  Also think about whether your issue is a valid one before submitting it.
+	* Please do not open an issue to ask a question-that is for [pahimar's Twitter](https://twitter.com/pahimar/) or the [forums](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3).
 2. Go to [the issues page](http://github.com/pahimar/Equivalent-Exchange-3/issues).
 3. Click `New Issue` right below `Star` and `Fork`.
 4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey pahimar, could you add/change xxx?" or "Hey, found an exploit:  stuff").
 	* If you are reporting a bug report from an unofficial version, make sure you include the following:
 		* Commit SHA (usually located in a changelog or the jar name itself)
 		* ForgeModLoader log
-		* Server log (if applicable)
-		* Detailed description of the bug
+		* Server log if applicable
+		* Detailed description of the bug and pictures if applicable
 5. Click `Submit new issue`, and wait for feedback!
