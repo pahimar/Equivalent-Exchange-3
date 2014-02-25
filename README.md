@@ -67,7 +67,7 @@ Gradle is used to execute the various build tasks when compiling EE3.
 Git is used to clone EE3 and update your local copy.
 
 1. Download and install Git [here](http://git-scm.com/download/).
-2. *Optional*: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
+	* *Optional*: Download and install a Git GUI client, such as Github for Windows/Mac, SmartGitHg, TortoiseGit, etc.  A nice list is available [here](http://git-scm.com/downloads/guis).
 
 ####Setup EE3
 This section assumes that you're using the command-line version of Git.
