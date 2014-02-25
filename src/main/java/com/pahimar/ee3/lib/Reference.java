@@ -39,7 +39,7 @@ public class Reference
     public static final String MOD_NAME = "Equivalent Exchange 3";
     public static final String VERSION_NUMBER;
     public static final String CHANNEL_NAME = MOD_ID;
-    public static final String DEPENDENCIES = "required-after:Forge@[9.10.1.849,)";
+    public static final String DEPENDENCIES = "required-after:Forge@[10.12.0.1024,)";
     public static final String FINGERPRINT = "@FINGERPRINT@";
     public static final int ONE_SECOND_IN_TICKS = 20;
     public static final String SERVER_PROXY_CLASS = "com.pahimar.ee3.proxy.ServerProxy";

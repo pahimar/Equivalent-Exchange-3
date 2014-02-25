@@ -24,7 +24,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class VersionCheckTickHandler
 {
 
-    private static boolean initialized = true;
+    private static boolean initialized = false;
 
     @SubscribeEvent
     public void tickEnd(TickEvent.ClientTickEvent event)
