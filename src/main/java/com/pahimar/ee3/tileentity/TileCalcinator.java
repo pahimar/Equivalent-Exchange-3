@@ -351,7 +351,12 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     @SideOnly(Side.CLIENT)
     public int getBurnTimeRemainingScaled(int scale)
     {
-        return this.deviceCookTime * scale / this.fuelBurnTime;
+        if (this.fuelBurnTime > 0)
+        {
+            return this.deviceCookTime * scale / this.fuelBurnTime;
+        }
+
+        return 0;
     }
 
     /**
