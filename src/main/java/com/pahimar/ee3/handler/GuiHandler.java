@@ -32,7 +32,7 @@ public class GuiHandler implements IGuiHandler
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         {
-            return new ContainerAlchemicalBag(player.inventory, player.getHeldItem());
+//            return new ContainerAlchemicalBag(player.inventory, player.getHeldItem());
         }
         else if (ID == GuiIds.ALUDEL)
         {
@@ -67,7 +67,7 @@ public class GuiHandler implements IGuiHandler
         }
         else if (ID == GuiIds.ALCHEMICAL_BAG)
         {
-            return new GuiAlchemicalBag(player.inventory, player.getHeldItem());
+//            return new GuiAlchemicalBag(player.inventory, player.getHeldItem());
         }
         else if (ID == GuiIds.ALUDEL)
         {
