@@ -65,6 +65,15 @@ public class RecipesAludel
         aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 1), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
         aludelRegistry.addRecipe(new ItemStack(ModBlocks.infusedPlanks.blockID, 1, 2), new OreStack("plankWood"), new ItemStack(ModItems.alchemicalDust.itemID, 1, 3));
 
+        // Alchemical Chest
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 0), new ItemStack(Block.chest.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 8, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 0), new ItemStack(Block.chestTrapped.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 8, 1));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 1), new ItemStack(Block.chest.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 8, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 1), new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 8, 2));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(Block.chest.blockID, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
+        aludelRegistry.addRecipe(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 1), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
+
         // Minium Stone
         aludelRegistry.addRecipe(new ItemStack(ModItems.miniumStone), new ItemStack(ModItems.inertStone), new ItemStack(ModItems.alchemicalDust.itemID, 8, 3));
     }
