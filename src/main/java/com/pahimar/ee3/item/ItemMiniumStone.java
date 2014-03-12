@@ -1,7 +1,9 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.api.ICustomEmcValueProvider;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
+import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.lib.GuiIds;
@@ -20,7 +22,7 @@ import net.minecraft.world.World;
  *
  * @author pahimar
  */
-public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound
+public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKeyBound, ICustomEmcValueProvider
 {
     public ItemMiniumStone(int id)
     {
@@ -114,5 +116,12 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
                 }
             }
         }
+    }
+
+    @Override
+    public EmcValue getEmcValue(ItemStack itemStack)
+    {
+        // TODO Finish me
+        return null;
     }
 }
