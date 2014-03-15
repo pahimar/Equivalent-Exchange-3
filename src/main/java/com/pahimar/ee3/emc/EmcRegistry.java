@@ -301,14 +301,20 @@ public class EmcRegistry
                         {
                             for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet())
                             {
-
                                 if (valuedStack.getWrappedStack() instanceof ItemStack)
                                 {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
 
-                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID)
+                                    if (valuedItemStack.itemID == wrappedItemStack.itemID)
                                     {
-                                        return true;
+                                        if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+                                        {
+                                            return true;
+                                        }
+                                        else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
+                                        {
+                                            return true;
+                                        }
                                     }
                                 }
                             }
@@ -393,18 +399,29 @@ public class EmcRegistry
                         {
                             for (WrappedStack valuedStack : emcRegistry.stackMappings.keySet())
                             {
-
                                 if (valuedStack.getWrappedStack() instanceof ItemStack)
                                 {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
 
-                                    if ((valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) && valuedItemStack.itemID == wrappedItemStack.itemID)
+                                    if (valuedItemStack.itemID == wrappedItemStack.itemID)
                                     {
-                                        EmcValue stackValue = emcRegistry.stackMappings.get(valuedStack);
-
-                                        if (stackValue.compareTo(lowestValue) < 0)
+                                        if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                                         {
-                                            lowestValue = stackValue;
+                                            EmcValue stackValue = emcRegistry.stackMappings.get(valuedStack);
+
+                                            if (stackValue.compareTo(lowestValue) < 0)
+                                            {
+                                                lowestValue = stackValue;
+                                            }
+                                        }
+                                        else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
+                                        {
+                                            EmcValue stackValue = new EmcValue(emcRegistry.stackMappings.get(valuedStack).getValue() * (1 - (wrappedItemStack.getItemDamage() * 1.0F / wrappedItemStack.getMaxDamage())));
+
+                                            if (stackValue.compareTo(lowestValue) < 0)
+                                            {
+                                                lowestValue = stackValue;
+                                            }
                                         }
                                     }
                                 }
