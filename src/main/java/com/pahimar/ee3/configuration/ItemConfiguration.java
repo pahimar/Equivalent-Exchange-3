@@ -35,6 +35,7 @@ public class ItemConfiguration
             ItemIds.CHALK = itemConfiguration.getItem(Strings.CHALK_NAME, ItemIds.CHALK_DEFAULT).getInt(ItemIds.CHALK_DEFAULT);
             ItemIds.DIVINING_ROD = itemConfiguration.getItem(Strings.DIVINING_ROD_NAME, ItemIds.DIVINING_ROD_DEFAULT).getInt(ItemIds.DIVINING_ROD_DEFAULT);
             ItemIds.ALCHEMICAL_FUEL = itemConfiguration.getItem(Strings.ALCHEMICAL_FUEL_NAME, ItemIds.ALCHEMICAL_FUEL_DEFAULT).getInt(ItemIds.ALCHEMICAL_FUEL_DEFAULT);
+            ItemIds.ALCHEMICAL_UPGRADE = itemConfiguration.getItem(Strings.ALCHEMICAL_UPGRADE_NAME, ItemIds.ALCHEMICAL_UPGRADE_DEFAULT).getInt(ItemIds.ALCHEMICAL_UPGRADE_DEFAULT);
 
             /* Item durability configs */
             ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY = itemConfiguration.get(CATEGORY_DURABILITY, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_CONFIGNAME, ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT).getInt(ConfigurationSettings.MINIUM_STONE_MAX_DURABILITY_DEFAULT);

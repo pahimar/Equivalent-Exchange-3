@@ -53,5 +53,9 @@ public class RecipesVanilla
         GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 2), new Object[]{"ccc", "cdc", "ccc", 'c', new ItemStack(ModBlocks.infusedCloth, 1, 2), 'd', new ItemStack(ModItems.alchemicalDust, 1, 3)});
 
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), new Object[]{" s ", " s ", "s s", 's', "stickWood"});
+
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalUpgrade.itemID, 1, 0), new Object[]{"ppp", "pdp", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 0), 'd', new ItemStack(ModItems.alchemicalDust, 1, 0)});
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalUpgrade.itemID, 1, 1), new Object[]{"ppp", "pdp", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 1), 'd', new ItemStack(ModItems.alchemicalDust, 1, 1)});
+        GameRegistry.addRecipe(new ItemStack(ModItems.alchemicalUpgrade.itemID, 1, 2), new Object[]{"ppp", "pdp", "ppp", 'p', new ItemStack(ModBlocks.infusedPlanks, 1, 2), 'd', new ItemStack(ModItems.alchemicalDust, 1, 2)});
     }
 }
