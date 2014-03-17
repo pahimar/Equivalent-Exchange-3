@@ -1,5 +1,6 @@
 package com.pahimar.ee3.emc;
 
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.api.WrappedStack;
 
 import java.util.Map;

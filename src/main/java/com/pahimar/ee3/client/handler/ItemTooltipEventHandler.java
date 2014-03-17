@@ -1,8 +1,8 @@
 package com.pahimar.ee3.client.handler;
 
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.emc.EmcValue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.event.EventPriority;

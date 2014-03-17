@@ -1,8 +1,8 @@
 package com.pahimar.ee3.addon;
 
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.api.RecipeMapping;
 import com.pahimar.ee3.api.StackValueMapping;
-import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.imc.InterModCommsOperations;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.event.FMLInterModComms;

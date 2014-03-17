@@ -1,6 +1,8 @@
-package com.pahimar.ee3.emc;
+package com.pahimar.ee3.api;
 
 import com.google.gson.*;
+import com.pahimar.ee3.emc.EmcComponent;
+import com.pahimar.ee3.emc.EmcType;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Compare;
 

@@ -1,7 +1,7 @@
 package com.pahimar.ee3.recipe;
 
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.emc.EmcRegistry;
-import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.ModItems;
