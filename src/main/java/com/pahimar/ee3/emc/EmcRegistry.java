@@ -3,6 +3,7 @@ package com.pahimar.ee3.emc;
 import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
+import com.pahimar.ee3.handler.ValueFilesHandler;
 import com.pahimar.ee3.helper.EmcHelper;
 import com.pahimar.ee3.lib.Compare;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -85,6 +86,40 @@ public class EmcRegistry
                 if (preAssignedValuesMap.get(keyStack) != null && Float.compare(preAssignedValuesMap.get(keyStack).getValue(), 0f) > Compare.EQUALS)
                 {
                     factoredEmcValue = EmcHelper.factorEmcValue(preAssignedValuesMap.get(keyStack), keyStack.getStackSize());
+                    factoredKeyStack = new WrappedStack(keyStack, 1);
+                }
+            }
+
+            if (factoredEmcValue != null)
+            {
+                if (stackValueMap.containsKey(factoredKeyStack))
+                {
+                    if (factoredEmcValue.compareTo(stackValueMap.get(factoredKeyStack)) == Compare.LESSER_THAN)
+                    {
+                        stackValueMap.put(factoredKeyStack, factoredEmcValue);
+                    }
+                }
+                else
+                {
+                    stackValueMap.put(factoredKeyStack, factoredEmcValue);
+                }
+            }
+        }
+
+        /*
+         *  File values
+         */
+        Map<WrappedStack, EmcValue> fileValuesMap = ValueFilesHandler.getFileValues();
+        for (WrappedStack keyStack : fileValuesMap.keySet())
+        {
+            EmcValue factoredEmcValue = null;
+            WrappedStack factoredKeyStack = null;
+
+            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
+            {
+                if (fileValuesMap.get(keyStack) != null && Float.compare(fileValuesMap.get(keyStack).getValue(), 0f) > Compare.EQUALS)
+                {
+                    factoredEmcValue = EmcHelper.factorEmcValue(fileValuesMap.get(keyStack), keyStack.getStackSize());
                     factoredKeyStack = new WrappedStack(keyStack, 1);
                 }
             }

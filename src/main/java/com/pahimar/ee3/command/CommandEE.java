@@ -41,7 +41,7 @@ public class CommandEE extends CommandBase
         {
             case 1:
             {
-                return getListOfStringsMatchingLastWord(args, Commands.COMMAND_OVERLAY, Commands.COMMAND_PARTICLES, Commands.COMMAND_SOUNDS, Commands.COMMAND_VERSION);
+                return getListOfStringsMatchingLastWord(args, Commands.COMMAND_OVERLAY, Commands.COMMAND_PARTICLES, Commands.COMMAND_SOUNDS, Commands.COMMAND_VERSION, Commands.COMMAND_EMC);
             }
             case 2:
             {
@@ -116,6 +116,10 @@ public class CommandEE extends CommandBase
             else if (commandName.equalsIgnoreCase(Commands.COMMAND_VERSION))
             {
                 CommandVersion.processCommand(commandSender, args);
+            }
+            else if (commandName.equalsIgnoreCase(Commands.COMMAND_EMC))
+            {
+                CommandEmcAssignment.processCommand(commandSender, args);
             }
             else
             {

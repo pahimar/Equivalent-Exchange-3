@@ -24,7 +24,8 @@ public enum PacketTypeHandler
     SOUND_EVENT(PacketSoundEvent.class),
     ITEM_UPDATE(PacketItemUpdate.class),
     TILE_WITH_ITEM(PacketTileWithItemUpdate.class),
-    TILE_CALCINATOR(PacketTileCalcinator.class);
+    TILE_CALCINATOR(PacketTileCalcinator.class),
+    OPEN_GUI_SCREEN(PacketOpenGuiScreen.class);
 
     private Class<? extends PacketEE> clazz;
 
