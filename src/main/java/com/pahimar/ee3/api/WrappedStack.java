@@ -22,7 +22,6 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 {
     private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
 
-    @SuppressWarnings("unused")
     private final String className;
 
     private int stackSize;

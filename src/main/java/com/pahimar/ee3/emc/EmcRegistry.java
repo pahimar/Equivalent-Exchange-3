@@ -1,6 +1,7 @@
 package com.pahimar.ee3.emc;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.helper.EmcHelper;

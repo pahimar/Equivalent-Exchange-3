@@ -1,7 +1,6 @@
 package com.pahimar.ee3.api;
 
 import com.google.gson.*;
-import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.LogHelper;
 
 import java.lang.reflect.Type;

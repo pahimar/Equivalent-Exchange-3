@@ -1,8 +1,8 @@
 package com.pahimar.ee3.addon;
 
+import com.pahimar.ee3.api.EmcValue;
 import com.pahimar.ee3.api.OreStack;
 import com.pahimar.ee3.api.WrappedStack;
-import com.pahimar.ee3.emc.EmcValue;
 import com.pahimar.ee3.helper.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
