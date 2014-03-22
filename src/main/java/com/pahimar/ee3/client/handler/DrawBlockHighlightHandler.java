@@ -1,16 +1,11 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.configuration.ConfigurationSettings;
-import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.IChargeable;
-import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Textures;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
@@ -28,34 +23,36 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class DrawBlockHighlightHandler
 {
-
     private static int pulse = 0;
     private static boolean doInc = true;
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event)
     {
+        /**
+         *  Disabling this until transmutation is done, since it's useless at the moment
 
-        Minecraft minecraft = FMLClientHandler.instance().getClient();
+         Minecraft minecraft = FMLClientHandler.instance().getClient();
 
-        if (event.currentItem != null)
-        {
-            if (event.currentItem.getItem() instanceof ITransmutationStone)
-            {
-                if (event.target.typeOfHit == EnumMovingObjectType.TILE)
-                {
-                    TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
+         if (event.currentItem != null)
+         {
+         if (event.currentItem.getItem() instanceof ITransmutationStone)
+         {
+         if (event.target.typeOfHit == EnumMovingObjectType.TILE)
+         {
+         TransmutationHelper.updateTargetBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ);
 
-                    if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
-                    {
-                        if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
-                        {
-                            drawInWorldTransmutationOverlay(event);
-                        }
-                    }
-                }
-            }
-        }
+         if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
+         {
+         if (ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
+         {
+         drawInWorldTransmutationOverlay(event);
+         }
+         }
+         }
+         }
+         }
+         */
     }
 
     public void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event)
