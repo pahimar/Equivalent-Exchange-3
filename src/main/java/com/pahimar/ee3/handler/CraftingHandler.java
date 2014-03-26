@@ -15,8 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
-import java.util.UUID;
-
 /**
  * Equivalent-Exchange-3
  * <p/>
@@ -53,9 +51,7 @@ public class CraftingHandler implements ICraftingHandler
             // Set the UUID on an Alchemical Bag when picked up from crafting
             if (itemStack.getItem() instanceof ItemAlchemicalBag)
             {
-                UUID itemUUID = UUID.randomUUID();
-                ItemStackNBTHelper.setLong(itemStack, Strings.NBT_ITEM_UUID_MOST_SIG, itemUUID.getMostSignificantBits());
-                ItemStackNBTHelper.setLong(itemStack, Strings.NBT_ITEM_UUID_LEAST_SIG, itemUUID.getLeastSignificantBits());
+                ItemStackNBTHelper.setUUID(itemStack);
             }
         }
     }

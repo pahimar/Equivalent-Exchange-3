@@ -1,7 +1,10 @@
 package com.pahimar.ee3.helper;
 
+import com.pahimar.ee3.lib.Strings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.UUID;
 
 /**
  * Equivalent-Exchange-3
@@ -21,7 +24,6 @@ public class ItemStackNBTHelper
      */
     private static void initNBTTagCompound(ItemStack itemStack)
     {
-
         if (itemStack.stackTagCompound == null)
         {
             itemStack.setTagCompound(new NBTTagCompound());
@@ -35,17 +37,33 @@ public class ItemStackNBTHelper
 
     public static void removeTag(ItemStack itemStack, String keyName)
     {
-
         if (itemStack.stackTagCompound != null)
         {
             itemStack.stackTagCompound.removeTag(keyName);
         }
     }
 
+    public static boolean hasUUID(ItemStack itemStack)
+    {
+        return hasTag(itemStack, Strings.NBT_ITEM_UUID_MOST_SIG) && hasTag(itemStack, Strings.NBT_ITEM_UUID_LEAST_SIG);
+    }
+
+    public static void setUUID(ItemStack itemStack)
+    {
+        initNBTTagCompound(itemStack);
+
+        // Set a UUID on the Alchemical Bag, if one doesn't exist already
+        if (!hasTag(itemStack, Strings.NBT_ITEM_UUID_MOST_SIG) && !hasTag(itemStack, Strings.NBT_ITEM_UUID_LEAST_SIG))
+        {
+            UUID itemUUID = UUID.randomUUID();
+            setLong(itemStack, Strings.NBT_ITEM_UUID_MOST_SIG, itemUUID.getMostSignificantBits());
+            setLong(itemStack, Strings.NBT_ITEM_UUID_LEAST_SIG, itemUUID.getLeastSignificantBits());
+        }
+    }
+
     // String
     public static String getString(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -58,7 +76,6 @@ public class ItemStackNBTHelper
 
     public static void setString(ItemStack itemStack, String keyName, String keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setString(keyName, keyValue);
@@ -67,7 +84,6 @@ public class ItemStackNBTHelper
     // boolean
     public static boolean getBoolean(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -80,7 +96,6 @@ public class ItemStackNBTHelper
 
     public static void setBoolean(ItemStack itemStack, String keyName, boolean keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setBoolean(keyName, keyValue);
@@ -89,7 +104,6 @@ public class ItemStackNBTHelper
     // byte
     public static byte getByte(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -102,7 +116,6 @@ public class ItemStackNBTHelper
 
     public static void setByte(ItemStack itemStack, String keyName, byte keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setByte(keyName, keyValue);
@@ -111,7 +124,6 @@ public class ItemStackNBTHelper
     // short
     public static short getShort(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -124,7 +136,6 @@ public class ItemStackNBTHelper
 
     public static void setShort(ItemStack itemStack, String keyName, short keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setShort(keyName, keyValue);
@@ -133,7 +144,6 @@ public class ItemStackNBTHelper
     // int
     public static int getInt(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -146,7 +156,6 @@ public class ItemStackNBTHelper
 
     public static void setInteger(ItemStack itemStack, String keyName, int keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setInteger(keyName, keyValue);
@@ -187,7 +196,6 @@ public class ItemStackNBTHelper
 
     public static void setFloat(ItemStack itemStack, String keyName, float keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setFloat(keyName, keyValue);
@@ -196,7 +204,6 @@ public class ItemStackNBTHelper
     // double
     public static double getDouble(ItemStack itemStack, String keyName)
     {
-
         initNBTTagCompound(itemStack);
 
         if (!itemStack.stackTagCompound.hasKey(keyName))
@@ -209,7 +216,6 @@ public class ItemStackNBTHelper
 
     public static void setDouble(ItemStack itemStack, String keyName, double keyValue)
     {
-
         initNBTTagCompound(itemStack);
 
         itemStack.stackTagCompound.setDouble(keyName, keyValue);

@@ -1,11 +1,14 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.helper.ItemStackNBTHelper;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.UUID;
 
 public class InventoryAlchemicalBag implements IInventory, INBTTaggable
 {
@@ -21,13 +24,56 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
         readFromNBT(itemStack.getTagCompound());
     }
 
+    public void onGuiSaved(EntityPlayer entityPlayer)
+    {
+        parentItemStack = findParentItemStack(entityPlayer);
+
+        if (parentItemStack != null)
+        {
+            save();
+        }
+    }
+
+    public ItemStack findParentItemStack(EntityPlayer entityPlayer)
+    {
+        if (ItemStackNBTHelper.hasUUID(parentItemStack))
+        {
+            UUID parentItemStackUUID = new UUID(parentItemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_MOST_SIG), parentItemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_LEAST_SIG));
+            for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++)
+            {
+                ItemStack itemStack = entityPlayer.inventory.getStackInSlot(i);
+
+                if (ItemStackNBTHelper.hasUUID(itemStack))
+                {
+                    if (itemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_MOST_SIG) == parentItemStackUUID.getMostSignificantBits() && itemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_LEAST_SIG) == parentItemStackUUID.getLeastSignificantBits())
+                    {
+                        return itemStack;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public boolean matchesUUID(UUID uuid)
+    {
+        return ItemStackNBTHelper.hasUUID(parentItemStack) && parentItemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_LEAST_SIG) == uuid.getLeastSignificantBits() && parentItemStack.getTagCompound().getLong(Strings.NBT_ITEM_UUID_MOST_SIG) == uuid.getMostSignificantBits();
+    }
+
     public void save()
     {
         NBTTagCompound nbtTagCompound = parentItemStack.getTagCompound();
+
         if (nbtTagCompound == null)
         {
             nbtTagCompound = new NBTTagCompound();
+
+            UUID uuid = UUID.randomUUID();
+            nbtTagCompound.setLong(Strings.NBT_ITEM_UUID_MOST_SIG, uuid.getMostSignificantBits());
+            nbtTagCompound.setLong(Strings.NBT_ITEM_UUID_LEAST_SIG, uuid.getLeastSignificantBits());
         }
+
         writeToNBT(nbtTagCompound);
         parentItemStack.setTagCompound(nbtTagCompound);
     }
@@ -193,7 +239,6 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
 
     public String getCustomName()
     {
-
         return customName;
     }
 }

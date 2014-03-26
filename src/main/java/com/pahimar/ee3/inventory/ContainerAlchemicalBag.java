@@ -16,6 +16,9 @@ import net.minecraft.item.ItemStack;
  */
 public class ContainerAlchemicalBag extends Container
 {
+    private final EntityPlayer entityPlayer;
+    private final InventoryAlchemicalBag inventoryAlchemicalBag;
+
     private int bagInventoryRows;
     private int bagInventoryColumns;
 
@@ -35,8 +38,11 @@ public class ContainerAlchemicalBag extends Container
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
 
-    public ContainerAlchemicalBag(InventoryPlayer inventoryPlayer, InventoryAlchemicalBag inventoryAlchemicalBag)
+    public ContainerAlchemicalBag(EntityPlayer entityPlayer, InventoryAlchemicalBag inventoryAlchemicalBag)
     {
+        this.entityPlayer = entityPlayer;
+        this.inventoryAlchemicalBag = inventoryAlchemicalBag;
+
 //        if (alchemicalBag.getItemDamage() == 0)
 //        {
 //            bagInventoryRows = SMALL_BAG_INVENTORY_ROWS;
@@ -118,13 +124,14 @@ public class ContainerAlchemicalBag extends Container
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer player)
+    public void onContainerClosed(EntityPlayer entityPlayer)
     {
-        super.onContainerClosed(player);
+        super.onContainerClosed(entityPlayer);
 
-        if (!player.worldObj.isRemote)
+        if (!entityPlayer.worldObj.isRemote)
         {
-            InventoryPlayer invPlayer = player.inventory;
+            // We can probably do this better now considering the InventoryAlchemicalBag has a findParent method
+            InventoryPlayer invPlayer = entityPlayer.inventory;
             for (ItemStack itemStack : invPlayer.mainInventory)
             {
                 if (itemStack != null)
@@ -135,6 +142,8 @@ public class ContainerAlchemicalBag extends Container
                     }
                 }
             }
+
+            saveInventory(entityPlayer);
         }
     }
 
@@ -143,5 +152,10 @@ public class ContainerAlchemicalBag extends Container
     {
         // TODO
         return null;
+    }
+
+    public void saveInventory(EntityPlayer entityPlayer)
+    {
+        inventoryAlchemicalBag.onGuiSaved(entityPlayer);
     }
 }

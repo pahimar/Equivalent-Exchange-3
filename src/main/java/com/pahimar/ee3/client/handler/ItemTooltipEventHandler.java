@@ -3,6 +3,7 @@ package com.pahimar.ee3.client.handler;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.event.EventPriority;
@@ -49,6 +50,11 @@ public class ItemTooltipEventHandler
             {
                 event.toolTip.add("No EMC value");
             }
+        }
+
+        if (event.itemStack.getItem() instanceof ItemAlchemicalBag && event.itemStack.getTagCompound() != null)
+        {
+            event.toolTip.add("NBT: " + event.itemStack.getTagCompound().toString());
         }
     }
 }

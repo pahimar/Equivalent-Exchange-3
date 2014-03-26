@@ -7,7 +7,7 @@ import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
@@ -22,9 +22,9 @@ import org.lwjgl.opengl.GL11;
 public class GuiAlchemicalBag extends GuiContainer
 {
 
-    public GuiAlchemicalBag(InventoryPlayer inventoryPlayer, InventoryAlchemicalBag inventoryAlchemicalBag)
+    public GuiAlchemicalBag(EntityPlayer entityPlayer, InventoryAlchemicalBag inventoryAlchemicalBag)
     {
-        super(new ContainerAlchemicalBag(inventoryPlayer, inventoryAlchemicalBag));
+        super(new ContainerAlchemicalBag(entityPlayer, inventoryAlchemicalBag));
     }
 
     @Override

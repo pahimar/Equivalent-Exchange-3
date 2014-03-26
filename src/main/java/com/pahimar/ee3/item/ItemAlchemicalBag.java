@@ -65,11 +65,13 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-//        if (!world.isRemote)
-//        {
+        if (!world.isRemote)
+        {
+            // Set a UUID on the Alchemical Bag, if one doesn't exist already
+            ItemStackNBTHelper.setUUID(itemStack);
 //            ItemStackNBTHelper.setBoolean(itemStack, Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN, true);
 //            entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
-//        }
+        }
 
         if (world.isRemote)
         {
