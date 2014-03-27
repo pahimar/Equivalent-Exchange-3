@@ -66,7 +66,6 @@ public class TileAlchemicalChest extends TileEE implements IInventory
     @Override
     public int getSizeInventory()
     {
-
         return inventory.length;
     }
 

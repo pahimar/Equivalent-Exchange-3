@@ -1,7 +1,8 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.lib.*;
+import com.pahimar.ee3.lib.Colours;
+import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,7 +25,7 @@ public class ItemAlchemicalUpgrade extends ItemEE
         super(id);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(Strings.ALCHEMICAL_UPGRADE_NAME);
-        this.setMaxStackSize(1);
+        this.setMaxStackSize(64);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class ItemAlchemicalUpgrade extends ItemEE
         {
             if (tile instanceof TileEntityChest)
             {
-                TileEntityChest chest = (TileEntityChest)tile;
+                TileEntityChest chest = (TileEntityChest) tile;
 
                 //If players are using this chest, don't upgrade
                 if (chest.numUsingPlayers > 0)
@@ -122,7 +123,7 @@ public class ItemAlchemicalUpgrade extends ItemEE
             }
             else if (tile instanceof TileAlchemicalChest)
             {
-                TileAlchemicalChest chest = (TileAlchemicalChest)tile;
+                TileAlchemicalChest chest = (TileAlchemicalChest) tile;
 
                 //If players are using this chest, don't upgrade
                 if (chest.numUsingPlayers > 0)
