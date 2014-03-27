@@ -1,5 +1,6 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -22,5 +23,14 @@ public class SlotAlchemicalBag extends Slot
     {
         super.onSlotChange(itemStack1, itemStack2);
         containerAlchemicalBag.saveInventory(entityPlayer);
+    }
+
+    /**
+     * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
+     */
+    @Override
+    public boolean isItemValid(ItemStack itemStack)
+    {
+        return itemStack.getItem() instanceof ItemAlchemicalBag ? false : true;
     }
 }
