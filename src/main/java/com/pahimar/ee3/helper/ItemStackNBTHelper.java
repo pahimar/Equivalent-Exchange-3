@@ -32,7 +32,7 @@ public class ItemStackNBTHelper
 
     public static boolean hasTag(ItemStack itemStack, String keyName)
     {
-        return itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
+        return itemStack != null && itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
     }
 
     public static void removeTag(ItemStack itemStack, String keyName)
