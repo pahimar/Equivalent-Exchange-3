@@ -60,25 +60,25 @@ public class ContainerAlchemicalBag extends Container
             bagInventoryColumns = LARGE_BAG_INVENTORY_COLUMNS;
         }
 
-//        // Add the Alchemical Chest slots to the container
-//        for (int bagRowIndex = 0; bagRowIndex < bagInventoryRows; ++bagRowIndex)
-//        {
-//            for (int bagColumnIndex = 0; bagColumnIndex < bagInventoryColumns; ++bagColumnIndex)
-//            {
-//                if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 0)
-//                {
-//                    this.addSlotToContainer(new SlotAlchemicalBag(this, entityPlayer.inventory, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
-//                }
-//                else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 1)
-//                {
-//                    this.addSlotToContainer(new SlotAlchemicalBag(this, entityPlayer.inventory, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
-//                }
-//                else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 2)
-//                {
-//                    this.addSlotToContainer(new SlotAlchemicalBag(this, entityPlayer.inventory, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 8 + bagRowIndex * 18));
-//                }
-//            }
-//        }
+        // Add the Alchemical Chest slots to the container
+        for (int bagRowIndex = 0; bagRowIndex < bagInventoryRows; ++bagRowIndex)
+        {
+            for (int bagColumnIndex = 0; bagColumnIndex < bagInventoryColumns; ++bagColumnIndex)
+            {
+                if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 0)
+                {
+                    this.addSlotToContainer(new SlotAlchemicalBag(this, inventoryAlchemicalBag, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
+                }
+                else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 1)
+                {
+                    this.addSlotToContainer(new SlotAlchemicalBag(this, inventoryAlchemicalBag, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 18 + bagRowIndex * 18));
+                }
+                else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 2)
+                {
+                    this.addSlotToContainer(new SlotAlchemicalBag(this, inventoryAlchemicalBag, entityPlayer, bagColumnIndex + bagRowIndex * bagInventoryColumns, 8 + bagColumnIndex * 18, 8 + bagRowIndex * 18));
+                }
+            }
+        }
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
