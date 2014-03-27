@@ -172,15 +172,15 @@ public class ContainerAlchemicalBag extends Container
             else if (itemStack.getItem() instanceof ItemAlchemicalBag)
             {
                 // Attempt to shift click a bag from the player inventory into the hot bar inventory
-                if (slotIndex < (bagInventoryRows * bagInventoryColumns) + 27)
+                if (slotIndex < (bagInventoryRows * bagInventoryColumns) + (PLAYER_INVENTORY_ROWS * PLAYER_INVENTORY_COLUMNS))
                 {
-                    if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns + 27, inventorySlots.size(), false))
+                    if (!this.mergeItemStack(itemStack, (bagInventoryRows * bagInventoryColumns) + (PLAYER_INVENTORY_ROWS * PLAYER_INVENTORY_COLUMNS), inventorySlots.size(), false))
                     {
                         return null;
                     }
                 }
                 // Attempt to shift click a bag from the hot bar inventory into the player inventory
-                else if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns, (bagInventoryRows * bagInventoryColumns) + 27, false))
+                else if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns, (bagInventoryRows * bagInventoryColumns) + (PLAYER_INVENTORY_ROWS * PLAYER_INVENTORY_COLUMNS), false))
                 {
                     return null;
                 }
