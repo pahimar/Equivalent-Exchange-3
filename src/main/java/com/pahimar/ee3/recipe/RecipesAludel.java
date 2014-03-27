@@ -37,6 +37,12 @@ public class RecipesAludel
 
     private void init()
     {
+        // Ash + Verdant = Azure
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalDust.itemID, 1, 2), new ItemStack(ModItems.alchemicalDust.itemID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 32, 1));
+
+        // Ash + Azure = Minium
+        aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalDust.itemID, 1, 3), new ItemStack(ModItems.alchemicalDust.itemID, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 4, 2));
+
         // Alchemical Coal
         aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 32, 1));
         aludelRegistry.addRecipe(new ItemStack(ModItems.alchemicalFuel.itemID, 1, 0), new ItemStack(Item.coal, 1, 0), new ItemStack(ModItems.alchemicalDust.itemID, 1, 2));
