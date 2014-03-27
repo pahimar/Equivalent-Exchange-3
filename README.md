@@ -1,5 +1,5 @@
 ##Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**: [EE3 pre1h for 1.5.1/1.5.2](http://adf.ly/PdBNy)
+**LATEST OFFICIAL VERSION**: [EE3 0.1.129 for MC 1.6.4](http://files.pahimar.com/ee3/MC_1.6.4/EquivalentExchange3-1.6.4-0.1.129.jar)
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
@@ -84,7 +84,7 @@ This section assumes that you're using the command-line version of Git.
 ***
 
 ####Compile EE3
-1. Execute `gradle setupDevWorkspace`. This sets up Forge and downloads the necessary libraries to build EE3.  This might take some time, be patient.
+1. Execute `gradle setupCIWorkspace`. This sets up Forge and downloads the necessary libraries to build EE3.  This might take some time, be patient.
 	* You will generally only have to do this once until the Forge version in `build.properties` changes.
 2. Execute `gradle build`. If you did everything right, `BUILD SUCCESSFUL` will be displayed after it finishes.  This should be relatively quick.
     * If you see `BUILD FAILED`, check the error output (it should be right around `BUILD FAILED`), fix everything (if possible), and try again.
