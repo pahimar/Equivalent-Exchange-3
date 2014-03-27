@@ -5,7 +5,7 @@ key.release=Выстрел
 key.toggle=Переключение
 
 # Предметы
-item.ee3:alchemicalBag.name=Алхимический мешок [WIP]
+item.ee3:alchemicalBag.name=Алхимический мешок
 item.ee3:alchemicalDust.ash.name=Пепел
 item.ee3:alchemicalDust.verdant.name=Зеленая пыль
 item.ee3:alchemicalDust.azure.name=Лазурная пыль
@@ -35,7 +35,7 @@ tile.ee3:infusedWood.name=Настоянная древесина
 tile.ee3:infusedPlanks.name=Настоянные доски
 
 # Интерфейс
-container.ee3:alchemicalBag=Алхемический мешок [WIP]
+container.ee3:alchemicalBag=Алхемический мешок
 container.ee3:alchemicalChest=Алхемический сундук
 container.ee3:aludel=Алудель
 container.ee3:calcinator=Кальцинатор
