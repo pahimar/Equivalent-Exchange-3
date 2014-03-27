@@ -9,7 +9,6 @@ package com.pahimar.ee3.lib;
  */
 public class ItemIds
 {
-
     /* Default item ids */
     public static int MINIUM_SHARD_DEFAULT = 27000;
     public static int INERT_STONE_DEFAULT = 27001;
@@ -20,6 +19,7 @@ public class ItemIds
     public static int CHALK_DEFAULT = 27006;
     public static int DIVINING_ROD_DEFAULT = 27007;
     public static int ALCHEMICAL_FUEL_DEFAULT = 27008;
+    public static int ALCHEMICAL_UPGRADE_DEFAULT = 27009;
 
     /* Current item ids */
     public static int MINIUM_SHARD;
@@ -31,4 +31,5 @@ public class ItemIds
     public static int CHALK;
     public static int DIVINING_ROD;
     public static int ALCHEMICAL_FUEL;
+    public static int ALCHEMICAL_UPGRADE;
 }

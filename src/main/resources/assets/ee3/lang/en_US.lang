@@ -19,6 +19,9 @@ item.ee3:shardMinium.name=Shard of Minium
 item.ee3:stoneInert.name=Inert Stone
 item.ee3:stoneMinium.name=Minium Stone [WIP]
 item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
+item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
+item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest
@@ -70,3 +73,4 @@ version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the re
 
 # Tooltip localizations
 tooltip.ee3:infusedPrefix=Infused with
+tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests

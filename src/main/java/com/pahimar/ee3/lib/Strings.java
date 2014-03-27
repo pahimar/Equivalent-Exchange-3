@@ -27,6 +27,7 @@ public class Strings
 
     // Tooltip related localiation keys
     public static final String TOOLTIP_INFUSED_WITH = "tooltip.ee3:infusedPrefix";
+    public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";
@@ -69,6 +70,8 @@ public class Strings
     public static final String[] ALCHEMICAL_FUEL_SUBTYPE_NAMES = {ALCHEMICAL_COAL_NAME, MOBIUS_FUEL_NAME, AETERNALIS_FUEL_NAME};
     public static final String ALCHEMICAL_FUEL_NAME = "alchemicalFuel";
     public static final String ALCHEMICAL_FUEL_BLOCK_NAME = "alchemicalFuelBlock";
+    public static final String ALCHEMICAL_UPGRADE_NAME = "alchemicalUpgrade";
+    public static final String[] ALCHEMICAL_UPGRADE_SUBTYPE_NAMES = {"verdant", "azure", "minium"};
 
     /* Transmutation cost related constants */
     public static final String TRANSMUTATION_COST = "_cost";
