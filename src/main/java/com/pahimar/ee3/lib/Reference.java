@@ -14,10 +14,8 @@ import java.util.Properties;
  */
 public class Reference
 {
-
     static
     {
-
         Properties prop = new Properties();
 
         try

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.helper.ItemStackNBTHelper;
+import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -151,8 +152,57 @@ public class ContainerAlchemicalBag extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
-        // TODO
-        return null;
+        ItemStack newItemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemStack = slot.getStack();
+            newItemStack = itemStack.copy();
+
+            // Attempt to shift click something from the bag inventory into the player inventory
+            if (slotIndex < bagInventoryRows * bagInventoryColumns)
+            {
+                if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns, inventorySlots.size(), false))
+                {
+                    return null;
+                }
+            }
+            // Special case if we are dealing with an Alchemical Bag being shift clicked
+            else if (itemStack.getItem() instanceof ItemAlchemicalBag)
+            {
+                // Attempt to shift click a bag from the player inventory into the hot bar inventory
+                if (slotIndex < (bagInventoryRows * bagInventoryColumns) + 27)
+                {
+                    if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns + 27, inventorySlots.size(), false))
+                    {
+                        return null;
+                    }
+                }
+                // Attempt to shift click a bag from the hot bar inventory into the player inventory
+                else if (!this.mergeItemStack(itemStack, bagInventoryRows * bagInventoryColumns, (bagInventoryRows * bagInventoryColumns) + 27, false))
+                {
+                    return null;
+                }
+            }
+            // Attempt to shift click a non-Alchemical Bag into the bag inventory
+            else if (!this.mergeItemStack(itemStack, 0, bagInventoryRows * bagInventoryColumns, false))
+            {
+                return null;
+            }
+
+
+            if (itemStack.stackSize == 0)
+            {
+                slot.putStack(null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
+
+        return newItemStack;
     }
 
     public void saveInventory(EntityPlayer entityPlayer)
