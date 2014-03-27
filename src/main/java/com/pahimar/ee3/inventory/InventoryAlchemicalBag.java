@@ -16,9 +16,24 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     protected ItemStack[] inventory;
     protected String customName;
 
-    public InventoryAlchemicalBag(ItemStack itemStack, int size)
+    public InventoryAlchemicalBag(ItemStack itemStack)
     {
         parentItemStack = itemStack;
+
+        int size;
+        if (itemStack.getItemDamage() == 1)
+        {
+            size = ContainerAlchemicalBag.MEDIUM_BAG_INVENTORY_ROWS * ContainerAlchemicalBag.MEDIUM_BAG_INVENTORY_COLUMNS;
+        }
+        else if (itemStack.getItemDamage() == 2)
+        {
+            size = ContainerAlchemicalBag.LARGE_BAG_INVENTORY_ROWS * ContainerAlchemicalBag.LARGE_BAG_INVENTORY_COLUMNS;
+        }
+        else
+        {
+            size = ContainerAlchemicalBag.SMALL_BAG_INVENTORY_ROWS * ContainerAlchemicalBag.SMALL_BAG_INVENTORY_COLUMNS;
+        }
+
         inventory = new ItemStack[size];
 
         readFromNBT(itemStack.getTagCompound());
@@ -137,7 +152,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     @Override
     public String getInvName()
     {
-        return this.hasCustomName() ? this.getCustomName() : Strings.ALCHEMICAL_BAG_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_BAG_NAME;
     }
 
     @Override

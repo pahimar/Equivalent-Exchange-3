@@ -10,7 +10,7 @@ public class SlotAlchemicalBag extends Slot
     private final EntityPlayer entityPlayer;
     private ContainerAlchemicalBag containerAlchemicalBag;
 
-    public SlotAlchemicalBag(EntityPlayer entityPlayer, ContainerAlchemicalBag containerAlchemicalBag, IInventory inventory, int x, int y, int z)
+    public SlotAlchemicalBag(ContainerAlchemicalBag containerAlchemicalBag, IInventory inventory, EntityPlayer entityPlayer, int x, int y, int z)
     {
         super(inventory, x, y, z);
         this.entityPlayer = entityPlayer;
