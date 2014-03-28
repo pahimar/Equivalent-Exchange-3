@@ -1,47 +1,33 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.creativetab.CreativeTab;
+import com.pahimar.ee3.reference.Textures;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * ItemEE
- *
- * @author pahimar
- */
 public class ItemEE extends Item
 {
-    private static final int SHIFTED_ID_RANGE_CORRECTION = 256;
-
-    public ItemEE(int id)
+    public ItemEE()
     {
-        super(id - SHIFTED_ID_RANGE_CORRECTION);
-        this.setCreativeTab(EquivalentExchange3.tabsEE3);
-        maxStackSize = 1;
-        setNoRepair();
+        super();
+        this.maxStackSize = 1;
+        this.setCreativeTab(CreativeTab.EE3_TAB);
+        this.setNoRepair();
     }
 
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("item.%s%s", Strings.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-        return String.format("item.%s%s", Strings.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
@@ -49,5 +35,10 @@ public class ItemEE extends Item
     public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+    }
+
+    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 }

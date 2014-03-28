@@ -1,13 +1,13 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.reference.Names;
 
 public class ItemChalk extends ItemEE
 {
-    public ItemChalk(int id)
+    public ItemChalk()
     {
-        super(id);
-        this.setUnlocalizedName(Strings.CHALK_NAME);
+        super();
         this.maxStackSize = 64;
+        this.setUnlocalizedName(Names.Items.CHALK);
     }
 }

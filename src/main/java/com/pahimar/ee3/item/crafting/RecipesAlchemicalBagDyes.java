@@ -3,42 +3,30 @@ package com.pahimar.ee3.item.crafting;
 import com.pahimar.ee3.item.ItemAlchemicalBag;
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * RecipesAlchemicalBagDyes
- *
- * @author pahimar
- */
 public class RecipesAlchemicalBagDyes implements IRecipe
 {
-
     @Override
     public boolean matches(InventoryCrafting inventoryCrafting, World world)
     {
-
         ItemStack itemStack = null;
         ArrayList<ItemStack> arrayList = new ArrayList<ItemStack>();
 
         for (int i = 0; i < inventoryCrafting.getSizeInventory(); ++i)
         {
-
             ItemStack currentStack = inventoryCrafting.getStackInSlot(i);
 
             if (currentStack != null)
             {
-
                 if (currentStack.getItem() instanceof ItemAlchemicalBag)
                 {
-
                     if (itemStack != null)
                     {
                         return false;
@@ -48,8 +36,7 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                 }
                 else
                 {
-
-                    if (currentStack.itemID != Item.dyePowder.itemID)
+                    if (currentStack.getItem() != Items.dye)
                     {
                         return false;
                     }
@@ -65,7 +52,6 @@ public class RecipesAlchemicalBagDyes implements IRecipe
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting)
     {
-
         ItemStack itemStack = null;
         ItemAlchemicalBag itemAlchemicalBag = null;
         int[] colorChannels = new int[3];
@@ -77,15 +63,12 @@ public class RecipesAlchemicalBagDyes implements IRecipe
 
         for (k = 0; k < inventoryCrafting.getSizeInventory(); ++k)
         {
-
             ItemStack currentStack = inventoryCrafting.getStackInSlot(k);
 
             if (currentStack != null)
             {
-
                 if (currentStack.getItem() instanceof ItemAlchemicalBag)
                 {
-
                     itemAlchemicalBag = (ItemAlchemicalBag) currentStack.getItem();
 
                     if (itemStack != null)
@@ -98,7 +81,6 @@ public class RecipesAlchemicalBagDyes implements IRecipe
 
                     if (itemAlchemicalBag.hasColor(currentStack))
                     {
-
                         currentColor = itemAlchemicalBag.getColor(itemStack);
                         red = (currentColor >> 16 & 255) / 255.0F;
                         green = (currentColor >> 8 & 255) / 255.0F;
@@ -112,13 +94,12 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                 }
                 else
                 {
-
-                    if (currentStack.itemID != Item.dyePowder.itemID)
+                    if (currentStack.getItem() != Items.dye)
                     {
                         return null;
                     }
 
-                    float[] dyeColorChannels = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(currentStack.getItemDamage())];
+                    float[] dyeColorChannels = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(currentStack.getItemDamage())];
                     j1 = (int) (dyeColorChannels[0] * 255.0F);
                     k1 = (int) (dyeColorChannels[1] * 255.0F);
                     newColor = (int) (dyeColorChannels[2] * 255.0F);
@@ -137,7 +118,6 @@ public class RecipesAlchemicalBagDyes implements IRecipe
         }
         else
         {
-
             k = colorChannels[0] / j;
             l1 = colorChannels[1] / j;
             currentColor = colorChannels[2] / j;
@@ -156,14 +136,12 @@ public class RecipesAlchemicalBagDyes implements IRecipe
     @Override
     public int getRecipeSize()
     {
-
         return 10;
     }
 
     @Override
     public ItemStack getRecipeOutput()
     {
-
         return null;
     }
 }

@@ -1,76 +1,39 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.helper.ItemStackNBTHelper;
-import com.pahimar.ee3.lib.Strings;
+import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * ItemEventHandler
- *
- * @author pahimar
- */
 public class ItemEventHandler
 {
     @SubscribeEvent
-    @SuppressWarnings("unused")
-    public void onItemPickup(EntityItemPickupEvent event)
+    public void onItemTossEvent(ItemTossEvent itemTossEvent)
     {
-        if (ItemStackNBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
-        }
-        else if (ItemStackNBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
-        }
-        else if (ItemStackNBTHelper.hasTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.item.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
-        }
+        NBTHelper.clearStatefulNBTTags(itemTossEvent.entityItem.getEntityItem());
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unused")
-    public void onItemToss(ItemTossEvent event)
+    public void onItemPickupEvent(PlayerEvent.ItemPickupEvent itemPickupEvent)
     {
-        if (ItemStackNBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
-        }
-        else if (ItemStackNBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
-        }
-        else if (ItemStackNBTHelper.hasTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
-        {
-            ItemStackNBTHelper.removeTag(event.entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
-        }
+        NBTHelper.clearStatefulNBTTags(itemPickupEvent.pickedUp.getEntityItem());
     }
 
     @SubscribeEvent
-    @SuppressWarnings("unused")
-    public void onPlayerDrop(PlayerDropsEvent event)
+    public void onEntityItemPickupEvent(EntityItemPickupEvent entityItemPickupEvent)
     {
-        for (EntityItem entityItem : event.drops)
+        NBTHelper.clearStatefulNBTTags(entityItemPickupEvent.item.getEntityItem());
+    }
+
+    @SubscribeEvent
+    public void onPlayerDropsEvent(PlayerDropsEvent playerDropsEvent)
+    {
+        for (EntityItem entityItem : playerDropsEvent.drops)
         {
-            if (ItemStackNBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN))
-            {
-                ItemStackNBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_CRAFTING_GUI_OPEN);
-            }
-            else if (ItemStackNBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN))
-            {
-                ItemStackNBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
-            }
-            else if (ItemStackNBTHelper.hasTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN))
-            {
-                ItemStackNBTHelper.removeTag(entityItem.getEntityItem(), Strings.NBT_ITEM_ALCHEMICAL_BAG_GUI_OPEN);
-            }
+            NBTHelper.clearStatefulNBTTags(entityItem.getEntityItem());
         }
     }
 }
