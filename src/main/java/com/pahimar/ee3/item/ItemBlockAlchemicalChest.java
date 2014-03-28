@@ -2,6 +2,7 @@ package com.pahimar.ee3.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -10,9 +11,9 @@ import java.util.List;
 
 public class ItemBlockAlchemicalChest extends ItemBlock
 {
-    public ItemBlockAlchemicalChest(int id)
+    public ItemBlockAlchemicalChest(Block block)
     {
-        super(id);
+        super(block);
         this.setHasSubtypes(true);
     }
 

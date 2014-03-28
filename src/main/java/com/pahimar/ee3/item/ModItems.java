@@ -3,7 +3,6 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.lib.ItemIds;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.ItemMultiTextureTile;
 
 /**
  * Equivalent-Exchange-3

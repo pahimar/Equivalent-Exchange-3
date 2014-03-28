@@ -1,6 +1,6 @@
 package com.pahimar.ee3.configuration;
 
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
@@ -13,10 +13,8 @@ import java.io.File;
  */
 public class ConfigurationHandler
 {
-
-    public static Configuration configuration;
-
     public static final String CATEGORY_TRANSMUTATION = "transmutation";
+    public static Configuration configuration;
 
     public static void init(String configPath)
     {

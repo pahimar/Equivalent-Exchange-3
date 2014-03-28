@@ -4,7 +4,6 @@ import com.pahimar.ee3.lib.BlockIds;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.common.Configuration;
 
 import java.io.File;
 import java.util.logging.Level;

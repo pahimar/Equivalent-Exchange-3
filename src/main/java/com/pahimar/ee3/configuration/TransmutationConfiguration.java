@@ -2,17 +2,15 @@ package com.pahimar.ee3.configuration;
 
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
-import java.util.logging.Level;
 
 public class TransmutationConfiguration
 {
-
-    private static Configuration transmutationConfiguration;
-
     private static final String CATEGORY_TRANSMUTATION = "transmutation";
+    private static Configuration transmutationConfiguration;
 
     protected static void init(File configFile)
     {
@@ -30,7 +28,7 @@ public class TransmutationConfiguration
         }
         catch (Exception e)
         {
-            FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its transmutation configuration");
+            FMLLog.log(Level.ERROR, e, Reference.MOD_NAME + " has had a problem loading its transmutation configuration");
         }
         finally
         {

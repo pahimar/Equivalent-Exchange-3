@@ -290,11 +290,11 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
         catch (JsonSyntaxException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
         catch (JsonParseException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
 
         return null;
@@ -489,6 +489,103 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
 
         return jsonWrappedStack;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public WrappedStack deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
+        if (!jsonElement.isJsonPrimitive())
+        {
+            JsonObject jsonWrappedStack = (JsonObject) jsonElement;
+
+            int stackSize = -1;
+            String className = null;
+            Object stackObject = null;
+
+            if (jsonWrappedStack.get("className") != null)
+            {
+                className = jsonWrappedStack.get("className").getAsString();
+            }
+
+            if (jsonWrappedStack.get("stackSize") != null)
+            {
+                stackSize = jsonWrappedStack.get("stackSize").getAsInt();
+            }
+
+            if (jsonWrappedStack.get("wrappedStack") != null && !jsonWrappedStack.get("wrappedStack").isJsonPrimitive())
+            {
+                if (className != null)
+                {
+                    if (className.equalsIgnoreCase(ItemStack.class.getSimpleName()))
+                    {
+                        JsonItemStack jsonItemStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), JsonItemStack.class);
+                        ItemStack itemStack = null;
+                        if (stackSize > 0)
+                        {
+                            itemStack = new ItemStack(jsonItemStack.itemID, stackSize, jsonItemStack.itemDamage);
+                            if (jsonItemStack.compressedStackTagCompound != null)
+                            {
+                                try
+                                {
+                                    itemStack.stackTagCompound = CompressedStreamTools.decompress(jsonItemStack.compressedStackTagCompound);
+                                }
+                                catch (IOException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        stackObject = itemStack;
+                    }
+                    else if (className.equalsIgnoreCase(OreStack.class.getSimpleName()))
+                    {
+                        OreStack oreStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), OreStack.class);
+
+                        if (stackSize > 0)
+                        {
+                            oreStack.stackSize = stackSize;
+                        }
+                        stackObject = oreStack;
+                    }
+                    else if (className.equalsIgnoreCase(EnergyStack.class.getSimpleName()))
+                    {
+                        EnergyStack energyStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), EnergyStack.class);
+
+                        if (stackSize > 0)
+                        {
+                            energyStack.stackSize = stackSize;
+                        }
+                        stackObject = energyStack;
+                    }
+                    else if (className.equalsIgnoreCase(FluidStack.class.getSimpleName()))
+                    {
+                        FluidStack fluidStack = gsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack"), FluidStack.class);
+
+                        if (stackSize > 0)
+                        {
+                            fluidStack.amount = stackSize;
+                        }
+                        stackObject = fluidStack;
+                    }
+                }
+            }
+
+            if (stackObject != null)
+            {
+                return new WrappedStack(stackObject);
+            }
+            else
+            {
+                throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
+            }
+        }
+        else
+        {
+            throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
+        }
     }
 
     /**

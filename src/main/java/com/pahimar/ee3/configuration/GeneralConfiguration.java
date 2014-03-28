@@ -3,21 +3,17 @@ package com.pahimar.ee3.configuration;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
-import java.util.logging.Level;
-
-import static net.minecraftforge.common.Configuration.CATEGORY_GENERAL;
 
 public class GeneralConfiguration
 {
-
-    private static Configuration generalConfiguration;
-
     public static final String CATEGORY_KEYBIND = "keybindings";
     public static final String CATEGORY_GRAPHICS = "graphics";
     public static final String CATEGORY_AUDIO = "audio";
+    private static Configuration generalConfiguration;
 
     protected static void init(File configFile)
     {
@@ -29,9 +25,9 @@ public class GeneralConfiguration
             generalConfiguration.load();
             
             /* Version check */
-            ConfigurationSettings.DISPLAY_VERSION_RESULT = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT).getBoolean(ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT);
-            ConfigurationSettings.LAST_DISCOVERED_VERSION = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_DEFAULT).getString();
-            ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE = generalConfiguration.get(CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_DEFAULT).getString();
+            ConfigurationSettings.DISPLAY_VERSION_RESULT = generalConfiguration.get(Configuration.CATEGORY_GENERAL, ConfigurationSettings.DISPLAY_VERSION_RESULT_CONFIGNAME, ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT).getBoolean(ConfigurationSettings.DISPLAY_VERSION_RESULT_DEFAULT);
+            ConfigurationSettings.LAST_DISCOVERED_VERSION = generalConfiguration.get(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_DEFAULT).getString();
+            ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE = generalConfiguration.get(Configuration.CATEGORY_GENERAL, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME, ConfigurationSettings.LAST_DISCOVERED_VERSION_TYPE_DEFAULT).getString();
 
             /* Graphics */
             ConfigurationSettings.ENABLE_PARTICLE_FX = generalConfiguration.get(CATEGORY_GRAPHICS, ConfigurationSettings.ENABLE_PARTICLE_FX_CONFIGNAME, ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT).getBoolean(ConfigurationSettings.ENABLE_PARTICLE_FX_DEFAULT);
@@ -76,7 +72,7 @@ public class GeneralConfiguration
         }
         catch (Exception e)
         {
-            FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its general configuration");
+            FMLLog.log(Level.ERROR, e, Reference.MOD_NAME + " has had a problem loading its general configuration");
         }
         finally
         {

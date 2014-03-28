@@ -2,8 +2,6 @@ package com.pahimar.ee3.network;
 
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.network.packet.*;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;

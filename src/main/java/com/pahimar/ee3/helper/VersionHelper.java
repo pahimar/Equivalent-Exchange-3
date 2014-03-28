@@ -7,7 +7,6 @@ import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.Configuration;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -25,25 +24,21 @@ public class VersionHelper implements Runnable
 
     // TODO Switch how versions are looked up from xml to json (for changelog support)
 
-    private static VersionHelper instance = new VersionHelper();
-
-    // The (publicly available) remote version number authority file
-    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml";
-
-    public static Properties remoteVersionProperties = new Properties();
-
     // All possible results of the remote version number check
     public static final byte UNINITIALIZED = 0;
+    // Var to hold the result of the remote version check, initially set to uninitialized
+    private static byte result = UNINITIALIZED;
     public static final byte CURRENT = 1;
     public static final byte OUTDATED = 2;
     public static final byte ERROR = 3;
     public static final byte FINAL_ERROR = 4;
     public static final byte MC_VERSION_NOT_FOUND = 5;
-
-    // Var to hold the result of the remote version check, initially set to uninitialized
-    private static byte result = UNINITIALIZED;
+    // The (publicly available) remote version number authority file
+    private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/pahimar/Equivalent-Exchange-3/master/version.xml";
+    public static Properties remoteVersionProperties = new Properties();
     public static String remoteVersion = null;
     public static String remoteUpdateLocation = null;
+    private static VersionHelper instance = new VersionHelper();
 
     /**
      * Checks the version of the currently running instance of the mod against the remote version authority, and sets
@@ -148,7 +143,7 @@ public class VersionHelper implements Runnable
         }
         else
         {
-            LogHelper.warning(getResultMessage());
+            LogHelper.warn(getResultMessage());
         }
     }
 
@@ -198,6 +193,11 @@ public class VersionHelper implements Runnable
         return result;
     }
 
+    public static void execute()
+    {
+        new Thread(instance).start();
+    }
+
     @Override
     public void run()
     {
@@ -231,10 +231,5 @@ public class VersionHelper implements Runnable
         {
             e.printStackTrace();
         }
-    }
-
-    public static void execute()
-    {
-        new Thread(instance).start();
     }
 }

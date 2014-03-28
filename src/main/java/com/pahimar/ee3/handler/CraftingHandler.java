@@ -8,7 +8,6 @@ import com.pahimar.ee3.item.crafting.RecipesTransmutationStones;
 import com.pahimar.ee3.item.crafting.RecipesVanilla;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.recipe.RecipesAludel;
-import cpw.mods.fml.common.ICraftingHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

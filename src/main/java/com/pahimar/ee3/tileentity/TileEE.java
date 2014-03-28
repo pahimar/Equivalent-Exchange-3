@@ -1,12 +1,10 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileUpdate;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -30,14 +28,7 @@ public class TileEE extends TileEntity
 
     public ForgeDirection getOrientation()
     {
-
         return orientation;
-    }
-
-    public void setOrientation(ForgeDirection orientation)
-    {
-
-        this.orientation = orientation;
     }
 
     public void setOrientation(int orientation)
@@ -45,15 +36,18 @@ public class TileEE extends TileEntity
         this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
+    public void setOrientation(ForgeDirection orientation)
+    {
+        this.orientation = orientation;
+    }
+
     public short getState()
     {
-
         return state;
     }
 
     public void setState(byte state)
     {
-
         this.state = state;
     }
 
@@ -64,13 +58,11 @@ public class TileEE extends TileEntity
 
     public String getCustomName()
     {
-
         return customName;
     }
 
     public void setCustomName(String customName)
     {
-
         this.customName = customName;
     }
 
@@ -112,12 +104,9 @@ public class TileEE extends TileEntity
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
-    }
+//        return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord, yCoord, zCoord, orientation, state, customName));
 
-    @Override
-    public String toString()
-    {
-        return String.format("TileEE Data - Class: %s, xCoord: %d, yCoord: %d, zCoord: %d, customName: '%s', orientation: %s, state: %d\n", this.getClass().getSimpleName(), xCoord, yCoord, zCoord, customName, orientation, state);
+        // FIXME Send proper packets
+        return null;
     }
 }

@@ -150,13 +150,13 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALCHEMICAL_BAG_NAME;
     }
 
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return true;
     }
@@ -168,7 +168,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     }
 
     @Override
-    public void onInventoryChanged()
+    public void markDirty()
     {
         // NOOP
     }
@@ -180,13 +180,13 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
         // NOOP
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
         // NOOP
     }
@@ -205,11 +205,11 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
             // Read in the ItemStacks in the inventory from NBT
             if (nbtTagCompound.hasKey("Items"))
             {
-                NBTTagList tagList = nbtTagCompound.getTagList("Items");
+                NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
                 inventory = new ItemStack[this.getSizeInventory()];
                 for (int i = 0; i < tagList.tagCount(); ++i)
                 {
-                    NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+                    NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
                     byte slotIndex = tagCompound.getByte("Slot");
                     if (slotIndex >= 0 && slotIndex < inventory.length)
                     {

@@ -4,7 +4,6 @@ import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.lib.Commands;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.util.ChatMessageComponent;
 
 /**
  * Equivalent-Exchange-3

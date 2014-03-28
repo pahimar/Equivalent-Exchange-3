@@ -1,9 +1,8 @@
 package com.pahimar.ee3.creativetab;
 
-import com.pahimar.ee3.lib.ItemIds;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.pahimar.ee3.lib.Reference;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 /**
  * Equivalent-Exchange-3
@@ -12,25 +11,14 @@ import net.minecraft.creativetab.CreativeTabs;
  *
  * @author pahimar
  */
-public class CreativeTabEE3 extends CreativeTabs
+public class CreativeTabEE3
 {
-    public CreativeTabEE3(int tabID)
+    public static final CreativeTabs tabEE3 = new CreativeTabs(Reference.MOD_ID)
     {
-        super(tabID, com.pahimar.ee3.lib.Reference.MOD_ID);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getTabIconItemIndex()
-    {
-
-        return ItemIds.MINIUM_SHARD;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getTranslatedTabLabel()
-    {
-        return "Equivalent Exchange 3";
-    }
+        @Override
+        public Item getTabIconItem()
+        {
+            return null;
+        }
+    };
 }

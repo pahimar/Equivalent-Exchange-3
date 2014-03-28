@@ -117,6 +117,86 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
         }
     }
 
+    /**
+     * Deserializes an EmcValue object from the given serialized json String
+     *
+     * @param jsonEmcValue
+     *         Json encoded String representing a EmcValue object
+     *
+     * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
+     */
+    @SuppressWarnings("unused")
+    public static EmcValue createFromJson(String jsonEmcValue)
+    {
+        try
+        {
+            return gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
+        }
+        catch (JsonSyntaxException exception)
+        {
+            LogHelper.error(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.error(exception.getMessage());
+        }
+
+        return null;
+    }
+
+    private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents)
+    {
+        Integer[] componentCount = new Integer[EmcType.TYPES.length];
+
+        for (EmcComponent emcComponent : uncollatedComponents)
+        {
+            if (componentCount[emcComponent.type.ordinal()] == null)
+            {
+                componentCount[emcComponent.type.ordinal()] = 0;
+            }
+
+            if (emcComponent.weight >= 0)
+            {
+                componentCount[emcComponent.type.ordinal()] = componentCount[emcComponent.type.ordinal()] + emcComponent.weight;
+            }
+        }
+
+        List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
+
+        for (int i = 0; i < EmcType.TYPES.length; i++)
+        {
+            if (componentCount[i] != null)
+            {
+                collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i]));
+            }
+        }
+
+        Collections.sort(collatedComponents);
+
+        return collatedComponents;
+    }
+
+    private static int compareComponents(float[] first, float[] second)
+    {
+        if (first.length == EmcType.TYPES.length && second.length == EmcType.TYPES.length)
+        {
+
+            for (EmcType emcType : EmcType.TYPES)
+            {
+                if (Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]) != Compare.EQUALS)
+                {
+                    return Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]);
+                }
+            }
+
+            return Compare.EQUALS;
+        }
+        else
+        {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+    }
+
     public float getValue()
     {
         float sumSubValues = 0;
@@ -184,33 +264,6 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     }
 
     /**
-     * Deserializes an EmcValue object from the given serialized json String
-     *
-     * @param jsonEmcValue
-     *         Json encoded String representing a EmcValue object
-     *
-     * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
-     */
-    @SuppressWarnings("unused")
-    public static EmcValue createFromJson(String jsonEmcValue)
-    {
-        try
-        {
-            return gsonSerializer.fromJson(jsonEmcValue, EmcValue.class);
-        }
-        catch (JsonSyntaxException exception)
-        {
-            LogHelper.severe(exception.getMessage());
-        }
-        catch (JsonParseException exception)
-        {
-            LogHelper.severe(exception.getMessage());
-        }
-
-        return null;
-    }
-
-    /**
      * Returns this EmcValue as a json serialized String
      *
      * @return Json serialized String of this EmcValue
@@ -218,59 +271,6 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
     public String toJson()
     {
         return gsonSerializer.toJson(this);
-    }
-
-    private static List<EmcComponent> collateComponents(List<EmcComponent> uncollatedComponents)
-    {
-        Integer[] componentCount = new Integer[EmcType.TYPES.length];
-
-        for (EmcComponent emcComponent : uncollatedComponents)
-        {
-            if (componentCount[emcComponent.type.ordinal()] == null)
-            {
-                componentCount[emcComponent.type.ordinal()] = 0;
-            }
-
-            if (emcComponent.weight >= 0)
-            {
-                componentCount[emcComponent.type.ordinal()] = componentCount[emcComponent.type.ordinal()] + emcComponent.weight;
-            }
-        }
-
-        List<EmcComponent> collatedComponents = new ArrayList<EmcComponent>();
-
-        for (int i = 0; i < EmcType.TYPES.length; i++)
-        {
-            if (componentCount[i] != null)
-            {
-                collatedComponents.add(new EmcComponent(EmcType.TYPES[i], componentCount[i]));
-            }
-        }
-
-        Collections.sort(collatedComponents);
-
-        return collatedComponents;
-    }
-
-    private static int compareComponents(float[] first, float[] second)
-    {
-        if (first.length == EmcType.TYPES.length && second.length == EmcType.TYPES.length)
-        {
-
-            for (EmcType emcType : EmcType.TYPES)
-            {
-                if (Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]) != Compare.EQUALS)
-                {
-                    return Float.compare(first[emcType.ordinal()], second[emcType.ordinal()]);
-                }
-            }
-
-            return Compare.EQUALS;
-        }
-        else
-        {
-            throw new ArrayIndexOutOfBoundsException();
-        }
     }
 
     @Override
@@ -303,7 +303,7 @@ public class EmcValue implements Comparable<EmcValue>, JsonDeserializer<EmcValue
                 }
                 catch (UnsupportedOperationException exception)
                 {
-                    LogHelper.severe(exception.getMessage());
+                    LogHelper.error(exception.getMessage());
                 }
             }
         }

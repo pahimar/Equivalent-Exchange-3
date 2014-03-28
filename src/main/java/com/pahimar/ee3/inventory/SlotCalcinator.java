@@ -1,6 +1,5 @@
 package com.pahimar.ee3.inventory;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -30,6 +29,5 @@ public class SlotCalcinator extends Slot
     public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
     {
         super.onPickupFromSlot(entityPlayer, itemStack);
-        GameRegistry.onItemCrafted(entityPlayer, itemStack, inventory);
     }
 }

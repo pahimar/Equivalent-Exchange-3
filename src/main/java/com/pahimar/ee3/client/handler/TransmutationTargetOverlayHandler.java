@@ -6,8 +6,6 @@ import com.pahimar.ee3.helper.TransmutationHelper;
 import com.pahimar.ee3.item.ITransmutationStone;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -31,51 +29,6 @@ import java.util.EnumSet;
 @SideOnly(Side.CLIENT)
 public class TransmutationTargetOverlayHandler implements ITickHandler
 {
-
-    @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData)
-    {
-
-    }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData)
-    {
-
-        Minecraft minecraft = FMLClientHandler.instance().getClient();
-        EntityPlayer player = minecraft.thePlayer;
-        ItemStack currentItemStack;
-
-        if (type.contains(TickType.RENDER))
-        {
-            if (player != null)
-            {
-                currentItemStack = player.inventory.getCurrentItem();
-
-                if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
-                {
-                    if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
-                    {
-                        renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public EnumSet<TickType> ticks()
-    {
-
-        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
-    }
-
-    @Override
-    public String getLabel()
-    {
-
-        return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
-    }
 
     private static void renderStoneHUD(Minecraft minecraft, EntityPlayer player, ItemStack stack, float partialTicks)
     {
@@ -156,5 +109,50 @@ public class TransmutationTargetOverlayHandler implements ITickHandler
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public void tickStart(EnumSet<TickType> type, Object... tickData)
+    {
+
+    }
+
+    @Override
+    public void tickEnd(EnumSet<TickType> type, Object... tickData)
+    {
+
+        Minecraft minecraft = FMLClientHandler.instance().getClient();
+        EntityPlayer player = minecraft.thePlayer;
+        ItemStack currentItemStack;
+
+        if (type.contains(TickType.RENDER))
+        {
+            if (player != null)
+            {
+                currentItemStack = player.inventory.getCurrentItem();
+
+                if (Minecraft.isGuiEnabled() && minecraft.inGameHasFocus)
+                {
+                    if (currentItemStack != null && currentItemStack.getItem() instanceof ITransmutationStone && ConfigurationSettings.ENABLE_OVERLAY_WORLD_TRANSMUTATION)
+                    {
+                        renderStoneHUD(minecraft, player, currentItemStack, (Float) tickData[0]);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public EnumSet<TickType> ticks()
+    {
+
+        return EnumSet.of(TickType.CLIENT, TickType.RENDER);
+    }
+
+    @Override
+    public String getLabel()
+    {
+
+        return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 }

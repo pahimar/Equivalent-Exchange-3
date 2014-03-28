@@ -1,10 +1,6 @@
 package com.pahimar.ee3.network;
 
 import com.pahimar.ee3.network.packet.PacketEE;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 /**
  * Equivalent-Exchange-3

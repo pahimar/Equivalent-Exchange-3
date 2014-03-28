@@ -2,9 +2,6 @@ package com.pahimar.ee3.network.packet;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.network.PacketTypeHandler;
-import cpw.mods.fml.common.network.Player;
-import net.minecraft.network.INetworkManager;
-import net.minecraftforge.common.ForgeDirection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -3,7 +3,6 @@ package com.pahimar.ee3.client.audio;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.lib.Sounds;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 
 /**
  * Equivalent-Exchange-3
@@ -30,7 +29,7 @@ public class SoundHandler
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e)
             {
-                LogHelper.warning("Failed loading sound file: " + soundFile);
+                LogHelper.warn("Failed loading sound file: " + soundFile);
             }
         }
     }

@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Random;
 
@@ -140,7 +139,7 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int blockID)
     {
-        TileAludel aludel = (TileAludel)world.getBlockTileEntity(x, y, z);
+        TileAludel aludel = (TileAludel) world.getBlockTileEntity(x, y, z);
         aludel.hasGlassBell = world.getBlockTileEntity(x, y + 1, z) instanceof TileGlassBell;
 
         super.onNeighborBlockChange(world, x, y, z, blockID);
@@ -168,7 +167,7 @@ public class BlockAludelBase extends BlockEE implements ITileEntityProvider
         {
             if (((TileAludel) tile).getState() == 1)
             {
-                switch(((TileAludel) tile).getOrientation())
+                switch (((TileAludel) tile).getOrientation())
                 {
                     case NORTH:
                         world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.33F, (double) z + 0.175F, 0.0D, 0.0D, 0.0D);

@@ -3,7 +3,6 @@ package com.pahimar.ee3.event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.Event;
 
 /**
  * Equivalent-Exchange-3
@@ -15,18 +14,13 @@ import net.minecraftforge.event.Event;
 public class ActionEvent extends Event
 {
 
-    public enum ActionResult
-    {
-        SUCCESS, DEFAULT, FAILURE
-    }
-
     public final byte actionType;
-    public ItemStack itemStack;
     public final EntityPlayer player;
     public final World world;
     public final int x, y, z;
     public final boolean hasActionOccured;
     public final String data;
+    public ItemStack itemStack;
     public ActionResult actionResult;
 
     public ActionEvent(byte actionType, ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, boolean hasActionOccured, String data)
@@ -41,5 +35,10 @@ public class ActionEvent extends Event
         this.z = z;
         this.hasActionOccured = hasActionOccured;
         this.data = data;
+    }
+
+    public enum ActionResult
+    {
+        SUCCESS, DEFAULT, FAILURE
     }
 }

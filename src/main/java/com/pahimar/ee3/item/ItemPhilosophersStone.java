@@ -9,12 +9,10 @@ import com.pahimar.ee3.lib.Sounds;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 /**
@@ -41,12 +39,6 @@ public class ItemPhilosophersStone extends ItemEE implements ITransmutationStone
     public boolean hasEffect(ItemStack itemStack, int renderPass)
     {
         return ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_CRAFTING_GUI_OPEN) || ItemStackNBTHelper.hasTag(itemStack, Strings.NBT_ITEM_TRANSMUTATION_GUI_OPEN);
-    }
-
-    @Override
-    public String getItemDisplayName(ItemStack itemStack)
-    {
-        return EnumChatFormatting.YELLOW + super.getItemDisplayName(itemStack);
     }
 
     @Override

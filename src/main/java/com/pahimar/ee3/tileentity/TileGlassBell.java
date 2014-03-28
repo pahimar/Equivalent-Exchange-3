@@ -4,31 +4,26 @@ import com.pahimar.ee3.helper.ItemHelper;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.network.Packet;
 
 public class TileGlassBell extends TileEE implements IInventory
 {
+    public static final int INVENTORY_SIZE = 1;
+    public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
+    public ItemStack outputItemStack;
     /**
      * Server sync counter (once per 20 ticks)
      */
     private int ticksSinceSync;
-
     /**
      * The ItemStacks that hold the items currently being used in the Glass Bell
      */
     private ItemStack[] inventory;
-
-    public static final int INVENTORY_SIZE = 1;
-
-    public static final int DISPLAY_SLOT_INVENTORY_INDEX = 0;
-
-    public ItemStack outputItemStack;
 
     public TileGlassBell()
     {
@@ -92,7 +87,7 @@ public class TileGlassBell extends TileEE implements IInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_GLASS_BELL_NAME;
     }
@@ -104,13 +99,13 @@ public class TileGlassBell extends TileEE implements IInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
 
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
 
     }
@@ -121,11 +116,11 @@ public class TileGlassBell extends TileEE implements IInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
             if (slotIndex >= 0 && slotIndex < inventory.length)
             {
@@ -155,7 +150,7 @@ public class TileGlassBell extends TileEE implements IInventory
     }
 
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return this.hasCustomName();
     }
@@ -197,7 +192,7 @@ public class TileGlassBell extends TileEE implements IInventory
     }
 
     @Override
-    public void onInventoryChanged()
+    public void markDirty()
     {
         worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
     }

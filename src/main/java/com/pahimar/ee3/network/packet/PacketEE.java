@@ -1,8 +1,6 @@
 package com.pahimar.ee3.network.packet;
 
 import com.pahimar.ee3.network.PacketTypeHandler;
-import cpw.mods.fml.common.network.Player;
-import net.minecraft.network.INetworkManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;

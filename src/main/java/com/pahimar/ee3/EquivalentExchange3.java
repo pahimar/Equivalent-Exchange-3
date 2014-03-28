@@ -4,7 +4,6 @@ import com.pahimar.ee3.addon.AddonHandler;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.creativetab.CreativeTabEE3;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.helper.FluidHelper;
 import com.pahimar.ee3.helper.LogHelper;
@@ -13,7 +12,6 @@ import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -21,12 +19,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
@@ -38,8 +33,7 @@ import java.io.File;
  *
  * @author pahimar
  */
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, dependencies = Reference.DEPENDENCIES, certificateFingerprint = Reference.FINGERPRINT)
-@NetworkMod(channels = {Reference.CHANNEL_NAME}, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT)
 public class EquivalentExchange3
 {
     @Instance(Reference.MOD_ID)
@@ -47,8 +41,6 @@ public class EquivalentExchange3
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
-
-    public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID());
 
     @EventHandler
     @SuppressWarnings("unused")
@@ -58,11 +50,11 @@ public class EquivalentExchange3
         // they are using has been changed/tampered with
         if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
         {
-            LogHelper.warning(Strings.NO_FINGERPRINT_MESSAGE);
+            LogHelper.warn(Strings.NO_FINGERPRINT_MESSAGE);
         }
         else
         {
-            LogHelper.severe(Strings.INVALID_FINGERPRINT_MESSAGE);
+            LogHelper.error(Strings.INVALID_FINGERPRINT_MESSAGE);
         }
     }
 
@@ -80,9 +72,6 @@ public class EquivalentExchange3
     {
         // set version number
         event.getModMetadata().version = Reference.VERSION_NUMBER;
-
-        // Initialize the log helper
-        LogHelper.init();
 
         // Initialize the configuration
         ConfigurationHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME.toLowerCase() + File.separator);
@@ -117,7 +106,7 @@ public class EquivalentExchange3
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
-        NetworkRegistry.instance().registerGuiHandler(instance, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
         // Register the Item Pickup Handler
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());

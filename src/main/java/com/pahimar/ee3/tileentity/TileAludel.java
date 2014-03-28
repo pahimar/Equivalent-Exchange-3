@@ -7,7 +7,6 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketTileWithItemUpdate;
 import com.pahimar.ee3.recipe.RecipesAludel;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,9 +14,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -28,25 +27,20 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public class TileAludel extends TileEE implements ISidedInventory
 {
-    /**
-     * The ItemStacks that hold the items currently being used in the Aludel
-     */
-    private ItemStack[] inventory;
-
     public static final int INVENTORY_SIZE = 4;
-
     public static final int FUEL_INVENTORY_INDEX = 0;
     public static final int INPUT_INVENTORY_INDEX = 1;
     public static final int DUST_INVENTORY_INDEX = 2;
     public static final int OUTPUT_INVENTORY_INDEX = 3;
-
     public int deviceCookTime;              // How much longer the Aludel will cook
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
-
     public ItemStack outputItemStack;
-
     public boolean hasGlassBell = false;
+    /**
+     * The ItemStacks that hold the items currently being used in the Aludel
+     */
+    private ItemStack[] inventory;
 
     public TileAludel()
     {
@@ -110,7 +104,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_ALUDEL_NAME;
     }
@@ -137,13 +131,13 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
         // NOOP
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
         // NOOP
     }
@@ -154,11 +148,11 @@ public class TileAludel extends TileEE implements ISidedInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
             if (slotIndex >= 0 && slotIndex < inventory.length)
             {
@@ -197,7 +191,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return this.hasCustomName();
     }
@@ -381,7 +375,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     }
 
     @Override
-    public void onInventoryChanged()
+    public void markDirty()
     {
         PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 128D, this.worldObj.provider.dimensionId, getDescriptionPacket());
 
@@ -456,7 +450,7 @@ public class TileAludel extends TileEE implements ISidedInventory
     @Override
     public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
     {
-        if (worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
+        if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileGlassBell)
         {
             return isItemValidForSlot(slotIndex, itemStack);
         }

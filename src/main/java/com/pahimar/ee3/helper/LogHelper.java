@@ -1,10 +1,8 @@
 package com.pahimar.ee3.helper;
 
-import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.common.FMLLog;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Equivalent-Exchange-3
@@ -15,32 +13,31 @@ import java.util.logging.Logger;
  */
 public class LogHelper
 {
-
-    private static Logger eeLogger = Logger.getLogger(Reference.MOD_ID);
-
-    public static void init()
-    {
-        eeLogger.setParent(FMLLog.getLogger());
-    }
+    private static final Logger EE_LOGGER = FMLLog.getLogger();
 
     public static void log(Level logLevel, Object object)
     {
-        eeLogger.log(logLevel, String.valueOf(object));
+        EE_LOGGER.log(logLevel, String.valueOf(object));
     }
 
-    public static void severe(Object object)
+    public static void all(Object object)
     {
-        log(Level.SEVERE, object);
+        log(Level.ALL, object);
     }
 
     public static void debug(Object object)
     {
-        log(Level.INFO, String.format("[DEBUG] %s", String.valueOf(object)));
+        log(Level.DEBUG, object);
     }
 
-    public static void warning(Object object)
+    public static void error(Object object)
     {
-        log(Level.WARNING, object);
+        log(Level.ERROR, object);
+    }
+
+    public static void fatal(Object object)
+    {
+        log(Level.FATAL, object);
     }
 
     public static void info(Object object)
@@ -48,23 +45,18 @@ public class LogHelper
         log(Level.INFO, object);
     }
 
-    public static void config(Object object)
+    public static void off(Object object)
     {
-        log(Level.CONFIG, object);
+        log(Level.OFF, object);
     }
 
-    public static void fine(Object object)
+    public static void trace(Object object)
     {
-        log(Level.FINE, object);
+        log(Level.TRACE, object);
     }
 
-    public static void finer(Object object)
+    public static void warn(Object object)
     {
-        log(Level.FINER, object);
-    }
-
-    public static void finest(Object object)
-    {
-        log(Level.FINEST, object);
+        log(Level.WARN, object);
     }
 }

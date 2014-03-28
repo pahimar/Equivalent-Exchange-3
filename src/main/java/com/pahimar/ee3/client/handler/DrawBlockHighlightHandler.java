@@ -8,8 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.ForgeSubscribe;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -25,6 +23,57 @@ public class DrawBlockHighlightHandler
 {
     private static int pulse = 0;
     private static boolean doInc = true;
+
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency)
+    {
+
+        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
+
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        Tessellator tessellator = Tessellator.instance;
+
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glColor4f(1, 1, 1, pulseTransparency);
+
+        tessellator.startDrawingQuads();
+        tessellator.setColorRGBA_F(1, 1, 1, pulseTransparency);
+
+        tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
+        tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
+        tessellator.addVertexWithUV(0.5D, -0.5D, 0F, 1, 0);
+        tessellator.addVertexWithUV(-0.5D, -0.5D, 0F, 0, 0);
+
+        tessellator.draw();
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+    }
+
+    private static int getPulseValue()
+    {
+
+        if (doInc)
+        {
+            pulse += 8;
+        }
+        else
+        {
+            pulse -= 8;
+        }
+
+        if (pulse == 3000)
+        {
+            doInc = false;
+        }
+
+        if (pulse == 0)
+        {
+            doInc = true;
+        }
+
+        return pulse;
+    }
 
     @ForgeSubscribe
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event)
@@ -158,56 +207,5 @@ public class DrawBlockHighlightHandler
 
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glDepthMask(true);
-    }
-
-    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency)
-    {
-
-        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
-        Tessellator tessellator = Tessellator.instance;
-
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1, 1, 1, pulseTransparency);
-
-        tessellator.startDrawingQuads();
-        tessellator.setColorRGBA_F(1, 1, 1, pulseTransparency);
-
-        tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
-        tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
-        tessellator.addVertexWithUV(0.5D, -0.5D, 0F, 1, 0);
-        tessellator.addVertexWithUV(-0.5D, -0.5D, 0F, 0, 0);
-
-        tessellator.draw();
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-    }
-
-    private static int getPulseValue()
-    {
-
-        if (doInc)
-        {
-            pulse += 8;
-        }
-        else
-        {
-            pulse -= 8;
-        }
-
-        if (pulse == 3000)
-        {
-            doInc = false;
-        }
-
-        if (pulse == 0)
-        {
-            doInc = true;
-        }
-
-        return pulse;
     }
 }

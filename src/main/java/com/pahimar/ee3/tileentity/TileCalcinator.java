@@ -1,8 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.lib.Strings;
-import com.pahimar.ee3.network.PacketTypeHandler;
-import com.pahimar.ee3.network.packet.PacketTileCalcinator;
 import com.pahimar.ee3.recipe.CalcinationManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,10 +10,10 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -26,18 +24,12 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public class TileCalcinator extends TileEE implements ISidedInventory
 {
-    /**
-     * The ItemStacks that hold the items currently being used in the Calcinator
-     */
-    private ItemStack[] inventory;
-
     public static final int INVENTORY_SIZE = 4;
-
     public static final int FUEL_INVENTORY_INDEX = 0;
     public static final int INPUT_INVENTORY_INDEX = 1;
     public static final int OUTPUT_LEFT_INVENTORY_INDEX = 2;
     public static final int OUTPUT_RIGHT_INVENTORY_INDEX = 3;
-
+    private static final int DEFAULT_ITEM_SUCK_COOL_DOWN = 20;
     public int deviceCookTime;              // How much longer the Calcinator will cook
     public int fuelBurnTime;                // The fuel value for the currently burning fuel
     public int itemCookTime;                // How long the current item has been "cooking"
@@ -45,11 +37,26 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     public byte leftStackSize, leftStackMeta, rightStackSize, rightStackMeta;
 
     public int itemSuckCoolDown = 0;
-    private static final int DEFAULT_ITEM_SUCK_COOL_DOWN = 20;
+    /**
+     * The ItemStacks that hold the items currently being used in the Calcinator
+     */
+    private ItemStack[] inventory;
 
     public TileCalcinator()
     {
         inventory = new ItemStack[INVENTORY_SIZE];
+    }
+
+    /**
+     * Sucks one item into the given hopper from an inventory or EntityItem above it.
+     */
+    public static boolean suckItemsIntoCalcinator(TileCalcinator calcinator)
+    {
+//        EntityItem entityitem = TileEntityHopper.getEntityAbove(calcinator.getWorldObj(), calcinator.xCoord, calcinator.yCoord + 1.0D, calcinator.zCoord);
+        EntityItem entityitem = TileEntityHopper.func_145897_a(calcinator.getWorldObj(), calcinator.xCoord, calcinator.yCoord + 1.0D, calcinator.zCoord);
+
+//        return entityitem != null && TileEntityHopper.insertStackFromEntity(calcinator, entityitem);
+        return entityitem != null && TileEntityHopper.func_145898_a(calcinator, entityitem);
     }
 
     /**
@@ -116,7 +123,7 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return this.hasCustomName() ? this.getCustomName() : Strings.CONTAINER_CALCINATOR_NAME;
     }
@@ -174,13 +181,13 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
 
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
 
     }
@@ -191,11 +198,11 @@ public class TileCalcinator extends TileEE implements ISidedInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items");
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
             byte slotIndex = tagCompound.getByte("Slot");
             if (slotIndex >= 0 && slotIndex < inventory.length)
             {
@@ -234,7 +241,7 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     }
 
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return this.hasCustomName();
     }
@@ -326,7 +333,7 @@ public class TileCalcinator extends TileEE implements ISidedInventory
             {
                 if (suckItemsIntoCalcinator(this))
                 {
-                    onInventoryChanged();
+                    markDirty();
                 }
                 itemSuckCoolDown = DEFAULT_ITEM_SUCK_COOL_DOWN;
             }
@@ -334,11 +341,11 @@ public class TileCalcinator extends TileEE implements ISidedInventory
 
         if (sendUpdate)
         {
-            this.onInventoryChanged();
+            this.markDirty();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, this.state);
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
             sendDustPileData();
-            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         }
     }
 
@@ -463,20 +470,12 @@ public class TileCalcinator extends TileEE implements ISidedInventory
         }
     }
 
-    /**
-     * Sucks one item into the given hopper from an inventory or EntityItem above it.
-     */
-    public static boolean suckItemsIntoCalcinator(TileCalcinator calcinator)
-    {
-        EntityItem entityitem = TileEntityHopper.getEntityAbove(calcinator.getWorldObj(), calcinator.xCoord, calcinator.yCoord + 1.0D, calcinator.zCoord);
-
-        return entityitem != null && TileEntityHopper.insertStackFromEntity(calcinator, entityitem);
-    }
-
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, (byte) getLeftStackSize(), (byte) getLeftStackMeta(), (byte) getRightStackSize(), (byte) getRightStackMeta()));
+//        return PacketTypeHandler.populatePacket(new PacketTileCalcinator(xCoord, yCoord, zCoord, orientation, state, customName, (byte) getLeftStackSize(), (byte) getLeftStackMeta(), (byte) getRightStackSize(), (byte) getRightStackMeta()));
+        // FIXME
+        return null;
     }
 
     private int getLeftStackSize()
@@ -523,10 +522,10 @@ public class TileCalcinator extends TileEE implements ISidedInventory
     {
         if (this.getBlockType() != null)
         {
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 2, getLeftStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 3, getLeftStackMeta());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 4, getRightStackSize());
-            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 5, getRightStackMeta());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 2, getLeftStackSize());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 3, getLeftStackMeta());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 4, getRightStackSize());
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 5, getRightStackMeta());
         }
     }
 

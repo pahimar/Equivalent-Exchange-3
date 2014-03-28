@@ -6,9 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public class TileAlchemySquare extends TileEE implements IInventory
 {
-    private ItemStack[] inventory;
-
     public static final int INVENTORY_SIZE = 8;
+    private ItemStack[] inventory;
 
     public TileAlchemySquare()
     {
@@ -76,7 +75,7 @@ public class TileAlchemySquare extends TileEE implements IInventory
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return null;
     }
@@ -86,7 +85,7 @@ public class TileAlchemySquare extends TileEE implements IInventory
      * language. Otherwise it will be used directly.
      */
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
         return false;
     }
@@ -113,13 +112,13 @@ public class TileAlchemySquare extends TileEE implements IInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
         // NOOP
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
         // NOOP
     }

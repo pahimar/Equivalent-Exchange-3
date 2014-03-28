@@ -35,11 +35,11 @@ public class StackValueMapping implements JsonSerializer<StackValueMapping>, Jso
         }
         catch (JsonSyntaxException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
         catch (JsonParseException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
 
         return null;

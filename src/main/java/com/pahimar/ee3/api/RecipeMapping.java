@@ -36,7 +36,7 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
             }
             else
             {
-                LogHelper.warning(String.format("RecipeMapping with output: %s is containing a null WrappedStack " +
+                LogHelper.warn(String.format("RecipeMapping with output: %s is containing a null WrappedStack " +
                         "input that will not be added to the input list.", outputWrappedStack.toString()));
             }
         }
@@ -52,11 +52,11 @@ public class RecipeMapping implements JsonSerializer<RecipeMapping>, JsonDeseria
         }
         catch (JsonSyntaxException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
         catch (JsonParseException exception)
         {
-            LogHelper.severe(exception.getMessage());
+            LogHelper.error(exception.getMessage());
         }
 
         return null;

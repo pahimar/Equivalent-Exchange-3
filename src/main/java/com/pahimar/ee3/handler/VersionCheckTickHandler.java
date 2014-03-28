@@ -5,9 +5,6 @@ import com.pahimar.ee3.configuration.GeneralConfiguration;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.lib.Reference;
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
-import net.minecraftforge.common.Configuration;
 
 import java.util.EnumSet;
 
