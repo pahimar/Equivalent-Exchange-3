@@ -3,6 +3,8 @@ package com.pahimar.ee3.client.handler;
 import com.pahimar.ee3.api.WrappedStack;
 import com.pahimar.ee3.emc.EmcRegistry;
 import com.pahimar.ee3.emc.EmcValue;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -23,7 +25,7 @@ public class ItemTooltipEventHandler
     private static DecimalFormat emcDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     @SuppressWarnings("unused")
-    @ForgeSubscribe(priority = EventPriority.LOWEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))

@@ -1,0 +1,17 @@
+{
+"chargeDown": {"category": "master","sounds": [{"name": "chargeDown","stream": false}]},
+"chargeUp": {"category": "master","sounds": [{"name": "chargeUp","stream": false}]},
+"destruct": {"category": "master","sounds": [{"name": "destruct","stream": false}]},
+"fail": {"category": "master","sounds": [{"name": "fail","stream": false}]},
+"gust": {"category": "master","sounds": [{"name": "gust","stream": false}]},
+"heal": {"category": "master","sounds": [{"name": "heal","stream": false}]},
+"kinesis": {"category": "master","sounds": [{"name": "kinesis","stream": false}]},
+"launch": {"category": "master","sounds": [{"name": "launch","stream": false}]},
+"nova": {"category": "master","sounds": [{"name": "nova","stream": false}]},
+"philball": {"category": "master","sounds": [{"name": "philball","stream": false}]},
+"tock": {"category": "master","sounds": [{"name": "tock","stream": false}]},
+"transmute": {"category": "master","sounds": [{"name": "transmute","stream": false}]},
+"wall": {"category": "master","sounds": [{"name": "wall","stream": false}]},
+"waterball": {"category": "master","sounds": [{"name": "waterball","stream": false}]},
+"wind": {"category": "master","sounds": [{"name": "wind","stream": false}]}
+}

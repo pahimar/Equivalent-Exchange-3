@@ -1,5 +1,6 @@
 package com.pahimar.ee3.handler;
 
+import com.google.common.eventbus.Subscribe;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.event.ActionEvent;
 import com.pahimar.ee3.event.ActionEvent.ActionResult;
@@ -14,10 +15,13 @@ import com.pahimar.ee3.network.PacketTypeHandler;
 import com.pahimar.ee3.network.packet.PacketItemUpdate;
 import com.pahimar.ee3.network.packet.PacketSoundEvent;
 import com.pahimar.ee3.network.packet.PacketSpawnParticle;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Equivalent-Exchange-3
@@ -108,7 +112,7 @@ public class WorldTransmutationHandler
                         actionRequestEvent = new ActionRequestEvent(thePlayer, actionEvent, originX + x, originY + y, originZ + z, sideHit);
                         MinecraftForge.EVENT_BUS.post(actionRequestEvent);
 
-                        if (actionRequestEvent.allowEvent != Result.DENY)
+                        if (actionRequestEvent.allowEvent != Event.Result.DENY)
                         {
                             MinecraftForge.EVENT_BUS.post(actionEvent);
                         }
@@ -147,7 +151,7 @@ public class WorldTransmutationHandler
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onWorldTransmutationEvent(WorldTransmutationEvent event)
     {
 

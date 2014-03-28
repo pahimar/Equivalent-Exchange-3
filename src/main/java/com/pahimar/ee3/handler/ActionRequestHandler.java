@@ -1,6 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.event.ActionRequestEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Equivalent-Exchange-3
@@ -11,8 +12,7 @@ import com.pahimar.ee3.event.ActionRequestEvent;
  */
 public class ActionRequestHandler
 {
-
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onModActionEvent(ActionRequestEvent event)
     {
 
