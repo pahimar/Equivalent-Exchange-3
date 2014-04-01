@@ -7,7 +7,7 @@ public class ItemChalk extends ItemEE
     public ItemChalk()
     {
         super();
-        this.maxStackSize = 64;
+        this.setMaxStackSize(64);
         this.setUnlocalizedName(Names.Items.CHALK);
     }
 }

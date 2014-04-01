@@ -18,7 +18,7 @@ public class ItemAlchemicalDust extends ItemEE
     public ItemAlchemicalDust()
     {
         super();
-        this.maxStackSize = 64;
+        this.setMaxStackSize(64);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(Names.Items.ALCHEMICAL_DUST);
     }
@@ -29,7 +29,7 @@ public class ItemAlchemicalDust extends ItemEE
 
         for (int meta = 0; meta < Names.Items.ALCHEMICAL_DUST_SUBTYPES.length; meta++)
         {
-            alchemicalDustStacks.add(new ItemStack(ModItems.itemAlchemicalDust, 1, meta));
+            alchemicalDustStacks.add(new ItemStack(ModItems.alchemicalDust, 1, meta));
         }
 
         return alchemicalDustStacks;

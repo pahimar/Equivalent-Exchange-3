@@ -7,11 +7,18 @@ public class Names
         public static final String ALCHEMICAL_BAG = "alchemicalBag";
         public static final String ALCHEMICAL_DUST = "alchemicalDust";
         public static final String[] ALCHEMICAL_DUST_SUBTYPES = {"ash", "verdant", "azure", "minium"};
-        public static final String ALCHEMICAL_COAL_NAME = "alchemicalCoal";
-        public static final String MOBIUS_FUEL_NAME = "mobiusFuel";
-        public static final String AETERNALIS_FUEL_NAME = "aeternalisFuel";
-        public static final String[] ALCHEMICAL_FUEL_SUBTYPES = {ALCHEMICAL_COAL_NAME, MOBIUS_FUEL_NAME, AETERNALIS_FUEL_NAME};
+        public static final String ALCHEMICAL_FUEL = "alchemicalFuel";
+        public static final String ALCHEMICAL_COAL = "alchemicalCoal";
+        public static final String MOBIUS_FUEL = "mobiusFuel";
+        public static final String AETERNALIS_FUEL = "aeternalisFuel";
+        public static final String[] ALCHEMICAL_FUEL_SUBTYPES = {ALCHEMICAL_COAL, MOBIUS_FUEL, AETERNALIS_FUEL};
         public static final String CHALK = "chalk";
+        public static final String INERT_STONE = "stoneInert";
+        public static final String MINIUM_SHARD = "shardMinium";
+        public static final String MINIUM_STONE = "stoneMinium";
+        public static final String PHILOSOPHERS_STONE = "stonePhilosophers";
+        public static final String ALCHEMICAL_UPGRADE = "alchemicalUpgrade";
+        public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
     }
 
     public static class NBT
