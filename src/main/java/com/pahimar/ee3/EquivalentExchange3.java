@@ -41,11 +41,11 @@ public class EquivalentExchange3
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        // Initialize mod blocks
-        ModBlocks.init();
-
         // Initialize mod items
         ModItems.init();
+
+        // Initialize mod blocks
+        ModBlocks.init();
     }
 
     @EventHandler

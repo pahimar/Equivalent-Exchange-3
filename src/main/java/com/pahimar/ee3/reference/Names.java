@@ -2,6 +2,13 @@ package com.pahimar.ee3.reference;
 
 public class Names
 {
+    public static class Blocks
+    {
+        public static final String INFUSED_CLOTH = "infusedCloth";
+        public static final String INFUSED_WOOD = "infusedWood";
+        public static final String INFUSED_PLANK = "infusedPlank";
+    }
+
     public static class Items
     {
         public static final String ALCHEMICAL_BAG = "alchemicalBag";
@@ -19,6 +26,7 @@ public class Names
         public static final String PHILOSOPHERS_STONE = "stonePhilosophers";
         public static final String ALCHEMICAL_UPGRADE = "alchemicalUpgrade";
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
+        public static final String DIVINING_ROD = "diviningRod";
     }
 
     public static class NBT
@@ -35,5 +43,6 @@ public class Names
         public static final String STATE = "teState";
         public static final String CUSTOM_NAME = "CustomName";
         public static final String DIRECTION = "teDirection";
+        public static final String OWNER = "owner";
     }
 }
