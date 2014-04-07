@@ -22,7 +22,7 @@ group = "com.pahimar.ee3" // http://maven.apache.org/guides/mini/guide-naming-co
 archivesBaseName = "EquivalentExchange3"
 
 minecraft {
-    version = "1.7.2-10.12.0.1057"
+    version = "1.7.2-10.12.0.1056"
     assetDir = "eclipse/assets"
 }
 processResources
