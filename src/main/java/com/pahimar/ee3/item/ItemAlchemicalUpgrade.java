@@ -84,9 +84,9 @@ public class ItemAlchemicalUpgrade extends ItemEE
         }
 
         TileEntity tile = world.getBlockTileEntity(x, y, z);
-        if (canUpgrade(itemStack, tile))
+        if (tile instanceof TileEntityChest)
         {
-            if (tile instanceof TileEntityChest)
+            if (itemStack.getItemDamage() >= 0)
             {
                 TileEntityChest chest = (TileEntityChest) tile;
 
@@ -121,55 +121,14 @@ public class ItemAlchemicalUpgrade extends ItemEE
                 itemStack.stackSize--;
                 return true;
             }
-            else if (tile instanceof TileAlchemicalChest)
+        }
+        else if (tile instanceof TileAlchemicalChest)
+        {
+            boolean succeeded = ((TileAlchemicalChest) tile).upgradeChest(itemStack.getItemDamage());
+            if (succeeded)
             {
-                TileAlchemicalChest chest = (TileAlchemicalChest) tile;
-
-                //If players are using this chest, don't upgrade
-                if (chest.numUsingPlayers > 0)
-                {
-                    return false;
-                }
-
-                //Make the new Alchemical Chest TileEntity
-                TileAlchemicalChest newChest = (TileAlchemicalChest) ModBlocks.alchemicalChest.createTileEntity(world, itemStack.getItemDamage());
-
-                //Set the correct orientation
-                newChest.setOrientation(chest.getOrientation());
-
-                //Copy all the ItemStacks in our new chest and delete the ItemStacks in the old chest
-                for (int slot = 0; slot < chest.getSizeInventory(); slot++)
-                {
-                    newChest.setInventorySlotContents(slot, chest.getStackInSlot(slot));
-                    chest.setInventorySlotContents(slot, null);
-                }
-
-                //Set the block to air
-                world.setBlock(x, y, z, 0, 0, 3);
-                chest.updateContainingBlockInfo();
-
-                //Set our new block and TileEntity instead
-                world.setBlock(x, y, z, ModBlocks.alchemicalChest.blockID, itemStack.getItemDamage(), 3);
-                world.setBlockTileEntity(x, y, z, newChest);
-
                 itemStack.stackSize--;
                 return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean canUpgrade(ItemStack itemStack, TileEntity tile)
-    {
-        if (tile != null)
-        {
-            if (tile instanceof TileEntityChest)
-            {
-                return this.getDamage(itemStack) >= 0;
-            }
-            else if (tile instanceof TileAlchemicalChest)
-            {
-                return itemStack.getItemDamage() > tile.getBlockMetadata();
             }
         }
         return false;

@@ -73,4 +73,4 @@ version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the re
 
 # Tooltip localizations
 tooltip.ee3:infusedPrefix=Infused with
-tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
+tooltip.ee3:upgradesChests=Upgrades (Alchemical) Chests
