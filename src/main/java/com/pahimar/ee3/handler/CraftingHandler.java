@@ -16,6 +16,6 @@ public class CraftingHandler
     @SubscribeEvent
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event)
     {
-
+        // TODO Set owner on who crafted the item (make sure it's not a FakePlayer)
     }
 }

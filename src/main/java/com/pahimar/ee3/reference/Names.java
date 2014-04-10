@@ -7,6 +7,7 @@ public class Names
         public static final String INFUSED_CLOTH = "infusedCloth";
         public static final String INFUSED_WOOD = "infusedWood";
         public static final String INFUSED_PLANK = "infusedPlank";
+        public static final String ALCHEMICAL_CHEST = "alchemicalChest";
     }
 
     public static class Items
@@ -44,5 +45,12 @@ public class Names
         public static final String CUSTOM_NAME = "CustomName";
         public static final String DIRECTION = "teDirection";
         public static final String OWNER = "owner";
+    }
+
+    public static class Containers
+    {
+        public static final String CONTAINER_INVENTORY = "container.inventory";
+
+        public static final String ALCHEMICAL_CHEST = "container.ee3:" + Blocks.ALCHEMICAL_CHEST;
     }
 }

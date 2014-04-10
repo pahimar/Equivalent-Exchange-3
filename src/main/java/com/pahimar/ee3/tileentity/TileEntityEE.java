@@ -17,6 +17,7 @@ public class TileEntityEE extends TileEntity
         orientation = ForgeDirection.SOUTH;
         state = 0;
         customName = "";
+        owner = "";
     }
 
     public ForgeDirection getOrientation()
@@ -24,14 +25,14 @@ public class TileEntityEE extends TileEntity
         return orientation;
     }
 
-    public void setOrientation(int orientation)
-    {
-        this.orientation = ForgeDirection.getOrientation(orientation);
-    }
-
     public void setOrientation(ForgeDirection orientation)
     {
         this.orientation = orientation;
+    }
+
+    public void setOrientation(int orientation)
+    {
+        this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
     public short getState()

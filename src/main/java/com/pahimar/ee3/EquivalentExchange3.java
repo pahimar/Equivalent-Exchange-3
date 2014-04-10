@@ -54,6 +54,12 @@ public class EquivalentExchange3
         // Register the GUI Handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+        // Initialize mod tile entities
+        proxy.registerTileEntities();
+
+        // Initialize custom rendering and pre-load textures (Client only)
+        proxy.initRenderingAndTextures();
+
         // Register the Items Event Handler
         FMLCommonHandler.instance().bus().register(EventHandlers.itemEventHandler);
         MinecraftForge.EVENT_BUS.register(EventHandlers.itemEventHandler);

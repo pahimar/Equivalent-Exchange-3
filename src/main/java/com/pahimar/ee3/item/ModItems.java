@@ -1,7 +1,9 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemBlock;
 
 public class ModItems
 {
@@ -15,6 +17,7 @@ public class ModItems
     public static final ItemEE alchemicalInventoryUpgrade = new ItemAlchemicalInventoryUpgrade();
     public static final ItemEE chalk = new ItemChalk();
     public static final ItemEE diviningRod = new ItemDiviningRod();
+    public static final ItemBlock alchemicalChest = new ItemBlockAlchemicalChest(ModBlocks.alchemicalChest);
 
     public static void init()
     {
