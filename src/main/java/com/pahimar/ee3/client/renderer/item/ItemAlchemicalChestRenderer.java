@@ -2,11 +2,14 @@ package com.pahimar.ee3.client.renderer.item;
 
 import com.pahimar.ee3.reference.Textures;
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class ItemAlchemicalChestRenderer implements IItemRenderer
 {
     private final ModelChest modelChest;

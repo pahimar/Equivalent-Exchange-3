@@ -26,7 +26,7 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2)
+    public TileEntity createNewTileEntity(World world, int metaData)
     {
         return new TileCalcinator();
     }

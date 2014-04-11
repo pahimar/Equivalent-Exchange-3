@@ -33,7 +33,7 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1, int metaData)
+    public TileEntity createNewTileEntity(World world, int metaData)
     {
         if (metaData == 0)
         {
