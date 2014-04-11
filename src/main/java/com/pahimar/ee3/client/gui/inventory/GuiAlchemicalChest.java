@@ -41,7 +41,7 @@ public class GuiAlchemicalChest extends GuiContainer
         if (tileAlchemicalChest.getState() == 0 || tileAlchemicalChest.getState() == 1)
         {
             fontRendererObj.drawString(tileAlchemicalChest.hasCustomInventoryName() ? tileAlchemicalChest.getInventoryName() : StatCollector.translateToLocal(tileAlchemicalChest.getInventoryName()), 8, 6, 4210752);
-            fontRendererObj.drawString(StatCollector.translateToLocal(Names.Containers.CONTAINER_INVENTORY), 35, ySize - 95 + 2, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, 4210752);
         }
     }
 

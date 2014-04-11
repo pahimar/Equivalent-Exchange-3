@@ -8,6 +8,9 @@ public class Names
         public static final String INFUSED_WOOD = "infusedWood";
         public static final String INFUSED_PLANK = "infusedPlank";
         public static final String ALCHEMICAL_CHEST = "alchemicalChest";
+        public static final String ALUDEL = "aludel";
+        public static final String GLASS_BELL = "glassBell";
+        public static final String CALCINATOR = "calcinator";
     }
 
     public static class Items
@@ -49,8 +52,14 @@ public class Names
 
     public static class Containers
     {
-        public static final String CONTAINER_INVENTORY = "container.inventory";
-
+        public static final String VANILLA_INVENTORY = "container.inventory";
+        public static final String VANILLA_CRAFTING = "container.crafting";
+        public static final String ALCHEMICAL_BAG = "container.ee3:" + Items.ALCHEMICAL_BAG;
         public static final String ALCHEMICAL_CHEST = "container.ee3:" + Blocks.ALCHEMICAL_CHEST;
+        public static final String CALCINATOR_NAME = "container.ee3:" + Blocks.CALCINATOR;
+        public static final String ALUDEL_NAME = "container.ee3:" + Blocks.ALUDEL;
+
+        public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
+
     }
 }
