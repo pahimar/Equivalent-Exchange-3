@@ -1,35 +1,53 @@
 package com.pahimar.ee3;
 
+import java.io.File;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+
 import com.pahimar.ee3.addon.AddonHandler;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.command.CommandHandler;
 import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.creativetab.CreativeTabEE3;
-import com.pahimar.ee3.handler.*;
+import com.pahimar.ee3.handler.ActionRequestHandler;
+import com.pahimar.ee3.handler.CraftingHandler;
+import com.pahimar.ee3.handler.FuelHandler;
+import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.handler.ItemEventHandler;
+import com.pahimar.ee3.handler.VersionCheckTickHandler;
+import com.pahimar.ee3.handler.WorldEventHandler;
+import com.pahimar.ee3.handler.WorldTransmutationHandler;
 import com.pahimar.ee3.helper.FluidHelper;
 import com.pahimar.ee3.helper.LogHelper;
 import com.pahimar.ee3.helper.VersionHelper;
 import com.pahimar.ee3.imc.InterModCommsHandler;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.lib.Reference;
 import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
+import com.pahimar.ee3.recipe.RecipesAludel;
+
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-
-import java.io.File;
+import cpw.mods.ironchest.IronChest;
 
 /**
  * Equivalent-Exchange-3
@@ -67,7 +85,6 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void serverStarting(FMLServerStartingEvent event)
     {
         // Initialize the custom commands
@@ -75,7 +92,6 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void preInit(FMLPreInitializationEvent event)
     {
         // set version number
@@ -113,7 +129,6 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unchecked, unused")
     public void init(FMLInitializationEvent event)
     {
         // Register the GUI Handler
@@ -155,14 +170,16 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void postInit(FMLPostInitializationEvent event)
     {
-        // NOOP
+        // YEEP
+    	if(Loader.isModLoaded("IronChest")){
+    		LogHelper.info("Iron Chests detected - enabling additional Alchemical Chest recipes");
+    			RecipesAludel.retroaddRecipe(new RecipeAludel(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(IronChest.ironChestBlock.blockID, 1, 2), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1)));
+			}
     }
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void handleIMCMessages(IMCEvent event)
     {
         InterModCommsHandler.processIMCMessages(event);
