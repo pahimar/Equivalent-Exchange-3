@@ -47,7 +47,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.ironchest.IronChest;
 
 /**
  * Equivalent-Exchange-3
@@ -69,7 +68,6 @@ public class EquivalentExchange3
     public static CreativeTabs tabsEE3 = new CreativeTabEE3(CreativeTabs.getNextID());
 
     @EventHandler
-    @SuppressWarnings("unused")
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
         // Report (log) to the user that the version of Equivalent Exchange 3
@@ -144,8 +142,7 @@ public class EquivalentExchange3
         // Register the hook to initialize the EmcRegistry
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
-        // Register the ItemTooltipEvent Handler
-        proxy.registerItemTooltipHandler();
+        // Register the ItemTooltipEv        proxy.registerItemTooltipHandler();
 
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
@@ -155,6 +152,7 @@ public class EquivalentExchange3
 
         // Initialize our Crafting Handler
         CraftingHandler.init();
+
 
         // Handle fluid registration
         FluidHelper.registerFluids();
@@ -168,15 +166,22 @@ public class EquivalentExchange3
         // Initialize addons (which work with IMC, and must be used in Init)
         AddonHandler.init();
     }
-
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
         // YEEP
-    	if(Loader.isModLoaded("IronChest")){
-    		LogHelper.info("Iron Chests detected - enabling additional Alchemical Chest recipes");
-    			RecipesAludel.retroaddRecipe(new RecipeAludel(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(IronChest.ironChestBlock.blockID, 1, 2), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1)));
-			}
+    	if(Loader.isModLoaded("IronChest")){//If IronChests is present
+    		LogHelper.info("Iron Chests mod detected - enabling additional Alchemical Chest recipes");
+    			try {
+					int ironChestId = Class.forName("cpw.mods.ironchest.IronChest").getDeclaredField("ironChestBlock").getClass().getDeclaredField("blockID").getInt(instance);
+	    			RecipesAludel.retroaddRecipe(new RecipeAludel(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(ironChestId, 1, 2), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1)));
+	    			//I have no idea of the proportions that I inputted. -.-
+
+    			} catch (Exception e) {
+					// TODO Auto-generated catch block (Should never be thrown.
+					LogHelper.severe(e.getMessage());
+				}
+    	}
     }
 
     @EventHandler

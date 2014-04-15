@@ -1,20 +1,18 @@
 package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.OreStack;
-import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.helper.LogHelper;
-import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipeAludel;
+import java.util.ArrayList;
+import java.util.List;
 
-import cpw.mods.ironchest.IronChest;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import com.pahimar.ee3.api.OreStack;
+import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.helper.LogHelper;
+import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 
 public class RecipesAludel
 {
