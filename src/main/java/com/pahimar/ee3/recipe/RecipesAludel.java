@@ -150,8 +150,8 @@ public class RecipesAludel
     		LogHelper.severe("You cannot retroactively add aludel recipies before the aludel recipe registry is initiated!");
     		return false;
     	} else{
-    	aludelRegistry.addRecipe(recipe);
-    	return true;
+    	    aludelRegistry.addRecipe(recipe);
+    	    return true;
     	}
     }
 }
