@@ -169,19 +169,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        // YEEP
-    	if(Loader.isModLoaded("IronChest")){//If IronChests is present
-    		LogHelper.info("Iron Chests mod detected - enabling additional Alchemical Chest recipes");
-    			try {
-					int ironChestId = Class.forName("cpw.mods.ironchest.IronChest").getDeclaredField("ironChestBlock").getClass().getDeclaredField("blockID").getInt(instance);
-	    			RecipesAludel.retroaddRecipe(new RecipeAludel(new ItemStack(ModBlocks.alchemicalChest.blockID, 1, 2), new ItemStack(ironChestId, 1, 2), new ItemStack(ModItems.alchemicalDust.itemID, 1, 1)));
-	    			//I have no idea of the proportions that I inputted. -.-
-
-    			} catch (Exception e) {
-					// TODO Auto-generated catch block (Should never be thrown.
-					LogHelper.severe(e.getMessage());
-				}
-    	}
+    	//TODO IronChest integration, when I fix my buildspace
     }
 
     @EventHandler
