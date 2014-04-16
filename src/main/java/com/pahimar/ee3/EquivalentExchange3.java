@@ -142,7 +142,8 @@ public class EquivalentExchange3
         // Register the hook to initialize the EmcRegistry
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
-        // Register the ItemTooltipEv        proxy.registerItemTooltipHandler();
+        // Register the ItemTooltipEv        
+        proxy.registerItemTooltipHandler();
 
         // Register the DrawBlockHighlight Handler
         proxy.registerDrawBlockHighlightHandler();
@@ -152,7 +153,6 @@ public class EquivalentExchange3
 
         // Initialize our Crafting Handler
         CraftingHandler.init();
-
 
         // Handle fluid registration
         FluidHelper.registerFluids();
