@@ -142,7 +142,7 @@ public class EquivalentExchange3
         // Register the hook to initialize the EmcRegistry
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 
-        // Register the ItemTooltipEv        
+        // Register the ItemTooltipEvent Handler 
         proxy.registerItemTooltipHandler();
 
         // Register the DrawBlockHighlight Handler
