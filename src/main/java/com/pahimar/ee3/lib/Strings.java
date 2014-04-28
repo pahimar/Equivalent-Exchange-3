@@ -27,7 +27,7 @@ public class Strings
 
     // Tooltip related localiation keys
     public static final String TOOLTIP_INFUSED_WITH = "tooltip.ee3:infusedPrefix";
-    public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
+    public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesChests";
 
     /* NBT related constants */
     public static final String NBT_ITEM_CHARGE_LEVEL_KEY = "itemChargeLevel";

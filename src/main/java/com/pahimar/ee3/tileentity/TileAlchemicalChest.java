@@ -237,6 +237,38 @@ public class TileAlchemicalChest extends TileEE implements IInventory
         }
     }
 
+    public boolean upgradeChest(int upgradeMetadata)
+    {
+        if (upgradeMetadata > getBlockMetadata())
+        {
+            //If players are using this chest, don't upgrade
+            if (numUsingPlayers > 0)
+            {
+                return false;
+            }
+
+            //Make the new Alchemical Chest TileEntity
+            TileAlchemicalChest newChest = (TileAlchemicalChest) ModBlocks.alchemicalChest.createTileEntity(worldObj, upgradeMetadata);
+
+            //Set the correct orientation
+            newChest.setOrientation(getOrientation());
+
+            //Copy all the ItemStacks in our new chest and delete the ItemStacks in the old chest
+            for (int slot = 0; slot < getSizeInventory(); slot++)
+            {
+                newChest.setInventorySlotContents(slot, getStackInSlot(slot));
+                setInventorySlotContents(slot, null);
+            }
+
+            //Set our new metadata and TileEntity instead
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, upgradeMetadata, 3);
+            worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, newChest);
+
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
