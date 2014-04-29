@@ -3,10 +3,13 @@ package com.pahimar.ee3;
 import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.item.EquivalencyStack;
 import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.reference.EventHandlers;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,6 +18,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = "0.2")
@@ -46,6 +50,8 @@ public class EquivalentExchange3
 
         // Initialize mod blocks
         ModBlocks.init();
+
+        PacketHandler.init();
     }
 
     @EventHandler
@@ -70,7 +76,12 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        EquivalencyStack equivalencyStack = new EquivalencyStack(Items.beef);
 
+        for (Object object : equivalencyStack.getEquivalentStacks())
+        {
+            LogHelper.info(object);
+        }
     }
 
     @EventHandler

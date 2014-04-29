@@ -8,7 +8,7 @@ public class LogHelper
 {
     public static void log(Level logLevel, Object object)
     {
-        FMLLog.log(Reference.MOD_NAME, logLevel, String.valueOf(object));
+        FMLLog.log(Reference.MOD_NAME, logLevel, "[EE3] " + String.valueOf(object));
     }
 
     public static void all(Object object)
