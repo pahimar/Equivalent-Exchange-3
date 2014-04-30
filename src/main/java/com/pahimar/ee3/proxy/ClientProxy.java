@@ -1,8 +1,8 @@
 package com.pahimar.ee3.proxy;
 
-import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.client.renderer.item.*;
 import com.pahimar.ee3.client.renderer.tileentity.*;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;

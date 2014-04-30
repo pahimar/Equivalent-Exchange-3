@@ -33,9 +33,6 @@ tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station [WIP]
-tile.ee3:infusedCloth.name=Infused Cloth
-tile.ee3:infusedWood.name=Infused Wood
-tile.ee3:infusedPlank.name=Infused Wood Planks
 
 # GUI localizations
 container.ee3:alchemicalBag=Alchemical Bag
@@ -72,5 +69,4 @@ version.ee3:final_error=Version check stopping after three unsuccessful connecti
 version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
 
 # Tooltip localizations
-tooltip.ee3:infusedPrefix=Infused with
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
