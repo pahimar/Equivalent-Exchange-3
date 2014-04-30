@@ -1,6 +1,7 @@
 package com.pahimar.ee3;
 
 import com.pahimar.ee3.handler.CraftingHandler;
+import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -71,6 +73,9 @@ public class EquivalentExchange3
         MinecraftForge.EVENT_BUS.register(EventHandlers.itemEventHandler);
 
         CraftingHandler.init();
+
+        // Register our fuels
+        GameRegistry.registerFuelHandler(new FuelHandler());
     }
 
     @EventHandler

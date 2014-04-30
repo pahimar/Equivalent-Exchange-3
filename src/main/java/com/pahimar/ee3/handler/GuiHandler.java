@@ -1,9 +1,12 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
 import com.pahimar.ee3.client.gui.inventory.GuiGlassBell;
+import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.inventory.ContainerGlassBell;
+import com.pahimar.ee3.inventory.InventoryAlchemicalBag;
 import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
@@ -26,6 +29,10 @@ public class GuiHandler implements IGuiHandler
             TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) world.getTileEntity(x, y, z);
             return new ContainerGlassBell(player.inventory, tileEntityGlassBell);
         }
+        else if (id == GuiIds.ALCHEMICAL_BAG)
+        {
+            return new ContainerAlchemicalBag(player, new InventoryAlchemicalBag(player.getHeldItem()));
+        }
 
         return null;
     }
@@ -42,6 +49,10 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) world.getTileEntity(x, y, z);
             return new GuiGlassBell(player.inventory, tileEntityGlassBell);
+        }
+        else if (id == GuiIds.ALCHEMICAL_BAG)
+        {
+            return new GuiAlchemicalBag(player, new InventoryAlchemicalBag(player.getHeldItem()));
         }
 
         return null;
