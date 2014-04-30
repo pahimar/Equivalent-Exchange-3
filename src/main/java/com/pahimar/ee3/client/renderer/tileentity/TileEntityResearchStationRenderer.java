@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.renderer.model.ModelResearchStation;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileResearchStation;
+import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -17,7 +17,7 @@ public class TileEntityResearchStationRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileResearchStation)
+        if (tileEntity instanceof TileEntityResearchStation)
         {
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);

@@ -2,8 +2,9 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.renderer.model.ModelAludel;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileAludel;
-import com.pahimar.ee3.tileentity.TileGlassBell;
+import com.pahimar.ee3.tileentity.TileEntityAludel;
+import com.pahimar.ee3.tileentity.TileEntityGlassBell;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -39,15 +40,15 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileAludel)
+        if (tileEntity instanceof TileEntityAludel)
         {
-            TileAludel tileAludel = (TileAludel) tileEntity;
+            TileEntityAludel tileEntityAludel = (TileEntityAludel) tileEntity;
 
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
 
             // Scale, Translate, Rotate
-            scaleTranslateRotate(x, y, z, tileAludel.getOrientation());
+            scaleTranslateRotate(x, y, z, tileEntityAludel.getOrientation());
 
             // Bind texture
             this.bindTexture(Textures.MODEL_ALUDEL);
@@ -62,18 +63,18 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
              */
             GL11.glPushMatrix();
 
-            TileEntity tileGlassBell = tileAludel.getWorldObj().getTileEntity(tileAludel.xCoord, tileAludel.yCoord + 1, tileAludel.zCoord);
+            TileEntity tileGlassBell = tileEntityAludel.getWorldObj().getTileEntity(tileEntityAludel.xCoord, tileEntityAludel.yCoord + 1, tileEntityAludel.zCoord);
 
-            if (tileGlassBell instanceof TileGlassBell)
+            if (tileGlassBell instanceof TileEntityGlassBell)
             {
-                if (tileAludel.outputItemStack != null)
+                if (tileEntityAludel.outputItemStack != null)
                 {
-                    float scaleFactor = getGhostItemScaleFactor(tileAludel.outputItemStack);
+                    float scaleFactor = getGhostItemScaleFactor(tileEntityAludel.outputItemStack);
                     float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                    EntityItem ghostEntityItem = new EntityItem(tileAludel.getWorldObj());
+                    EntityItem ghostEntityItem = new EntityItem(tileEntityAludel.getWorldObj());
                     ghostEntityItem.hoverStart = 0.0F;
-                    ghostEntityItem.setEntityItemStack(tileAludel.outputItemStack);
+                    ghostEntityItem.setEntityItemStack(tileEntityAludel.outputItemStack);
 
                     GL11.glTranslatef((float) x + 0.5F, (float) y + 1.25F, (float) z + 0.5F);
                     GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
@@ -91,6 +92,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 
     private void scaleTranslateRotate(double x, double y, double z, ForgeDirection orientation)
     {
+        LogHelper.info(orientation);
         if (orientation == ForgeDirection.NORTH)
         {
             GL11.glTranslated(x + 1, y, z);

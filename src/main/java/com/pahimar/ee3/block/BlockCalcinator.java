@@ -5,7 +5,7 @@ import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileEntityCalcinator;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(World world, int metaData)
     {
-        return new TileCalcinator();
+        return new TileEntityCalcinator();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        if ((world.getTileEntity(x, y, z) instanceof TileCalcinator) && (((TileCalcinator) world.getTileEntity(x, y, z)).getState() == 1))
+        if ((world.getTileEntity(x, y, z) instanceof TileEntityCalcinator) && (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1))
         {
             return 15;
         }
@@ -79,7 +79,7 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
         {
             if (!world.isRemote)
             {
-                if (world.getTileEntity(x, y, z) instanceof TileCalcinator)
+                if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
                 {
                     player.openGui(EquivalentExchange3.instance, GuiIds.CALCINATOR, world, x, y, z);
                 }
@@ -92,9 +92,9 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileCalcinator)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
         {
-            if (((TileCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
+            if (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
             {
                 // Fire pot particles
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);

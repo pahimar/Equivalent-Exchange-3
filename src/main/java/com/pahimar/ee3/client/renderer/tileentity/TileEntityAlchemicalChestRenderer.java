@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelChest;
@@ -19,25 +19,25 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileAlchemicalChest)
+        if (tileEntity instanceof TileEntityAlchemicalChest)
         {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) tileEntity;
+            TileEntityAlchemicalChest tileEntityAlchemicalChest = (TileEntityAlchemicalChest) tileEntity;
             ForgeDirection direction = null;
 
-            if (tileAlchemicalChest.getWorldObj() != null)
+            if (tileEntityAlchemicalChest.getWorldObj() != null)
             {
-                direction = tileAlchemicalChest.getOrientation();
+                direction = tileEntityAlchemicalChest.getOrientation();
             }
 
-            if (tileAlchemicalChest.getState() == 0)
+            if (tileEntityAlchemicalChest.getState() == 0)
             {
                 this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_SMALL);
             }
-            else if (tileAlchemicalChest.getState() == 1)
+            else if (tileEntityAlchemicalChest.getState() == 1)
             {
                 this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_MEDIUM);
             }
-            else if (tileAlchemicalChest.getState() == 2)
+            else if (tileEntityAlchemicalChest.getState() == 2)
             {
                 this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
             }
@@ -72,7 +72,7 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 
             GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
             GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-            float adjustedLidAngle = tileAlchemicalChest.prevLidAngle + (tileAlchemicalChest.lidAngle - tileAlchemicalChest.prevLidAngle) * tick;
+            float adjustedLidAngle = tileEntityAlchemicalChest.prevLidAngle + (tileEntityAlchemicalChest.lidAngle - tileEntityAlchemicalChest.prevLidAngle) * tick;
             adjustedLidAngle = 1.0F - adjustedLidAngle;
             adjustedLidAngle = 1.0F - adjustedLidAngle * adjustedLidAngle * adjustedLidAngle;
             modelChest.chestLid.rotateAngleX = -(adjustedLidAngle * (float) Math.PI / 2.0F);

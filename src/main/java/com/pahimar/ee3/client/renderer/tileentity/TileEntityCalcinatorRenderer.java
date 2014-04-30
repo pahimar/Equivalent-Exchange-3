@@ -4,7 +4,7 @@ import com.pahimar.ee3.client.renderer.model.ModelCalcinator;
 import com.pahimar.ee3.client.util.ColorUtils;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileEntityCalcinator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -50,9 +50,9 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileCalcinator)
+        if (tileEntity instanceof TileEntityCalcinator)
         {
-            TileCalcinator tileCalcinator = (TileCalcinator) tileEntity;
+            TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) tileEntity;
 
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
@@ -64,7 +64,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             GL11.glRotatef(-90F, 1F, 0F, 0F);
 
             // Bind texture
-            if (tileCalcinator.getState() == 1)
+            if (tileEntityCalcinator.getState() == 1)
             {
                 this.bindTexture(Textures.MODEL_CALCINATOR_ACTIVE);
             }
@@ -76,7 +76,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             // Render
             modelCalcinator.renderPart("Calcinator");
 
-            int dustStackSize = tileCalcinator.leftStackSize + tileCalcinator.rightStackSize;
+            int dustStackSize = tileEntityCalcinator.leftStackSize + tileEntityCalcinator.rightStackSize;
 
             if (dustStackSize > 0)
             {
@@ -86,7 +86,7 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(-45F, 0F, 1F, 0F);
 
-                float[] dustColour = getBlendedDustColour(tileCalcinator.leftStackSize, tileCalcinator.leftStackMeta, tileCalcinator.rightStackSize, tileCalcinator.rightStackMeta);
+                float[] dustColour = getBlendedDustColour(tileEntityCalcinator.leftStackSize, tileEntityCalcinator.leftStackMeta, tileEntityCalcinator.rightStackSize, tileEntityCalcinator.rightStackMeta);
 
                 GL11.glColor4f(dustColour[0], dustColour[1], dustColour[2], 1F);
 

@@ -1,10 +1,13 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageTileEntityAludel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
 
-public class TileAludel extends TileEntityEE implements ISidedInventory
+public class TileEntityAludel extends TileEntityEE implements ISidedInventory
 {
     public static final int INVENTORY_SIZE = 4;
     public static final int FUEL_INVENTORY_INDEX = 0;
@@ -21,7 +24,7 @@ public class TileAludel extends TileEntityEE implements ISidedInventory
      */
     private ItemStack[] inventory;
 
-    public TileAludel()
+    public TileEntityAludel()
     {
         inventory = new ItemStack[INVENTORY_SIZE];
     }
@@ -114,5 +117,11 @@ public class TileAludel extends TileEntityEE implements ISidedInventory
     public boolean isItemValidForSlot(int var1, ItemStack var2)
     {
         return false;
+    }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAludel(this, null));
     }
 }

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -24,26 +24,26 @@ public class ContainerAlchemicalChest extends Container
     // Player Inventory
     private final int PLAYER_INVENTORY_ROWS = 3;
     private final int PLAYER_INVENTORY_COLUMNS = 9;
-    private TileAlchemicalChest tileAlchemicalChest;
+    private TileEntityAlchemicalChest tileEntityAlchemicalChest;
     private int chestInventoryRows;
     private int chestInventoryColumns;
 
-    public ContainerAlchemicalChest(InventoryPlayer inventoryPlayer, TileAlchemicalChest tileAlchemicalChest)
+    public ContainerAlchemicalChest(InventoryPlayer inventoryPlayer, TileEntityAlchemicalChest tileEntityAlchemicalChest)
     {
-        this.tileAlchemicalChest = tileAlchemicalChest;
-        tileAlchemicalChest.openInventory();
+        this.tileEntityAlchemicalChest = tileEntityAlchemicalChest;
+        tileEntityAlchemicalChest.openInventory();
 
-        if (this.tileAlchemicalChest.getState() == 0)
+        if (this.tileEntityAlchemicalChest.getState() == 0)
         {
             chestInventoryRows = SMALL_CHEST_INVENTORY_ROWS;
             chestInventoryColumns = SMALL_CHEST_INVENTORY_COLUMNS;
         }
-        else if (this.tileAlchemicalChest.getState() == 1)
+        else if (this.tileEntityAlchemicalChest.getState() == 1)
         {
             chestInventoryRows = MEDIUM_CHEST_INVENTORY_ROWS;
             chestInventoryColumns = MEDIUM_CHEST_INVENTORY_COLUMNS;
         }
-        else if (this.tileAlchemicalChest.getState() == 2)
+        else if (this.tileEntityAlchemicalChest.getState() == 2)
         {
             chestInventoryRows = LARGE_CHEST_INVENTORY_ROWS;
             chestInventoryColumns = LARGE_CHEST_INVENTORY_COLUMNS;
@@ -54,17 +54,17 @@ public class ContainerAlchemicalChest extends Container
         {
             for (int chestColumnIndex = 0; chestColumnIndex < chestInventoryColumns; ++chestColumnIndex)
             {
-                if (this.tileAlchemicalChest.getState() == 0)
+                if (this.tileEntityAlchemicalChest.getState() == 0)
                 {
-                    this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
+                    this.addSlotToContainer(new Slot(tileEntityAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
                 }
-                else if (this.tileAlchemicalChest.getState() == 1)
+                else if (this.tileEntityAlchemicalChest.getState() == 1)
                 {
-                    this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
+                    this.addSlotToContainer(new Slot(tileEntityAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 18 + chestRowIndex * 18));
                 }
-                else if (this.tileAlchemicalChest.getState() == 2)
+                else if (this.tileEntityAlchemicalChest.getState() == 2)
                 {
-                    this.addSlotToContainer(new Slot(tileAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 8 + chestRowIndex * 18));
+                    this.addSlotToContainer(new Slot(tileEntityAlchemicalChest, chestColumnIndex + chestRowIndex * chestInventoryColumns, 8 + chestColumnIndex * 18, 8 + chestRowIndex * 18));
                 }
             }
         }
@@ -74,15 +74,15 @@ public class ContainerAlchemicalChest extends Container
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
-                if (this.tileAlchemicalChest.getState() == 0)
+                if (this.tileEntityAlchemicalChest.getState() == 0)
                 {
                     this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 104 + inventoryRowIndex * 18));
                 }
-                else if (this.tileAlchemicalChest.getState() == 1)
+                else if (this.tileEntityAlchemicalChest.getState() == 1)
                 {
                     this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 158 + inventoryRowIndex * 18));
                 }
-                else if (this.tileAlchemicalChest.getState() == 2)
+                else if (this.tileEntityAlchemicalChest.getState() == 2)
                 {
                     this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 44 + inventoryColumnIndex * 18, 174 + inventoryRowIndex * 18));
                 }
@@ -92,15 +92,15 @@ public class ContainerAlchemicalChest extends Container
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
-            if (this.tileAlchemicalChest.getState() == 0)
+            if (this.tileEntityAlchemicalChest.getState() == 0)
             {
                 this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
             }
-            else if (this.tileAlchemicalChest.getState() == 1)
+            else if (this.tileEntityAlchemicalChest.getState() == 1)
             {
                 this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
             }
-            else if (this.tileAlchemicalChest.getState() == 2)
+            else if (this.tileEntityAlchemicalChest.getState() == 2)
             {
                 this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
             }
@@ -120,7 +120,7 @@ public class ContainerAlchemicalChest extends Container
     public void onContainerClosed(EntityPlayer entityPlayer)
     {
         super.onContainerClosed(entityPlayer);
-        tileAlchemicalChest.closeInventory();
+        tileEntityAlchemicalChest.closeInventory();
     }
 
     @Override

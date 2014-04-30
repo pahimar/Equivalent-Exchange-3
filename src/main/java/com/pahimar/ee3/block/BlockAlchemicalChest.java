@@ -4,10 +4,10 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
-import com.pahimar.ee3.tileentity.TileAlchemicalChestLarge;
-import com.pahimar.ee3.tileentity.TileAlchemicalChestMedium;
-import com.pahimar.ee3.tileentity.TileAlchemicalChestSmall;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestLarge;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestMedium;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestSmall;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.ITileEntityProvider;
@@ -37,15 +37,15 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     {
         if (metaData == 0)
         {
-            return new TileAlchemicalChestSmall();
+            return new TileEntityAlchemicalChestSmall();
         }
         else if (metaData == 1)
         {
-            return new TileAlchemicalChestMedium();
+            return new TileEntityAlchemicalChestMedium();
         }
         else if (metaData == 2)
         {
-            return new TileAlchemicalChestLarge();
+            return new TileEntityAlchemicalChestLarge();
         }
 
         return null;
@@ -84,7 +84,7 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
         }
         else
         {
-            if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileAlchemicalChest)
+            if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemicalChest)
             {
                 player.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_CHEST, world, x, y, z);
             }

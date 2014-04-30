@@ -1,16 +1,13 @@
 package com.pahimar.ee3.network;
 
-import com.pahimar.ee3.network.message.MessageTileEntity;
+import com.pahimar.ee3.network.message.MessageTileCalcinator;
+import com.pahimar.ee3.network.message.MessageTileEntityAludel;
+import com.pahimar.ee3.network.message.MessageTileEntityEE;
+import com.pahimar.ee3.network.message.MessageTileEntityGlassBell;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.tileentity.TileEntityEE;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.tileentity.TileEntity;
 
 public class PacketHandler
 {
@@ -18,23 +15,9 @@ public class PacketHandler
 
     public static void init()
     {
-        INSTANCE.registerMessage(TileEntityUpdateHandler.class, MessageTileEntity.class, 0, Side.CLIENT);
-    }
-
-    public class TileEntityUpdateHandler implements IMessageHandler<MessageTileEntity, IMessage>
-    {
-        @Override
-        public IMessage onMessage(MessageTileEntity message, MessageContext ctx)
-        {
-            TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
-
-            if (tileEntity instanceof TileEntityEE)
-            {
-                ((TileEntityEE) tileEntity).setOrientation(message.orientation);
-                ((TileEntityEE) tileEntity).setState(message.state);
-            }
-
-            return null;
-        }
+        INSTANCE.registerMessage(MessageTileEntityEE.class, MessageTileEntityEE.class, 0, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileCalcinator.class, MessageTileCalcinator.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityAludel.class, MessageTileEntityAludel.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityGlassBell.class, MessageTileEntityGlassBell.class, 3, Side.CLIENT);
     }
 }

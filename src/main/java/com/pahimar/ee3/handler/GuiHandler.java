@@ -1,9 +1,12 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
+import com.pahimar.ee3.client.gui.inventory.GuiGlassBell;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
+import com.pahimar.ee3.inventory.ContainerGlassBell;
 import com.pahimar.ee3.reference.GuiIds;
-import com.pahimar.ee3.tileentity.TileAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -15,8 +18,13 @@ public class GuiHandler implements IGuiHandler
     {
         if (id == GuiIds.ALCHEMICAL_CHEST)
         {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getTileEntity(x, y, z);
-            return new ContainerAlchemicalChest(player.inventory, tileAlchemicalChest);
+            TileEntityAlchemicalChest tileEntityAlchemicalChest = (TileEntityAlchemicalChest) world.getTileEntity(x, y, z);
+            return new ContainerAlchemicalChest(player.inventory, tileEntityAlchemicalChest);
+        }
+        else if (id == GuiIds.GLASS_BELL)
+        {
+            TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) world.getTileEntity(x, y, z);
+            return new ContainerGlassBell(player.inventory, tileEntityGlassBell);
         }
 
         return null;
@@ -27,8 +35,13 @@ public class GuiHandler implements IGuiHandler
     {
         if (id == GuiIds.ALCHEMICAL_CHEST)
         {
-            TileAlchemicalChest tileAlchemicalChest = (TileAlchemicalChest) world.getTileEntity(x, y, z);
-            return new GuiAlchemicalChest(player.inventory, tileAlchemicalChest);
+            TileEntityAlchemicalChest tileEntityAlchemicalChest = (TileEntityAlchemicalChest) world.getTileEntity(x, y, z);
+            return new GuiAlchemicalChest(player.inventory, tileEntityAlchemicalChest);
+        }
+        else if (id == GuiIds.GLASS_BELL)
+        {
+            TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) world.getTileEntity(x, y, z);
+            return new GuiGlassBell(player.inventory, tileEntityGlassBell);
         }
 
         return null;

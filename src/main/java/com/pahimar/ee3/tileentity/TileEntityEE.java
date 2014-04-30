@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.network.PacketHandler;
-import com.pahimar.ee3.network.message.MessageTileEntity;
+import com.pahimar.ee3.network.message.MessageTileEntityEE;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
@@ -28,14 +28,14 @@ public class TileEntityEE extends TileEntity
         return orientation;
     }
 
-    public void setOrientation(int orientation)
-    {
-        this.orientation = ForgeDirection.getOrientation(orientation);
-    }
-
     public void setOrientation(ForgeDirection orientation)
     {
         this.orientation = orientation;
+    }
+
+    public void setOrientation(int orientation)
+    {
+        this.orientation = ForgeDirection.getOrientation(orientation);
     }
 
     public short getState()
@@ -126,6 +126,6 @@ public class TileEntityEE extends TileEntity
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntity(this));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityEE(this));
     }
 }

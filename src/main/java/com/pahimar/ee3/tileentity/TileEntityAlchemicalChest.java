@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileAlchemicalChest extends TileEntityEE implements IInventory
+public class TileEntityAlchemicalChest extends TileEntityEE implements IInventory
 {
     /**
      * The current angle of the chest lid (between 0 and 1)
@@ -37,7 +37,7 @@ public class TileAlchemicalChest extends TileEntityEE implements IInventory
      */
     private ItemStack[] inventory;
 
-    public TileAlchemicalChest(int metaData)
+    public TileEntityAlchemicalChest(int metaData)
     {
         super();
         this.state = (byte) metaData;
@@ -115,6 +115,7 @@ public class TileAlchemicalChest extends TileEntityEE implements IInventory
         {
             itemStack.stackSize = this.getInventoryStackLimit();
         }
+
 
         this.markDirty();
     }

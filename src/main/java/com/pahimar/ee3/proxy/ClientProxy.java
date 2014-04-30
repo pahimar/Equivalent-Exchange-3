@@ -27,10 +27,10 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.glassBell), new ItemGlassBellRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.researchStation), new ItemResearchStationRenderer());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileResearchStation.class, new TileEntityResearchStationRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCalcinator.class, new TileEntityCalcinatorRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAludel.class, new TileEntityAludelRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlassBell.class, new TileEntityGlassBellRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchStation.class, new TileEntityResearchStationRenderer());
     }
 }

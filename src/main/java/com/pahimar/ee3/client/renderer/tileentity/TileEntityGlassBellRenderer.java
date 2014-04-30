@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.renderer.model.ModelGlassBell;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileGlassBell;
+import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -39,9 +39,9 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        if (tileEntity instanceof TileGlassBell)
+        if (tileEntity instanceof TileEntityGlassBell)
         {
-            TileGlassBell tileGlassBell = (TileGlassBell) tileEntity;
+            TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) tileEntity;
 
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
@@ -52,7 +52,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
             GL11.glPushMatrix();
 
             // Scale, Translate, Rotate
-            renderGlassBellByOrientation(x, y, z, tileGlassBell.getOrientation());
+            renderGlassBellByOrientation(x, y, z, tileEntityGlassBell.getOrientation());
 
             // Bind texture
             this.bindTexture(Textures.MODEL_GLASS_BELL);
@@ -66,16 +66,17 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
              */
             GL11.glPushMatrix();
 
-            if (tileGlassBell.outputItemStack != null)
+            if (tileEntityGlassBell.outputItemStack != null)
             {
-                float scaleFactor = getGhostItemScaleFactor(tileGlassBell.outputItemStack);
+                // TODO Stop the ghost item rendering in the event that the client's game is paused
+                float scaleFactor = getGhostItemScaleFactor(tileEntityGlassBell.outputItemStack);
                 float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                EntityItem ghostEntityItem = new EntityItem(tileGlassBell.getWorldObj());
+                EntityItem ghostEntityItem = new EntityItem(tileEntityGlassBell.getWorldObj());
                 ghostEntityItem.hoverStart = 0.0F;
-                ghostEntityItem.setEntityItemStack(tileGlassBell.outputItemStack);
+                ghostEntityItem.setEntityItemStack(tileEntityGlassBell.outputItemStack);
 
-                translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileGlassBell.getOrientation());
+                translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileEntityGlassBell.getOrientation());
                 GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
                 GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 

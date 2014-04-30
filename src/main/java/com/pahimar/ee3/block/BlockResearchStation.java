@@ -2,7 +2,7 @@ package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileResearchStation;
+import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -20,7 +20,7 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
     @Override
     public TileEntity createNewTileEntity(World world, int metaData)
     {
-        return new TileResearchStation();
+        return new TileEntityResearchStation();
     }
 
     @Override
