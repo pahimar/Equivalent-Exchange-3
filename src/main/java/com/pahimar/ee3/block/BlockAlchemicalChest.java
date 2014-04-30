@@ -94,6 +94,14 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     }
 
     @Override
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
+    {
+        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+        return tileentity != null ? tileentity.receiveClientEvent(eventId, eventData) : false;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list)
     {
