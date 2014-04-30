@@ -4,9 +4,6 @@ public class Names
 {
     public static class Blocks
     {
-        public static final String INFUSED_CLOTH = "infusedCloth";
-        public static final String INFUSED_WOOD = "infusedWood";
-        public static final String INFUSED_PLANK = "infusedPlank";
         public static final String ALCHEMICAL_CHEST = "alchemicalChest";
         public static final String ALUDEL = "aludel";
         public static final String GLASS_BELL = "glassBell";

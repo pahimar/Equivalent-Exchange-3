@@ -1,5 +1,6 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;

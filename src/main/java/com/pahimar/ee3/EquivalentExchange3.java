@@ -1,10 +1,10 @@
 package com.pahimar.ee3;
 
-import com.pahimar.ee3.block.ModBlocks;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.init.ModBlocks;
+import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.item.EquivalencyStack;
-import com.pahimar.ee3.item.ModItems;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.reference.EventHandlers;

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.creativetab;
 
-import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

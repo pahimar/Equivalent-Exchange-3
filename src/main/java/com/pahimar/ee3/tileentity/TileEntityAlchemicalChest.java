@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Sounds;

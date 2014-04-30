@@ -1,6 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
