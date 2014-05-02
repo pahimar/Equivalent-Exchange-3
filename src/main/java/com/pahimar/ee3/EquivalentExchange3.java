@@ -1,5 +1,6 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.configuration.ConfigurationHandler;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
@@ -22,6 +23,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
+
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = "0.2")
 public class EquivalentExchange3
@@ -47,6 +50,9 @@ public class EquivalentExchange3
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        // Initialize the configuration
+        ConfigurationHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase() + File.separator);
+
         // Initialize mod items
         ModItems.init();
 
