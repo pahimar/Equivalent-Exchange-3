@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.2"
+version = "1.7.2-0.2"
 group = "com.pahimar.ee3" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "EquivalentExchange3"
 
 minecraft {
-    version = "1.7.2-10.12.1.1063"
+    version = "1.7.2-10.12.1.1065"
     assetDir = "eclipse/assets"
 }
 processResources
