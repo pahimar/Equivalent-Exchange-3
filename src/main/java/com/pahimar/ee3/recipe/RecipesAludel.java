@@ -1,17 +1,18 @@
 package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.OreStack;
-import com.pahimar.ee3.block.ModBlocks;
-import com.pahimar.ee3.helper.LogHelper;
-import com.pahimar.ee3.item.ModItems;
-import com.pahimar.ee3.item.crafting.RecipeAludel;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.pahimar.ee3.api.OreStack;
+import com.pahimar.ee3.block.ModBlocks;
+import com.pahimar.ee3.helper.LogHelper;
+import com.pahimar.ee3.item.ModItems;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 
 public class RecipesAludel
 {
@@ -143,5 +144,14 @@ public class RecipesAludel
         {
             LogHelper.debug(String.format("Output: %s, Input Stack: %s, Dust Stack: %s", recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputs()[0], recipeAludel.getRecipeInputs()[1]));
         }
+    }
+    public static boolean retroaddRecipe(RecipeAludel recipe){
+    	if(aludelRegistry == null){
+    		LogHelper.severe("You cannot retroactively add aludel recipies before the aludel recipe registry is initiated!");
+    		return false;
+    	} else{
+    	    aludelRegistry.addRecipe(recipe);
+    	    return true;
+    	}
     }
 }
