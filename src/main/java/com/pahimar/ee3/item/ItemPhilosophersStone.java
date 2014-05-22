@@ -1,9 +1,11 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public class ItemPhilosophersStone extends ItemEE
+public class ItemPhilosophersStone extends ItemEE implements IKeyBound
 {
     private int maxChargeLevel;
 
@@ -36,5 +38,11 @@ public class ItemPhilosophersStone extends ItemEE
         copiedStack.stackSize = 1;
 
         return copiedStack;
+    }
+
+    @Override
+    public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
+    {
+
     }
 }

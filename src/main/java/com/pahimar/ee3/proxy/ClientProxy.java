@@ -1,17 +1,36 @@
 package com.pahimar.ee3.proxy;
 
+import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.renderer.item.*;
 import com.pahimar.ee3.client.renderer.tileentity.*;
+import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy
 {
+    @Override
+    public void registerEventHandlers()
+    {
+        super.registerEventHandlers();
+        FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+    }
+
+    @Override
+    public void registerKeybindings()
+    {
+        ClientRegistry.registerKeyBinding(Keybindings.charge);
+        ClientRegistry.registerKeyBinding(Keybindings.extra);
+        ClientRegistry.registerKeyBinding(Keybindings.release);
+        ClientRegistry.registerKeyBinding(Keybindings.toggle);
+    }
+
     @Override
     public void initRenderingAndTextures()
     {

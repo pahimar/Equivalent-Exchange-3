@@ -1,9 +1,6 @@
 package com.pahimar.ee3.network;
 
-import com.pahimar.ee3.network.message.MessageTileCalcinator;
-import com.pahimar.ee3.network.message.MessageTileEntityAludel;
-import com.pahimar.ee3.network.message.MessageTileEntityEE;
-import com.pahimar.ee3.network.message.MessageTileEntityGlassBell;
+import com.pahimar.ee3.network.message.*;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -19,5 +16,6 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageTileCalcinator.class, MessageTileCalcinator.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityAludel.class, MessageTileEntityAludel.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityGlassBell.class, MessageTileEntityGlassBell.class, 3, Side.CLIENT);
+        INSTANCE.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, 4, Side.SERVER);
     }
 }

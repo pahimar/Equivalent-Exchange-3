@@ -1,11 +1,22 @@
 package com.pahimar.ee3.proxy;
 
+import com.pahimar.ee3.handler.ItemEventHandler;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.tileentity.*;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 public abstract class CommonProxy implements IProxy
 {
+    public void registerEventHandlers()
+    {
+        ItemEventHandler itemEventHandler = new ItemEventHandler();
+
+        FMLCommonHandler.instance().bus().register(itemEventHandler);
+        MinecraftForge.EVENT_BUS.register(itemEventHandler);
+    }
+
     public void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TileEntityAlchemicalChest.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST);

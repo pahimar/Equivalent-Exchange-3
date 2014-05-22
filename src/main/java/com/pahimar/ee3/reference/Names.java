@@ -59,4 +59,12 @@ public class Names
 
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
     }
+
+    public static class Keys
+    {
+        public static final String CHARGE = "key.charge";
+        public static final String EXTRA = "key.extra";
+        public static final String RELEASE = "key.release";
+        public static final String TOGGLE = "key.toggle";
+    }
 }

@@ -6,13 +6,9 @@ import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
-import com.pahimar.ee3.item.EquivalencyStack;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
-import com.pahimar.ee3.reference.EventHandlers;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.util.LogHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,8 +17,6 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Items;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
 
@@ -50,16 +44,15 @@ public class EquivalentExchange3
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        // Initialize the configuration
         ConfigurationHandler.init(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID.toLowerCase() + File.separator);
 
-        // Initialize mod items
+        PacketHandler.init();
+
+        proxy.registerKeybindings();
+
         ModItems.init();
 
-        // Initialize mod blocks
         ModBlocks.init();
-
-        PacketHandler.init();
     }
 
     @EventHandler
@@ -75,8 +68,7 @@ public class EquivalentExchange3
         proxy.initRenderingAndTextures();
 
         // Register the Items Event Handler
-        FMLCommonHandler.instance().bus().register(EventHandlers.itemEventHandler);
-        MinecraftForge.EVENT_BUS.register(EventHandlers.itemEventHandler);
+        proxy.registerEventHandlers();
 
         CraftingHandler.init();
 
@@ -87,12 +79,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        EquivalencyStack equivalencyStack = new EquivalencyStack(Items.beef);
 
-        for (Object object : equivalencyStack.getEquivalentStacks())
-        {
-            LogHelper.info(object);
-        }
     }
 
     @EventHandler
