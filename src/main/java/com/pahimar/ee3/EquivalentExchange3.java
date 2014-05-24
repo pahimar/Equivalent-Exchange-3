@@ -23,7 +23,7 @@ import java.io.File;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = "0.2")
 public class EquivalentExchange3
 {
-    @Instance
+    @Instance(Reference.MOD_ID)
     public static EquivalentExchange3 instance;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
