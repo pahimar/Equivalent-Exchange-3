@@ -6,6 +6,7 @@ import com.pahimar.ee3.item.ItemBlockAlchemicalFuel;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+//@GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks
 {
     public static final BlockEE chalk = new BlockChalk();
@@ -18,12 +19,12 @@ public class ModBlocks
 
     public static void init()
     {
-        GameRegistry.registerBlock(chalk, "tile." + Names.Items.CHALK);
-        GameRegistry.registerBlock(alchemicalFuel, ItemBlockAlchemicalFuel.class, "tile." + Names.Items.ALCHEMICAL_FUEL);
-        GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST);
-        GameRegistry.registerBlock(aludel, "tile." + Names.Blocks.ALUDEL);
-        GameRegistry.registerBlock(calcinator, "tile." + Names.Blocks.CALCINATOR);
-        GameRegistry.registerBlock(glassBell, "tile." + Names.Blocks.GLASS_BELL);
-        GameRegistry.registerBlock(researchStation, "tile." + Names.Blocks.RESEARCH_STATION);
+        GameRegistry.registerBlock(chalk, Names.Blocks.CHALK);
+        GameRegistry.registerBlock(alchemicalFuel, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
+        GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST);
+        GameRegistry.registerBlock(aludel, Names.Blocks.ALUDEL);
+        GameRegistry.registerBlock(calcinator, Names.Blocks.CALCINATOR);
+        GameRegistry.registerBlock(glassBell, Names.Blocks.GLASS_BELL);
+        GameRegistry.registerBlock(researchStation, Names.Blocks.RESEARCH_STATION);
     }
 }

@@ -4,6 +4,7 @@ import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+//@GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModItems
 {
     public static final ItemEE alchemicalBag = new ItemAlchemicalBag();
@@ -19,15 +20,15 @@ public class ModItems
 
     public static void init()
     {
-        GameRegistry.registerItem(alchemicalBag, "item." + Names.Items.ALCHEMICAL_BAG);
-        GameRegistry.registerItem(alchemicalDust, "item." + Names.Items.ALCHEMICAL_DUST);
-        GameRegistry.registerItem(alchemicalFuel, "item." + Names.Items.ALCHEMICAL_FUEL);
-        GameRegistry.registerItem(inertStone, "item." + Names.Items.INERT_STONE);
-        GameRegistry.registerItem(miniumShard, "item." + Names.Items.MINIUM_SHARD);
-        GameRegistry.registerItem(miniumStone, "item." + Names.Items.MINIUM_STONE);
-        GameRegistry.registerItem(philosophersStone, "item." + Names.Items.PHILOSOPHERS_STONE);
-        GameRegistry.registerItem(chalk, "item." + Names.Items.CHALK);
-        GameRegistry.registerItem(alchemicalInventoryUpgrade, "item." + Names.Items.ALCHEMICAL_UPGRADE);
-        GameRegistry.registerItem(diviningRod, "item." + Names.Items.DIVINING_ROD);
+        GameRegistry.registerItem(alchemicalBag, Names.Items.ALCHEMICAL_BAG);
+        GameRegistry.registerItem(alchemicalDust, Names.Items.ALCHEMICAL_DUST);
+        GameRegistry.registerItem(alchemicalFuel, Names.Items.ALCHEMICAL_FUEL);
+        GameRegistry.registerItem(inertStone, Names.Items.INERT_STONE);
+        GameRegistry.registerItem(miniumShard, Names.Items.MINIUM_SHARD);
+        GameRegistry.registerItem(miniumStone, Names.Items.MINIUM_STONE);
+        GameRegistry.registerItem(philosophersStone, Names.Items.PHILOSOPHERS_STONE);
+        GameRegistry.registerItem(chalk, Names.Items.CHALK);
+        GameRegistry.registerItem(alchemicalInventoryUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
+        GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
     }
 }

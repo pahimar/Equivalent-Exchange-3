@@ -1,4 +1,5 @@
 # Key localizations
+key.categories.ee3=Equivalent Exchange 3
 key.charge=Charge
 key.extra=Extra
 key.release=Release
@@ -25,9 +26,9 @@ item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest
-tile.ee3:alchemicalFuel.alchemicalCoal.name=Block of Alchemical Coal
-tile.ee3:alchemicalFuel.mobiusFuel.name=Block of Mobius Fuel
-tile.ee3:alchemicalFuel.aeternalisFuel.name=Block of Aeternalis Fuel
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
 tile.ee3:aludel.name=Aludel Base
 tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk

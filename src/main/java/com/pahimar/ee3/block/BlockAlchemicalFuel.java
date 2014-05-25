@@ -22,7 +22,7 @@ public class BlockAlchemicalFuel extends BlockEE
     public BlockAlchemicalFuel()
     {
         super();
-        this.setBlockName(Names.Items.ALCHEMICAL_FUEL);
+        this.setBlockName(Names.Blocks.ALCHEMICAL_FUEL);
         this.setHardness(5.0f);
         this.setResistance(10.0f);
     }

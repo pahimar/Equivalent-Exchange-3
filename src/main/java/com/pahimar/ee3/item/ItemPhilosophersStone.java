@@ -2,6 +2,7 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -43,6 +44,6 @@ public class ItemPhilosophersStone extends ItemEE implements IKeyBound
     @Override
     public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
     {
-
+        LogHelper.info(String.format("%s %s %s", entityPlayer.toString(), itemStack.toString(), key.toString()));
     }
 }

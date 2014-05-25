@@ -4,7 +4,9 @@ public class Names
 {
     public static class Blocks
     {
+        public static final String CHALK = "chalkBlock";
         public static final String ALCHEMICAL_CHEST = "alchemicalChest";
+        public static final String ALCHEMICAL_FUEL = "alchemicalFuelBlock";
         public static final String ALUDEL = "aludel";
         public static final String GLASS_BELL = "glassBell";
         public static final String CALCINATOR = "calcinator";
@@ -62,6 +64,7 @@ public class Names
 
     public static class Keys
     {
+        public static final String CATEGORY = "key.categories.ee3";
         public static final String CHARGE = "key.charge";
         public static final String EXTRA = "key.extra";
         public static final String RELEASE = "key.release";

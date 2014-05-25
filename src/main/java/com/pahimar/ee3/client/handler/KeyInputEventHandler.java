@@ -55,7 +55,7 @@ public class KeyInputEventHandler
                     {
                         if (entityPlayer.worldObj.isRemote)
                         {
-                            PacketHandler.INSTANCE.sendToServer(new MessageKeyPressed(Key.CHARGE)); // TODO Pass in the proper key pressed, but need to confirm FML SimpleNetworkWrapper fix first
+                            PacketHandler.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
                         }
                         else
                         {
