@@ -4,13 +4,14 @@ import com.pahimar.ee3.block.*;
 import com.pahimar.ee3.item.ItemBlockAlchemicalChest;
 import com.pahimar.ee3.item.ItemBlockAlchemicalFuel;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-//@GameRegistry.ObjectHolder(Reference.MOD_ID)
+@GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks
 {
-    public static final BlockEE chalk = new BlockChalk();
-    public static final BlockEE alchemicalFuel = new BlockAlchemicalFuel();
+    public static final BlockEE chalkBlock = new BlockChalk();
+    public static final BlockEE alchemicalFuelBlock = new BlockAlchemicalFuel();
     public static final BlockEE alchemicalChest = new BlockAlchemicalChest();
     public static final BlockEE aludel = new BlockAludel();
     public static final BlockEE calcinator = new BlockCalcinator();
@@ -19,8 +20,8 @@ public class ModBlocks
 
     public static void init()
     {
-        GameRegistry.registerBlock(chalk, Names.Blocks.CHALK);
-        GameRegistry.registerBlock(alchemicalFuel, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
+        GameRegistry.registerBlock(chalkBlock, Names.Blocks.CHALK);
+        GameRegistry.registerBlock(alchemicalFuelBlock, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
         GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST);
         GameRegistry.registerBlock(aludel, Names.Blocks.ALUDEL);
         GameRegistry.registerBlock(calcinator, Names.Blocks.CALCINATOR);
