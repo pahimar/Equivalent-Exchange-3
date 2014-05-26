@@ -3,15 +3,15 @@
   "modid": "EE3",
   "name": "Equivalent Exchange 3",
   "description": "Transmute stuff into other stuff! Become a Minecraft God!",
-  "version": "${version}",
-  "mcversion": ${mcversion}",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
   "url": "http://www.minecraftforum.net/topic/1106178-",
   "updateUrl": "",
   "authorList": [
     "pahimar",
     "x3n0ph0b3"
   ],
-  "credits": "By pahimar, based (loosely) on Equivalent Exchange 1 & 2 by x3n0ph0b3",
+  "credits": "pahimar and x3n0ph0b3",
   "logoFile": "assets/ee3/textures/logo/logo.png",
   "screenshots": [
   ],
