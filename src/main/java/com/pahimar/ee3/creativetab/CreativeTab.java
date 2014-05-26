@@ -21,7 +21,7 @@ public class CreativeTab
         @SideOnly(Side.CLIENT)
         public String getTranslatedTabLabel()
         {
-            return "Equivalent Exchange 3";
+            return StatCollector.translateToLocal("key.categories.ee3");
         }
     };
 }
