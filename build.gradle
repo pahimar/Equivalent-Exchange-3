@@ -68,7 +68,7 @@ import net.minecraftforge.gradle.tasks.dev.ChangelogTask
 task createChangelog(type: ChangelogTask) {
 
     if (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") && project.hasProperty("jenkins_password")) {
-        def jobName = "${System.getenv().JOB_NAME} ?: ''"
+        def jobName = "${System.getenv().JOB_NAME}"
         def buildNumber = "${System.getenv().BUILD_NUMBER}"
 
         setServerRoot(new DelayedString(project, project.jenkins_server))
