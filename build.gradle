@@ -35,6 +35,9 @@ minecraft {
 
     replaceIn "reference/Reference.java"
     replace "@VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+    if (project.hasProperty("ee3_signature")) {
+        replace "@FINGERPRINT@", project.ee3_signature
+    }
 }
 
 version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
@@ -63,6 +66,7 @@ import net.minecraftforge.gradle.delayed.*
 import net.minecraftforge.gradle.tasks.dev.ChangelogTask
 
 task createChangelog(type: ChangelogTask) {
+
     def jobName = "${System.getenv().JOB_NAME}"
     def buildNumber = "${System.getenv().BUILD_NUMBER}"
 
@@ -71,7 +75,11 @@ task createChangelog(type: ChangelogTask) {
     setAuthName(new DelayedString(project, project.jenkins_user))
     setAuthPassword(new DelayedString(project, project.jenkins_password))
     setTargetBuild({ buildNumber.toString() });
-    setOutput(new DelayedFile(project, 'build/libs/' + project.getName() + '-' + project.version + '-changelog.txt'));
+    setOutput(new DelayedFile(project, 'build/distributions/' + project.getName() + '-' + project.version + '-changelog.txt'));
+
+    onlyIf {
+        return (("${System.getenv().JOB_NAME}" == null) && project.hasProperty("jenkins_server") && project.hasProperty("jenkins_password"))
+    }
 }
 
 tasks.build.dependsOn('createChangelog')
