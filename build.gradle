@@ -34,27 +34,44 @@ minecraft {
     assetDir = "run/assets"
 
     replaceIn "reference/Reference.java"
-    replace "@VERSION@", config.mod_version
+    replace "@VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 }
 
 version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 
-processResources
-        {
-            // exclude xcf files, as they are for development only
-            exclude '**/*.xcf'
+processResources {
+    // exclude xcf files, as they are for development only
+    exclude '**/*.xcf'
 
-            // replace stuff in mcmod.info, nothing else
-            from(sourceSets.main.resources.srcDirs) {
-                include '*.info'
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include '*.info'
 
-                // replace version and mcversion
-                expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
-            }
+        // replace version and mcversion
+        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+    }
 
-            // copy everything else, thats not the mcmod.info
-            from(sourceSets.main.resources.srcDirs) {
-                include '**/*.info'
-                include '**/*.properties'
-            }
-        }
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+        include '**/*.properties'
+    }
+}
+
+
+import net.minecraftforge.gradle.delayed.*
+import net.minecraftforge.gradle.tasks.dev.ChangelogTask
+
+task createChangelog(type: ChangelogTask) {
+    def jobName = "${System.getenv().JOB_NAME}"
+    def buildNumber = "${System.getenv().BUILD_NUMBER}"
+
+    setServerRoot(new DelayedString(project, project.jenkins_server))
+    setJobName(new DelayedString(project, jobName.toString()))
+    setAuthName(new DelayedString(project, project.jenkins_user))
+    setAuthPassword(new DelayedString(project, project.jenkins_password))
+    setTargetBuild({ buildNumber.toString() });
+    setOutput(new DelayedFile(project, 'build/distributions/' + project.getName() + '-' + project.version + '-changelog.txt'));
+}
+
+tasks.build.dependsOn('createChangelog')
