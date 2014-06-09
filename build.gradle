@@ -56,8 +56,7 @@ processResources {
 
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        include '**/*.info'
-        include '**/*.properties'
+        exclude '**/*.info'
     }
 }
 
