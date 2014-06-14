@@ -2,12 +2,12 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
     <comment>Version lookup for Equivalent Exchange 3. Format is "Current Version Number|URL to update page"</comment>
-    <entry key="Minecraft 1.4.2">pre1a|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.4.4">pre1b|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.4.5">pre1d|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.4.6">pre1e|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.4.7">pre1f|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.5.1">pre1g|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.5.2">pre1h|http://goo.gl/Ria2V</entry>
-    <entry key="Minecraft 1.6.4">0.1.140|http://goo.gl/Ria2V</entry>
+    <entry key="Minecraft 1.4.2">pre1a|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.4.4">pre1b|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.4.5">pre1d|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.4.6">pre1e|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.4.7">pre1f|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.5.1">pre1g|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.5.2">pre1h|http://ee3.pahimar.com</entry>
+    <entry key="Minecraft 1.6.4">0.1.142|http://ee3.pahimar.com</entry>
 </properties>
