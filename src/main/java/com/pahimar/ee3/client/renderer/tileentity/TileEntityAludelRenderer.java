@@ -4,7 +4,6 @@ import com.pahimar.ee3.client.renderer.model.ModelAludel;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
-import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -92,7 +91,6 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
 
     private void scaleTranslateRotate(double x, double y, double z, ForgeDirection orientation)
     {
-        LogHelper.info(orientation);
         if (orientation == ForgeDirection.NORTH)
         {
             GL11.glTranslated(x + 1, y, z);

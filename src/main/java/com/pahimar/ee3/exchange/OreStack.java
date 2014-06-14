@@ -73,7 +73,11 @@ public class OreStack implements Comparable<OreStack>
 
     public OreStack(ItemStack itemStack)
     {
-        this(OreDictionary.getOreName(OreDictionary.getOreID(itemStack)), itemStack.stackSize);
+        if (itemStack != null && OreDictionary.getOreIDs(itemStack).length > 0)
+        {
+            this.oreName = OreDictionary.getOreName(OreDictionary.getOreIDs(itemStack)[0]); // TODO Likely not ideal, revisit
+            this.stackSize = itemStack.stackSize;
+        }
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)

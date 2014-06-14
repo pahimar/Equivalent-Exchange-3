@@ -1,5 +1,6 @@
 package com.pahimar.ee3.proxy;
 
+import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.renderer.item.*;
 import com.pahimar.ee3.client.renderer.tileentity.*;
@@ -12,6 +13,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
@@ -20,6 +22,7 @@ public class ClientProxy extends CommonProxy
     {
         super.registerEventHandlers();
         FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
     }
 
     @Override
