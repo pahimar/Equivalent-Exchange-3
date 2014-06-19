@@ -5,7 +5,10 @@ import com.google.common.collect.Multimap;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LogHelper;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class RecipeRegistry
 {
@@ -13,12 +16,10 @@ public class RecipeRegistry
     private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
-    private List<WrappedStack> discoveredStacks;
 
     private RecipeRegistry()
     {
         recipeMap = HashMultimap.create();
-        discoveredStacks = new ArrayList<WrappedStack>();
 
         init();
     }
@@ -82,46 +83,11 @@ public class RecipeRegistry
 //                recipeMap.put(recipeOutput, recipeInputs);
 //            }
 //        }
-
-        // Discover all stacks that we can
-        discoverStacks();
     }
 
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings()
     {
-
         return recipeRegistry.recipeMap;
-    }
-
-    public List<WrappedStack> getDiscoveredStacks()
-    {
-
-        return Collections.unmodifiableList(recipeRegistry.discoveredStacks);
-    }
-
-    private void discoverStacks()
-    {
-        discoveredStacks = new ArrayList<WrappedStack>();
-
-        // Scan stacks from known recipes
-        for (WrappedStack recipeOutput : recipeMap.keySet())
-        {
-            if (!discoveredStacks.contains(new WrappedStack(recipeOutput.getWrappedStack())))
-            {
-                discoveredStacks.add(new WrappedStack(recipeOutput.getWrappedStack()));
-            }
-
-            for (List<WrappedStack> recipeInputList : recipeMap.get(recipeOutput))
-            {
-                for (WrappedStack recipeInput : recipeInputList)
-                {
-                    if (!discoveredStacks.contains(new WrappedStack(recipeInput.getWrappedStack())))
-                    {
-                        discoveredStacks.add(new WrappedStack(recipeInput.getWrappedStack()));
-                    }
-                }
-            }
-        }
     }
 
     public void dumpRegistry()
