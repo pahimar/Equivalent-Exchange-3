@@ -8,7 +8,7 @@ public class EmcInitializationHelper implements Runnable
 
     public static void initEmcRegistry()
     {
-        new Thread(instance).start();
+        new Thread(instance, "EE3 - DynEmc Init Thread").start();
     }
 
     @Override

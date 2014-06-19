@@ -1,6 +1,7 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.reference.Compare;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;
@@ -14,7 +15,7 @@ public class ItemHelper
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
-                if (itemStack1.getUnlocalizedName().compareToIgnoreCase(itemStack2.getUnlocalizedName()) == Compare.EQUALS)
+                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == Compare.EQUALS)
                 {
                     // Then sort on meta
                     if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
@@ -52,7 +53,7 @@ public class ItemHelper
                 }
                 else
                 {
-                    return itemStack1.getUnlocalizedName().compareToIgnoreCase(itemStack2.getUnlocalizedName());
+                    return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
                 }
             }
             else if (itemStack1 != null && itemStack2 == null)

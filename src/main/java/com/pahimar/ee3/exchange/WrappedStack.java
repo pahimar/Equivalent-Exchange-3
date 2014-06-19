@@ -317,7 +317,7 @@ public class WrappedStack implements Comparable<WrappedStack>
 
         if (wrappedStack instanceof ItemStack)
         {
-            hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getUnlocalizedName().hashCode();
+            hashCode = (37 * hashCode) + Item.getIdFromItem(((ItemStack) wrappedStack).getItem());
             hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
 
             if (((ItemStack) wrappedStack).getTagCompound() != null)
@@ -359,7 +359,7 @@ public class WrappedStack implements Comparable<WrappedStack>
     {
         if (wrappedStack instanceof ItemStack)
         {
-            return String.format("%sxitemStack[%s@%s]", stackSize, ((ItemStack) wrappedStack).getUnlocalizedName(), ((ItemStack) wrappedStack).getItemDamage());
+            return String.format("%sxitemStack[%s@%s, %s]", stackSize, ((ItemStack) wrappedStack).getUnlocalizedName(), ((ItemStack) wrappedStack).getItemDamage(), Item.getIdFromItem(((ItemStack) wrappedStack).getItem()));
         }
         else if (wrappedStack instanceof OreStack)
         {
