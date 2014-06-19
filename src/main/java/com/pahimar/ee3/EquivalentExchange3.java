@@ -1,7 +1,6 @@
 package com.pahimar.ee3;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
-import com.pahimar.ee3.exchange.EnergyRegistry;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
@@ -80,7 +79,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        EnergyRegistry.getInstance().dumpStackMappings();
+
     }
 
     @EventHandler

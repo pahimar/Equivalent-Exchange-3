@@ -15,8 +15,6 @@ import java.util.List;
 
 public class WrappedStack implements Comparable<WrappedStack>
 {
-    @SuppressWarnings("unused")
-    private final String className;
     private final Object wrappedStack;
     public static Comparator<WrappedStack> comparator = new Comparator<WrappedStack>()
     {
@@ -88,7 +86,6 @@ public class WrappedStack implements Comparable<WrappedStack>
      */
     public WrappedStack()
     {
-        className = null;
         stackSize = -1;
         wrappedStack = null;
     }
@@ -112,7 +109,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             ItemStack itemStack = ((ItemStack) object).copy();
 
-            className = ItemStack.class.getSimpleName();
             stackSize = itemStack.stackSize;
             itemStack.stackSize = 1;
             wrappedStack = itemStack;
@@ -121,7 +117,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             OreStack oreStack = (OreStack) object;
 
-            className = OreStack.class.getSimpleName();
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -134,7 +129,6 @@ public class WrappedStack implements Comparable<WrappedStack>
 
             if (possibleOreStack != null)
             {
-                className = OreStack.class.getSimpleName();
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
@@ -142,7 +136,6 @@ public class WrappedStack implements Comparable<WrappedStack>
             else
             {
                 stackSize = -1;
-                className = null;
                 wrappedStack = null;
             }
         }
@@ -150,7 +143,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             FluidStack fluidStack = ((FluidStack) object).copy();
 
-            className = FluidStack.class.getSimpleName();
             stackSize = fluidStack.amount;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
@@ -161,20 +153,17 @@ public class WrappedStack implements Comparable<WrappedStack>
 
             if (wrappedStackObject.getWrappedStack() != null)
             {
-                className = wrappedStackObject.wrappedStack.getClass().getSimpleName();
                 this.stackSize = wrappedStackObject.stackSize;
                 this.wrappedStack = wrappedStackObject.wrappedStack;
             }
             else
             {
-                className = null;
                 stackSize = -1;
                 wrappedStack = null;
             }
         }
         else
         {
-            className = null;
             stackSize = -1;
             wrappedStack = null;
         }
@@ -199,7 +188,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             ItemStack itemStack = ((ItemStack) object).copy();
 
-            className = ItemStack.class.getSimpleName();
             this.stackSize = stackSize;
             itemStack.stackSize = 1;
             wrappedStack = itemStack;
@@ -208,7 +196,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             OreStack oreStack = (OreStack) object;
 
-            className = OreStack.class.getSimpleName();
             this.stackSize = stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -221,7 +208,6 @@ public class WrappedStack implements Comparable<WrappedStack>
 
             if (possibleOreStack != null)
             {
-                className = OreStack.class.getSimpleName();
                 this.stackSize = stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
@@ -229,7 +215,6 @@ public class WrappedStack implements Comparable<WrappedStack>
             else
             {
                 this.stackSize = -1;
-                className = null;
                 wrappedStack = null;
             }
         }
@@ -237,7 +222,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             FluidStack fluidStack = (FluidStack) object;
 
-            className = FluidStack.class.getSimpleName();
             this.stackSize = stackSize;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
@@ -248,20 +232,17 @@ public class WrappedStack implements Comparable<WrappedStack>
 
             if (wrappedStackObject.getWrappedStack() != null)
             {
-                className = wrappedStackObject.wrappedStack.getClass().getSimpleName();
                 this.stackSize = stackSize;
                 this.wrappedStack = wrappedStackObject.wrappedStack;
             }
             else
             {
-                className = null;
                 this.stackSize = -1;
                 wrappedStack = null;
             }
         }
         else
         {
-            className = null;
             this.stackSize = -1;
             wrappedStack = null;
         }

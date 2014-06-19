@@ -1,6 +1,7 @@
 package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.handler.ItemEventHandler;
+import com.pahimar.ee3.handler.WorldEventHandler;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -15,6 +16,7 @@ public abstract class CommonProxy implements IProxy
 
         FMLCommonHandler.instance().bus().register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(itemEventHandler);
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }
 
     public void registerTileEntities()
