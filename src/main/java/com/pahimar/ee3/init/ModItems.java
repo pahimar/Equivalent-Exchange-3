@@ -1,8 +1,14 @@
 package com.pahimar.ee3.init;
 
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+
 import com.pahimar.ee3.item.*;
+import com.pahimar.ee3.item.tool.*;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
@@ -18,6 +24,14 @@ public class ModItems
     public static final ItemEE alchemicalUpgrade = new ItemAlchemicalInventoryUpgrade();
     public static final ItemEE chalk = new ItemChalk();
     public static final ItemEE diviningRod = new ItemDiviningRod();
+    public static final ItemEE darkMatter = new ItemDarkMatter();
+    
+    public static final ItemTool axeDarkMatter = new DMAxe();
+    public static final ItemTool pickaxeDarkMatter = new DMPickaxe();
+    public static final ItemTool shovelDarkMatter = new DMShovel();
+    
+    public static final ItemHoe hoeDarkMatter = new DMHoe();
+    public static final ItemSword swordDarkMatter = new DMSword();
 
     public static void init()
     {
@@ -31,5 +45,14 @@ public class ModItems
         GameRegistry.registerItem(chalk, Names.Items.CHALK);
         GameRegistry.registerItem(alchemicalUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
         GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
+        GameRegistry.registerItem(darkMatter, Names.Items.DARK_MATTER);
+
+        
+        GameRegistry.registerItem(axeDarkMatter, Names.Tools.AXE_DARK_MATTER);
+        GameRegistry.registerItem(hoeDarkMatter, Names.Tools.HOE_DARK_MATTER);
+        GameRegistry.registerItem(pickaxeDarkMatter, Names.Tools.PICKAXE_DARK_MATTER);
+        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.SHOVEL_DARK_MATTER);
+        GameRegistry.registerItem(swordDarkMatter, Names.Tools.SWORD_DARK_MATTER);
+        
     }
 }
