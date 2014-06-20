@@ -10,13 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * EMCEntry
- *
- * @author pahimar
- */
 public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<EnergyValue>, JsonSerializer<EnergyValue>
 {
     // Gson serializer for serializing to/deserializing from json
@@ -118,18 +111,18 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
     /**
      * Deserializes an EnergyValue object from the given serialized json String
      *
-     * @param jsonEmcValue
+     * @param jsonEnergyValue
      *         Json encoded String representing a EnergyValue object
      *
      * @return The EnergyValue that was encoded as json, or null if a valid EnergyValue could not be decoded from given
      * String
      */
     @SuppressWarnings("unused")
-    public static EnergyValue createFromJson(String jsonEmcValue)
+    public static EnergyValue createFromJson(String jsonEnergyValue)
     {
         try
         {
-            return gsonSerializer.fromJson(jsonEmcValue, EnergyValue.class);
+            return gsonSerializer.fromJson(jsonEnergyValue, EnergyValue.class);
         }
         catch (JsonSyntaxException exception)
         {
@@ -250,11 +243,11 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
     }
 
     @Override
-    public int compareTo(EnergyValue energyValue)
+    public int compareTo(EnergyValue exchangeEnergyValue)
     {
-        if (energyValue != null)
+        if (exchangeEnergyValue != null)
         {
-            return compareComponents(this.components, energyValue.components);
+            return compareComponents(this.components, exchangeEnergyValue.components);
         }
         else
         {
@@ -273,32 +266,32 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
     }
 
     @Override
-    public JsonElement serialize(EnergyValue energyValue, Type type, JsonSerializationContext context)
+    public JsonElement serialize(EnergyValue exchangeEnergyValue, Type type, JsonSerializationContext context)
     {
-        JsonObject jsonEmcValue = new JsonObject();
+        JsonObject jsonEnergyValue = new JsonObject();
 
         for (EnergyType energyType : EnergyType.TYPES)
         {
-            jsonEmcValue.addProperty(energyType.toString(), energyValue.components[energyType.ordinal()]);
+            jsonEnergyValue.addProperty(energyType.toString(), exchangeEnergyValue.components[energyType.ordinal()]);
         }
 
-        return jsonEmcValue;
+        return jsonEnergyValue;
     }
 
     @Override
     public EnergyValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
     {
 
-        float[] emcValueComponents = new float[EnergyType.TYPES.length];
-        JsonObject jsonEmcValue = (JsonObject) jsonElement;
+        float[] energyValueComponents = new float[EnergyType.TYPES.length];
+        JsonObject jsonEnergyValue = (JsonObject) jsonElement;
 
         for (EnergyType energyType : EnergyType.TYPES)
         {
-            if ((jsonEmcValue.get(energyType.toString()) != null) && (jsonEmcValue.get(energyType.toString()).isJsonPrimitive()))
+            if ((jsonEnergyValue.get(energyType.toString()) != null) && (jsonEnergyValue.get(energyType.toString()).isJsonPrimitive()))
             {
                 try
                 {
-                    emcValueComponents[energyType.ordinal()] = jsonEmcValue.get(energyType.toString()).getAsFloat();
+                    energyValueComponents[energyType.ordinal()] = jsonEnergyValue.get(energyType.toString()).getAsFloat();
                 }
                 catch (UnsupportedOperationException exception)
                 {
@@ -307,11 +300,11 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
             }
         }
 
-        EnergyValue energyValue = new EnergyValue(emcValueComponents);
+        EnergyValue exchangeEnergyValue = new EnergyValue(energyValueComponents);
 
-        if (energyValue.getValue() > 0f)
+        if (exchangeEnergyValue.getValue() > 0f)
         {
-            return energyValue;
+            return exchangeEnergyValue;
         }
 
         return null;

@@ -44,7 +44,7 @@ public class EnergyComponent implements Comparable<EnergyComponent>
     @Override
     public String toString()
     {
-        return String.format("<EMC Type: %s, Weight: %s>", type, weight);
+        return String.format("<Energy Type: %s, Weight: %s>", type, weight);
     }
 
     @Override

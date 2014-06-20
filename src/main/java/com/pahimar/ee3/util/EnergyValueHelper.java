@@ -1,23 +1,27 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.util;
 
+import com.pahimar.ee3.exchange.EnergyType;
+import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnergyHelper
+public class EnergyValueHelper
 {
 
-    public static List<WrappedStack> filterStacksByEmc(List<WrappedStack> unfilteredStacks, EnergyValue filterValue)
+    public static List<WrappedStack> filterStacksByEnergyValue(List<WrappedStack> unfilteredStacks, EnergyValue filterValue)
     {
         List<WrappedStack> filteredStacks = new ArrayList<WrappedStack>();
 
         for (WrappedStack stack : unfilteredStacks)
         {
-            if (EnergyRegistry.getInstance().hasEnergyValue(stack))
+            if (EnergyValueRegistry.getInstance().hasEnergyValue(stack))
             {
-                EnergyValue value = EnergyRegistry.getInstance().getEnergyValue(stack);
+                EnergyValue value = EnergyValueRegistry.getInstance().getEnergyValue(stack);
                 boolean satisfiesFilter = true;
                 float[] valueSubValues = value.components;
                 float[] filterValueSubValues = filterValue.components;
@@ -41,9 +45,9 @@ public class EnergyHelper
     }
 
     @SuppressWarnings("unused")
-    public static List<WrappedStack> filterStacksByEmcAndRange(float start, float end, EnergyValue filterValue)
+    public static List<WrappedStack> filterStacksByEnergyValue(float start, float end, EnergyValue filterValue)
     {
-        return filterStacksByEmc(EnergyRegistry.getInstance().getStacksInRange(start, end), filterValue);
+        return filterStacksByEnergyValue(EnergyValueRegistry.getInstance().getStacksInRange(start, end), filterValue);
     }
 
     public static EnergyValue computeEnergyValueFromList(List<WrappedStack> wrappedStacks)
@@ -64,11 +68,11 @@ public class EnergyHelper
                     if (itemStack.getItem().getContainerItem(itemStack) != null)
                     {
                         stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
-                        wrappedStackValue = EnergyRegistry.getInstance().getEnergyValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
+                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
                     }
                     else
                     {
-                        wrappedStackValue = EnergyRegistry.getInstance().getEnergyValue(wrappedStack);
+                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
@@ -78,12 +82,12 @@ public class EnergyHelper
                 }
                 else
                 {
-                    wrappedStackValue = EnergyRegistry.getInstance().getEnergyValue(wrappedStack);
+                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
                 }
             }
             else
             {
-                wrappedStackValue = EnergyRegistry.getInstance().getEnergyValue(wrappedStack);
+                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
             }
 
             if (wrappedStackValue != null)
@@ -93,9 +97,9 @@ public class EnergyHelper
                     stackSize = wrappedStack.getStackSize();
                 }
 
-                for (EnergyType emcType : EnergyType.TYPES)
+                for (EnergyType energyType : EnergyType.TYPES)
                 {
-                    computedSubValues[emcType.ordinal()] += wrappedStackValue.components[emcType.ordinal()] * stackSize;
+                    computedSubValues[energyType.ordinal()] += wrappedStackValue.components[energyType.ordinal()] * stackSize;
                 }
             }
             else
@@ -107,17 +111,17 @@ public class EnergyHelper
         return new EnergyValue(computedSubValues);
     }
 
-    public static EnergyValue factorEnergyValue(EnergyValue EnergyValue, int factor)
+    public static EnergyValue factorEnergyValue(EnergyValue ExchangeEnergyValue, int factor)
     {
-        return factorEnergyValue(EnergyValue, (float) factor);
+        return factorEnergyValue(ExchangeEnergyValue, (float) factor);
     }
 
-    public static EnergyValue factorEnergyValue(EnergyValue EnergyValue, float factor)
+    public static EnergyValue factorEnergyValue(EnergyValue ExchangeEnergyValue, float factor)
     {
 
-        if ((Float.compare(factor, 0f) != 0) && (EnergyValue != null))
+        if ((Float.compare(factor, 0f) != 0) && (ExchangeEnergyValue != null))
         {
-            float[] factorSubValues = EnergyValue.components;
+            float[] factorSubValues = ExchangeEnergyValue.components;
 
             for (int i = 0; i < factorSubValues.length; i++)
             {
@@ -128,7 +132,7 @@ public class EnergyHelper
         }
         else
         {
-            return EnergyValue;
+            return ExchangeEnergyValue;
         }
     }
 } 

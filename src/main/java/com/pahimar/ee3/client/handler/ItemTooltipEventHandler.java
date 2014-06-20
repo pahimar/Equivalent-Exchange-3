@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.exchange.EnergyRegistry;
 import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,7 @@ import java.text.DecimalFormat;
 @SideOnly(Side.CLIENT)
 public class ItemTooltipEventHandler
 {
-    private static DecimalFormat emcDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
+    private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event)
@@ -30,22 +30,22 @@ public class ItemTooltipEventHandler
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
-            if (EnergyRegistry.getInstance().hasEnergyValue(stack))
+            if (EnergyValueRegistry.getInstance().hasEnergyValue(stack))
             {
-                EnergyValue emcValue = EnergyRegistry.getInstance().getEnergyValue(stack);
+                EnergyValue energyValue = EnergyValueRegistry.getInstance().getEnergyValue(stack);
                 if (stack.getStackSize() > 1)
                 {
-                    event.toolTip.add("EMC (Item): " + String.format("%s", emcDecimalFormat.format(emcValue.getValue())));
-                    event.toolTip.add("EMC (Stack): " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                    event.toolTip.add("Exchange Energy (Item): " + String.format("%s", energyValueDecimalFormat.format(energyValue.getValue())));
+                    event.toolTip.add("Exchange Energy (Stack): " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getValue())));
                 }
                 else
                 {
-                    event.toolTip.add("EMC: " + String.format("%s", emcDecimalFormat.format(stack.getStackSize() * emcValue.getValue())));
+                    event.toolTip.add("Exchange Energy: " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getValue())));
                 }
             }
             else
             {
-                event.toolTip.add("No EMC value");
+                event.toolTip.add("No Exchange Energy value");
             }
         }
     }

@@ -10,29 +10,29 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnergyValuesDefault
+public class EnergyDefaultValues
 {
-    private static EnergyValuesDefault emcDefaultValues = null;
+    private static EnergyDefaultValues energyDefaultValues = null;
     private Map<WrappedStack, EnergyValue> valueMap;
 
-    private EnergyValuesDefault()
+    private EnergyDefaultValues()
     {
         valueMap = new HashMap<WrappedStack, EnergyValue>();
     }
 
     private static void lazyInit()
     {
-        if (emcDefaultValues == null)
+        if (energyDefaultValues == null)
         {
-            emcDefaultValues = new EnergyValuesDefault();
-            emcDefaultValues.init();
+            energyDefaultValues = new EnergyDefaultValues();
+            energyDefaultValues.init();
         }
     }
 
     public static Map<WrappedStack, EnergyValue> getDefaultValueMap()
     {
         lazyInit();
-        return emcDefaultValues.valueMap;
+        return energyDefaultValues.valueMap;
     }
 
     private void init()
