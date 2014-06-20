@@ -51,7 +51,6 @@ public class EnergyValuesDefault
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.lapis_ore))), new EnergyValue(864));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.quartz_ore))), new EnergyValue(256));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.redstone_ore))), new EnergyValue(32));
-//        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.lit_redstone_ore))), new EnergyValue(32));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.planks))), new EnergyValue(8));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Items.record_11))), new EnergyValue(2048));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.wooden_slab))), new EnergyValue(4));
@@ -60,6 +59,7 @@ public class EnergyValuesDefault
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.stone))), new EnergyValue(1));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.leaves))), new EnergyValue(1));
         valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.sapling))), new EnergyValue(32));
+        valueMap.put(new WrappedStack(new OreStack(new ItemStack(Blocks.sandstone))), new EnergyValue(4));
 
         // Fluids
         valueMap.put(new WrappedStack(FluidRegistry.WATER), new EnergyValue(1));
@@ -69,13 +69,13 @@ public class EnergyValuesDefault
         /* Building Blocks */
         valueMap.put(new WrappedStack(Blocks.stone), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.grass), new EnergyValue(1));
-        valueMap.put(new WrappedStack(Blocks.dirt), new EnergyValue(1));
+        valueMap.put(new WrappedStack(new ItemStack(Blocks.dirt, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.cobblestone), new EnergyValue(1));
-        // Bedrock (7:0)
-        valueMap.put(new WrappedStack(Blocks.sand), new EnergyValue(1));
+        // Bedrock
+        valueMap.put(new WrappedStack(new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.gravel), new EnergyValue(4));
         valueMap.put(new WrappedStack(Blocks.coal_ore), new EnergyValue(32));
-        // Sponge (19:0)
+        // Sponge
         valueMap.put(new WrappedStack(Blocks.glass), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.sandstone), new EnergyValue(4));
         valueMap.put(new WrappedStack(Blocks.mossy_cobblestone), new EnergyValue(1));
@@ -95,22 +95,23 @@ public class EnergyValuesDefault
         valueMap.put(new WrappedStack(new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.deadbush), new EnergyValue(1));
         valueMap.put(new WrappedStack(Blocks.yellow_flower), new EnergyValue(16));
-        valueMap.put(new WrappedStack(Blocks.red_flower), new EnergyValue(16));
+        valueMap.put(new WrappedStack(new ItemStack(Blocks.red_flower, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(16));
         valueMap.put(new WrappedStack(Blocks.brown_mushroom), new EnergyValue(32));
         valueMap.put(new WrappedStack(Blocks.red_mushroom), new EnergyValue(32));
         valueMap.put(new WrappedStack(Blocks.snow), new EnergyValue(0.5f));
         valueMap.put(new WrappedStack(Blocks.cactus), new EnergyValue(8));
-        // Stone Monster Egg (97:0)
-        // Cobblestone Monster Egg (97:1)
-        // Stone Brick Monster Egg (97:2)
+        // Stone Monster Egg
+        // Cobblestone Monster Egg
+        // Stone Brick Monster Egg
         valueMap.put(new WrappedStack(Blocks.vine), new EnergyValue(8));
         valueMap.put(new WrappedStack(Blocks.waterlily), new EnergyValue(16));
-        // End Portal (120:0)
-        // Skeleton Skull (397:0)
-        // Wither Skeleton Skull (391:1)
-        // Zombie Head (397:2)
-        // Head (397:3)
-        // Creeper Head (397:4)
+        // End Portal
+        valueMap.put(new WrappedStack(new ItemStack(Blocks.double_plant, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(16));
+        // Skeleton Skull
+        // Wither Skeleton Skull
+        // Zombie Head
+        // Head
+        // Creeper Head
 
         /* Redstone */
         valueMap.put(new WrappedStack(Items.redstone), new EnergyValue(32));
@@ -120,18 +121,19 @@ public class EnergyValuesDefault
 
         /* Miscellaneous */
         valueMap.put(new WrappedStack(Items.snowball), new EnergyValue(0.25f));
+        // Milk
         valueMap.put(new WrappedStack(Items.slime_ball), new EnergyValue(24));
         valueMap.put(new WrappedStack(Items.bone), new EnergyValue(24));
         valueMap.put(new WrappedStack(Items.ender_pearl), new EnergyValue(1024));
-        // Bottle o'Enchanting (384:0)
-        // Firework Star (402:0)
+        // Bottle o'Enchanting
+        // Firework Star
 
         /* Foodstuffs */
         valueMap.put(new WrappedStack(Items.apple), new EnergyValue(128));
         valueMap.put(new WrappedStack(Items.porkchop), new EnergyValue(64));
         valueMap.put(new WrappedStack(Items.cooked_porkchop), new EnergyValue(64));
-        valueMap.put(new WrappedStack(Items.fish), new EnergyValue(64));
-        valueMap.put(new WrappedStack(Items.cooked_fished), new EnergyValue(64));
+        valueMap.put(new WrappedStack(new ItemStack(Items.fish, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(64));
+        valueMap.put(new WrappedStack(new ItemStack(Items.cooked_fished, 1, OreDictionary.WILDCARD_VALUE)), new EnergyValue(64));
         valueMap.put(new WrappedStack(Items.melon), new EnergyValue(16));
         valueMap.put(new WrappedStack(Items.beef), new EnergyValue(64));
         valueMap.put(new WrappedStack(Items.cooked_beef), new EnergyValue(64));
@@ -145,13 +147,13 @@ public class EnergyValuesDefault
         valueMap.put(new WrappedStack(Items.poisonous_potato), new EnergyValue(24));
 
         /* Tools */
-        // Name Tag (421:0)
+        // Name Tag
 
         /* Combat */
-        // Chain Helmet (302:0)
-        // Chain Chestplate (303:0)
-        // Chain Leggings (304:0)
-        // Chain Boots (305:0)
+        // Chain Helmet
+        // Chain Chestplate
+        // Chain Leggings
+        // Chain Boots
 
         /* Brewing */
         valueMap.put(new WrappedStack(Items.ghast_tear), new EnergyValue(4096));
@@ -162,7 +164,7 @@ public class EnergyValuesDefault
         valueMap.put(new WrappedStack(Items.diamond), new EnergyValue(8192));
         valueMap.put(new WrappedStack(Items.iron_ingot), new EnergyValue(256));
         valueMap.put(new WrappedStack(Items.gold_ingot), new EnergyValue(2048));
-        valueMap.put(new WrappedStack(Blocks.wool), new EnergyValue(12));
+        valueMap.put(new WrappedStack(Items.string), new EnergyValue(12));
         valueMap.put(new WrappedStack(Items.feather), new EnergyValue(48));
         valueMap.put(new WrappedStack(Items.gunpowder), new EnergyValue(192));
         valueMap.put(new WrappedStack(Items.wheat_seeds), new EnergyValue(16));
