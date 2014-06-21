@@ -1,4 +1,4 @@
-package com.pahimar.ee3.item.tool;
+package com.pahimar.ee3.client.util;
 
 import com.pahimar.ee3.reference.IChargeable;
 import com.pahimar.ee3.reference.Reference;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.EnumHelper;
  * Common functions for the Dark Matter tools
  *
  */
-public class DMUtils 
+public class PowerItemUtils 
 {
 	/**
 	 * Increases the charge on an ee3 power item if the provided

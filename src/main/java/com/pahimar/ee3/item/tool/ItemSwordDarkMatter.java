@@ -10,6 +10,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import com.pahimar.ee3.client.util.PowerItemUtils;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.item.ItemEE;
@@ -23,11 +24,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class DMSword extends ItemSword implements IChargeable, IKeyBound
+public class ItemSwordDarkMatter extends ItemSword implements IChargeable, IKeyBound
 {
-	public DMSword()
+	public ItemSwordDarkMatter()
 	{
-		super(DMUtils.MATERIALDARKMATTER);
+		super(PowerItemUtils.MATERIALDARKMATTER);
 		
 		setUnlocalizedName(Names.Tools.SWORD_DARK_MATTER);
 		setCreativeTab(CreativeTab.EE3_TAB);
@@ -56,7 +57,7 @@ public class DMSword extends ItemSword implements IChargeable, IKeyBound
 	 public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
     	
-		float damageToDo = Reference.DM_SWORD_BASE_DAMAGE + DMUtils.computeEfficiencyBonus(par1ItemStack.getItemDamage());
+		float damageToDo = Reference.DM_SWORD_BASE_DAMAGE + PowerItemUtils.computeEfficiencyBonus(par1ItemStack.getItemDamage());
 		 
     	DamageSource damagesource = DamageSource.causePlayerDamage((EntityPlayer)par3EntityLivingBase);
     	
@@ -69,7 +70,7 @@ public class DMSword extends ItemSword implements IChargeable, IKeyBound
     {
     	if(key == Key.CHARGE)
     	{
-    		DMUtils.bumpChargeOnItem(itemStack);
+    		PowerItemUtils.bumpChargeOnItem(itemStack);
     	}
     }
     

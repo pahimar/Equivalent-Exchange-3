@@ -26,12 +26,12 @@ public class ModItems
     public static final ItemEE diviningRod = new ItemDiviningRod();
     public static final ItemEE darkMatter = new ItemDarkMatter();
     
-    public static final ItemTool axeDarkMatter = new DMAxe();
-    public static final ItemTool pickaxeDarkMatter = new DMPickaxe();
-    public static final ItemTool shovelDarkMatter = new DMShovel();
+    public static final ItemTool axeDarkMatter = new ItemAxeDarkMatter();
+    public static final ItemTool pickaxeDarkMatter = new ItemPickaxeDarkMatter();
+    public static final ItemTool shovelDarkMatter = new ItemShovelDarkMatter();
     
-    public static final ItemHoe hoeDarkMatter = new DMHoe();
-    public static final ItemSword swordDarkMatter = new DMSword();
+    public static final ItemHoe hoeDarkMatter = new ItemHoeDarkMatter();
+    public static final ItemSword swordDarkMatter = new ItemSwordDarkMatter();
 
     public static void init()
     {

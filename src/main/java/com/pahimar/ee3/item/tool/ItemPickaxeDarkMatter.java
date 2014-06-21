@@ -14,6 +14,7 @@ import com.pahimar.ee3.reference.IChargeable;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.client.util.PowerItemUtils;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.item.ItemEE;
@@ -22,11 +23,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class DMPickaxe extends ItemPickaxe implements IChargeable, IKeyBound
+public class ItemPickaxeDarkMatter extends ItemPickaxe implements IChargeable, IKeyBound
 {
-	public DMPickaxe()
+	public ItemPickaxeDarkMatter()
 	{
-		super(DMUtils.MATERIALDARKMATTER);
+		super(PowerItemUtils.MATERIALDARKMATTER);
 		
 		setUnlocalizedName(Names.Tools.PICKAXE_DARK_MATTER);
 		setCreativeTab(CreativeTab.EE3_TAB);
@@ -67,7 +68,7 @@ public class DMPickaxe extends ItemPickaxe implements IChargeable, IKeyBound
         }
         
         //for every charge level, efficiency increases by 3
-        return efficiencyOnProperMaterial + DMUtils.computeEfficiencyBonus(itemstack.getItemDamage());
+        return efficiencyOnProperMaterial + PowerItemUtils.computeEfficiencyBonus(itemstack.getItemDamage());
   
     }
 	
@@ -76,7 +77,7 @@ public class DMPickaxe extends ItemPickaxe implements IChargeable, IKeyBound
     {
     	if(key == Key.CHARGE)
     	{
-    		DMUtils.bumpChargeOnItem(itemStack);
+    		PowerItemUtils.bumpChargeOnItem(itemStack);
     	}
     }
     

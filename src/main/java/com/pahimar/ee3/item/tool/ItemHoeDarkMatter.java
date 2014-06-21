@@ -18,16 +18,17 @@ import com.pahimar.ee3.reference.IChargeable;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.client.util.PowerItemUtils;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.item.ItemEE;
 
 
-public class DMHoe extends ItemHoe implements IChargeable, IKeyBound
+public class ItemHoeDarkMatter extends ItemHoe implements IChargeable, IKeyBound
 {
-	public DMHoe()
+	public ItemHoeDarkMatter()
 	{
-		super(DMUtils.MATERIALDARKMATTER);
+		super(PowerItemUtils.MATERIALDARKMATTER);
 		
 		setUnlocalizedName(Names.Tools.HOE_DARK_MATTER);
 		setCreativeTab(CreativeTab.EE3_TAB);
@@ -108,7 +109,7 @@ public class DMHoe extends ItemHoe implements IChargeable, IKeyBound
     {
     	if(key == Key.CHARGE)
     	{
-    		DMUtils.bumpChargeOnItem(itemStack);
+    		PowerItemUtils.bumpChargeOnItem(itemStack);
     	}
     }
     
