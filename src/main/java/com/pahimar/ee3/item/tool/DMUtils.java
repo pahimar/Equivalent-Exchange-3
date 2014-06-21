@@ -15,10 +15,10 @@ public class DMUtils
 {
 	/**
 	 * Increases the charge on an ee3 power item if the provided
-	 * ItemStack is a power item, otherwise returns false if it is not
+	 * ItemStack is a power item
 	 * @param itemStack
 	 */
-	public static boolean bumpChargeOnItem(ItemStack itemStack) 
+	public static void bumpChargeOnItem(ItemStack itemStack) 
 	{
 		//make sure that we're acting on a chargeable item
 		assert(itemStack.getItem() instanceof IChargeable);
@@ -32,8 +32,6 @@ public class DMUtils
 			//reset charge to default
 			itemStack.setItemDamage(Reference.MAX_ITEM_CHARGES);
 		}
-		
-		return true;
 		
 	}
 	
