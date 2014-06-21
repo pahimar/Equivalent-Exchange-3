@@ -23,6 +23,12 @@ item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
 item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
+item.ee3:axeDarkMatter.name=Dark Matter Axe
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe
+item.ee3:pickaxeDarkMatter.name=Dark Matter Pickaxe
+item.ee3:shovelDarkMatter.name=Dark Matter Shovel
+item.ee3:swordDarkMatter.name=Dark Matter Sword
+item.ee3:darkMatter.name=Dark Matter
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest

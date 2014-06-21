@@ -23,3 +23,12 @@
 /*.ipr
 /*.iws
 /atlassian-ide-plugin.xml
+
+## minecraft
+/config
+/crash-reports
+/logs
+/mods
+/resourcepacks
+/saves
+/options.txt

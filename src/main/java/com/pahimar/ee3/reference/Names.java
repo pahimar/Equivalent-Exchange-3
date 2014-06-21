@@ -31,6 +31,16 @@ public class Names
         public static final String ALCHEMICAL_UPGRADE = "alchemicalUpgrade";
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
         public static final String DIVINING_ROD = "diviningRod";
+        public static final String DARK_MATTER = "darkMatter";
+    }
+    
+    public static class Tools
+    {
+    	public static final String AXE_DARK_MATTER = "axeDarkMatter";
+    	public static final String HOE_DARK_MATTER = "hoeDarkMatter";
+    	public static final String PICKAXE_DARK_MATTER = "pickaxeDarkMatter";
+    	public static final String SHOVEL_DARK_MATTER = "shovelDarkMatter";
+    	public static final String SWORD_DARK_MATTER = "swordDarkMatter";
     }
 
     public static class NBT
