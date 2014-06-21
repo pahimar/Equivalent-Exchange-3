@@ -53,7 +53,7 @@ public class DMAxe extends ItemAxe implements IChargeable, IKeyBound
 		
         if(block.getMaterial() != Material.wood && block.getMaterial() != Material.plants && block.getMaterial() != Material.vine)
         {
-      		return super.func_150893_a(itemstack, block);
+      		return super.getDigSpeed(itemstack, block, metadata);
         }
         
         //for every charge level, efficiency increases by 4
