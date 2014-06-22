@@ -1,6 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.init.EnergyValues;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -39,7 +40,7 @@ public class EnergyValueRegistry
         /*
          *  Default values
          */
-        Map<WrappedStack, EnergyValue> defaultValuesMap = EnergyDefaultValues.getDefaultValueMap();
+        Map<WrappedStack, EnergyValue> defaultValuesMap = EnergyValues.getValueMap();
         for (WrappedStack keyStack : defaultValuesMap.keySet())
         {
             EnergyValue factoredExchangeEnergyValue = null;
