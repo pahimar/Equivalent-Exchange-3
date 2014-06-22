@@ -1,11 +1,13 @@
 package com.pahimar.ee3.configuration;
 
+import com.pahimar.ee3.EquivalentExchange3;
+
 import java.io.File;
 
 public class ConfigurationHandler
 {
     public static void init(String configPath)
     {
-        ClientConfiguration.init(new File(configPath + "client.properties"));
+        EquivalentExchange3.proxy.initClientConfiguration(new File(configPath + "client.properties"));
     }
 }

@@ -1,5 +1,6 @@
 package com.pahimar.ee3.proxy;
 
+import com.pahimar.ee3.client.configuration.ClientConfiguration;
 import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.renderer.item.*;
@@ -14,6 +15,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+
+import java.io.File;
 
 public class ClientProxy extends CommonProxy
 {
@@ -32,6 +35,12 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.registerKeyBinding(Keybindings.extra);
         ClientRegistry.registerKeyBinding(Keybindings.release);
         ClientRegistry.registerKeyBinding(Keybindings.toggle);
+    }
+
+    @Override
+    public void initClientConfiguration(File configFile)
+    {
+        ClientConfiguration.init(configFile);
     }
 
     @Override

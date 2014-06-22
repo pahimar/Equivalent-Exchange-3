@@ -1,4 +1,4 @@
-package com.pahimar.ee3.configuration;
+package com.pahimar.ee3.client.configuration;
 
 import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.reference.Names;
@@ -15,7 +15,7 @@ public class ClientConfiguration
     private static final String CATEGORY_KEYBIND = "keybindings";
     private static Configuration configuration;
 
-    protected static void init(File configFile)
+    public static void init(File configFile)
     {
         configuration = new Configuration(configFile);
 
