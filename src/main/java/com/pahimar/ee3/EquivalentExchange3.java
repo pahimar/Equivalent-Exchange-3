@@ -8,7 +8,9 @@ import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,7 +34,16 @@ public class EquivalentExchange3
     @EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
-
+        // Report (log) to the user that the version of Equivalent Exchange 3
+        // they are using has been changed/tampered with
+        if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
+        {
+            LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
+        }
+        else
+        {
+            LogHelper.warn(Messages.INVALID_FINGERPRINT_MESSAGE);
+        }
     }
 
     @EventHandler
