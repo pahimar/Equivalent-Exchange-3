@@ -1,0 +1,76 @@
+# Localistation des clés
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Charge
+key.extra=Extra
+key.release=Relacher
+key.toggle=Alterner
+
+# Item localizations
+item.ee3:alchemicalBag.name=Sac alchimique
+item.ee3:alchemicalDust.ash.name=Cendre
+item.ee3:alchemicalDust.verdant.name=Poussière verdoyante
+item.ee3:alchemicalDust.azure.name=Poussière d'azur
+item.ee3:alchemicalDust.minium.name=Poussière de minium
+item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon alchimique
+item.ee3:alchemicalFuel.mobiusFuel.name=Carburant möbius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant aeternalis
+item.ee3:chalk.name=Craie [WIP]
+item.ee3:diviningRod.name=Baguette de divination [WIP]
+item.ee3:shardMinium.name=Eclat de minium
+item.ee3:stoneInert.name=Pierre inerte
+item.ee3:stoneMinium.name=Pierre de minium [WIP]
+item.ee3:stonePhilosophers.name=Pierre philosphale [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Amélioration verdoyante
+item.ee3:alchemicalUpgrade.azure.name=Amélioration
+item.ee3:alchemicalUpgrade.minium.name=Amélioration
+
+# Block localizations
+tile.ee3:alchemicalChest.name=Alchemical Chest
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
+tile.ee3:aludel.name=Aludel Base
+tile.ee3:calcinator.name=Calcinator
+tile.ee3:chalk.name=Chalk
+tile.ee3:glassBell.name=Glass Bell
+tile.ee3:researchStation.name=Research Station [WIP]
+
+# GUI localizations
+container.ee3:alchemicalBag=Alchemical Bag
+container.ee3:alchemicalChest=Alchemical Chest
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinator
+container.ee3:glassBell=Glass Bell
+container.ee3:researchStation=Research Station [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Target transmutation overlay turned on
+command.ee3:overlay.turned_off=Target transmutation overlay turned off
+command.ee3:overlay.position.top_left=Target transmutation overlay position set to top left
+command.ee3:overlay.position.top_right=Target transmutation overlay position set to top right
+command.ee3:overlay.position.bottom_left=Target transmutation overlay position set to bottom left
+command.ee3:overlay.position.bottom_right=Target transmutation overlay position set to bottom right
+command.ee3:overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0)
+command.ee3:overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3:overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0)
+command.ee3:overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3:particles.turned_on=Equivalent Exchange 3 particles turned on
+command.ee3:particles.turned_off=Equivalent Exchange 3 particles turned off
+command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
+command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
+command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+
+# Version check localizations
+version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
+version.ee3:uninitialized=Remote version check failed to initialize properly
+version.ee3:current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
+version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
+version.ee3:general_error=Error while connecting to remote version authority file; trying again
+version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
+
+# Tooltip localizations
+tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
+tooltip.ee3:alchemicalChestPrefix.small=Small
+tooltip.ee3:alchemicalChestPrefix.medium=Medium
+tooltip.ee3:alchemicalChestPrefix.large=Large
