@@ -193,4 +193,5 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileCalcinator(this));
     }
+
 }

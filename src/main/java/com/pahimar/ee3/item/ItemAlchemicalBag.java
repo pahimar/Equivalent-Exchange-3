@@ -62,13 +62,11 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
             if (NBTHelper.hasTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
             {
                 return icons[0];
-            }
-            else
+            } else
             {
                 return icons[1];
             }
-        }
-        else
+        } else
         {
             return icons[2 + MathHelper.clamp_int(itemStack.getItemDamage(), 0, 3)];
         }

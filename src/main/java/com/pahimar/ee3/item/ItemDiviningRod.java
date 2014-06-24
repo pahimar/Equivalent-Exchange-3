@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ItemDiviningRod extends ItemEE
 {
+
+
     public ItemDiviningRod()
     {
         super();
@@ -24,56 +26,80 @@ public class ItemDiviningRod extends ItemEE
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int facing, float par8, float par9, float par10) {
-        if (!world.isRemote) {
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int facing, float par8, float par9, float par10)
+    {
+        if (!world.isRemote)
+        {
             float value = 0;
             int blockZ;
             int blockY;
             int blockX;
 
-            if (facing == 0||facing == 1) {
-                // Up and Down
-                z = z-1;
-                x = x-1;
-            }else if (facing == 2) {
-                // SOUTH
-                y = y-1;
-                x = x+1;
-            } else if (facing == 3) {
-                // NORTH
-                y = y-1;
-                x = x-1;
-            } else if(facing == 4){
-                // East
-                y = y-1;
-                z = z-1;
-            } else if(facing == 5){
-                // West
-                y = y-1;
-                z = z+1;
+            switch (facing)
+            {
+                case 0:
+                    //UP
+                    z = z - 1;
+                    x = x - 1;
+                    break;
+                case 1:
+                    //DOWN
+                    z = z - 1;
+                    x = x - 1;
+                    break;
+                case 2:
+                    //SOUTH
+                    y = y - 1;
+                    x = x + 1;
+                    break;
+                case 3:
+                    //NORTH
+                    y = y - 1;
+                    x = x - 1;
+                    break;
+                case 4:
+                    //EAST
+                    y = y - 1;
+                    z = z - 1;
+                    break;
+                case 5:
+                    //WEST
+                    y = y - 1;
+                    z = z + 1;
+                    break;
             }
 
-            for (int i = 0; i < 3; i++) {
-                if(facing==3 || facing == 5) {
+            for (int i = 0; i < 3; i++)
+            {
+                if (facing == 3 || facing == 5)
+                {
                     blockZ = z - i;
-                }else {
-                    blockZ = z + i ;
+                } else
+                {
+                    blockZ = z + i;
                 }
-                for (int o = 0; o < 3; o++) {
-                    if(facing == 1) {
+                for (int o = 0; o < 3; o++)
+                {
+                    if (facing == 1)
+                    {
                         blockY = y - o;
-                    }else{
+                    } else
+                    {
                         blockY = y + o;
                     }
-                    for (int s = 0; s < 3; s++) {
-                        if(facing == 2 || facing == 5){
+                    for (int s = 0; s < 3; s++)
+                    {
+                        if (facing == 2 || facing == 5)
+                        {
                             blockX = x - s;
-                        }else{
+                        } else
+                        {
                             blockX = x + s;
                         }
                         Block block = world.getBlock(blockX, blockY, blockZ);
                         LogHelper.info(block.getUnlocalizedName());
-                        if(block != Blocks.air) {
+                        if (block != Blocks.air)
+                        {
                             List<WrappedStack> get = new ArrayList<WrappedStack>();
                             get.clear();
                             get.add(new WrappedStack(block));
@@ -82,10 +108,9 @@ public class ItemDiviningRod extends ItemEE
                     }
                 }
             }
-            ChatComponentText T = new ChatComponentText("Value = "+ String.valueOf((int)value/27));
+            ChatComponentText T = new ChatComponentText("Value = " + String.valueOf((int) value / 27));
             entityPlayer.addChatMessage(T);
         }
         return super.onItemUse(itemStack, entityPlayer, world, x, z, y, facing, par8, par9, par10);
     }
-    
 }
