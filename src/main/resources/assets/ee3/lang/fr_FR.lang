@@ -10,10 +10,10 @@ item.ee3:alchemicalBag.name=Sac alchimique
 item.ee3:alchemicalDust.ash.name=Cendre
 item.ee3:alchemicalDust.verdant.name=Poussière verdoyante
 item.ee3:alchemicalDust.azure.name=Poussière d'azur
-item.ee3:alchemicalDust.minium.name=Poussière de minium
+item.ee3:alchemicalDust.minium.name=Poussière de Minium
 item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon alchimique
-item.ee3:alchemicalFuel.mobiusFuel.name=Carburant möbius
-item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant aeternalis
+item.ee3:alchemicalFuel.mobiusFuel.name=Carburant Möbius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant Aeternalis
 item.ee3:chalk.name=Craie [WIP]
 item.ee3:diviningRod.name=Baguette de divination [WIP]
 item.ee3:shardMinium.name=Eclat de minium
@@ -21,27 +21,27 @@ item.ee3:stoneInert.name=Pierre inerte
 item.ee3:stoneMinium.name=Pierre de minium [WIP]
 item.ee3:stonePhilosophers.name=Pierre philosphale [WIP]
 item.ee3:alchemicalUpgrade.verdant.name=Amélioration verdoyante
-item.ee3:alchemicalUpgrade.azure.name=Amélioration
-item.ee3:alchemicalUpgrade.minium.name=Amélioration
+item.ee3:alchemicalUpgrade.azure.name=Amélioration d'azur
+item.ee3:alchemicalUpgrade.minium.name=Amélioration de Minium
 
 # Block localizations
-tile.ee3:alchemicalChest.name=Alchemical Chest
-tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
-tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
-tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
-tile.ee3:aludel.name=Aludel Base
-tile.ee3:calcinator.name=Calcinator
-tile.ee3:chalk.name=Chalk
-tile.ee3:glassBell.name=Glass Bell
-tile.ee3:researchStation.name=Research Station [WIP]
+tile.ee3:alchemicalChest.name=Coffre alchimique
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Bloc de charbon alchimique
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Bloc de carburant Möbius
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Bloc de carburant d'Aternalis
+tile.ee3:aludel.name=Base de l'Aludel
+tile.ee3:calcinator.name=Calcinateur
+tile.ee3:chalk.name=Craie
+tile.ee3:glassBell.name=Cloche en verre
+tile.ee3:researchStation.name=Station de recherche [WIP]
 
 # GUI localizations
-container.ee3:alchemicalBag=Alchemical Bag
-container.ee3:alchemicalChest=Alchemical Chest
+container.ee3:alchemicalBag=Sac alchimique
+container.ee3:alchemicalChest=Coffre alchimique
 container.ee3:aludel=Aludel
-container.ee3:calcinator=Calcinator
-container.ee3:glassBell=Glass Bell
-container.ee3:researchStation=Research Station [WIP]
+container.ee3:calcinator=Calcinateur
+container.ee3:glassBell=Cloche en verre
+container.ee3:researchStation=Station de recherche [WIP]
 
 # Command localizations
 command.ee3:overlay.turned_on=Target transmutation overlay turned on
