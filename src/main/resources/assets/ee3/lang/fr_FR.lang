@@ -70,7 +70,7 @@ version.ee3:final_error=Vérification de version à stoppé après trois tentati
 version.ee3:mc_version_not_found=Impossible de trouver une version de %s pour %s dans l'autorité de version distante
 
 # Tooltip localizations
-tooltip.ee3:upgradesPrefix=Améliorations de coffres (Alchimiques)
+tooltip.ee3:upgradesPrefix=Améliorations de coffre (Alchimiques)
 tooltip.ee3:alchemicalChestPrefix.small=Petit
 tooltip.ee3:alchemicalChestPrefix.medium=Moyen
 tooltip.ee3:alchemicalChestPrefix.large=Grand
