@@ -3,7 +3,6 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.EnergyValueHelper;
-import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -46,16 +45,18 @@ public class ItemDiviningRod extends ItemEE
                     //DOWN
                     z = z - 1;
                     x = x - 1;
+                    y = y - 2;
                     break;
                 case 2:
                     //SOUTH
                     y = y - 1;
-                    x = x + 1;
+                    x = x - 1;
                     break;
                 case 3:
                     //NORTH
                     y = y - 1;
                     x = x - 1;
+                    z = z - 2;
                     break;
                 case 4:
                     //EAST
@@ -65,50 +66,31 @@ public class ItemDiviningRod extends ItemEE
                 case 5:
                     //WEST
                     y = y - 1;
-                    z = z + 1;
+                    z = z - 1;
+                    x = x - 2;
                     break;
             }
 
             for (int i = 0; i < 3; i++)
             {
-                if (facing == 3 || facing == 5)
-                {
-                    blockZ = z - i;
-                } else
-                {
-                    blockZ = z + i;
-                }
+                blockZ = z + i;
                 for (int o = 0; o < 3; o++)
                 {
-                    if (facing == 1)
-                    {
-                        blockY = y - o;
-                    } else
-                    {
-                        blockY = y + o;
-                    }
+                    blockY = y + o;
                     for (int s = 0; s < 3; s++)
                     {
-                        if (facing == 2 || facing == 5)
-                        {
-                            blockX = x - s;
-                        } else
-                        {
-                            blockX = x + s;
-                        }
+                        blockX = x + s;
                         Block block = world.getBlock(blockX, blockY, blockZ);
-                        LogHelper.info(block.getUnlocalizedName());
                         if (block != Blocks.air)
                         {
                             List<WrappedStack> get = new ArrayList<WrappedStack>();
-                            get.clear();
                             get.add(new WrappedStack(block));
                             value = value + EnergyValueHelper.computeEnergyValueFromList(get).getValue();
                         }
                     }
                 }
             }
-            ChatComponentText T = new ChatComponentText("Value = " + String.valueOf((int) value / 27));
+            ChatComponentText T = new ChatComponentText("Energy Value = " + String.valueOf((int) value / 27));
             entityPlayer.addChatMessage(T);
         }
         return super.onItemUse(itemStack, entityPlayer, world, x, z, y, facing, par8, par9, par10);
