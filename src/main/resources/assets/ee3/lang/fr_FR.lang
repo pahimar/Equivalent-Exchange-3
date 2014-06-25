@@ -1,6 +1,6 @@
 # Localistation des clés
 key.categories.ee3=Equivalent Exchange 3
-key.charge=Charge
+key.charge=Charger
 key.extra=Extra
 key.release=Relacher
 key.toggle=Alterner
@@ -57,7 +57,7 @@ command.ee3:overlay.scale.updated=Echelle du panneau de transmutation cible ajus
 command.ee3:particles.turned_on=Particules de Equivalent Exchange 3 activées
 command.ee3:particles.turned_off=Particules de Equivalent Exchange 3 désactivées
 command.ee3:sounds.set_to_all=Joue les sons d'Equivalent Exchange 3 provenant de tous les joueurs
-command.ee3:sounds.set_to_self=Joue les sons d'Equivalent Exchange 3 provenant soi-même
+command.ee3:sounds.set_to_self=Joue les sons d'Equivalent Exchange 3 provenant de soi-même
 command.ee3:sounds.turned_off=Sons d'Equivalent Exchange 3 désactivés
 
 # Version check localizations
@@ -65,7 +65,7 @@ version.ee3:init_log_message=Initialisation de la verification de version distan
 version.ee3:uninitialized=La vérification de version distante n'a pas réussi à s'initialiser correctement
 version.ee3:current=En train d'utiliser la version la plus à jour (%s) d'Equavalent Exchange 3 pour %s
 version.ee3:outdated=Une nouvelle version de %s existe (%s) pour %s. Obtenez-la ici : %s
-version.ee3:general_error=Erreur lors de la connection à l'autorité de vérification de version distante ; éssayez encore une fois
+version.ee3:general_error=Erreur lors de la connection à l'autorité de vérification de version distante ; rééssayez encore une fois
 version.ee3:final_error=Vérification de version à stoppé après trois tentatives de connecion échouées
 version.ee3:mc_version_not_found=Impossible de trouver une version de %s pour %s dans l'autorité de version distante
 
