@@ -6,6 +6,7 @@ import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
+import com.pahimar.ee3.init.Recipes;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.reference.Messages;
@@ -85,6 +86,8 @@ public class EquivalentExchange3
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
+
+        Recipes.init();
     }
 
     @EventHandler
