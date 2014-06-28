@@ -1,5 +1,5 @@
 ##Welcome to Equivalent Exchange 3!
-**LATEST OFFICIAL VERSION**: [EE3 0.1.142 for MC 1.6.4](http://files.pahimar.com/ee3/MC_1.6.4/EquivalentExchange3-1.6.4-0.1.142.jar)
+**SEE ALL THE DOWNLOADS HERE**: [EE3 Downloads, Latest 0.2.234 for MC 1.7.10](http://ee3.pahimar.com/)
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
 
