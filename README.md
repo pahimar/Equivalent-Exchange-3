@@ -1,5 +1,4 @@
 ##Welcome to Equivalent Exchange 3!
-
 **SEE ALL THE DOWNLOADS HERE**: [EE3 Downloads, Latest 0.2.234 for MC 1.7.10](http://ee3.pahimar.com/)
 
 [Minecraft Forums page](http://www.minecraftforum.net/topic/1540010-equivalent-exchange-3)
