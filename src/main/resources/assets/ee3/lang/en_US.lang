@@ -23,6 +23,7 @@ item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
 item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
+item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge [WIP]
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest

@@ -2,7 +2,7 @@ package com.pahimar.ee3.reference;
 
 public class Names
 {
-    public static class Blocks
+    public static final class Blocks
     {
         public static final String CHALK = "chalkBlock";
         public static final String ALCHEMICAL_CHEST = "alchemicalChest";
@@ -13,7 +13,7 @@ public class Names
         public static final String RESEARCH_STATION = "researchStation";
     }
 
-    public static class Items
+    public static final class Items
     {
         public static final String ALCHEMICAL_BAG = "alchemicalBag";
         public static final String ALCHEMICAL_DUST = "alchemicalDust";
@@ -31,9 +31,10 @@ public class Names
         public static final String ALCHEMICAL_UPGRADE = "alchemicalUpgrade";
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
         public static final String DIVINING_ROD = "diviningRod";
+        public static final String ALCHEMICAL_TOME = "alchemicalTome";
     }
 
-    public static class NBT
+    public static final class NBT
     {
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
@@ -50,7 +51,7 @@ public class Names
         public static final String OWNER = "owner";
     }
 
-    public static class Containers
+    public static final class Containers
     {
         public static final String VANILLA_INVENTORY = "container.inventory";
         public static final String VANILLA_CRAFTING = "container.crafting";
@@ -62,7 +63,7 @@ public class Names
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
     }
 
-    public static class Keys
+    public static final class Keys
     {
         public static final String CATEGORY = "key.categories.ee3";
         public static final String CHARGE = "key.charge";
