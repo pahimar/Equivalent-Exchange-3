@@ -1,9 +1,13 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.item.ItemAlchemicalDust;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAludel;
+import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Names;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -166,5 +170,58 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     public Packet getDescriptionPacket()
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAludel(this, null));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int scale) {
+        return this.itemCookTime * scale / 200;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBurnTimeRemainingScaled(int scale) {
+        if (this.fuelBurnTime > 0) {
+            return this.deviceCookTime * scale / this.fuelBurnTime;
+        }
+        return 0;
+    }
+
+    private boolean canInfuse() {
+        if (!hasGlassBell || inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null) {
+            return false;
+        } else {
+            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+
+            if (infusedItemStack == null) {
+                return false;
+            }
+
+            if (inventory[OUTPUT_INVENTORY_INDEX] == null) {
+                return true;
+            } else {
+                boolean outputEquals = this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack);
+                int mergedOutputStackSize = this.inventory[OUTPUT_INVENTORY_INDEX].stackSize + infusedItemStack.stackSize;
+
+                if (outputEquals) {
+                    return mergedOutputStackSize <= getInventoryStackLimit() && mergedOutputStackSize <= infusedItemStack.getMaxStackSize();
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void infuseItem() {
+        if (this.canInfuse()) {
+            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+
+            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null) {
+                this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
+            } else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput())) {
+                inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
+            }
+
+            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
+            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
+        }
     }
 }
