@@ -106,12 +106,12 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
 
     @Override
     public String getInventoryName() {
-        return this.hasCustomName() ? this.getCustomName() : Names.Containers.CALCINATOR_NAME;
+        return this.hasCustomName() ? this.getCustomName() : Names.Containers.CALCINATOR;
     }
 
     @Override
     public boolean hasCustomInventoryName() {
-        return false;
+        return this.hasCustomName();
     }
 
     @Override
