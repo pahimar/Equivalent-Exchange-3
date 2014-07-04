@@ -48,11 +48,6 @@ public class TileEntityEE extends TileEntity
         this.state = state;
     }
 
-    public boolean hasCustomName()
-    {
-        return customName != null && customName.length() > 0;
-    }
-
     public String getCustomName()
     {
         return customName;
@@ -61,11 +56,6 @@ public class TileEntityEE extends TileEntity
     public void setCustomName(String customName)
     {
         this.customName = customName;
-    }
-
-    public boolean hasOwner()
-    {
-        return owner != null && owner.length() > 0;
     }
 
     public String getOwner()
@@ -121,6 +111,16 @@ public class TileEntityEE extends TileEntity
         {
             nbtTagCompound.setString(Names.NBT.OWNER, owner);
         }
+    }
+
+    public boolean hasCustomName()
+    {
+        return customName != null && customName.length() > 0;
+    }
+
+    public boolean hasOwner()
+    {
+        return owner != null && owner.length() > 0;
     }
 
     @Override

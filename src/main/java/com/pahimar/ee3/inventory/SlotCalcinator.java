@@ -6,19 +6,23 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotCalcinator extends Slot {
-    public SlotCalcinator(IInventory inventory, int x, int y, int z) {
+public class SlotCalcinator extends Slot
+{
+    public SlotCalcinator(IInventory inventory, int x, int y, int z)
+    {
         super(inventory, x, y, z);
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack) {
-        return false;
+    public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+    {
+        super.onPickupFromSlot(entityPlayer, itemStack);
+        FMLCommonHandler.instance().firePlayerCraftingEvent(entityPlayer, itemStack, inventory);
     }
 
     @Override
-    public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack) {
-        super.onPickupFromSlot(entityPlayer, itemStack);
-        FMLCommonHandler.instance().firePlayerCraftingEvent(entityPlayer, itemStack, inventory);
+    public boolean isItemValid(ItemStack par1ItemStack)
+    {
+        return false;
     }
 }

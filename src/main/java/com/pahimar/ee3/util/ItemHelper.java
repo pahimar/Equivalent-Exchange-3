@@ -75,11 +75,8 @@ public class ItemHelper
      * Compares two ItemStacks for equality, testing itemID, metaData, stackSize, and their NBTTagCompounds (if they are
      * present)
      *
-     * @param first
-     *         The first ItemStack being tested for equality
-     * @param second
-     *         The second ItemStack being tested for equality
-     *
+     * @param first  The first ItemStack being tested for equality
+     * @param second The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
     public static boolean equals(ItemStack first, ItemStack second)

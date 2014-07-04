@@ -58,15 +58,15 @@ public class OreStack implements Comparable<OreStack>
         }
     };
 
+    public OreStack(String oreName)
+    {
+        this(oreName, 1);
+    }
+
     public OreStack(String oreName, int stackSize)
     {
         this.oreName = oreName;
         this.stackSize = stackSize;
-    }
-
-    public OreStack(String oreName)
-    {
-        this(oreName, 1);
     }
 
     public OreStack(ItemStack itemStack)
@@ -94,9 +94,7 @@ public class OreStack implements Comparable<OreStack>
     /**
      * Deserializes a OreStack object from the given serialized json String
      *
-     * @param jsonOreStack
-     *         Json encoded String representing a OreStack object
-     *
+     * @param jsonOreStack Json encoded String representing a OreStack object
      * @return The OreStack that was encoded as json, or null if a valid OreStack could not be decoded from given String
      */
     @SuppressWarnings("unused")
@@ -147,15 +145,15 @@ public class OreStack implements Comparable<OreStack>
     }
 
     @Override
-    public String toString()
-    {
-        return String.format("%sxoreStack.%s", stackSize, oreName);
-    }
-
-    @Override
     public boolean equals(Object object)
     {
         return object instanceof OreStack && (comparator.compare(this, (OreStack) object) == Compare.EQUALS);
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%sxoreStack.%s", stackSize, oreName);
     }
 
     @Override

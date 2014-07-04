@@ -8,33 +8,6 @@ import java.util.UUID;
 
 public class NBTHelper
 {
-    /**
-     * Initializes the NBT Tag Compound for the given ItemStack if it is null
-     *
-     * @param itemStack
-     *         The ItemStack for which its NBT Tag Compound is being checked for initialization
-     */
-    private static void initNBTTagCompound(ItemStack itemStack)
-    {
-        if (itemStack.stackTagCompound == null)
-        {
-            itemStack.setTagCompound(new NBTTagCompound());
-        }
-    }
-
-    public static boolean hasTag(ItemStack itemStack, String keyName)
-    {
-        return itemStack != null && itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
-    }
-
-    public static void removeTag(ItemStack itemStack, String keyName)
-    {
-        if (itemStack.stackTagCompound != null)
-        {
-            itemStack.stackTagCompound.removeTag(keyName);
-        }
-    }
-
     public static void clearStatefulNBTTags(ItemStack itemStack)
     {
         if (NBTHelper.hasTag(itemStack, Names.NBT.CRAFTING_GUI_OPEN))
@@ -48,6 +21,19 @@ public class NBTHelper
         else if (NBTHelper.hasTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
         {
             NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
+        }
+    }
+
+    public static boolean hasTag(ItemStack itemStack, String keyName)
+    {
+        return itemStack != null && itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
+    }
+
+    public static void removeTag(ItemStack itemStack, String keyName)
+    {
+        if (itemStack.stackTagCompound != null)
+        {
+            itemStack.stackTagCompound.removeTag(keyName);
         }
     }
 
@@ -67,6 +53,26 @@ public class NBTHelper
             setLong(itemStack, Names.NBT.UUID_MOST_SIG, itemUUID.getMostSignificantBits());
             setLong(itemStack, Names.NBT.UUID_LEAST_SIG, itemUUID.getLeastSignificantBits());
         }
+    }
+
+    /**
+     * Initializes the NBT Tag Compound for the given ItemStack if it is null
+     *
+     * @param itemStack The ItemStack for which its NBT Tag Compound is being checked for initialization
+     */
+    private static void initNBTTagCompound(ItemStack itemStack)
+    {
+        if (itemStack.stackTagCompound == null)
+        {
+            itemStack.setTagCompound(new NBTTagCompound());
+        }
+    }
+
+    public static void setLong(ItemStack itemStack, String keyName, long keyValue)
+    {
+        initNBTTagCompound(itemStack);
+
+        itemStack.stackTagCompound.setLong(keyName, keyValue);
     }
 
     // String
@@ -180,13 +186,6 @@ public class NBTHelper
         }
 
         return itemStack.stackTagCompound.getLong(keyName);
-    }
-
-    public static void setLong(ItemStack itemStack, String keyName, long keyValue)
-    {
-        initNBTTagCompound(itemStack);
-
-        itemStack.stackTagCompound.setLong(keyName, keyValue);
     }
 
     // float

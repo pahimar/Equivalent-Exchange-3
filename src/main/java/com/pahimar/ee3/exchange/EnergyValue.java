@@ -23,31 +23,6 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         this(new float[EnergyType.TYPES.length]);
     }
 
-    public EnergyValue(int value)
-    {
-        this((float) value);
-    }
-
-    public EnergyValue(float value)
-    {
-        this(value, EnergyType.DEFAULT);
-    }
-
-    public EnergyValue(float value, EnergyComponent component)
-    {
-        this(value, component.type);
-    }
-
-    public EnergyValue(int value, EnergyType energyType)
-    {
-        this((float) value, energyType);
-    }
-
-    public EnergyValue(float value, EnergyType energyType)
-    {
-        this(value, Arrays.asList(new EnergyComponent(energyType)));
-    }
-
     public EnergyValue(float[] components)
     {
         if (components.length == EnergyType.TYPES.length)
@@ -65,9 +40,19 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         }
     }
 
-    public EnergyValue(int value, List<EnergyComponent> componentList)
+    public EnergyValue(int value)
     {
-        this((float) value, componentList);
+        this((float) value);
+    }
+
+    public EnergyValue(float value)
+    {
+        this(value, EnergyType.DEFAULT);
+    }
+
+    public EnergyValue(float value, EnergyType energyType)
+    {
+        this(value, Arrays.asList(new EnergyComponent(energyType)));
     }
 
     public EnergyValue(float value, List<EnergyComponent> componentList)
@@ -108,34 +93,6 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         }
     }
 
-    /**
-     * Deserializes an EnergyValue object from the given serialized json String
-     *
-     * @param jsonEnergyValue
-     *         Json encoded String representing a EnergyValue object
-     *
-     * @return The EnergyValue that was encoded as json, or null if a valid EnergyValue could not be decoded from given
-     * String
-     */
-    @SuppressWarnings("unused")
-    public static EnergyValue createFromJson(String jsonEnergyValue)
-    {
-        try
-        {
-            return gsonSerializer.fromJson(jsonEnergyValue, EnergyValue.class);
-        }
-        catch (JsonSyntaxException exception)
-        {
-            LogHelper.error(exception.getMessage());
-        }
-        catch (JsonParseException exception)
-        {
-            LogHelper.error(exception.getMessage());
-        }
-
-        return null;
-    }
-
     private static List<EnergyComponent> collateComponents(List<EnergyComponent> uncollatedComponents)
     {
         Integer[] componentCount = new Integer[EnergyType.TYPES.length];
@@ -168,25 +125,59 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         return collatedComponents;
     }
 
-    private static int compareComponents(float[] first, float[] second)
+    public EnergyValue(float value, EnergyComponent component)
     {
-        if (first.length == EnergyType.TYPES.length && second.length == EnergyType.TYPES.length)
-        {
+        this(value, component.type);
+    }
 
-            for (EnergyType energyType : EnergyType.TYPES)
-            {
-                if (Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]) != 0)
-                {
-                    return Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]);
-                }
-            }
+    public EnergyValue(int value, EnergyType energyType)
+    {
+        this((float) value, energyType);
+    }
 
-            return 0;
-        }
-        else
+    public EnergyValue(int value, List<EnergyComponent> componentList)
+    {
+        this((float) value, componentList);
+    }
+
+    /**
+     * Deserializes an EnergyValue object from the given serialized json String
+     *
+     * @param jsonEnergyValue Json encoded String representing a EnergyValue object
+     * @return The EnergyValue that was encoded as json, or null if a valid EnergyValue could not be decoded from given
+     * String
+     */
+    @SuppressWarnings("unused")
+    public static EnergyValue createFromJson(String jsonEnergyValue)
+    {
+        try
         {
-            throw new ArrayIndexOutOfBoundsException();
+            return gsonSerializer.fromJson(jsonEnergyValue, EnergyValue.class);
         }
+        catch (JsonSyntaxException exception)
+        {
+            LogHelper.error(exception.getMessage());
+        }
+        catch (JsonParseException exception)
+        {
+            LogHelper.error(exception.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hashCode = 1;
+
+        hashCode = 37 * hashCode + Float.floatToIntBits(getValue());
+        for (float subValue : components)
+        {
+            hashCode = 37 * hashCode + Float.floatToIntBits(subValue);
+        }
+
+        return hashCode;
     }
 
     public float getValue()
@@ -229,20 +220,6 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
     }
 
     @Override
-    public int hashCode()
-    {
-        int hashCode = 1;
-
-        hashCode = 37 * hashCode + Float.floatToIntBits(getValue());
-        for (float subValue : components)
-        {
-            hashCode = 37 * hashCode + Float.floatToIntBits(subValue);
-        }
-
-        return hashCode;
-    }
-
-    @Override
     public int compareTo(EnergyValue exchangeEnergyValue)
     {
         if (exchangeEnergyValue != null)
@@ -252,6 +229,27 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         else
         {
             return -1;
+        }
+    }
+
+    private static int compareComponents(float[] first, float[] second)
+    {
+        if (first.length == EnergyType.TYPES.length && second.length == EnergyType.TYPES.length)
+        {
+
+            for (EnergyType energyType : EnergyType.TYPES)
+            {
+                if (Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]) != 0)
+                {
+                    return Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]);
+                }
+            }
+
+            return 0;
+        }
+        else
+        {
+            throw new ArrayIndexOutOfBoundsException();
         }
     }
 

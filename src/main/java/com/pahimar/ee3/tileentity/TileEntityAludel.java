@@ -49,9 +49,12 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     @Override
     public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
     {
-        if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityGlassBell) {
+        if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityGlassBell)
+        {
             return isItemValidForSlot(slotIndex, itemStack);
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -78,12 +81,17 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     public ItemStack decrStackSize(int slotIndex, int decrementAmount)
     {
         ItemStack itemStack = getStackInSlot(slotIndex);
-        if (itemStack != null) {
-            if (itemStack.stackSize <= decrementAmount) {
+        if (itemStack != null)
+        {
+            if (itemStack.stackSize <= decrementAmount)
+            {
                 setInventorySlotContents(slotIndex, null);
-            } else {
+            }
+            else
+            {
                 itemStack = itemStack.splitStack(decrementAmount);
-                if (itemStack.stackSize == 0) {
+                if (itemStack.stackSize == 0)
+                {
                     setInventorySlotContents(slotIndex, null);
                 }
             }
@@ -96,7 +104,8 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     public ItemStack getStackInSlotOnClosing(int slotIndex)
     {
         ItemStack itemStack = getStackInSlot(slotIndex);
-        if (itemStack != null) {
+        if (itemStack != null)
+        {
             setInventorySlotContents(slotIndex, null);
         }
         return itemStack;
@@ -106,7 +115,8 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
     {
         inventory[slotIndex] = itemStack;
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
+        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
+        {
             itemStack.stackSize = getInventoryStackLimit();
         }
     }
@@ -150,17 +160,22 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        switch (slotIndex) {
-            case FUEL_INVENTORY_INDEX: {
+        switch (slotIndex)
+        {
+            case FUEL_INVENTORY_INDEX:
+            {
                 return TileEntityFurnace.isItemFuel(itemStack);
             }
-            case INPUT_INVENTORY_INDEX: {
+            case INPUT_INVENTORY_INDEX:
+            {
                 return true;
             }
-            case DUST_INVENTORY_INDEX: {
+            case DUST_INVENTORY_INDEX:
+            {
                 return itemStack.getItem() instanceof ItemAlchemicalDust;
             }
-            default: {
+            default:
+            {
                 return false;
             }
         }
@@ -173,55 +188,72 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     }
 
     @SideOnly(Side.CLIENT)
-    public int getCookProgressScaled(int scale) {
+    public int getCookProgressScaled(int scale)
+    {
         return this.itemCookTime * scale / 200;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getBurnTimeRemainingScaled(int scale) {
-        if (this.fuelBurnTime > 0) {
+    public int getBurnTimeRemainingScaled(int scale)
+    {
+        if (this.fuelBurnTime > 0)
+        {
             return this.deviceCookTime * scale / this.fuelBurnTime;
         }
         return 0;
     }
 
-    private boolean canInfuse() {
-        if (!hasGlassBell || inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null) {
-            return false;
-        } else {
-            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
-
-            if (infusedItemStack == null) {
-                return false;
-            }
-
-            if (inventory[OUTPUT_INVENTORY_INDEX] == null) {
-                return true;
-            } else {
-                boolean outputEquals = this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack);
-                int mergedOutputStackSize = this.inventory[OUTPUT_INVENTORY_INDEX].stackSize + infusedItemStack.stackSize;
-
-                if (outputEquals) {
-                    return mergedOutputStackSize <= getInventoryStackLimit() && mergedOutputStackSize <= infusedItemStack.getMaxStackSize();
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public void infuseItem() {
-        if (this.canInfuse()) {
+    public void infuseItem()
+    {
+        if (this.canInfuse())
+        {
             RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
 
-            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null) {
+            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
+            {
                 this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
-            } else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput())) {
+            }
+            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput()))
+            {
                 inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
             }
 
             decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
             decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
         }
+    }
+
+    private boolean canInfuse()
+    {
+        if (!hasGlassBell || inventory[INPUT_INVENTORY_INDEX] == null || inventory[DUST_INVENTORY_INDEX] == null)
+        {
+            return false;
+        }
+        else
+        {
+            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+
+            if (infusedItemStack == null)
+            {
+                return false;
+            }
+
+            if (inventory[OUTPUT_INVENTORY_INDEX] == null)
+            {
+                return true;
+            }
+            else
+            {
+                boolean outputEquals = this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(infusedItemStack);
+                int mergedOutputStackSize = this.inventory[OUTPUT_INVENTORY_INDEX].stackSize + infusedItemStack.stackSize;
+
+                if (outputEquals)
+                {
+                    return mergedOutputStackSize <= getInventoryStackLimit() && mergedOutputStackSize <= infusedItemStack.getMaxStackSize();
+                }
+            }
+        }
+
+        return false;
     }
 }

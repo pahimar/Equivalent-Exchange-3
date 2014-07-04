@@ -1,6 +1,7 @@
 package com.pahimar.ee3.reference;
 
-public final class GuiIds {
+public final class GuiIds
+{
     public static final int PORTABLE_CRAFTING = 0;
     public static final int CALCINATOR = 1;
     public static final int ALUDEL = 2;
