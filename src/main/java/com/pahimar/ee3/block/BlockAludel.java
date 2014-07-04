@@ -1,6 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
@@ -12,6 +13,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -109,6 +111,14 @@ public class BlockAludel extends BlockEE implements ITileEntityProvider
                 if (world.getTileEntity(x, y, z) instanceof TileEntityAludel && world.getTileEntity(x, y + 1, z) instanceof TileEntityGlassBell)
                 {
                     player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y, z);
+                }
+            }
+
+            if (world.getTileEntity(x, y, z) instanceof TileEntityAludel && ModBlocks.glassBell.canPlaceBlockAt(world, x, y + 1, z) && faceHit == ForgeDirection.UP.ordinal())
+            {
+                if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemBlock && ((ItemBlock) player.getHeldItem().getItem()).field_150939_a == ModBlocks.glassBell)
+                {
+                    return false;
                 }
             }
 
