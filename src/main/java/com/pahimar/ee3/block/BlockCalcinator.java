@@ -38,34 +38,29 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-
-    @Override
     public int getRenderType()
     {
         return RenderIds.calcinator;
     }
 
     @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    public boolean isOpaqueCube()
     {
-        if ((world.getTileEntity(x, y, z) instanceof TileEntityCalcinator) && (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1))
-        {
-            return 15;
-        }
-
-        return super.getLightValue(world, x, y, z);
+        return false;
     }
 
     @Override
-    public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
-        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
-        return tileentity != null ? tileentity.receiveClientEvent(par5, par6) : false;
+        if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
+        {
+            if (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
+            {
+                // Fire pot particles
+                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.4F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
+            }
+        }
     }
 
     @Override
@@ -90,16 +85,21 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
+        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+        return tileentity != null ? tileentity.receiveClientEvent(eventId, eventData) : false;
+    }
+
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+        if ((world.getTileEntity(x, y, z) instanceof TileEntityCalcinator) && (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1))
         {
-            if (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
-            {
-                // Fire pot particles
-                world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);
-                world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.4F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
-            }
+            return 15;
         }
+
+        return super.getLightValue(world, x, y, z);
     }
 }

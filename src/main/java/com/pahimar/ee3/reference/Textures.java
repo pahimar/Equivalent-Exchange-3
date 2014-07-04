@@ -3,7 +3,7 @@ package com.pahimar.ee3.reference;
 import com.pahimar.ee3.util.ResourceLocationHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class Textures
+public final class Textures
 {
     public static final String RESOURCE_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
 

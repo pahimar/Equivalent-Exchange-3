@@ -371,8 +371,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
         if (eventId == 1)
         {
             this.state = (byte) eventData;
-            // NAME UPDATE
-            // this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
+            // NAME UPDATE - this.worldObj.updateAllLightTypes(this.xCoord, this.yCoord, this.zCoord);
             this.worldObj.func_147451_t(this.xCoord, this.yCoord, this.zCoord);
             return true;
         }

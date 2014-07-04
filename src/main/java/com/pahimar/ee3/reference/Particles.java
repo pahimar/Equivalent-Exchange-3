@@ -1,6 +1,6 @@
 package com.pahimar.ee3.reference;
 
-public class Particles
+public final class Particles
 {
     /* Vanilla particle names (not necessarily all of them) */
     public static final String NORMAL_SMOKE = "smoke";

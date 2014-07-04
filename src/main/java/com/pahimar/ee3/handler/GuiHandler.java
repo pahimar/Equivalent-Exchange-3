@@ -1,12 +1,10 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
-import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
-import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
-import com.pahimar.ee3.client.gui.inventory.GuiGlassBell;
+import com.pahimar.ee3.client.gui.inventory.*;
 import com.pahimar.ee3.inventory.*;
 import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
+import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityCalcinator;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -37,6 +35,11 @@ public class GuiHandler implements IGuiHandler
             TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) world.getTileEntity(x, y, z);
             return new ContainerCalcinator(player.inventory, tileEntityCalcinator);
         }
+        else if (id == GuiIds.ALUDEL)
+        {
+            TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(x, y, z);
+            return new ContainerAludel(player.inventory, tileEntityAludel);
+        }
 
         return null;
     }
@@ -62,6 +65,11 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) world.getTileEntity(x, y, z);
             return new GuiCalcinator(player.inventory, tileEntityCalcinator);
+        }
+        else if (id == GuiIds.ALUDEL)
+        {
+            TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(x, y, z);
+            return new GuiAludel(player.inventory, tileEntityAludel);
         }
 
         return null;

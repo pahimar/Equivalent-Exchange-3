@@ -6,11 +6,14 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAludel;
 import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Names;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -63,6 +66,30 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
     {
         return slotIndex == OUTPUT_INVENTORY_INDEX;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+
+        // Read in the ItemStacks in the inventory from NBT
+        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+        inventory = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < tagList.tagCount(); ++i)
+        {
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
+            byte slotIndex = tagCompound.getByte("Slot");
+            if (slotIndex >= 0 && slotIndex < inventory.length)
+            {
+                inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
+            }
+        }
+
+        deviceCookTime = nbtTagCompound.getInteger("deviceCookTime");
+        fuelBurnTime = nbtTagCompound.getInteger("fuelBurnTime");
+        itemCookTime = nbtTagCompound.getInteger("itemCookTime");
+        hasGlassBell = nbtTagCompound.getBoolean("hasGlassBell");
     }
 
     @Override
@@ -182,44 +209,101 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     }
 
     @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+
+        // Write the ItemStacks in the inventory to NBT
+        NBTTagList tagList = new NBTTagList();
+        for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex)
+        {
+            if (inventory[currentIndex] != null)
+            {
+                NBTTagCompound tagCompound = new NBTTagCompound();
+                tagCompound.setByte("Slot", (byte) currentIndex);
+                inventory[currentIndex].writeToNBT(tagCompound);
+                tagList.appendTag(tagCompound);
+            }
+        }
+        nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
+        nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
+        nbtTagCompound.setInteger("itemCookTime", itemCookTime);
+        nbtTagCompound.setBoolean("hasGlassBell", hasGlassBell);
+    }
+
+    @Override
     public Packet getDescriptionPacket()
     {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAludel(this, null));
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getCookProgressScaled(int scale)
+    @Override
+    public void updateEntity()
     {
-        return this.itemCookTime * scale / 200;
-    }
+        boolean isBurning = this.deviceCookTime > 0;
+        boolean sendUpdate = false;
 
-    @SideOnly(Side.CLIENT)
-    public int getBurnTimeRemainingScaled(int scale)
-    {
-        if (this.fuelBurnTime > 0)
+        // If the Aludel still has burn time, decrement it
+        if (this.deviceCookTime > 0)
         {
-            return this.deviceCookTime * scale / this.fuelBurnTime;
+            this.deviceCookTime--;
         }
-        return 0;
-    }
 
-    public void infuseItem()
-    {
-        if (this.canInfuse())
+        if (!this.worldObj.isRemote)
         {
-            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
-
-            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
+            // Start "cooking" a new item, if we can
+            if (this.deviceCookTime == 0 && this.canInfuse())
             {
-                this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
-            }
-            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput()))
-            {
-                inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
+                this.fuelBurnTime = this.deviceCookTime = TileEntityFurnace.getItemBurnTime(this.inventory[FUEL_INVENTORY_INDEX]);
+
+                if (this.deviceCookTime > 0)
+                {
+                    sendUpdate = true;
+
+                    if (this.inventory[FUEL_INVENTORY_INDEX] != null)
+                    {
+                        --this.inventory[FUEL_INVENTORY_INDEX].stackSize;
+
+                        if (this.inventory[FUEL_INVENTORY_INDEX].stackSize == 0)
+                        {
+                            this.inventory[FUEL_INVENTORY_INDEX] = this.inventory[FUEL_INVENTORY_INDEX].getItem().getContainerItem(inventory[FUEL_INVENTORY_INDEX]);
+                        }
+                    }
+                }
             }
 
-            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
-            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
+            // Continue "cooking" the same item, if we can
+            if (this.deviceCookTime > 0 && this.canInfuse())
+            {
+                this.itemCookTime++;
+
+                if (this.itemCookTime == 200)
+                {
+                    this.itemCookTime = 0;
+                    this.infuseItem();
+                    sendUpdate = true;
+                }
+            }
+            else
+            {
+                this.itemCookTime = 0;
+            }
+
+            // If the state has changed, catch that something changed
+            if (isBurning != this.deviceCookTime > 0)
+            {
+                sendUpdate = true;
+            }
+        }
+
+        if (sendUpdate)
+        {
+            this.markDirty();
+            this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTileEntityAludel(this, null), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double) this.yCoord, (double) this.zCoord, 128d));
+            this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         }
     }
 
@@ -255,5 +339,41 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
         }
 
         return false;
+    }
+
+    public void infuseItem()
+    {
+        if (this.canInfuse())
+        {
+            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+
+            if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
+            {
+                this.inventory[OUTPUT_INVENTORY_INDEX] = recipe.getRecipeOutput().copy();
+            }
+            else if (this.inventory[OUTPUT_INVENTORY_INDEX].isItemEqual(recipe.getRecipeOutput()))
+            {
+                inventory[OUTPUT_INVENTORY_INDEX].stackSize += recipe.getRecipeOutput().stackSize;
+            }
+
+            decrStackSize(INPUT_INVENTORY_INDEX, recipe.getRecipeInputs()[0].getStackSize());
+            decrStackSize(DUST_INVENTORY_INDEX, recipe.getRecipeInputs()[1].getStackSize());
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int scale)
+    {
+        return this.itemCookTime * scale / 200;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getBurnTimeRemainingScaled(int scale)
+    {
+        if (this.fuelBurnTime > 0)
+        {
+            return this.deviceCookTime * scale / this.fuelBurnTime;
+        }
+        return 0;
     }
 }
