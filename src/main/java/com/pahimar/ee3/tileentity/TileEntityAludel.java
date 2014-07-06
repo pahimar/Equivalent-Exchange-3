@@ -235,7 +235,7 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAludel(this, null));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAludel(this, inventory[OUTPUT_INVENTORY_INDEX]));
     }
 
     @Override
@@ -302,8 +302,21 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
             this.markDirty();
             this.state = this.deviceCookTime > 0 ? (byte) 1 : (byte) 0;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
-            PacketHandler.INSTANCE.sendToAllAround(new MessageTileEntityAludel(this, null), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double) this.yCoord, (double) this.zCoord, 128d));
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTileEntityAludel(this, inventory[OUTPUT_INVENTORY_INDEX]), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double) this.yCoord, (double) this.zCoord, 128d));
             this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+        }
+    }
+
+    @Override
+    public void markDirty()
+    {
+        PacketHandler.INSTANCE.sendToAllAround(new MessageTileEntityAludel(this, inventory[OUTPUT_INVENTORY_INDEX]), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double) this.yCoord, (double) this.zCoord, 128d));
+
+        worldObj.func_147451_t(xCoord, yCoord, zCoord);
+
+        if (hasGlassBell)
+        {
+            worldObj.func_147451_t(xCoord, yCoord + 1, zCoord);
         }
     }
 

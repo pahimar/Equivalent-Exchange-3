@@ -185,11 +185,6 @@ public class TileEntityGlassBell extends TileEntityEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        if (getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX) != null && getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX).stackSize > 0)
-        {
-            return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityGlassBell(this, getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX)));
-        }
-
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityGlassBell(this, null));
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityGlassBell(this, getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX)));
     }
 }
