@@ -2,7 +2,6 @@ package com.pahimar.ee3.item.crafting;
 
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -27,24 +26,6 @@ public class RecipeAludel
         this.recipeOutput = recipeOutput.copy();
         this.inputStack = new WrappedStack(inputStack);
         this.dustStack = dustStack.copy();
-    }
-
-    public boolean matches(ItemStack inputStack, ItemStack dustStack)
-    {
-        if (OreDictionary.getOreID(inputStack) != -1)
-        {
-            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
-            {
-                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
-            }
-        }
-
-        return matches(new WrappedStack(inputStack), dustStack);
-    }
-
-    public boolean matches(WrappedStack inputStack, ItemStack dustStack)
-    {
-        return compareStacks(this.inputStack, inputStack) && compareItemStacks(this.dustStack, dustStack);
     }
 
     private static boolean compareStacks(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
@@ -74,7 +55,46 @@ public class RecipeAludel
 
     private static boolean compareItemStacks(ItemStack itemStack1, ItemStack itemStack2)
     {
-        return ItemHelper.equals(itemStack1, itemStack2);
+        if (itemStack1 != null && itemStack2 != null)
+        {
+            if (itemStack1.getItem().getIdFromItem(itemStack1.getItem()) == itemStack2.getItem().getIdFromItem(itemStack2.getItem()))
+            {
+                if (itemStack1.getItemDamage() == itemStack2.getItemDamage() || itemStack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemStack2.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+                {
+                    if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                    {
+                        if (itemStack1.getTagCompound().hashCode() == itemStack2.getTagCompound().hashCode())
+                        {
+                            return itemStack2.stackSize >= itemStack1.stackSize;
+                        }
+                    }
+                    else if (!itemStack1.hasTagCompound() && !itemStack2.hasTagCompound())
+                    {
+                        return itemStack2.stackSize >= itemStack1.stackSize;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean matches(ItemStack inputStack, ItemStack dustStack)
+    {
+        if (OreDictionary.getOreIDs(inputStack).length > 0)
+        {
+            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
+            {
+                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
+            }
+        }
+
+        return matches(new WrappedStack(inputStack), dustStack);
+    }
+
+    public boolean matches(WrappedStack inputStack, ItemStack dustStack)
+    {
+        return compareStacks(this.inputStack, inputStack) && compareItemStacks(this.dustStack, dustStack);
     }
 
     public ItemStack getRecipeOutput()

@@ -3,6 +3,7 @@ package com.pahimar.ee3.recipe;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.util.LogHelper;
 
 import java.util.Collection;
@@ -73,16 +74,16 @@ public class RecipeRegistry
         }
 
         // Add Aludel recipes
-//        for (RecipeAludel recipeAludel : RecipesAludel.getInstance().getRecipes())
-//        {
-//            WrappedStack recipeOutput = new WrappedStack(recipeAludel.getRecipeOutput());
-//            List<WrappedStack> recipeInputs = recipeAludel.getRecipeInputsAsWrappedStacks();
-//
-//            if (!recipeMap.get(recipeOutput).contains(recipeInputs))
-//            {
-//                recipeMap.put(recipeOutput, recipeInputs);
-//            }
-//        }
+        for (RecipeAludel recipeAludel : RecipesAludel.getInstance().getRecipes())
+        {
+            WrappedStack recipeOutput = new WrappedStack(recipeAludel.getRecipeOutput());
+            List<WrappedStack> recipeInputs = recipeAludel.getRecipeInputsAsWrappedStacks();
+
+            if (!recipeMap.get(recipeOutput).contains(recipeInputs))
+            {
+                recipeMap.put(recipeOutput, recipeInputs);
+            }
+        }
     }
 
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings()
