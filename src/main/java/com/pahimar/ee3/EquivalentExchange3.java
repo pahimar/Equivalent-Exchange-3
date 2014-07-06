@@ -83,11 +83,10 @@ public class EquivalentExchange3
         proxy.registerEventHandlers();
 
         CraftingHandler.init();
+        Recipes.init();
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
-
-        Recipes.init();
     }
 
     @EventHandler
