@@ -1,19 +1,13 @@
-package com.pahimar.ee3.api.exchange;
+package com.pahimar.ee3.exchange;
 
-import com.google.gson.*;
-import com.pahimar.ee3.util.LogHelper;
-
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<EnergyValue>, JsonSerializer<EnergyValue>
+public class EnergyValue implements Comparable<EnergyValue>
 {
-    // Gson serializer for serializing to/deserializing from json
-    private static final Gson gsonSerializer = (new GsonBuilder()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).create();
     private static final int PRECISION = 4;
 
     public final float[] components;
@@ -140,32 +134,6 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         this((float) value, componentList);
     }
 
-    /**
-     * Deserializes an EnergyValue object from the given serialized json String
-     *
-     * @param jsonEnergyValue Json encoded String representing a EnergyValue object
-     * @return The EnergyValue that was encoded as json, or null if a valid EnergyValue could not be decoded from given
-     * String
-     */
-    @SuppressWarnings("unused")
-    public static EnergyValue createFromJson(String jsonEnergyValue)
-    {
-        try
-        {
-            return gsonSerializer.fromJson(jsonEnergyValue, EnergyValue.class);
-        }
-        catch (JsonSyntaxException exception)
-        {
-            LogHelper.error(exception.getMessage());
-        }
-        catch (JsonParseException exception)
-        {
-            LogHelper.error(exception.getMessage());
-        }
-
-        return null;
-    }
-
     @Override
     public int hashCode()
     {
@@ -251,60 +219,5 @@ public class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<En
         {
             throw new ArrayIndexOutOfBoundsException();
         }
-    }
-
-    /**
-     * Returns this EnergyValue as a json serialized String
-     *
-     * @return Json serialized String of this EnergyValue
-     */
-    public String toJson()
-    {
-        return gsonSerializer.toJson(this);
-    }
-
-    @Override
-    public JsonElement serialize(EnergyValue exchangeEnergyValue, Type type, JsonSerializationContext context)
-    {
-        JsonObject jsonEnergyValue = new JsonObject();
-
-        for (EnergyType energyType : EnergyType.TYPES)
-        {
-            jsonEnergyValue.addProperty(energyType.toString(), exchangeEnergyValue.components[energyType.ordinal()]);
-        }
-
-        return jsonEnergyValue;
-    }
-
-    @Override
-    public EnergyValue deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException
-    {
-
-        float[] energyValueComponents = new float[EnergyType.TYPES.length];
-        JsonObject jsonEnergyValue = (JsonObject) jsonElement;
-
-        for (EnergyType energyType : EnergyType.TYPES)
-        {
-            if ((jsonEnergyValue.get(energyType.toString()) != null) && (jsonEnergyValue.get(energyType.toString()).isJsonPrimitive()))
-            {
-                try
-                {
-                    energyValueComponents[energyType.ordinal()] = jsonEnergyValue.get(energyType.toString()).getAsFloat();
-                }
-                catch (UnsupportedOperationException exception)
-                {
-                    LogHelper.error(exception.getMessage());
-                }
-            }
-        }
-
-        EnergyValue exchangeEnergyValue = new EnergyValue(energyValueComponents);
-
-        if (exchangeEnergyValue.getValue() > 0f)
-        {
-            return exchangeEnergyValue;
-        }
-
-        return null;
     }
 }

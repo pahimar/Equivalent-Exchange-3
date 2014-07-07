@@ -1,8 +1,8 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.api.core.OreStack;
-import com.pahimar.ee3.api.core.WrappedStack;
-import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

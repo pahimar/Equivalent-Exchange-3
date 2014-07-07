@@ -1,8 +1,6 @@
 package com.pahimar.ee3.skill;
 
-import com.pahimar.ee3.init.Skills;
 import com.pahimar.ee3.util.ItemHelper;
-import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,45 +31,53 @@ public class SkillRegistry
     private void init()
     {
         skillMap = new TreeMap<ItemStack, Skill>(ItemHelper.comparator);
-        Skills.addDefaultSkills();
     }
 
-    public boolean addSkill(Item item)
+    public void addSkill(Item item)
     {
-        return addSkill(new ItemStack(item));
+        addSkill(new ItemStack(item));
     }
 
-    public boolean addSkill(Block block)
+    public void addSkill(ItemStack itemStack)
     {
-        return addSkill(new ItemStack(block));
+        addSkill(itemStack, true, true);
     }
 
-    public boolean addSkill(ItemStack itemStack)
+    public void addSkill(ItemStack itemStack, boolean learnable, boolean recoverable)
     {
-        return addSkill(itemStack, true, true);
+        addSkill(itemStack, new Skill(learnable, recoverable));
     }
 
-    public boolean addSkill(ItemStack itemStack, boolean learnable, boolean recoverable)
-    {
-        return addSkill(itemStack, new Skill(learnable, recoverable));
-    }
-
-    public boolean addSkill(ItemStack itemStack, Skill skill)
+    private void addSkill(ItemStack itemStack, Skill skill)
     {
         if (!skillMap.containsKey(itemStack))
         {
             skillMap.put(itemStack, skill);
-            return true;
+        }
+    }
+
+    public void addSkill(Block block)
+    {
+        addSkill(new ItemStack(block));
+    }
+
+    public boolean isLearnable(ItemStack itemStack)
+    {
+        if (skillMap.containsKey(itemStack))
+        {
+            return skillMap.get(itemStack).isLearnable();
         }
 
         return false;
     }
 
-    public void dumpSkillSet()
+    public boolean isRecoverable(ItemStack itemStack)
     {
-        for (ItemStack itemStack : skillMap.keySet())
+        if (skillMap.containsKey(itemStack))
         {
-            LogHelper.info(String.format("%s: %s", ItemHelper.toString(itemStack), skillMap.get(itemStack)));
+            return skillMap.get(itemStack).isRecoverable();
         }
+
+        return false;
     }
 }

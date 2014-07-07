@@ -1,9 +1,9 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.api.core.WrappedStack;
-import com.pahimar.ee3.api.exchange.EnergyType;
-import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.api.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.EnergyType;
+import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 

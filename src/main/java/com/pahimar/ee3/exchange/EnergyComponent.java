@@ -1,20 +1,17 @@
-package com.pahimar.ee3.api.exchange;
+package com.pahimar.ee3.exchange;
 
 public class EnergyComponent implements Comparable<EnergyComponent>
 {
-
     public final EnergyType type;
     public final int weight;
 
     public EnergyComponent(EnergyType type)
     {
-
         this(type, 1);
     }
 
     public EnergyComponent(EnergyType type, int weight)
     {
-
         this.type = type;
 
         if (weight > 0)
@@ -30,7 +27,6 @@ public class EnergyComponent implements Comparable<EnergyComponent>
     @Override
     public boolean equals(Object object)
     {
-
         if (!(object instanceof EnergyComponent))
         {
             return false;
@@ -50,7 +46,6 @@ public class EnergyComponent implements Comparable<EnergyComponent>
     @Override
     public int compareTo(EnergyComponent energyComponent)
     {
-
         if (energyComponent != null)
         {
             if (this.type == energyComponent.type)

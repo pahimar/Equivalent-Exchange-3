@@ -1,7 +1,7 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.api.core.OreStack;
-import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;

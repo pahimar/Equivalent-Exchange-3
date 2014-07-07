@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api.core;
+package com.pahimar.ee3.exchange;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

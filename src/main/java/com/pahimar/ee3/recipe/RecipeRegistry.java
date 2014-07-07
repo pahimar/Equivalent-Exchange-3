@@ -1,11 +1,9 @@
-package com.pahimar.ee3.api.recipe;
+package com.pahimar.ee3.recipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.api.core.WrappedStack;
-import com.pahimar.ee3.recipe.RecipesFluidContainers;
-import com.pahimar.ee3.recipe.RecipesPotions;
-import com.pahimar.ee3.recipe.RecipesVanilla;
+import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.util.LogHelper;
 
 import java.util.Collection;

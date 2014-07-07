@@ -1,7 +1,7 @@
-package com.pahimar.ee3.api.recipe;
+package com.pahimar.ee3.item.crafting;
 
-import com.pahimar.ee3.api.core.OreStack;
-import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

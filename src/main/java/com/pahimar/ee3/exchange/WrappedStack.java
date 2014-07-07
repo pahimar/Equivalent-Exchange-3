@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api.core;
+package com.pahimar.ee3.exchange;
 
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.ItemHelper;

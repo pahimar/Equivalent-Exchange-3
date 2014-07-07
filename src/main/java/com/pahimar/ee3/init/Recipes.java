@@ -1,6 +1,6 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.api.recipe.RecipesAludel;
+import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.util.CraftingHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;

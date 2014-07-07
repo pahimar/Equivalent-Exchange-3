@@ -1,10 +1,10 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.api.recipe.RecipeAludel;
-import com.pahimar.ee3.api.recipe.RecipesAludel;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAludel;
+import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;

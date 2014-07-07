@@ -1,6 +1,7 @@
 package com.pahimar.ee3;
 
 import com.pahimar.ee3.configuration.ConfigurationHandler;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
@@ -11,6 +12,7 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -99,5 +101,15 @@ public class EquivalentExchange3
     public void handleIMCMessages(IMCEvent event)
     {
 
+    }
+
+    public EnergyValueRegistry getEnergyValueRegistry()
+    {
+        return EnergyValueRegistry.getInstance();
+    }
+
+    public SkillRegistry getSkillRegistry()
+    {
+        return SkillRegistry.getInstance();
     }
 }

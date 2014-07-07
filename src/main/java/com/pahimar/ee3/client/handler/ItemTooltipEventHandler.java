@@ -1,8 +1,8 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.api.core.WrappedStack;
-import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.api.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

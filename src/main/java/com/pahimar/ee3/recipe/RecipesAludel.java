@@ -1,6 +1,7 @@
-package com.pahimar.ee3.api.recipe;
+package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.core.OreStack;
+import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.item.crafting.RecipeAludel;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

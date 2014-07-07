@@ -1,10 +1,8 @@
-package com.pahimar.ee3.api.exchange;
+package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
-import com.pahimar.ee3.api.core.OreStack;
-import com.pahimar.ee3.api.core.WrappedStack;
-import com.pahimar.ee3.api.recipe.RecipeRegistry;
 import com.pahimar.ee3.init.EnergyValues;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.Item;
