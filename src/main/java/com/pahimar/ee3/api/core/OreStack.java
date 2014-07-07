@@ -1,10 +1,5 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.core;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.reference.Compare;
-import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -14,9 +9,6 @@ import java.util.List;
 
 public class OreStack implements Comparable<OreStack>
 {
-    // Gson serializer for serializing to/deserializing from json
-    private static final Gson gsonSerializer = new Gson();
-
     public String oreName;
     public int stackSize;
     public static Comparator<OreStack> comparator = new Comparator<OreStack>()
@@ -41,18 +33,18 @@ public class OreStack implements Comparable<OreStack>
                 }
                 else
                 {
-                    return Compare.LESSER_THAN;
+                    return -1;
                 }
             }
             else
             {
                 if (oreStack2 != null)
                 {
-                    return Compare.GREATER_THAN;
+                    return 1;
                 }
                 else
                 {
-                    return Compare.EQUALS;
+                    return 0;
                 }
             }
         }
@@ -91,31 +83,6 @@ public class OreStack implements Comparable<OreStack>
         return false;
     }
 
-    /**
-     * Deserializes a OreStack object from the given serialized json String
-     *
-     * @param jsonOreStack Json encoded String representing a OreStack object
-     * @return The OreStack that was encoded as json, or null if a valid OreStack could not be decoded from given String
-     */
-    @SuppressWarnings("unused")
-    public static OreStack createFromJson(String jsonOreStack)
-    {
-        try
-        {
-            return gsonSerializer.fromJson(jsonOreStack, OreStack.class);
-        }
-        catch (JsonSyntaxException exception)
-        {
-            LogHelper.warn(exception.getMessage());
-        }
-        catch (JsonParseException exception)
-        {
-            LogHelper.warn(exception.getMessage());
-        }
-
-        return null;
-    }
-
     public static OreStack getOreStackFromList(Object... objects)
     {
         return getOreStackFromList(Arrays.asList(objects));
@@ -147,7 +114,7 @@ public class OreStack implements Comparable<OreStack>
     @Override
     public boolean equals(Object object)
     {
-        return object instanceof OreStack && (comparator.compare(this, (OreStack) object) == Compare.EQUALS);
+        return object instanceof OreStack && (comparator.compare(this, (OreStack) object) == 0);
     }
 
     @Override
@@ -160,16 +127,5 @@ public class OreStack implements Comparable<OreStack>
     public int compareTo(OreStack oreStack)
     {
         return comparator.compare(this, oreStack);
-    }
-
-    /**
-     * Returns this OreStack as a json serialized String
-     *
-     * @return Json serialized String of this OreStack
-     */
-    @SuppressWarnings("unused")
-    public String toJson()
-    {
-        return gsonSerializer.toJson(this);
     }
 }

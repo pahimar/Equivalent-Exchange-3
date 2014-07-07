@@ -1,10 +1,16 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.exchange;
 
 public class EnergyComponent implements Comparable<EnergyComponent>
 {
 
     public final EnergyType type;
     public final int weight;
+
+    public EnergyComponent(EnergyType type)
+    {
+
+        this(type, 1);
+    }
 
     public EnergyComponent(EnergyType type, int weight)
     {
@@ -19,12 +25,6 @@ public class EnergyComponent implements Comparable<EnergyComponent>
         {
             this.weight = -1;
         }
-    }
-
-    public EnergyComponent(EnergyType type)
-    {
-
-        this(type, 1);
     }
 
     @Override

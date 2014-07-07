@@ -1,6 +1,5 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.core;
 
-import com.pahimar.ee3.reference.Compare;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
@@ -31,14 +30,14 @@ public class WrappedStack implements Comparable<WrappedStack>
                 }
                 else
                 {
-                    return Compare.GREATER_THAN;
+                    return 1;
                 }
             }
             else if (wrappedStack1.wrappedStack instanceof OreStack)
             {
                 if (wrappedStack2.wrappedStack instanceof ItemStack)
                 {
-                    return Compare.LESSER_THAN;
+                    return -1;
                 }
                 else if (wrappedStack2.wrappedStack instanceof OreStack)
                 {
@@ -46,14 +45,14 @@ public class WrappedStack implements Comparable<WrappedStack>
                 }
                 else
                 {
-                    return Compare.GREATER_THAN;
+                    return 1;
                 }
             }
             else if (wrappedStack1.wrappedStack instanceof FluidStack)
             {
                 if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack)
                 {
-                    return Compare.LESSER_THAN;
+                    return -1;
                 }
                 else if (wrappedStack2.wrappedStack instanceof FluidStack)
                 {
@@ -61,22 +60,22 @@ public class WrappedStack implements Comparable<WrappedStack>
                 }
                 else
                 {
-                    return Compare.GREATER_THAN;
+                    return 1;
                 }
             }
             else if (wrappedStack1.wrappedStack == null)
             {
                 if (wrappedStack2.wrappedStack != null)
                 {
-                    return Compare.LESSER_THAN;
+                    return -1;
                 }
                 else
                 {
-                    return Compare.EQUALS;
+                    return 0;
                 }
             }
 
-            return Compare.EQUALS;
+            return 0;
         }
     };
     private int stackSize;
@@ -167,6 +166,12 @@ public class WrappedStack implements Comparable<WrappedStack>
             stackSize = -1;
             wrappedStack = null;
         }
+    }
+
+    public Object getWrappedStack()
+    {
+
+        return wrappedStack;
     }
 
     public WrappedStack(Object object, int stackSize)
@@ -289,23 +294,6 @@ public class WrappedStack implements Comparable<WrappedStack>
         this.stackSize = stackSize;
     }
 
-    public Object getWrappedStack()
-    {
-
-        return wrappedStack;
-    }
-
-    /*
-     * Sort order (class-wise) goes ItemStack, OreStack, EnergyStack,
-     * FluidStack, null
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(WrappedStack wrappedStack)
-    {
-        return comparator.compare(this, wrappedStack);
-    }
-
     /**
      *
      */
@@ -348,7 +336,18 @@ public class WrappedStack implements Comparable<WrappedStack>
     @Override
     public boolean equals(Object object)
     {
-        return object instanceof WrappedStack && (this.compareTo((WrappedStack) object) == Compare.EQUALS);
+        return object instanceof WrappedStack && (this.compareTo((WrappedStack) object) == 0);
+    }
+
+    /*
+     * Sort order (class-wise) goes ItemStack, OreStack, EnergyStack,
+     * FluidStack, null
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(WrappedStack wrappedStack)
+    {
+        return comparator.compare(this, wrappedStack);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.thread;
 
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.util.LogHelper;
 
 public class DynamicEnergyValueInitThread implements Runnable

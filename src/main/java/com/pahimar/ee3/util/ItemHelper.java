@@ -1,6 +1,5 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Compare;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -15,7 +14,7 @@ public class ItemHelper
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
-                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == Compare.EQUALS)
+                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
                 {
                     // Then sort on meta
                     if (itemStack1.getItemDamage() == itemStack2.getItemDamage())

@@ -1,7 +1,7 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import net.minecraft.item.ItemStack;

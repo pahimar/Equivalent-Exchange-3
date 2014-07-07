@@ -1,8 +1,6 @@
-package com.pahimar.ee3.recipe;
+package com.pahimar.ee3.api.recipe;
 
-import com.pahimar.ee3.exchange.OreStack;
-import com.pahimar.ee3.item.crafting.RecipeAludel;
-import com.pahimar.ee3.util.LogHelper;
+import com.pahimar.ee3.api.core.OreStack;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -40,10 +38,6 @@ public class RecipesAludel
         {
             aludelRecipes.add(recipeAludel);
         }
-        else
-        {
-            LogHelper.debug(String.format("Attempted to add RecipeAludel '%s' but already exists in the recipe list", recipeAludel));
-        }
     }
 
     public void addRecipe(ItemStack recipeOutput, OreStack recipeInputStack, ItemStack recipeInputDust)
@@ -80,13 +74,5 @@ public class RecipesAludel
     public List<RecipeAludel> getRecipes()
     {
         return aludelRecipes;
-    }
-
-    public void debugDumpMap()
-    {
-        for (RecipeAludel recipeAludel : aludelRecipes)
-        {
-            LogHelper.debug(String.format("Output: %s, Input Stack: %s, Dust Stack: %s", recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputs()[0], recipeAludel.getRecipeInputs()[1]));
-        }
     }
 }

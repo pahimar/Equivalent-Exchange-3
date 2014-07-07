@@ -1,9 +1,11 @@
-package com.pahimar.ee3.recipe;
+package com.pahimar.ee3.api.recipe;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.item.crafting.RecipeAludel;
+import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.recipe.RecipesFluidContainers;
+import com.pahimar.ee3.recipe.RecipesPotions;
+import com.pahimar.ee3.recipe.RecipesVanilla;
 import com.pahimar.ee3.util.LogHelper;
 
 import java.util.Collection;
@@ -13,7 +15,6 @@ import java.util.TreeSet;
 
 public class RecipeRegistry
 {
-
     private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
@@ -23,16 +24,6 @@ public class RecipeRegistry
         recipeMap = HashMultimap.create();
 
         init();
-    }
-
-    public static RecipeRegistry getInstance()
-    {
-        if (recipeRegistry == null)
-        {
-            recipeRegistry = new RecipeRegistry();
-        }
-
-        return recipeRegistry;
     }
 
     private void init()
@@ -84,6 +75,16 @@ public class RecipeRegistry
                 recipeMap.put(recipeOutput, recipeInputs);
             }
         }
+    }
+
+    public static RecipeRegistry getInstance()
+    {
+        if (recipeRegistry == null)
+        {
+            recipeRegistry = new RecipeRegistry();
+        }
+
+        return recipeRegistry;
     }
 
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings()

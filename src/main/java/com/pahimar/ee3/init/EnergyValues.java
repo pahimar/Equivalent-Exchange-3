@@ -1,8 +1,8 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.OreStack;
-import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.api.core.OreStack;
+import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.api.exchange.EnergyValue;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,6 +22,12 @@ public class EnergyValues
         valueMap = new HashMap<WrappedStack, EnergyValue>();
     }
 
+    public static Map<WrappedStack, EnergyValue> getValueMap()
+    {
+        lazyInit();
+        return energyValues.valueMap;
+    }
+
     private static void lazyInit()
     {
         if (energyValues == null)
@@ -29,12 +35,6 @@ public class EnergyValues
             energyValues = new EnergyValues();
             energyValues.init();
         }
-    }
-
-    public static Map<WrappedStack, EnergyValue> getValueMap()
-    {
-        lazyInit();
-        return energyValues.valueMap;
     }
 
     private void init()

@@ -1,8 +1,10 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.pahimar.ee3.api.core.OreStack;
+import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.api.recipe.RecipeRegistry;
 import com.pahimar.ee3.init.EnergyValues;
-import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.Item;
@@ -343,6 +345,11 @@ public class EnergyValueRegistry
         return hasEnergyValue(object, false);
     }
 
+    public EnergyValue getEnergyValue(Object object)
+    {
+        return getEnergyValue(object, false);
+    }
+
     public EnergyValue getEnergyValue(Object object, boolean strict)
     {
         if (WrappedStack.canBeWrapped(object))
@@ -448,18 +455,8 @@ public class EnergyValueRegistry
         return null;
     }
 
-    public EnergyValue getEnergyValue(Object object)
-    {
-        return getEnergyValue(object, false);
-    }
-
     @SuppressWarnings("unused")
     public List<WrappedStack> getStacksInRange(int start, int finish)
-    {
-        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
-    }
-
-    public List<WrappedStack> getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
@@ -500,9 +497,9 @@ public class EnergyValueRegistry
         return stacksInRange;
     }
 
-    public ImmutableSortedMap<WrappedStack, EnergyValue> getStackToEnergyValueMap()
+    public List<WrappedStack> getStacksInRange(float start, float finish)
     {
-        return stackMappings;
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
     public ImmutableSortedMap<EnergyValue, List<WrappedStack>> getEnergyValueToStackMap()
@@ -516,6 +513,11 @@ public class EnergyValueRegistry
         {
             LogHelper.info(String.format("%s = %s", wrappedStack, getStackToEnergyValueMap().get(wrappedStack)));
         }
+    }
+
+    public ImmutableSortedMap<WrappedStack, EnergyValue> getStackToEnergyValueMap()
+    {
+        return stackMappings;
     }
 
     public void dumpValueMappings()

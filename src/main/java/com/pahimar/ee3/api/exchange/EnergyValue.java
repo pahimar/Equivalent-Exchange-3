@@ -1,4 +1,4 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.exchange;
 
 import com.google.gson.*;
 import com.pahimar.ee3.util.LogHelper;

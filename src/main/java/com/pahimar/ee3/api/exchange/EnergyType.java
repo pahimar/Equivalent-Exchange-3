@@ -1,4 +1,4 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api.exchange;
 
 public enum EnergyType
 {

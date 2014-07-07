@@ -1,7 +1,7 @@
-package com.pahimar.ee3.item.crafting;
+package com.pahimar.ee3.api.recipe;
 
-import com.pahimar.ee3.exchange.OreStack;
-import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.api.core.OreStack;
+import com.pahimar.ee3.api.core.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,6 +26,24 @@ public class RecipeAludel
         this.recipeOutput = recipeOutput.copy();
         this.inputStack = new WrappedStack(inputStack);
         this.dustStack = dustStack.copy();
+    }
+
+    public boolean matches(ItemStack inputStack, ItemStack dustStack)
+    {
+        if (OreDictionary.getOreIDs(inputStack).length > 0)
+        {
+            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
+            {
+                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
+            }
+        }
+
+        return matches(new WrappedStack(inputStack), dustStack);
+    }
+
+    public boolean matches(WrappedStack inputStack, ItemStack dustStack)
+    {
+        return compareStacks(this.inputStack, inputStack) && compareItemStacks(this.dustStack, dustStack);
     }
 
     private static boolean compareStacks(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
@@ -77,24 +95,6 @@ public class RecipeAludel
         }
 
         return false;
-    }
-
-    public boolean matches(ItemStack inputStack, ItemStack dustStack)
-    {
-        if (OreDictionary.getOreIDs(inputStack).length > 0)
-        {
-            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
-            {
-                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
-            }
-        }
-
-        return matches(new WrappedStack(inputStack), dustStack);
-    }
-
-    public boolean matches(WrappedStack inputStack, ItemStack dustStack)
-    {
-        return compareStacks(this.inputStack, inputStack) && compareItemStacks(this.dustStack, dustStack);
     }
 
     public ItemStack getRecipeOutput()

@@ -1,9 +1,9 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.exchange.EnergyType;
-import com.pahimar.ee3.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.api.core.WrappedStack;
+import com.pahimar.ee3.api.exchange.EnergyType;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
@@ -12,6 +12,12 @@ import java.util.List;
 
 public class EnergyValueHelper
 {
+
+    @SuppressWarnings("unused")
+    public static List<WrappedStack> filterStacksByEnergyValue(float start, float end, EnergyValue filterValue)
+    {
+        return filterStacksByEnergyValue(EnergyValueRegistry.getInstance().getStacksInRange(start, end), filterValue);
+    }
 
     public static List<WrappedStack> filterStacksByEnergyValue(List<WrappedStack> unfilteredStacks, EnergyValue filterValue)
     {
@@ -42,12 +48,6 @@ public class EnergyValueHelper
         }
 
         return filteredStacks;
-    }
-
-    @SuppressWarnings("unused")
-    public static List<WrappedStack> filterStacksByEnergyValue(float start, float end, EnergyValue filterValue)
-    {
-        return filterStacksByEnergyValue(EnergyValueRegistry.getInstance().getStacksInRange(start, end), filterValue);
     }
 
     public static EnergyValue computeEnergyValueFromList(List<WrappedStack> wrappedStacks)
