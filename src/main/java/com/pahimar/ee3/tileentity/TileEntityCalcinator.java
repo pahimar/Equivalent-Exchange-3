@@ -42,6 +42,13 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
+    public static boolean suckInItems(TileEntityCalcinator tileEntityCalcinator)
+    {
+        EntityItem entityitem = TileEntityHopper.func_145897_a(tileEntityCalcinator.getWorldObj(), tileEntityCalcinator.xCoord, tileEntityCalcinator.yCoord + 1.0D, tileEntityCalcinator.zCoord);
+
+        return entityitem != null && TileEntityHopper.func_145898_a(tileEntityCalcinator, entityitem);
+    }
+
     @Override
     public int[] getAccessibleSlotsFromSide(int side)
     {
@@ -178,7 +185,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     }
 
     @Override
-    public boolean isItemValidForSlot(int var1, ItemStack var2)
+    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
         return false;
     }
@@ -466,13 +473,6 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
                 this.inventory[INPUT_INVENTORY_INDEX] = null;
             }
         }
-    }
-
-    public static boolean suckInItems(TileEntityCalcinator tileEntityCalcinator)
-    {
-        EntityItem entityitem = TileEntityHopper.func_145897_a(tileEntityCalcinator.getWorldObj(), tileEntityCalcinator.xCoord, tileEntityCalcinator.yCoord + 1.0D, tileEntityCalcinator.zCoord);
-
-        return entityitem != null && TileEntityHopper.func_145898_a(tileEntityCalcinator, entityitem);
     }
 
     private void addItemStackToOutput(ItemStack alchemicalDustStack)

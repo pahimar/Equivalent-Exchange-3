@@ -1,10 +1,13 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -39,5 +42,26 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
     public int getRenderType()
     {
         return RenderIds.researchStation;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+    {
+        if (player.isSneaking())
+        {
+            return false;
+        }
+        else
+        {
+            if (!world.isRemote)
+            {
+                if (world.getTileEntity(x, y, z) instanceof TileEntityResearchStation)
+                {
+                    player.openGui(EquivalentExchange3.instance, GuiIds.RESEARCH_STATION, world, x, y, z);
+                }
+            }
+
+            return true;
+        }
     }
 }

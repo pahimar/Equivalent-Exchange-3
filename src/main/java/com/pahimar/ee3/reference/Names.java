@@ -32,6 +32,7 @@ public class Names
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
         public static final String DIVINING_ROD = "diviningRod";
         public static final String ALCHEMICAL_TOME = "alchemicalTome";
+        public static final String GUIDE = "guide";
     }
 
     public static final class NBT
@@ -59,7 +60,7 @@ public class Names
         public static final String ALCHEMICAL_CHEST = "container.ee3:" + Blocks.ALCHEMICAL_CHEST;
         public static final String CALCINATOR = "container.ee3:" + Blocks.CALCINATOR;
         public static final String ALUDEL = "container.ee3:" + Blocks.ALUDEL;
-
+        public static final String RESEARCH_STATION = "container.ee3:" + Blocks.RESEARCH_STATION;
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
     }
 

@@ -32,6 +32,8 @@ public final class Textures
     public static final ResourceLocation GUI_ALCHEMICAL_CHEST_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_medium.png");
     public static final ResourceLocation GUI_ALCHEMICAL_CHEST_LARGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_large.png");
     public static final ResourceLocation GUI_GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
+    public static final ResourceLocation GUI_RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation.png");
+
     public static final String EFFECTS_LOCATION = "textures/effects/";
 
     // Effect textures

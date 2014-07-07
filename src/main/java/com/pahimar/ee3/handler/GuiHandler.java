@@ -3,10 +3,7 @@ package com.pahimar.ee3.handler;
 import com.pahimar.ee3.client.gui.inventory.*;
 import com.pahimar.ee3.inventory.*;
 import com.pahimar.ee3.reference.GuiIds;
-import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
-import com.pahimar.ee3.tileentity.TileEntityAludel;
-import com.pahimar.ee3.tileentity.TileEntityCalcinator;
-import com.pahimar.ee3.tileentity.TileEntityGlassBell;
+import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -40,6 +37,11 @@ public class GuiHandler implements IGuiHandler
             TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(x, y, z);
             return new ContainerAludel(player.inventory, tileEntityAludel);
         }
+        else if (id == GuiIds.RESEARCH_STATION)
+        {
+            TileEntityResearchStation tileEntityResearchStation = (TileEntityResearchStation) world.getTileEntity(x, y, z);
+            return new ContainerResearchStation(player.inventory, tileEntityResearchStation);
+        }
 
         return null;
     }
@@ -70,6 +72,11 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(x, y, z);
             return new GuiAludel(player.inventory, tileEntityAludel);
+        }
+        else if (id == GuiIds.RESEARCH_STATION)
+        {
+            TileEntityResearchStation tileEntityResearchStation = (TileEntityResearchStation) world.getTileEntity(x, y, z);
+            return new GuiResearchStation(player.inventory, tileEntityResearchStation);
         }
 
         return null;

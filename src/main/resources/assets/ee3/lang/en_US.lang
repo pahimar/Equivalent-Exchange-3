@@ -24,6 +24,7 @@ item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
 item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
 item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge [WIP]
+item.ee3:guide.name=Guide To Alchemy [WIP]
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest

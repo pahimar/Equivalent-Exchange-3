@@ -180,7 +180,7 @@ public class ContainerAludel extends Container
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer var1)
+    public boolean canInteractWith(EntityPlayer entityPlayer)
     {
         return true;
     }
