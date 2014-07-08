@@ -508,4 +508,5 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
             this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize += addedSize;
         }
     }
+
 }
