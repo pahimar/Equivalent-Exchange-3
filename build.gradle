@@ -40,7 +40,7 @@ minecraft {
     }
 }
 
-version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+version = "${config.minecraft_version}-${config.mod_version}.${System.getenv(\"BUILD_NUMBER\") ?: 0}"
 
 processResources {
     // exclude xcf files, as they are for development only
