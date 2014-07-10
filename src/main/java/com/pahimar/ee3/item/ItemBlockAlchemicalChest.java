@@ -33,12 +33,10 @@ public class ItemBlockAlchemicalChest extends ItemBlock
         if (metaData == 0)
         {
             list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.small"));
-        }
-        else if (metaData == 1)
+        } else if (metaData == 1)
         {
             list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.medium"));
-        }
-        else if (metaData == 2)
+        } else if (metaData == 2)
         {
             list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.large"));
         }

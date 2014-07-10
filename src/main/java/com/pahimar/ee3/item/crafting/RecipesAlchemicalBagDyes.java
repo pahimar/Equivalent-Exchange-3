@@ -33,8 +33,7 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                     }
 
                     itemStack = currentStack;
-                }
-                else
+                } else
                 {
                     if (currentStack.getItem() != Items.dye)
                     {
@@ -91,8 +90,7 @@ public class RecipesAlchemicalBagDyes implements IRecipe
                         colorChannels[2] = (int) (colorChannels[2] + blue * 255.0F);
                         ++j;
                     }
-                }
-                else
+                } else
                 {
                     if (currentStack.getItem() != Items.dye)
                     {
@@ -115,8 +113,7 @@ public class RecipesAlchemicalBagDyes implements IRecipe
         if (itemAlchemicalBag == null)
         {
             return null;
-        }
-        else
+        } else
         {
             k = colorChannels[0] / j;
             l1 = colorChannels[1] / j;

@@ -43,16 +43,13 @@ public class ItemAlchemicalDust extends ItemEE
         if (itemStack.getItemDamage() == 0)
         {
             return Integer.parseInt(Colors.DUST_ASH, 16);
-        }
-        else if (itemStack.getItemDamage() == 1)
+        } else if (itemStack.getItemDamage() == 1)
         {
             return Integer.parseInt(Colors.DUST_VERDANT, 16);
-        }
-        else if (itemStack.getItemDamage() == 2)
+        } else if (itemStack.getItemDamage() == 2)
         {
             return Integer.parseInt(Colors.DUST_AZURE, 16);
-        }
-        else if (itemStack.getItemDamage() == 3)
+        } else if (itemStack.getItemDamage() == 3)
         {
             return Integer.parseInt(Colors.DUST_MINIUM, 16);
         }

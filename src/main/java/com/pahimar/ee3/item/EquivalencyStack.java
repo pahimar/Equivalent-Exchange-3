@@ -25,12 +25,10 @@ public class EquivalencyStack
         if (object instanceof Item)
         {
             object = new ItemStack((Item) object);
-        }
-        else if (object instanceof Block)
+        } else if (object instanceof Block)
         {
             object = new ItemStack((Block) object);
-        }
-        else if (object instanceof Fluid)
+        } else if (object instanceof Fluid)
         {
             object = new FluidStack((Fluid) object, 1000);
         }
@@ -42,12 +40,10 @@ public class EquivalencyStack
             copiedItemStack.stackSize = 1;
             equivalentStacks = new ArrayList<Object>();
             equivalentStacks.add(copiedItemStack);
-        }
-        else if (object instanceof ArrayList)
+        } else if (object instanceof ArrayList)
         {
             equivalentStacks = new ArrayList<Object>();
-        }
-        else
+        } else
         {
             stackSize = -1;
             equivalentStacks = new ArrayList<Object>();
