@@ -48,7 +48,7 @@ public class EnergyValueRegistry
 
             if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
             {
-                if (defaultValuesMap.get(keyStack) != null && Float.compare(defaultValuesMap.get(keyStack).getValue(), 0f) > 0)
+                if (defaultValuesMap.get(keyStack) != null && Float.compare(defaultValuesMap.get(keyStack).getEnergyValue(), 0f) > 0)
                 {
                     factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(defaultValuesMap.get(keyStack), keyStack.getStackSize());
                     factoredKeyStack = new WrappedStack(keyStack, 1);
@@ -136,7 +136,7 @@ public class EnergyValueRegistry
 
                 if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
                 {
-                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getValue(), 0f) > 0)
+                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getEnergyValue(), 0f) > 0)
                     {
                         factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(computedStackValues.get(keyStack), keyStack.getStackSize());
                         factoredKeyStack = new WrappedStack(keyStack, 1);
@@ -247,7 +247,7 @@ public class EnergyValueRegistry
                     }
                 }
 
-                if ((lowestValue != null) && (lowestValue.getValue() > 0f))
+                if ((lowestValue != null) && (lowestValue.getEnergyValue() > 0f))
                 {
                     computedStackMap.put(new WrappedStack(recipeOutput.getWrappedStack()), lowestValue);
                 }
@@ -421,7 +421,7 @@ public class EnergyValueRegistry
                                         }
                                         else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
                                         {
-                                            EnergyValue stackValue = new EnergyValue(energyValueRegistry.stackMappings.get(valuedStack).getValue() * (1 - (wrappedItemStack.getItemDamage() * 1.0F / wrappedItemStack.getMaxDamage())));
+                                            EnergyValue stackValue = new EnergyValue(energyValueRegistry.stackMappings.get(valuedStack).getEnergyValue() * (1 - (wrappedItemStack.getItemDamage() * 1.0F / wrappedItemStack.getMaxDamage())));
 
                                             if (stackValue.compareTo(lowestValue) < 0)
                                             {

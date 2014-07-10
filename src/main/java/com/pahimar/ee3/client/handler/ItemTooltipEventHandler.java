@@ -35,12 +35,12 @@ public class ItemTooltipEventHandler
                 EnergyValue energyValue = EnergyValueRegistry.getInstance().getEnergyValue(stack);
                 if (stack.getStackSize() > 1)
                 {
-                    event.toolTip.add("Exchange Energy (Item): " + String.format("%s", energyValueDecimalFormat.format(energyValue.getValue())));
-                    event.toolTip.add("Exchange Energy (Stack): " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getValue())));
+                    event.toolTip.add("Exchange Energy (Item): " + String.format("%s", energyValueDecimalFormat.format(energyValue.getEnergyValue())));
+                    event.toolTip.add("Exchange Energy (Stack): " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
                 }
                 else
                 {
-                    event.toolTip.add("Exchange Energy: " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getValue())));
+                    event.toolTip.add("Exchange Energy: " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
                 }
             }
             else

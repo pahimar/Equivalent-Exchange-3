@@ -1,166 +1,29 @@
 package com.pahimar.ee3.exchange;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class EnergyValue implements Comparable<EnergyValue>
 {
-    private static final int PRECISION = 4;
+    private final float energyValue;
+    private final EnergyType energyType;
 
-    public final float[] components;
-
-    public EnergyValue()
+    public EnergyValue(int energyValue)
     {
-        this(new float[EnergyType.TYPES.length]);
+        this((float) energyValue);
     }
 
-    public EnergyValue(float[] components)
+    public EnergyValue(float energyValue)
     {
-        if (components.length == EnergyType.TYPES.length)
-        {
-            this.components = new float[components.length];
-            for (int i = 0; i < this.components.length; i++)
-            {
-                BigDecimal bigComponent = BigDecimal.valueOf(components[i]).setScale(PRECISION, BigDecimal.ROUND_HALF_DOWN);
-                this.components[i] = bigComponent.floatValue();
-            }
-        }
-        else
-        {
-            this.components = null;
-        }
+        this(energyValue, EnergyType.DEFAULT);
     }
 
-    public EnergyValue(int value)
+    public EnergyValue(float energyValue, EnergyType energyType)
     {
-        this((float) value);
+        this.energyValue = energyValue;
+        this.energyType = energyType;
     }
 
-    public EnergyValue(float value)
+    public EnergyValue(int energyValue, EnergyType energyType)
     {
-        this(value, EnergyType.DEFAULT);
-    }
-
-    public EnergyValue(float value, EnergyType energyType)
-    {
-        this(value, Arrays.asList(new EnergyComponent(energyType)));
-    }
-
-    public EnergyValue(float value, List<EnergyComponent> componentList)
-    {
-        this.components = new float[EnergyType.TYPES.length];
-
-        List<EnergyComponent> collatedComponents = collateComponents(componentList);
-
-        int totalComponents = 0;
-
-        for (EnergyComponent component : collatedComponents)
-        {
-            if (component.weight > 0)
-            {
-                totalComponents += component.weight;
-            }
-        }
-
-        if (totalComponents > 0)
-        {
-            for (EnergyComponent component : collatedComponents)
-            {
-                if (component.weight > 0)
-                {
-                    this.components[component.type.ordinal()] = value * (component.weight * 1F / totalComponents);
-                }
-            }
-        }
-        else
-        {
-            this.components[EnergyType.DEFAULT.ordinal()] = value;
-        }
-
-        for (int i = 0; i < this.components.length; i++)
-        {
-            BigDecimal bigComponent = BigDecimal.valueOf(this.components[i]).setScale(PRECISION, BigDecimal.ROUND_HALF_DOWN);
-            this.components[i] = bigComponent.floatValue();
-        }
-    }
-
-    private static List<EnergyComponent> collateComponents(List<EnergyComponent> uncollatedComponents)
-    {
-        Integer[] componentCount = new Integer[EnergyType.TYPES.length];
-
-        for (EnergyComponent energyComponent : uncollatedComponents)
-        {
-            if (componentCount[energyComponent.type.ordinal()] == null)
-            {
-                componentCount[energyComponent.type.ordinal()] = 0;
-            }
-
-            if (energyComponent.weight >= 0)
-            {
-                componentCount[energyComponent.type.ordinal()] = componentCount[energyComponent.type.ordinal()] + energyComponent.weight;
-            }
-        }
-
-        List<EnergyComponent> collatedComponents = new ArrayList<EnergyComponent>();
-
-        for (int i = 0; i < EnergyType.TYPES.length; i++)
-        {
-            if (componentCount[i] != null)
-            {
-                collatedComponents.add(new EnergyComponent(EnergyType.TYPES[i], componentCount[i]));
-            }
-        }
-
-        Collections.sort(collatedComponents);
-
-        return collatedComponents;
-    }
-
-    public EnergyValue(float value, EnergyComponent component)
-    {
-        this(value, component.type);
-    }
-
-    public EnergyValue(int value, EnergyType energyType)
-    {
-        this((float) value, energyType);
-    }
-
-    public EnergyValue(int value, List<EnergyComponent> componentList)
-    {
-        this((float) value, componentList);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hashCode = 1;
-
-        hashCode = 37 * hashCode + Float.floatToIntBits(getValue());
-        for (float subValue : components)
-        {
-            hashCode = 37 * hashCode + Float.floatToIntBits(subValue);
-        }
-
-        return hashCode;
-    }
-
-    public float getValue()
-    {
-        float sumSubValues = 0;
-
-        for (float subValue : this.components)
-        {
-            if (subValue > 0)
-            {
-                sumSubValues += subValue;
-            }
-        }
-
-        return sumSubValues;
+        this((float) energyValue, energyType);
     }
 
     @Override
@@ -172,27 +35,22 @@ public class EnergyValue implements Comparable<EnergyValue>
     @Override
     public String toString()
     {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("[");
-        for (EnergyType energyType : EnergyType.TYPES)
-        {
-            if (components[energyType.ordinal()] > 0)
-            {
-                stringBuilder.append(String.format(" %s:%s ", energyType, components[energyType.ordinal()]));
-            }
-        }
-        stringBuilder.append("]");
-
-        return stringBuilder.toString();
+        return String.format(" %s@%s ", energyValue, energyType);
     }
 
     @Override
-    public int compareTo(EnergyValue exchangeEnergyValue)
+    public int compareTo(EnergyValue energyValue)
     {
-        if (exchangeEnergyValue != null)
+        if (energyValue != null)
         {
-            return compareComponents(this.components, exchangeEnergyValue.components);
+            if (this.energyType == energyValue.getEnergyType())
+            {
+                return Float.compare(this.energyValue, energyValue.getEnergyValue());
+            }
+            else
+            {
+                return (this.energyType.ordinal() - energyValue.getEnergyType().ordinal());
+            }
         }
         else
         {
@@ -200,24 +58,22 @@ public class EnergyValue implements Comparable<EnergyValue>
         }
     }
 
-    private static int compareComponents(float[] first, float[] second)
+    public EnergyType getEnergyType()
     {
-        if (first.length == EnergyType.TYPES.length && second.length == EnergyType.TYPES.length)
-        {
+        return this.energyType;
+    }
 
-            for (EnergyType energyType : EnergyType.TYPES)
-            {
-                if (Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]) != 0)
-                {
-                    return Float.compare(first[energyType.ordinal()], second[energyType.ordinal()]);
-                }
-            }
+    public float getEnergyValue()
+    {
+        return this.energyValue;
+    }
 
-            return 0;
-        }
-        else
-        {
-            throw new ArrayIndexOutOfBoundsException();
-        }
+    public static enum EnergyType
+    {
+        OMNI, CORPOREAL, KINETIC, TEMPORAL, ESSENTIA, AMORPHOUS, VOID;
+
+        public static final EnergyType[] TYPES = EnergyType.values();
+
+        public static final EnergyType DEFAULT = EnergyType.CORPOREAL;
     }
 }
