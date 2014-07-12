@@ -76,3 +76,6 @@ tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
 tooltip.ee3:alchemicalChestPrefix.small=Small
 tooltip.ee3:alchemicalChestPrefix.medium=Medium
 tooltip.ee3:alchemicalChestPrefix.large=Large
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
