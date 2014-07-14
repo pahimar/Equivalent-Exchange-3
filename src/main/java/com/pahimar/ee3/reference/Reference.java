@@ -8,4 +8,5 @@ public class Reference
     public static final String VERSION = "@VERSION@";
     public static final String SERVER_PROXY_CLASS = "com.pahimar.ee3.proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "com.pahimar.ee3.proxy.ClientProxy";
+    public static final String VERSION_CHECKER_REMOTE_URL = "";
 }
