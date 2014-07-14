@@ -2,7 +2,6 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -93,20 +92,27 @@ public final class EnergyValueRegistryProxy
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
     }
 
-    public List<ItemStack> getStacksInRange(int start, int finish)
+    public List getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List<ItemStack> getStacksInRange(float start, float finish)
+    public List getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List<ItemStack> getStacksInRange(EnergyValue start, EnergyValue finish)
+    public List getStacksInRange(EnergyValue start, EnergyValue finish)
     {
-        // TODO Finish
-        return null;
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod == null)
+        {
+            return null;
+        }
+
+        return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
     }
 
     private static void init()

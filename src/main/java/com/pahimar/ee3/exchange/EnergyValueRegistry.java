@@ -7,6 +7,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
@@ -482,19 +483,19 @@ public class EnergyValueRegistry
         return computedStackMap;
     }
 
-    public List<WrappedStack> getStacksInRange(int start, int finish)
+    public List getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List<WrappedStack> getStacksInRange(float start, float finish)
+    public List getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List<WrappedStack> getStacksInRange(EnergyValue start, EnergyValue finish)
+    public List getStacksInRange(EnergyValue start, EnergyValue finish)
     {
-        List<WrappedStack> stacksInRange = new ArrayList<WrappedStack>();
+        List stacksInRange = new ArrayList<WrappedStack>();
 
         SortedMap<EnergyValue, List<WrappedStack>> tailMap = energyValueRegistry.valueMappings.tailMap(start);
         SortedMap<EnergyValue, List<WrappedStack>> headMap = energyValueRegistry.valueMappings.headMap(finish);
@@ -520,7 +521,20 @@ public class EnergyValueRegistry
             {
                 if (biggerMap.containsKey(value))
                 {
-                    stacksInRange.addAll(energyValueRegistry.valueMappings.get(value));
+                    for (WrappedStack wrappedStack : energyValueRegistry.valueMappings.get(value))
+                    {
+                        if (wrappedStack.getWrappedStack() instanceof ItemStack || wrappedStack.getWrappedStack() instanceof FluidStack)
+                        {
+                            stacksInRange.add(wrappedStack.getWrappedStack());
+                        }
+                        else if (wrappedStack.getWrappedStack() instanceof OreStack)
+                        {
+                            for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                            {
+                                stacksInRange.add(itemStack);
+                            }
+                        }
+                    }
                 }
             }
         }
