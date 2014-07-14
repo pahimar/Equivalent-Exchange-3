@@ -31,6 +31,6 @@ public class SlotAlchemicalBag extends Slot
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.getItem() instanceof ItemAlchemicalBag ? false : true;
+        return !(itemStack.getItem() instanceof ItemAlchemicalBag);
     }
 }

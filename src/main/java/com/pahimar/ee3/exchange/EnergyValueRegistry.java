@@ -1,5 +1,6 @@
 package com.pahimar.ee3.exchange;
 
+import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
@@ -14,8 +15,8 @@ public class EnergyValueRegistry
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
     private static Map<WrappedStack, EnergyValue> postAssignedMappings;
-    private SortedMap<WrappedStack, EnergyValue> stackMappings;
-    private SortedMap<EnergyValue, List<WrappedStack>> valueMappings;
+    private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
+    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
     private EnergyValueRegistry()
     {
@@ -26,7 +27,6 @@ public class EnergyValueRegistry
         if (energyValueRegistry == null)
         {
             energyValueRegistry = new EnergyValueRegistry();
-            energyValueRegistry.init();
         }
 
         return energyValueRegistry;
@@ -140,11 +140,14 @@ public class EnergyValueRegistry
                             }
                             else
                             {
-                                for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack)))
+                                for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
                                 {
-                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                    for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
                                     {
-                                        return true;
+                                        if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                        {
+                                            return true;
+                                        }
                                     }
                                 }
                             }
@@ -230,21 +233,24 @@ public class EnergyValueRegistry
                             }
                             else
                             {
-                                for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreID(wrappedItemStack)))
+                                for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
                                 {
-                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                    for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
                                     {
-                                        if (lowestValue == null)
+                                        if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
                                         {
-                                            lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
-                                        }
-                                        else
-                                        {
-                                            EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
-
-                                            if (itemValue.compareTo(lowestValue) < 0)
+                                            if (lowestValue == null)
                                             {
-                                                lowestValue = itemValue;
+                                                lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+                                            }
+                                            else
+                                            {
+                                                EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+
+                                                if (itemValue.compareTo(lowestValue) < 0)
+                                                {
+                                                    lowestValue = itemValue;
+                                                }
                                             }
                                         }
                                     }
@@ -306,15 +312,22 @@ public class EnergyValueRegistry
         return null;
     }
 
-    private void init()
+    protected final void init()
     {
-        stackMappings = new TreeMap<WrappedStack, EnergyValue>();
+        HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+
+        /*
+         *  Pre-assigned values
+         */
+        stackValueMap.putAll(preAssignedMappings);
 
         /*
          *  Auto-assignment
          */
         // Initialize the maps for the first pass to happen
-        stackMappings.putAll(preAssignedMappings);
+        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        stackMappingsBuilder.putAll(stackValueMap);
+        stackMappings = stackMappingsBuilder.build();
         Map<WrappedStack, EnergyValue> computedStackValues = computeStackMappings();
 
         // Initialize the pass counter
@@ -343,20 +356,22 @@ public class EnergyValueRegistry
 
                 if (factoredExchangeEnergyValue != null)
                 {
-                    if (stackMappings.containsKey(factoredKeyStack))
+                    if (stackValueMap.containsKey(factoredKeyStack))
                     {
-                        if (factoredExchangeEnergyValue.compareTo(stackMappings.get(factoredKeyStack)) == -1)
+                        if (factoredExchangeEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
                         {
-                            stackMappings.put(factoredKeyStack, factoredExchangeEnergyValue);
+                            stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
                         }
                     }
                     else
                     {
-                        stackMappings.put(factoredKeyStack, factoredExchangeEnergyValue);
+                        stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
                     }
                 }
             }
         }
+
+
 
         /*
          *  Post-assigned values
@@ -365,15 +380,22 @@ public class EnergyValueRegistry
         {
             for (WrappedStack wrappedStack : postAssignedMappings.keySet())
             {
-                stackMappings.put(wrappedStack, postAssignedMappings.get(wrappedStack));
+                stackValueMap.put(wrappedStack, postAssignedMappings.get(wrappedStack));
             }
         }
 
-        
-        /*
+        /**
+         * Finalize the stack to value map
+         */
+        stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        stackMappingsBuilder.putAll(stackValueMap);
+        stackMappings = stackMappingsBuilder.build();
+
+
+        /**
          *  Value map resolution
          */
-        valueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
+        SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
 
         for (WrappedStack stack : stackMappings.keySet())
         {
@@ -383,20 +405,22 @@ public class EnergyValueRegistry
 
                 if (value != null)
                 {
-                    if (valueMappings.containsKey(value))
+                    if (tempValueMappings.containsKey(value))
                     {
-                        if (!(valueMappings.get(value).contains(stack)))
+                        if (!(tempValueMappings.get(value).contains(stack)))
                         {
-                            valueMappings.get(value).add(stack);
+                            tempValueMappings.get(value).add(stack);
                         }
                     }
                     else
                     {
-                        valueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                        tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
                     }
                 }
             }
         }
+
+        valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()

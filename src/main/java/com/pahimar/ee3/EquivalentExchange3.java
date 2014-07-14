@@ -11,6 +11,7 @@ import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.init.Recipes;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.skill.SkillRegistry;
@@ -97,7 +98,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-
+        RecipeRegistry.getInstance();
     }
 
     @EventHandler

@@ -490,7 +490,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
             int addedSize = Math.min(alchemicalDustStack.stackSize, maxStackSize - this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize);
             alchemicalDustStack.stackSize -= addedSize;
             this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize += addedSize;
-            if (alchemicalDustStack == null || alchemicalDustStack.stackSize == 0)
+            if (alchemicalDustStack.stackSize == 0)
             {
                 return;
             }

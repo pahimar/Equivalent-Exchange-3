@@ -131,7 +131,7 @@ public class BlockAludel extends BlockEE implements ITileEntityProvider
     {
         super.onBlockEventReceived(world, x, y, z, eventId, eventData);
         TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null ? tileentity.receiveClientEvent(eventId, eventData) : false;
+        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
     }
 
     @Override

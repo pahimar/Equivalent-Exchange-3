@@ -2,7 +2,6 @@ package com.pahimar.ee3.util;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -84,14 +83,7 @@ public class FluidHelper
         // Register Milk in the FluidRegistry if it hasn't already been done
         if (!FluidRegistry.isFluidRegistered("milk"))
         {
-            Fluid milk = new Fluid("milk")
-            {
-                @Override
-                public String getLocalizedName()
-                {
-                    return StatCollector.translateToLocal("item.milk.name");
-                }
-            }.setUnlocalizedName(Items.milk_bucket.getUnlocalizedName());
+            Fluid milk = new Fluid("milk").setUnlocalizedName(Items.milk_bucket.getUnlocalizedName());
             FluidRegistry.registerFluid(milk);
             FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
         }

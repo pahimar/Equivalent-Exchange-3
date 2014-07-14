@@ -55,11 +55,11 @@ public class ItemHelper
                     return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
                 }
             }
-            else if (itemStack1 != null && itemStack2 == null)
+            else if (itemStack1 != null)
             {
                 return -1;
             }
-            else if (itemStack1 == null && itemStack2 != null)
+            else if (itemStack2 != null)
             {
                 return 1;
             }

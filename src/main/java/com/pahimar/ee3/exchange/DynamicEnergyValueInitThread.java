@@ -1,6 +1,5 @@
-package com.pahimar.ee3.thread;
+package com.pahimar.ee3.exchange;
 
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.util.LogHelper;
 
 public class DynamicEnergyValueInitThread implements Runnable
@@ -16,7 +15,7 @@ public class DynamicEnergyValueInitThread implements Runnable
     public void run()
     {
         long startTime = System.currentTimeMillis();
-        EnergyValueRegistry.getInstance();
+        EnergyValueRegistry.getInstance().init();
         long duration = System.currentTimeMillis() - startTime;
         if (duration > 10)
         {
