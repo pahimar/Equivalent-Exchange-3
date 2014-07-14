@@ -3,22 +3,22 @@ package com.pahimar.ee3.api;
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
 
-public class EnergyValueRegistryProxy
+public final class EnergyValueRegistryProxy
 {
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static void addPreAssignedEnergyValue(Object object, int energyValue)
+    public final static void addPreAssignedEnergyValue(Object object, int energyValue)
     {
         addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public static void addPreAssignedEnergyValue(Object object, float energyValue)
+    public final static void addPreAssignedEnergyValue(Object object, float energyValue)
     {
         addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public final static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         init();
 
@@ -31,17 +31,17 @@ public class EnergyValueRegistryProxy
         EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreAssignedEnergyValue(object, energyValue);
     }
 
-    public static void addPostAssignedEnergyValue(Object object, int energyValue)
+    public final static void addPostAssignedEnergyValue(Object object, int energyValue)
     {
         addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public static void addPostAssignedEnergyValue(Object object, float energyValue)
+    public final static void addPostAssignedEnergyValue(Object object, float energyValue)
     {
         addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public final static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         init();
 
@@ -54,12 +54,12 @@ public class EnergyValueRegistryProxy
         EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedEnergyValue(object, energyValue);
     }
 
-    public static boolean hasEnergyValue(Object object)
+    public final static boolean hasEnergyValue(Object object)
     {
         return hasEnergyValue(object, false);
     }
 
-    public static boolean hasEnergyValue(Object object, boolean strict)
+    public final static boolean hasEnergyValue(Object object, boolean strict)
     {
         init();
 
@@ -72,12 +72,12 @@ public class EnergyValueRegistryProxy
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().hasEnergyValue(object, strict);
     }
 
-    public static EnergyValue getEnergyValue(Object object)
+    public final static EnergyValue getEnergyValue(Object object)
     {
         return getEnergyValue(object, false);
     }
 
-    public static EnergyValue getEnergyValue(Object object, boolean strict)
+    public final static EnergyValue getEnergyValue(Object object, boolean strict)
     {
         init();
 
