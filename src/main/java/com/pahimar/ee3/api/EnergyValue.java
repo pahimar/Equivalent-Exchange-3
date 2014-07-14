@@ -70,7 +70,7 @@ public final class EnergyValue implements Comparable<EnergyValue>
 
     public static enum EnergyType
     {
-        OMNI, CORPOREAL, KINETIC, TEMPORAL, ESSENTIA, AMORPHOUS, VOID;
+        CORPOREAL, KINETIC, TEMPORAL, ESSENTIA, AMORPHOUS, VOID, OMNI;
 
         public static final EnergyType DEFAULT = EnergyType.CORPOREAL;
     }
