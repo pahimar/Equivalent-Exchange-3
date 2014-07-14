@@ -33,6 +33,8 @@ public class Names
         public static final String DIVINING_ROD = "diviningRod";
         public static final String ALCHEMICAL_TOME = "alchemicalTome";
         public static final String GUIDE = "guide";
+        public static final String MATTER = "matter";
+        public static final String[] MATTER_SUBTYPES = {"Dark", "Corporeal", "Kinetic", "Temporal", "Essentia", "Amorphous", "Void", "Omni"};
     }
 
     public static final class NBT

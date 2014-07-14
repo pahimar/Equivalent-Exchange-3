@@ -25,6 +25,14 @@ item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
 item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge [WIP]
 item.ee3:guide.name=Guide To Alchemy [WIP]
+item.ee3:matterDark.name=Dark Matter
+item.ee3:matterOmni.name=Omni Matter
+item.ee3:matterCorporeal.name=Corporeal Matter
+item.ee3:matterKinetic.name=Kinetic Matter
+item.ee3:matterTemporal.name=Temporal Matter
+item.ee3:matterEssentia.name=Essentia Matter
+item.ee3:matterAmorphous.name=Amorphous Matter
+item.ee3:matterVoid.name=Void Matter
 
 # Block localizations
 tile.ee3:alchemicalChest.name=Alchemical Chest
