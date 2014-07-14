@@ -23,12 +23,13 @@ public abstract class CommonProxy implements IProxy
 
     public void registerTileEntities()
     {
-        GameRegistry.registerTileEntity(TileEntityAlchemicalChest.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST);
-        GameRegistry.registerTileEntity(TileEntityAlchemicalChestSmall.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Small");
-        GameRegistry.registerTileEntity(TileEntityAlchemicalChestMedium.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Medium");
-        GameRegistry.registerTileEntity(TileEntityAlchemicalChestLarge.class, "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Large");
-        GameRegistry.registerTileEntity(TileEntityAludel.class, "tile." + Names.Blocks.ALUDEL);
-        GameRegistry.registerTileEntity(TileEntityCalcinator.class, "tile." + Names.Blocks.CALCINATOR);
-        GameRegistry.registerTileEntity(TileEntityGlassBell.class, "tile." + Names.Blocks.GLASS_BELL);
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST, "tile." + Names.Blocks.ALCHEMICAL_CHEST);
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestSmall.class, Names.Blocks.ALCHEMICAL_CHEST + "Small", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Small");
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestMedium.class, Names.Blocks.ALCHEMICAL_CHEST + "Medium", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Medium");
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestLarge.class, Names.Blocks.ALCHEMICAL_CHEST + "Large", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Large");
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityAludel.class, Names.Blocks.ALUDEL, "tile." + Names.Blocks.ALUDEL);
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityCalcinator.class, Names.Blocks.CALCINATOR, "tile." + Names.Blocks.CALCINATOR);
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityGlassBell.class, Names.Blocks.GLASS_BELL, "tile." + Names.Blocks.GLASS_BELL);
+        GameRegistry.registerTileEntityWithAlternatives(TileEntityResearchStation.class, Names.Blocks.RESEARCH_STATION);
     }
 }
