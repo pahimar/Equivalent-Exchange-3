@@ -2,6 +2,9 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
+import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public final class EnergyValueRegistryProxy
 {
@@ -88,6 +91,22 @@ public final class EnergyValueRegistryProxy
         }
 
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
+    }
+
+    public List<ItemStack> getStacksInRange(int start, int finish)
+    {
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+    }
+
+    public List<ItemStack> getStacksInRange(float start, float finish)
+    {
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+    }
+
+    public List<ItemStack> getStacksInRange(EnergyValue start, EnergyValue finish)
+    {
+        // TODO Finish
+        return null;
     }
 
     private static void init()
