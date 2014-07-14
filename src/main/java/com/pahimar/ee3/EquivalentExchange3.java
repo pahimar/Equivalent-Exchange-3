@@ -5,6 +5,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.init.EnergyValues;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.init.Recipes;
@@ -67,6 +68,8 @@ public class EquivalentExchange3
         ModItems.init();
 
         ModBlocks.init();
+
+        EnergyValues.init();
     }
 
     @EventHandler

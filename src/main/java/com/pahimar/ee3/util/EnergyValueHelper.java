@@ -1,6 +1,6 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.exchange.EnergyValue;
+import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;

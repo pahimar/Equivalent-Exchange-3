@@ -1,6 +1,6 @@
-package com.pahimar.ee3.exchange;
+package com.pahimar.ee3.api;
 
-public class EnergyValue implements Comparable<EnergyValue>
+public final class EnergyValue implements Comparable<EnergyValue>
 {
     private final float energyValue;
     private final EnergyType energyType;

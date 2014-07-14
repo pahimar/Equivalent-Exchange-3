@@ -1,10 +1,8 @@
 package com.pahimar.ee3.exchange;
 
-import com.google.common.collect.ImmutableSortedMap;
-import com.pahimar.ee3.init.EnergyValues;
+import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
-import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,9 +12,10 @@ import java.util.*;
 public class EnergyValueRegistry
 {
     private static EnergyValueRegistry energyValueRegistry = null;
-
-    private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
-    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
+    private static Map<WrappedStack, EnergyValue> preAssignedMappings;
+    private static Map<WrappedStack, EnergyValue> postAssignedMappings;
+    private SortedMap<WrappedStack, EnergyValue> stackMappings;
+    private SortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
     private EnergyValueRegistry()
     {
@@ -33,228 +32,82 @@ public class EnergyValueRegistry
         return energyValueRegistry;
     }
 
-    private void init()
+    public static void addPreAssignedEnergyValue(Object object, float energyValue)
     {
-        HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
-        
-        /*
-         *  Default values
-         */
-        Map<WrappedStack, EnergyValue> defaultValuesMap = EnergyValues.getValueMap();
-        for (WrappedStack keyStack : defaultValuesMap.keySet())
+        addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
+    }
+
+    public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
+    {
+        if (preAssignedMappings == null)
         {
-            EnergyValue factoredExchangeEnergyValue = null;
-            WrappedStack factoredKeyStack = null;
+            preAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+        }
 
-            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
-            {
-                if (defaultValuesMap.get(keyStack) != null && Float.compare(defaultValuesMap.get(keyStack).getEnergyValue(), 0f) > 0)
-                {
-                    factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(defaultValuesMap.get(keyStack), keyStack.getStackSize());
-                    factoredKeyStack = new WrappedStack(keyStack, 1);
-                }
-            }
+        if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
+        {
+            WrappedStack wrappedStack = new WrappedStack(object);
 
-            if (factoredExchangeEnergyValue != null)
+            if (wrappedStack.getStackSize() > 0)
             {
-                if (stackValueMap.containsKey(factoredKeyStack))
+                WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
+                EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
+
+                if (preAssignedMappings.containsKey(factoredWrappedStack))
                 {
-                    if (factoredExchangeEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
+                    if (factoredEnergyValue.compareTo(preAssignedMappings.get(factoredWrappedStack)) < 0)
                     {
-                        stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
+                        preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                     }
                 }
                 else
                 {
-                    stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
+                    preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                 }
             }
         }
-
-//        /*
-//         *  IMC Pre-assigned values
-//         */
-//        Map<WrappedStack, EnergyValue> preAssignedValuesMap = EnergyValuesIMC.getPreAssignedValues();
-//        for (WrappedStack keyStack : preAssignedValuesMap.keySet())
-//        {
-//            EnergyValue factoredEnergyValue = null;
-//            WrappedStack factoredKeyStack = null;
-//
-//            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
-//            {
-//                if (preAssignedValuesMap.get(keyStack) != null && Float.compare(preAssignedValuesMap.get(keyStack).getValue(), 0f) > 0)
-//                {
-//                    factoredEnergyValue = EnergyValueHelper.factorEnergyValue(preAssignedValuesMap.get(keyStack), keyStack.getStackSize());
-//                    factoredKeyStack = new WrappedStack(keyStack, 1);
-//                }
-//            }
-//
-//            if (factoredEnergyValue != null)
-//            {
-//                if (stackValueMap.containsKey(factoredKeyStack))
-//                {
-//                    if (factoredEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
-//                    {
-//                        stackValueMap.put(factoredKeyStack, factoredEnergyValue);
-//                    }
-//                }
-//                else
-//                {
-//                    stackValueMap.put(factoredKeyStack, factoredEnergyValue);
-//                }
-//            }
-//        }
-        
-        /*
-         *  Auto-assignment
-         */
-        // Initialize the maps for the first pass to happen
-        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackValueMap);
-        stackMappings = stackMappingsBuilder.build();
-        Map<WrappedStack, EnergyValue> computedStackValues = computeStackMappings();
-
-        // Initialize the pass counter
-        int passNumber = 0;
-
-        while ((computedStackValues.size() > 0) && (passNumber < 16))
-        {
-            // Increment the pass counter
-            passNumber++;
-
-            // Set the values for getEnergyValue calls in the auto-assignment computation
-            stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-            stackMappingsBuilder.putAll(stackValueMap);
-            stackMappings = stackMappingsBuilder.build();
-
-            // Compute stack mappings from existing stack mappings
-            computedStackValues = computeStackMappings();
-            for (WrappedStack keyStack : computedStackValues.keySet())
-            {
-                EnergyValue factoredExchangeEnergyValue = null;
-                WrappedStack factoredKeyStack = null;
-
-                if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
-                {
-                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getEnergyValue(), 0f) > 0)
-                    {
-                        factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(computedStackValues.get(keyStack), keyStack.getStackSize());
-                        factoredKeyStack = new WrappedStack(keyStack, 1);
-                    }
-                }
-
-                if (factoredExchangeEnergyValue != null)
-                {
-                    if (stackValueMap.containsKey(factoredKeyStack))
-                    {
-                        if (factoredExchangeEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
-                        {
-                            stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
-                        }
-                    }
-                    else
-                    {
-                        stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
-                    }
-                }
-            }
-        }
-
-//        /*
-//         *  IMC Post-assigned values
-//         */
-//        Map<WrappedStack, EnergyValue> postAssignedValuesMap = EnergyValuesIMC.getPostAssignedValues();
-//        for (WrappedStack keyStack : postAssignedValuesMap.keySet())
-//        {
-//            EnergyValue factoredEnergyValue = null;
-//            WrappedStack factoredKeyStack = null;
-//
-//            if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
-//            {
-//                if (postAssignedValuesMap.get(keyStack) != null && Float.compare(postAssignedValuesMap.get(keyStack).getValue(), 0f) > 0)
-//                {
-//                    factoredEnergyValue = EnergyHelper.factorEnergyValue(postAssignedValuesMap.get(keyStack), keyStack.getStackSize());
-//                    factoredKeyStack = new WrappedStack(keyStack, 1);
-//                }
-//            }
-//
-//            // Post auto assignment values are meant to override all over values, so we just take the value given
-//            if (factoredEnergyValue != null)
-//            {
-//                stackValueMap.put(factoredKeyStack, factoredEnergyValue);
-//            }
-//        }
-
-        /**
-         * Finalize the stack to value map
-         */
-        stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackValueMap);
-        stackMappings = stackMappingsBuilder.build();
-        
-        /*
-         *  Value map resolution
-         */
-        SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
-
-        for (WrappedStack stack : stackMappings.keySet())
-        {
-            if (stack != null)
-            {
-                EnergyValue value = stackMappings.get(stack);
-
-                if (value != null)
-                {
-                    if (tempValueMappings.containsKey(value))
-                    {
-                        if (!(tempValueMappings.get(value).contains(stack)))
-                        {
-                            tempValueMappings.get(value).add(stack);
-                        }
-                    }
-                    else
-                    {
-                        tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
-                    }
-                }
-            }
-        }
-
-        valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
 
-    private Map<WrappedStack, EnergyValue> computeStackMappings()
+    public static void addPostAssignedEnergyValue(Object object, float energyValue)
     {
-        Map<WrappedStack, EnergyValue> computedStackMap = new HashMap<WrappedStack, EnergyValue>();
-
-        for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet())
+        if (postAssignedMappings == null)
         {
-            if (!hasEnergyValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput))
-            {
-                EnergyValue lowestValue = null;
-
-                for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput))
-                {
-                    EnergyValue computedValue = EnergyValueHelper.computeEnergyValueFromList(recipeInputs);
-                    computedValue = EnergyValueHelper.factorEnergyValue(computedValue, recipeOutput.getStackSize());
-
-                    if (computedValue != null)
-                    {
-                        if (computedValue.compareTo(lowestValue) < 0)
-                        {
-                            lowestValue = computedValue;
-                        }
-                    }
-                }
-
-                if ((lowestValue != null) && (lowestValue.getEnergyValue() > 0f))
-                {
-                    computedStackMap.put(new WrappedStack(recipeOutput.getWrappedStack()), lowestValue);
-                }
-            }
+            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
         }
 
-        return computedStackMap;
+        if (WrappedStack.canBeWrapped(object) && Float.compare(energyValue, 0f) > 0)
+        {
+            WrappedStack wrappedStack = new WrappedStack(object);
+
+            if (wrappedStack.getStackSize() > 0)
+            {
+                WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
+                EnergyValue factoredEnergyValue = new EnergyValue(energyValue * 1f / wrappedStack.getStackSize(), EnergyValue.EnergyType.CORPOREAL);
+
+                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+            }
+        }
+    }
+
+    public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
+    {
+        if (postAssignedMappings == null)
+        {
+            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+        }
+
+        if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
+        {
+            WrappedStack wrappedStack = new WrappedStack(object);
+
+            if (wrappedStack.getStackSize() > 0)
+            {
+                WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
+                EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
+
+                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+            }
+        }
     }
 
     public boolean hasEnergyValue(Object object, boolean strict)
@@ -453,8 +306,139 @@ public class EnergyValueRegistry
         return null;
     }
 
-    @SuppressWarnings("unused")
+    private void init()
+    {
+        stackMappings = new TreeMap<WrappedStack, EnergyValue>();
+
+        /*
+         *  Auto-assignment
+         */
+        // Initialize the maps for the first pass to happen
+        stackMappings.putAll(preAssignedMappings);
+        Map<WrappedStack, EnergyValue> computedStackValues = computeStackMappings();
+
+        // Initialize the pass counter
+        int passNumber = 0;
+
+        while ((computedStackValues.size() > 0) && (passNumber < 16))
+        {
+            // Increment the pass counter
+            passNumber++;
+
+            // Compute stack mappings from existing stack mappings
+            computedStackValues = computeStackMappings();
+            for (WrappedStack keyStack : computedStackValues.keySet())
+            {
+                EnergyValue factoredExchangeEnergyValue = null;
+                WrappedStack factoredKeyStack = null;
+
+                if (keyStack != null && keyStack.getWrappedStack() != null && keyStack.getStackSize() > 0)
+                {
+                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getEnergyValue(), 0f) > 0)
+                    {
+                        factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(computedStackValues.get(keyStack), keyStack.getStackSize());
+                        factoredKeyStack = new WrappedStack(keyStack, 1);
+                    }
+                }
+
+                if (factoredExchangeEnergyValue != null)
+                {
+                    if (stackMappings.containsKey(factoredKeyStack))
+                    {
+                        if (factoredExchangeEnergyValue.compareTo(stackMappings.get(factoredKeyStack)) == -1)
+                        {
+                            stackMappings.put(factoredKeyStack, factoredExchangeEnergyValue);
+                        }
+                    }
+                    else
+                    {
+                        stackMappings.put(factoredKeyStack, factoredExchangeEnergyValue);
+                    }
+                }
+            }
+        }
+
+        /*
+         *  Post-assigned values
+         */
+        if (postAssignedMappings != null)
+        {
+            for (WrappedStack wrappedStack : postAssignedMappings.keySet())
+            {
+                stackMappings.put(wrappedStack, postAssignedMappings.get(wrappedStack));
+            }
+        }
+
+        
+        /*
+         *  Value map resolution
+         */
+        valueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
+
+        for (WrappedStack stack : stackMappings.keySet())
+        {
+            if (stack != null)
+            {
+                EnergyValue value = stackMappings.get(stack);
+
+                if (value != null)
+                {
+                    if (valueMappings.containsKey(value))
+                    {
+                        if (!(valueMappings.get(value).contains(stack)))
+                        {
+                            valueMappings.get(value).add(stack);
+                        }
+                    }
+                    else
+                    {
+                        valueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                    }
+                }
+            }
+        }
+    }
+
+    private Map<WrappedStack, EnergyValue> computeStackMappings()
+    {
+        Map<WrappedStack, EnergyValue> computedStackMap = new HashMap<WrappedStack, EnergyValue>();
+
+        for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet())
+        {
+            if (!hasEnergyValue(recipeOutput.getWrappedStack(), false) && !computedStackMap.containsKey(recipeOutput))
+            {
+                EnergyValue lowestValue = null;
+
+                for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput))
+                {
+                    EnergyValue computedValue = EnergyValueHelper.computeEnergyValueFromList(recipeInputs);
+                    computedValue = EnergyValueHelper.factorEnergyValue(computedValue, recipeOutput.getStackSize());
+
+                    if (computedValue != null)
+                    {
+                        if (computedValue.compareTo(lowestValue) < 0)
+                        {
+                            lowestValue = computedValue;
+                        }
+                    }
+                }
+
+                if ((lowestValue != null) && (lowestValue.getEnergyValue() > 0f))
+                {
+                    computedStackMap.put(new WrappedStack(recipeOutput.getWrappedStack()), lowestValue);
+                }
+            }
+        }
+
+        return computedStackMap;
+    }
+
     public List<WrappedStack> getStacksInRange(int start, int finish)
+    {
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+    }
+
+    public List<WrappedStack> getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
@@ -493,33 +477,5 @@ public class EnergyValueRegistry
         }
 
         return stacksInRange;
-    }
-
-    public List<WrappedStack> getStacksInRange(float start, float finish)
-    {
-        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
-    }
-
-    public ImmutableSortedMap<EnergyValue, List<WrappedStack>> getEnergyValueToStackMap()
-    {
-        return valueMappings;
-    }
-
-    public void dumpStackMappings()
-    {
-        for (WrappedStack wrappedStack : getStackToEnergyValueMap().keySet())
-        {
-            LogHelper.info(String.format("%s = %s", wrappedStack, getStackToEnergyValueMap().get(wrappedStack)));
-        }
-    }
-
-    public ImmutableSortedMap<WrappedStack, EnergyValue> getStackToEnergyValueMap()
-    {
-        return stackMappings;
-    }
-
-    public void dumpValueMappings()
-    {
-
     }
 }
