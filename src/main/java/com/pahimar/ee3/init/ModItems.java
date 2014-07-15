@@ -22,6 +22,8 @@ public class ModItems
     public static final ItemEE alchemicalTome = new ItemAlchemicalTome();
     public static final ItemEE guide = new ItemGuide();
     public static final ItemEE matter = new ItemMatter();
+
+    @GameRegistry.ObjectHolder(Names.Tools.DARK_MATTER_PICKAXE)
     public static final ItemMatterPickAxe matterPickAxe = new ItemMatterPickAxe(Material.Tools.DARK_MATTER, 3);
 
     public static void init()
