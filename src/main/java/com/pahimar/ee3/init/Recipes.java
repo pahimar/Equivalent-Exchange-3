@@ -37,6 +37,8 @@ public class Recipes
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.stoneInert), "sis", "igi", "sis", 's', Blocks.stone, 'i', "ingotIron", 'g', "ingotGold");
 
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), " s ", " s ", "s s", 's', "stickWood");
+
+        GameRegistry.addRecipe(new ItemStack(ModItems.matterPickAxe), "mmm", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
     }
 
     private static void initAludelRecipes()

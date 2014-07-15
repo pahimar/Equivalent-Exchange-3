@@ -1,11 +1,11 @@
-# Key localizations
+# Keys
 key.categories.ee3=Equivalent Exchange 3
 key.charge=Charge
 key.extra=Extra
 key.release=Release
 key.toggle=Toggle
 
-# Item localizations
+# Items
 item.ee3:alchemicalBag.name=Alchemical Bag
 item.ee3:alchemicalDust.ash.name=Ash
 item.ee3:alchemicalDust.verdant.name=Verdant Dust
@@ -34,7 +34,10 @@ item.ee3:matterEssentia.name=Essentia Matter
 item.ee3:matterAmorphous.name=Amorphous Matter
 item.ee3:matterVoid.name=Void Matter
 
-# Block localizations
+# Tools
+item.ee3:pickaxeMatterDark.name=Dark Matter Pickaxe
+
+# Blocks
 tile.ee3:alchemicalChest.name=Alchemical Chest
 tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
@@ -45,7 +48,7 @@ tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station [WIP]
 
-# GUI localizations
+# GUIs
 container.ee3:alchemicalBag=Alchemical Bag
 container.ee3:alchemicalChest=Alchemical Chest
 container.ee3:aludel=Aludel
@@ -53,7 +56,7 @@ container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station [WIP]
 
-# Command localizations
+# Commands
 command.ee3:overlay.turned_on=Target transmutation overlay turned on
 command.ee3:overlay.turned_off=Target transmutation overlay turned off
 command.ee3:overlay.position.top_left=Target transmutation overlay position set to top left
@@ -79,7 +82,7 @@ version.ee3:general_error=Error while connecting to remote version authority fil
 version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
 version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
 
-# Tooltip localizations
+# Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
 tooltip.ee3:alchemicalChestPrefix.small=Small
 tooltip.ee3:alchemicalChestPrefix.medium=Medium

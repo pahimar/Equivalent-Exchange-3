@@ -37,6 +37,28 @@ public class Names
         public static final String[] MATTER_SUBTYPES = {"Dark", "Corporeal", "Kinetic", "Temporal", "Essentia", "Amorphous", "Void", "Omni"};
     }
 
+    public static final class Materials
+    {
+        public static final String DARK_MATTER = "matterDark";
+    }
+
+    public static final class Tools
+    {
+        public static final String DARK_MATTER_PICKAXE = "pickaxeMatterDark";
+    }
+
+    public static final class Armor
+    {
+        public static final String DARK_MATTER_ARMOR = "armorMatterDark";
+        public static final String CORPOREAL_MATTER_ARMOR = "armorMatterCorporeal";
+        public static final String KINETIC_MATTER_ARMOR = "armorMatterKinetic";
+        public static final String TEMPORAL_MATTER_ARMOR = "armorMatterTemporal";
+        public static final String ESSENTIA_MATTER_ARMOR = "armorMatterEssentia";
+        public static final String AMORPHOUS_MATTER_ARMOR = "armorMatterAmorphous";
+        public static final String VOID_MATTER_ARMOR = "armorMatterVoid";
+        public static final String OMNI_MATTER_ARMOR = "armorMatterOmni";
+    }
+
     public static final class NBT
     {
         public static final String CHARGE_LEVEL = "chargeLevel";

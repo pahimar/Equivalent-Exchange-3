@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemAlchemicalBag extends ItemEE implements IDyeable
+public class ItemAlchemicalBag extends ItemEE
 {
     private static final String[] ALCHEMICAL_BAG_ICONS = {"open", "closed", "symbolTier1", "symbolTier2", "symbolTier3"};
 
@@ -118,19 +118,16 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
         return bagColor;
     }
 
-    @Override
     public boolean hasColor(ItemStack itemStack)
     {
         return ColorHelper.hasColor(itemStack);
     }
 
-    @Override
     public int getColor(ItemStack itemStack)
     {
         return ColorHelper.getColor(itemStack);
     }
 
-    @Override
     public void setColor(ItemStack itemStack, int color)
     {
         if (itemStack != null)
@@ -142,7 +139,6 @@ public class ItemAlchemicalBag extends ItemEE implements IDyeable
         }
     }
 
-    @Override
     public void removeColor(ItemStack itemStack)
     {
         if (itemStack != null)

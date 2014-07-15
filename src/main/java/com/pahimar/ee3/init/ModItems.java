@@ -1,6 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.item.*;
+import com.pahimar.ee3.reference.Material;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -21,6 +22,7 @@ public class ModItems
     public static final ItemEE alchemicalTome = new ItemAlchemicalTome();
     public static final ItemEE guide = new ItemGuide();
     public static final ItemEE matter = new ItemMatter();
+    public static final ItemMatterPickAxe matterPickAxe = new ItemMatterPickAxe(Material.Tools.DARK_MATTER, 3);
 
     public static void init()
     {
@@ -37,5 +39,6 @@ public class ModItems
         GameRegistry.registerItem(alchemicalTome, Names.Items.ALCHEMICAL_TOME);
         GameRegistry.registerItem(guide, Names.Items.GUIDE);
         GameRegistry.registerItem(matter, Names.Items.MATTER);
+        GameRegistry.registerItem(matterPickAxe, Names.Tools.DARK_MATTER_PICKAXE);
     }
 }
