@@ -3,6 +3,7 @@ package com.pahimar.ee3.reference;
 public class Messages
 {
     public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
+    public static final String NO_OWNER = "tooltip.ee3:none";
 
     /* Fingerprint check related constants */
     public static final String NO_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running is a development version of the mod, and as such may be unstable and/or incomplete.";

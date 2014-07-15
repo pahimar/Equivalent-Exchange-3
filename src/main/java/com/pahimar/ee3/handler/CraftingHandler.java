@@ -1,6 +1,8 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.item.IOwnable;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
+import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.crafting.CraftingManager;
@@ -16,6 +18,9 @@ public class CraftingHandler
     @SubscribeEvent
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event)
     {
-        // TODO Set owner on who crafted the item (make sure it's not a FakePlayer)
+        if (event.crafting.getItem() instanceof IOwnable)
+        {
+            ItemHelper.setOwner(event.crafting, event.player);
+        }
     }
 }

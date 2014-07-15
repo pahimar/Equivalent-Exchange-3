@@ -11,16 +11,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeHooks;
 
 public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, IChargeable
 {
     private short maxChargeLevel;
 
-    public ItemMatterPickAxe(ToolMaterial toolMaterial1, int maxChargeLevel)
+    public ItemMatterPickAxe(ToolMaterial toolMaterial, int maxChargeLevel)
     {
-        super(toolMaterial1);
+        super(toolMaterial);
         this.maxChargeLevel = (short) maxChargeLevel;
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
@@ -77,7 +79,7 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     @Override
     public float getDigSpeed(ItemStack itemStack, Block block, int meta)
     {
-        if (itemStack.getItem() instanceof IChargeable)
+        if ((ForgeHooks.isToolEffective(itemStack, block, meta) || block == Blocks.obsidian || block == Blocks.redstone_ore || block == Blocks.lit_redstone_ore) && (itemStack.getItem() instanceof IChargeable))
         {
             return super.getDigSpeed(itemStack, block, meta) + (((IChargeable) itemStack.getItem()).getChargeLevel(itemStack) * 12f);
         }

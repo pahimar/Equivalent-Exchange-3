@@ -73,5 +73,13 @@ public class Recipes
 
         // Minium Stone
         RecipesAludel.getInstance().addRecipe(new ItemStack(ModItems.stoneMinium), new ItemStack(ModItems.stoneInert), new ItemStack(ModItems.alchemicalDust, 8, 3));
+
+        // Tome of Alchemical Knowledge
+        RecipesAludel.getInstance().addRecipe(new ItemStack(ModItems.alchemicalTome), new ItemStack(Items.book), new ItemStack(ModItems.alchemicalDust, 1, 3));
+
+        // Alchemical bags
+        RecipesAludel.getInstance().addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 0), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 8, 1));
+        RecipesAludel.getInstance().addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 1), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 8, 2));
+        RecipesAludel.getInstance().addRecipe(new ItemStack(ModItems.alchemicalBag, 1, 2), new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.alchemicalDust, 8, 3));
     }
 }

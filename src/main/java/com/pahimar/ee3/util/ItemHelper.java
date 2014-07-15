@@ -1,9 +1,14 @@
 package com.pahimar.ee3.util;
 
+import com.pahimar.ee3.reference.Messages;
+import com.pahimar.ee3.reference.Names;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import java.util.Comparator;
+import java.util.UUID;
 
 public class ItemHelper
 {
@@ -96,5 +101,37 @@ public class ItemHelper
         }
 
         return "null";
+    }
+
+    public static boolean hasOwner(ItemStack itemStack)
+    {
+        return (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
+    }
+
+    public static String getOwnerName(ItemStack itemStack)
+    {
+        if (NBTHelper.hasTag(itemStack, Names.NBT.OWNER))
+        {
+            return NBTHelper.getString(itemStack, Names.NBT.OWNER);
+        }
+
+        return StatCollector.translateToLocal(Messages.NO_OWNER);
+    }
+
+    public static UUID getOwnerUUID(ItemStack itemStack)
+    {
+        if (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG))
+        {
+            return new UUID(NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
+        }
+
+        return null;
+    }
+
+    public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer)
+    {
+        NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
+        NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
+        NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
     }
 }

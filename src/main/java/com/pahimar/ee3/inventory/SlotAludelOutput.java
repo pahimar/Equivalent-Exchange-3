@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 
 public class SlotAludelOutput extends Slot
 {
-    public SlotAludelOutput(IInventory inventory, int x, int y, int z)
+    public SlotAludelOutput(IInventory inventory, int slotIndex, int x, int y)
     {
-        super(inventory, x, y, z);
+        super(inventory, slotIndex, x, y);
     }
 
     @Override

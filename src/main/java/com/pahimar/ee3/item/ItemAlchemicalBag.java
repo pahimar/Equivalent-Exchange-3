@@ -6,6 +6,7 @@ import com.pahimar.ee3.reference.GuiIds;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.util.ColorHelper;
+import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemAlchemicalBag extends ItemEE
+public class ItemAlchemicalBag extends ItemEE implements IOwnable
 {
     private static final String[] ALCHEMICAL_BAG_ICONS = {"open", "closed", "symbolTier1", "symbolTier2", "symbolTier3"};
 
@@ -95,6 +96,9 @@ public class ItemAlchemicalBag extends ItemEE
     {
         if (!world.isRemote)
         {
+            // Set the owner
+            ItemHelper.setOwner(itemStack, entityPlayer);
+
             // Set a UUID on the Alchemical Bag, if one doesn't exist already
             NBTHelper.setUUID(itemStack);
             NBTHelper.setBoolean(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN, true);

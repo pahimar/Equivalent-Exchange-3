@@ -1,5 +1,6 @@
 package com.pahimar.ee3.proxy;
 
+import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.ItemEventHandler;
 import com.pahimar.ee3.handler.PlayerEventHandler;
 import com.pahimar.ee3.handler.WorldEventHandler;
@@ -14,11 +15,14 @@ public abstract class CommonProxy implements IProxy
     public void registerEventHandlers()
     {
         ItemEventHandler itemEventHandler = new ItemEventHandler();
+        CraftingHandler craftingHandler = new CraftingHandler();
 
         FMLCommonHandler.instance().bus().register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+        FMLCommonHandler.instance().bus().register(craftingHandler);
+        MinecraftForge.EVENT_BUS.register(craftingHandler);
     }
 
     public void registerTileEntities()
