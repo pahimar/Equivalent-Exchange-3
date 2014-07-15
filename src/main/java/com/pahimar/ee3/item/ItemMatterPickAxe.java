@@ -166,7 +166,6 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
         else if (key == Key.EXTRA)
         {
             changeToolMode(itemStack);
-            LogHelper.info(getCurrentToolMode(itemStack));
         }
     }
 
