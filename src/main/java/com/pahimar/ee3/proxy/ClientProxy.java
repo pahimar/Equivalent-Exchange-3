@@ -1,6 +1,7 @@
 package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.client.configuration.ClientConfiguration;
+import com.pahimar.ee3.client.handler.DrawBlockHighlightEventHandler;
 import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.renderer.item.*;
@@ -26,6 +27,7 @@ public class ClientProxy extends CommonProxy
         super.registerEventHandlers();
         FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
         MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
+        MinecraftForge.EVENT_BUS.register(new DrawBlockHighlightEventHandler());
     }
 
     @Override

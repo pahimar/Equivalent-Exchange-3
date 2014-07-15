@@ -1,10 +1,8 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.creativetab.CreativeTab;
-import com.pahimar.ee3.reference.Key;
-import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.Sounds;
-import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.reference.*;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,9 +12,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, IChargeable
+import java.util.Arrays;
+import java.util.List;
+
+public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, IChargeable, IModalTool
 {
     private short maxChargeLevel;
 
@@ -88,6 +90,17 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     }
 
     @Override
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+    {
+        if (!world.isRemote)
+        {
+            LogHelper.info("Right click with the Dark Matter Pickaxe");
+        }
+
+        return false;
+    }
+
+    @Override
     public short getChargeLevel(ItemStack itemStack)
     {
         return NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
@@ -148,6 +161,52 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
                     decreaseChargeLevel(itemStack);
                     entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / maxChargeLevel)));
                 }
+            }
+        }
+        else if (key == Key.EXTRA)
+        {
+            changeToolMode(itemStack);
+            LogHelper.info(getCurrentToolMode(itemStack));
+        }
+    }
+
+    @Override
+    public List<ToolMode> getAvailableToolModes()
+    {
+        return Arrays.asList(ToolMode.SINGLE, ToolMode.WIDE, ToolMode.TALL);
+    }
+
+    @Override
+    public ToolMode getCurrentToolMode(ItemStack itemStack)
+    {
+        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
+        {
+            return ToolMode.TYPES[NBTHelper.getShort(itemStack, Names.NBT.MODE)];
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setToolMode(ItemStack itemStack, ToolMode toolMode)
+    {
+        NBTHelper.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
+    }
+
+    @Override
+    public void changeToolMode(ItemStack itemStack)
+    {
+        ToolMode currentToolMode = getCurrentToolMode(itemStack);
+
+        if (getAvailableToolModes().contains(currentToolMode))
+        {
+            if (getAvailableToolModes().indexOf(currentToolMode) == getAvailableToolModes().size() - 1)
+            {
+                setToolMode(itemStack, getAvailableToolModes().get(0));
+            }
+            else
+            {
+                setToolMode(itemStack, getAvailableToolModes().get(getAvailableToolModes().indexOf(currentToolMode) + 1));
             }
         }
     }
