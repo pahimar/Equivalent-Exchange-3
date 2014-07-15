@@ -1,7 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.reference.GuiIds;
+import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
@@ -80,11 +80,11 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
                 {
                     if (world.getTileEntity(x, y - 1, z) instanceof TileEntityAludel)
                     {
-                        player.openGui(EquivalentExchange3.instance, GuiIds.ALUDEL, world, x, y - 1, z);
+                        player.openGui(EquivalentExchange3.instance, GuiId.ALUDEL.ordinal(), world, x, y - 1, z);
                     }
                     else
                     {
-                        player.openGui(EquivalentExchange3.instance, GuiIds.GLASS_BELL, world, x, y, z);
+                        player.openGui(EquivalentExchange3.instance, GuiId.GLASS_BELL.ordinal(), world, x, y, z);
                     }
                 }
             }
