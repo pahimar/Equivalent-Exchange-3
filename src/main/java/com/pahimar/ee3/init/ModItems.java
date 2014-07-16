@@ -1,7 +1,6 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.item.*;
-import com.pahimar.ee3.reference.Material;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -23,8 +22,9 @@ public class ModItems
     public static final ItemEE guide = new ItemGuide();
     public static final ItemEE matter = new ItemMatter();
 
-    @GameRegistry.ObjectHolder(Names.Tools.DARK_MATTER_PICKAXE)
-    public static final ItemMatterPickAxe matterPickAxe = new ItemMatterPickAxe(Material.Tools.DARK_MATTER, 3);
+    public static final ItemDarkMatterShovel shovelDarkMatter = new ItemDarkMatterShovel();
+    public static final ItemDarkMatterPickAxe pickaxeDarkMatter = new ItemDarkMatterPickAxe();
+    public static final ItemDarkMatterFishingRod fishingrodDarkMatter = new ItemDarkMatterFishingRod();
 
     public static void init()
     {
@@ -41,6 +41,21 @@ public class ModItems
         GameRegistry.registerItem(alchemicalTome, Names.Items.ALCHEMICAL_TOME);
         GameRegistry.registerItem(guide, Names.Items.GUIDE);
         GameRegistry.registerItem(matter, Names.Items.MATTER);
-        GameRegistry.registerItem(matterPickAxe, Names.Tools.DARK_MATTER_PICKAXE);
+
+        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
+        GameRegistry.registerItem(pickaxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
+        // Axe
+        // Hoe
+        GameRegistry.registerItem(fishingrodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
+        // Shears
+
+        // Bow
+        // Arrow
+        // Sword
+
+        // Helm
+        // Chest
+        // Leggings
+        // Boots
     }
 }

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.item.ItemMatterPickAxe;
+import com.pahimar.ee3.item.ItemDarkMatterPickAxe;
 import com.pahimar.ee3.reference.ToolMode;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +26,7 @@ public class DrawBlockHighlightEventHandler
         {
             if (event.target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
             {
-                if (event.currentItem.getItem() instanceof ItemMatterPickAxe)
+                if (event.currentItem.getItem() instanceof ItemDarkMatterPickAxe)
                 {
                     event.setCanceled(true);
                     drawSelectionBoxForPickAxe(event);
@@ -37,7 +37,7 @@ public class DrawBlockHighlightEventHandler
 
     private void drawSelectionBoxForPickAxe(DrawBlockHighlightEvent event)
     {
-        ToolMode toolMode = ((ItemMatterPickAxe) event.currentItem.getItem()).getCurrentToolMode(event.currentItem);
+        ToolMode toolMode = ((ItemDarkMatterPickAxe) event.currentItem.getItem()).getCurrentToolMode(event.currentItem);
         int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
         if (toolMode == ToolMode.SINGLE)

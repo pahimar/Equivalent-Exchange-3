@@ -38,7 +38,7 @@ public class Recipes
 
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), " s ", " s ", "s s", 's', "stickWood");
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.matterPickAxe), "mmm", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        GameRegistry.addRecipe(new ItemStack(ModItems.pickaxeDarkMatter), "mmm", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
     }
 
     private static void initAludelRecipes()

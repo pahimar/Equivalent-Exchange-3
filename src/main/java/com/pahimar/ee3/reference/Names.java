@@ -44,19 +44,23 @@ public class Names
 
     public static final class Tools
     {
-        public static final String DARK_MATTER_PICKAXE = "pickaxeMatterDark";
+        public static final String DARK_MATTER_PICKAXE = "pickaxeDarkMatter";
+        public static final String DARK_MATTER_FISHING_ROD = "fishingrodDarkMatter";
+        public static final String DARK_MATTER_HOE = "hoeDarkMatter";
+        public static final String DARK_MATTER_SHOVEL = "shovelDarkMatter";
+        public static final String DARK_MATTER_SWORD = "swordDarkMatter";
     }
 
     public static final class Armor
     {
-        public static final String DARK_MATTER_ARMOR = "armorMatterDark";
-        public static final String CORPOREAL_MATTER_ARMOR = "armorMatterCorporeal";
-        public static final String KINETIC_MATTER_ARMOR = "armorMatterKinetic";
-        public static final String TEMPORAL_MATTER_ARMOR = "armorMatterTemporal";
-        public static final String ESSENTIA_MATTER_ARMOR = "armorMatterEssentia";
-        public static final String AMORPHOUS_MATTER_ARMOR = "armorMatterAmorphous";
-        public static final String VOID_MATTER_ARMOR = "armorMatterVoid";
-        public static final String OMNI_MATTER_ARMOR = "armorMatterOmni";
+        public static final String DARK_MATTER_ARMOR = "armorDarkMatter";
+        public static final String CORPOREAL_MATTER_ARMOR = "armorCorporealMatter";
+        public static final String KINETIC_MATTER_ARMOR = "armorKineticMatter";
+        public static final String TEMPORAL_MATTER_ARMOR = "armorTemporalMatter";
+        public static final String ESSENTIA_MATTER_ARMOR = "armorEssentiaMatter";
+        public static final String AMORPHOUS_MATTER_ARMOR = "armorAmorphousMatter";
+        public static final String VOID_MATTER_ARMOR = "armorVoidMatter";
+        public static final String OMNI_MATTER_ARMOR = "armorOmniMatter";
     }
 
     public static final class NBT

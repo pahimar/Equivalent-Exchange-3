@@ -2,33 +2,24 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.reference.*;
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, IChargeable, IModalTool
+public class ItemDarkMatterShovel extends ItemSpade implements IKeyBound, IChargeable, IModalTool
 {
-    private short maxChargeLevel;
-
-    public ItemMatterPickAxe(ToolMaterial toolMaterial, int maxChargeLevel)
+    public ItemDarkMatterShovel()
     {
-        super(toolMaterial);
-        this.maxChargeLevel = (short) maxChargeLevel;
+        super(Material.Tools.DARK_MATTER);
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
-        this.setUnlocalizedName(Names.Tools.DARK_MATTER_PICKAXE);
+        this.setUnlocalizedName(Names.Tools.DARK_MATTER_SHOVEL);
     }
 
     @Override
@@ -72,32 +63,16 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     {
         if (itemStack.getItem() instanceof IChargeable)
         {
-            return (double) (this.maxChargeLevel - ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack)) / (double) this.maxChargeLevel;
+            return (double) (this.getMaxChargeLevel() - ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack)) / (double) this.getMaxChargeLevel();
         }
 
         return 1d;
     }
 
     @Override
-    public float getDigSpeed(ItemStack itemStack, Block block, int meta)
+    public short getMaxChargeLevel()
     {
-        if ((ForgeHooks.isToolEffective(itemStack, block, meta) || block == Blocks.obsidian || block == Blocks.redstone_ore || block == Blocks.lit_redstone_ore) && (itemStack.getItem() instanceof IChargeable))
-        {
-            return super.getDigSpeed(itemStack, block, meta) + (((IChargeable) itemStack.getItem()).getChargeLevel(itemStack) * 12f);
-        }
-
-        return super.getDigSpeed(itemStack, block, meta);
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-    {
-        if (!world.isRemote)
-        {
-            LogHelper.info("Right click with the Dark Matter Pickaxe");
-        }
-
-        return false;
+        return 3;
     }
 
     @Override
@@ -109,7 +84,7 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     @Override
     public void setChargeLevel(ItemStack itemStack, short chargeLevel)
     {
-        if (chargeLevel <= maxChargeLevel)
+        if (chargeLevel <= this.getMaxChargeLevel())
         {
             NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, chargeLevel);
         }
@@ -118,7 +93,7 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     @Override
     public void increaseChargeLevel(ItemStack itemStack)
     {
-        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) < maxChargeLevel)
+        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) < this.getMaxChargeLevel())
         {
             NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) + 1));
         }
@@ -140,14 +115,14 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
         {
             if (!entityPlayer.isSneaking())
             {
-                if (getChargeLevel(itemStack) == maxChargeLevel)
+                if (getChargeLevel(itemStack) == this.getMaxChargeLevel())
                 {
                     entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     increaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / maxChargeLevel));
+                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
                 }
             }
             else
@@ -159,7 +134,7 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
                 else
                 {
                     decreaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / maxChargeLevel)));
+                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
                 }
             }
         }
@@ -172,7 +147,8 @@ public class ItemMatterPickAxe extends ItemPickaxe implements IKeyBound, ICharge
     @Override
     public List<ToolMode> getAvailableToolModes()
     {
-        return Arrays.asList(ToolMode.SINGLE, ToolMode.WIDE, ToolMode.TALL);
+        // TODO
+        return null;
     }
 
     @Override
