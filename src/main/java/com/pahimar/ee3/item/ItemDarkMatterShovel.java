@@ -1,72 +1,37 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.creativetab.CreativeTab;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.pahimar.ee3.reference.*;
 import com.pahimar.ee3.util.NBTHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.util.Set;
 
-public class ItemDarkMatterShovel extends ItemSpade implements IKeyBound, IChargeable, IModalTool
+public class ItemDarkMatterShovel extends ItemToolEE implements IKeyBound, IChargeable, IModalTool
 {
+    private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium});
+
     public ItemDarkMatterShovel()
     {
-        super(Material.Tools.DARK_MATTER);
-        this.setCreativeTab(CreativeTab.EE3_TAB);
-        this.setNoRepair();
+        super(1.0f, Material.Tools.DARK_MATTER, blocksEffectiveAgainst);
         this.setUnlocalizedName(Names.Tools.DARK_MATTER_SHOVEL);
     }
 
     @Override
-    public String getUnlocalizedName()
+    public boolean func_150897_b(Block block)
     {
-        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return block == Blocks.snow_layer ? true : block == Blocks.snow;
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
+    public Set<String> getToolClasses(ItemStack itemStack)
     {
-        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister)
-    {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
-    }
-
-    @Override
-    public boolean getShareTag()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean showDurabilityBar(ItemStack itemStack)
-    {
-        return ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack) > 0;
-    }
-
-    @Override
-    public double getDurabilityForDisplay(ItemStack itemStack)
-    {
-        if (itemStack.getItem() instanceof IChargeable)
-        {
-            return (double) (this.getMaxChargeLevel() - ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack)) / (double) this.getMaxChargeLevel();
-        }
-
-        return 1d;
+        return ImmutableSet.of("shovel");
     }
 
     @Override

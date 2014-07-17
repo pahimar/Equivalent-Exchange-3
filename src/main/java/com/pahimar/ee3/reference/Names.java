@@ -44,10 +44,19 @@ public class Names
 
     public static final class Tools
     {
-        public static final String DARK_MATTER_PICKAXE = "pickaxeDarkMatter";
-        public static final String DARK_MATTER_FISHING_ROD = "fishingrodDarkMatter";
-        public static final String DARK_MATTER_HOE = "hoeDarkMatter";
         public static final String DARK_MATTER_SHOVEL = "shovelDarkMatter";
+        public static final String DARK_MATTER_PICKAXE = "pickaxeDarkMatter";
+        public static final String DARK_MATTER_HAMMER = "hammerDarkMatter";
+        public static final String DARK_MATTER_AXE = "axeDarkMatter";
+        public static final String DARK_MATTER_HOE = "hoeDarkMatter";
+        public static final String DARK_MATTER_FISHING_ROD = "fishingrodDarkMatter";
+        public static final String DARK_MATTER_SHEARS = "shearsDarkMatter";
+    }
+
+    public static final class Weapons
+    {
+        public static final String DARK_MATTER_BOW = "bowDarkMatter";
+        public static final String DARK_MATTER_ARROW = "arrowDarkMatter";
         public static final String DARK_MATTER_SWORD = "swordDarkMatter";
     }
 

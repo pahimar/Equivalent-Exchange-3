@@ -35,10 +35,17 @@ item.ee3:matterAmorphous.name=Amorphous Matter
 item.ee3:matterVoid.name=Void Matter
 
 # Tools
-item.ee3:pickaxeDarkMatter.name=Dark Matter Pickaxe
-item.ee3:fishingrodDarkMatter.name=Dark Matter Fishing Rod
-item.ee3:hoeDarkMatter.name=Dark Matter Hoe
 item.ee3:shovelDarkMatter.name=Dark Matter Shovel
+item.ee3:pickaxeDarkMatter.name=Dark Matter Pickaxe
+item.ee3:hammerDarkMatter.name=Dark Matter Hammer
+item.ee3:axeDarkMatter.name=Dark Matter Axe
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe
+item.ee3:fishingrodDarkMatter.name=Dark Matter Fishing Rod
+item.ee3:shearsDarkMatter.name=Dark Matter Shears
+
+# Weapons
+item.ee3:bowDarkMatter.name=Dark Matter Bow
+item.ee3:arrowDarkMatter.name=Dark Matter Arrow
 item.ee3:swordDarkMatter.name=Dark Matter Sword
 
 # Blocks

@@ -1,73 +1,78 @@
 package com.pahimar.ee3.item;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.reference.*;
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.NBTHelper;
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, IChargeable, IModalTool
+public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable, IModalTool
 {
-    private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail});
-
-    public ItemDarkMatterPickAxe()
+    public ItemDarkMatterHoe()
     {
-        super(2f, Material.Tools.DARK_MATTER, blocksEffectiveAgainst);
+        super(Material.Tools.DARK_MATTER);
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
-        this.setUnlocalizedName(Names.Tools.DARK_MATTER_PICKAXE);
+        this.maxStackSize = 1;
+        this.setUnlocalizedName(Names.Tools.DARK_MATTER_HOE);
     }
 
     @Override
-    public boolean func_150897_b(Block block)
+    public String getUnlocalizedName()
     {
-        return block == Blocks.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (block != Blocks.diamond_block && block != Blocks.diamond_ore ? (block != Blocks.emerald_ore && block != Blocks.emerald_block ? (block != Blocks.gold_block && block != Blocks.gold_ore ? (block != Blocks.iron_block && block != Blocks.iron_ore ? (block != Blocks.lapis_block && block != Blocks.lapis_ore ? (block != Blocks.redstone_ore && block != Blocks.lit_redstone_ore ? (block.getMaterial() == net.minecraft.block.material.Material.rock ? true : (block.getMaterial() == net.minecraft.block.material.Material.iron ? true : block.getMaterial() == net.minecraft.block.material.Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
+        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
-    public float func_150893_a(ItemStack itemStack, Block block)
+    public String getUnlocalizedName(ItemStack itemStack)
     {
-        return block.getMaterial() != net.minecraft.block.material.Material.iron && block.getMaterial() != net.minecraft.block.material.Material.anvil && block.getMaterial() != net.minecraft.block.material.Material.rock ? super.func_150893_a(itemStack, block) : this.efficiencyOnProperMaterial;
+        return String.format("item.%s%s", Textures.RESOURCE_PREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     @Override
-    public Set<String> getToolClasses(ItemStack itemStack)
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister iconRegister)
     {
-        return ImmutableSet.of("pickaxe");
+        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+    }
+
+    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
+    {
+        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
     @Override
-    public float getDigSpeed(ItemStack itemStack, Block block, int meta)
+    public boolean getShareTag()
     {
-        if ((ForgeHooks.isToolEffective(itemStack, block, meta) || block == Blocks.obsidian || block == Blocks.redstone_ore || block == Blocks.lit_redstone_ore) && (itemStack.getItem() instanceof IChargeable))
+        return true;
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack itemStack)
+    {
+        if (itemStack.getItem() instanceof IChargeable)
         {
-            return super.getDigSpeed(itemStack, block, meta) + (((IChargeable) itemStack.getItem()).getChargeLevel(itemStack) * 12f);
-        }
-
-        return super.getDigSpeed(itemStack, block, meta);
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-    {
-        if (!world.isRemote)
-        {
-            // TODO
-            LogHelper.info("Right click with the Dark Matter Pickaxe");
+            return ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack) > 0;
         }
 
         return false;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack itemStack)
+    {
+        if (itemStack.getItem() instanceof IChargeable)
+        {
+            return (double) (((IChargeable) itemStack.getItem()).getMaxChargeLevel() - ((IChargeable) itemStack.getItem()).getChargeLevel(itemStack)) / (double) ((IChargeable) itemStack.getItem()).getMaxChargeLevel();
+        }
+
+        return 1d;
     }
 
     @Override
@@ -148,7 +153,8 @@ public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, ICha
     @Override
     public List<ToolMode> getAvailableToolModes()
     {
-        return Arrays.asList(ToolMode.SINGLE, ToolMode.WIDE, ToolMode.TALL);
+        // TODO
+        return null;
     }
 
     @Override
