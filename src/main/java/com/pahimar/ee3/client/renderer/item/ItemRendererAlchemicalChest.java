@@ -10,50 +10,50 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ItemAlchemicalChestRenderer implements IItemRenderer
+public class ItemRendererAlchemicalChest implements IItemRenderer
 {
     private final ModelChest modelChest;
 
-    public ItemAlchemicalChestRenderer()
+    public ItemRendererAlchemicalChest()
     {
         modelChest = new ModelChest();
     }
 
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    public boolean handleRenderType(ItemStack itemStack, ItemRenderType itemRenderType)
     {
         return true;
     }
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    public boolean shouldUseRenderHelper(ItemRenderType itemRenderType, ItemStack itemStack, ItemRendererHelper itemRendererHelper)
     {
         return true;
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    public void renderItem(ItemRenderType itemRenderType, ItemStack itemStack, Object... data)
     {
-        switch (type)
+        switch (itemRenderType)
         {
             case ENTITY:
             {
-                renderAlchemicalChest(0.5F, 0.5F, 0.5F, item.getItemDamage());
+                renderAlchemicalChest(0.5F, 0.5F, 0.5F, itemStack.getItemDamage());
                 break;
             }
             case EQUIPPED:
             {
-                renderAlchemicalChest(1.0F, 1.0F, 1.0F, item.getItemDamage());
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F, itemStack.getItemDamage());
                 break;
             }
             case EQUIPPED_FIRST_PERSON:
             {
-                renderAlchemicalChest(1.0F, 1.0F, 1.0F, item.getItemDamage());
+                renderAlchemicalChest(1.0F, 1.0F, 1.0F, itemStack.getItemDamage());
                 break;
             }
             case INVENTORY:
             {
-                renderAlchemicalChest(0.0F, 0.075F, 0.0F, item.getItemDamage());
+                renderAlchemicalChest(0.0F, 0.075F, 0.0F, itemStack.getItemDamage());
                 break;
             }
             default:
@@ -65,15 +65,15 @@ public class ItemAlchemicalChestRenderer implements IItemRenderer
     {
         if (metaData == 0)
         {
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_SMALL);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.Model.ALCHEMICAL_CHEST_SMALL);
         }
         else if (metaData == 1)
         {
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_MEDIUM);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.Model.ALCHEMICAL_CHEST_MEDIUM);
         }
         else if (metaData == 2)
         {
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.Model.ALCHEMICAL_CHEST_LARGE);
         }
 
         GL11.glPushMatrix(); //start

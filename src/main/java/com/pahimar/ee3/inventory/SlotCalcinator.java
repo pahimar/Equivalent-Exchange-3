@@ -21,7 +21,7 @@ public class SlotCalcinator extends Slot
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack)
+    public boolean isItemValid(ItemStack itemStack)
     {
         return false;
     }

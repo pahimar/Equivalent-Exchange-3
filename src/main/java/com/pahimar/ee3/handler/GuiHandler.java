@@ -42,6 +42,11 @@ public class GuiHandler implements IGuiHandler
             TileEntityResearchStation tileEntityResearchStation = (TileEntityResearchStation) world.getTileEntity(x, y, z);
             return new ContainerResearchStation(player.inventory, tileEntityResearchStation);
         }
+        else if (id == GuiId.AUGMENTATION_TABLE.ordinal())
+        {
+            TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
+            return new ContainerAugmentationTable(player.inventory, tileEntityAugmentationTable);
+        }
 
         return null;
     }
@@ -77,6 +82,11 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityResearchStation tileEntityResearchStation = (TileEntityResearchStation) world.getTileEntity(x, y, z);
             return new GuiResearchStation(player.inventory, tileEntityResearchStation);
+        }
+        else if (id == GuiId.AUGMENTATION_TABLE.ordinal())
+        {
+            TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
+            return new GuiAugmentationTable(player.inventory, tileEntityAugmentationTable);
         }
 
         return null;

@@ -37,7 +37,7 @@ public class GuiAludel extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(Textures.GUI_ALUDEL);
+        this.mc.getTextureManager().bindTexture(Textures.Gui.ALUDEL);
 
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;

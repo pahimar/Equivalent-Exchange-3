@@ -148,7 +148,7 @@ public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, ICha
     @Override
     public List<ToolMode> getAvailableToolModes()
     {
-        return Arrays.asList(ToolMode.SINGLE, ToolMode.WIDE, ToolMode.TALL);
+        return Arrays.asList(ToolMode.STANDARD, ToolMode.WIDE, ToolMode.TALL);
     }
 
     @Override

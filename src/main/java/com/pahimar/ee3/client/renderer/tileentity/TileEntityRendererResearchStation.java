@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityResearchStationRenderer extends TileEntitySpecialRenderer
+public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
 {
     private final ModelResearchStation modelResearchStation = new ModelResearchStation();
 
@@ -27,7 +27,7 @@ public class TileEntityResearchStationRenderer extends TileEntitySpecialRenderer
             GL11.glTranslatef((float) x + 0.0F, (float) y + 0.0F, (float) z + 1.0F);
 
             // Bind texture
-            this.bindTexture(Textures.MODEL_RESEARCH_STATION);
+            this.bindTexture(Textures.Model.RESEARCH_STATION);
 
             // Render
             modelResearchStation.render();

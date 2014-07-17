@@ -13,7 +13,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
+public class TileEntityRendererCalcinator extends TileEntitySpecialRenderer
 {
     private final ModelCalcinator modelCalcinator = new ModelCalcinator();
 
@@ -66,11 +66,11 @@ public class TileEntityCalcinatorRenderer extends TileEntitySpecialRenderer
             // Bind texture
             if (tileEntityCalcinator.getState() == 1)
             {
-                this.bindTexture(Textures.MODEL_CALCINATOR_ACTIVE);
+                this.bindTexture(Textures.Model.CALCINATOR_ACTIVE);
             }
             else
             {
-                this.bindTexture(Textures.MODEL_CALCINATOR_IDLE);
+                this.bindTexture(Textures.Model.CALCINATOR_IDLE);
             }
 
             // Render

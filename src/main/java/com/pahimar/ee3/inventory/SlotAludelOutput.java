@@ -21,7 +21,7 @@ public class SlotAludelOutput extends Slot
     }
 
     @Override
-    public boolean isItemValid(ItemStack par1ItemStack)
+    public boolean isItemValid(ItemStack itemStack)
     {
         return false;
     }

@@ -60,15 +60,15 @@ public class GuiAlchemicalBag extends GuiContainer
 
         if (this.parentItemStack.getItemDamage() == 0)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_SMALL);
+            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_SMALL);
         }
         else if (this.parentItemStack.getItemDamage() == 1)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_MEDIUM);
+            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_MEDIUM);
         }
         else if (this.parentItemStack.getItemDamage() == 2)
         {
-            this.mc.getTextureManager().bindTexture(Textures.GUI_ALCHEMICAL_BAG_LARGE);
+            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_LARGE);
         }
 
         int xStart = (width - xSize) / 2;

@@ -34,6 +34,7 @@ public abstract class CommonProxy implements IProxy
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAludel.class, Names.Blocks.ALUDEL, "tile." + Names.Blocks.ALUDEL);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityCalcinator.class, Names.Blocks.CALCINATOR, "tile." + Names.Blocks.CALCINATOR);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityGlassBell.class, Names.Blocks.GLASS_BELL, "tile." + Names.Blocks.GLASS_BELL);
-        GameRegistry.registerTileEntityWithAlternatives(TileEntityResearchStation.class, Names.Blocks.RESEARCH_STATION);
+        GameRegistry.registerTileEntity(TileEntityResearchStation.class, Names.Blocks.RESEARCH_STATION);
+        GameRegistry.registerTileEntity(TileEntityAugmentationTable.class, Names.Blocks.AUGMENTATION_TABLE);
     }
 }

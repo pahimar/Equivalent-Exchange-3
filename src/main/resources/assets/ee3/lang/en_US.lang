@@ -5,6 +5,9 @@ key.extra=Extra
 key.release=Release
 key.toggle=Toggle
 
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
 # Items
 item.ee3:alchemicalBag.name=Alchemical Bag
 item.ee3:alchemicalDust.ash.name=Ash
@@ -58,6 +61,7 @@ tile.ee3:calcinator.name=Calcinator
 tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station [WIP]
+tile.ee3:augmentationTable.name=Augmentation Table [WIP]
 
 # GUIs
 container.ee3:alchemicalBag=Alchemical Bag
@@ -66,6 +70,7 @@ container.ee3:aludel=Aludel
 container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station [WIP]
+container.ee3:augmentationTable=Augmentation Table [WIP]
 
 # Commands
 command.ee3:overlay.turned_on=Target transmutation overlay turned on
@@ -99,6 +104,3 @@ tooltip.ee3:alchemicalChestPrefix.small=Small
 tooltip.ee3:alchemicalChestPrefix.medium=Medium
 tooltip.ee3:alchemicalChestPrefix.large=Large
 tooltip.ee3:none=None
-
-# Creative Tabs
-itemGroup.ee3=Equivalent Exchange 3

@@ -6,16 +6,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class ContainerAludel extends Container
+public class ContainerAludel extends ContainerEE
 {
-    private final int PLAYER_INVENTORY_ROWS = 3;
-    private final int PLAYER_INVENTORY_COLUMNS = 9;
     private TileEntityAludel tileEntityAludel;
     private int lastDeviceCookTime;
     private int lastFuelBurnTime;
@@ -177,11 +174,5 @@ public class ContainerAludel extends Container
         {
             this.tileEntityAludel.itemCookTime = updatedValue;
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer)
-    {
-        return true;
     }
 }

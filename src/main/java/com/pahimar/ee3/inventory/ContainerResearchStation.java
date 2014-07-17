@@ -4,14 +4,11 @@ import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerResearchStation extends Container
+public class ContainerResearchStation extends ContainerEE
 {
-    private final int PLAYER_INVENTORY_ROWS = 3;
-    private final int PLAYER_INVENTORY_COLUMNS = 9;
     private TileEntityResearchStation tileEntityResearchStation;
 
     public ContainerResearchStation(InventoryPlayer inventoryPlayer, TileEntityResearchStation tileEntityResearchStation)
@@ -35,12 +32,6 @@ public class ContainerResearchStation extends Container
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 152));
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer)
-    {
-        return true;
     }
 
     @Override

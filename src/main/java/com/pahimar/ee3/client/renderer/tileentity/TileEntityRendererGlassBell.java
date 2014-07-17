@@ -16,12 +16,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
+public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
 {
     private final ModelGlassBell modelGlassBell = new ModelGlassBell();
     private final RenderItem customRenderItem;
 
-    public TileEntityGlassBellRenderer()
+    public TileEntityRendererGlassBell()
     {
         customRenderItem = new RenderItem()
         {
@@ -55,7 +55,7 @@ public class TileEntityGlassBellRenderer extends TileEntitySpecialRenderer
             renderGlassBellByOrientation(x, y, z, tileEntityGlassBell.getOrientation());
 
             // Bind texture
-            this.bindTexture(Textures.MODEL_GLASS_BELL);
+            this.bindTexture(Textures.Model.GLASS_BELL);
 
             modelGlassBell.render();
 

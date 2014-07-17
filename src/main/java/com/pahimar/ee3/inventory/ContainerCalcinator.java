@@ -5,13 +5,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class ContainerCalcinator extends Container
+public class ContainerCalcinator extends ContainerEE
 {
     private TileEntityCalcinator tileEntityCalcinator;
     private int lastCookTime;               // How much longer the Calcinator will burn
@@ -33,9 +32,9 @@ public class ContainerCalcinator extends Container
         this.addSlotToContainer(new SlotCalcinator(tileEntityCalcinator, TileEntityCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX, 136, 35));
 
         // Add the player's inventory slots to the container
-        for (int inventoryRowIndex = 0; inventoryRowIndex < 3; ++inventoryRowIndex)
+        for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
         {
-            for (int inventoryColumnIndex = 0; inventoryColumnIndex < 9; ++inventoryColumnIndex)
+            for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
                 this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 94 + inventoryRowIndex * 18));
             }
@@ -166,11 +165,5 @@ public class ContainerCalcinator extends Container
         {
             this.tileEntityCalcinator.itemCookTime = updatedValue;
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer player)
-    {
-        return true;
     }
 }

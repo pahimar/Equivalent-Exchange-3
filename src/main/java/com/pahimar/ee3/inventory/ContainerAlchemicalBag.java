@@ -5,11 +5,10 @@ import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerAlchemicalBag extends Container
+public class ContainerAlchemicalBag extends ContainerEE
 {
     // Small Bag
     public static final int SMALL_BAG_INVENTORY_ROWS = 4;
@@ -22,9 +21,7 @@ public class ContainerAlchemicalBag extends Container
     public static final int LARGE_BAG_INVENTORY_COLUMNS = 13;
     private final EntityPlayer entityPlayer;
     private final InventoryAlchemicalBag inventoryAlchemicalBag;
-    // Player Inventory
-    private final int PLAYER_INVENTORY_ROWS = 3;
-    private final int PLAYER_INVENTORY_COLUMNS = 9;
+
     private int bagInventoryRows;
     private int bagInventoryColumns;
 
@@ -105,12 +102,6 @@ public class ContainerAlchemicalBag extends Container
                 this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
             }
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer var1)
-    {
-        return true;
     }
 
     @Override

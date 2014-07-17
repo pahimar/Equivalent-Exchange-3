@@ -3,15 +3,11 @@ package com.pahimar.ee3.inventory;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGlassBell extends Container
+public class ContainerGlassBell extends ContainerEE
 {
-    private final int PLAYER_INVENTORY_ROWS = 3;
-    private final int PLAYER_INVENTORY_COLUMNS = 9;
-
     public ContainerGlassBell(InventoryPlayer inventoryPlayer, TileEntityGlassBell tileGlassBell)
     {
         this.addSlotToContainer(new Slot(tileGlassBell, TileEntityGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, 80, 22));
@@ -30,12 +26,6 @@ public class ContainerGlassBell extends Container
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 116));
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer)
-    {
-        return true;
     }
 
     @Override

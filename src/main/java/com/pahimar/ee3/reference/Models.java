@@ -11,4 +11,5 @@ public class Models
     public static final ResourceLocation CALCINATOR = ResourceLocationHelper.getResourceLocation(MODEL_LOCATION + "calcinator.obj");
     public static final ResourceLocation GLASS_BELL = ResourceLocationHelper.getResourceLocation(MODEL_LOCATION + "aludel.obj");
     public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(MODEL_LOCATION + "researchStation.obj");
+    public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(MODEL_LOCATION + "augmentationTable.obj");
 }

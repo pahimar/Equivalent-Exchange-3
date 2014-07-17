@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
+public class TileEntityRendererAlchemicalChest extends TileEntitySpecialRenderer
 {
     private final ModelChest modelChest = new ModelChest();
 
@@ -31,15 +31,15 @@ public class TileEntityAlchemicalChestRenderer extends TileEntitySpecialRenderer
 
             if (tileEntityAlchemicalChest.getState() == 0)
             {
-                this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_SMALL);
+                this.bindTexture(Textures.Model.ALCHEMICAL_CHEST_SMALL);
             }
             else if (tileEntityAlchemicalChest.getState() == 1)
             {
-                this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_MEDIUM);
+                this.bindTexture(Textures.Model.ALCHEMICAL_CHEST_MEDIUM);
             }
             else if (tileEntityAlchemicalChest.getState() == 2)
             {
-                this.bindTexture(Textures.MODEL_ALCHEMICAL_CHEST_LARGE);
+                this.bindTexture(Textures.Model.ALCHEMICAL_CHEST_LARGE);
             }
 
             GL11.glPushMatrix();

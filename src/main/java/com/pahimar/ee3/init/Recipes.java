@@ -38,7 +38,19 @@ public class Recipes
 
         CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.diviningRod), " s ", " s ", "s s", 's', "stickWood");
 
-        GameRegistry.addRecipe(new ItemStack(ModItems.pickaxeDarkMatter), "mmm", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.augmentationTable), "i  ", "sss", "p p", 'i', "ingotIron", 's', "slabWood", 'p', "plankWood");
+
+        GameRegistry.addRecipe(new ItemStack(ModItems.shovelDarkMatter), "m", "d", "d", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        GameRegistry.addRecipe(new ItemStack(ModItems.pickAxeDarkMatter), "mmm", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        GameRegistry.addRecipe(new ItemStack(ModItems.hammerDarkMatter), "mmm", "mdm", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        GameRegistry.addRecipe(new ItemStack(ModItems.axeDarkMatter), "mm ", "md ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        GameRegistry.addRecipe(new ItemStack(ModItems.hoeDarkMatter), "mm ", " d ", " d ", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.fishingRodDarkMatter), "  w", " ws", "m s", 'm', new ItemStack(ModItems.matter, 1, 0), 'w', "stickWood", 's', new ItemStack(Items.string));
+        GameRegistry.addRecipe(new ItemStack(ModItems.shearsDarkMatter), "m ", " m", 'm', new ItemStack(ModItems.matter, 1, 0));
+
+        GameRegistry.addRecipe(new ItemStack(ModItems.bowDarkMatter), "sm ", "s m", "sm ", 'm', new ItemStack(ModItems.matter, 1, 0), 's', new ItemStack(Items.string));
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.arrowDarkMatter, 64), "  m", " s ", "f  ", 'm', new ItemStack(ModItems.matter, 1, 0), 's', "stickWood", 'f', new ItemStack(Items.feather));
+        GameRegistry.addRecipe(new ItemStack(ModItems.swordDarkMatter), "m", "m", "d", 'm', new ItemStack(ModItems.matter, 1, 0), 'd', Items.diamond);
     }
 
     private static void initAludelRecipes()

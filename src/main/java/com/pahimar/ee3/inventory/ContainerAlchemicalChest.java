@@ -3,11 +3,10 @@ package com.pahimar.ee3.inventory;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerAlchemicalChest extends Container
+public class ContainerAlchemicalChest extends ContainerEE
 {
     // Small Chest
     public static final int SMALL_CHEST_INVENTORY_ROWS = 4;
@@ -21,9 +20,7 @@ public class ContainerAlchemicalChest extends Container
     public static final int LARGE_CHEST_INVENTORY_ROWS = 9;
     public static final int LARGE_CHEST_INVENTORY_COLUMNS = 13;
     public static final int LARGE_INVENTORY_SIZE = LARGE_CHEST_INVENTORY_ROWS * LARGE_CHEST_INVENTORY_COLUMNS;
-    // Player Inventory
-    private final int PLAYER_INVENTORY_ROWS = 3;
-    private final int PLAYER_INVENTORY_COLUMNS = 9;
+
     private TileEntityAlchemicalChest tileEntityAlchemicalChest;
     private int chestInventoryRows;
     private int chestInventoryColumns;
@@ -105,12 +102,6 @@ public class ContainerAlchemicalChest extends Container
                 this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
             }
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer)
-    {
-        return true;
     }
 
     /**

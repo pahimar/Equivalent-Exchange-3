@@ -17,12 +17,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
+public class TileEntityRendererAludel extends TileEntitySpecialRenderer
 {
     private final ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
 
-    public TileEntityAludelRenderer()
+    public TileEntityRendererAludel()
     {
         customRenderItem = new RenderItem()
         {
@@ -50,7 +50,7 @@ public class TileEntityAludelRenderer extends TileEntitySpecialRenderer
             scaleTranslateRotate(x, y, z, tileEntityAludel.getOrientation());
 
             // Bind texture
-            this.bindTexture(Textures.MODEL_ALUDEL);
+            this.bindTexture(Textures.Model.ALUDEL);
 
             // Render
             modelAludel.render();

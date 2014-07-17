@@ -40,7 +40,7 @@ public class DrawBlockHighlightEventHandler
         ToolMode toolMode = ((ItemDarkMatterPickAxe) event.currentItem.getItem()).getCurrentToolMode(event.currentItem);
         int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if (toolMode == ToolMode.SINGLE)
+        if (toolMode == ToolMode.STANDARD)
         {
             drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
         }
