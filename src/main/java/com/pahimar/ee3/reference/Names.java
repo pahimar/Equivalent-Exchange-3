@@ -45,11 +45,11 @@ public class Names
     public static final class Tools
     {
         public static final String DARK_MATTER_SHOVEL = "shovelDarkMatter";
-        public static final String DARK_MATTER_PICKAXE = "pickaxeDarkMatter";
+        public static final String DARK_MATTER_PICKAXE = "pickAxeDarkMatter";
         public static final String DARK_MATTER_HAMMER = "hammerDarkMatter";
         public static final String DARK_MATTER_AXE = "axeDarkMatter";
         public static final String DARK_MATTER_HOE = "hoeDarkMatter";
-        public static final String DARK_MATTER_FISHING_ROD = "fishingrodDarkMatter";
+        public static final String DARK_MATTER_FISHING_ROD = "fishingRodDarkMatter";
         public static final String DARK_MATTER_SHEARS = "shearsDarkMatter";
     }
 

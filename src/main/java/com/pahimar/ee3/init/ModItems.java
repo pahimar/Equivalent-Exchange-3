@@ -23,11 +23,11 @@ public class ModItems
     public static final ItemEE matter = new ItemMatter();
 
     public static final ItemToolEE shovelDarkMatter = new ItemDarkMatterShovel();
-    public static final ItemToolEE pickaxeDarkMatter = new ItemDarkMatterPickAxe();
+    public static final ItemToolEE pickAxeDarkMatter = new ItemDarkMatterPickAxe();
     public static final ItemEE hammerDarkMatter = new ItemDarkMatterHammer();
     public static final ItemToolEE axeDarkMatter = new ItemDarkMatterAxe();
     public static final ItemDarkMatterHoe hoeDarkMatter = new ItemDarkMatterHoe();
-    public static final ItemDarkMatterFishingRod fishingrodDarkMatter = new ItemDarkMatterFishingRod();
+    public static final ItemDarkMatterFishingRod fishingRodDarkMatter = new ItemDarkMatterFishingRod();
     public static final ItemDarkMatterShears shearsDarkMatter = new ItemDarkMatterShears();
 
     public static final ItemDarkMatterBow bowDarkMatter = new ItemDarkMatterBow();
@@ -51,11 +51,11 @@ public class ModItems
         GameRegistry.registerItem(matter, Names.Items.MATTER);
 
         GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
-        GameRegistry.registerItem(pickaxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
+        GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
         GameRegistry.registerItem(hammerDarkMatter, Names.Tools.DARK_MATTER_HAMMER);
         GameRegistry.registerItem(axeDarkMatter, Names.Tools.DARK_MATTER_AXE);
         GameRegistry.registerItem(hoeDarkMatter, Names.Tools.DARK_MATTER_HOE);
-        GameRegistry.registerItem(fishingrodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
+        GameRegistry.registerItem(fishingRodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
         GameRegistry.registerItem(shearsDarkMatter, Names.Tools.DARK_MATTER_SHEARS);
 
         GameRegistry.registerItem(bowDarkMatter, Names.Weapons.DARK_MATTER_BOW);
