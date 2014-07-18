@@ -95,3 +95,58 @@ task createChangelog(type: ChangelogTask) {
 }
 
 tasks.build.dependsOn('createChangelog')
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            if (project.hasProperty("forgemaven_url")) {
+                logger.info('Publishing to files server')
+                repository(url: project.forgemaven_url) {
+                    authentication(userName: project.forgemaven_username, password: project.forgemaven_password)
+                }
+            }
+
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+            }
+
+            pom.project {
+                name project.archivesBaseName
+                packaging 'jar'
+                description 'Equivalent Exchange 3'
+                url 'https://github.com/pahimar/Equivalent-Exchange-3/'
+            }
+
+            scm {
+                url 'https://github.com/pahimar/Equivalent-Exchange-3/'
+                connection 'scm:git:git://github.com/pahimar/Equivalent-Exchange-3.git'
+                developerConnection 'scm:git:git@github.com/pahimar/Equivalent-Exchange-3.git'
+            }
+
+            issueManagement {
+                system 'github'
+                url 'https://github.com/pahimar/Equivalent-Exchange-3/issues'
+            }
+
+            licenses {
+                license {
+                    name 'GNU Lesser General Public License 3.0'
+                    url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'Pahimar'
+                    name 'Pahimar'
+                    roles {
+                        role 'developer'
+                    }
+                }
+            }
+        }
+    }
+}
