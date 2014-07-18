@@ -25,15 +25,7 @@ public class ConfigurationHandler
 
     private static void loadConfiguration()
     {
-        Settings.TRANSMUTATION_KNOWLEDGE_MODE = configuration.get(
-                Messages.Configuration.CATEGORY_TRANSMUTATION,
-                Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE,
-                Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_DEFAULT,
-                StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_COMMENT),
-                Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_MIN,
-                Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_MAX)
-                .setLanguageKey(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_LABEL)
-                .getInt();
+        Settings.TRANSMUTATION_KNOWLEDGE_MODE = configuration.getString(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE, Messages.Configuration.CATEGORY_TRANSMUTATION, "All", StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_COMMENT), new String[]{"All", "Select", "None"}, Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_LABEL);
 
         if (configuration.hasChanged())
         {

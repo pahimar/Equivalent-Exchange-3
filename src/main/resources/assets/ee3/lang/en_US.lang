@@ -1,7 +1,7 @@
 # Configuration
 general.transmutation=Transmutation Settings
 general.transmutation.knowledge.mode=Transmutation Knowledge Mode
-general.transmutation.knowledge.comment=0 - Player can learn all items that have a value, 1 - Player can learn select items, 2 - Player cannot learn any items
+general.transmutation.knowledge.comment=All - Player can learn all items that have a value, Select - Player can learn select items, None - Player cannot learn any items
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
