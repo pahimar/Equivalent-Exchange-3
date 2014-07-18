@@ -15,7 +15,7 @@ public class ContainerResearchStation extends ContainerEE
     {
         this.tileEntityResearchStation = tileEntityResearchStation;
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 44, 41));
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 35, 41));
         this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 116, 41));
 
         // Add the player's inventory slots to the container
