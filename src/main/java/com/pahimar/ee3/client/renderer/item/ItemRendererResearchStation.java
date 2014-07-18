@@ -65,7 +65,6 @@ public class ItemRendererResearchStation implements IItemRenderer
     private void renderCalcinator(float x, float y, float z)
     {
         GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
 
         // Scale, Translate, Rotate
         GL11.glScalef(1.0F, 1.0F, 1.0F);
@@ -77,7 +76,6 @@ public class ItemRendererResearchStation implements IItemRenderer
         // Render
         modelResearchStation.render();
 
-        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 }

@@ -48,7 +48,7 @@ public class ItemRendererAugmentationTable implements IItemRenderer
             }
             case EQUIPPED_FIRST_PERSON:
             {
-                renderAugmentationTable(0.0F, 0.0F, 0.0F);
+                renderAugmentationTable(1.5F, 1.5F, 1.5F);
                 return;
             }
             case INVENTORY:
@@ -65,7 +65,6 @@ public class ItemRendererAugmentationTable implements IItemRenderer
     private void renderAugmentationTable(float x, float y, float z)
     {
         GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
 
         // Scale, Translate, Rotate
         GL11.glScalef(0.33F, 0.33F, 0.33F);
@@ -77,7 +76,6 @@ public class ItemRendererAugmentationTable implements IItemRenderer
         // Render
         modelAugmentationTable.render();
 
-        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 }

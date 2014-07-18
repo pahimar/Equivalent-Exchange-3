@@ -63,7 +63,6 @@ public class ItemRendererAludel implements IItemRenderer
     private void renderAludel(float x, float y, float z)
     {
         GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
 
         // Scale, Translate, Rotate
         GL11.glScalef(1F, 1F, 1F);
@@ -76,7 +75,6 @@ public class ItemRendererAludel implements IItemRenderer
         // Render
         modelAludel.render();
 
-        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 }
