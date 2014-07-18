@@ -201,12 +201,12 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("Items"))
+        if (nbtTagCompound != null && nbtTagCompound.hasKey(Names.NBT.ITEMS))
         {
             // Read in the ItemStacks in the inventory from NBT
-            if (nbtTagCompound.hasKey("Items"))
+            if (nbtTagCompound.hasKey(Names.NBT.ITEMS))
             {
-                NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+                NBTTagList tagList = nbtTagCompound.getTagList(Names.NBT.ITEMS, 10);
                 inventory = new ItemStack[this.getSizeInventory()];
                 for (int i = 0; i < tagList.tagCount(); ++i)
                 {
@@ -245,7 +245,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
                 tagList.appendTag(tagCompound);
             }
         }
-        nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
     }
 
     public boolean hasCustomName()

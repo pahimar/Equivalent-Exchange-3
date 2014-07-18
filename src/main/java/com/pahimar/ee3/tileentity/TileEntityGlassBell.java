@@ -34,7 +34,7 @@ public class TileEntityGlassBell extends TileEntityEE implements IInventory
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+        NBTTagList tagList = nbtTagCompound.getTagList(Names.NBT.ITEMS, 10);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
@@ -179,7 +179,7 @@ public class TileEntityGlassBell extends TileEntityEE implements IInventory
                 tagList.appendTag(tagCompound);
             }
         }
-        nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
     }
 
     @Override

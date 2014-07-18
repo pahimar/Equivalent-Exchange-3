@@ -73,7 +73,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT
-        NBTTagList tagList = nbtTagCompound.getTagList("Items", 10);
+        NBTTagList tagList = nbtTagCompound.getTagList(Names.NBT.ITEMS, 10);
         inventory = new ItemStack[this.getSizeInventory()];
         for (int i = 0; i < tagList.tagCount(); ++i)
         {
@@ -258,7 +258,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
                 tagList.appendTag(tagCompound);
             }
         }
-        nbtTagCompound.setTag("Items", tagList);
+        nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
         nbtTagCompound.setInteger("deviceCookTime", deviceCookTime);
         nbtTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
         nbtTagCompound.setInteger("itemCookTime", itemCookTime);

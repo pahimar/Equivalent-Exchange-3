@@ -75,6 +75,8 @@ public class Names
 
     public static final class NBT
     {
+        public static final String ITEMS = "Items";
+        public static final String KNOWLEDGE = "Knowledge";
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
         public static final String CRAFTING_GUI_OPEN = "craftingGuiOpen";
