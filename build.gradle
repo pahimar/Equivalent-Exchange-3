@@ -117,33 +117,33 @@ uploadArchives {
                 packaging 'jar'
                 description 'Equivalent Exchange 3'
                 url 'https://github.com/pahimar/Equivalent-Exchange-3/'
-            }
 
-            scm {
-                url 'https://github.com/pahimar/Equivalent-Exchange-3/'
-                connection 'scm:git:git://github.com/pahimar/Equivalent-Exchange-3.git'
-                developerConnection 'scm:git:git@github.com/pahimar/Equivalent-Exchange-3.git'
-            }
-
-            issueManagement {
-                system 'github'
-                url 'https://github.com/pahimar/Equivalent-Exchange-3/issues'
-            }
-
-            licenses {
-                license {
-                    name 'GNU Lesser General Public License 3.0'
-                    url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-                    distribution 'repo'
+                scm {
+                    url 'https://github.com/pahimar/Equivalent-Exchange-3/'
+                    connection 'scm:git:git://github.com/pahimar/Equivalent-Exchange-3.git'
+                    developerConnection 'scm:git:git@github.com/pahimar/Equivalent-Exchange-3.git'
                 }
-            }
 
-            developers {
-                developer {
-                    id 'Pahimar'
-                    name 'Pahimar'
-                    roles {
-                        role 'developer'
+                issueManagement {
+                    system 'github'
+                    url 'https://github.com/pahimar/Equivalent-Exchange-3/issues'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU Lesser General Public License 3.0'
+                        url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'Pahimar'
+                        name 'Pahimar'
+                        roles {
+                            role 'developer'
+                        }
                     }
                 }
             }
