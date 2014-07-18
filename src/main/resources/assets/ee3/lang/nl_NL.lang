@@ -1,0 +1,105 @@
+# Keys
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Opladen
+key.extra=Extra
+key.release=Loslaten
+key.toggle=Wissel
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
+# Items
+item.ee3:alchemicalBag.name=Alchemische tas
+item.ee3:alchemicalDust.ash.name=As
+item.ee3:alchemicalDust.verdant.name=Verdante Stof
+item.ee3:alchemicalDust.azure.name=Azure Stof
+item.ee3:alchemicalDust.minium.name=Minium Stof
+item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemische kool
+item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Brandstof
+item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Brandstof
+item.ee3:chalk.name=Krijt[WIP]
+item.ee3:diviningRod.name=Wichelroede [WIP]
+item.ee3:shardMinium.name=Scherf van Minium
+item.ee3:stoneInert.name=Inert Steen
+item.ee3:stoneMinium.name=Minium Steen [WIP]
+item.ee3:stonePhilosophers.name=Steen der wijzen [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
+item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
+item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
+item.ee3:alchemicalTome.name=Boekdeel van alchemishe kennis [WIP]
+item.ee3:guide.name=Gids Voor Alchemie [WIP]
+item.ee3:matterDark.name=Donkere Materie
+item.ee3:matterOmni.name=Omni Materie
+item.ee3:matterCorporeal.name=Lichamelijke Materie
+item.ee3:matterKinetic.name=Kenetische Materie
+item.ee3:matterTemporal.name=Temporale Materie
+item.ee3:matterEssentia.name=Essentia Materie
+item.ee3:matterAmorphous.name=Vormlose Materie
+item.ee3:matterVoid.name=Void Materie
+
+# Tools
+item.ee3:shovelDarkMatter.name=Donkere Materie Schep
+item.ee3:pickaxeDarkMatter.name=Donkere Materie Pikhouweel
+item.ee3:hammerDarkMatter.name=Donkere Materie Hamer
+item.ee3:axeDarkMatter.name=Donkere Materie Bijl
+item.ee3:hoeDarkMatter.name=Donkere Materie Schoffel
+item.ee3:fishingrodDarkMatter.name=Donkere Materie Vishengel
+item.ee3:shearsDarkMatter.name=Donkere Materie Schaar
+
+# Weapons
+item.ee3:bowDarkMatter.name=Donkere Materie Boog
+item.ee3:arrowDarkMatter.name=Donkere Materie Pijl
+item.ee3:swordDarkMatter.name=Donkere Materie Zwaard
+
+# Blocks
+tile.ee3:alchemicalChest.name=Alchemische Kist
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Blok van Alchemishe Kool
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Blok van Mobius Brandstof
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Blok van Aeternalis Brandstof
+tile.ee3:aludel.name=Aludel Voetstuk
+tile.ee3:calcinator.name=Calcinator
+tile.ee3:chalk.name=Krijt
+tile.ee3:glassBell.name=Glazen schel
+tile.ee3:researchStation.name=Onderzoeks station [WIP]
+tile.ee3:augmentationTable.name=Vergrotings Tafel [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=Alchemische Tas
+container.ee3:alchemicalChest=Alchemische Kist
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinator
+container.ee3:glassBell=Glazen schel
+container.ee3:researchStation=Onderzoeks station [WIP]
+container.ee3:augmentationTable=Vergrotings Tafel [WIP]
+
+# Commands
+command.ee3:overlay.turned_on=Doel transmutatie overlapping aan
+command.ee3:overlay.turned_off=Doel transmutatie overlapping uit
+command.ee3:overlay.position.top_left=Doel transmutatie overlapping positie naar links-boven gezet
+command.ee3:overlay.position.top_right=Doel transmutatie overlapping positie naar rechts-boven gezet
+command.ee3:overlay.position.bottom_left=Doel transmutatie overlapping positie naar links-onder gezet
+command.ee3:overlay.position.bottom_right=Doel transmutatie overlapping positie naar rechts-onder gezet
+command.ee3:overlay.opacity.usage.additional_text=(waar ### een decimaal getal is tussen 0.0 en 1.0) 
+command.ee3:overlay.opacity.updated=Doel transmutatie overlapping doorzichtigheid geupdated
+command.ee3:overlay.scale.usage.additional_text=%s (waar ### een decimaal getal is groter dan 0.0) 
+command.ee3:overlay.scale.updated=Doel transmutatie overlapping grootte geupdated
+command.ee3:particles.turned_on=Equivalent Exchange 3 deeltjes aan gezet
+command.ee3:particles.turned_off=Equivalent Exchange 3 deeltjes uit gezet
+command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 Geluiden van alle spelers
+command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 Geluiden van mijzelf alleen
+command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 Geluiden uitgezet
+
+# Version check localizations
+version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
+version.ee3:uninitialized=Remote version check failed to initialize properly
+version.ee3:current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
+version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
+version.ee3:general_error=Error while connecting to remote version authority file; trying again
+version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
+
+# Tooltips
+tooltip.ee3:upgradesPrefix=Upgrades (Alchemicalsche) Kist
+tooltip.ee3:alchemicalChestPrefix.medium=Medium
+tooltip.ee3:alchemicalChestPrefix.large=Groot
+tooltip.ee3:none=Geen
