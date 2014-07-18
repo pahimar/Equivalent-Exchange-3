@@ -3,6 +3,8 @@ package com.pahimar.ee3.handler;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.util.ConfigurationHelper;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.util.StatCollector;
@@ -25,8 +27,9 @@ public class ConfigurationHandler
 
     private static void loadConfiguration()
     {
-        Settings.TRANSMUTATION_KNOWLEDGE_MODE = configuration.getString(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE, Messages.Configuration.CATEGORY_TRANSMUTATION, "All", StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_COMMENT), new String[]{"All", "Select", "None"}, Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_LABEL);
+        Settings.TRANSMUTATION_KNOWLEDGE_MODE = ConfigurationHelper.getString(configuration, Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE, Messages.Configuration.CATEGORY_TRANSMUTATION, "All", StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_COMMENT), new String[]{"All", "Select", "None"}, Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MODE_LABEL);
 
+        LogHelper.info(Settings.TRANSMUTATION_KNOWLEDGE_MODE);
         if (configuration.hasChanged())
         {
             configuration.save();
