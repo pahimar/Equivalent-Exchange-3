@@ -21,13 +21,13 @@ public class ModBlocks
 
     public static void init()
     {
-        GameRegistry.registerBlock(chalkBlock, Names.Blocks.CHALK);
-        GameRegistry.registerBlock(alchemicalFuelBlock, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
-        GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST);
-        GameRegistry.registerBlock(aludel, Names.Blocks.ALUDEL);
         GameRegistry.registerBlock(calcinator, Names.Blocks.CALCINATOR);
+        GameRegistry.registerBlock(aludel, Names.Blocks.ALUDEL);
         GameRegistry.registerBlock(glassBell, Names.Blocks.GLASS_BELL);
         GameRegistry.registerBlock(researchStation, Names.Blocks.RESEARCH_STATION);
         GameRegistry.registerBlock(augmentationTable, Names.Blocks.AUGMENTATION_TABLE);
+        GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST);
+        GameRegistry.registerBlock(chalkBlock, Names.Blocks.CHALK);
+        GameRegistry.registerBlock(alchemicalFuelBlock, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
     }
 }
