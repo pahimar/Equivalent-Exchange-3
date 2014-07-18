@@ -20,7 +20,6 @@ public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
         if (tileEntity instanceof TileEntityResearchStation)
         {
             GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_LIGHTING);
 
             // Scale, Translate, Rotate
             GL11.glScalef(1.0F, 1.0F, 1.0F);
@@ -32,7 +31,6 @@ public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
             // Render
             modelResearchStation.render();
 
-            GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
     }

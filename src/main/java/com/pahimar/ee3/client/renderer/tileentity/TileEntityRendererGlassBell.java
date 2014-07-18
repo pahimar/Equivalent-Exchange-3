@@ -43,7 +43,6 @@ public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
         {
             TileEntityGlassBell tileEntityGlassBell = (TileEntityGlassBell) tileEntity;
 
-            GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_CULL_FACE);
 
             /**
@@ -86,7 +85,6 @@ public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
             GL11.glPopMatrix();
 
             GL11.glEnable(GL11.GL_CULL_FACE);
-            GL11.glEnable(GL11.GL_LIGHTING);
         }
     }
 

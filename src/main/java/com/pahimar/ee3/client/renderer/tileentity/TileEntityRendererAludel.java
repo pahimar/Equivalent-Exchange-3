@@ -44,7 +44,6 @@ public class TileEntityRendererAludel extends TileEntitySpecialRenderer
             TileEntityAludel tileEntityAludel = (TileEntityAludel) tileEntity;
 
             GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_LIGHTING);
 
             // Scale, Translate, Rotate
             scaleTranslateRotate(x, y, z, tileEntityAludel.getOrientation());
@@ -84,8 +83,6 @@ public class TileEntityRendererAludel extends TileEntitySpecialRenderer
             }
 
             GL11.glPopMatrix();
-
-            GL11.glEnable(GL11.GL_LIGHTING);
         }
     }
 
