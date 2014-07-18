@@ -2,6 +2,7 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.util.IChargeable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

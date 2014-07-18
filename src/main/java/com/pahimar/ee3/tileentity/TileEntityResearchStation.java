@@ -13,6 +13,8 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     public static final int ITEM_SLOT_INVENTORY_INDEX = 0;
     public static final int TOME_SLOT_INVENTORY_INDEX = 1;
 
+    public int itemLearnTime;
+
     /**
      * The ItemStacks that hold the items currently being used in the Glass Bell
      */
@@ -158,5 +160,25 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
+    }
+
+    @Override
+    public void updateEntity()
+    {
+
+    }
+
+    private boolean canLearnItemStack()
+    {
+        if (inventory[ITEM_SLOT_INVENTORY_INDEX] == null || inventory[TOME_SLOT_INVENTORY_INDEX] == null)
+        {
+            return false;
+        }
+        else
+        {
+
+        }
+
+        return false;
     }
 }

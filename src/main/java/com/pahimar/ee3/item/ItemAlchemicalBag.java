@@ -6,6 +6,7 @@ import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.util.ColorHelper;
+import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;

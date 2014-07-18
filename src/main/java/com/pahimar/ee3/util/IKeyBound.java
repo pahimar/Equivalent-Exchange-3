@@ -1,4 +1,4 @@
-package com.pahimar.ee3.item;
+package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.reference.Key;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package com.pahimar.ee3.network.message;
 
-import com.pahimar.ee3.item.IKeyBound;
 import com.pahimar.ee3.reference.Key;
+import com.pahimar.ee3.util.IKeyBound;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;

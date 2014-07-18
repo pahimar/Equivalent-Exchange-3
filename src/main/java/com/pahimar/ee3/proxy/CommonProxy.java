@@ -1,9 +1,6 @@
 package com.pahimar.ee3.proxy;
 
-import com.pahimar.ee3.handler.CraftingHandler;
-import com.pahimar.ee3.handler.ItemEventHandler;
-import com.pahimar.ee3.handler.PlayerEventHandler;
-import com.pahimar.ee3.handler.WorldEventHandler;
+import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -17,6 +14,7 @@ public abstract class CommonProxy implements IProxy
         ItemEventHandler itemEventHandler = new ItemEventHandler();
         CraftingHandler craftingHandler = new CraftingHandler();
 
+        FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
         FMLCommonHandler.instance().bus().register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());

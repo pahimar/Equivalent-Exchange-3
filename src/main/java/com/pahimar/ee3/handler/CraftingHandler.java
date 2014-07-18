@@ -1,7 +1,7 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.item.IOwnable;
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
+import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;

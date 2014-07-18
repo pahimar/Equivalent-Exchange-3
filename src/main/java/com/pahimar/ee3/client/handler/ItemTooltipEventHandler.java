@@ -3,7 +3,7 @@ package com.pahimar.ee3.client.handler;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.item.IOwnable;
+import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
