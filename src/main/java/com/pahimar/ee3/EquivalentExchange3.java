@@ -90,6 +90,9 @@ public class EquivalentExchange3
 
         CraftingHandler.init();
         Recipes.init();
+        
+     // Initialize VersionChecker
+        FMLInterModComms.sendRuntimeMessage(Reference.MOD_ID, "VersionChecker", "addVersionCheck", Reference.VERSION_CHECKER_REMOTE_URL);
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
