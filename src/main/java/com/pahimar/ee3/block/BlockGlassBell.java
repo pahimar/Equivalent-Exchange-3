@@ -3,7 +3,6 @@ package com.pahimar.ee3.block;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
@@ -49,7 +48,7 @@ public class BlockGlassBell extends BlockEE implements ITileEntityProvider
     @Override
     public int getRenderType()
     {
-        return RenderIds.glassBell;
+        return -1;
     }
 
     @Override

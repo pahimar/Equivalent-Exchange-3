@@ -3,7 +3,6 @@ package com.pahimar.ee3.block;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -41,7 +40,7 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
     @Override
     public int getRenderType()
     {
-        return RenderIds.researchStation;
+        return -1;
     }
 
     @Override

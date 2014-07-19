@@ -3,7 +3,6 @@ package com.pahimar.ee3.block;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestLarge;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestMedium;
@@ -72,7 +71,7 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     @Override
     public int getRenderType()
     {
-        return RenderIds.alchemicalChest;
+        return -1;
     }
 
     @Override
