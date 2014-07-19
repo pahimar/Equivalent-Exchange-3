@@ -11,14 +11,14 @@ public final class Messages
 
     public static final class Configuration
     {
-        //        Settings.TRANSMUTATION_KNOWLEDGE_MODE = configuration.get("general.transmutation", "mode", 0, "comment", 0, 2).setLanguageKey("general.transmutation.knowledge.mode").getInt();
         public static final String CATEGORY_TRANSMUTATION = "general.transmutation";
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE = "knowledgeMode";
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE_LABEL = "general.transmutation.knowledge.mode";
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE_COMMENT = "general.transmutation.knowledge.comment";
-        public static final int TRANSMUTATION_KNOWLEDGE_MODE_DEFAULT = 0;
-        public static final int TRANSMUTATION_KNOWLEDGE_MODE_MIN = 0;
-        public static final int TRANSMUTATION_KNOWLEDGE_MODE_MAX = 2;
 
+        public static final String TRANSMUTATION_KNOWLEDGE_MODE = "knowledgeMode";
+        public static final String TRANSMUTATION_KNOWLEDGE_MODE_LABEL = "general.transmutation.knowledge.mode.label";
+        public static final String TRANSMUTATION_KNOWLEDGE_MODE_COMMENT = "general.transmutation.knowledge.mode.comment";
+
+        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE = "useTemplateFile";
+        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_LABEL = "general.transmutation.knowledge.template.label";
+        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_COMMENT = "general.transmutation.knowledge.template.comment";
     }
 }

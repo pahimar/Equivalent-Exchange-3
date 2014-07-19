@@ -3,36 +3,33 @@ package com.pahimar.ee3.skill;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.ItemHelper;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagLong;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.UUID;
 
 public class PlayerKnowledge implements INBTTaggable
 {
-    private UUID playerUUID;
     private Set<ItemStack> knownItemStacks;
 
-    private PlayerKnowledge()
+    public PlayerKnowledge()
     {
-        this.playerUUID = null;
-        this.knownItemStacks = null;
-    }
-
-    public PlayerKnowledge(EntityPlayer entityPlayer)
-    {
-        this.playerUUID = entityPlayer.getUniqueID();
         this.knownItemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
     }
 
-    public UUID getPlayerUUID()
+    public PlayerKnowledge(Collection<ItemStack> knownItemStacks)
     {
-        return this.playerUUID;
+        this.knownItemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
+        this.knownItemStacks.addAll(knownItemStacks);
+    }
+
+    public PlayerKnowledge(ItemStack... knownItemStacks)
+    {
+        this(Arrays.asList(knownItemStacks));
     }
 
     public boolean isItemStackKnown(ItemStack itemStack)
@@ -81,14 +78,8 @@ public class PlayerKnowledge implements INBTTaggable
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey(Names.NBT.UUID_MOST_SIG) && nbtTagCompound.hasKey(Names.NBT.UUID_LEAST_SIG) && nbtTagCompound.hasKey("Knowledge"))
+        if (nbtTagCompound != null && nbtTagCompound.hasKey(Names.NBT.KNOWLEDGE))
         {
-            // Read in the player's UUID from NBT
-            if (nbtTagCompound.hasKey(Names.NBT.UUID_MOST_SIG) && nbtTagCompound.hasKey(Names.NBT.UUID_LEAST_SIG))
-            {
-                playerUUID = new UUID(nbtTagCompound.getLong(Names.NBT.UUID_MOST_SIG), nbtTagCompound.getLong(Names.NBT.UUID_LEAST_SIG));
-            }
-
             // Read in the ItemStacks in the inventory from NBT
             if (nbtTagCompound.hasKey(Names.NBT.KNOWLEDGE))
             {
@@ -107,13 +98,6 @@ public class PlayerKnowledge implements INBTTaggable
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-        // Write the player's UUID to NBT
-        if (playerUUID != null)
-        {
-            nbtTagCompound.setTag(Names.NBT.UUID_MOST_SIG, new NBTTagLong(playerUUID.getMostSignificantBits()));
-            nbtTagCompound.setTag(Names.NBT.UUID_LEAST_SIG, new NBTTagLong(playerUUID.getLeastSignificantBits()));
-        }
-
         // Write the ItemStacks in the set to NBT
         NBTTagList tagList = new NBTTagList();
         for (ItemStack itemStack : knownItemStacks)

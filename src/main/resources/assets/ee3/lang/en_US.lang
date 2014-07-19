@@ -1,7 +1,10 @@
 # Configuration
 general.transmutation=Transmutation Settings
-general.transmutation.knowledge.mode=Transmutation Knowledge Mode
-general.transmutation.knowledge.comment=All - Player can learn all items that have a value, Select - Player can learn select items, None - Player cannot learn any items
+general.transmutation.knowledge.mode.label=Transmutation Knowledge Mode
+general.transmutation.knowledge.mode.comment=All - Player can learn all items that have a value, Select - Player can learn select items, None - Player cannot learn any items
+
+general.transmutation.knowledge.template.label=Use Knowledge Template File
+general.transmutation.knowledge.template.comment=If true, new player's will have their transmutation knowledge copied from the knowledge template file (template.ee3)
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
