@@ -28,33 +28,33 @@ item.ee3:shardMinium.name=Shard of Minium
 item.ee3:stoneInert.name=Inert Stone
 item.ee3:stoneMinium.name=Minium Stone [WIP]
 item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
-item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade
-item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade
-item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade
+item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade [WIP]
+item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade [WIP]
+item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade [WIP]
 item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge [WIP]
 item.ee3:guide.name=Guide To Alchemy [WIP]
-item.ee3:matterDark.name=Dark Matter
-item.ee3:matterOmni.name=Omni Matter
-item.ee3:matterCorporeal.name=Corporeal Matter
-item.ee3:matterKinetic.name=Kinetic Matter
-item.ee3:matterTemporal.name=Temporal Matter
-item.ee3:matterEssentia.name=Essentia Matter
-item.ee3:matterAmorphous.name=Amorphous Matter
-item.ee3:matterVoid.name=Void Matter
+item.ee3:matterDark.name=Dark Matter [WIP]
+item.ee3:matterOmni.name=Omni Matter [WIP]
+item.ee3:matterCorporeal.name=Corporeal Matter [WIP]
+item.ee3:matterKinetic.name=Kinetic Matter [WIP]
+item.ee3:matterTemporal.name=Temporal Matter [WIP]
+item.ee3:matterEssentia.name=Essentia Matter [WIP]
+item.ee3:matterAmorphous.name=Amorphous Matter [WIP]
+item.ee3:matterVoid.name=Void Matter [WIP]
 
 # Tools
-item.ee3:shovelDarkMatter.name=Dark Matter Shovel
-item.ee3:pickaxeDarkMatter.name=Dark Matter Pickaxe
-item.ee3:hammerDarkMatter.name=Dark Matter Hammer
-item.ee3:axeDarkMatter.name=Dark Matter Axe
-item.ee3:hoeDarkMatter.name=Dark Matter Hoe
-item.ee3:fishingrodDarkMatter.name=Dark Matter Fishing Rod
-item.ee3:shearsDarkMatter.name=Dark Matter Shears
+item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
+item.ee3:pickaxeDarkMatter.name=Dark Matter Pickaxe [WIP]
+item.ee3:hammerDarkMatter.name=Dark Matter Hammer [WIP]
+item.ee3:axeDarkMatter.name=Dark Matter Axe [WIP]
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe [WIP]
+item.ee3:fishingrodDarkMatter.name=Dark Matter Fishing Rod [WIP]
+item.ee3:shearsDarkMatter.name=Dark Matter Shears [WIP]
 
 # Weapons
-item.ee3:bowDarkMatter.name=Dark Matter Bow
-item.ee3:arrowDarkMatter.name=Dark Matter Arrow
-item.ee3:swordDarkMatter.name=Dark Matter Sword
+item.ee3:bowDarkMatter.name=Dark Matter Bow [WIP]
+item.ee3:arrowDarkMatter.name=Dark Matter Arrow [WIP]
+item.ee3:swordDarkMatter.name=Dark Matter Sword [WIP]
 
 # Blocks
 tile.ee3:alchemicalChest.name=Alchemical Chest
@@ -76,32 +76,6 @@ container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station [WIP]
 container.ee3:augmentationTable=Augmentation Table [WIP]
-
-# Commands
-command.ee3:overlay.turned_on=Target transmutation overlay turned on
-command.ee3:overlay.turned_off=Target transmutation overlay turned off
-command.ee3:overlay.position.top_left=Target transmutation overlay position set to top left
-command.ee3:overlay.position.top_right=Target transmutation overlay position set to top right
-command.ee3:overlay.position.bottom_left=Target transmutation overlay position set to bottom left
-command.ee3:overlay.position.bottom_right=Target transmutation overlay position set to bottom right
-command.ee3:overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
-command.ee3:overlay.opacity.updated=Target transmutation overlay opacity updated successfully
-command.ee3:overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0) 
-command.ee3:overlay.scale.updated=Target transmutation overlay scale updated successfully
-command.ee3:particles.turned_on=Equivalent Exchange 3 particles turned on
-command.ee3:particles.turned_off=Equivalent Exchange 3 particles turned off
-command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
-command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
-command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
-
-# Version check localizations
-version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
-version.ee3:uninitialized=Remote version check failed to initialize properly
-version.ee3:current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
-version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
-version.ee3:general_error=Error while connecting to remote version authority file; trying again
-version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
-version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
 
 # Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests

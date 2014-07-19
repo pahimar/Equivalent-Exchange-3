@@ -16,7 +16,7 @@ public class ContainerResearchStation extends ContainerEE
         this.tileEntityResearchStation = tileEntityResearchStation;
 
         this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 35, 41));
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 116, 41));
+        this.addSlotToContainer(new SlotResearchStation(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 125, 41));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
@@ -46,7 +46,7 @@ public class ContainerResearchStation extends ContainerEE
             itemStack = slotItemStack.copy();
 
             /**
-             * If we are shift-clicking an item out of the Aludel's container,
+             * If we are shift-clicking an item out of the Research Table's container,
              * attempt to put it in the first available slot in the player's
              * inventory
              */
@@ -60,7 +60,7 @@ public class ContainerResearchStation extends ContainerEE
             else
             {
                 /**
-                 * If the stack being shift-clicked into the Aludel's container
+                 * If the stack being shift-clicked into the Research Table's container
                  * is a fuel, first try to put it in the fuel slot. If it cannot
                  * be merged into the fuel slot, try to put it in the input
                  * slot.
@@ -68,6 +68,13 @@ public class ContainerResearchStation extends ContainerEE
                 if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
                 {
                     if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, false))
                     {
                         return null;
                     }

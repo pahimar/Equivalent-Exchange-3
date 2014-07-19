@@ -12,20 +12,13 @@ public class ConfigurationHelper
         property.setLanguageKey(langKey);
         property.comment = comment + " [default: " + defaultValue + "]";
         String value = property.getString();
-        boolean isValueValid = false;
 
         for (int i = 0; i < validValues.length; i++)
         {
             if (value.equalsIgnoreCase(validValues[i]))
             {
-                isValueValid = true;
-                value = validValues[i];
+                return validValues[i];
             }
-        }
-
-        if (isValueValid)
-        {
-            return value;
         }
 
         return defaultValue;

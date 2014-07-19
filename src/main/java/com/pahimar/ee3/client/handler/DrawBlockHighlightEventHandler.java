@@ -1,7 +1,8 @@
 package com.pahimar.ee3.client.handler;
 
-import com.pahimar.ee3.item.ItemDarkMatterPickAxe;
+import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.ToolMode;
+import com.pahimar.ee3.util.IModalTool;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,18 +27,46 @@ public class DrawBlockHighlightEventHandler
         {
             if (event.target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
             {
-                if (event.currentItem.getItem() instanceof ItemDarkMatterPickAxe)
+                if (event.currentItem.getItem() instanceof ItemDarkMatterShovel)
                 {
-                    event.setCanceled(true);
-                    drawSelectionBoxForPickAxe(event);
+                    drawSelectionBoxForShovel(event, (IModalTool) event.currentItem.getItem());
+                }
+                else if (event.currentItem.getItem() instanceof ItemDarkMatterPickAxe)
+                {
+                    drawSelectionBoxForPickAxe(event, (IModalTool) event.currentItem.getItem());
+                }
+                else if (event.currentItem.getItem() instanceof ItemDarkMatterHammer)
+                {
+                    drawSelectionBoxForHammer(event, (IModalTool) event.currentItem.getItem());
+                }
+                else if (event.currentItem.getItem() instanceof ItemDarkMatterAxe)
+                {
+                    drawSelectionBoxForAxe(event, (IModalTool) event.currentItem.getItem());
+                }
+                else if (event.currentItem.getItem() instanceof ItemDarkMatterHoe)
+                {
+                    drawSelectionBoxForHoe(event, (IModalTool) event.currentItem.getItem());
                 }
             }
         }
     }
 
-    private void drawSelectionBoxForPickAxe(DrawBlockHighlightEvent event)
+    private void drawSelectionBoxForShovel(DrawBlockHighlightEvent event, IModalTool modalTool)
     {
-        ToolMode toolMode = ((ItemDarkMatterPickAxe) event.currentItem.getItem()).getCurrentToolMode(event.currentItem);
+        event.setCanceled(true);
+        ToolMode toolMode = modalTool.getCurrentToolMode(event.currentItem);
+        int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (toolMode == ToolMode.STANDARD)
+        {
+            drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
+        }
+    }
+
+    private void drawSelectionBoxForPickAxe(DrawBlockHighlightEvent event, IModalTool modalTool)
+    {
+        event.setCanceled(true);
+        ToolMode toolMode = modalTool.getCurrentToolMode(event.currentItem);
         int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
         if (toolMode == ToolMode.STANDARD)
@@ -94,6 +123,42 @@ public class DrawBlockHighlightEventHandler
                     drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ + 1, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
                 }
             }
+        }
+    }
+
+    private void drawSelectionBoxForHammer(DrawBlockHighlightEvent event, IModalTool modalTool)
+    {
+        event.setCanceled(true);
+        ToolMode toolMode = modalTool.getCurrentToolMode(event.currentItem);
+        int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (toolMode == ToolMode.STANDARD)
+        {
+            drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
+        }
+    }
+
+    private void drawSelectionBoxForAxe(DrawBlockHighlightEvent event, IModalTool modalTool)
+    {
+        event.setCanceled(true);
+        ToolMode toolMode = modalTool.getCurrentToolMode(event.currentItem);
+        int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (toolMode == ToolMode.STANDARD)
+        {
+            drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
+        }
+    }
+
+    private void drawSelectionBoxForHoe(DrawBlockHighlightEvent event, IModalTool modalTool)
+    {
+        event.setCanceled(true);
+        ToolMode toolMode = modalTool.getCurrentToolMode(event.currentItem);
+        int facing = MathHelper.floor_double(event.player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (toolMode == ToolMode.STANDARD)
+        {
+            drawSelectionBox(event.context, event.player, new MovingObjectPosition(event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit, event.target.hitVec), 0, event.partialTicks);
         }
     }
 
