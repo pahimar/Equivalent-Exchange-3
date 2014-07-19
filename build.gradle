@@ -59,17 +59,17 @@ processResources {
     }
 }
 
-task deobfJar(type: Jar, dependsOn: 'classes') {
+task devJar(type: Jar, dependsOn: 'classes') {
     from(sourceSets.main.output) {
         include '**'
     }
 
     extension = 'jar'
-    classifier = 'deobf'
+    classifier = 'dev'
 }
 
 artifacts {
-    archives deobfJar
+    archives devJar
 }
 
 import net.minecraftforge.gradle.delayed.*
