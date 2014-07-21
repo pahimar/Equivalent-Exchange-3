@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, IChargeable, IModalTool
+public class ItemDarkMatterPickAxe extends ItemToolModalEE implements IKeyBound, IChargeable
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{Blocks.cobblestone, Blocks.double_stone_slab, Blocks.stone_slab, Blocks.stone, Blocks.sandstone, Blocks.mossy_cobblestone, Blocks.iron_ore, Blocks.iron_block, Blocks.coal_ore, Blocks.gold_block, Blocks.gold_ore, Blocks.diamond_ore, Blocks.diamond_block, Blocks.ice, Blocks.netherrack, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.lit_redstone_ore, Blocks.rail, Blocks.detector_rail, Blocks.golden_rail, Blocks.activator_rail});
 
@@ -117,29 +117,30 @@ public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, ICha
             {
                 if (getChargeLevel(itemStack) == this.getMaxChargeLevel())
                 {
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.FAIL, 1.5f, 1.5f);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     increaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
                 }
             }
             else
             {
                 if (getChargeLevel(itemStack) == 0)
                 {
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.FAIL, 1.5f, 1.5f);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     decreaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
                 }
             }
         }
         else if (key == Key.EXTRA)
         {
+            NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.TOCK, 0.5f, 1.5F);
             changeToolMode(itemStack);
         }
     }
@@ -148,40 +149,5 @@ public class ItemDarkMatterPickAxe extends ItemToolEE implements IKeyBound, ICha
     public List<ToolMode> getAvailableToolModes()
     {
         return Arrays.asList(ToolMode.STANDARD, ToolMode.WIDE, ToolMode.TALL);
-    }
-
-    @Override
-    public ToolMode getCurrentToolMode(ItemStack itemStack)
-    {
-        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
-        {
-            return ToolMode.TYPES[NBTHelper.getShort(itemStack, Names.NBT.MODE)];
-        }
-
-        return null;
-    }
-
-    @Override
-    public void setToolMode(ItemStack itemStack, ToolMode toolMode)
-    {
-        NBTHelper.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
-    }
-
-    @Override
-    public void changeToolMode(ItemStack itemStack)
-    {
-        ToolMode currentToolMode = getCurrentToolMode(itemStack);
-
-        if (getAvailableToolModes().contains(currentToolMode))
-        {
-            if (getAvailableToolModes().indexOf(currentToolMode) == getAvailableToolModes().size() - 1)
-            {
-                setToolMode(itemStack, getAvailableToolModes().get(0));
-            }
-            else
-            {
-                setToolMode(itemStack, getAvailableToolModes().get(getAvailableToolModes().indexOf(currentToolMode) + 1));
-            }
-        }
     }
 }

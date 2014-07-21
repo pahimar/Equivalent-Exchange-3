@@ -2,10 +2,7 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.reference.*;
-import com.pahimar.ee3.util.IChargeable;
-import com.pahimar.ee3.util.IKeyBound;
-import com.pahimar.ee3.util.IModalTool;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable, IModalTool
@@ -126,29 +124,30 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
             {
                 if (getChargeLevel(itemStack) == this.getMaxChargeLevel())
                 {
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.FAIL, 1.5f, 1.5f);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     increaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
                 }
             }
             else
             {
                 if (getChargeLevel(itemStack) == 0)
                 {
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.FAIL, 1.5f, 1.5f);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     decreaseChargeLevel(itemStack);
-                    entityPlayer.worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
                 }
             }
         }
         else if (key == Key.EXTRA)
         {
+            NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.TOCK, 0.5f, 1.5F);
             changeToolMode(itemStack);
         }
     }
@@ -157,7 +156,7 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     public List<ToolMode> getAvailableToolModes()
     {
         // TODO
-        return null;
+        return Arrays.asList(ToolMode.STANDARD);
     }
 
     @Override

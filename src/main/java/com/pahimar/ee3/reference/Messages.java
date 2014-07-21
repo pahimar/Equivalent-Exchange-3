@@ -20,5 +20,9 @@ public final class Messages
         public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE = "useTemplateFile";
         public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_LABEL = "general.transmutation.knowledge.template.label";
         public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_COMMENT = "general.transmutation.knowledge.template.comment";
+
+        public static final String SOUND_MODE = "soundMode";
+        public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
+        public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";
     }
 }
