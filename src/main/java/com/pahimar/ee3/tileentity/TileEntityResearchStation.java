@@ -1,8 +1,10 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.skill.PlayerKnowledge;
 import com.pahimar.ee3.skill.SkillRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -210,7 +212,8 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
             if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase(Settings.Transmutation.KNOWLEDGE_MODE_ALL))
             {
-                return EnergyValueRegistry.getInstance().hasEnergyValue(inventory[ITEM_SLOT_INVENTORY_INDEX]);
+                PlayerKnowledge playerKnowledge = ItemAlchemicalTome.readPlayerKnowledge(inventory[TOME_SLOT_INVENTORY_INDEX]);
+                return EnergyValueRegistry.getInstance().hasEnergyValue(inventory[ITEM_SLOT_INVENTORY_INDEX]) && playerKnowledge.isItemStackKnown(inventory[TOME_SLOT_INVENTORY_INDEX]);
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase(Settings.Transmutation.KNOWLEDGE_MODE_SELECT))
             {
