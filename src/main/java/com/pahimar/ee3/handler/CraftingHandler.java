@@ -5,7 +5,11 @@ import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.util.FakePlayer;
 
 public class CraftingHandler
 {
@@ -22,5 +26,30 @@ public class CraftingHandler
         {
             ItemHelper.setOwner(event.crafting, event.player);
         }
+    }
+    
+    public boolean isFakePlayer(EntityPlayer player)
+    {
+        if (player.getGameProfile() == null || player.getGameProfile().getName() == null)
+            return true;
+        if (player instanceof FakePlayer)
+            return true;
+        if (player instanceof EntityPlayerMP)
+        {
+            EntityPlayerMP mp = (EntityPlayerMP) player;
+            if (mp.playerNetServerHandler == null)
+                return true;
+            try
+            {
+                mp.getPlayerIP();
+                mp.playerNetServerHandler.netManager.getSocketAddress().toString();
+            }
+            catch (Exception e)
+            {
+                return true;
+            }
+            return !MinecraftServer.getServer().getConfigurationManager().playerEntityList.contains(player);
+        }
+        return false;
     }
 }
