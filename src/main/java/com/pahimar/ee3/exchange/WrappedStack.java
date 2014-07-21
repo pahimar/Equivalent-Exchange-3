@@ -106,11 +106,18 @@ public class WrappedStack implements Comparable<WrappedStack>
 
         if (object instanceof ItemStack)
         {
-            ItemStack itemStack = ((ItemStack) object).copy();
-
-            stackSize = itemStack.stackSize;
-            itemStack.stackSize = 1;
-            wrappedStack = itemStack;
+            if (((ItemStack) object).getItem() != null)
+            {
+                ItemStack itemStack = ((ItemStack) object).copy();
+                stackSize = itemStack.stackSize;
+                itemStack.stackSize = 1;
+                wrappedStack = itemStack;
+            }
+            else
+            {
+                stackSize = -1;
+                wrappedStack = null;
+            }
         }
         else if (object instanceof OreStack)
         {
@@ -259,9 +266,16 @@ public class WrappedStack implements Comparable<WrappedStack>
         {
             return true;
         }
-        else if (object instanceof Item || object instanceof Block || object instanceof ItemStack)
+        else if (object instanceof Item || object instanceof Block)
         {
             return true;
+        }
+        else if (object instanceof ItemStack)
+        {
+            if (((ItemStack)object).getItem() != null)
+            {
+                return true;
+            }
         }
         else if (object instanceof OreStack)
         {
