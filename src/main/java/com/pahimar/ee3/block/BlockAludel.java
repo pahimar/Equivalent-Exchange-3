@@ -5,7 +5,6 @@ import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
-import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import net.minecraft.block.Block;
@@ -47,7 +46,7 @@ public class BlockAludel extends BlockEE implements ITileEntityProvider
     @Override
     public int getRenderType()
     {
-        return RenderIds.aludel;
+        return -1;
     }
 
     @Override
