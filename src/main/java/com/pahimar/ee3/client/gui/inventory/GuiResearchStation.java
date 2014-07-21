@@ -41,5 +41,8 @@ public class GuiResearchStation extends GuiContainer
         int xStart = (width - xSize) / 2;
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+
+        int scaleAdjustment = this.tileEntityResearchStation.getLearnProgressScaled(57);
+        this.drawTexturedModalRect(xStart + 60, yStart + 41, 176, 0, scaleAdjustment, 16);
     }
 }

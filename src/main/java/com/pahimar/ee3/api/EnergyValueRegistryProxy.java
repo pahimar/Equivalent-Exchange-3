@@ -115,16 +115,16 @@ public final class EnergyValueRegistryProxy
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
     }
 
+    private static class EE3Wrapper
+    {
+        private static EquivalentExchange3 ee3mod;
+    }
+
     private static void init()
     {
         if (ee3Mod != null)
         {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
-    }
-
-    private static class EE3Wrapper
-    {
-        private static EquivalentExchange3 ee3mod;
     }
 }

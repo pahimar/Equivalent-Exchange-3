@@ -1,6 +1,11 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.skill.SkillRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -141,6 +146,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
             }
         }
         nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
+        nbtTagCompound.setInteger("itemLearnTime", itemLearnTime);
     }
 
     @Override
@@ -160,12 +166,36 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
                 inventory[slotIndex] = ItemStack.loadItemStackFromNBT(tagCompound);
             }
         }
+        itemLearnTime = nbtTagCompound.getInteger("itemLearnTime");
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getLearnProgressScaled(int scale)
+    {
+        return this.itemLearnTime * scale / 200;
     }
 
     @Override
     public void updateEntity()
     {
+        if (!this.worldObj.isRemote)
+        {
+            // Continue "cooking" the same item, if we can
+            if (this.canLearnItemStack())
+            {
+                this.itemLearnTime++;
 
+                if (this.itemLearnTime == 200)
+                {
+                    this.itemLearnTime = 0;
+                    this.learnItemStack();
+                }
+            }
+            else
+            {
+                this.itemLearnTime = 0;
+            }
+        }
     }
 
     private boolean canLearnItemStack()
@@ -176,9 +206,33 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
         }
         else
         {
+            // TODO Check the book in the Tome spot to see if it already knows the itemstack
 
+            if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase(Settings.Transmutation.KNOWLEDGE_MODE_ALL))
+            {
+                return EnergyValueRegistry.getInstance().hasEnergyValue(inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            }
+            else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase(Settings.Transmutation.KNOWLEDGE_MODE_SELECT))
+            {
+                return EnergyValueRegistry.getInstance().hasEnergyValue(inventory[ITEM_SLOT_INVENTORY_INDEX]) && SkillRegistry.getInstance().isLearnable(inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            }
         }
 
         return false;
+    }
+
+    private void learnItemStack()
+    {
+        if (this.canLearnItemStack())
+        {
+            // TODO Add the input item to the books knowledge
+
+            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
+
+            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
+            {
+                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
+            }
+        }
     }
 }

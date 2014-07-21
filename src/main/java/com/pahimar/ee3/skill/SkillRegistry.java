@@ -33,6 +33,11 @@ public class SkillRegistry
         skillMap = new TreeMap<ItemStack, Skill>(ItemHelper.comparator);
     }
 
+    public void addSkill(Block block)
+    {
+        addSkill(new ItemStack(block));
+    }
+
     public void addSkill(Item item)
     {
         addSkill(new ItemStack(item));
@@ -50,22 +55,23 @@ public class SkillRegistry
 
     private void addSkill(ItemStack itemStack, Skill skill)
     {
-        if (!skillMap.containsKey(itemStack))
-        {
-            skillMap.put(itemStack, skill);
-        }
-    }
+        ItemStack unitItemStack = itemStack.copy();
+        unitItemStack.stackSize = 1;
 
-    public void addSkill(Block block)
-    {
-        addSkill(new ItemStack(block));
+        if (!skillMap.containsKey(unitItemStack))
+        {
+            skillMap.put(unitItemStack, skill);
+        }
     }
 
     public boolean isLearnable(ItemStack itemStack)
     {
-        if (skillMap.containsKey(itemStack))
+        ItemStack unitItemStack = itemStack.copy();
+        unitItemStack.stackSize = 1;
+
+        if (skillMap.containsKey(unitItemStack))
         {
-            return skillMap.get(itemStack).isLearnable();
+            return skillMap.get(unitItemStack).isLearnable();
         }
 
         return false;
@@ -73,9 +79,12 @@ public class SkillRegistry
 
     public boolean isRecoverable(ItemStack itemStack)
     {
-        if (skillMap.containsKey(itemStack))
+        ItemStack unitItemStack = itemStack.copy();
+        unitItemStack.stackSize = 1;
+
+        if (skillMap.containsKey(unitItemStack))
         {
-            return skillMap.get(itemStack).isRecoverable();
+            return skillMap.get(unitItemStack).isRecoverable();
         }
 
         return false;

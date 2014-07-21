@@ -30,7 +30,7 @@ public class PlayerKnowledgeHandler
 
             if (playerKnowledge == null)
             {
-                if (Settings.Transmutation.USE_TEMPLATE_FILE)
+                if (Settings.Transmutation.useTemplateFile)
                 {
                     playerKnowledgeCompound = readTemplateKnowledgeFile();
                 }

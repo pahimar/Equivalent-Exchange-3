@@ -2,14 +2,18 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerResearchStation extends ContainerEE
 {
     private TileEntityResearchStation tileEntityResearchStation;
+    private int lastItemLearnTime;
 
     public ContainerResearchStation(InventoryPlayer inventoryPlayer, TileEntityResearchStation tileEntityResearchStation)
     {
@@ -31,6 +35,40 @@ public class ContainerResearchStation extends ContainerEE
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 152));
+        }
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting)
+    {
+        super.addCraftingToCrafters(iCrafting);
+        iCrafting.sendProgressBarUpdate(this, 0, this.tileEntityResearchStation.itemLearnTime);
+    }
+
+    @Override
+    public void detectAndSendChanges()
+    {
+        super.detectAndSendChanges();
+
+        for (Object crafter : this.crafters)
+        {
+            ICrafting icrafting = (ICrafting) crafter;
+
+            if (this.lastItemLearnTime != this.tileEntityResearchStation.itemLearnTime)
+            {
+                icrafting.sendProgressBarUpdate(this, 0, this.tileEntityResearchStation.itemLearnTime);
+            }
+        }
+
+        this.lastItemLearnTime = this.tileEntityResearchStation.itemLearnTime;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int valueType, int updatedValue)
+    {
+        if (valueType == 0)
+        {
+            this.tileEntityResearchStation.itemLearnTime = updatedValue;
         }
     }
 

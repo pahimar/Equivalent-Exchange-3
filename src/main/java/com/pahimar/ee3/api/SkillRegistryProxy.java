@@ -11,6 +11,11 @@ public class SkillRegistryProxy
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
+    public static void addSkill(Block block)
+    {
+        addSkill(new ItemStack(block));
+    }
+
     public static void addSkill(Item item)
     {
         addSkill(new ItemStack(item));
@@ -34,47 +39,42 @@ public class SkillRegistryProxy
         EE3Wrapper.ee3mod.getSkillRegistry().addSkill(itemStack, isLearnable, isRecovereable);
     }
 
+    public static boolean isLearnable(ItemStack itemStack)
+    {
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod == null)
+        {
+            return false;
+        }
+
+        return EE3Wrapper.ee3mod.getSkillRegistry().isLearnable(itemStack);
+    }
+
+    public static boolean isRecoverable(ItemStack itemStack)
+    {
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod == null)
+        {
+            return false;
+        }
+
+        return EE3Wrapper.ee3mod.getSkillRegistry().isRecoverable(itemStack);
+    }
+
+    private static class EE3Wrapper
+    {
+        private static EquivalentExchange3 ee3mod;
+    }
+
     private static void init()
     {
         if (ee3Mod != null)
         {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
-    }
-
-    public static void addSkill(Block block)
-    {
-        addSkill(new ItemStack(block));
-    }
-
-    public static void isLearnable(ItemStack itemStack)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return;
-        }
-
-        EE3Wrapper.ee3mod.getSkillRegistry().isLearnable(itemStack);
-    }
-
-    public static void isRecoverable(ItemStack itemStack)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return;
-        }
-
-        EE3Wrapper.ee3mod.getSkillRegistry().isRecoverable(itemStack);
-    }
-
-    private static class EE3Wrapper
-    {
-        private static EquivalentExchange3 ee3mod;
     }
 }

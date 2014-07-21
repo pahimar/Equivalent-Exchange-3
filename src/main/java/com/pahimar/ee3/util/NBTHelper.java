@@ -227,4 +227,23 @@ public class NBTHelper
 
         itemStack.stackTagCompound.setDouble(keyName, keyValue);
     }
+
+    public static NBTTagCompound getTagCompound(ItemStack itemStack, String keyName)
+    {
+        initNBTTagCompound(itemStack);
+
+        if (!itemStack.stackTagCompound.hasKey(keyName))
+        {
+            setDouble(itemStack, keyName, 0);
+        }
+
+        return itemStack.stackTagCompound.getCompoundTag(keyName);
+    }
+
+    public static void setTagCompound(ItemStack itemStack, String keyName, NBTTagCompound nbtTagCompound)
+    {
+        initNBTTagCompound(itemStack);
+
+        itemStack.stackTagCompound.setTag(keyName, nbtTagCompound);
+    }
 }
