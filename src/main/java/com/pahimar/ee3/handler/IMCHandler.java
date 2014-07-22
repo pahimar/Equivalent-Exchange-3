@@ -6,7 +6,7 @@ import java.util.Map;
 import com.pahimar.ee3.imc.IMCMessageHandler;
 import com.pahimar.ee3.imc.IMCMessageTest;
 
-import nutriteam.nutricraft.integration.imc.messages.NCTestIMC;
+
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
