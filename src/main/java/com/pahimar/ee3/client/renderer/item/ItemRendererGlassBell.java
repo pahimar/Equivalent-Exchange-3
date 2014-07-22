@@ -64,6 +64,8 @@ public class ItemRendererGlassBell implements IItemRenderer
 
     private void renderGlassBell(float x, float y, float z)
     {
+    	GL11.glEnable(GL11.GL_ALPHA_TEST);
+    	
         GL11.glPushMatrix();
 
         // Scale, Translate, Rotate
@@ -78,5 +80,7 @@ public class ItemRendererGlassBell implements IItemRenderer
         modelGlassBell.render();
 
         GL11.glPopMatrix();
+        
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
     }
 }
