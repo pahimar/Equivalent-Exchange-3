@@ -34,12 +34,12 @@ public class EnergyValueRegistry
         return energyValueRegistry;
     }
 
-    public static void addPreAssignedEnergyValue(Object object, float energyValue)
+    public void addPreAssignedEnergyValue(Object object, float energyValue)
     {
         addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         if (preAssignedMappings == null)
         {
@@ -70,7 +70,7 @@ public class EnergyValueRegistry
         }
     }
 
-    public static void addPostAssignedEnergyValue(Object object, float energyValue)
+    public void addPostAssignedEnergyValue(Object object, float energyValue)
     {
         if (postAssignedMappings == null)
         {
@@ -91,7 +91,7 @@ public class EnergyValueRegistry
         }
     }
 
-    public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         if (postAssignedMappings == null)
         {

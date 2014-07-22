@@ -3,8 +3,23 @@ package com.pahimar.ee3.api;
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
 
+import java.util.List;
+
 public class RecipeRegistryProxy
 {
+    public static void addRecipe(Object recipeOutput, List<?> recipeInputList)
+    {
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod == null)
+        {
+            return;
+        }
+
+        EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputList);
+    }
+
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 

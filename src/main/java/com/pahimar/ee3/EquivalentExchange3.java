@@ -110,6 +110,11 @@ public class EquivalentExchange3
         return EnergyValueRegistry.getInstance();
     }
 
+    public RecipeRegistry getRecipeRegistry()
+    {
+        return RecipeRegistry.getInstance();
+    }
+
     public SkillRegistry getSkillRegistry()
     {
         return SkillRegistry.getInstance();
