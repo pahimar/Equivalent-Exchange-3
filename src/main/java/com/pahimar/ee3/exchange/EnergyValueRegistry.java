@@ -364,8 +364,14 @@ public class EnergyValueRegistry
             // Increment the pass counter
             passNumber++;
 
+            // Set the values for getEnergyValue calls in the auto-assignment computation
+            stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+            stackMappingsBuilder.putAll(stackValueMap);
+            stackMappings = stackMappingsBuilder.build();
+
             // Compute stack mappings from existing stack mappings
             computedStackValues = computeStackMappings();
+
             for (WrappedStack keyStack : computedStackValues.keySet())
             {
                 EnergyValue factoredExchangeEnergyValue = null;
@@ -396,8 +402,6 @@ public class EnergyValueRegistry
                 }
             }
         }
-
-
 
         /*
          *  Post-assigned values

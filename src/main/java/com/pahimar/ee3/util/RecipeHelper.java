@@ -26,10 +26,12 @@ public class RecipeHelper
     /**
      * Returns a list of elements that constitute the input in a crafting recipe
      *
-     * @param recipe The IRecipe being examined
+     * @param recipe
+     *         The IRecipe being examined
+     *
      * @return List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
      */
-    public static ArrayList<WrappedStack> getRecipeInputs(IRecipe recipe)
+    public static List<WrappedStack> getRecipeInputs(IRecipe recipe)
     {
         ArrayList<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
 
@@ -129,13 +131,15 @@ public class RecipeHelper
             }
         }
 
-        return recipeInputs;
+        return collateInputStacks(recipeInputs);
     }
 
     /**
      * Collates an uncollated, unsorted List of Objects into a sorted, collated List of WrappedStacks
      *
-     * @param uncollatedStacks List of objects for collating
+     * @param uncollatedStacks
+     *         List of objects for collating
+     *
      * @return A sorted, collated List of WrappedStacks
      */
     public static List<WrappedStack> collateInputStacks(List<?> uncollatedStacks)

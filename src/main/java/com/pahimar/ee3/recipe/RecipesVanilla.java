@@ -12,7 +12,6 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipesVanilla
@@ -45,7 +44,7 @@ public class RecipesVanilla
 
                 if (recipeOutput != null)
                 {
-                    ArrayList<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
+                    List<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
 
                     if (!recipeInputs.isEmpty())
                     {
