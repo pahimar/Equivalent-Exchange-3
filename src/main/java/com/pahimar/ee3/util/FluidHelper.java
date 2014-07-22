@@ -78,6 +78,7 @@ public class FluidHelper
         }
     };
 
+    // TODO Get Milk working
     public static void registerFluids()
     {
         // Register Milk in the FluidRegistry if it hasn't already been done
