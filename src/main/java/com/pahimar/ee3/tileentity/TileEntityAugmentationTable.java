@@ -12,7 +12,7 @@ public class TileEntityAugmentationTable extends TileEntityEE implements IInvent
     public static final int INVENTORY_SIZE = 3;
     public static final int INPUT_SLOT_INVENTORY_INDEX = 0;
     public static final int AUGMENT_SLOT_INVENTORY_INDEX = 1;
-    public static final int OUTPUT_SLOT_INVENTORY_INDEX = 1;
+    public static final int OUTPUT_SLOT_INVENTORY_INDEX = 2;
 
     /**
      * The ItemStacks that hold the items currently being used in the Glass Bell
