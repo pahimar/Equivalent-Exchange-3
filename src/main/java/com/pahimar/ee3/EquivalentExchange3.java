@@ -5,6 +5,7 @@ import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.handler.IMCHandler;
 import com.pahimar.ee3.init.EnergyValues;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
@@ -16,12 +17,14 @@ import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.LogHelper;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -58,7 +61,9 @@ public class EquivalentExchange3
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+    	IMCHandler.registerMessageHandlers();
+    	
+    	ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         PacketHandler.init();
 
@@ -69,6 +74,8 @@ public class EquivalentExchange3
         ModBlocks.init();
 
         EnergyValues.init();
+        
+        IMCHandler.sendIMCMessages();
     }
 
     @EventHandler
@@ -100,9 +107,11 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void handleIMCMessages(IMCEvent event)
+    public void handleIMCMessages(IMCEvent event) throws Exception
     {
-
+    	for (final IMCMessage message : event.getMessages()) {
+    		IMCHandler.handleIMCMessage(message);
+    	}
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()
