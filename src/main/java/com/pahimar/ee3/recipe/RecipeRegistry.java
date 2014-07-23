@@ -13,14 +13,10 @@ public class RecipeRegistry
     private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
-    private Multimap<WrappedStack, List<WrappedStack>> tempRecipeMap;
 
     private RecipeRegistry()
     {
         recipeMap = HashMultimap.create();
-        tempRecipeMap = HashMultimap.create();
-
-        init();
     }
 
     public static RecipeRegistry getInstance()
@@ -56,6 +52,12 @@ public class RecipeRegistry
         for (Object recipeInputObject : recipeInputList)
         {
             wrappedRecipeInputList.add(new WrappedStack(recipeInputObject));
+        }
+
+        // Add the recipe mapping only if we don't already have it
+        if (!recipeMap.get(wrappedRecipeOutput).contains(wrappedRecipeInputList))
+        {
+            recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
         }
     }
 
