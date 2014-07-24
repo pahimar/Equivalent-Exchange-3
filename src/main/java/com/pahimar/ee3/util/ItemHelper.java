@@ -19,7 +19,7 @@ public class ItemHelper
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
-                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
+                if (Item.getIdFromItem(itemStack1.getItem()) == Item.getIdFromItem(itemStack2.getItem()))
                 {
                     // Then sort on meta
                     if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
