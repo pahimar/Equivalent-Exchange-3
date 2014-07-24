@@ -25,7 +25,6 @@ public class PlayerKnowledgeHandler
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
-            initializeTemplateFile(null);
             NBTTagCompound playerKnowledgeCompound = null;
 
             if (playerKnowledge == null)
@@ -111,6 +110,10 @@ public class PlayerKnowledgeHandler
                     return nbtTagCompound;
                 }
             }
+            else
+            {
+                initializeTemplateFile(null);
+            }
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
@@ -122,7 +125,7 @@ public class PlayerKnowledgeHandler
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
-            File allowedKnowledgeFile = new File(playerDataDirectory, EXPLICITLY_ALLOWED_KNOWLEDGE_FILENAME);
+            File allowedKnowledgeFile = new File(playerDataDirectory, ALLOWED_KNOWLEDGE_FILENAME);
 
             if (allowedKnowledgeFile.exists() && allowedKnowledgeFile.isFile())
             {
@@ -141,6 +144,10 @@ public class PlayerKnowledgeHandler
                     return nbtTagCompound;
                 }
             }
+            else
+            {
+                initializeAllowedKnowledgeFile(null);
+            }
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
@@ -153,7 +160,7 @@ public class PlayerKnowledgeHandler
         return new PlayerKnowledge(readAllowedKnowledgeFile());
     }
 
-    public static void initializeTemplateFile(PlayerKnowledge templatePlayerKnowledge)
+    private static void initializeTemplateFile(PlayerKnowledge templatePlayerKnowledge)
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
@@ -181,7 +188,36 @@ public class PlayerKnowledgeHandler
         }
     }
 
+    private static void initializeAllowedKnowledgeFile(PlayerKnowledge allowedKnowledgeFile)
+    {
+        if (playerDataDirectory != null && playerDataDirectory.isDirectory())
+        {
+            File templatePlayerKnowledgeFile = new File(playerDataDirectory, ALLOWED_KNOWLEDGE_FILENAME);
+
+            if (allowedKnowledgeFile == null)
+            {
+                allowedKnowledgeFile = new PlayerKnowledge();
+            }
+
+            if (!templatePlayerKnowledgeFile.exists())
+            {
+                NBTTagCompound nbtTagCompound = new NBTTagCompound();
+                allowedKnowledgeFile.writeToNBT(nbtTagCompound);
+
+                try
+                {
+                    CompressedStreamTools.writeCompressed(nbtTagCompound, new FileOutputStream(templatePlayerKnowledgeFile));
+                }
+                catch (Exception exception)
+                {
+                    LogHelper.warn("Failed to initialize player knowledge template file");
+                }
+            }
+        }
+    }
+
+
     public static final String KNOWLEDGE_FILE_EXTENSION = ".ee3";
     private static final String TEMPLATE_FILENAME = "template" + KNOWLEDGE_FILE_EXTENSION;
-    private static final String EXPLICITLY_ALLOWED_KNOWLEDGE_FILENAME = "allowedKnowledge" + KNOWLEDGE_FILE_EXTENSION;
+    private static final String ALLOWED_KNOWLEDGE_FILENAME = "allowedKnowledge" + KNOWLEDGE_FILE_EXTENSION;
 }
