@@ -104,12 +104,53 @@ public class PlayerKnowledgeHandler
                 {
                     e.printStackTrace();
                 }
+                finally
+                {
+                    NBTTagCompound nbtTagCompound = new NBTTagCompound();
+                    new PlayerKnowledge().writeToNBT(nbtTagCompound);
+                    return nbtTagCompound;
+                }
             }
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
         new PlayerKnowledge().writeToNBT(nbtTagCompound);
         return nbtTagCompound;
+    }
+
+    private static NBTTagCompound readAllowedKnowledgeFile()
+    {
+        if (playerDataDirectory != null && playerDataDirectory.isDirectory())
+        {
+            File allowedKnowledgeFile = new File(playerDataDirectory, EXPLICITLY_ALLOWED_KNOWLEDGE_FILENAME);
+
+            if (allowedKnowledgeFile.exists() && allowedKnowledgeFile.isFile())
+            {
+                try
+                {
+                    return CompressedStreamTools.readCompressed(new FileInputStream(allowedKnowledgeFile));
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                finally
+                {
+                    NBTTagCompound nbtTagCompound = new NBTTagCompound();
+                    new PlayerKnowledge().writeToNBT(nbtTagCompound);
+                    return nbtTagCompound;
+                }
+            }
+        }
+
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        new PlayerKnowledge().writeToNBT(nbtTagCompound);
+        return nbtTagCompound;
+    }
+
+    public static PlayerKnowledge getAllowedPlayerKnowledge()
+    {
+        return new PlayerKnowledge(readAllowedKnowledgeFile());
     }
 
     public static void initializeTemplateFile(PlayerKnowledge templatePlayerKnowledge)
@@ -142,4 +183,5 @@ public class PlayerKnowledgeHandler
 
     public static final String KNOWLEDGE_FILE_EXTENSION = ".ee3";
     private static final String TEMPLATE_FILENAME = "template" + KNOWLEDGE_FILE_EXTENSION;
+    private static final String EXPLICITLY_ALLOWED_KNOWLEDGE_FILENAME = "allowedKnowledge" + KNOWLEDGE_FILE_EXTENSION;
 }

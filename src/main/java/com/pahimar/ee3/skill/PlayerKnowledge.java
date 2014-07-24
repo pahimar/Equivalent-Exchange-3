@@ -32,6 +32,12 @@ public class PlayerKnowledge implements INBTTaggable
         this(Arrays.asList(knownItemStacks));
     }
 
+    public PlayerKnowledge(NBTTagCompound nbtTagCompound)
+    {
+        this.knownItemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
+        this.readFromNBT(nbtTagCompound);
+    }
+
     public boolean isItemStackKnown(ItemStack itemStack)
     {
         ItemStack unitItemStack = itemStack.copy();

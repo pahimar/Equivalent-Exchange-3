@@ -1,5 +1,7 @@
 package com.pahimar.ee3.recipe;
 
+import com.google.common.collect.ImmutableList;
+import com.pahimar.ee3.api.RecipeRegistryProxy;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import net.minecraft.item.ItemStack;
@@ -74,6 +76,14 @@ public class RecipesAludel
 
     public List<RecipeAludel> getRecipes()
     {
-        return aludelRecipes;
+        return ImmutableList.copyOf(aludelRecipes);
+    }
+
+    public static void registerRecipes()
+    {
+        for (RecipeAludel recipeAludel : RecipesAludel.getInstance().getRecipes())
+        {
+            RecipeRegistryProxy.addRecipe(recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputsAsWrappedStacks());
+        }
     }
 }

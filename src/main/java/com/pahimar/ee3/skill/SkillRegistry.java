@@ -50,7 +50,12 @@ public class SkillRegistry
 
     public void addSkill(ItemStack itemStack, boolean learnable, boolean recoverable)
     {
-        addSkill(itemStack, new Skill(learnable, recoverable));
+        addSkill(itemStack, new Skill(learnable, recoverable, 0));
+    }
+
+    public void addSkill(ItemStack itemStack, boolean learnable, boolean recoverable, int tier)
+    {
+        addSkill(itemStack, new Skill(learnable, recoverable, tier));
     }
 
     private void addSkill(ItemStack itemStack, Skill skill)
@@ -88,5 +93,18 @@ public class SkillRegistry
         }
 
         return false;
+    }
+
+    public int getTier(ItemStack itemStack)
+    {
+        ItemStack unitItemStack = itemStack.copy();
+        unitItemStack.stackSize = 1;
+
+        if (skillMap.containsKey(unitItemStack))
+        {
+            return skillMap.get(unitItemStack).getTier();
+        }
+
+        return -1;
     }
 }

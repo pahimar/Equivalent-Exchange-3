@@ -28,6 +28,11 @@ public class SkillRegistryProxy
 
     public static void addSkill(ItemStack itemStack, boolean isLearnable, boolean isRecovereable)
     {
+        addSkill(itemStack, isLearnable, isRecovereable, 0);
+    }
+
+    public static void addSkill(ItemStack itemStack, boolean isLearnable, boolean isRecovereable, int tier)
+    {
         init();
 
         // NOOP if EquivalentExchange3 is not present
@@ -36,7 +41,7 @@ public class SkillRegistryProxy
             return;
         }
 
-        EE3Wrapper.ee3mod.getSkillRegistry().addSkill(itemStack, isLearnable, isRecovereable);
+        EE3Wrapper.ee3mod.getSkillRegistry().addSkill(itemStack, isLearnable, isRecovereable, tier);
     }
 
     public static boolean isLearnable(ItemStack itemStack)
