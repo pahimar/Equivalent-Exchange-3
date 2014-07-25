@@ -12,6 +12,10 @@ general.transmutation.knowledge.template.comment=If true, new player's will have
 general.sound.soundMode.label=Sounds
 general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
 
+general.debug=Debug Settings
+general.debug.mode.label=Debug Mode Enabled
+general.debug.mode.comment=Toggles whether or not debug mode is enabled (Note: This is primarily for modders testing mod interaction with Equivalent Exchange 3)
+
 # Keys
 key.categories.ee3=Equivalent Exchange 3
 key.charge=Charge

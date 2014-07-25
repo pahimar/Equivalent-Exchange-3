@@ -413,6 +413,10 @@ public class EnergyValueRegistry
                 stackValueMap.put(wrappedStack, postAssignedMappings.get(wrappedStack));
             }
         }
+        else
+        {
+            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+        }
 
         /**
          * Finalize the stack to value map
@@ -544,5 +548,28 @@ public class EnergyValueRegistry
         }
 
         return stacksInRange;
+    }
+
+    public String getStageValueWasAssigned(Object object)
+    {
+        if (WrappedStack.canBeWrapped(object))
+        {
+            WrappedStack wrappedStack = new WrappedStack(object);
+
+            if (preAssignedMappings.keySet().contains(wrappedStack))
+            {
+                return "Pre Assigned";
+            }
+            else if (postAssignedMappings.keySet().contains(wrappedStack))
+            {
+                return "Post Assigned";
+            }
+            else if (hasEnergyValue(object))
+            {
+                return "Computed";
+            }
+        }
+
+        return "No Value Assigned";
     }
 }

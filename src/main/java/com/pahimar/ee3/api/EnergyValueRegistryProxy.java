@@ -92,17 +92,17 @@ public final class EnergyValueRegistryProxy
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
     }
 
-    public List getStacksInRange(int start, int finish)
+    public static List getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List getStacksInRange(float start, float finish)
+    public static List getStacksInRange(float start, float finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
-    public List getStacksInRange(EnergyValue start, EnergyValue finish)
+    public static List getStacksInRange(EnergyValue start, EnergyValue finish)
     {
         init();
 
@@ -113,6 +113,19 @@ public final class EnergyValueRegistryProxy
         }
 
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
+    }
+
+    public static String getStageValueWasAssigned(Object object)
+    {
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod == null)
+        {
+            return "";
+        }
+
+        return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStageValueWasAssigned(object);
     }
 
     private static class EE3Wrapper

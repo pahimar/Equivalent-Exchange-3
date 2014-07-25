@@ -80,11 +80,11 @@ public class MessageSoundEvent implements IMessage, IMessageHandler<MessageSound
     {
         UUID originUUID = new UUID(event.mostSigUUID, event.leastSigUUID);
 
-        if (Settings.Sounds.soundMode.equalsIgnoreCase(Settings.Sounds.SOUND_MODE_ALL))
+        if (Settings.Sounds.soundMode.equalsIgnoreCase("All"))
         {
             EquivalentExchange3.proxy.playSound(event.soundName, event.xCoord, event.yCoord, event.zCoord, event.volume, event.pitch);
         }
-        else if (Settings.Sounds.soundMode.equalsIgnoreCase(Settings.Sounds.SOUND_MODE_SELF))
+        else if (Settings.Sounds.soundMode.equalsIgnoreCase("Self"))
         {
             if (FMLClientHandler.instance().getClient().thePlayer.getUniqueID().equals(originUUID))
             {
