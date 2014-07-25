@@ -5,10 +5,7 @@ import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.handler.CraftingHandler;
 import com.pahimar.ee3.handler.FuelHandler;
 import com.pahimar.ee3.handler.GuiHandler;
-import com.pahimar.ee3.init.EnergyValues;
-import com.pahimar.ee3.init.ModBlocks;
-import com.pahimar.ee3.init.ModItems;
-import com.pahimar.ee3.init.Recipes;
+import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -65,7 +62,9 @@ public class EquivalentExchange3
 
         ModBlocks.init();
 
-        EnergyValues.init();
+        EnergyValues.addDefaultEnergyValues();
+
+        Skills.addDefaultSkills();
     }
 
     @EventHandler

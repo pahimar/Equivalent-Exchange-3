@@ -3,6 +3,7 @@ package com.pahimar.ee3.client.handler;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -49,6 +50,8 @@ public class ItemTooltipEventHandler
             {
                 event.toolTip.add("No Exchange Energy value");
             }
+
+            event.toolTip.add(String.format("Can Learn: %s", SkillRegistry.canLearnItemStack(event.itemStack)));
         }
 
         if (event.itemStack.getItem() instanceof IOwnable)

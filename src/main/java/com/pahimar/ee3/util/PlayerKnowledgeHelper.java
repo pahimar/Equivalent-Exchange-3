@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 
 public class PlayerKnowledgeHelper
 {
+
+
     public static boolean canLearnItemStack(ItemStack itemStack, ItemStack alchemicalTomeStack)
     {
         if (itemStack == null || itemStack.getItem() == null || alchemicalTomeStack == null || !(alchemicalTomeStack.getItem() instanceof ItemAlchemicalTome))
@@ -33,8 +35,17 @@ public class PlayerKnowledgeHelper
         {
             if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("All"))
             {
-                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
-                        && !playerKnowledge.isItemStackKnown(itemStack);
+                if (SkillRegistry.getInstance().hasSkillMapping(itemStack))
+                {
+                    return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
+                            && !playerKnowledge.isItemStackKnown(itemStack)
+                            && SkillRegistry.getInstance().isLearnable(itemStack);
+                }
+                else
+                {
+                    return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
+                            && !playerKnowledge.isItemStackKnown(itemStack);
+                }
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Select"))
             {
@@ -44,7 +55,7 @@ public class PlayerKnowledgeHelper
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Tier"))
             {
-                int itemStackKnowledgeTier = SkillRegistry.getInstance().getTier(itemStack);
+                int itemStackKnowledgeTier = SkillRegistry.getInstance().getKnowledgeTier(itemStack);
 
                 return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
                         && !playerKnowledge.isItemStackKnown(itemStack)

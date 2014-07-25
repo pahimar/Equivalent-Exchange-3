@@ -2,9 +2,9 @@ package com.pahimar.ee3.skill;
 
 public class Skill
 {
-    private boolean learnable;
-    private boolean recoverable;
-    private int tier;
+    private final boolean learnable;
+    private final boolean recoverable;
+    private final int knowledgeTier;
 
     public Skill()
     {
@@ -23,11 +23,11 @@ public class Skill
 
         if (tier >= 0)
         {
-            this.tier = tier;
+            this.knowledgeTier = tier;
         }
         else
         {
-            this.tier = 0;
+            this.knowledgeTier = 0;
         }
     }
 
@@ -36,40 +36,25 @@ public class Skill
         return learnable;
     }
 
-    public void setLearnable(boolean learnable)
-    {
-        this.learnable = learnable;
-    }
-
     public boolean isRecoverable()
     {
         return recoverable;
     }
 
-    public void setRecoverable(boolean recoverable)
+    public int getKnowledgeTier()
     {
-        this.recoverable = recoverable;
-    }
-
-    public int getTier()
-    {
-        return tier;
-    }
-
-    public void setTier(int tier)
-    {
-        this.tier = tier;
+        return knowledgeTier;
     }
 
     @Override
     public boolean equals(Object object)
     {
-        return object instanceof Skill && (this.learnable == ((Skill) object).learnable && this.recoverable == ((Skill) object).recoverable && this.tier == ((Skill) object).tier);
+        return object instanceof Skill && (this.learnable == ((Skill) object).learnable && this.recoverable == ((Skill) object).recoverable && this.knowledgeTier == ((Skill) object).knowledgeTier);
     }
 
     @Override
     public String toString()
     {
-        return String.format("Skill[learnable: %s, recoverable: %s, tier: %s]", learnable, recoverable, tier);
+        return String.format("Skill[learnable: %s, recoverable: %s, knowledgeTier: %s]", learnable, recoverable, knowledgeTier);
     }
 }

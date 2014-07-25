@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class EnergyValues
 {
-    public static void init()
+    public static void addDefaultEnergyValues()
     {
         // OreDictionary assignment
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.cobblestone))), 1);

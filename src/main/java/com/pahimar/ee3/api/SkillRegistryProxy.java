@@ -16,9 +16,19 @@ public class SkillRegistryProxy
         addSkill(new ItemStack(block));
     }
 
+    public static void addSkill(Block block, boolean isLearnable, boolean isRecoverable)
+    {
+        addSkill(new ItemStack(block), isLearnable, isRecoverable);
+    }
+
     public static void addSkill(Item item)
     {
         addSkill(new ItemStack(item));
+    }
+
+    public static void addSkill(Item item, boolean isLearnable, boolean isRecoverable)
+    {
+        addSkill(new ItemStack(item), isLearnable, isRecoverable);
     }
 
     public static void addSkill(ItemStack itemStack)
@@ -31,7 +41,7 @@ public class SkillRegistryProxy
         addSkill(itemStack, isLearnable, isRecovereable, 0);
     }
 
-    public static void addSkill(ItemStack itemStack, boolean isLearnable, boolean isRecovereable, int tier)
+    public static void addSkill(ItemStack itemStack, boolean isLearnable, boolean isRecovereable, int knowledgeTier)
     {
         init();
 
@@ -41,33 +51,7 @@ public class SkillRegistryProxy
             return;
         }
 
-        EE3Wrapper.ee3mod.getSkillRegistry().addSkill(itemStack, isLearnable, isRecovereable, tier);
-    }
-
-    public static boolean isLearnable(ItemStack itemStack)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return false;
-        }
-
-        return EE3Wrapper.ee3mod.getSkillRegistry().isLearnable(itemStack);
-    }
-
-    public static boolean isRecoverable(ItemStack itemStack)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return false;
-        }
-
-        return EE3Wrapper.ee3mod.getSkillRegistry().isRecoverable(itemStack);
+        EE3Wrapper.ee3mod.getSkillRegistry().addSkill(itemStack, isLearnable, isRecovereable, knowledgeTier);
     }
 
     private static class EE3Wrapper
