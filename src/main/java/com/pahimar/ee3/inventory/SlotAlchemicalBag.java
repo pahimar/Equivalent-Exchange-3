@@ -1,6 +1,7 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalBag;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -19,10 +20,15 @@ public class SlotAlchemicalBag extends Slot
     }
 
     @Override
-    public void onSlotChange(ItemStack itemStack1, ItemStack itemStack2)
+    public void onSlotChanged()
     {
-        super.onSlotChange(itemStack1, itemStack2);
-        containerAlchemicalBag.saveInventory(entityPlayer);
+        super.onSlotChanged();
+
+        //Only save on server side to prevent a huge amount of client-side saving when the bag is opened
+        if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+        {
+            containerAlchemicalBag.saveInventory(entityPlayer);
+        }
     }
 
     /**
