@@ -5,7 +5,7 @@ import cpw.mods.fml.common.Mod;
 
 import java.util.List;
 
-public class RecipeRegistryProxy
+public final class RecipeRegistryProxy
 {
     public static void addRecipe(Object recipeOutput, List<?> recipeInputList)
     {
