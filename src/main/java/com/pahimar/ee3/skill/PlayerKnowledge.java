@@ -41,7 +41,7 @@ public class PlayerKnowledge implements INBTTaggable
     public boolean isItemStackKnown(ItemStack itemStack)
     {
         ItemStack unitItemStack = itemStack.copy();
-        itemStack.stackSize = 1;
+        unitItemStack.stackSize = 1;
         return this.knownItemStacks.contains(unitItemStack);
     }
 
@@ -53,7 +53,7 @@ public class PlayerKnowledge implements INBTTaggable
     public boolean learnItemStack(ItemStack itemStack)
     {
         ItemStack unitItemStack = itemStack.copy();
-        itemStack.stackSize = 1;
+        unitItemStack.stackSize = 1;
 
         if (!this.knownItemStacks.contains(unitItemStack))
         {
@@ -66,7 +66,7 @@ public class PlayerKnowledge implements INBTTaggable
     public boolean forgetItemStack(ItemStack itemStack)
     {
         ItemStack unitItemStack = itemStack.copy();
-        itemStack.stackSize = 1;
+        unitItemStack.stackSize = 1;
 
         if (this.knownItemStacks.contains(unitItemStack))
         {
@@ -122,5 +122,20 @@ public class PlayerKnowledge implements INBTTaggable
         playerKnowledge.readFromNBT(nbtTagCompound);
 
         return playerKnowledge;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("[");
+        for (ItemStack itemStack : knownItemStacks)
+        {
+            stringBuilder.append(ItemHelper.toString(itemStack) + ", ");
+        }
+        stringBuilder.append("]");
+
+        return stringBuilder.toString();
     }
 }

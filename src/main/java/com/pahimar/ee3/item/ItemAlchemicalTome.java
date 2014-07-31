@@ -1,5 +1,7 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.reference.GuiId;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.skill.PlayerKnowledge;
 import com.pahimar.ee3.util.IOwnable;
@@ -31,6 +33,8 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
         {
             // Set the owner
             ItemHelper.setOwner(itemStack, entityPlayer);
+
+            entityPlayer.openGui(EquivalentExchange3.instance, GuiId.ALCHEMICAL_TOME.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 
         return itemStack;

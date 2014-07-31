@@ -35,7 +35,6 @@ public class GuiGlassBell extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Textures.Gui.GLASS_BELL);
         int xStart = (width - xSize) / 2;

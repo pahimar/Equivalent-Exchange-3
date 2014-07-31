@@ -41,6 +41,7 @@ public final class Textures
         public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation.png");
         public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "augmentationTable.png");
         public static final ResourceLocation PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
+        public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalTome.png");
     }
 
     public static final class Effect

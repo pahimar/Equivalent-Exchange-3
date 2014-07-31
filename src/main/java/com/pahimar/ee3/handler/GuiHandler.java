@@ -27,6 +27,10 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerAlchemicalBag(entityPlayer, new InventoryAlchemicalBag(entityPlayer.getHeldItem()));
         }
+        else if (id == GuiId.ALCHEMICAL_TOME.ordinal())
+        {
+            return new ContainerAlchemicalTome(new InventoryAlchemicalTome(entityPlayer.getHeldItem()));
+        }
         else if (id == GuiId.CALCINATOR.ordinal())
         {
             TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) world.getTileEntity(x, y, z);
@@ -67,6 +71,10 @@ public class GuiHandler implements IGuiHandler
         else if (id == GuiId.ALCHEMICAL_BAG.ordinal())
         {
             return new GuiAlchemicalBag(entityPlayer, new InventoryAlchemicalBag(entityPlayer.getHeldItem()));
+        }
+        else if (id == GuiId.ALCHEMICAL_TOME.ordinal())
+        {
+            return new GuiAlchemicalTome(new InventoryAlchemicalTome(entityPlayer.getHeldItem()));
         }
         else if (id == GuiId.CALCINATOR.ordinal())
         {

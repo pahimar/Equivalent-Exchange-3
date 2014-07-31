@@ -12,6 +12,13 @@ import java.util.UUID;
 
 public class ItemHelper
 {
+    public static ItemStack cloneItemStack(ItemStack itemStack, int stackSize)
+    {
+        ItemStack clonedItemStack = itemStack.copy();
+        clonedItemStack.stackSize = stackSize;
+        return clonedItemStack;
+    }
+
     public static Comparator<ItemStack> comparator = new Comparator<ItemStack>()
     {
         public int compare(ItemStack itemStack1, ItemStack itemStack2)
@@ -86,6 +93,36 @@ public class ItemHelper
     public static boolean equals(ItemStack first, ItemStack second)
     {
         return (comparator.compare(first, second) == 0);
+    }
+
+    public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2)
+    {
+        if (itemStack1 != null && itemStack2 != null)
+        {
+            // Sort on itemID
+            if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
+            {
+                // Then sort on meta
+                if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                {
+                    // Then sort on NBT
+                    if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                    {
+                        // Then sort on stack size
+                        if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound()))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public static int compare(ItemStack itemStack1, ItemStack itemStack2)

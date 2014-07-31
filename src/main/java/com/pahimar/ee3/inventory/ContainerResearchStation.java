@@ -19,7 +19,14 @@ public class ContainerResearchStation extends ContainerEE
     {
         this.tileEntityResearchStation = tileEntityResearchStation;
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 35, 41));
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 35, 41)
+        {
+            @Override
+            public int getSlotStackLimit()
+            {
+                return 1;
+            }
+        });
         this.addSlotToContainer(new SlotResearchStation(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 125, 41));
 
         // Add the player's inventory slots to the container
