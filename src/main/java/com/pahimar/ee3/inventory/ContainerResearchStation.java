@@ -27,7 +27,19 @@ public class ContainerResearchStation extends ContainerEE
                 return 1;
             }
         });
-        this.addSlotToContainer(new SlotResearchStation(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 125, 41));
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 125, 41)
+        {
+            @Override
+            public boolean isItemValid(ItemStack itemStack)
+            {
+                if (itemStack != null)
+                {
+                    return itemStack.getItem() instanceof ItemAlchemicalTome;
+                }
+
+                return false;
+            }
+        });
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)

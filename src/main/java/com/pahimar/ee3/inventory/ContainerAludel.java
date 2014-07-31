@@ -2,6 +2,7 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +26,21 @@ public class ContainerAludel extends ContainerEE
         this.addSlotToContainer(new Slot(tileEntityAludel, TileEntityAludel.FUEL_INVENTORY_INDEX, 44, 74));
         this.addSlotToContainer(new Slot(tileEntityAludel, TileEntityAludel.INPUT_INVENTORY_INDEX, 44, 18));
         this.addSlotToContainer(new Slot(tileEntityAludel, TileEntityAludel.DUST_INVENTORY_INDEX, 44, 39));
-        this.addSlotToContainer(new SlotAludelOutput(tileEntityAludel, TileEntityAludel.OUTPUT_INVENTORY_INDEX, 120, 39));
+        this.addSlotToContainer(new Slot(tileEntityAludel, TileEntityAludel.OUTPUT_INVENTORY_INDEX, 120, 39)
+        {
+            @Override
+            public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+            {
+                super.onPickupFromSlot(entityPlayer, itemStack);
+                FMLCommonHandler.instance().firePlayerCraftingEvent(entityPlayer, itemStack, inventory);
+            }
+
+            @Override
+            public boolean isItemValid(ItemStack itemStack)
+            {
+                return false;
+            }
+        });
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
