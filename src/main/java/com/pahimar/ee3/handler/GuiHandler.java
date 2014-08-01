@@ -51,6 +51,11 @@ public class GuiHandler implements IGuiHandler
             TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
             return new ContainerAugmentationTable(entityPlayer.inventory, tileEntityAugmentationTable);
         }
+        else if (id == GuiId.TRANSMUTATION_SQUARE.ordinal())
+        {
+            TileEntityTransmutationSquare tileEntityTransmutationSquare = (TileEntityTransmutationSquare) world.getTileEntity(x, y, z);
+            return new ContainerTransmutationSquare(entityPlayer.inventory, tileEntityTransmutationSquare);
+        }
 
         return null;
     }
@@ -95,6 +100,11 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
             return new GuiAugmentationTable(entityPlayer.inventory, tileEntityAugmentationTable);
+        }
+        else if (id == GuiId.TRANSMUTATION_SQUARE.ordinal())
+        {
+            TileEntityTransmutationSquare tileEntityTransmutationSquare = (TileEntityTransmutationSquare) world.getTileEntity(x, y, z);
+            return new GuiTransmutationSquare(entityPlayer.inventory, tileEntityTransmutationSquare);
         }
 
         return null;

@@ -18,6 +18,7 @@ public class ModBlocks
     public static final BlockEE glassBell = new BlockGlassBell();
     public static final BlockEE researchStation = new BlockResearchStation();
     public static final BlockEE augmentationTable = new BlockAugmentationTable();
+    public static final BlockEE transmutationSquare = new BlockTransmutationSquare();
 
     public static void init()
     {
@@ -29,5 +30,6 @@ public class ModBlocks
         GameRegistry.registerBlock(alchemicalChest, ItemBlockAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST);
         GameRegistry.registerBlock(chalkBlock, Names.Blocks.CHALK);
         GameRegistry.registerBlock(alchemicalFuelBlock, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
+        GameRegistry.registerBlock(transmutationSquare, Names.Blocks.TRANSMUTATION_SQUARE);
     }
 }

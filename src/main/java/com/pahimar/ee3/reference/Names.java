@@ -12,6 +12,7 @@ public class Names
         public static final String CALCINATOR = "calcinator";
         public static final String RESEARCH_STATION = "researchStation";
         public static final String AUGMENTATION_TABLE = "augmentationTable";
+        public static final String TRANSMUTATION_SQUARE = "transmutationSquare";
     }
 
     public static final class Items
@@ -108,6 +109,7 @@ public class Names
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
         public static final String AUGMENTATION_TABLE = "container.ee3:" + Blocks.AUGMENTATION_TABLE;
         public static final String ALCHEMICAL_TOME = "container.ee3:" + Items.ALCHEMICAL_TOME;
+        public static final String TRANSMUTATION_SQUARE = "container.ee3:" + Blocks.TRANSMUTATION_SQUARE;
     }
 
     public static final class Keys
