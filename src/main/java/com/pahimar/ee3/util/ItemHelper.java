@@ -28,38 +28,46 @@ public class ItemHelper
                 // Sort on itemID
                 if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
                 {
-                    // Then sort on meta
-                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                    // Sort on item
+                    if (itemStack1.getItem() == itemStack2.getItem())
                     {
-                        // Then sort on NBT
-                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                        // Then sort on meta
+                        if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
                         {
-                            // Then sort on stack size
-                            if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound()))
+                            // Then sort on NBT
+                            if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
                             {
-                                return (itemStack1.stackSize - itemStack2.stackSize);
+                                // Then sort on stack size
+                                if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
+                                {
+                                    return (itemStack1.stackSize - itemStack2.stackSize);
+                                }
+                                else
+                                {
+                                    return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                                }
+                            }
+                            else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
+                            {
+                                return -1;
+                            }
+                            else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
+                            {
+                                return 1;
                             }
                             else
                             {
-                                return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                                return (itemStack1.stackSize - itemStack2.stackSize);
                             }
-                        }
-                        else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
-                        {
-                            return -1;
-                        }
-                        else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
-                        {
-                            return 1;
                         }
                         else
                         {
-                            return (itemStack1.stackSize - itemStack2.stackSize);
+                            return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
                         }
                     }
                     else
                     {
-                        return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+                        return itemStack1.getItem().getUnlocalizedName(itemStack1).compareToIgnoreCase(itemStack2.getItem().getUnlocalizedName(itemStack2));
                     }
                 }
                 else
@@ -102,21 +110,25 @@ public class ItemHelper
             // Sort on itemID
             if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
             {
-                // Then sort on meta
-                if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                // Sort on item
+                if (itemStack1.getItem() == itemStack2.getItem())
                 {
-                    // Then sort on NBT
-                    if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                    // Then sort on meta
+                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
                     {
-                        // Then sort on stack size
-                        if (itemStack1.getTagCompound().equals(itemStack2.getTagCompound()))
+                        // Then sort on NBT
+                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                        {
+                            // Then sort on stack size
+                            if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
+                            {
+                                return true;
+                            }
+                        }
+                        else
                         {
                             return true;
                         }
-                    }
-                    else
-                    {
-                        return true;
                     }
                 }
             }
