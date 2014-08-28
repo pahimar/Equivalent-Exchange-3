@@ -1,0 +1,108 @@
+# Configuration
+general.transmutation=Configurações de Transmutação
+general.transmutation.knowledge.mode.label=Modo de Sabedoria de Transmutação
+general.transmutation.knowledge.mode.comment=Tudo - O jogador pode aprender todos os itens com valor, Seleto - O jogador pode aprender itens seletos, Nível - O jogador pode aprender itens abaixo desse nível, Restrito - O jogador só pode aprender itens na lista de restritos, None - O jogador não pode aprender nenhum item
+
+general.transmutation.knowledge.maxTier.label=Maior Nível de Sabedoria Disponível
+general.transmutation.knowledge.maxTier.comment=O maior nível de sabedoria disponível pelo qual jogadores podem aprender transmutação.
+
+general.transmutation.knowledge.template.label=Usar Arquivo Modelo de Sabedoria
+general.transmutation.knowledge.template.comment=Se verdadeiro, novos jogadores vão ter sua sabedoria de transmutação copiada do arquivo modelo (template.ee3)
+
+general.sound.soundMode.label=Sons
+general.sound.soundMode.comment='Todos' toca sons de mods de todos os jogadores, 'Si' só toca sons de mod de você, e 'Nenhum' não toca sons de mod
+
+general.debug=Debug Settings
+general.debug.mode.label=Debug Mode Enabled
+general.debug.mode.comment=Toggles whether or not debug mode is enabled (Note: This is primarily for modders testing mod interaction with Equivalent Exchange 3)
+
+# Keys
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Charge
+key.extra=Extra
+key.release=Release
+key.toggle=Toggle
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
+# Items
+item.ee3:alchemicalBag.name=Alchemical Bag
+item.ee3:alchemicalDust.ash.name=Ash
+item.ee3:alchemicalDust.verdant.name=Verdant Dust
+item.ee3:alchemicalDust.azure.name=Azure Dust
+item.ee3:alchemicalDust.minium.name=Minium Dust
+item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemical Coal
+item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Fuel
+item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Fuel
+item.ee3:chalk.name=Chalk [WIP]
+item.ee3:diviningRod.name=Divining Rod [WIP]
+item.ee3:shardMinium.name=Shard of Minium
+item.ee3:stoneInert.name=Inert Stone
+item.ee3:stoneMinium.name=Minium Stone [WIP]
+item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade [WIP]
+item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade [WIP]
+item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade [WIP]
+item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge [WIP]
+item.ee3:guide.name=Guide To Alchemy [WIP]
+item.ee3:matterDark.name=Dark Matter [WIP]
+item.ee3:matterOmni.name=Omni Matter [WIP]
+item.ee3:matterCorporeal.name=Corporeal Matter [WIP]
+item.ee3:matterKinetic.name=Kinetic Matter [WIP]
+item.ee3:matterTemporal.name=Temporal Matter [WIP]
+item.ee3:matterEssentia.name=Essentia Matter [WIP]
+item.ee3:matterAmorphous.name=Amorphous Matter [WIP]
+item.ee3:matterVoid.name=Void Matter [WIP]
+item.ee3:gemBlack.name=Black Gem [WIP]
+item.ee3:gemBlue.name=Blue Gem [WIP]
+item.ee3:gemGreen.name=Green Gem [WIP]
+item.ee3:gemGrey.name=Grey Gem [WIP]
+item.ee3:gemPurple.name=Purple Gem [WIP]
+item.ee3:gemRed.name=Red Gem [WIP]
+item.ee3:gemYellow.name=Yellow Gem [WIP]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
+item.ee3:pickAxeDarkMatter.name=Dark Matter Pickaxe [WIP]
+item.ee3:hammerDarkMatter.name=Dark Matter Hammer [WIP]
+item.ee3:axeDarkMatter.name=Dark Matter Axe [WIP]
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe [WIP]
+item.ee3:fishingRodDarkMatter.name=Dark Matter Fishing Rod [WIP]
+item.ee3:shearsDarkMatter.name=Dark Matter Shears [WIP]
+
+# Weapons
+item.ee3:bowDarkMatter.name=Dark Matter Bow [WIP]
+item.ee3:arrowDarkMatter.name=Dark Matter Arrow [WIP]
+item.ee3:swordDarkMatter.name=Dark Matter Sword [WIP]
+
+# Blocks
+tile.ee3:alchemicalChest.name=Alchemical Chest
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
+tile.ee3:aludel.name=Aludel Base
+tile.ee3:calcinator.name=Calcinator
+tile.ee3:chalk.name=Chalk
+tile.ee3:glassBell.name=Glass Bell
+tile.ee3:researchStation.name=Research Station
+tile.ee3:augmentationTable.name=Augmentation Table [WIP]
+tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=Alchemical Bag
+container.ee3:alchemicalChest=Alchemical Chest
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinator
+container.ee3:glassBell=Glass Bell
+container.ee3:researchStation=Research Station
+container.ee3:augmentationTable=Augmentation Table [WIP]
+container.ee3:alchemicalTome=Tome of Alchemical Knowledge [WIP]
+container.ee3:transmutationSquare=Transmutation Square [WIP]
+
+# Tooltips
+tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
+tooltip.ee3:alchemicalChestPrefix.small=Small
+tooltip.ee3:alchemicalChestPrefix.medium=Medium
+tooltip.ee3:alchemicalChestPrefix.large=Large
+tooltip.ee3:none=None
