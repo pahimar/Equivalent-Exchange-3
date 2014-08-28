@@ -98,6 +98,14 @@ public class PlayerKnowledge implements INBTTaggable
                     knownItemStacks.add(itemStack);
                 }
             }
+            else
+            {
+                knownItemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
+            }
+        }
+        else
+        {
+            knownItemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
         }
     }
 

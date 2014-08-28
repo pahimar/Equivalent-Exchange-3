@@ -14,6 +14,7 @@ public class InventoryAlchemicalTome implements IInventory
 
     public InventoryAlchemicalTome(ItemStack itemStack)
     {
+        // TODO Handle case where there the NBTTagCompound of the ItemStack is invalid/uninitialized
         this(PlayerKnowledge.readPlayerKnowledgeFromNBT(itemStack.getTagCompound()));
     }
 
