@@ -5,14 +5,18 @@ import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.IEnergyValueProvider;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.EnergyValueHelper;
+import com.pahimar.ee3.util.INBTTaggable;
+import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
 
-public class EnergyValueRegistry
+public class EnergyValueRegistry implements INBTTaggable
 {
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
@@ -340,6 +344,18 @@ public class EnergyValueRegistry
 
     protected final void init()
     {
+        if (!SerializationHelper.energyValueRegistryFileExist())
+        {
+            runDynamicEnergyValueResolution();
+        }
+        else
+        {
+            SerializationHelper.readEnergyValueRegistryFromFile();
+        }
+    }
+
+    private void runDynamicEnergyValueResolution()
+    {
         HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
 
         /*
@@ -455,6 +471,9 @@ public class EnergyValueRegistry
         }
 
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+
+        // Serialize values to disk
+        SerializationHelper.writeEnergyValueRegistryToFile();
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()
@@ -571,5 +590,74 @@ public class EnergyValueRegistry
         }
 
         return "No Value Assigned";
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        if (nbtTagCompound != null && nbtTagCompound.hasKey("stackMappingList"))
+        {
+            HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+
+            /**
+             *  Read stack value mappings from NBTTagCompound
+             */
+            NBTTagList stackMappingTagList = nbtTagCompound.getTagList("stackMappingList", 10);
+            for (int i = 0; i < stackMappingTagList.tagCount(); i++)
+            {
+                NBTTagCompound tagCompound = stackMappingTagList.getCompoundTagAt(i);
+                WrappedStack wrappedStack = WrappedStack.fromNBTTagCompound(tagCompound.getCompoundTag("wrappedStack"));
+                EnergyValue energyValue = EnergyValue.loadEnergyValueFromNBT(tagCompound.getCompoundTag("energyValue"));
+                stackValueMap.put(wrappedStack, energyValue);
+            }
+
+            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+            stackMappingsBuilder.putAll(stackValueMap);
+            stackMappings = stackMappingsBuilder.build();
+
+            /**
+             *  Resolve value stack mappings from the newly loaded stack mappings
+             */
+            SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
+
+            for (WrappedStack stack : stackMappings.keySet())
+            {
+                if (stack != null)
+                {
+                    EnergyValue value = stackMappings.get(stack);
+
+                    if (value != null)
+                    {
+                        if (tempValueMappings.containsKey(value))
+                        {
+                            if (!(tempValueMappings.get(value).contains(stack)))
+                            {
+                                tempValueMappings.get(value).add(stack);
+                            }
+                        }
+                        else
+                        {
+                            tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                        }
+                    }
+                }
+            }
+
+            valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        NBTTagList stackMappingTagList = new NBTTagList();
+        for (WrappedStack wrappedStack : stackMappings.keySet())
+        {
+            NBTTagCompound stackMappingCompound = new NBTTagCompound();
+            stackMappingCompound.setTag("wrappedStack", WrappedStack.toNBTTagCompound(wrappedStack));
+            stackMappingCompound.setTag("energyValue", EnergyValue.writeEnergyValueToNBT(stackMappings.get(wrappedStack)));
+            stackMappingTagList.appendTag(stackMappingCompound);
+        }
+        nbtTagCompound.setTag("stackMappingList", stackMappingTagList);
     }
 }

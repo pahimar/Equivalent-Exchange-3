@@ -5,6 +5,7 @@ import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -272,7 +273,7 @@ public class WrappedStack implements Comparable<WrappedStack>
         }
         else if (object instanceof ItemStack)
         {
-            if (((ItemStack)object).getItem() != null)
+            if (((ItemStack) object).getItem() != null)
             {
                 return true;
             }
@@ -306,6 +307,74 @@ public class WrappedStack implements Comparable<WrappedStack>
     {
 
         this.stackSize = stackSize;
+    }
+
+    public static NBTTagCompound toNBTTagCompound(WrappedStack wrappedStack)
+    {
+        if (wrappedStack != null && wrappedStack.getWrappedStack() != null)
+        {
+            NBTTagCompound wrappedStackTagCompound = new NBTTagCompound();
+            if (wrappedStack.getWrappedStack() instanceof ItemStack)
+            {
+                NBTTagCompound wrappedItemTagCompound = new NBTTagCompound();
+                ((ItemStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedItemTagCompound);
+                wrappedStackTagCompound.setInteger("objectType", 0);
+                wrappedStackTagCompound.setTag("wrappedStack", wrappedItemTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
+                return wrappedStackTagCompound;
+            }
+            else if (wrappedStack.getWrappedStack() instanceof OreStack)
+            {
+                NBTTagCompound wrappedOreTagCompound = new NBTTagCompound();
+                ((OreStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedOreTagCompound);
+                wrappedStackTagCompound.setInteger("objectType", 1);
+                wrappedStackTagCompound.setTag("wrappedStack", wrappedOreTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
+                return wrappedStackTagCompound;
+            }
+            else if (wrappedStack.getWrappedStack() instanceof FluidStack)
+            {
+                NBTTagCompound wrappedFluidTagCompound = new NBTTagCompound();
+                ((FluidStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedFluidTagCompound);
+                wrappedStackTagCompound.setInteger("objectType", 2);
+                wrappedStackTagCompound.setTag("wrappedStack", wrappedFluidTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
+                return wrappedStackTagCompound;
+            }
+        }
+
+        return null;
+    }
+
+    public static WrappedStack fromNBTTagCompound(NBTTagCompound nbtTagCompound)
+    {
+        if (nbtTagCompound.hasKey("objectType") && nbtTagCompound.hasKey("wrappedStack") && nbtTagCompound.hasKey("stackSize"))
+        {
+            int objectType = nbtTagCompound.getInteger("objectType");
+            int stackSize = nbtTagCompound.getInteger("stackSize");
+
+            if (objectType == 0)
+            {
+                ItemStack itemStack = ItemStack.loadItemStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack"));
+                return new WrappedStack(itemStack, stackSize);
+            }
+            else if (objectType == 1)
+            {
+                OreStack oreStack = OreStack.loadOreStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack"));
+                return new WrappedStack(oreStack, stackSize);
+            }
+            else if (objectType == 2)
+            {
+                FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack"));
+                return new WrappedStack(fluidStack, stackSize);
+            }
+            else
+            {
+                return new WrappedStack();
+            }
+        }
+
+        return new WrappedStack();
     }
 
     /**

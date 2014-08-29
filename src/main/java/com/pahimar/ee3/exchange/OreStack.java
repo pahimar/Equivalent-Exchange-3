@@ -1,6 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
@@ -49,6 +50,10 @@ public class OreStack implements Comparable<OreStack>
             }
         }
     };
+
+    private OreStack()
+    {
+    }
 
     public OreStack(String oreName)
     {
@@ -115,6 +120,26 @@ public class OreStack implements Comparable<OreStack>
     public boolean equals(Object object)
     {
         return object instanceof OreStack && (comparator.compare(this, (OreStack) object) == 0);
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        nbtTagCompound.setString("oreName", oreName);
+        nbtTagCompound.setInteger("stackSize", stackSize);
+        return nbtTagCompound;
+    }
+
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        this.oreName = nbtTagCompound.getString("oreName");
+        this.stackSize = nbtTagCompound.getInteger("stackSize");
+    }
+
+    public static OreStack loadOreStackFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        OreStack oreStack = new OreStack();
+        oreStack.readFromNBT(nbtTagCompound);
+        return oreStack.oreName != null ? oreStack : null;
     }
 
     @Override

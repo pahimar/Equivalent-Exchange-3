@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 
 public class PlayerKnowledgeHelper
 {
-
-
     public static boolean canLearnItemStack(ItemStack itemStack, ItemStack alchemicalTomeStack)
     {
         if (itemStack == null || itemStack.getItem() == null || alchemicalTomeStack == null || !(alchemicalTomeStack.getItem() instanceof ItemAlchemicalTome))
