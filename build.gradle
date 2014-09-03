@@ -95,6 +95,36 @@ task createChangelog(type: ChangelogTask) {
 }
 
 tasks.build.dependsOn('createChangelog')
+tasks.build.dependsOn('signJar')
+
+if (!project.hasProperty("keystore_location")) // keystore stuff
+    ext.keystore_location = "."
+if (!project.hasProperty("keystore_password")) // keystore stuff
+    ext.keystore_password = ""
+if (!project.hasProperty("ee3_keystore_alias")) // keystore stuff
+    ext.ee3_keystore_alias = ""
+
+task signJar(dependsOn: "reobf") {
+    inputs.file jar.getArchivePath()
+    inputs.file keystore_location
+    inputs.property "ee3_keystore_alias", ee3_keystore_alias
+    inputs.property "keystore_password", keystore_password
+    outputs.file jar.getArchivePath()
+    // only sign if the keystore exists
+    onlyIf {
+        return keystore_location != "." && keystore_password != ""
+    }
+    // the actual action.. sign the jar.
+    doLast {
+        ant.signjar(
+                destDir: jar.destinationDir,
+                jar: jar.getArchivePath(),
+                keystore: keystore_location,
+                alias: ee3_keystore_alias,
+                storepass: keystore_password
+        )
+    }
+}
 
 uploadArchives {
     repositories {
