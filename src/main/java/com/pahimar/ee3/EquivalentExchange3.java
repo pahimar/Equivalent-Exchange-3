@@ -1,5 +1,6 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.command.CommandSetEnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.handler.CraftingHandler;
@@ -45,6 +46,12 @@ public class EquivalentExchange3
         {
             LogHelper.warn(Messages.INVALID_FINGERPRINT_MESSAGE);
         }
+    }
+
+    @EventHandler
+    public void onServerStarting(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new CommandSetEnergyValue());
     }
 
     @EventHandler
