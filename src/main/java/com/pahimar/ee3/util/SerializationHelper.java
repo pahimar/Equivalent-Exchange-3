@@ -40,6 +40,11 @@ public class SerializationHelper
 
     public static boolean energyValueRegistryFileExist()
     {
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
+        {
+            return false;
+        }
+
         File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
         if (!dataDirectory.exists())
         {
@@ -57,33 +62,36 @@ public class SerializationHelper
 
     public static void writeEnergyValueRegistryToFile()
     {
-        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-        if (!dataDirectory.exists())
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
         {
-            dataDirectory.mkdir();
-        }
-
-        NBTTagCompound energyValueRegistryNBT = new NBTTagCompound();
-        EnergyValueRegistry.getInstance().writeToNBT(energyValueRegistryNBT);
-
-        try
-        {
-            File file1 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3.tmp");
-            File file2 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
-            CompressedStreamTools.writeCompressed(energyValueRegistryNBT, new FileOutputStream(file1));
-
-            if (file2.exists())
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
+            if (!dataDirectory.exists())
             {
-                file2.delete();
+                dataDirectory.mkdir();
             }
 
-            file1.renameTo(file2);
+            NBTTagCompound energyValueRegistryNBT = new NBTTagCompound();
+            EnergyValueRegistry.getInstance().writeToNBT(energyValueRegistryNBT);
 
-            LogHelper.info("Successfully saved EnergyValues to file: " + file2.getAbsolutePath());
-        }
-        catch (Exception exception)
-        {
-            LogHelper.warn("Failed to save EnergyValueRegistry to file " + dataDirectory.getPath() + SerializationHelper.getModListMD5() + ".ee3");
+            try
+            {
+                File file1 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3.tmp");
+                File file2 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+                CompressedStreamTools.writeCompressed(energyValueRegistryNBT, new FileOutputStream(file1));
+
+                if (file2.exists())
+                {
+                    file2.delete();
+                }
+
+                file1.renameTo(file2);
+
+                LogHelper.info("Successfully saved EnergyValues to file: " + file2.getAbsolutePath());
+            }
+            catch (Exception exception)
+            {
+                LogHelper.warn("Failed to save EnergyValueRegistry to file " + dataDirectory.getPath() + SerializationHelper.getModListMD5() + ".ee3");
+            }
         }
     }
 
