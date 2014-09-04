@@ -14,14 +14,12 @@ import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.LogHelper;
+import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -94,6 +92,12 @@ public class EquivalentExchange3
     {
         RecipeRegistry.getInstance().registerVanillaRecipes();
         RecipesAludel.registerRecipes();
+    }
+
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event)
+    {
+        SerializationHelper.writeEnergyValueRegistryToFile();
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

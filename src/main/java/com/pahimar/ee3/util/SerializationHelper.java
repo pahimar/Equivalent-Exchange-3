@@ -78,6 +78,8 @@ public class SerializationHelper
             }
 
             file1.renameTo(file2);
+
+            LogHelper.info("Successfully saved EnergyValues to file: " + file2.getAbsolutePath());
         }
         catch (Exception exception)
         {

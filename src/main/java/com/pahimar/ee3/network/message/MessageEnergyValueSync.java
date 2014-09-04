@@ -99,11 +99,11 @@ public class MessageEnergyValueSync implements IMessage, IMessageHandler<Message
         if (message.energyValueRegistryNBT != null)
         {
             EnergyValueRegistry.getInstance().readFromNBT(message.energyValueRegistryNBT);
-            LogHelper.info("Successfully received EnergyValues from server");
+            LogHelper.info("Client successfully received EnergyValues from server");
         }
         else
         {
-            LogHelper.info("Failed to receive EnergyValues from server - falling back to local EnergyValues");
+            LogHelper.info("Client failed to receive EnergyValues from server - falling back to local EnergyValues");
         }
 
         return null;
