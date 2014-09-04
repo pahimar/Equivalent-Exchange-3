@@ -86,7 +86,7 @@ task createChangelog(type: ChangelogTask) {
         setAuthName(new DelayedString(project, project.jenkins_user))
         setAuthPassword(new DelayedString(project, project.jenkins_password))
         setTargetBuild({ buildNumber.toString() });
-        setOutput(new DelayedFile(project, 'build/libs/' + project.getName() + '-' + project.version + '-changelog.txt'));
+        setOutput(new DelayedFile(project, 'build/libs/' + project.archivesBaseName + '-' + project.version + '-changelog.txt'));
     }
 
     onlyIf {
