@@ -653,10 +653,12 @@ public class EnergyValueRegistry implements INBTTaggable
         NBTTagList stackMappingTagList = new NBTTagList();
         for (WrappedStack wrappedStack : stackMappings.keySet())
         {
-            NBTTagCompound stackMappingCompound = new NBTTagCompound();
-            stackMappingCompound.setTag("wrappedStack", WrappedStack.toNBTTagCompound(wrappedStack));
-            stackMappingCompound.setTag("energyValue", EnergyValue.writeEnergyValueToNBT(stackMappings.get(wrappedStack)));
-            stackMappingTagList.appendTag(stackMappingCompound);
+            if (wrappedStack != null && stackMappings.get(wrappedStack) != null) {
+                NBTTagCompound stackMappingCompound = new NBTTagCompound();
+                stackMappingCompound.setTag("wrappedStack", WrappedStack.toNBTTagCompound(wrappedStack));
+                stackMappingCompound.setTag("energyValue", EnergyValue.writeEnergyValueToNBT(stackMappings.get(wrappedStack)));
+                stackMappingTagList.appendTag(stackMappingCompound);
+            }
         }
         nbtTagCompound.setTag("stackMappingList", stackMappingTagList);
     }
