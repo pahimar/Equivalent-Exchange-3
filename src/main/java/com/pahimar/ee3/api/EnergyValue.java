@@ -12,6 +12,11 @@ public final class EnergyValue implements Comparable<EnergyValue>
         this((float) energyValue);
     }
 
+    public EnergyValue(double energyValue)
+    {
+        this((float) energyValue);
+    }
+
     public EnergyValue(float energyValue)
     {
         this(energyValue, EnergyType.DEFAULT);

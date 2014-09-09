@@ -5,8 +5,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
 
-public class EntityPlayerHelper
+public class PlayerHelper
 {
+    public static boolean isPlayerOp(EntityPlayer entityPlayer)
+    {
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
+        {
+            return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g((entityPlayer).getGameProfile());
+        }
+
+        return false;
+    }
+
     public static boolean isFakePlayer(EntityPlayer entityPlayer)
     {
         if (entityPlayer instanceof FakePlayer)
