@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
@@ -62,9 +61,9 @@ public class CommandSetEnergyValue extends CommandEE
 
                     itemStack.setTagCompound((NBTTagCompound) nbtBase);
                 }
-                catch (NBTException nbtexception)
+                catch (Exception exception)
                 {
-                    func_152373_a(commandSender, this, "command.ee3.set-energy-value.tagError", new Object[]{nbtexception.getMessage()});
+                    func_152373_a(commandSender, this, "command.ee3.set-energy-value.tagError", new Object[]{exception.getMessage()});
                     return;
                 }
             }
