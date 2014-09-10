@@ -653,7 +653,8 @@ public class EnergyValueRegistry implements INBTTaggable
         NBTTagList stackMappingTagList = new NBTTagList();
         for (WrappedStack wrappedStack : stackMappings.keySet())
         {
-            if (wrappedStack != null && stackMappings.get(wrappedStack) != null) {
+            if (wrappedStack != null && stackMappings.get(wrappedStack) != null)
+            {
                 NBTTagCompound stackMappingCompound = new NBTTagCompound();
                 stackMappingCompound.setTag("wrappedStack", WrappedStack.toNBTTagCompound(wrappedStack));
                 stackMappingCompound.setTag("energyValue", EnergyValue.writeEnergyValueToNBT(stackMappings.get(wrappedStack)));
@@ -661,5 +662,50 @@ public class EnergyValueRegistry implements INBTTaggable
             }
         }
         nbtTagCompound.setTag("stackMappingList", stackMappingTagList);
+    }
+
+    public void setEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue)
+    {
+        HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+
+        /**
+         *  Read stack value mappings from NBTTagCompound
+         */
+        stackValueMap.putAll(stackMappings);
+        stackValueMap.put(wrappedStack, energyValue);
+
+        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        stackMappingsBuilder.putAll(stackValueMap);
+        stackMappings = stackMappingsBuilder.build();
+
+        /**
+         *  Resolve value stack mappings from the newly loaded stack mappings
+         */
+        SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
+
+        for (WrappedStack stack : stackMappings.keySet())
+        {
+            if (stack != null)
+            {
+                EnergyValue value = stackMappings.get(stack);
+
+                if (value != null)
+                {
+                    if (tempValueMappings.containsKey(value))
+                    {
+                        if (!(tempValueMappings.get(value).contains(stack)))
+                        {
+                            tempValueMappings.get(value).add(stack);
+                        }
+                    }
+                    else
+                    {
+                        tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                    }
+                }
+            }
+        }
+
+        valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
 }

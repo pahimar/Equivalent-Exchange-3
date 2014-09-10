@@ -1,5 +1,8 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -67,6 +70,8 @@ public class CommandSetEnergyValue extends CommandEE
                     return;
                 }
             }
+
+            EnergyValueRegistry.getInstance().setEnergyValue(new WrappedStack(itemStack), new EnergyValue(energyValue));
         }
     }
 
