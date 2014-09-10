@@ -9,8 +9,7 @@ import java.util.List;
 
 public class CommandEE extends CommandBase
 {
-    private static final CommandSetEnergyValue COMMAND_SET_ENERGY_VALUE = new CommandSetEnergyValue();
-    private static final CommandSyncEnergyValues COMMAND_SYNC_ENERGY_VALUES = new CommandSyncEnergyValues();
+    private static final CommandEE[] COMMANDS = {new CommandSetEnergyValue(), new CommandSyncEnergyValues()};
 
     @Override
     public String getCommandName()
@@ -29,18 +28,16 @@ public class CommandEE extends CommandBase
     {
         if (args.length > 0)
         {
-            if (args[0].equalsIgnoreCase(COMMAND_SET_ENERGY_VALUE.getCommandName()))
+            for (CommandEE command : COMMANDS)
             {
-                COMMAND_SET_ENERGY_VALUE.processCommand(commandSender, args);
+                if (args[0].equalsIgnoreCase(command.getCommandName()))
+                {
+                    command.processCommand(commandSender, args);
+                    return;
+                }
             }
-            else if (args[0].equalsIgnoreCase(COMMAND_SYNC_ENERGY_VALUES.getCommandName()))
-            {
-                COMMAND_SYNC_ENERGY_VALUES.processCommand(commandSender, args);
-            }
-            else
-            {
-                throw new WrongUsageException("command.ee3.usage");
-            }
+
+            throw new WrongUsageException("command.ee3.usage");
         }
         else
         {
@@ -56,22 +53,26 @@ public class CommandEE extends CommandBase
         {
             if (args.length == 1)
             {
-                return getListOfStringsMatchingLastWord(args, COMMAND_SET_ENERGY_VALUE.getCommandName(), COMMAND_SYNC_ENERGY_VALUES.getCommandName());
+                String[] commands = new String[COMMANDS.length];
+
+                for (int i = 0; i < COMMANDS.length; i++)
+                {
+                    commands[i] = COMMANDS[i].getCommandName();
+                }
+
+                return getListOfStringsMatchingLastWord(args, commands);
             }
             else if (args.length == 2)
             {
-                if (args[0].equalsIgnoreCase(COMMAND_SET_ENERGY_VALUE.getCommandName()))
+                for (CommandEE command : COMMANDS)
                 {
-                    return COMMAND_SET_ENERGY_VALUE.addTabCompletionOptions(commandSender, args);
+                    if (args[0].equalsIgnoreCase(command.getCommandName()))
+                    {
+                        return command.addTabCompletionOptions(commandSender, args);
+                    }
                 }
-                else if (args[0].equalsIgnoreCase(COMMAND_SYNC_ENERGY_VALUES.getCommandName()))
-                {
-                    return COMMAND_SYNC_ENERGY_VALUES.addTabCompletionOptions(commandSender, args);
-                }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 
