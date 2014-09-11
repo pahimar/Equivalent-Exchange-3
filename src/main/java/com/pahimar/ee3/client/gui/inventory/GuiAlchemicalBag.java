@@ -26,20 +26,22 @@ public class GuiAlchemicalBag extends GuiContainer
         this.parentItemStack = inventoryAlchemicalBag.parentItemStack;
         this.inventoryAlchemicalBag = inventoryAlchemicalBag;
 
-        if (this.parentItemStack.getItemDamage() == 0)
-        {
-            xSize = 230;
-            ySize = 186;
-        }
-        else if (this.parentItemStack.getItemDamage() == 1)
-        {
-            xSize = 230;
-            ySize = 240;
-        }
-        else if (this.parentItemStack.getItemDamage() == 2)
-        {
-            xSize = 248;
-            ySize = 256;
+        switch(this.parentItemStack.getItemDamage()) {
+            case (0)
+            {
+                xSize = 230;
+                ySize = 186;
+            }
+            case: (1)
+            {
+                xSize = 230;
+                ySize = 240;
+            }
+            case: (2)
+            {
+                xSize = 248;
+                ySize = 256;
+            }
         }
     }
 
@@ -58,17 +60,11 @@ public class GuiAlchemicalBag extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if (this.parentItemStack.getItemDamage() == 0)
+        switch(this.parentItemStack.getItemDamage())
         {
-            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_SMALL);
-        }
-        else if (this.parentItemStack.getItemDamage() == 1)
-        {
-            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_MEDIUM);
-        }
-        else if (this.parentItemStack.getItemDamage() == 2)
-        {
-            this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_LARGE);
+            case (0): this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_SMALL);
+            case (1): this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_MEDIUM);
+            case (2): this.mc.getTextureManager().bindTexture(Textures.Gui.ALCHEMICAL_BAG_LARGE);
         }
 
         int xStart = (width - xSize) / 2;
@@ -85,12 +81,8 @@ public class GuiAlchemicalBag extends GuiContainer
         {
             for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory)
             {
-                if (itemStack != null)
-                {
-                    if (NBTHelper.hasTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
-                    {
-                        NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
-                    }
+                if (itemStack != null && NBTHelper.hasTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
+                    NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
                 }
             }
         }
