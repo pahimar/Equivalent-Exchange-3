@@ -2,7 +2,7 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.network.PacketHandler;
-import com.pahimar.ee3.network.message.MessageEnergyValueSync;
+import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -55,6 +55,6 @@ public class PlayerEventHandler
     @SubscribeEvent
     public void onPlayerLoggedInEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
     {
-        PacketHandler.INSTANCE.sendTo(new MessageEnergyValueSync(EnergyValueRegistry.getInstance()), (EntityPlayerMP) event.player);
+        PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(EnergyValueRegistry.getInstance()), (EntityPlayerMP) event.player);
     }
 }

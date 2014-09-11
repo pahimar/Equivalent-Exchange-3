@@ -3,6 +3,8 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -14,22 +16,20 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
 
-public class CommandSetEnergyValue extends CommandEE
+public class CommandSetValue extends CommandEE
 {
     @Override
     public String getCommandName()
     {
-        return "set-energy-value";
+        return "set-value";
     }
 
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        LogHelper.info(args.length);
-
         if (args.length < 3)
         {
-            throw new WrongUsageException("command.ee3.set-energy-value.usage");
+            throw new WrongUsageException("command.ee3.set-value.usage");
         }
         else
         {
@@ -58,7 +58,7 @@ public class CommandSetEnergyValue extends CommandEE
 
                     if (!(nbtBase instanceof NBTTagCompound))
                     {
-                        func_152373_a(commandSender, this, "command.ee3.set-energy-value.tagError", new Object[]{"Not a valid tag"});
+                        func_152373_a(commandSender, this, "command.ee3.set-value.tagError", new Object[]{"Not a valid tag"});
                         return;
                     }
 
@@ -66,12 +66,25 @@ public class CommandSetEnergyValue extends CommandEE
                 }
                 catch (Exception exception)
                 {
-                    func_152373_a(commandSender, this, "command.ee3.set-energy-value.tagError", new Object[]{exception.getMessage()});
+                    func_152373_a(commandSender, this, "command.ee3.set-value.tagError", new Object[]{exception.getMessage()});
                     return;
                 }
             }
 
-            EnergyValueRegistry.getInstance().setEnergyValue(new WrappedStack(itemStack), new EnergyValue(energyValue));
+            WrappedStack wrappedStack = new WrappedStack(itemStack);
+            EnergyValue newEnergyValue = new EnergyValue(energyValue);
+
+            if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getEnergyValue(), 0) > 0)
+            {
+                LogHelper.info(String.format("%s set the EnergyValue of %s to %s", commandSender.getCommandSenderName(), wrappedStack, newEnergyValue));
+                EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                PacketHandler.INSTANCE.sendToAll(new MessageSyncEnergyValues(EnergyValueRegistry.getInstance())); //TODO Get MessageSetEnergyValue working so we are only setting new values and not unchanged ones
+                func_152373_a(commandSender, this, "command.ee3.set-value.success", new Object[]{commandSender.getCommandSenderName(), wrappedStack.toString(), newEnergyValue.toString()});
+            }
+            else
+            {
+                throw new WrongUsageException("command.ee3.set-value.usage");
+            }
         }
     }
 

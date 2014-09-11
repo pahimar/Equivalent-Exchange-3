@@ -101,12 +101,13 @@ container.ee3:alchemicalTome=Tome of Alchemical Knowledge [WIP]
 container.ee3:transmutationSquare=Transmutation Square [WIP]
 
 # Commands
-command.ee3.usage=/ee3 <set-energy-value|sync-energy-values>
-command.ee3.set-energy-value.usage=/ee3 set-energy-value <item> <value> [data] [dataTag]
-command.ee3.set-energy-value.tagError=Data tag parsing failed: %s
-command.ee3.sync-energy-values.usage=/ee3 sync-energy-values <self|all>
-command.ee3.sync-energy-values.self.success=Successfully synchronized EnergyValues with the server
-command.ee3.sync-energy-values.all.success=%s synchronized all EnergyValues with all players on the server
+command.ee3.usage=/ee3 <set-value|sync-values>
+command.ee3.set-value.usage=/ee3 set-value <item> <value> [data] [dataTag]
+command.ee3.set-value.success=%s set the EnergyValue of %s to %s
+command.ee3.set-value.tagError=Data tag parsing failed: %s
+command.ee3.sync-values.usage=/ee3 sync-values <self|all>
+command.ee3.sync-values.self.success=Successfully synchronized EnergyValues with the server
+command.ee3.sync-values.all.success=%s synchronized all EnergyValues with all players on the server
 
 # Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests

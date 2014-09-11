@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommandEE extends CommandBase
 {
-    private static final CommandEE[] COMMANDS = {new CommandSetEnergyValue(), new CommandSyncEnergyValues()};
+    private static final CommandEE[] COMMANDS = {new CommandSetValue(), new CommandSyncValues()};
 
     @Override
     public String getCommandName()

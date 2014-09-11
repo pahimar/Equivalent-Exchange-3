@@ -666,46 +666,49 @@ public class EnergyValueRegistry implements INBTTaggable
 
     public void setEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue)
     {
-        HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
-
-        /**
-         *  Read stack value mappings from NBTTagCompound
-         */
-        stackValueMap.putAll(stackMappings);
-        stackValueMap.put(wrappedStack, energyValue);
-
-        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackValueMap);
-        stackMappings = stackMappingsBuilder.build();
-
-        /**
-         *  Resolve value stack mappings from the newly loaded stack mappings
-         */
-        SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
-
-        for (WrappedStack stack : stackMappings.keySet())
+        if (wrappedStack != null && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
         {
-            if (stack != null)
-            {
-                EnergyValue value = stackMappings.get(stack);
+            HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
 
-                if (value != null)
+            /**
+             *  Read stack value mappings from NBTTagCompound
+             */
+            stackValueMap.putAll(stackMappings);
+            stackValueMap.put(wrappedStack, energyValue);
+
+            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+            stackMappingsBuilder.putAll(stackValueMap);
+            stackMappings = stackMappingsBuilder.build();
+
+            /**
+             *  Resolve value stack mappings from the newly loaded stack mappings
+             */
+            SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
+
+            for (WrappedStack stack : stackMappings.keySet())
+            {
+                if (stack != null)
                 {
-                    if (tempValueMappings.containsKey(value))
+                    EnergyValue value = stackMappings.get(stack);
+
+                    if (value != null)
                     {
-                        if (!(tempValueMappings.get(value).contains(stack)))
+                        if (tempValueMappings.containsKey(value))
                         {
-                            tempValueMappings.get(value).add(stack);
+                            if (!(tempValueMappings.get(value).contains(stack)))
+                            {
+                                tempValueMappings.get(value).add(stack);
+                            }
                         }
-                    }
-                    else
-                    {
-                        tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                        else
+                        {
+                            tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
+                        }
                     }
                 }
             }
-        }
 
-        valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+            valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+        }
     }
 }

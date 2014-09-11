@@ -12,15 +12,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class MessageEnergyValueSync implements IMessage, IMessageHandler<MessageEnergyValueSync, IMessage>
+public class MessageSyncEnergyValues implements IMessage, IMessageHandler<MessageSyncEnergyValues, IMessage>
 {
     public NBTTagCompound energyValueRegistryNBT;
 
-    public MessageEnergyValueSync()
+    public MessageSyncEnergyValues()
     {
     }
 
-    public MessageEnergyValueSync(EnergyValueRegistry energyValueRegistry)
+    public MessageSyncEnergyValues(EnergyValueRegistry energyValueRegistry)
     {
         energyValueRegistryNBT = new NBTTagCompound();
         energyValueRegistry.writeToNBT(energyValueRegistryNBT);
@@ -94,7 +94,7 @@ public class MessageEnergyValueSync implements IMessage, IMessageHandler<Message
      * @return an optional return message
      */
     @Override
-    public IMessage onMessage(MessageEnergyValueSync message, MessageContext ctx)
+    public IMessage onMessage(MessageSyncEnergyValues message, MessageContext ctx)
     {
         if (message.energyValueRegistryNBT != null)
         {
