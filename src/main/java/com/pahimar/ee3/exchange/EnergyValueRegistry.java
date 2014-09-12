@@ -363,6 +363,10 @@ public class EnergyValueRegistry implements INBTTaggable
          */
         stackValueMap.putAll(preAssignedMappings);
 
+        // Grab custom pre-assigned values from file
+        Map<WrappedStack, EnergyValue> preAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile("preAssignedValues.json");
+        stackValueMap.putAll(preAssignedValueMap);
+
         /*
          *  Auto-assignment
          */
@@ -433,6 +437,10 @@ public class EnergyValueRegistry implements INBTTaggable
         {
             postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
         }
+
+        // Grab custom post-assigned values from file
+        Map<WrappedStack, EnergyValue> postAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile("postAssignedValues.json");
+        stackValueMap.putAll(postAssignedValueMap);
 
         /**
          * Finalize the stack to value map
