@@ -29,7 +29,7 @@ public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, 
     @Override
     public boolean func_150897_b(Block block)
     {
-        return block == Blocks.snow_layer ? true : block == Blocks.snow;
+        return block == Blocks.snow_layer || block == Blocks.snow;
     }
 
     @Override

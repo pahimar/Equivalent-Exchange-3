@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.IEnergyValueProvider;
 import com.pahimar.ee3.recipe.RecipeRegistry;
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -364,7 +365,7 @@ public class EnergyValueRegistry implements INBTTaggable
         stackValueMap.putAll(preAssignedMappings);
 
         // Grab custom pre-assigned values from file
-        Map<WrappedStack, EnergyValue> preAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile("preAssignedValues.json");
+        Map<WrappedStack, EnergyValue> preAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES);
         stackValueMap.putAll(preAssignedValueMap);
 
         /*
@@ -439,7 +440,7 @@ public class EnergyValueRegistry implements INBTTaggable
         }
 
         // Grab custom post-assigned values from file
-        Map<WrappedStack, EnergyValue> postAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile("postAssignedValues.json");
+        Map<WrappedStack, EnergyValue> postAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_ASSIGNED_ENERGY_VALUES);
         stackValueMap.putAll(postAssignedValueMap);
 
         /**

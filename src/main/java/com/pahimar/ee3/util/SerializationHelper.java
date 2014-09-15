@@ -185,9 +185,7 @@ public class SerializationHelper
         if (FMLCommonHandler.instance().getMinecraftServerInstance() != null && FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld() != null)
         {
             File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            File dataFile = new File(dataDirectory, fileName);
-
-            return dataFile;
+            return new File(dataDirectory, fileName);
         }
 
         return null;

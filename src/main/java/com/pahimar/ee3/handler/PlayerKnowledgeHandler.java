@@ -103,12 +103,6 @@ public class PlayerKnowledgeHandler
                 {
                     e.printStackTrace();
                 }
-                finally
-                {
-                    NBTTagCompound nbtTagCompound = new NBTTagCompound();
-                    new PlayerKnowledge().writeToNBT(nbtTagCompound);
-                    return nbtTagCompound;
-                }
             }
             else
             {

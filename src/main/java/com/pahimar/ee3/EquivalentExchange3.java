@@ -1,6 +1,7 @@
 package com.pahimar.ee3;
 
-import com.pahimar.ee3.command.CommandEE;
+import com.pahimar.ee3.command.CommandSetValue;
+import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.handler.CraftingHandler;
@@ -51,7 +52,8 @@ public class EquivalentExchange3
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event)
     {
-        event.registerServerCommand(new CommandEE());
+        event.registerServerCommand(new CommandSetValue());
+        event.registerServerCommand(new CommandSyncValues());
     }
 
     @EventHandler

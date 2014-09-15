@@ -140,7 +140,7 @@ public class PlayerKnowledge implements INBTTaggable
         stringBuilder.append("[");
         for (ItemStack itemStack : knownItemStacks)
         {
-            stringBuilder.append(ItemHelper.toString(itemStack) + ", ");
+            stringBuilder.append(String.format("%s, ", ItemHelper.toString(itemStack)));
         }
         stringBuilder.append("]");
 
