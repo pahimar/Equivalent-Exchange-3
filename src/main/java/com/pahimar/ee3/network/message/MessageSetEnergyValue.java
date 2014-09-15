@@ -52,7 +52,7 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
             try
             {
                 this.wrappedStack = WrappedStack.fromNBTTagCompound(CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedWrappedStack)));
-                this.energyValue = EnergyValue.loadEnergyValueFromNBT(CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedWrappedStack)));
+                this.energyValue = EnergyValue.loadEnergyValueFromNBT(CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedEnergyValue)));
             }
             catch (IOException e)
             {
