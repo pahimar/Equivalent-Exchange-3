@@ -88,10 +88,10 @@ public class CommandSetValue extends CommandBase
             {
                 if (args[0].equalsIgnoreCase("pre"))
                 {
-                    // TODO Mark that the server needs to regen values on next startup
                     Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES);
                     preAssignedValues.put(wrappedStack, newEnergyValue);
                     SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES, preAssignedValues);
+                    EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
                 }
                 else if (args[0].equalsIgnoreCase("post"))
                 {

@@ -19,6 +19,7 @@ import java.util.*;
 
 public class EnergyValueRegistry implements INBTTaggable
 {
+    private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
     private static Map<WrappedStack, EnergyValue> postAssignedMappings;
@@ -345,14 +346,26 @@ public class EnergyValueRegistry implements INBTTaggable
 
     protected final void init()
     {
-        if (!SerializationHelper.energyValueRegistryFileExist())
+        String fileName = SerializationHelper.getModListMD5() + ".ee3";
+
+        if (!SerializationHelper.dataFileExist(fileName))
         {
             runDynamicEnergyValueResolution();
         }
         else
         {
-            SerializationHelper.readEnergyValueRegistryFromFile();
+            NBTTagCompound nbtEnergyValueRegistry = SerializationHelper.readEnergyValueRegistryFromFile(fileName);
+            if (nbtEnergyValueRegistry != null)
+            {
+                energyValueRegistry.readFromNBT(nbtEnergyValueRegistry);
+            }
+            else
+            {
+                runDynamicEnergyValueResolution();
+            }
         }
+
+        this.shouldRegenNextRestart = false;
     }
 
     private void runDynamicEnergyValueResolution()
@@ -482,7 +495,7 @@ public class EnergyValueRegistry implements INBTTaggable
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
 
         // Serialize values to disk
-        SerializationHelper.writeEnergyValueRegistryToFile();
+        SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + ".ee3");
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()
@@ -719,5 +732,15 @@ public class EnergyValueRegistry implements INBTTaggable
 
             valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
         }
+    }
+
+    public boolean getShouldRegenNextRestart()
+    {
+        return shouldRegenNextRestart;
+    }
+
+    public void setShouldRegenNextRestart(boolean shouldRegenNextRestart)
+    {
+        this.shouldRegenNextRestart = shouldRegenNextRestart;
     }
 }

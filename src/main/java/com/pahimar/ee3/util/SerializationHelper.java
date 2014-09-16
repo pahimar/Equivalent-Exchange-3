@@ -42,7 +42,7 @@ public class SerializationHelper
         return DigestUtils.md5Hex(modListString.toString());
     }
 
-    public static boolean energyValueRegistryFileExist()
+    public static boolean dataFileExist(String fileName)
     {
         if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
         {
@@ -59,12 +59,12 @@ public class SerializationHelper
             return false;
         }
 
-        File file = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+        File file = new File(dataDirectory, fileName);
 
         return file.exists() && file.isFile();
     }
 
-    public static void writeEnergyValueRegistryToFile()
+    public static void writeEnergyValueRegistryToFile(String fileName)
     {
         if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
         {
@@ -79,8 +79,8 @@ public class SerializationHelper
 
             try
             {
-                File file1 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3.tmp");
-                File file2 = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+                File file1 = new File(dataDirectory, fileName + ".tmp");
+                File file2 = new File(dataDirectory, fileName);
                 CompressedStreamTools.writeCompressed(energyValueRegistryNBT, new FileOutputStream(file1));
 
                 if (file2.exists())
@@ -90,7 +90,7 @@ public class SerializationHelper
 
                 file1.renameTo(file2);
 
-                LogHelper.info("Successfully saved EnergyValues to file: " + file2.getAbsolutePath());
+                LogHelper.info("Successfully saved EnergyValueRegistry to file: " + file2.getPath());
             }
             catch (Exception exception)
             {
@@ -99,22 +99,24 @@ public class SerializationHelper
         }
     }
 
-    public static void readEnergyValueRegistryFromFile()
+    public static NBTTagCompound readEnergyValueRegistryFromFile(String fileName)
     {
-        if (energyValueRegistryFileExist())
+        if (dataFileExist(fileName))
         {
             File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+            File energyValueRegistryFile = new File(dataDirectory, fileName);
 
             try
             {
-                EnergyValueRegistry.getInstance().readFromNBT(CompressedStreamTools.readCompressed(new FileInputStream(energyValueRegistryFile)));
+                return CompressedStreamTools.readCompressed(new FileInputStream(energyValueRegistryFile));
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
+
+        return null;
     }
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(String fileName)
@@ -141,8 +143,6 @@ public class SerializationHelper
         }
         catch (FileNotFoundException e)
         {
-            // TODO More intelligent log message
-            e.printStackTrace();
         }
         catch (IOException e)
         {

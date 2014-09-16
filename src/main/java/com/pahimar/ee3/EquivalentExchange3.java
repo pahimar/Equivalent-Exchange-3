@@ -3,10 +3,7 @@ package com.pahimar.ee3;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.handler.ConfigurationHandler;
-import com.pahimar.ee3.handler.CraftingHandler;
-import com.pahimar.ee3.handler.FuelHandler;
-import com.pahimar.ee3.handler.GuiHandler;
+import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
@@ -17,6 +14,7 @@ import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,6 +22,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class EquivalentExchange3
@@ -37,8 +37,6 @@ public class EquivalentExchange3
     @EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
     {
-        // Report (log) to the user that the version of Equivalent Exchange 3
-        // they are using has been changed/tampered with
         if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
         {
             LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
@@ -106,7 +104,22 @@ public class EquivalentExchange3
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event)
     {
-        SerializationHelper.writeEnergyValueRegistryToFile();
+        if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
+        {
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
+            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+
+            if (energyValueRegistryFile.exists())
+            {
+                energyValueRegistryFile.delete();
+            }
+        }
+        else
+        {
+            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + ".ee3");
+        }
+
+        WorldEventHandler.hasInitilialized = false;
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

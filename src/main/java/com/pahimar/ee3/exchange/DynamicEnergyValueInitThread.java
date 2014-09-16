@@ -16,10 +16,6 @@ public class DynamicEnergyValueInitThread implements Runnable
     {
         long startTime = System.currentTimeMillis();
         EnergyValueRegistry.getInstance().init();
-        long duration = System.currentTimeMillis() - startTime;
-        if (duration > 10)
-        {
-            LogHelper.info(String.format("DynamicEV system initialized after %s ms", duration));
-        }
+        LogHelper.info(String.format("DynamicEV system initialized after %s ms", System.currentTimeMillis() - startTime));
     }
 }

@@ -8,7 +8,7 @@ import net.minecraftforge.event.world.WorldEvent;
 
 public class WorldEventHandler
 {
-    private static boolean hasInitilialized = false;
+    public static boolean hasInitilialized = false;
 
     @SubscribeEvent
     public void onWorldLoadEvent(WorldEvent.Load event)
