@@ -1,5 +1,6 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
@@ -51,6 +52,7 @@ public class EquivalentExchange3
     public void onServerStarting(FMLServerStartingEvent event)
     {
         event.registerServerCommand(new CommandSetValue());
+        event.registerServerCommand(new CommandSetCurrentItemValue());
         event.registerServerCommand(new CommandSyncValues());
     }
 
