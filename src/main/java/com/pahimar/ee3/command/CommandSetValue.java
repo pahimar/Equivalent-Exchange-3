@@ -88,12 +88,10 @@ public class CommandSetValue extends CommandBase
             {
                 if (args[0].equalsIgnoreCase("pre"))
                 {
-                    // TODO When this is done, should we regen values immediately and sync all the values to everyone?
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                    // TODO Mark that the server needs to regen values on next startup
                     Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES);
                     preAssignedValues.put(wrappedStack, newEnergyValue);
                     SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES, preAssignedValues);
-                    PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
                 }
                 else if (args[0].equalsIgnoreCase("post"))
                 {
