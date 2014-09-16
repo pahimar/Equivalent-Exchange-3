@@ -3,6 +3,9 @@ general.transmutation=Transmutation Settings
 general.transmutation.knowledge.mode.label=Transmutation Knowledge Mode
 general.transmutation.knowledge.mode.comment=All - Player can learn all items that have a value, Select - Player can learn select items, Tier - Player can learn items below this tier level, Restricted - Player can only learn items listed in the restricted file, None - Player cannot learn any items
 
+general.sync.threshold.label=Sync Threshold
+general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
+
 general.transmutation.knowledge.maxTier.label=Highest Available Knowledge Tier
 general.transmutation.knowledge.maxTier.comment=The highest available knowledge tier for which players can learn transmutations
 

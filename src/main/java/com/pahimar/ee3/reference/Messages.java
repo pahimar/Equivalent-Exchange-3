@@ -17,6 +17,10 @@ public final class Messages
         public static final String DEBUG_MODE_LABEL = "general.debug.mode.label";
         public static final String DEBUG_MODE_COMMENT = "general.debug.mode.comment";
 
+        public static final String GENERAL_SYNC_THRESHOLD = "sync.threshold";
+        public static final String GENERAL_SYNC_THRESHOLD_LABEL = "general.sync.threshold.label";
+        public static final String GENERAL_SYNC_THRESHOLD_COMMENT = "general.sync.threshold.comment";
+
         public static final String CATEGORY_TRANSMUTATION = "general.transmutation";
 
         public static final String TRANSMUTATION_KNOWLEDGE_MODE = "knowledgeMode";

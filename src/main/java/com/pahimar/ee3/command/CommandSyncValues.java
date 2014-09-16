@@ -3,6 +3,7 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
+import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.PlayerHelper;
 import net.minecraft.command.CommandBase;
@@ -19,7 +20,6 @@ import java.util.UUID;
 
 public class CommandSyncValues extends CommandBase
 {
-    private static final long SYNC_THRESHOLD = 5000;
     private static Map<UUID, Long> requesterMap = new HashMap<UUID, Long>();
 
     @Override
@@ -57,13 +57,13 @@ public class CommandSyncValues extends CommandBase
                     if (requesterMap.containsKey(commandSenderUUID))
                     {
                         long timeDifference = System.currentTimeMillis() - requesterMap.get(commandSenderUUID).longValue();
-                        if (timeDifference >= SYNC_THRESHOLD)
+                        if (timeDifference >= (Settings.General.syncThreshold * 1000))
                         {
                             requesterMap.remove(commandSenderUUID);
                         }
                         else
                         {
-                            coolDown = SYNC_THRESHOLD - timeDifference;
+                            coolDown = (Settings.General.syncThreshold * 1000) - timeDifference;
                             shouldSync = false;
                         }
                     }

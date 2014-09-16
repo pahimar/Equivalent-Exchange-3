@@ -7,6 +7,11 @@ public class Settings
         public static boolean debugMode;
     }
 
+    public static class General
+    {
+        public static int syncThreshold;
+    }
+
     public static class Transmutation
     {
         public static String knowledgeMode;
