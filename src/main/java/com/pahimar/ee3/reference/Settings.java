@@ -2,11 +2,6 @@ package com.pahimar.ee3.reference;
 
 public class Settings
 {
-    public static class Debug
-    {
-        public static boolean debugMode;
-    }
-
     public static class General
     {
         public static int syncThreshold;

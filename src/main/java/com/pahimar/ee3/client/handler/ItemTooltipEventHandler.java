@@ -1,11 +1,8 @@
 package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.reference.Settings;
-import com.pahimar.ee3.skill.SkillRegistry;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -51,17 +48,6 @@ public class ItemTooltipEventHandler
             else
             {
                 event.toolTip.add("No Exchange Energy value");
-            }
-
-            if (Settings.Debug.debugMode)
-            {
-                event.toolTip.add("");
-                event.toolTip.add("[DEBUG INFORMATION]");
-                if (EnergyValueRegistry.getInstance().hasEnergyValue(stack))
-                {
-                    event.toolTip.add(String.format("Value was: %s", EnergyValueRegistryProxy.getStageValueWasAssigned(event.itemStack)));
-                }
-                event.toolTip.add(String.format("Can Learn: %s", SkillRegistry.canLearnItemStack(event.itemStack)));
             }
         }
 

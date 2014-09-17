@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-public class TileEntityAlchemySquare extends TileEntityEE
+public class TileEntityAlchemySymbol extends TileEntityEE
 {
     /**
      *  Shape (3 bits):

@@ -8,4 +8,5 @@ public class RenderIds
     public static int glassBell;
     public static int researchStation;
     public static int augmentationTable;
+    public static int alchemySymbol;
 }

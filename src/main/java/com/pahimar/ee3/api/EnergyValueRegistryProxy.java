@@ -115,19 +115,6 @@ public final class EnergyValueRegistryProxy
         return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
     }
 
-    public static String getStageValueWasAssigned(Object object)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return "";
-        }
-
-        return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStageValueWasAssigned(object);
-    }
-
     private static class EE3Wrapper
     {
         private static EquivalentExchange3 ee3mod;

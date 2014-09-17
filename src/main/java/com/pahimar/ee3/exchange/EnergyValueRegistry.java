@@ -591,29 +591,6 @@ public class EnergyValueRegistry implements INBTTaggable
         return stacksInRange;
     }
 
-    public String getStageValueWasAssigned(Object object)
-    {
-        if (WrappedStack.canBeWrapped(object))
-        {
-            WrappedStack wrappedStack = new WrappedStack(object);
-
-            if (preAssignedMappings.keySet().contains(wrappedStack))
-            {
-                return "Pre Assigned";
-            }
-            else if (postAssignedMappings.keySet().contains(wrappedStack))
-            {
-                return "Post Assigned";
-            }
-            else if (hasEnergyValue(object))
-            {
-                return "Computed";
-            }
-        }
-
-        return "No Value Assigned";
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
