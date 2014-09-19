@@ -52,7 +52,7 @@ public class ClientProxy extends CommonProxy
         RenderIds.glassBell = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.researchStation = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.augmentationTable = RenderingRegistry.getNextAvailableRenderId();
-        RenderIds.alchemySymbol = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.alchemyArray = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.alchemicalChest), new ItemRendererAlchemicalChest());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.aludel), new ItemRendererAludel());
@@ -67,5 +67,6 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlassBell.class, new TileEntityRendererGlassBell());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchStation.class, new TileEntityRendererResearchStation());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAugmentationTable.class, new TileEntityRendererAugmentationTable());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemyArray.class, new TileEntityRendererAlchemyArray());
     }
 }
