@@ -1,7 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.reference.GuiId;
+import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
@@ -57,7 +57,7 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
             {
                 if (world.getTileEntity(x, y, z) instanceof TileEntityResearchStation)
                 {
-                    player.openGui(EquivalentExchange3.instance, GuiId.RESEARCH_STATION.ordinal(), world, x, y, z);
+                    player.openGui(EquivalentExchange3.instance, GUIs.RESEARCH_STATION.ordinal(), world, x, y, z);
                 }
             }
 

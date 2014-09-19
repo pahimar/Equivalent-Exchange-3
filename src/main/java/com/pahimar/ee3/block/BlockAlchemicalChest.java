@@ -1,7 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.reference.GuiId;
+import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
@@ -86,7 +86,7 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
         {
             if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemicalChest)
             {
-                player.openGui(EquivalentExchange3.instance, GuiId.ALCHEMICAL_CHEST.ordinal(), world, x, y, z);
+                player.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_CHEST.ordinal(), world, x, y, z);
             }
 
             return true;

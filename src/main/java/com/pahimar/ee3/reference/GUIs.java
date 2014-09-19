@@ -1,6 +1,6 @@
 package com.pahimar.ee3.reference;
 
-public enum GuiId
+public enum GUIs
 {
     PORTABLE_CRAFTING,
     CALCINATOR,
@@ -11,5 +11,6 @@ public enum GuiId
     RESEARCH_STATION,
     AUGMENTATION_TABLE,
     ALCHEMICAL_TOME,
-    TRANSMUTATION_SQUARE
+    TRANSMUTATION_SQUARE,
+    SYMBOL_SELECTION
 }

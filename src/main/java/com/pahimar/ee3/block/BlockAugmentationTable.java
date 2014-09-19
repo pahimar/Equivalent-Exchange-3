@@ -1,7 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.reference.GuiId;
+import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAugmentationTable;
@@ -57,7 +57,7 @@ public class BlockAugmentationTable extends BlockEE implements ITileEntityProvid
             {
                 if (world.getTileEntity(x, y, z) instanceof TileEntityAugmentationTable)
                 {
-                    player.openGui(EquivalentExchange3.instance, GuiId.AUGMENTATION_TABLE.ordinal(), world, x, y, z);
+                    player.openGui(EquivalentExchange3.instance, GUIs.AUGMENTATION_TABLE.ordinal(), world, x, y, z);
                 }
             }
 
