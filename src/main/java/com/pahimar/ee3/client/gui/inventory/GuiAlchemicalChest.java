@@ -1,6 +1,7 @@
 package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
+import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
@@ -40,8 +41,8 @@ public class GuiAlchemicalChest extends GuiContainer
     {
         if (tileEntityAlchemicalChest.getState() == 0 || tileEntityAlchemicalChest.getState() == 1)
         {
-            fontRendererObj.drawString(StatCollector.translateToLocal(tileEntityAlchemicalChest.getInventoryName()), 8, 6, 4210752);
-            fontRendererObj.drawString(StatCollector.translateToLocal(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, 4210752);
+            fontRendererObj.drawString(StatCollector.translateToLocal(tileEntityAlchemicalChest.getInventoryName()), 8, 6, Integer.parseInt(Colors.PURE_WHITE, 16));
+            fontRendererObj.drawString(StatCollector.translateToLocal(Names.Containers.VANILLA_INVENTORY), 35, ySize - 95 + 2, Integer.parseInt(Colors.PURE_WHITE, 16));
         }
     }
 

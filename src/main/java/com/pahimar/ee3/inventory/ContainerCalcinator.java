@@ -22,14 +22,14 @@ public class ContainerCalcinator extends ContainerEE
         this.tileEntityCalcinator = tileEntityCalcinator;
 
         // Add the fuel slot to the container
-        this.addSlotToContainer(new Slot(tileEntityCalcinator, TileEntityCalcinator.FUEL_INVENTORY_INDEX, 56, 62));
+        this.addSlotToContainer(new Slot(tileEntityCalcinator, TileEntityCalcinator.FUEL_INVENTORY_INDEX, 45, 55));
 
         // Add the input slot to the container
-        this.addSlotToContainer(new Slot(tileEntityCalcinator, TileEntityCalcinator.INPUT_INVENTORY_INDEX, 56, 17));
+        this.addSlotToContainer(new Slot(tileEntityCalcinator, TileEntityCalcinator.INPUT_INVENTORY_INDEX, 45, 10));
 
         // Add the output results slot to the container
-        this.addSlotToContainer(new SlotCalcinator(tileEntityCalcinator, TileEntityCalcinator.OUTPUT_LEFT_INVENTORY_INDEX, 116, 35));
-        this.addSlotToContainer(new SlotCalcinator(tileEntityCalcinator, TileEntityCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX, 136, 35));
+        this.addSlotToContainer(new SlotCalcinator(tileEntityCalcinator, TileEntityCalcinator.OUTPUT_LEFT_INVENTORY_INDEX, 105, 29));
+        this.addSlotToContainer(new SlotCalcinator(tileEntityCalcinator, TileEntityCalcinator.OUTPUT_RIGHT_INVENTORY_INDEX, 125, 29));
 
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
