@@ -67,7 +67,10 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
         try
         {
-            compressedNBT = CompressedStreamTools.compress(energyValueRegistryNBT);
+            if (energyValueRegistryNBT != null)
+            {
+                compressedNBT = CompressedStreamTools.compress(energyValueRegistryNBT);
+            }
         }
         catch (IOException e)
         {
