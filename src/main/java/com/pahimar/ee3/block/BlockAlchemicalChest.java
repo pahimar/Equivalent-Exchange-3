@@ -78,7 +78,7 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        if (player.isSneaking() || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))
+        if ((player.isSneaking() && player.getCurrentEquippedItem() != null) || world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))
         {
             return true;
         }
