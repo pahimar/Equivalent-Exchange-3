@@ -1,24 +1,39 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.alchemy.Symbol;
-import com.pahimar.ee3.alchemy.Symbols;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.AxisAlignedBB;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TileEntityAlchemyArray extends TileEntityEE
 {
-    private List<Symbol> alchemySymbols;
+    private List<Symbol> symbols;
+    private int largestSymbolSize;
 
     public TileEntityAlchemyArray()
     {
         super();
-        alchemySymbols = new ArrayList<Symbol>(Arrays.asList(Symbols.CIRCLE));
+        symbols = new ArrayList<Symbol>();
+        this.largestSymbolSize = 0;
     }
 
-    public List<Symbol> getAlchemySymbols()
+    public List<Symbol> getSymbols()
     {
-        return alchemySymbols;
+        return symbols;
+    }
+
+    public int getLargestSymbolSize()
+    {
+        return largestSymbolSize;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        return AxisAlignedBB.getBoundingBox(xCoord - largestSymbolSize, yCoord, zCoord - largestSymbolSize, xCoord + largestSymbolSize, yCoord, zCoord + largestSymbolSize);
     }
 }

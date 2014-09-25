@@ -6,14 +6,19 @@ import net.minecraft.util.ResourceLocation;
 public class Symbol
 {
     private final ResourceLocation texture;
-    private final float size;
+    private final int size;
 
-    public Symbol(String texture, float size)
+    public Symbol(String texture)
+    {
+        this(texture, 1);
+    }
+
+    public Symbol(String texture, int size)
     {
         this(ResourceLocationHelper.getResourceLocation(texture), size);
     }
 
-    public Symbol(ResourceLocation texture, float size)
+    public Symbol(ResourceLocation texture, int size)
     {
         this.texture = texture;
         this.size = size;
@@ -24,8 +29,19 @@ public class Symbol
         return texture;
     }
 
-    public float getSize()
+    public int getSize()
     {
         return size;
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if (object instanceof Symbol)
+        {
+            return this.texture.equals(((Symbol) object).getTexture()) && this.size == ((Symbol) object).size;
+        }
+
+        return false;
     }
 }
