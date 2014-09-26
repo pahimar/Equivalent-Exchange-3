@@ -1,6 +1,7 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
@@ -14,7 +15,6 @@ public class ItemChalk extends ItemEE implements IKeyBound
     public ItemChalk()
     {
         super();
-        this.setMaxStackSize(64);
         this.setUnlocalizedName(Names.Items.CHALK);
     }
 
@@ -25,17 +25,81 @@ public class ItemChalk extends ItemEE implements IKeyBound
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
-    {
-        return itemStack;
-    }
-
-    @Override
     public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
     {
         if (key == Key.TOGGLE)
         {
             entityPlayer.openGui(EquivalentExchange3.instance, GUIs.SYMBOL_SELECTION.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
+    }
+
+    /**
+     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
+     * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
+     */
+    @Override
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+    {
+        if (side == 0)
+        {
+            --y;
+        }
+        else if (side == 1)
+        {
+            ++y;
+        }
+        else if (side == 2)
+        {
+            --z;
+        }
+        else if (side == 3)
+        {
+            ++z;
+        }
+        else if (side == 4)
+        {
+            --x;
+        }
+        else if (side == 5)
+        {
+            ++x;
+        }
+
+        if (world.canPlaceEntityOnSide(ModBlocks.alchemyArray, x, y, z, false, side, entityPlayer, itemStack))
+        {
+            if (placeBlockAt(itemStack, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ, 0))
+            {
+                world.playSoundEffect(x + 0.5d, y + 0.5d, z + 0.5d, ModBlocks.alchemyArray.stepSound.func_150496_b(), (ModBlocks.alchemyArray.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.alchemyArray.stepSound.getPitch() * 0.8F);
+                --itemStack.stackSize;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Called to actually place the block, after the location is determined
+     * and all permission checks have been made.
+     *
+     * @param stack  The item stack that was used to place the block. This can be changed inside the method.
+     * @param player The player who is placing the block. Can be null if the block is not being placed by a player.
+     * @param side   The side the player (or machine) right-clicked on.
+     */
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
+    {
+
+        if (!world.setBlock(x, y, z, ModBlocks.alchemyArray, metadata, 3))
+        {
+            return false;
+        }
+
+        if (world.getBlock(x, y, z) == ModBlocks.alchemyArray)
+        {
+            ModBlocks.alchemyArray.onBlockPlacedBy(world, x, y, z, player, stack);
+            ModBlocks.alchemyArray.onPostBlockPlaced(world, x, y, z, metadata);
+        }
+
+        return true;
     }
 }
