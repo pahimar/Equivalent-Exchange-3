@@ -30,7 +30,7 @@ repositories {
     }
 }
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.5.3_1.7.10"
+    compile "mcp.mobius.waila:Waila:1.5.5_1.7.10"
 }
 
 ext.configFile = file "build.properties"
