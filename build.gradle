@@ -15,7 +15,23 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'forge'
+apply plugin: 'maven'
+
+repositories {
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
+    maven { // the repo from which to get NEI and stuff
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
+    }
+}
+dependencies {
+    compile "mcp.mobius.waila:Waila:1.5.3_1.7.10"
+}
 
 ext.configFile = file "build.properties"
 
