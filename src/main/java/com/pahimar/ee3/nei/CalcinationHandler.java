@@ -46,11 +46,10 @@ public class CalcinationHandler extends TemplateRecipeHandler
 		public CachedCalcinationRecipe(ItemStack outputDust)
 		{
 			output = new PositionedStack(outputDust, 101, 19);
-
+			
 			inputs = new ArrayList<PositionedStack>();
 
 			minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-			
 			maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
 
 			for (Object obj : EnergyValueRegistryProxy.getStacksInRange(minEnergyValue, maxEnergyValue))
@@ -65,13 +64,11 @@ public class CalcinationHandler extends TemplateRecipeHandler
 		public CachedCalcinationRecipe(ItemStack inputStack, ItemStack outputDust)
 		{
 			inputStack.stackSize = 1;
-
 			inputs = Arrays.asList(new PositionedStack[] { new PositionedStack(inputStack, 40, 0) });
 
 			output = new PositionedStack(outputDust, 101, 19);
 
 			minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-			
 			maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
 		}
 

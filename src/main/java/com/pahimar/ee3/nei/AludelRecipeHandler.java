@@ -51,8 +51,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 
 		public PositionedStack getOtherStack()
 		{
-			return new PositionedStack(
-					FurnaceRecipeHandler.afuels.get((cycleticks / 48) % FurnaceRecipeHandler.afuels.size()).stack.item, 37, 63);
+			return new PositionedStack(FurnaceRecipeHandler.afuels.get((cycleticks / 48) % FurnaceRecipeHandler.afuels.size()).stack.item, 37, 63);
 		}
 
 		@Override
@@ -117,7 +116,6 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 	{
 		if (outputId.equals(getRecipeID()))
 		{
-
 			for (RecipeAludel recipe : RecipesAludel.getInstance().getRecipes())
 			{
 				arecipes.add(new CachedAludelRecipe(recipe));
