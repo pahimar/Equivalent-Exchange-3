@@ -126,7 +126,7 @@ task signJar(dependsOn: ["reobf", "devJar"]) {
     inputs.property "ee3_keystore_alias", ee3_keystore_alias
     inputs.property "keystore_password", keystore_password
     outputs.dir devJar.destinationDir
-    
+
     // only sign if the keystore exists
     onlyIf {
         return keystore_location != "." && keystore_password != ""
@@ -139,15 +139,26 @@ task signJar(dependsOn: ["reobf", "devJar"]) {
 
             logger.lifecycle "signing $file"
             ant.signjar(
-                destDir: file.getParentFile(), // same place it came from
-                jar: file,
-                keystore: keystore_location,
-                alias: ee3_keystore_alias,
-                storepass: keystore_password
+                    destDir: file.getParentFile(), // same place it came from
+                    jar: file,
+                    keystore: keystore_location,
+                    alias: ee3_keystore_alias,
+                    storepass: keystore_password
             )
-       }
+        }
     }
 }
+
+task copyChicken(type: Copy, dependsOn: "extractUserDev") {
+    from { configurations.compile }
+    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar", "**/*Waila*.jar"
+    exclude "**/CodeChickenLib*" // because CCC downloads it anyways.. -_-
+    into file("./run/mods") // paralell to the assets dir
+    mustRunAfter "deobfBinJar"
+    mustRunAfter "repackMinecraft"
+}
+tasks.setupDevWorkspace.dependsOn copyChicken
+tasks.setupDecompWorkspace.dependsOn copyChicken
 
 uploadArchives {
     repositories {
