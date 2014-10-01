@@ -3,11 +3,12 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.IKeyBound;
+import com.pahimar.ee3.util.IOverlayItem;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public class ItemPhilosophersStone extends ItemEE implements IKeyBound
+public class ItemPhilosophersStone extends ItemEE implements IKeyBound, IOverlayItem
 {
     private int maxChargeLevel;
 

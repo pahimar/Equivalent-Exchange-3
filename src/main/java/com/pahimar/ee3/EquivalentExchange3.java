@@ -1,5 +1,7 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.array.AlchemyArrayRegistry;
+import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
@@ -69,6 +71,8 @@ public class EquivalentExchange3
 
         ModBlocks.init();
 
+        Glyphs.init();
+
         EnergyValues.addDefaultEnergyValues();
 
         Skills.addDefaultSkills();
@@ -81,7 +85,7 @@ public class EquivalentExchange3
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
         // Initialize mod tile entities
-        proxy.registerTileEntities();
+        TileEntities.init();
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();
@@ -94,6 +98,9 @@ public class EquivalentExchange3
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
+
+        // Register the Waila data provider
+        FMLInterModComms.sendMessage("Waila", "register", "com.pahimar.ee3.waila.WailaDataProvider.callbackRegister");
     }
 
     @EventHandler
@@ -108,8 +115,8 @@ public class EquivalentExchange3
     {
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
 
             if (energyValueRegistryFile.exists())
             {
@@ -118,7 +125,7 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + ".ee3");
+            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
         }
 
         WorldEventHandler.hasInitilialized = false;
@@ -137,5 +144,15 @@ public class EquivalentExchange3
     public SkillRegistry getSkillRegistry()
     {
         return SkillRegistry.getInstance();
+    }
+
+    public GlyphTextureRegistry getGlyphRegistry()
+    {
+        return GlyphTextureRegistry.getInstance();
+    }
+
+    public AlchemyArrayRegistry getAlchemyArrayRegistry()
+    {
+        return AlchemyArrayRegistry.getInstance();
     }
 }

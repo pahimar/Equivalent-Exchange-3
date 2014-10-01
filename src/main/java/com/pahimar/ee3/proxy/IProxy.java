@@ -2,7 +2,7 @@ package com.pahimar.ee3.proxy;
 
 public interface IProxy
 {
-    public abstract void registerTileEntities();
+    public abstract ClientProxy getClientProxy();
 
     public abstract void initRenderingAndTextures();
 

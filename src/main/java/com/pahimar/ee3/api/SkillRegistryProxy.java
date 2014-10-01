@@ -74,7 +74,7 @@ public final class SkillRegistryProxy
             return false;
         }
 
-        return EE3Wrapper.ee3mod.getSkillRegistry().isLearnable(itemStack);
+        return EE3Wrapper.ee3mod.getSkillRegistry().canBeLearned(itemStack);
     }
 
     public static boolean isRecoverable(Block block)
