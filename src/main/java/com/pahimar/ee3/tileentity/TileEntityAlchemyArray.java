@@ -1,28 +1,30 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.alchemy.Symbol;
+import com.pahimar.ee3.array.Glyph;
+import com.pahimar.ee3.array.Symbols;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TileEntityAlchemyArray extends TileEntityEE
 {
-    private List<Symbol> symbols;
+    private List<Glyph> glyphs;
     private int largestSymbolSize;
 
     public TileEntityAlchemyArray()
     {
         super();
-        symbols = new ArrayList<Symbol>();
-        this.largestSymbolSize = 0;
+        glyphs = new ArrayList<Glyph>(Arrays.asList(Symbols.BASE_CIRCLE, Symbols.TRIANGLE));
+        this.largestSymbolSize = 1;
     }
 
-    public List<Symbol> getSymbols()
+    public List<Glyph> getGlyphs()
     {
-        return symbols;
+        return glyphs;
     }
 
     public int getLargestSymbolSize()

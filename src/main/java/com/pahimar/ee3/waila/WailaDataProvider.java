@@ -1,6 +1,6 @@
 package com.pahimar.ee3.waila;
 
-import com.pahimar.ee3.block.BlockAludel;
+import com.pahimar.ee3.tileentity.TileEntityAludel;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -37,6 +37,6 @@ public class WailaDataProvider implements IWailaDataProvider
 
     public static void callbackRegister(IWailaRegistrar registrar)
     {
-        registrar.registerHeadProvider(new WailaDataProvider(), BlockAludel.class);
+        registrar.registerHeadProvider(new WailaDataProvider(), TileEntityAludel.class);
     }
 }
