@@ -30,7 +30,7 @@ repositories {
     }
 }
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.5.5_1.7.10"
+    compile "mcp.mobius.waila:Waila:1.5.6_dev1_1.7.10"
 }
 
 ext.configFile = file "build.properties"
@@ -151,7 +151,7 @@ task signJar(dependsOn: ["reobf", "devJar"]) {
 
 task copyChicken(type: Copy, dependsOn: "extractUserDev") {
     from { configurations.compile }
-    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar", "**/*Waila*.jar"
+    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar"
     exclude "**/CodeChickenLib*" // because CCC downloads it anyways.. -_-
     into file("./run/mods") // paralell to the assets dir
     mustRunAfter "deobfBinJar"

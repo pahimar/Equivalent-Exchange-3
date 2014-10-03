@@ -5,12 +5,13 @@ import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.IKeyBound;
+import com.pahimar.ee3.reference.Sounds;
+import com.pahimar.ee3.util.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemChalk extends ItemEE implements IKeyBound
+public class ItemChalk extends ItemEE implements IKeyBound, IChargeable, IOverlayItem
 {
     public ItemChalk()
     {
@@ -22,15 +23,6 @@ public class ItemChalk extends ItemEE implements IKeyBound
     public boolean getShareTag()
     {
         return true;
-    }
-
-    @Override
-    public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
-    {
-        if (key == Key.TOGGLE)
-        {
-            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.SYMBOL_SELECTION.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
-        }
     }
 
     /**
@@ -101,5 +93,80 @@ public class ItemChalk extends ItemEE implements IKeyBound
         }
 
         return true;
+    }
+
+    @Override
+    public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
+    {
+        if (key == Key.CHARGE)
+        {
+            if (!entityPlayer.isSneaking())
+            {
+                if (getChargeLevel(itemStack) == this.getMaxChargeLevel())
+                {
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
+                }
+                else
+                {
+                    increaseChargeLevel(itemStack);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
+                }
+            }
+            else
+            {
+                if (getChargeLevel(itemStack) == 0)
+                {
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
+                }
+                else
+                {
+                    decreaseChargeLevel(itemStack);
+                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
+                }
+            }
+        }
+        else if (key == Key.TOGGLE)
+        {
+            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.SYMBOL_SELECTION.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+        }
+    }
+
+    @Override
+    public short getMaxChargeLevel()
+    {
+        return 6;
+    }
+
+    @Override
+    public short getChargeLevel(ItemStack itemStack)
+    {
+        return NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
+    }
+
+    @Override
+    public void setChargeLevel(ItemStack itemStack, short chargeLevel)
+    {
+        if (chargeLevel <= this.getMaxChargeLevel())
+        {
+            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, chargeLevel);
+        }
+    }
+
+    @Override
+    public void increaseChargeLevel(ItemStack itemStack)
+    {
+        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) < this.getMaxChargeLevel())
+        {
+            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) + 1));
+        }
+    }
+
+    @Override
+    public void decreaseChargeLevel(ItemStack itemStack)
+    {
+        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) > 0)
+        {
+            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) - 1));
+        }
     }
 }

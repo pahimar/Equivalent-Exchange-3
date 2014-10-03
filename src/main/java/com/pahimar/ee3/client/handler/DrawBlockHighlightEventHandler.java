@@ -47,6 +47,10 @@ public class DrawBlockHighlightEventHandler
                 {
                     drawSelectionBoxForHoe(event, (IModalTool) event.currentItem.getItem());
                 }
+                else if (event.currentItem.getItem() instanceof ItemChalk)
+                {
+
+                }
             }
         }
     }

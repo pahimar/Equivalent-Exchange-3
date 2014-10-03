@@ -63,14 +63,14 @@ public class SkillRegistry
         return skillMap.containsKey(unitItemStack);
     }
 
-    public boolean isLearnable(ItemStack itemStack)
+    public boolean canBeLearned(ItemStack itemStack)
     {
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
         if (skillMap.containsKey(unitItemStack))
         {
-            return skillMap.get(unitItemStack).isLearnable();
+            return skillMap.get(unitItemStack).canBeLearned();
         }
 
         return false;
@@ -88,7 +88,7 @@ public class SkillRegistry
             {
                 if (SkillRegistry.getInstance().hasSkillMapping(itemStack))
                 {
-                    return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().isLearnable(itemStack);
+                    return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack);
                 }
                 else
                 {
@@ -97,19 +97,19 @@ public class SkillRegistry
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Select"))
             {
-                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().isLearnable(itemStack);
+                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack);
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Tier"))
             {
                 int itemStackKnowledgeTier = SkillRegistry.getInstance().getKnowledgeTier(itemStack);
 
-                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().isLearnable(itemStack) && itemStackKnowledgeTier >= 0 && itemStackKnowledgeTier <= Settings.Transmutation.maxKnowledgeTier;
+                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack) && itemStackKnowledgeTier >= 0 && itemStackKnowledgeTier <= Settings.Transmutation.maxKnowledgeTier;
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Restricted"))
             {
                 PlayerKnowledge allowedKnowledge = PlayerKnowledgeHandler.getAllowedPlayerKnowledge();
 
-                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().isLearnable(itemStack) && allowedKnowledge.isItemStackKnown(itemStack);
+                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack) && allowedKnowledge.isItemStackKnown(itemStack);
             }
         }
 

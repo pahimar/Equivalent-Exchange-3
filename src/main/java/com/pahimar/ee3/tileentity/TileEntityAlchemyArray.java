@@ -1,41 +1,70 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.array.Glyph;
-import com.pahimar.ee3.array.Symbols;
+import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.Glyph;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TileEntityAlchemyArray extends TileEntityEE
 {
-    private List<Glyph> glyphs;
-    private int largestSymbolSize;
+    private AlchemyArray alchemyArray;
 
     public TileEntityAlchemyArray()
     {
         super();
-        glyphs = new ArrayList<Glyph>(Arrays.asList(Symbols.BASE_CIRCLE, Symbols.TRIANGLE));
-        this.largestSymbolSize = 1;
+        alchemyArray = new AlchemyArray();
     }
 
-    public List<Glyph> getGlyphs()
+    public AlchemyArray getAlchemyArray()
     {
-        return glyphs;
+        return alchemyArray;
     }
 
-    public int getLargestSymbolSize()
+    public void addGlyphToAlchemyArray(Glyph glyph)
     {
-        return largestSymbolSize;
+        alchemyArray.addGlyph(glyph);
+    }
+
+    public void addGlyphToAlchemyArray(Glyph glyph, int size)
+    {
+        alchemyArray.addGlyph(new Glyph(glyph, size));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
     {
-        return AxisAlignedBB.getBoundingBox(xCoord - largestSymbolSize, yCoord, zCoord - largestSymbolSize, xCoord + largestSymbolSize, yCoord, zCoord + largestSymbolSize);
+        return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord, zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord, zCoord + alchemyArray.getLargestGlyphSize());
+    }
+
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAlchemyArray(this));
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound);
+
+        NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
+        alchemyArray = AlchemyArray.readAlchemyArrayFromNBT(alchemyArrayTagCompound);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.writeToNBT(nbtTagCompound);
+
+        NBTTagCompound alchemyArrayTagCompound = new NBTTagCompound();
+        alchemyArray.writeToNBT(alchemyArrayTagCompound);
+
+        nbtTagCompound.setTag("alchemyArray", alchemyArrayTagCompound);
     }
 }
