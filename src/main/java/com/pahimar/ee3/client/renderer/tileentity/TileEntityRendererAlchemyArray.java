@@ -1,7 +1,8 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
-import com.pahimar.ee3.array.Glyph;
+import com.pahimar.ee3.api.Glyph;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
@@ -17,12 +18,12 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
     {
         if (tileEntity instanceof TileEntityAlchemyArray)
         {
-            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) tileEntity;
+            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
 
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glPushMatrix();
-            for (Glyph glyph : tileEntityAlchemyArray.getGlyphs())
+            for (Glyph glyph : tileEntityAlchemyArray.getAlchemyArray().getGlyphs())
             {
                 this.bindTexture(glyph.getTexture());
                 renderSymbol(glyph, x, y, z);

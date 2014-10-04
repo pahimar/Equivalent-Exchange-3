@@ -20,6 +20,8 @@ public class WailaDataProvider implements IWailaDataProvider
     @Override
     public List<String> getWailaHead(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor, IWailaConfigHandler config)
     {
+        currentTip.set(0, "Something else");
+
         return currentTip;
     }
 

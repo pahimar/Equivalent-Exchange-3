@@ -5,6 +5,8 @@ import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -47,6 +49,16 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     public TileEntity createNewTileEntity(World world, int metaData)
     {
         return new TileEntityAlchemyArray();
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            // TODO: Place the first glyph of the alchemy array from the player's currently selected glyph
+        }
     }
 
     @Override

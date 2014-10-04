@@ -1,5 +1,6 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.array.GlyphRegistry;
 import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
@@ -68,6 +69,8 @@ public class EquivalentExchange3
         ModItems.init();
 
         ModBlocks.init();
+
+        Glyphs.init();
 
         EnergyValues.addDefaultEnergyValues();
 
@@ -139,5 +142,10 @@ public class EquivalentExchange3
     public SkillRegistry getSkillRegistry()
     {
         return SkillRegistry.getInstance();
+    }
+
+    public GlyphRegistry getGlyphRegistry()
+    {
+        return GlyphRegistry.getInstance();
     }
 }

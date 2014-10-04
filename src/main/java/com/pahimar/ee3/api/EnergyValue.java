@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 public final class EnergyValue implements Comparable<EnergyValue>, JsonDeserializer<EnergyValue>, JsonSerializer<EnergyValue>
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).create();
-    private final float energyValue;
+    private float energyValue;
     private final EnergyType energyType;
 
     public EnergyValue()
@@ -82,6 +82,22 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     public float getEnergyValue()
     {
         return this.energyValue;
+    }
+
+    public void add(EnergyValue energyValue)
+    {
+        if (this.energyType == energyValue.energyType && energyValue.energyValue > 0f)
+        {
+            this.energyValue += energyValue.energyValue;
+        }
+    }
+
+    public void subtract(EnergyValue energyValue)
+    {
+        if (this.energyType == energyValue.energyType && (this.energyValue - energyValue.energyValue) >= 0f)
+        {
+            this.energyValue -= energyValue.energyValue;
+        }
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)

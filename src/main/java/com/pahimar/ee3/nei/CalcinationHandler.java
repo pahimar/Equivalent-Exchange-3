@@ -207,7 +207,7 @@ public class CalcinationHandler extends TemplateRecipeHandler
 
 		if (gui.isMouseOver(cRecipe.getIngredient(), recipe))
 		{
-			currenttip.add("Exchange Energy: [" + (cRecipe.minEnergyValue.getEnergyValue() > 1 ? String.format("%s", energyValueDecimalFormat.format(cRecipe.minEnergyValue.getEnergyValue())) : 0) + ", " + (cRecipe.maxEnergyValue.getEnergyValue() <= 8192 ? String.format("%s", energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getEnergyValue())) : "\u221E") + "[");
+			currenttip.add("Exchange Energy: [" + (cRecipe.minEnergyValue.getEnergyValue() > 1 ? String.format("%s", energyValueDecimalFormat.format(cRecipe.minEnergyValue.getEnergyValue())) : 0) + ", " + (cRecipe.maxEnergyValue.getEnergyValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getEnergyValue() ? String.format("%s", energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getEnergyValue())) : "\u221E") + "[");
 		}
 
 		return currenttip;

@@ -37,7 +37,7 @@ public class PlayerKnowledgeHelper
                 {
                     return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
                             && !playerKnowledge.isItemStackKnown(itemStack)
-                            && SkillRegistry.getInstance().isLearnable(itemStack);
+                            && SkillRegistry.getInstance().canBeLearned(itemStack);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ public class PlayerKnowledgeHelper
             {
                 return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
                         && !playerKnowledge.isItemStackKnown(itemStack)
-                        && SkillRegistry.getInstance().isLearnable(itemStack);
+                        && SkillRegistry.getInstance().canBeLearned(itemStack);
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Tier"))
             {
@@ -57,7 +57,7 @@ public class PlayerKnowledgeHelper
 
                 return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
                         && !playerKnowledge.isItemStackKnown(itemStack)
-                        && SkillRegistry.getInstance().isLearnable(itemStack)
+                        && SkillRegistry.getInstance().canBeLearned(itemStack)
                         && itemStackKnowledgeTier >= 0 && itemStackKnowledgeTier <= Settings.Transmutation.maxKnowledgeTier;
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Restricted"))
@@ -66,7 +66,7 @@ public class PlayerKnowledgeHelper
 
                 return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack)
                         && !playerKnowledge.isItemStackKnown(itemStack)
-                        && SkillRegistry.getInstance().isLearnable(itemStack)
+                        && SkillRegistry.getInstance().canBeLearned(itemStack)
                         && allowedKnowledge.isItemStackKnown(itemStack);
             }
         }
