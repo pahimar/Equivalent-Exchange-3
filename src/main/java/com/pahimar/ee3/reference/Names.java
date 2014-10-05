@@ -121,4 +121,20 @@ public class Names
         public static final String RELEASE = "key.release";
         public static final String TOGGLE = "key.toggle";
     }
+
+    public static final class Glyphs
+    {
+        public static final String BASE_CIRCLE = "glyph.ee3:baseCircle";
+        public static final String CIRCLE = "glyph.ee3:circle";
+        public static final String DIAMOND = "glyph.ee3:diamond";
+        public static final String DOT = "glyph.ee3:dot";
+        public static final String HEPTAGON = "glyph.ee3:heptagon";
+        public static final String HEXAGON = "glyph.ee3:hexagon";
+        public static final String INVERTED_TRIANGLE = "glyph.ee3:invertedTriangle";
+        public static final String LINE = "glyph.ee3:line";
+        public static final String OCTAGON = "glyph.ee3:octagon";
+        public static final String PENTAGON = "glyph.ee3:pentagon";
+        public static final String SQUARE = "glyph.ee3:square";
+        public static final String TRIANGLE = "glyph.ee3:triangle";
+    }
 }

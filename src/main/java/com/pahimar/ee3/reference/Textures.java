@@ -50,4 +50,23 @@ public final class Textures
         private static final String EFFECTS_LOCATION = "textures/effects/";
         public static final ResourceLocation WORLD_TRANSMUTATION = ResourceLocationHelper.getResourceLocation(EFFECTS_LOCATION + "noise.png");
     }
+
+    public static final class Glyph
+    {
+        private static final String SYMBOL_TEXTURE_LOCATION = "textures/glyphs/";
+
+
+        public static final ResourceLocation BASE_CIRCLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transBaseCircle.png");
+        public static final ResourceLocation DOT = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transDot.png");
+        public static final ResourceLocation LINE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transLine.png");
+        public static final ResourceLocation CIRCLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transCircle.png");
+        public static final ResourceLocation TRIANGLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transTriangle.png");
+        public static final ResourceLocation INVERTED_TRIANGLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transInvertedTriangle.png");
+        public static final ResourceLocation SQUARE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transSquare.png");
+        public static final ResourceLocation DIAMOND = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transDiamond.png");
+        public static final ResourceLocation PENTAGON = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transPentagon.png");
+        public static final ResourceLocation HEXAGON = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transHexagon.png");
+        public static final ResourceLocation HEPTAGON = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transHeptagon.png");
+        public static final ResourceLocation OCTAGON = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transOctagon.png");
+    }
 }

@@ -15,6 +15,11 @@ public class Glyph implements Comparable<Glyph>
 
     }
 
+    public Glyph(ResourceLocation texture, String unLocalizedName)
+    {
+        this(texture, unLocalizedName, 1);
+    }
+
     public Glyph(String texture, String unLocalizedName)
     {
         this(texture, unLocalizedName, 1);
@@ -88,7 +93,7 @@ public class Glyph implements Comparable<Glyph>
     @Override
     public String toString()
     {
-        return String.format("texture: %s, unLocalizedName: %s, size: %s", texture.getResourcePath() + ":" + texture.getResourcePath(), unLocalizedName, size);
+        return String.format("texture: %s, unLocalizedName: %s, size: %s", texture.getResourceDomain() + ":" + texture.getResourcePath(), unLocalizedName, size);
     }
 
     @Override

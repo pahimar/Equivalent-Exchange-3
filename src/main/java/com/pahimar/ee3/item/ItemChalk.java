@@ -59,7 +59,8 @@ public class ItemChalk extends ItemEE implements IKeyBound, IChargeable, IOverla
 
         if (world.canPlaceEntityOnSide(ModBlocks.alchemyArray, x, y, z, false, side, entityPlayer, itemStack))
         {
-            if (placeBlockAt(itemStack, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ, 0))
+            int sideHit = ModBlocks.alchemyArray.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, itemStack.getItemDamage());
+            if (placeBlockAt(itemStack, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ, sideHit))
             {
                 world.playSoundEffect(x + 0.5d, y + 0.5d, z + 0.5d, ModBlocks.alchemyArray.stepSound.func_150496_b(), (ModBlocks.alchemyArray.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.alchemyArray.stepSound.getPitch() * 0.8F);
                 --itemStack.stackSize;
@@ -71,12 +72,14 @@ public class ItemChalk extends ItemEE implements IKeyBound, IChargeable, IOverla
     }
 
     /**
-     * Called to actually place the block, after the location is determined
-     * and all permission checks have been made.
+     * Called to actually place the block, after the location is determined and all permission checks have been made.
      *
-     * @param stack  The item stack that was used to place the block. This can be changed inside the method.
-     * @param player The player who is placing the block. Can be null if the block is not being placed by a player.
-     * @param side   The side the player (or machine) right-clicked on.
+     * @param stack
+     *         The item stack that was used to place the block. This can be changed inside the method.
+     * @param player
+     *         The player who is placing the block. Can be null if the block is not being placed by a player.
+     * @param side
+     *         The side the player (or machine) right-clicked on.
      */
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
     {

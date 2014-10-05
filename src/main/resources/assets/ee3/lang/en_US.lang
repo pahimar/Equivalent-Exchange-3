@@ -99,6 +99,20 @@ container.ee3:augmentationTable=Augmentation Table [WIP]
 container.ee3:alchemicalTome=Tome of Alchemical Knowledge [WIP]
 container.ee3:transmutationSquare=Transmutation Square [WIP]
 
+# Glyphs
+glyph.ee3:baseCircle=Circle (Base)
+glyph.ee3:circle=Circle
+glyph.ee3:diamond=Diamond
+glyph.ee3:dot=Dot
+glyph.ee3:heptagon=Heptagon
+glyph.ee3:hexagon=Hexagon
+glyph.ee3:invertedTriangle=Triangle (Inverted)
+glyph.ee3:line=Line
+glyph.ee3:octagon=Octagon
+glyph.ee3:pentagon=Pentagon
+glyph.ee3:square=Square
+glyph.ee3:triangle=Triangle
+
 # Commands
 command.ee3.usage=/ee3 <set-value|sync-values>
 command.ee3.set-value.usage=/ee3-set-value <pre|post> <item> <value> [data] [dataTag]

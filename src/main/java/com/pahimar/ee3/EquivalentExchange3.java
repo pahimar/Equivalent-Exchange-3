@@ -98,6 +98,7 @@ public class EquivalentExchange3
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
 
+        // Register the Waila data provider
         FMLInterModComms.sendMessage("Waila", "register", "com.pahimar.ee3.waila.WailaDataProvider.callbackRegister");
     }
 
@@ -113,7 +114,7 @@ public class EquivalentExchange3
     {
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
             File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
 
             if (energyValueRegistryFile.exists())
@@ -123,7 +124,7 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + ".ee3");
+            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + Reference.MOD_ID.toLowerCase());
         }
 
         WorldEventHandler.hasInitilialized = false;
