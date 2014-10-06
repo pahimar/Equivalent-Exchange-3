@@ -124,7 +124,7 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + File.separator + Reference.MOD_ID.toLowerCase());
+            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
         }
 
         WorldEventHandler.hasInitilialized = false;
