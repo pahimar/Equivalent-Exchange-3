@@ -1,7 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.api.Glyph;
-import com.pahimar.ee3.api.GlyphRegistryProxy;
+import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 
@@ -24,17 +24,17 @@ public class Glyphs
 
     public static void init()
     {
-        GlyphRegistryProxy.addGlyph(BASE_CIRCLE);
-        GlyphRegistryProxy.addGlyph(DOT);
-        GlyphRegistryProxy.addGlyph(LINE);
-        GlyphRegistryProxy.addGlyph(CIRCLE);
-        GlyphRegistryProxy.addGlyph(TRIANGLE);
-        GlyphRegistryProxy.addGlyph(INVERTED_TRIANGLE);
-        GlyphRegistryProxy.addGlyph(SQUARE);
-        GlyphRegistryProxy.addGlyph(DIAMOND);
-        GlyphRegistryProxy.addGlyph(PENTAGON);
-        GlyphRegistryProxy.addGlyph(HEXAGON);
-        GlyphRegistryProxy.addGlyph(HEPTAGON);
-        GlyphRegistryProxy.addGlyph(OCTAGON);
+        GlyphTextureRegistry.getInstance().addGlyph(BASE_CIRCLE);
+        GlyphTextureRegistry.getInstance().addGlyph(DOT);
+        GlyphTextureRegistry.getInstance().addGlyph(LINE);
+        GlyphTextureRegistry.getInstance().addGlyph(CIRCLE);
+        GlyphTextureRegistry.getInstance().addGlyph(TRIANGLE);
+        GlyphTextureRegistry.getInstance().addGlyph(INVERTED_TRIANGLE);
+        GlyphTextureRegistry.getInstance().addGlyph(SQUARE);
+        GlyphTextureRegistry.getInstance().addGlyph(DIAMOND);
+        GlyphTextureRegistry.getInstance().addGlyph(PENTAGON);
+        GlyphTextureRegistry.getInstance().addGlyph(HEXAGON);
+        GlyphTextureRegistry.getInstance().addGlyph(HEPTAGON);
+        GlyphTextureRegistry.getInstance().addGlyph(OCTAGON);
     }
 }

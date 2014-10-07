@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -57,11 +58,17 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
+        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
         if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             // TODO: Place the first glyph of the alchemy glyphs from the player's currently selected glyph
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 3);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 3, facing);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 2, facing);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 1, facing);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 1, facing);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 2);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 3);
         }
     }
 
@@ -74,7 +81,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
-        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
+        return null;
     }
 
     /**

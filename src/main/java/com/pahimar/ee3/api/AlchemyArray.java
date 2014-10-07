@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class AlchemyArray
+public class AlchemyArray implements Comparable<AlchemyArray>
 {
     private SortedSet<Glyph> glyphs;
     private int largestGlyphSize;
@@ -129,5 +129,37 @@ public class AlchemyArray
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if (object instanceof AlchemyArray)
+        {
+            return this.compareTo((AlchemyArray) object) == 0;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int compareTo(AlchemyArray alchemyArray)
+    {
+        if (this.glyphs.size() == alchemyArray.glyphs.size())
+        {
+            for (Glyph glyph : this.glyphs)
+            {
+                if (!alchemyArray.glyphs.contains(glyph))
+                {
+                    return -1;
+                }
+            }
+
+            return 0;
+        }
+        else
+        {
+            return this.glyphs.size() - alchemyArray.glyphs.size();
+        }
     }
 }

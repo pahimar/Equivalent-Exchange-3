@@ -35,11 +35,17 @@ public class TileEntityAlchemyArray extends TileEntityEE
         alchemyArray.addGlyph(new Glyph(glyph, size));
     }
 
+    public void addGlyphToAlchemyArray(Glyph glyph, int size, int facing)
+    {
+        alchemyArray.addGlyph(new Glyph(glyph, size, facing));
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
     {
-        return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord, zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord, zCoord + alchemyArray.getLargestGlyphSize());
+        // TODO: Make this glyph size and orientation sensitive
+        return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - alchemyArray.getLargestGlyphSize(), zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord + alchemyArray.getLargestGlyphSize(), zCoord + alchemyArray.getLargestGlyphSize());
     }
 
     @Override

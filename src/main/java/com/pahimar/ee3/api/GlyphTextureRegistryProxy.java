@@ -2,13 +2,14 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
+import net.minecraft.util.ResourceLocation;
 
-public class GlyphRegistryProxy
+public class GlyphTextureRegistryProxy
 {
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static void addGlyph(Glyph glyph)
+    public static void addGlyph(ResourceLocation glyphTexture, String unLocalizedName)
     {
         init();
 
@@ -18,7 +19,7 @@ public class GlyphRegistryProxy
             return;
         }
 
-        EE3Wrapper.ee3mod.getGlyphRegistry().addGlyph(glyph);
+        EE3Wrapper.ee3mod.getGlyphRegistry().addGlyph(glyphTexture, unLocalizedName);
     }
 
     private static class EE3Wrapper

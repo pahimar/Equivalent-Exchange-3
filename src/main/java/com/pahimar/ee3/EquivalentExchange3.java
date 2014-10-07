@@ -1,6 +1,6 @@
 package com.pahimar.ee3;
 
-import com.pahimar.ee3.array.GlyphRegistry;
+import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
@@ -145,8 +145,8 @@ public class EquivalentExchange3
         return SkillRegistry.getInstance();
     }
 
-    public GlyphRegistry getGlyphRegistry()
+    public GlyphTextureRegistry getGlyphRegistry()
     {
-        return GlyphRegistry.getInstance();
+        return GlyphTextureRegistry.getInstance();
     }
 }
