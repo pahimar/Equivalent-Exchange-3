@@ -4,6 +4,7 @@ import com.pahimar.ee3.init.Glyphs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
+import com.pahimar.ee3.tileentity.TileEntityEE;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -56,11 +57,11 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
-        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
+        ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
         if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             // TODO: Place the first glyph of the alchemy glyphs from the player's currently selected glyph
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE);
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 3);
         }
     }
 
@@ -73,7 +74,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
-        return null;
+        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
     /**
@@ -87,36 +88,38 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
         {
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
 
+            int largestGlyphSize = tileEntityAlchemyArray.getAlchemyArray().getLargestGlyphSize();
+
             switch (tileEntityAlchemyArray.getOrientation())
             {
                 case DOWN:
                 {
-                    this.setBlockBounds(0.125F, 0.33F, 0.125F, 0.875F, 1.0F, 0.875F);
+                    this.setBlockBounds(0f, 1f, 0f, 1f, 1 - 0.0625f, 1f);
                     break;
                 }
                 case UP:
                 {
-                    this.setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.66F, 0.875F);
+                    this.setBlockBounds(0 - (largestGlyphSize - 1) / 2, 0f, 0 - (largestGlyphSize - 1) / 2, 1 + (largestGlyphSize - 1) / 2, 0.0625f, 1 + (largestGlyphSize - 1) / 2);
                     break;
                 }
                 case NORTH:
                 {
-                    this.setBlockBounds(0.125F, 0.125F, 0.33F, 0.875F, 0.875F, 1.0F);
+                    this.setBlockBounds(0f, 0f, 1 - 0.0625f, 1f, 1f, 1f);
                     break;
                 }
                 case SOUTH:
                 {
-                    this.setBlockBounds(0.125F, 0.125F, 0.0F, 0.875F, 0.875F, 0.66F);
+                    this.setBlockBounds(0f, 0f, 0f, 1f, 1f, 0.0625f);
                     break;
                 }
                 case EAST:
                 {
-                    this.setBlockBounds(0.0F, 0.125F, 0.125F, 0.66F, 0.875F, 0.875F);
+                    this.setBlockBounds(0f, 0f, 0f, 0.0625f, 1f, 1f);
                     break;
                 }
                 case WEST:
                 {
-                    this.setBlockBounds(0.33F, 0.125F, 0.125F, 1.0F, 0.875F, 0.875F);
+                    this.setBlockBounds(1f, 0f, 0f, 1 - 0.0625f, 1f, 1f);
                     break;
                 }
                 case UNKNOWN:
