@@ -37,7 +37,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 		public CachedAludelRecipe(RecipeAludel recipe)
 		{
 			WrappedStack[] wrappedInputs = recipe.getRecipeInputs();
-			inputs = Arrays.asList(new PositionedStack(wrappedInputs[0].getWrappedStack(), 37, 7), new PositionedStack(wrappedInputs[1].getWrappedStack(), 37, 28));
+			inputs = Arrays.asList(new PositionedStack(new ItemStack(((ItemStack) wrappedInputs[0].getWrappedStack()).getItem(), wrappedInputs[0].getStackSize(), ((ItemStack) wrappedInputs[0].getWrappedStack()).getItemDamage()), 37, 7), new PositionedStack(new ItemStack(((ItemStack) wrappedInputs[1].getWrappedStack()).getItem(), wrappedInputs[1].getStackSize(), ((ItemStack) wrappedInputs[1].getWrappedStack()).getItemDamage()), 37, 28));
 
 			output = new PositionedStack(recipe.getRecipeOutput(), 113, 28);
 			
@@ -142,7 +142,8 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 		{
 			for (WrappedStack wrappedStack : recipe.getRecipeInputs())
 			{
-				if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) wrappedStack.getWrappedStack(), ingredient)){
+				if (NEIServerUtils.areStacksSameTypeCrafting((ItemStack) wrappedStack.getWrappedStack(), ingredient))
+				{
 					arecipes.add(new CachedAludelRecipe(recipe));
 				}	
 			}
