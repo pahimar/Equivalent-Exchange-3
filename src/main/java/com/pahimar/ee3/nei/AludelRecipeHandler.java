@@ -150,22 +150,6 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadUsageRecipes(String inputId, Object... ingredients)
-	{
-		if (inputId.equals(getRecipeID()))
-		{
-			for (RecipeAludel recipe : RecipesAludel.getInstance().getRecipes())
-			{
-				arecipes.add(new CachedAludelRecipe(recipe));
-			}
-		}
-		else
-		{
-			super.loadUsageRecipes(inputId, ingredients);
-		}
-	}
-
-	@Override
 	public int recipiesPerPage()
 	{
 		return 1;
