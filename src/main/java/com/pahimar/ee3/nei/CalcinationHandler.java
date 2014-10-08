@@ -162,23 +162,6 @@ public class CalcinationHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadUsageRecipes(String inputId, Object... ingredients)
-	{
-		if (inputId.equals(getRecipeID()))
-		{
-			for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
-			{
-				arecipes.add(new CachedCalcinationRecipe(stack));
-			}
-
-		}
-		else
-		{
-			super.loadUsageRecipes(inputId, ingredients);
-		}
-	}
-
-	@Override
 	public int recipiesPerPage()
 	{
 		return 1;
