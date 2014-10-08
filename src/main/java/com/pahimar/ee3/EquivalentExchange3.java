@@ -115,7 +115,7 @@ public class EquivalentExchange3
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
             File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
 
             if (energyValueRegistryFile.exists())
             {

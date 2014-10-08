@@ -13,7 +13,7 @@ public class EntityHelper
             return entity.getEntityData().getCompoundTag(Reference.MOD_ID.toLowerCase());
         }
 
-        return null;
+        return new NBTTagCompound();
     }
 
     public static void saveCustomEntityData(Entity entity, NBTTagCompound nbtTagCompound)

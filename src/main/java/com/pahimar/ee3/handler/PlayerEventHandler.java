@@ -1,5 +1,6 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
@@ -65,27 +66,58 @@ public class PlayerEventHandler
     {
         if (event.player != null)
         {
-            if (EntityHelper.getCustomEntityData(event.player) == null)
+            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
+            NBTTagCompound chalkCustomData;
+
+            // Glyph Settings
+            int index = 0;
+            int size = 1;
+            int rotation = 0;
+
+            if (!playerCustomData.hasNoTags() && playerCustomData.hasKey("chalk_settings") && playerCustomData.getTag("chalk_settings").getId() == (byte) 10)
             {
-                NBTTagCompound playerCustomData = new NBTTagCompound();
+                chalkCustomData = playerCustomData.getCompoundTag("chalk_settings");
 
-                NBTTagCompound glyphCustomData = new NBTTagCompound();
-                glyphCustomData.setInteger("index", 0);
-                glyphCustomData.setInteger("size", 1);
-                glyphCustomData.setInteger("rotation", 0);
-                playerCustomData.setTag("chalkSettings", glyphCustomData);
+                if (chalkCustomData.hasKey("index"))
+                {
+                    index = chalkCustomData.getInteger("index");
 
-                EntityHelper.saveCustomEntityData(event.player, playerCustomData);
+                    if (index < 0 || index > GlyphTextureRegistry.getInstance().getGlyphs().size())
+                    {
+                        index = 0;
+                    }
+                }
+
+                if (chalkCustomData.hasKey("size"))
+                {
+                    size = chalkCustomData.getInteger("size");
+
+                    if (size < 1 || size > 6)
+                    {
+                        size = 1;
+                    }
+                }
+
+                if (chalkCustomData.hasKey("rotation"))
+                {
+                    rotation = chalkCustomData.getInteger("rotation");
+
+                    if (rotation < 0 || rotation > 3)
+                    {
+                        rotation = 0;
+                    }
+                }
             }
             else
             {
-                NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
-
-                for (Object object : playerCustomData.func_150296_c())
-                {
-                    LogHelper.info(String.format("key: %s, value: %s", object.toString(), playerCustomData.getTag(object.toString())));
-                }
+                chalkCustomData = new NBTTagCompound();
             }
+
+            chalkCustomData.setInteger("index", index);
+            chalkCustomData.setInteger("size", size);
+            chalkCustomData.setInteger("rotation", rotation);
+            playerCustomData.setTag("chalk_settings", chalkCustomData);
+            EntityHelper.saveCustomEntityData(event.player, playerCustomData);
         }
     }
 }
