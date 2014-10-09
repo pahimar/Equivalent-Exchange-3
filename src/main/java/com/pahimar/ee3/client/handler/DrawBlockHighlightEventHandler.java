@@ -1,11 +1,12 @@
 package com.pahimar.ee3.client.handler;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.array.GlyphTextureRegistry;
+import com.pahimar.ee3.client.util.RenderUtils;
 import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.ToolMode;
-import com.pahimar.ee3.util.EntityHelper;
+import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.util.IModalTool;
-import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,9 +15,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
@@ -215,37 +216,8 @@ public class DrawBlockHighlightEventHandler
 
     private void drawGlyphOverlay(DrawBlockHighlightEvent event)
     {
-        NBTTagCompound customData = EntityHelper.getCustomEntityData(event.player);
-
-        int index = 0;
-        int size = 1;
-        int rotation = 0;
-
-        if (customData.hasKey("chalk_settings"))
-        {
-            NBTTagCompound chalkSettings = customData.getCompoundTag("chalk_settings");
-
-            if (chalkSettings.hasKey("index"))
-            {
-                index = chalkSettings.getInteger("index");
-
-                if (index >= GlyphTextureRegistry.getInstance().getGlyphs().size())
-                {
-                    index = 0;
-                }
-            }
-
-            if (chalkSettings.hasKey("size"))
-            {
-                size = chalkSettings.getInteger("size");
-            }
-
-            if (chalkSettings.hasKey("rotation"))
-            {
-                rotation = chalkSettings.getInteger("rotation");
-            }
-        }
-
-        LogHelper.info(String.format("index: %s, size: %s, rotation: %s", index, size, rotation));
+        ChalkSettings chalkSettings = EquivalentExchange3.proxy.getClientProxy().chalkSettings;
+        ResourceLocation[] textures = GlyphTextureRegistry.getInstance().getGlyphs().keySet().toArray(new ResourceLocation[]{});
+        RenderUtils.drawInWorldTransmutationOverlay(event, textures[chalkSettings.getIndex()], chalkSettings.getSize(), chalkSettings.getRotation());
     }
 }

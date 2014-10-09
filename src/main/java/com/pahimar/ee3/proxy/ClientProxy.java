@@ -10,6 +10,7 @@ import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
+import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -20,6 +21,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
+    public ChalkSettings chalkSettings = new ChalkSettings();
+
     @Override
     public void registerEventHandlers()
     {
@@ -43,6 +46,12 @@ public class ClientProxy extends CommonProxy
     public void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch)
     {
         ClientSoundHelper.playSound(soundName, xCoord, yCoord, zCoord, volume, pitch);
+    }
+
+    @Override
+    public ClientProxy getClientProxy()
+    {
+        return this;
     }
 
     @Override

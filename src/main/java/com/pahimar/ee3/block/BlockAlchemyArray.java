@@ -14,7 +14,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
 {
@@ -70,6 +72,19 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 2);
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 3);
         }
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World world, int x, int y, int z)
+    {
+        return false;
+//        return super.canPlaceBlockAt(world, x, y, z);
+    }
+
+    @Override
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+    {
+        return false;
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.pahimar.ee3.api;
 
 import com.google.common.collect.ImmutableSortedSet;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
 
 import java.util.Collection;
 import java.util.Set;
@@ -62,6 +64,20 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     public int getLargestGlyphSize()
     {
         return largestGlyphSize;
+    }
+
+    /**
+     * TODO: Document this method
+     *
+     * @param entityLiving
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     */
+    public void activateArray(EntityLiving entityLiving, World world, int x, int y, int z)
+    {
+
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -145,6 +161,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     @Override
     public int compareTo(AlchemyArray alchemyArray)
     {
+        // TODO: Modify this to check that all glyphs have the same rotation
         if (this.glyphs.size() == alchemyArray.glyphs.size())
         {
             for (Glyph glyph : this.glyphs)

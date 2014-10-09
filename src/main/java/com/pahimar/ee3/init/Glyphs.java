@@ -14,7 +14,6 @@ public class Glyphs
     public static final Glyph LINE = new Glyph(Textures.Glyph.LINE, Names.Glyphs.LINE);
     public static final Glyph CIRCLE = new Glyph(Textures.Glyph.CIRCLE, Names.Glyphs.CIRCLE);
     public static final Glyph TRIANGLE = new Glyph(Textures.Glyph.TRIANGLE, Names.Glyphs.TRIANGLE);
-    public static final Glyph INVERTED_TRIANGLE = new Glyph(Textures.Glyph.INVERTED_TRIANGLE, Names.Glyphs.INVERTED_TRIANGLE);
     public static final Glyph SQUARE = new Glyph(Textures.Glyph.SQUARE, Names.Glyphs.SQUARE);
     public static final Glyph DIAMOND = new Glyph(Textures.Glyph.DIAMOND, Names.Glyphs.DIAMOND);
     public static final Glyph PENTAGON = new Glyph(Textures.Glyph.PENTAGON, Names.Glyphs.PENTAGON);
@@ -29,7 +28,6 @@ public class Glyphs
         GlyphTextureRegistry.getInstance().addGlyph(LINE);
         GlyphTextureRegistry.getInstance().addGlyph(CIRCLE);
         GlyphTextureRegistry.getInstance().addGlyph(TRIANGLE);
-        GlyphTextureRegistry.getInstance().addGlyph(INVERTED_TRIANGLE);
         GlyphTextureRegistry.getInstance().addGlyph(SQUARE);
         GlyphTextureRegistry.getInstance().addGlyph(DIAMOND);
         GlyphTextureRegistry.getInstance().addGlyph(PENTAGON);

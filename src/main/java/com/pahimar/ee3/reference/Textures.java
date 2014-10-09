@@ -61,7 +61,6 @@ public final class Textures
         public static final ResourceLocation LINE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transLine.png");
         public static final ResourceLocation CIRCLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transCircle.png");
         public static final ResourceLocation TRIANGLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transTriangle.png");
-        public static final ResourceLocation INVERTED_TRIANGLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transInvertedTriangle.png");
         public static final ResourceLocation SQUARE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transSquare.png");
         public static final ResourceLocation DIAMOND = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transDiamond.png");
         public static final ResourceLocation PENTAGON = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transPentagon.png");

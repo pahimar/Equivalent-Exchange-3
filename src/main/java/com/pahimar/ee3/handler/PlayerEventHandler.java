@@ -1,10 +1,11 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.util.EntityHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -62,61 +63,27 @@ public class PlayerEventHandler
     }
 
     @SubscribeEvent
+    public void syncChalkSettingsOnLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    {
+        NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
+        ChalkSettings chalkSettings = new ChalkSettings();
+        chalkSettings.readFromNBT(playerCustomData);
+
+        PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) event.player);
+    }
+
+    @SubscribeEvent
     public void initPlayerCustomData(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
     {
         if (event.player != null)
         {
             NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
-            NBTTagCompound chalkCustomData;
 
-            // Glyph Settings
-            int index = 0;
-            int size = 1;
-            int rotation = 0;
+            // Chalk Settings
+            ChalkSettings chalkSettings = new ChalkSettings();
+            chalkSettings.readFromNBT(playerCustomData);
+            chalkSettings.writeToNBT(playerCustomData);
 
-            if (!playerCustomData.hasNoTags() && playerCustomData.hasKey("chalk_settings") && playerCustomData.getTag("chalk_settings").getId() == (byte) 10)
-            {
-                chalkCustomData = playerCustomData.getCompoundTag("chalk_settings");
-
-                if (chalkCustomData.hasKey("index"))
-                {
-                    index = chalkCustomData.getInteger("index");
-
-                    if (index < 0 || index > GlyphTextureRegistry.getInstance().getGlyphs().size())
-                    {
-                        index = 0;
-                    }
-                }
-
-                if (chalkCustomData.hasKey("size"))
-                {
-                    size = chalkCustomData.getInteger("size");
-
-                    if (size < 1 || size > 6)
-                    {
-                        size = 1;
-                    }
-                }
-
-                if (chalkCustomData.hasKey("rotation"))
-                {
-                    rotation = chalkCustomData.getInteger("rotation");
-
-                    if (rotation < 0 || rotation > 3)
-                    {
-                        rotation = 0;
-                    }
-                }
-            }
-            else
-            {
-                chalkCustomData = new NBTTagCompound();
-            }
-
-            chalkCustomData.setInteger("index", index);
-            chalkCustomData.setInteger("size", size);
-            chalkCustomData.setInteger("rotation", rotation);
-            playerCustomData.setTag("chalk_settings", chalkCustomData);
             EntityHelper.saveCustomEntityData(event.player, playerCustomData);
         }
     }
