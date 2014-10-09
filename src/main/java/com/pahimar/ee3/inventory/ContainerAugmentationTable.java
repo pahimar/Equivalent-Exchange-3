@@ -1,5 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.item.ItemGem;
+import com.pahimar.ee3.item.ItemToolEE;
 import com.pahimar.ee3.tileentity.TileEntityAugmentationTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -37,6 +39,73 @@ public class ContainerAugmentationTable extends ContainerEE
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
-        return super.transferStackInSlot(entityPlayer, slotIndex);
+        ItemStack itemStack = null;
+        Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+        if (slot != null && slot.getHasStack())
+        {
+
+            ItemStack slotItemStack = slot.getStack();
+            itemStack = slotItemStack.copy();
+
+            /**
+             * If we are shift-clicking an item out of the AugmentationTable's container,
+             * attempt to put it in the first available slot in the player's
+             * inventory
+             */
+            if (slotIndex < TileEntityAugmentationTable.INVENTORY_SIZE)
+            {
+                if (!this.mergeItemStack(slotItemStack, TileEntityAugmentationTable.INVENTORY_SIZE, inventorySlots.size(), false))
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                /**
+                 * If the stack being shift-clicked into the AugmentationTable's container
+                 * is a tool(?), first try to put it in the tool slot.
+                 */
+                //TODO: create IAugmentable(?) interface
+                if (slotItemStack.getItem() instanceof ItemToolEE)
+                {
+                    if (!this.mergeItemStack(slotItemStack, TileEntityAugmentationTable.INPUT_SLOT_INVENTORY_INDEX, TileEntityAugmentationTable.AUGMENT_SLOT_INVENTORY_INDEX, false))
+                    {
+                        return null;
+                    }
+                }
+
+                /**
+                 * If the stack being shift-clicked into the AugmentationTable's container
+                 * is an augment(?), try to put it in the augment slot.
+                 */
+                else if (slotItemStack.getItem() instanceof ItemGem)
+                {
+                    if (!this.mergeItemStack(slotItemStack, TileEntityAugmentationTable.AUGMENT_SLOT_INVENTORY_INDEX, TileEntityAugmentationTable.OUTPUT_SLOT_INVENTORY_INDEX, false))
+                    {
+                        return null;
+                    }
+                }
+
+                /**
+                 * If the stack is not augmentable or an augment don't add it in a slot
+                 */
+                else
+                {
+                    return null;
+                }
+            }
+
+            if (slotItemStack.stackSize == 0)
+            {
+                slot.putStack(null);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+        }
+
+        return itemStack;
     }
 }
