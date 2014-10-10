@@ -1,22 +1,23 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.init.Glyphs;
+import com.pahimar.ee3.api.Glyph;
+import com.pahimar.ee3.array.GlyphTextureRegistry;
+import com.pahimar.ee3.item.ItemChalk;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
+import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
+import com.pahimar.ee3.util.EntityHelper;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
 {
@@ -57,40 +58,70 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
         return new TileEntityAlchemyArray();
     }
 
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
-    {
-        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-        ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
-        {
-            // TODO: Place the first glyph of the alchemy glyphs from the player's currently selected glyph
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 3, facing);
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 2, facing);
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.BASE_CIRCLE, 1, facing);
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 1, facing);
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 2);
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(Glyphs.TRIANGLE, 3);
-        }
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z)
-    {
-        return false;
+//    @Override
+//    public boolean canPlaceBlockAt(World world, int x, int y, int z)
+//    {
 //        return super.canPlaceBlockAt(world, x, y, z);
-    }
+//    }
 
-    @Override
-    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
-    {
-        return false;
-    }
+//    @Override
+//    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+//    {
+//        return false;
+//    }
 
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData)
     {
         return sideHit;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+
+        // TODO: Set rotation
+        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
+        {
+            NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
+            ChalkSettings chalkSettings = new ChalkSettings();
+            chalkSettings.readFromNBT(customEntityData);
+
+            ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
+
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
+
+            // TODO: Play a sound when a glyph is added
+        }
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            if (entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemChalk)
+            {
+                NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityPlayer);
+                ChalkSettings chalkSettings = new ChalkSettings();
+                chalkSettings.readFromNBT(customEntityData);
+
+                ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
+
+                ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
+                world.markBlockForUpdate(x, y, z);
+                world.getTileEntity(x, y, z).markDirty();
+
+                // TODO: Play a sound when a glyph is added to an array
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

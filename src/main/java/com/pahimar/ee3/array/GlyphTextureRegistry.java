@@ -50,6 +50,18 @@ public class GlyphTextureRegistry
         }
     }
 
+    public ResourceLocation getResourceLocation(int index)
+    {
+        if (index >= glyphTextureSortedMap.size() || index < 0)
+        {
+            return null;
+        }
+
+        ResourceLocation[] glyphTextures = glyphTextureSortedMap.keySet().toArray(new ResourceLocation[]{});
+
+        return glyphTextures[index];
+    }
+
     public Map<ResourceLocation, String> getGlyphs()
     {
         return ImmutableMap.copyOf(glyphTextureSortedMap);

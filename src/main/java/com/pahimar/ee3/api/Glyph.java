@@ -8,7 +8,6 @@ public class Glyph implements Comparable<Glyph>
     private ResourceLocation texture;
     private String unLocalizedName;
     private int size;
-    private int rotation;
 
     private Glyph()
     {
@@ -22,25 +21,14 @@ public class Glyph implements Comparable<Glyph>
 
     public Glyph(ResourceLocation texture, String unLocalizedName, int size)
     {
-        this(texture, unLocalizedName, size, 0);
-    }
-
-    public Glyph(ResourceLocation texture, String unLocalizedName, int size, int rotation)
-    {
         this.texture = texture;
         this.unLocalizedName = unLocalizedName;
         this.size = size;
-        this.rotation = rotation;
     }
 
     public Glyph(Glyph glyph, int size)
     {
-        this(glyph, size, glyph.rotation);
-    }
-
-    public Glyph(Glyph glyph, int size, int rotation)
-    {
-        this(glyph.texture, glyph.unLocalizedName, size, rotation);
+        this(glyph.texture, glyph.unLocalizedName, size);
     }
 
     public ResourceLocation getTexture()
@@ -56,11 +44,6 @@ public class Glyph implements Comparable<Glyph>
     public int getSize()
     {
         return size;
-    }
-
-    public int getRotation()
-    {
-        return rotation;
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -93,22 +76,12 @@ public class Glyph implements Comparable<Glyph>
             {
                 this.size = 0;
             }
-
-            if (nbtTagCompound.hasKey("rotation"))
-            {
-                this.rotation = nbtTagCompound.getInteger("rotation");
-            }
-            else
-            {
-                this.rotation = 0;
-            }
         }
         else
         {
             this.texture = new ResourceLocation("");
             this.unLocalizedName = "";
             this.size = 0;
-            this.rotation = 0;
         }
     }
 
@@ -118,7 +91,6 @@ public class Glyph implements Comparable<Glyph>
         nbtTagCompound.setString("texturePath", texture.getResourcePath());
         nbtTagCompound.setString("unLocalizedName", unLocalizedName);
         nbtTagCompound.setInteger("size", size);
-        nbtTagCompound.setInteger("rotation", rotation);
     }
 
     public static Glyph readGlyphFromNBT(NBTTagCompound nbtTagCompound)
@@ -131,7 +103,7 @@ public class Glyph implements Comparable<Glyph>
     @Override
     public String toString()
     {
-        return String.format("texture: %s, unLocalizedName: %s, size: %s, orientation: %s", texture.getResourceDomain() + ":" + texture.getResourcePath(), unLocalizedName, size, rotation);
+        return String.format("texture: %s, unLocalizedName: %s, size: %s", texture.getResourceDomain() + ":" + texture.getResourcePath(), unLocalizedName, size);
     }
 
     @Override
@@ -152,14 +124,7 @@ public class Glyph implements Comparable<Glyph>
         {
             if (this.texture.getResourcePath().equalsIgnoreCase(glyph.getTexture().getResourcePath()))
             {
-                if (this.size == glyph.size)
-                {
-                    return this.rotation - glyph.rotation;
-                }
-                else
-                {
-                    return this.size - glyph.size;
-                }
+                return this.size - glyph.size;
             }
             else
             {

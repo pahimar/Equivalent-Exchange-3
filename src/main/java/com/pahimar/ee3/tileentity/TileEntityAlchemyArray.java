@@ -13,11 +13,13 @@ import net.minecraft.util.AxisAlignedBB;
 public class TileEntityAlchemyArray extends TileEntityEE
 {
     private AlchemyArray alchemyArray;
+    private int rotation;
 
     public TileEntityAlchemyArray()
     {
         super();
         alchemyArray = new AlchemyArray();
+        rotation = 0;
     }
 
     public AlchemyArray getAlchemyArray()
@@ -25,19 +27,53 @@ public class TileEntityAlchemyArray extends TileEntityEE
         return alchemyArray;
     }
 
-    public void addGlyphToAlchemyArray(Glyph glyph)
-    {
-        alchemyArray.addGlyph(glyph);
-    }
-
     public void addGlyphToAlchemyArray(Glyph glyph, int size)
     {
         alchemyArray.addGlyph(new Glyph(glyph, size));
     }
 
-    public void addGlyphToAlchemyArray(Glyph glyph, int size, int facing)
+    public int getRotation()
     {
-        alchemyArray.addGlyph(new Glyph(glyph, size, facing));
+        return rotation;
+    }
+
+    public void setRotation(int rotation)
+    {
+        this.rotation = rotation;
+
+        if (this.rotation < 0)
+        {
+            this.rotation = 0;
+        }
+        else
+        {
+            this.rotation = this.rotation % 4;
+        }
+    }
+
+    public void rotate()
+    {
+        rotate(true);
+    }
+
+    /**
+     * @param rotateClockwise true if we should rotate clockwise, false if we rotate counter clockwise
+     */
+    public void rotate(boolean rotateClockwise)
+    {
+        if (rotateClockwise)
+        {
+            this.rotation = (rotation + 1) % 4;
+        }
+        else
+        {
+            this.rotation -= 1;
+
+            if (this.rotation < 0)
+            {
+                this.rotation = 3;
+            }
+        }
     }
 
     @Override
@@ -61,6 +97,8 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
         NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
         alchemyArray = AlchemyArray.readAlchemyArrayFromNBT(alchemyArrayTagCompound);
+
+        rotation = nbtTagCompound.getInteger("rotation");
     }
 
     @Override
@@ -70,6 +108,8 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
         NBTTagCompound alchemyArrayTagCompound = new NBTTagCompound();
         alchemyArray.writeToNBT(alchemyArrayTagCompound);
+
+        nbtTagCompound.setInteger("rotation", rotation);
 
         nbtTagCompound.setTag("alchemyArray", alchemyArrayTagCompound);
     }

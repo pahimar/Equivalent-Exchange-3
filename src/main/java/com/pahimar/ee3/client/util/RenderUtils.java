@@ -1,10 +1,13 @@
 package com.pahimar.ee3.client.util;
 
+import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -42,7 +45,6 @@ public class RenderUtils
 
     public static void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event, ResourceLocation texture, int size, int rotation)
     {
-        // TODO: Intelligently render the overlay (whether its new, or part of an existing array)
         // TODO: Only render glyphs if they can be placed
 
         double x = event.target.blockX + 0.5F;
@@ -66,6 +68,8 @@ public class RenderUtils
 
         int chargeLevel = size;
         ForgeDirection sideHit = ForgeDirection.getOrientation(event.target.sideHit);
+        TileEntity tileEntity = event.player.worldObj.getTileEntity(event.target.blockX, event.target.blockY, event.target.blockZ);
+        LogHelper.info(sideHit);
         switch (sideHit)
         {
             case UP:
@@ -75,6 +79,10 @@ public class RenderUtils
                 xRotate = -1;
                 rotationAngle = (-90 * (rotation + 2)) % 360;
                 facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    y -= 1;
+                }
                 break;
             }
             case DOWN:
@@ -84,6 +92,10 @@ public class RenderUtils
                 xRotate = 1;
                 rotationAngle = (-90 * (rotation + 2)) % 360;
                 facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    y += 1;
+                }
                 break;
             }
             case NORTH:
@@ -93,6 +105,10 @@ public class RenderUtils
                 zShift = -0.001f;
                 zRotate = 1;
                 rotationAngle = (-90 * (rotation + 1)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    z += 1;
+                }
                 break;
             }
             case SOUTH:
@@ -101,6 +117,10 @@ public class RenderUtils
                 zShift = 0.001f;
                 zRotate = -1;
                 rotationAngle = (-90 * (rotation + 1)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    z -= 1;
+                }
                 break;
             }
             case EAST:
@@ -109,6 +129,10 @@ public class RenderUtils
                 xShift = 0.001f;
                 yRotate = 1;
                 rotationAngle = (-90 * (rotation + 2)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    x -= 1;
+                }
                 break;
             }
             case WEST:
@@ -117,6 +141,10 @@ public class RenderUtils
                 xShift = -0.001f;
                 yRotate = -1;
                 rotationAngle = (-90 * (rotation + 2)) % 360;
+                if (tileEntity instanceof TileEntityAlchemyArray)
+                {
+                    x += 1;
+                }
                 break;
             }
             default:
