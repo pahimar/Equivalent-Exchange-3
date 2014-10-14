@@ -1,6 +1,7 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.api.Glyph;
+import com.pahimar.ee3.client.util.RenderUtils;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -24,11 +25,24 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glPushMatrix();
+
             for (Glyph glyph : tileEntityAlchemyArray.getAlchemyArray().getGlyphs())
             {
-                this.bindTexture(glyph.getTexture());
-                renderSymbol(glyph, x, y, z, tileEntityAlchemyArray.getOrientation());
+                GL11.glDepthMask(false);
+                GL11.glPushMatrix();
+                GL11.glTranslated(x + 0.5d, y + 0.5d, z + 0.5d);
+                GL11.glScalef(1f, 1f, 1f);
+                // TODO: Finish making this work in this much more intelligent way than the way we did in renderSymbol
+//            GL11.glRotatef(rotationAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
+//            GL11.glRotatef(facingCorrectionAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
+//            GL11.glRotatef(90, xRotate, yRotate, zRotate);
+//            GL11.glTranslated(0, 0, 0.5f * zCorrection);
+                GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+                RenderUtils.renderQuad(glyph.getTexture());
+                GL11.glPopMatrix();
+                GL11.glDepthMask(true);
             }
+
             GL11.glPopMatrix();
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_CULL_FACE);

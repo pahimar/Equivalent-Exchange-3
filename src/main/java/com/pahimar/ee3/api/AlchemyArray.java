@@ -36,14 +36,14 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         }
     }
 
-    public void addGlyph(Glyph glyph)
+    public boolean addGlyph(Glyph glyph)
     {
         if (glyph.getSize() > largestGlyphSize)
         {
             largestGlyphSize = glyph.getSize();
         }
 
-        glyphs.add(glyph);
+        return glyphs.add(glyph);
     }
 
     public void addGlyph(Glyph glyph, int size)

@@ -8,6 +8,7 @@ import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
+import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.EntityHelper;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -84,7 +85,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
         // TODO: Set rotation
         int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
         {
             NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
             ChalkSettings chalkSettings = new ChalkSettings();
@@ -94,14 +95,14 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
 
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
 
-            // TODO: Play a sound when a glyph is added
+            CommonSoundHelper.playChalkSoundAt((EntityPlayer) entityLiving);
         }
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             if (entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemChalk)
             {
@@ -111,13 +112,13 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
 
                 ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
 
-                ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
-                world.markBlockForUpdate(x, y, z);
-                world.getTileEntity(x, y, z).markDirty();
-
-                // TODO: Play a sound when a glyph is added to an array
-
-                return true;
+                if (((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize()))
+                {
+                    world.markBlockForUpdate(x, y, z);
+                    world.getTileEntity(x, y, z).markDirty();
+                    CommonSoundHelper.playChalkSoundAt(entityPlayer);
+                    return true;
+                }
             }
         }
 

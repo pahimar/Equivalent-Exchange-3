@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.util;
 
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
-import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -18,7 +17,7 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderUtils
 {
-    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale)
+    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale, int zLevel)
     {
         IIcon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -28,19 +27,14 @@ public class RenderUtils
         float green = (overlayColour >> 8 & 255) / 255.0F;
         float blue = (overlayColour & 255) / 255.0F;
         GL11.glColor4f(red, green, blue, opacity);
-        drawTexturedQuad(x, y, icon, 16 * scale, 16 * scale, -90);
-        GL11.glEnable(GL11.GL_LIGHTING);
-    }
-
-    public static void drawTexturedQuad(int x, int y, IIcon icon, float width, float height, double zLevel)
-    {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getMaxV());
-        tessellator.addVertexWithUV(x + width, y + height, zLevel, icon.getMaxU(), icon.getMaxV());
-        tessellator.addVertexWithUV(x + width, y, zLevel, icon.getMaxU(), icon.getMinV());
+        tessellator.addVertexWithUV(x, y + 16 * scale, zLevel, icon.getMinU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + 16 * scale, y + 16 * scale, zLevel, icon.getMaxU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + 16 * scale, y, zLevel, icon.getMaxU(), icon.getMinV());
         tessellator.addVertexWithUV(x, y, zLevel, icon.getMinU(), icon.getMinV());
         tessellator.draw();
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     public static void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event, ResourceLocation texture, int size, int rotation)
@@ -69,7 +63,6 @@ public class RenderUtils
         int chargeLevel = size;
         ForgeDirection sideHit = ForgeDirection.getOrientation(event.target.sideHit);
         TileEntity tileEntity = event.player.worldObj.getTileEntity(event.target.blockX, event.target.blockY, event.target.blockZ);
-        LogHelper.info(sideHit);
         switch (sideHit)
         {
             case UP:

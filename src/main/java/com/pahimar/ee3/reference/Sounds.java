@@ -1,7 +1,11 @@
 package com.pahimar.ee3.reference;
 
+import java.util.Random;
+
 public class Sounds
 {
+    private static final Random random = new Random();
+
     public static final String CHEST_OPEN = "random.chestopen";
     public static final String CHEST_CLOSE = "random.chestclosed";
 
@@ -20,4 +24,15 @@ public class Sounds
     public static final String WALL = "wall";
     public static final String WATER_BALL = "waterball";
     public static final String WIND = "wind";
+
+    public static final class Chalk
+    {
+        private static final String CHALK_PREFIX = "chalk_";
+        private static final int CHALK_SOUNDS_COUNT = 11;
+
+        public static final String getRandomChalkSound()
+        {
+            return String.format("%s%s", CHALK_PREFIX, random.nextInt(CHALK_SOUNDS_COUNT) + 1);
+        }
+    }
 }

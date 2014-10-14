@@ -6,6 +6,7 @@ import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.settings.ChalkSettings;
+import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.EntityHelper;
 import com.pahimar.ee3.util.IKeyBound;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,7 +66,8 @@ public class ItemChalk extends ItemEE implements IKeyBound
             int sideHit = ModBlocks.alchemyArray.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, itemStack.getItemDamage());
             if (placeBlockAt(itemStack, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ, sideHit))
             {
-                world.playSoundEffect(x + 0.5d, y + 0.5d, z + 0.5d, ModBlocks.alchemyArray.stepSound.func_150496_b(), (ModBlocks.alchemyArray.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.alchemyArray.stepSound.getPitch() * 0.8F);
+//                world.playSoundEffect(x + 0.5d, y + 0.5d, z + 0.5d, ModBlocks.alchemyArray.stepSound.func_150496_b(), (ModBlocks.alchemyArray.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.alchemyArray.stepSound.getPitch() * 0.8F);
+                CommonSoundHelper.playChalkSoundAt(entityPlayer);
                 --itemStack.stackSize;
             }
             return true;
@@ -83,7 +85,6 @@ public class ItemChalk extends ItemEE implements IKeyBound
      */
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
     {
-
         if (!world.setBlock(x, y, z, ModBlocks.alchemyArray, metadata, 3))
         {
             return false;

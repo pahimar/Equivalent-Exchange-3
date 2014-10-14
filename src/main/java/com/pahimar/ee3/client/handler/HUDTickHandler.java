@@ -65,7 +65,7 @@ public class HUDTickHandler
         hudOverlayX = (int) (sr.getScaledWidth() - 16 * overlayScale);
         hudOverlayY = (int) (sr.getScaledHeight() - 16 * overlayScale);
 
-        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, itemStack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale);
+        RenderUtils.renderItemIntoGUI(minecraft.fontRenderer, itemStack, hudOverlayX, hudOverlayY, overlayOpacity, overlayScale, -90);
 
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

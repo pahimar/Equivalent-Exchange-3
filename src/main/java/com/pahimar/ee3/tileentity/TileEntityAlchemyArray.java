@@ -27,9 +27,14 @@ public class TileEntityAlchemyArray extends TileEntityEE
         return alchemyArray;
     }
 
-    public void addGlyphToAlchemyArray(Glyph glyph, int size)
+    public boolean addGlyphToAlchemyArray(Glyph glyph)
     {
-        alchemyArray.addGlyph(new Glyph(glyph, size));
+        return alchemyArray.addGlyph(glyph);
+    }
+
+    public boolean addGlyphToAlchemyArray(Glyph glyph, int size)
+    {
+        return addGlyphToAlchemyArray(new Glyph(glyph, size));
     }
 
     public int getRotation()

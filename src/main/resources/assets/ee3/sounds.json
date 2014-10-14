@@ -1,18 +1,130 @@
 {
-    "chargeDown": {"category": "master","sounds": [{"name": "chargeDown", "stream": false}]},
-    "chargeUp": {"category": "master","sounds": [{"name": "chargeUp", "stream": false}]},
-    "destruct": {"category": "master","sounds": [{"name": "destruct", "stream": false}]},
-    "fail": {"category": "master","sounds": [{"name": "fail", "stream": false}]},
-    "gust": {"category": "master","sounds": [{"name": "gust", "stream": false}]},
-    "heal": {"category": "master","sounds": [{"name": "heal", "stream": false}]},
-    "kinesis": {"category": "master","sounds": [{"name": "kinesis", "stream": false}]},
-    "launch": {"category": "master","sounds": [{"name": "launch", "stream": false}]},
-    "nova": {"category": "master","sounds": [{"name": "nova", "stream": false}]},
-    "philball": {"category": "master","sounds": [{"name": "philball", "stream": false}]},
-    "tock": {"category": "master","sounds": [{"name": "tock", "stream": false}]},
-    "transmute": {"category": "master","sounds": [{"name": "transmute", "stream": false}]},
-    "wall": {"category": "master","sounds": [{"name": "wall", "stream": false}]},
-    "waterball": {"category": "master","sounds": [{"name": "waterball", "stream": false}]},
+    "chargeDown": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "chargeDown",
+                "stream": false
+            }
+        ]
+    },
+    "chargeUp": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "chargeUp",
+                "stream": false
+            }
+        ]
+    },
+    "destruct": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "destruct",
+                "stream": false
+            }
+        ]
+    },
+    "fail": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "fail",
+                "stream": false
+            }
+        ]
+    },
+    "gust": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "gust",
+                "stream": false
+            }
+        ]
+    },
+    "heal": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "heal",
+                "stream": false
+            }
+        ]
+    },
+    "kinesis": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "kinesis",
+                "stream": false
+            }
+        ]
+    },
+    "launch": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "launch",
+                "stream": false
+            }
+        ]
+    },
+    "nova": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "nova",
+                "stream": false
+            }
+        ]
+    },
+    "philball": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "philball",
+                "stream": false
+            }
+        ]
+    },
+    "tock": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "tock",
+                "stream": false
+            }
+        ]
+    },
+    "transmute": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "transmute",
+                "stream": false
+            }
+        ]
+    },
+    "wall": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "wall",
+                "stream": false
+            }
+        ]
+    },
+    "waterball": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "waterball",
+                "stream": false
+            }
+        ]
+    },
     "wind": {
         "category": "master",
         "sounds": [
@@ -22,299 +134,101 @@
             }
         ]
     },
-    "chalk_short_1": {
+    "chalk_1": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_1",
+                "name": "chalk/chalk_1",
                 "stream": false
             }
         ]
     },
-    "chalk_short_2": {
+    "chalk_2": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_2",
+                "name": "chalk/chalk_2",
                 "stream": false
             }
         ]
     },
-    "chalk_short_3": {
+    "chalk_3": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_3",
+                "name": "chalk/chalk_3",
                 "stream": false
             }
         ]
     },
-    "chalk_short_4": {
+    "chalk_4": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_4",
+                "name": "chalk/chalk_4",
                 "stream": false
             }
         ]
     },
-    "chalk_short_5": {
+    "chalk_5": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_5",
+                "name": "chalk/chalk_5",
                 "stream": false
             }
         ]
     },
-    "chalk_short_6": {
+    "chalk_6": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_6",
+                "name": "chalk/chalk_6",
                 "stream": false
             }
         ]
     },
-    "chalk_short_7": {
+    "chalk_7": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_7",
+                "name": "chalk/chalk_7",
                 "stream": false
             }
         ]
     },
-    "chalk_short_8": {
+    "chalk_8": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_8",
+                "name": "chalk/chalk_8",
                 "stream": false
             }
         ]
     },
-    "chalk_short_9": {
+    "chalk_9": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_9",
+                "name": "chalk/chalk_9",
                 "stream": false
             }
         ]
     },
-    "chalk_short_10": {
+    "chalk_10": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_10",
+                "name": "chalk/chalk_10",
                 "stream": false
             }
         ]
     },
-    "chalk_short_11": {
+    "chalk_11": {
         "category": "master",
         "sounds": [
             {
-                "name": "chalk/short/chalk_short_11",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_1": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_1",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_2": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_2",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_3": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_3",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_4": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_4",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_5": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_5",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_6": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_6",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_7": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_7",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_8": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_8",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_9": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_9",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_10": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_10",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_medium_11": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/medium/chalk_medium_11",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_1": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_1",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_2": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_2",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_3": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_3",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_4": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_4",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_5": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_5",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_6": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_6",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_7": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_7",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_8": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_8",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_9": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_9",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_10": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_10",
-                "stream": false
-            }
-        ]
-    },
-    "chalk_long_11": {
-        "category": "master",
-        "sounds": [
-            {
-                "name": "chalk/long/chalk_long_11",
+                "name": "chalk/chalk_11",
                 "stream": false
             }
         ]
