@@ -39,7 +39,7 @@ public class RenderUtils
 
     public static void drawInWorldTransmutationOverlay(DrawBlockHighlightEvent event, ResourceLocation texture, int size, int rotation)
     {
-        // TODO: Only render glyphs if they can be placed
+        // TODO: Move this to DrawHighlightEventHandler - it has no place here!
 
         double x = event.target.blockX + 0.5F;
         double y = event.target.blockY + 0.5F;
@@ -63,6 +63,7 @@ public class RenderUtils
         int chargeLevel = size;
         ForgeDirection sideHit = ForgeDirection.getOrientation(event.target.sideHit);
         TileEntity tileEntity = event.player.worldObj.getTileEntity(event.target.blockX, event.target.blockY, event.target.blockZ);
+
         switch (sideHit)
         {
             case UP:
@@ -153,7 +154,7 @@ public class RenderUtils
         GL11.glRotatef(90, xRotate, yRotate, zRotate);
         GL11.glTranslated(0, 0, 0.5f * zCorrection);
         GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-        renderQuad(texture);
+        renderPulsingQuad(texture, 1f);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glDepthMask(true);
@@ -176,4 +177,48 @@ public class RenderUtils
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
     }
+
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency)
+    {
+        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        Tessellator tessellator = Tessellator.instance;
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glColor4f(1, 1, 1, pulseTransparency);
+        tessellator.startDrawingQuads();
+        tessellator.setColorRGBA_F(1, 1, 1, pulseTransparency);
+        tessellator.addVertexWithUV(-0.5D, 0.5D, 0F, 0, 1);
+        tessellator.addVertexWithUV(0.5D, 0.5D, 0F, 1, 1);
+        tessellator.addVertexWithUV(0.5D, -0.5D, 0F, 1, 0);
+        tessellator.addVertexWithUV(-0.5D, -0.5D, 0F, 0, 0);
+        tessellator.draw();
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+    }
+
+    private static int getPulseValue()
+    {
+        if (doInc)
+        {
+            pulse += 50;
+        }
+        else
+        {
+            pulse -= 50;
+        }
+        if (pulse == 3000)
+        {
+            doInc = false;
+        }
+        if (pulse == 0)
+        {
+            doInc = true;
+        }
+        return pulse;
+    }
+
+    private static int pulse = 0;
+    private static boolean doInc = true;
 }

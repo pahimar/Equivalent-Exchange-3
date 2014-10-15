@@ -218,6 +218,8 @@ public class DrawBlockHighlightEventHandler
     {
         ChalkSettings chalkSettings = EquivalentExchange3.proxy.getClientProxy().chalkSettings;
         ResourceLocation[] textures = GlyphTextureRegistry.getInstance().getGlyphs().keySet().toArray(new ResourceLocation[]{});
+
+        // TODO: Only intelligently render glyphs (and make them pulse)
         RenderUtils.drawInWorldTransmutationOverlay(event, textures[chalkSettings.getIndex()], chalkSettings.getSize(), chalkSettings.getRotation());
     }
 }

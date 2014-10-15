@@ -82,14 +82,15 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     {
         ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
 
-        // TODO: Set rotation
-        int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
         {
             NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(customEntityData);
+
+            // Set adjusted rotation
+            int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setRotation(chalkSettings.getRotation(), facing);
 
             ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
 
