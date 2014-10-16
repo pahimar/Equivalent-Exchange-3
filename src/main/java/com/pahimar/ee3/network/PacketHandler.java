@@ -22,5 +22,6 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageSetEnergyValue.class, MessageSetEnergyValue.class, 7, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityAlchemyArray.class, MessageTileEntityAlchemyArray.class, 8, Side.CLIENT);
         INSTANCE.registerMessage(MessageChalkSettings.class, MessageChalkSettings.class, 9, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityDummy.class, MessageTileEntityDummy.class, 10, Side.CLIENT);
     }
 }

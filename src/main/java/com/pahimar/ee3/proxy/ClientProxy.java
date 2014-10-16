@@ -57,6 +57,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void initRenderingAndTextures()
     {
+        RenderIds.dummy = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.calcinator = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludel = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChest = RenderingRegistry.getNextAvailableRenderId();

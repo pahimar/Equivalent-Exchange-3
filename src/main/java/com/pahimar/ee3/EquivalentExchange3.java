@@ -84,7 +84,7 @@ public class EquivalentExchange3
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
         // Initialize mod tile entities
-        proxy.registerTileEntities();
+        TileEntities.init();
 
         // Initialize custom rendering and pre-load textures (Client only)
         proxy.initRenderingAndTextures();

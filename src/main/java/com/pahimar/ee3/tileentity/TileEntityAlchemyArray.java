@@ -199,4 +199,10 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
         nbtTagCompound.setTag("alchemyArray", alchemyArrayTagCompound);
     }
+
+    @Override
+    public void updateEntity()
+    {
+//        LogHelper.info(String.format("x: %s, y: %s, z: %s", this.xCoord, this.yCoord, this.zCoord));
+    }
 }
