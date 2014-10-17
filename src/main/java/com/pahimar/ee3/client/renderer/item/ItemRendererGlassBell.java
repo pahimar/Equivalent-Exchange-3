@@ -80,7 +80,6 @@ public class ItemRendererGlassBell implements IItemRenderer
         modelGlassBell.render();
 
         GL11.glPopMatrix();
-        
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
+
     }
 }
