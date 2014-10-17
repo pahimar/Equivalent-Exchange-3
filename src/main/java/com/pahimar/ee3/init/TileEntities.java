@@ -8,7 +8,7 @@ public class TileEntities
 {
     public static void init()
     {
-        GameRegistry.registerTileEntity(TileEntityDummy.class, Names.Blocks.DUMMY_BLOCK);
+        GameRegistry.registerTileEntity(TileEntityDummyArray.class, Names.Blocks.DUMMY_ARRAY);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST, "tile." + Names.Blocks.ALCHEMICAL_CHEST);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestSmall.class, Names.Blocks.ALCHEMICAL_CHEST + "Small", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Small");
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestMedium.class, Names.Blocks.ALCHEMICAL_CHEST + "Medium", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Medium");

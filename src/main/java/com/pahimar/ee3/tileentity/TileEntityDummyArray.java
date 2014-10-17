@@ -5,12 +5,12 @@ import com.pahimar.ee3.network.message.MessageTileEntityDummy;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 
-public class TileEntityDummy extends TileEntityEE
+public class TileEntityDummyArray extends TileEntityEE
 {
     private int trueXCoord, trueYCoord, trueZCoord;
     private int ticksSinceSync;
 
-    public TileEntityDummy()
+    public TileEntityDummyArray()
     {
         super();
     }

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.network.message;
 
-import com.pahimar.ee3.tileentity.TileEntityDummy;
+import com.pahimar.ee3.tileentity.TileEntityDummyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -22,18 +22,18 @@ public class MessageTileEntityDummy implements IMessage, IMessageHandler<Message
 
     }
 
-    public MessageTileEntityDummy(TileEntityDummy tileEntityDummy)
+    public MessageTileEntityDummy(TileEntityDummyArray tileEntityDummyArray)
     {
-        this.x = tileEntityDummy.xCoord;
-        this.y = tileEntityDummy.yCoord;
-        this.z = tileEntityDummy.zCoord;
-        this.orientation = (byte) tileEntityDummy.getOrientation().ordinal();
-        this.state = (byte) tileEntityDummy.getState();
-        this.customName = tileEntityDummy.getCustomName();
-        this.owner = tileEntityDummy.getOwner();
-        this.trueXCoord = tileEntityDummy.getTrueXCoord();
-        this.trueYCoord = tileEntityDummy.getTrueYCoord();
-        this.trueZCoord = tileEntityDummy.getTrueZCoord();
+        this.x = tileEntityDummyArray.xCoord;
+        this.y = tileEntityDummyArray.yCoord;
+        this.z = tileEntityDummyArray.zCoord;
+        this.orientation = (byte) tileEntityDummyArray.getOrientation().ordinal();
+        this.state = (byte) tileEntityDummyArray.getState();
+        this.customName = tileEntityDummyArray.getCustomName();
+        this.owner = tileEntityDummyArray.getOwner();
+        this.trueXCoord = tileEntityDummyArray.getTrueXCoord();
+        this.trueYCoord = tileEntityDummyArray.getTrueYCoord();
+        this.trueZCoord = tileEntityDummyArray.getTrueZCoord();
     }
 
     /**
@@ -100,9 +100,9 @@ public class MessageTileEntityDummy implements IMessage, IMessageHandler<Message
             ((TileEntityEE) tileEntity).setCustomName(message.customName);
             ((TileEntityEE) tileEntity).setOwner(message.owner);
 
-            if (tileEntity instanceof TileEntityDummy)
+            if (tileEntity instanceof TileEntityDummyArray)
             {
-                ((TileEntityDummy) tileEntity).setTrueCoords(message.trueXCoord, message.trueYCoord, message.trueZCoord);
+                ((TileEntityDummyArray) tileEntity).setTrueCoords(message.trueXCoord, message.trueYCoord, message.trueZCoord);
             }
         }
 

@@ -57,7 +57,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void initRenderingAndTextures()
     {
-        RenderIds.dummy = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.calcinator = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludel = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChest = RenderingRegistry.getNextAvailableRenderId();
@@ -65,6 +64,7 @@ public class ClientProxy extends CommonProxy
         RenderIds.researchStation = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.augmentationTable = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemyArray = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.dummyArray = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.alchemicalChest), new ItemRendererAlchemicalChest());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.aludel), new ItemRendererAludel());

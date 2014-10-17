@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks
 {
-    public static final BlockEE dummyBlock = new BlockDummy();
+    public static final BlockEE dummyArray = new BlockDummyArray();
     public static final BlockEE chalkBlock = new BlockChalk();
     public static final BlockEE alchemicalFuelBlock = new BlockAlchemicalFuel();
     public static final BlockEE alchemicalChest = new BlockAlchemicalChest();
@@ -23,7 +23,7 @@ public class ModBlocks
 
     public static void init()
     {
-        GameRegistry.registerBlock(dummyBlock, Names.Blocks.DUMMY_BLOCK);
+        GameRegistry.registerBlock(dummyArray, Names.Blocks.DUMMY_ARRAY);
         GameRegistry.registerBlock(calcinator, Names.Blocks.CALCINATOR);
         GameRegistry.registerBlock(aludel, Names.Blocks.ALUDEL);
         GameRegistry.registerBlock(glassBell, Names.Blocks.GLASS_BELL);

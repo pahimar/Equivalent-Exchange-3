@@ -161,7 +161,6 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     @Override
     public int compareTo(AlchemyArray alchemyArray)
     {
-        // TODO: Modify this to check that all glyphs have the same rotation
         if (this.glyphs.size() == alchemyArray.glyphs.size())
         {
             for (Glyph glyph : this.glyphs)

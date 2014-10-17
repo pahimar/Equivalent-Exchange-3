@@ -2,16 +2,15 @@ package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.api.Glyph;
 import com.pahimar.ee3.array.GlyphTextureRegistry;
-import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.item.ItemChalk;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
-import com.pahimar.ee3.tileentity.TileEntityDummy;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.EntityHelper;
+import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,6 +26,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
+
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
 {
@@ -76,8 +77,26 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z)
     {
-        // TODO: Check whether or not we can place the glyph here (given the size of the glyph)
-        return super.canPlaceBlockAt(world, x, y, z);
+        return world.getBlock(x, y, z).isReplaceable(world, x, y, z) &&
+                (world.isSideSolid(x - 1, y, z, EAST) ||
+                        world.isSideSolid(x + 1, y, z, WEST) ||
+                        world.isSideSolid(x, y, z - 1, SOUTH) ||
+                        world.isSideSolid(x, y, z + 1, NORTH) ||
+                        world.isSideSolid(x, y - 1, z, UP) ||
+                        world.isSideSolid(x, y + 1, z, DOWN));
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int sideHit)
+    {
+        ForgeDirection side = ForgeDirection.getOrientation(sideHit);
+        return world.getBlock(x, y, z).isReplaceable(world, x, y, z) &&
+                ((side == DOWN && world.isSideSolid(x, y + 1, z, DOWN)) ||
+                        (side == UP && world.isSideSolid(x, y - 1, z, UP)) ||
+                        (side == NORTH && world.isSideSolid(x, y, z + 1, NORTH)) ||
+                        (side == SOUTH && world.isSideSolid(x, y, z - 1, SOUTH)) ||
+                        (side == WEST && world.isSideSolid(x + 1, y, z, WEST)) ||
+                        (side == EAST && world.isSideSolid(x - 1, y, z, EAST)));
     }
 
     @Override
@@ -159,8 +178,6 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
 
             CommonSoundHelper.playChalkSoundAt((EntityPlayer) entityLiving);
-
-            placeDummyBlocksAround(world, x, y, z, world.getBlockMetadata(x, y, z));
         }
     }
 
@@ -185,62 +202,13 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
                     return true;
                 }
             }
+            else
+            {
+                LogHelper.info("Hello!");
+            }
         }
 
         return false;
-    }
-
-    private void placeDummyBlocksAround(World world, int x, int y, int z, int metaData)
-    {
-        // TODO: Save orientation correctly
-        ForgeDirection orientation = ForgeDirection.getOrientation(metaData);
-        int coordOffset = ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).getAlchemyArray().getLargestGlyphSize() / 2;
-
-        if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
-        {
-            for (int i = x - coordOffset; i <= x + coordOffset; i++)
-            {
-                for (int j = z - coordOffset; j <= z + coordOffset; j++)
-                {
-                    if (i != x || j != z)
-                    {
-                        world.setBlock(i, y, j, ModBlocks.dummyBlock, metaData, 3);
-                        ((TileEntityEE) world.getTileEntity(i, y, j)).setOrientation(metaData);
-                        ((TileEntityDummy) world.getTileEntity(i, y, j)).setTrueCoords(x, y, z);
-                    }
-                }
-            }
-        }
-        else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
-        {
-            for (int i = x - coordOffset; i <= x + coordOffset; i++)
-            {
-                for (int j = y - coordOffset; j <= y + coordOffset; j++)
-                {
-                    if (i != x || j != y)
-                    {
-                        world.setBlock(i, j, z, ModBlocks.dummyBlock, metaData, 3);
-                        ((TileEntityEE) world.getTileEntity(i, j, z)).setOrientation(metaData);
-                        ((TileEntityDummy) world.getTileEntity(i, j, z)).setTrueCoords(x, y, z);
-                    }
-                }
-            }
-        }
-        else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
-        {
-            for (int i = y - coordOffset; i <= y + coordOffset; i++)
-            {
-                for (int j = z - coordOffset; j <= z + coordOffset; j++)
-                {
-                    if (i != y || j != z)
-                    {
-                        world.setBlock(x, i, j, ModBlocks.dummyBlock, metaData, 3);
-                        ((TileEntityEE) world.getTileEntity(x, i, j)).setOrientation(metaData);
-                        ((TileEntityDummy) world.getTileEntity(x, i, j)).setTrueCoords(x, y, z);
-                    }
-                }
-            }
-        }
     }
 
     @Override
