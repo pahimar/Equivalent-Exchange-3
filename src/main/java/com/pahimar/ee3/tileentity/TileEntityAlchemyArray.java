@@ -15,6 +15,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 {
     private AlchemyArray alchemyArray;
     private ForgeDirection rotation;
+    private int ticksSinceSync;
 
     public TileEntityAlchemyArray()
     {
@@ -215,6 +216,84 @@ public class TileEntityAlchemyArray extends TileEntityEE
     @Override
     public void updateEntity()
     {
-//        LogHelper.info(String.format("x: %s, y: %s, z: %s", this.xCoord, this.yCoord, this.zCoord));
+        super.updateEntity();
+
+        if (!worldObj.isRemote)
+        {
+            if (++ticksSinceSync % 100 == 0)
+            {
+                if (!areDummyBlocksValid())
+                {
+                    this.invalidate();
+                    worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+                }
+            }
+        }
+    }
+
+    private boolean areDummyBlocksValid()
+    {
+        boolean validDummyBlocks = true;
+        int coordOffset = this.alchemyArray.getLargestGlyphSize() / 2;
+
+        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
+        {
+            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++)
+            {
+                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++)
+                {
+                    if ((i != this.xCoord || j != this.zCoord) && isValidDummyBlock(i, this.yCoord, j))
+                    {
+                        validDummyBlocks = false;
+                    }
+                }
+            }
+        }
+        else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH)
+        {
+            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++)
+            {
+                for (int j = this.yCoord - coordOffset; j <= this.yCoord + coordOffset; j++)
+                {
+                    if ((i != this.xCoord || j != this.yCoord) && isValidDummyBlock(i, j, this.zCoord))
+                    {
+                        validDummyBlocks = false;
+                    }
+                }
+            }
+        }
+        else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST)
+        {
+            for (int i = this.yCoord - coordOffset; i <= this.yCoord + coordOffset; i++)
+            {
+                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++)
+                {
+                    if ((i != this.yCoord || j != this.zCoord) && isValidDummyBlock(this.xCoord, i, j))
+                    {
+                        validDummyBlocks = false;
+                    }
+                }
+            }
+        }
+
+        return validDummyBlocks;
+    }
+
+    private boolean isValidDummyBlock(int x, int y, int z)
+    {
+        if (!this.worldObj.isRemote)
+        {
+            if (this.worldObj.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+            {
+                TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) this.worldObj.getTileEntity(x, y, z);
+
+                return tileEntityDummyArray.getOrientation() == this.orientation &&
+                        tileEntityDummyArray.getTrueXCoord() == this.xCoord &&
+                        tileEntityDummyArray.getTrueYCoord() == this.yCoord &&
+                        tileEntityDummyArray.getTrueZCoord() == this.zCoord;
+            }
+        }
+
+        return false;
     }
 }
