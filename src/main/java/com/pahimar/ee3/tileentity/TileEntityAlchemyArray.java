@@ -166,8 +166,20 @@ public class TileEntityAlchemyArray extends TileEntityEE
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
     {
-        // TODO: Make this glyph size and orientation sensitive
-        return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - alchemyArray.getLargestGlyphSize(), zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord + alchemyArray.getLargestGlyphSize(), zCoord + alchemyArray.getLargestGlyphSize());
+        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
+        {
+            return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - 1, zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord + 1, zCoord + alchemyArray.getLargestGlyphSize());
+        }
+        else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH)
+        {
+            return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - alchemyArray.getLargestGlyphSize(), zCoord - 1, xCoord + alchemyArray.getLargestGlyphSize(), yCoord + alchemyArray.getLargestGlyphSize(), zCoord + 1);
+        }
+        else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST)
+        {
+            return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord - alchemyArray.getLargestGlyphSize(), zCoord - alchemyArray.getLargestGlyphSize(), xCoord + 1, yCoord + alchemyArray.getLargestGlyphSize(), zCoord + alchemyArray.getLargestGlyphSize());
+        }
+
+        return super.getRenderBoundingBox();
     }
 
     @Override
