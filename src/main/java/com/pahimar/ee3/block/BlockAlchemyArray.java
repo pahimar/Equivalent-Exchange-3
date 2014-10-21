@@ -28,30 +28,36 @@ import java.util.Random;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
-public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
-    public BlockAlchemyArray() {
+public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
+{
+    public BlockAlchemyArray()
+    {
         super(Material.circuits);
         this.setCreativeTab(null);
         this.setBlockName(Names.Blocks.ALCHEMY_ARRAY);
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean renderAsNormalBlock()
+    {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
     @Override
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return RenderIds.alchemyArray;
     }
 
     @Override
-    public Item getItemDropped(int par1, Random random, int par2) {
+    public Item getItemDropped(int par1, Random random, int par2)
+    {
         return null;
     }
 
@@ -62,12 +68,14 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
      * @param metaData
      */
     @Override
-    public TileEntity createNewTileEntity(World world, int metaData) {
+    public TileEntity createNewTileEntity(World world, int metaData)
+    {
         return new TileEntityAlchemyArray();
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+    public boolean canPlaceBlockAt(World world, int x, int y, int z)
+    {
         return world.getBlock(x, y, z).isReplaceable(world, x, y, z) &&
                 (world.isSideSolid(x - 1, y, z, EAST) ||
                         world.isSideSolid(x + 1, y, z, WEST) ||
@@ -78,7 +86,8 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
     }
 
     @Override
-    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int sideHit) {
+    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int sideHit)
+    {
         ForgeDirection side = ForgeDirection.getOrientation(sideHit);
         return world.getBlock(x, y, z).isReplaceable(world, x, y, z) &&
                 ((side == DOWN && world.isSideSolid(x, y + 1, z, DOWN)) ||
@@ -90,36 +99,52 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
     }
 
     @Override
-    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+    {
         return false;
     }
 
     @Override
-    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+    public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
+    {
         return true;
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray) {
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
             boolean invalidateAlchemyArray = false;
 
-            if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.UP && !world.isSideSolid(x, y - 1, z, ForgeDirection.UP, true)) {
+            if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.UP && !world.isSideSolid(x, y - 1, z, ForgeDirection.UP, true))
+            {
                 invalidateAlchemyArray = true;
-            } else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.DOWN && !world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN, true)) {
+            }
+            else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.DOWN && !world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN, true))
+            {
                 invalidateAlchemyArray = true;
-            } else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.NORTH && !world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH, true)) {
+            }
+            else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.NORTH && !world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH, true))
+            {
                 invalidateAlchemyArray = true;
-            } else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.SOUTH && !world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH, true)) {
+            }
+            else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.SOUTH && !world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH, true))
+            {
                 invalidateAlchemyArray = true;
-            } else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.EAST && !world.isSideSolid(x - 1, y, z, ForgeDirection.EAST, true)) {
+            }
+            else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.EAST && !world.isSideSolid(x - 1, y, z, ForgeDirection.EAST, true))
+            {
                 invalidateAlchemyArray = true;
-            } else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.WEST && !world.isSideSolid(x + 1, y, z, ForgeDirection.WEST, true)) {
+            }
+            else if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.WEST && !world.isSideSolid(x + 1, y, z, ForgeDirection.WEST, true))
+            {
                 invalidateAlchemyArray = true;
             }
 
-            if (invalidateAlchemyArray) {
+            if (invalidateAlchemyArray)
+            {
                 tileEntityAlchemyArray.invalidate();
                 world.setBlockToAir(x, y, z);
             }
@@ -127,15 +152,18 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
+    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData)
+    {
         return sideHit;
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
         ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
 
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer) {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
+        {
             NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(customEntityData);
@@ -144,32 +172,39 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
             int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setRotation(chalkSettings.getRotation(), facing);
 
-            ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
+            ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getRegisteredGlyphAt(chalkSettings.getIndex());
 
-            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize());
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().get(glyphTexture)), chalkSettings.getSize());
 
             CommonSoundHelper.playChalkSoundAt((EntityPlayer) entityLiving);
         }
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray) {
-            if (entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemChalk) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
+            if (entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemChalk && !entityPlayer.isSneaking())
+            {
                 NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityPlayer);
                 ChalkSettings chalkSettings = new ChalkSettings();
                 chalkSettings.readFromNBT(customEntityData);
 
-                ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getResourceLocation(chalkSettings.getIndex());
+                ResourceLocation glyphTexture = GlyphTextureRegistry.getInstance().getRegisteredGlyphAt(chalkSettings.getIndex());
 
-                if (((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getGlyphs().get(glyphTexture)), chalkSettings.getSize())) {
+                if (tileEntityAlchemyArray.addGlyphToAlchemyArray(new Glyph(glyphTexture, GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().get(glyphTexture)), chalkSettings.getSize()))
+                {
                     world.markBlockForUpdate(x, y, z);
                     world.getTileEntity(x, y, z).markDirty();
                     CommonSoundHelper.playChalkSoundAt(entityPlayer);
                     return true;
                 }
-            } else {
-                // TODO: If the Alchemy Array in the TileEntity associated with this block is valid (registered) fire its onActivate event
+            }
+            else
+            {
+                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
             }
         }
 
@@ -177,7 +212,8 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+    {
         return null;
     }
 
@@ -186,36 +222,46 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider {
      * x, y, z, startVec, endVec
      */
     @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray) {
+    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    {
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
 
-            switch (tileEntityAlchemyArray.getOrientation()) {
-                case DOWN: {
+            switch (tileEntityAlchemyArray.getOrientation())
+            {
+                case DOWN:
+                {
                     this.setBlockBounds(0f, 1f, 0f, 1f, 1 - 0.0625f, 1f);
                     break;
                 }
-                case UP: {
+                case UP:
+                {
                     this.setBlockBounds(0f, 0f, 0f, 1f, 0.0625f, 1f);
                     break;
                 }
-                case NORTH: {
+                case NORTH:
+                {
                     this.setBlockBounds(0f, 0f, 1 - 0.0625f, 1f, 1f, 1f);
                     break;
                 }
-                case SOUTH: {
+                case SOUTH:
+                {
                     this.setBlockBounds(0f, 0f, 0f, 1f, 1f, 0.0625f);
                     break;
                 }
-                case EAST: {
+                case EAST:
+                {
                     this.setBlockBounds(0f, 0f, 0f, 0.0625f, 1f, 1f);
                     break;
                 }
-                case WEST: {
+                case WEST:
+                {
                     this.setBlockBounds(1f, 0f, 0f, 1 - 0.0625f, 1f, 1f);
                     break;
                 }
-                case UNKNOWN: {
+                case UNKNOWN:
+                {
                     break;
                 }
             }

@@ -2,25 +2,11 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
-import net.minecraft.util.ResourceLocation;
 
-public class GlyphTextureRegistryProxy
+public class AlchemyArrayRegistryProxy
 {
     @Mod.Instance("EE3")
     private static Object ee3Mod;
-
-    public static void addGlyph(ResourceLocation glyphTexture, String unLocalizedName)
-    {
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
-        {
-            return;
-        }
-
-        EE3Wrapper.ee3mod.getGlyphRegistry().registerGlyph(glyphTexture, unLocalizedName);
-    }
 
     private static class EE3Wrapper
     {

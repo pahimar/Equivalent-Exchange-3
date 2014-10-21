@@ -23,16 +23,16 @@ public class Glyphs
 
     public static void init()
     {
-        GlyphTextureRegistry.getInstance().addGlyph(BASE_CIRCLE);
-        GlyphTextureRegistry.getInstance().addGlyph(DOT);
-        GlyphTextureRegistry.getInstance().addGlyph(LINE);
-        GlyphTextureRegistry.getInstance().addGlyph(CIRCLE);
-        GlyphTextureRegistry.getInstance().addGlyph(TRIANGLE);
-        GlyphTextureRegistry.getInstance().addGlyph(SQUARE);
-        GlyphTextureRegistry.getInstance().addGlyph(DIAMOND);
-        GlyphTextureRegistry.getInstance().addGlyph(PENTAGON);
-        GlyphTextureRegistry.getInstance().addGlyph(HEXAGON);
-        GlyphTextureRegistry.getInstance().addGlyph(HEPTAGON);
-        GlyphTextureRegistry.getInstance().addGlyph(OCTAGON);
+        GlyphTextureRegistry.getInstance().registerGlyph(BASE_CIRCLE);
+        GlyphTextureRegistry.getInstance().registerGlyph(DOT);
+        GlyphTextureRegistry.getInstance().registerGlyph(LINE);
+        GlyphTextureRegistry.getInstance().registerGlyph(CIRCLE);
+        GlyphTextureRegistry.getInstance().registerGlyph(TRIANGLE);
+        GlyphTextureRegistry.getInstance().registerGlyph(SQUARE);
+        GlyphTextureRegistry.getInstance().registerGlyph(DIAMOND);
+        GlyphTextureRegistry.getInstance().registerGlyph(PENTAGON);
+        GlyphTextureRegistry.getInstance().registerGlyph(HEXAGON);
+        GlyphTextureRegistry.getInstance().registerGlyph(HEPTAGON);
+        GlyphTextureRegistry.getInstance().registerGlyph(OCTAGON);
     }
 }

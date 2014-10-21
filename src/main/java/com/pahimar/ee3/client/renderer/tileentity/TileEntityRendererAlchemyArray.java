@@ -22,12 +22,9 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
 
             int scale;
-            double xShift, yShift, zShift;
-            float xRotate, yRotate, zRotate;
-            int rotationAngle;
-            xShift = yShift = zShift = 0.5d;
-            xRotate = yRotate = zRotate = 0;
-            rotationAngle = 0;
+            double xShift = 0.5d, yShift = 0.5d, zShift = 0.5d;
+            float xRotate = 0, yRotate = 0, zRotate = 0;
+            int rotationAngle = 0;
 
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glDisable(GL11.GL_LIGHTING);

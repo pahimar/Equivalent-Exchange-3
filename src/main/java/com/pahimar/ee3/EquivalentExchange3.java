@@ -1,5 +1,6 @@
 package com.pahimar.ee3;
 
+import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.array.GlyphTextureRegistry;
 import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
@@ -148,5 +149,10 @@ public class EquivalentExchange3
     public GlyphTextureRegistry getGlyphRegistry()
     {
         return GlyphTextureRegistry.getInstance();
+    }
+
+    public AlchemyArrayRegistry getAlchemyArrayRegistry()
+    {
+        return AlchemyArrayRegistry.getInstance();
     }
 }

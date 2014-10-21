@@ -11,82 +11,105 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class AlchemyArray implements Comparable<AlchemyArray> {
+public class AlchemyArray implements Comparable<AlchemyArray>
+{
     private SortedSet<Glyph> glyphs;
     private int largestGlyphSize;
 
-    public AlchemyArray() {
+    public AlchemyArray()
+    {
         glyphs = new TreeSet<Glyph>();
         largestGlyphSize = 0;
     }
 
-    public AlchemyArray(Collection<Glyph> glyphs) {
+    public AlchemyArray(Collection<Glyph> glyphs)
+    {
         this.glyphs = new TreeSet<Glyph>(glyphs);
         largestGlyphSize = 0;
 
-        for (Glyph glyph : glyphs) {
-            if (glyph.getSize() > largestGlyphSize) {
+        for (Glyph glyph : glyphs)
+        {
+            if (glyph.getSize() > largestGlyphSize)
+            {
                 largestGlyphSize = glyph.getSize();
             }
         }
     }
 
-    public boolean addGlyph(Glyph glyph) {
-        if (glyph.getSize() > largestGlyphSize) {
+    public boolean addGlyph(Glyph glyph)
+    {
+        if (glyph.getSize() > largestGlyphSize)
+        {
             largestGlyphSize = glyph.getSize();
         }
 
         return glyphs.add(glyph);
     }
 
-    public void addGlyph(Glyph glyph, int size) {
-        if (size > largestGlyphSize) {
+    public void addGlyph(Glyph glyph, int size)
+    {
+        if (size > largestGlyphSize)
+        {
             largestGlyphSize = size;
         }
 
         glyphs.add(new Glyph(glyph, size));
     }
 
-    public Set<Glyph> getGlyphs() {
+    public Set<Glyph> getGlyphs()
+    {
         return ImmutableSortedSet.copyOf(glyphs);
     }
 
-    public int getLargestGlyphSize() {
+    public int getLargestGlyphSize()
+    {
         return largestGlyphSize;
     }
 
-    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ) {
+    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
 
     }
 
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("glyphs")) {
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        if (nbtTagCompound != null && nbtTagCompound.hasKey("glyphs"))
+        {
             // Read in the ItemStacks in the inventory from NBT
-            if (nbtTagCompound.hasKey("glyphs")) {
+            if (nbtTagCompound.hasKey("glyphs"))
+            {
                 NBTTagList tagList = nbtTagCompound.getTagList("glyphs", 10);
                 glyphs = new TreeSet<Glyph>();
                 largestGlyphSize = 0;
-                for (int i = 0; i < tagList.tagCount(); ++i) {
+                for (int i = 0; i < tagList.tagCount(); ++i)
+                {
                     NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
                     Glyph glyph = Glyph.readGlyphFromNBT(tagCompound);
                     glyphs.add(glyph);
-                    if (glyph.getSize() > largestGlyphSize) {
+                    if (glyph.getSize() > largestGlyphSize)
+                    {
                         largestGlyphSize = glyph.getSize();
                     }
                 }
-            } else {
+            }
+            else
+            {
                 glyphs = new TreeSet<Glyph>();
                 largestGlyphSize = 0;
             }
-        } else {
+        }
+        else
+        {
             glyphs = new TreeSet<Glyph>();
             largestGlyphSize = 0;
         }
     }
 
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
         NBTTagList tagList = new NBTTagList();
-        for (Glyph glyph : glyphs) {
+        for (Glyph glyph : glyphs)
+        {
             NBTTagCompound tagCompound = new NBTTagCompound();
             glyph.writeToNBT(tagCompound);
             tagList.appendTag(tagCompound);
@@ -95,17 +118,20 @@ public class AlchemyArray implements Comparable<AlchemyArray> {
         nbtTagCompound.setInteger("largestGlyphSize", largestGlyphSize);
     }
 
-    public static AlchemyArray readAlchemyArrayFromNBT(NBTTagCompound nbtTagCompound) {
+    public static AlchemyArray readAlchemyArrayFromNBT(NBTTagCompound nbtTagCompound)
+    {
         AlchemyArray alchemyArray = new AlchemyArray();
         alchemyArray.readFromNBT(nbtTagCompound);
         return alchemyArray;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Glyph glyph : glyphs) {
+        for (Glyph glyph : glyphs)
+        {
             stringBuilder.append(glyph.toString() + ", ");
         }
 
@@ -113,8 +139,10 @@ public class AlchemyArray implements Comparable<AlchemyArray> {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof AlchemyArray) {
+    public boolean equals(Object object)
+    {
+        if (object instanceof AlchemyArray)
+        {
             return this.compareTo((AlchemyArray) object) == 0;
         }
 
@@ -122,16 +150,22 @@ public class AlchemyArray implements Comparable<AlchemyArray> {
     }
 
     @Override
-    public int compareTo(AlchemyArray alchemyArray) {
-        if (this.glyphs.size() == alchemyArray.glyphs.size()) {
-            for (Glyph glyph : this.glyphs) {
-                if (!alchemyArray.glyphs.contains(glyph)) {
+    public int compareTo(AlchemyArray alchemyArray)
+    {
+        if (this.glyphs.size() == alchemyArray.glyphs.size())
+        {
+            for (Glyph glyph : this.glyphs)
+            {
+                if (!alchemyArray.glyphs.contains(glyph))
+                {
                     return -1;
                 }
             }
 
             return 0;
-        } else {
+        }
+        else
+        {
             return this.glyphs.size() - alchemyArray.glyphs.size();
         }
     }

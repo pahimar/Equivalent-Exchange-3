@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class GlyphTextureRegistry
 {
     private static GlyphTextureRegistry glyphTextureRegistry = null;
-    private SortedMap<ResourceLocation, String> glyphTextureSortedMap;
+    private SortedMap<ResourceLocation, String> registeredGlyphTextures;
 
     private GlyphTextureRegistry()
     {
@@ -31,40 +31,40 @@ public class GlyphTextureRegistry
 
     private void init()
     {
-        glyphTextureSortedMap = new TreeMap<ResourceLocation, String>(comparator);
+        registeredGlyphTextures = new TreeMap<ResourceLocation, String>(comparator);
     }
 
-    public void addGlyph(Glyph glyph)
+    public void registerGlyph(Glyph glyph)
     {
         if (glyph.getTexture() != null)
         {
-            glyphTextureSortedMap.put(glyph.getTexture(), glyph.getUnLocalizedName());
+            registeredGlyphTextures.put(glyph.getTexture(), glyph.getUnLocalizedName());
         }
     }
 
-    public void addGlyph(ResourceLocation glyphTexture, String unLocalizedName)
+    public void registerGlyph(ResourceLocation glyphTexture, String unLocalizedName)
     {
         if (glyphTexture != null)
         {
-            glyphTextureSortedMap.put(glyphTexture, unLocalizedName);
+            registeredGlyphTextures.put(glyphTexture, unLocalizedName);
         }
     }
 
-    public ResourceLocation getResourceLocation(int index)
+    public ResourceLocation getRegisteredGlyphAt(int index)
     {
-        if (index >= glyphTextureSortedMap.size() || index < 0)
+        if (index >= registeredGlyphTextures.size() || index < 0)
         {
             return null;
         }
 
-        ResourceLocation[] glyphTextures = glyphTextureSortedMap.keySet().toArray(new ResourceLocation[]{});
+        ResourceLocation[] registeredGlyphTextures = this.registeredGlyphTextures.keySet().toArray(new ResourceLocation[]{});
 
-        return glyphTextures[index];
+        return registeredGlyphTextures[index];
     }
 
-    public Map<ResourceLocation, String> getGlyphs()
+    public Map<ResourceLocation, String> getRegisteredGlyphTextures()
     {
-        return ImmutableMap.copyOf(glyphTextureSortedMap);
+        return ImmutableMap.copyOf(registeredGlyphTextures);
     }
 
     private static Comparator<ResourceLocation> comparator = new Comparator<ResourceLocation>()

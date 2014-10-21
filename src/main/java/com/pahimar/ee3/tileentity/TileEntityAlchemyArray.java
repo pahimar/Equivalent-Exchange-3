@@ -6,98 +6,160 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityAlchemyArray extends TileEntityEE {
+public class TileEntityAlchemyArray extends TileEntityEE
+{
     private AlchemyArray alchemyArray;
     private ForgeDirection rotation;
     private int ticksSinceSync;
 
-    public TileEntityAlchemyArray() {
+    public TileEntityAlchemyArray()
+    {
         super();
         alchemyArray = new AlchemyArray();
         rotation = ForgeDirection.UNKNOWN;
     }
 
-    public AlchemyArray getAlchemyArray() {
+    public AlchemyArray getAlchemyArray()
+    {
         return alchemyArray;
     }
 
-    public boolean addGlyphToAlchemyArray(Glyph glyph) {
+    public boolean addGlyphToAlchemyArray(Glyph glyph)
+    {
         return alchemyArray.addGlyph(glyph);
     }
 
-    public boolean addGlyphToAlchemyArray(Glyph glyph, int size) {
+    public boolean addGlyphToAlchemyArray(Glyph glyph, int size)
+    {
         return addGlyphToAlchemyArray(new Glyph(glyph, size));
     }
 
-    public ForgeDirection getRotation() {
+    public ForgeDirection getRotation()
+    {
         return rotation;
     }
 
-    public void setRotation(int rotation, int facing) {
-        if (this.orientation == ForgeDirection.UP) {
-            if ((rotation + facing) % 4 == 0) {
+    public void setRotation(int rotation, int facing)
+    {
+        if (this.orientation == ForgeDirection.UP)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.NORTH;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.EAST;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.SOUTH;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.WEST;
             }
 
-        } else if (this.orientation == ForgeDirection.DOWN) {
-            if ((rotation + facing) % 4 == 0) {
+        }
+        else if (this.orientation == ForgeDirection.DOWN)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.NORTH;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.EAST;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.SOUTH;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.WEST;
             }
-        } else if (this.orientation == ForgeDirection.NORTH) {
-            if ((rotation + facing) % 4 == 0) {
+        }
+        else if (this.orientation == ForgeDirection.NORTH)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.UP;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.EAST;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.DOWN;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.WEST;
             }
-        } else if (this.orientation == ForgeDirection.SOUTH) {
-            if ((rotation + facing) % 4 == 0) {
+        }
+        else if (this.orientation == ForgeDirection.SOUTH)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.DOWN;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.EAST;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.UP;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.WEST;
             }
-        } else if (this.orientation == ForgeDirection.EAST) {
-            if ((rotation + facing) % 4 == 0) {
+        }
+        else if (this.orientation == ForgeDirection.EAST)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.NORTH;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.UP;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.SOUTH;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.DOWN;
             }
-        } else if (this.orientation == ForgeDirection.WEST) {
-            if ((rotation + facing) % 4 == 0) {
+        }
+        else if (this.orientation == ForgeDirection.WEST)
+        {
+            if ((rotation + facing) % 4 == 0)
+            {
                 this.rotation = ForgeDirection.NORTH;
-            } else if ((rotation + facing) % 4 == 1) {
+            }
+            else if ((rotation + facing) % 4 == 1)
+            {
                 this.rotation = ForgeDirection.DOWN;
-            } else if ((rotation + facing) % 4 == 2) {
+            }
+            else if ((rotation + facing) % 4 == 2)
+            {
                 this.rotation = ForgeDirection.SOUTH;
-            } else if ((rotation + facing) % 4 == 3) {
+            }
+            else if ((rotation + facing) % 4 == 3)
+            {
                 this.rotation = ForgeDirection.UP;
             }
         }
@@ -105,12 +167,18 @@ public class TileEntityAlchemyArray extends TileEntityEE {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN) {
+    public AxisAlignedBB getRenderBoundingBox()
+    {
+        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
+        {
             return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - 1, zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord + 1, zCoord + alchemyArray.getLargestGlyphSize());
-        } else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH) {
+        }
+        else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH)
+        {
             return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - alchemyArray.getLargestGlyphSize(), zCoord - 1, xCoord + alchemyArray.getLargestGlyphSize(), yCoord + alchemyArray.getLargestGlyphSize(), zCoord + 1);
-        } else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST) {
+        }
+        else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST)
+        {
             return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord - alchemyArray.getLargestGlyphSize(), zCoord - alchemyArray.getLargestGlyphSize(), xCoord + 1, yCoord + alchemyArray.getLargestGlyphSize(), zCoord + alchemyArray.getLargestGlyphSize());
         }
 
@@ -118,12 +186,14 @@ public class TileEntityAlchemyArray extends TileEntityEE {
     }
 
     @Override
-    public Packet getDescriptionPacket() {
+    public Packet getDescriptionPacket()
+    {
         return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAlchemyArray(this));
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
         super.readFromNBT(nbtTagCompound);
 
         NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
@@ -133,7 +203,8 @@ public class TileEntityAlchemyArray extends TileEntityEE {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
         super.writeToNBT(nbtTagCompound);
 
         NBTTagCompound alchemyArrayTagCompound = new NBTTagCompound();
@@ -145,12 +216,16 @@ public class TileEntityAlchemyArray extends TileEntityEE {
     }
 
     @Override
-    public void updateEntity() {
+    public void updateEntity()
+    {
         super.updateEntity();
 
-        if (!worldObj.isRemote) {
-            if (++ticksSinceSync % 100 == 0) {
-                if (!areDummyBlocksValid()) {
+        if (!worldObj.isRemote)
+        {
+            if (++ticksSinceSync % 100 == 0)
+            {
+                if (!areDummyBlocksValid())
+                {
                     this.invalidate();
                     worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 }
@@ -158,30 +233,51 @@ public class TileEntityAlchemyArray extends TileEntityEE {
         }
     }
 
-    private boolean areDummyBlocksValid() {
+    public void onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
+        // TODO: Perform the action for the registered alchemy array
+        this.alchemyArray.onAlchemyArrayActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
+    }
+
+    private boolean areDummyBlocksValid()
+    {
         boolean validDummyBlocks = true;
         int coordOffset = this.alchemyArray.getLargestGlyphSize() / 2;
 
-        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN) {
-            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++) {
-                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++) {
-                    if ((i != this.xCoord || j != this.zCoord) && !isValidDummyBlock(i, this.yCoord, j)) {
+        if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
+        {
+            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++)
+            {
+                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++)
+                {
+                    if ((i != this.xCoord || j != this.zCoord) && !isValidDummyBlock(i, this.yCoord, j))
+                    {
                         validDummyBlocks = false;
                     }
                 }
             }
-        } else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH) {
-            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++) {
-                for (int j = this.yCoord - coordOffset; j <= this.yCoord + coordOffset; j++) {
-                    if ((i != this.xCoord || j != this.yCoord) && !isValidDummyBlock(i, j, this.zCoord)) {
+        }
+        else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH)
+        {
+            for (int i = this.xCoord - coordOffset; i <= this.xCoord + coordOffset; i++)
+            {
+                for (int j = this.yCoord - coordOffset; j <= this.yCoord + coordOffset; j++)
+                {
+                    if ((i != this.xCoord || j != this.yCoord) && !isValidDummyBlock(i, j, this.zCoord))
+                    {
                         validDummyBlocks = false;
                     }
                 }
             }
-        } else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST) {
-            for (int i = this.yCoord - coordOffset; i <= this.yCoord + coordOffset; i++) {
-                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++) {
-                    if ((i != this.yCoord || j != this.zCoord) && !isValidDummyBlock(this.xCoord, i, j)) {
+        }
+        else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST)
+        {
+            for (int i = this.yCoord - coordOffset; i <= this.yCoord + coordOffset; i++)
+            {
+                for (int j = this.zCoord - coordOffset; j <= this.zCoord + coordOffset; j++)
+                {
+                    if ((i != this.yCoord || j != this.zCoord) && !isValidDummyBlock(this.xCoord, i, j))
+                    {
                         validDummyBlocks = false;
                     }
                 }
@@ -191,9 +287,12 @@ public class TileEntityAlchemyArray extends TileEntityEE {
         return validDummyBlocks;
     }
 
-    private boolean isValidDummyBlock(int x, int y, int z) {
-        if (!this.worldObj.isRemote) {
-            if (this.worldObj.getTileEntity(x, y, z) instanceof TileEntityDummyArray) {
+    private boolean isValidDummyBlock(int x, int y, int z)
+    {
+        if (!this.worldObj.isRemote)
+        {
+            if (this.worldObj.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+            {
                 TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) this.worldObj.getTileEntity(x, y, z);
 
                 return tileEntityDummyArray.getOrientation() == this.orientation &&

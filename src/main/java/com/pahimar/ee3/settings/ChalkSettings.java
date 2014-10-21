@@ -37,9 +37,9 @@ public class ChalkSettings implements INBTTaggable
         {
             this.index = 0;
         }
-        else if (this.index >= GlyphTextureRegistry.getInstance().getGlyphs().size())
+        else if (this.index >= GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().size())
         {
-            this.index = GlyphTextureRegistry.getInstance().getGlyphs().size() - 1;
+            this.index = GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().size() - 1;
         }
     }
 
@@ -47,7 +47,7 @@ public class ChalkSettings implements INBTTaggable
     {
         index += 1;
 
-        if (index >= GlyphTextureRegistry.getInstance().getGlyphs().size())
+        if (index >= GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().size())
         {
             index = 0;
         }
@@ -59,7 +59,7 @@ public class ChalkSettings implements INBTTaggable
 
         if (index < 0)
         {
-            this.index = GlyphTextureRegistry.getInstance().getGlyphs().size() - 1;
+            this.index = GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().size() - 1;
         }
     }
 
@@ -142,7 +142,7 @@ public class ChalkSettings implements INBTTaggable
             {
                 this.index = chalkSettings.getInteger("index");
 
-                if (this.index < 0 || this.index >= GlyphTextureRegistry.getInstance().getGlyphs().size())
+                if (this.index < 0 || this.index >= GlyphTextureRegistry.getInstance().getRegisteredGlyphTextures().size())
                 {
                     this.index = 0;
                 }
