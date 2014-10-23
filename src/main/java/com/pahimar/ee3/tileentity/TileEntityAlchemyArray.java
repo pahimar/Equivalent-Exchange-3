@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.api.AlchemyArray;
+import com.google.common.collect.ImmutableSortedSet;
 import com.pahimar.ee3.api.Glyph;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
@@ -8,32 +8,49 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 public class TileEntityAlchemyArray extends TileEntityEE
 {
-    private AlchemyArray alchemyArray;
+    private SortedSet<Glyph> glyphs;
+    private int largestGlyphSize;
     private ForgeDirection rotation;
     private int ticksSinceSync;
 
     public TileEntityAlchemyArray()
     {
         super();
-        alchemyArray = new AlchemyArray();
+        glyphs = new TreeSet<Glyph>();
+        largestGlyphSize = 0;
         rotation = ForgeDirection.UNKNOWN;
     }
 
-    public AlchemyArray getAlchemyArray()
+    public Set<Glyph> getGlyphs()
     {
-        return alchemyArray;
+        return ImmutableSortedSet.copyOf(glyphs);
     }
 
     public boolean addGlyphToAlchemyArray(Glyph glyph)
     {
-        return alchemyArray.addGlyph(glyph);
+        if (!glyphs.contains(glyph))
+        {
+            if (glyph.getSize() > largestGlyphSize)
+            {
+                largestGlyphSize = glyph.getSize();
+            }
+
+            return glyphs.add(glyph);
+        }
+
+        return false;
     }
 
     public boolean addGlyphToAlchemyArray(Glyph glyph, int size)
@@ -171,15 +188,15 @@ public class TileEntityAlchemyArray extends TileEntityEE
     {
         if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
         {
-            return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - 1, zCoord - alchemyArray.getLargestGlyphSize(), xCoord + alchemyArray.getLargestGlyphSize(), yCoord + 1, zCoord + alchemyArray.getLargestGlyphSize());
+            return AxisAlignedBB.getBoundingBox(xCoord - largestGlyphSize, yCoord - 1, zCoord - largestGlyphSize, xCoord + largestGlyphSize, yCoord + 1, zCoord + largestGlyphSize);
         }
         else if (this.orientation == ForgeDirection.NORTH || this.orientation == ForgeDirection.SOUTH)
         {
-            return AxisAlignedBB.getBoundingBox(xCoord - alchemyArray.getLargestGlyphSize(), yCoord - alchemyArray.getLargestGlyphSize(), zCoord - 1, xCoord + alchemyArray.getLargestGlyphSize(), yCoord + alchemyArray.getLargestGlyphSize(), zCoord + 1);
+            return AxisAlignedBB.getBoundingBox(xCoord - largestGlyphSize, yCoord - largestGlyphSize, zCoord - 1, xCoord + largestGlyphSize, yCoord + largestGlyphSize, zCoord + 1);
         }
         else if (this.orientation == ForgeDirection.EAST || this.orientation == ForgeDirection.WEST)
         {
-            return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord - alchemyArray.getLargestGlyphSize(), zCoord - alchemyArray.getLargestGlyphSize(), xCoord + 1, yCoord + alchemyArray.getLargestGlyphSize(), zCoord + alchemyArray.getLargestGlyphSize());
+            return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord - largestGlyphSize, zCoord - largestGlyphSize, xCoord + 1, yCoord + largestGlyphSize, zCoord + largestGlyphSize);
         }
 
         return super.getRenderBoundingBox();
@@ -196,10 +213,23 @@ public class TileEntityAlchemyArray extends TileEntityEE
     {
         super.readFromNBT(nbtTagCompound);
 
-        NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
-        alchemyArray = AlchemyArray.readAlchemyArrayFromNBT(alchemyArrayTagCompound);
-
+        largestGlyphSize = 0;
         rotation = ForgeDirection.getOrientation(nbtTagCompound.getInteger("rotation"));
+
+        // Read in the ItemStacks in the inventory from NBT
+        NBTTagList tagList = nbtTagCompound.getTagList("glyphs", 10);
+        glyphs = new TreeSet<Glyph>();
+        for (int i = 0; i < tagList.tagCount(); ++i)
+        {
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
+            Glyph glyph = Glyph.readGlyphFromNBT(tagCompound);
+            glyphs.add(glyph);
+
+            if (glyph.getSize() > largestGlyphSize)
+            {
+                largestGlyphSize = glyph.getSize();
+            }
+        }
     }
 
     @Override
@@ -207,12 +237,17 @@ public class TileEntityAlchemyArray extends TileEntityEE
     {
         super.writeToNBT(nbtTagCompound);
 
-        NBTTagCompound alchemyArrayTagCompound = new NBTTagCompound();
-        alchemyArray.writeToNBT(alchemyArrayTagCompound);
-
         nbtTagCompound.setInteger("rotation", rotation.ordinal());
 
-        nbtTagCompound.setTag("alchemyArray", alchemyArrayTagCompound);
+        // Write the ItemStacks in the inventory to NBT
+        NBTTagList tagList = new NBTTagList();
+        for (Glyph glyph : glyphs)
+        {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            glyph.writeToNBT(tagCompound);
+            tagList.appendTag(tagCompound);
+        }
+        nbtTagCompound.setTag("glyphs", tagList);
     }
 
     @Override
@@ -236,13 +271,12 @@ public class TileEntityAlchemyArray extends TileEntityEE
     public void onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
         // TODO: Perform the action for the registered alchemy array
-        this.alchemyArray.onAlchemyArrayActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
     }
 
     private boolean areDummyBlocksValid()
     {
         boolean validDummyBlocks = true;
-        int coordOffset = this.alchemyArray.getLargestGlyphSize() / 2;
+        int coordOffset = this.largestGlyphSize / 2;
 
         if (this.orientation == ForgeDirection.UP || this.orientation == ForgeDirection.DOWN)
         {

@@ -32,7 +32,7 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
 
             GL11.glDepthMask(false);
             GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-            for (Glyph glyph : tileEntityAlchemyArray.getAlchemyArray().getGlyphs())
+            for (Glyph glyph : tileEntityAlchemyArray.getGlyphs())
             {
                 scale = glyph.getSize();
                 if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.UP)
