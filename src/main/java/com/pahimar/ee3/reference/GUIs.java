@@ -12,5 +12,7 @@ public enum GUIs
     AUGMENTATION_TABLE,
     ALCHEMICAL_TOME,
     TRANSMUTATION_SQUARE,
-    SYMBOL_SELECTION
+    SYMBOL_SELECTION;
+
+    public static final GUIs[] VALUES = GUIs.values();
 }
