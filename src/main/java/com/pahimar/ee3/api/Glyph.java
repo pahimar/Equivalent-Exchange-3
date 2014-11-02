@@ -1,6 +1,5 @@
 package com.pahimar.ee3.api;
 
-import com.pahimar.ee3.util.ResourceLocationHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
@@ -15,14 +14,9 @@ public class Glyph implements Comparable<Glyph>
 
     }
 
-    public Glyph(String texture, String unLocalizedName)
+    public Glyph(ResourceLocation texture, String unLocalizedName)
     {
         this(texture, unLocalizedName, 1);
-    }
-
-    public Glyph(String texture, String unLocalizedName, int size)
-    {
-        this(ResourceLocationHelper.getResourceLocation(texture), unLocalizedName, size);
     }
 
     public Glyph(ResourceLocation texture, String unLocalizedName, int size)
@@ -34,9 +28,7 @@ public class Glyph implements Comparable<Glyph>
 
     public Glyph(Glyph glyph, int size)
     {
-        this.texture = glyph.texture;
-        this.unLocalizedName = glyph.unLocalizedName;
-        this.size = size;
+        this(glyph.texture, glyph.unLocalizedName, size);
     }
 
     public ResourceLocation getTexture()
@@ -56,11 +48,34 @@ public class Glyph implements Comparable<Glyph>
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath") && nbtTagCompound.hasKey("unLocalizedName") && nbtTagCompound.hasKey("size"))
+        if (nbtTagCompound != null)
         {
-            this.texture = new ResourceLocation(nbtTagCompound.getString("textureDomain"), nbtTagCompound.getString("texturePath"));
-            this.unLocalizedName = nbtTagCompound.getString("unLocalizedName");
-            this.size = nbtTagCompound.getInteger("size");
+            if (nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath"))
+            {
+                this.texture = new ResourceLocation(nbtTagCompound.getString("textureDomain"), nbtTagCompound.getString("texturePath"));
+            }
+            else
+            {
+                this.texture = new ResourceLocation("");
+            }
+
+            if (nbtTagCompound.hasKey("unLocalizedName"))
+            {
+                this.unLocalizedName = nbtTagCompound.getString("unLocalizedName");
+            }
+            else
+            {
+                this.unLocalizedName = "";
+            }
+
+            if (nbtTagCompound.hasKey("size"))
+            {
+                this.size = nbtTagCompound.getInteger("size");
+            }
+            else
+            {
+                this.size = 0;
+            }
         }
         else
         {
@@ -88,7 +103,7 @@ public class Glyph implements Comparable<Glyph>
     @Override
     public String toString()
     {
-        return String.format("texture: %s, unLocalizedName: %s, size: %s", texture.getResourcePath() + ":" + texture.getResourcePath(), unLocalizedName, size);
+        return String.format("texture: %s, unLocalizedName: %s, size: %s", texture.getResourceDomain() + ":" + texture.getResourcePath(), unLocalizedName, size);
     }
 
     @Override

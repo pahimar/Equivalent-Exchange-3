@@ -3,10 +3,10 @@ package com.pahimar.ee3.item;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.pahimar.ee3.reference.*;
+import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.IChargeable;
 import com.pahimar.ee3.util.IKeyBound;
 import com.pahimar.ee3.util.NBTHelper;
-import com.pahimar.ee3.util.NetworkSoundHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -86,30 +86,30 @@ public class ItemDarkMatterAxe extends ItemToolModalEE implements IKeyBound, ICh
             {
                 if (getChargeLevel(itemStack) == this.getMaxChargeLevel())
                 {
-                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
+                    CommonSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     increaseChargeLevel(itemStack);
-                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
+                    CommonSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_UP, 0.5F, 0.5F + 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel()));
                 }
             }
             else
             {
                 if (getChargeLevel(itemStack) == 0)
                 {
-                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
+                    CommonSoundHelper.playSoundAt(entityPlayer, Sounds.FAIL, 1.5f, 1.5f);
                 }
                 else
                 {
                     decreaseChargeLevel(itemStack);
-                    NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
+                    CommonSoundHelper.playSoundAt(entityPlayer, Sounds.CHARGE_DOWN, 0.5F, 1.0F - (0.5F - 0.5F * (getChargeLevel(itemStack) * 1.0F / this.getMaxChargeLevel())));
                 }
             }
         }
         else if (key == Key.EXTRA)
         {
-            NetworkSoundHelper.playSoundAt(entityPlayer, Sounds.TOCK, 0.5f, 1.5F);
+            CommonSoundHelper.playSoundAt(entityPlayer, Sounds.TOCK, 0.5f, 1.5F);
             changeToolMode(itemStack);
         }
     }

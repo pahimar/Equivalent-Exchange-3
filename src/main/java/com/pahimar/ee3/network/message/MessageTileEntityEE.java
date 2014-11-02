@@ -10,9 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTileEntityEE, IMessage>
 {
-    // TODO: Investigate using compressed NBT data to unify tile entity packets into this single one
-    // We would only need x, y, z, and the compressed nbt byte array to do this
-
     public int x, y, z;
     public byte orientation, state;
     public String customName, owner;

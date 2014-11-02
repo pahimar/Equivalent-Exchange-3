@@ -2,11 +2,15 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.settings.ChalkSettings;
+import com.pahimar.ee3.util.EntityHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.io.*;
@@ -53,8 +57,34 @@ public class PlayerEventHandler
     }
 
     @SubscribeEvent
-    public void onPlayerLoggedInEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    public void syncEnergyValuesOnLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
     {
         PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(EnergyValueRegistry.getInstance()), (EntityPlayerMP) event.player);
+    }
+
+    @SubscribeEvent
+    public void syncChalkSettingsOnLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    {
+        NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
+        ChalkSettings chalkSettings = new ChalkSettings();
+        chalkSettings.readFromNBT(playerCustomData);
+
+        PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) event.player);
+    }
+
+    @SubscribeEvent
+    public void initPlayerCustomData(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    {
+        if (event.player != null)
+        {
+            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(event.player);
+
+            // Chalk Settings
+            ChalkSettings chalkSettings = new ChalkSettings();
+            chalkSettings.readFromNBT(playerCustomData);
+            chalkSettings.writeToNBT(playerCustomData);
+
+            EntityHelper.saveCustomEntityData(event.player, playerCustomData);
+        }
     }
 }

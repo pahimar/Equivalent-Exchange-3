@@ -19,7 +19,7 @@ public class ContainerResearchStation extends ContainerEE
     {
         this.tileEntityResearchStation = tileEntityResearchStation;
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 35, 41)
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 79, 83)
         {
             @Override
             public int getSlotStackLimit()
@@ -27,7 +27,7 @@ public class ContainerResearchStation extends ContainerEE
                 return 1;
             }
         });
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 125, 41)
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 161, 83)
         {
             @Override
             public boolean isItemValid(ItemStack itemStack)
@@ -46,14 +46,14 @@ public class ContainerResearchStation extends ContainerEE
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 94 + inventoryRowIndex * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 50 + inventoryColumnIndex * 18, 152 + inventoryRowIndex * 18));
             }
         }
 
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
-            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 152));
+            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 50 + actionBarSlotIndex * 18, 210));
         }
     }
 

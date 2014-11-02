@@ -10,6 +10,7 @@ import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
+import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -20,6 +21,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
+    public ChalkSettings chalkSettings = new ChalkSettings();
+
     @Override
     public void registerEventHandlers()
     {
@@ -46,6 +49,12 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
+    public ClientProxy getClientProxy()
+    {
+        return this;
+    }
+
+    @Override
     public void initRenderingAndTextures()
     {
         RenderIds.calcinator = RenderingRegistry.getNextAvailableRenderId();
@@ -55,6 +64,7 @@ public class ClientProxy extends CommonProxy
         RenderIds.researchStation = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.augmentationTable = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemyArray = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.dummyArray = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.alchemicalChest), new ItemRendererAlchemicalChest());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.aludel), new ItemRendererAludel());
