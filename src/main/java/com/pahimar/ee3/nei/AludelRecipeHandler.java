@@ -96,7 +96,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getRecipeName()
 	{
-		return StatCollector.translateToLocal(Names.Containers.ALUDEL);
+		return StatCollector.translateToLocal("gui.nei.ee3:aludel");
 	}
 
 	@Override

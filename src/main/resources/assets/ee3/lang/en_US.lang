@@ -99,6 +99,11 @@ container.ee3:augmentationTable=Augmentation Table [WIP]
 container.ee3:alchemicalTome=Tome of Alchemical Knowledge [WIP]
 container.ee3:transmutationSquare=Transmutation Square [WIP]
 
+# NEI
+gui.nei.ee3:calcination=Calcination
+gui.nei.ee3:calcination.tooltip=Energy values needed to calcine
+gui.nei.ee3:aludel=Aludel
+
 # Commands
 command.ee3.usage=/ee3 <set-value|sync-values>
 command.ee3.set-value.usage=/ee3-set-value <pre|post> <item> <value> [data] [dataTag]
