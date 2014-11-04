@@ -100,6 +100,12 @@ container.ee3:augmentationTable=Augmentation Table [WIP]
 container.ee3:alchemicalTome=Tome of Alchemical Knowledge [WIP]
 container.ee3:transmutationSquare=Transmutation Square [WIP]
 
+# NEI
+gui.nei.ee3:calcination=Calcination
+gui.nei.ee3:calcination.tooltip.1=Energy values needed to calcine
+gui.nei.ee3:calcination.tooltip.2=From %s to %s
+gui.nei.ee3:aludel=Aludel
+
 # Glyphs
 glyph.ee3:baseCircle=Circle (Base)
 glyph.ee3:circle=Circle
