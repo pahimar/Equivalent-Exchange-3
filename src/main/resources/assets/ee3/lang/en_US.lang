@@ -102,7 +102,8 @@ container.ee3:transmutationSquare=Transmutation Square [WIP]
 
 # NEI
 gui.nei.ee3:calcination=Calcination
-gui.nei.ee3:calcination.tooltip=Energy values needed to calcine
+gui.nei.ee3:calcination.tooltip.1=Energy values needed to calcine
+gui.nei.ee3:calcination.tooltip.2=From %s to %s
 gui.nei.ee3:aludel=Aludel
 
 # Glyphs
