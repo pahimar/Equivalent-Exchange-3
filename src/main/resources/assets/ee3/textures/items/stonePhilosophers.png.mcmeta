@@ -2,7 +2,7 @@
    "animation":{
       "width":1,
       "height":5,
-      "frametime":1,
+      "frametime":2,
       "frames":[0,1,2,3,4]
    }
 }
