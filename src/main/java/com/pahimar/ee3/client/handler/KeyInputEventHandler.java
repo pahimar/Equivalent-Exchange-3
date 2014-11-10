@@ -41,6 +41,10 @@ public class KeyInputEventHandler
     @SubscribeEvent
     public void handleKeyInputEvent(InputEvent.KeyInputEvent event)
     {
+        if (getPressedKeybinding() == Key.UNKNOWN){
+            return;
+        }
+        
         if (FMLClientHandler.instance().getClient().inGameHasFocus)
         {
             if (FMLClientHandler.instance().getClientPlayerEntity() != null)
