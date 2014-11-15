@@ -30,7 +30,7 @@ public class Sounds
         private static final String CHALK_PREFIX = "chalk_";
         private static final int CHALK_SOUNDS_COUNT = 11;
 
-        public static final String getRandomChalkSound()
+        public static String getRandomChalkSound()
         {
             return String.format("%s%s", CHALK_PREFIX, random.nextInt(CHALK_SOUNDS_COUNT) + 1);
         }

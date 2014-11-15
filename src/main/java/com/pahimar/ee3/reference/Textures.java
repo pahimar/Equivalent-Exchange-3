@@ -55,7 +55,6 @@ public final class Textures
     {
         private static final String SYMBOL_TEXTURE_LOCATION = "textures/glyphs/";
 
-
         public static final ResourceLocation BASE_CIRCLE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transBaseCircle.png");
         public static final ResourceLocation DOT = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transDot.png");
         public static final ResourceLocation LINE = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transLine.png");

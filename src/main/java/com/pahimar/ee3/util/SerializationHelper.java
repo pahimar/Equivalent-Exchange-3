@@ -140,8 +140,7 @@ public class SerializationHelper
             }
             jsonReader.endArray();
             jsonReader.close();
-        }
-        catch (FileNotFoundException e)
+        } catch (FileNotFoundException ignored)
         {
         }
         catch (IOException e)
