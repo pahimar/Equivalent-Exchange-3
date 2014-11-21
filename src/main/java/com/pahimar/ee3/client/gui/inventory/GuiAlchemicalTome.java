@@ -2,10 +2,10 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.reference.Textures;
+import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.InventoryBasic;
@@ -16,7 +16,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiAlchemicalTome extends InventoryEffectRenderer
+public class GuiAlchemicalTome extends GuiBase
 {
     //    private InventoryAlchemicalTome inventoryAlchemicalTome;
     private InventoryPlayer inventoryPlayer;
