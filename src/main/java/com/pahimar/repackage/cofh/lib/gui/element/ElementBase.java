@@ -74,6 +74,14 @@ public abstract class ElementBase {
         return this;
     }
 
+    public ElementBase setTexture(ResourceLocation texture, int texW, int texH) {
+
+        this.texture = texture;
+        this.texW = texW;
+        this.texH = texH;
+        return this;
+    }
+
     public final ElementBase setVisible(boolean visible) {
 
         this.visible = visible;

@@ -1,8 +1,10 @@
 package com.pahimar.repackage.cofh.lib.gui.element;
 
+import com.pahimar.ee3.util.ResourceLocationHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.render.RenderHelper;
 import com.pahimar.repackage.cofh.lib.util.helpers.StringHelper;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 
@@ -18,7 +20,18 @@ public class ElementButton extends ElementBase {
     String tooltip;
 
     public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, String texture) {
+        this(gui, posX, posY, name, sheetX, sheetY, hoverX, hoverY, sizeX, sizeY, 256, 256, texture);
+    }
 
+    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, ResourceLocation texture) {
+        this(gui, posX, posY, name, sheetX, sheetY, hoverX, hoverY, sizeX, sizeY, 256, 256, texture);
+    }
+
+    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, int texW, int texH, String texture) {
+        this(gui, posX, posY, name, sheetX, sheetY, hoverX, hoverY, sizeX, sizeY, texW, texH, ResourceLocationHelper.getResourceLocation(texture));
+    }
+
+    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int sizeX, int sizeY, int texW, int texH, ResourceLocation texture) {
         super(gui, posX, posY);
         setName(name);
         setSize(sizeX, sizeY);
@@ -29,9 +42,11 @@ public class ElementButton extends ElementBase {
         this.hoverY = hoverY;
     }
 
-    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int disabledX, int disabledY, int sizeX,
-                         int sizeY, String texture) {
+    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int disabledX, int disabledY, int sizeX, int sizeY, int texW, int texH, String texture) {
+        this(gui, posX, posY, name, sheetX, sheetY, hoverX, hoverY, disabledX, disabledY, sizeX, sizeY, texW, texH, ResourceLocationHelper.getResourceLocation(texture));
+    }
 
+    public ElementButton(GuiBase gui, int posX, int posY, String name, int sheetX, int sheetY, int hoverX, int hoverY, int disabledX, int disabledY, int sizeX, int sizeY, int texW, int texH, ResourceLocation texture) {
         super(gui, posX, posY);
         setName(name);
         setSize(sizeX, sizeY);
