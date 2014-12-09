@@ -34,9 +34,10 @@ public class GuiAlchemicalTome extends GuiBase
     {
         super.initGui();
 
-        prevPageButton = new ElementButton(this, 10, 10, "Prev", 0, 0, 20, 0, 0, 0, 20, 10, 40, 10, "textures/gui/elements/arrowLeft.png");
-        s
+        prevPageButton = new ElementButton(this, 15, 177, "Prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, "textures/gui/elements/arrowLeft.png");
+        nextPageButton = new ElementButton(this, 223, 177, "Next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, "textures/gui/elements/arrowRight.png");
         addElement(prevPageButton);
+        addElement(nextPageButton);
     }
 
     @Override
