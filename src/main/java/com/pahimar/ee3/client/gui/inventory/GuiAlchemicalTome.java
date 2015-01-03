@@ -20,13 +20,17 @@ public class GuiAlchemicalTome extends GuiBase
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
 
+    private ElementButton commonAlchemyRibbon;
+    private ElementButton forbiddenAlchemyRibbon;
+    private ElementButton alkahestryRibbon;
+
     public GuiAlchemicalTome(EntityPlayer entityPlayer)
     {
         super(new ContainerAlchemicalTome(entityPlayer.inventory), Textures.Gui.ALCHEMICAL_TOME);
         this.inventoryPlayer = entityPlayer.inventory;
         entityPlayer.openContainer = this.inventorySlots;
         xSize = 256;
-        ySize = 200;
+        ySize = 226;
     }
 
     @Override
@@ -36,8 +40,19 @@ public class GuiAlchemicalTome extends GuiBase
 
         prevPageButton = new ElementButton(this, 15, 177, "Prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, "textures/gui/elements/arrowLeft.png");
         nextPageButton = new ElementButton(this, 223, 177, "Next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, "textures/gui/elements/arrowRight.png");
+        commonAlchemyRibbon = new ElementButton(this, 140, 187, "Common Alchemy", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalRed.png");
+        alkahestryRibbon = new ElementButton(this, 190, 187, "Alkahestry", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalGreen.png");
+        forbiddenAlchemyRibbon = new ElementButton(this, 165, 187, "Forbidden Alchemy", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalPurple.png");
+
+        commonAlchemyRibbon.setToolTip("Common Alchemy");
+        alkahestryRibbon.setToolTip("Alkahestry");
+        forbiddenAlchemyRibbon.setToolTip("Forbidden Alchemy");
+
         addElement(prevPageButton);
         addElement(nextPageButton);
+        addElement(commonAlchemyRibbon);
+        addElement(alkahestryRibbon);
+        addElement(forbiddenAlchemyRibbon);
     }
 
     @Override

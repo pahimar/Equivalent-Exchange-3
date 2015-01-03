@@ -19,7 +19,6 @@ public class ModItems
     public static final ItemEE chalk = new ItemChalk();
     public static final ItemEE diviningRod = new ItemDiviningRod();
     public static final ItemEE alchemicalTome = new ItemAlchemicalTome();
-    public static final ItemEE guide = new ItemGuide();
     public static final ItemEE matter = new ItemMatter();
     public static final ItemEE gem = new ItemGem();
 
@@ -48,7 +47,6 @@ public class ModItems
         GameRegistry.registerItem(alchemicalUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
         GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
         GameRegistry.registerItem(alchemicalTome, Names.Items.ALCHEMICAL_TOME);
-        GameRegistry.registerItem(guide, Names.Items.GUIDE);
         GameRegistry.registerItem(matter, Names.Items.MATTER);
         GameRegistry.registerItem(gem, Names.Items.GEM);
 

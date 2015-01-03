@@ -64,7 +64,7 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
     {
         if (itemStack.getItem() instanceof ItemAlchemicalTome)
         {
-            if (itemStack.hasTagCompound() && NBTHelper.hasTag(itemStack, Names.NBT.KNOWLEDGE))
+            if (itemStack.hasTagCompound() && NBTHelper.hasTag(itemStack, Names.NBT.ITEM_TRANSMUTATION_KNOWLEDGE))
             {
                 PlayerKnowledge playerKnowledge = new PlayerKnowledge();
                 playerKnowledge.readFromNBT(itemStack.getTagCompound());

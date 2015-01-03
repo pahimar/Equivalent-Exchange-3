@@ -1,23 +1,9 @@
 package com.pahimar.ee3.nei;
 
-import static codechicken.lib.gui.GuiDraw.changeTexture;
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
-
-import java.awt.Rectangle;
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.FurnaceRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-
 import com.pahimar.ee3.client.gui.inventory.GuiAludel;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
@@ -25,6 +11,17 @@ import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Textures;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static codechicken.lib.gui.GuiDraw.changeTexture;
+import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class AludelRecipeHandler extends TemplateRecipeHandler
 {

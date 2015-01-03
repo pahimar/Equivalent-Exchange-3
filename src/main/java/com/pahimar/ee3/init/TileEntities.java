@@ -8,7 +8,6 @@ public class TileEntities
 {
     public static void init()
     {
-        GameRegistry.registerTileEntity(TileEntityDummyArray.class, Names.Blocks.DUMMY_ARRAY);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChest.class, Names.Blocks.ALCHEMICAL_CHEST, "tile." + Names.Blocks.ALCHEMICAL_CHEST);
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestSmall.class, Names.Blocks.ALCHEMICAL_CHEST + "Small", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Small");
         GameRegistry.registerTileEntityWithAlternatives(TileEntityAlchemicalChestMedium.class, Names.Blocks.ALCHEMICAL_CHEST + "Medium", "tile." + Names.Blocks.ALCHEMICAL_CHEST + "Medium");
@@ -18,6 +17,5 @@ public class TileEntities
         GameRegistry.registerTileEntityWithAlternatives(TileEntityGlassBell.class, Names.Blocks.GLASS_BELL, "tile." + Names.Blocks.GLASS_BELL);
         GameRegistry.registerTileEntity(TileEntityResearchStation.class, Names.Blocks.RESEARCH_STATION);
         GameRegistry.registerTileEntity(TileEntityAugmentationTable.class, Names.Blocks.AUGMENTATION_TABLE);
-        GameRegistry.registerTileEntity(TileEntityAlchemyArray.class, Names.Blocks.ALCHEMY_ARRAY);
     }
 }

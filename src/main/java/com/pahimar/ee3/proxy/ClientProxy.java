@@ -10,7 +10,6 @@ import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -21,8 +20,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
-    public ChalkSettings chalkSettings = new ChalkSettings();
-
     @Override
     public void registerEventHandlers()
     {
@@ -79,6 +76,5 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlassBell.class, new TileEntityRendererGlassBell());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchStation.class, new TileEntityRendererResearchStation());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAugmentationTable.class, new TileEntityRendererAugmentationTable());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemyArray.class, new TileEntityRendererAlchemyArray());
     }
 }

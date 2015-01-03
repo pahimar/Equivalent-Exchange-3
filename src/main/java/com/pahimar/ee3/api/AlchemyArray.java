@@ -1,49 +1,77 @@
 package com.pahimar.ee3.api;
 
-import com.google.common.collect.ImmutableSortedSet;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-public abstract class AlchemyArray implements Comparable<AlchemyArray>
+public class AlchemyArray implements Comparable<AlchemyArray>
 {
-    private SortedSet<Glyph> glyphs;
+    private ResourceLocation texture;
+    private String unLocalizedName;
 
-    public AlchemyArray()
+    private AlchemyArray()
     {
-        glyphs = new TreeSet<Glyph>();
+
     }
 
-    public AlchemyArray(Collection<Glyph> glyphs)
+    public AlchemyArray(ResourceLocation texture, String unLocalizedName)
     {
-        this.glyphs = new TreeSet<Glyph>(glyphs);
+        this.texture = texture;
+        this.unLocalizedName = unLocalizedName;
     }
 
-    public Set<Glyph> getGlyphs()
+    public ResourceLocation getTexture()
     {
-        return ImmutableSortedSet.copyOf(glyphs);
+        return texture;
     }
 
-    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    public String getUnLocalizedName()
     {
+        return unLocalizedName;
+    }
+
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        if (nbtTagCompound != null) {
+            if (nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath")) {
+                this.texture = new ResourceLocation(nbtTagCompound.getString("textureDomain"), nbtTagCompound.getString("texturePath"));
+            } else {
+                this.texture = new ResourceLocation("");
+            }
+
+            if (nbtTagCompound.hasKey("unLocalizedName")) {
+                this.unLocalizedName = nbtTagCompound.getString("unLocalizedName");
+            } else {
+                this.unLocalizedName = "";
+            }
+        } else
+        {
+            this.texture = new ResourceLocation("");
+            this.unLocalizedName = "";
+        }
+    }
+
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        nbtTagCompound.setString("textureDomain", texture.getResourceDomain());
+        nbtTagCompound.setString("texturePath", texture.getResourcePath());
+        nbtTagCompound.setString("unLocalizedName", unLocalizedName);
+    }
+
+    public static AlchemyArray readGlyphFromNBT(NBTTagCompound nbtTagCompound) {
+        AlchemyArray alchemyArray = new AlchemyArray();
+        alchemyArray.readFromNBT(nbtTagCompound);
+        return alchemyArray;
+    }
+
+    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ) {
 
     }
 
     @Override
-    public String toString()
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Glyph glyph : glyphs)
-        {
-            stringBuilder.append(glyph.toString() + ", ");
-        }
-
-        return stringBuilder.toString();
+    public String toString() {
+        return StatCollector.translateToLocal(unLocalizedName);
     }
 
     @Override
@@ -60,21 +88,18 @@ public abstract class AlchemyArray implements Comparable<AlchemyArray>
     @Override
     public int compareTo(AlchemyArray alchemyArray)
     {
-        if (this.glyphs.size() == alchemyArray.glyphs.size())
+        if (this.texture.getResourceDomain().equalsIgnoreCase(alchemyArray.getTexture().getResourceDomain()))
         {
-            for (Glyph glyph : this.glyphs)
+            if (this.texture.getResourcePath().equalsIgnoreCase(alchemyArray.getTexture().getResourcePath()))
             {
-                if (!alchemyArray.glyphs.contains(glyph))
-                {
-                    return -1;
-                }
+                return 0;
+            } else {
+                return this.texture.getResourcePath().compareToIgnoreCase(alchemyArray.getTexture().getResourcePath());
             }
-
-            return 0;
         }
         else
         {
-            return this.glyphs.size() - alchemyArray.glyphs.size();
+            return this.texture.getResourceDomain().compareToIgnoreCase(alchemyArray.getTexture().getResourceDomain());
         }
     }
 }

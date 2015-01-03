@@ -12,9 +12,6 @@ public class Names
         public static final String CALCINATOR = "calcinator";
         public static final String RESEARCH_STATION = "researchStation";
         public static final String AUGMENTATION_TABLE = "augmentationTable";
-        public static final String TRANSMUTATION_SQUARE = "transmutationSquare";
-        public static final String ALCHEMY_ARRAY = "alchemyArray";
-        public static final String DUMMY_ARRAY = "dummyArray";
     }
 
     public static final class Items
@@ -36,7 +33,6 @@ public class Names
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
         public static final String DIVINING_ROD = "diviningRod";
         public static final String ALCHEMICAL_TOME = "alchemicalTome";
-        public static final String GUIDE = "guide";
         public static final String MATTER = "matter";
         public static final String[] MATTER_SUBTYPES = {"Proto", "Dark", "Corporeal", "Kinetic", "Temporal", "Essentia", "Amorphous", "Void", "Omni"};
         public static final String GEM = "gem";
@@ -81,7 +77,10 @@ public class Names
     public static final class NBT
     {
         public static final String ITEMS = "Items";
-        public static final String KNOWLEDGE = "Knowledge";
+        public static final String PLAYER_KNOWLEDGE = "PlayerKnowledge";
+        public static final String ITEM_TRANSMUTATION_KNOWLEDGE = "ItemTransmutationKnowledge";
+        public static final String FORBIDDEN_ALCHEMY_KNOWLEDGE = "ForbiddenAlchemyKnowledge";
+        public static final String ALKAHESTRY_KNOWLEDGE = "AlkahestryKnowledge";
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
         public static final String CRAFTING_GUI_OPEN = "craftingGuiOpen";
@@ -111,7 +110,6 @@ public class Names
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
         public static final String AUGMENTATION_TABLE = "container.ee3:" + Blocks.AUGMENTATION_TABLE;
         public static final String ALCHEMICAL_TOME = "container.ee3:" + Items.ALCHEMICAL_TOME;
-        public static final String TRANSMUTATION_SQUARE = "container.ee3:" + Blocks.TRANSMUTATION_SQUARE;
     }
 
     public static final class Keys
@@ -121,21 +119,5 @@ public class Names
         public static final String EXTRA = "key.extra";
         public static final String RELEASE = "key.release";
         public static final String TOGGLE = "key.toggle";
-    }
-
-    public static final class Glyphs
-    {
-        public static final String BASE_CIRCLE = "glyph.ee3:baseCircle";
-        public static final String CIRCLE = "glyph.ee3:circle";
-        public static final String DIAMOND = "glyph.ee3:diamond";
-        public static final String DOT = "glyph.ee3:dot";
-        public static final String HEPTAGON = "glyph.ee3:heptagon";
-        public static final String HEXAGON = "glyph.ee3:hexagon";
-        public static final String INVERTED_TRIANGLE = "glyph.ee3:invertedTriangle";
-        public static final String LINE = "glyph.ee3:line";
-        public static final String OCTAGON = "glyph.ee3:octagon";
-        public static final String PENTAGON = "glyph.ee3:pentagon";
-        public static final String SQUARE = "glyph.ee3:square";
-        public static final String TRIANGLE = "glyph.ee3:triangle";
     }
 }
