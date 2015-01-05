@@ -16,7 +16,7 @@ general.sound.soundMode.label=Sounds
 general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
 
 general.tools.miniumStoneMax=Minium Stone Max Damage
-general.tools.miniumStoneMax.comment=Sets the Minium Stones max damage, between 1 - 9999
+general.tools.miniumStoneMax.comment=Sets the Minium Stones max damage
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
