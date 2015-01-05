@@ -34,15 +34,15 @@ public class WailaDataProvider implements IWailaDataProvider
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestSmall)
         {
-            currentTip.set(0, SpecialChars.WHITE + "Small Alchemical Chest"); // TODO: Localize
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal("waila.ee3.smallAlchemicalChest"));
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestMedium)
         {
-            currentTip.set(0, SpecialChars.WHITE + "Medium Alchemical Chest"); // TODO: Localize
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal("waila.ee3.mediumAlchemicalChest"));
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestLarge)
         {
-            currentTip.set(0, SpecialChars.WHITE + "Large Alchemical Chest"); // TODO: Localize
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal("waila.ee3.largeAlchemicalChest"));
         }
 
         return currentTip;

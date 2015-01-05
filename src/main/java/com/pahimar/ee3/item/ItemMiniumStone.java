@@ -2,6 +2,7 @@ package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.IKeyBound;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.NBTHelper;
@@ -16,7 +17,7 @@ public class ItemMiniumStone extends ItemEE implements IKeyBound
     {
         super();
         this.setUnlocalizedName(Names.Items.MINIUM_STONE);
-        this.setMaxDamage(1000); // TODO Get this from configs
+        this.setMaxDamage(Settings.Tools.miniumMaxDamage);
     }
 
     @Override

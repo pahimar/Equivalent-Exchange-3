@@ -5,6 +5,7 @@ import com.pahimar.ee3.skill.PlayerKnowledge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class InventoryAlchemicalTome implements IInventory
 {
@@ -14,8 +15,7 @@ public class InventoryAlchemicalTome implements IInventory
 
     public InventoryAlchemicalTome(ItemStack itemStack)
     {
-        // TODO Handle case where there the NBTTagCompound of the ItemStack is invalid/uninitialized
-        this(PlayerKnowledge.readPlayerKnowledgeFromNBT(itemStack.getTagCompound()));
+    	this(itemStack.hasTagCompound() ? PlayerKnowledge.readPlayerKnowledgeFromNBT(itemStack.getTagCompound()) : PlayerKnowledge.readPlayerKnowledgeFromNBT(new NBTTagCompound()));
     }
 
     public InventoryAlchemicalTome(PlayerKnowledge playerKnowledge)

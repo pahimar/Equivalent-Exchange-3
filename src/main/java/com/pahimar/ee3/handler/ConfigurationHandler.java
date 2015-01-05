@@ -32,6 +32,7 @@ public class ConfigurationHandler
         Settings.Transmutation.maxKnowledgeTier = configuration.getInt(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MAX_TIER, Messages.Configuration.CATEGORY_TRANSMUTATION, 0, 0, Short.MAX_VALUE, StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MAX_TIER_COMMENT), Messages.Configuration.TRANSMUTATION_KNOWLEDGE_MAX_TIER_LABEL);
         Settings.Transmutation.useTemplateFile = configuration.getBoolean(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_TEMPLATE, Messages.Configuration.CATEGORY_TRANSMUTATION, true, StatCollector.translateToLocal(Messages.Configuration.TRANSMUTATION_KNOWLEDGE_TEMPLATE_COMMENT), Messages.Configuration.TRANSMUTATION_KNOWLEDGE_TEMPLATE_LABEL);
         Settings.Sounds.soundMode = ConfigurationHelper.getString(configuration, Messages.Configuration.SOUND_MODE, Configuration.CATEGORY_GENERAL, "All", StatCollector.translateToLocal(Messages.Configuration.SOUND_MODE_COMMENT), new String[]{"All", "Self", "None"}, Messages.Configuration.SOUND_MODE_LABEL);
+        Settings.Tools.miniumMaxDamage = configuration.getInt(Messages.Configuration.TOOL_MINIUM_STONE_MAX, Configuration.CATEGORY_GENERAL, 1000, 1, 9999, StatCollector.translateToLocal(Messages.Configuration.TOOL_MINIUM_STONE_MAX_COMMENT));
 
         if (configuration.hasChanged())
         {
