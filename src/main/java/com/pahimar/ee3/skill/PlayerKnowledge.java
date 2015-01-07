@@ -1,7 +1,9 @@
 package com.pahimar.ee3.skill;
 
+import java.util.Set;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerKnowledge implements INBTTaggable
@@ -16,6 +18,10 @@ public class PlayerKnowledge implements INBTTaggable
     public PlayerKnowledge(ItemTransmutationKnowledge itemTransmutationKnowledge)
     {
         this.itemTransmutationKnowledge = itemTransmutationKnowledge;
+    }
+    
+    public PlayerKnowledge(NBTTagCompound nbtTagCompound)
+    {
     }
 
     public ItemTransmutationKnowledge getItemTransmutationKnowledge()
@@ -60,6 +66,21 @@ public class PlayerKnowledge implements INBTTaggable
         playerKnowledge.readFromNBT(nbtTagCompound);
 
         return playerKnowledge;
+    }
+    
+    public Set<ItemStack> getKnownItemStacks()
+    {
+    	return itemTransmutationKnowledge.getKnownItemTransmutations();
+    }
+    
+    public boolean isItemStackKnown(ItemStack itemStack)
+    {
+    	return itemTransmutationKnowledge.isItemStackKnown(itemStack);
+    }
+    
+    public boolean learnItemStack(ItemStack itemStack)
+    {
+    	return itemTransmutationKnowledge.learnItemStack(itemStack);
     }
 
     @Override

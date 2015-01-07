@@ -5,6 +5,7 @@ import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -67,19 +68,21 @@ public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
 
             if (tileEntityGlassBell.outputItemStack != null)
             {
-                // TODO Stop the ghost item rendering in the event that the client's game is paused
-                float scaleFactor = getGhostItemScaleFactor(tileEntityGlassBell.outputItemStack);
-                float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+            	if (Minecraft.getMinecraft().currentScreen == null && Minecraft.getMinecraft().inGameHasFocus)
+            	{
+            		float scaleFactor = getGhostItemScaleFactor(tileEntityGlassBell.outputItemStack);
+                    float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-                EntityItem ghostEntityItem = new EntityItem(tileEntityGlassBell.getWorldObj());
-                ghostEntityItem.hoverStart = 0.0F;
-                ghostEntityItem.setEntityItemStack(tileEntityGlassBell.outputItemStack);
+                    EntityItem ghostEntityItem = new EntityItem(tileEntityGlassBell.getWorldObj());
+                    ghostEntityItem.hoverStart = 0.0F;
+                    ghostEntityItem.setEntityItemStack(tileEntityGlassBell.outputItemStack);
 
-                translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileEntityGlassBell.getOrientation());
-                GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
-                GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
+                    translateGhostItemByOrientation(ghostEntityItem.getEntityItem(), x, y, z, tileEntityGlassBell.getOrientation());
+                    GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+                    GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 
-                customRenderItem.doRender(ghostEntityItem, 0, 0, 0, 0, 0);
+                    customRenderItem.doRender(ghostEntityItem, 0, 0, 0, 0, 0);
+            	}
             }
 
             GL11.glPopMatrix();
