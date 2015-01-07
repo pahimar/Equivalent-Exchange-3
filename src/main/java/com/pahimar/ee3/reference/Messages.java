@@ -32,5 +32,8 @@ public final class Messages
         public static final String SOUND_MODE = "soundMode";
         public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
         public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";
+        
+        public static final String TOOL_MINIUM_STONE_MAX = "general.tools.miniumStoneMax";
+        public static final String TOOL_MINIUM_STONE_MAX_COMMENT = "general.tools.miniumStoneMax.comment";
     }
 }

@@ -18,4 +18,9 @@ public class Settings
     {
         public static String soundMode;
     }
+    
+    public static class Tools
+    {
+    	public static int miniumMaxDamage;
+    }
 }
