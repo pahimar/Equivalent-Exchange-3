@@ -1,7 +1,7 @@
-package com.pahimar.ee3.skill;
+package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.handler.PlayerKnowledgeHandler;
+import com.pahimar.ee3.handler.KnowledgeHandler;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class SkillRegistry
 {
     private static SkillRegistry SkillRegistry = null;
-    private SortedMap<ItemStack, Skill> skillMap;
+    private SortedMap<ItemStack, Skill> transmutationSkills;
 
     private SkillRegistry()
     {
@@ -31,7 +31,7 @@ public class SkillRegistry
 
     private void init()
     {
-        skillMap = new TreeMap<ItemStack, Skill>(ItemHelper.comparator);
+        transmutationSkills = new TreeMap<ItemStack, Skill>(ItemHelper.comparator);
     }
 
     public void addSkill(ItemStack itemStack, boolean learnable, boolean recoverable)
@@ -49,9 +49,9 @@ public class SkillRegistry
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
-        if (!skillMap.containsKey(unitItemStack))
+        if (!transmutationSkills.containsKey(unitItemStack))
         {
-            skillMap.put(unitItemStack, skill);
+            transmutationSkills.put(unitItemStack, skill);
         }
     }
 
@@ -60,7 +60,7 @@ public class SkillRegistry
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
-        return skillMap.containsKey(unitItemStack);
+        return transmutationSkills.containsKey(unitItemStack);
     }
 
     public boolean canBeLearned(ItemStack itemStack)
@@ -68,9 +68,9 @@ public class SkillRegistry
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
-        if (skillMap.containsKey(unitItemStack))
+        if (transmutationSkills.containsKey(unitItemStack))
         {
-            return skillMap.get(unitItemStack).canBeLearned();
+            return transmutationSkills.get(unitItemStack).isLearnable();
         }
 
         return false;
@@ -107,9 +107,9 @@ public class SkillRegistry
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Restricted"))
             {
-                PlayerKnowledge allowedKnowledge = PlayerKnowledgeHandler.getAllowedPlayerKnowledge();
+                TransmutationKnowledge allowedKnowledge = KnowledgeHandler.getAllowedTransmutationKnowledge();
 
-                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack) && allowedKnowledge.isItemStackKnown(itemStack);
+                return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack) && allowedKnowledge.isKnown(itemStack);
             }
         }
 
@@ -121,9 +121,9 @@ public class SkillRegistry
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
-        if (skillMap.containsKey(unitItemStack))
+        if (transmutationSkills.containsKey(unitItemStack))
         {
-            return skillMap.get(unitItemStack).isRecoverable();
+            return transmutationSkills.get(unitItemStack).isRecoverable();
         }
 
         return false;
@@ -134,9 +134,9 @@ public class SkillRegistry
         ItemStack unitItemStack = itemStack.copy();
         unitItemStack.stackSize = 1;
 
-        if (skillMap.containsKey(unitItemStack))
+        if (transmutationSkills.containsKey(unitItemStack))
         {
-            return skillMap.get(unitItemStack).getKnowledgeTier();
+            return transmutationSkills.get(unitItemStack).getKnowledgeTier();
         }
 
         return -1;

@@ -1,8 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.skill.PlayerKnowledge;
-import com.pahimar.ee3.util.PlayerKnowledgeHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -199,23 +197,24 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
     private boolean canLearnItemStack()
     {
-        return PlayerKnowledgeHelper.canLearnItemStack(inventory[ITEM_SLOT_INVENTORY_INDEX], inventory[TOME_SLOT_INVENTORY_INDEX]);
+//        return ItemTransmutationKnowledgeHelper.canLearnItemStack(inventory[ITEM_SLOT_INVENTORY_INDEX], inventory[TOME_SLOT_INVENTORY_INDEX]);
+        return false;
     }
 
     private void learnItemStack()
     {
         if (this.canLearnItemStack())
         {
-            PlayerKnowledge playerKnowledge = PlayerKnowledge.readPlayerKnowledgeFromNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-            playerKnowledge.learnItemStack(this.inventory[ITEM_SLOT_INVENTORY_INDEX]);
-            playerKnowledge.writeToNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-
-            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
-
-            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
-            {
-                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
-            }
+//            PlayerKnowledge playerKnowledge = PlayerKnowledge.readPlayerKnowledgeFromNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
+//            playerKnowledge.learnTransmutation(this.inventory[ITEM_SLOT_INVENTORY_INDEX]);
+//            playerKnowledge.writeToNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
+//
+//            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
+//
+//            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
+//            {
+//                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
+//            }
         }
     }
 }

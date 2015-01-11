@@ -1,7 +1,8 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.knowledge.PlayerKnowledge;
+import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Settings;
-import com.pahimar.ee3.skill.PlayerKnowledge;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -12,18 +13,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PlayerKnowledgeHandler
+public class KnowledgeHandler
 {
     public static File playerDataDirectory;
+    public static File transmutationKnowledgeDirectory;
 
-    public static void writeKnowledgeData(EntityPlayer entityPlayer)
+    public static void writeKnowledgeData(EntityPlayer entityPlayer, File knowledgeDirectory)
     {
-        writeKnowledgeData(entityPlayer, null);
+        writeKnowledgeData(entityPlayer, knowledgeDirectory, null);
     }
 
-    public static void writeKnowledgeData(EntityPlayer entityPlayer, PlayerKnowledge playerKnowledge)
+    public static void writeKnowledgeData(EntityPlayer entityPlayer, File knowledgeDirectory, PlayerKnowledge playerKnowledge)
     {
-        if (playerDataDirectory != null && playerDataDirectory.isDirectory())
+        if (playerDataDirectory != null && playerDataDirectory.isDirectory() && knowledgeDirectory != null && knowledgeDirectory.isDirectory())
         {
             NBTTagCompound playerKnowledgeCompound = null;
 
@@ -31,11 +33,7 @@ public class PlayerKnowledgeHandler
             {
                 if (Settings.Transmutation.useTemplateFile)
                 {
-                    playerKnowledgeCompound = readTemplateKnowledgeFile();
-                }
-                else
-                {
-                    new PlayerKnowledge().writeToNBT(playerKnowledgeCompound);
+                    playerKnowledgeCompound = readTemplateKnowledgeFile(); // TODO Generalize this to the provided directory
                 }
             }
             else
@@ -45,8 +43,8 @@ public class PlayerKnowledgeHandler
 
             try
             {
-                File file1 = new File(playerDataDirectory, entityPlayer.getUniqueID().toString() + KNOWLEDGE_FILE_EXTENSION + ".tmp");
-                File file2 = new File(playerDataDirectory, entityPlayer.getUniqueID().toString() + KNOWLEDGE_FILE_EXTENSION);
+                File file1 = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + KNOWLEDGE_FILE_EXTENSION + ".tmp");
+                File file2 = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + KNOWLEDGE_FILE_EXTENSION);
                 CompressedStreamTools.writeCompressed(playerKnowledgeCompound, new FileOutputStream(file1));
 
                 if (file2.exists())
@@ -83,7 +81,7 @@ public class PlayerKnowledgeHandler
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        new PlayerKnowledge().writeToNBT(nbtTagCompound);
+        new TransmutationKnowledge().writeToNBT(nbtTagCompound);
         return nbtTagCompound;
     }
 
@@ -111,11 +109,11 @@ public class PlayerKnowledgeHandler
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        new PlayerKnowledge().writeToNBT(nbtTagCompound);
+        new TransmutationKnowledge().writeToNBT(nbtTagCompound);
         return nbtTagCompound;
     }
 
-    private static NBTTagCompound readAllowedKnowledgeFile()
+    private static NBTTagCompound readAllowedTransmutationFile()
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
@@ -134,7 +132,7 @@ public class PlayerKnowledgeHandler
                 finally
                 {
                     NBTTagCompound nbtTagCompound = new NBTTagCompound();
-                    new PlayerKnowledge().writeToNBT(nbtTagCompound);
+                    new TransmutationKnowledge().writeToNBT(nbtTagCompound);
                     return nbtTagCompound;
                 }
             }
@@ -145,16 +143,16 @@ public class PlayerKnowledgeHandler
         }
 
         NBTTagCompound nbtTagCompound = new NBTTagCompound();
-        new PlayerKnowledge().writeToNBT(nbtTagCompound);
+        new TransmutationKnowledge().writeToNBT(nbtTagCompound);
         return nbtTagCompound;
     }
 
-    public static PlayerKnowledge getAllowedPlayerKnowledge()
+    public static TransmutationKnowledge getAllowedTransmutationKnowledge()
     {
-        return new PlayerKnowledge(readAllowedKnowledgeFile());
+        return new TransmutationKnowledge(readAllowedTransmutationFile());
     }
 
-    private static void initializeTemplateFile(PlayerKnowledge templatePlayerKnowledge)
+    private static void initializeTemplateFile(TransmutationKnowledge templatePlayerKnowledge)
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
@@ -162,7 +160,7 @@ public class PlayerKnowledgeHandler
 
             if (templatePlayerKnowledge == null)
             {
-                templatePlayerKnowledge = new PlayerKnowledge();
+                templatePlayerKnowledge = new TransmutationKnowledge();
             }
 
             if (!templatePlayerKnowledgeFile.exists())
@@ -182,7 +180,7 @@ public class PlayerKnowledgeHandler
         }
     }
 
-    private static void initializeAllowedKnowledgeFile(PlayerKnowledge allowedKnowledgeFile)
+    private static void initializeAllowedKnowledgeFile(TransmutationKnowledge allowedKnowledgeFile)
     {
         if (playerDataDirectory != null && playerDataDirectory.isDirectory())
         {
@@ -190,7 +188,7 @@ public class PlayerKnowledgeHandler
 
             if (allowedKnowledgeFile == null)
             {
-                allowedKnowledgeFile = new PlayerKnowledge();
+                allowedKnowledgeFile = new TransmutationKnowledge();
             }
 
             if (!templatePlayerKnowledgeFile.exists())
@@ -204,14 +202,14 @@ public class PlayerKnowledgeHandler
                 }
                 catch (Exception exception)
                 {
-                    LogHelper.warn("Failed to initialize player knowledge template file");
+                    LogHelper.warn("Failed to initialize transmutation knowledge template file");
                 }
             }
         }
     }
 
 
-    public static final String KNOWLEDGE_FILE_EXTENSION = ".ee3";
+    public static final String KNOWLEDGE_FILE_EXTENSION = ".knowledge";
     private static final String TEMPLATE_FILENAME = "template" + KNOWLEDGE_FILE_EXTENSION;
     private static final String ALLOWED_KNOWLEDGE_FILENAME = "allowedKnowledge" + KNOWLEDGE_FILE_EXTENSION;
 }
