@@ -1,6 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -13,7 +14,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TransmutationKnowledge extends PlayerKnowledge
+public class TransmutationKnowledge implements INBTTaggable
 {
     private Set<ItemStack> knownTransmutations;
 
@@ -162,11 +163,5 @@ public class TransmutationKnowledge extends PlayerKnowledge
         stringBuilder.append("]");
 
         return stringBuilder.toString();
-    }
-
-    @Override
-    public String getKnowledgeLabel()
-    {
-        return "transmutation";
     }
 }

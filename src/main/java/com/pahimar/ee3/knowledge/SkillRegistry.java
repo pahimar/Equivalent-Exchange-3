@@ -1,7 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.handler.KnowledgeHandler;
+import com.pahimar.ee3.handler.TransmutationKnowledgeHandler;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.ItemStack;
@@ -107,7 +107,7 @@ public class SkillRegistry
             }
             else if (Settings.Transmutation.knowledgeMode.equalsIgnoreCase("Restricted"))
             {
-                TransmutationKnowledge allowedKnowledge = KnowledgeHandler.getAllowedTransmutationKnowledge();
+                TransmutationKnowledge allowedKnowledge = TransmutationKnowledgeHandler.getAllowedTransmutations();
 
                 return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && SkillRegistry.getInstance().canBeLearned(itemStack) && allowedKnowledge.isKnown(itemStack);
             }

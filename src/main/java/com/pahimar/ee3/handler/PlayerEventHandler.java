@@ -1,7 +1,6 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Reference;
@@ -19,28 +18,28 @@ public class PlayerEventHandler
         if (!event.entityPlayer.worldObj.isRemote)
         {
             // Grab the correct directory to be reading/writing player knowledge data to
-            if (KnowledgeHandler.playerDataDirectory == null || !KnowledgeHandler.playerDataDirectory.getAbsolutePath().equalsIgnoreCase(event.playerDirectory.getAbsolutePath()))
+            if (TransmutationKnowledgeHandler.playerDataDirectory == null || !TransmutationKnowledgeHandler.playerDataDirectory.getAbsolutePath().equalsIgnoreCase(event.playerDirectory.getAbsolutePath()))
             {
-                KnowledgeHandler.playerDataDirectory = new File(event.playerDirectory, Reference.MOD_ID.toLowerCase());
+                TransmutationKnowledgeHandler.playerDataDirectory = new File(event.playerDirectory, Reference.MOD_ID.toLowerCase());
 
-                if (!KnowledgeHandler.playerDataDirectory.exists())
+                if (!TransmutationKnowledgeHandler.playerDataDirectory.exists())
                 {
-                    KnowledgeHandler.playerDataDirectory.mkdir();
+                    TransmutationKnowledgeHandler.playerDataDirectory.mkdir();
                 }
 
-                KnowledgeHandler.transmutationKnowledgeDirectory = new File(KnowledgeHandler.playerDataDirectory, new TransmutationKnowledge().getKnowledgeLabel());
+                TransmutationKnowledgeHandler.transmutationKnowledgeDirectory = new File(TransmutationKnowledgeHandler.playerDataDirectory, "knowledge" + File.pathSeparator + "transmutation");
 
-                if (!KnowledgeHandler.transmutationKnowledgeDirectory.exists())
+                if (!TransmutationKnowledgeHandler.transmutationKnowledgeDirectory.exists())
                 {
-                    KnowledgeHandler.transmutationKnowledgeDirectory.mkdir();
+                    TransmutationKnowledgeHandler.transmutationKnowledgeDirectory.mkdir();
                 }
             }
 
             // If player knowledge data doesn't exist, initialize a file for the player
-            File playerTransmutationKnowledgeFile = new File(KnowledgeHandler.transmutationKnowledgeDirectory, event.entityPlayer.getUniqueID() + KnowledgeHandler.KNOWLEDGE_FILE_EXTENSION);
+            File playerTransmutationKnowledgeFile = new File(TransmutationKnowledgeHandler.transmutationKnowledgeDirectory, event.entityPlayer.getUniqueID() + TransmutationKnowledgeHandler.KNOWLEDGE_FILE_EXTENSION);
             if (!playerTransmutationKnowledgeFile.exists())
             {
-                KnowledgeHandler.writeKnowledgeData(event.entityPlayer, KnowledgeHandler.transmutationKnowledgeDirectory);
+                TransmutationKnowledgeHandler.savePlayerKnowledge(event.entityPlayer);
             }
         }
     }
