@@ -5,9 +5,12 @@ import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.IEnergyValueProvider;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.INBTTaggable;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.io.File;
 import java.util.*;
 
 public class EnergyValueRegistry implements INBTTaggable
@@ -346,18 +350,20 @@ public class EnergyValueRegistry implements INBTTaggable
 
     protected final void init()
     {
-        String fileName = SerializationHelper.getModListMD5() + ".ee3";
+        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
 
-        if (!SerializationHelper.dataFileExist(fileName))
+        if (!energyValueRegistryFile.exists())
         {
             runDynamicEnergyValueResolution();
         }
         else
         {
-            NBTTagCompound nbtEnergyValueRegistry = SerializationHelper.readEnergyValueRegistryFromFile(fileName);
+            NBTTagCompound nbtEnergyValueRegistry = SerializationHelper.readNBTFromFile(energyValueRegistryFile);
             if (nbtEnergyValueRegistry != null)
             {
                 energyValueRegistry.readFromNBT(nbtEnergyValueRegistry);
+                LogHelper.info("Successfully loaded EnergyValueRegistry from file: " + energyValueRegistryFile.getAbsolutePath());
             }
             else
             {
@@ -495,7 +501,8 @@ public class EnergyValueRegistry implements INBTTaggable
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
 
         // Serialize values to disk
-        SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + ".ee3");
+        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        SerializationHelper.writeNBTToFile(dataDirectory, SerializationHelper.getModListMD5() + ".ee3", this);
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()
@@ -661,6 +668,12 @@ public class EnergyValueRegistry implements INBTTaggable
             }
         }
         nbtTagCompound.setTag("stackMappingList", stackMappingTagList);
+    }
+
+    @Override
+    public String getTagLabel()
+    {
+        return "EnergyValueRegistry";
     }
 
     public void setEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue)

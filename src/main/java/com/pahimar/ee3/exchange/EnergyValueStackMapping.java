@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 
 public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackMapping>, JsonDeserializer<EnergyValueStackMapping>
 {
-    private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
 
     public final WrappedStack wrappedStack;
     public final EnergyValue energyValue;

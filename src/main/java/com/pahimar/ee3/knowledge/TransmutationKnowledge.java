@@ -141,6 +141,12 @@ public class TransmutationKnowledge implements INBTTaggable
         nbtTagCompound.setTag(Names.NBT.ITEM_TRANSMUTATION_KNOWLEDGE, tagList);
     }
 
+    @Override
+    public String getTagLabel()
+    {
+        return "TransmutationKnowledge";
+    }
+
     public static TransmutationKnowledge readTransmutationKnowledgeFromNBT(NBTTagCompound nbtTagCompound)
     {
         TransmutationKnowledge transmutationKnowledge = new TransmutationKnowledge();

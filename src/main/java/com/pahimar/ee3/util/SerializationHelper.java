@@ -1,13 +1,11 @@
 package com.pahimar.ee3.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
@@ -20,7 +18,40 @@ import java.util.*;
 
 public class SerializationHelper
 {
-    private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+    private static File dataDirectory;
+    private static File playerDataDirectory;
+
+    /**
+     * Returns a File reference to the mod specific directory in the data directory
+     *
+     * @return
+     */
+    public static File getDataDirectory()
+    {
+        return dataDirectory;
+    }
+
+    /**
+     * Returns a File reference to the mod specific directory in the playerdata directory
+     *
+     * @return
+     */
+    public static File getPlayerDataDirectory()
+    {
+        return playerDataDirectory;
+    }
+
+    /**
+     * Creates (if one does not exist already) and initializes a mod specific File reference inside of the current world's playerdata directory
+     */
+    public static void initModDataDirectories()
+    {
+        dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        dataDirectory.mkdirs();
+
+        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.MOD_ID.toLowerCase());
+        playerDataDirectory.mkdirs();
+    }
 
     public static String getModListMD5()
     {
@@ -42,73 +73,13 @@ public class SerializationHelper
         return DigestUtils.md5Hex(modListString.toString());
     }
 
-    public static boolean dataFileExist(String fileName)
+    public static NBTTagCompound readNBTFromFile(File nbtEncodedFile)
     {
-        if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
+        if (nbtEncodedFile.exists() && nbtEncodedFile.isFile())
         {
-            return false;
-        }
-
-        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-        if (!dataDirectory.exists())
-        {
-            return false;
-        }
-        else if (dataDirectory.isFile())
-        {
-            return false;
-        }
-
-        File file = new File(dataDirectory, fileName);
-
-        return file.exists() && file.isFile();
-    }
-
-    public static void writeEnergyValueRegistryToFile(String fileName)
-    {
-        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
-        {
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            if (!dataDirectory.exists())
-            {
-                dataDirectory.mkdir();
-            }
-
-            NBTTagCompound energyValueRegistryNBT = new NBTTagCompound();
-            EnergyValueRegistry.getInstance().writeToNBT(energyValueRegistryNBT);
-
             try
             {
-                File file1 = new File(dataDirectory, fileName + ".tmp");
-                File file2 = new File(dataDirectory, fileName);
-                CompressedStreamTools.writeCompressed(energyValueRegistryNBT, new FileOutputStream(file1));
-
-                if (file2.exists())
-                {
-                    file2.delete();
-                }
-
-                file1.renameTo(file2);
-
-                LogHelper.info("Successfully saved EnergyValueRegistry to file: " + file2.getPath());
-            }
-            catch (Exception exception)
-            {
-                LogHelper.warn("Failed to save EnergyValueRegistry to file " + dataDirectory.getPath() + SerializationHelper.getModListMD5() + ".ee3");
-            }
-        }
-    }
-
-    public static NBTTagCompound readEnergyValueRegistryFromFile(String fileName)
-    {
-        if (dataFileExist(fileName))
-        {
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            File energyValueRegistryFile = new File(dataDirectory, fileName);
-
-            try
-            {
-                return CompressedStreamTools.readCompressed(new FileInputStream(energyValueRegistryFile));
+                return CompressedStreamTools.readCompressed(new FileInputStream(nbtEncodedFile));
             }
             catch (IOException e)
             {
@@ -117,6 +88,39 @@ public class SerializationHelper
         }
 
         return null;
+    }
+
+    public static void writeNBTToFile(File directory, String fileName, INBTTaggable nbtTaggable)
+    {
+        if (directory != null && fileName != null && nbtTaggable != null)
+        {
+            if (!directory.exists())
+            {
+                directory.mkdirs();
+            }
+
+            NBTTagCompound nbtTagCompound = new NBTTagCompound();
+            nbtTaggable.writeToNBT(nbtTagCompound);
+
+            try
+            {
+                File file1 = new File(directory, fileName + ".tmp");
+                File file2 = new File(directory, fileName);
+                CompressedStreamTools.writeCompressed(nbtTagCompound, new FileOutputStream(file1));
+
+                if (file2.exists())
+                {
+                    file2.delete();
+                }
+
+                file1.renameTo(file2);
+
+                LogHelper.info(String.format("Successfully saved %s to file: %s", nbtTaggable.getTagLabel(), file2.getAbsolutePath()));
+            } catch (Exception exception)
+            {
+                LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+            }
+        }
     }
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(String fileName)
@@ -135,7 +139,7 @@ public class SerializationHelper
             jsonReader.beginArray();
             while (jsonReader.hasNext())
             {
-                EnergyValueStackMapping energyValueStackMapping = jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                 energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
             }
             jsonReader.endArray();
@@ -167,7 +171,7 @@ public class SerializationHelper
             jsonWriter.beginArray();
             for (WrappedStack wrappedStack : energyValueMap.keySet())
             {
-                jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
+                EnergyValueStackMapping.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
             }
 
             jsonWriter.endArray();

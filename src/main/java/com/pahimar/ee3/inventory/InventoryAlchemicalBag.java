@@ -248,6 +248,12 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
         nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
     }
 
+    @Override
+    public String getTagLabel()
+    {
+        return "InventoryAlchemicalBag";
+    }
+
     public boolean hasCustomName()
     {
         return customName != null && customName.length() > 0;

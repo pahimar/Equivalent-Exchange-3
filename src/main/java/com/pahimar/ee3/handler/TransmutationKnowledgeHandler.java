@@ -1,11 +1,13 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
+import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +22,27 @@ public class TransmutationKnowledgeHandler
     private static TransmutationKnowledge allowedTransmutationKnowledge;
     private static TransmutationKnowledge templateTransmutationKnowledge;
     // TODO Look into caching TransmutationKnowledge for currently logged in players, rather than going to disk constantly
+
+    public static void lazyInitKnowledgeSystem(PlayerEvent.LoadFromFile event)
+    {
+        // Grab the correct directory to be reading/writing player knowledge data to
+        if (playerDataDirectory == null || !playerDataDirectory.getAbsolutePath().equalsIgnoreCase(event.playerDirectory.getAbsolutePath()))
+        {
+            playerDataDirectory = new File(event.playerDirectory, Reference.MOD_ID.toLowerCase());
+
+            if (!playerDataDirectory.exists())
+            {
+                playerDataDirectory.mkdir();
+            }
+
+            transmutationKnowledgeDirectory = new File(playerDataDirectory, "knowledge");
+
+            if (!transmutationKnowledgeDirectory.exists())
+            {
+                transmutationKnowledgeDirectory.mkdir();
+            }
+        }
+    }
 
     public static NBTTagCompound getPlayerKnowledge(EntityPlayer entityPlayer)
     {
@@ -232,7 +255,7 @@ public class TransmutationKnowledgeHandler
 
     }
 
-    public static final String KNOWLEDGE_FILE_EXTENSION = ".knowledge";
+    public static final String KNOWLEDGE_FILE_EXTENSION = ".transmutation";
     private static final String TEMPLATE_FILENAME = "template" + KNOWLEDGE_FILE_EXTENSION;
-    private static final String ALLOWED_KNOWLEDGE_FILENAME = "allowedKnowledge" + KNOWLEDGE_FILE_EXTENSION;
+    private static final String ALLOWED_KNOWLEDGE_FILENAME = "allowed" + KNOWLEDGE_FILE_EXTENSION;
 }

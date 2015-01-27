@@ -55,6 +55,7 @@ public class EquivalentExchange3
         event.registerServerCommand(new CommandSetValue());
         event.registerServerCommand(new CommandSetCurrentItemValue());
         event.registerServerCommand(new CommandSyncValues());
+        SerializationHelper.initModDataDirectories();
     }
 
     @EventHandler
@@ -122,7 +123,8 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
+//            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
+            SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase(), getEnergyValueRegistry());
         }
 
         WorldEventHandler.hasInitilialized = false;
