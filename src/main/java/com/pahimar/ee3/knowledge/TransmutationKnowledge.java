@@ -1,21 +1,27 @@
 package com.pahimar.ee3.knowledge;
 
+import com.google.gson.*;
+import com.pahimar.ee3.exchange.JsonUnitItemStack;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class TransmutationKnowledge implements INBTTaggable
+public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<TransmutationKnowledge>, JsonDeserializer<TransmutationKnowledge>
 {
+    private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(TransmutationKnowledge.class, new TransmutationKnowledge()).create();
     private Set<ItemStack> knownTransmutations;
 
     public TransmutationKnowledge()
@@ -169,5 +175,60 @@ public class TransmutationKnowledge implements INBTTaggable
         stringBuilder.append("]");
 
         return stringBuilder.toString();
+    }
+
+    public static TransmutationKnowledge createFromJson(String jsonTransmutationKnowledge) throws JsonParseException
+    {
+        try
+        {
+            return jsonSerializer.fromJson(jsonTransmutationKnowledge, TransmutationKnowledge.class);
+        } catch (JsonSyntaxException exception)
+        {
+            exception.printStackTrace();
+        } catch (JsonParseException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String toJson()
+    {
+        return jsonSerializer.toJson(this);
+    }
+
+    @Override
+    public TransmutationKnowledge deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(TransmutationKnowledge transmutationKnowledge, Type typeOfSrc, JsonSerializationContext context)
+    {
+        Gson gson = new Gson();
+        JsonArray jsonTransmutationKnowledge = new JsonArray();
+
+        for (ItemStack itemStack : transmutationKnowledge.getKnownTransmutations())
+        {
+            JsonUnitItemStack jsonUnitItemStack = new JsonUnitItemStack();
+            jsonUnitItemStack.itemName = Item.itemRegistry.getNameForObject(itemStack.getItem());
+            jsonUnitItemStack.itemDamage = itemStack.getItemDamage();
+            if (itemStack.stackTagCompound != null)
+            {
+                try
+                {
+                    jsonUnitItemStack.compressedStackTagCompound = CompressedStreamTools.compress(itemStack.stackTagCompound);
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            jsonTransmutationKnowledge.add(gson.toJsonTree(jsonUnitItemStack));
+        }
+
+        return jsonTransmutationKnowledge;
     }
 }

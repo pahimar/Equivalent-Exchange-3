@@ -1,6 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.knowledge.KnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -19,12 +20,16 @@ public class PlayerEventHandler
     {
         if (!event.entityPlayer.worldObj.isRemote)
         {
-            // If player knowledge data doesn't exist, initialize a file for the player
-//            File playerTransmutationKnowledgeFile = new File(TransmutationKnowledgeHandler.transmutationKnowledgeDirectory, event.entityPlayer.getUniqueID() + TransmutationKnowledgeHandler.KNOWLEDGE_FILE_EXTENSION);
-//            if (!playerTransmutationKnowledgeFile.exists())
-//            {
-//                TransmutationKnowledgeHandler.savePlayerKnowledge(event.entityPlayer);
-//            }
+            KnowledgeRegistry.getInstance().loadPlayerFromDisk(event.entityPlayer);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerSaveToFileEvent(PlayerEvent.SaveToFile event)
+    {
+        if (!event.entityPlayer.worldObj.isRemote)
+        {
+            KnowledgeRegistry.getInstance().savePlayerKnowledgeToDisk(event.entityPlayer);
         }
     }
 

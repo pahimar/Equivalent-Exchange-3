@@ -1,6 +1,8 @@
 package com.pahimar.ee3.knowledge;
 
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,6 +19,8 @@ public class KnowledgeRegistry
     {
         knowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge");
         knowledgeDirectory.mkdirs();
+
+        playerKnowledgeMap = new HashMap<UUID, TransmutationKnowledge>();
     }
 
     public static KnowledgeRegistry getInstance()
@@ -37,5 +41,26 @@ public class KnowledgeRegistry
         }
 
         return templateKnowledge;
+    }
+
+    public void loadPlayerFromDisk(EntityPlayer entityPlayer)
+    {
+        TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
+        LogHelper.error(entityPlayer.getUniqueID());
+        File playerKnowledgeFile = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".transmutation");
+
+        LogHelper.info(playerKnowledgeFile.getAbsolutePath());
+
+        if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
+        {
+            playerTransmutationKnowledge = TransmutationKnowledge.readTransmutationKnowledgeFromNBT(SerializationHelper.readNBTFromFile(playerKnowledgeFile));
+        }
+
+        playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
+    }
+
+    public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
+    {
+        SerializationHelper.writeNBTToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".transmutation", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
     }
 }

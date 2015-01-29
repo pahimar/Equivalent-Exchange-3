@@ -92,6 +92,11 @@ public class SerializationHelper
 
     public static void writeNBTToFile(File directory, String fileName, INBTTaggable nbtTaggable)
     {
+        writeNBTToFile(directory, fileName, nbtTaggable, false);
+    }
+
+    public static void writeNBTToFile(File directory, String fileName, INBTTaggable nbtTaggable, boolean verboseLogging)
+    {
         if (directory != null && fileName != null && nbtTaggable != null)
         {
             if (!directory.exists())
@@ -115,10 +120,16 @@ public class SerializationHelper
 
                 file1.renameTo(file2);
 
-                LogHelper.info(String.format("Successfully saved %s to file: %s", nbtTaggable.getTagLabel(), file2.getAbsolutePath()));
+                if (verboseLogging)
+                {
+                    LogHelper.info(String.format("Successfully saved %s to file: %s", nbtTaggable.getTagLabel(), file2.getAbsolutePath()));
+                }
             } catch (Exception exception)
             {
-                LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+                if (verboseLogging)
+                {
+                    LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+                }
             }
         }
     }

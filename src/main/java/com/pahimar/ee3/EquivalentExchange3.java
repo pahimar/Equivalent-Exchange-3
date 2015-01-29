@@ -8,6 +8,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.SkillRegistry;
+import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -24,6 +25,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 
 import java.io.File;
 
@@ -106,6 +108,11 @@ public class EquivalentExchange3
     {
         RecipeRegistry.getInstance().registerVanillaRecipes();
         RecipesAludel.registerRecipes();
+        TransmutationKnowledge transmutationKnowledge = new TransmutationKnowledge();
+        transmutationKnowledge.learnTransmutation(Items.apple);
+        transmutationKnowledge.learnTransmutation(Items.arrow);
+        transmutationKnowledge.learnTransmutation(Items.baked_potato);
+        LogHelper.info(transmutationKnowledge.toJson());
     }
 
     @EventHandler
@@ -123,7 +130,6 @@ public class EquivalentExchange3
         }
         else
         {
-//            SerializationHelper.writeEnergyValueRegistryToFile(SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
             SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase(), getEnergyValueRegistry());
         }
 
