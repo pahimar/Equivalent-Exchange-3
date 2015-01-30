@@ -146,7 +146,11 @@ public class ItemHelper
     {
         if (itemStack != null)
         {
-            return String.format("%sxitemStack[%s@%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
+            if (itemStack.hasTagCompound()) {
+                return String.format("%sxitemStack[%s@%s:%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
+            } else {
+                return String.format("%sxitemStack[%s@%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
+            }
         }
 
         return "null";

@@ -1,6 +1,5 @@
 package com.pahimar.ee3.knowledge;
 
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -46,13 +45,12 @@ public class KnowledgeRegistry
     public void loadPlayerFromDisk(EntityPlayer entityPlayer)
     {
         TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
-        LogHelper.error(entityPlayer.getUniqueID());
-        File playerKnowledgeFile = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".transmutation");
 
-        LogHelper.info(playerKnowledgeFile.getAbsolutePath());
+        File playerKnowledgeFile = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
 
         if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
         {
+            // TODO Load from disk as JSON and not as NBT
             playerTransmutationKnowledge = TransmutationKnowledge.readTransmutationKnowledgeFromNBT(SerializationHelper.readNBTFromFile(playerKnowledgeFile));
         }
 
@@ -61,6 +59,7 @@ public class KnowledgeRegistry
 
     public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
     {
+        // TODO Save to disk as JSON and not as NBT
         SerializationHelper.writeNBTToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
     }
 }

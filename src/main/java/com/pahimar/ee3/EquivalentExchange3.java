@@ -8,7 +8,6 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.SkillRegistry;
-import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -16,7 +15,6 @@ import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.NBTHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -26,8 +24,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 import java.io.File;
 
@@ -110,14 +106,6 @@ public class EquivalentExchange3
     {
         RecipeRegistry.getInstance().registerVanillaRecipes();
         RecipesAludel.registerRecipes();
-        TransmutationKnowledge transmutationKnowledge = new TransmutationKnowledge();
-        transmutationKnowledge.learnTransmutation(Items.apple);
-        transmutationKnowledge.learnTransmutation(Items.arrow);
-        transmutationKnowledge.learnTransmutation(Items.baked_potato);
-        ItemStack testStack = new ItemStack(Items.blaze_powder);
-        NBTHelper.setString(testStack, "test_string", "This is a test string");
-        transmutationKnowledge.learnTransmutation(testStack);
-        LogHelper.info(transmutationKnowledge.toJson());
     }
 
     @EventHandler
@@ -125,6 +113,7 @@ public class EquivalentExchange3
     {
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
+            // TODO Use the SerializationHelper to save this and reduce File objects
             File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
             File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
 
