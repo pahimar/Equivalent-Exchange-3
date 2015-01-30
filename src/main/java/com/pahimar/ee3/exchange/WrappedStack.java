@@ -6,13 +6,10 @@ import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -401,16 +398,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                         if (stackSize > 0 && item != null)
                         {
                             itemStack = new ItemStack(item, stackSize, jsonItemStack.itemDamage);
-                            if (jsonItemStack.compressedStackTagCompound != null)
+                            if (jsonItemStack.nbtTagCompound != null)
                             {
-                                try
-                                {
-                                    itemStack.stackTagCompound = CompressedStreamTools.readCompressed(new ByteArrayInputStream(jsonItemStack.compressedStackTagCompound));
-                                }
-                                catch (IOException e)
-                                {
-                                    e.printStackTrace();
-                                }
+                                itemStack.stackTagCompound = jsonItemStack.nbtTagCompound;
                             }
                         }
                         stackObject = itemStack;
@@ -483,17 +473,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             JsonItemStack jsonItemStack = new JsonItemStack();
             jsonItemStack.itemName = Item.itemRegistry.getNameForObject(((ItemStack) wrappedStack.wrappedStack).getItem());
             jsonItemStack.itemDamage = ((ItemStack) wrappedStack.wrappedStack).getItemDamage();
-            jsonItemStack.stackSize = ((ItemStack) wrappedStack.wrappedStack).stackSize;
             if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
             {
-                try
-                {
-                    jsonItemStack.compressedStackTagCompound = CompressedStreamTools.compress(((ItemStack) wrappedStack.wrappedStack).stackTagCompound);
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                jsonItemStack.nbtTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
             }
             jsonWrappedStack.add("data", gson.toJsonTree(jsonItemStack, JsonItemStack.class));
         }

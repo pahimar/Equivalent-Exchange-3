@@ -1,9 +1,10 @@
 package com.pahimar.ee3.exchange;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public class JsonItemStack
 {
     public String itemName;
     public int itemDamage;
-    public int stackSize;
-    public byte[] compressedStackTagCompound;
+    public NBTTagCompound nbtTagCompound;
 }

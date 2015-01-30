@@ -16,6 +16,7 @@ import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.LogHelper;
+import com.pahimar.ee3.util.NBTHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -26,6 +27,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 import java.io.File;
 
@@ -112,6 +114,9 @@ public class EquivalentExchange3
         transmutationKnowledge.learnTransmutation(Items.apple);
         transmutationKnowledge.learnTransmutation(Items.arrow);
         transmutationKnowledge.learnTransmutation(Items.baked_potato);
+        ItemStack testStack = new ItemStack(Items.blaze_powder);
+        NBTHelper.setString(testStack, "test_string", "This is a test string");
+        transmutationKnowledge.learnTransmutation(testStack);
         LogHelper.info(transmutationKnowledge.toJson());
     }
 

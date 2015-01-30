@@ -1,18 +1,16 @@
 package com.pahimar.ee3.knowledge;
 
 import com.google.gson.*;
-import com.pahimar.ee3.exchange.JsonUnitItemStack;
+import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
@@ -213,20 +211,14 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
 
         for (ItemStack itemStack : transmutationKnowledge.getKnownTransmutations())
         {
-            JsonUnitItemStack jsonUnitItemStack = new JsonUnitItemStack();
-            jsonUnitItemStack.itemName = Item.itemRegistry.getNameForObject(itemStack.getItem());
-            jsonUnitItemStack.itemDamage = itemStack.getItemDamage();
+            JsonItemStack jsonItemStack = new JsonItemStack();
+            jsonItemStack.itemName = Item.itemRegistry.getNameForObject(itemStack.getItem());
+            jsonItemStack.itemDamage = itemStack.getItemDamage();
             if (itemStack.stackTagCompound != null)
             {
-                try
-                {
-                    jsonUnitItemStack.compressedStackTagCompound = CompressedStreamTools.compress(itemStack.stackTagCompound);
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                jsonItemStack.nbtTagCompound = itemStack.getTagCompound();
             }
-            jsonTransmutationKnowledge.add(gson.toJsonTree(jsonUnitItemStack));
+            jsonTransmutationKnowledge.add(gson.toJsonTree(jsonItemStack));
         }
 
         return jsonTransmutationKnowledge;

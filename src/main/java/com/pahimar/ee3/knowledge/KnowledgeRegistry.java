@@ -61,6 +61,6 @@ public class KnowledgeRegistry
 
     public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
     {
-        SerializationHelper.writeNBTToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".transmutation", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+        SerializationHelper.writeNBTToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
     }
 }
