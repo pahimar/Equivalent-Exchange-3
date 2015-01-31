@@ -163,11 +163,11 @@ tasks.setupDecompWorkspace.dependsOn copyChicken
 
 curse {
     projectId = project.ee3_curseforge_projectid
-    apiKey = project.curseforge_apikey
-    changelog = ''
+    apiKey = project.ee3_curseforge_apikey
+    changelog = 'Please see the attached changelog file'
     releaseType = 'alpha'
     additionalArtifact devJar
-
+    additionalArtifact "$project.buildDir/libs/$project.archivesBaseName-$config.minecraft_version-$config.mod_version-changelog.txt"
 }
 
 uploadArchives {
