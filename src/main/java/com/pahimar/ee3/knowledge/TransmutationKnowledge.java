@@ -15,7 +15,6 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 // TODO Think up of an interface for predictable loading/saving of JSON files for use in SerializationHelper
-// TODO While I'm here, also remember to modify the build script to upload to CurseForge
 public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<TransmutationKnowledge>, JsonDeserializer<TransmutationKnowledge>
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(TransmutationKnowledge.class, new TransmutationKnowledge()).create();
