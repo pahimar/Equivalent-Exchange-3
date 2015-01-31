@@ -17,6 +17,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 apply plugin: 'maven'
 
 repositories {
@@ -159,6 +160,15 @@ task copyChicken(type: Copy, dependsOn: "extractUserDev") {
 }
 tasks.setupDevWorkspace.dependsOn copyChicken
 tasks.setupDecompWorkspace.dependsOn copyChicken
+
+curse {
+    projectId = project.ee3_curseforge_projectid
+    apiKey = project.curseforge_apikey
+    changelog = ''
+    releaseType = 'alpha'
+    additionalArtifact devJar
+
+}
 
 uploadArchives {
     repositories {
