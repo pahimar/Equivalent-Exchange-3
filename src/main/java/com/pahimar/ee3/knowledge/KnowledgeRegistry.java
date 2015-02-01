@@ -1,5 +1,6 @@
 package com.pahimar.ee3.knowledge;
 
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -16,8 +17,10 @@ public class KnowledgeRegistry
 
     private KnowledgeRegistry()
     {
-        knowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge");
+        knowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
         knowledgeDirectory.mkdirs();
+
+        loadTemplateKnowledgeFromDisk();
 
         playerKnowledgeMap = new HashMap<UUID, TransmutationKnowledge>();
     }
@@ -34,12 +37,22 @@ public class KnowledgeRegistry
 
     public TransmutationKnowledge getTemplateKnowledge()
     {
-        if (templateKnowledge == null)
-        {
-
-        }
-
         return templateKnowledge;
+    }
+
+    public void loadTemplateKnowledgeFromDisk() {
+        File templateFile = new File(knowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+
+        if (!templateFile.exists()) {
+            templateKnowledge = new TransmutationKnowledge();
+            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+        } else {
+            templateKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+        }
+    }
+
+    public void saveTemplateKnowledgeToDisk() {
+        SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
     }
 
     public void loadPlayerFromDisk(EntityPlayer entityPlayer)
@@ -50,8 +63,7 @@ public class KnowledgeRegistry
 
         if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
         {
-            // TODO Load from disk as JSON and not as NBT
-            playerTransmutationKnowledge = TransmutationKnowledge.readTransmutationKnowledgeFromNBT(SerializationHelper.readNBTFromFile(playerKnowledgeFile));
+            playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
         }
 
         playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
@@ -59,7 +71,18 @@ public class KnowledgeRegistry
 
     public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
     {
-        // TODO Save to disk as JSON and not as NBT
-        SerializationHelper.writeNBTToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+        if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID())) {
+            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+        } else {
+            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
+        }
+    }
+
+    public void saveAll() {
+        saveTemplateKnowledgeToDisk();
+
+        for (UUID playerUUID : playerKnowledgeMap.keySet()) {
+            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
+        }
     }
 }

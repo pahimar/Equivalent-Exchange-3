@@ -7,6 +7,7 @@ import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
+import com.pahimar.ee3.knowledge.KnowledgeRegistry;
 import com.pahimar.ee3.knowledge.SkillRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
@@ -52,10 +53,13 @@ public class EquivalentExchange3
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event)
     {
+        SerializationHelper.initModDataDirectories();
+
+        KnowledgeRegistry.getInstance();
+
         event.registerServerCommand(new CommandSetValue());
         event.registerServerCommand(new CommandSetCurrentItemValue());
         event.registerServerCommand(new CommandSyncValues());
-        SerializationHelper.initModDataDirectories();
     }
 
     @EventHandler
@@ -126,6 +130,8 @@ public class EquivalentExchange3
         {
             SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase(), getEnergyValueRegistry());
         }
+
+        KnowledgeRegistry.getInstance().saveAll();
 
         WorldEventHandler.hasInitilialized = false;
     }

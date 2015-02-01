@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -126,10 +127,50 @@ public class SerializationHelper
                 }
             } catch (Exception exception)
             {
+                LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+            }
+        }
+    }
+
+    public static TransmutationKnowledge readTransmutationKnowledgeFromFile(File directory, String fileName) {
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        return TransmutationKnowledge.readFromFile(new File(directory, fileName));
+    }
+
+    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge) {
+        writeTransmutationKnowledgeToFile(directory, fileName, transmutationKnowledge, false);
+    }
+
+    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge, boolean verboseLogging) {
+        if (directory != null && fileName != null) {
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            if (transmutationKnowledge == null) {
+                transmutationKnowledge = new TransmutationKnowledge();
+            }
+
+            try {
+                File file1 = new File(directory, fileName + ".tmp");
+                File file2 = new File(directory, fileName);
+                TransmutationKnowledge.saveToFile(file1, transmutationKnowledge);
+
+                if (file2.exists()) {
+                    file2.delete();
+                }
+
+                file1.renameTo(file2);
+
                 if (verboseLogging)
                 {
-                    LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+                    LogHelper.info(String.format("Successfully saved TransmutationKnowledge to file: %s", file2.getAbsolutePath()));
                 }
+            } catch (Exception exception) {
+                LogHelper.error(String.format("Failed to save TransmutationKnowledge to file: %s%s", directory.getAbsolutePath(), fileName));
             }
         }
     }

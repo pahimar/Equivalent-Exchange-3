@@ -1,6 +1,8 @@
 package com.pahimar.ee3.knowledge;
 
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -197,7 +200,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     {
         if (json.isJsonArray()) {
             JsonArray jsonArray = (JsonArray) json;
-            Set<ItemStack> itemStackSet = new TreeSet<ItemStack>(ItemHelper.comparator);
+            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
             Iterator<JsonElement> iterator = jsonArray.iterator();
 
             while (iterator.hasNext()) {
@@ -209,16 +212,18 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
                     Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
                     if (item != null) {
                         itemStack = new ItemStack(item, 1, jsonItemStack.itemDamage);
-                        if (jsonItemStack.nbtTagCompound != null) {
-                            itemStack.stackTagCompound = jsonItemStack.nbtTagCompound;
+                        if (jsonItemStack.itemNBTTagCompound != null) {
+                            itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
                         }
                     }
 
-                    itemStackSet.add(itemStack);
+                    if (itemStack != null) {
+                        itemStacks.add(itemStack);
+                    }
                 }
             }
 
-            return new TransmutationKnowledge(itemStackSet);
+            return new TransmutationKnowledge(itemStacks);
         }
 
         return null;
@@ -227,21 +232,70 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     @Override
     public JsonElement serialize(TransmutationKnowledge transmutationKnowledge, Type typeOfSrc, JsonSerializationContext context)
     {
-        Gson gson = new Gson();
         JsonArray jsonTransmutationKnowledge = new JsonArray();
 
         for (ItemStack itemStack : transmutationKnowledge.getKnownTransmutations())
         {
-            JsonItemStack jsonItemStack = new JsonItemStack();
-            jsonItemStack.itemName = Item.itemRegistry.getNameForObject(itemStack.getItem());
-            jsonItemStack.itemDamage = itemStack.getItemDamage();
-            if (itemStack.stackTagCompound != null)
-            {
-                jsonItemStack.nbtTagCompound = itemStack.getTagCompound();
-            }
-            jsonTransmutationKnowledge.add(gson.toJsonTree(jsonItemStack));
+            jsonTransmutationKnowledge.add(jsonSerializer.toJsonTree(new JsonItemStack(itemStack)));
         }
 
         return jsonTransmutationKnowledge;
+    }
+
+    public static void saveToFile(File file, TransmutationKnowledge transmutationKnowledge) {
+        JsonWriter jsonWriter;
+
+        try {
+            jsonWriter = new JsonWriter(new FileWriter(file));
+            jsonWriter.setIndent("    ");
+            jsonWriter.beginArray();
+
+            Iterator<ItemStack> iterator = transmutationKnowledge.getKnownTransmutations().iterator();
+
+            while (iterator.hasNext())
+            {
+                ItemStack itemStack = iterator.next();
+                jsonSerializer.toJson(new JsonItemStack(itemStack), JsonItemStack.class, jsonWriter);
+            }
+
+            jsonWriter.endArray();
+            jsonWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static TransmutationKnowledge readFromFile(File file) {
+        Set<ItemStack> itemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
+        JsonReader jsonReader;
+
+        try {
+            jsonReader = new JsonReader(new FileReader(file));
+            jsonReader.beginArray();
+            while (jsonReader.hasNext()) {
+                JsonItemStack jsonItemStack = jsonSerializer.fromJson(jsonReader, JsonItemStack.class);
+
+                ItemStack itemStack = null;
+                Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
+                if (item != null) {
+                    itemStack = new ItemStack(item, 1, jsonItemStack.itemDamage);
+                    if (jsonItemStack.itemNBTTagCompound != null) {
+                        itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
+                    }
+                }
+
+                if (itemStack != null) {
+                    itemStacks.add(itemStack);
+                }
+            }
+            jsonReader.endArray();
+            jsonReader.close();
+        } catch (FileNotFoundException ignored) {
+            // NOOP
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new TransmutationKnowledge(itemStacks);
     }
 }

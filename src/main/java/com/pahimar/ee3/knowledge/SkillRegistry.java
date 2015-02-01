@@ -1,18 +1,25 @@
 package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.handler.TransmutationKnowledgeHandler;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.ItemStack;
 
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
+// TODO Change up so that we only track what is not learnable, and what is not recoverable
+// Everything that has an EnergyValue is learnable and recoverable unless there is an entry for it in either of these lists
 public class SkillRegistry
 {
     private static SkillRegistry SkillRegistry = null;
     private SortedMap<ItemStack, Skill> transmutationSkills;
+    private Set<WrappedStack> notLearnableSet;
+    private Set<WrappedStack> notRecoverableSet;
 
     private SkillRegistry()
     {
@@ -32,6 +39,8 @@ public class SkillRegistry
     private void init()
     {
         transmutationSkills = new TreeMap<ItemStack, Skill>(ItemHelper.comparator);
+        notLearnableSet = new TreeSet<WrappedStack>();
+        notRecoverableSet = new TreeSet<WrappedStack>();
     }
 
     public void addSkill(ItemStack itemStack, boolean learnable, boolean recoverable)

@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+// TODO Remove
 public class TransmutationKnowledgeHandler
 {
     public static File playerDataDirectory;

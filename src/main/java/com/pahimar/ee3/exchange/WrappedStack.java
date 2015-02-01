@@ -398,9 +398,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                         if (stackSize > 0 && item != null)
                         {
                             itemStack = new ItemStack(item, stackSize, jsonItemStack.itemDamage);
-                            if (jsonItemStack.nbtTagCompound != null)
+                            if (jsonItemStack.itemNBTTagCompound != null)
                             {
-                                itemStack.stackTagCompound = jsonItemStack.nbtTagCompound;
+                                itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
                             }
                         }
                         stackObject = itemStack;
@@ -475,7 +475,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             jsonItemStack.itemDamage = ((ItemStack) wrappedStack.wrappedStack).getItemDamage();
             if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
             {
-                jsonItemStack.nbtTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
+                jsonItemStack.itemNBTTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
             }
             jsonWrappedStack.add("data", gson.toJsonTree(jsonItemStack, JsonItemStack.class));
         }
