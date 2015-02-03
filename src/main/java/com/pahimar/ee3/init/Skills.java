@@ -1,6 +1,6 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.api.SkillRegistryProxy;
+import com.pahimar.ee3.api.AbilityRegistryProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -14,7 +14,7 @@ public class Skills
             {
                 for (ItemStack oreStack : OreDictionary.getOres(oreName))
                 {
-                    SkillRegistryProxy.addSkill(oreStack, false, true);
+                    AbilityRegistryProxy.setAsNotLearnable(oreStack);
                 }
             }
         }

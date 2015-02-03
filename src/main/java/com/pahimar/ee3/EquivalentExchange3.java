@@ -7,8 +7,8 @@ import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.KnowledgeRegistry;
-import com.pahimar.ee3.knowledge.SkillRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -146,9 +146,9 @@ public class EquivalentExchange3
         return RecipeRegistry.getInstance();
     }
 
-    public SkillRegistry getSkillRegistry()
+    public AbilityRegistry getAbilityRegistry()
     {
-        return SkillRegistry.getInstance();
+        return AbilityRegistry.getInstance();
     }
 
     public AlchemyArrayRegistry getAlchemyArrayRegistry()

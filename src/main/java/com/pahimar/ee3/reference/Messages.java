@@ -15,20 +15,6 @@ public final class Messages
         public static final String GENERAL_SYNC_THRESHOLD_LABEL = "general.sync.threshold.label";
         public static final String GENERAL_SYNC_THRESHOLD_COMMENT = "general.sync.threshold.comment";
 
-        public static final String CATEGORY_TRANSMUTATION = "general.transmutation";
-
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE = "knowledgeMode";
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE_LABEL = "general.transmutation.knowledge.mode.label";
-        public static final String TRANSMUTATION_KNOWLEDGE_MODE_COMMENT = "general.transmutation.knowledge.mode.comment";
-
-        public static final String TRANSMUTATION_KNOWLEDGE_MAX_TIER = "maxTier";
-        public static final String TRANSMUTATION_KNOWLEDGE_MAX_TIER_LABEL = "general.transmutation.knowledge.maxTier.label";
-        public static final String TRANSMUTATION_KNOWLEDGE_MAX_TIER_COMMENT = "general.transmutation.knowledge.maxTier.comment";
-
-        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE = "useTemplateFile";
-        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_LABEL = "general.transmutation.knowledge.template.label";
-        public static final String TRANSMUTATION_KNOWLEDGE_TEMPLATE_COMMENT = "general.transmutation.knowledge.template.comment";
-
         public static final String SOUND_MODE = "soundMode";
         public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
         public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";

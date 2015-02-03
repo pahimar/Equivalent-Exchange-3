@@ -24,13 +24,10 @@ public final class EnergyValueRegistryProxy
     {
         init();
 
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return;
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreAssignedEnergyValue(object, energyValue);
         }
-
-        EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreAssignedEnergyValue(object, energyValue);
     }
 
     public static void addPostAssignedEnergyValue(Object object, int energyValue)
@@ -47,13 +44,10 @@ public final class EnergyValueRegistryProxy
     {
         init();
 
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return;
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedEnergyValue(object, energyValue);
         }
-
-        EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedEnergyValue(object, energyValue);
     }
 
     public static boolean hasEnergyValue(Object object)
@@ -65,13 +59,12 @@ public final class EnergyValueRegistryProxy
     {
         init();
 
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return false;
+            return EE3Wrapper.ee3mod.getEnergyValueRegistry().hasEnergyValue(object, strict);
         }
 
-        return EE3Wrapper.ee3mod.getEnergyValueRegistry().hasEnergyValue(object, strict);
+        return false;
     }
 
     public static EnergyValue getEnergyValue(Object object)
@@ -83,13 +76,12 @@ public final class EnergyValueRegistryProxy
     {
         init();
 
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return null;
+            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
         }
 
-        return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
+        return null;
     }
 
     public static List getStacksInRange(int start, int finish)
@@ -106,13 +98,12 @@ public final class EnergyValueRegistryProxy
     {
         init();
 
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return null;
+            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
         }
 
-        return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
+        return null;
     }
 
     private static class EE3Wrapper
