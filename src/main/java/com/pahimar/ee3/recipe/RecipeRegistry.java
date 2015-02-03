@@ -13,6 +13,7 @@ public class RecipeRegistry
     private static RecipeRegistry recipeRegistry = null;
 
     private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
+    private ImmutableMultimap<WrappedStack, List<WrappedStack>> immutableRecipeMap;
 
     private RecipeRegistry()
     {
@@ -70,6 +71,11 @@ public class RecipeRegistry
 
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings()
     {
-        return ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
+        if (immutableRecipeMap == null)
+        {
+            return ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
+        }
+
+        return immutableRecipeMap;
     }
 }

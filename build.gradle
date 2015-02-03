@@ -168,7 +168,7 @@ curse {
     projectId = project.ee3_curseforge_projectid
     apiKey = project.ee3_curseforge_apikey
     changelog = project.hasProperty('changelog') ? project.changelog : ''
-    releaseType = 'alpha'
+    releaseType = config.release_type
 
     additionalArtifact devJar
 }
