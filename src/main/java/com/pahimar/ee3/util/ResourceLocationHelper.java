@@ -12,6 +12,6 @@ public class ResourceLocationHelper
 
     public static ResourceLocation getResourceLocation(String path)
     {
-        return getResourceLocation(Reference.MOD_ID.toLowerCase(), path);
+        return getResourceLocation(Reference.LOWERCASE_MOD_ID, path);
     }
 }

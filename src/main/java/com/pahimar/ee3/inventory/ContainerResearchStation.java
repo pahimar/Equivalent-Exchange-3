@@ -1,6 +1,5 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,25 +18,12 @@ public class ContainerResearchStation extends ContainerEE
     {
         this.tileEntityResearchStation = tileEntityResearchStation;
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 79, 83)
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 122, 84)
         {
             @Override
             public int getSlotStackLimit()
             {
                 return 1;
-            }
-        });
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 161, 83)
-        {
-            @Override
-            public boolean isItemValid(ItemStack itemStack)
-            {
-                if (itemStack != null)
-                {
-                    return itemStack.getItem() instanceof ItemAlchemicalTome;
-                }
-
-                return false;
             }
         });
 
@@ -116,25 +102,9 @@ public class ContainerResearchStation extends ContainerEE
             }
             else
             {
-                /**
-                 * If the stack being shift-clicked into the Research Table's container
-                 * is a fuel, first try to put it in the fuel slot. If it cannot
-                 * be merged into the fuel slot, try to put it in the input
-                 * slot.
-                 */
-                if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
+                if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
-                    {
-                        return null;
-                    }
-                }
-                else
-                {
-                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, false))
-                    {
-                        return null;
-                    }
+                    return null;
                 }
             }
 

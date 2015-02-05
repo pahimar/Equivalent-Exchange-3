@@ -1,6 +1,7 @@
 package com.pahimar.ee3;
 
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
+import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.command.CommandSetCurrentItemValue;
 import com.pahimar.ee3.command.CommandSetValue;
 import com.pahimar.ee3.command.CommandSyncValues;
@@ -8,7 +9,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
-import com.pahimar.ee3.knowledge.KnowledgeRegistry;
+import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -55,8 +56,9 @@ public class EquivalentExchange3
     {
         SerializationHelper.initModDataDirectories();
 
-        KnowledgeRegistry.getInstance();
+        TransmutationKnowledgeRegistry.getInstance();
 
+        event.registerServerCommand(new CommandEE());
         event.registerServerCommand(new CommandSetValue());
         event.registerServerCommand(new CommandSetCurrentItemValue());
         event.registerServerCommand(new CommandSyncValues());
@@ -118,8 +120,8 @@ public class EquivalentExchange3
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
             // TODO Use the SerializationHelper to save this and reduce File objects
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase());
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
+            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.LOWERCASE_MOD_ID);
 
             if (energyValueRegistryFile.exists())
             {
@@ -128,10 +130,10 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.MOD_ID.toLowerCase(), getEnergyValueRegistry());
+            SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.LOWERCASE_MOD_ID, getEnergyValueRegistry());
         }
 
-        KnowledgeRegistry.getInstance().saveAll();
+        TransmutationKnowledgeRegistry.getInstance().saveAll();
 
         WorldEventHandler.hasInitilialized = false;
     }

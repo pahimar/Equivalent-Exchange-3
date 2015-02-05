@@ -350,7 +350,7 @@ public class EnergyValueRegistry implements INBTTaggable
 
     protected final void init()
     {
-        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
 
         if (!energyValueRegistryFile.exists())
@@ -501,7 +501,7 @@ public class EnergyValueRegistry implements INBTTaggable
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
 
         // Serialize values to disk
-        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         SerializationHelper.writeNBTToFile(dataDirectory, SerializationHelper.getModListMD5() + ".ee3", this);
     }
 

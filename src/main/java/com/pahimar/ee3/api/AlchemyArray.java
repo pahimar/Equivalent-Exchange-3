@@ -34,43 +34,55 @@ public class AlchemyArray implements Comparable<AlchemyArray>
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound != null) {
-            if (nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath")) {
+        if (nbtTagCompound != null)
+        {
+            if (nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath"))
+            {
                 this.texture = new ResourceLocation(nbtTagCompound.getString("textureDomain"), nbtTagCompound.getString("texturePath"));
-            } else {
+            }
+            else
+            {
                 this.texture = new ResourceLocation("");
             }
 
-            if (nbtTagCompound.hasKey("unLocalizedName")) {
+            if (nbtTagCompound.hasKey("unLocalizedName"))
+            {
                 this.unLocalizedName = nbtTagCompound.getString("unLocalizedName");
-            } else {
+            }
+            else
+            {
                 this.unLocalizedName = "";
             }
-        } else
+        }
+        else
         {
             this.texture = new ResourceLocation("");
             this.unLocalizedName = "";
         }
     }
 
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
         nbtTagCompound.setString("textureDomain", texture.getResourceDomain());
         nbtTagCompound.setString("texturePath", texture.getResourcePath());
         nbtTagCompound.setString("unLocalizedName", unLocalizedName);
     }
 
-    public static AlchemyArray readGlyphFromNBT(NBTTagCompound nbtTagCompound) {
+    public static AlchemyArray readGlyphFromNBT(NBTTagCompound nbtTagCompound)
+    {
         AlchemyArray alchemyArray = new AlchemyArray();
         alchemyArray.readFromNBT(nbtTagCompound);
         return alchemyArray;
     }
 
-    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ) {
+    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
 
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return StatCollector.translateToLocal(unLocalizedName);
     }
 
@@ -93,7 +105,9 @@ public class AlchemyArray implements Comparable<AlchemyArray>
             if (this.texture.getResourcePath().equalsIgnoreCase(alchemyArray.getTexture().getResourcePath()))
             {
                 return 0;
-            } else {
+            }
+            else
+            {
                 return this.texture.getResourcePath().compareToIgnoreCase(alchemyArray.getTexture().getResourcePath());
             }
         }

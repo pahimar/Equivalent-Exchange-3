@@ -12,12 +12,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.UUID;
+
 public class MessageTileEntityAludel implements IMessage, IMessageHandler<MessageTileEntityAludel, IMessage>
 {
     public int x, y, z;
     public byte orientation;
     public byte state;
-    public String customName, owner;
+    public String customName;
+    public UUID ownerUUID;
     public int itemId, metaData, stackSize, itemColor;
 
     public MessageTileEntityAludel()
@@ -32,7 +35,7 @@ public class MessageTileEntityAludel implements IMessage, IMessageHandler<Messag
         this.orientation = (byte) tileEntityAludel.getOrientation().ordinal();
         this.state = (byte) tileEntityAludel.getState();
         this.customName = tileEntityAludel.getCustomName();
-        this.owner = tileEntityAludel.getOwner();
+        this.ownerUUID = tileEntityAludel.getOwnerUUID();
 
         if (outputItemStack != null)
         {
@@ -60,8 +63,7 @@ public class MessageTileEntityAludel implements IMessage, IMessageHandler<Messag
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        int ownerLength = buf.readInt();
-        this.owner = new String(buf.readBytes(ownerLength).array());
+        this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
         this.itemId = buf.readInt();
         this.metaData = buf.readInt();
         this.stackSize = buf.readInt();
@@ -78,8 +80,8 @@ public class MessageTileEntityAludel implements IMessage, IMessageHandler<Messag
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeInt(owner.length());
-        buf.writeBytes(owner.getBytes());
+        buf.writeLong(ownerUUID.getMostSignificantBits());
+        buf.writeLong(ownerUUID.getLeastSignificantBits());
         buf.writeInt(itemId);
         buf.writeInt(metaData);
         buf.writeInt(stackSize);
@@ -96,7 +98,7 @@ public class MessageTileEntityAludel implements IMessage, IMessageHandler<Messag
             ((TileEntityAludel) tileEntity).setOrientation(message.orientation);
             ((TileEntityAludel) tileEntity).setState(message.state);
             ((TileEntityAludel) tileEntity).setCustomName(message.customName);
-            ((TileEntityAludel) tileEntity).setOwner(message.owner);
+            ((TileEntityAludel) tileEntity).setOwnerUUID(message.ownerUUID);
 
             ItemStack outputItemStack = null;
 
@@ -121,6 +123,6 @@ public class MessageTileEntityAludel implements IMessage, IMessageHandler<Messag
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityAludel - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, owner:%s, itemId: %s, metaData: %s, stackSize: %s, itemColor: %s", x, y, z, orientation, state, customName, owner, itemId, metaData, stackSize, itemColor);
+        return String.format("MessageTileEntityAludel - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s, itemId: %s, metaData: %s, stackSize: %s, itemColor: %s", x, y, z, orientation, state, customName, ownerUUID, itemId, metaData, stackSize, itemColor);
     }
 }

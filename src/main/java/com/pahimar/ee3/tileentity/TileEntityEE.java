@@ -3,24 +3,28 @@ package com.pahimar.ee3.tileentity;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityEE;
 import com.pahimar.ee3.reference.Names;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.UUID;
 
 public class TileEntityEE extends TileEntity
 {
     protected ForgeDirection orientation;
     protected byte state;
     protected String customName;
-    protected String owner;
+    protected UUID ownerUUID;
 
     public TileEntityEE()
     {
         orientation = ForgeDirection.SOUTH;
         state = 0;
         customName = "";
-        owner = "";
+        ownerUUID = null;
     }
 
     public ForgeDirection getOrientation()
@@ -58,14 +62,29 @@ public class TileEntityEE extends TileEntity
         this.customName = customName;
     }
 
-    public String getOwner()
+    public UUID getOwnerUUID()
     {
-        return owner;
+        return ownerUUID;
     }
 
-    public void setOwner(String owner)
+    public String getOwnerName()
     {
-        this.owner = owner;
+        if (ownerUUID != null)
+        {
+            return UsernameCache.getLastKnownUsername(ownerUUID);
+        }
+
+        return "Unknown";
+    }
+
+    public void setOwner(EntityPlayer entityPlayer)
+    {
+        this.ownerUUID = entityPlayer.getPersistentID();
+    }
+
+    public void setOwnerUUID(UUID ownerUUID)
+    {
+        this.ownerUUID = ownerUUID;
     }
 
     @Override
@@ -88,9 +107,9 @@ public class TileEntityEE extends TileEntity
             this.customName = nbtTagCompound.getString(Names.NBT.CUSTOM_NAME);
         }
 
-        if (nbtTagCompound.hasKey(Names.NBT.OWNER))
+        if (nbtTagCompound.hasKey(Names.NBT.OWNER_UUID_MOST_SIG) && nbtTagCompound.hasKey(Names.NBT.OWNER_UUID_LEAST_SIG))
         {
-            this.owner = nbtTagCompound.getString(Names.NBT.OWNER);
+            this.ownerUUID = new UUID(nbtTagCompound.getLong(Names.NBT.OWNER_UUID_MOST_SIG), nbtTagCompound.getLong(Names.NBT.OWNER_UUID_MOST_SIG));
         }
     }
 
@@ -109,7 +128,8 @@ public class TileEntityEE extends TileEntity
 
         if (this.hasOwner())
         {
-            nbtTagCompound.setString(Names.NBT.OWNER, owner);
+            nbtTagCompound.setLong(Names.NBT.OWNER_UUID_MOST_SIG, ownerUUID.getMostSignificantBits());
+            nbtTagCompound.setLong(Names.NBT.OWNER_UUID_LEAST_SIG, ownerUUID.getLeastSignificantBits());
         }
     }
 
@@ -120,7 +140,7 @@ public class TileEntityEE extends TileEntity
 
     public boolean hasOwner()
     {
-        return owner != null && owner.length() > 0;
+        return ownerUUID != null;
     }
 
     @Override

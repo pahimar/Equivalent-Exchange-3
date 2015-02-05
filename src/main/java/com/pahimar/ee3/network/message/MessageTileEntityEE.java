@@ -8,11 +8,14 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.UUID;
+
 public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTileEntityEE, IMessage>
 {
     public int x, y, z;
     public byte orientation, state;
-    public String customName, owner;
+    public String customName;
+    public UUID ownerUUID;
 
     public MessageTileEntityEE()
     {
@@ -26,7 +29,7 @@ public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTil
         this.orientation = (byte) tileEntityEE.getOrientation().ordinal();
         this.state = (byte) tileEntityEE.getState();
         this.customName = tileEntityEE.getCustomName();
-        this.owner = tileEntityEE.getOwner();
+        this.ownerUUID = tileEntityEE.getOwnerUUID();
     }
 
     @Override
@@ -39,8 +42,14 @@ public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTil
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        int ownerLength = buf.readInt();
-        this.owner = new String(buf.readBytes(ownerLength).array());
+        if (buf.readBoolean())
+        {
+            this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
+        }
+        else
+        {
+            this.ownerUUID = null;
+        }
     }
 
     @Override
@@ -53,8 +62,16 @@ public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTil
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeInt(owner.length());
-        buf.writeBytes(owner.getBytes());
+        if (ownerUUID != null)
+        {
+            buf.writeBoolean(true);
+            buf.writeLong(ownerUUID.getMostSignificantBits());
+            buf.writeLong(ownerUUID.getLeastSignificantBits());
+        }
+        else
+        {
+            buf.writeBoolean(false);
+        }
     }
 
     @Override
@@ -67,7 +84,7 @@ public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTil
             ((TileEntityEE) tileEntity).setOrientation(message.orientation);
             ((TileEntityEE) tileEntity).setState(message.state);
             ((TileEntityEE) tileEntity).setCustomName(message.customName);
-            ((TileEntityEE) tileEntity).setOwner(message.owner);
+            ((TileEntityEE) tileEntity).setOwnerUUID(message.ownerUUID);
         }
 
         return null;
@@ -76,6 +93,6 @@ public class MessageTileEntityEE implements IMessage, IMessageHandler<MessageTil
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityEE - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, owner:%s", x, y, z, orientation, state, customName, owner);
+        return String.format("MessageTileEntityEE - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s", x, y, z, orientation, state, customName, ownerUUID);
     }
 }

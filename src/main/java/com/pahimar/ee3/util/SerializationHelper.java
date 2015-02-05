@@ -47,10 +47,10 @@ public class SerializationHelper
      */
     public static void initModDataDirectories()
     {
-        dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.MOD_ID.toLowerCase());
+        dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         dataDirectory.mkdirs();
 
-        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.MOD_ID.toLowerCase());
+        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
         playerDataDirectory.mkdirs();
     }
 
@@ -125,41 +125,51 @@ public class SerializationHelper
                 {
                     LogHelper.info(String.format("Successfully saved %s to file: %s", nbtTaggable.getTagLabel(), file2.getAbsolutePath()));
                 }
-            } catch (Exception exception)
+            }
+            catch (Exception exception)
             {
                 LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
             }
         }
     }
 
-    public static TransmutationKnowledge readTransmutationKnowledgeFromFile(File directory, String fileName) {
-        if (!directory.exists()) {
+    public static TransmutationKnowledge readTransmutationKnowledgeFromFile(File directory, String fileName)
+    {
+        if (!directory.exists())
+        {
             directory.mkdirs();
         }
 
         return TransmutationKnowledge.readFromFile(new File(directory, fileName));
     }
 
-    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge) {
+    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge)
+    {
         writeTransmutationKnowledgeToFile(directory, fileName, transmutationKnowledge, false);
     }
 
-    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge, boolean verboseLogging) {
-        if (directory != null && fileName != null) {
-            if (!directory.exists()) {
+    public static void writeTransmutationKnowledgeToFile(File directory, String fileName, TransmutationKnowledge transmutationKnowledge, boolean verboseLogging)
+    {
+        if (directory != null && fileName != null)
+        {
+            if (!directory.exists())
+            {
                 directory.mkdirs();
             }
 
-            if (transmutationKnowledge == null) {
+            if (transmutationKnowledge == null)
+            {
                 transmutationKnowledge = new TransmutationKnowledge();
             }
 
-            try {
+            try
+            {
                 File file1 = new File(directory, fileName + ".tmp");
                 File file2 = new File(directory, fileName);
                 TransmutationKnowledge.saveToFile(file1, transmutationKnowledge);
 
-                if (file2.exists()) {
+                if (file2.exists())
+                {
                     file2.delete();
                 }
 
@@ -169,7 +179,10 @@ public class SerializationHelper
                 {
                     LogHelper.info(String.format("Successfully saved TransmutationKnowledge to file: %s", file2.getAbsolutePath()));
                 }
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
+                exception.printStackTrace();
                 LogHelper.error(String.format("Failed to save TransmutationKnowledge to file: %s%s", directory.getAbsolutePath(), fileName));
             }
         }
@@ -196,7 +209,8 @@ public class SerializationHelper
             }
             jsonReader.endArray();
             jsonReader.close();
-        } catch (FileNotFoundException ignored)
+        }
+        catch (FileNotFoundException ignored)
         {
         }
         catch (IOException e)

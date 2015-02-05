@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 
 public final class Textures
 {
-    public static final String RESOURCE_PREFIX = Reference.MOD_ID.toLowerCase() + ":";
+    public static final String RESOURCE_PREFIX = Reference.LOWERCASE_MOD_ID + ":";
 
     public static final class Armor
     {

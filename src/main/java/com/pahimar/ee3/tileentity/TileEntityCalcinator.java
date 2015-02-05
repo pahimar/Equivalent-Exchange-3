@@ -484,8 +484,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
             this.inventory[OUTPUT_LEFT_INVENTORY_INDEX] = alchemicalDustStack;
             return;
         }
-        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
-                && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < maxStackSize)
+        if (this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack) && this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize < maxStackSize)
         {
             int addedSize = Math.min(alchemicalDustStack.stackSize, maxStackSize - this.inventory[OUTPUT_LEFT_INVENTORY_INDEX].stackSize);
             alchemicalDustStack.stackSize -= addedSize;
@@ -500,8 +499,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
             this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX] = alchemicalDustStack;
             return;
         }
-        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack)
-                && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < maxStackSize)
+        if (this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].isItemEqual(alchemicalDustStack) && this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize < maxStackSize)
         {
             int addedSize = Math.min(alchemicalDustStack.stackSize, maxStackSize - this.inventory[OUTPUT_RIGHT_INVENTORY_INDEX].stackSize);
             alchemicalDustStack.stackSize -= addedSize;

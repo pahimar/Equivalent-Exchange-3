@@ -10,16 +10,19 @@ public class JsonItemStack
     public int itemDamage;
     public NBTTagCompound itemNBTTagCompound;
 
-    public JsonItemStack() {
+    public JsonItemStack()
+    {
         this.itemName = null;
         this.itemDamage = 0;
         this.itemNBTTagCompound = null;
     }
 
-    public JsonItemStack(ItemStack itemStack) {
+    public JsonItemStack(ItemStack itemStack)
+    {
         this.itemName = Item.itemRegistry.getNameForObject(itemStack.getItem());
         this.itemDamage = itemStack.getItemDamage();
-        if (itemStack.stackTagCompound != null) {
+        if (itemStack.stackTagCompound != null)
+        {
             this.itemNBTTagCompound = itemStack.getTagCompound();
         }
     }

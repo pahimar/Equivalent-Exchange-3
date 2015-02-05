@@ -78,6 +78,7 @@ public class Names
     {
         public static final String ITEMS = "Items";
         public static final String ITEM_TRANSMUTATION_KNOWLEDGE = "transmutationKnowledge";
+        public static final String CAN_TRANSMUTE_ANYTHING = "CAN_TRANSMUTE_ANYTHING";
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
         public static final String CRAFTING_GUI_OPEN = "craftingGuiOpen";
@@ -116,5 +117,14 @@ public class Names
         public static final String EXTRA = "key.extra";
         public static final String RELEASE = "key.release";
         public static final String TOGGLE = "key.toggle";
+    }
+
+    public static final class Commands
+    {
+        public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
+        public static final String PLAYER_LEARN_EVERYTHING = "player-learn-everything";
+        public static final String PLAYER_LEARN_ITEM = "player-learn-item";
+        public static final String TEMPLATE_LEARN_EVERYTHING = "template-learn-everything";
+        public static final String TEMPLATE_LEARN_ITEM = "template-learn-item";
     }
 }

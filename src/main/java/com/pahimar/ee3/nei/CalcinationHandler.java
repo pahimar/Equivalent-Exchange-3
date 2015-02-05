@@ -28,157 +28,157 @@ import static codechicken.lib.gui.GuiDraw.*;
 
 public class CalcinationHandler extends TemplateRecipeHandler
 {
-	private static final DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
+    private static final DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
-	public class CachedCalcinationRecipe extends CachedRecipe
-	{
-		public List<PositionedStack> inputs;
-		public PositionedStack output;
+    public class CachedCalcinationRecipe extends CachedRecipe
+    {
+        public List<PositionedStack> inputs;
+        public PositionedStack output;
 
-		public EnergyValue minEnergyValue;
-		public EnergyValue maxEnergyValue;
+        public EnergyValue minEnergyValue;
+        public EnergyValue maxEnergyValue;
 
-		public CachedCalcinationRecipe(ItemStack outputDust)
-		{
-			output = new PositionedStack(outputDust, 101, 19);
-			
-			inputs = new ArrayList<PositionedStack>();
+        public CachedCalcinationRecipe(ItemStack outputDust)
+        {
+            output = new PositionedStack(outputDust, 101, 19);
 
-			minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-			maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
+            inputs = new ArrayList<PositionedStack>();
 
-			for (Object obj : EnergyValueRegistryProxy.getStacksInRange(minEnergyValue, maxEnergyValue))
-			{
-				if (obj instanceof ItemStack)
-				{
-					inputs.add(new PositionedStack((ItemStack) obj, 40, 0));
-				}
-			}
-		}
+            minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
+            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
 
-		public CachedCalcinationRecipe(ItemStack inputStack, ItemStack outputDust)
-		{
-			inputStack.stackSize = 1;
-			inputs = Arrays.asList(new PositionedStack[] { new PositionedStack(inputStack, 40, 0) });
+            for (Object obj : EnergyValueRegistryProxy.getStacksInRange(minEnergyValue, maxEnergyValue))
+            {
+                if (obj instanceof ItemStack)
+                {
+                    inputs.add(new PositionedStack((ItemStack) obj, 40, 0));
+                }
+            }
+        }
 
-			output = new PositionedStack(outputDust, 101, 19);
+        public CachedCalcinationRecipe(ItemStack inputStack, ItemStack outputDust)
+        {
+            inputStack.stackSize = 1;
+            inputs = Arrays.asList(new PositionedStack[]{new PositionedStack(inputStack, 40, 0)});
 
-			minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-			maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
-		}
+            output = new PositionedStack(outputDust, 101, 19);
 
-		@Override
-		public PositionedStack getIngredient()
-		{
-			return inputs.get((cycleticks / 48) % inputs.size());
-		}
+            minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
+            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
+        }
 
-		public PositionedStack getOtherStack()
-		{
-			return new PositionedStack(FurnaceRecipeHandler.afuels.get((cycleticks / 48) % FurnaceRecipeHandler.afuels.size()).stack.item, 40, 45);
-		}
+        @Override
+        public PositionedStack getIngredient()
+        {
+            return inputs.get((cycleticks / 48) % inputs.size());
+        }
 
-		@Override
-		public PositionedStack getResult()
-		{
-			return output;
-		}
-	}
+        public PositionedStack getOtherStack()
+        {
+            return new PositionedStack(FurnaceRecipeHandler.afuels.get((cycleticks / 48) % FurnaceRecipeHandler.afuels.size()).stack.item, 40, 45);
+        }
 
-	@Override
-	public Class<? extends GuiContainer> getGuiClass()
-	{
-		return GuiCalcinator.class;
-	}
+        @Override
+        public PositionedStack getResult()
+        {
+            return output;
+        }
+    }
 
-	@Override
-	public String getGuiTexture()
-	{
-		return Textures.Gui.CALCINATOR.toString();
-	}
+    @Override
+    public Class<? extends GuiContainer> getGuiClass()
+    {
+        return GuiCalcinator.class;
+    }
 
-	@Override
-	public String getRecipeName()
-	{
-		return StatCollector.translateToLocal("gui.nei.ee3:calcination");
-	}
+    @Override
+    public String getGuiTexture()
+    {
+        return Textures.Gui.CALCINATOR.toString();
+    }
 
-	public String getRecipeID()
-	{
-		return Reference.MOD_ID + ":" + Names.Blocks.CALCINATOR;
-	}
+    @Override
+    public String getRecipeName()
+    {
+        return StatCollector.translateToLocal("gui.nei.ee3:calcination");
+    }
 
-	@Override
-	public void loadCraftingRecipes(ItemStack result)
-	{
-		for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
-		{
-			if (NEIServerUtils.areStacksSameTypeCrafting(stack, result))
-			{
-				arecipes.add(new CachedCalcinationRecipe(stack));
-			}
-		}
-	}
+    public String getRecipeID()
+    {
+        return Reference.MOD_ID + ":" + Names.Blocks.CALCINATOR;
+    }
 
-	@Override
-	public void loadCraftingRecipes(String outputId, Object... results)
-	{
-		if (outputId.equals(getRecipeID()))
-		{
-			for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
-			{
-				arecipes.add(new CachedCalcinationRecipe(stack));
-			}
-		}
-		else
-		{
-			super.loadCraftingRecipes(outputId, results);
-		}
-	}
+    @Override
+    public void loadCraftingRecipes(ItemStack result)
+    {
+        for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
+        {
+            if (NEIServerUtils.areStacksSameTypeCrafting(stack, result))
+            {
+                arecipes.add(new CachedCalcinationRecipe(stack));
+            }
+        }
+    }
 
-	@Override
-	public void loadTransferRects()
-	{
-		transferRects.add(new RecipeTransferRect(new Rectangle(39, 20, 18, 18), "fuel"));
-		transferRects.add(new RecipeTransferRect(new Rectangle(69, 19, 24, 16), getRecipeID()));
-	}
+    @Override
+    public void loadCraftingRecipes(String outputId, Object... results)
+    {
+        if (outputId.equals(getRecipeID()))
+        {
+            for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
+            {
+                arecipes.add(new CachedCalcinationRecipe(stack));
+            }
+        }
+        else
+        {
+            super.loadCraftingRecipes(outputId, results);
+        }
+    }
 
-	@Override
-	public void loadUsageRecipes(ItemStack ingredient)
-	{
-		for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
-		{
-			if (NEIServerUtils.areStacksSameTypeCrafting(stack, CalcinationHelper.getCalcinationResult(ingredient)))
-			{
-				arecipes.add(new CachedCalcinationRecipe(ingredient, stack));
-			}
-		}
+    @Override
+    public void loadTransferRects()
+    {
+        transferRects.add(new RecipeTransferRect(new Rectangle(39, 20, 18, 18), "fuel"));
+        transferRects.add(new RecipeTransferRect(new Rectangle(69, 19, 24, 16), getRecipeID()));
+    }
 
-	}
+    @Override
+    public void loadUsageRecipes(ItemStack ingredient)
+    {
+        for (ItemStack stack : ItemAlchemicalDust.getAlchemicalDusts())
+        {
+            if (NEIServerUtils.areStacksSameTypeCrafting(stack, CalcinationHelper.getCalcinationResult(ingredient)))
+            {
+                arecipes.add(new CachedCalcinationRecipe(ingredient, stack));
+            }
+        }
 
-	@Override
-	public int recipiesPerPage()
-	{
-		return 1;
-	}
+    }
 
-	@Override
-	public void drawBackground(int recipe)
-	{
-		GL11.glColor4f(1, 1, 1, 1);
-		changeTexture(getGuiTexture());
-		drawTexturedModalRect(14, -3, 19, 7, 143, 68);
-	}
+    @Override
+    public int recipiesPerPage()
+    {
+        return 1;
+    }
 
-	@Override
-	public void drawExtras(int recipe)
-	{
-		drawProgressBar(41, 23, 176, 0, 14, 14, 48, 7);
-		drawProgressBar(70, 20, 176, 14, 24, 16, 48, 0);
-		CachedCalcinationRecipe cRecipe = (CachedCalcinationRecipe) arecipes.get(recipe);
-		drawStringC(StatCollector.translateToLocal("gui.nei.ee3:calcination.tooltip.1"), 83, 75, 0x404040, false);
-		drawStringC(cRecipe.getResult().item.getDisplayName() + ":", 83, 85, 0x404040, false);
-		drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2", (cRecipe.minEnergyValue.getEnergyValue() > 1 ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getEnergyValue()) : "0"), (cRecipe.maxEnergyValue.getEnergyValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getEnergyValue() ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getEnergyValue()) : "\u221E")), 83, 95, 0x404040, false);
-	}
+    @Override
+    public void drawBackground(int recipe)
+    {
+        GL11.glColor4f(1, 1, 1, 1);
+        changeTexture(getGuiTexture());
+        drawTexturedModalRect(14, -3, 19, 7, 143, 68);
+    }
+
+    @Override
+    public void drawExtras(int recipe)
+    {
+        drawProgressBar(41, 23, 176, 0, 14, 14, 48, 7);
+        drawProgressBar(70, 20, 176, 14, 24, 16, 48, 0);
+        CachedCalcinationRecipe cRecipe = (CachedCalcinationRecipe) arecipes.get(recipe);
+        drawStringC(StatCollector.translateToLocal("gui.nei.ee3:calcination.tooltip.1"), 83, 75, 0x404040, false);
+        drawStringC(cRecipe.getResult().item.getDisplayName() + ":", 83, 85, 0x404040, false);
+        drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2", (cRecipe.minEnergyValue.getEnergyValue() > 1 ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getEnergyValue()) : "0"), (cRecipe.maxEnergyValue.getEnergyValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getEnergyValue() ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getEnergyValue()) : "\u221E")), 83, 95, 0x404040, false);
+    }
 
 }

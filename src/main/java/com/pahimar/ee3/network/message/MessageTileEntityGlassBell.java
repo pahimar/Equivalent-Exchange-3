@@ -10,12 +10,15 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.UUID;
+
 public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<MessageTileEntityGlassBell, IMessage>
 {
     public int x, y, z;
     public byte orientation;
     public byte state;
-    public String customName, owner;
+    public String customName;
+    public UUID ownerUUID;
     public ItemStack outputItemStack;
 
     public MessageTileEntityGlassBell()
@@ -30,7 +33,7 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
         this.orientation = (byte) tileEntityGlassBell.getOrientation().ordinal();
         this.state = (byte) tileEntityGlassBell.getState();
         this.customName = tileEntityGlassBell.getCustomName();
-        this.owner = tileEntityGlassBell.getOwner();
+        this.ownerUUID = tileEntityGlassBell.getOwnerUUID();
         this.outputItemStack = outputItemStack;
     }
 
@@ -44,8 +47,7 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        int ownerLength = buf.readInt();
-        this.owner = new String(buf.readBytes(ownerLength).array());
+        this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
         outputItemStack = ByteBufUtils.readItemStack(buf);
     }
 
@@ -59,8 +61,8 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeInt(owner.length());
-        buf.writeBytes(owner.getBytes());
+        buf.writeLong(ownerUUID.getMostSignificantBits());
+        buf.writeLong(ownerUUID.getLeastSignificantBits());
         ByteBufUtils.writeItemStack(buf, outputItemStack);
     }
 
@@ -74,7 +76,7 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
             ((TileEntityGlassBell) tileEntity).setOrientation(message.orientation);
             ((TileEntityGlassBell) tileEntity).setState(message.state);
             ((TileEntityGlassBell) tileEntity).setCustomName(message.customName);
-            ((TileEntityGlassBell) tileEntity).setOwner(message.owner);
+            ((TileEntityGlassBell) tileEntity).setOwnerUUID(message.ownerUUID);
             ((TileEntityGlassBell) tileEntity).outputItemStack = message.outputItemStack;
 
             //NAME UPDATE
@@ -87,6 +89,6 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityGlassBell - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, owner:%s, outputItemStack: %s", x, y, z, orientation, state, customName, owner, outputItemStack.toString());
+        return String.format("MessageTileEntityGlassBell - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s, outputItemStack: %s", x, y, z, orientation, state, customName, ownerUUID, outputItemStack.toString());
     }
 }

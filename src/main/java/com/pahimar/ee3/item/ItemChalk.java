@@ -72,57 +72,57 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         if (!world.isRemote)
         {
-//            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
-//            ChalkSettings chalkSettings = new ChalkSettings();
-//            chalkSettings.readFromNBT(playerCustomData);
-//            int coordOffset = getOffsetForSize(chalkSettings.getSize());
-//            ForgeDirection orientation = ForgeDirection.getOrientation(side);
-//            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
-//
-//            if (canPlaceAlchemyArray)
-//            {
-//                if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
-//                {
-//                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
-//                    {
-//                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
-//                        {
-//                            if ((i != x || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, y, j, side) || world.getTileEntity(i, y, j) instanceof TileEntityDummyArray))
-//                            {
-//                                canPlaceAlchemyArray = false;
-//                            }
-//                        }
-//                    }
-//                }
-//                else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
-//                {
-//                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
-//                    {
-//                        for (int j = y - coordOffset; j <= y + coordOffset; j++)
-//                        {
-//                            if ((i != x || j != y) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, j, z, side) || world.getTileEntity(i, j, z) instanceof TileEntityDummyArray))
-//                            {
-//                                canPlaceAlchemyArray = false;
-//                            }
-//                        }
-//                    }
-//                }
-//                else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
-//                {
-//                    for (int i = y - coordOffset; i <= y + coordOffset; i++)
-//                    {
-//                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
-//                        {
-//                            if ((i != y || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, x, i, j, side) || world.getTileEntity(x, i, j) instanceof TileEntityDummyArray))
-//                            {
-//                                canPlaceAlchemyArray = false;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            return canPlaceAlchemyArray;
+            //            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+            //            ChalkSettings chalkSettings = new ChalkSettings();
+            //            chalkSettings.readFromNBT(playerCustomData);
+            //            int coordOffset = getOffsetForSize(chalkSettings.getSize());
+            //            ForgeDirection orientation = ForgeDirection.getOrientation(side);
+            //            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
+            //
+            //            if (canPlaceAlchemyArray)
+            //            {
+            //                if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
+            //                {
+            //                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
+            //                    {
+            //                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
+            //                        {
+            //                            if ((i != x || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, y, j, side) || world.getTileEntity(i, y, j) instanceof TileEntityDummyArray))
+            //                            {
+            //                                canPlaceAlchemyArray = false;
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
+            //                {
+            //                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
+            //                    {
+            //                        for (int j = y - coordOffset; j <= y + coordOffset; j++)
+            //                        {
+            //                            if ((i != x || j != y) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, j, z, side) || world.getTileEntity(i, j, z) instanceof TileEntityDummyArray))
+            //                            {
+            //                                canPlaceAlchemyArray = false;
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
+            //                {
+            //                    for (int i = y - coordOffset; i <= y + coordOffset; i++)
+            //                    {
+            //                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
+            //                        {
+            //                            if ((i != y || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, x, i, j, side) || world.getTileEntity(x, i, j) instanceof TileEntityDummyArray))
+            //                            {
+            //                                canPlaceAlchemyArray = false;
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //
+            //            return canPlaceAlchemyArray;
         }
 
         return false;
@@ -132,67 +132,67 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         if (!world.isRemote)
         {
-//            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
-//            ChalkSettings chalkSettings = new ChalkSettings();
-//            chalkSettings.readFromNBT(playerCustomData);
-//            int coordOffset = getOffsetForSize(chalkSettings.getSize());
-//            ForgeDirection orientation = ForgeDirection.getOrientation(side);
-//            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
-//
-//            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.alchemyArray, side);
-//
-//            if (canPlaceAlchemyArray)
-//            {
-//                if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
-//                {
-//                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
-//                    {
-//                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
-//                        {
-//                            if (i != x || j != z)
-//                            {
-//                                placeBlockAt(entityPlayer, itemStack, world, i, y, j, ModBlocks.dummyArray, side);
-//                                if (world.getTileEntity(i, y, j) instanceof TileEntityDummyArray)
-//                                {
-//                                    ((TileEntityDummyArray) world.getTileEntity(i, y, j)).setTrueCoords(x, y, z);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
-//                {
-//                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
-//                    {
-//                        for (int j = y - coordOffset; j <= y + coordOffset; j++)
-//                        {
-//                            if (i != x || j != y)
-//                            {
-//                                placeBlockAt(entityPlayer, itemStack, world, i, j, z, ModBlocks.dummyArray, side);
-//                                {
-//                                    ((TileEntityDummyArray) world.getTileEntity(i, j, z)).setTrueCoords(x, y, z);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
-//                {
-//                    for (int i = y - coordOffset; i <= y + coordOffset; i++)
-//                    {
-//                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
-//                        {
-//                            if (i != y || j != z)
-//                            {
-//                                placeBlockAt(entityPlayer, itemStack, world, x, i, j, ModBlocks.dummyArray, side);
-//                                {
-//                                    ((TileEntityDummyArray) world.getTileEntity(x, i, j)).setTrueCoords(x, y, z);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            //            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+            //            ChalkSettings chalkSettings = new ChalkSettings();
+            //            chalkSettings.readFromNBT(playerCustomData);
+            //            int coordOffset = getOffsetForSize(chalkSettings.getSize());
+            //            ForgeDirection orientation = ForgeDirection.getOrientation(side);
+            //            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
+            //
+            //            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.alchemyArray, side);
+            //
+            //            if (canPlaceAlchemyArray)
+            //            {
+            //                if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
+            //                {
+            //                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
+            //                    {
+            //                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
+            //                        {
+            //                            if (i != x || j != z)
+            //                            {
+            //                                placeBlockAt(entityPlayer, itemStack, world, i, y, j, ModBlocks.dummyArray, side);
+            //                                if (world.getTileEntity(i, y, j) instanceof TileEntityDummyArray)
+            //                                {
+            //                                    ((TileEntityDummyArray) world.getTileEntity(i, y, j)).setTrueCoords(x, y, z);
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
+            //                {
+            //                    for (int i = x - coordOffset; i <= x + coordOffset; i++)
+            //                    {
+            //                        for (int j = y - coordOffset; j <= y + coordOffset; j++)
+            //                        {
+            //                            if (i != x || j != y)
+            //                            {
+            //                                placeBlockAt(entityPlayer, itemStack, world, i, j, z, ModBlocks.dummyArray, side);
+            //                                {
+            //                                    ((TileEntityDummyArray) world.getTileEntity(i, j, z)).setTrueCoords(x, y, z);
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
+            //                {
+            //                    for (int i = y - coordOffset; i <= y + coordOffset; i++)
+            //                    {
+            //                        for (int j = z - coordOffset; j <= z + coordOffset; j++)
+            //                        {
+            //                            if (i != y || j != z)
+            //                            {
+            //                                placeBlockAt(entityPlayer, itemStack, world, x, i, j, ModBlocks.dummyArray, side);
+            //                                {
+            //                                    ((TileEntityDummyArray) world.getTileEntity(x, i, j)).setTrueCoords(x, y, z);
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
         }
     }
 

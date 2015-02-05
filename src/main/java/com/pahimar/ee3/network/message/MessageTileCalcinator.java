@@ -9,11 +9,14 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.UUID;
+
 public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageTileCalcinator, IMessage>
 {
     public int x, y, z;
     public byte orientation, state;
-    public String customName, owner;
+    public String customName;
+    public UUID ownerUUID;
     public byte leftStackSize, leftStackMeta, rightStackSize, rightStackMeta;
 
     public MessageTileCalcinator()
@@ -28,7 +31,7 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
         this.orientation = (byte) tileEntityCalcinator.getOrientation().ordinal();
         this.state = (byte) tileEntityCalcinator.getState();
         this.customName = tileEntityCalcinator.getCustomName();
-        this.owner = tileEntityCalcinator.getOwner();
+        this.ownerUUID = tileEntityCalcinator.getOwnerUUID();
         this.leftStackSize = tileEntityCalcinator.leftStackSize;
         this.leftStackMeta = tileEntityCalcinator.leftStackMeta;
         this.rightStackSize = tileEntityCalcinator.rightStackSize;
@@ -45,8 +48,7 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        int ownerLength = buf.readInt();
-        this.owner = new String(buf.readBytes(ownerLength).array());
+        this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
         this.leftStackSize = buf.readByte();
         this.leftStackMeta = buf.readByte();
         this.rightStackSize = buf.readByte();
@@ -63,8 +65,8 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeInt(owner.length());
-        buf.writeBytes(owner.getBytes());
+        buf.writeLong(ownerUUID.getMostSignificantBits());
+        buf.writeLong(ownerUUID.getLeastSignificantBits());
         buf.writeByte(leftStackSize);
         buf.writeByte(leftStackMeta);
         buf.writeByte(rightStackSize);
@@ -81,7 +83,7 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
             ((TileEntityEE) tileEntity).setOrientation(message.orientation);
             ((TileEntityEE) tileEntity).setState(message.state);
             ((TileEntityEE) tileEntity).setCustomName(message.customName);
-            ((TileEntityEE) tileEntity).setOwner(message.owner);
+            ((TileEntityEE) tileEntity).setOwnerUUID(message.ownerUUID);
             ((TileEntityCalcinator) tileEntity).leftStackSize = message.leftStackSize;
             ((TileEntityCalcinator) tileEntity).leftStackMeta = message.leftStackMeta;
             ((TileEntityCalcinator) tileEntity).rightStackSize = message.rightStackSize;
@@ -94,6 +96,6 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityCalcinator - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, owner:%s, leftStackSize: %s, leftStackMeta: %s, rightStackSize: %s, rightStackMeta: %s", x, y, z, orientation, state, customName, owner, leftStackSize, leftStackMeta, rightStackSize, rightStackMeta);
+        return String.format("MessageTileEntityCalcinator - x:%s, y:%s, z:%s, orientation:%s, state:%s, customName:%s, ownerUUID:%s, leftStackSize: %s, leftStackMeta: %s, rightStackSize: %s, rightStackMeta: %s", x, y, z, orientation, state, customName, ownerUUID, leftStackSize, leftStackMeta, rightStackSize, rightStackMeta);
     }
 }

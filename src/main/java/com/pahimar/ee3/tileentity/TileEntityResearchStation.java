@@ -11,15 +11,10 @@ import net.minecraft.nbt.NBTTagList;
 
 public class TileEntityResearchStation extends TileEntityEE implements IInventory
 {
-    public static final int INVENTORY_SIZE = 2;
+    public static final int INVENTORY_SIZE = 1;
     public static final int ITEM_SLOT_INVENTORY_INDEX = 0;
-    public static final int TOME_SLOT_INVENTORY_INDEX = 1;
 
     public int itemLearnTime;
-
-    /**
-     * The ItemStacks that hold the items currently being used in the Glass Bell
-     */
     private ItemStack[] inventory;
 
     public TileEntityResearchStation()
@@ -197,7 +192,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
     private boolean canLearnItemStack()
     {
-//        return ItemTransmutationKnowledgeHelper.canLearnItemStack(inventory[ITEM_SLOT_INVENTORY_INDEX], inventory[TOME_SLOT_INVENTORY_INDEX]);
+        //        return ItemTransmutationKnowledgeHelper.canLearnItemStack(inventory[ITEM_SLOT_INVENTORY_INDEX], inventory[TOME_SLOT_INVENTORY_INDEX]);
         return false;
     }
 
@@ -205,16 +200,16 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-//            PlayerKnowledge playerKnowledge = PlayerKnowledge.readPlayerKnowledgeFromNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-//            playerKnowledge.learnTransmutation(this.inventory[ITEM_SLOT_INVENTORY_INDEX]);
-//            playerKnowledge.writeToNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-//
-//            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
-//
-//            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
-//            {
-//                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
-//            }
+            //            PlayerKnowledge playerKnowledge = PlayerKnowledge.readPlayerKnowledgeFromNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
+            //            playerKnowledge.learnTransmutation(this.inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            //            playerKnowledge.writeToNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
+            //
+            //            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
+            //
+            //            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
+            //            {
+            //                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
+            //            }
         }
     }
 }

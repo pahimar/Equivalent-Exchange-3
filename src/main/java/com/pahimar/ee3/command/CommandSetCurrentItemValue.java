@@ -35,11 +35,6 @@ public class CommandSetCurrentItemValue extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        for (int i = 0; i < args.length; i++)
-        {
-            LogHelper.info(String.format("args[%s]: %s", i, args[i]));
-        }
-
         if (args.length < 2)
         {
             throw new WrongUsageException("command.ee3.set-current-item-value.usage");
