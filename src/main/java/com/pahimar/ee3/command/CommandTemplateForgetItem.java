@@ -7,12 +7,12 @@ import net.minecraft.command.ICommandSender;
 
 import java.util.List;
 
-public class CommandTemplateLearnItem extends CommandBase
+public class CommandTemplateForgetItem extends CommandBase
 {
     @Override
     public String getCommandName()
     {
-        return Names.Commands.TEMPLATE_LEARN_ITEM;
+        return Names.Commands.TEMPLATE_FORGET_ITEM;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CommandTemplateLearnItem extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender commandSender)
     {
-        return Messages.Commands.TEMPLATE_LEARN_ITEM_USAGE;
+        return Messages.Commands.TEMPLATE_FORGET_ITEM_USAGE;
     }
 
     @Override

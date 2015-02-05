@@ -1,14 +1,17 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandEE extends CommandBase
 {
-    CommandBase[] modCommands = {new CommandPlayerLearnEverything(), new CommandPlayerLearnItem(), new CommandTemplateLearnEverything(), new CommandTemplateLearnItem()};
+    private static List<CommandBase> modCommands = new ArrayList<CommandBase>();
+    private static List<String> commands = new ArrayList<String>();
 
     @Override
     public String getCommandName()
@@ -19,7 +22,7 @@ public class CommandEE extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender commandSender)
     {
-        return "TODO";
+        return Messages.Commands.BASE_COMMAND_USAGE;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class CommandEE extends CommandBase
     {
         if (args.length == 1)
         {
-            return getListOfStringsMatchingLastWord(args, "set-energy-value", "set-item-learnable", "set-item-recoverable", "set-item-unlearnable", "set-item-unrecoverable", "sync-energy-values", "player-learn-everything", "player-learn-item", "template-learn-everything", "template-learn-item");
+            return getListOfStringsFromIterableMatchingLastWord(args, commands);
         }
         else if (args.length >= 2)
         {
@@ -56,5 +59,20 @@ public class CommandEE extends CommandBase
         }
 
         return null;
+    }
+
+    static
+    {
+        modCommands.add(new CommandPlayerLearnEverything());
+        modCommands.add(new CommandPlayerLearnItem());
+        modCommands.add(new CommandTemplateLearnEverything());
+        modCommands.add(new CommandTemplateLearnItem());
+        modCommands.add(new CommandTemplateForgetEverything());
+        modCommands.add(new CommandTemplateForgetItem());
+
+        for (CommandBase commandBase : modCommands)
+        {
+            commands.add(commandBase.getCommandName());
+        }
     }
 }

@@ -124,7 +124,11 @@ public class Names
         public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
         public static final String PLAYER_LEARN_EVERYTHING = "player-learn-everything";
         public static final String PLAYER_LEARN_ITEM = "player-learn-item";
+        public static final String PLAYER_FORGET_EVERYTHING = "player-forget-everything";
+        public static final String PLAYER_FORGET_ITEM = "player-forget-item";
         public static final String TEMPLATE_LEARN_EVERYTHING = "template-learn-everything";
         public static final String TEMPLATE_LEARN_ITEM = "template-learn-item";
+        public static final String TEMPLATE_FORGET_EVERYTHING = "template-forget-everything";
+        public static final String TEMPLATE_FORGET_ITEM = "template-forget-item";
     }
 }

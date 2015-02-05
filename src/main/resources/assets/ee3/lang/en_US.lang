@@ -138,11 +138,23 @@ command.ee3.player-learn-everything.success=%s taught %s how to transmute everyt
 command.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <value> [data] [dataTag]
 command.ee3.player-learn-item.success=%s taught %s how to transmute %s
 
+command.ee3.player-forget-everything.usage=/ee3 player-forget-everything <playername>
+command.ee3.player-forget-everything.success=%s made %s forget how to transmute everything
+
+command.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <value> [data] [dataTag]
+command.ee3.player-forget-item.success=%s made %s forget how to transmute %s
+
 command.ee3.template-learn-everything.usage=/ee3 template-learn-everything <playername>
 command.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
 
 command.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <value> [data] [dataTag]
 command.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
+
+command.ee3.template-forget-everything.usage=/ee3 template-forget-everything <playername>
+command.ee3.template-forget-everything.success=%s made the knowledge template forget how to transmute everything
+
+command.ee3.template-forget-item.usage=/ee3 template-forget-item <playername> <item> <value> [data] [dataTag]
+command.ee3.template-forget-item.success=%s made the knowledge template forget how to transmute %s
 
 # Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
