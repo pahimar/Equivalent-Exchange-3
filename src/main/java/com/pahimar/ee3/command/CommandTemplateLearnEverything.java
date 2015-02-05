@@ -29,6 +29,6 @@ public class CommandTemplateLearnEverything extends CommandBase
     public void processCommand(ICommandSender commandSender, String[] args)
     {
         TransmutationKnowledgeRegistry.getInstance().teachTemplateAll();
-        // TODO Notify admins of the change to the template
+        func_152373_a(commandSender, this, "command.ee3.sync-values.all.success", new Object[]{commandSender.getCommandSenderName()});
     }
 }

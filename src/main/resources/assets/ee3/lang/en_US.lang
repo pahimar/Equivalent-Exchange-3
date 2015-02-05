@@ -132,6 +132,18 @@ command.ee3.sync-values.self.denied=Please wait %s more seconds and try again
 command.ee3.sync-values.all.success=%s synchronized all EnergyValues with all players on the server
 command.ee3.sync-values.all.denied=Only ops can use this command
 
+command.ee3.player-learn-everything.usage=/ee3 player-learn-everything <playername>
+command.ee3.player-learn-everything.success=%s taught %s how to transmute everything
+
+command.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <value> [data] [dataTag]
+command.ee3.player-learn-item.success=%s taught %s how to transmute %s
+
+command.ee3.template-learn-everything.usage=/ee3 template-learn-everything <playername>
+command.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
+
+command.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <value> [data] [dataTag]
+command.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
+
 # Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
 tooltip.ee3:alchemicalChestPrefix.small=Small
