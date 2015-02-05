@@ -47,7 +47,14 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
+        if (buf.readBoolean())
+        {
+            this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
+        }
+        else
+        {
+            this.ownerUUID = null;
+        }
         outputItemStack = ByteBufUtils.readItemStack(buf);
     }
 
@@ -61,8 +68,16 @@ public class MessageTileEntityGlassBell implements IMessage, IMessageHandler<Mes
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeLong(ownerUUID.getMostSignificantBits());
-        buf.writeLong(ownerUUID.getLeastSignificantBits());
+        if (ownerUUID != null)
+        {
+            buf.writeBoolean(true);
+            buf.writeLong(ownerUUID.getMostSignificantBits());
+            buf.writeLong(ownerUUID.getLeastSignificantBits());
+        }
+        else
+        {
+            buf.writeBoolean(false);
+        }
         ByteBufUtils.writeItemStack(buf, outputItemStack);
     }
 

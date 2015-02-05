@@ -48,7 +48,14 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
         this.state = buf.readByte();
         int customNameLength = buf.readInt();
         this.customName = new String(buf.readBytes(customNameLength).array());
-        this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
+        if (buf.readBoolean())
+        {
+            this.ownerUUID = new UUID(buf.readLong(), buf.readLong());
+        }
+        else
+        {
+            this.ownerUUID = null;
+        }
         this.leftStackSize = buf.readByte();
         this.leftStackMeta = buf.readByte();
         this.rightStackSize = buf.readByte();
@@ -65,8 +72,16 @@ public class MessageTileCalcinator implements IMessage, IMessageHandler<MessageT
         buf.writeByte(state);
         buf.writeInt(customName.length());
         buf.writeBytes(customName.getBytes());
-        buf.writeLong(ownerUUID.getMostSignificantBits());
-        buf.writeLong(ownerUUID.getLeastSignificantBits());
+        if (ownerUUID != null)
+        {
+            buf.writeBoolean(true);
+            buf.writeLong(ownerUUID.getMostSignificantBits());
+            buf.writeLong(ownerUUID.getLeastSignificantBits());
+        }
+        else
+        {
+            buf.writeBoolean(false);
+        }
         buf.writeByte(leftStackSize);
         buf.writeByte(leftStackMeta);
         buf.writeByte(rightStackSize);
