@@ -2,9 +2,6 @@ package com.pahimar.ee3;
 
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
-import com.pahimar.ee3.command.CommandSetCurrentItemValue;
-import com.pahimar.ee3.command.CommandSetValue;
-import com.pahimar.ee3.command.CommandSyncValues;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
@@ -59,9 +56,6 @@ public class EquivalentExchange3
         TransmutationKnowledgeRegistry.getInstance();
 
         event.registerServerCommand(new CommandEE());
-        event.registerServerCommand(new CommandSetValue());
-        event.registerServerCommand(new CommandSetCurrentItemValue());
-        event.registerServerCommand(new CommandSyncValues());
     }
 
     @EventHandler

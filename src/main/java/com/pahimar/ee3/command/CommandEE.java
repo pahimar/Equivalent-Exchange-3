@@ -63,6 +63,8 @@ public class CommandEE extends CommandBase
 
     static
     {
+        modCommands.add(new CommandSetEnergyValue());
+        modCommands.add(new CommandSyncEnergyValues());
         modCommands.add(new CommandPlayerLearnEverything());
         modCommands.add(new CommandPlayerLearnItem());
         modCommands.add(new CommandPlayerForgetEverything());
