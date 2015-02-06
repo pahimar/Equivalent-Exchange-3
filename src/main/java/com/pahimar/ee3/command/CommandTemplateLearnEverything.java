@@ -29,7 +29,7 @@ public class CommandTemplateLearnEverything extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        TransmutationKnowledgeRegistry.getInstance().teachTemplateAll();
+        TransmutationKnowledgeRegistry.getInstance().teachTemplateEverything();
         func_152373_a(commandSender, this, Messages.Commands.TEMPLATE_LEARN_EVERYTHING_SUCCESS, new Object[]{commandSender.getCommandSenderName()});
     }
 }

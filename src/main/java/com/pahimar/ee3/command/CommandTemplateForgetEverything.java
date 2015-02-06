@@ -29,7 +29,7 @@ public class CommandTemplateForgetEverything extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        TransmutationKnowledgeRegistry.getInstance().makeTemplateForgetAll();
+        TransmutationKnowledgeRegistry.getInstance().makeTemplateForgetEverything();
         func_152373_a(commandSender, this, Messages.Commands.TEMPLATE_FORGET_EVERYTHING_SUCCESS, new Object[]{commandSender.getCommandSenderName()});
     }
 }
