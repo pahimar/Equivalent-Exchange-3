@@ -4,6 +4,7 @@ import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.item.Item;
 
 import java.util.List;
 
@@ -36,7 +37,11 @@ public class CommandTemplateLearnItem extends CommandBase
     @Override
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
     {
-        // TODO
+        if (args.length == 2)
+        {
+            return getListOfStringsFromIterableMatchingLastWord(args, Item.itemRegistry.getKeys());
+        }
+
         return null;
     }
 }

@@ -2,6 +2,7 @@ package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.LogHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
@@ -36,7 +37,11 @@ public class CommandPlayerLearnEverything extends CommandBase
     @Override
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
     {
-        // TODO List currently logged in players as options
+        if (args.length == 2)
+        {
+            return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames());
+        }
+
         return null;
     }
 }
