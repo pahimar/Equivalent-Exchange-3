@@ -101,7 +101,7 @@ public class TransmutationKnowledgeRegistry
         saveTemplateKnowledgeToDisk();
     }
 
-    public void teachTemplateAll()
+    public void teachTemplateEverything()
     {
         if (templateKnowledge == null)
         {
@@ -128,7 +128,7 @@ public class TransmutationKnowledgeRegistry
         saveTemplateKnowledgeToDisk();
     }
 
-    public void makeTemplateForgetAll()
+    public void makeTemplateForgetEverything()
     {
         if (templateKnowledge == null)
         {
@@ -179,7 +179,7 @@ public class TransmutationKnowledgeRegistry
         }
     }
 
-    public void teachPlayerAll(EntityPlayer entityPlayer)
+    public void teachPlayerEverything(EntityPlayer entityPlayer)
     {
         loadPlayerFromDiskIfNeeded(entityPlayer);
         playerKnowledgeMap.get(entityPlayer.getUniqueID()).setCanTransmuteEverything(true);
@@ -200,7 +200,7 @@ public class TransmutationKnowledgeRegistry
         }
     }
 
-    public void makePlayerForgetAll(EntityPlayer entityPlayer)
+    public void makePlayerForgetEverything(EntityPlayer entityPlayer)
     {
         loadPlayerFromDiskIfNeeded(entityPlayer);
         playerKnowledgeMap.get(entityPlayer.getUniqueID()).forgetAllTransmutations();
