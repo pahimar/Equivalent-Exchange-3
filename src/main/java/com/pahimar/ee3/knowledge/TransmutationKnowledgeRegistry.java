@@ -14,14 +14,18 @@ import java.util.UUID;
 public class TransmutationKnowledgeRegistry
 {
     private static TransmutationKnowledgeRegistry transmutationKnowledgeRegistry = null;
-    private static File knowledgeDirectory;
+    private static File playerKnowledgeDirectory;
+    private static File dataKnowledgeDirectory;
     private static TransmutationKnowledge templateKnowledge;
     private static HashMap<UUID, TransmutationKnowledge> playerKnowledgeMap;
 
     private TransmutationKnowledgeRegistry()
     {
-        knowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
-        knowledgeDirectory.mkdirs();
+        playerKnowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
+        playerKnowledgeDirectory.mkdirs();
+
+        dataKnowledgeDirectory = new File(SerializationHelper.getDataDirectory(), "knowledge" + File.separator + "transmutation");
+        dataKnowledgeDirectory.mkdirs();
 
         loadTemplateKnowledgeFromDisk();
 
@@ -209,16 +213,16 @@ public class TransmutationKnowledgeRegistry
      */
     public void loadTemplateKnowledgeFromDisk()
     {
-        File templateFile = new File(knowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+        File templateFile = new File(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE);
 
         if (!templateFile.exists())
         {
             templateKnowledge = new TransmutationKnowledge();
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+            SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
         }
         else
         {
-            templateKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+            templateKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE);
         }
     }
 
@@ -226,12 +230,12 @@ public class TransmutationKnowledgeRegistry
     {
         if (templateKnowledge != null)
         {
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+            SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
         }
         else
         {
             templateKnowledge = new TransmutationKnowledge();
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+            SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
         }
     }
 
@@ -241,11 +245,11 @@ public class TransmutationKnowledgeRegistry
         {
             TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
 
-            File playerKnowledgeFile = new File(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
+            File playerKnowledgeFile = new File(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
 
             if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
             {
-                playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
+                playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
             }
 
             playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
@@ -265,11 +269,11 @@ public class TransmutationKnowledgeRegistry
     {
         if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
         {
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+            SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
         }
         else
         {
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
+            SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
         }
     }
 
@@ -279,7 +283,7 @@ public class TransmutationKnowledgeRegistry
 
         for (UUID playerUUID : playerKnowledgeMap.keySet())
         {
-            SerializationHelper.writeTransmutationKnowledgeToFile(knowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
+            SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
         }
     }
 }
