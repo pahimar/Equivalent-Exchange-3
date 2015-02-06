@@ -121,9 +121,12 @@ glyph.ee3:triangle=Triangle
 
 # Commands
 command.ee3.usage=/ee3 <set-value|sync-values>
+
+command.ee3.player-not-found.error=Player with name %s was not found on the server
+command.ee3.invalid-nbt-tag.error=Data tag parsing failed: %s
+
 command.ee3.set-value.usage=/ee3-set-value <pre|post> <item> <value> [data] [dataTag]
 command.ee3.set-value.success=%s set a %s EnergyValue of %s to %s
-command.ee3.set-value.tagError=Data tag parsing failed: %s
 command.ee3.set-current-item-value.usage=/ee3-set-current-item-value <pre|post> <value>
 command.ee3.set-current-item-value.success=%s set a %s EnergyValue of %s to %s
 command.ee3.sync-values.usage=/ee3-sync-values <self|all>
@@ -135,25 +138,25 @@ command.ee3.sync-values.all.denied=Only ops can use this command
 command.ee3.player-learn-everything.usage=/ee3 player-learn-everything <playername>
 command.ee3.player-learn-everything.success=%s taught %s how to transmute everything
 
-command.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <value> [data] [dataTag]
+command.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <data> [dataTag]
 command.ee3.player-learn-item.success=%s taught %s how to transmute %s
 
 command.ee3.player-forget-everything.usage=/ee3 player-forget-everything <playername>
 command.ee3.player-forget-everything.success=%s made %s forget how to transmute everything
 
-command.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <value> [data] [dataTag]
+command.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <data> [dataTag]
 command.ee3.player-forget-item.success=%s made %s forget how to transmute %s
 
 command.ee3.template-learn-everything.usage=/ee3 template-learn-everything <playername>
 command.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
 
-command.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <value> [data] [dataTag]
+command.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <data> [dataTag]
 command.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
 
 command.ee3.template-forget-everything.usage=/ee3 template-forget-everything <playername>
 command.ee3.template-forget-everything.success=%s made the knowledge template forget how to transmute everything
 
-command.ee3.template-forget-item.usage=/ee3 template-forget-item <playername> <item> <value> [data] [dataTag]
+command.ee3.template-forget-item.usage=/ee3 template-forget-item <playername> <item> <data> [dataTag]
 command.ee3.template-forget-item.success=%s made the knowledge template forget how to transmute %s
 
 # Tooltips

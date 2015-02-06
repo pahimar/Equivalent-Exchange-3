@@ -6,6 +6,7 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSetEnergyValue;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.command.CommandBase;
@@ -68,7 +69,7 @@ public class CommandSetValue extends CommandBase
 
                     if (!(nbtBase instanceof NBTTagCompound))
                     {
-                        func_152373_a(commandSender, this, "command.ee3.set-value.tagError", new Object[]{"Not a valid tag"});
+                        func_152373_a(commandSender, this, Messages.Commands.INVALID_NBT_TAG_ERROR, new Object[]{"Not a valid tag"});
                         return;
                     }
 
@@ -76,7 +77,7 @@ public class CommandSetValue extends CommandBase
                 }
                 catch (Exception exception)
                 {
-                    func_152373_a(commandSender, this, "command.ee3.set-value.tagError", new Object[]{exception.getMessage()});
+                    func_152373_a(commandSender, this, Messages.Commands.INVALID_NBT_TAG_ERROR, new Object[]{exception.getMessage()});
                     return;
                 }
             }
