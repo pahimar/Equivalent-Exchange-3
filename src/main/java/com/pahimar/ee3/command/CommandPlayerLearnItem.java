@@ -1,5 +1,6 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
@@ -25,7 +26,7 @@ public class CommandPlayerLearnItem extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender commandSender)
     {
-        return "TODO";
+        return Messages.Commands.PLAYER_LEARN_ITEM_USAGE;
     }
 
     @Override

@@ -8,12 +8,12 @@ import net.minecraft.command.ICommandSender;
 
 import java.util.List;
 
-public class CommandPlayerLearnEverything extends CommandBase
+public class CommandPlayerForgetEverything extends CommandBase
 {
     @Override
     public String getCommandName()
     {
-        return Names.Commands.PLAYER_LEARN_EVERYTHING;
+        return Names.Commands.PLAYER_FORGET_EVERYTHING;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class CommandPlayerLearnEverything extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender commandSender)
     {
-        return Messages.Commands.PLAYER_LEARN_EVERYTHING_USAGE;
+        return Messages.Commands.PLAYER_FORGET_EVERYTHING_USAGE;
     }
 
     @Override

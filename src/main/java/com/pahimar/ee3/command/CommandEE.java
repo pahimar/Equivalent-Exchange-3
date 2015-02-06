@@ -65,6 +65,8 @@ public class CommandEE extends CommandBase
     {
         modCommands.add(new CommandPlayerLearnEverything());
         modCommands.add(new CommandPlayerLearnItem());
+        modCommands.add(new CommandPlayerForgetEverything());
+        modCommands.add(new CommandPlayerForgetItem());
         modCommands.add(new CommandTemplateLearnEverything());
         modCommands.add(new CommandTemplateLearnItem());
         modCommands.add(new CommandTemplateForgetEverything());
