@@ -241,39 +241,48 @@ public class TransmutationKnowledgeRegistry
 
     public void loadPlayerFromDiskIfNeeded(EntityPlayer entityPlayer)
     {
-        if (!playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
-
-            File playerKnowledgeFile = new File(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
-
-            if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
+            if (!playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
             {
-                playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
-            }
+                TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
 
-            playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
+                File playerKnowledgeFile = new File(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
+
+                if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
+                {
+                    playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
+                }
+
+                playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
+            }
         }
     }
 
     public void unloadPlayer(EntityPlayer entityPlayer)
     {
-        if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            savePlayerKnowledgeToDisk(entityPlayer);
-            playerKnowledgeMap.remove(entityPlayer.getUniqueID());
+            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            {
+                savePlayerKnowledgeToDisk(entityPlayer);
+                playerKnowledgeMap.remove(entityPlayer.getUniqueID());
+            }
         }
     }
 
     public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
     {
-        if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
+        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
-        }
-        else
-        {
-            SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
+            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
+            {
+                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+            }
+            else
+            {
+                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
+            }
         }
     }
 
