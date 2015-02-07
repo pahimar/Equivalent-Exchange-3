@@ -132,5 +132,9 @@ public class Names
         public static final String TEMPLATE_LEARN_ITEM = "template-learn-item";
         public static final String TEMPLATE_FORGET_EVERYTHING = "template-forget-everything";
         public static final String TEMPLATE_FORGET_ITEM = "template-forget-item";
+        public static final String SET_ITEM_LEARNABLE = "set-item-learnable";
+        public static final String SET_ITEM_NOT_LEARNABLE = "set-item-not-learnable";
+        public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
+        public static final String SET_ITEM_NOT_RECOVERABLE = "set-item-not-recoverable";
     }
 }
