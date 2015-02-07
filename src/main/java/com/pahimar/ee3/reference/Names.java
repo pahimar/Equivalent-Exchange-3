@@ -122,6 +122,8 @@ public class Names
     public static final class Commands
     {
         public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
+        public static final String SET_ENERGY_VALUE = "set-energy-value";
+        public static final String SYNC_ENERGY_VALUES = "sync-energy-values";
         public static final String PLAYER_LEARN_EVERYTHING = "player-learn-everything";
         public static final String PLAYER_LEARN_ITEM = "player-learn-item";
         public static final String PLAYER_FORGET_EVERYTHING = "player-forget-everything";

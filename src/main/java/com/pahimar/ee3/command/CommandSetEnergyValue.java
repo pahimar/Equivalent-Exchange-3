@@ -7,6 +7,7 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSetEnergyValue;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
+import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.command.CommandBase;
@@ -21,47 +22,57 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.List;
 import java.util.Map;
 
-public class CommandSetValue extends CommandBase
+public class CommandSetEnergyValue extends CommandBase
 {
     @Override
     public String getCommandName()
     {
-        return "ee3-set-value";
+        return Names.Commands.SET_ENERGY_VALUE;
+    }
+
+    @Override
+    public int getRequiredPermissionLevel()
+    {
+        return 2;
     }
 
     @Override
     public String getCommandUsage(ICommandSender commandSender)
     {
-        return "command.ee3.set-value.usage";
+        return Messages.Commands.SET_ENERGY_VALUE_USAGE;
     }
 
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        if (args.length < 3)
+        for (int i = 0; i < args.length; i++)
         {
-            throw new WrongUsageException("command.ee3.set-value.usage");
+            LogHelper.info(String.format("args[%s]: %s", i, args[i]));
+        }
+        if (args.length < 4)
+        {
+            throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
         }
         else
         {
-            Item item = getItemByText(commandSender, args[1]);
+            Item item = getItemByText(commandSender, args[2]);
             double energyValue = 0;
             int metaData = 0;
 
-            if (args.length >= 3)
+            if (args.length >= 4)
             {
-                energyValue = parseDoubleWithMin(commandSender, args[2], 0);
+                energyValue = parseDoubleWithMin(commandSender, args[3], 0);
             }
-            else if (args.length >= 4)
+            else if (args.length >= 5)
             {
-                metaData = parseInt(commandSender, args[3]);
+                metaData = parseInt(commandSender, args[4]);
             }
 
             ItemStack itemStack = new ItemStack(item, 1, metaData);
 
-            if (args.length >= 5)
+            if (args.length >= 6)
             {
-                String stringNBTData = func_147178_a(commandSender, args, 4).getUnformattedText();
+                String stringNBTData = func_147178_a(commandSender, args, 5).getUnformattedText();
 
                 try
                 {
@@ -104,12 +115,11 @@ public class CommandSetValue extends CommandBase
                 }
 
                 // Notify admins and log the value change
-                func_152373_a(commandSender, this, "command.ee3.set-value.success", new Object[]{commandSender.getCommandSenderName(), args[0], wrappedStack.toString(), newEnergyValue.toString()});
-                LogHelper.info(String.format("%s set the EnergyValue of %s to %s", commandSender.getCommandSenderName(), wrappedStack, newEnergyValue));
+                func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
             }
             else
             {
-                throw new WrongUsageException("command.ee3.set-value.usage");
+                throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
             }
         }
     }
@@ -117,11 +127,11 @@ public class CommandSetValue extends CommandBase
     @Override
     public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
     {
-        if (args.length == 1)
+        if (args.length == 2)
         {
             return getListOfStringsMatchingLastWord(args, "pre", "post");
         }
-        else if (args.length == 2)
+        else if (args.length == 3)
         {
             return getListOfStringsFromIterableMatchingLastWord(args, Item.itemRegistry.getKeys());
         }

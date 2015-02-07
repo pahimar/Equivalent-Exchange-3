@@ -1,5 +1,6 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -82,8 +83,11 @@ public class CommandPlayerLearnItem extends CommandBase
                     }
                 }
 
-                TransmutationKnowledgeRegistry.getInstance().teachPlayer(entityPlayer, itemStack);
-                func_152373_a(commandSender, this, Messages.Commands.PLAYER_LEARN_ITEM_SUCCESS, new Object[]{commandSender.getCommandSenderName(), entityPlayer.getCommandSenderName(), itemStack.func_151000_E()});
+                if (AbilityRegistry.getInstance().isLearnable(itemStack))
+                {
+                    TransmutationKnowledgeRegistry.getInstance().teachPlayer(entityPlayer, itemStack);
+                    func_152373_a(commandSender, this, Messages.Commands.PLAYER_LEARN_ITEM_SUCCESS, new Object[]{commandSender.getCommandSenderName(), entityPlayer.getCommandSenderName(), itemStack.func_151000_E()});
+                }
             }
             else
             {

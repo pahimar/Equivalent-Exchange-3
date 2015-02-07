@@ -105,59 +105,31 @@ gui.nei.ee3:calcination.tooltip.1=Energy values needed to calcine
 gui.nei.ee3:calcination.tooltip.2=From %s to %s
 gui.nei.ee3:aludel=Aludel
 
-# Glyphs
-glyph.ee3:baseCircle=Circle (Base)
-glyph.ee3:circle=Circle
-glyph.ee3:diamond=Diamond
-glyph.ee3:dot=Dot
-glyph.ee3:heptagon=Heptagon
-glyph.ee3:hexagon=Hexagon
-glyph.ee3:invertedTriangle=Triangle (Inverted)
-glyph.ee3:line=Line
-glyph.ee3:octagon=Octagon
-glyph.ee3:pentagon=Pentagon
-glyph.ee3:square=Square
-glyph.ee3:triangle=Triangle
-
 # Commands
-command.ee3.usage=/ee3 <set-value|sync-values>
-
-command.ee3.player-not-found.error=Player with name %s was not found on the server
-command.ee3.invalid-nbt-tag.error=Data tag parsing failed: %s
-
-command.ee3.set-value.usage=/ee3-set-value <pre|post> <item> <value> [data] [dataTag]
-command.ee3.set-value.success=%s set a %s EnergyValue of %s to %s
-command.ee3.set-current-item-value.usage=/ee3-set-current-item-value <pre|post> <value>
-command.ee3.set-current-item-value.success=%s set a %s EnergyValue of %s to %s
-command.ee3.sync-values.usage=/ee3-sync-values <self|all>
-command.ee3.sync-values.self.success=Successfully synchronized EnergyValues with the server
-command.ee3.sync-values.self.denied=Please wait %s more seconds and try again
-command.ee3.sync-values.all.success=%s synchronized all EnergyValues with all players on the server
-command.ee3.sync-values.all.denied=Only ops can use this command
-
-command.ee3.player-learn-everything.usage=/ee3 player-learn-everything <playername>
-command.ee3.player-learn-everything.success=%s taught %s how to transmute everything
-
-command.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <data> [dataTag]
-command.ee3.player-learn-item.success=%s taught %s how to transmute %s
-
-command.ee3.player-forget-everything.usage=/ee3 player-forget-everything <playername>
-command.ee3.player-forget-everything.success=%s made %s forget how to transmute everything
-
-command.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <data> [dataTag]
-command.ee3.player-forget-item.success=%s made %s forget how to transmute %s
-
-command.ee3.template-learn-everything.usage=/ee3 template-learn-everything <playername>
-command.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
-
-command.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <data> [dataTag]
-command.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
-
-command.ee3.template-forget-everything.usage=/ee3 template-forget-everything <playername>
-command.ee3.template-forget-everything.success=%s made the knowledge template forget how to transmute everything
-
-command.ee3.template-forget-item.usage=/ee3 template-forget-item <playername> <item> <data> [dataTag]
-command.ee3.template-forget-item.success=%s made the knowledge template forget how to transmute %s
+commands.ee3.usage=/ee3
+commands.ee3.player-not-found.error=Player with name %s was not found on the server
+commands.ee3.invalid-nbt-tag.error=Data tag parsing failed: %s
+commands.ee3.set-energy-value.usage=/ee3 set-energy-value <pre> <item> <value> [data] [dataTag] OR /ee3 set-energy-value <post> <item> <value> [data] [dataTag]
+commands.ee3.set-energy-value.success=%s set a %s EnergyValue of %s to %s
+commands.ee3.sync-energy-values.usage=/ee3 sync-energy-values
+commands.ee3.sync-energy-values.success=Successfully synchronized energy values with the server
+commands.ee3.sync-energy-values.denied=Please wait %s more seconds and try again
+commands.ee3.player-learn-everything.usage=/ee3 player-learn-everything <playername>
+commands.ee3.player-learn-everything.success=%s taught %s how to transmute everything
+commands.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <data> [dataTag]
+commands.ee3.player-learn-item.success=%s taught %s how to transmute %s
+commands.ee3.player-forget-everything.usage=/ee3 player-forget-everything <playername>
+commands.ee3.player-forget-everything.success=%s made %s forget how to transmute everything
+commands.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <data> [dataTag]
+commands.ee3.player-forget-item.success=%s made %s forget how to transmute %s
+commands.ee3.template-learn-everything.usage=/ee3 template-learn-everything <playername>
+commands.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
+commands.ee3.template-learn-item.usage=/ee3 template-learn-item <playername> <item> <data> [dataTag]
+commands.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
+commands.ee3.template-forget-everything.usage=/ee3 template-forget-everything <playername>
+commands.ee3.template-forget-everything.success=%s made the knowledge template forget how to transmute everything
+commands.ee3.template-forget-item.usage=/ee3 template-forget-item <playername> <item> <data> [dataTag]
+commands.ee3.template-forget-item.success=%s made the knowledge template forget how to transmute %s
 
 # Tooltips
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests

@@ -2,6 +2,8 @@ package com.pahimar.ee3.api;
 
 import com.google.gson.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
 import java.lang.reflect.Type;
 
@@ -98,6 +100,11 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         {
             this.energyValue -= energyValue.energyValue;
         }
+    }
+
+    public IChatComponent getChatComponent()
+    {
+        return new ChatComponentText("" + this.getEnergyValue());
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)
