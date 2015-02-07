@@ -6,6 +6,7 @@ import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
@@ -41,6 +42,10 @@ public class CommandPlayerForgetEverything extends CommandBase
             {
                 TransmutationKnowledgeRegistry.getInstance().makePlayerForgetEverything(entityPlayer);
                 func_152373_a(commandSender, this, Messages.Commands.PLAYER_FORGET_EVERYTHING_SUCCESS, new Object[]{commandSender.getCommandSenderName(), entityPlayer.getCommandSenderName()});
+            }
+            else
+            {
+                throw new WrongUsageException(Messages.Commands.PLAYER_NOT_FOUND_ERROR);
             }
         }
     }
