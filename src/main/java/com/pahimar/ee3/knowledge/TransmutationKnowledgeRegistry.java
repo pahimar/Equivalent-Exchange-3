@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 
-// TODO Unload players from disk if they have changes made to their knowledge while they are not online
 public class TransmutationKnowledgeRegistry
 {
     private static TransmutationKnowledgeRegistry transmutationKnowledgeRegistry = null;

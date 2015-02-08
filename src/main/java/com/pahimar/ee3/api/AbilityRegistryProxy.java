@@ -2,136 +2,73 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public final class AbilityRegistryProxy
 {
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static boolean isLearnable(Block block)
-    {
-        return isLearnable(new ItemStack(block));
-    }
-
-    public static boolean isLearnable(Item item)
-    {
-        return isLearnable(new ItemStack(item));
-    }
-
-    public static boolean isLearnable(ItemStack itemStack)
+    public static boolean isLearnable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            return EE3Wrapper.ee3mod.getAbilityRegistry().isLearnable(itemStack);
+            return EE3Wrapper.ee3mod.getAbilityRegistry().isLearnable(object);
         }
 
         return false;
     }
 
-    public static void setAsLearnable(Block block)
-    {
-        setAsLearnable(new ItemStack(block));
-    }
-
-    public static void setAsLearnable(Item item)
-    {
-        setAsLearnable(new ItemStack(item));
-    }
-
-    public static void setAsLearnable(ItemStack itemStack)
+    public static void setAsLearnable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsLearnable(itemStack);
+            EE3Wrapper.ee3mod.getAbilityRegistry().setAsLearnable(object);
         }
     }
 
-    public static void setAsNotLearnable(Block block)
-    {
-        setAsNotLearnable(new ItemStack(block));
-    }
-
-    public static void setAsNotLearnable(Item item)
-    {
-        setAsNotLearnable(new ItemStack(item));
-    }
-
-    public static void setAsNotLearnable(ItemStack itemStack)
+    public static void setAsNotLearnable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotLearnable(itemStack);
+            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotLearnable(object);
         }
     }
 
-    public static boolean isRecoverable(Block block)
-    {
-        return isRecoverable(new ItemStack(block));
-    }
-
-    public static boolean isRecoverable(Item item)
-    {
-        return isRecoverable(new ItemStack(item));
-    }
-
-    public static boolean isRecoverable(ItemStack itemStack)
+    public static boolean isRecoverable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            return EE3Wrapper.ee3mod.getAbilityRegistry().isRecoverable(itemStack);
+            return EE3Wrapper.ee3mod.getAbilityRegistry().isRecoverable(object);
         }
 
         return false;
     }
 
-    public static void setAsRecoverable(Block block)
-    {
-        setAsRecoverable(new ItemStack(block));
-    }
-
-    public static void setAsRecoverable(Item item)
-    {
-        setAsRecoverable(new ItemStack(item));
-    }
-
-    public static void setAsRecoverable(ItemStack itemStack)
+    public static void setAsRecoverable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsRecoverable(itemStack);
+            EE3Wrapper.ee3mod.getAbilityRegistry().setAsRecoverable(object);
         }
     }
 
-    public static void setAsNotRecoverable(Block block)
-    {
-        setAsNotRecoverable(new ItemStack(block));
-    }
-
-    public static void setAsNotRecoverable(Item item)
-    {
-        setAsNotRecoverable(new ItemStack(item));
-    }
-
-    public static void setAsNotRecoverable(ItemStack itemStack)
+    public static void setAsNotRecoverable(Object object)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotRecoverable(itemStack);
+            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotRecoverable(object);
         }
     }
 

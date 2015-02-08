@@ -73,7 +73,7 @@ public class EquivalentExchange3
 
         EnergyValues.addDefaultEnergyValues();
 
-        Skills.addDefaultSkills();
+        Abilities.setOresNotLearnable();
     }
 
     @EventHandler
@@ -130,6 +130,8 @@ public class EquivalentExchange3
         TransmutationKnowledgeRegistry.getInstance().saveAll();
 
         WorldEventHandler.hasInitilialized = false;
+
+        AbilityRegistry.getInstance().saveToFile(new File(SerializationHelper.getDataDirectory(), "abilities.json"));
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()
