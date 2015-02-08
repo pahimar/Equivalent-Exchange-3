@@ -274,12 +274,13 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
+            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()) != null && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
             {
                 SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
             }
             else
             {
+                loadPlayerFromDiskIfNeeded(entityPlayer);
                 SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
             }
         }

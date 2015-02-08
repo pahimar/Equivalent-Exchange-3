@@ -21,7 +21,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(TransmutationKnowledge.class, new TransmutationKnowledge()).create();
     private boolean canTransmuteEverything;
     private Set<ItemStack> knownTransmutations;
-    private boolean hasBeenModified;
+    private boolean hasBeenModified = false;
 
     public TransmutationKnowledge()
     {

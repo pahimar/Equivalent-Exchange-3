@@ -34,8 +34,9 @@ public class PlayerEventHandler
     }
 
     @SubscribeEvent
-    public void syncEnergyValuesOnLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    public void onPlayerLoggedIn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
     {
+        TransmutationKnowledgeRegistry.getInstance().loadPlayerFromDiskIfNeeded(event.player);
         PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(EnergyValueRegistry.getInstance()), (EntityPlayerMP) event.player);
     }
 
