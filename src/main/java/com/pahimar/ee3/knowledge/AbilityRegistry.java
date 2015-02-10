@@ -4,9 +4,12 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.util.SerializationHelper;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -14,13 +17,16 @@ import java.util.TreeSet;
 public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(AbilityRegistry.class, new AbilityRegistry()).create();
-
+    private static File abilityDirectory;
     private static AbilityRegistry abilityRegistry = null;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
 
     private AbilityRegistry()
     {
+        abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
+        abilityDirectory.mkdirs();
+
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
     }
@@ -110,15 +116,15 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Not Learnables");
+        stringBuilder.append("Not Learnables: ");
         for (WrappedStack wrappedStack : notLearnableSet)
         {
-            stringBuilder.append(wrappedStack);
+            stringBuilder.append(wrappedStack + " ");
         }
-        stringBuilder.append("Not Recoverables");
+        stringBuilder.append(", Not Recoverables: ");
         for (WrappedStack wrappedStack : notRecoverableSet)
         {
-            stringBuilder.append(wrappedStack);
+            stringBuilder.append(wrappedStack + " ");
         }
 
         return stringBuilder.toString();
@@ -137,13 +143,41 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
             if (jsonObject.has("notLearnable") && jsonObject.get("notLearnable").isJsonArray())
             {
                 JsonArray jsonArray = (JsonArray) jsonObject.get("notLearnable");
-                // TODO Pick up here in the morning
+                Iterator<JsonElement> iterator = jsonArray.iterator();
+
+                while (iterator.hasNext())
+                {
+                    JsonElement jsonElement = iterator.next();
+                    WrappedStack wrappedStack = WrappedStack.jsonSerializer.fromJson(jsonElement, WrappedStack.class);
+
+                    if (wrappedStack != null)
+                    {
+                        notLearnableStacks.add(wrappedStack);
+                    }
+                }
             }
 
             if (jsonObject.has("notRecoverable") && jsonObject.get("notRecoverable").isJsonArray())
             {
                 JsonArray jsonArray = (JsonArray) jsonObject.get("notRecoverable");
+                Iterator<JsonElement> iterator = jsonArray.iterator();
+
+                while (iterator.hasNext())
+                {
+                    JsonElement jsonElement = iterator.next();
+                    WrappedStack wrappedStack = WrappedStack.jsonSerializer.fromJson(jsonElement, WrappedStack.class);
+
+                    if (wrappedStack != null)
+                    {
+                        notRecoverableStacks.add(wrappedStack);
+                    }
+                }
             }
+
+            AbilityRegistry abilityRegistry1 = new AbilityRegistry();
+            abilityRegistry1.notLearnableSet = notLearnableStacks;
+            abilityRegistry1.notRecoverableSet = notRecoverableStacks;
+            return abilityRegistry1;
         }
 
         return null;
@@ -171,7 +205,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         return jsonAbilityRegistry;
     }
 
-    public void saveToFile(File file)
+    public void saveAbilityRegistryToFile()
+    {
+        abilityDirectory.mkdirs();
+        writeToFile(new File(abilityDirectory, Files.ABILITIES_JSON_FILE));
+    }
+
+    private void writeToFile(File file)
     {
         JsonWriter jsonWriter;
 
@@ -188,7 +228,17 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         }
     }
 
-    public void loadFromFile(File file)
+    public void loadAbilityRegistryFromFile()
+    {
+        File abilitiesFile = new File(abilityDirectory, Files.ABILITIES_JSON_FILE);
+
+        if (abilitiesFile.exists())
+        {
+            readFromFile(abilitiesFile);
+        }
+    }
+
+    private void readFromFile(File file)
     {
         JsonReader jsonReader;
 

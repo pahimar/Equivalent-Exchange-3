@@ -301,7 +301,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
         return jsonTransmutationKnowledge;
     }
 
-    public static void saveToFile(File file, TransmutationKnowledge transmutationKnowledge)
+    public static void writeToFile(File file, TransmutationKnowledge transmutationKnowledge)
     {
         JsonWriter jsonWriter;
 

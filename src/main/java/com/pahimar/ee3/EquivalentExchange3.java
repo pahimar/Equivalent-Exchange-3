@@ -55,6 +55,9 @@ public class EquivalentExchange3
 
         TransmutationKnowledgeRegistry.getInstance();
 
+        AbilityRegistry.getInstance().loadAbilityRegistryFromFile();
+        AbilityRegistry.getInstance().saveAbilityRegistryToFile();
+
         event.registerServerCommand(new CommandEE());
     }
 
@@ -131,7 +134,7 @@ public class EquivalentExchange3
 
         WorldEventHandler.hasInitilialized = false;
 
-        AbilityRegistry.getInstance().saveToFile(new File(SerializationHelper.getDataDirectory(), "abilities.json"));
+        AbilityRegistry.getInstance().saveAbilityRegistryToFile();
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

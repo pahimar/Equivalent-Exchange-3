@@ -166,7 +166,7 @@ public class SerializationHelper
             {
                 File file1 = new File(directory, fileName + ".tmp");
                 File file2 = new File(directory, fileName);
-                TransmutationKnowledge.saveToFile(file1, transmutationKnowledge);
+                TransmutationKnowledge.writeToFile(file1, transmutationKnowledge);
 
                 if (file2.exists())
                 {
