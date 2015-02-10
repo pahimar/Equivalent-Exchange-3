@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 
 public class ItemHelper
@@ -19,7 +21,7 @@ public class ItemHelper
         return clonedItemStack;
     }
 
-    public static Comparator<ItemStack> comparator = new Comparator<ItemStack>()
+    public static Comparator<ItemStack> baseComparator = new Comparator<ItemStack>()
     {
         public int compare(ItemStack itemStack1, ItemStack itemStack2)
         {
@@ -90,6 +92,84 @@ public class ItemHelper
         }
     };
 
+    public static Comparator<ItemStack> displayNameComparator = new Comparator<ItemStack>()
+    {
+        public int compare(ItemStack itemStack1, ItemStack itemStack2)
+        {
+            if (itemStack1 != null && itemStack2 != null)
+            {
+                if (itemStack1.getDisplayName().equalsIgnoreCase(itemStack2.getDisplayName()))
+                {
+                    // Sort on itemID
+                    if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
+                    {
+                        // Sort on item
+                        if (itemStack1.getItem() == itemStack2.getItem())
+                        {
+                            // Then sort on meta
+                            if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                            {
+                                // Then sort on NBT
+                                if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
+                                {
+                                    // Then sort on stack size
+                                    if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
+                                    {
+                                        return (itemStack1.stackSize - itemStack2.stackSize);
+                                    }
+                                    else
+                                    {
+                                        return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                                    }
+                                }
+                                else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound())
+                                {
+                                    return -1;
+                                }
+                                else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound()))
+                                {
+                                    return 1;
+                                }
+                                else
+                                {
+                                    return (itemStack1.stackSize - itemStack2.stackSize);
+                                }
+                            }
+                            else
+                            {
+                                return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
+                            }
+                        }
+                        else
+                        {
+                            return itemStack1.getItem().getUnlocalizedName(itemStack1).compareToIgnoreCase(itemStack2.getItem().getUnlocalizedName(itemStack2));
+                        }
+                    }
+                    else
+                    {
+                        return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
+                    }
+                }
+                else
+                {
+                    return itemStack1.getDisplayName().compareToIgnoreCase(itemStack2.getDisplayName());
+                }
+            }
+            else if (itemStack1 != null)
+            {
+                return -1;
+            }
+            else if (itemStack2 != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    };
+
     /**
      * Compares two ItemStacks for equality, testing itemID, metaData, stackSize, and their NBTTagCompounds (if they are
      * present)
@@ -100,7 +180,7 @@ public class ItemHelper
      */
     public static boolean equals(ItemStack first, ItemStack second)
     {
-        return (comparator.compare(first, second) == 0);
+        return (displayNameComparator.compare(first, second) == 0);
     }
 
     public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2)
@@ -139,7 +219,7 @@ public class ItemHelper
 
     public static int compare(ItemStack itemStack1, ItemStack itemStack2)
     {
-        return comparator.compare(itemStack1, itemStack2);
+        return displayNameComparator.compare(itemStack1, itemStack2);
     }
 
     public static String toString(ItemStack itemStack)
@@ -157,6 +237,40 @@ public class ItemHelper
         }
 
         return "null";
+    }
+
+    public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString)
+    {
+        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
+
+        for (ItemStack itemStack : unfilteredItemStackSet)
+        {
+            String itemDisplayName = itemStack.getDisplayName().toLowerCase();
+
+            if (itemDisplayName.startsWith(filterString))
+            {
+                nameSortedSet.add(itemStack);
+            }
+        }
+
+        return nameSortedSet;
+    }
+
+    public static Set<ItemStack> filterByNameContains(Set<ItemStack> unfilteredItemStackSet, String filterString)
+    {
+        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
+
+        for (ItemStack itemStack : unfilteredItemStackSet)
+        {
+            String itemDisplayName = itemStack.getDisplayName().toLowerCase();
+
+            if (itemDisplayName.contains(filterString))
+            {
+                nameSortedSet.add(itemStack);
+            }
+        }
+
+        return nameSortedSet;
     }
 
     public static boolean hasOwner(ItemStack itemStack)

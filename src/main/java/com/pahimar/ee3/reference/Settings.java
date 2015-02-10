@@ -11,4 +11,9 @@ public class Settings
     {
         public static String soundMode;
     }
+
+    public static class Abilities
+    {
+        public static boolean onlyLoadFile;
+    }
 }

@@ -13,12 +13,13 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-// TODO Serialize the sets to separate JSON for map makers, cause you know, I love them
 public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(AbilityRegistry.class, new AbilityRegistry()).create();
-    private static File abilityDirectory;
     private static AbilityRegistry abilityRegistry = null;
+
+    private static File abilityDirectory;
+    private boolean hasBeenModified;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
 
@@ -27,6 +28,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
         abilityDirectory.mkdirs();
 
+        hasBeenModified = false;
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
     }
@@ -68,7 +70,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            notLearnableSet.remove(new WrappedStack(object));
+            hasBeenModified = notLearnableSet.remove(new WrappedStack(object));
         }
     }
 
@@ -76,7 +78,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            notLearnableSet.add(new WrappedStack(object));
+            hasBeenModified = notLearnableSet.add(new WrappedStack(object));
         }
     }
 
@@ -99,7 +101,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            notRecoverableSet.remove(new WrappedStack(object));
+            hasBeenModified = notRecoverableSet.remove(new WrappedStack(object));
         }
     }
 
@@ -107,7 +109,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            notRecoverableSet.add(new WrappedStack(object));
+            hasBeenModified = notRecoverableSet.add(new WrappedStack(object));
         }
     }
 
@@ -207,38 +209,48 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     public void saveAbilityRegistryToFile()
     {
-        abilityDirectory.mkdirs();
-        writeToFile(new File(abilityDirectory, Files.ABILITIES_JSON_FILE));
+        if (abilityDirectory != null)
+        {
+            abilityDirectory.mkdirs();
+            writeToFile(new File(abilityDirectory, Files.ABILITIES_JSON_FILE));
+        }
     }
 
     private void writeToFile(File file)
     {
         JsonWriter jsonWriter;
 
-        try
+        if (hasBeenModified)
         {
-            jsonWriter = new JsonWriter(new FileWriter(file));
-            jsonWriter.setIndent("    ");
-            jsonSerializer.toJson(this, AbilityRegistry.class, jsonWriter);
-            jsonWriter.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+            try
+            {
+                jsonWriter = new JsonWriter(new FileWriter(file));
+                jsonWriter.setIndent("    ");
+                jsonSerializer.toJson(this, AbilityRegistry.class, jsonWriter);
+                jsonWriter.close();
+                hasBeenModified = false;
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void loadAbilityRegistryFromFile()
+    public void loadAbilityRegistryFromFile(boolean loadFileOnly)
     {
-        File abilitiesFile = new File(abilityDirectory, Files.ABILITIES_JSON_FILE);
-
-        if (abilitiesFile.exists())
+        if (abilityDirectory != null)
         {
-            readFromFile(abilitiesFile);
+            File abilitiesFile = new File(abilityDirectory, Files.ABILITIES_JSON_FILE);
+
+            if (abilitiesFile.exists())
+            {
+                readFromFile(abilitiesFile, loadFileOnly);
+            }
         }
     }
 
-    private void readFromFile(File file)
+    private void readFromFile(File file, boolean loadFileOnly)
     {
         JsonReader jsonReader;
 
@@ -248,21 +260,31 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
             AbilityRegistry abilityRegistry1 = jsonSerializer.fromJson(jsonReader, AbilityRegistry.class);
             jsonReader.close();
 
-            for (WrappedStack wrappedStack : abilityRegistry1.getNotLearnableStacks())
+            if (!loadFileOnly)
             {
-                if (!this.notLearnableSet.contains(wrappedStack))
+                for (WrappedStack wrappedStack : abilityRegistry1.getNotLearnableStacks())
                 {
-                    this.notLearnableSet.add(wrappedStack);
+                    if (!this.notLearnableSet.contains(wrappedStack))
+                    {
+                        this.notLearnableSet.add(wrappedStack);
+                    }
                 }
+
+                for (WrappedStack wrappedStack : abilityRegistry1.getNotRecoverableSet())
+                {
+                    if (!this.notRecoverableSet.contains(wrappedStack))
+                    {
+                        this.notRecoverableSet.add(wrappedStack);
+                    }
+                }
+            }
+            else
+            {
+                this.notLearnableSet = abilityRegistry1.notLearnableSet;
+                this.notRecoverableSet = abilityRegistry1.notRecoverableSet;
             }
 
-            for (WrappedStack wrappedStack : abilityRegistry1.getNotRecoverableSet())
-            {
-                if (!this.notRecoverableSet.contains(wrappedStack))
-                {
-                    this.notRecoverableSet.add(wrappedStack);
-                }
-            }
+            hasBeenModified = true;
         }
         catch (FileNotFoundException ignored)
         {

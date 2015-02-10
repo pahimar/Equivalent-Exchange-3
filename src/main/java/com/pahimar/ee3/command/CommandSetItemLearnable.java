@@ -1,7 +1,6 @@
 package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.api.AbilityRegistryProxy;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
@@ -78,7 +77,6 @@ public class CommandSetItemLearnable extends CommandBase
             }
 
             AbilityRegistryProxy.setAsLearnable(itemStack);
-            AbilityRegistry.getInstance().saveAbilityRegistryToFile();
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_LEARNABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

@@ -25,7 +25,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
 
     public TransmutationKnowledge()
     {
-        this(new TreeSet<ItemStack>(ItemHelper.comparator));
+        this(new TreeSet<ItemStack>(ItemHelper.displayNameComparator));
     }
 
     public TransmutationKnowledge(Collection<ItemStack> knownTransmutations)
@@ -36,7 +36,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     public TransmutationKnowledge(Collection<ItemStack> knownTransmutations, boolean canTransmuteEverything)
     {
         this.canTransmuteEverything = canTransmuteEverything;
-        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.comparator);
+        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
         this.knownTransmutations.addAll(knownTransmutations);
         hasBeenModified = false;
     }
@@ -49,7 +49,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     public TransmutationKnowledge(NBTTagCompound nbtTagCompound)
     {
         canTransmuteEverything = false;
-        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.comparator);
+        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
         this.readFromNBT(nbtTagCompound);
         hasBeenModified = false;
     }
@@ -124,6 +124,16 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
         return hasBeenModified;
     }
 
+    public Set<ItemStack> filterByNameStartsWith(String filterString)
+    {
+        return ItemHelper.filterByNameStartsWith(knownTransmutations, filterString);
+    }
+
+    public Set<ItemStack> filterByNameContains(String filterString)
+    {
+        return ItemHelper.filterByNameContains(knownTransmutations, filterString);
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -132,7 +142,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
             if (nbtTagCompound.hasKey(Names.NBT.ITEM_TRANSMUTATION_KNOWLEDGE))
             {
                 NBTTagList tagList = nbtTagCompound.getTagList(Names.NBT.ITEM_TRANSMUTATION_KNOWLEDGE, 10);
-                knownTransmutations = new TreeSet<ItemStack>(ItemHelper.comparator);
+                knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
                 for (int i = 0; i < tagList.tagCount(); ++i)
                 {
                     NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
@@ -142,7 +152,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
             }
             else
             {
-                knownTransmutations = new TreeSet<ItemStack>(ItemHelper.comparator);
+                knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
             }
 
             if (nbtTagCompound.hasKey(Names.NBT.CAN_TRANSMUTE_ANYTHING))
@@ -156,7 +166,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
         }
         else
         {
-            knownTransmutations = new TreeSet<ItemStack>(ItemHelper.comparator);
+            knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
             canTransmuteEverything = false;
         }
     }
@@ -179,15 +189,6 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     public String getTagLabel()
     {
         return "TransmutationKnowledge";
-    }
-
-    public static TransmutationKnowledge readTransmutationKnowledgeFromNBT(NBTTagCompound nbtTagCompound)
-    {
-        TransmutationKnowledge transmutationKnowledge = new TransmutationKnowledge();
-
-        transmutationKnowledge.readFromNBT(nbtTagCompound);
-
-        return transmutationKnowledge;
     }
 
     @Override
@@ -236,7 +237,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
             JsonObject jsonObject = (JsonObject) json;
 
             boolean canTransmuteEverything;
-            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(ItemHelper.comparator);
+            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
 
             if (jsonObject.has("canTransmuteEverything") && jsonObject.get("canTransmuteEverything").isJsonPrimitive())
             {

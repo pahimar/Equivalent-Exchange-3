@@ -13,6 +13,7 @@ public abstract class CommonProxy implements IProxy
         PlayerEventHandler playerEventHandler = new PlayerEventHandler();
 
         FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+        FMLCommonHandler.instance().bus().register(new AbilityRegistrySerializationHandler());
         FMLCommonHandler.instance().bus().register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(itemEventHandler);
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());

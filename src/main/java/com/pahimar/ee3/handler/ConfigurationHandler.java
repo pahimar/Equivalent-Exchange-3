@@ -29,6 +29,7 @@ public class ConfigurationHandler
         // TODO Come back and do these constants in logical locations and names
         Settings.General.syncThreshold = configuration.getInt(Messages.Configuration.GENERAL_SYNC_THRESHOLD, Configuration.CATEGORY_GENERAL, 5, 0, Short.MAX_VALUE, StatCollector.translateToLocal(Messages.Configuration.GENERAL_SYNC_THRESHOLD_COMMENT), Messages.Configuration.GENERAL_SYNC_THRESHOLD_LABEL);
         Settings.Sounds.soundMode = ConfigurationHelper.getString(configuration, Messages.Configuration.SOUND_MODE, Configuration.CATEGORY_GENERAL, "All", StatCollector.translateToLocal(Messages.Configuration.SOUND_MODE_COMMENT), new String[]{"All", "Self", "None"}, Messages.Configuration.SOUND_MODE_LABEL);
+        Settings.Abilities.onlyLoadFile = configuration.getBoolean(Messages.Configuration.ABILITIES_ONLY_LOAD_FILE, Configuration.CATEGORY_GENERAL, false, StatCollector.translateToLocal(Messages.Configuration.ABILITIES_ONLY_LOAD_FILE_COMMENT), Messages.Configuration.ABILITIES_ONLY_LOAD_FILE_LABEL);
 
         if (configuration.hasChanged())
         {

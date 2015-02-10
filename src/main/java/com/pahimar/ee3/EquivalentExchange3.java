@@ -13,6 +13,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -55,8 +56,7 @@ public class EquivalentExchange3
 
         TransmutationKnowledgeRegistry.getInstance();
 
-        AbilityRegistry.getInstance().loadAbilityRegistryFromFile();
-        AbilityRegistry.getInstance().saveAbilityRegistryToFile();
+        AbilityRegistry.getInstance().loadAbilityRegistryFromFile(Settings.Abilities.onlyLoadFile);
 
         event.registerServerCommand(new CommandEE());
     }
@@ -155,5 +155,10 @@ public class EquivalentExchange3
     public AlchemyArrayRegistry getAlchemyArrayRegistry()
     {
         return AlchemyArrayRegistry.getInstance();
+    }
+
+    public TransmutationKnowledgeRegistry getTransmutationKnowledgeRegistry()
+    {
+        return TransmutationKnowledgeRegistry.getInstance();
     }
 }

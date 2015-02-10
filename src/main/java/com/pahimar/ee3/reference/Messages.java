@@ -71,5 +71,9 @@ public final class Messages
         public static final String SOUND_MODE = "soundMode";
         public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
         public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";
+
+        public static final String ABILITIES_ONLY_LOAD_FILE = "abilities.onlyLoadFile";
+        public static final String ABILITIES_ONLY_LOAD_FILE_LABEL = "general.abilities.onlyLoadFile.label";
+        public static final String ABILITIES_ONLY_LOAD_FILE_COMMENT = "general.abilities.onlyLoadFile.comment";
     }
 }
