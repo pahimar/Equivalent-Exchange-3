@@ -36,6 +36,7 @@ public class EnergyValueHelper
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
+                // TODO Come back and optimize this a bit better - we aren't generating values properly here (we're missing things that should be lower than they are)
                 else if (itemStack.getItem() != null && (itemStack.getItem().getContainerItem(itemStack) != null || !itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)))
                 {
                     wrappedStackValue = new EnergyValue(0);

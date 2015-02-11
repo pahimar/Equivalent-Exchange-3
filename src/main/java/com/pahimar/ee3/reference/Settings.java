@@ -16,4 +16,9 @@ public class Settings
     {
         public static boolean onlyLoadFile;
     }
+
+    public static class DynamicEnergyValueGeneration
+    {
+        public static String regenerateEnergyValuesWhen;
+    }
 }

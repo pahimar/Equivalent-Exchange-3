@@ -1,22 +1,15 @@
 # Configuration
-general.transmutation=Transmutation Settings
-general.transmutation.knowledge.mode.label=Transmutation Knowledge Mode
-general.transmutation.knowledge.mode.comment=All - Player can learn all items that have a value, Select - Player can learn select items, Tier - Player can learn items below this tier level, Restricted - Player can only learn items listed in the restricted file, None - Player cannot learn any items
-
 general.sync.threshold.label=Sync Threshold
 general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
-
-general.transmutation.knowledge.maxTier.label=Highest Available Knowledge Tier
-general.transmutation.knowledge.maxTier.comment=The highest available knowledge tier for which players can learn transmutations
-
-general.transmutation.knowledge.template.label=Use Knowledge Template File
-general.transmutation.knowledge.template.comment=If true, new player's will have their transmutation knowledge copied from the knowledge template file (template.ee3)
 
 general.sound.soundMode.label=Sounds
 general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
 
 general.abilities.onlyLoadFile.label=Only load Abilities file
 general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
+
+general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
+general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3

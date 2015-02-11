@@ -75,5 +75,9 @@ public final class Messages
         public static final String ABILITIES_ONLY_LOAD_FILE = "abilities.onlyLoadFile";
         public static final String ABILITIES_ONLY_LOAD_FILE_LABEL = "general.abilities.onlyLoadFile.label";
         public static final String ABILITIES_ONLY_LOAD_FILE_COMMENT = "general.abilities.onlyLoadFile.comment";
+
+        public static final String REGENERATE_ENERGYVALUES_WHEN = "energyvalues.regenerateEnergyValuesWhen";
+        public static final String REGENERATE_ENERGYVALUES_WHEN_LABEL = "general.energyvalues.regenerateEnergyValuesWhen.label";
+        public static final String REGENERATE_ENERGYVALUES_WHEN_COMMENT = "general.energyvalues.regenerateEnergyValuesWhen.comment";
     }
 }

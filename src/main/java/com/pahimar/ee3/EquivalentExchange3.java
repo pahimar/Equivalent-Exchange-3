@@ -117,8 +117,9 @@ public class EquivalentExchange3
         if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
         {
             // TODO Use the SerializationHelper to save this and reduce File objects
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + "." + Reference.LOWERCASE_MOD_ID);
+            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+            dataDirectory.mkdirs();
+            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".dat");
 
             if (energyValueRegistryFile.exists())
             {
@@ -127,7 +128,7 @@ public class EquivalentExchange3
         }
         else
         {
-            SerializationHelper.writeNBTToFile(SerializationHelper.getDataDirectory(), SerializationHelper.getModListMD5() + "." + Reference.LOWERCASE_MOD_ID, getEnergyValueRegistry());
+            SerializationHelper.writeNBTToFile(new File(SerializationHelper.getDataDirectory(), "energyvalues"), SerializationHelper.getModListMD5() + ".dat", getEnergyValueRegistry());
         }
 
         TransmutationKnowledgeRegistry.getInstance().saveAll();

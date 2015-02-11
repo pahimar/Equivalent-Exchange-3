@@ -350,8 +350,9 @@ public class EnergyValueRegistry implements INBTTaggable
 
     protected final void init()
     {
-        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-        File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".ee3");
+        File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        dataDirectory.mkdirs();
+        File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".dat");
 
         if (!energyValueRegistryFile.exists())
         {
@@ -732,5 +733,15 @@ public class EnergyValueRegistry implements INBTTaggable
     public void setShouldRegenNextRestart(boolean shouldRegenNextRestart)
     {
         this.shouldRegenNextRestart = shouldRegenNextRestart;
+    }
+
+    public void saveEnergyValueRegistryToFile()
+    {
+        // TODO
+    }
+
+    public void loadEnergyValueRegistryFromFile()
+    {
+        // TODO
     }
 }
