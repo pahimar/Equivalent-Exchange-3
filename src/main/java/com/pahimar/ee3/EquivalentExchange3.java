@@ -16,7 +16,6 @@ import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,8 +23,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class EquivalentExchange3
@@ -114,26 +111,11 @@ public class EquivalentExchange3
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event)
     {
-        if (EnergyValueRegistry.getInstance().getShouldRegenNextRestart())
-        {
-            // TODO Use the SerializationHelper to save this and reduce File objects
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-            dataDirectory.mkdirs();
-            File energyValueRegistryFile = new File(dataDirectory, SerializationHelper.getModListMD5() + ".dat");
+        WorldEventHandler.hasInitilialized = false;
 
-            if (energyValueRegistryFile.exists())
-            {
-                energyValueRegistryFile.delete();
-            }
-        }
-        else
-        {
-            SerializationHelper.writeNBTToFile(new File(SerializationHelper.getDataDirectory(), "energyvalues"), SerializationHelper.getModListMD5() + ".dat", getEnergyValueRegistry());
-        }
+        EnergyValueRegistry.getInstance().saveEnergyValueRegistryToFile();
 
         TransmutationKnowledgeRegistry.getInstance().saveAll();
-
-        WorldEventHandler.hasInitilialized = false;
 
         AbilityRegistry.getInstance().saveAbilityRegistryToFile();
     }
