@@ -18,11 +18,10 @@ import java.util.List;
 
 public class ItemAlchemicalInventoryUpgrade extends ItemEE
 {
-    public ItemAlchemicalInventoryUpgrade()
+    public ItemAlchemicalInventoryUpgrade(Names.Items.ALCHEMICAL_UPGRADE)
     {
         super();
         this.setMaxStackSize(64);
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_UPGRADE);
         this.setHasSubtypes(true);
     }
 

@@ -11,10 +11,9 @@ import net.minecraft.world.World;
 
 public class ItemAlchemicalTome extends ItemEE implements IOwnable
 {
-    public ItemAlchemicalTome()
+    public ItemAlchemicalTome(Names.Items.ALCHEMICAL_TOME)
     {
         super();
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_TOME);
     }
 
     @Override

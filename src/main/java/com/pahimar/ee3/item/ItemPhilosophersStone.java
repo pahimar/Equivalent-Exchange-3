@@ -12,10 +12,9 @@ public class ItemPhilosophersStone extends ItemEE implements IKeyBound, IOverlay
 {
     private int maxChargeLevel;
 
-    public ItemPhilosophersStone()
+    public ItemPhilosophersStone(Names.Items.PHILOSOPHERS_STONE)
     {
         super();
-        this.setUnlocalizedName(Names.Items.PHILOSOPHERS_STONE);
         this.setMaxDamage(1000);
         this.maxChargeLevel = 3;
     }

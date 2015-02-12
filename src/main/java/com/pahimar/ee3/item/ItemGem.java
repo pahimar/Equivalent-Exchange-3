@@ -18,12 +18,11 @@ public class ItemGem extends ItemEE
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public ItemGem()
+    public ItemGem(Names.Items.GEM)
     {
         super();
         this.setMaxStackSize(64);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.GEM);
     }
 
     @Override

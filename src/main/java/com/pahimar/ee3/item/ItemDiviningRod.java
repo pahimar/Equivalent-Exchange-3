@@ -4,10 +4,9 @@ import com.pahimar.ee3.reference.Names;
 
 public class ItemDiviningRod extends ItemEE
 {
-    public ItemDiviningRod()
+    public ItemDiviningRod(Names.Items.DIVINING_ROD)
     {
         super();
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.DIVINING_ROD);
     }
 }

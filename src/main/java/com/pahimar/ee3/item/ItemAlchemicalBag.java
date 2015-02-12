@@ -30,11 +30,10 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public ItemAlchemicalBag()
+    public ItemAlchemicalBag(Names.Items.ALCHEMICAL_BAG)
     {
         super();
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_BAG);
     }
 
     @Override

@@ -4,10 +4,9 @@ import com.pahimar.ee3.reference.Names;
 
 public class ItemMiniumShard extends ItemEE
 {
-    public ItemMiniumShard()
+    public ItemMiniumShard(Names.Items.MINIUM_SHARD)
     {
         super();
         this.setMaxStackSize(64);
-        this.setUnlocalizedName(Names.Items.MINIUM_SHARD);
     }
 }

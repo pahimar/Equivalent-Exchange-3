@@ -18,12 +18,11 @@ public class ItemMatter extends ItemEE
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public ItemMatter()
+    public ItemMatter(Names.Items.MATTER)
     {
         super();
         this.setMaxStackSize(64);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.MATTER);
     }
 
     @Override
