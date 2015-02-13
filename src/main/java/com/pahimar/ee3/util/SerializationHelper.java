@@ -190,7 +190,8 @@ public class SerializationHelper
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(String fileName)
     {
-        return readEnergyValueStackMapFromJsonFile(getFileInDataDirectory(fileName));
+        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        return readEnergyValueStackMapFromJsonFile(new File(energyValuesDataDirectory, fileName));
     }
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(File jsonFile)
@@ -223,7 +224,8 @@ public class SerializationHelper
 
     public static void writeEnergyValueStackMapToJsonFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)
     {
-        writeEnergyValueStackMapToJsonFile(getFileInDataDirectory(fileName), energyValueMap);
+        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        writeEnergyValueStackMapToJsonFile(new File(energyValuesDataDirectory, fileName), energyValueMap);
     }
 
     public static void writeEnergyValueStackMapToJsonFile(File jsonFile, Map<WrappedStack, EnergyValue> energyValueMap)
@@ -247,16 +249,5 @@ public class SerializationHelper
         {
             e.printStackTrace();
         }
-    }
-
-    public static File getFileInDataDirectory(String fileName)
-    {
-        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null && FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld() != null)
-        {
-            File dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + "ee3");
-            return new File(dataDirectory, fileName);
-        }
-
-        return null;
     }
 }

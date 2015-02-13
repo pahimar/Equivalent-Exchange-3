@@ -99,24 +99,20 @@ public class CommandSetEnergyValue extends CommandBase
                 File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
                 if (args[1].equalsIgnoreCase("pre"))
                 {
-                    File preAssignedValuesFile = new File(energyValuesDataDirectory, Files.PRE_ASSIGNED_ENERGY_VALUES);
-
-                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(preAssignedValuesFile);
+                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES);
                     preAssignedValues.put(wrappedStack, newEnergyValue);
 
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(preAssignedValuesFile, preAssignedValues);
+                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES, preAssignedValues);
                     EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
                 }
                 else if (args[1].equalsIgnoreCase("post"))
                 {
                     EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
 
-                    File postAssignedValuesFile = new File(energyValuesDataDirectory, Files.POST_ASSIGNED_ENERGY_VALUES);
-
-                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(postAssignedValuesFile);
+                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_ASSIGNED_ENERGY_VALUES);
                     postAssignedValues.put(wrappedStack, newEnergyValue);
 
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(postAssignedValuesFile, postAssignedValues);
+                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.POST_ASSIGNED_ENERGY_VALUES, postAssignedValues);
                     PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
                 }
 
