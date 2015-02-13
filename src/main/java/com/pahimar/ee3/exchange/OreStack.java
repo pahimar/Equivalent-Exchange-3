@@ -98,15 +98,18 @@ public class OreStack implements Comparable<OreStack>
 
     public static OreStack getOreStackFromList(List<?> objectList)
     {
-        for (Object listElement : objectList)
+        if (objectList.size() > 0)
         {
-            if (listElement instanceof ItemStack)
+            for (Object listElement : objectList)
             {
-                ItemStack stack = (ItemStack) listElement;
-
-                if (OreDictionary.getOreIDs(stack).length > 0)
+                if (listElement instanceof ItemStack)
                 {
-                    return new OreStack(stack);
+                    ItemStack stack = (ItemStack) listElement;
+
+                    if (OreDictionary.getOreIDs(stack).length > 0)
+                    {
+                        return new OreStack(stack);
+                    }
                 }
             }
         }

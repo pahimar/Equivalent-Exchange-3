@@ -10,6 +10,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,31 +76,35 @@ public class RecipeHelper
         {
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
 
-            for (int i = 0; i < shapedOreRecipe.getInput().length; i++)
+            //            if (validateShapedOreDictionaryRecipe(shapedOreRecipe.getInput()))
+            if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput())))
             {
+                for (int i = 0; i < shapedOreRecipe.getInput().length; i++)
+                {
                 /*
                  * If the element is a list, then it is an OreStack
                  */
-                if (shapedOreRecipe.getInput()[i] instanceof ArrayList)
-                {
-                    WrappedStack oreStack = new WrappedStack(shapedOreRecipe.getInput()[i]);
-
-                    if (oreStack.getWrappedStack() instanceof OreStack)
+                    if (shapedOreRecipe.getInput()[i] instanceof ArrayList)
                     {
-                        recipeInputs.add(oreStack);
+                        WrappedStack oreStack = new WrappedStack(shapedOreRecipe.getInput()[i]);
+
+                        if (oreStack.getWrappedStack() instanceof OreStack)
+                        {
+                            recipeInputs.add(oreStack);
+                        }
                     }
-                }
-                else if (shapedOreRecipe.getInput()[i] instanceof ItemStack)
-                {
-
-                    ItemStack itemStack = ((ItemStack) shapedOreRecipe.getInput()[i]).copy();
-
-                    if (itemStack.stackSize > 1)
+                    else if (shapedOreRecipe.getInput()[i] instanceof ItemStack)
                     {
-                        itemStack.stackSize = 1;
-                    }
 
-                    recipeInputs.add(new WrappedStack(itemStack));
+                        ItemStack itemStack = ((ItemStack) shapedOreRecipe.getInput()[i]).copy();
+
+                        if (itemStack.stackSize > 1)
+                        {
+                            itemStack.stackSize = 1;
+                        }
+
+                        recipeInputs.add(new WrappedStack(itemStack));
+                    }
                 }
             }
         }
@@ -107,24 +112,27 @@ public class RecipeHelper
         {
             ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
 
-            for (Object object : shapelessOreRecipe.getInput())
+            if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput()))
             {
-
-                if (object instanceof ArrayList)
-                {
-                    recipeInputs.add(new WrappedStack(object));
-                }
-                else if (object instanceof ItemStack)
+                for (Object object : shapelessOreRecipe.getInput())
                 {
 
-                    ItemStack itemStack = ((ItemStack) object).copy();
-
-                    if (itemStack.stackSize > 1)
+                    if (object instanceof ArrayList)
                     {
-                        itemStack.stackSize = 1;
+                        recipeInputs.add(new WrappedStack(object));
                     }
+                    else if (object instanceof ItemStack)
+                    {
 
-                    recipeInputs.add(new WrappedStack(itemStack));
+                        ItemStack itemStack = ((ItemStack) object).copy();
+
+                        if (itemStack.stackSize > 1)
+                        {
+                            itemStack.stackSize = 1;
+                        }
+
+                        recipeInputs.add(new WrappedStack(itemStack));
+                    }
                 }
             }
         }
@@ -193,5 +201,30 @@ public class RecipeHelper
         }
         Collections.sort(collatedStacks);
         return collatedStacks;
+    }
+
+    /**
+     * Validates the list of recipe inputs for an OreDictionary recipe to ensure that if there is an
+     * OreDictionary entry found in the recipe (a list) that it is not empty (that there are ItemStacks
+     * associated with that particular OreDictionary entry)
+     *
+     * @param objects a list of recipe inputs for an OreDictionary recipe
+     * @return true if there exists no "invalid" (empty) OreDictionary entries in the provided list of recipe inputs
+     */
+    private static boolean validateOreDictionaryRecipe(List objects)
+    {
+        for (Object object : objects)
+        {
+            if (object instanceof ArrayList)
+            {
+                ArrayList list = (ArrayList) object;
+                if (list.isEmpty())
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
