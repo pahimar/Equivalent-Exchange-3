@@ -88,7 +88,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 
     public void add(EnergyValue energyValue)
     {
-        if (this.energyType == energyValue.energyType && energyValue.energyValue > 0f)
+        if (energyValue != null && this.energyType == energyValue.energyType && energyValue.energyValue > 0f)
         {
             this.energyValue += energyValue.energyValue;
         }
@@ -96,7 +96,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 
     public void subtract(EnergyValue energyValue)
     {
-        if (this.energyType == energyValue.energyType && (this.energyValue - energyValue.energyValue) >= 0f)
+        if (energyValue != null && this.energyType == energyValue.energyType && (this.energyValue - energyValue.energyValue) >= 0f)
         {
             this.energyValue -= energyValue.energyValue;
         }
