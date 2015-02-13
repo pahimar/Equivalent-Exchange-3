@@ -750,6 +750,8 @@ public class EnergyValueRegistry implements INBTTaggable
             {
                 md5EnergyValuesFile.delete();
             }
+
+            shouldRegenNextRestart = false;
         }
         else
         {
