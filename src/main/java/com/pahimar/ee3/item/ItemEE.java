@@ -10,12 +10,13 @@ import net.minecraft.item.ItemStack;
 
 public class ItemEE extends Item
 {
-    public ItemEE()
+    public ItemEE(name)
     {
         super();
         this.maxStackSize = 1;
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
+        this.setUnlocalizedName(name);
     }
 
     @Override

@@ -16,12 +16,11 @@ import java.util.List;
 
 public class ItemAlchemicalDust extends ItemEE
 {
-    public ItemAlchemicalDust()
+    public ItemAlchemicalDust(Names.Items.ALCHEMICAL_DUST)
     {
         super();
         this.setMaxStackSize(64);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_DUST);
     }
 
     public static List<ItemStack> getAlchemicalDusts()

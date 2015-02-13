@@ -18,12 +18,11 @@ public class ItemAlchemicalFuel extends ItemEE
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    public ItemAlchemicalFuel()
+    public ItemAlchemicalFuel(Names.Items.ALCHEMICAL_FUEL)
     {
         super();
         this.setMaxStackSize(64);
         this.setHasSubtypes(true);
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_FUEL);
     }
 
     @Override

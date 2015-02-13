@@ -11,10 +11,9 @@ import net.minecraft.world.World;
 
 public class ItemChalk extends ItemEE implements IKeyBound
 {
-    public ItemChalk()
+    public ItemChalk(Names.Items.CHALK)
     {
         super();
-        this.setUnlocalizedName(Names.Items.CHALK);
     }
 
     @Override

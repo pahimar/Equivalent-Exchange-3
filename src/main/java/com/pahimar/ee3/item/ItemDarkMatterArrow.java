@@ -4,10 +4,9 @@ import com.pahimar.ee3.reference.Names;
 
 public class ItemDarkMatterArrow extends ItemEE
 {
-    public ItemDarkMatterArrow()
+    public ItemDarkMatterArrow(Names.Weapons.DARK_MATTER_ARROW)
     {
         super();
         this.setMaxStackSize(64);
-        this.setUnlocalizedName(Names.Weapons.DARK_MATTER_ARROW);
     }
 }

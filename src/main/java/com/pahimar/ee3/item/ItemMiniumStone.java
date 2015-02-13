@@ -12,10 +12,9 @@ import net.minecraft.item.ItemStack;
 
 public class ItemMiniumStone extends ItemEE implements IKeyBound
 {
-    public ItemMiniumStone()
+    public ItemMiniumStone(Names.Items.MINIUM_STONE)
     {
         super();
-        this.setUnlocalizedName(Names.Items.MINIUM_STONE);
         this.setMaxDamage(1000); // TODO Get this from configs
     }
 
