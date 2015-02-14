@@ -37,7 +37,6 @@ public class EnergyValueHelper
                         wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
                     }
                 }
-                // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
                 else if (itemStack.getItem().getContainerItem(itemStack) != null)
                 {
                     ItemStack containerItemStack = itemStack.getItem().getContainerItem(itemStack);

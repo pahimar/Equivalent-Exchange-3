@@ -25,8 +25,8 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     private AbilityRegistry()
     {
-        abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
-        abilityDirectory.mkdirs();
+        //        abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
+        //        abilityDirectory.mkdirs();
 
         hasBeenModified = false;
         notLearnableSet = new TreeSet<WrappedStack>();
@@ -247,6 +247,11 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
             {
                 readFromFile(abilitiesFile, loadFileOnly);
             }
+        }
+        else
+        {
+            abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
+            abilityDirectory.mkdirs();
         }
     }
 

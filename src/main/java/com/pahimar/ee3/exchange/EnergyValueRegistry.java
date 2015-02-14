@@ -387,9 +387,12 @@ public class EnergyValueRegistry implements INBTTaggable
         int passNumber = 0;
         long computationStartTime = System.currentTimeMillis();
         long passStartTime;
-        LogHelper.info("DynamicEV beginning dynamic value computation");
+        int computedValueCount;
+        int totalComputedValueCount = 0;
+        LogHelper.info("Beginning dynamic value computation");
         while ((computedStackValues.size() > 0) && (passNumber < 16))
         {
+            computedValueCount = 0;
             passStartTime = System.currentTimeMillis();
             // Increment the pass counter
             passNumber++;
@@ -428,12 +431,14 @@ public class EnergyValueRegistry implements INBTTaggable
                     else
                     {
                         stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
+                        computedValueCount++;
+                        totalComputedValueCount++;
                     }
                 }
             }
-            LogHelper.info(String.format("DynamicEV pass %s took %s ms", passNumber, System.currentTimeMillis() - passStartTime));
+            LogHelper.info(String.format("Pass %s: Computed %s values for obejcts in %s ms", passNumber, computedValueCount, System.currentTimeMillis() - passStartTime));
         }
-        LogHelper.info(String.format("DynamicEV dynamic value computation completed in %s ms", System.currentTimeMillis() - computationStartTime));
+        LogHelper.info(String.format("Finished dynamic value computation (computed %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
 
         /*
          *  Post-assigned values
@@ -460,7 +465,6 @@ public class EnergyValueRegistry implements INBTTaggable
         stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
-
 
         /**
          *  Value map resolution
@@ -489,10 +493,10 @@ public class EnergyValueRegistry implements INBTTaggable
                 }
             }
         }
-
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
 
         // Serialize values to disk
+        LogHelper.info("Saving energy values to disk");
         saveEnergyValueRegistryToFile();
     }
 
