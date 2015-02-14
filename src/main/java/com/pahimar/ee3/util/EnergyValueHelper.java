@@ -2,9 +2,11 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
@@ -36,14 +38,40 @@ public class EnergyValueHelper
                     }
                 }
                 // If we are dealing with a "tool" (container item), assume it's value is 0 (since it won't be used up in the recipe)
-                // TODO Come back and optimize this a bit better - we aren't generating values properly here (we're missing things that should be lower than they are)
-                else if (itemStack.getItem() != null && (itemStack.getItem().getContainerItem(itemStack) != null || !itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)))
+                else if (itemStack.getItem().getContainerItem(itemStack) != null)
+                {
+                    ItemStack containerItemStack = itemStack.getItem().getContainerItem(itemStack);
+
+                    if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && EnergyValueRegistry.getInstance().hasEnergyValue(containerItemStack))
+                    {
+                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValue(itemStack).getEnergyValue();
+                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValue(containerItemStack).getEnergyValue();
+                        wrappedStackValue = new EnergyValue(itemStackValue - containerStackValue);
+                    }
+                    else
+                    {
+                        wrappedStackValue = new EnergyValue(0);
+                    }
+                }
+                else if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack))
                 {
                     wrappedStackValue = new EnergyValue(0);
                 }
                 else
                 {
                     wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                }
+            }
+            else if (wrappedStack.getWrappedStack() instanceof OreStack)
+            {
+                OreStack oreStack = (OreStack) wrappedStack.getWrappedStack();
+                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                for (ItemStack itemStack : OreDictionary.getOres(oreStack.oreName))
+                {
+                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack))
+                    {
+                        wrappedStackValue = new EnergyValue(0);
+                    }
                 }
             }
             else
