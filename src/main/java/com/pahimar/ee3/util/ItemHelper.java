@@ -205,7 +205,7 @@ public class ItemHelper
                                 return true;
                             }
                         }
-                        else
+                        else if (!itemStack1.hasTagCompound() && !itemStack2.hasTagCompound())
                         {
                             return true;
                         }
