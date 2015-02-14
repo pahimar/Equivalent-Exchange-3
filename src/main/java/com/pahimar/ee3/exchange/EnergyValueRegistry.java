@@ -387,7 +387,7 @@ public class EnergyValueRegistry implements INBTTaggable
         int passNumber = 0;
         long computationStartTime = System.currentTimeMillis();
         long passStartTime;
-        LogHelper.trace("DynamicEV beginning dynamic value computation");
+        LogHelper.info("DynamicEV beginning dynamic value computation");
         while ((computedStackValues.size() > 0) && (passNumber < 16))
         {
             passStartTime = System.currentTimeMillis();
@@ -431,9 +431,9 @@ public class EnergyValueRegistry implements INBTTaggable
                     }
                 }
             }
-            LogHelper.trace(String.format("DynamicEV pass %s took %s ms", passNumber, System.currentTimeMillis() - passStartTime));
+            LogHelper.info(String.format("DynamicEV pass %s took %s ms", passNumber, System.currentTimeMillis() - passStartTime));
         }
-        LogHelper.trace(String.format("DynamicEV dynamic value computation completed in %s ms", System.currentTimeMillis() - computationStartTime));
+        LogHelper.info(String.format("DynamicEV dynamic value computation completed in %s ms", System.currentTimeMillis() - computationStartTime));
 
         /*
          *  Post-assigned values
