@@ -1,6 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
+import com.google.gson.*;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.IEnergyValueProvider;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -20,13 +21,16 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.*;
 
-public class EnergyValueRegistry implements INBTTaggable
+public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
+    private static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+    private static final Gson prettyJsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
-    private static String modListMD5;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
     private static Map<WrappedStack, EnergyValue> postAssignedMappings;
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
@@ -34,7 +38,6 @@ public class EnergyValueRegistry implements INBTTaggable
 
     private EnergyValueRegistry()
     {
-        modListMD5 = SerializationHelper.getModListMD5();
     }
 
     public static EnergyValueRegistry getInstance()
@@ -469,6 +472,15 @@ public class EnergyValueRegistry implements INBTTaggable
         /**
          *  Value map resolution
          */
+        generateValueStackMappings();
+
+        // Serialize values to disk
+        LogHelper.info("Saving energy values to disk");
+        saveEnergyValueRegistryToFile();
+    }
+
+    private void generateValueStackMappings()
+    {
         SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
 
         for (WrappedStack stack : stackMappings.keySet())
@@ -494,10 +506,6 @@ public class EnergyValueRegistry implements INBTTaggable
             }
         }
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
-
-        // Serialize values to disk
-        LogHelper.info("Saving energy values to disk");
-        saveEnergyValueRegistryToFile();
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()
@@ -596,11 +604,6 @@ public class EnergyValueRegistry implements INBTTaggable
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("modListMD5"))
-        {
-            this.modListMD5 = nbtTagCompound.getString("modListMD5");
-        }
-
         if (nbtTagCompound != null && nbtTagCompound.hasKey("stackMappingList"))
         {
             HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
@@ -624,32 +627,7 @@ public class EnergyValueRegistry implements INBTTaggable
             /**
              *  Resolve value stack mappings from the newly loaded stack mappings
              */
-            SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
-
-            for (WrappedStack stack : stackMappings.keySet())
-            {
-                if (stack != null)
-                {
-                    EnergyValue value = stackMappings.get(stack);
-
-                    if (value != null)
-                    {
-                        if (tempValueMappings.containsKey(value))
-                        {
-                            if (!(tempValueMappings.get(value).contains(stack)))
-                            {
-                                tempValueMappings.get(value).add(stack);
-                            }
-                        }
-                        else
-                        {
-                            tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
-                        }
-                    }
-                }
-            }
-
-            valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+            generateValueStackMappings();
         }
     }
 
@@ -805,5 +783,53 @@ public class EnergyValueRegistry implements INBTTaggable
             LogHelper.info("No energy value file to load values from, generating new values");
             return false;
         }
+    }
+
+    public String toJson()
+    {
+        return jsonSerializer.toJson(this);
+    }
+
+    @Override
+    public EnergyValueRegistry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
+        if (json.isJsonArray())
+        {
+            JsonArray jsonArray = (JsonArray) json;
+            Map<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+            Iterator<JsonElement> iterator = jsonArray.iterator();
+
+            while (iterator.hasNext())
+            {
+                JsonElement jsonElement = iterator.next();
+                EnergyValueStackMapping energyValueStackMapping = new EnergyValueStackMapping().deserialize(jsonElement, typeOfT, context);
+
+                if (energyValueStackMapping != null)
+                {
+                    stackValueMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
+                }
+            }
+
+            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+            stackMappingsBuilder.putAll(stackValueMap);
+            stackMappings = stackMappingsBuilder.build();
+
+            generateValueStackMappings();
+        }
+
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(EnergyValueRegistry energyValueRegistry, Type typeOfSrc, JsonSerializationContext context)
+    {
+        JsonArray jsonEnergyValueRegistry = new JsonArray();
+
+        for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet())
+        {
+            jsonEnergyValueRegistry.add(EnergyValueStackMapping.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
+        }
+
+        return jsonEnergyValueRegistry;
     }
 }

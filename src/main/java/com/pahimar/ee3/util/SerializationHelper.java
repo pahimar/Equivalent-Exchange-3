@@ -128,7 +128,8 @@ public class SerializationHelper
             }
             catch (Exception exception)
             {
-                LogHelper.warn(String.format("Failed to save %s to file: %s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), fileName));
+                LogHelper.warn(String.format("Failed to save %s to file: %s%s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), File.separator, fileName));
+                exception.printStackTrace();
             }
         }
     }
