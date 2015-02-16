@@ -29,7 +29,10 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
         if (!world.isRemote)
         {
             // Set the owner
-            ItemHelper.setOwner(itemStack, entityPlayer);
+            if (!ItemHelper.hasOwner(itemStack))
+            {
+                ItemHelper.setOwner(itemStack, entityPlayer);
+            }
         }
         else
         {

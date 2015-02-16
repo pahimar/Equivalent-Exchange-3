@@ -3,6 +3,7 @@ package com.pahimar.ee3.knowledge;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -25,9 +26,6 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     private AbilityRegistry()
     {
-        //        abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
-        //        abilityDirectory.mkdirs();
-
         hasBeenModified = false;
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
@@ -60,7 +58,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         if (WrappedStack.canBeWrapped(object))
         {
             WrappedStack wrappedObject = new WrappedStack(object);
-            return !notLearnableSet.contains(wrappedObject);
+            return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
         }
 
         return false;
@@ -91,7 +89,8 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            return !notRecoverableSet.contains(new WrappedStack(object));
+            WrappedStack wrappedObject = new WrappedStack(object);
+            return !notRecoverableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
         }
 
         return false;

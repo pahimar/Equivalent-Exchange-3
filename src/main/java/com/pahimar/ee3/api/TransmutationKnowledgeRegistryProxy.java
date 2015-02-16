@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class TransmutationKnowledgeRegistryProxy
 {
@@ -16,6 +17,18 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().doesPlayerKnow(entityPlayer, itemStack);
+        }
+
+        return false;
+    }
+
+    public static boolean doesPlayerKnow(UUID playerUUID, ItemStack itemStack)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().doesPlayerKnow(playerUUID, itemStack);
         }
 
         return false;
@@ -33,6 +46,18 @@ public class TransmutationKnowledgeRegistryProxy
         return false;
     }
 
+    public static boolean canPlayerLearn(UUID playerUUID, ItemStack itemStack)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().canPlayerLearn(playerUUID, itemStack);
+        }
+
+        return false;
+    }
+
     public static Set<ItemStack> getPlayerKnownTransmutations(EntityPlayer entityPlayer)
     {
         init();
@@ -40,6 +65,18 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutations(entityPlayer);
+        }
+
+        return null;
+    }
+
+    public static Set<ItemStack> getPlayerKnownTransmutations(UUID playerUUID)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutations(playerUUID);
         }
 
         return null;
@@ -57,6 +94,18 @@ public class TransmutationKnowledgeRegistryProxy
         return null;
     }
 
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredStartsWith(UUID playerUUID, String filterString)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredStartsWith(playerUUID, filterString);
+        }
+
+        return null;
+    }
+
     public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(EntityPlayer entityPlayer, String filterString)
     {
         init();
@@ -64,6 +113,18 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredContains(entityPlayer, filterString);
+        }
+
+        return null;
+    }
+
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(UUID playerUUID, String filterString)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredContains(playerUUID, filterString);
         }
 
         return null;
@@ -79,6 +140,16 @@ public class TransmutationKnowledgeRegistryProxy
         }
     }
 
+    public static void teachPlayer(UUID playerUUID, ItemStack itemStack)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayer(playerUUID, itemStack);
+        }
+    }
+
     public static void teachPlayerEverything(EntityPlayer entityPlayer)
     {
         init();
@@ -86,6 +157,16 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayerEverything(entityPlayer);
+        }
+    }
+
+    public static void teachPlayerEverything(UUID playerUUID)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayerEverything(playerUUID);
         }
     }
 
@@ -99,6 +180,16 @@ public class TransmutationKnowledgeRegistryProxy
         }
     }
 
+    public static void makePlayerForget(UUID playerUUID, ItemStack itemStack)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForget(playerUUID, itemStack);
+        }
+    }
+
     public static void makePlayerForgetEverything(EntityPlayer entityPlayer)
     {
         init();
@@ -106,6 +197,16 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForgetEverything(entityPlayer);
+        }
+    }
+
+    public static void makePlayerForgetEverything(UUID playerUUID)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForgetEverything(playerUUID);
         }
     }
 

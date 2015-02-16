@@ -39,6 +39,8 @@ public final class Textures
         public static final ResourceLocation ALCHEMICAL_CHEST_LARGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_large.png");
         public static final ResourceLocation GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
         public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation.png");
+        public static final ResourceLocation RESEARCH_STATION_GYLPH_1 = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation_Glyph1.png");
+        public static final ResourceLocation RESEARCH_STATION_GYLPH_2 = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation_Glyph2.png");
         public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "augmentationTable.png");
         public static final ResourceLocation PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
         public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalTome.png");

@@ -169,11 +169,21 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
+            return getPlayersKnownTransmutations(entityPlayer.getUniqueID());
+        }
 
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+        return null;
+    }
+
+    public Set<ItemStack> getPlayersKnownTransmutations(UUID playerUUID)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                return playerKnowledgeMap.get(entityPlayer.getUniqueID()).getKnownTransmutations();
+                return playerKnowledgeMap.get(playerUUID).getKnownTransmutations();
             }
         }
 
@@ -184,11 +194,21 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
+            return getPlayersKnownTransmutationsFilteredStartsWith(entityPlayer.getUniqueID(), startsWith);
+        }
 
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+        return null;
+    }
+
+    public Set<ItemStack> getPlayersKnownTransmutationsFilteredStartsWith(UUID playerUUID, String startsWith)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                return playerKnowledgeMap.get(entityPlayer.getUniqueID()).filterByNameStartsWith(startsWith);
+                return playerKnowledgeMap.get(playerUUID).filterByNameStartsWith(startsWith);
             }
         }
 
@@ -199,11 +219,21 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
+            return getPlayersKnownTransmutationsFilteredContains(entityPlayer.getUniqueID(), contains);
+        }
 
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+        return null;
+    }
+
+    public Set<ItemStack> getPlayersKnownTransmutationsFilteredContains(UUID playerUUID, String contains)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                return playerKnowledgeMap.get(entityPlayer.getUniqueID()).filterByNameContains(contains);
+                return playerKnowledgeMap.get(playerUUID).filterByNameContains(contains);
             }
         }
 
@@ -225,17 +255,42 @@ public class TransmutationKnowledgeRegistry
         return false;
     }
 
+    public boolean doesPlayerKnow(UUID playerUUID, ItemStack itemStack)
+    {
+        if (playerUUID != null && itemStack != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+
+            if (playerKnowledgeMap.containsKey(playerUUID))
+            {
+                return playerKnowledgeMap.get(playerUUID).isKnown(itemStack);
+            }
+        }
+
+        return false;
+    }
+
     public boolean canPlayerLearn(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        if (entityPlayer != null && itemStack != null)
+        if (entityPlayer != null)
+        {
+            return canPlayerLearn(entityPlayer.getUniqueID(), itemStack);
+        }
+
+        return false;
+    }
+
+    public boolean canPlayerLearn(UUID playerUUID, ItemStack itemStack)
+    {
+        if (playerUUID != null && itemStack != null)
         {
             if (AbilityRegistry.getInstance().isLearnable(itemStack))
             {
-                loadPlayerFromDiskIfNeeded(entityPlayer);
+                loadPlayerFromDiskIfNeeded(playerUUID);
 
-                if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+                if (playerKnowledgeMap.containsKey(playerUUID))
                 {
-                    return !playerKnowledgeMap.get(entityPlayer.getUniqueID()).isKnown(itemStack);
+                    return !playerKnowledgeMap.get(playerUUID).isKnown(itemStack);
                 }
             }
         }
@@ -245,12 +300,21 @@ public class TransmutationKnowledgeRegistry
 
     public void teachPlayer(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        if (entityPlayer != null && itemStack != null && canPlayerLearn(entityPlayer, itemStack))
+        if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            teachPlayer(entityPlayer.getUniqueID(), itemStack);
+        }
+    }
+
+    public void teachPlayer(UUID playerUUID, ItemStack itemStack)
+    {
+        if (playerUUID != null && itemStack != null && canPlayerLearn(playerUUID, itemStack))
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                playerKnowledgeMap.get(entityPlayer.getUniqueID()).learnTransmutation(itemStack);
+                playerKnowledgeMap.get(playerUUID).learnTransmutation(itemStack);
+                savePlayerKnowledgeToDisk(playerUUID);
             }
         }
     }
@@ -259,11 +323,20 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
+            teachPlayerEverything(entityPlayer.getUniqueID());
+        }
+    }
 
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+    public void teachPlayerEverything(UUID playerUUID)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                playerKnowledgeMap.get(entityPlayer.getUniqueID()).setCanTransmuteEverything(true);
+                playerKnowledgeMap.get(playerUUID).setCanTransmuteEverything(true);
+                savePlayerKnowledgeToDisk(playerUUID);
             }
         }
     }
@@ -272,22 +345,40 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            setPlayerCanTransmuteEverything(entityPlayer.getUniqueID(), canTransmuteEverything);
+        }
+    }
+
+    public void setPlayerCanTransmuteEverything(UUID playerUUID, boolean canTransmuteEverything)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                playerKnowledgeMap.get(entityPlayer.getUniqueID()).setCanTransmuteEverything(canTransmuteEverything);
+                playerKnowledgeMap.get(playerUUID).setCanTransmuteEverything(canTransmuteEverything);
+                savePlayerKnowledgeToDisk(playerUUID);
             }
         }
     }
 
     public void makePlayerForget(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        if (entityPlayer != null && itemStack != null && doesPlayerKnow(entityPlayer, itemStack))
+        if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            makePlayerForget(entityPlayer.getUniqueID(), itemStack);
+        }
+    }
+
+    public void makePlayerForget(UUID playerUUID, ItemStack itemStack)
+    {
+        if (playerUUID != null && itemStack != null && doesPlayerKnow(playerUUID, itemStack))
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                playerKnowledgeMap.get(entityPlayer.getUniqueID()).forgetTransmutation(itemStack);
+                playerKnowledgeMap.get(playerUUID).forgetTransmutation(itemStack);
+                savePlayerKnowledgeToDisk(playerUUID);
             }
         }
     }
@@ -296,10 +387,19 @@ public class TransmutationKnowledgeRegistry
     {
         if (entityPlayer != null)
         {
-            loadPlayerFromDiskIfNeeded(entityPlayer);
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            makePlayerForgetEverything(entityPlayer.getUniqueID());
+        }
+    }
+
+    public void makePlayerForgetEverything(UUID playerUUID)
+    {
+        if (playerUUID != null)
+        {
+            loadPlayerFromDiskIfNeeded(playerUUID);
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                playerKnowledgeMap.get(entityPlayer.getUniqueID()).forgetAllTransmutations();
+                playerKnowledgeMap.get(playerUUID).forgetAllTransmutations();
+                savePlayerKnowledgeToDisk(playerUUID);
             }
         }
     }
@@ -349,48 +449,72 @@ public class TransmutationKnowledgeRegistry
 
     public void loadPlayerFromDiskIfNeeded(EntityPlayer entityPlayer)
     {
-        if (entityPlayer != null && entityPlayer.getUniqueID() != null && playerKnowledgeDirectory != null)
+        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            if (!playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            loadPlayerFromDiskIfNeeded(entityPlayer.getUniqueID());
+        }
+    }
+
+    public void loadPlayerFromDiskIfNeeded(UUID playerUUID)
+    {
+        if (playerUUID != null && playerKnowledgeDirectory != null && !playerKnowledgeMap.containsKey(playerUUID))
+        {
+            TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
+
+            File playerKnowledgeFile = new File(playerKnowledgeDirectory, playerUUID.toString() + ".json");
+
+            if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
             {
-                TransmutationKnowledge playerTransmutationKnowledge = new TransmutationKnowledge();
-
-                File playerKnowledgeFile = new File(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
-
-                if (playerKnowledgeFile.exists() && playerKnowledgeFile.isFile())
-                {
-                    playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json");
-                }
-
-                playerKnowledgeMap.put(entityPlayer.getUniqueID(), playerTransmutationKnowledge);
+                playerTransmutationKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(playerKnowledgeDirectory, playerUUID.toString() + ".json");
             }
+
+            playerKnowledgeMap.put(playerUUID, playerTransmutationKnowledge);
         }
     }
 
     public void unloadPlayer(EntityPlayer entityPlayer)
     {
-        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
+        if (entityPlayer != null)
         {
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()))
+            unloadPlayer(entityPlayer.getUniqueID());
+        }
+    }
+
+    public void unloadPlayer(UUID playerUUID)
+    {
+        if (playerUUID != null)
+        {
+            if (playerKnowledgeMap.containsKey(playerUUID))
             {
-                savePlayerKnowledgeToDisk(entityPlayer);
-                playerKnowledgeMap.remove(entityPlayer.getUniqueID());
+                savePlayerKnowledgeToDisk(playerUUID);
+                playerKnowledgeMap.remove(playerUUID);
             }
         }
     }
 
     public void savePlayerKnowledgeToDisk(EntityPlayer entityPlayer)
     {
-        if (entityPlayer != null && entityPlayer.getUniqueID() != null && playerKnowledgeDirectory != null)
+        if (entityPlayer != null && entityPlayer.getUniqueID() != null)
         {
-            if (playerKnowledgeMap.containsKey(entityPlayer.getUniqueID()) && playerKnowledgeMap.get(entityPlayer.getUniqueID()) != null && playerKnowledgeMap.get(entityPlayer.getUniqueID()).hasBeenModified())
+            savePlayerKnowledgeToDisk(entityPlayer.getUniqueID());
+        }
+    }
+
+    public void savePlayerKnowledgeToDisk(UUID playerUUID)
+    {
+        if (playerUUID != null && playerKnowledgeDirectory != null)
+        {
+            if (playerKnowledgeMap.containsKey(playerUUID) && playerKnowledgeMap.get(playerUUID) != null)
             {
-                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", playerKnowledgeMap.get(entityPlayer.getUniqueID()));
+                if (playerKnowledgeMap.get(playerUUID).hasBeenModified())
+                {
+                    SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
+                }
             }
             else
             {
-                loadPlayerFromDiskIfNeeded(entityPlayer);
-                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, entityPlayer.getUniqueID().toString() + ".json", new TransmutationKnowledge());
+                loadPlayerFromDiskIfNeeded(playerUUID);
+                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", new TransmutationKnowledge());
             }
         }
     }

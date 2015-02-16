@@ -1,5 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.item.ItemAlchemicalTome;
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,21 +15,43 @@ public class ContainerResearchStation extends ContainerEE
 {
     private TileEntityResearchStation tileEntityResearchStation;
     private int lastItemLearnTime;
+    private boolean isItemStackKnown;
 
     public ContainerResearchStation(InventoryPlayer inventoryPlayer, TileEntityResearchStation tileEntityResearchStation)
     {
         this.tileEntityResearchStation = tileEntityResearchStation;
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 122, 84)
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, 79, 84)
         {
             @Override
             public int getSlotStackLimit()
             {
                 return 1;
             }
+
+            @Override
+            public boolean isItemValid(ItemStack itemStack)
+            {
+                return AbilityRegistry.getInstance().isLearnable(itemStack);
+            }
         });
 
-        // Add the player's inventory slots to the container
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 161, 84)
+        {
+            @Override
+            public int getSlotStackLimit()
+            {
+                return 1;
+            }
+
+            @Override
+            public boolean isItemValid(ItemStack itemStack)
+            {
+                return itemStack.getItem() instanceof ItemAlchemicalTome;
+            }
+        });
+
+        // Add the entityPlayer's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
@@ -36,7 +60,7 @@ public class ContainerResearchStation extends ContainerEE
             }
         }
 
-        // Add the player's action bar slots to the container
+        // Add the entityPlayer's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 50 + actionBarSlotIndex * 18, 210));
@@ -48,6 +72,14 @@ public class ContainerResearchStation extends ContainerEE
     {
         super.addCraftingToCrafters(iCrafting);
         iCrafting.sendProgressBarUpdate(this, 0, this.tileEntityResearchStation.itemLearnTime);
+        if (this.tileEntityResearchStation.isItemKnown)
+        {
+            iCrafting.sendProgressBarUpdate(this, 1, 1);
+        }
+        else
+        {
+            iCrafting.sendProgressBarUpdate(this, 1, 0);
+        }
     }
 
     @Override
@@ -57,15 +89,28 @@ public class ContainerResearchStation extends ContainerEE
 
         for (Object crafter : this.crafters)
         {
-            ICrafting icrafting = (ICrafting) crafter;
+            ICrafting iCrafting = (ICrafting) crafter;
 
             if (this.lastItemLearnTime != this.tileEntityResearchStation.itemLearnTime)
             {
-                icrafting.sendProgressBarUpdate(this, 0, this.tileEntityResearchStation.itemLearnTime);
+                iCrafting.sendProgressBarUpdate(this, 0, this.tileEntityResearchStation.itemLearnTime);
+            }
+
+            if (this.isItemStackKnown != this.tileEntityResearchStation.isItemKnown)
+            {
+                if (this.tileEntityResearchStation.isItemKnown)
+                {
+                    iCrafting.sendProgressBarUpdate(this, 1, 1);
+                }
+                else
+                {
+                    iCrafting.sendProgressBarUpdate(this, 1, 0);
+                }
             }
         }
 
         this.lastItemLearnTime = this.tileEntityResearchStation.itemLearnTime;
+        this.isItemStackKnown = this.tileEntityResearchStation.isItemKnown;
     }
 
     @SideOnly(Side.CLIENT)
@@ -74,6 +119,17 @@ public class ContainerResearchStation extends ContainerEE
         if (valueType == 0)
         {
             this.tileEntityResearchStation.itemLearnTime = updatedValue;
+        }
+        else if (valueType == 1)
+        {
+            if (updatedValue == 1)
+            {
+                this.tileEntityResearchStation.isItemKnown = true;
+            }
+            else
+            {
+                this.tileEntityResearchStation.isItemKnown = false;
+            }
         }
     }
 
@@ -90,7 +146,7 @@ public class ContainerResearchStation extends ContainerEE
 
             /**
              * If we are shift-clicking an item out of the Research Table's container,
-             * attempt to put it in the first available slot in the player's
+             * attempt to put it in the first available slot in the entityPlayer's
              * inventory
              */
             if (slotIndex < TileEntityResearchStation.INVENTORY_SIZE)
@@ -102,9 +158,25 @@ public class ContainerResearchStation extends ContainerEE
             }
             else
             {
-                if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
+                /**
+                 * If the stack being shift-clicked into the Research Table's container
+                 * is a fuel, first try to put it in the fuel slot. If it cannot
+                 * be merged into the fuel slot, try to put it in the input
+                 * slot.
+                 */
+                if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
                 {
-                    return null;
+                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, false))
+                    {
+                        return null;
+                    }
                 }
             }
 

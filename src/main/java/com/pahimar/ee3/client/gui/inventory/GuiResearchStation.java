@@ -33,7 +33,19 @@ public class GuiResearchStation extends GuiContainer
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int scaleAdjustment = this.tileEntityResearchStation.getLearnProgressScaled(42);
-        this.drawTexturedModalRect(xStart + 107, yStart + 87, 0, 236, scaleAdjustment, 16);
+        if (this.tileEntityResearchStation.isItemKnown)
+        {
+            this.mc.getTextureManager().bindTexture(Textures.Gui.RESEARCH_STATION_GYLPH_1);
+            this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
+        }
+        else
+        {
+            int arrowScaleAdjustment = this.tileEntityResearchStation.getLearnProgressScaled(42);
+            this.drawTexturedModalRect(xStart + 107, yStart + 87, 0, 236, arrowScaleAdjustment, 16);
+
+            int scaleAdjustment = this.tileEntityResearchStation.getLearnProgressScaled(80);
+            this.mc.getTextureManager().bindTexture(Textures.Gui.RESEARCH_STATION_GYLPH_1);
+            this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, (ySize * scaleAdjustment) / 100);
+        }
     }
 }

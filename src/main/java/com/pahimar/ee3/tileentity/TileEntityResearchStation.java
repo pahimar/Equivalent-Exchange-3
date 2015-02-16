@@ -1,6 +1,9 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.knowledge.AbilityRegistry;
+import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,12 +12,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.util.UUID;
+
 public class TileEntityResearchStation extends TileEntityEE implements IInventory
 {
-    public static final int INVENTORY_SIZE = 1;
+    public static final int INVENTORY_SIZE = 2;
     public static final int ITEM_SLOT_INVENTORY_INDEX = 0;
+    public static final int TOME_SLOT_INVENTORY_INDEX = 1;
 
     public int itemLearnTime;
+    public boolean isItemKnown;
     private ItemStack[] inventory;
 
     public TileEntityResearchStation()
@@ -117,7 +124,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return false;
+        return slotIndex == ITEM_SLOT_INVENTORY_INDEX && AbilityRegistry.getInstance().isLearnable(itemStack);
     }
 
     @Override
@@ -187,12 +194,34 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
             {
                 this.itemLearnTime = 0;
             }
+
+            isItemKnown = isItemStackKnown();
         }
     }
 
     private boolean canLearnItemStack()
     {
-        //        return ItemTransmutationKnowledgeHelper.canLearnItemStack(inventory[ITEM_SLOT_INVENTORY_INDEX], inventory[TOME_SLOT_INVENTORY_INDEX]);
+        ItemStack alchemicalTome = inventory[TOME_SLOT_INVENTORY_INDEX];
+        UUID playerUUID = ItemHelper.getOwnerUUID(alchemicalTome);
+
+        if (alchemicalTome != null && playerUUID != null)
+        {
+            return TransmutationKnowledgeRegistry.getInstance().canPlayerLearn(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+        }
+
+        return false;
+    }
+
+    private boolean isItemStackKnown()
+    {
+        ItemStack alchemicalTome = inventory[TOME_SLOT_INVENTORY_INDEX];
+        UUID playerUUID = ItemHelper.getOwnerUUID(alchemicalTome);
+
+        if (alchemicalTome != null && playerUUID != null)
+        {
+            return TransmutationKnowledgeRegistry.getInstance().doesPlayerKnow(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+        }
+
         return false;
     }
 
@@ -200,16 +229,14 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-            //            PlayerKnowledge playerKnowledge = PlayerKnowledge.readPlayerKnowledgeFromNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-            //            playerKnowledge.learnTransmutation(this.inventory[ITEM_SLOT_INVENTORY_INDEX]);
-            //            playerKnowledge.writeToNBT(this.inventory[TOME_SLOT_INVENTORY_INDEX].getTagCompound());
-            //
-            //            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
-            //
-            //            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
-            //            {
-            //                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
-            //            }
+            TransmutationKnowledgeRegistry.getInstance().teachPlayer(ItemHelper.getOwnerUUID(inventory[TOME_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
+
+            this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
+
+            if (this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize <= 0)
+            {
+                this.inventory[ITEM_SLOT_INVENTORY_INDEX] = null;
+            }
         }
     }
 }
