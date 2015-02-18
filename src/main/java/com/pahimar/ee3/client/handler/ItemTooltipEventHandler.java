@@ -3,6 +3,7 @@ package com.pahimar.ee3.client.handler;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -28,7 +29,7 @@ public class ItemTooltipEventHandler
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || event.entityPlayer.openContainer instanceof ContainerAlchemicalTome)
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
@@ -37,12 +38,12 @@ public class ItemTooltipEventHandler
                 EnergyValue energyValue = EnergyValueRegistry.getInstance().getEnergyValue(stack);
                 if (stack.getStackSize() > 1)
                 {
-                    event.toolTip.add("Exchange Energy (Item): " + String.format("%s", energyValueDecimalFormat.format(energyValue.getEnergyValue())));
-                    event.toolTip.add("Exchange Energy (Stack): " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(energyValue.getEnergyValue())));
                 }
                 else
                 {
-                    event.toolTip.add("Exchange Energy: " + String.format("%s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy: %s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
                 }
             }
             else

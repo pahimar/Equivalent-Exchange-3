@@ -36,6 +36,8 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
+    // TODO Determine some set of itemstacks that have EMC values
+
     private EnergyValueRegistry()
     {
     }

@@ -2,33 +2,29 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.Slot;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalTome extends GuiBase
 {
-    private InventoryPlayer inventoryPlayer;
-    public static InventoryBasic tempInventory = new InventoryBasic("tmp", true, 81);
+    private static final int LEFT_CLICK = 0;
 
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
 
-    private ElementButton commonAlchemyRibbon;
-    private ElementButton forbiddenAlchemyRibbon;
-    private ElementButton alkahestryRibbon;
-
     public GuiAlchemicalTome(EntityPlayer entityPlayer)
     {
         super(new ContainerAlchemicalTome(entityPlayer.inventory), Textures.Gui.ALCHEMICAL_TOME);
-        this.inventoryPlayer = entityPlayer.inventory;
-        entityPlayer.openContainer = this.inventorySlots;
+        LogHelper.info(this.inventorySlots instanceof ContainerAlchemicalTome);
+        ContainerAlchemicalTome containerAlchemicalTome = (ContainerAlchemicalTome) this.inventorySlots;
+        LogHelper.info(containerAlchemicalTome.getInventorySize());
         xSize = 256;
         ySize = 226;
     }
@@ -40,19 +36,9 @@ public class GuiAlchemicalTome extends GuiBase
 
         prevPageButton = new ElementButton(this, 15, 177, "Prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, "textures/gui/elements/arrowLeft.png");
         nextPageButton = new ElementButton(this, 223, 177, "Next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, "textures/gui/elements/arrowRight.png");
-        commonAlchemyRibbon = new ElementButton(this, 140, 187, "Common Alchemy", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalRed.png");
-        alkahestryRibbon = new ElementButton(this, 190, 187, "Alkahestry", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalGreen.png");
-        forbiddenAlchemyRibbon = new ElementButton(this, 165, 187, "Forbidden Alchemy", 0, 0, 0, 0, 0, 0, 20, 40, 20, 40, "textures/gui/elements/ribbonVerticalPurple.png");
-
-        commonAlchemyRibbon.setToolTip("Common Alchemy");
-        alkahestryRibbon.setToolTip("Alkahestry");
-        forbiddenAlchemyRibbon.setToolTip("Forbidden Alchemy");
 
         addElement(prevPageButton);
         addElement(nextPageButton);
-        addElement(commonAlchemyRibbon);
-        addElement(alkahestryRibbon);
-        addElement(forbiddenAlchemyRibbon);
     }
 
     @Override
@@ -74,5 +60,27 @@ public class GuiAlchemicalTome extends GuiBase
         drawElements(partialTicks, false);
         drawTabs(partialTicks, false);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    protected void updateElementInformation()
+    {
+        if (((ContainerAlchemicalTome) this.inventorySlots).getInventorySize() < 80)
+        {
+            prevPageButton.setDisabled();
+            nextPageButton.setDisabled();
+        }
+    }
+
+    @Override
+    protected void handleMouseClick(Slot slot, int p_146984_2_, int p_146984_3_, int p_146984_4_)
+    {
+        // NOOP
+    }
+
+    @Override
+    public void handleElementButtonClick(String buttonName, int mouseButton)
+    {
+        LogHelper.info(String.format("%s %s", buttonName, mouseButton));
     }
 }
