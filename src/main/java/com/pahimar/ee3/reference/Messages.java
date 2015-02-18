@@ -23,6 +23,9 @@ public final class Messages
         public static final String SET_ENERGY_VALUE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ENERGY_VALUE + ".usage";
         public static final String SET_ENERGY_VALUE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ENERGY_VALUE + ".success";
 
+        public static final String SET_ENERGY_VALUE_CURRENT_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.SET_ENERGY_VALUE_CURRENT_ITEM + ".usage";
+        public static final String SET_ENERGY_VALUE_CURRENT_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ENERGY_VALUE_CURRENT_ITEM + ".success";
+
         public static final String SYNC_ENERGY_VALUES_USAGE = COMMAND_PREFIX + Names.Commands.SYNC_ENERGY_VALUES + ".usage";
         public static final String SYNC_ENERGY_VALUES_SUCCESS = COMMAND_PREFIX + Names.Commands.SYNC_ENERGY_VALUES + ".success";
         public static final String SYNC_ENERGY_VALUES_DENIED = COMMAND_PREFIX + Names.Commands.SYNC_ENERGY_VALUES + ".denied";
@@ -33,11 +36,17 @@ public final class Messages
         public static final String PLAYER_LEARN_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.PLAYER_LEARN_ITEM + ".usage";
         public static final String PLAYER_LEARN_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.PLAYER_LEARN_ITEM + ".success";
 
+        public static final String PLAYER_LEARN_CURRENT_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.PLAYER_LEARN_CURRENT_ITEM + ".usage";
+        public static final String PLAYER_LEARN_CURRENT_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.PLAYER_LEARN_CURRENT_ITEM + ".success";
+
         public static final String PLAYER_FORGET_EVERYTHING_USAGE = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_EVERYTHING + ".usage";
         public static final String PLAYER_FORGET_EVERYTHING_SUCCESS = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_EVERYTHING + ".success";
 
         public static final String PLAYER_FORGET_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_ITEM + ".usage";
         public static final String PLAYER_FORGET_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_ITEM + ".success";
+
+        public static final String PLAYER_FORGET_CURRENT_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_CURRENT_ITEM + ".usage";
+        public static final String PLAYER_FORGET_CURRENT_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.PLAYER_FORGET_CURRENT_ITEM + ".success";
 
         public static final String TEMPLATE_LEARN_EVERYTHING_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_EVERYTHING + ".usage";
         public static final String TEMPLATE_LEARN_EVERYTHING_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_EVERYTHING + ".success";
@@ -45,11 +54,17 @@ public final class Messages
         public static final String TEMPLATE_LEARN_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_ITEM + ".usage";
         public static final String TEMPLATE_LEARN_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_ITEM + ".success";
 
+        public static final String TEMPLATE_LEARN_CURRENT_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_CURRENT_ITEM + ".usage";
+        public static final String TEMPLATE_LEARN_CURRENT_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_LEARN_CURRENT_ITEM + ".success";
+
         public static final String TEMPLATE_FORGET_EVERYTHING_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_EVERYTHING + ".usage";
         public static final String TEMPLATE_FORGET_EVERYTHING_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_EVERYTHING + ".success";
 
         public static final String TEMPLATE_FORGET_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_ITEM + ".usage";
         public static final String TEMPLATE_FORGET_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_ITEM + ".success";
+
+        public static final String TEMPLATE_FORGET_CURRENT_ITEM_USAGE = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_CURRENT_ITEM + ".usage";
+        public static final String TEMPLATE_FORGET_CURRENT_ITEM_SUCCESS = COMMAND_PREFIX + Names.Commands.TEMPLATE_FORGET_CURRENT_ITEM + ".success";
 
         public static final String SET_ITEM_LEARNABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".usage";
         public static final String SET_ITEM_LEARNABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".success";

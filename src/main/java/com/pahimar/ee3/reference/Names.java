@@ -123,15 +123,20 @@ public class Names
     {
         public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
         public static final String SET_ENERGY_VALUE = "set-energy-value";
+        public static final String SET_ENERGY_VALUE_CURRENT_ITEM = "set-energy-value-current-item";
         public static final String SYNC_ENERGY_VALUES = "sync-energy-values";
         public static final String PLAYER_LEARN_EVERYTHING = "player-learn-everything";
         public static final String PLAYER_LEARN_ITEM = "player-learn-item";
+        public static final String PLAYER_LEARN_CURRENT_ITEM = "player-learn-current-item";
         public static final String PLAYER_FORGET_EVERYTHING = "player-forget-everything";
         public static final String PLAYER_FORGET_ITEM = "player-forget-item";
+        public static final String PLAYER_FORGET_CURRENT_ITEM = "player-forget-current-item";
         public static final String TEMPLATE_LEARN_EVERYTHING = "template-learn-everything";
         public static final String TEMPLATE_LEARN_ITEM = "template-learn-item";
+        public static final String TEMPLATE_LEARN_CURRENT_ITEM = "template-learn-current-item";
         public static final String TEMPLATE_FORGET_EVERYTHING = "template-forget-everything";
         public static final String TEMPLATE_FORGET_ITEM = "template-forget-item";
+        public static final String TEMPLATE_FORGET_CURRENT_ITEM = "template-forget-current-item";
         public static final String SET_ITEM_LEARNABLE = "set-item-learnable";
         public static final String SET_ITEM_NOT_LEARNABLE = "set-item-not-learnable";
         public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
