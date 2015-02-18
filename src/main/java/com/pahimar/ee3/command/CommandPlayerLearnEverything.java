@@ -34,7 +34,11 @@ public class CommandPlayerLearnEverything extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        if (args.length >= 2)
+        if (args.length < 2)
+        {
+            throw new WrongUsageException(Messages.Commands.PLAYER_LEARN_EVERYTHING_USAGE);
+        }
+        else
         {
             EntityPlayer entityPlayer = getPlayer(commandSender, args[1]);
 

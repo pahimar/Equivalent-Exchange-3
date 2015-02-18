@@ -78,7 +78,7 @@ public class GuiHandler implements IGuiHandler
         }
         else if (id == GUIs.ALCHEMICAL_TOME.ordinal())
         {
-            return new GuiAlchemicalTome(entityPlayer);
+            return new GuiAlchemicalTome(entityPlayer.inventory);
         }
         else if (id == GUIs.CALCINATOR.ordinal())
         {

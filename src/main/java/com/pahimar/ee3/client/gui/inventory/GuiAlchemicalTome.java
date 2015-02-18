@@ -8,7 +8,7 @@ import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import org.lwjgl.opengl.GL11;
 
@@ -20,9 +20,9 @@ public class GuiAlchemicalTome extends GuiBase
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
 
-    public GuiAlchemicalTome(EntityPlayer entityPlayer)
+    public GuiAlchemicalTome(InventoryPlayer inventoryPlayer)
     {
-        super(new ContainerAlchemicalTome(entityPlayer), Textures.Gui.ALCHEMICAL_TOME);
+        super(new ContainerAlchemicalTome(inventoryPlayer.player), Textures.Gui.ALCHEMICAL_TOME);
         ContainerAlchemicalTome containerAlchemicalTome = (ContainerAlchemicalTome) this.inventorySlots;
         xSize = 256;
         ySize = 226;

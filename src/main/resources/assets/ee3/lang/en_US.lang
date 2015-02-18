@@ -141,3 +141,6 @@ tooltip.ee3:alchemicalChestPrefix.small=Small
 tooltip.ee3:alchemicalChestPrefix.medium=Medium
 tooltip.ee3:alchemicalChestPrefix.large=Large
 tooltip.ee3:none=None
+
+#Misc
+misc.ee3:owner-set-to-self=You are now the owner of %s

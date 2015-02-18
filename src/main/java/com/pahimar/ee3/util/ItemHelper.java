@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Comparator;
 import java.util.Set;
@@ -107,7 +108,7 @@ public class ItemHelper
                         if (itemStack1.getItem() == itemStack2.getItem())
                         {
                             // Then sort on meta
-                            if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
+                            if (itemStack1.getItemDamage() == itemStack2.getItemDamage() || itemStack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemStack2.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                             {
                                 // Then sort on NBT
                                 if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())

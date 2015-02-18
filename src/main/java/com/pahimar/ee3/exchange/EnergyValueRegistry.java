@@ -8,10 +8,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
-import com.pahimar.ee3.util.EnergyValueHelper;
-import com.pahimar.ee3.util.INBTTaggable;
-import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.SerializationHelper;
+import com.pahimar.ee3.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +33,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
-    // TODO Determine some set of itemstacks that have EMC values
+    private Set<ItemStack> allItemStacksWithValues = new TreeSet<ItemStack>(ItemHelper.baseComparator);
 
     private EnergyValueRegistry()
     {
@@ -362,7 +359,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         {
             runDynamicEnergyValueResolution();
         }
-
+        determineAllItemStacksWithValues();
         this.shouldRegenNextRestart = false;
     }
 
@@ -479,6 +476,30 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         // Serialize values to disk
         LogHelper.info("Saving energy values to disk");
         saveEnergyValueRegistryToFile();
+    }
+
+    private void determineAllItemStacksWithValues()
+    {
+        this.allItemStacksWithValues = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+        for (WrappedStack wrappedStack : this.stackMappings.keySet())
+        {
+            if (wrappedStack.getWrappedStack() instanceof OreStack)
+            {
+                for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                {
+                    this.allItemStacksWithValues.add(itemStack);
+                }
+            }
+            else if (wrappedStack.getWrappedStack() instanceof ItemStack)
+            {
+                this.allItemStacksWithValues.add((ItemStack) wrappedStack.getWrappedStack());
+            }
+        }
+    }
+
+    public Set<ItemStack> getAllItemStacksWithValues()
+    {
+        return this.allItemStacksWithValues;
     }
 
     private void generateValueStackMappings()
