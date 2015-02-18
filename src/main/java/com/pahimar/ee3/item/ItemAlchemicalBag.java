@@ -98,7 +98,10 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
         if (!world.isRemote)
         {
             // Set the owner
-            ItemHelper.setOwner(itemStack, entityPlayer);
+            if (!ItemHelper.hasOwner(itemStack))
+            {
+                ItemHelper.setOwner(itemStack, entityPlayer);
+            }
 
             // Set a UUID on the Alchemical Bag, if one doesn't exist already
             NBTHelper.setUUID(itemStack);

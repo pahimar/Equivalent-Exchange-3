@@ -87,4 +87,9 @@ public abstract class ContainerEE extends Container
 
         return slotFound;
     }
+
+    public void handleElementButtonClick(String buttonName, int mouseButton)
+    {
+        // NOOP
+    }
 }

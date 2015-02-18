@@ -4,7 +4,6 @@ import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.repackage.cofh.lib.gui.slot.SlotViewOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
 import java.util.TreeSet;
@@ -17,10 +16,10 @@ public class ContainerAlchemicalTome extends ContainerEE
     private final static int MAX_ROW_INDEX = 8;
     private final static int MAX_COLUMN_INDEX = 5;
 
-    public ContainerAlchemicalTome(InventoryPlayer inventoryPlayer)
+    public ContainerAlchemicalTome(EntityPlayer entityPlayer)
     {
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-        knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(inventoryPlayer.player.getUniqueID()));
+        knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(entityPlayer.getUniqueID()));
 
         inventoryTransmutationKnowledge = new InventoryTransmutationKnowledge(knownTransmutations);
         pageOffset = 0;
@@ -54,5 +53,11 @@ public class ContainerAlchemicalTome extends ContainerEE
     public int getInventorySize()
     {
         return inventoryTransmutationKnowledge.getSizeInventory();
+    }
+
+    @Override
+    public void handleElementButtonClick(String buttonName, int mouseButton)
+    {
+
     }
 }

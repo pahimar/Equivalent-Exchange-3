@@ -29,8 +29,7 @@ public class GuiHandler implements IGuiHandler
         }
         else if (id == GUIs.ALCHEMICAL_TOME.ordinal())
         {
-            //            return new ContainerAlchemicalTome(new InventoryAlchemicalTome(entityPlayer.getHeldItem()));
-            return new ContainerAlchemicalTome(entityPlayer.inventory);
+            return new ContainerAlchemicalTome(entityPlayer);
         }
         else if (id == GUIs.CALCINATOR.ordinal())
         {
@@ -79,7 +78,6 @@ public class GuiHandler implements IGuiHandler
         }
         else if (id == GUIs.ALCHEMICAL_TOME.ordinal())
         {
-            //            return new GuiAlchemicalTome(new InventoryAlchemicalTome(entityPlayer.getHeldItem()));
             return new GuiAlchemicalTome(entityPlayer);
         }
         else if (id == GUIs.CALCINATOR.ordinal())

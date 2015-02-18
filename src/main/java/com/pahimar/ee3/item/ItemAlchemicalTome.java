@@ -33,9 +33,7 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
             {
                 ItemHelper.setOwner(itemStack, entityPlayer);
             }
-        }
-        else
-        {
+
             entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_TOME.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 

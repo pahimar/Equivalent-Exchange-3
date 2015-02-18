@@ -1,8 +1,9 @@
 package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageGuiElementClicked;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
 import cpw.mods.fml.relauncher.Side;
@@ -21,10 +22,8 @@ public class GuiAlchemicalTome extends GuiBase
 
     public GuiAlchemicalTome(EntityPlayer entityPlayer)
     {
-        super(new ContainerAlchemicalTome(entityPlayer.inventory), Textures.Gui.ALCHEMICAL_TOME);
-        LogHelper.info(this.inventorySlots instanceof ContainerAlchemicalTome);
+        super(new ContainerAlchemicalTome(entityPlayer), Textures.Gui.ALCHEMICAL_TOME);
         ContainerAlchemicalTome containerAlchemicalTome = (ContainerAlchemicalTome) this.inventorySlots;
-        LogHelper.info(containerAlchemicalTome.getInventorySize());
         xSize = 256;
         ySize = 226;
     }
@@ -65,11 +64,7 @@ public class GuiAlchemicalTome extends GuiBase
     @Override
     protected void updateElementInformation()
     {
-        if (((ContainerAlchemicalTome) this.inventorySlots).getInventorySize() < 80)
-        {
-            prevPageButton.setDisabled();
-            nextPageButton.setDisabled();
-        }
+
     }
 
     @Override
@@ -81,6 +76,6 @@ public class GuiAlchemicalTome extends GuiBase
     @Override
     public void handleElementButtonClick(String buttonName, int mouseButton)
     {
-        LogHelper.info(String.format("%s %s", buttonName, mouseButton));
+        PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
     }
 }
