@@ -105,6 +105,7 @@ gui.nei.ee3:aludel=Aludel
 commands.ee3.usage=/ee3
 commands.ee3.player-not-found.error=Player with name %s was not found on the server
 commands.ee3.invalid-nbt-tag.error=Data tag parsing failed: %s
+commands.ee3.no-item.error=No current item
 commands.ee3.set-energy-value.usage=/ee3 set-energy-value <pre> <item> <value> [data] [dataTag] OR /ee3 set-energy-value <post> <item> <value> [data] [dataTag]
 commands.ee3.set-energy-value.success=%s set a %s EnergyValue of %s to %s
 commands.ee3.set-energy-value-current-item.usage=/ee3 set-energy-value-current-item <pre> <value> OR /ee3 set-energy-value-current-item <post> <value>

@@ -438,7 +438,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
                     }
                 }
             }
-            LogHelper.info(String.format("Pass %s: Computed %s values for obejcts in %s ms", passNumber, computedValueCount, System.currentTimeMillis() - passStartTime));
+            LogHelper.info(String.format("Pass %s: Computed %s values for objects in %s ms", passNumber, computedValueCount, System.currentTimeMillis() - passStartTime));
         }
         LogHelper.info(String.format("Finished dynamic value computation (computed %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
 

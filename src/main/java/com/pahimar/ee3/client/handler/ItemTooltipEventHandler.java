@@ -39,7 +39,7 @@ public class ItemTooltipEventHandler
                 if (stack.getStackSize() > 1)
                 {
                     event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getEnergyValue())));
-                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
                 }
                 else
                 {
