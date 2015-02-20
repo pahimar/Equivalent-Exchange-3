@@ -10,21 +10,25 @@ import net.minecraft.item.ItemStack;
  *
  * @author King Lemming
  */
-public class SlotCraftingLocked extends SlotCrafting {
+public class SlotCraftingLocked extends SlotCrafting
+{
 
-    public SlotCraftingLocked(EntityPlayer player, IInventory craftMatrix, IInventory inventory, int index, int x, int y) {
+    public SlotCraftingLocked(EntityPlayer player, IInventory craftMatrix, IInventory inventory, int index, int x, int y)
+    {
 
         super(player, craftMatrix, inventory, index, x, y);
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean isItemValid(ItemStack stack)
+    {
 
         return false;
     }
 
     @Override
-    public boolean canTakeStack(EntityPlayer player) {
+    public boolean canTakeStack(EntityPlayer player)
+    {
 
         return false;
     }

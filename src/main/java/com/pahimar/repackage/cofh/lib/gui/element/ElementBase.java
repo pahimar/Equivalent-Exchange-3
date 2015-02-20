@@ -2,7 +2,9 @@ package com.pahimar.repackage.cofh.lib.gui.element;
 
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -11,7 +13,8 @@ import java.util.List;
  *
  * @author King Lemming
  */
-public abstract class ElementBase {
+public abstract class ElementBase
+{
 
     protected GuiBase gui;
     protected ResourceLocation texture;
@@ -30,14 +33,16 @@ public abstract class ElementBase {
     private boolean visible = true;
     private boolean enabled = true;
 
-    public ElementBase(GuiBase gui, int posX, int posY) {
+    public ElementBase(GuiBase gui, int posX, int posY)
+    {
 
         this.gui = gui;
         this.posX = posX;
         this.posY = posY;
     }
 
-    public ElementBase(GuiBase gui, int posX, int posY, int width, int height) {
+    public ElementBase(GuiBase gui, int posX, int posY, int width, int height)
+    {
 
         this.gui = gui;
         this.posX = posX;
@@ -46,27 +51,31 @@ public abstract class ElementBase {
         this.sizeY = height;
     }
 
-    public ElementBase setName(String name) {
+    public ElementBase setName(String name)
+    {
 
         this.name = name;
         return this;
     }
 
-    public ElementBase setPosition(int posX, int posY) {
+    public ElementBase setPosition(int posX, int posY)
+    {
 
         this.posX = posX;
         this.posY = posY;
         return this;
     }
 
-    public ElementBase setSize(int sizeX, int sizeY) {
+    public ElementBase setSize(int sizeX, int sizeY)
+    {
 
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         return this;
     }
 
-    public ElementBase setTexture(String texture, int texW, int texH) {
+    public ElementBase setTexture(String texture, int texW, int texH)
+    {
 
         this.texture = new ResourceLocation(texture);
         this.texW = texW;
@@ -74,7 +83,8 @@ public abstract class ElementBase {
         return this;
     }
 
-    public ElementBase setTexture(ResourceLocation texture, int texW, int texH) {
+    public ElementBase setTexture(ResourceLocation texture, int texW, int texH)
+    {
 
         this.texture = texture;
         this.texW = texW;
@@ -82,34 +92,40 @@ public abstract class ElementBase {
         return this;
     }
 
-    public final ElementBase setVisible(boolean visible) {
+    public final ElementBase setVisible(boolean visible)
+    {
 
         this.visible = visible;
         return this;
     }
 
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
 
         return visible;
     }
 
-    public final ElementBase setEnabled(boolean enabled) {
+    public final ElementBase setEnabled(boolean enabled)
+    {
 
         this.enabled = enabled;
         return this;
     }
 
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
 
         return enabled;
     }
 
-    public void update(int mouseX, int mouseY) {
+    public void update(int mouseX, int mouseY)
+    {
 
         update();
     }
 
-    public void update() {
+    public void update()
+    {
 
     }
 
@@ -117,60 +133,93 @@ public abstract class ElementBase {
 
     public abstract void drawForeground(int mouseX, int mouseY);
 
-    public void addTooltip(List<String> list) {
+    public void addTooltip(List<String> list)
+    {
 
     }
 
-    public void drawModalRect(int x, int y, int width, int height, int color) {
+    public void drawModalRect(int x, int y, int width, int height, int color)
+    {
 
         gui.drawSizedModalRect(x, y, width, height, color);
     }
 
-    public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height) {
+    public void drawStencil(int xStart, int yStart, int xEnd, int yEnd, int flag)
+    {
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glStencilFunc(GL11.GL_ALWAYS, flag, flag);
+        GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
+        GL11.glStencilMask(1);
+        GL11.glColorMask(false, false, false, false);
+        GL11.glDepthMask(false);
+        Tessellator.instance.startDrawingQuads();
+        Tessellator.instance.addVertex(xStart, yEnd, 0);
+        Tessellator.instance.addVertex(xEnd, yEnd, 0);
+        Tessellator.instance.addVertex(xEnd, yStart, 0);
+        Tessellator.instance.addVertex(xStart, yStart, 0);
+        Tessellator.instance.draw();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glStencilFunc(GL11.GL_EQUAL, flag, flag);
+        GL11.glStencilMask(0);
+        GL11.glColorMask(true, true, true, true);
+        GL11.glDepthMask(true);
+    }
+
+    public void drawTexturedModalRect(int x, int y, int u, int v, int width, int height)
+    {
 
         gui.drawSizedTexturedModalRect(x, y, u, v, width, height, texW, texH);
     }
 
-    public void drawCenteredString(FontRenderer fontRenderer, String text, int x, int y, int color) {
+    public void drawCenteredString(FontRenderer fontRenderer, String text, int x, int y, int color)
+    {
 
         fontRenderer.drawStringWithShadow(text, x - fontRenderer.getStringWidth(text) / 2, y, color);
     }
 
-    public boolean onMousePressed(int mouseX, int mouseY, int mouseButton) {
+    public boolean onMousePressed(int mouseX, int mouseY, int mouseButton)
+    {
 
         return false;
     }
 
-    public void onMouseReleased(int mouseX, int mouseY) {
+    public void onMouseReleased(int mouseX, int mouseY)
+    {
 
     }
 
-    public boolean onMouseWheel(int mouseX, int mouseY, int movement) {
+    public boolean onMouseWheel(int mouseX, int mouseY, int movement)
+    {
 
         return false;
     }
 
-    public boolean onKeyTyped(char characterTyped, int keyPressed) {
+    public boolean onKeyTyped(char characterTyped, int keyPressed)
+    {
 
         return false;
     }
 
-    public boolean intersectsWith(int mouseX, int mouseY) {
+    public boolean intersectsWith(int mouseX, int mouseY)
+    {
 
         return mouseX >= this.posX && mouseX <= this.posX + this.sizeX && mouseY >= this.posY && mouseY <= this.posY + this.sizeY;
     }
 
-    public final String getName() {
+    public final String getName()
+    {
 
         return name;
     }
 
-    public final GuiBase getContainerScreen() {
+    public final GuiBase getContainerScreen()
+    {
 
         return gui;
     }
 
-    public final FontRenderer getFontRenderer() {
+    public final FontRenderer getFontRenderer()
+    {
 
         return gui.getFontRenderer();
     }
@@ -178,7 +227,8 @@ public abstract class ElementBase {
     /**
      * This method is relative to the GUI's y coordinate
      */
-    public final int getPosY() {
+    public final int getPosY()
+    {
 
         return posY;
     }
@@ -186,17 +236,20 @@ public abstract class ElementBase {
     /**
      * This method is relative to the GUI's x coordinate
      */
-    public final int getPosX() {
+    public final int getPosX()
+    {
 
         return posX;
     }
 
-    public final int getHeight() {
+    public final int getHeight()
+    {
 
         return sizeY;
     }
 
-    public final int getWidth() {
+    public final int getWidth()
+    {
 
         return sizeX;
     }

@@ -2,7 +2,8 @@ package com.pahimar.repackage.cofh.lib.gui.element.listbox;
 
 import com.pahimar.repackage.cofh.lib.gui.element.ElementListBox;
 
-public interface IListBoxElement {
+public interface IListBoxElement
+{
 
     public int getHeight();
 

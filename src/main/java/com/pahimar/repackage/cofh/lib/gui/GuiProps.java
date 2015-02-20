@@ -2,7 +2,8 @@ package com.pahimar.repackage.cofh.lib.gui;
 
 import com.pahimar.ee3.reference.Textures;
 
-public class GuiProps {
+public class GuiProps
+{
 
     /* GUI */
     public static final String PATH_GFX = Textures.RESOURCE_PREFIX + "textures/";

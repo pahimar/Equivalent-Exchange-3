@@ -8,17 +8,20 @@ import com.pahimar.repackage.cofh.lib.render.RenderHelper;
  *
  * @author King Lemming
  */
-public class ElementSimple extends ElementBase {
+public class ElementSimple extends ElementBase
+{
 
     int texU = 0;
     int texV = 0;
 
-    public ElementSimple(GuiBase gui, int posX, int posY) {
+    public ElementSimple(GuiBase gui, int posX, int posY)
+    {
 
         super(gui, posX, posY);
     }
 
-    public ElementSimple setTextureOffsets(int u, int v) {
+    public ElementSimple setTextureOffsets(int u, int v)
+    {
 
         texU = u;
         texV = v;
@@ -26,15 +29,18 @@ public class ElementSimple extends ElementBase {
     }
 
     @Override
-    public void drawBackground(int mouseX, int mouseY, float gameTicks) {
+    public void drawBackground(int mouseX, int mouseY, float gameTicks)
+    {
 
         RenderHelper.bindTexture(texture);
         drawTexturedModalRect(posX, posY, texU, texV, sizeX, sizeY);
     }
 
     @Override
-    public void drawForeground(int mouseX, int mouseY) {
+    public void drawForeground(int mouseX, int mouseY)
+    {
 
+        return;
     }
 
 }

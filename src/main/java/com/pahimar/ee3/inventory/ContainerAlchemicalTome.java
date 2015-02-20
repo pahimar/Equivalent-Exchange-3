@@ -12,6 +12,7 @@ public class ContainerAlchemicalTome extends ContainerEE
 {
     private final InventoryTransmutationKnowledge inventoryTransmutationKnowledge;
     private int pageOffset;
+    private String searchTerm;
 
     private final static int MAX_ROW_INDEX = 8;
     private final static int MAX_COLUMN_INDEX = 5;

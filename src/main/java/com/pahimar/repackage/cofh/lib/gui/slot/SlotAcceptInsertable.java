@@ -9,23 +9,29 @@ import net.minecraft.item.ItemStack;
  * <p/>
  * If an ISidedInventory, canInsertItem (from side 6 (UNKNOWN)) must also return true.
  */
-public class SlotAcceptInsertable extends SlotAcceptValid {
+public class SlotAcceptInsertable extends SlotAcceptValid
+{
 
     protected ISidedInventory sidedInv;
 
-    public SlotAcceptInsertable(IInventory inventory, int index, int x, int y) {
+    public SlotAcceptInsertable(IInventory inventory, int index, int x, int y)
+    {
 
         super(inventory, index, x, y);
 
-        if (inventory instanceof ISidedInventory) {
+        if (inventory instanceof ISidedInventory)
+        {
             sidedInv = (ISidedInventory) inventory;
-        } else {
+        }
+        else
+        {
             sidedInv = null;
         }
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean isItemValid(ItemStack stack)
+    {
 
         boolean valid = super.isItemValid(stack);
 

@@ -9,18 +9,21 @@ import net.minecraft.item.ItemStack;
  *
  * @author King Lemming
  */
-public class SlotValidated extends Slot {
+public class SlotValidated extends Slot
+{
 
     ISlotValidator validator;
 
-    public SlotValidated(ISlotValidator validator, IInventory inventory, int index, int x, int y) {
+    public SlotValidated(ISlotValidator validator, IInventory inventory, int index, int x, int y)
+    {
 
         super(inventory, index, x, y);
         this.validator = validator;
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean isItemValid(ItemStack stack)
+    {
 
         return validator.isItemValid(stack);
     }

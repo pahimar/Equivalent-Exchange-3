@@ -7,7 +7,8 @@ import net.minecraft.item.ItemStack;
  *
  * @author King Lemming
  */
-public interface ISlotValidator {
+public interface ISlotValidator
+{
 
     /**
      * Essentially a passthrough so an arbitrary criterion can be checked against.

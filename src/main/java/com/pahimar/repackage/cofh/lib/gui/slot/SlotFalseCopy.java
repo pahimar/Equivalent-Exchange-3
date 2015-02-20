@@ -10,32 +10,38 @@ import net.minecraft.item.ItemStack;
  *
  * @author King Lemming
  */
-public class SlotFalseCopy extends Slot {
+public class SlotFalseCopy extends Slot
+{
 
     public int slotIndex = 0;
 
-    public SlotFalseCopy(IInventory inventory, int index, int x, int y) {
+    public SlotFalseCopy(IInventory inventory, int index, int x, int y)
+    {
 
         super(inventory, index, x, y);
         slotIndex = index;
     }
 
     @Override
-    public boolean canTakeStack(EntityPlayer player) {
+    public boolean canTakeStack(EntityPlayer player)
+    {
 
         return false;
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean isItemValid(ItemStack stack)
+    {
 
         return true;
     }
 
     @Override
-    public void putStack(ItemStack stack) {
+    public void putStack(ItemStack stack)
+    {
 
-        if (stack != null) {
+        if (stack != null)
+        {
             stack.stackSize = 1;
         }
         this.inventory.setInventorySlotContents(this.slotIndex, stack);

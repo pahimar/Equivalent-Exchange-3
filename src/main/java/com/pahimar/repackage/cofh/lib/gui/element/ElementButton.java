@@ -8,7 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 
-public class ElementButton extends ElementBase {
+public class ElementButton extends ElementBase
+{
 
     int sheetX;
     int sheetY;
@@ -59,93 +60,131 @@ public class ElementButton extends ElementBase {
         this.disabledY = disabledY;
     }
 
-    public ElementButton clearToolTip() {
+    public ElementButton clearToolTip()
+    {
 
         this.tooltip = null;
         return this;
     }
 
-    public ElementButton setToolTip(String tooltip) {
+    public ElementButton setToolTip(String tooltip)
+    {
 
         this.tooltip = tooltip;
         return this;
     }
 
-    public ElementButton setToolTipLocalized(boolean localized) {
+    public ElementButton setToolTipLocalized(boolean localized)
+    {
 
         this.tooltipLocalized = localized;
         return this;
     }
 
     @Override
-    public void drawBackground(int mouseX, int mouseY, float gameTicks) {
+    public void drawBackground(int mouseX, int mouseY, float gameTicks)
+    {
 
         RenderHelper.bindTexture(texture);
-        if (isEnabled()) {
-            if (intersectsWith(mouseX, mouseY)) {
+        if (isEnabled())
+        {
+            if (intersectsWith(mouseX, mouseY))
+            {
 
                 drawTexturedModalRect(posX, posY, hoverX, hoverY, sizeX, sizeY);
-            } else {
+            }
+            else
+            {
                 drawTexturedModalRect(posX, posY, sheetX, sheetY, sizeX, sizeY);
             }
-        } else {
+        }
+        else
+        {
             drawTexturedModalRect(posX, posY, disabledX, disabledY, sizeX, sizeY);
         }
     }
 
     @Override
-    public void drawForeground(int mouseX, int mouseY) {
+    public void drawForeground(int mouseX, int mouseY)
+    {
 
     }
 
     @Override
-    public void addTooltip(List<String> list) {
+    public void addTooltip(List<String> list)
+    {
 
-        if (tooltip != null) {
-            if (tooltipLocalized) {
+        if (tooltip != null)
+        {
+            if (tooltipLocalized)
+            {
                 list.add(tooltip);
-            } else {
+            }
+            else
+            {
                 list.add(StringHelper.localize(tooltip));
             }
         }
     }
 
     @Override
-    public boolean onMousePressed(int x, int y, int mouseButton) {
+    public boolean onMousePressed(int x, int y, int mouseButton)
+    {
 
-        if (isEnabled()) {
+        if (isEnabled())
+        {
             gui.handleElementButtonClick(getName(), mouseButton);
             return true;
         }
         return false;
     }
 
-    public void setSheetX(int pos) {
+    public void setSheetX(int pos)
+    {
 
         sheetX = pos;
     }
 
-    public void setSheetY(int pos) {
+    public void setSheetY(int pos)
+    {
 
         sheetY = pos;
     }
 
-    public void setHoverX(int pos) {
+    public void setHoverX(int pos)
+    {
 
         hoverX = pos;
     }
 
-    public void setHoverY(int pos) {
+    public void setHoverY(int pos)
+    {
 
         hoverY = pos;
     }
 
-    public void setActive() {
+    public ElementButton setDisabledX(int pos)
+    {
+
+        disabledX = pos;
+        return this;
+    }
+
+    public ElementButton setDisabledY(int pos)
+    {
+
+        disabledY = pos;
+        return this;
+    }
+
+    public void setActive()
+    {
 
         setEnabled(true);
     }
 
-    public void setDisabled() {
+    public void setDisabled()
+    {
 
         setEnabled(false);
     }

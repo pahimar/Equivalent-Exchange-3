@@ -13,12 +13,16 @@ import org.lwjgl.opengl.GL11;
  *
  * @author King Lemming
  */
-public abstract class TabBase extends ElementBase {
+public abstract class TabBase extends ElementBase
+{
 
     public static int tabExpandSpeed = 8;
 
-    public static int LEFT = 0;
-    public static int RIGHT = 1;
+    public static final int LEFT = 0;
+    public static final int RIGHT = 1;
+
+    protected int offsetX = 0;
+    protected int offsetY = 0;
 
     public boolean open;
     public boolean fullyOpen;
@@ -29,8 +33,8 @@ public abstract class TabBase extends ElementBase {
     public int textColor = 0x000000;
     public int backgroundColor = 0xffffff;
 
-    public int currentShiftX = 0;
-    public int currentShiftY = 0;
+    protected int currentShiftX = 0;
+    protected int currentShiftY = 0;
 
     public int minWidth = 22;
     public int maxWidth = 124;
@@ -43,74 +47,108 @@ public abstract class TabBase extends ElementBase {
     public static final ResourceLocation DEFAULT_TEXTURE_LEFT = new ResourceLocation(GuiProps.PATH_ELEMENTS + "Tab_Left.png");
     public static final ResourceLocation DEFAULT_TEXTURE_RIGHT = new ResourceLocation(GuiProps.PATH_ELEMENTS + "Tab_Right.png");
 
-    public TabBase(GuiBase gui) {
+    public TabBase(GuiBase gui)
+    {
 
         super(gui, 0, 0);
         texture = DEFAULT_TEXTURE_RIGHT;
     }
 
-    public TabBase(GuiBase gui, int side) {
+    public TabBase(GuiBase gui, int side)
+    {
 
         super(gui, 0, 0);
         this.side = side;
 
-        if (side == LEFT) {
+        if (side == LEFT)
+        {
             texture = DEFAULT_TEXTURE_LEFT;
-        } else {
+        }
+        else
+        {
             texture = DEFAULT_TEXTURE_RIGHT;
         }
     }
 
-    public void draw(int x, int y) {
+    public TabBase setOffsets(int x, int y)
+    {
 
-        posX = x;
-        posY = y;
+        offsetX = x;
+        offsetY = y;
+
+        return this;
+    }
+
+    public void draw(int x, int y)
+    {
+
+        posX = x + offsetX;
+        posY = y + offsetY;
         draw();
     }
 
-    public void draw() {
+    public void draw()
+    {
+
+        return;
+    }
+
+    @Override
+    public void drawBackground(int mouseX, int mouseY, float gameTicks)
+    {
 
     }
 
     @Override
-    public void drawBackground(int mouseX, int mouseY, float gameTicks) {
+    public void drawForeground(int mouseX, int mouseY)
+    {
 
     }
 
     @Override
-    public void drawForeground(int mouseX, int mouseY) {
+    public void update()
+    {
 
-    }
-
-    @Override
-    public void update() {
-
-        if (open && currentWidth < maxWidth) {
+        if (open && currentWidth < maxWidth)
+        {
             currentWidth += tabExpandSpeed;
-        } else if (!open && currentWidth > minWidth) {
+        }
+        else if (!open && currentWidth > minWidth)
+        {
             currentWidth -= tabExpandSpeed;
         }
-        if (currentWidth > maxWidth) {
+        if (currentWidth > maxWidth)
+        {
             currentWidth = maxWidth;
-        } else if (currentWidth < minWidth) {
+        }
+        else if (currentWidth < minWidth)
+        {
             currentWidth = minWidth;
         }
-        if (open && currentHeight < maxHeight) {
+        if (open && currentHeight < maxHeight)
+        {
             currentHeight += tabExpandSpeed;
-        } else if (!open && currentHeight > minHeight) {
+        }
+        else if (!open && currentHeight > minHeight)
+        {
             currentHeight -= tabExpandSpeed;
         }
-        if (currentHeight > maxHeight) {
+        if (currentHeight > maxHeight)
+        {
             currentHeight = maxHeight;
-        } else if (currentHeight < minHeight) {
+        }
+        else if (currentHeight < minHeight)
+        {
             currentHeight = minHeight;
         }
-        if (!fullyOpen && open && currentWidth == maxWidth && currentHeight == maxHeight) {
+        if (!fullyOpen && open && currentWidth == maxWidth && currentHeight == maxHeight)
+        {
             setFullyOpen();
         }
     }
 
-    protected void drawBackground() {
+    protected void drawBackground()
+    {
 
         float colorR = (backgroundColor >> 16 & 255) / 255.0F;
         float colorG = (backgroundColor >> 8 & 255) / 255.0F;
@@ -130,7 +168,8 @@ public abstract class TabBase extends ElementBase {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
     }
 
-    protected void drawTabIcon(String iconName) {
+    protected void drawTabIcon(String iconName)
+    {
 
         gui.drawIcon(iconName, posXOffset(), posY + 3, 1);
     }
@@ -138,9 +177,11 @@ public abstract class TabBase extends ElementBase {
     /**
      * Shortcut to correct for the proper X position.
      */
-    protected int posX() {
+    protected int posX()
+    {
 
-        if (side == LEFT) {
+        if (side == LEFT)
+        {
             return posX - currentWidth;
         }
         return posX;
@@ -149,34 +190,53 @@ public abstract class TabBase extends ElementBase {
     /**
      * Corrects for shadowing differences in tabs to ensure that they always look nice - used in font rendering, typically.
      */
-    protected int posXOffset() {
+    protected int posXOffset()
+    {
 
-        return posX() + offset();
+        return posX() + sideOffset();
     }
 
-    protected int offset() {
+    protected int sideOffset()
+    {
 
         return (side == LEFT ? 4 : 2);
     }
 
-    public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY) {
+    public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY)
+    {
 
-        if (side == LEFT) {
-            if (mouseX <= shiftX && mouseX >= shiftX - currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight) {
+        shiftX += offsetX;
+        shiftY += offsetY;
+
+        if (side == LEFT)
+        {
+            if (mouseX <= shiftX && mouseX >= shiftX - currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight)
+            {
                 return true;
             }
-        } else if (mouseX >= shiftX && mouseX <= shiftX + currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight) {
+        }
+        else if (mouseX >= shiftX && mouseX <= shiftX + currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight)
+        {
             return true;
         }
         return false;
     }
 
-    public boolean isFullyOpened() {
+    public boolean isFullyOpened()
+    {
 
         return fullyOpen;
     }
 
-    public void setFullyOpen() {
+    public void setCurrentShift(int x, int y)
+    {
+
+        currentShiftX = x + offsetX;
+        currentShiftY = y + offsetY;
+    }
+
+    public void setFullyOpen()
+    {
 
         open = true;
         currentWidth = maxWidth;
@@ -184,29 +244,48 @@ public abstract class TabBase extends ElementBase {
         fullyOpen = true;
     }
 
-    public void toggleOpen() {
+    public void toggleOpen()
+    {
 
-        if (open) {
+        if (open)
+        {
             open = false;
-            if (side == LEFT) {
+            if (side == LEFT)
+            {
                 TabTracker.setOpenedLeftTab(null);
-            } else {
+            }
+            else
+            {
                 TabTracker.setOpenedRightTab(null);
             }
             fullyOpen = false;
-        } else {
+        }
+        else
+        {
             open = true;
-            if (side == LEFT) {
+            if (side == LEFT)
+            {
                 TabTracker.setOpenedLeftTab(this.getClass());
-            } else {
+            }
+            else
+            {
                 TabTracker.setOpenedRightTab(this.getClass());
             }
         }
     }
 
-    public Rectangle4i getBounds() {
+    public Rectangle4i getBounds()
+    {
 
-        return new Rectangle4i(posX() + gui.getGuiLeft(), posY + gui.getGuiTop(), currentWidth, currentHeight);
+        if (isVisible())
+        {
+            return new Rectangle4i(posX() + gui.getGuiLeft(), posY + gui.getGuiTop(), currentWidth, currentHeight);
+        }
+        else
+        {
+            return new Rectangle4i(posX() + gui.getGuiLeft(), posY + gui.getGuiTop(), 0, 0);
+        }
+
     }
 
 }

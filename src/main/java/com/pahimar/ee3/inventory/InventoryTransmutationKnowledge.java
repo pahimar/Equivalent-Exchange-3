@@ -1,22 +1,31 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class InventoryTransmutationKnowledge implements IInventory
 {
-    public ItemStack[] inventory = new ItemStack[0];
+    private ItemStack[] inventory;
+    private Set<ItemStack> knownTransmutations;
 
     public InventoryTransmutationKnowledge(Set<ItemStack> knownTransmutations)
     {
+        inventory = new ItemStack[80];
         if (knownTransmutations != null)
         {
-            inventory = knownTransmutations.toArray(inventory);
+            this.knownTransmutations = knownTransmutations;
         }
+        else
+        {
+            this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+        }
+        inventory = knownTransmutations.toArray(inventory);
     }
 
     @Override
@@ -129,5 +138,10 @@ public class InventoryTransmutationKnowledge implements IInventory
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
         return false;
+    }
+
+    public Set<ItemStack> getKnownTransmutations()
+    {
+        return knownTransmutations;
     }
 }
