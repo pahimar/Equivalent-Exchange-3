@@ -37,7 +37,21 @@ public class ContainerAlchemicalTome extends ContainerEE
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 18 + columnIndex * 20, 18 + rowIndex * 19));
+                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 18 + columnIndex * 20, 18 + rowIndex * 19)
+                {
+                    @Override
+                    public boolean canTakeStack(EntityPlayer player)
+                    {
+                        return false;
+                    }
+
+                    @Override
+                    @SideOnly(Side.CLIENT)
+                    public boolean func_111238_b()
+                    {
+                        return false;
+                    }
+                });
                 i++;
             }
         }
@@ -47,7 +61,21 @@ public class ContainerAlchemicalTome extends ContainerEE
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 140 + columnIndex * 20, 18 + rowIndex * 19));
+                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 140 + columnIndex * 20, 18 + rowIndex * 19)
+                {
+                    @Override
+                    public boolean canTakeStack(EntityPlayer player)
+                    {
+                        return false;
+                    }
+
+                    @Override
+                    @SideOnly(Side.CLIENT)
+                    public boolean func_111238_b()
+                    {
+                        return false;
+                    }
+                });
                 i++;
             }
         }
@@ -58,6 +86,7 @@ public class ContainerAlchemicalTome extends ContainerEE
     {
         super.addCraftingToCrafters(iCrafting);
         iCrafting.sendProgressBarUpdate(this, 0, this.pageOffset);
+        iCrafting.sendProgressBarUpdate(this, 1, this.maxPageOffset);
     }
 
     @Override
@@ -71,6 +100,7 @@ public class ContainerAlchemicalTome extends ContainerEE
             {
                 ICrafting icrafting = (ICrafting) crafter;
                 icrafting.sendProgressBarUpdate(this, 0, this.pageOffset);
+                icrafting.sendProgressBarUpdate(this, 1, this.maxPageOffset);
             }
         }
     }
@@ -81,6 +111,10 @@ public class ContainerAlchemicalTome extends ContainerEE
         if (valueType == 0)
         {
             this.pageOffset = updatedValue;
+        }
+        else if (valueType == 1)
+        {
+            this.maxPageOffset = updatedValue;
         }
     }
 
@@ -106,13 +140,11 @@ public class ContainerAlchemicalTome extends ContainerEE
         {
             this.pageOffset--;
             updateInventory();
-            this.requiresUpdate = true;
         }
         else if (buttonName.equalsIgnoreCase("next") && mouseButton == 0 && this.pageOffset < this.maxPageOffset)
         {
             this.pageOffset++;
             updateInventory();
-            this.requiresUpdate = true;
         }
     }
 
@@ -124,17 +156,17 @@ public class ContainerAlchemicalTome extends ContainerEE
             this.searchTerm = updatedText;
             pageOffset = 0;
             updateInventory();
-            this.requiresUpdate = true;
         }
     }
 
     private void updateInventory()
     {
+        this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
         List<ItemStack> filteredList = new ArrayList(ItemHelper.filterByNameContains(inventoryTransmutationKnowledge.getKnownTransmutations(), searchTerm));
 
-        maxPageOffset = filteredList.size() % 80;
+        maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)
         {
             pageOffset = 0;
@@ -160,7 +192,7 @@ public class ContainerAlchemicalTome extends ContainerEE
         }
         else if (pageOffset == maxPageOffset)
         {
-            newInventory = filteredList.subList(pageOffset * 80, filteredList.size()).toArray(newInventory);
+            newInventory = filteredList.subList(pageOffset * 80, filteredList.size() - 1).toArray(newInventory);
             shouldUpdateInventory = true;
         }
 

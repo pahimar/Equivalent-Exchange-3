@@ -6,6 +6,7 @@ import com.pahimar.ee3.network.message.MessageGuiElementClicked;
 import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
+import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
 import cpw.mods.fml.relauncher.Side;
@@ -17,10 +18,6 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAlchemicalTome extends GuiBase
 {
-    private static final int LEFT_CLICK = 0;
-
-    private int pageOffset;
-
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
     private ElementTextField searchTextField;
@@ -53,6 +50,9 @@ public class GuiAlchemicalTome extends GuiBase
                 }
             }
         };
+        searchTextField.borderColor = new GuiColor(160, 160, 160).getColor();
+        searchTextField.backgroundColor = new GuiColor(0, 0, 0).getColor();
+        searchTextField.setFocused(true);
 
         addElement(prevPageButton);
         addElement(nextPageButton);

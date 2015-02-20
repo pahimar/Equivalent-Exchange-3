@@ -1,6 +1,5 @@
 package com.pahimar.repackage.cofh.lib.gui.element;
 
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;
@@ -15,7 +14,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class ElementTextField extends ElementBase
 {
-
     public int borderColor = new GuiColor(55, 55, 55).getColor();
     public int backgroundColor = new GuiColor(139, 139, 139).getColor();
     public int disabledColor = new GuiColor(198, 198, 198).getColor();
@@ -374,7 +372,6 @@ public class ElementTextField extends ElementBase
     @Override
     public boolean onKeyTyped(char charTyped, int keyTyped)
     {
-        LogHelper.info(keyTyped);
         if (!isFocused())
         {
             return false;
@@ -662,7 +659,7 @@ public class ElementTextField extends ElementBase
 
         FontRenderer font = getFontRenderer();
         char[] text = this.text;
-        int startX = posX + 1, endX = sizeX - 1, startY = posY + 1, endY = startY + font.FONT_HEIGHT;
+        int startX = posX + 3, endX = sizeX - 3, startY = posY + 6, endY = startY + font.FONT_HEIGHT;
         for (int i = renderStart, width = 0; i <= textLength; ++i)
         {
             boolean end = i == textLength;
@@ -694,7 +691,7 @@ public class ElementTextField extends ElementBase
                 {
                     drawModalRect(startX + width, startY, startX + width + charW, endY, selectedLineColor);
                 }
-                font.drawString(String.valueOf(text[i]), startX + width, startY, selected ? selectedTextColor : textColor);
+                font.drawStringWithShadow(String.valueOf(text[i]), startX + width, startY, selected ? selectedTextColor : textColor);
             }
 
             if (drawCaret)
