@@ -21,5 +21,6 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageSyncEnergyValues.class, MessageSyncEnergyValues.class, 6, Side.CLIENT);
         INSTANCE.registerMessage(MessageSetEnergyValue.class, MessageSetEnergyValue.class, 7, Side.CLIENT);
         INSTANCE.registerMessage(MessageGuiElementClicked.class, MessageGuiElementClicked.class, 8, Side.SERVER);
+        INSTANCE.registerMessage(MessageGuiElementTextFieldUpdate.class, MessageGuiElementTextFieldUpdate.class, 9, Side.SERVER);
     }
 }

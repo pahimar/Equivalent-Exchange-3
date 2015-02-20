@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class ElementTextFieldFiltered extends ElementTextField
 {
-
     protected boolean includeVanilla = true;
     protected CharacterSingleton seq = new CharacterSingleton();
     protected Matcher filter;

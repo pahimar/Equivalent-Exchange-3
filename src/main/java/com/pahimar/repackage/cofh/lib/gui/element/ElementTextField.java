@@ -1,5 +1,6 @@
 package com.pahimar.repackage.cofh.lib.gui.element;
 
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;
@@ -42,20 +43,29 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField(GuiBase gui, int posX, int posY, int width, int height)
     {
-
         this(gui, posX, posY, width, height, (short) 32);
     }
 
     public ElementTextField(GuiBase gui, int posX, int posY, int width, int height, short limit)
     {
-
         super(gui, posX, posY, width, height);
+        setMaxLength(limit);
+    }
+
+    public ElementTextField(GuiBase gui, int posX, int posY, String name, int width, int height)
+    {
+        this(gui, posX, posY, name, width, height, (short) 32);
+    }
+
+    public ElementTextField(GuiBase gui, int posX, int posY, String name, int width, int height, short limit)
+    {
+        super(gui, posX, posY, width, height);
+        setName(name);
         setMaxLength(limit);
     }
 
     public ElementTextField setTextColor(Number textColor, Number selectedTextColor)
     {
-
         if (textColor != null)
         {
             this.textColor = textColor.intValue();
@@ -69,7 +79,6 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField setSelectionColor(Number selectedLineColor, Number defaultCaretColor)
     {
-
         if (selectedLineColor != null)
         {
             this.selectedLineColor = selectedLineColor.intValue();
@@ -83,7 +92,6 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField setBackgroundColor(Number backgroundColor, Number disabledColor, Number borderColor)
     {
-
         if (backgroundColor != null)
         {
             this.backgroundColor = backgroundColor.intValue();
@@ -101,14 +109,12 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField setFocusable(boolean focusable)
     {
-
         canFocusChange = focusable;
         return this;
     }
 
     public ElementTextField setFocused(boolean focused)
     {
-
         if (canFocusChange)
         {
             isFocused = focused;
@@ -119,7 +125,6 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField setText(String text)
     {
-
         selectionStart = 0;
         selectionEnd = textLength;
         writeText(text);
@@ -128,7 +133,6 @@ public class ElementTextField extends ElementBase
 
     public ElementTextField setMaxLength(short limit)
     {
-
         char[] oldText = text;
         text = new char[limit];
         textLength = Math.min(limit, textLength);
@@ -142,25 +146,21 @@ public class ElementTextField extends ElementBase
 
     public int getMaxStringLength()
     {
-
         return text.length;
     }
 
     public boolean isFocused()
     {
-
         return isEnabled() && isFocused;
     }
 
     public boolean isFocusable()
     {
-
         return canFocusChange;
     }
 
     public int getContentWidth()
     {
-
         FontRenderer font = getFontRenderer();
         int width = 0;
         for (int i = 0; i < textLength; ++i)
@@ -172,7 +172,6 @@ public class ElementTextField extends ElementBase
 
     public int getVisibleWidth()
     {
-
         FontRenderer font = getFontRenderer();
         int width = 0, endX = sizeX - 1;
         for (int i = renderStart; i < textLength; ++i)
@@ -194,7 +193,6 @@ public class ElementTextField extends ElementBase
 
     public String getText()
     {
-
         return new String(text, 0, textLength);
     }
 
@@ -210,7 +208,6 @@ public class ElementTextField extends ElementBase
 
     public void writeText(String text)
     {
-
         int i = 0;
         for (int e = text.length(); i < e; ++i)
         {
@@ -226,13 +223,11 @@ public class ElementTextField extends ElementBase
 
     public boolean isAllowedCharacter(char charTyped)
     {
-
         return ChatAllowedCharacters.isAllowedCharacter(charTyped);
     }
 
     protected boolean onEnter()
     {
-
         return false;
     }
 
@@ -379,7 +374,7 @@ public class ElementTextField extends ElementBase
     @Override
     public boolean onKeyTyped(char charTyped, int keyTyped)
     {
-
+        LogHelper.info(keyTyped);
         if (!isFocused())
         {
             return false;
@@ -461,7 +456,7 @@ public class ElementTextField extends ElementBase
                                 renderStart = MathHelper.clampI(caret - 3, 0, textLength);
                             }
                             findRenderStart();
-
+                            onCharacterEntered(true);
                             return true;
                         }
                         // continue.. (shift+delete = backspace)
@@ -491,7 +486,7 @@ public class ElementTextField extends ElementBase
                             renderStart = MathHelper.clampI(caret - 3, 0, textLength);
                         }
                         findRenderStart();
-
+                        onCharacterEntered(true);
                         return true;
                     case Keyboard.KEY_HOME: // home
                         if (GuiScreen.isShiftKeyDown())

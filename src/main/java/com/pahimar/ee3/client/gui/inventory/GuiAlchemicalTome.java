@@ -3,9 +3,11 @@ package com.pahimar.ee3.client.gui.inventory;
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageGuiElementClicked;
+import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
+import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,13 +19,15 @@ public class GuiAlchemicalTome extends GuiBase
 {
     private static final int LEFT_CLICK = 0;
 
+    private int pageOffset;
+
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
+    private ElementTextField searchTextField;
 
     public GuiAlchemicalTome(InventoryPlayer inventoryPlayer)
     {
         super(new ContainerAlchemicalTome(inventoryPlayer.player), Textures.Gui.ALCHEMICAL_TOME);
-        ContainerAlchemicalTome containerAlchemicalTome = (ContainerAlchemicalTome) this.inventorySlots;
         xSize = 256;
         ySize = 226;
     }
@@ -33,17 +37,32 @@ public class GuiAlchemicalTome extends GuiBase
     {
         super.initGui();
 
-        prevPageButton = new ElementButton(this, 15, 177, "Prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, "textures/gui/elements/arrowLeft.png");
-        nextPageButton = new ElementButton(this, 223, 177, "Next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, "textures/gui/elements/arrowRight.png");
+        this.drawTitle = false;
+        this.drawInventory = false;
+
+        prevPageButton = new ElementButton(this, 15, 177, "prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, "textures/gui/elements/arrowLeft.png");
+        nextPageButton = new ElementButton(this, 223, 177, "next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, "textures/gui/elements/arrowRight.png");
+        searchTextField = new ElementTextField(this, 64, 205, "searchField", 128, 20)
+        {
+            @Override
+            protected void onCharacterEntered(boolean success)
+            {
+                if (success)
+                {
+                    PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
+                }
+            }
+        };
 
         addElement(prevPageButton);
         addElement(nextPageButton);
+        addElement(searchTextField);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        // NOOP
+        super.drawGuiContainerForegroundLayer(x, y);
     }
 
     @Override
@@ -64,7 +83,23 @@ public class GuiAlchemicalTome extends GuiBase
     @Override
     protected void updateElementInformation()
     {
+        if (((ContainerAlchemicalTome) this.inventorySlots).getPageOffset() == 0)
+        {
+            prevPageButton.setDisabled();
+        }
+        else if (!prevPageButton.isEnabled())
+        {
+            prevPageButton.setEnabled(true);
+        }
 
+        if (((ContainerAlchemicalTome) this.inventorySlots).getPageOffset() == ((ContainerAlchemicalTome) this.inventorySlots).getMaxPageOffset())
+        {
+            nextPageButton.setDisabled();
+        }
+        else if (!nextPageButton.isEnabled())
+        {
+            nextPageButton.setEnabled(true);
+        }
     }
 
     @Override

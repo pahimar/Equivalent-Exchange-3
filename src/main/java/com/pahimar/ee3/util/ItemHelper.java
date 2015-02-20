@@ -246,7 +246,14 @@ public class ItemHelper
         {
             String itemDisplayName = itemStack.getDisplayName().toLowerCase();
 
-            if (itemDisplayName.startsWith(filterString))
+            if (filterString != null)
+            {
+                if (itemDisplayName.startsWith(filterString.toLowerCase()))
+                {
+                    nameSortedSet.add(itemStack);
+                }
+            }
+            else
             {
                 nameSortedSet.add(itemStack);
             }
@@ -263,7 +270,14 @@ public class ItemHelper
         {
             String itemDisplayName = itemStack.getDisplayName().toLowerCase();
 
-            if (itemDisplayName.contains(filterString))
+            if (filterString != null)
+            {
+                if (itemDisplayName.contains(filterString.toLowerCase()))
+                {
+                    nameSortedSet.add(itemStack);
+                }
+            }
+            else
             {
                 nameSortedSet.add(itemStack);
             }
