@@ -1,11 +1,9 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Comparator;
@@ -279,6 +277,16 @@ public class ItemHelper
         return (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
     }
 
+    public static boolean hasOwnerUUID(ItemStack itemStack)
+    {
+        return NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG);
+    }
+
+    public static boolean hasOwnerName(ItemStack itemStack)
+    {
+        return NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
+    }
+
     public static String getOwnerName(ItemStack itemStack)
     {
         if (NBTHelper.hasTag(itemStack, Names.NBT.OWNER))
@@ -286,7 +294,7 @@ public class ItemHelper
             return NBTHelper.getString(itemStack, Names.NBT.OWNER);
         }
 
-        return StatCollector.translateToLocal(Messages.NO_OWNER);
+        return null;
     }
 
     public static UUID getOwnerUUID(ItemStack itemStack)
@@ -301,8 +309,18 @@ public class ItemHelper
 
     public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer)
     {
-        NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
+        setOwnerName(itemStack, entityPlayer);
+        setOwnerUUID(itemStack, entityPlayer);
+    }
+
+    public static void setOwnerUUID(ItemStack itemStack, EntityPlayer entityPlayer)
+    {
         NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
         NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
+    }
+
+    public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer)
+    {
+        NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
     }
 }

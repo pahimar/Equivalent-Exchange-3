@@ -1,10 +1,7 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.reference.Colors;
-import com.pahimar.ee3.reference.GUIs;
-import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.reference.*;
 import com.pahimar.ee3.util.ColorHelper;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
@@ -17,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -97,10 +95,10 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
     {
         if (!world.isRemote)
         {
-            // Set the owner
-            if (!ItemHelper.hasOwner(itemStack))
+            if (!ItemHelper.hasOwnerUUID(itemStack))
             {
                 ItemHelper.setOwner(itemStack, entityPlayer);
+                entityPlayer.addChatComponentMessage(new ChatComponentTranslation(Messages.OWNER_SET_TO_SELF, new Object[]{itemStack.func_151000_E()}));
             }
 
             // Set a UUID on the Alchemical Bag, if one doesn't exist already

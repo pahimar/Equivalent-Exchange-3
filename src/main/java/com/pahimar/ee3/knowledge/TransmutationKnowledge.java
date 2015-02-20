@@ -3,7 +3,6 @@ package com.pahimar.ee3.knowledge;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
@@ -84,7 +83,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
     {
         if (canTransmuteEverything)
         {
-            return EnergyValueRegistry.getInstance().getAllItemStacksWithValues();
+            return AbilityRegistry.getInstance().getAllLearnableItemStacks();
         }
         else
         {
@@ -134,26 +133,12 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
 
     public Set<ItemStack> filterByNameStartsWith(String filterString)
     {
-        if (canTransmuteEverything)
-        {
-            return ItemHelper.filterByNameStartsWith(EnergyValueRegistry.getInstance().getAllItemStacksWithValues(), filterString);
-        }
-        else
-        {
-            return ItemHelper.filterByNameStartsWith(knownTransmutations, filterString);
-        }
+        return ItemHelper.filterByNameStartsWith(getKnownTransmutations(), filterString);
     }
 
     public Set<ItemStack> filterByNameContains(String filterString)
     {
-        if (canTransmuteEverything)
-        {
-            return ItemHelper.filterByNameContains(EnergyValueRegistry.getInstance().getAllItemStacksWithValues(), filterString);
-        }
-        else
-        {
-            return ItemHelper.filterByNameContains(knownTransmutations, filterString);
-        }
+        return ItemHelper.filterByNameContains(getKnownTransmutations(), filterString);
     }
 
     @Override

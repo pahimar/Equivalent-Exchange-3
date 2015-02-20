@@ -84,6 +84,7 @@ public final class EnergyValueRegistryProxy
         return null;
     }
 
+
     public static List getStacksInRange(int start, int finish)
     {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.*;
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.IEnergyValueProvider;
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
@@ -239,9 +240,11 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         {
             WrappedStack stack = new WrappedStack(object);
 
-            if (stack.getWrappedStack() instanceof ItemStack && ((ItemStack) stack.getWrappedStack()).getItem() instanceof IEnergyValueProvider)
+            if (stack.getWrappedStack() instanceof ItemStack && ((ItemStack) stack.getWrappedStack()).getItem() instanceof IEnergyValueProvider && !strict)
             {
-                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) stack.getWrappedStack()).getItem()).getEnergyValue((ItemStack) stack.getWrappedStack());
+                ItemStack itemStack = (ItemStack) stack.getWrappedStack();
+                IEnergyValueProvider iEnergyValueProvider = (IEnergyValueProvider) itemStack.getItem();
+                EnergyValue energyValue = iEnergyValueProvider.getEnergyValue(itemStack);
 
                 if (energyValue != null && energyValue.getEnergyValue() > 0f)
                 {
@@ -359,7 +362,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         {
             runDynamicEnergyValueResolution();
         }
-        determineAllItemStacksWithValues();
+        AbilityRegistry.getInstance().discoverAllLearnableItemStacks();
         this.shouldRegenNextRestart = false;
     }
 
@@ -476,30 +479,6 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         // Serialize values to disk
         LogHelper.info("Saving energy values to disk");
         saveEnergyValueRegistryToFile();
-    }
-
-    private void determineAllItemStacksWithValues()
-    {
-        this.allItemStacksWithValues = new TreeSet<ItemStack>(ItemHelper.baseComparator);
-        for (WrappedStack wrappedStack : this.stackMappings.keySet())
-        {
-            if (wrappedStack.getWrappedStack() instanceof OreStack)
-            {
-                for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
-                {
-                    this.allItemStacksWithValues.add(itemStack);
-                }
-            }
-            else if (wrappedStack.getWrappedStack() instanceof ItemStack)
-            {
-                this.allItemStacksWithValues.add((ItemStack) wrappedStack.getWrappedStack());
-            }
-        }
-    }
-
-    public Set<ItemStack> getAllItemStacksWithValues()
-    {
-        return this.allItemStacksWithValues;
     }
 
     private void generateValueStackMappings()
@@ -734,6 +713,16 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     public void setShouldRegenNextRestart(boolean shouldRegenNextRestart)
     {
         this.shouldRegenNextRestart = shouldRegenNextRestart;
+    }
+
+    public ImmutableSortedMap<WrappedStack, EnergyValue> getStackValueMap()
+    {
+        return stackMappings;
+    }
+
+    public ImmutableSortedMap<EnergyValue, List<WrappedStack>> getValueStackMap()
+    {
+        return valueMappings;
     }
 
     public void saveEnergyValueRegistryToFile()

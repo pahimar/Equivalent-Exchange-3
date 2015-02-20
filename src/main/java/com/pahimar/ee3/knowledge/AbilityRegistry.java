@@ -4,14 +4,19 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
@@ -23,6 +28,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     private boolean hasBeenModified;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
+    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.baseComparator);
 
     private AbilityRegistry()
     {
@@ -46,6 +52,33 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
+    }
+
+    public void discoverAllLearnableItemStacks()
+    {
+        this.allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+        for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
+        {
+            if (isLearnable(wrappedStack))
+            {
+                if (wrappedStack.getWrappedStack() instanceof OreStack)
+                {
+                    for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                    {
+                        this.allLearnableItemStacks.add(itemStack);
+                    }
+                }
+                else if (wrappedStack.getWrappedStack() instanceof ItemStack)
+                {
+                    this.allLearnableItemStacks.add((ItemStack) wrappedStack.getWrappedStack());
+                }
+            }
+        }
+    }
+
+    public SortedSet<ItemStack> getAllLearnableItemStacks()
+    {
+        return allLearnableItemStacks;
     }
 
     public Set<WrappedStack> getNotLearnableStacks()

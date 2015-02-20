@@ -1,6 +1,10 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.IEnergyValueProvider;
+import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -11,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
-public class ItemAlchemicalTome extends ItemEE implements IOwnable
+public class ItemAlchemicalTome extends ItemEE implements IOwnable, IEnergyValueProvider
 {
     public ItemAlchemicalTome()
     {
@@ -30,8 +34,7 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
     {
         if (!world.isRemote)
         {
-            // Set the owner if one hasn't been set already
-            if (!ItemHelper.hasOwner(itemStack))
+            if (!ItemHelper.hasOwnerUUID(itemStack))
             {
                 ItemHelper.setOwner(itemStack, entityPlayer);
                 entityPlayer.addChatComponentMessage(new ChatComponentTranslation(Messages.OWNER_SET_TO_SELF, new Object[]{itemStack.func_151000_E()}));
@@ -43,5 +46,11 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable
         }
 
         return itemStack;
+    }
+
+    @Override
+    public EnergyValue getEnergyValue(ItemStack itemStack)
+    {
+        return EnergyValueRegistryProxy.getEnergyValue(ModItems.alchemicalTome, true);
     }
 }

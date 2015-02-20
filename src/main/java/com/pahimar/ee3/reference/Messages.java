@@ -3,7 +3,8 @@ package com.pahimar.ee3.reference;
 public final class Messages
 {
     public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
-    public static final String NO_OWNER = "tooltip.ee3:none";
+    public static final String ITEM_BELONGS_TO = "tooltip.ee3:belongsTo";
+    public static final String ITEM_BELONGS_TO_NO_ONE = "tooltip.ee3:belongsToNoOne";
 
     public static final String OWNER_SET_TO_SELF = "misc.ee3:owner-set-to-self";
 
