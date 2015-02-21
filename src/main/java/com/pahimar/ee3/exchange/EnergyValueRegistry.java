@@ -134,7 +134,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         {
             WrappedStack stack = new WrappedStack(object);
 
-            if (stack.getWrappedStack() instanceof ItemStack && ((ItemStack) stack.getWrappedStack()).getItem() instanceof IEnergyValueProvider)
+            if (stack.getWrappedStack() instanceof ItemStack && ((ItemStack) stack.getWrappedStack()).getItem() instanceof IEnergyValueProvider && !strict)
             {
                 EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) stack.getWrappedStack()).getItem()).getEnergyValue((ItemStack) stack.getWrappedStack());
 
@@ -145,74 +145,77 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
             }
             else
             {
-                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
+                if (energyValueRegistry.stackMappings != null)
                 {
-                    return true;
-                }
-                else
-                {
-                    if (!strict)
+                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
                     {
-                        if (stack.getWrappedStack() instanceof ItemStack)
+                        return true;
+                    }
+                    else
+                    {
+                        if (!strict)
                         {
-                            ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
-
-                            // If its an OreDictionary item, scan its siblings for values
-                            if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
+                            if (stack.getWrappedStack() instanceof ItemStack)
                             {
+                                ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
 
-                                OreStack oreStack = new OreStack(wrappedItemStack);
-
-                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                                // If its an OreDictionary item, scan its siblings for values
+                                if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
                                 {
-                                    return true;
+
+                                    OreStack oreStack = new OreStack(wrappedItemStack);
+
+                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
+                                        {
+                                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
+                                            {
+                                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                                {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
+                                // Else, scan for if there is a wildcard value for it
                                 else
                                 {
-                                    for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
+                                    for (WrappedStack valuedStack : energyValueRegistry.stackMappings.keySet())
                                     {
-                                        for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
+                                        if (valuedStack.getWrappedStack() instanceof ItemStack)
                                         {
-                                            if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
-                                            {
-                                                return true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            // Else, scan for if there is a wildcard value for it
-                            else
-                            {
-                                for (WrappedStack valuedStack : energyValueRegistry.stackMappings.keySet())
-                                {
-                                    if (valuedStack.getWrappedStack() instanceof ItemStack)
-                                    {
-                                        ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
+                                            ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
 
-                                        if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
-                                        {
-                                            if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+                                            if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
                                             {
-                                                return true;
-                                            }
-                                            else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
-                                            {
-                                                return true;
+                                                if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+                                                {
+                                                    return true;
+                                                }
+                                                else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
+                                                {
+                                                    return true;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        else if (stack.getWrappedStack() instanceof OreStack)
-                        {
-                            OreStack oreStack = (OreStack) stack.getWrappedStack();
-                            for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
+                            else if (stack.getWrappedStack() instanceof OreStack)
                             {
-                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
+                                OreStack oreStack = (OreStack) stack.getWrappedStack();
+                                for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
                                 {
-                                    return true;
+                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
+                                    {
+                                        return true;
+                                    }
                                 }
                             }
                         }
@@ -253,46 +256,83 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
             }
             else
             {
-                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
+                if (energyValueRegistry.stackMappings != null)
                 {
-                    return energyValueRegistry.stackMappings.get(new WrappedStack(stack.getWrappedStack()));
-                }
-                else
-                {
-                    if (!strict)
+                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
                     {
-                        if (stack.getWrappedStack() instanceof ItemStack)
+                        return energyValueRegistry.stackMappings.get(new WrappedStack(stack.getWrappedStack()));
+                    }
+                    else
+                    {
+                        if (!strict)
                         {
-                            EnergyValue lowestValue = null;
-                            ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
-
-                            if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
+                            if (stack.getWrappedStack() instanceof ItemStack)
                             {
-                                OreStack oreStack = new OreStack(wrappedItemStack);
+                                EnergyValue lowestValue = null;
+                                ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
 
-                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                                if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
                                 {
-                                    return energyValueRegistry.stackMappings.get(new WrappedStack(oreStack));
+                                    OreStack oreStack = new OreStack(wrappedItemStack);
+
+                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                                    {
+                                        return energyValueRegistry.stackMappings.get(new WrappedStack(oreStack));
+                                    }
+                                    else
+                                    {
+                                        for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
+                                        {
+                                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
+                                            {
+                                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                                {
+                                                    if (lowestValue == null)
+                                                    {
+                                                        lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+                                                    }
+                                                    else
+                                                    {
+                                                        EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+
+                                                        if (itemValue.compareTo(lowestValue) < 0)
+                                                        {
+                                                            lowestValue = itemValue;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        return lowestValue;
+                                    }
                                 }
                                 else
                                 {
-                                    for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
+                                    for (WrappedStack valuedStack : energyValueRegistry.stackMappings.keySet())
                                     {
-                                        for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
+                                        if (valuedStack.getWrappedStack() instanceof ItemStack)
                                         {
-                                            if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
-                                            {
-                                                if (lowestValue == null)
-                                                {
-                                                    lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
-                                                }
-                                                else
-                                                {
-                                                    EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+                                            ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
 
-                                                    if (itemValue.compareTo(lowestValue) < 0)
+                                            if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
+                                            {
+                                                if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+                                                {
+                                                    EnergyValue stackValue = energyValueRegistry.stackMappings.get(valuedStack);
+
+                                                    if (stackValue.compareTo(lowestValue) < 0)
                                                     {
-                                                        lowestValue = itemValue;
+                                                        lowestValue = stackValue;
+                                                    }
+                                                }
+                                                else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
+                                                {
+                                                    EnergyValue stackValue = new EnergyValue(energyValueRegistry.stackMappings.get(valuedStack).getEnergyValue() * (1 - (wrappedItemStack.getItemDamage() * 1.0F / wrappedItemStack.getMaxDamage())));
+
+                                                    if (stackValue.compareTo(lowestValue) < 0)
+                                                    {
+                                                        lowestValue = stackValue;
                                                     }
                                                 }
                                             }
@@ -302,49 +342,15 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
                                     return lowestValue;
                                 }
                             }
-                            else
+                            else if (stack.getWrappedStack() instanceof OreStack)
                             {
-                                for (WrappedStack valuedStack : energyValueRegistry.stackMappings.keySet())
+                                OreStack oreStack = (OreStack) stack.getWrappedStack();
+                                for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
                                 {
-                                    if (valuedStack.getWrappedStack() instanceof ItemStack)
+                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
                                     {
-                                        ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
-
-                                        if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
-                                        {
-                                            if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-                                            {
-                                                EnergyValue stackValue = energyValueRegistry.stackMappings.get(valuedStack);
-
-                                                if (stackValue.compareTo(lowestValue) < 0)
-                                                {
-                                                    lowestValue = stackValue;
-                                                }
-                                            }
-                                            else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
-                                            {
-                                                EnergyValue stackValue = new EnergyValue(energyValueRegistry.stackMappings.get(valuedStack).getEnergyValue() * (1 - (wrappedItemStack.getItemDamage() * 1.0F / wrappedItemStack.getMaxDamage())));
-
-                                                if (stackValue.compareTo(lowestValue) < 0)
-                                                {
-                                                    lowestValue = stackValue;
-                                                }
-                                            }
-                                        }
+                                        return energyValueRegistry.stackMappings.get(new WrappedStack(oreItemStack));
                                     }
-                                }
-
-                                return lowestValue;
-                            }
-                        }
-                        else if (stack.getWrappedStack() instanceof OreStack)
-                        {
-                            OreStack oreStack = (OreStack) stack.getWrappedStack();
-                            for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
-                            {
-                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
-                                {
-                                    return energyValueRegistry.stackMappings.get(new WrappedStack(oreItemStack));
                                 }
                             }
                         }
