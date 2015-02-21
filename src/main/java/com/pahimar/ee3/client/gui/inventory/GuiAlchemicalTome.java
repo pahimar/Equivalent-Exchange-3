@@ -4,6 +4,7 @@ import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageGuiElementClicked;
 import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
@@ -13,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -71,9 +73,8 @@ public class GuiAlchemicalTome extends GuiBase
         }
         else
         {
-            // TODO Localize this
-            fontRendererObj.drawSplitString("You don't know how to transmute anything yet!", 142, 20, 100, new GuiColor(50, 50, 50).getColor());
-            fontRendererObj.drawSplitString("Use a Research Station to teach yourself how to transmute items", 142, 60, 100, new GuiColor(50, 50, 50).getColor());
+            fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.NO_KNOWN_TRANSMUTATIONS), 142, 20, 100, new GuiColor(50, 50, 50).getColor());
+            fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.HOW_TO_LEARN_TRANSMUTATIONS), 142, 60, 100, new GuiColor(50, 50, 50).getColor());
         }
 
         if (this.inventorySlots.getSlot(40).getHasStack())

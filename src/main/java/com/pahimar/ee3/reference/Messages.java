@@ -12,6 +12,14 @@ public final class Messages
     public static final String NO_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running is a development version of the mod, and as such may be unstable and/or incomplete.";
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
 
+    public static final class Gui
+    {
+        private static final String GUI_PREFIX = "container.ee3:";
+
+        public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.noTransmutationsKnown";
+        public static final String HOW_TO_LEARN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.howToLearnTransmutations";
+    }
+
     public static final class Commands
     {
         private static final String COMMAND_PREFIX = "commands.ee3.";
