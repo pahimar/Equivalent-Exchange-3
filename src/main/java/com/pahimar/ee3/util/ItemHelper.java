@@ -6,10 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.UUID;
+import java.util.*;
 
 public class ItemHelper
 {
@@ -336,5 +333,24 @@ public class ItemHelper
     public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer)
     {
         NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
+    }
+
+    public static void filterOutItemsWithInvalidIcons(List<ItemStack> unfilteredCollection)
+    {
+        List<ItemStack> itemsToRemove = new ArrayList<ItemStack>();
+
+        for (ItemStack itemStack : unfilteredCollection)
+        {
+            try
+            {
+                itemStack.getItem().getIconIndex(itemStack);
+            }
+            catch (ArrayIndexOutOfBoundsException e)
+            {
+                itemsToRemove.add(itemStack);
+            }
+        }
+
+        unfilteredCollection.removeAll(itemsToRemove);
     }
 }

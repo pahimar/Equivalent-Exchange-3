@@ -30,7 +30,7 @@ public class ContainerAlchemicalTome extends ContainerEE
 
         inventoryTransmutationKnowledge = new InventoryTransmutationKnowledge(knownTransmutations);
         pageOffset = 0;
-        maxPageOffset = knownTransmutations.size() % 80;
+        maxPageOffset = knownTransmutations.size() / 80;
 
         int i = 0;
         for (int rowIndex = 0; rowIndex < MAX_ROW_INDEX; ++rowIndex)
@@ -165,6 +165,7 @@ public class ContainerAlchemicalTome extends ContainerEE
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
         List<ItemStack> filteredList = new ArrayList(ItemHelper.filterByNameContains(inventoryTransmutationKnowledge.getKnownTransmutations(), searchTerm));
+        ItemHelper.filterOutItemsWithInvalidIcons(filteredList);
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

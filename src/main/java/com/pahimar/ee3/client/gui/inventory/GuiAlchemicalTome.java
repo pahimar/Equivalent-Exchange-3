@@ -63,6 +63,23 @@ public class GuiAlchemicalTome extends GuiBase
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         super.drawGuiContainerForegroundLayer(x, y);
+        int pageOffset = ((ContainerAlchemicalTome) this.inventorySlots).getPageOffset();
+
+        if (this.inventorySlots.getSlot(0).getHasStack())
+        {
+            fontRendererObj.drawString((pageOffset * 2 + 1) + "", 64, 178, new GuiColor(50, 50, 50).getColor());
+        }
+        else
+        {
+            // TODO Localize this
+            fontRendererObj.drawSplitString("You don't know how to transmute anything yet!", 142, 20, 100, new GuiColor(50, 50, 50).getColor());
+            fontRendererObj.drawSplitString("Use a Research Station to teach yourself how to transmute items", 142, 60, 100, new GuiColor(50, 50, 50).getColor());
+        }
+
+        if (this.inventorySlots.getSlot(40).getHasStack())
+        {
+            fontRendererObj.drawString((pageOffset * 2 + 2) + "", 186, 178, new GuiColor(50, 50, 50).getColor());
+        }
     }
 
     @Override
