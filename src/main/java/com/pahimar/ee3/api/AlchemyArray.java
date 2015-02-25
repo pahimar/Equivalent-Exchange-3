@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+// TODO Switch bare Strings to String constants
 public class AlchemyArray implements Comparable<AlchemyArray>
 {
     private ResourceLocation texture;
@@ -30,6 +31,11 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     public String getUnLocalizedName()
     {
         return unLocalizedName;
+    }
+
+    public String getDisplayName()
+    {
+        return StatCollector.translateToLocal(unLocalizedName);
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -68,22 +74,16 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         nbtTagCompound.setString("unLocalizedName", unLocalizedName);
     }
 
-    public static AlchemyArray readGlyphFromNBT(NBTTagCompound nbtTagCompound)
+    public static AlchemyArray readArrayFromNBT(NBTTagCompound nbtTagCompound)
     {
         AlchemyArray alchemyArray = new AlchemyArray();
         alchemyArray.readFromNBT(nbtTagCompound);
         return alchemyArray;
     }
 
-    public void onAlchemyArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    public void onArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
 
-    }
-
-    @Override
-    public String toString()
-    {
-        return StatCollector.translateToLocal(unLocalizedName);
     }
 
     @Override

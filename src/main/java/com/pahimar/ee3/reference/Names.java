@@ -12,6 +12,9 @@ public class Names
         public static final String CALCINATOR = "calcinator";
         public static final String RESEARCH_STATION = "researchStation";
         public static final String AUGMENTATION_TABLE = "augmentationTable";
+        public static final String ASH_INFUSED_STONE = "ashInfusedStone";
+        public static final String BASIC_ALCHEMY_ARRAY = "basicAlchemyArray";
+        public static final String DUMMY_ALCHEMY_ARRAY = "dummyAlchemyArray";
     }
 
     public static final class Items
@@ -141,5 +144,11 @@ public class Names
         public static final String SET_ITEM_NOT_LEARNABLE = "set-item-not-learnable";
         public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
         public static final String SET_ITEM_NOT_RECOVERABLE = "set-item-not-recoverable";
+    }
+
+    public static final class AlchemyArrays
+    {
+        private static final String ALCHEMY_ARRAY_BASE = "arrays.ee3:";
+        public static final String BASIC_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "basicAlchemyArray";
     }
 }

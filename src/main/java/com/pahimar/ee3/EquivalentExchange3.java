@@ -9,13 +9,14 @@ import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
+import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
-import com.pahimar.ee3.recipe.RecipesAludel;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import com.pahimar.ee3.util.TileEntityDataHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -73,6 +74,8 @@ public class EquivalentExchange3
 
         EnergyValues.addDefaultEnergyValues();
 
+        AlchemyArrays.registerAlchemyArrays();
+
         Abilities.setOresNotLearnable();
     }
 
@@ -105,7 +108,7 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         RecipeRegistry.getInstance().registerVanillaRecipes();
-        RecipesAludel.registerRecipes();
+        AludelRecipeManager.registerRecipes();
     }
 
     @EventHandler
@@ -130,6 +133,11 @@ public class EquivalentExchange3
         return RecipeRegistry.getInstance();
     }
 
+    public AludelRecipeManager getAludelRecipeManager()
+    {
+        return AludelRecipeManager.getInstance();
+    }
+
     public AbilityRegistry getAbilityRegistry()
     {
         return AbilityRegistry.getInstance();
@@ -143,5 +151,10 @@ public class EquivalentExchange3
     public TransmutationKnowledgeRegistry getTransmutationKnowledgeRegistry()
     {
         return TransmutationKnowledgeRegistry.getInstance();
+    }
+
+    public TileEntityDataHelper getTileEntityDataHelper()
+    {
+        return TileEntityDataHelper.getInstance();
     }
 }

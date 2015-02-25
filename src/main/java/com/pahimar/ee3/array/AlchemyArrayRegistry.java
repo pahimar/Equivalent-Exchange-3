@@ -31,6 +31,22 @@ public class AlchemyArrayRegistry
         registeredAlchemyArrays = new TreeSet<AlchemyArray>();
     }
 
+    public AlchemyArray getAlchemyArray(int index)
+    {
+        if (registeredAlchemyArrays != null)
+        {
+            AlchemyArray[] alchemyArrays = new AlchemyArray[0];
+            alchemyArrays = registeredAlchemyArrays.toArray(alchemyArrays);
+
+            if (index < alchemyArrays.length)
+            {
+                return alchemyArrays[index];
+            }
+        }
+
+        return null;
+    }
+
     public SortedSet<AlchemyArray> getRegisteredAlchemyArrays()
     {
         return ImmutableSortedSet.copyOf(registeredAlchemyArrays);

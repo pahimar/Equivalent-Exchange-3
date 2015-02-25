@@ -18,19 +18,19 @@ public class KeyInputEventHandler
 {
     private static Key getPressedKeybinding()
     {
-        if (Keybindings.charge.isPressed())
+        if (Keybindings.charge.getIsKeyPressed())
         {
             return Key.CHARGE;
         }
-        else if (Keybindings.extra.isPressed())
+        else if (Keybindings.extra.getIsKeyPressed())
         {
             return Key.EXTRA;
         }
-        else if (Keybindings.release.isPressed())
+        else if (Keybindings.release.getIsKeyPressed())
         {
             return Key.RELEASE;
         }
-        else if (Keybindings.toggle.isPressed())
+        else if (Keybindings.toggle.getIsKeyPressed())
         {
             return Key.TOGGLE;
         }

@@ -83,6 +83,11 @@ tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station
 tile.ee3:augmentationTable.name=Augmentation Table [WIP]
 tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
+tile.ee3:ashInfusedStone.name=Ash Infused Stone
+tile.ee3:alchemyArray.name=Alchemy Array [WIP]
+
+# Alchemy Arrays
+arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
 
 # GUIs
 container.ee3:alchemicalBag=Alchemical Bag

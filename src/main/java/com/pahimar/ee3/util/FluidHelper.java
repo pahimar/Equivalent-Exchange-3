@@ -12,6 +12,7 @@ import java.util.Comparator;
 public class FluidHelper
 {
 
+    // TODO Possible problem with comparator
     public static Comparator<FluidStack> comparator = new Comparator<FluidStack>()
     {
 

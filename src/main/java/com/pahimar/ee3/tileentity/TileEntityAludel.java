@@ -4,7 +4,7 @@ import com.pahimar.ee3.item.ItemAlchemicalDust;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAludel;
-import com.pahimar.ee3.recipe.RecipesAludel;
+import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -328,7 +328,7 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
         }
         else
         {
-            ItemStack infusedItemStack = RecipesAludel.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+            ItemStack infusedItemStack = AludelRecipeManager.getInstance().getResult(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
 
             if (infusedItemStack == null)
             {
@@ -358,7 +358,7 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     {
         if (this.canInfuse())
         {
-            RecipeAludel recipe = RecipesAludel.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
+            RecipeAludel recipe = AludelRecipeManager.getInstance().getRecipe(inventory[INPUT_INVENTORY_INDEX], inventory[DUST_INVENTORY_INDEX]);
 
             if (this.inventory[OUTPUT_INVENTORY_INDEX] == null)
             {

@@ -2,37 +2,36 @@ package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
+import net.minecraft.item.ItemStack;
 
-import java.util.SortedSet;
-
-public class AlchemyArrayRegistryProxy
+// TODO Clean this up and make it more nice for modders. Consider this very volatile for the time being
+public class AludelRecipeProxy
 {
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static boolean registerAlchemyArray(AlchemyArray alchemyArray)
+    public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
         init();
 
         if (ee3Mod != null)
         {
-            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().registerAlchemyArray(alchemyArray);
+            EE3Wrapper.ee3mod.getAludelRecipeManager().addRecipe(recipeOutput, recipeInputStack, recipeInputDust);
         }
-
-        return false;
     }
 
-    public static SortedSet<AlchemyArray> getRegisteredAlchemyArrays()
+    public ItemStack getResult(ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
         init();
 
         if (ee3Mod != null)
         {
-            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().getRegisteredAlchemyArrays();
+            return EE3Wrapper.ee3mod.getAludelRecipeManager().getResult(recipeInputStack, recipeInputDust);
         }
 
         return null;
     }
+
 
     private static class EE3Wrapper
     {

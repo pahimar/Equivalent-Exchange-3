@@ -9,22 +9,22 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipesAludel
+public class AludelRecipeManager
 {
-    private static RecipesAludel aludelRegistry = null;
+    private static AludelRecipeManager aludelRegistry = null;
 
     private List<RecipeAludel> aludelRecipes;
 
-    private RecipesAludel()
+    private AludelRecipeManager()
     {
         aludelRecipes = new ArrayList<RecipeAludel>();
     }
 
-    public static RecipesAludel getInstance()
+    public static AludelRecipeManager getInstance()
     {
         if (aludelRegistry == null)
         {
-            aludelRegistry = new RecipesAludel();
+            aludelRegistry = new AludelRecipeManager();
         }
 
         return aludelRegistry;
@@ -81,7 +81,7 @@ public class RecipesAludel
 
     public static void registerRecipes()
     {
-        for (RecipeAludel recipeAludel : RecipesAludel.getInstance().getRecipes())
+        for (RecipeAludel recipeAludel : AludelRecipeManager.getInstance().getRecipes())
         {
             RecipeRegistryProxy.addRecipe(recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputsAsWrappedStacks());
         }

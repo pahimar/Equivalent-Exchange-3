@@ -7,7 +7,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 import com.pahimar.ee3.client.gui.inventory.GuiAludel;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
-import com.pahimar.ee3.recipe.RecipesAludel;
+import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Textures;
@@ -99,7 +99,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
     @Override
     public void loadCraftingRecipes(ItemStack result)
     {
-        for (RecipeAludel recipe : RecipesAludel.getInstance().getRecipes())
+        for (RecipeAludel recipe : AludelRecipeManager.getInstance().getRecipes())
         {
             if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getRecipeOutput(), result))
             {
@@ -113,7 +113,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
     {
         if (outputId.equals(getRecipeID()))
         {
-            for (RecipeAludel recipe : RecipesAludel.getInstance().getRecipes())
+            for (RecipeAludel recipe : AludelRecipeManager.getInstance().getRecipes())
             {
                 arecipes.add(new CachedAludelRecipe(recipe));
             }
@@ -135,7 +135,7 @@ public class AludelRecipeHandler extends TemplateRecipeHandler
     @Override
     public void loadUsageRecipes(ItemStack ingredient)
     {
-        for (RecipeAludel recipe : RecipesAludel.getInstance().getRecipes())
+        for (RecipeAludel recipe : AludelRecipeManager.getInstance().getRecipes())
         {
             for (WrappedStack wrappedStack : recipe.getRecipeInputs())
             {
