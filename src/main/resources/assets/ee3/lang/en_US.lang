@@ -30,7 +30,7 @@ item.ee3:alchemicalDust.minium.name=Minium Dust
 item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemical Coal
 item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Fuel
 item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Fuel
-item.ee3:chalk.name=Chalk [WIP]
+item.ee3:chalk.name=Chalk
 item.ee3:diviningRod.name=Divining Rod [WIP]
 item.ee3:shardMinium.name=Shard of Minium
 item.ee3:stoneInert.name=Inert Stone
@@ -90,6 +90,7 @@ tile.ee3:dummyArray.name=Alchemy Array
 
 # Alchemy Arrays
 arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
+arrays.ee3:transmutationAlchemyArray=Transmutation Alchemy Array [WIP]
 
 # GUIs
 container.ee3:alchemicalBag=Alchemical Bag
@@ -102,7 +103,7 @@ container.ee3:augmentationTable=Augmentation Table [WIP]
 container.ee3:alchemicalTome=Tome of Alchemical Knowledge
 container.ee3:alchemicalTome.noTransmutationsKnown=You don't know how to transmute anything yet!
 container.ee3:alchemicalTome.howToLearnTransmutations=Use a Research Station to teach yourself how to transmute items
-container.ee3:transmutationSquare=Transmutation Square [WIP]
+container.ee3:transmutationAlchemyArray=Transmutation Square [WIP]
 
 # NEI
 gui.nei.ee3:calcination=Calcination

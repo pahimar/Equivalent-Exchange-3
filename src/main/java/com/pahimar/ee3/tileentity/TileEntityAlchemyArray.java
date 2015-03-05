@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
@@ -17,7 +18,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityAlchemyArray extends TileEntityEE
+public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 {
     private AlchemyArray alchemyArray;
     private ForgeDirection rotation;
@@ -245,10 +246,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onBlockActivated(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onArrayActivated(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer, sideHit, hitX, hitY, hitZ);
-        }
+        alchemyArray.onArrayActivated(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer, sideHit, hitX, hitY, hitZ);
     }
 
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
@@ -258,10 +256,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onBlockClicked(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onArrayClicked(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer);
-        }
+        alchemyArray.onArrayClicked(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer);
     }
 
     public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
@@ -271,10 +266,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onBlockDestroyedByExplosion(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Explosion explosion)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onArrayDestroyedByExplosion(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, explosion);
-        }
+        alchemyArray.onArrayDestroyedByExplosion(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, explosion);
     }
 
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
@@ -284,10 +276,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onBlockDestroyedByPlayer(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, int metaData)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onArrayDestroyedByPlayer(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, metaData);
-        }
+        alchemyArray.onArrayDestroyedByPlayer(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, metaData);
     }
 
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
@@ -297,10 +286,7 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onEntityCollidedWithBlock(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onEntityCollidedWithArray(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity);
-        }
+        alchemyArray.onEntityCollidedWithArray(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity);
     }
 
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
@@ -310,20 +296,13 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
     public void onFallenUpon(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity, float fallDistance)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onArrayFallenUpon(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity, fallDistance);
-        }
+        alchemyArray.onArrayFallenUpon(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity, fallDistance);
     }
 
     public void onUpdate(World world, int x, int y, int z)
     {
-        if (!world.isRemote)
-        {
-            alchemyArray.onUpdate(world, x, y, z);
-        }
+        alchemyArray.onUpdate(world, x, y, z);
     }
-
 
     @Override
     public Packet getDescriptionPacket()
@@ -423,6 +402,132 @@ public class TileEntityAlchemyArray extends TileEntityEE
                         tileEntityDummyArray.getTrueYCoord() == this.yCoord &&
                         tileEntityDummyArray.getTrueZCoord() == this.zCoord;
             }
+        }
+
+        return false;
+    }
+
+    @Override
+    public int getSizeInventory()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).getSizeInventory();
+        }
+
+        return 0;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slotIndex)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).getStackInSlot(slotIndex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ItemStack decrStackSize(int slotIndex, int decrementAmount)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).decrStackSize(slotIndex, decrementAmount);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slotIndex)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).getStackInSlotOnClosing(slotIndex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            ((IInventory) alchemyArray).setInventorySlotContents(slotIndex, itemStack);
+        }
+    }
+
+    @Override
+    public String getInventoryName()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).getInventoryName();
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).hasCustomInventoryName();
+        }
+
+        return false;
+    }
+
+    @Override
+    public int getInventoryStackLimit()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).getInventoryStackLimit();
+        }
+
+        return 0;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).isUseableByPlayer(entityplayer);
+        }
+
+        return false;
+    }
+
+    @Override
+    public void openInventory()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            ((IInventory) alchemyArray).openInventory();
+        }
+    }
+
+    @Override
+    public void closeInventory()
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            ((IInventory) alchemyArray).closeInventory();
+        }
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
+    {
+        if (alchemyArray instanceof IInventory)
+        {
+            return ((IInventory) alchemyArray).isItemValidForSlot(slotIndex, itemStack);
         }
 
         return false;

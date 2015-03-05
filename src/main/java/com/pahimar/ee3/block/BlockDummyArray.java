@@ -8,6 +8,7 @@ import com.pahimar.ee3.tileentity.TileEntityEE;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -102,15 +104,91 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
+                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entityPlayer, sideHit, hitX, hitY, hitZ);
             }
         }
 
         return false;
+    }
+
+    @Override
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
+
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onBlockClicked(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entityPlayer);
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
+
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onBlockDestroyedByExplosion(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, explosion);
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
+
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onBlockDestroyedByPlayer(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, metaData);
+            }
+        }
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
+
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onEntityCollidedWithBlock(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entity);
+            }
+        }
+    }
+
+    @Override
+    public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
+
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onFallenUpon(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entity, fallDistance);
+            }
+        }
     }
 
     @Override

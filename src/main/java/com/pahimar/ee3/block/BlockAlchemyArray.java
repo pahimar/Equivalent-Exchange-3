@@ -214,6 +214,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
             {
                 // Set adjusted rotation
                 int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+                world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z), 3);
                 ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setRotation(chalkSettings.getRotation(), facing);
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setAlchemyArray(alchemyArray, chalkSettings.getSize());
@@ -227,7 +228,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && !entityPlayer.isSneaking())
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && !entityPlayer.isSneaking())
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
         }
@@ -238,7 +239,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockClicked(world, x, y, z, entityPlayer);
         }
@@ -247,7 +248,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockDestroyedByExplosion(world, x, y, z, explosion);
         }
@@ -256,7 +257,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockDestroyedByPlayer(world, x, y, z, metaData);
         }
@@ -265,7 +266,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onEntityCollidedWithBlock(world, x, y, z, entity);
         }
@@ -274,7 +275,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onFallenUpon(world, x, y, z, entity, fallDistance);
         }

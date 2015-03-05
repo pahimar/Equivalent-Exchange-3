@@ -23,6 +23,8 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         super();
         this.setUnlocalizedName(Names.Items.CHALK);
+        this.setMaxDamage(50);
+        this.canRepair = true;
     }
 
     /**
@@ -78,7 +80,12 @@ public class ItemChalk extends ItemEE implements IKeyBound
             chalkSettings.readFromNBT(playerCustomData);
             int coordOffset = chalkSettings.getSize() - 1;
             ForgeDirection orientation = ForgeDirection.getOrientation(side);
-            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side); // TODO Not hardcoded to basic alchemy array
+            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
+
+            if (itemStack.getMaxDamage() - itemStack.getItemDamage() < (2 * coordOffset) + 1)
+            {
+                canPlaceAlchemyArray = false;
+            }
 
             if (canPlaceAlchemyArray)
             {
@@ -138,9 +145,9 @@ public class ItemChalk extends ItemEE implements IKeyBound
             chalkSettings.readFromNBT(playerCustomData);
             int coordOffset = chalkSettings.getSize() - 1;
             ForgeDirection orientation = ForgeDirection.getOrientation(side);
-            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side); // TODO Not hardcoded to basic alchemy array
+            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
 
-            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.alchemyArray, side); // TODO Not hardcoded to basic alchemy array
+            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.alchemyArray, side);
 
             if (canPlaceAlchemyArray)
             {
@@ -214,6 +221,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
 
             if (world.getBlock(x, y, z) == block)
             {
+                itemStack.damageItem(1, entityPlayer);
                 block.onBlockPlacedBy(world, x, y, z, entityPlayer, itemStack);
                 block.onPostBlockPlaced(world, x, y, z, metadata);
             }
