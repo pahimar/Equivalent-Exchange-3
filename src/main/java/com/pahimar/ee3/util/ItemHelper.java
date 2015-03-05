@@ -6,7 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.UUID;
 
 public class ItemHelper
 {
@@ -235,54 +236,6 @@ public class ItemHelper
         return "null";
     }
 
-    public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString)
-    {
-        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-
-        for (ItemStack itemStack : unfilteredItemStackSet)
-        {
-            String itemDisplayName = itemStack.getDisplayName().toLowerCase();
-
-            if (filterString != null)
-            {
-                if (itemDisplayName.startsWith(filterString.toLowerCase()))
-                {
-                    nameSortedSet.add(itemStack);
-                }
-            }
-            else
-            {
-                nameSortedSet.add(itemStack);
-            }
-        }
-
-        return nameSortedSet;
-    }
-
-    public static Set<ItemStack> filterByNameContains(Set<ItemStack> unfilteredItemStackSet, String filterString)
-    {
-        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-
-        for (ItemStack itemStack : unfilteredItemStackSet)
-        {
-            String itemDisplayName = itemStack.getDisplayName().toLowerCase();
-
-            if (filterString != null)
-            {
-                if (itemDisplayName.contains(filterString.toLowerCase()))
-                {
-                    nameSortedSet.add(itemStack);
-                }
-            }
-            else
-            {
-                nameSortedSet.add(itemStack);
-            }
-        }
-
-        return nameSortedSet;
-    }
-
     public static boolean hasOwner(ItemStack itemStack)
     {
         return (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
@@ -335,22 +288,4 @@ public class ItemHelper
         NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
     }
 
-    public static void filterOutItemsWithInvalidIcons(List<ItemStack> unfilteredCollection)
-    {
-        List<ItemStack> itemsToRemove = new ArrayList<ItemStack>();
-
-        for (ItemStack itemStack : unfilteredCollection)
-        {
-            try
-            {
-                itemStack.getItem().getIconIndex(itemStack);
-            }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
-                itemsToRemove.add(itemStack);
-            }
-        }
-
-        unfilteredCollection.removeAll(itemsToRemove);
-    }
 }

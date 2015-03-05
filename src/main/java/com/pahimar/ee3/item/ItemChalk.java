@@ -76,9 +76,9 @@ public class ItemChalk extends ItemEE implements IKeyBound
             NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
-            int coordOffset = getOffsetForSize(chalkSettings.getSize());
+            int coordOffset = chalkSettings.getSize() - 1;
             ForgeDirection orientation = ForgeDirection.getOrientation(side);
-            boolean canPlaceAlchemyArray = ModBlocks.basicAlchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
+            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side); // TODO Not hardcoded to basic alchemy array
 
             if (canPlaceAlchemyArray)
             {
@@ -88,7 +88,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                     {
                         for (int j = z - coordOffset; j <= z + coordOffset; j++)
                         {
-                            if ((i != x || j != z) && (!ModBlocks.dummyAlchemyArray.canPlaceBlockOnSide(world, i, y, j, side) || world.getTileEntity(i, y, j) instanceof TileEntityDummyArray))
+                            if ((i != x || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, y, j, side) || world.getTileEntity(i, y, j) instanceof TileEntityDummyArray))
                             {
                                 canPlaceAlchemyArray = false;
                             }
@@ -101,7 +101,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                     {
                         for (int j = y - coordOffset; j <= y + coordOffset; j++)
                         {
-                            if ((i != x || j != y) && (!ModBlocks.dummyAlchemyArray.canPlaceBlockOnSide(world, i, j, z, side) || world.getTileEntity(i, j, z) instanceof TileEntityDummyArray))
+                            if ((i != x || j != y) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, i, j, z, side) || world.getTileEntity(i, j, z) instanceof TileEntityDummyArray))
                             {
                                 canPlaceAlchemyArray = false;
                             }
@@ -114,7 +114,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                     {
                         for (int j = z - coordOffset; j <= z + coordOffset; j++)
                         {
-                            if ((i != y || j != z) && (!ModBlocks.dummyAlchemyArray.canPlaceBlockOnSide(world, x, i, j, side) || world.getTileEntity(x, i, j) instanceof TileEntityDummyArray))
+                            if ((i != y || j != z) && (!ModBlocks.dummyArray.canPlaceBlockOnSide(world, x, i, j, side) || world.getTileEntity(x, i, j) instanceof TileEntityDummyArray))
                             {
                                 canPlaceAlchemyArray = false;
                             }
@@ -136,11 +136,11 @@ public class ItemChalk extends ItemEE implements IKeyBound
             NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
-            int coordOffset = getOffsetForSize(chalkSettings.getSize());
+            int coordOffset = chalkSettings.getSize() - 1;
             ForgeDirection orientation = ForgeDirection.getOrientation(side);
-            boolean canPlaceAlchemyArray = ModBlocks.basicAlchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
+            boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side); // TODO Not hardcoded to basic alchemy array
 
-            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.basicAlchemyArray, side);
+            placeBlockAt(entityPlayer, itemStack, world, x, y, z, ModBlocks.alchemyArray, side); // TODO Not hardcoded to basic alchemy array
 
             if (canPlaceAlchemyArray)
             {
@@ -152,7 +152,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                         {
                             if (i != x || j != z)
                             {
-                                placeBlockAt(entityPlayer, itemStack, world, i, y, j, ModBlocks.dummyAlchemyArray, side);
+                                placeBlockAt(entityPlayer, itemStack, world, i, y, j, ModBlocks.dummyArray, side);
                                 if (world.getTileEntity(i, y, j) instanceof TileEntityDummyArray)
                                 {
                                     ((TileEntityDummyArray) world.getTileEntity(i, y, j)).setTrueCoords(x, y, z);
@@ -169,7 +169,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                         {
                             if (i != x || j != y)
                             {
-                                placeBlockAt(entityPlayer, itemStack, world, i, j, z, ModBlocks.dummyAlchemyArray, side);
+                                placeBlockAt(entityPlayer, itemStack, world, i, j, z, ModBlocks.dummyArray, side);
                                 {
                                     ((TileEntityDummyArray) world.getTileEntity(i, j, z)).setTrueCoords(x, y, z);
                                 }
@@ -185,7 +185,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
                         {
                             if (i != y || j != z)
                             {
-                                placeBlockAt(entityPlayer, itemStack, world, x, i, j, ModBlocks.dummyAlchemyArray, side);
+                                placeBlockAt(entityPlayer, itemStack, world, x, i, j, ModBlocks.dummyArray, side);
                                 {
                                     ((TileEntityDummyArray) world.getTileEntity(x, i, j)).setTrueCoords(x, y, z);
                                 }
@@ -205,15 +205,18 @@ public class ItemChalk extends ItemEE implements IKeyBound
      */
     private boolean placeBlockAt(EntityPlayer entityPlayer, ItemStack itemStack, World world, int x, int y, int z, Block block, int metadata)
     {
-        if (!world.setBlock(x, y, z, block, metadata, 3))
+        if (!world.isRemote)
         {
-            return false;
-        }
+            if (!world.setBlock(x, y, z, block, metadata, 3))
+            {
+                return false;
+            }
 
-        if (world.getBlock(x, y, z) == block)
-        {
-            block.onBlockPlacedBy(world, x, y, z, entityPlayer, itemStack);
-            block.onPostBlockPlaced(world, x, y, z, metadata);
+            if (world.getBlock(x, y, z) == block)
+            {
+                block.onBlockPlacedBy(world, x, y, z, entityPlayer, itemStack);
+                block.onPostBlockPlaced(world, x, y, z, metadata);
+            }
         }
 
         return true;
@@ -266,27 +269,5 @@ public class ItemChalk extends ItemEE implements IKeyBound
             EntityHelper.saveCustomEntityData(entityPlayer, playerCustomData);
             PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) entityPlayer);
         }
-    }
-
-    private static int getOffsetForSize(int size)
-    {
-        if (size == 1)
-        {
-            return 0;
-        }
-        else if (size == 2 || size == 3)
-        {
-            return 1;
-        }
-        else if (size == 4 || size == 5)
-        {
-            return 2;
-        }
-        else if (size == 6 || size == 7)
-        {
-            return 3;
-        }
-
-        return 0;
     }
 }

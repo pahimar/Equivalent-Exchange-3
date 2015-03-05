@@ -6,10 +6,14 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -210,7 +214,8 @@ public class TileEntityAlchemyArray extends TileEntityEE
 
         if (!worldObj.isRemote)
         {
-            if (++ticksSinceSync % 100 == 0)
+            ++ticksSinceSync;
+            if (ticksSinceSync % 100 == 0)
             {
                 if (!areDummyBlocksValid())
                 {
@@ -218,14 +223,104 @@ public class TileEntityAlchemyArray extends TileEntityEE
                     worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 }
             }
+
+            onUpdate(worldObj, xCoord, yCoord, zCoord);
         }
+    }
+
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        onBlockPlacedBy(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entityLiving, itemStack);
+    }
+
+    public void onBlockPlacedBy(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+        alchemyArray.onArrayPlacedBy(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityLiving, itemStack);
     }
 
     public void onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
+        onBlockActivated(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entityPlayer, sideHit, hitX, hitY, hitZ);
+    }
+
+    public void onBlockActivated(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
         if (!world.isRemote)
         {
-            alchemyArray.onArrayActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
+            alchemyArray.onArrayActivated(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer, sideHit, hitX, hitY, hitZ);
+        }
+    }
+
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
+    {
+        onBlockClicked(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entityPlayer);
+    }
+
+    public void onBlockClicked(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onArrayClicked(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer);
+        }
+    }
+
+    public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
+    {
+        onBlockDestroyedByExplosion(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, explosion);
+    }
+
+    public void onBlockDestroyedByExplosion(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Explosion explosion)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onArrayDestroyedByExplosion(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, explosion);
+        }
+    }
+
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
+    {
+        onBlockDestroyedByPlayer(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, metaData);
+    }
+
+    public void onBlockDestroyedByPlayer(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, int metaData)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onArrayDestroyedByPlayer(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, metaData);
+        }
+    }
+
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+    {
+        onEntityCollidedWithBlock(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entity);
+    }
+
+    public void onEntityCollidedWithBlock(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onEntityCollidedWithArray(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity);
+        }
+    }
+
+    public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
+    {
+        onFallenUpon(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entity, fallDistance);
+    }
+
+    public void onFallenUpon(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity, float fallDistance)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onArrayFallenUpon(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity, fallDistance);
+        }
+    }
+
+    public void onUpdate(World world, int x, int y, int z)
+    {
+        if (!world.isRemote)
+        {
+            alchemyArray.onUpdate(world, x, y, z);
         }
     }
 
@@ -244,6 +339,16 @@ public class TileEntityAlchemyArray extends TileEntityEE
         size = nbtTagCompound.getInteger("size");
         NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
         alchemyArray = AlchemyArray.readArrayFromNBT(alchemyArrayTagCompound);
+        try
+        {
+            Class clazz = Class.forName(alchemyArray.getClassName());
+            alchemyArray = (AlchemyArray) clazz.getConstructor().newInstance();
+        }
+        catch (Exception e)
+        {
+            this.invalidate();
+            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+        }
     }
 
     @Override

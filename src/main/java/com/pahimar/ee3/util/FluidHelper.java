@@ -79,7 +79,6 @@ public class FluidHelper
         }
     };
 
-    // TODO Get Milk working
     public static void registerFluids()
     {
         // Register Milk in the FluidRegistry if it hasn't already been done
@@ -98,7 +97,6 @@ public class FluidHelper
 
     public static String toString(FluidStack fluidStack)
     {
-
         if (fluidStack != null)
         {
             return String.format("%sxfluidStack.%s", fluidStack.amount, fluidStack.getFluid().getName());

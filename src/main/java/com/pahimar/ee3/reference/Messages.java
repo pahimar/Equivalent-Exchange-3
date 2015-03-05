@@ -5,6 +5,9 @@ public final class Messages
     public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
     public static final String ITEM_BELONGS_TO = "tooltip.ee3:belongsTo";
     public static final String ITEM_BELONGS_TO_NO_ONE = "tooltip.ee3:belongsToNoOne";
+    public static final String SMALL = "tooltip.ee3:small";
+    public static final String MEDIUM = "tooltip.ee3:medium";
+    public static final String LARGE = "tooltip.ee3:large";
 
     public static final String OWNER_SET_TO_SELF = "misc.ee3:owner-set-to-self";
 

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.init.Blocks;
@@ -173,5 +174,21 @@ public class EnergyValues
          *  Minium Shard
          */
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new ItemStack(ModItems.shardMinium)), 8192);
+
+        // TODO Break this into a proper post-assignment method for logical delineation
+        //        EnergyValueRegistry.getInstance().addPostAssignedDependentEnergyValue(Items.water_bucket, Arrays.asList(Items.bucket, new WrappedStack(FluidRegistry.WATER)));
+        EnergyValueRegistry.getInstance().addPostAssignedExactEnergyValue(Items.water_bucket, 769);
+        EnergyValueRegistry.getInstance().addPostAssignedExactEnergyValue(Items.milk_bucket, 832);
+        //        if (!FluidRegistry.isFluidRegistered("milk"))
+        //        {
+        //            Fluid milk = new Fluid("milk").setUnlocalizedName(Items.milk_bucket.getUnlocalizedName());
+        //            FluidRegistry.registerFluid(milk);
+        //            FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
+        //            EnergyValueRegistry.getInstance().addPostAssignedDependentEnergyValue(Items.milk_bucket, Arrays.asList(Items.bucket, new FluidStack(milk, 1000)));
+        //        }
+        //        else
+        //        {
+        //            EnergyValueRegistry.getInstance().addPostAssignedDependentEnergyValue(Items.milk_bucket, Arrays.asList(Items.bucket, new FluidStack(FluidRegistry.getFluid("milk"), 1000)));
+        //        }
     }
 }

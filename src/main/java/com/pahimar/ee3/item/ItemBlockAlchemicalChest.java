@@ -1,5 +1,6 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.reference.Messages;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -27,20 +28,19 @@ public class ItemBlockAlchemicalChest extends ItemBlock
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean flag)
     {
-        // TODO Localize and add more descriptive text
         int metaData = itemStack.getItemDamage();
 
         if (metaData == 0)
         {
-            list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.small"));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.SMALL)));
         }
         else if (metaData == 1)
         {
-            list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.medium"));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.MEDIUM)));
         }
         else if (metaData == 2)
         {
-            list.add(StatCollector.translateToLocal("tooltip.ee3:alchemicalChestPrefix.large"));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.LARGE)));
         }
     }
 }

@@ -37,22 +37,22 @@ public class ItemTooltipEventHandler
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
-            if (EnergyValueRegistry.getInstance().hasEnergyValue(stack))
+            if (EnergyValueRegistry.getInstance().getEnergyValue(stack) != null)
             {
                 EnergyValue energyValue = EnergyValueRegistry.getInstance().getEnergyValue(stack);
                 if (stack.getStackSize() > 1)
                 {
-                    event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getEnergyValue())));
-                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getEnergyValue()))); // TODO Localize
+                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue()))); // TODO Localize
                 }
                 else
                 {
-                    event.toolTip.add(String.format("Exchange Energy: %s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue())));
+                    event.toolTip.add(String.format("Exchange Energy: %s", energyValueDecimalFormat.format(stack.getStackSize() * energyValue.getEnergyValue()))); // TODO Localize
                 }
             }
             else
             {
-                event.toolTip.add("No Exchange Energy value");
+                event.toolTip.add("No Exchange Energy value"); // TODO Localize
             }
         }
 

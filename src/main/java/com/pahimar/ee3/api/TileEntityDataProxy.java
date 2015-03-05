@@ -1,7 +1,6 @@
 package com.pahimar.ee3.api;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.tileentity.TileEntityEE;
 import cpw.mods.fml.common.Mod;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -27,9 +26,11 @@ public class TileEntityDataProxy
 
     public static ForgeDirection getOrientation(World world, int xCoord, int yCoord, int zCoord)
     {
-        if (!world.isRemote && world.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityEE)
+        init();
+
+        if (ee3Mod != null)
         {
-            return ((TileEntityEE) world.getTileEntity(xCoord, yCoord, zCoord)).getOrientation();
+            return EE3Wrapper.ee3mod.getTileEntityDataHelper().getOrientation(world, xCoord, yCoord, zCoord);
         }
 
         return null;
@@ -37,9 +38,11 @@ public class TileEntityDataProxy
 
     public static short getState(World world, int xCoord, int yCoord, int zCoord)
     {
-        if (!world.isRemote && world.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityEE)
+        init();
+
+        if (ee3Mod != null)
         {
-            return ((TileEntityEE) world.getTileEntity(xCoord, yCoord, zCoord)).getState();
+            return EE3Wrapper.ee3mod.getTileEntityDataHelper().getState(world, xCoord, yCoord, zCoord);
         }
 
         return Short.MIN_VALUE;
@@ -47,9 +50,11 @@ public class TileEntityDataProxy
 
     public static String getCustomName(World world, int xCoord, int yCoord, int zCoord)
     {
-        if (!world.isRemote && world.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityEE)
+        init();
+
+        if (ee3Mod != null)
         {
-            return ((TileEntityEE) world.getTileEntity(xCoord, yCoord, zCoord)).getCustomName();
+            return EE3Wrapper.ee3mod.getTileEntityDataHelper().getCustomName(world, xCoord, yCoord, zCoord);
         }
 
         return null;
@@ -57,9 +62,11 @@ public class TileEntityDataProxy
 
     public static UUID getOwnerUUID(World world, int xCoord, int yCoord, int zCoord)
     {
-        if (!world.isRemote && world.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityEE)
+        init();
+
+        if (ee3Mod != null)
         {
-            return ((TileEntityEE) world.getTileEntity(xCoord, yCoord, zCoord)).getOwnerUUID();
+            return EE3Wrapper.ee3mod.getTileEntityDataHelper().getOwnerUUID(world, xCoord, yCoord, zCoord);
         }
 
         return null;
@@ -67,9 +74,11 @@ public class TileEntityDataProxy
 
     public static String getOwnerName(World world, int xCoord, int yCoord, int zCoord)
     {
-        if (!world.isRemote && world.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityEE)
+        init();
+
+        if (ee3Mod != null)
         {
-            return ((TileEntityEE) world.getTileEntity(xCoord, yCoord, zCoord)).getOwnerName();
+            return EE3Wrapper.ee3mod.getTileEntityDataHelper().getOwnerName(world, xCoord, yCoord, zCoord);
         }
 
         return null;

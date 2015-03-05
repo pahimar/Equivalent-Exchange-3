@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -28,7 +27,7 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     {
         super(Material.circuits);
         setCreativeTab(null);
-        this.setBlockName(Names.Blocks.DUMMY_ALCHEMY_ARRAY);
+        this.setBlockName(Names.Blocks.DUMMY_ARRAY);
     }
 
     @Override
@@ -103,11 +102,12 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            int trueXCoord = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getTrueXCoord();
-            int trueYCoord = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getTrueYCoord();
-            int trueZCoord = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getTrueZCoord();
+            TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
-            return world.getBlock(trueXCoord, trueYCoord, trueZCoord).onBlockActivated(world, trueXCoord, trueYCoord, trueZCoord, entityPlayer, sideHit, hitX, hitY, hitZ);
+            if (tileEntityAlchemyArray != null)
+            {
+                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
+            }
         }
 
         return false;
@@ -165,12 +165,6 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
 
     @Override
     public Item getItemDropped(int par1, Random random, int par2)
-    {
-        return null;
-    }
-
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
         return null;
     }

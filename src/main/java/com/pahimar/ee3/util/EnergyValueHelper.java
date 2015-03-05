@@ -12,11 +12,11 @@ import java.util.List;
 
 public class EnergyValueHelper
 {
-    public static EnergyValue computeEnergyValueFromList(List<WrappedStack> wrappedStacks)
+    public static EnergyValue computeEnergyValueFromRecipe(WrappedStack outputStack, List<WrappedStack> inputStacks)
     {
         float computedValue = 0f;
 
-        for (WrappedStack wrappedStack : wrappedStacks)
+        for (WrappedStack wrappedStack : inputStacks)
         {
             EnergyValue wrappedStackValue;
             int stackSize = -1;
@@ -56,6 +56,10 @@ public class EnergyValueHelper
                 {
                     wrappedStackValue = new EnergyValue(0);
                 }
+                else if (OreDictionary.getOreIDs(itemStack).length > 0)
+                {
+                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack, true);
+                }
                 else
                 {
                     wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
@@ -93,7 +97,7 @@ public class EnergyValueHelper
             }
         }
 
-        return new EnergyValue(computedValue);
+        return factorEnergyValue(new EnergyValue(computedValue), outputStack.getStackSize());
     }
 
     public static EnergyValue factorEnergyValue(EnergyValue energyValue, int factor)

@@ -13,8 +13,16 @@ public class Names
         public static final String RESEARCH_STATION = "researchStation";
         public static final String AUGMENTATION_TABLE = "augmentationTable";
         public static final String ASH_INFUSED_STONE = "ashInfusedStone";
-        public static final String BASIC_ALCHEMY_ARRAY = "basicAlchemyArray";
-        public static final String DUMMY_ALCHEMY_ARRAY = "dummyAlchemyArray";
+        public static final String ALCHEMY_ARRAY = "alchemyArray";
+        public static final String DUMMY_ARRAY = "dummyArray";
+    }
+
+    public static final class TileEntities
+    {
+        private static final String PREFIX = "tile.ee3:";
+        private static final String SUFFIX = ".name";
+
+        public static final String ALCHEMICAL_CHEST = PREFIX + Blocks.ALCHEMICAL_CHEST + SUFFIX;
     }
 
     public static final class Items
@@ -29,6 +37,7 @@ public class Names
         public static final String[] ALCHEMICAL_FUEL_SUBTYPES = {ALCHEMICAL_COAL, MOBIUS_FUEL, AETERNALIS_FUEL};
         public static final String CHALK = "chalk";
         public static final String INERT_STONE = "stoneInert";
+        public static final String LOOT_BALL = "lootBall";
         public static final String MINIUM_SHARD = "shardMinium";
         public static final String MINIUM_STONE = "stoneMinium";
         public static final String PHILOSOPHERS_STONE = "stonePhilosophers";
@@ -149,6 +158,7 @@ public class Names
     public static final class AlchemyArrays
     {
         private static final String ALCHEMY_ARRAY_BASE = "arrays.ee3:";
-        public static final String BASIC_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "basicAlchemyArray";
+        public static final String BASIC_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "test";
+        public static final String TRANSMUTATION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "transmutation";
     }
 }

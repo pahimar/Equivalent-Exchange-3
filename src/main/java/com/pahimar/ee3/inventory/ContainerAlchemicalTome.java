@@ -1,6 +1,7 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
+import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -164,8 +165,8 @@ public class ContainerAlchemicalTome extends ContainerEE
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(ItemHelper.filterByNameContains(inventoryTransmutationKnowledge.getKnownTransmutations(), searchTerm));
-        ItemHelper.filterOutItemsWithInvalidIcons(filteredList);
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryTransmutationKnowledge.getKnownTransmutations(), searchTerm, ItemHelper.displayNameComparator));
+        FilterUtils.filterOutListItemsWithInvalidIcons(filteredList, ItemHelper.displayNameComparator);
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

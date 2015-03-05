@@ -19,8 +19,8 @@ public class ModBlocks
     public static final BlockEE researchStation = new BlockResearchStation();
     public static final BlockEE augmentationTable = new BlockAugmentationTable();
     public static final BlockEE ashInfusedStone = new BlockAshInfusedStone();
-    public static final BlockEE basicAlchemyArray = new BlockAlchemyArray();
-    public static final BlockEE dummyAlchemyArray = new BlockDummyArray();
+    public static final BlockEE alchemyArray = new BlockAlchemyArray();
+    public static final BlockEE dummyArray = new BlockDummyArray();
 
     public static void init()
     {
@@ -33,7 +33,7 @@ public class ModBlocks
         GameRegistry.registerBlock(chalkBlock, Names.Blocks.CHALK);
         GameRegistry.registerBlock(alchemicalFuelBlock, ItemBlockAlchemicalFuel.class, Names.Blocks.ALCHEMICAL_FUEL);
         GameRegistry.registerBlock(ashInfusedStone, Names.Blocks.ASH_INFUSED_STONE);
-        GameRegistry.registerBlock(basicAlchemyArray, Names.Blocks.BASIC_ALCHEMY_ARRAY);
-        GameRegistry.registerBlock(dummyAlchemyArray, Names.Blocks.DUMMY_ALCHEMY_ARRAY);
+        GameRegistry.registerBlock(alchemyArray, Names.Blocks.ALCHEMY_ARRAY);
+        GameRegistry.registerBlock(dummyArray, Names.Blocks.DUMMY_ARRAY);
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.INBTTaggable;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.Item;
@@ -133,12 +134,12 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
 
     public Set<ItemStack> filterByNameStartsWith(String filterString)
     {
-        return ItemHelper.filterByNameStartsWith(getKnownTransmutations(), filterString);
+        return FilterUtils.filterByNameStartsWith(getKnownTransmutations(), filterString);
     }
 
     public Set<ItemStack> filterByNameContains(String filterString)
     {
-        return ItemHelper.filterByNameContains(getKnownTransmutations(), filterString);
+        return FilterUtils.filterByNameContains(getKnownTransmutations(), filterString);
     }
 
     @Override

@@ -57,6 +57,7 @@ public final class Textures
     {
         private static final String SYMBOL_TEXTURE_LOCATION = "textures/arrays/";
 
-        public static final ResourceLocation BASIC_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "basicAlchemyArray.png");
+        public static final ResourceLocation BASIC_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "test.png");
+        public static final ResourceLocation TRANSMUTATION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transmutation.png");
     }
 }

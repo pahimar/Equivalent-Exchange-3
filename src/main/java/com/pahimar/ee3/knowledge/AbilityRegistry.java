@@ -59,7 +59,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         this.allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.baseComparator);
         for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
         {
-            if (isLearnable(wrappedStack))
+            if (isLearnable(wrappedStack) && EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack) != null)
             {
                 if (wrappedStack.getWrappedStack() instanceof OreStack)
                 {

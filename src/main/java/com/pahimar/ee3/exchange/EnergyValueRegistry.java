@@ -30,7 +30,8 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
-    private static Map<WrappedStack, EnergyValue> postAssignedMappings;
+    private static Map<WrappedStack, EnergyValue> postAssignedExactMappings;
+    private static Map<WrappedStack, List<WrappedStack>> postAssignedDependentMappings;
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
@@ -86,32 +87,16 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
     }
 
-    public void addPostAssignedEnergyValue(Object object, float energyValue)
+    public void addPostAssignedExactEnergyValue(Object object, float energyValue)
     {
-        if (postAssignedMappings == null)
-        {
-            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
-        }
-
-        if (WrappedStack.canBeWrapped(object) && Float.compare(energyValue, 0f) > 0)
-        {
-            WrappedStack wrappedStack = new WrappedStack(object);
-
-            if (wrappedStack.getStackSize() > 0)
-            {
-                WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
-                EnergyValue factoredEnergyValue = new EnergyValue(energyValue * 1f / wrappedStack.getStackSize(), EnergyValue.EnergyType.CORPOREAL);
-
-                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
-            }
-        }
+        addPostAssignedExactEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public void addPostAssignedExactEnergyValue(Object object, EnergyValue energyValue)
     {
-        if (postAssignedMappings == null)
+        if (postAssignedExactMappings == null)
         {
-            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+            postAssignedExactMappings = new HashMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
@@ -123,113 +108,57 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
                 WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
-                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+                postAssignedExactMappings.put(factoredWrappedStack, factoredEnergyValue);
             }
         }
     }
 
-    public boolean hasEnergyValue(Object object, boolean strict)
+    public void addPostAssignedDependentEnergyValue(Object object, List objects)
     {
-        if (WrappedStack.canBeWrapped(object))
+        if (postAssignedDependentMappings == null)
         {
-            WrappedStack stack = new WrappedStack(object);
+            postAssignedDependentMappings = new HashMap<WrappedStack, List<WrappedStack>>();
+        }
 
-            if (stack.getWrappedStack() instanceof ItemStack && ((ItemStack) stack.getWrappedStack()).getItem() instanceof IEnergyValueProvider && !strict)
+        if (!WrappedStack.canBeWrapped(object))
+        {
+            return;
+        }
+        WrappedStack wrappedStack = new WrappedStack(object);
+
+        List<WrappedStack> wrappedStacks = new ArrayList<WrappedStack>();
+        for (Object obj : objects)
+        {
+            if (!WrappedStack.canBeWrapped(obj))
             {
-                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) stack.getWrappedStack()).getItem()).getEnergyValue((ItemStack) stack.getWrappedStack());
-
-                if (energyValue != null && energyValue.getEnergyValue() > 0f)
-                {
-                    return true;
-                }
+                return;
             }
             else
             {
-                if (energyValueRegistry.stackMappings != null)
-                {
-                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(stack.getWrappedStack())))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        if (!strict)
-                        {
-                            if (stack.getWrappedStack() instanceof ItemStack)
-                            {
-                                ItemStack wrappedItemStack = (ItemStack) stack.getWrappedStack();
-
-                                // If its an OreDictionary item, scan its siblings for values
-                                if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
-                                {
-
-                                    OreStack oreStack = new OreStack(wrappedItemStack);
-
-                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
-                                    {
-                                        return true;
-                                    }
-                                    else
-                                    {
-                                        for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
-                                        {
-                                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
-                                            {
-                                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
-                                                {
-                                                    return true;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                // Else, scan for if there is a wildcard value for it
-                                else
-                                {
-                                    for (WrappedStack valuedStack : energyValueRegistry.stackMappings.keySet())
-                                    {
-                                        if (valuedStack.getWrappedStack() instanceof ItemStack)
-                                        {
-                                            ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedStack();
-
-                                            if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
-                                            {
-                                                if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-                                                {
-                                                    return true;
-                                                }
-                                                else if (wrappedItemStack.getItem().isDamageable() && wrappedItemStack.isItemDamaged())
-                                                {
-                                                    return true;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else if (stack.getWrappedStack() instanceof OreStack)
-                            {
-                                OreStack oreStack = (OreStack) stack.getWrappedStack();
-                                for (ItemStack oreItemStack : OreDictionary.getOres(oreStack.oreName))
-                                {
-                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreItemStack)))
-                                    {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                wrappedStacks.add(new WrappedStack(obj));
             }
         }
 
-        return false;
+        if (wrappedStacks.size() > 0)
+        {
+            postAssignedDependentMappings.put(wrappedStack, wrappedStacks);
+        }
     }
 
     public boolean hasEnergyValue(Object object)
     {
         return hasEnergyValue(object, false);
+    }
+
+    public boolean hasEnergyValue(Object object, boolean strict)
+    {
+        return getEnergyValue(object, strict) != null;
+    }
+
+    public EnergyValue getEnergyValueFromMap(Map<WrappedStack, EnergyValue> stackEnergyValueMap, Object object, boolean strict)
+    {
+        // TODO
+        return null;
     }
 
     public EnergyValue getEnergyValue(Object object)
@@ -392,7 +321,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
-        Map<WrappedStack, EnergyValue> computedStackValues = computeStackMappings();
+        Map<WrappedStack, EnergyValue> computedStackValues = new HashMap<WrappedStack, EnergyValue>();
 
         // Initialize the pass counter
         int passNumber = 0;
@@ -401,8 +330,14 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         int computedValueCount;
         int totalComputedValueCount = 0;
         LogHelper.info("Beginning dynamic value computation");
-        while ((computedStackValues.size() > 0) && (passNumber < 16))
+        boolean isFirstPass = true;
+        while ((isFirstPass || computedStackValues.size() > 0) && (passNumber < 16))
         {
+            if (isFirstPass)
+            {
+                isFirstPass = false;
+            }
+
             computedValueCount = 0;
             passStartTime = System.currentTimeMillis();
             // Increment the pass counter
@@ -451,19 +386,52 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
         LogHelper.info(String.format("Finished dynamic value computation (computed %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
 
-        /*
-         *  Post-assigned values
-         */
-        if (postAssignedMappings != null)
+        //        stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        //        stackMappingsBuilder.putAll(stackValueMap);
+        //        stackMappings = stackMappingsBuilder.build();
+        //
+        //        /*
+        //         *  Post-assigned values
+        //         */
+        //        if (postAssignedDependentMappings != null)
+        //        {
+        //           for (WrappedStack wrappedStack : postAssignedDependentMappings.keySet())
+        //           {
+        //               boolean allItemsHaveValues = true;
+        //               float computedValue = 0f;
+        //               for (WrappedStack stack : postAssignedDependentMappings.get(wrappedStack))
+        //               {
+        //                   if (getEnergyValue(stack) != null)
+        //                   {
+        //                       computedValue += getEnergyValue(stack).getEnergyValue() * stack.getStackSize();
+        //                   }
+        //                   else
+        //                   {
+        //                       allItemsHaveValues = false;
+        //                   }
+        //               }
+        //
+        //               if (allItemsHaveValues)
+        //               {
+        //                   stackValueMap.put(wrappedStack, new EnergyValue(computedValue));
+        //               }
+        //           }
+        //        }
+        //        else
+        //        {
+        //            postAssignedDependentMappings = new HashMap<WrappedStack, List<WrappedStack>>();
+        //        }
+
+        if (postAssignedExactMappings != null)
         {
-            for (WrappedStack wrappedStack : postAssignedMappings.keySet())
+            for (WrappedStack wrappedStack : postAssignedExactMappings.keySet())
             {
-                stackValueMap.put(wrappedStack, postAssignedMappings.get(wrappedStack));
+                stackValueMap.put(wrappedStack, postAssignedExactMappings.get(wrappedStack));
             }
         }
         else
         {
-            postAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+            postAssignedExactMappings = new HashMap<WrappedStack, EnergyValue>();
         }
 
         // Grab custom post-assigned values from file
@@ -528,8 +496,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
                 for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput))
                 {
-                    EnergyValue computedValue = EnergyValueHelper.computeEnergyValueFromList(recipeInputs);
-                    computedValue = EnergyValueHelper.factorEnergyValue(computedValue, recipeOutput.getStackSize());
+                    EnergyValue computedValue = EnergyValueHelper.computeEnergyValueFromRecipe(recipeOutput, recipeInputs);
 
                     if (computedValue != null)
                     {
@@ -805,7 +772,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
     public String toJson()
     {
-        return jsonSerializer.toJson(this);
+        return prettyJsonSerializer.toJson(this);
     }
 
     @Override

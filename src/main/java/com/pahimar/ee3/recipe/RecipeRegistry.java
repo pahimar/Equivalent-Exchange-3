@@ -73,7 +73,7 @@ public class RecipeRegistry
     {
         if (immutableRecipeMap == null)
         {
-            return ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
+            immutableRecipeMap = ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
         }
 
         return immutableRecipeMap;

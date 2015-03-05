@@ -56,6 +56,7 @@ item.ee3:gemGrey.name=Grey Gem [WIP]
 item.ee3:gemPurple.name=Purple Gem [WIP]
 item.ee3:gemRed.name=Red Gem [WIP]
 item.ee3:gemYellow.name=Yellow Gem [WIP]
+item.ee3:lootBall.name=Loot Ball [WIP]
 
 # Tools
 item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
@@ -84,7 +85,8 @@ tile.ee3:researchStation.name=Research Station
 tile.ee3:augmentationTable.name=Augmentation Table [WIP]
 tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
 tile.ee3:ashInfusedStone.name=Ash Infused Stone
-tile.ee3:alchemyArray.name=Alchemy Array [WIP]
+tile.ee3:alchemyArray.name=Alchemy Array
+tile.ee3:dummyArray.name=Alchemy Array
 
 # Alchemy Arrays
 arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
@@ -157,9 +159,9 @@ commands.ee3.set-item-not-recoverable.success=%s set %s as not being able to hav
 tooltip.ee3:belongsTo=Belongs to %s
 tooltip.ee3:belongsToNoOne=Belongs to no one
 tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
-tooltip.ee3:alchemicalChestPrefix.small=Small
-tooltip.ee3:alchemicalChestPrefix.medium=Medium
-tooltip.ee3:alchemicalChestPrefix.large=Large
+tooltip.ee3:small=Small
+tooltip.ee3:medium=Medium
+tooltip.ee3:large=Large
 
 #Misc
 misc.ee3:owner-set-to-self=You are now the owner of %s

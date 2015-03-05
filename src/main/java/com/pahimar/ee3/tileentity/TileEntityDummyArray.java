@@ -37,6 +37,16 @@ public class TileEntityDummyArray extends TileEntityEE
         this.trueZCoord = trueZCoord;
     }
 
+    public TileEntityAlchemyArray getAssociatedTileEntity()
+    {
+        if (this.worldObj.getTileEntity(trueXCoord, trueYCoord, trueZCoord) instanceof TileEntityAlchemyArray)
+        {
+            return (TileEntityAlchemyArray) this.worldObj.getTileEntity(trueXCoord, trueYCoord, trueZCoord);
+        }
+
+        return null;
+    }
+
     @Override
     public void updateEntity()
     {

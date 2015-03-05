@@ -46,7 +46,7 @@ public final class EnergyValueRegistryProxy
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedEnergyValue(object, energyValue);
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedExactEnergyValue(object, energyValue);
         }
     }
 

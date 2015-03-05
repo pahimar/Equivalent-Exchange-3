@@ -1,9 +1,13 @@
 package com.pahimar.ee3.api;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 // TODO Switch bare Strings to String constants
@@ -11,6 +15,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
 {
     private ResourceLocation texture;
     private String unLocalizedName;
+    private String className;
 
     private AlchemyArray()
     {
@@ -28,14 +33,34 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         return texture;
     }
 
+    public void setTexture(ResourceLocation texture)
+    {
+        this.texture = texture;
+    }
+
     public String getUnLocalizedName()
     {
         return unLocalizedName;
     }
 
+    public void setUnLocalizedName(String unLocalizedName)
+    {
+        this.unLocalizedName = unLocalizedName;
+    }
+
     public String getDisplayName()
     {
         return StatCollector.translateToLocal(unLocalizedName);
+    }
+
+    public String getClassName()
+    {
+        return className;
+    }
+
+    public int getChalkCostPerBlock()
+    {
+        return 1;
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -59,11 +84,21 @@ public class AlchemyArray implements Comparable<AlchemyArray>
             {
                 this.unLocalizedName = "";
             }
+
+            if (nbtTagCompound.hasKey("className"))
+            {
+                this.className = nbtTagCompound.getString("className");
+            }
+            else
+            {
+                this.className = "";
+            }
         }
         else
         {
             this.texture = new ResourceLocation("");
             this.unLocalizedName = "";
+            this.className = "";
         }
     }
 
@@ -72,6 +107,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         nbtTagCompound.setString("textureDomain", texture.getResourceDomain());
         nbtTagCompound.setString("texturePath", texture.getResourcePath());
         nbtTagCompound.setString("unLocalizedName", unLocalizedName);
+        nbtTagCompound.setString("className", this.getClass().getCanonicalName());
     }
 
     public static AlchemyArray readArrayFromNBT(NBTTagCompound nbtTagCompound)
@@ -81,7 +117,42 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         return alchemyArray;
     }
 
-    public void onArrayActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    public void onArrayPlacedBy(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityLivingBase entityLiving, ItemStack itemStack)
+    {
+
+    }
+
+    public void onArrayActivated(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
+    {
+
+    }
+
+    public void onArrayClicked(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer)
+    {
+
+    }
+
+    public void onArrayDestroyedByExplosion(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Explosion explosion)
+    {
+
+    }
+
+    public void onArrayDestroyedByPlayer(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, int metaData)
+    {
+
+    }
+
+    public void onEntityCollidedWithArray(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity)
+    {
+
+    }
+
+    public void onArrayFallenUpon(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity, float fallDistance)
+    {
+
+    }
+
+    public void onUpdate(World world, int arrayX, int arrayY, int arrayZ)
     {
 
     }

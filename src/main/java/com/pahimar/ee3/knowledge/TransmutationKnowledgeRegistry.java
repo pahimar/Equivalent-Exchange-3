@@ -1,7 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.reference.Files;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -69,7 +69,7 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        return ItemHelper.filterByNameStartsWith(templateKnowledge.getKnownTransmutations(), filterString);
+        return FilterUtils.filterByNameStartsWith(templateKnowledge.getKnownTransmutations(), filterString);
     }
 
     public Set<ItemStack> getTemplatesKnownTransmutationsFilteredContains(String filterString)
@@ -79,7 +79,7 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        return ItemHelper.filterByNameContains(templateKnowledge.getKnownTransmutations(), filterString);
+        return FilterUtils.filterByNameContains(templateKnowledge.getKnownTransmutations(), filterString);
     }
 
     public boolean doesTemplateKnow(ItemStack itemStack)

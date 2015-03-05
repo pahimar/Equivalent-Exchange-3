@@ -21,6 +21,7 @@ public class ModItems
     public static final ItemEE alchemicalTome = new ItemAlchemicalTome();
     public static final ItemEE matter = new ItemMatter();
     public static final ItemEE gem = new ItemGem();
+    public static final ItemEE lootBall = new ItemLootBall();
 
     public static final ItemToolEE shovelDarkMatter = new ItemDarkMatterShovel();
     public static final ItemToolEE pickAxeDarkMatter = new ItemDarkMatterPickAxe();
@@ -49,6 +50,7 @@ public class ModItems
         GameRegistry.registerItem(alchemicalTome, Names.Items.ALCHEMICAL_TOME);
         GameRegistry.registerItem(matter, Names.Items.MATTER);
         GameRegistry.registerItem(gem, Names.Items.GEM);
+        GameRegistry.registerItem(lootBall, Names.Items.LOOT_BALL);
 
         GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
         GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);

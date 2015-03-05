@@ -12,6 +12,7 @@ import com.pahimar.ee3.util.EntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,6 +21,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -32,7 +36,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     {
         super(Material.circuits);
         this.setCreativeTab(null);
-        this.setBlockName(Names.Blocks.BASIC_ALCHEMY_ARRAY);
+        this.setBlockName(Names.Blocks.ALCHEMY_ARRAY);
     }
 
     @Override
@@ -62,7 +66,56 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
-        return null;
+        return AxisAlignedBB.getBoundingBox((double) x + this.minX, (double) y + this.minY, (double) z + this.minZ, (double) x + this.maxX, (double) y + 0.5, (double) z + this.maxZ);
+    }
+
+    @Override
+    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    {
+        //        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        //        {
+        //            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
+        //
+        //            switch (tileEntityAlchemyArray.getOrientation())
+        //            {
+        //                case DOWN:
+        //                {
+        //                    this.setBlockBounds(0f, 1f, 0f, 1f, 1 - 0.0625f, 1f);
+        //                    break;
+        //                }
+        //                case UP:
+        //                {
+        //                    this.setBlockBounds(0f, 0f, 0f, 1f, 0.0625f, 1f);
+        //                    break;
+        //                }
+        //                case NORTH:
+        //                {
+        //                    this.setBlockBounds(0f, 0f, 1 - 0.0625f, 1f, 1f, 1f);
+        //                    break;
+        //                }
+        //                case SOUTH:
+        //                {
+        //                    this.setBlockBounds(0f, 0f, 0f, 1f, 1f, 0.0625f);
+        //                    break;
+        //                }
+        //                case EAST:
+        //                {
+        //                    this.setBlockBounds(0f, 0f, 0f, 0.0625f, 1f, 1f);
+        //                    break;
+        //                }
+        //                case WEST:
+        //                {
+        //                    this.setBlockBounds(1f, 0f, 0f, 1 - 0.0625f, 1f, 1f);
+        //                    break;
+        //                }
+        //                case UNKNOWN:
+        //                {
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+        return super.collisionRayTrace(world, x, y, z, startVec, endVec);
     }
 
     @Override
@@ -150,8 +203,6 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
-        ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
-
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
         {
             NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
@@ -163,9 +214,12 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
             {
                 // Set adjusted rotation
                 int facing = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+                ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setRotation(chalkSettings.getRotation(), facing);
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setAlchemyArray(alchemyArray, chalkSettings.getSize());
                 CommonSoundHelper.playChalkSoundAt((EntityPlayer) entityLiving);
+
+                ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
             }
         }
     }
@@ -179,6 +233,51 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
         }
 
         return false;
+    }
+
+    @Override
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockClicked(world, x, y, z, entityPlayer);
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockDestroyedByExplosion(world, x, y, z, explosion);
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockDestroyedByPlayer(world, x, y, z, metaData);
+        }
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onEntityCollidedWithBlock(world, x, y, z, entity);
+        }
+    }
+
+    @Override
+    public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
+    {
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onFallenUpon(world, x, y, z, entity, fallDistance);
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.pahimar.ee3;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -14,6 +15,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import com.pahimar.ee3.util.TileEntityDataHelper;
@@ -72,6 +74,8 @@ public class EquivalentExchange3
 
         ModBlocks.init();
 
+        FluidHelper.registerFluids();
+
         EnergyValues.addDefaultEnergyValues();
 
         AlchemyArrays.registerAlchemyArrays();
@@ -121,6 +125,11 @@ public class EquivalentExchange3
         TransmutationKnowledgeRegistry.getInstance().saveAll();
 
         AbilityRegistry.getInstance().saveAbilityRegistryToFile();
+
+        for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
+        {
+            LogHelper.info(String.format("Stack %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
+        }
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

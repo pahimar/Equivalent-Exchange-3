@@ -21,13 +21,25 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
         {
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
 
-            int scale;
+            int scale = 1;
             double xShift = 0.5d, yShift = 0.5d, zShift = 0.5d;
             float xRotate = 0, yRotate = 0, zRotate = 0;
             int rotationAngle = 0;
 
             AlchemyArray alchemyArray = tileEntityAlchemyArray.getAlchemyArray();
-            scale = tileEntityAlchemyArray.getSize();
+
+            if (tileEntityAlchemyArray.getSize() == 1)
+            {
+                scale = 1;
+            }
+            else if (tileEntityAlchemyArray.getSize() == 2)
+            {
+                scale = 3;
+            }
+            else if (tileEntityAlchemyArray.getSize() == 3)
+            {
+                scale = 5;
+            }
 
             if (alchemyArray != null)
             {
