@@ -13,6 +13,7 @@ public class Names
         public static final String RESEARCH_STATION = "researchStation";
         public static final String AUGMENTATION_TABLE = "augmentationTable";
         public static final String ASH_INFUSED_STONE = "ashInfusedStone";
+        public static final String TRANSMUTATION_TABLET = "transmutationTablet";
         public static final String ALCHEMY_ARRAY = "alchemyArray";
         public static final String DUMMY_ARRAY = "dummyArray";
     }

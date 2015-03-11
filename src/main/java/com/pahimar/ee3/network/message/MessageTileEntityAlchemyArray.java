@@ -110,6 +110,8 @@ public class MessageTileEntityAlchemyArray implements IMessage, IMessageHandler<
             if (tileEntity instanceof TileEntityAlchemyArray)
             {
                 tileEntity.readFromNBT(message.tileEntityAlchemyArrayNBT);
+                //NAME UPDATE
+                FMLClientHandler.instance().getClient().theWorld.func_147451_t(tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord);
             }
         }
 

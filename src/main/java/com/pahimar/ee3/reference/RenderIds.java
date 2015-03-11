@@ -10,4 +10,5 @@ public class RenderIds
     public static int augmentationTable;
     public static int alchemyArray;
     public static int dummyArray;
+    public static int tabletSlab;
 }

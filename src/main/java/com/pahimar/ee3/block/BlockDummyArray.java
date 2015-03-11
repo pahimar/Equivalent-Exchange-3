@@ -51,6 +51,19 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     }
 
     @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        {
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+
+            return tileEntityDummyArray.getLightLevel();
+        }
+
+        return 0;
+    }
+
+    @Override
     public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
     {
         return false;
@@ -102,14 +115,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entityPlayer, sideHit, hitX, hitY, hitZ);
+                tileEntityAlchemyArray.onBlockActivated(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, entityPlayer, sideHit, hitX, hitY, hitZ);
             }
         }
 
@@ -119,14 +131,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onBlockClicked(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entityPlayer);
+                tileEntityAlchemyArray.onBlockClicked(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, entityPlayer);
             }
         }
     }
@@ -134,14 +145,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onBlockDestroyedByExplosion(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, explosion);
+                tileEntityAlchemyArray.onBlockDestroyedByExplosion(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, explosion);
             }
         }
     }
@@ -149,14 +159,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onBlockDestroyedByPlayer(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, metaData);
+                tileEntityAlchemyArray.onBlockDestroyedByPlayer(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, metaData);
             }
         }
     }
@@ -164,14 +173,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onEntityCollidedWithBlock(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entity);
+                tileEntityAlchemyArray.onEntityCollidedWithBlock(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, entity);
             }
         }
     }
@@ -179,14 +187,13 @@ public class BlockDummyArray extends BlockEE implements ITileEntityProvider
     @Override
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
     {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
             TileEntityAlchemyArray tileEntityAlchemyArray = ((TileEntityDummyArray) world.getTileEntity(x, y, z)).getAssociatedTileEntity();
 
             if (tileEntityAlchemyArray != null)
             {
-                tileEntityAlchemyArray.onFallenUpon(world, x, y, z, tileEntityDummyArray.xCoord, tileEntityDummyArray.yCoord, tileEntityDummyArray.xCoord, entity, fallDistance);
+                tileEntityAlchemyArray.onFallenUpon(world, x, y, z, tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord, entity, fallDistance);
             }
         }
     }

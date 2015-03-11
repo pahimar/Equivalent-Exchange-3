@@ -16,6 +16,8 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     private ResourceLocation texture;
     private String unLocalizedName;
     private String className;
+    private int lightLevel;
+    private int chalkPerBlockCost;
 
     private AlchemyArray()
     {
@@ -26,6 +28,8 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     {
         this.texture = texture;
         this.unLocalizedName = unLocalizedName;
+        this.chalkPerBlockCost = 1;
+        this.lightLevel = 0;
     }
 
     public ResourceLocation getTexture()
@@ -53,14 +57,24 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         return StatCollector.translateToLocal(unLocalizedName);
     }
 
+    public int getChalkCostPerBlock()
+    {
+        return chalkPerBlockCost;
+    }
+
+    public void setChalkPerBlockCost(int chalkPerBlockCost)
+    {
+        this.chalkPerBlockCost = Math.abs(chalkPerBlockCost);
+    }
+
+    public int getLightLevel()
+    {
+        return lightLevel;
+    }
+
     public String getClassName()
     {
         return className;
-    }
-
-    public int getChalkCostPerBlock()
-    {
-        return 1;
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
@@ -93,12 +107,22 @@ public class AlchemyArray implements Comparable<AlchemyArray>
             {
                 this.className = "";
             }
+
+            if (nbtTagCompound.hasKey("lightLevel"))
+            {
+                this.lightLevel = nbtTagCompound.getInteger("lightLevel");
+            }
+            else
+            {
+                this.lightLevel = 0;
+            }
         }
         else
         {
             this.texture = new ResourceLocation("");
             this.unLocalizedName = "";
             this.className = "";
+            this.lightLevel = 0;
         }
     }
 
@@ -108,6 +132,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         nbtTagCompound.setString("texturePath", texture.getResourcePath());
         nbtTagCompound.setString("unLocalizedName", unLocalizedName);
         nbtTagCompound.setString("className", this.getClass().getCanonicalName());
+        nbtTagCompound.setInteger("lightLevel", lightLevel);
     }
 
     public static AlchemyArray readArrayFromNBT(NBTTagCompound nbtTagCompound)

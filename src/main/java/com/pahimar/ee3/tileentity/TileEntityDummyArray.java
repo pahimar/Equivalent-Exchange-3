@@ -47,6 +47,18 @@ public class TileEntityDummyArray extends TileEntityEE
         return null;
     }
 
+    public int getLightLevel()
+    {
+        TileEntityAlchemyArray tileEntityAlchemyArray = getAssociatedTileEntity();
+
+        if (tileEntityAlchemyArray != null)
+        {
+            return tileEntityAlchemyArray.getLightLevel();
+        }
+
+        return 0;
+    }
+
     @Override
     public void updateEntity()
     {
@@ -54,10 +66,11 @@ public class TileEntityDummyArray extends TileEntityEE
 
         if (++ticksSinceSync % 10 == 0)
         {
-            if (!worldObj.isRemote && !(worldObj.getTileEntity(trueXCoord, trueYCoord, trueZCoord) instanceof TileEntityEE))
+            if (!worldObj.isRemote && !(worldObj.getTileEntity(trueXCoord, trueYCoord, trueZCoord) instanceof TileEntityAlchemyArray))
             {
                 this.invalidate();
                 worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
         }
     }

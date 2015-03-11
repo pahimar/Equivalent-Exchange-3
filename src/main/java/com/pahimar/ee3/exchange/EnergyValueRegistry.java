@@ -8,7 +8,6 @@ import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
@@ -737,21 +736,23 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
         NBTTagCompound nbtTagCompound = null;
 
-        if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Never"))
-        {
-            if (staticEnergyValuesFile.exists())
-            {
-                LogHelper.info("Attempting to load energy values from file: " + staticEnergyValuesFile.getAbsolutePath());
-                nbtTagCompound = SerializationHelper.readNBTFromFile(staticEnergyValuesFile);
-            }
-            else if (md5EnergyValuesFile.exists())
-            {
-                LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
-                nbtTagCompound = SerializationHelper.readNBTFromFile(md5EnergyValuesFile);
-            }
-
-        }
-        else if (md5EnergyValuesFile.exists())
+        // TODO Re-enable this once the NPE related to mod changes in the serialized value file bug is resolved
+        //        if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Never"))
+        //        {
+        //            if (staticEnergyValuesFile.exists())
+        //            {
+        //                LogHelper.info("Attempting to load energy values from file: " + staticEnergyValuesFile.getAbsolutePath());
+        //                nbtTagCompound = SerializationHelper.readNBTFromFile(staticEnergyValuesFile);
+        //            }
+        //            else if (md5EnergyValuesFile.exists())
+        //            {
+        //                LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
+        //                nbtTagCompound = SerializationHelper.readNBTFromFile(md5EnergyValuesFile);
+        //            }
+        //
+        //        }
+        //        else if (md5EnergyValuesFile.exists())
+        if (md5EnergyValuesFile.exists())
         {
             LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
             nbtTagCompound = SerializationHelper.readNBTFromFile(md5EnergyValuesFile);

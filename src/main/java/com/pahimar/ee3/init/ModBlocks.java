@@ -21,6 +21,7 @@ public class ModBlocks
     public static final BlockEE ashInfusedStone = new BlockAshInfusedStone();
     public static final BlockEE alchemyArray = new BlockAlchemyArray();
     public static final BlockEE dummyArray = new BlockDummyArray();
+    public static final BlockEE transmutationTablet = new BlockTransmutationTablet();
 
     public static void init()
     {
@@ -35,5 +36,6 @@ public class ModBlocks
         GameRegistry.registerBlock(ashInfusedStone, Names.Blocks.ASH_INFUSED_STONE);
         GameRegistry.registerBlock(alchemyArray, Names.Blocks.ALCHEMY_ARRAY);
         GameRegistry.registerBlock(dummyArray, Names.Blocks.DUMMY_ARRAY);
+        GameRegistry.registerBlock(transmutationTablet, Names.Blocks.TRANSMUTATION_TABLET);
     }
 }

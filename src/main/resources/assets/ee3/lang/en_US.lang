@@ -90,7 +90,7 @@ tile.ee3:dummyArray.name=Alchemy Array
 
 # Alchemy Arrays
 arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
-arrays.ee3:transmutationAlchemyArray=Transmutation Alchemy Array [WIP]
+arrays.ee3:transmutation=Transmutation Alchemy Array [WIP]
 
 # GUIs
 container.ee3:alchemicalBag=Alchemical Bag

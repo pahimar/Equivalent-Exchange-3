@@ -365,7 +365,7 @@ public abstract class GuiBase extends GuiContainer
 
         if (foreground)
         {
-            return; // TODO:
+            return;
         }
         int yPosRight = 4;
         int yPosLeft = 4;
@@ -378,7 +378,6 @@ public abstract class GuiBase extends GuiContainer
             {
                 continue;
             }
-            // TODO: convert these over to foreground/background (maybe logic for top/bottom tabs?)
             if (tab.side == TabBase.LEFT)
             {
                 tab.draw(0, yPosLeft);

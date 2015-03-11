@@ -1,7 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.api.AlchemyArray;
-import com.pahimar.ee3.init.AlchemyArrays;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +29,7 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
         super();
         rotation = ForgeDirection.UNKNOWN;
         size = 0;
-        alchemyArray = AlchemyArrays.basicAlchemyArray;
+        alchemyArray = null;
     }
 
     public AlchemyArray getAlchemyArray()
@@ -229,6 +228,16 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
         }
     }
 
+    public int getLightLevel()
+    {
+        if (alchemyArray != null)
+        {
+            return alchemyArray.getLightLevel();
+        }
+
+        return 0;
+    }
+
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
         onBlockPlacedBy(world, x, y, z, this.xCoord, this.yCoord, this.zCoord, entityLiving, itemStack);
@@ -236,7 +245,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onBlockPlacedBy(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityLivingBase entityLiving, ItemStack itemStack)
     {
-        alchemyArray.onArrayPlacedBy(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityLiving, itemStack);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayPlacedBy(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityLiving, itemStack);
+        }
     }
 
     public void onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
@@ -246,7 +258,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onBlockActivated(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        alchemyArray.onArrayActivated(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer, sideHit, hitX, hitY, hitZ);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayActivated(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer, sideHit, hitX, hitY, hitZ);
+        }
     }
 
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer)
@@ -256,7 +271,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onBlockClicked(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer)
     {
-        alchemyArray.onArrayClicked(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayClicked(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entityPlayer);
+        }
     }
 
     public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion)
@@ -266,7 +284,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onBlockDestroyedByExplosion(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Explosion explosion)
     {
-        alchemyArray.onArrayDestroyedByExplosion(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, explosion);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayDestroyedByExplosion(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, explosion);
+        }
     }
 
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData)
@@ -276,7 +297,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onBlockDestroyedByPlayer(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, int metaData)
     {
-        alchemyArray.onArrayDestroyedByPlayer(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, metaData);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayDestroyedByPlayer(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, metaData);
+        }
     }
 
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
@@ -286,7 +310,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onEntityCollidedWithBlock(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity)
     {
-        alchemyArray.onEntityCollidedWithArray(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onEntityCollidedWithArray(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity);
+        }
     }
 
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float fallDistance)
@@ -296,12 +323,18 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
     public void onFallenUpon(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity, float fallDistance)
     {
-        alchemyArray.onArrayFallenUpon(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity, fallDistance);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onArrayFallenUpon(world, eventX, eventY, eventZ, arrayX, arrayY, arrayZ, entity, fallDistance);
+        }
     }
 
     public void onUpdate(World world, int x, int y, int z)
     {
-        alchemyArray.onUpdate(world, x, y, z);
+        if (alchemyArray != null)
+        {
+            alchemyArray.onUpdate(world, x, y, z);
+        }
     }
 
     @Override
@@ -317,16 +350,27 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
         rotation = ForgeDirection.getOrientation(nbtTagCompound.getInteger("rotation"));
         size = nbtTagCompound.getInteger("size");
         NBTTagCompound alchemyArrayTagCompound = nbtTagCompound.getCompoundTag("alchemyArray");
-        alchemyArray = AlchemyArray.readArrayFromNBT(alchemyArrayTagCompound);
-        try
+
+        if (!alchemyArrayTagCompound.hasNoTags())
         {
-            Class clazz = Class.forName(alchemyArray.getClassName());
-            alchemyArray = (AlchemyArray) clazz.getConstructor().newInstance();
+            alchemyArray = AlchemyArray.readArrayFromNBT(alchemyArrayTagCompound);
+            try
+            {
+                Class clazz = Class.forName(alchemyArray.getClassName());
+                alchemyArray = (AlchemyArray) clazz.getConstructor().newInstance();
+            }
+            catch (Exception e)
+            {
+                this.invalidate();
+                if (worldObj != null)
+                {
+                    worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+                }
+            }
         }
-        catch (Exception e)
+        else
         {
             this.invalidate();
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
         }
     }
 
@@ -337,7 +381,10 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
         nbtTagCompound.setInteger("rotation", rotation.ordinal());
         nbtTagCompound.setInteger("size", size);
         NBTTagCompound alchemyArrayTagCompound = new NBTTagCompound();
-        alchemyArray.writeToNBT(alchemyArrayTagCompound);
+        if (alchemyArray != null)
+        {
+            alchemyArray.writeToNBT(alchemyArrayTagCompound);
+        }
         nbtTagCompound.setTag("alchemyArray", alchemyArrayTagCompound);
     }
 

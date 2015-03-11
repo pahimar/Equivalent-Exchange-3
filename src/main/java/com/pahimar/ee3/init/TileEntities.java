@@ -19,5 +19,6 @@ public class TileEntities
         GameRegistry.registerTileEntity(TileEntityAugmentationTable.class, Names.Blocks.AUGMENTATION_TABLE);
         GameRegistry.registerTileEntity(TileEntityAlchemyArray.class, Names.Blocks.ALCHEMY_ARRAY);
         GameRegistry.registerTileEntity(TileEntityDummyArray.class, Names.Blocks.DUMMY_ARRAY);
+        GameRegistry.registerTileEntity(TileEntityTransmutationTablet.class, Names.Blocks.TRANSMUTATION_TABLET);
     }
 }

@@ -64,7 +64,7 @@ public class WailaDataProvider implements IWailaDataProvider
             TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) accessor.getTileEntity();
             TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) accessor.getWorld().getTileEntity(tileEntityDummyArray.getTrueXCoord(), tileEntityDummyArray.getTrueYCoord(), tileEntityDummyArray.getTrueZCoord());
 
-            if (tileEntityAlchemyArray.getAlchemyArray() != null)
+            if (tileEntityAlchemyArray != null && tileEntityAlchemyArray.getAlchemyArray() != null && tileEntityAlchemyArray.getAlchemyArray().getDisplayName() != null)
             {
                 currentTip.set(0, SpecialChars.WHITE + tileEntityAlchemyArray.getAlchemyArray().getDisplayName());
             }

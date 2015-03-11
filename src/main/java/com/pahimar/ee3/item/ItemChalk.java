@@ -1,5 +1,7 @@
 package com.pahimar.ee3.item;
 
+import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageChalkSettings;
@@ -23,7 +25,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         super();
         this.setUnlocalizedName(Names.Items.CHALK);
-        this.setMaxDamage(50);
+        this.setMaxDamage(49);
         this.canRepair = true;
     }
 
@@ -78,11 +80,19 @@ public class ItemChalk extends ItemEE implements IKeyBound
             NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
+            AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());
+
             int coordOffset = chalkSettings.getSize() - 1;
             ForgeDirection orientation = ForgeDirection.getOrientation(side);
             boolean canPlaceAlchemyArray = ModBlocks.alchemyArray.canPlaceBlockOnSide(world, x, y, z, side);
 
-            if (itemStack.getMaxDamage() - itemStack.getItemDamage() < (2 * coordOffset) + 1)
+            int chargeLevel = ((chalkSettings.getSize() - 1) * 2) + 1;
+
+            if (itemStack.getItemDamage() == itemStack.getMaxDamage() && (chargeLevel * chargeLevel) * alchemyArray.getChalkCostPerBlock() == 1)
+            {
+                canPlaceAlchemyArray = true;
+            }
+            else if (itemStack.getMaxDamage() - itemStack.getItemDamage() + 1 < (chargeLevel * chargeLevel) * alchemyArray.getChalkCostPerBlock())
             {
                 canPlaceAlchemyArray = false;
             }
@@ -221,9 +231,17 @@ public class ItemChalk extends ItemEE implements IKeyBound
 
             if (world.getBlock(x, y, z) == block)
             {
-                itemStack.damageItem(1, entityPlayer);
-                block.onBlockPlacedBy(world, x, y, z, entityPlayer, itemStack);
-                block.onPostBlockPlaced(world, x, y, z, metadata);
+                NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+                ChalkSettings chalkSettings = new ChalkSettings();
+                chalkSettings.readFromNBT(playerCustomData);
+                AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());
+
+                if (alchemyArray != null)
+                {
+                    itemStack.damageItem(alchemyArray.getChalkCostPerBlock(), entityPlayer);
+                    block.onBlockPlacedBy(world, x, y, z, entityPlayer, itemStack);
+                    block.onPostBlockPlaced(world, x, y, z, metadata);
+                }
             }
         }
 

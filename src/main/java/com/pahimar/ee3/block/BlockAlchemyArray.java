@@ -19,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -58,62 +57,69 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     }
 
     @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
+
+            return tileEntityAlchemyArray.getLightLevel();
+        }
+
+        return 0;
+    }
+
+    @Override
     public Item getItemDropped(int par1, Random random, int par2)
     {
         return null;
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-    {
-        return AxisAlignedBB.getBoundingBox((double) x + this.minX, (double) y + this.minY, (double) z + this.minZ, (double) x + this.maxX, (double) y + 0.5, (double) z + this.maxZ);
-    }
-
-    @Override
     public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
     {
-        //        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
-        //        {
-        //            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
-        //
-        //            switch (tileEntityAlchemyArray.getOrientation())
-        //            {
-        //                case DOWN:
-        //                {
-        //                    this.setBlockBounds(0f, 1f, 0f, 1f, 1 - 0.0625f, 1f);
-        //                    break;
-        //                }
-        //                case UP:
-        //                {
-        //                    this.setBlockBounds(0f, 0f, 0f, 1f, 0.0625f, 1f);
-        //                    break;
-        //                }
-        //                case NORTH:
-        //                {
-        //                    this.setBlockBounds(0f, 0f, 1 - 0.0625f, 1f, 1f, 1f);
-        //                    break;
-        //                }
-        //                case SOUTH:
-        //                {
-        //                    this.setBlockBounds(0f, 0f, 0f, 1f, 1f, 0.0625f);
-        //                    break;
-        //                }
-        //                case EAST:
-        //                {
-        //                    this.setBlockBounds(0f, 0f, 0f, 0.0625f, 1f, 1f);
-        //                    break;
-        //                }
-        //                case WEST:
-        //                {
-        //                    this.setBlockBounds(1f, 0f, 0f, 1 - 0.0625f, 1f, 1f);
-        //                    break;
-        //                }
-        //                case UNKNOWN:
-        //                {
-        //                    break;
-        //                }
-        //            }
-        //        }
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        {
+            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
+
+            switch (tileEntityAlchemyArray.getOrientation())
+            {
+                case DOWN:
+                {
+                    this.setBlockBounds(0f, 1f, 0f, 1f, 1 - 0.0625f, 1f);
+                    break;
+                }
+                case UP:
+                {
+                    this.setBlockBounds(0f, 0f, 0f, 1f, 0.0625f, 1f);
+                    break;
+                }
+                case NORTH:
+                {
+                    this.setBlockBounds(0f, 0f, 1 - 0.0625f, 1f, 1f, 1f);
+                    break;
+                }
+                case SOUTH:
+                {
+                    this.setBlockBounds(0f, 0f, 0f, 1f, 1f, 0.0625f);
+                    break;
+                }
+                case EAST:
+                {
+                    this.setBlockBounds(0f, 0f, 0f, 0.0625f, 1f, 1f);
+                    break;
+                }
+                case WEST:
+                {
+                    this.setBlockBounds(1f, 0f, 0f, 1 - 0.0625f, 1f, 1f);
+                    break;
+                }
+                case UNKNOWN:
+                {
+                    break;
+                }
+            }
+        }
 
         return super.collisionRayTrace(world, x, y, z, startVec, endVec);
     }

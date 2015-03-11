@@ -51,6 +51,10 @@ public class GuiHandler implements IGuiHandler
             TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
             return new ContainerAugmentationTable(entityPlayer.inventory, tileEntityAugmentationTable);
         }
+        else if (id == GUIs.TRANSMUTATION_TABLET.ordinal())
+        {
+            return new ContainerTransmutationTablet(entityPlayer.inventory);
+        }
         else if (id == GUIs.SYMBOL_SELECTION.ordinal())
         {
             return new ContainerSymbolSelection();
@@ -99,6 +103,10 @@ public class GuiHandler implements IGuiHandler
         {
             TileEntityAugmentationTable tileEntityAugmentationTable = (TileEntityAugmentationTable) world.getTileEntity(x, y, z);
             return new GuiAugmentationTable(entityPlayer.inventory, tileEntityAugmentationTable);
+        }
+        else if (id == GUIs.TRANSMUTATION_TABLET.ordinal())
+        {
+            return new GuiTransmutationTablet(entityPlayer.inventory);
         }
         else if (id == GUIs.SYMBOL_SELECTION.ordinal())
         {

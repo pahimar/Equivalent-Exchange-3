@@ -19,10 +19,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
@@ -59,6 +61,7 @@ public class DrawBlockHighlightEventHandler
                 }
                 else if (event.currentItem.getItem() instanceof ItemChalk)
                 {
+                    // if should draw
                     drawAlchemyArrayOverlay(event);
                 }
             }
@@ -231,111 +234,196 @@ public class DrawBlockHighlightEventHandler
             }
         }
 
-        switch (sideHit)
+        if (!canPlaceAlchemyArray(event.currentItem, event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ, event.target.sideHit))
         {
-            case UP:
-            {
-                xScale = zScale = chargeLevel;
-                yShift = 0.001f;
-                xRotate = -1;
-                rotationAngle = (-90 * (rotation + 2)) % 360;
-                facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    y -= 1;
-                }
-
-                if (tileEntity instanceof TileEntityDummyArray)
-                {
-                    x = ((TileEntityDummyArray) tileEntity).getTrueXCoord() + 0.5f;
-                    y = ((TileEntityDummyArray) tileEntity).getTrueYCoord() + 0.5f - 1;
-                    z = ((TileEntityDummyArray) tileEntity).getTrueXCoord() + 0.5f;
-                }
-                break;
-            }
-            case DOWN:
-            {
-                xScale = zScale = chargeLevel;
-                yShift = -0.001f;
-                xRotate = 1;
-                rotationAngle = (-90 * (rotation + 2)) % 360;
-                facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    y += 1;
-                }
-                break;
-            }
-            case NORTH:
-            {
-                xScale = yScale = chargeLevel;
-                zCorrection = -1;
-                zShift = -0.001f;
-                zRotate = 1;
-                rotationAngle = (-90 * (rotation + 1)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    z += 1;
-                }
-                break;
-            }
-            case SOUTH:
-            {
-                xScale = yScale = chargeLevel;
-                zShift = 0.001f;
-                zRotate = -1;
-                rotationAngle = (-90 * (rotation + 1)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    z -= 1;
-                }
-                break;
-            }
-            case EAST:
-            {
-                yScale = zScale = chargeLevel;
-                xShift = 0.001f;
-                yRotate = 1;
-                rotationAngle = (-90 * (rotation + 2)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    x -= 1;
-                }
-                break;
-            }
-            case WEST:
-            {
-                yScale = zScale = chargeLevel;
-                xShift = -0.001f;
-                yRotate = -1;
-                rotationAngle = (-90 * (rotation + 2)) % 360;
-                if (tileEntity instanceof TileEntityAlchemyArray)
-                {
-                    x += 1;
-                }
-                break;
-            }
-            default:
-                break;
+            shouldRender = false;
         }
 
         if (shouldRender)
         {
-            GL11.glDepthMask(false);
-            GL11.glDisable(GL11.GL_CULL_FACE);
-            GL11.glPushMatrix();
-            GL11.glTranslated(-iPX + x + xShift, -iPY + y + yShift, -iPZ + z + zShift);
-            GL11.glScalef(1F * xScale, 1F * yScale, 1F * zScale);
-            GL11.glRotatef(rotationAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
-            GL11.glRotatef(facingCorrectionAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
-            GL11.glRotatef(90, xRotate, yRotate, zRotate);
-            GL11.glTranslated(0, 0, 0.5f * zCorrection);
-            GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-            RenderUtils.renderPulsingQuad(texture, 1f);
-            GL11.glPopMatrix();
-            GL11.glEnable(GL11.GL_CULL_FACE);
-            GL11.glDepthMask(true);
+            switch (sideHit)
+            {
+                case UP:
+                {
+                    xScale = zScale = chargeLevel;
+                    yShift = 0.001f;
+                    xRotate = -1;
+                    rotationAngle = (-90 * (rotation + 2)) % 360;
+                    facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        y -= 1;
+                    }
+
+                    if (tileEntity instanceof TileEntityDummyArray)
+                    {
+                        x = ((TileEntityDummyArray) tileEntity).getTrueXCoord() + 0.5f;
+                        y = ((TileEntityDummyArray) tileEntity).getTrueYCoord() + 0.5f - 1;
+                        z = ((TileEntityDummyArray) tileEntity).getTrueXCoord() + 0.5f;
+                    }
+                    break;
+                }
+                case DOWN:
+                {
+                    xScale = zScale = chargeLevel;
+                    yShift = -0.001f;
+                    xRotate = 1;
+                    rotationAngle = (-90 * (rotation + 2)) % 360;
+                    facingCorrectionAngle = (-90 * (playerFacing + 2)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        y += 1;
+                    }
+                    break;
+                }
+                case NORTH:
+                {
+                    xScale = yScale = chargeLevel;
+                    zCorrection = -1;
+                    zShift = -0.001f;
+                    zRotate = 1;
+                    rotationAngle = (-90 * (rotation + 1)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        z += 1;
+                    }
+                    break;
+                }
+                case SOUTH:
+                {
+                    xScale = yScale = chargeLevel;
+                    zShift = 0.001f;
+                    zRotate = -1;
+                    rotationAngle = (-90 * (rotation + 1)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        z -= 1;
+                    }
+                    break;
+                }
+                case EAST:
+                {
+                    yScale = zScale = chargeLevel;
+                    xShift = 0.001f;
+                    yRotate = 1;
+                    rotationAngle = (-90 * (rotation + 2)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        x -= 1;
+                    }
+                    break;
+                }
+                case WEST:
+                {
+                    yScale = zScale = chargeLevel;
+                    xShift = -0.001f;
+                    yRotate = -1;
+                    rotationAngle = (-90 * (rotation + 2)) % 360;
+                    if (tileEntity instanceof TileEntityAlchemyArray)
+                    {
+                        x += 1;
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            if (shouldRender)
+            {
+                GL11.glDepthMask(false);
+                GL11.glDisable(GL11.GL_CULL_FACE);
+                GL11.glPushMatrix();
+                GL11.glTranslated(-iPX + x + xShift, -iPY + y + yShift, -iPZ + z + zShift);
+                GL11.glScalef(1F * xScale, 1F * yScale, 1F * zScale);
+                GL11.glRotatef(rotationAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
+                GL11.glRotatef(facingCorrectionAngle, sideHit.offsetX, sideHit.offsetY, sideHit.offsetZ);
+                GL11.glRotatef(90, xRotate, yRotate, zRotate);
+                GL11.glTranslated(0, 0, 0.5f * zCorrection);
+                GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+                RenderUtils.renderPulsingQuad(texture, 1f);
+                GL11.glPopMatrix();
+                GL11.glEnable(GL11.GL_CULL_FACE);
+                GL11.glDepthMask(true);
+            }
         }
+    }
+
+    private boolean canPlaceAlchemyArray(ItemStack itemStack, World world, int x, int y, int z, int side)
+    {
+        ChalkSettings chalkSettings = EquivalentExchange3.proxy.getClientProxy().chalkSettings;
+
+        int coordOffset = chalkSettings.getSize() - 1;
+        ForgeDirection orientation = ForgeDirection.getOrientation(side);
+        AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());
+        boolean canPlaceAlchemyArray = isValidForArray(world, x, y, z, side);
+
+        int chargeLevel = ((chalkSettings.getSize() - 1) * 2) + 1;
+
+        if (itemStack.getItemDamage() == itemStack.getMaxDamage() && (chargeLevel * chargeLevel) * alchemyArray.getChalkCostPerBlock() == 1)
+        {
+            canPlaceAlchemyArray = true;
+        }
+        else if (itemStack.getMaxDamage() - itemStack.getItemDamage() + 1 < (chargeLevel * chargeLevel) * alchemyArray.getChalkCostPerBlock())
+        {
+            canPlaceAlchemyArray = false;
+        }
+
+        if (canPlaceAlchemyArray)
+        {
+            if (orientation == ForgeDirection.UP || orientation == ForgeDirection.DOWN)
+            {
+                for (int i = x - coordOffset; i <= x + coordOffset; i++)
+                {
+                    for (int j = z - coordOffset; j <= z + coordOffset; j++)
+                    {
+                        if ((i != x || j != z) && (!isValidForArray(world, i, y, j, side)))
+                        {
+                            canPlaceAlchemyArray = false;
+                        }
+                    }
+                }
+            }
+            else if (orientation == ForgeDirection.NORTH || orientation == ForgeDirection.SOUTH)
+            {
+                for (int i = x - coordOffset; i <= x + coordOffset; i++)
+                {
+                    for (int j = y - coordOffset; j <= y + coordOffset; j++)
+                    {
+                        if ((i != x || j != y) && (!isValidForArray(world, i, j, z, side)))
+                        {
+                            canPlaceAlchemyArray = false;
+                        }
+                    }
+                }
+            }
+            else if (orientation == ForgeDirection.EAST || orientation == ForgeDirection.WEST)
+            {
+                for (int i = y - coordOffset; i <= y + coordOffset; i++)
+                {
+                    for (int j = z - coordOffset; j <= z + coordOffset; j++)
+                    {
+                        if ((i != y || j != z) && (!isValidForArray(world, x, i, j, side)))
+                        {
+                            canPlaceAlchemyArray = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return canPlaceAlchemyArray;
+    }
+
+    private boolean isValidForArray(World world, int x, int y, int z, int sideHit)
+    {
+        ForgeDirection side = ForgeDirection.getOrientation(sideHit);
+        return world.isSideSolid(x, y, z, side) && ((side == ForgeDirection.DOWN && world.getBlock(x, y - 1, z).isReplaceable(world, x, y, z)) ||
+                (side == ForgeDirection.UP && world.getBlock(x, y + 1, z).isReplaceable(world, x, y, z)) ||
+                (side == ForgeDirection.NORTH && world.getBlock(x, y, z - 1).isReplaceable(world, x, y, z)) ||
+                (side == ForgeDirection.SOUTH && world.getBlock(x, y, z + 1).isReplaceable(world, x, y, z)) ||
+                (side == ForgeDirection.WEST && world.getBlock(x - 1, y, z).isReplaceable(world, x, y, z)) ||
+                (side == ForgeDirection.EAST && world.getBlock(x + 1, y, z).isReplaceable(world, x, y, z)));
     }
 
     private void drawSelectionBox(RenderGlobal context, EntityPlayer entityPlayer, MovingObjectPosition rayTrace, int i, float partialTicks)

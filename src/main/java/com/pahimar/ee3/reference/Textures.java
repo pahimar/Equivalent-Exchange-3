@@ -24,6 +24,7 @@ public final class Textures
         public static final ResourceLocation GLASS_BELL = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "aludel.png");
         public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "researchStation.png");
         public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "augmentationTable.png");
+        public static final ResourceLocation TRANSMUTATION_TABLET = ResourceLocationHelper.getResourceLocation(MODEL_TEXTURE_LOCATION + "transmutationTablet.png");
     }
 
     public static final class Gui
@@ -44,7 +45,7 @@ public final class Textures
         public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "augmentationTable.png");
         public static final ResourceLocation PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
         public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalTome.png");
-        public static final ResourceLocation TRANSMUTATION_SQUARE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "transmutationSquare.png");
+        public static final ResourceLocation TRANSMUTATION_TABLET = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "transmutationTablet.png");
     }
 
     public static final class Effect
