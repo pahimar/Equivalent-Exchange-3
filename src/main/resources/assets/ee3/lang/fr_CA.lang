@@ -1,0 +1,168 @@
+# Configuration
+general.sync.threshold.label=Seuil de synchronisation
+general.sync.threshold.comment=Le nombre de secondes un joueur doit attendre avant qu'ils peuvent synchroniser leurs valeurs d'énergie avec le serveur de nouveau
+
+general.sound.soundMode.label=Effets sonores
+general.sound.soundMode.comment='All' joue les sons de mod de tous les joueurs, 'Self' joue seulement les sons de mod de vous, et 'None' ne joue aucun son de mod
+
+general.abilities.onlyLoadFile.label=Charge seulement le fichier des abilités
+general.abilities.onlyLoadFile.comment=Définir cette option à true signifie que les abilités sont seulement initialement chargés à partir de fichier, plutôt que par fichier et d'autres mods
+
+general.energyvalues.regenerateEnergyValuesWhen.label=Régénérer les valeurs d'énergie
+general.energyvalues.regenerateEnergyValuesWhen.comment=À quel moment régénérer les valeurs d'énergie. Les options sont "When Mods Change" (quand les mods sont ajoutés, enlevés ou mis à jour) ou "Never" (génère seulement la première fois).
+
+# Keys
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Charger
+key.extra=Extra
+key.release=Relâcher
+key.toggle=Alterner
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
+# Items
+item.ee3:alchemicalBag.name=Sac alchimique
+item.ee3:alchemicalDust.ash.name=Cendre
+item.ee3:alchemicalDust.verdant.name=Poudre verdoyante
+item.ee3:alchemicalDust.azure.name=Poudre azur
+item.ee3:alchemicalDust.minium.name=Poudre de minium
+item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon alchimique
+item.ee3:alchemicalFuel.mobiusFuel.name=Carburant de mobius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant d'aeternalis
+item.ee3:chalk.name=Craie
+item.ee3:diviningRod.name=Baguette de sourcier [WIP]
+item.ee3:shardMinium.name=Éclat de minium
+item.ee3:stoneInert.name=Pierre inerte
+item.ee3:stoneMinium.name=Pierre de minium [WIP]
+item.ee3:stonePhilosophers.name=Pierre philosophale [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Upgrade verdoyant [WIP]
+item.ee3:alchemicalUpgrade.azure.name=Upgrade azur [WIP]
+item.ee3:alchemicalUpgrade.minium.name=Upgrade de minium [WIP]
+item.ee3:alchemicalTome.name=Tome de connaissance alchimique
+item.ee3:matterProto.name=Proto-matière [WIP]
+item.ee3:matterDark.name=Matière noire [WIP]
+item.ee3:matterOmni.name=Omni-matière [WIP]
+item.ee3:matterCorporeal.name=Matière corporelle [WIP]
+item.ee3:matterKinetic.name=Matière cinétique [WIP]
+item.ee3:matterTemporal.name=Matière temporelle [WIP]
+item.ee3:matterEssentia.name=Matière essentia [WIP]
+item.ee3:matterAmorphous.name=Matière informe [WIP]
+item.ee3:matterVoid.name=Matière vide [WIP]
+item.ee3:gemBlack.name=Gemme noire [WIP]
+item.ee3:gemBlue.name=Gemme bleue [WIP]
+item.ee3:gemGreen.name=Gemme verte [WIP]
+item.ee3:gemGrey.name=Gemme grise [WIP]
+item.ee3:gemPurple.name=Gemme mauve [WIP]
+item.ee3:gemRed.name=Gemme rouge [WIP]
+item.ee3:gemYellow.name=Gemme jaune [WIP]
+item.ee3:lootBall.name=Boule de loot [WIP]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Pelle de matière noire [WIP]
+item.ee3:pickAxeDarkMatter.name=Pioche de matière noire [WIP]
+item.ee3:hammerDarkMatter.name=Marteau de matière noire [WIP]
+item.ee3:axeDarkMatter.name=Hache de matière noire [WIP]
+item.ee3:hoeDarkMatter.name=Houe de matière noire [WIP]
+item.ee3:fishingRodDarkMatter.name=Canne à pêche de matière noire [WIP]
+item.ee3:shearsDarkMatter.name=Cisailles de matière noire [WIP]
+
+# Weapons
+item.ee3:bowDarkMatter.name=Arc de matière noire [WIP]
+item.ee3:arrowDarkMatter.name=Flèche de matière noire [WIP]
+item.ee3:swordDarkMatter.name=Épée de matière noire [WIP]
+
+# Blocks
+tile.ee3:alchemicalChest.name=Coffre alchimique
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Bloc de charbon alchimique
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Bloc de carburant de mobius
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Bloc de carburant d'aeternalis
+tile.ee3:aludel.name=Base d'aludel
+tile.ee3:calcinator.name=Calcinateur
+tile.ee3:chalk.name=Craie
+tile.ee3:glassBell.name=Cloche de verre
+tile.ee3:researchStation.name=Station de recherche
+tile.ee3:augmentationTable.name=Table d'augmentation [WIP]
+tile.ee3:transmutationSquare.name=Carré de transmutation [WIP]
+tile.ee3:ashInfusedStone.name=Pierre infusée de cendre
+tile.ee3:alchemyArray.name=Étalage d'alchimie
+tile.ee3:dummyArray.name=Étalage d'alchimie
+
+# Alchemy Arrays
+arrays.ee3:basicAlchemyArray=Étalage d'alchimie de base [WIP]
+arrays.ee3:transmutation=Étalage d'alchimie de transmutation [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=Sac alchimique
+container.ee3:alchemicalChest=Coffre alchimique
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinateur
+container.ee3:glassBell=Cloche de verre
+container.ee3:researchStation=Station de recherche
+container.ee3:augmentationTable=Table d'augmentation [WIP]
+container.ee3:alchemicalTome=Tome de connaissance alchimique
+container.ee3:alchemicalTome.noTransmutationsKnown=Vous ne savez pas comment transmuter quoi que ce soit pour l'instant !
+container.ee3:alchemicalTome.howToLearnTransmutations=Utilisez une station de recherche pour vous apprendre comment transmuter les objets
+container.ee3:transmutationAlchemyArray=Carré de transmutation [WIP]
+
+# NEI
+gui.nei.ee3:calcination=Calcination
+gui.nei.ee3:calcination.tooltip.1=Valeurs d'énergie requises pour calciner
+gui.nei.ee3:calcination.tooltip.2=De %s à %s
+gui.nei.ee3:aludel=Aludel
+
+# Commands
+commands.ee3.usage=/ee3
+commands.ee3.player-not-found.error=%s n'a pas été trouvé(e) sur le serveur
+commands.ee3.invalid-nbt-tag.error=L'analyse syntaxique du data tag a échoué : %s
+commands.ee3.no-item.error=Aucun objet actuel
+commands.ee3.set-energy-value.usage=/ee3 set-energy-value <pré> <objet> <valeur> [données] [dataTag] OU /ee3 set-energy-value <post> <objet> <valeur> [données] [dataTag]
+commands.ee3.set-energy-value.success=%s a défini une %s valeur d'énergie de %s à %s
+commands.ee3.set-energy-value-current-item.usage=/ee3 set-energy-value-current-item <pré> <valeur> OR /ee3 set-energy-value-current-item <post> <valeur>
+commands.ee3.set-energy-value-current-item.success=%s a défini une %s valeur d'énergie de %s à %s
+commands.ee3.sync-energy-values.usage=/ee3 sync-energy-values
+commands.ee3.sync-energy-values.success=Les valeurs d'énergie ont été synchronisées avec le serveur avec succès
+commands.ee3.sync-energy-values.denied=Veuillez attendre %s secondes de plus, puis réessayez
+commands.ee3.player-learn-everything.usage=/ee3 player-learn-everything <joueur>
+commands.ee3.player-learn-everything.success=%s a enseigné à %s comment transmuter
+commands.ee3.player-learn-item.usage=/ee3 player-learn-item <joueur> <objet> <données> [dataTag]
+commands.ee3.player-learn-item.success=%s a enseigné à %s comment transmuter %s
+commands.ee3.player-learn-current-item.usage=/ee3 player-learn-current-item <joueur>
+commands.ee3.player-learn-current-item.success=%s a enseigné à %s comment transmuter %s
+commands.ee3.player-forget-everything.usage=/ee3 player-forget-everything <joueur>
+commands.ee3.player-forget-everything.success=%s a fait oublier à %s comment tout transmuter
+commands.ee3.player-forget-item.usage=/ee3 player-forget-item <joueur> <objet> <données> [dataTag]
+commands.ee3.player-forget-item.success=%s a fait oublier à %s comment transmuter %s
+commands.ee3.player-forget-current-item.usage=/ee3 player-forget-current-item <joueur>
+commands.ee3.player-forget-current-item.success=%s a fait oublier à %s comment transmuter %s
+commands.ee3.template-learn-everything.usage=/ee3 template-learn-everything
+commands.ee3.template-learn-everything.success=%s a enseigné à la base de connaissance comment tout transmuter
+commands.ee3.template-learn-item.usage=/ee3 template-learn-item <objet> <données> [dataTag]
+commands.ee3.template-learn-item.success=%s a enseigné à la base de connaissance comment transmuter %s
+commands.ee3.template-learn-current-item.usage=/ee3 template-learn-current-item
+commands.ee3.template-learn-current-item.success=%s a enseigné à la base de connaissance comment transmuter %s
+commands.ee3.template-forget-everything.usage=/ee3 template-forget-everything
+commands.ee3.template-forget-everything.success=%s a fait oublier à la base de connaissance comment tout transmuter
+commands.ee3.template-forget-item.usage=/ee3 template-forget-item <objet> <données> [dataTag]
+commands.ee3.template-forget-item.success=%s a fait oublier à la base de connaissance comment transmuter %s
+commands.ee3.template-forget-current-item.usage=/ee3 template-forget-current-item
+commands.ee3.template-forget-current-item.success=%s a fait oublier à la base de connaissance comment transmuter %s
+commands.ee3.set-item-learnable.usage=/ee3 set-item-learnable <objet> <données> [dataTag]
+commands.ee3.set-item-learnable.success=%s a défini %s comme étant apprenable pour les transmutations
+commands.ee3.set-item-not-learnable.usage=/ee3 set-item-not-learnable <objet> <données> [dataTag]
+commands.ee3.set-item-not-learnable.success=%s a défini %s comme étant non apprenable pour les transmutations
+commands.ee3.set-item-recoverable.usage=/ee3 set-item-recoverable <objet> <données> [dataTag]
+commands.ee3.set-item-recoverable.success=%s a défini %s comme étant capable de récupérer sa valeur d'énergie
+commands.ee3.set-item-not-recoverable.usage=/ee3 set-item-not-recoverable <objet> <données> [dataTag]
+commands.ee3.set-item-not-recoverable.success=%s a défini %s comme n'étant pas capable de récupérer sa valeur d'énergie
+
+# Tooltips
+tooltip.ee3:belongsTo=Appartient à %s
+tooltip.ee3:belongsToNoOne=Appartient à personne
+tooltip.ee3:upgradesPrefix=Coffre d'upgrades (alchimiques)
+tooltip.ee3:small=Petit
+tooltip.ee3:medium=Moyen
+tooltip.ee3:large=Grand
+
+#Misc
+misc.ee3:owner-set-to-self=Vous êtes maintenant le ou la propriétaire de/d' %s
