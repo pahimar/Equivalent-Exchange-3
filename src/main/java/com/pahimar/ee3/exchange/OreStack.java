@@ -1,9 +1,11 @@
 package com.pahimar.ee3.exchange;
 
+import com.google.common.primitives.Ints;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -66,16 +68,14 @@ public class OreStack implements Comparable<OreStack>
         this.stackSize = stackSize;
     }
 
-    // TODO Maybe this should return a List of OreStacks that match the OreDictionary entries this ItemStack belongs to
-    // Ponder and test - changing this could have massive ramifications on DynEV
-    // For now, this returns an OreStack for the first OreDictionary entry the ItemStack is associated with
-    public OreStack(ItemStack itemStack)
+    public static List<OreStack> getOreStacks(ItemStack itemStack)
     {
-        if (itemStack != null && OreDictionary.getOreIDs(itemStack).length > 0)
+        List<OreStack> oreList = new ArrayList<OreStack>();
+        for (int id : OreDictionary.getOreIDs(itemStack))
         {
-            this.oreName = OreDictionary.getOreName(OreDictionary.getOreIDs(itemStack)[0]);
-            this.stackSize = itemStack.stackSize;
+            oreList.add(new OreStack(OreDictionary.getOreName(id)));
         }
+        return oreList;
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)
@@ -100,17 +100,26 @@ public class OreStack implements Comparable<OreStack>
     {
         if (objectList.size() > 0)
         {
+            List<Integer> commonIDs = null;
             for (Object listElement : objectList)
             {
                 if (listElement instanceof ItemStack)
                 {
                     ItemStack stack = (ItemStack) listElement;
 
-                    if (OreDictionary.getOreIDs(stack).length > 0)
+                    if (commonIDs == null)
                     {
-                        return new OreStack(stack);
+                        commonIDs = new ArrayList<Integer>(Ints.asList(OreDictionary.getOreIDs(stack)));
+                    }
+                    else
+                    {
+                        commonIDs.retainAll(Ints.asList(OreDictionary.getOreIDs(stack)));
                     }
                 }
+            }
+            if (commonIDs != null && !commonIDs.isEmpty())
+            {
+                return new OreStack(OreDictionary.getOreName(commonIDs.get(0)));
             }
         }
 

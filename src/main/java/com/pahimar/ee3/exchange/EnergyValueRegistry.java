@@ -201,39 +201,37 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
                                 if (OreDictionary.getOreIDs(wrappedItemStack).length > 0)
                                 {
-                                    OreStack oreStack = new OreStack(wrappedItemStack);
-
-                                    if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
+                                    for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
                                     {
-                                        return energyValueRegistry.stackMappings.get(new WrappedStack(oreStack));
-                                    }
-                                    else
-                                    {
-                                        for (int oreId : OreDictionary.getOreIDs(wrappedItemStack))
+                                        OreStack oreStack = new OreStack(OreDictionary.getOreName(oreId));
+                                        if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(oreStack)))
                                         {
-                                            for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
-                                            {
-                                                if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
-                                                {
-                                                    if (lowestValue == null)
-                                                    {
-                                                        lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
-                                                    }
-                                                    else
-                                                    {
-                                                        EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+                                            return energyValueRegistry.stackMappings.get(new WrappedStack(oreStack));
+                                        }
 
-                                                        if (itemValue.compareTo(lowestValue) < 0)
-                                                        {
-                                                            lowestValue = itemValue;
-                                                        }
+                                        //Necessary, but prone to breaking things :(
+                                        for (ItemStack itemStack : OreDictionary.getOres(OreDictionary.getOreName(oreId)))
+                                        {
+                                            if (energyValueRegistry.stackMappings.containsKey(new WrappedStack(itemStack)))
+                                            {
+                                                if (lowestValue == null)
+                                                {
+                                                    lowestValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+                                                }
+                                                else
+                                                {
+                                                    EnergyValue itemValue = energyValueRegistry.stackMappings.get(new WrappedStack(itemStack));
+
+                                                    if (itemValue.compareTo(lowestValue) < 0)
+                                                    {
+                                                        lowestValue = itemValue;
                                                     }
                                                 }
                                             }
                                         }
-
-                                        return lowestValue;
                                     }
+
+                                    return lowestValue;
                                 }
                                 else
                                 {
