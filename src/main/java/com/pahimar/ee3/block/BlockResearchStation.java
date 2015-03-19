@@ -17,7 +17,7 @@ public class BlockResearchStation extends BlockEE implements ITileEntityProvider
     {
         super(Material.rock);
         this.setHardness(2.0f);
-        this.setBlockName(Names.Blocks.TRANSMUTATION_TABLET);
+        this.setBlockName(Names.Blocks.RESEARCH_STATION);
     }
 
     @Override

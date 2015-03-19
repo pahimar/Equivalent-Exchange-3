@@ -21,6 +21,7 @@ public class BlockTransmutationTablet extends BlockEE implements ITileEntityProv
     public BlockTransmutationTablet()
     {
         super(Material.rock);
+        setCreativeTab(null);
         this.setHardness(2.0f);
         this.setBlockName(Names.Blocks.TRANSMUTATION_TABLET);
         this.setBlockBounds(0f, 0f, 0f, 1f, 0.625f, 1f);
