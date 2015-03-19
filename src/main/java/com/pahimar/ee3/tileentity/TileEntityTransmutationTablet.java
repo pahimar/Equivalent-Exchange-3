@@ -1,6 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.item.ItemMiniumStone;
@@ -71,6 +72,18 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements IInve
     public AxisAlignedBB getRenderBoundingBox()
     {
         return AxisAlignedBB.getBoundingBox(xCoord - 1.5d, yCoord - 1, zCoord - 1.5d, xCoord + 1.5d, yCoord + 1, zCoord + 1.5d);
+    }
+
+    public boolean isStructureValid()
+    {
+        return ((worldObj.getBlock(xCoord - 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) == 1) &&
+                (worldObj.getBlock(xCoord, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) == 2) &&
+                (worldObj.getBlock(xCoord + 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) == 3) &&
+                (worldObj.getBlock(xCoord - 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) == 4) &&
+                (worldObj.getBlock(xCoord + 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) == 5) &&
+                (worldObj.getBlock(xCoord - 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) == 6) &&
+                (worldObj.getBlock(xCoord, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1) == 7) &&
+                (worldObj.getBlock(xCoord + 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) == 8));
     }
 
     @Override
@@ -199,7 +212,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements IInve
         }
 
         float newEnergyValue = 0f;
-        for (int i = 0; i < STONE_INDEX; i++)
+        for (int i = 0; i <= STONE_INDEX; i++)
         {
             if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
             {

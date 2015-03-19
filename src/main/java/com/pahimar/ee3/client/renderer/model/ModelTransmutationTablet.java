@@ -20,9 +20,13 @@ public class ModelTransmutationTablet extends ModelBase
         this.base.addBox(-8.0F, 6.0F, -8.0F, 16, 8, 16, 0.0F);
     }
 
-    public void render(float scale)
+    public void renderTransmutationPad(float scale)
     {
         this.transmutationPad.render(scale);
+    }
+
+    public void renderBase(float scale)
+    {
         this.base.render(scale);
     }
 }

@@ -6,12 +6,12 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -25,6 +25,19 @@ public class BlockTransmutationTablet extends BlockEE implements ITileEntityProv
         this.setHardness(2.0f);
         this.setBlockName(Names.Blocks.TRANSMUTATION_TABLET);
         this.setBlockBounds(0f, 0f, 0f, 1f, 0.625f, 1f);
+    }
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z)
+    {
+        if (isStructureValid(iBlockAccess, x, y, z))
+        {
+            this.setBlockBounds(0f, 0f, 0f, 1f, 0.625f, 1f);
+        }
+        else
+        {
+            this.setBlockBounds(0f, 0f, 0f, 1f, 0.5f, 1f);
+        }
     }
 
     @Override
@@ -61,15 +74,6 @@ public class BlockTransmutationTablet extends BlockEE implements ITileEntityProv
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
-    {
-        if (!isStructureValid(world, x, y, z))
-        {
-            super.breakBlock(world, x, y, z, block, world.getBlockMetadata(x, y, z));
-        }
-    }
-
-    @Override
     public TileEntity createNewTileEntity(World world, int metaData)
     {
         return new TileEntityTransmutationTablet();
@@ -93,15 +97,15 @@ public class BlockTransmutationTablet extends BlockEE implements ITileEntityProv
         return RenderIds.tabletSlab;
     }
 
-    public boolean isStructureValid(World world, int xCoord, int yCoord, int zCoord)
+    private boolean isStructureValid(IBlockAccess iBlockAcces, int xCoord, int yCoord, int zCoord)
     {
-        return ((world.getBlock(xCoord - 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) == 1) &&
-                (world.getBlock(xCoord, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord, yCoord, zCoord - 1) == 2) &&
-                (world.getBlock(xCoord + 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) == 3) &&
-                (world.getBlock(xCoord - 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord - 1, yCoord, zCoord) == 4) &&
-                (world.getBlock(xCoord + 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord + 1, yCoord, zCoord) == 5) &&
-                (world.getBlock(xCoord - 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) == 6) &&
-                (world.getBlock(xCoord, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord, yCoord, zCoord + 1) == 7) &&
-                (world.getBlock(xCoord + 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && world.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) == 8));
+        return ((iBlockAcces.getBlock(xCoord - 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) == 1) &&
+                (iBlockAcces.getBlock(xCoord, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord, yCoord, zCoord - 1) == 2) &&
+                (iBlockAcces.getBlock(xCoord + 1, yCoord, zCoord - 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) == 3) &&
+                (iBlockAcces.getBlock(xCoord - 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord - 1, yCoord, zCoord) == 4) &&
+                (iBlockAcces.getBlock(xCoord + 1, yCoord, zCoord) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord + 1, yCoord, zCoord) == 5) &&
+                (iBlockAcces.getBlock(xCoord - 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) == 6) &&
+                (iBlockAcces.getBlock(xCoord, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord, yCoord, zCoord + 1) == 7) &&
+                (iBlockAcces.getBlock(xCoord + 1, yCoord, zCoord + 1) instanceof BlockAshInfusedStoneSlab && iBlockAcces.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) == 8));
     }
 }

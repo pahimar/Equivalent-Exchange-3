@@ -5,7 +5,6 @@ import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -150,15 +149,6 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
-    {
-        if (!hasValidNeighbours(world, x, y, z))
-        {
-            super.breakBlock(world, x, y, z, block, world.getBlockMetadata(x, y, z));
-        }
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
@@ -224,58 +214,6 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
     public String func_150002_b(int meta)
     {
         return getUnlocalizedName();
-    }
-
-    private boolean hasValidNeighbours(World world, int x, int y, int z)
-    {
-        int metaData = world.getBlockMetadata(x, y, z);
-
-        int shiftedX = x;
-        int shiftedZ = z;
-
-        if (metaData == 1)
-        {
-            shiftedX++;
-            shiftedZ++;
-        }
-        else if (metaData == 2)
-        {
-            shiftedZ++;
-        }
-        else if (metaData == 3)
-        {
-            shiftedX--;
-            shiftedZ++;
-        }
-        else if (metaData == 4)
-        {
-            shiftedX++;
-        }
-        else if (metaData == 5)
-        {
-            shiftedZ--;
-        }
-        else if (metaData == 6)
-        {
-            shiftedX++;
-            shiftedZ--;
-        }
-        else if (metaData == 7)
-        {
-            shiftedZ--;
-        }
-        else if (metaData == 8)
-        {
-            shiftedX--;
-            shiftedZ--;
-        }
-
-        if (world.getBlock(shiftedX, y, shiftedZ) instanceof BlockTransmutationTablet)
-        {
-            return ((BlockTransmutationTablet) world.getBlock(shiftedX, y, shiftedZ)).isStructureValid(world, shiftedX, y, shiftedZ);
-        }
-
-        return false;
     }
 
     private boolean isAssociatedWithValidTablet(World world, int x, int y, int z)
