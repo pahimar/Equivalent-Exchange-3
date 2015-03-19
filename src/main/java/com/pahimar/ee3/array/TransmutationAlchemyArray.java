@@ -1,23 +1,17 @@
 package com.pahimar.ee3.array;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.AlchemyArray;
-import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.init.ModBlocks;
-import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
+import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TransmutationAlchemyArray extends AlchemyArray implements IInventory
+public class TransmutationAlchemyArray extends AlchemyArray
 {
-    private EnergyValue energyValue;
-
     public TransmutationAlchemyArray()
     {
         super(Textures.AlchemyArray.TRANSMUTATION_ALCHEMY_ARRAY, Names.AlchemyArrays.TRANSMUTATION_ALCHEMY_ARRAY);
@@ -33,7 +27,23 @@ public class TransmutationAlchemyArray extends AlchemyArray implements IInventor
                 TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(arrayX, arrayY, arrayZ);
                 if (tileEntityAlchemyArray.getOrientation() == ForgeDirection.UP && tileEntityAlchemyArray.getSize() == 2 && areBlocksValidForTransmutationTablet(world, arrayX, arrayY, arrayZ))
                 {
-                    entityPlayer.openGui(EquivalentExchange3.instance, GUIs.TRANSMUTATION_TABLET.ordinal(), world, arrayX, arrayY, arrayZ);
+                    world.setBlock(arrayX - 1, arrayY - 1, arrayZ - 1, ModBlocks.ashInfusedStoneSlab, 1, 3);
+                    world.setBlock(arrayX, arrayY - 1, arrayZ - 1, ModBlocks.ashInfusedStoneSlab, 2, 3);
+                    world.setBlock(arrayX + 1, arrayY - 1, arrayZ - 1, ModBlocks.ashInfusedStoneSlab, 3, 3);
+
+                    world.setBlock(arrayX - 1, arrayY - 1, arrayZ, ModBlocks.ashInfusedStoneSlab, 4, 3);
+                    world.setBlock(arrayX, arrayY - 1, arrayZ, ModBlocks.transmutationTablet, 0, 3);
+                    world.setBlock(arrayX + 1, arrayY - 1, arrayZ, ModBlocks.ashInfusedStoneSlab, 5, 3);
+
+                    world.setBlock(arrayX - 1, arrayY - 1, arrayZ + 1, ModBlocks.ashInfusedStoneSlab, 6, 3);
+                    world.setBlock(arrayX, arrayY - 1, arrayZ + 1, ModBlocks.ashInfusedStoneSlab, 7, 3);
+                    world.setBlock(arrayX + 1, arrayY - 1, arrayZ + 1, ModBlocks.ashInfusedStoneSlab, 8, 3);
+
+                    // TODO Set orientation on the tablet, make sound effects, and add particles
+                    if (world.getTileEntity(arrayX, arrayY - 1, arrayZ) instanceof TileEntityTransmutationTablet)
+                    {
+                        ((TileEntityTransmutationTablet) world.getTileEntity(arrayX, arrayY - 1, arrayZ)).setOrientation(tileEntityAlchemyArray.getOrientation());
+                    }
                 }
             }
         }
@@ -55,83 +65,5 @@ public class TransmutationAlchemyArray extends AlchemyArray implements IInventor
         }
 
         return areBlocksValid;
-    }
-
-    @Override
-    public int getSizeInventory()
-    {
-        return 0;
-    }
-
-    @Override
-    public ItemStack getStackInSlot(int p_70301_1_)
-    {
-        return null;
-    }
-
-    @Override
-    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_)
-    {
-        return null;
-    }
-
-    @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_)
-    {
-        return null;
-    }
-
-    @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
-    {
-
-    }
-
-    @Override
-    public String getInventoryName()
-    {
-        return null;
-    }
-
-    @Override
-    public boolean hasCustomInventoryName()
-    {
-        return false;
-    }
-
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 0;
-    }
-
-    @Override
-    public void markDirty()
-    {
-
-    }
-
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
-    {
-        return false;
-    }
-
-    @Override
-    public void openInventory()
-    {
-
-    }
-
-    @Override
-    public void closeInventory()
-    {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_)
-    {
-        return false;
     }
 }

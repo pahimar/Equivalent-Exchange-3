@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class ContainerAlchemicalTome extends ContainerEE
+public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldElementHandler
 {
     private final InventoryTransmutationKnowledge inventoryTransmutationKnowledge;
     private int pageOffset, maxPageOffset;

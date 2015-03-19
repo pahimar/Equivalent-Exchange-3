@@ -1,6 +1,6 @@
 package com.pahimar.ee3.network.message;
 
-import com.pahimar.ee3.inventory.ContainerEE;
+import com.pahimar.ee3.inventory.ITextFieldElementHandler;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -54,9 +54,9 @@ public class MessageGuiElementTextFieldUpdate implements IMessage, IMessageHandl
 
         if (entityPlayer != null)
         {
-            if (entityPlayer.openContainer instanceof ContainerEE)
+            if (entityPlayer.openContainer instanceof ITextFieldElementHandler)
             {
-                ((ContainerEE) entityPlayer.openContainer).handleElementTextFieldUpdate(message.elementName, message.elementText);
+                ((ITextFieldElementHandler) entityPlayer.openContainer).handleElementTextFieldUpdate(message.elementName, message.elementText);
             }
         }
 

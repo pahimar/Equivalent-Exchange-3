@@ -1,6 +1,7 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.renderer.model.ModelTransmutationTablet;
+import com.pahimar.ee3.client.util.RenderUtils;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import cpw.mods.fml.relauncher.Side;
@@ -21,49 +22,50 @@ public class TileEntityRendererTransmutationTablet extends TileEntitySpecialRend
     {
         if (tileEntity instanceof TileEntityTransmutationTablet)
         {
-            TileEntityTransmutationTablet tileEntityTransmutationTablet = (TileEntityTransmutationTablet) tileEntity;
-            ForgeDirection direction = null;
-
-            if (tileEntityTransmutationTablet.getWorldObj() != null)
-            {
-                direction = tileEntityTransmutationTablet.getOrientation();
-            }
-
             this.bindTexture(Textures.Model.TRANSMUTATION_TABLET);
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
-            GL11.glScalef(1.0F, -1.0F, -1.0F);
-            GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-            short angle = 0;
-
-            if (direction != null)
-            {
-                if (direction == ForgeDirection.NORTH)
-                {
-                    angle = 180;
-                }
-                else if (direction == ForgeDirection.SOUTH)
-                {
-                    angle = 0;
-                }
-                else if (direction == ForgeDirection.WEST)
-                {
-                    angle = 90;
-                }
-                else if (direction == ForgeDirection.EAST)
-                {
-                    angle = -90;
-                }
-            }
-
-            GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
-            //            GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-            modelTransmutationTablet.render(null, 0.0625f, 0.0625f, 0.0625f, 0.0625f, 0.0625f, 0.0625f);
+            GL11.glTranslatef((float) x, (float) y, (float) z);
+            GL11.glTranslatef(0.5F, -0.375F, 0.5F);
+            modelTransmutationTablet.render(0.0625f);
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glPopMatrix();
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+            TileEntityTransmutationTablet tileEntityTransmutationTablet = (TileEntityTransmutationTablet) tileEntity;
+            int rotationAngle = 0;
+            if (tileEntityTransmutationTablet.getRotation() == ForgeDirection.NORTH)
+            {
+                rotationAngle = 0;
+            }
+            else if (tileEntityTransmutationTablet.getRotation() == ForgeDirection.EAST)
+            {
+                rotationAngle = -90;
+            }
+            else if (tileEntityTransmutationTablet.getRotation() == ForgeDirection.SOUTH)
+            {
+                rotationAngle = 180;
+            }
+            else if (tileEntityTransmutationTablet.getRotation() == ForgeDirection.WEST)
+            {
+                rotationAngle = 90;
+            }
+
+            GL11.glDisable(GL11.GL_CULL_FACE);
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glPushMatrix();
+            GL11.glDepthMask(false);
+            GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+            GL11.glPushMatrix();
+            GL11.glTranslated(x + 0.5d, y + 0.63d, z + 0.5d);
+            GL11.glScalef(2f, 2f, 2f);
+            GL11.glRotatef(rotationAngle, tileEntityTransmutationTablet.getOrientation().offsetX, tileEntityTransmutationTablet.getOrientation().offsetY, tileEntityTransmutationTablet.getOrientation().offsetZ);
+            GL11.glRotatef(90, -1, 0, 0);
+            RenderUtils.renderQuad(Textures.AlchemyArray.TRANSMUTATION_ALCHEMY_ARRAY);
+            GL11.glPopMatrix();
+            GL11.glDepthMask(true);
+            GL11.glPopMatrix();
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_CULL_FACE);
         }
     }
 }

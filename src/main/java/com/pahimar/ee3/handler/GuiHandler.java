@@ -53,7 +53,8 @@ public class GuiHandler implements IGuiHandler
         }
         else if (id == GUIs.TRANSMUTATION_TABLET.ordinal())
         {
-            return new ContainerTransmutationTablet(entityPlayer.inventory);
+            TileEntityTransmutationTablet tileEntityTransmutationTablet = (TileEntityTransmutationTablet) world.getTileEntity(x, y, z);
+            return new ContainerTransmutationTablet(entityPlayer.inventory, tileEntityTransmutationTablet);
         }
         else if (id == GUIs.SYMBOL_SELECTION.ordinal())
         {
@@ -106,7 +107,8 @@ public class GuiHandler implements IGuiHandler
         }
         else if (id == GUIs.TRANSMUTATION_TABLET.ordinal())
         {
-            return new GuiTransmutationTablet(entityPlayer.inventory);
+            TileEntityTransmutationTablet tileEntityTransmutationTablet = (TileEntityTransmutationTablet) world.getTileEntity(x, y, z);
+            return new GuiTransmutationTablet(entityPlayer.inventory, tileEntityTransmutationTablet);
         }
         else if (id == GUIs.SYMBOL_SELECTION.ordinal())
         {

@@ -85,8 +85,10 @@ tile.ee3:researchStation.name=Research Station
 tile.ee3:augmentationTable.name=Augmentation Table [WIP]
 tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
 tile.ee3:ashInfusedStone.name=Ash Infused Stone
+tile.ee3:ashInfusedStoneSlab.name=Ash Infused Stone Slab
 tile.ee3:alchemyArray.name=Alchemy Array
 tile.ee3:dummyArray.name=Alchemy Array
+tile.ee3:transmutationTablet.name=Transmutation Tablet
 
 # Alchemy Arrays
 arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]

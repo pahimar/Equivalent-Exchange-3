@@ -92,9 +92,4 @@ public abstract class ContainerEE extends Container
     {
         // NOOP
     }
-
-    public void handleElementTextFieldUpdate(String buttonName, String updatedText)
-    {
-        // NOOP
-    }
 }

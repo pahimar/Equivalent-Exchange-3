@@ -14,6 +14,7 @@ public class Names
         public static final String AUGMENTATION_TABLE = "augmentationTable";
         public static final String ASH_INFUSED_STONE = "ashInfusedStone";
         public static final String TRANSMUTATION_TABLET = "transmutationTablet";
+        public static final String ASH_INFUSED_STONE_SLAB = "ashInfusedStoneSlab";
         public static final String ALCHEMY_ARRAY = "alchemyArray";
         public static final String DUMMY_ARRAY = "dummyArray";
     }
@@ -121,6 +122,7 @@ public class Names
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
         public static final String AUGMENTATION_TABLE = "container.ee3:" + Blocks.AUGMENTATION_TABLE;
         public static final String ALCHEMICAL_TOME = "container.ee3:" + Items.ALCHEMICAL_TOME;
+        public static final String TRANSMUTATION_TABLET = "container.ee3:" + Blocks.TRANSMUTATION_TABLET;
     }
 
     public static final class Keys

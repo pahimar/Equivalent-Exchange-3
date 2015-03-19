@@ -6,6 +6,7 @@ import com.pahimar.ee3.item.ItemBlockAlchemicalFuel;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks
@@ -22,6 +23,7 @@ public class ModBlocks
     public static final BlockEE alchemyArray = new BlockAlchemyArray();
     public static final BlockEE dummyArray = new BlockDummyArray();
     public static final BlockEE transmutationTablet = new BlockTransmutationTablet();
+    public static final Block ashInfusedStoneSlab = new BlockAshInfusedStoneSlab();
 
     public static void init()
     {
@@ -37,5 +39,6 @@ public class ModBlocks
         GameRegistry.registerBlock(alchemyArray, Names.Blocks.ALCHEMY_ARRAY);
         GameRegistry.registerBlock(dummyArray, Names.Blocks.DUMMY_ARRAY);
         GameRegistry.registerBlock(transmutationTablet, Names.Blocks.TRANSMUTATION_TABLET);
+        GameRegistry.registerBlock(ashInfusedStoneSlab, Names.Blocks.ASH_INFUSED_STONE_SLAB);
     }
 }

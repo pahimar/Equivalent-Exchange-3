@@ -27,6 +27,8 @@ public class ElementTextField extends ElementBase
     protected int selectionStart, selectionEnd;
     protected int renderStart, caret;
 
+    private int paddingLeft, paddingRight, paddingTop, paddingBottom;
+
     private boolean isFocused;
     private boolean canFocusChange = true;
 
@@ -47,6 +49,7 @@ public class ElementTextField extends ElementBase
     public ElementTextField(GuiBase gui, int posX, int posY, int width, int height, short limit)
     {
         super(gui, posX, posY, width, height);
+        setPadding(1, 1, 1, 1);
         setMaxLength(limit);
     }
 
@@ -59,6 +62,7 @@ public class ElementTextField extends ElementBase
     {
         super(gui, posX, posY, width, height);
         setName(name);
+        setPadding(1, 1, 1, 1);
         setMaxLength(limit);
     }
 
@@ -72,6 +76,39 @@ public class ElementTextField extends ElementBase
         {
             this.selectedTextColor = selectedTextColor.intValue();
         }
+        return this;
+    }
+
+    public ElementTextField setPaddingLeft(int paddingLeft)
+    {
+        this.paddingLeft = paddingLeft;
+        return this;
+    }
+
+    public ElementTextField setPaddingRight(int paddingRight)
+    {
+        this.paddingRight = paddingRight;
+        return this;
+    }
+
+    public ElementTextField setPaddingTop(int paddingTop)
+    {
+        this.paddingTop = paddingTop;
+        return this;
+    }
+
+    public ElementTextField setPaddingBottom(int paddingBottom)
+    {
+        this.paddingBottom = paddingBottom;
+        return this;
+    }
+
+    public ElementTextField setPadding(int paddingTop, int paddingRight, int paddingBottom, int paddingLeft)
+    {
+        this.paddingTop = paddingTop;
+        this.paddingRight = paddingRight;
+        this.paddingBottom = paddingBottom;
+        this.paddingLeft = paddingLeft;
         return this;
     }
 
@@ -166,6 +203,26 @@ public class ElementTextField extends ElementBase
             width += font.getCharWidth(text[i]);
         }
         return width;
+    }
+
+    public int getPaddingLeft()
+    {
+        return paddingLeft;
+    }
+
+    public int getPaddingRight()
+    {
+        return paddingRight;
+    }
+
+    public int getPaddingTop()
+    {
+        return paddingTop;
+    }
+
+    public int getPaddingBottom()
+    {
+        return paddingBottom;
     }
 
     public int getVisibleWidth()
@@ -659,7 +716,7 @@ public class ElementTextField extends ElementBase
 
         FontRenderer font = getFontRenderer();
         char[] text = this.text;
-        int startX = posX + 3, endX = sizeX - 3, startY = posY + 6, endY = startY + font.FONT_HEIGHT;
+        int startX = posX + paddingLeft, endX = sizeX - paddingRight, startY = posY + paddingTop, endY = startY + font.FONT_HEIGHT + paddingBottom;
         for (int i = renderStart, width = 0; i <= textLength; ++i)
         {
             boolean end = i == textLength;

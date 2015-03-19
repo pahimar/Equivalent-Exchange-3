@@ -15,21 +15,18 @@ public abstract class ElementButtonManaged extends ElementBase
 
     public ElementButtonManaged(GuiBase containerScreen, int posX, int posY, int sizeX, int sizeY, String text)
     {
-
         super(containerScreen, posX, posY, sizeX, sizeY);
         _text = text;
     }
 
     public void setText(String text)
     {
-
         _text = text;
     }
 
     @Override
     public void drawBackground(int mouseX, int mouseY, float gameTicks)
     {
-
         if (!isEnabled())
         {
             gui.bindTexture(DISABLED);
@@ -52,14 +49,12 @@ public abstract class ElementButtonManaged extends ElementBase
     @Override
     public void drawForeground(int mouseX, int mouseY)
     {
-
         String text = getFontRenderer().trimStringToWidth(_text, sizeX - 4);
         drawCenteredString(getFontRenderer(), text, posX + sizeX / 2, posY + (sizeY - 8) / 2, getTextColor(mouseX, mouseY));
     }
 
     protected int getTextColor(int mouseX, int mouseY)
     {
-
         if (!isEnabled())
         {
             return -6250336;
@@ -77,7 +72,6 @@ public abstract class ElementButtonManaged extends ElementBase
     @Override
     public boolean onMousePressed(int mouseX, int mouseY, int mouseButton)
     {
-
         GuiBase.playSound("random.click", 1.0F, 1.0F);
         if (mouseButton == 0)
         {

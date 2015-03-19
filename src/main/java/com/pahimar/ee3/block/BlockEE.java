@@ -61,6 +61,7 @@ public class BlockEE extends Block
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack)
     {
+        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
         if (world.getTileEntity(x, y, z) instanceof TileEntityEE)
         {
             int direction = 0;

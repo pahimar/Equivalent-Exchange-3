@@ -29,23 +29,35 @@ public final class Textures
 
     public static final class Gui
     {
-        private static final String GUI_SHEET_LOCATION = "textures/gui/";
-        public static final ResourceLocation CALCINATOR = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "calcinator.png");
-        public static final ResourceLocation ALUDEL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "aludel.png");
-        public static final ResourceLocation ALCHEMICAL_BAG_SMALL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalBag_small.png");
-        public static final ResourceLocation ALCHEMICAL_BAG_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalBag_medium.png");
-        public static final ResourceLocation ALCHEMICAL_BAG_LARGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalBag_large.png");
-        public static final ResourceLocation ALCHEMICAL_CHEST_SMALL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_small.png");
-        public static final ResourceLocation ALCHEMICAL_CHEST_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_medium.png");
-        public static final ResourceLocation ALCHEMICAL_CHEST_LARGE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalChest_large.png");
-        public static final ResourceLocation GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "glassBell.png");
-        public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation.png");
-        public static final ResourceLocation RESEARCH_STATION_GYLPH_1 = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation_Glyph1.png");
-        public static final ResourceLocation RESEARCH_STATION_GYLPH_2 = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "researchStation_Glyph2.png");
-        public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "augmentationTable.png");
+        protected static final String GUI_TEXTURE_LOCATION = "textures/gui/";
+        public static final ResourceLocation CALCINATOR = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "calcinator.png");
+        public static final ResourceLocation ALUDEL = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "aludel.png");
+        public static final ResourceLocation ALCHEMICAL_BAG_SMALL = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalBag_small.png");
+        public static final ResourceLocation ALCHEMICAL_BAG_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalBag_medium.png");
+        public static final ResourceLocation ALCHEMICAL_BAG_LARGE = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalBag_large.png");
+        public static final ResourceLocation ALCHEMICAL_CHEST_SMALL = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalChest_small.png");
+        public static final ResourceLocation ALCHEMICAL_CHEST_MEDIUM = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalChest_medium.png");
+        public static final ResourceLocation ALCHEMICAL_CHEST_LARGE = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalChest_large.png");
+        public static final ResourceLocation GLASS_BELL = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "glassBell.png");
+        public static final ResourceLocation RESEARCH_STATION = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "researchStation.png");
+        public static final ResourceLocation RESEARCH_STATION_GYLPH_1 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "researchStation_Glyph1.png");
+        public static final ResourceLocation RESEARCH_STATION_GYLPH_2 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "researchStation_Glyph2.png");
+        public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "augmentationTable.png");
         public static final ResourceLocation PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
-        public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "alchemicalTome.png");
-        public static final ResourceLocation TRANSMUTATION_TABLET = ResourceLocationHelper.getResourceLocation(GUI_SHEET_LOCATION + "transmutationTablet.png");
+        public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalTome.png");
+        public static final ResourceLocation TRANSMUTATION_TABLET = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "transmutationTablet.png");
+
+        public static final class Elements
+        {
+            protected static final String ELEMENT_TEXTURE_LOCATION = GUI_TEXTURE_LOCATION + "elements/";
+            public static final ResourceLocation ARROW_LEFT = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "arrowLeft.png");
+            public static final ResourceLocation ARROW_RIGHT = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "arrowRight.png");
+            public static final ResourceLocation SLIDER_VERTICAL_ENABLED = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "sliderVerticalEnabled.png");
+            public static final ResourceLocation SLIDER_VERTICAL_DISABLED = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "sliderVerticalDisabled.png");
+            public static final ResourceLocation BUTTON_ENABLED = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonEnabled.png");
+            public static final ResourceLocation BUTTON_DISABLED = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonDisabled.png");
+            public static final ResourceLocation BUTTON_HOVER = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonHover.png");
+        }
     }
 
     public static final class Effect

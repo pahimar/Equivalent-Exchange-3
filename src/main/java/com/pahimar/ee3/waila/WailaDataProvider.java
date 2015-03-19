@@ -1,5 +1,6 @@
 package com.pahimar.ee3.waila;
 
+import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.tileentity.*;
@@ -73,6 +74,60 @@ public class WailaDataProvider implements IWailaDataProvider
                 currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Names.Blocks.DUMMY_ARRAY));
             }
         }
+        else if (accessor.getBlock() instanceof BlockAshInfusedStoneSlab)
+        {
+            int metaData = accessor.getMetadata();
+            int x = accessor.getPosition().blockX;
+            int y = accessor.getPosition().blockY;
+            int z = accessor.getPosition().blockZ;
+            String unLocalizedBlockName = accessor.getWorld().getBlock(x, y, z).getUnlocalizedName() + ".name";
+
+            if (metaData == 1)
+            {
+                x++;
+                z++;
+            }
+            else if (metaData == 2)
+            {
+                z++;
+            }
+            else if (metaData == 3)
+            {
+                x--;
+                z++;
+            }
+            else if (metaData == 4)
+            {
+                x++;
+            }
+            else if (metaData == 5)
+            {
+                x--;
+            }
+            else if (metaData == 6)
+            {
+                x++;
+                z--;
+            }
+            else if (metaData == 7)
+            {
+                z--;
+            }
+            else if (metaData == 8)
+            {
+                x--;
+                z--;
+            }
+
+            if (metaData != 0 && accessor.getWorld().getTileEntity(x, y, z) instanceof TileEntityTransmutationTablet)
+            {
+                currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(accessor.getWorld().getBlock(x, y, z).getUnlocalizedName() + ".name"));
+            }
+            else
+            {
+                currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(unLocalizedBlockName));
+            }
+        }
 
         return currentTip;
     }
@@ -98,5 +153,6 @@ public class WailaDataProvider implements IWailaDataProvider
         registrar.registerHeadProvider(new WailaDataProvider(), TileEntityAlchemicalChestLarge.class);
         registrar.registerHeadProvider(new WailaDataProvider(), TileEntityAlchemyArray.class);
         registrar.registerHeadProvider(new WailaDataProvider(), TileEntityDummyArray.class);
+        registrar.registerHeadProvider(new WailaDataProvider(), BlockAshInfusedStoneSlab.class);
     }
 }
