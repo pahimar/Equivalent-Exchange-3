@@ -109,7 +109,7 @@ public class EnergyValueHelper
     {
         if ((Float.compare(factor, 0f) != 0) && (energyValue != null))
         {
-            return new EnergyValue(energyValue.getEnergyValue() * 1f / factor, energyValue.getEnergyType());
+            return new EnergyValue(energyValue.getEnergyValue() * 1f / factor);
         }
         else
         {

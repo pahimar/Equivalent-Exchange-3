@@ -11,11 +11,10 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).create();
     private float energyValue;
-    private final EnergyType energyType;
 
     public EnergyValue()
     {
-        this(0f, EnergyType.UNKNOWN);
+        this(0f);
     }
 
     public EnergyValue(int energyValue)
@@ -30,18 +29,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 
     public EnergyValue(float energyValue)
     {
-        this(energyValue, EnergyType.DEFAULT);
-    }
-
-    public EnergyValue(float energyValue, EnergyType energyType)
-    {
         this.energyValue = energyValue;
-        this.energyType = energyType;
-    }
-
-    public EnergyValue(int energyValue, EnergyType energyType)
-    {
-        this((float) energyValue, energyType);
     }
 
     @Override
@@ -53,7 +41,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     @Override
     public String toString()
     {
-        return String.format(" %s@%s ", energyValue, energyType);
+        return String.format("%s", energyValue);
     }
 
     @Override
@@ -61,14 +49,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     {
         if (energyValue != null)
         {
-            if (this.energyType == energyValue.getEnergyType())
-            {
-                return Float.compare(this.energyValue, energyValue.getEnergyValue());
-            }
-            else
-            {
-                return (this.energyType.ordinal() - energyValue.getEnergyType().ordinal());
-            }
+            return Float.compare(this.energyValue, energyValue.getEnergyValue());
         }
         else
         {
@@ -76,27 +57,48 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         }
     }
 
-    public EnergyType getEnergyType()
-    {
-        return this.energyType;
-    }
-
     public float getEnergyValue()
     {
         return this.energyValue;
     }
 
+    public void add(int energyValue)
+    {
+        this.add((float) energyValue);
+    }
+
+    public void add(float energyValue)
+    {
+        if (energyValue >= 0f)
+        {
+            this.energyValue += energyValue;
+        }
+    }
+
     public void add(EnergyValue energyValue)
     {
-        if (energyValue != null && this.energyType == energyValue.energyType && energyValue.energyValue > 0f)
+        if (energyValue != null && energyValue.energyValue >= 0f)
         {
             this.energyValue += energyValue.energyValue;
         }
     }
 
+    public void subtract(int energyValue)
+    {
+        this.subtract((float) energyValue);
+    }
+
+    public void subtract(float energyValue)
+    {
+        if (this.energyValue - energyValue >= 0f)
+        {
+            this.energyValue -= energyValue;
+        }
+    }
+
     public void subtract(EnergyValue energyValue)
     {
-        if (energyValue != null && this.energyType == energyValue.energyType && (this.energyValue - energyValue.energyValue) >= 0f)
+        if (energyValue != null && (this.energyValue - energyValue.energyValue) >= 0f)
         {
             this.energyValue -= energyValue.energyValue;
         }
@@ -110,8 +112,15 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)
     {
         nbtTagCompound.setFloat("energyValue", energyValue);
-        nbtTagCompound.setInteger("energyType", energyType.ordinal());
         return nbtTagCompound;
+    }
+
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        if (nbtTagCompound.hasKey("energyValue"))
+        {
+            this.energyValue = nbtTagCompound.getFloat("energyValue");
+        }
     }
 
     public static NBTTagCompound writeEnergyValueToNBT(EnergyValue energyValue)
@@ -123,12 +132,11 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 
     public static EnergyValue loadEnergyValueFromNBT(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound.hasKey("energyValue") && nbtTagCompound.hasKey("energyType"))
+        if (nbtTagCompound.hasKey("energyValue"))
         {
             float energyValue = nbtTagCompound.getFloat("energyValue");
-            EnergyType energyType = EnergyType.getEnergyTypeFromOrdinal(nbtTagCompound.getInteger("energyType"));
 
-            return new EnergyValue(energyValue, energyType);
+            return new EnergyValue(energyValue);
         }
 
         return null;
@@ -189,14 +197,13 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     {
         JsonObject jsonEnergyValue = (JsonObject) jsonElement;
 
-        if (jsonEnergyValue.get("type") != null && jsonEnergyValue.get("type").isJsonPrimitive() && jsonEnergyValue.get("value") != null && jsonEnergyValue.get("value").isJsonPrimitive())
+        if (jsonEnergyValue.get("value") != null && jsonEnergyValue.get("value").isJsonPrimitive())
         {
-            EnergyType energyType = EnergyType.getEnergyTypeFromOrdinal(jsonEnergyValue.get("type").getAsInt());
             float energyValue = jsonEnergyValue.get("value").getAsFloat();
 
-            if (Float.compare(energyValue, 0f) > 0)
+            if (Float.compare(energyValue, 0f) >= 0)
             {
-                return new EnergyValue(energyValue, energyType);
+                return new EnergyValue(energyValue);
             }
         }
 
@@ -223,52 +230,8 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     {
         JsonObject jsonEnergyValue = new JsonObject();
 
-        jsonEnergyValue.addProperty("type", energyValueObject.energyType.ordinal());
         jsonEnergyValue.addProperty("value", energyValueObject.energyValue);
 
         return jsonEnergyValue;
-    }
-
-    public static enum EnergyType
-    {
-        UNKNOWN, CORPOREAL, KINETIC, TEMPORAL, ESSENTIA, AMORPHOUS, VOID, OMNI;
-
-        public static final EnergyType DEFAULT = EnergyType.CORPOREAL;
-
-        public static EnergyType getEnergyTypeFromOrdinal(int ordinal)
-        {
-            if (ordinal == CORPOREAL.ordinal())
-            {
-                return CORPOREAL;
-            }
-            else if (ordinal == KINETIC.ordinal())
-            {
-                return KINETIC;
-            }
-            else if (ordinal == TEMPORAL.ordinal())
-            {
-                return TEMPORAL;
-            }
-            else if (ordinal == ESSENTIA.ordinal())
-            {
-                return ESSENTIA;
-            }
-            else if (ordinal == AMORPHOUS.ordinal())
-            {
-                return AMORPHOUS;
-            }
-            else if (ordinal == VOID.ordinal())
-            {
-                return VOID;
-            }
-            else if (ordinal == OMNI.ordinal())
-            {
-                return OMNI;
-            }
-            else
-            {
-                return UNKNOWN;
-            }
-        }
     }
 }

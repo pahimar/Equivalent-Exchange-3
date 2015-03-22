@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.util.LogHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,5 +78,22 @@ public class RecipeRegistry
         }
 
         return immutableRecipeMap;
+    }
+
+    public void dumpRecipeRegistryToLog()
+    {
+        for (WrappedStack wrappedStack : recipeMap.keySet())
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(String.format("Output: %s, Inputs: ", wrappedStack.toString()));
+            for (List<WrappedStack> listStacks : recipeMap.get(wrappedStack))
+            {
+                for (WrappedStack listStack : listStacks)
+                {
+                    stringBuilder.append(listStack.toString() + " ");
+                }
+            }
+            LogHelper.info(stringBuilder.toString());
+        }
     }
 }

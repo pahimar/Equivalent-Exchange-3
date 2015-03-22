@@ -5,7 +5,6 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.FurnaceRecipeHandler;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValue.EnergyType;
 import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
 import com.pahimar.ee3.item.ItemAlchemicalDust;
@@ -45,7 +44,7 @@ public class CalcinationHandler extends TemplateRecipeHandler
             inputs = new ArrayList<PositionedStack>();
 
             minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
+            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE));
 
             for (Object obj : EnergyValueRegistryProxy.getStacksInRange(minEnergyValue, maxEnergyValue))
             {
@@ -64,7 +63,7 @@ public class CalcinationHandler extends TemplateRecipeHandler
             output = new PositionedStack(outputDust, 101, 19);
 
             minEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputDust);
-            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE, EnergyType.CORPOREAL));
+            maxEnergyValue = (outputDust.getItemDamage() < (ItemAlchemicalDust.getAlchemicalDusts().size() - 1) ? EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(outputDust.getItemDamage() + 1)) : new EnergyValue(Float.MAX_VALUE));
         }
 
         @Override
