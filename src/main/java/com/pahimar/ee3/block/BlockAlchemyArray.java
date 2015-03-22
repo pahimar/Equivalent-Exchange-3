@@ -4,6 +4,7 @@ import com.pahimar.ee3.api.AlchemyArray;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
+import com.pahimar.ee3.reference.Sounds;
 import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
@@ -224,7 +225,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
                 ((TileEntityEE) world.getTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setRotation(chalkSettings.getRotation(), facing);
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).setAlchemyArray(alchemyArray, chalkSettings.getSize());
-                CommonSoundHelper.playChalkSoundAt((EntityPlayer) entityLiving);
+                CommonSoundHelper.playSoundAtPlayer((EntityPlayer) entityLiving, Sounds.Chalk.getRandomChalkSound(), 1f, 1f);
 
                 ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
             }

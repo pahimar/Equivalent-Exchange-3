@@ -25,4 +25,10 @@ public class ServerProxy extends CommonProxy
     {
         // NOOP
     }
+
+    @Override
+    public void spawnParticle(String particleName, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity)
+    {
+        // NOOP
+    }
 }

@@ -7,6 +7,7 @@ import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.renderer.item.*;
 import com.pahimar.ee3.client.renderer.tileentity.*;
 import com.pahimar.ee3.client.settings.Keybindings;
+import com.pahimar.ee3.client.util.ClientParticleHelper;
 import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
@@ -46,6 +47,12 @@ public class ClientProxy extends CommonProxy
     public void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch)
     {
         ClientSoundHelper.playSound(soundName, xCoord, yCoord, zCoord, volume, pitch);
+    }
+
+    @Override
+    public void spawnParticle(String particleName, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity)
+    {
+        ClientParticleHelper.spawnParticle(particleName, xCoord, yCoord, zCoord, xVelocity, yVelocity, zVelocity);
     }
 
     @Override

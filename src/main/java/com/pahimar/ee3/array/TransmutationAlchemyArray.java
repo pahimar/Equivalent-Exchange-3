@@ -1,13 +1,17 @@
 package com.pahimar.ee3.array;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.AlchemyArray;
 import com.pahimar.ee3.init.ModBlocks;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageSingleParticleEvent;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Particles;
 import com.pahimar.ee3.reference.Sounds;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
+import com.pahimar.ee3.util.CommonSoundHelper;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -46,7 +50,8 @@ public class TransmutationAlchemyArray extends AlchemyArray
                         ((TileEntityTransmutationTablet) world.getTileEntity(arrayX, arrayY - 1, arrayZ)).setOrientation(tileEntityAlchemyArray.getOrientation());
                     }
 
-                    EquivalentExchange3.proxy.playSound(Sounds.TRANSMUTE, arrayX, arrayY, arrayZ, 1f, 1f);
+                    CommonSoundHelper.playSoundAtLocation(world.provider.dimensionId, arrayX, arrayY, arrayZ, Sounds.TRANSMUTE, 1f, 1f);
+                    PacketHandler.INSTANCE.sendToAllAround(new MessageSingleParticleEvent(Particles.LARGE_EXPLODE, arrayX + 0.5d, arrayY + 0.625d, arrayZ + 0.5d, 0d, 0d, 0d), new NetworkRegistry.TargetPoint(world.provider.dimensionId, (double) arrayX, (double) arrayY, (double) arrayZ, 128d));
                 }
             }
         }
