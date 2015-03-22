@@ -13,7 +13,7 @@ import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -21,9 +21,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityTransmutationTablet extends TileEntityEE implements IInventory
+public class TileEntityTransmutationTablet extends TileEntityEE implements ISidedInventory
 {
-    private static final int INVENTORY_SIZE = 10;
+    public static final int INVENTORY_SIZE = 10;
     public static final int ITEM_INPUT_1 = 0;
     public static final int ITEM_INPUT_2 = 1;
     public static final int ITEM_INPUT_3 = 2;
@@ -274,6 +274,24 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements IInve
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int slotIndex)
+    {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
+    {
         return false;
     }
 }

@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class InventoryTransmutationKnowledge implements IInventory
+public class InventoryAlchemicalTome implements IInventory
 {
     private ItemStack[] inventory;
     private Set<ItemStack> knownTransmutations;
 
-    public InventoryTransmutationKnowledge(Set<ItemStack> knownTransmutations)
+    public InventoryAlchemicalTome(Set<ItemStack> knownTransmutations)
     {
         inventory = new ItemStack[80];
         if (knownTransmutations != null)

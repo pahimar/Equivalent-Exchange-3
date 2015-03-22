@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldElementHandler
 {
-    private final InventoryTransmutationKnowledge inventoryTransmutationKnowledge;
+    private final InventoryAlchemicalTome inventoryAlchemicalTome;
     private int pageOffset, maxPageOffset;
     private String searchTerm;
     private boolean requiresUpdate = false;
@@ -29,7 +29,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
         knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(entityPlayer.getUniqueID()));
 
-        inventoryTransmutationKnowledge = new InventoryTransmutationKnowledge(knownTransmutations);
+        inventoryAlchemicalTome = new InventoryAlchemicalTome(knownTransmutations);
         pageOffset = 0;
         maxPageOffset = knownTransmutations.size() / 80;
 
@@ -38,7 +38,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 18 + columnIndex * 20, 18 + rowIndex * 19)
+                this.addSlotToContainer(new Slot(inventoryAlchemicalTome, i, 18 + columnIndex * 20, 18 + rowIndex * 19)
                 {
                     @Override
                     public boolean canTakeStack(EntityPlayer player)
@@ -62,7 +62,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryTransmutationKnowledge, i, 140 + columnIndex * 20, 18 + rowIndex * 19)
+                this.addSlotToContainer(new Slot(inventoryAlchemicalTome, i, 140 + columnIndex * 20, 18 + rowIndex * 19)
                 {
                     @Override
                     public boolean canTakeStack(EntityPlayer player)
@@ -121,7 +121,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
 
     public int getInventorySize()
     {
-        return inventoryTransmutationKnowledge.getSizeInventory();
+        return inventoryAlchemicalTome.getSizeInventory();
     }
 
     public int getPageOffset()
@@ -165,7 +165,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryTransmutationKnowledge.getKnownTransmutations(), searchTerm, ItemHelper.displayNameComparator));
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchemicalTome.getKnownTransmutations(), searchTerm, ItemHelper.displayNameComparator));
         FilterUtils.filterOutListItemsWithInvalidIcons(filteredList, ItemHelper.displayNameComparator);
 
         maxPageOffset = filteredList.size() / 80;
@@ -202,8 +202,8 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         {
             for (int i = 0; i < 80; i++)
             {
-                inventoryTransmutationKnowledge.setInventorySlotContents(i, newInventory[i]);
-                inventoryTransmutationKnowledge.markDirty();
+                inventoryAlchemicalTome.setInventorySlotContents(i, newInventory[i]);
+                inventoryAlchemicalTome.markDirty();
             }
         }
     }
