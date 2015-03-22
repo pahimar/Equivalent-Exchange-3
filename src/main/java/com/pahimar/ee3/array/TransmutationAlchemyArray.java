@@ -1,8 +1,10 @@
 package com.pahimar.ee3.array;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.AlchemyArray;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Sounds;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
@@ -39,11 +41,12 @@ public class TransmutationAlchemyArray extends AlchemyArray
                     world.setBlock(arrayX, arrayY - 1, arrayZ + 1, ModBlocks.ashInfusedStoneSlab, 7, 3);
                     world.setBlock(arrayX + 1, arrayY - 1, arrayZ + 1, ModBlocks.ashInfusedStoneSlab, 8, 3);
 
-                    // TODO Set orientation on the tablet, make sound effects, and add particles
                     if (world.getTileEntity(arrayX, arrayY - 1, arrayZ) instanceof TileEntityTransmutationTablet)
                     {
                         ((TileEntityTransmutationTablet) world.getTileEntity(arrayX, arrayY - 1, arrayZ)).setOrientation(tileEntityAlchemyArray.getOrientation());
                     }
+
+                    EquivalentExchange3.proxy.playSound(Sounds.TRANSMUTE, arrayX, arrayY, arrayZ, 1f, 1f);
                 }
             }
         }
