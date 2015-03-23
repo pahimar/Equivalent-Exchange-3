@@ -177,7 +177,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
 
     }
 
-    public void onUpdate(World world, int arrayX, int arrayY, int arrayZ)
+    public void onUpdate(World world, int arrayX, int arrayY, int arrayZ, int tickCount)
     {
 
     }

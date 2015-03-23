@@ -205,21 +205,24 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     @Override
     public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
     {
-        inventory[slotIndex] = itemStack;
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
+        if (slotIndex < getSizeInventory())
         {
-            itemStack.stackSize = getInventoryStackLimit();
-        }
-
-        float newEnergyValue = 0f;
-        for (int i = 0; i <= STONE_INDEX; i++)
-        {
-            if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
+            inventory[slotIndex] = itemStack;
+            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit())
             {
-                newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
+                itemStack.stackSize = getInventoryStackLimit();
             }
+
+            float newEnergyValue = 0f;
+            for (int i = 0; i <= STONE_INDEX; i++)
+            {
+                if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
+                {
+                    newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
+                }
+            }
+            this.energyValue = new EnergyValue(newEnergyValue);
         }
-        this.energyValue = new EnergyValue(newEnergyValue);
     }
 
     @Override

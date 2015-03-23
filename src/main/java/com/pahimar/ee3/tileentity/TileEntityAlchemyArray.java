@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
@@ -17,12 +18,12 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
+public class TileEntityAlchemyArray extends TileEntityEE implements ISidedInventory
 {
     private AlchemyArray alchemyArray;
     private ForgeDirection rotation;
     private int size;
-    private int ticksSinceSync;
+    private int tickCount;
 
     public TileEntityAlchemyArray()
     {
@@ -214,8 +215,8 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
 
         if (!worldObj.isRemote)
         {
-            ++ticksSinceSync;
-            if (ticksSinceSync % 100 == 0)
+            ++tickCount;
+            if (tickCount % 100 == 0)
             {
                 if (!areDummyBlocksValid())
                 {
@@ -224,7 +225,7 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
                 }
             }
 
-            onUpdate(worldObj, xCoord, yCoord, zCoord);
+            onUpdate(worldObj, xCoord, yCoord, zCoord, tickCount);
         }
     }
 
@@ -329,11 +330,11 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
         }
     }
 
-    public void onUpdate(World world, int x, int y, int z)
+    public void onUpdate(World world, int x, int y, int z, int tickCount)
     {
         if (alchemyArray != null)
         {
-            alchemyArray.onUpdate(world, x, y, z);
+            alchemyArray.onUpdate(world, x, y, z, tickCount);
         }
     }
 
@@ -358,6 +359,7 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
             {
                 Class clazz = Class.forName(alchemyArray.getClassName());
                 alchemyArray = (AlchemyArray) clazz.getConstructor().newInstance();
+                alchemyArray.readFromNBT(alchemyArrayTagCompound);
             }
             catch (Exception e)
             {
@@ -577,6 +579,24 @@ public class TileEntityAlchemyArray extends TileEntityEE implements IInventory
             return ((IInventory) alchemyArray).isItemValidForSlot(slotIndex, itemStack);
         }
 
+        return false;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int slotIndex)
+    {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int slotIndex, ItemStack itemStack, int side)
+    {
         return false;
     }
 }

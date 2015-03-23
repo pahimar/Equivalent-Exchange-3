@@ -235,7 +235,7 @@ public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && !entityPlayer.isSneaking())
+        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
             ((TileEntityAlchemyArray) world.getTileEntity(x, y, z)).onBlockActivated(world, x, y, z, entityPlayer, sideHit, hitX, hitY, hitZ);
         }

@@ -52,7 +52,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void spawnParticle(String particleName, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity)
     {
-        ClientParticleHelper.spawnParticle(particleName, xCoord, yCoord, zCoord, xVelocity, yVelocity, zVelocity);
+        ClientParticleHelper.spawnParticleAtLocation(particleName, xCoord, yCoord, zCoord, xVelocity, yVelocity, zVelocity);
     }
 
     @Override
