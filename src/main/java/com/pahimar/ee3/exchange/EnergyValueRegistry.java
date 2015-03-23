@@ -530,41 +530,44 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         List stacksInRange = new ArrayList<WrappedStack>();
 
-        SortedMap<EnergyValue, List<WrappedStack>> tailMap = energyValueRegistry.valueMappings.tailMap(start);
-        SortedMap<EnergyValue, List<WrappedStack>> headMap = energyValueRegistry.valueMappings.headMap(finish);
-
-        SortedMap<EnergyValue, List<WrappedStack>> smallerMap;
-        SortedMap<EnergyValue, List<WrappedStack>> biggerMap;
-
-        if (!tailMap.isEmpty() && !headMap.isEmpty())
+        if (valueMappings != null)
         {
+            SortedMap<EnergyValue, List<WrappedStack>> tailMap = energyValueRegistry.valueMappings.tailMap(start);
+            SortedMap<EnergyValue, List<WrappedStack>> headMap = energyValueRegistry.valueMappings.headMap(finish);
 
-            if (tailMap.size() <= headMap.size())
-            {
-                smallerMap = tailMap;
-                biggerMap = headMap;
-            }
-            else
-            {
-                smallerMap = headMap;
-                biggerMap = tailMap;
-            }
+            SortedMap<EnergyValue, List<WrappedStack>> smallerMap;
+            SortedMap<EnergyValue, List<WrappedStack>> biggerMap;
 
-            for (EnergyValue value : smallerMap.keySet())
+            if (!tailMap.isEmpty() && !headMap.isEmpty())
             {
-                if (biggerMap.containsKey(value))
+
+                if (tailMap.size() <= headMap.size())
                 {
-                    for (WrappedStack wrappedStack : energyValueRegistry.valueMappings.get(value))
+                    smallerMap = tailMap;
+                    biggerMap = headMap;
+                }
+                else
+                {
+                    smallerMap = headMap;
+                    biggerMap = tailMap;
+                }
+
+                for (EnergyValue value : smallerMap.keySet())
+                {
+                    if (biggerMap.containsKey(value))
                     {
-                        if (wrappedStack.getWrappedStack() instanceof ItemStack || wrappedStack.getWrappedStack() instanceof FluidStack)
+                        for (WrappedStack wrappedStack : energyValueRegistry.valueMappings.get(value))
                         {
-                            stacksInRange.add(wrappedStack.getWrappedStack());
-                        }
-                        else if (wrappedStack.getWrappedStack() instanceof OreStack)
-                        {
-                            for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                            if (wrappedStack.getWrappedStack() instanceof ItemStack || wrappedStack.getWrappedStack() instanceof FluidStack)
                             {
-                                stacksInRange.add(itemStack);
+                                stacksInRange.add(wrappedStack.getWrappedStack());
+                            }
+                            else if (wrappedStack.getWrappedStack() instanceof OreStack)
+                            {
+                                for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                                {
+                                    stacksInRange.add(itemStack);
+                                }
                             }
                         }
                     }
