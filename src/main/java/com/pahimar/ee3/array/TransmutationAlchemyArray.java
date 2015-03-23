@@ -1,9 +1,11 @@
 package com.pahimar.ee3.array;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.AlchemyArray;
 import com.pahimar.ee3.init.ModBlocks;
-import com.pahimar.ee3.reference.*;
+import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.reference.Particles;
+import com.pahimar.ee3.reference.Sounds;
+import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.CommonParticleHelper;
@@ -32,11 +34,12 @@ public class TransmutationAlchemyArray extends AlchemyArray implements IInventor
     @Override
     public void onArrayActivated(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, EntityPlayer entityPlayer, int sideHit, float hitX, float hitY, float hitZ)
     {
-        if (!entityPlayer.isSneaking())
-        {
-            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.TRANSMUTATION_ARRAY.ordinal(), world, arrayX, arrayY, arrayZ);
-            return;
-        }
+        // TODO Come back to this later to resolve inventory issues
+        //        if (!entityPlayer.isSneaking())
+        //        {
+        //            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.TRANSMUTATION_ARRAY.ordinal(), world, arrayX, arrayY, arrayZ);
+        //            return;
+        //        }
 
         if (!world.isRemote && entityPlayer.isSneaking())
         {

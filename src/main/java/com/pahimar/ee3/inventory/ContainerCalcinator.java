@@ -1,11 +1,13 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.tileentity.TileEntityCalcinator;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -164,6 +166,27 @@ public class ContainerCalcinator extends ContainerEE
         if (valueType == 2)
         {
             this.tileEntityCalcinator.itemCookTime = updatedValue;
+        }
+    }
+
+    private class SlotCalcinator extends Slot
+    {
+        public SlotCalcinator(IInventory inventory, int slotIndex, int x, int y)
+        {
+            super(inventory, slotIndex, x, y);
+        }
+
+        @Override
+        public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+        {
+            super.onPickupFromSlot(entityPlayer, itemStack);
+            FMLCommonHandler.instance().firePlayerCraftingEvent(entityPlayer, itemStack, inventory);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack itemStack)
+        {
+            return false;
         }
     }
 }

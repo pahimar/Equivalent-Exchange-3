@@ -5,6 +5,7 @@ import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -187,5 +188,34 @@ public class ContainerAlchemicalBag extends ContainerEE
     public void saveInventory(EntityPlayer entityPlayer)
     {
         inventoryAlchemicalBag.onGuiSaved(entityPlayer);
+    }
+
+    private class SlotAlchemicalBag extends Slot
+    {
+        private final EntityPlayer entityPlayer;
+        private ContainerAlchemicalBag containerAlchemicalBag;
+
+        public SlotAlchemicalBag(ContainerAlchemicalBag containerAlchemicalBag, IInventory inventory, EntityPlayer entityPlayer, int slotIndex, int x, int y)
+        {
+            super(inventory, slotIndex, x, y);
+            this.entityPlayer = entityPlayer;
+            this.containerAlchemicalBag = containerAlchemicalBag;
+        }
+
+        @Override
+        public void onSlotChange(ItemStack itemStack1, ItemStack itemStack2)
+        {
+            super.onSlotChange(itemStack1, itemStack2);
+            containerAlchemicalBag.saveInventory(entityPlayer);
+        }
+
+        /**
+         * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
+         */
+        @Override
+        public boolean isItemValid(ItemStack itemStack)
+        {
+            return !(itemStack.getItem() instanceof ItemAlchemicalBag);
+        }
     }
 }

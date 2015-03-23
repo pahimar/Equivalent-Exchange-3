@@ -121,7 +121,7 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
             }
             else if (metaData == 5)
             {
-                shiftedZ--;
+                shiftedX--;
             }
             else if (metaData == 6)
             {

@@ -1,8 +1,7 @@
 package com.pahimar.ee3.client.gui.inventory;
 
+import com.pahimar.ee3.client.gui.element.ElementSearchField;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
-import com.pahimar.ee3.network.PacketHandler;
-import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
@@ -38,22 +37,12 @@ public class GuiTransmutationTablet extends GuiBase
         this.drawTitle = false;
         this.drawInventory = false;
 
-        searchTextField = new ElementTextField(this, 173, 145, "searchField", 78, 10)
-        {
-            @Override
-            protected void onCharacterEntered(boolean success)
-            {
-                if (success)
-                {
-                    PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
-                }
-            }
-        };
+        searchTextField = new ElementSearchField(this, 173, 145, "searchField", 78, 10);
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.setFocused(true);
 
-        slider = new ElementSlider(this, 239, 163, 12, 74, 50, 0)
+        slider = new ElementSlider(this, 239, 163, 12, 74, 59, 0)
         {
             @Override
             protected void dragSlider(int x, int y)

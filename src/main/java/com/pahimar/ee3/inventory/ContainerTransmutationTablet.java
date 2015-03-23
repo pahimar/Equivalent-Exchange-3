@@ -1,14 +1,17 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -162,5 +165,33 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
         }
 
         return itemStack;
+    }
+
+    private class SlotTabletOutput extends Slot
+    {
+        public SlotTabletOutput(IInventory iInventory, int slotIndex, int x, int y)
+        {
+            super(iInventory, slotIndex, x, y);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack itemStack)
+        {
+            return false;
+        }
+    }
+
+    private class SlotTabletInput extends Slot
+    {
+        public SlotTabletInput(IInventory iInventory, int slotIndex, int x, int y)
+        {
+            super(iInventory, slotIndex, x, y);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack itemStack)
+        {
+            return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && AbilityRegistry.getInstance().isRecoverable(itemStack);
+        }
     }
 }

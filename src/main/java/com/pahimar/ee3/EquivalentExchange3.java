@@ -3,7 +3,6 @@ package com.pahimar.ee3;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -125,11 +124,6 @@ public class EquivalentExchange3
         TransmutationKnowledgeRegistry.getInstance().saveAll();
 
         AbilityRegistry.getInstance().saveAbilityRegistryToFile();
-
-        for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
-        {
-            LogHelper.info(String.format("Stack %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
-        }
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

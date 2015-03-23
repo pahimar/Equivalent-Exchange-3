@@ -1,9 +1,9 @@
 package com.pahimar.ee3.client.gui.inventory;
 
+import com.pahimar.ee3.client.gui.element.ElementSearchField;
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageGuiElementClicked;
-import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
@@ -41,21 +41,10 @@ public class GuiAlchemicalTome extends GuiBase
 
         prevPageButton = new ElementButton(this, 15, 177, "prev", 0, 0, 20, 0, 40, 0, 20, 10, 60, 10, Textures.Gui.Elements.ARROW_LEFT);
         nextPageButton = new ElementButton(this, 223, 177, "next", 0, 0, 22, 0, 44, 0, 22, 10, 66, 10, Textures.Gui.Elements.ARROW_RIGHT);
-        searchTextField = new ElementTextField(this, 64, 205, "searchField", 128, 20)
-        {
-            @Override
-            protected void onCharacterEntered(boolean success)
-            {
-                if (success)
-                {
-                    PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
-                }
-            }
-        };
+        searchTextField = new ElementSearchField(this, 64, 205, "searchField", 128, 20);
         searchTextField.setPadding(6, 3, 0, 3);
         searchTextField.borderColor = new GuiColor(160, 160, 160).getColor();
         searchTextField.backgroundColor = new GuiColor(0, 0, 0).getColor();
-        searchTextField.setFocused(true);
 
         addElement(prevPageButton);
         addElement(nextPageButton);
@@ -74,7 +63,7 @@ public class GuiAlchemicalTome extends GuiBase
         }
         else
         {
-            if (((ContainerAlchemicalTome) this.inventorySlots).getInventorySize() == 0)
+            if (((ContainerAlchemicalTome) this.inventorySlots).getKnownTransmutationsCount() == 0)
             {
                 fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.NO_KNOWN_TRANSMUTATIONS), 142, 20, 100, new GuiColor(50, 50, 50).getColor());
                 fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.HOW_TO_LEARN_TRANSMUTATIONS), 142, 60, 100, new GuiColor(50, 50, 50).getColor());

@@ -124,6 +124,11 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         return inventoryAlchemicalTome.getSizeInventory();
     }
 
+    public int getKnownTransmutationsCount()
+    {
+        return inventoryAlchemicalTome.getKnownTransmutations().size();
+    }
+
     public int getPageOffset()
     {
         return this.pageOffset;
