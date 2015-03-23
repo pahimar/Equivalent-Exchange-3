@@ -8,6 +8,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import java.util.UUID;
+
 public class ContainerAlchemicalBag extends ContainerEE
 {
     // Small Bag
@@ -187,5 +189,15 @@ public class ContainerAlchemicalBag extends ContainerEE
     public void saveInventory(EntityPlayer entityPlayer)
     {
         inventoryAlchemicalBag.onGuiSaved(entityPlayer);
+    }
+
+    public boolean isStackParent(ItemStack stack)
+    {
+        if (NBTHelper.hasUUID(stack))
+        {
+            UUID stackUUID = new UUID(stack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG), stack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
+            return inventoryAlchemicalBag.matchesUUID(stackUUID);
+        }
+        return false;
     }
 }
