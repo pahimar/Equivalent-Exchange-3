@@ -8,6 +8,7 @@ import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
@@ -755,21 +756,28 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         //
         //        }
         //        else if (md5EnergyValuesFile.exists())
-        if (md5EnergyValuesFile.exists())
+        if (!Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Always"))
         {
-            LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
-            nbtTagCompound = SerializationHelper.readNBTFromFile(md5EnergyValuesFile);
-        }
+            if (md5EnergyValuesFile.exists())
+            {
+                LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
+                nbtTagCompound = SerializationHelper.readNBTFromFile(md5EnergyValuesFile);
+            }
 
-        if (nbtTagCompound != null)
-        {
-            energyValueRegistry.readFromNBT(nbtTagCompound);
-            LogHelper.info("Successfully loaded energy values from file");
-            return true;
+            if (nbtTagCompound != null)
+            {
+                energyValueRegistry.readFromNBT(nbtTagCompound);
+                LogHelper.info("Successfully loaded energy values from file");
+                return true;
+            }
+            else
+            {
+                LogHelper.info("No energy value file to load values from, generating new values");
+                return false;
+            }
         }
         else
         {
-            LogHelper.info("No energy value file to load values from, generating new values");
             return false;
         }
     }
