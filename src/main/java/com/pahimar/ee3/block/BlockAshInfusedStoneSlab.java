@@ -1,5 +1,7 @@
 package com.pahimar.ee3.block;
 
+import com.pahimar.ee3.creativetab.CreativeTab;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
@@ -10,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -26,6 +29,7 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
     public BlockAshInfusedStoneSlab()
     {
         super(false, Material.rock);
+        this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setHardness(2.0f);
         this.setBlockName(Names.Blocks.ASH_INFUSED_STONE_SLAB);
     }
@@ -269,5 +273,18 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
         }
 
         return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z)
+    {
+        return Item.getItemFromBlock(ModBlocks.ashInfusedStoneSlab);
+    }
+
+    @Override
+    public int getDamageValue(World world, int x, int y, int z)
+    {
+        return 0;
     }
 }

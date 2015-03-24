@@ -1,5 +1,6 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
@@ -13,10 +14,12 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.UUID;
 
 public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldElementHandler
 {
     private final InventoryAlchemicalTome inventoryAlchemicalTome;
+    private final ItemStack alchemicalTomeItemStack;
     private int pageOffset, maxPageOffset;
     private String searchTerm;
     private boolean requiresUpdate = false;
@@ -24,10 +27,16 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
     private final static int MAX_ROW_INDEX = 8;
     private final static int MAX_COLUMN_INDEX = 5;
 
-    public ContainerAlchemicalTome(EntityPlayer entityPlayer)
+    public ContainerAlchemicalTome(EntityPlayer entityPlayer, ItemStack itemStack)
     {
+        this.alchemicalTomeItemStack = itemStack;
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-        knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(entityPlayer.getUniqueID()));
+
+        if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+        {
+            UUID ownerUUID = ItemHelper.getOwnerUUID(itemStack);
+            knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ownerUUID));
+        }
 
         inventoryAlchemicalTome = new InventoryAlchemicalTome(knownTransmutations);
         pageOffset = 0;

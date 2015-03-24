@@ -20,7 +20,6 @@ public final class Messages
         private static final String GUI_PREFIX = "container.ee3:";
 
         public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.noTransmutationsKnown";
-        public static final String HOW_TO_LEARN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.howToLearnTransmutations";
     }
 
     public static final class Commands

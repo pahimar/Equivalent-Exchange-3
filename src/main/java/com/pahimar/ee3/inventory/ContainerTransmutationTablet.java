@@ -68,6 +68,14 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
             }
         });
 
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                this.addSlotToContainer(new SlotTabletOutput(inventoryTransmutationTablet, i * 4 + j + 10, 175 + j * 20, 163 + i * 19));
+            }
+        }
+
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex)
         {

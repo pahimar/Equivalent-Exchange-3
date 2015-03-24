@@ -26,6 +26,9 @@ public class Recipes
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.alchemicalFuel, 9, 1), new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 1));
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.alchemicalFuel, 9, 2), new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 2));
 
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.ashInfusedStoneSlab, 6), "sss", 's', new ItemStack(ModBlocks.ashInfusedStone));
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.ashInfusedStone, 1), "s", "s", 's', new ItemStack(ModBlocks.ashInfusedStoneSlab));
+
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chalkBlock), "bcb", "cbc", "bcb", 'b', new ItemStack(Items.dye, 1, 15), 'c', new ItemStack(Items.clay_ball));
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chalkBlock), "cc", "cc", 'c', new ItemStack(ModItems.chalk));
 

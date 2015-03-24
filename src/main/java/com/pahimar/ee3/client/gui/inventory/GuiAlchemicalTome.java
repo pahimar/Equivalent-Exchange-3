@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
@@ -24,9 +25,9 @@ public class GuiAlchemicalTome extends GuiBase
     private ElementButton nextPageButton;
     private ElementTextField searchTextField;
 
-    public GuiAlchemicalTome(InventoryPlayer inventoryPlayer)
+    public GuiAlchemicalTome(InventoryPlayer inventoryPlayer, ItemStack itemStack)
     {
-        super(new ContainerAlchemicalTome(inventoryPlayer.player), Textures.Gui.ALCHEMICAL_TOME);
+        super(new ContainerAlchemicalTome(inventoryPlayer.player, itemStack), Textures.Gui.ALCHEMICAL_TOME);
         xSize = 256;
         ySize = 226;
     }
@@ -66,7 +67,6 @@ public class GuiAlchemicalTome extends GuiBase
             if (((ContainerAlchemicalTome) this.inventorySlots).getKnownTransmutationsCount() == 0)
             {
                 fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.NO_KNOWN_TRANSMUTATIONS), 142, 20, 100, new GuiColor(50, 50, 50).getColor());
-                fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.HOW_TO_LEARN_TRANSMUTATIONS), 142, 60, 100, new GuiColor(50, 50, 50).getColor());
             }
         }
 
