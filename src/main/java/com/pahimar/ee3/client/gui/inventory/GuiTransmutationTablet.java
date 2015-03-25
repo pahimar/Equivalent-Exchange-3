@@ -13,6 +13,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 
+import java.text.DecimalFormat;
+
 @SideOnly(Side.CLIENT)
 public class GuiTransmutationTablet extends GuiBase
 {
@@ -20,6 +22,8 @@ public class GuiTransmutationTablet extends GuiBase
 
     private ElementTextField searchTextField;
     private ElementSlider slider;
+
+    private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     public GuiTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
     {
@@ -37,12 +41,12 @@ public class GuiTransmutationTablet extends GuiBase
         this.drawTitle = false;
         this.drawInventory = false;
 
-        searchTextField = new ElementSearchField(this, 173, 145, "searchField", 78, 10);
+        searchTextField = new ElementSearchField(this, 173, 18, "searchField", 78, 10);
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.setFocused(true);
 
-        slider = new ElementSlider(this, 239, 163, 12, 74, 59, 0)
+        slider = new ElementSlider(this, 239, 36, 12, 74, 187, 0)
         {
             @Override
             protected void dragSlider(int x, int y)
@@ -75,9 +79,7 @@ public class GuiTransmutationTablet extends GuiBase
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         super.drawGuiContainerForegroundLayer(x, y);
-        fontRendererObj.drawString("Energy Value:", 8, 140, Integer.parseInt(Colors.PURE_WHITE, 16));
-
-        // TODO Nicer text formatting of the value
-        fontRendererObj.drawString(String.format("%s", tileEntityTransmutationTablet.getEnergyValue().getEnergyValue()), 8, 150, Integer.parseInt(Colors.PURE_WHITE, 16));
+        fontRendererObj.drawString("Energy Value:", 8, 140, Integer.parseInt(Colors.PURE_WHITE, 16)); // TODO Localize
+        fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue())), 8, 150, Integer.parseInt(Colors.PURE_WHITE, 16));
     }
 }

@@ -35,7 +35,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public static final int STONE_INDEX = 8;
     public static final int ALCHEMICAL_TOME_INDEX = 9;
 
-    private EnergyValue energyValue;
+    private EnergyValue storedEnergyValue;
     private ForgeDirection rotation;
     private ItemStack[] inventory;
 
@@ -43,18 +43,18 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     {
         super();
         rotation = ForgeDirection.UNKNOWN;
-        energyValue = new EnergyValue(0);
+        storedEnergyValue = new EnergyValue(0);
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
-    public EnergyValue getEnergyValue()
+    public EnergyValue getStoredEnergyValue()
     {
-        return energyValue;
+        return storedEnergyValue;
     }
 
-    public void setEnergyValue(EnergyValue energyValue)
+    public void setStoredEnergyValue(EnergyValue storedEnergyValue)
     {
-        this.energyValue = energyValue;
+        this.storedEnergyValue = storedEnergyValue;
     }
 
     public ForgeDirection getRotation()
@@ -117,14 +117,14 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
             }
         }
 
-        NBTTagCompound energyValueTagCompound = nbtTagCompound.getCompoundTag("energyValue");
+        NBTTagCompound energyValueTagCompound = nbtTagCompound.getCompoundTag("storedEnergyValue");
         if (!energyValueTagCompound.hasNoTags())
         {
-            energyValue = EnergyValue.loadEnergyValueFromNBT(energyValueTagCompound);
+            storedEnergyValue = EnergyValue.loadEnergyValueFromNBT(energyValueTagCompound);
         }
         else
         {
-            energyValue = new EnergyValue(0);
+            storedEnergyValue = new EnergyValue(0);
         }
     }
 
@@ -149,11 +149,11 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         nbtTagCompound.setTag(Names.NBT.ITEMS, tagList);
 
         NBTTagCompound energyValueTagCompound = new NBTTagCompound();
-        if (energyValue != null)
+        if (storedEnergyValue != null)
         {
-            energyValue.writeToNBT(energyValueTagCompound);
+            storedEnergyValue.writeToNBT(energyValueTagCompound);
         }
-        nbtTagCompound.setTag("energyValue", energyValueTagCompound);
+        nbtTagCompound.setTag("storedEnergyValue", energyValueTagCompound);
     }
 
     @Override
@@ -221,7 +221,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
                     newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
                 }
             }
-            this.energyValue = new EnergyValue(newEnergyValue);
+            this.storedEnergyValue = new EnergyValue(newEnergyValue);
         }
     }
 

@@ -8,6 +8,7 @@ import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
+import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,11 +16,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class ContainerTransmutationTablet extends ContainerEE implements ITextFieldElementHandler
 {
-    private final InventoryTransmutationTablet inventoryTransmutationTablet;
+    private InventoryTransmutationTablet inventoryTransmutationTablet;
     private TileEntityTransmutationTablet tileEntityTransmutationTablet;
     private EnergyValue energyValue;
     private String searchTerm;
@@ -28,18 +32,26 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
     {
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-        knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(inventoryPlayer.player.getUniqueID()));
+
+        if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX) != null)
+        {
+            ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX);
+            if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+            {
+                knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ItemHelper.getOwnerUUID(itemStack)));
+            }
+        }
         inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
 
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_1, 120, 27));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_2, 93, 38));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_3, 84, 64));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_4, 93, 90));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_5, 120, 102));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_6, 147, 90));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_7, 156, 64));
-        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_8, 147, 38));
-        this.addSlotToContainer(new Slot(tileEntityTransmutationTablet, TileEntityTransmutationTablet.STONE_INDEX, 120, 64)
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_1, 62, 24));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_2, 35, 35));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_3, 26, 61));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_4, 35, 87));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_5, 62, 99));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_6, 89, 87));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_7, 98, 61));
+        this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_8, 89, 35));
+        this.addSlotToContainer(new Slot(tileEntityTransmutationTablet, TileEntityTransmutationTablet.STONE_INDEX, 62, 61)
         {
             @Override
             public int getSlotStackLimit()
@@ -53,7 +65,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
                 return itemStack.getItem() instanceof ItemMiniumStone || itemStack.getItem() instanceof ItemPhilosophersStone;
             }
         });
-        this.addSlotToContainer(new Slot(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX, 152, 142)
+        this.addSlotToContainer(new Slot(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX, 152, 15)
         {
             @Override
             public int getSlotStackLimit()
@@ -68,11 +80,11 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
             }
         });
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                this.addSlotToContainer(new SlotTabletOutput(inventoryTransmutationTablet, i * 4 + j + 10, 175 + j * 20, 163 + i * 19));
+                this.addSlotToContainer(new SlotTabletOutput(inventoryTransmutationTablet, i * 4 + j + 10, 175 + j * 20, 38 + i * 20));
             }
         }
 
@@ -81,14 +93,14 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
         {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 163 + inventoryRowIndex * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 8 + inventoryColumnIndex * 18, 164 + inventoryRowIndex * 18));
             }
         }
 
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex)
         {
-            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 221));
+            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 222));
         }
     }
 
@@ -96,7 +108,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
-        this.energyValue = this.tileEntityTransmutationTablet.getEnergyValue();
+        this.energyValue = this.tileEntityTransmutationTablet.getStoredEnergyValue();
     }
 
     @Override
@@ -111,7 +123,31 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
 
     private void updateInventory()
     {
+        boolean shouldUpdateInventory = false;
+        ItemStack[] newInventory = new ItemStack[inventoryTransmutationTablet.getSizeInventory()];
+        Set<ItemStack> sets = inventoryTransmutationTablet.getKnownTransmutations();
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(sets, searchTerm, ItemHelper.displayNameComparator));
+        FilterUtils.filterOutListItemsWithInvalidIcons(filteredList, ItemHelper.displayNameComparator);
 
+        if (filteredList.size() <= inventoryTransmutationTablet.getSizeInventory())
+        {
+            newInventory = filteredList.toArray(newInventory);
+            shouldUpdateInventory = true;
+        }
+        else
+        {
+            newInventory = filteredList.subList(0, inventoryTransmutationTablet.getSizeInventory()).toArray(newInventory);
+            shouldUpdateInventory = true;
+        }
+
+        if (shouldUpdateInventory)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                inventoryTransmutationTablet.setInventorySlotContents(i, newInventory[i]);
+                inventoryTransmutationTablet.markDirty();
+            }
+        }
     }
 
     @Override

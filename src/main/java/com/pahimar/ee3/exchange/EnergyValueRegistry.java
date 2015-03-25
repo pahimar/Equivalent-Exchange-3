@@ -343,7 +343,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
             // Increment the pass counter
             passNumber++;
 
-            // Set the values for getEnergyValue calls in the auto-assignment computation
+            // Set the values for getStoredEnergyValue calls in the auto-assignment computation
             stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(stackValueMap);
             stackMappings = stackMappingsBuilder.build();
@@ -401,9 +401,9 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         //               float computedValue = 0f;
         //               for (WrappedStack stack : postAssignedDependentMappings.get(wrappedStack))
         //               {
-        //                   if (getEnergyValue(stack) != null)
+        //                   if (getStoredEnergyValue(stack) != null)
         //                   {
-        //                       computedValue += getEnergyValue(stack).getEnergyValue() * stack.getStackSize();
+        //                       computedValue += getStoredEnergyValue(stack).getStoredEnergyValue() * stack.getStackSize();
         //                   }
         //                   else
         //                   {

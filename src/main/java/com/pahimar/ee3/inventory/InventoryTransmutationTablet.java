@@ -16,7 +16,7 @@ public class InventoryTransmutationTablet implements IInventory
 
     public InventoryTransmutationTablet(Set<ItemStack> knownTransmutations)
     {
-        inventory = new ItemStack[12];
+        inventory = new ItemStack[30];
         if (knownTransmutations != null)
         {
             this.knownTransmutations = knownTransmutations;
