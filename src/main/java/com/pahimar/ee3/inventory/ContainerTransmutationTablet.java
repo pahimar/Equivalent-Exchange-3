@@ -6,24 +6,19 @@ import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
-import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.LogHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 public class ContainerTransmutationTablet extends ContainerEE implements ITextFieldElementHandler
 {
-    private InventoryTransmutationTablet inventoryTransmutationTablet;
     private TileEntityTransmutationTablet tileEntityTransmutationTablet;
     private EnergyValue energyValue;
     private String searchTerm;
@@ -31,17 +26,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
     public ContainerTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
     {
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
-
-        if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX) != null)
-        {
-            ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX);
-            if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
-            {
-                knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ItemHelper.getOwnerUUID(itemStack)));
-            }
-        }
-        inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
 
         this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_1, 62, 24));
         this.addSlotToContainer(new SlotTabletInput(tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_2, 35, 35));
@@ -78,13 +62,57 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
             {
                 return itemStack.getItem() instanceof ItemAlchemicalTome;
             }
+
+            @Override
+            public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+            {
+                super.onPickupFromSlot(entityPlayer, itemStack);
+
+                if (!((TileEntityTransmutationTablet) this.inventory).getWorldObj().isRemote)
+                {
+                    LogHelper.info("onPickup: " + ItemHelper.toString(itemStack));
+                    this.inventory.setInventorySlotContents(15, null);
+                }
+            }
+
+            @Override
+            public void putStack(ItemStack itemStack)
+            {
+                super.putStack(itemStack);
+
+                if (!((TileEntityTransmutationTablet) this.inventory).getWorldObj().isRemote)
+                {
+                    LogHelper.info("putStack: " + ItemHelper.toString(itemStack));
+                    this.inventory.setInventorySlotContents(15, itemStack);
+                }
+            }
         });
 
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                this.addSlotToContainer(new SlotTabletOutput(inventoryTransmutationTablet, i * 4 + j + 10, 175 + j * 20, 38 + i * 20));
+                this.addSlotToContainer(new Slot(tileEntityTransmutationTablet, 10 + (j + i * 3), 175 + j * 20, 39 + i * 20)
+                {
+                    @Override
+                    public boolean canTakeStack(EntityPlayer entityPlayer)
+                    {
+                        return super.canTakeStack(entityPlayer);
+                    }
+
+                    @Override
+                    public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+                    {
+                        super.onPickupFromSlot(entityPlayer, itemStack);
+                    }
+
+                    @Override
+                    @SideOnly(Side.CLIENT)
+                    public boolean func_111238_b()
+                    {
+                        return this.getHasStack();
+                    }
+                });
             }
         }
 
@@ -123,31 +151,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements ITextFi
 
     private void updateInventory()
     {
-        boolean shouldUpdateInventory = false;
-        ItemStack[] newInventory = new ItemStack[inventoryTransmutationTablet.getSizeInventory()];
-        Set<ItemStack> sets = inventoryTransmutationTablet.getKnownTransmutations();
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(sets, searchTerm, ItemHelper.displayNameComparator));
-        FilterUtils.filterOutListItemsWithInvalidIcons(filteredList, ItemHelper.displayNameComparator);
 
-        if (filteredList.size() <= inventoryTransmutationTablet.getSizeInventory())
-        {
-            newInventory = filteredList.toArray(newInventory);
-            shouldUpdateInventory = true;
-        }
-        else
-        {
-            newInventory = filteredList.subList(0, inventoryTransmutationTablet.getSizeInventory()).toArray(newInventory);
-            shouldUpdateInventory = true;
-        }
-
-        if (shouldUpdateInventory)
-        {
-            for (int i = 0; i < 30; i++)
-            {
-                inventoryTransmutationTablet.setInventorySlotContents(i, newInventory[i]);
-                inventoryTransmutationTablet.markDirty();
-            }
-        }
     }
 
     @Override

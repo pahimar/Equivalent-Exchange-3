@@ -23,7 +23,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityTransmutationTablet extends TileEntityEE implements ISidedInventory
 {
-    public static final int INVENTORY_SIZE = 10;
+    public static final int INVENTORY_SIZE = 40;
     public static final int ITEM_INPUT_1 = 0;
     public static final int ITEM_INPUT_2 = 1;
     public static final int ITEM_INPUT_3 = 2;
