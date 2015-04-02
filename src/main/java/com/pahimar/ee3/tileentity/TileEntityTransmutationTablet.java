@@ -23,7 +23,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityTransmutationTablet extends TileEntityEE implements ISidedInventory
 {
-    public static final int INVENTORY_SIZE = 40;
+    public static final int INVENTORY_SIZE = 10;
     public static final int ITEM_INPUT_1 = 0;
     public static final int ITEM_INPUT_2 = 1;
     public static final int ITEM_INPUT_3 = 2;
@@ -36,6 +36,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public static final int ALCHEMICAL_TOME_INDEX = 9;
 
     private EnergyValue storedEnergyValue;
+    private EnergyValue availableEnergyValue;
     private ForgeDirection rotation;
     private ItemStack[] inventory;
 
@@ -55,6 +56,19 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public void setStoredEnergyValue(EnergyValue storedEnergyValue)
     {
         this.storedEnergyValue = storedEnergyValue;
+    }
+
+    public void updateEnergyValueFromInventory()
+    {
+        float newEnergyValue = 0f;
+        for (int i = 0; i <= STONE_INDEX; i++)
+        {
+            if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
+            {
+                newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
+            }
+        }
+        this.storedEnergyValue = new EnergyValue(newEnergyValue);
     }
 
     public ForgeDirection getRotation()
@@ -90,6 +104,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public void updateEntity()
     {
         super.updateEntity();
+        updateEnergyValueFromInventory();
     }
 
     @Override
@@ -213,15 +228,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
                 itemStack.stackSize = getInventoryStackLimit();
             }
 
-            float newEnergyValue = 0f;
-            for (int i = 0; i <= STONE_INDEX; i++)
-            {
-                if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
-                {
-                    newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
-                }
-            }
-            this.storedEnergyValue = new EnergyValue(newEnergyValue);
+            updateEnergyValueFromInventory();
         }
     }
 

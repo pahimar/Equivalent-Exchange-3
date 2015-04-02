@@ -1,6 +1,6 @@
 package com.pahimar.ee3.network.message;
 
-import com.pahimar.ee3.inventory.ContainerEE;
+import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -46,9 +46,9 @@ public class MessageGuiElementClicked implements IMessage, IMessageHandler<Messa
 
         if (entityPlayer != null)
         {
-            if (entityPlayer.openContainer instanceof ContainerEE)
+            if (entityPlayer.openContainer instanceof IElementButtonHandler)
             {
-                ((ContainerEE) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
+                ((IElementButtonHandler) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
             }
         }
 

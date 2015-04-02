@@ -64,6 +64,14 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
     }
 
     @Override
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
+    {
+        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
+    }
+
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
         if (player.isSneaking())
@@ -82,14 +90,6 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
 
             return true;
         }
-    }
-
-    @Override
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
     }
 
     @Override

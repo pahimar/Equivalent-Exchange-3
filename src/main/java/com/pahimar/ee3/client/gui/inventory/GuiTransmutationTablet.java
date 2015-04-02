@@ -2,11 +2,14 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.client.gui.element.ElementSearchField;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageSliderElementUpdated;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
+import com.pahimar.repackage.cofh.lib.gui.element.ElementButton;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementSlider;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
 import cpw.mods.fml.relauncher.Side;
@@ -21,6 +24,7 @@ public class GuiTransmutationTablet extends GuiBase
     private TileEntityTransmutationTablet tileEntityTransmutationTablet;
 
     private ElementTextField searchTextField;
+    private ElementButton sortOrderButton;
     private ElementSlider slider;
 
     private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
@@ -44,9 +48,10 @@ public class GuiTransmutationTablet extends GuiBase
         searchTextField = new ElementSearchField(this, 173, 18, "searchField", 78, 10);
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
-        searchTextField.setFocused(true);
 
-        slider = new ElementSlider(this, 239, 36, 12, 74, 187, 0)
+        sortOrderButton = new ElementButton(this, 151, 36, "sortOrder", 0, 0, 18, 0, 36, 0, 18, 18, 54, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER);
+
+        slider = new ElementSlider(this, 239, 36, 12, 201, 187, 0)
         {
             @Override
             protected void dragSlider(int x, int y)
@@ -62,6 +67,12 @@ public class GuiTransmutationTablet extends GuiBase
             }
 
             @Override
+            public void onStopDragging()
+            {
+                PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
+            }
+
+            @Override
             public int getSliderY()
             {
                 return _value;
@@ -71,6 +82,7 @@ public class GuiTransmutationTablet extends GuiBase
         slider.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.setSliderSize(12, 15);
 
+        addElement(sortOrderButton);
         addElement(searchTextField);
         addElement(slider);
     }

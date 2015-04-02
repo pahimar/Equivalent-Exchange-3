@@ -1,5 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.inventory.element.IElementButtonHandler;
+import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.util.FilterUtils;
@@ -16,7 +18,7 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.UUID;
 
-public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldElementHandler
+public class ContainerAlchemicalTome extends ContainerEE implements IElementButtonHandler, IElementTextFieldHandler
 {
     private final InventoryAlchemicalTome inventoryAlchemicalTome;
     private final ItemStack alchemicalTomeItemStack;
@@ -112,6 +114,8 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
                 icrafting.sendProgressBarUpdate(this, 0, this.pageOffset);
                 icrafting.sendProgressBarUpdate(this, 1, this.maxPageOffset);
             }
+
+            requiresUpdate = false;
         }
     }
 
@@ -149,14 +153,14 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
     }
 
     @Override
-    public void handleElementButtonClick(String buttonName, int mouseButton)
+    public void handleElementButtonClick(String elementName, int mouseButton)
     {
-        if (buttonName.equalsIgnoreCase("prev") && mouseButton == 0 && this.pageOffset > 0)
+        if (elementName.equalsIgnoreCase("prev") && mouseButton == 0 && this.pageOffset > 0)
         {
             this.pageOffset--;
             updateInventory();
         }
-        else if (buttonName.equalsIgnoreCase("next") && mouseButton == 0 && this.pageOffset < this.maxPageOffset)
+        else if (elementName.equalsIgnoreCase("next") && mouseButton == 0 && this.pageOffset < this.maxPageOffset)
         {
             this.pageOffset++;
             updateInventory();
@@ -164,9 +168,9 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
     }
 
     @Override
-    public void handleElementTextFieldUpdate(String buttonName, String updatedText)
+    public void handleElementTextFieldUpdate(String elementName, String updatedText)
     {
-        if (buttonName.equalsIgnoreCase("searchField"))
+        if (elementName.equalsIgnoreCase("searchField"))
         {
             this.searchTerm = updatedText;
             pageOffset = 0;
@@ -180,7 +184,6 @@ public class ContainerAlchemicalTome extends ContainerEE implements ITextFieldEl
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
         List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchemicalTome.getKnownTransmutations(), searchTerm, ItemHelper.displayNameComparator));
-        FilterUtils.filterOutListItemsWithInvalidIcons(filteredList, ItemHelper.displayNameComparator);
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

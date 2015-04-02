@@ -49,6 +49,11 @@ public abstract class ElementSlider extends ElementBase
         return this;
     }
 
+    public int getValue()
+    {
+        return this._value;
+    }
+
     public ElementSlider setValue(int value)
     {
         value = Math.max(_valueMin, Math.min(_valueMax, value));

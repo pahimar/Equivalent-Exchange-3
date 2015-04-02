@@ -6,26 +6,45 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class InventoryTransmutationTablet implements IInventory
 {
     private ItemStack[] inventory;
     private Set<ItemStack> knownTransmutations;
 
-    public InventoryTransmutationTablet(Set<ItemStack> knownTransmutations)
+    public InventoryTransmutationTablet()
+    {
+        this(null);
+    }
+
+    public InventoryTransmutationTablet(Collection<ItemStack> knownTransmutations)
     {
         inventory = new ItemStack[30];
+
+        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.baseComparator);
         if (knownTransmutations != null)
         {
-            this.knownTransmutations = knownTransmutations;
+            this.knownTransmutations.addAll(knownTransmutations);
+        }
+
+        List<ItemStack> knownTransmutationsList = new ArrayList<ItemStack>(this.knownTransmutations);
+        if (knownTransmutationsList.size() <= 30)
+        {
+            inventory = knownTransmutationsList.toArray(inventory);
         }
         else
         {
-            this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+            inventory = knownTransmutationsList.subList(0, 30).toArray(inventory);
         }
-        inventory = knownTransmutations.toArray(inventory);
+
+        for (int i = 0; i < inventory.length; i++)
+        {
+            if (inventory[i] instanceof ItemStack)
+            {
+                inventory[i].stackSize = 1;
+            }
+        }
     }
 
     @Override
@@ -45,6 +64,10 @@ public class InventoryTransmutationTablet implements IInventory
         return null;
     }
 
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
+     */
     @Override
     public ItemStack decrStackSize(int slotIndex, int decrementAmount)
     {
@@ -58,11 +81,14 @@ public class InventoryTransmutationTablet implements IInventory
             else
             {
                 itemStack = itemStack.splitStack(decrementAmount);
+
                 if (itemStack.stackSize == 0)
                 {
                     setInventorySlotContents(slotIndex, null);
                 }
             }
+
+            setInventorySlotContents(slotIndex, itemStack);
         }
 
         return itemStack;
@@ -88,7 +114,16 @@ public class InventoryTransmutationTablet implements IInventory
     {
         if (slotIndex < inventory.length)
         {
-            inventory[slotIndex] = itemStack;
+            if (itemStack != null)
+            {
+                ItemStack copiedItemStack = itemStack.copy();
+                copiedItemStack.stackSize = 1;
+                inventory[slotIndex] = copiedItemStack;
+            }
+            else
+            {
+                inventory[slotIndex] = itemStack;
+            }
         }
     }
 

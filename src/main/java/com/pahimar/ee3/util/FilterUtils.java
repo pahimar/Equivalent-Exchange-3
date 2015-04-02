@@ -1,5 +1,7 @@
 package com.pahimar.ee3.util;
 
+import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -56,16 +58,11 @@ public class FilterUtils
         return nameSortedSet;
     }
 
-    public static Set<ItemStack> filterByNameContains(Set<ItemStack> unfilteredItemStackSet, String filterString)
+    public static Set<ItemStack> filterByNameContains(Collection<ItemStack> unfilteredCollection, String filterString)
     {
-        return filterByNameContains(unfilteredItemStackSet, filterString, ItemHelper.baseComparator);
-    }
+        Set<ItemStack> nameSortedSet = new HashSet<ItemStack>();
 
-    public static Set<ItemStack> filterByNameContains(Set<ItemStack> unfilteredItemStackSet, String filterString, Comparator comparator)
-    {
-        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(comparator);
-
-        for (ItemStack itemStack : unfilteredItemStackSet)
+        for (ItemStack itemStack : unfilteredCollection)
         {
             String itemDisplayName = itemStack.getDisplayName().toLowerCase();
 
@@ -85,49 +82,73 @@ public class FilterUtils
         return nameSortedSet;
     }
 
-    public static void filterOutListItemsWithInvalidIcons(List<ItemStack> unfilteredCollection)
+    public static Set<ItemStack> filterByNameContains(Collection<ItemStack> unfilteredCollection, String filterString, Comparator comparator)
     {
-        filterOutListItemsWithInvalidIcons(unfilteredCollection, ItemHelper.baseComparator);
-    }
-
-    public static Set<ItemStack> filterOutItemsWithInvalidIcons(Set<ItemStack> unfilteredCollection, Comparator comparator)
-    {
-        List<ItemStack> itemsToRemove = new ArrayList<ItemStack>();
-        Set<ItemStack> filteredSet = new TreeSet<ItemStack>(comparator);
+        Set<ItemStack> nameSortedSet = new TreeSet<ItemStack>(comparator);
 
         for (ItemStack itemStack : unfilteredCollection)
         {
-            try
+            String itemDisplayName = itemStack.getDisplayName().toLowerCase();
+
+            if (filterString != null)
             {
-                itemStack.getItem().getIconIndex(itemStack);
-                filteredSet.add(itemStack);
+                if (itemDisplayName.contains(filterString.toLowerCase()))
+                {
+                    nameSortedSet.add(itemStack);
+                }
             }
-            catch (ArrayIndexOutOfBoundsException e)
+            else
             {
-                itemsToRemove.add(itemStack);
+                nameSortedSet.add(itemStack);
             }
         }
 
-        return filteredSet;
+        return nameSortedSet;
     }
 
-    public static void filterOutListItemsWithInvalidIcons(List<ItemStack> unfilteredCollection, Comparator comparator)
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, EnergyValue energyValue)
     {
-        List<ItemStack> itemsToRemove = new ArrayList<ItemStack>();
+        return filterByEnergyValue(unfilteredCollection, energyValue.getEnergyValue());
+    }
+
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, EnergyValue energyValue, Comparator<ItemStack> comparator)
+    {
+        return filterByEnergyValue(unfilteredCollection, energyValue.getEnergyValue(), comparator);
+    }
+
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, float energyValue)
+    {
+        Set<ItemStack> sortedSet = new HashSet<ItemStack>();
 
         for (ItemStack itemStack : unfilteredCollection)
         {
-            try
+            if (energyValue > 0f && EnergyValueRegistryProxy.hasEnergyValue(itemStack))
             {
-                itemStack.getItem().getIconIndex(itemStack);
-            }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
-                itemsToRemove.add(itemStack);
+                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getEnergyValue() <= energyValue)
+                {
+                    sortedSet.add(itemStack);
+                }
             }
         }
 
-        unfilteredCollection.removeAll(itemsToRemove);
-        Collections.sort(unfilteredCollection, comparator);
+        return sortedSet;
+    }
+
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, float energyValue, Comparator<ItemStack> comparator)
+    {
+        Set<ItemStack> sortedSet = new TreeSet<ItemStack>(comparator);
+
+        for (ItemStack itemStack : unfilteredCollection)
+        {
+            if (energyValue > 0f && EnergyValueRegistryProxy.hasEnergyValue(itemStack))
+            {
+                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getEnergyValue() <= energyValue)
+                {
+                    sortedSet.add(itemStack);
+                }
+            }
+        }
+
+        return sortedSet;
     }
 }
