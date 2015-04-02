@@ -3,6 +3,7 @@ package com.pahimar.ee3.network.message;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -19,6 +20,7 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
 
     public MessageTransmutationKnowledgeUpdate()
     {
+        this.transmutationKnowledge = new TransmutationKnowledge();
     }
 
     public MessageTransmutationKnowledgeUpdate(Collection<ItemStack> knownTransmutationsCollection)
@@ -31,6 +33,8 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
     {
         byte[] compressedString = null;
         int readableBytes = buf.readInt();
+
+        LogHelper.info(readableBytes);
 
         if (readableBytes > 0)
         {

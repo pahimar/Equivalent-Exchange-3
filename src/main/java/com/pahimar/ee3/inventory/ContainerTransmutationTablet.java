@@ -282,13 +282,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             super.onPickupFromSlot(entityPlayer, itemStack);
 
-            Set<ItemStack> knownTransmutations = TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ItemHelper.getOwnerUUID(itemStack));
-            this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
+            this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet();
             this.containerTransmutationTablet.updateInventory();
 
             if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
             {
-                PacketHandler.INSTANCE.sendToAllAround(new MessageTransmutationKnowledgeUpdate(knownTransmutations), new NetworkRegistry.TargetPoint(this.tileEntityTransmutationTablet.getWorldObj().provider.dimensionId, (double) this.tileEntityTransmutationTablet.xCoord, (double) this.tileEntityTransmutationTablet.yCoord, (double) this.tileEntityTransmutationTablet.zCoord, 5d));
+                PacketHandler.INSTANCE.sendToAllAround(new MessageTransmutationKnowledgeUpdate(), new NetworkRegistry.TargetPoint(this.tileEntityTransmutationTablet.getWorldObj().provider.dimensionId, (double) this.tileEntityTransmutationTablet.xCoord, (double) this.tileEntityTransmutationTablet.yCoord, (double) this.tileEntityTransmutationTablet.zCoord, 5d));
             }
         }
 
@@ -325,7 +324,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean canTakeStack(EntityPlayer entityPlayer)
         {
-            return false;
+            return true;
         }
 
         @Override
