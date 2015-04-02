@@ -1,5 +1,6 @@
 package com.pahimar.ee3.client.gui.element;
 
+import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
@@ -15,8 +16,9 @@ public class ElementSearchField extends ElementTextField
     @Override
     protected void onCharacterEntered(boolean success)
     {
-        if (success)
+        if (success && this.gui.inventorySlots instanceof IElementTextFieldHandler)
         {
+            ((IElementTextFieldHandler) this.gui.inventorySlots).handleElementTextFieldUpdate(this.name, this.getText());
             PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
         }
     }
