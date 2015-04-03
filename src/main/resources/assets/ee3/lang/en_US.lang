@@ -164,6 +164,10 @@ tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
 tooltip.ee3:small=Small
 tooltip.ee3:medium=Medium
 tooltip.ee3:large=Large
+tooltip.ee3:sortByDisplayName=Sort by Display Name
+tooltip.ee3:sortByEnergyValue=Sort by Energy Value
+tooltip.ee3:sortByID=Sort by ID
 
 #Misc
 misc.ee3:owner-set-to-self=You are now the owner of %s
+misc.ee3:energy-value=Energy Value

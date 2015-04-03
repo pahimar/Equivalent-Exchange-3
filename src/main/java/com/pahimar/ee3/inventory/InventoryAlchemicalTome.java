@@ -23,7 +23,7 @@ public class InventoryAlchemicalTome implements IInventory
         }
         else
         {
-            this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+            this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.idComparator);
         }
         inventory = knownTransmutations.toArray(inventory);
     }

@@ -2,14 +2,8 @@ package com.pahimar.ee3.reference;
 
 public final class Messages
 {
-    public static final String UPGRADES_CHESTS = "tooltip.ee3:upgradesPrefix";
-    public static final String ITEM_BELONGS_TO = "tooltip.ee3:belongsTo";
-    public static final String ITEM_BELONGS_TO_NO_ONE = "tooltip.ee3:belongsToNoOne";
-    public static final String SMALL = "tooltip.ee3:small";
-    public static final String MEDIUM = "tooltip.ee3:medium";
-    public static final String LARGE = "tooltip.ee3:large";
-
     public static final String OWNER_SET_TO_SELF = "misc.ee3:owner-set-to-self";
+    public static final String ENERGY_VALUE = "misc.ee3:energy-value";
 
     /* Fingerprint check related constants */
     public static final String NO_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running is a development version of the mod, and as such may be unstable and/or incomplete.";
@@ -20,6 +14,21 @@ public final class Messages
         private static final String GUI_PREFIX = "container.ee3:";
 
         public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.noTransmutationsKnown";
+    }
+
+    public static final class Tooltips
+    {
+        private static final String TOOLTIP_PREFIX = "tooltip.ee3:";
+
+        public static final String UPGRADES_CHESTS = TOOLTIP_PREFIX + "upgradesPrefix";
+        public static final String ITEM_BELONGS_TO = TOOLTIP_PREFIX + "belongsTo";
+        public static final String ITEM_BELONGS_TO_NO_ONE = TOOLTIP_PREFIX + "belongsToNoOne";
+        public static final String SMALL = TOOLTIP_PREFIX + "small";
+        public static final String MEDIUM = TOOLTIP_PREFIX + "medium";
+        public static final String LARGE = TOOLTIP_PREFIX + "large";
+        public static final String SORT_BY_DISPLAY_NAME = TOOLTIP_PREFIX + "sortByDisplayName";
+        public static final String SORT_BY_ENERGY_VALUE = TOOLTIP_PREFIX + "sortByEnergyValue";
+        public static final String SORT_BY_ID = TOOLTIP_PREFIX + "sortByID";
     }
 
     public static final class Commands

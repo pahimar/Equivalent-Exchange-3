@@ -61,17 +61,17 @@ public class ItemTooltipEventHandler
             UUID playerUUID = ItemHelper.getOwnerUUID(event.itemStack);
             if (playerUUID != null && UsernameCache.containsUUID(playerUUID))
             {
-                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
+                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
             }
             else if (ItemHelper.hasOwnerName(event.itemStack))
             {
-                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.ITEM_BELONGS_TO, ItemHelper.getOwnerName(event.itemStack)));
+                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, ItemHelper.getOwnerName(event.itemStack)));
             }
             else
             {
                 if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
                 {
-                    event.toolTip.add(StatCollector.translateToLocal(Messages.ITEM_BELONGS_TO_NO_ONE));
+                    event.toolTip.add(StatCollector.translateToLocal(Messages.Tooltips.ITEM_BELONGS_TO_NO_ONE));
                 }
             }
         }

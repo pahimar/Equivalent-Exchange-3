@@ -35,7 +35,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
-    private Set<ItemStack> allItemStacksWithValues = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+    private Set<ItemStack> allItemStacksWithValues = new TreeSet<ItemStack>(ItemHelper.idComparator);
 
     private EnergyValueRegistry()
     {

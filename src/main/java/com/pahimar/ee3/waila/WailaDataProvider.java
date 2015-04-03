@@ -37,15 +37,15 @@ public class WailaDataProvider implements IWailaDataProvider
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestSmall)
         {
-            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.SMALL) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.Tooltips.SMALL) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestMedium)
         {
-            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.MEDIUM) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.Tooltips.MEDIUM) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemicalChestLarge)
         {
-            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.LARGE) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
+            currentTip.set(0, SpecialChars.WHITE + StatCollector.translateToLocal(Messages.Tooltips.LARGE) + " " + StatCollector.translateToLocal(Names.Blocks.ALCHEMICAL_CHEST));
         }
         else if (accessor.getTileEntity() instanceof TileEntityAlchemyArray)
         {

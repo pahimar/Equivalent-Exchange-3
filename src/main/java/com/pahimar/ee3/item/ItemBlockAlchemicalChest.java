@@ -32,15 +32,15 @@ public class ItemBlockAlchemicalChest extends ItemBlock
 
         if (metaData == 0)
         {
-            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.SMALL)));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.Tooltips.SMALL)));
         }
         else if (metaData == 1)
         {
-            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.MEDIUM)));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.Tooltips.MEDIUM)));
         }
         else if (metaData == 2)
         {
-            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.LARGE)));
+            list.add(StatCollector.translateToLocal(StatCollector.translateToLocal(Messages.Tooltips.LARGE)));
         }
     }
 }

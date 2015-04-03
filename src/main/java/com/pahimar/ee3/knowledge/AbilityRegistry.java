@@ -28,7 +28,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     private boolean hasBeenModified;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
-    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.idComparator);
 
     private AbilityRegistry()
     {
@@ -56,7 +56,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     public void discoverAllLearnableItemStacks()
     {
-        this.allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.baseComparator);
+        this.allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.idComparator);
         for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
         {
             if (isLearnable(wrappedStack) && EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack) != null)

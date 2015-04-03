@@ -123,9 +123,7 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
 
                 if (guiContainer.inventorySlots instanceof ContainerTransmutationTablet)
                 {
-                    TileEntityTransmutationTablet tileEntityTransmutationTablet = ((ContainerTransmutationTablet) guiContainer.inventorySlots).tileEntityTransmutationTablet;
-
-                    if (tileEntityTransmutationTablet.xCoord == message.xCoord && tileEntityTransmutationTablet.yCoord == message.yCoord && tileEntityTransmutationTablet.zCoord == message.zCoord)
+                    if (FMLClientHandler.instance().getWorldClient().getTileEntity(message.xCoord, message.yCoord, message.zCoord) instanceof TileEntityTransmutationTablet)
                     {
                         ((ContainerTransmutationTablet) guiContainer.inventorySlots).handleTransmutationKnowledgeUpdate(message.transmutationKnowledge);
                     }

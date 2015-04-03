@@ -11,7 +11,7 @@ public class FilterUtils
 {
     public static Set<ItemStack> filterForItemBlock(Set<ItemStack> unfilteredItemStackSet)
     {
-        return filterForItemBlock(unfilteredItemStackSet, ItemHelper.baseComparator);
+        return filterForItemBlock(unfilteredItemStackSet, ItemHelper.idComparator);
     }
 
     public static Set<ItemStack> filterForItemBlock(Set<ItemStack> unfilteredItemStackSet, Comparator comparator)
@@ -31,7 +31,7 @@ public class FilterUtils
 
     public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString)
     {
-        return filterByNameStartsWith(unfilteredItemStackSet, filterString, ItemHelper.baseComparator);
+        return filterByNameStartsWith(unfilteredItemStackSet, filterString, ItemHelper.idComparator);
     }
 
     public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString, Comparator comparator)

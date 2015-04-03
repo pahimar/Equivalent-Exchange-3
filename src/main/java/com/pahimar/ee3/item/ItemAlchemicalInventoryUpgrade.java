@@ -72,7 +72,7 @@ public class ItemAlchemicalInventoryUpgrade extends ItemEE
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean flag)
     {
-        list.add(StatCollector.translateToLocal(Messages.UPGRADES_CHESTS));
+        list.add(StatCollector.translateToLocal(Messages.Tooltips.UPGRADES_CHESTS));
     }
 
     @Override
