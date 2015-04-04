@@ -381,7 +381,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean canTakeStack(EntityPlayer entityPlayer)
         {
-            return true;
+            return false;
         }
 
         @Override
