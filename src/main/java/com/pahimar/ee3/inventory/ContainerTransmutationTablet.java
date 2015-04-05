@@ -12,10 +12,10 @@ import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTransmutationKnowledgeUpdate;
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
-import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,6 +35,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     private float energyValue;
     private String searchTerm;
     private int sortOrder;
+    private int scrollBarPosition;
 
     public ContainerTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
     {
@@ -52,6 +53,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
 
         this.sortOrder = 0;
+        this.scrollBarPosition = 0;
         this.energyValue = tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue();
 
         this.addSlotToContainer(new SlotTabletInput(this, tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_1, 62, 24));
@@ -143,8 +145,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             sortOrder = updatedValue;
         }
+        else if (valueType == 3)
+        {
+            scrollBarPosition = updatedValue;
+        }
 
-        if (valueType == 0 || valueType == 1 || valueType == 2)
+        if (valueType >= 0 && valueType <= 3)
         {
             updateInventory();
         }
@@ -163,7 +169,11 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     @Override
     public void handleElementSliderUpdate(String elementName, int elementValue)
     {
-        LogHelper.info(elementValue);
+        if (elementName.equals("scrollBar"))
+        {
+            this.scrollBarPosition = elementValue;
+            updateInventory();
+        }
     }
 
     public void handleTransmutationKnowledgeUpdate(TransmutationKnowledge transmutationKnowledge)
@@ -182,26 +192,24 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         Set<ItemStack> filteredSet = FilterUtils.filterByNameContains(this.inventoryTransmutationTablet.getKnownTransmutations(), searchTerm);
         List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByEnergyValue(filteredSet, energyValue));
 
-        if (sortOrder == 0)
+        int adjustedStartIndex = (int) ((scrollBarPosition / 187f) * filteredList.size());
+
+        if (sortOrder >= 0 && sortOrder < Comparators.itemComparators.length)
         {
-            Collections.sort(filteredList, ItemHelper.displayNameComparator);
-        }
-        else if (sortOrder == 1)
-        {
-            Collections.sort(filteredList, ItemHelper.energyValueComparator);
-        }
-        else if (sortOrder == 2)
-        {
-            Collections.sort(filteredList, ItemHelper.idComparator);
+            Collections.sort(filteredList, Comparators.itemComparators[sortOrder]);
         }
 
         if (filteredList.size() <= 30)
         {
             newInventory = filteredList.toArray(newInventory);
         }
+        else if (adjustedStartIndex + 30 <= filteredList.size())
+        {
+            newInventory = filteredList.subList(adjustedStartIndex, adjustedStartIndex + 30).toArray(newInventory);
+        }
         else
         {
-            newInventory = filteredList.subList(0, 30).toArray(newInventory);
+            newInventory = filteredList.subList(filteredList.size() - 30, filteredList.size()).toArray(newInventory);
         }
 
         for (int i = 0; i < 30; i++)
@@ -306,6 +314,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                     sortOrder = 1;
                 }
             }
+        }
+
+        for (Object crafter : this.crafters)
+        {
+            ICrafting iCrafting = (ICrafting) crafter;
+            iCrafting.sendProgressBarUpdate(this, 2, sortOrder);
         }
     }
 

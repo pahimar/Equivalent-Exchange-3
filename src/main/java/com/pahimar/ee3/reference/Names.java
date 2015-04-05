@@ -51,6 +51,8 @@ public class Names
         public static final String[] MATTER_SUBTYPES = {"Proto", "Dark", "Corporeal", "Kinetic", "Temporal", "Essentia", "Amorphous", "Void", "Omni"};
         public static final String GEM = "gem";
         public static final String[] GEM_SUBTYPES = {"Black", "Blue", "Green", "Grey", "Purple", "Red", "Yellow"};
+        public static final String KNOWLEDGE_SCROLL = "knowledgeScroll";
+        public static final String POTION_LETHE = "potionLethe";
     }
 
     public static final class Materials

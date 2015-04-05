@@ -57,6 +57,8 @@ item.ee3:gemPurple.name=Purple Gem [WIP]
 item.ee3:gemRed.name=Red Gem [WIP]
 item.ee3:gemYellow.name=Yellow Gem [WIP]
 item.ee3:lootBall.name=Loot Ball [WIP]
+item.ee3:knowledgeScroll.name=Scroll of Transmutation Knowledge [WIP]
+item.ee3:potionLethe.name=Lethe Potion [WIP]
 
 # Tools
 item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]

@@ -10,6 +10,7 @@ import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementSlider;
@@ -30,6 +31,7 @@ public class GuiTransmutationTablet extends GuiBase
     private ElementTextField searchTextField;
     private ElementStatefulButton sortOrderButton;
     private ElementSlider slider;
+    protected int tickCount;
 
     private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
@@ -102,6 +104,14 @@ public class GuiTransmutationTablet extends GuiBase
             }
 
             @Override
+            public boolean onMouseWheel(int mouseX, int mouseY, int movement)
+            {
+                PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
+                LogHelper.info(tickCount);
+                return super.onMouseWheel(mouseX, mouseY, movement);
+            }
+
+            @Override
             public void onStopDragging()
             {
                 PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
@@ -113,6 +123,7 @@ public class GuiTransmutationTablet extends GuiBase
                 return _value;
             }
         };
+        slider.setName("scrollBar");
         slider.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.setSliderSize(12, 15);
@@ -128,6 +139,13 @@ public class GuiTransmutationTablet extends GuiBase
         super.drawGuiContainerForegroundLayer(x, y);
         fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 8, 140, Integer.parseInt(Colors.PURE_WHITE, 16)); // TODO Localize
         fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue())), 8, 150, Integer.parseInt(Colors.PURE_WHITE, 16));
+    }
+
+    @Override
+    public void updateScreen()
+    {
+        super.updateScreen();
+        tickCount++;
     }
 
     @Override
