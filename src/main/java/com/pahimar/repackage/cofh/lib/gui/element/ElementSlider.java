@@ -35,6 +35,14 @@ public abstract class ElementSlider extends ElementBase
         _valueMin = minValue;
     }
 
+    protected ElementSlider(GuiBase containerScreen, String elementName, int x, int y, int width, int height, int maxValue, int minValue)
+    {
+        super(containerScreen, x, y, width, height);
+        this.name = elementName;
+        _valueMax = maxValue;
+        _valueMin = minValue;
+    }
+
     public ElementSlider setColor(int backgroundColor, int borderColor)
     {
         this.borderColor = borderColor;
@@ -54,6 +62,16 @@ public abstract class ElementSlider extends ElementBase
         return this._value;
     }
 
+    public int getValueMin()
+    {
+        return this._valueMin;
+    }
+
+    public int getValueMax()
+    {
+        return this._valueMax;
+    }
+
     public ElementSlider setValue(int value)
     {
         value = Math.max(_valueMin, Math.min(_valueMax, value));
@@ -62,6 +80,18 @@ public abstract class ElementSlider extends ElementBase
             _value = value;
             onValueChanged(_value);
         }
+        return this;
+    }
+
+    public ElementSlider setMinValue(int minValue)
+    {
+        _valueMin = minValue;
+        return this;
+    }
+
+    public ElementSlider setMaxValue(int maxValue)
+    {
+        _valueMax = maxValue;
         return this;
     }
 

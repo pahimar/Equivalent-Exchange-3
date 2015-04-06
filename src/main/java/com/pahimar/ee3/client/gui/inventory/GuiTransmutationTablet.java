@@ -88,7 +88,7 @@ public class GuiTransmutationTablet extends GuiBase
         };
         setTooltipByState();
 
-        slider = new ElementSlider(this, 239, 36, 12, 201, 187, 0)
+        slider = new ElementSlider(this, "scrollBar", 239, 36, 12, 201, 187, 0)
         {
             @Override
             protected void dragSlider(int x, int y)
@@ -123,7 +123,6 @@ public class GuiTransmutationTablet extends GuiBase
                 return _value;
             }
         };
-        slider.setName("scrollBar");
         slider.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.setSliderSize(12, 15);
@@ -137,7 +136,7 @@ public class GuiTransmutationTablet extends GuiBase
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         super.drawGuiContainerForegroundLayer(x, y);
-        fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 8, 140, Integer.parseInt(Colors.PURE_WHITE, 16)); // TODO Localize
+        fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 8, 140, Integer.parseInt(Colors.PURE_WHITE, 16));
         fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue())), 8, 150, Integer.parseInt(Colors.PURE_WHITE, 16));
     }
 

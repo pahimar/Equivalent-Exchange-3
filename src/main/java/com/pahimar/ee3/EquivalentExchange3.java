@@ -2,6 +2,7 @@ package com.pahimar.ee3;
 
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
+import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
@@ -110,6 +111,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        CachedOreDictionary.getInstance();
         RecipeRegistry.getInstance().registerVanillaRecipes();
         AludelRecipeManager.registerRecipes();
     }
