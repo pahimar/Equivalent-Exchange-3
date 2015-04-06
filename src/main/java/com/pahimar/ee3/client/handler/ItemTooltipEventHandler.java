@@ -33,7 +33,7 @@ public class ItemTooltipEventHandler
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || event.entityPlayer.openContainer instanceof ContainerAlchemicalTome)
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerAlchemicalTome))
         {
             WrappedStack stack = new WrappedStack(event.itemStack);
 
