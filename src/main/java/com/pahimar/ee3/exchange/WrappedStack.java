@@ -49,7 +49,12 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         {
             if (((ItemStack) object).getItem() != null)
             {
-                ItemStack itemStack = ((ItemStack) object).copy();
+                ItemStack itemStackObject = (ItemStack) object;
+                ItemStack itemStack = new ItemStack(itemStackObject.getItem(), itemStackObject.stackSize, itemStackObject.getItemDamage());
+                if (itemStackObject.stackTagCompound != null)
+                {
+                    itemStack.stackTagCompound = (NBTTagCompound) itemStackObject.stackTagCompound.copy();
+                }
                 objectType = "itemstack";
                 stackSize = itemStack.stackSize;
                 itemStack.stackSize = 1;
@@ -392,7 +397,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                 {
                     if (objectType.equalsIgnoreCase("ItemStack"))
                     {
-                        JsonItemStack jsonItemStack = jsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack_data"), JsonItemStack.class);
+                        JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack_data"), JsonItemStack.class);
                         ItemStack itemStack = null;
                         Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
                         if (stackSize > 0 && item != null)
@@ -477,7 +482,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             {
                 jsonItemStack.itemNBTTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
             }
-            jsonWrappedStack.add("wrappedStack_data", gson.toJsonTree(jsonItemStack, JsonItemStack.class));
+            jsonWrappedStack.add("wrappedStack_data", JsonItemStack.jsonSerializer.toJsonTree(jsonItemStack, JsonItemStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof OreStack)
         {
@@ -555,7 +560,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
     {
         if (wrappedStack instanceof ItemStack)
         {
-            return String.format("%sxitemStack[%s@%s, %s]", stackSize, ((ItemStack) wrappedStack).getUnlocalizedName(), ((ItemStack) wrappedStack).getItemDamage(), Item.getIdFromItem(((ItemStack) wrappedStack).getItem()));
+            return ItemHelper.toString((ItemStack) wrappedStack);
         }
         else if (wrappedStack instanceof OreStack)
         {

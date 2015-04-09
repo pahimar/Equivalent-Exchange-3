@@ -266,22 +266,28 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
                     JsonElement jsonElement = iterator.next();
                     if (jsonElement.isJsonObject())
                     {
-                        JsonItemStack jsonItemStack = jsonSerializer.fromJson(jsonElement, JsonItemStack.class);
-
-                        ItemStack itemStack = null;
-                        Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
-                        if (item != null)
+                        try
                         {
-                            itemStack = new ItemStack(item, 1, jsonItemStack.itemDamage);
-                            if (jsonItemStack.itemNBTTagCompound != null)
+                            JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonElement, JsonItemStack.class);
+
+                            ItemStack itemStack = null;
+                            Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
+                            if (item != null)
                             {
-                                itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
+                                itemStack = new ItemStack(item, 1, jsonItemStack.itemDamage);
+                                if (jsonItemStack.itemNBTTagCompound != null)
+                                {
+                                    itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
+                                }
+                            }
+
+                            if (itemStack != null)
+                            {
+                                itemStacks.add(itemStack);
                             }
                         }
-
-                        if (itemStack != null)
+                        catch (JsonParseException e)
                         {
-                            itemStacks.add(itemStack);
                         }
                     }
                 }
@@ -303,7 +309,7 @@ public class TransmutationKnowledge implements INBTTaggable, JsonSerializer<Tran
         JsonArray knownTransmutations = new JsonArray();
         for (ItemStack itemStack : transmutationKnowledge.getKnownTransmutations())
         {
-            knownTransmutations.add(jsonSerializer.toJsonTree(new JsonItemStack(itemStack)));
+            knownTransmutations.add(JsonItemStack.jsonSerializer.toJsonTree(new JsonItemStack(itemStack)));
         }
         jsonTransmutationKnowledge.add("knownTransmutations", knownTransmutations);
 

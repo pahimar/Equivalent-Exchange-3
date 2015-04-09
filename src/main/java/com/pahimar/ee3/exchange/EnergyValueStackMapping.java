@@ -74,12 +74,26 @@ public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackM
 
             if (jsonStackValueMapping.get("wrappedStack") != null)
             {
-                wrappedStack = new WrappedStack().deserialize(jsonStackValueMapping.get("wrappedStack").getAsJsonObject(), typeOfT, context);
+                try
+                {
+                    wrappedStack = new WrappedStack().deserialize(jsonStackValueMapping.get("wrappedStack").getAsJsonObject(), typeOfT, context);
+                }
+                catch (JsonParseException e)
+                {
+
+                }
             }
 
             if (jsonStackValueMapping.get("energyValue") != null)
             {
-                energyValue = new EnergyValue().deserialize(jsonStackValueMapping.get("energyValue").getAsJsonObject(), typeOfT, context);
+                try
+                {
+                    energyValue = new EnergyValue().deserialize(jsonStackValueMapping.get("energyValue").getAsJsonObject(), typeOfT, context);
+                }
+                catch (JsonParseException e)
+                {
+
+                }
             }
 
             if (wrappedStack != null && energyValue != null)

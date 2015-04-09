@@ -3,11 +3,13 @@ package com.pahimar.ee3.knowledge;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pahimar.ee3.api.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -331,5 +333,56 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             e.printStackTrace();
         }
+    }
+
+    public void dumpAbilityRegistryToLog()
+    {
+        dumpAbilityRegistryToLog(AbilityRegistryProxy.Abilities.ALL);
+    }
+
+    public void dumpAbilityRegistryToLog(AbilityRegistryProxy.Abilities abilityType)
+    {
+        LogHelper.info(String.format("BEGIN DUMPING %s ABILITY OBJECTS", abilityType));
+        if (abilityType == AbilityRegistryProxy.Abilities.NOT_LEARNABLE)
+        {
+            if (this.notLearnableSet != null)
+            {
+                for (WrappedStack wrappedStack : this.notLearnableSet)
+                {
+                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+                }
+            }
+        }
+        else if (abilityType == AbilityRegistryProxy.Abilities.NOT_RECOVERABLE)
+        {
+            if (this.notRecoverableSet != null)
+            {
+                for (WrappedStack wrappedStack : this.notRecoverableSet)
+                {
+                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+                }
+            }
+        }
+        else if (abilityType == AbilityRegistryProxy.Abilities.ALL)
+        {
+            if (this.notLearnableSet != null)
+            {
+                LogHelper.info("NOT LEARNABLE OBJECTS");
+                for (WrappedStack wrappedStack : this.notLearnableSet)
+                {
+                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+                }
+            }
+
+            if (this.notRecoverableSet != null)
+            {
+                LogHelper.info("NOT RECOVERABLE OBJECTS");
+                for (WrappedStack wrappedStack : this.notRecoverableSet)
+                {
+                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+                }
+            }
+        }
+        LogHelper.info(String.format("END DUMPING %s ABILITY OBJECTS", abilityType));
     }
 }

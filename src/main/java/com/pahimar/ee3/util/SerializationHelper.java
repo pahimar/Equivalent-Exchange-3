@@ -207,7 +207,10 @@ public class SerializationHelper
             while (jsonReader.hasNext())
             {
                 EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
-                energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
+                if (energyValueStackMapping != null)
+                {
+                    energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
+                }
             }
             jsonReader.endArray();
             jsonReader.close();

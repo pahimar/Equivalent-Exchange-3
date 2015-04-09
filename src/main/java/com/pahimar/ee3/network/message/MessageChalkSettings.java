@@ -2,7 +2,6 @@ package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.settings.ChalkSettings;
-import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -62,9 +61,6 @@ public class MessageChalkSettings implements IMessage, IMessageHandler<MessageCh
     public IMessage onMessage(MessageChalkSettings message, MessageContext ctx)
     {
         EquivalentExchange3.proxy.getClientProxy().chalkSettings = new ChalkSettings(message.index, message.size, message.rotation);
-
-        LogHelper.info(String.format("index: %s, size: %s, rotation: %s", EquivalentExchange3.proxy.getClientProxy().chalkSettings.getIndex(), EquivalentExchange3.proxy.getClientProxy().chalkSettings.getSize(), EquivalentExchange3.proxy.getClientProxy().chalkSettings.getRotation()));
-
         return null;
     }
 }

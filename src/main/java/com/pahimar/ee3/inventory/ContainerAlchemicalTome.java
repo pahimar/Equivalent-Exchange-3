@@ -21,7 +21,6 @@ import java.util.UUID;
 public class ContainerAlchemicalTome extends ContainerEE implements IElementButtonHandler, IElementTextFieldHandler
 {
     private final InventoryAlchemicalTome inventoryAlchemicalTome;
-    private final ItemStack alchemicalTomeItemStack;
     private int pageOffset, maxPageOffset;
     private String searchTerm;
     private boolean requiresUpdate = false;
@@ -31,7 +30,6 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
 
     public ContainerAlchemicalTome(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        this.alchemicalTomeItemStack = itemStack;
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
 
         if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))

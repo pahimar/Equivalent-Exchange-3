@@ -107,6 +107,21 @@ public final class EnergyValueRegistryProxy
         return null;
     }
 
+    public static void dumpEnergyValueRegistryToLog()
+    {
+        dumpEnergyValueRegistryToLog(Phase.ALL);
+    }
+
+    public static void dumpEnergyValueRegistryToLog(Phase phase)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().dumpEnergyValueRegistryToLog(phase);
+        }
+    }
+
     private static class EE3Wrapper
     {
         private static EquivalentExchange3 ee3mod;
@@ -118,5 +133,12 @@ public final class EnergyValueRegistryProxy
         {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
+    }
+
+    public enum Phase
+    {
+        PRE_ASSIGNMENT,
+        POST_ASSIGNMENT,
+        ALL
     }
 }

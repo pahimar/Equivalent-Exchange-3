@@ -12,12 +12,21 @@ public final class RecipeRegistryProxy
         init();
 
         // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod == null)
+        if (ee3Mod != null)
         {
-            return;
+            EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputList);
         }
+    }
 
-        EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputList);
+    public static void dumpRecipeRegistryToLog()
+    {
+        init();
+
+        // NOOP if EquivalentExchange3 is not present
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getRecipeRegistry().dumpRecipeRegistryToLog();
+        }
     }
 
     @Mod.Instance("EE3")

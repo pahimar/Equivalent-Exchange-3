@@ -72,6 +72,21 @@ public final class AbilityRegistryProxy
         }
     }
 
+    public static void dumpAbilityRegistryToLog()
+    {
+        dumpAbilityRegistryToLog(Abilities.ALL);
+    }
+
+    public static void dumpAbilityRegistryToLog(Abilities ability)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getAbilityRegistry().dumpAbilityRegistryToLog(ability);
+        }
+    }
+
     private static class EE3Wrapper
     {
         private static EquivalentExchange3 ee3mod;
@@ -83,5 +98,12 @@ public final class AbilityRegistryProxy
         {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
+    }
+
+    public enum Abilities
+    {
+        NOT_LEARNABLE,
+        NOT_RECOVERABLE,
+        ALL
     }
 }

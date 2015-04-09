@@ -3,6 +3,7 @@ package com.pahimar.ee3.exchange;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.*;
 import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.IEnergyValueProvider;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -60,7 +61,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         if (preAssignedMappings == null)
         {
-            preAssignedMappings = new HashMap<WrappedStack, EnergyValue>();
+            preAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
@@ -96,7 +97,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         if (postAssignedExactMappings == null)
         {
-            postAssignedExactMappings = new HashMap<WrappedStack, EnergyValue>();
+            postAssignedExactMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
@@ -117,7 +118,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         if (postAssignedDependentMappings == null)
         {
-            postAssignedDependentMappings = new HashMap<WrappedStack, List<WrappedStack>>();
+            postAssignedDependentMappings = new TreeMap<WrappedStack, List<WrappedStack>>();
         }
 
         if (!WrappedStack.canBeWrapped(object))
@@ -303,7 +304,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
     private void runDynamicEnergyValueResolution()
     {
-        HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+        TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
 
         /*
          *  Pre-assigned values
@@ -321,7 +322,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
-        Map<WrappedStack, EnergyValue> computedStackValues = new HashMap<WrappedStack, EnergyValue>();
+        Map<WrappedStack, EnergyValue> computedStackValues = new TreeMap<WrappedStack, EnergyValue>();
 
         // Initialize the pass counter
         int passNumber = 0;
@@ -431,7 +432,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
         else
         {
-            postAssignedExactMappings = new HashMap<WrappedStack, EnergyValue>();
+            postAssignedExactMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         // Grab custom post-assigned values from file
@@ -486,7 +487,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
     private Map<WrappedStack, EnergyValue> computeStackMappings()
     {
-        Map<WrappedStack, EnergyValue> computedStackMap = new HashMap<WrappedStack, EnergyValue>();
+        Map<WrappedStack, EnergyValue> computedStackMap = new TreeMap<WrappedStack, EnergyValue>();
 
         for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet())
         {
@@ -584,7 +585,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         if (nbtTagCompound != null && nbtTagCompound.hasKey("stackMappingList"))
         {
-            HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+            TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
 
             /**
              *  Read stack value mappings from NBTTagCompound
@@ -637,7 +638,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     {
         if (wrappedStack != null && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
         {
-            HashMap<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+            TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
 
             /**
              *  Read stack value mappings from NBTTagCompound
@@ -793,7 +794,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         if (json.isJsonArray())
         {
             JsonArray jsonArray = (JsonArray) json;
-            Map<WrappedStack, EnergyValue> stackValueMap = new HashMap<WrappedStack, EnergyValue>();
+            Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
             Iterator<JsonElement> iterator = jsonArray.iterator();
 
             while (iterator.hasNext())
@@ -828,5 +829,49 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
 
         return jsonEnergyValueRegistry;
+    }
+
+    public void dumpEnergyValueRegistryToLog()
+    {
+        dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase.ALL);
+    }
+
+    public void dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase phase)
+    {
+        LogHelper.info(String.format("BEGIN DUMPING %s ENERGY VALUE MAPPINGS", phase));
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT)
+        {
+            for (WrappedStack wrappedStack : this.preAssignedMappings.keySet())
+            {
+                LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
+            }
+        }
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT)
+        {
+            LogHelper.info("POST-ASSIGNED VALUES (DEPENDENT)");
+            if (this.postAssignedDependentMappings != null)
+            {
+                for (WrappedStack wrappedStack : this.postAssignedDependentMappings.keySet())
+                {
+                    LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
+                }
+            }
+            LogHelper.info("POST-ASSIGNED VALUES (EXACT)");
+            if (this.postAssignedExactMappings != null)
+            {
+                for (WrappedStack wrappedStack : this.postAssignedExactMappings.keySet())
+                {
+                    LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
+                }
+            }
+        }
+        else if (phase == EnergyValueRegistryProxy.Phase.ALL)
+        {
+            for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
+            {
+                LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
+            }
+        }
+        LogHelper.info(String.format("END DUMPING %s ENERGY VALUE MAPPINGS", phase));
     }
 }
