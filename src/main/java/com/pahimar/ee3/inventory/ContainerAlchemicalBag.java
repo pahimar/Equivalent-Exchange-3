@@ -2,13 +2,15 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.ee3.util.NBTHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.UUID;
 
 public class ContainerAlchemicalBag extends ContainerEE
 {
@@ -22,7 +24,7 @@ public class ContainerAlchemicalBag extends ContainerEE
     public static final int LARGE_BAG_INVENTORY_ROWS = 9;
     public static final int LARGE_BAG_INVENTORY_COLUMNS = 13;
     private final EntityPlayer entityPlayer;
-    protected final InventoryAlchemicalBag inventoryAlchemicalBag;
+    public final InventoryAlchemicalBag inventoryAlchemicalBag;
 
     private int bagInventoryRows;
     private int bagInventoryColumns;
@@ -75,15 +77,15 @@ public class ContainerAlchemicalBag extends ContainerEE
             {
                 if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 0)
                 {
-                    this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 104 + inventoryRowIndex * 18));
+                    this.addSlotToContainer(new Slot(entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 104 + inventoryRowIndex * 18));
                 }
                 else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 1)
                 {
-                    this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 158 + inventoryRowIndex * 18));
+                    this.addSlotToContainer(new Slot(entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 35 + inventoryColumnIndex * 18, 158 + inventoryRowIndex * 18));
                 }
                 else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 2)
                 {
-                    this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 44 + inventoryColumnIndex * 18, 174 + inventoryRowIndex * 18));
+                    this.addSlotToContainer(new Slot(entityPlayer.inventory, inventoryColumnIndex + inventoryRowIndex * 9 + 9, 44 + inventoryColumnIndex * 18, 174 + inventoryRowIndex * 18));
                 }
             }
         }
@@ -93,15 +95,15 @@ public class ContainerAlchemicalBag extends ContainerEE
         {
             if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 0)
             {
-                this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
+                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
             }
             else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 1)
             {
-                this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
+                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
             }
             else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 2)
             {
-                this.addSlotToContainer(new SlotPlayerInventory(this, entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
+                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
             }
         }
     }
@@ -128,6 +130,16 @@ public class ContainerAlchemicalBag extends ContainerEE
 
             saveInventory(entityPlayer);
         }
+    }
+
+    public boolean isItemStackParent(ItemStack itemStack)
+    {
+        if (NBTHelper.hasUUID(itemStack))
+        {
+            UUID stackUUID = new UUID(itemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG), itemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
+            return inventoryAlchemicalBag.matchesUUID(stackUUID);
+        }
+        return false;
     }
 
     @Override
@@ -204,17 +216,14 @@ public class ContainerAlchemicalBag extends ContainerEE
         }
 
         @Override
-        public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
+        public void onSlotChanged()
         {
-            super.onPickupFromSlot(entityPlayer, itemStack);
-            containerAlchemicalBag.saveInventory(entityPlayer);
-        }
+            super.onSlotChanged();
 
-        @Override
-        public void putStack(ItemStack itemStack)
-        {
-            super.putStack(itemStack);
-            containerAlchemicalBag.saveInventory(entityPlayer);
+            if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+            {
+                containerAlchemicalBag.saveInventory(entityPlayer);
+            }
         }
 
         /**
@@ -224,23 +233,6 @@ public class ContainerAlchemicalBag extends ContainerEE
         public boolean isItemValid(ItemStack itemStack)
         {
             return !(itemStack.getItem() instanceof ItemAlchemicalBag);
-        }
-    }
-
-    private class SlotPlayerInventory extends Slot
-    {
-        private ContainerAlchemicalBag containerAlchemicalBag;
-
-        public SlotPlayerInventory(ContainerAlchemicalBag containerAlchemicalBag, IInventory inventory, int slotIndex, int x, int y)
-        {
-            super(inventory, slotIndex, x, y);
-            this.containerAlchemicalBag = containerAlchemicalBag;
-        }
-
-        @Override
-        public boolean canTakeStack(EntityPlayer entityPlayer)
-        {
-            return !ItemHelper.equals(this.getStack(), containerAlchemicalBag.inventoryAlchemicalBag.parentItemStack);
         }
     }
 }
