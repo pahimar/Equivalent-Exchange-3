@@ -32,9 +32,12 @@ public class RecipeAludel
     {
         if (OreDictionary.getOreIDs(inputStack).length > 0)
         {
-            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
+            for (OreStack stack : OreStack.getOreStacks(inputStack))
             {
-                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
+                if (matches(new WrappedStack(stack), dustStack))
+                {
+                    return matches(new WrappedStack(stack), dustStack);
+                }
             }
         }
 
