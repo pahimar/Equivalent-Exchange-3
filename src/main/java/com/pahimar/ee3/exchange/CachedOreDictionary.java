@@ -14,18 +14,21 @@ import java.util.*;
 public class CachedOreDictionary
 {
     private static CachedOreDictionary cachedOreDictionary = null;
+    private ImmutableMap<Integer, String> idToNameMap;
     private ImmutableMap<String, List<ItemStack>> oreNameToItemStackMap;
     private ImmutableMultimap<ItemStack, String> itemStackToOreNameMap;
 
     private CachedOreDictionary()
     {
+        Map<Integer, String> idToOreNameMap = new TreeMap<Integer, String>();
         Map<String, List<ItemStack>> nameToStackMap = new TreeMap<String, List<ItemStack>>(Comparators.stringComparator);
         Multimap<ItemStack, String> stackToNameMultiMap = TreeMultimap.create(ItemHelper.idComparator, Comparators.stringComparator);
 
         for (String oreName : OreDictionary.getOreNames())
         {
-            List<ItemStack> oreNameItemStacks = OreDictionary.getOres(oreName);
+            idToOreNameMap.put(OreDictionary.getOreID(oreName), oreName);
 
+            List<ItemStack> oreNameItemStacks = OreDictionary.getOres(oreName);
             nameToStackMap.put(oreName, oreNameItemStacks);
 
             for (ItemStack itemStack : oreNameItemStacks)
@@ -34,6 +37,7 @@ public class CachedOreDictionary
             }
         }
 
+        idToNameMap = ImmutableMap.copyOf(idToOreNameMap);
         oreNameToItemStackMap = ImmutableMap.copyOf(nameToStackMap);
         itemStackToOreNameMap = ImmutableMultimap.copyOf(stackToNameMultiMap);
     }

@@ -1,12 +1,11 @@
 package com.pahimar.ee3.exchange;
 
+import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class OreStack implements Comparable<OreStack>
 {
@@ -100,18 +99,42 @@ public class OreStack implements Comparable<OreStack>
     {
         if (objectList.size() > 0)
         {
+            Map<String, Integer> oreNameCountMap = new TreeMap<String, Integer>(Comparators.stringComparator);
             for (Object listElement : objectList)
             {
                 if (listElement instanceof ItemStack)
                 {
-                    ItemStack stack = (ItemStack) listElement;
+                    ItemStack itemStack = (ItemStack) listElement;
 
-                    if (OreDictionary.getOreIDs(stack).length > 0)
+                    for (String oreName : CachedOreDictionary.getInstance().getOreNamesForItemStack(itemStack))
                     {
-                        return new OreStack(stack);
+                        if (oreNameCountMap.containsKey(oreName))
+                        {
+                            oreNameCountMap.put(oreName, oreNameCountMap.get(oreName) + 1);
+                        }
+                        else
+                        {
+                            oreNameCountMap.put(oreName, 1);
+                        }
                     }
                 }
             }
+
+            List<OreStack> candidateOreStacks = new ArrayList<OreStack>();
+            for (String oreName : oreNameCountMap.keySet())
+            {
+                if (oreNameCountMap.get(oreName) == objectList.size())
+                {
+                    candidateOreStacks.add(new OreStack(oreName));
+                }
+            }
+
+            if (candidateOreStacks.size() == 1)
+            {
+                return candidateOreStacks.get(0);
+            }
+
+            return null;
         }
 
         return null;

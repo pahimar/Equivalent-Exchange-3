@@ -15,28 +15,31 @@ public class EnergyValues
     public static void addDefaultEnergyValues()
     {
         // OreDictionary assignment
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.cobblestone))), 1);
-        for (int meta = 0; meta < 16; meta++)
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("cobblestone")), 1);
+
+        String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
+        for (int i = 0; i < dyes.length; i++)
         {
-            EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Items.dye, 1, meta))), 8);
+            EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("dye" + dyes[i])), 8);
         }
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.log))), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.diamond_ore))), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.emerald_ore))), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.gold_ore))), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.iron_ore))), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.lapis_ore))), 864);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.quartz_ore))), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.redstone_ore))), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.planks))), 8);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Items.record_11))), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.wooden_slab))), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.oak_stairs))), 12);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Items.stick))), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.stone))), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.leaves))), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.sapling))), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack(new ItemStack(Blocks.sandstone))), 4);
+
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("logWood")), 32);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreDiamond")), 8192);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreEmerald")), 8192);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreGold")), 2048);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreIron")), 256);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreLapis")), 864);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreQuartz")), 256);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("oreRedstone")), 32);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("plankWood")), 8);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("record")), 2048);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("slabWood")), 4);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stairWood")), 12);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stick")), 4);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stone")), 1);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("leaves")), 1);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("sapling")), 32);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("sandstone")), 4);
 
         // Fluids
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(FluidRegistry.WATER), 1);
