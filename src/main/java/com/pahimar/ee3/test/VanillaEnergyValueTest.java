@@ -244,22 +244,22 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Blocks.leaves2, 1, 0), 1);
         add(new ItemStack(Blocks.leaves2, 1, 1), 1);
         add(new ItemStack(Blocks.carpet, 1, 0), 32);
-        add(new ItemStack(Blocks.carpet, 1, 1), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 2), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 3), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 4), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 5), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 6), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 7), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 8), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 9), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 10), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 11), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 12), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 13), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 14), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 15), 37.333);
-        add(new ItemStack(Blocks.carpet, 1, 15), 37.333);
+        add(new ItemStack(Blocks.carpet, 1, 1), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 2), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 3), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 4), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 5), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 6), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 7), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 8), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 9), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 10), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 11), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 12), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 13), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 14), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 15), 37.333332);
+        add(new ItemStack(Blocks.carpet, 1, 15), 37.333332);
         add(new ItemStack(Blocks.double_plant, 1, 0), 16);
         add(new ItemStack(Blocks.double_plant, 1, 1), 16);
         add(new ItemStack(Blocks.double_plant, 1, 2), 16);
@@ -299,8 +299,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Blocks.redstone_block, 288);
         add(Blocks.hopper, 1344);
         add(Blocks.dropper, 39);
-        add(Blocks.wooden_door, 48);
-        add(Blocks.iron_door, 1536);
+        add(Items.wooden_door, 48);
+        add(Items.iron_door, 1536);
         add(Items.redstone, 32);
         add(Items.repeater, 107);
         add(Items.comparator, 367);
@@ -363,7 +363,7 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Items.spawn_egg, 1, 97), null);
         add(new ItemStack(Items.spawn_egg, 1, 99), null);
         add(Items.experience_bottle, null);
-        add(Items.fire_charge, 330.666);
+        add(Items.fire_charge, 330.66666);
         add(Items.writable_book, 216);
         add(Items.map, 1312);
         add(Items.firework_charge, null);
@@ -411,7 +411,7 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.potato, 24);
         add(Items.baked_potato, 24);
         add(Items.poisonous_potato, 24);
-        add(Items.golden_carrot, 1844.444);
+        add(Items.golden_carrot, 1844.4445);
         add(Items.pumpkin_pie, 208);
     }
 
@@ -506,13 +506,13 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Items.potionitem, 1, 16420), 730);
         add(new ItemStack(Items.potionitem, 1, 16452), 762);
         add(new ItemStack(Items.potionitem, 1, 8261), null);
-        add(new ItemStack(Items.potionitem, 1, 8229), 2246.444);
+        add(new ItemStack(Items.potionitem, 1, 8229), 2246.4443);
         add(new ItemStack(Items.potionitem, 1, 16453), null);
-        add(new ItemStack(Items.potionitem, 1, 16421), 2438.444);
+        add(new ItemStack(Items.potionitem, 1, 16421), 2438.4443);
         add(new ItemStack(Items.potionitem, 1, 8230), null);
-        add(new ItemStack(Items.potionitem, 1, 8262), 1902.444);
+        add(new ItemStack(Items.potionitem, 1, 8262), 1902.4445);
         add(new ItemStack(Items.potionitem, 1, 16422), null);
-        add(new ItemStack(Items.potionitem, 1, 16454), 2094.444);
+        add(new ItemStack(Items.potionitem, 1, 16454), 2094.4443);
         add(new ItemStack(Items.potionitem, 1, 8232), null);
         add(new ItemStack(Items.potionitem, 1, 8264), 226);
         add(new ItemStack(Items.potionitem, 1, 16424), null);
@@ -536,15 +536,15 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Items.potionitem, 1, 16429), null);
         add(new ItemStack(Items.potionitem, 1, 16461), null);
         add(new ItemStack(Items.potionitem, 1, 8238), null);
-        add(new ItemStack(Items.potionitem, 1, 8270), 2094.444);
+        add(new ItemStack(Items.potionitem, 1, 8270), 2094.4443);
         add(new ItemStack(Items.potionitem, 1, 16430), null);
-        add(new ItemStack(Items.potionitem, 1, 16462), 2286.444);
+        add(new ItemStack(Items.potionitem, 1, 16462), 2286.4443);
         add(Items.glass_bottle, 1);
         add(Items.fermented_spider_eye, 192);
         add(Items.blaze_powder, 768);
         add(Items.magma_cream, 792);
         add(Items.brewing_stand, 1539);
-        add(Items.speckled_melon, 1836.444);
+        add(Items.speckled_melon, 1836.4445);
     }
 
     private void addMaterialsTabTestCases()
@@ -555,7 +555,7 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.iron_ingot, 256);
         add(Items.gold_ingot, 2048);
         add(Items.stick, 4);
-        add(Items.bowl, 4);
+        add(Items.bowl, 6);
         add(Items.string, 12);
         add(Items.feather, 48);
         add(Items.gunpowder, 192);
@@ -588,7 +588,7 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.pumpkin_seeds, 36);
         add(Items.melon_seeds, 16);
         add(Items.blaze_rod, 1536);
-        add(Items.gold_nugget, 227.556);
+        add(Items.gold_nugget, 227.55556);
         add(Items.nether_wart, 24);
         add(Items.emerald, 8192);
         add(Items.nether_star, 24576);

@@ -85,7 +85,7 @@ public class RecipeRegistry
         for (WrappedStack wrappedStack : getRecipeMappings().keySet())
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("- Output: %s, Inputs: ", wrappedStack.toString()));
+            stringBuilder.append(String.format("Output: %s, Inputs: ", wrappedStack.toString()));
             for (List<WrappedStack> listStacks : getRecipeMappings().get(wrappedStack))
             {
                 for (WrappedStack listStack : listStacks)
