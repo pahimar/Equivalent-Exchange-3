@@ -158,6 +158,7 @@ public class Names
         public static final String SET_ITEM_NOT_LEARNABLE = "set-item-not-learnable";
         public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
         public static final String SET_ITEM_NOT_RECOVERABLE = "set-item-not-recoverable";
+        public static final String RUN_TEST = "run-tests";
     }
 
     public static final class AlchemyArrays

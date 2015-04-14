@@ -88,7 +88,7 @@ public class RecipeHelper
                     {
                         WrappedStack oreStack = new WrappedStack(shapedOreRecipe.getInput()[i]);
 
-                        if (oreStack.getWrappedStack() instanceof OreStack)
+                        if (oreStack.getWrappedObject() instanceof OreStack)
                         {
                             recipeInputs.add(oreStack);
                         }
@@ -171,19 +171,19 @@ public class RecipeHelper
 
                     for (WrappedStack collatedStack : collatedStacks)
                     {
-                        if (collatedStack.getWrappedStack() != null)
+                        if (collatedStack.getWrappedObject() != null)
                         {
-                            if (stack.getWrappedStack() instanceof ItemStack && collatedStack.getWrappedStack() instanceof ItemStack)
+                            if (stack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack)
                             {
-                                if (ItemHelper.equals((ItemStack) stack.getWrappedStack(), (ItemStack) collatedStack.getWrappedStack()))
+                                if (ItemHelper.equals((ItemStack) stack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject()))
                                 {
                                     collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;
                                 }
                             }
-                            else if (stack.getWrappedStack() instanceof OreStack && collatedStack.getWrappedStack() instanceof OreStack)
+                            else if (stack.getWrappedObject() instanceof OreStack && collatedStack.getWrappedObject() instanceof OreStack)
                             {
-                                if (OreStack.compareOreNames((OreStack) stack.getWrappedStack(), (OreStack) collatedStack.getWrappedStack()))
+                                if (OreStack.compareOreNames((OreStack) stack.getWrappedObject(), (OreStack) collatedStack.getWrappedObject()))
                                 {
                                     collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;

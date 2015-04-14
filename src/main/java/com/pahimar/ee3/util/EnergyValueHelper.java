@@ -9,10 +9,11 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
+import java.util.Map;
 
 public class EnergyValueHelper
 {
-    public static EnergyValue computeEnergyValueFromRecipe(WrappedStack outputStack, List<WrappedStack> inputStacks)
+    public static EnergyValue computeEnergyValueFromRecipe(Map<WrappedStack, EnergyValue> stackValueMappings, WrappedStack outputStack, List<WrappedStack> inputStacks)
     {
         float computedValue = 0f;
 
@@ -20,9 +21,9 @@ public class EnergyValueHelper
         {
             EnergyValue wrappedStackValue;
             int stackSize = -1;
-            if (wrappedStack.getWrappedStack() instanceof ItemStack)
+            if (wrappedStack.getWrappedObject() instanceof ItemStack)
             {
-                ItemStack itemStack = (ItemStack) wrappedStack.getWrappedStack();
+                ItemStack itemStack = (ItemStack) wrappedStack.getWrappedObject();
 
                 // Check if we are dealing with a potential fluid
                 if (FluidContainerRegistry.getFluidForFilledItem(itemStack) != null)
@@ -30,11 +31,11 @@ public class EnergyValueHelper
                     if (itemStack.getItem().getContainerItem(itemStack) != null)
                     {
                         stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
-                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(FluidContainerRegistry.getFluidForFilledItem(itemStack));
+                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, FluidContainerRegistry.getFluidForFilledItem(itemStack));
                     }
                     else
                     {
-                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
                     }
                 }
                 else if (itemStack.getItem().getContainerItem(itemStack) != null)
@@ -43,8 +44,8 @@ public class EnergyValueHelper
 
                     if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && EnergyValueRegistry.getInstance().hasEnergyValue(containerItemStack))
                     {
-                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValue(itemStack).getEnergyValue();
-                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValue(containerItemStack).getEnergyValue();
+                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, itemStack).getEnergyValue();
+                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, containerItemStack).getEnergyValue();
                         wrappedStackValue = new EnergyValue(itemStackValue - containerStackValue);
                     }
                     else
@@ -58,17 +59,17 @@ public class EnergyValueHelper
                 }
                 else if (OreDictionary.getOreIDs(itemStack).length > 0)
                 {
-                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack, true);
+                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack, true);
                 }
                 else
                 {
-                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
                 }
             }
-            else if (wrappedStack.getWrappedStack() instanceof OreStack)
+            else if (wrappedStack.getWrappedObject() instanceof OreStack)
             {
-                OreStack oreStack = (OreStack) wrappedStack.getWrappedStack();
-                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                OreStack oreStack = (OreStack) wrappedStack.getWrappedObject();
+                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
                 for (ItemStack itemStack : OreDictionary.getOres(oreStack.oreName))
                 {
                     if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack))
@@ -79,7 +80,7 @@ public class EnergyValueHelper
             }
             else
             {
-                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack);
+                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
             }
 
             if (wrappedStackValue != null)

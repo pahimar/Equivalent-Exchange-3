@@ -96,7 +96,7 @@ public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackM
                 }
             }
 
-            if (wrappedStack != null && energyValue != null)
+            if (wrappedStack != null)
             {
                 return new EnergyValueStackMapping(wrappedStack, energyValue);
             }

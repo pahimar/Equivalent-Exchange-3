@@ -107,7 +107,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         {
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            if (wrappedStackObject.getWrappedStack() != null)
+            if (wrappedStackObject.getWrappedObject() != null)
             {
                 this.objectType = wrappedStackObject.objectType;
                 this.stackSize = wrappedStackObject.stackSize;
@@ -191,7 +191,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         {
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            if (wrappedStackObject.getWrappedStack() != null)
+            if (wrappedStackObject.getWrappedObject() != null)
             {
                 this.objectType = wrappedStackObject.objectType;
                 this.stackSize = stackSize;
@@ -212,7 +212,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
     }
 
-    public Object getWrappedStack()
+    public Object getWrappedObject()
     {
         return wrappedStack;
     }
@@ -265,31 +265,31 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
     public static NBTTagCompound toNBTTagCompound(WrappedStack wrappedStack)
     {
-        if (wrappedStack != null && wrappedStack.getWrappedStack() != null)
+        if (wrappedStack != null && wrappedStack.getWrappedObject() != null)
         {
             NBTTagCompound wrappedStackTagCompound = new NBTTagCompound();
-            if (wrappedStack.getWrappedStack() instanceof ItemStack)
+            if (wrappedStack.getWrappedObject() instanceof ItemStack)
             {
                 NBTTagCompound wrappedItemTagCompound = new NBTTagCompound();
-                ((ItemStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedItemTagCompound);
+                ((ItemStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedItemTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_type", 0);
                 wrappedStackTagCompound.setTag("wrappedStack_data", wrappedItemTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());
                 return wrappedStackTagCompound;
             }
-            else if (wrappedStack.getWrappedStack() instanceof OreStack)
+            else if (wrappedStack.getWrappedObject() instanceof OreStack)
             {
                 NBTTagCompound wrappedOreTagCompound = new NBTTagCompound();
-                ((OreStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedOreTagCompound);
+                ((OreStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedOreTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_type", 1);
                 wrappedStackTagCompound.setTag("wrappedStack_data", wrappedOreTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());
                 return wrappedStackTagCompound;
             }
-            else if (wrappedStack.getWrappedStack() instanceof FluidStack)
+            else if (wrappedStack.getWrappedObject() instanceof FluidStack)
             {
                 NBTTagCompound wrappedFluidTagCompound = new NBTTagCompound();
-                ((FluidStack) wrappedStack.getWrappedStack()).writeToNBT(wrappedFluidTagCompound);
+                ((FluidStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedFluidTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_type", 2);
                 wrappedStackTagCompound.setTag("wrappedStack_data", wrappedFluidTagCompound);
                 wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());

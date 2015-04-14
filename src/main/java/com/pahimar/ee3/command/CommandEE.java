@@ -82,6 +82,7 @@ public class CommandEE extends CommandBase
         modCommands.add(new CommandSetItemNotLearnable());
         modCommands.add(new CommandSetItemRecoverable());
         modCommands.add(new CommandSetItemNotRecoverable());
+        modCommands.add(new CommandRunTest());
 
         for (CommandBase commandBase : modCommands)
         {

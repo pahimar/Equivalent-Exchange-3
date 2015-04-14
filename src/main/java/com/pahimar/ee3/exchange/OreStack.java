@@ -65,9 +65,7 @@ public class OreStack implements Comparable<OreStack>
         this.stackSize = stackSize;
     }
 
-    // TODO Maybe this should return a List of OreStacks that match the OreDictionary entries this ItemStack belongs to
-    // Ponder and test - changing this could have massive ramifications on DynEV
-    // For now, this returns an OreStack for the first OreDictionary entry the ItemStack is associated with
+    // TODO Refactor away, we shouldn't be building OreStacks from single ItemStacks
     public OreStack(ItemStack itemStack)
     {
         if (itemStack != null && OreDictionary.getOreIDs(itemStack).length > 0)

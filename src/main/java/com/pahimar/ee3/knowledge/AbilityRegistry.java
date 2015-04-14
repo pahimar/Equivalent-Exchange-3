@@ -63,16 +63,16 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             if (isLearnable(wrappedStack) && EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack) != null)
             {
-                if (wrappedStack.getWrappedStack() instanceof OreStack)
+                if (wrappedStack.getWrappedObject() instanceof OreStack)
                 {
-                    for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedStack()).oreName))
+                    for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName))
                     {
                         this.allLearnableItemStacks.add(itemStack);
                     }
                 }
-                else if (wrappedStack.getWrappedStack() instanceof ItemStack)
+                else if (wrappedStack.getWrappedObject() instanceof ItemStack)
                 {
-                    this.allLearnableItemStacks.add((ItemStack) wrappedStack.getWrappedStack());
+                    this.allLearnableItemStacks.add((ItemStack) wrappedStack.getWrappedObject());
                 }
             }
         }

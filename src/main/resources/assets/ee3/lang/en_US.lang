@@ -158,6 +158,9 @@ commands.ee3.set-item-recoverable.usage=/ee3 set-item-recoverable <item> <data> 
 commands.ee3.set-item-recoverable.success=%s set %s as being able to have its energy value recovered
 commands.ee3.set-item-not-recoverable.usage=/ee3 set-item-not-recoverable <item> <data> [dataTag]
 commands.ee3.set-item-not-recoverable.success=%s set %s as not being able to have its energy value recovered
+commands.ee3.run-tests.usage=/ee3 run-tests <file-name>
+commands.ee3.run-tests.success=Executed test file '%s', check server log for results
+commands.ee3.run-tests.notfound=Test file '%s' was not found!
 
 # Tooltips
 tooltip.ee3:belongsTo=Belongs to %s

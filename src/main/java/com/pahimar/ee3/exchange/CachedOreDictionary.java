@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 import com.pahimar.ee3.reference.Comparators;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -16,13 +16,13 @@ public class CachedOreDictionary
     private static CachedOreDictionary cachedOreDictionary = null;
     private ImmutableMap<Integer, String> idToNameMap;
     private ImmutableMap<String, List<ItemStack>> oreNameToItemStackMap;
-    private ImmutableMultimap<ItemStack, String> itemStackToOreNameMap;
+    private ImmutableMultimap<WrappedStack, String> itemStackToOreNameMap;
 
     private CachedOreDictionary()
     {
         Map<Integer, String> idToOreNameMap = new TreeMap<Integer, String>();
         Map<String, List<ItemStack>> nameToStackMap = new TreeMap<String, List<ItemStack>>(Comparators.stringComparator);
-        Multimap<ItemStack, String> stackToNameMultiMap = TreeMultimap.create(ItemHelper.idComparator, Comparators.stringComparator);
+        Multimap<WrappedStack, String> stackToNameMultiMap = TreeMultimap.create(WrappedStack.comparator, Comparators.stringComparator);
 
         for (String oreName : OreDictionary.getOreNames())
         {
@@ -33,7 +33,7 @@ public class CachedOreDictionary
 
             for (ItemStack itemStack : oreNameItemStacks)
             {
-                stackToNameMultiMap.put(itemStack, oreName);
+                stackToNameMultiMap.put(new WrappedStack(itemStack), oreName);
             }
         }
 
@@ -70,14 +70,23 @@ public class CachedOreDictionary
     public List<String> getOreNamesForItemStack(ItemStack itemStack)
     {
         List<String> oreNameList = new ArrayList<String>();
-        if (itemStackToOreNameMap.containsKey(itemStack))
+        WrappedStack wrappedStack = new WrappedStack(itemStack);
+        if (itemStackToOreNameMap.containsKey(wrappedStack))
         {
-            for (String oreName : itemStackToOreNameMap.get(itemStack))
+            for (String oreName : itemStackToOreNameMap.get(wrappedStack))
             {
                 oreNameList.add(oreName);
             }
         }
 
         return oreNameList;
+    }
+
+    public void dumpCachedOreDictionaryToLog()
+    {
+        for (String oreName : CachedOreDictionary.getInstance().getOreNames())
+        {
+            LogHelper.info(String.format("OreName: %s, ItemStacks: %s", oreName, CachedOreDictionary.getInstance().getItemStacksForOreName(oreName)));
+        }
     }
 }

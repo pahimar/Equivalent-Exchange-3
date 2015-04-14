@@ -3,6 +3,7 @@ package com.pahimar.ee3.tileentity;
 import com.pahimar.ee3.api.AlchemyArray;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
@@ -357,7 +358,7 @@ public class TileEntityAlchemyArray extends TileEntityEE implements ISidedInvent
             alchemyArray = AlchemyArray.readArrayFromNBT(alchemyArrayTagCompound);
             try
             {
-                Class clazz = Class.forName(alchemyArray.getClassName());
+                Class clazz = Class.forName(alchemyArray.getClassName(), true, Loader.instance().getModClassLoader());
                 alchemyArray = (AlchemyArray) clazz.getConstructor().newInstance();
                 alchemyArray.readFromNBT(alchemyArrayTagCompound);
             }

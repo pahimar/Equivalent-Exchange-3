@@ -1,0 +1,6595 @@
+[
+  {
+    "wrappedStack": {
+      "wrappedStack_stackSize": 1
+    },
+    "energyValue": {
+      "value": 1536.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:grass",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dirt",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dirt",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cobblestone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:planks",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sapling",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bedrock",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sand",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gravel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gold_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:coal_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sponge",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:glass",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lapis_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 864.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lapis_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 7776.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dispenser",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 87.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sandstone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sandstone",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sandstone",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:noteblock",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 96.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_rail",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2054.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:detector_rail",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 261.666
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sticky_piston",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 340.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:web",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:tallgrass",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:tallgrass",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:deadbush",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:piston",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 316.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 48.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wool",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 56.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:yellow_flower",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_flower",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:brown_mushroom",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:red_mushroom",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gold_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 18432.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2304.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 0.5
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 2.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 0.5
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 128.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 0.5
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 2.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_slab",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 512.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:brick_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:tnt",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 964.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bookshelf",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 528.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:mossy_cobblestone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:obsidian",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 64.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:torch",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:oak_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chest",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 64.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 73728.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:crafting_table",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:furnace",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ladder",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 9.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:rail",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 96.25
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.5
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lever",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 5.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_pressure_plate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_pressure_plate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:redstone_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:redstone_torch",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 36.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_button",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:snow_layer",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 0.125
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ice",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:snow",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cactus",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:clay",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:jukebox",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fence",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:pumpkin",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 144.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:netherrack",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:soul_sand",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 49.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:glowstone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1536.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lit_pumpkin",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 153.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:trapdoor",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 48.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 1
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 2
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 3
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 4
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:monster_egg",
+        "itemDamage": 5
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stonebrick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stonebrick",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stonebrick",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stonebrick",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_bars",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 96.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:glass_pane",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 0.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:melon_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 144.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:vine",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fence_gate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:brick_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 384.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_brick_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.5
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:mycelium",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:waterlily",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:nether_brick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:nether_brick_fence",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:nether_brick_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 6.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:enchanting_table",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16800.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:end_portal_frame",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:end_stone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:redstone_lamp",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1664.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_slab",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sandstone_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 6.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:emerald_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ender_chest",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2304.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:tripwire_hook",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 134.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:emerald_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 73728.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spruce_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:birch_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:jungle_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:beacon",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24773.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cobblestone_wall",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cobblestone_wall",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_button",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:anvil",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 7936.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:anvil",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 5290.666
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:anvil",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 2645.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:trapped_chest",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 198.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:light_weighted_pressure_plate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4096.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:heavy_weighted_pressure_plate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 512.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:daylight_detector",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 783.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:redstone_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 288.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz_ore",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:hopper",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1344.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1024.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz_block",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1024.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz_block",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 1024.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1536.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:activator_rail",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 263.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dropper",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 39.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_hardened_clay",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 257.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stained_glass_pane",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 3.375
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves2",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leaves2",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log2",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:log2",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:acacia_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dark_oak_stairs",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:hay_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 216.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carpet",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 37.333
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:hardened_clay",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:coal_block",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 288.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:packed_ice",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:double_plant",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_shovel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 264.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_pickaxe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 776.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_axe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 776.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:flint_and_steel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 260.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:apple",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bow",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 48.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:arrow",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 14.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:coal",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:coal",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_ingot",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gold_ingot",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_sword",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 516.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_sword",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 20.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_shovel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_pickaxe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_axe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_sword",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 6.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_shovel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 9.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_pickaxe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 11.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_axe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 11.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_sword",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16388.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_shovel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8200.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_pickaxe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24584.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_axe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24584.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bowl",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:mushroom_stew",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 68.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_sword",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4100.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_shovel",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2056.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_pickaxe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 6152.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_axe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 6152.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:string",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 12.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:feather",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 48.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gunpowder",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wooden_hoe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:stone_hoe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 10.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_hoe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 520.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_hoe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16392.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_hoe",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4104.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wheat_seeds",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:wheat",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bread",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 72.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leather_helmet",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 320.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leather_chestplate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 512.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leather_leggings",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 448.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leather_boots",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chainmail_helmet",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chainmail_chestplate",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chainmail_leggings",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chainmail_boots",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_helmet",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1280.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_chestplate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_leggings",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1792.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_boots",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1024.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_helmet",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 40960.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_chestplate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 65536.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_leggings",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 57344.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_boots",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32768.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_helmet",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 10240.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_chestplate",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16384.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_leggings",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 14336.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_boots",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:flint",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:porkchop",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cooked_porkchop",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:painting",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 80.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_apple",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16408.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_apple",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 147480.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sign",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 52.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bucket",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 768.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:water_bucket",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 769.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lava_bucket",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 832.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:minecart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1280.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:saddle",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:redstone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:snowball",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 0.25
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:boat",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 40.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:leather",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 64.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:milk_bucket",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 832.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:brick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 64.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:clay_ball",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 64.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:reeds",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:paper",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:book",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 160.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:slime_ball",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chest_minecart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1344.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:furnace_minecart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1288.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:egg",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:compass",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1056.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fishing_rod",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 36.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:clock",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8224.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:glowstone_dust",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 384.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fish",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fish",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fish",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fish",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cooked_fished",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cooked_fished",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 1
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 2
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 3
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 4
+      }
+    },
+    "energyValue": {
+      "value": 864.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 5
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 6
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 7
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 8
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 9
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 10
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 11
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 12
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 13
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 14
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:dye",
+        "itemDamage": 15
+      }
+    },
+    "energyValue": {
+      "value": 8.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:bone",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:sugar",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 32.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cake",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 360.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:repeater",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 107.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cookie",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 7.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:shears",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 512.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:melon",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:pumpkin_seeds",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 36.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:melon_seeds",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 16.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:beef",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cooked_beef",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:chicken",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:cooked_chicken",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:rotten_flesh",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ender_pearl",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1024.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:blaze_rod",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1536.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ghast_tear",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 4096.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:gold_nugget",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 227.556
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:nether_wart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16
+      }
+    },
+    "energyValue": {
+      "value": 26.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8193
+      }
+    },
+    "energyValue": {
+      "value": 4122.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8194
+      }
+    },
+    "energyValue": {
+      "value": 58.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8196
+      }
+    },
+    "energyValue": {
+      "value": 154.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8201
+      }
+    },
+    "energyValue": {
+      "value": 794.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8225
+      }
+    },
+    "energyValue": {
+      "value": 4506.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8226
+      }
+    },
+    "energyValue": {
+      "value": 442.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8227
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8228
+      }
+    },
+    "energyValue": {
+      "value": 538.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8229
+      }
+    },
+    "energyValue": {
+      "value": 2246.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8230
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8232
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8233
+      }
+    },
+    "energyValue": {
+      "value": 1178.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8234
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8236
+      }
+    },
+    "energyValue": {
+      "value": 730.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8237
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8238
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8257
+      }
+    },
+    "energyValue": {
+      "value": 4154.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8258
+      }
+    },
+    "energyValue": {
+      "value": 90.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8259
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8260
+      }
+    },
+    "energyValue": {
+      "value": 570.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8261
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8262
+      }
+    },
+    "energyValue": {
+      "value": 1902.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8264
+      }
+    },
+    "energyValue": {
+      "value": 226.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8265
+      }
+    },
+    "energyValue": {
+      "value": 826.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8266
+      }
+    },
+    "energyValue": {
+      "value": 634.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8268
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8269
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 8270
+      }
+    },
+    "energyValue": {
+      "value": 2094.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16385
+      }
+    },
+    "energyValue": {
+      "value": 4314.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16386
+      }
+    },
+    "energyValue": {
+      "value": 250.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16388
+      }
+    },
+    "energyValue": {
+      "value": 346.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16393
+      }
+    },
+    "energyValue": {
+      "value": 986.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16417
+      }
+    },
+    "energyValue": {
+      "value": 4698.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16418
+      }
+    },
+    "energyValue": {
+      "value": 634.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16419
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16420
+      }
+    },
+    "energyValue": {
+      "value": 730.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16421
+      }
+    },
+    "energyValue": {
+      "value": 2438.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16422
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16424
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16425
+      }
+    },
+    "energyValue": {
+      "value": 1370.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16426
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16428
+      }
+    },
+    "energyValue": {
+      "value": 922.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16429
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16430
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16449
+      }
+    },
+    "energyValue": {
+      "value": 4346.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16450
+      }
+    },
+    "energyValue": {
+      "value": 282.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16451
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16452
+      }
+    },
+    "energyValue": {
+      "value": 762.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16453
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16454
+      }
+    },
+    "energyValue": {
+      "value": 2094.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16456
+      }
+    },
+    "energyValue": {
+      "value": 418.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16457
+      }
+    },
+    "energyValue": {
+      "value": 1018.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16458
+      }
+    },
+    "energyValue": {
+      "value": 826.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16460
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16461
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potion",
+        "itemDamage": 16462
+      }
+    },
+    "energyValue": {
+      "value": 2286.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:glass_bottle",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spider_eye",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 128.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fermented_spider_eye",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:blaze_powder",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 768.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:magma_cream",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 792.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:brewing_stand",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1539.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:ender_eye",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1792.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:speckled_melon",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1836.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 50
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 51
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 52
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 54
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 55
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 56
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 57
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 58
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 59
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 60
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 61
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 62
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 65
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 66
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 90
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 91
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 92
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 93
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 94
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 95
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 96
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 97
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 98
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 99
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 100
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:spawn_egg",
+        "itemDamage": 120
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:experience_bottle",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:fire_charge",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 330.666
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:writable_book",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 216.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:emerald",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 8192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:flower_pot",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 192.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carrot",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:potato",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:baked_potato",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:poisonous_potato",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:map",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1312.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_carrot",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1844.444
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:carrot_on_a_stick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 60.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:nether_star",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 24576.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:pumpkin_pie",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 208.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:firework_charge",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:enchanted_book",
+        "itemDamage": 32767
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:comparator",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 367.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:netherbrick",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 1.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:quartz",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 256.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:tnt_minecart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2244.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:hopper_minecart",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2624.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:iron_horse_armor",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:golden_horse_armor",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:diamond_horse_armor",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:lead",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 72.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:name_tag",
+        "itemDamage": 0
+      }
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_13",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_cat",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_blocks",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_chirp",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_far",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_mellohi",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_stal",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_strad",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_ward",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_11",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  },
+  {
+    "wrappedStack": {
+      "wrappedStack_type": "itemstack",
+      "wrappedStack_stackSize": 1,
+      "wrappedStack_data": {
+        "itemName": "minecraft:record_wait",
+        "itemDamage": 0
+      }
+    },
+    "energyValue": {
+      "value": 2048.0
+    }
+  }
+]

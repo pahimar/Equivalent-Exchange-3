@@ -48,20 +48,20 @@ public class RecipeAludel
 
     private static boolean compareStacks(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
     {
-        if (wrappedStack1 != null && wrappedStack1.getWrappedStack() != null && wrappedStack2 != null && wrappedStack2.getWrappedStack() != null)
+        if (wrappedStack1 != null && wrappedStack1.getWrappedObject() != null && wrappedStack2 != null && wrappedStack2.getWrappedObject() != null)
         {
-            if (wrappedStack1.getWrappedStack() instanceof ItemStack && wrappedStack2.getWrappedStack() instanceof ItemStack)
+            if (wrappedStack1.getWrappedObject() instanceof ItemStack && wrappedStack2.getWrappedObject() instanceof ItemStack)
             {
-                ItemStack itemStack1 = (ItemStack) wrappedStack1.getWrappedStack();
+                ItemStack itemStack1 = (ItemStack) wrappedStack1.getWrappedObject();
                 itemStack1.stackSize = wrappedStack1.getStackSize();
-                ItemStack itemStack2 = (ItemStack) wrappedStack2.getWrappedStack();
+                ItemStack itemStack2 = (ItemStack) wrappedStack2.getWrappedObject();
                 itemStack2.stackSize = wrappedStack2.getStackSize();
 
                 return compareItemStacks(itemStack1, itemStack2);
             }
-            else if (wrappedStack1.getWrappedStack() instanceof OreStack && wrappedStack2.getWrappedStack() instanceof OreStack)
+            else if (wrappedStack1.getWrappedObject() instanceof OreStack && wrappedStack2.getWrappedObject() instanceof OreStack)
             {
-                if (((OreStack) wrappedStack1.getWrappedStack()).oreName.equalsIgnoreCase(((OreStack) wrappedStack2.getWrappedStack()).oreName))
+                if (((OreStack) wrappedStack1.getWrappedObject()).oreName.equalsIgnoreCase(((OreStack) wrappedStack2.getWrappedObject()).oreName))
                 {
                     return wrappedStack2.getStackSize() >= wrappedStack1.getStackSize();
                 }

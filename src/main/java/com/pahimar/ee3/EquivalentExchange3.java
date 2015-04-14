@@ -15,6 +15,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.test.EnergyValueMappingsTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -26,6 +27,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class EquivalentExchange3
@@ -161,5 +164,15 @@ public class EquivalentExchange3
     public TileEntityDataHelper getTileEntityDataHelper()
     {
         return TileEntityDataHelper.getInstance();
+    }
+
+    public void runEnergyValueMappingTest(File file)
+    {
+        runEnergyValueMappingTest(file, false);
+    }
+
+    public void runEnergyValueMappingTest(File file, boolean strict)
+    {
+        new EnergyValueMappingsTestSuite(file).runTestSuite(strict);
     }
 }
