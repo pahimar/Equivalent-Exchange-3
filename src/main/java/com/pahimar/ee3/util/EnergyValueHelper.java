@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -110,11 +111,11 @@ public class EnergyValueHelper
     {
         if ((Float.compare(factor, 0f) != 0) && (energyValue != null))
         {
-            return new EnergyValue(energyValue.getEnergyValue() * 1f / factor);
+            return new EnergyValue(new BigDecimal(energyValue.getEnergyValue() * 1f / factor).setScale(3, BigDecimal.ROUND_HALF_EVEN).floatValue());
         }
         else
         {
-            return energyValue;
+            return null;
         }
     }
 } 

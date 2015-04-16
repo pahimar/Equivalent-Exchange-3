@@ -15,6 +15,7 @@ public class EnergyValues
     {
         // OreDictionary assignment
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("cobblestone")), 1);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stone")), 1);
 
         String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
         for (int i = 0; i < dyes.length; i++)
@@ -41,10 +42,10 @@ public class EnergyValues
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("slabWood")), 4);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stairWood")), 12);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stickWood")), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("stone")), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("leaves")), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("sapling")), 32);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("treeLeaves")), 1);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("treeSapling")), 32);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("sandstone")), 4);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(new OreStack("sand")), 1);
 
         // Fluids
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new WrappedStack(FluidRegistry.WATER), 1);

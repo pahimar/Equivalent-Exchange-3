@@ -1,6 +1,6 @@
 package com.pahimar.ee3.item.crafting;
 
-import com.pahimar.ee3.exchange.OreStack;
+
 import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -21,23 +21,8 @@ public class RecipeAludel
         this.dustStack = dustStack.copy();
     }
 
-    public RecipeAludel(ItemStack recipeOutput, OreStack inputStack, ItemStack dustStack)
-    {
-        this.recipeOutput = recipeOutput.copy();
-        this.inputStack = new WrappedStack(inputStack);
-        this.dustStack = dustStack.copy();
-    }
-
     public boolean matches(ItemStack inputStack, ItemStack dustStack)
     {
-        if (OreDictionary.getOreIDs(inputStack).length > 0)
-        {
-            if (matches(new WrappedStack(new OreStack(inputStack)), dustStack))
-            {
-                return matches(new WrappedStack(new OreStack(inputStack)), dustStack);
-            }
-        }
-
         return matches(new WrappedStack(inputStack), dustStack);
     }
 
@@ -58,13 +43,6 @@ public class RecipeAludel
                 itemStack2.stackSize = wrappedStack2.getStackSize();
 
                 return compareItemStacks(itemStack1, itemStack2);
-            }
-            else if (wrappedStack1.getWrappedObject() instanceof OreStack && wrappedStack2.getWrappedObject() instanceof OreStack)
-            {
-                if (((OreStack) wrappedStack1.getWrappedObject()).oreName.equalsIgnoreCase(((OreStack) wrappedStack2.getWrappedObject()).oreName))
-                {
-                    return wrappedStack2.getStackSize() >= wrappedStack1.getStackSize();
-                }
             }
         }
 

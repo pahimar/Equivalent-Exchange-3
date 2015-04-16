@@ -31,8 +31,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preAssignedMappings;
-    private static Map<WrappedStack, EnergyValue> postAssignedExactMappings;
-    private static Map<WrappedStack, List<WrappedStack>> postAssignedDependentMappings;
+    private static Map<WrappedStack, EnergyValue> postAssignedMappings;
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
 
@@ -95,9 +94,9 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
     public void addPostAssignedExactEnergyValue(Object object, EnergyValue energyValue)
     {
-        if (postAssignedExactMappings == null)
+        if (postAssignedMappings == null)
         {
-            postAssignedExactMappings = new TreeMap<WrappedStack, EnergyValue>();
+            postAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getEnergyValue(), 0f) > 0)
@@ -109,40 +108,8 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
                 WrappedStack factoredWrappedStack = new WrappedStack(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
-                postAssignedExactMappings.put(factoredWrappedStack, factoredEnergyValue);
+                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
             }
-        }
-    }
-
-    public void addPostAssignedDependentEnergyValue(Object object, List objects)
-    {
-        if (postAssignedDependentMappings == null)
-        {
-            postAssignedDependentMappings = new TreeMap<WrappedStack, List<WrappedStack>>();
-        }
-
-        if (!WrappedStack.canBeWrapped(object))
-        {
-            return;
-        }
-        WrappedStack wrappedStack = new WrappedStack(object);
-
-        List<WrappedStack> wrappedStacks = new ArrayList<WrappedStack>();
-        for (Object obj : objects)
-        {
-            if (!WrappedStack.canBeWrapped(obj))
-            {
-                return;
-            }
-            else
-            {
-                wrappedStacks.add(new WrappedStack(obj));
-            }
-        }
-
-        if (wrappedStacks.size() > 0)
-        {
-            postAssignedDependentMappings.put(wrappedStack, wrappedStacks);
         }
     }
 
@@ -211,13 +178,14 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
                         ItemStack wrappedItemStack = (ItemStack) wrappedObject;
 
                         /**
-                         *  The ItemStack does not have a direct"mapping, so check if it is a member of an OreDictionary
+                         *  The ItemStack does not have a direct mapping, so check if it is a member of an OreDictionary
                          *  entry. If it is a member of only one OreDictionary entry, check if that OreStack has a direct
                          *  mapping
                          */
-                        if (CachedOreDictionary.getInstance().getOreNamesForItemStack(wrappedItemStack).size() == 1)
+                        //                        if (CachedOreDictionary.getInstance().getOreNamesForItemStack(wrappedItemStack).size() == 1)
+                        if (OreDictionary.getOreIDs(wrappedItemStack).length == 1)
                         {
-                            OreStack oreStack = new OreStack(wrappedItemStack);
+                            OreStack oreStack = new OreStack(OreDictionary.getOreName(OreDictionary.getOreIDs(wrappedItemStack)[0]));
 
                             if (stackEnergyValueMap.containsKey(new WrappedStack(oreStack)))
                             {
@@ -378,51 +346,19 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
         LogHelper.info(String.format("Finished dynamic value computation (computed %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
 
-        //        /*
-        //         *  Post-assigned values
-        //         */
-        //        if (postAssignedDependentMappings != null)
-        //        {
-        //           for (WrappedStack wrappedStack : postAssignedDependentMappings.keySet())
-        //           {
-        //               boolean allItemsHaveValues = true;
-        //               float computedValue = 0f;
-        //               for (WrappedStack stack : postAssignedDependentMappings.get(wrappedStack))
-        //               {
-        //                   if (getStoredEnergyValue(stack) != null)
-        //                   {
-        //                       computedValue += getStoredEnergyValue(stack).getStoredEnergyValue() * stack.getStackSize();
-        //                   }
-        //                   else
-        //                   {
-        //                       allItemsHaveValues = false;
-        //                   }
-        //               }
-        //
-        //               if (allItemsHaveValues)
-        //               {
-        //                   stackValueMap.put(wrappedStack, new EnergyValue(computedValue));
-        //               }
-        //           }
-        //        }
-        //        else
-        //        {
-        //            postAssignedDependentMappings = new HashMap<WrappedStack, List<WrappedStack>>();
-        //        }
-
-        if (postAssignedExactMappings != null)
+        if (postAssignedMappings != null)
         {
-            for (WrappedStack wrappedStack : postAssignedExactMappings.keySet())
+            for (WrappedStack wrappedStack : postAssignedMappings.keySet())
             {
-                if (postAssignedExactMappings.get(wrappedStack) != null)
+                if (postAssignedMappings.get(wrappedStack) != null)
                 {
-                    stackValueMap.put(wrappedStack, postAssignedExactMappings.get(wrappedStack));
+                    stackValueMap.put(wrappedStack, postAssignedMappings.get(wrappedStack));
                 }
             }
         }
         else
         {
-            postAssignedExactMappings = new TreeMap<WrappedStack, EnergyValue>();
+            postAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         // Grab custom post-assigned values from file
@@ -844,18 +780,9 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
         else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT)
         {
-            LogHelper.info("POST-ASSIGNED VALUES (DEPENDENT)");
-            if (this.postAssignedDependentMappings != null)
+            if (this.postAssignedMappings != null)
             {
-                for (WrappedStack wrappedStack : this.postAssignedDependentMappings.keySet())
-                {
-                    LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
-                }
-            }
-            LogHelper.info("POST-ASSIGNED VALUES (EXACT)");
-            if (this.postAssignedExactMappings != null)
-            {
-                for (WrappedStack wrappedStack : this.postAssignedExactMappings.keySet())
+                for (WrappedStack wrappedStack : this.postAssignedMappings.keySet())
                 {
                     LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
                 }

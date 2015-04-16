@@ -71,11 +71,19 @@ public class CachedOreDictionary
     {
         List<String> oreNameList = new ArrayList<String>();
         WrappedStack wrappedStack = new WrappedStack(itemStack);
+
         if (itemStackToOreNameMap.containsKey(wrappedStack))
         {
             for (String oreName : itemStackToOreNameMap.get(wrappedStack))
             {
                 oreNameList.add(oreName);
+            }
+        }
+        else
+        {
+            for (WrappedStack wrappedStack1 : itemStackToOreNameMap.keySet())
+            {
+
             }
         }
 

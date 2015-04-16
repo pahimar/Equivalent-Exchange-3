@@ -2,7 +2,6 @@ package com.pahimar.ee3.recipe;
 
 import com.google.common.collect.ImmutableList;
 import com.pahimar.ee3.api.RecipeRegistryProxy;
-import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import net.minecraft.item.ItemStack;
 
@@ -41,11 +40,6 @@ public class AludelRecipeManager
         {
             aludelRecipes.add(recipeAludel);
         }
-    }
-
-    public void addRecipe(ItemStack recipeOutput, OreStack recipeInputStack, ItemStack recipeInputDust)
-    {
-        addRecipe(new RecipeAludel(recipeOutput, recipeInputStack, recipeInputDust));
     }
 
     public ItemStack getResult(ItemStack recipeInputStack, ItemStack recipeInputDust)

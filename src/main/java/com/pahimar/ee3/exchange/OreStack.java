@@ -3,7 +3,6 @@ package com.pahimar.ee3.exchange;
 import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
 
@@ -63,16 +62,6 @@ public class OreStack implements Comparable<OreStack>
     {
         this.oreName = oreName;
         this.stackSize = stackSize;
-    }
-
-    // TODO Refactor away, we shouldn't be building OreStacks from single ItemStacks
-    public OreStack(ItemStack itemStack)
-    {
-        if (itemStack != null && OreDictionary.getOreIDs(itemStack).length > 0)
-        {
-            this.oreName = OreDictionary.getOreName(OreDictionary.getOreIDs(itemStack)[0]);
-            this.stackSize = itemStack.stackSize;
-        }
     }
 
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2)
