@@ -14,22 +14,12 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
 
     public EnergyValue()
     {
-        this(0f);
+        this(0);
     }
 
-    public EnergyValue(int energyValue)
+    public EnergyValue(Number energyValue)
     {
-        this((float) energyValue);
-    }
-
-    public EnergyValue(double energyValue)
-    {
-        this((float) energyValue);
-    }
-
-    public EnergyValue(float energyValue)
-    {
-        this.energyValue = energyValue;
+        this.energyValue = energyValue.floatValue();
     }
 
     @Override
@@ -49,7 +39,7 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
     {
         if (energyValue != null)
         {
-            return Float.compare(this.energyValue, energyValue.getEnergyValue());
+            return Float.compare(this.energyValue, energyValue.getValue());
         }
         else
         {
@@ -57,56 +47,14 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         }
     }
 
-    public float getEnergyValue()
+    public float getValue()
     {
         return this.energyValue;
     }
 
-    public void add(int energyValue)
-    {
-        this.add((float) energyValue);
-    }
-
-    public void add(float energyValue)
-    {
-        if (energyValue >= 0f)
-        {
-            this.energyValue += energyValue;
-        }
-    }
-
-    public void add(EnergyValue energyValue)
-    {
-        if (energyValue != null && energyValue.energyValue >= 0f)
-        {
-            this.energyValue += energyValue.energyValue;
-        }
-    }
-
-    public void subtract(int energyValue)
-    {
-        this.subtract((float) energyValue);
-    }
-
-    public void subtract(float energyValue)
-    {
-        if (this.energyValue - energyValue >= 0f)
-        {
-            this.energyValue -= energyValue;
-        }
-    }
-
-    public void subtract(EnergyValue energyValue)
-    {
-        if (energyValue != null && (this.energyValue - energyValue.energyValue) >= 0f)
-        {
-            this.energyValue -= energyValue.energyValue;
-        }
-    }
-
     public IChatComponent getChatComponent()
     {
-        return new ChatComponentText("" + this.getEnergyValue());
+        return new ChatComponentText("" + this.getValue());
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)

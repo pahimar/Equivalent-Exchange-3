@@ -31,18 +31,21 @@ public class EnergyValueMappingsTestSuite
 
     public void add(Object object, Object value)
     {
-        if (WrappedStack.canBeWrapped(object) && value instanceof Number)
+        if (WrappedStack.canBeWrapped(object))
         {
-            Number number = (Number) value;
-            WrappedStack wrappedStack = new WrappedStack(object);
-            wrappedStack.setStackSize(1);
-            testSuiteValueMap.put(wrappedStack, new EnergyValue(number.floatValue()));
-        }
-        else if (value == null)
-        {
-            WrappedStack wrappedStack = new WrappedStack(object);
-            wrappedStack.setStackSize(1);
-            testSuiteValueMap.put(wrappedStack, null);
+            if (value instanceof Number)
+            {
+                Number number = (Number) value;
+                WrappedStack wrappedStack = WrappedStack.wrap(object);
+                wrappedStack.setStackSize(1);
+                testSuiteValueMap.put(wrappedStack, new EnergyValue(number.floatValue()));
+            }
+            else if (value == null)
+            {
+                WrappedStack wrappedStack = WrappedStack.wrap(object);
+                wrappedStack.setStackSize(1);
+                testSuiteValueMap.put(wrappedStack, null);
+            }
         }
     }
 
@@ -50,7 +53,7 @@ public class EnergyValueMappingsTestSuite
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            WrappedStack wrappedStack = new WrappedStack(object);
+            WrappedStack wrappedStack = WrappedStack.wrap(object);
             wrappedStack.setStackSize(1);
             testSuiteValueMap.remove(wrappedStack);
         }

@@ -44,8 +44,14 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     {
         super();
         rotation = ForgeDirection.UNKNOWN;
+        availableEnergyValue = new EnergyValue(0);
         storedEnergyValue = new EnergyValue(0);
         inventory = new ItemStack[INVENTORY_SIZE];
+    }
+
+    public EnergyValue getAvailableEnergyValue()
+    {
+        return availableEnergyValue;
     }
 
     public EnergyValue getStoredEnergyValue()
@@ -53,22 +59,17 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         return storedEnergyValue;
     }
 
-    public void setStoredEnergyValue(EnergyValue storedEnergyValue)
-    {
-        this.storedEnergyValue = storedEnergyValue;
-    }
-
     public void updateEnergyValueFromInventory()
     {
-        float newEnergyValue = 0f;
+        float newEnergyValue = storedEnergyValue.getValue();
         for (int i = 0; i <= STONE_INDEX; i++)
         {
             if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
             {
-                newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValue(inventory[i]).getEnergyValue() * inventory[i].stackSize;
+                newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValueForStack(inventory[i]).getValue();
             }
         }
-        this.storedEnergyValue = new EnergyValue(newEnergyValue);
+        this.availableEnergyValue = new EnergyValue(newEnergyValue);
     }
 
     public ForgeDirection getRotation()

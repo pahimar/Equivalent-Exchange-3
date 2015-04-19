@@ -92,6 +92,9 @@ tile.ee3:alchemyArray.name=Alchemy Array
 tile.ee3:dummyArray.name=Alchemy Array
 tile.ee3:transmutationTablet.name=Transmutation Tablet
 
+# Fluids
+fluid.ee3.milk=Milk
+
 # Alchemy Arrays
 arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
 arrays.ee3:transmutation=Transmutation Alchemy Array [WIP]

@@ -17,13 +17,13 @@ public class RecipeAludel
     public RecipeAludel(ItemStack recipeOutput, ItemStack inputStack, ItemStack dustStack)
     {
         this.recipeOutput = recipeOutput.copy();
-        this.inputStack = new WrappedStack(inputStack);
+        this.inputStack = WrappedStack.wrap(inputStack);
         this.dustStack = dustStack.copy();
     }
 
     public boolean matches(ItemStack inputStack, ItemStack dustStack)
     {
-        return matches(new WrappedStack(inputStack), dustStack);
+        return matches(WrappedStack.wrap(inputStack), dustStack);
     }
 
     public boolean matches(WrappedStack inputStack, ItemStack dustStack)
@@ -82,14 +82,14 @@ public class RecipeAludel
 
     public WrappedStack[] getRecipeInputs()
     {
-        return new WrappedStack[]{inputStack, new WrappedStack(dustStack)};
+        return new WrappedStack[]{inputStack, WrappedStack.wrap(dustStack)};
     }
 
     public List<WrappedStack> getRecipeInputsAsWrappedStacks()
     {
         List<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
-        recipeInputs.add(new WrappedStack(inputStack));
-        recipeInputs.add(new WrappedStack(dustStack));
+        recipeInputs.add(WrappedStack.wrap(inputStack));
+        recipeInputs.add(WrappedStack.wrap(dustStack));
         return recipeInputs;
     }
 

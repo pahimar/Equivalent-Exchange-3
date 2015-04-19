@@ -1,5 +1,6 @@
 package com.pahimar.ee3.util;
 
+import com.pahimar.ee3.reference.Names;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -11,8 +12,6 @@ import java.util.Comparator;
 
 public class FluidHelper
 {
-
-    // TODO Possible problem with comparator
     public static Comparator<FluidStack> comparator = new Comparator<FluidStack>()
     {
 
@@ -84,7 +83,7 @@ public class FluidHelper
         // Register Milk in the FluidRegistry if it hasn't already been done
         if (!FluidRegistry.isFluidRegistered("milk"))
         {
-            Fluid milk = new Fluid("milk").setUnlocalizedName(Items.milk_bucket.getUnlocalizedName());
+            Fluid milk = new Fluid("milk").setUnlocalizedName(Names.Fluids.MILK);
             FluidRegistry.registerFluid(milk);
             FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
         }

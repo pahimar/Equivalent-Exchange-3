@@ -108,12 +108,12 @@ public class FilterUtils
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, EnergyValue energyValue)
     {
-        return filterByEnergyValue(unfilteredCollection, energyValue.getEnergyValue());
+        return filterByEnergyValue(unfilteredCollection, energyValue.getValue());
     }
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, EnergyValue energyValue, Comparator<ItemStack> comparator)
     {
-        return filterByEnergyValue(unfilteredCollection, energyValue.getEnergyValue(), comparator);
+        return filterByEnergyValue(unfilteredCollection, energyValue.getValue(), comparator);
     }
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> unfilteredCollection, float energyValue)
@@ -124,7 +124,7 @@ public class FilterUtils
         {
             if (energyValue > 0f && EnergyValueRegistryProxy.hasEnergyValue(itemStack))
             {
-                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getEnergyValue() <= energyValue)
+                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getValue() <= energyValue)
                 {
                     sortedSet.add(itemStack);
                 }
@@ -142,7 +142,7 @@ public class FilterUtils
         {
             if (energyValue > 0f && EnergyValueRegistryProxy.hasEnergyValue(itemStack))
             {
-                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getEnergyValue() <= energyValue)
+                if (EnergyValueRegistryProxy.getEnergyValue(itemStack).getValue() <= energyValue)
                 {
                     sortedSet.add(itemStack);
                 }

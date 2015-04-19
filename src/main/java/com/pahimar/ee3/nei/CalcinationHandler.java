@@ -180,7 +180,7 @@ public class CalcinationHandler extends TemplateRecipeHandler
 
         if (cRecipe != null && cRecipe.minEnergyValue != null && cRecipe.maxEnergyValue != null && EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)) != null)
         {
-            drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2", (cRecipe.minEnergyValue.getEnergyValue() > 1 ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getEnergyValue()) : "0"), (cRecipe.maxEnergyValue.getEnergyValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getEnergyValue() ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getEnergyValue()) : "\u221E")), 83, 95, 0x404040, false);
+            drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2", (cRecipe.minEnergyValue.getValue() > 1 ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getValue()) : "0"), (cRecipe.maxEnergyValue.getValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getValue() ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getValue()) : "\u221E")), 83, 95, 0x404040, false);
         }
     }
 

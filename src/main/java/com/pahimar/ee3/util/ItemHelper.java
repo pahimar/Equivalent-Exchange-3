@@ -129,7 +129,7 @@ public class ItemHelper
             {
                 if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack1) && EnergyValueRegistry.getInstance().hasEnergyValue(itemStack2))
                 {
-                    return Float.compare(EnergyValueRegistry.getInstance().getEnergyValue(itemStack1).getEnergyValue(), EnergyValueRegistry.getInstance().getEnergyValue(itemStack2).getEnergyValue());
+                    return Float.compare(EnergyValueRegistry.getInstance().getEnergyValue(itemStack1).getValue(), EnergyValueRegistry.getInstance().getEnergyValue(itemStack2).getValue());
                 }
                 else
                 {

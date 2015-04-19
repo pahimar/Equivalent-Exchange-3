@@ -30,7 +30,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         wrappedStack = null;
     }
 
-    public WrappedStack(Object object)
+    private WrappedStack(Object object)
     {
         if (object instanceof Item)
         {
@@ -128,7 +128,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
     }
 
-    public WrappedStack(Object object, int stackSize)
+    private WrappedStack(Object object, int stackSize)
     {
         if (object instanceof Item)
         {
@@ -329,6 +329,26 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
 
         return new WrappedStack();
+    }
+
+    public static WrappedStack wrap(Object object)
+    {
+        if (canBeWrapped(object))
+        {
+            return new WrappedStack(object);
+        }
+
+        return null;
+    }
+
+    public static WrappedStack wrap(Object object, int stackSize)
+    {
+        if (canBeWrapped(object))
+        {
+            return new WrappedStack(object, stackSize);
+        }
+
+        return null;
     }
 
     public static WrappedStack createFromJson(String jsonWrappedObject) throws JsonParseException
@@ -560,7 +580,15 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
     {
         if (wrappedStack instanceof ItemStack)
         {
-            return ItemHelper.toString((ItemStack) wrappedStack);
+            ItemStack itemStack = (ItemStack) wrappedStack;
+            if (itemStack.hasTagCompound())
+            {
+                return String.format("%sxitemStack[%s@%s:%s]", stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
+            }
+            else
+            {
+                return String.format("%sxitemStack[%s@%s]", stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
+            }
         }
         else if (wrappedStack instanceof OreStack)
         {
@@ -574,7 +602,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
         else
         {
-            return "null";
+            return "null-wrappedstack";
         }
     }
 

@@ -55,6 +55,11 @@ public class Names
         public static final String POTION_LETHE = "potionLethe";
     }
 
+    public static final class Fluids
+    {
+        public static final String MILK = "ee3.milk";
+    }
+
     public static final class Materials
     {
         public static final String DARK_MATTER = "matterDark";

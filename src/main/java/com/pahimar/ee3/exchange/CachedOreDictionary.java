@@ -33,7 +33,7 @@ public class CachedOreDictionary
 
             for (ItemStack itemStack : oreNameItemStacks)
             {
-                stackToNameMultiMap.put(new WrappedStack(itemStack), oreName);
+                stackToNameMultiMap.put(WrappedStack.wrap(itemStack), oreName);
             }
         }
 
@@ -70,7 +70,7 @@ public class CachedOreDictionary
     public List<String> getOreNamesForItemStack(ItemStack itemStack)
     {
         List<String> oreNameList = new ArrayList<String>();
-        WrappedStack wrappedStack = new WrappedStack(itemStack);
+        WrappedStack wrappedStack = WrappedStack.wrap(itemStack);
 
         if (itemStackToOreNameMap.containsKey(wrappedStack))
         {

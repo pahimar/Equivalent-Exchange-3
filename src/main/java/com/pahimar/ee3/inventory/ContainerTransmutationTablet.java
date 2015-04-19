@@ -54,7 +54,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         this.sortOrder = 0;
         this.scrollBarPosition = 0;
-        this.energyValue = tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue();
+        this.energyValue = tileEntityTransmutationTablet.getAvailableEnergyValue().getValue();
 
         this.addSlotToContainer(new SlotTabletInput(this, tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_1, 62, 24));
         this.addSlotToContainer(new SlotTabletInput(this, tileEntityTransmutationTablet, TileEntityTransmutationTablet.ITEM_INPUT_2, 35, 35));
@@ -115,11 +115,11 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             ICrafting iCrafting = (ICrafting) crafter;
 
-            if (this.energyValue != this.tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue())
+            if (this.energyValue != this.tileEntityTransmutationTablet.getAvailableEnergyValue().getValue())
             {
-                this.energyValue = this.tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue();
+                this.energyValue = this.tileEntityTransmutationTablet.getAvailableEnergyValue().getValue();
                 this.updateInventory();
-                int energyValueAsInt = Float.floatToRawIntBits(this.tileEntityTransmutationTablet.getStoredEnergyValue().getEnergyValue());
+                int energyValueAsInt = Float.floatToRawIntBits(this.tileEntityTransmutationTablet.getAvailableEnergyValue().getValue());
                 iCrafting.sendProgressBarUpdate(this, 0, energyValueAsInt & 0xffff);
                 iCrafting.sendProgressBarUpdate(this, 1, energyValueAsInt >>> 16);
             }

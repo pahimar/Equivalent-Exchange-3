@@ -49,7 +49,7 @@ public class RecipeHelper
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new WrappedStack(itemStack));
+                    recipeInputs.add(WrappedStack.wrap(itemStack));
                 }
             }
         }
@@ -68,7 +68,7 @@ public class RecipeHelper
                         itemStack.stackSize = 1;
                     }
 
-                    recipeInputs.add(new WrappedStack(itemStack));
+                    recipeInputs.add(WrappedStack.wrap(itemStack));
                 }
             }
         }
@@ -76,7 +76,6 @@ public class RecipeHelper
         {
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
 
-            //            if (validateShapedOreDictionaryRecipe(shapedOreRecipe.getInput()))
             if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput())))
             {
                 for (int i = 0; i < shapedOreRecipe.getInput().length; i++)
@@ -86,16 +85,15 @@ public class RecipeHelper
                  */
                     if (shapedOreRecipe.getInput()[i] instanceof ArrayList)
                     {
-                        WrappedStack oreStack = new WrappedStack(shapedOreRecipe.getInput()[i]);
+                        WrappedStack oreStack = WrappedStack.wrap(shapedOreRecipe.getInput()[i]);
 
-                        if (oreStack.getWrappedObject() instanceof OreStack)
+                        if (oreStack != null && oreStack.getWrappedObject() instanceof OreStack)
                         {
                             recipeInputs.add(oreStack);
                         }
                     }
                     else if (shapedOreRecipe.getInput()[i] instanceof ItemStack)
                     {
-
                         ItemStack itemStack = ((ItemStack) shapedOreRecipe.getInput()[i]).copy();
 
                         if (itemStack.stackSize > 1)
@@ -103,7 +101,7 @@ public class RecipeHelper
                             itemStack.stackSize = 1;
                         }
 
-                        recipeInputs.add(new WrappedStack(itemStack));
+                        recipeInputs.add(WrappedStack.wrap(itemStack));
                     }
                 }
             }
@@ -119,7 +117,7 @@ public class RecipeHelper
 
                     if (object instanceof ArrayList)
                     {
-                        recipeInputs.add(new WrappedStack(object));
+                        recipeInputs.add(WrappedStack.wrap(object));
                     }
                     else if (object instanceof ItemStack)
                     {
@@ -131,7 +129,7 @@ public class RecipeHelper
                             itemStack.stackSize = 1;
                         }
 
-                        recipeInputs.add(new WrappedStack(itemStack));
+                        recipeInputs.add(WrappedStack.wrap(itemStack));
                     }
                 }
             }
@@ -159,8 +157,7 @@ public class RecipeHelper
 
             if (WrappedStack.canBeWrapped(object))
             {
-
-                stack = new WrappedStack(object);
+                stack = WrappedStack.wrap(object);
 
                 if (collatedStacks.isEmpty())
                 {
@@ -215,10 +212,9 @@ public class RecipeHelper
     {
         for (Object object : objects)
         {
-            if (object instanceof ArrayList)
+            if (object != null)
             {
-                ArrayList list = (ArrayList) object;
-                if (list.isEmpty())
+                if (!WrappedStack.canBeWrapped(object))
                 {
                     return false;
                 }

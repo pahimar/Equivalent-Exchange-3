@@ -92,7 +92,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            WrappedStack wrappedObject = new WrappedStack(object);
+            WrappedStack wrappedObject = WrappedStack.wrap(object);
             return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
         }
 
@@ -103,7 +103,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notLearnableSet.remove(new WrappedStack(object));
+            hasBeenModified = notLearnableSet.remove(WrappedStack.wrap(object));
         }
     }
 
@@ -111,7 +111,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notLearnableSet.add(new WrappedStack(object));
+            hasBeenModified = notLearnableSet.add(WrappedStack.wrap(object));
         }
     }
 
@@ -124,7 +124,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            WrappedStack wrappedObject = new WrappedStack(object);
+            WrappedStack wrappedObject = WrappedStack.wrap(object);
             return !notRecoverableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
         }
 
@@ -135,7 +135,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notRecoverableSet.remove(new WrappedStack(object));
+            hasBeenModified = notRecoverableSet.remove(WrappedStack.wrap(object));
         }
     }
 
@@ -143,7 +143,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notRecoverableSet.add(new WrappedStack(object));
+            hasBeenModified = notRecoverableSet.add(WrappedStack.wrap(object));
         }
     }
 

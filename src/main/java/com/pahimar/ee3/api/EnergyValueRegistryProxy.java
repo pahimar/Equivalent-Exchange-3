@@ -10,14 +10,9 @@ public final class EnergyValueRegistryProxy
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static void addPreAssignedEnergyValue(Object object, int energyValue)
+    public static void addPreAssignedEnergyValue(Object object, Number energyValue)
     {
-        addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
-    }
-
-    public static void addPreAssignedEnergyValue(Object object, float energyValue)
-    {
-        addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
+        addPreAssignedEnergyValue(object, new EnergyValue(energyValue.floatValue()));
     }
 
     public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
@@ -30,14 +25,9 @@ public final class EnergyValueRegistryProxy
         }
     }
 
-    public static void addPostAssignedEnergyValue(Object object, int energyValue)
+    public static void addPostAssignedEnergyValue(Object object, Number energyValue)
     {
-        addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
-    }
-
-    public static void addPostAssignedEnergyValue(Object object, float energyValue)
-    {
-        addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
+        addPostAssignedEnergyValue(object, new EnergyValue(energyValue.floatValue()));
     }
 
     public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
@@ -84,15 +74,26 @@ public final class EnergyValueRegistryProxy
         return null;
     }
 
-
-    public static List getStacksInRange(int start, int finish)
+    public static EnergyValue getEnergyValueForStack(Object object)
     {
-        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+        return getEnergyValueForStack(object, false);
     }
 
-    public static List getStacksInRange(float start, float finish)
+    public static EnergyValue getEnergyValueForStack(Object object, boolean strict)
     {
-        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+        init();
+
+        if (ee3Mod != null)
+        {
+            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValueForStack(object, strict);
+        }
+
+        return null;
+    }
+
+    public static List getStacksInRange(Number start, Number finish)
+    {
+        return getStacksInRange(new EnergyValue(start.floatValue()), new EnergyValue(finish.floatValue()));
     }
 
     public static List getStacksInRange(EnergyValue start, EnergyValue finish)

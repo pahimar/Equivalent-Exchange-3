@@ -33,27 +33,25 @@ public class RecipeRegistry
 
     public void addRecipe(Object recipeOutput, List<?> recipeInputList)
     {
-        // Verify that the recipe output object can be wrapped
-        if (!WrappedStack.canBeWrapped(recipeOutput))
+        // Wrap the recipe output
+        WrappedStack wrappedRecipeOutput = WrappedStack.wrap(recipeOutput);
+        if (wrappedRecipeOutput == null)
         {
             return;
         }
 
-        // Verify that every recipe input object can be wrapped
-        for (Object recipeInputObject : recipeInputList)
-        {
-            if (!WrappedStack.canBeWrapped(recipeInputObject))
-            {
-                return;
-            }
-        }
-
-        // Wrap the recipe output
-        WrappedStack wrappedRecipeOutput = new WrappedStack(recipeOutput);
         List<WrappedStack> wrappedRecipeInputList = new ArrayList<WrappedStack>();
         for (Object recipeInputObject : recipeInputList)
         {
-            wrappedRecipeInputList.add(new WrappedStack(recipeInputObject));
+            WrappedStack wrappedInputObject = WrappedStack.wrap(recipeInputObject);
+            if (wrappedInputObject != null)
+            {
+                wrappedRecipeInputList.add(wrappedInputObject);
+            }
+            else
+            {
+                return;
+            }
         }
 
         // Add the recipe mapping only if we don't already have it

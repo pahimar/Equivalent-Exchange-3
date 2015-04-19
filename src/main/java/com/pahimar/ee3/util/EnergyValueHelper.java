@@ -31,7 +31,7 @@ public class EnergyValueHelper
                 {
                     if (itemStack.getItem().getContainerItem(itemStack) != null)
                     {
-                        stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount;
+                        stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount * wrappedStack.getStackSize();
                         wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, FluidContainerRegistry.getFluidForFilledItem(itemStack));
                     }
                     else
@@ -45,8 +45,8 @@ public class EnergyValueHelper
 
                     if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && EnergyValueRegistry.getInstance().hasEnergyValue(containerItemStack))
                     {
-                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, itemStack).getEnergyValue();
-                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, containerItemStack).getEnergyValue();
+                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, itemStack).getValue();
+                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, containerItemStack).getValue();
                         wrappedStackValue = new EnergyValue(itemStackValue - containerStackValue);
                     }
                     else
@@ -91,7 +91,7 @@ public class EnergyValueHelper
                     stackSize = wrappedStack.getStackSize();
                 }
 
-                computedValue += wrappedStackValue.getEnergyValue() * stackSize;
+                computedValue += wrappedStackValue.getValue() * stackSize;
             }
             else
             {
@@ -111,7 +111,7 @@ public class EnergyValueHelper
     {
         if ((Float.compare(factor, 0f) != 0) && (energyValue != null))
         {
-            return new EnergyValue(new BigDecimal(energyValue.getEnergyValue() * 1f / factor).setScale(3, BigDecimal.ROUND_HALF_EVEN).floatValue());
+            return new EnergyValue(new BigDecimal(energyValue.getValue() * 1f / factor).setScale(3, BigDecimal.ROUND_HALF_EVEN).floatValue());
         }
         else
         {

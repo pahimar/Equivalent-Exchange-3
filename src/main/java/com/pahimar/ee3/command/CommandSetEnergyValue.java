@@ -88,10 +88,10 @@ public class CommandSetEnergyValue extends CommandBase
                 }
             }
 
-            WrappedStack wrappedStack = new WrappedStack(itemStack);
+            WrappedStack wrappedStack = WrappedStack.wrap(itemStack);
             EnergyValue newEnergyValue = new EnergyValue(energyValue);
 
-            if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getEnergyValue(), 0) > 0)
+            if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getValue(), 0) > 0)
             {
                 if (args[1].equalsIgnoreCase("pre"))
                 {
