@@ -272,27 +272,27 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             {
                 NBTTagCompound wrappedItemTagCompound = new NBTTagCompound();
                 ((ItemStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedItemTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_type", 0);
-                wrappedStackTagCompound.setTag("wrappedStack_data", wrappedItemTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());
+                wrappedStackTagCompound.setInteger("type", 0);
+                wrappedStackTagCompound.setTag("objectData", wrappedItemTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
                 return wrappedStackTagCompound;
             }
             else if (wrappedStack.getWrappedObject() instanceof OreStack)
             {
                 NBTTagCompound wrappedOreTagCompound = new NBTTagCompound();
                 ((OreStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedOreTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_type", 1);
-                wrappedStackTagCompound.setTag("wrappedStack_data", wrappedOreTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());
+                wrappedStackTagCompound.setInteger("type", 1);
+                wrappedStackTagCompound.setTag("objectData", wrappedOreTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
                 return wrappedStackTagCompound;
             }
             else if (wrappedStack.getWrappedObject() instanceof FluidStack)
             {
                 NBTTagCompound wrappedFluidTagCompound = new NBTTagCompound();
                 ((FluidStack) wrappedStack.getWrappedObject()).writeToNBT(wrappedFluidTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_type", 2);
-                wrappedStackTagCompound.setTag("wrappedStack_data", wrappedFluidTagCompound);
-                wrappedStackTagCompound.setInteger("wrappedStack_stackSize", wrappedStack.getStackSize());
+                wrappedStackTagCompound.setInteger("type", 2);
+                wrappedStackTagCompound.setTag("objectData", wrappedFluidTagCompound);
+                wrappedStackTagCompound.setInteger("stackSize", wrappedStack.getStackSize());
                 return wrappedStackTagCompound;
             }
         }
@@ -302,24 +302,24 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
     public static WrappedStack fromNBTTagCompound(NBTTagCompound nbtTagCompound)
     {
-        if (nbtTagCompound.hasKey("wrappedStack_type") && nbtTagCompound.hasKey("wrappedStack_data") && nbtTagCompound.hasKey("wrappedStack_stackSize"))
+        if (nbtTagCompound.hasKey("type") && nbtTagCompound.hasKey("objectData") && nbtTagCompound.hasKey("stackSize"))
         {
-            int objectType = nbtTagCompound.getInteger("wrappedStack_type");
-            int stackSize = nbtTagCompound.getInteger("wrappedStack_stackSize");
+            int objectType = nbtTagCompound.getInteger("type");
+            int stackSize = nbtTagCompound.getInteger("stackSize");
 
             if (objectType == 0)
             {
-                ItemStack itemStack = ItemStack.loadItemStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack_data"));
+                ItemStack itemStack = ItemStack.loadItemStackFromNBT(nbtTagCompound.getCompoundTag("objectData"));
                 return new WrappedStack(itemStack, stackSize);
             }
             else if (objectType == 1)
             {
-                OreStack oreStack = OreStack.loadOreStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack_data"));
+                OreStack oreStack = OreStack.loadOreStackFromNBT(nbtTagCompound.getCompoundTag("objectData"));
                 return new WrappedStack(oreStack, stackSize);
             }
             else if (objectType == 2)
             {
-                FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(nbtTagCompound.getCompoundTag("wrappedStack_data"));
+                FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(nbtTagCompound.getCompoundTag("objectData"));
                 return new WrappedStack(fluidStack, stackSize);
             }
             else
@@ -401,23 +401,23 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             String objectType = null;
             Object stackObject = null;
 
-            if (jsonWrappedStack.get("wrappedStack_type") != null)
+            if (jsonWrappedStack.get("type") != null)
             {
-                objectType = jsonWrappedStack.get("wrappedStack_type").getAsString();
+                objectType = jsonWrappedStack.get("type").getAsString();
             }
 
-            if (jsonWrappedStack.get("wrappedStack_stackSize") != null)
+            if (jsonWrappedStack.get("stackSize") != null)
             {
-                stackSize = jsonWrappedStack.get("wrappedStack_stackSize").getAsInt();
+                stackSize = jsonWrappedStack.get("stackSize").getAsInt();
             }
 
-            if (jsonWrappedStack.get("wrappedStack_data") != null && !jsonWrappedStack.get("wrappedStack_data").isJsonPrimitive())
+            if (jsonWrappedStack.get("objectData") != null && !jsonWrappedStack.get("objectData").isJsonPrimitive())
             {
                 if (objectType != null)
                 {
                     if (objectType.equalsIgnoreCase("ItemStack"))
                     {
-                        JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack_data"), JsonItemStack.class);
+                        JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), JsonItemStack.class);
                         ItemStack itemStack = null;
                         Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
                         if (stackSize > 0 && item != null)
@@ -432,7 +432,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                     }
                     else if (objectType.equalsIgnoreCase("OreStack"))
                     {
-                        OreStack oreStack = jsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack_data"), OreStack.class);
+                        OreStack oreStack = jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), OreStack.class);
 
                         if (stackSize > 0)
                         {
@@ -442,7 +442,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                     }
                     else if (objectType.equalsIgnoreCase("FluidStack"))
                     {
-                        FluidStack fluidStack = jsonSerializer.fromJson(jsonWrappedStack.get("wrappedStack_data"), FluidStack.class);
+                        FluidStack fluidStack = jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), FluidStack.class);
 
                         if (stackSize > 0)
                         {
@@ -490,8 +490,8 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         Gson gson = new Gson();
 
-        jsonWrappedStack.addProperty("wrappedStack_type", wrappedStack.objectType);
-        jsonWrappedStack.addProperty("wrappedStack_stackSize", wrappedStack.stackSize);
+        jsonWrappedStack.addProperty("type", wrappedStack.objectType);
+        jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
 
         if (wrappedStack.wrappedStack instanceof ItemStack)
         {
@@ -502,15 +502,15 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             {
                 jsonItemStack.itemNBTTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
             }
-            jsonWrappedStack.add("wrappedStack_data", JsonItemStack.jsonSerializer.toJsonTree(jsonItemStack, JsonItemStack.class));
+            jsonWrappedStack.add("objectData", JsonItemStack.jsonSerializer.toJsonTree(jsonItemStack, JsonItemStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof OreStack)
         {
-            jsonWrappedStack.add("wrappedStack_data", gson.toJsonTree(wrappedStack.wrappedStack, OreStack.class));
+            jsonWrappedStack.add("objectData", gson.toJsonTree(wrappedStack.wrappedStack, OreStack.class));
         }
         else if (wrappedStack.wrappedStack instanceof FluidStack)
         {
-            jsonWrappedStack.add("wrappedStack_data", gson.toJsonTree(wrappedStack.wrappedStack, FluidStack.class));
+            jsonWrappedStack.add("objectData", gson.toJsonTree(wrappedStack.wrappedStack, FluidStack.class));
         }
 
         return jsonWrappedStack;

@@ -241,6 +241,13 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                     return null;
                 }
             }
+            else if (slotIndex >= TileEntityTransmutationTablet.INVENTORY_SIZE && slotIndex < 40)
+            {
+                //                if (!this.mergeItemStackFromTransmutationOutput(slotItemStack, TileEntityTransmutationTablet.INVENTORY_SIZE, inventorySlots.size(), false))
+                //                {
+                return null;
+                //                }
+            }
             else
             {
                 if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
@@ -277,6 +284,21 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
 
         return itemStack;
+    }
+
+    @Override
+    public ItemStack slotClick(int slotIndex, int mouseButton, int shiftPressed, EntityPlayer entityPlayer)
+    {
+        if (slotIndex < TileEntityTransmutationTablet.INVENTORY_SIZE)
+        {
+            return super.slotClick(slotIndex, mouseButton, shiftPressed, entityPlayer);
+        }
+        else
+        {
+            return super.slotClick(slotIndex, mouseButton, shiftPressed, entityPlayer);
+        }
+
+        //        return null;
     }
 
     @Override
@@ -395,13 +417,14 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean canTakeStack(EntityPlayer entityPlayer)
         {
-            return false;
+            return true;
         }
 
         @Override
         public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
         {
             super.onPickupFromSlot(entityPlayer, itemStack);
+            this.containerTransmutationTablet.tileEntityTransmutationTablet.consumeInventoryForEnergyValue(itemStack);
             this.containerTransmutationTablet.inventoryTransmutationTablet.setInventorySlotContents(this.getSlotIndex(), new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage()));
         }
 

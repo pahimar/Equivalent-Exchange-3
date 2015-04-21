@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class Comparators
 {
-    public static final Comparator[] itemComparators = {ItemHelper.displayNameComparator, ItemHelper.energyValueComparator, ItemHelper.idComparator};
+    public static final Comparator[] itemComparators = {ItemHelper.displayNameComparator, ItemHelper.energyValueItemStackComparator, ItemHelper.idComparator};
 
     public static Comparator<String> stringComparator = new Comparator<String>()
     {

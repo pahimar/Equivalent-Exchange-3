@@ -1,9 +1,13 @@
 package com.pahimar.ee3.test;
 
+import com.pahimar.ee3.reference.Reference;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.io.File;
 
 public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
 {
@@ -594,5 +598,12 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.nether_star, 24576);
         add(Items.netherbrick, 1);
         add(Items.quartz, 256);
+    }
+
+    public void save()
+    {
+        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
+        energyValuesDataDirectory.mkdirs();
+        this.saveTestSuite(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));
     }
 }

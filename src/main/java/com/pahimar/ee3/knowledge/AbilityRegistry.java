@@ -241,7 +241,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         return jsonAbilityRegistry;
     }
 
-    public void saveAbilityRegistryToFile()
+    public void save()
     {
         if (abilityDirectory != null)
         {

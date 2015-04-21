@@ -1,6 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.item.ItemAlchemicalTome;
@@ -59,14 +60,53 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         return storedEnergyValue;
     }
 
+    public void consumeInventoryForEnergyValue(ItemStack outputItemStack)
+    {
+        EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputItemStack);
+
+        /**
+         *  Algorithm:
+         *
+         *  1) Check the Stone slot, and attempt to take EMC out of the stone there (til 0)
+         *  2) Search the inventory for items that will most make up the difference, decrement them and consume their EMC
+         *  3) Repeat 2 until Stored EMC > outputItemStack EMC
+         *  4) Profit
+         */
+
+        if (this.storedEnergyValue.compareTo(outputEnergyValue) >= 0)
+        {
+            this.storedEnergyValue = new EnergyValue(this.storedEnergyValue.getValue() - outputEnergyValue.getValue());
+        }
+        else
+        {
+            while (this.storedEnergyValue.compareTo(outputEnergyValue) < 0)
+            {
+                int candidateSlotIndex = Integer.MIN_VALUE;
+                float candidateEnergyValue = Float.MIN_VALUE;
+
+                for (int i = 0; i < STONE_INDEX; i++)
+                {
+                    // Sick as hell algorithm that solves everything and makes me look cool on a skateboard
+                }
+            }
+
+            if (this.storedEnergyValue.getValue() >= outputEnergyValue.getValue())
+            {
+                this.storedEnergyValue = new EnergyValue(this.storedEnergyValue.getValue() - outputEnergyValue.getValue());
+            }
+        }
+
+        updateEnergyValueFromInventory();
+    }
+
     public void updateEnergyValueFromInventory()
     {
         float newEnergyValue = storedEnergyValue.getValue();
         for (int i = 0; i <= STONE_INDEX; i++)
         {
-            if (inventory[i] != null && EnergyValueRegistry.getInstance().hasEnergyValue(inventory[i]))
+            if (inventory[i] != null && EnergyValueRegistryProxy.hasEnergyValue(inventory[i]))
             {
-                newEnergyValue += EnergyValueRegistry.getInstance().getEnergyValueForStack(inventory[i]).getValue();
+                newEnergyValue += EnergyValueRegistryProxy.getEnergyValueForStack(inventory[i]).getValue();
             }
         }
         this.availableEnergyValue = new EnergyValue(newEnergyValue);

@@ -14,7 +14,7 @@ public class AbilityRegistrySerializationHandler
         {
             if (FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getWorldTime() % 600 == 0)
             {
-                AbilityRegistry.getInstance().saveAbilityRegistryToFile();
+                AbilityRegistry.getInstance().save();
             }
         }
     }

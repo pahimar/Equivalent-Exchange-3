@@ -120,7 +120,7 @@ public class ItemHelper
         }
     };
 
-    public static Comparator<ItemStack> energyValueComparator = new Comparator<ItemStack>()
+    public static Comparator<ItemStack> energyValueItemStackComparator = new Comparator<ItemStack>()
     {
         @Override
         public int compare(ItemStack itemStack1, ItemStack itemStack2)

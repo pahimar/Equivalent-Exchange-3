@@ -124,11 +124,9 @@ public class EquivalentExchange3
     {
         WorldEventHandler.hasInitilialized = false;
 
-        EnergyValueRegistry.getInstance().saveEnergyValueRegistryToFile();
-
+        EnergyValueRegistry.getInstance().save();
         TransmutationKnowledgeRegistry.getInstance().saveAll();
-
-        AbilityRegistry.getInstance().saveAbilityRegistryToFile();
+        AbilityRegistry.getInstance().save();
     }
 
     public EnergyValueRegistry getEnergyValueRegistry()

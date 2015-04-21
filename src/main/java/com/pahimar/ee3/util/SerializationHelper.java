@@ -243,7 +243,7 @@ public class SerializationHelper
             jsonWriter.beginArray();
             for (WrappedStack wrappedStack : energyValueMap.keySet())
             {
-                if (wrappedStack.getWrappedObject() != null)
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null)
                 {
                     EnergyValueStackMapping.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
                 }

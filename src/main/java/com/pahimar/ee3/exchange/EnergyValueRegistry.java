@@ -458,7 +458,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
         // Serialize values to disk
         LogHelper.info("Saving energy values to disk");
-        saveEnergyValueRegistryToFile();
+        save();
     }
 
     private void generateValueStackMappings()
@@ -707,7 +707,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         return valueMappings;
     }
 
-    public void saveEnergyValueRegistryToFile()
+    public void save()
     {
         File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
         energyValuesDataDirectory.mkdirs();
@@ -715,16 +715,28 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         if (shouldRegenNextRestart)
         {
             File staticEnergyValuesFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES);
+            File staticEnergyValuesJsonFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON);
             File md5EnergyValuesFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".dat");
+            File md5EnergyValuesJsonFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json");
 
+            // NBT
             if (staticEnergyValuesFile.exists())
             {
                 staticEnergyValuesFile.delete();
             }
-
             if (md5EnergyValuesFile.exists())
             {
                 md5EnergyValuesFile.delete();
+            }
+
+            // JSON
+            if (staticEnergyValuesJsonFile.exists())
+            {
+                staticEnergyValuesJsonFile.delete();
+            }
+            if (md5EnergyValuesJsonFile.exists())
+            {
+                md5EnergyValuesJsonFile.delete();
             }
 
             shouldRegenNextRestart = false;
@@ -733,6 +745,9 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         {
             SerializationHelper.writeNBTToFile(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES, this);
             SerializationHelper.writeNBTToFile(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".dat", this);
+
+            SerializationHelper.writeEnergyValueStackMapToJsonFile(new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON), energyValueRegistry.stackMappings);
+            SerializationHelper.writeEnergyValueStackMapToJsonFile(new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json"), energyValueRegistry.stackMappings);
         }
     }
 
@@ -743,6 +758,9 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
         File staticEnergyValuesFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES);
         File md5EnergyValuesFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".dat");
+
+        File staticEnergyValuesJsonFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON);
+        File md5EnergyValuesJsonFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json");
 
         NBTTagCompound nbtTagCompound = null;
 
