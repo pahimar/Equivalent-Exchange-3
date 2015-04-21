@@ -1,5 +1,6 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;
@@ -243,10 +244,10 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             }
             else if (slotIndex >= TileEntityTransmutationTablet.INVENTORY_SIZE && slotIndex < 40)
             {
-                //                if (!this.mergeItemStackFromTransmutationOutput(slotItemStack, TileEntityTransmutationTablet.INVENTORY_SIZE, inventorySlots.size(), false))
-                //                {
-                return null;
-                //                }
+                if (!this.mergeTransmutationItemStack(slotItemStack, 40, inventorySlots.size(), false))
+                {
+                    return null;
+                }
             }
             else
             {
@@ -286,19 +287,79 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         return itemStack;
     }
 
-    @Override
-    public ItemStack slotClick(int slotIndex, int mouseButton, int shiftPressed, EntityPlayer entityPlayer)
+    protected boolean mergeTransmutationItemStack(ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
     {
-        if (slotIndex < TileEntityTransmutationTablet.INVENTORY_SIZE)
+        if (this.tileEntityTransmutationTablet.getAvailableEnergyValue().compareTo(EnergyValueRegistryProxy.getEnergyValue(itemStack)) < 0)
         {
-            return super.slotClick(slotIndex, mouseButton, shiftPressed, entityPlayer);
-        }
-        else
-        {
-            return super.slotClick(slotIndex, mouseButton, shiftPressed, entityPlayer);
+            return false;
         }
 
-        //        return null;
+        boolean slotFound = false;
+        int currentSlotIndex = ascending ? slotMax - 1 : slotMin;
+
+        Slot slot;
+        ItemStack stackInSlot;
+
+        if (itemStack.isStackable())
+        {
+            while (itemStack.stackSize > 0 && (!ascending && currentSlotIndex < slotMax || ascending && currentSlotIndex >= slotMin))
+            {
+                slot = (Slot) this.inventorySlots.get(currentSlotIndex);
+                stackInSlot = slot.getStack();
+
+                if (slot.isItemValid(itemStack) && ItemHelper.equalsIgnoreStackSize(itemStack, stackInSlot))
+                {
+                    int combinedStackSize = stackInSlot.stackSize + itemStack.stackSize;
+                    int slotStackSizeLimit = Math.min(stackInSlot.getMaxStackSize(), slot.getSlotStackLimit());
+
+                    if (combinedStackSize <= slotStackSizeLimit)
+                    {
+                        itemStack.stackSize = 1;
+                        stackInSlot.stackSize = combinedStackSize;
+                        slot.onSlotChanged();
+                        slotFound = true;
+                    }
+                    else if (stackInSlot.stackSize < slotStackSizeLimit)
+                    {
+                        itemStack.stackSize -= slotStackSizeLimit - stackInSlot.stackSize;
+                        stackInSlot.stackSize = slotStackSizeLimit;
+                        slot.onSlotChanged();
+                        slotFound = true;
+                    }
+                }
+
+                currentSlotIndex += ascending ? -1 : 1;
+            }
+        }
+
+        if (itemStack.stackSize > 0)
+        {
+            currentSlotIndex = ascending ? slotMax - 1 : slotMin;
+
+            while (!ascending && currentSlotIndex < slotMax || ascending && currentSlotIndex >= slotMin)
+            {
+                slot = (Slot) this.inventorySlots.get(currentSlotIndex);
+                stackInSlot = slot.getStack();
+
+                if (slot.isItemValid(itemStack) && stackInSlot == null)
+                {
+                    slot.putStack(ItemHelper.cloneItemStack(itemStack, Math.min(itemStack.stackSize, slot.getSlotStackLimit())));
+                    slot.onSlotChanged();
+
+                    if (slot.getStack() != null)
+                    {
+                        itemStack.stackSize = 0;
+                        slotFound = true;
+                    }
+
+                    break;
+                }
+
+                currentSlotIndex += ascending ? -1 : 1;
+            }
+            itemStack.stackSize = 1;
+        }
+        return slotFound;
     }
 
     @Override
@@ -424,8 +485,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
         {
             super.onPickupFromSlot(entityPlayer, itemStack);
-            this.containerTransmutationTablet.tileEntityTransmutationTablet.consumeInventoryForEnergyValue(itemStack);
-            this.containerTransmutationTablet.inventoryTransmutationTablet.setInventorySlotContents(this.getSlotIndex(), new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage()));
+            //            this.containerTransmutationTablet.tileEntityTransmutationTablet.consumeInventoryForEnergyValue(itemStack);
+            //            this.containerTransmutationTablet.inventoryTransmutationTablet.setInventorySlotContents(this.getSlotIndex(), new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage()));
         }
 
         @Override
