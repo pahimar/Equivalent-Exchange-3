@@ -12,14 +12,12 @@ public class OreStack implements Comparable<OreStack>
     public int stackSize;
     public static Comparator<OreStack> comparator = new Comparator<OreStack>()
     {
-
         @Override
         public int compare(OreStack oreStack1, OreStack oreStack2)
         {
-
-            if (oreStack1 != null)
+            if (oreStack1 != null && oreStack1.oreName != null)
             {
-                if (oreStack2 != null)
+                if (oreStack2 != null && oreStack2.oreName != null)
                 {
                     if (oreStack1.oreName.equalsIgnoreCase(oreStack2.oreName))
                     {

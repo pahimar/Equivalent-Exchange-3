@@ -17,6 +17,7 @@ import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -105,6 +106,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
 
         this.updateInventory();
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityTransmutationTablet != null && this.tileEntityTransmutationTablet.isStructureValid();
     }
 
     @Override
@@ -244,7 +251,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             }
             else if (slotIndex >= TileEntityTransmutationTablet.INVENTORY_SIZE && slotIndex < 40)
             {
-                if (!this.mergeTransmutationItemStack(slotItemStack, 40, inventorySlots.size(), false))
+                if (!this.mergeTransmutatedItemStack(entityPlayer, slot, slotItemStack, 40, inventorySlots.size(), false))
                 {
                     return null;
                 }
@@ -287,12 +294,14 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         return itemStack;
     }
 
-    protected boolean mergeTransmutationItemStack(ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
+    protected boolean mergeTransmutatedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
     {
         if (this.tileEntityTransmutationTablet.getAvailableEnergyValue().compareTo(EnergyValueRegistryProxy.getEnergyValue(itemStack)) < 0)
         {
             return false;
         }
+
+        transmutationOutputSlot.onPickupFromSlot(entityPlayer, itemStack);
 
         boolean slotFound = false;
         int currentSlotIndex = ascending ? slotMax - 1 : slotMin;
@@ -314,7 +323,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
                     if (combinedStackSize <= slotStackSizeLimit)
                     {
-                        itemStack.stackSize = 1;
+                        itemStack.stackSize = 0;
                         stackInSlot.stackSize = combinedStackSize;
                         slot.onSlotChanged();
                         slotFound = true;
@@ -357,8 +366,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
                 currentSlotIndex += ascending ? -1 : 1;
             }
-            itemStack.stackSize = 1;
         }
+        itemStack.stackSize = 1;
         return slotFound;
     }
 
@@ -478,15 +487,29 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean canTakeStack(EntityPlayer entityPlayer)
         {
-            return true;
+            return this.getHasStack();
         }
 
         @Override
         public void onPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack)
         {
             super.onPickupFromSlot(entityPlayer, itemStack);
-            //            this.containerTransmutationTablet.tileEntityTransmutationTablet.consumeInventoryForEnergyValue(itemStack);
-            //            this.containerTransmutationTablet.inventoryTransmutationTablet.setInventorySlotContents(this.getSlotIndex(), new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage()));
+
+            if (this.getHasStack())
+            {
+                this.containerTransmutationTablet.tileEntityTransmutationTablet.consumeInventoryForEnergyValue(itemStack);
+            }
+        }
+
+        @Override
+        public void onSlotChanged()
+        {
+            super.onSlotChanged();
+
+            if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+            {
+                this.containerTransmutationTablet.tileEntityTransmutationTablet.updateEnergyValueFromInventory();
+            }
         }
 
         @Override

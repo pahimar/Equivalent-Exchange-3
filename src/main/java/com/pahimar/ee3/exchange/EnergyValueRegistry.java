@@ -743,7 +743,8 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
         }
         else
         {
-            SerializationHelper.writeNBTToFile(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES, this);
+            //            SerializationHelper.writeNBTToFile(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES, this);
+            SerializationHelper.compressEnergyValueRegistryToFile(new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES));
             SerializationHelper.writeNBTToFile(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".dat", this);
 
             SerializationHelper.writeEnergyValueStackMapToJsonFile(new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON), energyValueRegistry.stackMappings);
@@ -753,6 +754,7 @@ public class EnergyValueRegistry implements INBTTaggable, JsonSerializer<EnergyV
 
     public boolean loadEnergyValueRegistryFromFile()
     {
+        // TODO Come back here
         File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
         energyValuesDataDirectory.mkdirs();
 

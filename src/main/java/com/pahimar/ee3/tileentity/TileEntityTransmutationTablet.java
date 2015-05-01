@@ -79,14 +79,16 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         }
         else
         {
-            while (this.storedEnergyValue.compareTo(outputEnergyValue) < 0)
+            while (this.storedEnergyValue.compareTo(outputEnergyValue) < 0 && this.availableEnergyValue.compareTo(outputEnergyValue) >= 0)
             {
-                int candidateSlotIndex = Integer.MIN_VALUE;
-                float candidateEnergyValue = Float.MIN_VALUE;
-
                 for (int i = 0; i < STONE_INDEX; i++)
                 {
-                    // Sick as hell algorithm that solves everything and makes me look cool on a skateboard
+                    ItemStack stackInSlot = getStackInSlot(i);
+                    if (stackInSlot != null && EnergyValueRegistryProxy.hasEnergyValue(stackInSlot))
+                    {
+                        this.storedEnergyValue = new EnergyValue(this.storedEnergyValue.getValue() + EnergyValueRegistryProxy.getEnergyValue(stackInSlot).getValue());
+                        decrStackSize(i, 1);
+                    }
                 }
             }
 

@@ -3,6 +3,7 @@ package com.pahimar.ee3.util;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
@@ -251,6 +252,35 @@ public class SerializationHelper
 
             jsonWriter.endArray();
             jsonWriter.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void compressEnergyValueStackMapToFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)
+    {
+        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, fileName), energyValueMap);
+    }
+
+    public static void compressEnergyValueStackMapToFile(File file, Map<WrappedStack, EnergyValue> energyValueMap)
+    {
+        try
+        {
+            byte[] energyValueRegistryArray = CompressionHelper.compressStringToByteArray(EnergyValueRegistry.getInstance().toJson());
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(energyValueRegistryArray);
+            fos.close();
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
         }
         catch (IOException e)
         {
