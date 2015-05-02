@@ -1,5 +1,6 @@
 package com.pahimar.ee3.util;
 
+import com.google.common.io.Files;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.EnergyValue;
@@ -286,5 +287,44 @@ public class SerializationHelper
         {
             e.printStackTrace();
         }
+    }
+
+    public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(String fileName)
+    {
+        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        return decompressEnergyValueStackMapFromFile(new File(energyValuesDataDirectory, fileName));
+    }
+
+    public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(File file)
+    {
+        Map<WrappedStack, EnergyValue> energyValueStackMap = new TreeMap<WrappedStack, EnergyValue>();
+
+        try
+        {
+            String jsonEnergyValueStackMap = CompressionHelper.decompressStringFromByteArray(Files.toByteArray(file));
+            JsonReader jsonReader = new JsonReader(new StringReader(jsonEnergyValueStackMap));
+            jsonReader.beginArray();
+            while (jsonReader.hasNext())
+            {
+                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                if (energyValueStackMapping != null)
+                {
+                    energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
+                }
+            }
+            jsonReader.endArray();
+            jsonReader.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return energyValueStackMap;
     }
 }
