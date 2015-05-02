@@ -1,20 +1,25 @@
 package com.pahimar.ee3.network.message;
 
+import com.google.gson.stream.JsonReader;
+import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.EnergyValueStackMapping;
+import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.util.CompressionHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MessageSyncEnergyValues implements IMessage, IMessageHandler<MessageSyncEnergyValues, IMessage>
 {
-    public NBTTagCompound energyValueRegistryNBT;
+    public String jsonEnergyValueRegistry;
 
     public MessageSyncEnergyValues()
     {
@@ -22,8 +27,7 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
     public MessageSyncEnergyValues(EnergyValueRegistry energyValueRegistry)
     {
-        energyValueRegistryNBT = new NBTTagCompound();
-        energyValueRegistry.writeToNBT(energyValueRegistryNBT);
+        this.jsonEnergyValueRegistry = energyValueRegistry.toJson();
     }
 
     /**
@@ -34,24 +38,17 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        byte[] compressedNBT = null;
+        byte[] compressedBytes = null;
         int readableBytes = buf.readInt();
 
         if (readableBytes > 0)
         {
-            compressedNBT = buf.readBytes(readableBytes).array();
+            compressedBytes = buf.readBytes(readableBytes).array();
         }
 
-        if (compressedNBT != null)
+        if (compressedBytes != null)
         {
-            try
-            {
-                this.energyValueRegistryNBT = CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedNBT));
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            this.jsonEnergyValueRegistry = CompressionHelper.decompressStringFromByteArray(compressedBytes);
         }
     }
 
@@ -63,24 +60,17 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public void toBytes(ByteBuf buf)
     {
-        byte[] compressedNBT = null;
+        byte[] compressedBytes = null;
 
-        try
+        if (jsonEnergyValueRegistry != null)
         {
-            if (energyValueRegistryNBT != null)
-            {
-                compressedNBT = CompressedStreamTools.compress(energyValueRegistryNBT);
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+            compressedBytes = CompressionHelper.compressStringToByteArray(jsonEnergyValueRegistry);
         }
 
-        if (compressedNBT != null)
+        if (compressedBytes != null)
         {
-            buf.writeInt(compressedNBT.length);
-            buf.writeBytes(compressedNBT);
+            buf.writeInt(compressedBytes.length);
+            buf.writeBytes(compressedBytes);
         }
         else
         {
@@ -99,9 +89,35 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public IMessage onMessage(MessageSyncEnergyValues message, MessageContext ctx)
     {
-        if (message.energyValueRegistryNBT != null)
+        if (message.jsonEnergyValueRegistry != null)
         {
-            EnergyValueRegistry.getInstance().readFromNBT(message.energyValueRegistryNBT);
+            Map<WrappedStack, EnergyValue> energyValueStackMap = new TreeMap<WrappedStack, EnergyValue>();
+
+            try
+            {
+                JsonReader jsonReader = new JsonReader(new StringReader(message.jsonEnergyValueRegistry));
+                jsonReader.beginArray();
+                while (jsonReader.hasNext())
+                {
+                    EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                    if (energyValueStackMapping != null)
+                    {
+                        energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
+                    }
+                }
+                jsonReader.endArray();
+                jsonReader.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            for (WrappedStack wrappedStack : energyValueStackMap.keySet())
+            {
+                LogHelper.info(String.format("Object: %s, Value: %s", wrappedStack, energyValueStackMap.get(wrappedStack)));
+            }
+            EnergyValueRegistry.getInstance().loadFromMap(energyValueStackMap);
             LogHelper.info("Client successfully received EnergyValues from server");
         }
         else

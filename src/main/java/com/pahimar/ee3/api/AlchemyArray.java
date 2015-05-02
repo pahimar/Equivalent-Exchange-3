@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class AlchemyArray implements Comparable<AlchemyArray>
 {
     private ResourceLocation texture;
-    private String unLocalizedName;
+    private String unlocalizedName;
     private String className;
     private int lightLevel;
     private int chalkPerBlockCost;
@@ -24,10 +24,10 @@ public class AlchemyArray implements Comparable<AlchemyArray>
 
     }
 
-    public AlchemyArray(ResourceLocation texture, String unLocalizedName)
+    public AlchemyArray(ResourceLocation texture, String unlocalizedName)
     {
         this.texture = texture;
-        this.unLocalizedName = unLocalizedName;
+        this.unlocalizedName = unlocalizedName;
         this.chalkPerBlockCost = 1;
         this.lightLevel = 0;
     }
@@ -42,19 +42,19 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         this.texture = texture;
     }
 
-    public String getUnLocalizedName()
+    public String getUnlocalizedName()
     {
-        return unLocalizedName;
+        return unlocalizedName;
     }
 
-    public void setUnLocalizedName(String unLocalizedName)
+    public void setUnlocalizedName(String unlocalizedName)
     {
-        this.unLocalizedName = unLocalizedName;
+        this.unlocalizedName = unlocalizedName;
     }
 
     public String getDisplayName()
     {
-        return StatCollector.translateToLocal(unLocalizedName);
+        return StatCollector.translateToLocal(unlocalizedName);
     }
 
     public int getChalkCostPerBlock()
@@ -90,13 +90,13 @@ public class AlchemyArray implements Comparable<AlchemyArray>
                 this.texture = new ResourceLocation("");
             }
 
-            if (nbtTagCompound.hasKey("unLocalizedName"))
+            if (nbtTagCompound.hasKey("unlocalizedName"))
             {
-                this.unLocalizedName = nbtTagCompound.getString("unLocalizedName");
+                this.unlocalizedName = nbtTagCompound.getString("unlocalizedName");
             }
             else
             {
-                this.unLocalizedName = "";
+                this.unlocalizedName = "";
             }
 
             if (nbtTagCompound.hasKey("className"))
@@ -120,7 +120,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
         else
         {
             this.texture = new ResourceLocation("");
-            this.unLocalizedName = "";
+            this.unlocalizedName = "";
             this.className = "";
             this.lightLevel = 0;
         }
@@ -130,7 +130,7 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     {
         nbtTagCompound.setString("textureDomain", texture.getResourceDomain());
         nbtTagCompound.setString("texturePath", texture.getResourcePath());
-        nbtTagCompound.setString("unLocalizedName", unLocalizedName);
+        nbtTagCompound.setString("unlocalizedName", unlocalizedName);
         nbtTagCompound.setString("className", this.getClass().getCanonicalName());
         nbtTagCompound.setInteger("lightLevel", lightLevel);
     }

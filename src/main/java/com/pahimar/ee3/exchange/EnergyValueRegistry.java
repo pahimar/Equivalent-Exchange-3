@@ -16,8 +16,6 @@ import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -585,24 +583,10 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         return stacksInRange;
     }
 
-    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    public void loadFromMap(Map<WrappedStack, EnergyValue> stackValueMap)
     {
-        if (nbtTagCompound != null && nbtTagCompound.hasKey("stackMappingList"))
+        if (stackValueMap != null)
         {
-            TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
-
-            /**
-             *  Read stack value mappings from NBTTagCompound
-             */
-            NBTTagList stackMappingTagList = nbtTagCompound.getTagList("stackMappingList", 10);
-            for (int i = 0; i < stackMappingTagList.tagCount(); i++)
-            {
-                NBTTagCompound tagCompound = stackMappingTagList.getCompoundTagAt(i);
-                WrappedStack wrappedStack = WrappedStack.fromNBTTagCompound(tagCompound.getCompoundTag("wrappedStack"));
-                EnergyValue energyValue = EnergyValue.loadEnergyValueFromNBT(tagCompound.getCompoundTag("energyValue"));
-                stackValueMap.put(wrappedStack, energyValue);
-            }
-
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(stackValueMap);
             stackMappings = stackMappingsBuilder.build();
@@ -612,23 +596,6 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
              */
             generateValueStackMappings();
         }
-    }
-
-    public void writeToNBT(NBTTagCompound nbtTagCompound)
-    {
-        NBTTagList stackMappingTagList = new NBTTagList();
-        for (WrappedStack wrappedStack : stackMappings.keySet())
-        {
-            if (wrappedStack != null && stackMappings.get(wrappedStack) != null)
-            {
-                NBTTagCompound stackMappingCompound = new NBTTagCompound();
-                stackMappingCompound.setTag("wrappedStack", WrappedStack.toNBTTagCompound(wrappedStack));
-                stackMappingCompound.setTag("energyValue", EnergyValue.writeEnergyValueToNBT(stackMappings.get(wrappedStack)));
-                stackMappingTagList.appendTag(stackMappingCompound);
-            }
-        }
-        nbtTagCompound.setTag("stackMappingList", stackMappingTagList);
-        nbtTagCompound.setString("modListMD5", SerializationHelper.getModListMD5());
     }
 
     public void setEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue)
@@ -740,26 +707,33 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         if (!Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Always"))
         {
-            if (md5EnergyValuesFile.exists())
+            if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("When Mods Change"))
             {
-                LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
-                stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(md5EnergyValuesFile);
+                if (md5EnergyValuesFile.exists())
+                {
+                    LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
+                    stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(md5EnergyValuesFile);
+                }
             }
-
-            if (staticEnergyValuesFile.exists())
+            else if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Never"))
             {
-                LogHelper.info("Attempting to load energy values from file: " + staticEnergyValuesFile.getAbsolutePath());
-                stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(staticEnergyValuesFile);
+                if (staticEnergyValuesFile.exists())
+                {
+                    LogHelper.info("Attempting to load energy values from file: " + staticEnergyValuesFile.getAbsolutePath());
+                    stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(staticEnergyValuesFile);
+                }
+                else if (md5EnergyValuesFile.exists())
+                {
+                    LogHelper.info("Attempting to load energy values from file: " + md5EnergyValuesFile.getAbsolutePath());
+                    stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(md5EnergyValuesFile);
+                }
             }
 
             if (stackValueMap != null)
             {
+                loadFromMap(stackValueMap);
                 LogHelper.info("Successfully loaded energy values from file");
-                for (WrappedStack wrappedStack : stackValueMap.keySet())
-                {
-                    LogHelper.info(String.format("Stack: %s, Value: %s", wrappedStack, stackValueMap.get(wrappedStack)));
-                }
-                return false;
+                return true;
             }
             else
             {
