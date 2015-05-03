@@ -442,7 +442,8 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                     }
                     else if (objectType.equalsIgnoreCase("FluidStack"))
                     {
-                        FluidStack fluidStack = jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), FluidStack.class);
+                        JsonFluidStack jsonFluidStack = JsonFluidStack.jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), JsonFluidStack.class);
+                        FluidStack fluidStack = new FluidStack(jsonFluidStack.fluidID, jsonFluidStack.amount, jsonFluidStack.tag);
 
                         if (stackSize > 0)
                         {
@@ -510,7 +511,8 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
         else if (wrappedStack.wrappedStack instanceof FluidStack)
         {
-            jsonWrappedStack.add("objectData", gson.toJsonTree(wrappedStack.wrappedStack, FluidStack.class));
+            JsonFluidStack jsonFluidStack = new JsonFluidStack((FluidStack) wrappedStack.wrappedStack);
+            jsonWrappedStack.add("objectData", JsonFluidStack.jsonSerializer.toJsonTree(jsonFluidStack, JsonFluidStack.class));
         }
 
         return jsonWrappedStack;
