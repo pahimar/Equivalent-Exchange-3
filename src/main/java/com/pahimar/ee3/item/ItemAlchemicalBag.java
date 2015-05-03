@@ -103,6 +103,7 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
 
             // Set a UUID on the Alchemical Bag, if one doesn't exist already
             NBTHelper.setUUID(itemStack);
+            // TODO Do a scan of inventory and if we find a bag with the same UUID, change it's UUID
             NBTHelper.setBoolean(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN, true);
             entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_BAG.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }

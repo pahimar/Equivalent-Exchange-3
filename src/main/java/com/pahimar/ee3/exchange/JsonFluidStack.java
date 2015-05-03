@@ -5,6 +5,8 @@ import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.lang.reflect.Type;
@@ -13,29 +15,22 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
 {
     public static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(JsonFluidStack.class, new JsonFluidStack()).create();
 
-    public int fluidID;
+    public Fluid fluid;
     public int amount;
     public NBTTagCompound tag;
 
     public JsonFluidStack()
     {
-        this.fluidID = Integer.MIN_VALUE;
+        this.fluid = null;
         this.amount = 0;
         this.tag = null;
     }
 
     public JsonFluidStack(FluidStack fluidStack)
     {
-        this.fluidID = fluidStack.fluidID;
+        this.fluid = fluidStack.getFluid();
         this.amount = fluidStack.amount;
         this.tag = fluidStack.tag;
-    }
-
-    public JsonFluidStack(int fluidID, int amount, NBTTagCompound tag)
-    {
-        this.fluidID = fluidID;
-        this.amount = amount;
-        this.tag = tag;
     }
 
     @Override
@@ -46,9 +41,9 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
             JsonObject jsonObject = (JsonObject) json;
             JsonFluidStack jsonFluidStack = new JsonFluidStack();
 
-            if (jsonObject.has("fluidID"))
+            if (jsonObject.has("fluidName"))
             {
-                jsonFluidStack.fluidID = jsonObject.get("fluidID").getAsInt();
+                jsonFluidStack.fluid = FluidRegistry.getFluid(jsonObject.get("fluidName").getAsString());
             }
             else
             {
@@ -92,7 +87,7 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
     {
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.addProperty("fluidID", src.fluidID);
+        jsonObject.addProperty("fluidName", src.fluid.getName());
         jsonObject.addProperty("amount", src.amount);
 
         if (src.tag != null)
@@ -106,6 +101,6 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
     @Override
     public String toString()
     {
-        return String.format("fluidID: %s, amount: %s, tag: %s", fluidID, amount, tag);
+        return String.format("fluid: %s, amount: %s, tag: %s", fluid, amount, tag);
     }
 }

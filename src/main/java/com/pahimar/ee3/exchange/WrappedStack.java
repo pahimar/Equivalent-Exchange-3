@@ -443,7 +443,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                     else if (objectType.equalsIgnoreCase("FluidStack"))
                     {
                         JsonFluidStack jsonFluidStack = JsonFluidStack.jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), JsonFluidStack.class);
-                        FluidStack fluidStack = new FluidStack(jsonFluidStack.fluidID, jsonFluidStack.amount, jsonFluidStack.tag);
+                        FluidStack fluidStack = new FluidStack(jsonFluidStack.fluid, jsonFluidStack.amount, jsonFluidStack.tag);
 
                         if (stackSize > 0)
                         {

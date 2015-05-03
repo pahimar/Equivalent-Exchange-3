@@ -100,7 +100,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     @Override
     public int getInventoryStackLimit()
     {
-        return 64;
+        return 1;
     }
 
     @Override
