@@ -2,7 +2,9 @@ package com.pahimar.ee3.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.Reference;
+import net.minecraft.item.ItemStack;
 
 public class NEIConfig implements IConfigureNEI
 {
@@ -21,7 +23,6 @@ public class NEIConfig implements IConfigureNEI
     @Override
     public void loadConfig()
     {
-
         AludelRecipeHandler aludelRecipeHandler = new AludelRecipeHandler();
         CalcinationHandler calcinationHandler = new CalcinationHandler();
 
@@ -31,5 +32,8 @@ public class NEIConfig implements IConfigureNEI
         API.registerRecipeHandler(calcinationHandler);
         API.registerUsageHandler(calcinationHandler);
 
+        API.hideItem(new ItemStack(ModBlocks.transmutationTablet));
+        API.hideItem(new ItemStack(ModBlocks.dummyArray));
+        API.hideItem(new ItemStack(ModBlocks.alchemyArray));
     }
 }

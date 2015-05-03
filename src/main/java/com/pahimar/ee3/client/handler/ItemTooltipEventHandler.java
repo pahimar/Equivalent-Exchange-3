@@ -4,6 +4,7 @@ import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
+import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemHelper;
@@ -35,7 +36,7 @@ public class ItemTooltipEventHandler
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event)
     {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerAlchemicalTome))
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && (event.entityPlayer.openContainer instanceof ContainerAlchemicalTome || event.entityPlayer.openContainer instanceof ContainerTransmutationTablet)))
         {
             WrappedStack wrappedItemStack = WrappedStack.wrap(event.itemStack);
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
