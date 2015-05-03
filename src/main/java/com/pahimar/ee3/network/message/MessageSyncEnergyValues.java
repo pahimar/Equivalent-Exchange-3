@@ -113,10 +113,6 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
                 e.printStackTrace();
             }
 
-            for (WrappedStack wrappedStack : energyValueStackMap.keySet())
-            {
-                LogHelper.info(String.format("Object: %s, Value: %s", wrappedStack, energyValueStackMap.get(wrappedStack)));
-            }
             EnergyValueRegistry.getInstance().loadFromMap(energyValueStackMap);
             LogHelper.info("Client successfully received EnergyValues from server");
         }

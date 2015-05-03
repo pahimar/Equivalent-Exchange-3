@@ -10,7 +10,6 @@ import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementSlider;
@@ -29,7 +28,7 @@ public class GuiTransmutationTablet extends GuiBase
     private TileEntityTransmutationTablet tileEntityTransmutationTablet;
 
     private ElementTextField searchTextField;
-    private ElementStatefulButton sortOrderButton;
+    private ElementStatefulButton sortOptionButton;
     private ElementSlider slider;
     protected int tickCount;
 
@@ -62,7 +61,7 @@ public class GuiTransmutationTablet extends GuiBase
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
 
-        sortOrderButton = new ElementStatefulButton(this, 151, 36, "sortOrder", 0, 0, 18, 0, 36, 0, 18, 18, 54, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER)
+        sortOptionButton = new ElementStatefulButton(this, 151, 36, "sortOption", 0, 0, 18, 0, 36, 0, 18, 18, 54, 18, Textures.Gui.Elements.BUTTON_SORT_OPTION)
         {
             @Override
             public void drawBackground(int mouseX, int mouseY, float gameTicks)
@@ -107,7 +106,6 @@ public class GuiTransmutationTablet extends GuiBase
             public boolean onMouseWheel(int mouseX, int mouseY, int movement)
             {
                 PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
-                LogHelper.info(tickCount);
                 return super.onMouseWheel(mouseX, mouseY, movement);
             }
 
@@ -127,7 +125,7 @@ public class GuiTransmutationTablet extends GuiBase
         slider.borderColor = new GuiColor(0, 0, 0, 0).getColor();
         slider.setSliderSize(12, 15);
 
-        addElement(sortOrderButton);
+        addElement(sortOptionButton);
         addElement(searchTextField);
         addElement(slider);
     }
@@ -150,38 +148,38 @@ public class GuiTransmutationTablet extends GuiBase
     @Override
     public void handleElementButtonClick(String buttonName, int mouseButton)
     {
-        if (buttonName.equals("sortOrder"))
+        if (buttonName.equals("sortOption"))
         {
             PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
 
             if (mouseButton == LEFT_MOUSEBUTTON)
             {
-                if (sortOrderButton.getState() == SORT_BY_DISPLAY_NAME)
+                if (sortOptionButton.getState() == SORT_BY_DISPLAY_NAME)
                 {
-                    sortOrderButton.setState(SORT_BY_ENERGY_VALUE);
+                    sortOptionButton.setState(SORT_BY_ENERGY_VALUE);
                 }
-                else if (sortOrderButton.getState() == SORT_BY_ENERGY_VALUE)
+                else if (sortOptionButton.getState() == SORT_BY_ENERGY_VALUE)
                 {
-                    sortOrderButton.setState(SORT_BY_ID);
+                    sortOptionButton.setState(SORT_BY_ID);
                 }
-                else if (sortOrderButton.getState() == SORT_BY_ID)
+                else if (sortOptionButton.getState() == SORT_BY_ID)
                 {
-                    sortOrderButton.setState(SORT_BY_DISPLAY_NAME);
+                    sortOptionButton.setState(SORT_BY_DISPLAY_NAME);
                 }
             }
             else if (mouseButton == RIGHT_MOUSEBUTTON)
             {
-                if (sortOrderButton.getState() == SORT_BY_DISPLAY_NAME)
+                if (sortOptionButton.getState() == SORT_BY_DISPLAY_NAME)
                 {
-                    sortOrderButton.setState(SORT_BY_ID);
+                    sortOptionButton.setState(SORT_BY_ID);
                 }
-                else if (sortOrderButton.getState() == SORT_BY_ENERGY_VALUE)
+                else if (sortOptionButton.getState() == SORT_BY_ENERGY_VALUE)
                 {
-                    sortOrderButton.setState(SORT_BY_DISPLAY_NAME);
+                    sortOptionButton.setState(SORT_BY_DISPLAY_NAME);
                 }
-                else if (sortOrderButton.getState() == SORT_BY_ID)
+                else if (sortOptionButton.getState() == SORT_BY_ID)
                 {
-                    sortOrderButton.setState(SORT_BY_ENERGY_VALUE);
+                    sortOptionButton.setState(SORT_BY_ENERGY_VALUE);
                 }
             }
 
@@ -191,18 +189,18 @@ public class GuiTransmutationTablet extends GuiBase
 
     private void setTooltipByState()
     {
-        sortOrderButton.clearToolTip();
-        if (sortOrderButton.getState() == SORT_BY_DISPLAY_NAME)
+        sortOptionButton.clearToolTip();
+        if (sortOptionButton.getState() == SORT_BY_DISPLAY_NAME)
         {
-            sortOrderButton.setToolTip(Messages.Tooltips.SORT_BY_DISPLAY_NAME);
+            sortOptionButton.setToolTip(Messages.Tooltips.SORT_BY_DISPLAY_NAME);
         }
-        else if (sortOrderButton.getState() == SORT_BY_ENERGY_VALUE)
+        else if (sortOptionButton.getState() == SORT_BY_ENERGY_VALUE)
         {
-            sortOrderButton.setToolTip(Messages.Tooltips.SORT_BY_ENERGY_VALUE);
+            sortOptionButton.setToolTip(Messages.Tooltips.SORT_BY_ENERGY_VALUE);
         }
-        else if (sortOrderButton.getState() == SORT_BY_ID)
+        else if (sortOptionButton.getState() == SORT_BY_ID)
         {
-            sortOrderButton.setToolTip(Messages.Tooltips.SORT_BY_ID);
+            sortOptionButton.setToolTip(Messages.Tooltips.SORT_BY_ID);
         }
     }
 }

@@ -36,7 +36,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     public final TileEntityTransmutationTablet tileEntityTransmutationTablet;
     private float energyValue;
     private String searchTerm;
-    private int sortOrder;
+    private int sortOption;
     private int scrollBarPosition;
 
     public ContainerTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
@@ -54,7 +54,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
         inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
 
-        this.sortOrder = 0;
+        this.sortOption = 0;
         this.scrollBarPosition = 0;
         this.energyValue = tileEntityTransmutationTablet.getAvailableEnergyValue().getValue();
 
@@ -151,7 +151,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
         else if (valueType == 2)
         {
-            sortOrder = updatedValue;
+            sortOption = updatedValue;
         }
         else if (valueType == 3)
         {
@@ -202,9 +202,9 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         int adjustedStartIndex = (int) ((scrollBarPosition / 187f) * filteredList.size());
 
-        if (sortOrder >= 0 && sortOrder < Comparators.itemComparators.length)
+        if (sortOption >= 0 && sortOption < Comparators.itemComparators.length)
         {
-            Collections.sort(filteredList, Comparators.itemComparators[sortOrder]);
+            Collections.sort(filteredList, Comparators.itemComparators[sortOption]);
         }
 
         if (filteredList.size() <= 30)
@@ -374,36 +374,36 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     @Override
     public void handleElementButtonClick(String elementName, int mouseButton)
     {
-        if (elementName.equals("sortOrder"))
+        if (elementName.equals("sortOption"))
         {
             if (mouseButton == 0)
             {
-                if (sortOrder == 0)
+                if (sortOption == 0)
                 {
-                    sortOrder = 1;
+                    sortOption = 1;
                 }
-                else if (sortOrder == 1)
+                else if (sortOption == 1)
                 {
-                    sortOrder = 2;
+                    sortOption = 2;
                 }
-                else if (sortOrder == 2)
+                else if (sortOption == 2)
                 {
-                    sortOrder = 0;
+                    sortOption = 0;
                 }
             }
             else if (mouseButton == 1)
             {
-                if (sortOrder == 0)
+                if (sortOption == 0)
                 {
-                    sortOrder = 2;
+                    sortOption = 2;
                 }
-                else if (sortOrder == 1)
+                else if (sortOption == 1)
                 {
-                    sortOrder = 0;
+                    sortOption = 0;
                 }
-                else if (sortOrder == 2)
+                else if (sortOption == 2)
                 {
-                    sortOrder = 1;
+                    sortOption = 1;
                 }
             }
         }
@@ -411,7 +411,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         for (Object crafter : this.crafters)
         {
             ICrafting iCrafting = (ICrafting) crafter;
-            iCrafting.sendProgressBarUpdate(this, 2, sortOrder);
+            iCrafting.sendProgressBarUpdate(this, 2, sortOption);
         }
     }
 
