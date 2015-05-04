@@ -168,7 +168,7 @@ curse {
     projectId = project.hasProperty('ee3_curseforge_projectid') ? project.ee3_curseforge_projectid : ''
     apiKey = project.hasProperty('ee3_curseforge_apikey') ? project.ee3_curseforge_apikey : ''
     changelog = project.hasProperty('changelog') ? project.changelog : ''
-    releaseType = config.hasProperty('release_type') ? config.release_type : ''
+    releaseType = config.release_type
 
     additionalArtifact devJar
 }
