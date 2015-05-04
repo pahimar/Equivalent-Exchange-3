@@ -29,6 +29,7 @@ public class GuiTransmutationTablet extends GuiBase
 
     private ElementTextField searchTextField;
     private ElementStatefulButton sortOptionButton;
+    private ElementStatefulButton sortOrderButton;
     private ElementSlider slider;
     protected int tickCount;
 
@@ -40,6 +41,9 @@ public class GuiTransmutationTablet extends GuiBase
     private static final int SORT_BY_DISPLAY_NAME = 0;
     private static final int SORT_BY_ENERGY_VALUE = 1;
     private static final int SORT_BY_ID = 2;
+
+    private static final int SORT_ASCENDING = 0;
+    private static final int SORT_DESCENDING = 1;
 
     public GuiTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
     {
@@ -61,12 +65,31 @@ public class GuiTransmutationTablet extends GuiBase
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
 
+        sortOrderButton = new ElementStatefulButton(this, 151, 58, "sortOrder", 0, 0, 18, 0, 36, 0, 18, 18, 36, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER)
+        {
+            @Override
+            public void drawBackground(int mouseX, int mouseY, float gameTicks)
+            {
+                RenderHelper.bindTexture(texture);
+                if (isEnabled())
+                {
+                    if (getState() == SORT_ASCENDING)
+                    {
+                        drawTexturedModalRect(posX, posY, 36, 0, sizeX, sizeY);
+                    }
+                    else if (getState() == SORT_DESCENDING)
+                    {
+                        drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
+                    }
+                }
+            }
+        };
+
         sortOptionButton = new ElementStatefulButton(this, 151, 36, "sortOption", 0, 0, 18, 0, 36, 0, 18, 18, 54, 18, Textures.Gui.Elements.BUTTON_SORT_OPTION)
         {
             @Override
             public void drawBackground(int mouseX, int mouseY, float gameTicks)
             {
-
                 RenderHelper.bindTexture(texture);
                 if (isEnabled())
                 {
@@ -126,6 +149,7 @@ public class GuiTransmutationTablet extends GuiBase
         slider.setSliderSize(12, 15);
 
         addElement(sortOptionButton);
+        addElement(sortOrderButton);
         addElement(searchTextField);
         addElement(slider);
     }
