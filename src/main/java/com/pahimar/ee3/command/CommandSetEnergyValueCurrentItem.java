@@ -47,11 +47,11 @@ public class CommandSetEnergyValueCurrentItem extends CommandBase
         }
         else
         {
-            double energyValue = 0;
+            float energyValue = 0;
 
             if (args.length >= 3)
             {
-                energyValue = parseDoubleWithMin(commandSender, args[2], 0);
+                energyValue = (float) parseDoubleWithMin(commandSender, args[2], 0);
             }
 
             ItemStack itemStack = ((EntityPlayer) commandSender).getCurrentEquippedItem();

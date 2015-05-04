@@ -49,7 +49,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         return energyValueRegistry;
     }
 
-    public void addPreAssignedEnergyValue(Object object, Number energyValue)
+    public void addPreAssignedEnergyValue(Object object, float energyValue)
     {
         addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
@@ -85,7 +85,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         }
     }
 
-    public void addPostAssignedExactEnergyValue(Object object, Number energyValue)
+    public void addPostAssignedExactEnergyValue(Object object, float energyValue)
     {
         addPostAssignedExactEnergyValue(object, new EnergyValue(energyValue));
     }

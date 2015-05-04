@@ -1,6 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.api.AbilityRegistryProxy;
+import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.OreStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,10 @@ public class Abilities
         {
             if (oreName.startsWith("ore"))
             {
+                for (ItemStack itemStack : CachedOreDictionary.getInstance().getItemStacksForOreName(oreName))
+                {
+                    AbilityRegistryProxy.setAsNotLearnable(itemStack);
+                }
                 AbilityRegistryProxy.setAsNotLearnable(new OreStack(oreName));
             }
         }

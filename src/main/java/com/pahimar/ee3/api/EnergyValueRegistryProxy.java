@@ -10,9 +10,9 @@ public final class EnergyValueRegistryProxy
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    public static void addPreAssignedEnergyValue(Object object, Number energyValue)
+    public static void addPreAssignedEnergyValue(Object object, float energyValue)
     {
-        addPreAssignedEnergyValue(object, new EnergyValue(energyValue.floatValue()));
+        addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
     public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
@@ -25,9 +25,9 @@ public final class EnergyValueRegistryProxy
         }
     }
 
-    public static void addPostAssignedEnergyValue(Object object, Number energyValue)
+    public static void addPostAssignedEnergyValue(Object object, float energyValue)
     {
-        addPostAssignedEnergyValue(object, new EnergyValue(energyValue.floatValue()));
+        addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
     public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
@@ -91,9 +91,9 @@ public final class EnergyValueRegistryProxy
         return null;
     }
 
-    public static List getStacksInRange(Number start, Number finish)
+    public static List getStacksInRange(float start, float finish)
     {
-        return getStacksInRange(new EnergyValue(start.floatValue()), new EnergyValue(finish.floatValue()));
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
     public static List getStacksInRange(EnergyValue start, EnergyValue finish)

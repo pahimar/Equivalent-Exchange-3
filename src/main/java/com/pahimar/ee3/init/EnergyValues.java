@@ -80,7 +80,7 @@ public class EnergyValues
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.brown_mushroom, 32);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.red_mushroom, 32);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.red_mushroom, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.snow_layer, 0.125);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.snow_layer, 0.125f);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.cactus, 8);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.vine, 8);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.waterlily, 16);

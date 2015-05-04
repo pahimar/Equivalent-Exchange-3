@@ -51,12 +51,12 @@ public class CommandSetEnergyValue extends CommandBase
         else
         {
             Item item = getItemByText(commandSender, args[2]);
-            double energyValue = 0;
+            float energyValue = 0;
             int metaData = 0;
 
             if (args.length >= 4)
             {
-                energyValue = parseDoubleWithMin(commandSender, args[3], 0);
+                energyValue = (float) parseDoubleWithMin(commandSender, args[3], 0);
             }
             else if (args.length >= 5)
             {

@@ -17,9 +17,9 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         this(0);
     }
 
-    public EnergyValue(Number energyValue)
+    public EnergyValue(float energyValue)
     {
-        this.energyValue = energyValue.floatValue();
+        this.energyValue = energyValue;
     }
 
     @Override
