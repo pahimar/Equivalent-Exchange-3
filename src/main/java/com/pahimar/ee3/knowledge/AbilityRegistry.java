@@ -7,8 +7,8 @@ import com.pahimar.ee3.api.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
-import com.pahimar.ee3.util.ItemHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     private boolean hasBeenModified;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
-    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.idComparator);
+    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
 
     private AbilityRegistry()
     {
@@ -58,7 +58,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     public void discoverAllLearnableItemStacks()
     {
-        this.allLearnableItemStacks = new TreeSet<ItemStack>(ItemHelper.idComparator);
+        this.allLearnableItemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
         for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
         {
             if (isLearnable(wrappedStack) && EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack) != null)

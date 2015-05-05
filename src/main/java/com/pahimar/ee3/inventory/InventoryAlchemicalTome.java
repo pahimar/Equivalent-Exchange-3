@@ -1,7 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class InventoryAlchemicalTome implements IInventory
         }
         else
         {
-            this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.idComparator);
+            this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
         }
         inventory = knownTransmutations.toArray(inventory);
     }

@@ -2,6 +2,7 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.EnergyValue;
 import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -11,7 +12,7 @@ public class FilterUtils
 {
     public static Set<ItemStack> filterForItemBlock(Set<ItemStack> unfilteredItemStackSet)
     {
-        return filterForItemBlock(unfilteredItemStackSet, ItemHelper.idComparator);
+        return filterForItemBlock(unfilteredItemStackSet, Comparators.idComparator);
     }
 
     public static Set<ItemStack> filterForItemBlock(Set<ItemStack> unfilteredItemStackSet, Comparator comparator)
@@ -31,7 +32,7 @@ public class FilterUtils
 
     public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString)
     {
-        return filterByNameStartsWith(unfilteredItemStackSet, filterString, ItemHelper.idComparator);
+        return filterByNameStartsWith(unfilteredItemStackSet, filterString, Comparators.idComparator);
     }
 
     public static Set<ItemStack> filterByNameStartsWith(Set<ItemStack> unfilteredItemStackSet, String filterString, Comparator comparator)

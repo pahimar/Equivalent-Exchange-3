@@ -1,7 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class InventoryTransmutationTablet implements IInventory
     {
         inventory = new ItemStack[30];
 
-        this.knownTransmutations = new TreeSet<ItemStack>(ItemHelper.idComparator);
+        this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
         if (knownTransmutations != null)
         {
             this.knownTransmutations.addAll(knownTransmutations);

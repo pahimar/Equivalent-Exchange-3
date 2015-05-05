@@ -51,8 +51,8 @@ minecraft {
 
     replaceIn "reference/Reference.java"
     replace "@VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
-    if (project.hasProperty("ee3_signature")) {
-        replace "@FINGERPRINT@", project.ee3_signature
+    if (project.hasProperty("ee3_sha1_signature")) {
+        replace "@FINGERPRINT@", project.ee3_sha1_signature
     }
 }
 
