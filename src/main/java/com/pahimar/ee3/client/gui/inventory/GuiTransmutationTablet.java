@@ -35,8 +35,8 @@ public class GuiTransmutationTablet extends GuiBase
 
     private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
-    private static final int LEFT_MOUSEBUTTON = 0;
-    private static final int RIGHT_MOUSEBUTTON = 1;
+    private static final int LEFT_MOUSE_BUTTON = 0;
+    private static final int RIGHT_MOUSE_BUTTON = 1;
 
     private static final int SORT_BY_DISPLAY_NAME = 0;
     private static final int SORT_BY_ENERGY_VALUE = 1;
@@ -65,26 +65,6 @@ public class GuiTransmutationTablet extends GuiBase
         searchTextField.backgroundColor = new GuiColor(0, 0, 0, 0).getColor();
         searchTextField.borderColor = new GuiColor(0, 0, 0, 0).getColor();
 
-        sortOrderButton = new ElementStatefulButton(this, 151, 58, "sortOrder", 0, 0, 18, 0, 36, 0, 18, 18, 36, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER)
-        {
-            @Override
-            public void drawBackground(int mouseX, int mouseY, float gameTicks)
-            {
-                RenderHelper.bindTexture(texture);
-                if (isEnabled())
-                {
-                    if (getState() == SORT_ASCENDING)
-                    {
-                        drawTexturedModalRect(posX, posY, 36, 0, sizeX, sizeY);
-                    }
-                    else if (getState() == SORT_DESCENDING)
-                    {
-                        drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
-                    }
-                }
-            }
-        };
-
         sortOptionButton = new ElementStatefulButton(this, 151, 36, "sortOption", 0, 0, 18, 0, 36, 0, 18, 18, 54, 18, Textures.Gui.Elements.BUTTON_SORT_OPTION)
         {
             @Override
@@ -104,6 +84,25 @@ public class GuiTransmutationTablet extends GuiBase
                     else if (getState() == SORT_BY_ID)
                     {
                         drawTexturedModalRect(posX, posY, 18, 0, sizeX, sizeY);
+                    }
+                }
+            }
+        };
+        sortOrderButton = new ElementStatefulButton(this, 151, 58, "sortOrder", 0, 0, 0, 0, 18, 0, 18, 18, 36, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER)
+        {
+            @Override
+            public void drawBackground(int mouseX, int mouseY, float gameTicks)
+            {
+                RenderHelper.bindTexture(texture);
+                if (isEnabled())
+                {
+                    if (getState() == SORT_ASCENDING)
+                    {
+                        drawTexturedModalRect(posX, posY, 36, 0, sizeX, sizeY);
+                    }
+                    else if (getState() == SORT_DESCENDING)
+                    {
+                        drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
                     }
                 }
             }
@@ -176,7 +175,7 @@ public class GuiTransmutationTablet extends GuiBase
         {
             PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
 
-            if (mouseButton == LEFT_MOUSEBUTTON)
+            if (mouseButton == LEFT_MOUSE_BUTTON)
             {
                 if (sortOptionButton.getState() == SORT_BY_DISPLAY_NAME)
                 {
@@ -191,7 +190,7 @@ public class GuiTransmutationTablet extends GuiBase
                     sortOptionButton.setState(SORT_BY_DISPLAY_NAME);
                 }
             }
-            else if (mouseButton == RIGHT_MOUSEBUTTON)
+            else if (mouseButton == RIGHT_MOUSE_BUTTON)
             {
                 if (sortOptionButton.getState() == SORT_BY_DISPLAY_NAME)
                 {
@@ -205,6 +204,21 @@ public class GuiTransmutationTablet extends GuiBase
                 {
                     sortOptionButton.setState(SORT_BY_ENERGY_VALUE);
                 }
+            }
+
+            setTooltipByState();
+        }
+        else if (buttonName.equals("sortOrder"))
+        {
+            PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
+
+            if (sortOrderButton.getState() == SORT_ASCENDING)
+            {
+                sortOrderButton.setState(SORT_DESCENDING);
+            }
+            else if (sortOrderButton.getState() == SORT_DESCENDING)
+            {
+                sortOrderButton.setState(SORT_ASCENDING);
             }
 
             setTooltipByState();
@@ -225,6 +239,16 @@ public class GuiTransmutationTablet extends GuiBase
         else if (sortOptionButton.getState() == SORT_BY_ID)
         {
             sortOptionButton.setToolTip(Messages.Tooltips.SORT_BY_ID);
+        }
+
+        sortOrderButton.clearToolTip();
+        if (sortOrderButton.getState() == SORT_ASCENDING)
+        {
+            sortOrderButton.setToolTip(Messages.Tooltips.SORT_ASCENDING);
+        }
+        else if (sortOrderButton.getState() == SORT_DESCENDING)
+        {
+            sortOrderButton.setToolTip(Messages.Tooltips.SORT_DESCENDING);
         }
     }
 }

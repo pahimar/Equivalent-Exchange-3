@@ -173,6 +173,8 @@ tooltip.ee3:large=Large
 tooltip.ee3:sortByDisplayName=Sort by Display Name
 tooltip.ee3:sortByEnergyValue=Sort by Energy Value
 tooltip.ee3:sortByID=Sort by ID
+tooltip.ee3:sortAscending=Ascending Order
+tooltip.ee3:sortDescending=Descending Order
 
 #Misc
 misc.ee3:owner-set-to-self=You are now the owner of %s

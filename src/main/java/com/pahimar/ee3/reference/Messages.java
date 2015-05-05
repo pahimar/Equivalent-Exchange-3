@@ -29,6 +29,8 @@ public final class Messages
         public static final String SORT_BY_DISPLAY_NAME = TOOLTIP_PREFIX + "sortByDisplayName";
         public static final String SORT_BY_ENERGY_VALUE = TOOLTIP_PREFIX + "sortByEnergyValue";
         public static final String SORT_BY_ID = TOOLTIP_PREFIX + "sortByID";
+        public static final String SORT_ASCENDING = TOOLTIP_PREFIX + "sortAscending";
+        public static final String SORT_DESCENDING = TOOLTIP_PREFIX + "sortDescending";
     }
 
     public static final class Commands

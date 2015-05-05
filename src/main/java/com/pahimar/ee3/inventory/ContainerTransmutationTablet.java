@@ -37,6 +37,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     private float energyValue;
     private String searchTerm;
     private int sortOption;
+    private int sortOrder;
     private int scrollBarPosition;
 
     public ContainerTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
@@ -407,11 +408,16 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 }
             }
         }
+        else if (elementName.equals("sortOption"))
+        {
+
+        }
 
         for (Object crafter : this.crafters)
         {
             ICrafting iCrafting = (ICrafting) crafter;
             iCrafting.sendProgressBarUpdate(this, 2, sortOption);
+            iCrafting.sendProgressBarUpdate(this, 3, sortOrder);
         }
     }
 
