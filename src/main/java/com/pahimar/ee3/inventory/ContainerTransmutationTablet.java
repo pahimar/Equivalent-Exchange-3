@@ -44,7 +44,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     {
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
 
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
+        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
         if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX) != null)
         {
             ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX);
@@ -158,8 +158,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             scrollBarPosition = updatedValue;
         }
+        else if (valueType == 4)
+        {
+            sortOrder = updatedValue;
+        }
 
-        if (valueType >= 0 && valueType <= 3)
+        if (valueType >= 0 && valueType <= 4)
         {
             updateInventory();
         }
@@ -203,9 +207,38 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         int adjustedStartIndex = (int) ((scrollBarPosition / 187f) * filteredList.size());
 
-        if (sortOption >= 0 && sortOption < Comparators.itemComparators.length)
+        if (sortOption == 0)
         {
-            Collections.sort(filteredList, Comparators.itemComparators[sortOption]);
+            if (sortOrder == 0)
+            {
+                Collections.sort(filteredList, Comparators.displayNameComparator);
+            }
+            else
+            {
+                Collections.sort(filteredList, Comparators.reverseDisplayNameComparator);
+            }
+        }
+        else if (sortOption == 1)
+        {
+            if (sortOrder == 0)
+            {
+                Collections.sort(filteredList, Comparators.energyValueItemStackComparator);
+            }
+            else
+            {
+                Collections.sort(filteredList, Comparators.reverseEnergyValueComparator);
+            }
+        }
+        else if (sortOption == 2)
+        {
+            if (sortOrder == 0)
+            {
+                Collections.sort(filteredList, Comparators.idComparator);
+            }
+            else
+            {
+                Collections.sort(filteredList, Comparators.reverseIdComparator);
+            }
         }
 
         if (filteredList.size() <= 30)
@@ -408,16 +441,23 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 }
             }
         }
-        else if (elementName.equals("sortOption"))
+        else if (elementName.equals("sortOrder"))
         {
-
+            if (sortOrder == 0)
+            {
+                sortOrder = 1;
+            }
+            else if (sortOrder == 1)
+            {
+                sortOrder = 0;
+            }
         }
 
         for (Object crafter : this.crafters)
         {
             ICrafting iCrafting = (ICrafting) crafter;
             iCrafting.sendProgressBarUpdate(this, 2, sortOption);
-            iCrafting.sendProgressBarUpdate(this, 3, sortOrder);
+            iCrafting.sendProgressBarUpdate(this, 4, sortOrder);
         }
     }
 

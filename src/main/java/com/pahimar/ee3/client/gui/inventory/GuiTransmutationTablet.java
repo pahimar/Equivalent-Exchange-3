@@ -88,6 +88,7 @@ public class GuiTransmutationTablet extends GuiBase
                 }
             }
         };
+
         sortOrderButton = new ElementStatefulButton(this, 151, 58, "sortOrder", 0, 0, 0, 0, 18, 0, 18, 18, 36, 18, Textures.Gui.Elements.BUTTON_SORT_ORDER)
         {
             @Override
@@ -98,11 +99,11 @@ public class GuiTransmutationTablet extends GuiBase
                 {
                     if (getState() == SORT_ASCENDING)
                     {
-                        drawTexturedModalRect(posX, posY, 36, 0, sizeX, sizeY);
+                        drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
                     }
                     else if (getState() == SORT_DESCENDING)
                     {
-                        drawTexturedModalRect(posX, posY, 0, 0, sizeX, sizeY);
+                        drawTexturedModalRect(posX, posY, 18, 0, sizeX, sizeY);
                     }
                 }
             }

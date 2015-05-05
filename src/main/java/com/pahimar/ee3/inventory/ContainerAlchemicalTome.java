@@ -4,6 +4,7 @@ import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +31,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
 
     public ContainerAlchemicalTome(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(ItemHelper.displayNameComparator);
+        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
 
         if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
         {
@@ -181,7 +182,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchemicalTome.getKnownTransmutations(), searchTerm, ItemHelper.displayNameComparator));
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchemicalTome.getKnownTransmutations(), searchTerm, Comparators.displayNameComparator));
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)
