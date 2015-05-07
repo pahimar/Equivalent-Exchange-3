@@ -9,8 +9,10 @@ import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -111,7 +113,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notLearnableSet.remove(WrappedStack.wrap(object));
+            WrappedStack wrappedStack = WrappedStack.wrap(object);
+
+            if (wrappedStack != null && notLearnableSet.remove(wrappedStack))
+            {
+                hasBeenModified = true;
+                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+            }
         }
     }
 
@@ -119,7 +127,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notLearnableSet.add(WrappedStack.wrap(object));
+            WrappedStack wrappedStack = WrappedStack.wrap(object);
+
+            if (wrappedStack != null && notLearnableSet.add(wrappedStack))
+            {
+                hasBeenModified = true;
+                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+            }
         }
     }
 
@@ -143,7 +157,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notRecoverableSet.remove(WrappedStack.wrap(object));
+            WrappedStack wrappedStack = WrappedStack.wrap(object);
+
+            if (wrappedStack != null && notRecoverableSet.remove(wrappedStack))
+            {
+                hasBeenModified = true;
+                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+            }
         }
     }
 
@@ -151,7 +171,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (WrappedStack.canBeWrapped(object))
         {
-            hasBeenModified = notRecoverableSet.add(WrappedStack.wrap(object));
+            WrappedStack wrappedStack = WrappedStack.wrap(object);
+
+            if (wrappedStack != null && notRecoverableSet.add(wrappedStack))
+            {
+                hasBeenModified = true;
+                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+            }
         }
     }
 

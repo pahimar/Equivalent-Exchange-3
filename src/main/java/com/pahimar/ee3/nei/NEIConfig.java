@@ -17,7 +17,7 @@ public class NEIConfig implements IConfigureNEI
     @Override
     public String getVersion()
     {
-        return Reference.VERSION;
+        return Reference.MOD_VERSION;
     }
 
     @Override
