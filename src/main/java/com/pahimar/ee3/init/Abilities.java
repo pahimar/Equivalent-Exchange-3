@@ -1,6 +1,6 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.api.AbilityRegistryProxy;
+import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.OreStack;
 import net.minecraft.init.Blocks;

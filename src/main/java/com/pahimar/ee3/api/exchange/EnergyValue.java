@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api;
+package com.pahimar.ee3.api.exchange;
 
 import com.google.gson.*;
 import net.minecraft.nbt.NBTTagCompound;

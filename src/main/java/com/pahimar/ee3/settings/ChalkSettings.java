@@ -1,6 +1,6 @@
 package com.pahimar.ee3.settings;
 
-import com.pahimar.ee3.api.AlchemyArrayRegistryProxy;
+import com.pahimar.ee3.api.array.AlchemyArrayRegistryProxy;
 import com.pahimar.ee3.util.INBTTaggable;
 import net.minecraft.nbt.NBTTagCompound;
 

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.network.PacketHandler;

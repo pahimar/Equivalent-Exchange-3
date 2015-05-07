@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.item.ItemAlchemicalTome;

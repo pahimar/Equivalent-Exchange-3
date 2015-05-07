@@ -1,6 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;

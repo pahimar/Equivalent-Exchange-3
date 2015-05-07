@@ -1,7 +1,7 @@
 package com.pahimar.ee3.array;
 
 import com.google.common.collect.ImmutableSortedSet;
-import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.array.AlchemyArray;
 
 import java.util.SortedSet;
 import java.util.TreeSet;

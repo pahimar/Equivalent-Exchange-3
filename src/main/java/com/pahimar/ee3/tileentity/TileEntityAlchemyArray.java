@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.common.Loader;

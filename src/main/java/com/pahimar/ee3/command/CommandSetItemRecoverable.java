@@ -1,6 +1,6 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.api.AbilityRegistryProxy;
+import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;

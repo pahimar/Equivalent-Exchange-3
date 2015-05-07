@@ -1,6 +1,6 @@
 package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.RecipeRegistryProxy;
+import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 

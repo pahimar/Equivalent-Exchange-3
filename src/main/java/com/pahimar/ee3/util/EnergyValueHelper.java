@@ -1,6 +1,6 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;

@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api;
+package com.pahimar.ee3.api.array;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

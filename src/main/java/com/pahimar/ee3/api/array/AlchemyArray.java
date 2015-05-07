@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api;
+package com.pahimar.ee3.api.array;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

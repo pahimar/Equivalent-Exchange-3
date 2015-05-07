@@ -1,7 +1,7 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

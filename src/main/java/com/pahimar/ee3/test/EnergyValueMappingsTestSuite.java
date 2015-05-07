@@ -1,7 +1,7 @@
 package com.pahimar.ee3.test;
 
-import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;

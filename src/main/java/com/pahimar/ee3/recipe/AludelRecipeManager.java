@@ -1,7 +1,7 @@
 package com.pahimar.ee3.recipe;
 
 import com.google.common.collect.ImmutableList;
-import com.pahimar.ee3.api.RecipeRegistryProxy;
+import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import net.minecraft.item.ItemStack;
 

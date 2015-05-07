@@ -1,7 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import com.google.gson.*;
-import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValue;
 
 import java.lang.reflect.Type;
 

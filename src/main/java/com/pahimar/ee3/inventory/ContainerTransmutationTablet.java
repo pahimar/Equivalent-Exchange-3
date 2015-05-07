@@ -1,6 +1,6 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;

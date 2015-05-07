@@ -3,7 +3,7 @@ package com.pahimar.ee3.util;
 import com.google.common.io.Files;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;

@@ -2,9 +2,9 @@ package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.*;
-import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
-import com.pahimar.ee3.api.IEnergyValueProvider;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;

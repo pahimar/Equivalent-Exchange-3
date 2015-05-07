@@ -1,7 +1,7 @@
 package com.pahimar.ee3.network.message;
 
 import com.google.gson.stream.JsonReader;
-import com.pahimar.ee3.api.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;

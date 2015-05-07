@@ -1,4 +1,4 @@
-package com.pahimar.ee3.api;
+package com.pahimar.ee3.api.exchange;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;

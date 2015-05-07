@@ -1,6 +1,6 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.OreStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

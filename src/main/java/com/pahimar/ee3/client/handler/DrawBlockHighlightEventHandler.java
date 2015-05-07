@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.api.AlchemyArray;
+import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.client.util.RenderUtils;
 import com.pahimar.ee3.item.*;

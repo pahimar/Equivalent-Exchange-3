@@ -1,9 +1,9 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.api.EnergyValue;
-import com.pahimar.ee3.api.EnergyValueRegistryProxy;
-import com.pahimar.ee3.api.IEnergyValueProvider;
+import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Messages;
