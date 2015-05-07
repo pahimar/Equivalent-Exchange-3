@@ -93,7 +93,15 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         if (WrappedStack.canBeWrapped(object))
         {
             WrappedStack wrappedObject = WrappedStack.wrap(object);
-            return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
+
+            if (object instanceof ItemStack && ((ItemStack) object).isItemDamaged())
+            {
+                return false;
+            }
+            else
+            {
+                return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
+            }
         }
 
         return false;

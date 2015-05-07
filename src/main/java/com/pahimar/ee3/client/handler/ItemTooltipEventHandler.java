@@ -2,8 +2,10 @@ package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.knowledge.TransmutationKnowledgeRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
+import com.pahimar.ee3.inventory.ContainerResearchStation;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
@@ -67,6 +69,14 @@ public class ItemTooltipEventHandler
             else
             {
                 event.toolTip.add("No Exchange Energy value"); // TODO Localize
+            }
+        }
+
+        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerResearchStation)))
+        {
+            if (TransmutationKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack))
+            {
+                event.toolTip.add("You know how to transmute this"); // TODO Localize with better phrasing
             }
         }
 
