@@ -4,7 +4,9 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
+import cpw.mods.fml.common.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +43,15 @@ public class RecipeRegistry
         }
 
         List<WrappedStack> wrappedRecipeInputList = new ArrayList<WrappedStack>();
+        StringBuilder stringBuilder = new StringBuilder();
         for (Object recipeInputObject : recipeInputList)
         {
             WrappedStack wrappedInputObject = WrappedStack.wrap(recipeInputObject);
             if (wrappedInputObject != null)
             {
                 wrappedRecipeInputList.add(wrappedInputObject);
+                stringBuilder.append(wrappedInputObject);
+                stringBuilder.append(" ");
             }
             else
             {
@@ -57,6 +62,7 @@ public class RecipeRegistry
         // Add the recipe mapping only if we don't already have it
         if (!recipeMap.get(wrappedRecipeOutput).contains(wrappedRecipeInputList))
         {
+            LogHelper.trace(String.format("RecipeRegistry[%s]: Mod with ID '%s' added recipe (Output: %s, Inputs: %s)", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim()));
             recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
         }
     }

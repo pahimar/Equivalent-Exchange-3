@@ -2,6 +2,9 @@ package com.pahimar.ee3.array;
 
 import com.google.common.collect.ImmutableSortedSet;
 import com.pahimar.ee3.api.array.AlchemyArray;
+import com.pahimar.ee3.util.LoaderHelper;
+import com.pahimar.ee3.util.LogHelper;
+import cpw.mods.fml.common.Loader;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -56,6 +59,7 @@ public class AlchemyArrayRegistry
     {
         if (!registeredAlchemyArrays.contains(alchemyArray))
         {
+            LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' added alchemy array %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), alchemyArray));
             return registeredAlchemyArrays.add(alchemyArray);
         }
 

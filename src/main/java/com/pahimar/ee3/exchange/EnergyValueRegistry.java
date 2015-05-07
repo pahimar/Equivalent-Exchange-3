@@ -76,13 +76,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 {
                     if (factoredEnergyValue.compareTo(preAssignedMappings.get(factoredWrappedStack)) < 0)
                     {
-                        LogHelper.trace(String.format("Mod with ID '%s' added a pre-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState())); // TODO Localize?
+                        LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a pre-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
                         preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                     }
                 }
                 else
                 {
-                    LogHelper.trace(String.format("Mod with ID '%s' added a pre-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState())); // TODO Localize?
+                    LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a pre-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
                     preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                 }
             }
@@ -110,8 +110,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
-                LogHelper.trace(String.format("Mod with ID '%s' added a post-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState()));
-                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue); // TODO Localize?
+                LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a post-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
+                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
             }
         }
     }
