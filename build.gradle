@@ -50,10 +50,31 @@ minecraft {
     version = config.minecraft_version + "-" + config.forge_version
 
     replaceIn "reference/Reference.java"
-    replace "@VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+    replace "@MOD_VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
     if (project.hasProperty("ee3_sha1_signature")) {
         replace "@FINGERPRINT@", project.ee3_sha1_signature
     }
+
+    replaceIn "api/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/array/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/event/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/exchange/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/knowledge/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/recipe/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/util/package-info.java"
+    replace "@API_VERSION@", config.api_version
 }
 
 version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"

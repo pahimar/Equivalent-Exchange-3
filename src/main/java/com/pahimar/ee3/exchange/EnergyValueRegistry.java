@@ -11,9 +11,11 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.EnergyValueHelper;
+import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -74,11 +76,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 {
                     if (factoredEnergyValue.compareTo(preAssignedMappings.get(factoredWrappedStack)) < 0)
                     {
+                        LogHelper.trace(String.format("Mod with ID '%s' added a pre-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState())); // TODO Localize?
                         preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                     }
                 }
                 else
                 {
+                    LogHelper.trace(String.format("Mod with ID '%s' added a pre-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState())); // TODO Localize?
                     preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
                 }
             }
@@ -106,7 +110,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
-                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+                LogHelper.trace(String.format("Mod with ID '%s' added a post-assignment energy value of %s for object %s during %s", Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack, LoaderHelper.getLoaderState()));
+                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue); // TODO Localize?
             }
         }
     }
