@@ -583,13 +583,23 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         if (wrappedStack instanceof ItemStack)
         {
             ItemStack itemStack = (ItemStack) wrappedStack;
+            String unlocalizedName = "";
+            try
+            {
+                unlocalizedName = itemStack.getUnlocalizedName();
+            }
+            catch (ArrayIndexOutOfBoundsException e)
+            {
+                unlocalizedName = "no-name";
+            }
+
             if (itemStack.hasTagCompound())
             {
-                return String.format("%sxitemStack[%s@%s:%s]", stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
+                return String.format("%sxitemStack[%s@%s:%s]", stackSize, unlocalizedName, itemStack.getItemDamage(), itemStack.getTagCompound());
             }
             else
             {
-                return String.format("%sxitemStack[%s@%s]", stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
+                return String.format("%sxitemStack[%s@%s]", stackSize, unlocalizedName, itemStack.getItemDamage());
             }
         }
         else if (wrappedStack instanceof OreStack)
