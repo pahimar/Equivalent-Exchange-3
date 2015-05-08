@@ -514,7 +514,7 @@ public class TransmutationKnowledgeRegistry
             else
             {
                 loadPlayerFromDiskIfNeeded(playerUUID);
-                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", new TransmutationKnowledge());
+                SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
             }
         }
     }
