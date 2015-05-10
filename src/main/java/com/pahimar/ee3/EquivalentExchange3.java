@@ -82,8 +82,6 @@ public class EquivalentExchange3
         EnergyValues.addDefaultEnergyValues();
 
         AlchemyArrays.registerAlchemyArrays();
-
-        Abilities.setOresNotLearnable();
     }
 
     @EventHandler
@@ -117,6 +115,7 @@ public class EquivalentExchange3
         CachedOreDictionary.getInstance();
         RecipeRegistry.getInstance().registerVanillaRecipes();
         AludelRecipeManager.registerRecipes();
+        Abilities.setOresNotLearnable();
     }
 
     @EventHandler
