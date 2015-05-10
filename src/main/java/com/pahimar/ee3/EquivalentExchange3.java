@@ -104,6 +104,8 @@ public class EquivalentExchange3
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
+        
+        Abilities.setOresNotLearnable();
 
         // Register the Waila data provider
         FMLInterModComms.sendMessage("Waila", "register", "com.pahimar.ee3.waila.WailaDataProvider.callbackRegister");
