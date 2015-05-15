@@ -29,5 +29,6 @@ public class PacketHandler
         INSTANCE.registerMessage(MessageSingleParticleEvent.class, MessageSingleParticleEvent.class, 14, Side.CLIENT);
         INSTANCE.registerMessage(MessageSliderElementUpdated.class, MessageSliderElementUpdated.class, 15, Side.SERVER);
         INSTANCE.registerMessage(MessageTransmutationKnowledgeUpdate.class, MessageTransmutationKnowledgeUpdate.class, 16, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityResearchStation.class, MessageTileEntityResearchStation.class, 17, Side.CLIENT);
     }
 }
