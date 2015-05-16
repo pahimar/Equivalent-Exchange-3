@@ -182,6 +182,14 @@ task copyChicken(type: Copy, dependsOn: "extractUserDev") {
 tasks.setupDevWorkspace.dependsOn copyChicken
 tasks.setupDecompWorkspace.dependsOn copyChicken
 
+// Stop MCP from crashing the client on every start. -.-'
+runClient {
+    args '--noCoreSearch'
+}
+runServer {
+    args '--noCoreSearch'
+}
+
 curse {
     dependsOn 'reobf'
     onlyIf { return project.hasProperty('ee3_curseforge_apikey') }
