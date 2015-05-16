@@ -86,16 +86,16 @@ public class MessageTileEntityTransmutationTablet implements IMessage, IMessageH
     {
         if (message.tileEntityTransmutationTabletNBT != null)
         {
-            TileEntityAlchemyArray tileEntityAlchemyArray = new TileEntityAlchemyArray();
-            tileEntityAlchemyArray.readFromNBT(message.tileEntityTransmutationTabletNBT);
+            TileEntityTransmutationTablet tileEntityTransmutationTablet = new TileEntityTransmutationTablet();
+            tileEntityTransmutationTablet.readFromNBT(message.tileEntityTransmutationTabletNBT);
 
-            TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord);
+            TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntityTransmutationTablet.xCoord, tileEntityTransmutationTablet.yCoord, tileEntityTransmutationTablet.zCoord);
 
             if (tileEntity instanceof TileEntityTransmutationTablet)
             {
                 tileEntity.readFromNBT(message.tileEntityTransmutationTabletNBT);
                 //NAME UPDATE
-                FMLClientHandler.instance().getClient().theWorld.func_147451_t(tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord);
+                FMLClientHandler.instance().getClient().theWorld.func_147451_t(tileEntityTransmutationTablet.xCoord, tileEntityTransmutationTablet.yCoord, tileEntityTransmutationTablet.zCoord);
             }
         }
 
