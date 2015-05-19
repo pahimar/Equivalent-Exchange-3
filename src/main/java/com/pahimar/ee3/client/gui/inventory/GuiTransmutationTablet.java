@@ -26,6 +26,7 @@ import java.text.DecimalFormat;
 public class GuiTransmutationTablet extends GuiBase
 {
     private TileEntityTransmutationTablet tileEntityTransmutationTablet;
+    private ContainerTransmutationTablet containerTransmutationTablet;
 
     private ElementTextField searchTextField;
     private ElementStatefulButton sortOptionButton;
@@ -49,6 +50,7 @@ public class GuiTransmutationTablet extends GuiBase
     {
         super(new ContainerTransmutationTablet(inventoryPlayer, tileEntityTransmutationTablet), Textures.Gui.TRANSMUTATION_TABLET);
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
+        this.containerTransmutationTablet = (ContainerTransmutationTablet)this.inventorySlots;
         xSize = 256;
         ySize = 256;
     }
@@ -159,7 +161,7 @@ public class GuiTransmutationTablet extends GuiBase
     {
         super.drawGuiContainerForegroundLayer(x, y);
         fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 10, 142, Integer.parseInt(Colors.PURE_WHITE, 16));
-        fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(tileEntityTransmutationTablet.getAvailableEnergyValue().getValue())), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
+        fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(containerTransmutationTablet.getEnergyValue())), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
     }
 
     @Override

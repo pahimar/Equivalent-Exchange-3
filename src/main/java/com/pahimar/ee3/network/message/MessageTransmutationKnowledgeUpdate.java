@@ -4,6 +4,7 @@ import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -11,6 +12,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 import java.util.Collection;
 
@@ -117,17 +119,16 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
     {
         if (message.yCoord != Integer.MIN_VALUE)
         {
-            if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiContainer)
-            {
-                GuiContainer guiContainer = (GuiContainer) FMLClientHandler.instance().getClient().currentScreen;
-
-                if (guiContainer.inventorySlots instanceof ContainerTransmutationTablet)
-                {
-                    if (FMLClientHandler.instance().getWorldClient().getTileEntity(message.xCoord, message.yCoord, message.zCoord) instanceof TileEntityTransmutationTablet)
-                    {
-                        ((ContainerTransmutationTablet) guiContainer.inventorySlots).handleTransmutationKnowledgeUpdate(message.transmutationKnowledge);
-                    }
-                }
+            // Going through a GUI races with the GUI opening on the client (message arrives before GUI load!)
+            // Go through the TileEntity instead.
+            TileEntity tileEntity = FMLClientHandler.instance().getWorldClient().getTileEntity(
+                message.xCoord,
+                message.yCoord,
+                message.zCoord
+            );
+            if (tileEntity instanceof TileEntityTransmutationTablet) {
+                TileEntityTransmutationTablet tablet = (TileEntityTransmutationTablet)tileEntity;
+                tablet.handleTransmutationKnowledgeUpdate(message);
             }
         }
 
