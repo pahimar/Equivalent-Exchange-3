@@ -9,7 +9,7 @@ general.abilities.onlyLoadFile.label=Only load Abilities file
 general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
 
 general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
-general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
+general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (when the world gets loaded), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
