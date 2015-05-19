@@ -1,5 +1,6 @@
 package com.pahimar.ee3.command;
 
+import com.google.common.base.Joiner;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
@@ -42,7 +43,7 @@ public class CommandEE extends CommandBase
             }
         }
         if (!found) {
-            throw new WrongUsageException("Invalid command. Usage: /ee3 " + String.join(" ", commands));
+            throw new WrongUsageException("Invalid command. Usage: /ee3 " + Joiner.on(" ").join(commands));
         }
     }
 
