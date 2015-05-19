@@ -115,7 +115,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         updateInventory();
     }
 
-    @SideOnly(Side.SERVER)
     private void sendTransmutationsToClient(Set<ItemStack> transmutations) {
         PacketHandler.INSTANCE.sendToAllAround(
                 new MessageTransmutationKnowledgeUpdate(
