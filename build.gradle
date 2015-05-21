@@ -21,17 +21,22 @@ apply plugin: 'curseforge'
 apply plugin: 'maven'
 
 repositories {
-    maven { // The repo from which to get waila
-        name "Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
-    }
     maven { // the repo from which to get NEI and stuff
         name 'CB Repo'
         url "http://chickenbones.net/maven/"
     }
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
 }
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.5.6_dev1_1.7.10"
+    compile('mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10') {
+        exclude group: 'mcp.mobius.waila'
+    }
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.136:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.6.43:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.4.105:dev"
 }
 
 ext.configFile = file "build.properties"
@@ -169,25 +174,6 @@ task signJar(dependsOn: ["reobf", "devJar"]) {
             )
         }
     }
-}
-
-task copyChicken(type: Copy, dependsOn: "extractUserDev") {
-    from { configurations.compile }
-    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar"
-    exclude "**/CodeChickenLib*" // because CCC downloads it anyways.. -_-
-    into file("./run/mods") // paralell to the assets dir
-    mustRunAfter "deobfBinJar"
-    mustRunAfter "repackMinecraft"
-}
-tasks.setupDevWorkspace.dependsOn copyChicken
-tasks.setupDecompWorkspace.dependsOn copyChicken
-
-// Stop MCP from crashing the client on every start. -.-'
-runClient {
-    args '--noCoreSearch'
-}
-runServer {
-    args '--noCoreSearch'
 }
 
 curse {

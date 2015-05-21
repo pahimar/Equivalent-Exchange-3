@@ -71,7 +71,6 @@ public class CommandEE extends CommandBase
         modCommands.add(new CommandPlayerForgetEverything());
         modCommands.add(new CommandPlayerForgetItem());
         modCommands.add(new CommandPlayerForgetCurrentItem());
-        modCommands.add(new CommandTemplateLearnEverything());
         modCommands.add(new CommandTemplateLearnItem());
         modCommands.add(new CommandTemplateLearnCurrentItem());
         modCommands.add(new CommandTemplateForgetEverything());
@@ -82,6 +81,7 @@ public class CommandEE extends CommandBase
         modCommands.add(new CommandSetItemRecoverable());
         modCommands.add(new CommandSetItemNotRecoverable());
         modCommands.add(new CommandRunTest());
+        modCommands.add(new CommandDebug());
 
         for (CommandBase commandBase : modCommands)
         {

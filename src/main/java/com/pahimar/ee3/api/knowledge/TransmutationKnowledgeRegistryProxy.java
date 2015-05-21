@@ -150,26 +150,6 @@ public class TransmutationKnowledgeRegistryProxy
         }
     }
 
-    public static void teachPlayerEverything(EntityPlayer entityPlayer)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayerEverything(entityPlayer);
-        }
-    }
-
-    public static void teachPlayerEverything(UUID playerUUID)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayerEverything(playerUUID);
-        }
-    }
-
     public static void makePlayerForget(EntityPlayer entityPlayer, ItemStack itemStack)
     {
         init();
@@ -265,16 +245,6 @@ public class TransmutationKnowledgeRegistryProxy
         if (ee3Mod != null)
         {
             EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachTemplate(itemStack);
-        }
-    }
-
-    public static void teachTemplateEverything()
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachTemplateEverything();
         }
     }
 

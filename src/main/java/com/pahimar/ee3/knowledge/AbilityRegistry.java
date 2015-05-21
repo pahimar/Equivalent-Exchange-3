@@ -3,24 +3,22 @@ package com.pahimar.ee3.knowledge;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.pahimar.ee3.api.event.AbilityEvent;
 import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
@@ -32,7 +30,6 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     private boolean hasBeenModified;
     private Set<WrappedStack> notLearnableSet;
     private Set<WrappedStack> notRecoverableSet;
-    private SortedSet<ItemStack> allLearnableItemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
 
     private AbilityRegistry()
     {
@@ -56,33 +53,6 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
-    }
-
-    public void discoverAllLearnableItemStacks()
-    {
-        this.allLearnableItemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
-        for (WrappedStack wrappedStack : EnergyValueRegistry.getInstance().getStackValueMap().keySet())
-        {
-            if (isLearnable(wrappedStack) && EnergyValueRegistry.getInstance().getEnergyValue(wrappedStack) != null)
-            {
-                if (wrappedStack.getWrappedObject() instanceof OreStack)
-                {
-                    for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName))
-                    {
-                        this.allLearnableItemStacks.add(itemStack);
-                    }
-                }
-                else if (wrappedStack.getWrappedObject() instanceof ItemStack)
-                {
-                    this.allLearnableItemStacks.add((ItemStack) wrappedStack.getWrappedObject());
-                }
-            }
-        }
-    }
-
-    public SortedSet<ItemStack> getAllLearnableItemStacks()
-    {
-        return allLearnableItemStacks;
     }
 
     public Set<WrappedStack> getNotLearnableStacks()
@@ -115,10 +85,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             WrappedStack wrappedStack = WrappedStack.wrap(object);
 
-            if (wrappedStack != null && notLearnableSet.remove(wrappedStack))
+            if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new AbilityEvent.SetLearnableEvent(object)))
             {
-                hasBeenModified = true;
-                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                if (notLearnableSet.remove(wrappedStack))
+                {
+                    hasBeenModified = true;
+                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                }
             }
         }
     }
@@ -129,10 +102,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             WrappedStack wrappedStack = WrappedStack.wrap(object);
 
-            if (wrappedStack != null && notLearnableSet.add(wrappedStack))
+            if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new AbilityEvent.SetNotLearnableEvent(object)))
             {
-                hasBeenModified = true;
-                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                if (notLearnableSet.add(wrappedStack))
+                {
+                    hasBeenModified = true;
+                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                }
             }
         }
     }
@@ -159,10 +135,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             WrappedStack wrappedStack = WrappedStack.wrap(object);
 
-            if (wrappedStack != null && notRecoverableSet.remove(wrappedStack))
+            if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new AbilityEvent.SetRecoverableEvent(object)))
             {
-                hasBeenModified = true;
-                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                if (notRecoverableSet.remove(wrappedStack))
+                {
+                    hasBeenModified = true;
+                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                }
             }
         }
     }
@@ -173,10 +152,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         {
             WrappedStack wrappedStack = WrappedStack.wrap(object);
 
-            if (wrappedStack != null && notRecoverableSet.add(wrappedStack))
+            if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new AbilityEvent.SetNotRecoverableEvent(object)))
             {
-                hasBeenModified = true;
-                LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                if (notRecoverableSet.add(wrappedStack))
+                {
+                    hasBeenModified = true;
+                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                }
             }
         }
     }

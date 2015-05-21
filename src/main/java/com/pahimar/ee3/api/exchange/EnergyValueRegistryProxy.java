@@ -64,11 +64,16 @@ public final class EnergyValueRegistryProxy
 
     public static EnergyValue getEnergyValue(Object object, boolean strict)
     {
+        return getEnergyValue(Phase.ALL, object, strict);
+    }
+
+    public static EnergyValue getEnergyValue(Phase phase, Object object, boolean strict)
+    {
         init();
 
         if (ee3Mod != null)
         {
-            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(object, strict);
+            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValue(phase, object, strict);
         }
 
         return null;
@@ -140,6 +145,7 @@ public final class EnergyValueRegistryProxy
     {
         PRE_ASSIGNMENT,
         POST_ASSIGNMENT,
+        RUNTIME,
         ALL
     }
 }

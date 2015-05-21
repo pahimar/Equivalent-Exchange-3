@@ -5,7 +5,6 @@ import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
@@ -128,17 +127,28 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public EnergyValue getEnergyValue(Object object)
     {
-        return getEnergyValueFromMap(energyValueRegistry.stackMappings, object, false);
+        return getEnergyValue(EnergyValueRegistryProxy.Phase.ALL, object, false);
     }
 
     public EnergyValue getEnergyValue(Object object, boolean strict)
     {
-        return getEnergyValueFromMap(energyValueRegistry.stackMappings, object, strict);
+        return getEnergyValue(EnergyValueRegistryProxy.Phase.ALL, object, strict);
     }
 
-    public EnergyValue getEnergyValueForStack(Object object)
+    public EnergyValue getEnergyValue(EnergyValueRegistryProxy.Phase phase, Object object, boolean strict)
     {
-        return getEnergyValueForStack(object, false);
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT)
+        {
+            return getEnergyValueFromMap(preAssignedMappings, object, strict);
+        }
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT)
+        {
+            return getEnergyValueFromMap(postAssignedMappings, object, strict);
+        }
+        else
+        {
+            return getEnergyValueFromMap(energyValueRegistry.stackMappings, object, strict);
+        }
     }
 
     public EnergyValue getEnergyValueForStack(Object object, boolean strict)
@@ -332,7 +342,6 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         {
             runDynamicEnergyValueResolution();
         }
-        AbilityRegistry.getInstance().discoverAllLearnableItemStacks();
         this.shouldRegenNextRestart = false;
     }
 

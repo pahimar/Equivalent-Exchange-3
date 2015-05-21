@@ -1,10 +1,13 @@
 package com.pahimar.ee3.knowledge;
 
+import com.pahimar.ee3.api.event.PlayerKnowledgeEvent;
+import com.pahimar.ee3.api.event.TemplateKnowledgeEvent;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
 import java.util.HashMap;
@@ -14,8 +17,7 @@ import java.util.UUID;
 public class TransmutationKnowledgeRegistry
 {
     private static TransmutationKnowledgeRegistry transmutationKnowledgeRegistry = null;
-    private static File playerKnowledgeDirectory;
-    private static File dataKnowledgeDirectory;
+    private static File playerKnowledgeDirectory, dataKnowledgeDirectory;
     private static TransmutationKnowledge templateKnowledge;
     private static HashMap<UUID, TransmutationKnowledge> playerKnowledgeMap;
 
@@ -47,11 +49,7 @@ public class TransmutationKnowledgeRegistry
         return templateKnowledge;
     }
 
-    /*****************************************************************************/
-    /**               Template Related Transmutation Knowledge                  **/
-    /**
-     * *************************************************************************
-     */
+    /* Template Related Transmutation Knowledge */
     public Set<ItemStack> getTemplatesKnownTransmutations()
     {
         if (templateKnowledge == null)
@@ -113,24 +111,11 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        if (canTemplateLearn(itemStack))
+        if (canTemplateLearn(itemStack) && !MinecraftForge.EVENT_BUS.post(new TemplateKnowledgeEvent.TemplateLearnKnowledgeEvent(itemStack)))
         {
             templateKnowledge.learnTransmutation(itemStack);
+            saveTemplateKnowledgeToDisk();
         }
-
-        saveTemplateKnowledgeToDisk();
-    }
-
-    public void teachTemplateEverything()
-    {
-        if (templateKnowledge == null)
-        {
-            loadTemplateKnowledgeFromDisk();
-        }
-
-        templateKnowledge.setCanTransmuteEverything(true);
-
-        saveTemplateKnowledgeToDisk();
     }
 
     public void makeTemplateForget(ItemStack itemStack)
@@ -140,12 +125,11 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        if (doesTemplateKnow(itemStack))
+        if (doesTemplateKnow(itemStack) && !MinecraftForge.EVENT_BUS.post(new TemplateKnowledgeEvent.TemplateForgetKnowledgeEvent(itemStack)))
         {
             templateKnowledge.forgetTransmutation(itemStack);
+            saveTemplateKnowledgeToDisk();
         }
-
-        saveTemplateKnowledgeToDisk();
     }
 
     public void makeTemplateForgetEverything()
@@ -155,16 +139,14 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        templateKnowledge.forgetAllTransmutations();
-
-        saveTemplateKnowledgeToDisk();
+        if (!MinecraftForge.EVENT_BUS.post(new TemplateKnowledgeEvent.TemplateForgetAllKnowledgeEvent()))
+        {
+            templateKnowledge.forgetAllTransmutations();
+            saveTemplateKnowledgeToDisk();
+        }
     }
 
-    /*****************************************************************************/
-    /**                Player Related Transmutation Knowledge                   **/
-    /**
-     * *************************************************************************
-     */
+    /* Player Related Transmutation Knowledge */
     public Set<ItemStack> getPlayersKnownTransmutations(EntityPlayer entityPlayer)
     {
         if (entityPlayer != null)
@@ -311,52 +293,9 @@ public class TransmutationKnowledgeRegistry
         if (playerUUID != null && itemStack != null && canPlayerLearn(playerUUID, itemStack))
         {
             loadPlayerFromDiskIfNeeded(playerUUID);
-            if (playerKnowledgeMap.containsKey(playerUUID))
+            if (playerKnowledgeMap.containsKey(playerUUID) && !MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerLearnKnowledgeEvent(playerUUID, itemStack)))
             {
                 playerKnowledgeMap.get(playerUUID).learnTransmutation(itemStack);
-                savePlayerKnowledgeToDisk(playerUUID);
-            }
-        }
-    }
-
-    public void teachPlayerEverything(EntityPlayer entityPlayer)
-    {
-        if (entityPlayer != null)
-        {
-            teachPlayerEverything(entityPlayer.getUniqueID());
-        }
-    }
-
-    public void teachPlayerEverything(UUID playerUUID)
-    {
-        if (playerUUID != null)
-        {
-            loadPlayerFromDiskIfNeeded(playerUUID);
-
-            if (playerKnowledgeMap.containsKey(playerUUID))
-            {
-                playerKnowledgeMap.get(playerUUID).setCanTransmuteEverything(true);
-                savePlayerKnowledgeToDisk(playerUUID);
-            }
-        }
-    }
-
-    public void setPlayerCanTransmuteEverything(EntityPlayer entityPlayer, boolean canTransmuteEverything)
-    {
-        if (entityPlayer != null)
-        {
-            setPlayerCanTransmuteEverything(entityPlayer.getUniqueID(), canTransmuteEverything);
-        }
-    }
-
-    public void setPlayerCanTransmuteEverything(UUID playerUUID, boolean canTransmuteEverything)
-    {
-        if (playerUUID != null)
-        {
-            loadPlayerFromDiskIfNeeded(playerUUID);
-            if (playerKnowledgeMap.containsKey(playerUUID))
-            {
-                playerKnowledgeMap.get(playerUUID).setCanTransmuteEverything(canTransmuteEverything);
                 savePlayerKnowledgeToDisk(playerUUID);
             }
         }
@@ -375,7 +314,7 @@ public class TransmutationKnowledgeRegistry
         if (playerUUID != null && itemStack != null && doesPlayerKnow(playerUUID, itemStack))
         {
             loadPlayerFromDiskIfNeeded(playerUUID);
-            if (playerKnowledgeMap.containsKey(playerUUID))
+            if (playerKnowledgeMap.containsKey(playerUUID) && !MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetKnowledgeEvent(playerUUID, itemStack)))
             {
                 playerKnowledgeMap.get(playerUUID).forgetTransmutation(itemStack);
                 savePlayerKnowledgeToDisk(playerUUID);
@@ -396,7 +335,7 @@ public class TransmutationKnowledgeRegistry
         if (playerUUID != null)
         {
             loadPlayerFromDiskIfNeeded(playerUUID);
-            if (playerKnowledgeMap.containsKey(playerUUID))
+            if (playerKnowledgeMap.containsKey(playerUUID) && !MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetAllKnowledgeEvent(playerUUID)))
             {
                 playerKnowledgeMap.get(playerUUID).forgetAllTransmutations();
                 savePlayerKnowledgeToDisk(playerUUID);
@@ -404,11 +343,7 @@ public class TransmutationKnowledgeRegistry
         }
     }
 
-    /*****************************************************************************/
-    /**                            Serialization                                **/
-    /**
-     * *************************************************************************
-     */
+    /* Serialization */
     public void loadTemplateKnowledgeFromDisk()
     {
         if (dataKnowledgeDirectory != null)
@@ -533,5 +468,11 @@ public class TransmutationKnowledgeRegistry
                 SerializationHelper.writeTransmutationKnowledgeToFile(playerKnowledgeDirectory, playerUUID.toString() + ".json", playerKnowledgeMap.get(playerUUID));
             }
         }
+    }
+
+    public void clear()
+    {
+        saveAll();
+        this.transmutationKnowledgeRegistry = null;
     }
 }

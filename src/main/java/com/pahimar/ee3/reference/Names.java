@@ -99,7 +99,6 @@ public class Names
     {
         public static final String ITEMS = "Items";
         public static final String ITEM_TRANSMUTATION_KNOWLEDGE = "transmutationKnowledge";
-        public static final String CAN_TRANSMUTE_ANYTHING = "CAN_TRANSMUTE_ANYTHING";
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
         public static final String CRAFTING_GUI_OPEN = "craftingGuiOpen";
@@ -164,6 +163,7 @@ public class Names
         public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
         public static final String SET_ITEM_NOT_RECOVERABLE = "set-item-not-recoverable";
         public static final String RUN_TEST = "run-tests";
+        public static final String DEBUG = "debug";
     }
 
     public static final class AlchemyArrays

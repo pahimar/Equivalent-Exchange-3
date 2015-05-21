@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.api.knowledge.TransmutationKnowledgeRegistryProxy;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
-import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityResearchStation;
 import com.pahimar.ee3.reference.Names;
@@ -215,7 +215,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
         if (alchemicalTome != null && playerUUID != null)
         {
-            return TransmutationKnowledgeRegistry.getInstance().canPlayerLearn(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            return TransmutationKnowledgeRegistryProxy.canPlayerLearn(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
 
         return false;
@@ -228,7 +228,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
         if (alchemicalTome != null && playerUUID != null)
         {
-            return TransmutationKnowledgeRegistry.getInstance().doesPlayerKnow(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            return TransmutationKnowledgeRegistryProxy.doesPlayerKnow(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
 
         return false;
@@ -238,7 +238,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-            TransmutationKnowledgeRegistry.getInstance().teachPlayer(ItemHelper.getOwnerUUID(inventory[TOME_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            TransmutationKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerUUID(inventory[TOME_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
 
             this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
 

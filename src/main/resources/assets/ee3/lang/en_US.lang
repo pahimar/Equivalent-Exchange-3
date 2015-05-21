@@ -9,7 +9,7 @@ general.abilities.onlyLoadFile.label=Only load Abilities file
 general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
 
 general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
-general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
+general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
@@ -139,8 +139,6 @@ commands.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item
 commands.ee3.player-forget-item.success=%s made %s forget how to transmute %s
 commands.ee3.player-forget-current-item.usage=/ee3 player-forget-current-item <playername>
 commands.ee3.player-forget-current-item.success=%s made %s forget how to transmute %s
-commands.ee3.template-learn-everything.usage=/ee3 template-learn-everything
-commands.ee3.template-learn-everything.success=%s taught the knowledge template how to transmute everything
 commands.ee3.template-learn-item.usage=/ee3 template-learn-item <item> <data> [dataTag]
 commands.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
 commands.ee3.template-learn-current-item.usage=/ee3 template-learn-current-item
