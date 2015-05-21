@@ -2,6 +2,8 @@ package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
+import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageTileEntityResearchStation;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.ItemHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -11,6 +13,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.Packet;
 
 import java.util.UUID;
 
@@ -166,6 +169,12 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
             }
         }
         itemLearnTime = nbtTagCompound.getInteger("itemLearnTime");
+    }
+    
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityResearchStation(this));
     }
 
     @SideOnly(Side.CLIENT)
