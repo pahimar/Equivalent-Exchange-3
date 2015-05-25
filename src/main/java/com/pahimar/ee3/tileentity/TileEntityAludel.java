@@ -169,7 +169,7 @@ public class TileEntityAludel extends TileEntityEE implements ISidedInventory
     @Override
     public boolean isUseableByPlayer(EntityPlayer var1)
     {
-        return true;
+        return this.worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
     @Override
