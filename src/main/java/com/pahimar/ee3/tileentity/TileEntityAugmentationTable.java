@@ -101,7 +101,7 @@ public class TileEntityAugmentationTable extends TileEntityEE implements IInvent
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        return true;
+        return this.worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
     @Override
