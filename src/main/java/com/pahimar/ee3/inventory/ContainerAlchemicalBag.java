@@ -132,6 +132,12 @@ public class ContainerAlchemicalBag extends ContainerEE
         }
     }
 
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return true;
+    }
+
     public boolean isItemStackParent(ItemStack itemStack)
     {
         if (NBTHelper.hasUUID(itemStack))

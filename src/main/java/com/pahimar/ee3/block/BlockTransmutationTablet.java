@@ -6,7 +6,6 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +15,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockTransmutationTablet extends BlockEE implements ITileEntityProvider
+public class BlockTransmutationTablet extends BlockTileEntityEE
 {
     public BlockTransmutationTablet()
     {

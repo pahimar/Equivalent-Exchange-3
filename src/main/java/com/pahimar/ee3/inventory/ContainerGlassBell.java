@@ -8,8 +8,11 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerGlassBell extends ContainerEE
 {
+    private TileEntityGlassBell tileGlassBell;
+
     public ContainerGlassBell(InventoryPlayer inventoryPlayer, TileEntityGlassBell tileGlassBell)
     {
+        this.tileGlassBell = tileGlassBell;
         this.addSlotToContainer(new Slot(tileGlassBell, TileEntityGlassBell.DISPLAY_SLOT_INVENTORY_INDEX, 80, 26));
 
         // Add the player's inventory slots to the container
@@ -66,5 +69,11 @@ public class ContainerGlassBell extends ContainerEE
         }
 
         return itemStack;
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileGlassBell.isUseableByPlayer(entityPlayer);
     }
 }

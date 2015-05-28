@@ -11,7 +11,6 @@ import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.EntityHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,7 +29,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class BlockAlchemyArray extends BlockEE implements ITileEntityProvider
+public class BlockAlchemyArray extends BlockTileEntityEE
 {
     public BlockAlchemyArray()
     {

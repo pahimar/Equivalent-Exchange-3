@@ -9,7 +9,6 @@ import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class BlockAludel extends BlockEE implements ITileEntityProvider
+public class BlockAludel extends BlockTileEntityEE
 {
     public BlockAludel()
     {
@@ -124,14 +123,6 @@ public class BlockAludel extends BlockEE implements ITileEntityProvider
 
             return true;
         }
-    }
-
-    @Override
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
     }
 
     @Override

@@ -108,4 +108,10 @@ public class ContainerAugmentationTable extends ContainerEE
 
         return itemStack;
     }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityAugmentationTable.isUseableByPlayer(entityPlayer);
+    }
 }
