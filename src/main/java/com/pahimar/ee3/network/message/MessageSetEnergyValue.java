@@ -2,21 +2,18 @@ package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.util.CompressionHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.CompressedStreamTools;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageSetEnergyValue, IMessage>
 {
-    public WrappedStack wrappedStack;
-    public EnergyValue energyValue;
+    public EnergyValueStackMapping energyValueStackMapping;
 
     public MessageSetEnergyValue()
     {
@@ -24,66 +21,43 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
 
     public MessageSetEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue)
     {
-        this.wrappedStack = wrappedStack;
-        this.energyValue = energyValue;
+        this.energyValueStackMapping = new EnergyValueStackMapping(wrappedStack, energyValue);
     }
 
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        byte[] compressedWrappedStack = null;
-        int wrappedStackByteCount = buf.readInt();
+        byte[] compressedEnergyValueStackMapping = null;
+        int energyValueStackMappingByteCount = buf.readInt();
 
-        if (wrappedStackByteCount > 0)
+        if (energyValueStackMappingByteCount > 0)
         {
-            compressedWrappedStack = buf.readBytes(wrappedStackByteCount).array();
+            compressedEnergyValueStackMapping = buf.readBytes(energyValueStackMappingByteCount).array();
         }
 
-        byte[] compressedEnergyValue = null;
-        int energyValueByteCount = buf.readInt();
-
-        if (energyValueByteCount > 0)
+        if (compressedEnergyValueStackMapping != null)
         {
-            compressedEnergyValue = buf.readBytes(energyValueByteCount).array();
-        }
-
-        if (compressedWrappedStack != null && compressedEnergyValue != null)
-        {
-            try
-            {
-                this.wrappedStack = WrappedStack.fromNBTTagCompound(CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedWrappedStack)));
-                this.energyValue = EnergyValue.loadEnergyValueFromNBT(CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedEnergyValue)));
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            String decompressedEnergyValueStackMapping = CompressionHelper.decompressStringFromByteArray(compressedEnergyValueStackMapping);
+            this.energyValueStackMapping = EnergyValueStackMapping.createFromJson(decompressedEnergyValueStackMapping);
         }
     }
 
     @Override
     public void toBytes(ByteBuf buf)
     {
-        byte[] compressedWrappedStack = null;
-        byte[] compressedEnergyValue = null;
+        byte[] compressedBytes = null;
+        String jsonEnergyValueStackMapping = this.energyValueStackMapping.toJson();
 
-        try
+
+        if (jsonEnergyValueStackMapping != null)
         {
-            compressedWrappedStack = CompressedStreamTools.compress(WrappedStack.toNBTTagCompound(wrappedStack));
-            compressedEnergyValue = CompressedStreamTools.compress(EnergyValue.writeEnergyValueToNBT(energyValue));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+            compressedBytes = CompressionHelper.compressStringToByteArray(jsonEnergyValueStackMapping);
         }
 
-        if (compressedWrappedStack != null && compressedEnergyValue != null)
+        if (compressedBytes != null)
         {
-            buf.writeInt(compressedWrappedStack.length);
-            buf.writeBytes(compressedWrappedStack);
-
-            buf.writeInt(compressedEnergyValue.length);
-            buf.writeBytes(compressedEnergyValue);
+            buf.writeInt(compressedBytes.length);
+            buf.writeBytes(compressedBytes);
         }
         else
         {
@@ -94,10 +68,10 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
     @Override
     public IMessage onMessage(MessageSetEnergyValue message, MessageContext ctx)
     {
-        if (message.wrappedStack != null && message.energyValue != null)
+        if (message.energyValueStackMapping != null && message.energyValueStackMapping.wrappedStack != null && message.energyValueStackMapping.energyValue != null)
         {
-            EnergyValueRegistry.getInstance().setEnergyValue(message.wrappedStack, message.energyValue);
-            LogHelper.info(String.format("Client successfully received new EnergyValue '%s' for object '%s'", message.energyValue, message.wrappedStack));
+            EnergyValueRegistry.getInstance().setEnergyValue(message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
+            LogHelper.info(String.format("Client successfully received new EnergyValue '%s' for object '%s'", message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue));
         }
         else
         {
