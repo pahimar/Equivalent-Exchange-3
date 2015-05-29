@@ -1,6 +1,7 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.reference.Settings;
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
@@ -43,7 +44,14 @@ public class LogHelper
 
     public static void trace(Object object)
     {
-        log(Level.TRACE, object);
+        if (!Settings.Debug.logTraceToInfo)
+        {
+            log(Level.TRACE, object);
+        }
+        else
+        {
+            log(Level.INFO, object);
+        }
     }
 
     public static void warn(Object object)
