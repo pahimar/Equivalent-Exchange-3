@@ -169,7 +169,14 @@ public class Names
     public static final class AlchemyArrays
     {
         private static final String ALCHEMY_ARRAY_BASE = "arrays.ee3:";
-        public static final String BASIC_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "test";
+        public static final String ACCELERANT_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "accelerant";
+        public static final String COMBUSTION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "combustion";
+        public static final String CONSTRUCTION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "construction";
+        public static final String CONVEYOR_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "conveyor";
+        public static final String DESTRUCTION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "destruction";
+        public static final String GELID_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "gelid";
+        public static final String PARTHENOGENESIS_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "parthenogenesis";
+        public static final String TRANSFIGURATION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "transfiguration";
         public static final String TRANSMUTATION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "transmutation";
     }
 }

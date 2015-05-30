@@ -22,11 +22,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class TransmutationAlchemyArray extends AlchemyArray implements IInventory
+public class AlchemyArrayTransmutation extends AlchemyArray implements IInventory
 {
     private ItemStack[] inventory = new ItemStack[25];
 
-    public TransmutationAlchemyArray()
+    public AlchemyArrayTransmutation()
     {
         super(Textures.AlchemyArray.TRANSMUTATION_ALCHEMY_ARRAY, Names.AlchemyArrays.TRANSMUTATION_ALCHEMY_ARRAY);
     }

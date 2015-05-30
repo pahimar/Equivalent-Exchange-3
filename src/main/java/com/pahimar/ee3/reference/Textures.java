@@ -75,7 +75,14 @@ public final class Textures
     {
         private static final String SYMBOL_TEXTURE_LOCATION = "textures/arrays/";
 
-        public static final ResourceLocation BASIC_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "test.png");
-        public static final ResourceLocation TRANSMUTATION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "transmutation.png");
+        public static final ResourceLocation ACCELERANT_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayAccelerant.png");
+        public static final ResourceLocation COMBUSTION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayCombustion.png");
+        public static final ResourceLocation CONSTRUCTION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayConstruction.png");
+        public static final ResourceLocation CONVEYOR_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayConveyor.png");
+        public static final ResourceLocation DESTRUCTION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayDestruction.png");
+        public static final ResourceLocation GELID_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayGelid.png");
+        public static final ResourceLocation PARTHENOGENESIS_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayParthenogenesis.png");
+        public static final ResourceLocation TRANSFIGURATION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayTransfiguration.png");
+        public static final ResourceLocation TRANSMUTATION_ALCHEMY_ARRAY = ResourceLocationHelper.getResourceLocation(SYMBOL_TEXTURE_LOCATION + "arrayTransmutation.png");
     }
 }
