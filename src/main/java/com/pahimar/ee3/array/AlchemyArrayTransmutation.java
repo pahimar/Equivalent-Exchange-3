@@ -1,6 +1,5 @@
 package com.pahimar.ee3.array;
 
-import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
@@ -22,7 +21,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class AlchemyArrayTransmutation extends AlchemyArray implements IInventory
+public class AlchemyArrayTransmutation extends AlchemyArrayEE implements IInventory
 {
     private ItemStack[] inventory = new ItemStack[25];
 
