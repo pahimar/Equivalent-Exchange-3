@@ -51,6 +51,14 @@ public class TileEntityRendererAlchemyArray extends TileEntitySpecialRenderer
                         {
                             scale = 5;
                         }
+                        else if (tileEntityAlchemyArray.getSize() == 4)
+                        {
+                            scale = 7;
+                        }
+                        else if (tileEntityAlchemyArray.getSize() == 5)
+                        {
+                            scale = 9;
+                        }
 
                         GL11.glDisable(GL11.GL_CULL_FACE);
                         GL11.glDisable(GL11.GL_LIGHTING);
