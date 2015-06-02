@@ -6,7 +6,6 @@ import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityDummyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,7 +22,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class BlockDummyArray extends BlockEE implements ITileEntityProvider
+public class BlockDummyArray extends BlockTileEntityEE
 {
     public BlockDummyArray()
     {

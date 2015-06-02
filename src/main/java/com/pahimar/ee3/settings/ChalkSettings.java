@@ -11,7 +11,7 @@ public class ChalkSettings implements INBTTaggable
     private int size;
     private int rotation;
 
-    private final int MAX_SIZE = 3;
+    private final int MAX_SIZE = 5;
 
     public ChalkSettings()
     {

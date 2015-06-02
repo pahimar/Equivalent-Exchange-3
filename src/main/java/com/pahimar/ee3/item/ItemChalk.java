@@ -25,7 +25,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         super();
         this.setUnlocalizedName(Names.Items.CHALK);
-        this.setMaxDamage(49);
+        this.setMaxDamage(80);
         this.canRepair = true;
     }
 

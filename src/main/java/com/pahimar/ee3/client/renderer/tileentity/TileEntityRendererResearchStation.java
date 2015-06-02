@@ -1,20 +1,18 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
+import com.pahimar.ee3.client.renderer.model.ModelResearchStation;
+import com.pahimar.ee3.reference.Textures;
+import com.pahimar.ee3.tileentity.TileEntityResearchStation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL11;
-
-import com.pahimar.ee3.client.renderer.model.ModelResearchStation;
-import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityResearchStation;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
@@ -67,7 +65,7 @@ public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
             GL11.glPushMatrix();
 
             ItemStack tome = tileEntityResearchStation.getStackInSlot(TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX);
-            if (tome != null)
+            if (Minecraft.getMinecraft().gameSettings.fancyGraphics && tome != null)
             {
                 EntityItem ghostEntityItem = new EntityItem(tileEntityResearchStation.getWorldObj());
                 ghostEntityItem.hoverStart = 0.0F;

@@ -169,6 +169,12 @@ public class ContainerCalcinator extends ContainerEE
         }
     }
 
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityCalcinator.isUseableByPlayer(entityPlayer);
+    }
+
     private class SlotCalcinator extends Slot
     {
         public SlotCalcinator(IInventory inventory, int slotIndex, int x, int y)

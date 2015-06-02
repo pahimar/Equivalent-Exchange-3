@@ -13,16 +13,16 @@ public class ModBlocks
 {
     public static final BlockEE chalkBlock = new BlockChalk();
     public static final BlockEE alchemicalFuelBlock = new BlockAlchemicalFuel();
-    public static final BlockEE alchemicalChest = new BlockAlchemicalChest();
-    public static final BlockEE aludel = new BlockAludel();
-    public static final BlockEE calcinator = new BlockCalcinator();
-    public static final BlockEE glassBell = new BlockGlassBell();
-    public static final BlockEE researchStation = new BlockResearchStation();
-    public static final BlockEE augmentationTable = new BlockAugmentationTable();
+    public static final BlockTileEntityEE alchemicalChest = new BlockAlchemicalChest();
+    public static final BlockTileEntityEE aludel = new BlockAludel();
+    public static final BlockTileEntityEE calcinator = new BlockCalcinator();
+    public static final BlockTileEntityEE glassBell = new BlockGlassBell();
+    public static final BlockTileEntityEE researchStation = new BlockResearchStation();
+    public static final BlockTileEntityEE augmentationTable = new BlockAugmentationTable();
     public static final BlockEE ashInfusedStone = new BlockAshInfusedStone();
-    public static final BlockEE alchemyArray = new BlockAlchemyArray();
-    public static final BlockEE dummyArray = new BlockDummyArray();
-    public static final BlockEE transmutationTablet = new BlockTransmutationTablet();
+    public static final BlockTileEntityEE alchemyArray = new BlockAlchemyArray();
+    public static final BlockTileEntityEE dummyArray = new BlockDummyArray();
+    public static final BlockTileEntityEE transmutationTablet = new BlockTransmutationTablet();
     public static final Block ashInfusedStoneSlab = new BlockAshInfusedStoneSlab();
 
     public static void init()

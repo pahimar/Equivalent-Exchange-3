@@ -21,4 +21,9 @@ public class Settings
     {
         public static String regenerateEnergyValuesWhen;
     }
+
+    public static class Debug
+    {
+        public static boolean logTraceToInfo;
+    }
 }

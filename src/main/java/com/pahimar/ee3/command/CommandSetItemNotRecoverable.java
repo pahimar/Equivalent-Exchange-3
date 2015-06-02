@@ -76,7 +76,7 @@ public class CommandSetItemNotRecoverable extends CommandBase
                 }
             }
 
-            AbilityRegistryProxy.setAsRecoverable(itemStack);
+            AbilityRegistryProxy.setAsNotRecoverable(itemStack);
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_NOT_RECOVERABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

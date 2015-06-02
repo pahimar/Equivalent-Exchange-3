@@ -134,6 +134,12 @@ public class ContainerResearchStation extends ContainerEE
     }
 
     @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityResearchStation.isUseableByPlayer(entityPlayer);
+    }
+
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
         ItemStack itemStack = null;

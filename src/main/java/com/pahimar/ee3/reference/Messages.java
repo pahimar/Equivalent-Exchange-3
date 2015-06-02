@@ -123,5 +123,9 @@ public final class Messages
         public static final String REGENERATE_ENERGYVALUES_WHEN = "energyvalues.regenerateEnergyValuesWhen";
         public static final String REGENERATE_ENERGYVALUES_WHEN_LABEL = "general.energyvalues.regenerateEnergyValuesWhen.label";
         public static final String REGENERATE_ENERGYVALUES_WHEN_COMMENT = "general.energyvalues.regenerateEnergyValuesWhen.comment";
+
+        public static final String LOG_TRACE_TO_INFO = "debug.logTraceToInfo";
+        public static final String LOG_TRACE_TO_INFO_LABEL = "debug.logTraceToInfo.label";
+        public static final String LOG_TRACE_TO_INFO_COMMENT = "debug.logTraceToInfo.comment";
     }
 }

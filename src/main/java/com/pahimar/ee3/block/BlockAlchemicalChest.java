@@ -10,7 +10,6 @@ import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestMedium;
 import com.pahimar.ee3.tileentity.TileEntityAlchemicalChestSmall;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
+public class BlockAlchemicalChest extends BlockTileEntityEE
 {
     public BlockAlchemicalChest()
     {
@@ -91,14 +90,6 @@ public class BlockAlchemicalChest extends BlockEE implements ITileEntityProvider
 
             return true;
         }
-    }
-
-    @Override
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
     }
 
     @Override

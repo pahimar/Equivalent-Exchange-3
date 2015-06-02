@@ -5,13 +5,12 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockResearchStation extends BlockEE implements ITileEntityProvider
+public class BlockResearchStation extends BlockTileEntityEE
 {
     public BlockResearchStation()
     {

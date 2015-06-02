@@ -190,4 +190,10 @@ public class ContainerAludel extends ContainerEE
             this.tileEntityAludel.itemCookTime = updatedValue;
         }
     }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityAludel.isUseableByPlayer(entityPlayer);
+    }
 }

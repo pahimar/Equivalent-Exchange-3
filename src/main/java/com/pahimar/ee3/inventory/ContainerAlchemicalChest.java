@@ -115,6 +115,12 @@ public class ContainerAlchemicalChest extends ContainerEE
     }
 
     @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityAlchemicalChest.isUseableByPlayer(entityPlayer);
+    }
+
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex)
     {
         ItemStack newItemStack = null;

@@ -119,4 +119,10 @@ public class ContainerTransmutationArray extends ContainerEE
 
         return itemStack;
     }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return this.tileEntityAlchemyArray.isUseableByPlayer(entityPlayer);
+    }
 }

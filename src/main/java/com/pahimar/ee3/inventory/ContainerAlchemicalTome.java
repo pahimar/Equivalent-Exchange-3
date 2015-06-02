@@ -131,6 +131,12 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         }
     }
 
+    @Override
+    public boolean canInteractWith(EntityPlayer entityPlayer)
+    {
+        return true;
+    }
+
     public int getInventorySize()
     {
         return inventoryAlchemicalTome.getSizeInventory();

@@ -7,7 +7,6 @@ import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockGlassBell extends BlockEE implements ITileEntityProvider
+public class BlockGlassBell extends BlockTileEntityEE
 {
     public BlockGlassBell()
     {

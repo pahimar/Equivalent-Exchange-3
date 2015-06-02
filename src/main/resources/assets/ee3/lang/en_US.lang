@@ -11,6 +11,9 @@ general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities
 general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
 general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
+debug.logTraceToInfo.label=Log TRACE to INFO
+debug.logTraceToInfo.comment=Whether or not to log TRACE level logging events to INFO
+
 # Keys
 key.categories.ee3=Equivalent Exchange 3
 key.charge=Charge
@@ -96,7 +99,14 @@ tile.ee3:transmutationTablet.name=Transmutation Tablet
 fluid.ee3.milk=Milk
 
 # Alchemy Arrays
-arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
+arrays.ee3:accelerant=Accelerant Alchemy Array [WIP]
+arrays.ee3:combustion=Combustion Alchemy Array [WIP]
+arrays.ee3:construction=Construction Alchemy Array [WIP]
+arrays.ee3:conveyor=Conveyor Alchemy Array [WIP]
+arrays.ee3:destruction=Destruction Alchemy Array [WIP]
+arrays.ee3:gelid=Gelid Alchemy Array [WIP]
+arrays.ee3:parthenogenesis=Parthenogenesis Alchemy Array [WIP]
+arrays.ee3:transfiguration=Transfiguration Alchemy Array [WIP]
 arrays.ee3:transmutation=Transmutation Alchemy Array [WIP]
 
 # GUIs

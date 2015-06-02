@@ -6,7 +6,6 @@ import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.tileentity.TileEntityCalcinator;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCalcinator extends BlockEE implements ITileEntityProvider
+public class BlockCalcinator extends BlockTileEntityEE
 {
     public BlockCalcinator()
     {
@@ -56,19 +55,10 @@ public class BlockCalcinator extends BlockEE implements ITileEntityProvider
         {
             if (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
             {
-                // Fire pot particles
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);
                 world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.4F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
             }
         }
-    }
-
-    @Override
-    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventData)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventId, eventData);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity.receiveClientEvent(eventId, eventData);
     }
 
     @Override
