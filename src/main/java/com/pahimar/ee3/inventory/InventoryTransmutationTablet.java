@@ -130,7 +130,7 @@ public class InventoryTransmutationTablet implements IInventory
     @Override
     public String getInventoryName()
     {
-        return Names.Containers.ALCHEMICAL_TOME;
+        return Names.Containers.TRANSMUTATION_TABLET;
     }
 
     @Override
