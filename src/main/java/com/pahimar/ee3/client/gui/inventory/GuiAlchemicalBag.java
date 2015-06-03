@@ -96,4 +96,11 @@ public class GuiAlchemicalBag extends GuiContainer
             }
         }
     }
+
+    @Override
+    protected boolean checkHotbarKeys(int key)
+    {
+        return false;
+    }
+    
 }
