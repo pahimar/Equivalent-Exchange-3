@@ -170,6 +170,12 @@ public class GuiTransmutationTablet extends GuiBase
     }
 
     @Override
+    protected boolean checkHotbarKeys(int key)
+    {
+        return false;
+    }
+
+    @Override
     public void handleElementButtonClick(String buttonName, int mouseButton)
     {
         if (buttonName.equals("sortOption"))

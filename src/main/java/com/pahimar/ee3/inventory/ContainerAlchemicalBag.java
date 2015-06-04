@@ -95,15 +95,54 @@ public class ContainerAlchemicalBag extends ContainerEE
         {
             if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 0)
             {
-                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
+            	if(!(entityPlayer.inventory.getStackInSlot(actionBarSlotIndex)==inventoryAlchemicalBag.parentItemStack))
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162));
+            	}
+            	else
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 162)
+            		{
+            			public boolean canTakeStack(EntityPlayer p_82869_1_)
+            		    {
+            		        return false;
+            		    }
+            		});
+            	}
             }
             else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 1)
             {
-                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
+            	if(!(entityPlayer.inventory.getStackInSlot(actionBarSlotIndex)==inventoryAlchemicalBag.parentItemStack))
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216));
+            	}
+            	else
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 35 + actionBarSlotIndex * 18, 216)
+            		{
+            			public boolean canTakeStack(EntityPlayer p_82869_1_)
+            		    {
+            		        return false;
+            		    }
+            		});
+            	}
             }
             else if (inventoryAlchemicalBag.parentItemStack.getItemDamage() == 2)
             {
-                this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
+            	if(!(entityPlayer.inventory.getStackInSlot(actionBarSlotIndex)==inventoryAlchemicalBag.parentItemStack))
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232));
+            	}
+            	else
+            	{
+            		this.addSlotToContainer(new Slot(entityPlayer.inventory, actionBarSlotIndex, 44 + actionBarSlotIndex * 18, 232)
+            		{
+            			public boolean canTakeStack(EntityPlayer p_82869_1_)
+            		    {
+            		        return false;
+            		    }
+            		});
+            	}
             }
         }
     }
