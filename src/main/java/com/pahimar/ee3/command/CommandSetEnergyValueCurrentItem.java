@@ -81,6 +81,10 @@ public class CommandSetEnergyValueCurrentItem extends CommandBase
                         SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.POST_ASSIGNED_ENERGY_VALUES, postAssignedValues);
                         PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
                     }
+                    else
+                    {
+                        throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_CURRENT_ITEM_USAGE);
+                    }
 
                     // Notify admins and log the value change
                     func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_CURRENT_ITEM_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
