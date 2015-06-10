@@ -137,11 +137,11 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public EnergyValue getEnergyValue(EnergyValueRegistryProxy.Phase phase, Object object, boolean strict)
     {
-        if (phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT || phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
         {
             return getEnergyValueFromMap(preCalculationMappings, object, strict);
         }
-        else if (phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT || phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
         {
             return getEnergyValueFromMap(postCalculationMappings, object, strict);
         }
@@ -832,14 +832,14 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     public void dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase phase)
     {
         LogHelper.info(String.format("BEGIN DUMPING %s ENERGY VALUE MAPPINGS", phase));
-        if (phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT || phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
         {
             for (WrappedStack wrappedStack : this.preCalculationMappings.keySet())
             {
                 LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
             }
         }
-        else if (phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT || phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
         {
             if (this.postCalculationMappings != null)
             {

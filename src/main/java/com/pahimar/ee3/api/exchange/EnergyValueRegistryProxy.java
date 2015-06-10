@@ -177,9 +177,22 @@ public final class EnergyValueRegistryProxy
 
     public enum Phase
     {
+        /**
+         * @Deprecated Use PRE_CALCULATION instead
+         */
+        @Deprecated PRE_ASSIGNMENT,
+
         PRE_CALCULATION,
+
+        /**
+         * @Deprecated Use POST_CALCULATION instead
+         */
+        @Deprecated POST_ASSIGNMENT,
+
         POST_CALCULATION,
+
         RUNTIME,
+
         ALL
     }
 }
