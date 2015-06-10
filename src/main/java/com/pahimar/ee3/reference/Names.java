@@ -21,7 +21,7 @@ public class Names
 
     public static final class TileEntities
     {
-        private static final String PREFIX = "tile.ee3:";
+        private static final String PREFIX = "tile.";
         private static final String SUFFIX = ".name";
 
         public static final String ALCHEMICAL_CHEST = PREFIX + Blocks.ALCHEMICAL_CHEST + SUFFIX;
