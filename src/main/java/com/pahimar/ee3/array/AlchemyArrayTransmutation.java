@@ -9,6 +9,8 @@ import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.CommonParticleHelper;
 import com.pahimar.ee3.util.CommonSoundHelper;
+import com.pahimar.ee3.util.LogHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -28,6 +30,12 @@ public class AlchemyArrayTransmutation extends AlchemyArrayEE implements IInvent
     public AlchemyArrayTransmutation()
     {
         super(Textures.AlchemyArray.TRANSMUTATION_ALCHEMY_ARRAY, Names.AlchemyArrays.TRANSMUTATION_ALCHEMY_ARRAY);
+    }
+
+    @Override
+    public void onEntityCollidedWithArray(World world, int eventX, int eventY, int eventZ, int arrayX, int arrayY, int arrayZ, Entity entity)
+    {
+        LogHelper.info(entity);
     }
 
     @Override
@@ -66,6 +74,7 @@ public class AlchemyArrayTransmutation extends AlchemyArrayEE implements IInvent
                     if (world.getTileEntity(arrayX, arrayY - 1, arrayZ) instanceof TileEntityTransmutationTablet)
                     {
                         ((TileEntityTransmutationTablet) world.getTileEntity(arrayX, arrayY - 1, arrayZ)).setOrientation(tileEntityAlchemyArray.getOrientation());
+                        ((TileEntityTransmutationTablet) world.getTileEntity(arrayX, arrayY - 1, arrayZ)).setRotation(tileEntityAlchemyArray.getRotation());
                     }
 
                     ejectInventory(world, arrayX, arrayY, arrayZ);

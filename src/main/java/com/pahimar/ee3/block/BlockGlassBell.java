@@ -12,8 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -118,16 +116,12 @@ public class BlockGlassBell extends BlockTileEntityEE
         return sideHit;
     }
 
-    /**
-     * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
-     * x, y, z, startVec, endVec
-     */
     @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityGlassBell)
+        if (iBlockAccess.getTileEntity(x, y, z) instanceof TileEntityGlassBell)
         {
-            TileEntityGlassBell tileGlassBell = (TileEntityGlassBell) world.getTileEntity(x, y, z);
+            TileEntityGlassBell tileGlassBell = (TileEntityGlassBell) iBlockAccess.getTileEntity(x, y, z);
 
             switch (tileGlassBell.getOrientation())
             {
@@ -167,7 +161,5 @@ public class BlockGlassBell extends BlockTileEntityEE
                 }
             }
         }
-
-        return super.collisionRayTrace(world, x, y, z, startVec, endVec);
     }
 }

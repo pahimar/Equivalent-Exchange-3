@@ -21,17 +21,17 @@ import java.util.*;
 
 public class SerializationHelper
 {
-    private static File dataDirectory;
-    private static File playerDataDirectory;
+    private static File instanceDataDirectory;
+    private static File instancePlayerDataDirectory;
 
     /**
      * Returns a File reference to the mod specific directory in the data directory
      *
      * @return
      */
-    public static File getDataDirectory()
+    public static File getInstanceDataDirectory()
     {
-        return dataDirectory;
+        return instanceDataDirectory;
     }
 
     /**
@@ -39,9 +39,9 @@ public class SerializationHelper
      *
      * @return
      */
-    public static File getPlayerDataDirectory()
+    public static File getInstancePlayerDataDirectory()
     {
-        return playerDataDirectory;
+        return instancePlayerDataDirectory;
     }
 
     /**
@@ -49,11 +49,11 @@ public class SerializationHelper
      */
     public static void initModDataDirectories()
     {
-        dataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-        dataDirectory.mkdirs();
+        instanceDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
+        instanceDataDirectory.mkdirs();
 
-        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
-        playerDataDirectory.mkdirs();
+        instancePlayerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
+        instancePlayerDataDirectory.mkdirs();
     }
 
     public static String getModListMD5()

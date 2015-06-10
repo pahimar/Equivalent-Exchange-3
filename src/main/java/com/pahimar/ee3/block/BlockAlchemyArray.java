@@ -20,8 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -76,11 +74,11 @@ public class BlockAlchemyArray extends BlockTileEntityEE
     }
 
     @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
+        if (iBlockAccess.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray)
         {
-            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) world.getTileEntity(x, y, z);
+            TileEntityAlchemyArray tileEntityAlchemyArray = (TileEntityAlchemyArray) iBlockAccess.getTileEntity(x, y, z);
 
             switch (tileEntityAlchemyArray.getOrientation())
             {
@@ -118,10 +116,12 @@ public class BlockAlchemyArray extends BlockTileEntityEE
                 {
                     break;
                 }
+                default:
+                {
+                    this.setBlockBounds(0f, 0f, 0f, 1f, 0.0625f, 1f);
+                }
             }
         }
-
-        return super.collisionRayTrace(world, x, y, z, startVec, endVec);
     }
 
     @Override

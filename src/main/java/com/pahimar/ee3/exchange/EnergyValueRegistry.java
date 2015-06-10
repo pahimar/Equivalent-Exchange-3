@@ -26,15 +26,15 @@ import java.util.*;
 
 public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
-    private static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
-    private static final Gson prettyJsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+    private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
 
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
-    private static Map<WrappedStack, EnergyValue> preAssignedMappings;
-    private static Map<WrappedStack, EnergyValue> postAssignedMappings;
+    private static Map<WrappedStack, EnergyValue> preCalculationMappings;
+    private static Map<WrappedStack, EnergyValue> postCalculationMappings;
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackMappings;
     private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMappings;
+    private SortedSet<WrappedStack> uncomputedStacks;
 
     private EnergyValueRegistry()
     {
@@ -50,16 +50,16 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         return energyValueRegistry;
     }
 
-    public void addPreAssignedEnergyValue(Object object, float energyValue)
+    public void addPreCalculationEnergyValue(Object object, float energyValue)
     {
-        addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
+        addPreCalculationEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
+    public void addPreCalculationEnergyValue(Object object, EnergyValue energyValue)
     {
-        if (preAssignedMappings == null)
+        if (preCalculationMappings == null)
         {
-            preAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
+            preCalculationMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0)
@@ -71,33 +71,33 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
-                if (preAssignedMappings.containsKey(factoredWrappedStack))
+                if (preCalculationMappings.containsKey(factoredWrappedStack))
                 {
-                    if (factoredEnergyValue.compareTo(preAssignedMappings.get(factoredWrappedStack)) < 0)
+                    if (factoredEnergyValue.compareTo(preCalculationMappings.get(factoredWrappedStack)) < 0)
                     {
                         LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a pre-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
-                        preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+                        preCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
                     }
                 }
                 else
                 {
                     LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a pre-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
-                    preAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+                    preCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
                 }
             }
         }
     }
 
-    public void addPostAssignedExactEnergyValue(Object object, float energyValue)
+    public void addPostCalculationExactEnergyValue(Object object, float energyValue)
     {
-        addPostAssignedExactEnergyValue(object, new EnergyValue(energyValue));
+        addPostCalculationExactEnergyValue(object, new EnergyValue(energyValue));
     }
 
-    public void addPostAssignedExactEnergyValue(Object object, EnergyValue energyValue)
+    public void addPostCalculationExactEnergyValue(Object object, EnergyValue energyValue)
     {
-        if (postAssignedMappings == null)
+        if (postCalculationMappings == null)
         {
-            postAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
+            postCalculationMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0)
@@ -110,7 +110,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
 
                 LogHelper.trace(String.format("EnergyValueRegistry[%s]: Mod with ID '%s' added a post-assignment energy value of %s for object %s", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack));
-                postAssignedMappings.put(factoredWrappedStack, factoredEnergyValue);
+                postCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
             }
         }
     }
@@ -137,13 +137,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public EnergyValue getEnergyValue(EnergyValueRegistryProxy.Phase phase, Object object, boolean strict)
     {
-        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT)
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
         {
-            return getEnergyValueFromMap(preAssignedMappings, object, strict);
+            return getEnergyValueFromMap(preCalculationMappings, object, strict);
         }
-        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT)
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
         {
-            return getEnergyValueFromMap(postAssignedMappings, object, strict);
+            return getEnergyValueFromMap(postCalculationMappings, object, strict);
         }
         else
         {
@@ -348,53 +348,60 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     private void runDynamicEnergyValueResolution()
     {
         TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
+        uncomputedStacks = null;
 
-        /*
-         *  Pre-assigned values
-         */
-        stackValueMap.putAll(preAssignedMappings);
+        // Add in all mod specified pre-calculation values
+        stackValueMap.putAll(preCalculationMappings); // TODO Logging
 
-        // Grab custom pre-assigned values from file
-        Map<WrappedStack, EnergyValue> preAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_ASSIGNED_ENERGY_VALUES);
-        for (WrappedStack wrappedStack : preAssignedValueMap.keySet())
+        // Add in all global pre-calculation values
+        LogHelper.trace(String.format("BEGIN Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
+        Map<WrappedStack, EnergyValue> globalPreCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.preCalcluationEnergyValueFile);
+        for (WrappedStack wrappedStack : globalPreCalculationValueMap.keySet())
         {
-            if (preAssignedValueMap.get(wrappedStack) != null)
+            if (globalPreCalculationValueMap.get(wrappedStack) != null)
             {
-                stackValueMap.put(wrappedStack, preAssignedValueMap.get(wrappedStack));
+                stackValueMap.put(wrappedStack, globalPreCalculationValueMap.get(wrappedStack));
+                LogHelper.trace(String.format("Adding EnergyValue %s for %s", globalPreCalculationValueMap.get(wrappedStack), wrappedStack));
             }
         }
+        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
+
+        // Add in all instance pre-calculation values
+        LogHelper.trace(String.format("BEGIN Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
+        Map<WrappedStack, EnergyValue> instancePreAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES);
+        for (WrappedStack wrappedStack : instancePreAssignedValueMap.keySet())
+        {
+            if (instancePreAssignedValueMap.get(wrappedStack) != null)
+            {
+                stackValueMap.put(wrappedStack, instancePreAssignedValueMap.get(wrappedStack));
+                LogHelper.trace(String.format("Adding EnergyValue %s for %s", instancePreAssignedValueMap.get(wrappedStack), wrappedStack));
+            }
+        }
+        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
 
         /*
          *  Auto-assignment
          */
-        // Initialize the maps for the first pass to happen
-        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackValueMap);
-        stackMappings = stackMappingsBuilder.build();
-        Map<WrappedStack, EnergyValue> computedStackValues = new TreeMap<WrappedStack, EnergyValue>();
-
-        // Initialize the pass counter
+        Map<WrappedStack, EnergyValue> computedStackValues;
         int passNumber = 0;
         long computationStartTime = System.currentTimeMillis();
         long passStartTime;
-        int computedValueCount = 0;
+        int passComputedValueCount = 0;
         int totalComputedValueCount = 0;
-        LogHelper.info("Beginning dynamic value computation");
+        LogHelper.info("Beginning dynamic value calculation");
         boolean isFirstPass = true;
-        while ((isFirstPass || computedValueCount > 0) && (passNumber < 16))
+        while ((isFirstPass || passComputedValueCount > 0) && (passNumber < 16))
         {
             if (isFirstPass)
             {
                 isFirstPass = false;
             }
-
-            computedValueCount = 0;
+            passComputedValueCount = 0;
             passStartTime = System.currentTimeMillis();
-            // Increment the pass counter
             passNumber++;
 
             // Compute stack mappings from existing stack mappings
-            computedStackValues = computeStackMappings(stackValueMap);
+            computedStackValues = computeStackMappings(stackValueMap, passNumber);
 
             for (WrappedStack keyStack : computedStackValues.keySet())
             {
@@ -416,50 +423,70 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                     {
                         if (factoredExchangeEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
                         {
+                            LogHelper.trace(String.format("")); // TODO Log message
                             stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
                         }
                     }
                     else
                     {
+                        LogHelper.trace(String.format("")); // TODO Log message
                         stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
-                        computedValueCount++;
+                        passComputedValueCount++;
                         totalComputedValueCount++;
                     }
                 }
             }
-            LogHelper.info(String.format("Pass %s: Computed %s values for objects in %s ms", passNumber, computedValueCount, System.currentTimeMillis() - passStartTime));
+            LogHelper.info(String.format("Pass %s: Calculated %s values for objects in %s ms", passNumber, passComputedValueCount, System.currentTimeMillis() - passStartTime));
         }
-        LogHelper.info(String.format("Finished dynamic value computation (computed %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
+        LogHelper.info(String.format("Finished dynamic value calculation (calculated %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
 
-        if (postAssignedMappings != null)
+        // Add in all mod specified post-calculation values
+        // TODO Logging
+        if (postCalculationMappings != null)
         {
-            for (WrappedStack wrappedStack : postAssignedMappings.keySet())
+            for (WrappedStack wrappedStack : postCalculationMappings.keySet())
             {
-                if (postAssignedMappings.get(wrappedStack) != null)
+                if (postCalculationMappings.get(wrappedStack) != null)
                 {
-                    stackValueMap.put(wrappedStack, postAssignedMappings.get(wrappedStack));
+                    stackValueMap.put(wrappedStack, postCalculationMappings.get(wrappedStack));
                 }
             }
         }
         else
         {
-            postAssignedMappings = new TreeMap<WrappedStack, EnergyValue>();
+            postCalculationMappings = new TreeMap<WrappedStack, EnergyValue>();
         }
 
-        // Grab custom post-assigned values from file
-        Map<WrappedStack, EnergyValue> postAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_ASSIGNED_ENERGY_VALUES);
-        for (WrappedStack wrappedStack : postAssignedValueMap.keySet())
+        // Add in all global post-calculation values
+        LogHelper.trace(String.format("Begin Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
+        Map<WrappedStack, EnergyValue> globalPostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.postCalcluationEnergyValueFile);
+        for (WrappedStack wrappedStack : globalPostCalculationValueMap.keySet())
         {
-            if (postAssignedValueMap.get(wrappedStack) != null)
+            if (globalPostCalculationValueMap.get(wrappedStack) != null)
             {
-                stackValueMap.put(wrappedStack, postAssignedValueMap.get(wrappedStack));
+                stackValueMap.put(wrappedStack, globalPostCalculationValueMap.get(wrappedStack));
+                LogHelper.trace(String.format("Adding EnergyValue %s for %s", globalPostCalculationValueMap.get(wrappedStack), wrappedStack));
             }
         }
+        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
+
+        // Add in all instance post-calculation values
+        LogHelper.trace(String.format("Begin Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
+        Map<WrappedStack, EnergyValue> instancePostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_CALCULATION_ENERGY_VALUES);
+        for (WrappedStack wrappedStack : instancePostCalculationValueMap.keySet())
+        {
+            if (instancePostCalculationValueMap.get(wrappedStack) != null)
+            {
+                stackValueMap.put(wrappedStack, instancePostCalculationValueMap.get(wrappedStack));
+                LogHelper.trace(String.format("Adding EnergyValue %s for %s", instancePreAssignedValueMap.get(wrappedStack), wrappedStack));
+            }
+        }
+        LogHelper.trace(String.format("End Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
 
         /**
          * Finalize the stack to value map
          */
-        stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         stackMappings = stackMappingsBuilder.build();
 
@@ -471,6 +498,17 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         // Serialize values to disk
         LogHelper.info("Saving energy values to disk");
         save();
+
+        // TODO Make this make "sense" and also ensure it's added as an option to the debug command
+        LogHelper.info("BEGIN UNCOMPUTED OBJECT LIST");
+        for (WrappedStack wrappedStack : uncomputedStacks)
+        {
+            if (!hasEnergyValue(wrappedStack))
+            {
+                LogHelper.info(wrappedStack);
+            }
+        }
+        LogHelper.info("END UNCOMPUTED OBJECT LIST");
     }
 
     private void generateValueStackMappings()
@@ -502,12 +540,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
     }
 
-    private Map<WrappedStack, EnergyValue> computeStackMappings(Map<WrappedStack, EnergyValue> stackValueMappings)
+    private Map<WrappedStack, EnergyValue> computeStackMappings(Map<WrappedStack, EnergyValue> stackValueMappings, int passCount)
     {
         Map<WrappedStack, EnergyValue> computedStackMap = new TreeMap<WrappedStack, EnergyValue>();
 
         for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet())
         {
+            // TODO Review: possible fault in the logic here that is preventing some values from being assigned?
             if (!hasEnergyValue(recipeOutput.getWrappedObject(), false) && !computedStackMap.containsKey(recipeOutput))
             {
                 EnergyValue lowestValue = null;
@@ -522,6 +561,15 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                         {
                             lowestValue = computedValue;
                         }
+                    }
+                    else
+                    {
+                        if (uncomputedStacks == null)
+                        {
+                            uncomputedStacks = new TreeSet<WrappedStack>();
+                        }
+
+                        uncomputedStacks.add(recipeOutput);
                     }
                 }
 
@@ -616,47 +664,14 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     {
         if (wrappedStack != null && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0)
         {
-            TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
-
-            /**
-             *  Read stack value mappings from NBTTagCompound
-             */
-            stackValueMap.putAll(stackMappings);
+            TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>(stackMappings);
             stackValueMap.put(wrappedStack, energyValue);
 
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(stackValueMap);
             stackMappings = stackMappingsBuilder.build();
 
-            /**
-             *  Resolve value stack mappings from the newly loaded stack mappings
-             */
-            SortedMap<EnergyValue, List<WrappedStack>> tempValueMappings = new TreeMap<EnergyValue, List<WrappedStack>>();
-
-            for (WrappedStack stack : stackMappings.keySet())
-            {
-                if (stack != null)
-                {
-                    EnergyValue value = stackMappings.get(stack);
-
-                    if (value != null)
-                    {
-                        if (tempValueMappings.containsKey(value))
-                        {
-                            if (!(tempValueMappings.get(value).contains(stack)))
-                            {
-                                tempValueMappings.get(value).add(stack);
-                            }
-                        }
-                        else
-                        {
-                            tempValueMappings.put(value, new ArrayList<WrappedStack>(Arrays.asList(stack)));
-                        }
-                    }
-                }
-            }
-
-            valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+            generateValueStackMappings();
         }
     }
 
@@ -763,7 +778,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public String toJson()
     {
-        return prettyJsonSerializer.toJson(this);
+        return JSON_SERIALIZER.toJson(this);
     }
 
     @Override
@@ -817,18 +832,18 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     public void dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase phase)
     {
         LogHelper.info(String.format("BEGIN DUMPING %s ENERGY VALUE MAPPINGS", phase));
-        if (phase == EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT)
+        if (phase == EnergyValueRegistryProxy.Phase.PRE_CALCULATION)
         {
-            for (WrappedStack wrappedStack : this.preAssignedMappings.keySet())
+            for (WrappedStack wrappedStack : this.preCalculationMappings.keySet())
             {
                 LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
             }
         }
-        else if (phase == EnergyValueRegistryProxy.Phase.POST_ASSIGNMENT)
+        else if (phase == EnergyValueRegistryProxy.Phase.POST_CALCULATION)
         {
-            if (this.postAssignedMappings != null)
+            if (this.postCalculationMappings != null)
             {
-                for (WrappedStack wrappedStack : this.postAssignedMappings.keySet())
+                for (WrappedStack wrappedStack : this.postCalculationMappings.keySet())
                 {
                     LogHelper.info(String.format("- Object: %s, Value: %s", wrappedStack, EnergyValueRegistry.getInstance().getStackValueMap().get(wrappedStack)));
                 }

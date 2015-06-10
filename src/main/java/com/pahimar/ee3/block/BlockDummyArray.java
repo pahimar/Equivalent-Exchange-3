@@ -13,8 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -254,11 +252,11 @@ public class BlockDummyArray extends BlockTileEntityEE
     }
 
     @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 startVec, Vec3 endVec)
+    public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
+        if (iBlockAccess.getTileEntity(x, y, z) instanceof TileEntityDummyArray)
         {
-            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) world.getTileEntity(x, y, z);
+            TileEntityDummyArray tileEntityDummyArray = (TileEntityDummyArray) iBlockAccess.getTileEntity(x, y, z);
 
             switch (tileEntityDummyArray.getOrientation())
             {
@@ -298,8 +296,6 @@ public class BlockDummyArray extends BlockTileEntityEE
                 }
             }
         }
-
-        return super.collisionRayTrace(world, x, y, z, startVec, endVec);
     }
 
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
