@@ -19,14 +19,6 @@ public class Names
         public static final String DUMMY_ARRAY = "dummyArray";
     }
 
-    public static final class TileEntities
-    {
-        private static final String PREFIX = "tile.ee3:";
-        private static final String SUFFIX = ".name";
-
-        public static final String ALCHEMICAL_CHEST = PREFIX + Blocks.ALCHEMICAL_CHEST + SUFFIX;
-    }
-
     public static final class Items
     {
         public static final String ALCHEMICAL_BAG = "alchemicalBag";

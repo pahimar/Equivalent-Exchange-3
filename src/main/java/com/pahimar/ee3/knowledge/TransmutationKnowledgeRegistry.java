@@ -23,10 +23,10 @@ public class TransmutationKnowledgeRegistry
 
     private TransmutationKnowledgeRegistry()
     {
-        playerKnowledgeDirectory = new File(SerializationHelper.getPlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
+        playerKnowledgeDirectory = new File(SerializationHelper.getInstancePlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
         playerKnowledgeDirectory.mkdirs();
 
-        dataKnowledgeDirectory = new File(SerializationHelper.getDataDirectory(), "knowledge" + File.separator + "transmutation");
+        dataKnowledgeDirectory = new File(SerializationHelper.getInstanceDataDirectory(), "knowledge" + File.separator + "transmutation");
         dataKnowledgeDirectory.mkdirs();
 
         loadTemplateKnowledgeFromDisk();

@@ -30,7 +30,7 @@ public class CommandDebug extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
-        EnergyValueRegistryProxy.dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase.PRE_ASSIGNMENT);
+        EnergyValueRegistryProxy.dumpEnergyValueRegistryToLog(EnergyValueRegistryProxy.Phase.PRE_CALCULATION);
     }
 
     @Override

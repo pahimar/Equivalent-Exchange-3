@@ -300,7 +300,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         }
         else
         {
-            abilityDirectory = new File(SerializationHelper.getDataDirectory(), "abilities");
+            abilityDirectory = new File(SerializationHelper.getInstanceDataDirectory(), "abilities");
             abilityDirectory.mkdirs();
         }
     }

@@ -12,6 +12,7 @@ import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
@@ -69,6 +70,8 @@ public class EquivalentExchange3
     {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
+        Files.Global.init(event);
+
         PacketHandler.init();
 
         proxy.registerKeybindings();
@@ -113,8 +116,6 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         CachedOreDictionary.getInstance();
-        RecipeRegistry.getInstance().registerVanillaRecipes();
-        AludelRecipeManager.registerRecipes();
         Abilities.setOresNotLearnable();
     }
 

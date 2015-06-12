@@ -1,5 +1,7 @@
 package com.pahimar.ee3.exchange;
 
+import com.pahimar.ee3.recipe.AludelRecipeManager;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.LogHelper;
 
 public class DynamicEnergyValueInitThread implements Runnable
@@ -14,6 +16,10 @@ public class DynamicEnergyValueInitThread implements Runnable
     @Override
     public void run()
     {
+        // Add in recipes to the RecipeRegistry *just* before we do calculations
+        RecipeRegistry.getInstance().registerVanillaRecipes();
+        AludelRecipeManager.registerRecipes();
+
         long startTime = System.currentTimeMillis();
         EnergyValueRegistry.getInstance().init();
         LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));

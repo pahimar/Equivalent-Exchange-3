@@ -10,33 +10,67 @@ public final class EnergyValueRegistryProxy
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
+    public static void addPreCalculationEnergyValue(Object object, float energyValue)
+    {
+        addPreCalculationEnergyValue(object, new EnergyValue(energyValue));
+    }
+
+    @Deprecated
     public static void addPreAssignedEnergyValue(Object object, float energyValue)
     {
         addPreAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
+    public static void addPreCalculationEnergyValue(Object object, EnergyValue energyValue)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreCalculationEnergyValue(object, energyValue);
+        }
+    }
+
+    @Deprecated
     public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreAssignedEnergyValue(object, energyValue);
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreCalculationEnergyValue(object, energyValue);
         }
     }
 
+    public static void addPostCalculationEnergyValue(Object object, float energyValue)
+    {
+        addPostCalculationEnergyValue(object, new EnergyValue(energyValue));
+    }
+
+    @Deprecated
     public static void addPostAssignedEnergyValue(Object object, float energyValue)
     {
         addPostAssignedEnergyValue(object, new EnergyValue(energyValue));
     }
 
+    public static void addPostCalculationEnergyValue(Object object, EnergyValue energyValue)
+    {
+        init();
+
+        if (ee3Mod != null)
+        {
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostCalculationExactEnergyValue(object, energyValue);
+        }
+    }
+
+    @Deprecated
     public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue)
     {
         init();
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostAssignedExactEnergyValue(object, energyValue);
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostCalculationExactEnergyValue(object, energyValue);
         }
     }
 
@@ -143,9 +177,22 @@ public final class EnergyValueRegistryProxy
 
     public enum Phase
     {
-        PRE_ASSIGNMENT,
-        POST_ASSIGNMENT,
+        /**
+         * @Deprecated Use PRE_CALCULATION instead
+         */
+        @Deprecated PRE_ASSIGNMENT,
+
+        PRE_CALCULATION,
+
+        /**
+         * @Deprecated Use POST_CALCULATION instead
+         */
+        @Deprecated POST_ASSIGNMENT,
+
+        POST_CALCULATION,
+
         RUNTIME,
+
         ALL
     }
 }
