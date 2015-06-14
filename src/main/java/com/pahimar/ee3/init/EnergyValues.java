@@ -45,6 +45,7 @@ public class EnergyValues
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("stone"), 1);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("treeLeaves"), 1);
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("treeSapling"), 32);
+        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("slimeball"), 24);
 
         // Fluids
         EnergyValueRegistryProxy.addPreAssignedEnergyValue(FluidRegistry.WATER, 1);
