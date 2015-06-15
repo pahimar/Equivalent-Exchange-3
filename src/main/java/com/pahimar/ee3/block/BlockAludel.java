@@ -77,6 +77,8 @@ public class BlockAludel extends BlockTileEntityEE
                     case EAST:
                         world.spawnParticle(Particles.FLAME, (double) x + 0.825F, (double) y + 0.33F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
                         break;
+                    default:
+                        break;
                 }
 
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.7F, (double) z + 0.0F, 0.0D, 0.05D, 0.0D);
