@@ -461,6 +461,16 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
     }
 
+    @Override
+    public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player)
+    {
+    	if(button==0 && flag==6)
+    	{
+    		return null;
+    	}
+    	return super.slotClick(slot, button, flag, player);
+    }
+    
     private class SlotAlchemicalTome extends Slot
     {
         private ContainerTransmutationTablet containerTransmutationTablet;
