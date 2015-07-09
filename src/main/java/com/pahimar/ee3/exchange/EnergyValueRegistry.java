@@ -29,6 +29,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
 
     private boolean shouldRegenNextRestart = false;
+    private boolean ready = false;
+    private boolean failed = false;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preCalculationMappings;
     private static Map<WrappedStack, EnergyValue> postCalculationMappings;
@@ -265,7 +267,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                                 {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedObject();
 
-                                    if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
+                                    if (Item.itemRegistry.getNameForObject(valuedItemStack.getItem()).compareToIgnoreCase(Item.itemRegistry.getNameForObject(wrappedItemStack.getItem())) == 0)
                                     {
                                         if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                                         {
@@ -338,11 +340,34 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     protected final void init()
     {
-        if (!loadEnergyValueRegistryFromFile())
+        try
         {
-            runDynamicEnergyValueResolution();
+            if (!loadEnergyValueRegistryFromFile())
+            {
+                runDynamicEnergyValueResolution();
+            }
+            this.shouldRegenNextRestart = false;
         }
-        this.shouldRegenNextRestart = false;
+        catch (Throwable t)
+        {
+            t.printStackTrace();
+            setFailed();
+            makeBlankMaps();
+        }
+
+        synchronized (this)
+        {
+            makeReady();
+            this.notifyAll();
+        }
+    }
+
+    public final void uninit()
+    {
+        makeUnready();
+        unsetFailed();
+        stackMappings = null;
+        valueMappings = null;
     }
 
     private void runDynamicEnergyValueResolution()
@@ -538,6 +563,12 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             }
         }
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
+    }
+
+    private void makeBlankMaps()
+    {
+        stackMappings = ImmutableSortedMap.copyOf(new TreeMap<WrappedStack, EnergyValue>());
+        valueMappings = ImmutableSortedMap.copyOf(new TreeMap<EnergyValue, List<WrappedStack>>());
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings(Map<WrappedStack, EnergyValue> stackValueMappings, int passCount)
@@ -857,5 +888,35 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             }
         }
         LogHelper.info(String.format("END DUMPING %s ENERGY VALUE MAPPINGS", phase));
+    }
+
+    public boolean isReady()
+    {
+        return ready;
+    }
+
+    private void makeReady()
+    {
+        ready = true;
+    }
+
+    private void makeUnready()
+    {
+        ready = false;
+    }
+
+    public boolean getFailed()
+    {
+        return failed;
+    }
+
+    public void setFailed()
+    {
+        failed = true;
+    }
+
+    public void unsetFailed()
+    {
+        failed = false;
     }
 }

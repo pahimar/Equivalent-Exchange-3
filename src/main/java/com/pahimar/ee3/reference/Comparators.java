@@ -25,7 +25,7 @@ public class Comparators
             if (itemStack1 != null && itemStack2 != null)
             {
                 // Sort on itemID
-                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
+                if (Item.itemRegistry.getNameForObject(itemStack1.getItem()).compareToIgnoreCase(Item.itemRegistry.getNameForObject(itemStack2.getItem())) == 0)
                 {
                     // Sort on item
                     if (itemStack1.getItem() == itemStack2.getItem())
@@ -71,7 +71,7 @@ public class Comparators
                 }
                 else
                 {
-                    return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
+                    return Item.itemRegistry.getNameForObject(itemStack1.getItem()).compareToIgnoreCase(Item.itemRegistry.getNameForObject(itemStack2.getItem()));
                 }
             }
             else if (itemStack1 != null)
