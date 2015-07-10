@@ -47,7 +47,7 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
             }
             else
             {
-                throw new JsonParseException(""); // TODO Exception message
+                throw new JsonParseException("FluidStack must contain a fluidName entry."); // TODO Exception message localization
             }
 
             if (jsonObject.has("amount"))
@@ -56,7 +56,7 @@ public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeser
             }
             else
             {
-                throw new JsonParseException(""); // TODO Exception message
+                throw new JsonParseException("FluidStack must contain an amount entry."); // TODO Exception message localization
             }
 
             if (jsonObject.has("tag"))

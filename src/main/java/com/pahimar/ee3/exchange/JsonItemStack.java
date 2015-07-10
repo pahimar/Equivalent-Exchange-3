@@ -49,7 +49,7 @@ public class JsonItemStack implements JsonSerializer<JsonItemStack>, JsonDeseria
             }
             else
             {
-                throw new JsonParseException(""); // TODO Exception message
+                throw new JsonParseException("ItemStack must contain an itemName entry."); // TODO Exception message localization
             }
 
             if (jsonObject.has("itemDamage"))
@@ -58,7 +58,9 @@ public class JsonItemStack implements JsonSerializer<JsonItemStack>, JsonDeseria
             }
             else
             {
-                throw new JsonParseException(""); // TODO Exception message
+                // Why throw an exception? We can just assume 0.
+                // throw new JsonParseException(""); TODO Exception message(?)
+                jsonItemStack.itemDamage = 0;
             }
 
             if (jsonObject.has("itemNBTTagCompound"))
