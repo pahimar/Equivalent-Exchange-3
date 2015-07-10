@@ -1,5 +1,6 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.item.ItemEE;
 import com.pahimar.ee3.item.ItemGem;
 import com.pahimar.ee3.item.ItemToolEE;
 import com.pahimar.ee3.tileentity.TileEntityAugmentationTable;
@@ -66,8 +67,8 @@ public class ContainerAugmentationTable extends ContainerEE
                  * If the stack being shift-clicked into the AugmentationTable's container
                  * is a tool(?), first try to put it in the tool slot.
                  */
-                //TODO: create IAugmentable(?) interface
-                if (slotItemStack.getItem() instanceof ItemToolEE)
+                // TODO: create IAugmentable(?) interface
+                if (ItemEE.IsAugmentable(slotItemStack.getItem()))
                 {
                     if (!this.mergeItemStack(slotItemStack, TileEntityAugmentationTable.INPUT_SLOT_INVENTORY_INDEX, TileEntityAugmentationTable.AUGMENT_SLOT_INVENTORY_INDEX, false))
                     {
@@ -79,7 +80,7 @@ public class ContainerAugmentationTable extends ContainerEE
                  * If the stack being shift-clicked into the AugmentationTable's container
                  * is an augment(?), try to put it in the augment slot.
                  */
-                else if (slotItemStack.getItem() instanceof ItemGem)
+                else if (ItemEE.IsAugment(slotItemStack.getItem()))
                 {
                     if (!this.mergeItemStack(slotItemStack, TileEntityAugmentationTable.AUGMENT_SLOT_INVENTORY_INDEX, TileEntityAugmentationTable.OUTPUT_SLOT_INVENTORY_INDEX, false))
                     {
