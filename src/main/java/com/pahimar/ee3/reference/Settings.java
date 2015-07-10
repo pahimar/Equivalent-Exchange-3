@@ -1,5 +1,8 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.configuration.EnergyRegenOption;
+import com.pahimar.ee3.configuration.SoundModeOption;
+
 public class Settings
 {
     public static class General
@@ -9,7 +12,7 @@ public class Settings
 
     public static class Sounds
     {
-        public static String soundMode;
+        public static SoundModeOption soundMode;
     }
 
     public static class Abilities
@@ -19,7 +22,7 @@ public class Settings
 
     public static class DynamicEnergyValueGeneration
     {
-        public static String regenerateEnergyValuesWhen;
+        public static EnergyRegenOption regenerateEnergyValuesWhen;
     }
 
     public static class Debug
