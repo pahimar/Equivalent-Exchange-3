@@ -3,8 +3,11 @@ package com.pahimar.ee3.client.renderer.tileentity;
 import com.pahimar.ee3.client.renderer.model.ModelGlassBell;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
+import com.pahimar.ee3.util.LogHelper;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -12,32 +15,38 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
+public class TileEntityRendererGlassBell extends TileEntitySpecialRendererBase
 {
+    // The calculation is: deg = total(ticks) * speed
+    //      tick = [1 / 20][sec]
+    //      speed[deg/s] = speed[deg/tc] * 20
+    //      speed[deg/s] = [4.5] * 20 = 90[deg/s]
+    private static final float rotationSpeed = 4.5f;
+
     private final ModelGlassBell modelGlassBell = new ModelGlassBell();
     private final RenderItem customRenderItem;
 
     public TileEntityRendererGlassBell()
     {
-        customRenderItem = new RenderItem()
+        this.customRenderItem = new RenderItem()
         {
             @Override
             public boolean shouldBob()
             {
-
                 return false;
             }
         };
 
-        customRenderItem.setRenderManager(RenderManager.instance);
+        this.customRenderItem.setRenderManager(RenderManager.instance);
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
+    protected void renderTileEntryAt(TileEntity tileEntity, double x, double y, double z, float dTick, float totalAdjustedTicks)
     {
         if (tileEntity instanceof TileEntityGlassBell)
         {
@@ -67,11 +76,10 @@ public class TileEntityRendererGlassBell extends TileEntitySpecialRenderer
 
             if (tileEntityGlassBell.outputItemStack != null)
             {
-                // TODO Stop the ghost item rendering in the event that the client's game is paused
                 float scaleFactor = getGhostItemScaleFactor(tileEntityGlassBell.outputItemStack);
-                float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+                float rotationAngle = totalAdjustedTicks * rotationSpeed;
 
-                EntityItem ghostEntityItem = new EntityItem(tileEntityGlassBell.getWorldObj());
+                EntityItem ghostEntityItem = new EntityItem(tileEntity.getWorldObj());
                 ghostEntityItem.hoverStart = 0.0F;
                 ghostEntityItem.setEntityItemStack(tileEntityGlassBell.outputItemStack);
 
