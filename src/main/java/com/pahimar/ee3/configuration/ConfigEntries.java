@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public final class ConfigEntries
 {
+    private final static String CATEGORY_ITEMS = "general.Items";
     private final static String CATEGORY_DEBUG = "general.Debug";
 
     public static final class General
@@ -26,6 +27,28 @@ public final class ConfigEntries
                         Configuration.CATEGORY_GENERAL,
                         StatCollector.translateToLocal(Messages.Configuration.GENERAL_SYNC_THRESHOLD_COMMENT),
                         Messages.Configuration.GENERAL_SYNC_THRESHOLD_LABEL,
+                        defaultValue, minValue, maxValue);
+            }
+        }
+    }
+
+    public static final class Items
+    {
+        public static final class MiniumStoneDurability
+        {
+            public static final int minValue = 1;
+            public static final int maxValue = Short.MAX_VALUE;
+            public static final int defaultValue = 1000;
+
+            public static final IntConfigEntry entry;
+
+            static
+            {
+                entry = new IntConfigEntry(
+                        Messages.Configuration.ITEMS_MINIUM_STONE_DURABILITY,
+                        CATEGORY_ITEMS,
+                        StatCollector.translateToLocal(Messages.Configuration.ITEMS_MINIUM_STONE_DURABILITY_COMMENT),
+                        Messages.Configuration.ITEMS_MINIUM_STONE_DURABILITY_LABEL,
                         defaultValue, minValue, maxValue);
             }
         }

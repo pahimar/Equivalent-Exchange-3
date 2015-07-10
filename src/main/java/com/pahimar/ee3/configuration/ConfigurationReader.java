@@ -11,6 +11,10 @@ public final class ConfigurationReader
                 ConfigEntries.General.SyncThreshold
                         .entry.getValue(configuration);
 
+        Settings.Items.miniumStoneDurability =
+                ConfigEntries.Items.MiniumStoneDurability
+                        .entry.getValue(configuration);
+
         Settings.Sounds.soundMode =
                 ConfigEntries.Sounds.SoundMode
                         .entry.getValue(configuration);

@@ -10,6 +10,11 @@ public class Settings
         public static int syncThreshold;
     }
 
+    public static class Items
+    {
+        public static int miniumStoneDurability;
+    }
+
     public static class Sounds
     {
         public static SoundModeOption soundMode;
