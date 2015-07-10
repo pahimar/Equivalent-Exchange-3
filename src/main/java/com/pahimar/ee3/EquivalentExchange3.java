@@ -85,7 +85,7 @@ public class EquivalentExchange3
 
         if (getEnergyValueRegistry().getFailed())
         {
-            LogHelper.error("An error occured while computing energy values.  EMC will not work.");
+            throw new RuntimeException("An error occured while computing energy values.", getEnergyValueRegistry().getError());
         }
     }
 

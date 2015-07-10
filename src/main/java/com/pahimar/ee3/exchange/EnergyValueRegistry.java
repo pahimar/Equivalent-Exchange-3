@@ -30,7 +30,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     private boolean shouldRegenNextRestart = false;
     private boolean ready = false;
-    private boolean failed = false;
+    private Throwable error = null;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preCalculationMappings;
     private static Map<WrappedStack, EnergyValue> postCalculationMappings;
@@ -340,26 +340,11 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     protected final void init()
     {
-        try
+        if (!loadEnergyValueRegistryFromFile())
         {
-            if (!loadEnergyValueRegistryFromFile())
-            {
-                runDynamicEnergyValueResolution();
-            }
-            this.shouldRegenNextRestart = false;
+            runDynamicEnergyValueResolution();
         }
-        catch (Throwable t)
-        {
-            t.printStackTrace();
-            setFailed();
-            makeBlankMaps();
-        }
-
-        synchronized (this)
-        {
-            makeReady();
-            this.notifyAll();
-        }
+        this.shouldRegenNextRestart = false;
     }
 
     public final void uninit()
@@ -563,12 +548,6 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             }
         }
         valueMappings = ImmutableSortedMap.copyOf(tempValueMappings);
-    }
-
-    private void makeBlankMaps()
-    {
-        stackMappings = ImmutableSortedMap.copyOf(new TreeMap<WrappedStack, EnergyValue>());
-        valueMappings = ImmutableSortedMap.copyOf(new TreeMap<EnergyValue, List<WrappedStack>>());
     }
 
     private Map<WrappedStack, EnergyValue> computeStackMappings(Map<WrappedStack, EnergyValue> stackValueMappings, int passCount)
@@ -895,28 +874,33 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         return ready;
     }
 
-    private void makeReady()
+    protected void makeReady()
     {
         ready = true;
     }
 
-    private void makeUnready()
+    protected void makeUnready()
     {
         ready = false;
     }
 
     public boolean getFailed()
     {
-        return failed;
+        return error != null;
     }
 
-    public void setFailed()
+    protected void setFailed(Throwable t)
     {
-        failed = true;
+        error = t;
     }
 
-    public void unsetFailed()
+    protected void unsetFailed()
     {
-        failed = false;
+        error = null;
+    }
+
+    public Throwable getError()
+    {
+        return error;
     }
 }
