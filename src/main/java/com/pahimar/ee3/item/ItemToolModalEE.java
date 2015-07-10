@@ -10,8 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-@Augmentable
-public class ItemToolModalEE extends ItemToolEE implements IModalTool
+public class ItemToolModalEE extends ItemToolEE implements IModalTool, IAugmentable
 {
     public ItemToolModalEE(float damageVsEntity, ToolMaterial toolMaterial, Set blocksEffectiveAgainst)
     {
