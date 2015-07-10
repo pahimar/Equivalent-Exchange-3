@@ -5,8 +5,10 @@ import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
+import com.pahimar.ee3.configuration.EnergyRegenOption;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.EnergyValueHelper;
@@ -338,11 +340,18 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     protected final void init()
     {
-        if (!loadEnergyValueRegistryFromFile())
-        {
-            runDynamicEnergyValueResolution();
-        }
+        if(this.shouldRegenerateEnergyValue())
+            this.runDynamicEnergyValueResolution();
+
         this.shouldRegenNextRestart = false;
+    }
+
+    protected boolean shouldRegenerateEnergyValue()
+    {
+        if(Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen == EnergyRegenOption.Always)
+            return true;
+
+        return !this.loadEnergyValueRegistryFromFile();
     }
 
     private void runDynamicEnergyValueResolution()
@@ -733,10 +742,9 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         File md5EnergyValuesFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json.gz");
 
         Map<WrappedStack, EnergyValue> stackValueMap = null;
-
-        if (!Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Always"))
+        if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen != EnergyRegenOption.Always)
         {
-            if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("When Mods Change"))
+            if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen == EnergyRegenOption.ModsChange)
             {
                 if (md5EnergyValuesFile.exists())
                 {
@@ -744,7 +752,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                     stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(md5EnergyValuesFile);
                 }
             }
-            else if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Never"))
+            else if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen == EnergyRegenOption.Never)
             {
                 if (staticEnergyValuesFile.exists())
                 {
