@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ItemDarkMatterAxe extends ItemToolModalEE implements IKeyBound, IChargeable
+public class ItemDarkMatterAxe extends ItemToolModalEE implements IKeyBound, IChargeable, IAugmentable
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin});
 
