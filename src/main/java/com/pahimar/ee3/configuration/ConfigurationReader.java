@@ -7,7 +7,7 @@ public final class ConfigurationReader
 {
     public static void ReadConfig(Configuration configuration)
     {
-        Settings.Abilities.onlyLoadFile =
+        Settings.General.syncThreshold =
                 ConfigEntries.General.SyncThreshold
                         .entry.getValue(configuration);
 
