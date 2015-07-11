@@ -25,10 +25,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
     private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+    private static final Object singletonSyncRoot = new Object();
 
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
@@ -46,7 +50,10 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     {
         if (energyValueRegistry == null)
         {
-            energyValueRegistry = new EnergyValueRegistry();
+            synchronized (singletonSyncRoot) {
+                if(energyValueRegistry == null)
+                    energyValueRegistry = new EnergyValueRegistry();
+            }
         }
 
         return energyValueRegistry;

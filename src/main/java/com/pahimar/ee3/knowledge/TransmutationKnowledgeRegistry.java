@@ -17,6 +17,8 @@ import java.util.UUID;
 public class TransmutationKnowledgeRegistry
 {
     private static TransmutationKnowledgeRegistry transmutationKnowledgeRegistry = null;
+    private static final Object singletonSyncRoot = new Object();
+
     private static File playerKnowledgeDirectory, dataKnowledgeDirectory;
     private static TransmutationKnowledge templateKnowledge;
     private static HashMap<UUID, TransmutationKnowledge> playerKnowledgeMap;
@@ -38,7 +40,11 @@ public class TransmutationKnowledgeRegistry
     {
         if (transmutationKnowledgeRegistry == null)
         {
-            transmutationKnowledgeRegistry = new TransmutationKnowledgeRegistry();
+            synchronized (singletonSyncRoot)
+            {
+                if(transmutationKnowledgeRegistry == null)
+                    transmutationKnowledgeRegistry = new TransmutationKnowledgeRegistry();
+            }
         }
 
         return transmutationKnowledgeRegistry;

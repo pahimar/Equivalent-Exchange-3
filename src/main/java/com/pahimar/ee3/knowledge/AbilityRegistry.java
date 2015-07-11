@@ -25,6 +25,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 {
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(AbilityRegistry.class, new AbilityRegistry()).create();
     private static AbilityRegistry abilityRegistry = null;
+    private static final Object singletonSyncRoot = new Object();
 
     private static File abilityDirectory;
     private boolean hasBeenModified;
@@ -42,8 +43,14 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (abilityRegistry == null)
         {
-            abilityRegistry = new AbilityRegistry();
-            abilityRegistry.init();
+            synchronized (singletonSyncRoot)
+            {
+                if(abilityRegistry == null)
+                {
+                    abilityRegistry = new AbilityRegistry();
+                    abilityRegistry.init();
+                }
+            }
         }
 
         return abilityRegistry;

@@ -19,9 +19,9 @@ import java.util.List;
 
 public class RecipesVanilla
 {
-    public static void registerRecipes()
+    public static void registerRecipes(Object[] recipes)
     {
-        for (Object recipeObject : CraftingManager.getInstance().getRecipeList())
+        for (Object recipeObject : recipes)
         {
             /**
              * Vanilla

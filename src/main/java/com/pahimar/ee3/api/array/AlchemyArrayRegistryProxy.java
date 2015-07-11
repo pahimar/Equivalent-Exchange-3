@@ -12,9 +12,7 @@ public class AlchemyArrayRegistryProxy
 
     public static boolean registerAlchemyArray(AlchemyArray alchemyArray)
     {
-        init();
-
-        if (ee3Mod != null)
+        if (ensureEEAvailable())
         {
             return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().registerAlchemyArray(alchemyArray);
         }
@@ -24,9 +22,7 @@ public class AlchemyArrayRegistryProxy
 
     public static SortedSet<AlchemyArray> getRegisteredAlchemyArrays()
     {
-        init();
-
-        if (ee3Mod != null)
+        if (ensureEEAvailable())
         {
             return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().getRegisteredAlchemyArrays();
         }
@@ -45,5 +41,11 @@ public class AlchemyArrayRegistryProxy
         {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
+    }
+
+    private static boolean ensureEEAvailable()
+    {
+        init();
+        return ee3Mod != null;
     }
 }

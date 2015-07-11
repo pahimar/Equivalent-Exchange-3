@@ -12,6 +12,8 @@ import java.util.TreeSet;
 public class AlchemyArrayRegistry
 {
     private static AlchemyArrayRegistry alchemyArrayRegistry = null;
+    private static final Object singletonSyncRoot = new Object();
+
     private SortedSet<AlchemyArray> registeredAlchemyArrays;
 
     private AlchemyArrayRegistry()
@@ -22,8 +24,14 @@ public class AlchemyArrayRegistry
     {
         if (alchemyArrayRegistry == null)
         {
-            alchemyArrayRegistry = new AlchemyArrayRegistry();
-            alchemyArrayRegistry.init();
+            synchronized (singletonSyncRoot)
+            {
+                if(alchemyArrayRegistry == null)
+                {
+                    alchemyArrayRegistry = new AlchemyArrayRegistry();
+                    alchemyArrayRegistry.init();
+                }
+            }
         }
 
         return alchemyArrayRegistry;
