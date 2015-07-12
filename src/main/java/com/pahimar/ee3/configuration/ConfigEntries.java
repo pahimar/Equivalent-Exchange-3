@@ -103,10 +103,10 @@ public final class ConfigEntries
             static
             {
                 entry = ConfigEntry.Create(
-                        Messages.Configuration.REGENERATE_ENERGYVALUES_WHEN,
+                        Messages.Configuration.SOUND_MODE,
                         Configuration.CATEGORY_GENERAL,
-                        StatCollector.translateToLocal(Messages.Configuration.REGENERATE_ENERGYVALUES_WHEN_COMMENT),
-                        Messages.Configuration.REGENERATE_ENERGYVALUES_WHEN_LABEL,
+                        StatCollector.translateToLocal(Messages.Configuration.SOUND_MODE_COMMENT),
+                        Messages.Configuration.SOUND_MODE_LABEL,
                         new ValueTransformer<SoundModeOption>(SoundModeOption.All)
                                 .addTransform("all", SoundModeOption.All)
                                 .addTransform("self", SoundModeOption.Self)

@@ -2,6 +2,9 @@
 general.sync.threshold.label=Sync Threshold
 general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
 
+item.miniumStone.durability.label=Minium Stone Durability
+item.miniumStone.durability.comment=The maximum durability of the Minium Stone, from 1 to 32767.
+
 general.sound.soundMode.label=Sounds
 general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
 
