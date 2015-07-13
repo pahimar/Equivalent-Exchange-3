@@ -479,6 +479,6 @@ public class TransmutationKnowledgeRegistry
     public void clear()
     {
         saveAll();
-        this.transmutationKnowledgeRegistry = null;
+        transmutationKnowledgeRegistry = null;
     }
 }

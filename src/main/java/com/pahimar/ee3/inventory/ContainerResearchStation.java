@@ -122,14 +122,7 @@ public class ContainerResearchStation extends ContainerEE
         }
         else if (valueType == 1)
         {
-            if (updatedValue == 1)
-            {
-                this.tileEntityResearchStation.isItemKnown = true;
-            }
-            else
-            {
-                this.tileEntityResearchStation.isItemKnown = false;
-            }
+            this.tileEntityResearchStation.isItemKnown = updatedValue == 1;
         }
     }
 
