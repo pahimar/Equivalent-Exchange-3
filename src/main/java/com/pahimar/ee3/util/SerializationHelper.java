@@ -9,6 +9,7 @@ import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.serialization.JsonSerialization;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
@@ -208,7 +209,7 @@ public class SerializationHelper
             jsonReader.beginArray();
             while (jsonReader.hasNext())
             {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                EnergyValueStackMapping energyValueStackMapping = JsonSerialization.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                 if (energyValueStackMapping != null)
                 {
                     energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
@@ -247,7 +248,7 @@ public class SerializationHelper
             {
                 if (wrappedStack != null && wrappedStack.getWrappedObject() != null)
                 {
-                    EnergyValueStackMapping.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
+                    JsonSerialization.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
                 }
             }
 
@@ -306,7 +307,7 @@ public class SerializationHelper
             jsonReader.beginArray();
             while (jsonReader.hasNext())
             {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                EnergyValueStackMapping energyValueStackMapping = JsonSerialization.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                 if (energyValueStackMapping != null)
                 {
                     energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);

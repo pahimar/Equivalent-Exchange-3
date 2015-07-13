@@ -8,6 +8,7 @@ import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.serialization.AbilityRegistrySerializer;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -21,9 +22,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
+public class AbilityRegistry
 {
-    private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(AbilityRegistry.class, new AbilityRegistry()).create();
     private static AbilityRegistry abilityRegistry = null;
     private static final Object singletonSyncRoot = new Object();
 
@@ -37,6 +37,13 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         hasBeenModified = false;
         notLearnableSet = new TreeSet<WrappedStack>();
         notRecoverableSet = new TreeSet<WrappedStack>();
+    }
+
+    public AbilityRegistry(Set<WrappedStack> notLearnableSet, Set<WrappedStack> notRecoverableSet)
+    {
+        this();
+        this.notLearnableSet = notLearnableSet;
+        this.notRecoverableSet = notRecoverableSet;
     }
 
     public static AbilityRegistry getInstance()
@@ -189,81 +196,6 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         return stringBuilder.toString();
     }
 
-    @Override
-    public AbilityRegistry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-    {
-        if (json.isJsonObject())
-        {
-            JsonObject jsonObject = (JsonObject) json;
-
-            Set<WrappedStack> notLearnableStacks = new TreeSet<WrappedStack>();
-            Set<WrappedStack> notRecoverableStacks = new TreeSet<WrappedStack>();
-
-            if (jsonObject.has("notLearnable") && jsonObject.get("notLearnable").isJsonArray())
-            {
-                JsonArray jsonArray = (JsonArray) jsonObject.get("notLearnable");
-                Iterator<JsonElement> iterator = jsonArray.iterator();
-
-                while (iterator.hasNext())
-                {
-                    JsonElement jsonElement = iterator.next();
-                    WrappedStack wrappedStack = WrappedStack.jsonSerializer.fromJson(jsonElement, WrappedStack.class);
-
-                    if (wrappedStack != null)
-                    {
-                        notLearnableStacks.add(wrappedStack);
-                    }
-                }
-            }
-
-            if (jsonObject.has("notRecoverable") && jsonObject.get("notRecoverable").isJsonArray())
-            {
-                JsonArray jsonArray = (JsonArray) jsonObject.get("notRecoverable");
-                Iterator<JsonElement> iterator = jsonArray.iterator();
-
-                while (iterator.hasNext())
-                {
-                    JsonElement jsonElement = iterator.next();
-                    WrappedStack wrappedStack = WrappedStack.jsonSerializer.fromJson(jsonElement, WrappedStack.class);
-
-                    if (wrappedStack != null)
-                    {
-                        notRecoverableStacks.add(wrappedStack);
-                    }
-                }
-            }
-
-            AbilityRegistry abilityRegistry1 = new AbilityRegistry();
-            abilityRegistry1.notLearnableSet = notLearnableStacks;
-            abilityRegistry1.notRecoverableSet = notRecoverableStacks;
-            return abilityRegistry1;
-        }
-
-        return null;
-    }
-
-    @Override
-    public JsonElement serialize(AbilityRegistry abilityRegistry, Type typeOfSrc, JsonSerializationContext context)
-    {
-        JsonObject jsonAbilityRegistry = new JsonObject();
-
-        JsonArray notLearnables = new JsonArray();
-        for (WrappedStack wrappedStack : abilityRegistry.getNotLearnableStacks())
-        {
-            notLearnables.add(WrappedStack.jsonSerializer.toJsonTree(wrappedStack));
-        }
-        jsonAbilityRegistry.add("notLearnable", notLearnables);
-
-        JsonArray notRecoverables = new JsonArray();
-        for (WrappedStack wrappedStack : abilityRegistry.getNotRecoverableSet())
-        {
-            notRecoverables.add(WrappedStack.jsonSerializer.toJsonTree(wrappedStack));
-        }
-        jsonAbilityRegistry.add("notRecoverable", notRecoverables);
-
-        return jsonAbilityRegistry;
-    }
-
     public void save()
     {
         if (abilityDirectory != null)
@@ -283,7 +215,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
             {
                 jsonWriter = new JsonWriter(new FileWriter(file));
                 jsonWriter.setIndent("    ");
-                jsonSerializer.toJson(this, AbilityRegistry.class, jsonWriter);
+                AbilityRegistrySerializer.toJson(this, jsonWriter);
                 jsonWriter.close();
                 hasBeenModified = false;
             }
@@ -319,7 +251,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         try
         {
             jsonReader = new JsonReader(new FileReader(file));
-            AbilityRegistry abilityRegistry1 = jsonSerializer.fromJson(jsonReader, AbilityRegistry.class);
+            AbilityRegistry abilityRegistry1 = AbilityRegistrySerializer.createFromJson(jsonReader);
             jsonReader.close();
 
             if (!loadFileOnly)

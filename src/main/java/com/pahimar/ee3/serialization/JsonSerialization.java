@@ -7,6 +7,7 @@ import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.JsonFluidStack;
 import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class JsonSerialization
     {
         List<SerializationPair> serializationMap = new ArrayList<SerializationPair>();
         serializationMap.add(new SerializationPair(WrappedStack.class, new WrappedStackSerializer()));
-        serializationMap.add(new SerializationPair(EnergyValue.class, new EnergyValue()));
+        serializationMap.add(new SerializationPair(EnergyValue.class, new EnergyValueSerializer()));
         // serializationMap.add(new SerializationPair(EnergyValueRegistry.class, new EnergyValueRegistry()));
-        serializationMap.add(new SerializationPair(EnergyValueStackMapping.class, new EnergyValueStackMapping()));
-        serializationMap.add(new SerializationPair(JsonFluidStack.class, new JsonFluidStack()));
-        serializationMap.add(new SerializationPair(JsonItemStack.class, new JsonItemStack()));
-        // serializationMap.add(new SerializationPair(AbilityRegistry.class, new AbilityRegistry()));
-        serializationMap.add(new SerializationPair(TransmutationKnowledge.class, new TransmutationKnowledge()));
+        serializationMap.add(new SerializationPair(EnergyValueStackMapping.class, new EnergyValueStackMappingSerializer()));
+        serializationMap.add(new SerializationPair(JsonFluidStack.class, new JsonFluidStackSerializer()));
+        serializationMap.add(new SerializationPair(JsonItemStack.class, new JsonItemStackSerializer()));
+        serializationMap.add(new SerializationPair(AbilityRegistry.class, new AbilityRegistrySerializer()));
+        serializationMap.add(new SerializationPair(TransmutationKnowledge.class, new TransmutationKnowledgeSerializer()));
 
         jsonSerializer = initializeSerializer(serializationMap);
     }
@@ -38,11 +39,6 @@ public class JsonSerialization
             builder.registerTypeAdapter(pair.getObjectType(), pair.getSerializer());
 
         return builder.create();
-    }
-
-    public static Gson getJsonSerializer()
-    {
-        return jsonSerializer;
     }
 
     private static class SerializationPair

@@ -5,6 +5,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.serialization.JsonSerialization;
 import com.pahimar.ee3.util.CompressionHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -99,7 +100,7 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
                 jsonReader.beginArray();
                 while (jsonReader.hasNext())
                 {
-                    EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                    EnergyValueStackMapping energyValueStackMapping = JsonSerialization.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                     if (energyValueStackMapping != null)
                     {
                         energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);

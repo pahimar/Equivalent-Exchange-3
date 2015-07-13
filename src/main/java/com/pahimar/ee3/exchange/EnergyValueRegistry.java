@@ -11,6 +11,8 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
+import com.pahimar.ee3.serialization.EnergyValueStackMappingSerializer;
+import com.pahimar.ee3.serialization.JsonSerialization;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -31,9 +33,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
+    // TODO Rethink serialization here
     private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting()
             .registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry())
-            .registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+            .registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMappingSerializer()).create();
 
     private static final Object singletonSyncRoot = new Object();
 
@@ -811,7 +814,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             while (iterator.hasNext())
             {
                 JsonElement jsonElement = iterator.next();
-                EnergyValueStackMapping energyValueStackMapping = new EnergyValueStackMapping().deserialize(jsonElement, typeOfT, context);
+                EnergyValueStackMapping energyValueStackMapping = new EnergyValueStackMappingSerializer().deserialize(jsonElement, typeOfT, context);
 
                 if (energyValueStackMapping != null)
                 {
@@ -836,7 +839,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet())
         {
-            jsonEnergyValueRegistry.add(EnergyValueStackMapping.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
+            jsonEnergyValueRegistry.add(JsonSerialization.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
         }
 
         return jsonEnergyValueRegistry;

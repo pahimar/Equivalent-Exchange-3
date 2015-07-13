@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.exchange.JsonItemStack;
 import com.pahimar.ee3.reference.Comparators;
+import com.pahimar.ee3.serialization.TransmutationKnowledgeSerializer;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.item.Item;
@@ -14,9 +15,8 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowledge>, JsonDeserializer<TransmutationKnowledge>
+public class TransmutationKnowledge
 {
-    private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(TransmutationKnowledge.class, new TransmutationKnowledge()).create();
     private Set<ItemStack> knownTransmutations;
     private boolean hasBeenModified = false;
 
@@ -113,11 +113,11 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
         return stringBuilder.toString();
     }
 
-    public static TransmutationKnowledge createFromJson(String jsonTransmutationKnowledge) throws JsonParseException
+    public static TransmutationKnowledge createFromJson(String jsonTransmutationKnowledge)
     {
         try
         {
-            return jsonSerializer.fromJson(jsonTransmutationKnowledge, TransmutationKnowledge.class);
+            return TransmutationKnowledgeSerializer.createFromJson(jsonTransmutationKnowledge);
         }
         catch (JsonSyntaxException exception)
         {
@@ -133,74 +133,7 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
 
     public String toJson()
     {
-        return jsonSerializer.toJson(this);
-    }
-
-    @Override
-    public TransmutationKnowledge deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-    {
-        if (json.isJsonObject())
-        {
-            JsonObject jsonObject = (JsonObject) json;
-
-            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
-
-            if (jsonObject.has("knownTransmutations") && jsonObject.get("knownTransmutations").isJsonArray())
-            {
-                JsonArray jsonArray = (JsonArray) jsonObject.get("knownTransmutations");
-                Iterator<JsonElement> iterator = jsonArray.iterator();
-
-                while (iterator.hasNext())
-                {
-                    JsonElement jsonElement = iterator.next();
-                    if (jsonElement.isJsonObject())
-                    {
-                        try
-                        {
-                            JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonElement, JsonItemStack.class);
-
-                            ItemStack itemStack = null;
-                            Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
-                            if (item != null)
-                            {
-                                itemStack = new ItemStack(item, 1, jsonItemStack.itemDamage);
-                                if (jsonItemStack.itemNBTTagCompound != null)
-                                {
-                                    itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
-                                }
-                            }
-
-                            if (itemStack != null)
-                            {
-                                itemStacks.add(itemStack);
-                            }
-                        }
-                        catch (JsonParseException e)
-                        {
-                        }
-                    }
-                }
-            }
-
-            return new TransmutationKnowledge(itemStacks);
-        }
-
-        return null;
-    }
-
-    @Override
-    public JsonElement serialize(TransmutationKnowledge transmutationKnowledge, Type typeOfSrc, JsonSerializationContext context)
-    {
-        JsonObject jsonTransmutationKnowledge = new JsonObject();
-
-        JsonArray knownTransmutations = new JsonArray();
-        for (ItemStack itemStack : transmutationKnowledge.getKnownTransmutations())
-        {
-            knownTransmutations.add(JsonItemStack.jsonSerializer.toJsonTree(new JsonItemStack(itemStack)));
-        }
-        jsonTransmutationKnowledge.add("knownTransmutations", knownTransmutations);
-
-        return jsonTransmutationKnowledge;
+        return TransmutationKnowledgeSerializer.toJson(this);
     }
 
     public static void writeToFile(File file, TransmutationKnowledge transmutationKnowledge)
@@ -211,7 +144,7 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
         {
             jsonWriter = new JsonWriter(new FileWriter(file));
             jsonWriter.setIndent("    ");
-            jsonSerializer.toJson(transmutationKnowledge, TransmutationKnowledge.class, jsonWriter);
+            TransmutationKnowledgeSerializer.toJson(transmutationKnowledge, jsonWriter);
             jsonWriter.close();
             transmutationKnowledge.hasBeenModified = false;
         }
@@ -228,7 +161,7 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
         try
         {
             jsonReader = new JsonReader(new FileReader(file));
-            TransmutationKnowledge transmutationKnowledge = jsonSerializer.fromJson(jsonReader, TransmutationKnowledge.class);
+            TransmutationKnowledge transmutationKnowledge = TransmutationKnowledgeSerializer.createFromJson(jsonReader);
             jsonReader.close();
             return transmutationKnowledge;
         }

@@ -18,9 +18,6 @@ import java.util.List;
 
 public class WrappedStack implements Comparable<WrappedStack>
 {
-    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting()
-            .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer()).create();
-
     // TODO Convert these constants to an enum(?)
     public static final String itemStackType = "itemstack";
     public static final String oreStackType = "orestack";
