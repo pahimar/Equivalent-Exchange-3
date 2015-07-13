@@ -361,6 +361,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         return !this.loadEnergyValueRegistryFromFile();
     }
 
+    // TODO Refactor, break into stages and break passes too.
     private void runDynamicEnergyValueResolution()
     {
         TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
@@ -406,7 +407,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         int totalComputedValueCount = 0;
         LogHelper.info("Beginning dynamic value calculation");
         boolean isFirstPass = true;
-        while ((isFirstPass || passComputedValueCount > 0) && (passNumber < 16))
+        while ((isFirstPass || passComputedValueCount > 0) && (passNumber < 16)) // TODO Make this a config option (calculation max depth?)
         {
             if (isFirstPass)
             {
@@ -516,15 +517,18 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         save();
 
         // TODO Make this make "sense" and also ensure it's added as an option to the debug command
-        LogHelper.info("BEGIN UNCOMPUTED OBJECT LIST");
-        for (WrappedStack wrappedStack : uncomputedStacks)
+        if(this.uncomputedStacks != null)
         {
-            if (!hasEnergyValue(wrappedStack))
+            LogHelper.info("BEGIN UNCOMPUTED OBJECT LIST");
+            for (WrappedStack wrappedStack : uncomputedStacks)
             {
-                LogHelper.info(wrappedStack);
+                if (!hasEnergyValue(wrappedStack))
+                {
+                    LogHelper.info(wrappedStack);
+                }
             }
+            LogHelper.info("END UNCOMPUTED OBJECT LIST");
         }
-        LogHelper.info("END UNCOMPUTED OBJECT LIST");
     }
 
     private void generateValueStackMappings()

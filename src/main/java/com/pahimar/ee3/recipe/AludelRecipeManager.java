@@ -24,6 +24,7 @@ public class AludelRecipeManager
 
     public static AludelRecipeManager getInstance()
     {
+        // TODO Sync
         if (aludelRegistry == null)
         {
             aludelRegistry = new AludelRecipeManager();
