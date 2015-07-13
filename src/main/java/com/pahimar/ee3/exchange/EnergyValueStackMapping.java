@@ -2,12 +2,16 @@ package com.pahimar.ee3.exchange;
 
 import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.serialization.WrappedStackSerializer;
 
 import java.lang.reflect.Type;
 
 public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackMapping>, JsonDeserializer<EnergyValueStackMapping>
 {
-    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting()
+            .registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping())
+            .registerTypeAdapter(EnergyValue.class, new EnergyValue())
+            .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer()).create();
 
     public final WrappedStack wrappedStack;
     public final EnergyValue energyValue;
@@ -76,7 +80,7 @@ public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackM
             {
                 try
                 {
-                    wrappedStack = new WrappedStack().deserialize(jsonStackValueMapping.get("wrappedStack").getAsJsonObject(), typeOfT, context);
+                    wrappedStack = new WrappedStackSerializer().deserialize(jsonStackValueMapping.get("wrappedStack").getAsJsonObject(), typeOfT, context);
                 }
                 catch (JsonParseException e)
                 {

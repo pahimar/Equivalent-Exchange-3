@@ -1,6 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import com.google.gson.*;
+import com.pahimar.ee3.serialization.WrappedStackSerializer;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
@@ -15,9 +16,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<WrappedStack>, JsonSerializer<WrappedStack>
+public class WrappedStack implements Comparable<WrappedStack>
 {
-    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();
+    public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting()
+            .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer()).create();
+
+    // TODO Convert these constants to an enum(?)
+    public static final String itemStackType = "itemstack";
+    public static final String oreStackType = "orestack";
+    public static final String fluidStackType = "fluidstack";
 
     private final String objectType;
     private final Object wrappedStack;
@@ -30,6 +37,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         wrappedStack = null;
     }
 
+    // TODO Way too complex constructor.
+    @Deprecated
+    @SuppressWarnings("unused")
     private WrappedStack(Object object)
     {
         if (object instanceof Item)
@@ -55,7 +65,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
                 {
                     itemStack.stackTagCompound = (NBTTagCompound) itemStackObject.stackTagCompound.copy();
                 }
-                objectType = "itemstack";
+                objectType = itemStackType;
                 stackSize = itemStack.stackSize;
                 itemStack.stackSize = 1;
                 wrappedStack = itemStack;
@@ -70,7 +80,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         else if (object instanceof OreStack)
         {
             OreStack oreStack = (OreStack) object;
-            objectType = "orestack";
+            objectType = oreStackType;
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -83,7 +93,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
             if (possibleOreStack != null)
             {
-                objectType = "orestack";
+                objectType = oreStackType;
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
@@ -98,7 +108,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         else if (object instanceof FluidStack)
         {
             FluidStack fluidStack = ((FluidStack) object).copy();
-            objectType = "fluidstack";
+            objectType = fluidStackType;
             stackSize = fluidStack.amount;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
@@ -128,6 +138,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
     }
 
+    // TODO Way too complex constructor.
+    @Deprecated
+    @SuppressWarnings("unused")
     private WrappedStack(Object object, int stackSize)
     {
         if (object instanceof Item)
@@ -146,7 +159,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         if (object instanceof ItemStack)
         {
             ItemStack itemStack = ((ItemStack) object).copy();
-            objectType = "itemstack";
+            objectType = itemStackType;
             this.stackSize = stackSize;
             itemStack.stackSize = 1;
             wrappedStack = itemStack;
@@ -154,7 +167,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         else if (object instanceof OreStack)
         {
             OreStack oreStack = (OreStack) object;
-            objectType = "orestack";
+            objectType = oreStackType;
             this.stackSize = stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -167,7 +180,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
             if (possibleOreStack != null)
             {
-                objectType = "orestack";
+                objectType = oreStackType;
                 this.stackSize = stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
@@ -182,7 +195,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         else if (object instanceof FluidStack)
         {
             FluidStack fluidStack = (FluidStack) object;
-            objectType = "fluidstack";
+            objectType = fluidStackType;
             this.stackSize = stackSize;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
@@ -212,11 +225,140 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
     }
 
-    public Object getWrappedObject()
+    private WrappedStack(String objectType, Object wrappedStack, int stackSize)
     {
-        return wrappedStack;
+        this.objectType = objectType;
+        this.wrappedStack = wrappedStack;
+        this.stackSize = stackSize;
     }
 
+    protected WrappedStack clone()
+    {
+        return this.clone(this.stackSize);
+    }
+
+    protected WrappedStack clone(int stackSize)
+    {
+        if(this.getWrappedObject() == null)
+            return new WrappedStack(null, null, -1);
+
+        stackSize = stackSize == -1 ? this.stackSize : stackSize;
+        return new WrappedStack(this.objectType, this.wrappedStack, stackSize);
+    }
+
+    private static WrappedStack wrapAnonymous(Object object)
+    {
+        return wrapAnonymous(object, -1);
+    }
+
+    private static WrappedStack wrapAnonymous(Object object, int stackSize)
+    {
+        object = tryTransformStack(object);
+        if(object == null)
+            return null;
+
+        return wrapAnonymousStack(object, stackSize);
+    }
+
+    private static WrappedStack wrapAnonymousStack(Object object, int stackSize)
+    {
+        if(object instanceof ItemStack)
+            return wrapItemStack((ItemStack) object, stackSize);
+
+        if(object instanceof OreStack)
+            return wrapOreStack((OreStack) object, stackSize);
+
+        if(object instanceof FluidStack)
+            return wrapFluidStack((FluidStack) object, stackSize);
+
+        if (object instanceof ArrayList)
+            return wrapArrayList((ArrayList<?>) object, stackSize);
+
+        if(object instanceof WrappedStack)
+            return ((WrappedStack) object).clone(stackSize);
+
+        return null;
+    }
+
+    private static WrappedStack wrapItemStack(ItemStack stack, int stackSize)
+    {
+        ItemStack wrappedStack = stack.copy();
+        stackSize = stackSize == -1 ? wrappedStack.stackSize : stackSize;
+        wrappedStack.stackSize = 1;
+        return new WrappedStack(itemStackType, wrappedStack, stackSize);
+    }
+
+    private static WrappedStack wrapOreStack(OreStack stack, int stackSize)
+    {
+        stackSize = stackSize == -1 ? stack.stackSize : stackSize;
+        stack.stackSize = 1;
+        return new WrappedStack(oreStackType, stack, stackSize);
+    }
+
+    private static WrappedStack wrapFluidStack(FluidStack stack, int stackSize)
+    {
+        stackSize = stackSize == -1 ? stack.amount : stackSize;
+        stack.amount = 1;
+        return new WrappedStack(fluidStackType, stack, stackSize);
+    }
+
+    private static WrappedStack wrapArrayList(ArrayList<?> list, int stackSize)
+    {
+        OreStack possibleOreStack = OreStack.getOreStackFromList(list);
+        if(possibleOreStack == null)
+            return null;
+
+        stackSize = stackSize == -1 ? possibleOreStack.stackSize : stackSize;
+        possibleOreStack.stackSize = 1;
+        return new WrappedStack(oreStackType, possibleOreStack, stackSize);
+    }
+
+    private static Object tryTransformStack(Object object)
+    {
+        if(object == null)
+            return null;
+
+        if(isWrappedStackType(object))
+            return object;
+
+        Object transformStack = tryWrapItemStack(object);
+        if(transformStack != null)
+            return transformStack;
+
+        transformStack = tryWrapFluidStack(object);
+        if(transformStack != null)
+            return transformStack;
+
+        return null;
+    }
+
+    private static boolean isWrappedStackType(Object object)
+    {
+        return object instanceof ItemStack || object instanceof FluidStack ||
+                object instanceof OreStack ||object instanceof ArrayList ||
+                object instanceof WrappedStack;
+    }
+
+    private static ItemStack tryWrapItemStack(Object object)
+    {
+        if(object instanceof Item)
+            return new ItemStack((Item) object);
+
+        if(object instanceof Block)
+            return new ItemStack((Block) object);
+
+        return null;
+    }
+
+    private static FluidStack tryWrapFluidStack(Object object)
+    {
+        return object instanceof Fluid
+            ? new FluidStack((Fluid) object, 1000)
+            : null;
+    }
+
+    // Using this method method we're asserting the same think twice,
+    //  don't waste these precious cycles.
     public static boolean canBeWrapped(Object object)
     {
         if (object instanceof WrappedStack)
@@ -263,31 +405,31 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         this.stackSize = stackSize;
     }
 
+    public Object getWrappedObject()
+    {
+        return wrappedStack;
+    }
+
+    public String getObjectType()
+    {
+        return this.objectType;
+    }
+
     public static WrappedStack wrap(Object object)
     {
-        if (canBeWrapped(object))
-        {
-            return new WrappedStack(object);
-        }
-
-        return null;
+        return wrapAnonymous(object);
     }
 
     public static WrappedStack wrap(Object object, int stackSize)
     {
-        if (canBeWrapped(object))
-        {
-            return new WrappedStack(object, stackSize);
-        }
-
-        return null;
+        return wrapAnonymous(object, stackSize);
     }
 
-    public static WrappedStack createFromJson(String jsonWrappedObject) throws JsonParseException
+    public static WrappedStack createFromJson(String jsonWrappedObject)
     {
         try
         {
-            return jsonSerializer.fromJson(jsonWrappedObject, WrappedStack.class);
+            return WrappedStackSerializer.createFromJson(jsonWrappedObject);
         }
         catch (JsonSyntaxException exception)
         {
@@ -304,150 +446,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
     @SuppressWarnings("unused")
     public String toJson()
     {
-        return jsonSerializer.toJson(this);
-    }
-
-    /**
-     * Gson invokes this call-back method during deserialization when it encounters a field of the
-     * specified type.
-     * <p>In the implementation of this call-back method, you should consider invoking
-     * {@link com.google.gson.JsonDeserializationContext#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type)} method to create objects
-     * for any non-trivial field of the returned object. However, you should never invoke it on the
-     * the same type passing {@code jsonElement} since that will cause an infinite loop (Gson will call your
-     * call-back method again).
-     *
-     * @param jsonElement The Json data being deserialized
-     * @param typeOfT     The type of the Object to deserialize to
-     * @param context
-     * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
-     * @throws com.google.gson.JsonParseException if jsonElement is not in the expected format of {@code typeofT}
-     */
-    @Override
-    public WrappedStack deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-    {
-        if (!jsonElement.isJsonPrimitive())
-        {
-            JsonObject jsonWrappedStack = (JsonObject) jsonElement;
-
-            int stackSize = 1;
-            String objectType = null;
-            Object stackObject = null;
-
-            if (jsonWrappedStack.get("type") != null)
-            {
-                objectType = jsonWrappedStack.get("type").getAsString();
-            }
-
-            if (jsonWrappedStack.get("stackSize") != null)
-            {
-                stackSize = jsonWrappedStack.get("stackSize").getAsInt();
-            }
-
-            if (jsonWrappedStack.get("objectData") != null && !jsonWrappedStack.get("objectData").isJsonPrimitive())
-            {
-                if (objectType != null)
-                {
-                    if (objectType.equalsIgnoreCase("ItemStack"))
-                    {
-                        JsonItemStack jsonItemStack = JsonItemStack.jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), JsonItemStack.class);
-                        ItemStack itemStack = null;
-                        Item item = (Item) Item.itemRegistry.getObject(jsonItemStack.itemName);
-                        if (stackSize > 0 && item != null)
-                        {
-                            itemStack = new ItemStack(item, stackSize, jsonItemStack.itemDamage);
-                            if (jsonItemStack.itemNBTTagCompound != null)
-                            {
-                                itemStack.stackTagCompound = jsonItemStack.itemNBTTagCompound;
-                            }
-                        }
-                        stackObject = itemStack;
-                    }
-                    else if (objectType.equalsIgnoreCase("OreStack"))
-                    {
-                        OreStack oreStack = jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), OreStack.class);
-
-                        if (stackSize > 0)
-                        {
-                            oreStack.stackSize = stackSize;
-                        }
-                        stackObject = oreStack;
-                    }
-                    else if (objectType.equalsIgnoreCase("FluidStack"))
-                    {
-                        JsonFluidStack jsonFluidStack = JsonFluidStack.jsonSerializer.fromJson(jsonWrappedStack.get("objectData"), JsonFluidStack.class);
-                        FluidStack fluidStack = new FluidStack(jsonFluidStack.fluid, jsonFluidStack.amount, jsonFluidStack.tag);
-
-                        if (stackSize > 0)
-                        {
-                            fluidStack.amount = stackSize;
-                        }
-                        stackObject = fluidStack;
-                    }
-                }
-            }
-
-            if (stackObject != null)
-            {
-                return new WrappedStack(stackObject);
-            }
-            else
-            {
-                throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
-            }
-        }
-        else
-        {
-            throw new JsonParseException(String.format("Unable to parse a wrappable stack object from the provided json: %s", jsonElement.toString()));
-        }
-    }
-
-    /**
-     * Gson invokes this call-back method during serialization when it encounters a field of the
-     * specified type.
-     * <p/>
-     * <p>In the implementation of this call-back method, you should consider invoking
-     * {@link com.google.gson.JsonSerializationContext#serialize(Object, java.lang.reflect.Type)} method to create JsonElements for any
-     * non-trivial field of the {@code wrappedStack} object. However, you should never invoke it on the
-     * {@code wrappedStack} object itself since that will cause an infinite loop (Gson will call your
-     * call-back method again).</p>
-     *
-     * @param wrappedStack the object that needs to be converted to Json.
-     * @param typeOfSrc    the actual type (fully genericized version) of the source object.
-     * @param context
-     * @return a JsonElement corresponding to the specified object.
-     */
-    @Override
-    public JsonElement serialize(WrappedStack wrappedStack, Type typeOfSrc, JsonSerializationContext context)
-    {
-        JsonObject jsonWrappedStack = new JsonObject();
-
-        Gson gson = new Gson();
-
-        jsonWrappedStack.addProperty("type", wrappedStack.objectType);
-        jsonWrappedStack.addProperty("stackSize", wrappedStack.stackSize);
-
-        if (wrappedStack.wrappedStack instanceof ItemStack)
-        {
-            JsonItemStack jsonItemStack = new JsonItemStack();
-            jsonItemStack.itemName = Item.itemRegistry.getNameForObject(((ItemStack) wrappedStack.wrappedStack).getItem());
-            jsonItemStack.itemDamage = ((ItemStack) wrappedStack.wrappedStack).getItemDamage();
-            if (((ItemStack) wrappedStack.wrappedStack).stackTagCompound != null)
-            {
-                jsonItemStack.itemNBTTagCompound = ((ItemStack) wrappedStack.wrappedStack).stackTagCompound;
-            }
-            jsonWrappedStack.add("objectData", JsonItemStack.jsonSerializer.toJsonTree(jsonItemStack, JsonItemStack.class));
-        }
-        else if (wrappedStack.wrappedStack instanceof OreStack)
-        {
-            jsonWrappedStack.add("objectData", gson.toJsonTree(wrappedStack.wrappedStack, OreStack.class));
-        }
-        else if (wrappedStack.wrappedStack instanceof FluidStack)
-        {
-            JsonFluidStack jsonFluidStack = new JsonFluidStack((FluidStack) wrappedStack.wrappedStack);
-            jsonWrappedStack.add("objectData", JsonFluidStack.jsonSerializer.toJsonTree(jsonFluidStack, JsonFluidStack.class));
-        }
-
-        return jsonWrappedStack;
+        return WrappedStackSerializer.toJson(this);
     }
 
     /**

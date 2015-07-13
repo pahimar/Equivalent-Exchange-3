@@ -31,7 +31,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
-    private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+    private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting()
+            .registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry())
+            .registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
+
     private static final Object singletonSyncRoot = new Object();
 
     private boolean shouldRegenNextRestart = false;

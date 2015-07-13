@@ -129,6 +129,7 @@ public class EquivalentExchange3
         AbilityRegistry.getInstance().save();
     }
 
+    // TODO Switch refactor EnergyValueRegistry.getInstance() to getEnergyValueRegistry()(?)
     public EnergyValueRegistry getEnergyValueRegistry()
     {
         return EnergyValueRegistry.getInstance();
