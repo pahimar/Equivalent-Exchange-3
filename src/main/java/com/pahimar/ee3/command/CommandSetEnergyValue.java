@@ -3,6 +3,7 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.filesystem.FileSystem;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSetEnergyValue;
 import com.pahimar.ee3.reference.Files;
@@ -18,6 +19,8 @@ import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
+import javax.naming.OperationNotSupportedException;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -91,57 +94,66 @@ public class CommandSetEnergyValue extends CommandBase
             WrappedStack wrappedStack = WrappedStack.wrap(itemStack);
             EnergyValue newEnergyValue = new EnergyValue(energyValue);
 
-            if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getValue(), 0) > 0)
+            try
             {
-                if (args[1].equalsIgnoreCase("pre"))
+                if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getValue(), 0) > 0)
                 {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                    if (args[1].equalsIgnoreCase("pre"))
+                    {
+                        EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
 
-                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES);
-                    preAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES, preAssignedValues);
-                    EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
-                }
-                else if (args[1].equalsIgnoreCase("global-pre"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                        Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES);
+                        preAssignedValues.put(wrappedStack, newEnergyValue);
+                        SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES, preAssignedValues);
+                        EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
+                    }
+                    else if (args[1].equalsIgnoreCase("global-pre"))
+                    {
+                        EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
 
-                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.preCalcluationEnergyValueFile);
-                    preAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.Global.preCalcluationEnergyValueFile, preAssignedValues);
-                    EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
-                }
-                else if (args[1].equalsIgnoreCase("post"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                        File preCalcluationEnergyValueFile = FileSystem.getGlobal().getPreCalcluationEnergyValueFile();
+                        Map<WrappedStack, EnergyValue> preAssignedValues = null;
+                        preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(preCalcluationEnergyValueFile);
+                        preAssignedValues.put(wrappedStack, newEnergyValue);
+                        SerializationHelper.writeEnergyValueStackMapToJsonFile(preCalcluationEnergyValueFile, preAssignedValues);
+                        EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
+                    }
+                    else if (args[1].equalsIgnoreCase("post"))
+                    {
+                        EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
 
-                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_CALCULATION_ENERGY_VALUES);
-                    postAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.POST_CALCULATION_ENERGY_VALUES, postAssignedValues);
+                        Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_CALCULATION_ENERGY_VALUES);
+                        postAssignedValues.put(wrappedStack, newEnergyValue);
+                        SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.POST_CALCULATION_ENERGY_VALUES, postAssignedValues);
 
-                    PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
-                }
-                else if (args[1].equalsIgnoreCase("global-post"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
+                        PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
+                    }
+                    else if (args[1].equalsIgnoreCase("global-post"))
+                    {
+                        EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
 
-                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.postCalcluationEnergyValueFile);
-                    postAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.Global.postCalcluationEnergyValueFile, postAssignedValues);
+                        File postCalcluationEnergyValueFile = FileSystem.getGlobal().getPostCalcluationEnergyValueFile();
+                        Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(postCalcluationEnergyValueFile);
+                        postAssignedValues.put(wrappedStack, newEnergyValue);
+                        SerializationHelper.writeEnergyValueStackMapToJsonFile(postCalcluationEnergyValueFile, postAssignedValues);
 
-                    PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
+                        PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
+                    }
+                    else
+                    {
+                        throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
+                    }
+
+                    // Notify admins and log the value change
+                    func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
                 }
                 else
                 {
                     throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
                 }
-
-                // Notify admins and log the value change
-                func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
-            }
-            else
+            } catch (OperationNotSupportedException e)
             {
-                throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
+                // TODO Inform the player that the files are not available.
             }
         }
     }

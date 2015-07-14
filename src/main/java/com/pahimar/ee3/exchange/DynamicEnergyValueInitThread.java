@@ -5,6 +5,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.item.crafting.CraftingManager;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,13 @@ public class DynamicEnergyValueInitThread implements Runnable
         AludelRecipeManager.registerRecipes();
 
         long startTime = System.currentTimeMillis();
-        EnergyValueRegistry.getInstance().init();
+        try
+        {
+            EnergyValueRegistry.getInstance().init();
+        } catch (OperationNotSupportedException e)
+        {
+            // TODO This should never happen, if it does, what should we do?
+        }
         LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));
     }
 

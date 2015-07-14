@@ -6,10 +6,10 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.configuration.EnergyRegenOption;
+import com.pahimar.ee3.filesystem.FileSystem;
+import com.pahimar.ee3.filesystem.IFileSystem;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
-import com.pahimar.ee3.reference.Messages;
-import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LoaderHelper;
@@ -19,15 +19,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
 {
@@ -346,6 +345,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     }
 
     protected final void init()
+            throws OperationNotSupportedException
     {
         if(this.shouldRegenerateEnergyValue())
             this.runDynamicEnergyValueResolution();
@@ -363,6 +363,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     // TODO Refactor, break into stages and break passes too.
     private void runDynamicEnergyValueResolution()
+            throws OperationNotSupportedException
     {
         TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
         uncomputedStacks = null;
@@ -372,7 +373,9 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         // Add in all global pre-calculation values
         LogHelper.trace(String.format("BEGIN Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> globalPreCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.preCalcluationEnergyValueFile);
+        Map<WrappedStack, EnergyValue> globalPreCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(
+            FileSystem.getGlobal().getPreCalcluationEnergyValueFile()
+        );
         for (WrappedStack wrappedStack : globalPreCalculationValueMap.keySet())
         {
             if (globalPreCalculationValueMap.get(wrappedStack) != null)
@@ -476,7 +479,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         // Add in all global post-calculation values
         LogHelper.trace(String.format("Begin Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> globalPostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.postCalcluationEnergyValueFile);
+        Map<WrappedStack, EnergyValue> globalPostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(
+                FileSystem.getGlobal().getPostCalcluationEnergyValueFile());
         for (WrappedStack wrappedStack : globalPostCalculationValueMap.keySet())
         {
             if (globalPostCalculationValueMap.get(wrappedStack) != null)
@@ -717,7 +721,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public void save()
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File energyValuesDataDirectory = FileSystem.getWorld(world).getEnergyValuesDirectory();
         energyValuesDataDirectory.mkdirs();
 
         if (shouldRegenNextRestart)
@@ -746,11 +751,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public boolean loadEnergyValueRegistryFromFile()
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        IFileSystem fileSystem = FileSystem.getWorld(world);
+        File energyValuesDataDirectory = fileSystem.getEnergyValuesDirectory();
         energyValuesDataDirectory.mkdirs();
 
-        File staticEnergyValuesFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON);
-        File md5EnergyValuesFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json.gz");
+        File staticEnergyValuesFile = fileSystem.getStaticEnergyValueFile();
+        File md5EnergyValuesFile = fileSystem.getEnergyValueFile(SerializationHelper.getModListMD5() + ".json.gz");
 
         Map<WrappedStack, EnergyValue> stackValueMap = null;
         if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen != EnergyRegenOption.Always)
