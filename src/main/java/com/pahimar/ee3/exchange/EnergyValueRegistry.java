@@ -39,6 +39,17 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     private static final Object singletonSyncRoot = new Object();
 
+    // TODO Expose to API
+    private static final IEnergyValuesSource[] preCalculationSources = {
+            new FileSystemEnergyValuesSource(Files.PRE_CALCULATION_ENERGY_VALUES),
+            new FileSystemEnergyValuesSource(Files.PRE_CALCULATION_ENERGY_VALUES, true)
+    };
+
+    private static final IEnergyValuesSource[] postCalculationSources = {
+            new FileSystemEnergyValuesSource(Files.POST_CALCULATION_ENERGY_VALUES),
+            new FileSystemEnergyValuesSource(Files.POST_CALCULATION_ENERGY_VALUES, true)
+    };
+
     private boolean shouldRegenNextRestart = false;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preCalculationMappings;
@@ -371,151 +382,12 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     private void runDynamicEnergyValueResolution()
             throws OperationNotSupportedException
     {
-        TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
-        uncomputedStacks = null;
+        IRegistryContext context = new Context(this);
+        IEnergyCalculationDataProvider dataProvider = new CalculationDataProvider();
+        EnergyCalculationSession session = new EnergyCalculationSession(context, dataProvider);
 
-        // Add in all mod specified pre-calculation values
-        stackValueMap.putAll(preCalculationMappings); // TODO Logging
-
-        // Add in all global pre-calculation values
-        LogHelper.trace(String.format("BEGIN Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> globalPreCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(
-            FileSystem.getGlobal().getPreCalcluationEnergyValueFile()
-        );
-        for (WrappedStack wrappedStack : globalPreCalculationValueMap.keySet())
-        {
-            if (globalPreCalculationValueMap.get(wrappedStack) != null)
-            {
-                stackValueMap.put(wrappedStack, globalPreCalculationValueMap.get(wrappedStack));
-                LogHelper.trace(String.format("Adding EnergyValue %s for %s", globalPreCalculationValueMap.get(wrappedStack), wrappedStack));
-            }
-        }
-        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-
-        // Add in all instance pre-calculation values
-        LogHelper.trace(String.format("BEGIN Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> instancePreAssignedValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES);
-        for (WrappedStack wrappedStack : instancePreAssignedValueMap.keySet())
-        {
-            if (instancePreAssignedValueMap.get(wrappedStack) != null)
-            {
-                stackValueMap.put(wrappedStack, instancePreAssignedValueMap.get(wrappedStack));
-                LogHelper.trace(String.format("Adding EnergyValue %s for %s", instancePreAssignedValueMap.get(wrappedStack), wrappedStack));
-            }
-        }
-        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-
-        /*
-         *  Auto-assignment
-         */
-        Map<WrappedStack, EnergyValue> computedStackValues;
-        int passNumber = 0;
-        long computationStartTime = System.currentTimeMillis();
-        long passStartTime;
-        int passComputedValueCount = 0;
-        int totalComputedValueCount = 0;
-        LogHelper.info("Beginning dynamic value calculation");
-        boolean isFirstPass = true;
-        while ((isFirstPass || passComputedValueCount > 0) && (passNumber < 16)) // TODO Make this a config option (calculation max depth?)
-        {
-            if (isFirstPass)
-            {
-                isFirstPass = false;
-            }
-            passComputedValueCount = 0;
-            passStartTime = System.currentTimeMillis();
-            passNumber++;
-
-            // Compute stack mappings from existing stack mappings
-            computedStackValues = computeStackMappings(stackValueMap, passNumber);
-
-            for (WrappedStack keyStack : computedStackValues.keySet())
-            {
-                EnergyValue factoredExchangeEnergyValue = null;
-                WrappedStack factoredKeyStack = null;
-
-                if (keyStack != null && keyStack.getWrappedObject() != null && keyStack.getStackSize() > 0)
-                {
-                    if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getValue(), 0f) > 0)
-                    {
-                        factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(computedStackValues.get(keyStack), keyStack.getStackSize());
-                        factoredKeyStack = WrappedStack.wrap(keyStack, 1);
-                    }
-                }
-
-                if (factoredExchangeEnergyValue != null)
-                {
-                    if (stackValueMap.containsKey(factoredKeyStack))
-                    {
-                        if (factoredExchangeEnergyValue.compareTo(stackValueMap.get(factoredKeyStack)) == -1)
-                        {
-                            LogHelper.trace(String.format("")); // TODO Log message
-                            stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
-                        }
-                    }
-                    else
-                    {
-                        LogHelper.trace(String.format("")); // TODO Log message
-                        stackValueMap.put(factoredKeyStack, factoredExchangeEnergyValue);
-                        passComputedValueCount++;
-                        totalComputedValueCount++;
-                    }
-                }
-            }
-            LogHelper.info(String.format("Pass %s: Calculated %s values for objects in %s ms", passNumber, passComputedValueCount, System.currentTimeMillis() - passStartTime));
-        }
-        LogHelper.info(String.format("Finished dynamic value calculation (calculated %s values for objects in %s ms)", totalComputedValueCount, System.currentTimeMillis() - computationStartTime));
-
-        // Add in all mod specified post-calculation values
-        // TODO Logging
-        if (postCalculationMappings != null)
-        {
-            for (WrappedStack wrappedStack : postCalculationMappings.keySet())
-            {
-                if (postCalculationMappings.get(wrappedStack) != null)
-                {
-                    stackValueMap.put(wrappedStack, postCalculationMappings.get(wrappedStack));
-                }
-            }
-        }
-        else
-        {
-            postCalculationMappings = new TreeMap<WrappedStack, EnergyValue>();
-        }
-
-        // Add in all global post-calculation values
-        LogHelper.trace(String.format("Begin Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> globalPostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(
-                FileSystem.getGlobal().getPostCalcluationEnergyValueFile());
-        for (WrappedStack wrappedStack : globalPostCalculationValueMap.keySet())
-        {
-            if (globalPostCalculationValueMap.get(wrappedStack) != null)
-            {
-                stackValueMap.put(wrappedStack, globalPostCalculationValueMap.get(wrappedStack));
-                LogHelper.trace(String.format("Adding EnergyValue %s for %s", globalPostCalculationValueMap.get(wrappedStack), wrappedStack));
-            }
-        }
-        LogHelper.trace(String.format("END Adding EnergyValue mappings from %s", Files.PRE_CALCULATION_ENERGY_VALUES));
-
-        // Add in all instance post-calculation values
-        LogHelper.trace(String.format("Begin Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
-        Map<WrappedStack, EnergyValue> instancePostCalculationValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_CALCULATION_ENERGY_VALUES);
-        for (WrappedStack wrappedStack : instancePostCalculationValueMap.keySet())
-        {
-            if (instancePostCalculationValueMap.get(wrappedStack) != null)
-            {
-                stackValueMap.put(wrappedStack, instancePostCalculationValueMap.get(wrappedStack));
-                LogHelper.trace(String.format("Adding EnergyValue %s for %s", instancePreAssignedValueMap.get(wrappedStack), wrappedStack));
-            }
-        }
-        LogHelper.trace(String.format("End Adding EnergyValue mappings from %s", Files.POST_CALCULATION_ENERGY_VALUES));
-
-        /**
-         * Finalize the stack to value map
-         */
-        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-        stackMappingsBuilder.putAll(stackValueMap);
-        stackMappings = stackMappingsBuilder.build();
+        EnergyCalculationSession.Result result = session.runDynamicEnergyValueResolution();
+        this.stackMappings = result.getStackValueMap();
 
         /**
          *  Value map resolution
@@ -889,5 +761,70 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             }
         }
         LogHelper.info(String.format("END DUMPING %s ENERGY VALUE MAPPINGS", phase));
+    }
+
+    private class Context implements IRegistryContext
+    {
+        private final EnergyValueRegistry registry;
+        private final IFileSystem globalFs;
+        private final IFileSystem worldFs;
+
+        private Context(EnergyValueRegistry registry) throws OperationNotSupportedException
+        {
+            this.registry = registry;
+            this.globalFs = FileSystem.getGlobal();
+
+            World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+            this.worldFs = FileSystem.getWorld(world);
+        }
+
+        @Override
+        public boolean hasEnergyValue(Object object, boolean strict)
+        {
+            return this.registry.hasEnergyValue(object, strict);
+        }
+
+        @Override
+        public IFileSystem getGlobal()
+        {
+            return this.globalFs;
+        }
+
+        @Override
+        public IFileSystem getWorld()
+        {
+            return this.worldFs;
+        }
+    }
+
+    private class CalculationDataProvider implements IEnergyCalculationDataProvider
+    {
+        private CalculationDataProvider()
+        {
+        }
+
+        @Override
+        public Map<WrappedStack, EnergyValue> getPreCalculationMappings()
+        {
+            return EnergyValueRegistry.preCalculationMappings;
+        }
+
+        @Override
+        public Map<WrappedStack, EnergyValue> getPostCalculationMappings()
+        {
+            return EnergyValueRegistry.postCalculationMappings;
+        }
+
+        @Override
+        public IEnergyValuesSource[] getPreCalculationSources()
+        {
+            return EnergyValueRegistry.preCalculationSources;
+        }
+
+        @Override
+        public IEnergyValuesSource[] getPostCalculationSources()
+        {
+            return EnergyValueRegistry.postCalculationSources;
+        }
     }
 }

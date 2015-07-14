@@ -412,6 +412,11 @@ public class WrappedStack implements Comparable<WrappedStack>
         return this.objectType;
     }
 
+    public boolean isEmpty()
+    {
+        return this.wrappedStack == null || this.stackSize <= 0;
+    }
+
     public static WrappedStack wrap(Object object)
     {
         return wrapAnonymous(object);
