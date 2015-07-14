@@ -65,14 +65,30 @@ public class RecipeRegistry
             }
         }
 
+        LogHelper.trace(String.format("RecipeRegistry[%s]: Mod with ID '%s' added recipe (Output: %s, Inputs: %s)",
+                LoaderHelper.getLoaderState(),
+                Loader.instance().activeModContainer().getModId(),
+                wrappedRecipeOutput, stringBuilder.toString().trim()));
+
+        this.addRecipe(wrappedRecipeOutput, wrappedRecipeInputList);
+    }
+
+    private void addRecipe(WrappedStack recipeOutput, List<WrappedStack> recipeInputList)
+    {
         // Add the recipe mapping only if we don't already have it
         synchronized (this.recipeMapSyncRoot)
         {
-            if (!recipeMap.get(wrappedRecipeOutput).contains(wrappedRecipeInputList)) {
-                LogHelper.trace(String.format("RecipeRegistry[%s]: Mod with ID '%s' added recipe (Output: %s, Inputs: %s)", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim()));
-                recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
+            if (!this.recipeMap.get(recipeOutput).contains(recipeInputList))
+            {
+                this.recipeMap.put(recipeOutput, recipeInputList);
+                this.invalidateView();
             }
         }
+    }
+
+    private void invalidateView()
+    {
+        this.immutableRecipeMap = null;
     }
 
     public void registerVanillaRecipes(Object[] recipes)

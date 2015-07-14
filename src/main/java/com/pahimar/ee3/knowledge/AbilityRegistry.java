@@ -7,15 +7,19 @@ import com.pahimar.ee3.api.event.AbilityEvent;
 import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.filesystem.*;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.serialization.AbilityRegistrySerializer;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Iterator;
@@ -227,6 +231,7 @@ public class AbilityRegistry
     }
 
     public void loadAbilityRegistryFromFile(boolean loadFileOnly)
+            throws OperationNotSupportedException
     {
         if (abilityDirectory != null)
         {
@@ -239,7 +244,7 @@ public class AbilityRegistry
         }
         else
         {
-            abilityDirectory = new File(SerializationHelper.getInstanceDataDirectory(), "abilities");
+            abilityDirectory = FileSystem.getWorld().getAbilitiesDirectory();
             abilityDirectory.mkdirs();
         }
     }

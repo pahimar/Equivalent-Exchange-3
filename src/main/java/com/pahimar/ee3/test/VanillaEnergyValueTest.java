@@ -1,10 +1,13 @@
 package com.pahimar.ee3.test;
 
+import com.pahimar.ee3.filesystem.FileSystem;
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
@@ -602,8 +605,11 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
 
     public void save()
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File energyValuesDataDirectoryBase = FileSystem.getWorld(world).getEnergyValuesDirectory();
+        File energyValuesDataDirectory = new File(energyValuesDataDirectoryBase, "testcases");
         energyValuesDataDirectory.mkdirs();
+
         this.saveTestSuite(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));
     }
 }
