@@ -30,7 +30,7 @@ public class EnergyCalculationSession
         final int maxPassDepth = 16; // TODO Make this a config value.
         LogHelper.info("Beginning dynamic value calculation");
         CalculationPass pass = new CalculationPass(1, context);
-        while ((pass.isFirstPass() || pass.calculatedNewValues()) && (pass.getPassNumber() < maxPassDepth))
+        while (pass.isFirstPass() || pass.getPassNumber() < maxPassDepth)
         {
             Map<WrappedStack, EnergyValue> computedStackMap = this.runCalculationPass(pass, stackValueMap);
             for (WrappedStack keyStack : computedStackMap.keySet())
@@ -43,6 +43,10 @@ public class EnergyCalculationSession
                     stackValueMap.put(normalizedValue.wrappedStack, normalizedValue.energyValue);
                 }
             }
+
+            // If not new value were added there is no sense in more passes.
+            if(!pass.calculatedNewValues())
+                break;
 
             pass = pass.next();
         }
@@ -215,6 +219,9 @@ public class EnergyCalculationSession
 
         public boolean calculatedNewValues()
         {
+            if(this.computedValues == null)
+                return false;
+
             return this.computedValues.size() > 0;
         }
 

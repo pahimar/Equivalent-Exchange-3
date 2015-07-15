@@ -1,6 +1,7 @@
 package com.pahimar.ee3.api.exchange;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import cpw.mods.fml.common.Mod;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public final class EnergyValueRegistryProxy
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreCalculationEnergyValue(object, energyValue);
+            EnergyValueRegistry.Factory.addPreCalculationEnergyValue(object, energyValue);
         }
     }
 
@@ -38,7 +39,7 @@ public final class EnergyValueRegistryProxy
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPreCalculationEnergyValue(object, energyValue);
+            EnergyValueRegistry.Factory.addPreCalculationEnergyValue(object, energyValue);
         }
     }
 
@@ -59,7 +60,7 @@ public final class EnergyValueRegistryProxy
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostCalculationExactEnergyValue(object, energyValue);
+            EnergyValueRegistry.Factory.addPostCalculationExactEnergyValue(object, energyValue);
         }
     }
 
@@ -70,7 +71,7 @@ public final class EnergyValueRegistryProxy
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().addPostCalculationExactEnergyValue(object, energyValue);
+            EnergyValueRegistry.Factory.addPostCalculationExactEnergyValue(object, energyValue);
         }
     }
 
