@@ -1,7 +1,6 @@
 package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableSortedMap;
-import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
@@ -10,8 +9,7 @@ import com.pahimar.ee3.filesystem.FileSystem;
 import com.pahimar.ee3.filesystem.IFileSystem;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Settings;
-import com.pahimar.ee3.serialization.EnergyValueStackMappingSerializer;
-import com.pahimar.ee3.serialization.JsonSerialization;
+import com.pahimar.ee3.serialization.EnergyValueRegistrySerializer;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -26,16 +24,10 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.naming.OperationNotSupportedException;
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.*;
 
-public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
+public class EnergyValueRegistry
 {
-    // TODO Rethink serialization here
-    private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting()
-            .registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry())
-            .registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMappingSerializer()).create();
-
     private static EnergyValueRegistry currentInstance;
     private static final Object singletonSyncRoot = new Object();
 
@@ -406,50 +398,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
     public String toJson()
     {
-        return JSON_SERIALIZER.toJson(this);
-    }
-
-    @Override
-    public EnergyValueRegistry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-    {
-        if (json.isJsonArray())
-        {
-            JsonArray jsonArray = (JsonArray) json;
-            Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
-            Iterator<JsonElement> iterator = jsonArray.iterator();
-
-            while (iterator.hasNext())
-            {
-                JsonElement jsonElement = iterator.next();
-                EnergyValueStackMapping energyValueStackMapping = new EnergyValueStackMappingSerializer().deserialize(jsonElement, typeOfT, context);
-
-                if (energyValueStackMapping != null)
-                {
-                    stackValueMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
-                }
-            }
-
-            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-            stackMappingsBuilder.putAll(stackValueMap);
-            stackMappings = stackMappingsBuilder.build();
-
-            generateValueStackMappings();
-        }
-
-        return null;
-    }
-
-    @Override
-    public JsonElement serialize(EnergyValueRegistry energyValueRegistry, Type typeOfSrc, JsonSerializationContext context)
-    {
-        JsonArray jsonEnergyValueRegistry = new JsonArray();
-
-        for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet())
-        {
-            jsonEnergyValueRegistry.add(JsonSerialization.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
-        }
-
-        return jsonEnergyValueRegistry;
+        return EnergyValueRegistrySerializer.toJson(this);
     }
 
     public static void dumpEnergyValueRegistryToLog()

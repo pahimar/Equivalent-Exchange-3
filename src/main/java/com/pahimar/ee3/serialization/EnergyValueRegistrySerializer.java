@@ -1,6 +1,6 @@
 package com.pahimar.ee3.serialization;
 
-/*import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
@@ -12,35 +12,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class EnergyValueRegistrySerializer implements JsonSerializer<EnergyValueRegistry>, JsonDeserializer<EnergyValueRegistry>
+public class EnergyValueRegistrySerializer implements JsonSerializer<EnergyValueRegistry>
 {
-    @Override
-    public EnergyValueRegistry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    public static String toJson(EnergyValueRegistry registry)
     {
-        if (json.isJsonArray())
-        {
-
-            JsonArray jsonArray = (JsonArray) json;
-            Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<WrappedStack, EnergyValue>();
-            Iterator<JsonElement> iterator = jsonArray.iterator();
-
-            while (iterator.hasNext())
-            {
-                JsonElement jsonElement = iterator.next();
-                EnergyValueStackMapping energyValueStackMapping = new EnergyValueStackMapping().deserialize(jsonElement, typeOfT, context);
-
-                if (energyValueStackMapping != null)
-                    stackValueMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
-            }
-
-            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-            stackMappingsBuilder.putAll(stackValueMap);
-            stackMappings = stackMappingsBuilder.build();
-
-            generateValueStackMappings();
-        }
-
-        return null;
+        return JsonSerialization.jsonSerializer.toJson(registry, EnergyValueRegistry.class);
     }
 
     @Override
@@ -48,10 +24,14 @@ public class EnergyValueRegistrySerializer implements JsonSerializer<EnergyValue
     {
         JsonArray jsonEnergyValueRegistry = new JsonArray();
 
-        for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet())
-            jsonEnergyValueRegistry.add(EnergyValueStackMapping.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
+        Map<WrappedStack, EnergyValue> stackMapping = energyValueRegistry.getStackValueMap();
+        for (WrappedStack wrappedStack : stackMapping.keySet())
+        {
+            EnergyValue value = stackMapping.get(wrappedStack);
+            EnergyValueStackMapping mapping = new EnergyValueStackMapping(wrappedStack, value);
+            jsonEnergyValueRegistry.add(JsonSerialization.jsonSerializer.toJsonTree(mapping));
+        }
 
         return jsonEnergyValueRegistry;
     }
 }
-*/
