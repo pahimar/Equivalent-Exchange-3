@@ -38,6 +38,7 @@ public class DynamicEnergyValueInitThread implements Runnable
         } catch (OperationNotSupportedException e)
         {
             // TODO This should never happen, if it does, what should we do?
+            e.printStackTrace();
         }
         LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));
     }

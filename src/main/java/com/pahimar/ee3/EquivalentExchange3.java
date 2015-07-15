@@ -65,9 +65,10 @@ public class EquivalentExchange3
         try
         {
             AbilityRegistry.getInstance().loadAbilityRegistryFromFile(Settings.Abilities.onlyLoadFile);
-        } catch (OperationNotSupportedException ignored)
+        } catch (OperationNotSupportedException e)
         {
             // TODO This should never happen, if it does, what should we do?
+            e.printStackTrace();
         }
 
         event.registerServerCommand(new CommandEE());
@@ -133,6 +134,8 @@ public class EquivalentExchange3
         WorldEventHandler.hasInitilialized = false;
 
         EnergyValueRegistry.getInstance().save();
+        EnergyValueRegistry.invalidateInstance();
+
         TransmutationKnowledgeRegistry.getInstance().clear();
         AbilityRegistry.getInstance().save();
     }

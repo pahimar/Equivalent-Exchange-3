@@ -154,6 +154,7 @@ public class CommandSetEnergyValue extends CommandBase
             } catch (OperationNotSupportedException e)
             {
                 // TODO Inform the player that the files are not available.
+                e.printStackTrace();
             }
         }
     }

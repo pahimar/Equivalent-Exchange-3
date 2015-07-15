@@ -52,9 +52,10 @@ public class TransmutationKnowledgeRegistry
                     try
                     {
                         transmutationKnowledgeRegistry = new TransmutationKnowledgeRegistry();
-                    } catch (OperationNotSupportedException ignored)
+                    } catch (OperationNotSupportedException e)
                     {
                         // TODO This should never happen, if it does, what should we do?
+                        e.printStackTrace();
                     }
                 }
             }
