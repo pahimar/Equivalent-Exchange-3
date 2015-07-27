@@ -44,7 +44,7 @@ item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade [WIP]
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade [WIP]
 item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge
 item.ee3:matterProto.name=Proto Matter [WIP]
-item.ee3:matterDark.name=Dank Matter [WIP]
+item.ee3:matterDark.name=Dark Matter [WIP]
 item.ee3:matterOmni.name=Omni Matter [WIP]
 item.ee3:matterCorporeal.name=Corporeal Matter [WIP]
 item.ee3:matterKinetic.name=Kinetic Matter [WIP]
@@ -64,18 +64,18 @@ item.ee3:knowledgeScroll.name=Scroll of Transmutation Knowledge [WIP]
 item.ee3:potionLethe.name=Lethe Potion [WIP]
 
 # Tools
-item.ee3:shovelDarkMatter.name=Dank Matter Shovel [WIP]
-item.ee3:pickAxeDarkMatter.name=Dank Matter Pickaxe [WIP]
-item.ee3:hammerDarkMatter.name=Dank Matter Hammer [WIP]
-item.ee3:axeDarkMatter.name=Dank Matter Axe [WIP]
-item.ee3:hoeDarkMatter.name=Dank Matter Hoe [WIP]
-item.ee3:fishingRodDarkMatter.name=Dank Matter Fishing Rod [WIP]
-item.ee3:shearsDarkMatter.name=Dank Matter Shears [WIP]
+item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
+item.ee3:pickAxeDarkMatter.name=Dark Matter Pickaxe [WIP]
+item.ee3:hammerDarkMatter.name=Dark Matter Hammer [WIP]
+item.ee3:axeDarkMatter.name=Dark Matter Axe [WIP]
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe [WIP]
+item.ee3:fishingRodDarkMatter.name=Dark Matter Fishing Rod [WIP]
+item.ee3:shearsDarkMatter.name=Dark Matter Shears [WIP]
 
 # Weapons
-item.ee3:bowDarkMatter.name=Dank Matter Bow [WIP]
-item.ee3:arrowDarkMatter.name=Dank Matter Arrow [WIP]
-item.ee3:swordDarkMatter.name=Dank Matter Sword [WIP]
+item.ee3:bowDarkMatter.name=Dark Matter Bow [WIP]
+item.ee3:arrowDarkMatter.name=Dark Matter Arrow [WIP]
+item.ee3:swordDarkMatter.name=Dark Matter Sword [WIP]
 
 # Blocks
 tile.ee3:alchemicalChest.name=Alchemical Chest
