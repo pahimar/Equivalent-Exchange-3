@@ -39,6 +39,11 @@ public class BlockAshInfusedStoneSlab extends BlockSlab
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
     }
+    
+    public int getLightOpacity()
+    {
+        return 0;
+    }
 
     /**
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
