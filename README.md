@@ -100,7 +100,7 @@ In order to get the most up-to-date builds, you'll have to periodically update y
 1. Open up your command line.
 2. Navigate to wherever you cloned EE3 in the console.
 3. Make sure you have not made any changes to the local repository, or else there might be issues with Git.
-	* If there are local changes, try reverting them to the status that they were when you last updated your repository by executing `git revert HEAD --hard`.
+	* If there are local changes, try reverting them to the status that they were when you last updated your repository by executing `git reset HEAD --hard`.
 4. Execute `git pull master`.  This pulls all commits from the official repository that do not yet exist on your local repository and updates it.
 
 ### Contributing
