@@ -4,6 +4,7 @@ import com.pahimar.ee3.client.renderer.model.ModelAludel;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.tileentity.TileEntityAludel;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -17,8 +18,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityRendererAludel extends TileEntitySpecialRenderer
+public class TileEntityRendererAludel extends TileEntitySpecialRendererBase
 {
+    // The calculation is: deg = total(ticks) * speed
+    //      tick = [1 / 20][sec]
+    //      speed[deg/s] = speed[deg/tc] * 20
+    //      speed[deg/s] = [4.5] * 20 = 90[deg/s]
+    private static final float rotationSpeed = 4.5f;
+
     private final ModelAludel modelAludel = new ModelAludel();
     private final RenderItem customRenderItem;
 
@@ -37,7 +44,7 @@ public class TileEntityRendererAludel extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
+    public void  renderTileEntryAt(TileEntity tileEntity, double x, double y, double z, float dTick, float totalAdjustedTicks)
     {
         if (tileEntity instanceof TileEntityAludel)
         {
@@ -68,7 +75,7 @@ public class TileEntityRendererAludel extends TileEntitySpecialRenderer
                 if (tileEntityAludel.outputItemStack != null)
                 {
                     float scaleFactor = getGhostItemScaleFactor(tileEntityAludel.outputItemStack);
-                    float rotationAngle = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+                    float rotationAngle = totalAdjustedTicks * scaleFactor;
 
                     EntityItem ghostEntityItem = new EntityItem(tileEntityAludel.getWorldObj());
                     ghostEntityItem.hoverStart = 0.0F;

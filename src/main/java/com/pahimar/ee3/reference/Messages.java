@@ -112,6 +112,10 @@ public final class Messages
         public static final String GENERAL_SYNC_THRESHOLD_LABEL = "general.sync.threshold.label";
         public static final String GENERAL_SYNC_THRESHOLD_COMMENT = "general.sync.threshold.comment";
 
+        public static final String ITEMS_MINIUM_STONE_DURABILITY = "miniumStone.durability";
+        public static final String ITEMS_MINIUM_STONE_DURABILITY_LABEL = "item.miniumStone.durability.label";
+        public static final String ITEMS_MINIUM_STONE_DURABILITY_COMMENT = "item.miniumStone.durability.comment";
+
         public static final String SOUND_MODE = "soundMode";
         public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
         public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";

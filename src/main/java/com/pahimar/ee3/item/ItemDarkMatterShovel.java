@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, IChargeable
+public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, IChargeable, IAugmentable
 {
     private static final Set blocksEffectiveAgainst = Sets.newHashSet(new Block[]{Blocks.grass, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.snow_layer, Blocks.snow, Blocks.clay, Blocks.farmland, Blocks.soul_sand, Blocks.mycelium});
 

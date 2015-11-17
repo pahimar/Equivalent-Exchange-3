@@ -41,4 +41,16 @@ public class ItemEE extends Item
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
+
+    public static boolean IsAugmentable(Item item)
+    {
+        return item != null && item instanceof IAugmentable;
+
+    }
+
+    public static boolean IsAugment(Item item)
+    {
+        return item != null && item instanceof IAugment;
+
+    }
 }

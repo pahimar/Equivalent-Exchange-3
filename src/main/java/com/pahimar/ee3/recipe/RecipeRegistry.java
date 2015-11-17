@@ -14,7 +14,9 @@ import java.util.List;
 public class RecipeRegistry
 {
     private static RecipeRegistry recipeRegistry = null;
+    private static final Object singletonSyncRoot = new Object();
 
+    private final Object recipeMapSyncRoot = new Object();
     private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
     private ImmutableMultimap<WrappedStack, List<WrappedStack>> immutableRecipeMap;
 
@@ -27,7 +29,11 @@ public class RecipeRegistry
     {
         if (recipeRegistry == null)
         {
-            recipeRegistry = new RecipeRegistry();
+            synchronized (singletonSyncRoot)
+            {
+                if(recipeRegistry == null)
+                    recipeRegistry = new RecipeRegistry();
+            }
         }
 
         return recipeRegistry;
@@ -59,17 +65,35 @@ public class RecipeRegistry
             }
         }
 
+        LogHelper.trace(String.format("RecipeRegistry[%s]: Mod with ID '%s' added recipe (Output: %s, Inputs: %s)",
+                LoaderHelper.getLoaderState(),
+                Loader.instance().activeModContainer().getModId(),
+                wrappedRecipeOutput, stringBuilder.toString().trim()));
+
+        this.addRecipe(wrappedRecipeOutput, wrappedRecipeInputList);
+    }
+
+    private void addRecipe(WrappedStack recipeOutput, List<WrappedStack> recipeInputList)
+    {
         // Add the recipe mapping only if we don't already have it
-        if (!recipeMap.get(wrappedRecipeOutput).contains(wrappedRecipeInputList))
+        synchronized (this.recipeMapSyncRoot)
         {
-            LogHelper.trace(String.format("RecipeRegistry[%s]: Mod with ID '%s' added recipe (Output: %s, Inputs: %s)", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim()));
-            recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
+            if (!this.recipeMap.get(recipeOutput).contains(recipeInputList))
+            {
+                this.recipeMap.put(recipeOutput, recipeInputList);
+                this.invalidateView();
+            }
         }
     }
 
-    public void registerVanillaRecipes()
+    private void invalidateView()
     {
-        RecipesVanilla.registerRecipes();
+        this.immutableRecipeMap = null;
+    }
+
+    public void registerVanillaRecipes(Object[] recipes)
+    {
+        RecipesVanilla.registerRecipes(recipes);
         RecipesFluidContainers.registerRecipes();
         RecipesPotions.registerRecipes();
     }

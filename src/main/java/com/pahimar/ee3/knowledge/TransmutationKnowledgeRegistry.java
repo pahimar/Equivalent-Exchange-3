@@ -2,13 +2,17 @@ package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.api.event.PlayerKnowledgeEvent;
 import com.pahimar.ee3.api.event.TemplateKnowledgeEvent;
+import com.pahimar.ee3.filesystem.FileSystem;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
@@ -17,16 +21,19 @@ import java.util.UUID;
 public class TransmutationKnowledgeRegistry
 {
     private static TransmutationKnowledgeRegistry transmutationKnowledgeRegistry = null;
+    private static final Object singletonSyncRoot = new Object();
+
     private static File playerKnowledgeDirectory, dataKnowledgeDirectory;
     private static TransmutationKnowledge templateKnowledge;
     private static HashMap<UUID, TransmutationKnowledge> playerKnowledgeMap;
 
     private TransmutationKnowledgeRegistry()
+            throws OperationNotSupportedException
     {
-        playerKnowledgeDirectory = new File(SerializationHelper.getInstancePlayerDataDirectory(), "knowledge" + File.separator + "transmutation");
+        playerKnowledgeDirectory = FileSystem.getPlayer().getTransmutationDirectory();
         playerKnowledgeDirectory.mkdirs();
 
-        dataKnowledgeDirectory = new File(SerializationHelper.getInstanceDataDirectory(), "knowledge" + File.separator + "transmutation");
+        dataKnowledgeDirectory = FileSystem.getWorld().getTransmutationDirectory();
         dataKnowledgeDirectory.mkdirs();
 
         loadTemplateKnowledgeFromDisk();
@@ -38,7 +45,20 @@ public class TransmutationKnowledgeRegistry
     {
         if (transmutationKnowledgeRegistry == null)
         {
-            transmutationKnowledgeRegistry = new TransmutationKnowledgeRegistry();
+            synchronized (singletonSyncRoot)
+            {
+                if(transmutationKnowledgeRegistry == null)
+                {
+                    try
+                    {
+                        transmutationKnowledgeRegistry = new TransmutationKnowledgeRegistry();
+                    } catch (OperationNotSupportedException e)
+                    {
+                        // TODO This should never happen, if it does, what should we do?
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         return transmutationKnowledgeRegistry;
@@ -473,6 +493,6 @@ public class TransmutationKnowledgeRegistry
     public void clear()
     {
         saveAll();
-        this.transmutationKnowledgeRegistry = null;
+        transmutationKnowledgeRegistry = null;
     }
 }

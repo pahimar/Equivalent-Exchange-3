@@ -328,14 +328,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         return itemStack;
     }
 
-    protected boolean mergeTransmutatedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
+    protected boolean attemptMergeTransmutatedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
     {
         if (this.tileEntityTransmutationTablet.getAvailableEnergyValue().compareTo(EnergyValueRegistryProxy.getEnergyValue(itemStack)) < 0)
         {
             return false;
         }
-
-        transmutationOutputSlot.onPickupFromSlot(entityPlayer, itemStack);
 
         boolean slotFound = false;
         int currentSlotIndex = ascending ? slotMax - 1 : slotMin;
@@ -403,6 +401,15 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
         itemStack.stackSize = 1;
         return slotFound;
+    }
+
+    protected boolean mergeTransmutatedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
+    {
+        boolean result = this.attemptMergeTransmutatedItemStack(entityPlayer, transmutationOutputSlot, itemStack, slotMin, slotMax, ascending);
+        if(result)
+            transmutationOutputSlot.onPickupFromSlot(entityPlayer, itemStack);
+
+        return result;
     }
 
     @Override

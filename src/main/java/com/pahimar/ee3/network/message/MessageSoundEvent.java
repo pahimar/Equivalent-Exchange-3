@@ -1,6 +1,7 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.configuration.SoundModeOption;
 import com.pahimar.ee3.reference.Settings;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -80,11 +81,11 @@ public class MessageSoundEvent implements IMessage, IMessageHandler<MessageSound
     {
         UUID originUUID = new UUID(event.mostSigUUID, event.leastSigUUID);
 
-        if (Settings.Sounds.soundMode.equalsIgnoreCase("All"))
+        if (Settings.Sounds.soundMode == SoundModeOption.All)
         {
             EquivalentExchange3.proxy.playSound(event.soundName, event.xCoord, event.yCoord, event.zCoord, event.volume, event.pitch);
         }
-        else if (Settings.Sounds.soundMode.equalsIgnoreCase("Self"))
+        else if (Settings.Sounds.soundMode == SoundModeOption.Self)
         {
             if (FMLClientHandler.instance().getClient().thePlayer.getUniqueID().equals(originUUID))
             {

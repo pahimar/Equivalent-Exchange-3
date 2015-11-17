@@ -10,9 +10,14 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-// TODO Switch bare Strings to String constants
 public class AlchemyArray implements Comparable<AlchemyArray>
 {
+    private static final String textureDomainKey = "textureDomain";
+    private static final String texturePathKey = "texturePath";
+    private static final String unlocalizedNameKey = "unlocalizedName";
+    private static final String classNameKey = "className";
+    private static final String lightLevelKey = "lightLevel";
+
     private ResourceLocation texture;
     private String unlocalizedName;
     private String className;
@@ -81,36 +86,36 @@ public class AlchemyArray implements Comparable<AlchemyArray>
     {
         if (nbtTagCompound != null)
         {
-            if (nbtTagCompound.hasKey("textureDomain") && nbtTagCompound.hasKey("texturePath"))
+            if (nbtTagCompound.hasKey(textureDomainKey) && nbtTagCompound.hasKey(texturePathKey))
             {
-                this.texture = new ResourceLocation(nbtTagCompound.getString("textureDomain"), nbtTagCompound.getString("texturePath"));
+                this.texture = new ResourceLocation(nbtTagCompound.getString(textureDomainKey), nbtTagCompound.getString("texturePath"));
             }
             else
             {
                 this.texture = new ResourceLocation("");
             }
 
-            if (nbtTagCompound.hasKey("unlocalizedName"))
+            if (nbtTagCompound.hasKey(unlocalizedNameKey))
             {
-                this.unlocalizedName = nbtTagCompound.getString("unlocalizedName");
+                this.unlocalizedName = nbtTagCompound.getString(unlocalizedNameKey);
             }
             else
             {
                 this.unlocalizedName = "";
             }
 
-            if (nbtTagCompound.hasKey("className"))
+            if (nbtTagCompound.hasKey(classNameKey))
             {
-                this.className = nbtTagCompound.getString("className");
+                this.className = nbtTagCompound.getString(classNameKey);
             }
             else
             {
                 this.className = "";
             }
 
-            if (nbtTagCompound.hasKey("lightLevel"))
+            if (nbtTagCompound.hasKey(lightLevelKey))
             {
-                this.lightLevel = nbtTagCompound.getInteger("lightLevel");
+                this.lightLevel = nbtTagCompound.getInteger(lightLevelKey);
             }
             else
             {
@@ -128,11 +133,11 @@ public class AlchemyArray implements Comparable<AlchemyArray>
 
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-        nbtTagCompound.setString("textureDomain", texture.getResourceDomain());
-        nbtTagCompound.setString("texturePath", texture.getResourcePath());
-        nbtTagCompound.setString("unlocalizedName", unlocalizedName);
-        nbtTagCompound.setString("className", this.getClass().getCanonicalName());
-        nbtTagCompound.setInteger("lightLevel", lightLevel);
+        nbtTagCompound.setString(textureDomainKey, texture.getResourceDomain());
+        nbtTagCompound.setString(texturePathKey, texture.getResourcePath());
+        nbtTagCompound.setString(unlocalizedNameKey, unlocalizedName);
+        nbtTagCompound.setString(classNameKey, this.getClass().getCanonicalName());
+        nbtTagCompound.setInteger(lightLevelKey, lightLevel);
     }
 
     public static AlchemyArray readArrayFromNBT(NBTTagCompound nbtTagCompound)

@@ -122,7 +122,7 @@ public class InventoryTransmutationTablet implements IInventory
             }
             else
             {
-                inventory[slotIndex] = itemStack;
+                inventory[slotIndex] = null;
             }
         }
     }

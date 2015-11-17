@@ -1,19 +1,22 @@
 package com.pahimar.ee3.util;
 
-import com.google.common.io.Files;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.filesystem.*;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.serialization.JsonSerialization;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
@@ -21,39 +24,12 @@ import java.util.*;
 
 public class SerializationHelper
 {
-    private static File instanceDataDirectory;
-    private static File instancePlayerDataDirectory;
-
-    /**
-     * Returns a File reference to the mod specific directory in the data directory
-     *
-     * @return
-     */
-    public static File getInstanceDataDirectory()
-    {
-        return instanceDataDirectory;
-    }
-
-    /**
-     * Returns a File reference to the mod specific directory in the playerdata directory
-     *
-     * @return
-     */
-    public static File getInstancePlayerDataDirectory()
-    {
-        return instancePlayerDataDirectory;
-    }
-
     /**
      * Creates (if one does not exist already) and initializes a mod specific File reference inside of the current world's playerdata directory
      */
     public static void initModDataDirectories()
     {
-        instanceDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-        instanceDataDirectory.mkdirs();
-
-        instancePlayerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
-        instancePlayerDataDirectory.mkdirs();
+        FileSystem.setWorld(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld());
     }
 
     public static String getModListMD5()
@@ -193,8 +169,10 @@ public class SerializationHelper
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(String fileName)
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        return readEnergyValueStackMapFromJsonFile(new File(energyValuesDataDirectory, fileName));
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File file = FileSystem.getWorld(world).getEnergyValueFile(fileName);
+
+        return readEnergyValueStackMapFromJsonFile(file);
     }
 
     public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(File jsonFile)
@@ -208,7 +186,7 @@ public class SerializationHelper
             jsonReader.beginArray();
             while (jsonReader.hasNext())
             {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                EnergyValueStackMapping energyValueStackMapping = JsonSerialization.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                 if (energyValueStackMapping != null)
                 {
                     energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
@@ -230,8 +208,10 @@ public class SerializationHelper
 
     public static void writeEnergyValueStackMapToJsonFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        writeEnergyValueStackMapToJsonFile(new File(energyValuesDataDirectory, fileName), energyValueMap);
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File file = FileSystem.getWorld(world).getEnergyValueFile(fileName);
+
+        writeEnergyValueStackMapToJsonFile(file, energyValueMap);
     }
 
     public static void writeEnergyValueStackMapToJsonFile(File jsonFile, Map<WrappedStack, EnergyValue> energyValueMap)
@@ -247,7 +227,7 @@ public class SerializationHelper
             {
                 if (wrappedStack != null && wrappedStack.getWrappedObject() != null)
                 {
-                    EnergyValueStackMapping.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
+                    JsonSerialization.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
                 }
             }
 
@@ -262,8 +242,10 @@ public class SerializationHelper
 
     public static void compressEnergyValueStackMapToFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, fileName), energyValueMap);
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File file = FileSystem.getWorld(world).getEnergyValueFile(fileName);
+
+        compressEnergyValueStackMapToFile(file, energyValueMap);
     }
 
     public static void compressEnergyValueStackMapToFile(File file, Map<WrappedStack, EnergyValue> energyValueMap)
@@ -291,8 +273,10 @@ public class SerializationHelper
 
     public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(String fileName)
     {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        return decompressEnergyValueStackMapFromFile(new File(energyValuesDataDirectory, fileName));
+        World world = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        File file = FileSystem.getWorld(world).getEnergyValueFile(fileName);
+
+        return decompressEnergyValueStackMapFromFile(file);
     }
 
     public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(File file)
@@ -301,12 +285,12 @@ public class SerializationHelper
 
         try
         {
-            String jsonEnergyValueStackMap = CompressionHelper.decompressStringFromByteArray(Files.toByteArray(file));
+            String jsonEnergyValueStackMap = CompressionHelper.decompressStringFromByteArray(com.google.common.io.Files.toByteArray(file));
             JsonReader jsonReader = new JsonReader(new StringReader(jsonEnergyValueStackMap));
             jsonReader.beginArray();
             while (jsonReader.hasNext())
             {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
+                EnergyValueStackMapping energyValueStackMapping = JsonSerialization.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
                 if (energyValueStackMapping != null)
                 {
                     energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);

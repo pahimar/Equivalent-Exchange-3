@@ -174,13 +174,25 @@ public class CalcinationHandler extends TemplateRecipeHandler
     {
         drawProgressBar(41, 23, 176, 0, 14, 14, 48, 7);
         drawProgressBar(70, 20, 176, 14, 24, 16, 48, 0);
+        if(arecipes.size() <= recipe)
+            return;
+
         CachedCalcinationRecipe cRecipe = (CachedCalcinationRecipe) arecipes.get(recipe);
         drawStringC(StatCollector.translateToLocal("gui.nei.ee3:calcination.tooltip.1"), 83, 75, 0x404040, false);
         drawStringC(cRecipe.getResult().item.getDisplayName() + ":", 83, 85, 0x404040, false);
 
-        if (cRecipe != null && cRecipe.minEnergyValue != null && cRecipe.maxEnergyValue != null && EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)) != null)
+        if (cRecipe.minEnergyValue != null && cRecipe.maxEnergyValue != null && EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)) != null)
         {
-            drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2", (cRecipe.minEnergyValue.getValue() > 1 ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getValue()) : "0"), (cRecipe.maxEnergyValue.getValue() <= EnergyValueRegistryProxy.getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts().get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getValue() ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getValue()) : "\u221E")), 83, 95, 0x404040, false);
+            drawStringC(StatCollector.translateToLocalFormatted("gui.nei.ee3:calcination.tooltip.2",
+                    (cRecipe.minEnergyValue.getValue() > 1
+                            ? energyValueDecimalFormat.format(cRecipe.minEnergyValue.getValue())
+                            : "0"),
+                    (cRecipe.maxEnergyValue.getValue() <= EnergyValueRegistryProxy
+                            .getEnergyValue(ItemAlchemicalDust.getAlchemicalDusts()
+                                    .get(ItemAlchemicalDust.getAlchemicalDusts().size() - 1)).getValue()
+                            ? energyValueDecimalFormat.format(cRecipe.maxEnergyValue.getValue())
+                            : "\u221E")),
+                    83, 95, 0x404040, false);
         }
     }
 

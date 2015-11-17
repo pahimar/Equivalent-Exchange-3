@@ -25,7 +25,8 @@ public class InventoryAlchemicalTome implements IInventory
         {
             this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
         }
-        inventory = knownTransmutations.toArray(inventory);
+        
+        inventory = this.knownTransmutations.toArray(inventory);
     }
 
     @Override

@@ -14,6 +14,8 @@ import java.util.*;
 public class CachedOreDictionary
 {
     private static CachedOreDictionary cachedOreDictionary = null;
+    private static final Object singletonSyncRoot = new Object();
+
     private ImmutableMap<Integer, String> idToNameMap;
     private ImmutableMap<String, List<ItemStack>> oreNameToItemStackMap;
     private ImmutableMultimap<WrappedStack, String> itemStackToOreNameMap;
@@ -46,7 +48,11 @@ public class CachedOreDictionary
     {
         if (cachedOreDictionary == null)
         {
-            cachedOreDictionary = new CachedOreDictionary();
+            synchronized (singletonSyncRoot)
+            {
+                if(cachedOreDictionary == null)
+                    cachedOreDictionary = new CachedOreDictionary();
+            }
         }
 
         return cachedOreDictionary;

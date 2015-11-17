@@ -4,6 +4,7 @@ import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.filesystem.FileSystem;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -29,6 +30,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
@@ -60,7 +62,14 @@ public class EquivalentExchange3
 
         TransmutationKnowledgeRegistry.getInstance();
 
-        AbilityRegistry.getInstance().loadAbilityRegistryFromFile(Settings.Abilities.onlyLoadFile);
+        try
+        {
+            AbilityRegistry.getInstance().loadAbilityRegistryFromFile(Settings.Abilities.onlyLoadFile);
+        } catch (OperationNotSupportedException e)
+        {
+            // TODO This should never happen, if it does, what should we do?
+            e.printStackTrace();
+        }
 
         event.registerServerCommand(new CommandEE());
     }
@@ -70,7 +79,7 @@ public class EquivalentExchange3
     {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
-        Files.Global.init(event);
+        FileSystem.initGlobal(event);
 
         PacketHandler.init();
 
@@ -125,10 +134,13 @@ public class EquivalentExchange3
         WorldEventHandler.hasInitilialized = false;
 
         EnergyValueRegistry.getInstance().save();
+        EnergyValueRegistry.invalidateInstance();
+
         TransmutationKnowledgeRegistry.getInstance().clear();
         AbilityRegistry.getInstance().save();
     }
 
+    // TODO Switch refactor EnergyValueRegistry.getInstance() to getEnergyValueRegistry()(?)
     public EnergyValueRegistry getEnergyValueRegistry()
     {
         return EnergyValueRegistry.getInstance();
