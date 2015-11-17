@@ -23,7 +23,7 @@ public class FluidHelper
                 if (fluidStack2 != null)
                 {
                     //                    if (fluidStack1.fluidID == fluidStack2.fluidID)
-                    if (FluidRegistry.getFluidID(fluidStack1.getFluid()) == FluidRegistry.getFluidID(fluidStack2.getFluid()))
+                    if (fluidStack1.getFluid().getName().compareToIgnoreCase(fluidStack2.getFluid().getName()) == 0)
                     {
                         if (fluidStack1.amount == fluidStack2.amount)
                         {
@@ -57,7 +57,7 @@ public class FluidHelper
                     }
                     else
                     {
-                        return (FluidRegistry.getFluidID(fluidStack1.getFluid()) - FluidRegistry.getFluidID(fluidStack2.getFluid()));
+                        return (fluidStack1.getFluid().getName().compareToIgnoreCase(fluidStack2.getFluid().getName()));
                     }
                 }
                 else

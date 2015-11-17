@@ -16,12 +16,27 @@ public class DynamicEnergyValueInitThread implements Runnable
     @Override
     public void run()
     {
-        // Add in recipes to the RecipeRegistry *just* before we do calculations
-        RecipeRegistry.getInstance().registerVanillaRecipes();
-        AludelRecipeManager.registerRecipes();
+        try
+        {
+            // Add in recipes to the RecipeRegistry *just* before we do calculations
+            RecipeRegistry.getInstance().registerVanillaRecipes();
+            AludelRecipeManager.registerRecipes();
 
-        long startTime = System.currentTimeMillis();
-        EnergyValueRegistry.getInstance().init();
-        LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));
+            long startTime = System.currentTimeMillis();
+            EnergyValueRegistry.getInstance().init();
+            LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));
+        }
+        catch (Throwable t)
+        {
+            EnergyValueRegistry.getInstance().setFailed(t);
+        }
+        finally
+        {
+            synchronized (EnergyValueRegistry.getInstance())
+            {
+                EnergyValueRegistry.getInstance().makeReady();
+                EnergyValueRegistry.getInstance().notifyAll();
+            }
+        }
     }
 }

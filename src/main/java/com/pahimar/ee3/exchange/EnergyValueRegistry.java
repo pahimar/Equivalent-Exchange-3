@@ -29,6 +29,8 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
     private static final Gson JSON_SERIALIZER = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueRegistry.class, new EnergyValueRegistry()).registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).create();
 
     private boolean shouldRegenNextRestart = false;
+    private boolean ready = false;
+    private Throwable error = null;
     private static EnergyValueRegistry energyValueRegistry = null;
     private static Map<WrappedStack, EnergyValue> preCalculationMappings;
     private static Map<WrappedStack, EnergyValue> postCalculationMappings;
@@ -265,7 +267,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                                 {
                                     ItemStack valuedItemStack = (ItemStack) valuedStack.getWrappedObject();
 
-                                    if (Item.getIdFromItem(valuedItemStack.getItem()) == Item.getIdFromItem(wrappedItemStack.getItem()))
+                                    if (Item.itemRegistry.getNameForObject(valuedItemStack.getItem()).compareToIgnoreCase(Item.itemRegistry.getNameForObject(wrappedItemStack.getItem())) == 0)
                                     {
                                         if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || wrappedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                                         {
@@ -343,6 +345,14 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             runDynamicEnergyValueResolution();
         }
         this.shouldRegenNextRestart = false;
+    }
+
+    public final void uninit()
+    {
+        makeUnready();
+        unsetFailed();
+        stackMappings = null;
+        valueMappings = null;
     }
 
     private void runDynamicEnergyValueResolution()
@@ -857,5 +867,40 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             }
         }
         LogHelper.info(String.format("END DUMPING %s ENERGY VALUE MAPPINGS", phase));
+    }
+
+    public boolean isReady()
+    {
+        return ready;
+    }
+
+    protected void makeReady()
+    {
+        ready = true;
+    }
+
+    protected void makeUnready()
+    {
+        ready = false;
+    }
+
+    public boolean getFailed()
+    {
+        return error != null;
+    }
+
+    protected void setFailed(Throwable t)
+    {
+        error = t;
+    }
+
+    protected void unsetFailed()
+    {
+        error = null;
+    }
+
+    public Throwable getError()
+    {
+        return error;
     }
 }

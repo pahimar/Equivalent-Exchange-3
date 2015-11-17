@@ -66,6 +66,30 @@ public class EquivalentExchange3
     }
 
     @EventHandler
+    public void onServerStarted(FMLServerStartedEvent event)
+    {
+        synchronized (getEnergyValueRegistry())
+        {
+            try
+            {
+                if (!getEnergyValueRegistry().isReady())
+                {
+                    getEnergyValueRegistry().wait();
+                }
+            }
+            catch (InterruptedException ignored)
+            {
+
+            }
+        }
+
+        if (getEnergyValueRegistry().getFailed())
+        {
+            throw new RuntimeException("An error occured while computing energy values.", getEnergyValueRegistry().getError());
+        }
+    }
+
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
@@ -125,6 +149,7 @@ public class EquivalentExchange3
         WorldEventHandler.hasInitilialized = false;
 
         EnergyValueRegistry.getInstance().save();
+        EnergyValueRegistry.getInstance().uninit();
         TransmutationKnowledgeRegistry.getInstance().clear();
         AbilityRegistry.getInstance().save();
     }

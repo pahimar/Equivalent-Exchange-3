@@ -461,7 +461,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         if (wrappedStack instanceof ItemStack)
         {
-            hashCode = (37 * hashCode) + Item.getIdFromItem(((ItemStack) wrappedStack).getItem());
+            hashCode = (37 * hashCode) + Item.itemRegistry.getNameForObject(((ItemStack) wrappedStack).getItem()).hashCode();
             hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
 
             if (((ItemStack) wrappedStack).getTagCompound() != null)
@@ -478,7 +478,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
         else if (wrappedStack instanceof FluidStack)
         {
-            hashCode = (37 * hashCode) + wrappedStack.hashCode();
+            hashCode = (37 * hashCode) + ((FluidStack)wrappedStack).getFluid().getName().hashCode();
 
             if (((FluidStack) wrappedStack).tag != null)
             {
@@ -556,7 +556,6 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         @Override
         public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
         {
-
             if (wrappedStack1.wrappedStack instanceof ItemStack)
             {
                 if (wrappedStack2.wrappedStack instanceof ItemStack)
