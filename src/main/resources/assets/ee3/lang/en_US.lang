@@ -11,9 +11,6 @@ general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities
 general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
 general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
-debug.logTraceToInfo.label=Log TRACE to INFO
-debug.logTraceToInfo.comment=Whether or not to log TRACE level logging events to INFO
-
 # Keys
 key.categories.ee3=Equivalent Exchange 3
 key.charge=Charge
