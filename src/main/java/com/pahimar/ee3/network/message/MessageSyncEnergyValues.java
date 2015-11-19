@@ -114,11 +114,11 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
             }
 
             EnergyValueRegistry.getInstance().loadFromMap(energyValueStackMap);
-            LogHelper.info("Client successfully received EnergyValues from server");
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received EnergyValues from server");
         }
         else
         {
-            LogHelper.info("Client failed to receive EnergyValues from server - falling back to local EnergyValues");
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client failed to receive EnergyValues from server - falling back to local EnergyValues");
         }
 
         return null;

@@ -94,7 +94,7 @@ public class CachedOreDictionary
     {
         for (String oreName : CachedOreDictionary.getInstance().getOreNames())
         {
-            LogHelper.info(String.format("OreName: %s, ItemStacks: %s", oreName, CachedOreDictionary.getInstance().getItemStacksForOreName(oreName)));
+            LogHelper.info("OreName: {}, ItemStacks: {}", oreName, CachedOreDictionary.getInstance().getItemStacksForOreName(oreName));
         }
     }
 }

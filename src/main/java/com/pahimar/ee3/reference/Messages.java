@@ -1,7 +1,7 @@
 package com.pahimar.ee3.reference;
 
-public final class Messages
-{
+public final class Messages {
+
     public static final String OWNER_SET_TO_SELF = "misc.ee3:owner-set-to-self";
     public static final String ENERGY_VALUE = "misc.ee3:energy-value";
 
@@ -9,15 +9,15 @@ public final class Messages
     public static final String NO_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running is a development version of the mod, and as such may be unstable and/or incomplete.";
     public static final String INVALID_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running has been modified from the original, and unpredictable things may happen. Please consider re-downloading the original version of the mod.";
 
-    public static final class Gui
-    {
+    public static final class Gui {
+
         private static final String GUI_PREFIX = "container.ee3:";
 
         public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.noTransmutationsKnown";
     }
 
-    public static final class Tooltips
-    {
+    public static final class Tooltips {
+
         private static final String TOOLTIP_PREFIX = "tooltip.ee3:";
 
         public static final String UPGRADES_CHESTS = TOOLTIP_PREFIX + "upgradesPrefix";
@@ -33,8 +33,8 @@ public final class Messages
         public static final String SORT_DESCENDING = TOOLTIP_PREFIX + "sortDescending";
     }
 
-    public static final class Commands
-    {
+    public static final class Commands {
+
         private static final String COMMAND_PREFIX = "commands.ee3.";
 
         public static final String BASE_COMMAND_USAGE = COMMAND_PREFIX + "usage";
@@ -106,8 +106,8 @@ public final class Messages
         public static final String RUN_TESTS_NOT_FOUND = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".notfound";
     }
 
-    public static final class Configuration
-    {
+    public static final class Configuration {
+
         public static final String GENERAL_SYNC_THRESHOLD = "sync.threshold";
         public static final String GENERAL_SYNC_THRESHOLD_LABEL = "general.sync.threshold.label";
         public static final String GENERAL_SYNC_THRESHOLD_COMMENT = "general.sync.threshold.comment";
@@ -123,9 +123,5 @@ public final class Messages
         public static final String REGENERATE_ENERGYVALUES_WHEN = "energyvalues.regenerateEnergyValuesWhen";
         public static final String REGENERATE_ENERGYVALUES_WHEN_LABEL = "general.energyvalues.regenerateEnergyValuesWhen.label";
         public static final String REGENERATE_ENERGYVALUES_WHEN_COMMENT = "general.energyvalues.regenerateEnergyValuesWhen.comment";
-
-        public static final String LOG_TRACE_TO_INFO = "debug.logTraceToInfo";
-        public static final String LOG_TRACE_TO_INFO_LABEL = "debug.logTraceToInfo.label";
-        public static final String LOG_TRACE_TO_INFO_COMMENT = "debug.logTraceToInfo.comment";
     }
 }

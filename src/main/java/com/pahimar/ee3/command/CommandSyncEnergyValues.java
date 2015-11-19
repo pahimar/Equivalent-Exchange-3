@@ -67,7 +67,7 @@ public class CommandSyncEnergyValues extends CommandBase
 
         if (shouldSync)
         {
-            LogHelper.info(String.format("Syncing energy values with player '%s' at their request", commandSender.getCommandSenderName()));
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Syncing energy values with player '{}' at their request", commandSender.getCommandSenderName());
             PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(EnergyValueRegistry.getInstance()), (EntityPlayerMP) commandSender);
             commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.SYNC_ENERGY_VALUES_SUCCESS));
         }

@@ -125,12 +125,12 @@ public class SerializationHelper
 
                 if (verboseLogging)
                 {
-                    LogHelper.info(String.format("Successfully saved %s to file: %s", nbtTaggable.getTagLabel(), file2.getAbsolutePath()));
+                    LogHelper.info("Successfully saved {} to file: {}", nbtTaggable.getTagLabel(), file2.getAbsolutePath());
                 }
             }
             catch (Exception exception)
             {
-                LogHelper.warn(String.format("Failed to save %s to file: %s%s%s", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), File.separator, fileName));
+                LogHelper.warn("Failed to save {} to file: {}{}{}", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), File.separator, fileName);
                 exception.printStackTrace();
             }
         }
@@ -180,13 +180,13 @@ public class SerializationHelper
 
                 if (verboseLogging)
                 {
-                    LogHelper.info(String.format("Successfully saved TransmutationKnowledge to file: %s", file2.getAbsolutePath()));
+                    LogHelper.info("Successfully saved TransmutationKnowledge to file: {}", file2.getAbsolutePath());
                 }
             }
             catch (Exception exception)
             {
                 exception.printStackTrace();
-                LogHelper.error(String.format("Failed to save TransmutationKnowledge to file: %s%s", directory.getAbsolutePath(), fileName));
+                LogHelper.error("Failed to save TransmutationKnowledge to file: {}{}", directory.getAbsolutePath(), fileName);
             }
         }
     }

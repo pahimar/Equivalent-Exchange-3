@@ -7,9 +7,6 @@ import org.apache.logging.log4j.message.Message;
 public class LogHelper
 {
     public static final Marker MOD_MARKER = MarkerManager.getMarker(Reference.MOD_ID);
-    public static final Marker ENERGY_VALUE_MARKER = MarkerManager.getMarker("ENERGY_VALUE", MOD_MARKER);
-    public static final Marker ABILITY_MARKER = MarkerManager.getMarker("ABILITY", MOD_MARKER);
-    public static final Marker RECIPE_MARKER = MarkerManager.getMarker("RECIPE", MOD_MARKER);
     private static Logger logger = LogManager.getLogger(Reference.MOD_ID);
 
     public static void log(Level level, Marker marker, Message message) {

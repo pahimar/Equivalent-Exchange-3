@@ -32,6 +32,12 @@ public class AludelRecipeManager
         return aludelRegistry;
     }
 
+    public static void registerRecipes() {
+        for (RecipeAludel recipeAludel : AludelRecipeManager.getInstance().getRecipes()) {
+            RecipeRegistryProxy.addRecipe(recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputsAsWrappedStacks());
+        }
+    }
+
     public void addRecipe(ItemStack recipeOutput, ItemStack recipeInputStack, ItemStack recipeInputDust)
     {
         addRecipe(new RecipeAludel(recipeOutput, recipeInputStack, recipeInputDust));
@@ -41,7 +47,7 @@ public class AludelRecipeManager
     {
         if (!aludelRecipes.contains(recipeAludel))
         {
-            LogHelper.trace(String.format("AludelRecipeManager[%s]: Mod with ID '%s' added Aludel recipe '%s'", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel));
+            LogHelper.trace(RecipeRegistry.RECIPE_MARKER, "[{}] Mod with ID '%s' added Aludel recipe '%s'", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel);
             aludelRecipes.add(recipeAludel);
         }
     }
@@ -75,13 +81,5 @@ public class AludelRecipeManager
     public List<RecipeAludel> getRecipes()
     {
         return ImmutableList.copyOf(aludelRecipes);
-    }
-
-    public static void registerRecipes()
-    {
-        for (RecipeAludel recipeAludel : AludelRecipeManager.getInstance().getRecipes())
-        {
-            RecipeRegistryProxy.addRecipe(recipeAludel.getRecipeOutput(), recipeAludel.getRecipeInputsAsWrappedStacks());
-        }
     }
 }

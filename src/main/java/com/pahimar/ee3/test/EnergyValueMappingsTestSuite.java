@@ -5,6 +5,8 @@ import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,8 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class EnergyValueMappingsTestSuite
-{
+public class EnergyValueMappingsTestSuite {
+
+    public static final Marker TEST_MARKER = MarkerManager.getMarker("EE3_TEST", LogHelper.MOD_MARKER);
+    private static final Marker SUCCESS_MARKER = MarkerManager.getMarker("EE3_TEST_SUCCESS", TEST_MARKER);
+    private static final Marker FAILURE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE", TEST_MARKER);
+
     Map<WrappedStack, EnergyValue> testSuiteValueMap;
 
     public EnergyValueMappingsTestSuite()
@@ -124,12 +130,12 @@ public class EnergyValueMappingsTestSuite
 
         for (String successMessage : successMessages)
         {
-            LogHelper.info(successMessage);
+            LogHelper.info(SUCCESS_MARKER, successMessage);
         }
 
         for (String failureMessage : failureMessages)
         {
-            LogHelper.warn(failureMessage);
+            LogHelper.warn(FAILURE_MARKER, failureMessage);
         }
     }
 }

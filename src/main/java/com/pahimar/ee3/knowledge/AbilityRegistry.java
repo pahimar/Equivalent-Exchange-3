@@ -14,6 +14,8 @@ import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -23,6 +25,12 @@ import java.util.TreeSet;
 
 public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDeserializer<AbilityRegistry>
 {
+    public static final Marker ABILITY_MARKER = MarkerManager.getMarker("EE3_ABILITY", LogHelper.MOD_MARKER);
+    private static final Marker NOT_LEARABLE_MARKER = MarkerManager.getMarker("EE3_ABILITY_NOT_LEARNABLE", ABILITY_MARKER);
+    private static final Marker LEARABLE_MARKER = MarkerManager.getMarker("EE3_ABILITY_LEARNABLE", ABILITY_MARKER);
+    private static final Marker NOT_RECOVERABLE_MARKER = MarkerManager.getMarker("EE3_ABILITY_NOT_RECOVERABLE", ABILITY_MARKER);
+    private static final Marker RECOVERABLE_MARKER = MarkerManager.getMarker("EE3_ABILITY_RECOVERABLE", ABILITY_MARKER);
+
     private static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(AbilityRegistry.class, new AbilityRegistry()).create();
     private static AbilityRegistry abilityRegistry = null;
 
@@ -90,7 +98,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
                 if (notLearnableSet.remove(wrappedStack))
                 {
                     hasBeenModified = true;
-                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                    LogHelper.trace(LEARABLE_MARKER, "[{}] Mod with ID '{}' set object {} as LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                 }
             }
         }
@@ -107,7 +115,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
                 if (notLearnableSet.add(wrappedStack))
                 {
                     hasBeenModified = true;
-                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                    LogHelper.trace(NOT_LEARABLE_MARKER, "[{}] Mod with ID '{}' set object {} as NOT LEARNABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                 }
             }
         }
@@ -140,7 +148,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
                 if (notRecoverableSet.remove(wrappedStack))
                 {
                     hasBeenModified = true;
-                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                    LogHelper.trace(RECOVERABLE_MARKER, "[{}] Mod with ID '{}' set object {} as RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                 }
             }
         }
@@ -157,7 +165,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
                 if (notRecoverableSet.add(wrappedStack))
                 {
                     hasBeenModified = true;
-                    LogHelper.trace(String.format("AbilityRegistry[%s]: Mod with ID '%s' set object %s as NOT RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack));
+                    LogHelper.trace(NOT_RECOVERABLE_MARKER, "[{}] Mod with ID '{}' set object {} as NOT RECOVERABLE", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                 }
             }
         }
@@ -358,47 +366,30 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
 
     public void dumpAbilityRegistryToLog(AbilityRegistryProxy.Abilities abilityType)
     {
-        LogHelper.info(String.format("BEGIN DUMPING %s ABILITY OBJECTS", abilityType));
-        if (abilityType == AbilityRegistryProxy.Abilities.NOT_LEARNABLE)
-        {
-            if (this.notLearnableSet != null)
-            {
-                for (WrappedStack wrappedStack : this.notLearnableSet)
-                {
-                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+        if (abilityType == AbilityRegistryProxy.Abilities.NOT_LEARNABLE) {
+            if (this.notLearnableSet != null) {
+                for (WrappedStack wrappedStack : this.notLearnableSet) {
+                    LogHelper.info(NOT_LEARABLE_MARKER, "Not Learnable: {}", wrappedStack);
                 }
             }
-        }
-        else if (abilityType == AbilityRegistryProxy.Abilities.NOT_RECOVERABLE)
-        {
-            if (this.notRecoverableSet != null)
-            {
-                for (WrappedStack wrappedStack : this.notRecoverableSet)
-                {
-                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+        } else if (abilityType == AbilityRegistryProxy.Abilities.NOT_RECOVERABLE) {
+            if (this.notRecoverableSet != null) {
+                for (WrappedStack wrappedStack : this.notRecoverableSet) {
+                    LogHelper.info(NOT_RECOVERABLE_MARKER, "Not Recoverable: {}", wrappedStack);
                 }
             }
-        }
-        else if (abilityType == AbilityRegistryProxy.Abilities.ALL)
-        {
-            if (this.notLearnableSet != null)
-            {
-                LogHelper.info("NOT LEARNABLE OBJECTS");
-                for (WrappedStack wrappedStack : this.notLearnableSet)
-                {
-                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+        } else if (abilityType == AbilityRegistryProxy.Abilities.ALL) {
+            if (this.notLearnableSet != null) {
+                for (WrappedStack wrappedStack : this.notLearnableSet) {
+                    LogHelper.info(NOT_LEARABLE_MARKER, "Not Learnable: {}", wrappedStack);
                 }
             }
 
-            if (this.notRecoverableSet != null)
-            {
-                LogHelper.info("NOT RECOVERABLE OBJECTS");
-                for (WrappedStack wrappedStack : this.notRecoverableSet)
-                {
-                    LogHelper.info(String.format("- Object: %s", wrappedStack));
+            if (this.notRecoverableSet != null) {
+                for (WrappedStack wrappedStack : this.notRecoverableSet) {
+                    LogHelper.info(NOT_RECOVERABLE_MARKER, "Not Recoverable: {}", wrappedStack);
                 }
             }
         }
-        LogHelper.info(String.format("END DUMPING %s ABILITY OBJECTS", abilityType));
     }
 }

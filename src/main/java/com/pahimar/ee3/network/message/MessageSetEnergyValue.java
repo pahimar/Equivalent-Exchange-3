@@ -71,11 +71,11 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
         if (message.energyValueStackMapping != null && message.energyValueStackMapping.wrappedStack != null && message.energyValueStackMapping.energyValue != null)
         {
             EnergyValueRegistry.getInstance().setEnergyValue(message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
-            LogHelper.info(String.format("Client successfully received new EnergyValue '%s' for object '%s'", message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue));
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received new EnergyValue '{}' for object '{}'", message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
         }
         else
         {
-            LogHelper.info("Client failed to receive new EnergyValue from server");
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client failed to receive new EnergyValue from server");
         }
 
         return null;

@@ -49,9 +49,9 @@ public class CommandRunTest extends CommandEE
                 {
                     testFound = true;
                     EnergyValueMappingsTestSuite energyValueMappingsTestSuite = new EnergyValueMappingsTestSuite(testCaseFile);
-                    LogHelper.info(String.format("BEGIN TEST (%s)", testCaseFile.getName()));
+                    LogHelper.info(EnergyValueMappingsTestSuite.TEST_MARKER, "BEGIN TEST ({})", testCaseFile.getName());
                     energyValueMappingsTestSuite.runTestSuite();
-                    LogHelper.info(String.format("END TEST (%s)", testCaseFile.getName()));
+                    LogHelper.info(EnergyValueMappingsTestSuite.TEST_MARKER, "END TEST ({})", testCaseFile.getName());
                 }
             }
 

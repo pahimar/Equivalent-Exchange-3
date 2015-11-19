@@ -52,6 +52,6 @@ public class ItemMiniumStone extends ItemEE implements IKeyBound
     @Override
     public void doKeyBindingAction(EntityPlayer entityPlayer, ItemStack itemStack, Key key)
     {
-        LogHelper.info(String.format("%s %s %s", entityPlayer.toString(), itemStack.toString(), key.toString()));
+        LogHelper.info("{} {} {}", entityPlayer.toString(), itemStack.toString(), key.toString());
     }
 }

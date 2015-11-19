@@ -22,6 +22,6 @@ public class DynamicEnergyValueInitThread implements Runnable
 
         long startTime = System.currentTimeMillis();
         EnergyValueRegistry.getInstance().init();
-        LogHelper.info(String.format("DynamicEMC system initialized after %s ms", System.currentTimeMillis() - startTime));
+        LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "DynamicEMC system initialized after {} ms", System.currentTimeMillis() - startTime);
     }
 }
