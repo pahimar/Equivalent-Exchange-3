@@ -1,9 +1,11 @@
 package com.pahimar.ee3.command;
 
+import com.google.common.base.Joiner;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +30,20 @@ public class CommandEE extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args)
     {
+        boolean found = false;
         if (args.length >= 1)
         {
             for (CommandBase command : modCommands)
             {
                 if (command.getCommandName().equalsIgnoreCase(args[0]) && command.canCommandSenderUseCommand(commandSender))
                 {
+                    found = true;
                     command.processCommand(commandSender, args);
                 }
             }
+        }
+        if (!found) {
+            throw new WrongUsageException("Invalid command. Usage: /ee3 " + Joiner.on(" ").join(commands));
         }
     }
 

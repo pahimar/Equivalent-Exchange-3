@@ -1,6 +1,7 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -14,7 +15,6 @@ public class MessageGuiElementClicked implements IMessage, IMessageHandler<Messa
 
     public MessageGuiElementClicked()
     {
-
     }
 
     public MessageGuiElementClicked(String elementName, int buttonPressed)
@@ -43,15 +43,10 @@ public class MessageGuiElementClicked implements IMessage, IMessageHandler<Messa
     public IMessage onMessage(MessageGuiElementClicked message, MessageContext ctx)
     {
         EntityPlayer entityPlayer = ctx.getServerHandler().playerEntity;
-
-        if (entityPlayer != null)
+        if (entityPlayer != null && entityPlayer.openContainer instanceof IElementButtonHandler)
         {
-            if (entityPlayer.openContainer instanceof IElementButtonHandler)
-            {
-                ((IElementButtonHandler) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
-            }
+            ((IElementButtonHandler) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
         }
-
         return null;
     }
 }

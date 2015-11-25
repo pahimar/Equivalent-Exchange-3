@@ -8,8 +8,10 @@ import com.pahimar.ee3.item.ItemAlchemicalTome;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
+import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityTransmutationTablet;
+import com.pahimar.ee3.network.message.MessageTransmutationKnowledgeUpdate;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +23,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class TileEntityTransmutationTablet extends TileEntityEE implements ISidedInventory
 {
@@ -50,6 +56,24 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
+    //region client-side hackery
+    public TransmutationKnowledge lastTransmutationKnowledge;
+    @SideOnly(Side.CLIENT)
+    public void handleTransmutationKnowledgeUpdate(MessageTransmutationKnowledgeUpdate message) {
+        this.lastTransmutationKnowledge = message.transmutationKnowledge;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public Set<ItemStack> getTransmutationKnowledge() {
+        if (lastTransmutationKnowledge != null) {
+            return lastTransmutationKnowledge.getKnownTransmutations();
+        } else {
+            return Collections.emptySet();
+        }
+    }
+    //endregion
+
+    //region Energy
     public EnergyValue getAvailableEnergyValue()
     {
         return availableEnergyValue;
@@ -113,7 +137,9 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         }
         this.availableEnergyValue = new EnergyValue(newEnergyValue);
     }
+    //endregion
 
+    //region TileEntity
     public ForgeDirection getRotation()
     {
         return rotation;
@@ -213,7 +239,9 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         }
         nbtTagCompound.setTag("storedEnergyValue", energyValueTagCompound);
     }
+    //endregion
 
+    //region IInventory
     @Override
     public int getSizeInventory()
     {
@@ -329,7 +357,9 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
 
         return false;
     }
+    //endregion
 
+    //region ISidedInventory
     @Override
     public int[] getAccessibleSlotsFromSide(int slotIndex)
     {
@@ -347,4 +377,5 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     {
         return false;
     }
+    //endregion
 }
