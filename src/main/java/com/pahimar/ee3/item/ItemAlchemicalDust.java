@@ -76,9 +76,7 @@ public class ItemAlchemicalDust extends ItemEE
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs creativeTab, List list)
     {
-        for (int meta = 0; meta < Names.Items.ALCHEMICAL_DUST_SUBTYPES.length; ++meta)
-        {
-            list.add(new ItemStack(this, 1, meta));
-        }
+        list.add(new ItemStack(this, 1, 0));
+        list.add(new ItemStack(this, 1, 3));
     }
 }

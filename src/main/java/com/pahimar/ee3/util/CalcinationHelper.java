@@ -1,59 +1,34 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.init.ModItems;
-import com.pahimar.ee3.item.ItemAlchemicalDust;
 import net.minecraft.item.ItemStack;
 
-import java.util.TreeMap;
+import java.util.Random;
 
 public class CalcinationHelper
 {
-    public static ItemStack getCalcinationResult(ItemStack calcinedStack)
-    {
-        ItemStack itemStack = calcinedStack.copy();
-        itemStack.stackSize = 1;
+    private static Random random = new Random();
 
-        TreeMap<EnergyValue, ItemStack> sortedItems = new TreeMap<EnergyValue, ItemStack>();
+    public static ItemStack getCalcinationResult(ItemStack itemStack) {
+        EnergyValue dustEnergyValue = EnergyValueRegistryProxy.getEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 3));
+        EnergyValue itemStackEnergyValue = EnergyValueRegistryProxy.getEnergyValue(itemStack);
 
-        for (ItemStack dustStack : ItemAlchemicalDust.getAlchemicalDusts())
-        {
-            // If the item to be calcined is an alchemical dust, return null (you cannot calcine what's already been calcined)
-            if (ItemHelper.equals(itemStack, dustStack))
-            {
-                return null;
-            }
+        if (dustEnergyValue != null && itemStackEnergyValue != null) {
+            int dustAmount = (int) Math.floor(itemStackEnergyValue.getValue() / dustEnergyValue.getValue());
+            float residualEMC = itemStackEnergyValue.getValue() - (dustAmount * dustEnergyValue.getValue());
 
-            if (EnergyValueRegistry.getInstance().hasEnergyValue(dustStack))
-            {
-                sortedItems.put(EnergyValueRegistry.getInstance().getEnergyValue(dustStack), dustStack);
-            }
-        }
+            double u = (double) residualEMC / dustEnergyValue.getValue(); // expected value (µ)
+            double s = u / 2; // deviation (σ)
+            u *= 1 - 0.0043451773677092; // negative cut-off correction factor
+            dustAmount += (int) (Math.max(0, random.nextGaussian() * s + u) + random.nextDouble());
 
-        if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack))
-        {
-            if (sortedItems.containsKey(EnergyValueRegistry.getInstance().getEnergyValue(itemStack)))
-            {
-                return sortedItems.get(EnergyValueRegistry.getInstance().getEnergyValue(itemStack));
-            }
-            else
-            {
-                sortedItems.put(EnergyValueRegistry.getInstance().getEnergyValue(itemStack), itemStack);
-
-                if (sortedItems.lowerEntry(EnergyValueRegistry.getInstance().getEnergyValue(itemStack)) == null)
-                {
-                    return new ItemStack(ModItems.alchemicalDust, 1, 0);
-                }
-                else
-                {
-                    return sortedItems.lowerEntry(EnergyValueRegistry.getInstance().getEnergyValue(itemStack)).getValue();
-                }
+            if (dustAmount > 0) {
+                return new ItemStack(ModItems.alchemicalDust, dustAmount, 3);
             }
         }
-        else
-        {
-            return new ItemStack(ModItems.alchemicalDust, 1, 0);
-        }
+
+        return new ItemStack(ModItems.alchemicalDust, 1, 0);
     }
 }

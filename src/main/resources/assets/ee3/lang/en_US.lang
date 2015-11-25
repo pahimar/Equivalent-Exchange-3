@@ -39,7 +39,7 @@ item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
 item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade [WIP]
 item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade [WIP]
 item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade [WIP]
-item.ee3:alchemicalTome.name=Tome of Alchemical Knowledge
+item.ee3:alchemicalTome.name=Alchenomicon
 item.ee3:matterProto.name=Proto Matter [WIP]
 item.ee3:matterDark.name=Dark Matter [WIP]
 item.ee3:matterOmni.name=Omni Matter [WIP]
@@ -114,7 +114,7 @@ container.ee3:calcinator=Calcinator
 container.ee3:glassBell=Glass Bell
 container.ee3:researchStation=Research Station
 container.ee3:augmentationTable=Augmentation Table [WIP]
-container.ee3:alchemicalTome=Tome of Alchemical Knowledge
+container.ee3:alchemicalTome=Alchenomicon
 container.ee3:alchemicalTome.noTransmutationsKnown=No known transmutations
 container.ee3:transmutationAlchemyArray=Transmutation Square [WIP]
 

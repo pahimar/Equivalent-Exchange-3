@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Abilities
 {
-    public static void setOresNotLearnable()
+    public static void initNotLearnables()
     {
         for (String oreName : OreDictionary.getOreNames())
         {
@@ -22,7 +22,10 @@ public class Abilities
                 AbilityRegistryProxy.setAsNotLearnable(new OreStack(oreName));
             }
         }
-
         AbilityRegistryProxy.setAsNotLearnable(new ItemStack(Blocks.coal_ore));
+
+        AbilityRegistryProxy.setAsNotLearnable(ModItems.shardMinium);
+        AbilityRegistryProxy.setAsNotLearnable(new ItemStack(ModItems.alchemicalDust, 1, 1));
+        AbilityRegistryProxy.setAsNotLearnable(new ItemStack(ModItems.alchemicalDust, 1, 2));
     }
 }

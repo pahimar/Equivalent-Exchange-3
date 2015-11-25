@@ -116,7 +116,7 @@ public class EquivalentExchange3
     public void postInit(FMLPostInitializationEvent event)
     {
         CachedOreDictionary.getInstance();
-        Abilities.setOresNotLearnable();
+        Abilities.initNotLearnables();
     }
 
     @EventHandler

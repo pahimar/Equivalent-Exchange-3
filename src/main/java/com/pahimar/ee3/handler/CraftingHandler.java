@@ -9,18 +9,18 @@ import net.minecraft.item.crafting.CraftingManager;
 
 public class CraftingHandler
 {
-    public static void init()
-    {
+    public static void init() {
         // Add in the ability to dye Alchemical Bags
         CraftingManager.getInstance().getRecipeList().add(new RecipesAlchemicalBagDyes());
     }
 
     @SubscribeEvent
-    public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event)
-    {
-        if (event.crafting.getItem() instanceof IOwnable)
-        {
+    public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
+        if (event.crafting.getItem() instanceof IOwnable) {
             ItemHelper.setOwner(event.crafting, event.player);
         }
+
+        // TODO Conversion of deprecated alchemical dusts to shards of minium with appropriate energy values
+        // https://github.com/pahimar/Equivalent-Exchange-3/issues/1020
     }
 }
