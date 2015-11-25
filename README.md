@@ -53,7 +53,7 @@ Gradle is used to execute the various build tasks when compiling EE3.
 		* Unzip the package and put it wherever you want, eg `C:\Gradle`.
 	* Linux: Installation methods for certain popular flavors of Linux are listed below.  If your distribution is not listed, follow the instructions specific to your package manager or install it manually [here](http://www.gradle.org/downloads).
 		* Gentoo: `emerge dev-java/gradle-bin`
-		* Archlinux: You'll have to install it from the [AUR](https://aur.archlinux.org/packages/gradle).
+		* Archlinux: `pacman -S gradle`
 		* Ubuntu/Debian: `apt-get install gradle`
 		* Fedora: Install Gradle manually from its website (see above), as Fedora ships a "broken" version of Gradle.  Use `yum install gradle` only if you know what you're doing.
 2. Windows: Set environment variables for Gradle.
