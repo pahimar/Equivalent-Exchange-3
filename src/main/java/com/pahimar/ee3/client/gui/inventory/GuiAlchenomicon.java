@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.client.gui.element.ElementSearchField;
-import com.pahimar.ee3.inventory.ContainerAlchemicalTome;
+import com.pahimar.ee3.inventory.ContainerAlchenomicon;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageGuiElementClicked;
 import com.pahimar.ee3.reference.Messages;
@@ -19,15 +19,15 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiAlchemicalTome extends GuiBase
+public class GuiAlchenomicon extends GuiBase
 {
     private ElementButton prevPageButton;
     private ElementButton nextPageButton;
     private ElementTextField searchTextField;
 
-    public GuiAlchemicalTome(InventoryPlayer inventoryPlayer, ItemStack itemStack)
+    public GuiAlchenomicon(InventoryPlayer inventoryPlayer, ItemStack itemStack)
     {
-        super(new ContainerAlchemicalTome(inventoryPlayer.player, itemStack), Textures.Gui.ALCHEMICAL_TOME);
+        super(new ContainerAlchenomicon(inventoryPlayer.player, itemStack), Textures.Gui.ALCHENOMICON);
         xSize = 256;
         ySize = 226;
     }
@@ -56,7 +56,7 @@ public class GuiAlchemicalTome extends GuiBase
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         super.drawGuiContainerForegroundLayer(x, y);
-        int pageOffset = ((ContainerAlchemicalTome) this.inventorySlots).getPageOffset();
+        int pageOffset = ((ContainerAlchenomicon) this.inventorySlots).getPageOffset();
 
         if (this.inventorySlots.getSlot(0).getHasStack())
         {
@@ -64,7 +64,7 @@ public class GuiAlchemicalTome extends GuiBase
         }
         else
         {
-            if (((ContainerAlchemicalTome) this.inventorySlots).getKnownTransmutationsCount() == 0)
+            if (((ContainerAlchenomicon) this.inventorySlots).getKnownTransmutationsCount() == 0)
             {
                 fontRendererObj.drawSplitString(StatCollector.translateToLocal(Messages.Gui.NO_KNOWN_TRANSMUTATIONS), 142, 20, 100, new GuiColor(50, 50, 50).getColor());
             }
@@ -94,7 +94,7 @@ public class GuiAlchemicalTome extends GuiBase
     @Override
     protected void updateElementInformation()
     {
-        if (((ContainerAlchemicalTome) this.inventorySlots).getPageOffset() == 0)
+        if (((ContainerAlchenomicon) this.inventorySlots).getPageOffset() == 0)
         {
             prevPageButton.setDisabled();
         }
@@ -103,7 +103,7 @@ public class GuiAlchemicalTome extends GuiBase
             prevPageButton.setEnabled(true);
         }
 
-        if (((ContainerAlchemicalTome) this.inventorySlots).getPageOffset() == ((ContainerAlchemicalTome) this.inventorySlots).getMaxPageOffset())
+        if (((ContainerAlchenomicon) this.inventorySlots).getPageOffset() == ((ContainerAlchenomicon) this.inventorySlots).getMaxPageOffset())
         {
             nextPageButton.setDisabled();
         }

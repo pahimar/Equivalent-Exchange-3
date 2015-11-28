@@ -13,7 +13,7 @@ public final class Messages {
 
         private static final String GUI_PREFIX = "container.ee3:";
 
-        public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchemicalTome.noTransmutationsKnown";
+        public static final String NO_KNOWN_TRANSMUTATIONS = GUI_PREFIX + "alchenomicon.noTransmutationsKnown";
     }
 
     public static final class Tooltips {
@@ -104,6 +104,8 @@ public final class Messages {
         public static final String RUN_TEST_USAGE = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".usage";
         public static final String RUN_TESTS_SUCCESS = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".success";
         public static final String RUN_TESTS_NOT_FOUND = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".notfound";
+
+        public static final String ADMIN_USAGE = COMMAND_PREFIX + Names.Commands.ADMIN_PANEL + ".usage";
     }
 
     public static final class Configuration {

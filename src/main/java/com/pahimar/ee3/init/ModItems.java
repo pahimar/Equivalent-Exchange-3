@@ -18,7 +18,7 @@ public class ModItems
     public static final ItemEE alchemicalUpgrade = new ItemAlchemicalInventoryUpgrade();
     public static final ItemEE chalk = new ItemChalk();
     public static final ItemEE diviningRod = new ItemDiviningRod();
-    public static final ItemEE alchemicalTome = new ItemAlchemicalTome();
+    public static final ItemEE alchenomicon = new ItemAlchenomicon();
     public static final ItemEE matter = new ItemMatter();
     public static final ItemEE gem = new ItemGem();
     public static final ItemEE lootBall = new ItemLootBall();
@@ -49,7 +49,7 @@ public class ModItems
         GameRegistry.registerItem(chalk, Names.Items.CHALK);
         GameRegistry.registerItem(alchemicalUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
         GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
-        GameRegistry.registerItem(alchemicalTome, Names.Items.ALCHEMICAL_TOME);
+        GameRegistry.registerItem(alchenomicon, Names.Items.ALCHENOMICON, Names.Items.ALCHEMICAL_TOME);
         GameRegistry.registerItem(matter, Names.Items.MATTER);
         GameRegistry.registerItem(gem, Names.Items.GEM);
         GameRegistry.registerItem(lootBall, Names.Items.LOOT_BALL);

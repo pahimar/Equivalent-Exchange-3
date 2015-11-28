@@ -21,7 +21,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 {
     public static final int INVENTORY_SIZE = 2;
     public static final int ITEM_SLOT_INVENTORY_INDEX = 0;
-    public static final int TOME_SLOT_INVENTORY_INDEX = 1;
+    public static final int ALCHENOMICON_SLOT_INVENTORY_INDEX = 1;
 
     public int itemLearnTime;
     public boolean isItemKnown;
@@ -210,10 +210,10 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
     private boolean canLearnItemStack()
     {
-        ItemStack alchemicalTome = inventory[TOME_SLOT_INVENTORY_INDEX];
-        UUID playerUUID = ItemHelper.getOwnerUUID(alchemicalTome);
+        ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
+        UUID playerUUID = ItemHelper.getOwnerUUID(alchenomicon);
 
-        if (alchemicalTome != null && playerUUID != null)
+        if (alchenomicon != null && playerUUID != null)
         {
             return TransmutationKnowledgeRegistryProxy.canPlayerLearn(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
@@ -223,10 +223,10 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
 
     private boolean isItemStackKnown()
     {
-        ItemStack alchemicalTome = inventory[TOME_SLOT_INVENTORY_INDEX];
-        UUID playerUUID = ItemHelper.getOwnerUUID(alchemicalTome);
+        ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
+        UUID playerUUID = ItemHelper.getOwnerUUID(alchenomicon);
 
-        if (alchemicalTome != null && playerUUID != null)
+        if (alchenomicon != null && playerUUID != null)
         {
             return TransmutationKnowledgeRegistryProxy.doesPlayerKnow(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
@@ -238,7 +238,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-            TransmutationKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerUUID(inventory[TOME_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            TransmutationKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerUUID(inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
 
             this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
 

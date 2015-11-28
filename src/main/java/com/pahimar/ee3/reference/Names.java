@@ -38,6 +38,7 @@ public class Names
         public static final String ALCHEMICAL_UPGRADE = "alchemicalUpgrade";
         public static final String[] ALCHEMICAL_UPGRADE_SUBTYPES = {"verdant", "azure", "minium"};
         public static final String DIVINING_ROD = "diviningRod";
+        public static final String ALCHENOMICON = "alchenomicon";
         public static final String ALCHEMICAL_TOME = "alchemicalTome";
         public static final String MATTER = "matter";
         public static final String[] MATTER_SUBTYPES = {"Proto", "Dark", "Corporeal", "Kinetic", "Temporal", "Essentia", "Amorphous", "Void", "Omni"};
@@ -106,6 +107,7 @@ public class Names
         public static final String OWNER = "owner";
         public static final String OWNER_UUID_MOST_SIG = "ownerUUIDMostSig";
         public static final String OWNER_UUID_LEAST_SIG = "ownerUUIDLeastSig";
+        public static final String ENERGY_VALUE = "energyValue";
     }
 
     public static final class Containers
@@ -119,7 +121,7 @@ public class Names
         public static final String RESEARCH_STATION = "container.ee3:" + Blocks.RESEARCH_STATION;
         public static final String GLASS_BELL = "container.ee3:" + Blocks.GLASS_BELL;
         public static final String AUGMENTATION_TABLE = "container.ee3:" + Blocks.AUGMENTATION_TABLE;
-        public static final String ALCHEMICAL_TOME = "container.ee3:" + Items.ALCHEMICAL_TOME;
+        public static final String ALCHENOMICON = "container.ee3:" + Items.ALCHENOMICON;
         public static final String TRANSMUTATION_TABLET = "container.ee3:" + Blocks.TRANSMUTATION_TABLET;
     }
 
@@ -156,6 +158,7 @@ public class Names
         public static final String SET_ITEM_NOT_RECOVERABLE = "set-item-not-recoverable";
         public static final String RUN_TEST = "run-tests";
         public static final String DEBUG = "debug";
+        public static final String ADMIN_PANEL = "admin";
     }
 
     public static final class AlchemyArrays

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.item.ItemAlchemicalTome;
+import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +36,7 @@ public class ContainerResearchStation extends ContainerEE
             }
         });
 
-        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, 161, 84)
+        this.addSlotToContainer(new Slot(tileEntityResearchStation, TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX, 161, 84)
         {
             @Override
             public int getSlotStackLimit()
@@ -47,7 +47,7 @@ public class ContainerResearchStation extends ContainerEE
             @Override
             public boolean isItemValid(ItemStack itemStack)
             {
-                return itemStack.getItem() instanceof ItemAlchemicalTome;
+                return itemStack.getItem() instanceof ItemAlchenomicon;
             }
         });
 
@@ -170,16 +170,16 @@ public class ContainerResearchStation extends ContainerEE
                  * be merged into the fuel slot, try to put it in the input
                  * slot.
                  */
-                if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
+                if (slotItemStack.getItem() instanceof ItemAlchenomicon)
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX, TileEntityResearchStation.INVENTORY_SIZE, false))
                     {
                         return null;
                     }
                 }
                 else
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, false))
+                    if (!this.mergeItemStack(slotItemStack, TileEntityResearchStation.ITEM_SLOT_INVENTORY_INDEX, TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX, false))
                     {
                         return null;
                     }

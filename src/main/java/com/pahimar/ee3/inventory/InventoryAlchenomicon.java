@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class InventoryAlchemicalTome implements IInventory
+public class InventoryAlchenomicon implements IInventory
 {
     private ItemStack[] inventory;
     private Set<ItemStack> knownTransmutations;
 
-    public InventoryAlchemicalTome(Set<ItemStack> knownTransmutations)
+    public InventoryAlchenomicon(Set<ItemStack> knownTransmutations)
     {
         inventory = new ItemStack[80];
         if (knownTransmutations != null)
@@ -95,7 +95,7 @@ public class InventoryAlchemicalTome implements IInventory
     @Override
     public String getInventoryName()
     {
-        return Names.Containers.ALCHEMICAL_TOME;
+        return Names.Containers.ALCHENOMICON;
     }
 
     @Override

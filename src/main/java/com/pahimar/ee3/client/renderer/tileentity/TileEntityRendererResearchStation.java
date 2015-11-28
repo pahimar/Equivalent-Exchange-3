@@ -64,12 +64,12 @@ public class TileEntityRendererResearchStation extends TileEntitySpecialRenderer
              */
             GL11.glPushMatrix();
 
-            ItemStack tome = tileEntityResearchStation.getStackInSlot(TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX);
-            if (Minecraft.getMinecraft().gameSettings.fancyGraphics && tome != null)
+            ItemStack alchenomicon = tileEntityResearchStation.getStackInSlot(TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX);
+            if (Minecraft.getMinecraft().gameSettings.fancyGraphics && alchenomicon != null)
             {
                 EntityItem ghostEntityItem = new EntityItem(tileEntityResearchStation.getWorldObj());
                 ghostEntityItem.hoverStart = 0.0F;
-                ghostEntityItem.setEntityItemStack(tome);
+                ghostEntityItem.setEntityItemStack(alchenomicon);
                 
                 GL11.glTranslated(x + 0.6F, y + 1.015625F, z + 0.35F);
                 GL11.glRotatef(90F, 1.0F, 0.0F, 0.0F);

@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 public class MessageTileEntityResearchStation implements IMessage, IMessageHandler<MessageTileEntityResearchStation, IMessage>
 {
     public int x, y, z;
-    public ItemStack tomeItemStack;
+    public ItemStack alchenomiconItemStack;
 
     public MessageTileEntityResearchStation()
     {
@@ -24,7 +24,7 @@ public class MessageTileEntityResearchStation implements IMessage, IMessageHandl
         this.x = tileEntityResearchStation.xCoord;
         this.y = tileEntityResearchStation.yCoord;
         this.z = tileEntityResearchStation.zCoord;
-        this.tomeItemStack = tileEntityResearchStation.getStackInSlot(TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX);
+        this.alchenomiconItemStack = tileEntityResearchStation.getStackInSlot(TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MessageTileEntityResearchStation implements IMessage, IMessageHandl
         this.x = buf.readInt();
         this.y = buf.readInt();
         this.z = buf.readInt();
-        tomeItemStack = ByteBufUtils.readItemStack(buf);
+        alchenomiconItemStack = ByteBufUtils.readItemStack(buf);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MessageTileEntityResearchStation implements IMessage, IMessageHandl
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        ByteBufUtils.writeItemStack(buf, tomeItemStack);
+        ByteBufUtils.writeItemStack(buf, alchenomiconItemStack);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MessageTileEntityResearchStation implements IMessage, IMessageHandl
 
         if (tileEntity instanceof TileEntityResearchStation)
         {
-            ((TileEntityResearchStation) tileEntity).setInventorySlotContents(TileEntityResearchStation.TOME_SLOT_INVENTORY_INDEX, message.tomeItemStack);
+            ((TileEntityResearchStation) tileEntity).setInventorySlotContents(TileEntityResearchStation.ALCHENOMICON_SLOT_INVENTORY_INDEX, message.alchenomiconItemStack);
         }
 
         return null;
@@ -61,6 +61,6 @@ public class MessageTileEntityResearchStation implements IMessage, IMessageHandl
     @Override
     public String toString()
     {
-        return String.format("MessageTileEntityResearchStation - x:%s, y:%s, z:%s, tome:%s", x, y, z, tomeItemStack.toString());
+        return String.format("MessageTileEntityResearchStation - x:%s, y:%s, z:%s, tome:%s", x, y, z, alchenomiconItemStack.toString());
     }
 }

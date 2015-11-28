@@ -27,9 +27,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerAlchemicalBag(entityPlayer, new InventoryAlchemicalBag(entityPlayer.getHeldItem()));
         }
-        else if (id == GUIs.ALCHEMICAL_TOME.ordinal())
+        else if (id == GUIs.ALCHENOMICON.ordinal())
         {
-            return new ContainerAlchemicalTome(entityPlayer, entityPlayer.getHeldItem());
+            return new ContainerAlchenomicon(entityPlayer, entityPlayer.getHeldItem());
         }
         else if (id == GUIs.CALCINATOR.ordinal())
         {
@@ -65,6 +65,10 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerSymbolSelection();
         }
+        else if (id == GUIs.ADMIN_PANEL.ordinal())
+        {
+            return new ContainerAdminPanel(entityPlayer.inventory);
+        }
 
         return null;
     }
@@ -86,9 +90,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiAlchemicalBag(entityPlayer, new InventoryAlchemicalBag(entityPlayer.getHeldItem()));
         }
-        else if (id == GUIs.ALCHEMICAL_TOME.ordinal())
+        else if (id == GUIs.ALCHENOMICON.ordinal())
         {
-            return new GuiAlchemicalTome(entityPlayer.inventory, entityPlayer.getHeldItem());
+            return new GuiAlchenomicon(entityPlayer.inventory, entityPlayer.getHeldItem());
         }
         else if (id == GUIs.CALCINATOR.ordinal())
         {
@@ -123,6 +127,10 @@ public class GuiHandler implements IGuiHandler
         else if (id == GUIs.SYMBOL_SELECTION.ordinal())
         {
             return new GuiSymbolSelection();
+        }
+        else if (id == GUIs.ADMIN_PANEL.ordinal())
+        {
+            return new GuiAdminPanel(entityPlayer.inventory);
         }
 
         return null;

@@ -19,8 +19,5 @@ public class CraftingHandler
         if (event.crafting.getItem() instanceof IOwnable) {
             ItemHelper.setOwner(event.crafting, event.player);
         }
-
-        // TODO Conversion of deprecated alchemical dusts to shards of minium with appropriate energy values
-        // https://github.com/pahimar/Equivalent-Exchange-3/issues/1020
     }
 }

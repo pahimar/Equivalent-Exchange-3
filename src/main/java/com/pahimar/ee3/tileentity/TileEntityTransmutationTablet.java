@@ -4,7 +4,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.item.ItemAlchemicalTome;
+import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -34,7 +34,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public static final int ITEM_INPUT_7 = 6;
     public static final int ITEM_INPUT_8 = 7;
     public static final int STONE_INDEX = 8;
-    public static final int ALCHEMICAL_TOME_INDEX = 9;
+    public static final int ALCHENOMICON_INDEX = 9;
 
     private EnergyValue storedEnergyValue;
     private EnergyValue availableEnergyValue;
@@ -322,7 +322,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         {
             return true;
         }
-        else if (slotIndex == ALCHEMICAL_TOME_INDEX && itemStack.getItem() instanceof ItemAlchemicalTome)
+        else if (slotIndex == ALCHENOMICON_INDEX && itemStack.getItem() instanceof ItemAlchenomicon)
         {
             return true;
         }

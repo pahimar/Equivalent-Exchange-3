@@ -15,12 +15,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
-public class ItemAlchemicalTome extends ItemEE implements IOwnable, IEnergyValueProvider
+public class ItemAlchenomicon extends ItemEE implements IOwnable, IEnergyValueProvider
 {
-    public ItemAlchemicalTome()
+    public ItemAlchenomicon()
     {
         super();
-        this.setUnlocalizedName(Names.Items.ALCHEMICAL_TOME);
+        this.setUnlocalizedName(Names.Items.ALCHENOMICON);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable, IEnergyValue
             }
             else
             {
-                entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_TOME.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+                entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHENOMICON.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
             }
         }
 
@@ -51,6 +51,6 @@ public class ItemAlchemicalTome extends ItemEE implements IOwnable, IEnergyValue
     @Override
     public EnergyValue getEnergyValue(ItemStack itemStack)
     {
-        return EnergyValueRegistryProxy.getEnergyValue(ModItems.alchemicalTome, true);
+        return EnergyValueRegistryProxy.getEnergyValue(ModItems.alchenomicon, true);
     }
 }

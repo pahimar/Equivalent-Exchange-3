@@ -129,6 +129,21 @@ public class EquivalentExchange3
         AbilityRegistry.getInstance().save();
     }
 
+    @EventHandler
+    public void handleMissingMappingEvent(FMLMissingMappingsEvent event)
+    {
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get())
+        {
+            if (mapping.type == GameRegistry.Type.ITEM)
+            {
+                if (mapping.name.equals("EE3:alchemicalTome"))
+                {
+                    mapping.remap(ModItems.alchenomicon);
+                }
+            }
+        }
+    }
+
     public EnergyValueRegistry getEnergyValueRegistry()
     {
         return EnergyValueRegistry.getInstance();

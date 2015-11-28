@@ -44,11 +44,12 @@ public final class Textures
         public static final ResourceLocation RESEARCH_STATION_GYLPH_2 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "researchStation_Glyph2.png");
         public static final ResourceLocation AUGMENTATION_TABLE = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "augmentationTable.png");
         public static final ResourceLocation PORTABLE_CRAFTING = new ResourceLocation("textures/gui/container/crafting_table.png");
-        public static final ResourceLocation ALCHEMICAL_TOME = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchemicalTome.png");
+        public static final ResourceLocation ALCHENOMICON = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "alchenomicon.png");
         public static final ResourceLocation TRANSMUTATION_ARRAY_1 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "transmutationArray_1.png");
         public static final ResourceLocation TRANSMUTATION_ARRAY_3 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "transmutationArray_3.png");
         public static final ResourceLocation TRANSMUTATION_ARRAY_5 = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "transmutationArray_5.png");
         public static final ResourceLocation TRANSMUTATION_TABLET = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "transmutationTablet.png");
+        public static final ResourceLocation ADMIN_PANEL = ResourceLocationHelper.getResourceLocation(GUI_TEXTURE_LOCATION + "adminPanel.png");
 
         public static final class Elements
         {
@@ -62,6 +63,7 @@ public final class Textures
             public static final ResourceLocation BUTTON_HOVER = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonHover.png");
             public static final ResourceLocation BUTTON_SORT_OPTION = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonSortOption.png");
             public static final ResourceLocation BUTTON_SORT_ORDER = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "buttonSortOrder.png");
+            public static final ResourceLocation BUTTON = ResourceLocationHelper.getResourceLocation(ELEMENT_TEXTURE_LOCATION + "button.png");
         }
     }
 

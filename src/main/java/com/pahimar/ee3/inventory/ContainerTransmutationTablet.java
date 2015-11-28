@@ -5,7 +5,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
-import com.pahimar.ee3.item.ItemAlchemicalTome;
+import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -45,10 +45,10 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
 
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
-        if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX) != null)
+        if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX) != null)
         {
-            ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX);
-            if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+            ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX);
+            if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
             {
                 knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ItemHelper.getOwnerUUID(itemStack)));
             }
@@ -81,7 +81,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 return itemStack.getItem() instanceof ItemMiniumStone || itemStack.getItem() instanceof ItemPhilosophersStone;
             }
         });
-        this.addSlotToContainer(new SlotAlchemicalTome(this, tileEntityTransmutationTablet, TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX, 152, 15));
+        this.addSlotToContainer(new SlotAlchenomicon(this, tileEntityTransmutationTablet, TileEntityTransmutationTablet.ALCHENOMICON_INDEX, 152, 15));
 
         for (int i = 0; i < 10; i++)
         {
@@ -292,9 +292,9 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             }
             else
             {
-                if (slotItemStack.getItem() instanceof ItemAlchemicalTome)
+                if (slotItemStack.getItem() instanceof ItemAlchenomicon)
                 {
-                    if (!this.mergeItemStack(slotItemStack, TileEntityTransmutationTablet.ALCHEMICAL_TOME_INDEX, TileEntityTransmutationTablet.INVENTORY_SIZE, false))
+                    if (!this.mergeItemStack(slotItemStack, TileEntityTransmutationTablet.ALCHENOMICON_INDEX, TileEntityTransmutationTablet.INVENTORY_SIZE, false))
                     {
                         return null;
                     }
@@ -470,13 +470,13 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     	}
     	return super.slotClick(slot, button, flag, player);
     }
-    
-    private class SlotAlchemicalTome extends Slot
+
+    private class SlotAlchenomicon extends Slot
     {
         private ContainerTransmutationTablet containerTransmutationTablet;
         private TileEntityTransmutationTablet tileEntityTransmutationTablet;
 
-        public SlotAlchemicalTome(ContainerTransmutationTablet containerTransmutationTablet, IInventory iInventory, int slotIndex, int x, int y)
+        public SlotAlchenomicon(ContainerTransmutationTablet containerTransmutationTablet, IInventory iInventory, int slotIndex, int x, int y)
         {
             super(iInventory, slotIndex, x, y);
             this.containerTransmutationTablet = containerTransmutationTablet;
@@ -492,7 +492,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean isItemValid(ItemStack itemStack)
         {
-            return itemStack.getItem() instanceof ItemAlchemicalTome;
+            return itemStack.getItem() instanceof ItemAlchenomicon;
         }
 
         @Override
@@ -503,7 +503,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet();
             this.containerTransmutationTablet.updateInventory();
 
-            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
             {
                 PacketHandler.INSTANCE.sendToAllAround(new MessageTransmutationKnowledgeUpdate(this.containerTransmutationTablet.tileEntityTransmutationTablet, null), new NetworkRegistry.TargetPoint(this.tileEntityTransmutationTablet.getWorldObj().provider.dimensionId, (double) this.tileEntityTransmutationTablet.xCoord, (double) this.tileEntityTransmutationTablet.yCoord, (double) this.tileEntityTransmutationTablet.zCoord, 5d));
             }
@@ -514,7 +514,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             super.putStack(itemStack);
 
-            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
             {
                 Set<ItemStack> knownTransmutations = TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ItemHelper.getOwnerUUID(itemStack));
                 this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);

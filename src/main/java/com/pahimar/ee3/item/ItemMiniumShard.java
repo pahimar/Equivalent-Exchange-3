@@ -16,9 +16,12 @@ public class ItemMiniumShard extends ItemEE implements IEnergyValueProvider
 
     @Override
     public EnergyValue getEnergyValue(ItemStack itemStack) {
-        if (itemStack != null && itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("energyValue")) {
-            if (Float.compare(itemStack.getTagCompound().getFloat("energyValue"), 0) > 0)
-                return new EnergyValue(itemStack.getTagCompound().getFloat("energyValue"));
+        if (itemStack != null && itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey(Names.NBT.ENERGY_VALUE))
+        {
+            if (Float.compare(itemStack.getTagCompound().getFloat(Names.NBT.ENERGY_VALUE), 0) > 0)
+            {
+                return new EnergyValue(itemStack.getTagCompound().getFloat(Names.NBT.ENERGY_VALUE));
+            }
         }
         return null;
     }

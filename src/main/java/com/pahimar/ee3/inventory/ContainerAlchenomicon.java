@@ -2,7 +2,7 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
-import com.pahimar.ee3.item.ItemAlchemicalTome;
+import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.UUID;
 
-public class ContainerAlchemicalTome extends ContainerEE implements IElementButtonHandler, IElementTextFieldHandler
+public class ContainerAlchenomicon extends ContainerEE implements IElementButtonHandler, IElementTextFieldHandler
 {
-    private final InventoryAlchemicalTome inventoryAlchemicalTome;
+    private final InventoryAlchenomicon inventoryAlchenomicon;
     private int pageOffset, maxPageOffset;
     private String searchTerm;
     private boolean requiresUpdate = false;
@@ -29,17 +29,17 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
     private final static int MAX_ROW_INDEX = 8;
     private final static int MAX_COLUMN_INDEX = 5;
 
-    public ContainerAlchemicalTome(EntityPlayer entityPlayer, ItemStack itemStack)
+    public ContainerAlchenomicon(EntityPlayer entityPlayer, ItemStack itemStack)
     {
         TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
 
-        if (itemStack.getItem() instanceof ItemAlchemicalTome && ItemHelper.hasOwnerUUID(itemStack))
+        if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
         {
             UUID ownerUUID = ItemHelper.getOwnerUUID(itemStack);
             knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ownerUUID));
         }
 
-        inventoryAlchemicalTome = new InventoryAlchemicalTome(knownTransmutations);
+        inventoryAlchenomicon = new InventoryAlchenomicon(knownTransmutations);
         pageOffset = 0;
         maxPageOffset = knownTransmutations.size() / 80;
 
@@ -48,7 +48,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryAlchemicalTome, i, 18 + columnIndex * 20, 18 + rowIndex * 19)
+                this.addSlotToContainer(new Slot(inventoryAlchenomicon, i, 18 + columnIndex * 20, 18 + rowIndex * 19)
                 {
                     @Override
                     public boolean canTakeStack(EntityPlayer player)
@@ -72,7 +72,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         {
             for (int columnIndex = 0; columnIndex < MAX_COLUMN_INDEX; ++columnIndex)
             {
-                this.addSlotToContainer(new Slot(inventoryAlchemicalTome, i, 140 + columnIndex * 20, 18 + rowIndex * 19)
+                this.addSlotToContainer(new Slot(inventoryAlchenomicon, i, 140 + columnIndex * 20, 18 + rowIndex * 19)
                 {
                     @Override
                     public boolean canTakeStack(EntityPlayer player)
@@ -139,12 +139,12 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
 
     public int getInventorySize()
     {
-        return inventoryAlchemicalTome.getSizeInventory();
+        return inventoryAlchenomicon.getSizeInventory();
     }
 
     public int getKnownTransmutationsCount()
     {
-        return inventoryAlchemicalTome.getKnownTransmutations().size();
+        return inventoryAlchenomicon.getKnownTransmutations().size();
     }
 
     public int getPageOffset()
@@ -188,7 +188,7 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchemicalTome.getKnownTransmutations(), searchTerm, Comparators.displayNameComparator));
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, Comparators.displayNameComparator));
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)
@@ -224,8 +224,8 @@ public class ContainerAlchemicalTome extends ContainerEE implements IElementButt
         {
             for (int i = 0; i < 80; i++)
             {
-                inventoryAlchemicalTome.setInventorySlotContents(i, newInventory[i]);
-                inventoryAlchemicalTome.markDirty();
+                inventoryAlchenomicon.setInventorySlotContents(i, newInventory[i]);
+                inventoryAlchenomicon.markDirty();
             }
         }
     }
