@@ -3,13 +3,14 @@ package com.pahimar.ee3.client.gui.component;
 import com.pahimar.ee3.client.gui.GuiBase;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class GuiComponent {
+public abstract class GuiComponent implements Comparable<GuiComponent> {
 
     protected final GuiBase parentGui;
     protected final String id;
     protected ResourceLocation texture;
 
     protected int positionX, positionY, componentWidth, componentHeight, textureWidth, textureHeight;
+    protected int ordering = 0;
     protected boolean isVisible = true;
     protected boolean isEnabled = true;
 
@@ -85,6 +86,13 @@ public abstract class GuiComponent {
     }
 
     public GuiComponent setVisible(boolean isVisible) {
+
+        if (this.isVisible && !isVisible) {
+            this.onHide();
+        } else if (!this.isVisible && isVisible) {
+            this.onShow();
+        }
+
         this.isVisible = isVisible;
         return this;
     }
@@ -94,15 +102,22 @@ public abstract class GuiComponent {
     }
 
     public GuiComponent setEnabled(boolean isEnabled) {
+
+        if (this.isEnabled && !isEnabled) {
+            this.onDisable();
+        } else if (!this.isEnabled && isEnabled) {
+            this.onEnable();
+        }
+
         this.isEnabled = isEnabled;
         return this;
     }
 
-    public abstract void drawForeground();
+    public abstract void drawForeground(float partialTicks);
 
-    public abstract void drawBackground();
+    public abstract void drawBackground(float partialTicks);
 
-    public abstract void update();
+    public abstract void onUpdate(int mouseX, int mouseY, float partialTicks);
 
     /**
      * Checks whether or not the mouse cursor is intersecting with this GuiComponent
@@ -112,7 +127,7 @@ public abstract class GuiComponent {
      * @return true if the mouse cursor is intersecting with this GuiComponent, false otherwise
      */
     public boolean intersectsWithMouse(int mouseX, int mouseY) {
-        return false;
+        return (mouseX >= this.positionX && mouseX <= this.positionX + this.componentWidth) && (mouseY >= this.positionY && mouseY <= this.positionY + this.componentHeight);
     }
 
     public abstract void onMouseButtonClick(int mouseX, int mouseY, int mouseButton);
@@ -137,4 +152,38 @@ public abstract class GuiComponent {
 
     public abstract void onKeyPress(char characterTyped, int keyPressed);
 
+    public abstract void onFocusGain();
+
+    public abstract void onFocusLost();
+
+    public abstract void onInit();
+
+    public abstract void onClose();
+
+    public abstract void onHide();
+
+    public abstract void onShow();
+
+    public abstract void onEnable();
+
+    public abstract void onDisable();
+
+    /**
+     * Compares this GuiComponent with another one to determine sort order
+     *
+     * @param guiComponent the GuiComponent we are comparing this one against
+     * @return
+     */
+    @Override
+    public int compareTo(GuiComponent guiComponent) {
+        if (this.ordering == guiComponent.ordering) {
+            if (this.id != null && guiComponent.id != null) {
+                return this.id.compareToIgnoreCase(guiComponent.id);
+            } else {
+                return this.hashCode() - guiComponent.hashCode();
+            }
+        } else {
+            return this.ordering - guiComponent.ordering;
+        }
+    }
 }

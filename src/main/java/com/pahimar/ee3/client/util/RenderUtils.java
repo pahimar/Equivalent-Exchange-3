@@ -12,6 +12,18 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderUtils
 {
+    private static int pulse = 0;
+    private static boolean doInc = true;
+
+    public static void bindTexture(ResourceLocation texture) {
+        FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
+    }
+
+    public static int getCenteredTextOffset(FontRenderer fontRenderer, String string, int width) {
+
+        return (width - fontRenderer.getStringWidth(string)) / 2;
+    }
+
     public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale, int zLevel)
     {
         IIcon icon = itemStack.getIconIndex();
@@ -90,7 +102,4 @@ public class RenderUtils
         }
         return pulse;
     }
-
-    private static int pulse = 0;
-    private static boolean doInc = true;
 }
