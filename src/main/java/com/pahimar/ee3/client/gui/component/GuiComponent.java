@@ -11,14 +11,36 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
 
     protected int positionX, positionY, componentWidth, componentHeight, textureWidth, textureHeight;
     protected int ordering = 0;
+    protected int zIndex = 0;
     protected boolean isVisible = true;
     protected boolean isEnabled = true;
 
-    public GuiComponent(GuiBase parentGui, String id, int positionX, int positionY) {
+    public GuiComponent(GuiBase parentGui, String id) {
+        this(parentGui, id, null, 0, 0);
+    }
+
+    public GuiComponent(GuiBase parentGui, String id, ResourceLocation texture, int positionX, int positionY) {
+        this(parentGui, id, texture, positionX, positionY, 256, 256);
+    }
+
+    public GuiComponent(GuiBase parentGui, String id, ResourceLocation texture, int positionX, int positionY, int componentWidth, int componentHeight) {
+        this(parentGui, id, texture, positionX, positionY, componentWidth, componentHeight, 256, 256);
+    }
+
+    public GuiComponent(GuiBase parentGui, String id, ResourceLocation texture, int positionX, int positionY, int componentWidth, int componentHeight, int textureWidth, int textureHeight) {
         this.parentGui = parentGui;
         this.id = id;
+        this.texture = texture;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.componentWidth = componentWidth;
+        this.componentHeight = componentHeight;
+        this.textureWidth = textureWidth;
+        this.textureHeight = textureHeight;
+    }
+
+    public final GuiBase getParentGui() {
+        return parentGui;
     }
 
     public final String getId() {
@@ -81,6 +103,24 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
         return this;
     }
 
+    public int getOrdering() {
+        return ordering;
+    }
+
+    public GuiComponent setOrdering(int ordering) {
+        this.ordering = ordering;
+        return this;
+    }
+
+    public int getZIndex() {
+        return zIndex;
+    }
+
+    public GuiComponent setZIndex(int zIndex) {
+        this.zIndex = zIndex;
+        return this;
+    }
+
     public boolean isVisible() {
         return isVisible;
     }
@@ -120,14 +160,26 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
     public abstract void onUpdate(int mouseX, int mouseY, float partialTicks);
 
     /**
-     * Checks whether or not the mouse cursor is intersecting with this GuiComponent
+     * Checks whether or not the specified coordinate intersects with this GuiComponent
      *
-     * @param mouseX x position of mouse cursor on the screen
-     * @param mouseY y position of mouse cursor on the screen
-     * @return true if the mouse cursor is intersecting with this GuiComponent, false otherwise
+     * @param xCoord x position
+     * @param yCoord y position
+     * @return true if the specified coordinates intersect with this GuiComponent, false otherwise
      */
-    public boolean intersectsWithMouse(int mouseX, int mouseY) {
-        return (mouseX >= this.positionX && mouseX <= this.positionX + this.componentWidth) && (mouseY >= this.positionY && mouseY <= this.positionY + this.componentHeight);
+    public boolean intersectsWith(int xCoord, int yCoord) {
+        return (xCoord >= this.positionX && xCoord <= this.positionX + this.componentWidth) && (yCoord >= this.positionY && yCoord <= this.positionY + this.componentHeight);
+    }
+
+    /**
+     * Checks whether or not the specified coordinate and z index intersects with this GuiComponent
+     *
+     * @param xCoord x position
+     * @param yCoord y position
+     * @param zIndex z index
+     * @return
+     */
+    public boolean intersectsWith(int xCoord, int yCoord, int zIndex) {
+        return (xCoord >= this.positionX && xCoord <= this.positionX + this.componentWidth) && (yCoord >= this.positionY && yCoord <= this.positionY + this.componentHeight) && (zIndex == this.zIndex);
     }
 
     public abstract void onMouseButtonClick(int mouseX, int mouseY, int mouseButton);
@@ -177,10 +229,15 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
     @Override
     public int compareTo(GuiComponent guiComponent) {
         if (this.ordering == guiComponent.ordering) {
-            if (this.id != null && guiComponent.id != null) {
-                return this.id.compareToIgnoreCase(guiComponent.id);
+            if (this.zIndex == guiComponent.zIndex) {
+                if (this.id != null && guiComponent.id != null) {
+                    return this.id.compareToIgnoreCase(guiComponent.id);
+                } else {
+                    return this.hashCode() - guiComponent.hashCode();
+                }
             } else {
-                return this.hashCode() - guiComponent.hashCode();
+                // Purposefully sorting so that higher z-indices appear first in the map
+                return guiComponent.zIndex - this.zIndex;
             }
         } else {
             return this.ordering - guiComponent.ordering;

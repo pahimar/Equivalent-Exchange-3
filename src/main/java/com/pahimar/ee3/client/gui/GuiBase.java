@@ -11,6 +11,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -116,8 +117,52 @@ public abstract class GuiBase extends GuiContainer {
         return guiComponentMap.get(id);
     }
 
+    public GuiComponent getGuiComponentAt(int positionX, int positionY) {
+        for (GuiComponent guiComponent : guiComponentMap.values()) {
+            if (guiComponent.intersectsWith(positionX, positionY)) {
+                return guiComponent;
+            }
+        }
+
+        return null;
+    }
+
+    public GuiComponent getGuiComponentAt(int positionX, int positionY, int zIndex) {
+        for (GuiComponent guiComponent : guiComponentMap.values()) {
+            if (guiComponent.intersectsWith(positionX, positionY, zIndex)) {
+                return guiComponent;
+            }
+        }
+
+        return null;
+    }
+
     public Collection<GuiComponent> getGuiComponents() {
         return guiComponentMap.values();
+    }
+
+    public Collection<GuiComponent> getGuiComponentsAt(int positionX, int positionY) {
+        Collection<GuiComponent> intersectingGuiComponents = new ArrayList<GuiComponent>();
+
+        for (GuiComponent guiComponent : guiComponentMap.values()) {
+            if (guiComponent.intersectsWith(positionX, positionY)) {
+                intersectingGuiComponents.add(guiComponent);
+            }
+        }
+
+        return intersectingGuiComponents;
+    }
+
+    public Collection<GuiComponent> getGuiComponentsAt(int positionX, int positionY, int zIndex) {
+        Collection<GuiComponent> intersectingGuiComponents = new ArrayList<GuiComponent>();
+
+        for (GuiComponent guiComponent : guiComponentMap.values()) {
+            if (guiComponent.intersectsWith(positionX, positionY, zIndex)) {
+                intersectingGuiComponents.add(guiComponent);
+            }
+        }
+
+        return intersectingGuiComponents;
     }
 
     public GuiBase addGuiComponent(GuiComponent guiComponent) {
