@@ -11,10 +11,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiBase extends GuiContainer {
@@ -24,6 +21,9 @@ public abstract class GuiBase extends GuiContainer {
     protected String title;
     private boolean shouldDrawTitle = true;
     private String activeGuiComponentId = null;
+
+    private int adjustedMouseX = 0;
+    private int adjustedMouseY = 0;
 
     public GuiBase(Container container) {
         this(null, container);
@@ -63,6 +63,28 @@ public abstract class GuiBase extends GuiContainer {
     public GuiBase setShouldDrawTitle(boolean shouldDrawTitle) {
         this.shouldDrawTitle = shouldDrawTitle;
         return this;
+    }
+
+    public int getAdjustedMouseX() {
+        return adjustedMouseX;
+    }
+
+    protected GuiBase updateAdjustedMouseX(int rawMouseX) {
+        this.adjustedMouseX = rawMouseX - getGuiPositionX();
+        return this;
+    }
+
+    public int getAdjustedMouseY() {
+        return adjustedMouseY;
+    }
+
+    protected GuiBase updateAdjustedMouseY(int rawMouseY) {
+        this.adjustedMouseY = rawMouseY - getGuiPositionY();
+        return this;
+    }
+
+    public GuiBase updateAdjustedMousePosition(int rawMouseX, int rawMouseY) {
+        return updateAdjustedMouseX(rawMouseX).updateAdjustedMouseY(rawMouseY);
     }
 
     public int getScreenWidth() {
@@ -117,8 +139,8 @@ public abstract class GuiBase extends GuiContainer {
         return guiComponentMap.get(id);
     }
 
-    public GuiComponent getGuiComponentAt(int positionX, int positionY) {
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+    public GuiComponent getFirstGuiComponentAt(int positionX, int positionY) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             if (guiComponent.intersectsWith(positionX, positionY)) {
                 return guiComponent;
             }
@@ -127,14 +149,19 @@ public abstract class GuiBase extends GuiContainer {
         return null;
     }
 
-    public GuiComponent getGuiComponentAt(int positionX, int positionY, int zIndex) {
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
-            if (guiComponent.intersectsWith(positionX, positionY, zIndex)) {
-                return guiComponent;
+    public GuiComponent getTopGuiComponentAt(int positionX, int positionY) {
+        TreeSet<GuiComponent> guiComponents = new TreeSet<GuiComponent>(GuiComponent.zIndexComparator);
+        for (GuiComponent guiComponent : getGuiComponents()) {
+            if (guiComponent.intersectsWith(positionX, positionY)) {
+                guiComponents.add(guiComponent);
             }
         }
 
-        return null;
+        if (!guiComponents.isEmpty()) {
+            return guiComponents.first();
+        } else {
+            return null;
+        }
     }
 
     public Collection<GuiComponent> getGuiComponents() {
@@ -144,7 +171,7 @@ public abstract class GuiBase extends GuiContainer {
     public Collection<GuiComponent> getGuiComponentsAt(int positionX, int positionY) {
         Collection<GuiComponent> intersectingGuiComponents = new ArrayList<GuiComponent>();
 
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             if (guiComponent.intersectsWith(positionX, positionY)) {
                 intersectingGuiComponents.add(guiComponent);
             }
@@ -156,7 +183,7 @@ public abstract class GuiBase extends GuiContainer {
     public Collection<GuiComponent> getGuiComponentsAt(int positionX, int positionY, int zIndex) {
         Collection<GuiComponent> intersectingGuiComponents = new ArrayList<GuiComponent>();
 
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             if (guiComponent.intersectsWith(positionX, positionY, zIndex)) {
                 intersectingGuiComponents.add(guiComponent);
             }
@@ -186,9 +213,9 @@ public abstract class GuiBase extends GuiContainer {
     public void initGui() {
         super.initGui();
 
-        // A bunch of different impls clear the list of components here - no reason I can gather why at this point
+        // A bunch of different impls clear the list of components here - no reason I can discern why at this point
 
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             guiComponent.onInit();
         }
     }
@@ -197,32 +224,40 @@ public abstract class GuiBase extends GuiContainer {
     public void onGuiClosed() {
         super.onGuiClosed();
 
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             guiComponent.onClose();
         }
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
+    public void drawScreen(int rawMouseX, int rawMouseY, float partialTicks) {
+        super.drawScreen(rawMouseX, rawMouseY, partialTicks);
 
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
-            guiComponent.onUpdate(mouseX, mouseY, partialTicks);
+        updateAdjustedMousePosition(rawMouseX, rawMouseY);
+
+        for (GuiComponent guiComponent : getGuiComponents()) {
+            if (guiComponent.intersectsWith(getAdjustedMouseX(), getAdjustedMouseY())) {
+                guiComponent.onMouseOver(getAdjustedMouseX(), getAdjustedMouseY(), partialTicks);
+            }
         }
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+    protected void drawGuiContainerForegroundLayer(int rawMouseX, int rawMouseY) {
 
+        // Draw text
         if (shouldDrawTitle && title != null) {
             getFontRenderer().drawString(StringHelper.localize(title), RenderUtils.getCenteredTextOffset(getFontRenderer(), StringHelper.localize(title), getGuiWidth()), 6, 0x404040);
         }
-        drawComponents(true);
+
+        // Draw components
+        drawComponents(true, rawMouseX, rawMouseY, 0);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int rawMouseX, int rawMouseY) {
 
+        // Draw background
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         if (texture != null) {
             RenderUtils.bindTexture(texture);
@@ -231,25 +266,22 @@ public abstract class GuiBase extends GuiContainer {
             this.drawTexturedModalRect(xStart, yStart, 0, 0, getGuiWidth(), getGuiHeight());
         }
 
+        // Draw components
         GL11.glPushMatrix();
         GL11.glTranslatef(getGuiPositionX(), getGuiPositionY(), 0.0F);
-        drawComponents(false, partialTicks);
+        drawComponents(false, rawMouseX, rawMouseY, partialTicks);
         GL11.glPopMatrix();
 
     }
 
-    protected void drawComponents(boolean drawForeground) {
-        drawComponents(drawForeground, 0);
-    }
+    protected void drawComponents(boolean drawForeground, int rawMouseX, int rawMouseY, float partialTicks) {
 
-    protected void drawComponents(boolean drawForeground, float partialTicks) {
-
-        for (GuiComponent guiComponent : guiComponentMap.values()) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
             if (guiComponent.isVisible()) {
                 if (drawForeground) {
-                    guiComponent.drawForeground(partialTicks);
+                    guiComponent.drawForeground(rawMouseX, rawMouseY, partialTicks);
                 } else {
-                    guiComponent.drawBackground(partialTicks);
+                    guiComponent.drawBackground(rawMouseX, rawMouseY, partialTicks);
                 }
             }
         }

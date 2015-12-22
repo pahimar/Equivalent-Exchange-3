@@ -3,12 +3,53 @@ package com.pahimar.ee3.client.gui.component;
 import com.pahimar.ee3.client.gui.GuiBase;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Comparator;
+
 public abstract class GuiComponent implements Comparable<GuiComponent> {
 
+    public static Comparator<GuiComponent> orderingComparator = new Comparator<GuiComponent>() {
+
+        @Override
+        public int compare(GuiComponent guiComponent1, GuiComponent guiComponent2) {
+            if (guiComponent1.ordering == guiComponent2.ordering) {
+                if (guiComponent1.zIndex == guiComponent2.zIndex) {
+                    if (guiComponent1.id != null && guiComponent2.id != null) {
+                        return guiComponent1.id.compareToIgnoreCase(guiComponent2.id);
+                    } else {
+                        return guiComponent1.hashCode() - guiComponent2.hashCode();
+                    }
+                } else {
+                    // Purposefully sorting so that higher z-indices appear first in the map
+                    return guiComponent2.zIndex - guiComponent1.zIndex;
+                }
+            } else {
+                return guiComponent1.ordering - guiComponent2.ordering;
+            }
+        }
+    };
+    public static Comparator<GuiComponent> zIndexComparator = new Comparator<GuiComponent>() {
+
+        @Override
+        public int compare(GuiComponent guiComponent1, GuiComponent guiComponent2) {
+            if (guiComponent1.zIndex == guiComponent2.zIndex) {
+                if (guiComponent1.ordering == guiComponent2.ordering) {
+                    if (guiComponent1.id != null && guiComponent2.id != null) {
+                        return guiComponent1.id.compareToIgnoreCase(guiComponent2.id);
+                    } else {
+                        return guiComponent1.hashCode() - guiComponent2.hashCode();
+                    }
+                } else {
+                    return guiComponent1.ordering - guiComponent2.ordering;
+                }
+            } else {
+                // Purposefully sorting so that higher z-indices appear first in the map
+                return guiComponent2.zIndex - guiComponent1.zIndex;
+            }
+        }
+    };
     protected final GuiBase parentGui;
     protected final String id;
     protected ResourceLocation texture;
-
     protected int positionX, positionY, componentWidth, componentHeight, textureWidth, textureHeight;
     protected int ordering = 0;
     protected int zIndex = 0;
@@ -153,11 +194,11 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
         return this;
     }
 
-    public abstract void drawForeground(float partialTicks);
+    public abstract void drawForeground(int rawMouseX, int rawMouseY, float partialTicks);
 
-    public abstract void drawBackground(float partialTicks);
+    public abstract void drawBackground(int rawMouseX, int rawMouseY, float partialTicks);
 
-    public abstract void onUpdate(int mouseX, int mouseY, float partialTicks);
+    public abstract void onUpdate(int rawMouseX, int rawMouseY, float partialTicks);
 
     /**
      * Checks whether or not the specified coordinate intersects with this GuiComponent
@@ -194,13 +235,9 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
 
     public abstract void onMouseEnter(int mouseX, int mouseY);
 
-    public abstract void onMouseOver(int mouseX, int mouseY);
+    public abstract void onMouseOver(int mouseX, int mouseY, float partialTicks);
 
     public abstract void onMouseLeave(int mouseX, int mouseY);
-
-    public abstract void onKeyDown(int keyPressed);
-
-    public abstract void onKeyUp(int keyPressed);
 
     public abstract void onKeyPress(char characterTyped, int keyPressed);
 
@@ -228,19 +265,6 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
      */
     @Override
     public int compareTo(GuiComponent guiComponent) {
-        if (this.ordering == guiComponent.ordering) {
-            if (this.zIndex == guiComponent.zIndex) {
-                if (this.id != null && guiComponent.id != null) {
-                    return this.id.compareToIgnoreCase(guiComponent.id);
-                } else {
-                    return this.hashCode() - guiComponent.hashCode();
-                }
-            } else {
-                // Purposefully sorting so that higher z-indices appear first in the map
-                return guiComponent.zIndex - this.zIndex;
-            }
-        } else {
-            return this.ordering - guiComponent.ordering;
-        }
+        return orderingComparator.compare(this, guiComponent);
     }
 }
