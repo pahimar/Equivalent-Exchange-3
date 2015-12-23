@@ -1,6 +1,8 @@
 package com.pahimar.ee3.client.gui.component;
 
 import com.pahimar.ee3.client.gui.GuiBase;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Comparator;
@@ -49,6 +51,7 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
     };
     protected final GuiBase parentGui;
     protected final String id;
+    @SideOnly(Side.CLIENT)
     protected ResourceLocation texture;
     protected int positionX, positionY, componentWidth, componentHeight, textureWidth, textureHeight;
     protected int ordering = 0;
@@ -223,23 +226,53 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
         return (xCoord >= this.positionX && xCoord <= this.positionX + this.componentWidth) && (yCoord >= this.positionY && yCoord <= this.positionY + this.componentHeight) && (zIndex == this.zIndex);
     }
 
-    public abstract void onMouseButtonClick(int mouseX, int mouseY, int mouseButton);
 
-    public abstract void onMouseButtonDown(int mouseX, int mouseY, int mouseButton);
+    /**
+     * @param rawMouseX
+     * @param rawMouseY
+     * @param mouseButton
+     */
+    public abstract void onMouseButtonClicked(int rawMouseX, int rawMouseY, int mouseButton);
 
-    public abstract void onMouseButtonUp(int mouseX, int mouseY, int mouseButton);
+    /**
+     *
+     * @param rawMouseX
+     * @param rawMouseY
+     * @param mouseButton
+     * @return
+     */
+    public boolean onMouseButtonClick(int rawMouseX, int rawMouseY, int mouseButton) {
+        onMouseButtonClicked(rawMouseX, rawMouseY, mouseButton);
+        return false;
+    }
 
-    public abstract void onMouseButtonRelease(int mouseX, int mouseY, int mouseButton, long duration);
+    public abstract void onMouseButtonDown(int rawMouseX, int rawMouseY, int mouseButton);
 
-    public abstract void onMouseMove(int prevMouseX, int prevMouseY, int newMouseX, int newMouseY);
+    public abstract void onMouseButtonUp(int rawMouseX, int rawMouseY, int mouseButton);
 
-    public abstract void onMouseEnter(int mouseX, int mouseY);
+    public abstract void onMouseButtonRelease(int rawMouseX, int rawMouseY, int mouseButton, long duration);
 
-    public abstract void onMouseOver(int mouseX, int mouseY, float partialTicks);
+    public abstract void onMouseMove(int prevRawMouseX, int prevRawMouseY, int newRawMouseX, int newRawMouseY);
 
-    public abstract void onMouseLeave(int mouseX, int mouseY);
+    public abstract void onMouseEnter(int rawMouseX, int rawMouseY);
 
-    public abstract void onKeyPress(char characterTyped, int keyPressed);
+    public abstract void onMouseOver(int rawMouseX, int rawMouseY, float partialTicks);
+
+    public abstract void onMouseLeave(int rawMouseX, int rawMouseY);
+
+    public abstract void onMouseWheel(int rawMouseX, int rawMouseY, int change);
+
+    public abstract void onKeyPressed(char characterTyped, int keyPressed);
+
+    /**
+     * @param characterTyped
+     * @param keyPressed
+     * @return
+     */
+    public boolean onKeyPress(char characterTyped, int keyPressed) {
+        onKeyPress(characterTyped, keyPressed);
+        return false;
+    }
 
     public abstract void onFocusGain();
 

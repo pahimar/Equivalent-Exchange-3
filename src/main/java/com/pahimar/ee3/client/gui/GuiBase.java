@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -16,6 +17,7 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public abstract class GuiBase extends GuiContainer {
 
+    @SideOnly(Side.CLIENT)
     protected ResourceLocation texture;
     protected Map<String, GuiComponent> guiComponentMap = new TreeMap<String, GuiComponent>();
     protected String title;
@@ -229,6 +231,66 @@ public abstract class GuiBase extends GuiContainer {
         }
     }
 
+    // Keyboard
+    @Override
+    protected void keyTyped(char characterTyped, int keyPressed) {
+        for (GuiComponent guiComponent : getGuiComponents()) {
+            if (guiComponent.onKeyPress(characterTyped, keyPressed)) {
+                return;
+            }
+        }
+
+        super.keyTyped(characterTyped, keyPressed);
+    }
+
+    // Mouse
+    @Override
+    public void handleMouseInput() {
+        // TODO
+        super.handleMouseInput();
+    }
+
+    @Override
+    protected void mouseClicked(int rawMouseX, int rawMouseY, int mouseButton) {
+        // TODO
+        super.mouseClicked(rawMouseX, rawMouseY, mouseButton);
+    }
+
+    @Override
+    protected void mouseMovedOrUp(int rawMouseX, int rawMouseY, int mouseButton) {
+        // TODO
+        super.mouseMovedOrUp(rawMouseX, rawMouseY, mouseButton);
+    }
+
+    @Override
+    protected void mouseClickMove(int rawMouseX, int rawMouseY, int mouseButton, long duration) {
+
+    }
+
+    public Slot getSlotAtPosition(int rawMouseX, int rawMouseY) {
+
+        Iterator iterator = this.inventorySlots.inventorySlots.iterator();
+        while (iterator.hasNext()) {
+            Slot slot = (Slot) iterator.next();
+            if (this.isMouseOverSlot(slot, rawMouseX, rawMouseY)) {
+                return slot;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean isMouseOverSlot(Slot slot, int rawMouseX, int rawMouseY) {
+        return this.isMouseOverSlot(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, rawMouseX, rawMouseY);
+    }
+
+
+    protected boolean isMouseOverSlot(int slotPositionX, int slotPositionY, int slotWidth, int slotHeight, int rawMouseX, int rawMouseY) {
+        rawMouseX -= getGuiPositionX();
+        rawMouseY -= getGuiPositionX();
+        return (rawMouseX >= slotPositionX - 1) && (rawMouseX < slotPositionX + slotWidth + 1) && (rawMouseY >= slotPositionY - 1) && (rawMouseY < slotPositionY + slotHeight + 1);
+    }
+
     @Override
     public void drawScreen(int rawMouseX, int rawMouseY, float partialTicks) {
         super.drawScreen(rawMouseX, rawMouseY, partialTicks);
@@ -244,7 +306,6 @@ public abstract class GuiBase extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int rawMouseX, int rawMouseY) {
-
         // Draw text
         if (shouldDrawTitle && title != null) {
             getFontRenderer().drawString(StringHelper.localize(title), RenderUtils.getCenteredTextOffset(getFontRenderer(), StringHelper.localize(title), getGuiWidth()), 6, 0x404040);
@@ -256,7 +317,6 @@ public abstract class GuiBase extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int rawMouseX, int rawMouseY) {
-
         // Draw background
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         if (texture != null) {
