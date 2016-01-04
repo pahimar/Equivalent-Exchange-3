@@ -58,6 +58,7 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
     protected int zIndex = 0;
     protected boolean isVisible = true;
     protected boolean isEnabled = true;
+    protected boolean isFocusable = true;
 
     public GuiComponent(GuiBase parentGui, String id) {
         this(parentGui, id, null, 0, 0);
@@ -197,6 +198,23 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
         return this;
     }
 
+    public boolean isFocusable() {
+        return isFocusable;
+    }
+
+    public GuiComponent setIsFocusable(boolean isFocusable) {
+        this.isFocusable = isFocusable;
+        return this;
+    }
+
+    public boolean hasFocus() {
+        if (isFocusable) {
+            return getParentGui().getActiveGuiComponentId().equals(getId());
+        }
+
+        return false;
+    }
+
     public abstract void drawForeground(int rawMouseX, int rawMouseY, float partialTicks);
 
     public abstract void drawBackground(int rawMouseX, int rawMouseY, float partialTicks);
@@ -274,7 +292,7 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
         return false;
     }
 
-    public abstract void onFocusGain();
+    public abstract void onFocusGained();
 
     public abstract void onFocusLost();
 
