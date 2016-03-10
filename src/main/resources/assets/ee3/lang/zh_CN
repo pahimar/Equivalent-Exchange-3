@@ -1,0 +1,182 @@
+#基础翻译来自 78及TF汉化组 （http://www.mcbbs.net/thread-281939-1-1.html） ，在此基础上加了一点翻译，其他的我翻译不来 :(
+#有翻译错误的请务必修改 :)
+
+# Configuration
+general.sync.threshold.label=Sync Threshold
+general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
+
+general.sound.soundMode.label=Sounds
+general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
+
+general.abilities.onlyLoadFile.label=Only load Abilities file
+general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
+
+general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
+general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
+
+# Keys
+key.categories.ee3=等价交换3
+key.charge=充能
+key.extra=附加
+key.release=释放
+key.toggle=切换
+
+# Creative Tabs
+itemGroup.ee3=等价交换3
+
+# Items
+item.ee3:alchemicalBag.name=炼金背包
+item.ee3:alchemicalDust.ash.name=灰尘
+item.ee3:alchemicalDust.verdant.name=翠绿灰尘
+item.ee3:alchemicalDust.azure.name=蔚蓝灰尘
+item.ee3:alchemicalDust.minium.name=铅丹灰尘
+item.ee3:alchemicalFuel.alchemicalCoal.name=炼金煤
+item.ee3:alchemicalFuel.mobiusFuel.name=莫比乌斯燃料
+item.ee3:alchemicalFuel.aeternalisFuel.name=永恒燃料
+item.ee3:chalk.name=粉笔
+item.ee3:diviningRod.name=占卜棒 [WIP]
+item.ee3:shardMinium.name=铅丹碎片
+item.ee3:stoneInert.name=惰性之石
+item.ee3:stoneMinium.name=铅丹石 [WIP]
+item.ee3:stonePhilosophers.name=贤者之石 [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=翠绿升级 [WIP]
+item.ee3:alchemicalUpgrade.azure.name=蔚蓝升级 [WIP]
+item.ee3:alchemicalUpgrade.minium.name=铅丹升级 [WIP]
+item.ee3:alchemicalTome.name=炼金术手册
+item.ee3:matterProto.name=原型物质 [WIP]
+item.ee3:matterDark.name=暗物质 [WIP]
+item.ee3:matterOmni.name=Omni Matter [WIP]
+item.ee3:matterCorporeal.name=Corporeal Matter [WIP]
+item.ee3:matterKinetic.name=Kinetic Matter [WIP]
+item.ee3:matterTemporal.name=Temporal Matter [WIP]
+item.ee3:matterEssentia.name=Essentia Matter [WIP]
+item.ee3:matterAmorphous.name=Amorphous Matter [WIP]
+item.ee3:matterVoid.name=虚空物质 [WIP]
+item.ee3:gemBlack.name=黑色宝石 [WIP]
+item.ee3:gemBlue.name=蓝色宝石 [WIP]
+item.ee3:gemGreen.name=绿色宝石 [WIP]
+item.ee3:gemGrey.name=灰色宝石 [WIP]
+item.ee3:gemPurple.name=紫色宝石 [WIP]
+item.ee3:gemRed.name=红色宝石 [WIP]
+item.ee3:gemYellow.name=黄色宝石 [WIP]
+item.ee3:lootBall.name=Loot Ball [WIP]
+item.ee3:knowledgeScroll.name=Scroll of Transmutation Knowledge [WIP]
+item.ee3:potionLethe.name=失忆药水 [WIP]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
+item.ee3:pickAxeDarkMatter.name=Dark Matter Pickaxe [WIP]
+item.ee3:hammerDarkMatter.name=Dark Matter Hammer [WIP]
+item.ee3:axeDarkMatter.name=Dark Matter Axe [WIP]
+item.ee3:hoeDarkMatter.name=Dark Matter Hoe [WIP]
+item.ee3:fishingRodDarkMatter.name=Dark Matter Fishing Rod [WIP]
+item.ee3:shearsDarkMatter.name=Dark Matter Shears [WIP]
+
+# Weapons
+item.ee3:bowDarkMatter.name=暗物质弓 [WIP]
+item.ee3:arrowDarkMatter.name=暗物质箭 [WIP]
+item.ee3:swordDarkMatter.name=暗物质剑 [WIP]
+
+# Blocks
+tile.ee3:alchemicalChest.name=炼金箱子
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=炼金煤块
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=莫比乌斯燃料块
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永恒燃料块
+tile.ee3:aludel.name=梨坛
+tile.ee3:calcinator.name=煅烧炉
+tile.ee3:chalk.name=粉笔块
+tile.ee3:glassBell.name=玻璃罩
+tile.ee3:researchStation.name=研究站
+tile.ee3:augmentationTable.name=Augmentation Table [WIP]
+tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
+tile.ee3:ashInfusedStone.name=Ash Infused Stone
+tile.ee3:ashInfusedStoneSlab.name=Ash Infused Stone Slab
+tile.ee3:alchemyArray.name=Alchemy Array
+tile.ee3:dummyArray.name=Alchemy Array
+tile.ee3:transmutationTablet.name=Transmutation Tablet
+
+# Fluids
+fluid.ee3.milk=牛奶
+
+# Alchemy Arrays
+arrays.ee3:basicAlchemyArray=Basic Alchemy Array [WIP]
+arrays.ee3:transmutation=Transmutation Alchemy Array [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=炼金背包
+container.ee3:alchemicalChest=炼金箱
+container.ee3:aludel=梨坛
+container.ee3:calcinator=煅烧炉
+container.ee3:glassBell=玻璃罩
+container.ee3:researchStation=研究站
+container.ee3:augmentationTable=Augmentation Table [WIP]
+container.ee3:alchemicalTome=Tome of Alchemical Knowledge
+container.ee3:alchemicalTome.noTransmutationsKnown=No known transmutations
+container.ee3:transmutationAlchemyArray=Transmutation Square [WIP]
+
+# NEI
+gui.nei.ee3:calcination=烧制
+gui.nei.ee3:calcination.tooltip.1=Energy values needed to calcine
+gui.nei.ee3:calcination.tooltip.2=From %s to %s
+gui.nei.ee3:aludel=梨坛
+
+# Commands
+commands.ee3.usage=/ee3
+commands.ee3.player-not-found.error=Player with name %s was not found on the server
+commands.ee3.invalid-nbt-tag.error=Data tag parsing failed: %s
+commands.ee3.no-item.error=No current item
+commands.ee3.set-energy-value.usage=/ee3 set-energy-value <pre> <item> <value> [data] [dataTag] OR /ee3 set-energy-value <post> <item> <value> [data] [dataTag]
+commands.ee3.set-energy-value.success=%s set a %s EnergyValue of %s to %s
+commands.ee3.set-energy-value-current-item.usage=/ee3 set-energy-value-current-item <pre> <value> OR /ee3 set-energy-value-current-item <post> <value>
+commands.ee3.set-energy-value-current-item.success=%s set a %s EnergyValue of %s to %s
+commands.ee3.sync-energy-values.usage=/ee3 sync-energy-values
+commands.ee3.sync-energy-values.success=Successfully synchronized energy values with the server
+commands.ee3.sync-energy-values.denied=Please wait %s more seconds and try again
+commands.ee3.player-learn-item.usage=/ee3 player-learn-item <playername> <item> <data> [dataTag]
+commands.ee3.player-learn-item.success=%s taught %s how to transmute %s
+commands.ee3.player-learn-current-item.usage=/ee3 player-learn-current-item <playername>
+commands.ee3.player-learn-current-item.success=%s taught %s how to transmute %s
+commands.ee3.player-forget-everything.usage=/ee3 player-forget-everything <playername>
+commands.ee3.player-forget-everything.success=%s made %s forget how to transmute everything
+commands.ee3.player-forget-item.usage=/ee3 player-forget-item <playername> <item> <data> [dataTag]
+commands.ee3.player-forget-item.success=%s made %s forget how to transmute %s
+commands.ee3.player-forget-current-item.usage=/ee3 player-forget-current-item <playername>
+commands.ee3.player-forget-current-item.success=%s made %s forget how to transmute %s
+commands.ee3.template-learn-item.usage=/ee3 template-learn-item <item> <data> [dataTag]
+commands.ee3.template-learn-item.success=%s taught the knowledge template how to transmute %s
+commands.ee3.template-learn-current-item.usage=/ee3 template-learn-current-item
+commands.ee3.template-learn-current-item.success=%s taught the knowledge template how to transmute %s
+commands.ee3.template-forget-everything.usage=/ee3 template-forget-everything
+commands.ee3.template-forget-everything.success=%s made the knowledge template forget how to transmute everything
+commands.ee3.template-forget-item.usage=/ee3 template-forget-item <item> <data> [dataTag]
+commands.ee3.template-forget-item.success=%s made the knowledge template forget how to transmute %s
+commands.ee3.template-forget-current-item.usage=/ee3 template-forget-current-item
+commands.ee3.template-forget-current-item.success=%s made the knowledge template forget how to transmute %s
+commands.ee3.set-item-learnable.usage=/ee3 set-item-learnable <item> <data> [dataTag]
+commands.ee3.set-item-learnable.success=%s set %s as learnable for transmutations
+commands.ee3.set-item-not-learnable.usage=/ee3 set-item-not-learnable <item> <data> [dataTag]
+commands.ee3.set-item-not-learnable.success=%s set %s as not learnable for transmutations
+commands.ee3.set-item-recoverable.usage=/ee3 set-item-recoverable <item> <data> [dataTag]
+commands.ee3.set-item-recoverable.success=%s set %s as being able to have its energy value recovered
+commands.ee3.set-item-not-recoverable.usage=/ee3 set-item-not-recoverable <item> <data> [dataTag]
+commands.ee3.set-item-not-recoverable.success=%s set %s as not being able to have its energy value recovered
+commands.ee3.run-tests.usage=/ee3 run-tests <file-name>
+commands.ee3.run-tests.success=Executed test file '%s', check server log for results
+commands.ee3.run-tests.notfound=Test file '%s' was not found!
+
+# Tooltips
+tooltip.ee3:belongsTo=Belongs to %s
+tooltip.ee3:belongsToNoOne=Belongs to no one
+tooltip.ee3:upgradesPrefix=升级(炼金)箱子
+tooltip.ee3:small=小
+tooltip.ee3:medium=中
+tooltip.ee3:large=大
+tooltip.ee3:sortByDisplayName=按名字排序
+tooltip.ee3:sortByEnergyValue=按能量值排序
+tooltip.ee3:sortByID=按ID排序
+tooltip.ee3:sortAscending=升序
+tooltip.ee3:sortDescending=降序
+
+#Misc
+misc.ee3:owner-set-to-self=你拥有了 %s
+misc.ee3:energy-value=能量值
