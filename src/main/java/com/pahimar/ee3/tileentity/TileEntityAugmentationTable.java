@@ -119,7 +119,7 @@ public class TileEntityAugmentationTable extends TileEntityEE implements IInvent
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return false;
+        return (slotIndex == INPUT_SLOT_INVENTORY_INDEX || slotIndex == AUGMENT_SLOT_INVENTORY_INDEX);
     }
 
     @Override

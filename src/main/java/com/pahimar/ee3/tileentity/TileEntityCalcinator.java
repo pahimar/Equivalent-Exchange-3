@@ -187,6 +187,10 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
+        if(slotIndex == FUEL_INVENTORY_INDEX && TileEntityFurnace.isItemFuel(itemStack))
+            return true;
+        else if(slotIndex == INPUT_INVENTORY_INDEX)
+            return true;
         return false;
     }
 
