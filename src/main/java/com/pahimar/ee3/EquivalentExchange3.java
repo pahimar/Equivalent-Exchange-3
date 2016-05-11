@@ -4,6 +4,7 @@ import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.NewEnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import java.io.File;
+import java.io.IOException;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class EquivalentExchange3
@@ -117,6 +119,12 @@ public class EquivalentExchange3
     {
         CachedOreDictionary.getInstance();
         Abilities.initNotLearnables();
+
+        try {
+            NewEnergyValueRegistry.INSTANCE.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @EventHandler

@@ -48,7 +48,11 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
         if (compressedBytes != null)
         {
-            this.jsonEnergyValueRegistry = CompressionHelper.decompressStringFromByteArray(compressedBytes);
+            try {
+                this.jsonEnergyValueRegistry = CompressionHelper.decompress(compressedBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -64,7 +68,11 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
         if (jsonEnergyValueRegistry != null)
         {
-            compressedBytes = CompressionHelper.compressStringToByteArray(jsonEnergyValueRegistry);
+            try {
+                compressedBytes = CompressionHelper.compress(jsonEnergyValueRegistry);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (compressedBytes != null)

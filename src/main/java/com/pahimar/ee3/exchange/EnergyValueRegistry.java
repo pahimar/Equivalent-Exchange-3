@@ -52,6 +52,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             energyValueRegistry = new EnergyValueRegistry();
         }
 
+
         return energyValueRegistry;
     }
 
@@ -692,7 +693,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         energyValuesDataDirectory.mkdirs();
 
         if (shouldRegenNextRestart) {
-            File staticEnergyValuesJsonFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON);
+            File staticEnergyValuesJsonFile = new File(energyValuesDataDirectory, Files.ENERGY_VALUES_JSON);
             File md5EnergyValuesJsonFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json");
 
             // JSON
@@ -705,9 +706,17 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
             shouldRegenNextRestart = false;
         } else {
-            SerializationHelper.compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON), energyValueRegistry.stackMappings);
+            SerializationHelper.compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, Files.ENERGY_VALUES_JSON), energyValueRegistry.stackMappings);
             SerializationHelper.compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json.gz"), energyValueRegistry.stackMappings);
         }
+    }
+
+    public boolean loadFromFile(File energyValueFile) {
+        if (energyValueFile != null) {
+            LogHelper.info(ENERGY_VALUE_MARKER, "Attempting to load energy values from file: {}", energyValueFile.getAbsolutePath());
+        }
+
+        return false;
     }
 
     public boolean loadEnergyValueRegistryFromFile() {
@@ -715,10 +724,12 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
         File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
         energyValuesDataDirectory.mkdirs();
 
-        File staticEnergyValuesFile = new File(energyValuesDataDirectory, Files.STATIC_ENERGY_VALUES_JSON);
+        File staticEnergyValuesFile = new File(energyValuesDataDirectory, Files.ENERGY_VALUES_JSON);
         File md5EnergyValuesFile = new File(energyValuesDataDirectory, SerializationHelper.getModListMD5() + ".json.gz");
 
         Map<WrappedStack, EnergyValue> stackValueMap = null;
+
+        loadFromFile(new File(Files.Global.dataDirectory, Files.ENERGY_VALUES_JSON));
 
         if (!Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Always")) {
             if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("When Mods Change")) {

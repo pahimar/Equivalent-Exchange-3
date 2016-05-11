@@ -11,6 +11,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 
+import java.io.IOException;
+
 public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageSetEnergyValue, IMessage>
 {
     public EnergyValueStackMapping energyValueStackMapping;
@@ -37,7 +39,12 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
 
         if (compressedEnergyValueStackMapping != null)
         {
-            String decompressedEnergyValueStackMapping = CompressionHelper.decompressStringFromByteArray(compressedEnergyValueStackMapping);
+            String decompressedEnergyValueStackMapping = null;
+            try {
+                decompressedEnergyValueStackMapping = CompressionHelper.decompress(compressedEnergyValueStackMapping);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             this.energyValueStackMapping = EnergyValueStackMapping.createFromJson(decompressedEnergyValueStackMapping);
         }
     }
@@ -51,7 +58,11 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
 
         if (jsonEnergyValueStackMapping != null)
         {
-            compressedBytes = CompressionHelper.compressStringToByteArray(jsonEnergyValueStackMapping);
+            try {
+                compressedBytes = CompressionHelper.compress(jsonEnergyValueStackMapping);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (compressedBytes != null)

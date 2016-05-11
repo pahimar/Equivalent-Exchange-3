@@ -1,47 +1,33 @@
 package com.pahimar.ee3.util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class CompressionHelper
 {
-    public static byte[] compressStringToByteArray(String uncompressedString)
-    {
+    public static byte[] compress(String uncompressedString) throws IOException {
+
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        GZIPOutputStream gzipOutputStream;
-        try
-        {
-            gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
-            gzipOutputStream.write(uncompressedString.getBytes("UTF-8"));
-            gzipOutputStream.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
+        gzipOutputStream.write(uncompressedString.getBytes(StandardCharsets.UTF_8));
+        gzipOutputStream.close();
 
         return byteArrayOutputStream.toByteArray();
     }
 
-    public static String decompressStringFromByteArray(byte[] compressedString)
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-        try
-        {
-            GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(compressedString));
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(gzipInputStream, "UTF-8"));
+    public static String decompress(byte[] compressedString) throws IOException {
 
-            String line;
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                stringBuilder.append(line);
-            }
+        GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(compressedString));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(gzipInputStream, StandardCharsets.UTF_8));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
         return stringBuilder.toString();
     }
 }

@@ -270,7 +270,7 @@ public class SerializationHelper
     {
         try
         {
-            byte[] energyValueRegistryArray = CompressionHelper.compressStringToByteArray(EnergyValueRegistry.getInstance().toJson());
+            byte[] energyValueRegistryArray = CompressionHelper.compress(EnergyValueRegistry.getInstance().toJson());
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(energyValueRegistryArray);
             fos.close();
@@ -301,7 +301,7 @@ public class SerializationHelper
 
         try
         {
-            String jsonEnergyValueStackMap = CompressionHelper.decompressStringFromByteArray(Files.toByteArray(file));
+            String jsonEnergyValueStackMap = CompressionHelper.decompress(Files.toByteArray(file));
             JsonReader jsonReader = new JsonReader(new StringReader(jsonEnergyValueStackMap));
             jsonReader.beginArray();
             while (jsonReader.hasNext())
