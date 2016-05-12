@@ -1,26 +1,42 @@
 package com.pahimar.ee3.util;
 
 import com.google.common.io.Files;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
+import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.util.serialize.FluidStackSerializer;
+import com.pahimar.ee3.util.serialize.ItemStackSerializer;
+import com.pahimar.ee3.util.serialize.OreStackSerializer;
+import com.pahimar.ee3.util.serialize.WrappedStackSerializer;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
 import java.util.*;
 
-public class SerializationHelper
-{
+public class SerializationHelper {
+
+    public static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .enableComplexMapKeySerialization()
+            .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
+            .registerTypeAdapter(OreStack.class, new OreStackSerializer())
+            .registerTypeAdapter(FluidStack.class, new FluidStackSerializer())
+            .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
+            .create();
+
     private static File instanceDataDirectory;
     private static File instancePlayerDataDirectory;
 
@@ -74,66 +90,6 @@ public class SerializationHelper
         }
 
         return DigestUtils.md5Hex(modListString.toString());
-    }
-
-    public static NBTTagCompound readNBTFromFile(File nbtEncodedFile)
-    {
-        if (nbtEncodedFile.exists() && nbtEncodedFile.isFile())
-        {
-            try
-            {
-                return CompressedStreamTools.readCompressed(new FileInputStream(nbtEncodedFile));
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-    }
-
-    public static void writeNBTToFile(File directory, String fileName, INBTTaggable nbtTaggable)
-    {
-        writeNBTToFile(directory, fileName, nbtTaggable, false);
-    }
-
-    public static void writeNBTToFile(File directory, String fileName, INBTTaggable nbtTaggable, boolean verboseLogging)
-    {
-        if (directory != null && fileName != null && nbtTaggable != null)
-        {
-            if (!directory.exists())
-            {
-                directory.mkdirs();
-            }
-
-            NBTTagCompound nbtTagCompound = new NBTTagCompound();
-            nbtTaggable.writeToNBT(nbtTagCompound);
-
-            try
-            {
-                File file1 = new File(directory, fileName + ".tmp");
-                File file2 = new File(directory, fileName);
-                CompressedStreamTools.writeCompressed(nbtTagCompound, new FileOutputStream(file1));
-
-                if (file2.exists())
-                {
-                    file2.delete();
-                }
-
-                file1.renameTo(file2);
-
-                if (verboseLogging)
-                {
-                    LogHelper.info("Successfully saved {} to file: {}", nbtTaggable.getTagLabel(), file2.getAbsolutePath());
-                }
-            }
-            catch (Exception exception)
-            {
-                LogHelper.warn("Failed to save {} to file: {}{}{}", nbtTaggable.getTagLabel(), directory.getAbsolutePath(), File.separator, fileName);
-                exception.printStackTrace();
-            }
-        }
     }
 
     public static TransmutationKnowledge readTransmutationKnowledgeFromFile(File directory, String fileName)

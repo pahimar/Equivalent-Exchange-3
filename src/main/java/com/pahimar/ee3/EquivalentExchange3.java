@@ -1,10 +1,10 @@
 package com.pahimar.ee3;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
-import com.pahimar.ee3.exchange.*;
+import com.pahimar.ee3.exchange.CachedOreDictionary;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.NewEnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -22,10 +22,6 @@ import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import com.pahimar.ee3.util.TileEntityDataHelper;
-import com.pahimar.ee3.util.serialize.FluidStackSerializer;
-import com.pahimar.ee3.util.serialize.ItemStackSerializer;
-import com.pahimar.ee3.util.serialize.OreStackSerializer;
-import com.pahimar.ee3.util.serialize.WrappedStackSerializer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -33,8 +29,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,13 +41,6 @@ public class EquivalentExchange3
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
-
-    public static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
-            .registerTypeAdapter(OreStack.class, new OreStackSerializer())
-            .registerTypeAdapter(FluidStack.class, new FluidStackSerializer())
-            .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
-            .create();
 
     @EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)

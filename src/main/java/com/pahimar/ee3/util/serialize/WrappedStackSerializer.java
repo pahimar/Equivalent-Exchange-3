@@ -3,6 +3,7 @@ package com.pahimar.ee3.util.serialize;
 import com.google.gson.*;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -17,12 +18,11 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
 
         if (json.isJsonObject()) {
 
-            JsonObject jsonObject = (JsonObject) json;
+            JsonObject jsonObject = json.getAsJsonObject();
 
             String type = null;
             int stackSize = Integer.MIN_VALUE;
-            String data = null;
-
+            JsonObject data = null;
 
             try {
                 if (jsonObject.get("type").getAsJsonPrimitive().isString()) {
@@ -41,8 +41,8 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
             }
 
             try {
-                if (jsonObject.get("data").getAsJsonPrimitive().isString()) {
-                    data = jsonObject.get("data").getAsString();
+                if (jsonObject.get("data").isJsonObject()) {
+                    data = jsonObject.getAsJsonObject("data");
                 }
             }
             catch (IllegalStateException exception) {
@@ -50,8 +50,28 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
 
             if ("itemstack".equalsIgnoreCase(type) || "orestack".equalsIgnoreCase(type) || "fluidstack".equalsIgnoreCase(type)) {
                 if (stackSize >= 1) {
-                    // TODO PICK UP HERE
-                    // TODO ALSO LOOK INTO MOVING THESE ALL INTO SerializationHelper
+
+                    if ("itemstack".equalsIgnoreCase(type)) {
+                        ItemStack itemStack = SerializationHelper.GSON.fromJson(data, ItemStack.class);
+
+                        if (itemStack != null) {
+                            return WrappedStack.wrap(itemStack, stackSize);
+                        }
+                    }
+                    else if ("orestack".equalsIgnoreCase(type)) {
+                        OreStack oreStack = SerializationHelper.GSON.fromJson(data, OreStack.class);
+
+                        if (oreStack != null) {
+                            return WrappedStack.wrap(oreStack, stackSize);
+                        }
+                    }
+                    else if ("fluidstack".equalsIgnoreCase(type)) {
+                        FluidStack fluidStack = SerializationHelper.GSON.fromJson(data, FluidStack.class);
+
+                        if (fluidStack != null) {
+                            return WrappedStack.wrap(fluidStack, stackSize);
+                        }
+                    }
                 }
             }
         }
