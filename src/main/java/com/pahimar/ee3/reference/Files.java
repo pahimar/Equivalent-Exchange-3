@@ -1,5 +1,6 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.exchange.NewEnergyValueRegistry;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
@@ -12,11 +13,10 @@ public class Files {
     public static final String ENERGY_VALUES_JSON = "energy-values.json";
 
     public static File dataDirectory;
-    public static File energyValuesDataDirectory;
+
     public static File abilitiesDataDirectory;
     public static File knowledgeDataDirectory;
 
-    public static File energyValuesDataFile;
     public static File abilitiesDataFile;
     public static File knowledgeDataFile;
 
@@ -24,9 +24,9 @@ public class Files {
 
         dataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
 
-        energyValuesDataDirectory = new File(dataDirectory, "energy-values");
-        energyValuesDataDirectory.mkdirs();
-        energyValuesDataFile = new File(energyValuesDataDirectory, ENERGY_VALUES_JSON);
+        NewEnergyValueRegistry.energyValuesDataDirectory = new File(dataDirectory, "energy-values");
+        NewEnergyValueRegistry.energyValuesDataDirectory.mkdirs();
+        NewEnergyValueRegistry.energyValuesDataFile = new File(NewEnergyValueRegistry.energyValuesDataDirectory, ENERGY_VALUES_JSON);
 
         abilitiesDataDirectory = new File(dataDirectory, "abilities");
         abilitiesDataDirectory.mkdirs();

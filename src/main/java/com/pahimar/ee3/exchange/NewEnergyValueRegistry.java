@@ -2,8 +2,8 @@ package com.pahimar.ee3.exchange;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,10 +22,13 @@ public class NewEnergyValueRegistry implements JsonSerializer<NewEnergyValueRegi
 
     public static final Marker ENERGY_VALUE_MARKER = MarkerManager.getMarker("EE3_ENERGY_VALUE", LogHelper.MOD_MARKER);
     public static final NewEnergyValueRegistry INSTANCE = new NewEnergyValueRegistry();
-    private static final Type ENERGY_VALUE_MAP_TYPE = new TypeToken<Map<WrappedStack, EnergyValue>>(){}.getType();
+    public static final Type ENERGY_VALUE_MAP_TYPE = new TypeToken<Map<WrappedStack, EnergyValue>>(){}.getType();
 
     private final Map<WrappedStack, EnergyValue> preCalculationMappings;
     private final Map<WrappedStack, EnergyValue> postCalculationMappings;
+
+    public static File energyValuesDataDirectory;
+    public static File energyValuesDataFile;
 
     private NewEnergyValueRegistry() {
         preCalculationMappings = new TreeMap<>();
@@ -39,8 +42,7 @@ public class NewEnergyValueRegistry implements JsonSerializer<NewEnergyValueRegi
     }
 
     public String toJson() {
-        // FIXME This shouldn't be a new object all the time - we should be using an instance of a single serializer
-        return new GsonBuilder().setPrettyPrinting().registerTypeAdapter(NewEnergyValueRegistry.class, new NewEnergyValueRegistry()).create().toJson(this);
+        return EquivalentExchange3.GSON.toJson(this);
     }
 
     /**
@@ -48,8 +50,7 @@ public class NewEnergyValueRegistry implements JsonSerializer<NewEnergyValueRegi
      */
     public void save() throws IOException {
 
-        // TODO We should probably keep the references to the energy value data dir and file in this class and not in Files. You know, anti-patterns and stuff.
-        File file = Files.energyValuesDataFile;
+        File file = energyValuesDataFile;
         File tempFile = new File(file.getAbsolutePath() + "_tmp");
 
         if (tempFile.exists()) {
@@ -96,8 +97,8 @@ public class NewEnergyValueRegistry implements JsonSerializer<NewEnergyValueRegi
     public JsonElement serialize(NewEnergyValueRegistry src, Type typeOfSrc, JsonSerializationContext context) {
 
         JsonObject jsonRegistry = new JsonObject();
-        jsonRegistry.add("pre_calculation_value_mappings", context.serialize(src.preCalculationMappings, ENERGY_VALUE_MAP_TYPE));       // TODO String constant for property name
-        jsonRegistry.add("post_calculation_value_mappings", context.serialize(src.postCalculationMappings, ENERGY_VALUE_MAP_TYPE));     // TODO String constant for property name
+        jsonRegistry.add("pre_calculation_value_mappings", context.serialize(src.preCalculationMappings));       // TODO String constant for property name
+        jsonRegistry.add("post_calculation_value_mappings", context.serialize(src.postCalculationMappings));     // TODO String constant for property name
         return jsonRegistry;
     }
 }
