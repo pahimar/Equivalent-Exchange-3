@@ -12,60 +12,61 @@ import java.lang.reflect.Type;
 
 public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeserializer<ItemStack> {
 
-    // TODO String constants for property names
+    private static final String NAME = "name";
+    private static final String META_VALUE = "metaValue";
+    private static final String TAG_COMPOUND = "tagCompound";
 
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
         if (json.isJsonObject()) {
-            JsonObject jsonObject = (JsonObject) json;
+            JsonObject jsonObject = json.getAsJsonObject();
 
-            String itemName = null;
-            int itemDamage = Integer.MIN_VALUE;
-            NBTTagCompound nbtTagCompound = null;
+            String name = null;
+            int metaValue = 0;
+            NBTTagCompound tagCompound = null;
 
             try {
-                if (jsonObject.get("itemName").getAsJsonPrimitive().isString()) {
-                    itemName = jsonObject.get("itemName").getAsString();
+                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                    name = jsonObject.get(NAME).getAsString();
                 }
             }
             catch (IllegalStateException exception) {
+                // TODO We could probably log here that an invalid piece of data was found
             }
 
             try {
-                if (jsonObject.get("itemDamage").getAsJsonPrimitive().isNumber()) {
-                    itemDamage = jsonObject.get("itemDamage").getAsInt();
+                if (jsonObject.has(META_VALUE) && jsonObject.get(META_VALUE).getAsJsonPrimitive().isNumber()) {
+                    metaValue = jsonObject.get(META_VALUE).getAsInt();
                 }
             }
             catch (IllegalStateException exception) {
+                // TODO We could probably log here that an invalid piece of data was found
             }
 
             try {
-                if (jsonObject.get("itemTagCompound").getAsJsonPrimitive().isString()) {
+                if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).getAsJsonPrimitive().isString()) {
 
-                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get("itemTagCompound").getAsString());
+                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get(TAG_COMPOUND).getAsString());
                     if (nbtBase instanceof NBTTagCompound) {
-                        nbtTagCompound = (NBTTagCompound) nbtBase;
+                        tagCompound = (NBTTagCompound) nbtBase;
                     }
                 }
-            }
-            catch (IllegalStateException exception) {
             }
             catch (NBTException e) {
             }
+            catch (IllegalStateException exception) {
+                // TODO We could probably log here that an invalid piece of data was found
+            }
 
-            if (itemName != null) {
-                Item item = (Item) Item.itemRegistry.getObject(itemName);
+            if (name != null) {
+                Item item = (Item) Item.itemRegistry.getObject(name);
 
                 if (item != null) {
-                    ItemStack itemStack = new ItemStack((Item) Item.itemRegistry.getObject(itemName));
+                    ItemStack itemStack = new ItemStack((Item) Item.itemRegistry.getObject(name), 1, metaValue);
 
-                    if (itemDamage >= 0) {
-                        itemStack.setItemDamage(itemDamage);
-                    }
-
-                    if (nbtTagCompound != null) {
-                        itemStack.setTagCompound(nbtTagCompound);
+                    if (tagCompound != null) {
+                        itemStack.setTagCompound(tagCompound);
                     }
 
                     return itemStack;
@@ -82,10 +83,14 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
         if (src != null) {
             JsonObject jsonObject = new JsonObject();
 
-            jsonObject.addProperty("itemName", Item.itemRegistry.getNameForObject(src.getItem()));
-            jsonObject.addProperty("itemDamage", src.getItemDamage());
+            jsonObject.addProperty(NAME, Item.itemRegistry.getNameForObject(src.getItem()));
+
+            if (src.getItemDamage() != 0) {
+                jsonObject.addProperty(META_VALUE, src.getItemDamage());
+            }
+
             if (src.getTagCompound() != null) {
-                jsonObject.addProperty("itemTagCompound", src.getTagCompound().toString());
+                jsonObject.addProperty(TAG_COMPOUND, src.getTagCompound().toString());
             }
 
             return jsonObject;

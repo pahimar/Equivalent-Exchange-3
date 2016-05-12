@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 
 public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeserializer<OreStack> {
 
-    // TODO String constants for property names
+    private static final String NAME = "name";
 
     @Override
     public OreStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -16,9 +16,9 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
             JsonObject jsonObject = (JsonObject) json;
 
             try {
-                if (jsonObject.get("oreName").getAsJsonPrimitive().isString()) {
-                    String oreName = jsonObject.get("oreName").getAsString();
-                    return new OreStack(oreName);
+                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                    String name = jsonObject.get(NAME).getAsString();
+                    return new OreStack(name);
                 }
             }
             catch (IllegalStateException exception) {
@@ -34,7 +34,7 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
 
         if (src != null) {
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("oreName", src.oreName);
+            jsonObject.addProperty(NAME, src.oreName);
             return jsonObject;
         }
 

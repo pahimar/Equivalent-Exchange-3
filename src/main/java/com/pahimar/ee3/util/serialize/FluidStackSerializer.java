@@ -13,39 +13,32 @@ import java.lang.reflect.Type;
 
 public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDeserializer<FluidStack> {
 
-    // TODO String constants for property names
+    private static final String NAME = "name";
+    private static final String TAG_COMPOUND = "tagCompound";
 
     @Override
     public FluidStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
         if (json.isJsonObject()) {
-            JsonObject jsonObject = (JsonObject) json;
+            JsonObject jsonObject = json.getAsJsonObject();
 
-            String fluidName = null;
-            int fluidAmount = Integer.MIN_VALUE;
-            NBTTagCompound nbtTagCompound = null;
+            String name = null;
+            NBTTagCompound tagCompound = null;
 
             try {
-                if (jsonObject.get("fluidName").getAsJsonPrimitive().isString()) {
-                    fluidName = jsonObject.get("fluidName").getAsString();
+                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                    name = jsonObject.get(NAME).getAsString();
                 }
             }
             catch (IllegalStateException exception) {
             }
 
             try {
-                if (jsonObject.get("fluidAmount").getAsJsonPrimitive().isNumber()) {
-                    fluidAmount = jsonObject.get("fluidAmount").getAsInt();
-                }
-            }
-            catch (IllegalStateException exception) {
-            }
+                if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).getAsJsonPrimitive().isString()) {
 
-            try {
-                if (jsonObject.get("fluidTagCompound").getAsJsonPrimitive().isString()) {
-
-                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get("fluidTagCompound").getAsString());
+                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get(TAG_COMPOUND).getAsString());
                     if (nbtBase instanceof NBTTagCompound) {
-                        nbtTagCompound = (NBTTagCompound) nbtBase;
+                        tagCompound = (NBTTagCompound) nbtBase;
                     }
                 }
             }
@@ -54,14 +47,14 @@ public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDes
             catch (NBTException e) {
             }
 
-            if (fluidName != null) {
-                Fluid fluid = FluidRegistry.getFluid(fluidName);
+            if (name != null) {
+                Fluid fluid = FluidRegistry.getFluid(name);
 
-                if (fluid != null && fluidAmount >= 0) {
-                    FluidStack fluidStack = new FluidStack(fluid, fluidAmount);
+                if (fluid != null) {
+                    FluidStack fluidStack = new FluidStack(fluid, 1);
 
-                    if (nbtTagCompound != null) {
-                        fluidStack.tag = nbtTagCompound;
+                    if (tagCompound != null) {
+                        fluidStack.tag = tagCompound;
                     }
 
                     return fluidStack;
@@ -78,10 +71,9 @@ public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDes
         if (src != null) {
             JsonObject jsonObject = new JsonObject();
 
-            jsonObject.addProperty("fluidName", src.getFluid().getName());
-            jsonObject.addProperty("fluidAmount", src.amount);
+            jsonObject.addProperty(NAME, src.getFluid().getName());
             if (src.tag != null) {
-                jsonObject.addProperty("fluidTagCompound", src.tag.toString());
+                jsonObject.addProperty(TAG_COMPOUND, src.tag.toString());
             }
 
             return jsonObject;

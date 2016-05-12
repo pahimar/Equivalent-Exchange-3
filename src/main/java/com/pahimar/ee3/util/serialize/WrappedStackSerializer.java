@@ -11,7 +11,11 @@ import java.lang.reflect.Type;
 
 public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, JsonDeserializer<WrappedStack> {
 
-    // TODO String constants for property names
+    private static final String DATA = "data";
+    private static final String TYPE = "type";
+    private static final String TYPE_ITEMSTACK = "itemstack";
+    private static final String TYPE_ORESTACK = "orestack";
+    private static final String TYPE_FLUIDSTACK = "fluidstack";
 
     @Override
     public WrappedStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -21,56 +25,39 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
             JsonObject jsonObject = json.getAsJsonObject();
 
             String type = null;
-            int stackSize = Integer.MIN_VALUE;
-            JsonObject data = null;
 
             try {
-                if (jsonObject.get("type").getAsJsonPrimitive().isString()) {
-                    type = jsonObject.get("type").getAsString();
+                if (jsonObject.get(TYPE).getAsJsonPrimitive().isString()) {
+                    type = jsonObject.get(TYPE).getAsString();
                 }
             }
             catch (IllegalStateException exception) {
             }
 
-            try {
-                if (jsonObject.get("stackSize").getAsJsonPrimitive().isNumber()) {
-                    stackSize = jsonObject.get("stackSize").getAsInt();
-                }
-            }
-            catch (IllegalStateException exception) {
-            }
+            // TODO COME BACK HERE AND MAKE THIS CLEANER FOR THE SAKE OF PACK DEVS AND USERS ALIKE
 
-            try {
-                if (jsonObject.get("data").isJsonObject()) {
-                    data = jsonObject.getAsJsonObject("data");
-                }
-            }
-            catch (IllegalStateException exception) {
-            }
+            if (jsonObject.get(DATA).isJsonObject()) {
+                JsonObject data = jsonObject.getAsJsonObject(DATA);
 
-            if ("itemstack".equalsIgnoreCase(type) || "orestack".equalsIgnoreCase(type) || "fluidstack".equalsIgnoreCase(type)) {
-                if (stackSize >= 1) {
+                if (TYPE_ITEMSTACK.equalsIgnoreCase(type)) {
+                    ItemStack itemStack = SerializationHelper.GSON.fromJson(data, ItemStack.class);
 
-                    if ("itemstack".equalsIgnoreCase(type)) {
-                        ItemStack itemStack = SerializationHelper.GSON.fromJson(data, ItemStack.class);
-
-                        if (itemStack != null) {
-                            return WrappedStack.wrap(itemStack, stackSize);
-                        }
+                    if (itemStack != null) {
+                        return WrappedStack.wrap(itemStack);
                     }
-                    else if ("orestack".equalsIgnoreCase(type)) {
-                        OreStack oreStack = SerializationHelper.GSON.fromJson(data, OreStack.class);
+                }
+                else if (TYPE_ORESTACK.equalsIgnoreCase(type)) {
+                    OreStack oreStack = SerializationHelper.GSON.fromJson(data, OreStack.class);
 
-                        if (oreStack != null) {
-                            return WrappedStack.wrap(oreStack, stackSize);
-                        }
+                    if (oreStack != null) {
+                        return WrappedStack.wrap(oreStack);
                     }
-                    else if ("fluidstack".equalsIgnoreCase(type)) {
-                        FluidStack fluidStack = SerializationHelper.GSON.fromJson(data, FluidStack.class);
+                }
+                else if (TYPE_FLUIDSTACK.equalsIgnoreCase(type)) {
+                    FluidStack fluidStack = SerializationHelper.GSON.fromJson(data, FluidStack.class);
 
-                        if (fluidStack != null) {
-                            return WrappedStack.wrap(fluidStack, stackSize);
-                        }
+                    if (fluidStack != null) {
+                        return WrappedStack.wrap(fluidStack);
                     }
                 }
             }
@@ -84,11 +71,8 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
 
         final JsonObject jsonObject = new JsonObject();
 
-        if (src.getWrappedObject() instanceof ItemStack || src.getWrappedObject() instanceof OreStack || src.getWrappedObject() instanceof FluidStack) {
-            jsonObject.addProperty("type", src.getWrappedObject().getClass().getSimpleName().toLowerCase());
-            jsonObject.add("data", context.serialize(src.getWrappedObject()));
-            jsonObject.addProperty("stackSize", src.getStackSize());
-
+        if (src != null && src.getWrappedObject() != null) {
+            jsonObject.add(src.getWrappedObject().getClass().getSimpleName().toLowerCase(), context.serialize(src.getWrappedObject()));
             return jsonObject;
         }
 

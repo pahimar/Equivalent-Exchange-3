@@ -1,6 +1,5 @@
 package com.pahimar.ee3.exchange;
 
-import com.google.common.reflect.TypeToken;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -13,7 +12,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,7 +19,6 @@ public class NewEnergyValueRegistry {
 
     public static final Marker ENERGY_VALUE_MARKER = MarkerManager.getMarker("EE3_ENERGY_VALUE", LogHelper.MOD_MARKER);
     public static final NewEnergyValueRegistry INSTANCE = new NewEnergyValueRegistry();
-    public static final Type ENERGY_VALUE_MAP_TYPE = new TypeToken<Map<WrappedStack, EnergyValue>>(){}.getType();
 
     public final Map<WrappedStack, EnergyValue> preCalculationMappings;
     public final Map<WrappedStack, EnergyValue> postCalculationMappings;
