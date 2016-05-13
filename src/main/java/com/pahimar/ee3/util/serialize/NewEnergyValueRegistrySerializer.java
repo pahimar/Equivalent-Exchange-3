@@ -16,6 +16,7 @@ public class NewEnergyValueRegistrySerializer implements JsonSerializer<NewEnerg
 
     @Override
     public NewEnergyValueRegistry deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        // TODO This
         return null;
     }
 

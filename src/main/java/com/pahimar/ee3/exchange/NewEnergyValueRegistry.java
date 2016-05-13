@@ -3,14 +3,12 @@ package com.pahimar.ee3.exchange;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,6 +26,14 @@ public class NewEnergyValueRegistry {
     private NewEnergyValueRegistry() {
 
         preCalculationMappings = new TreeMap<>();
+
+        // Loading up some dummy values for testing serialization
+        preCalculationMappings.put(WrappedStack.wrap(Items.apple), new EnergyValue(1));
+        preCalculationMappings.put(WrappedStack.wrap(Items.arrow), new EnergyValue(2));
+        preCalculationMappings.put(WrappedStack.wrap(Items.baked_potato), new EnergyValue(3));
+        preCalculationMappings.put(WrappedStack.wrap(Items.bed), new EnergyValue(4));
+        preCalculationMappings.put(WrappedStack.wrap(new OreStack("oreIron")), new EnergyValue(5));
+
         postCalculationMappings = new TreeMap<>();
     }
 
@@ -65,5 +71,26 @@ public class NewEnergyValueRegistry {
 
     public void load() {
 
+        File file = energyValuesDataFile;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+
+            stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String jsonRegistryString = stringBuilder.toString();
+        LogHelper.info(jsonRegistryString);
+
+        NewEnergyValueRegistry newEnergyValueRegistry = SerializationHelper.GSON.fromJson(jsonRegistryString, NewEnergyValueRegistry.class);
+
+        LogHelper.info(newEnergyValueRegistry);
     }
 }

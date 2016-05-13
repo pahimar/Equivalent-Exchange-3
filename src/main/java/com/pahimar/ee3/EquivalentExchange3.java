@@ -121,6 +121,8 @@ public class EquivalentExchange3
         CachedOreDictionary.getInstance();
         Abilities.initNotLearnables();
 
+        NewEnergyValueRegistry.INSTANCE.load();
+
         try {
             NewEnergyValueRegistry.INSTANCE.save();
         } catch (IOException e) {
