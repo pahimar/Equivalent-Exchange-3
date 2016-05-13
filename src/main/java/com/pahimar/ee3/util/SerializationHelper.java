@@ -6,16 +6,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.EnergyValueStackMapping;
-import com.pahimar.ee3.exchange.OreStack;
-import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.exchange.*;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.util.serialize.FluidStackSerializer;
-import com.pahimar.ee3.util.serialize.ItemStackSerializer;
-import com.pahimar.ee3.util.serialize.OreStackSerializer;
-import com.pahimar.ee3.util.serialize.WrappedStackSerializer;
+import com.pahimar.ee3.util.serialize.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
@@ -35,6 +29,7 @@ public class SerializationHelper {
             .registerTypeAdapter(OreStack.class, new OreStackSerializer())
             .registerTypeAdapter(FluidStack.class, new FluidStackSerializer())
             .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
+            .registerTypeAdapter(NewEnergyValueRegistry.class, new NewEnergyValueRegistrySerializer())
             .create();
 
     private static File instanceDataDirectory;

@@ -3,7 +3,6 @@ package com.pahimar.ee3.exchange;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
@@ -27,20 +26,12 @@ public class NewEnergyValueRegistry {
     public static File energyValuesDataFile;
 
     private NewEnergyValueRegistry() {
+
         preCalculationMappings = new TreeMap<>();
-        // Loading up some dummy values for testing serialization
-        preCalculationMappings.put(WrappedStack.wrap(Items.apple), new EnergyValue(1));
-        preCalculationMappings.put(WrappedStack.wrap(Items.arrow), new EnergyValue(2));
-        preCalculationMappings.put(WrappedStack.wrap(Items.baked_potato), new EnergyValue(3));
-        preCalculationMappings.put(WrappedStack.wrap(Items.bed), new EnergyValue(4));
-        preCalculationMappings.put(WrappedStack.wrap(new OreStack("oreIron")), new EnergyValue(5));
-
-
         postCalculationMappings = new TreeMap<>();
     }
 
     public String toJson() {
-        LogHelper.info(SerializationHelper.GSON.toJson(this));
         return SerializationHelper.GSON.toJson(this);
     }
 
