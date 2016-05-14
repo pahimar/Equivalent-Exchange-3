@@ -16,15 +16,20 @@ import org.apache.logging.log4j.MarkerManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class NewEnergyValueRegistry {
 
     public static final NewEnergyValueRegistry INSTANCE = new NewEnergyValueRegistry();
 
     private ImmutableSortedMap<WrappedStack, EnergyValue> energyValueMap;
+
+    // TODO Should we have API values and files loaded from file as separate maps (runtime vs file)
     private final Map<WrappedStack, EnergyValue> preCalculationValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationValueMap;
+    private transient SortedSet<WrappedStack> uncomputedStacks;
 
     public static File energyValuesDirectory;
     public static File energyValuesFile;
@@ -117,6 +122,33 @@ public class NewEnergyValueRegistry {
         }
     }
 
+    public void compute() {
+
+        // TODO Should we load in values from file?
+
+        // Initialize the "working copy" energy value map
+        TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<>();
+        uncomputedStacks = new TreeSet<>();
+
+        // Add in all pre-calculation energy value mappings
+        // TODO Should we be extra vigilant about possible nulls here?
+        stackValueMap.putAll(preCalculationValueMap);
+
+        // Calculate values from the known methods to create items, and the pre-calculation value mappings
+        // TODO Re-implement DynEMC here
+
+        // Add in all post-calculation energy value mappings
+        // TODO Should we be extra vigilant about possible nulls here?
+        stackValueMap.putAll(postCalculationValueMap);
+
+        // Bake the final calculated energy value map
+        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+        stackMappingsBuilder.putAll(stackValueMap);
+        energyValueMap = stackMappingsBuilder.build();
+
+        // TODO Should we save the results to file now?
+    }
+
     /**
      * Saves the pre-calculation, post-calculation, and calculated energy value maps to disk
      */
@@ -135,14 +167,12 @@ public class NewEnergyValueRegistry {
     public void load() {
 
         try {
-            preCalculationValueMap.clear();
             preCalculationValueMap.putAll(SerializationHelper.readFromJsonFile(preCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no pre-calculation values were loaded from file because file wasn't found
         }
 
         try {
-            postCalculationValueMap.clear();
             postCalculationValueMap.putAll(SerializationHelper.readFromJsonFile(postCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no pre-calculation values were loaded from file because file wasn't found
