@@ -52,19 +52,46 @@ public class NewEnergyValueRegistry {
         preCalculationValueMap.put(WrappedStack.wrap(new ItemStack(Items.chainmail_boots, 1, 2)), new EnergyValue(8));
     }
 
+    /**
+     * Returns an {@link ImmutableMap} containing the current energy value mappings
+     *
+     * @return an {@link ImmutableMap} containing the current energy value mappings
+     */
     public ImmutableMap<WrappedStack, EnergyValue> getEnergyValues() {
         return energyValueMap;
     }
 
+    /**
+     * Returns a {@link Map} containing the pre-calculation energy value mappings
+     *
+     * @return a {link Map} containing the pre-calculation energy value mappings
+     */
     public Map<WrappedStack, EnergyValue> getPreCalculationValueMap() {
         return preCalculationValueMap;
     }
 
+    /**
+     * Returns a {@link Map} containing the post-calculation energy value mappings
+     *
+     * @return a {link Map} containing the post-calculation energy value mappings
+     */
     public Map<WrappedStack, EnergyValue> getPostCalculationValueMap() {
         return postCalculationValueMap;
     }
 
-    public void set(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment) {
+    /**
+     * Sets an {@link EnergyValue} for the provided {@link Object} (if it can be wrapped in a {@link WrappedStack}.
+     * Depending on whether or not this is a pre-calculation value assignment it's also possible for the calculated
+     * energy value map to be recomputed to take into account the new mapping.
+     *
+     * @param object the object the energy value is being assigned for
+     * @param energyValue the energy value being set on the object
+     * @param isPreCalculationAssignment whether or not the calculated energy value assignment is a pre-calculation
+     *                                   value assignment or not
+     * @param doRegenValues whether or not the energy value map needs recomputing. Only an option if
+     *                      <code>isPreCalculationAssignment</code> is true
+     */
+    public void set(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment, boolean doRegenValues) {
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
 
@@ -72,30 +99,39 @@ public class NewEnergyValueRegistry {
             EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
 
             if (isPreCalculationAssignment) {
-                if (preCalculationValueMap.containsKey(wrappedStack) && factoredEnergyValue.compareTo(preCalculationValueMap.get(wrappedStack)) < 0) {
-                    preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
-                }
-                else {
-                    preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+                preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+
+                if (doRegenValues) {
+                    // TODO Regen values
                 }
             }
             else {
-                if (postCalculationValueMap.containsKey(wrappedStack) && factoredEnergyValue.compareTo(postCalculationValueMap.get(wrappedStack)) < 0) {
-                    postCalculationValueMap.put(wrappedStack, factoredEnergyValue);
-                }
-                else {
-                    postCalculationValueMap.put(wrappedStack, factoredEnergyValue);
-                }
+
+                TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(energyValueMap);
+                valueMap.put(wrappedStack, energyValue);
+                ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
+                energyValueMap = stackMappingsBuilder.putAll(valueMap).build();
+
+                postCalculationValueMap.put(wrappedStack, factoredEnergyValue);
             }
         }
     }
 
+    /**
+     * Saves the pre-calculation, post-calculation, and calculated energy value maps to disk
+     */
     public void save() {
         SerializationHelper.writeToJsonFile(energyValueMap, energyValuesFile);
         SerializationHelper.writeToJsonFile(preCalculationValueMap, preCalculationValuesFile);
         SerializationHelper.writeToJsonFile(postCalculationValueMap, postCalculationValuesFile);
     }
 
+    /**
+     * Loads the pre-calculation, post-calculation, and calculated energy value maps from disk. In the event that either
+     * the pre/post calculation maps can not be loaded from disk they will be initialized as empty maps. If the
+     * calculated energy value map can not be loaded from disk then the values will be computed from the pre/post
+     * calculation maps
+     */
     public void load() {
 
         try {
