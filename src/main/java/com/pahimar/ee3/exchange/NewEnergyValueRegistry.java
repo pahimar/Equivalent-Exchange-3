@@ -26,7 +26,6 @@ public class NewEnergyValueRegistry {
 
     private ImmutableSortedMap<WrappedStack, EnergyValue> energyValueMap;
 
-    // TODO Should we have API values and files loaded from file as separate maps (runtime vs file)
     private final Map<WrappedStack, EnergyValue> preCalculationValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationValueMap;
     private transient SortedSet<WrappedStack> uncomputedStacks;
@@ -107,7 +106,7 @@ public class NewEnergyValueRegistry {
                 preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
 
                 if (doRegenValues) {
-                    // TODO Regen values
+                    compute();
                 }
             }
             else {
@@ -122,31 +121,35 @@ public class NewEnergyValueRegistry {
         }
     }
 
+    /**
+     * This is where the magic happens
+     */
     public void compute() {
-
-        // TODO Should we load in values from file?
 
         // Initialize the "working copy" energy value map
         TreeMap<WrappedStack, EnergyValue> stackValueMap = new TreeMap<>();
         uncomputedStacks = new TreeSet<>();
 
         // Add in all pre-calculation energy value mappings
-        // TODO Should we be extra vigilant about possible nulls here?
-        stackValueMap.putAll(preCalculationValueMap);
+        preCalculationValueMap.keySet().stream()
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && preCalculationValueMap.get(wrappedStack) != null)
+                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
         // TODO Re-implement DynEMC here
 
         // Add in all post-calculation energy value mappings
-        // TODO Should we be extra vigilant about possible nulls here?
-        stackValueMap.putAll(postCalculationValueMap);
+        postCalculationValueMap.keySet().stream()
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && postCalculationValueMap.get(wrappedStack) != null)
+                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, postCalculationValueMap.get(wrappedStack)));
 
         // Bake the final calculated energy value map
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
         energyValueMap = stackMappingsBuilder.build();
 
-        // TODO Should we save the results to file now?
+        // Save the results to disk
+        save();
     }
 
     /**
@@ -175,7 +178,7 @@ public class NewEnergyValueRegistry {
         try {
             postCalculationValueMap.putAll(SerializationHelper.readFromJsonFile(postCalculationValuesFile));
         } catch (FileNotFoundException e) {
-            // TODO Log that no pre-calculation values were loaded from file because file wasn't found
+            // TODO Log that no post-calculation values were loaded from file because file wasn't found
         }
 
         try {
@@ -183,8 +186,8 @@ public class NewEnergyValueRegistry {
             energyValueMapBuilder.putAll(SerializationHelper.readFromJsonFile(energyValuesFile));
             energyValueMap = energyValueMapBuilder.build();
         } catch (FileNotFoundException e) {
-            LogHelper.warn("No calculated energy value file found, regenerating");
-            // TODO Gen new values from the loaded pre/post value maps
+            LogHelper.warn("No calculated energy value file found, regenerating"); // TODO Better log message
+            compute();
         }
     }
 }

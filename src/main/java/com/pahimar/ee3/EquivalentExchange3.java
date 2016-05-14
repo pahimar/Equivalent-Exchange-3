@@ -119,8 +119,6 @@ public class EquivalentExchange3
     {
         CachedOreDictionary.getInstance();
         Abilities.initNotLearnables();
-
-        NewEnergyValueRegistry.INSTANCE.save();
         NewEnergyValueRegistry.INSTANCE.load();
     }
 
@@ -130,6 +128,7 @@ public class EquivalentExchange3
         WorldEventHandler.hasInitilialized = false;
 
         EnergyValueRegistry.getInstance().save();
+        NewEnergyValueRegistry.INSTANCE.save();
         TransmutationKnowledgeRegistry.getInstance().clear();
         AbilityRegistry.getInstance().save();
     }
