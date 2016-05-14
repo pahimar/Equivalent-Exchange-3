@@ -6,11 +6,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import java.io.File;
 
 public class Files {
+
+    public static final String ENERGY_VALUES_JSON = "energy-values.json";
     public static final String PRE_CALCULATION_ENERGY_VALUES = "pre-calculation-energy-values.json";
     public static final String POST_CALCULATION_ENERGY_VALUES = "post-calculation-energy-values.json";
+
     public static final String TEMPLATE_JSON_FILE = "template.json";
     public static final String ABILITIES_JSON_FILE = "abilities.json";
-    public static final String ENERGY_VALUES_JSON = "energy-values.json";
 
     public static File dataDirectory;
 
@@ -24,9 +26,11 @@ public class Files {
 
         dataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
 
-        NewEnergyValueRegistry.energyValuesDataDirectory = new File(dataDirectory, "energy-values");
-        NewEnergyValueRegistry.energyValuesDataDirectory.mkdirs();
-        NewEnergyValueRegistry.energyValuesDataFile = new File(NewEnergyValueRegistry.energyValuesDataDirectory, ENERGY_VALUES_JSON);
+        NewEnergyValueRegistry.energyValuesDirectory = new File(dataDirectory, "energy-values");
+        NewEnergyValueRegistry.energyValuesDirectory.mkdirs();
+        NewEnergyValueRegistry.energyValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, ENERGY_VALUES_JSON);
+        NewEnergyValueRegistry.preCalculationValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, PRE_CALCULATION_ENERGY_VALUES);
+        NewEnergyValueRegistry.postCalculationValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, POST_CALCULATION_ENERGY_VALUES);
 
         abilitiesDataDirectory = new File(dataDirectory, "abilities");
         abilitiesDataDirectory.mkdirs();

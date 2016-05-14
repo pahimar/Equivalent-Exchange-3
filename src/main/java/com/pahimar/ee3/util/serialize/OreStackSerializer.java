@@ -16,7 +16,7 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
             JsonObject jsonObject = (JsonObject) json;
 
             try {
-                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
                     String name = jsonObject.get(NAME).getAsString();
                     return new OreStack(name);
                 }

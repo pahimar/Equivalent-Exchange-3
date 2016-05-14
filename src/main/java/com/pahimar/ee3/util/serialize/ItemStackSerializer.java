@@ -27,7 +27,7 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
             NBTTagCompound tagCompound = null;
 
             try {
-                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
                     name = jsonObject.get(NAME).getAsString();
                 }
             }

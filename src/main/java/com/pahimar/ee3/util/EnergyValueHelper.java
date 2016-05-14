@@ -99,15 +99,15 @@ public class EnergyValueHelper
             }
         }
 
-        return factorEnergyValue(new EnergyValue(computedValue), outputStack.getStackSize());
+        return factor(new EnergyValue(computedValue), outputStack.getStackSize());
     }
 
-    public static EnergyValue factorEnergyValue(EnergyValue energyValue, int factor)
+    public static EnergyValue factor(EnergyValue energyValue, int factor)
     {
-        return factorEnergyValue(energyValue, (float) factor);
+        return factor(energyValue, (float) factor);
     }
 
-    public static EnergyValue factorEnergyValue(EnergyValue energyValue, float factor)
+    public static EnergyValue factor(EnergyValue energyValue, float factor)
     {
         if ((Float.compare(factor, 0f) != 0) && (energyValue != null))
         {

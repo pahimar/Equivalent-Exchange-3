@@ -515,10 +515,11 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         if (wrappedStack instanceof ItemStack)
         {
             ItemStack itemStack = (ItemStack) wrappedStack;
-            String unlocalizedName = "";
+            String unlocalizedName;
             try
             {
-                unlocalizedName = itemStack.getUnlocalizedName();
+//                unlocalizedName = itemStack.getUnlocalizedName();
+                unlocalizedName = Item.itemRegistry.getNameForObject(itemStack.getItem());
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
@@ -537,12 +538,12 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         else if (wrappedStack instanceof OreStack)
         {
             OreStack oreStack = (OreStack) wrappedStack;
-            return String.format("%sxoreStack.%s", stackSize, oreStack.oreName);
+            return String.format("%sxoreStack[%s]", stackSize, oreStack.oreName);
         }
         else if (wrappedStack instanceof FluidStack)
         {
             FluidStack fluidStack = (FluidStack) wrappedStack;
-            return String.format("%sxfluidStack.%s", stackSize, fluidStack.getFluid().getName());
+            return String.format("%sxfluidStack[%s]", stackSize, fluidStack.getFluid().getName());
         }
         else
         {

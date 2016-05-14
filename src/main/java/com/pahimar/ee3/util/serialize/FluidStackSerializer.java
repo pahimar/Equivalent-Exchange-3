@@ -26,7 +26,7 @@ public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDes
             NBTTagCompound tagCompound = null;
 
             try {
-                if (jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
+                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
                     name = jsonObject.get(NAME).getAsString();
                 }
             }

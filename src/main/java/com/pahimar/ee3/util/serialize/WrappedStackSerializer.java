@@ -34,8 +34,6 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
             catch (IllegalStateException exception) {
             }
 
-            // TODO COME BACK HERE AND MAKE THIS CLEANER FOR THE SAKE OF PACK DEVS AND USERS ALIKE
-
             if (jsonObject.get(DATA).isJsonObject()) {
                 JsonObject data = jsonObject.getAsJsonObject(DATA);
 

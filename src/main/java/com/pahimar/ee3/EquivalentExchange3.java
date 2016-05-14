@@ -31,7 +31,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import java.io.File;
-import java.io.IOException;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class EquivalentExchange3
@@ -121,13 +120,8 @@ public class EquivalentExchange3
         CachedOreDictionary.getInstance();
         Abilities.initNotLearnables();
 
+        NewEnergyValueRegistry.INSTANCE.save();
         NewEnergyValueRegistry.INSTANCE.load();
-
-        try {
-            NewEnergyValueRegistry.INSTANCE.save();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @EventHandler

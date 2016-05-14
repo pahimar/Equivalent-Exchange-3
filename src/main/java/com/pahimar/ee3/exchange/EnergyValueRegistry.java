@@ -75,7 +75,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             if (wrappedStack.getStackSize() > 0)
             {
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
-                EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
+                EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
 
                 if (preCalculationMappings.containsKey(factoredWrappedStack))
                 {
@@ -113,7 +113,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             if (wrappedStack.getStackSize() > 0)
             {
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
-                EnergyValue factoredEnergyValue = EnergyValueHelper.factorEnergyValue(energyValue, wrappedStack.getStackSize());
+                EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
 
                 LogHelper.trace(POST_CALC_MARKER, "[{}] Mod with ID '{}' set a post-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
                 postCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
@@ -416,7 +416,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 {
                     if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getValue(), 0f) > 0)
                     {
-                        factoredExchangeEnergyValue = EnergyValueHelper.factorEnergyValue(computedStackValues.get(keyStack), keyStack.getStackSize());
+                        factoredExchangeEnergyValue = EnergyValueHelper.factor(computedStackValues.get(keyStack), keyStack.getStackSize());
                         factoredKeyStack = WrappedStack.wrap(keyStack, 1);
                     }
                 }

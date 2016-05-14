@@ -22,6 +22,10 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         this.energyValue = energyValue;
     }
 
+    public EnergyValue(Number energyValue) {
+        this.energyValue = energyValue.floatValue();
+    }
+
     @Override
     public boolean equals(Object object)
     {
@@ -96,7 +100,6 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
      * @param jsonEnergyValue Json encoded String representing a EmcValue object
      * @return The EmcValue that was encoded as json, or null if a valid EmcValue could not be decoded from given String
      */
-    @SuppressWarnings("unused")
     public static EnergyValue createFromJson(String jsonEnergyValue)
     {
         try
@@ -181,5 +184,12 @@ public final class EnergyValue implements Comparable<EnergyValue>, JsonDeseriali
         jsonEnergyValue.addProperty("value", energyValueObject.energyValue);
 
         return jsonEnergyValue;
+    }
+
+    public enum Phase {
+        PRE_CALCULATION,
+        POST_CALCULATION,
+        RUNTIME,
+        ALL
     }
 }
