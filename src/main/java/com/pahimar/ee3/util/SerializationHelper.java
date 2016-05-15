@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
@@ -19,7 +18,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -185,70 +183,6 @@ public class SerializationHelper {
         }
 
         return energyValueStackMap;
-    }
-
-    /**
-     *  @see net.minecraft.nbt.CompressedStreamTools#safeWrite(NBTTagCompound, File)
-     */
-    public static void writeToJsonFile(Map<WrappedStack, EnergyValue> valueMap, File file) {
-
-        File tempFile = new File(file.getAbsolutePath() + "_tmp");
-
-        if (tempFile.exists()) {
-            tempFile.delete();
-        }
-
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
-
-            bufferedWriter.write(SerializationHelper.GSON.toJson(valueMap, ENERGY_VALUE_MAP_TYPE));
-            bufferedWriter.close();
-        }
-        catch (IOException exception) {
-            exception.printStackTrace(); // TODO Better logging of the exception
-        }
-
-        if (file.exists()) {
-            file.delete();
-        }
-
-        if (file.exists()) {
-            LogHelper.warn("Failed to delete " + file);
-        }
-        else {
-            tempFile.renameTo(file);
-        }
-    }
-
-    public static Map<WrappedStack, EnergyValue> readFromJsonFile(File file) throws FileNotFoundException {
-
-        Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
-
-        StringBuilder jsonStringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-
-            jsonStringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                jsonStringBuilder.append(line);
-            }
-        }
-        catch (IOException exception) {
-            if (exception instanceof FileNotFoundException) {
-                throw (FileNotFoundException) exception;
-            }
-            else {
-                exception.printStackTrace(); // TODO Better logging of the exception (other)
-            }
-        }
-
-        try {
-            valueMap = SerializationHelper.GSON.fromJson(jsonStringBuilder.toString(), ENERGY_VALUE_MAP_TYPE);
-        }
-        catch (JsonParseException exception) {
-            // TODO Better logging of the exception (failed parsing so no values loaded)
-        }
-
-        return valueMap;
     }
 
     public static void writeEnergyValueStackMapToJsonFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)

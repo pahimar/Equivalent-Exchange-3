@@ -1,6 +1,7 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
@@ -12,8 +13,42 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-public class EnergyValueHelper
-{
+public class EnergyValueHelper {
+
+    // FIXME Priority Number 1 here
+    public static EnergyValue getEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Object object, boolean strict) {
+
+        /**
+         * Priority of checking goes
+         * 1 - IEnergyValueProvider implementation
+         * 2 - Exact match
+         * 3 - If the object is an ItemStack, various checks in the OreDictionary
+         *      THINK ON THIS BECAUSE THIS LOGIC COULD BE FAULTY FOR COMPUTATION PURPOSES
+         *          1 - Does the parent OreStack have a non-null value
+         *          2 - Do all sibling members have the same non-null value
+         *          3 - Does there exist a wildcard value mapping with a value
+         * 4 - If the object is an OreStack, check all child ItemStacks to see if they have the same (not null) value
+         */
+        if (WrappedStack.canBeWrapped(object)) {
+
+            if (object instanceof ItemStack && ((ItemStack) object).getItem() instanceof IEnergyValueProvider && !strict) {
+
+            }
+            else if (valueMap != null) {
+                WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
+
+                if (valueMap.containsKey(wrappedObject)) {
+                    return valueMap.get(wrappedObject);
+                }
+                else if (!strict) {
+
+                }
+            }
+        }
+
+        return null;
+    }
+
     public static EnergyValue computeEnergyValueFromRecipe(Map<WrappedStack, EnergyValue> stackValueMappings, WrappedStack outputStack, List<WrappedStack> inputStacks)
     {
         float computedValue = 0f;

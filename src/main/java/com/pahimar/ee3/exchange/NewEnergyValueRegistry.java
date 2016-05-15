@@ -2,19 +2,20 @@ package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
+import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -83,19 +84,51 @@ public class NewEnergyValueRegistry {
         return postCalculationValueMap;
     }
 
+    public boolean hasEnergyValue(Object object) {
+        return hasEnergyValue(object, false);
+    }
+
+    public boolean hasEnergyValue(Object object, boolean strict) {
+        // TODO This
+        return false;
+    }
+
+    public EnergyValue getEnergyValue(Object object) {
+        return getEnergyValue(object, false);
+    }
+
+    public EnergyValue getEnergyValue(Object object, boolean strict) {
+        // TODO This
+        return null;
+    }
+
     /**
      * Sets an {@link EnergyValue} for the provided {@link Object} (if it can be wrapped in a {@link WrappedStack}.
      * Depending on whether or not this is a pre-calculation value assignment it's also possible for the calculated
      * energy value map to be recomputed to take into account the new mapping.
      *
      * @param object the object the energy value is being assigned for
-     * @param energyValue the energy value being set on the object
+     * @param energyValue the energy value being setEnergyValue on the object
+     * @param isPreCalculationAssignment whether or not the calculated energy value assignment is a pre-calculation
+     *                                   value assignment or not
+     */
+    public void setEnergyValue(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment) {
+        setEnergyValue(object, energyValue, isPreCalculationAssignment, false);
+    }
+
+    /**
+     * Sets an {@link EnergyValue} for the provided {@link Object} (if it can be wrapped in a {@link WrappedStack}.
+     * Depending on whether or not this is a pre-calculation value assignment it's also possible for the calculated
+     * energy value map to be recomputed to take into account the new mapping.
+     *
+     * @param object the object the energy value is being assigned for
+     * @param energyValue the energy value being setEnergyValue on the object
      * @param isPreCalculationAssignment whether or not the calculated energy value assignment is a pre-calculation
      *                                   value assignment or not
      * @param doRegenValues whether or not the energy value map needs recomputing. Only an option if
      *                      <code>isPreCalculationAssignment</code> is true
      */
-    public void set(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment, boolean doRegenValues) {
+    public void setEnergyValue(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment, boolean doRegenValues) {
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
 
@@ -185,9 +218,9 @@ public class NewEnergyValueRegistry {
      * Saves the pre-calculation, post-calculation, and calculated energy value maps to disk
      */
     public void save() {
-        SerializationHelper.writeToJsonFile(energyValueMap, energyValuesFile);
-        SerializationHelper.writeToJsonFile(preCalculationValueMap, preCalculationValuesFile);
-        SerializationHelper.writeToJsonFile(postCalculationValueMap, postCalculationValuesFile);
+        writeToJsonFile(energyValueMap, energyValuesFile);
+        writeToJsonFile(preCalculationValueMap, preCalculationValuesFile);
+        writeToJsonFile(postCalculationValueMap, postCalculationValuesFile);
     }
 
     /**
@@ -199,24 +232,88 @@ public class NewEnergyValueRegistry {
     public void load() {
 
         try {
-            preCalculationValueMap.putAll(SerializationHelper.readFromJsonFile(preCalculationValuesFile));
+            preCalculationValueMap.putAll(readFromJsonFile(preCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no pre-calculation values were loaded from file because file wasn't found
         }
 
         try {
-            postCalculationValueMap.putAll(SerializationHelper.readFromJsonFile(postCalculationValuesFile));
+            postCalculationValueMap.putAll(readFromJsonFile(postCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no post-calculation values were loaded from file because file wasn't found
         }
 
         try {
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> energyValueMapBuilder = ImmutableSortedMap.naturalOrder();
-            energyValueMapBuilder.putAll(SerializationHelper.readFromJsonFile(energyValuesFile));
+            energyValueMapBuilder.putAll(readFromJsonFile(energyValuesFile));
             energyValueMap = energyValueMapBuilder.build();
         } catch (FileNotFoundException e) {
             LogHelper.warn("No calculated energy value file found, regenerating"); // TODO Better log message
             compute();
         }
+    }
+
+    /**
+     *  @see net.minecraft.nbt.CompressedStreamTools#safeWrite(NBTTagCompound, File)
+     */
+    private static void writeToJsonFile(Map<WrappedStack, EnergyValue> valueMap, File file) {
+
+        File tempFile = new File(file.getAbsolutePath() + "_tmp");
+
+        if (tempFile.exists()) {
+            tempFile.delete();
+        }
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
+
+            bufferedWriter.write(SerializationHelper.GSON.toJson(valueMap, SerializationHelper.ENERGY_VALUE_MAP_TYPE));
+            bufferedWriter.close();
+        }
+        catch (IOException exception) {
+            exception.printStackTrace(); // TODO Better logging of the exception
+        }
+
+        if (file.exists()) {
+            file.delete();
+        }
+
+        if (file.exists()) {
+            LogHelper.warn("Failed to delete " + file);
+        }
+        else {
+            tempFile.renameTo(file);
+        }
+    }
+
+    private static Map<WrappedStack, EnergyValue> readFromJsonFile(File file) throws FileNotFoundException {
+
+        Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
+
+        StringBuilder jsonStringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+
+            jsonStringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                jsonStringBuilder.append(line);
+            }
+        }
+        catch (IOException exception) {
+            if (exception instanceof FileNotFoundException) {
+                throw (FileNotFoundException) exception;
+            }
+            else {
+                exception.printStackTrace(); // TODO Better logging of the exception (other)
+            }
+        }
+
+        try {
+            valueMap = SerializationHelper.GSON.fromJson(jsonStringBuilder.toString(), SerializationHelper.ENERGY_VALUE_MAP_TYPE);
+        }
+        catch (JsonParseException exception) {
+            // TODO Better logging of the exception (failed parsing so no values loaded)
+        }
+
+        return valueMap;
     }
 }

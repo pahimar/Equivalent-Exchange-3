@@ -81,13 +81,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 {
                     if (factoredEnergyValue.compareTo(preCalculationMappings.get(factoredWrappedStack)) < 0)
                     {
-                        LogHelper.trace(PRE_CALC_MARKER, "[{}] Mod with ID '{}' set a pre-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
+                        LogHelper.trace(PRE_CALC_MARKER, "[{}] Mod with ID '{}' setEnergyValue a pre-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
                         preCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
                     }
                 }
                 else
                 {
-                    LogHelper.trace(PRE_CALC_MARKER, "[{}] Mod with ID '{}' set a pre-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
+                    LogHelper.trace(PRE_CALC_MARKER, "[{}] Mod with ID '{}' setEnergyValue a pre-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
                     preCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
                 }
             }
@@ -115,7 +115,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
                 EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
 
-                LogHelper.trace(POST_CALC_MARKER, "[{}] Mod with ID '{}' set a post-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
+                LogHelper.trace(POST_CALC_MARKER, "[{}] Mod with ID '{}' setEnergyValue a post-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
                 postCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
             }
         }
@@ -208,8 +208,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 }
                 else if (!strict)
                 {
-                    if (wrappedObject instanceof ItemStack)
-                    {
+                    if (wrappedObject instanceof ItemStack) {
                         EnergyValue lowestValue = null;
                         ItemStack wrappedItemStack = (ItemStack) wrappedObject;
 

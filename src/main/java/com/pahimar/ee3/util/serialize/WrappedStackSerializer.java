@@ -18,6 +18,7 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
     private static final String TYPE_FLUIDSTACK = "fluidstack";
 
     @Override
+    // TODO Update deserialize to match up with new serialize method implementation
     public WrappedStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
         if (json.isJsonObject()) {
