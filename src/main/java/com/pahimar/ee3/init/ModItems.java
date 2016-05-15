@@ -56,17 +56,17 @@ public class ModItems
         GameRegistry.registerItem(knowledgeScroll, Names.Items.KNOWLEDGE_SCROLL);
         GameRegistry.registerItem(potionLethe, Names.Items.POTION_LETHE);
 
-        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
-        GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
-        GameRegistry.registerItem(hammerDarkMatter, Names.Tools.DARK_MATTER_HAMMER);
-        GameRegistry.registerItem(axeDarkMatter, Names.Tools.DARK_MATTER_AXE);
-        GameRegistry.registerItem(hoeDarkMatter, Names.Tools.DARK_MATTER_HOE);
-        GameRegistry.registerItem(fishingRodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
-        GameRegistry.registerItem(shearsDarkMatter, Names.Tools.DARK_MATTER_SHEARS);
+//        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
+//        GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
+//        GameRegistry.registerItem(hammerDarkMatter, Names.Tools.DARK_MATTER_HAMMER);
+//        GameRegistry.registerItem(axeDarkMatter, Names.Tools.DARK_MATTER_AXE);
+//        GameRegistry.registerItem(hoeDarkMatter, Names.Tools.DARK_MATTER_HOE);
+//        GameRegistry.registerItem(fishingRodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
+//        GameRegistry.registerItem(shearsDarkMatter, Names.Tools.DARK_MATTER_SHEARS);
 
-        GameRegistry.registerItem(bowDarkMatter, Names.Weapons.DARK_MATTER_BOW);
-        GameRegistry.registerItem(arrowDarkMatter, Names.Weapons.DARK_MATTER_ARROW);
-        GameRegistry.registerItem(swordDarkMatter, Names.Weapons.DARK_MATTER_SWORD);
+//        GameRegistry.registerItem(bowDarkMatter, Names.Weapons.DARK_MATTER_BOW);
+//        GameRegistry.registerItem(arrowDarkMatter, Names.Weapons.DARK_MATTER_ARROW);
+//        GameRegistry.registerItem(swordDarkMatter, Names.Weapons.DARK_MATTER_SWORD);
 
         // Helm
         // Chest

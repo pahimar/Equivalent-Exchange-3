@@ -136,7 +136,7 @@ public class NewEnergyValueRegistry {
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
-        // TODO Re-implement DynEMC here
+        calculate();
 
         // Add in all post-calculation energy value mappings
         postCalculationValueMap.keySet().stream()
@@ -150,6 +150,35 @@ public class NewEnergyValueRegistry {
 
         // Save the results to disk
         save();
+    }
+
+    private void calculate() {
+
+        Map<WrappedStack, EnergyValue> computedMap;
+        int passNumber, passComputed, totalComputed;
+        passNumber = passComputed = totalComputed = 0;
+        boolean firstPass = true;
+
+        LogHelper.info(ENERGY_VALUE_MARKER, "Beginning energy value calculation");
+        long startingTime = System.nanoTime();
+        while ((firstPass || passComputed > 0) && passNumber < 16) {
+
+            long passStartTime = System.nanoTime();
+            passNumber++;
+            passComputed = 0;
+            if (firstPass) {
+                firstPass = false;
+            }
+            long passDuration = System.nanoTime() - passStartTime;
+
+            // TODO Tie this extra logging into a debug config option
+            boolean debug = false;
+            if (debug) {
+                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} values for objects in {} ns", passNumber, passComputed, passDuration);
+            }
+        }
+        long endingTime = System.nanoTime() - startingTime;
+        LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", totalComputed, endingTime);
     }
 
     /**
