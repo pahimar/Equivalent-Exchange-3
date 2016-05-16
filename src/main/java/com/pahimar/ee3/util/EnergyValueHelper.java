@@ -175,7 +175,16 @@ public class EnergyValueHelper {
         return null;
     }
 
-    // FIXME PRIORITY NUMBER 1
+    // FIXME PRIORITY NUMBER 1 (Implement new method)
+    public static EnergyValue computeFromInputs(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, List<WrappedStack> wrappedInputs) {
+
+        EnergyValue computedEnergyValue = null;
+
+
+
+        return computedEnergyValue;
+    }
+
     public static EnergyValue computeEnergyValueFromRecipe(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, List<WrappedStack> wrappedInputs) {
 
         float computedValue = 0f;
