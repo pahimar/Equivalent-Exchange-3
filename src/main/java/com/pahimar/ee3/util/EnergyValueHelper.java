@@ -175,107 +175,109 @@ public class EnergyValueHelper {
         return null;
     }
 
-    public static EnergyValue computeEnergyValueFromRecipe(Map<WrappedStack, EnergyValue> stackValueMappings, WrappedStack outputStack, List<WrappedStack> inputStacks)
-    {
+    // FIXME PRIORITY NUMBER 1
+    public static EnergyValue computeEnergyValueFromRecipe(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, List<WrappedStack> wrappedInputs) {
+
         float computedValue = 0f;
 
-        for (WrappedStack wrappedStack : inputStacks)
-        {
-            EnergyValue wrappedStackValue;
+        // TODO We should do some verification that every input has an energy value - if not there is no point doing the calculation
+
+        /**
+         * Basic algorithm:
+         * Set sumOfInputValues to 0
+         * For every input, add (input's Unit Value) * (input's stackSize) to sumOfInputs
+         * return new EnergyValue(sumOfInputs / output's stackSize)
+         *
+         * Caveats are for ItemStacks that act as containers. You only want to catch the difference in values between
+         * pre-crafting and post-crafting
+         *
+         * e.g., A recipe that uses up the water in a bucket (empty bucket left) vs uses up the entire water bucket (nothing left)
+         */
+        for (WrappedStack wrappedInput : wrappedInputs) {
+
+            EnergyValue wrappedInputValue;
             int stackSize = -1;
-            if (wrappedStack.getWrappedObject() instanceof ItemStack)
-            {
-                ItemStack itemStack = (ItemStack) wrappedStack.getWrappedObject();
+
+            if (wrappedInput.getWrappedObject() instanceof ItemStack) {
+
+                ItemStack itemStack = (ItemStack) wrappedInput.getWrappedObject();
 
                 // Check if we are dealing with a potential fluid
-                if (FluidContainerRegistry.getFluidForFilledItem(itemStack) != null)
-                {
-                    if (itemStack.getItem().getContainerItem(itemStack) != null)
-                    {
-                        stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount * wrappedStack.getStackSize();
-                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, FluidContainerRegistry.getFluidForFilledItem(itemStack));
+                if (FluidContainerRegistry.getFluidForFilledItem(itemStack) != null) {
+
+                    if (itemStack.getItem().getContainerItem(itemStack) != null) {
+                        stackSize = FluidContainerRegistry.getFluidForFilledItem(itemStack).amount * wrappedInput.getStackSize();
+                        wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, FluidContainerRegistry.getFluidForFilledItem(itemStack));
                     }
-                    else
-                    {
-                        wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
+                    else {
+                        wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, wrappedInput);
                     }
                 }
-                else if (itemStack.getItem().getContainerItem(itemStack) != null)
-                {
+                else if (itemStack.getItem().getContainerItem(itemStack) != null) {
+
                     ItemStack containerItemStack = itemStack.getItem().getContainerItem(itemStack);
 
-                    if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && EnergyValueRegistry.getInstance().hasEnergyValue(containerItemStack))
-                    {
-                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, itemStack).getValue();
-                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, containerItemStack).getValue();
-                        wrappedStackValue = new EnergyValue(itemStackValue - containerStackValue);
+                    if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && EnergyValueRegistry.getInstance().hasEnergyValue(containerItemStack)) {
+                        float itemStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, itemStack).getValue();
+                        float containerStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, containerItemStack).getValue();
+                        wrappedInputValue = new EnergyValue(itemStackValue - containerStackValue);
                     }
-                    else
-                    {
-                        wrappedStackValue = new EnergyValue(0);
+                    else {
+                        wrappedInputValue = new EnergyValue(0);
                     }
                 }
-                else if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack))
-                {
-                    wrappedStackValue = new EnergyValue(0);
+                else if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
+                    wrappedInputValue = new EnergyValue(0);
                 }
-                else if (OreDictionary.getOreIDs(itemStack).length > 0)
-                {
-                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack, true);
+                else if (OreDictionary.getOreIDs(itemStack).length > 0) {
+                    wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, wrappedInput, true);
                 }
-                else
-                {
-                    wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
+                else {
+                    wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, wrappedInput);
                 }
             }
-            else if (wrappedStack.getWrappedObject() instanceof OreStack)
-            {
-                OreStack oreStack = (OreStack) wrappedStack.getWrappedObject();
-                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
+            else if (wrappedInput.getWrappedObject() instanceof OreStack) {
+
+                OreStack oreStack = (OreStack) wrappedInput.getWrappedObject();
+                wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, wrappedInput);
                 for (ItemStack itemStack : OreDictionary.getOres(oreStack.oreName))
                 {
                     if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack))
                     {
-                        wrappedStackValue = new EnergyValue(0);
+                        wrappedInputValue = new EnergyValue(0);
                     }
                 }
             }
-            else
-            {
-                wrappedStackValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(stackValueMappings, wrappedStack);
+            else {
+                wrappedInputValue = EnergyValueRegistry.getInstance().getEnergyValueFromMap(valueMap, wrappedInput);
             }
 
-            if (wrappedStackValue != null)
-            {
-                if (stackSize == -1)
-                {
-                    stackSize = wrappedStack.getStackSize();
+            if (wrappedInputValue != null) {
+
+                if (stackSize == -1) {
+                    stackSize = wrappedInput.getStackSize();
                 }
 
-                computedValue += wrappedStackValue.getValue() * stackSize;
+                computedValue += wrappedInputValue.getValue() * stackSize;
             }
-            else
-            {
+            else {
                 return null;
             }
         }
 
-        return factor(new EnergyValue(computedValue), outputStack.getStackSize());
+        return factor(new EnergyValue(computedValue), wrappedOutput.getStackSize());
     }
 
-    public static EnergyValue factor(EnergyValue energyValue, int factor)
-    {
+    public static EnergyValue factor(EnergyValue energyValue, int factor) {
         return factor(energyValue, (float) factor);
     }
 
-    public static EnergyValue factor(EnergyValue energyValue, float factor)
-    {
-        if ((Float.compare(factor, 0f) != 0) && (energyValue != null))
-        {
+    public static EnergyValue factor(EnergyValue energyValue, float factor) {
+
+        if ((Float.compare(factor, 0f) != 0) && (energyValue != null)) {
             return new EnergyValue(new BigDecimal(energyValue.getValue() * 1f / factor).setScale(3, BigDecimal.ROUND_HALF_EVEN).floatValue());
         }
-        else
-        {
+        else {
             return null;
         }
     }

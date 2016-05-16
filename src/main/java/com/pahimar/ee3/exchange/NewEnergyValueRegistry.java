@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -229,10 +230,8 @@ public class NewEnergyValueRegistry {
                 firstPass = false;
             }
             long passDuration = System.nanoTime() - passStartTime;
-
-            // TODO Tie this extra logging into a debug config option
-            boolean debug = false;
-            if (debug) {
+            
+            if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
                 LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} values for objects in {} ns", passNumber, passComputed, passDuration);
             }
         }
