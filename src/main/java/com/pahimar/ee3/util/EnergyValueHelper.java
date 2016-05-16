@@ -5,6 +5,7 @@ import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -41,7 +42,34 @@ public class EnergyValueHelper {
                     return valueMap.get(wrappedObject);
                 }
                 else if (!strict) {
+                    // Search for wildcard entries first
+                    // Then search for possible OreStack value
+                    // Then search for possible sibling OreStack values
+                    if (object instanceof ItemStack) {
 
+                        ItemStack unValuedItemStack = ItemStack.copyItemStack((ItemStack) object);
+                        EnergyValue minEnergyValue = null;
+
+                        for (WrappedStack valuedWrappedStack : valueMap.keySet()) {
+                            if (valuedWrappedStack.getWrappedObject() instanceof ItemStack) {
+                                if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getWrappedObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
+
+                                    ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getWrappedObject();
+                                    if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || unValuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+
+                                        EnergyValue energyValue = valueMap.get(valuedWrappedStack);
+
+                                        if (energyValue.compareTo(minEnergyValue) < 0) {
+                                            minEnergyValue = energyValue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (object instanceof OreStack) {
+
+                    }
                 }
             }
         }
