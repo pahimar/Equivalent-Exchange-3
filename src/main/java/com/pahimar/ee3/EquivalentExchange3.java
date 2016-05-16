@@ -16,7 +16,6 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.test.EnergyValueMappingsTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -61,7 +60,7 @@ public class EquivalentExchange3
 
         TransmutationKnowledgeRegistry.getInstance();
 
-        AbilityRegistry.getInstance().loadAbilityRegistryFromFile(Settings.Abilities.onlyLoadFile);
+        AbilityRegistry.getInstance().loadAbilityRegistryFromFile(ConfigurationHandler.Settings.onlyLoadFile);
 
         event.registerServerCommand(new CommandEE());
     }

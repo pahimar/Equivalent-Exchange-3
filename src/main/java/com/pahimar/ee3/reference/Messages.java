@@ -110,20 +110,5 @@ public final class Messages {
 
     public static final class Configuration {
 
-        public static final String GENERAL_SYNC_THRESHOLD = "sync.threshold";
-        public static final String GENERAL_SYNC_THRESHOLD_LABEL = "general.sync.threshold.label";
-        public static final String GENERAL_SYNC_THRESHOLD_COMMENT = "general.sync.threshold.comment";
-
-        public static final String SOUND_MODE = "soundMode";
-        public static final String SOUND_MODE_LABEL = "general.sound.soundMode.label";
-        public static final String SOUND_MODE_COMMENT = "general.sound.soundMode.comment";
-
-        public static final String ABILITIES_ONLY_LOAD_FILE = "abilities.onlyLoadFile";
-        public static final String ABILITIES_ONLY_LOAD_FILE_LABEL = "general.abilities.onlyLoadFile.label";
-        public static final String ABILITIES_ONLY_LOAD_FILE_COMMENT = "general.abilities.onlyLoadFile.comment";
-
-        public static final String REGENERATE_ENERGYVALUES_WHEN = "energyvalues.regenerateEnergyValuesWhen";
-        public static final String REGENERATE_ENERGYVALUES_WHEN_LABEL = "general.energyvalues.regenerateEnergyValuesWhen.label";
-        public static final String REGENERATE_ENERGYVALUES_WHEN_COMMENT = "general.energyvalues.regenerateEnergyValuesWhen.comment";
     }
 }

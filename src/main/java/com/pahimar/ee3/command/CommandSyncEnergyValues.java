@@ -1,11 +1,11 @@
 package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -50,13 +50,13 @@ public class CommandSyncEnergyValues extends CommandBase
         if (requesterMap.containsKey(commandSenderUUID))
         {
             long timeDifference = System.currentTimeMillis() - requesterMap.get(commandSenderUUID).longValue();
-            if (timeDifference >= (Settings.General.syncThreshold * 1000))
+            if (timeDifference >= (ConfigurationHandler.Settings.serverSyncThreshold * 1000))
             {
                 requesterMap.remove(commandSenderUUID);
             }
             else
             {
-                coolDown = (Settings.General.syncThreshold * 1000) - timeDifference;
+                coolDown = (ConfigurationHandler.Settings.serverSyncThreshold * 1000) - timeDifference;
                 shouldSync = false;
             }
         }

@@ -1,15 +1,19 @@
-# Configuration
-general.sync.threshold.label=Sync Threshold
-general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
+# Configuration (Energy Value Options)
+energy_value=Energy Value Options
+energy_value.sync_threshold.label=Sync Threshold
+energy_value.sync_threshold.comment=The number of seconds a player must wait before they can sync their energy values for objects with the server again
+energy_value.regenerate_when.label=Regenerate EnergyValues
+energy_value.regenerate_when.comment=When to regenerate energy values for objects. Options are "Always" (every time Minecraft starts) or "As Needed" (whenever the mod cannot the calculated energy values file).
+energy_value.debug_logging_enabled.label=Enable Debug Logging
+energy_value.debug_logging_enabled.comment=Additional debug logging for when energy values are calculated for objects
 
-general.sound.soundMode.label=Sounds
-general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
+# Configuration (Sound Options)
+sound=Sound Options
+sound.mode.label=Play Sounds Only From
+sound.mode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' does not play any mod sounds
 
 general.abilities.onlyLoadFile.label=Only load Abilities file
 general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
-
-general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
-general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3

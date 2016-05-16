@@ -5,10 +5,10 @@ import com.google.gson.*;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
+import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.reference.Settings;
 import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -730,13 +730,13 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         loadFromFile(new File(Files.Global.dataDirectory, Files.ENERGY_VALUES_JSON));
 
-        if (!Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Always")) {
-            if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("When Mods Change")) {
+        if (!ConfigurationHandler.Settings.regenerateEnergyValuesWhen.equalsIgnoreCase("Always")) {
+            if (ConfigurationHandler.Settings.regenerateEnergyValuesWhen.equalsIgnoreCase("When Mods Change")) {
                 if (md5EnergyValuesFile.exists()) {
                     LogHelper.info(ENERGY_VALUE_MARKER, "Attempting to load energy values from file: {}", md5EnergyValuesFile.getAbsolutePath());
                     stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(md5EnergyValuesFile);
                 }
-            } else if (Settings.DynamicEnergyValueGeneration.regenerateEnergyValuesWhen.equalsIgnoreCase("Never")) {
+            } else if (ConfigurationHandler.Settings.regenerateEnergyValuesWhen.equalsIgnoreCase("Never")) {
                 if (staticEnergyValuesFile.exists()) {
                     LogHelper.info(ENERGY_VALUE_MARKER, "Attempting to load energy values from file: {}", staticEnergyValuesFile.getAbsolutePath());
                     stackValueMap = SerializationHelper.decompressEnergyValueStackMapFromFile(staticEnergyValuesFile);

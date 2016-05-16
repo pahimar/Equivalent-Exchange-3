@@ -78,28 +78,54 @@ public class NewEnergyValueRegistry {
     /**
      * Returns a {@link Map} containing the post-calculation energy value mappings
      *
-     * @return a {link Map} containing the post-calculation energy value mappings
+     * @return a {@link Map} containing the post-calculation energy value mappings
      */
     public Map<WrappedStack, EnergyValue> getPostCalculationValueMap() {
         return postCalculationValueMap;
     }
 
+    /**
+     * Checks if there exists an {@link EnergyValue} associated with the provided {@link Object}.
+     *
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @return true if the provided object has an energy value, false otherwise
+     */
     public boolean hasEnergyValue(Object object) {
         return hasEnergyValue(object, false);
     }
 
+    /**
+     * Checks if there exists an {@link EnergyValue} associated with the provided {@link Object}
+     *
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @param strict whether this is a strict (e.g., only looking for direct value assignment vs associative value
+     *               assignments) query or not
+     * @return true if the provided object has an energy value, false otherwise
+     */
     public boolean hasEnergyValue(Object object, boolean strict) {
-        // TODO This
-        return false;
+        return getEnergyValue(object, strict) != null;
     }
 
+    /**
+     * Returns an {@link EnergyValue} associated with the provided {@link Object} (if there is one)
+     *
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @return an {@link EnergyValue} if there is one to be found, null otherwise
+     */
     public EnergyValue getEnergyValue(Object object) {
         return getEnergyValue(object, false);
     }
 
+    /**
+     * Returns an {@link EnergyValue} associated with the provided {@link Object} (if there is one)
+     *
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @param strict whether this is a strict (e.g., only looking for direct value assignment vs associative value
+     *               assignments) query or not
+     * @return an {@link EnergyValue} if there is one to be found, null otherwise
+     */
     public EnergyValue getEnergyValue(Object object, boolean strict) {
-        // TODO This
-        return null;
+        return EnergyValueHelper.getEnergyValue(energyValueMap, object, strict);
     }
 
     /**

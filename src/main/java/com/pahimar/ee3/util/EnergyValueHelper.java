@@ -16,59 +16,157 @@ import java.util.Map;
 
 public class EnergyValueHelper {
 
-    // FIXME Priority Number 1 here
+    /**
+     * Returns an {@link EnergyValue} for a {@link Object} in the provided {@link Map>} of {@link WrappedStack}s mapped
+     * to EnergyValues
+     *
+     * <p>The order of checking is as follows;</p>
+     * <ol>
+     *     <li>{@link ItemStack}s whose {@link Item}s implement {@link IEnergyValueProvider}</li>
+     *     <li>Direct EnergyValue mapping of the provided Object in the provided Map</li>
+     *     <li>The following criteria are only checked (in order) in the event that this is a non-strict query;
+     *         <ol>
+     *             <li>
+     *                 ItemStacks that are part of an {@link OreDictionary} entry are checked to see if
+     *                 <strong>all</strong> Ores they are registered to have the same non-null EnergyValue assigned to
+     *                 it
+     *                     <ul>
+     *                         <li>
+     *                             e.g., ItemStack X is associated with OreDictionary entries A, B and C. An EnergyValue
+     *                             would be returned for X only if A, B and C all had the same non-null EnergyValue
+     *                         </li>
+     *                     </ul>
+     *             </li>
+     *             <li>
+     *                 ItemStacks are checked to see if there exist {@link OreDictionary#WILDCARD_VALUE} equivalents
+     *             </li>
+     *             <li>
+     *                 {@link OreStack}s are checked to see if all members of the OreDictionary entry represented by the
+     *                 OreStack have the same non-null EnergyValue (similar to the case for ItemStacks above)
+     *             </li>
+     *         </ol>
+     *     </li>
+     * </ol>
+     *
+     * @param valueMap a {@link Map} of {@link EnergyValue}'s mapped to {@link WrappedStack}'s
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @param strict whether this is a strict (e.g., only looking for direct value assignment vs associative value
+     *               assignments) query or not
+     * @return an {@link EnergyValue} if there is one to be found for the provided {@link Object} in the provided Map, null otherwise
+     */
     public static EnergyValue getEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Object object, boolean strict) {
 
-        /**
-         * Priority of checking goes
-         * 1 - IEnergyValueProvider implementation
-         * 2 - Exact match
-         * 3 - If the object is an ItemStack, various checks in the OreDictionary
-         *      THINK ON THIS BECAUSE THIS LOGIC COULD BE FAULTY FOR COMPUTATION PURPOSES
-         *          1 - Does the parent OreStack have a non-null value
-         *          2 - Do all sibling members have the same non-null value
-         *          3 - Does there exist a wildcard value mapping with a value
-         * 4 - If the object is an OreStack, check all child ItemStacks to see if they have the same (not null) value
-         */
         if (WrappedStack.canBeWrapped(object)) {
 
-            if (object instanceof ItemStack && ((ItemStack) object).getItem() instanceof IEnergyValueProvider && !strict) {
+            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            Object wrappedObject = wrappedStack.getWrappedObject();
 
+            if (wrappedObject instanceof ItemStack && ((ItemStack) wrappedObject).getItem() instanceof IEnergyValueProvider && !strict) {
+
+                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) wrappedObject).getItem()).getEnergyValue(((ItemStack) wrappedObject));
+
+                if (energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
+                    return energyValue;
+                }
             }
-            else if (valueMap != null) {
-                WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
 
-                if (valueMap.containsKey(wrappedObject)) {
-                    return valueMap.get(wrappedObject);
+            if (valueMap != null && !valueMap.isEmpty()) {
+
+                // First check for a direct energy value mapping to the wrapped object
+                if (valueMap.containsKey(wrappedStack)) {
+                    return valueMap.get(wrappedStack);
                 }
                 else if (!strict) {
-                    // Search for wildcard entries first
-                    // Then search for possible OreStack value
-                    // Then search for possible sibling OreStack values
-                    if (object instanceof ItemStack) {
 
-                        ItemStack unValuedItemStack = ItemStack.copyItemStack((ItemStack) object);
+                    if (wrappedObject instanceof ItemStack) {
+
+                        ItemStack unValuedItemStack = ItemStack.copyItemStack((ItemStack) wrappedObject);
                         EnergyValue minEnergyValue = null;
 
-                        for (WrappedStack valuedWrappedStack : valueMap.keySet()) {
-                            if (valuedWrappedStack.getWrappedObject() instanceof ItemStack) {
-                                if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getWrappedObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
+                        int[] oreIds = OreDictionary.getOreIDs(unValuedItemStack);
+                        if (oreIds.length > 0) {
 
-                                    ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getWrappedObject();
-                                    if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || unValuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+                            EnergyValue energyValue = null;
+                            boolean allHaveSameValue = true;
 
-                                        EnergyValue energyValue = valueMap.get(valuedWrappedStack);
+                            for (int oreId : oreIds) {
+                                String oreName = OreDictionary.getOreName(oreId);
 
-                                        if (energyValue.compareTo(minEnergyValue) < 0) {
-                                            minEnergyValue = energyValue;
+                                if (!"Unknown".equalsIgnoreCase(oreName)) {
+
+                                    WrappedStack oreStack = WrappedStack.wrap(new OreStack(oreName));
+
+                                    if (oreStack != null && valueMap.containsKey(oreStack)) {
+
+                                        if (energyValue == null) {
+                                            energyValue = valueMap.get(oreStack);
+                                        }
+                                        else if (!energyValue.equals(valueMap.get(oreStack))) {
+                                            allHaveSameValue = false;
+                                        }
+                                    }
+                                    else {
+                                        allHaveSameValue = false;
+                                    }
+                                }
+                                else {
+                                    allHaveSameValue = false;
+                                }
+                            }
+
+                            if (allHaveSameValue) {
+                                return energyValue;
+                            }
+                        }
+                        else {
+                            for (WrappedStack valuedWrappedStack : valueMap.keySet()) {
+                                if (valuedWrappedStack.getWrappedObject() instanceof ItemStack) {
+                                    if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getWrappedObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
+
+                                        ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getWrappedObject();
+                                        if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || unValuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+
+                                            EnergyValue energyValue = valueMap.get(valuedWrappedStack);
+
+                                            if (energyValue.compareTo(minEnergyValue) < 0) {
+                                                minEnergyValue = energyValue;
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    else if (object instanceof OreStack) {
+                    else if (wrappedObject instanceof OreStack) {
 
+                        OreStack oreStack = (OreStack) wrappedObject;
+                        List<ItemStack> itemStacks = OreDictionary.getOres(oreStack.oreName);
+
+                        if (!itemStacks.isEmpty()) {
+
+                            EnergyValue energyValue = null;
+                            boolean allHaveSameValue = true;
+
+                            for (ItemStack itemStack : itemStacks) {
+                                WrappedStack wrappedItemStack = WrappedStack.wrap(itemStack, 1);
+
+                                if (wrappedItemStack != null && valueMap.containsKey(wrappedItemStack)) {
+                                    if (energyValue == null) {
+                                        energyValue = valueMap.get(wrappedItemStack);
+                                    }
+                                    else if (!energyValue.equals(valueMap.get(wrappedItemStack))) {
+                                        allHaveSameValue = false;
+                                    }
+                                }
+                                else {
+                                    allHaveSameValue = false;
+                                }
+                            }
+
+                            if (allHaveSameValue) {
+                                return energyValue;
+                            }
+                        }
                     }
                 }
             }
