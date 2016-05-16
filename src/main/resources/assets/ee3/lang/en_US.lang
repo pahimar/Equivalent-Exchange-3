@@ -2,8 +2,8 @@
 energy_value=Energy Value Options
 energy_value.sync_threshold.label=Sync Threshold
 energy_value.sync_threshold.comment=The number of seconds a player must wait before they can sync their energy values for objects with the server again
-energy_value.regenerate_when.label=Regenerate EnergyValues
-energy_value.regenerate_when.comment=When to regenerate energy values for objects. Options are "Always" (every time Minecraft starts) or "As Needed" (whenever the mod cannot the calculated energy values file).
+energy_value.regenerate_values_when.label=Regenerate Energy Values When
+energy_value.regenerate_values_when.comment=When to regenerate energy values for objects. Options are "Always" (every time Minecraft starts) or "As Needed" (whenever the mod cannot the calculated energy values file).
 energy_value.debug_logging_enabled.label=Enable Debug Logging
 energy_value.debug_logging_enabled.comment=Additional debug logging for when energy values are calculated for objects
 

@@ -89,9 +89,9 @@ public class ConfigurationHandler {
         private static final int ENERGY_VALUE_SYNC_THRESHOLD_MAX = Short.MAX_VALUE;
 
         public static String regenerateEnergyValuesWhen;
-        private static final String ENERGY_VALUE_REGENERATE_WHEN_NAME = "regenerate_when";
-        private static final String ENERGY_VALUE_REGENERATE_WHEN_LABEL = "energy_value.regenerate_when.label";
-        private static final String ENERGY_VALUE_REGENERATE_WHEN_COMMENT = "energy_value.regenerate_when.comment";
+        private static final String ENERGY_VALUE_REGENERATE_WHEN_NAME = "regenerate_values_when";
+        private static final String ENERGY_VALUE_REGENERATE_WHEN_LABEL = "energy_value.regenerate_values_when.label";
+        private static final String ENERGY_VALUE_REGENERATE_WHEN_COMMENT = "energy_value.regenerate_values_when.comment";
         private static final String ENERGY_VALUE_REGENERATE_WHEN_DEFAULT = "Always"; // TODO This is set for during mod dev, set to As Needed for release
         private static final String[] ENERGY_VALUE_REGENERATE_WHEN_OPTIONS = new String[]{"As Needed", "Always"};
 
