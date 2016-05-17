@@ -10,12 +10,10 @@ import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
@@ -30,11 +28,11 @@ public class NewEnergyValueRegistry {
 
     public static final NewEnergyValueRegistry INSTANCE = new NewEnergyValueRegistry();
 
-    private ImmutableSortedMap<WrappedStack, EnergyValue> stackMap;
-    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMap;
+    private ImmutableSortedMap<WrappedStack, EnergyValue> stackValueMap;
+    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueStackMap;
 
-    private final Map<WrappedStack, EnergyValue> preCalculationValueMap;
-    private final Map<WrappedStack, EnergyValue> postCalculationValueMap;
+    private final Map<WrappedStack, EnergyValue> preCalculationStackValueMap;
+    private final Map<WrappedStack, EnergyValue> postCalculationStackValueMap;
     private transient SortedSet<WrappedStack> uncomputedStacks;
 
     public static File energyValuesDirectory;
@@ -47,20 +45,10 @@ public class NewEnergyValueRegistry {
     private NewEnergyValueRegistry() {
 
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
-        stackMap = stackMapBuilder.build();
+        stackValueMap = stackMapBuilder.build();
 
-        preCalculationValueMap = new TreeMap<>();
-        postCalculationValueMap = new TreeMap<>();
-
-        // Loading up some dummy values for testing serialization
-        preCalculationValueMap.put(WrappedStack.wrap(Items.apple), new EnergyValue(1));
-        preCalculationValueMap.put(WrappedStack.wrap(Items.arrow), new EnergyValue(2));
-        preCalculationValueMap.put(WrappedStack.wrap(Items.baked_potato), new EnergyValue(3));
-        preCalculationValueMap.put(WrappedStack.wrap(Items.bed), new EnergyValue(4));
-        preCalculationValueMap.put(WrappedStack.wrap(new OreStack("oreIron")), new EnergyValue(5));
-        preCalculationValueMap.put(WrappedStack.wrap(new FluidStack(FluidRegistry.WATER, 500)), new EnergyValue(6));
-        preCalculationValueMap.put(WrappedStack.wrap(new ItemStack(Items.carrot, 1, 1)), new EnergyValue(7));
-        preCalculationValueMap.put(WrappedStack.wrap(new ItemStack(Items.chainmail_boots, 1, 2)), new EnergyValue(8));
+        preCalculationStackValueMap = new TreeMap<>();
+        postCalculationStackValueMap = new TreeMap<>();
     }
 
     /**
@@ -318,7 +306,7 @@ public class NewEnergyValueRegistry {
      * @return an {@link ImmutableMap} containing the current energy value mappings
      */
     public ImmutableMap<WrappedStack, EnergyValue> getEnergyValues() {
-        return stackMap;
+        return stackValueMap;
     }
 
     /**
@@ -326,8 +314,8 @@ public class NewEnergyValueRegistry {
      *
      * @return a {link Map} containing the pre-calculation energy value mappings
      */
-    public Map<WrappedStack, EnergyValue> getPreCalculationValueMap() {
-        return preCalculationValueMap;
+    public Map<WrappedStack, EnergyValue> getPreCalculationStackValueMap() {
+        return preCalculationStackValueMap;
     }
 
     /**
@@ -335,8 +323,8 @@ public class NewEnergyValueRegistry {
      *
      * @return a {@link Map} containing the post-calculation energy value mappings
      */
-    public Map<WrappedStack, EnergyValue> getPostCalculationValueMap() {
-        return postCalculationValueMap;
+    public Map<WrappedStack, EnergyValue> getPostCalculationStackValueMap() {
+        return postCalculationStackValueMap;
     }
 
     /**
@@ -380,7 +368,7 @@ public class NewEnergyValueRegistry {
      * @return an {@link EnergyValue} if there is one to be found, null otherwise
      */
     public EnergyValue getEnergyValue(Object object, boolean strict) {
-        return getEnergyValue(stackMap, object, strict);
+        return getEnergyValue(stackValueMap, object, strict);
     }
 
     /**
@@ -424,10 +412,10 @@ public class NewEnergyValueRegistry {
 
         List stacksInRange = new ArrayList<WrappedStack>();
 
-        if (valueMap != null) {
+        if (valueStackMap != null) {
 
-            SortedMap<EnergyValue, List<WrappedStack>> tailMap = valueMap.tailMap(start);
-            SortedMap<EnergyValue, List<WrappedStack>> headMap = valueMap.headMap(finish);
+            SortedMap<EnergyValue, List<WrappedStack>> tailMap = valueStackMap.tailMap(start);
+            SortedMap<EnergyValue, List<WrappedStack>> headMap = valueStackMap.headMap(finish);
 
             SortedMap<EnergyValue, List<WrappedStack>> smallerMap;
             SortedMap<EnergyValue, List<WrappedStack>> biggerMap;
@@ -445,7 +433,7 @@ public class NewEnergyValueRegistry {
 
                 for (EnergyValue value : smallerMap.keySet()) {
                     if (biggerMap.containsKey(value)) {
-                        for (WrappedStack wrappedStack : valueMap.get(value)) {
+                        for (WrappedStack wrappedStack : valueStackMap.get(value)) {
                             if (wrappedStack.getWrappedObject() instanceof ItemStack || wrappedStack.getWrappedObject() instanceof FluidStack) {
                                 stacksInRange.add(wrappedStack.getWrappedObject());
                             }
@@ -495,7 +483,7 @@ public class NewEnergyValueRegistry {
             if (phase == Phase.PRE_CALCULATION) {
                 if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.PRE_CALCULATION))) {
 
-                    preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+                    preCalculationStackValueMap.put(wrappedStack, factoredEnergyValue);
 
                     if (doRegenValues) {
                         compute();
@@ -504,12 +492,12 @@ public class NewEnergyValueRegistry {
             }
             else if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.POST_CALCULATION))) {
 
-                TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(stackMap);
+                TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(stackValueMap);
                 valueMap.put(wrappedStack, energyValue);
                 ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-                stackMap = stackMappingsBuilder.putAll(valueMap).build();
+                stackValueMap = stackMappingsBuilder.putAll(valueMap).build();
 
-                postCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+                postCalculationStackValueMap.put(wrappedStack, factoredEnergyValue);
             }
         }
     }
@@ -524,28 +512,29 @@ public class NewEnergyValueRegistry {
         uncomputedStacks = new TreeSet<>();
 
         // Add in all pre-calculation energy value mappings
-        preCalculationValueMap.keySet().stream()
-                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && preCalculationValueMap.get(wrappedStack) != null)
-                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationValueMap.get(wrappedStack)));
+        preCalculationStackValueMap.keySet().stream()
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && preCalculationStackValueMap.get(wrappedStack) != null)
+                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationStackValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
-        calculateStackMap();
+        calculateStackValueMap(stackValueMap);
 
         // Add in all post-calculation energy value mappings
-        postCalculationValueMap.keySet().stream()
-                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && postCalculationValueMap.get(wrappedStack) != null)
-                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, postCalculationValueMap.get(wrappedStack)));
+        postCalculationStackValueMap.keySet().stream()
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && postCalculationStackValueMap.get(wrappedStack) != null)
+                .forEach(wrappedStack -> stackValueMap.put(wrappedStack, postCalculationStackValueMap.get(wrappedStack)));
 
-        // Bake the final calculated energy value map
+        // Bake the final calculated energy value maps
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
-        stackMap = stackMappingsBuilder.build();
+        this.stackValueMap = stackMappingsBuilder.build();
+        calculateValueStackMap();
 
         // Save the results to disk
         save();
     }
 
-    private void calculateStackMap() {
+    private void calculateStackValueMap(Map<WrappedStack, EnergyValue> stackValueMap) {
 
         Map<WrappedStack, EnergyValue> computedMap;
         int passNumber, passComputed, totalComputed;
@@ -562,8 +551,14 @@ public class NewEnergyValueRegistry {
             if (firstPass) {
                 firstPass = false;
             }
+
+            /**
+             * FIXME PRIORITY NUMBER 1
+             * @see EnergyValueRegistry#computeStackMappings(Map, int)
+             */
+//            computedMap = computeFromInputs(stackValueMap);
+
             long passDuration = System.nanoTime() - passStartTime;
-            
             if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
                 LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} values for objects in {} ns", passNumber, passComputed, passDuration);
             }
@@ -572,7 +567,7 @@ public class NewEnergyValueRegistry {
         LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", totalComputed, endingTime);
     }
 
-    private void calculateValueMap() {
+    private void calculateValueStackMap() {
 
         SortedMap<EnergyValue, List<WrappedStack>> tempValueMap = new TreeMap<>();
 
@@ -594,7 +589,7 @@ public class NewEnergyValueRegistry {
                 }
             }
         }
-        valueMap = ImmutableSortedMap.copyOf(tempValueMap);
+        valueStackMap = ImmutableSortedMap.copyOf(tempValueMap);
     }
 
     /**
@@ -602,9 +597,9 @@ public class NewEnergyValueRegistry {
      */
     public void save() {
 
-        writeToJsonFile(stackMap, energyValuesFile);
-        writeToJsonFile(preCalculationValueMap, preCalculationValuesFile);
-        writeToJsonFile(postCalculationValueMap, postCalculationValuesFile);
+        writeToJsonFile(stackValueMap, energyValuesFile);
+        writeToJsonFile(preCalculationStackValueMap, preCalculationValuesFile);
+        writeToJsonFile(postCalculationStackValueMap, postCalculationValuesFile);
     }
 
     /**
@@ -616,13 +611,13 @@ public class NewEnergyValueRegistry {
     public void load() {
 
         try {
-            preCalculationValueMap.putAll(readFromJsonFile(preCalculationValuesFile));
+            preCalculationStackValueMap.putAll(readFromJsonFile(preCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no pre-calculation values were loaded from file because file wasn't found
         }
 
         try {
-            postCalculationValueMap.putAll(readFromJsonFile(postCalculationValuesFile));
+            postCalculationStackValueMap.putAll(readFromJsonFile(postCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no post-calculation values were loaded from file because file wasn't found
         }
@@ -630,7 +625,8 @@ public class NewEnergyValueRegistry {
         try {
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
             stackMapBuilder.putAll(readFromJsonFile(energyValuesFile));
-            stackMap = stackMapBuilder.build();
+            stackValueMap = stackMapBuilder.build();
+            calculateValueStackMap();
         } catch (FileNotFoundException e) {
             LogHelper.warn("No calculated energy value file found, regenerating"); // TODO Better log message
             compute();

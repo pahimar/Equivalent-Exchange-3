@@ -792,9 +792,10 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
         JsonArray jsonEnergyValueRegistry = new JsonArray();
 
-        for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet())
-        {
-            jsonEnergyValueRegistry.add(EnergyValueStackMapping.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
+        if (energyValueRegistry != null && energyValueRegistry.stackMappings != null) {
+            for (WrappedStack wrappedStack : energyValueRegistry.stackMappings.keySet()) {
+                jsonEnergyValueRegistry.add(EnergyValueStackMapping.jsonSerializer.toJsonTree(new EnergyValueStackMapping(wrappedStack, energyValueRegistry.stackMappings.get(wrappedStack))));
+            }
         }
 
         return jsonEnergyValueRegistry;
