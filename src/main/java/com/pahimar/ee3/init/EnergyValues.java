@@ -8,162 +8,164 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class EnergyValues
-{
-    public static void addDefaultEnergyValues()
-    {
+import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
+
+public class EnergyValues {
+
+    public static void init() {
+
         // OreDictionary assignment
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("cobblestone"), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("dustRedstone"), 32);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("cobblestone"), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("dustRedstone"), 32, Phase.PRE_CALCULATION);
         String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
         for (int i = 0; i < dyes.length; i++)
         {
-            EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("dye" + dyes[i]), 16);
+            EnergyValueRegistryProxy.setEnergyValue(new OreStack("dye" + dyes[i]), 16, Phase.PRE_CALCULATION);
         }
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("gemDiamond"), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("gemEmerald"), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("gemLapis"), 864);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("gemQuartz"), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("ingotGold"), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("ingotIron"), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("logWood"), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreCoal"), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreDiamond"), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreEmerald"), 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreGold"), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreIron"), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreLapis"), 864);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreQuartz"), 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("oreRedstone"), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("plankWood"), 8);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("record"), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("sand"), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("sandstone"), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("slabWood"), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("stairWood"), 12);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("stickWood"), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("stone"), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("treeLeaves"), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new OreStack("treeSapling"), 32);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemDiamond"), 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemEmerald"), 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemLapis"), 864, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemQuartz"), 256, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("ingotGold"), 2048, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("ingotIron"), 256, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("logWood"), 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreCoal"), 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreDiamond"), 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreEmerald"), 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreGold"), 2048, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreIron"), 256, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreLapis"), 864, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreQuartz"), 256, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("oreRedstone"), 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("plankWood"), 8, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("record"), 2048, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("sand"), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("sandstone"), 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("slabWood"), 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("stairWood"), 12, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("stickWood"), 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("stone"), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("treeLeaves"), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("treeSapling"), 32, Phase.PRE_CALCULATION);
 
         // Fluids
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(FluidRegistry.WATER, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(FluidRegistry.LAVA, 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(FluidRegistry.getFluid("milk"), 64);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.WATER, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.LAVA, 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.getFluid("milk"), 64, Phase.PRE_CALCULATION);
 
         /* Building Blocks */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.stone, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.grass, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.dirt, 1, OreDictionary.WILDCARD_VALUE), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.cobblestone, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.gravel, 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.glass, 1, OreDictionary.WILDCARD_VALUE), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.sandstone, 1, OreDictionary.WILDCARD_VALUE), 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.mossy_cobblestone, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.obsidian, 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.ice, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.pumpkin, 144);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.netherrack, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.soul_sand, 49);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.stonebrick, 1, OreDictionary.WILDCARD_VALUE), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.mycelium, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.end_stone, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.hardened_clay, 256);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.stone, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.grass, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.dirt, 1, OreDictionary.WILDCARD_VALUE), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.cobblestone, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.sand, 1, OreDictionary.WILDCARD_VALUE), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.gravel, 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.glass, 1, OreDictionary.WILDCARD_VALUE), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.sandstone, 1, OreDictionary.WILDCARD_VALUE), 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.mossy_cobblestone, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.obsidian, 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.ice, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.pumpkin, 144, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.netherrack, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.soul_sand, 49, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.stonebrick, 1, OreDictionary.WILDCARD_VALUE), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.mycelium, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.end_stone, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.hardened_clay, 256, Phase.PRE_CALCULATION);
 
         /* Decoration Blocks */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.web, 12);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.deadbush, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.yellow_flower, 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.red_flower, 1, OreDictionary.WILDCARD_VALUE), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.brown_mushroom, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.red_mushroom, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.red_mushroom, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.snow_layer, 0.125f);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.cactus, 8);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.vine, 8);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Blocks.waterlily, 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.anvil, 1, 1), 5290.667f);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.anvil, 1, 2), 2645.333f);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Blocks.double_plant, 1, OreDictionary.WILDCARD_VALUE), 32);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.web, 12, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.deadbush, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.yellow_flower, 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.red_flower, 1, OreDictionary.WILDCARD_VALUE), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.brown_mushroom, 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.red_mushroom, 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.red_mushroom, 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.snow_layer, 0.125f, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.cactus, 8, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.vine, 8, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Blocks.waterlily, 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.anvil, 1, 1), 5290.667f, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.anvil, 1, 2), 2645.333f, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Blocks.double_plant, 1, OreDictionary.WILDCARD_VALUE), 32, Phase.PRE_CALCULATION);
 
         /* Redstone */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.redstone, 32);
+        EnergyValueRegistryProxy.setEnergyValue(Items.redstone, 32, Phase.PRE_CALCULATION);
 
         /* Transportation */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.saddle, 192);
+        EnergyValueRegistryProxy.setEnergyValue(Items.saddle, 192, Phase.PRE_CALCULATION);
 
         /* Miscellaneous */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.snowball, 0.25f);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.slime_ball, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.bone, 48);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.ender_pearl, 1024);
+        EnergyValueRegistryProxy.setEnergyValue(Items.snowball, 0.25f, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.slime_ball, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.bone, 48, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.ender_pearl, 1024, Phase.PRE_CALCULATION);
 
         /* Foodstuffs */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.apple, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.porkchop, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.cooked_porkchop, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.fish, 1, OreDictionary.WILDCARD_VALUE), 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.cooked_fished, 1, OreDictionary.WILDCARD_VALUE), 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.melon, 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.beef, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.cooked_beef, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.chicken, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.cooked_chicken, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.rotten_flesh, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.spider_eye, 128);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.carrot, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.potato, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.baked_potato, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.poisonous_potato, 24);
+        EnergyValueRegistryProxy.setEnergyValue(Items.apple, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.porkchop, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.cooked_porkchop, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.fish, 1, OreDictionary.WILDCARD_VALUE), 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.cooked_fished, 1, OreDictionary.WILDCARD_VALUE), 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.melon, 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.beef, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.cooked_beef, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.chicken, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.cooked_chicken, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.rotten_flesh, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.spider_eye, 128, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.carrot, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.potato, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.baked_potato, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.poisonous_potato, 24, Phase.PRE_CALCULATION);
 
         /* Brewing */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.ghast_tear, 4096);
+        EnergyValueRegistryProxy.setEnergyValue(Items.ghast_tear, 4096, Phase.PRE_CALCULATION);
 
         /* Materials */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.coal, 1, 0), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.coal, 1, 1), 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.diamond, 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.iron_ingot, 256);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.gold_ingot, 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.string, 12);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.feather, 48);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.gunpowder, 192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.wheat_seeds, 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.wheat, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.flint, 4);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.leather, 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.brick, 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.clay_ball, 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.reeds, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.egg, 32);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.glowstone_dust, 384);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 0), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 2), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 3), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 4), 864);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 5), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(Items.dye, 1, 6), 16);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.blaze_rod, 1536);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.nether_wart, 24);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.emerald, 8192);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.nether_star, 24576);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.netherbrick, 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(Items.quartz, 256);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.coal, 1, 0), 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.coal, 1, 1), 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.diamond, 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.iron_ingot, 256, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.gold_ingot, 2048, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.string, 12, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.feather, 48, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.gunpowder, 192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.wheat_seeds, 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.wheat, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.flint, 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.leather, 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.brick, 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.clay_ball, 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.reeds, 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.egg, 32, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.glowstone_dust, 384, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 0), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 2), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 3), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 4), 864, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 5), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.dye, 1, 6), 16, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.blaze_rod, 1536, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.nether_wart, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.emerald, 8192, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.nether_star, 24576, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.netherbrick, 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.quartz, 256, Phase.PRE_CALCULATION);
 
         /* Equivalent Exchange 3 */
         /**
          *  Alchemical Dusts
          */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 0), 1);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 1), 64);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 2), 2048);
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 3), 8192);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 0), 1, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 1), 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 2), 2048, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 3), 8192, Phase.PRE_CALCULATION);
 
         /**
          *  Minium Shard
          */
-        EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ModItems.shardMinium), 8192);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.shardMinium), 8192, Phase.PRE_CALCULATION);
     }
 }

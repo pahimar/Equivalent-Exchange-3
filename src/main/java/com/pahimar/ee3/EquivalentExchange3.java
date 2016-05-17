@@ -83,7 +83,7 @@ public class EquivalentExchange3
 
         FluidHelper.registerFluids();
 
-        EnergyValues.addDefaultEnergyValues();
+        EnergyValues.init();
 
         AlchemyArrays.registerAlchemyArrays();
     }
@@ -147,9 +147,9 @@ public class EquivalentExchange3
         }
     }
 
-    public EnergyValueRegistry getEnergyValueRegistry()
+    public NewEnergyValueRegistry getEnergyValueRegistry()
     {
-        return EnergyValueRegistry.getInstance();
+        return NewEnergyValueRegistry.INSTANCE;
     }
 
     public RecipeRegistry getRecipeRegistry()

@@ -9,7 +9,6 @@ import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -75,7 +74,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             if (wrappedStack.getStackSize() > 0)
             {
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
-                EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
+                EnergyValue factoredEnergyValue = EnergyValue.factor(energyValue, wrappedStack.getStackSize());
 
                 if (preCalculationMappings.containsKey(factoredWrappedStack))
                 {
@@ -113,7 +112,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
             if (wrappedStack.getStackSize() > 0)
             {
                 WrappedStack factoredWrappedStack = WrappedStack.wrap(wrappedStack, 1);
-                EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
+                EnergyValue factoredEnergyValue = EnergyValue.factor(energyValue, wrappedStack.getStackSize());
 
                 LogHelper.trace(POST_CALC_MARKER, "[{}] Mod with ID '{}' setEnergyValue a post-calculation energy value of {} for object {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), energyValue, wrappedStack);
                 postCalculationMappings.put(factoredWrappedStack, factoredEnergyValue);
@@ -415,7 +414,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                 {
                     if (computedStackValues.get(keyStack) != null && Float.compare(computedStackValues.get(keyStack).getValue(), 0f) > 0)
                     {
-                        factoredExchangeEnergyValue = EnergyValueHelper.factor(computedStackValues.get(keyStack), keyStack.getStackSize());
+                        factoredExchangeEnergyValue = EnergyValue.factor(computedStackValues.get(keyStack), keyStack.getStackSize());
                         factoredKeyStack = WrappedStack.wrap(keyStack, 1);
                     }
                 }
@@ -552,7 +551,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
 
                 for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput))
                 {
-                    EnergyValue computedValue = EnergyValueHelper.computeEnergyValueFromRecipe(stackValueMappings, recipeOutput, recipeInputs);
+                    EnergyValue computedValue = NewEnergyValueRegistry.computeFromInputs(stackValueMappings, recipeOutput, recipeInputs);
 
                     if (computedValue != null)
                     {
@@ -630,10 +629,7 @@ public class EnergyValueRegistry implements JsonSerializer<EnergyValueRegistry>,
                             }
                             else if (wrappedStack.getWrappedObject() instanceof OreStack)
                             {
-                                for (ItemStack itemStack : OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName))
-                                {
-                                    stacksInRange.add(itemStack);
-                                }
+                                stacksInRange.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
                             }
                         }
                     }

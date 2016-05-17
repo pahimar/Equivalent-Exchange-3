@@ -3,30 +3,35 @@ package com.pahimar.ee3.exchange;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.gson.JsonParseException;
+import com.pahimar.ee3.api.event.EnergyValueEvent;
 import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.handler.ConfigurationHandler;
-import com.pahimar.ee3.util.EnergyValueHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.io.*;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
+
+import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
 
 public class NewEnergyValueRegistry {
 
     public static final NewEnergyValueRegistry INSTANCE = new NewEnergyValueRegistry();
 
-    private ImmutableSortedMap<WrappedStack, EnergyValue> energyValueMap;
+    private ImmutableSortedMap<WrappedStack, EnergyValue> stackMap;
+    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueMap;
 
     private final Map<WrappedStack, EnergyValue> preCalculationValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationValueMap;
@@ -41,8 +46,8 @@ public class NewEnergyValueRegistry {
 
     private NewEnergyValueRegistry() {
 
-        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> energyValueMapBuilder = ImmutableSortedMap.naturalOrder();
-        energyValueMap = energyValueMapBuilder.build();
+        ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
+        stackMap = stackMapBuilder.build();
 
         preCalculationValueMap = new TreeMap<>();
         postCalculationValueMap = new TreeMap<>();
@@ -59,12 +64,261 @@ public class NewEnergyValueRegistry {
     }
 
     /**
+     * Returns an {@link EnergyValue} for a {@link Object} in the provided {@link Map>} of {@link WrappedStack}s mapped
+     * to EnergyValues
+     *
+     * <p>The order of checking is as follows;</p>
+     * <ol>
+     *     <li>{@link ItemStack}s whose {@link Item}s implement {@link IEnergyValueProvider}</li>
+     *     <li>Direct EnergyValue mapping of the provided Object in the provided Map</li>
+     *     <li>The following criteria are only checked (in order) in the event that this is a non-strict query;
+     *         <ol>
+     *             <li>
+     *                 ItemStacks that are part of an {@link OreDictionary} entry are checked to see if
+     *                 <strong>all</strong> Ores they are registered to have the same non-null EnergyValue assigned to
+     *                 it
+     *                     <ul>
+     *                         <li>
+     *                             e.g., ItemStack X is associated with OreDictionary entries A, B and C. An EnergyValue
+     *                             would be returned for X only if A, B and C all had the same non-null EnergyValue
+     *                         </li>
+     *                     </ul>
+     *             </li>
+     *             <li>
+     *                 ItemStacks are checked to see if there exist {@link OreDictionary#WILDCARD_VALUE} equivalents
+     *             </li>
+     *             <li>
+     *                 {@link OreStack}s are checked to see if all members of the OreDictionary entry represented by the
+     *                 OreStack have the same non-null EnergyValue (similar to the case for ItemStacks above)
+     *             </li>
+     *         </ol>
+     *     </li>
+     * </ol>
+     *
+     * @param valueMap a {@link Map} of {@link EnergyValue}'s mapped to {@link WrappedStack}'s
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @param strict whether this is a strict (e.g., only looking for direct value assignment vs associative value
+     *               assignments) query or not
+     * @return an {@link EnergyValue} if there is one to be found for the provided {@link Object} in the provided Map, null otherwise
+     */
+    private static EnergyValue getEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Object object, boolean strict) {
+
+        if (WrappedStack.canBeWrapped(object)) {
+
+            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            Object wrappedObject = wrappedStack.getWrappedObject();
+
+            if (wrappedObject instanceof ItemStack && ((ItemStack) wrappedObject).getItem() instanceof IEnergyValueProvider && !strict) {
+
+                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) wrappedObject).getItem()).getEnergyValue(((ItemStack) wrappedObject));
+
+                if (energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
+                    return energyValue;
+                }
+            }
+
+            if (valueMap != null && !valueMap.isEmpty()) {
+
+                // First check for a direct energy value mapping to the wrapped object
+                if (valueMap.containsKey(wrappedStack)) {
+                    return valueMap.get(wrappedStack);
+                }
+                else if (!strict) {
+
+                    if (wrappedObject instanceof ItemStack) {
+
+                        ItemStack unValuedItemStack = ItemStack.copyItemStack((ItemStack) wrappedObject);
+                        EnergyValue minEnergyValue = null;
+
+                        int[] oreIds = OreDictionary.getOreIDs(unValuedItemStack);
+                        if (oreIds.length > 0) {
+
+                            EnergyValue energyValue = null;
+                            boolean allHaveSameValue = true;
+
+                            for (int oreId : oreIds) {
+                                String oreName = OreDictionary.getOreName(oreId);
+
+                                if (!"Unknown".equalsIgnoreCase(oreName)) {
+
+                                    WrappedStack oreStack = WrappedStack.wrap(new OreStack(oreName));
+
+                                    if (oreStack != null && valueMap.containsKey(oreStack)) {
+
+                                        if (energyValue == null) {
+                                            energyValue = valueMap.get(oreStack);
+                                        }
+                                        else if (!energyValue.equals(valueMap.get(oreStack))) {
+                                            allHaveSameValue = false;
+                                        }
+                                    }
+                                    else {
+                                        allHaveSameValue = false;
+                                    }
+                                }
+                                else {
+                                    allHaveSameValue = false;
+                                }
+                            }
+
+                            if (allHaveSameValue) {
+                                return energyValue;
+                            }
+                        }
+                        else {
+                            for (WrappedStack valuedWrappedStack : valueMap.keySet()) {
+                                if (valuedWrappedStack.getWrappedObject() instanceof ItemStack) {
+                                    if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getWrappedObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
+
+                                        ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getWrappedObject();
+                                        if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || unValuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+
+                                            EnergyValue energyValue = valueMap.get(valuedWrappedStack);
+
+                                            if (energyValue.compareTo(minEnergyValue) < 0) {
+                                                minEnergyValue = energyValue;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (wrappedObject instanceof OreStack) {
+
+                        OreStack oreStack = (OreStack) wrappedObject;
+                        List<ItemStack> itemStacks = OreDictionary.getOres(oreStack.oreName);
+
+                        if (!itemStacks.isEmpty()) {
+
+                            EnergyValue energyValue = null;
+                            boolean allHaveSameValue = true;
+
+                            for (ItemStack itemStack : itemStacks) {
+                                WrappedStack wrappedItemStack = WrappedStack.wrap(itemStack, 1);
+
+                                if (wrappedItemStack != null && valueMap.containsKey(wrappedItemStack)) {
+                                    if (energyValue == null) {
+                                        energyValue = valueMap.get(wrappedItemStack);
+                                    }
+                                    else if (!energyValue.equals(valueMap.get(wrappedItemStack))) {
+                                        allHaveSameValue = false;
+                                    }
+                                }
+                                else {
+                                    allHaveSameValue = false;
+                                }
+                            }
+
+                            if (allHaveSameValue) {
+                                return energyValue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Calculates an {@link EnergyValue} for the provided {@link WrappedStack} output from the provided {@link List} of
+     * WrappedStack inputs and {@link Map} of energy value mappings to objects. We calculate the energy value for the
+     * output by, for each input, summing the input's energy value * the input's stack size. That sum is then divided
+     * by the stack size of the output. If <strong>any</strong> of the inputs do not have an energy value then no
+     * energy value can be calculated for the output - therefore we return null
+     *
+     * @param valueMap a {@link Map} of {@link EnergyValue}'s mapped to {@link WrappedStack}'s
+     * @param wrappedOutput the {@link WrappedStack} output for that the inputs "create"
+     * @param wrappedInputs a {@link List} of {@link WrappedStack}s that "create" the output
+     * @return an {@link EnergyValue} if there is one that can be calculated, null otherwise
+     */
+    // TODO Make this private when EnergyValueRegistry is properly replaced
+    public static EnergyValue computeFromInputs(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, List<WrappedStack> wrappedInputs) {
+
+        float sumOfValues = 0f;
+
+        for (WrappedStack wrappedInput : wrappedInputs) {
+
+            EnergyValue inputValue;
+            int stackSize = Integer.MIN_VALUE;
+
+            if (wrappedInput.getWrappedObject() instanceof ItemStack) {
+
+                ItemStack inputItemStack = (ItemStack) wrappedInput.getWrappedObject();
+
+                // Check if we are dealing with a potential fluid
+                if (FluidContainerRegistry.getFluidForFilledItem(inputItemStack) != null) {
+
+                    if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
+                        stackSize = FluidContainerRegistry.getFluidForFilledItem(inputItemStack).amount * wrappedInput.getStackSize();
+                        inputValue = getEnergyValue(valueMap, FluidContainerRegistry.getFluidForFilledItem(inputItemStack), false);
+                    }
+                    else {
+                        inputValue = getEnergyValue(valueMap, wrappedInput, false);
+                    }
+                }
+                else if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
+
+                    ItemStack inputContainerItemStack = inputItemStack.getItem().getContainerItem(inputItemStack);
+
+                    if (getEnergyValue(valueMap, inputItemStack, false) != null && getEnergyValue(valueMap, inputContainerItemStack, false) != null) {
+                        float itemStackValue = getEnergyValue(valueMap, inputItemStack, false).getValue();
+                        float containerStackValue = getEnergyValue(valueMap, inputContainerItemStack, false).getValue();
+                        inputValue = new EnergyValue(itemStackValue - containerStackValue);
+                    }
+                    else {
+                        inputValue = new EnergyValue(0);
+                    }
+                }
+                else if (!inputItemStack.getItem().doesContainerItemLeaveCraftingGrid(inputItemStack)) {
+                    inputValue = new EnergyValue(0);
+                }
+                else if (OreDictionary.getOreIDs(inputItemStack).length > 0) {
+                    inputValue = getEnergyValue(valueMap, wrappedInput, true);
+                }
+                else {
+                    inputValue = getEnergyValue(valueMap, wrappedInput, false);
+                }
+            }
+            else if (wrappedInput.getWrappedObject() instanceof OreStack) {
+
+                OreStack inputOreStack = (OreStack) wrappedInput.getWrappedObject();
+                inputValue = getEnergyValue(valueMap, wrappedInput, false);
+                for (ItemStack itemStack : OreDictionary.getOres(inputOreStack.oreName)) {
+                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
+                        inputValue = new EnergyValue(0);
+                    }
+                }
+            }
+            else {
+                inputValue = getEnergyValue(valueMap, wrappedInput, false);
+            }
+
+            if (inputValue != null) {
+
+                if (stackSize == Integer.MIN_VALUE) {
+                    stackSize = wrappedInput.getStackSize();
+                }
+
+                sumOfValues += inputValue.getValue() * stackSize;
+            }
+            else {
+                return null;
+            }
+        }
+
+        return EnergyValue.factor(new EnergyValue(sumOfValues), wrappedOutput.getStackSize());
+    }
+
+    /**
      * Returns an {@link ImmutableMap} containing the current energy value mappings
      *
      * @return an {@link ImmutableMap} containing the current energy value mappings
      */
     public ImmutableMap<WrappedStack, EnergyValue> getEnergyValues() {
-        return energyValueMap;
+        return stackMap;
     }
 
     /**
@@ -126,7 +380,85 @@ public class NewEnergyValueRegistry {
      * @return an {@link EnergyValue} if there is one to be found, null otherwise
      */
     public EnergyValue getEnergyValue(Object object, boolean strict) {
-        return EnergyValueHelper.getEnergyValue(energyValueMap, object, strict);
+        return getEnergyValue(stackMap, object, strict);
+    }
+
+    /**
+     * Returns an {@link EnergyValue} associated with the provided {@link Object} (if there is one)
+     *
+     * @param object the {@link Object} that is being checked for a corresponding {@link EnergyValue}
+     * @param strict whether this is a strict (e.g., only looking for direct value assignment vs associative value
+     *               assignments) query or not
+     * @return an {@link EnergyValue} if there is one to be found, null otherwise
+     */
+    public EnergyValue getEnergyValueForStack(Object object, boolean strict) {
+
+        WrappedStack wrappedObject = WrappedStack.wrap(object);
+
+        if (wrappedObject != null && getEnergyValue(object, strict) != null) {
+            return new EnergyValue(getEnergyValue(object, strict).getValue() * wrappedObject.getStackSize());
+        }
+
+        return null;
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param start
+     * @param finish
+     * @return
+     */
+    public List getStacksInRange(Number start, Number finish) {
+        return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param start
+     * @param finish
+     * @return
+     */
+    public List getStacksInRange(EnergyValue start, EnergyValue finish) {
+
+        List stacksInRange = new ArrayList<WrappedStack>();
+
+        if (valueMap != null) {
+
+            SortedMap<EnergyValue, List<WrappedStack>> tailMap = valueMap.tailMap(start);
+            SortedMap<EnergyValue, List<WrappedStack>> headMap = valueMap.headMap(finish);
+
+            SortedMap<EnergyValue, List<WrappedStack>> smallerMap;
+            SortedMap<EnergyValue, List<WrappedStack>> biggerMap;
+
+            if (!tailMap.isEmpty() && !headMap.isEmpty()) {
+
+                if (tailMap.size() <= headMap.size()) {
+                    smallerMap = tailMap;
+                    biggerMap = headMap;
+                }
+                else {
+                    smallerMap = headMap;
+                    biggerMap = tailMap;
+                }
+
+                for (EnergyValue value : smallerMap.keySet()) {
+                    if (biggerMap.containsKey(value)) {
+                        for (WrappedStack wrappedStack : valueMap.get(value)) {
+                            if (wrappedStack.getWrappedObject() instanceof ItemStack || wrappedStack.getWrappedObject() instanceof FluidStack) {
+                                stacksInRange.add(wrappedStack.getWrappedObject());
+                            }
+                            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
+                                stacksInRange.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return stacksInRange;
     }
 
     /**
@@ -136,11 +468,10 @@ public class NewEnergyValueRegistry {
      *
      * @param object the object the energy value is being assigned for
      * @param energyValue the energy value being setEnergyValue on the object
-     * @param isPreCalculationAssignment whether or not the calculated energy value assignment is a pre-calculation
-     *                                   value assignment or not
+     * @param phase the {@link Phase} of energy value assignment to set this value for
      */
-    public void setEnergyValue(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment) {
-        setEnergyValue(object, energyValue, isPreCalculationAssignment, false);
+    public void setEnergyValue(Object object, EnergyValue energyValue, Phase phase) {
+        setEnergyValue(object, energyValue, phase, false);
     }
 
     /**
@@ -150,31 +481,33 @@ public class NewEnergyValueRegistry {
      *
      * @param object the object the energy value is being assigned for
      * @param energyValue the energy value being setEnergyValue on the object
-     * @param isPreCalculationAssignment whether or not the calculated energy value assignment is a pre-calculation
-     *                                   value assignment or not
-     * @param doRegenValues whether or not the energy value map needs recomputing. Only an option if
-     *                      <code>isPreCalculationAssignment</code> is true
+     * @param phase the {@link Phase} of energy value assignment to set this value for
+     * @param doRegenValues whether or not the energy value map needs recomputing. Only an option if the energy value
+     *                      is being assigned in the <code>PRE_CALCULATION</code> phase
      */
-    public void setEnergyValue(Object object, EnergyValue energyValue, boolean isPreCalculationAssignment, boolean doRegenValues) {
+    public void setEnergyValue(Object object, EnergyValue energyValue, Phase phase, boolean doRegenValues) {
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
 
             WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
-            EnergyValue factoredEnergyValue = EnergyValueHelper.factor(energyValue, wrappedStack.getStackSize());
+            EnergyValue factoredEnergyValue = EnergyValue.factor(energyValue, wrappedStack.getStackSize());
 
-            if (isPreCalculationAssignment) {
-                preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+            if (phase == Phase.PRE_CALCULATION) {
+                if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.PRE_CALCULATION))) {
 
-                if (doRegenValues) {
-                    compute();
+                    preCalculationValueMap.put(wrappedStack, factoredEnergyValue);
+
+                    if (doRegenValues) {
+                        compute();
+                    }
                 }
             }
-            else {
+            else if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.POST_CALCULATION))) {
 
-                TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(energyValueMap);
+                TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(stackMap);
                 valueMap.put(wrappedStack, energyValue);
                 ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-                energyValueMap = stackMappingsBuilder.putAll(valueMap).build();
+                stackMap = stackMappingsBuilder.putAll(valueMap).build();
 
                 postCalculationValueMap.put(wrappedStack, factoredEnergyValue);
             }
@@ -196,7 +529,7 @@ public class NewEnergyValueRegistry {
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
-        calculate();
+        calculateStackMap();
 
         // Add in all post-calculation energy value mappings
         postCalculationValueMap.keySet().stream()
@@ -206,13 +539,13 @@ public class NewEnergyValueRegistry {
         // Bake the final calculated energy value map
         ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
         stackMappingsBuilder.putAll(stackValueMap);
-        energyValueMap = stackMappingsBuilder.build();
+        stackMap = stackMappingsBuilder.build();
 
         // Save the results to disk
         save();
     }
 
-    private void calculate() {
+    private void calculateStackMap() {
 
         Map<WrappedStack, EnergyValue> computedMap;
         int passNumber, passComputed, totalComputed;
@@ -239,11 +572,37 @@ public class NewEnergyValueRegistry {
         LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", totalComputed, endingTime);
     }
 
+    private void calculateValueMap() {
+
+        SortedMap<EnergyValue, List<WrappedStack>> tempValueMap = new TreeMap<>();
+
+        for (WrappedStack wrappedStack : getEnergyValues().keySet()) {
+
+            if (wrappedStack != null) {
+
+                EnergyValue energyValue = getEnergyValues().get(wrappedStack);
+
+                if (energyValue != null) {
+                    if (tempValueMap.containsKey(energyValue)) {
+                        if (!(tempValueMap.get(energyValue).contains(wrappedStack))) {
+                            tempValueMap.get(energyValue).add(wrappedStack);
+                        }
+                    }
+                    else {
+                        tempValueMap.put(energyValue, new ArrayList<>(Arrays.asList(wrappedStack)));
+                    }
+                }
+            }
+        }
+        valueMap = ImmutableSortedMap.copyOf(tempValueMap);
+    }
+
     /**
      * Saves the pre-calculation, post-calculation, and calculated energy value maps to disk
      */
     public void save() {
-        writeToJsonFile(energyValueMap, energyValuesFile);
+
+        writeToJsonFile(stackMap, energyValuesFile);
         writeToJsonFile(preCalculationValueMap, preCalculationValuesFile);
         writeToJsonFile(postCalculationValueMap, postCalculationValuesFile);
     }
@@ -269,9 +628,9 @@ public class NewEnergyValueRegistry {
         }
 
         try {
-            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> energyValueMapBuilder = ImmutableSortedMap.naturalOrder();
-            energyValueMapBuilder.putAll(readFromJsonFile(energyValuesFile));
-            energyValueMap = energyValueMapBuilder.build();
+            ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
+            stackMapBuilder.putAll(readFromJsonFile(energyValuesFile));
+            stackMap = stackMapBuilder.build();
         } catch (FileNotFoundException e) {
             LogHelper.warn("No calculated energy value file found, regenerating"); // TODO Better log message
             compute();
