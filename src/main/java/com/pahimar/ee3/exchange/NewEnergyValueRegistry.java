@@ -7,6 +7,7 @@ import com.pahimar.ee3.api.event.EnergyValueEvent;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.handler.ConfigurationHandler;
+import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -49,6 +50,7 @@ public class NewEnergyValueRegistry {
 
         preCalculationStackValueMap = new TreeMap<>();
         postCalculationStackValueMap = new TreeMap<>();
+        uncomputedStacks = new TreeSet<>();
     }
 
     /**
@@ -534,37 +536,83 @@ public class NewEnergyValueRegistry {
         save();
     }
 
-    private void calculateStackValueMap(Map<WrappedStack, EnergyValue> stackValueMap) {
+    private Map<WrappedStack, EnergyValue> calculateStackValueMap(Map<WrappedStack, EnergyValue> stackValueMap) {
 
-        Map<WrappedStack, EnergyValue> computedMap;
-        int passNumber, passComputed, totalComputed;
-        passNumber = passComputed = totalComputed = 0;
-        boolean firstPass = true;
+        Map<WrappedStack, EnergyValue> computedMap = new TreeMap<>(stackValueMap);
+
+        Map<WrappedStack, EnergyValue> tempComputedMap = new TreeMap<>();
+        int passNumber = 0;
 
         LogHelper.info(ENERGY_VALUE_MARKER, "Beginning energy value calculation");
         long startingTime = System.nanoTime();
-        while ((firstPass || passComputed > 0) && passNumber < 16) {
+
+        while ((passNumber == 0 || tempComputedMap.size() != computedMap.size()) && passNumber < 16) {
 
             long passStartTime = System.nanoTime();
             passNumber++;
-            passComputed = 0;
-            if (firstPass) {
-                firstPass = false;
-            }
 
             /**
-             * FIXME PRIORITY NUMBER 1
              * @see EnergyValueRegistry#computeStackMappings(Map, int)
              */
-//            computedMap = computeFromInputs(stackValueMap);
+            tempComputedMap = new TreeMap<>(computedMap);
+            for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet()) {
+
+                // We won't attempt to recalculate values that already have a pre-calculation value assignment
+                if (!stackValueMap.containsKey(WrappedStack.wrap(recipeOutput, 1))) {
+                    for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
+                        // FIXME PRIORITY NUMBER 1
+                    }
+                }
+            }
+
+            computedMap.putAll(tempComputedMap);
 
             long passDuration = System.nanoTime() - passStartTime;
             if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} values for objects in {} ns", passNumber, passComputed, passDuration);
+                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} values for objects in {} ns", passNumber, tempComputedMap.size(), passDuration);
             }
         }
         long endingTime = System.nanoTime() - startingTime;
-        LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", totalComputed, endingTime);
+        LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", computedMap.size() - stackValueMap.size(), endingTime);
+
+        return computedMap;
+    }
+
+    private Map<WrappedStack, EnergyValue> computeValuesFromRecipes(Map<WrappedStack, EnergyValue> stackValueMap) {
+
+        Map<WrappedStack, EnergyValue> tempStackValueMap = new TreeMap<>();
+
+        /**
+         * Algorithm
+         *
+         * For everything we know how to make in the RecipeRegistry
+         *  Check to see if we have a value for it already
+         */
+        for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet()) {
+            // TODO Review: possible fault in the logic here that is preventing some values from being assigned?
+            if (!hasEnergyValue(recipeOutput.getWrappedObject()) && !tempStackValueMap.containsKey(recipeOutput)) {
+                EnergyValue lowestValue = null;
+
+                for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
+                    EnergyValue computedValue = computeFromInputs(stackValueMap, recipeOutput, recipeInputs);
+
+                    if (computedValue != null) {
+                        if (computedValue.compareTo(lowestValue) < 0) {
+                            lowestValue = computedValue;
+                        }
+                    }
+                    else {
+                        uncomputedStacks.add(recipeOutput);
+                    }
+                }
+
+                if ((lowestValue != null) && (lowestValue.getValue() > 0f)) {
+                    tempStackValueMap.put(WrappedStack.wrap(recipeOutput.getWrappedObject()), lowestValue);
+                }
+            }
+        }
+
+        return tempStackValueMap;
     }
 
     private void calculateValueStackMap() {
