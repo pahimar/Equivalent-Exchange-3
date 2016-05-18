@@ -112,14 +112,14 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
+
         Abilities.init();
     }
 
     @EventHandler
-    public void onServerStopping(FMLServerStoppingEvent event)
-    {
+    public void onServerStopping(FMLServerStoppingEvent event) {
+
         WorldEventHandler.hasInitilialized = false;
         EnergyValueRegistry.INSTANCE.save();
         TransmutationKnowledgeRegistry.getInstance().clear();
