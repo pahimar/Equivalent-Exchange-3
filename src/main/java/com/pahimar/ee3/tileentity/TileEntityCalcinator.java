@@ -58,7 +58,10 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     @Override
     public boolean canInsertItem(int slotIndex, ItemStack itemStack, int side)
     {
-        return isItemValidForSlot(slotIndex, itemStack);
+        if (side == ForgeDirection.DOWN.ordinal() || side == ForgeDirection.UP.ordinal()) {
+            return isItemValidForSlot(slotIndex, itemStack);
+        }
+        return false;
     }
 
     @Override
@@ -187,6 +190,11 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
+        if (itemStack != null && slotIndex == FUEL_INVENTORY_INDEX) {
+            return TileEntityFurnace.isItemFuel(itemStack);
+        } else if (itemStack != null && slotIndex == INPUT_INVENTORY_INDEX) {
+            return CalcinationHelper.getCalcinationResult(itemStack) != null;
+        }
         return false;
     }
 
