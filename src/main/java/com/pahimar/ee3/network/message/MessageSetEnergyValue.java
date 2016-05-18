@@ -1,6 +1,7 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
@@ -10,8 +11,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-
-import java.io.IOException;
 
 public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageSetEnergyValue, IMessage>
 {
@@ -39,12 +38,7 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
 
         if (compressedEnergyValueStackMapping != null)
         {
-            String decompressedEnergyValueStackMapping = null;
-            try {
-                decompressedEnergyValueStackMapping = CompressionHelper.decompress(compressedEnergyValueStackMapping);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String decompressedEnergyValueStackMapping = decompressedEnergyValueStackMapping = CompressionHelper.decompress(compressedEnergyValueStackMapping);
             this.energyValueStackMapping = EnergyValueStackMapping.createFromJson(decompressedEnergyValueStackMapping);
         }
     }
@@ -58,11 +52,7 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
 
         if (jsonEnergyValueStackMapping != null)
         {
-            try {
-                compressedBytes = CompressionHelper.compress(jsonEnergyValueStackMapping);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            compressedBytes = CompressionHelper.compress(jsonEnergyValueStackMapping);
         }
 
         if (compressedBytes != null)
@@ -81,7 +71,7 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
     {
         if (message.energyValueStackMapping != null && message.energyValueStackMapping.wrappedStack != null && message.energyValueStackMapping.energyValue != null)
         {
-            EnergyValueRegistry.getInstance().setEnergyValue(message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
+            EnergyValueRegistryProxy.setEnergyValue(message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received new EnergyValue '{}' for object '{}'", message.energyValueStackMapping.wrappedStack, message.energyValueStackMapping.energyValue);
         }
         else

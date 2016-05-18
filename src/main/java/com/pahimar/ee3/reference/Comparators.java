@@ -1,6 +1,6 @@
 package com.pahimar.ee3.reference;
 
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -129,9 +129,9 @@ public class Comparators
         {
             if (itemStack1 != null && itemStack2 != null)
             {
-                if (EnergyValueRegistry.getInstance().hasEnergyValue(itemStack1) && EnergyValueRegistry.getInstance().hasEnergyValue(itemStack2))
+                if (EnergyValueRegistryProxy.hasEnergyValue(itemStack1) && EnergyValueRegistryProxy.hasEnergyValue(itemStack2))
                 {
-                    return Float.compare(EnergyValueRegistry.getInstance().getEnergyValue(itemStack1).getValue(), EnergyValueRegistry.getInstance().getEnergyValue(itemStack2).getValue());
+                    return Float.compare(EnergyValueRegistryProxy.getEnergyValue(itemStack1).getValue(), EnergyValueRegistryProxy.getEnergyValue(itemStack2).getValue());
                 }
                 else
                 {

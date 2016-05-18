@@ -2,9 +2,7 @@ package com.pahimar.ee3;
 
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.command.CommandEE;
-import com.pahimar.ee3.exchange.CachedOreDictionary;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.NewEnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
@@ -116,17 +114,14 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        CachedOreDictionary.getInstance();
-        Abilities.initNotLearnables();
+        Abilities.init();
     }
 
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event)
     {
         WorldEventHandler.hasInitilialized = false;
-
-        EnergyValueRegistry.getInstance().save();
-        NewEnergyValueRegistry.INSTANCE.save();
+        EnergyValueRegistry.INSTANCE.save();
         TransmutationKnowledgeRegistry.getInstance().clear();
         AbilityRegistry.getInstance().save();
     }
@@ -146,9 +141,9 @@ public class EquivalentExchange3
         }
     }
 
-    public NewEnergyValueRegistry getEnergyValueRegistry()
+    public EnergyValueRegistry getEnergyValueRegistry()
     {
-        return NewEnergyValueRegistry.INSTANCE;
+        return EnergyValueRegistry.INSTANCE;
     }
 
     public RecipeRegistry getRecipeRegistry()

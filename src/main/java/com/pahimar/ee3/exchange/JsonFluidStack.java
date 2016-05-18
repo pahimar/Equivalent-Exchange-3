@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.lang.reflect.Type;
 
+@Deprecated
 public class JsonFluidStack implements JsonSerializer<JsonFluidStack>, JsonDeserializer<JsonFluidStack>
 {
     public static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(JsonFluidStack.class, new JsonFluidStack()).create();

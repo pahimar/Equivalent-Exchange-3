@@ -1,13 +1,11 @@
 package com.pahimar.ee3.util;
 
-import com.google.common.io.Files;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
@@ -215,73 +213,5 @@ public class SerializationHelper {
         {
             e.printStackTrace();
         }
-    }
-
-    public static void compressEnergyValueStackMapToFile(String fileName, Map<WrappedStack, EnergyValue> energyValueMap)
-    {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        compressEnergyValueStackMapToFile(new File(energyValuesDataDirectory, fileName), energyValueMap);
-    }
-
-    public static void compressEnergyValueStackMapToFile(File file, Map<WrappedStack, EnergyValue> energyValueMap)
-    {
-        try
-        {
-            byte[] energyValueRegistryArray = CompressionHelper.compress(EnergyValueRegistry.getInstance().toJson());
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(energyValueRegistryArray);
-            fos.close();
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(String fileName)
-    {
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues");
-        return decompressEnergyValueStackMapFromFile(new File(energyValuesDataDirectory, fileName));
-    }
-
-    public static Map<WrappedStack, EnergyValue> decompressEnergyValueStackMapFromFile(File file)
-    {
-        Map<WrappedStack, EnergyValue> energyValueStackMap = new TreeMap<WrappedStack, EnergyValue>();
-
-        try
-        {
-            String jsonEnergyValueStackMap = CompressionHelper.decompress(Files.toByteArray(file));
-            JsonReader jsonReader = new JsonReader(new StringReader(jsonEnergyValueStackMap));
-            jsonReader.beginArray();
-            while (jsonReader.hasNext())
-            {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
-                if (energyValueStackMapping != null)
-                {
-                    energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
-                }
-            }
-            jsonReader.endArray();
-            jsonReader.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-
-        return energyValueStackMap;
     }
 }

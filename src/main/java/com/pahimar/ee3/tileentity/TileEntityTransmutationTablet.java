@@ -2,12 +2,11 @@ package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityTransmutationTablet;
 import com.pahimar.ee3.reference.Names;
@@ -314,7 +313,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        if (slotIndex < STONE_INDEX && EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && AbilityRegistry.getInstance().isRecoverable(itemStack))
+        if (slotIndex < STONE_INDEX && EnergyValueRegistryProxy.hasEnergyValue(itemStack) && AbilityRegistryProxy.isRecoverable(itemStack))
         {
             return true;
         }

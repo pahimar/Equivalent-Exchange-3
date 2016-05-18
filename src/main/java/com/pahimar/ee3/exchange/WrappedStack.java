@@ -454,34 +454,28 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
      *
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
+
         int hashCode = 1;
         hashCode = (37 * hashCode) + stackSize;
 
-        if (wrappedStack instanceof ItemStack)
-        {
+        if (wrappedStack instanceof ItemStack) {
             hashCode = (37 * hashCode) + Item.getIdFromItem(((ItemStack) wrappedStack).getItem());
             hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
 
-            if (((ItemStack) wrappedStack).getTagCompound() != null)
-            {
+            if (((ItemStack) wrappedStack).getTagCompound() != null) {
                 hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getTagCompound().hashCode();
             }
         }
-        else if (wrappedStack instanceof OreStack)
-        {
-            if (((OreStack) wrappedStack).oreName != null)
-            {
+        else if (wrappedStack instanceof OreStack) {
+            if (((OreStack) wrappedStack).oreName != null) {
                 hashCode = (37 * hashCode) + ((OreStack) wrappedStack).oreName.hashCode();
             }
         }
-        else if (wrappedStack instanceof FluidStack)
-        {
+        else if (wrappedStack instanceof FluidStack) {
             hashCode = (37 * hashCode) + wrappedStack.hashCode();
 
-            if (((FluidStack) wrappedStack).tag != null)
-            {
+            if (((FluidStack) wrappedStack).tag != null) {
                 hashCode = (37 * hashCode) + ((FluidStack) wrappedStack).tag.hashCode();
             }
         }

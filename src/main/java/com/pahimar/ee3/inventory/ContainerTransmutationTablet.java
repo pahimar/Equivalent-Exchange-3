@@ -1,14 +1,13 @@
 package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
@@ -589,7 +588,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean isItemValid(ItemStack itemStack)
         {
-            return EnergyValueRegistry.getInstance().hasEnergyValue(itemStack) && AbilityRegistry.getInstance().isRecoverable(itemStack);
+            return EnergyValueRegistryProxy.hasEnergyValue(itemStack) && AbilityRegistryProxy.isRecoverable(itemStack);
         }
 
         @Override

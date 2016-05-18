@@ -12,7 +12,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 
-import java.io.IOException;
 import java.util.Collection;
 
 public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHandler<MessageTransmutationKnowledgeUpdate, IMessage>
@@ -83,12 +82,7 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
 
         if (compressedString != null)
         {
-            String uncompressedString = null;
-            try {
-                uncompressedString = CompressionHelper.decompress(compressedString);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String uncompressedString = CompressionHelper.decompress(compressedString);
             this.transmutationKnowledge = TransmutationKnowledge.createFromJson(uncompressedString);
         }
     }
@@ -102,13 +96,8 @@ public class MessageTransmutationKnowledgeUpdate implements IMessage, IMessageHa
 
         byte[] compressedString = null;
 
-        if (transmutationKnowledge != null)
-        {
-            try {
-                compressedString = CompressionHelper.compress(transmutationKnowledge.toJson());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (transmutationKnowledge != null) {
+            compressedString = CompressionHelper.compress(transmutationKnowledge.toJson());
         }
 
         if (compressedString != null)

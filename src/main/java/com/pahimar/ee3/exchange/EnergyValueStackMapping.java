@@ -5,6 +5,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 
 import java.lang.reflect.Type;
 
+@Deprecated
 public class EnergyValueStackMapping implements JsonSerializer<EnergyValueStackMapping>, JsonDeserializer<EnergyValueStackMapping>
 {
     public static final Gson jsonSerializer = (new GsonBuilder()).setPrettyPrinting().registerTypeAdapter(EnergyValueStackMapping.class, new EnergyValueStackMapping()).registerTypeAdapter(EnergyValue.class, new EnergyValue()).registerTypeAdapter(WrappedStack.class, new WrappedStack()).create();

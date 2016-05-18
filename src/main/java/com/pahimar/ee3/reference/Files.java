@@ -1,6 +1,6 @@
 package com.pahimar.ee3.reference;
 
-import com.pahimar.ee3.exchange.NewEnergyValueRegistry;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
@@ -26,11 +26,11 @@ public class Files {
 
         dataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
 
-        NewEnergyValueRegistry.energyValuesDirectory = new File(dataDirectory, "energy-values");
-        NewEnergyValueRegistry.energyValuesDirectory.mkdirs();
-        NewEnergyValueRegistry.energyValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, ENERGY_VALUES_JSON);
-        NewEnergyValueRegistry.preCalculationValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, PRE_CALCULATION_ENERGY_VALUES);
-        NewEnergyValueRegistry.postCalculationValuesFile = new File(NewEnergyValueRegistry.energyValuesDirectory, POST_CALCULATION_ENERGY_VALUES);
+        EnergyValueRegistry.energyValuesDirectory = new File(dataDirectory, "energy-values");
+        EnergyValueRegistry.energyValuesDirectory.mkdirs();
+        EnergyValueRegistry.energyValuesFile = new File(EnergyValueRegistry.energyValuesDirectory, ENERGY_VALUES_JSON);
+        EnergyValueRegistry.preCalculationValuesFile = new File(EnergyValueRegistry.energyValuesDirectory, PRE_CALCULATION_ENERGY_VALUES);
+        EnergyValueRegistry.postCalculationValuesFile = new File(EnergyValueRegistry.energyValuesDirectory, POST_CALCULATION_ENERGY_VALUES);
 
         abilitiesDataDirectory = new File(dataDirectory, "abilities");
         abilitiesDataDirectory.mkdirs();

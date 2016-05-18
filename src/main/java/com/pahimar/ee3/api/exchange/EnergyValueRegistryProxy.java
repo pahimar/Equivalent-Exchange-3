@@ -73,15 +73,24 @@ public final class EnergyValueRegistryProxy {
     }
 
     public static void setEnergyValue(Object object, Number energyValue) {
+        setEnergyValue(object, new EnergyValue(energyValue), Phase.POST_CALCULATION);
+    }
+
+    public static void setEnergyValue(Object object, EnergyValue energyValue) {
         setEnergyValue(object, energyValue, Phase.POST_CALCULATION);
     }
 
     public static void setEnergyValue(Object object, Number energyValue, Phase phase) {
 
+        setEnergyValue(object, new EnergyValue(energyValue), phase);
+    }
+
+    public static void setEnergyValue(Object object, EnergyValue energyValue, Phase phase) {
+
         init();
 
         if (ee3Mod != null) {
-            EE3Wrapper.ee3mod.getEnergyValueRegistry().setEnergyValue(object, new EnergyValue(energyValue), phase);
+            EE3Wrapper.ee3mod.getEnergyValueRegistry().setEnergyValue(object, energyValue, phase);
         }
     }
 
@@ -97,10 +106,7 @@ public final class EnergyValueRegistryProxy {
     }
 
     public enum Phase {
-        @Deprecated PRE_ASSIGNMENT,
         PRE_CALCULATION,
-        @Deprecated POST_ASSIGNMENT,
-        POST_CALCULATION,
-        ALL
+        POST_CALCULATION
     }
 }

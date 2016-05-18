@@ -4,8 +4,8 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.event.AbilityEvent;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.LoaderHelper;
@@ -80,7 +80,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
             }
             else
             {
-                return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
+                return !notLearnableSet.contains(wrappedObject) && EnergyValueRegistryProxy.hasEnergyValue(wrappedObject);
             }
         }
 
@@ -131,7 +131,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         if (WrappedStack.canBeWrapped(object))
         {
             WrappedStack wrappedObject = WrappedStack.wrap(object);
-            return !notRecoverableSet.contains(wrappedObject) && EnergyValueRegistry.getInstance().hasEnergyValue(wrappedObject);
+            return !notRecoverableSet.contains(wrappedObject) && EnergyValueRegistryProxy.hasEnergyValue(wrappedObject);
         }
 
         return false;

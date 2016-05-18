@@ -1,14 +1,10 @@
 package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.network.PacketHandler;
-import com.pahimar.ee3.network.message.MessageSetEnergyValue;
-import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -19,7 +15,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
-import java.util.Map;
 
 public class CommandSetEnergyValue extends CommandBase
 {
@@ -93,46 +88,13 @@ public class CommandSetEnergyValue extends CommandBase
 
             if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getValue(), 0) > 0)
             {
-                if (args[1].equalsIgnoreCase("pre"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
-
-                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES);
-                    preAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.PRE_CALCULATION_ENERGY_VALUES, preAssignedValues);
-                    EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
+                if (args[1].equalsIgnoreCase("pre")) {
+                    EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue, EnergyValueRegistryProxy.Phase.PRE_CALCULATION);
                 }
-                else if (args[1].equalsIgnoreCase("global-pre"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
-
-                    Map<WrappedStack, EnergyValue> preAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.preCalcluationEnergyValueFile);
-                    preAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.Global.preCalcluationEnergyValueFile, preAssignedValues);
-                    EnergyValueRegistry.getInstance().setShouldRegenNextRestart(true);
+                else if (args[1].equalsIgnoreCase("post")) {
+                    EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue);
                 }
-                else if (args[1].equalsIgnoreCase("post"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
-
-                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.POST_CALCULATION_ENERGY_VALUES);
-                    postAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.POST_CALCULATION_ENERGY_VALUES, postAssignedValues);
-
-                    PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
-                }
-                else if (args[1].equalsIgnoreCase("global-post"))
-                {
-                    EnergyValueRegistry.getInstance().setEnergyValue(wrappedStack, newEnergyValue);
-
-                    Map<WrappedStack, EnergyValue> postAssignedValues = SerializationHelper.readEnergyValueStackMapFromJsonFile(Files.Global.postCalcluationEnergyValueFile);
-                    postAssignedValues.put(wrappedStack, newEnergyValue);
-                    SerializationHelper.writeEnergyValueStackMapToJsonFile(Files.Global.postCalcluationEnergyValueFile, postAssignedValues);
-
-                    PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
-                }
-                else
-                {
+                else {
                     throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
                 }
 
@@ -151,7 +113,7 @@ public class CommandSetEnergyValue extends CommandBase
     {
         if (args.length == 2)
         {
-            return getListOfStringsMatchingLastWord(args, "pre", "global-pre", "post", "global-post");
+            return getListOfStringsMatchingLastWord(args, "pre", "post");
         }
         else if (args.length == 3)
         {

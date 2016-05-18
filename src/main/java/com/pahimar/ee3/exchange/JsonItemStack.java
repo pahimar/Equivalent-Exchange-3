@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.lang.reflect.Type;
 
+@Deprecated
 public class JsonItemStack implements JsonSerializer<JsonItemStack>, JsonDeserializer<JsonItemStack>
 {
     public static final Gson jsonSerializer = (new GsonBuilder()).registerTypeAdapter(JsonItemStack.class, new JsonItemStack()).create();
