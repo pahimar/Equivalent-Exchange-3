@@ -52,24 +52,20 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
+    public void onServerStarting(FMLServerStartingEvent event) {
+
         SerializationHelper.initModDataDirectories();
-
         TransmutationKnowledgeRegistry.getInstance();
-
         AbilityRegistry.getInstance().loadAbilityRegistryFromFile(ConfigurationHandler.Settings.onlyLoadFile);
-
         event.registerServerCommand(new CommandEE());
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
+
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         Files.init(event);
-        Files.Global.init(event);
 
         PacketHandler.init();
 
@@ -87,8 +83,8 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
+
         // Register the GUI Handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
@@ -127,14 +123,11 @@ public class EquivalentExchange3
     }
 
     @EventHandler
-    public void handleMissingMappingEvent(FMLMissingMappingsEvent event)
-    {
-        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get())
-        {
-            if (mapping.type == GameRegistry.Type.ITEM)
-            {
-                if (mapping.name.equals("EE3:alchemicalTome"))
-                {
+    public void handleMissingMappingEvent(FMLMissingMappingsEvent event) {
+
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+            if (mapping.type == GameRegistry.Type.ITEM) {
+                if (mapping.name.equals("EE3:alchemicalTome")) {
                     mapping.remap(ModItems.alchenomicon);
                 }
             }

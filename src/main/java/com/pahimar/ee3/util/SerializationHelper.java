@@ -13,15 +13,13 @@ import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.serialize.*;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SerializationHelper {
 
@@ -69,26 +67,6 @@ public class SerializationHelper {
 
         instancePlayerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
         instancePlayerDataDirectory.mkdirs();
-    }
-
-    public static String getModListMD5()
-    {
-        List<String> modList = new ArrayList<String>();
-
-        for (ModContainer modContainer : Loader.instance().getModList())
-        {
-            modList.add("[" + modContainer.getModId() + "-" + modContainer.getName() + "-" + modContainer.getVersion() + "]");
-        }
-
-        Collections.sort(modList);
-
-        StringBuilder modListString = new StringBuilder();
-        for (String modEntry : modList)
-        {
-            modListString.append(modEntry);
-        }
-
-        return DigestUtils.md5Hex(modListString.toString());
     }
 
     public static TransmutationKnowledge readTransmutationKnowledgeFromFile(File directory, String fileName)
