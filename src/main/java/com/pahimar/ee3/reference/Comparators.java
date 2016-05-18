@@ -33,11 +33,8 @@ public class Comparators
         public int compare(ItemStack itemStack1, ItemStack itemStack2) {
 
             if (itemStack1 != null && itemStack2 != null) {
-
-                String name1 = Item.itemRegistry.getNameForObject(itemStack1.getItem());
-                String name2 = Item.itemRegistry.getNameForObject(itemStack2.getItem());
-
-                if (name1.equalsIgnoreCase(name2)) {
+                // Sort on id
+                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0) {
                     // Sort on item
                     if (itemStack1.getItem() == itemStack2.getItem()) {
                         // Then sort on meta
@@ -71,7 +68,7 @@ public class Comparators
                     }
                 }
                 else {
-                    return name1.compareToIgnoreCase(name2);
+                    return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
                 }
             }
             else if (itemStack1 != null) {

@@ -538,13 +538,12 @@ public class NewEnergyValueRegistry {
 
     private Map<WrappedStack, EnergyValue> calculateStackValueMap(Map<WrappedStack, EnergyValue> stackValueMap) {
 
-        Map<WrappedStack, EnergyValue> computedMap = new TreeMap<>(stackValueMap);
-
-        Map<WrappedStack, EnergyValue> tempComputedMap = new TreeMap<>();
-        int passNumber = 0;
-
         LogHelper.info(ENERGY_VALUE_MARKER, "Beginning energy value calculation");
         long startingTime = System.nanoTime();
+
+        Map<WrappedStack, EnergyValue> computedMap = new TreeMap<>(stackValueMap);
+        Map<WrappedStack, EnergyValue> tempComputedMap = new TreeMap<>();
+        int passNumber = 0;
 
         while ((passNumber == 0 || tempComputedMap.size() != computedMap.size()) && passNumber < 16) {
 
@@ -560,7 +559,24 @@ public class NewEnergyValueRegistry {
                 // We won't attempt to recalculate values that already have a pre-calculation value assignment
                 if (!stackValueMap.containsKey(WrappedStack.wrap(recipeOutput, 1))) {
                     for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
-                        // FIXME PRIORITY NUMBER 1
+
+                        // FIXME PRIORITY NUMBER 1 - getting of values should use the same algo in getEnergyValue
+                        EnergyValue currentOutputValue = tempComputedMap.get(WrappedStack.wrap(recipeOutput, 1));
+                        EnergyValue computedOutputValue = computeFromInputs(tempComputedMap, recipeOutput, recipeInputs);
+
+                        if (computedOutputValue != null && computedOutputValue.compareTo(currentOutputValue) < 0) {
+
+                            uncomputedStacks.removeIf(wrappedStack -> uncomputedStacks.contains(WrappedStack.wrap(recipeOutput, 1)));
+
+                            if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
+                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {}", passNumber, computedOutputValue, recipeOutput);
+                            }
+
+                            tempComputedMap.put(WrappedStack.wrap(recipeOutput), computedOutputValue);
+                        }
+                        else if (computedOutputValue != null) {
+                            uncomputedStacks.add(WrappedStack.wrap(recipeOutput, 1));
+                        }
                     }
                 }
             }
@@ -576,43 +592,6 @@ public class NewEnergyValueRegistry {
         LogHelper.info(ENERGY_VALUE_MARKER, "Finished dynamic value calculation (calculated {} values for objects in {} ns)", computedMap.size() - stackValueMap.size(), endingTime);
 
         return computedMap;
-    }
-
-    private Map<WrappedStack, EnergyValue> computeValuesFromRecipes(Map<WrappedStack, EnergyValue> stackValueMap) {
-
-        Map<WrappedStack, EnergyValue> tempStackValueMap = new TreeMap<>();
-
-        /**
-         * Algorithm
-         *
-         * For everything we know how to make in the RecipeRegistry
-         *  Check to see if we have a value for it already
-         */
-        for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet()) {
-            // TODO Review: possible fault in the logic here that is preventing some values from being assigned?
-            if (!hasEnergyValue(recipeOutput.getWrappedObject()) && !tempStackValueMap.containsKey(recipeOutput)) {
-                EnergyValue lowestValue = null;
-
-                for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
-                    EnergyValue computedValue = computeFromInputs(stackValueMap, recipeOutput, recipeInputs);
-
-                    if (computedValue != null) {
-                        if (computedValue.compareTo(lowestValue) < 0) {
-                            lowestValue = computedValue;
-                        }
-                    }
-                    else {
-                        uncomputedStacks.add(recipeOutput);
-                    }
-                }
-
-                if ((lowestValue != null) && (lowestValue.getValue() > 0f)) {
-                    tempStackValueMap.put(WrappedStack.wrap(recipeOutput.getWrappedObject()), lowestValue);
-                }
-            }
-        }
-
-        return tempStackValueMap;
     }
 
     private void calculateValueStackMap() {

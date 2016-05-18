@@ -118,7 +118,6 @@ public class EquivalentExchange3
     {
         CachedOreDictionary.getInstance();
         Abilities.initNotLearnables();
-        NewEnergyValueRegistry.INSTANCE.compute();
     }
 
     @EventHandler

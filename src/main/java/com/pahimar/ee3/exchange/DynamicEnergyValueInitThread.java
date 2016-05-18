@@ -20,8 +20,9 @@ public class DynamicEnergyValueInitThread implements Runnable
         RecipeRegistry.getInstance().registerVanillaRecipes();
         AludelRecipeManager.registerRecipes();
 
-        long startTime = System.currentTimeMillis();
-        EnergyValueRegistry.getInstance().init();
-        LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "DynamicEMC system initialized after {} ms", System.currentTimeMillis() - startTime);
+        long startTime = System.nanoTime();
+//        EnergyValueRegistry.getInstance().init();
+        NewEnergyValueRegistry.INSTANCE.compute();
+        LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "DynamicEMC system initialized after {} ms", System.nanoTime() - startTime);
     }
 }
