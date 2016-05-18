@@ -42,6 +42,7 @@ public class EnergyValues {
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("sand"), 1, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("sandstone"), 4, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("slabWood"), 4, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new OreStack("slimeball"), 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("stairWood"), 12, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("stickWood"), 4, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("stone"), 1, Phase.PRE_CALCULATION);
@@ -98,7 +99,6 @@ public class EnergyValues {
 
         /* Miscellaneous */
         EnergyValueRegistryProxy.setEnergyValue(Items.snowball, 0.25f, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(Items.slime_ball, 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.bone, 48, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.ender_pearl, 1024, Phase.PRE_CALCULATION);
 
