@@ -92,14 +92,14 @@ public class ConfigurationHandler {
         private static final String ENERGY_VALUE_REGENERATE_WHEN_NAME = "regenerate_values_when";
         private static final String ENERGY_VALUE_REGENERATE_WHEN_LABEL = "energy_value.regenerate_values_when.label";
         private static final String ENERGY_VALUE_REGENERATE_WHEN_COMMENT = "energy_value.regenerate_values_when.comment";
-        private static final String ENERGY_VALUE_REGENERATE_WHEN_DEFAULT = "Always"; // TODO This is set for during mod dev, set to As Needed for release
+        private static final String ENERGY_VALUE_REGENERATE_WHEN_DEFAULT = "As Needed";
         private static final String[] ENERGY_VALUE_REGENERATE_WHEN_OPTIONS = new String[]{"As Needed", "Always"};
 
         public static boolean energyValueDebugLoggingEnabled;
         private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_NAME = "debug_logging_enabled";
         private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_LABEL = "energy_value.debug_logging_enabled.label";
         private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_COMMENT = "energy_value.debug_logging_enabled.comment";
-        private static final boolean ENERGY_VALUE_DEBUG_LOGGING_ENABLED_DEFAULT = true; // TODO This is set for during mod dev, set to false for release
+        private static final boolean ENERGY_VALUE_DEBUG_LOGGING_ENABLED_DEFAULT = false;
 
         public static String soundMode;
         private static final String SOUND_MODE_NAME = "mode";
