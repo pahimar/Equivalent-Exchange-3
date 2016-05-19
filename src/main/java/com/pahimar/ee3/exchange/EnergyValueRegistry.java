@@ -579,7 +579,7 @@ public class EnergyValueRegistry {
                             uncomputedStacks.removeIf(wrappedStack -> uncomputedStacks.contains(WrappedStack.wrap(recipeOutput, 1)));
 
                             if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {}", passNumber, computedOutputValue, recipeOutput);
+                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {}", passNumber, computedOutputValue, WrappedStack.wrap(recipeOutput, 1));
                             }
 
                             tempComputedMap.put(WrappedStack.wrap(recipeOutput), computedOutputValue);

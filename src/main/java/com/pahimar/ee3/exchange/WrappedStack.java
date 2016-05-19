@@ -6,7 +6,6 @@ import com.pahimar.ee3.util.ItemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -50,15 +49,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
             if (((ItemStack) object).getItem() != null)
             {
                 ItemStack itemStackObject = (ItemStack) object;
-                ItemStack itemStack = new ItemStack(itemStackObject.getItem(), itemStackObject.stackSize, itemStackObject.getItemDamage());
-                if (itemStackObject.stackTagCompound != null)
-                {
-                    itemStack.stackTagCompound = (NBTTagCompound) itemStackObject.stackTagCompound.copy();
-                }
                 objectType = "itemstack";
-                stackSize = itemStack.stackSize;
-                itemStack.stackSize = 1;
-                wrappedStack = itemStack;
+                stackSize = ((ItemStack) object).stackSize;
+                wrappedStack = ItemHelper.clone((ItemStack) object, 1);
             }
             else
             {
@@ -145,11 +138,9 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
 
         if (object instanceof ItemStack)
         {
-            ItemStack itemStack = ((ItemStack) object).copy();
             objectType = "itemstack";
             this.stackSize = stackSize;
-            itemStack.stackSize = 1;
-            wrappedStack = itemStack;
+            wrappedStack = ItemHelper.clone((ItemStack) object, 1);
         }
         else if (object instanceof OreStack)
         {
