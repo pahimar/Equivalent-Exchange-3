@@ -20,6 +20,9 @@ apply plugin: 'forge'
 apply plugin: 'curseforge'
 apply plugin: 'maven'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 repositories {
     maven { // the repo from which to get NEI and stuff
         name 'CB Repo'
