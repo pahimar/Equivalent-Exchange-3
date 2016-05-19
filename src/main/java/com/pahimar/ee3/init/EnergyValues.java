@@ -50,9 +50,9 @@ public class EnergyValues {
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("treeSapling"), 32, Phase.PRE_CALCULATION);
 
         // Fluids
-        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.WATER, 1, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.LAVA, 64, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.getFluid("milk"), 64, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.WATER, 0.001, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.LAVA, 0.064, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.getFluid("milk"), 0.064, Phase.PRE_CALCULATION);
 
         /* Building Blocks */
         EnergyValueRegistryProxy.setEnergyValue(Blocks.stone, 1, Phase.PRE_CALCULATION);
