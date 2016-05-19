@@ -34,6 +34,7 @@ public class RecipeRegistry {
         return recipeRegistry;
     }
 
+    // FIXME Prevent adding multiple equivalent entries {@link https://github.com/pahimar/Equivalent-Exchange-3/issues/1046}
     public void addRecipe(Object recipeOutput, List<?> recipeInputList) {
 
         // Wrap the recipe output
@@ -42,27 +43,40 @@ public class RecipeRegistry {
             return;
         }
 
-        List<WrappedStack> wrappedRecipeInputList = new ArrayList<WrappedStack>();
+        List<WrappedStack> wrappedRecipeInputList = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
+
         for (Object recipeInputObject : recipeInputList) {
+
             WrappedStack wrappedInputObject = WrappedStack.wrap(recipeInputObject);
+
             if (wrappedInputObject != null) {
                 wrappedRecipeInputList.add(wrappedInputObject);
                 stringBuilder.append(wrappedInputObject);
                 stringBuilder.append(" ");
-            } else {
+            }
+            else {
                 return;
             }
         }
 
+        // Check to see if we already have this recipe in the map
+        boolean existsAlready = false;
+        for (List<WrappedStack> recipeInputs : recipeMap.get(wrappedRecipeOutput)) {
+            if (recipeInputs.containsAll(wrappedRecipeInputList) && wrappedRecipeInputList.containsAll(recipeInputs)) {
+                existsAlready = true;
+            }
+        }
+
         // Add the recipe mapping only if we don't already have it
-        if (!recipeMap.get(wrappedRecipeOutput).contains(wrappedRecipeInputList)) {
+        if (!existsAlready) {
             LogHelper.trace(RECIPE_MARKER, "[{}] Mod with ID '{}' added recipe (Output: {}, Inputs: {})", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim());
             recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
         }
     }
 
     public void registerVanillaRecipes() {
+
         RecipesVanilla.registerRecipes();
         RecipesFluidContainers.registerRecipes();
         RecipesPotions.registerRecipes();
@@ -71,7 +85,6 @@ public class RecipeRegistry {
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings() {
 
         if (immutableRecipeMap == null) {
-            // FIXME Check to ensure we don't have multiple entries {@link https://github.com/pahimar/Equivalent-Exchange-3/issues/1046}
             immutableRecipeMap = ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
         }
 
