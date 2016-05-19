@@ -1,6 +1,6 @@
 package com.pahimar.ee3.recipe;
 
-import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
+import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
