@@ -48,13 +48,13 @@ public class ModItems
         GameRegistry.registerItem(stonePhilosophers, Names.Items.PHILOSOPHERS_STONE);
         GameRegistry.registerItem(chalk, Names.Items.CHALK);
         GameRegistry.registerItem(alchemicalUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
-        GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
+//        GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
         GameRegistry.registerItem(alchenomicon, Names.Items.ALCHENOMICON, Names.Items.ALCHEMICAL_TOME);
-        GameRegistry.registerItem(matter, Names.Items.MATTER);
-        GameRegistry.registerItem(gem, Names.Items.GEM);
-        GameRegistry.registerItem(lootBall, Names.Items.LOOT_BALL);
-        GameRegistry.registerItem(knowledgeScroll, Names.Items.KNOWLEDGE_SCROLL);
-        GameRegistry.registerItem(potionLethe, Names.Items.POTION_LETHE);
+//        GameRegistry.registerItem(matter, Names.Items.MATTER);
+//        GameRegistry.registerItem(gem, Names.Items.GEM);
+//        GameRegistry.registerItem(lootBall, Names.Items.LOOT_BALL);
+//        GameRegistry.registerItem(knowledgeScroll, Names.Items.KNOWLEDGE_SCROLL);
+//        GameRegistry.registerItem(potionLethe, Names.Items.POTION_LETHE);
 
 //        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
 //        GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);

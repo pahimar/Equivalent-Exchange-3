@@ -72,6 +72,94 @@ public final class EnergyValueRegistryProxy {
         return Collections.EMPTY_LIST;
     }
 
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPreAssignedEnergyValue(Object object, float energyValue) {
+        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue) {
+        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPreCalculationEnergyValue(Object object, float energyValue) {
+        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPreCalculationEnergyValue(Object object, EnergyValue energyValue) {
+        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPostAssignedEnergyValue(Object object, float energyValue) {
+        setEnergyValue(object, energyValue);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue) {
+        setEnergyValue(object, energyValue);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPostCalculationEnergyValue(Object object, float energyValue) {
+        setEnergyValue(object, energyValue);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param object
+     * @param energyValue
+     */
+    @Deprecated
+    public static void addPostCalculationEnergyValue(Object object, EnergyValue energyValue) {
+        setEnergyValue(object, energyValue);
+    }
+
     public static void setEnergyValue(Object object, Number energyValue) {
         setEnergyValue(object, new EnergyValue(energyValue), Phase.POST_CALCULATION);
     }
@@ -106,7 +194,11 @@ public final class EnergyValueRegistryProxy {
     }
 
     public enum Phase {
+        @Deprecated PRE_ASSIGNMENT,
         PRE_CALCULATION,
-        POST_CALCULATION
+        @Deprecated POST_ASSIGNMENT,
+        POST_CALCULATION,
+        @Deprecated RUNTIME,
+        @Deprecated ALL
     }
 }

@@ -29,8 +29,7 @@ public class Recipes
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.ashInfusedStoneSlab, 6), "sss", 's', new ItemStack(ModBlocks.ashInfusedStone));
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.ashInfusedStone, 1), "s", "s", 's', new ItemStack(ModBlocks.ashInfusedStoneSlab));
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chalkBlock), "bcb", "cbc", "bcb", 'b', new ItemStack(Items.dye, 1, 15), 'c', new ItemStack(Items.clay_ball));
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.chalkBlock), "cc", "cc", 'c', new ItemStack(ModItems.chalk));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.chalk), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.clay_ball));
 
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.glassBell), "ggg", "g g", "g g", 'g', Blocks.glass);
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.calcinator), "i i", "sis", "s s", 'i', "ingotIron", 's', Blocks.stone));
