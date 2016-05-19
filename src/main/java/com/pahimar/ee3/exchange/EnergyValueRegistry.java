@@ -2,7 +2,6 @@ package com.pahimar.ee3.exchange;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedMap;
-import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.event.EnergyValueEvent;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
@@ -15,14 +14,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
@@ -638,10 +637,10 @@ public class EnergyValueRegistry {
          * the local ones
          */
         if (!loadedFromMap) {
-            writeToJsonFile(stackValueMap, energyValuesFile);
+            SerializationHelper.writeMapToFile(stackValueMap, energyValuesFile);
         }
-        writeToJsonFile(preCalculationStackValueMap, preCalculationValuesFile);
-        writeToJsonFile(postCalculationStackValueMap, postCalculationValuesFile);
+        SerializationHelper.writeMapToFile(preCalculationStackValueMap, preCalculationValuesFile);
+        SerializationHelper.writeMapToFile(postCalculationStackValueMap, postCalculationValuesFile);
     }
 
     /**
@@ -653,20 +652,20 @@ public class EnergyValueRegistry {
     public void load() {
 
         try {
-            preCalculationStackValueMap.putAll(readFromJsonFile(preCalculationValuesFile));
+            preCalculationStackValueMap.putAll(SerializationHelper.readMapFromFile(preCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no pre-calculation values were loaded from file because file wasn't found
         }
 
         try {
-            postCalculationStackValueMap.putAll(readFromJsonFile(postCalculationValuesFile));
+            postCalculationStackValueMap.putAll(SerializationHelper.readMapFromFile(postCalculationValuesFile));
         } catch (FileNotFoundException e) {
             // TODO Log that no post-calculation values were loaded from file because file wasn't found
         }
 
         try {
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
-            stackMapBuilder.putAll(readFromJsonFile(energyValuesFile));
+            stackMapBuilder.putAll(SerializationHelper.readMapFromFile(energyValuesFile));
             stackValueMap = stackMapBuilder.build();
             calculateValueStackMap();
         } catch (FileNotFoundException e) {
@@ -690,69 +689,5 @@ public class EnergyValueRegistry {
             stackValueMap = stackMappingsBuilder.build();
             calculateValueStackMap();
         }
-    }
-
-    /**
-     *  @see net.minecraft.nbt.CompressedStreamTools#safeWrite(NBTTagCompound, File)
-     */
-    private static void writeToJsonFile(Map<WrappedStack, EnergyValue> valueMap, File file) {
-
-        File tempFile = new File(file.getAbsolutePath() + "_tmp");
-
-        if (tempFile.exists()) {
-            tempFile.delete();
-        }
-
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
-
-            bufferedWriter.write(SerializationHelper.GSON.toJson(valueMap, SerializationHelper.ENERGY_VALUE_MAP_TYPE));
-            bufferedWriter.close();
-        }
-        catch (IOException exception) {
-            exception.printStackTrace(); // TODO Better logging of the exception
-        }
-
-        if (file.exists()) {
-            file.delete();
-        }
-
-        if (file.exists()) {
-            LogHelper.warn("Failed to delete " + file);
-        }
-        else {
-            tempFile.renameTo(file);
-        }
-    }
-
-    private static Map<WrappedStack, EnergyValue> readFromJsonFile(File file) throws FileNotFoundException {
-
-        Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
-
-        StringBuilder jsonStringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-
-            jsonStringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                jsonStringBuilder.append(line);
-            }
-        }
-        catch (IOException exception) {
-            if (exception instanceof FileNotFoundException) {
-                throw (FileNotFoundException) exception;
-            }
-            else {
-                exception.printStackTrace(); // TODO Better logging of the exception (other)
-            }
-        }
-
-        try {
-            valueMap = SerializationHelper.GSON.fromJson(jsonStringBuilder.toString(), SerializationHelper.ENERGY_VALUE_MAP_TYPE);
-        }
-        catch (JsonParseException exception) {
-            // TODO Better logging of the exception (failed parsing so no values loaded)
-        }
-
-        return valueMap;
     }
 }

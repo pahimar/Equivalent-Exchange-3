@@ -3,7 +3,6 @@ package com.pahimar.ee3.util.serialize;
 import com.google.gson.*;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -11,54 +10,31 @@ import java.lang.reflect.Type;
 
 public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, JsonDeserializer<WrappedStack> {
 
-    private static final String DATA = "data";
-    private static final String TYPE = "type";
-    private static final String TYPE_ITEMSTACK = "itemstack";
-    private static final String TYPE_ORESTACK = "orestack";
-    private static final String TYPE_FLUIDSTACK = "fluidstack";
+    private static final String TYPE_ITEM_STACK = "itemstack";
+    private static final String TYPE_ORE_STACK = "orestack";
+    private static final String TYPE_FLUID_STACK = "fluidstack";
 
     @Override
-    // TODO Update deserialize to match up with new serialize method implementation
     public WrappedStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
         if (json.isJsonObject()) {
 
             JsonObject jsonObject = json.getAsJsonObject();
 
-            String type = null;
+            WrappedStack wrappedStack = null;
 
-            try {
-                if (jsonObject.get(TYPE).getAsJsonPrimitive().isString()) {
-                    type = jsonObject.get(TYPE).getAsString();
-                }
+            if (jsonObject.has(TYPE_ITEM_STACK)) {
+                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class));
             }
-            catch (IllegalStateException exception) {
+            else if (jsonObject.has(TYPE_ORE_STACK)) {
+                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class));
+            }
+            else if (jsonObject.has(TYPE_FLUID_STACK)) {
+                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class));
             }
 
-            if (jsonObject.get(DATA).isJsonObject()) {
-                JsonObject data = jsonObject.getAsJsonObject(DATA);
-
-                if (TYPE_ITEMSTACK.equalsIgnoreCase(type)) {
-                    ItemStack itemStack = SerializationHelper.GSON.fromJson(data, ItemStack.class);
-
-                    if (itemStack != null) {
-                        return WrappedStack.wrap(itemStack);
-                    }
-                }
-                else if (TYPE_ORESTACK.equalsIgnoreCase(type)) {
-                    OreStack oreStack = SerializationHelper.GSON.fromJson(data, OreStack.class);
-
-                    if (oreStack != null) {
-                        return WrappedStack.wrap(oreStack);
-                    }
-                }
-                else if (TYPE_FLUIDSTACK.equalsIgnoreCase(type)) {
-                    FluidStack fluidStack = SerializationHelper.GSON.fromJson(data, FluidStack.class);
-
-                    if (fluidStack != null) {
-                        return WrappedStack.wrap(fluidStack);
-                    }
-                }
+            if (wrappedStack != null) {
+                return wrappedStack;
             }
         }
 

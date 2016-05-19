@@ -24,30 +24,28 @@ public class EnergyValueMappingsTestSuite {
 
     public EnergyValueMappingsTestSuite()
     {
-        testSuiteValueMap = new TreeMap<WrappedStack, EnergyValue>();
+        testSuiteValueMap = new TreeMap<>();
     }
 
-    public EnergyValueMappingsTestSuite(File jsonFile)
-    {
-        if (jsonFile != null && jsonFile.exists() && jsonFile.isFile())
-        {
+    public EnergyValueMappingsTestSuite(File jsonFile) {
+
+        if (jsonFile != null && jsonFile.exists() && jsonFile.isFile()) {
             testSuiteValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(jsonFile);
         }
     }
 
-    public void add(Object object, Object value)
-    {
-        if (WrappedStack.canBeWrapped(object))
-        {
-            if (value instanceof Number)
-            {
+    public void add(Object object, Object value) {
+
+        if (WrappedStack.canBeWrapped(object)) {
+
+            if (value instanceof Number) {
                 Number number = (Number) value;
                 WrappedStack wrappedStack = WrappedStack.wrap(object);
                 wrappedStack.setStackSize(1);
                 testSuiteValueMap.put(wrappedStack, new EnergyValue(number.floatValue()));
             }
-            else if (value == null)
-            {
+            else if (value == null) {
+
                 WrappedStack wrappedStack = WrappedStack.wrap(object);
                 wrappedStack.setStackSize(1);
                 testSuiteValueMap.put(wrappedStack, null);
@@ -55,86 +53,77 @@ public class EnergyValueMappingsTestSuite {
         }
     }
 
-    public void remove(Object object)
-    {
-        if (WrappedStack.canBeWrapped(object))
-        {
+    public void remove(Object object) {
+
+        if (WrappedStack.canBeWrapped(object)) {
             WrappedStack wrappedStack = WrappedStack.wrap(object);
             wrappedStack.setStackSize(1);
             testSuiteValueMap.remove(wrappedStack);
         }
     }
 
-    public void loadTestSuite(File jsonFile)
-    {
-        if (jsonFile != null && jsonFile.exists() && jsonFile.isFile())
-        {
+    public void loadTestSuite(File jsonFile) {
+
+        if (jsonFile != null && jsonFile.exists() && jsonFile.isFile()) {
             testSuiteValueMap = SerializationHelper.readEnergyValueStackMapFromJsonFile(jsonFile);
         }
     }
 
-    public void saveTestSuite(File jsonFile)
-    {
-        if (jsonFile != null)
-        {
+    public void saveTestSuite(File jsonFile) {
+
+        if (jsonFile != null) {
             SerializationHelper.writeEnergyValueStackMapToJsonFile(jsonFile, testSuiteValueMap);
         }
     }
 
-    public void runTestSuite()
-    {
+    public void runTestSuite() {
         runTestSuite(false);
     }
 
-    public void runTestSuite(boolean strict)
-    {
-        List<String> successMessages = new ArrayList<String>();
-        List<String> failureMessages = new ArrayList<String>();
-        for (WrappedStack wrappedStack : testSuiteValueMap.keySet())
-        {
-            EnergyValue registryEnergyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedStack, strict);
-            EnergyValue testSuiteEnergryValue = testSuiteValueMap.get(wrappedStack);
+    public void runTestSuite(boolean strict) {
 
-            if (registryEnergyValue == null && testSuiteEnergryValue == null)
-            {
+        List<String> successMessages = new ArrayList<>();
+        List<String> failureMessages = new ArrayList<>();
+
+        for (WrappedStack wrappedStack : testSuiteValueMap.keySet()) {
+
+            EnergyValue registryEnergyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedStack, strict);
+            EnergyValue testSuiteEnergyValue = testSuiteValueMap.get(wrappedStack);
+
+            if (registryEnergyValue == null && testSuiteEnergyValue == null) {
                 /**
                  *  Success - anticipated that no value was found and no value was found
                  */
-                successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergryValue, registryEnergyValue));
+                successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergyValue, registryEnergyValue));
             }
-            else if (registryEnergyValue == null)
-            {
+            else if (registryEnergyValue == null) {
                 /**
                  *  Failure - anticipated that a value would be found but no value was found
                  */
-                failureMessages.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergryValue, registryEnergyValue));
+                failureMessages.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergyValue, registryEnergyValue));
             }
-            else if (registryEnergyValue != null && testSuiteEnergryValue != null)
-            {
-                if (registryEnergyValue.equals(testSuiteEnergryValue))
-                {
+            else if (registryEnergyValue != null && testSuiteEnergyValue != null) {
+
+                if (registryEnergyValue.equals(testSuiteEnergyValue)) {
                     /**
                      *  Success - anticipated that a specific value would be found and the anticipated value was found
                      */
-                    successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergryValue, registryEnergyValue));
+                    successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergyValue, registryEnergyValue));
                 }
-                else
-                {
+                else {
                     /**
                      *  Failure - anticipated that a specific value would be found and while a value was found it was not the anticipated one
                      */
-                    failureMessages.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergryValue, registryEnergyValue));
+                    failureMessages.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, testSuiteEnergyValue, registryEnergyValue));
                 }
             }
         }
 
-        for (String successMessage : successMessages)
-        {
+        for (String successMessage : successMessages) {
             LogHelper.info(SUCCESS_MARKER, successMessage);
         }
 
-        for (String failureMessage : failureMessages)
-        {
+        for (String failureMessage : failureMessages) {
             LogHelper.warn(FAILURE_MARKER, failureMessage);
         }
     }

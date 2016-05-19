@@ -3,6 +3,7 @@ package com.pahimar.ee3.util;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
@@ -19,11 +20,14 @@ import net.minecraftforge.fluids.FluidStack;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class SerializationHelper {
 
     public static final Type ENERGY_VALUE_MAP_TYPE = new TypeToken<Map<WrappedStack, EnergyValue>>(){}.getType();
+    public static final Type WRAPPED_STACK_SET_TYPE = new TypeToken<Set<WrappedStack>>(){}.getType();
     public static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .enableComplexMapKeySerialization()
@@ -58,10 +62,11 @@ public class SerializationHelper {
     }
 
     /**
+     * TODO Move this to {@link com.pahimar.ee3.reference.Files}
+     *
      * Creates (if one does not exist already) and initializes a mod specific File reference inside of the current world's playerdata directory
      */
-    public static void initModDataDirectories()
-    {
+    public static void initModDataDirectories() {
         instanceDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         instanceDataDirectory.mkdirs();
 
@@ -190,6 +195,94 @@ public class SerializationHelper {
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public static Set<WrappedStack> readSetFromFile(File file) throws FileNotFoundException {
+
+        Set<WrappedStack> wrappedStackSet = new TreeSet<>();
+
+        try {
+            wrappedStackSet = GSON.fromJson(readJsonFile(file), WRAPPED_STACK_SET_TYPE);
+        }
+        catch (JsonParseException exception) {
+            // TODO Better logging of the exception (failed parsing so no values loaded)
+        }
+
+        return wrappedStackSet;
+    }
+
+    public static void writeSetToFile(Set<WrappedStack> wrappedStackSet, File file) {
+        writeJsonFile(file, GSON.toJson(wrappedStackSet));
+    }
+
+    public static Map<WrappedStack, EnergyValue> readMapFromFile(File file) throws FileNotFoundException {
+
+        Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
+
+        try {
+            valueMap = GSON.fromJson(readJsonFile(file), ENERGY_VALUE_MAP_TYPE);
+        }
+        catch (JsonParseException exception) {
+            // TODO Better logging of the exception (failed parsing so no values loaded)
+        }
+
+        return valueMap;
+    }
+
+    public static void writeMapToFile(Map<WrappedStack, EnergyValue> valueMap, File file) {
+        writeJsonFile(file, GSON.toJson(valueMap, ENERGY_VALUE_MAP_TYPE));
+    }
+
+    private static String readJsonFile(File file) throws FileNotFoundException {
+
+        StringBuilder jsonStringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+
+            jsonStringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                jsonStringBuilder.append(line);
+            }
+        }
+        catch (IOException exception) {
+            if (exception instanceof FileNotFoundException) {
+                throw (FileNotFoundException) exception;
+            }
+            else {
+                exception.printStackTrace(); // TODO Better logging of the exception
+            }
+        }
+
+        return jsonStringBuilder.toString();
+    }
+
+    private static void writeJsonFile(File file, String fileContents) {
+
+        File tempFile = new File(file.getAbsolutePath() + "_tmp");
+
+        if (tempFile.exists()) {
+            tempFile.delete();
+        }
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
+
+            bufferedWriter.write(fileContents);
+            bufferedWriter.close();
+        }
+        catch (IOException exception) {
+            exception.printStackTrace(); // TODO Better logging of the exception
+        }
+
+        if (file.exists()) {
+            file.delete();
+        }
+
+        if (file.exists()) {
+            LogHelper.warn("Failed to delete " + file);
+        }
+        else {
+            tempFile.renameTo(file);
         }
     }
 }
