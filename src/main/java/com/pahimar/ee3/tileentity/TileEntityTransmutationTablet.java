@@ -61,7 +61,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
 
     public void consumeInventoryForEnergyValue(ItemStack outputItemStack)
     {
-        EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValue(outputItemStack);
+        EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(outputItemStack);
 
         /**
          *  Algorithm:

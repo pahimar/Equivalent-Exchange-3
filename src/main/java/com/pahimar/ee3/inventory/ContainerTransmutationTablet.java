@@ -16,6 +16,7 @@ import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -284,7 +285,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             }
             else if (slotIndex >= TileEntityTransmutationTablet.INVENTORY_SIZE && slotIndex < 40)
             {
-                if (!this.mergeTransmutatedItemStack(entityPlayer, slot, slotItemStack, 40, inventorySlots.size(), false))
+                if (!this.mergeTransmutedItemStack(entityPlayer, slot, slotItemStack, 40, inventorySlots.size(), false))
                 {
                     return null;
                 }
@@ -327,81 +328,65 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         return itemStack;
     }
 
-    protected boolean mergeTransmutatedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending)
-    {
-        if (this.tileEntityTransmutationTablet.getAvailableEnergyValue().compareTo(EnergyValueRegistryProxy.getEnergyValue(itemStack)) < 0)
-        {
+    protected boolean mergeTransmutedItemStack(EntityPlayer entityPlayer, Slot transmutationOutputSlot, ItemStack itemStack, int slotMin, int slotMax, boolean ascending) {
+
+        // Calculate how many items can be transmuted
+        int numCanTransmute = MathHelper.floor(this.tileEntityTransmutationTablet.getAvailableEnergyValue().getValue() / EnergyValueRegistryProxy.getEnergyValue(itemStack).getValue());
+        int numTransmuted = 0;
+
+        ItemStack itemStack1 = itemStack.copy();
+        itemStack1.stackSize = Math.min(numCanTransmute, itemStack1.getMaxStackSize());
+
+        if (numCanTransmute <= 0) {
             return false;
         }
 
-        transmutationOutputSlot.onPickupFromSlot(entityPlayer, itemStack);
-
-        boolean slotFound = false;
         int currentSlotIndex = ascending ? slotMax - 1 : slotMin;
 
         Slot slot;
         ItemStack stackInSlot;
 
-        if (itemStack.isStackable())
-        {
-            while (itemStack.stackSize > 0 && (!ascending && currentSlotIndex < slotMax || ascending && currentSlotIndex >= slotMin))
-            {
-                slot = (Slot) this.inventorySlots.get(currentSlotIndex);
-                stackInSlot = slot.getStack();
+        while (itemStack1.stackSize > 0 && (!ascending && currentSlotIndex < slotMax || ascending && currentSlotIndex >= slotMin)) {
 
-                if (slot.isItemValid(itemStack) && ItemHelper.equalsIgnoreStackSize(itemStack, stackInSlot))
-                {
-                    int combinedStackSize = stackInSlot.stackSize + itemStack.stackSize;
-                    int slotStackSizeLimit = Math.min(stackInSlot.getMaxStackSize(), slot.getSlotStackLimit());
+            slot = (Slot) this.inventorySlots.get(currentSlotIndex);
+            stackInSlot = slot.getStack();
 
-                    if (combinedStackSize <= slotStackSizeLimit)
-                    {
-                        itemStack.stackSize = 0;
-                        stackInSlot.stackSize = combinedStackSize;
-                        slot.onSlotChanged();
-                        slotFound = true;
-                    }
-                    else if (stackInSlot.stackSize < slotStackSizeLimit)
-                    {
-                        itemStack.stackSize -= slotStackSizeLimit - stackInSlot.stackSize;
-                        stackInSlot.stackSize = slotStackSizeLimit;
-                        slot.onSlotChanged();
-                        slotFound = true;
-                    }
-                }
+            if (stackInSlot == null) {
 
-                currentSlotIndex += ascending ? -1 : 1;
+                stackInSlot = new ItemStack(itemStack1.getItem());
+                stackInSlot.stackSize = itemStack1.stackSize;
+                slot.putStack(stackInSlot);
+                numTransmuted = itemStack1.stackSize;
+                itemStack1.stackSize = 0;
+                slot.onSlotChanged();
             }
-        }
+            else if (slot.isItemValid(itemStack1) && ItemHelper.equalsIgnoreStackSize(itemStack1, stackInSlot)) {
 
-        if (itemStack.stackSize > 0)
-        {
-            currentSlotIndex = ascending ? slotMax - 1 : slotMin;
+                int slotStackSizeLimit = Math.min(stackInSlot.getMaxStackSize(), slot.getSlotStackLimit());
+                int combinedStackSize = stackInSlot.stackSize + itemStack1.stackSize;
 
-            while (!ascending && currentSlotIndex < slotMax || ascending && currentSlotIndex >= slotMin)
-            {
-                slot = (Slot) this.inventorySlots.get(currentSlotIndex);
-                stackInSlot = slot.getStack();
+                if (combinedStackSize <= slotStackSizeLimit) {
 
-                if (slot.isItemValid(itemStack) && stackInSlot == null)
-                {
-                    slot.putStack(ItemHelper.cloneItemStack(itemStack, Math.min(itemStack.stackSize, slot.getSlotStackLimit())));
+                    stackInSlot.stackSize = combinedStackSize;
+                    numTransmuted = stackInSlot.stackSize - itemStack1.stackSize;
+                    itemStack1.stackSize = 0;
                     slot.onSlotChanged();
-
-                    if (slot.getStack() != null)
-                    {
-                        itemStack.stackSize = 0;
-                        slotFound = true;
-                    }
-
-                    break;
                 }
+                else if (stackInSlot.stackSize < slotStackSizeLimit) {
 
-                currentSlotIndex += ascending ? -1 : 1;
+                    itemStack1.stackSize -= slotStackSizeLimit - stackInSlot.stackSize;
+                    stackInSlot.stackSize = slotStackSizeLimit;
+                    numTransmuted = stackInSlot.stackSize - itemStack1.stackSize;
+                    slot.onSlotChanged();
+                }
             }
+
+            currentSlotIndex += ascending ? -1 : 1;
         }
-        itemStack.stackSize = 1;
-        return slotFound;
+
+        transmutationOutputSlot.onPickupFromSlot(entityPlayer, new ItemStack(itemStack.getItem(), numTransmuted));
+
+        return false;
     }
 
     @Override
