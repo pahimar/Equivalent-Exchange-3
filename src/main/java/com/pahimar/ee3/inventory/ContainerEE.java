@@ -62,7 +62,7 @@ public abstract class ContainerEE extends Container
 
                 if (slot.isItemValid(itemStack) && stackInSlot == null)
                 {
-                    slot.putStack(ItemHelper.cloneItemStack(itemStack, Math.min(itemStack.stackSize, slot.getSlotStackLimit())));
+                    slot.putStack(ItemHelper.clone(itemStack, Math.min(itemStack.stackSize, slot.getSlotStackLimit())));
                     slot.onSlotChanged();
 
                     if (slot.getStack() != null)

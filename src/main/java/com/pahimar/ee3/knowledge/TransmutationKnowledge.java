@@ -90,12 +90,12 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
 
     public Set<ItemStack> filterByNameStartsWith(String filterString)
     {
-        return FilterUtils.filterByNameStartsWith(getKnownTransmutations(), filterString);
+        return FilterUtils.filterByDisplayName(getKnownTransmutations(), filterString, FilterUtils.NameFilterType.STARTS_WITH);
     }
 
     public Set<ItemStack> filterByNameContains(String filterString)
     {
-        return FilterUtils.filterByNameContains(getKnownTransmutations(), filterString);
+        return FilterUtils.filterByDisplayName(getKnownTransmutations(), filterString, FilterUtils.NameFilterType.CONTAINS);
     }
 
     @Override

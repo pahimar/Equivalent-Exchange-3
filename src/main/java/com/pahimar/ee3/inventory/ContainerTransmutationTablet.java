@@ -202,7 +202,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     {
         ItemStack[] newInventory = new ItemStack[30];
 
-        Set<ItemStack> filteredSet = FilterUtils.filterByNameContains(this.inventoryTransmutationTablet.getKnownTransmutations(), searchTerm);
+        Set<ItemStack> filteredSet = FilterUtils.filterByDisplayName(this.inventoryTransmutationTablet.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS);
         List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByEnergyValue(filteredSet, energyValue));
 
         int adjustedStartIndex = (int) ((scrollBarPosition / 187f) * filteredList.size());

@@ -67,7 +67,7 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        return FilterUtils.filterByNameStartsWith(templateKnowledge.getKnownTransmutations(), filterString);
+        return FilterUtils.filterByDisplayName(templateKnowledge.getKnownTransmutations(), filterString, FilterUtils.NameFilterType.STARTS_WITH);
     }
 
     public Set<ItemStack> getTemplatesKnownTransmutationsFilteredContains(String filterString)
@@ -77,7 +77,7 @@ public class TransmutationKnowledgeRegistry
             loadTemplateKnowledgeFromDisk();
         }
 
-        return FilterUtils.filterByNameContains(templateKnowledge.getKnownTransmutations(), filterString);
+        return FilterUtils.filterByDisplayName(templateKnowledge.getKnownTransmutations(), filterString, FilterUtils.NameFilterType.CONTAINS);
     }
 
     public boolean doesTemplateKnow(ItemStack itemStack)

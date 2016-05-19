@@ -71,6 +71,7 @@ public class RecipeRegistry {
     public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings() {
 
         if (immutableRecipeMap == null) {
+            // FIXME Check to ensure we don't have multiple entries {@link https://github.com/pahimar/Equivalent-Exchange-3/issues/1046}
             immutableRecipeMap = ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
         }
 

@@ -188,7 +188,7 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByNameContains(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, Comparators.displayNameComparator));
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByDisplayName(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS, Comparators.displayNameComparator));
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

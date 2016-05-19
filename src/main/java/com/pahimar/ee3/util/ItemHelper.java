@@ -3,18 +3,22 @@ package com.pahimar.ee3.util;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
 
-public class ItemHelper
-{
-    public static ItemStack cloneItemStack(ItemStack itemStack, int stackSize)
-    {
-        ItemStack clonedItemStack = itemStack.copy();
-        clonedItemStack.stackSize = stackSize;
-        return clonedItemStack;
+public class ItemHelper {
+
+    public static ItemStack clone(ItemStack itemStack, int stackSize) {
+
+        if (itemStack != null) {
+            ItemStack clonedItemStack = itemStack.copy();
+            clonedItemStack.stackSize = stackSize;
+            return clonedItemStack;
+        }
+        else {
+            return null;
+        }
     }
 
     /**
@@ -25,60 +29,25 @@ public class ItemHelper
      * @param second The second ItemStack being tested for equality
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
-    public static boolean equals(ItemStack first, ItemStack second)
-    {
+    public static boolean equals(ItemStack first, ItemStack second) {
         return (Comparators.idComparator.compare(first, second) == 0);
     }
 
-    public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2)
-    {
-        if (itemStack1 != null && itemStack2 != null)
-        {
-            // Sort on itemID
-            if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0)
-            {
-                // Sort on item
-                if (itemStack1.getItem() == itemStack2.getItem())
-                {
-                    // Then sort on meta
-                    if (itemStack1.getItemDamage() == itemStack2.getItemDamage())
-                    {
-                        // Then sort on NBT
-                        if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound())
-                        {
-                            // Then sort on stack size
-                            if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2))
-                            {
-                                return true;
-                            }
-                        }
-                        else if (!itemStack1.hasTagCompound() && !itemStack2.hasTagCompound())
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
+    public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2) {
+        return equals(clone(itemStack1, 1), clone(itemStack2, 1));
     }
 
-    public static int compare(ItemStack itemStack1, ItemStack itemStack2)
-    {
+    public static int compare(ItemStack itemStack1, ItemStack itemStack2) {
         return Comparators.idComparator.compare(itemStack1, itemStack2);
     }
 
-    public static String toString(ItemStack itemStack)
-    {
-        if (itemStack != null)
-        {
-            if (itemStack.hasTagCompound())
-            {
+    public static String toString(ItemStack itemStack) {
+
+        if (itemStack != null) {
+            if (itemStack.hasTagCompound()) {
                 return String.format("%sxitemStack[%s@%s:%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
             }
-            else
-            {
+            else {
                 return String.format("%sxitemStack[%s@%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
             }
         }
@@ -86,13 +55,11 @@ public class ItemHelper
         return "null";
     }
 
-    public static boolean hasOwner(ItemStack itemStack)
-    {
+    public static boolean hasOwner(ItemStack itemStack) {
         return (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
     }
 
-    public static boolean hasOwnerUUID(ItemStack itemStack)
-    {
+    public static boolean hasOwnerUUID(ItemStack itemStack) {
         return NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG);
     }
 
