@@ -10,6 +10,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import com.pahimar.ee3.knowledge.TransmutationKnowledge;
 import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.serialize.*;
@@ -35,6 +36,7 @@ public class SerializationHelper {
             .registerTypeAdapter(OreStack.class, new OreStackSerializer())
             .registerTypeAdapter(FluidStack.class, new FluidStackSerializer())
             .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
+            .registerTypeAdapter(PlayerKnowledge.class, new PlayerKnowledgeSerializer())
             .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
             .create();
 

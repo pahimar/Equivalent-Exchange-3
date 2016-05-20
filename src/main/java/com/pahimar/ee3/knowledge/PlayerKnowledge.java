@@ -11,9 +11,6 @@ import java.util.TreeSet;
 
 public class PlayerKnowledge {
 
-    private static final int VERSION = 1;
-
-    private int version;
     private Set<ItemStack> knownItemStacks;
 
     public PlayerKnowledge() {
@@ -22,7 +19,6 @@ public class PlayerKnowledge {
 
     public PlayerKnowledge(Collection<ItemStack> itemStacks) {
 
-        version = VERSION;
         knownItemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
 
         if (itemStacks != null) {
@@ -36,7 +32,7 @@ public class PlayerKnowledge {
         return knownItemStacks.contains(ItemHelper.clone(itemStack, 1));
     }
 
-    public Set<ItemStack> get() {
+    public Set<ItemStack> getKnownItemStacks() {
         return knownItemStacks;
     }
 
@@ -48,6 +44,13 @@ public class PlayerKnowledge {
         }
     }
 
+    public void learn(Collection<ItemStack> itemStacks) {
+
+        for (ItemStack itemStack : itemStacks) {
+            learn(itemStack);
+        }
+    }
+
     public void forget(ItemStack itemStack) {
 
         if (itemStack != null) {
@@ -56,7 +59,28 @@ public class PlayerKnowledge {
         }
     }
 
+    public void forget(Collection<ItemStack> itemStacks) {
+
+        for (ItemStack itemStack : itemStacks) {
+            forget(itemStack);
+        }
+    }
+
     public void forgetAll() {
         knownItemStacks.clear();
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("[");
+        for (ItemStack itemStack : knownItemStacks) {
+            stringBuilder.append(String.format("%s, ", ItemHelper.toString(itemStack)));
+        }
+        stringBuilder.append("]");
+
+        return stringBuilder.toString();
     }
 }
