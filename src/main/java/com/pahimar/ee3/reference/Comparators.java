@@ -34,10 +34,13 @@ public class Comparators {
                 }
             }
             else if (collection1 != null) {
+                return -1;
+            }
+            else if (collection2 != null) {
                 return 1;
             }
             else {
-                return -1;
+                return 0;
             }
         }
     };
