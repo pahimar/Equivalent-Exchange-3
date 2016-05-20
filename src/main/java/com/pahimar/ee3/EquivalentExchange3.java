@@ -141,7 +141,7 @@ public class EquivalentExchange3
 
     public RecipeRegistry getRecipeRegistry()
     {
-        return RecipeRegistry.getInstance();
+        return RecipeRegistry.INSTANCE;
     }
 
     public AludelRecipeManager getAludelRecipeManager()

@@ -18,7 +18,7 @@ public class WorldEventHandler {
 
         if (!hasInitilialized && FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 
-            RecipeRegistry.getInstance().registerVanillaRecipes();
+            RecipeRegistry.INSTANCE.registerVanillaRecipes();
             AludelRecipeManager.registerRecipes();
 
             long startTime = System.nanoTime();

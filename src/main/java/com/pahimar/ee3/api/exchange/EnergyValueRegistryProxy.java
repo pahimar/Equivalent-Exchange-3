@@ -3,6 +3,7 @@ package com.pahimar.ee3.api.exchange;
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public final class EnergyValueRegistryProxy {
         init();
 
         if (ee3Mod != null) {
-            return EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish);
+            return new ArrayList<>(EE3Wrapper.ee3mod.getEnergyValueRegistry().getStacksInRange(start, finish));
         }
 
         return Collections.EMPTY_LIST;

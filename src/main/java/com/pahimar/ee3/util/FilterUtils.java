@@ -1,16 +1,32 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class FilterUtils {
+
+    public static Set<ItemStack> filterForItemStacks(Set<WrappedStack> wrappedStacks) {
+
+        Set<ItemStack> itemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
+
+        for (WrappedStack wrappedStack : wrappedStacks) {
+            if (wrappedStack.getWrappedObject() instanceof ItemStack) {
+                itemStacks.add((ItemStack) wrappedStack.getWrappedObject());
+            }
+            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
+                itemStacks.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
+            }
+        }
+
+        return itemStacks;
+    }
 
     public static Set<ItemStack> filterByDisplayName(Set<ItemStack> itemStacks, String filterString) {
         return filterByDisplayName(itemStacks, filterString, NameFilterType.STARTS_WITH, null);
@@ -62,10 +78,14 @@ public class FilterUtils {
     }
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, Number valueBound, ValueFilterType filterType, Comparator comparator) {
-        return filterByEnergyValue(itemStacks, new EnergyValue(valueBound.floatValue()), filterType, comparator);
+        return filterByEnergyValue(EnergyValueRegistry.INSTANCE.getEnergyValues(), itemStacks, new EnergyValue(valueBound.floatValue()), filterType, comparator);
     }
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator comparator) {
+        return filterByEnergyValue(EnergyValueRegistry.INSTANCE.getEnergyValues(), itemStacks, valueBound, filterType, comparator);
+    }
+
+    public static Set<ItemStack> filterByEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator comparator) {
 
         Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR));
 
@@ -77,9 +97,9 @@ public class FilterUtils {
             else {
                 for (ItemStack itemStack : itemStacks) {
 
-                    EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(itemStack);
+                    EnergyValue energyValue = EnergyValueRegistry.INSTANCE.getEnergyValue(valueMap, itemStack, false);
 
-                    if (energyValue != null) {
+                    if (energyValue != null && Float.compare(energyValue.getValue(), 0) > 0) {
                         if (filterType == ValueFilterType.VALUE_LOWER_THAN_BOUND && energyValue.compareTo(valueBound) <= 0) {
                             filteredSet.add(itemStack);
                         }

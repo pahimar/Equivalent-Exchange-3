@@ -7,6 +7,8 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.recipe.RecipeRegistry;
+import com.pahimar.ee3.reference.Comparators;
+import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -15,7 +17,6 @@ import cpw.mods.fml.common.Loader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
@@ -31,7 +32,7 @@ public class EnergyValueRegistry {
     public static final EnergyValueRegistry INSTANCE = new EnergyValueRegistry();
 
     private ImmutableSortedMap<WrappedStack, EnergyValue> stackValueMap;
-    private ImmutableSortedMap<EnergyValue, List<WrappedStack>> valueStackMap;
+    private ImmutableSortedMap<EnergyValue, Set<WrappedStack>> valueStackMap;
 
     private final Map<WrappedStack, EnergyValue> preCalculationStackValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationStackValueMap;
@@ -94,7 +95,7 @@ public class EnergyValueRegistry {
      *               assignments) query or not
      * @return an {@link EnergyValue} if there is one to be found for the provided {@link Object} in the provided Map, null otherwise
      */
-    private static EnergyValue getEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Object object, boolean strict) {
+    public static EnergyValue getEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Object object, boolean strict) {
 
         if (WrappedStack.canBeWrapped(object)) {
 
@@ -401,57 +402,68 @@ public class EnergyValueRegistry {
      * @param finish
      * @return
      */
-    public List getStacksInRange(Number start, Number finish) {
+    public Set<ItemStack> getStacksInRange(Number start, Number finish) {
         return getStacksInRange(new EnergyValue(start), new EnergyValue(finish));
     }
 
     /**
      * TODO Finish JavaDoc
      *
-     * @param start
-     * @param finish
+     * @param lowerBound
+     * @param upperBound
      * @return
      */
-    public List getStacksInRange(EnergyValue start, EnergyValue finish) {
+    public Set<ItemStack> getStacksInRange(EnergyValue lowerBound, EnergyValue upperBound) {
 
-        List stacksInRange = new ArrayList<WrappedStack>();
+        Set<ItemStack> filteredItemStacks = new TreeSet<>(Comparators.ENERGY_VALUE_ITEM_STACK_COMPARATOR);
 
-        if (valueStackMap != null) {
+        Set<ItemStack> greaterThanLowerBound = getStacksInRange(getEnergyValues(), lowerBound, false);
+        Set<ItemStack> lesserThanUpperBound = getStacksInRange(getEnergyValues(), upperBound, true);
 
-            SortedMap<EnergyValue, List<WrappedStack>> tailMap = valueStackMap.tailMap(start);
-            SortedMap<EnergyValue, List<WrappedStack>> headMap = valueStackMap.headMap(finish);
+        if (!greaterThanLowerBound.isEmpty() && !lesserThanUpperBound.isEmpty()) {
 
-            SortedMap<EnergyValue, List<WrappedStack>> smallerMap;
-            SortedMap<EnergyValue, List<WrappedStack>> biggerMap;
+            for (ItemStack itemStack : greaterThanLowerBound) {
+                if (lesserThanUpperBound.contains(itemStack)) {
+                    filteredItemStacks.add(itemStack);
+                }
+            }
+        }
+        else if (!greaterThanLowerBound.isEmpty()) {
+            return greaterThanLowerBound;
+        }
+        else if (!lesserThanUpperBound.isEmpty()) {
+            return lesserThanUpperBound;
+        }
 
-            if (!tailMap.isEmpty() && !headMap.isEmpty()) {
+        return filteredItemStacks;
+    }
 
-                if (tailMap.size() <= headMap.size()) {
-                    smallerMap = tailMap;
-                    biggerMap = headMap;
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param valueMap
+     * @param energyValueBound
+     * @param isUpperBound
+     * @return
+     */
+    private static Set<ItemStack> getStacksInRange(Map<WrappedStack, EnergyValue> valueMap, EnergyValue energyValueBound, boolean isUpperBound) {
+
+        Set itemStacks = FilterUtils.filterForItemStacks(valueMap.keySet());
+
+        if (valueMap != null) {
+            if (energyValueBound != null) {
+                if (isUpperBound) {
+                    return FilterUtils.filterByEnergyValue(valueMap, itemStacks, energyValueBound, FilterUtils.ValueFilterType.VALUE_LOWER_THAN_BOUND, Comparators.ENERGY_VALUE_ITEM_STACK_COMPARATOR);
                 }
                 else {
-                    smallerMap = headMap;
-                    biggerMap = tailMap;
-                }
-
-                for (EnergyValue value : smallerMap.keySet()) {
-                    if (biggerMap.containsKey(value)) {
-                        for (WrappedStack wrappedStack : valueStackMap.get(value)) {
-                            if (wrappedStack.getWrappedObject() instanceof ItemStack || wrappedStack.getWrappedObject() instanceof FluidStack) {
-                                stacksInRange.add(wrappedStack.getWrappedObject());
-                            }
-                            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
-                                stacksInRange.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
-                            }
-                        }
-                    }
+                    return FilterUtils.filterByEnergyValue(valueMap, itemStacks, energyValueBound, FilterUtils.ValueFilterType.VALUE_GREATER_THAN_BOUND, Comparators.ENERGY_VALUE_ITEM_STACK_COMPARATOR);
                 }
             }
         }
 
-        return stacksInRange;
+        return new TreeSet<>(Collections.EMPTY_SET);
     }
+
 
     /**
      * Sets an {@link EnergyValue} for the provided {@link Object} (if it can be wrapped in a {@link WrappedStack}.
@@ -565,11 +577,11 @@ public class EnergyValueRegistry {
             computedMap.putAll(tempComputedMap);
 
             tempComputedMap = new TreeMap<>(computedMap);
-            for (WrappedStack recipeOutput : RecipeRegistry.getInstance().getRecipeMappings().keySet()) {
+            for (WrappedStack recipeOutput : RecipeRegistry.INSTANCE.getRecipeMappings().keySet()) {
 
                 // We won't attempt to recalculate values that already have a pre-calculation value assignment
                 if (!stackValueMap.containsKey(WrappedStack.wrap(recipeOutput, 1))) {
-                    for (Set<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
+                    for (Set<WrappedStack> recipeInputs : RecipeRegistry.INSTANCE.getRecipeMappings().get(recipeOutput)) {
 
                         EnergyValue currentOutputValue = getEnergyValue(tempComputedMap, WrappedStack.wrap(recipeOutput, 1), false);
                         EnergyValue computedOutputValue = computeFromInputs(tempComputedMap, recipeOutput, recipeInputs);
@@ -604,7 +616,7 @@ public class EnergyValueRegistry {
 
     private void calculateValueStackMap() {
 
-        SortedMap<EnergyValue, List<WrappedStack>> tempValueMap = new TreeMap<>();
+        SortedMap<EnergyValue, Set<WrappedStack>> tempValueMap = new TreeMap<>();
 
         for (WrappedStack wrappedStack : getEnergyValues().keySet()) {
 
@@ -619,7 +631,7 @@ public class EnergyValueRegistry {
                         }
                     }
                     else {
-                        tempValueMap.put(energyValue, new ArrayList<>(Arrays.asList(wrappedStack)));
+                        tempValueMap.put(energyValue, new TreeSet<>(Arrays.asList(wrappedStack)));
                     }
                 }
             }

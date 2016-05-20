@@ -18,22 +18,13 @@ import java.util.TreeSet;
 public class RecipeRegistry {
 
     public static final Marker RECIPE_MARKER = MarkerManager.getMarker("EE3_RECIPE", LogHelper.MOD_MARKER);
-    private static RecipeRegistry recipeRegistry = null;
+    public static final RecipeRegistry INSTANCE = new RecipeRegistry();
 
     private Multimap<WrappedStack, Set<WrappedStack>> recipeMap;
     private ImmutableMultimap<WrappedStack, Set<WrappedStack>> immutableRecipeMap;
 
     private RecipeRegistry() {
         recipeMap = TreeMultimap.create(WrappedStack.COMPARATOR, Comparators.WRAPPED_STACK_SET_COMPARATOR);
-    }
-
-    public static RecipeRegistry getInstance() {
-
-        if (recipeRegistry == null) {
-            recipeRegistry = new RecipeRegistry();
-        }
-
-        return recipeRegistry;
     }
 
     public void addRecipe(Object recipeOutput, Collection<?> recipeInputList) {
@@ -86,7 +77,7 @@ public class RecipeRegistry {
     public Multimap<WrappedStack, Set<WrappedStack>> getRecipeMappings() {
 
         if (immutableRecipeMap == null) {
-            immutableRecipeMap = ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
+            immutableRecipeMap = ImmutableMultimap.copyOf(INSTANCE.recipeMap);
         }
 
         return immutableRecipeMap;
