@@ -65,12 +65,14 @@ public class EnergyValueMapSerializer implements JsonSerializer<Map<WrappedStack
         JsonArray jsonArray = new JsonArray();
 
         if (src != null) {
-            for (WrappedStack wrappedStack : src.keySet()) {
+            src.keySet().stream()
+                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null & src.get(wrappedStack) != null)
+                    .forEach(wrappedStack -> {
                 JsonObject jsonMapping = new JsonObject();
                 jsonMapping.add(wrappedStack.getWrappedObject().getClass().getSimpleName().toLowerCase(), context.serialize(wrappedStack.getWrappedObject()));
                 jsonMapping.addProperty(ENERGY_VALUE, src.get(wrappedStack).getValue());
                 jsonArray.add(jsonMapping);
-            }
+            });
         }
 
         return jsonArray;
