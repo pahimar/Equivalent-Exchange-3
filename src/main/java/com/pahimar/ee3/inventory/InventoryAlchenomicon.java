@@ -23,7 +23,7 @@ public class InventoryAlchenomicon implements IInventory
         }
         else
         {
-            this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
+            this.knownTransmutations = new TreeSet<ItemStack>(Comparators.ID_COMPARATOR);
         }
         inventory = knownTransmutations.toArray(inventory);
     }

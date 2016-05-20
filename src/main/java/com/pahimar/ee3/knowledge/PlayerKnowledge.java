@@ -23,7 +23,7 @@ public class PlayerKnowledge {
     public PlayerKnowledge(Collection<ItemStack> itemStacks) {
 
         version = VERSION;
-        knownItemStacks = new TreeSet<>(Comparators.idComparator);
+        knownItemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
 
         if (itemStacks != null) {
             for (ItemStack itemStack : itemStacks) {

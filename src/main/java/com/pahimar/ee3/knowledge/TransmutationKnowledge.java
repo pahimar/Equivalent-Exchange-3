@@ -22,12 +22,12 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
 
     public TransmutationKnowledge()
     {
-        this(new TreeSet<ItemStack>(Comparators.idComparator));
+        this(new TreeSet<ItemStack>(Comparators.ID_COMPARATOR));
     }
 
     public TransmutationKnowledge(Collection<ItemStack> knownTransmutations)
     {
-        this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
+        this.knownTransmutations = new TreeSet<ItemStack>(Comparators.ID_COMPARATOR);
         this.knownTransmutations.addAll(knownTransmutations);
         hasBeenModified = false;
     }
@@ -143,7 +143,7 @@ public class TransmutationKnowledge implements JsonSerializer<TransmutationKnowl
         {
             JsonObject jsonObject = (JsonObject) json;
 
-            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(Comparators.idComparator);
+            Set<ItemStack> itemStacks = new TreeSet<ItemStack>(Comparators.ID_COMPARATOR);
 
             if (jsonObject.has("knownTransmutations") && jsonObject.get("knownTransmutations").isJsonArray())
             {

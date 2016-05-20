@@ -216,18 +216,18 @@ public class EnergyValueRegistry {
     }
 
     /**
-     * Calculates an {@link EnergyValue} for the provided {@link WrappedStack} output from the provided {@link List} of
-     * WrappedStack inputs and {@link Map} of energy value mappings to objects. We calculate the energy value for the
-     * output by, for each input, summing the input's energy value * the input's stack size. That sum is then divided
-     * by the stack size of the output. If <strong>any</strong> of the inputs do not have an energy value then no
-     * energy value can be calculated for the output - therefore we return null
+     * Calculates an {@link EnergyValue} for the provided {@link WrappedStack} output from the provided
+     * {@link Collection} of WrappedStack inputs and {@link Map} of energy value mappings to objects. We calculate the
+     * energy value for the output by, for each input, summing the input's energy value * the input's stack size. That
+     * sum is then divided by the stack size of the output. If <strong>any</strong> of the inputs do not have an energy
+     * value then no energy value can be calculated for the output - therefore we return null
      *
      * @param valueMap a {@link Map} of {@link EnergyValue}'s mapped to {@link WrappedStack}'s
      * @param wrappedOutput the {@link WrappedStack} output for that the inputs "create"
-     * @param wrappedInputs a {@link List} of {@link WrappedStack}s that "create" the output
+     * @param wrappedInputs a {@link Collection} of {@link WrappedStack}s that "create" the output
      * @return an {@link EnergyValue} if there is one that can be calculated, null otherwise
      */
-    private static EnergyValue computeFromInputs(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, List<WrappedStack> wrappedInputs) {
+    private static EnergyValue computeFromInputs(Map<WrappedStack, EnergyValue> valueMap, WrappedStack wrappedOutput, Collection<WrappedStack> wrappedInputs) {
 
         float sumOfValues = 0f;
 
@@ -569,7 +569,7 @@ public class EnergyValueRegistry {
 
                 // We won't attempt to recalculate values that already have a pre-calculation value assignment
                 if (!stackValueMap.containsKey(WrappedStack.wrap(recipeOutput, 1))) {
-                    for (List<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
+                    for (Set<WrappedStack> recipeInputs : RecipeRegistry.getInstance().getRecipeMappings().get(recipeOutput)) {
 
                         EnergyValue currentOutputValue = getEnergyValue(tempComputedMap, WrappedStack.wrap(recipeOutput, 1), false);
                         EnergyValue computedOutputValue = computeFromInputs(tempComputedMap, recipeOutput, recipeInputs);

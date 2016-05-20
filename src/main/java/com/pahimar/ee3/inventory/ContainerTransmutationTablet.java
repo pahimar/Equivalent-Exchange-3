@@ -44,7 +44,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     {
         this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
 
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
+        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.DISPLAY_NAME_COMPARATOR);
         if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX) != null)
         {
             ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX);
@@ -198,8 +198,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
     }
 
-    private void updateInventory()
-    {
+    private void updateInventory() {
+        
         ItemStack[] newInventory = new ItemStack[30];
 
         Set<ItemStack> filteredSet = FilterUtils.filterByDisplayName(this.inventoryTransmutationTablet.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS);
@@ -207,55 +207,45 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         int adjustedStartIndex = (int) ((scrollBarPosition / 187f) * filteredList.size());
 
-        if (sortOption == 0)
-        {
-            if (sortOrder == 0)
-            {
-                Collections.sort(filteredList, Comparators.displayNameComparator);
+        if (sortOption == 0) {
+
+            if (sortOrder == 0) {
+                Collections.sort(filteredList, Comparators.DISPLAY_NAME_COMPARATOR);
             }
-            else
-            {
-                Collections.sort(filteredList, Comparators.reverseDisplayNameComparator);
+            else {
+                Collections.sort(filteredList, Comparators.DISPLAY_NAME_COMPARATOR.reversed());
             }
         }
-        else if (sortOption == 1)
-        {
-            if (sortOrder == 0)
-            {
-                Collections.sort(filteredList, Comparators.energyValueItemStackComparator);
+        else if (sortOption == 1) {
+
+            if (sortOrder == 0) {
+                Collections.sort(filteredList, Comparators.ENERGY_VALUE_ITEM_STACK_COMPARATOR);
             }
-            else
-            {
-                Collections.sort(filteredList, Comparators.reverseEnergyValueComparator);
+            else {
+                Collections.sort(filteredList, Comparators.ENERGY_VALUE_ITEM_STACK_COMPARATOR.reversed());
             }
         }
-        else if (sortOption == 2)
-        {
-            if (sortOrder == 0)
-            {
-                Collections.sort(filteredList, Comparators.idComparator);
+        else if (sortOption == 2) {
+
+            if (sortOrder == 0) {
+                Collections.sort(filteredList, Comparators.ID_COMPARATOR);
             }
-            else
-            {
-                Collections.sort(filteredList, Comparators.reverseIdComparator);
+            else {
+                Collections.sort(filteredList, Comparators.ID_COMPARATOR.reversed());
             }
         }
 
-        if (filteredList.size() <= 30)
-        {
+        if (filteredList.size() <= 30) {
             newInventory = filteredList.toArray(newInventory);
         }
-        else if (adjustedStartIndex + 30 <= filteredList.size())
-        {
+        else if (adjustedStartIndex + 30 <= filteredList.size()) {
             newInventory = filteredList.subList(adjustedStartIndex, adjustedStartIndex + 30).toArray(newInventory);
         }
-        else
-        {
+        else {
             newInventory = filteredList.subList(filteredList.size() - 30, filteredList.size()).toArray(newInventory);
         }
 
-        for (int i = 0; i < 30; i++)
-        {
+        for (int i = 0; i < 30; i++) {
             this.getSlot(i + 10).putStack(newInventory[i]);
         }
     }

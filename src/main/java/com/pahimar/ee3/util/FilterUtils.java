@@ -22,7 +22,7 @@ public class FilterUtils {
 
     public static Set<ItemStack> filterByDisplayName(Collection<ItemStack> itemStacks, String filterString, NameFilterType filterType, Comparator comparator) {
 
-        Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.displayNameComparator));
+        Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR));
 
         if (itemStacks != null) {
             if (filterString == null || filterString.isEmpty()) {
@@ -67,7 +67,7 @@ public class FilterUtils {
 
     public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator comparator) {
 
-        Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.displayNameComparator));
+        Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR));
 
         if (itemStacks != null) {
 

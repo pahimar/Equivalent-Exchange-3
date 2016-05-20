@@ -22,7 +22,7 @@ public class InventoryTransmutationTablet implements IInventory
     {
         inventory = new ItemStack[30];
 
-        this.knownTransmutations = new TreeSet<ItemStack>(Comparators.idComparator);
+        this.knownTransmutations = new TreeSet<ItemStack>(Comparators.ID_COMPARATOR);
         if (knownTransmutations != null)
         {
             this.knownTransmutations.addAll(knownTransmutations);

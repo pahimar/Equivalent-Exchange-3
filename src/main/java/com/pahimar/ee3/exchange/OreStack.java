@@ -67,7 +67,7 @@ public class OreStack implements Comparable<OreStack> {
     public static OreStack getOreStackFromList(List<?> objectList) {
 
         if (objectList.size() > 0) {
-            Map<String, Integer> oreNameCountMap = new TreeMap<>(Comparators.stringComparator);
+            Map<String, Integer> oreNameCountMap = new TreeMap<>(Comparators.STRING_COMPARATOR);
             for (Object listElement : objectList) {
                 if (listElement instanceof ItemStack) {
                     ItemStack itemStack = (ItemStack) listElement;

@@ -7,6 +7,11 @@ import java.util.List;
 
 public final class RecipeRegistryProxy {
 
+    /**
+     *
+     * @param recipeOutput
+     * @param recipeInputList
+     */
     public static void addRecipe(Object recipeOutput, List<?> recipeInputList) {
 
         init();

@@ -1,28 +1,30 @@
 package com.pahimar.ee3.recipe;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.TreeMultimap;
 import com.pahimar.ee3.exchange.WrappedStack;
+import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.Loader;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class RecipeRegistry {
 
     public static final Marker RECIPE_MARKER = MarkerManager.getMarker("EE3_RECIPE", LogHelper.MOD_MARKER);
     private static RecipeRegistry recipeRegistry = null;
 
-    private Multimap<WrappedStack, List<WrappedStack>> recipeMap;
-    private ImmutableMultimap<WrappedStack, List<WrappedStack>> immutableRecipeMap;
+    private Multimap<WrappedStack, Set<WrappedStack>> recipeMap;
+    private ImmutableMultimap<WrappedStack, Set<WrappedStack>> immutableRecipeMap;
 
     private RecipeRegistry() {
-        recipeMap = HashMultimap.create(); // TODO Switch this to a TreeMultimap
+        recipeMap = TreeMultimap.create(WrappedStack.COMPARATOR, Comparators.WRAPPED_STACK_SET_COMPARATOR);
     }
 
     public static RecipeRegistry getInstance() {
@@ -34,8 +36,7 @@ public class RecipeRegistry {
         return recipeRegistry;
     }
 
-    // FIXME Prevent adding multiple equivalent entries {@link https://github.com/pahimar/Equivalent-Exchange-3/issues/1046}
-    public void addRecipe(Object recipeOutput, List<?> recipeInputList) {
+    public void addRecipe(Object recipeOutput, Collection<?> recipeInputList) {
 
         // Wrap the recipe output
         WrappedStack wrappedRecipeOutput = WrappedStack.wrap(recipeOutput);
@@ -43,7 +44,7 @@ public class RecipeRegistry {
             return;
         }
 
-        List<WrappedStack> wrappedRecipeInputList = new ArrayList<>();
+        Set<WrappedStack> wrappedRecipeInputList = new TreeSet<>();
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Object recipeInputObject : recipeInputList) {
@@ -62,7 +63,7 @@ public class RecipeRegistry {
 
         // Check to see if we already have this recipe in the map
         boolean existsAlready = false;
-        for (List<WrappedStack> recipeInputs : recipeMap.get(wrappedRecipeOutput)) {
+        for (Set<WrappedStack> recipeInputs : recipeMap.get(wrappedRecipeOutput)) {
             if (recipeInputs.containsAll(wrappedRecipeInputList) && wrappedRecipeInputList.containsAll(recipeInputs)) {
                 existsAlready = true;
             }
@@ -82,7 +83,7 @@ public class RecipeRegistry {
         RecipesPotions.registerRecipes();
     }
 
-    public Multimap<WrappedStack, List<WrappedStack>> getRecipeMappings() {
+    public Multimap<WrappedStack, Set<WrappedStack>> getRecipeMappings() {
 
         if (immutableRecipeMap == null) {
             immutableRecipeMap = ImmutableMultimap.copyOf(recipeRegistry.recipeMap);
@@ -96,7 +97,7 @@ public class RecipeRegistry {
         for (WrappedStack wrappedStack : getRecipeMappings().keySet()) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(String.format("Output: %s, Inputs: ", wrappedStack.toString()));
-            for (List<WrappedStack> listStacks : getRecipeMappings().get(wrappedStack)) {
+            for (Set<WrappedStack> listStacks : getRecipeMappings().get(wrappedStack)) {
                 for (WrappedStack listStack : listStacks) {
                     stringBuilder.append(listStack.toString() + " ");
                 }

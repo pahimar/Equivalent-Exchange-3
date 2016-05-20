@@ -31,7 +31,7 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
 
     public ContainerAlchenomicon(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.displayNameComparator);
+        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.DISPLAY_NAME_COMPARATOR);
 
         if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
         {
@@ -188,7 +188,7 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByDisplayName(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS, Comparators.displayNameComparator));
+        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByDisplayName(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS, Comparators.DISPLAY_NAME_COMPARATOR));
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

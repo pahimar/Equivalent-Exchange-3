@@ -441,39 +441,6 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         return jsonWrappedStack;
     }
 
-    /**
-     *
-     */
-    @Override
-    public int hashCode() {
-
-        int hashCode = 1;
-        hashCode = (37 * hashCode) + stackSize;
-
-        if (wrappedStack instanceof ItemStack) {
-            hashCode = (37 * hashCode) + Item.getIdFromItem(((ItemStack) wrappedStack).getItem());
-            hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getItemDamage();
-
-            if (((ItemStack) wrappedStack).getTagCompound() != null) {
-                hashCode = (37 * hashCode) + ((ItemStack) wrappedStack).getTagCompound().hashCode();
-            }
-        }
-        else if (wrappedStack instanceof OreStack) {
-            if (((OreStack) wrappedStack).oreName != null) {
-                hashCode = (37 * hashCode) + ((OreStack) wrappedStack).oreName.hashCode();
-            }
-        }
-        else if (wrappedStack instanceof FluidStack) {
-            hashCode = (37 * hashCode) + wrappedStack.hashCode();
-
-            if (((FluidStack) wrappedStack).tag != null) {
-                hashCode = (37 * hashCode) + ((FluidStack) wrappedStack).tag.hashCode();
-            }
-        }
-
-        return hashCode;
-    }
-
     @Override
     public boolean equals(Object object)
     {
@@ -488,7 +455,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
     @Override
     public int compareTo(WrappedStack wrappedStack)
     {
-        return comparator.compare(this, wrappedStack);
+        return COMPARATOR.compare(this, wrappedStack);
     }
 
     /**
@@ -536,7 +503,7 @@ public class WrappedStack implements Comparable<WrappedStack>, JsonDeserializer<
         }
     }
 
-    public static Comparator<WrappedStack> comparator = new Comparator<WrappedStack>()
+    public static final Comparator<WrappedStack> COMPARATOR = new Comparator<WrappedStack>()
     {
 
         @Override

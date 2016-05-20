@@ -1,33 +1,50 @@
 package com.pahimar.ee3.reference;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.WrappedStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Comparator;
+import java.util.Set;
 
-public class Comparators
-{
-    public static Comparator<String> stringComparator = new Comparator<String>()
-    {
+public class Comparators {
+
+    public static final Comparator<Set<WrappedStack>> WRAPPED_STACK_SET_COMPARATOR = new Comparator<Set<WrappedStack>>() {
         @Override
-        public int compare(String string1, String string2)
-        {
-            return string1.compareToIgnoreCase(string2);
+        public int compare(Set<WrappedStack> collection1, Set<WrappedStack> collection2) {
+
+            if (collection1 != null && collection2 != null) {
+                if (collection1.size() == collection2.size()) {
+                    if (collection1.containsAll(collection2)) {
+                        if (collection2.containsAll(collection1)) {
+                            return 0;
+                        }
+                        else {
+                            return 1;
+                        }
+                    }
+                    else {
+                        return -1;
+                    }
+                }
+                else {
+                    return collection1.size() - collection2.size();
+                }
+            }
+            else if (collection1 != null) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
         }
     };
 
-    public static Comparator<ItemStack> reverseIdComparator = new Comparator<ItemStack>()
-    {
-        @Override
-        public int compare(ItemStack itemStack1, ItemStack itemStack2)
-        {
-            return idComparator.compare(itemStack1, itemStack2) * -1;
-        }
-    };
+    public static final Comparator<String> STRING_COMPARATOR = String::compareToIgnoreCase;
 
-    public static Comparator<ItemStack> idComparator = new Comparator<ItemStack>() {
+    public static final Comparator<ItemStack> ID_COMPARATOR = new Comparator<ItemStack>() {
 
         @Override
         public int compare(ItemStack itemStack1, ItemStack itemStack2) {
@@ -83,15 +100,16 @@ public class Comparators
         }
     };
 
-    public static Comparator<ItemStack> displayNameComparator = new Comparator<ItemStack>()
-    {
+    public static final Comparator<ItemStack> DISPLAY_NAME_COMPARATOR = new Comparator<ItemStack>() {
+
+        @Override
         public int compare(ItemStack itemStack1, ItemStack itemStack2)
         {
             if (itemStack1 != null && itemStack2 != null)
             {
                 if (itemStack1.getDisplayName().equalsIgnoreCase(itemStack2.getDisplayName()))
                 {
-                    return idComparator.compare(itemStack1, itemStack2);
+                    return ID_COMPARATOR.compare(itemStack1, itemStack2);
                 }
                 else
                 {
@@ -113,17 +131,8 @@ public class Comparators
         }
     };
 
-    public static Comparator<ItemStack> reverseDisplayNameComparator = new Comparator<ItemStack>()
-    {
-        @Override
-        public int compare(ItemStack itemStack1, ItemStack itemStack2)
-        {
-            return displayNameComparator.compare(itemStack1, itemStack2) * -1;
-        }
-    };
+    public static final Comparator<ItemStack> ENERGY_VALUE_ITEM_STACK_COMPARATOR = new Comparator<ItemStack>() {
 
-    public static Comparator<ItemStack> energyValueItemStackComparator = new Comparator<ItemStack>()
-    {
         @Override
         public int compare(ItemStack itemStack1, ItemStack itemStack2)
         {
@@ -135,7 +144,7 @@ public class Comparators
                 }
                 else
                 {
-                    return idComparator.compare(itemStack1, itemStack2);
+                    return ID_COMPARATOR.compare(itemStack1, itemStack2);
                 }
             }
             else if (itemStack1 != null)
@@ -150,15 +159,6 @@ public class Comparators
             {
                 return 0;
             }
-        }
-    };
-
-    public static Comparator<ItemStack> reverseEnergyValueComparator = new Comparator<ItemStack>()
-    {
-        @Override
-        public int compare(ItemStack itemStack1, ItemStack itemStack2)
-        {
-            return energyValueItemStackComparator.compare(itemStack1, itemStack2) * -1;
         }
     };
 }

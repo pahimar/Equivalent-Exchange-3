@@ -30,7 +30,7 @@ public class ItemHelper {
      * @return true if the two ItemStacks are equivalent, false otherwise
      */
     public static boolean equals(ItemStack first, ItemStack second) {
-        return (Comparators.idComparator.compare(first, second) == 0);
+        return (Comparators.ID_COMPARATOR.compare(first, second) == 0);
     }
 
     public static boolean equalsIgnoreStackSize(ItemStack itemStack1, ItemStack itemStack2) {
@@ -38,7 +38,7 @@ public class ItemHelper {
     }
 
     public static int compare(ItemStack itemStack1, ItemStack itemStack2) {
-        return Comparators.idComparator.compare(itemStack1, itemStack2);
+        return Comparators.ID_COMPARATOR.compare(itemStack1, itemStack2);
     }
 
     public static String toString(ItemStack itemStack) {
