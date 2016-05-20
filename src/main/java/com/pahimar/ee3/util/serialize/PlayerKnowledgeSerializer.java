@@ -1,6 +1,7 @@
 package com.pahimar.ee3.util.serialize;
 
 import com.google.gson.*;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import net.minecraft.item.ItemStack;
 
@@ -21,7 +22,7 @@ public class PlayerKnowledgeSerializer implements JsonSerializer<PlayerKnowledge
 
         if (src != null) {
             for (ItemStack itemStack : src.getKnownItemStacks()) {
-                jsonArray.add(context.serialize(itemStack));
+                jsonArray.add(context.serialize(WrappedStack.wrap(itemStack)));
             }
         }
 

@@ -23,7 +23,7 @@ public class PlayerKnowledge {
 
         if (itemStacks != null) {
             for (ItemStack itemStack : itemStacks) {
-                knownItemStacks.add(ItemHelper.clone(itemStack, 1));
+                learn(itemStack);
             }
         }
     }

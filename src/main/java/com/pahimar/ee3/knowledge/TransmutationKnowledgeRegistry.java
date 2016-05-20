@@ -348,16 +348,16 @@ public class TransmutationKnowledgeRegistry
     {
         if (dataKnowledgeDirectory != null)
         {
-            File templateFile = new File(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+            File templateFile = new File(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILENAME);
 
             if (!templateFile.exists())
             {
                 templateKnowledge = new TransmutationKnowledge();
-                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILENAME, templateKnowledge);
             }
             else
             {
-                templateKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE);
+                templateKnowledge = SerializationHelper.readTransmutationKnowledgeFromFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILENAME);
             }
         }
         else
@@ -372,12 +372,12 @@ public class TransmutationKnowledgeRegistry
         {
             if (templateKnowledge != null)
             {
-                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILENAME, templateKnowledge);
             }
             else
             {
                 templateKnowledge = new TransmutationKnowledge();
-                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILE, templateKnowledge);
+                SerializationHelper.writeTransmutationKnowledgeToFile(dataKnowledgeDirectory, Files.TEMPLATE_JSON_FILENAME, templateKnowledge);
             }
         }
     }

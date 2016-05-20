@@ -48,6 +48,7 @@ public class SerializationHelper {
      *
      * @return
      */
+    @Deprecated
     public static File getInstanceDataDirectory()
     {
         return instanceDataDirectory;
@@ -69,6 +70,7 @@ public class SerializationHelper {
      * Creates (if one does not exist already) and initializes a mod specific File reference inside of the current world's playerdata directory
      */
     public static void initModDataDirectories() {
+
         instanceDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         instanceDataDirectory.mkdirs();
 
@@ -236,7 +238,7 @@ public class SerializationHelper {
         writeJsonFile(file, GSON.toJson(valueMap, ENERGY_VALUE_MAP_TYPE));
     }
 
-    private static String readJsonFile(File file) throws FileNotFoundException {
+    public static String readJsonFile(File file) throws FileNotFoundException {
 
         StringBuilder jsonStringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -259,7 +261,7 @@ public class SerializationHelper {
         return jsonStringBuilder.toString();
     }
 
-    private static void writeJsonFile(File file, String fileContents) {
+    public static void writeJsonFile(File file, String fileContents) {
 
         File tempFile = new File(file.getAbsolutePath() + "_tmp");
 

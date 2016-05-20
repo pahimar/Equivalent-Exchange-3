@@ -6,6 +6,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
+import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
@@ -53,6 +54,8 @@ public class EquivalentExchange3
 
     @EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
+
+        Files.updateFileReferences();
 
         SerializationHelper.initModDataDirectories();
         TransmutationKnowledgeRegistry.getInstance();
@@ -118,7 +121,10 @@ public class EquivalentExchange3
 
         WorldEventHandler.hasInitilialized = false;
         EnergyValueRegistry.INSTANCE.save();
+
         TransmutationKnowledgeRegistry.getInstance().clear();
+        PlayerKnowledgeRegistry.INSTANCE.save();
+
         AbilityRegistry.getInstance().save();
     }
 

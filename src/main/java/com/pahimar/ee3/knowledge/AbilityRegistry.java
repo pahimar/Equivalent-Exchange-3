@@ -270,7 +270,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
         if (abilityDirectory != null)
         {
             abilityDirectory.mkdirs();
-            writeToFile(new File(abilityDirectory, Files.ABILITIES_JSON_FILE));
+            writeToFile(new File(abilityDirectory, Files.ABILITIES_JSON_FILENAME));
         }
     }
 
@@ -299,7 +299,7 @@ public class AbilityRegistry implements JsonSerializer<AbilityRegistry>, JsonDes
     {
         if (abilityDirectory != null)
         {
-            File abilitiesFile = new File(abilityDirectory, Files.ABILITIES_JSON_FILE);
+            File abilitiesFile = new File(abilityDirectory, Files.ABILITIES_JSON_FILENAME);
 
             if (abilitiesFile.exists())
             {

@@ -1,6 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
+import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.LogHelper;
@@ -25,6 +26,8 @@ public class WorldEventHandler {
             EnergyValueRegistry.INSTANCE.compute();
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Energy value system initialized {} values after {} ms", EnergyValueRegistry.INSTANCE.getEnergyValues().size(), (System.nanoTime() - startTime) / 100000);
             hasInitilialized = true;
+
+            PlayerKnowledgeRegistry.INSTANCE.load();
         }
     }
 }
