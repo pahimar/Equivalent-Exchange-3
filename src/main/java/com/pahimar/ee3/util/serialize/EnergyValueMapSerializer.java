@@ -37,16 +37,47 @@ public class EnergyValueMapSerializer implements JsonSerializer<Map<WrappedStack
                     JsonObject jsonValueMapping = jsonElement.getAsJsonObject();
 
                     WrappedStack wrappedStack = null;
-                    EnergyValue energyValue = new EnergyValue(jsonValueMapping.get(ENERGY_VALUE).getAsNumber());
+                    EnergyValue energyValue = null;
+
+                    if (jsonValueMapping.get(ENERGY_VALUE).isJsonPrimitive()) {
+
+                        try {
+                            energyValue = new EnergyValue(((JsonPrimitive) jsonValueMapping.get(ENERGY_VALUE)).getAsNumber());
+                        }
+                        catch (NumberFormatException e) {
+                            // TODO Logging
+                        }
+                    }
 
                     if (jsonValueMapping.has(TYPE_ITEM_STACK)) {
-                        wrappedStack = WrappedStack.wrap(context.deserialize(jsonValueMapping.get(TYPE_ITEM_STACK), ItemStack.class));
+
+                        try {
+                            ItemStack itemStack = context.deserialize(jsonValueMapping.get(TYPE_ITEM_STACK), ItemStack.class);
+                            wrappedStack = WrappedStack.wrap(itemStack);
+                        }
+                        catch (JsonParseException e) {
+                            // TODO Logging
+                        }
                     }
                     else if (jsonValueMapping.has(TYPE_ORE_STACK)) {
-                        wrappedStack = WrappedStack.wrap(context.deserialize(jsonValueMapping.get(TYPE_ORE_STACK), OreStack.class));
+
+                        try {
+                            OreStack oreStack = context.deserialize(jsonValueMapping.get(TYPE_ORE_STACK), OreStack.class);
+                            wrappedStack = WrappedStack.wrap(oreStack);
+                        }
+                        catch (JsonParseException e) {
+                            // TODO Logging
+                        }
                     }
                     else if (jsonValueMapping.has(TYPE_FLUID_STACK)) {
-                        wrappedStack = WrappedStack.wrap(context.deserialize(jsonValueMapping.get(TYPE_FLUID_STACK), FluidStack.class));
+
+                        try {
+                            FluidStack fluidStack = context.deserialize(jsonValueMapping.get(TYPE_FLUID_STACK), FluidStack.class);
+                            wrappedStack = WrappedStack.wrap(fluidStack);
+                        }
+                        catch (JsonParseException e) {
+                            // TODO Logging
+                        }
                     }
 
                     if (wrappedStack != null && energyValue != null) {

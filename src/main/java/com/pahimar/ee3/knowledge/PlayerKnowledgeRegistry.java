@@ -117,7 +117,7 @@ public class PlayerKnowledgeRegistry {
 
         // Load template knowledge
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-
+            // FIXME Priority Number 2
         }
     }
 
