@@ -123,7 +123,7 @@ public class EquivalentExchange3
         EnergyValueRegistry.INSTANCE.save();
 
         TransmutationKnowledgeRegistry.getInstance().clear();
-        PlayerKnowledgeRegistry.INSTANCE.save();
+        PlayerKnowledgeRegistry.INSTANCE.saveAll();
 
         AbilityRegistry.getInstance().save();
     }

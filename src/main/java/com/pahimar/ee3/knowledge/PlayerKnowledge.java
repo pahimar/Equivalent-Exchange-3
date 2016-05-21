@@ -33,7 +33,12 @@ public class PlayerKnowledge {
     }
 
     public boolean isKnown(ItemStack itemStack) {
-        return knownItemStacks.contains(ItemHelper.clone(itemStack, 1));
+
+        if (itemStack != null) {
+            return knownItemStacks.contains(ItemHelper.clone(itemStack, 1));
+        }
+
+        return false;
     }
 
     public Set<ItemStack> getKnownItemStacks() {
@@ -50,8 +55,10 @@ public class PlayerKnowledge {
 
     public void learn(Collection<ItemStack> itemStacks) {
 
-        for (ItemStack itemStack : itemStacks) {
-            learn(itemStack);
+        if (itemStacks != null) {
+            for (ItemStack itemStack : itemStacks) {
+                learn(itemStack);
+            }
         }
     }
 
@@ -65,8 +72,10 @@ public class PlayerKnowledge {
 
     public void forget(Collection<ItemStack> itemStacks) {
 
-        for (ItemStack itemStack : itemStacks) {
-            forget(itemStack);
+        if (itemStacks != null) {
+            for (ItemStack itemStack : itemStacks) {
+                forget(itemStack);
+            }
         }
     }
 
