@@ -42,7 +42,7 @@ public class EnergyValueMapSerializer implements JsonSerializer<Map<WrappedStack
                     if (jsonValueMapping.get(ENERGY_VALUE).isJsonPrimitive()) {
 
                         try {
-                            energyValue = new EnergyValue(((JsonPrimitive) jsonValueMapping.get(ENERGY_VALUE)).getAsNumber());
+                            energyValue = new EnergyValue(jsonValueMapping.getAsJsonPrimitive(ENERGY_VALUE).getAsNumber());
                         }
                         catch (NumberFormatException e) {
                             // TODO Logging

@@ -26,37 +26,30 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
             int metaValue = 0;
             NBTTagCompound tagCompound = null;
 
-            try {
-                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
-                    name = jsonObject.get(NAME).getAsString();
+            if (jsonObject.has(NAME) && jsonObject.get(NAME).isJsonPrimitive()) {
+                name = jsonObject.getAsJsonPrimitive(NAME).getAsString();
+            }
+
+            if (jsonObject.has(META_VALUE) && jsonObject.get(META_VALUE).isJsonPrimitive()) {
+                try {
+                    metaValue = jsonObject.getAsJsonPrimitive(META_VALUE).getAsInt();
+                }
+                catch (NumberFormatException e) {
+                    // TODO Logging
                 }
             }
-            catch (IllegalStateException exception) {
-                // TODO We could probably log here that an invalid piece of data was found
-            }
 
-            try {
-                if (jsonObject.has(META_VALUE) && jsonObject.get(META_VALUE).getAsJsonPrimitive().isNumber()) {
-                    metaValue = jsonObject.get(META_VALUE).getAsInt();
-                }
-            }
-            catch (IllegalStateException exception) {
-                // TODO We could probably log here that an invalid piece of data was found
-            }
+            if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).isJsonPrimitive()) {
 
-            try {
-                if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).getAsJsonPrimitive().isString()) {
-
-                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get(TAG_COMPOUND).getAsString());
+                try {
+                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.getAsJsonPrimitive(TAG_COMPOUND).getAsString());
                     if (nbtBase instanceof NBTTagCompound) {
                         tagCompound = (NBTTagCompound) nbtBase;
                     }
                 }
-            }
-            catch (NBTException e) {
-            }
-            catch (IllegalStateException exception) {
-                // TODO We could probably log here that an invalid piece of data was found
+                catch (NBTException e) {
+                    // TODO Logging
+                }
             }
 
             if (name != null) {
