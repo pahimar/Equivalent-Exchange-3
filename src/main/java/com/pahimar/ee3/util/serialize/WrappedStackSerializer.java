@@ -24,13 +24,34 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
             WrappedStack wrappedStack = null;
 
             if (jsonObject.has(TYPE_ITEM_STACK)) {
-                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class));
+
+                try {
+                    ItemStack itemStack = context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class);
+                    wrappedStack = WrappedStack.wrap(itemStack);
+                }
+                catch (JsonParseException e) {
+                    // TODO Logging
+                }
             }
             else if (jsonObject.has(TYPE_ORE_STACK)) {
-                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class));
+
+                try {
+                    OreStack oreStack = context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class);
+                    wrappedStack = WrappedStack.wrap(oreStack);
+                }
+                catch (JsonParseException e) {
+                    // TODO Logging
+                }
             }
             else if (jsonObject.has(TYPE_FLUID_STACK)) {
-                wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class));
+
+                try {
+                    FluidStack fluidStack = context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class);
+                    wrappedStack = WrappedStack.wrap(fluidStack);
+                }
+                catch (JsonParseException e) {
+                    // TODO Logging
+                }
             }
 
             if (wrappedStack != null) {
