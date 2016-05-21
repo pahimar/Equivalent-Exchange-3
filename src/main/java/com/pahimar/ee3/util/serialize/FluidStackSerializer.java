@@ -25,27 +25,22 @@ public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDes
             String name = null;
             NBTTagCompound tagCompound = null;
 
-            try {
-                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
-                    name = jsonObject.get(NAME).getAsString();
-                }
-            }
-            catch (IllegalStateException exception) {
+            if (jsonObject.has(NAME) && jsonObject.get(NAME).isJsonPrimitive()) {
+                name = jsonObject.getAsJsonPrimitive(NAME).getAsString();
             }
 
-            try {
-                if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).getAsJsonPrimitive().isString()) {
+            if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).isJsonPrimitive()) {
 
+                try {
                     NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get(TAG_COMPOUND).getAsString());
                     if (nbtBase instanceof NBTTagCompound) {
                         tagCompound = (NBTTagCompound) nbtBase;
                     }
                 }
+                catch (NBTException e) {
+                }
             }
-            catch (IllegalStateException exception) {
-            }
-            catch (NBTException e) {
-            }
+
 
             if (name != null) {
                 Fluid fluid = FluidRegistry.getFluid(name);

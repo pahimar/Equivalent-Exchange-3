@@ -13,16 +13,12 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
     public OreStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
         if (json.isJsonObject()) {
+
             JsonObject jsonObject = (JsonObject) json;
 
-            try {
-                if (jsonObject.has(NAME) && jsonObject.get(NAME).getAsJsonPrimitive().isString()) {
-                    String name = jsonObject.get(NAME).getAsString();
-                    return new OreStack(name);
-                }
-            }
-            catch (IllegalStateException exception) {
-                // TODO We could probably log here that an invalid piece of data was found
+            if (jsonObject.has(NAME) && jsonObject.get(NAME).isJsonPrimitive()) {
+                String name = jsonObject.getAsJsonPrimitive(NAME).getAsString();
+                return new OreStack(name);
             }
         }
 
