@@ -15,6 +15,7 @@ public class ConfigurationHandler {
 
     private static final String CATEGORY_SOUND = "general.sound";
     private static final String CATEGORY_ENERGY_VALUE = "general.energy_value";
+    private static final String CATEGORY_PLAYER_KNOWLEDGE = "general.player_knowledge";
 
     public static void init(File configFile) {
 
@@ -57,6 +58,13 @@ public class ConfigurationHandler {
                 StatCollector.translateToLocal(Settings.SOUND_MODE_COMMENT),
                 Settings.SOUND_MODE_OPTIONS,
                 Settings.SOUND_MODE_LABEL);
+
+        Settings.playerKnowledgeTemplateEnabled = configuration.getBoolean(
+                Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_NAME,
+                CATEGORY_PLAYER_KNOWLEDGE,
+                Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_DEFAULT,
+                StatCollector.translateToLocal(Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT),
+                Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL);
 
         Settings.onlyLoadFile = configuration.getBoolean(
                 Settings.ABILITIES_ONLY_LOAD_FILE_NAME,
@@ -107,6 +115,12 @@ public class ConfigurationHandler {
         private static final String SOUND_MODE_COMMENT = "sound.mode.comment";
         private static final String SOUND_MODE_DEFAULT = "All";
         private static final String[] SOUND_MODE_OPTIONS = new String[]{"All", "Self", "None"};
+
+        public static boolean playerKnowledgeTemplateEnabled;
+        private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_NAME = "use_template";
+        private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL = "player_knowledge.use_template.label";
+        private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT = "player_knowledge.use_template.comment";
+        private static final boolean USE_PLAYER_KNOWLEDGE_TEMPLATE_DEFAULT = true;
 
         public static boolean onlyLoadFile;
         private static final String ABILITIES_ONLY_LOAD_FILE_NAME = "abilities.onlyLoadFile";

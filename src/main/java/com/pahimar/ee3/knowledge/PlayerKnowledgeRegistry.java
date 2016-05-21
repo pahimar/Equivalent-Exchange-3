@@ -1,5 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
+import com.google.gson.JsonSyntaxException;
+import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -10,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.TreeMap;
 
 public class PlayerKnowledgeRegistry {
@@ -48,35 +51,118 @@ public class PlayerKnowledgeRegistry {
      *  teach
      *  makeForget
      *  makeForgetAll
-     *  load
-     *  save
      */
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @return
+     */
+    public PlayerKnowledge getPlayerKnowledge(EntityPlayer entityPlayer) {
+
+        if (entityPlayer != null) {
+            return getPlayerKnowledge(entityPlayer.getDisplayName());
+        }
+        else {
+            throw new IllegalArgumentException("EntityPlayer must be non-null");
+        }
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @return
+     */
+    public PlayerKnowledge getPlayerKnowledge(String playerName) {
+
+        // TODO Logging
+        if (playerName != null && !playerName.isEmpty()) {
+            if (!playerKnowledgeMap.containsKey(playerName)) {
+                playerKnowledgeMap.put(playerName, load(getPlayerKnowledgeFile(playerName)));
+            }
+
+            return playerKnowledgeMap.get(playerName);
+        }
+        else {
+            throw new IllegalArgumentException("Invalid player name - must not be null and must be longer than 0 characters");
+        }
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     */
     public void save() {
 
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+
+            // Save the template to file
+            SerializationHelper.writeJsonFile(templatePlayerKnowledgeFile, SerializationHelper.GSON.toJson(templatePlayerKnowledge));
+
+            // Save every currently loaded player knowledge to file
             for (String playerName : playerKnowledgeMap.keySet()) {
-                SerializationHelper.writeJsonFile(getPlayerKnowledgeFile(playerName), SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
+                File playerKnowledgeFile = getPlayerKnowledgeFile(playerName);
+                if (playerKnowledgeFile != null) {
+                    SerializationHelper.writeJsonFile(playerKnowledgeFile, SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
+                }
             }
         }
-
-        SerializationHelper.writeJsonFile(templatePlayerKnowledgeFile, SerializationHelper.GSON.toJson(templatePlayerKnowledge));
     }
 
+    /**
+     * TODO Finish JavaDoc
+     */
     public void load() {
 
         // Load template knowledge
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+
+        }
     }
 
-    public void loadPlayer(EntityPlayer entityPlayer) {
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param file
+     * @return
+     */
+    private PlayerKnowledge load(File file) {
 
+        if (file != null) {
+            try {
+                String jsonString = SerializationHelper.readJsonFile(file);
+                PlayerKnowledge playerKnowledge = SerializationHelper.GSON.fromJson(jsonString, PlayerKnowledge.class);
+
+                if (playerKnowledge != null) {
+                   return playerKnowledge;
+                }
+            }
+            catch (JsonSyntaxException | FileNotFoundException e) {
+            }
+        }
+
+        if (ConfigurationHandler.Settings.playerKnowledgeTemplateEnabled) {
+            return new PlayerKnowledge(templatePlayerKnowledge);
+        }
+        else {
+            return new PlayerKnowledge();
+        }
     }
 
-    public void loadPlayer(File file) {
-
-    }
-
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @return
+     */
     private static File getPlayerKnowledgeFile(String playerName) {
-        return new File(Files.playerDataDirectory, "knowledge" + File.separator + "transmutation" + File.separator + playerName + ".json");
+
+        if (playerName != null && playerName.isEmpty()) {
+            return new File(Files.playerDataDirectory, "knowledge" + File.separator + "transmutation" + File.separator + playerName + ".json");
+        }
+        else {
+            throw new IllegalArgumentException("Invalid player name - must not be null and must be longer than 0 characters");
+        }
     }
 }

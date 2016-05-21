@@ -12,6 +12,11 @@ sound=Sound Options
 sound.mode.label=Play Sounds Only From
 sound.mode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' does not play any mod sounds
 
+# Configuration (Player Knowledge Options)
+player_knowledge=Player Knowledge Options
+player_knowledge.use_template.label=Use Knowledge Template
+player_knowledge.use_template.comment=Whether or not to use the player knowledge template. The template allows players to start with some items already researched
+
 general.abilities.onlyLoadFile.label=Only load Abilities file
 general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
 

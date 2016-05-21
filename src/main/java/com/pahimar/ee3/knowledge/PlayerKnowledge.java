@@ -17,6 +17,10 @@ public class PlayerKnowledge {
         this(Collections.EMPTY_SET);
     }
 
+    public PlayerKnowledge(PlayerKnowledge playerKnowledge) {
+        this(playerKnowledge.knownItemStacks);
+    }
+
     public PlayerKnowledge(Collection<ItemStack> itemStacks) {
 
         knownItemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
