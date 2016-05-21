@@ -102,9 +102,11 @@ public class PlayerKnowledgeRegistry {
 
             // Save every currently loaded player knowledge to file
             for (String playerName : playerKnowledgeMap.keySet()) {
-                File playerKnowledgeFile = getPlayerKnowledgeFile(playerName);
-                if (playerKnowledgeFile != null) {
-                    SerializationHelper.writeJsonFile(playerKnowledgeFile, SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
+                if (playerName != null && !playerName.isEmpty()) {
+                    File playerKnowledgeFile = getPlayerKnowledgeFile(playerName);
+                    if (playerKnowledgeFile != null) {
+                        SerializationHelper.writeJsonFile(playerKnowledgeFile, SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
+                    }
                 }
             }
         }
@@ -158,7 +160,7 @@ public class PlayerKnowledgeRegistry {
      */
     private static File getPlayerKnowledgeFile(String playerName) {
 
-        if (playerName != null && playerName.isEmpty()) {
+        if (playerName != null && !playerName.isEmpty()) {
             return new File(Files.playerDataDirectory, "knowledge" + File.separator + "transmutation" + File.separator + playerName + ".json");
         }
         else {
