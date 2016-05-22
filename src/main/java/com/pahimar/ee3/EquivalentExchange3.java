@@ -7,7 +7,6 @@ import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
-import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
@@ -56,7 +55,6 @@ public class EquivalentExchange3
         Files.updateFileReferences();
 
         SerializationHelper.initModDataDirectories();
-        TransmutationKnowledgeRegistry.getInstance();
         AbilityRegistry.getInstance().loadAbilityRegistryFromFile(ConfigurationHandler.Settings.onlyLoadFile);
         event.registerServerCommand(new CommandEE());
     }
@@ -119,8 +117,6 @@ public class EquivalentExchange3
 
         WorldEventHandler.hasInitilialized = false;
         EnergyValueRegistry.INSTANCE.save();
-
-        TransmutationKnowledgeRegistry.getInstance().clear();
         PlayerKnowledgeRegistry.INSTANCE.saveAll();
 
         AbilityRegistry.getInstance().save();

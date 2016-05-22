@@ -1,9 +1,9 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchenomicon;
-import com.pahimar.ee3.knowledge.TransmutationKnowledgeRegistry;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemHelper;
@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.UUID;
 
 public class ContainerAlchenomicon extends ContainerEE implements IElementButtonHandler, IElementTextFieldHandler
 {
@@ -31,12 +30,12 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
 
     public ContainerAlchenomicon(EntityPlayer entityPlayer, ItemStack itemStack)
     {
-        TreeSet<ItemStack> knownTransmutations = new TreeSet<ItemStack>(Comparators.DISPLAY_NAME_COMPARATOR);
+        TreeSet<ItemStack> knownTransmutations = new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR);
 
-        if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
+        if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerName(itemStack))
         {
-            UUID ownerUUID = ItemHelper.getOwnerUUID(itemStack);
-            knownTransmutations.addAll(TransmutationKnowledgeRegistry.getInstance().getPlayersKnownTransmutations(ownerUUID));
+            String playerName = ItemHelper.getOwnerName(itemStack);
+            knownTransmutations.addAll(PlayerKnowledgeRegistryProxy.getKnownItemStacks(playerName));
         }
 
         inventoryAlchenomicon = new InventoryAlchenomicon(knownTransmutations);
@@ -188,7 +187,7 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
         this.requiresUpdate = true;
         boolean shouldUpdateInventory = false;
         ItemStack[] newInventory = new ItemStack[80];
-        List<ItemStack> filteredList = new ArrayList(FilterUtils.filterByDisplayName(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS, Comparators.DISPLAY_NAME_COMPARATOR));
+        List<ItemStack> filteredList = new ArrayList<>(FilterUtils.filterByDisplayName(inventoryAlchenomicon.getKnownTransmutations(), searchTerm, FilterUtils.NameFilterType.CONTAINS, Comparators.DISPLAY_NAME_COMPARATOR));
 
         maxPageOffset = filteredList.size() / 80;
         if (pageOffset > maxPageOffset)

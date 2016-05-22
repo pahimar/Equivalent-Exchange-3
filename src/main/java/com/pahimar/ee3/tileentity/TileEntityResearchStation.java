@@ -184,7 +184,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     @Override
     public void updateEntity()
     {
-        if (!this.worldObj.isRemote)
+        if (!this.worldObj.isRemote && inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX] != null && inventory[ITEM_SLOT_INVENTORY_INDEX] != null)
         {
             // Continue "cooking" the same item, if we can
             if (this.canLearnItemStack())

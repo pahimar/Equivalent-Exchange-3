@@ -5,6 +5,7 @@ import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
+import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -33,10 +34,13 @@ public class PlayerKnowledgeRegistry {
         templatePlayerKnowledge = new PlayerKnowledge();
     }
 
-    public PlayerKnowledge getTemplatePlayerKnowledge() {
-        return templatePlayerKnowledge;
-    }
-
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param player
+     * @param object
+     * @return
+     */
     public boolean doesPlayerKnow(EntityPlayer player, Object object) {
 
         if (player != null) {
@@ -46,6 +50,13 @@ public class PlayerKnowledgeRegistry {
         return false;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param object
+     * @return
+     */
     public boolean doesPlayerKnow(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
@@ -55,6 +66,13 @@ public class PlayerKnowledgeRegistry {
         return false;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @param object
+     * @return
+     */
     public boolean canPlayerLearn(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
@@ -64,6 +82,13 @@ public class PlayerKnowledgeRegistry {
         return false;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param object
+     * @return
+     */
     public boolean canPlayerLearn(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
@@ -73,6 +98,12 @@ public class PlayerKnowledgeRegistry {
         return false;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @param object
+     */
     public void teachPlayer(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
@@ -80,6 +111,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param object
+     */
     public void teachPlayer(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
@@ -88,6 +125,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @param objects
+     */
     public void teachPlayer(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
@@ -95,6 +138,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param objects
+     */
     public void teachPlayer(String playerName, Collection<?> objects) {
 
         if (objects != null) {
@@ -102,12 +151,20 @@ public class PlayerKnowledgeRegistry {
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
             if (playerKnowledge != null) {
-                objects.forEach(playerKnowledge::learn);
+                for (Object object : objects){
+                    getPlayerKnowledge(playerName).learn(object);
+                }
                 save(playerName);
             }
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @param object
+     */
     public void makePlayerForget(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
@@ -115,6 +172,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param object
+     */
     public void makePlayerForget(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
@@ -123,6 +186,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @param objects
+     */
     public void makePlayerForget(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
@@ -130,6 +199,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @param objects
+     */
     public void makePlayerForget(String playerName, Collection<?> objects) {
 
         if (objects != null) {
@@ -137,12 +212,19 @@ public class PlayerKnowledgeRegistry {
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
             if (playerKnowledge != null) {
-                objects.forEach(playerKnowledge::forget);
+                for (Object object : objects) {
+                    getPlayerKnowledge(playerName).forget(object);
+                }
                 save(playerName);
             }
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     */
     public void makePlayerForgetAll(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
@@ -150,6 +232,11 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     */
     public void makePlayerForgetAll(String playerName) {
 
         if (playerName != null && !playerName.isEmpty()) {
@@ -158,6 +245,12 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param entityPlayer
+     * @return
+     */
     public Set<ItemStack> getKnownItemStacks(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
@@ -167,6 +260,12 @@ public class PlayerKnowledgeRegistry {
         return Collections.EMPTY_SET;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param playerName
+     * @return
+     */
     public Set<ItemStack> getKnownItemStacks(String playerName) {
 
         if (getPlayerKnowledge(playerName) != null) {
@@ -199,7 +298,6 @@ public class PlayerKnowledgeRegistry {
      */
     protected PlayerKnowledge getPlayerKnowledge(String playerName) {
 
-        // TODO Logging
         if (playerName != null && !playerName.isEmpty()) {
             if (!playerKnowledgeMap.containsKey(playerName)) {
                 playerKnowledgeMap.put(playerName, load(getPlayerKnowledgeFile(playerName), false));
@@ -275,17 +373,23 @@ public class PlayerKnowledgeRegistry {
                 PlayerKnowledge playerKnowledge = SerializationHelper.GSON.fromJson(jsonString, PlayerKnowledge.class);
 
                 if (playerKnowledge != null) {
-                   return playerKnowledge;
+                    return playerKnowledge;
                 }
             }
-            catch (JsonSyntaxException | FileNotFoundException e) {
+            catch (JsonSyntaxException e) {
+                LogHelper.error("Unable to read player knowledge from file '{}'", file.getAbsoluteFile());
+            }
+            catch (FileNotFoundException e) {
+                LogHelper.warn("Unable to find file '{}'", file.getAbsoluteFile());
             }
         }
 
         if (ConfigurationHandler.Settings.playerKnowledgeTemplateEnabled && !isTemplate) {
+            LogHelper.info("Unable to read player knowledge from {}, initializing a new one with template data", file.getName());
             return new PlayerKnowledge(templatePlayerKnowledge);
         }
         else {
+            LogHelper.info("Unable to read player knowledge from {}, initializing a new empty one", file.getName());
             return new PlayerKnowledge();
         }
     }
