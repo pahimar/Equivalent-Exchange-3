@@ -2,6 +2,7 @@ package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -78,6 +79,8 @@ public class CommandSetEnergyValueCurrentItem extends CommandBase
                 {
                     throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_CURRENT_ITEM_USAGE);
                 }
+
+                EnergyValueRegistry.INSTANCE.save();
             }
             else
             {

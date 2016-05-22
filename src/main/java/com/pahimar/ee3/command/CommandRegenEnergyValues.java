@@ -11,20 +11,19 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class CommandSyncEnergyValues extends CommandBase
-{
+public class CommandRegenEnergyValues extends CommandBase {
+
     private static Map<UUID, Long> requesterMap = new HashMap<>();
 
     @Override
     public String getCommandName() {
-        return Names.Commands.SYNC_ENERGY_VALUES;
+        return Names.Commands.REGEN_ENERGY_VALUES;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class CommandSyncEnergyValues extends CommandBase
     @Override
     public void processCommand(ICommandSender commandSender, String[] args) {
 
-        boolean shouldSync = true;
+        boolean shouldRegen = true;
         float coolDown = 0f;
         UUID commandSenderUUID = ((EntityPlayer) commandSender).getUniqueID();
 
@@ -54,20 +53,24 @@ public class CommandSyncEnergyValues extends CommandBase
             }
             else {
                 coolDown = (ConfigurationHandler.Settings.serverSyncThreshold * 1000) - timeDifference;
-                shouldSync = false;
+                shouldRegen = false;
             }
         }
         else {
             requesterMap.put(commandSenderUUID, System.currentTimeMillis());
         }
 
-        if (shouldSync) {
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Syncing energy values with player '{}' at their request", commandSender.getCommandSenderName());
-            PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(), (EntityPlayerMP) commandSender);
-            commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.SYNC_ENERGY_VALUES_SUCCESS));
+        if (shouldRegen) {
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getCommandSenderName());
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Reloading energy values from file");
+            EnergyValueRegistry.INSTANCE.load();
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Recalculating energy values");
+            EnergyValueRegistry.INSTANCE.compute();
+            PacketHandler.INSTANCE.sendToAll(new MessageSyncEnergyValues());
+            commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
         }
         else {
-            throw new WrongUsageException(Messages.Commands.SYNC_ENERGY_VALUES_DENIED, new Object[]{coolDown / 1000f});
+            throw new WrongUsageException(Messages.Commands.REGEN_ENERGY_VALUES_DENIED, new Object[]{coolDown / 1000f});
         }
     }
 }

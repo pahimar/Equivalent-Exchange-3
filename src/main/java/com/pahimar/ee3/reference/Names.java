@@ -139,6 +139,7 @@ public class Names
         public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
         public static final String SET_ENERGY_VALUE = "set-energy-value";
         public static final String SET_ENERGY_VALUE_CURRENT_ITEM = "set-energy-value-current-item";
+        public static final String REGEN_ENERGY_VALUES = "regen-energy-values";
         public static final String SYNC_ENERGY_VALUES = "sync-energy-values";
         public static final String PLAYER_LEARN_EVERYTHING = "player-learn-everything";
         public static final String PLAYER_LEARN_ITEM = "player-learn-item";

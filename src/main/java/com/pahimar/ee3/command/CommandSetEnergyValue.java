@@ -2,6 +2,7 @@ package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -98,6 +99,7 @@ public class CommandSetEnergyValue extends CommandBase
                     throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
                 }
 
+                EnergyValueRegistry.INSTANCE.save();
                 // Notify admins and log the value change
                 func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
             }
