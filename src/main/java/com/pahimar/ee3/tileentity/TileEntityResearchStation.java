@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.api.knowledge.TransmutationKnowledgeRegistryProxy;
+import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityResearchStation;
@@ -14,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
-
-import java.util.UUID;
 
 public class TileEntityResearchStation extends TileEntityEE implements IInventory
 {
@@ -211,11 +209,11 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     private boolean canLearnItemStack()
     {
         ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
-        UUID playerUUID = ItemHelper.getOwnerUUID(alchenomicon);
+        String playerName = ItemHelper.getOwnerName(alchenomicon);
 
-        if (alchenomicon != null && playerUUID != null)
+        if (alchenomicon != null && playerName != null)
         {
-            return TransmutationKnowledgeRegistryProxy.canPlayerLearn(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            return PlayerKnowledgeRegistryProxy.canPlayerLearn(playerName, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
 
         return false;
@@ -224,11 +222,11 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     private boolean isItemStackKnown()
     {
         ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
-        UUID playerUUID = ItemHelper.getOwnerUUID(alchenomicon);
+        String playerName = ItemHelper.getOwnerName(alchenomicon);
 
-        if (alchenomicon != null && playerUUID != null)
+        if (alchenomicon != null && playerName != null)
         {
-            return TransmutationKnowledgeRegistryProxy.doesPlayerKnow(playerUUID, inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            return PlayerKnowledgeRegistryProxy.doesPlayerKnow(playerName, inventory[ITEM_SLOT_INVENTORY_INDEX]);
         }
 
         return false;
@@ -238,7 +236,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-            TransmutationKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerUUID(inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            PlayerKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerName(inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
 
             this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
 

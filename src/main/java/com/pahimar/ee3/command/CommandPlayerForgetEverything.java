@@ -1,6 +1,6 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.api.knowledge.TransmutationKnowledgeRegistryProxy;
+import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -44,7 +44,7 @@ public class CommandPlayerForgetEverything extends CommandBase
 
             if (entityPlayer != null)
             {
-                TransmutationKnowledgeRegistryProxy.makePlayerForgetEverything(entityPlayer);
+                PlayerKnowledgeRegistryProxy.makePlayerForgetAll(entityPlayer);
                 func_152373_a(commandSender, this, Messages.Commands.PLAYER_FORGET_EVERYTHING_SUCCESS, new Object[]{commandSender.getCommandSenderName(), entityPlayer.getCommandSenderName()});
             }
             else

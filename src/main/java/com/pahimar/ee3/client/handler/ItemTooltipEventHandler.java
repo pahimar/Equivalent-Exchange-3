@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
-import com.pahimar.ee3.api.knowledge.TransmutationKnowledgeRegistryProxy;
+import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.inventory.ContainerAlchenomicon;
 import com.pahimar.ee3.inventory.ContainerResearchStation;
@@ -74,7 +74,7 @@ public class ItemTooltipEventHandler
 
         if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerResearchStation)))
         {
-            if (TransmutationKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack))
+            if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack))
             {
                 event.toolTip.add("You know how to transmute this"); // TODO Localize with better phrasing
             }
