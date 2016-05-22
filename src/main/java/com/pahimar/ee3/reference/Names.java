@@ -146,12 +146,6 @@ public class Names
         public static final String PLAYER_FORGET_EVERYTHING = "player-forget-everything";
         public static final String PLAYER_FORGET_ITEM = "player-forget-item";
         public static final String PLAYER_FORGET_CURRENT_ITEM = "player-forget-current-item";
-        public static final String TEMPLATE_LEARN_EVERYTHING = "template-learn-everything";
-        public static final String TEMPLATE_LEARN_ITEM = "template-learn-item";
-        public static final String TEMPLATE_LEARN_CURRENT_ITEM = "template-learn-current-item";
-        public static final String TEMPLATE_FORGET_EVERYTHING = "template-forget-everything";
-        public static final String TEMPLATE_FORGET_ITEM = "template-forget-item";
-        public static final String TEMPLATE_FORGET_CURRENT_ITEM = "template-forget-current-item";
         public static final String SET_ITEM_LEARNABLE = "set-item-learnable";
         public static final String SET_ITEM_NOT_LEARNABLE = "set-item-not-learnable";
         public static final String SET_ITEM_RECOVERABLE = "set-item-recoverable";
