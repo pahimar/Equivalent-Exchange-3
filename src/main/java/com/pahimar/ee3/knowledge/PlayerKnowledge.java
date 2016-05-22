@@ -21,21 +21,21 @@ public class PlayerKnowledge {
         this(playerKnowledge.knownItemStacks);
     }
 
-    public PlayerKnowledge(Collection<ItemStack> itemStacks) {
+    public PlayerKnowledge(Collection<?> objects) {
 
         knownItemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
 
-        if (itemStacks != null) {
-            for (ItemStack itemStack : itemStacks) {
-                learn(itemStack);
+        if (objects != null) {
+            for (Object object : objects) {
+                learn(object);
             }
         }
     }
 
-    public boolean isKnown(ItemStack itemStack) {
+    public boolean isKnown(Object object) {
 
-        if (itemStack != null) {
-            return knownItemStacks.contains(ItemHelper.clone(itemStack, 1));
+        if (object instanceof ItemStack) {
+            return knownItemStacks.contains(ItemHelper.clone((ItemStack) object, 1));
         }
 
         return false;
@@ -45,36 +45,36 @@ public class PlayerKnowledge {
         return knownItemStacks;
     }
 
-    public void learn(ItemStack itemStack) {
+    public void learn(Object object) {
 
-        if (itemStack != null) {
-            ItemStack unitItemStack = ItemHelper.clone(itemStack, 1);
+        if (object instanceof ItemStack) {
+            ItemStack unitItemStack = ItemHelper.clone((ItemStack) object, 1);
             knownItemStacks.add(unitItemStack);
         }
     }
 
-    public void learn(Collection<ItemStack> itemStacks) {
+    public void learn(Collection<?> objects) {
 
-        if (itemStacks != null) {
-            for (ItemStack itemStack : itemStacks) {
-                learn(itemStack);
+        if (objects != null) {
+            for (Object object : objects) {
+                learn(object);
             }
         }
     }
 
-    public void forget(ItemStack itemStack) {
+    public void forget(Object object) {
 
-        if (itemStack != null) {
-            ItemStack unitItemStack = ItemHelper.clone(itemStack, 1);
+        if (object instanceof ItemStack) {
+            ItemStack unitItemStack = ItemHelper.clone((ItemStack) object, 1);
             knownItemStacks.remove(unitItemStack);
         }
     }
 
-    public void forget(Collection<ItemStack> itemStacks) {
+    public void forget(Collection<?> objects) {
 
-        if (itemStacks != null) {
-            for (ItemStack itemStack : itemStacks) {
-                forget(itemStack);
+        if (objects != null) {
+            for (Object object : objects) {
+                forget(object);
             }
         }
     }

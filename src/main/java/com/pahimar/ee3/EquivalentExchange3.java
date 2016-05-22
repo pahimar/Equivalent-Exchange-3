@@ -40,14 +40,12 @@ public class EquivalentExchange3
     public static IProxy proxy;
 
     @EventHandler
-    public void invalidFingerprint(FMLFingerprintViolationEvent event)
-    {
-        if (Reference.FINGERPRINT.equals("@FINGERPRINT@"))
-        {
+    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
+
+        if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
             LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
         }
-        else
-        {
+        else {
             LogHelper.warn(Messages.INVALID_FINGERPRINT_MESSAGE);
         }
     }
@@ -165,9 +163,8 @@ public class EquivalentExchange3
         return AlchemyArrayRegistry.getInstance();
     }
 
-    public TransmutationKnowledgeRegistry getTransmutationKnowledgeRegistry()
-    {
-        return TransmutationKnowledgeRegistry.getInstance();
+    public PlayerKnowledgeRegistry getPlayerKnowledgeRegistry() {
+        return PlayerKnowledgeRegistry.INSTANCE;
     }
 
     public TileEntityDataHelper getTileEntityDataHelper()

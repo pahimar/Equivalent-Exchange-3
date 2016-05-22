@@ -5,281 +5,141 @@ import cpw.mods.fml.common.Mod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
-public class TransmutationKnowledgeRegistryProxy
-{
-    public static boolean doesPlayerKnow(EntityPlayer entityPlayer, ItemStack itemStack)
-    {
-        init();
+/**
+ * @deprecated as of API 0.4.0; use {@link PlayerKnowledgeRegistryProxy} instead
+ * @see PlayerKnowledgeRegistryProxy
+ */
+@Deprecated
+public class TransmutationKnowledgeRegistryProxy {
 
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().doesPlayerKnow(entityPlayer, itemStack);
-        }
+    @Deprecated
+    public static boolean doesPlayerKnow(EntityPlayer entityPlayer, ItemStack itemStack) {
+        return PlayerKnowledgeRegistryProxy.doesPlayerKnow(entityPlayer, itemStack);
+    }
 
+    @Deprecated
+    public static boolean doesPlayerKnow(UUID playerUUID, ItemStack itemStack) {
         return false;
     }
 
-    public static boolean doesPlayerKnow(UUID playerUUID, ItemStack itemStack)
-    {
-        init();
+    @Deprecated
+    public static boolean canPlayerLearn(EntityPlayer entityPlayer, ItemStack itemStack) {
+        return PlayerKnowledgeRegistryProxy.canPlayerLearn(entityPlayer, itemStack);
+    }
 
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().doesPlayerKnow(playerUUID, itemStack);
-        }
-
+    @Deprecated
+    public static boolean canPlayerLearn(UUID playerUUID, ItemStack itemStack) {
         return false;
     }
 
-    public static boolean canPlayerLearn(EntityPlayer entityPlayer, ItemStack itemStack)
-    {
-        init();
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutations(EntityPlayer entityPlayer) {
+        return PlayerKnowledgeRegistryProxy.getKnownItemStacks(entityPlayer);
+    }
 
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().canPlayerLearn(entityPlayer, itemStack);
-        }
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutations(UUID playerUUID) {
+        return Collections.EMPTY_SET;
+    }
 
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredStartsWith(EntityPlayer entityPlayer, String filterString) {
+        return PlayerKnowledgeRegistryProxy.getKnownItemStacks(entityPlayer);
+    }
+
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredStartsWith(UUID playerUUID, String filterString) {
+        return Collections.EMPTY_SET;
+    }
+
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(EntityPlayer entityPlayer, String filterString) {
+        return PlayerKnowledgeRegistryProxy.getKnownItemStacks(entityPlayer);
+    }
+
+    @Deprecated
+    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(UUID playerUUID, String filterString) {
+        return Collections.EMPTY_SET;
+    }
+
+    @Deprecated
+    public static void teachPlayer(EntityPlayer entityPlayer, ItemStack itemStack) {
+        PlayerKnowledgeRegistryProxy.teachPlayer(entityPlayer, itemStack);
+    }
+
+    @Deprecated
+    public static void teachPlayer(UUID playerUUID, ItemStack itemStack) {
+        // NOOP
+    }
+
+    @Deprecated
+    public static void makePlayerForget(EntityPlayer entityPlayer, ItemStack itemStack) {
+        PlayerKnowledgeRegistryProxy.makePlayerForget(entityPlayer, itemStack);
+    }
+
+    @Deprecated
+    public static void makePlayerForget(UUID playerUUID, ItemStack itemStack) {
+        // NOOP
+    }
+
+    @Deprecated
+    public static void makePlayerForgetEverything(EntityPlayer entityPlayer) {
+        PlayerKnowledgeRegistryProxy.makePlayerForgetAll(entityPlayer);
+    }
+
+    @Deprecated
+    public static void makePlayerForgetEverything(UUID playerUUID) {
+        // NOOP
+    }
+
+    @Deprecated
+    public static boolean doesTemplateKnow(ItemStack itemStack) {
         return false;
     }
 
-    public static boolean canPlayerLearn(UUID playerUUID, ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().canPlayerLearn(playerUUID, itemStack);
-        }
-
-        return false;
+    @Deprecated
+    public static Set<ItemStack> getTemplateKnownTransmutations() {
+        return Collections.EMPTY_SET;
     }
 
-    public static Set<ItemStack> getPlayerKnownTransmutations(EntityPlayer entityPlayer)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutations(entityPlayer);
-        }
-
-        return null;
+    @Deprecated
+    public static Set<ItemStack> getTemplateKnownTransmutationsFilteredStartsWith(String filterString) {
+        return Collections.EMPTY_SET;
     }
 
-    public static Set<ItemStack> getPlayerKnownTransmutations(UUID playerUUID)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutations(playerUUID);
-        }
-
-        return null;
+    @Deprecated
+    public static Set<ItemStack> getTemplateKnownTransmutationsFilteredContains(String filterString) {
+        return Collections.EMPTY_SET;
     }
 
-    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredStartsWith(EntityPlayer entityPlayer, String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredStartsWith(entityPlayer, filterString);
-        }
-
-        return null;
+    @Deprecated
+    public static void teachTemplate(ItemStack itemStack) {
+        // NOOP
     }
 
-    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredStartsWith(UUID playerUUID, String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredStartsWith(playerUUID, filterString);
-        }
-
-        return null;
+    @Deprecated
+    public static void makeTemplateForget(ItemStack itemStack) {
+        // NOOP
     }
 
-    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(EntityPlayer entityPlayer, String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredContains(entityPlayer, filterString);
-        }
-
-        return null;
-    }
-
-    public static Set<ItemStack> getPlayerKnownTransmutationsFilteredContains(UUID playerUUID, String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getPlayersKnownTransmutationsFilteredContains(playerUUID, filterString);
-        }
-
-        return null;
-    }
-
-    public static void teachPlayer(EntityPlayer entityPlayer, ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayer(entityPlayer, itemStack);
-        }
-    }
-
-    public static void teachPlayer(UUID playerUUID, ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachPlayer(playerUUID, itemStack);
-        }
-    }
-
-    public static void makePlayerForget(EntityPlayer entityPlayer, ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForget(entityPlayer, itemStack);
-        }
-    }
-
-    public static void makePlayerForget(UUID playerUUID, ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForget(playerUUID, itemStack);
-        }
-    }
-
-    public static void makePlayerForgetEverything(EntityPlayer entityPlayer)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForgetEverything(entityPlayer);
-        }
-    }
-
-    public static void makePlayerForgetEverything(UUID playerUUID)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makePlayerForgetEverything(playerUUID);
-        }
-    }
-
-    public static boolean doesTemplateKnow(ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().doesTemplateKnow(itemStack);
-        }
-
-        return false;
-    }
-
-    public static Set<ItemStack> getTemplateKnownTransmutations()
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getTemplatesKnownTransmutations();
-        }
-
-        return null;
-    }
-
-    public static Set<ItemStack> getTemplateKnownTransmutationsFilteredStartsWith(String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getTemplatesKnownTransmutationsFilteredStartsWith(filterString);
-        }
-
-        return null;
-    }
-
-    public static Set<ItemStack> getTemplateKnownTransmutationsFilteredContains(String filterString)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().getTemplatesKnownTransmutationsFilteredContains(filterString);
-        }
-
-        return null;
-    }
-
-    public static void teachTemplate(ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().teachTemplate(itemStack);
-        }
-    }
-
-    public static void makeTemplateForget(ItemStack itemStack)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makeTemplateForget(itemStack);
-        }
-    }
-
-    public static void makeTemplateForgetEverything()
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getTransmutationKnowledgeRegistry().makeTemplateForgetEverything();
-        }
+    @Deprecated
+    public static void makeTemplateForgetEverything() {
+        // NOOP
     }
 
     @Mod.Instance("EE3")
     private static Object ee3Mod;
 
-    private static class EE3Wrapper
-    {
+    private static class EE3Wrapper {
         private static EquivalentExchange3 ee3mod;
     }
 
-    private static void init()
-    {
-        if (ee3Mod != null)
-        {
+    private static void init() {
+        if (ee3Mod != null) {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
     }

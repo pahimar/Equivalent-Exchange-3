@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class PlayerKnowledgeRegistry {
@@ -35,107 +37,107 @@ public class PlayerKnowledgeRegistry {
         return templatePlayerKnowledge;
     }
 
-    public boolean doesPlayerKnow(EntityPlayer player, ItemStack itemStack) {
+    public boolean doesPlayerKnow(EntityPlayer player, Object object) {
 
         if (player != null) {
-            return doesPlayerKnow(player.getDisplayName(), itemStack);
+            return doesPlayerKnow(player.getDisplayName(), object);
         }
 
         return false;
     }
 
-    public boolean doesPlayerKnow(String playerName, ItemStack itemStack) {
+    public boolean doesPlayerKnow(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            return getPlayerKnowledge(playerName).isKnown(itemStack);
+            return getPlayerKnowledge(playerName).isKnown(object);
         }
 
         return false;
     }
 
-    public boolean canPlayerLearn(EntityPlayer entityPlayer, ItemStack itemStack) {
+    public boolean canPlayerLearn(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            return canPlayerLearn(entityPlayer.getDisplayName(), itemStack);
+            return canPlayerLearn(entityPlayer.getDisplayName(), object);
         }
 
         return false;
     }
 
-    public boolean canPlayerLearn(String playerName, ItemStack itemStack) {
+    public boolean canPlayerLearn(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            return !getPlayerKnowledge(playerName).isKnown(itemStack) && AbilityRegistryProxy.isLearnable(itemStack);
+            return !getPlayerKnowledge(playerName).isKnown(object) && AbilityRegistryProxy.isLearnable(object);
         }
 
         return false;
     }
 
-    public void teachPlayer(EntityPlayer entityPlayer, ItemStack itemStack) {
+    public void teachPlayer(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), itemStack);
+            teachPlayer(entityPlayer.getDisplayName(), object);
         }
     }
 
-    public void teachPlayer(String playerName, ItemStack itemStack) {
+    public void teachPlayer(String playerName, Object object) {
 
-        if (itemStack != null && getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).learn(itemStack);
+        if (getPlayerKnowledge(playerName) != null) {
+            getPlayerKnowledge(playerName).learn(object);
             save(playerName);
         }
     }
 
-    public void teachPlayer(EntityPlayer entityPlayer, Collection<ItemStack> itemStacks) {
+    public void teachPlayer(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), itemStacks);
+            teachPlayer(entityPlayer.getDisplayName(), objects);
         }
     }
 
-    public void teachPlayer(String playerName, Collection<ItemStack> itemStacks) {
+    public void teachPlayer(String playerName, Collection<?> objects) {
 
-        if (itemStacks != null) {
+        if (objects != null) {
 
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
             if (playerKnowledge != null) {
-                itemStacks.forEach(playerKnowledge::learn);
+                objects.forEach(playerKnowledge::learn);
                 save(playerName);
             }
         }
     }
 
-    public void makePlayerForget(EntityPlayer entityPlayer, ItemStack itemStack) {
+    public void makePlayerForget(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), itemStack);
+            makePlayerForget(entityPlayer.getDisplayName(), object);
         }
     }
 
-    public void makePlayerForget(String playerName, ItemStack itemStack) {
+    public void makePlayerForget(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).forget(itemStack);
+            getPlayerKnowledge(playerName).forget(object);
             save(playerName);
         }
     }
 
-    public void makePlayerForget(EntityPlayer entityPlayer, Collection<ItemStack> itemStacks) {
+    public void makePlayerForget(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), itemStacks);
+            makePlayerForget(entityPlayer.getDisplayName(), objects);
         }
     }
 
-    public void makePlayerForget(String playerName, Collection<ItemStack> itemStacks) {
+    public void makePlayerForget(String playerName, Collection<?> objects) {
 
-        if (itemStacks != null) {
+        if (objects != null) {
 
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
             if (playerKnowledge != null) {
-                itemStacks.forEach(playerKnowledge::forget);
+                objects.forEach(playerKnowledge::forget);
                 save(playerName);
             }
         }
@@ -156,13 +158,31 @@ public class PlayerKnowledgeRegistry {
         }
     }
 
+    public Set<ItemStack> getKnownItemStacks(EntityPlayer entityPlayer) {
+
+        if (entityPlayer != null) {
+            return getKnownItemStacks(entityPlayer.getDisplayName());
+        }
+
+        return Collections.EMPTY_SET;
+    }
+
+    public Set<ItemStack> getKnownItemStacks(String playerName) {
+
+        if (getPlayerKnowledge(playerName) != null) {
+            return getPlayerKnowledge(playerName).getKnownItemStacks();
+        }
+
+        return Collections.EMPTY_SET;
+    }
+
     /**
      * TODO Finish JavaDoc
      *
      * @param entityPlayer
      * @return
      */
-    public PlayerKnowledge getPlayerKnowledge(EntityPlayer entityPlayer) {
+    protected PlayerKnowledge getPlayerKnowledge(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
             return getPlayerKnowledge(entityPlayer.getDisplayName());
@@ -177,7 +197,7 @@ public class PlayerKnowledgeRegistry {
      * @param playerName
      * @return
      */
-    public PlayerKnowledge getPlayerKnowledge(String playerName) {
+    protected PlayerKnowledge getPlayerKnowledge(String playerName) {
 
         // TODO Logging
         if (playerName != null && !playerName.isEmpty()) {
