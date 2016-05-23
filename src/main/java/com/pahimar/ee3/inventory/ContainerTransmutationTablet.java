@@ -341,8 +341,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             stackInSlot = slot.getStack();
 
             if (stackInSlot == null) {
-
-                stackInSlot = new ItemStack(itemStack1.getItem());
+                stackInSlot = itemStack1.copy();
                 stackInSlot.stackSize = itemStack1.stackSize;
                 slot.putStack(stackInSlot);
                 numTransmuted = itemStack1.stackSize;
