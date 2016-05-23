@@ -1,11 +1,11 @@
 package com.pahimar.ee3;
 
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
+import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.proxy.IProxy;
@@ -55,7 +55,6 @@ public class EquivalentExchange3
         Files.updateFileReferences();
 
         SerializationHelper.initModDataDirectories();
-        AbilityRegistry.getInstance().loadAbilityRegistryFromFile(ConfigurationHandler.Settings.onlyLoadFile);
         event.registerServerCommand(new CommandEE());
     }
 
@@ -79,6 +78,8 @@ public class EquivalentExchange3
         EnergyValues.init();
 
         AlchemyArrays.registerAlchemyArrays();
+
+        BlacklistRegistry.INSTANCE.load();
     }
 
     @EventHandler
@@ -118,8 +119,7 @@ public class EquivalentExchange3
         WorldEventHandler.hasInitilialized = false;
         EnergyValueRegistry.INSTANCE.save();
         PlayerKnowledgeRegistry.INSTANCE.saveAll();
-
-        AbilityRegistry.getInstance().save();
+        BlacklistRegistry.INSTANCE.saveAll();
     }
 
     @EventHandler
@@ -149,9 +149,8 @@ public class EquivalentExchange3
         return AludelRecipeManager.getInstance();
     }
 
-    public AbilityRegistry getAbilityRegistry()
-    {
-        return AbilityRegistry.getInstance();
+    public BlacklistRegistry getBlacklistRegistry() {
+        return BlacklistRegistry.INSTANCE;
     }
 
     public AlchemyArrayRegistry getAlchemyArrayRegistry()

@@ -1,5 +1,6 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -16,8 +17,10 @@ public class Files {
     private static final String PRE_CALCULATION_ENERGY_VALUES_FILENAME = "pre-calculation-energy-values.json";
     private static final String POST_CALCULATION_ENERGY_VALUES_FILENAME = "post-calculation-energy-values.json";
 
-    public static final String TEMPLATE_JSON_FILENAME = "template-player-knowledge.json";
-    public static final String ABILITIES_JSON_FILENAME = "abilities.json";
+    public static final String TEMPLATE_PLAYER_KNOWLEDGE_FILENAME = "template-player-knowledge.json";
+
+    public static final String KNOWLEDGE_BLACKLIST_FILENAME = "knowledge-blacklist.json";
+    public static final String EXCHANGE_BLACKLIST_FILENAME = "exchange-blacklist.json";
 
     public static File abilitiesDataDirectory;
     public static File abilitiesDataFile;
@@ -34,11 +37,14 @@ public class Files {
 
         File templatePlayerKnowledgeDirectory = new File(globalDataDirectory, "knowledge" + File.separator + "transmutation");
         templatePlayerKnowledgeDirectory.mkdirs();
-        PlayerKnowledgeRegistry.templatePlayerKnowledgeFile = new File(templatePlayerKnowledgeDirectory, TEMPLATE_JSON_FILENAME);
+        PlayerKnowledgeRegistry.templatePlayerKnowledgeFile = new File(templatePlayerKnowledgeDirectory, TEMPLATE_PLAYER_KNOWLEDGE_FILENAME);
+
+        BlacklistRegistry.knowledgeBlacklistFile = new File(globalDataDirectory, "blacklist" + File.separator + KNOWLEDGE_BLACKLIST_FILENAME);
+        BlacklistRegistry.exchangeBlacklistFile = new File(globalDataDirectory, "blacklist" + File.separator + EXCHANGE_BLACKLIST_FILENAME);
 
         abilitiesDataDirectory = new File(globalDataDirectory, "abilities");
         abilitiesDataDirectory.mkdirs();
-        abilitiesDataFile = new File(abilitiesDataDirectory, ABILITIES_JSON_FILENAME);
+        abilitiesDataFile = new File(abilitiesDataDirectory, "abilities.json");
     }
 
     /**

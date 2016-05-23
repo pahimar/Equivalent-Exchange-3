@@ -1,7 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
 import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
@@ -87,7 +87,7 @@ public class PlayerKnowledgeRegistry {
     public boolean canPlayerLearn(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            return !getPlayerKnowledge(playerName).isKnown(object) && AbilityRegistryProxy.isLearnable(object);
+            return !getPlayerKnowledge(playerName).isKnown(object) && BlacklistRegistryProxy.isLearnable(object);
         }
 
         return false;

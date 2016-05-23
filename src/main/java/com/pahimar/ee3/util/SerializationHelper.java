@@ -37,6 +37,7 @@ public class SerializationHelper {
             .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
             .registerTypeAdapter(PlayerKnowledge.class, new PlayerKnowledgeSerializer())
             .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
+            .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
             .create();
 
     private static File instanceDataDirectory;
@@ -124,7 +125,7 @@ public class SerializationHelper {
         }
     }
 
-    public static Set<WrappedStack> readSetFromFile(File file) throws FileNotFoundException {
+    public static Set<WrappedStack> readSetFromFile(File file) {
 
         Set<WrappedStack> wrappedStackSet = new TreeSet<>();
 
@@ -132,7 +133,10 @@ public class SerializationHelper {
             wrappedStackSet = GSON.fromJson(readJsonFile(file), WRAPPED_STACK_SET_TYPE);
         }
         catch (JsonParseException exception) {
-            // TODO Better logging of the exception (failed parsing so no values loaded)
+            LogHelper.error("Unable to parse contents from file '{}'", file.getAbsoluteFile());
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn("Unable to find file '{}'", file.getAbsoluteFile());
         }
 
         return wrappedStackSet;

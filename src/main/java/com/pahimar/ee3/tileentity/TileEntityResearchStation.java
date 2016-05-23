@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
-import com.pahimar.ee3.knowledge.AbilityRegistry;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityResearchStation;
 import com.pahimar.ee3.reference.Names;
@@ -125,7 +125,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        return slotIndex == ITEM_SLOT_INVENTORY_INDEX && AbilityRegistry.getInstance().isLearnable(itemStack);
+        return slotIndex == ITEM_SLOT_INVENTORY_INDEX && BlacklistRegistryProxy.isLearnable(itemStack);
     }
 
     @Override

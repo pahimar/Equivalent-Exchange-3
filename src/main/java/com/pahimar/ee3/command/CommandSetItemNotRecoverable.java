@@ -1,6 +1,6 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
@@ -76,7 +76,7 @@ public class CommandSetItemNotRecoverable extends CommandBase
                 }
             }
 
-            AbilityRegistryProxy.setAsNotRecoverable(itemStack);
+            BlacklistRegistryProxy.addToBlacklist(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE);
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_NOT_RECOVERABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

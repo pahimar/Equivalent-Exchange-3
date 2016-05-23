@@ -1,7 +1,7 @@
 package com.pahimar.ee3.inventory;
 
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
-import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;
@@ -372,7 +372,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             currentSlotIndex += ascending ? -1 : 1;
         }
 
-        transmutationOutputSlot.onPickupFromSlot(entityPlayer, new ItemStack(itemStack.getItem(), numTransmuted));
+//        transmutationOutputSlot.onPickupFromSlot(entityPlayer, new ItemStack(itemStack.getItem(), numTransmuted));
+        transmutationOutputSlot.onPickupFromSlot(entityPlayer, ItemHelper.clone(itemStack, numTransmuted));
 
         return false;
     }
@@ -561,7 +562,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         @Override
         public boolean isItemValid(ItemStack itemStack)
         {
-            return EnergyValueRegistryProxy.hasEnergyValue(itemStack) && AbilityRegistryProxy.isRecoverable(itemStack);
+            return EnergyValueRegistryProxy.hasEnergyValue(itemStack) && BlacklistRegistryProxy.isExchangeable(itemStack);
         }
 
         @Override

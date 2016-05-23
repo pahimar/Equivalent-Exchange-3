@@ -1,6 +1,6 @@
 package com.pahimar.ee3.command;
 
-import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.command.CommandBase;
@@ -76,7 +76,7 @@ public class CommandSetItemLearnable extends CommandBase
                 }
             }
 
-            AbilityRegistryProxy.setAsLearnable(itemStack);
+            BlacklistRegistryProxy.removeFromBlacklist(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE);
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_LEARNABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

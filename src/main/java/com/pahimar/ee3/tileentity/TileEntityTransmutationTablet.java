@@ -1,8 +1,8 @@
 package com.pahimar.ee3.tileentity;
 
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
-import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
@@ -62,6 +62,8 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     public void consumeInventoryForEnergyValue(ItemStack outputItemStack)
     {
         EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(outputItemStack);
+        EnergyValue ev2 = EnergyValueRegistryProxy.getEnergyValue(outputItemStack);
+
 
         /**
          *  Algorithm:
@@ -313,7 +315,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     @Override
     public boolean isItemValidForSlot(int slotIndex, ItemStack itemStack)
     {
-        if (slotIndex < STONE_INDEX && EnergyValueRegistryProxy.hasEnergyValue(itemStack) && AbilityRegistryProxy.isRecoverable(itemStack))
+        if (slotIndex < STONE_INDEX && EnergyValueRegistryProxy.hasEnergyValue(itemStack) && BlacklistRegistryProxy.isExchangeable(itemStack))
         {
             return true;
         }

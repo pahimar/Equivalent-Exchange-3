@@ -42,6 +42,7 @@ public class ItemTooltipEventHandler
         {
             WrappedStack wrappedItemStack = WrappedStack.wrap(event.itemStack);
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
+            EnergyValue energyValue2 = EnergyValueRegistryProxy.getEnergyValueForStack(wrappedItemStack);
 
             if (energyValue != null)
             {
@@ -49,6 +50,7 @@ public class ItemTooltipEventHandler
                 {
                     event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getValue()))); // TODO Localize
                     event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(wrappedItemStack.getStackSize() * energyValue.getValue()))); // TODO Localize
+                    event.toolTip.add(String.format("Exchange Energy 2 (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(energyValue2.getValue()))); // TODO Localize
                 }
                 else
                 {

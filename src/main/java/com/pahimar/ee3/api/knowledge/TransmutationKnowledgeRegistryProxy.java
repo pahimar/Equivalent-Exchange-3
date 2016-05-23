@@ -1,7 +1,5 @@
 package com.pahimar.ee3.api.knowledge;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import cpw.mods.fml.common.Mod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -129,18 +127,5 @@ public class TransmutationKnowledgeRegistryProxy {
     @Deprecated
     public static void makeTemplateForgetEverything() {
         // NOOP
-    }
-
-    @Mod.Instance("EE3")
-    private static Object ee3Mod;
-
-    private static class EE3Wrapper {
-        private static EquivalentExchange3 ee3mod;
-    }
-
-    private static void init() {
-        if (ee3Mod != null) {
-            EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
-        }
     }
 }

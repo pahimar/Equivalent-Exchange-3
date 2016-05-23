@@ -1,107 +1,67 @@
 package com.pahimar.ee3.api.knowledge;
 
-import com.pahimar.ee3.EquivalentExchange3;
-import cpw.mods.fml.common.Mod;
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 
-public final class AbilityRegistryProxy
-{
-    @Mod.Instance("EE3")
-    private static Object ee3Mod;
+@Deprecated
+public final class AbilityRegistryProxy {
 
-    public static boolean isLearnable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getAbilityRegistry().isLearnable(object);
-        }
-
-        return false;
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#isLearnable(Object)}
+     */
+    public static boolean isLearnable(Object object) {
+        return BlacklistRegistryProxy.isLearnable(object);
     }
 
-    public static void setAsLearnable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsLearnable(object);
-        }
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#setAsLearnable(Object)}
+     */
+    public static void setAsLearnable(Object object) {
+        BlacklistRegistryProxy.setAsLearnable(object);
     }
 
-    public static void setAsNotLearnable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotLearnable(object);
-        }
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#setAsNotLearnable(Object)}
+     */
+    public static void setAsNotLearnable(Object object) {
+        BlacklistRegistryProxy.setAsNotLearnable(object);
     }
 
-    public static boolean isRecoverable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getAbilityRegistry().isRecoverable(object);
-        }
-
-        return false;
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#isExchangeable(Object)}
+     */
+    public static boolean isRecoverable(Object object) {
+        return BlacklistRegistryProxy.isExchangeable(object);
     }
 
-    public static void setAsRecoverable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsRecoverable(object);
-        }
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#setAsExchangeable(Object)}
+     */
+    public static void setAsRecoverable(Object object) {
+        BlacklistRegistryProxy.setAsExchangeable(object);
     }
 
-    public static void setAsNotRecoverable(Object object)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getAbilityRegistry().setAsNotRecoverable(object);
-        }
+    /**
+     * @deprecated See {@link BlacklistRegistryProxy#setAsNotExchangeable(Object)}
+     */
+    public static void setAsNotRecoverable(Object object) {
+        BlacklistRegistryProxy.setAsNotExchangeable(object);
     }
 
-    public static void dumpAbilityRegistryToLog()
-    {
-        dumpAbilityRegistryToLog(Abilities.ALL);
+    /**
+     * @deprecated will be removed from EE3 in newer versions of Minecraft
+     */
+    public static void dumpAbilityRegistryToLog() {
+        // NOOP
     }
 
-    public static void dumpAbilityRegistryToLog(Abilities ability)
-    {
-        init();
-
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod.getAbilityRegistry().dumpAbilityRegistryToLog(ability);
-        }
+    /**
+     * @deprecated will be removed from EE3 in newer versions of Minecraft
+     */
+    public static void dumpAbilityRegistryToLog(Abilities ability) {
+        // NOOP
     }
 
-    private static class EE3Wrapper
-    {
-        private static EquivalentExchange3 ee3mod;
-    }
-
-    private static void init()
-    {
-        if (ee3Mod != null)
-        {
-            EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
-        }
-    }
-
-    public enum Abilities
-    {
+    public enum Abilities {
         NOT_LEARNABLE,
         NOT_RECOVERABLE,
         ALL
