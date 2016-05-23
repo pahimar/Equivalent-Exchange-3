@@ -15,9 +15,9 @@ import net.minecraft.item.ItemStack;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class PlayerKnowledgeRegistry {
 
@@ -42,12 +42,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean doesPlayerKnow(EntityPlayer player, Object object) {
-
-        if (player != null) {
-            return doesPlayerKnow(player.getDisplayName(), object);
-        }
-
-        return false;
+        return player != null && doesPlayerKnow(player.getDisplayName(), object);
     }
 
     /**
@@ -239,9 +234,11 @@ public class PlayerKnowledgeRegistry {
      */
     public void makePlayerForgetAll(String playerName) {
 
-        if (playerName != null && !playerName.isEmpty()) {
-            playerKnowledgeMap.put(playerName, new PlayerKnowledge());
-            save(playerName);
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+            if (playerName != null && !playerName.isEmpty()) {
+                playerKnowledgeMap.put(playerName, new PlayerKnowledge());
+                save(playerName);
+            }
         }
     }
 
@@ -257,7 +254,7 @@ public class PlayerKnowledgeRegistry {
             return getKnownItemStacks(entityPlayer.getDisplayName());
         }
 
-        return Collections.EMPTY_SET;
+        return new TreeSet<>(Comparators.ID_COMPARATOR);
     }
 
     /**
@@ -272,7 +269,7 @@ public class PlayerKnowledgeRegistry {
             return getPlayerKnowledge(playerName).getKnownItemStacks();
         }
 
-        return Collections.EMPTY_SET;
+        return new TreeSet<>(Comparators.ID_COMPARATOR);
     }
 
     /**
@@ -296,9 +293,9 @@ public class PlayerKnowledgeRegistry {
      * @param playerName
      * @return
      */
-    protected PlayerKnowledge getPlayerKnowledge(String playerName) {
+    private PlayerKnowledge getPlayerKnowledge(String playerName) {
 
-        if (playerName != null && !playerName.isEmpty()) {
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && playerName != null && !playerName.isEmpty()) {
             if (!playerKnowledgeMap.containsKey(playerName)) {
                 playerKnowledgeMap.put(playerName, load(getPlayerKnowledgeFile(playerName), false));
             }
@@ -367,7 +364,7 @@ public class PlayerKnowledgeRegistry {
      */
     private PlayerKnowledge load(File file, boolean isTemplate) {
 
-        if (file != null) {
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && file != null) {
             try {
                 String jsonString = SerializationHelper.readJsonFile(file);
                 PlayerKnowledge playerKnowledge = SerializationHelper.GSON.fromJson(jsonString, PlayerKnowledge.class);

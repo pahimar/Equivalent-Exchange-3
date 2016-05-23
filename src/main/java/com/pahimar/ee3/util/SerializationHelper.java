@@ -185,6 +185,7 @@ public class SerializationHelper {
 
     public static void writeJsonFile(File file, String fileContents) {
 
+        file.getParentFile().mkdirs();
         File tempFile = new File(file.getAbsolutePath() + "_tmp");
 
         if (tempFile.exists()) {
