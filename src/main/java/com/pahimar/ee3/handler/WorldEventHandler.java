@@ -23,7 +23,12 @@ public class WorldEventHandler {
             AludelRecipeManager.registerRecipes();
 
             long startTime = System.nanoTime();
-            EnergyValueRegistry.INSTANCE.compute();
+            if (ConfigurationHandler.Settings.regenerateEnergyValuesWhen.equalsIgnoreCase("As Needed")) {
+                EnergyValueRegistry.INSTANCE.load();
+            }
+            else {
+                EnergyValueRegistry.INSTANCE.compute();
+            }
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Energy value system initialized {} values after {} ms", EnergyValueRegistry.INSTANCE.getEnergyValues().size(), (System.nanoTime() - startTime) / 100000);
             hasInitilialized = true;
 
