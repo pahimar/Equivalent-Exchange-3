@@ -1,5 +1,6 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
@@ -87,21 +88,30 @@ public class CommandSetEnergyValue extends CommandBase
             WrappedStack wrappedStack = WrappedStack.wrap(itemStack);
             EnergyValue newEnergyValue = new EnergyValue(energyValue);
 
-            if (wrappedStack != null && newEnergyValue != null && Float.compare(newEnergyValue.getValue(), 0) > 0)
+            if (wrappedStack != null && newEnergyValue != null)
             {
-                if (args[1].equalsIgnoreCase("pre")) {
-                    EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue, EnergyValueRegistryProxy.Phase.PRE_CALCULATION);
-                }
-                else if (args[1].equalsIgnoreCase("post")) {
-                    EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue);
-                }
-                else {
-                    throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
-                }
+                if (Float.compare(newEnergyValue.getValue(), 0) > 0) {
 
-                EnergyValueRegistry.INSTANCE.save();
-                // Notify admins and log the value change
-                func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
+                    if (args[1].equalsIgnoreCase("pre")) {
+                        EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue, EnergyValueRegistryProxy.Phase.PRE_CALCULATION);
+                    }
+                    else if (args[1].equalsIgnoreCase("post")) {
+                        EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue);
+                    }
+                    else {
+                        throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_USAGE);
+                    }
+
+                    EnergyValueRegistry.INSTANCE.save();
+                    // Notify admins and log the value change
+                    func_152373_a(commandSender, this, Messages.Commands.SET_ENERGY_VALUE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), args[1], itemStack.func_151000_E(), newEnergyValue.getChatComponent()});
+                }
+                else if (Float.compare(newEnergyValue.getValue(), 0) == 0) {
+
+                    BlacklistRegistryProxy.setAsNotLearnable(wrappedStack);
+                    BlacklistRegistryProxy.setAsNotExchangeable(wrappedStack);
+                    func_152373_a(commandSender, this, "%s set %s as not learnable and not exchangeable", new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
+                }
             }
             else
             {

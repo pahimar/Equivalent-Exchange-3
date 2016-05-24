@@ -61,21 +61,24 @@ public class CommandEE extends CommandBase
         return null;
     }
 
-    static
-    {
+    static {
         modCommands.add(new CommandSetEnergyValue());
         modCommands.add(new CommandSetEnergyValueCurrentItem());
-        modCommands.add(new CommandSyncEnergyValues());
-        modCommands.add(new CommandRegenEnergyValues());
         modCommands.add(new CommandPlayerLearnItem());
         modCommands.add(new CommandPlayerLearnCurrentItem());
         modCommands.add(new CommandPlayerForgetEverything());
         modCommands.add(new CommandPlayerForgetItem());
         modCommands.add(new CommandPlayerForgetCurrentItem());
         modCommands.add(new CommandSetItemLearnable());
+        modCommands.add(new CommandSetCurrentItemLearnable());
         modCommands.add(new CommandSetItemNotLearnable());
+        modCommands.add(new CommandSetCurrentItemNotLearnable());
         modCommands.add(new CommandSetItemRecoverable());
+        modCommands.add(new CommandSetCurrentItemRecoverable());
         modCommands.add(new CommandSetItemNotRecoverable());
+        modCommands.add(new CommandSetCurrentItemNotRecoverable());
+        modCommands.add(new CommandSyncEnergyValues());
+        modCommands.add(new CommandRegenEnergyValues());
         modCommands.add(new CommandRunTest());
 
         for (CommandBase commandBase : modCommands)

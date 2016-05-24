@@ -131,12 +131,14 @@ public class BlacklistRegistry {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeWhitelistEvent(object))) {
                     LogHelper.trace(KNOWLEDGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the player knowledge blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     knowledgeBlacklist.remove(wrappedStack);
+                    save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeWhitelistEvent(object))) {
                     LogHelper.trace(EXCHANGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the exchange blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     exchangeBlacklist.remove(wrappedStack);
+                    save(blacklist);
                 }
             }
         }

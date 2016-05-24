@@ -75,14 +75,30 @@ public final class Messages {
         public static final String SET_ITEM_LEARNABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".usage";
         public static final String SET_ITEM_LEARNABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".success";
 
+        public static final String SET_CURRENT_ITEM_LEARNABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".usage";
+        public static final String SET_CURRENT_ITEM_LEARNABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".success";
+        public static final String SET_CURRENT_ITEM_LEARNABLE_NO_EFFECT = COMMAND_PREFIX + Names.Commands.SET_ITEM_LEARNABLE + ".no-effect";
+
         public static final String SET_ITEM_NOT_LEARNABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_LEARNABLE + ".usage";
         public static final String SET_ITEM_NOT_LEARNABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_LEARNABLE + ".success";
+
+        public static final String SET_CURRENT_ITEM_NOT_LEARNABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_LEARNABLE + ".usage";
+        public static final String SET_CURRENT_ITEM_NOT_LEARNABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_LEARNABLE + ".success";
+        public static final String SET_CURRENT_ITEM_NOT_LEARNABLE_NO_EFFECT = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_LEARNABLE + ".no-effect";
 
         public static final String SET_ITEM_RECOVERABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_RECOVERABLE + ".usage";
         public static final String SET_ITEM_RECOVERABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_RECOVERABLE + ".success";
 
+        public static final String SET_CURRENT_ITEM_RECOVERABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_RECOVERABLE + ".usage";
+        public static final String SET_CURRENT_ITEM_RECOVERABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_RECOVERABLE + ".success";
+        public static final String SET_CURRENT_ITEM_RECOVERABLE_NO_EFFECT = COMMAND_PREFIX + Names.Commands.SET_ITEM_RECOVERABLE + ".no-effect";
+
         public static final String SET_ITEM_NOT_RECOVERABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_RECOVERABLE + ".usage";
         public static final String SET_ITEM_NOT_RECOVERABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_RECOVERABLE + ".success";
+
+        public static final String SET_CURRENT_ITEM_NOT_RECOVERABLE_USAGE = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_RECOVERABLE + ".usage";
+        public static final String SET_CURRENT_ITEM_NOT_RECOVERABLE_SUCCESS = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_RECOVERABLE + ".success";
+        public static final String SET_CURRENT_ITEM_NOT_RECOVERABLE_NO_EFFECT = COMMAND_PREFIX + Names.Commands.SET_ITEM_NOT_RECOVERABLE + ".no-effect";
 
         public static final String RUN_TEST_USAGE = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".usage";
         public static final String RUN_TESTS_SUCCESS = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".success";
