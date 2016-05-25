@@ -15,29 +15,26 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandRunTest extends CommandEE
-{
+public class CommandRunTest extends CommandEE {
+
     @Override
-    public String getCommandName()
-    {
+    public String getCommandName() {
         return Names.Commands.RUN_TEST;
     }
 
     @Override
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 2;
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender)
-    {
+    public String getCommandUsage(ICommandSender commandSender) {
         return Messages.Commands.RUN_TEST_USAGE;
     }
 
     @Override
-    public void processCommand(ICommandSender commandSender, String[] args)
-    {
+    public void processCommand(ICommandSender commandSender, String[] args) {
+
         if (args.length == 2) {
 
             boolean testFound = false;
@@ -64,27 +61,26 @@ public class CommandRunTest extends CommandEE
                 throw new WrongUsageException(Messages.Commands.RUN_TEST_USAGE);
             }
         }
-        else
-        {
+        else {
             throw new WrongUsageException(Messages.Commands.RUN_TEST_USAGE);
         }
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
-    {
-        if (args.length == 2)
-        {
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+
+        if (args.length == 2) {
+
             File testCaseDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
             testCaseDirectory.mkdirs();
 
-            ArrayList<String> fileNames = new ArrayList<String>();
+            ArrayList<String> fileNames = new ArrayList<>();
 
-            for (File testCaseFile : testCaseDirectory.listFiles())
-            {
-                if (testCaseFile.isFile() && testCaseFile.getAbsolutePath().endsWith(".json"))
-                {
-                    fileNames.add(testCaseFile.getName());
+            if (Tests.globalTestDirectory != null) {
+                for (File testCaseFile : Tests.globalTestDirectory.listFiles()) {
+                    if (testCaseFile.isFile() && testCaseFile.getAbsolutePath().endsWith(".json")) {
+                        fileNames.add(testCaseFile.getName());
+                    }
                 }
             }
 

@@ -30,6 +30,7 @@ public class Files {
         globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
         Tests.globalTestDirectory = new File(globalDataDirectory, "tests");
         Tests.globalTestDirectory.mkdirs();
+        Tests.VANILLA_TEST_SUITE.save();
 
         EnergyValueRegistry.energyValuesDirectory = new File(globalDataDirectory, "energy-values");
         EnergyValueRegistry.energyValuesDirectory.mkdirs();
