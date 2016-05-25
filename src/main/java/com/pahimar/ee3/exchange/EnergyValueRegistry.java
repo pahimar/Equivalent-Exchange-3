@@ -548,7 +548,21 @@ public class EnergyValueRegistry {
         final Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<>();
         uncomputedStacks = new TreeSet<>();
 
-        // TODO Potentially read in values from pre-calculation file to capture file edits
+        // Load in pre calculation value assignments from file
+        Map<WrappedStack, EnergyValue> fileValueMap = null;
+        try {
+            fileValueMap = SerializationHelper.readMapFromFile(preCalculationValuesFile);
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn(ENERGY_VALUE_MARKER, "No pre calculation energy values were loaded from file - could not find {}", preCalculationValuesFile.getAbsolutePath());
+        }
+        if (fileValueMap != null) {
+            for (WrappedStack wrappedStack : fileValueMap.keySet()) {
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                    preCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
+                }
+            }
+        }
 
         // Add in all pre-calculation energy value mappings
         preCalculationStackValueMap.keySet().stream()
@@ -558,7 +572,21 @@ public class EnergyValueRegistry {
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
         stackValueMap.putAll(calculateStackValueMap(stackValueMap));
 
-        // TODO Potentially read in values from post-calculation file to capture file edits
+        // Load in post calculation value assignments from file
+        fileValueMap = null;
+        try {
+            fileValueMap = SerializationHelper.readMapFromFile(postCalculationValuesFile);
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn(ENERGY_VALUE_MARKER, "No post calculation energy values were loaded from file - could not find {}", postCalculationValuesFile.getAbsolutePath());
+        }
+        if (fileValueMap != null) {
+            for (WrappedStack wrappedStack : fileValueMap.keySet()) {
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                    postCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
+                }
+            }
+        }
 
         // Add in all post-calculation energy value mappings
         postCalculationStackValueMap.keySet().stream()
@@ -689,26 +717,57 @@ public class EnergyValueRegistry {
      */
     public void load() {
 
+        // Load in pre calculation value assignments from file
+        Map<WrappedStack, EnergyValue> fileValueMap = null;
         try {
-            preCalculationStackValueMap.putAll(SerializationHelper.readMapFromFile(preCalculationValuesFile));
-        } catch (FileNotFoundException e) {
-            // TODO Log that no pre-calculation values were loaded from file because file wasn't found
+            fileValueMap = SerializationHelper.readMapFromFile(preCalculationValuesFile);
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn(ENERGY_VALUE_MARKER, "No pre calculation energy values were loaded from file - could not find {}", preCalculationValuesFile.getAbsolutePath());
+        }
+        if (fileValueMap != null) {
+            for (WrappedStack wrappedStack : fileValueMap.keySet()) {
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                    preCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
+                }
+            }
         }
 
+        // Load in post calculation value assignments from file
+        fileValueMap = null;
         try {
-            postCalculationStackValueMap.putAll(SerializationHelper.readMapFromFile(postCalculationValuesFile));
-        } catch (FileNotFoundException e) {
-            // TODO Log that no post-calculation values were loaded from file because file wasn't found
+            fileValueMap = SerializationHelper.readMapFromFile(postCalculationValuesFile);
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn(ENERGY_VALUE_MARKER, "No post calculation energy values were loaded from file - could not find {}", postCalculationValuesFile.getAbsolutePath());
+        }
+        if (fileValueMap != null) {
+            for (WrappedStack wrappedStack : fileValueMap.keySet()) {
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                    postCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
+                }
+            }
         }
 
+        // Load the calculated energy values assignments from file
+        fileValueMap = null;
         try {
+            fileValueMap = SerializationHelper.readMapFromFile(energyValuesFile);
+        }
+        catch (FileNotFoundException e) {
+            LogHelper.warn("No calculated energy values were loaded from file - could not find {}", energyValuesFile.getAbsolutePath());
+            LogHelper.info("Recomputing energy values", energyValuesFile.getAbsolutePath());
+            compute();
+        }
+        if (fileValueMap != null) {
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
-            stackMapBuilder.putAll(SerializationHelper.readMapFromFile(energyValuesFile));
+            for (WrappedStack wrappedStack : fileValueMap.keySet()) {
+                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                    stackMapBuilder.put(wrappedStack, fileValueMap.get(wrappedStack));
+                }
+            }
             stackValueMap = stackMapBuilder.build();
             calculateValueStackMap();
-        } catch (FileNotFoundException e) {
-            LogHelper.warn("No calculated energy value file found, regenerating"); // TODO Better log message
-            compute();
         }
     }
 
@@ -723,7 +782,9 @@ public class EnergyValueRegistry {
 
             setShouldSave(false);
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
-            stackMappingsBuilder.putAll(valueMap);
+            valueMap.keySet().stream()
+                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && valueMap.get(wrappedStack) != null)
+                    .forEach(wrappedStack -> stackMappingsBuilder.put(wrappedStack, valueMap.get(wrappedStack)));
             stackValueMap = stackMappingsBuilder.build();
             calculateValueStackMap();
         }
