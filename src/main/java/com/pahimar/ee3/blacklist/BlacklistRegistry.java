@@ -26,10 +26,12 @@ public class BlacklistRegistry {
     public static final BlacklistRegistry INSTANCE = new BlacklistRegistry();
 
     private static final Marker BLACKLIST_MARKER = MarkerManager.getMarker("EE3_BLACKLIST", LogHelper.MOD_MARKER);
-    private static final Marker KNOWLEDGE_BLACKLIST_MARKER = MarkerManager.getMarker("EE3_BLACKLIST_KNOWLEDGE", BLACKLIST_MARKER);
-    private static final Marker KNOWLEDGE_WHITELIST_MARKER = MarkerManager.getMarker("EE3_WHITELIST_KNOWLEDGE", BLACKLIST_MARKER);
-    private static final Marker EXCHANGE_BLACKLIST_MARKER = MarkerManager.getMarker("EE3_BLACKLIST_EXCHANGE", BLACKLIST_MARKER);
-    private static final Marker EXCHANGE_WHITELIST_MARKER = MarkerManager.getMarker("EE3_WHITELIST_EXCHANGE", BLACKLIST_MARKER);
+    private static final Marker KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_KNOWLEDGE", BLACKLIST_MARKER);
+    private static final Marker KNOWLEDGE_BLACKLIST_MARKER = MarkerManager.getMarker("EE3_KNOWLEDGE_BLACKLIST", KNOWLEDGE_MARKER);
+    private static final Marker KNOWLEDGE_WHITELIST_MARKER = MarkerManager.getMarker("EE3_KNOWLEDGE_WHITELIST", KNOWLEDGE_MARKER);
+    private static final Marker EXCHANGE_MARKER = MarkerManager.getMarker("EE3_EXCHANGE", BLACKLIST_MARKER);
+    private static final Marker EXCHANGE_BLACKLIST_MARKER = MarkerManager.getMarker("EE3_EXCHANGE_BLACKLIST", EXCHANGE_MARKER);
+    private static final Marker EXCHANGE_WHITELIST_MARKER = MarkerManager.getMarker("EE3_EXCHANGE_WHITELIST", EXCHANGE_MARKER);
 
     private final Set<WrappedStack> knowledgeBlacklist, exchangeBlacklist;
     public static File knowledgeBlacklistFile, exchangeBlacklistFile;
@@ -184,7 +186,7 @@ public class BlacklistRegistry {
 
         if (exchangeBlacklistFile != null) {
             LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
-            Set<WrappedStack> exchangeBlacklistSet = SerializationHelper.readSetFromFile(knowledgeBlacklistFile);
+            Set<WrappedStack> exchangeBlacklistSet = SerializationHelper.readSetFromFile(exchangeBlacklistFile);
             exchangeBlacklist.clear();
             exchangeBlacklist.addAll(exchangeBlacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
         }
