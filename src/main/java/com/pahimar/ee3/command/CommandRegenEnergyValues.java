@@ -62,9 +62,6 @@ public class CommandRegenEnergyValues extends CommandBase {
 
         if (shouldRegen) {
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getCommandSenderName());
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Reloading energy values from file");
-            EnergyValueRegistry.INSTANCE.load();
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Recalculating energy values");
             EnergyValueRegistry.INSTANCE.compute();
             PacketHandler.INSTANCE.sendToAll(new MessageSyncEnergyValues());
             commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
