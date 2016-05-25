@@ -1,5 +1,6 @@
 package com.pahimar.ee3.client.handler;
 
+import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
@@ -36,31 +37,29 @@ public class ItemTooltipEventHandler
     private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     @SubscribeEvent
-    public void handleItemTooltipEvent(ItemTooltipEvent event)
-    {
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && (event.entityPlayer.openContainer instanceof ContainerAlchenomicon || event.entityPlayer.openContainer instanceof ContainerTransmutationTablet)))
-        {
+    public void handleItemTooltipEvent(ItemTooltipEvent event) {
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && (event.entityPlayer.openContainer instanceof ContainerAlchenomicon || event.entityPlayer.openContainer instanceof ContainerTransmutationTablet))) {
+
             WrappedStack wrappedItemStack = WrappedStack.wrap(event.itemStack);
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
-            EnergyValue energyValue2 = EnergyValueRegistryProxy.getEnergyValueForStack(wrappedItemStack);
 
-            if (energyValue != null)
-            {
-                if (wrappedItemStack.getStackSize() > 1)
-                {
+            if (energyValue != null && (BlacklistRegistryProxy.isExchangeable(wrappedItemStack) || BlacklistRegistryProxy.isLearnable(wrappedItemStack))) {
+
+                if (wrappedItemStack.getStackSize() > 1) {
                     event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValueDecimalFormat.format(energyValue.getValue()))); // TODO Localize
                     event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(wrappedItemStack.getStackSize() * energyValue.getValue()))); // TODO Localize
-                    event.toolTip.add(String.format("Exchange Energy 2 (Stack of %s): %s", event.itemStack.stackSize, energyValueDecimalFormat.format(energyValue2.getValue()))); // TODO Localize
                 }
-                else
-                {
+                else {
+
                     event.toolTip.add(String.format("Exchange Energy: %s", energyValueDecimalFormat.format(wrappedItemStack.getStackSize() * energyValue.getValue()))); // TODO Localize
-                    if (FluidContainerRegistry.getFluidForFilledItem(event.itemStack) != null)
-                    {
+
+                    if (FluidContainerRegistry.getFluidForFilledItem(event.itemStack) != null) {
+
                         FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.itemStack);
 
-                        if (EnergyValueRegistryProxy.getEnergyValueForStack(fluidStack) != null)
-                        {
+                        if (EnergyValueRegistryProxy.getEnergyValueForStack(fluidStack) != null) {
+
                             EnergyValue fluidStackEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(fluidStack);
                             event.toolTip.add(String.format(" - Exchange Energy (%s): %s", fluidStack.getLocalizedName(), energyValueDecimalFormat.format(fluidStackEnergyValue.getValue()))); // TODO Localize
                             event.toolTip.add(String.format(" - Exchange Energy (Container): %s", energyValueDecimalFormat.format(energyValue.getValue() - fluidStackEnergyValue.getValue()))); // TODO Localize
