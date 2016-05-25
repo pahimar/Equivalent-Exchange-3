@@ -4,7 +4,6 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.CompressionHelper;
 import com.pahimar.ee3.util.LogHelper;
@@ -20,7 +19,6 @@ import java.util.TreeMap;
 public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageSetEnergyValue, IMessage> {
 
     public Map<WrappedStack, EnergyValue> energyValueMap;
-    public EnergyValueStackMapping energyValueStackMapping;
 
     public MessageSetEnergyValue() {
     }
@@ -31,7 +29,6 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
         if (wrappedStack != null && wrappedStack.getWrappedObject() != null && energyValue != null) {
             this.energyValueMap.put(wrappedStack, energyValue);
         }
-        this.energyValueStackMapping = new EnergyValueStackMapping(wrappedStack, energyValue);
     }
 
     public MessageSetEnergyValue(Map<WrappedStack, EnergyValue> energyValueMap) {
