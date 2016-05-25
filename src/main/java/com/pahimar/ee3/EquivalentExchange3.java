@@ -78,8 +78,6 @@ public class EquivalentExchange3
         EnergyValues.init();
 
         AlchemyArrays.registerAlchemyArrays();
-
-        BlacklistRegistry.INSTANCE.load();
     }
 
     @EventHandler
@@ -110,6 +108,7 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
+        BlacklistRegistry.INSTANCE.load();
         Abilities.init();
     }
 
