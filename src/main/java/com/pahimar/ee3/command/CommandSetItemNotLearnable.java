@@ -79,7 +79,7 @@ public class CommandSetItemNotLearnable extends CommandBase
             }
 
             BlacklistRegistryProxy.addToBlacklist(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE);
-            PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE, true));
+            PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_NOT_LEARNABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

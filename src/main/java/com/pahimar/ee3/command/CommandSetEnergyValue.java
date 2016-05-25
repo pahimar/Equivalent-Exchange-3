@@ -6,6 +6,7 @@ import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.message.MessageSetBlacklistEntry;
 import com.pahimar.ee3.network.message.MessageSetEnergyValue;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -114,7 +115,8 @@ public class CommandSetEnergyValue extends CommandBase
                     BlacklistRegistryProxy.setAsNotLearnable(wrappedStack);
                     BlacklistRegistryProxy.setAsNotExchangeable(wrappedStack);
                     // TODO Remove energy value from EnergyValueRegistry
-                    // TODO Sync change with client
+                    PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
+                    PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE));
                     func_152373_a(commandSender, this, "%s set %s as not learnable and not exchangeable", new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
                 }
             }

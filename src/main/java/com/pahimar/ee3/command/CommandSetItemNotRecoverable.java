@@ -79,7 +79,7 @@ public class CommandSetItemNotRecoverable extends CommandBase
             }
 
             BlacklistRegistryProxy.addToBlacklist(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE);
-            PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE, true));
+            PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE));
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_NOT_RECOVERABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

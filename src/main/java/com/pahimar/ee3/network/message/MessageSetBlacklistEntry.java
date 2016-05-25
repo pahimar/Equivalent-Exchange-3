@@ -23,6 +23,10 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
     public MessageSetBlacklistEntry() {
     }
 
+    public MessageSetBlacklistEntry(Object object, Blacklist blacklist) {
+        this(object, blacklist, true);
+    }
+
     public MessageSetBlacklistEntry(Object object, Blacklist blacklist, boolean isBlacklistAction) {
 
         if (WrappedStack.canBeWrapped(object)) {
