@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import static com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy.Blacklist;
 import static com.pahimar.ee3.api.event.BlacklistEvent.*;
@@ -165,13 +166,19 @@ public class BlacklistRegistry {
      */
     public void load() {
 
-        LogHelper.trace(BLACKLIST_MARKER, "Loading player knowledge blacklist from {}", knowledgeBlacklistFile.getAbsolutePath());
-        knowledgeBlacklist.clear();
-        knowledgeBlacklist.addAll(SerializationHelper.readSetFromFile(knowledgeBlacklistFile));
+        if (knowledgeBlacklistFile != null) {
+            LogHelper.trace(BLACKLIST_MARKER, "Loading player knowledge blacklist from {}", knowledgeBlacklistFile.getAbsolutePath());
+            Set<WrappedStack> knowledgeBlacklistSet = SerializationHelper.readSetFromFile(knowledgeBlacklistFile);
+            knowledgeBlacklist.clear();
+            knowledgeBlacklist.addAll(knowledgeBlacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
+        }
 
-        LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
-        exchangeBlacklist.clear();
-        exchangeBlacklist.addAll(SerializationHelper.readSetFromFile(exchangeBlacklistFile));
+        if (exchangeBlacklistFile != null) {
+            LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
+            Set<WrappedStack> exchangeBlacklistSet = SerializationHelper.readSetFromFile(knowledgeBlacklistFile);
+            exchangeBlacklist.clear();
+            exchangeBlacklist.addAll(exchangeBlacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
+        }
     }
 
     public void load(Set<WrappedStack> blacklistSet, Blacklist blacklist) {
@@ -183,12 +190,12 @@ public class BlacklistRegistry {
             if (blacklist == Blacklist.KNOWLEDGE) {
                 LogHelper.info("Received {} player knowledge blacklist entries from server", blacklistSet.size());
                 knowledgeBlacklist.clear();
-                knowledgeBlacklist.addAll(blacklistSet);
+                knowledgeBlacklist.addAll(blacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 LogHelper.info("Received {} exchange blacklist entries from server", blacklistSet.size());
                 exchangeBlacklist.clear();
-                exchangeBlacklist.addAll(blacklistSet);
+                exchangeBlacklist.addAll(blacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
             }
         }
     }
