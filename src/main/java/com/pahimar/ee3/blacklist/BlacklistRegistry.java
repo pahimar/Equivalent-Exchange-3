@@ -33,7 +33,7 @@ public class BlacklistRegistry {
 
     private final Set<WrappedStack> knowledgeBlacklist, exchangeBlacklist;
     public static File knowledgeBlacklistFile, exchangeBlacklistFile;
-    private transient boolean loadedFromServer;
+    private transient boolean shouldSave;
 
     /**
      * TODO Finish JavaDoc
@@ -42,7 +42,7 @@ public class BlacklistRegistry {
 
         knowledgeBlacklist = new TreeSet<>();
         exchangeBlacklist = new TreeSet<>();
-        loadedFromServer = false;
+        shouldSave = true;
     }
 
     /**
@@ -161,6 +161,10 @@ public class BlacklistRegistry {
         }
     }
 
+    public void setShouldSave(boolean shouldSave) {
+        this.shouldSave = shouldSave;
+    }
+
     /**
      * TODO Finish JavaDoc
      */
@@ -185,7 +189,7 @@ public class BlacklistRegistry {
 
         if (blacklist != null && blacklistSet != null) {
 
-            loadedFromServer = true;
+            setShouldSave(false);
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 LogHelper.info("Received {} player knowledge blacklist entries from server", blacklistSet.size());
@@ -207,7 +211,7 @@ public class BlacklistRegistry {
      */
     public void save(Blacklist blacklist) {
 
-        if (!loadedFromServer) {
+        if (shouldSave) {
             if (blacklist == Blacklist.KNOWLEDGE) {
                 LogHelper.trace(BLACKLIST_MARKER, "Saving player knowledge blacklist to {}", knowledgeBlacklistFile.getAbsolutePath());
                 SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
@@ -224,7 +228,7 @@ public class BlacklistRegistry {
      */
     public void saveAll() {
 
-        if (!loadedFromServer) {
+        if (shouldSave) {
             LogHelper.trace(BLACKLIST_MARKER, "Saving all blacklists to disk", exchangeBlacklistFile.getAbsolutePath());
             SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
             SerializationHelper.writeJsonFile(exchangeBlacklistFile, SerializationHelper.GSON.toJson(exchangeBlacklist));
