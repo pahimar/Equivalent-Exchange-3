@@ -19,28 +19,40 @@ public class FluidHelper {
 
             if (fluidStack1 != null && fluidStack2 != null) {
                 if (fluidStack1.getFluid() != null &&  fluidStack2.getFluid() != null) {
-                    if (FluidRegistry.getFluidName(fluidStack1).equalsIgnoreCase(FluidRegistry.getFluidName(fluidStack2))) {
-                        if (fluidStack1.amount == fluidStack2.amount) {
-                            if (fluidStack1.tag != null && fluidStack2.tag != null) {
-                                return fluidStack1.tag.hashCode() - fluidStack2.tag.hashCode();
-                            }
-                            else if (fluidStack1.tag != null) {
-                                return -1;
-                            }
-                            else if (fluidStack2.tag != null) {
-                                return 1;
+                    if (FluidRegistry.getFluidName(fluidStack1) != null && FluidRegistry.getFluidName(fluidStack2) != null) {
+                        if (FluidRegistry.getFluidName(fluidStack1).equalsIgnoreCase(FluidRegistry.getFluidName(fluidStack2))) {
+                            if (fluidStack1.amount == fluidStack2.amount) {
+                                if (fluidStack1.tag != null && fluidStack2.tag != null) {
+                                    return fluidStack1.tag.hashCode() - fluidStack2.tag.hashCode();
+                                }
+                                else if (fluidStack1.tag != null) {
+                                    return -1;
+                                }
+                                else if (fluidStack2.tag != null) {
+                                    return 1;
+                                }
+                                else {
+                                    return 0;
+                                }
                             }
                             else {
-                                return 0;
+                                return fluidStack1.amount - fluidStack2.amount;
                             }
                         }
                         else {
-                            return fluidStack1.amount - fluidStack2.amount;
+                            return FluidRegistry.getFluidName(fluidStack1).compareToIgnoreCase(FluidRegistry.getFluidName(fluidStack2));
                         }
                     }
-                    else {
-                        return FluidRegistry.getFluidName(fluidStack1).compareToIgnoreCase(FluidRegistry.getFluidName(fluidStack2));
+                    else if (FluidRegistry.getFluidName(fluidStack1) != null) {
+                        return -1;
                     }
+                    else if (FluidRegistry.getFluidName(fluidStack2) != null) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+
                 }
                 else if (fluidStack1.getFluid() != null) {
                     return -1;
@@ -69,8 +81,7 @@ public class FluidHelper {
         // Register Milk in the FluidRegistry if it hasn't already been done
         if (!FluidRegistry.isFluidRegistered("milk")) {
             Fluid milk = new Fluid("milk").setUnlocalizedName(Names.Fluids.MILK);
-            if (FluidRegistry.registerFluid(milk))
-            {
+            if (FluidRegistry.registerFluid(milk)) {
                 FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
             }
         }

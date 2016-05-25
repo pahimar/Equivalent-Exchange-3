@@ -16,10 +16,10 @@ import java.util.Map;
 
 public class MessageSyncEnergyValues implements IMessage, IMessageHandler<MessageSyncEnergyValues, IMessage> {
 
-    public String jsonString;
+    public Map<WrappedStack, EnergyValue> valueMap;
 
     public MessageSyncEnergyValues() {
-        this.jsonString = SerializationHelper.GSON.toJson(EnergyValueRegistry.INSTANCE.getEnergyValues(), SerializationHelper.ENERGY_VALUE_MAP_TYPE);
+        this.valueMap = EnergyValueRegistry.INSTANCE.getEnergyValues();
     }
 
     /**
@@ -30,15 +30,29 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public void fromBytes(ByteBuf buf) {
 
-        byte[] compressedString;
-        int compressedStringLength = buf.readInt();
+        int compressedJsonLength = buf.readInt();
 
-        if (compressedStringLength > 0) {
-            compressedString = buf.readBytes(compressedStringLength).array();
+        if (compressedJsonLength != 0) {
+            byte[] compressedValueMap = buf.readBytes(compressedJsonLength).array();
 
-            if (compressedString != null) {
-                this.jsonString = CompressionHelper.decompress(compressedString);
+            if (compressedValueMap != null) {
+
+                String jsonString = CompressionHelper.decompress(compressedValueMap);
+
+                try {
+                    valueMap = SerializationHelper.GSON.fromJson(jsonString, SerializationHelper.ENERGY_VALUE_MAP_TYPE);
+                }
+                catch (JsonParseException e) {
+                    LogHelper.warn("Failed to read energy value map from server");
+                    valueMap = null;
+                }
             }
+            else {
+                valueMap = null;
+            }
+        }
+        else {
+            valueMap = null;
         }
     }
 
@@ -50,15 +64,13 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public void toBytes(ByteBuf buf) {
 
-        byte[] compressedString = null;
+        if (valueMap != null) {
 
-        if (jsonString != null) {
+            byte[] compressedValueMap = CompressionHelper.compress(SerializationHelper.GSON.toJson(valueMap, SerializationHelper.ENERGY_VALUE_MAP_TYPE));
 
-            compressedString = CompressionHelper.compress(jsonString);
-
-            if (compressedString != null) {
-                buf.writeInt(compressedString.length);
-                buf.writeBytes(compressedString);
+            if (compressedValueMap != null) {
+                buf.writeInt(compressedValueMap.length);
+                buf.writeBytes(compressedValueMap);
             }
             else {
                 buf.writeInt(0);
@@ -80,24 +92,9 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
     @Override
     public IMessage onMessage(MessageSyncEnergyValues message, MessageContext ctx) {
 
-        if (message.jsonString != null) {
-
-            Map<WrappedStack, EnergyValue> valueMap = null;
-
-            try {
-                valueMap = SerializationHelper.GSON.fromJson(message.jsonString, SerializationHelper.ENERGY_VALUE_MAP_TYPE);
-            }
-            catch (JsonParseException e) {
-                // TODO Log an error message here
-            }
-
-            if (valueMap != null) {
-                EnergyValueRegistry.INSTANCE.load(valueMap);
-                LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received {} energy values from server", valueMap.size());
-            }
-            else {
-                // TODO Log a message here
-            }
+        if (message.valueMap != null) {
+            EnergyValueRegistry.INSTANCE.load(message.valueMap);
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received {} energy values from server", message.valueMap.size());
         }
         else {
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client failed to receive energy values from server - falling back to local values");

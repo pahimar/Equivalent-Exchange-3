@@ -5,15 +5,14 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,11 +30,9 @@ public class BlacklistRegistry {
     private static final Marker EXCHANGE_BLACKLIST_MARKER = MarkerManager.getMarker("EE3_BLACKLIST_EXCHANGE", BLACKLIST_MARKER);
     private static final Marker EXCHANGE_WHITELIST_MARKER = MarkerManager.getMarker("EE3_WHITELIST_EXCHANGE", BLACKLIST_MARKER);
 
-    private final Set<WrappedStack> knowledgeBlacklist;
-    private final Set<WrappedStack> exchangeBlacklist;
-
-    public static File knowledgeBlacklistFile;
-    public static File exchangeBlacklistFile;
+    private final Set<WrappedStack> knowledgeBlacklist, exchangeBlacklist;
+    public static File knowledgeBlacklistFile, exchangeBlacklistFile;
+    private transient boolean loadedFromServer;
 
     /**
      * TODO Finish JavaDoc
@@ -44,6 +41,25 @@ public class BlacklistRegistry {
 
         knowledgeBlacklist = new TreeSet<>();
         exchangeBlacklist = new TreeSet<>();
+        loadedFromServer = false;
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @return
+     */
+    public Set<WrappedStack> getKnowledgeBlacklist() {
+        return Collections.unmodifiableSet(knowledgeBlacklist);
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @return
+     */
+    public Set<WrappedStack> getExchangeBlacklist() {
+        return Collections.unmodifiableSet(exchangeBlacklist);
     }
 
     /**
@@ -148,15 +164,32 @@ public class BlacklistRegistry {
      * TODO Finish JavaDoc
      */
     public void load() {
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER){
 
-            LogHelper.trace(BLACKLIST_MARKER, "Loading player knowledge blacklist from {}", knowledgeBlacklistFile.getAbsolutePath());
-            knowledgeBlacklist.clear();
-            knowledgeBlacklist.addAll(SerializationHelper.readSetFromFile(knowledgeBlacklistFile));
+        LogHelper.trace(BLACKLIST_MARKER, "Loading player knowledge blacklist from {}", knowledgeBlacklistFile.getAbsolutePath());
+        knowledgeBlacklist.clear();
+        knowledgeBlacklist.addAll(SerializationHelper.readSetFromFile(knowledgeBlacklistFile));
 
-            LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
-            exchangeBlacklist.clear();
-            exchangeBlacklist.addAll(SerializationHelper.readSetFromFile(exchangeBlacklistFile));
+        LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
+        exchangeBlacklist.clear();
+        exchangeBlacklist.addAll(SerializationHelper.readSetFromFile(exchangeBlacklistFile));
+    }
+
+    public void load(Set<WrappedStack> blacklistSet, Blacklist blacklist) {
+
+        if (blacklist != null && blacklistSet != null) {
+
+            loadedFromServer = true;
+
+            if (blacklist == Blacklist.KNOWLEDGE) {
+                LogHelper.info("Received {} player knowledge blacklist entries from server", blacklistSet.size());
+                knowledgeBlacklist.clear();
+                knowledgeBlacklist.addAll(blacklistSet);
+            }
+            else if (blacklist == Blacklist.EXCHANGE) {
+                LogHelper.info("Received {} exchange blacklist entries from server", blacklistSet.size());
+                exchangeBlacklist.clear();
+                exchangeBlacklist.addAll(blacklistSet);
+            }
         }
     }
 
@@ -167,8 +200,7 @@ public class BlacklistRegistry {
      */
     public void save(Blacklist blacklist) {
 
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-
+        if (!loadedFromServer) {
             if (blacklist == Blacklist.KNOWLEDGE) {
                 LogHelper.trace(BLACKLIST_MARKER, "Saving player knowledge blacklist to {}", knowledgeBlacklistFile.getAbsolutePath());
                 SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
@@ -185,7 +217,7 @@ public class BlacklistRegistry {
      */
     public void saveAll() {
 
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+        if (!loadedFromServer) {
             LogHelper.trace(BLACKLIST_MARKER, "Saving all blacklists to disk", exchangeBlacklistFile.getAbsolutePath());
             SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
             SerializationHelper.writeJsonFile(exchangeBlacklistFile, SerializationHelper.GSON.toJson(exchangeBlacklist));

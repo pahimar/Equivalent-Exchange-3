@@ -37,7 +37,8 @@ public class EnergyValueRegistry {
     private final Map<WrappedStack, EnergyValue> preCalculationStackValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationStackValueMap;
     private transient SortedSet<WrappedStack> uncomputedStacks;
-    private transient boolean loadedFromMap;
+    private transient boolean shouldSave;
+    private transient boolean valuesNeedRegeneration;
 
     public static File energyValuesDirectory;
     public static File energyValuesFile;
@@ -54,7 +55,7 @@ public class EnergyValueRegistry {
         preCalculationStackValueMap = new TreeMap<>();
         postCalculationStackValueMap = new TreeMap<>();
         uncomputedStacks = new TreeSet<>();
-        loadedFromMap = false;
+        shouldSave = true;
     }
 
     /**
@@ -504,6 +505,9 @@ public class EnergyValueRegistry {
                     if (doRegenValues) {
                         compute();
                     }
+                    else {
+                        valuesNeedRegeneration = true;
+                    }
                 }
             }
             else if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.POST_CALCULATION))) {
@@ -522,6 +526,10 @@ public class EnergyValueRegistry {
         }
     }
 
+    public void setShouldSave(boolean shouldSave) {
+        this.shouldSave = shouldSave;
+    }
+
     /**
      * TODO Finish JavaDoc
      *
@@ -529,9 +537,13 @@ public class EnergyValueRegistry {
      */
     public void compute() {
 
+        valuesNeedRegeneration = false;
+
         // Initialize the "working copy" energy value map
         final Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<>();
         uncomputedStacks = new TreeSet<>();
+
+        // TODO Potentially read in values from pre-calculation file to capture file edits
 
         // Add in all pre-calculation energy value mappings
         preCalculationStackValueMap.keySet().stream()
@@ -540,6 +552,8 @@ public class EnergyValueRegistry {
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
         stackValueMap.putAll(calculateStackValueMap(stackValueMap));
+
+        // TODO Potentially read in values from post-calculation file to capture file edits
 
         // Add in all post-calculation energy value mappings
         postCalculationStackValueMap.keySet().stream()
@@ -648,8 +662,15 @@ public class EnergyValueRegistry {
          * If the current values were synched to us from a server, do not save them to disk as they would override
          * the local ones
          */
-        if (!loadedFromMap) {
-            SerializationHelper.writeMapToFile(stackValueMap, energyValuesFile);
+        if (shouldSave) {
+            if (valuesNeedRegeneration) {
+                if (energyValuesFile.exists()) {
+                    energyValuesFile.delete();
+                }
+            }
+            else {
+                SerializationHelper.writeMapToFile(stackValueMap, energyValuesFile);
+            }
         }
         SerializationHelper.writeMapToFile(preCalculationStackValueMap, preCalculationValuesFile);
         SerializationHelper.writeMapToFile(postCalculationStackValueMap, postCalculationValuesFile);
@@ -693,9 +714,9 @@ public class EnergyValueRegistry {
      */
     public void load(Map<WrappedStack, EnergyValue> valueMap){
 
-        if (stackValueMap != null) {
+        if (valueMap != null) {
 
-            loadedFromMap = true;
+            setShouldSave(false);
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             stackMappingsBuilder.putAll(valueMap);
             stackValueMap = stackMappingsBuilder.build();

@@ -1,9 +1,52 @@
 package com.pahimar.ee3.api.blacklist;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.exchange.WrappedStack;
 import cpw.mods.fml.common.Mod;
 
+import java.util.Set;
+
 public class BlacklistRegistryProxy {
+
+    /**
+     * TODO Finis JavaDoc
+     *
+     * @return
+     */
+    public static Set<WrappedStack> getKnowledgeBlacklist() {
+        return getBlacklist(Blacklist.KNOWLEDGE);
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @return
+     */
+    public static Set<WrappedStack> getExchangeBlacklist() {
+        return getBlacklist(Blacklist.EXCHANGE);
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param blacklist
+     * @return
+     */
+    public static Set<WrappedStack> getBlacklist(Blacklist blacklist) {
+
+        init();
+
+        if (ee3Mod != null) {
+            if (blacklist == Blacklist.KNOWLEDGE) {
+                return EE3Wrapper.ee3mod.getBlacklistRegistry().getKnowledgeBlacklist();
+            }
+            else if (blacklist == Blacklist.EXCHANGE) {
+                return EE3Wrapper.ee3mod.getBlacklistRegistry().getExchangeBlacklist();
+            }
+        }
+
+        return null;
+    }
 
     /**
      * TODO Finish JavaDoc

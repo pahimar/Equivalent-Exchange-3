@@ -1,16 +1,49 @@
 package com.pahimar.ee3.api.exchange;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.exchange.WrappedStack;
 import cpw.mods.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public final class EnergyValueRegistryProxy {
 
     @Mod.Instance("EE3")
     private static Object ee3Mod;
+
+    public static Map<WrappedStack, EnergyValue> getPreCalculationEnergyValues() {
+        return getEnergyValues(Phase.PRE_CALCULATION);
+    }
+
+    public static Map<WrappedStack, EnergyValue> getPostCalculationEnergyValues() {
+        return getEnergyValues(Phase.POST_CALCULATION);
+    }
+
+    public static Map<WrappedStack, EnergyValue> getEnergyValues() {
+        return getEnergyValues(Phase.ALL);
+    }
+
+    public static Map<WrappedStack, EnergyValue> getEnergyValues(Phase phase) {
+
+        init();
+
+        if (ee3Mod != null) {
+            if (phase == Phase.PRE_ASSIGNMENT || phase == Phase.PRE_CALCULATION) {
+                EE3Wrapper.ee3mod.getEnergyValueRegistry().getPreCalculationStackValueMap();
+            }
+            else if (phase == Phase.POST_ASSIGNMENT || phase == Phase.POST_CALCULATION) {
+                EE3Wrapper.ee3mod.getEnergyValueRegistry().getPostCalculationStackValueMap();
+            }
+            else if (phase == Phase.ALL) {
+                EE3Wrapper.ee3mod.getEnergyValueRegistry().getEnergyValues();
+            }
+        }
+
+        return null;
+    }
 
     public static boolean hasEnergyValue(Object object)
     {
@@ -200,6 +233,6 @@ public final class EnergyValueRegistryProxy {
         @Deprecated POST_ASSIGNMENT,
         POST_CALCULATION,
         @Deprecated RUNTIME,
-        @Deprecated ALL
+        ALL
     }
 }
