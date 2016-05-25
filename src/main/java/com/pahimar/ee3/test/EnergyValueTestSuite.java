@@ -15,8 +15,10 @@ import java.util.*;
 public class EnergyValueTestSuite {
 
     public static final Marker TEST_MARKER = MarkerManager.getMarker("EE3_ENERGY_VALUE_TEST", LogHelper.MOD_MARKER);
-    private static final Marker SUCCESS_MARKER = MarkerManager.getMarker("EE3_ENERGY_VALUE_TEST_SUCCESS", TEST_MARKER);
-    private static final Marker FAILURE_MARKER = MarkerManager.getMarker("EE3_ENERGY_VALUE_TEST_FAILURE", TEST_MARKER);
+    private static final Marker SUCCESS_MARKER = MarkerManager.getMarker("EE3_TEST_SUCCESS", TEST_MARKER);
+    private static final Marker FAILURE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE", TEST_MARKER);
+    private static final Marker FAILURE_WRONG_VALUE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE_WRONG_VALUE", FAILURE_MARKER);
+    private static final Marker FAILURE_NO_VALUE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE_NO_VALUE", FAILURE_MARKER);
 
     private Map<WrappedStack, EnergyValue> testSuiteValueMap;
     private transient Set<WrappedStack> stacksWithCorrectValue;
@@ -111,11 +113,11 @@ public class EnergyValueTestSuite {
         }
 
         for (String failureMessage : failureMessagesWrongValue) {
-            LogHelper.warn(FAILURE_MARKER, failureMessage);
+            LogHelper.warn(FAILURE_WRONG_VALUE_MARKER, failureMessage);
         }
 
         for (String failureMessage : failureMessagesNoValue) {
-            LogHelper.warn(FAILURE_MARKER, failureMessage);
+            LogHelper.warn(FAILURE_NO_VALUE_MARKER, failureMessage);
         }
     }
 
@@ -136,8 +138,7 @@ public class EnergyValueTestSuite {
         return this;
     }
 
-    public EnergyValueTestSuite save(File file) {
+    public void save(File file) {
         SerializationHelper.writeMapToFile(testSuiteValueMap, file);
-        return this;
     }
 }

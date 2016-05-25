@@ -22,9 +22,6 @@ public class Files {
     public static final String KNOWLEDGE_BLACKLIST_FILENAME = "knowledge-blacklist.json";
     public static final String EXCHANGE_BLACKLIST_FILENAME = "exchange-blacklist.json";
 
-    public static File abilitiesDataDirectory;
-    public static File abilitiesDataFile;
-
     public static void init(FMLPreInitializationEvent event) {
 
         globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
@@ -44,10 +41,6 @@ public class Files {
 
         BlacklistRegistry.knowledgeBlacklistFile = new File(globalDataDirectory, "blacklist" + File.separator + KNOWLEDGE_BLACKLIST_FILENAME);
         BlacklistRegistry.exchangeBlacklistFile = new File(globalDataDirectory, "blacklist" + File.separator + EXCHANGE_BLACKLIST_FILENAME);
-
-        abilitiesDataDirectory = new File(globalDataDirectory, "abilities");
-        abilitiesDataDirectory.mkdirs();
-        abilitiesDataFile = new File(abilitiesDataDirectory, "abilities.json");
     }
 
     /**
