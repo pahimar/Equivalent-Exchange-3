@@ -178,6 +178,7 @@ commands.ee3.set-current-item-not-recoverable.no-effect=%s is already not exchan
 commands.ee3.run-tests.usage=/ee3 run-tests <file-name>
 commands.ee3.run-tests.success=Executed test file '%s', check server log for results
 commands.ee3.run-tests.notfound=Test file '%s' was not found!
+commands.ee3.run-tests.dir-notfound=Test directory was not found!
 
 # Tooltips
 tooltip.ee3:belongsTo=Belongs to %s

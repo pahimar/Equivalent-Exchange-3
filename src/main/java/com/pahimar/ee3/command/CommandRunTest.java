@@ -3,6 +3,7 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.reference.Tests;
 import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -39,26 +40,28 @@ public class CommandRunTest extends CommandEE
     {
         if (args.length == 2) {
 
-            // TODO Change location of where it looks for test cases
-            File testCaseDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
-            testCaseDirectory.mkdirs();
             boolean testFound = false;
 
-            for (File testCaseFile : testCaseDirectory.listFiles()) {
-                if (testCaseFile.isFile() && testCaseFile.getName().equalsIgnoreCase(args[1])) {
-                    testFound = true;
-                    EnergyValueTestSuite energyValueTestSuite = new EnergyValueTestSuite(testCaseFile);
-                    LogHelper.info(EnergyValueTestSuite.TEST_MARKER, "BEGIN TEST ({})", testCaseFile.getName());
-                    energyValueTestSuite.run();
-                    LogHelper.info(EnergyValueTestSuite.TEST_MARKER, "END TEST ({})", testCaseFile.getName());
+            if (Tests.globalTestDirectory != null) {
+                for (File testCaseFile : Tests.globalTestDirectory.listFiles()) {
+                    if (testCaseFile.isFile() && testCaseFile.getName().equalsIgnoreCase(args[1])) {
+                        testFound = true;
+                        EnergyValueTestSuite energyValueTestSuite = new EnergyValueTestSuite(testCaseFile);
+                        LogHelper.info(EnergyValueTestSuite.TEST_MARKER, "BEGIN TEST ({})", testCaseFile.getName());
+                        energyValueTestSuite.run();
+                        LogHelper.info(EnergyValueTestSuite.TEST_MARKER, "END TEST ({})", testCaseFile.getName());
+                    }
+                }
+
+                if (testFound) {
+                    commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
+                }
+                else {
+                    commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
                 }
             }
-
-            if (testFound) {
-                commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
-            }
             else {
-                commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
+                throw new WrongUsageException(Messages.Commands.RUN_TEST_USAGE);
             }
         }
         else

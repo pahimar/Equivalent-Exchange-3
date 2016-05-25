@@ -103,6 +103,7 @@ public final class Messages {
         public static final String RUN_TEST_USAGE = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".usage";
         public static final String RUN_TESTS_SUCCESS = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".success";
         public static final String RUN_TESTS_NOT_FOUND = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".notfound";
+        public static final String RUN_TESTS_DIR_NOT_FOUND = COMMAND_PREFIX + Names.Commands.RUN_TEST + ".dir-notfound";
 
         public static final String ADMIN_USAGE = COMMAND_PREFIX + Names.Commands.ADMIN_PANEL + ".usage";
     }

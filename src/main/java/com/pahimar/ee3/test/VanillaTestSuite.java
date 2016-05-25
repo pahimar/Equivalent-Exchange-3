@@ -1,7 +1,6 @@
 package com.pahimar.ee3.test;
 
-import com.pahimar.ee3.reference.Reference;
-import cpw.mods.fml.common.FMLCommonHandler;
+import com.pahimar.ee3.reference.Tests;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -600,9 +599,6 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
     }
 
     public void save() {
-        // TODO Change the test directory location
-        File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
-        energyValuesDataDirectory.mkdirs();
-        this.save(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));
+        this.save(new File(Tests.globalTestDirectory, "minecraft-v1710-vanilla-test-suite.json"));
     }
 }

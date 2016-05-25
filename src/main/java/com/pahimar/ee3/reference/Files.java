@@ -28,6 +28,8 @@ public class Files {
     public static void init(FMLPreInitializationEvent event) {
 
         globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
+        Tests.globalTestDirectory = new File(globalDataDirectory, "tests");
+        Tests.globalTestDirectory.mkdirs();
 
         EnergyValueRegistry.energyValuesDirectory = new File(globalDataDirectory, "energy-values");
         EnergyValueRegistry.energyValuesDirectory.mkdirs();
