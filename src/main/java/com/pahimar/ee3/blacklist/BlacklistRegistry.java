@@ -161,6 +161,11 @@ public class BlacklistRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param shouldSave
+     */
     public void setShouldSave(boolean shouldSave) {
         this.shouldSave = shouldSave;
     }
@@ -185,6 +190,12 @@ public class BlacklistRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param blacklistSet
+     * @param blacklist
+     */
     public void load(Set<WrappedStack> blacklistSet, Blacklist blacklist) {
 
         if (blacklist != null && blacklistSet != null) {

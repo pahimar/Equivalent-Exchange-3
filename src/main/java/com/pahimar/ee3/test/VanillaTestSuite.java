@@ -9,9 +9,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
 
-public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
+public class VanillaTestSuite extends EnergyValueTestSuite
 {
-    public VanillaEnergyValueTest()
+    public VanillaTestSuite()
     {
         buildTestSuite();
     }
@@ -30,8 +30,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         addMaterialsTabTestCases();
     }
 
-    private void addBuildingBlocksTabTestCases()
-    {
+    private void addBuildingBlocksTabTestCases() {
+
         add(Blocks.stone, 1);
         add(Blocks.grass, 1);
         add(Blocks.dirt, 1);
@@ -174,8 +174,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Blocks.packed_ice, null);
     }
 
-    private void addDecorationBlocksTabTestCases()
-    {
+    private void addDecorationBlocksTabTestCases() {
+
         add(new ItemStack(Blocks.sapling, 1, 0), 32);
         add(new ItemStack(Blocks.sapling, 1, 1), 32);
         add(new ItemStack(Blocks.sapling, 1, 2), 32);
@@ -280,8 +280,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Blocks.skull, 1, 4), null);
     }
 
-    private void addRedstoneTabTestCases()
-    {
+    private void addRedstoneTabTestCases() {
+
         add(Blocks.dispenser, 87);
         add(Blocks.noteblock, 96);
         add(Blocks.sticky_piston, 340);
@@ -310,8 +310,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.comparator, 367);
     }
 
-    private void addTransportationTabTestCases()
-    {
+    private void addTransportationTabTestCases() {
+
         add(Blocks.golden_rail, 2054);
         add(Blocks.detector_rail, 261.667);
         add(Blocks.rail, 96.25);
@@ -326,8 +326,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.hopper_minecart, 2624);
     }
 
-    private void addMiscellaneousTabTestCases()
-    {
+    private void addMiscellaneousTabTestCases() {
+
         add(Blocks.beacon, 24773);
         add(Items.bucket, 768);
         add(Items.water_bucket, 769);
@@ -387,8 +387,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.record_wait, 2048);
     }
 
-    private void addFoodstuffsTabTestCases()
-    {
+    private void addFoodstuffsTabTestCases() {
+
         add(Items.apple, 24);
         add(Items.mushroom_stew, 70);
         add(Items.bread, 72);
@@ -419,8 +419,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.pumpkin_pie, 208);
     }
 
-    private void addToolsTabTestCases()
-    {
+    private void addToolsTabTestCases() {
+
         add(Items.iron_shovel, 264);
         add(Items.iron_pickaxe, 776);
         add(Items.iron_axe, 776);
@@ -451,8 +451,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(new ItemStack(Items.enchanted_book, 1, OreDictionary.WILDCARD_VALUE), null);
     }
 
-    private void addCombatTabTestCases()
-    {
+    private void addCombatTabTestCases() {
+
         add(Items.bow, 48);
         add(Items.arrow, 14);
         add(Items.iron_sword, 516);
@@ -482,8 +482,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.golden_boots, 8192);
     }
 
-    private void addBrewingTabTestCases()
-    {
+    private void addBrewingTabTestCases() {
+
         add(Items.ghast_tear, 4096);
         add(new ItemStack(Items.potionitem, 1, 0), 2);
         add(new ItemStack(Items.potionitem, 1, 16), 8.667);
@@ -551,8 +551,8 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.speckled_melon, 1836.448);
     }
 
-    private void addMaterialsTabTestCases()
-    {
+    private void addMaterialsTabTestCases() {
+
         add(new ItemStack(Items.coal, 1, 0), 32);
         add(new ItemStack(Items.coal, 1, 1), 32);
         add(Items.diamond, 8192);
@@ -600,10 +600,9 @@ public class VanillaEnergyValueTest extends EnergyValueMappingsTestSuite
         add(Items.quartz, 256);
     }
 
-    public void save()
-    {
+    public void save() {
         File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
         energyValuesDataDirectory.mkdirs();
-        this.saveTestSuite(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));
+        this.save(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));
     }
 }

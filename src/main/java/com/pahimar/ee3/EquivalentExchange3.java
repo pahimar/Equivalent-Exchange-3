@@ -14,7 +14,7 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.test.EnergyValueMappingsTestSuite;
+import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -167,13 +167,12 @@ public class EquivalentExchange3
         return TileEntityDataHelper.getInstance();
     }
 
-    public void runEnergyValueMappingTest(File file)
+    public void runEnergyValueTestSuite(File file)
     {
-        runEnergyValueMappingTest(file, false);
+        runEnergyValueTestSuite(file, false);
     }
 
-    public void runEnergyValueMappingTest(File file, boolean strict)
-    {
-        new EnergyValueMappingsTestSuite(file).runTestSuite(strict);
+    public void runEnergyValueTestSuite(File file, boolean strict) {
+        new EnergyValueTestSuite(file).run(strict);
     }
 }

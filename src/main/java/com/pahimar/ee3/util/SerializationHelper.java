@@ -4,10 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.pahimar.ee3.api.exchange.EnergyValue;
-import com.pahimar.ee3.exchange.EnergyValueStackMapping;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
@@ -68,63 +65,6 @@ public class SerializationHelper {
         instancePlayerDataDirectory.mkdirs();
     }
 
-    public static Map<WrappedStack, EnergyValue> readEnergyValueStackMapFromJsonFile(File jsonFile)
-    {
-        Map<WrappedStack, EnergyValue> energyValueStackMap = new TreeMap<WrappedStack, EnergyValue>();
-        JsonReader jsonReader;
-
-        try
-        {
-            jsonReader = new JsonReader(new FileReader(jsonFile));
-            jsonReader.beginArray();
-            while (jsonReader.hasNext())
-            {
-                EnergyValueStackMapping energyValueStackMapping = EnergyValueStackMapping.jsonSerializer.fromJson(jsonReader, EnergyValueStackMapping.class);
-                if (energyValueStackMapping != null)
-                {
-                    energyValueStackMap.put(energyValueStackMapping.wrappedStack, energyValueStackMapping.energyValue);
-                }
-            }
-            jsonReader.endArray();
-            jsonReader.close();
-        }
-        catch (FileNotFoundException ignored)
-        {
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return energyValueStackMap;
-    }
-
-    public static void writeEnergyValueStackMapToJsonFile(File jsonFile, Map<WrappedStack, EnergyValue> energyValueMap)
-    {
-        JsonWriter jsonWriter;
-
-        try
-        {
-            jsonWriter = new JsonWriter(new FileWriter(jsonFile));
-            jsonWriter.setIndent("    ");
-            jsonWriter.beginArray();
-            for (WrappedStack wrappedStack : energyValueMap.keySet())
-            {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null)
-                {
-                    EnergyValueStackMapping.jsonSerializer.toJson(new EnergyValueStackMapping(wrappedStack, energyValueMap.get(wrappedStack)), EnergyValueStackMapping.class, jsonWriter);
-                }
-            }
-
-            jsonWriter.endArray();
-            jsonWriter.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     public static Set<WrappedStack> readSetFromFile(File file) {
 
         Set<WrappedStack> wrappedStackSet = new TreeSet<>();
@@ -167,53 +107,55 @@ public class SerializationHelper {
     public static String readJsonFile(File file) throws FileNotFoundException {
 
         StringBuilder jsonStringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        if (file != null) {
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 
-            jsonStringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                jsonStringBuilder.append(line);
+                jsonStringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    jsonStringBuilder.append(line);
+                }
+            }
+            catch (IOException exception) {
+                if (exception instanceof FileNotFoundException) {
+                    throw (FileNotFoundException) exception;
+                }
+                else {
+                    exception.printStackTrace(); // TODO Better logging of the exception
+                }
             }
         }
-        catch (IOException exception) {
-            if (exception instanceof FileNotFoundException) {
-                throw (FileNotFoundException) exception;
-            }
-            else {
-                exception.printStackTrace(); // TODO Better logging of the exception
-            }
-        }
-
         return jsonStringBuilder.toString();
     }
 
     public static void writeJsonFile(File file, String fileContents) {
 
-        file.getParentFile().mkdirs();
-        File tempFile = new File(file.getAbsolutePath() + "_tmp");
+        if (file != null) {
 
-        if (tempFile.exists()) {
-            tempFile.delete();
-        }
+            file.getParentFile().mkdirs();
+            File tempFile = new File(file.getAbsolutePath() + "_tmp");
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
+            if (tempFile.exists()) {
+                tempFile.delete();
+            }
 
-            bufferedWriter.write(fileContents);
-            bufferedWriter.close();
-        }
-        catch (IOException exception) {
-            exception.printStackTrace(); // TODO Better logging of the exception
-        }
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFile))) {
 
-        if (file.exists()) {
-            file.delete();
-        }
+                bufferedWriter.write(fileContents);
+                bufferedWriter.close();
+            } catch (IOException exception) {
+                exception.printStackTrace(); // TODO Better logging of the exception
+            }
 
-        if (file.exists()) {
-            LogHelper.warn("Failed to delete " + file);
-        }
-        else {
-            tempFile.renameTo(file);
+            if (file.exists()) {
+                file.delete();
+            }
+
+            if (file.exists()) {
+                LogHelper.warn("Failed to delete " + file);
+            } else {
+                tempFile.renameTo(file);
+            }
         }
     }
 }

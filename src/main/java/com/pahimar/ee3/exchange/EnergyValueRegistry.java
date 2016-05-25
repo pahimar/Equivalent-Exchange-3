@@ -526,6 +526,11 @@ public class EnergyValueRegistry {
         }
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param shouldSave
+     */
     public void setShouldSave(boolean shouldSave) {
         this.shouldSave = shouldSave;
     }

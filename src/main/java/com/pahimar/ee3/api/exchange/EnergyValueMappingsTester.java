@@ -18,7 +18,7 @@ public class EnergyValueMappingsTester
 
         if (ee3Mod != null)
         {
-            EE3Wrapper.ee3mod.runEnergyValueMappingTest(file, strict);
+            EE3Wrapper.ee3mod.runEnergyValueTestSuite(file, strict);
         }
     }
 
