@@ -9,15 +9,14 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
 
-public class VanillaTestSuite extends EnergyValueTestSuite
-{
-    public VanillaTestSuite()
-    {
+public class VanillaTestSuite extends EnergyValueTestSuite {
+
+    public VanillaTestSuite() {
         buildTestSuite();
     }
 
-    private void buildTestSuite()
-    {
+    private void buildTestSuite() {
+
         addBuildingBlocksTabTestCases();
         addDecorationBlocksTabTestCases();
         addRedstoneTabTestCases();
@@ -601,6 +600,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite
     }
 
     public void save() {
+        // TODO Change the test directory location
         File energyValuesDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
         energyValuesDataDirectory.mkdirs();
         this.save(new File(energyValuesDataDirectory, "minecraft-v1710-vanilla-test-suite.json"));

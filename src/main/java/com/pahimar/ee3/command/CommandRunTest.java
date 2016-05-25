@@ -39,6 +39,7 @@ public class CommandRunTest extends CommandEE
     {
         if (args.length == 2) {
 
+            // TODO Change location of where it looks for test cases
             File testCaseDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID + File.separator + "energyvalues" + File.separator + "testcases");
             testCaseDirectory.mkdirs();
             boolean testFound = false;
