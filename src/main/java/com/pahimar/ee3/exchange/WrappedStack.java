@@ -336,55 +336,68 @@ public class WrappedStack implements Comparable<WrappedStack> {
         public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
         {
 
-            if (wrappedStack1.wrappedStack instanceof ItemStack)
-            {
-                if (wrappedStack2.wrappedStack instanceof ItemStack)
-                {
-                    return ItemHelper.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
+            if (wrappedStack1.wrappedStack instanceof ItemStack) {
+
+                if (wrappedStack2.wrappedStack instanceof ItemStack) {
+
+                    int compareResult = ItemHelper.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
+
+                    if (compareResult == 0) {
+                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                    }
+                    else {
+                        return compareResult;
+                    }
                 }
-                else
-                {
+                else {
                     return 1;
                 }
             }
-            else if (wrappedStack1.wrappedStack instanceof OreStack)
-            {
-                if (wrappedStack2.wrappedStack instanceof ItemStack)
-                {
+            else if (wrappedStack1.wrappedStack instanceof OreStack) {
+
+                if (wrappedStack2.wrappedStack instanceof ItemStack) {
                     return -1;
                 }
-                else if (wrappedStack2.wrappedStack instanceof OreStack)
-                {
-                    return OreStack.compare((OreStack) wrappedStack1.wrappedStack, (OreStack) wrappedStack2.wrappedStack);
+                else if (wrappedStack2.wrappedStack instanceof OreStack) {
+
+                    int compareResult = OreStack.compare((OreStack) wrappedStack1.wrappedStack, (OreStack) wrappedStack2.wrappedStack);
+
+                    if (compareResult == 0) {
+                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                    }
+                    else {
+                        return compareResult;
+                    }
                 }
-                else
-                {
+                else {
                     return 1;
                 }
             }
-            else if (wrappedStack1.wrappedStack instanceof FluidStack)
-            {
-                if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack)
-                {
+            else if (wrappedStack1.wrappedStack instanceof FluidStack) {
+
+                if (wrappedStack2.wrappedStack instanceof ItemStack || wrappedStack2.wrappedStack instanceof OreStack) {
                     return -1;
                 }
-                else if (wrappedStack2.wrappedStack instanceof FluidStack)
-                {
-                    return FluidHelper.compare((FluidStack) wrappedStack1.wrappedStack, (FluidStack) wrappedStack2.wrappedStack);
+                else if (wrappedStack2.wrappedStack instanceof FluidStack) {
+
+                    int compareResult = FluidHelper.compare((FluidStack) wrappedStack1.wrappedStack, (FluidStack) wrappedStack2.wrappedStack);
+
+                    if (compareResult == 0) {
+                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                    }
+                    else {
+                        return compareResult;
+                    }
                 }
-                else
-                {
+                else {
                     return 1;
                 }
             }
-            else if (wrappedStack1.wrappedStack == null)
-            {
-                if (wrappedStack2.wrappedStack != null)
-                {
+            else if (wrappedStack1.wrappedStack == null) {
+                if (wrappedStack2.wrappedStack != null) {
                     return -1;
                 }
-                else
-                {
+                else {
                     return 0;
                 }
             }
