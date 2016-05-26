@@ -46,7 +46,7 @@ public class CommandRegenEnergyValues extends CommandBase {
         if (requesterMap.containsKey(commandSenderUUID)) {
 
             // TODO Switch to nanoTime from currentTimeMillis
-            long timeDifference = System.currentTimeMillis() - requesterMap.get(commandSenderUUID).longValue();
+            long timeDifference = (System.nanoTime() - requesterMap.get(commandSenderUUID).longValue()) / 100000;
 
             if (timeDifference >= (ConfigurationHandler.Settings.serverSyncThreshold * 1000)) {
                 requesterMap.remove(commandSenderUUID);
@@ -57,7 +57,7 @@ public class CommandRegenEnergyValues extends CommandBase {
             }
         }
         else {
-            requesterMap.put(commandSenderUUID, System.currentTimeMillis());
+            requesterMap.put(commandSenderUUID, System.nanoTime() / 100000);
         }
 
         if (shouldRegen) {
