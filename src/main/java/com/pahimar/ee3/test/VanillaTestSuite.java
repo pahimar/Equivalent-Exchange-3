@@ -1,6 +1,6 @@
 package com.pahimar.ee3.test;
 
-import com.pahimar.ee3.reference.Tests;
+import com.pahimar.ee3.reference.Files;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,10 +11,10 @@ import java.io.File;
 public class VanillaTestSuite extends EnergyValueTestSuite {
 
     public VanillaTestSuite() {
-        buildTestSuite();
+        super();
     }
 
-    private void buildTestSuite() {
+    public VanillaTestSuite build() {
 
         addBuildingBlocksTabTestCases();
         addDecorationBlocksTabTestCases();
@@ -26,6 +26,8 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         addCombatTabTestCases();
         addBrewingTabTestCases();
         addMaterialsTabTestCases();
+
+        return this;
     }
 
     private void addBuildingBlocksTabTestCases() {
@@ -599,6 +601,6 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
     }
 
     public void save() {
-        this.save(new File(Tests.globalTestDirectory, "minecraft-v1710-vanilla-test-suite.json"));
+        this.save(new File(Files.globalTestDirectory, "minecraft-v1710-vanilla-test-suite.json"));
     }
 }

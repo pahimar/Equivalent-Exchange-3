@@ -291,43 +291,40 @@ public class WrappedStack implements Comparable<WrappedStack> {
      * @return a string representation of the object.
      */
     @Override
-    public String toString()
-    {
-        if (wrappedStack instanceof ItemStack)
-        {
+    public String toString() {
+
+        if (wrappedStack instanceof ItemStack) {
             ItemStack itemStack = (ItemStack) wrappedStack;
-            String unlocalizedName;
-            try
-            {
-//                unlocalizedName = itemStack.getUnlocalizedName();
-                unlocalizedName = Item.itemRegistry.getNameForObject(itemStack.getItem());
+            String unlocalizedName = null;
+            try {
+                if (itemStack.getItem() != null) {
+                    unlocalizedName = Item.itemRegistry.getNameForObject(itemStack.getItem());
+                }
+
+                if (unlocalizedName == null) {
+                    unlocalizedName = itemStack.getUnlocalizedName();
+                }
             }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
+            catch (ArrayIndexOutOfBoundsException e) {
                 unlocalizedName = "no-name";
             }
 
-            if (itemStack.hasTagCompound())
-            {
+            if (itemStack.hasTagCompound()) {
                 return String.format("%sxitemStack[%s@%s:%s]", stackSize, unlocalizedName, itemStack.getItemDamage(), itemStack.getTagCompound());
             }
-            else
-            {
+            else {
                 return String.format("%sxitemStack[%s@%s]", stackSize, unlocalizedName, itemStack.getItemDamage());
             }
         }
-        else if (wrappedStack instanceof OreStack)
-        {
+        else if (wrappedStack instanceof OreStack) {
             OreStack oreStack = (OreStack) wrappedStack;
             return String.format("%sxoreStack[%s]", stackSize, oreStack.oreName);
         }
-        else if (wrappedStack instanceof FluidStack)
-        {
+        else if (wrappedStack instanceof FluidStack) {
             FluidStack fluidStack = (FluidStack) wrappedStack;
             return String.format("%sxfluidStack[%s]", stackSize, fluidStack.getFluid().getName());
         }
-        else
-        {
+        else {
             return "null-wrappedstack";
         }
     }

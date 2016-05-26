@@ -53,42 +53,46 @@ public class Comparators {
         public int compare(ItemStack itemStack1, ItemStack itemStack2) {
 
             if (itemStack1 != null && itemStack2 != null) {
-                // Sort on id
-                if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0) {
-                    // Sort on item
-                    if (itemStack1.getItem() == itemStack2.getItem()) {
-                        // Then sort on meta
-                        if ((itemStack1.getItemDamage() == itemStack2.getItemDamage()) || itemStack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemStack2.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                            // Then sort on NBT
-                            if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
-                                // Then sort on stack size
-                                if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
+                if (itemStack1.getItem() != null && itemStack2.getItem() != null) {
+                    // Sort on id
+                    if (Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem()) == 0) {
+                        // Sort on item
+                        if (itemStack1.getItem() == itemStack2.getItem()) {
+                            // Then sort on meta
+                            if ((itemStack1.getItemDamage() == itemStack2.getItemDamage()) || itemStack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemStack2.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+                                // Then sort on NBT
+                                if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
+                                    // Then sort on stack size
+                                    if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
+                                        return (itemStack1.stackSize - itemStack2.stackSize);
+                                    } else {
+                                        return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                                    }
+                                } else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
+                                    return -1;
+                                } else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
+                                    return 1;
+                                } else {
                                     return (itemStack1.stackSize - itemStack2.stackSize);
                                 }
-                                else {
-                                    return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
-                                }
+                            } else {
+                                return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
                             }
-                            else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {
-                                return -1;
-                            }
-                            else if (itemStack1.hasTagCompound() && !(itemStack2.hasTagCompound())) {
-                                return 1;
-                            }
-                            else {
-                                return (itemStack1.stackSize - itemStack2.stackSize);
-                            }
+                        } else {
+                            return itemStack1.getItem().getUnlocalizedName(itemStack1).compareToIgnoreCase(itemStack2.getItem().getUnlocalizedName(itemStack2));
                         }
-                        else {
-                            return (itemStack1.getItemDamage() - itemStack2.getItemDamage());
-                        }
-                    }
-                    else {
-                        return itemStack1.getItem().getUnlocalizedName(itemStack1).compareToIgnoreCase(itemStack2.getItem().getUnlocalizedName(itemStack2));
+                    } else {
+                        return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
                     }
                 }
+                else if (itemStack1.getItem() != null) {
+                    return -1;
+                }
+                else if (itemStack2.getItem() != null) {
+                    return 1;
+                }
                 else {
-                    return Item.getIdFromItem(itemStack1.getItem()) - Item.getIdFromItem(itemStack2.getItem());
+                    return 0;
                 }
             }
             else if (itemStack1 != null) {

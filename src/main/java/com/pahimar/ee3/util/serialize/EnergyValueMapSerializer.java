@@ -41,11 +41,13 @@ public class EnergyValueMapSerializer implements JsonSerializer<Map<WrappedStack
 
                     if (jsonValueMapping.get(ENERGY_VALUE).isJsonPrimitive()) {
 
-                        try {
-                            energyValue = new EnergyValue(jsonValueMapping.getAsJsonPrimitive(ENERGY_VALUE).getAsNumber());
-                        }
-                        catch (NumberFormatException e) {
-                            // TODO Logging
+                        if (jsonValueMapping.getAsJsonPrimitive(ENERGY_VALUE).isNumber()) {
+                            try {
+                                energyValue = new EnergyValue(jsonValueMapping.getAsJsonPrimitive(ENERGY_VALUE).getAsNumber());
+                            }
+                            catch (NumberFormatException e) {
+                                // TODO Logging
+                            }
                         }
                     }
 
@@ -97,12 +99,23 @@ public class EnergyValueMapSerializer implements JsonSerializer<Map<WrappedStack
 
         if (src != null) {
             src.keySet().stream()
-                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null & src.get(wrappedStack) != null)
+                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null)
                     .forEach(wrappedStack -> {
-                JsonObject jsonMapping = new JsonObject();
-                jsonMapping.add(wrappedStack.getWrappedObject().getClass().getSimpleName().toLowerCase(), context.serialize(wrappedStack.getWrappedObject()));
-                jsonMapping.addProperty(ENERGY_VALUE, src.get(wrappedStack).getValue());
-                jsonArray.add(jsonMapping);
+                        JsonObject jsonMapping = new JsonObject();
+                        JsonElement jsonElement = context.serialize(wrappedStack.getWrappedObject());
+
+                        if (jsonElement.isJsonObject()) {
+                            jsonMapping.add(wrappedStack.getWrappedObject().getClass().getSimpleName().toLowerCase(), context.serialize(wrappedStack.getWrappedObject()));
+
+                            if (src.get(wrappedStack) != null) {
+                                jsonMapping.addProperty(ENERGY_VALUE, src.get(wrappedStack).getValue());
+                            }
+                            else {
+                                jsonMapping.add(ENERGY_VALUE, JsonNull.INSTANCE);
+                            }
+
+                            jsonArray.add(jsonMapping);
+                        }
             });
         }
 

@@ -14,7 +14,9 @@ import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.EnergyValueTestSuite;
+import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -108,8 +110,13 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
+        // Initialize the blacklist registry
         BlacklistRegistry.INSTANCE.load();
         Abilities.init();
+
+        // Initialize our test files
+        new VanillaTestSuite().build().save();
+        new EETestSuite().build().save();
     }
 
     @EventHandler

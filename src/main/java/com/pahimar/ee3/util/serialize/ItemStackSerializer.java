@@ -73,10 +73,15 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
     @Override
     public JsonElement serialize(ItemStack src, Type typeOfSrc, JsonSerializationContext context) {
 
-        if (src != null) {
+        if (src != null && src.getItem() != null) {
             JsonObject jsonObject = new JsonObject();
 
-            jsonObject.addProperty(NAME, Item.itemRegistry.getNameForObject(src.getItem()));
+            if (Item.itemRegistry.getNameForObject(src.getItem()) != null) {
+                jsonObject.addProperty(NAME, Item.itemRegistry.getNameForObject(src.getItem()));
+            }
+            else {
+                return JsonNull.INSTANCE;
+            }
 
             if (src.getItemDamage() != 0) {
                 jsonObject.addProperty(META_VALUE, src.getItemDamage());
@@ -89,6 +94,6 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
             return jsonObject;
         }
 
-        return null;
+        return JsonNull.INSTANCE;
     }
 }

@@ -1,9 +1,9 @@
 package com.pahimar.ee3.command;
 
+import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.reference.Tests;
 import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -39,8 +39,8 @@ public class CommandRunTest extends CommandEE {
 
             boolean testFound = false;
 
-            if (Tests.globalTestDirectory != null) {
-                for (File testCaseFile : Tests.globalTestDirectory.listFiles()) {
+            if (Files.globalTestDirectory != null) {
+                for (File testCaseFile : Files.globalTestDirectory.listFiles()) {
                     if (testCaseFile.isFile() && testCaseFile.getName().equalsIgnoreCase(args[1])) {
                         testFound = true;
                         EnergyValueTestSuite energyValueTestSuite = new EnergyValueTestSuite(testCaseFile);
@@ -76,8 +76,8 @@ public class CommandRunTest extends CommandEE {
 
             ArrayList<String> fileNames = new ArrayList<>();
 
-            if (Tests.globalTestDirectory != null) {
-                for (File testCaseFile : Tests.globalTestDirectory.listFiles()) {
+            if (Files.globalTestDirectory != null) {
+                for (File testCaseFile : Files.globalTestDirectory.listFiles()) {
                     if (testCaseFile.isFile() && testCaseFile.getAbsolutePath().endsWith(".json")) {
                         fileNames.add(testCaseFile.getName());
                     }

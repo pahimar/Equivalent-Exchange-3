@@ -11,6 +11,7 @@ import java.io.File;
 public class Files {
 
     public static File globalDataDirectory;
+    public static File globalTestDirectory;
     public static File playerDataDirectory;
 
     private static final String ENERGY_VALUES_JSON_FILENAME = "energy-values.json";
@@ -25,9 +26,8 @@ public class Files {
     public static void init(FMLPreInitializationEvent event) {
 
         globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-        Tests.globalTestDirectory = new File(globalDataDirectory, "tests");
-        Tests.globalTestDirectory.mkdirs();
-        Tests.VANILLA_TEST_SUITE.save();
+        globalTestDirectory = new File(globalDataDirectory, "tests");
+        globalTestDirectory.mkdirs();
 
         EnergyValueRegistry.energyValuesDirectory = new File(globalDataDirectory, "energy-values");
         EnergyValueRegistry.energyValuesDirectory.mkdirs();

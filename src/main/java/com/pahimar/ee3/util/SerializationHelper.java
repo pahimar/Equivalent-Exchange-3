@@ -34,7 +34,6 @@ public class SerializationHelper {
             .registerTypeAdapter(WrappedStack.class, new WrappedStackSerializer())
             .registerTypeAdapter(PlayerKnowledge.class, new PlayerKnowledgeSerializer())
             .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
-            .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
             .create();
 
     private static File instanceDataDirectory;
