@@ -10,22 +10,18 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderUtils
-{
-    private static int pulse = 0;
-    private static boolean doInc = true;
+public class RenderUtils {
 
     public static void bindTexture(ResourceLocation texture) {
         FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
     }
 
     public static int getCenteredTextOffset(FontRenderer fontRenderer, String string, int width) {
-
         return (width - fontRenderer.getStringWidth(string)) / 2;
     }
 
-    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale, int zLevel)
-    {
+    public static void renderItemIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, float opacity, float scale, int zLevel) {
+
         IIcon icon = itemStack.getIconIndex();
         GL11.glDisable(GL11.GL_LIGHTING);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TextureMap.locationItemsTexture);
@@ -44,8 +40,8 @@ public class RenderUtils
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    public static void renderQuad(ResourceLocation texture)
-    {
+    public static void renderQuad(ResourceLocation texture) {
+
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -62,9 +58,9 @@ public class RenderUtils
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
     }
 
-    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency)
-    {
-        float pulseTransparency = getPulseValue() * maxTransparency / 3000f;
+    public static void renderPulsingQuad(ResourceLocation texture, float maxTransparency) {
+
+        float pulseTransparency = (float) getPulseValue() * maxTransparency;
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         Tessellator tessellator = Tessellator.instance;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -82,24 +78,7 @@ public class RenderUtils
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
     }
 
-    private static int getPulseValue()
-    {
-        if (doInc)
-        {
-            pulse += 50;
-        }
-        else
-        {
-            pulse -= 50;
-        }
-        if (pulse == 3000)
-        {
-            doInc = false;
-        }
-        if (pulse == 0)
-        {
-            doInc = true;
-        }
-        return pulse;
+    private static double getPulseValue() {
+        return (Math.sin(System.nanoTime() / 100f) + 1) / 2;
     }
 }
