@@ -12,258 +12,224 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class WrappedStack implements Comparable<WrappedStack> {
+public final class WrappedStack implements Comparable<WrappedStack> {
 
-    private final String objectType;
     private final Object wrappedStack;
     private int stackSize;
 
-    public WrappedStack()
-    {
-        objectType = null;
+    public WrappedStack() {
+
         stackSize = -1;
         wrappedStack = null;
     }
 
-    private WrappedStack(Object object)
-    {
-        if (object instanceof Item)
-        {
+    private WrappedStack(Object object) {
+
+        if (object instanceof Item) {
             object = new ItemStack((Item) object);
         }
-        else if (object instanceof Block)
-        {
+        else if (object instanceof Block) {
             object = new ItemStack((Block) object);
         }
-        else if (object instanceof Fluid)
-        {
+        else if (object instanceof Fluid) {
             object = new FluidStack((Fluid) object, 1000);
         }
 
-        if (object instanceof ItemStack)
-        {
-            if (((ItemStack) object).getItem() != null)
-            {
-                ItemStack itemStackObject = (ItemStack) object;
-                objectType = "itemstack";
+        if (object instanceof ItemStack) {
+
+            if (((ItemStack) object).getItem() != null) {
+
                 stackSize = ((ItemStack) object).stackSize;
                 wrappedStack = ItemHelper.clone((ItemStack) object, 1);
             }
-            else
-            {
-                objectType = null;
+            else {
+
                 stackSize = -1;
                 wrappedStack = null;
             }
         }
-        else if (object instanceof OreStack)
-        {
+        else if (object instanceof OreStack) {
+
             OreStack oreStack = (OreStack) object;
-            objectType = "orestack";
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
         }
-        else if (object instanceof ArrayList)
-        {
+        else if (object instanceof ArrayList) {
+
             ArrayList<?> objectList = (ArrayList<?>) object;
 
             OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
 
-            if (possibleOreStack != null)
-            {
-                objectType = "orestack";
+            if (possibleOreStack != null) {
+
                 stackSize = possibleOreStack.stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
             }
-            else
-            {
-                objectType = null;
+            else {
+
                 stackSize = -1;
                 wrappedStack = null;
             }
         }
-        else if (object instanceof FluidStack)
-        {
+        else if (object instanceof FluidStack) {
+
             FluidStack fluidStack = ((FluidStack) object).copy();
-            objectType = "fluidstack";
             stackSize = fluidStack.amount;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
-        else if (object instanceof WrappedStack)
-        {
+        else if (object instanceof WrappedStack) {
+
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            if (wrappedStackObject.getWrappedObject() != null)
-            {
-                this.objectType = wrappedStackObject.objectType;
+            if (wrappedStackObject.getWrappedObject() != null) {
+
                 this.stackSize = wrappedStackObject.stackSize;
                 this.wrappedStack = wrappedStackObject.wrappedStack;
             }
-            else
-            {
-                objectType = null;
+            else {
+
                 stackSize = -1;
                 wrappedStack = null;
             }
         }
-        else
-        {
-            objectType = null;
+        else {
+
             stackSize = -1;
             wrappedStack = null;
         }
     }
 
-    private WrappedStack(Object object, int stackSize)
-    {
-        if (object instanceof Item)
-        {
+    private WrappedStack(Object object, int stackSize) {
+
+        if (object instanceof Item) {
+
             object = new ItemStack((Item) object);
         }
-        else if (object instanceof Block)
-        {
+        else if (object instanceof Block) {
+
             object = new ItemStack((Block) object);
         }
-        else if (object instanceof Fluid)
-        {
+        else if (object instanceof Fluid) {
+
             object = new FluidStack((Fluid) object, 1000);
         }
 
-        if (object instanceof ItemStack)
-        {
-            objectType = "itemstack";
+        if (object instanceof ItemStack) {
+
             this.stackSize = stackSize;
             wrappedStack = ItemHelper.clone((ItemStack) object, 1);
         }
-        else if (object instanceof OreStack)
-        {
+        else if (object instanceof OreStack) {
+
             OreStack oreStack = (OreStack) object;
-            objectType = "orestack";
             this.stackSize = stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
         }
-        else if (object instanceof ArrayList)
-        {
+        else if (object instanceof ArrayList) {
+
             ArrayList<?> objectList = (ArrayList<?>) object;
 
             OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
 
-            if (possibleOreStack != null)
-            {
-                objectType = "orestack";
+            if (possibleOreStack != null) {
+
                 this.stackSize = stackSize;
                 possibleOreStack.stackSize = 1;
                 wrappedStack = possibleOreStack;
             }
-            else
-            {
-                objectType = null;
+            else {
+
                 this.stackSize = -1;
                 wrappedStack = null;
             }
         }
-        else if (object instanceof FluidStack)
-        {
+        else if (object instanceof FluidStack) {
+
             FluidStack fluidStack = (FluidStack) object;
-            objectType = "fluidstack";
             this.stackSize = stackSize;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
         }
-        else if (object instanceof WrappedStack)
-        {
+        else if (object instanceof WrappedStack) {
+
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            if (wrappedStackObject.getWrappedObject() != null)
-            {
-                this.objectType = wrappedStackObject.objectType;
+            if (wrappedStackObject.getWrappedObject() != null) {
+
                 this.stackSize = stackSize;
                 this.wrappedStack = wrappedStackObject.wrappedStack;
             }
-            else
-            {
-                objectType = null;
+            else {
+
                 this.stackSize = -1;
                 wrappedStack = null;
             }
         }
-        else
-        {
-            objectType = null;
+        else {
+
             this.stackSize = -1;
             wrappedStack = null;
         }
     }
 
-    public Object getWrappedObject()
-    {
+    public Object getWrappedObject() {
         return wrappedStack;
     }
 
-    public static boolean canBeWrapped(Object object)
-    {
-        if (object instanceof WrappedStack)
-        {
+    public static boolean canBeWrapped(Object object) {
+
+        if (object instanceof WrappedStack) {
             return true;
         }
-        else if (object instanceof Item || object instanceof Block)
-        {
+        else if (object instanceof Item || object instanceof Block) {
             return true;
         }
-        else if (object instanceof ItemStack)
-        {
-            if (((ItemStack) object).getItem() != null)
-            {
+        else if (object instanceof ItemStack) {
+
+            if (((ItemStack) object).getItem() != null) {
                 return true;
             }
         }
-        else if (object instanceof OreStack)
-        {
+        else if (object instanceof OreStack) {
             return true;
         }
-        else if (object instanceof List)
-        {
-            if (OreStack.getOreStackFromList((List<?>) object) != null)
-            {
+        else if (object instanceof List) {
+
+            if (OreStack.getOreStackFromList((List<?>) object) != null) {
                 return true;
             }
         }
-        else if (object instanceof Fluid || object instanceof FluidStack)
-        {
+        else if (object instanceof Fluid || object instanceof FluidStack) {
             return true;
         }
 
         return false;
     }
 
-    public int getStackSize()
-    {
+    public int getStackSize() {
         return stackSize;
     }
 
-    public void setStackSize(int stackSize)
-    {
+    public void setStackSize(int stackSize) {
         this.stackSize = stackSize;
     }
 
-    public static WrappedStack wrap(Object object)
-    {
-        if (canBeWrapped(object))
-        {
+    public static WrappedStack wrap(Object object) {
+
+        if (canBeWrapped(object)) {
             return new WrappedStack(object);
         }
 
         return null;
     }
 
-    public static WrappedStack wrap(Object object, int stackSize)
-    {
-        if (canBeWrapped(object))
-        {
+    public static WrappedStack wrap(Object object, int stackSize) {
+
+        if (canBeWrapped(object)) {
             return new WrappedStack(object, stackSize);
         }
 
@@ -271,19 +237,17 @@ public class WrappedStack implements Comparable<WrappedStack> {
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         return object instanceof WrappedStack && (this.compareTo((WrappedStack) object) == 0);
     }
 
-    /*
+    /**
      * Sort order (class-wise) goes ItemStack, OreStack, EnergyStack,
      * FluidStack, null
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(WrappedStack wrappedStack)
-    {
+    public int compareTo(WrappedStack wrappedStack) {
         return COMPARATOR.compare(this, wrappedStack);
     }
 
@@ -329,12 +293,10 @@ public class WrappedStack implements Comparable<WrappedStack> {
         }
     }
 
-    public static final Comparator<WrappedStack> COMPARATOR = new Comparator<WrappedStack>()
-    {
+    public static final Comparator<WrappedStack> COMPARATOR = new Comparator<WrappedStack>() {
 
         @Override
-        public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
-        {
+        public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2) {
 
             if (wrappedStack1.wrappedStack instanceof ItemStack) {
 

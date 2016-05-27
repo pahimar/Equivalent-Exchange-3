@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class OreStack implements Comparable<OreStack> {
+public final class OreStack implements Comparable<OreStack> {
 
     public String oreName;
     public int stackSize;
