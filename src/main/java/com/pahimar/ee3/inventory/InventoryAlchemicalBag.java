@@ -40,29 +40,27 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
         readFromNBT(itemStack.getTagCompound());
     }
 
-    public void onGuiSaved(EntityPlayer entityPlayer)
-    {
+    public void onGuiSaved(EntityPlayer entityPlayer) {
+
         parentItemStack = findParentItemStack(entityPlayer);
 
-        if (parentItemStack != null)
-        {
+        if (parentItemStack != null) {
             save();
         }
     }
 
-    public ItemStack findParentItemStack(EntityPlayer entityPlayer)
-    {
-        if (NBTHelper.hasUUID(parentItemStack))
-        {
+    public ItemStack findParentItemStack(EntityPlayer entityPlayer) {
+
+        if (NBTHelper.hasUUID(parentItemStack)) {
+
             UUID parentItemStackUUID = new UUID(parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG), parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
-            for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++)
-            {
+
+            for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++) {
+
                 ItemStack itemStack = entityPlayer.inventory.getStackInSlot(i);
 
-                if (NBTHelper.hasUUID(itemStack))
-                {
-                    if (itemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == parentItemStackUUID.getMostSignificantBits() && itemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == parentItemStackUUID.getLeastSignificantBits())
-                    {
+                if (NBTHelper.hasUUID(itemStack)) {
+                    if (itemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == parentItemStackUUID.getMostSignificantBits() && itemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == parentItemStackUUID.getLeastSignificantBits()) {
                         return itemStack;
                     }
                 }
@@ -72,17 +70,16 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
         return null;
     }
 
-    public boolean matchesUUID(UUID uuid)
-    {
+    public boolean matchesUUID(UUID uuid) {
         return NBTHelper.hasUUID(parentItemStack) && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == uuid.getLeastSignificantBits() && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == uuid.getMostSignificantBits();
     }
 
-    public void save()
-    {
+    public void save() {
+
         NBTTagCompound nbtTagCompound = parentItemStack.getTagCompound();
 
-        if (nbtTagCompound == null)
-        {
+        if (nbtTagCompound == null) {
+
             nbtTagCompound = new NBTTagCompound();
 
             UUID uuid = UUID.randomUUID();

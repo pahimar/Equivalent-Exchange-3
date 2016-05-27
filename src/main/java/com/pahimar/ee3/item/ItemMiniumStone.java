@@ -46,7 +46,7 @@ public class ItemMiniumStone extends ItemEE implements IKeyBound
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack, int renderPass)
     {
-        return NBTHelper.hasTag(itemStack, Names.NBT.CRAFTING_GUI_OPEN) || NBTHelper.hasTag(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
+        return NBTHelper.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN) || NBTHelper.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
     }
 
     @Override

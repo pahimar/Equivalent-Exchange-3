@@ -56,21 +56,21 @@ public class ItemHelper {
     }
 
     public static boolean hasOwner(ItemStack itemStack) {
-        return (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
+        return (NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasKey(itemStack, Names.NBT.OWNER);
     }
 
     public static boolean hasOwnerUUID(ItemStack itemStack) {
-        return NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG);
+        return NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG);
     }
 
     public static boolean hasOwnerName(ItemStack itemStack)
     {
-        return NBTHelper.hasTag(itemStack, Names.NBT.OWNER);
+        return NBTHelper.hasKey(itemStack, Names.NBT.OWNER);
     }
 
     public static String getOwnerName(ItemStack itemStack)
     {
-        if (NBTHelper.hasTag(itemStack, Names.NBT.OWNER))
+        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER))
         {
             return NBTHelper.getString(itemStack, Names.NBT.OWNER);
         }
@@ -80,7 +80,7 @@ public class ItemHelper {
 
     public static UUID getOwnerUUID(ItemStack itemStack)
     {
-        if (NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasTag(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG))
+        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG))
         {
             return new UUID(NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
         }

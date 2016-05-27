@@ -24,16 +24,9 @@ import org.lwjgl.input.Keyboard;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * ItemTooltipEventHandler
- *
- * @author pahimar
- */
 @SideOnly(Side.CLIENT)
-public class ItemTooltipEventHandler
-{
+public class ItemTooltipEventHandler {
+
     private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     @SubscribeEvent
@@ -67,37 +60,27 @@ public class ItemTooltipEventHandler
                     }
                 }
             }
-            else
-            {
+            else {
                 event.toolTip.add("No Exchange Energy value"); // TODO Localize
             }
         }
 
-        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerResearchStation)))
-        {
-            if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack))
-            {
+        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerResearchStation))) {
+
+            if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack)) {
                 event.toolTip.add("You know how to transmute this"); // TODO Localize with better phrasing
             }
         }
 
-        if (event.itemStack.getItem() instanceof IOwnable)
-        {
+        if (event.itemStack.getItem() instanceof IOwnable) {
+
             UUID playerUUID = ItemHelper.getOwnerUUID(event.itemStack);
-            if (playerUUID != null && UsernameCache.containsUUID(playerUUID))
-            {
+
+            if (playerUUID != null && UsernameCache.containsUUID(playerUUID)) {
                 event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
             }
-            else if (ItemHelper.hasOwnerName(event.itemStack))
-            {
+            else if (ItemHelper.hasOwnerName(event.itemStack)) {
                 event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, ItemHelper.getOwnerName(event.itemStack)));
-            }
-            else
-            {
-                if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-                {
-                    event.toolTip.add(StatCollector.translateToLocal(Messages.Tooltips.ITEM_BELONGS_TO_NO_ONE));
-                }
             }
         }
     }
