@@ -10,7 +10,7 @@ import com.pahimar.ee3.inventory.ContainerResearchStation;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -74,13 +74,13 @@ public class ItemTooltipEventHandler {
 
         if (event.itemStack.getItem() instanceof IOwnable) {
 
-            UUID playerUUID = ItemHelper.getOwnerUUID(event.itemStack);
+            UUID playerUUID = ItemStackUtils.getOwnerUUID(event.itemStack);
 
             if (playerUUID != null && UsernameCache.containsUUID(playerUUID)) {
                 event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
             }
-            else if (ItemHelper.hasOwnerName(event.itemStack)) {
-                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, ItemHelper.getOwnerName(event.itemStack)));
+            else if (ItemStackUtils.getOwnerName(event.itemStack) != null) {
+                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, ItemStackUtils.getOwnerName(event.itemStack)));
             }
         }
     }

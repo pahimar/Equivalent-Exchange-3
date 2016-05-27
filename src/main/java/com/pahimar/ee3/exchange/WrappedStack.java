@@ -1,7 +1,7 @@
 package com.pahimar.ee3.exchange;
 
 import com.pahimar.ee3.util.FluidHelper;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,7 +40,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             if (((ItemStack) object).getItem() != null) {
 
                 stackSize = ((ItemStack) object).stackSize;
-                wrappedStack = ItemHelper.clone((ItemStack) object, 1);
+                wrappedStack = ItemStackUtils.clone((ItemStack) object, 1);
             }
             else {
 
@@ -59,7 +59,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
 
             ArrayList<?> objectList = (ArrayList<?>) object;
 
-            OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
+            OreStack possibleOreStack = OreStack.getOreStackFrom(objectList);
 
             if (possibleOreStack != null) {
 
@@ -120,7 +120,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         if (object instanceof ItemStack) {
 
             this.stackSize = stackSize;
-            wrappedStack = ItemHelper.clone((ItemStack) object, 1);
+            wrappedStack = ItemStackUtils.clone((ItemStack) object, 1);
         }
         else if (object instanceof OreStack) {
 
@@ -133,7 +133,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
 
             ArrayList<?> objectList = (ArrayList<?>) object;
 
-            OreStack possibleOreStack = OreStack.getOreStackFromList(objectList);
+            OreStack possibleOreStack = OreStack.getOreStackFrom(objectList);
 
             if (possibleOreStack != null) {
 
@@ -199,7 +199,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         }
         else if (object instanceof List) {
 
-            if (OreStack.getOreStackFromList((List<?>) object) != null) {
+            if (OreStack.getOreStackFrom((List<?>) object) != null) {
                 return true;
             }
         }
@@ -302,7 +302,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
 
                 if (wrappedStack2.wrappedStack instanceof ItemStack) {
 
-                    int compareResult = ItemHelper.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
+                    int compareResult = ItemStackUtils.compare((ItemStack) wrappedStack1.wrappedStack, (ItemStack) wrappedStack2.wrappedStack);
 
                     if (compareResult == 0) {
                         return wrappedStack1.stackSize - wrappedStack2.stackSize;

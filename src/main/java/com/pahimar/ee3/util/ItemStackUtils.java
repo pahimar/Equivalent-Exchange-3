@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
 
-public class ItemHelper {
+public class ItemStackUtils {
 
     public static ItemStack clone(ItemStack itemStack, int stackSize) {
 
@@ -55,54 +55,35 @@ public class ItemHelper {
         return "null";
     }
 
-    public static boolean hasOwner(ItemStack itemStack) {
-        return (NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG)) || NBTHelper.hasKey(itemStack, Names.NBT.OWNER);
+    public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer) {
+        setOwnerName(itemStack, entityPlayer);
+        setOwnerUUID(itemStack, entityPlayer);
     }
 
-    public static boolean hasOwnerUUID(ItemStack itemStack) {
-        return NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG);
-    }
+    public static String getOwnerName(ItemStack itemStack) {
 
-    public static boolean hasOwnerName(ItemStack itemStack)
-    {
-        return NBTHelper.hasKey(itemStack, Names.NBT.OWNER);
-    }
-
-    public static String getOwnerName(ItemStack itemStack)
-    {
-        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER))
-        {
+        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER)) {
             return NBTHelper.getString(itemStack, Names.NBT.OWNER);
         }
 
         return null;
     }
 
-    public static UUID getOwnerUUID(ItemStack itemStack)
-    {
-        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) && NBTHelper.hasKey(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG))
-        {
+    public static UUID getOwnerUUID(ItemStack itemStack) {
+        if (NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) != null && NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG) != null) {
             return new UUID(NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
         }
 
         return null;
     }
 
-    public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer)
-    {
-        setOwnerName(itemStack, entityPlayer);
-        setOwnerUUID(itemStack, entityPlayer);
-    }
+    public static void setOwnerUUID(ItemStack itemStack, EntityPlayer entityPlayer) {
 
-    public static void setOwnerUUID(ItemStack itemStack, EntityPlayer entityPlayer)
-    {
         NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
         NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
     }
 
-    public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer)
-    {
+    public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer) {
         NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
     }
-
 }

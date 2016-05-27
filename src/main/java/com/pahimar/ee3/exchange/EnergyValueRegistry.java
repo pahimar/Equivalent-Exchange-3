@@ -115,6 +115,10 @@ public class EnergyValueRegistry {
             if (valueMap != null && !valueMap.isEmpty()) {
 
                 // First check for a direct energy value mapping to the wrapped object
+                /**
+                 * FIXME If the object being checked has a WILD_CARD meta value, then it will match any similar object.
+                 * We must ensure that it returns the LOWEST possible value from the map
+                 */
                 if (valueMap.containsKey(wrappedStack)) {
                     return valueMap.get(wrappedStack);
                 }
@@ -449,7 +453,7 @@ public class EnergyValueRegistry {
      */
     private static Set<ItemStack> getStacksInRange(Map<WrappedStack, EnergyValue> valueMap, EnergyValue energyValueBound, boolean isUpperBound) {
 
-        Set itemStacks = FilterUtils.filterForItemStacks(valueMap.keySet());
+        Set itemStacks = filterForItemStacks(valueMap.keySet());
 
         if (valueMap != null) {
             if (energyValueBound != null) {
@@ -570,7 +574,11 @@ public class EnergyValueRegistry {
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationStackValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
-        stackValueMap.putAll(calculateStackValueMap(stackValueMap));
+        Map<WrappedStack, EnergyValue> computedStackValueMap = calculateStackValueMap(stackValueMap);
+        for (WrappedStack wrappedStack : computedStackValueMap.keySet()) {
+            stackValueMap.put(wrappedStack, computedStackValueMap.get(wrappedStack));
+        }
+//        stackValueMap.putAll(calculateStackValueMap(stackValueMap));
 
         // Load in post calculation value assignments from file
         fileValueMap = null;
@@ -633,25 +641,26 @@ public class EnergyValueRegistry {
             tempComputedMap = new TreeMap<>(computedMap);
             for (WrappedStack recipeOutput : RecipeRegistry.INSTANCE.getRecipeMappings().keySet()) {
 
+                WrappedStack unitWrappedStack = WrappedStack.wrap(recipeOutput, 1);
                 // We won't attempt to recalculate values that already have a pre-calculation value assignment
-                if (!stackValueMap.containsKey(WrappedStack.wrap(recipeOutput, 1))) {
+                if (!stackValueMap.containsKey(unitWrappedStack)) {
                     for (Set<WrappedStack> recipeInputs : RecipeRegistry.INSTANCE.getRecipeMappings().get(recipeOutput)) {
 
-                        EnergyValue currentOutputValue = getEnergyValue(tempComputedMap, WrappedStack.wrap(recipeOutput, 1), false);
+                        EnergyValue currentOutputValue = getEnergyValue(tempComputedMap, unitWrappedStack, false);
                         EnergyValue computedOutputValue = computeFromInputs(tempComputedMap, recipeOutput, recipeInputs);
 
                         if (computedOutputValue != null && computedOutputValue.compareTo(currentOutputValue) < 0) {
 
-                            uncomputedStacks.remove(WrappedStack.wrap(recipeOutput, 1));
+                            uncomputedStacks.remove(unitWrappedStack);
 
                             if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, WrappedStack.wrap(recipeOutput, 1), recipeInputs, recipeOutput);
+                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, unitWrappedStack, recipeInputs, recipeOutput);
                             }
 
-                            tempComputedMap.put(WrappedStack.wrap(recipeOutput), computedOutputValue);
+                            tempComputedMap.put(unitWrappedStack, computedOutputValue);
                         }
                         else if (computedOutputValue != null) {
-                            uncomputedStacks.add(WrappedStack.wrap(recipeOutput, 1));
+                            uncomputedStacks.add(unitWrappedStack);
                         }
                     }
                 }
@@ -691,6 +700,22 @@ public class EnergyValueRegistry {
             }
         }
         valueStackMap = ImmutableSortedMap.copyOf(tempValueMap);
+    }
+
+    private static Set<ItemStack> filterForItemStacks(Set<WrappedStack> wrappedStacks) {
+
+        Set<ItemStack> itemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
+
+        for (WrappedStack wrappedStack : wrappedStacks) {
+            if (wrappedStack.getWrappedObject() instanceof ItemStack) {
+                itemStacks.add((ItemStack) wrappedStack.getWrappedObject());
+            }
+            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
+                itemStacks.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
+            }
+        }
+
+        return itemStacks;
     }
 
     /**

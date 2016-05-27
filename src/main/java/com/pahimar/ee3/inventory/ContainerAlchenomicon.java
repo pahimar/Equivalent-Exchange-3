@@ -6,7 +6,7 @@ import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,9 +32,8 @@ public class ContainerAlchenomicon extends ContainerEE implements IElementButton
     {
         TreeSet<ItemStack> knownTransmutations = new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR);
 
-        if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerName(itemStack))
-        {
-            String playerName = ItemHelper.getOwnerName(itemStack);
+        if (itemStack.getItem() instanceof ItemAlchenomicon && ItemStackUtils.getOwnerName(itemStack) != null) {
+            String playerName = ItemStackUtils.getOwnerName(itemStack);
             knownTransmutations.addAll(PlayerKnowledgeRegistryProxy.getKnownItemStacks(playerName));
         }
 

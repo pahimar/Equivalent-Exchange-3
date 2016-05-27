@@ -1,12 +1,13 @@
 package com.pahimar.ee3.exchange;
 
 import com.pahimar.ee3.reference.Comparators;
-import com.pahimar.ee3.util.OreDictionaryHelper;
-import net.minecraft.item.ItemStack;
+import com.pahimar.ee3.util.FilterUtils;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 
 public final class OreStack implements Comparable<OreStack> {
 
@@ -60,39 +61,16 @@ public final class OreStack implements Comparable<OreStack> {
         return false;
     }
 
-    public static OreStack getOreStackFromList(Object... objects) {
-        return getOreStackFromList(Arrays.asList(objects));
+    public static OreStack getOreStackFrom(Object... objects) {
+        return getOreStackFrom(Arrays.asList(objects));
     }
 
-    public static OreStack getOreStackFromList(List<?> objectList) {
+    public static OreStack getOreStackFrom(Collection<?> objects) {
 
-        if (objectList.size() > 0) {
-            Map<String, Integer> oreNameCountMap = new TreeMap<>(Comparators.STRING_COMPARATOR);
-            for (Object listElement : objectList) {
-                if (listElement instanceof ItemStack) {
-                    ItemStack itemStack = (ItemStack) listElement;
-
-                    for (String oreName : OreDictionaryHelper.getOreNames(itemStack)) {
-                        if (oreNameCountMap.containsKey(oreName)) {
-                            oreNameCountMap.put(oreName, oreNameCountMap.get(oreName) + 1);
-                        }
-                        else {
-                            oreNameCountMap.put(oreName, 1);
-                        }
-                    }
-                }
+        for (String oreName : OreDictionary.getOreNames()) {
+            if (Comparators.ITEM_STACK_COLLECTION_COMPARATOR.compare(FilterUtils.filterForItemStacks(objects), OreDictionary.getOres(oreName)) == 0) {
+                return new OreStack(oreName, 1);
             }
-
-            List<OreStack> candidateOreStacks = oreNameCountMap.keySet().stream()
-                    .filter(oreName -> oreNameCountMap.get(oreName) == objectList.size())
-                    .map(OreStack::new)
-                    .collect(Collectors.toList());
-
-            if (candidateOreStacks.size() == 1) {
-                return candidateOreStacks.get(0);
-            }
-
-            return null;
         }
 
         return null;

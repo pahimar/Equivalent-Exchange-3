@@ -272,6 +272,8 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(new ItemStack(Blocks.double_plant, 1, 5), 32);
         add(Items.painting, 80);
         add(Items.sign, 17.333);
+        add(Items.bed, 168);
+        add(Items.item_frame, 96);
         add(Items.flower_pot, 192);
         add(new ItemStack(Blocks.skull, 1, 0), null);
         add(new ItemStack(Blocks.skull, 1, 1), null);

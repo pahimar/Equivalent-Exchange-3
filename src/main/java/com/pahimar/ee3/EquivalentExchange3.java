@@ -88,6 +88,9 @@ public class EquivalentExchange3
         // Register the GUI Handler
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
+        // Initialize the blacklist registry
+        BlacklistRegistry.INSTANCE.load();
+
         // Initialize mod tile entities
         TileEntities.init();
 
@@ -110,8 +113,6 @@ public class EquivalentExchange3
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
-        // Initialize the blacklist registry
-        BlacklistRegistry.INSTANCE.load();
         Abilities.init();
 
         // Initialize our test files

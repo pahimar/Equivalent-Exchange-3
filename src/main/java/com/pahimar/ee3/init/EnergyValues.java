@@ -12,15 +12,15 @@ import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
 
 public class EnergyValues {
 
+    private static final String[] DYES = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
+
     public static void init() {
 
         // OreDictionary assignment
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("cobblestone"), 1, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("dustRedstone"), 32, Phase.PRE_CALCULATION);
-        String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
-        for (int i = 0; i < dyes.length; i++)
-        {
-            EnergyValueRegistryProxy.setEnergyValue(new OreStack("dye" + dyes[i]), 16, Phase.PRE_CALCULATION);
+        for (int i = 0; i < DYES.length; i++) {
+            EnergyValueRegistryProxy.setEnergyValue(new OreStack("dye" + DYES[i]), 16, Phase.PRE_CALCULATION);
         }
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemDiamond"), 8192, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemEmerald"), 8192, Phase.PRE_CALCULATION);

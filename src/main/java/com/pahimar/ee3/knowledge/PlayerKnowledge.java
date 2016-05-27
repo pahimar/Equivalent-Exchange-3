@@ -1,7 +1,7 @@
 package com.pahimar.ee3.knowledge;
 
 import com.pahimar.ee3.reference.Comparators;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class PlayerKnowledge {
     public boolean isKnown(Object object) {
 
         if (object instanceof ItemStack) {
-            return knownItemStacks.contains(ItemHelper.clone((ItemStack) object, 1));
+            return knownItemStacks.contains(ItemStackUtils.clone((ItemStack) object, 1));
         }
 
         return false;
@@ -48,7 +48,7 @@ public class PlayerKnowledge {
     public void learn(Object object) {
 
         if (object instanceof ItemStack) {
-            ItemStack unitItemStack = ItemHelper.clone((ItemStack) object, 1);
+            ItemStack unitItemStack = ItemStackUtils.clone((ItemStack) object, 1);
             knownItemStacks.add(unitItemStack);
         }
     }
@@ -65,7 +65,7 @@ public class PlayerKnowledge {
     public void forget(Object object) {
 
         if (object instanceof ItemStack) {
-            ItemStack unitItemStack = ItemHelper.clone((ItemStack) object, 1);
+            ItemStack unitItemStack = ItemStackUtils.clone((ItemStack) object, 1);
             knownItemStacks.remove(unitItemStack);
         }
     }
@@ -90,7 +90,7 @@ public class PlayerKnowledge {
 
         stringBuilder.append("[");
         for (ItemStack itemStack : knownItemStacks) {
-            stringBuilder.append(String.format("%s, ", ItemHelper.toString(itemStack)));
+            stringBuilder.append(String.format("%s, ", ItemStackUtils.toString(itemStack)));
         }
         stringBuilder.append("]");
 

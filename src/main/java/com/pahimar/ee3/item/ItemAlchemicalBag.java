@@ -7,7 +7,7 @@ import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.util.ColorHelper;
 import com.pahimar.ee3.util.IOwnable;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import com.pahimar.ee3.util.NBTHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -99,12 +99,12 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
         if (!world.isRemote) {
 
             // Set the owner of the bag if one doesn't exist already
-            if (!ItemHelper.hasOwnerUUID(itemStack)) {
-                ItemHelper.setOwner(itemStack, entityPlayer);
+            if (ItemStackUtils.getOwnerUUID(itemStack) == null) {
+                ItemStackUtils.setOwner(itemStack, entityPlayer);
             }
 
             // Set an UUID on the bag if one doesn't exist already
-            if (!NBTHelper.hasUUID(itemStack)) {
+            if (NBTHelper.getUUID(itemStack) == null) {
                 NBTHelper.setUUID(itemStack, UUID.randomUUID());
             }
 

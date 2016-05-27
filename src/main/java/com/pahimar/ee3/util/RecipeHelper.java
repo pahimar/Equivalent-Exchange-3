@@ -172,7 +172,7 @@ public class RecipeHelper
                         {
                             if (stack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack)
                             {
-                                if (ItemHelper.equals((ItemStack) stack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject()))
+                                if (ItemStackUtils.equals((ItemStack) stack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject()))
                                 {
                                     collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
                                     found = true;
@@ -208,6 +208,7 @@ public class RecipeHelper
      * @param objects a list of recipe inputs for an OreDictionary recipe
      * @return true if there exists no "invalid" (empty) OreDictionary entries in the provided list of recipe inputs
      */
+    // FIXME This is not working as intended
     private static boolean validateOreDictionaryRecipe(List objects)
     {
         for (Object object : objects)

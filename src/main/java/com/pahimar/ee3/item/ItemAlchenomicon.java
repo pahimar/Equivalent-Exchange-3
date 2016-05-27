@@ -9,7 +9,7 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.IOwnable;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
@@ -34,9 +34,9 @@ public class ItemAlchenomicon extends ItemEE implements IOwnable, IEnergyValuePr
     {
         if (!world.isRemote)
         {
-            if (!ItemHelper.hasOwnerUUID(itemStack))
+            if (ItemStackUtils.getOwnerUUID(itemStack) == null)
             {
-                ItemHelper.setOwner(itemStack, entityPlayer);
+                ItemStackUtils.setOwner(itemStack, entityPlayer);
                 entityPlayer.addChatComponentMessage(new ChatComponentTranslation(Messages.OWNER_SET_TO_SELF, new Object[]{itemStack.func_151000_E()}));
             }
             else

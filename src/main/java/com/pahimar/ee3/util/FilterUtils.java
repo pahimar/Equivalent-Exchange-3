@@ -2,31 +2,15 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
-import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
 
 public class FilterUtils {
 
-    public static Set<ItemStack> filterForItemStacks(Set<WrappedStack> wrappedStacks) {
 
-        Set<ItemStack> itemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
-
-        for (WrappedStack wrappedStack : wrappedStacks) {
-            if (wrappedStack.getWrappedObject() instanceof ItemStack) {
-                itemStacks.add((ItemStack) wrappedStack.getWrappedObject());
-            }
-            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
-                itemStacks.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
-            }
-        }
-
-        return itemStacks;
-    }
 
     public static Set<ItemStack> filterByDisplayName(Set<ItemStack> itemStacks, String filterString) {
         return filterByDisplayName(itemStacks, filterString, NameFilterType.STARTS_WITH, null);
@@ -112,6 +96,19 @@ public class FilterUtils {
         }
 
         return filteredSet;
+    }
+
+    public static Collection<ItemStack> filterForItemStacks(Collection<?> objects) {
+
+        Set<ItemStack> itemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
+
+        for (Object object : objects) {
+            if (object instanceof ItemStack) {
+                itemStacks.add((ItemStack) object);
+            }
+        }
+
+        return itemStacks;
     }
 
     public enum NameFilterType {

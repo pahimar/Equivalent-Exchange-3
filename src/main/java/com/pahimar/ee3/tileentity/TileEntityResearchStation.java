@@ -5,7 +5,7 @@ import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityResearchStation;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -209,7 +209,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     private boolean canLearnItemStack()
     {
         ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
-        String playerName = ItemHelper.getOwnerName(alchenomicon);
+        String playerName = ItemStackUtils.getOwnerName(alchenomicon);
 
         if (alchenomicon != null && playerName != null)
         {
@@ -222,7 +222,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     private boolean isItemStackKnown()
     {
         ItemStack alchenomicon = inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX];
-        String playerName = ItemHelper.getOwnerName(alchenomicon);
+        String playerName = ItemStackUtils.getOwnerName(alchenomicon);
 
         if (alchenomicon != null && playerName != null)
         {
@@ -236,7 +236,7 @@ public class TileEntityResearchStation extends TileEntityEE implements IInventor
     {
         if (this.canLearnItemStack())
         {
-            PlayerKnowledgeRegistryProxy.teachPlayer(ItemHelper.getOwnerName(inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
+            PlayerKnowledgeRegistryProxy.teachPlayer(ItemStackUtils.getOwnerName(inventory[ALCHENOMICON_SLOT_INVENTORY_INDEX]), inventory[ITEM_SLOT_INVENTORY_INDEX]);
 
             this.inventory[ITEM_SLOT_INVENTORY_INDEX].stackSize--;
 

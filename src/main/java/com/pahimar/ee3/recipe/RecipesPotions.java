@@ -6,8 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import java.util.Arrays;
-
 public class RecipesPotions
 {
     private static WrappedStack reagentWater = WrappedStack.wrap(new ItemStack(Blocks.water));
@@ -154,181 +152,181 @@ public class RecipesPotions
     private static WrappedStack potionInvisibilitySplashExtended = WrappedStack.wrap(new ItemStack(Items.potionitem, 1, 16462));
     private static WrappedStack potionInvisibilitySplashExtendedOutput = WrappedStack.wrap(new ItemStack(Items.potionitem, 3, 16462));
 
-    public static void registerRecipes()
-    {
-        RecipeRegistryProxy.addRecipe(bottleWater, Arrays.asList(bottleEmpty, reagentWater));
+    public void registerRecipes() {
 
-        RecipeRegistryProxy.addRecipe(potionAwkwardOutput, Arrays.asList(bottleWater, reagentNetherWart));
+        RecipeRegistryProxy.addRecipe(bottleWater, bottleEmpty, reagentWater);
 
-        RecipeRegistryProxy.addRecipe(potionNightVisionOutput, Arrays.asList(potionAwkward, reagentGoldenCarrot));
-        RecipeRegistryProxy.addRecipe(potionNightVisionOutput, Arrays.asList(potionNightVisionExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionNightVisionSplashOutput, Arrays.asList(potionNightVisionSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionNightVisionSplashOutput, Arrays.asList(potionNightVision, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionAwkwardOutput, bottleWater, reagentNetherWart);
 
-        RecipeRegistryProxy.addRecipe(potionNightVisionExtendedOutput, Arrays.asList(potionNightVision, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionNightVisionSplashExtendedOutput, Arrays.asList(potionNightVisionSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionNightVisionSplashExtendedOutput, Arrays.asList(potionNightVisionExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionNightVisionOutput, potionAwkward, reagentGoldenCarrot);
+        RecipeRegistryProxy.addRecipe(potionNightVisionOutput, potionNightVisionExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionNightVisionSplashOutput, potionNightVisionSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionNightVisionSplashOutput, potionNightVision, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionInvisibilityOutput, Arrays.asList(potionNightVision, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionInvisibilityOutput, Arrays.asList(potionInvisibilityExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, Arrays.asList(potionNightVisionSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, Arrays.asList(potionInvisibilitySplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, Arrays.asList(potionInvisibility, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionNightVisionExtendedOutput, potionNightVision, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionNightVisionSplashExtendedOutput, potionNightVisionSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionNightVisionSplashExtendedOutput, potionNightVisionExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionInvisibilityExtendedOutput, Arrays.asList(potionInvisibility, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionInvisibilityExtendedOutput, Arrays.asList(potionNightVisionExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, Arrays.asList(potionInvisibilitySplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, Arrays.asList(potionNightVisionSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, Arrays.asList(potionInvisibilityExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionInvisibilityOutput, potionNightVision, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionInvisibilityOutput, potionInvisibilityExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, potionNightVisionSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, potionInvisibilitySplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashOutput, potionInvisibility, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionFireResistOutput, Arrays.asList(potionAwkward, reagentMagmaCream));
-        RecipeRegistryProxy.addRecipe(potionFireResistOutput, Arrays.asList(potionFireResistExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionFireResistSplashOutput, Arrays.asList(potionFireResistSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionFireResistSplashOutput, Arrays.asList(potionFireResist, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionInvisibilityExtendedOutput, potionInvisibility, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionInvisibilityExtendedOutput, potionNightVisionExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, potionInvisibilitySplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, potionNightVisionSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionInvisibilitySplashExtendedOutput, potionInvisibilityExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionFireResistExtendedOutput, Arrays.asList(potionFireResist, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionFireResistSplashExtendedOutput, Arrays.asList(potionFireResistSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionFireResistSplashExtendedOutput, Arrays.asList(potionFireResistExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionFireResistOutput, potionAwkward, reagentMagmaCream);
+        RecipeRegistryProxy.addRecipe(potionFireResistOutput, potionFireResistExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionFireResistSplashOutput, potionFireResistSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionFireResistSplashOutput, potionFireResist, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionSlownessOutput, Arrays.asList(potionFireResist, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessOutput, Arrays.asList(potionSlownessExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSlownessOutput, Arrays.asList(potionSwiftness, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessOutput, Arrays.asList(potionSwiftnessExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, Arrays.asList(potionFireResistSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, Arrays.asList(potionSlownessSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, Arrays.asList(potionSwiftnessSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, Arrays.asList(potionSwiftnessSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, Arrays.asList(potionSlowness, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionFireResistExtendedOutput, potionFireResist, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionFireResistSplashExtendedOutput, potionFireResistSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionFireResistSplashExtendedOutput, potionFireResistExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionSlownessExtendedOutput, Arrays.asList(potionFireResistExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessExtendedOutput, Arrays.asList(potionSwiftnessEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, Arrays.asList(potionFireResistSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, Arrays.asList(potionSwiftnessSplashEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, Arrays.asList(potionSlownessExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionSlownessOutput, potionFireResist, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessOutput, potionSlownessExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSlownessOutput, potionSwiftness, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessOutput, potionSwiftnessExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, potionFireResistSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, potionSlownessSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, potionSwiftnessSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, potionSwiftnessSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashOutput, potionSlowness, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionSwiftnessOutput, Arrays.asList(potionAwkward, reagentSugar));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashOutput, Arrays.asList(potionSwiftness, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionSlownessExtendedOutput, potionFireResistExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessExtendedOutput, potionSwiftnessEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, potionFireResistSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, potionSwiftnessSplashEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionSlownessSplashExtendedOutput, potionSlownessExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionSwiftnessExtendedOutput, Arrays.asList(potionSwiftness, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessExtendedOutput, Arrays.asList(potionSwiftnessEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, Arrays.asList(potionSwiftnessSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, Arrays.asList(potionSwiftnessSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, Arrays.asList(potionSwiftnessExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionSwiftnessOutput, potionAwkward, reagentSugar);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashOutput, potionSwiftness, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionSwiftnessEnhancedOutput, Arrays.asList(potionSwiftness, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessEnhancedOutput, Arrays.asList(potionSwiftnessExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, Arrays.asList(potionSwiftnessSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, Arrays.asList(potionSwiftnessSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, Arrays.asList(potionSwiftnessEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionSwiftnessExtendedOutput, potionSwiftness, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessExtendedOutput, potionSwiftnessEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, potionSwiftnessSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, potionSwiftnessSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashExtendedOutput, potionSwiftnessExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionHealingOutput, Arrays.asList(potionAwkward, reagentGlisteringMelon));
-        RecipeRegistryProxy.addRecipe(potionHealingOutput, Arrays.asList(potionHealingEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHealingSplashOutput, Arrays.asList(potionHealingSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHealingSplashOutput, Arrays.asList(potionHealing, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionSwiftnessEnhancedOutput, potionSwiftness, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessEnhancedOutput, potionSwiftnessExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, potionSwiftnessSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, potionSwiftnessSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionSwiftnessSplashEnhancedOutput, potionSwiftnessEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionHealingEnhancedOutput, Arrays.asList(potionHealing, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHealingSplashEnhancedOutput, Arrays.asList(potionHealingSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHealingSplashEnhancedOutput, Arrays.asList(potionHealingEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionHealingOutput, potionAwkward, reagentGlisteringMelon);
+        RecipeRegistryProxy.addRecipe(potionHealingOutput, potionHealingEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHealingSplashOutput, potionHealingSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHealingSplashOutput, potionHealing, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionHarmingOutput, Arrays.asList(potionHealing, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingOutput, Arrays.asList(potionPoison, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingOutput, Arrays.asList(potionPoisonExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingOutput, Arrays.asList(potionHarmingEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, Arrays.asList(potionHealingSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, Arrays.asList(potionPoisonSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, Arrays.asList(potionPoisonSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, Arrays.asList(potionHarmingSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, Arrays.asList(potionHarming, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionHealingEnhancedOutput, potionHealing, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHealingSplashEnhancedOutput, potionHealingSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHealingSplashEnhancedOutput, potionHealingEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, Arrays.asList(potionHealingEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, Arrays.asList(potionHarming, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, Arrays.asList(potionPoisonEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, Arrays.asList(potionHealingSplashEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, Arrays.asList(potionHarmingSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, Arrays.asList(potionPoisonSplashEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, Arrays.asList(potionHarmingEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionHarmingOutput, potionHealing, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingOutput, potionPoison, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingOutput, potionPoisonExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingOutput, potionHarmingEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, potionHealingSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, potionPoisonSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, potionPoisonSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, potionHarmingSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashOutput, potionHarming, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionPoisonOutput, Arrays.asList(potionAwkward, reagentSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashOutput, Arrays.asList(potionPoison, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, potionHealingEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, potionHarming, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHarmingEnhancedOutput, potionPoisonEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, potionHealingSplashEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, potionHarmingSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, potionPoisonSplashEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionHarmingSplashEnhancedOutput, potionHarmingEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionPoisonExtendedOutput, Arrays.asList(potionPoisonExtended, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonExtendedOutput, Arrays.asList(potionPoisonEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, Arrays.asList(potionPoisonSplashExtended, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, Arrays.asList(potionPoisonSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, Arrays.asList(potionPoisonExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionPoisonOutput, potionAwkward, reagentSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashOutput, potionPoison, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionPoisonEnhancedOutput, Arrays.asList(potionPoison, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonEnhancedOutput, Arrays.asList(potionPoisonExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, Arrays.asList(potionPoisonSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, Arrays.asList(potionPoisonSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, Arrays.asList(potionPoisonEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionPoisonExtendedOutput, potionPoisonExtended, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonExtendedOutput, potionPoisonEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, potionPoisonSplashExtended, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, potionPoisonSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashExtendedOutput, potionPoisonExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionRegenerationOutput, Arrays.asList(potionAwkward, reagentGhastTear));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashOutput, Arrays.asList(potionRegeneration, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionPoisonEnhancedOutput, potionPoison, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonEnhancedOutput, potionPoisonExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, potionPoisonSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, potionPoisonSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionPoisonSplashEnhancedOutput, potionPoisonEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionRegenerationExtendedOutput, Arrays.asList(potionRegeneration, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationExtendedOutput, Arrays.asList(potionRegenerationEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, Arrays.asList(potionRegenerationSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, Arrays.asList(potionRegenerationSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, Arrays.asList(potionRegenerationExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionRegenerationOutput, potionAwkward, reagentGhastTear);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashOutput, potionRegeneration, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionRegenerationEnhancedOutput, Arrays.asList(potionRegeneration, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationEnhancedOutput, Arrays.asList(potionRegenerationExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, Arrays.asList(potionRegenerationSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, Arrays.asList(potionRegenerationSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, Arrays.asList(potionRegenerationEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionRegenerationExtendedOutput, potionRegeneration, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationExtendedOutput, potionRegenerationEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, potionRegenerationSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, potionRegenerationSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashExtendedOutput, potionRegenerationExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionAwkward, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionRegeneration, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionRegenerationEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionStrength, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionStrengthEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionMundane, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, Arrays.asList(potionWeaknessExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionRegenerationSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionRegenerationSplashEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionStrengthSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionStrengthSplashEnhanced, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionMundaneSplash, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionWeaknessSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, Arrays.asList(potionWeakness, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionRegenerationEnhancedOutput, potionRegeneration, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationEnhancedOutput, potionRegenerationExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, potionRegenerationSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, potionRegenerationSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionRegenerationSplashEnhancedOutput, potionRegenerationEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, Arrays.asList(potionWeakness, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, Arrays.asList(potionRegenerationExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, Arrays.asList(potionStrengthExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, Arrays.asList(potionMundaneExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, Arrays.asList(potionWeaknessSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, Arrays.asList(potionRegenerationSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, Arrays.asList(potionStrengthSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, Arrays.asList(potionMundaneSplashExtended, reagentFermentedSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, Arrays.asList(potionWeaknessExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionAwkward, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionRegeneration, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionRegenerationEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionStrength, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionStrengthEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionMundane, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessOutput, potionWeaknessExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionRegenerationSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionRegenerationSplashEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionStrengthSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionStrengthSplashEnhanced, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionMundaneSplash, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionWeaknessSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashOutput, potionWeakness, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionStrengthOutput, Arrays.asList(potionAwkward, reagentBlazePowder));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashOutput, Arrays.asList(potionStrength, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, potionWeakness, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, potionRegenerationExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, potionStrengthExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessExtendedOutput, potionMundaneExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, potionWeaknessSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, potionRegenerationSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, potionStrengthSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, potionMundaneSplashExtended, reagentFermentedSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionWeaknessSplashExtendedOutput, potionWeaknessExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionStrengthEnhancedOutput, Arrays.asList(potionStrength, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthEnhancedOutput, Arrays.asList(potionStrengthExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, Arrays.asList(potionStrengthSplash, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, Arrays.asList(potionStrengthSplashExtended, reagentGlowstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, Arrays.asList(potionStrengthEnhanced, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionStrengthOutput, potionAwkward, reagentBlazePowder);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashOutput, potionStrength, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionStrengthExtendedOutput, Arrays.asList(potionStrength, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthExtendedOutput, Arrays.asList(potionStrengthEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, Arrays.asList(potionStrengthSplash, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, Arrays.asList(potionStrengthSplashEnhanced, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, Arrays.asList(potionStrengthExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionStrengthEnhancedOutput, potionStrength, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthEnhancedOutput, potionStrengthExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, potionStrengthSplash, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, potionStrengthSplashExtended, reagentGlowstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashEnhancedOutput, potionStrengthEnhanced, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionThickOutput, Arrays.asList(bottleWater, reagentGlowstoneDust));
+        RecipeRegistryProxy.addRecipe(potionStrengthExtendedOutput, potionStrength, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthExtendedOutput, potionStrengthEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, potionStrengthSplash, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, potionStrengthSplashEnhanced, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionStrengthSplashExtendedOutput, potionStrengthExtended, reagentGunpowder);
 
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentSugar));
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentGlisteringMelon));
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentSpiderEye));
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentBlazePowder));
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentMagmaCream));
-        RecipeRegistryProxy.addRecipe(potionMundaneOutput, Arrays.asList(bottleWater, reagentGhastTear));
-        RecipeRegistryProxy.addRecipe(potionMundaneSplashOutput, Arrays.asList(potionMundane, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionThickOutput, bottleWater, reagentGlowstoneDust);
 
-        RecipeRegistryProxy.addRecipe(potionMundaneExtendedOutput, Arrays.asList(bottleWater, reagentRedstoneDust));
-        RecipeRegistryProxy.addRecipe(potionMundaneSplashExtendedOutput, Arrays.asList(potionMundaneExtended, reagentGunpowder));
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentSugar);
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentGlisteringMelon);
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentSpiderEye);
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentBlazePowder);
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentMagmaCream);
+        RecipeRegistryProxy.addRecipe(potionMundaneOutput, bottleWater, reagentGhastTear);
+        RecipeRegistryProxy.addRecipe(potionMundaneSplashOutput, potionMundane, reagentGunpowder);
+
+        RecipeRegistryProxy.addRecipe(potionMundaneExtendedOutput, bottleWater, reagentRedstoneDust);
+        RecipeRegistryProxy.addRecipe(potionMundaneSplashExtendedOutput, potionMundaneExtended, reagentGunpowder);
     }
 }

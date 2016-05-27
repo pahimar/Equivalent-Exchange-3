@@ -226,11 +226,9 @@ public class BlacklistRegistry {
 
         if (shouldSave) {
             if (blacklist == Blacklist.KNOWLEDGE) {
-                LogHelper.trace(BLACKLIST_MARKER, "Saving player knowledge blacklist to {}", knowledgeBlacklistFile.getAbsolutePath());
                 SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
             }
             else if (blacklist == Blacklist.EXCHANGE) {
-                LogHelper.trace(BLACKLIST_MARKER, "Saving exchange blacklist to {}", exchangeBlacklistFile.getAbsolutePath());
                 SerializationHelper.writeJsonFile(exchangeBlacklistFile, SerializationHelper.GSON.toJson(exchangeBlacklist));
             }
         }

@@ -6,10 +6,45 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Set;
 
 public class Comparators {
+
+    public static final Comparator<Collection<ItemStack>> ITEM_STACK_COLLECTION_COMPARATOR = new Comparator<Collection<ItemStack>>() {
+        @Override
+        public int compare(Collection<ItemStack> o1, Collection<ItemStack> o2) {
+
+            if (o1 != null && o2 != null) {
+                if (o1.size() == o2.size()) {
+                    if (o1.containsAll(o2)) {
+                        if (o2.containsAll(o1)) {
+                            return 0;
+                        }
+                        else {
+                            return 1;
+                        }
+                    }
+                    else {
+                        return -1;
+                    }
+                }
+                else {
+                    return o1.size() - o2.size();
+                }
+            }
+            else if (o1 != null) {
+                return -1;
+            }
+            else if (o2 != null) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+    };
 
     public static final Comparator<Set<WrappedStack>> WRAPPED_STACK_SET_COMPARATOR = new Comparator<Set<WrappedStack>>() {
         @Override

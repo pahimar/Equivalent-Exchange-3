@@ -2,7 +2,7 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.item.crafting.RecipesAlchemicalBagDyes;
 import com.pahimar.ee3.util.IOwnable;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.crafting.CraftingManager;
@@ -17,7 +17,7 @@ public class CraftingHandler
     @SubscribeEvent
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
         if (event.crafting.getItem() instanceof IOwnable) {
-            ItemHelper.setOwner(event.crafting, event.player);
+            ItemStackUtils.setOwner(event.crafting, event.player);
         }
     }
 }

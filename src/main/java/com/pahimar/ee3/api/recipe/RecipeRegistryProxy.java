@@ -3,16 +3,16 @@ package com.pahimar.ee3.api.recipe;
 import com.pahimar.ee3.EquivalentExchange3;
 import cpw.mods.fml.common.Mod;
 
+import java.util.Arrays;
 import java.util.List;
 
 public final class RecipeRegistryProxy {
 
-    /**
-     *
-     * @param recipeOutput
-     * @param recipeInputList
-     */
-    public static void addRecipe(Object recipeOutput, List<?> recipeInputList) {
+    public static void addRecipe(Object recipeOutput, Object ... recipeInputs) { // TODO 1.9, List -> Collection
+        addRecipe(recipeOutput, Arrays.asList(recipeInputs));
+    }
+
+    public static void addRecipe(Object recipeOutput, List<?> recipeInputList) { // TODO 1.9, List -> Collection
 
         init();
 

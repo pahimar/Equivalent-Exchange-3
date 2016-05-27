@@ -15,7 +15,7 @@ import com.pahimar.ee3.network.message.MessagePlayerKnowledge;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
-import com.pahimar.ee3.util.ItemHelper;
+import com.pahimar.ee3.util.ItemStackUtils;
 import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -48,9 +48,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         if (tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX) != null)
         {
             ItemStack itemStack = tileEntityTransmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX);
-            if (itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerName(itemStack))
-            {
-                knownTransmutations.addAll(PlayerKnowledgeRegistryProxy.getKnownItemStacks(ItemHelper.getOwnerName(itemStack)));
+            if (itemStack.getItem() instanceof ItemAlchenomicon && ItemStackUtils.getOwnerName(itemStack) != null) {
+                knownTransmutations.addAll(PlayerKnowledgeRegistryProxy.getKnownItemStacks(ItemStackUtils.getOwnerName(itemStack)));
             }
         }
         inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
@@ -348,7 +347,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 itemStack1.stackSize = 0;
                 slot.onSlotChanged();
             }
-            else if (slot.isItemValid(itemStack1) && ItemHelper.equalsIgnoreStackSize(itemStack1, stackInSlot)) {
+            else if (slot.isItemValid(itemStack1) && ItemStackUtils.equalsIgnoreStackSize(itemStack1, stackInSlot)) {
 
                 int slotStackSizeLimit = Math.min(stackInSlot.getMaxStackSize(), slot.getSlotStackLimit());
                 int combinedStackSize = stackInSlot.stackSize + itemStack1.stackSize;
@@ -373,7 +372,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
 
 //        transmutationOutputSlot.onPickupFromSlot(entityPlayer, new ItemStack(itemStack.getItem(), numTransmuted));
-        transmutationOutputSlot.onPickupFromSlot(entityPlayer, ItemHelper.clone(itemStack, numTransmuted));
+        transmutationOutputSlot.onPickupFromSlot(entityPlayer, ItemStackUtils.clone(itemStack, numTransmuted));
 
         return false;
     }
@@ -476,7 +475,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet();
             this.containerTransmutationTablet.updateInventory();
 
-            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerUUID(itemStack))
+            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemStackUtils.getOwnerUUID(itemStack) != null)
             {
                 PacketHandler.INSTANCE.sendToAllAround(new MessagePlayerKnowledge(this.containerTransmutationTablet.tileEntityTransmutationTablet, null), new NetworkRegistry.TargetPoint(this.tileEntityTransmutationTablet.getWorldObj().provider.dimensionId, (double) this.tileEntityTransmutationTablet.xCoord, (double) this.tileEntityTransmutationTablet.yCoord, (double) this.tileEntityTransmutationTablet.zCoord, 5d));
             }
@@ -487,9 +486,9 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         {
             super.putStack(itemStack);
 
-            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemHelper.hasOwnerName(itemStack))
+            if (!this.tileEntityTransmutationTablet.getWorldObj().isRemote && itemStack != null && itemStack.getItem() instanceof ItemAlchenomicon && ItemStackUtils.getOwnerName(itemStack) != null)
             {
-                Set<ItemStack> knownTransmutations = PlayerKnowledgeRegistryProxy.getKnownItemStacks(ItemHelper.getOwnerName(itemStack));
+                Set<ItemStack> knownTransmutations = PlayerKnowledgeRegistryProxy.getKnownItemStacks(ItemStackUtils.getOwnerName(itemStack));
                 this.containerTransmutationTablet.inventoryTransmutationTablet = new InventoryTransmutationTablet(knownTransmutations);
                 this.containerTransmutationTablet.updateInventory();
                 PacketHandler.INSTANCE.sendToAllAround(new MessagePlayerKnowledge(this.containerTransmutationTablet.tileEntityTransmutationTablet, knownTransmutations), new NetworkRegistry.TargetPoint(this.tileEntityTransmutationTablet.getWorldObj().provider.dimensionId, (double) this.tileEntityTransmutationTablet.xCoord, (double) this.tileEntityTransmutationTablet.yCoord, (double) this.tileEntityTransmutationTablet.zCoord, 5d));

@@ -69,9 +69,9 @@ public class RecipeRegistry {
 
     public void registerVanillaRecipes() {
 
-        RecipesVanilla.registerRecipes();
-        RecipesFluidContainers.registerRecipes();
-        RecipesPotions.registerRecipes();
+        new RecipesVanilla().registerRecipes();
+        new RecipesFluidContainers().registerRecipes();
+        new RecipesPotions().registerRecipes();
     }
 
     public Multimap<WrappedStack, Set<WrappedStack>> getRecipeMappings() {
