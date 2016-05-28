@@ -178,14 +178,12 @@ public class BlacklistRegistry {
     public void load() {
 
         if (knowledgeBlacklistFile != null) {
-            LogHelper.trace(BLACKLIST_MARKER, "Loading player knowledge blacklist from {}", knowledgeBlacklistFile.getAbsolutePath());
             Set<WrappedStack> knowledgeBlacklistSet = SerializationHelper.readSetFromFile(knowledgeBlacklistFile);
             knowledgeBlacklist.clear();
             knowledgeBlacklist.addAll(knowledgeBlacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
         }
 
         if (exchangeBlacklistFile != null) {
-            LogHelper.trace(BLACKLIST_MARKER, "Loading exchange blacklist from {}", exchangeBlacklistFile.getAbsolutePath());
             Set<WrappedStack> exchangeBlacklistSet = SerializationHelper.readSetFromFile(exchangeBlacklistFile);
             exchangeBlacklist.clear();
             exchangeBlacklist.addAll(exchangeBlacklistSet.stream().filter(wrappedStack -> wrappedStack != null).collect(Collectors.toList()));
@@ -225,10 +223,10 @@ public class BlacklistRegistry {
     public void save(Blacklist blacklist) {
 
         if (shouldSave) {
-            if (blacklist == Blacklist.KNOWLEDGE) {
+            if (blacklist == Blacklist.KNOWLEDGE && knowledgeBlacklistFile != null) {
                 SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
             }
-            else if (blacklist == Blacklist.EXCHANGE) {
+            else if (blacklist == Blacklist.EXCHANGE && exchangeBlacklistFile != null) {
                 SerializationHelper.writeJsonFile(exchangeBlacklistFile, SerializationHelper.GSON.toJson(exchangeBlacklist));
             }
         }
@@ -239,7 +237,7 @@ public class BlacklistRegistry {
      */
     public void saveAll() {
 
-        if (shouldSave) {
+        if (shouldSave && knowledgeBlacklistFile != null && exchangeBlacklistFile != null) {
             LogHelper.trace(BLACKLIST_MARKER, "Saving all blacklists to disk", exchangeBlacklistFile.getAbsolutePath());
             SerializationHelper.writeJsonFile(knowledgeBlacklistFile, SerializationHelper.GSON.toJson(knowledgeBlacklist));
             SerializationHelper.writeJsonFile(exchangeBlacklistFile, SerializationHelper.GSON.toJson(exchangeBlacklist));
