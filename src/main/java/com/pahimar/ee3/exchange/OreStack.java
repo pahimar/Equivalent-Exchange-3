@@ -50,6 +50,11 @@ public final class OreStack implements Comparable<OreStack> {
         this.stackSize = stackSize;
     }
 
+    public OreStack(OreStack oreStack) {
+        this.oreName = oreStack.oreName;
+        this.stackSize = oreStack.stackSize;
+    }
+
     public static boolean compareOreNames(OreStack oreStack1, OreStack oreStack2) {
 
         if (oreStack1 != null && oreStack2 != null) {

@@ -50,7 +50,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         }
         else if (object instanceof OreStack) {
 
-            OreStack oreStack = (OreStack) object;
+            OreStack oreStack = new OreStack((OreStack) object);
             stackSize = oreStack.stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
@@ -124,16 +124,14 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         }
         else if (object instanceof OreStack) {
 
-            OreStack oreStack = (OreStack) object;
+            OreStack oreStack = new OreStack((OreStack) object);
             this.stackSize = stackSize;
             oreStack.stackSize = 1;
             wrappedStack = oreStack;
         }
         else if (object instanceof ArrayList) {
 
-            ArrayList<?> objectList = (ArrayList<?>) object;
-
-            OreStack possibleOreStack = OreStack.getOreStackFrom(objectList);
+            OreStack possibleOreStack = OreStack.getOreStackFrom((ArrayList<?>) object);
 
             if (possibleOreStack != null) {
 
@@ -149,7 +147,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         }
         else if (object instanceof FluidStack) {
 
-            FluidStack fluidStack = (FluidStack) object;
+            FluidStack fluidStack = ((FluidStack) object).copy();
             this.stackSize = stackSize;
             fluidStack.amount = 1;
             wrappedStack = fluidStack;
