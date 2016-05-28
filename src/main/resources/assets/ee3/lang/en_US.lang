@@ -1,7 +1,5 @@
 # Configuration (Energy Value Options)
 energy_value=Energy Value Options
-energy_value.sync_threshold.label=Sync Threshold
-energy_value.sync_threshold.comment=The number of seconds a player must wait before they can sync their energy values for objects with the server again
 energy_value.regenerate_values_when.label=Regenerate Energy Values When
 energy_value.regenerate_values_when.comment=When to regenerate energy values for objects. Options are "Always" (every time Minecraft starts) or "As Needed" (whenever the mod cannot the calculated energy values file).
 energy_value.debug_logging_enabled.label=Enable Debug Logging
@@ -17,8 +15,10 @@ player_knowledge=Player Knowledge Options
 player_knowledge.use_template.label=Use Knowledge Template
 player_knowledge.use_template.comment=Whether or not to use the player knowledge template. The template allows players to start with some items already researched
 
-general.abilities.onlyLoadFile.label=Only load Abilities file
-general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
+# Server Options
+server=Server Options
+server.sync_threshold.label=Sync Threshold
+server.sync_threshold.comment=The number of seconds a player must wait before they can sync their energy values for objects with the server again
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
@@ -89,7 +89,7 @@ tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
 tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
 tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
 tile.ee3:aludel.name=Aludel Base
-tile.ee3:calcinator.name=Calcinator
+tile.ee3:calcinator.name=Calciner
 tile.ee3:chalk.name=Chalk
 tile.ee3:glassBell.name=Glass Bell
 tile.ee3:researchStation.name=Research Station

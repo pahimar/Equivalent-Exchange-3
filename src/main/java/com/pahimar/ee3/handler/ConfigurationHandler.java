@@ -16,6 +16,7 @@ public class ConfigurationHandler {
     private static final String CATEGORY_SOUND = "general.sound";
     private static final String CATEGORY_ENERGY_VALUE = "general.energy_value";
     private static final String CATEGORY_PLAYER_KNOWLEDGE = "general.player_knowledge";
+    private static final String CATEGORY_SERVER = "general.server";
 
     public static void init(File configFile) {
 
@@ -28,13 +29,13 @@ public class ConfigurationHandler {
     private static void loadConfiguration() {
 
         Settings.serverSyncThreshold = configuration.getInt(
-                Settings.ENERGY_VALUE_SYNC_THRESHOLD_NAME,
-                CATEGORY_ENERGY_VALUE,
-                Settings.ENERGY_VALUE_SYNC_THRESHOLD_DEFAULT,
-                Settings.ENERGY_VALUE_SYNC_THRESHOLD_MIN,
-                Settings.ENERGY_VALUE_SYNC_THRESHOLD_MAX,
-                StatCollector.translateToLocal(Settings.ENERGY_VALUE_SYNC_THRESHOLD_COMMENT),
-                Settings.ENERGY_VALUE_SYNC_THRESHOLD_LABEL);
+                Settings.SERVER_SYNC_THRESHOLD_NAME,
+                CATEGORY_SERVER,
+                Settings.SERVER_SYNC_THRESHOLD_DEFAULT,
+                Settings.SERVER_SYNC_THRESHOLD_MIN,
+                Settings.SERVER_SYNC_THRESHOLD_MAX,
+                StatCollector.translateToLocal(Settings.SERVER_SYNC_THRESHOLD_COMMENT),
+                Settings.SERVER_SYNC_THRESHOLD_LABEL);
 
         Settings.regenerateEnergyValuesWhen = ConfigurationHelper.getString(configuration,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_NAME,
@@ -66,13 +67,6 @@ public class ConfigurationHandler {
                 StatCollector.translateToLocal(Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT),
                 Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL);
 
-        Settings.onlyLoadFile = configuration.getBoolean(
-                Settings.ABILITIES_ONLY_LOAD_FILE_NAME,
-                Configuration.CATEGORY_GENERAL,
-                false,
-                StatCollector.translateToLocal(Settings.ABILITIES_ONLY_LOAD_FILE_COMMENT),
-                Settings.ABILITIES_ONLY_LOAD_FILE_LABEL);
-
         if (configuration.hasChanged()) {
             configuration.save();
         }
@@ -89,12 +83,12 @@ public class ConfigurationHandler {
     public static class Settings {
 
         public static int serverSyncThreshold;
-        private static final String ENERGY_VALUE_SYNC_THRESHOLD_NAME = "sync_threshold";
-        private static final String ENERGY_VALUE_SYNC_THRESHOLD_LABEL = "energy_value.sync_threshold.label";
-        private static final String ENERGY_VALUE_SYNC_THRESHOLD_COMMENT = "energy_value.sync_threshold.comment";
-        private static final int ENERGY_VALUE_SYNC_THRESHOLD_DEFAULT = 5;
-        private static final int ENERGY_VALUE_SYNC_THRESHOLD_MIN = 0;
-        private static final int ENERGY_VALUE_SYNC_THRESHOLD_MAX = Short.MAX_VALUE;
+        private static final String SERVER_SYNC_THRESHOLD_NAME = "sync_threshold";
+        private static final String SERVER_SYNC_THRESHOLD_LABEL = "server.sync_threshold.label";
+        private static final String SERVER_SYNC_THRESHOLD_COMMENT = "server.sync_threshold.comment";
+        private static final int SERVER_SYNC_THRESHOLD_DEFAULT = 5;
+        private static final int SERVER_SYNC_THRESHOLD_MIN = 0;
+        private static final int SERVER_SYNC_THRESHOLD_MAX = Short.MAX_VALUE;
 
         public static String regenerateEnergyValuesWhen;
         private static final String ENERGY_VALUE_REGENERATE_WHEN_NAME = "regenerate_values_when";
@@ -121,10 +115,5 @@ public class ConfigurationHandler {
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL = "player_knowledge.use_template.label";
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT = "player_knowledge.use_template.comment";
         private static final boolean USE_PLAYER_KNOWLEDGE_TEMPLATE_DEFAULT = true;
-
-        public static boolean onlyLoadFile;
-        private static final String ABILITIES_ONLY_LOAD_FILE_NAME = "abilities.onlyLoadFile";
-        private static final String ABILITIES_ONLY_LOAD_FILE_LABEL = "general.abilities.onlyLoadFile.label";
-        private static final String ABILITIES_ONLY_LOAD_FILE_COMMENT = "general.abilities.onlyLoadFile.comment";
     }
 }
