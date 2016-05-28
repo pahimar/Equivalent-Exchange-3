@@ -420,9 +420,9 @@ public class EnergyValueRegistry {
     public EnergyValue getEnergyValueForStack(Object object, boolean strict) {
 
         WrappedStack wrappedObject = WrappedStack.wrap(object);
-
-        if (wrappedObject != null && getEnergyValue(object, strict) != null) {
-            return new EnergyValue(getEnergyValue(object, strict).getValue() * wrappedObject.getStackSize());
+        EnergyValue energyValue = getEnergyValue(object, strict);
+        if (wrappedObject != null && energyValue != null) {
+            return new EnergyValue(energyValue.getValue() * wrappedObject.getStackSize());
         }
 
         return null;
