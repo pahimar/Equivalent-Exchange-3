@@ -24,6 +24,7 @@ import org.apache.logging.log4j.MarkerManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
 
@@ -114,11 +115,38 @@ public class EnergyValueRegistry {
 
             if (valueMap != null && !valueMap.isEmpty()) {
 
-                // First check for a direct energy value mapping to the wrapped object
                 /**
-                 * FIXME If the object being checked has a WILD_CARD meta value, then it will match any similar object.
-                 * We must ensure that it returns the LOWEST possible value from the map
+                 * First check to see if the object is a WILDCARD_VALUE ItemStack, as if it is it will match any similar
+                 * ItemStack. If it is check to see how many objects it matches in the given map. If there is at least
+                 * one similar object found, find the lowest energy value out of all the similar objects
                  */
+                if (wrappedObject instanceof ItemStack && ((ItemStack) wrappedObject).getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+
+                    Set<WrappedStack> equivalentStacks = valueMap.keySet().stream()
+                            .filter(wrappedStack::equals)
+                            .filter(wrappedStack1 -> wrappedStack1.getWrappedObject() instanceof ItemStack)
+                            .filter(wrappedStack1 -> ((ItemStack) wrappedStack1.getWrappedObject()).getItemDamage() != OreDictionary.WILDCARD_VALUE)
+                            .collect(Collectors.toCollection(TreeSet::new));
+
+                    if (equivalentStacks.size() >= 1) {
+                        EnergyValue lowestValue = null;
+
+                        for (WrappedStack wrappedStack1 : equivalentStacks) {
+                            EnergyValue currentValue = getEnergyValue(valueMap, wrappedStack1, strict);
+
+                            if (lowestValue == null) {
+                                lowestValue = currentValue;
+                            }
+                            else if (currentValue.compareTo(lowestValue) < 0) {
+                                lowestValue = currentValue;
+                            }
+                        }
+
+                        return lowestValue;
+                    }
+                }
+
+                // Check for an exact mapping
                 if (valueMap.containsKey(wrappedStack)) {
                     return valueMap.get(wrappedStack);
                 }
