@@ -26,7 +26,7 @@ public class ItemToolModalEE extends ItemToolEE implements IModalTool
     @Override
     public ToolMode getCurrentToolMode(ItemStack itemStack)
     {
-        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
+        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) != null && NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
         {
             return ToolMode.TYPES[NBTHelper.getShort(itemStack, Names.NBT.MODE)];
         }
