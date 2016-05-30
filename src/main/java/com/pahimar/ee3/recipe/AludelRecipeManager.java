@@ -47,7 +47,7 @@ public class AludelRecipeManager
     {
         if (!aludelRecipes.contains(recipeAludel))
         {
-            LogHelper.trace(RecipeRegistry.RECIPE_MARKER, "[{}] Mod with ID '%s' added Aludel recipe '%s'", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel);
+            LogHelper.trace(RecipeRegistry.RECIPE_MARKER, "[{}] Mod with ID '{}' added Aludel recipe '{}'", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel);
             aludelRecipes.add(recipeAludel);
         }
     }
