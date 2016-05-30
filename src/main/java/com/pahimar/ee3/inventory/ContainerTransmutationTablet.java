@@ -1,6 +1,5 @@
 package com.pahimar.ee3.inventory;
 
-import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
@@ -11,23 +10,19 @@ import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
-import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessagePlayerKnowledge;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemStackUtils;
-import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.containers.LinearProgressHandler;
-import com.pahimar.ee3.util.containers.ProgressMessage;
 import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -46,21 +41,11 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
     private EnergyValue energyValue;
     private String searchTerm;
     private int sortOption, sortOrder, scrollBarPosition;
-    private LinearProgressHandler<ProgressUpdate> progressHandler;
 
     public ContainerTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet transmutationTablet) {
 
         this.transmutationTablet = transmutationTablet;
         this.world = transmutationTablet.getWorldObj();
-
-        if (EquivalentExchange3.proxy.getClientProxy() != null) {
-            this.progressHandler = new LinearProgressHandler<ProgressUpdate>(ProgressUpdate.class) {
-                @Override
-                public void handle(ProgressMessage<ProgressUpdate> message) {
-                    handleProgressUpdate(message);
-                }
-            };
-        }
 
         handleTomeSync(transmutationTablet.getStackInSlot(TileEntityTransmutationTablet.ALCHENOMICON_INDEX));
 
@@ -124,19 +109,49 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         super.detectAndSendChanges();
 
-        this.updateInventory();
-
         EnergyValue tileEnergyValue = transmutationTablet.getAvailableEnergy();
-        if (energyValue.compareTo(tileEnergyValue) != 0) {
-            energyValue = tileEnergyValue;
-            ProgressUpdate.getMessage(ProgressUpdate.EnergyUpdate, tileEnergyValue.getValue()).send(this, this.crafters);
+        for (Object crafter : this.crafters) {
+
+            ICrafting iCrafting = (ICrafting) crafter;
+
+            if (energyValue.compareTo(tileEnergyValue) != 0) {
+                energyValue = tileEnergyValue;
+
+                int energyValueAsInt = Float.floatToRawIntBits(tileEnergyValue.getValue());
+                iCrafting.sendProgressBarUpdate(this, 0, energyValueAsInt & 0xffff);
+                iCrafting.sendProgressBarUpdate(this, 1, energyValueAsInt >>> 16);
+            }
         }
+
+        this.updateInventory();
     }
 
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int valueType, int updatedValue) {
 
-        progressHandler.handle(valueType, updatedValue);
+        if (valueType == 0) {
+            int energyValueAsInt = Float.floatToRawIntBits(energyValue.getValue());
+            energyValueAsInt = (energyValueAsInt & 0xffff0000) | updatedValue;
+            energyValue = new EnergyValue(Float.intBitsToFloat(energyValueAsInt));
+        }
+        else if (valueType == 1) {
+            int energyValueAsInt = Float.floatToRawIntBits(energyValue.getValue());
+            energyValueAsInt = (energyValueAsInt & 0xffff) | (updatedValue << 16);
+            energyValue = new EnergyValue(Float.intBitsToFloat(energyValueAsInt));
+        }
+        else if (valueType == 2) {
+            sortOption = updatedValue;
+        }
+        else if (valueType == 3) {
+            scrollBarPosition = updatedValue;
+        }
+        else if (valueType == 4) {
+            sortOrder = updatedValue;
+        }
+
+        if (valueType >= 0 && valueType <= 4) {
+            updateInventory();
+        }
     }
 
     private void sendKnowledgeToClient(Collection<ItemStack> knownItemStacks) {
@@ -170,31 +185,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void handleProgressUpdate(ProgressMessage<ProgressUpdate> message) {
-
-        switch (message.getType()) {
-            case EnergyUpdate: {
-                energyValue = new EnergyValue(message.getFloat());
-                LogHelper.trace("Got energy: {}", message.getFloat());
-                break;
-            }
-            case SortTypeUpdate: {
-                sortOption = message.getInt();
-                break;
-            }
-            case SortOrderUpdate: {
-                sortOrder = message.getInt();
-                break;
-            }
-            case ScrollBarUpdate: {
-                break;
-            }
-        }
-
-        updateInventory();
-    }
-
     @Override
     public void handleElementTextFieldUpdate(String elementName, String updatedText) {
 
@@ -209,14 +199,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         if (elementName.equals("scrollBar")) {
             scrollBarPosition = elementValue;
-            updateInventory();
-        }
-    }
-
-    public void handlePlayerKnowledgeUpdate(PlayerKnowledge playerKnowledge) {
-
-        if (playerKnowledge != null) {
-            inventoryTransmutationTablet = new InventoryTransmutationTablet(playerKnowledge.getKnownItemStacks());
             updateInventory();
         }
     }
@@ -256,12 +238,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
         int startIndex = Math.max(0, Math.min(adjustedStartIndex, filteredList.size() - 30));
         int endIndex = Math.min(adjustedStartIndex + 30, filteredList.size());
-
-        if (world.isRemote) {
-            LogHelper.trace("updateInventory called");
-            LogHelper.trace(String.format("known transmutations count: %d", this.inventoryTransmutationTablet.getKnownTransmutations().size()));
-            LogHelper.trace(String.format("(from, to): (%d, %d)", startIndex, endIndex));
-        }
 
         filteredList.subList(startIndex, endIndex).toArray(newInventory);
 
@@ -387,7 +363,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             currentSlotIndex += ascending ? -1 : 1;
         }
 
-        transmutationOutputSlot.onPickupFromSlot(entityPlayer, ItemStackUtils.clone(itemStack, numTransmuted));
+        ((SlotTabletOutput) transmutationOutputSlot).onShiftPickupFromSlot(entityPlayer, ItemStackUtils.clone(itemStack, numTransmuted));
 
         return false;
     }
@@ -407,8 +383,12 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             sortOrder = 1 - sortOrder; // Toggle between 0 and 1
         }
 
-        ProgressUpdate.getMessage(ProgressUpdate.SortTypeUpdate, sortOption).send(this, this.crafters);
-        ProgressUpdate.getMessage(ProgressUpdate.SortOrderUpdate, sortOrder).send(this, this.crafters);
+        for (Object crafter : this.crafters) {
+
+            ICrafting iCrafting = (ICrafting) crafter;
+            iCrafting.sendProgressBarUpdate(this, 2, sortOption);
+            iCrafting.sendProgressBarUpdate(this, 4, sortOrder);
+        }
     }
 
     @Override
@@ -472,20 +452,29 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             super.onPickupFromSlot(entityPlayer, itemStack);
 
             if (getHasStack()) {
-                containerTransmutationTablet.transmutationTablet.consumeInventoryForEnergyValue(itemStack);
+                ItemStack unitItemStack = ItemStackUtils.clone(itemStack, 1);
+                transmutationTablet.consumeInventoryForEnergyValue(unitItemStack);
             }
 
-            containerTransmutationTablet.updateInventory();
+            updateInventory();
+        }
+
+        public void onShiftPickupFromSlot(EntityPlayer entityPlayer, ItemStack itemStack) {
+
+            super.onPickupFromSlot(entityPlayer, itemStack);
+
+            if (getHasStack()) {
+                transmutationTablet.consumeInventoryForEnergyValue(itemStack);
+            }
+
+            updateInventory();
         }
 
         @Override
         public void onSlotChanged() {
 
             super.onSlotChanged();
-
-            if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-                containerTransmutationTablet.transmutationTablet.updateEnergyValueFromInventory();
-            }
+            transmutationTablet.updateEnergyValueFromInventory();
         }
 
         @Override
@@ -524,21 +513,6 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
             super.putStack(itemStack);
             this.containerTransmutationTablet.transmutationTablet.updateEnergyValueFromInventory();
             this.containerTransmutationTablet.updateInventory();
-        }
-    }
-
-    enum ProgressUpdate {
-        EnergyUpdate,
-        SortTypeUpdate,
-        SortOrderUpdate,
-        ScrollBarUpdate;
-
-        public static ProgressMessage<ProgressUpdate> getMessage(ProgressUpdate type, int data) {
-            return new ProgressMessage<>(ProgressUpdate.class, type, data);
-        }
-
-        public static ProgressMessage<ProgressUpdate> getMessage(ProgressUpdate type, float data) {
-            return new ProgressMessage<>(ProgressUpdate.class, type, data);
         }
     }
 }
