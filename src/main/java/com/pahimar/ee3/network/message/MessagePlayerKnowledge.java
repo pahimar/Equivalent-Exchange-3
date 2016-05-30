@@ -13,17 +13,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
-import java.util.Set;
+import java.util.Collection;
 
-public class MessagePlayerKnowledge implements IMessage, IMessageHandler<MessagePlayerKnowledge, IMessage>
-{
+public class MessagePlayerKnowledge implements IMessage, IMessageHandler<MessagePlayerKnowledge, IMessage> {
+
     public int xCoord, yCoord, zCoord;
     public PlayerKnowledge playerKnowledge;
 
     public MessagePlayerKnowledge(){
     }
 
-    public MessagePlayerKnowledge(TileEntityTransmutationTablet transmutationTablet, Set<ItemStack> knownItemStacks) {
+    public MessagePlayerKnowledge(TileEntityTransmutationTablet transmutationTablet, Collection<ItemStack> knownItemStacks) {
 
         if (transmutationTablet != null) {
             this.xCoord = transmutationTablet.xCoord;

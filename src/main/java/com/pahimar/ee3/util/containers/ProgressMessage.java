@@ -25,11 +25,11 @@ public class ProgressMessage<MessageType extends Enum<MessageType>> {
     }
 
     public ProgressMessage(Class<MessageType> enumClass, MessageType messageType, int data) {
-        this(enumClass, (short)messageType.ordinal(), data);
+        this(enumClass, (short) messageType.ordinal(), data);
     }
 
     public ProgressMessage(Class<MessageType> enumClass, MessageType messageType, float data) {
-        this(enumClass, (short)messageType.ordinal(), Float.floatToIntBits(data));
+        this(enumClass, (short) messageType.ordinal(), Float.floatToIntBits(data));
     }
 
     public ProgressMessage<MessageType> complete(int data) {

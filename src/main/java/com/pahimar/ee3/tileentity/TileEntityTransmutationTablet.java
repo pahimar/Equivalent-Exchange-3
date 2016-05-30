@@ -297,7 +297,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
-        return this.worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
+        return this.worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && isStructureValid() && entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
     @Override

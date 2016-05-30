@@ -56,20 +56,17 @@ public class ItemStackUtils {
     }
 
     public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer) {
+
         setOwnerName(itemStack, entityPlayer);
         setOwnerUUID(itemStack, entityPlayer);
     }
 
     public static String getOwnerName(ItemStack itemStack) {
-
-        if (NBTHelper.hasKey(itemStack, Names.NBT.OWNER)) {
-            return NBTHelper.getString(itemStack, Names.NBT.OWNER);
-        }
-
-        return null;
+        return NBTHelper.getString(itemStack, Names.NBT.OWNER);
     }
 
     public static UUID getOwnerUUID(ItemStack itemStack) {
+
         if (NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) != null && NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG) != null) {
             return new UUID(NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
         }

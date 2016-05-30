@@ -155,7 +155,7 @@ public class GuiTransmutationTablet extends GuiBase {
     {
         super.drawGuiContainerForegroundLayer(x, y);
         fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 10, 142, Integer.parseInt(Colors.PURE_WHITE, 16));
-        fontRendererObj.drawString(String.format("%s", containerTablet.tileEntityTransmutationTablet.getAvailableEnergy()), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
+        fontRendererObj.drawString(String.format("%s", containerTablet.getEnergyValue()), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
     }
 
     @Override
