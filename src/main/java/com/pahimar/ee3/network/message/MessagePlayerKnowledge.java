@@ -1,7 +1,6 @@
 package com.pahimar.ee3.network.message;
 
 import com.google.gson.JsonSyntaxException;
-import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.CompressionHelper;
@@ -11,8 +10,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 import java.util.Set;
 
@@ -95,15 +94,11 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
     public IMessage onMessage(MessagePlayerKnowledge message, MessageContext ctx) {
 
         if (message.yCoord != Integer.MIN_VALUE) {
-            if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiContainer) {
 
-                GuiContainer guiContainer = (GuiContainer) FMLClientHandler.instance().getClient().currentScreen;
+            TileEntity tileEntity = FMLClientHandler.instance().getWorldClient().getTileEntity(message.xCoord, message.yCoord, message.zCoord);
 
-                if (guiContainer.inventorySlots instanceof ContainerTransmutationTablet) {
-                    if (FMLClientHandler.instance().getWorldClient().getTileEntity(message.xCoord, message.yCoord, message.zCoord) instanceof TileEntityTransmutationTablet) {
-                        ((ContainerTransmutationTablet) guiContainer.inventorySlots).handlePlayerKnowledgeUpdate(message.playerKnowledge);
-                    }
-                }
+            if (tileEntity instanceof TileEntityTransmutationTablet) {
+                ((TileEntityTransmutationTablet) tileEntity).handlePlayerKnowledgeUpdate(message.playerKnowledge);
             }
         }
 

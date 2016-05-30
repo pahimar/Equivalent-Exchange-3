@@ -20,20 +20,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
-import java.text.DecimalFormat;
-
 @SideOnly(Side.CLIENT)
-public class GuiTransmutationTablet extends GuiBase
-{
-    private TileEntityTransmutationTablet tileEntityTransmutationTablet;
+public class GuiTransmutationTablet extends GuiBase {
+
+    private ContainerTransmutationTablet containerTablet;
 
     private ElementTextField searchTextField;
     private ElementStatefulButton sortOptionButton;
     private ElementStatefulButton sortOrderButton;
     private ElementSlider slider;
     protected int tickCount;
-
-    private static DecimalFormat energyValueDecimalFormat = new DecimalFormat("###,###,###,###,###.###");
 
     private static final int LEFT_MOUSE_BUTTON = 0;
     private static final int RIGHT_MOUSE_BUTTON = 1;
@@ -48,7 +44,7 @@ public class GuiTransmutationTablet extends GuiBase
     public GuiTransmutationTablet(InventoryPlayer inventoryPlayer, TileEntityTransmutationTablet tileEntityTransmutationTablet)
     {
         super(new ContainerTransmutationTablet(inventoryPlayer, tileEntityTransmutationTablet), Textures.Gui.TRANSMUTATION_TABLET);
-        this.tileEntityTransmutationTablet = tileEntityTransmutationTablet;
+        this.containerTablet = (ContainerTransmutationTablet) this.inventorySlots;
         xSize = 256;
         ySize = 256;
     }
@@ -159,7 +155,7 @@ public class GuiTransmutationTablet extends GuiBase
     {
         super.drawGuiContainerForegroundLayer(x, y);
         fontRendererObj.drawString(String.format("%s:", StatCollector.translateToLocal(Messages.ENERGY_VALUE)), 10, 142, Integer.parseInt(Colors.PURE_WHITE, 16));
-        fontRendererObj.drawString(String.format("%s", energyValueDecimalFormat.format(tileEntityTransmutationTablet.getAvailableEnergyValue().getValue())), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
+        fontRendererObj.drawString(String.format("%s", containerTablet.tileEntityTransmutationTablet.getAvailableEnergy()), 10, 152, Integer.parseInt(Colors.PURE_WHITE, 16));
     }
 
     @Override

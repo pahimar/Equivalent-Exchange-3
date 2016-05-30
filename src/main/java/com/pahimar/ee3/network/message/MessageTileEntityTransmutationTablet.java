@@ -1,6 +1,5 @@
 package com.pahimar.ee3.network.message;
 
-import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -14,88 +13,77 @@ import net.minecraft.tileentity.TileEntity;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class MessageTileEntityTransmutationTablet implements IMessage, IMessageHandler<MessageTileEntityTransmutationTablet, IMessage>
-{
+public class MessageTileEntityTransmutationTablet implements IMessage, IMessageHandler<MessageTileEntityTransmutationTablet, IMessage> {
+
     public NBTTagCompound tileEntityTransmutationTabletNBT;
 
-    public MessageTileEntityTransmutationTablet()
-    {
-
+    public MessageTileEntityTransmutationTablet() {
     }
 
-    public MessageTileEntityTransmutationTablet(TileEntityTransmutationTablet tileEntityTransmutationTablet)
-    {
+    public MessageTileEntityTransmutationTablet(TileEntityTransmutationTablet tileEntityTransmutationTablet) {
+
         tileEntityTransmutationTabletNBT = new NBTTagCompound();
         tileEntityTransmutationTablet.writeToNBT(tileEntityTransmutationTabletNBT);
     }
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
+    public void fromBytes(ByteBuf buf) {
+
         byte[] compressedNBT = null;
         int readableBytes = buf.readInt();
 
-        if (readableBytes > 0)
-        {
+        if (readableBytes > 0) {
             compressedNBT = buf.readBytes(readableBytes).array();
         }
 
-        if (compressedNBT != null)
-        {
-            try
-            {
+        if (compressedNBT != null) {
+
+            try {
                 this.tileEntityTransmutationTabletNBT = CompressedStreamTools.readCompressed(new ByteArrayInputStream(compressedNBT));
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void toBytes(ByteBuf buf)
-    {
+    public void toBytes(ByteBuf buf) {
+
         byte[] compressedNBT = null;
 
-        try
-        {
-            if (tileEntityTransmutationTabletNBT != null)
-            {
+        try {
+            if (tileEntityTransmutationTabletNBT != null) {
                 compressedNBT = CompressedStreamTools.compress(tileEntityTransmutationTabletNBT);
             }
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
 
-        if (compressedNBT != null)
-        {
+        if (compressedNBT != null) {
             buf.writeInt(compressedNBT.length);
             buf.writeBytes(compressedNBT);
         }
-        else
-        {
+        else {
             buf.writeInt(0);
         }
     }
 
     @Override
-    public IMessage onMessage(MessageTileEntityTransmutationTablet message, MessageContext ctx)
-    {
-        if (message.tileEntityTransmutationTabletNBT != null)
-        {
-            TileEntityAlchemyArray tileEntityAlchemyArray = new TileEntityAlchemyArray();
-            tileEntityAlchemyArray.readFromNBT(message.tileEntityTransmutationTabletNBT);
+    public IMessage onMessage(MessageTileEntityTransmutationTablet message, MessageContext ctx) {
 
-            TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord);
+        if (message.tileEntityTransmutationTabletNBT != null) {
 
-            if (tileEntity instanceof TileEntityTransmutationTablet)
-            {
+            TileEntityTransmutationTablet tileEntityTransmutationTablet = new TileEntityTransmutationTablet();
+            tileEntityTransmutationTablet.readFromNBT(message.tileEntityTransmutationTabletNBT);
+
+            TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(tileEntityTransmutationTablet.xCoord, tileEntityTransmutationTablet.yCoord, tileEntityTransmutationTablet.zCoord);
+
+            if (tileEntity instanceof TileEntityTransmutationTablet) {
                 tileEntity.readFromNBT(message.tileEntityTransmutationTabletNBT);
                 //NAME UPDATE
-                FMLClientHandler.instance().getClient().theWorld.func_147451_t(tileEntityAlchemyArray.xCoord, tileEntityAlchemyArray.yCoord, tileEntityAlchemyArray.zCoord);
+                FMLClientHandler.instance().getClient().theWorld.func_147451_t(tileEntityTransmutationTablet.xCoord, tileEntityTransmutationTablet.yCoord, tileEntityTransmutationTablet.zCoord);
             }
         }
 
