@@ -353,7 +353,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 }
                 else if (stackInSlot.stackSize < slotStackSizeLimit) {
 
-                    itemStack1.stackSize -= slotStackSizeLimit - stackInSlot.stackSize;
+                    itemStack1.stackSize = slotStackSizeLimit - stackInSlot.stackSize;
                     stackInSlot.stackSize = slotStackSizeLimit;
                     numTransmuted = itemStack1.stackSize;
                     itemStack1.stackSize = 0;
