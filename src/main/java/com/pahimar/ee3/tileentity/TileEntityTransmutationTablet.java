@@ -85,6 +85,9 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         this.playerKnowledge = playerKnowledge;
     }
 
+    /**
+     * https://github.com/pahimar/Equivalent-Exchange-3/issues/1062
+     */
     public void consumeInventoryForEnergyValue(ItemStack outputItemStack) {
 
         EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(outputItemStack);
