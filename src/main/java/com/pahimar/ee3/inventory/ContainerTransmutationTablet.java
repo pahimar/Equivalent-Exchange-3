@@ -347,7 +347,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
                 if (combinedStackSize <= slotStackSizeLimit) {
 
                     stackInSlot.stackSize = combinedStackSize;
-                    numTransmuted = stackInSlot.stackSize - itemStack1.stackSize;
+                    numTransmuted = itemStack1.stackSize;
                     itemStack1.stackSize = 0;
                     slot.onSlotChanged();
                 }
@@ -355,7 +355,8 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
                     itemStack1.stackSize -= slotStackSizeLimit - stackInSlot.stackSize;
                     stackInSlot.stackSize = slotStackSizeLimit;
-                    numTransmuted = stackInSlot.stackSize - itemStack1.stackSize;
+                    numTransmuted = itemStack1.stackSize;
+                    itemStack1.stackSize = 0;
                     slot.onSlotChanged();
                 }
             }
