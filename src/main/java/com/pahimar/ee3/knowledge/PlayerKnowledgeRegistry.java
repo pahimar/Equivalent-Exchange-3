@@ -11,6 +11,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +29,11 @@ public class PlayerKnowledgeRegistry {
     private final PlayerKnowledge templatePlayerKnowledge;
 
     public static File templatePlayerKnowledgeFile;
+
+    public static final Marker PLAYER_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_KNOWLEDGE", LogHelper.MOD_MARKER);
+    public static final Marker PLAYER_LEARN_KNOWLEDGE = MarkerManager.getMarker("EE3_PLAYER_TEACH_KNOWLEDGE", PLAYER_KNOWLEDGE_MARKER);
+    public static final Marker PLAYER_FORGET_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_FORGET_KNOWLEDGE", PLAYER_KNOWLEDGE_MARKER);
+    public static final Marker PLAYER_FORGET_ALL_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_FORGET_ALL_KNOWLEDGE", PLAYER_FORGET_KNOWLEDGE_MARKER);
 
     private PlayerKnowledgeRegistry() {
 
@@ -116,6 +123,7 @@ public class PlayerKnowledgeRegistry {
 
         if (getPlayerKnowledge(playerName) != null) {
             getPlayerKnowledge(playerName).learn(object);
+            LogHelper.trace(PLAYER_LEARN_KNOWLEDGE, "Player {} learned {}", playerName, object);
             save(playerName);
         }
     }
@@ -148,6 +156,7 @@ public class PlayerKnowledgeRegistry {
             if (playerKnowledge != null) {
                 for (Object object : objects){
                     getPlayerKnowledge(playerName).learn(object);
+                    LogHelper.trace(PLAYER_LEARN_KNOWLEDGE, "Player {} learned {}", playerName, object);
                 }
                 save(playerName);
             }
@@ -177,6 +186,7 @@ public class PlayerKnowledgeRegistry {
 
         if (getPlayerKnowledge(playerName) != null) {
             getPlayerKnowledge(playerName).forget(object);
+            LogHelper.trace(PLAYER_FORGET_KNOWLEDGE_MARKER, "Player {} forgot {}", playerName, object);
             save(playerName);
         }
     }
@@ -209,6 +219,7 @@ public class PlayerKnowledgeRegistry {
             if (playerKnowledge != null) {
                 for (Object object : objects) {
                     getPlayerKnowledge(playerName).forget(object);
+                    LogHelper.trace(PLAYER_FORGET_KNOWLEDGE_MARKER, "Player {} forgot {}", playerName, object);
                 }
                 save(playerName);
             }
@@ -237,6 +248,7 @@ public class PlayerKnowledgeRegistry {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
             if (playerName != null && !playerName.isEmpty()) {
                 playerKnowledgeMap.put(playerName, new PlayerKnowledge());
+                LogHelper.trace(PLAYER_FORGET_ALL_KNOWLEDGE_MARKER, "Player {} forget everything", playerName);
                 save(playerName);
             }
         }

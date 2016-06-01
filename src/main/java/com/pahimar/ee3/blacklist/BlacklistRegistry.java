@@ -1,9 +1,11 @@
 package com.pahimar.ee3.blacklist;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
+import com.pahimar.ee3.util.OreDictionaryHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,7 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
@@ -81,7 +84,20 @@ public class BlacklistRegistry {
                 return false;
             }
             else {
-                return !knowledgeBlacklist.contains(wrappedObject) && EnergyValueRegistryProxy.hasEnergyValue(wrappedObject);
+                if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+                    if (knowledgeBlacklist.contains(wrappedObject)) {
+                        return false;
+                    }
+                    else if (object instanceof ItemStack){
+                        Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
+                        for (String oreName : oreNames) {
+                            boolean isNotLearnable = !isLearnable(new OreStack(oreName));
+                            if (isNotLearnable) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -98,8 +114,22 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
-            return !exchangeBlacklist.contains(wrappedStack) && EnergyValueRegistryProxy.hasEnergyValue(wrappedStack);
+            WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
+
+            if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+                if (exchangeBlacklist.contains(wrappedObject)) {
+                    return false;
+                }
+                else if (object instanceof ItemStack){
+                    Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
+                    for (String oreName : oreNames) {
+                        boolean isNotLearnable = !isLearnable(new OreStack(oreName));
+                        if (isNotLearnable) {
+                            return false;
+                        }
+                    }
+                }
+            }
         }
 
         return false;
