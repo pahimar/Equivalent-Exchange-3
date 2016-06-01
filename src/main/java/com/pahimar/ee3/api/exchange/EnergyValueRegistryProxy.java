@@ -2,7 +2,7 @@ package com.pahimar.ee3.api.exchange;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.exchange.WrappedStack;
-import cpw.mods.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,10 +31,10 @@ public final class EnergyValueRegistryProxy {
         init();
 
         if (ee3Mod != null) {
-            if (phase == Phase.PRE_ASSIGNMENT || phase == Phase.PRE_CALCULATION) {
+            if (phase == Phase.PRE_CALCULATION) {
                 EE3Wrapper.ee3mod.getEnergyValueRegistry().getPreCalculationStackValueMap();
             }
-            else if (phase == Phase.POST_ASSIGNMENT || phase == Phase.POST_CALCULATION) {
+            else if (phase == Phase.POST_CALCULATION) {
                 EE3Wrapper.ee3mod.getEnergyValueRegistry().getPostCalculationStackValueMap();
             }
             else if (phase == Phase.ALL) {
@@ -91,10 +91,12 @@ public final class EnergyValueRegistryProxy {
         return null;
     }
 
+    // TODO List -> Collection
     public static List getStacksInRange(Number start, Number finish) {
         return getStacksInRange(start, finish);
     }
 
+    // TODO List -> Collection
     public static List getStacksInRange(EnergyValue start, EnergyValue finish) {
 
         init();
@@ -108,88 +110,36 @@ public final class EnergyValueRegistryProxy {
 
     /**
      *
-     * @deprecated
      * @param object
      * @param energyValue
      */
-    @Deprecated
-    public static void addPreAssignedEnergyValue(Object object, float energyValue) {
+    public static void addPreCalculationEnergyValue(Object object, Number energyValue) {
         setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
     }
 
     /**
      *
-     * @deprecated
      * @param object
      * @param energyValue
      */
-    @Deprecated
-    public static void addPreAssignedEnergyValue(Object object, EnergyValue energyValue) {
-        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param object
-     * @param energyValue
-     */
-    @Deprecated
-    public static void addPreCalculationEnergyValue(Object object, float energyValue) {
-        setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param object
-     * @param energyValue
-     */
-    @Deprecated
     public static void addPreCalculationEnergyValue(Object object, EnergyValue energyValue) {
         setEnergyValue(object, energyValue, Phase.PRE_CALCULATION);
     }
 
     /**
      *
-     * @deprecated
      * @param object
      * @param energyValue
      */
-    @Deprecated
-    public static void addPostAssignedEnergyValue(Object object, float energyValue) {
+    public static void addPostCalculationEnergyValue(Object object, Number energyValue) {
         setEnergyValue(object, energyValue);
     }
 
     /**
      *
-     * @deprecated
      * @param object
      * @param energyValue
      */
-    @Deprecated
-    public static void addPostAssignedEnergyValue(Object object, EnergyValue energyValue) {
-        setEnergyValue(object, energyValue);
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param object
-     * @param energyValue
-     */
-    @Deprecated
-    public static void addPostCalculationEnergyValue(Object object, float energyValue) {
-        setEnergyValue(object, energyValue);
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param object
-     * @param energyValue
-     */
-    @Deprecated
     public static void addPostCalculationEnergyValue(Object object, EnergyValue energyValue) {
         setEnergyValue(object, energyValue);
     }
@@ -228,11 +178,8 @@ public final class EnergyValueRegistryProxy {
     }
 
     public enum Phase {
-        @Deprecated PRE_ASSIGNMENT,
         PRE_CALCULATION,
-        @Deprecated POST_ASSIGNMENT,
         POST_CALCULATION,
-        @Deprecated RUNTIME,
         ALL
     }
 }
