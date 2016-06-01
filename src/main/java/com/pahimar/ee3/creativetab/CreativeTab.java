@@ -5,13 +5,11 @@ import com.pahimar.ee3.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTab
-{
-    public static final CreativeTabs EE3_TAB = new CreativeTabs(Reference.LOWERCASE_MOD_ID)
-    {
+public class CreativeTab {
+
+    public static final CreativeTabs EE3_TAB = new CreativeTabs(Reference.LOWERCASE_MOD_ID) {
         @Override
-        public Item getTabIconItem()
-        {
+        public Item getTabIconItem() {
             return ModItems.stonePhilosophers;
         }
     };

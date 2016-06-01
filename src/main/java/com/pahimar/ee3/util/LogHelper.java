@@ -116,8 +116,8 @@ public class LogHelper {
         all(MOD_MARKER, message);
     }
 
-    public static void all(String format, Object... pararms) {
-        all(MOD_MARKER, format, pararms);
+    public static void all(String format, Object... params) {
+        all(MOD_MARKER, format, params);
     }
 
     public static void all(String message, Throwable throwable) {
@@ -173,8 +173,8 @@ public class LogHelper {
         debug(MOD_MARKER, message);
     }
 
-    public static void debug(String format, Object... pararms) {
-        debug(MOD_MARKER, format, pararms);
+    public static void debug(String format, Object... params) {
+        debug(MOD_MARKER, format, params);
     }
 
     public static void debug(String message, Throwable throwable) {
@@ -230,8 +230,8 @@ public class LogHelper {
         error(MOD_MARKER, message);
     }
 
-    public static void error(String format, Object... pararms) {
-        error(MOD_MARKER, format, pararms);
+    public static void error(String format, Object... params) {
+        error(MOD_MARKER, format, params);
     }
 
     public static void error(String message, Throwable throwable) {
@@ -287,8 +287,8 @@ public class LogHelper {
         fatal(MOD_MARKER, message);
     }
 
-    public static void fatal(String format, Object... pararms) {
-        fatal(MOD_MARKER, format, pararms);
+    public static void fatal(String format, Object... params) {
+        fatal(MOD_MARKER, format, params);
     }
 
     public static void fatal(String message, Throwable throwable) {
@@ -344,8 +344,8 @@ public class LogHelper {
         info(MOD_MARKER, message);
     }
 
-    public static void info(String format, Object... pararms) {
-        info(MOD_MARKER, format, pararms);
+    public static void info(String format, Object... params) {
+        info(MOD_MARKER, format, params);
     }
 
     public static void info(String message, Throwable throwable) {
@@ -401,8 +401,8 @@ public class LogHelper {
         off(MOD_MARKER, message);
     }
 
-    public static void off(String format, Object... pararms) {
-        off(MOD_MARKER, format, pararms);
+    public static void off(String format, Object... params) {
+        off(MOD_MARKER, format, params);
     }
 
     public static void off(String message, Throwable throwable) {
@@ -458,8 +458,8 @@ public class LogHelper {
         trace(MOD_MARKER, message);
     }
 
-    public static void trace(String format, Object... pararms) {
-        trace(MOD_MARKER, format, pararms);
+    public static void trace(String format, Object... params) {
+        trace(MOD_MARKER, format, params);
     }
 
     public static void trace(String message, Throwable throwable) {
@@ -515,8 +515,8 @@ public class LogHelper {
         warn(MOD_MARKER, message);
     }
 
-    public static void warn(String format, Object... pararms) {
-        warn(MOD_MARKER, format, pararms);
+    public static void warn(String format, Object... params) {
+        warn(MOD_MARKER, format, params);
     }
 
     public static void warn(String message, Throwable throwable) {

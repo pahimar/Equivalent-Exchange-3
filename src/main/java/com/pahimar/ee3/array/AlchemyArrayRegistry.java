@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSortedSet;
 import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.util.LoaderHelper;
 import com.pahimar.ee3.util.LogHelper;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
