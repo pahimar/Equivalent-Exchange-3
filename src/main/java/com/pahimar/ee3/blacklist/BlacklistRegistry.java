@@ -91,8 +91,7 @@ public class BlacklistRegistry {
                     else if (object instanceof ItemStack){
                         Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
                         for (String oreName : oreNames) {
-                            boolean isNotLearnable = !isLearnable(new OreStack(oreName));
-                            if (isNotLearnable) {
+                            if (knowledgeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
                                 return false;
                             }
                         }
@@ -123,8 +122,7 @@ public class BlacklistRegistry {
                 else if (object instanceof ItemStack){
                     Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
                     for (String oreName : oreNames) {
-                        boolean isNotLearnable = !isLearnable(new OreStack(oreName));
-                        if (isNotLearnable) {
+                        if (exchangeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
                             return false;
                         }
                     }
