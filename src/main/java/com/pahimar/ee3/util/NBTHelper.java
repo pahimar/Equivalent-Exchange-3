@@ -22,13 +22,13 @@ public class NBTHelper {
     }
 
     public static boolean hasKey(ItemStack itemStack, String keyName) {
-        return itemStack != null && itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
+        return itemStack != null && itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey(keyName);
     }
 
     public static void removeTag(ItemStack itemStack, String keyName) {
 
-        if (itemStack != null && itemStack.stackTagCompound != null && keyName != null && !keyName.isEmpty()) {
-            itemStack.stackTagCompound.removeTag(keyName);
+        if (itemStack != null && itemStack.getTagCompound() != null && keyName != null && !keyName.isEmpty()) {
+            itemStack.getTagCompound().removeTag(keyName);
         }
     }
 
@@ -67,7 +67,7 @@ public class NBTHelper {
      */
     private static void initNBTTagCompound(ItemStack itemStack) {
 
-        if (itemStack != null && itemStack.stackTagCompound == null) {
+        if (itemStack != null && itemStack.getTagCompound() == null) {
             itemStack.setTagCompound(new NBTTagCompound());
         }
     }
@@ -77,7 +77,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagString) {
-                return itemStack.stackTagCompound.getString(keyName);
+                return itemStack.getTagCompound().getString(keyName);
             }
         }
 
@@ -88,7 +88,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setString(keyName, keyValue);
+            itemStack.getTagCompound().setString(keyName, keyValue);
         }
     }
 
@@ -97,7 +97,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagByte) {
-                itemStack.stackTagCompound.getBoolean(keyName);
+                itemStack.getTagCompound().getBoolean(keyName);
             }
         }
 
@@ -108,7 +108,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setBoolean(keyName, keyValue);
+            itemStack.getTagCompound().setBoolean(keyName, keyValue);
         }
     }
 
@@ -117,7 +117,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagByte) {
-                return itemStack.stackTagCompound.getByte(keyName);
+                return itemStack.getTagCompound().getByte(keyName);
             }
         }
 
@@ -128,7 +128,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setByte(keyName, keyValue);
+            itemStack.getTagCompound().setByte(keyName, keyValue);
         }
     }
 
@@ -137,7 +137,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagShort) {
-                return itemStack.stackTagCompound.getShort(keyName);
+                return itemStack.getTagCompound().getShort(keyName);
             }
         }
 
@@ -148,7 +148,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setShort(keyName, keyValue);
+            itemStack.getTagCompound().setShort(keyName, keyValue);
         }
     }
 
@@ -157,7 +157,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagInt) {
-                return itemStack.stackTagCompound.getInteger(keyName);
+                return itemStack.getTagCompound().getInteger(keyName);
             }
         }
 
@@ -168,7 +168,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setInteger(keyName, keyValue);
+            itemStack.getTagCompound().setInteger(keyName, keyValue);
         }
     }
 
@@ -177,7 +177,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagLong) {
-                return itemStack.stackTagCompound.getLong(keyName);
+                return itemStack.getTagCompound().getLong(keyName);
             }
         }
 
@@ -189,7 +189,7 @@ public class NBTHelper {
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
 
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setLong(keyName, keyValue);
+            itemStack.getTagCompound().setLong(keyName, keyValue);
         }
     }
 
@@ -198,7 +198,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagFloat) {
-                return itemStack.stackTagCompound.getFloat(keyName);
+                return itemStack.getTagCompound().getFloat(keyName);
             }
         }
 
@@ -209,7 +209,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setFloat(keyName, keyValue);
+            itemStack.getTagCompound().setFloat(keyName, keyValue);
         }
     }
 
@@ -218,7 +218,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagDouble) {
-                return itemStack.stackTagCompound.getDouble(keyName);
+                return itemStack.getTagCompound().getDouble(keyName);
             }
         }
 
@@ -229,7 +229,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setDouble(keyName, keyValue);
+            itemStack.getTagCompound().setDouble(keyName, keyValue);
         }
     }
 
@@ -238,7 +238,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagList) {
-                return itemStack.stackTagCompound.getTagList(keyName, nbtBaseType);
+                return itemStack.getTagCompound().getTagList(keyName, nbtBaseType);
             }
         }
 
@@ -249,7 +249,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setTag(keyName, nbtTagList);
+            itemStack.getTagCompound().setTag(keyName, nbtTagList);
         }
     }
 
@@ -258,7 +258,7 @@ public class NBTHelper {
 
         if (hasKey(itemStack, keyName)) {
             if (itemStack.getTagCompound().getTag(keyName) instanceof NBTTagCompound) {
-                return itemStack.stackTagCompound.getCompoundTag(keyName);
+                return itemStack.getTagCompound().getCompoundTag(keyName);
             }
         }
 
@@ -269,7 +269,7 @@ public class NBTHelper {
 
         if (itemStack != null && keyName != null && !keyName.isEmpty()) {
             initNBTTagCompound(itemStack);
-            itemStack.stackTagCompound.setTag(keyName, nbtTagCompound);
+            itemStack.getTagCompound().setTag(keyName, nbtTagCompound);
         }
     }
 }
