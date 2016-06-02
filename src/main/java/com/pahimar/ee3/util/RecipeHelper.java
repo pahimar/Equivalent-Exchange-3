@@ -2,6 +2,7 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -15,21 +16,23 @@ import java.util.stream.Collectors;
 public class RecipeHelper {
 
     /**
-     * Returns a list of elements that constitute the input in a crafting recipe
+     * TODO Finish JavaDoc
      *
-     * @param recipe The IRecipe being examined
-     * @return List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
+     * @param recipe
+     * @return
      */
     public static Set<WrappedStack> getRecipeInputs(IRecipe recipe) {
 
-        ArrayList<WrappedStack> recipeInputs = new ArrayList<>();
+        List<WrappedStack> recipeInputs = new ArrayList<>();
 
         if (recipe instanceof ShapedRecipes) {
+
             recipeInputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems).stream()
                     .map(itemStack -> WrappedStack.wrap(itemStack, 1))
                     .collect(Collectors.toList()));
         }
         else if (recipe instanceof ShapelessRecipes) {
+
             recipeInputs.addAll(((ShapelessRecipes) recipe).recipeItems.stream()
                     .filter(itemStack -> itemStack != null)
                     .map(itemStack -> WrappedStack.wrap(itemStack, 1))
@@ -38,90 +41,73 @@ public class RecipeHelper {
         else if (recipe instanceof ShapedOreRecipe) {
 
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
-
-            if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput()))) {
-                for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
-                    if (shapedOreRecipe.getInput()[i] instanceof ArrayList) {
-                        recipeInputs.add(WrappedStack.wrap(shapedOreRecipe.getInput()[i], 1));
-                    }
-                    else if (shapedOreRecipe.getInput()[i] instanceof ItemStack) {
-                        recipeInputs.add(WrappedStack.wrap(shapedOreRecipe.getInput()[i], 1));
-                    }
-                }
+            List<?> inputObjects = Arrays.asList(shapedOreRecipe.getInput());
+            if (validateOreDictionaryRecipe(inputObjects)) {
+                recipeInputs.addAll(inputObjects.stream()
+                        .filter(recipeInput -> recipeInput instanceof ItemStack || recipeInput instanceof ArrayList)
+                        .map(recipeInput -> WrappedStack.wrap(recipeInput, 1))
+                        .collect(Collectors.toList()));
             }
         }
         else if (recipe instanceof ShapelessOreRecipe) {
 
-            ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
-
+            ShapelessOreRecipe shapelessOreRecipe = ((ShapelessOreRecipe) recipe);
             if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput())) {
-                for (Object object : shapelessOreRecipe.getInput()) {
-                    if (object instanceof ArrayList) {
-                        recipeInputs.add(WrappedStack.wrap(object));
-                    }
-                    else if (object instanceof ItemStack) {
-                        recipeInputs.add(WrappedStack.wrap(object, 1));
-                    }
-                }
+                recipeInputs.addAll(shapelessOreRecipe.getInput().stream()
+                        .filter(recipeInput -> recipeInput instanceof Item || recipeInput instanceof ArrayList)
+                        .map(recipeInput -> WrappedStack.wrap(recipeInput, 1))
+                        .collect(Collectors.toList()));
             }
         }
 
-        return collateInputStacks(recipeInputs);
+        return collateStacks(recipeInputs);
     }
 
     /**
-     * Collates an uncollated, unsorted List of Objects into a sorted, collated List of WrappedStacks
+     * TODO Finish JavaDoc
      *
-     * @param uncollatedStacks List of objects for collating
-     * @return A sorted, collated List of WrappedStacks
+     * @param uncollatedStacks
+     * @return a {@link Set} of collated {@link WrappedStack}s
      */
-    public static Set<WrappedStack> collateInputStacks(Collection<?> uncollatedStacks) {
+    private static Set<WrappedStack> collateStacks(Collection<?> uncollatedStacks) {
 
-        // FIXME Pick up here
         List<WrappedStack> collatedStacks = new ArrayList<>();
-
-        WrappedStack stack;
+        WrappedStack uncollatedStack;
         boolean found;
 
         for (Object object : uncollatedStacks) {
 
             found = false;
+            uncollatedStack = WrappedStack.wrap(object);
 
-            if (WrappedStack.canBeWrapped(object)) {
-
-                stack = WrappedStack.wrap(object);
-
+            if (uncollatedStack != null) {
                 if (collatedStacks.isEmpty()) {
-                    collatedStacks.add(stack);
+                    collatedStacks.add(uncollatedStack);
                 }
                 else {
-
                     for (WrappedStack collatedStack : collatedStacks) {
-                        if (collatedStack.getWrappedObject() != null) {
-                            if (stack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack) {
-                                if (ItemStackUtils.equals((ItemStack) stack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject())) {
-                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
-                                    found = true;
-                                }
+                        if (uncollatedStack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack) {
+                            if (ItemStackUtils.equals((ItemStack) uncollatedStack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject())) {
+                                collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
+                                found = true;
                             }
-                            else if (stack.getWrappedObject() instanceof OreStack && collatedStack.getWrappedObject() instanceof OreStack) {
-                                if (OreStack.compareOreNames((OreStack) stack.getWrappedObject(), (OreStack) collatedStack.getWrappedObject()))
-                                {
-                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
-                                    found = true;
-                                }
+                        }
+                        else if (uncollatedStack.getWrappedObject() instanceof OreStack && collatedStack.getWrappedObject() instanceof OreStack) {
+                            if (OreStack.compareOreNames((OreStack) uncollatedStack.getWrappedObject(), (OreStack) collatedStack.getWrappedObject())) {
+                                collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
+                                found = true;
                             }
                         }
                     }
 
                     if (!found) {
-                        collatedStacks.add(stack);
+                        collatedStacks.add(uncollatedStack);
                     }
                 }
             }
         }
-        Collections.sort(collatedStacks);
-        return collatedStacks;
+
+        return new TreeSet<>(collatedStacks);
     }
 
     /**
@@ -135,10 +121,8 @@ public class RecipeHelper {
     private static boolean validateOreDictionaryRecipe(Collection<?> objects) {
 
         for (Object object : objects) {
-            if (object != null) {
-                if (!WrappedStack.canBeWrapped(object)) {
-                    return false;
-                }
+            if (object != null && !WrappedStack.canBeWrapped(object)) {
+                return false;
             }
         }
 
