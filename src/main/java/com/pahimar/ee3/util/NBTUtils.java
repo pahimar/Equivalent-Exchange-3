@@ -6,18 +6,18 @@ import net.minecraft.nbt.*;
 
 import java.util.UUID;
 
-public class NBTHelper {
+public class NBTUtils {
 
     public static void clearStatefulNBTTags(ItemStack itemStack) {
 
-        if (NBTHelper.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN)) {
-            NBTHelper.removeTag(itemStack, Names.NBT.CRAFTING_GUI_OPEN);
+        if (NBTUtils.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN)) {
+            NBTUtils.removeTag(itemStack, Names.NBT.CRAFTING_GUI_OPEN);
         }
-        else if (NBTHelper.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN)) {
-            NBTHelper.removeTag(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
+        else if (NBTUtils.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN)) {
+            NBTUtils.removeTag(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
         }
-        else if (NBTHelper.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN)) {
-            NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
+        else if (NBTUtils.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN)) {
+            NBTUtils.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
         }
     }
 

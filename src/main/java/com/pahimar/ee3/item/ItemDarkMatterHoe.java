@@ -85,19 +85,19 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     @Override
     public short getChargeLevel(ItemStack itemStack)
     {
-        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) != null) {
-            return NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
+        if (NBTUtils.getShort(itemStack, Names.NBT.CHARGE_LEVEL) != null) {
+            return NBTUtils.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
         }
 
         return 0;
     }
 
     @Override
-    public void setChargeLevel(ItemStack itemStack, short chargeLevel)
+    public void setChargeLevel(ItemStack itemStack, short charge)
     {
-        if (chargeLevel <= this.getMaxChargeLevel())
+        if (charge <= this.getMaxChargeLevel())
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, chargeLevel);
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, charge);
         }
     }
 
@@ -106,7 +106,7 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     {
         if (getChargeLevel(itemStack) < this.getMaxChargeLevel())
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) + 1));
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) + 1));
         }
     }
 
@@ -115,7 +115,7 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     {
         if (getChargeLevel(itemStack) > 0)
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) - 1));
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) - 1));
         }
     }
 
@@ -166,9 +166,9 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     @Override
     public ToolMode getCurrentToolMode(ItemStack itemStack)
     {
-        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) != null && NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
+        if (NBTUtils.getShort(itemStack, Names.NBT.MODE) != null && NBTUtils.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
         {
-            return ToolMode.TYPES[NBTHelper.getShort(itemStack, Names.NBT.MODE)];
+            return ToolMode.TYPES[NBTUtils.getShort(itemStack, Names.NBT.MODE)];
         }
 
         return null;
@@ -177,7 +177,7 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
     @Override
     public void setToolMode(ItemStack itemStack, ToolMode toolMode)
     {
-        NBTHelper.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
+        NBTUtils.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
     }
 
     @Override

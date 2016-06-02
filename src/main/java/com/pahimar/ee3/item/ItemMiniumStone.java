@@ -4,7 +4,7 @@ import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.IKeyBound;
 import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class ItemMiniumStone extends ItemEE implements IKeyBound
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack itemStack, int renderPass)
     {
-        return NBTHelper.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN) || NBTHelper.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
+        return NBTUtils.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN) || NBTUtils.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
     }
 
     @Override

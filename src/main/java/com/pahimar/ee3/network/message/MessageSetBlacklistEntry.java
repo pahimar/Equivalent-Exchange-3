@@ -4,7 +4,7 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -67,7 +67,7 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
 
                     if (compressedWrappedStack != null) {
 
-                        String jsonWrappedStack = CompressionHelper.decompress(compressedWrappedStack);
+                        String jsonWrappedStack = CompressionUtils.decompress(compressedWrappedStack);
 
                         try {
                             wrappedStack = SerializationHelper.GSON.fromJson(jsonWrappedStack, WrappedStack.class);
@@ -102,7 +102,7 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
 
             if (wrappedStack != null && wrappedStack.getWrappedObject() != null) {
 
-                byte[] compressedWrappedStack = CompressionHelper.compress(SerializationHelper.GSON.toJson(wrappedStack));
+                byte[] compressedWrappedStack = CompressionUtils.compress(SerializationHelper.GSON.toJson(wrappedStack));
                 buf.writeInt(compressedWrappedStack.length);
                 buf.writeBytes(compressedWrappedStack);
             }

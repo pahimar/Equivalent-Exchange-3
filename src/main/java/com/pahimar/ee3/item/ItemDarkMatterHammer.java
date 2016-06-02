@@ -32,7 +32,7 @@ public class ItemDarkMatterHammer extends ItemEE implements IKeyBound, IChargeab
     }
 
     @Override
-    public void setChargeLevel(ItemStack itemStack, short chargeLevel)
+    public void setChargeLevel(ItemStack itemStack, short charge)
     {
 
     }

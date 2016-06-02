@@ -3,7 +3,7 @@ package com.pahimar.ee3.util;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-public class ConfigurationHelper {
+public class ConfigurationUtils {
 
     /**
      * TODO Finish JavaDoc

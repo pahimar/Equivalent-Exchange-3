@@ -3,7 +3,7 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.ToolMode;
 import com.pahimar.ee3.util.IModalTool;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
@@ -26,9 +26,9 @@ public class ItemToolModalEE extends ItemToolEE implements IModalTool
     @Override
     public ToolMode getCurrentToolMode(ItemStack itemStack)
     {
-        if (NBTHelper.getShort(itemStack, Names.NBT.MODE) != null && NBTHelper.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
+        if (NBTUtils.getShort(itemStack, Names.NBT.MODE) != null && NBTUtils.getShort(itemStack, Names.NBT.MODE) < ToolMode.TYPES.length)
         {
-            return ToolMode.TYPES[NBTHelper.getShort(itemStack, Names.NBT.MODE)];
+            return ToolMode.TYPES[NBTUtils.getShort(itemStack, Names.NBT.MODE)];
         }
 
         return ToolMode.UNKNOWN;
@@ -37,7 +37,7 @@ public class ItemToolModalEE extends ItemToolEE implements IModalTool
     @Override
     public void setToolMode(ItemStack itemStack, ToolMode toolMode)
     {
-        NBTHelper.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
+        NBTUtils.setShort(itemStack, Names.NBT.MODE, (short) toolMode.ordinal());
     }
 
     @Override

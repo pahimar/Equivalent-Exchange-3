@@ -20,41 +20,34 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
         if (json.isJsonObject()) {
 
             JsonObject jsonObject = json.getAsJsonObject();
-
             WrappedStack wrappedStack = null;
 
             if (jsonObject.has(TYPE_ITEM_STACK)) {
-
                 try {
-                    ItemStack itemStack = context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class);
-                    wrappedStack = WrappedStack.wrap(itemStack);
+                    wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
             else if (jsonObject.has(TYPE_ORE_STACK)) {
-
                 try {
-                    OreStack oreStack = context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class);
-                    wrappedStack = WrappedStack.wrap(oreStack);
+                    wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
             else if (jsonObject.has(TYPE_FLUID_STACK)) {
-
                 try {
-                    FluidStack fluidStack = context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class);
-                    wrappedStack = WrappedStack.wrap(fluidStack);
+                    wrappedStack = WrappedStack.wrap(context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
 
-            if (wrappedStack != null) {
+            if (wrappedStack != null && wrappedStack.getWrappedObject() != null) {
                 return wrappedStack;
             }
         }

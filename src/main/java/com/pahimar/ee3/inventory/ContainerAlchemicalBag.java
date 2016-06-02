@@ -2,7 +2,7 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemAlchemicalBag;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -160,9 +160,9 @@ public class ContainerAlchemicalBag extends ContainerEE
             {
                 if (itemStack != null)
                 {
-                    if (NBTHelper.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
+                    if (NBTUtils.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
                     {
-                        NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
+                        NBTUtils.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }
@@ -179,7 +179,7 @@ public class ContainerAlchemicalBag extends ContainerEE
 
     public boolean isItemStackParent(ItemStack itemStack)
     {
-        if (NBTHelper.hasUUID(itemStack))
+        if (NBTUtils.hasUUID(itemStack))
         {
             UUID stackUUID = new UUID(itemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG), itemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
             return inventoryAlchemicalBag.matchesUUID(stackUUID);

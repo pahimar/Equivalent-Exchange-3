@@ -9,7 +9,7 @@ import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.util.CommonSoundHelper;
-import com.pahimar.ee3.util.EntityHelper;
+import com.pahimar.ee3.util.EntityUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -211,7 +211,7 @@ public class BlockAlchemyArray extends BlockTileEntityEE
     {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityAlchemyArray && entityLiving instanceof EntityPlayer)
         {
-            NBTTagCompound customEntityData = EntityHelper.getCustomEntityData(entityLiving);
+            NBTTagCompound customEntityData = EntityUtils.getCustomEntityData(entityLiving);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(customEntityData);
             AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());

@@ -65,9 +65,9 @@ public class RecipeHelper {
 
     /**
      * TODO Finish JavaDoc
-     *
+     * 
      * @param uncollatedStacks
-     * @return a {@link Set} of collated {@link WrappedStack}s
+     * @return
      */
     private static Set<WrappedStack> collateStacks(Collection<?> uncollatedStacks) {
 
@@ -111,12 +111,10 @@ public class RecipeHelper {
     }
 
     /**
-     * Validates the list of recipe inputs for an OreDictionary recipe to ensure that if there is an
-     * OreDictionary entry found in the recipe (a list) that it is not empty (that there are ItemStacks
-     * associated with that particular OreDictionary entry)
+     * TODO Finish JavaDoc
      *
-     * @param objects a list of recipe inputs for an OreDictionary recipe
-     * @return true if there exists no "invalid" (empty) OreDictionary entries in the provided list of recipe inputs
+     * @param objects
+     * @return
      */
     private static boolean validateOreDictionaryRecipe(Collection<?> objects) {
 

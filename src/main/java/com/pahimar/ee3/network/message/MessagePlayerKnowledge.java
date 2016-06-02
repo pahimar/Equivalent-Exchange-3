@@ -3,7 +3,7 @@ package com.pahimar.ee3.network.message;
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -60,7 +60,7 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
 
         if (compressedJson != null) {
             try {
-                this.playerKnowledge = SerializationHelper.GSON.fromJson(CompressionHelper.decompress(compressedJson), PlayerKnowledge.class);
+                this.playerKnowledge = SerializationHelper.GSON.fromJson(CompressionUtils.decompress(compressedJson), PlayerKnowledge.class);
             }
             catch (JsonSyntaxException e) {
                 this.playerKnowledge = new PlayerKnowledge();
@@ -78,7 +78,7 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
         byte[] compressedJson = null;
 
         if (playerKnowledge != null) {
-            compressedJson = CompressionHelper.compress(SerializationHelper.GSON.toJson(playerKnowledge));
+            compressedJson = CompressionUtils.compress(SerializationHelper.GSON.toJson(playerKnowledge));
         }
 
         if (compressedJson != null) {

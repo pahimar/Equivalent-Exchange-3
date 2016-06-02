@@ -6,7 +6,7 @@ import com.pahimar.ee3.reference.*;
 import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.IChargeable;
 import com.pahimar.ee3.util.IKeyBound;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -47,19 +47,19 @@ public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, 
     @Override
     public short getChargeLevel(ItemStack itemStack) {
 
-        if (NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL) != null) {
-            return NBTHelper.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
+        if (NBTUtils.getShort(itemStack, Names.NBT.CHARGE_LEVEL) != null) {
+            return NBTUtils.getShort(itemStack, Names.NBT.CHARGE_LEVEL);
         }
 
         return 0;
     }
 
     @Override
-    public void setChargeLevel(ItemStack itemStack, short chargeLevel)
+    public void setChargeLevel(ItemStack itemStack, short charge)
     {
-        if (chargeLevel <= this.getMaxChargeLevel())
+        if (charge <= this.getMaxChargeLevel())
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, chargeLevel);
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, charge);
         }
     }
 
@@ -68,7 +68,7 @@ public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, 
     {
         if (getChargeLevel(itemStack) < this.getMaxChargeLevel())
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) + 1));
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) + 1));
         }
     }
 
@@ -77,7 +77,7 @@ public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, 
     {
         if (getChargeLevel(itemStack) > 0)
         {
-            NBTHelper.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) - 1));
+            NBTUtils.setShort(itemStack, Names.NBT.CHARGE_LEVEL, (short) (getChargeLevel(itemStack) - 1));
         }
     }
 

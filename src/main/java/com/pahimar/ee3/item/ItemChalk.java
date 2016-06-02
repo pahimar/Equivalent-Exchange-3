@@ -9,7 +9,7 @@ import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.tileentity.TileEntityDummyArray;
-import com.pahimar.ee3.util.EntityHelper;
+import com.pahimar.ee3.util.EntityUtils;
 import com.pahimar.ee3.util.IKeyBound;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -77,7 +77,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         if (!world.isRemote)
         {
-            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+            NBTTagCompound playerCustomData = EntityUtils.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
             AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());
@@ -150,7 +150,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         if (!world.isRemote)
         {
-            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+            NBTTagCompound playerCustomData = EntityUtils.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
             int coordOffset = chalkSettings.getSize() - 1;
@@ -231,7 +231,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
 
             if (world.getBlock(x, y, z) == block)
             {
-                NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+                NBTTagCompound playerCustomData = EntityUtils.getCustomEntityData(entityPlayer);
                 ChalkSettings chalkSettings = new ChalkSettings();
                 chalkSettings.readFromNBT(playerCustomData);
                 AlchemyArray alchemyArray = AlchemyArrayRegistry.getInstance().getAlchemyArray(chalkSettings.getIndex());
@@ -253,7 +253,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
     {
         if (key != Key.UNKNOWN)
         {
-            NBTTagCompound playerCustomData = EntityHelper.getCustomEntityData(entityPlayer);
+            NBTTagCompound playerCustomData = EntityUtils.getCustomEntityData(entityPlayer);
             ChalkSettings chalkSettings = new ChalkSettings();
             chalkSettings.readFromNBT(playerCustomData);
 
@@ -292,7 +292,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
             }
 
             chalkSettings.writeToNBT(playerCustomData);
-            EntityHelper.saveCustomEntityData(entityPlayer, playerCustomData);
+            EntityUtils.saveCustomEntityData(entityPlayer, playerCustomData);
             PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) entityPlayer);
         }
     }

@@ -3,7 +3,7 @@ package com.pahimar.ee3.util;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 
-public class LoaderHelper {
+public class LoaderUtils {
 
     public static LoaderState getLoaderState() {
 

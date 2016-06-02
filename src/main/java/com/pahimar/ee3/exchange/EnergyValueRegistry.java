@@ -9,7 +9,7 @@ import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
-import com.pahimar.ee3.util.LoaderHelper;
+import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -553,7 +553,7 @@ public class EnergyValueRegistry {
             }
 
             if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                LogHelper.info(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
+                LogHelper.info(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
             }
         }
     }

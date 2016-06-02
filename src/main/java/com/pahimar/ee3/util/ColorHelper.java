@@ -5,6 +5,7 @@ import com.pahimar.ee3.reference.Names;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+// FIXME This class needs love
 public class ColorHelper
 {
     public static boolean hasColor(ItemStack itemStack)

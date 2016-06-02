@@ -4,7 +4,7 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -37,7 +37,7 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
             if (compressedValueMap != null) {
 
-                String jsonString = CompressionHelper.decompress(compressedValueMap);
+                String jsonString = CompressionUtils.decompress(compressedValueMap);
 
                 try {
                     valueMap = SerializationHelper.GSON.fromJson(jsonString, SerializationHelper.ENERGY_VALUE_MAP_TYPE);
@@ -66,7 +66,7 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
 
         if (valueMap != null) {
 
-            byte[] compressedValueMap = CompressionHelper.compress(SerializationHelper.GSON.toJson(valueMap, SerializationHelper.ENERGY_VALUE_MAP_TYPE));
+            byte[] compressedValueMap = CompressionUtils.compress(SerializationHelper.GSON.toJson(valueMap, SerializationHelper.ENERGY_VALUE_MAP_TYPE));
 
             if (compressedValueMap != null) {
                 buf.writeInt(compressedValueMap.length);

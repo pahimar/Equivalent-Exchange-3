@@ -1,6 +1,6 @@
 package com.pahimar.ee3.api.event;
 
-import cpw.mods.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class BlacklistEvent extends Event {
 

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Random;
 
-public class CalcinationHelper {
+public class CalcinationUtils {
 
     private static final Random RANDOM = new Random();
 

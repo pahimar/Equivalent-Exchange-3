@@ -3,7 +3,7 @@ package com.pahimar.ee3.tileentity;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileCalcinator;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.util.CalcinationHelper;
+import com.pahimar.ee3.util.CalcinationUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
@@ -425,7 +425,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
         }
         else
         {
-            ItemStack alchemicalDustStack = CalcinationHelper.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
+            ItemStack alchemicalDustStack = CalcinationUtils.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
 
             /**
              * If we don't get a calcination result, then return false
@@ -472,7 +472,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     {
         if (this.canCalcinate())
         {
-            ItemStack alchemicalDustStack = CalcinationHelper.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
+            ItemStack alchemicalDustStack = CalcinationUtils.getCalcinationResult(this.inventory[INPUT_INVENTORY_INDEX]);
             addItemStackToOutput(alchemicalDustStack.copy());
 
             this.inventory[INPUT_INVENTORY_INDEX].stackSize--;

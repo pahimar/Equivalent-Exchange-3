@@ -1,7 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.reference.Reference;
-import com.pahimar.ee3.util.ConfigurationHelper;
+import com.pahimar.ee3.util.ConfigurationUtils;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.util.StatCollector;
@@ -37,7 +37,7 @@ public class ConfigurationHandler {
                 StatCollector.translateToLocal(Settings.SERVER_SYNC_THRESHOLD_COMMENT),
                 Settings.SERVER_SYNC_THRESHOLD_LABEL);
 
-        Settings.regenerateEnergyValuesWhen = ConfigurationHelper.getString(configuration,
+        Settings.regenerateEnergyValuesWhen = ConfigurationUtils.getString(configuration,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_NAME,
                 CATEGORY_ENERGY_VALUE,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_DEFAULT,
@@ -52,7 +52,7 @@ public class ConfigurationHandler {
                 StatCollector.translateToLocal(Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_COMMENT),
                 Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_LABEL);
 
-        Settings.soundMode = ConfigurationHelper.getString(configuration,
+        Settings.soundMode = ConfigurationUtils.getString(configuration,
                 Settings.SOUND_MODE_NAME,
                 CATEGORY_SOUND,
                 Settings.SOUND_MODE_DEFAULT,

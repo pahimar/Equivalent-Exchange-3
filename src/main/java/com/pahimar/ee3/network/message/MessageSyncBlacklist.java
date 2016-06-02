@@ -4,7 +4,7 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -54,7 +54,7 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
 
                 if (compressedBlacklist != null) {
 
-                    String jsonBlacklist = CompressionHelper.decompress(compressedBlacklist);
+                    String jsonBlacklist = CompressionUtils.decompress(compressedBlacklist);
 
                     try {
                         blacklistSet = SerializationHelper.GSON.fromJson(jsonBlacklist, SerializationHelper.WRAPPED_STACK_SET_TYPE);
@@ -83,7 +83,7 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
 
             if (blacklistSet != null) {
 
-                byte[] compressedBlacklist = CompressionHelper.compress(SerializationHelper.GSON.toJson(blacklistSet, SerializationHelper.WRAPPED_STACK_SET_TYPE));
+                byte[] compressedBlacklist = CompressionUtils.compress(SerializationHelper.GSON.toJson(blacklistSet, SerializationHelper.WRAPPED_STACK_SET_TYPE));
 
                 if (compressedBlacklist != null) {
                     buf.writeInt(compressedBlacklist.length);

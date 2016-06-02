@@ -2,7 +2,7 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.INBTTaggable;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -51,7 +51,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
 
     public ItemStack findParentItemStack(EntityPlayer entityPlayer) {
 
-        if (NBTHelper.hasUUID(parentItemStack)) {
+        if (NBTUtils.hasUUID(parentItemStack)) {
 
             UUID parentItemStackUUID = new UUID(parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG), parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG));
 
@@ -59,7 +59,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
 
                 ItemStack itemStack = entityPlayer.inventory.getStackInSlot(i);
 
-                if (NBTHelper.hasUUID(itemStack)) {
+                if (NBTUtils.hasUUID(itemStack)) {
                     if (itemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == parentItemStackUUID.getMostSignificantBits() && itemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == parentItemStackUUID.getLeastSignificantBits()) {
                         return itemStack;
                     }
@@ -71,7 +71,7 @@ public class InventoryAlchemicalBag implements IInventory, INBTTaggable
     }
 
     public boolean matchesUUID(UUID uuid) {
-        return NBTHelper.hasUUID(parentItemStack) && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == uuid.getLeastSignificantBits() && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == uuid.getMostSignificantBits();
+        return NBTUtils.hasUUID(parentItemStack) && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_LEAST_SIG) == uuid.getLeastSignificantBits() && parentItemStack.getTagCompound().getLong(Names.NBT.UUID_MOST_SIG) == uuid.getMostSignificantBits();
     }
 
     public void save() {

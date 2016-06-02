@@ -8,7 +8,7 @@ import com.pahimar.ee3.reference.Textures;
 import com.pahimar.ee3.util.ColorHelper;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemStackUtils;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -62,7 +62,7 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
     {
         if (renderPass == 0)
         {
-            if (NBTHelper.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
+            if (NBTUtils.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
             {
                 return icons[0];
             }
@@ -104,8 +104,8 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
             }
 
             // Set an UUID on the bag if one doesn't exist already
-            if (NBTHelper.getUUID(itemStack) == null) {
-                NBTHelper.setUUID(itemStack, UUID.randomUUID());
+            if (NBTUtils.getUUID(itemStack) == null) {
+                NBTUtils.setUUID(itemStack, UUID.randomUUID());
             }
 
             // TODO Do a scan of inventory and if we find a bag with the same UUID, change it's UUID
@@ -114,14 +114,14 @@ public class ItemAlchemicalBag extends ItemEE implements IOwnable
                     ItemStack itemStack1 = entityPlayer.inventory.getStackInSlot(i);
 
                     if (itemStack1.getItem() instanceof ItemAlchemicalBag) {
-                        if (NBTHelper.hasUUID(itemStack1) && NBTHelper.getUUID(itemStack).equals(NBTHelper.getUUID(itemStack1))) {
-                            NBTHelper.setUUID(itemStack1, UUID.randomUUID());
+                        if (NBTUtils.hasUUID(itemStack1) && NBTUtils.getUUID(itemStack).equals(NBTUtils.getUUID(itemStack1))) {
+                            NBTUtils.setUUID(itemStack1, UUID.randomUUID());
                         }
                     }
                 }
             }
 
-            NBTHelper.setBoolean(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN, true);
+            NBTUtils.setBoolean(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN, true);
             entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_BAG.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 

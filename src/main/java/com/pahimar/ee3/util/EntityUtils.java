@@ -4,7 +4,7 @@ import com.pahimar.ee3.reference.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class EntityHelper {
+public class EntityUtils {
 
     /**
      * TODO Finish JavaDoc

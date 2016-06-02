@@ -4,7 +4,6 @@ import com.google.gson.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -20,6 +19,7 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
         if (json.isJsonObject()) {
+
             JsonObject jsonObject = json.getAsJsonObject();
 
             String name = null;
@@ -40,30 +40,18 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
             }
 
             if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).isJsonPrimitive()) {
-
                 try {
-                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.getAsJsonPrimitive(TAG_COMPOUND).getAsString());
-                    if (nbtBase instanceof NBTTagCompound) {
-                        tagCompound = (NBTTagCompound) nbtBase;
-                    }
+                    tagCompound = JsonToNBT.getTagFromJson(jsonObject.getAsJsonPrimitive(TAG_COMPOUND).getAsString());
                 }
                 catch (NBTException e) {
                     // TODO Logging
                 }
             }
 
-            if (name != null) {
-                Item item = (Item) Item.itemRegistry.getObject(name);
-
-                if (item != null) {
-                    ItemStack itemStack = new ItemStack((Item) Item.itemRegistry.getObject(name), 1, metaValue);
-
-                    if (tagCompound != null) {
-                        itemStack.setTagCompound(tagCompound);
-                    }
-
-                    return itemStack;
-                }
+            if (name != null && Item.getByNameOrId(name) != null) {
+                ItemStack itemStack = new ItemStack(Item.getByNameOrId(name), 1, metaValue);
+                itemStack.setTagCompound(tagCompound);
+                return itemStack;
             }
         }
 
@@ -76,8 +64,8 @@ public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeser
         if (src != null && src.getItem() != null) {
             JsonObject jsonObject = new JsonObject();
 
-            if (Item.itemRegistry.getNameForObject(src.getItem()) != null) {
-                jsonObject.addProperty(NAME, Item.itemRegistry.getNameForObject(src.getItem()));
+            if (Item.REGISTRY.getNameForObject(src.getItem()) != null) {
+                jsonObject.addProperty(NAME, Item.REGISTRY.getNameForObject(src.getItem()).toString());
             }
             else {
                 return JsonNull.INSTANCE;

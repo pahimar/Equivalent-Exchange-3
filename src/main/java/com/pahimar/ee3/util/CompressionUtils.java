@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class CompressionHelper {
+public class CompressionUtils {
 
     /**
      * TODO Finish JavaDoc

@@ -2,15 +2,15 @@ package com.pahimar.ee3.util;
 
 import net.minecraft.item.ItemStack;
 
-public interface IChargeable
-{
-    public abstract short getMaxChargeLevel();
+public interface IChargeable {
 
-    public abstract short getChargeLevel(ItemStack itemStack);
+    short getMaxChargeLevel();
 
-    public abstract void setChargeLevel(ItemStack itemStack, short chargeLevel);
+    short getChargeLevel(ItemStack itemStack);
 
-    public abstract void increaseChargeLevel(ItemStack itemStack);
+    void setChargeLevel(ItemStack itemStack, short charge);
 
-    public abstract void decreaseChargeLevel(ItemStack itemStack);
+    void increaseChargeLevel(ItemStack itemStack);
+
+    void decreaseChargeLevel(ItemStack itemStack);
 }

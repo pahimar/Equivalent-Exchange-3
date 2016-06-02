@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public interface IModalTool
-{
-    public abstract List<ToolMode> getAvailableToolModes();
+public interface IModalTool {
 
-    public abstract ToolMode getCurrentToolMode(ItemStack itemStack);
+    List<ToolMode> getAvailableToolModes();
 
-    public abstract void setToolMode(ItemStack itemStack, ToolMode toolMode);
+    ToolMode getCurrentToolMode(ItemStack itemStack);
 
-    public abstract void changeToolMode(ItemStack itemStack);
+    void setToolMode(ItemStack itemStack, ToolMode toolMode);
+
+    void changeToolMode(ItemStack itemStack);
 }

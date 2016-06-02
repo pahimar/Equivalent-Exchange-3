@@ -32,7 +32,7 @@ public class FluidStackSerializer implements JsonSerializer<FluidStack>, JsonDes
             if (jsonObject.has(TAG_COMPOUND) && jsonObject.get(TAG_COMPOUND).isJsonPrimitive()) {
 
                 try {
-                    NBTBase nbtBase = JsonToNBT.func_150315_a(jsonObject.get(TAG_COMPOUND).getAsString());
+                    NBTBase nbtBase = JsonToNBT.getTagFromJson(jsonObject.get(TAG_COMPOUND).getAsString());
                     if (nbtBase instanceof NBTTagCompound) {
                         tagCompound = (NBTTagCompound) nbtBase;
                     }

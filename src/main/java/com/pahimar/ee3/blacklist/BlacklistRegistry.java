@@ -1,17 +1,20 @@
 package com.pahimar.ee3.blacklist;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.LoaderHelper;
+import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
+import com.pahimar.ee3.util.OreDictionaryHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
@@ -81,7 +84,19 @@ public class BlacklistRegistry {
                 return false;
             }
             else {
-                return !knowledgeBlacklist.contains(wrappedObject) && EnergyValueRegistryProxy.hasEnergyValue(wrappedObject);
+                if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+                    if (knowledgeBlacklist.contains(wrappedObject)) {
+                        return false;
+                    }
+                    else if (object instanceof ItemStack){
+                        Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
+                        for (String oreName : oreNames) {
+                            if (knowledgeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -98,8 +113,21 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
-            return !exchangeBlacklist.contains(wrappedStack) && EnergyValueRegistryProxy.hasEnergyValue(wrappedStack);
+            WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
+
+            if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+                if (exchangeBlacklist.contains(wrappedObject)) {
+                    return false;
+                }
+                else if (object instanceof ItemStack){
+                    Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
+                    for (String oreName : oreNames) {
+                        if (exchangeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
+                            return false;
+                        }
+                    }
+                }
+            }
         }
 
         return false;
@@ -119,14 +147,14 @@ public class BlacklistRegistry {
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeBlacklistEvent(object))) {
-                    LogHelper.trace(KNOWLEDGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the player knowledge blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(KNOWLEDGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the player knowledge blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     knowledgeBlacklist.add(WrappedStack.wrap(object, 1));
                     save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeBlacklistEvent(object))) {
-                    LogHelper.trace(EXCHANGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the exchange blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(EXCHANGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the exchange blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     exchangeBlacklist.add(WrappedStack.wrap(object, 1));
                     save(blacklist);
                 }
@@ -148,14 +176,14 @@ public class BlacklistRegistry {
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeWhitelistEvent(object))) {
-                    LogHelper.trace(KNOWLEDGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the player knowledge blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(KNOWLEDGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the player knowledge blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     knowledgeBlacklist.remove(wrappedStack);
                     save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeWhitelistEvent(object))) {
-                    LogHelper.trace(EXCHANGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the exchange blacklist", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(EXCHANGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the exchange blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     exchangeBlacklist.remove(wrappedStack);
                     save(blacklist);
                 }

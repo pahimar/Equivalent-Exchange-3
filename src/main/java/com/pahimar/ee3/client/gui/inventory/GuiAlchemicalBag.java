@@ -5,7 +5,7 @@ import com.pahimar.ee3.inventory.InventoryAlchemicalBag;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -88,9 +88,9 @@ public class GuiAlchemicalBag extends GuiContainer
             {
                 if (itemStack != null)
                 {
-                    if (NBTHelper.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
+                    if (NBTUtils.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN))
                     {
-                        NBTHelper.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
+                        NBTUtils.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
                     }
                 }
             }

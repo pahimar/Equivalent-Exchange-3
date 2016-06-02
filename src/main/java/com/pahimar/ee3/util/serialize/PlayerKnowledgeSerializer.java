@@ -7,7 +7,6 @@ import com.pahimar.ee3.reference.Comparators;
 import net.minecraft.item.ItemStack;
 
 import java.lang.reflect.Type;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,11 +20,8 @@ public class PlayerKnowledgeSerializer implements JsonSerializer<PlayerKnowledge
         if (json.isJsonArray()) {
 
             JsonArray jsonArray = json.getAsJsonArray();
-            Iterator<JsonElement> jsonArrayIterator = jsonArray.iterator();
 
-            while (jsonArrayIterator.hasNext()) {
-
-                JsonElement jsonElement = jsonArrayIterator.next();
+            for (JsonElement jsonElement : jsonArray) {
 
                 if (jsonElement.isJsonObject()) {
 
@@ -33,8 +29,8 @@ public class PlayerKnowledgeSerializer implements JsonSerializer<PlayerKnowledge
 
                     try {
                         wrappedStack = context.deserialize(jsonElement, WrappedStack.class);
-                    }
-                    catch (JsonParseException e){
+                    } catch (JsonParseException e) {
+                        // TODO Logging
                     }
 
                     if (wrappedStack != null && wrappedStack.getWrappedObject() instanceof ItemStack) {

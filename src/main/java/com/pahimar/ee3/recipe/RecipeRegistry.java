@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Comparators;
-import com.pahimar.ee3.util.LoaderHelper;
+import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.common.Loader;
 import org.apache.logging.log4j.Marker;
@@ -62,7 +62,7 @@ public class RecipeRegistry {
 
         // Add the recipe mapping only if we don't already have it
         if (!existsAlready) {
-            LogHelper.trace(RECIPE_MARKER, "[{}] Mod with ID '{}' added recipe (Output: {}, Inputs: {})", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim());
+            LogHelper.trace(RECIPE_MARKER, "[{}] Mod with ID '{}' added recipe (Output: {}, Inputs: {})", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedRecipeOutput, stringBuilder.toString().trim());
             recipeMap.put(wrappedRecipeOutput, wrappedRecipeInputList);
         }
     }

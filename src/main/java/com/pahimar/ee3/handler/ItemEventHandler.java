@@ -1,7 +1,7 @@
 package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
-import com.pahimar.ee3.util.NBTHelper;
+import com.pahimar.ee3.util.NBTUtils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.item.EntityItem;
@@ -14,7 +14,7 @@ public class ItemEventHandler
     @SubscribeEvent
     public void onItemTossEvent(ItemTossEvent itemTossEvent)
     {
-        NBTHelper.clearStatefulNBTTags(itemTossEvent.entityItem.getEntityItem());
+        NBTUtils.clearStatefulNBTTags(itemTossEvent.entityItem.getEntityItem());
 
         //Close the Alchemical Bag GUI when the Alchemical bag is tossed
         if (itemTossEvent.player.openContainer instanceof ContainerAlchemicalBag)
@@ -31,13 +31,13 @@ public class ItemEventHandler
     @SubscribeEvent
     public void onItemPickupEvent(PlayerEvent.ItemPickupEvent itemPickupEvent)
     {
-        NBTHelper.clearStatefulNBTTags(itemPickupEvent.pickedUp.getEntityItem());
+        NBTUtils.clearStatefulNBTTags(itemPickupEvent.pickedUp.getEntityItem());
     }
 
     @SubscribeEvent
     public void onEntityItemPickupEvent(EntityItemPickupEvent entityItemPickupEvent)
     {
-        NBTHelper.clearStatefulNBTTags(entityItemPickupEvent.item.getEntityItem());
+        NBTUtils.clearStatefulNBTTags(entityItemPickupEvent.item.getEntityItem());
     }
 
     @SubscribeEvent
@@ -45,7 +45,7 @@ public class ItemEventHandler
     {
         for (EntityItem entityItem : playerDropsEvent.drops)
         {
-            NBTHelper.clearStatefulNBTTags(entityItem.getEntityItem());
+            NBTUtils.clearStatefulNBTTags(entityItem.getEntityItem());
         }
     }
 }
