@@ -1,16 +1,11 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Names;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Comparator;
 
-public class FluidHelper {
+public class FluidStackUtils {
 
     public static final Comparator<FluidStack> COMPARATOR = new Comparator<FluidStack>() {
 
@@ -76,21 +71,34 @@ public class FluidHelper {
         }
     };
 
-    public static void registerFluids() {
-
-        // Register Milk in the FluidRegistry if it hasn't already been done
-        if (!FluidRegistry.isFluidRegistered("milk")) {
-            Fluid milk = new Fluid("milk").setUnlocalizedName(Names.Fluids.MILK);
-            if (FluidRegistry.registerFluid(milk)) {
-                FluidContainerRegistry.registerFluidContainer(new FluidStack(milk, 1000), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
-            }
-        }
-    }
-
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param fluidStack1
+     * @param fluidStack2
+     * @return
+     */
     public static int compare(FluidStack fluidStack1, FluidStack fluidStack2) {
         return COMPARATOR.compare(fluidStack1, fluidStack2);
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param fluidStack1
+     * @param fluidStack2
+     * @return
+     */
+    public static boolean equals(FluidStack fluidStack1, FluidStack fluidStack2) {
+        return compare(fluidStack1, fluidStack2) == 0;
+    }
+
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param fluidStack
+     * @return
+     */
     public static String toString(FluidStack fluidStack) {
 
         if (fluidStack != null) {

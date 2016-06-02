@@ -17,7 +17,6 @@ import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
-import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import com.pahimar.ee3.util.TileEntityDataHelper;
@@ -74,8 +73,6 @@ public class EquivalentExchange3
         ModItems.init();
 
         ModBlocks.init();
-
-        FluidHelper.registerFluids();
 
         EnergyValues.init();
 

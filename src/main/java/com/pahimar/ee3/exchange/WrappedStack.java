@@ -1,6 +1,6 @@
 package com.pahimar.ee3.exchange;
 
-import com.pahimar.ee3.util.FluidHelper;
+import com.pahimar.ee3.util.FluidStackUtils;
 import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -340,7 +340,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
                 }
                 else if (wrappedStack2.wrappedStack instanceof FluidStack) {
 
-                    int compareResult = FluidHelper.compare((FluidStack) wrappedStack1.wrappedStack, (FluidStack) wrappedStack2.wrappedStack);
+                    int compareResult = FluidStackUtils.compare((FluidStack) wrappedStack1.wrappedStack, (FluidStack) wrappedStack2.wrappedStack);
 
                     if (compareResult == 0) {
                         return wrappedStack1.stackSize - wrappedStack2.stackSize;

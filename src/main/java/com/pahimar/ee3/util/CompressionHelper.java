@@ -8,16 +8,17 @@ import java.util.zip.GZIPOutputStream;
 public class CompressionHelper {
 
     /**
+     * TODO Finish JavaDoc
      *
-     * @param uncompressedString
+     * @param string
      * @return
      */
-    public static byte[] compress(String uncompressedString) {
+    public static byte[] compress(String string) {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         try (GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
-            gzipOutputStream.write(uncompressedString.getBytes(StandardCharsets.UTF_8));
+            gzipOutputStream.write(string.getBytes(StandardCharsets.UTF_8));
             gzipOutputStream.close();
         }
         catch (IOException e) {
@@ -28,15 +29,16 @@ public class CompressionHelper {
     }
 
     /**
+     * TODO Finish JavaDoc
      *
-     * @param compressedString
+     * @param byteArray
      * @return
      */
-    public static String decompress(byte[] compressedString) {
+    public static String decompress(byte[] byteArray) {
 
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(new ByteArrayInputStream(compressedString)), StandardCharsets.UTF_8))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new GZIPInputStream(new ByteArrayInputStream(byteArray)), StandardCharsets.UTF_8))) {
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
