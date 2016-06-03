@@ -85,6 +85,7 @@ public class BlacklistRegistry {
             }
             else {
                 if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+
                     if (knowledgeBlacklist.contains(wrappedObject)) {
                         return false;
                     }
@@ -96,6 +97,8 @@ public class BlacklistRegistry {
                             }
                         }
                     }
+
+                    return true;
                 }
             }
         }
@@ -116,6 +119,7 @@ public class BlacklistRegistry {
             WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
 
             if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
+
                 if (exchangeBlacklist.contains(wrappedObject)) {
                     return false;
                 }
@@ -127,6 +131,8 @@ public class BlacklistRegistry {
                         }
                     }
                 }
+
+                return true;
             }
         }
 
