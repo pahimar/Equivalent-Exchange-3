@@ -35,7 +35,7 @@ public class ItemTooltipEventHandler {
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
             EnergyValue stackEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(wrappedItemStack);
 
-            if (energyValue != null && (BlacklistRegistryProxy.isExchangeable(wrappedItemStack) || BlacklistRegistryProxy.isLearnable(wrappedItemStack))) {
+            if (energyValue != null) {
 
                 if (wrappedItemStack.getStackSize() > 1) {
                     event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValue)); // TODO Localize
@@ -59,6 +59,14 @@ public class ItemTooltipEventHandler {
             }
             else {
                 event.toolTip.add("No Exchange Energy value"); // TODO Localize
+            }
+
+            if (!BlacklistRegistryProxy.isLearnable(wrappedItemStack)) {
+                event.toolTip.add("Not learnable"); // TODO Localize
+            }
+
+            if (!BlacklistRegistryProxy.isExchangeable(wrappedItemStack)) {
+                event.toolTip.add("Not exchangeable"); // TODO Localize
             }
         }
 
