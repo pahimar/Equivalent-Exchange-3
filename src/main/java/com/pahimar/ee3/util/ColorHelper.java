@@ -1,53 +1,54 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Colors;
-import com.pahimar.ee3.reference.Names;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.EnumDyeColor;
 
-// FIXME This class needs love
-public class ColorHelper
-{
-    public static boolean hasColor(ItemStack itemStack)
-    {
-        return itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey(Names.NBT.DISPLAY) && itemStack.getTagCompound().getCompoundTag(Names.NBT.DISPLAY).hasKey(Names.NBT.COLOR);
+import java.awt.*;
+
+public class ColorHelper {
+
+    public static float[] getRGB(EnumDyeColor dyeColor) {
+        return getRGB(dyeColor.getMapColor().colorValue);
     }
 
-    public static int getColor(ItemStack itemStack)
-    {
-        NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
-
-        if (nbtTagCompound == null)
-        {
-            return Integer.parseInt(Colors.PURE_WHITE, 16);
-        }
-        else
-        {
-            NBTTagCompound displayTagCompound = nbtTagCompound.getCompoundTag(Names.NBT.DISPLAY);
-            return displayTagCompound == null ? Integer.parseInt(Colors.PURE_WHITE, 16) : displayTagCompound.hasKey(Names.NBT.COLOR) ? displayTagCompound.getInteger(Names.NBT.COLOR) : Integer.parseInt(Colors.PURE_WHITE, 16);
-        }
+    public static float[] getRGB(int intColor) {
+        return new Color(intColor).getRGBColorComponents(null);
     }
 
-    public static void setColor(ItemStack itemStack, int color)
-    {
-        if (itemStack != null)
-        {
-            NBTTagCompound nbtTagCompound = itemStack.getTagCompound();
+    public static final int blend(int color1, int color2) {
+        return blend(color1, 1, color2, 1);
 
-            if (nbtTagCompound == null)
-            {
-                nbtTagCompound = new NBTTagCompound();
-                itemStack.setTagCompound(nbtTagCompound);
-            }
-
-            NBTTagCompound colourTagCompound = nbtTagCompound.getCompoundTag(Names.NBT.DISPLAY);
-
-            if (!nbtTagCompound.hasKey(Names.NBT.DISPLAY))
-            {
-                nbtTagCompound.setTag(Names.NBT.DISPLAY, colourTagCompound);
-            }
-
-            colourTagCompound.setInteger(Names.NBT.COLOR, color);
-        }
     }
+    public static final int blend(int color1, int weight1, int color2, int weight2) {
+        return blend(new Color(color1), weight1, new Color(color2), weight2).getRGB();
+    }
+
+    private static final Color blend (Color color1, int weight1, Color color2, int weight2) {
+
+        if (color1 == null) {
+            color1 = Color.WHITE;
+        }
+
+        if (color2 == null) {
+            color2 = Color.WHITE;
+        }
+
+        if (weight1 <= 0) {
+            weight1 = 1;
+        }
+
+        if (weight2 <= 0) {
+            weight2 = 1;
+        }
+
+        double totalWeight = weight1 + weight2;
+        double adjWeight1 = weight1 / totalWeight;
+        double adjWeight2 = weight2 / totalWeight;
+
+        double r = adjWeight1 * color1.getRed() + adjWeight2 * color2.getRed();
+        double g = adjWeight1 * color1.getGreen() + adjWeight2 * color2.getGreen();
+        double b = adjWeight1 * color1.getBlue() + adjWeight2 * color2.getBlue();
+
+        return new Color((int) r, (int) g, (int) b, 0);
+    }
+
 }

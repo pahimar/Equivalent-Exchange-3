@@ -2,7 +2,7 @@ package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.ConfigurationHandler;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -63,7 +63,7 @@ public class CommandRegenEnergyValues extends CommandBase {
         if (shouldRegen) {
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getCommandSenderName());
             EnergyValueRegistry.INSTANCE.compute();
-            PacketHandler.INSTANCE.sendToAll(new MessageSyncEnergyValues());
+            Network.INSTANCE.sendToAll(new MessageSyncEnergyValues());
             commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
         }
         else {

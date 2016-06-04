@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.handler;
 
 import com.pahimar.ee3.client.settings.Keybindings;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageKeyPressed;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.util.IKeyBound;
@@ -60,7 +60,7 @@ public class KeyInputEventHandler
                     {
                         if (entityPlayer.worldObj.isRemote)
                         {
-                            PacketHandler.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
+                            Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
                         }
                         else
                         {

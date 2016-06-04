@@ -5,7 +5,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageSetBlacklistEntry;
 import com.pahimar.ee3.network.message.MessageSetEnergyValue;
 import com.pahimar.ee3.reference.Messages;
@@ -70,7 +70,7 @@ public class CommandSetEnergyValueCurrentItem extends CommandBase
                         }
                         else if (args[1].equalsIgnoreCase("post")) {
                             EnergyValueRegistryProxy.setEnergyValue(wrappedStack, newEnergyValue);
-                            PacketHandler.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
+                            Network.INSTANCE.sendToAll(new MessageSetEnergyValue(wrappedStack, newEnergyValue));
                         }
                         else {
                             throw new WrongUsageException(Messages.Commands.SET_ENERGY_VALUE_CURRENT_ITEM_USAGE);
@@ -85,8 +85,8 @@ public class CommandSetEnergyValueCurrentItem extends CommandBase
                         BlacklistRegistryProxy.setAsNotExchangeable(wrappedStack);
                         // TODO Remove energy value from EnergyValueRegistry
                         // TODO Sync change with client
-                        PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
-                        PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE));
+                        Network.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
+                        Network.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.EXCHANGE));
                         func_152373_a(commandSender, this, "%s set %s as not learnable and not exchangeable", new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
                     }
                 }

@@ -8,7 +8,7 @@ import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileEntityTransmutationTablet;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.relauncher.Side;
@@ -164,7 +164,7 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
 
     @Override
     public Packet getDescriptionPacket() {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityTransmutationTablet(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileEntityTransmutationTablet(this));
     }
 
     @Override

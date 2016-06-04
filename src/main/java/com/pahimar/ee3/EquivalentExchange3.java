@@ -7,7 +7,7 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
@@ -66,7 +66,7 @@ public class EquivalentExchange3
 
         Files.init(event);
 
-        PacketHandler.init();
+        Network.init();
 
         proxy.registerKeybindings();
 

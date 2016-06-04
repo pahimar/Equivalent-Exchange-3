@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.api.array.AlchemyArray;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileEntityAlchemyArray;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
@@ -342,7 +342,7 @@ public class TileEntityAlchemyArray extends TileEntityEE implements ISidedInvent
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityAlchemyArray(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileEntityAlchemyArray(this));
     }
 
     @Override

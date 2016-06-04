@@ -3,7 +3,7 @@ package com.pahimar.ee3.item;
 import com.pahimar.ee3.api.array.AlchemyArray;
 import com.pahimar.ee3.array.AlchemyArrayRegistry;
 import com.pahimar.ee3.init.ModBlocks;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
@@ -293,7 +293,7 @@ public class ItemChalk extends ItemEE implements IKeyBound
 
             chalkSettings.writeToNBT(playerCustomData);
             EntityUtils.saveCustomEntityData(entityPlayer, playerCustomData);
-            PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) entityPlayer);
+            Network.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) entityPlayer);
         }
     }
 }

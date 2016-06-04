@@ -1,7 +1,7 @@
 package com.pahimar.ee3.client.gui.element;
 
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageGuiElementTextFieldUpdate;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
@@ -19,7 +19,7 @@ public class ElementSearchField extends ElementTextField
         if (success && this.gui.inventorySlots instanceof IElementTextFieldHandler)
         {
             ((IElementTextFieldHandler) this.gui.inventorySlots).handleElementTextFieldUpdate(this.name, this.getText());
-            PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
+            Network.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
         }
     }
 
@@ -40,7 +40,7 @@ public class ElementSearchField extends ElementTextField
         if (mouseButton == 1)
         {
             this.setText("");
-            PacketHandler.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
+            Network.INSTANCE.sendToServer(new MessageGuiElementTextFieldUpdate(this));
         }
 
         return true;

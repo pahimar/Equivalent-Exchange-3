@@ -3,7 +3,7 @@ package com.pahimar.ee3.client.gui.inventory;
 import com.pahimar.ee3.client.gui.element.ElementSearchField;
 import com.pahimar.ee3.client.gui.element.ElementStatefulButton;
 import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageGuiElementClicked;
 import com.pahimar.ee3.network.message.MessageSliderElementUpdated;
 import com.pahimar.ee3.reference.Colors;
@@ -124,14 +124,14 @@ public class GuiTransmutationTablet extends GuiBase {
             @Override
             public boolean onMouseWheel(int mouseX, int mouseY, int movement)
             {
-                PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
+                Network.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
                 return super.onMouseWheel(mouseX, mouseY, movement);
             }
 
             @Override
             public void onStopDragging()
             {
-                PacketHandler.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
+                Network.INSTANCE.sendToServer(new MessageSliderElementUpdated(this));
             }
 
             @Override
@@ -176,7 +176,7 @@ public class GuiTransmutationTablet extends GuiBase {
     {
         if (buttonName.equals("sortOption"))
         {
-            PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
+            Network.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
 
             if (mouseButton == LEFT_MOUSE_BUTTON)
             {
@@ -213,7 +213,7 @@ public class GuiTransmutationTablet extends GuiBase {
         }
         else if (buttonName.equals("sortOrder"))
         {
-            PacketHandler.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
+            Network.INSTANCE.sendToServer(new MessageGuiElementClicked(buttonName, mouseButton));
 
             if (sortOrderButton.getState() == SORT_ASCENDING)
             {

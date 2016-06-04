@@ -1,6 +1,6 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.network.message.MessageSyncBlacklist;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
@@ -25,11 +25,11 @@ public class PlayerEventHandler {
             chalkSettings.readFromNBT(playerCustomData);
             chalkSettings.writeToNBT(playerCustomData);
             EntityUtils.saveCustomEntityData(event.player, playerCustomData);
-            PacketHandler.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) event.player);
+            Network.INSTANCE.sendTo(new MessageChalkSettings(chalkSettings), (EntityPlayerMP) event.player);
 
-            PacketHandler.INSTANCE.sendTo(new MessageSyncEnergyValues(), (EntityPlayerMP) event.player);
-            PacketHandler.INSTANCE.sendTo(new MessageSyncBlacklist(Blacklist.KNOWLEDGE), (EntityPlayerMP) event.player);
-            PacketHandler.INSTANCE.sendTo(new MessageSyncBlacklist(Blacklist.EXCHANGE), (EntityPlayerMP) event.player);
+            Network.INSTANCE.sendTo(new MessageSyncEnergyValues(), (EntityPlayerMP) event.player);
+            Network.INSTANCE.sendTo(new MessageSyncBlacklist(Blacklist.KNOWLEDGE), (EntityPlayerMP) event.player);
+            Network.INSTANCE.sendTo(new MessageSyncBlacklist(Blacklist.EXCHANGE), (EntityPlayerMP) event.player);
         }
     }
 }

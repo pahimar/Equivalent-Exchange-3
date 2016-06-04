@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileCalcinator;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.CalcinationUtils;
@@ -278,7 +278,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     public Packet getDescriptionPacket()
     {
         sendDustPileData();
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileCalcinator(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileCalcinator(this));
     }
 
     @SideOnly(Side.CLIENT)

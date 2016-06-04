@@ -10,7 +10,7 @@ import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessagePlayerKnowledge;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
@@ -156,7 +156,7 @@ public class ContainerTransmutationTablet extends ContainerEE implements IElemen
 
     private void sendKnowledgeToClient(Collection<ItemStack> knownItemStacks) {
 
-        PacketHandler.INSTANCE.sendToAllAround(
+        Network.INSTANCE.sendToAllAround(
                 new MessagePlayerKnowledge(transmutationTablet, knownItemStacks),
                 new NetworkRegistry.TargetPoint(world.provider.dimensionId, transmutationTablet.xCoord, transmutationTablet.yCoord, transmutationTablet.zCoord, 5d)
         );

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileEntityGlassBell;
 import com.pahimar.ee3.reference.Names;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -116,7 +116,7 @@ public class TileEntityGlassBell extends TileEntityEE implements IInventory
                 this.state = 0;
             }
 
-            PacketHandler.INSTANCE.sendToAllAround(new MessageTileEntityGlassBell(this, displayStack), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 128d));
+            Network.INSTANCE.sendToAllAround(new MessageTileEntityGlassBell(this, displayStack), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 128d));
         }
 
         this.markDirty();
@@ -185,6 +185,6 @@ public class TileEntityGlassBell extends TileEntityEE implements IInventory
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityGlassBell(this, getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX)));
+        return Network.INSTANCE.getPacketFrom(new MessageTileEntityGlassBell(this, getStackInSlot(DISPLAY_SLOT_INVENTORY_INDEX)));
     }
 }

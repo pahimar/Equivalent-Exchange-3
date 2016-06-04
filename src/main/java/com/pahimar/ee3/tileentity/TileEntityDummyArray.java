@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileEntityDummy;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
@@ -78,7 +78,7 @@ public class TileEntityDummyArray extends TileEntityEE
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityDummy(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileEntityDummy(this));
     }
 
     @Override

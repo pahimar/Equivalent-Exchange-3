@@ -1,6 +1,6 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageTileEntityEE;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
@@ -146,6 +146,6 @@ public class TileEntityEE extends TileEntity
     @Override
     public Packet getDescriptionPacket()
     {
-        return PacketHandler.INSTANCE.getPacketFrom(new MessageTileEntityEE(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileEntityEE(this));
     }
 }

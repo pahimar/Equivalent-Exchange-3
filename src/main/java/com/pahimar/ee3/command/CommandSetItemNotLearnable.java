@@ -1,7 +1,7 @@
 package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageSetBlacklistEntry;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
@@ -79,7 +79,7 @@ public class CommandSetItemNotLearnable extends CommandBase
             }
 
             BlacklistRegistryProxy.addToBlacklist(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE);
-            PacketHandler.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
+            Network.INSTANCE.sendToAll(new MessageSetBlacklistEntry(itemStack, BlacklistRegistryProxy.Blacklist.KNOWLEDGE));
             func_152373_a(commandSender, this, Messages.Commands.SET_ITEM_NOT_LEARNABLE_SUCCESS, new Object[]{commandSender.getCommandSenderName(), itemStack.func_151000_E()});
         }
     }

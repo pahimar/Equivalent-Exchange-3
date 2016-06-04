@@ -2,25 +2,20 @@ package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.settings.ChalkSettings;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageChalkSettings implements IMessage, IMessageHandler<MessageChalkSettings, IMessage>
-{
-    private int index, size, rotation;
+public class MessageChalkSettings implements IMessage {
 
-    public MessageChalkSettings()
-    {
+    public ChalkSettings chalkSettings;
 
+    public MessageChalkSettings() {
     }
 
-    public MessageChalkSettings(ChalkSettings chalkSettings)
-    {
-        this.index = chalkSettings.getIndex();
-        this.size = chalkSettings.getSize();
-        this.rotation = chalkSettings.getRotation();
+    public MessageChalkSettings(ChalkSettings chalkSettings) {
+        this.chalkSettings = chalkSettings;
     }
 
     /**
@@ -31,36 +26,28 @@ public class MessageChalkSettings implements IMessage, IMessageHandler<MessageCh
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        this.index = buf.readInt();
-        this.size = buf.readInt();
-        this.rotation = buf.readInt();
+        this.chalkSettings = new ChalkSettings(buf.readInt(), buf.readInt(), buf.readInt());
     }
 
     /**
      * Deconstruct your message into the supplied byte buffer
      *
-     * @param buf
+     * @param byteBuf
      */
     @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(this.index);
-        buf.writeInt(this.size);
-        buf.writeInt(this.rotation);
+    public void toBytes(ByteBuf byteBuf) {
+
+        byteBuf.writeInt(chalkSettings.getIndex());
+        byteBuf.writeInt(chalkSettings.getSize());
+        byteBuf.writeInt(chalkSettings.getRotation());
     }
 
-    /**
-     * Called when a message is received of the appropriate type. You can optionally return a reply message, or null if no reply
-     * is needed.
-     *
-     * @param message The message
-     * @param ctx
-     * @return an optional return message
-     */
-    @Override
-    public IMessage onMessage(MessageChalkSettings message, MessageContext ctx)
-    {
-        EquivalentExchange3.proxy.getClientProxy().chalkSettings = new ChalkSettings(message.index, message.size, message.rotation);
-        return null;
+    public static class MessageHandler implements IMessageHandler<MessageChalkSettings, IMessage> {
+
+        @Override
+        public IMessage onMessage(MessageChalkSettings message, MessageContext ctx) {
+            EquivalentExchange3.proxy.getClientProxy().chalkSettings = message.chalkSettings;
+            return null;
+        }
     }
 }
