@@ -12,31 +12,28 @@ import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.settings.ChalkSettings;
-import com.pahimar.ee3.tileentity.*;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
+
     public ChalkSettings chalkSettings = new ChalkSettings();
 
     @Override
-    public void registerEventHandlers()
-    {
+    public void registerEventHandlers() {
+
         super.registerEventHandlers();
-        FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
-        FMLCommonHandler.instance().bus().register(new HUDTickHandler());
+        MinecraftForge.EVENT_BUS.register(new KeyInputEventHandler());
+        MinecraftForge.EVENT_BUS.register(new HUDTickHandler());
         MinecraftForge.EVENT_BUS.register(new ItemTooltipEventHandler());
         MinecraftForge.EVENT_BUS.register(new DrawBlockHighlightEventHandler());
     }
 
     @Override
-    public void registerKeybindings()
-    {
+    public void registerKeybindings() {
+
         ClientRegistry.registerKeyBinding(Keybindings.charge);
         ClientRegistry.registerKeyBinding(Keybindings.extra);
         ClientRegistry.registerKeyBinding(Keybindings.release);

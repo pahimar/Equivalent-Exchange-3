@@ -3,7 +3,7 @@ package com.pahimar.ee3.init;
 import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Reference;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModItems

@@ -8,7 +8,6 @@ import com.pahimar.ee3.network.message.MessageChalkSettings;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.settings.ChalkSettings;
-import com.pahimar.ee3.tileentity.TileEntityDummyArray;
 import com.pahimar.ee3.util.EntityUtils;
 import com.pahimar.ee3.util.IKeyBound;
 import net.minecraft.block.Block;

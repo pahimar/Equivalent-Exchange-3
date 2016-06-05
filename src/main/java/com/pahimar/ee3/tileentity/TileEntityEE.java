@@ -1,7 +1,5 @@
 package com.pahimar.ee3.tileentity;
 
-import com.pahimar.ee3.network.Network;
-import com.pahimar.ee3.network.message.MessageTileEntityEE;
 import com.pahimar.ee3.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -120,6 +118,8 @@ public abstract class TileEntityEE extends TileEntity implements ITickable {
             nbtTagCompound.setLong(Names.NBT.OWNER_UUID_MOST_SIG, ownerUUID.getMostSignificantBits());
             nbtTagCompound.setLong(Names.NBT.OWNER_UUID_LEAST_SIG, ownerUUID.getLeastSignificantBits());
         }
+
+        return nbtTagCompound;
     }
 
     public boolean hasCustomName() {
@@ -133,7 +133,7 @@ public abstract class TileEntityEE extends TileEntity implements ITickable {
     // FIXME No idea if this is correct
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
-        return (SPacketUpdateTileEntity) Network.INSTANCE.getPacketFrom(new MessageTileEntityEE(this));
+        return super.getUpdatePacket();
     }
 
     @Override

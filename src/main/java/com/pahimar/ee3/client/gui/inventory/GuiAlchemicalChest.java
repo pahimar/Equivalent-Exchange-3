@@ -4,7 +4,6 @@ import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;

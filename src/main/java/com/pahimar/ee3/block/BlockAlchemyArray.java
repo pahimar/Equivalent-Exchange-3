@@ -6,7 +6,6 @@ import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
 import com.pahimar.ee3.reference.Sounds;
 import com.pahimar.ee3.settings.ChalkSettings;
-import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.util.CommonSoundHelper;
 import com.pahimar.ee3.util.EntityUtils;

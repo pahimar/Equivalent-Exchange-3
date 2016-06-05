@@ -2,7 +2,6 @@ package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.client.renderer.model.ModelAugmentationTable;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityAugmentationTable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

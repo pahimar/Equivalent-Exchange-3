@@ -1,48 +1,43 @@
 package com.pahimar.ee3.api.array;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import cpw.mods.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 
-import java.util.SortedSet;
+import java.util.Set;
 
-public class AlchemyArrayRegistryProxy
-{
-    @Mod.Instance("EE3")
-    private static Object ee3Mod;
+public class AlchemyArrayRegistryProxy {
 
-    public static boolean registerAlchemyArray(AlchemyArray alchemyArray)
-    {
+    public static boolean register(AlchemyArray alchemyArray) {
+
         init();
 
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().registerAlchemyArray(alchemyArray);
+        if (ee3Mod != null) {
+            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().register(alchemyArray);
         }
 
         return false;
     }
 
-    public static SortedSet<AlchemyArray> getRegisteredAlchemyArrays()
-    {
+    public static Set<AlchemyArray> getAlchemyArrays() {
+
         init();
 
-        if (ee3Mod != null)
-        {
-            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().getRegisteredAlchemyArrays();
+        if (ee3Mod != null) {
+            return EE3Wrapper.ee3mod.getAlchemyArrayRegistry().getAlchemyArrays();
         }
 
         return null;
     }
 
-    private static class EE3Wrapper
-    {
+    @Mod.Instance("EE3")
+    private static Object ee3Mod;
+
+    private static class EE3Wrapper {
         private static EquivalentExchange3 ee3mod;
     }
 
-    private static void init()
-    {
-        if (ee3Mod != null)
-        {
+    private static void init() {
+        if (ee3Mod != null) {
             EE3Wrapper.ee3mod = (EquivalentExchange3) ee3Mod;
         }
     }

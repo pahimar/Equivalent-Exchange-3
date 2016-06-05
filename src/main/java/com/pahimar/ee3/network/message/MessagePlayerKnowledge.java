@@ -2,7 +2,6 @@ package com.pahimar.ee3.network.message;
 
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
-import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.SerializationHelper;
 import io.netty.buffer.ByteBuf;

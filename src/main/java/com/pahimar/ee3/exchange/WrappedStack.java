@@ -260,7 +260,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             String unlocalizedName = null;
             try {
                 if (itemStack.getItem() != null) {
-                    unlocalizedName = Item.itemRegistry.getNameForObject(itemStack.getItem());
+                    unlocalizedName = Item.REGISTRY.getNameForObject(itemStack.getItem()).toString();
                 }
 
                 if (unlocalizedName == null) {

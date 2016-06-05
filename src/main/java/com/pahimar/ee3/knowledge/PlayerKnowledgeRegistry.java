@@ -7,10 +7,10 @@ import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +42,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean doesPlayerKnow(EntityPlayer player, Object object) {
-        return player != null && doesPlayerKnow(player.getDisplayName(), object);
+        return player != null && doesPlayerKnow(player.getName(), object);
     }
 
     /**
@@ -53,12 +53,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean doesPlayerKnow(String playerName, Object object) {
-
-        if (getPlayerKnowledge(playerName) != null) {
-            return getPlayerKnowledge(playerName).isKnown(object);
-        }
-
-        return false;
+        return getPlayerKnowledge(playerName) != null && getPlayerKnowledge(playerName).isKnown(object);
     }
 
     /**
@@ -71,7 +66,7 @@ public class PlayerKnowledgeRegistry {
     public boolean canPlayerLearn(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            return canPlayerLearn(entityPlayer.getDisplayName(), object);
+            return canPlayerLearn(entityPlayer.getName(), object);
         }
 
         return false;
@@ -85,12 +80,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean canPlayerLearn(String playerName, Object object) {
-
-        if (getPlayerKnowledge(playerName) != null) {
-            return !getPlayerKnowledge(playerName).isKnown(object) && BlacklistRegistryProxy.isLearnable(object);
-        }
-
-        return false;
+        return getPlayerKnowledge(playerName) != null && !getPlayerKnowledge(playerName).isKnown(object) && BlacklistRegistryProxy.isLearnable(object);
     }
 
     /**
@@ -102,7 +92,7 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), object);
+            teachPlayer(entityPlayer.getName(), object);
         }
     }
 
@@ -129,7 +119,7 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), objects);
+            teachPlayer(entityPlayer.getName(), objects);
         }
     }
 
@@ -141,16 +131,10 @@ public class PlayerKnowledgeRegistry {
      */
     public void teachPlayer(String playerName, Collection<?> objects) {
 
-        if (objects != null) {
-
+        if (objects != null && getPlayerKnowledge(playerName) != null) {
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
-
-            if (playerKnowledge != null) {
-                for (Object object : objects){
-                    getPlayerKnowledge(playerName).learn(object);
-                }
-                save(playerName);
-            }
+            objects.forEach(playerKnowledge::learn);
+            save(playerName);
         }
     }
 
@@ -163,7 +147,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), object);
+            makePlayerForget(entityPlayer.getName(), object);
         }
     }
 
@@ -190,7 +174,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), objects);
+            makePlayerForget(entityPlayer.getName(), objects);
         }
     }
 
@@ -202,16 +186,11 @@ public class PlayerKnowledgeRegistry {
      */
     public void makePlayerForget(String playerName, Collection<?> objects) {
 
-        if (objects != null) {
+        if (objects != null && getPlayerKnowledge(playerName) != null) {
 
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
-
-            if (playerKnowledge != null) {
-                for (Object object : objects) {
-                    getPlayerKnowledge(playerName).forget(object);
-                }
-                save(playerName);
-            }
+            objects.forEach(playerKnowledge::forget);
+            save(playerName);
         }
     }
 
@@ -223,7 +202,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForgetAll(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            makePlayerForgetAll(entityPlayer.getDisplayName());
+            makePlayerForgetAll(entityPlayer.getName());
         }
     }
 
@@ -251,7 +230,7 @@ public class PlayerKnowledgeRegistry {
     public Set<ItemStack> getKnownItemStacks(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            return getKnownItemStacks(entityPlayer.getDisplayName());
+            return getKnownItemStacks(entityPlayer.getName());
         }
 
         return new TreeSet<>(Comparators.ID_COMPARATOR);
@@ -281,7 +260,7 @@ public class PlayerKnowledgeRegistry {
     protected PlayerKnowledge getPlayerKnowledge(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            return getPlayerKnowledge(entityPlayer.getDisplayName());
+            return getPlayerKnowledge(entityPlayer.getName());
         }
 
         return null;

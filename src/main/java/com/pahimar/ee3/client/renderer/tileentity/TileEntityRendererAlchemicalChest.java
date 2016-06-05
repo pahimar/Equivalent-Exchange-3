@@ -1,7 +1,6 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityAlchemicalChest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelChest;

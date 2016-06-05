@@ -4,7 +4,6 @@ import com.pahimar.ee3.client.renderer.model.ModelCalcinator;
 import com.pahimar.ee3.client.util.ColorUtils;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

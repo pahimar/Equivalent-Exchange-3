@@ -2,7 +2,6 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;

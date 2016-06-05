@@ -7,8 +7,6 @@ import com.pahimar.ee3.client.util.RenderUtils;
 import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.ToolMode;
 import com.pahimar.ee3.settings.ChalkSettings;
-import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
-import com.pahimar.ee3.tileentity.TileEntityDummyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import com.pahimar.ee3.util.IModalTool;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

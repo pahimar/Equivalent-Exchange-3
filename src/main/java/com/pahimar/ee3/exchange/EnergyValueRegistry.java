@@ -12,11 +12,11 @@ import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
@@ -530,7 +530,7 @@ public class EnergyValueRegistry {
             EnergyValue factoredEnergyValue = EnergyValue.factor(energyValue, wrappedStack.getStackSize());
 
             if (phase == Phase.PRE_CALCULATION) {
-                if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.PRE_CALCULATION))) {
+                if (!MinecraftForge.EVENT_BUS.post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.PRE_CALCULATION))) {
 
                     preCalculationStackValueMap.put(wrappedStack, factoredEnergyValue);
 
@@ -542,7 +542,7 @@ public class EnergyValueRegistry {
                     }
                 }
             }
-            else if (!FMLCommonHandler.instance().bus().post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.POST_CALCULATION))) {
+            else if (!MinecraftForge.EVENT_BUS.post(new EnergyValueEvent.SetEnergyValueEvent(wrappedStack, factoredEnergyValue, Phase.POST_CALCULATION))) {
 
                 TreeMap<WrappedStack, EnergyValue> valueMap = new TreeMap<>(stackValueMap);
                 valueMap.put(wrappedStack, energyValue);

@@ -9,7 +9,6 @@ import com.pahimar.ee3.network.message.MessageSliderElementUpdated;
 import com.pahimar.ee3.reference.Colors;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.repackage.cofh.lib.gui.GuiBase;
 import com.pahimar.repackage.cofh.lib.gui.GuiColor;
 import com.pahimar.repackage.cofh.lib.gui.element.ElementSlider;

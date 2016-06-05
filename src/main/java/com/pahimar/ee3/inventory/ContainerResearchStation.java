@@ -2,7 +2,6 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.item.ItemAlchenomicon;
-import com.pahimar.ee3.tileentity.TileEntityResearchStation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;

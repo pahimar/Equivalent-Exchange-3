@@ -1,9 +1,7 @@
 package com.pahimar.ee3.client.renderer.tileentity;
 
 import com.pahimar.ee3.api.array.AlchemyArray;
-import com.pahimar.ee3.api.array.ICustomAlchemyArrayRender;
 import com.pahimar.ee3.client.util.RenderUtils;
-import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

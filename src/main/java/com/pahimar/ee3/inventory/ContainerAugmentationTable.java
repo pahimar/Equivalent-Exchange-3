@@ -2,7 +2,6 @@ package com.pahimar.ee3.inventory;
 
 import com.pahimar.ee3.item.ItemGem;
 import com.pahimar.ee3.item.ItemToolEE;
-import com.pahimar.ee3.tileentity.TileEntityAugmentationTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

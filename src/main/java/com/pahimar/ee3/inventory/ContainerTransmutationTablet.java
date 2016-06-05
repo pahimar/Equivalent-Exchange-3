@@ -13,7 +13,6 @@ import com.pahimar.ee3.item.ItemPhilosophersStone;
 import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessagePlayerKnowledge;
 import com.pahimar.ee3.reference.Comparators;
-import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import com.pahimar.ee3.util.FilterUtils;
 import com.pahimar.ee3.util.ItemStackUtils;
 import com.pahimar.repackage.cofh.lib.util.helpers.MathHelper;

@@ -17,7 +17,7 @@ public class Abilities {
             }
         }
 
-        BlacklistRegistryProxy.setAsNotLearnable(new ItemStack(Blocks.coal_ore));
+        BlacklistRegistryProxy.setAsNotLearnable(new ItemStack(Blocks.COAL_ORE));
         BlacklistRegistryProxy.setAsNotLearnable(ModItems.shardMinium);
         BlacklistRegistryProxy.setAsNotLearnable(new ItemStack(ModItems.alchemicalDust, 1, 1));
         BlacklistRegistryProxy.setAsNotLearnable(new ItemStack(ModItems.alchemicalDust, 1, 2));

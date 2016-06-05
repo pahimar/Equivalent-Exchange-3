@@ -2,8 +2,6 @@ package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileEntityAlchemyArray;
-import com.pahimar.ee3.tileentity.TileEntityDummyArray;
 import com.pahimar.ee3.tileentity.TileEntityEE;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

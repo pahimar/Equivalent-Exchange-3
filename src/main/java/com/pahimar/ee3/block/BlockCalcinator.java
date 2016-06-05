@@ -5,7 +5,6 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

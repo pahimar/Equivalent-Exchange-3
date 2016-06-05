@@ -3,8 +3,8 @@ package com.pahimar.ee3.reference;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 

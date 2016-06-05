@@ -5,7 +5,6 @@ import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
