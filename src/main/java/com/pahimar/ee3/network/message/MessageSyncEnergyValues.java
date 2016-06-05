@@ -7,14 +7,14 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Map;
 
-public class MessageSyncEnergyValues implements IMessage, IMessageHandler<MessageSyncEnergyValues, IMessage> {
+public class MessageSyncEnergyValues implements IMessage {
 
     public Map<WrappedStack, EnergyValue> valueMap;
 
@@ -22,11 +22,6 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
         this.valueMap = EnergyValueRegistry.INSTANCE.getEnergyValues();
     }
 
-    /**
-     * Convert from the supplied buffer into your specific message type
-     *
-     * @param buf
-     */
     @Override
     public void fromBytes(ByteBuf buf) {
 
@@ -56,11 +51,6 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
         }
     }
 
-    /**
-     * Deconstruct your message into the supplied byte buffer
-     *
-     * @param buf
-     */
     @Override
     public void toBytes(ByteBuf buf) {
 
@@ -81,25 +71,20 @@ public class MessageSyncEnergyValues implements IMessage, IMessageHandler<Messag
         }
     }
 
-    /**
-     * Called when a message is received of the appropriate type. You can optionally return a reply message, or null if no reply
-     * is needed.
-     *
-     * @param message The message
-     * @param ctx
-     * @return an optional return message
-     */
-    @Override
-    public IMessage onMessage(MessageSyncEnergyValues message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageSyncEnergyValues, IMessage> {
 
-        if (message.valueMap != null) {
-            EnergyValueRegistry.INSTANCE.load(message.valueMap);
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received {} energy values from server", message.valueMap.size());
-        }
-        else {
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client failed to receive energy values from server - falling back to local values");
-        }
+        @Override
+        public IMessage onMessage(MessageSyncEnergyValues message, MessageContext ctx) {
 
-        return null;
+            if (message.valueMap != null) {
+                EnergyValueRegistry.INSTANCE.load(message.valueMap);
+                LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received {} energy values from server", message.valueMap.size());
+            }
+            else {
+                LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client failed to receive energy values from server - falling back to local values");
+            }
+
+            return null;
+        }
     }
 }

@@ -5,7 +5,7 @@ import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.reference.Particles;
 import com.pahimar.ee3.reference.RenderIds;
-import com.pahimar.ee3.tileentity.TileEntityCalcinator;
+import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,7 +27,7 @@ public class BlockCalcinator extends BlockTileEntityEE
     @Override
     public TileEntity createNewTileEntity(World world, int metaData)
     {
-        return new TileEntityCalcinator();
+        return new TileEntityCalciner();
     }
 
     @Override
@@ -51,9 +51,9 @@ public class BlockCalcinator extends BlockTileEntityEE
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
+        if (world.getTileEntity(x, y, z) instanceof TileEntityCalciner)
         {
-            if (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1)
+            if (((TileEntityCalciner) world.getTileEntity(x, y, z)).getState() == 1)
             {
                 world.spawnParticle(Particles.NORMAL_SMOKE, (double) x + 0.5F, (double) y + 0.4F, (double) ((z + 0.5F) + (random.nextFloat() * 0.5F - 0.3F)), 0.0D, 0.0D, 0.0D);
                 world.spawnParticle(Particles.FLAME, (double) x + 0.5F, (double) y + 0.4F, (double) z + 0.5F, 0.0D, 0.0D, 0.0D);
@@ -72,7 +72,7 @@ public class BlockCalcinator extends BlockTileEntityEE
         {
             if (!world.isRemote)
             {
-                if (world.getTileEntity(x, y, z) instanceof TileEntityCalcinator)
+                if (world.getTileEntity(x, y, z) instanceof TileEntityCalciner)
                 {
                     player.openGui(EquivalentExchange3.instance, GUIs.CALCINATOR.ordinal(), world, x, y, z);
                 }
@@ -85,7 +85,7 @@ public class BlockCalcinator extends BlockTileEntityEE
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        if ((world.getTileEntity(x, y, z) instanceof TileEntityCalcinator) && (((TileEntityCalcinator) world.getTileEntity(x, y, z)).getState() == 1))
+        if ((world.getTileEntity(x, y, z) instanceof TileEntityCalciner) && (((TileEntityCalciner) world.getTileEntity(x, y, z)).getState() == 1))
         {
             return 15;
         }

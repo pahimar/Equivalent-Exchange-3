@@ -19,7 +19,8 @@ public class MessageKeyPressed implements IMessage {
 
         if (keyPressed != null) {
             this.keyPressed = keyPressed;
-        } else {
+        }
+        else {
             this.keyPressed = Key.UNKNOWN;
         }
     }

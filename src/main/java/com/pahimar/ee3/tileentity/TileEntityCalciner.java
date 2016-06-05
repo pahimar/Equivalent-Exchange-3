@@ -1,7 +1,7 @@
 package com.pahimar.ee3.tileentity;
 
 import com.pahimar.ee3.network.Network;
-import com.pahimar.ee3.network.message.MessageTileCalcinator;
+import com.pahimar.ee3.network.message.MessageTileCalciner;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.CalcinationUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +17,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityCalcinator extends TileEntityEE implements ISidedInventory
+public class TileEntityCalciner extends TileEntityEE implements ISidedInventory
 {
     public static final int INVENTORY_SIZE = 4;
     public static final int FUEL_INVENTORY_INDEX = 0;
@@ -37,16 +37,16 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
      */
     private ItemStack[] inventory;
 
-    public TileEntityCalcinator()
+    public TileEntityCalciner()
     {
         inventory = new ItemStack[INVENTORY_SIZE];
     }
 
-    public static boolean suckInItems(TileEntityCalcinator tileEntityCalcinator)
+    public static boolean suckInItems(TileEntityCalciner tileEntityCalciner)
     {
-        EntityItem entityitem = TileEntityHopper.func_145897_a(tileEntityCalcinator.getWorldObj(), tileEntityCalcinator.xCoord, tileEntityCalcinator.yCoord + 1.0D, tileEntityCalcinator.zCoord);
+        EntityItem entityitem = TileEntityHopper.func_145897_a(tileEntityCalciner.getWorldObj(), tileEntityCalciner.xCoord, tileEntityCalciner.yCoord + 1.0D, tileEntityCalciner.zCoord);
 
-        return entityitem != null && TileEntityHopper.func_145898_a(tileEntityCalcinator, entityitem);
+        return entityitem != null && TileEntityHopper.func_145898_a(tileEntityCalciner, entityitem);
     }
 
     @Override
@@ -278,7 +278,7 @@ public class TileEntityCalcinator extends TileEntityEE implements ISidedInventor
     public Packet getDescriptionPacket()
     {
         sendDustPileData();
-        return Network.INSTANCE.getPacketFrom(new MessageTileCalcinator(this));
+        return Network.INSTANCE.getPacketFrom(new MessageTileCalciner(this));
     }
 
     @SideOnly(Side.CLIENT)

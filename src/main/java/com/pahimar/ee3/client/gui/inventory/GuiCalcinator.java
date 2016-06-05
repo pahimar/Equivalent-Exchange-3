@@ -2,7 +2,7 @@ package com.pahimar.ee3.client.gui.inventory;
 
 import com.pahimar.ee3.inventory.ContainerCalcinator;
 import com.pahimar.ee3.reference.Textures;
-import com.pahimar.ee3.tileentity.TileEntityCalcinator;
+import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -12,13 +12,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiCalcinator extends GuiContainer
 {
-    private TileEntityCalcinator tileEntityCalcinator;
+    private TileEntityCalciner tileEntityCalciner;
 
-    public GuiCalcinator(InventoryPlayer inventoryPlayer, TileEntityCalcinator tileEntityCalcinator)
+    public GuiCalcinator(InventoryPlayer inventoryPlayer, TileEntityCalciner tileEntityCalciner)
     {
-        super(new ContainerCalcinator(inventoryPlayer, tileEntityCalcinator));
+        super(new ContainerCalcinator(inventoryPlayer, tileEntityCalciner));
         ySize = 176;
-        this.tileEntityCalcinator = tileEntityCalcinator;
+        this.tileEntityCalciner = tileEntityCalciner;
     }
 
     @Override
@@ -39,13 +39,13 @@ public class GuiCalcinator extends GuiContainer
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
         int scaleAdjustment;
 
-        if (this.tileEntityCalcinator.getState() == 1)
+        if (this.tileEntityCalciner.getState() == 1)
         {
-            scaleAdjustment = this.tileEntityCalcinator.getBurnTimeRemainingScaled(12);
+            scaleAdjustment = this.tileEntityCalciner.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(xStart + 46, yStart + 22 + 23 - scaleAdjustment, 176, 12 - scaleAdjustment, 14, scaleAdjustment + 2);
         }
 
-        scaleAdjustment = this.tileEntityCalcinator.getCookProgressScaled(24);
+        scaleAdjustment = this.tileEntityCalciner.getCookProgressScaled(24);
         this.drawTexturedModalRect(xStart + 75, yStart + 30, 176, 14, scaleAdjustment + 1, 16);
     }
 }

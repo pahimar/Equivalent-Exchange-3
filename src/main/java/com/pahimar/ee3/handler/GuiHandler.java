@@ -31,8 +31,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerAlchenomicon(entityPlayer, entityPlayer.getHeldItemMainhand());
         }
         else if (id == GUIs.CALCINATOR.ordinal()) {
-            TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) world.getTileEntity(blockPos);
-            return new ContainerCalcinator(entityPlayer.inventory, tileEntityCalcinator);
+            TileEntityCalciner tileEntityCalciner = (TileEntityCalciner) world.getTileEntity(blockPos);
+            return new ContainerCalcinator(entityPlayer.inventory, tileEntityCalciner);
         }
         else if (id == GUIs.ALUDEL.ordinal()) {
             TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(blockPos);
@@ -74,8 +74,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiAlchenomicon(entityPlayer.inventory, entityPlayer.getHeldItemMainhand());
         }
         else if (id == GUIs.CALCINATOR.ordinal()) {
-            TileEntityCalcinator tileEntityCalcinator = (TileEntityCalcinator) world.getTileEntity(blockPos);
-            return new GuiCalcinator(entityPlayer.inventory, tileEntityCalcinator);
+            TileEntityCalciner tileEntityCalciner = (TileEntityCalciner) world.getTileEntity(blockPos);
+            return new GuiCalcinator(entityPlayer.inventory, tileEntityCalciner);
         }
         else if (id == GUIs.ALUDEL.ordinal()) {
             TileEntityAludel tileEntityAludel = (TileEntityAludel) world.getTileEntity(blockPos);

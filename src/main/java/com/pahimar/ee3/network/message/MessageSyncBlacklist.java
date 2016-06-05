@@ -7,16 +7,16 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Set;
 
 import static com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy.Blacklist;
 
-public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageSyncBlacklist, IMessage> {
+public class MessageSyncBlacklist implements IMessage {
 
     public Blacklist blacklist;
     public Set<WrappedStack> blacklistSet;
@@ -102,13 +102,16 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
         }
     }
 
-    @Override
-    public IMessage onMessage(MessageSyncBlacklist message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageSyncBlacklist, IMessage> {
 
-        if (message.blacklist != null && message.blacklistSet != null) {
-            BlacklistRegistry.INSTANCE.load(message.blacklistSet, message.blacklist);
+        @Override
+        public IMessage onMessage(MessageSyncBlacklist message, MessageContext ctx) {
+
+            if (message.blacklist != null && message.blacklistSet != null) {
+                BlacklistRegistry.INSTANCE.load(message.blacklistSet, message.blacklist);
+            }
+
+            return null;
         }
-
-        return null;
     }
 }

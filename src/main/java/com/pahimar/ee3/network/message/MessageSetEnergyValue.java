@@ -8,15 +8,15 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageSetEnergyValue, IMessage> {
+public class MessageSetEnergyValue implements IMessage {
 
     public Map<WrappedStack, EnergyValue> energyValueMap;
 
@@ -84,19 +84,22 @@ public class MessageSetEnergyValue implements IMessage, IMessageHandler<MessageS
         }
     }
 
-    @Override
-    public IMessage onMessage(MessageSetEnergyValue message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageSetEnergyValue, IMessage> {
 
-        if (message.energyValueMap != null) {
-            for (WrappedStack wrappedStack : message.energyValueMap.keySet()) {
+        @Override
+        public IMessage onMessage(MessageSetEnergyValue message, MessageContext ctx) {
 
-                EnergyValue energyValue = message.energyValueMap.get(wrappedStack);
-                EnergyValueRegistryProxy.setEnergyValue(wrappedStack, energyValue);
-                EnergyValueRegistry.INSTANCE.setShouldSave(false);
-                LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received new energy value '{}' for object '{}'", energyValue, wrappedStack);
+            if (message.energyValueMap != null) {
+                for (WrappedStack wrappedStack : message.energyValueMap.keySet()) {
+
+                    EnergyValue energyValue = message.energyValueMap.get(wrappedStack);
+                    EnergyValueRegistryProxy.setEnergyValue(wrappedStack, energyValue);
+                    EnergyValueRegistry.INSTANCE.setShouldSave(false);
+                    LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Client successfully received new energy value '{}' for object '{}'", energyValue, wrappedStack);
+                }
             }
-        }
 
-        return null;
+            return null;
+        }
     }
 }
