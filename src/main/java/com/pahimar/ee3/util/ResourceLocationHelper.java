@@ -1,6 +1,6 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.EquivalentExchange3;
 import net.minecraft.util.ResourceLocation;
 
 public class ResourceLocationHelper
@@ -12,6 +12,6 @@ public class ResourceLocationHelper
 
     public static ResourceLocation getResourceLocation(String path)
     {
-        return getResourceLocation(Reference.LOWERCASE_MOD_ID, path);
+        return getResourceLocation(EquivalentExchange3.MOD_ID, path);
     }
 }

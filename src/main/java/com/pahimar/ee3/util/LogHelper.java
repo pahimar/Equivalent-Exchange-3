@@ -1,6 +1,6 @@
 package com.pahimar.ee3.util;
 
-import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.EquivalentExchange3;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.message.Message;
 
@@ -8,8 +8,8 @@ import static org.apache.logging.log4j.Level.*;
 
 public class LogHelper {
 
-    public static final Marker MOD_MARKER = MarkerManager.getMarker(Reference.MOD_ID);
-    private static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
+    public static final Marker MOD_MARKER = MarkerManager.getMarker(EquivalentExchange3.MOD_ID);
+    private static final Logger LOGGER = LogManager.getLogger(EquivalentExchange3.MOD_ID);
 
     public static void log(Level level, Marker marker, Message message) {
         LOGGER.log(level, marker, message);

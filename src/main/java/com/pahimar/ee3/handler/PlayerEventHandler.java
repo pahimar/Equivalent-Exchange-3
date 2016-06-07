@@ -6,16 +6,17 @@ import com.pahimar.ee3.network.message.MessageSyncBlacklist;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.settings.ChalkSettings;
 import com.pahimar.ee3.util.EntityUtils;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import static com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy.Blacklist;
 
 public class PlayerEventHandler {
 
     @SubscribeEvent
-    public void onPlayerLoggedIn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
 
         if (event.player != null) {
             NBTTagCompound playerCustomData = EntityUtils.getCustomEntityData(event.player);

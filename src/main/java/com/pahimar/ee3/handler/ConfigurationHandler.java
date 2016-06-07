@@ -1,11 +1,10 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.reference.Reference;
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.util.ConfigurationUtils;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
 
@@ -75,7 +74,7 @@ public class ConfigurationHandler {
     @SubscribeEvent
     public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
 
-        if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
+        if (event.getModID().equalsIgnoreCase(EquivalentExchange3.MOD_ID)) {
             loadConfiguration();
         }
     }

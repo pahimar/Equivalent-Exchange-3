@@ -8,9 +8,7 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
-import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.util.serialize.*;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -36,34 +34,12 @@ public class SerializationHelper {
             .registerTypeAdapter(ENERGY_VALUE_MAP_TYPE, new EnergyValueMapSerializer())
             .create();
 
-    private static File instanceDataDirectory;
-    private static File instancePlayerDataDirectory;
-
     /**
-     * Returns a File reference to the mod specific directory in the data directory
+     * TODO Finish JavaDoc
      *
+     * @param file
      * @return
      */
-    @Deprecated
-    public static File getInstanceDataDirectory()
-    {
-        return instanceDataDirectory;
-    }
-
-    /**
-     * TODO Move this to {@link com.pahimar.ee3.reference.Files}
-     *
-     * Creates (if one does not exist already) and initializes a mod specific File reference inside of the current world's playerdata directory
-     */
-    public static void initModDataDirectories() {
-
-        instanceDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
-        instanceDataDirectory.mkdirs();
-
-        instancePlayerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
-        instancePlayerDataDirectory.mkdirs();
-    }
-
     public static Set<WrappedStack> readSetFromFile(File file) {
 
         Set<WrappedStack> wrappedStackSet = new TreeSet<>();
@@ -81,10 +57,23 @@ public class SerializationHelper {
         return wrappedStackSet;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param wrappedStackSet
+     * @param file
+     */
     public static void writeSetToFile(Set<WrappedStack> wrappedStackSet, File file) {
         writeJsonFile(file, GSON.toJson(wrappedStackSet));
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
     public static Map<WrappedStack, EnergyValue> readMapFromFile(File file) throws FileNotFoundException {
 
         Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
@@ -99,10 +88,23 @@ public class SerializationHelper {
         return valueMap;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param valueMap
+     * @param file
+     */
     public static void writeMapToFile(Map<WrappedStack, EnergyValue> valueMap, File file) {
         writeJsonFile(file, GSON.toJson(valueMap, ENERGY_VALUE_MAP_TYPE));
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
     public static String readJsonFile(File file) throws FileNotFoundException {
 
         StringBuilder jsonStringBuilder = new StringBuilder();
@@ -127,6 +129,12 @@ public class SerializationHelper {
         return jsonStringBuilder.toString();
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param file
+     * @param fileContents
+     */
     public static void writeJsonFile(File file, String fileContents) {
 
         if (file != null) {

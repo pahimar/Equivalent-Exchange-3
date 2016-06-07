@@ -22,7 +22,7 @@ public class ItemDarkMatterShovel extends ItemToolModalEE implements IKeyBound, 
 
     public ItemDarkMatterShovel()
     {
-        super(1.0f, Material.Tools.DARK_MATTER, blocksEffectiveAgainst);
+        super(1.0f, Material.DARK_MATTER_TOOL, blocksEffectiveAgainst);
         this.setUnlocalizedName(Names.Tools.DARK_MATTER_SHOVEL);
     }
 

@@ -2,28 +2,28 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.util.NBTUtils;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class ItemEventHandler
 {
     @SubscribeEvent
     public void onItemTossEvent(ItemTossEvent itemTossEvent)
     {
-        NBTUtils.clearStatefulNBTTags(itemTossEvent.entityItem.getEntityItem());
+        NBTUtils.clearStatefulNBTTags(itemTossEvent.getEntityItem().getEntityItem());
 
         //Close the Alchemical Bag GUI when the Alchemical bag is tossed
-        if (itemTossEvent.player.openContainer instanceof ContainerAlchemicalBag)
+        if (itemTossEvent.getPlayer().openContainer instanceof ContainerAlchemicalBag)
         {
-            if (((ContainerAlchemicalBag) itemTossEvent.player.openContainer).isItemStackParent(itemTossEvent.entityItem.getEntityItem()))
+            if (((ContainerAlchemicalBag) itemTossEvent.getPlayer().openContainer).isItemStackParent(itemTossEvent.getEntityItem().getEntityItem()))
             {
                 //We have to remove the itemstack we are throwing from the inventory now to prevent a loop (will also happen after this event has been fired)
-                itemTossEvent.player.inventory.setItemStack(null);
-                itemTossEvent.player.closeScreen();
+                itemTossEvent.getPlayer().inventory.setItemStack(null);
+                itemTossEvent.getPlayer().closeScreen();
             }
         }
     }
@@ -37,13 +37,13 @@ public class ItemEventHandler
     @SubscribeEvent
     public void onEntityItemPickupEvent(EntityItemPickupEvent entityItemPickupEvent)
     {
-        NBTUtils.clearStatefulNBTTags(entityItemPickupEvent.item.getEntityItem());
+        NBTUtils.clearStatefulNBTTags(entityItemPickupEvent.getItem().getEntityItem());
     }
 
     @SubscribeEvent
     public void onPlayerDropsEvent(PlayerDropsEvent playerDropsEvent)
     {
-        for (EntityItem entityItem : playerDropsEvent.drops)
+        for (EntityItem entityItem : playerDropsEvent.getDrops())
         {
             NBTUtils.clearStatefulNBTTags(entityItem.getEntityItem());
         }

@@ -22,7 +22,7 @@ public class ItemDarkMatterPickAxe extends ItemToolModalEE implements IKeyBound,
 
     public ItemDarkMatterPickAxe()
     {
-        super(2f, Material.Tools.DARK_MATTER, blocksEffectiveAgainst);
+        super(2f, Material.DARK_MATTER_TOOL, blocksEffectiveAgainst);
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
         this.setUnlocalizedName(Names.Tools.DARK_MATTER_PICKAXE);

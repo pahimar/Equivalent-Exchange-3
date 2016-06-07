@@ -22,7 +22,7 @@ public class ItemDarkMatterAxe extends ItemToolModalEE implements IKeyBound, ICh
 
     public ItemDarkMatterAxe()
     {
-        super(3.0f, Material.Tools.DARK_MATTER, blocksEffectiveAgainst);
+        super(3.0f, Material.DARK_MATTER_TOOL, blocksEffectiveAgainst);
         this.setUnlocalizedName(Names.Tools.DARK_MATTER_AXE);
     }
 

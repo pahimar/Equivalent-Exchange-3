@@ -10,10 +10,7 @@ import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class EnergyValueTestSuite {
 
@@ -24,6 +21,7 @@ public class EnergyValueTestSuite {
     private static final Marker FAILURE_NO_VALUE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE_NO_VALUE", FAILURE_MARKER);
 
     private Map<WrappedStack, EnergyValue> testSuiteValueMap;
+    private Set<WrappedStack> correctValues, failureNoValues, failureWrongValues;
 
     public EnergyValueTestSuite() {
         testSuiteValueMap = new TreeMap<>();

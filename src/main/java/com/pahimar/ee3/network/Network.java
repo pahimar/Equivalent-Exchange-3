@@ -1,16 +1,17 @@
 package com.pahimar.ee3.network;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.network.message.*;
-import com.pahimar.ee3.reference.Reference;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class Network {
 
-    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.LOWERCASE_MOD_ID);
+    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(EquivalentExchange3.MOD_ID);
 
     public static void init() {
+
         INSTANCE.registerMessage(MessageKeyPressed.MessageHandler.class, MessageKeyPressed.class, 4, Side.SERVER);
         INSTANCE.registerMessage(MessageSoundEvent.MessageHandler.class, MessageSoundEvent.class, 5, Side.CLIENT);
         INSTANCE.registerMessage(MessageSyncEnergyValues.MessageHandler.class, MessageSyncEnergyValues.class, 6, Side.CLIENT);

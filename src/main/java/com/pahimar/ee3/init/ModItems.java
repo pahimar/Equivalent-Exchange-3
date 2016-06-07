@@ -1,13 +1,13 @@
 package com.pahimar.ee3.init;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.Reference;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@GameRegistry.ObjectHolder(Reference.MOD_ID)
-public class ModItems
-{
+@GameRegistry.ObjectHolder(EquivalentExchange3.MOD_ID)
+public class ModItems {
+
     public static final ItemEE alchemicalBag = new ItemAlchemicalBag();
     public static final ItemEE alchemicalDust = new ItemAlchemicalDust();
     public static final ItemEE alchemicalFuel = new ItemAlchemicalFuel();

@@ -17,7 +17,7 @@ public class ItemDarkMatterHoe extends ItemHoe implements IKeyBound, IChargeable
 {
     public ItemDarkMatterHoe()
     {
-        super(Material.Tools.DARK_MATTER);
+        super(Material.DARK_MATTER_TOOL);
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
         this.maxStackSize = 1;

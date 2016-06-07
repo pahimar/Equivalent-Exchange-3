@@ -275,6 +275,7 @@ public class EnergyValueRegistry {
                 ItemStack inputItemStack = (ItemStack) wrappedInput.getWrappedObject();
 
                 // Check if we are dealing with a potential fluid
+                // TODO Move away from deprecated FluidContainerRegistry
                 if (FluidContainerRegistry.getFluidForFilledItem(inputItemStack) != null) {
 
                     if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
@@ -298,9 +299,10 @@ public class EnergyValueRegistry {
                         inputValue = new EnergyValue(0);
                     }
                 }
-                else if (!inputItemStack.getItem().doesContainerItemLeaveCraftingGrid(inputItemStack)) {
-                    inputValue = new EnergyValue(0);
-                }
+                // FIXME Determine if this check is still needed
+//                else if (!inputItemStack.getItem().doesContainerItemLeaveCraftingGrid(inputItemStack)) {
+//                    inputValue = new EnergyValue(0);
+//                }
                 else if (OreDictionary.getOreIDs(inputItemStack).length > 0) {
                     inputValue = getEnergyValue(valueMap, wrappedInput, true);
                 }
@@ -310,13 +312,14 @@ public class EnergyValueRegistry {
             }
             else if (wrappedInput.getWrappedObject() instanceof OreStack) {
 
-                OreStack inputOreStack = (OreStack) wrappedInput.getWrappedObject();
                 inputValue = getEnergyValue(valueMap, wrappedInput, false);
-                for (ItemStack itemStack : OreDictionary.getOres(inputOreStack.oreName)) {
-                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
-                        inputValue = new EnergyValue(0);
-                    }
-                }
+                // FIXME Determine if this check is still needed
+//                OreStack inputOreStack = (OreStack) wrappedInput.getWrappedObject();
+//                for (ItemStack itemStack : OreDictionary.getOres(inputOreStack.oreName)) {
+//                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
+//                        inputValue = new EnergyValue(0);
+//                    }
+//                }
             }
             else {
                 inputValue = getEnergyValue(valueMap, wrappedInput, false);

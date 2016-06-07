@@ -13,11 +13,9 @@ import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
-import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.SerializationHelper;
 import com.pahimar.ee3.util.TileEntityDataHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,19 +23,27 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
+@Mod(modid = EquivalentExchange3.MOD_ID,
+        name = "Equivalent Exchange 3",
+        certificateFingerprint = EquivalentExchange3.FINGERPRINT,
+        version = "@MOD_VERSION@",
+        dependencies = "required-after:Forge@[12.17.0,)",
+        guiFactory = "com.pahimar.ee3.client.gui.GuiFactory")
 public class EquivalentExchange3 {
 
-    @Mod.Instance(Reference.MOD_ID)
+    public static final String MOD_ID = "ee3";
+    protected static final String FINGERPRINT = "@FINGERPRINT@";
+
+    @Mod.Instance(EquivalentExchange3.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = "com.pahimar.ee3.proxy.ClientProxy", serverSide = "com.pahimar.ee3.proxy.ServerProxy")
     public static IProxy proxy;
 
     @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
-        if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
+        if (FINGERPRINT.equals("@FINGERPRINT@")) {
             LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
         }
         else {
@@ -49,8 +55,6 @@ public class EquivalentExchange3 {
     public void onServerStarting(FMLServerStartingEvent event) {
 
         Files.updateFileReferences();
-
-        SerializationHelper.initModDataDirectories();
         event.registerServerCommand(new CommandEE());
     }
 
@@ -85,9 +89,6 @@ public class EquivalentExchange3 {
 
         // Initialize mod tile entities
         TileEntities.init();
-
-        // Initialize custom rendering and pre-load textures (Client only)
-        proxy.initRenderingAndTextures();
 
         // Register the Items Event Handler
         proxy.registerEventHandlers();

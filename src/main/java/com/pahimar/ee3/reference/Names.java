@@ -1,5 +1,7 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.EquivalentExchange3;
+
 public class Names
 {
     public static final class Blocks
@@ -137,7 +139,7 @@ public class Names
 
     public static final class Commands
     {
-        public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
+        public static final String BASE_COMMAND = EquivalentExchange3.MOD_ID;
         public static final String SET_ENERGY_VALUE = "set-energy-value";
         public static final String SET_ENERGY_VALUE_CURRENT_ITEM = "set-energy-value-current-item";
         public static final String REGEN_ENERGY_VALUES = "regen-energy-values";

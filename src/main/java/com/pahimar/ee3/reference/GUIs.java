@@ -1,7 +1,7 @@
 package com.pahimar.ee3.reference;
 
-public enum GUIs
-{
+public enum GUIs {
+
     PORTABLE_CRAFTING,
     CALCINATOR,
     ALUDEL,

@@ -15,7 +15,7 @@ public class ItemDarkMatterSword extends ItemSword
 {
     public ItemDarkMatterSword()
     {
-        super(Material.Tools.DARK_MATTER);
+        super(Material.DARK_MATTER_TOOL);
         this.setCreativeTab(CreativeTab.EE3_TAB);
         this.setNoRepair();
         this.maxStackSize = 1;

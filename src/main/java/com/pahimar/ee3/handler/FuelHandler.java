@@ -1,6 +1,5 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.item.ItemAlchemicalFuel;
 import com.pahimar.ee3.item.ItemBlockAlchemicalFuel;
@@ -15,9 +14,9 @@ public class FuelHandler implements IFuelHandler {
     private static final ItemStack MOBIUS_FUEL = new ItemStack(ModItems.alchemicalFuel, 1, 1);
     private static final ItemStack AETERNALIS_FUEL = new ItemStack(ModItems.alchemicalFuel, 1, 2);
 
-    private static final ItemStack ALCHEMICAL_COAL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 0);
-    private static final ItemStack MOBIUS_FUEL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 1);
-    private static final ItemStack AETERNALIS_FUEL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 2);
+//    private static final ItemStack ALCHEMICAL_COAL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 0);
+//    private static final ItemStack MOBIUS_FUEL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 1);
+//    private static final ItemStack AETERNALIS_FUEL_BLOCK = new ItemStack(ModBlocks.alchemicalFuelBlock, 1, 2);
 
     @Override
     public int getBurnTime(ItemStack fuel) {

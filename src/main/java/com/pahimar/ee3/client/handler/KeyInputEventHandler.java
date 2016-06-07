@@ -5,33 +5,28 @@ import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageKeyPressed;
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.util.IKeyBound;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class KeyInputEventHandler
-{
-    private static Key getPressedKeybinding()
-    {
-        if (Keybindings.charge.getIsKeyPressed())
-        {
+public class KeyInputEventHandler {
+
+    private static Key getPressedKeybinding() {
+
+        if (Keybindings.charge.isPressed()) {
             return Key.CHARGE;
         }
-        else if (Keybindings.extra.getIsKeyPressed())
-        {
+        else if (Keybindings.extra.isPressed()) {
             return Key.EXTRA;
         }
-        else if (Keybindings.release.getIsKeyPressed())
-        {
+        else if (Keybindings.release.isPressed()) {
             return Key.RELEASE;
         }
-        else if (Keybindings.toggle.getIsKeyPressed())
-        {
+        else if (Keybindings.toggle.isPressed()) {
             return Key.TOGGLE;
         }
 
@@ -39,36 +34,24 @@ public class KeyInputEventHandler
     }
 
     @SubscribeEvent
-    public void handleKeyInputEvent(InputEvent.KeyInputEvent event)
-    {
-        if (getPressedKeybinding() == Key.UNKNOWN)
-        {
+    public void handleKeyInputEvent(InputEvent.KeyInputEvent event) {
+
+        if (getPressedKeybinding() == Key.UNKNOWN) {
             return;
         }
 
-        if (FMLClientHandler.instance().getClient().inGameHasFocus)
-        {
-            if (FMLClientHandler.instance().getClientPlayerEntity() != null)
-            {
+        if (FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClientPlayerEntity() != null) {
+
                 EntityPlayer entityPlayer = FMLClientHandler.instance().getClientPlayerEntity();
 
-                if (entityPlayer.getCurrentEquippedItem() != null)
-                {
-                    ItemStack currentlyEquippedItemStack = entityPlayer.getCurrentEquippedItem();
-
-                    if (currentlyEquippedItemStack.getItem() instanceof IKeyBound)
-                    {
-                        if (entityPlayer.worldObj.isRemote)
-                        {
-                            Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
-                        }
-                        else
-                        {
-                            ((IKeyBound) currentlyEquippedItemStack.getItem()).doKeyBindingAction(entityPlayer, currentlyEquippedItemStack, getPressedKeybinding());
-                        }
+                if (entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof IKeyBound) {
+                    if (entityPlayer.worldObj.isRemote) {
+                        Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
+                    }
+                    else {
+                        ((IKeyBound) entityPlayer.getHeldItemMainhand().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getHeldItemMainhand(), getPressedKeybinding());
                     }
                 }
-            }
         }
     }
 }
