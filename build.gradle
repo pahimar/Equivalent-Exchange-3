@@ -55,7 +55,7 @@ minecraft {
     useDepAts = true // Required for JEI
 
     // Set mod version in code prior to compilation
-    replaceIn "reference/Reference.java"
+    replaceIn "EquivalentExchange3.java"
     replace "@MOD_VERSION@", "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 
     // Set the jar signature in code prior to compilation, if it exists as a build property

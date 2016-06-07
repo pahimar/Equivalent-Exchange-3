@@ -1,9 +1,9 @@
 package com.pahimar.ee3.client.gui.component;
 
-import com.pahimar.ee3.client.gui.GuiBase;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.pahimar.ee3.client.gui.base.GuiBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Comparator;
 
@@ -49,6 +49,7 @@ public abstract class GuiComponent implements Comparable<GuiComponent> {
             }
         }
     };
+
     protected final GuiBase parentGui;
     protected final String id;
     @SideOnly(Side.CLIENT)

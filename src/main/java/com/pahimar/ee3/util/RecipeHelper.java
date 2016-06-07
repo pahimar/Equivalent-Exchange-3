@@ -28,14 +28,14 @@ public class RecipeHelper {
         if (recipe instanceof ShapedRecipes) {
 
             recipeInputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems).stream()
-                    .map(itemStack -> WrappedStack.wrap(itemStack, 1))
+                    .map(itemStack -> WrappedStack.build(itemStack, 1))
                     .collect(Collectors.toList()));
         }
         else if (recipe instanceof ShapelessRecipes) {
 
             recipeInputs.addAll(((ShapelessRecipes) recipe).recipeItems.stream()
                     .filter(itemStack -> itemStack != null)
-                    .map(itemStack -> WrappedStack.wrap(itemStack, 1))
+                    .map(itemStack -> WrappedStack.build(itemStack, 1))
                     .collect(Collectors.toList()));
         }
         else if (recipe instanceof ShapedOreRecipe) {
@@ -45,7 +45,7 @@ public class RecipeHelper {
             if (validateOreDictionaryRecipe(inputObjects)) {
                 recipeInputs.addAll(inputObjects.stream()
                         .filter(recipeInput -> recipeInput instanceof ItemStack || recipeInput instanceof ArrayList)
-                        .map(recipeInput -> WrappedStack.wrap(recipeInput, 1))
+                        .map(recipeInput -> WrappedStack.build(recipeInput, 1))
                         .collect(Collectors.toList()));
             }
         }
@@ -55,7 +55,7 @@ public class RecipeHelper {
             if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput())) {
                 recipeInputs.addAll(shapelessOreRecipe.getInput().stream()
                         .filter(recipeInput -> recipeInput instanceof Item || recipeInput instanceof ArrayList)
-                        .map(recipeInput -> WrappedStack.wrap(recipeInput, 1))
+                        .map(recipeInput -> WrappedStack.build(recipeInput, 1))
                         .collect(Collectors.toList()));
             }
         }
@@ -78,7 +78,7 @@ public class RecipeHelper {
         for (Object object : uncollatedStacks) {
 
             found = false;
-            uncollatedStack = WrappedStack.wrap(object);
+            uncollatedStack = WrappedStack.build(object);
 
             if (uncollatedStack != null) {
                 if (collatedStacks.isEmpty()) {
@@ -86,14 +86,14 @@ public class RecipeHelper {
                 }
                 else {
                     for (WrappedStack collatedStack : collatedStacks) {
-                        if (uncollatedStack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack) {
-                            if (ItemStackUtils.equals((ItemStack) uncollatedStack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject())) {
+                        if (uncollatedStack.getObject() instanceof ItemStack && collatedStack.getObject() instanceof ItemStack) {
+                            if (ItemStackUtils.equals((ItemStack) uncollatedStack.getObject(), (ItemStack) collatedStack.getObject())) {
                                 collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
                                 found = true;
                             }
                         }
-                        else if (uncollatedStack.getWrappedObject() instanceof OreStack && collatedStack.getWrappedObject() instanceof OreStack) {
-                            if (OreStack.compareOreNames((OreStack) uncollatedStack.getWrappedObject(), (OreStack) collatedStack.getWrappedObject())) {
+                        else if (uncollatedStack.getObject() instanceof OreStack && collatedStack.getObject() instanceof OreStack) {
+                            if (OreStack.compareOreNames((OreStack) uncollatedStack.getObject(), (OreStack) collatedStack.getObject())) {
                                 collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
                                 found = true;
                             }

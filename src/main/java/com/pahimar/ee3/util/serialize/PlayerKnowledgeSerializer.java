@@ -33,8 +33,8 @@ public class PlayerKnowledgeSerializer implements JsonSerializer<PlayerKnowledge
                         // TODO Logging
                     }
 
-                    if (wrappedStack != null && wrappedStack.getWrappedObject() instanceof ItemStack) {
-                        knownItemStacks.add((ItemStack) wrappedStack.getWrappedObject());
+                    if (wrappedStack != null && wrappedStack.getObject() instanceof ItemStack) {
+                        knownItemStacks.add((ItemStack) wrappedStack.getObject());
                     }
                 }
             }
@@ -50,7 +50,7 @@ public class PlayerKnowledgeSerializer implements JsonSerializer<PlayerKnowledge
 
         if (src != null) {
             for (ItemStack itemStack : src.getKnownItemStacks()) {
-                jsonArray.add(context.serialize(WrappedStack.wrap(itemStack)));
+                jsonArray.add(context.serialize(WrappedStack.build(itemStack)));
             }
         }
 

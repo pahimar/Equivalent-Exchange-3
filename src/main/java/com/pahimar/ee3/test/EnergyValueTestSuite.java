@@ -35,7 +35,7 @@ public class EnergyValueTestSuite {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
             if (value instanceof Number) {
                 testSuiteValueMap.put(wrappedStack, new EnergyValue((Number) value));
             }
@@ -53,7 +53,7 @@ public class EnergyValueTestSuite {
     public EnergyValueTestSuite remove(Object object) {
 
         if (WrappedStack.canBeWrapped(object)) {
-            testSuiteValueMap.remove(WrappedStack.wrap(object, 1));
+            testSuiteValueMap.remove(WrappedStack.build(object, 1));
         }
 
         return this;

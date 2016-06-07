@@ -39,7 +39,6 @@ public final class Messages {
 
         public static final String BASE_COMMAND_USAGE = COMMAND_PREFIX + "usage";
 
-        public static final String PLAYER_NOT_FOUND_ERROR = COMMAND_PREFIX + "player-not-found.error";
         public static final String INVALID_NBT_TAG_ERROR = COMMAND_PREFIX + "invalid-nbt-tag.error";
         public static final String NO_ITEM = COMMAND_PREFIX + "no-item.error";
 

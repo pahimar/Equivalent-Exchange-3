@@ -1,16 +1,36 @@
 package com.pahimar.ee3.api.event;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-// TODO Fire events for PlayerKnowledge activity
 public class PlayerKnowledgeEvent extends Event {
 
-    public final String playerName;
+    private final String playerName;
+    private final Object[] objects;
 
-    private PlayerKnowledgeEvent(EntityPlayer entityPlayer) {
-        this.playerName = entityPlayer.getName();
+    private PlayerKnowledgeEvent(EntityPlayer entityPlayer, Object... objects) {
+
+        if (entityPlayer != null) {
+            playerName = entityPlayer.getName();
+        }
+        else {
+            playerName = null;
+        }
+
+        this.objects = objects;
+    }
+
+    private PlayerKnowledgeEvent(String playerName, Object... objects) {
+        this.playerName = playerName;
+        this.objects = objects;
+    }
+
+    public final String getPlayerName() {
+        return playerName;
+    }
+
+    public final Object[] getObjects() {
+        return objects;
     }
 
     @Override
@@ -18,30 +38,36 @@ public class PlayerKnowledgeEvent extends Event {
         return true;
     }
 
-    public static class PlayerLearnKnowledgeEvent extends PlayerKnowledgeEvent {
+    public static final class PlayerLearnEvent extends PlayerKnowledgeEvent {
 
-        public final ItemStack itemStack;
+        public PlayerLearnEvent(EntityPlayer entityPlayer, Object... objects) {
+            super(entityPlayer, objects);
+        }
 
-        public PlayerLearnKnowledgeEvent(EntityPlayer entityPlayer, ItemStack itemStack) {
-            super(entityPlayer);
-            this.itemStack = itemStack;
+        public PlayerLearnEvent(String playerName, Object... objects) {
+            super(playerName, objects);
         }
     }
 
-    public static class PlayerForgetKnowledgeEvent extends PlayerKnowledgeEvent {
+    public static final class PlayerForgetEvent extends PlayerKnowledgeEvent {
 
-        public final ItemStack itemStack;
+        public PlayerForgetEvent(EntityPlayer entityPlayer, Object... objects) {
+            super(entityPlayer, objects);
+        }
 
-        public PlayerForgetKnowledgeEvent(EntityPlayer entityPlayer, ItemStack itemStack) {
-            super(entityPlayer);
-            this.itemStack = itemStack;
+        public PlayerForgetEvent(String playerName, Object... objects) {
+            super(playerName, objects);
         }
     }
 
-    public static class PlayerForgetAllKnowledgeEvent extends PlayerKnowledgeEvent {
+    public static final class PlayerForgetAllEvent extends PlayerKnowledgeEvent {
 
-        public PlayerForgetAllKnowledgeEvent(EntityPlayer entityPlayer) {
-            super(entityPlayer);
+        public PlayerForgetAllEvent(EntityPlayer entityPlayer) {
+            super(entityPlayer, null);
+        }
+
+        public PlayerForgetAllEvent(String playerName) {
+            super(playerName, null);
         }
     }
 }

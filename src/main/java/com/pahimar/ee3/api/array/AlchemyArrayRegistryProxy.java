@@ -5,8 +5,14 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Set;
 
-public class AlchemyArrayRegistryProxy {
+public final class AlchemyArrayRegistryProxy {
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param alchemyArray
+     * @return
+     */
     public static boolean register(AlchemyArray alchemyArray) {
 
         init();
@@ -18,6 +24,11 @@ public class AlchemyArrayRegistryProxy {
         return false;
     }
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @return
+     */
     public static Set<AlchemyArray> getAlchemyArrays() {
 
         init();

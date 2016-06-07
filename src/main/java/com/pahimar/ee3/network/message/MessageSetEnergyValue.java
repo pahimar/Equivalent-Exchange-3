@@ -26,7 +26,7 @@ public class MessageSetEnergyValue implements IMessage {
     public MessageSetEnergyValue(WrappedStack wrappedStack, EnergyValue energyValue) {
 
         this.energyValueMap = new TreeMap<>();
-        if (wrappedStack != null && wrappedStack.getWrappedObject() != null && energyValue != null) {
+        if (wrappedStack != null && wrappedStack.getObject() != null && energyValue != null) {
             this.energyValueMap.put(wrappedStack, energyValue);
         }
     }

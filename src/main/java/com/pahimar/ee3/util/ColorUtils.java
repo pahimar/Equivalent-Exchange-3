@@ -4,7 +4,7 @@ import net.minecraft.item.EnumDyeColor;
 
 import java.awt.*;
 
-public class ColorHelper {
+public class ColorUtils {
 
     public static float[] getRGB(EnumDyeColor dyeColor) {
         return getRGB(dyeColor.getMapColor().colorValue);
@@ -14,15 +14,16 @@ public class ColorHelper {
         return new Color(intColor).getRGBColorComponents(null);
     }
 
-    public static final int blend(int color1, int color2) {
+    public static int blend(int color1, int color2) {
         return blend(color1, 1, color2, 1);
 
     }
-    public static final int blend(int color1, int weight1, int color2, int weight2) {
+
+    public static int blend(int color1, int weight1, int color2, int weight2) {
         return blend(new Color(color1), weight1, new Color(color2), weight2).getRGB();
     }
 
-    private static final Color blend (Color color1, int weight1, Color color2, int weight2) {
+    private static Color blend (Color color1, int weight1, Color color2, int weight2) {
 
         if (color1 == null) {
             color1 = Color.WHITE;
@@ -50,5 +51,4 @@ public class ColorHelper {
 
         return new Color((int) r, (int) g, (int) b, 0);
     }
-
 }

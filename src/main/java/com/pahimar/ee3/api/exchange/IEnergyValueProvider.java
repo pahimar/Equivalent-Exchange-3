@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IEnergyValueProvider {
 
-    EnergyValue getEnergyValue(ItemStack itemStack);
+    EnergyValue getEnergyValueFor(ItemStack itemStack);
 }

@@ -30,7 +30,7 @@ public class MessageSetBlacklistEntry implements IMessage {
     public MessageSetBlacklistEntry(Object object, Blacklist blacklist, boolean isBlacklistAction) {
 
         if (WrappedStack.canBeWrapped(object)) {
-            this.wrappedStack = WrappedStack.wrap(object, 1);
+            this.wrappedStack = WrappedStack.build(object, 1);
         }
         else {
             wrappedStack = null;
@@ -100,7 +100,7 @@ public class MessageSetBlacklistEntry implements IMessage {
 
             buf.writeBoolean(isBlacklistAction);
 
-            if (wrappedStack != null && wrappedStack.getWrappedObject() != null) {
+            if (wrappedStack != null && wrappedStack.getObject() != null) {
 
                 byte[] compressedWrappedStack = CompressionUtils.compress(SerializationHelper.GSON.toJson(wrappedStack));
                 buf.writeInt(compressedWrappedStack.length);

@@ -5,21 +5,21 @@ import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
 import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AludelRecipeManager
-{
+public class AludelRecipeManager {
+
     private static AludelRecipeManager aludelRegistry = null;
 
     private List<RecipeAludel> aludelRecipes;
 
     private AludelRecipeManager()
     {
-        aludelRecipes = new ArrayList<RecipeAludel>();
+        aludelRecipes = new ArrayList<>();
     }
 
     public static AludelRecipeManager getInstance()

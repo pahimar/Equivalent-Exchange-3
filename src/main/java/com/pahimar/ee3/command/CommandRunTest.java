@@ -6,10 +6,15 @@ import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.util.LogHelper;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ public class CommandRunTest extends CommandEE {
     }
 
     @Override
-    public void processCommand(ICommandSender commandSender, String[] args) {
+    public void execute(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args) throws CommandException {
 
         if (args.length == 2) {
 
@@ -50,10 +55,10 @@ public class CommandRunTest extends CommandEE {
                 }
 
                 if (testFound) {
-                    commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
+                    commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
                 }
                 else {
-                    commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
+                    commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
                 }
             }
             else {
@@ -66,7 +71,7 @@ public class CommandRunTest extends CommandEE {
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
 
         if (args.length == 2) {
 

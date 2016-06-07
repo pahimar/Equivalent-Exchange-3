@@ -1,14 +1,16 @@
 package com.pahimar.ee3.proxy;
 
-public interface IProxy
-{
-    public abstract ClientProxy getClientProxy();
+import net.minecraft.util.EnumParticleTypes;
 
-    public abstract void registerEventHandlers();
+public interface IProxy {
 
-    public abstract void registerKeybindings();
+    ClientProxy getClientProxy();
 
-    public abstract void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch);
+    void registerEventHandlers();
 
-    public abstract void spawnParticle(String particleName, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity);
+    void registerKeybindings();
+
+    void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch);
+
+    void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity);
 }

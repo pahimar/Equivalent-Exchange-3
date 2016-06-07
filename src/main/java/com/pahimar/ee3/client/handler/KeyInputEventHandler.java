@@ -17,16 +17,16 @@ public class KeyInputEventHandler {
 
     private static Key getPressedKeybinding() {
 
-        if (Keybindings.charge.isPressed()) {
+        if (Keybindings.CHARGE.isPressed()) {
             return Key.CHARGE;
         }
-        else if (Keybindings.extra.isPressed()) {
+        else if (Keybindings.EXTRA.isPressed()) {
             return Key.EXTRA;
         }
-        else if (Keybindings.release.isPressed()) {
+        else if (Keybindings.RELEASE.isPressed()) {
             return Key.RELEASE;
         }
-        else if (Keybindings.toggle.isPressed()) {
+        else if (Keybindings.TOGGLE.isPressed()) {
             return Key.TOGGLE;
         }
 
@@ -42,16 +42,16 @@ public class KeyInputEventHandler {
 
         if (FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClientPlayerEntity() != null) {
 
-                EntityPlayer entityPlayer = FMLClientHandler.instance().getClientPlayerEntity();
+            EntityPlayer entityPlayer = FMLClientHandler.instance().getClientPlayerEntity();
 
-                if (entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof IKeyBound) {
-                    if (entityPlayer.worldObj.isRemote) {
-                        Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
-                    }
-                    else {
-                        ((IKeyBound) entityPlayer.getHeldItemMainhand().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getHeldItemMainhand(), getPressedKeybinding());
-                    }
+            if (entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof IKeyBound) {
+                if (entityPlayer.worldObj.isRemote) {
+                    Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
                 }
+                else {
+                    ((IKeyBound) entityPlayer.getHeldItemMainhand().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getHeldItemMainhand(), getPressedKeybinding());
+                }
+            }
         }
     }
 }

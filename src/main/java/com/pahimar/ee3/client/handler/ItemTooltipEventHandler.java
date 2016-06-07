@@ -5,9 +5,6 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.inventory.ContainerAlchenomicon;
-import com.pahimar.ee3.inventory.ContainerResearchStation;
-import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemStackUtils;
@@ -29,9 +26,9 @@ public class ItemTooltipEventHandler {
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event) {
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.getEntityPlayer() != null && (event.getEntityPlayer().openContainer instanceof ContainerAlchenomicon || event.getEntityPlayer().openContainer instanceof ContainerTransmutationTablet))) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 
-            WrappedStack wrappedItemStack = WrappedStack.wrap(event.getItemStack());
+            WrappedStack wrappedItemStack = WrappedStack.build(event.getItemStack());
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
             EnergyValue stackEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(wrappedItemStack);
 
@@ -63,7 +60,7 @@ public class ItemTooltipEventHandler {
             }
         }
 
-        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.getEntityPlayer() != null && event.getEntityPlayer().openContainer instanceof ContainerResearchStation))) {
+        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.getEntityPlayer() != null))) {
 
             if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.getEntityPlayer(), event.getItemStack())) {
                 event.getToolTip().add("You know how to transmute this"); // TODO Localize with better phrasing

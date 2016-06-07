@@ -6,6 +6,7 @@ import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.client.util.ClientParticleHelper;
 import com.pahimar.ee3.client.util.ClientSoundHelper;
 import com.pahimar.ee3.settings.ChalkSettings;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -24,22 +25,20 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerKeybindings() {
 
-        ClientRegistry.registerKeyBinding(Keybindings.charge);
-        ClientRegistry.registerKeyBinding(Keybindings.extra);
-        ClientRegistry.registerKeyBinding(Keybindings.release);
-        ClientRegistry.registerKeyBinding(Keybindings.toggle);
+        ClientRegistry.registerKeyBinding(Keybindings.CHARGE);
+        ClientRegistry.registerKeyBinding(Keybindings.EXTRA);
+        ClientRegistry.registerKeyBinding(Keybindings.RELEASE);
+        ClientRegistry.registerKeyBinding(Keybindings.TOGGLE);
     }
 
     @Override
-    public void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch)
-    {
+    public void playSound(String soundName, float xCoord, float yCoord, float zCoord, float volume, float pitch) {
         ClientSoundHelper.playSound(soundName, xCoord, yCoord, zCoord, volume, pitch);
     }
 
     @Override
-    public void spawnParticle(String particleName, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity)
-    {
-        ClientParticleHelper.spawnParticleAtLocation(particleName, xCoord, yCoord, zCoord, xVelocity, yVelocity, zVelocity);
+    public void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity) {
+        ClientParticleHelper.spawnParticleAtLocation(particleType, xCoord, yCoord, zCoord, xVelocity, yVelocity, zVelocity);
     }
 
     @Override

@@ -17,13 +17,13 @@ public class RecipeAludel
     public RecipeAludel(ItemStack recipeOutput, ItemStack inputStack, ItemStack dustStack)
     {
         this.recipeOutput = recipeOutput.copy();
-        this.inputStack = WrappedStack.wrap(inputStack);
+        this.inputStack = WrappedStack.build(inputStack);
         this.dustStack = dustStack.copy();
     }
 
     public boolean matches(ItemStack inputStack, ItemStack dustStack)
     {
-        return matches(WrappedStack.wrap(inputStack), dustStack);
+        return matches(WrappedStack.build(inputStack), dustStack);
     }
 
     public boolean matches(WrappedStack inputStack, ItemStack dustStack)
@@ -33,13 +33,13 @@ public class RecipeAludel
 
     private static boolean compareStacks(WrappedStack wrappedStack1, WrappedStack wrappedStack2)
     {
-        if (wrappedStack1 != null && wrappedStack1.getWrappedObject() != null && wrappedStack2 != null && wrappedStack2.getWrappedObject() != null)
+        if (wrappedStack1 != null && wrappedStack1.getObject() != null && wrappedStack2 != null && wrappedStack2.getObject() != null)
         {
-            if (wrappedStack1.getWrappedObject() instanceof ItemStack && wrappedStack2.getWrappedObject() instanceof ItemStack)
+            if (wrappedStack1.getObject() instanceof ItemStack && wrappedStack2.getObject() instanceof ItemStack)
             {
-                ItemStack itemStack1 = (ItemStack) wrappedStack1.getWrappedObject();
+                ItemStack itemStack1 = (ItemStack) wrappedStack1.getObject();
                 itemStack1.stackSize = wrappedStack1.getStackSize();
-                ItemStack itemStack2 = (ItemStack) wrappedStack2.getWrappedObject();
+                ItemStack itemStack2 = (ItemStack) wrappedStack2.getObject();
                 itemStack2.stackSize = wrappedStack2.getStackSize();
 
                 return compareItemStacks(itemStack1, itemStack2);
@@ -82,14 +82,14 @@ public class RecipeAludel
 
     public WrappedStack[] getRecipeInputs()
     {
-        return new WrappedStack[]{inputStack, WrappedStack.wrap(dustStack)};
+        return new WrappedStack[]{inputStack, WrappedStack.build(dustStack)};
     }
 
     public List<WrappedStack> getRecipeInputsAsWrappedStacks()
     {
         List<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
-        recipeInputs.add(WrappedStack.wrap(inputStack));
-        recipeInputs.add(WrappedStack.wrap(dustStack));
+        recipeInputs.add(WrappedStack.build(inputStack));
+        recipeInputs.add(WrappedStack.build(dustStack));
         return recipeInputs;
     }
 

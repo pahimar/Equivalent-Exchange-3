@@ -10,6 +10,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
 
+// TODO Uncomment out dusts once they are re-implemented
 public class EnergyValues {
 
     private static final String[] DYES = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
@@ -157,14 +158,14 @@ public class EnergyValues {
         /**
          *  Alchemical Dusts
          */
-        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 0), 1, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 1), 64, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 2), 2048, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 3), 8192, Phase.PRE_CALCULATION);
+//        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 0), 1, Phase.PRE_CALCULATION);
+//        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 1), 64, Phase.PRE_CALCULATION);
+//        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 2), 2048, Phase.PRE_CALCULATION);
+//        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.alchemicalDust, 1, 3), 8192, Phase.PRE_CALCULATION);
 
         /**
          *  Minium Shard
          */
-        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.shardMinium), 8192, Phase.PRE_CALCULATION);
+//        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(ModItems.shardMinium), 8192, Phase.PRE_CALCULATION);
     }
 }

@@ -3,12 +3,14 @@ package com.pahimar.ee3.command;
 import com.google.common.base.Joiner;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.WrongUsageException;
+import net.minecraft.command.*;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandEE extends CommandBase {
 
@@ -26,7 +28,7 @@ public class CommandEE extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender commandSender, String[] args) {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 
         boolean found = false;
 
@@ -34,9 +36,9 @@ public class CommandEE extends CommandBase {
 
             for (CommandBase command : modCommands) {
 
-                if (command.getCommandName().equalsIgnoreCase(args[0]) && command.canCommandSenderUseCommand(commandSender)) {
+                if (command.getCommandName().equalsIgnoreCase(args[0]) && command.checkPermission(server, sender)) {
                     found = true;
-                    command.processCommand(commandSender, args);
+                    command.execute(server, sender, args);
                 }
             }
         }
@@ -47,15 +49,15 @@ public class CommandEE extends CommandBase {
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+    public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
 
         if (args.length == 1) {
-            return getListOfStringsFromIterableMatchingLastWord(args, commands);
+            return getListOfStringsMatchingLastWord(args, commands);
         }
         else if (args.length >= 2) {
             for (CommandBase command : modCommands) {
                 if (command.getCommandName().equalsIgnoreCase(args[0])) {
-                    return command.addTabCompletionOptions(commandSender, args);
+                    return command.getTabCompletionOptions(server, sender, args, pos);
                 }
             }
         }
@@ -65,26 +67,17 @@ public class CommandEE extends CommandBase {
 
     static {
         modCommands.add(new CommandSetEnergyValue());
-        modCommands.add(new CommandSetEnergyValueCurrentItem());
         modCommands.add(new CommandPlayerLearnItem());
-        modCommands.add(new CommandPlayerLearnCurrentItem());
         modCommands.add(new CommandPlayerForgetEverything());
         modCommands.add(new CommandPlayerForgetItem());
-        modCommands.add(new CommandPlayerForgetCurrentItem());
         modCommands.add(new CommandSetItemLearnable());
-        modCommands.add(new CommandSetCurrentItemLearnable());
         modCommands.add(new CommandSetItemNotLearnable());
-        modCommands.add(new CommandSetCurrentItemNotLearnable());
         modCommands.add(new CommandSetItemRecoverable());
-        modCommands.add(new CommandSetCurrentItemRecoverable());
         modCommands.add(new CommandSetItemNotRecoverable());
-        modCommands.add(new CommandSetCurrentItemNotRecoverable());
         modCommands.add(new CommandSyncEnergyValues());
         modCommands.add(new CommandRegenEnergyValues());
         modCommands.add(new CommandRunTest());
 
-        for (CommandBase commandBase : modCommands) {
-            commands.add(commandBase.getCommandName());
-        }
+        commands.addAll(modCommands.stream().map(ICommand::getCommandName).collect(Collectors.toList()));
     }
 }

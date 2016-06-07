@@ -101,12 +101,12 @@ public class EnergyValueRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
-            Object wrappedObject = wrappedStack.getWrappedObject();
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
+            Object wrappedObject = wrappedStack.getObject();
 
             if (wrappedObject instanceof ItemStack && ((ItemStack) wrappedObject).getItem() instanceof IEnergyValueProvider && !strict) {
 
-                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) wrappedObject).getItem()).getEnergyValue(((ItemStack) wrappedObject));
+                EnergyValue energyValue = ((IEnergyValueProvider) ((ItemStack) wrappedObject).getItem()).getEnergyValueFor(((ItemStack) wrappedObject));
 
                 if (energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
                     return energyValue;
@@ -124,8 +124,8 @@ public class EnergyValueRegistry {
 
                     Set<WrappedStack> equivalentStacks = valueMap.keySet().stream()
                             .filter(wrappedStack::equals)
-                            .filter(wrappedStack1 -> wrappedStack1.getWrappedObject() instanceof ItemStack)
-                            .filter(wrappedStack1 -> ((ItemStack) wrappedStack1.getWrappedObject()).getItemDamage() != OreDictionary.WILDCARD_VALUE)
+                            .filter(wrappedStack1 -> wrappedStack1.getObject() instanceof ItemStack)
+                            .filter(wrappedStack1 -> ((ItemStack) wrappedStack1.getObject()).getItemDamage() != OreDictionary.WILDCARD_VALUE)
                             .collect(Collectors.toCollection(TreeSet::new));
 
                     if (equivalentStacks.size() >= 1) {
@@ -168,7 +168,7 @@ public class EnergyValueRegistry {
 
                                 if (!"Unknown".equalsIgnoreCase(oreName)) {
 
-                                    WrappedStack oreStack = WrappedStack.wrap(new OreStack(oreName));
+                                    WrappedStack oreStack = WrappedStack.build(new OreStack(oreName));
 
                                     if (oreStack != null && valueMap.containsKey(oreStack)) {
 
@@ -194,10 +194,10 @@ public class EnergyValueRegistry {
                         }
                         else {
                             for (WrappedStack valuedWrappedStack : valueMap.keySet()) {
-                                if (valuedWrappedStack.getWrappedObject() instanceof ItemStack) {
-                                    if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getWrappedObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
+                                if (valuedWrappedStack.getObject() instanceof ItemStack) {
+                                    if (Item.getIdFromItem(((ItemStack) valuedWrappedStack.getObject()).getItem()) == Item.getIdFromItem(unValuedItemStack.getItem())) {
 
-                                        ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getWrappedObject();
+                                        ItemStack valuedItemStack = (ItemStack) valuedWrappedStack.getObject();
                                         if (valuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || unValuedItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
 
                                             EnergyValue energyValue = valueMap.get(valuedWrappedStack);
@@ -214,7 +214,7 @@ public class EnergyValueRegistry {
                     else if (wrappedObject instanceof OreStack) {
 
                         OreStack oreStack = (OreStack) wrappedObject;
-                        List<ItemStack> itemStacks = OreDictionary.getOres(oreStack.oreName);
+                        List<ItemStack> itemStacks = OreDictionary.getOres(oreStack.getOreName());
 
                         if (!itemStacks.isEmpty()) {
 
@@ -222,7 +222,7 @@ public class EnergyValueRegistry {
                             boolean allHaveSameValue = true;
 
                             for (ItemStack itemStack : itemStacks) {
-                                WrappedStack wrappedItemStack = WrappedStack.wrap(itemStack, 1);
+                                WrappedStack wrappedItemStack = WrappedStack.build(itemStack, 1);
 
                                 if (wrappedItemStack != null && valueMap.containsKey(wrappedItemStack)) {
                                     if (energyValue == null) {
@@ -270,9 +270,9 @@ public class EnergyValueRegistry {
             EnergyValue inputValue;
             int stackSize = Integer.MIN_VALUE;
 
-            if (wrappedInput.getWrappedObject() instanceof ItemStack) {
+            if (wrappedInput.getObject() instanceof ItemStack) {
 
-                ItemStack inputItemStack = (ItemStack) wrappedInput.getWrappedObject();
+                ItemStack inputItemStack = (ItemStack) wrappedInput.getObject();
 
                 // Check if we are dealing with a potential fluid
                 // TODO Move away from deprecated FluidContainerRegistry
@@ -310,11 +310,11 @@ public class EnergyValueRegistry {
                     inputValue = getEnergyValue(valueMap, wrappedInput, false);
                 }
             }
-            else if (wrappedInput.getWrappedObject() instanceof OreStack) {
+            else if (wrappedInput.getObject() instanceof OreStack) {
 
                 inputValue = getEnergyValue(valueMap, wrappedInput, false);
                 // FIXME Determine if this check is still needed
-//                OreStack inputOreStack = (OreStack) wrappedInput.getWrappedObject();
+//                OreStack inputOreStack = (OreStack) wrappedInput.getObject();
 //                for (ItemStack itemStack : OreDictionary.getOres(inputOreStack.oreName)) {
 //                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
 //                        inputValue = new EnergyValue(0);
@@ -422,7 +422,7 @@ public class EnergyValueRegistry {
      */
     public EnergyValue getEnergyValueForStack(Object object, boolean strict) {
 
-        WrappedStack wrappedObject = WrappedStack.wrap(object);
+        WrappedStack wrappedObject = WrappedStack.build(object);
         EnergyValue energyValue = getEnergyValue(object, strict);
         if (wrappedObject != null && energyValue != null) {
             return new EnergyValue(energyValue.getValue() * wrappedObject.getStackSize());
@@ -529,7 +529,7 @@ public class EnergyValueRegistry {
 
         if (WrappedStack.canBeWrapped(object) && energyValue != null && Float.compare(energyValue.getValue(), 0f) > 0) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
             EnergyValue factoredEnergyValue = EnergyValue.factor(energyValue, wrappedStack.getStackSize());
 
             if (phase == Phase.PRE_CALCULATION) {
@@ -593,7 +593,7 @@ public class EnergyValueRegistry {
         }
         if (fileValueMap != null) {
             for (WrappedStack wrappedStack : fileValueMap.keySet()) {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                if (wrappedStack != null && wrappedStack.getObject() != null && fileValueMap.get(wrappedStack) != null) {
                     preCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
                 }
             }
@@ -601,7 +601,7 @@ public class EnergyValueRegistry {
 
         // Add in all pre-calculation energy value mappings
         preCalculationStackValueMap.keySet().stream()
-                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && preCalculationStackValueMap.get(wrappedStack) != null)
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getObject() != null && preCalculationStackValueMap.get(wrappedStack) != null)
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationStackValueMap.get(wrappedStack)));
 
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
@@ -621,7 +621,7 @@ public class EnergyValueRegistry {
         }
         if (fileValueMap != null) {
             for (WrappedStack wrappedStack : fileValueMap.keySet()) {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                if (wrappedStack != null && wrappedStack.getObject() != null && fileValueMap.get(wrappedStack) != null) {
                     postCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
                 }
             }
@@ -629,7 +629,7 @@ public class EnergyValueRegistry {
 
         // Add in all post-calculation energy value mappings
         postCalculationStackValueMap.keySet().stream()
-                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && postCalculationStackValueMap.get(wrappedStack) != null)
+                .filter(wrappedStack -> wrappedStack != null && wrappedStack.getObject() != null && postCalculationStackValueMap.get(wrappedStack) != null)
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, postCalculationStackValueMap.get(wrappedStack)));
 
         // Bake the final calculated energy value maps
@@ -672,7 +672,7 @@ public class EnergyValueRegistry {
             tempComputedMap = new TreeMap<>(computedMap);
             for (WrappedStack recipeOutput : RecipeRegistry.INSTANCE.getRecipeMappings().keySet()) {
 
-                WrappedStack unitWrappedStack = WrappedStack.wrap(recipeOutput, 1);
+                WrappedStack unitWrappedStack = WrappedStack.build(recipeOutput, 1);
                 // We won't attempt to recalculate values that already have a pre-calculation value assignment
                 if (!stackValueMap.containsKey(unitWrappedStack)) {
                     for (Set<WrappedStack> recipeInputs : RecipeRegistry.INSTANCE.getRecipeMappings().get(recipeOutput)) {
@@ -738,11 +738,11 @@ public class EnergyValueRegistry {
         Set<ItemStack> itemStacks = new TreeSet<>(Comparators.ID_COMPARATOR);
 
         for (WrappedStack wrappedStack : wrappedStacks) {
-            if (wrappedStack.getWrappedObject() instanceof ItemStack) {
-                itemStacks.add((ItemStack) wrappedStack.getWrappedObject());
+            if (wrappedStack.getObject() instanceof ItemStack) {
+                itemStacks.add((ItemStack) wrappedStack.getObject());
             }
-            else if (wrappedStack.getWrappedObject() instanceof OreStack) {
-                itemStacks.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getWrappedObject()).oreName));
+            else if (wrappedStack.getObject() instanceof OreStack) {
+                itemStacks.addAll(OreDictionary.getOres(((OreStack) wrappedStack.getObject()).getOreName()));
             }
         }
 
@@ -790,7 +790,7 @@ public class EnergyValueRegistry {
         }
         if (fileValueMap != null) {
             for (WrappedStack wrappedStack : fileValueMap.keySet()) {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                if (wrappedStack != null && wrappedStack.getObject() != null && fileValueMap.get(wrappedStack) != null) {
                     preCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
                 }
             }
@@ -806,7 +806,7 @@ public class EnergyValueRegistry {
         }
         if (fileValueMap != null) {
             for (WrappedStack wrappedStack : fileValueMap.keySet()) {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                if (wrappedStack != null && wrappedStack.getObject() != null && fileValueMap.get(wrappedStack) != null) {
                     postCalculationStackValueMap.put(wrappedStack, fileValueMap.get(wrappedStack));
                 }
             }
@@ -825,7 +825,7 @@ public class EnergyValueRegistry {
         if (fileValueMap != null) {
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMapBuilder = ImmutableSortedMap.naturalOrder();
             for (WrappedStack wrappedStack : fileValueMap.keySet()) {
-                if (wrappedStack != null && wrappedStack.getWrappedObject() != null && fileValueMap.get(wrappedStack) != null) {
+                if (wrappedStack != null && wrappedStack.getObject() != null && fileValueMap.get(wrappedStack) != null) {
                     stackMapBuilder.put(wrappedStack, fileValueMap.get(wrappedStack));
                 }
             }
@@ -846,7 +846,7 @@ public class EnergyValueRegistry {
             setShouldSave(false);
             ImmutableSortedMap.Builder<WrappedStack, EnergyValue> stackMappingsBuilder = ImmutableSortedMap.naturalOrder();
             valueMap.keySet().stream()
-                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && valueMap.get(wrappedStack) != null)
+                    .filter(wrappedStack -> wrappedStack != null && wrappedStack.getObject() != null && valueMap.get(wrappedStack) != null)
                     .forEach(wrappedStack -> stackMappingsBuilder.put(wrappedStack, valueMap.get(wrappedStack)));
             stackValueMap = stackMappingsBuilder.build();
             calculateValueStackMap();

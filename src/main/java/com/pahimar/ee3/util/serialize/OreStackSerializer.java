@@ -29,7 +29,7 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
 
         if (src != null) {
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty(NAME, src.oreName);
+            jsonObject.addProperty(NAME, src.getOreName());
             return jsonObject;
         }
 

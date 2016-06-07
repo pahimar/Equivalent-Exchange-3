@@ -78,7 +78,7 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedObject = WrappedStack.build(object, 1);
 
             if (object instanceof ItemStack && ((ItemStack) object).isItemDamaged()) {
                 return false;
@@ -92,7 +92,7 @@ public class BlacklistRegistry {
                     else if (object instanceof ItemStack){
                         Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
                         for (String oreName : oreNames) {
-                            if (knowledgeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
+                            if (knowledgeBlacklist.contains(WrappedStack.build(new OreStack(oreName)))) {
                                 return false;
                             }
                         }
@@ -116,7 +116,7 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedObject = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedObject = WrappedStack.build(object, 1);
 
             if (EnergyValueRegistryProxy.hasEnergyValue(wrappedObject)) {
 
@@ -126,7 +126,7 @@ public class BlacklistRegistry {
                 else if (object instanceof ItemStack){
                     Collection<String> oreNames = OreDictionaryHelper.getOreNames((ItemStack) object);
                     for (String oreName : oreNames) {
-                        if (exchangeBlacklist.contains(WrappedStack.wrap(new OreStack(oreName)))) {
+                        if (exchangeBlacklist.contains(WrappedStack.build(new OreStack(oreName)))) {
                             return false;
                         }
                     }
@@ -149,19 +149,19 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeBlacklistEvent(object))) {
                     LogHelper.trace(KNOWLEDGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the player knowledge blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
-                    knowledgeBlacklist.add(WrappedStack.wrap(object, 1));
+                    knowledgeBlacklist.add(WrappedStack.build(object, 1));
                     save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeBlacklistEvent(object))) {
                     LogHelper.trace(EXCHANGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the exchange blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
-                    exchangeBlacklist.add(WrappedStack.wrap(object, 1));
+                    exchangeBlacklist.add(WrappedStack.build(object, 1));
                     save(blacklist);
                 }
             }
@@ -178,7 +178,7 @@ public class BlacklistRegistry {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeWhitelistEvent(object))) {

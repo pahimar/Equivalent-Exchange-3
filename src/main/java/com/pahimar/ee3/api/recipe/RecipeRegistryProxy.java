@@ -8,27 +8,28 @@ import java.util.Collection;
 
 public final class RecipeRegistryProxy {
 
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param recipeOutput
+     * @param recipeInputs
+     */
     public static void addRecipe(Object recipeOutput, Object ... recipeInputs) {
         addRecipe(recipeOutput, Arrays.asList(recipeInputs));
     }
 
-    public static void addRecipe(Object recipeOutput, Collection<?> recipeInputList) {
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param recipeOutput
+     * @param recipeInputs
+     */
+    public static void addRecipe(Object recipeOutput, Collection<?> recipeInputs) {
 
         init();
 
-        // NOOP if EquivalentExchange3 is not present
         if (ee3Mod != null) {
-            EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputList);
-        }
-    }
-
-    public static void dumpRecipeRegistryToLog() {
-
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod != null) {
-            EE3Wrapper.ee3mod.getRecipeRegistry().dumpRecipeRegistryToLog();
+            EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputs);
         }
     }
 

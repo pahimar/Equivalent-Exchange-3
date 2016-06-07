@@ -1,17 +1,18 @@
-package com.pahimar.ee3.client.gui;
+package com.pahimar.ee3.client.gui.base;
 
 import com.pahimar.ee3.client.gui.component.GuiComponent;
 import com.pahimar.ee3.client.util.RenderUtils;
-import com.pahimar.repackage.cofh.lib.util.helpers.StringHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import java.io.IOException;
 import java.util.*;
 
 @SideOnly(Side.CLIENT)
@@ -233,7 +234,7 @@ public abstract class GuiBase extends GuiContainer {
 
     // Keyboard
     @Override
-    protected void keyTyped(char characterTyped, int keyPressed) {
+    protected void keyTyped(char characterTyped, int keyPressed) throws IOException {
         for (GuiComponent guiComponent : getGuiComponents()) {
             if (guiComponent.onKeyPress(characterTyped, keyPressed)) {
                 return;
@@ -245,21 +246,21 @@ public abstract class GuiBase extends GuiContainer {
 
     // Mouse
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         // TODO
         super.handleMouseInput();
     }
 
     @Override
-    protected void mouseClicked(int rawMouseX, int rawMouseY, int mouseButton) {
+    protected void mouseClicked(int rawMouseX, int rawMouseY, int mouseButton) throws IOException {
         // TODO
         super.mouseClicked(rawMouseX, rawMouseY, mouseButton);
     }
 
     @Override
-    protected void mouseMovedOrUp(int rawMouseX, int rawMouseY, int mouseButton) {
+    protected void mouseReleased(int rawMouseX, int rawMouseY, int mouseButton) {
         // TODO
-        super.mouseMovedOrUp(rawMouseX, rawMouseY, mouseButton);
+        super.mouseReleased(rawMouseX, rawMouseY, mouseButton);
     }
 
     @Override
@@ -308,7 +309,7 @@ public abstract class GuiBase extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int rawMouseX, int rawMouseY) {
         // Draw text
         if (shouldDrawTitle && title != null) {
-            getFontRenderer().drawString(StringHelper.localize(title), RenderUtils.getCenteredTextOffset(getFontRenderer(), StringHelper.localize(title), getGuiWidth()), 6, 0x404040);
+            getFontRenderer().drawString(I18n.format(title), RenderUtils.getCenteredTextOffset(getFontRenderer(), I18n.format(title), getGuiWidth()), 6, 0x404040);
         }
 
         // Draw components
@@ -331,7 +332,6 @@ public abstract class GuiBase extends GuiContainer {
         GL11.glTranslatef(getGuiPositionX(), getGuiPositionY(), 0.0F);
         drawComponents(false, rawMouseX, rawMouseY, partialTicks);
         GL11.glPopMatrix();
-
     }
 
     protected void drawComponents(boolean drawForeground, int rawMouseX, int rawMouseY, float partialTicks) {

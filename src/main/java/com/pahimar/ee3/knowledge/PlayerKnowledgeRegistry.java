@@ -2,6 +2,7 @@ package com.pahimar.ee3.knowledge;
 
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
+import com.pahimar.ee3.api.event.PlayerKnowledgeEvent;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
@@ -9,6 +10,7 @@ import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -52,6 +54,7 @@ public class PlayerKnowledgeRegistry {
      * @param object
      * @return
      */
+    // TODO Remove the object from players knowledge if it is blacklisted
     public boolean doesPlayerKnow(String playerName, Object object) {
         return getPlayerKnowledge(playerName) != null && getPlayerKnowledge(playerName).isKnown(object);
     }
@@ -105,8 +108,10 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).learn(object);
-            save(playerName);
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerLearnEvent(playerName, object))) {
+                getPlayerKnowledge(playerName).learn(object);
+                save(playerName);
+            }
         }
     }
 
@@ -133,8 +138,11 @@ public class PlayerKnowledgeRegistry {
 
         if (objects != null && getPlayerKnowledge(playerName) != null) {
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
-            objects.forEach(playerKnowledge::learn);
-            save(playerName);
+
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerLearnEvent(playerName, objects))) {
+                playerKnowledge.learn(objects);
+                save(playerName);
+            }
         }
     }
 
@@ -160,8 +168,10 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).forget(object);
-            save(playerName);
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetEvent(playerName, object))) {
+                getPlayerKnowledge(playerName).forget(object);
+                save(playerName);
+            }
         }
     }
 
@@ -189,8 +199,11 @@ public class PlayerKnowledgeRegistry {
         if (objects != null && getPlayerKnowledge(playerName) != null) {
 
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
-            objects.forEach(playerKnowledge::forget);
-            save(playerName);
+
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetEvent(playerName, objects))) {
+                playerKnowledge.forget(objects);
+                save(playerName);
+            }
         }
     }
 
@@ -214,7 +227,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForgetAll(String playerName) {
 
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            if (playerName != null && !playerName.isEmpty()) {
+            if (playerName != null && !playerName.isEmpty() && !MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetAllEvent(playerName))) {
                 playerKnowledgeMap.put(playerName, new PlayerKnowledge());
                 save(playerName);
             }
@@ -293,12 +306,11 @@ public class PlayerKnowledgeRegistry {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 
             // Save the template to file
+            // TODO Do not save knowledge that is blacklisted
             SerializationHelper.writeJsonFile(templatePlayerKnowledgeFile, SerializationHelper.GSON.toJson(templatePlayerKnowledge));
 
             // Save every currently loaded player knowledge to file
-            for (String playerName : playerKnowledgeMap.keySet()) {
-                save(playerName);
-            }
+            playerKnowledgeMap.keySet().forEach(this::save);
         }
     }
 
@@ -313,6 +325,7 @@ public class PlayerKnowledgeRegistry {
             if (playerName != null && !playerName.isEmpty()) {
                 File playerKnowledgeFile = getPlayerKnowledgeFile(playerName);
                 if (playerKnowledgeFile != null) {
+                    // TODO Do not save knowledge that is currently blacklisted
                     SerializationHelper.writeJsonFile(playerKnowledgeFile, SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
                 }
             }
@@ -328,6 +341,7 @@ public class PlayerKnowledgeRegistry {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 
             templatePlayerKnowledge.forgetAll();
+            // TODO Do not load in knowledge that is blacklisted
             templatePlayerKnowledge.learn(load(templatePlayerKnowledgeFile, true).getKnownItemStacks());
 
             // Reset the player knowledge map
@@ -349,6 +363,7 @@ public class PlayerKnowledgeRegistry {
                 PlayerKnowledge playerKnowledge = SerializationHelper.GSON.fromJson(jsonString, PlayerKnowledge.class);
 
                 if (playerKnowledge != null) {
+                    // TODO Remove knowledge that is blacklisted
                     return playerKnowledge;
                 }
             }

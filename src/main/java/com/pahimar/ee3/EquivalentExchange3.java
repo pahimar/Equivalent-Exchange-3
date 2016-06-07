@@ -16,7 +16,6 @@ import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.TileEntityDataHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -69,7 +68,7 @@ public class EquivalentExchange3 {
 
         proxy.registerKeybindings();
 
-        ModItems.init();
+        ModItems.register();
 
         ModBlocks.init();
 
@@ -144,9 +143,5 @@ public class EquivalentExchange3 {
 
     public PlayerKnowledgeRegistry getPlayerKnowledgeRegistry() {
         return PlayerKnowledgeRegistry.INSTANCE;
-    }
-
-    public TileEntityDataHelper getTileEntityDataHelper() {
-        return TileEntityDataHelper.INSTANCE;
     }
 }

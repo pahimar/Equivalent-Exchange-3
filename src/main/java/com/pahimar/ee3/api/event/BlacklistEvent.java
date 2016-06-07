@@ -4,10 +4,14 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class BlacklistEvent extends Event {
 
-    public final Object object;
+    private final Object object;
 
-    public BlacklistEvent(Object object) {
+    private BlacklistEvent(Object object) {
         this.object = object;
+    }
+
+    public final Object getObject() {
+        return object;
     }
 
     @Override
@@ -15,28 +19,28 @@ public class BlacklistEvent extends Event {
         return true;
     }
 
-    public static class KnowledgeBlacklistEvent extends BlacklistEvent {
+    public static final class KnowledgeBlacklistEvent extends BlacklistEvent {
 
         public KnowledgeBlacklistEvent(Object object) {
             super(object);
         }
     }
 
-    public static class KnowledgeWhitelistEvent extends BlacklistEvent {
+    public static final class KnowledgeWhitelistEvent extends BlacklistEvent {
 
         public KnowledgeWhitelistEvent(Object object) {
             super(object);
         }
     }
 
-    public static class ExchangeBlacklistEvent extends BlacklistEvent {
+    public static final class ExchangeBlacklistEvent extends BlacklistEvent {
 
         public ExchangeBlacklistEvent(Object object) {
             super(object);
         }
     }
 
-    public static class ExchangeWhitelistEvent extends BlacklistEvent {
+    public static final class ExchangeWhitelistEvent extends BlacklistEvent {
 
         public ExchangeWhitelistEvent(Object object) {
             super(object);

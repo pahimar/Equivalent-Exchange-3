@@ -2,14 +2,14 @@ package com.pahimar.ee3.api.blacklist;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.exchange.WrappedStack;
-import cpw.mods.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.Set;
 
-public class BlacklistRegistryProxy {
+public final class BlacklistRegistryProxy {
 
     /**
-     * TODO Finis JavaDoc
+     * TODO Finish JavaDoc
      *
      * @return
      */
