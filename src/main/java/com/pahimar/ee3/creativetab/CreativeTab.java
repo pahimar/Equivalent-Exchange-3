@@ -1,8 +1,8 @@
 package com.pahimar.ee3.creativetab;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.init.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class CreativeTab {
@@ -11,7 +11,9 @@ public class CreativeTab {
 
         @Override
         public Item getTabIconItem() {
-            return ModItems.stonePhilosophers;
+            // TODO Uncomment after reimplemented
+//            return ModItems.stonePhilosophers;
+            return Items.SLIME_BALL;
         }
     };
 }

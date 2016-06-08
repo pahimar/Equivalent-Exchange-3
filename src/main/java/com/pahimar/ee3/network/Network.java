@@ -13,7 +13,6 @@ public class Network {
     public static void init() {
 
         INSTANCE.registerMessage(MessageKeyPressed.MessageHandler.class, MessageKeyPressed.class, 4, Side.SERVER);
-        INSTANCE.registerMessage(MessageSoundEvent.MessageHandler.class, MessageSoundEvent.class, 5, Side.CLIENT);
         INSTANCE.registerMessage(MessageSyncEnergyValues.MessageHandler.class, MessageSyncEnergyValues.class, 6, Side.CLIENT);
         INSTANCE.registerMessage(MessageSetEnergyValue.MessageHandler.class, MessageSetEnergyValue.class, 7, Side.CLIENT);
         INSTANCE.registerMessage(MessageGuiElementClicked.MessageHandler.class, MessageGuiElementClicked.class, 8, Side.SERVER);

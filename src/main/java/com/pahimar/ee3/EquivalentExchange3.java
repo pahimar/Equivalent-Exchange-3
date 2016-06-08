@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         guiFactory = "com.pahimar.ee3.client.gui.GuiFactory")
 public class EquivalentExchange3 {
 
-    public static final String MOD_ID = "ee3";
+    public static final String MOD_ID = "EE3";
     protected static final String FINGERPRINT = "@FINGERPRINT@";
 
     @Mod.Instance(EquivalentExchange3.MOD_ID)

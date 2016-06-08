@@ -1,7 +1,6 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.inventory.element.IElementSliderHandler;
-import com.pahimar.repackage.cofh.lib.gui.element.ElementSlider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -14,10 +13,6 @@ public class MessageSliderElementUpdated implements IMessage {
     public int elementValue;
 
     public MessageSliderElementUpdated() {
-    }
-
-    public MessageSliderElementUpdated(ElementSlider elementSlider) {
-        this(elementSlider.getName(), elementSlider.getValue());
     }
 
     public MessageSliderElementUpdated(String elementName, int elementValue) {

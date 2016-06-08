@@ -23,7 +23,7 @@ public class MessagePlayerKnowledge implements IMessage {
     public MessagePlayerKnowledge(){
     }
 
-    public MessagePlayerKnowledge(TileEntityTransmutationTablet transmutationTablet, Collection<ItemStack> knownItemStacks) {
+    public MessagePlayerKnowledge(TileEntity transmutationTablet, Collection<ItemStack> knownItemStacks) {
 
         if (transmutationTablet != null) {
             this.blockPos = transmutationTablet.getPos();
@@ -100,9 +100,10 @@ public class MessagePlayerKnowledge implements IMessage {
 
                 TileEntity tileEntity = FMLClientHandler.instance().getWorldClient().getTileEntity(message.blockPos);
 
-                if (tileEntity instanceof TileEntityTransmutationTablet) {
-                    ((TileEntityTransmutationTablet) tileEntity).handlePlayerKnowledgeUpdate(message.playerKnowledge);
-                }
+                // TODO Uncomment this once we reimplement things
+//                if (tileEntity instanceof TileEntityTransmutationTablet) {
+//                    ((TileEntityTransmutationTablet) tileEntity).handlePlayerKnowledgeUpdate(message.playerKnowledge);
+//                }
             }
 
             return null;

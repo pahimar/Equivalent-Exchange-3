@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.pahimar.ee3.api.event.EnergyValueEvent;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
-import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
@@ -37,7 +36,7 @@ public class EnergyValueRegistry {
 
     private final Map<WrappedStack, EnergyValue> preCalculationStackValueMap;
     private final Map<WrappedStack, EnergyValue> postCalculationStackValueMap;
-    private transient SortedSet<WrappedStack> uncomputedStacks;
+    private transient SortedSet<WrappedStack> unComputedStacks;
     private transient boolean shouldSave;
     private transient boolean valuesNeedRegeneration;
 
@@ -55,7 +54,7 @@ public class EnergyValueRegistry {
 
         preCalculationStackValueMap = new TreeMap<>();
         postCalculationStackValueMap = new TreeMap<>();
-        uncomputedStacks = new TreeSet<>();
+        unComputedStacks = new TreeSet<>();
         shouldSave = true;
     }
 
@@ -555,9 +554,7 @@ public class EnergyValueRegistry {
                 postCalculationStackValueMap.put(wrappedStack, factoredEnergyValue);
             }
 
-            if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                LogHelper.info(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
-            }
+            LogHelper.trace(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
         }
     }
 
@@ -581,7 +578,7 @@ public class EnergyValueRegistry {
 
         // Initialize the "working copy" energy value map
         final Map<WrappedStack, EnergyValue> stackValueMap = new TreeMap<>();
-        uncomputedStacks = new TreeSet<>();
+        unComputedStacks = new TreeSet<>();
 
         // Load in pre calculation value assignments from file
         Map<WrappedStack, EnergyValue> fileValueMap = null;
@@ -609,7 +606,6 @@ public class EnergyValueRegistry {
         for (WrappedStack wrappedStack : computedStackValueMap.keySet()) {
             stackValueMap.put(wrappedStack, computedStackValueMap.get(wrappedStack));
         }
-//        stackValueMap.putAll(calculateStackValueMap(stackValueMap));
 
         // Load in post calculation value assignments from file
         fileValueMap = null;
@@ -642,11 +638,9 @@ public class EnergyValueRegistry {
         save();
 
         // Report the objects for which we were unable to compute an energy value for
-        if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-            uncomputedStacks.stream()
-                    .filter(wrappedStack -> getEnergyValue(stackValueMap, wrappedStack, false) == null)
-                    .forEach(wrappedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", wrappedStack));
-        }
+        unComputedStacks.stream()
+                .filter(wrappedStack -> getEnergyValue(stackValueMap, wrappedStack, false) == null)
+                .forEach(wrappedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", wrappedStack));
     }
 
     /**
@@ -682,28 +676,26 @@ public class EnergyValueRegistry {
 
                         if (computedOutputValue != null && computedOutputValue.compareTo(currentOutputValue) < 0) {
 
-                            uncomputedStacks.remove(unitWrappedStack);
-
-                            if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, unitWrappedStack, recipeInputs, recipeOutput);
-                            }
-
+                            unComputedStacks.remove(unitWrappedStack);
+                            LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, unitWrappedStack, recipeInputs, recipeOutput);
                             tempComputedMap.put(unitWrappedStack, computedOutputValue);
                         }
                         else if (computedOutputValue != null) {
-                            uncomputedStacks.add(unitWrappedStack);
+                            unComputedStacks.add(unitWrappedStack);
                         }
                     }
                 }
             }
 
             long passDuration = System.nanoTime() - passStartTime;
-            if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
-                LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} different values for objects in {} ms", passNumber, tempComputedMap.size(), passDuration / 100000);
-            }
+            LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated {} different values for objects in {} ms", passNumber, tempComputedMap.size(), passDuration / 100000);
         }
         long endingTime = System.nanoTime() - startingTime;
         LogHelper.info(ENERGY_VALUE_MARKER, "Finished energy value calculation - calculated {} new values for objects in {} ms", computedMap.size() - stackValueMap.size(), endingTime / 100000);
+
+        unComputedStacks.stream()
+                .filter(unComputedStack -> getEnergyValue(computedMap, unComputedStack, false) != null)
+                .forEach(unComputedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", unComputedStack));
 
         return computedMap;
     }

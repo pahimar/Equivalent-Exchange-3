@@ -41,12 +41,28 @@ public class RecipeHelper {
         else if (recipe instanceof ShapedOreRecipe) {
 
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
-            List<?> inputObjects = Arrays.asList(shapedOreRecipe.getInput());
-            if (validateOreDictionaryRecipe(inputObjects)) {
-                recipeInputs.addAll(inputObjects.stream()
-                        .filter(recipeInput -> recipeInput instanceof ItemStack || recipeInput instanceof ArrayList)
-                        .map(recipeInput -> WrappedStack.build(recipeInput, 1))
-                        .collect(Collectors.toList()));
+
+            if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput()))) {
+                for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
+                /*
+                 * If the element is a list, then it is an OreStack
+                 */
+                    Object recipeInput = shapedOreRecipe.getInput()[i];
+                    if (recipeInput != null) {
+                        LogHelper.info("{} {}", recipeInput, recipeInput.getClass().toString());
+                        Collection list = (Collection) recipeInput; // FIXME Pick up here, it's wrapped in a collection we need to unwrap
+                    }
+                    if (recipeInput instanceof ArrayList) {
+                        WrappedStack oreStack = WrappedStack.build(recipeInput, 1);
+
+                        if (oreStack != null) {
+                            recipeInputs.add(oreStack);
+                        }
+                    }
+                    else if (recipeInput instanceof ItemStack) {
+                        recipeInputs.add(WrappedStack.build(recipeInput, 1));
+                    }
+                }
             }
         }
         else if (recipe instanceof ShapelessOreRecipe) {

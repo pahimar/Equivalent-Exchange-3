@@ -2,6 +2,7 @@ package com.pahimar.ee3.handler;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.util.ConfigurationUtils;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -12,7 +13,6 @@ public class ConfigurationHandler {
 
     public static Configuration configuration;
 
-    private static final String CATEGORY_SOUND = "general.sound";
     private static final String CATEGORY_ENERGY_VALUE = "general.energy_value";
     private static final String CATEGORY_PLAYER_KNOWLEDGE = "general.player_knowledge";
     private static final String CATEGORY_SERVER = "general.server";
@@ -33,37 +33,22 @@ public class ConfigurationHandler {
                 Settings.SERVER_SYNC_THRESHOLD_DEFAULT,
                 Settings.SERVER_SYNC_THRESHOLD_MIN,
                 Settings.SERVER_SYNC_THRESHOLD_MAX,
-                StatCollector.translateToLocal(Settings.SERVER_SYNC_THRESHOLD_COMMENT),
+                I18n.translateToLocal(Settings.SERVER_SYNC_THRESHOLD_COMMENT),
                 Settings.SERVER_SYNC_THRESHOLD_LABEL);
 
         Settings.regenerateEnergyValuesWhen = ConfigurationUtils.getString(configuration,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_NAME,
                 CATEGORY_ENERGY_VALUE,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_DEFAULT,
-                StatCollector.translateToLocal(Settings.ENERGY_VALUE_REGENERATE_WHEN_COMMENT),
+                I18n.translateToLocal(Settings.ENERGY_VALUE_REGENERATE_WHEN_COMMENT),
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_OPTIONS,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_LABEL);
-
-        Settings.energyValueDebugLoggingEnabled = configuration.getBoolean(
-                Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_NAME,
-                CATEGORY_ENERGY_VALUE,
-                Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_DEFAULT,
-                StatCollector.translateToLocal(Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_COMMENT),
-                Settings.ENERGY_VALUE_DEBUG_LOGGING_ENABLED_LABEL);
-
-        Settings.soundMode = ConfigurationUtils.getString(configuration,
-                Settings.SOUND_MODE_NAME,
-                CATEGORY_SOUND,
-                Settings.SOUND_MODE_DEFAULT,
-                StatCollector.translateToLocal(Settings.SOUND_MODE_COMMENT),
-                Settings.SOUND_MODE_OPTIONS,
-                Settings.SOUND_MODE_LABEL);
 
         Settings.playerKnowledgeTemplateEnabled = configuration.getBoolean(
                 Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_NAME,
                 CATEGORY_PLAYER_KNOWLEDGE,
                 Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_DEFAULT,
-                StatCollector.translateToLocal(Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT),
+                I18n.translateToLocal(Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT),
                 Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL);
 
         if (configuration.hasChanged()) {
@@ -95,19 +80,6 @@ public class ConfigurationHandler {
         private static final String ENERGY_VALUE_REGENERATE_WHEN_COMMENT = "energy_value.regenerate_values_when.comment";
         private static final String ENERGY_VALUE_REGENERATE_WHEN_DEFAULT = "As Needed";
         private static final String[] ENERGY_VALUE_REGENERATE_WHEN_OPTIONS = new String[]{"As Needed", "Always"};
-
-        public static boolean energyValueDebugLoggingEnabled;
-        private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_NAME = "debug_logging_enabled";
-        private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_LABEL = "energy_value.debug_logging_enabled.label";
-        private static final String ENERGY_VALUE_DEBUG_LOGGING_ENABLED_COMMENT = "energy_value.debug_logging_enabled.comment";
-        private static final boolean ENERGY_VALUE_DEBUG_LOGGING_ENABLED_DEFAULT = false;
-
-        public static String soundMode;
-        private static final String SOUND_MODE_NAME = "mode";
-        private static final String SOUND_MODE_LABEL = "sound.mode.label";
-        private static final String SOUND_MODE_COMMENT = "sound.mode.comment";
-        private static final String SOUND_MODE_DEFAULT = "All";
-        private static final String[] SOUND_MODE_OPTIONS = new String[]{"All", "Self", "None"};
 
         public static boolean playerKnowledgeTemplateEnabled;
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_NAME = "use_template";

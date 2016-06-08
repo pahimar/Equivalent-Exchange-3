@@ -1,7 +1,6 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.inventory.element.IElementTextFieldHandler;
-import com.pahimar.repackage.cofh.lib.gui.element.ElementTextField;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -13,10 +12,6 @@ public class MessageGuiElementTextFieldUpdate implements IMessage {
     public String elementName, elementText;
 
     public MessageGuiElementTextFieldUpdate() {
-    }
-
-    public MessageGuiElementTextFieldUpdate(ElementTextField elementTextField) {
-        this(elementTextField.getName(), elementTextField.getText());
     }
 
     public MessageGuiElementTextFieldUpdate(String elementName, String elementText) {
