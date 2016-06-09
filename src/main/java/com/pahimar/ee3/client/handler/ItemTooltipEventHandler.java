@@ -8,6 +8,7 @@ import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemStackUtils;
+import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -58,13 +59,13 @@ public class ItemTooltipEventHandler {
             else {
                 event.getToolTip().add("No Exchange Energy value"); // TODO Localize
             }
-        }
-
-        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.getEntityPlayer() != null))) {
 
             if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.getEntityPlayer(), event.getItemStack())) {
                 event.getToolTip().add("You know how to transmute this"); // TODO Localize with better phrasing
             }
+
+            // TODO This is more of a debug thing to determine the new NBT stuff
+            event.getToolTip().add(SerializationHelper.GSON.toJson(event.getItemStack()));
         }
 
         if (event.getItemStack().getItem() instanceof IOwnable) {

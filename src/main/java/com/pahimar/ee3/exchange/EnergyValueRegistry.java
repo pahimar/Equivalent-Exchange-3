@@ -288,7 +288,7 @@ public class EnergyValueRegistry {
                 else if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
 
                     ItemStack inputContainerItemStack = inputItemStack.getItem().getContainerItem(inputItemStack);
-
+                    // FIXME There is a bug here, see how cakes value is calculated with a milk bucket
                     if (getEnergyValue(valueMap, inputItemStack, false) != null && getEnergyValue(valueMap, inputContainerItemStack, false) != null) {
                         float itemStackValue = getEnergyValue(valueMap, inputItemStack, false).getValue();
                         float containerStackValue = getEnergyValue(valueMap, inputContainerItemStack, false).getValue();
@@ -694,7 +694,7 @@ public class EnergyValueRegistry {
         LogHelper.info(ENERGY_VALUE_MARKER, "Finished energy value calculation - calculated {} new values for objects in {} ms", computedMap.size() - stackValueMap.size(), endingTime / 100000);
 
         unComputedStacks.stream()
-                .filter(unComputedStack -> getEnergyValue(computedMap, unComputedStack, false) != null)
+                .filter(unComputedStack -> getEnergyValue(computedMap, unComputedStack, false) == null)
                 .forEach(unComputedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", unComputedStack));
 
         return computedMap;

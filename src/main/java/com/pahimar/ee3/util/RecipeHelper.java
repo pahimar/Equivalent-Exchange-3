@@ -2,7 +2,6 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -44,17 +43,9 @@ public class RecipeHelper {
 
             if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput()))) {
                 for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
-                /*
-                 * If the element is a list, then it is an OreStack
-                 */
                     Object recipeInput = shapedOreRecipe.getInput()[i];
-                    if (recipeInput != null) {
-                        LogHelper.info("{} {}", recipeInput, recipeInput.getClass().toString());
-                        Collection list = (Collection) recipeInput; // FIXME Pick up here, it's wrapped in a collection we need to unwrap
-                    }
-                    if (recipeInput instanceof ArrayList) {
+                    if (recipeInput instanceof Collection) {
                         WrappedStack oreStack = WrappedStack.build(recipeInput, 1);
-
                         if (oreStack != null) {
                             recipeInputs.add(oreStack);
                         }
@@ -70,7 +61,7 @@ public class RecipeHelper {
             ShapelessOreRecipe shapelessOreRecipe = ((ShapelessOreRecipe) recipe);
             if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput())) {
                 recipeInputs.addAll(shapelessOreRecipe.getInput().stream()
-                        .filter(recipeInput -> recipeInput instanceof Item || recipeInput instanceof ArrayList)
+                        .filter(recipeInput -> recipeInput instanceof ItemStack || recipeInput instanceof Collection)
                         .map(recipeInput -> WrappedStack.build(recipeInput, 1))
                         .collect(Collectors.toList()));
             }

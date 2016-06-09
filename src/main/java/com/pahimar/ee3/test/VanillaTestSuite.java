@@ -354,14 +354,14 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Blocks.REDSTONE_BLOCK, 288);                                // BLOCK OF REDSTONE
         add(Blocks.HOPPER, 1344);                                       // HOPPER
         add(Blocks.DROPPER, 39);                                        // DROPPER
-        // TODO IRON TRAPDOOR
+        add(Blocks.IRON_TRAPDOOR, 1024);                                // IRON TRAP DOOR
         add(Blocks.SPRUCE_FENCE_GATE, 32);                              // SPRUCE FENCE GATE
         add(Blocks.BIRCH_FENCE_GATE, 32);                               // BIRCH FENCE GATE
         add(Blocks.JUNGLE_FENCE_GATE, 32);                              // JUNGLE FENCE GATE
         add(Blocks.DARK_OAK_FENCE_GATE, 32);                            // DARK OAK FENCE GATE
         add(Blocks.ACACIA_FENCE_GATE, 32);                              // ACACIA FENCE GATE
-        add(Items.OAK_DOOR, 48);                                        // OAK DOOR
-        add(Items.IRON_DOOR, 1536);                                     // IRON DOOR
+        add(Items.OAK_DOOR, 16);                                        // OAK DOOR
+        add(Items.IRON_DOOR, 512);                                      // IRON DOOR
         add(Items.REDSTONE, 32);                                        // REDSTONE
         add(Items.REPEATER, 107);                                       // REDSTONE REPEATER
         add(Items.COMPARATOR, 367);                                     // REDSTONE COMPARATOR

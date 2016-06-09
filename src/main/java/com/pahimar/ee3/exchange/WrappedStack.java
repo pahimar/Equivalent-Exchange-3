@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -53,11 +52,9 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             stackSize = ((OreStack) object).getStackSize();
             wrappedObject = OreStack.copy((OreStack) object, 1);
         }
-        else if (object instanceof ArrayList) {
+        else if (object instanceof List) {
 
-            ArrayList<?> objectList = (ArrayList<?>) object;
-
-            OreStack possibleOreStack = OreStack.getOreStackFrom(objectList);
+            OreStack possibleOreStack = OreStack.getOreStackFrom((List<?>) object);
 
             if (possibleOreStack != null) {
 
@@ -124,9 +121,9 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             this.stackSize = stackSize;
             wrappedObject = OreStack.copy((OreStack) object, 1);
         }
-        else if (object instanceof ArrayList) {
+        else if (object instanceof List) {
 
-            OreStack possibleOreStack = OreStack.getOreStackFrom((ArrayList<?>) object);
+            OreStack possibleOreStack = OreStack.getOreStackFrom((List<?>) object);
 
             if (possibleOreStack != null) {
 

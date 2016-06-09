@@ -53,7 +53,9 @@ public class EnergyValues {
         // Fluids
         EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.WATER, 0.001, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.LAVA, 0.064, Phase.PRE_CALCULATION);
-        EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.getFluid("milk"), 0.064, Phase.PRE_CALCULATION);
+        if (FluidRegistry.isFluidRegistered("milk")) {
+            EnergyValueRegistryProxy.setEnergyValue(FluidRegistry.getFluid("milk"), 0.064, Phase.PRE_CALCULATION);
+        }
 
         /* Building Blocks */
         EnergyValueRegistryProxy.setEnergyValue(Blocks.STONE, 1, Phase.PRE_CALCULATION);
