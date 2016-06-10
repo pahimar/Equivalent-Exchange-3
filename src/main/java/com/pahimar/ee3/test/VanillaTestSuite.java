@@ -185,16 +185,16 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Blocks.HARDENED_CLAY, 256);                                 // HARDENED CLAY
         add(Blocks.COAL_BLOCK, 288);                                    // BLOCK OF COAL
         add(Blocks.PACKED_ICE, null);                                   // PACKED ICE
-        // TODO RED SANDSTONE
-        // TODO CHISELED RED SANDSTONE
-        // TODO SMOOTH RED SANDSTONE
-        // TODO RED SANDSTONE STAIRS
-        // TODO RED SANDSTONE SLAB
+        add(Blocks.RED_SANDSTONE, 4);                                   // RED SANDSTONE
+        add(new ItemStack(Blocks.RED_SANDSTONE, 1, 1), 4);              // CHISELED RED SANDSTONE
+        add(new ItemStack(Blocks.RED_SANDSTONE, 1, 2), 4);              // SMOOTH RED SANDSTONE
+        add(Blocks.RED_SANDSTONE_STAIRS, 6);                            // RED SANDSTONE STAIRS
+        add(Blocks.STONE_SLAB2, 2);                                     // RED SANDSTONE SLAB
         // TODO PURPUR BLOCK
         // TODO PURPUR PILLAR
         // TODO PURPUR STAIRS
         // TODO PURPUR SLAB
-        // TODO END STONE BRICKS
+        add(Blocks.END_BRICKS, 1);                                      // END STONE BRICKS
     }
 
     private void addDecorationBlocksTabTestCases() {
@@ -310,7 +310,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(new ItemStack(Blocks.SKULL, 1, 3), null);                   // HEAD (PLAYER)
         add(new ItemStack(Blocks.SKULL, 1, 4), null);                   // CREEPER HEAD
         add(new ItemStack(Blocks.SKULL, 1, 5), null);                   // DRAGON HEAD
-        // TODO ARMOR STAND
+        add(Items.ARMOR_STAND, 24.5);                                   // ARMOR STAND
         // TODO WHITE BANNER
         // TODO ORANGE BANNER
         // TODO MAGENTA BANNER
@@ -327,7 +327,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         // TODO GREEN BANNER
         // TODO RED BANNER
         // TODO BLACK BANNER
-        // TODO END CRYSTAL
+        add(Items.END_CRYSTAL, 5895);                                   // END CRYSTAL
     }
 
     private void addRedstoneTabTestCases() {
@@ -487,13 +487,13 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Items.BAKED_POTATO, 24);                                    // BAKED POTATO
         add(Items.POISONOUS_POTATO, 24);                                // POISONOUS POTATO
         add(Items.PUMPKIN_PIE, 208);                                    // PUMPKIN PIE
-        // TODO RAW RABBIT
-        // TODO COOKED RABBIT
-        // TODO RABBIT STEW
-        // TODO RAW MUTTON
-        // TODO COOKED MUTTON
-        // TODO BEETROOT
-        // TODO BEETROOT SOUP
+        add(Items.RABBIT, 24);                                          // RAW RABBIT
+        add(Items.COOKED_RABBIT, 24);                                   // COOKED RABBIT
+        add(Items.RABBIT_STEW, 110);                                    // RABBIT STEW
+        add(Items.MUTTON, 24);                                          // RAW MUTTON
+        add(Items.COOKED_MUTTON, 24);                                   // COOKED MUTTON
+        add(Items.BEETROOT, 24);                                        // BEETROOT
+        add(Items.BEETROOT_SOUP, 150);                                  // BEETROOT SOUP
     }
 
     private void addToolsTabTestCases() {
@@ -595,7 +595,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         // TODO ARROW OF WEAKNESS (WEAKNESS, 0:11)
         // TODO ARROW OF WEAKNESS (WEAKNESS, 0:30)
         // TODO ARROW OF LUCK (LUCK, 0:37)
-        // TODO SHIELD
+        add(Items.SHIELD, 304);                                         // SHIELD
     }
 
     private void addBrewingTabTestCases() {
@@ -643,7 +643,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Items.BLAZE_POWDER, 768);                                   // BLAZE POWDER
         add(Items.MAGMA_CREAM, 792);                                    // MAGMA CREAM
         add(Items.BREWING_STAND, 1539);                                 // BREWING STAND
-        // TODO CAULDRON
+        add(Items.CAULDRON, 1792);                                      // CAULDRON
         add(Items.SPECKLED_MELON, 1836.448);                            // GLISTERING MELON
         add(Items.GOLDEN_CARROT, 1844.448);                             // GOLDEN CARROT
         // TODO RABBIT'S FOOT
@@ -776,10 +776,10 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         // TODO RABBIT HIDE
         // TODO CHORUS FRUIT
         // TODO POPPED CHORUS FRUIT
-        // TODO BEETROOT SEEDS
+        add(Items.BEETROOT_SEEDS, 16);                                  // BEETROOT SEEDS
     }
 
     public void save() {
-        this.save(new File(Files.globalTestDirectory, "vanilla-minecraft-1.9.4-test-suite.json"));
+        this.save(new File(Files.globalTestDirectory, "minecraft-1.9.4-test-suite.json"));
     }
 }
