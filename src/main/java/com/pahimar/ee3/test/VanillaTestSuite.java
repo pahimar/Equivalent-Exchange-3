@@ -233,7 +233,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Blocks.SNOW_LAYER, 0.125);                                  // SNOW (LAYER)
         add(Blocks.CACTUS, 8);                                          // CACTUS
         add(Blocks.JUKEBOX, 8256);                                      // JUKEBOX
-        add(Blocks.OAK_FENCE, 12);                                      // OAK FENCE
+        add(Blocks.OAK_FENCE, 13.333);                                  // OAK FENCE
         add(new ItemStack(Blocks.MONSTER_EGG, 1, 0), null);             // STONE MONSTER EGG
         add(new ItemStack(Blocks.MONSTER_EGG, 1, 1), null);             // COBBLESTONE MONSTER EGG
         add(new ItemStack(Blocks.MONSTER_EGG, 1, 2), null);             // STONE BRICK MONSTER EGG
@@ -291,11 +291,11 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(new ItemStack(Blocks.DOUBLE_PLANT, 1, 3), 32);              // LARGE FERN
         add(new ItemStack(Blocks.DOUBLE_PLANT, 1, 4), 32);              // ROSE BUSH
         add(new ItemStack(Blocks.DOUBLE_PLANT, 1, 5), 32);              // PEONY
-        add(Blocks.SPRUCE_FENCE, 12);                                   // SPRUCE FENCE
-        add(Blocks.BIRCH_FENCE, 12);                                    // BIRCH FENCE
-        add(Blocks.JUNGLE_FENCE, 12);                                   // JUNGLE FENCE
-        add(Blocks.DARK_OAK_FENCE, 12);                                 // DARK OAK FENCE
-        add(Blocks.ACACIA_FENCE, 12);                                   // ACACIA LEAVES
+        add(Blocks.SPRUCE_FENCE, 13.333);                               // SPRUCE FENCE
+        add(Blocks.BIRCH_FENCE, 13.333);                                // BIRCH FENCE
+        add(Blocks.JUNGLE_FENCE, 13.333);                               // JUNGLE FENCE
+        add(Blocks.DARK_OAK_FENCE, 13.333);                             // DARK OAK FENCE
+        add(Blocks.ACACIA_FENCE, 13.333);                               // ACACIA LEAVES
         // TODO END ROD
         // TODO CHORUS PLANT
         // TODO CHORUS FLOWER

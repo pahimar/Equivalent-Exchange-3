@@ -10,7 +10,6 @@ import java.util.*;
 
 public class FilterUtils {
 
-    //FIXME Pick up here
     public static Set<ItemStack> filterByDisplayName(Set<ItemStack> itemStacks, String filterString) {
         return filterByDisplayName(itemStacks, filterString, NameFilterType.STARTS_WITH, null);
     }

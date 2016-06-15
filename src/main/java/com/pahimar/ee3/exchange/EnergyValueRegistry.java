@@ -269,6 +269,7 @@ public class EnergyValueRegistry {
             EnergyValue inputValue;
             int stackSize = Integer.MIN_VALUE;
 
+            // TODO Could be simplified a bit more
             if (wrappedInput.getObject() instanceof ItemStack) {
 
                 ItemStack inputItemStack = (ItemStack) wrappedInput.getObject();
@@ -295,30 +296,12 @@ public class EnergyValueRegistry {
                         inputValue = new EnergyValue(itemStackValue - containerStackValue);
                     }
                     else {
-                        inputValue = new EnergyValue(0);
+                        inputValue = null;
                     }
-                }
-                // FIXME Determine if this check is still needed
-//                else if (!inputItemStack.getItem().doesContainerItemLeaveCraftingGrid(inputItemStack)) {
-//                    inputValue = new EnergyValue(0);
-//                }
-                else if (OreDictionary.getOreIDs(inputItemStack).length > 0) {
-                    inputValue = getEnergyValue(valueMap, wrappedInput, true);
                 }
                 else {
                     inputValue = getEnergyValue(valueMap, wrappedInput, false);
                 }
-            }
-            else if (wrappedInput.getObject() instanceof OreStack) {
-
-                inputValue = getEnergyValue(valueMap, wrappedInput, false);
-                // FIXME Determine if this check is still needed
-//                OreStack inputOreStack = (OreStack) wrappedInput.getObject();
-//                for (ItemStack itemStack : OreDictionary.getOres(inputOreStack.oreName)) {
-//                    if (!itemStack.getItem().doesContainerItemLeaveCraftingGrid(itemStack)) {
-//                        inputValue = new EnergyValue(0);
-//                    }
-//                }
             }
             else {
                 inputValue = getEnergyValue(valueMap, wrappedInput, false);

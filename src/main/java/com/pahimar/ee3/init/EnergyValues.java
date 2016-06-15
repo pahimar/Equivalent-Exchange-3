@@ -121,6 +121,12 @@ public class EnergyValues {
         EnergyValueRegistryProxy.setEnergyValue(Items.POTATO, 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.BAKED_POTATO, 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.POISONOUS_POTATO, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.RABBIT, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.COOKED_RABBIT, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.MUTTON, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.COOKED_MUTTON, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.BEETROOT, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.BEETROOT_SEEDS, 16, Phase.PRE_CALCULATION);
 
         /* Brewing */
         EnergyValueRegistryProxy.setEnergyValue(Items.GHAST_TEAR, 4096, Phase.PRE_CALCULATION);
