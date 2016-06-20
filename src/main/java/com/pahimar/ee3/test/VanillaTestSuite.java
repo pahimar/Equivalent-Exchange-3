@@ -8,6 +8,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
 
+import static com.pahimar.ee3.recipe.RecipesPotions.*;
+
 public class VanillaTestSuite extends EnergyValueTestSuite {
 
     public VanillaTestSuite() {
@@ -601,43 +603,43 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
     private void addBrewingTabTestCases() {
 
         add(Items.GHAST_TEAR, 4096);                                    // GHAST TEAR
-        // TODO UNCRAFTABLE POTION
-        add(new ItemStack(Items.POTIONITEM, 1, 0), 2);                  // WATER BOTTLE
-        // TODO MUNDANE POTION
-        // TODO THICK POTION
-        // TODO AWKWARD POTION
-        // TODO POTION OF NIGHT VISION (NIGHT VISION, 3:00)
-        // TODO POTION OF NIGHT VISION (NIGHT VISION, 8:00)
-        // TODO POTION OF INVISIBILITY (INVISIBILITY, 3:00)
-        // TODO POTION OF INVISIBILITY (INVISIBILITY, 8:00)
-        // TODO POTION OF LEAPING (JUMP BOOST, 3:00)
-        // TODO POTION OF LEAPING (JUMP BOOST, 8:00)
-        // TODO POTION OF LEAPING (JUMP BOOT 2, 1:30)
-        // TODO POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 3:00)
-        // TODO POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 8:00)
-        // TODO POTION OF SWIFTNESS (SPEED, 3:00)
-        // TODO POTION OF SWIFTNESS (SPEED, 8:00)
-        // TODO POTION OF SWIFTNESS (SPEED 2, 1:30)
-        // TODO POTION OF SLOWNESS (SLOWNESS, 1:30)
-        // TODO POTION OF SLOWNESS (SLOWNESS, 4:00)
-        // TODO POTION OF WATER BREATHING (WATER BREATHING, 3:00)
-        // TODO POTION OF WATER BREATHING (WATER BREATHING, 8:00)
-        // TODO POTION OF HEALING (INSTANT HEALTH)
-        // TODO POTION OF HEALING (INSTANT HEALTH 2)
-        // TODO POTION OF HARMING (INSTANT DAMAGE)
-        // TODO POTION OF HARMING (INSTANT DAMAGE 2)
-        // TODO POTION OF POISON (POISON, 0:45)
-        // TODO POTION OF POISON (POISON, 1:30)
-        // TODO POTION OF POISON (POISON 2, 0:21)
-        // TODO POTION OF REGENERATION (REGENERATION, 0:45)
-        // TODO POTION OF REGENERATION (REGENERATION, 1:30)
-        // TODO POTION OF REGENERATION (REGENERATION 2, 0:22)
-        // TODO POTION OF STRENGTH (STRENGTH, 3:00)
-        // TODO POTION OF STRENGTH (STRENGTH, 8:00)
-        // TODO POTION OF STRENGTH (STRENGTH 2, 1:30)
-        // TODO POTION OF WEAKNESS (WEAKNESS, 1:30)
-        // TODO POTION OF WEAKNESS (WEAKNESS, 4:00)
-        // TODO POTION OF LUCK (LUCK, 5:00)
+        add(POTION_UNCRAFTABLE, null);                                  // UNCRAFTABLE POTION
+        add(BOTTLE_WATER, 2);                                           // WATER BOTTLE
+        add(POTION_MUNDANE, 12.667);                                    // MUNDANE POTION
+        add(POTION_THICK, 130);                                         // THICK POTION
+        add(POTION_MUNDANE, 10);                                        // AWKWARD POTION
+        add(POTION_NIGHT_VISION, 624.816);                              // POTION OF NIGHT VISION (NIGHT VISION, 3:00)
+        add(POTION_NIGHT_VISION_LONG, 635.483);                         // POTION OF NIGHT VISION (NIGHT VISION, 8:00)
+        add(POTION_INVISIBILITY, 688.816);                              // POTION OF INVISIBILITY (INVISIBILITY, 3:00)
+        add(POTION_INVISIBILITY_LONG, 699.483);                         // POTION OF INVISIBILITY (INVISIBILITY, 8:00)
+        add(POTION_LEAPING, 20.667);                                    // POTION OF LEAPING (JUMP BOOST, 3:00)
+        add(POTION_LEAPING_LONG, 31.334);                               // POTION OF LEAPING (JUMP BOOST, 8:00)
+        add(POTION_LEAPING_STRONG, 148.667);                            // POTION OF LEAPING (JUMP BOOT 2, 1:30)
+        add(POTION_FIRE_RESISTANCE, 274);                               // POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 3:00)
+        add(POTION_FIRE_RESISTANCE_LONG, 284.667);                      // POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 8:00)
+        add(POTION_SWIFTNESS, 20.667);                                  // POTION OF SWIFTNESS (SPEED, 3:00)
+        add(POTION_SWIFTNESS_LONG, 31.334);                             // POTION OF SWIFTNESS (SPEED, 8:00)
+        add(POTION_SWIFTNESS_STRONG, 148.667);                          // POTION OF SWIFTNESS (SPEED 2, 1:30)
+        add(POTION_SLOWNESS, 84.667);                                   // POTION OF SLOWNESS (SLOWNESS, 1:30)
+        add(POTION_SLOWNESS_LONG, 95.334);                              // POTION OF SLOWNESS (SLOWNESS, 4:00)
+        add(POTION_WATER_BREATHING, 18);                                // POTION OF WATER BREATHING (WATER BREATHING, 3:00)
+        add(POTION_WATER_BREATHING_LONG, 28.667);                       // POTION OF WATER BREATHING (WATER BREATHING, 8:00)
+        add(POTION_HEALING, 622.149);                                   // POTION OF HEALING (INSTANT HEALTH)
+        add(POTION_HEALING_STRONG, 750.149);                            // POTION OF HEALING (INSTANT HEALTH 2)
+        add(POTION_HARMING, 116.667);                                   // POTION OF HARMING (INSTANT DAMAGE)
+        add(POTION_HARMING_STRONG, 244.667);                            // POTION OF HARMING (INSTANT DAMAGE 2)
+        add(POTION_POISON, 52.667);                                     // POTION OF POISON (POISON, 0:45)
+        add(POTION_POISON_LONG, 63.334);                                // POTION OF POISON (POISON, 1:30)
+        add(POTION_POISON_STRONG, 180.667);                             // POTION OF POISON (POISON 2, 0:21)
+        add(POTION_REGENERATION, 1375.333);                             // POTION OF REGENERATION (REGENERATION, 0:45)
+        add(POTION_REGENERATION_LONG, 1386);                            // POTION OF REGENERATION (REGENERATION, 1:30)
+        add(POTION_REGENERATION_STRONG, 1503.333);                      // POTION OF REGENERATION (REGENERATION 2, 0:22)
+        add(POTION_STRENGTH, 266);                                      // POTION OF STRENGTH (STRENGTH, 3:00)
+        add(POTION_STRENGTH_LONG, 276.667);                             // POTION OF STRENGTH (STRENGTH, 8:00)
+        add(POTION_STRENGTH_STRONG, 394);                               // POTION OF STRENGTH (STRENGTH 2, 1:30)
+        add(POTION_WEAKNESS, 66);                                       // POTION OF WEAKNESS (WEAKNESS, 1:30)
+        add(POTION_WEAKNESS_LONG, 76.667);                              // POTION OF WEAKNESS (WEAKNESS, 4:00)
+        add(POTION_LUCK, null);                                         // POTION OF LUCK (LUCK, 5:00)
         add(Items.GLASS_BOTTLE, 1);                                     // GLASS BOTTLE
         add(Items.FERMENTED_SPIDER_EYE, 192);                           // FERMENTED SPIDER EYE
         add(Items.BLAZE_POWDER, 768);                                   // BLAZE POWDER
@@ -646,31 +648,31 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Items.CAULDRON, 1792);                                      // CAULDRON
         add(Items.SPECKLED_MELON, 1836.448);                            // GLISTERING MELON
         add(Items.GOLDEN_CARROT, 1844.448);                             // GOLDEN CARROT
-        // TODO RABBIT'S FOOT
+        add(Items.RABBIT_FOOT, 32);                                     // RABBIT'S FOOT
         // TODO DRAGON'S BREATH
-        // TODO SPLASH UNCRAFTABLE POTION
-        // TODO SPLASH WATER BOTTLE
-        // TODO MUNDANE SPLASH POTION
-        // TODO THICK SPLASH POTION
-        // TODO AWKWARD SPLASH POTION
-        // TODO SPLASH POTION OF NIGHT VISION (NIGHT VISION, 3:00)
-        // TODO SPLASH POTION OF NIGHT VISION (NIGHT VISION, 8:00)
-        // TODO SPLASH POTION OF INVISIBILITY (INVISIBILITY, 3:00)
-        // TODO SPLASH POTION OF INVISIBILITY (INVISIBILITY, 8:00)
-        // TODO SPLASH POTION OF LEAPING (JUMP BOOST, 3:00)
-        // TODO SPLASH POTION OF LEAPING (JUMP BOOST, 8:00)
-        // TODO SPLASH POTION OF LEAPING (JUMP BOOST 2, 1:30)
-        // TODO SPLASH POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 3:00)
-        // TODO SPLASH POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 8:00)
-        // TODO SPLASH POTION OF SWIFTNESS (SPEED, 3:00)
-        // TODO SPLASH POTION OF SWIFTNESS (SPEED, 8:00)
-        // TODO SPLASH POTION OF SWIFTNESS (SPEED 2, 1:30)
-        // TODO SPLASH POTION OF SLOWNESS (SLOWNESS, 1:30)
-        // TODO SPLASH POTION OF SLOWNESS (SLOWNESS, 4:00)
-        // TODO SPLASH POTION OF WATER BREATHING (WATER BREATHING, 3:00)
-        // TODO SPLASH POTION OF WATER BREATHING (WATER BREATHING, 8:00)
-        // TODO SPLASH POTION OF HEALING (INSTANT HEALTH)
-        // TODO SPLASH POTION OF HEALING (INSTANT HEALTH 2)
+        add(SPLASH_POTION_UNCRAFTABLE, null);                           // SPLASH UNCRAFTABLE POTION
+        add(SPLASH_BOTTLE_WATER, 66);                                   // SPLASH WATER BOTTLE
+        add(SPLASH_POTION_MUNDANE, 76.667);                             // MUNDANE SPLASH POTION
+        add(SPLASH_POTION_THICK, 194);                                  // THICK SPLASH POTION
+        add(SPLASH_POTION_AWKWARD, 74);                                 // AWKWARD SPLASH POTION
+        add(SPLASH_POTION_NIGHT_VISION, 688.816);                       // SPLASH POTION OF NIGHT VISION (NIGHT VISION, 3:00)
+        add(SPLASH_POTION_NIGHT_VISION_LONG, 699.483);                  // SPLASH POTION OF NIGHT VISION (NIGHT VISION, 8:00)
+        add(SPLASH_POTION_INVISIBILITY, 752.816);                       // SPLASH POTION OF INVISIBILITY (INVISIBILITY, 3:00)
+        add(SPLASH_POTION_INVISIBILITY_LONG, 763.483);                  // SPLASH POTION OF INVISIBILITY (INVISIBILITY, 8:00)
+        add(SPLASH_POTION_LEAPING, 84.667);                             // SPLASH POTION OF LEAPING (JUMP BOOST, 3:00)
+        add(SPLASH_POTION_LEAPING_LONG, 95.334);                        // SPLASH POTION OF LEAPING (JUMP BOOST, 8:00)
+        add(SPLASH_POTION_LEAPING_STRONG, 212.667);                     // SPLASH POTION OF LEAPING (JUMP BOOST 2, 1:30)
+        add(SPLASH_POTION_FIRE_RESISTANCE, 338);                        // SPLASH POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 3:00)
+        add(SPLASH_POTION_FIRE_RESISTANCE_LONG, 348.667);               // SPLASH POTION OF FIRE RESISTANCE (FIRE RESISTANCE, 8:00)
+        add(SPLASH_POTION_SWIFTNESS, 84.667);                           // SPLASH POTION OF SWIFTNESS (SPEED, 3:00)
+        add(SPLASH_POTION_SWIFTNESS_LONG, 95.334);                      // SPLASH POTION OF SWIFTNESS (SPEED, 8:00)
+        add(SPLASH_POTION_SWIFTNESS_STRONG, 212.667);                   // SPLASH POTION OF SWIFTNESS (SPEED 2, 1:30)
+        add(SPLASH_POTION_SLOWNESS, 148.667);                           // SPLASH POTION OF SLOWNESS (SLOWNESS, 1:30)
+        add(SPLASH_POTION_SLOWNESS_LONG, 159.334);                      // SPLASH POTION OF SLOWNESS (SLOWNESS, 4:00)
+        add(SPLASH_POTION_WATER_BREATHING, 82);                         // SPLASH POTION OF WATER BREATHING (WATER BREATHING, 3:00)
+        add(SPLASH_POTION_WATER_BREATHING_LONG, 92.667);                // SPLASH POTION OF WATER BREATHING (WATER BREATHING, 8:00)
+        add(SPLASH_POTION_HEALING, 686.149);                            // SPLASH POTION OF HEALING (INSTANT HEALTH)
+        add(SPLASH_POTION_HEALING_STRONG, 814.149);                     // SPLASH POTION OF HEALING (INSTANT HEALTH 2)
         // TODO SPLASH POTION OF HARMING (INSTANT DAMAGE)
         // TODO SPLASH POTION OF HARMING (INSTANT DAMAGE 2)
         // TODO SPLASH POTION OF POISON (POISON, 0:45)

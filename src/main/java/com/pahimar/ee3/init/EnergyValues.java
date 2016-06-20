@@ -130,6 +130,7 @@ public class EnergyValues {
 
         /* Brewing */
         EnergyValueRegistryProxy.setEnergyValue(Items.GHAST_TEAR, 4096, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(Items.RABBIT_FOOT, 32, Phase.PRE_CALCULATION);
 
         /* Materials */
         EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.COAL, 1, 0), 32, Phase.PRE_CALCULATION);
