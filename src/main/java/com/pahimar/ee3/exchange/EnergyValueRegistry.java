@@ -658,19 +658,34 @@ public class EnergyValueRegistry {
         Map<WrappedStack, EnergyValue> newMap = new TreeMap<>();
 
         for (WrappedStack stack : stackValueMap.keySet()) {
+
             Object wrappedObject = stack.getWrappedObject();
+
             if (wrappedObject instanceof ItemStack) {
+
                 ItemStack itemStack = (ItemStack) wrappedObject;
                 int[] ids = OreDictionary.getOreIDs(itemStack);
+
                 if (ids.length == 1) {
+
                     String oreName = OreDictionary.getOreName(ids[0]);
                     WrappedStack newStack = WrappedStack.wrap(new OreStack(oreName));
+
                     if (!stackValueMap.containsKey(newStack) || stackValueMap.get(newStack).compareTo(stackValueMap.get(stack)) < 0 ) {
-                        LogHelper.info("Item "+itemStack.getItem().getUnlocalizedName()+" promoted to "+oreName);
+
+                        if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
+                            LogHelper.info(ENERGY_VALUE_MARKER, "Item {} promoted to {}", itemStack.getItem().getUnlocalizedName(), oreName);
+                        }
+
                         newMap.put(newStack, stackValueMap.get(stack));
                         total++;
+
                     } else {
-                        LogHelper.info("Item "+itemStack.getItem().getUnlocalizedName()+" would have been promoted, but an equal or cheaper entry already exists.");
+
+                        if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
+                            LogHelper.info(ENERGY_VALUE_MARKER, "Item {} would have been promoted, but an equal or cheaper entry already exists.",itemStack.getItem().getUnlocalizedName());
+                        }
+
                     }
                 }
             }
@@ -679,7 +694,7 @@ public class EnergyValueRegistry {
         stackValueMap.putAll(newMap);
 
         long diff = System.nanoTime()-startingTime;
-        LogHelper.info("Performed "+total+" OreDictionary promotions in "+diff+"ns");
+        LogHelper.info(ENERGY_VALUE_MARKER, "Performed {} OreDictionary promotions in {} ms", total, diff / 100000);
         return stackValueMap;
 
     }
