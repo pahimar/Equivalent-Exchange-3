@@ -107,20 +107,6 @@ artifacts {
     archives devJar
 }
 
-task createChangelog(type: JenkinsChangelog) {
-    onlyIf {
-        return (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") && project.hasProperty("jenkins_password"))
-    }
-
-    outputs.upToDateWhen { false } // never up to date
-    serverRoot = project.hasProperty('jenkins_server') ? project.getProperty('jenkins_server') : "";
-    jobName = System.env['JOB_NAME'] ?: ""
-    targetBuild = System.env['BUILD_NUMBER'] ?: 0;
-    authName = project.hasProperty('jenkins_user') ? project.getProperty('jenkins_user') : "";
-    authPassword = project.hasProperty('jenkins_password') ? project.getProperty('jenkins_password') : "";
-    output = "build/libs/${project.archivesBaseName}-${project.version}-changelog.txt"
-}
-
 task signJar(type: SignJar, dependsOn: ["jar", "devJar"]) {
     onlyIf {
         project.hasProperty('keystore_location')
@@ -133,9 +119,6 @@ task signJar(type: SignJar, dependsOn: ["jar", "devJar"]) {
     inputFile = jar.archivePath
     outputFile = jar.archivePath
 }
-
-uploadArchives.dependsOn signJar
-build.dependsOn signJar
 
 curseforge {
     apiKey = project.hasProperty('ee3_curseforge_apikey') ? project.ee3_curseforge_apikey : ''
