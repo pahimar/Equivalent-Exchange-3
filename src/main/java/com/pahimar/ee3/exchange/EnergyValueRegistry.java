@@ -601,8 +601,11 @@ public class EnergyValueRegistry {
                 .filter(wrappedStack -> wrappedStack != null && wrappedStack.getWrappedObject() != null && preCalculationStackValueMap.get(wrappedStack) != null)
                 .forEach(wrappedStack -> stackValueMap.put(wrappedStack, preCalculationStackValueMap.get(wrappedStack)));
 
+        //Scan for ore dicitonary promotions
+        Map<WrappedStack, EnergyValue> promotedStackValueMap = promoteStackValueMap(stackValueMap);
+
         // Calculate values from the known methods to create items, and the pre-calculation value mappings
-        Map<WrappedStack, EnergyValue> computedStackValueMap = calculateStackValueMap(stackValueMap);
+        Map<WrappedStack, EnergyValue> computedStackValueMap = calculateStackValueMap(promotedStackValueMap);
         for (WrappedStack wrappedStack : computedStackValueMap.keySet()) {
             stackValueMap.put(wrappedStack, computedStackValueMap.get(wrappedStack));
         }
@@ -644,6 +647,56 @@ public class EnergyValueRegistry {
                     .filter(wrappedStack -> getEnergyValue(stackValueMap, wrappedStack, false) == null)
                     .forEach(wrappedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", wrappedStack));
         }
+    }
+
+    private Map<WrappedStack, EnergyValue> promoteStackValueMap(Map<WrappedStack, EnergyValue> stackValueMap) {
+
+        LogHelper.info("Scanning for possible OreDictionary promotions");
+        long startingTime = System.nanoTime();
+        int total = 0;
+
+        Map<WrappedStack, EnergyValue> newMap = new TreeMap<>();
+
+        for (WrappedStack stack : stackValueMap.keySet()) {
+
+            Object wrappedObject = stack.getWrappedObject();
+
+            if (wrappedObject instanceof ItemStack) {
+
+                ItemStack itemStack = (ItemStack) wrappedObject;
+                int[] ids = OreDictionary.getOreIDs(itemStack);
+
+                if (ids.length == 1) {
+
+                    String oreName = OreDictionary.getOreName(ids[0]);
+                    WrappedStack newStack = WrappedStack.wrap(new OreStack(oreName));
+
+                    if (!stackValueMap.containsKey(newStack) || stackValueMap.get(newStack).compareTo(stackValueMap.get(stack)) < 0 ) {
+
+                        if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
+                            LogHelper.info(ENERGY_VALUE_MARKER, "Item {} promoted to {}", itemStack.getItem().getUnlocalizedName(), oreName);
+                        }
+
+                        newMap.put(newStack, stackValueMap.get(stack));
+                        total++;
+
+                    } else {
+
+                        if (ConfigurationHandler.Settings.energyValueDebugLoggingEnabled) {
+                            LogHelper.info(ENERGY_VALUE_MARKER, "Item {} would have been promoted, but an equal or cheaper entry already exists.",itemStack.getItem().getUnlocalizedName());
+                        }
+
+                    }
+                }
+            }
+        }
+
+        stackValueMap.putAll(newMap);
+
+        long diff = System.nanoTime()-startingTime;
+        LogHelper.info(ENERGY_VALUE_MARKER, "Performed {} OreDictionary promotions in {} ms", total, diff / 100000);
+        return stackValueMap;
+
     }
 
     /**
