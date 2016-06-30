@@ -4,6 +4,7 @@ import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.block.BlockAshInfusedStoneSlab;
+import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemMiniumStone;
 import com.pahimar.ee3.item.ItemPhilosophersStone;
@@ -11,6 +12,7 @@ import com.pahimar.ee3.knowledge.PlayerKnowledge;
 import com.pahimar.ee3.network.PacketHandler;
 import com.pahimar.ee3.network.message.MessageTileEntityTransmutationTablet;
 import com.pahimar.ee3.reference.Names;
+import com.pahimar.ee3.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,8 +24,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TileEntityTransmutationTablet extends TileEntityEE implements ISidedInventory {
 
@@ -88,17 +90,78 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
     /**
      * https://github.com/pahimar/Equivalent-Exchange-3/issues/1062
      */
+//    public void consumeInventoryForEnergyValue(ItemStack outputItemStack) {
+//
+//        EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(outputItemStack);
+//
+//        /**
+//         *  Algorithm:
+//         *
+//         *  1) Check the Stone slot, and attempt to take EMC out of the stone there (til 0)
+//         *  2) Search the inventory for items that will most make up the difference, decrement them and consume their EMC
+//         *  3) Repeat 2 until Stored EMC > outputItemStack EMC
+//         *  4) Profit
+//         */
+//
+//        if (this.storedEnergy.compareTo(outputEnergyValue) >= 0) {
+//            this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() - outputEnergyValue.getValue());
+//        }
+//        else {
+//
+//            while (this.storedEnergy.compareTo(outputEnergyValue) < 0 && this.availableEnergy.compareTo(outputEnergyValue) >= 0) {
+//
+//                for (int i = 0; i < STONE_INDEX; i++) {
+//
+//                    ItemStack stackInSlot = getStackInSlot(i);
+//                    if (stackInSlot != null && EnergyValueRegistryProxy.hasEnergyValue(stackInSlot)) {
+//                        this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() + EnergyValueRegistryProxy.getEnergyValue(stackInSlot).getValue());
+//                        decrStackSize(i, 1);
+//                    }
+//                }
+//            }
+//
+//            if (this.storedEnergy.getValue() >= outputEnergyValue.getValue()) {
+//                this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() - outputEnergyValue.getValue());
+//            }
+//        }
+//
+//        updateEnergyValueFromInventory();
+//    }
+
+    private List<WrappedStack> getStacksInInventory() {
+
+        Map<WrappedStack, Integer> stacksWithQuantity = new TreeMap<>();
+
+        for (int i = 0; i< STONE_INDEX; i++) {
+            ItemStack stackInSlot = getStackInSlot(i);
+            if (stackInSlot != null && EnergyValueRegistryProxy.hasEnergyValue(stackInSlot)) {
+                WrappedStack wrappedStack = WrappedStack.wrap(stackInSlot, 1);
+                int stackSize = 0;
+                if (stacksWithQuantity.containsKey(wrappedStack)) {
+                    stackSize = stacksWithQuantity.get(wrappedStack);
+                }
+                stackSize += stackInSlot.stackSize;
+                stacksWithQuantity.put(wrappedStack, stackSize);
+            }
+        }
+
+        List<WrappedStack> itemStacksInInventory = stacksWithQuantity.entrySet().stream().map(entry -> WrappedStack.wrap(entry.getKey().getWrappedObject(), entry.getValue())).collect(Collectors.toList());
+        return itemStacksInInventory;
+    }
+
     public void consumeInventoryForEnergyValue(ItemStack outputItemStack) {
+
 
         EnergyValue outputEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(outputItemStack);
 
         /**
-         *  Algorithm:
+         * New Algorithm:
          *
-         *  1) Check the Stone slot, and attempt to take EMC out of the stone there (til 0)
-         *  2) Search the inventory for items that will most make up the difference, decrement them and consume their EMC
-         *  3) Repeat 2 until Stored EMC > outputItemStack EMC
-         *  4) Profit
+         * 1) Check the Stone slot, and attempt to take EMC out of the stone there (til 0)
+         * 2) Order the items in inventory by EMC ascending
+         * 3) Chomp the cheapest item until the total >= outputItemStack EMC, moving the chomped items to a new list
+         * 4) Reverse the new list and iterate through removing the most expensive item possible that retains sufficient emc
+         * 5) Consume the items specified in the list for EMC and update the stored energy
          */
 
         if (this.storedEnergy.compareTo(outputEnergyValue) >= 0) {
@@ -106,21 +169,106 @@ public class TileEntityTransmutationTablet extends TileEntityEE implements ISide
         }
         else {
 
-            while (this.storedEnergy.compareTo(outputEnergyValue) < 0 && this.availableEnergy.compareTo(outputEnergyValue) >= 0) {
+            LogHelper.trace("Consuming items to make {} {}", outputItemStack.stackSize, outputItemStack.getItem().getUnlocalizedName());
 
-                for (int i = 0; i < STONE_INDEX; i++) {
+            //Find what items we have in the table
+            List<WrappedStack> itemStacksInInventory = getStacksInInventory();
 
-                    ItemStack stackInSlot = getStackInSlot(i);
-                    if (stackInSlot != null && EnergyValueRegistryProxy.hasEnergyValue(stackInSlot)) {
-                        this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() + EnergyValueRegistryProxy.getEnergyValue(stackInSlot).getValue());
-                        decrStackSize(i, 1);
+            LogHelper.trace("Found {} items in tablet", itemStacksInInventory.size());
+
+            //Sort the ItemStacks by their Item's EMC value
+            itemStacksInInventory.sort((first, second) -> {
+                float fVal = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(first, 1)).getValue();
+                float sVal = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(second, 1)).getValue();
+                if (fVal > sVal) {
+                    return 1;
+                } else if (fVal < sVal) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+
+
+            float total = 0;
+            float target = outputEnergyValue.getValue();
+
+            List<WrappedStack> itemsToConsume = new ArrayList<>();
+
+            //Simulate consuming items until we exceed the requirement, and remember which items we 'need' to consume
+            for (WrappedStack curr : itemStacksInInventory) {
+                int num = 0;
+                float val = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(curr, 1)).getValue();
+                while (num < curr.getStackSize() && total < target) {
+                    num++;
+                    total += val;
+                }
+                itemsToConsume.add(WrappedStack.wrap(curr, num));
+            }
+
+            //Sort the new list in reverse-EMC order
+            itemsToConsume.sort((first, second) -> {
+                float fVal = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(first, 1)).getValue();
+                float sVal = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(second, 1)).getValue();
+                if (fVal > sVal) {
+                    return -1;
+                } else if (fVal < sVal) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+
+            //Now, starting with the most expensive items, iterate through regurgitate anything we can whilst keeping enough EMC
+            for (int i = 0; i < itemsToConsume.size(); i++) {
+                WrappedStack curr = itemsToConsume.remove(0);
+                int num = curr.getStackSize();
+                float val = EnergyValueRegistryProxy.getEnergyValue(WrappedStack.wrap(curr, 1)).getValue();
+                while (num > 0 && total-val >= target) {
+                    num--;
+                    total-= val;
+                }
+                itemsToConsume.add(WrappedStack.wrap(curr, num));
+            }
+            //The resulting list is now what we will remove from the inventory
+
+            //In order to remove the correct number of each item we have to track how many we've removed already
+            //Convert the list to a map to make this easier
+            Map<WrappedStack, Integer> itemsToRemoveByQuantity = new TreeMap<>();
+            for (WrappedStack wrappedStack : itemsToConsume) {
+                itemsToRemoveByQuantity.put(WrappedStack.wrap(wrappedStack.getWrappedObject(), 1), wrappedStack.getStackSize());
+            }
+
+            //Finally, iterate through the inventory slots removing items where necessary
+            for (int i = 0; i < STONE_INDEX; i++) {
+                ItemStack stackInSlot = getStackInSlot(i);
+
+                if (stackInSlot != null) {
+                    for (WrappedStack stackToRemove : itemsToRemoveByQuantity.keySet()) {
+                        //Check that the item in this slot is one we want to remove
+                        if (stackToRemove.compareTo(WrappedStack.wrap(stackInSlot, stackToRemove.getStackSize())) == 0) {
+                            //Work out how many to remove based on the total we want to remove, and the number actually in this slot
+                            int numToRemove = Integer.min(itemsToRemoveByQuantity.get(stackToRemove), stackInSlot.stackSize);
+                            //If we do want to remove something from this slot,
+                            if (numToRemove > 0) {
+                                //Work out how much energy we'll be adding.
+                                float energyToAdd = EnergyValueRegistryProxy.getEnergyValue(stackToRemove).getValue();
+                                energyToAdd *= numToRemove;
+                                //Add that much energy
+                                this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() + energyToAdd);
+                                //Actually decrement the ItemStacks
+                                decrStackSize(i, numToRemove);
+                                //Update the map to reflect that we've removed some items
+                                itemsToRemoveByQuantity.put(stackToRemove, itemsToRemoveByQuantity.get(stackToRemove) - numToRemove);
+                            }
+                        }
                     }
                 }
             }
 
-            if (this.storedEnergy.getValue() >= outputEnergyValue.getValue()) {
-                this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() - outputEnergyValue.getValue());
-            }
+            //Finally, update the stored energy to reflect the changes we've made
+            this.storedEnergy = new EnergyValue(this.storedEnergy.getValue() - outputEnergyValue.getValue());
+
         }
 
         updateEnergyValueFromInventory();
