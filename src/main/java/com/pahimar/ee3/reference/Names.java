@@ -1,5 +1,7 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.EquivalentExchange3;
+
 public class Names
 {
     public static final class Blocks
@@ -103,7 +105,8 @@ public class Names
         public static final String COLOR = "color";
         public static final String STATE = "teState";
         public static final String CUSTOM_NAME = "CustomName";
-        public static final String DIRECTION = "teDirection";
+        public static final String DIRECTION = "teDirection"; // Legacy from MC 1.7 and earlier
+        public static final String FACING = "teFacing";
         public static final String OWNER = "owner";
         public static final String OWNER_UUID_MOST_SIG = "ownerUUIDMostSig";
         public static final String OWNER_UUID_LEAST_SIG = "ownerUUIDLeastSig";
@@ -136,7 +139,7 @@ public class Names
 
     public static final class Commands
     {
-        public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
+        public static final String BASE_COMMAND = EquivalentExchange3.MOD_ID.toLowerCase();
         public static final String SET_ENERGY_VALUE = "set-energy-value";
         public static final String SET_ENERGY_VALUE_CURRENT_ITEM = "set-energy-value-current-item";
         public static final String REGEN_ENERGY_VALUES = "regen-energy-values";

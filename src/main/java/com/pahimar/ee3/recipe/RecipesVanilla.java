@@ -4,42 +4,38 @@ import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
 import com.pahimar.ee3.util.RecipeHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
+import net.minecraft.init.Items;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 public class RecipesVanilla {
 
     public void registerRecipes() {
 
-        for (Object recipeObject : CraftingManager.getInstance().getRecipeList()) {
-
-            // Vanilla
-            if (recipeObject instanceof ShapedRecipes || recipeObject instanceof ShapelessRecipes || recipeObject instanceof ShapedOreRecipe || recipeObject instanceof ShapelessOreRecipe) {
-                IRecipe recipe = (IRecipe) recipeObject;
-                ItemStack recipeOutput = recipe.getRecipeOutput();
-
-                if (recipeOutput != null) {
-
-                    List<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(recipe);
+        CraftingManager.getInstance().getRecipeList().stream()
+                .filter(iRecipe -> iRecipe instanceof ShapedRecipes || iRecipe instanceof ShapelessRecipes || iRecipe instanceof ShapedOreRecipe || iRecipe instanceof ShapelessOreRecipe)
+                .filter(iRecipe -> iRecipe.getRecipeOutput() != null)
+                .forEach(iRecipe -> {
+                    Set<WrappedStack> recipeInputs = RecipeHelper.getRecipeInputs(iRecipe);
 
                     if (!recipeInputs.isEmpty()) {
-                        RecipeRegistryProxy.addRecipe(recipeOutput, recipeInputs);
+                        RecipeRegistryProxy.addRecipe(iRecipe.getRecipeOutput(), recipeInputs);
                     }
-                }
-            }
-        }
+        });
 
-        // Fixes for OreDictionary entries that may not exist (because the OreDictionary entry has nothing in it)
-        RecipeRegistryProxy.addRecipe(new ItemStack(Blocks.daylight_detector), Arrays.asList(new ItemStack(Blocks.glass, 3, OreDictionary.WILDCARD_VALUE), new OreStack("slabWood", 3), new OreStack("gemQuartz", 3)));
+        if (!FluidRegistry.isFluidRegistered("milk")) {
+            RecipeRegistryProxy.addRecipe(Items.MILK_BUCKET, Items.BUCKET, new OreStack("ee3Milk"));
+        }
+        else {
+            RecipeRegistryProxy.addRecipe(Items.MILK_BUCKET, Items.BUCKET, new FluidStack(FluidRegistry.getFluid("milk"), Fluid.BUCKET_VOLUME));
+        }
     }
 }

@@ -4,19 +4,19 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Set;
 
 import static com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy.Blacklist;
 
-public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageSyncBlacklist, IMessage> {
+public class MessageSyncBlacklist implements IMessage {
 
     public Blacklist blacklist;
     public Set<WrappedStack> blacklistSet;
@@ -54,7 +54,7 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
 
                 if (compressedBlacklist != null) {
 
-                    String jsonBlacklist = CompressionHelper.decompress(compressedBlacklist);
+                    String jsonBlacklist = CompressionUtils.decompress(compressedBlacklist);
 
                     try {
                         blacklistSet = SerializationHelper.GSON.fromJson(jsonBlacklist, SerializationHelper.WRAPPED_STACK_SET_TYPE);
@@ -83,7 +83,7 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
 
             if (blacklistSet != null) {
 
-                byte[] compressedBlacklist = CompressionHelper.compress(SerializationHelper.GSON.toJson(blacklistSet, SerializationHelper.WRAPPED_STACK_SET_TYPE));
+                byte[] compressedBlacklist = CompressionUtils.compress(SerializationHelper.GSON.toJson(blacklistSet, SerializationHelper.WRAPPED_STACK_SET_TYPE));
 
                 if (compressedBlacklist != null) {
                     buf.writeInt(compressedBlacklist.length);
@@ -102,13 +102,16 @@ public class MessageSyncBlacklist  implements IMessage, IMessageHandler<MessageS
         }
     }
 
-    @Override
-    public IMessage onMessage(MessageSyncBlacklist message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageSyncBlacklist, IMessage> {
 
-        if (message.blacklist != null && message.blacklistSet != null) {
-            BlacklistRegistry.INSTANCE.load(message.blacklistSet, message.blacklist);
+        @Override
+        public IMessage onMessage(MessageSyncBlacklist message, MessageContext ctx) {
+
+            if (message.blacklist != null && message.blacklistSet != null) {
+                BlacklistRegistry.INSTANCE.load(message.blacklistSet, message.blacklist);
+            }
+
+            return null;
         }
-
-        return null;
     }
 }

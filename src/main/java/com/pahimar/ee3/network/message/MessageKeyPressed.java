@@ -2,81 +2,51 @@ package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.reference.Key;
 import com.pahimar.ee3.util.IKeyBound;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageKeyPressed implements IMessage, IMessageHandler<MessageKeyPressed, IMessage>
-{
-    private byte keyPressed;
+public class MessageKeyPressed implements IMessage {
 
-    public MessageKeyPressed()
-    {
+    private Key keyPressed;
+
+    public MessageKeyPressed() {
     }
 
-    public MessageKeyPressed(Key key)
-    {
-        if (key == Key.CHARGE)
-        {
-            this.keyPressed = (byte) Key.CHARGE.ordinal();
+    public MessageKeyPressed(Key keyPressed) {
+
+        if (keyPressed != null) {
+            this.keyPressed = keyPressed;
         }
-        else if (key == Key.EXTRA)
-        {
-            this.keyPressed = (byte) Key.EXTRA.ordinal();
-        }
-        else if (key == Key.RELEASE)
-        {
-            this.keyPressed = (byte) Key.RELEASE.ordinal();
-        }
-        else if (key == Key.TOGGLE)
-        {
-            this.keyPressed = (byte) Key.TOGGLE.ordinal();
-        }
-        else
-        {
-            this.keyPressed = (byte) Key.UNKNOWN.ordinal();
+        else {
+            this.keyPressed = Key.UNKNOWN;
         }
     }
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        this.keyPressed = buf.readByte();
+    public void fromBytes(ByteBuf buf) {
+        this.keyPressed = Key.getKey(buf.readByte());
     }
 
     @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeByte(keyPressed);
+    public void toBytes(ByteBuf buf) {
+        buf.writeByte((byte) keyPressed.ordinal());
     }
 
-    @Override
-    public IMessage onMessage(MessageKeyPressed message, MessageContext ctx)
-    {
-        EntityPlayer entityPlayer = ctx.getServerHandler().playerEntity;
+    public static class MessageHandler implements IMessageHandler<MessageKeyPressed, IMessage> {
 
-        if (entityPlayer != null && entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof IKeyBound)
-        {
-            if (message.keyPressed == Key.CHARGE.ordinal())
-            {
-                ((IKeyBound) entityPlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getCurrentEquippedItem(), Key.CHARGE);
+        @Override
+        public IMessage onMessage(MessageKeyPressed message, MessageContext ctx) {
+
+            EntityPlayer entityPlayer = ctx.getServerHandler().playerEntity;
+
+            if (entityPlayer != null && entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof IKeyBound) {
+                ((IKeyBound) entityPlayer.getHeldItemMainhand().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getHeldItemMainhand(), message.keyPressed);
             }
-            else if (message.keyPressed == Key.EXTRA.ordinal())
-            {
-                ((IKeyBound) entityPlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getCurrentEquippedItem(), Key.EXTRA);
-            }
-            else if (message.keyPressed == Key.RELEASE.ordinal())
-            {
-                ((IKeyBound) entityPlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getCurrentEquippedItem(), Key.RELEASE);
-            }
-            else if (message.keyPressed == Key.TOGGLE.ordinal())
-            {
-                ((IKeyBound) entityPlayer.getCurrentEquippedItem().getItem()).doKeyBindingAction(entityPlayer, entityPlayer.getCurrentEquippedItem(), Key.TOGGLE);
-            }
+
+            return null;
         }
-
-        return null;
     }
 }

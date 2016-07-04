@@ -62,13 +62,13 @@ public class ItemStackUtils {
     }
 
     public static String getOwnerName(ItemStack itemStack) {
-        return NBTHelper.getString(itemStack, Names.NBT.OWNER);
+        return NBTUtils.getString(itemStack, Names.NBT.OWNER);
     }
 
     public static UUID getOwnerUUID(ItemStack itemStack) {
 
-        if (NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) != null && NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG) != null) {
-            return new UUID(NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTHelper.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
+        if (NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) != null && NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG) != null) {
+            return new UUID(NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
         }
 
         return null;
@@ -76,11 +76,11 @@ public class ItemStackUtils {
 
     public static void setOwnerUUID(ItemStack itemStack, EntityPlayer entityPlayer) {
 
-        NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
-        NBTHelper.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
+        NBTUtils.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
+        NBTUtils.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
     }
 
     public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer) {
-        NBTHelper.setString(itemStack, Names.NBT.OWNER, entityPlayer.getDisplayName());
+        NBTUtils.setString(itemStack, Names.NBT.OWNER, entityPlayer.getName());
     }
 }

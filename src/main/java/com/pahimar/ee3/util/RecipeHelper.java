@@ -9,216 +9,125 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-/**
- * Equivalent-Exchange-3
- * <p/>
- * RecipeHelper
- *
- * @author pahimar
- */
-public class RecipeHelper
-{
+public class RecipeHelper {
 
     /**
-     * Returns a list of elements that constitute the input in a crafting recipe
+     * TODO Finish JavaDoc
      *
-     * @param recipe The IRecipe being examined
-     * @return List of elements that constitute the input of the given IRecipe. Could be an ItemStack or an Arraylist
+     * @param recipe
+     * @return
      */
-    public static List<WrappedStack> getRecipeInputs(IRecipe recipe)
-    {
-        ArrayList<WrappedStack> recipeInputs = new ArrayList<WrappedStack>();
+    public static Set<WrappedStack> getRecipeInputs(IRecipe recipe) {
 
-        if (recipe instanceof ShapedRecipes)
-        {
-            ShapedRecipes shapedRecipe = (ShapedRecipes) recipe;
+        List<WrappedStack> recipeInputs = new ArrayList<>();
 
-            for (int i = 0; i < shapedRecipe.recipeItems.length; i++)
-            {
-                if (shapedRecipe.recipeItems[i] instanceof ItemStack)
-                {
-                    ItemStack itemStack = shapedRecipe.recipeItems[i].copy();
+        if (recipe instanceof ShapedRecipes) {
 
-                    if (itemStack.stackSize > 1)
-                    {
-                        itemStack.stackSize = 1;
-                    }
-
-                    recipeInputs.add(WrappedStack.wrap(itemStack));
-                }
-            }
+            recipeInputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems).stream()
+                    .map(itemStack -> WrappedStack.build(itemStack, 1))
+                    .collect(Collectors.toList()));
         }
-        else if (recipe instanceof ShapelessRecipes)
-        {
-            ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
+        else if (recipe instanceof ShapelessRecipes) {
 
-            for (Object object : shapelessRecipe.recipeItems)
-            {
-                if (object instanceof ItemStack)
-                {
-                    ItemStack itemStack = ((ItemStack) object).copy();
-
-                    if (itemStack.stackSize > 1)
-                    {
-                        itemStack.stackSize = 1;
-                    }
-
-                    recipeInputs.add(WrappedStack.wrap(itemStack));
-                }
-            }
+            recipeInputs.addAll(((ShapelessRecipes) recipe).recipeItems.stream()
+                    .filter(itemStack -> itemStack != null)
+                    .map(itemStack -> WrappedStack.build(itemStack, 1))
+                    .collect(Collectors.toList()));
         }
-        else if (recipe instanceof ShapedOreRecipe)
-        {
+        else if (recipe instanceof ShapedOreRecipe) {
+
             ShapedOreRecipe shapedOreRecipe = (ShapedOreRecipe) recipe;
 
-            if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput())))
-            {
-                for (int i = 0; i < shapedOreRecipe.getInput().length; i++)
-                {
-                /*
-                 * If the element is a list, then it is an OreStack
-                 */
-                    if (shapedOreRecipe.getInput()[i] instanceof ArrayList)
-                    {
-                        WrappedStack oreStack = WrappedStack.wrap(shapedOreRecipe.getInput()[i]);
-
-                        if (oreStack != null && oreStack.getWrappedObject() instanceof OreStack)
-                        {
+            if (validateOreDictionaryRecipe(Arrays.asList(shapedOreRecipe.getInput()))) {
+                for (int i = 0; i < shapedOreRecipe.getInput().length; i++) {
+                    Object recipeInput = shapedOreRecipe.getInput()[i];
+                    if (recipeInput instanceof Collection) {
+                        WrappedStack oreStack = WrappedStack.build(recipeInput, 1);
+                        if (oreStack != null) {
                             recipeInputs.add(oreStack);
                         }
                     }
-                    else if (shapedOreRecipe.getInput()[i] instanceof ItemStack)
-                    {
-                        ItemStack itemStack = ((ItemStack) shapedOreRecipe.getInput()[i]).copy();
-
-                        if (itemStack.stackSize > 1)
-                        {
-                            itemStack.stackSize = 1;
-                        }
-
-                        recipeInputs.add(WrappedStack.wrap(itemStack));
+                    else if (recipeInput instanceof ItemStack) {
+                        recipeInputs.add(WrappedStack.build(recipeInput, 1));
                     }
                 }
             }
         }
-        else if (recipe instanceof ShapelessOreRecipe)
-        {
-            ShapelessOreRecipe shapelessOreRecipe = (ShapelessOreRecipe) recipe;
+        else if (recipe instanceof ShapelessOreRecipe) {
 
-            if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput()))
-            {
-                for (Object object : shapelessOreRecipe.getInput())
-                {
-
-                    if (object instanceof ArrayList)
-                    {
-                        recipeInputs.add(WrappedStack.wrap(object));
-                    }
-                    else if (object instanceof ItemStack)
-                    {
-
-                        ItemStack itemStack = ((ItemStack) object).copy();
-
-                        if (itemStack.stackSize > 1)
-                        {
-                            itemStack.stackSize = 1;
-                        }
-
-                        recipeInputs.add(WrappedStack.wrap(itemStack));
-                    }
-                }
+            ShapelessOreRecipe shapelessOreRecipe = ((ShapelessOreRecipe) recipe);
+            if (validateOreDictionaryRecipe(shapelessOreRecipe.getInput())) {
+                recipeInputs.addAll(shapelessOreRecipe.getInput().stream()
+                        .filter(recipeInput -> recipeInput instanceof ItemStack || recipeInput instanceof Collection)
+                        .map(recipeInput -> WrappedStack.build(recipeInput, 1))
+                        .collect(Collectors.toList()));
             }
         }
 
-        return collateInputStacks(recipeInputs);
+        return collateStacks(recipeInputs);
     }
 
     /**
-     * Collates an uncollated, unsorted List of Objects into a sorted, collated List of WrappedStacks
-     *
-     * @param uncollatedStacks List of objects for collating
-     * @return A sorted, collated List of WrappedStacks
+     * TODO Finish JavaDoc
+     * 
+     * @param uncollatedStacks
+     * @return
      */
-    public static List<WrappedStack> collateInputStacks(List<?> uncollatedStacks)
-    {
-        List<WrappedStack> collatedStacks = new ArrayList<WrappedStack>();
+    private static Set<WrappedStack> collateStacks(Collection<?> uncollatedStacks) {
 
-        WrappedStack stack;
+        List<WrappedStack> collatedStacks = new ArrayList<>();
+        WrappedStack uncollatedStack;
         boolean found;
 
-        for (Object object : uncollatedStacks)
-        {
+        for (Object object : uncollatedStacks) {
+
             found = false;
+            uncollatedStack = WrappedStack.build(object);
 
-            if (WrappedStack.canBeWrapped(object))
-            {
-                stack = WrappedStack.wrap(object);
-
-                if (collatedStacks.isEmpty())
-                {
-                    collatedStacks.add(stack);
+            if (uncollatedStack != null) {
+                if (collatedStacks.isEmpty()) {
+                    collatedStacks.add(uncollatedStack);
                 }
-                else
-                {
-
-                    for (WrappedStack collatedStack : collatedStacks)
-                    {
-                        if (collatedStack.getWrappedObject() != null)
-                        {
-                            if (stack.getWrappedObject() instanceof ItemStack && collatedStack.getWrappedObject() instanceof ItemStack)
-                            {
-                                if (ItemStackUtils.equals((ItemStack) stack.getWrappedObject(), (ItemStack) collatedStack.getWrappedObject()))
-                                {
-                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
-                                    found = true;
-                                }
+                else {
+                    for (WrappedStack collatedStack : collatedStacks) {
+                        if (uncollatedStack.getObject() instanceof ItemStack && collatedStack.getObject() instanceof ItemStack) {
+                            if (ItemStackUtils.equals((ItemStack) uncollatedStack.getObject(), (ItemStack) collatedStack.getObject())) {
+                                collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
+                                found = true;
                             }
-                            else if (stack.getWrappedObject() instanceof OreStack && collatedStack.getWrappedObject() instanceof OreStack)
-                            {
-                                if (OreStack.compareOreNames((OreStack) stack.getWrappedObject(), (OreStack) collatedStack.getWrappedObject()))
-                                {
-                                    collatedStack.setStackSize(collatedStack.getStackSize() + stack.getStackSize());
-                                    found = true;
-                                }
+                        }
+                        else if (uncollatedStack.getObject() instanceof OreStack && collatedStack.getObject() instanceof OreStack) {
+                            if (OreStack.compareOreNames((OreStack) uncollatedStack.getObject(), (OreStack) collatedStack.getObject())) {
+                                collatedStack.setStackSize(collatedStack.getStackSize() + uncollatedStack.getStackSize());
+                                found = true;
                             }
                         }
                     }
 
-                    if (!found)
-                    {
-                        collatedStacks.add(stack);
+                    if (!found) {
+                        collatedStacks.add(uncollatedStack);
                     }
                 }
             }
         }
-        Collections.sort(collatedStacks);
-        return collatedStacks;
+
+        return new TreeSet<>(collatedStacks);
     }
 
     /**
-     * Validates the list of recipe inputs for an OreDictionary recipe to ensure that if there is an
-     * OreDictionary entry found in the recipe (a list) that it is not empty (that there are ItemStacks
-     * associated with that particular OreDictionary entry)
+     * TODO Finish JavaDoc
      *
-     * @param objects a list of recipe inputs for an OreDictionary recipe
-     * @return true if there exists no "invalid" (empty) OreDictionary entries in the provided list of recipe inputs
+     * @param objects
+     * @return
      */
-    // FIXME This is not working as intended
-    private static boolean validateOreDictionaryRecipe(List objects)
-    {
-        for (Object object : objects)
-        {
-            if (object != null)
-            {
-                if (!WrappedStack.canBeWrapped(object))
-                {
-                    return false;
-                }
+    private static boolean validateOreDictionaryRecipe(Collection<?> objects) {
+
+        for (Object object : objects) {
+            if (object != null && !WrappedStack.canBeWrapped(object)) {
+                return false;
             }
         }
 

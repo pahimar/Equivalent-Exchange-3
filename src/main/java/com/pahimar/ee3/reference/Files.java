@@ -1,10 +1,11 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
@@ -25,7 +26,7 @@ public class Files {
 
     public static void init(FMLPreInitializationEvent event) {
 
-        globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + Reference.LOWERCASE_MOD_ID);
+        globalDataDirectory = new File(event.getModConfigurationDirectory().getParentFile(), "data" + File.separator + EquivalentExchange3.MOD_ID);
         globalTestDirectory = new File(globalDataDirectory, "tests");
         globalTestDirectory.mkdirs();
 
@@ -48,7 +49,7 @@ public class Files {
      */
     public static void updateFileReferences() {
 
-        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + Reference.LOWERCASE_MOD_ID);
+        playerDataDirectory = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getSaveHandler().getWorldDirectory(), "playerdata" + File.separator + EquivalentExchange3.MOD_ID);
         playerDataDirectory.mkdirs();
     }
 }

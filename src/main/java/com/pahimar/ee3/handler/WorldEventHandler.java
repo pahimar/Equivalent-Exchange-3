@@ -5,10 +5,10 @@ import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.util.LogHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class WorldEventHandler {
 

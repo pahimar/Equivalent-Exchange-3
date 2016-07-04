@@ -1,9 +1,16 @@
+// For those who want the bleeding edge
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            // Required for the curseforge task
+            name = "gradle"
+            url "https://plugins.gradle.org/m2/"
         }
         maven {
             name = "sonatype"
@@ -11,97 +18,79 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.7" // Required for the curseforge task
+    }
+}
+
+repositories {
+    maven {
+        // Required for JEI
+        name 'progwml6'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        // Required for WAILA
+        name 'ProfMobius'
+        url 'http://mobiusstrip.eu/maven'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'forge'
-apply plugin: 'curseforge'
 apply plugin: 'maven'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle' // Required for the curseforge task
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories {
-    maven { // the repo from which to get NEI and stuff
-        name 'CB Repo'
-        url "http://chickenbones.net/maven/"
-    }
-    maven { // The repo from which to get waila
-        name "Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
-    }
-}
-dependencies {
-    compile('mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10') {
-        exclude group: 'mcp.mobius.waila'
-    }
-    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.136:dev"
-    compile "codechicken:CodeChickenCore:1.7.10-1.0.6.43:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.4.105:dev"
-}
-
-ext.configFile = file "build.properties"
-
-configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-version = config.mod_version
-group = "com.pahimar.ee3" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "EquivalentExchange3"
+version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+group = mod_group
+archivesBaseName = mod_artifact_basename
 
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
+    version = minecraft_version + "-" + forge_version
+    runDir = "run"
 
-    replaceIn "reference/Reference.java"
-    replace "@MOD_VERSION@", "${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+    useDepAts = true // Required for JEI
+
+    // Set mod version in code prior to compilation
+    replaceIn "EquivalentExchange3.java"
+    replace "@MOD_VERSION@", "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+
+    // Set the jar signature in code prior to compilation, if it exists as a build property
     if (project.hasProperty("ee3_sha1_signature")) {
         replace "@FINGERPRINT@", project.ee3_sha1_signature
     }
 
-    replaceIn "api/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/array/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/event/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/exchange/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/knowledge/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/recipe/package-info.java"
-    replace "@API_VERSION@", config.api_version
-
-    replaceIn "api/util/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    // Specify the mcp mappings to use
+    mappings = mcp_mappings_version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+dependencies {
+    deobfCompile "mezz.jei:jei_${minecraft_version}:${dep_jei_version}"
+    deobfCompile "mcp.mobius.waila:Waila:${dep_waila_version}"
+}
 
 processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
     // exclude xcf files, as they are for development only
     exclude '**/*.xcf'
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include '*.info'
+        include 'mcmod.info'
 
         // replace version and mcversion
-        expand 'mod_version': project.version, 'minecraft_version': project.config.minecraft_version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude '**/*.info'
+        exclude 'mcmod.info'
     }
 }
 
@@ -118,77 +107,31 @@ artifacts {
     archives devJar
 }
 
-import net.minecraftforge.gradle.delayed.*
-import net.minecraftforge.gradle.tasks.dev.ChangelogTask
-
-task createChangelog(type: ChangelogTask) {
-
-    if (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") && project.hasProperty("jenkins_password")) {
-        def jobName = "${System.getenv().JOB_NAME}"
-        def buildNumber = "${System.getenv().BUILD_NUMBER}"
-
-        setServerRoot(new DelayedString(project, project.jenkins_server))
-        setJobName(new DelayedString(project, jobName.toString()))
-        setAuthName(new DelayedString(project, project.jenkins_user))
-        setAuthPassword(new DelayedString(project, project.jenkins_password))
-        setTargetBuild({ buildNumber.toString() });
-        setOutput(new DelayedFile(project, 'build/libs/' + project.archivesBaseName + '-' + project.version + '-changelog.txt'));
-    }
-
+task signJar(type: SignJar, dependsOn: ["jar", "devJar"]) {
     onlyIf {
-        return (("${System.getenv().JOB_NAME}" != null) && project.hasProperty("jenkins_server") && project.hasProperty("jenkins_password"))
+        project.hasProperty('keystore_location')
     }
+
+    keyStore = project.hasProperty('keystore_location') ? project.getProperty('keystore_location') : "";
+    storePass = project.hasProperty('keystore_password') ? project.getProperty('keystore_password') : "";
+    alias = project.hasProperty('ee3_keystore_alias') ? project.getProperty('ee3_keystore_alias') : "";
+    keyPass = project.hasProperty('keystore_password') ? project.getProperty('keystore_password') : "";
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
 }
 
-tasks.build.dependsOn('createChangelog')
-tasks.build.dependsOn('signJar')
-
-if (!project.hasProperty("keystore_location")) // keystore stuff
-    ext.keystore_location = "."
-if (!project.hasProperty("keystore_password")) // keystore stuff
-    ext.keystore_password = ""
-if (!project.hasProperty("ee3_keystore_alias")) // keystore stuff
-    ext.ee3_keystore_alias = ""
-
-task signJar(dependsOn: ["reobf", "devJar"]) {
-    inputs.dir jar.destinationDir
-    inputs.file keystore_location
-    inputs.property "ee3_keystore_alias", ee3_keystore_alias
-    inputs.property "keystore_password", keystore_password
-    outputs.dir devJar.destinationDir
-
-    // only sign if the keystore exists
-    onlyIf {
-        return keystore_location != "." && keystore_password != ""
-    }
-    // the actual action.. sign the jar.
-    doLast {
-        jar.destinationDir.eachFile { file ->
-            if (!file.getPath().endsWith(".jar"))
-                return; // skip non-jars
-
-            logger.lifecycle "signing $file"
-            ant.signjar(
-                    destDir: file.getParentFile(), // same place it came from
-                    jar: file,
-                    keystore: keystore_location,
-                    alias: ee3_keystore_alias,
-                    storepass: keystore_password
-            )
+curseforge {
+    apiKey = project.hasProperty('ee3_curseforge_apikey') ? project.ee3_curseforge_apikey : ''
+    project {
+        id = project.hasProperty('ee3_curseforge_projectid') ? project.ee3_curseforge_projectid : '0'
+        releaseType = mod_release_type
+        changelogType = 'text'
+        changelog = file("build/libs/${project.archivesBaseName}-${project.version}-changelog.txt")
+        addArtifact devJar
+        relations {
+            optionalLibrary 'jei'
         }
     }
-}
-
-curse {
-    dependsOn 'reobf'
-    onlyIf { return project.hasProperty('ee3_curseforge_apikey') }
-
-    projectId = project.hasProperty('ee3_curseforge_projectid') ? project.ee3_curseforge_projectid : ''
-    apiKey = project.hasProperty('ee3_curseforge_apikey') ? project.ee3_curseforge_apikey : ''
-    changelog = project.hasProperty('changelog') ? project.changelog : ''
-    releaseType = config.release_type
-
-    additionalArtifact devJar
 }
 
 uploadArchives {

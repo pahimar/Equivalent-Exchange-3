@@ -14,11 +14,10 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
 
         if (json.isJsonObject()) {
 
-            JsonObject jsonObject = (JsonObject) json;
+            JsonObject jsonObject = json.getAsJsonObject();
 
             if (jsonObject.has(NAME) && jsonObject.get(NAME).isJsonPrimitive()) {
-                String name = jsonObject.getAsJsonPrimitive(NAME).getAsString();
-                return new OreStack(name);
+                return new OreStack(jsonObject.getAsJsonPrimitive(NAME).getAsString());
             }
         }
 
@@ -30,7 +29,7 @@ public class OreStackSerializer implements JsonSerializer<OreStack>, JsonDeseria
 
         if (src != null) {
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty(NAME, src.oreName);
+            jsonObject.addProperty(NAME, src.getOreName());
             return jsonObject;
         }
 

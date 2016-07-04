@@ -1,75 +1,73 @@
 package com.pahimar.ee3.api.event;
 
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
-import java.util.UUID;
+public class PlayerKnowledgeEvent extends Event {
 
-public class PlayerKnowledgeEvent extends Event
-{
-    public final UUID playerUUID;
+    private final String playerName;
+    private final Object[] objects;
 
-    private PlayerKnowledgeEvent(EntityPlayer entityPlayer)
-    {
-        this(entityPlayer.getUniqueID());
+    private PlayerKnowledgeEvent(EntityPlayer entityPlayer, Object... objects) {
+
+        if (entityPlayer != null) {
+            playerName = entityPlayer.getName();
+        }
+        else {
+            playerName = null;
+        }
+
+        this.objects = objects;
     }
 
-    private PlayerKnowledgeEvent(UUID playerUUID)
-    {
-        this.playerUUID = playerUUID;
+    private PlayerKnowledgeEvent(String playerName, Object... objects) {
+        this.playerName = playerName;
+        this.objects = objects;
+    }
+
+    public final String getPlayerName() {
+        return playerName;
+    }
+
+    public final Object[] getObjects() {
+        return objects;
     }
 
     @Override
-    public boolean isCancelable()
-    {
+    public boolean isCancelable() {
         return true;
     }
 
-    public static class PlayerLearnKnowledgeEvent extends PlayerKnowledgeEvent
-    {
-        public final ItemStack itemStack;
+    public static final class PlayerLearnEvent extends PlayerKnowledgeEvent {
 
-        public PlayerLearnKnowledgeEvent(EntityPlayer entityPlayer, ItemStack itemStack)
-        {
-            super(entityPlayer);
-            this.itemStack = itemStack;
+        public PlayerLearnEvent(EntityPlayer entityPlayer, Object... objects) {
+            super(entityPlayer, objects);
         }
 
-        public PlayerLearnKnowledgeEvent(UUID playerUUID, ItemStack itemStack)
-        {
-            super(playerUUID);
-            this.itemStack = itemStack;
+        public PlayerLearnEvent(String playerName, Object... objects) {
+            super(playerName, objects);
         }
     }
 
-    public static class PlayerForgetKnowledgeEvent extends PlayerKnowledgeEvent
-    {
-        public final ItemStack itemStack;
+    public static final class PlayerForgetEvent extends PlayerKnowledgeEvent {
 
-        public PlayerForgetKnowledgeEvent(EntityPlayer entityPlayer, ItemStack itemStack)
-        {
-            super(entityPlayer);
-            this.itemStack = itemStack;
+        public PlayerForgetEvent(EntityPlayer entityPlayer, Object... objects) {
+            super(entityPlayer, objects);
         }
 
-        public PlayerForgetKnowledgeEvent(UUID playerUUID, ItemStack itemStack)
-        {
-            super(playerUUID);
-            this.itemStack = itemStack;
+        public PlayerForgetEvent(String playerName, Object... objects) {
+            super(playerName, objects);
         }
     }
 
-    public static class PlayerForgetAllKnowledgeEvent extends PlayerKnowledgeEvent
-    {
-        public PlayerForgetAllKnowledgeEvent(EntityPlayer entityPlayer)
-        {
-            super(entityPlayer);
+    public static final class PlayerForgetAllEvent extends PlayerKnowledgeEvent {
+
+        public PlayerForgetAllEvent(EntityPlayer entityPlayer) {
+            super(entityPlayer, null);
         }
 
-        public PlayerForgetAllKnowledgeEvent(UUID playerUUID)
-        {
-            super(playerUUID);
+        public PlayerForgetAllEvent(String playerName) {
+            super(playerName, null);
         }
     }
 }

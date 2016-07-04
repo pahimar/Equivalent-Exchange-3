@@ -20,41 +20,34 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
         if (json.isJsonObject()) {
 
             JsonObject jsonObject = json.getAsJsonObject();
-
             WrappedStack wrappedStack = null;
 
             if (jsonObject.has(TYPE_ITEM_STACK)) {
-
                 try {
-                    ItemStack itemStack = context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class);
-                    wrappedStack = WrappedStack.wrap(itemStack);
+                    wrappedStack = WrappedStack.build(context.deserialize(jsonObject.get(TYPE_ITEM_STACK), ItemStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
             else if (jsonObject.has(TYPE_ORE_STACK)) {
-
                 try {
-                    OreStack oreStack = context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class);
-                    wrappedStack = WrappedStack.wrap(oreStack);
+                    wrappedStack = WrappedStack.build(context.deserialize(jsonObject.get(TYPE_ORE_STACK), OreStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
             else if (jsonObject.has(TYPE_FLUID_STACK)) {
-
                 try {
-                    FluidStack fluidStack = context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class);
-                    wrappedStack = WrappedStack.wrap(fluidStack);
+                    wrappedStack = WrappedStack.build(context.deserialize(jsonObject.get(TYPE_FLUID_STACK), FluidStack.class));
                 }
                 catch (JsonParseException e) {
                     // TODO Logging
                 }
             }
 
-            if (wrappedStack != null) {
+            if (wrappedStack != null && wrappedStack.getObject() != null) {
                 return wrappedStack;
             }
         }
@@ -67,8 +60,8 @@ public class WrappedStackSerializer implements JsonSerializer<WrappedStack>, Jso
 
         final JsonObject jsonObject = new JsonObject();
 
-        if (src != null && src.getWrappedObject() != null) {
-            jsonObject.add(src.getWrappedObject().getClass().getSimpleName().toLowerCase(), context.serialize(src.getWrappedObject()));
+        if (src != null && src.getObject() != null) {
+            jsonObject.add(src.getObject().getClass().getSimpleName().toLowerCase(), context.serialize(src.getObject()));
             return jsonObject;
         }
 

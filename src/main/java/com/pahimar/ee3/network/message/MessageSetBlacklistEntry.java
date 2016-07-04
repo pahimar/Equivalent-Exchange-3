@@ -4,17 +4,17 @@ import com.google.gson.JsonParseException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import static com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy.Blacklist;
 
-public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<MessageSetBlacklistEntry, IMessage> {
+public class MessageSetBlacklistEntry implements IMessage {
 
     public Blacklist blacklist;
     public boolean isBlacklistAction;
@@ -30,7 +30,7 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
     public MessageSetBlacklistEntry(Object object, Blacklist blacklist, boolean isBlacklistAction) {
 
         if (WrappedStack.canBeWrapped(object)) {
-            this.wrappedStack = WrappedStack.wrap(object, 1);
+            this.wrappedStack = WrappedStack.build(object, 1);
         }
         else {
             wrappedStack = null;
@@ -67,7 +67,7 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
 
                     if (compressedWrappedStack != null) {
 
-                        String jsonWrappedStack = CompressionHelper.decompress(compressedWrappedStack);
+                        String jsonWrappedStack = CompressionUtils.decompress(compressedWrappedStack);
 
                         try {
                             wrappedStack = SerializationHelper.GSON.fromJson(jsonWrappedStack, WrappedStack.class);
@@ -100,9 +100,9 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
 
             buf.writeBoolean(isBlacklistAction);
 
-            if (wrappedStack != null && wrappedStack.getWrappedObject() != null) {
+            if (wrappedStack != null && wrappedStack.getObject() != null) {
 
-                byte[] compressedWrappedStack = CompressionHelper.compress(SerializationHelper.GSON.toJson(wrappedStack));
+                byte[] compressedWrappedStack = CompressionUtils.compress(SerializationHelper.GSON.toJson(wrappedStack));
                 buf.writeInt(compressedWrappedStack.length);
                 buf.writeBytes(compressedWrappedStack);
             }
@@ -115,21 +115,24 @@ public class MessageSetBlacklistEntry implements IMessage, IMessageHandler<Messa
         }
     }
 
-    @Override
-    public IMessage onMessage(MessageSetBlacklistEntry message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageSetBlacklistEntry, IMessage> {
 
-        if (message.blacklist != null && message.wrappedStack != null) {
+        @Override
+        public IMessage onMessage(MessageSetBlacklistEntry message, MessageContext ctx) {
 
-            if (message.isBlacklistAction) {
-                BlacklistRegistryProxy.addToBlacklist(message.wrappedStack, message.blacklist);
-                BlacklistRegistry.INSTANCE.setShouldSave(false);
+            if (message.blacklist != null && message.wrappedStack != null) {
+
+                if (message.isBlacklistAction) {
+                    BlacklistRegistryProxy.addToBlacklist(message.wrappedStack, message.blacklist);
+                    BlacklistRegistry.INSTANCE.setShouldSave(false);
+                }
+                else {
+                    BlacklistRegistryProxy.removeFromBlacklist(message.wrappedStack, message.blacklist);
+                    BlacklistRegistry.INSTANCE.setShouldSave(false);
+                }
             }
-            else {
-                BlacklistRegistryProxy.removeFromBlacklist(message.wrappedStack, message.blacklist);
-                BlacklistRegistry.INSTANCE.setShouldSave(false);
-            }
+
+            return null;
         }
-
-        return null;
     }
 }

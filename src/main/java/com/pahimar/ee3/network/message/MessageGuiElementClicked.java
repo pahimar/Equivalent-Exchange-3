@@ -1,22 +1,21 @@
 package com.pahimar.ee3.network.message;
 
 import com.pahimar.ee3.inventory.element.IElementButtonHandler;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageGuiElementClicked implements IMessage, IMessageHandler<MessageGuiElementClicked, IMessage> {
+public class MessageGuiElementClicked implements IMessage {
 
     public String elementName;
     public int buttonPressed;
 
-    public MessageGuiElementClicked(){
+    public MessageGuiElementClicked() {
     }
 
     public MessageGuiElementClicked(String elementName, int buttonPressed) {
-
         this.elementName = elementName;
         this.buttonPressed = buttonPressed;
     }
@@ -37,15 +36,18 @@ public class MessageGuiElementClicked implements IMessage, IMessageHandler<Messa
         buf.writeInt(buttonPressed);
     }
 
-    @Override
-    public IMessage onMessage(MessageGuiElementClicked message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessageGuiElementClicked, IMessage> {
 
-        EntityPlayer entityPlayer = ctx.getServerHandler().playerEntity;
+        @Override
+        public IMessage onMessage(MessageGuiElementClicked message, MessageContext ctx) {
 
-        if (entityPlayer != null && entityPlayer.openContainer instanceof IElementButtonHandler) {
-            ((IElementButtonHandler) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
+            EntityPlayer entityPlayer = ctx.getServerHandler().playerEntity;
+
+            if (entityPlayer != null && entityPlayer.openContainer instanceof IElementButtonHandler) {
+                ((IElementButtonHandler) entityPlayer.openContainer).handleElementButtonClick(message.elementName, message.buttonPressed);
+            }
+
+            return null;
         }
-
-        return null;
     }
 }

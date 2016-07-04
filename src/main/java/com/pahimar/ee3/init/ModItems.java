@@ -1,76 +1,39 @@
 package com.pahimar.ee3.init;
 
-import com.pahimar.ee3.item.*;
-import com.pahimar.ee3.reference.Names;
-import com.pahimar.ee3.reference.Reference;
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.pahimar.ee3.item.base.ItemEE;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-@GameRegistry.ObjectHolder(Reference.MOD_ID)
-public class ModItems
-{
-    public static final ItemEE alchemicalBag = new ItemAlchemicalBag();
-    public static final ItemEE alchemicalDust = new ItemAlchemicalDust();
-    public static final ItemEE alchemicalFuel = new ItemAlchemicalFuel();
-    public static final ItemEE stoneInert = new ItemInertStone();
-    public static final ItemEE shardMinium = new ItemMiniumShard();
-    public static final ItemEE stoneMinium = new ItemMiniumStone();
-    public static final ItemEE stonePhilosophers = new ItemPhilosophersStone();
-    public static final ItemEE alchemicalUpgrade = new ItemAlchemicalInventoryUpgrade();
-    public static final ItemEE chalk = new ItemChalk();
-    public static final ItemEE diviningRod = new ItemDiviningRod();
-    public static final ItemEE alchenomicon = new ItemAlchenomicon();
-    public static final ItemEE matter = new ItemMatter();
-    public static final ItemEE gem = new ItemGem();
-    public static final ItemEE lootBall = new ItemLootBall();
-    public static final ItemEE knowledgeScroll = new ItemKnowledgeScroll();
-    public static final ItemEE potionLethe = new ItemPotionLethe();
+import java.util.ArrayList;
+import java.util.List;
 
-    public static final ItemToolEE shovelDarkMatter = new ItemDarkMatterShovel();
-    public static final ItemToolEE pickAxeDarkMatter = new ItemDarkMatterPickAxe();
-    public static final ItemEE hammerDarkMatter = new ItemDarkMatterHammer();
-    public static final ItemToolEE axeDarkMatter = new ItemDarkMatterAxe();
-    public static final ItemDarkMatterHoe hoeDarkMatter = new ItemDarkMatterHoe();
-    public static final ItemDarkMatterFishingRod fishingRodDarkMatter = new ItemDarkMatterFishingRod();
-    public static final ItemDarkMatterShears shearsDarkMatter = new ItemDarkMatterShears();
+public class ModItems {
 
-    public static final ItemDarkMatterBow bowDarkMatter = new ItemDarkMatterBow();
-    public static final ItemDarkMatterArrow arrowDarkMatter = new ItemDarkMatterArrow();
-    public static final ItemDarkMatterSword swordDarkMatter = new ItemDarkMatterSword();
+    public static final List<ItemEE> ITEMS = new ArrayList<>();
 
-    public static void init()
-    {
-        GameRegistry.registerItem(alchemicalBag, Names.Items.ALCHEMICAL_BAG);
-        GameRegistry.registerItem(alchemicalDust, Names.Items.ALCHEMICAL_DUST);
-        GameRegistry.registerItem(alchemicalFuel, Names.Items.ALCHEMICAL_FUEL);
-        GameRegistry.registerItem(stoneInert, Names.Items.INERT_STONE);
-        GameRegistry.registerItem(shardMinium, Names.Items.MINIUM_SHARD);
-        GameRegistry.registerItem(stoneMinium, Names.Items.MINIUM_STONE);
-        GameRegistry.registerItem(stonePhilosophers, Names.Items.PHILOSOPHERS_STONE);
-        GameRegistry.registerItem(chalk, Names.Items.CHALK);
-        GameRegistry.registerItem(alchemicalUpgrade, Names.Items.ALCHEMICAL_UPGRADE);
-        GameRegistry.registerItem(diviningRod, Names.Items.DIVINING_ROD);
-        GameRegistry.registerItem(alchenomicon, Names.Items.ALCHENOMICON, Names.Items.ALCHEMICAL_TOME);
-        GameRegistry.registerItem(matter, Names.Items.MATTER);
-        GameRegistry.registerItem(gem, Names.Items.GEM);
-        GameRegistry.registerItem(lootBall, Names.Items.LOOT_BALL);
-        GameRegistry.registerItem(knowledgeScroll, Names.Items.KNOWLEDGE_SCROLL);
-        GameRegistry.registerItem(potionLethe, Names.Items.POTION_LETHE);
+    public static void register() {
+    }
 
-        GameRegistry.registerItem(shovelDarkMatter, Names.Tools.DARK_MATTER_SHOVEL);
-        GameRegistry.registerItem(pickAxeDarkMatter, Names.Tools.DARK_MATTER_PICKAXE);
-        GameRegistry.registerItem(hammerDarkMatter, Names.Tools.DARK_MATTER_HAMMER);
-        GameRegistry.registerItem(axeDarkMatter, Names.Tools.DARK_MATTER_AXE);
-        GameRegistry.registerItem(hoeDarkMatter, Names.Tools.DARK_MATTER_HOE);
-        GameRegistry.registerItem(fishingRodDarkMatter, Names.Tools.DARK_MATTER_FISHING_ROD);
-        GameRegistry.registerItem(shearsDarkMatter, Names.Tools.DARK_MATTER_SHEARS);
+    @SideOnly(Side.CLIENT)
+    public static void initModelsAndVariants() {
+        ITEMS.forEach(ItemEE::initModelsAndVariants);
+    }
 
-        GameRegistry.registerItem(bowDarkMatter, Names.Weapons.DARK_MATTER_BOW);
-        GameRegistry.registerItem(arrowDarkMatter, Names.Weapons.DARK_MATTER_ARROW);
-        GameRegistry.registerItem(swordDarkMatter, Names.Weapons.DARK_MATTER_SWORD);
+    @SideOnly(Side.CLIENT)
+    public static void registerItemColors() {
 
-        // Helm
-        // Chest
-        // Leggings
-        // Boots
+        for (ItemEE itemEE : ITEMS) {
+            if (itemEE instanceof IItemColor) {
+                FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new IItemColor() {
+                    @Override
+                    public int getColorFromItemstack(ItemStack itemStack, int tintIndex) {
+                        return ((IItemColor) itemEE).getColorFromItemstack(itemStack, tintIndex);
+                    }
+                }, itemEE);
+            }
+        }
     }
 }

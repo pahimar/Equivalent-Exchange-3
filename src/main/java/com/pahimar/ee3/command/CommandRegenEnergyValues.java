@@ -2,16 +2,18 @@ package com.pahimar.ee3.command;
 
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.ConfigurationHandler;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.network.message.MessageSyncEnergyValues;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class CommandRegenEnergyValues extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender commandSender, String[] args) {
+    public void execute(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args) throws CommandException {
 
         boolean shouldRegen = true;
         float coolDown = 0f;
@@ -45,8 +47,7 @@ public class CommandRegenEnergyValues extends CommandBase {
 
         if (requesterMap.containsKey(commandSenderUUID)) {
 
-            // TODO Switch to nanoTime from currentTimeMillis
-            long timeDifference = (System.nanoTime() - requesterMap.get(commandSenderUUID).longValue()) / 100000;
+            long timeDifference = (System.nanoTime() - requesterMap.get(commandSenderUUID)) / 100000;
 
             if (timeDifference >= (ConfigurationHandler.Settings.serverSyncThreshold * 1000)) {
                 requesterMap.remove(commandSenderUUID);
@@ -61,13 +62,13 @@ public class CommandRegenEnergyValues extends CommandBase {
         }
 
         if (shouldRegen) {
-            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getCommandSenderName());
+            LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getName());
             EnergyValueRegistry.INSTANCE.compute();
-            PacketHandler.INSTANCE.sendToAll(new MessageSyncEnergyValues());
-            commandSender.addChatMessage(new ChatComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
+            Network.INSTANCE.sendToAll(new MessageSyncEnergyValues());
+            commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
         }
         else {
-            throw new WrongUsageException(Messages.Commands.REGEN_ENERGY_VALUES_DENIED, new Object[]{coolDown / 1000f});
+            throw new WrongUsageException(Messages.Commands.REGEN_ENERGY_VALUES_DENIED, coolDown / 1000f);
         }
     }
 }

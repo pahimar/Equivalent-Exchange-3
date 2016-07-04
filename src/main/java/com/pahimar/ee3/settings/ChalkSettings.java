@@ -38,9 +38,9 @@ public class ChalkSettings implements INBTTaggable
         {
             this.index = 0;
         }
-        else if (this.index >= AlchemyArrayRegistryProxy.getRegisteredAlchemyArrays().size())
+        else if (this.index >= AlchemyArrayRegistryProxy.getAlchemyArrays().size())
         {
-            this.index = AlchemyArrayRegistryProxy.getRegisteredAlchemyArrays().size() - 1;
+            this.index = AlchemyArrayRegistryProxy.getAlchemyArrays().size() - 1;
         }
     }
 
@@ -48,7 +48,7 @@ public class ChalkSettings implements INBTTaggable
     {
         index += 1;
 
-        if (index >= AlchemyArrayRegistryProxy.getRegisteredAlchemyArrays().size())
+        if (index >= AlchemyArrayRegistryProxy.getAlchemyArrays().size())
         {
             index = 0;
         }
@@ -60,7 +60,7 @@ public class ChalkSettings implements INBTTaggable
 
         if (index < 0)
         {
-            this.index = AlchemyArrayRegistryProxy.getRegisteredAlchemyArrays().size() - 1;
+            this.index = AlchemyArrayRegistryProxy.getAlchemyArrays().size() - 1;
         }
     }
 
@@ -143,7 +143,7 @@ public class ChalkSettings implements INBTTaggable
             {
                 this.index = chalkSettings.getInteger("index");
 
-                if (this.index < 0 || this.index >= AlchemyArrayRegistryProxy.getRegisteredAlchemyArrays().size())
+                if (this.index < 0 || this.index >= AlchemyArrayRegistryProxy.getAlchemyArrays().size())
                 {
                     this.index = 0;
                 }

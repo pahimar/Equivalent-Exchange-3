@@ -2,38 +2,34 @@ package com.pahimar.ee3.network.message;
 
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.knowledge.PlayerKnowledge;
-import com.pahimar.ee3.tileentity.TileEntityTransmutationTablet;
-import com.pahimar.ee3.util.CompressionHelper;
+import com.pahimar.ee3.util.CompressionUtils;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Collection;
 
-public class MessagePlayerKnowledge implements IMessage, IMessageHandler<MessagePlayerKnowledge, IMessage> {
+public class MessagePlayerKnowledge implements IMessage {
 
-    public int xCoord, yCoord, zCoord;
+    public BlockPos blockPos;
     public PlayerKnowledge playerKnowledge;
 
     public MessagePlayerKnowledge(){
     }
 
-    public MessagePlayerKnowledge(TileEntityTransmutationTablet transmutationTablet, Collection<ItemStack> knownItemStacks) {
+    public MessagePlayerKnowledge(TileEntity transmutationTablet, Collection<ItemStack> knownItemStacks) {
 
         if (transmutationTablet != null) {
-            this.xCoord = transmutationTablet.xCoord;
-            this.yCoord = transmutationTablet.yCoord;
-            this.zCoord = transmutationTablet.zCoord;
+            this.blockPos = transmutationTablet.getPos();
         }
         else {
-            this.xCoord = 0;
-            this.yCoord = Integer.MIN_VALUE;
-            this.zCoord = 0;
+            this.blockPos = new BlockPos(0, Integer.MIN_VALUE, 0);
         }
 
         if (knownItemStacks != null) {
@@ -47,9 +43,7 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
     @Override
     public void fromBytes(ByteBuf buf) {
 
-        this.xCoord = buf.readInt();
-        this.yCoord = buf.readInt();
-        this.zCoord = buf.readInt();
+        blockPos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 
         byte[] compressedJson = null;
         int readableBytes = buf.readInt();
@@ -60,7 +54,7 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
 
         if (compressedJson != null) {
             try {
-                this.playerKnowledge = SerializationHelper.GSON.fromJson(CompressionHelper.decompress(compressedJson), PlayerKnowledge.class);
+                this.playerKnowledge = SerializationHelper.GSON.fromJson(CompressionUtils.decompress(compressedJson), PlayerKnowledge.class);
             }
             catch (JsonSyntaxException e) {
                 this.playerKnowledge = new PlayerKnowledge();
@@ -71,14 +65,21 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
     @Override
     public void toBytes(ByteBuf buf) {
 
-        buf.writeInt(xCoord);
-        buf.writeInt(yCoord);
-        buf.writeInt(zCoord);
+        if (blockPos != null) {
+            buf.writeInt(blockPos.getX());
+            buf.writeInt(blockPos.getY());
+            buf.writeInt(blockPos.getZ());
+        }
+        else {
+            buf.writeInt(0);
+            buf.writeInt(Integer.MIN_VALUE);
+            buf.writeInt(0);
+        }
 
         byte[] compressedJson = null;
 
         if (playerKnowledge != null) {
-            compressedJson = CompressionHelper.compress(SerializationHelper.GSON.toJson(playerKnowledge));
+            compressedJson = CompressionUtils.compress(SerializationHelper.GSON.toJson(playerKnowledge));
         }
 
         if (compressedJson != null) {
@@ -90,18 +91,22 @@ public class MessagePlayerKnowledge implements IMessage, IMessageHandler<Message
         }
     }
 
-    @Override
-    public IMessage onMessage(MessagePlayerKnowledge message, MessageContext ctx) {
+    public static class MessageHandler implements IMessageHandler<MessagePlayerKnowledge, IMessage> {
 
-        if (message.yCoord != Integer.MIN_VALUE) {
+        @Override
+        public IMessage onMessage(MessagePlayerKnowledge message, MessageContext ctx) {
 
-            TileEntity tileEntity = FMLClientHandler.instance().getWorldClient().getTileEntity(message.xCoord, message.yCoord, message.zCoord);
+            if (message.blockPos.getY() != Integer.MIN_VALUE) {
 
-            if (tileEntity instanceof TileEntityTransmutationTablet) {
-                ((TileEntityTransmutationTablet) tileEntity).handlePlayerKnowledgeUpdate(message.playerKnowledge);
+                TileEntity tileEntity = FMLClientHandler.instance().getWorldClient().getTileEntity(message.blockPos);
+
+                // TODO Uncomment this once we reimplement things
+//                if (tileEntity instanceof TileEntityTransmutationTablet) {
+//                    ((TileEntityTransmutationTablet) tileEntity).handlePlayerKnowledgeUpdate(message.playerKnowledge);
+//                }
             }
-        }
 
-        return null;
+            return null;
+        }
     }
 }

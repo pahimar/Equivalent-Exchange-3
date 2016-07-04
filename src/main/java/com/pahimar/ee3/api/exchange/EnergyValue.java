@@ -1,8 +1,8 @@
 package com.pahimar.ee3.api.exchange;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -25,8 +25,8 @@ public final class EnergyValue implements Comparable<EnergyValue> {
         return this.energyValue;
     }
 
-    public IChatComponent getChatComponent() {
-        return new ChatComponentText("" + this.getValue());
+    public ITextComponent getTextComponent() {
+        return new TextComponentString("" + this.getValue());
     }
 
     @Override

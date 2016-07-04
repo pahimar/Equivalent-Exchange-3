@@ -3,23 +3,23 @@ package com.pahimar.ee3.recipe;
 import com.google.common.collect.ImmutableList;
 import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.item.crafting.RecipeAludel;
-import com.pahimar.ee3.util.LoaderHelper;
+import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AludelRecipeManager
-{
+public class AludelRecipeManager {
+
     private static AludelRecipeManager aludelRegistry = null;
 
     private List<RecipeAludel> aludelRecipes;
 
     private AludelRecipeManager()
     {
-        aludelRecipes = new ArrayList<RecipeAludel>();
+        aludelRecipes = new ArrayList<>();
     }
 
     public static AludelRecipeManager getInstance()
@@ -47,7 +47,7 @@ public class AludelRecipeManager
     {
         if (!aludelRecipes.contains(recipeAludel))
         {
-            LogHelper.trace(RecipeRegistry.RECIPE_MARKER, "[{}] Mod with ID '{}' added Aludel recipe '{}'", LoaderHelper.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel);
+            LogHelper.trace(RecipeRegistry.RECIPE_MARKER, "[{}] Mod with ID '{}' added Aludel recipe '{}'", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), recipeAludel);
             aludelRecipes.add(recipeAludel);
         }
     }

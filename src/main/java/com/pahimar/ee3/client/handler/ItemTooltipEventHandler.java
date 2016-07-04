@@ -5,20 +5,18 @@ import com.pahimar.ee3.api.exchange.EnergyValue;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.inventory.ContainerAlchenomicon;
-import com.pahimar.ee3.inventory.ContainerResearchStation;
-import com.pahimar.ee3.inventory.ContainerTransmutationTablet;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemStackUtils;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.StatCollector;
+import com.pahimar.ee3.util.SerializationHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 import java.util.UUID;
@@ -29,63 +27,56 @@ public class ItemTooltipEventHandler {
     @SubscribeEvent
     public void handleItemTooltipEvent(ItemTooltipEvent event) {
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || (event.entityPlayer != null && (event.entityPlayer.openContainer instanceof ContainerAlchenomicon || event.entityPlayer.openContainer instanceof ContainerTransmutationTablet))) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 
-            WrappedStack wrappedItemStack = WrappedStack.wrap(event.itemStack);
+            WrappedStack wrappedItemStack = WrappedStack.build(event.getItemStack());
             EnergyValue energyValue = EnergyValueRegistryProxy.getEnergyValue(wrappedItemStack);
             EnergyValue stackEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(wrappedItemStack);
 
-            if (energyValue != null) {
+            if (energyValue != null && (BlacklistRegistryProxy.isExchangeable(wrappedItemStack) || BlacklistRegistryProxy.isLearnable(wrappedItemStack))) {
 
                 if (wrappedItemStack.getStackSize() > 1) {
-                    event.toolTip.add(String.format("Exchange Energy (Item): %s", energyValue)); // TODO Localize
-                    event.toolTip.add(String.format("Exchange Energy (Stack of %s): %s", event.itemStack.stackSize, stackEnergyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("Exchange Energy (Item): %s", energyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("Exchange Energy (Stack of %s): %s", event.getItemStack().stackSize, stackEnergyValue)); // TODO Localize
                 }
                 else {
 
-                    event.toolTip.add(String.format("Exchange Energy: %s", stackEnergyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("Exchange Energy: %s", stackEnergyValue)); // TODO Localize
 
-                    if (FluidContainerRegistry.getFluidForFilledItem(event.itemStack) != null) {
+                    // TODO Move away from deprecated FluidContainerRegistry
+                    if (FluidContainerRegistry.getFluidForFilledItem(event.getItemStack()) != null) {
 
-                        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.itemStack);
+                        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.getItemStack());
                         EnergyValue fluidStackEnergyValue = EnergyValueRegistryProxy.getEnergyValueForStack(fluidStack);
 
                         if (fluidStackEnergyValue != null) {
-                            event.toolTip.add(String.format(" - Exchange Energy (%smB of %s): %s", fluidStack.amount, fluidStack.getLocalizedName(), fluidStackEnergyValue)); // TODO Localize
-                            event.toolTip.add(String.format(" - Exchange Energy (Container): %s", new EnergyValue(energyValue.getValue() - fluidStackEnergyValue.getValue()))); // TODO Localize
+                            event.getToolTip().add(String.format(" - Exchange Energy (%smB of %s): %s", fluidStack.amount, fluidStack.getLocalizedName(), fluidStackEnergyValue)); // TODO Localize
+                            event.getToolTip().add(String.format(" - Exchange Energy (Container): %s", new EnergyValue(energyValue.getValue() - fluidStackEnergyValue.getValue()))); // TODO Localize
                         }
                     }
                 }
             }
             else {
-                event.toolTip.add("No Exchange Energy value"); // TODO Localize
+                event.getToolTip().add("No Exchange Energy value"); // TODO Localize
             }
 
-            if (!BlacklistRegistryProxy.isLearnable(wrappedItemStack)) {
-                event.toolTip.add("Not learnable"); // TODO Localize
+            if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.getEntityPlayer(), event.getItemStack())) {
+                event.getToolTip().add("You know how to transmute this"); // TODO Localize with better phrasing
             }
 
-            if (!BlacklistRegistryProxy.isExchangeable(wrappedItemStack)) {
-                event.toolTip.add("Not exchangeable"); // TODO Localize
-            }
+            // TODO This is more of a debug thing to determine the new NBT stuff
+            event.getToolTip().add(SerializationHelper.GSON.toJson(event.getItemStack()));
         }
 
-        if (((Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) && (event.entityPlayer != null && event.entityPlayer.openContainer instanceof ContainerResearchStation))) {
+        if (event.getItemStack().getItem() instanceof IOwnable) {
 
-            if (PlayerKnowledgeRegistryProxy.doesPlayerKnow(event.entityPlayer, event.itemStack)) {
-                event.toolTip.add("You know how to transmute this"); // TODO Localize with better phrasing
-            }
-        }
-
-        if (event.itemStack.getItem() instanceof IOwnable) {
-
-            UUID playerUUID = ItemStackUtils.getOwnerUUID(event.itemStack);
+            UUID playerUUID = ItemStackUtils.getOwnerUUID(event.getItemStack());
 
             if (playerUUID != null && UsernameCache.containsUUID(playerUUID)) {
-                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
+                event.getToolTip().add(I18n.format(Messages.Tooltips.ITEM_BELONGS_TO, UsernameCache.getLastKnownUsername(playerUUID)));
             }
-            else if (ItemStackUtils.getOwnerName(event.itemStack) != null) {
-                event.toolTip.add(StatCollector.translateToLocalFormatted(Messages.Tooltips.ITEM_BELONGS_TO, ItemStackUtils.getOwnerName(event.itemStack)));
+            else if (ItemStackUtils.getOwnerName(event.getItemStack()) != null) {
+                event.getToolTip().add(I18n.format(Messages.Tooltips.ITEM_BELONGS_TO, ItemStackUtils.getOwnerName(event.getItemStack())));
             }
         }
     }

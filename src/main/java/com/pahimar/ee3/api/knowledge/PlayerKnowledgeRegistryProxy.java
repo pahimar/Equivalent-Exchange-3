@@ -1,15 +1,15 @@
 package com.pahimar.ee3.api.knowledge;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import cpw.mods.fml.common.Mod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-public class PlayerKnowledgeRegistryProxy {
+public final class PlayerKnowledgeRegistryProxy {
 
     /**
      * TODO Finish JavaDoc

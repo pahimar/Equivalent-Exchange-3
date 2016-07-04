@@ -1,34 +1,35 @@
 package com.pahimar.ee3.api.recipe;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import cpw.mods.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 public final class RecipeRegistryProxy {
 
-    public static void addRecipe(Object recipeOutput, Object ... recipeInputs) { // TODO 1.9, List -> Collection
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param recipeOutput
+     * @param recipeInputs
+     */
+    public static void addRecipe(Object recipeOutput, Object ... recipeInputs) {
         addRecipe(recipeOutput, Arrays.asList(recipeInputs));
     }
 
-    public static void addRecipe(Object recipeOutput, List<?> recipeInputList) { // TODO 1.9, List -> Collection
+    /**
+     * TODO Finish JavaDoc
+     *
+     * @param recipeOutput
+     * @param recipeInputs
+     */
+    public static void addRecipe(Object recipeOutput, Collection<?> recipeInputs) {
 
         init();
 
-        // NOOP if EquivalentExchange3 is not present
         if (ee3Mod != null) {
-            EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputList);
-        }
-    }
-
-    public static void dumpRecipeRegistryToLog() {
-
-        init();
-
-        // NOOP if EquivalentExchange3 is not present
-        if (ee3Mod != null) {
-            EE3Wrapper.ee3mod.getRecipeRegistry().dumpRecipeRegistryToLog();
+            EE3Wrapper.ee3mod.getRecipeRegistry().addRecipe(recipeOutput, recipeInputs);
         }
     }
 

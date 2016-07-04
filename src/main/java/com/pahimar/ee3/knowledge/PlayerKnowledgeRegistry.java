@@ -2,17 +2,17 @@ package com.pahimar.ee3.knowledge;
 
 import com.google.gson.JsonSyntaxException;
 import com.pahimar.ee3.api.blacklist.BlacklistRegistryProxy;
+import com.pahimar.ee3.api.event.PlayerKnowledgeEvent;
 import com.pahimar.ee3.handler.ConfigurationHandler;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,11 +30,6 @@ public class PlayerKnowledgeRegistry {
 
     public static File templatePlayerKnowledgeFile;
 
-    public static final Marker PLAYER_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_KNOWLEDGE", LogHelper.MOD_MARKER);
-    public static final Marker PLAYER_LEARN_KNOWLEDGE = MarkerManager.getMarker("EE3_PLAYER_TEACH_KNOWLEDGE", PLAYER_KNOWLEDGE_MARKER);
-    public static final Marker PLAYER_FORGET_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_FORGET_KNOWLEDGE", PLAYER_KNOWLEDGE_MARKER);
-    public static final Marker PLAYER_FORGET_ALL_KNOWLEDGE_MARKER = MarkerManager.getMarker("EE3_PLAYER_FORGET_ALL_KNOWLEDGE", PLAYER_FORGET_KNOWLEDGE_MARKER);
-
     private PlayerKnowledgeRegistry() {
 
         playerKnowledgeMap = new TreeMap<>(Comparators.STRING_COMPARATOR);
@@ -49,7 +44,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean doesPlayerKnow(EntityPlayer player, Object object) {
-        return player != null && doesPlayerKnow(player.getDisplayName(), object);
+        return player != null && doesPlayerKnow(player.getName(), object);
     }
 
     /**
@@ -59,13 +54,9 @@ public class PlayerKnowledgeRegistry {
      * @param object
      * @return
      */
+    // TODO Remove the object from players knowledge if it is blacklisted
     public boolean doesPlayerKnow(String playerName, Object object) {
-
-        if (getPlayerKnowledge(playerName) != null) {
-            return getPlayerKnowledge(playerName).isKnown(object);
-        }
-
-        return false;
+        return getPlayerKnowledge(playerName) != null && getPlayerKnowledge(playerName).isKnown(object);
     }
 
     /**
@@ -78,7 +69,7 @@ public class PlayerKnowledgeRegistry {
     public boolean canPlayerLearn(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            return canPlayerLearn(entityPlayer.getDisplayName(), object);
+            return canPlayerLearn(entityPlayer.getName(), object);
         }
 
         return false;
@@ -92,12 +83,7 @@ public class PlayerKnowledgeRegistry {
      * @return
      */
     public boolean canPlayerLearn(String playerName, Object object) {
-
-        if (getPlayerKnowledge(playerName) != null) {
-            return !getPlayerKnowledge(playerName).isKnown(object) && BlacklistRegistryProxy.isLearnable(object);
-        }
-
-        return false;
+        return getPlayerKnowledge(playerName) != null && !getPlayerKnowledge(playerName).isKnown(object) && BlacklistRegistryProxy.isLearnable(object);
     }
 
     /**
@@ -109,7 +95,7 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), object);
+            teachPlayer(entityPlayer.getName(), object);
         }
     }
 
@@ -122,9 +108,10 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).learn(object);
-            LogHelper.trace(PLAYER_LEARN_KNOWLEDGE, "Player {} learned {}", playerName, object);
-            save(playerName);
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerLearnEvent(playerName, object))) {
+                getPlayerKnowledge(playerName).learn(object);
+                save(playerName);
+            }
         }
     }
 
@@ -137,7 +124,7 @@ public class PlayerKnowledgeRegistry {
     public void teachPlayer(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            teachPlayer(entityPlayer.getDisplayName(), objects);
+            teachPlayer(entityPlayer.getName(), objects);
         }
     }
 
@@ -149,15 +136,11 @@ public class PlayerKnowledgeRegistry {
      */
     public void teachPlayer(String playerName, Collection<?> objects) {
 
-        if (objects != null) {
-
+        if (objects != null && getPlayerKnowledge(playerName) != null) {
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
-            if (playerKnowledge != null) {
-                for (Object object : objects){
-                    getPlayerKnowledge(playerName).learn(object);
-                    LogHelper.trace(PLAYER_LEARN_KNOWLEDGE, "Player {} learned {}", playerName, object);
-                }
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerLearnEvent(playerName, objects))) {
+                playerKnowledge.learn(objects);
                 save(playerName);
             }
         }
@@ -172,7 +155,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(EntityPlayer entityPlayer, Object object) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), object);
+            makePlayerForget(entityPlayer.getName(), object);
         }
     }
 
@@ -185,9 +168,10 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(String playerName, Object object) {
 
         if (getPlayerKnowledge(playerName) != null) {
-            getPlayerKnowledge(playerName).forget(object);
-            LogHelper.trace(PLAYER_FORGET_KNOWLEDGE_MARKER, "Player {} forgot {}", playerName, object);
-            save(playerName);
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetEvent(playerName, object))) {
+                getPlayerKnowledge(playerName).forget(object);
+                save(playerName);
+            }
         }
     }
 
@@ -200,7 +184,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForget(EntityPlayer entityPlayer, Collection<?> objects) {
 
         if (entityPlayer != null) {
-            makePlayerForget(entityPlayer.getDisplayName(), objects);
+            makePlayerForget(entityPlayer.getName(), objects);
         }
     }
 
@@ -212,15 +196,12 @@ public class PlayerKnowledgeRegistry {
      */
     public void makePlayerForget(String playerName, Collection<?> objects) {
 
-        if (objects != null) {
+        if (objects != null && getPlayerKnowledge(playerName) != null) {
 
             PlayerKnowledge playerKnowledge = getPlayerKnowledge(playerName);
 
-            if (playerKnowledge != null) {
-                for (Object object : objects) {
-                    getPlayerKnowledge(playerName).forget(object);
-                    LogHelper.trace(PLAYER_FORGET_KNOWLEDGE_MARKER, "Player {} forgot {}", playerName, object);
-                }
+            if (!MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetEvent(playerName, objects))) {
+                playerKnowledge.forget(objects);
                 save(playerName);
             }
         }
@@ -234,7 +215,7 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForgetAll(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            makePlayerForgetAll(entityPlayer.getDisplayName());
+            makePlayerForgetAll(entityPlayer.getName());
         }
     }
 
@@ -246,9 +227,8 @@ public class PlayerKnowledgeRegistry {
     public void makePlayerForgetAll(String playerName) {
 
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-            if (playerName != null && !playerName.isEmpty()) {
+            if (playerName != null && !playerName.isEmpty() && !MinecraftForge.EVENT_BUS.post(new PlayerKnowledgeEvent.PlayerForgetAllEvent(playerName))) {
                 playerKnowledgeMap.put(playerName, new PlayerKnowledge());
-                LogHelper.trace(PLAYER_FORGET_ALL_KNOWLEDGE_MARKER, "Player {} forget everything", playerName);
                 save(playerName);
             }
         }
@@ -263,7 +243,7 @@ public class PlayerKnowledgeRegistry {
     public Set<ItemStack> getKnownItemStacks(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            return getKnownItemStacks(entityPlayer.getDisplayName());
+            return getKnownItemStacks(entityPlayer.getName());
         }
 
         return new TreeSet<>(Comparators.ID_COMPARATOR);
@@ -293,7 +273,7 @@ public class PlayerKnowledgeRegistry {
     protected PlayerKnowledge getPlayerKnowledge(EntityPlayer entityPlayer) {
 
         if (entityPlayer != null) {
-            return getPlayerKnowledge(entityPlayer.getDisplayName());
+            return getPlayerKnowledge(entityPlayer.getName());
         }
 
         return null;
@@ -326,12 +306,11 @@ public class PlayerKnowledgeRegistry {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 
             // Save the template to file
+            // TODO Do not save knowledge that is blacklisted
             SerializationHelper.writeJsonFile(templatePlayerKnowledgeFile, SerializationHelper.GSON.toJson(templatePlayerKnowledge));
 
             // Save every currently loaded player knowledge to file
-            for (String playerName : playerKnowledgeMap.keySet()) {
-                save(playerName);
-            }
+            playerKnowledgeMap.keySet().forEach(this::save);
         }
     }
 
@@ -346,6 +325,7 @@ public class PlayerKnowledgeRegistry {
             if (playerName != null && !playerName.isEmpty()) {
                 File playerKnowledgeFile = getPlayerKnowledgeFile(playerName);
                 if (playerKnowledgeFile != null) {
+                    // TODO Do not save knowledge that is currently blacklisted
                     SerializationHelper.writeJsonFile(playerKnowledgeFile, SerializationHelper.GSON.toJson(playerKnowledgeMap.get(playerName)));
                 }
             }
@@ -361,6 +341,7 @@ public class PlayerKnowledgeRegistry {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 
             templatePlayerKnowledge.forgetAll();
+            // TODO Do not load in knowledge that is blacklisted
             templatePlayerKnowledge.learn(load(templatePlayerKnowledgeFile, true).getKnownItemStacks());
 
             // Reset the player knowledge map
@@ -382,6 +363,7 @@ public class PlayerKnowledgeRegistry {
                 PlayerKnowledge playerKnowledge = SerializationHelper.GSON.fromJson(jsonString, PlayerKnowledge.class);
 
                 if (playerKnowledge != null) {
+                    // TODO Remove knowledge that is blacklisted
                     return playerKnowledge;
                 }
             }

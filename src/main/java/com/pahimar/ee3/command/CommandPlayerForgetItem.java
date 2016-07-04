@@ -3,105 +3,79 @@ package com.pahimar.ee3.command;
 import com.pahimar.ee3.api.knowledge.PlayerKnowledgeRegistryProxy;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class CommandPlayerForgetItem extends CommandBase
-{
+public class CommandPlayerForgetItem extends CommandBase {
+
     @Override
-    public String getCommandName()
-    {
+    public String getCommandName() {
         return Names.Commands.PLAYER_FORGET_ITEM;
     }
 
     @Override
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 2;
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender)
-    {
+    public String getCommandUsage(ICommandSender commandSender) {
         return Messages.Commands.PLAYER_FORGET_ITEM_USAGE;
     }
 
     @Override
-    public void processCommand(ICommandSender commandSender, String[] args)
-    {
-        if (args.length < 3)
-        {
+    public void execute(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args) throws CommandException {
+
+        if (args.length < 3) {
             throw new WrongUsageException(Messages.Commands.PLAYER_FORGET_ITEM_USAGE);
         }
-        else
-        {
-            EntityPlayer entityPlayer = getPlayer(commandSender, args[1]);
+        else {
 
-            if (entityPlayer != null)
-            {
-                Item item = getItemByText(commandSender, args[2]);
-                int metaData = 0;
+            EntityPlayer entityPlayer = getPlayer(minecraftServer, commandSender, args[1]);
 
-                if (args.length >= 4)
-                {
-                    metaData = parseInt(commandSender, args[3]);
+            Item item = getItemByText(commandSender, args[2]);
+            int metaData = args.length >= 4 ? parseInt(args[3]) : 0;
+
+            ItemStack itemStack = new ItemStack(item, 1, metaData);
+
+            if (args.length >= 5) {
+                String stringNBTData = getChatComponentFromNthArg(commandSender, args, 4).getUnformattedText();
+
+                try {
+                    itemStack.setTagCompound(JsonToNBT.getTagFromJson(stringNBTData));
                 }
-
-                ItemStack itemStack = new ItemStack(item, 1, metaData);
-
-                if (args.length >= 5)
-                {
-                    String stringNBTData = func_147178_a(commandSender, args, 4).getUnformattedText();
-
-                    try
-                    {
-                        NBTBase nbtBase = JsonToNBT.func_150315_a(stringNBTData);
-
-                        if (!(nbtBase instanceof NBTTagCompound))
-                        {
-                            func_152373_a(commandSender, this, Messages.Commands.INVALID_NBT_TAG_ERROR, new Object[]{"Not a valid tag"});
-                            return;
-                        }
-
-                        itemStack.setTagCompound((NBTTagCompound) nbtBase);
-                    }
-                    catch (Exception exception)
-                    {
-                        func_152373_a(commandSender, this, Messages.Commands.INVALID_NBT_TAG_ERROR, new Object[]{exception.getMessage()});
-                        return;
-                    }
+                catch (Exception exception) {
+                    notifyCommandListener(commandSender, this, Messages.Commands.INVALID_NBT_TAG_ERROR, exception.getMessage());
+                    return;
                 }
+            }
 
-                PlayerKnowledgeRegistryProxy.makePlayerForget(entityPlayer, itemStack);
-                func_152373_a(commandSender, this, Messages.Commands.PLAYER_FORGET_ITEM_SUCCESS, new Object[]{commandSender.getCommandSenderName(), entityPlayer.getCommandSenderName(), itemStack.func_151000_E()});
-            }
-            else
-            {
-                throw new WrongUsageException(Messages.Commands.PLAYER_NOT_FOUND_ERROR);
-            }
+            // TODO Check to see if the request runs before telling everyone it did
+            PlayerKnowledgeRegistryProxy.makePlayerForget(entityPlayer, itemStack);
+            notifyCommandListener(commandSender, this, Messages.Commands.PLAYER_FORGET_ITEM_SUCCESS, commandSender.getName(), entityPlayer.getName(), itemStack.getTextComponent());
         }
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
-    {
-        if (args.length == 2)
-        {
+    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
+
+        if (args.length == 2) {
             return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames());
         }
-        else if (args.length == 3)
-        {
-            return getListOfStringsFromIterableMatchingLastWord(args, Item.itemRegistry.getKeys());
+        else if (args.length == 3) {
+            return getListOfStringsMatchingLastWord(args, Item.REGISTRY.getKeys());
         }
 
         return null;

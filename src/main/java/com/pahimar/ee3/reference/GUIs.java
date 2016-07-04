@@ -1,7 +1,7 @@
 package com.pahimar.ee3.reference;
 
-public enum GUIs
-{
+public enum GUIs {
+
     PORTABLE_CRAFTING,
     CALCINATOR,
     ALUDEL,
@@ -11,8 +11,5 @@ public enum GUIs
     RESEARCH_STATION,
     AUGMENTATION_TABLE,
     ALCHENOMICON,
-    TRANSMUTATION_TABLET,
-    SYMBOL_SELECTION,
-    TRANSMUTATION_ARRAY,
-    ADMIN_PANEL
+    TRANSMUTATION_TABLET
 }

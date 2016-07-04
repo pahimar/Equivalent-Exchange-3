@@ -10,8 +10,6 @@ import java.util.*;
 
 public class FilterUtils {
 
-
-
     public static Set<ItemStack> filterByDisplayName(Set<ItemStack> itemStacks, String filterString) {
         return filterByDisplayName(itemStacks, filterString, NameFilterType.STARTS_WITH, null);
     }
@@ -20,7 +18,7 @@ public class FilterUtils {
         return filterByDisplayName(itemStacks, filterString, filterType, null);
     }
 
-    public static Set<ItemStack> filterByDisplayName(Collection<ItemStack> itemStacks, String filterString, NameFilterType filterType, Comparator comparator) {
+    public static Set<ItemStack> filterByDisplayName(Collection<ItemStack> itemStacks, String filterString, NameFilterType filterType, Comparator<ItemStack> comparator) {
 
         Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR));
 
@@ -61,15 +59,15 @@ public class FilterUtils {
         return filterByEnergyValue(itemStacks, valueBound, filterType, null);
     }
 
-    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, Number valueBound, ValueFilterType filterType, Comparator comparator) {
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, Number valueBound, ValueFilterType filterType, Comparator<ItemStack> comparator) {
         return filterByEnergyValue(EnergyValueRegistry.INSTANCE.getEnergyValues(), itemStacks, new EnergyValue(valueBound.floatValue()), filterType, comparator);
     }
 
-    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator comparator) {
+    public static Set<ItemStack> filterByEnergyValue(Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator<ItemStack> comparator) {
         return filterByEnergyValue(EnergyValueRegistry.INSTANCE.getEnergyValues(), itemStacks, valueBound, filterType, comparator);
     }
 
-    public static Set<ItemStack> filterByEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator comparator) {
+    public static Set<ItemStack> filterByEnergyValue(Map<WrappedStack, EnergyValue> valueMap, Collection<ItemStack> itemStacks, EnergyValue valueBound, ValueFilterType filterType, Comparator<ItemStack> comparator) {
 
         Set<ItemStack> filteredSet = (comparator != null ? new TreeSet<>(comparator) : new TreeSet<>(Comparators.DISPLAY_NAME_COMPARATOR));
 

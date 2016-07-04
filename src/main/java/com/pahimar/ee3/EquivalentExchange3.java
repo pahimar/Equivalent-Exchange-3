@@ -7,43 +7,43 @@ import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
-import com.pahimar.ee3.network.PacketHandler;
+import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.proxy.IProxy;
 import com.pahimar.ee3.recipe.AludelRecipeManager;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
-import com.pahimar.ee3.reference.Reference;
 import com.pahimar.ee3.test.EETestSuite;
-import com.pahimar.ee3.test.EnergyValueTestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
-import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
-import com.pahimar.ee3.util.SerializationHelper;
-import com.pahimar.ee3.util.TileEntityDataHelper;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.io.File;
+@Mod(modid = EquivalentExchange3.MOD_ID,
+        name = "Equivalent Exchange 3",
+        certificateFingerprint = EquivalentExchange3.FINGERPRINT,
+        version = "@MOD_VERSION@",
+        dependencies = "required-after:Forge@[12.17.0,)",
+        guiFactory = "com.pahimar.ee3.client.gui.GuiFactory",
+        updateJSON = "http://ee3.pahimar.com/update/update.json")
+public class EquivalentExchange3 {
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, certificateFingerprint = Reference.FINGERPRINT, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
-public class EquivalentExchange3
-{
-    @Instance(Reference.MOD_ID)
+    public static final String MOD_ID = "EE3";
+    protected static final String FINGERPRINT = "@FINGERPRINT@";
+
+    @Mod.Instance(EquivalentExchange3.MOD_ID)
     public static EquivalentExchange3 instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = "com.pahimar.ee3.proxy.ClientProxy", serverSide = "com.pahimar.ee3.proxy.ServerProxy")
     public static IProxy proxy;
 
-    @EventHandler
+    @Mod.EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event) {
 
-        if (Reference.FINGERPRINT.equals("@FINGERPRINT@")) {
+        if (FINGERPRINT.equals("@FINGERPRINT@")) {
             LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
         }
         else {
@@ -51,38 +51,34 @@ public class EquivalentExchange3
         }
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
 
         Files.updateFileReferences();
-
-        SerializationHelper.initModDataDirectories();
         event.registerServerCommand(new CommandEE());
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         Files.init(event);
 
-        PacketHandler.init();
+        Network.init();
 
         proxy.registerKeybindings();
 
-        ModItems.init();
+        ModItems.register();
 
         ModBlocks.init();
 
-        FluidHelper.registerFluids();
-
         EnergyValues.init();
 
-        AlchemyArrays.registerAlchemyArrays();
+        AlchemyArrays.init();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
 
         // Register the GUI Handler
@@ -93,9 +89,6 @@ public class EquivalentExchange3
 
         // Initialize mod tile entities
         TileEntities.init();
-
-        // Initialize custom rendering and pre-load textures (Client only)
-        proxy.initRenderingAndTextures();
 
         // Register the Items Event Handler
         proxy.registerEventHandlers();
@@ -110,7 +103,7 @@ public class EquivalentExchange3
         FMLInterModComms.sendMessage("Waila", "register", "com.pahimar.ee3.waila.WailaDataProvider.callbackRegister");
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
         Abilities.init();
@@ -120,7 +113,7 @@ public class EquivalentExchange3
         new EETestSuite().build().save();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void onServerStopping(FMLServerStoppingEvent event) {
 
         WorldEventHandler.hasInitilialized = false;
@@ -129,30 +122,15 @@ public class EquivalentExchange3
         BlacklistRegistry.INSTANCE.saveAll();
     }
 
-    @EventHandler
-    public void handleMissingMappingEvent(FMLMissingMappingsEvent event) {
-
-        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-            if (mapping.type == GameRegistry.Type.ITEM) {
-                if (mapping.name.equals("EE3:alchemicalTome")) {
-                    mapping.remap(ModItems.alchenomicon);
-                }
-            }
-        }
-    }
-
-    public EnergyValueRegistry getEnergyValueRegistry()
-    {
+    public EnergyValueRegistry getEnergyValueRegistry() {
         return EnergyValueRegistry.INSTANCE;
     }
 
-    public RecipeRegistry getRecipeRegistry()
-    {
+    public RecipeRegistry getRecipeRegistry() {
         return RecipeRegistry.INSTANCE;
     }
 
-    public AludelRecipeManager getAludelRecipeManager()
-    {
+    public AludelRecipeManager getAludelRecipeManager() {
         return AludelRecipeManager.getInstance();
     }
 
@@ -160,26 +138,11 @@ public class EquivalentExchange3
         return BlacklistRegistry.INSTANCE;
     }
 
-    public AlchemyArrayRegistry getAlchemyArrayRegistry()
-    {
-        return AlchemyArrayRegistry.getInstance();
+    public AlchemyArrayRegistry getAlchemyArrayRegistry() {
+        return AlchemyArrayRegistry.INSTANCE;
     }
 
     public PlayerKnowledgeRegistry getPlayerKnowledgeRegistry() {
         return PlayerKnowledgeRegistry.INSTANCE;
-    }
-
-    public TileEntityDataHelper getTileEntityDataHelper()
-    {
-        return TileEntityDataHelper.getInstance();
-    }
-
-    public void runEnergyValueTestSuite(File file)
-    {
-        runEnergyValueTestSuite(file, false);
-    }
-
-    public void runEnergyValueTestSuite(File file, boolean strict) {
-        new EnergyValueTestSuite(file).run(strict);
     }
 }

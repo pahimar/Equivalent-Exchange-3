@@ -1,11 +1,12 @@
 package com.pahimar.ee3.reference;
 
+import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.util.ResourceLocationHelper;
 import net.minecraft.util.ResourceLocation;
 
 public final class Textures
 {
-    public static final String RESOURCE_PREFIX = Reference.LOWERCASE_MOD_ID + ":";
+    public static final String RESOURCE_PREFIX = EquivalentExchange3.MOD_ID + ":";
 
     public static final class Armor
     {

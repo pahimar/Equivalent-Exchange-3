@@ -10,10 +10,7 @@ import org.apache.logging.log4j.MarkerManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class EnergyValueTestSuite {
 
@@ -24,6 +21,9 @@ public class EnergyValueTestSuite {
     private static final Marker FAILURE_NO_VALUE_MARKER = MarkerManager.getMarker("EE3_TEST_FAILURE_NO_VALUE", FAILURE_MARKER);
 
     private Map<WrappedStack, EnergyValue> testSuiteValueMap;
+    private Set<WrappedStack> correctValues = new TreeSet<>();
+    private Set<WrappedStack> failureNoValues = new TreeSet<>();
+    private Set<WrappedStack> failureWrongValues = new TreeSet<>();
 
     public EnergyValueTestSuite() {
         testSuiteValueMap = new TreeMap<>();
@@ -37,7 +37,7 @@ public class EnergyValueTestSuite {
 
         if (WrappedStack.canBeWrapped(object)) {
 
-            WrappedStack wrappedStack = WrappedStack.wrap(object, 1);
+            WrappedStack wrappedStack = WrappedStack.build(object, 1);
             if (value instanceof Number) {
                 testSuiteValueMap.put(wrappedStack, new EnergyValue((Number) value));
             }
@@ -55,7 +55,7 @@ public class EnergyValueTestSuite {
     public EnergyValueTestSuite remove(Object object) {
 
         if (WrappedStack.canBeWrapped(object)) {
-            testSuiteValueMap.remove(WrappedStack.wrap(object, 1));
+            testSuiteValueMap.remove(WrappedStack.build(object, 1));
         }
 
         return this;
@@ -66,6 +66,10 @@ public class EnergyValueTestSuite {
     }
 
     public void run(boolean strict) {
+
+        correctValues.clear();
+        failureNoValues.clear();
+        failureWrongValues.clear();
 
         List<String> successMessages = new ArrayList<>();
         List<String> failureMessagesWrongValue = new ArrayList<>();
@@ -79,20 +83,24 @@ public class EnergyValueTestSuite {
             if (actualValue == null && expectedValue == null) {
                 // Success - anticipated that no value was found and no value was found
                 successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, expectedValue, actualValue));
+                correctValues.add(wrappedStack);
             }
             else if (actualValue == null) {
                 // Failure - anticipated that a value would be found but no value was found
                 failureMessagesNoValue.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, expectedValue, actualValue));
+                failureNoValues.add(wrappedStack);
             }
             else if (actualValue != null && expectedValue != null) {
 
                 if (actualValue.equals(expectedValue)) {
                     //  Success - anticipated that a specific value would be found and the anticipated value was found
                     successMessages.add(String.format("SUCCESS: Object '%s' had the expected energy value [Expected (%s), Found (%s)]", wrappedStack, expectedValue, actualValue));
+                    correctValues.add(wrappedStack);
                 }
                 else {
                     // Failure - anticipated that a specific value would be found and while a value was found it was not the anticipated one
                     failureMessagesWrongValue.add(String.format("FAILURE: Object '%s' did not have the expected energy value [Expected (%s), Found (%s)]", wrappedStack, expectedValue, actualValue));
+                    failureWrongValues.add(wrappedStack);
                 }
             }
         }
@@ -108,6 +116,15 @@ public class EnergyValueTestSuite {
         for (String failureMessage : failureMessagesNoValue) {
             LogHelper.warn(FAILURE_NO_VALUE_MARKER, failureMessage);
         }
+
+        LogHelper.info("================================");
+        LogHelper.info("Test Results:");
+        LogHelper.info("{} energy value mappings being tested", testSuiteValueMap.size());
+        LogHelper.info("Successes: {}", correctValues.size());
+        LogHelper.info("Failures (Wrong Value): {}", failureWrongValues.size());
+        LogHelper.info("Failures (No Value): {}", failureNoValues.size());
+        LogHelper.info("Success rate: {}%", correctValues.size() * 100f / testSuiteValueMap.size());
+        LogHelper.info("================================");
     }
 
     public EnergyValueTestSuite load(File file) {
