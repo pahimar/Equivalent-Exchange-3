@@ -139,10 +139,14 @@ uploadArchives {
         mavenDeployer {
             if (project.hasProperty("forgemaven_url")) {
                 logger.info('Publishing to files server')
-                repository(url: project.forgemaven_url) {
-                    authentication(userName: project.forgemaven_username, password: project.forgemaven_password)
+                repository(url: project.getProperty("forgemaven_url")) {
+                    authentication(userName: project.properties.forgemaven_username ?: "", password: project.properties.forgemaven_password ?: "")
                 }
             }
+			else {
+				// local repo folder. Might wanna just use gradle install if you wanna send it to maven-local
+				repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
+			}
 
             pom {
                 groupId = project.group
