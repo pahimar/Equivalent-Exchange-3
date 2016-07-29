@@ -77,6 +77,7 @@ public class EnergyValueTestSuite {
 
         for (WrappedStack wrappedStack : testSuiteValueMap.keySet()) {
 
+            // FIXME For some reason this get is not returning any results, despite that it clearly should (see for loop)
             EnergyValue expectedValue = testSuiteValueMap.get(wrappedStack);
             EnergyValue actualValue = EnergyValueRegistryProxy.getEnergyValue(wrappedStack, strict);
 
@@ -134,7 +135,7 @@ public class EnergyValueTestSuite {
         }
         catch (FileNotFoundException e) {
             LogHelper.warn(TEST_MARKER, "Could not load test file from disk: " + e.getMessage());
-            testSuiteValueMap = new TreeMap<>();
+            testSuiteValueMap = new TreeMap(WrappedStack.COMPARATOR);
         }
 
         return this;

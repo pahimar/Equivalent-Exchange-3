@@ -76,7 +76,7 @@ public class SerializationHelper {
      */
     public static Map<WrappedStack, EnergyValue> readMapFromFile(File file) throws FileNotFoundException {
 
-        Map<WrappedStack, EnergyValue> valueMap = new TreeMap<>();
+        Map<WrappedStack, EnergyValue> valueMap = new TreeMap(WrappedStack.COMPARATOR);
 
         try {
             valueMap = GSON.fromJson(readJsonFile(file), ENERGY_VALUE_MAP_TYPE);

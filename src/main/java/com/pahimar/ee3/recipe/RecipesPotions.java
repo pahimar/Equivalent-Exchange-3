@@ -33,7 +33,7 @@ public class RecipesPotions {
     private static final ItemStack REAGENT_DRAGONS_BREATH = new ItemStack(Items.DRAGON_BREATH);
 
     // Regular Potions
-    public static final ItemStack BOTTLE_EMPTY = new ItemStack(Items.GLASS_BOTTLE);
+    private static final ItemStack BOTTLE_EMPTY = new ItemStack(Items.GLASS_BOTTLE);
     public static final ItemStack BOTTLE_WATER = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER);
     public static final ItemStack POTION_UNCRAFTABLE = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.EMPTY);
     public static final ItemStack POTION_MUNDANE = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.MUNDANE);

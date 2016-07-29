@@ -2,6 +2,7 @@ package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.OreStack;
+import com.pahimar.ee3.reference.Colors;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,15 +14,13 @@ import static com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy.Phase;
 // TODO Uncomment out dusts once they are re-implemented
 public class EnergyValues {
 
-    private static final String[] DYES = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
-
     public static void init() {
 
         // OreDictionary assignment
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("cobblestone"), 1, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("dustRedstone"), 32, Phase.PRE_CALCULATION);
-        for (int i = 0; i < DYES.length; i++) {
-            EnergyValueRegistryProxy.setEnergyValue(new OreStack("dye" + DYES[i]), 16, Phase.PRE_CALCULATION);
+        for (String dyeName : Colors.DYE_NAMES) {
+            EnergyValueRegistryProxy.setEnergyValue(new OreStack(dyeName), 16, Phase.PRE_CALCULATION);
         }
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemDiamond"), 8192, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("gemEmerald"), 8192, Phase.PRE_CALCULATION);
