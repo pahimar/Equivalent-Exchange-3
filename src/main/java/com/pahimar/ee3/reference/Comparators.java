@@ -93,7 +93,7 @@ public class Comparators {
                                     return (itemStack1.stackSize - itemStack2.stackSize);
                                 }
                                 else {
-                                    return (itemStack1.getTagCompound().hashCode() - itemStack2.getTagCompound().hashCode());
+                                    return itemStack1.getTagCompound().toString().compareTo(itemStack2.getTagCompound().toString());
                                 }
                             }
                             else if (!(itemStack1.hasTagCompound()) && itemStack2.hasTagCompound()) {

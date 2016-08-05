@@ -105,6 +105,7 @@ public class EnergyValues {
 
         /* Foodstuffs */
         EnergyValueRegistryProxy.setEnergyValue(Items.APPLE, 24, Phase.PRE_CALCULATION);
+        EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.GOLDEN_APPLE, 1, 1), 147480, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.PORKCHOP, 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(Items.COOKED_PORKCHOP, 24, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new ItemStack(Items.FISH, 1, OreDictionary.WILDCARD_VALUE), 24, Phase.PRE_CALCULATION);
