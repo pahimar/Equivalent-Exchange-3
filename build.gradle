@@ -134,6 +134,19 @@ curseforge {
     }
 }
 
+/**
+ * This is massively experimental and for me to continue off of
+ */
+task buildVersionFile {
+    def slurper = new groovy.json.JsonSlurper()
+    def result = slurper.parseText('{"person":{"name":"Guillaume","age":33,"pets":["dog","cat"]}}')
+
+    def g = new File('jsonObject.txt')
+    g.createNewFile()
+    def json = new groovy.json.JsonOutput().toJson([name: 'John Doe', age: 42])
+    g.setText(json.toString())
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
