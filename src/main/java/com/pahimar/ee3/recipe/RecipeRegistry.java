@@ -78,9 +78,10 @@ public class RecipeRegistry {
      */
     public void registerVanillaRecipes() {
 
-        new RecipesVanilla().registerRecipes();
-        new RecipesFluidContainers().registerRecipes();
-        new RecipesPotions().registerRecipes();
+        RecipesVanilla.registerRecipes();
+        RecipesFluidContainers.registerRecipes();
+        RecipesPotions.registerRecipes();
+        RecipesArrows.registerRecipes();
     }
 
     /**

@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
 public class RecipesFluidContainers {
 
-    public void registerRecipes() {
+    public static void registerRecipes() {
 
         for (FluidContainerData fluidContainerData : FluidContainerRegistry.getRegisteredFluidContainerData()) {
             if (fluidContainerData.fluid != null && fluidContainerData.filledContainer != null && fluidContainerData.emptyContainer != null) {

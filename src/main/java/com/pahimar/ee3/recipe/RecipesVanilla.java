@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class RecipesVanilla {
 
-    public void registerRecipes() {
+    public static void registerRecipes() {
 
         CraftingManager.getInstance().getRecipeList().stream()
                 .filter(iRecipe -> iRecipe instanceof ShapedRecipes || iRecipe instanceof ShapelessRecipes || iRecipe instanceof ShapedOreRecipe || iRecipe instanceof ShapelessOreRecipe)

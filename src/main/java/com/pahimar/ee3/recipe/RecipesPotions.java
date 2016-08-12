@@ -150,14 +150,14 @@ public class RecipesPotions {
     public static final ItemStack LINGERING_POTION_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.LONG_WEAKNESS);
     public static final ItemStack LINGERING_POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
 
-    public void registerRecipes() {
+    public static void registerRecipes() {
 
         registerRegularPotionRecipes();
         registerSplashPotionRecipes();
         registerLingeringPotionRecipes();
     }
 
-    private void registerRegularPotionRecipes() {
+    private static void registerRegularPotionRecipes() {
 
         RecipeRegistryProxy.addRecipe(BOTTLE_WATER, BOTTLE_EMPTY, REAGENT_WATER);
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(POTION_MUNDANE, 3), ItemStackUtils.clone(BOTTLE_WATER, 3), REAGENT_SPIDER_EYE);
@@ -210,7 +210,7 @@ public class RecipesPotions {
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(POTION_WEAKNESS_LONG, 3), ItemStackUtils.clone(POTION_WEAKNESS, 3), REAGENT_REDSTONE_DUST);
     }
 
-    private void registerSplashPotionRecipes() {
+    private static void registerSplashPotionRecipes() {
 
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(SPLASH_POTION_UNCRAFTABLE, 3), ItemStackUtils.clone(POTION_UNCRAFTABLE, 3), REAGENT_GUNPOWDER);
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(SPLASH_BOTTLE_WATER, 3), ItemStackUtils.clone(BOTTLE_WATER, 3), REAGENT_GUNPOWDER);
@@ -298,7 +298,7 @@ public class RecipesPotions {
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(SPLASH_POTION_WEAKNESS_LONG, 3), ItemStackUtils.clone(POTION_WEAKNESS_LONG, 3), REAGENT_GUNPOWDER);
     }
 
-    private void registerLingeringPotionRecipes() {
+    private static void registerLingeringPotionRecipes() {
 
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(LINGERING_POTION_UNCRAFTABLE, 3), ItemStackUtils.clone(SPLASH_POTION_UNCRAFTABLE, 3), REAGENT_DRAGONS_BREATH);
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(LINGERING_BOTTLE_WATER, 3), ItemStackUtils.clone(SPLASH_BOTTLE_WATER, 3), REAGENT_DRAGONS_BREATH);
