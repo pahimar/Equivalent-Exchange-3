@@ -652,7 +652,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Items.SPECKLED_MELON, 1836.448);                            // GLISTERING MELON
         add(Items.GOLDEN_CARROT, 1844.448);                             // GOLDEN CARROT
         add(Items.RABBIT_FOOT, 32);                                     // RABBIT'S FOOT
-        add(Items.DRAGON_BREATH, 768);                                  // DRAGON'S BREATH
+        add(Items.DRAGON_BREATH, 769);                                  // DRAGON'S BREATH
         add(SPLASH_POTION_UNCRAFTABLE, null);                           // SPLASH UNCRAFTABLE POTION
         add(SPLASH_BOTTLE_WATER, 66);                                   // SPLASH WATER BOTTLE
         add(SPLASH_POTION_MUNDANE, 76.667);                             // MUNDANE SPLASH POTION
