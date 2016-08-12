@@ -1,16 +1,12 @@
 package com.pahimar.ee3.test;
 
+import com.pahimar.ee3.recipe.RecipesArrows;
 import com.pahimar.ee3.reference.Files;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.PotionTypes;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -563,43 +559,43 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(Items.GOLDEN_LEGGINGS, 14336);                              // GOLDEN LEGGINGS
         add(Items.GOLDEN_BOOTS, 8192);                                  // GOLDEN BOOTS
         add(Items.SPECTRAL_ARROW, 775);                                 // SPECTRAL ARROW
-        add(Arrows.ARROW_UNCRAFTABLE, null);                            // TIPPED ARROW (LINGERING UNCRAFTABLE POTION)
-        add(Arrows.ARROW_SPLASHING, 54.25);                             // ARROW OF SPLASHING
-        add(Arrows.ARROW_MUNDANE, 55.583);                              // TIPPED ARROW (MUNDANE LINGERING POTION)
-        add(Arrows.ARROW_THICK, 70.25);                                 // TIPPED ARROW (THICK LINGERING POTION)
-        add(Arrows.ARROW_AWKWARD, 55.25);                               // TIPPED ARROW (AWKWARD LINGERING POTION)
-        add(Arrows.ARROW_NIGHT_VISION, 132.102);                        // ARROW OF NIGHT VISION (NIGHT VISION, 0:22)
-        add(Arrows.ARROW_NIGHT_VISION_LONG, 141.435);                   // ARROW OF NIGHT VISION (NIGHT VISION, 1:00)
-        add(Arrows.ARROW_INVISIBILITY, 140.102);                        // ARROW OF INVISIBILITY (INVISIBILITY, 0:22)
-        add(Arrows.ARROW_INVISIBILITY_LONG, 141.435);                   // ARROW OF INVISIBILITY (INVISIBILITY, 1:00)
-        add(Arrows.ARROW_LEAPING, 56.583);                              // ARROW OF LEAPING (JUMP BOOST, 0:22)
-        add(Arrows.ARROW_LEAPING_LONG, 57.917);                         // ARROW OF LEAPING (JUMP BOOST, 1:00)
-        add(Arrows.ARROW_LEAPING_STRONG, 72.583);                       // ARROW OF LEAPING (JUMP BOOST 2, 0:11)
-        add(Arrows.ARROW_FIRE_RESISTANCE, 88.25);                       // ARROW OF FIRE RESISTANCE (FIRE RESISTANCE, 0:22)
-        add(Arrows.ARROW_FIRE_RESISTANCE_LONG, 89.583);                 // ARROW OF FIRE RESISTANCE (FIRE RESISTANCE, 1:00)
-        add(Arrows.ARROW_SWIFTNESS, 56.583);                            // ARROW OF SWIFTNESS (SPEED, 0:22)
-        add(Arrows.ARROW_SWIFTNESS_LONG, 57.917);                       // ARROW OF SWIFTNESS (SPEED, 1:00)
-        add(Arrows.ARROW_SWIFTNESS_STRONG, 72.583);                     // ARROW OF SWIFTNESS (SPEED 2, 0:11)
-        add(Arrows.ARROW_SLOWNESS, 64.583);                             // ARROW OF SLOWNESS (SLOWNESS, 0:11)
-        add(Arrows.ARROW_SLOWNESS_LONG, 65.917);                        // ARROW OF SLOWNESS (SLOWNESS, 0:30)
-        add(Arrows.ARROW_WATER_BREATHING, 56.25);                       // ARROW OF WATER BREATHING (WATER BREATHING, 0:22)
-        add(Arrows.ARROW_WATER_BREATHING_LONG, 57.583);                 // ARROW OF WATER BREATHING (WATER BREATHING, 1:00)
-        add(Arrows.ARROW_HEALING, 131.769);                             // ARROW OF HEALING (INSTANT HEALTH)
-        add(Arrows.ARROW_HEALING_STRONG, 147.769);                      // ARROW OF HEALING (INSTANT HEALTH 2)
-        add(Arrows.ARROW_HARMING, 68.583);                              // ARROW OF HARMING (INSTANT DAMAGE)
-        add(Arrows.ARROW_HARMING_STRONG, 84.583);                       // ARROW OF HARMING (INSTANT DAMAGE 2)
-        add(Arrows.ARROW_POISON, 60.583);                               // ARROW OF POISON (POISON, 0:05)
-        add(Arrows.ARROW_POISON_LONG, 61.917);                          // ARROW OF POISON (POISON, 0:11)
-        add(Arrows.ARROW_POISON_STRONG, 76.583);                        // ARROW OF POISON (POISON 2, 0:02)
-        add(Arrows.ARROW_REGENERATION, 225.917);                        // ARROW OF REGENERATION (REGENERATION, 0:05)
-        add(Arrows.ARROW_REGENERATION_LONG, 227.25);                    // ARROW OF REGENERATION (REGENERATION, 0:11)
-        add(Arrows.ARROW_REGENERATION_STRONG, 241.917);                 // ARROW OF REGENERATION (REGENERATION 2, 0:02)
-        add(Arrows.ARROW_STRENGTH, 87.25);                              // ARROW OF STRENGTH (STRENGTH, 0:22)
-        add(Arrows.ARROW_STRENGTH_LONG, 88.583);                        // ARROW OF STRENGTH (STRENGTH, 1:00)
-        add(Arrows.ARROW_STRENGTH_STRONG, 103.25);                      // ARROW OF STRENGTH (STRENGTH 2, 0:11)
-        add(Arrows.ARROW_WEAKNESS, 62.25);                              // ARROW OF WEAKNESS (WEAKNESS, 0:11)
-        add(Arrows.ARROW_WEAKNESS_LONG, 63.583);                        // ARROW OF WEAKNESS (WEAKNESS, 0:30)
-        add(Arrows.ARROW_LUCK, null);                                   // ARROW OF LUCK (LUCK, 0:37)
+        add(RecipesArrows.ARROW_UNCRAFTABLE, null);                     // TIPPED ARROW (LINGERING UNCRAFTABLE POTION)
+        add(RecipesArrows.ARROW_SPLASHING, 54.25);                      // ARROW OF SPLASHING
+        add(RecipesArrows.ARROW_MUNDANE, 55.583);                       // TIPPED ARROW (MUNDANE LINGERING POTION)
+        add(RecipesArrows.ARROW_THICK, 70.25);                          // TIPPED ARROW (THICK LINGERING POTION)
+        add(RecipesArrows.ARROW_AWKWARD, 55.25);                        // TIPPED ARROW (AWKWARD LINGERING POTION)
+        add(RecipesArrows.ARROW_NIGHT_VISION, 132.102);                 // ARROW OF NIGHT VISION (NIGHT VISION, 0:22)
+        add(RecipesArrows.ARROW_NIGHT_VISION_LONG, 141.435);            // ARROW OF NIGHT VISION (NIGHT VISION, 1:00)
+        add(RecipesArrows.ARROW_INVISIBILITY, 140.102);                 // ARROW OF INVISIBILITY (INVISIBILITY, 0:22)
+        add(RecipesArrows.ARROW_INVISIBILITY_LONG, 141.435);            // ARROW OF INVISIBILITY (INVISIBILITY, 1:00)
+        add(RecipesArrows.ARROW_LEAPING, 56.583);                       // ARROW OF LEAPING (JUMP BOOST, 0:22)
+        add(RecipesArrows.ARROW_LEAPING_LONG, 57.917);                  // ARROW OF LEAPING (JUMP BOOST, 1:00)
+        add(RecipesArrows.ARROW_LEAPING_STRONG, 72.583);                // ARROW OF LEAPING (JUMP BOOST 2, 0:11)
+        add(RecipesArrows.ARROW_FIRE_RESISTANCE, 88.25);                // ARROW OF FIRE RESISTANCE (FIRE RESISTANCE, 0:22)
+        add(RecipesArrows.ARROW_FIRE_RESISTANCE_LONG, 89.583);          // ARROW OF FIRE RESISTANCE (FIRE RESISTANCE, 1:00)
+        add(RecipesArrows.ARROW_SWIFTNESS, 56.583);                     // ARROW OF SWIFTNESS (SPEED, 0:22)
+        add(RecipesArrows.ARROW_SWIFTNESS_LONG, 57.917);                // ARROW OF SWIFTNESS (SPEED, 1:00)
+        add(RecipesArrows.ARROW_SWIFTNESS_STRONG, 72.583);              // ARROW OF SWIFTNESS (SPEED 2, 0:11)
+        add(RecipesArrows.ARROW_SLOWNESS, 64.583);                      // ARROW OF SLOWNESS (SLOWNESS, 0:11)
+        add(RecipesArrows.ARROW_SLOWNESS_LONG, 65.917);                 // ARROW OF SLOWNESS (SLOWNESS, 0:30)
+        add(RecipesArrows.ARROW_WATER_BREATHING, 56.25);                // ARROW OF WATER BREATHING (WATER BREATHING, 0:22)
+        add(RecipesArrows.ARROW_WATER_BREATHING_LONG, 57.583);          // ARROW OF WATER BREATHING (WATER BREATHING, 1:00)
+        add(RecipesArrows.ARROW_HEALING, 131.769);                      // ARROW OF HEALING (INSTANT HEALTH)
+        add(RecipesArrows.ARROW_HEALING_STRONG, 147.769);               // ARROW OF HEALING (INSTANT HEALTH 2)
+        add(RecipesArrows.ARROW_HARMING, 68.583);                       // ARROW OF HARMING (INSTANT DAMAGE)
+        add(RecipesArrows.ARROW_HARMING_STRONG, 84.583);                // ARROW OF HARMING (INSTANT DAMAGE 2)
+        add(RecipesArrows.ARROW_POISON, 60.583);                        // ARROW OF POISON (POISON, 0:05)
+        add(RecipesArrows.ARROW_POISON_LONG, 61.917);                   // ARROW OF POISON (POISON, 0:11)
+        add(RecipesArrows.ARROW_POISON_STRONG, 76.583);                 // ARROW OF POISON (POISON 2, 0:02)
+        add(RecipesArrows.ARROW_REGENERATION, 225.917);                 // ARROW OF REGENERATION (REGENERATION, 0:05)
+        add(RecipesArrows.ARROW_REGENERATION_LONG, 227.25);             // ARROW OF REGENERATION (REGENERATION, 0:11)
+        add(RecipesArrows.ARROW_REGENERATION_STRONG, 241.917);          // ARROW OF REGENERATION (REGENERATION 2, 0:02)
+        add(RecipesArrows.ARROW_STRENGTH, 87.25);                       // ARROW OF STRENGTH (STRENGTH, 0:22)
+        add(RecipesArrows.ARROW_STRENGTH_LONG, 88.583);                 // ARROW OF STRENGTH (STRENGTH, 1:00)
+        add(RecipesArrows.ARROW_STRENGTH_STRONG, 103.25);               // ARROW OF STRENGTH (STRENGTH 2, 0:11)
+        add(RecipesArrows.ARROW_WEAKNESS, 62.25);                       // ARROW OF WEAKNESS (WEAKNESS, 0:11)
+        add(RecipesArrows.ARROW_WEAKNESS_LONG, 63.583);                 // ARROW OF WEAKNESS (WEAKNESS, 0:30)
+        add(RecipesArrows.ARROW_LUCK, null);                            // ARROW OF LUCK (LUCK, 0:37)
         add(Items.SHIELD, 304);                                         // SHIELD
     }
 
@@ -786,46 +782,5 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
 
     public void save() {
         this.save(new File(Files.globalTestDirectory, "minecraft-1.10.2-test-suite.json"));
-    }
-
-    protected static class Arrows {
-
-        protected static final ItemStack ARROW_UNCRAFTABLE = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.EMPTY);
-        protected static final ItemStack ARROW_SPLASHING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.WATER);
-        protected static final ItemStack ARROW_MUNDANE = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.MUNDANE);
-        protected static final ItemStack ARROW_THICK = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.THICK);
-        protected static final ItemStack ARROW_AWKWARD = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.AWKWARD);
-        protected static final ItemStack ARROW_NIGHT_VISION = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.NIGHT_VISION);
-        protected static final ItemStack ARROW_NIGHT_VISION_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_NIGHT_VISION);
-        protected static final ItemStack ARROW_INVISIBILITY = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.INVISIBILITY);
-        protected static final ItemStack ARROW_INVISIBILITY_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_INVISIBILITY);
-        protected static final ItemStack ARROW_LEAPING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LEAPING);
-        protected static final ItemStack ARROW_LEAPING_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_LEAPING);
-        protected static final ItemStack ARROW_LEAPING_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_LEAPING);
-        protected static final ItemStack ARROW_FIRE_RESISTANCE = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.FIRE_RESISTANCE);
-        protected static final ItemStack ARROW_FIRE_RESISTANCE_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_FIRE_RESISTANCE);
-        protected static final ItemStack ARROW_SWIFTNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.SWIFTNESS);
-        protected static final ItemStack ARROW_SWIFTNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_SWIFTNESS);
-        protected static final ItemStack ARROW_SWIFTNESS_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_SWIFTNESS);
-        protected static final ItemStack ARROW_SLOWNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.SLOWNESS);
-        protected static final ItemStack ARROW_SLOWNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_SLOWNESS);
-        protected static final ItemStack ARROW_WATER_BREATHING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.WATER_BREATHING);
-        protected static final ItemStack ARROW_WATER_BREATHING_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_WATER_BREATHING);
-        protected static final ItemStack ARROW_HEALING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.HEALING);
-        protected static final ItemStack ARROW_HEALING_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_HEALING);
-        protected static final ItemStack ARROW_HARMING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.HARMING);
-        protected static final ItemStack ARROW_HARMING_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_HARMING);
-        protected static final ItemStack ARROW_POISON = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.POISON);
-        protected static final ItemStack ARROW_POISON_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_POISON);
-        protected static final ItemStack ARROW_POISON_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_POISON);
-        protected static final ItemStack ARROW_REGENERATION = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.REGENERATION);
-        protected static final ItemStack ARROW_REGENERATION_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_REGENERATION);
-        protected static final ItemStack ARROW_REGENERATION_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_REGENERATION);
-        protected static final ItemStack ARROW_STRENGTH = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRENGTH);
-        protected static final ItemStack ARROW_STRENGTH_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_STRENGTH);
-        protected static final ItemStack ARROW_STRENGTH_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_STRENGTH);
-        protected static final ItemStack ARROW_WEAKNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.WEAKNESS);
-        protected static final ItemStack ARROW_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_WEAKNESS);
-        protected static final ItemStack ARROW_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
     }
 }
