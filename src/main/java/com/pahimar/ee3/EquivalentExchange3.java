@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         name = "Equivalent Exchange 3",
         certificateFingerprint = EquivalentExchange3.FINGERPRINT,
         version = "@MOD_VERSION@",
-        dependencies = "required-after:Forge@[12.17.0,)",
+        dependencies = "required-after:Forge@[12.18.1,)",
         guiFactory = "com.pahimar.ee3.client.gui.GuiFactory",
         updateJSON = "http://ee3.pahimar.com/update/update.json")
 public class EquivalentExchange3 {
