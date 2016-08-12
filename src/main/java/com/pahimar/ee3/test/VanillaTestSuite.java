@@ -4,10 +4,7 @@ import com.pahimar.ee3.recipe.RecipesArrows;
 import com.pahimar.ee3.reference.Files;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.io.File;
@@ -317,17 +314,6 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(new ItemStack(Blocks.SKULL, 1, 4), null);                   // CREEPER HEAD
         add(new ItemStack(Blocks.SKULL, 1, 5), null);                   // DRAGON HEAD
         add(Items.ARMOR_STAND, 24.5);                                   // ARMOR STAND
-
-        for (EnumDyeColor enumDyeColor : EnumDyeColor.values()) {
-            NBTTagCompound bannerColorTagCompound = new NBTTagCompound();
-            TileEntityBanner.setBaseColorAndPatterns(bannerColorTagCompound, enumDyeColor.getDyeDamage(), null);
-            NBTTagCompound itemTagCompound = new NBTTagCompound();
-            itemTagCompound.setTag("BlockEntityTag", bannerColorTagCompound);
-            ItemStack itemStack = new ItemStack(Blocks.STANDING_BANNER, 1, enumDyeColor.getDyeDamage());
-            itemStack.setTagCompound(itemTagCompound);
-            add(itemStack, 388);
-        }
-
         add(Items.END_CRYSTAL, 5895);                                   // END CRYSTAL
     }
 
@@ -565,7 +551,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(RecipesArrows.ARROW_THICK, 70.25);                          // TIPPED ARROW (THICK LINGERING POTION)
         add(RecipesArrows.ARROW_AWKWARD, 55.25);                        // TIPPED ARROW (AWKWARD LINGERING POTION)
         add(RecipesArrows.ARROW_NIGHT_VISION, 132.102);                 // ARROW OF NIGHT VISION (NIGHT VISION, 0:22)
-        add(RecipesArrows.ARROW_NIGHT_VISION_LONG, 141.435);            // ARROW OF NIGHT VISION (NIGHT VISION, 1:00)
+        add(RecipesArrows.ARROW_NIGHT_VISION_LONG, 133.435);            // ARROW OF NIGHT VISION (NIGHT VISION, 1:00)
         add(RecipesArrows.ARROW_INVISIBILITY, 140.102);                 // ARROW OF INVISIBILITY (INVISIBILITY, 0:22)
         add(RecipesArrows.ARROW_INVISIBILITY_LONG, 141.435);            // ARROW OF INVISIBILITY (INVISIBILITY, 1:00)
         add(RecipesArrows.ARROW_LEAPING, 56.583);                       // ARROW OF LEAPING (JUMP BOOST, 0:22)

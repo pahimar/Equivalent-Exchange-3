@@ -1,5 +1,7 @@
 package com.pahimar.ee3.recipe;
 
+import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
+import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
@@ -10,6 +12,7 @@ import net.minecraft.potion.PotionUtils;
 
 public class RecipesArrows {
 
+    private static final ItemStack ARROWS = new ItemStack(Items.ARROW, 8);
     public static final ItemStack ARROW_UNCRAFTABLE = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.EMPTY);
     public static final ItemStack ARROW_SPLASHING = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.WATER);
     public static final ItemStack ARROW_MUNDANE = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.MUNDANE);
@@ -50,5 +53,42 @@ public class RecipesArrows {
 
     public static void registerRecipes() {
 
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_UNCRAFTABLE, 8), RecipesPotions.LINGERING_POTION_UNCRAFTABLE, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SPLASHING, 8), RecipesPotions.LINGERING_BOTTLE_WATER, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_MUNDANE, 8), RecipesPotions.LINGERING_POTION_MUNDANE, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_THICK, 8), RecipesPotions.LINGERING_POTION_THICK, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_AWKWARD, 8), RecipesPotions.LINGERING_POTION_AWKWARD, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_NIGHT_VISION, 8), RecipesPotions.LINGERING_POTION_NIGHT_VISION, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_NIGHT_VISION_LONG, 8), RecipesPotions.LINGERING_POTION_NIGHT_VISION_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_INVISIBILITY, 8), RecipesPotions.LINGERING_POTION_INVISIBILITY, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_INVISIBILITY_LONG, 8), RecipesPotions.LINGERING_POTION_INVISIBILITY_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LEAPING, 8), RecipesPotions.LINGERING_POTION_LEAPING, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LEAPING_LONG, 8), RecipesPotions.LINGERING_POTION_LEAPING_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LEAPING_STRONG, 8), RecipesPotions.LINGERING_POTION_LEAPING_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_FIRE_RESISTANCE, 8), RecipesPotions.LINGERING_POTION_FIRE_RESISTANCE, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_FIRE_RESISTANCE_LONG, 8), RecipesPotions.LINGERING_POTION_FIRE_RESISTANCE_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SWIFTNESS, 8), RecipesPotions.LINGERING_POTION_SWIFTNESS, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SWIFTNESS_LONG, 8), RecipesPotions.LINGERING_POTION_SWIFTNESS_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SWIFTNESS_STRONG, 8), RecipesPotions.LINGERING_POTION_SWIFTNESS_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SLOWNESS, 8), RecipesPotions.LINGERING_POTION_SLOWNESS, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_SLOWNESS_LONG, 8), RecipesPotions.LINGERING_POTION_SLOWNESS_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WATER_BREATHING, 8), RecipesPotions.LINGERING_POTION_WATER_BREATHING, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WATER_BREATHING_LONG, 8), RecipesPotions.LINGERING_POTION_WATER_BREATHING_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_HEALING, 8), RecipesPotions.LINGERING_POTION_HEALING, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_HEALING_STRONG, 8), RecipesPotions.LINGERING_POTION_HEALING_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_HARMING, 8), RecipesPotions.LINGERING_POTION_HARMING, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_HARMING_STRONG, 8), RecipesPotions.LINGERING_POTION_HARMING_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_POISON, 8), RecipesPotions.LINGERING_POTION_POISON, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_POISON_LONG, 8), RecipesPotions.LINGERING_POTION_POISON_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_POISON_STRONG, 8), RecipesPotions.LINGERING_POTION_POISON_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_REGENERATION, 8), RecipesPotions.LINGERING_POTION_REGENERATION, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_REGENERATION_LONG, 8), RecipesPotions.LINGERING_POTION_REGENERATION_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_REGENERATION_STRONG, 8), RecipesPotions.LINGERING_POTION_REGENERATION_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_STRENGTH, 8), RecipesPotions.LINGERING_POTION_STRENGTH, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_STRENGTH_LONG, 8), RecipesPotions.LINGERING_POTION_STRENGTH_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_STRENGTH_STRONG, 8), RecipesPotions.LINGERING_POTION_STRENGTH_STRONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WEAKNESS, 8), RecipesPotions.LINGERING_POTION_WEAKNESS, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WEAKNESS_LONG, 8), RecipesPotions.LINGERING_POTION_WEAKNESS_LONG, ARROWS);
+        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LUCK, 8), RecipesPotions.LINGERING_POTION_LUCK, ARROWS);
     }
 }
