@@ -1,7 +1,9 @@
-### Expected behaviour
+### What should have happened
 
-### Actual behaviour
+### What actually happened
 
-### Steps to reproduce the behaviour
+### What steps do we have to follow so we can reproduce the issue
 
-### Pastebin of log files (fml-latest-client.log, fml-latest-server.log, latest.log)
+### Version of Equivalent Exchange 3
+
+### Pastebin of relevant log files (fml-latest-client.log, fml-latest-server.log, latest.log)
