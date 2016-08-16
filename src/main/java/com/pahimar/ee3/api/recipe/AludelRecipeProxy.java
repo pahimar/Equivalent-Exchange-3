@@ -27,7 +27,7 @@ public final class AludelRecipeProxy {
         return null;
     }
 
-    @Mod.Instance("EE3")
+    @Mod.Instance("ee3")
     private static Object ee3Mod;
 
     private static class EE3Wrapper {

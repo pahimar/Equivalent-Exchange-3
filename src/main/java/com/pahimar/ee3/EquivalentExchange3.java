@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         updateJSON = "http://ee3.pahimar.com/update/update.json")
 public class EquivalentExchange3 {
 
-    public static final String MOD_ID = "EE3";
+    public static final String MOD_ID = "ee3";
     protected static final String FINGERPRINT = "@FINGERPRINT@";
 
     @Mod.Instance(EquivalentExchange3.MOD_ID)
