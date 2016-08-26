@@ -1,3 +1,7 @@
+import groovy.json.JsonException
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 // For those who want the bleeding edge
 buildscript {
     repositories {
@@ -137,14 +141,41 @@ curseforge {
 /**
  * This is massively experimental and for me to continue off of
  */
-task buildVersionFile {
-    def slurper = new groovy.json.JsonSlurper()
-    def result = slurper.parseText('{"person":{"name":"Guillaume","age":33,"pets":["dog","cat"]}}')
 
-    def g = new File('jsonObject.txt')
-    g.createNewFile()
-    def json = new groovy.json.JsonOutput().toJson([name: 'John Doe', age: 42])
-    g.setText(json.toString())
+task buildVersionFile {
+
+    def slurper = new JsonSlurper()
+    def remoteUpdateJson;
+
+    try {
+        remoteUpdateJson = slurper.parse(new URL('http://ee3.pahimar.com/update/update.json'))
+    }
+    catch (JsonException e) {}
+
+    
+    def localUpdateFile = new File("update.json")
+    if (!localUpdateFile.exists()) {
+        localUpdateFile.createNewFile()
+    }
+
+    try {
+        def localUpdateJson = new HashMap<String, String>()
+        localUpdateJson.put("homepage", "equivalent.exchange")
+
+//        def existingUpdateJson = new JsonSlurper().parse(localUpdateFile)
+//        if (existingUpdateJson != null) {
+//            def foobar = new HashMap<String, String>()
+//            if (existingUpdateJson."${minecraft_version}" instanceof Map) {
+//                foobar.putAll(existingUpdateJson."${minecraft_version}")
+//            }
+//            foobar.put("0.4.99999", "changelog")
+//            existingUpdateJson."${minecraft_version}" = foobar
+//        }
+
+        def String updateJson = JsonOutput.toJson(localUpdateJson)
+        localUpdateFile.setText(JsonOutput.prettyPrint(updateJson))
+    }
+    catch (JsonException e) {}
 }
 
 uploadArchives {
