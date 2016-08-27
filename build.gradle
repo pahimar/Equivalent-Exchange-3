@@ -139,43 +139,73 @@ curseforge {
 }
 
 /**
- * This is massively experimental and for me to continue off of
+ *  Build the json file that MinecraftForge's Update Checker will use to check for new versions
+ *
+ *  MinecraftForge Update Checker documentation - http://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
  */
-
 task buildVersionFile {
 
-    def slurper = new JsonSlurper()
-    def remoteUpdateJson;
+    def minecraftVersion = "${minecraft_version}"
+    def modVersion = "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+    def isReleaseVersion = project.hasProperty("mod_release_type") && project.property("mod_release_type") == "release"
+    def fileName = "versions.json"
+    def remoteUrl = "http://ee3.pahimar.com/"
+    def changelogStatement = "Changelog available at " + remoteUrl + minecraftVersion + "/${project.archivesBaseName}-${project.version}-changelog.txt"
+    def localUpdateJson = new HashMap()
 
+    // Grab the remote file so that we can append new entries to it
     try {
-        remoteUpdateJson = slurper.parse(new URL('http://ee3.pahimar.com/update/update.json'))
+        def remoteUpdateJson = new JsonSlurper().parse(new URL(remoteUrl + 'update/' + fileName))
+
+        if (remoteUpdateJson instanceof Map) {
+            localUpdateJson.putAll(remoteUpdateJson)
+        }
     }
     catch (JsonException e) {}
 
-    
-    def localUpdateFile = new File("update.json")
+    // Set homepage
+    localUpdateJson.put("homepage", remoteUrl)
+
+    // Add new mod version to the list of mod versions for this version of Minecraft
+    if (localUpdateJson.get(minecraftVersion) instanceof Map) {
+        ((Map) localUpdateJson.get(minecraftVersion)).put(modVersion, changelogStatement)
+    }
+    else {
+        def modVersionsMap = new HashMap()
+        modVersionsMap.put(modVersion, changelogStatement)
+        localUpdateJson.put(minecraftVersion, modVersionsMap)
+    }
+
+    // Add new versions to the promos list
+    if (localUpdateJson.get("promos") instanceof Map) {
+        ((Map) localUpdateJson.get("promos")).put("latest", modVersion)
+        ((Map) localUpdateJson.get("promos")).put(minecraftVersion + "-latest", modVersion)
+
+        if (isReleaseVersion) {
+            ((Map) localUpdateJson.get("promos")).put("recommended", modVersion)
+            ((Map) localUpdateJson.get("promos")).put(minecraftVersion + "-recommended", modVersion)
+        }
+    }
+    else {
+        def promosMap = new HashMap<String, String>()
+
+        promosMap.put("latest", modVersion)
+        promosMap.put(minecraftVersion + "-latest", modVersion)
+
+        if (isReleaseVersion) {
+            promosMap.put("recommended", modVersion)
+            promosMap.put(minecraftVersion + "-recommended", modVersion)
+        }
+
+        localUpdateJson.put("promos", promosMap)
+    }
+
+    // Output new versions file
+    def localUpdateFile = new File(fileName)
     if (!localUpdateFile.exists()) {
         localUpdateFile.createNewFile()
     }
-
-    try {
-        def localUpdateJson = new HashMap<String, String>()
-        localUpdateJson.put("homepage", "equivalent.exchange")
-
-//        def existingUpdateJson = new JsonSlurper().parse(localUpdateFile)
-//        if (existingUpdateJson != null) {
-//            def foobar = new HashMap<String, String>()
-//            if (existingUpdateJson."${minecraft_version}" instanceof Map) {
-//                foobar.putAll(existingUpdateJson."${minecraft_version}")
-//            }
-//            foobar.put("0.4.99999", "changelog")
-//            existingUpdateJson."${minecraft_version}" = foobar
-//        }
-
-        def String updateJson = JsonOutput.toJson(localUpdateJson)
-        localUpdateFile.setText(JsonOutput.prettyPrint(updateJson))
-    }
-    catch (JsonException e) {}
+    localUpdateFile.setText(JsonOutput.prettyPrint(JsonOutput.toJson(localUpdateJson)))
 }
 
 uploadArchives {
