@@ -24,6 +24,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.7" // Required for the curseforge task
+        classpath "se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.32"
     }
 }
 
@@ -44,6 +45,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle' // Required for the curseforge task
+apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -206,6 +208,31 @@ task buildVersionFile {
         localUpdateFile.createNewFile()
     }
     localUpdateFile.setText(JsonOutput.prettyPrint(JsonOutput.toJson(localUpdateJson)))
+}
+
+/**
+ * Generate a changelog file from GitHub commits
+ *
+ * See: https://github.com/tomasbjerre/git-changelog-gradle-plugin
+ */
+task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    filePath = "changelog.html"
+    untaggedName = "Current release ${mod_version}"
+    templateContent = """
+<h1>Changelog for Equivalent Exchange 3</h1>
+<h2>Version ${mod_version} for Minecraft ${project.minecraft.version}</h2>
+<ul>
+{{#tags}}
+<li><h3>{{name}}</h3>
+<hr/>
+<ul>
+{{#commits}}
+<li>{{{message}}}</li>
+{{/commits}}
+</ul>
+{{/tags}}
+</ul>
+    """
 }
 
 uploadArchives {
