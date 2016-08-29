@@ -15,6 +15,7 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
+import com.pahimar.ee3.util.FluidHelper;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -106,6 +107,7 @@ public class EquivalentExchange3 {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
+        FluidHelper.initMilk();
         Abilities.init();
 
         // Initialize our test files
