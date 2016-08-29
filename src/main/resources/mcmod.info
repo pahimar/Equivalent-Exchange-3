@@ -6,7 +6,7 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "http://equivalent.exchange/",
-  "updateUrl": "http://ee3.pahimar.com/update/update.json",
+  "updateUrl": "http://ee3.pahimar.com/update/versions.json",
   "authorList": [
     "pahimar",
     "x3n0ph0b3"

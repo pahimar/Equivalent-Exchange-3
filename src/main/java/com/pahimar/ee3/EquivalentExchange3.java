@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         version = "@MOD_VERSION@",
         dependencies = "required-after:Forge@[12.18.1,)",
         guiFactory = "com.pahimar.ee3.client.gui.GuiFactory",
-        updateJSON = "http://ee3.pahimar.com/update/update.json")
+        updateJSON = "http://ee3.pahimar.com/update/versions.json")
 public class EquivalentExchange3 {
 
     public static final String MOD_ID = "ee3";
