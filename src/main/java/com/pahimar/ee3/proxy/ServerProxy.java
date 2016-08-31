@@ -15,6 +15,12 @@ public class ServerProxy extends CommonProxy {
     }
 
     @Override
+    public void initModelsAndVariants() {
+
+        // NOOP
+    }
+
+    @Override
     public void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity) {
         // NOOP
     }

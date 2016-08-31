@@ -10,5 +10,7 @@ public interface IProxy {
 
     void registerKeybindings();
 
+    void initModelsAndVariants();
+
     void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity);
 }

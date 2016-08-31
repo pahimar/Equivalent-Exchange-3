@@ -65,18 +65,13 @@ public class EquivalentExchange3 {
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
         Files.init(event);
-
         Network.init();
-
-        proxy.registerKeybindings();
-
         ModItems.register();
-
         ModBlocks.init();
-
         EnergyValues.init();
-
         AlchemyArrays.init();
+        proxy.registerKeybindings();
+        proxy.initModelsAndVariants();
     }
 
     @Mod.EventHandler
