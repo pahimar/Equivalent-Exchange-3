@@ -32,10 +32,8 @@ itemGroup.ee3=Equivalent Exchange 3
 
 # Items
 item.ee3:alchemicalBag.name=Alchemical Bag
-item.ee3:alchemicalDust.ash.name=Ash
-item.ee3:alchemicalDust.verdant.name=Verdant Dust
-item.ee3:alchemicalDust.azure.name=Azure Dust
-item.ee3:alchemicalDust.minium.name=Minium Dust
+item.ee3:ash.name=Ash
+item.ee3:minium_dust.name=Minium Dust
 item.ee3:alchemical_coal.name=Alchemical Coal
 item.ee3:mobius_fuel.name=Mobius Fuel
 item.ee3:aeternalis_fuel.name=Aeternalis Fuel
