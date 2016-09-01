@@ -1,6 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.item.ItemAlchemicalFuel;
+import com.pahimar.ee3.item.ItemAlchenomicon;
 import com.pahimar.ee3.item.ItemChalk;
 import com.pahimar.ee3.item.base.ItemEE;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -19,10 +20,12 @@ public class ModItems {
 
     public static final ItemEE CHALK = new ItemChalk();
     public static final ItemEE ALCHEMICAL_FUEL = new ItemAlchemicalFuel();
+    public static final ItemEE ALCHENOMICON = new ItemAlchenomicon();
 
     public static void register() {
         GameRegistry.register(CHALK);
         GameRegistry.register(ALCHEMICAL_FUEL);
+        GameRegistry.register(ALCHENOMICON);
     }
 
     @SideOnly(Side.CLIENT)
