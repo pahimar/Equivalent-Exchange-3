@@ -22,6 +22,7 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
     private final String[] VARIANTS;
 
     public ItemEE(String name, String ... variants) {
+
         super();
         setRegistryName(name);
         setUnlocalizedName(name);
