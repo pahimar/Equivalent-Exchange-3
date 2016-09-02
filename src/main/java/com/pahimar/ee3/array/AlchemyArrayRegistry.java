@@ -1,7 +1,6 @@
 package com.pahimar.ee3.array;
 
 import com.pahimar.ee3.api.array.AlchemyArray;
-import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Marker;
@@ -27,7 +26,7 @@ public class AlchemyArrayRegistry {
     public boolean register(AlchemyArray alchemyArray) {
 
         if (!alchemyArrays.contains(alchemyArray)) {
-            LogHelper.trace(ALCHEMY_ARRAY_MARKER, "[{}]: Mod with ID '{}' added alchemy array {}", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), alchemyArray);
+            LogHelper.trace(ALCHEMY_ARRAY_MARKER, "[{}]: Mod with ID '{}' added alchemy array {}", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), alchemyArray);
             return alchemyArrays.add(alchemyArray);
         }
 

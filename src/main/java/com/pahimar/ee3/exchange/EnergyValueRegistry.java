@@ -8,7 +8,6 @@ import com.pahimar.ee3.api.exchange.IEnergyValueProvider;
 import com.pahimar.ee3.recipe.RecipeRegistry;
 import com.pahimar.ee3.reference.Comparators;
 import com.pahimar.ee3.util.FilterUtils;
-import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.Item;
@@ -537,7 +536,7 @@ public class EnergyValueRegistry {
                 postCalculationStackValueMap.put(wrappedStack, factoredEnergyValue);
             }
 
-            LogHelper.trace(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
+            LogHelper.trace(ENERGY_VALUE_MARKER, "[{}] Mod '{}' set a {} value of {} on object '{}' with doRegen = {}", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), phase, energyValue, wrappedStack, doRegenValues);
         }
     }
 

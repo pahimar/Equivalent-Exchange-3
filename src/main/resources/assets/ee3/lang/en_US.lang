@@ -31,7 +31,7 @@ key.toggle=Toggle
 itemGroup.ee3=Equivalent Exchange 3
 
 # Items
-item.ee3:alchemicalBag.name=Alchemical Bag
+item.ee3:alchemical_bag.name=Alchemical Bag
 item.ee3:ash.name=Ash
 item.ee3:minium_dust.name=Minium Dust
 item.ee3:alchemical_coal.name=Alchemical Coal

@@ -14,7 +14,7 @@ public class ItemEventHandler {
     @SubscribeEvent
     public void onItemTossEvent(ItemTossEvent itemTossEvent) {
 
-        NBTUtils.clearStatefulNBTTags(itemTossEvent.getEntityItem().getEntityItem());
+        NBTUtils.clearStatefulTags(itemTossEvent.getEntityItem().getEntityItem());
 
         //Close the Alchemical Bag GUI when the Alchemical bag is tossed
 //        if (itemTossEvent.getPlayer().openContainer instanceof ContainerAlchemicalBag) {
@@ -28,18 +28,18 @@ public class ItemEventHandler {
 
     @SubscribeEvent
     public void onItemPickupEvent(PlayerEvent.ItemPickupEvent itemPickupEvent) {
-        NBTUtils.clearStatefulNBTTags(itemPickupEvent.pickedUp.getEntityItem());
+        NBTUtils.clearStatefulTags(itemPickupEvent.pickedUp.getEntityItem());
     }
 
     @SubscribeEvent
     public void onEntityItemPickupEvent(EntityItemPickupEvent entityItemPickupEvent) {
-        NBTUtils.clearStatefulNBTTags(entityItemPickupEvent.getItem().getEntityItem());
+        NBTUtils.clearStatefulTags(entityItemPickupEvent.getItem().getEntityItem());
     }
 
     @SubscribeEvent
     public void onPlayerDropsEvent(PlayerDropsEvent playerDropsEvent) {
         for (EntityItem entityItem : playerDropsEvent.getDrops()) {
-            NBTUtils.clearStatefulNBTTags(entityItem.getEntityItem());
+            NBTUtils.clearStatefulTags(entityItem.getEntityItem());
         }
     }
 }

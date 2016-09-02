@@ -1,10 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.item.ItemAlchemicalDust;
-import com.pahimar.ee3.item.ItemAlchemicalFuel;
-import com.pahimar.ee3.item.ItemAlchenomicon;
-import com.pahimar.ee3.item.ItemChalk;
+import com.pahimar.ee3.item.*;
 import com.pahimar.ee3.item.base.ItemEE;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -21,6 +18,7 @@ public class ModItems {
     public static final ItemEE ALCHEMICAL_FUEL = new ItemAlchemicalFuel();
     public static final ItemEE ALCHENOMICON = new ItemAlchenomicon();
     public static final ItemEE ALCHEMICAL_DUST = new ItemAlchemicalDust();
+    public static final ItemEE ALCHEMICAL_BAG = new ItemAlchemicalBag();
 
     private ModItems() {}
 

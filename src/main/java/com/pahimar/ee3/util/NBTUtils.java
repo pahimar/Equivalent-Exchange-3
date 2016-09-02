@@ -11,49 +11,60 @@ import java.util.UUID;
 
 public class NBTUtils {
 
-    public static void clearStatefulNBTTags(ItemStack itemStack) {
+    private static final String[] STATEFUL_TAG_NAMES = { Names.NBT.GUI_OPEN };
 
-        if (NBTUtils.hasKey(itemStack, Names.NBT.CRAFTING_GUI_OPEN)) {
-            NBTUtils.removeTag(itemStack, Names.NBT.CRAFTING_GUI_OPEN);
-        }
-        else if (NBTUtils.hasKey(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN)) {
-            NBTUtils.removeTag(itemStack, Names.NBT.TRANSMUTATION_GUI_OPEN);
-        }
-        else if (NBTUtils.hasKey(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN)) {
-            NBTUtils.removeTag(itemStack, Names.NBT.ALCHEMICAL_BAG_GUI_OPEN);
+    private static boolean validate(ItemStack itemStack, String keyName) {
+        return itemStack != null && itemStack.getTagCompound() != null && keyName != null && !keyName.isEmpty();
+    }
+
+    public static boolean hasKey(ItemStack itemStack, String keyName) {
+        return validate(itemStack, keyName) && itemStack.getTagCompound().hasKey(keyName);
+    }
+
+    public static boolean hasKey(ItemStack itemStack, String keyName, NBTType nbtType) {
+        return validate(itemStack, keyName) && nbtType != null && itemStack.getTagCompound().hasKey(keyName, nbtType.ordinal());
+    }
+
+    public static void removeTag(ItemStack itemStack, String keyName) {
+
+        if (validate(itemStack, keyName)) {
+            itemStack.getTagCompound().removeTag(keyName);
         }
     }
 
-    public static boolean hasUUID(ItemStack itemStack) {
-        return getLong(itemStack, Names.NBT.UUID_MOST_SIG) != null && getLong(itemStack, Names.NBT.UUID_LEAST_SIG) != null;
-    }
+    public static void clearStatefulTags(ItemStack itemStack) {
 
-    public static UUID getUUID(ItemStack itemStack) {
-
-        if (hasUUID(itemStack)) {
-            return new UUID(getLong(itemStack, Names.NBT.UUID_MOST_SIG), getLong(itemStack, Names.NBT.UUID_LEAST_SIG));
+        for (String tagName : STATEFUL_TAG_NAMES) {
+            removeTag(itemStack, tagName);
         }
-
-        return null;
     }
 
-    public static void setUUID(ItemStack itemStack, UUID uuid) {
+    public static boolean hasUUID(ItemStack itemStack, String keyName) {
+        return validate(itemStack, keyName) && itemStack.getTagCompound().hasUniqueId(keyName);
+    }
 
-        if (itemStack != null) {
+    public static UUID getUUID(ItemStack itemStack, String keyName) {
+        return hasUUID(itemStack, keyName) ? itemStack.getTagCompound().getUniqueId(keyName) : null;
+    }
 
-            initNBTTagCompound(itemStack);
+    public static void setUUID(ItemStack itemStack, String keyName) {
+        setUUID(itemStack, keyName, null);
+    }
+
+    public static void setUUID(ItemStack itemStack, String keyName, UUID uuid) {
+
+        if (itemStack != null && keyName != null && !keyName.isEmpty()) {
 
             if (uuid == null) {
                 uuid = UUID.randomUUID();
             }
 
-            setLong(itemStack, Names.NBT.UUID_MOST_SIG, uuid.getMostSignificantBits());
-            setLong(itemStack, Names.NBT.UUID_LEAST_SIG, uuid.getLeastSignificantBits());
+            initNBTTagCompound(itemStack);
+            itemStack.getTagCompound().setUniqueId(keyName, uuid);
         }
     }
 
     public static boolean hasColor(ItemStack itemStack) {
-
         return hasKey(itemStack, Names.NBT.DISPLAY, NBTType.COMPOUND) && getTagCompound(itemStack, Names.NBT.DISPLAY).hasKey(Names.NBT.COLOR, NBTType.INT.ordinal());
     }
 
@@ -81,21 +92,6 @@ public class NBTUtils {
                 displayTagCompound.setInteger(Names.NBT.COLOR, color);
                 itemStack.getTagCompound().setTag(Names.NBT.DISPLAY, displayTagCompound);
             }
-        }
-    }
-
-    public static boolean hasKey(ItemStack itemStack, String keyName) {
-        return itemStack != null && itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey(keyName);
-    }
-
-    public static boolean hasKey(ItemStack itemStack, String keyName, NBTType nbtType) {
-        return itemStack != null && itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey(keyName, nbtType.ordinal());
-    }
-
-    public static void removeTag(ItemStack itemStack, String keyName) {
-
-        if (itemStack != null && itemStack.getTagCompound() != null && keyName != null && !keyName.isEmpty()) {
-            itemStack.getTagCompound().removeTag(keyName);
         }
     }
 
@@ -130,13 +126,13 @@ public class NBTUtils {
     }
 
     // boolean
-    public static Boolean getBoolean(ItemStack itemStack, String keyName) {
+    public static boolean getBoolean(ItemStack itemStack, String keyName) {
 
         if (hasKey(itemStack, keyName, NBTType.BYTE)) {
-            itemStack.getTagCompound().getBoolean(keyName);
+            return itemStack.getTagCompound().getBoolean(keyName);
         }
 
-        return null;
+        return false;
     }
 
     public static void setBoolean(ItemStack itemStack, String keyName, boolean keyValue) {

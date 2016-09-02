@@ -3,7 +3,6 @@ package com.pahimar.ee3.blacklist;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.exchange.OreStack;
 import com.pahimar.ee3.exchange.WrappedStack;
-import com.pahimar.ee3.util.LoaderUtils;
 import com.pahimar.ee3.util.LogHelper;
 import com.pahimar.ee3.util.OreDictionaryHelper;
 import com.pahimar.ee3.util.SerializationHelper;
@@ -153,14 +152,14 @@ public class BlacklistRegistry {
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeBlacklistEvent(object))) {
-                    LogHelper.trace(KNOWLEDGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the player knowledge blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(KNOWLEDGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the player knowledge blacklist", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     knowledgeBlacklist.add(WrappedStack.build(object, 1));
                     save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeBlacklistEvent(object))) {
-                    LogHelper.trace(EXCHANGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the exchange blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(EXCHANGE_BLACKLIST_MARKER, "[{}] Mod with ID '{}' added object {} to the exchange blacklist", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     exchangeBlacklist.add(WrappedStack.build(object, 1));
                     save(blacklist);
                 }
@@ -182,14 +181,14 @@ public class BlacklistRegistry {
 
             if (blacklist == Blacklist.KNOWLEDGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new KnowledgeWhitelistEvent(object))) {
-                    LogHelper.trace(KNOWLEDGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the player knowledge blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(KNOWLEDGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the player knowledge blacklist", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     knowledgeBlacklist.remove(wrappedStack);
                     save(blacklist);
                 }
             }
             else if (blacklist == Blacklist.EXCHANGE) {
                 if (wrappedStack != null && !MinecraftForge.EVENT_BUS.post(new ExchangeWhitelistEvent(object))) {
-                    LogHelper.trace(EXCHANGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the exchange blacklist", LoaderUtils.getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
+                    LogHelper.trace(EXCHANGE_WHITELIST_MARKER, "[{}] Mod with ID '{}' removed object {} from the exchange blacklist", Loader.instance().getLoaderState(), Loader.instance().activeModContainer().getModId(), wrappedStack);
                     exchangeBlacklist.remove(wrappedStack);
                     save(blacklist);
                 }

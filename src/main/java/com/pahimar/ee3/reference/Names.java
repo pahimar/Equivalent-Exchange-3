@@ -2,10 +2,10 @@ package com.pahimar.ee3.reference;
 
 import com.pahimar.ee3.EquivalentExchange3;
 
-public class Names
-{
-    public static final class Blocks
-    {
+public class Names {
+
+    public static final class Blocks {
+
         public static final String CHALK = "chalkBlock";
         public static final String ALCHEMICAL_CHEST = "alchemicalChest";
         public static final String ALCHEMICAL_FUEL = "alchemicalFuelBlock";
@@ -21,8 +21,8 @@ public class Names
         public static final String DUMMY_ARRAY = "dummyArray";
     }
 
-    public static final class Items
-    {
+    public static final class Items {
+
         public static final String ALCHEMICAL_BAG = "alchemicalBag";
         public static final String ALCHEMICAL_DUST = "alchemicalDust";
         public static final String[] ALCHEMICAL_DUST_SUBTYPES = {"ash", "verdant", "azure", "minium"};
@@ -50,18 +50,13 @@ public class Names
         public static final String POTION_LETHE = "potionLethe";
     }
 
-    public static final class Fluids
-    {
-        public static final String MILK = "ee3.milk";
-    }
+    public static final class Materials {
 
-    public static final class Materials
-    {
         public static final String DARK_MATTER = "matterDark";
     }
 
-    public static final class Tools
-    {
+    public static final class Tools {
+
         public static final String DARK_MATTER_SHOVEL = "shovelDarkMatter";
         public static final String DARK_MATTER_PICKAXE = "pickAxeDarkMatter";
         public static final String DARK_MATTER_HAMMER = "hammerDarkMatter";
@@ -71,15 +66,15 @@ public class Names
         public static final String DARK_MATTER_SHEARS = "shearsDarkMatter";
     }
 
-    public static final class Weapons
-    {
+    public static final class Weapons {
+
         public static final String DARK_MATTER_BOW = "bowDarkMatter";
         public static final String DARK_MATTER_ARROW = "arrowDarkMatter";
         public static final String DARK_MATTER_SWORD = "swordDarkMatter";
     }
 
-    public static final class Armor
-    {
+    public static final class Armor {
+
         public static final String DARK_MATTER_ARMOR = "armorDarkMatter";
         public static final String CORPOREAL_MATTER_ARMOR = "armorCorporealMatter";
         public static final String KINETIC_MATTER_ARMOR = "armorKineticMatter";
@@ -90,17 +85,14 @@ public class Names
         public static final String OMNI_MATTER_ARMOR = "armorOmniMatter";
     }
 
-    public static final class NBT
-    {
+    public static final class NBT {
+
         public static final String ITEMS = "Items";
         public static final String ITEM_TRANSMUTATION_KNOWLEDGE = "transmutationKnowledge";
         public static final String CHARGE_LEVEL = "chargeLevel";
         public static final String MODE = "mode";
-        public static final String CRAFTING_GUI_OPEN = "craftingGuiOpen";
-        public static final String TRANSMUTATION_GUI_OPEN = "transmutationGuiOpen";
-        public static final String ALCHEMICAL_BAG_GUI_OPEN = "alchemicalBagGuiOpen";
-        public static final String UUID_MOST_SIG = "UUIDMostSig";
-        public static final String UUID_LEAST_SIG = "UUIDLeastSig";
+        public static final String GUI_OPEN = "gui_open";
+        public static final String UUID = "uuid";
         public static final String DISPLAY = "display";
         public static final String COLOR = "color";
         public static final String STATE = "teState";
@@ -113,8 +105,8 @@ public class Names
         public static final String ENERGY_VALUE = "energyValue";
     }
 
-    public static final class Containers
-    {
+    public static final class Containers {
+
         public static final String VANILLA_INVENTORY = "container.inventory";
         public static final String VANILLA_CRAFTING = "container.crafting";
         public static final String ALCHEMICAL_BAG = "container.ee3:" + Items.ALCHEMICAL_BAG;
@@ -128,17 +120,8 @@ public class Names
         public static final String TRANSMUTATION_TABLET = "container.ee3:" + Blocks.TRANSMUTATION_TABLET;
     }
 
-    public static final class Keys
-    {
-        public static final String CATEGORY = "key.categories.ee3";
-        public static final String CHARGE = "key.charge";
-        public static final String EXTRA = "key.extra";
-        public static final String RELEASE = "key.release";
-        public static final String TOGGLE = "key.toggle";
-    }
+    public static final class Commands {
 
-    public static final class Commands
-    {
         public static final String BASE_COMMAND = EquivalentExchange3.MOD_ID.toLowerCase();
         public static final String SET_ENERGY_VALUE = "set-energy-value";
         public static final String SET_ENERGY_VALUE_CURRENT_ITEM = "set-energy-value-current-item";
@@ -163,8 +146,8 @@ public class Names
         public static final String ADMIN_PANEL = "admin";
     }
 
-    public static final class AlchemyArrays
-    {
+    public static final class AlchemyArrays {
+
         private static final String ALCHEMY_ARRAY_BASE = "arrays.ee3:";
         public static final String ACCELERANT_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "accelerant";
         public static final String COMBUSTION_ALCHEMY_ARRAY = ALCHEMY_ARRAY_BASE + "combustion";

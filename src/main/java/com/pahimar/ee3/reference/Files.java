@@ -11,7 +11,7 @@ import java.io.File;
 
 public class Files {
 
-    public static File globalDataDirectory;
+    private static File globalDataDirectory;
     public static File globalTestDirectory;
     public static File playerDataDirectory;
 

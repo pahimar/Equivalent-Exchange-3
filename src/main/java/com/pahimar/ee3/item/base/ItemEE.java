@@ -3,7 +3,7 @@ package com.pahimar.ee3.item.base;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.init.ModItems;
-import net.minecraft.client.renderer.ItemMeshDefinition;
+import com.pahimar.ee3.util.ResourceLocationHelper;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -71,7 +71,7 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
         if (getCustomMeshDefinition() != null) {
 
             for (int i = 0; i < VARIANTS.length; i++) {
-                ModelBakery.registerItemVariants(this, getCustomModelResourceLocation(VARIANTS[i]));
+                ModelBakery.registerItemVariants(this, ResourceLocationHelper.getModelResourceLocation(VARIANTS[i]));
             }
 
             ModelLoader.setCustomMeshDefinition(this, getCustomMeshDefinition());
@@ -82,7 +82,7 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
                 List<ModelResourceLocation> modelResources = new ArrayList<>();
 
                 for (int i = 0; i < VARIANTS.length; i++) {
-                    modelResources.add(getCustomModelResourceLocation(VARIANTS[i]));
+                    modelResources.add(ResourceLocationHelper.getModelResourceLocation(VARIANTS[i]));
                 }
 
                 ModelBakery.registerItemVariants(this, modelResources.toArray(new ModelResourceLocation[0]));
@@ -102,14 +102,5 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
     @Override
     public String[] getVariants() {
         return VARIANTS;
-    }
-
-    @Override
-    public ItemMeshDefinition getCustomMeshDefinition() {
-        return null;
-    }
-
-    private ModelResourceLocation getCustomModelResourceLocation(String variant) {
-        return new ModelResourceLocation(EquivalentExchange3.MOD_ID + ":" + variant);
     }
 }

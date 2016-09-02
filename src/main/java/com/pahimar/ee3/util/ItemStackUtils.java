@@ -5,6 +5,7 @@ import com.pahimar.ee3.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class ItemStackUtils {
@@ -55,29 +56,27 @@ public class ItemStackUtils {
         return "null";
     }
 
-    public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer) {
-
-        setOwnerName(itemStack, entityPlayer);
-        setOwnerUUID(itemStack, entityPlayer);
+    public static boolean hasOwner(ItemStack itemStack) {
+        return getOwnerName(itemStack) != null || getOwnerUUID(itemStack) != null;
     }
 
+    @Nullable
     public static String getOwnerName(ItemStack itemStack) {
         return NBTUtils.getString(itemStack, Names.NBT.OWNER);
     }
 
+    @Nullable
     public static UUID getOwnerUUID(ItemStack itemStack) {
+        return NBTUtils.getUUID(itemStack, Names.NBT.OWNER);
+    }
 
-        if (NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG) != null && NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG) != null) {
-            return new UUID(NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG), NBTUtils.getLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG));
-        }
-
-        return null;
+    public static void setOwner(ItemStack itemStack, EntityPlayer entityPlayer) {
+        setOwnerName(itemStack, entityPlayer);
+        setOwnerUUID(itemStack, entityPlayer);
     }
 
     public static void setOwnerUUID(ItemStack itemStack, EntityPlayer entityPlayer) {
-
-        NBTUtils.setLong(itemStack, Names.NBT.OWNER_UUID_MOST_SIG, entityPlayer.getUniqueID().getMostSignificantBits());
-        NBTUtils.setLong(itemStack, Names.NBT.OWNER_UUID_LEAST_SIG, entityPlayer.getUniqueID().getLeastSignificantBits());
+        NBTUtils.setUUID(itemStack, Names.NBT.OWNER, entityPlayer.getUniqueID());
     }
 
     public static void setOwnerName(ItemStack itemStack, EntityPlayer entityPlayer) {

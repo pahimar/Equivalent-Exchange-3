@@ -8,5 +8,7 @@ public interface IItemVariantHolder<T extends ItemEE> {
 
     String[] getVariants();
 
-    ItemMeshDefinition getCustomMeshDefinition();
+    default ItemMeshDefinition getCustomMeshDefinition() {
+        return null;
+    }
 }
