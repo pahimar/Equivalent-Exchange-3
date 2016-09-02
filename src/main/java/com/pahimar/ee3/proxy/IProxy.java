@@ -1,16 +1,25 @@
 package com.pahimar.ee3.proxy;
 
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.common.event.*;
 
 public interface IProxy {
 
-    ClientProxy getClientProxy();
+    void onPreInit(FMLPreInitializationEvent event);
 
-    void registerEventHandlers();
+    void onInit(FMLInitializationEvent event);
 
-    void registerKeybindings();
+    void onPostInit(FMLPostInitializationEvent event);
 
-    void initModelsAndVariants();
+    void onServerStarting(FMLServerStartingEvent event);
 
-    void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity);
+    void onServerStopping(FMLServerStoppingEvent event);
+
+    default ClientProxy getClientProxy() {
+        return null;
+    }
+
+    default void spawnParticle(EnumParticleTypes particleType, double xCoord, double yCoord, double zCoord, double xVelocity, double yVelocity, double zVelocity) {
+        // NOOP
+    }
 }
