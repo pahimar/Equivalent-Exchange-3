@@ -1,0 +1,5 @@
+# Blender MTL File: 'tank.blend'
+# Material Count: 1
+
+newmtl tank
+map_Kd ee3:blocks/tank

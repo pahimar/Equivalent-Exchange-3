@@ -2,8 +2,8 @@ package com.pahimar.ee3.reference;
 
 public final class Messages {
 
-    public static final String OWNER_SET_TO_SELF = "misc.ee3:owner-set-to-self";
-    public static final String ENERGY_VALUE = "misc.ee3:energy-value";
+    public static final String OWNER_SET_TO_SELF = "misc.ee3:owner_set_to_self";
+    public static final String ENERGY_VALUE = "misc.ee3:energy_value";
 
     /* Fingerprint check related constants */
     public static final String NO_FINGERPRINT_MESSAGE = "The copy of Equivalent Exchange 3 that you are running is a development version of the mod, and as such may be unstable and/or incomplete.";

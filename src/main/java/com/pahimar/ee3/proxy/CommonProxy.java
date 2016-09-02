@@ -2,6 +2,7 @@ package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
+import com.pahimar.ee3.block.base.BlockEE;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
@@ -12,6 +13,7 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -26,7 +28,11 @@ public abstract class CommonProxy implements IProxy {
         Files.init(event);
         Network.init();
         ModItems.getItems().forEach(GameRegistry::register);
-        ModBlocks.init();
+
+        for (BlockEE blockEE : ModBlocks.getBlocks()) {
+            GameRegistry.register(blockEE);
+            GameRegistry.register(new ItemBlock(blockEE), blockEE.getRegistryName());
+        }
         EnergyValues.init();
         AlchemyArrays.init();
     }

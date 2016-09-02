@@ -38,95 +38,78 @@ item.ee3:alchemical_coal.name=Alchemical Coal
 item.ee3:mobius_fuel.name=Mobius Fuel
 item.ee3:aeternalis_fuel.name=Aeternalis Fuel
 item.ee3:chalk.name=Chalk
-item.ee3:diviningRod.name=Divining Rod [WIP]
-item.ee3:shardMinium.name=Shard of Minium
-item.ee3:stoneInert.name=Inert Stone
-item.ee3:stoneMinium.name=Minium Stone [WIP]
-item.ee3:stonePhilosophers.name=Philosopher's Stone [WIP]
-item.ee3:alchemicalUpgrade.verdant.name=Verdant Upgrade [WIP]
-item.ee3:alchemicalUpgrade.azure.name=Azure Upgrade [WIP]
-item.ee3:alchemicalUpgrade.minium.name=Minium Upgrade [WIP]
+item.ee3:divining_rod.name=Divining Rod [WIP]
+item.ee3:minium_shard.name=Shard of Minium
+item.ee3:inert_stone.name=Inert Stone
+item.ee3:minium_stone.name=Minium Stone [WIP]
+item.ee3:philosophers_stone.name=Philosopher's Stone [WIP]
 item.ee3:alchenomicon.name=Alchenomicon
-item.ee3:matterProto.name=Proto Matter [WIP]
-item.ee3:matterDark.name=Dark Matter [WIP]
-item.ee3:matterOmni.name=Omni Matter [WIP]
-item.ee3:matterCorporeal.name=Corporeal Matter [WIP]
-item.ee3:matterKinetic.name=Kinetic Matter [WIP]
-item.ee3:matterTemporal.name=Temporal Matter [WIP]
-item.ee3:matterEssentia.name=Essentia Matter [WIP]
-item.ee3:matterAmorphous.name=Amorphous Matter [WIP]
-item.ee3:matterVoid.name=Void Matter [WIP]
-item.ee3:gemBlack.name=Black Gem [WIP]
-item.ee3:gemBlue.name=Blue Gem [WIP]
-item.ee3:gemGreen.name=Green Gem [WIP]
-item.ee3:gemGrey.name=Grey Gem [WIP]
-item.ee3:gemPurple.name=Purple Gem [WIP]
-item.ee3:gemRed.name=Red Gem [WIP]
-item.ee3:gemYellow.name=Yellow Gem [WIP]
-item.ee3:lootBall.name=Loot Ball [WIP]
-item.ee3:knowledgeScroll.name=Scroll of Transmutation Knowledge [WIP]
-item.ee3:potionLethe.name=Lethe Potion [WIP]
+item.ee3:proto_matter.name=Proto Matter [WIP]
+item.ee3:dark_matter.name=Dark Matter [WIP]
+item.ee3:omni_matter.name=Omni Matter [WIP]
+item.ee3:corporeal_matter.name=Corporeal Matter [WIP]
+item.ee3:kinetic_matter.name=Kinetic Matter [WIP]
+item.ee3:temporal_matter.name=Temporal Matter [WIP]
+item.ee3:essentia_matter.name=Essentia Matter [WIP]
+item.ee3:amorphous_matter.name=Amorphous Matter [WIP]
+item.ee3:void_matter.name=Void Matter [WIP]
+item.ee3:black_gem.name=Black Gem [WIP]
+item.ee3:blue_gem.name=Blue Gem [WIP]
+item.ee3:empty_gem.name=Empty Gem [WIP]
+item.ee3:green_gem.name=Green Gem [WIP]
+item.ee3:grey_gem.name=Grey Gem [WIP]
+item.ee3:purple_gem.name=Purple Gem [WIP]
+item.ee3:red_gem.name=Red Gem [WIP]
+item.ee3:yellow_gem.name=Yellow Gem [WIP]
+item.ee3:loot_ball.name=Loot Ball [WIP]
+item.ee3:knowledge_scroll.name=Scroll of Transmutation Knowledge [WIP]
+item.ee3:lethe_potion.name=Lethe Potion [WIP]
 
 # Tools
-item.ee3:shovelDarkMatter.name=Dark Matter Shovel [WIP]
-item.ee3:pickAxeDarkMatter.name=Dark Matter Pickaxe [WIP]
-item.ee3:hammerDarkMatter.name=Dark Matter Hammer [WIP]
-item.ee3:axeDarkMatter.name=Dark Matter Axe [WIP]
-item.ee3:hoeDarkMatter.name=Dark Matter Hoe [WIP]
-item.ee3:fishingRodDarkMatter.name=Dark Matter Fishing Rod [WIP]
-item.ee3:shearsDarkMatter.name=Dark Matter Shears [WIP]
+item.ee3:dark_matter_shovel.name=Dark Matter Shovel [WIP]
+item.ee3:dark_matter_pick_axe.name=Dark Matter Pickaxe [WIP]
+item.ee3:dark_matter_hammer.name=Dark Matter Hammer [WIP]
+item.ee3:dark_matter_axe.name=Dark Matter Axe [WIP]
+item.ee3:dark_matter_hoe.name=Dark Matter Hoe [WIP]
+item.ee3:dark_matter_fishing_rod.name=Dark Matter Fishing Rod [WIP]
+item.ee3:dark_matter_shears.name=Dark Matter Shears [WIP]
 
 # Weapons
-item.ee3:bowDarkMatter.name=Dark Matter Bow [WIP]
-item.ee3:arrowDarkMatter.name=Dark Matter Arrow [WIP]
-item.ee3:swordDarkMatter.name=Dark Matter Sword [WIP]
+item.ee3:dark_matter_bow.name=Dark Matter Bow [WIP]
+item.ee3:dark_matter_arrow.name=Dark Matter Arrow [WIP]
+item.ee3:dark_matter_sword.name=Dark Matter Sword [WIP]
 
 # Blocks
-tile.ee3:alchemicalChest.name=Alchemical Chest
-tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Block of Alchemical Coal
-tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Block of Mobius Fuel
-tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Block of Aeternalis Fuel
+tile.ee3:alchemical_chest.name=Alchemical Chest
+tile.ee3:alchemical_coal.name=Block of Alchemical Coal
+tile.ee3:mobius_fuel.name=Block of Mobius Fuel
+tile.ee3:aeternalis_fuel.name=Block of Aeternalis Fuel
 tile.ee3:aludel.name=Aludel Base
-tile.ee3:calcinator.name=Calciner
+tile.ee3:calciner.name=Calciner
 tile.ee3:chalk.name=Chalk
-tile.ee3:glassBell.name=Glass Bell
-tile.ee3:researchStation.name=Research Station
-tile.ee3:augmentationTable.name=Augmentation Table [WIP]
-tile.ee3:transmutationSquare.name=Transmutation Square [WIP]
-tile.ee3:ashInfusedStone.name=Ash Infused Stone
-tile.ee3:ashInfusedStoneSlab.name=Ash Infused Stone Slab
-tile.ee3:alchemyArray.name=Alchemy Array
-tile.ee3:dummyArray.name=Alchemy Array
-tile.ee3:transmutationTablet.name=Transmutation Tablet
-
-# Fluids
-fluid.ee3.milk=Milk
+tile.ee3:glass_bell.name=Glass Bell
+tile.ee3:research_station.name=Research Station
+tile.ee3:augmentation_table.name=Augmentation Table [WIP]
+tile.ee3:transmutation_square.name=Transmutation Square [WIP]
+tile.ee3:ash_infused_stone.name=Ash Infused Stone
+tile.ee3:ash_infused_stone_slab.name=Ash Infused Stone Slab
+tile.ee3:alchemy_array.name=Alchemy Array
+tile.ee3:dummy_array.name=Alchemy Array
+tile.ee3:transmutation_tablet.name=Transmutation Tablet
 
 # Alchemy Arrays
-arrays.ee3:accelerant=Accelerant Alchemy Array [WIP]
-arrays.ee3:combustion=Combustion Alchemy Array [WIP]
-arrays.ee3:construction=Construction Alchemy Array [WIP]
-arrays.ee3:conveyor=Conveyor Alchemy Array [WIP]
-arrays.ee3:destruction=Destruction Alchemy Array [WIP]
-arrays.ee3:gelid=Gelid Alchemy Array [WIP]
-arrays.ee3:parthenogenesis=Parthenogenesis Alchemy Array [WIP]
-arrays.ee3:transfiguration=Transfiguration Alchemy Array [WIP]
 arrays.ee3:transmutation=Transmutation Alchemy Array [WIP]
 
 # GUIs
-container.ee3:alchemicalBag=Alchemical Bag
-container.ee3:alchemicalChest=Alchemical Chest
+container.ee3:alchemical_bag=Alchemical Bag
+container.ee3:alchemical_chest=Alchemical Chest
 container.ee3:aludel=Aludel
 container.ee3:calcinator=Calcinator
-container.ee3:glassBell=Glass Bell
-container.ee3:researchStation=Research Station
-container.ee3:augmentationTable=Augmentation Table [WIP]
+container.ee3:glass_bell=Glass Bell
+container.ee3:research_station=Research Station
+container.ee3:augmentation_table=Augmentation Table [WIP]
 container.ee3:alchenomicon=Alchenomicon
-container.ee3:alchenomicon.noTransmutationsKnown=No known transmutations
-container.ee3:transmutationAlchemyArray=Transmutation Square [WIP]
-
-# NEI
-gui.nei.ee3:aludel=Aludel
+container.ee3:alchenomicon.no_transmutations_known=No known transmutations
 
 # Commands
 commands.ee3.usage=/ee3
@@ -179,18 +162,14 @@ commands.ee3.run-tests.notfound=Test file '%s' was not found!
 commands.ee3.run-tests.dir-notfound=Test directory was not found!
 
 # Tooltips
-tooltip.ee3:belongsTo=Belongs to %s
-tooltip.ee3:belongsToNoOne=Belongs to no one
-tooltip.ee3:upgradesPrefix=Upgrades (Alchemical) Chests
-tooltip.ee3:small=Small
-tooltip.ee3:medium=Medium
-tooltip.ee3:large=Large
-tooltip.ee3:sortByDisplayName=Sort by Display Name
-tooltip.ee3:sortByEnergyValue=Sort by Energy Value
-tooltip.ee3:sortByID=Sort by ID
-tooltip.ee3:sortAscending=Ascending Order
-tooltip.ee3:sortDescending=Descending Order
+tooltip.ee3:belongs_to=Belongs to %s
+tooltip.ee3:belongs_to_no_one=Belongs to no one
+tooltip.ee3:sort_by_name=Sort by Name
+tooltip.ee3:sort_by_value=Sort by Energy Value
+tooltip.ee3:sort_by_id=Sort by ID
+tooltip.ee3:sort_order_ascending=Ascending Order
+tooltip.ee3:sort_order_descending=Descending Order
 
 #Misc
-misc.ee3:owner-set-to-self=You are now the owner of %s
-misc.ee3:energy-value=Energy Value
+misc.ee3:owner_set_to_self=You are now the owner of %s
+misc.ee3:energy_value=Energy Value

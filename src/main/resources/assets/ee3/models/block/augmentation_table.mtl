@@ -1,0 +1,5 @@
+# Blender MTL File: 'augmentation_table.blend'
+# Material Count: 1
+
+newmtl augmentation_table
+map_Kd ee3:blocks/augmentation_table

@@ -1,0 +1,5 @@
+# Blender MTL File: 'aludel_base.blend'
+# Material Count: 1
+
+newmtl aludel_base
+map_Kd ee3:blocks/aludel_base
