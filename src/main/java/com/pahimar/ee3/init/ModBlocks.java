@@ -1,6 +1,7 @@
 package com.pahimar.ee3.init;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.block.BlockAlchemicalFuel;
 import com.pahimar.ee3.block.BlockCalciner;
 import com.pahimar.ee3.block.base.BlockEE;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -14,7 +15,8 @@ public class ModBlocks {
 
     private static final List<BlockEE> BLOCKS = new ArrayList<>();
 
-    public static final BlockEE calciner = new BlockCalciner();
+    public static final BlockEE CALCINER = new BlockCalciner();
+    public static final BlockEE ALCHEMICAL_FUEL = new BlockAlchemicalFuel();
 
     private ModBlocks() {}
 
