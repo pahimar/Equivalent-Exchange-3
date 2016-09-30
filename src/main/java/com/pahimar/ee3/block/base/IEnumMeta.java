@@ -4,7 +4,7 @@ import net.minecraft.util.IStringSerializable;
 
 public interface IEnumMeta extends IStringSerializable {
 
-    int getMeta();
+    int getMetadata();
 
     default String getName() {
         return ((Enum) this).name().toLowerCase();

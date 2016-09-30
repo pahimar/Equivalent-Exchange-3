@@ -81,9 +81,9 @@ item.ee3:dark_matter_sword.name=Dark Matter Sword [WIP]
 
 # Blocks
 tile.ee3:alchemical_chest.name=Alchemical Chest
-tile.ee3:alchemical_coal.name=Block of Alchemical Coal
-tile.ee3:mobius_fuel.name=Block of Mobius Fuel
-tile.ee3:aeternalis_fuel.name=Block of Aeternalis Fuel
+tile.ee3:alchemical_fuel_block.alchemical_coal.name=Block of Alchemical Coal
+tile.ee3:alchemical_fuel_block.mobius_fuel.name=Block of Mobius Fuel
+tile.ee3:alchemical_fuel_block.aeternalis_fuel.name=Block of Aeternalis Fuel
 tile.ee3:aludel.name=Aludel Base
 tile.ee3:calciner.name=Calciner
 tile.ee3:chalk.name=Chalk
