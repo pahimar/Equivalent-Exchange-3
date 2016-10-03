@@ -22,7 +22,7 @@ public class BlockAlchemicalFuel extends BlockEnumEE {
     public static final PropertyEnum<FuelVariant> VARIANT = PropertyEnum.create("variant", FuelVariant.class);
 
     public BlockAlchemicalFuel() {
-        super("alchemical_fuel_block");
+        super("alchemical_fuel_block", "alchemical_coal", "mobius_fuel", "aeternalis_fuel");
         setDefaultState(getDefaultState().withProperty(VARIANT, FuelVariant.ALCHEMICAL_COAL));
     }
 
