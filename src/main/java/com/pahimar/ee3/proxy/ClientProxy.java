@@ -10,7 +10,10 @@ import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
 import com.pahimar.ee3.item.base.ItemEE;
 import com.pahimar.ee3.settings.ChalkSettings;
+import com.pahimar.ee3.util.ResourceLocationHelper;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,6 +40,7 @@ public class ClientProxy extends CommonProxy {
         // Initialize models and textures
         ModItems.getItems().forEach(ItemEE::initModelsAndVariants);
         ModBlocks.getBlocks().forEach(BlockEE::initModelsAndVariants);
+        ModelBakery.registerItemVariants(Item.getItemFromBlock(ModBlocks.ALCHEMICAL_FUEL), ResourceLocationHelper.getModelResourceLocation("alchemical_coal"));
         OBJLoader.INSTANCE.addDomain(EquivalentExchange3.MOD_ID);
 
         // Register keybindings
