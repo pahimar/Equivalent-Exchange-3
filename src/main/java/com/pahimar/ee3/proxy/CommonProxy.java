@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.block.BlockAlchemicalFuel;
+import com.pahimar.ee3.block.BlockCalciner;
 import com.pahimar.ee3.block.base.BlockEE;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
@@ -15,6 +16,7 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,7 +38,9 @@ public abstract class CommonProxy implements IProxy {
 
         for (BlockEE blockEE : ModBlocks.getBlocks()) {
             GameRegistry.register(blockEE);
-//            GameRegistry.register(new ItemBlock(blockEE), blockEE.getRegistryName());
+            if (blockEE instanceof BlockCalciner) {
+                GameRegistry.register(new ItemBlock(blockEE), blockEE.getRegistryName());
+            }
         }
         GameRegistry.register(new ItemMultiTexture(ModBlocks.ALCHEMICAL_FUEL, ModBlocks.ALCHEMICAL_FUEL, new Function<ItemStack, String>() {
             @Nullable

@@ -66,6 +66,7 @@ public class ItemTooltipEventHandler {
 
             // TODO This is more of a debug thing to determine the new NBT stuff
             event.getToolTip().add(SerializationHelper.GSON.toJson(event.getItemStack()));
+            event.getToolTip().add(event.getItemStack().getItem().getRegistryName().toString());
         }
 
         if (event.getItemStack().getItem() instanceof IOwnable) {
