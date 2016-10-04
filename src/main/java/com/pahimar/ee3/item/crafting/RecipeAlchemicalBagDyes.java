@@ -84,7 +84,7 @@ public class RecipeAlchemicalBagDyes implements IRecipe {
 //                        return null;
 //                    }
 //
-//                    float[] dyeColorChannels = ColorUtils.getRGB(EnumDyeColor.byDyeDamage(currentStack.getMetadata()));
+//                    float[] dyeColorChannels = ColorUtils.getRGB(EnumDyeColor.byDyeDamage(currentStack.getMeta()));
 //                    j1 = (int) (dyeColorChannels[0] * 255.0F);
 //                    k1 = (int) (dyeColorChannels[1] * 255.0F);
 //                    newColor = (int) (dyeColorChannels[2] * 255.0F);

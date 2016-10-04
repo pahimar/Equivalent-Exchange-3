@@ -45,7 +45,7 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
     public String getUnlocalizedName(ItemStack itemStack) {
 
         if (hasSubtypes && itemStack.getMetadata() < VARIANTS.length) {
-            return String.format("item.%s:%s", EquivalentExchange3.MOD_ID, VARIANTS[itemStack.getMetadata()]);
+            return String.format("item.%s:%s", EquivalentExchange3.MOD_ID, VARIANTS[Math.abs(itemStack.getMetadata() % VARIANTS.length)]);
         }
         else {
             return String.format("item.%s:%s", EquivalentExchange3.MOD_ID, BASE_NAME);
