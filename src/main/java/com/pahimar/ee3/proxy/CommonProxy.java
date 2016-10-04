@@ -3,19 +3,16 @@ package com.pahimar.ee3.proxy;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
 import com.pahimar.ee3.block.base.BlockEE;
-import com.pahimar.ee3.block.base.BlockEnumEE;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
 import com.pahimar.ee3.init.*;
-import com.pahimar.ee3.item.base.ItemBlockEnumEE;
 import com.pahimar.ee3.knowledge.PlayerKnowledgeRegistry;
 import com.pahimar.ee3.network.Network;
 import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -33,12 +30,7 @@ public abstract class CommonProxy implements IProxy {
 
         for (BlockEE blockEE : ModBlocks.getBlocks()) {
             GameRegistry.register(blockEE);
-            if (blockEE instanceof BlockEnumEE) {
-                GameRegistry.register(new ItemBlockEnumEE((BlockEnumEE) blockEE), blockEE.getRegistryName());
-            }
-            else {
-                GameRegistry.register(new ItemBlock(blockEE), blockEE.getRegistryName());
-            }
+            GameRegistry.register(BlockEE.getItemBlockFor(blockEE), blockEE.getRegistryName());
         }
         EnergyValues.init();
         AlchemyArrays.init();
