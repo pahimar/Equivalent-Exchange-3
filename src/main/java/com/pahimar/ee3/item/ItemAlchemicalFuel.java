@@ -6,6 +6,7 @@ public class ItemAlchemicalFuel extends ItemEE {
 
     public ItemAlchemicalFuel() {
         super("alchemical_fuel", "alchemical_coal", "mobius_fuel", "aeternalis_fuel");
+        setMaxStackSize(64);
         setHasSubtypes(true);
     }
 }
