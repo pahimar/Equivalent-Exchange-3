@@ -1,6 +1,7 @@
 package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.EquivalentExchange3;
+import com.pahimar.ee3.handler.ConfigurationHandler;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.message.Message;
 
@@ -12,31 +13,66 @@ public class LogHelper {
     private static final Logger LOGGER = LogManager.getLogger(EquivalentExchange3.MOD_ID);
 
     public static void log(Level level, Marker marker, Message message) {
-        LOGGER.log(level, marker, message);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, message);
+        }
+        else {
+            LOGGER.log(level, marker, message);
+        }
     }
 
     public static void log(Level level, Marker marker, Message message, Throwable throwable) {
-        LOGGER.log(level, marker, message, throwable);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, message, throwable);
+        }
+        else {
+            LOGGER.log(level, marker, message, throwable);
+        }
     }
 
     public static void log(Level level, Marker marker, Object object) {
-        LOGGER.log(level, marker, object);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, object);
+        }
+        else {
+            LOGGER.log(level, marker, object);
+        }
     }
 
     public static void log(Level level, Marker marker, Object object, Throwable throwable) {
-        LOGGER.log(level, marker, object, throwable);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, object, throwable);
+        }
+        else {
+            LOGGER.log(level, marker, object, throwable);
+        }
     }
 
     public static void log(Level level, Marker marker, String message) {
-        LOGGER.log(level, marker, message);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, message);
+        }
+        else {
+            LOGGER.log(level, marker, message);
+        }
     }
 
     public static void log(Level level, Marker marker, String format, Object... params) {
-        LOGGER.log(level, marker, format, params);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, format, params);
+        }
+        else {
+            LOGGER.log(level, marker, format, params);
+        }
     }
 
     public static void log(Level level, Marker marker, String message, Throwable throwable) {
-        LOGGER.log(level, marker, message, throwable);
+        if (ConfigurationHandler.Settings.debugEnabled && (level == Level.DEBUG || level == Level.TRACE)) {
+            LOGGER.log(Level.INFO, marker, message, throwable);
+        }
+        else {
+            LOGGER.log(level, marker, message, throwable);
+        }
     }
 
     public static void log(Level level, Message message) {

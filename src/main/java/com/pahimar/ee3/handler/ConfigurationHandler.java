@@ -15,6 +15,7 @@ public class ConfigurationHandler {
 
     private static final String CATEGORY_ENERGY_VALUE = "general.energy_value";
     private static final String CATEGORY_PLAYER_KNOWLEDGE = "general.player_knowledge";
+    private static final String CATEGORY_DEBUG = "general.debug";
     private static final String CATEGORY_SERVER = "general.server";
 
     public static void init(File configFile) {
@@ -51,6 +52,13 @@ public class ConfigurationHandler {
                 I18n.translateToLocal(Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT),
                 Settings.USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL);
 
+        Settings.debugEnabled = configuration.getBoolean(
+                Settings.DEBUG_ENABLED_NAME,
+                CATEGORY_DEBUG,
+                Settings.DEBUG_ENABLED_DEFAULT,
+                I18n.translateToLocal(Settings.DEBUG_ENABLED_COMMENT),
+                Settings.DEBUG_ENABLED_LABEL);
+
         if (configuration.hasChanged()) {
             configuration.save();
         }
@@ -86,5 +94,11 @@ public class ConfigurationHandler {
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_LABEL = "player_knowledge.use_template.label";
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_COMMENT = "player_knowledge.use_template.comment";
         private static final boolean USE_PLAYER_KNOWLEDGE_TEMPLATE_DEFAULT = true;
+
+        public static boolean debugEnabled;
+        private static final String DEBUG_ENABLED_NAME = "enabled";
+        private static final String DEBUG_ENABLED_LABEL = "debug.enabled.label";
+        private static final String DEBUG_ENABLED_COMMENT = "debug.enabled.comment";
+        private static final boolean DEBUG_ENABLED_DEFAULT = false;
     }
 }

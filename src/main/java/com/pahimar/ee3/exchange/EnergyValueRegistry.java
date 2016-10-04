@@ -659,7 +659,7 @@ public class EnergyValueRegistry {
                         if (computedOutputValue != null && computedOutputValue.compareTo(currentOutputValue) < 0) {
 
                             unComputedStacks.remove(unitWrappedStack);
-                            LogHelper.info(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, unitWrappedStack, recipeInputs, recipeOutput);
+                            LogHelper.debug(ENERGY_VALUE_MARKER, "Pass {}: Calculated value {} for object {} with recipe inputs {} and output {}", passNumber, computedOutputValue, unitWrappedStack, recipeInputs, recipeOutput);
                             tempComputedMap.put(unitWrappedStack, computedOutputValue);
                         }
                         else if (computedOutputValue != null) {
@@ -677,7 +677,7 @@ public class EnergyValueRegistry {
 
         unComputedStacks.stream()
                 .filter(unComputedStack -> getEnergyValue(computedMap, unComputedStack, false) == null)
-                .forEach(unComputedStack -> LogHelper.info(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", unComputedStack));
+                .forEach(unComputedStack -> LogHelper.debug(ENERGY_VALUE_MARKER, "Unable to compute an energy value for {}", unComputedStack));
 
         return computedMap;
     }

@@ -15,10 +15,15 @@ player_knowledge=Player Knowledge Options
 player_knowledge.use_template.label=Use Knowledge Template
 player_knowledge.use_template.comment=Whether or not to use the player knowledge template. The template allows players to start with some items already researched
 
-# Server Options
+# Configuration (Server Options)
 server=Server Options
 server.sync_threshold.label=Sync Threshold
 server.sync_threshold.comment=The number of seconds a player must wait before they can sync their energy values for objects with the server again
+
+# Configuration (Debug Options)
+debug=Debug Options
+debug.enabled.label=Debug Enabled
+debug.enabled.comment=Whether or not extra debug related information should be added to log files
 
 # Keys
 key.categories.ee3=Equivalent Exchange 3
