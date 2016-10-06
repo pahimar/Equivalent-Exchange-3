@@ -36,12 +36,12 @@ public class ItemTooltipEventHandler {
             if (energyValue != null && (BlacklistRegistryProxy.isExchangeable(wrappedItemStack) || BlacklistRegistryProxy.isLearnable(wrappedItemStack))) {
 
                 if (wrappedItemStack.getStackSize() > 1) {
-                    event.getToolTip().add(String.format("Exchange Energy (Item): %s", energyValue)); // TODO Localize
-                    event.getToolTip().add(String.format("Exchange Energy (Stack of %s): %s", event.getItemStack().stackSize, stackEnergyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("\u00A7aEMC Value (Item)\u00A7a: %s", energyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("\u00A7aEMC Value (Stack of %s)\u00A7a: %s", event.getItemStack().stackSize, stackEnergyValue)); // TODO Localize
                 }
                 else {
 
-                    event.getToolTip().add(String.format("Exchange Energy: %s", stackEnergyValue)); // TODO Localize
+                    event.getToolTip().add(String.format("\u00A7aEMC Value: %s\u00A7a", stackEnergyValue)); // TODO Localize
 
                     // TODO Move away from deprecated FluidContainerRegistry
                     if (FluidContainerRegistry.getFluidForFilledItem(event.getItemStack()) != null) {

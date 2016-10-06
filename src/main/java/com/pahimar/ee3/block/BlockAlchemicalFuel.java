@@ -57,7 +57,7 @@ public class BlockAlchemicalFuel extends BlockEnumEE {
         MOBIUS_FUEL,
         AETERNALIS_FUEL;
 
-        private final int meta;
+        private int meta;
         protected static final FuelVariant[] VARIANTS = values();
 
         FuelVariant() {
