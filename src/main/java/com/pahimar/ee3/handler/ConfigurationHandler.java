@@ -37,6 +37,13 @@ public class ConfigurationHandler {
                 I18n.translateToLocal(Settings.SERVER_SYNC_THRESHOLD_COMMENT),
                 Settings.SERVER_SYNC_THRESHOLD_LABEL);
 
+        Settings.requireShiftToDisplayExtra = configuration.getBoolean(
+                Settings.SHIFT_DISPLAYS_ENERGY_VALUE_NAME,
+                CATEGORY_ENERGY_VALUE,
+                Settings.SHIFT_DISPLAYS_ENERGY_VALUE_DEFAULT,
+                I18n.translateToLocal(Settings.SHIFT_DISPLAYS_ENERGY_VALUE_COMMENT),
+                Settings.SHIFT_DISPLAYS_ENERGY_VALUE_LABEL);
+
         Settings.regenerateEnergyValuesWhen = ConfigurationUtils.getString(configuration,
                 Settings.ENERGY_VALUE_REGENERATE_WHEN_NAME,
                 CATEGORY_ENERGY_VALUE,
@@ -88,6 +95,12 @@ public class ConfigurationHandler {
         private static final String ENERGY_VALUE_REGENERATE_WHEN_COMMENT = "energy_value.regenerate_values_when.comment";
         private static final String ENERGY_VALUE_REGENERATE_WHEN_DEFAULT = "As Needed";
         private static final String[] ENERGY_VALUE_REGENERATE_WHEN_OPTIONS = new String[]{"As Needed", "Always"};
+
+        public static boolean requireShiftToDisplayExtra;
+        private static final String SHIFT_DISPLAYS_ENERGY_VALUE_NAME = "hold_shift_to_display_emc_value";
+        private static final String SHIFT_DISPLAYS_ENERGY_VALUE_LABEL = "energy_value.hold_shift_to_display_emc_value.label";
+        private static final String SHIFT_DISPLAYS_ENERGY_VALUE_COMMENT = "energy_value.hold_shift_to_display_emc_value.comment";
+        private static final boolean SHIFT_DISPLAYS_ENERGY_VALUE_DEFAULT = true;
 
         public static boolean playerKnowledgeTemplateEnabled;
         private static final String USE_PLAYER_KNOWLEDGE_TEMPLATE_NAME = "use_template";
