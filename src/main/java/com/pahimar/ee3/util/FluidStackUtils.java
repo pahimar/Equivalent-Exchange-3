@@ -3,9 +3,23 @@ package com.pahimar.ee3.util;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nullable;
 import java.util.Comparator;
 
 public class FluidStackUtils {
+
+    @Nullable
+    public static FluidStack clone(FluidStack fluidStack, int amount) {
+
+        if (fluidStack != null) {
+            FluidStack clonedFluidStack = fluidStack.copy();
+            clonedFluidStack.amount = amount;
+            return clonedFluidStack;
+        }
+        else {
+            return null;
+        }
+    }
 
     public static final Comparator<FluidStack> COMPARATOR = (fluidStack1, fluidStack2) -> {
 

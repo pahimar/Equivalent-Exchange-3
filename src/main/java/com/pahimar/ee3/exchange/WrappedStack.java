@@ -34,21 +34,11 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             object = new FluidStack((Fluid) object, 1000);
         }
 
-        if (object instanceof ItemStack) {
-
-            if (((ItemStack) object).getItem() != null) {
-
-                stackSize = ((ItemStack) object).stackSize;
-                wrappedObject = ItemStackUtils.clone((ItemStack) object, 1);
-            }
-            else {
-
-                stackSize = -1;
-                wrappedObject = null;
-            }
+        if (object instanceof ItemStack && ((ItemStack) object).getItem() != null) {
+            stackSize = ((ItemStack) object).stackSize;
+            wrappedObject = ItemStackUtils.clone((ItemStack) object, 1);
         }
         else if (object instanceof OreStack) {
-
             stackSize = ((OreStack) object).getStackSize();
             wrappedObject = OreStack.copy((OreStack) object, 1);
         }
@@ -77,20 +67,23 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         else if (object instanceof WrappedStack) {
 
             WrappedStack wrappedStackObject = (WrappedStack) object;
+            this.stackSize = wrappedStackObject.stackSize;
 
-            if (wrappedStackObject.getObject() != null) {
-
-                this.stackSize = wrappedStackObject.stackSize;
-                this.wrappedObject = wrappedStackObject.wrappedObject;
+            if (wrappedStackObject.getObject() instanceof ItemStack) {
+                this.wrappedObject = ItemStackUtils.clone((ItemStack) wrappedStackObject.wrappedObject, 1);
+            }
+            else if (wrappedStackObject.getObject() instanceof OreStack) {
+                this.wrappedObject = OreStack.copy((OreStack) wrappedStackObject.wrappedObject, 1);
+            }
+            else if (wrappedStackObject.getObject() instanceof FluidStack) {
+                this.wrappedObject = FluidStackUtils.clone((FluidStack) wrappedStackObject.wrappedObject, 1);
             }
             else {
-
                 stackSize = -1;
                 wrappedObject = null;
             }
         }
         else {
-
             stackSize = -1;
             wrappedObject = null;
         }
@@ -99,25 +92,20 @@ public final class WrappedStack implements Comparable<WrappedStack> {
     private WrappedStack(Object object, int stackSize) {
 
         if (object instanceof Item) {
-
             object = new ItemStack((Item) object);
         }
         else if (object instanceof Block) {
-
             object = new ItemStack((Block) object);
         }
         else if (object instanceof Fluid) {
-
             object = new FluidStack((Fluid) object, 1000);
         }
 
         if (object instanceof ItemStack) {
-
             this.stackSize = stackSize;
             wrappedObject = ItemStackUtils.clone((ItemStack) object, 1);
         }
         else if (object instanceof OreStack) {
-
             this.stackSize = stackSize;
             wrappedObject = OreStack.copy((OreStack) object, 1);
         }
@@ -126,12 +114,10 @@ public final class WrappedStack implements Comparable<WrappedStack> {
             OreStack possibleOreStack = OreStack.getOreStackFrom((List<?>) object);
 
             if (possibleOreStack != null) {
-
                 this.stackSize = stackSize;
                 wrappedObject = OreStack.copy(possibleOreStack, 1);
             }
             else {
-
                 this.stackSize = -1;
                 wrappedObject = null;
             }
@@ -147,13 +133,18 @@ public final class WrappedStack implements Comparable<WrappedStack> {
 
             WrappedStack wrappedStackObject = (WrappedStack) object;
 
-            if (wrappedStackObject.getObject() != null) {
+            this.stackSize = stackSize;
 
-                this.stackSize = stackSize;
-                this.wrappedObject = wrappedStackObject.wrappedObject;
+            if (wrappedStackObject.getObject() instanceof ItemStack) {
+                this.wrappedObject = ItemStackUtils.clone((ItemStack) wrappedStackObject.wrappedObject, 1);
+            }
+            else if (wrappedStackObject.getObject() instanceof OreStack) {
+                this.wrappedObject = OreStack.copy((OreStack) wrappedStackObject.wrappedObject, 1);
+            }
+            else if (wrappedStackObject.getObject() instanceof FluidStack) {
+                this.wrappedObject = FluidStackUtils.clone((FluidStack) wrappedStackObject.wrappedObject, 1);
             }
             else {
-
                 this.stackSize = -1;
                 wrappedObject = null;
             }
@@ -177,20 +168,14 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         else if (object instanceof Item || object instanceof Block) {
             return true;
         }
-        else if (object instanceof ItemStack) {
-
-            if (((ItemStack) object).getItem() != null) {
-                return true;
-            }
+        else if (object instanceof ItemStack && ((ItemStack) object).getItem() != null) {
+            return true;
         }
         else if (object instanceof OreStack) {
             return true;
         }
-        else if (object instanceof List) {
-
-            if (OreStack.getOreStackFrom((List<?>) object) != null) {
-                return true;
-            }
+        else if (object instanceof List && OreStack.getOreStackFrom((List<?>) object) != null) {
+            return true;
         }
         else if (object instanceof Fluid || object instanceof FluidStack) {
             return true;
@@ -282,78 +267,74 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         }
     }
 
-    public static final Comparator<WrappedStack> COMPARATOR = new Comparator<WrappedStack>() {
+    public static final Comparator<WrappedStack> COMPARATOR = (wrappedStack1, wrappedStack2) -> {
 
-        @Override
-        public int compare(WrappedStack wrappedStack1, WrappedStack wrappedStack2) {
+        if (wrappedStack1.wrappedObject instanceof ItemStack) {
 
-            if (wrappedStack1.wrappedObject instanceof ItemStack) {
+            if (wrappedStack2.wrappedObject instanceof ItemStack) {
 
-                if (wrappedStack2.wrappedObject instanceof ItemStack) {
+                int compareResult = ItemStackUtils.compare((ItemStack) wrappedStack1.wrappedObject, (ItemStack) wrappedStack2.wrappedObject);
 
-                    int compareResult = ItemStackUtils.compare((ItemStack) wrappedStack1.wrappedObject, (ItemStack) wrappedStack2.wrappedObject);
-
-                    if (compareResult == 0) {
-                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
-                    }
-                    else {
-                        return compareResult;
-                    }
+                if (compareResult == 0) {
+                    return wrappedStack1.stackSize - wrappedStack2.stackSize;
                 }
                 else {
-                    return 1;
+                    return compareResult;
                 }
             }
-            else if (wrappedStack1.wrappedObject instanceof OreStack) {
-
-                if (wrappedStack2.wrappedObject instanceof ItemStack) {
-                    return -1;
-                }
-                else if (wrappedStack2.wrappedObject instanceof OreStack) {
-
-                    int compareResult = OreStack.compare((OreStack) wrappedStack1.wrappedObject, (OreStack) wrappedStack2.wrappedObject);
-
-                    if (compareResult == 0) {
-                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
-                    }
-                    else {
-                        return compareResult;
-                    }
-                }
-                else {
-                    return 1;
-                }
+            else {
+                return 1;
             }
-            else if (wrappedStack1.wrappedObject instanceof FluidStack) {
-
-                if (wrappedStack2.wrappedObject instanceof ItemStack || wrappedStack2.wrappedObject instanceof OreStack) {
-                    return -1;
-                }
-                else if (wrappedStack2.wrappedObject instanceof FluidStack) {
-
-                    int compareResult = FluidStackUtils.compare((FluidStack) wrappedStack1.wrappedObject, (FluidStack) wrappedStack2.wrappedObject);
-
-                    if (compareResult == 0) {
-                        return wrappedStack1.stackSize - wrappedStack2.stackSize;
-                    }
-                    else {
-                        return compareResult;
-                    }
-                }
-                else {
-                    return 1;
-                }
-            }
-            else if (wrappedStack1.wrappedObject == null) {
-                if (wrappedStack2.wrappedObject != null) {
-                    return -1;
-                }
-                else {
-                    return 0;
-                }
-            }
-
-            return 0;
         }
+        else if (wrappedStack1.wrappedObject instanceof OreStack) {
+
+            if (wrappedStack2.wrappedObject instanceof ItemStack) {
+                return -1;
+            }
+            else if (wrappedStack2.wrappedObject instanceof OreStack) {
+
+                int compareResult = OreStack.compare((OreStack) wrappedStack1.wrappedObject, (OreStack) wrappedStack2.wrappedObject);
+
+                if (compareResult == 0) {
+                    return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                }
+                else {
+                    return compareResult;
+                }
+            }
+            else {
+                return 1;
+            }
+        }
+        else if (wrappedStack1.wrappedObject instanceof FluidStack) {
+
+            if (wrappedStack2.wrappedObject instanceof ItemStack || wrappedStack2.wrappedObject instanceof OreStack) {
+                return -1;
+            }
+            else if (wrappedStack2.wrappedObject instanceof FluidStack) {
+
+                int compareResult = FluidStackUtils.compare((FluidStack) wrappedStack1.wrappedObject, (FluidStack) wrappedStack2.wrappedObject);
+
+                if (compareResult == 0) {
+                    return wrappedStack1.stackSize - wrappedStack2.stackSize;
+                }
+                else {
+                    return compareResult;
+                }
+            }
+            else {
+                return 1;
+            }
+        }
+        else if (wrappedStack1.wrappedObject == null) {
+            if (wrappedStack2.wrappedObject != null) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        return 0;
     };
 }
