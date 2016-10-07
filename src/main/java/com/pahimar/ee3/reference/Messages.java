@@ -20,9 +20,12 @@ public final class Messages {
 
         private static final String TOOLTIP_PREFIX = "tooltip.ee3:";
 
+        public static final String ENERGY_VALUE = TOOLTIP_PREFIX + "energy_value";
+        public static final String NO_ENERGY_VALUE = TOOLTIP_PREFIX + "no_energy_value";
+        public static final String ITEM_BELONGS_TO = TOOLTIP_PREFIX + "belongs_to";
+        public static final String ITEM_BELONGS_TO_NO_ONE = TOOLTIP_PREFIX + "belongs_to_no_one";
+
         public static final String UPGRADES_CHESTS = TOOLTIP_PREFIX + "upgradesPrefix";
-        public static final String ITEM_BELONGS_TO = TOOLTIP_PREFIX + "belongsTo";
-        public static final String ITEM_BELONGS_TO_NO_ONE = TOOLTIP_PREFIX + "belongsToNoOne";
         public static final String SMALL = TOOLTIP_PREFIX + "small";
         public static final String MEDIUM = TOOLTIP_PREFIX + "medium";
         public static final String LARGE = TOOLTIP_PREFIX + "large";

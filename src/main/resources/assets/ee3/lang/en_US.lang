@@ -162,6 +162,8 @@ commands.ee3.run-tests.notfound=Test file '%s' was not found!
 commands.ee3.run-tests.dir-notfound=Test directory was not found!
 
 # Tooltips
+tooltip.ee3:energy_value=EMC Value
+tooltip.ee3:no_energy_value=No EMC Value
 tooltip.ee3:belongs_to=Belongs to %s
 tooltip.ee3:belongs_to_no_one=Belongs to no one
 tooltip.ee3:sort_by_name=Sort by Name
