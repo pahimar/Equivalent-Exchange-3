@@ -13,15 +13,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockEE extends Block {
+public abstract class BlockBase extends Block {
 
     private final String BASE_NAME;
 
-    public BlockEE(String name) {
+    public BlockBase(String name) {
         this(name, Material.ROCK);
     }
 
-    public BlockEE(String name, Material material) {
+    public BlockBase(String name, Material material) {
         super(material);
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -40,7 +40,7 @@ public class BlockEE extends Block {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString()));
     }
 
-    public static ItemBlock getItemBlockFor(BlockEE blockEE) {
-        return blockEE instanceof BlockEnumEE ? new ItemBlockEnumEE((BlockEnumEE) blockEE) : new ItemBlock(blockEE);
+    public static ItemBlock getItemBlockFor(BlockBase blockBase) {
+        return blockBase instanceof BlockEnum ? new ItemBlockEnumEE((BlockEnum) blockBase) : new ItemBlock(blockBase);
     }
 }

@@ -10,16 +10,16 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockEnumEE extends BlockEE {
+public abstract class BlockEnum extends BlockBase {
 
     private boolean hasSubtypes;
     private final IEnumMeta[] VARIANTS;
 
-    public BlockEnumEE(String name, IEnumMeta[] variants) {
+    public BlockEnum(String name, IEnumMeta[] variants) {
         this(name, Material.ROCK, variants);
     }
 
-    public BlockEnumEE(String name, Material material, IEnumMeta[] variants) {
+    public BlockEnum(String name, Material material, IEnumMeta[] variants) {
         super(name, material);
         hasSubtypes = false;
         if (variants.length > 0) {
@@ -39,7 +39,7 @@ public abstract class BlockEnumEE extends BlockEE {
     }
 
     public String getUnlocalizedName(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem() != null && Block.getBlockFromItem(itemStack.getItem()) instanceof BlockEE) {
+        if (itemStack != null && itemStack.getItem() != null && Block.getBlockFromItem(itemStack.getItem()) instanceof BlockBase) {
             if (getHasSubtypes() && VARIANTS.length > 0) {
                 return String.format("tile.%s:%s", EquivalentExchange3.MOD_ID, VARIANTS[Math.abs(itemStack.getMetadata() % VARIANTS.length)].getName());
             }

@@ -1,14 +1,14 @@
 package com.pahimar.ee3.item.base;
 
-import com.pahimar.ee3.block.base.BlockEnumEE;
+import com.pahimar.ee3.block.base.BlockEnum;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockEnumEE extends ItemBlock {
 
-    protected final BlockEnumEE block;
+    protected final BlockEnum block;
 
-    public ItemBlockEnumEE(BlockEnumEE block) {
+    public ItemBlockEnumEE(BlockEnum block) {
         super(block);
         this.block = block;
         this.setMaxDamage(0);

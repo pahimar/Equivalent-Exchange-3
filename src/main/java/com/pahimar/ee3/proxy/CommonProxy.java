@@ -2,7 +2,7 @@ package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.blacklist.BlacklistRegistry;
-import com.pahimar.ee3.block.base.BlockEE;
+import com.pahimar.ee3.block.base.BlockBase;
 import com.pahimar.ee3.command.CommandEE;
 import com.pahimar.ee3.exchange.EnergyValueRegistry;
 import com.pahimar.ee3.handler.*;
@@ -28,9 +28,9 @@ public abstract class CommonProxy implements IProxy {
         Network.init();
         ModItems.getItems().forEach(GameRegistry::register);
 
-        for (BlockEE blockEE : ModBlocks.getBlocks()) {
-            GameRegistry.register(blockEE);
-            GameRegistry.register(BlockEE.getItemBlockFor(blockEE), blockEE.getRegistryName());
+        for (BlockBase blockBase : ModBlocks.getBlocks()) {
+            GameRegistry.register(blockBase);
+            GameRegistry.register(BlockBase.getItemBlockFor(blockBase), blockBase.getRegistryName());
         }
         EnergyValues.init();
         AlchemyArrays.init();
