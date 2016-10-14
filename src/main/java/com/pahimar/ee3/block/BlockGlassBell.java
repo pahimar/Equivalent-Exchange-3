@@ -15,8 +15,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGlassBell extends BlockDirectional {
 
-    protected static final AxisAlignedBB AABB_FACING_UP = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.66D, 0.875D);
-    protected static final AxisAlignedBB AABB_FACING_DOWN = new AxisAlignedBB(0.125D, 0.33D, 0.125D, 0.875D, 1.0D, 0.875D);
+    private static final AxisAlignedBB AABB_FACING_UP = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.66D, 0.875D);
+    private static final AxisAlignedBB AABB_FACING_DOWN = new AxisAlignedBB(0.125D, 0.33D, 0.125D, 0.875D, 1.0D, 0.875D);
+    private static final AxisAlignedBB AABB_FACING_NORTH = new AxisAlignedBB(0.125F, 0.125F, 0.33F, 0.875F, 0.875F, 1.0F);
+    private static final AxisAlignedBB AABB_FACING_SOUTH = new AxisAlignedBB(0.125F, 0.125F, 0.0F, 0.875F, 0.875F, 0.66F);
+    private static final AxisAlignedBB AABB_FACING_EAST = new AxisAlignedBB(0.0F, 0.125F, 0.125F, 0.66F, 0.875F, 0.875F);
+    private static final AxisAlignedBB AABB_FACING_WEST = new AxisAlignedBB(0.33F, 0.125F, 0.125F, 1.0F, 0.875F, 0.875F);
 
     public BlockGlassBell() {
         super("glass_bell");
@@ -24,7 +28,7 @@ public class BlockGlassBell extends BlockDirectional {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos blockPos, EnumFacing side) {
         return false;
     }
 
@@ -57,8 +61,21 @@ public class BlockGlassBell extends BlockDirectional {
         else if (state.getValue(FACING) == EnumFacing.DOWN) {
             return AABB_FACING_DOWN;
         }
-
-        return AABB_FACING_UP;
+        else if (state.getValue(FACING) == EnumFacing.NORTH) {
+            return AABB_FACING_NORTH;
+        }
+        else if (state.getValue(FACING) == EnumFacing.SOUTH) {
+            return AABB_FACING_SOUTH;
+        }
+        else if (state.getValue(FACING) == EnumFacing.EAST) {
+            return AABB_FACING_EAST;
+        }
+        else if (state.getValue(FACING) == EnumFacing.WEST) {
+            return AABB_FACING_WEST;
+        }
+        else {
+            return FULL_BLOCK_AABB;
+        }
     }
 
     @Override
