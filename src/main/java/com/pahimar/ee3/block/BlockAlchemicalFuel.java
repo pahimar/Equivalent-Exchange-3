@@ -1,6 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.block.base.BlockEnum;
+import com.pahimar.ee3.block.base.BlockEnumBase;
 import com.pahimar.ee3.block.base.IEnumMeta;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,13 +13,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockAlchemicalFuel extends BlockEnum {
+public class BlockAlchemicalFuel extends BlockEnumBase {
 
     public static final PropertyEnum<FuelVariant> VARIANT = PropertyEnum.create("variant", FuelVariant.class);
 
     public BlockAlchemicalFuel() {
         super("alchemical_fuel_block", FuelVariant.VARIANTS);
-        setHasSubtypes(true);
         setDefaultState(getDefaultState().withProperty(VARIANT, FuelVariant.ALCHEMICAL_COAL));
     }
 

@@ -3,25 +3,25 @@ package com.pahimar.ee3.block.base;
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.creativetab.CreativeTab;
 import com.pahimar.ee3.init.ModBlocks;
-import com.pahimar.ee3.item.base.ItemBlockEnumEE;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockBase extends Block implements IBlockEE {
+public abstract class BlockContainerBase extends BlockContainer implements IBlockEE {
 
     private final String BASE_NAME;
 
-    public BlockBase(String name) {
+    public BlockContainerBase(String name) {
         this(name, Material.ROCK);
     }
 
-    public BlockBase(String name, Material material) {
+    public BlockContainerBase(String name, Material material) {
         super(material);
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -40,7 +40,8 @@ public abstract class BlockBase extends Block implements IBlockEE {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString()));
     }
 
-    public static ItemBlock getItemBlockFor(Block block) {
-        return block instanceof BlockEnumBase ? new ItemBlockEnumEE((BlockEnumBase) block) : new ItemBlock(block);
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 }

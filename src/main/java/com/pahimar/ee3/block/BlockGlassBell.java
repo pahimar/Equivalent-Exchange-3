@@ -1,9 +1,11 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.block.base.BlockDirectional;
+import com.pahimar.ee3.block.base.BlockContainerBase;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -13,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGlassBell extends BlockDirectional {
+public class BlockGlassBell extends BlockContainerBase {
 
     private static final AxisAlignedBB AABB_FACING_UP = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.66D, 0.875D);
     private static final AxisAlignedBB AABB_FACING_DOWN = new AxisAlignedBB(0.125D, 0.33D, 0.125D, 0.875D, 1.0D, 0.875D);
@@ -22,8 +24,26 @@ public class BlockGlassBell extends BlockDirectional {
     private static final AxisAlignedBB AABB_FACING_EAST = new AxisAlignedBB(0.0F, 0.125F, 0.125F, 0.66F, 0.875F, 0.875F);
     private static final AxisAlignedBB AABB_FACING_WEST = new AxisAlignedBB(0.33F, 0.125F, 0.125F, 1.0F, 0.875F, 0.875F);
 
+    public static final PropertyDirection FACING = PropertyDirection.create("facing");
+
     public BlockGlassBell() {
         super("glass_bell");
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 
     @Override
@@ -79,12 +99,18 @@ public class BlockGlassBell extends BlockDirectional {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos blockPos, IBlockState state, EntityLivingBase entity, ItemStack itemStack) {
-        // NO-OP
-    }
-
-    @Override
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return this.getDefaultState().withProperty(FACING, facing);
+    }
+
+    /**
+     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     *
+     * @param worldIn
+     * @param meta
+     */
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return null; // TODO
     }
 }

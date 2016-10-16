@@ -2,7 +2,10 @@ package com.pahimar.ee3.util;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 
 public class EntityUtils {
 
@@ -32,5 +35,9 @@ public class EntityUtils {
         if (entity != null) {
             entity.getEntityData().setTag(EquivalentExchange3.MOD_ID, nbtTagCompound);
         }
+    }
+
+    public static EnumFacing getFacingFromEntity(BlockPos blockPos, EntityLivingBase entity) {
+        return EnumFacing.getFacingFromVector((float) (entity.posX - blockPos.getX()), (float) (entity.posY - blockPos.getY()), (float) (entity.posZ - blockPos.getZ()));
     }
 }

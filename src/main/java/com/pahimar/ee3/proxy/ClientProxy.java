@@ -1,7 +1,7 @@
 package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.block.base.BlockBase;
+import com.pahimar.ee3.block.base.IBlockEE;
 import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.settings.Keybindings;
@@ -36,8 +36,9 @@ public class ClientProxy extends CommonProxy {
 
         // Initialize models and textures
         ModItems.getItems().forEach(ItemEE::initModelsAndVariants);
-        ModBlocks.getBlocks().forEach(BlockBase::initModelsAndVariants);
-//        ModelBakery.registerItemVariants(Item.getItemFromBlock(ModBlocks.ALCHEMICAL_FUEL), ResourceLocationHelper.getModelResourceLocation("alchemical_coal"));
+        ModBlocks.getBlocks().stream()
+                .filter(block -> block instanceof IBlockEE)
+                .forEach(block -> ((IBlockEE) block).initModelsAndVariants());
         OBJLoader.INSTANCE.addDomain(EquivalentExchange3.MOD_ID);
 
         // Register keybindings

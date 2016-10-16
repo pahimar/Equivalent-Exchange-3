@@ -10,18 +10,16 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockEnum extends BlockBase {
+public abstract class BlockEnumBase extends BlockBase {
 
-    private boolean hasSubtypes;
     private final IEnumMeta[] VARIANTS;
 
-    public BlockEnum(String name, IEnumMeta[] variants) {
+    public BlockEnumBase(String name, IEnumMeta[] variants) {
         this(name, Material.ROCK, variants);
     }
 
-    public BlockEnum(String name, Material material, IEnumMeta[] variants) {
+    public BlockEnumBase(String name, Material material, IEnumMeta[] variants) {
         super(name, material);
-        hasSubtypes = false;
         if (variants.length > 0) {
             VARIANTS = variants;
         }
@@ -30,17 +28,9 @@ public abstract class BlockEnum extends BlockBase {
         }
     }
 
-    public boolean getHasSubtypes() {
-        return hasSubtypes;
-    }
-
-    public void setHasSubtypes(boolean hasSubtypes) {
-        this.hasSubtypes = hasSubtypes;
-    }
-
     public String getUnlocalizedName(ItemStack itemStack) {
         if (itemStack != null && itemStack.getItem() != null && Block.getBlockFromItem(itemStack.getItem()) instanceof BlockBase) {
-            if (getHasSubtypes() && VARIANTS.length > 0) {
+            if (VARIANTS.length > 0) {
                 return String.format("tile.%s:%s", EquivalentExchange3.MOD_ID, VARIANTS[Math.abs(itemStack.getMetadata() % VARIANTS.length)].getName());
             }
         }
@@ -52,7 +42,7 @@ public abstract class BlockEnum extends BlockBase {
     public void initModelsAndVariants() {
 
         if (Item.getItemFromBlock(this) != null) {
-            if (getHasSubtypes() && VARIANTS.length > 0) {
+            if (VARIANTS.length > 0) {
                 for (IEnumMeta variant : VARIANTS) {
                     ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), variant.getMeta(), new ModelResourceLocation(getRegistryName(), "variant=" + variant.getName()));
                 }

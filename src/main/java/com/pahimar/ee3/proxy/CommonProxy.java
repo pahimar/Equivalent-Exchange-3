@@ -13,6 +13,7 @@ import com.pahimar.ee3.reference.Files;
 import com.pahimar.ee3.test.EETestSuite;
 import com.pahimar.ee3.test.VanillaTestSuite;
 import com.pahimar.ee3.util.FluidHelper;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -28,9 +29,9 @@ public abstract class CommonProxy implements IProxy {
         Network.init();
         ModItems.getItems().forEach(GameRegistry::register);
 
-        for (BlockBase blockBase : ModBlocks.getBlocks()) {
-            GameRegistry.register(blockBase);
-            GameRegistry.register(BlockBase.getItemBlockFor(blockBase), blockBase.getRegistryName());
+        for (Block block : ModBlocks.getBlocks()) {
+            GameRegistry.register(block);
+            GameRegistry.register(BlockBase.getItemBlockFor(block), block.getRegistryName());
         }
         EnergyValues.init();
         AlchemyArrays.init();
