@@ -51,6 +51,15 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
         }
     }
 
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
+    }
+
+    @Override
+    public void update() {
+        // NO-OP
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
 

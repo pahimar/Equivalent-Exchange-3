@@ -1,6 +1,7 @@
 package com.pahimar.ee3.block;
 
 import com.pahimar.ee3.block.base.BlockContainerBase;
+import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -103,14 +104,8 @@ public class BlockGlassBell extends BlockContainerBase {
         return this.getDefaultState().withProperty(FACING, facing);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     *
-     * @param worldIn
-     * @param meta
-     */
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null; // TODO
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileEntityGlassBell();
     }
 }
