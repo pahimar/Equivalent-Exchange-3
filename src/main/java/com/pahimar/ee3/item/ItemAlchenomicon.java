@@ -1,7 +1,7 @@
 package com.pahimar.ee3.item;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.item.base.ItemEE;
+import com.pahimar.ee3.item.base.ItemBase;
 import com.pahimar.ee3.reference.GUIs;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.util.ItemStackUtils;
@@ -13,7 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class ItemAlchenomicon extends ItemEE {
+public class ItemAlchenomicon extends ItemBase {
 
     public ItemAlchenomicon() {
         super("alchenomicon");

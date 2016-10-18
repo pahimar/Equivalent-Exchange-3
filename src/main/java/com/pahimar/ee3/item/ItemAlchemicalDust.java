@@ -1,13 +1,13 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.item.base.ItemEE;
+import com.pahimar.ee3.item.base.ItemBase;
 import com.pahimar.ee3.reference.Colors;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemAlchemicalDust extends ItemEE implements IItemColor {
+public class ItemAlchemicalDust extends ItemBase implements IItemColor {
 
     public ItemAlchemicalDust() {
         super("alchemical_dust", "ash", "minium_dust");

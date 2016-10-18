@@ -1,14 +1,14 @@
 package com.pahimar.ee3.proxy;
 
 import com.pahimar.ee3.EquivalentExchange3;
-import com.pahimar.ee3.block.base.IBlockEE;
+import com.pahimar.ee3.block.base.BlockBase;
 import com.pahimar.ee3.client.handler.ItemTooltipEventHandler;
 import com.pahimar.ee3.client.handler.KeyInputEventHandler;
 import com.pahimar.ee3.client.settings.Keybindings;
 import com.pahimar.ee3.client.util.ClientParticleHelper;
 import com.pahimar.ee3.init.ModBlocks;
 import com.pahimar.ee3.init.ModItems;
-import com.pahimar.ee3.item.base.ItemEE;
+import com.pahimar.ee3.item.base.ItemBase;
 import com.pahimar.ee3.settings.ChalkSettings;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.util.EnumParticleTypes;
@@ -35,10 +35,8 @@ public class ClientProxy extends CommonProxy {
         super.onPreInit(event);
 
         // Initialize models and textures
-        ModItems.getItems().forEach(ItemEE::initModelsAndVariants);
-        ModBlocks.getBlocks().stream()
-                .filter(block -> block instanceof IBlockEE)
-                .forEach(block -> ((IBlockEE) block).initModelsAndVariants());
+        ModItems.getItems().forEach(ItemBase::initModelsAndVariants);
+        ModBlocks.getBlocks().forEach(BlockBase::initModelsAndVariants);
         OBJLoader.INSTANCE.addDomain(EquivalentExchange3.MOD_ID);
 
         // Register keybindings

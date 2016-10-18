@@ -1,6 +1,6 @@
 package com.pahimar.ee3.item;
 
-import com.pahimar.ee3.item.base.ItemEE;
+import com.pahimar.ee3.item.base.ItemBase;
 import com.pahimar.ee3.reference.Messages;
 import com.pahimar.ee3.reference.Names;
 import com.pahimar.ee3.util.IOwnable;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemAlchemicalBag extends ItemEE implements IOwnable, IItemColor {
+public class ItemAlchemicalBag extends ItemBase implements IOwnable, IItemColor {
 
     private static final String[] VARIANTS = {"alchemical_bag_closed", "alchemical_bag_open"};
 

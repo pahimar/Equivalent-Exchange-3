@@ -6,7 +6,11 @@
     "model": "ee3:calciner.obj"
   },
   "variants": {
-    "normal": [{}],
+    "normal": [{
+      "transform": {
+        "rotation": { "y": 45 }
+      }
+    }],
     "inventory": [{}]
   }
 }

@@ -1,6 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.block.base.BlockContainerBase;
+import com.pahimar.ee3.block.base.BlockTileEntity;
 import com.pahimar.ee3.tileentity.TileEntityGlassBell;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGlassBell extends BlockContainerBase {
+public class BlockGlassBell extends BlockTileEntity {
 
     private static final AxisAlignedBB AABB_FACING_UP = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.66D, 0.875D);
     private static final AxisAlignedBB AABB_FACING_DOWN = new AxisAlignedBB(0.125D, 0.33D, 0.125D, 0.875D, 1.0D, 0.875D);

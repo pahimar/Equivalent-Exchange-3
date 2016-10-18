@@ -2,7 +2,7 @@ package com.pahimar.ee3.item.base;
 
 import net.minecraft.client.renderer.ItemMeshDefinition;
 
-public interface IItemVariantHolder<T extends ItemEE> {
+public interface IItemVariantHolder<T extends ItemBase> {
 
     T getItem();
 

@@ -11,7 +11,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockBase extends Block implements IBlockEE {
+public abstract class BlockBase extends Block {
 
     private final String BASE_NAME;
 

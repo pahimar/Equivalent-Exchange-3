@@ -16,12 +16,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
+public class ItemBase extends Item implements IItemVariantHolder<ItemBase> {
 
     private final String BASE_NAME;
     private final String[] VARIANTS;
 
-    public ItemEE(String name, String ... variants) {
+    public ItemBase(String name, String ... variants) {
 
         super();
         setRegistryName(name);
@@ -96,7 +96,7 @@ public class ItemEE extends Item implements IItemVariantHolder<ItemEE> {
     }
 
     @Override
-    public ItemEE getItem() {
+    public ItemBase getItem() {
         return this;
     }
 

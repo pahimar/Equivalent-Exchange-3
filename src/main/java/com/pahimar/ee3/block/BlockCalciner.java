@@ -1,6 +1,6 @@
 package com.pahimar.ee3.block;
 
-import com.pahimar.ee3.block.base.BlockContainerBase;
+import com.pahimar.ee3.block.base.BlockTileEntity;
 import com.pahimar.ee3.tileentity.TileEntityCalciner;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCalciner extends BlockContainerBase {
+public class BlockCalciner extends BlockTileEntity {
 
     private static final AxisAlignedBB AABB_CALCINER = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 1.0D, 0.9D);
 

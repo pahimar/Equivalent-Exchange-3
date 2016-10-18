@@ -4,8 +4,7 @@ import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.block.BlockAlchemicalFuel;
 import com.pahimar.ee3.block.BlockCalciner;
 import com.pahimar.ee3.block.BlockGlassBell;
-import com.pahimar.ee3.block.base.IBlockEE;
-import net.minecraft.block.Block;
+import com.pahimar.ee3.block.base.BlockBase;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
@@ -15,21 +14,19 @@ import java.util.List;
 @GameRegistry.ObjectHolder(EquivalentExchange3.MOD_ID)
 public class ModBlocks {
 
-    private static final List<Block> BLOCKS = new ArrayList<>();
+    private static final List<BlockBase> BLOCKS = new ArrayList<>();
 
-    public static final Block CALCINER = new BlockCalciner();
-    public static final Block ALCHEMICAL_FUEL = new BlockAlchemicalFuel();
-    public static final Block GLASS_BELL = new BlockGlassBell();
+    public static final BlockBase CALCINER = new BlockCalciner();
+    public static final BlockBase ALCHEMICAL_FUEL = new BlockAlchemicalFuel();
+    public static final BlockBase GLASS_BELL = new BlockGlassBell();
 
     private ModBlocks() {}
 
-    public static Collection<Block> getBlocks() {
+    public static Collection<BlockBase> getBlocks() {
         return BLOCKS;
     }
 
-    public static void register(Block block) {
-        if (block instanceof IBlockEE) {
-            BLOCKS.add(block);
-        }
+    public static void register(BlockBase block) {
+        BLOCKS.add(block);
     }
 }

@@ -10,15 +10,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockEnumBase extends BlockBase {
+public abstract class BlockEnum extends BlockBase {
 
     private final IEnumMeta[] VARIANTS;
 
-    public BlockEnumBase(String name, IEnumMeta[] variants) {
+    public BlockEnum(String name, IEnumMeta[] variants) {
         this(name, Material.ROCK, variants);
     }
 
-    public BlockEnumBase(String name, Material material, IEnumMeta[] variants) {
+    public BlockEnum(String name, Material material, IEnumMeta[] variants) {
         super(name, material);
         if (variants.length > 0) {
             VARIANTS = variants;
