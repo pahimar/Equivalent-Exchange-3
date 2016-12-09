@@ -13,7 +13,8 @@ import com.pahimar.ee3.util.SerializationHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Marker;
@@ -152,7 +153,7 @@ public class EnergyValueRegistry {
 
                     if (wrappedObject instanceof ItemStack) {
 
-                        ItemStack unValuedItemStack = ItemStack.copyItemStack((ItemStack) wrappedObject);
+                        ItemStack unValuedItemStack = ((ItemStack) wrappedObject).copy();
                         EnergyValue minEnergyValue = null;
 
                         int[] oreIds = OreDictionary.getOreIDs(unValuedItemStack);
@@ -274,18 +275,17 @@ public class EnergyValueRegistry {
                 ItemStack inputItemStack = (ItemStack) wrappedInput.getObject();
 
                 // Check if we are dealing with a potential fluid
-                // TODO Move away from deprecated FluidContainerRegistry
-                if (FluidContainerRegistry.getFluidForFilledItem(inputItemStack) != null) {
-
+                if (FluidUtil.getFluidContained(inputItemStack) != null) {
+                    FluidStack fluidStack = FluidUtil.getFluidContained(inputItemStack);
                     if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
-                        stackSize = FluidContainerRegistry.getFluidForFilledItem(inputItemStack).amount * wrappedInput.getStackSize();
-                        inputValue = getEnergyValue(valueMap, FluidContainerRegistry.getFluidForFilledItem(inputItemStack), false);
+                        stackSize = fluidStack.amount;
+                        inputValue = getEnergyValue(valueMap, fluidStack, false);
                     }
                     else {
                         inputValue = getEnergyValue(valueMap, wrappedInput, false);
                     }
                 }
-                else if (inputItemStack.getItem().getContainerItem(inputItemStack) != null) {
+                else if (inputItemStack.getItem().hasContainerItem(inputItemStack)) {
 
                     ItemStack inputContainerItemStack = inputItemStack.getItem().getContainerItem(inputItemStack);
                     // FIXME There is a bug here, see how cakes value is calculated with a milk bucket

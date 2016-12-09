@@ -38,9 +38,9 @@ public class RecipeAludel
             if (wrappedStack1.getObject() instanceof ItemStack && wrappedStack2.getObject() instanceof ItemStack)
             {
                 ItemStack itemStack1 = (ItemStack) wrappedStack1.getObject();
-                itemStack1.stackSize = wrappedStack1.getStackSize();
+                itemStack1.setCount(wrappedStack1.getStackSize());
                 ItemStack itemStack2 = (ItemStack) wrappedStack2.getObject();
-                itemStack2.stackSize = wrappedStack2.getStackSize();
+                itemStack2.setCount(wrappedStack2.getStackSize());
 
                 return compareItemStacks(itemStack1, itemStack2);
             }
@@ -61,12 +61,12 @@ public class RecipeAludel
                     {
                         if (itemStack1.getTagCompound().hashCode() == itemStack2.getTagCompound().hashCode())
                         {
-                            return itemStack2.stackSize >= itemStack1.stackSize;
+                            return itemStack2.getCount() >= itemStack1.getCount();
                         }
                     }
                     else if (!itemStack1.hasTagCompound() && !itemStack2.hasTagCompound())
                     {
-                        return itemStack2.stackSize >= itemStack1.stackSize;
+                        return itemStack2.getCount() >= itemStack1.getCount();
                     }
                 }
             }

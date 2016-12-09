@@ -28,12 +28,13 @@ public class ItemAlchemicalBag extends ItemBase implements IOwnable, IItemColor 
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityPlayer, EnumHand hand) {
 
         if (!world.isRemote) {
+            ItemStack itemStack = entityPlayer.getHeldItem(hand);
             if (!ItemStackUtils.hasOwner(itemStack)) {
                 ItemStackUtils.setOwner(itemStack, entityPlayer);
-                entityPlayer.addChatComponentMessage(new TextComponentTranslation(Messages.OWNER_SET_TO_SELF, itemStack.getTextComponent()));
+                entityPlayer.sendMessage(new TextComponentTranslation(Messages.OWNER_SET_TO_SELF, itemStack.getTextComponent()));
             }
 
             // Set a UUID on the Alchemical Bag, if one doesn't exist already
@@ -55,7 +56,7 @@ public class ItemAlchemicalBag extends ItemBase implements IOwnable, IItemColor 
 //            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_BAG.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 
-        return new ActionResult<>(EnumActionResult.PASS, itemStack);
+        return new ActionResult<>(EnumActionResult.PASS, entityPlayer.getHeldItem(hand));
     }
 
     @Override

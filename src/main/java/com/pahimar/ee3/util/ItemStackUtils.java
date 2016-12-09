@@ -23,7 +23,7 @@ public class ItemStackUtils {
 
         if (itemStack != null) {
             ItemStack clonedItemStack = itemStack.copy();
-            clonedItemStack.stackSize = stackSize;
+            clonedItemStack.setCount(stackSize);
             return clonedItemStack;
         }
         else {
@@ -75,10 +75,10 @@ public class ItemStackUtils {
 
         if (itemStack != null) {
             if (itemStack.hasTagCompound()) {
-                return String.format("%sxitemStack[%s@%s:%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
+                return String.format("%sxitemStack[%s@%s:%s]", itemStack.getCount(), itemStack.getUnlocalizedName(), itemStack.getItemDamage(), itemStack.getTagCompound());
             }
             else {
-                return String.format("%sxitemStack[%s@%s]", itemStack.stackSize, itemStack.getUnlocalizedName(), itemStack.getItemDamage());
+                return String.format("%sxitemStack[%s@%s]", itemStack.getCount(), itemStack.getUnlocalizedName(), itemStack.getItemDamage());
             }
         }
 

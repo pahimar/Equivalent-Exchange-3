@@ -45,7 +45,7 @@ public class KeyInputEventHandler {
             EntityPlayer entityPlayer = FMLClientHandler.instance().getClientPlayerEntity();
 
             if (entityPlayer.getHeldItemMainhand() != null && entityPlayer.getHeldItemMainhand().getItem() instanceof IKeyBound) {
-                if (entityPlayer.worldObj.isRemote) {
+                if (entityPlayer.getEntityWorld().isRemote) {
                     Network.INSTANCE.sendToServer(new MessageKeyPressed(getPressedKeybinding()));
                 }
                 else {

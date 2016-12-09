@@ -20,19 +20,19 @@ public class ItemAlchenomicon extends ItemBase {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityPlayer, EnumHand hand) {
 
-        if (!world.isRemote)
-        {
+        if (!world.isRemote) {
+            ItemStack itemStack = entityPlayer.getHeldItem(hand);
             if (!ItemStackUtils.hasOwner(itemStack)) {
                 ItemStackUtils.setOwner(itemStack, entityPlayer);
-                entityPlayer.addChatComponentMessage(new TextComponentTranslation(Messages.OWNER_SET_TO_SELF, itemStack.getTextComponent()));
+                entityPlayer.sendMessage(new TextComponentTranslation(Messages.OWNER_SET_TO_SELF, itemStack.getTextComponent()));
             }
             else {
-                entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHENOMICON.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+                entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHENOMICON.ordinal(), entityPlayer.getEntityWorld(), (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
             }
         }
 
-        return new ActionResult(EnumActionResult.SUCCESS, itemStack);
+        return new ActionResult(EnumActionResult.SUCCESS, entityPlayer.getHeldItem(hand));
     }
 }

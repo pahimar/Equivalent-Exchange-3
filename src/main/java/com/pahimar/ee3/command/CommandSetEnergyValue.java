@@ -26,7 +26,7 @@ import java.util.List;
 public class CommandSetEnergyValue extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.SET_ENERGY_VALUE;
     }
 
@@ -36,7 +36,7 @@ public class CommandSetEnergyValue extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.SET_ENERGY_VALUE_USAGE;
     }
 
@@ -106,7 +106,7 @@ public class CommandSetEnergyValue extends CommandBase {
     }
 
     @Override
-    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
+    public List<String> getTabCompletions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
 
         if (args.length == 2) {
             return getListOfStringsMatchingLastWord(args, "pre", "post");

@@ -18,7 +18,7 @@ import java.util.List;
 public class CommandPlayerForgetEverything extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.PLAYER_FORGET_EVERYTHING;
     }
 
@@ -28,7 +28,7 @@ public class CommandPlayerForgetEverything extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.PLAYER_FORGET_EVERYTHING_USAGE;
     }
 
@@ -49,10 +49,10 @@ public class CommandPlayerForgetEverything extends CommandBase {
     }
 
     @Override
-    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos blockPos) {
+    public List<String> getTabCompletions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos blockPos) {
 
         if (args.length == 2) {
-            return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames());
+            return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getOnlinePlayerNames());
         }
 
         return null;

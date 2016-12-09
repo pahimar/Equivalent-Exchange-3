@@ -282,7 +282,7 @@ public abstract class GuiBase extends GuiContainer {
     }
 
     public boolean isMouseOverSlot(Slot slot, int rawMouseX, int rawMouseY) {
-        return this.isMouseOverSlot(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, rawMouseX, rawMouseY);
+        return this.isMouseOverSlot(slot.xPos, slot.yPos, 16, 16, rawMouseX, rawMouseY);
     }
 
 

@@ -3,6 +3,7 @@ package com.pahimar.ee3.item.crafting;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -127,13 +128,13 @@ public class RecipeAlchemicalBagDyes implements IRecipe {
     }
 
     @Override
-    public ItemStack[] getRemainingItems(InventoryCrafting inventoryCrafting) {
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
 
-        ItemStack[] itemStacks = new ItemStack[inventoryCrafting.getSizeInventory()];
+        NonNullList<ItemStack> itemStacks = NonNullList.withSize(inventory.getSizeInventory(), ItemStack.EMPTY);
 
-        for (int i = 0; i < itemStacks.length; ++i) {
-            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
-            itemStacks[i] = ForgeHooks.getContainerItem(itemstack);
+        for (int i = 0; i < itemStacks.size(); ++i) {
+            ItemStack itemstack = inventory.getStackInSlot(i);
+            itemStacks.set(i, ForgeHooks.getContainerItem(itemstack));
         }
 
         return itemStacks;

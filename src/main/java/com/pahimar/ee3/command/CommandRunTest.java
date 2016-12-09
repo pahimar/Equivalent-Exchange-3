@@ -22,7 +22,7 @@ import java.util.List;
 public class CommandRunTest extends CommandEE {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.RUN_TEST;
     }
 
@@ -32,7 +32,7 @@ public class CommandRunTest extends CommandEE {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.RUN_TEST_USAGE;
     }
 
@@ -55,10 +55,10 @@ public class CommandRunTest extends CommandEE {
                 }
 
                 if (testFound) {
-                    commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
+                    commandSender.sendMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_SUCCESS, args[1]));
                 }
                 else {
-                    commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
+                    commandSender.sendMessage(new TextComponentTranslation(Messages.Commands.RUN_TESTS_NOT_FOUND, args[1]));
                 }
             }
             else {
@@ -71,7 +71,7 @@ public class CommandRunTest extends CommandEE {
     }
 
     @Override
-    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
+    public List<String> getTabCompletions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos pos) {
 
         if (args.length == 2) {
 

@@ -62,9 +62,6 @@ public abstract class CommonProxy implements IProxy {
 
         // Register our fuels
         GameRegistry.registerFuelHandler(new FuelHandler());
-
-        // Register the Waila data provider
-        FMLInterModComms.sendMessage("Waila", "register", "com.pahimar.ee3.waila.WailaDataProvider.callbackRegister");
     }
 
     @Override

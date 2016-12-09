@@ -24,7 +24,7 @@ public class CommandSyncEnergyValues extends CommandBase {
     private static Map<UUID, Long> requesterMap = new HashMap<>();
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.SYNC_ENERGY_VALUES;
     }
 
@@ -34,7 +34,7 @@ public class CommandSyncEnergyValues extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.SYNC_ENERGY_VALUES_USAGE;
     }
 
@@ -65,7 +65,7 @@ public class CommandSyncEnergyValues extends CommandBase {
         if (shouldSync) {
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Syncing energy values with all players at {}'s request", commandSender.getName());
             Network.INSTANCE.sendToAll(new MessageSyncEnergyValues());
-            commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.SYNC_ENERGY_VALUES_SUCCESS));
+            commandSender.sendMessage(new TextComponentTranslation(Messages.Commands.SYNC_ENERGY_VALUES_SUCCESS));
         }
         else {
             throw new WrongUsageException(Messages.Commands.SYNC_ENERGY_VALUES_DENIED, coolDown / 1000f);

@@ -3,6 +3,7 @@ package com.pahimar.ee3.api.recipe;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -32,7 +33,7 @@ public class InfusionRecipe implements IRecipe {
     }
 
     @Override
-    public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
-        return new ItemStack[0];
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
+        return NonNullList.withSize(inventory.getSizeInventory(), ItemStack.EMPTY);
     }
 }

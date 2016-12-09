@@ -22,7 +22,7 @@ import java.util.List;
 public class CommandPlayerLearnItem extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.PLAYER_LEARN_ITEM;
     }
 
@@ -32,7 +32,7 @@ public class CommandPlayerLearnItem extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.PLAYER_LEARN_ITEM_USAGE;
     }
 
@@ -73,10 +73,10 @@ public class CommandPlayerLearnItem extends CommandBase {
     }
 
     @Override
-    public List<String> getTabCompletionOptions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos blockPos) {
+    public List<String> getTabCompletions(MinecraftServer minecraftServer, ICommandSender commandSender, String[] args, @Nullable BlockPos blockPos) {
 
         if (args.length == 2) {
-            return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames());
+            return getListOfStringsMatchingLastWord(args, FMLCommonHandler.instance().getMinecraftServerInstance().getOnlinePlayerNames());
         }
         else if (args.length == 3) {
             return getListOfStringsMatchingLastWord(args, Item.REGISTRY.getKeys());

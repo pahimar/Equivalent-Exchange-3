@@ -75,7 +75,7 @@ minecraft {
 
 dependencies {
     deobfCompile "mezz.jei:jei_${minecraft_version}:${dep_jei_version}"
-    deobfCompile "mcp.mobius.waila:Waila:${dep_waila_version}"
+//    deobfCompile "mcp.mobius.waila:Waila:${dep_waila_version}"
 }
 
 processResources {

@@ -24,7 +24,7 @@ public class CommandRegenEnergyValues extends CommandBase {
     private static Map<UUID, Long> requesterMap = new HashMap<>();
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return Names.Commands.REGEN_ENERGY_VALUES;
     }
 
@@ -34,7 +34,7 @@ public class CommandRegenEnergyValues extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender commandSender) {
+    public String getUsage(ICommandSender commandSender) {
         return Messages.Commands.SYNC_ENERGY_VALUES_USAGE;
     }
 
@@ -65,7 +65,7 @@ public class CommandRegenEnergyValues extends CommandBase {
             LogHelper.info(EnergyValueRegistry.ENERGY_VALUE_MARKER, "Regenerating energy values at {}'s request", commandSender.getName());
             EnergyValueRegistry.INSTANCE.compute();
             Network.INSTANCE.sendToAll(new MessageSyncEnergyValues());
-            commandSender.addChatMessage(new TextComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
+            commandSender.sendMessage(new TextComponentTranslation(Messages.Commands.REGEN_ENERGY_VALUES_SUCCESS));
         }
         else {
             throw new WrongUsageException(Messages.Commands.REGEN_ENERGY_VALUES_DENIED, coolDown / 1000f);

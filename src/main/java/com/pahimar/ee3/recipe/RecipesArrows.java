@@ -3,11 +3,8 @@ package com.pahimar.ee3.recipe;
 import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 
 public class RecipesArrows {
@@ -49,7 +46,7 @@ public class RecipesArrows {
     public static final ItemStack ARROW_STRENGTH_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.STRONG_STRENGTH);
     public static final ItemStack ARROW_WEAKNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.WEAKNESS);
     public static final ItemStack ARROW_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), PotionTypes.LONG_WEAKNESS);
-    public static final ItemStack ARROW_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
+//    public static final ItemStack ARROW_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.TIPPED_ARROW), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
 
     public static void registerRecipes() {
 
@@ -89,6 +86,6 @@ public class RecipesArrows {
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_STRENGTH_STRONG, 8), RecipesPotions.LINGERING_POTION_STRENGTH_STRONG, ARROWS);
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WEAKNESS, 8), RecipesPotions.LINGERING_POTION_WEAKNESS, ARROWS);
         RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_WEAKNESS_LONG, 8), RecipesPotions.LINGERING_POTION_WEAKNESS_LONG, ARROWS);
-        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LUCK, 8), RecipesPotions.LINGERING_POTION_LUCK, ARROWS);
+//        RecipeRegistryProxy.addRecipe(ItemStackUtils.clone(ARROW_LUCK, 8), RecipesPotions.LINGERING_POTION_LUCK, ARROWS);
     }
 }

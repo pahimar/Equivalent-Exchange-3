@@ -90,7 +90,7 @@ public class Comparators {
                             if (itemStack1.hasTagCompound() && itemStack2.hasTagCompound()) {
                                 // Then sort on stack size
                                 if (ItemStack.areItemStackTagsEqual(itemStack1, itemStack2)) {
-                                    return (itemStack1.stackSize - itemStack2.stackSize);
+                                    return (itemStack1.getCount() - itemStack2.getCount());
                                 }
                                 else {
                                     return itemStack1.getTagCompound().toString().compareTo(itemStack2.getTagCompound().toString());
@@ -103,7 +103,7 @@ public class Comparators {
                                 return 1;
                             }
                             else {
-                                return (itemStack1.stackSize - itemStack2.stackSize);
+                                return (itemStack1.getCount() - itemStack2.getCount());
                             }
                         }
                         else {

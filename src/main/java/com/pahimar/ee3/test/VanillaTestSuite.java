@@ -581,7 +581,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(RecipesArrows.ARROW_STRENGTH_STRONG, 103.25);               // ARROW OF STRENGTH (STRENGTH 2, 0:11)
         add(RecipesArrows.ARROW_WEAKNESS, 62.25);                       // ARROW OF WEAKNESS (WEAKNESS, 0:11)
         add(RecipesArrows.ARROW_WEAKNESS_LONG, 63.583);                 // ARROW OF WEAKNESS (WEAKNESS, 0:30)
-        add(RecipesArrows.ARROW_LUCK, null);                            // ARROW OF LUCK (LUCK, 0:37)
+//        add(RecipesArrows.ARROW_LUCK, null);                            // ARROW OF LUCK (LUCK, 0:37)
         add(Items.SHIELD, 304);                                         // SHIELD
     }
 
@@ -624,7 +624,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(POTION_STRENGTH_STRONG, 394);                               // POTION OF STRENGTH (STRENGTH 2, 1:30)
         add(POTION_WEAKNESS, 66);                                       // POTION OF WEAKNESS (WEAKNESS, 1:30)
         add(POTION_WEAKNESS_LONG, 76.667);                              // POTION OF WEAKNESS (WEAKNESS, 4:00)
-        add(POTION_LUCK, null);                                         // POTION OF LUCK (LUCK, 5:00)
+//        add(POTION_LUCK, null);                                         // POTION OF LUCK (LUCK, 5:00)
         add(Items.GLASS_BOTTLE, 1);                                     // GLASS BOTTLE
         add(Items.FERMENTED_SPIDER_EYE, 192);                           // FERMENTED SPIDER EYE
         add(Items.BLAZE_POWDER, 768);                                   // BLAZE POWDER
@@ -671,7 +671,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(SPLASH_POTION_STRENGTH_STRONG, 458);                        // SPLASH POTION OF STRENGTH (STRENGTH 2, 1:30)
         add(SPLASH_POTION_WEAKNESS, 130);                               // SPLASH POTION OF WEAKNESS (WEAKNESS, 1:30)
         add(SPLASH_POTION_WEAKNESS_LONG, 140.667);                      // SPLASH POTION OF WEAKNESS (WEAKNESS, 4:00)
-        add(SPLASH_POTION_LUCK, null);                                  // SPLASH POTION OF LUCK (LUCK, 5:00)
+//        add(SPLASH_POTION_LUCK, null);                                  // SPLASH POTION OF LUCK (LUCK, 5:00)
         add(LINGERING_POTION_UNCRAFTABLE, null);                        // LINGERING UNCRAFTABLE POTION
         add(LINGERING_BOTTLE_WATER, 322);                               // LINGERING WATER BOTTLE
         add(LINGERING_POTION_MUNDANE, 332.667);                         // MUNDANE LINGERING POTION
@@ -708,7 +708,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(LINGERING_POTION_STRENGTH_STRONG, 714);                     // LINGERING POTION OF STRENGTH (STRENGTH 2, 0:22)
         add(LINGERING_POTION_WEAKNESS, 386);                            // LINGERING POTION OF WEAKNESS (WEAKNESS, 0:22)
         add(LINGERING_POTION_WEAKNESS_LONG, 396.667);                   // LINGERING POTION OF WEAKNESS (WEAKNESS, 1:00)
-        add(LINGERING_POTION_LUCK, null);                               // LINGERING POTION OF LUCK (LUCK, 1:15)
+//        add(LINGERING_POTION_LUCK, null);                               // LINGERING POTION OF LUCK (LUCK, 1:15)
     }
 
     private void addMaterialsTabTestCases() {

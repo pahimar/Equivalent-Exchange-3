@@ -3,11 +3,8 @@ package com.pahimar.ee3.recipe;
 import com.pahimar.ee3.api.recipe.RecipeRegistryProxy;
 import com.pahimar.ee3.util.ItemStackUtils;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -70,7 +67,7 @@ public class RecipesPotions {
     public static final ItemStack POTION_STRENGTH_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_STRENGTH);
     public static final ItemStack POTION_WEAKNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WEAKNESS);
     public static final ItemStack POTION_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.LONG_WEAKNESS);
-    public static final ItemStack POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
+//    public static final ItemStack POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
 
     // Splash Potions
     public static final ItemStack SPLASH_BOTTLE_WATER = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.WATER);
@@ -109,7 +106,7 @@ public class RecipesPotions {
     public static final ItemStack SPLASH_POTION_STRENGTH_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.STRONG_STRENGTH);
     public static final ItemStack SPLASH_POTION_WEAKNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.WEAKNESS);
     public static final ItemStack SPLASH_POTION_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.LONG_WEAKNESS);
-    public static final ItemStack SPLASH_POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
+//    public static final ItemStack SPLASH_POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
 
     // Lingering Potions
     public static final ItemStack LINGERING_BOTTLE_WATER = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.WATER);
@@ -148,7 +145,7 @@ public class RecipesPotions {
     public static final ItemStack LINGERING_POTION_STRENGTH_STRONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.STRONG_STRENGTH);
     public static final ItemStack LINGERING_POTION_WEAKNESS = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.WEAKNESS);
     public static final ItemStack LINGERING_POTION_WEAKNESS_LONG = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.LONG_WEAKNESS);
-    public static final ItemStack LINGERING_POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
+//    public static final ItemStack LINGERING_POTION_LUCK = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), new PotionType("luck", new PotionEffect(MobEffects.LUCK, 6000)));
 
     public static void registerRecipes() {
 
