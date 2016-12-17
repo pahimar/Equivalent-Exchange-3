@@ -1,3 +1,5 @@
+# TRANSLATORS' NOTE: while this mod is in development, localizations will not be accepted. Please wait ^_^
+
 # Configuration (Energy Value Options)
 energy_value=Energy Value Options
 energy_value.regenerate_values_when.label=Regenerate Energy Values When
