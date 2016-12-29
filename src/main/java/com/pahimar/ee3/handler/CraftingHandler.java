@@ -1,16 +1,15 @@
 package com.pahimar.ee3.handler;
 
-import com.pahimar.ee3.item.crafting.RecipeAlchemicalBagDyes;
 import com.pahimar.ee3.util.IOwnable;
 import com.pahimar.ee3.util.ItemStackUtils;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class CraftingHandler {
 
     public static void init() {
-        CraftingManager.getInstance().getRecipeList().add(new RecipeAlchemicalBagDyes());
+        // TODO Reimplement when bags are done
+//        CraftingManager.getInstance().getRecipeList().add(new RecipeAlchemicalBagDyes());
     }
 
     @SubscribeEvent

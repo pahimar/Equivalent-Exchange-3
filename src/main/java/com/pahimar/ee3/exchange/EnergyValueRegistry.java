@@ -151,7 +151,7 @@ public class EnergyValueRegistry {
                 }
                 else if (!strict) {
 
-                    if (wrappedObject instanceof ItemStack) {
+                    if (wrappedObject instanceof ItemStack && !((ItemStack) wrappedObject).isEmpty()) {
 
                         ItemStack unValuedItemStack = ((ItemStack) wrappedObject).copy();
                         EnergyValue minEnergyValue = null;

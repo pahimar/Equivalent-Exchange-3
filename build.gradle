@@ -75,7 +75,6 @@ minecraft {
 
 dependencies {
     deobfCompile "mezz.jei:jei_${minecraft_version}:${dep_jei_version}"
-//    deobfCompile "mcp.mobius.waila:Waila:${dep_waila_version}"
 }
 
 processResources {
@@ -244,10 +243,10 @@ uploadArchives {
                     authentication(userName: project.properties.forgemaven_username ?: "", password: project.properties.forgemaven_password ?: "")
                 }
             }
-			else {
-				// local repo folder. Might wanna just use gradle install if you wanna send it to maven-local
-				repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
-			}
+            else {
+                // local repo folder. Might wanna just use gradle install if you wanna send it to maven-local
+                repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
+            }
 
             pom {
                 groupId = project.group
