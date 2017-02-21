@@ -26,14 +26,16 @@ public class RecipeHelper {
 
         if (recipe instanceof ShapedRecipes) {
 
-            recipeInputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems).stream()
+            recipeInputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems)
+                    .stream()
+                    .filter(itemStack -> itemStack != null && !itemStack.isEmpty())
                     .map(itemStack -> WrappedStack.build(itemStack, 1))
                     .collect(Collectors.toList()));
         }
         else if (recipe instanceof ShapelessRecipes) {
 
             recipeInputs.addAll(((ShapelessRecipes) recipe).recipeItems.stream()
-                    .filter(itemStack -> itemStack != null)
+                    .filter(itemStack -> itemStack != null && !itemStack.isEmpty())
                     .map(itemStack -> WrappedStack.build(itemStack, 1))
                     .collect(Collectors.toList()));
         }

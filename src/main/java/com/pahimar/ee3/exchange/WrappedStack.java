@@ -168,7 +168,7 @@ public final class WrappedStack implements Comparable<WrappedStack> {
         else if (object instanceof Item || object instanceof Block) {
             return true;
         }
-        else if (object instanceof ItemStack && ((ItemStack) object).getItem() != null) {
+        else if (object instanceof ItemStack && ((ItemStack) object).getItem() != null && !((ItemStack) object).isEmpty()) {
             return true;
         }
         else if (object instanceof OreStack) {

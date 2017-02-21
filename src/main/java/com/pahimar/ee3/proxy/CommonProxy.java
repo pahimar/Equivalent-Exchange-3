@@ -67,7 +67,7 @@ public abstract class CommonProxy implements IProxy {
     @Override
     public void onPostInit(FMLPostInitializationEvent event){
 
-        FluidHelper.initMilk();
+        FluidHelper.init();
         Abilities.init();
 
         // Initialize our test files

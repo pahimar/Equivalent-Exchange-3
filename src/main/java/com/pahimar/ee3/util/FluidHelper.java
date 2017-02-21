@@ -9,11 +9,18 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FluidHelper {
 
+    public static void init() {
+        RecipeRegistryProxy.addRecipe(Items.WATER_BUCKET, Items.BUCKET, new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME));
+        RecipeRegistryProxy.addRecipe(Items.LAVA_BUCKET, Items.BUCKET, new FluidStack(FluidRegistry.LAVA, Fluid.BUCKET_VOLUME));
+        initMilk();
+    }
+
     /**
      *  An awkward fix for the case where milk may not be registered as a liquid but we want to assign
-     *  an energy value to milk (the liquid). TLDR we substitute a dummy liquid and assign value/recipes to it
+     *  an energy value to milk (the liquid).
+     *  <p>TL-DR; we substitute a dummy liquid and assign value/recipes to it
      */
-    public static void initMilk() {
+    private static void initMilk() {
 
         if (!FluidRegistry.isFluidRegistered("milk")) {
             if (FluidRegistry.registerFluid(new Fluid("ee3_milk", ResourceLocationHelper.getResourceLocation("milk_still"), ResourceLocationHelper.getResourceLocation("milk_flow")))) {

@@ -35,6 +35,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
 
     private void addBuildingBlocksTabTestCases() {
 
+        add(Blocks.AIR, null);
         add(Blocks.STONE, 1);                                           //  SMOOTH STONE
         // TODO GRANITE
         // TODO POLISHED GRANITE
@@ -205,7 +206,7 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
         add(new ItemStack(Blocks.SAPLING, 1, 0), 32);                   // OAK SAPLING
         add(new ItemStack(Blocks.SAPLING, 1, 1), 32);                   // SPRUCE SAPLING
         add(new ItemStack(Blocks.SAPLING, 1, 2), 32);                   // BIRCH SAPLING
-        add(new ItemStack(Blocks.SAPLING, 1, 3), 32);                   // JUNGLE SAPLING
+        add(new ItemStack(Blocks.SAPLING, 1, 3), 32);                   // JUNGLE SAPLINGn
         add(new ItemStack(Blocks.SAPLING, 1, 4), 32);                   // ACACIA SAPLING
         add(new ItemStack(Blocks.SAPLING, 1, 5), 32);                   // DARK OAK SAPLING
         add(new ItemStack(Blocks.LEAVES, 1, 0), 1);                     // OAK LEAVES
@@ -767,6 +768,6 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
     }
 
     public void save() {
-        this.save(new File(Files.globalTestDirectory, "minecraft-1.10.2-test-suite.json"));
+        this.save(new File(Files.globalTestDirectory, "minecraft-1.11.2-test-suite.json"));
     }
 }

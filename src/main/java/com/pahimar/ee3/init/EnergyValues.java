@@ -16,6 +16,8 @@ public class EnergyValues {
 
     public static void init() {
 
+        EnergyValueRegistryProxy.setEnergyValue(ItemStack.EMPTY, 0, Phase.PRE_CALCULATION);
+
         // OreDictionary assignment
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("cobblestone"), 1, Phase.PRE_CALCULATION);
         EnergyValueRegistryProxy.setEnergyValue(new OreStack("dustRedstone"), 32, Phase.PRE_CALCULATION);
