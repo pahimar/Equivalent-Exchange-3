@@ -1,4 +1,4 @@
-package com.pahimar.ee3.client.gui;
+package com.pahimar.ee3.client.gui.config;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.handler.ConfigurationHandler;

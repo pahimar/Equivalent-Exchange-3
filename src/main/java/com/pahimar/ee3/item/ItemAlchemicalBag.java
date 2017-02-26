@@ -53,7 +53,7 @@ public class ItemAlchemicalBag extends ItemBase implements IOwnable, IItemColor 
             }
 
             // TODO Get the Gui working again
-//            entityPlayer.openGui(EquivalentExchange3.instance, GUIs.ALCHEMICAL_BAG.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+//            entityPlayer.openGui(EquivalentExchange3.instance, GuiIds.ALCHEMICAL_BAG.ordinal(), entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         }
 
         return new ActionResult<>(EnumActionResult.PASS, entityPlayer.getHeldItem(hand));

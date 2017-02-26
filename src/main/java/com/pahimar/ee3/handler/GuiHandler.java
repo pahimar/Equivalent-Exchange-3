@@ -1,5 +1,7 @@
 package com.pahimar.ee3.handler;
 
+import com.pahimar.ee3.client.gui.GuiAlchenomicon;
+import com.pahimar.ee3.reference.GuiIds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,6 +21,10 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int id, EntityPlayer entityPlayer, World world, int x, int y, int z) {
 
         BlockPos blockPos = new BlockPos(x, y, z);
+
+        if (id == GuiIds.ALCHENOMICON) {
+            return new GuiAlchenomicon();
+        }
 
         return null;
     }

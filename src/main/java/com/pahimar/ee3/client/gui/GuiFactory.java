@@ -1,5 +1,6 @@
 package com.pahimar.ee3.client.gui;
 
+import com.pahimar.ee3.client.gui.config.ModGuiConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
