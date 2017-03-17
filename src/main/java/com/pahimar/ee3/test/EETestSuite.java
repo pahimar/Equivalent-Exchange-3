@@ -15,6 +15,6 @@ public class EETestSuite extends EnergyValueTestSuite {
     }
 
     public void save() {
-        this.save(new File(Files.globalTestDirectory, "ee3-1.9.4-test-suite.json"));
+        this.save(new File(Files.globalTestDirectory, "ee-test-suite.json"));
     }
 }

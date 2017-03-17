@@ -768,6 +768,6 @@ public class VanillaTestSuite extends EnergyValueTestSuite {
     }
 
     public void save() {
-        this.save(new File(Files.globalTestDirectory, "minecraft-1.11.2-test-suite.json"));
+        this.save(new File(Files.globalTestDirectory, "minecraft-test-suite.json"));
     }
 }
