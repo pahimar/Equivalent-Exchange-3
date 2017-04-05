@@ -17,8 +17,8 @@ import java.io.IOException;
  */
 public class GuiAlchenomicon extends GuiScreen {
 
-    final int guiWidth = 256;
-    final int guiHeight = 256;
+    private static final int GUI_WIDTH = 256;
+    private static final int GUI_HEIGHT = 201;
 
     private static final ResourceLocation TEXTURE = Textures.Gui.ALCHENOMICON;
 
@@ -37,7 +37,7 @@ public class GuiAlchenomicon extends GuiScreen {
         this.drawDefaultBackground();
         GlStateManager.color(1f, 1f, 1f, 1f);
         mc.renderEngine.bindTexture(TEXTURE);
-        drawTexturedModalRect(width / 2 - guiWidth / 2, height / 2 - guiHeight / 2, 0, 0, guiWidth, guiHeight);
+        drawTexturedModalRect(width / 2 - GUI_WIDTH / 2, height / 2 - GUI_HEIGHT / 2, 0, 0, GUI_WIDTH, GUI_HEIGHT);
     }
 
     @Override
