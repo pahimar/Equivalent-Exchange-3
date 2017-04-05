@@ -1,12 +1,12 @@
 [
 {
-  "modid": "ee3",
+  "modid": "ee",
   "name": "Equivalent Exchange 3",
   "description": "Transmute stuff into other stuff! Become a Minecraft God!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "http://equivalent.exchange/",
-  "updateUrl": "http://ee3.pahimar.com/update/versions.json",
+  "updateUrl": "http://ee.pahimar.com/update/versions.json",
   "authorList": [
     "pahimar",
     "x3n0ph0b3"

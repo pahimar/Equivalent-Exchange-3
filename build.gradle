@@ -61,7 +61,7 @@ minecraft {
     useDepAts = true // Required for JEI
 
     // Set mod version in code prior to compilation
-    replaceIn "EquivalentExchange3.java"
+    replaceIn "EquivalentExchange.java"
     replace "@MOD_VERSION@", "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 
     // Set the jar signature in code prior to compilation, if it exists as a build property
@@ -150,7 +150,7 @@ task buildVersionFile {
     def modVersion = "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
     def isReleaseVersion = project.hasProperty("mod_release_type") && project.property("mod_release_type") == "release"
     def fileName = "versions.json"
-    def remoteUrl = "http://ee3.pahimar.com/"
+    def remoteUrl = "http://ee.pahimar.com/"
     def changelogStatement = "Changelog available at " + remoteUrl + minecraftVersion + "/${project.archivesBaseName}-${project.version}-changelog.txt"
     def localUpdateJson = new HashMap()
 

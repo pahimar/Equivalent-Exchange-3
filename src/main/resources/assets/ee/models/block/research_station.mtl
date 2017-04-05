@@ -1,0 +1,5 @@
+# Blender MTL File: 'research_station.blend'
+# Material Count: 1
+
+newmtl table
+map_Kd ee:blocks/research_station

@@ -1,0 +1,108 @@
+package com.pahimar.ee.proxy;
+
+import com.pahimar.ee.EquivalentExchange;
+import com.pahimar.ee.blacklist.BlacklistRegistry;
+import com.pahimar.ee.command.CommandEE;
+import com.pahimar.ee.exchange.EnergyValueRegistry;
+import com.pahimar.ee.handler.*;
+import com.pahimar.ee.init.*;
+import com.pahimar.ee.knowledge.PlayerKnowledgeRegistry;
+import com.pahimar.ee.network.Network;
+import com.pahimar.ee.reference.Files;
+import com.pahimar.ee.test.EETestSuite;
+import com.pahimar.ee.test.VanillaTestSuite;
+import com.pahimar.ee.util.BlockUtils;
+import com.pahimar.ee.util.FluidHelper;
+import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+public abstract class CommonProxy implements IProxy {
+
+    @Override
+    public void onPreInit(FMLPreInitializationEvent event) {
+
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        Files.init(event);
+        Network.init();
+        ModItems.getItems().forEach(GameRegistry::register);
+
+        for (Block block : ModBlocks.getBlocks()) {
+            GameRegistry.register(block);
+            GameRegistry.register(BlockUtils.getItemBlockFor(block), block.getRegistryName());
+        }
+        EnergyValues.init();
+        AlchemyArrays.init();
+    }
+
+    @Override
+    public void onInit(FMLInitializationEvent event) {
+
+        // Register the GUI Handler
+        NetworkRegistry.INSTANCE.registerGuiHandler(EquivalentExchange.instance, new GuiHandler());
+
+        // Initialize the blacklist registry
+        BlacklistRegistry.INSTANCE.load();
+
+        // Initialize mod tile entities
+        TileEntities.init();
+
+        // Register event handlers
+        MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+        MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+        MinecraftForge.EVENT_BUS.register(new CraftingHandler());
+
+        // TODO Come back and remove silly init methods that are not necessary
+        CraftingHandler.init();
+        Recipes.init();
+
+        // Register our fuels
+        GameRegistry.registerFuelHandler(new FuelHandler());
+    }
+
+    @Override
+    public void onPostInit(FMLPostInitializationEvent event){
+
+        FluidHelper.init();
+        Abilities.init();
+
+        // Initialize our test files
+        new VanillaTestSuite().build().save();
+        new EETestSuite().build().save();
+    }
+
+    @Override
+    public void onServerStarting(FMLServerStartingEvent event){
+
+        Files.updateFileReferences();
+        event.registerServerCommand(new CommandEE());
+    }
+
+    @Override
+    public void onServerStopping(FMLServerStoppingEvent event){
+
+        WorldEventHandler.hasInitilialized = false;
+        EnergyValueRegistry.INSTANCE.save();
+        PlayerKnowledgeRegistry.INSTANCE.saveAll();
+        BlacklistRegistry.INSTANCE.saveAll();
+    }
+
+    public void registerEventHandlers() {
+
+        ItemEventHandler itemEventHandler = new ItemEventHandler();
+        CraftingHandler craftingHandler = new CraftingHandler();
+        PlayerEventHandler playerEventHandler = new PlayerEventHandler();
+        MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
+        MinecraftForge.EVENT_BUS.register(itemEventHandler);
+        MinecraftForge.EVENT_BUS.register(itemEventHandler);
+        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+        MinecraftForge.EVENT_BUS.register(playerEventHandler);
+        MinecraftForge.EVENT_BUS.register(playerEventHandler);
+        MinecraftForge.EVENT_BUS.register(craftingHandler);
+        MinecraftForge.EVENT_BUS.register(craftingHandler);
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "custom": { "flip-v": true },
+    "model": "ee:glass_bell.obj"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+      "north": { "x": 90 },
+      "south": { "x": 90, "y": 180 },
+      "west": { "x": 90, "y": -90 },
+      "east": { "x": 90, "y": 90 },
+      "up": {},
+      "down": { "x": 180 }
+    }
+  }
+}
