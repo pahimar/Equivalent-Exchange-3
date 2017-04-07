@@ -1,0 +1,192 @@
+#Equivalent Exchange 3 Localization - Russian
+#Author - zlotnleo
+
+# Configuration
+general.sync.threshold.label=Sync Threshold
+general.sync.threshold.comment=The number of seconds a player must wait before they can sync their Energy Values with the server again
+
+general.sound.soundMode.label=Звуки
+general.sound.soundMode.comment='All' plays mod sounds from all players, 'Self' only plays mod sounds from you, and 'None' plays no mod sounds
+
+general.abilities.onlyLoadFile.label=Only load Abilities file
+general.abilities.onlyLoadFile.comment=Setting this to true means that Abilities are initially only loaded from file, rather than from both file and from other mods
+
+general.energyvalues.regenerateEnergyValuesWhen.label=Regenerate EnergyValues
+general.energyvalues.regenerateEnergyValuesWhen.comment=When to regenerate EnergyValues. Options are "Always" (every time Minecraft starts), "When Mods Change" (when mods are added, removed, or updated) or "Never" (only generate the first time).
+
+debug.logTraceToInfo.label=Log TRACE to INFO
+debug.logTraceToInfo.comment=Whether or not to log TRACE level logging events to INFO
+
+# Keys
+key.categories.ee3=Эквивалентный Обмен 3
+key.charge=Зарядить
+key.extra=Дополнительно
+key.release=Выпуск
+key.toggle=Переключить
+
+# Creative Tabs
+itemGroup.ee3=Эквивалентный Обмен 3
+
+# Items
+item.ee3:alchemicalBag.name=Мешок Алхимика
+item.ee3:alchemicalDust.ash.name=Пепел
+item.ee3:alchemicalDust.verdant.name=Зеленая Пыль
+item.ee3:alchemicalDust.azure.name=Лазурная Пыль
+item.ee3:alchemicalDust.minium.name=Киноварная Пыль
+item.ee3:alchemicalFuel.alchemicalCoal.name=Алхимический Уголь
+item.ee3:alchemicalFuel.mobiusFuel.name=Топливо Мёбиуса
+item.ee3:alchemicalFuel.aeternalisFuel.name=Вечное Топливо
+item.ee3:chalk.name=Мел
+item.ee3:diviningRod.name=Посох Пророка [в разработке]
+item.ee3:shardMinium.name=Осколок Киновари
+item.ee3:stoneInert.name=Инертный Камень
+item.ee3:stoneMinium.name=Киноварный Камень [в разработке]
+item.ee3:stonePhilosophers.name=Философский Камень [в разработке]
+item.ee3:alchemicalUpgrade.verdant.name=Зеленое Улучшение [в разработке]
+item.ee3:alchemicalUpgrade.azure.name=Лазурное Улучшение [в разработке]
+item.ee3:alchemicalUpgrade.minium.name=Киноварное Улучшение [в разработке]
+item.ee3:alchemicalTome.name=Том Алхемических Знаний
+item.ee3:matterProto.name=Первичная Материя [в разработке]
+item.ee3:matterDark.name=Темная Материя [в разработке]
+item.ee3:matterOmni.name=Всеобъемлющая Материя [в разработке]
+item.ee3:matterCorporeal.name=Телесная Материя [в разработке]
+item.ee3:matterKinetic.name=Кинетическая Материя [в разработке]
+item.ee3:matterTemporal.name=временная Материя [в разработке]
+item.ee3:matterEssentia.name=Essentia Matter [в разработке]
+item.ee3:matterAmorphous.name=Аморфная Материя [в разработке]
+item.ee3:matterVoid.name=Вакуумная Материя [в разработке]
+item.ee3:gemBlack.name=Черный Самоцвет [в разработке]
+item.ee3:gemBlue.name=Синий Самоцвет [в разработке]
+item.ee3:gemGreen.name=Зеленый Самоцвет [в разработке]
+item.ee3:gemGrey.name=Серый Самоцвет [в разработке]
+item.ee3:gemPurple.name=Фиолетовый Самоцвет [в разработке]
+item.ee3:gemRed.name=Красный Самоцвет [в разработке]
+item.ee3:gemYellow.name=Желтый Самоцвет [в разработке]
+item.ee3:lootBall.name=Шар Добычи [в разработке]
+item.ee3:knowledgeScroll.name=Свиток Трансмутационных Знаний [в разработке]
+item.ee3:potionLethe.name=Зелье Леты [в разработке]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Лопата из Темной Материи [в разработке]
+item.ee3:pickAxeDarkMatter.name=Кирка из Темной Материи [в разработке]
+item.ee3:hammerDarkMatter.name=Молот из Темной Материи [в разработке]
+item.ee3:axeDarkMatter.name=Топор из Темной Материи [в разработке]
+item.ee3:hoeDarkMatter.name=Мотыга из Темной Материи [в разработке]
+item.ee3:fishingRodDarkMatter.name=Удочка из Темной Материи [в разработке]
+item.ee3:shearsDarkMatter.name=Ножницы из Темной Материи [в разработке]
+
+# Weapons
+item.ee3:bowDarkMatter.name=Лук из Темной Материи [в разработке]
+item.ee3:arrowDarkMatter.name=Стрела из Темной Материи [в разработке]
+item.ee3:swordDarkMatter.name=Dark Matter Sword [в разработке]
+
+# Blocks
+tile.ee3:alchemicalChest.name=Сундук Алхимика
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Блок Алхимического Угля
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Блок Топлива Мёбиуса
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Блок Вечного Топлива
+tile.ee3:aludel.name=Основание Алюдели
+tile.ee3:calcinator.name=Кальцинатор
+tile.ee3:chalk.name=Мел
+tile.ee3:glassBell.name=Стеклянный Колокол
+tile.ee3:researchStation.name=Пункт Исследования
+tile.ee3:augmentationTable.name=Стол Улучшений [в разработке]
+tile.ee3:transmutationSquare.name=Площадь Трансмутации [в разработке]
+tile.ee3:ashInfusedStone.name=Пепельный Камень
+tile.ee3:ashInfusedStoneSlab.name=Ступень из Пепельного Камня
+tile.ee3:alchemyArray.name=Алхемический Строй
+tile.ee3:dummyArray.name=Алхемический Строй
+tile.ee3:transmutationTablet.name=Трансмутационный Стол
+
+# Fluids
+fluid.ee3.milk=Молоко
+
+# Alchemy Arrays
+arrays.ee3:accelerant=Ускоренный Алхимический Строй [в разработке]
+arrays.ee3:combustion=Алхимический Строй  Горения [в разработке]
+arrays.ee3:construction=Конструкционный Алхимический Строй [в разработке]
+arrays.ee3:conveyor=Конвейерный Алхимический Строй [в разработке]
+arrays.ee3:destruction=Алхимический Строй Разрушения [в разработке]
+arrays.ee3:gelid=Ледяной Алхимический Строй [в разработке]
+arrays.ee3:parthenogenesis=Алхимический Строй Партеногенеза [в разработке]
+arrays.ee3:transfiguration=Алхимический Строй Трансфигурации [в разработке]
+arrays.ee3:transmutation=Алхимический Строй Трансмутации [в разработке]
+
+# GUIs
+container.ee3:alchemicalBag=Мешок Алхимика
+container.ee3:alchemicalChest=Сундук Алхимика
+container.ee3:aludel=Алюдель
+container.ee3:calcinator=Кальцинатор
+container.ee3:glassBell=Стеклянный Колокол
+container.ee3:researchStation=Пункт Исследования
+container.ee3:augmentationTable=Стол Улучшений [в разработке]
+container.ee3:alchemicalTome=Том Алхимических Знаний
+container.ee3:alchemicalTome.noTransmutationsKnown=Нет Известных Трансмутаций
+container.ee3:transmutationAlchemyArray=Трансмутационная Площадь [в разработке]
+
+# NEI
+gui.nei.ee3:calcination=Кальцинация
+gui.nei.ee3:calcination.tooltip.1=Энергетические затраты на кальцинацию
+gui.nei.ee3:calcination.tooltip.2=От %s до %s
+gui.nei.ee3:aludel=Алюдель
+
+# Commands
+commands.ee3.usage=/ee3
+commands.ee3.player-not-found.error=Игрок с именем %s не был найден на сервере
+commands.ee3.invalid-nbt-tag.error=Не удалось разобрать тег данных: %s
+commands.ee3.no-item.error=Нет тукущего предмета
+commands.ee3.set-energy-value.usage=/ee3 set-energy-value <pre|global-pre|post|global-post> <предмет> <значение> [данные] [тег-данных]
+commands.ee3.set-energy-value.success=%s установить %s Энергетическое значение %s до %s
+commands.ee3.set-energy-value-current-item.usage=/ee3 set-energy-value-current-item <pre|global-pre|post|global-post> <значение>
+commands.ee3.set-energy-value-current-item.success=%s Установить %s Энергетическое значение %s до %s
+commands.ee3.sync-energy-values.usage=/ee3 sync-energy-values
+commands.ee3.sync-energy-values.success=Синхронизация энергетических значений с сервером прошла успешно
+commands.ee3.sync-energy-values.denied=Пожалуйста, подождите %s секунд и попробуйте еще раз
+commands.ee3.player-learn-item.usage=/ee3 player-learn-item <имя-игрока> <предмет> <данные> [тег-данных]
+commands.ee3.player-learn-item.success=%s научил %s трансмутации %s
+commands.ee3.player-learn-current-item.usage=/ee3 player-learn-current-item <имя-игрока>
+commands.ee3.player-learn-current-item.success=%s научил %s трансмутации %s
+commands.ee3.player-forget-everything.usage=/ee3 player-forget-everything <имя-игрока>
+commands.ee3.player-forget-everything.success=%s заставил %s забыть все трансмутации
+commands.ee3.player-forget-item.usage=/ee3 player-forget-item <имя-игрока> <предмет> <данные> [тег-данных]
+commands.ee3.player-forget-item.success=%s заставил %s забыть трансмутацию %s
+commands.ee3.player-forget-current-item.usage=/ee3 player-forget-current-item <имя-игрока>
+commands.ee3.player-forget-current-item.success=%s заставил %s забыть трансмутацию %s
+commands.ee3.template-learn-item.usage=/ee3 template-learn-item <предмет> <данные> [тег-данных]
+commands.ee3.template-learn-item.success=%s научил образец знанийтрансмутации %s
+commands.ee3.template-learn-current-item.usage=/ee3 template-learn-current-item
+commands.ee3.template-learn-current-item.success=%s научил образец знаний трансмутации %s
+commands.ee3.template-forget-everything.usage=/ee3 template-forget-everything
+commands.ee3.template-forget-everything.success=%s заставил образец знаний забыть все трансмутации
+commands.ee3.template-forget-item.usage=/ee3 template-forget-item <предмет> <данные> [тег-данных]
+commands.ee3.template-forget-item.success=%s заставил образец знаний забыть трансмутацию %s
+commands.ee3.template-forget-current-item.usage=/ee3 template-forget-current-item
+commands.ee3.template-forget-current-item.success=%s заставил образец знаний забыть трансмутацию %s
+commands.ee3.set-item-learnable.usage=/ee3 set-item-learnable <предмет> <данные> [тег-данных]
+commands.ee3.set-item-learnable.success=%s сделал %s возможным для иучения 
+commands.ee3.set-item-not-learnable.usage=/ee3 set-item-not-learnable <предмет> <данные> [тег-данных]
+commands.ee3.set-item-not-learnable.success=%s сделал %s невозможным для изучения
+commands.ee3.set-item-recoverable.usage=/ee3 set-item-recoverable <предмет> <данные> [тег-данных]
+commands.ee3.set-item-recoverable.success=%s установил возможность %s вернуть свое энергетическое значение
+commands.ee3.set-item-not-recoverable.usage=/ee3 set-item-not-recoverable <предмет> <данные> [тег-данных]
+commands.ee3.set-item-not-recoverable.success=%s установил невозможность %s вернуть свое энергетическое значение
+commands.ee3.run-tests.usage=/ee3 run-tests <имя-файла>
+commands.ee3.run-tests.success=Выполнен тест файл '%s', проверьте лог сервера, чтобы узнать результат
+commands.ee3.run-tests.notfound=Тест файл ’%s’ не найден!
+
+# Tooltips
+tooltip.ee3:belongsTo=Принадлежит %s
+tooltip.ee3:belongsToNoOne=Никому не принадлежит
+tooltip.ee3:upgradesPrefix=Улучшение (Алхимические) Сундуки
+tooltip.ee3:small=Маленький
+tooltip.ee3:medium=Средний
+tooltip.ee3:large=Большой
+tooltip.ee3:sortByDisplayName=Сортировать по имени
+tooltip.ee3:sortByEnergyValue=Сортировать по энергетическому значению 
+tooltip.ee3:sortByID=Сортировать по ID
+tooltip.ee3:sortAscending=Возрстающий порядок
+tooltip.ee3:sortDescending=Убывающий порядок
+
+#Misc
+misc.ee3:owner-set-to-self=Теперь вы владелец %s
+misc.ee3:energy-value=Энергетическое значение
