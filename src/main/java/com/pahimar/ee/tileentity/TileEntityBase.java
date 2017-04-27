@@ -1,12 +1,12 @@
 package com.pahimar.ee.tileentity;
 
 import com.pahimar.ee.reference.Names;
-import com.sun.istack.internal.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class TileEntityBase extends TileEntity implements ITickable {
