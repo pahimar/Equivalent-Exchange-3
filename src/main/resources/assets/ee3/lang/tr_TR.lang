@@ -1,0 +1,61 @@
+# Key localizations 
+key.extra=Ekstra
+key.release=Bırak
+key.toggle=Aç/Kapa
+key.charge=Şarj
+
+# Item localizations
+item.ee3:shardMinium.name=Minium Parçası
+item.ee3:stoneInert.name=Atıl Taşı
+item.ee3:stoneMinium.name=Minium Taşı
+item.ee3:stonePhilosophers.name=Felsefe Taşı [WIP]
+item.ee3:alchemicalDustAsh.name=Kül [WIP]
+item.ee3:alchemicalDustMinium.name=Minium Tozu [WIP]
+item.ee3:alchemicalDustVerdant.name=Verdant Tozu [WIP]
+item.ee3:alchemicalDustAzure.name=Azure Tozu [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Amaranthine Tozu [WIP]
+item.ee3:alchemicalDustIridescent.name=Iridescent Tozu [WIP]
+item.ee3:alchemicalBag.name=Simyacı Çantası [WIP]
+item.ee3:alchemicalChalk.name=Alchemical Chalk [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Kalsinator [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
+tile.ee3:glassBell.name=Glass Bell [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Kalsinator [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemical Chest [WIP]
+container.ee3:alchemicalBag=Alchemical Bag [WIP]
+container.ee3:glassBell=Glass Bell [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Dönüşüm hedef arayüzü kapatıldı
+command.ee3:overlay.turned_off=Dönüşüm hedef arayüzü açıldı
+command.ee3:overlay.position.top_left=Dönüşüm hedef arayüzü konumu sol üst'e ayarlandı
+command.ee3:overlay.position.top_right=Dönüşüm hedef arayüzü konumu sağ üst'e ayarlandı
+command.ee3:overlay.position.bottom_left=Dönüşüm hedef arayüzü konumu sol alt'a ayarlandı
+command.ee3:overlay.position.bottom_right=Dönüşüm hedef arayüzü konumu sağ alt'a ayarlandı
+command.ee3:overlay.opacity.usage.additional_text=(### , 0.0 ile 1.0 arasında ondalıklı sayı)
+command.ee3:overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3:overlay.scale.usage.additional_text=%s (### , 0.0 dan daha büyük ondalıklı sayı)
+command.ee3:overlay.scale.updated=Dönüşüm hedef arayüzü şeffaflığı güncellendi
+command.ee3:particles.turned_on=Equivalent Exchange 3 parçacık efekti açıldı
+command.ee3:particles.turned_off=Equivalent Exchange 3 parçacık efekti kapatıldı
+command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sesleri : Bütün Oyuncular
+command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sesleri : Sadece Kendin
+command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sesleri : Kapalı
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Uzak versiyon denetlemesi, bulundugu yer %s
+version.ee3:uninitialized=Remote version check failed to initialize properly
+version.ee3:current=Minecraft(@MINECRAFT_VERSION@) için en yeni Equivalent Exchange 3 versiyonunu(@REMOTE_MOD_VERSION@) kullanıyorsunuz.
+version.ee3:outdated=Minecraft(@MINECRAFT_VERSION@) için yeni bir @MOD_NAME@ versiyonu var (@REMOTE_MOD_VERSION@). Burdan indirin: @MOD_UPDATE_LOCATION@
+version.ee3:general_error=Uzak versiyon yetki dosyasına bağlanılırken hata ile karşılaşıldı; tekrar deneniyor
+version.ee3:final_error=3 başarısız bağlantı denemesi sonucu versiyon kontrolü durduruluyor
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
