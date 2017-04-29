@@ -1,0 +1,108 @@
+# Configuration
+general.transmutation=Configurações de Transmutação
+general.transmutation.knowledge.mode.label=Modo de Conhecimento de Transmutação
+general.transmutation.knowledge.mode.comment=Tudo - O jogador pode aprender todos os itens com valor, Seleto - O jogador pode aprender itens seletos, Nível - O jogador pode aprender itens abaixo desse nível, Restrito - O jogador só pode aprender itens na lista de restritos, None - O jogador não pode aprender nenhum item
+
+general.transmutation.knowledge.maxTier.label=Maior Nível de Conhecimento Disponível
+general.transmutation.knowledge.maxTier.comment=O maior nível de conhecimento disponível pelo qual jogadores podem aprender transmutação.
+
+general.transmutation.knowledge.template.label=Usar Arquivo Modelo de Conhecimento
+general.transmutation.knowledge.template.comment=Se verdadeiro, novos jogadores vão ter seu conhecimento de transmutação copiada do arquivo modelo (template.ee3)
+
+general.sound.soundMode.label=Sons
+general.sound.soundMode.comment='Todos' toca sons de mod de todos os jogadores, 'Si' só toca sons de mod seus, e 'Nenhum' não toca sons de mod
+
+general.debug=Configurações de Debug
+general.debug.mode.label=Modo de Debug Ativado
+general.debug.mode.comment=Alterna se o modo de debug está ou não ativado (Nota: Isso é primariamente para modders testarem interações de mod com o Equivalent Exchange 3)
+
+# Keys
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Carga
+key.extra=Extra
+key.release=Versão
+key.toggle=Alternar
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
+# Items
+item.ee3:alchemicalBag.name=Sacola Alquímica
+item.ee3:alchemicalDust.ash.name=Cinzas
+item.ee3:alchemicalDust.verdant.name=Pó Verdejante
+item.ee3:alchemicalDust.azure.name=Pó Índigo
+item.ee3:alchemicalDust.minium.name=Pó de Mínio
+item.ee3:alchemicalFuel.alchemicalCoal.name=Carvão Alquímico
+item.ee3:alchemicalFuel.mobiusFuel.name=Combustível Mobius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Combustível Aeternalis
+item.ee3:chalk.name=Giz [WIP]
+item.ee3:diviningRod.name=Vara da Adivinhação [WIP]
+item.ee3:shardMinium.name=Caco de Mínio
+item.ee3:stoneInert.name=Pedra Inerte
+item.ee3:stoneMinium.name=Pedra de Mínio [WIP]
+item.ee3:stonePhilosophers.name=Pedra Filosofal [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Melhoria Verdejante [WIP]
+item.ee3:alchemicalUpgrade.azure.name=Melhoria Índigo [WIP]
+item.ee3:alchemicalUpgrade.minium.name=Melhoria de Mínio [WIP]
+item.ee3:alchemicalTome.name=Tomo do Conhecimento Alquímico [WIP]
+item.ee3:guide.name=Guia à Alquimia [WIP]
+item.ee3:matterDark.name=Matéria Escura [WIP]
+item.ee3:matterOmni.name=Onimatéria [WIP]
+item.ee3:matterCorporeal.name=Matéria Corporal [WIP]
+item.ee3:matterKinetic.name=Matéria Cinética [WIP]
+item.ee3:matterTemporal.name=Matéria Temporal [WIP]
+item.ee3:matterEssentia.name=Matéria de Essentia [WIP]
+item.ee3:matterAmorphous.name=Matéria Amorfa [WIP]
+item.ee3:matterVoid.name=Matéria do Vácuo [WIP]
+item.ee3:gemBlack.name=Gema Negra [WIP]
+item.ee3:gemBlue.name=Gema Azul [WIP]
+item.ee3:gemGreen.name=Gema Verde [WIP]
+item.ee3:gemGrey.name=Gema Cinza [WIP]
+item.ee3:gemPurple.name=Gema Roxa [WIP]
+item.ee3:gemRed.name=Gema Vermelha [WIP]
+item.ee3:gemYellow.name=Gema Amarela [WIP]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Pá de Matéria Negra [WIP]
+item.ee3:pickAxeDarkMatter.name=Picareta de Matéria Negra [WIP]
+item.ee3:hammerDarkMatter.name=Martelo de Matéria Negra [WIP]
+item.ee3:axeDarkMatter.name=Machado de Matéria Negra[WIP]
+item.ee3:hoeDarkMatter.name=Enxada de Matéria Negra[WIP]
+item.ee3:fishingRodDarkMatter.name=Vara de Pesca de Matéria Negra[WIP]
+item.ee3:shearsDarkMatter.name=Tesouras de Matéria Negra[WIP]
+
+# Weapons
+item.ee3:bowDarkMatter.name=Arco de Matéria Negra[WIP]
+item.ee3:arrowDarkMatter.name=Flecha de Matéria Negra[WIP]
+item.ee3:swordDarkMatter.name=Espada de Matéria Negra [WIP]
+
+# Blocks
+tile.ee3:alchemicalChest.name=Baú Alquímico
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Bloco de Carvão Alquímico
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Bloco de Combustível Mobius
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Bloco de Combustível Aeternalis
+tile.ee3:aludel.name=Base do Aludel
+tile.ee3:calcinator.name=Calcinador
+tile.ee3:chalk.name=Giz
+tile.ee3:glassBell.name=Sino de Vidro
+tile.ee3:researchStation.name=Estação de Pesquisa
+tile.ee3:augmentationTable.name=Mesa de Aumento [WIP]
+tile.ee3:transmutationSquare.name=Quadrado de Transmutação [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=Saco Alquímico
+container.ee3:alchemicalChest=Baú Alquímico
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinador
+container.ee3:glassBell=Sino de Vidro
+container.ee3:researchStation=Estação de Pesquisa
+container.ee3:augmentationTable=Mesa de Aumento [WIP]
+container.ee3:alchemicalTome=Tomo do Conhecimento Alquímico [WIP]
+container.ee3:transmutationSquare=Quadrado de Transmutação [WIP]
+
+# Tooltips
+tooltip.ee3:upgradesPrefix=Upgrades dos Baús (Alquímicos)
+tooltip.ee3:alchemicalChestPrefix.small=Pequeno
+tooltip.ee3:alchemicalChestPrefix.medium=Médio
+tooltip.ee3:alchemicalChestPrefix.large=Grande
+tooltip.ee3:none=Nenhum
