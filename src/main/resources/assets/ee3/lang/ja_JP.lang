@@ -1,0 +1,61 @@
+# Key localizations 
+key.extra=エクストラ
+key.release=リリース
+key.toggle=トグル
+key.charge=チャージ
+
+# Item localizations
+item.ee3:shardMinium.name=鉛丹の欠片
+item.ee3:stoneInert.name=不活性な石
+item.ee3:stoneMinium.name=鉛丹石
+item.ee3:stonePhilosophers.name=賢者の石 [WIP]
+item.ee3:alchemicalDustAsh.name=灰 [WIP]
+item.ee3:alchemicalDustMinium.name=鉛丹の粉末 [WIP]
+item.ee3:alchemicalDustVerdant.name=新緑の粉末 [WIP]
+item.ee3:alchemicalDustAzure.name=紺碧の粉末 [WIP]
+item.ee3:alchemicalDustAmaranthine.name=紫赤色の粉末 [WIP]
+item.ee3:alchemicalDustIridescent.name=玉虫色の粉末 [WIP]
+item.ee3:alchemicalBag.name=奇術袋 [WIP]
+item.ee3:alchemicalChalk.name=奇術チョーク[WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Calcinator [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
+tile.ee3:glassBell.name=ガラス鐘 [WIP]
+
+# GUI localizations
+container.ee3:calcinator=煆焼器 [WIP]
+container.ee3:aludel=アルデル [WIP]
+container.ee3:alchemicalChest=奇術チェスト [WIP]
+container.ee3:alchemicalBag=奇術袋 [WIP]
+container.ee3:glassBell=ガラス鐘 [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Target transmutation overlay turned on
+command.ee3:overlay.turned_off=Target transmutation overlay turned off
+command.ee3:overlay.position.top_left=Target transmutation overlay position set to top left
+command.ee3:overlay.position.top_right=Target transmutation overlay position set to top right
+command.ee3:overlay.position.bottom_left=Target transmutation overlay position set to bottom left
+command.ee3:overlay.position.bottom_right=Target transmutation overlay position set to bottom right
+command.ee3:overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
+command.ee3:overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3:overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0) 
+command.ee3:overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3:particles.turned_on=Equivalent Exchange 3 particles turned on
+command.ee3:particles.turned_off=Equivalent Exchange 3 particles turned off
+command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
+command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
+command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=オンラインバージョンチェックの初期化中。場所: %s
+version.ee3:uninitialized=バージョンチェックの初期化に正しく失敗した
+version.ee3:current=%1$s のための最新の EE3 バージョン (%0$s) を使っている
+version.ee3:outdated=%2$s のために新しい %0$s バージョン (%1$s) がある。ダウンロードください：%3$s
+version.ee3:general_error=リモートバージョンへの接続エラーが発生しました。 また試している
+version.ee3:final_error=失敗した３つの試みあと、バージョンチェックを止める
+version.ee3:mc_version_not_found=リモートバージョン機関で %1$s のための %0$s 見つからなかった
