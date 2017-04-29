@@ -1,0 +1,91 @@
+# Configuration
+general.transmutation=Omzettings Instellingen
+general.transmutation.knowledge.mode.label=Omzetting Kennis Mode
+general.transmutation.knowledge.mode.comment=All - Speler kan alle voorwerpen met een waarde leren, Select - Speler kan geselecteerde voorwerpen leren, None - Speler kan niks leren
+
+general.transmutation.knowledge.template.label=Gebruik Kennis Sjabloon Bestand
+general.transmutation.knowledge.template.comment=Als true, De omzettings kennis voor nieuwe spelers wordt gekopieerd uit het kennis sjabloon bestand (template.ee3)
+
+general.sound.soundMode.label=Geluiden
+general.sound.soundMode.comment='All' Speelt mod geluiden af voor alle spelers, 'Self' speelt alleen mod geluiden af voor je zelf, and 'None' speelt geen mod geluiden af
+
+# Keys
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Opladen
+key.extra=Extra
+key.release=Loslaten
+key.toggle=Omschakelen
+
+# Creative Tabs
+itemGroup.ee3=Equivalent Exchange 3
+
+# Items
+item.ee3:alchemicalBag.name=Alchemische Zak
+item.ee3:alchemicalDust.ash.name=As
+item.ee3:alchemicalDust.verdant.name=Groen Poeder
+item.ee3:alchemicalDust.azure.name=Azuur Blauw Poeder
+item.ee3:alchemicalDust.minium.name=Menie Poeder
+item.ee3:alchemicalFuel.alchemicalCoal.name=Alchemische Kool
+item.ee3:alchemicalFuel.mobiusFuel.name=Mobius Brandstof
+item.ee3:alchemicalFuel.aeternalisFuel.name=Aeternalis Brandstof
+item.ee3:chalk.name=Krijt [WIP]
+item.ee3:diviningRod.name=Wichelroede [WIP]
+item.ee3:shardMinium.name=Menie Scherf
+item.ee3:stoneInert.name=Energieloze Steen
+item.ee3:stoneMinium.name=Menie Steen [WIP]
+item.ee3:stonePhilosophers.name=Filosofische Steen [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Groene Upgrade [WIP]
+item.ee3:alchemicalUpgrade.azure.name=Azuur Blauwe Upgrade [WIP]
+item.ee3:alchemicalUpgrade.minium.name=Menie Upgrade [WIP]
+item.ee3:alchemicalTome.name=Boek der Alchemische Kennis [WIP]
+item.ee3:guide.name=Alchemie Gids [WIP]
+item.ee3:matterDark.name=Donkere Materie [WIP]
+item.ee3:matterOmni.name=Alles Omvattende Materie [WIP]
+item.ee3:matterCorporeal.name=Lichamelijke Materie [WIP]
+item.ee3:matterKinetic.name=Kinetishce Materie [WIP]
+item.ee3:matterTemporal.name=Tijdelijke Materie [WIP]
+item.ee3:matterEssentia.name=Essentiele Materie [WIP]
+item.ee3:matterAmorphous.name=Vormloze Materie [WIP]
+item.ee3:matterVoid.name=Vacuüm Materie [WIP]
+
+# Tools
+item.ee3:shovelDarkMatter.name=Donkere Materie Schep [WIP]
+item.ee3:pickAxeDarkMatter.name=Donkere Materie Houweel[WIP]
+item.ee3:hammerDarkMatter.name=Donkere Materie Hamer [WIP]
+item.ee3:axeDarkMatter.name=Donkere Materie Bijl [WIP]
+item.ee3:hoeDarkMatter.name=Donkere Materie Schoffel [WIP]
+item.ee3:fishingRodDarkMatter.name=Donkere Materie Hengel [WIP]
+item.ee3:shearsDarkMatter.name=Donkere Materie Schaar [WIP]
+
+# Weapons
+item.ee3:bowDarkMatter.name=Donkere Materie Boog [WIP]
+item.ee3:arrowDarkMatter.name=Donkere Materie Pijl [WIP]
+item.ee3:swordDarkMatter.name=Donkere Materie Swaard [WIP]
+
+# Blocks
+tile.ee3:alchemicalChest.name=Alchemische Kist
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Alchemische Kool Blok
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Mobius Brandstof Blok
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Aeternalis Brandstof Blok
+tile.ee3:aludel.name=Aludel Basis
+tile.ee3:calcinator.name=Calcinator
+tile.ee3:chalk.name=Krijt
+tile.ee3:glassBell.name=Stolp
+tile.ee3:researchStation.name=Onderzoeks Station [WIP]
+tile.ee3:augmentationTable.name=Vermeerderings Tafel [WIP]
+
+# GUIs
+container.ee3:alchemicalBag=Alchemische Zak
+container.ee3:alchemicalChest=Alchemische Kist
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinator
+container.ee3:glassBell=Stolp
+container.ee3:researchStation=Onderzoeks Station [WIP]
+container.ee3:augmentationTable=Vermeerderings Tafel [WIP]
+
+# Tooltips
+tooltip.ee3:upgradesPrefix=Upgrades (Alchemische) Kist
+tooltip.ee3:alchemicalChestPrefix.small=Klein
+tooltip.ee3:alchemicalChestPrefix.medium=Medium
+tooltip.ee3:alchemicalChestPrefix.large=Groot
+tooltip.ee3:none=Geen
