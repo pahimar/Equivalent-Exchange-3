@@ -1,0 +1,61 @@
+# Key localizations 
+key.extra=Екстра
+key.release=Одпустити
+key.toggle=Клин
+key.charge=Напунити
+
+# Item localizations
+item.ee3:shardMinium.name=Делић од Миниум
+item.ee3:stoneInert.name=Инерт Камен
+item.ee3:stoneMinium.name=Миниум Камен
+item.ee3:stonePhilosophers.name=>Философ'сКи Камен [WIP]
+item.ee3:alchemicalDustAsh.name=Пепео [WIP]
+item.ee3:alchemicalDustMinium.name=Миниум Прашина [WIP]
+item.ee3:alchemicalDustVerdant.name=Зелена Прашина [WIP]
+item.ee3:alchemicalDustAzure.name=Плава Пашина [WIP]
+item.ee3:alchemicalDustAmaranthine.name=Неувенљива Прашина [WIP]
+item.ee3:alchemicalDustIridescent.name=Преливач боја Прашина [WIP]
+item.ee3:alchemicalBag.name=Alchemical Bag [WIP]
+item.ee3:alchemicalChalk.name=Alchemical Chalk [WIP]
+
+# Block localizations
+tile.ee3:calcinator.name=Калсинатор [WIP]
+tile.ee3:aludel.name=Aludel [WIP]
+tile.ee3:alchemicalChest.name=Alchemical Chest [WIP]
+tile.ee3:glassBell.name=Glass Bell [WIP]
+
+# GUI localizations
+container.ee3:calcinator=Калсинатор [WIP]
+container.ee3:aludel=Aludel [WIP]
+container.ee3:alchemicalChest=Alchemical Chest [WIP]
+container.ee3:alchemicalBag=Alchemical Bag [WIP]
+container.ee3:glassBell=Glass Bell [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Target transmutation overlay turned on
+command.ee3:overlay.turned_off=Target transmutation overlay turned off
+command.ee3:overlay.position.top_left=Target transmutation overlay position set to top left
+command.ee3:overlay.position.top_right=Target transmutation overlay position set to top right
+command.ee3:overlay.position.bottom_left=Target transmutation overlay position set to bottom left
+command.ee3:overlay.position.bottom_right=Target transmutation overlay position set to bottom right
+command.ee3:overlay.opacity.usage.additional_text=(where ### is a decimal value between 0.0 and 1.0) 
+command.ee3:overlay.opacity.updated=Target transmutation overlay opacity updated successfully
+command.ee3:overlay.scale.usage.additional_text=%s (where ### is a decimal value greater than 0.0) 
+command.ee3:overlay.scale.updated=Target transmutation overlay scale updated successfully
+command.ee3:particles.turned_on=Equivalent Exchange 3 particles turned on
+command.ee3:particles.turned_off=Equivalent Exchange 3 particles turned off
+command.ee3:sounds.set_to_all=Playing Equivalent Exchange 3 sounds from all players
+command.ee3:sounds.set_to_self=Playing Equivalent Exchange 3 sounds from self only
+command.ee3:sounds.turned_off=Playing Equivalent Exchange 3 sounds disabled
+
+# Creative Tab localizations
+itemGroup.EE3=Equivalent Exchange 3
+
+# Version check localizations
+version.ee3:init_log_message=Покретање верзије провера према приступу удаљеним фајловима верзије ауторитета, који се налази у: %s
+version.ee3:uninitialized=Провера Верзије није успешно завршена
+version.ee3:current=Ви тренутно користите најновију верзинју (@REMOTE_MOD_VERSION@) од Исте Замене 3 за @MINECRAFT_VERSION@
+version.ee3:outdated=Нова @MOD_NAME@ верзија постоји (@REMOTE_MOD_VERSION@) за @MINECRAFT_VERSION@. Узмите овде: %s
+version.ee3:general_error=Error while connecting to remote version authority file; trying again
+version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
