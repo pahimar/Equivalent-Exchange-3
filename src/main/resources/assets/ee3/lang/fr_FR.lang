@@ -1,0 +1,76 @@
+# Localistation des clés
+key.categories.ee3=Equivalent Exchange 3
+key.charge=Charger
+key.extra=Extra
+key.release=Relacher
+key.toggle=Alterner
+
+# Item localizations
+item.ee3:alchemicalBag.name=Sac alchimique
+item.ee3:alchemicalDust.ash.name=Cendre
+item.ee3:alchemicalDust.verdant.name=Poussière verdoyante
+item.ee3:alchemicalDust.azure.name=Poussière d'azur
+item.ee3:alchemicalDust.minium.name=Poussière de Minium
+item.ee3:alchemicalFuel.alchemicalCoal.name=Charbon alchimique
+item.ee3:alchemicalFuel.mobiusFuel.name=Carburant Möbius
+item.ee3:alchemicalFuel.aeternalisFuel.name=Carburant Aeternalis
+item.ee3:chalk.name=Craie [WIP]
+item.ee3:diviningRod.name=Baguette de divination [WIP]
+item.ee3:shardMinium.name=Eclat de minium
+item.ee3:stoneInert.name=Pierre inerte
+item.ee3:stoneMinium.name=Pierre de minium [WIP]
+item.ee3:stonePhilosophers.name=Pierre philosphale [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=Amélioration verdoyante
+item.ee3:alchemicalUpgrade.azure.name=Amélioration d'azur
+item.ee3:alchemicalUpgrade.minium.name=Amélioration de Minium
+
+# Block localizations
+tile.ee3:alchemicalChest.name=Coffre alchimique
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=Bloc de charbon alchimique
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=Bloc de carburant Möbius
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=Bloc de carburant d'Aternalis
+tile.ee3:aludel.name=Base de l'Aludel
+tile.ee3:calcinator.name=Calcinateur
+tile.ee3:chalk.name=Craie
+tile.ee3:glassBell.name=Cloche en verre
+tile.ee3:researchStation.name=Station de recherche [WIP]
+
+# GUI localizations
+container.ee3:alchemicalBag=Sac alchimique
+container.ee3:alchemicalChest=Coffre alchimique
+container.ee3:aludel=Aludel
+container.ee3:calcinator=Calcinateur
+container.ee3:glassBell=Cloche en verre
+container.ee3:researchStation=Station de recherche [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=Panneau de transmutation cible activé
+command.ee3:overlay.turned_off=Panneau de transmutation cible désactivé
+command.ee3:overlay.position.top_left=Panneau de transmutation cible mis en haut à gauche
+command.ee3:overlay.position.top_right=Panneau de transmutation cible mis en haut à droite
+command.ee3:overlay.position.bottom_left=Panneau de transmutation cible mis en bas à gauche
+command.ee3:overlay.position.bottom_right=Panneau de transmutation cible mis en bas à droite
+command.ee3:overlay.opacity.usage.additional_text=(là où ### est une valeur décimale entre 0.0 et 1.0)
+command.ee3:overlay.opacity.updated=Opacité du panneau de transmutation cible ajusté
+command.ee3:overlay.scale.usage.additional_text=%s (là où ### est une valeur décimale au dessus de 0.0)
+command.ee3:overlay.scale.updated=Echelle du panneau de transmutation cible ajusté
+command.ee3:particles.turned_on=Particules de Equivalent Exchange 3 activées
+command.ee3:particles.turned_off=Particules de Equivalent Exchange 3 désactivées
+command.ee3:sounds.set_to_all=Joue les sons d'Equivalent Exchange 3 provenant de tous les joueurs
+command.ee3:sounds.set_to_self=Joue les sons d'Equivalent Exchange 3 provenant de soi-même
+command.ee3:sounds.turned_off=Sons d'Equivalent Exchange 3 désactivés
+
+# Version check localizations
+version.ee3:init_log_message=Initialisation de la verification de version distante contre l'autorité de la version distante: %s
+version.ee3:uninitialized=La vérification de version distante n'a pas réussi à s'initialiser correctement
+version.ee3:current=En train d'utiliser la version la plus à jour (%s) d'Equavalent Exchange 3 pour %s
+version.ee3:outdated=Une nouvelle version de %s existe (%s) pour %s. Obtenez-la ici : %s
+version.ee3:general_error=Erreur lors de la connection à l'autorité de vérification de version distante ; rééssayez encore une fois
+version.ee3:final_error=Vérification de version à stoppé après trois tentatives de connecion échouées
+version.ee3:mc_version_not_found=Impossible de trouver une version de %s pour %s dans l'autorité de version distante
+
+# Tooltip localizations
+tooltip.ee3:upgradesPrefix=Améliorations de coffre (Alchimiques)
+tooltip.ee3:alchemicalChestPrefix.small=Petit
+tooltip.ee3:alchemicalChestPrefix.medium=Moyen
+tooltip.ee3:alchemicalChestPrefix.large=Grand
