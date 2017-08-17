@@ -1,0 +1,157 @@
+# Key localizations
+key.categories.ee3=等价交换3
+key.charge=充能
+key.extra=附加
+key.release=释放
+key.toggle=切换
+
+# Item localizations
+item.ee3:alchemicalBag.name=炼金背包
+item.ee3:alchemicalDust.ash.name=灰尘
+item.ee3:alchemicalDust.verdant.name=翠绿灰尘
+item.ee3:alchemicalDust.azure.name=蔚蓝灰尘
+item.ee3:alchemicalDust.minium.name=铅丹灰尘
+item.ee3:alchemicalFuel.alchemicalCoal.name=炼金煤
+item.ee3:alchemicalFuel.mobiusFuel.name=莫比乌斯燃料
+item.ee3:alchemicalFuel.aeternalisFuel.name=永恒燃料
+item.ee3:chalk.name=粉笔 [WIP]
+item.ee3:diviningRod.name=占卜棒 [WIP]
+item.ee3:shardMinium.name=铅丹碎片
+item.ee3:stoneInert.name=惰性之石
+item.ee3:stoneMinium.name=铅丹石[WIP]
+item.ee3:stonePhilosophers.name=贤者之石 [WIP]
+
+item.ee3:matterDark.name=暗物质 [WIP]
+item.ee3:matterProto.name=元始物质 [WIP]
+item.ee3:alchenomicon.name=哲人之书
+item.ee3:matterOmni.name=全物质 [WIP]
+
+item.ee3:matterCorporeal.name=凡尘物质 [WIP]
+
+item.ee3:matterKinetic.name=富动力物质 [WIP]
+
+item.ee3:matterTemporal.name=时间物质 [WIP]
+
+item.ee3:matterEssentia.name=根源物质 [WIP]
+
+item.ee3:matterAmorphous.name=非晶态物质 [WIP]
+
+item.ee3:matterVoid.name=虚空物质 [WIP]
+
+item.ee3:gemBlack.name=黑色晶石 [WIP]
+
+item.ee3:gemBlue.name=蓝色晶石 [WIP]
+
+item.ee3:gemGreen.name=绿色晶石 [WIP]
+
+item.ee3:gemGrey.name=灰色晶石 [WIP]
+
+item.ee3:gemPurple.name=紫色晶石 [WIP]
+
+item.ee3:gemRed.name=红色晶石 [WIP]
+
+item.ee3:gemYellow.name=黄色晶石 [WIP]
+
+item.ee3:lootBall.name=物质球 [WIP]
+
+item.ee3:knowledgeScroll.name=嬗变睿智之古卷 [WIP]
+
+item.ee3:potionLethe.name=遗忘之酿 [WIP]
+
+
+# Tools
+item.
+ee3:shovelDarkMatter.name=暗物质铲 [WIP]
+
+item.ee3:pickAxeDarkMatter.name=暗物质镐 [WIP]
+
+item.ee3:hammerDarkMatter.name=暗物质锤 [WIP]
+
+item.ee3:axeDarkMatter.name=暗物质斧 [WIP]
+
+item.ee3:hoeDarkMatter.name=暗物质锄 [WIP]
+
+item.ee3:fishingRodDarkMatter.name=暗物质鱼竿 [WIP]
+
+item.ee3:shearsDarkMatter.name=暗物质剪刀 [WIP]
+
+
+# Weapons
+item.ee3:
+bowDarkMatter.name=暗物质弓 [WIP]
+
+item.ee3:arrowDarkMatter.name=暗物质箭 [WIP]
+
+item.ee3:swordDarkMatter.name=暗物质剑 [WIP]
+item.ee3:alchemicalUpgrade.verdant.name=翠绿升级
+item.ee3:alchemicalUpgrade.azure.name=蔚蓝升级
+item.ee3:alchemicalUpgrade.minium.name=铅丹升级
+
+# Block localizations
+tile.ee3:alchemicalChest.name=炼金箱子
+tile.ee3:alchemicalFuelBlock.alchemicalCoal.name=炼金煤块
+tile.ee3:alchemicalFuelBlock.mobiusFuel.name=莫比乌斯燃料块
+tile.ee3:alchemicalFuelBlock.aeternalisFuel.name=永恒燃料块
+tile.ee3:aludel.name=梨坛
+tile.ee3:calcinator.name=煅烧炉
+tile.ee3:chalk.name=粉笔块
+tile.ee3:glassBell.name=玻璃罩
+tile.ee3:researchStation.name=研究站 [WIP]
+
+tile.ee3:augmentationTable.name=增幅桌 [WIP]
+
+tile.ee3:transmutationSquare.name=便携强化方桌 [WIP]
+
+tile.ee3:ashInfusedStone.name=灰化石
+tile.ee3:ashInfusedStoneSlab.name=灰化石半砖
+tile.ee3:alchemyArray.name=炼金式阵
+
+tile.ee3:dummyArray.name=炼金式阵
+
+tile.ee3:transmutationTablet.name=强化桌
+
+
+
+# Fluids
+
+fluid.ee3.milk=牛奶
+
+# GUI localizations
+container.ee3:alchemicalBag=炼金背包
+container.ee3:alchemicalChest=炼金箱
+container.ee3:aludel=梨坛
+container.ee3:calcinator=煅烧炉
+container.ee3:glassBell=玻璃罩
+container.ee3:researchStation=研究站 [WIP]
+
+# Command localizations
+command.ee3:overlay.turned_on=目标嬗变覆盖层已开启
+command.ee3:overlay.turned_off=目标嬗变覆盖层已关闭
+command.ee3:overlay.position.top_left=目标嬗变覆盖层设置为左上部
+command.ee3:overlay.position.top_right=目标嬗变覆盖层设置为右上部
+command.ee3:overlay.position.bottom_left=目标嬗变覆盖层设置为左下部
+command.ee3:overlay.position.bottom_right=目标嬗变覆盖层设置为右下部
+command.ee3:overlay.opacity.usage.additional_text=(这里 ### 是0.0和1.0之间的十进制值) 
+command.ee3:overlay.opacity.updated=目标嬗变覆盖层不透明度成功更新
+command.ee3:overlay.scale.usage.additional_text=%s (这里 ### 是一个0.0以上的十进制值) 
+command.ee3:overlay.scale.updated=目标嬗变覆盖层尺度成功更新
+command.ee3:particles.turned_on=等价交换3粒子开启
+command.ee3:particles.turned_off=等价交换3粒子关闭
+command.ee3:sounds.set_to_all=播放等价交换3所有玩家的音效
+command.ee3:sounds.set_to_self=只播放等价交换3本体音效
+command.ee3:sounds.turned_off=禁用等价交换3音效
+
+# Version check localizations
+version.ee3:init_log_message=Initializing remote version check against remote version authority, located at: %s
+version.ee3:uninitialized=Remote version check failed to initialize properly
+version.ee3:current=Currently using the most up to date version (%s) of Equivalent Exchange 3 for %s
+version.ee3:outdated=A new %s version exists (%s) for %s. Get it here: %s
+version.ee3:general_error=Error while connecting to remote version authority file; trying again
+version.ee3:final_error=Version check stopping after three unsuccessful connection attempts
+version.ee3:mc_version_not_found=Unable to find a version of %s for %s in the remote version authority
+
+# Tooltip localizations
+tooltip.ee3:upgradesPrefix=升级(炼金)箱子
+tooltip.ee3:alchemicalChestPrefix.small=小
+tooltip.ee3:alchemicalChestPrefix.medium=中
+tooltip.ee3:alchemicalChestPrefix.large=大
