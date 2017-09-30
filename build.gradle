@@ -22,7 +22,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.7" // Required for the curseforge task
         classpath "se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.32"
     }
@@ -33,11 +33,6 @@ repositories {
         // Required for JEI
         name 'progwml6'
         url 'http://dvs1.progwml6.com/files/maven'
-    }
-    maven {
-        // Required for WAILA
-        name 'ProfMobius'
-        url 'http://mobiusstrip.eu/maven'
     }
 }
 
@@ -50,7 +45,7 @@ apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+version = "${minecraft_version}-${mod_version}"
 group = mod_group
 archivesBaseName = mod_artifact_basename
 
@@ -62,7 +57,7 @@ minecraft {
 
     // Set mod version in code prior to compilation
     replaceIn "EquivalentExchange.java"
-    replace "@MOD_VERSION@", "${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
+    replace "@MOD_VERSION@", "${mod_version}"
 
     // Set the jar signature in code prior to compilation, if it exists as a build property
     if (project.hasProperty("ee3_sha1_signature")) {
