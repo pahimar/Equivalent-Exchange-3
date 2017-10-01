@@ -116,7 +116,6 @@ public class ItemBase extends Item {
             ModelLoader.setCustomMeshDefinition(this, getCustomMeshDefinition());
         }
         else {
-
             if (getHasSubtypes() && variants.length > 0) {
                 List<ModelResourceLocation> modelResources = new ArrayList<>();
 
@@ -128,7 +127,7 @@ public class ItemBase extends Item {
                 ModelLoader.setCustomMeshDefinition(this, itemStack -> modelResources.get(itemStack.getMetadata()));
             }
             else {
-                ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName().toString()));
+                ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
             }
         }
     }
