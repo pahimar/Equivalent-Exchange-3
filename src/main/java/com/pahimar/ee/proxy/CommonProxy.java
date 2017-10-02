@@ -81,13 +81,4 @@ public class CommonProxy {
     public ClientProxy getClientProxy() {
         return null;
     }
-
-    /**
-     * TODO Finish Javadoc
-     *
-     * @since   3.0.0
-     */
-    public void registerEventHandlers() {
-
-    }
 }
