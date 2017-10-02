@@ -1,45 +1,39 @@
 package com.pahimar.ee;
 
-import com.pahimar.ee.array.AlchemyArrayRegistry;
-import com.pahimar.ee.blacklist.BlacklistRegistry;
-import com.pahimar.ee.exchange.EnergyValueRegistry;
-import com.pahimar.ee.knowledge.PlayerKnowledgeRegistry;
-import com.pahimar.ee.proxy.IProxy;
-import com.pahimar.ee.recipe.AludelRecipeManager;
-import com.pahimar.ee.recipe.RecipeRegistry;
-import com.pahimar.ee.reference.Messages;
-import com.pahimar.ee.util.LogHelper;
+import com.pahimar.ee.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = EquivalentExchange.MOD_ID,
-        name = "Equivalent Exchange 3",
+        name = "Equivalent Exchange",
         certificateFingerprint = EquivalentExchange.FINGERPRINT,
         version = "@MOD_VERSION@",
-        guiFactory = "com.pahimar.ee.client.gui.GuiFactory",
-        updateJSON = "http://ee.pahimar.com/update/versions.json")
+        updateJSON = "https://ee.pahimar.com/update/versions.json")
 public class EquivalentExchange {
 
-    public static final String MOD_ID = "ee";
+    /**
+     * TODO Finish Javadoc
+     */
     static final String FINGERPRINT = "@FINGERPRINT@";
 
-    @Mod.Instance(EquivalentExchange.MOD_ID)
+    /**
+     * TODO Finish Javadoc
+     */
+    public static final String MOD_ID = "ee";
+
+    /**
+     * TODO Finish Javadoc
+     */
+    public static final Logger LOGGER = LogManager.getLogger(EquivalentExchange.MOD_ID);
+
+    @Mod.Instance
     public static EquivalentExchange instance;
 
-    @SidedProxy(clientSide = "com.pahimar.ee.proxy.ClientProxy", serverSide = "com.pahimar.ee.proxy.ServerProxy")
-    public static IProxy proxy;
-
-    @Mod.EventHandler
-    public void invalidFingerprint(FMLFingerprintViolationEvent event) {
-
-        if (FINGERPRINT.equals("@FINGERPRINT@")) {
-            LogHelper.info(Messages.NO_FINGERPRINT_MESSAGE);
-        }
-        else {
-            LogHelper.warn(Messages.INVALID_FINGERPRINT_MESSAGE);
-        }
-    }
+    @SidedProxy(clientSide = "com.pahimar.ee.proxy.ClientProxy", serverSide = "com.pahimar.ee.proxy.CommonProxy")
+    public static CommonProxy proxy;
 
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
@@ -47,46 +41,22 @@ public class EquivalentExchange {
     }
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void onPreInit(FMLPreInitializationEvent event) {
         proxy.onPreInit(event);
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void onInit(FMLInitializationEvent event) {
         proxy.onInit(event);
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+    public void onPostInit(FMLPostInitializationEvent event) {
         proxy.onPostInit(event);
     }
 
     @Mod.EventHandler
     public void onServerStopping(FMLServerStoppingEvent event) {
         proxy.onServerStopping(event);
-    }
-
-    public EnergyValueRegistry getEnergyValueRegistry() {
-        return EnergyValueRegistry.INSTANCE;
-    }
-
-    public RecipeRegistry getRecipeRegistry() {
-        return RecipeRegistry.INSTANCE;
-    }
-
-    public AludelRecipeManager getAludelRecipeManager() {
-        return AludelRecipeManager.getInstance();
-    }
-
-    public BlacklistRegistry getBlacklistRegistry() {
-        return BlacklistRegistry.INSTANCE;
-    }
-
-    public AlchemyArrayRegistry getAlchemyArrayRegistry() {
-        return AlchemyArrayRegistry.INSTANCE;
-    }
-
-    public PlayerKnowledgeRegistry getPlayerKnowledgeRegistry() {
-        return PlayerKnowledgeRegistry.INSTANCE;
     }
 }

@@ -3,7 +3,8 @@ package com.pahimar.ee.item.base;
 import com.pahimar.ee.EquivalentExchange;
 import com.pahimar.ee.creativetab.CreativeTab;
 import com.pahimar.ee.init.ModItems;
-import com.pahimar.ee.util.ResourceLocationHelper;
+import com.pahimar.ee.util.ResourceLocationUtil;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,92 +18,128 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBase extends Item implements IItemVariantHolder<ItemBase> {
+/**
+ * TODO Finish Javadoc
+ *
+ * @author      pahimar
+ *
+ * @since       3.0.0
+ */
+public class ItemBase extends Item {
 
-    private final String BASE_NAME;
-    private final String[] VARIANTS;
+    /**
+     * TODO Finish Javadoc
+     */
+    private final String baseName;
 
-    public ItemBase(String name, String ... variants) {
+    /**
+     * TODO Finish Javadoc
+     */
+    private final String[] variants;
 
+    /**
+     * TODO Finish Javadoc
+     *
+     * @param   baseName
+     *          TODO
+     * @param   variants
+     *          TODO
+     *
+     * @since   3.0.0
+     */
+    public ItemBase(String baseName, String ... variants) {
         super();
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        setCreativeTab(CreativeTab.EE_TAB);
+        setRegistryName(baseName);
+        setUnlocalizedName(baseName);
         setMaxStackSize(1);
         setNoRepair();
+        setCreativeTab(CreativeTab.MOD_TAB);
 
-        BASE_NAME = name;
+        this.baseName = baseName;
         if (variants.length > 0) {
-            VARIANTS = variants;
+            this.variants = variants;
         }
         else {
-            VARIANTS = new String[0];
+            this.variants = new String[0];
         }
-
         ModItems.register(this);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since   3.0.0
+     */
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
 
-        if (hasSubtypes && itemStack.getMetadata() < VARIANTS.length) {
-            return String.format("item.%s:%s", EquivalentExchange.MOD_ID, VARIANTS[Math.abs(itemStack.getMetadata() % VARIANTS.length)]);
+        if (hasSubtypes && itemStack.getMetadata() < variants.length) {
+            return String.format("item.%s:%s", EquivalentExchange.MOD_ID, variants[Math.abs(itemStack.getMetadata() % variants.length)]);
         }
         else {
-            return String.format("item.%s:%s", EquivalentExchange.MOD_ID, BASE_NAME);
+            return String.format("item.%s:%s", EquivalentExchange.MOD_ID, baseName);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since   3.0.0
+     */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs creativeTab, NonNullList<ItemStack> list) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 
-        if (getHasSubtypes() && VARIANTS.length > 0) {
-            for (int meta = 0; meta < VARIANTS.length; ++meta) {
-                list.add(new ItemStack(this, 1, meta));
+        if (getHasSubtypes() && variants.length > 0) {
+            for (int meta = 0; meta < variants.length; ++meta) {
+                items.add(new ItemStack(this, 1, meta));
             }
         }
         else {
-            super.getSubItems(item, creativeTab, list);
+            super.getSubItems(tab, items);
         }
     }
 
+    /**
+     * TODO Finish Javadoc
+     *
+     * @since
+     */
     @SideOnly(Side.CLIENT)
     public void initModelsAndVariants() {
 
         if (getCustomMeshDefinition() != null) {
-
-            for (int i = 0; i < VARIANTS.length; i++) {
-                ModelBakery.registerItemVariants(this, ResourceLocationHelper.getModelResourceLocation(VARIANTS[i]));
+            for (String variant : variants) {
+                ModelBakery.registerItemVariants(this, ResourceLocationUtil.getResourceLocation(variant));
             }
 
             ModelLoader.setCustomMeshDefinition(this, getCustomMeshDefinition());
         }
         else {
-
-            if (getHasSubtypes() && VARIANTS.length > 0) {
+            if (getHasSubtypes() && variants.length > 0) {
                 List<ModelResourceLocation> modelResources = new ArrayList<>();
 
-                for (int i = 0; i < VARIANTS.length; i++) {
-                    modelResources.add(ResourceLocationHelper.getModelResourceLocation(VARIANTS[i]));
+                for (String variant : variants) {
+                    modelResources.add(ResourceLocationUtil.getModelResourceLocation(variant));
                 }
 
                 ModelBakery.registerItemVariants(this, modelResources.toArray(new ModelResourceLocation[0]));
                 ModelLoader.setCustomMeshDefinition(this, itemStack -> modelResources.get(itemStack.getMetadata()));
             }
             else {
-                ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName().toString()));
+                ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
             }
         }
     }
 
-    @Override
-    public ItemBase getItem() {
-        return this;
-    }
-
-    @Override
-    public String[] getVariants() {
-        return VARIANTS;
+    /**
+     * TODO Finish Javadoc
+     *
+     * @return  TODO
+     *
+     * @since   3.0.0
+     */
+    private ItemMeshDefinition getCustomMeshDefinition() {
+        return null;
     }
 }

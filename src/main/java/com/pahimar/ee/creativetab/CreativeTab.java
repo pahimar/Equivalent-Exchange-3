@@ -1,19 +1,35 @@
 package com.pahimar.ee.creativetab;
 
 import com.pahimar.ee.EquivalentExchange;
+import com.pahimar.ee.init.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+/**
+ * TODO Finish Javadoc
+ *
+ * @author      pahimar
+ *
+ * @since       3.0.0
+ */
 public class CreativeTab {
 
-    public static final CreativeTabs EE_TAB = new CreativeTabs(EquivalentExchange.MOD_ID) {
-
+    /**
+     * TODO Finish Javadoc
+     */
+    public static final CreativeTabs MOD_TAB = new CreativeTabs(EquivalentExchange.MOD_ID) {
         @Override
         public ItemStack getTabIconItem() {
-            // TODO Uncomment after reimplemented
-//            return new ItemStack(ModItems.PHILOSOPHERS_STONE);
-            return new ItemStack(Items.SLIME_BALL);
+            return new ItemStack(ModItems.ALCHENOMICON);
         }
     };
+
+    /**
+     * TODO Finish Javadoc
+     *
+     * @since   3.0.0
+     */
+    private CreativeTab() {
+        // NO-OP
+    }
 }

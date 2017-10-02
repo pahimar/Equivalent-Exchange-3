@@ -1,8 +1,0 @@
-# Blender MTL File: 'glass_bell.blend'
-# Material Count: 2
-
-newmtl glass_bell
-map_Kd ee:blocks/glass_bell
-
-newmtl glass_bell.001
-map_Kd ee:blocks/glass_bell

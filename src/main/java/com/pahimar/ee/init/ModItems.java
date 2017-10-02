@@ -1,32 +1,48 @@
 package com.pahimar.ee.init;
 
 import com.pahimar.ee.EquivalentExchange;
-import com.pahimar.ee.item.*;
+import com.pahimar.ee.item.ItemAlchenomicon;
 import com.pahimar.ee.item.base.ItemBase;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+/**
+ * TODO Finish Javadoc
+ *
+ * @author      pahimar
+ *
+ * @since       3.0.0
+ */
 @GameRegistry.ObjectHolder(EquivalentExchange.MOD_ID)
+@Mod.EventBusSubscriber
 public class ModItems {
 
     private static final List<ItemBase> ITEMS = new ArrayList<>();
 
-    public static final ItemBase CHALK = new ItemChalk();
-    public static final ItemBase ALCHEMICAL_FUEL = new ItemAlchemicalFuel();
     public static final ItemBase ALCHENOMICON = new ItemAlchenomicon();
-    public static final ItemBase ALCHEMICAL_DUST = new ItemAlchemicalDust();
-    public static final ItemBase ALCHEMICAL_BAG = new ItemAlchemicalBag();
 
-    private ModItems() {}
+    private ModItems() {
+        // NO-OP
+    }
 
-    public static Collection<ItemBase> getItems() {
+    public static List<ItemBase> getItems() {
         return ITEMS;
     }
 
-    public static void register(ItemBase item) {
-        ITEMS.add(item);
+    public static void register(ItemBase itemBase) {
+        ITEMS.add(itemBase);
+    }
+
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        for (ItemBase itemBase : ITEMS) {
+            event.getRegistry().register(itemBase);
+        }
     }
 }

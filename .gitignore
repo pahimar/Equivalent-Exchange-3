@@ -1,5 +1,5 @@
 ## project stuff
-/versions.json
+versions.json
 
 ## gradle
 /.gradle
@@ -9,6 +9,7 @@
 /gradlew.bat
 
 ## ForgeGradle
+/classes
 /run
 
 ## eclipse
