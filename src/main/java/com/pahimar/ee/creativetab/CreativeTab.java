@@ -1,8 +1,8 @@
 package com.pahimar.ee.creativetab;
 
 import com.pahimar.ee.EquivalentExchange;
+import com.pahimar.ee.init.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,15 +14,13 @@ import net.minecraft.item.ItemStack;
  */
 public class CreativeTab {
 
-    private static final ItemStack TAB_ITEMSTACK = new ItemStack(Items.SLIME_BALL);
-
     /**
      * TODO Finish Javadoc
      */
     public static final CreativeTabs MOD_TAB = new CreativeTabs(EquivalentExchange.MOD_ID) {
         @Override
         public ItemStack getTabIconItem() {
-            return TAB_ITEMSTACK;
+            return new ItemStack(ModItems.ALCHENOMICON);
         }
     };
 

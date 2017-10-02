@@ -1,5 +1,7 @@
 package com.pahimar.ee.proxy;
 
+import com.pahimar.ee.init.ModItems;
+import com.pahimar.ee.item.base.ItemBase;
 import net.minecraftforge.fml.common.event.*;
 
 /**
@@ -27,6 +29,8 @@ public class ClientProxy extends CommonProxy {
      */
     public void onPreInit(FMLPreInitializationEvent event) {
         super.onPreInit(event);
+
+        ModItems.getItems().forEach(ItemBase::initModelsAndVariants);
     }
 
     /**
