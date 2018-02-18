@@ -1,0 +1,162 @@
+energy_value=suoᴉʇdO ǝnꞁɐᴧ ʎᵷɹǝuƎ
+energy_value.regenerate_values_when.label=uǝɥM sǝnꞁɐᴧ ʎᵷɹǝuƎ ǝʇɐɹǝuǝᵷǝᴚ
+energy_value.regenerate_values_when.comment=˙(ǝꞁᴉɟ sǝnꞁɐʌ ʎᵷɹǝuǝ pǝʇɐꞁnɔꞁɐɔ ǝɥʇ ʇouuɐɔ poɯ ǝɥʇ ɹǝʌǝuǝɥʍ) „pǝpǝǝN sⱯ„ ɹo (sʇɹɐʇs ʇɟɐɹɔǝuᴉW ǝɯᴉʇ ʎɹǝʌǝ) „sʎɐʍꞁⱯ„ ǝɹɐ suoᴉʇdO ˙sʇɔǝɾqo ɹoɟ sǝnꞁɐʌ ʎᵷɹǝuǝ ǝʇɐɹǝuǝᵷǝɹ oʇ uǝɥM
+energy_value.hold_shift_to_display_emc_value.label=sǝnꞁɐᴧ ƆWƎ ʎɐꞁdsᴉᗡ o⟘ ʇɟᴉɥS pꞁoH
+energy_value.hold_shift_to_display_emc_value.comment=(pǝʎɐꞁdsᴉp sʎɐʍꞁⱯ = ǝsꞁɐɟ 'ʇɟᴉɥS pꞁoH = ǝnɹʇ) sǝnꞁɐʌ ƆWƎ ʎɐꞁdsᴉp oʇ pǝssǝɹd ǝq ʇsnɯ ʇɟᴉɥS ʇou ɹo ɹǝɥʇǝɥM
+
+player_knowledge=suoᴉʇdO ǝᵷpǝꞁʍouʞ ɹǝʎɐꞁԀ
+player_knowledge.use_template.label=ǝʇɐꞁdɯǝ⟘ ǝᵷpǝꞁʍouʞ ǝs∩
+player_knowledge.use_template.comment=pǝɥɔɹɐǝsǝɹ ʎpɐǝɹꞁɐ sɯǝʇᴉ ǝɯos ɥʇᴉʍ ʇɹɐʇs oʇ sɹǝʎɐꞁd sʍoꞁꞁɐ ǝʇɐꞁdɯǝʇ ǝɥ⟘ ˙ǝʇɐꞁdɯǝʇ ǝᵷpǝꞁʍouʞ ɹǝʎɐꞁd ǝɥʇ ǝsn oʇ ʇou ɹo ɹǝɥʇǝɥM
+
+server=suoᴉʇdO ɹǝʌɹǝS
+server.sync_threshold.label=pꞁoɥsǝɹɥ⟘ ɔuʎS
+server.sync_threshold.comment=uᴉɐᵷɐ ɹǝʌɹǝs ǝɥʇ ɥʇᴉʍ sʇɔǝɾqo ɹoɟ sǝnꞁɐʌ ʎᵷɹǝuǝ ɹᴉǝɥʇ ɔuʎs uɐɔ ʎǝɥʇ ǝɹoɟǝq ʇᴉɐʍ ʇsnɯ ɹǝʎɐꞁd ɐ spuoɔǝs ɟo ɹǝqɯnu ǝɥ⟘
+
+debug=suoᴉʇdO ᵷnqǝᗡ
+debug.enabled.label=pǝꞁqɐuƎ ᵷnqǝᗡ
+debug.enabled.comment=sǝꞁᴉɟ ᵷoꞁ oʇ pǝppɐ ǝq pꞁnoɥs uoᴉʇɐɯɹoɟuᴉ pǝʇɐꞁǝɹ ᵷnqǝp ɐɹʇxǝ ʇou ɹo ɹǝɥʇǝɥM
+
+key.categories.ee=ǝᵷuɐɥɔxƎ ʇuǝꞁɐʌᴉnbƎ
+key.charge=ǝᵷɹɐɥƆ
+key.extra=ɐɹʇxƎ
+key.release=ǝsɐǝꞁǝᴚ
+key.toggle=ǝꞁᵷᵷo⟘
+
+itemGroup.ee=ǝᵷuɐɥɔxƎ ʇuǝꞁɐʌᴉnbƎ
+
+item.ee:alchemical_bag.name=ᵷɐᗺ ꞁɐɔᴉɯǝɥɔꞁⱯ
+item.ee:ash.name=ɥsⱯ
+item.ee:minium_dust.name=ʇsnᗡ ɯnᴉuᴉW
+item.ee:alchemical_coal.name=ꞁɐoƆ ꞁɐɔᴉɯǝɥɔꞁⱯ
+item.ee:mobius_fuel.name=ꞁǝnℲ snᴉqoW
+item.ee:aeternalis_fuel.name=ꞁǝnℲ sᴉꞁɐuɹǝʇǝⱯ
+item.ee:chalk.name=ʞꞁɐɥƆ
+item.ee:divining_rod.name=[ԀIM] poᴚ ᵷuᴉuᴉʌᴉᗡ
+item.ee:minium_shard.name=ɯnᴉuᴉW ɟo pɹɐɥS
+item.ee:inert_stone.name=ǝuoʇS ʇɹǝuI
+item.ee:minium_stone.name=[ԀIM] ǝuoʇS ɯnᴉuᴉW
+item.ee:philosophers_stone.name=[ԀIM] ǝuoʇS s,ɹǝɥdosoꞁᴉɥԀ
+item.ee:alchenomicon.name=uoɔᴉɯouǝɥɔꞁⱯ
+item.ee:proto_matter.name=[ԀIM] ɹǝʇʇɐW oʇoɹԀ
+item.ee:dark_matter.name=[ԀIM] ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:omni_matter.name=[ԀIM] ɹǝʇʇɐW ᴉuɯO
+item.ee:corporeal_matter.name=[ԀIM] ɹǝʇʇɐW ꞁɐǝɹodɹoƆ
+item.ee:kinetic_matter.name=[ԀIM] ɹǝʇʇɐW ɔᴉʇǝuᴉʞ
+item.ee:temporal_matter.name=[ԀIM] ɹǝʇʇɐW ꞁɐɹodɯǝ⟘
+item.ee:essentia_matter.name=[ԀIM] ɹǝʇʇɐW ɐᴉʇuǝssƎ
+item.ee:amorphous_matter.name=[ԀIM] ɹǝʇʇɐW snoɥdɹoɯⱯ
+item.ee:void_matter.name=[ԀIM] ɹǝʇʇɐW pᴉoᴧ
+item.ee:black_gem.name=[ԀIM] ɯǝ⅁ ʞɔɐꞁᗺ
+item.ee:blue_gem.name=[ԀIM] ɯǝ⅁ ǝnꞁᗺ
+item.ee:empty_gem.name=[ԀIM] ɯǝ⅁ ʎʇdɯƎ
+item.ee:green_gem.name=[ԀIM] ɯǝ⅁ uǝǝɹ⅁
+item.ee:grey_gem.name=[ԀIM] ɯǝ⅁ ʎǝɹ⅁
+item.ee:purple_gem.name=[ԀIM] ɯǝ⅁ ǝꞁdɹnԀ
+item.ee:red_gem.name=[ԀIM] ɯǝ⅁ pǝᴚ
+item.ee:yellow_gem.name=[ԀIM] ɯǝ⅁ ʍoꞁꞁǝ⅄
+item.ee:loot_ball.name=[ԀIM] ꞁꞁɐᗺ ʇooꞀ
+item.ee:knowledge_scroll.name=[ԀIM] ǝᵷpǝꞁʍouʞ uoᴉʇɐʇnɯsuɐɹ⟘ ɟo ꞁꞁoɹɔS
+item.ee:lethe_potion.name=[ԀIM] uoᴉʇoԀ ǝɥʇǝꞀ
+
+item.ee:dark_matter_shovel.name=[ԀIM] ꞁǝʌoɥS ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_pick_axe.name=[ԀIM] ǝxɐʞɔᴉԀ ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_hammer.name=[ԀIM] ɹǝɯɯɐH ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_axe.name=[ԀIM] ǝxⱯ ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_hoe.name=[ԀIM] ǝoH ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_fishing_rod.name=[ԀIM] poᴚ ᵷuᴉɥsᴉℲ ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_shears.name=[ԀIM] sɹɐǝɥS ɹǝʇʇɐW ʞɹɐᗡ
+
+item.ee:dark_matter_bow.name=[ԀIM] ʍoᗺ ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_arrow.name=[ԀIM] ʍoɹɹⱯ ɹǝʇʇɐW ʞɹɐᗡ
+item.ee:dark_matter_sword.name=[ԀIM] pɹoʍS ɹǝʇʇɐW ʞɹɐᗡ
+
+tile.ee:alchemical_chest.name=ʇsǝɥƆ ꞁɐɔᴉɯǝɥɔꞁⱯ
+tile.ee:alchemical_coal.name=ꞁɐoƆ ꞁɐɔᴉɯǝɥɔꞁⱯ ɟo ʞɔoꞁᗺ
+tile.ee:mobius_fuel.name=ꞁǝnℲ snᴉqoW ɟo ʞɔoꞁᗺ
+tile.ee:aeternalis_fuel.name=ꞁǝnℲ sᴉꞁɐuɹǝʇǝⱯ ɟo ʞɔoꞁᗺ
+tile.ee:aludel.name=ǝsɐᗺ ꞁǝpnꞁⱯ
+tile.ee:calciner.name=ɹǝuᴉɔꞁɐƆ
+tile.ee:chalk.name=ʞꞁɐɥƆ
+tile.ee:glass_bell.name=ꞁꞁǝᗺ ssɐꞁ⅁
+tile.ee:research_station.name=uoᴉʇɐʇS ɥɔɹɐǝsǝᴚ
+tile.ee:augmentation_table.name=[ԀIM] ǝꞁqɐ⟘ uoᴉʇɐʇuǝɯᵷnⱯ
+tile.ee:transmutation_square.name=[ԀIM] ǝɹɐnbS uoᴉʇɐʇnɯsuɐɹ⟘
+tile.ee:infused_stone.name=ǝuoʇS pǝsnɟuI
+tile.ee:infused_stone_slab.name=qɐꞁS ǝuoʇS pǝsnɟuI
+tile.ee:alchemy_array.name=ʎɐɹɹⱯ ʎɯǝɥɔꞁⱯ
+tile.ee:dummy_array.name=ʎɐɹɹⱯ ʎɯǝɥɔꞁⱯ
+tile.ee:transmutation_tablet.name=ʇǝꞁqɐ⟘ uoᴉʇɐʇnɯsuɐɹ⟘
+
+arrays.ee:transmutation=[ԀIM] ʎɐɹɹⱯ ʎɯǝɥɔꞁⱯ uoᴉʇɐʇnɯsuɐɹ⟘
+
+container.ee:alchemical_bag=ᵷɐᗺ ꞁɐɔᴉɯǝɥɔꞁⱯ
+container.ee:alchemical_chest=ʇsǝɥƆ ꞁɐɔᴉɯǝɥɔꞁⱯ
+container.ee:aludel=ꞁǝpnꞁⱯ
+container.ee:calcinator=ɹoʇɐuᴉɔꞁɐƆ
+container.ee:glass_bell=ꞁꞁǝᗺ ssɐꞁ⅁
+container.ee:research_station=uoᴉʇɐʇS ɥɔɹɐǝsǝᴚ
+container.ee:augmentation_table=[ԀIM] ǝꞁqɐ⟘ uoᴉʇɐʇuǝɯᵷnⱯ
+container.ee:alchenomicon=uoɔᴉɯouǝɥɔꞁⱯ
+container.ee:alchenomicon.no_transmutations_known=suoᴉʇɐʇnɯsuɐɹʇ uʍouʞ oN
+
+commands.ee.usage=ǝǝ/
+commands.ee.player-not-found.error=ɹǝʌɹǝs ǝɥʇ uo punoɟ ʇou sɐʍ %s ǝɯɐu ɥʇᴉʍ ɹǝʎɐꞁԀ
+commands.ee.invalid-nbt-tag.error=%s
+commands.ee.no-item.error=ɯǝʇᴉ ʇuǝɹɹnɔ oN
+commands.ee.set-energy-value.usage=[ᵷɐ⟘ɐʇɐp] [ɐʇɐp] <ǝnꞁɐʌ> <ɯǝʇᴉ> <ʇsod-ꞁɐqoꞁᵷ|ʇsod|ǝɹd-ꞁɐqoꞁᵷ|ǝɹd> ǝnꞁɐʌ-ʎᵷɹǝuǝ-ʇǝs ǝǝ/
+commands.ee.set-energy-value.success=%4$s oʇ %3$s ɟo ǝnꞁɐᴧʎᵷɹǝuƎ %3$s ɐ ʇǝs %2$s
+commands.ee.set-energy-value-current-item.usage=<ǝnꞁɐʌ> <ʇsod-ꞁɐqoꞁᵷ|ʇsod|ǝɹd-ꞁɐqoꞁᵷ|ǝɹd> ɯǝʇᴉ-ʇuǝɹɹnɔ-ǝnꞁɐʌ-ʎᵷɹǝuǝ-ʇǝs ǝǝ/
+commands.ee.set-energy-value-current-item.success=%4$s oʇ %3$s ɟo ǝnꞁɐᴧʎᵷɹǝuƎ %3$s ɐ ʇǝs %2$s
+commands.ee.regen-energy-values.usage=sǝnꞁɐʌ-ʎᵷɹǝuǝ-uǝᵷǝɹ ǝǝ/
+commands.ee.regen-energy-values.success=sǝnꞁɐʌ ʎᵷɹǝuǝ pǝʇɐꞁnɔꞁɐɔǝɹ ʎꞁꞁnɟssǝɔɔnS
+commands.ee.regen-energy-values.denied=uᴉɐᵷɐ ʎɹʇ puɐ spuoɔǝs ǝɹoɯ %s ʇᴉɐʍ ǝsɐǝꞁԀ
+commands.ee.sync-energy-values.usage=sǝnꞁɐʌ-ʎᵷɹǝuǝ-ɔuʎs ǝǝ/
+commands.ee.sync-energy-values.success=ɹǝʌɹǝs ǝɥʇ ɥʇᴉʍ sǝnꞁɐʌ ʎᵷɹǝuǝ pǝzᴉuoɹɥɔuʎs ʎꞁꞁnɟssǝɔɔnS
+commands.ee.sync-energy-values.denied=uᴉɐᵷɐ ʎɹʇ puɐ spuoɔǝs ǝɹoɯ %s ʇᴉɐʍ ǝsɐǝꞁԀ
+commands.ee.player-learn-item.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> <ǝɯɐuɹǝʎɐꞁd> ɯǝʇᴉ-uɹɐǝꞁ-ɹǝʎɐꞁd ǝǝ/
+commands.ee.player-learn-item.success=%3$s ǝʇnɯsuɐɹʇ oʇ ʍoɥ %2$s ʇɥᵷnɐʇ %2$s
+commands.ee.player-learn-current-item.usage=<ǝɯɐuɹǝʎɐꞁd> ɯǝʇᴉ-ʇuǝɹɹnɔ-uɹɐǝꞁ-ɹǝʎɐꞁd ǝǝ/
+commands.ee.player-learn-current-item.success=%3$s ǝʇnɯsuɐɹʇ oʇ ʍoɥ %2$s ʇɥᵷnɐʇ %2$s
+commands.ee.player-forget-everything.usage=<ǝɯɐuɹǝʎɐꞁd> ᵷuᴉɥʇʎɹǝʌǝ-ʇǝᵷɹoɟ-ɹǝʎɐꞁd ǝǝ/
+commands.ee.player-forget-everything.success=ᵷuᴉɥʇʎɹǝʌǝ ǝʇnɯsuɐɹʇ oʇ ʍoɥ ʇǝᵷɹoɟ %2$s ǝpɐɯ %1$s
+commands.ee.player-forget-item.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> <ǝɯɐuɹǝʎɐꞁd> ɯǝʇᴉ-ʇǝᵷɹoɟ-ɹǝʎɐꞁd ǝǝ/
+commands.ee.player-forget-item.success=%3$s ǝʇnɯsuɐɹʇ oʇ ʍoɥ ʇǝᵷɹoɟ %2$s ǝpɐɯ %2$s
+commands.ee.player-forget-current-item.usage=<ǝɯɐuɹǝʎɐꞁd> ɯǝʇᴉ-ʇuǝɹɹnɔ-ʇǝᵷɹoɟ-ɹǝʎɐꞁd ǝǝ/
+commands.ee.player-forget-current-item.success=%3$s ǝʇnɯsuɐɹʇ oʇ ʍoɥ ʇǝᵷɹoɟ %2$s ǝpɐɯ %2$s
+commands.ee.set-item-learnable.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> ǝꞁqɐuɹɐǝꞁ-ɯǝʇᴉ-ʇǝs ǝǝ/
+commands.ee.set-item-learnable.success=suoᴉʇɐʇnɯsuɐɹʇ ɹoɟ ǝꞁqɐuɹɐǝꞁ sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-learnable.usage=ǝꞁqɐuɹɐǝꞁ-ɯǝʇᴉ-ʇuǝɹɹnɔ-ʇǝs ǝǝ/
+commands.ee.set-current-item-learnable.success=suoᴉʇɐʇnɯsuɐɹʇ ɹoɟ ǝꞁqɐuɹɐǝꞁ sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-learnable.no-effect=ǝꞁqɐuɹɐǝꞁ ʎpɐǝɹꞁɐ sᴉ %s
+commands.ee.set-item-not-learnable.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> ǝꞁqɐuɹɐǝꞁ-ʇou-ɯǝʇᴉ-ʇǝs ǝǝ/
+commands.ee.set-item-not-learnable.success=suoᴉʇɐʇnɯsuɐɹʇ ɹoɟ ǝꞁqɐuɹɐǝꞁ ʇou sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-not-learnable.usage=ǝꞁqɐuɹɐǝꞁ-ʇou-ɯǝʇᴉ-ʇuǝɹɹnɔ-ʇǝs ǝǝ/
+commands.ee.set-current-item-not-learnable.success=suoᴉʇɐʇnɯsuɐɹʇ ɹoɟ ǝꞁqɐuɹɐǝꞁ ʇou sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-not-learnable.no-effect=ǝꞁqɐuɹɐǝꞁ ʇou ʎpɐǝɹꞁɐ sᴉ %s
+commands.ee.set-item-recoverable.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> ǝꞁqɐɹǝʌoɔǝɹ-ɯǝʇᴉ-ʇǝs ǝǝ/
+commands.ee.set-item-recoverable.success=pǝɹǝʌoɔǝɹ ǝnꞁɐʌ ʎᵷɹǝuǝ sʇᴉ ǝʌɐɥ oʇ ǝꞁqɐ ᵷuᴉǝq sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-recoverable.usage=ǝꞁqɐɹǝʌoɔǝɹ-ɯǝʇᴉ-ʇuǝɹɹnɔ-ʇǝs ǝǝ/
+commands.ee.set-current-item-recoverable.success=pǝɹǝʌoɔǝɹ ǝnꞁɐʌ ʎᵷɹǝuǝ sʇᴉ ǝʌɐɥ oʇ ǝꞁqɐ ᵷuᴉǝq sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-recoverable.no-effect=ǝꞁqɐǝᵷuɐɥɔxǝ ʎpɐǝɹꞁɐ sᴉ %s
+commands.ee.set-item-not-recoverable.usage=[ᵷɐ⟘ɐʇɐp] <ɐʇɐp> <ɯǝʇᴉ> ǝꞁqɐɹǝʌoɔǝɹ-ʇou-ɯǝʇᴉ-ʇǝs ǝǝ/
+commands.ee.set-item-not-recoverable.success=pǝɹǝʌoɔǝɹ ǝnꞁɐʌ ʎᵷɹǝuǝ sʇᴉ ǝʌɐɥ oʇ ǝꞁqɐ ᵷuᴉǝq ʇou sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-not-recoverable.usage=ǝꞁqɐɹǝʌoɔǝɹ-ʇou-ɯǝʇᴉ-ʇuǝɹɹnɔ-ʇǝs ǝǝ/
+commands.ee.set-current-item-not-recoverable.success=pǝɹǝʌoɔǝɹ ǝnꞁɐʌ ʎᵷɹǝuǝ sʇᴉ ǝʌɐɥ oʇ ǝꞁqɐ ᵷuᴉǝq ʇou sɐ %2$s ʇǝs %1$s
+commands.ee.set-current-item-not-recoverable.no-effect=ǝꞁqɐǝᵷuɐɥɔxǝ ʇou ʎpɐǝɹꞁɐ sᴉ %s
+commands.ee.run-tests.usage=<ǝɯɐu-ǝꞁᴉɟ> sʇsǝʇ-unɹ ǝǝ/
+commands.ee.run-tests.success=sʇꞁnsǝɹ ɹoɟ ᵷoꞁ ɹǝʌɹǝs ʞɔǝɥɔ ',%s, ǝꞁᴉɟ ʇsǝʇ pǝʇnɔǝxƎ
+commands.ee.run-tests.notfound=¡punoɟ ʇou sɐʍ ,%s, ǝꞁᴉɟ ʇsǝ⟘
+commands.ee.run-tests.dir-notfound=¡punoɟ ʇou sɐʍ ʎɹoʇɔǝɹᴉp ʇsǝ⟘
+
+tooltip.ee:energy_value=ǝnꞁɐᴧ ƆWƎ
+tooltip.ee:no_energy_value=ǝnꞁɐᴧ ƆWƎ oN
+tooltip.ee:belongs_to=%s
+tooltip.ee:belongs_to_no_one=ǝuo ou oʇ sᵷuoꞁǝᗺ
+tooltip.ee:sort_by_name=ǝɯɐN ʎq ʇɹoS
+tooltip.ee:sort_by_value=ǝnꞁɐᴧ ʎᵷɹǝuƎ ʎq ʇɹoS
+tooltip.ee:sort_by_id=ᗡI ʎq ʇɹoS
+tooltip.ee:sort_order_ascending=ɹǝpɹO ᵷuᴉpuǝɔsⱯ
+tooltip.ee:sort_order_descending=ɹǝpɹO ᵷuᴉpuǝɔsǝᗡ
+
+misc.ee:owner_set_to_self=%s
+misc.ee:energy_value=ǝnꞁɐᴧ ʎᵷɹǝuƎ
